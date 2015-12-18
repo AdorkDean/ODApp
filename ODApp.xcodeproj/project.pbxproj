@@ -1,0 +1,1281 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		453C139C602C89AF557B0F7E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E55588697041BF02F9C6E1 /* libPods.a */; };
+		B80F02FB1C225C8F009CE9D8 /* 欧动集市任务详情任务过期.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B80F028E1C225C8F009CE9D8 /* 欧动集市任务详情任务过期.jpg */; };
+		B80F02FC1C225C8F009CE9D8 /* 欧动集市任务详情任务过期.psd in Resources */ = {isa = PBXBuildFile; fileRef = B80F028F1C225C8F009CE9D8 /* 欧动集市任务详情任务过期.psd */; };
+		B80F02FD1C225C8F009CE9D8 /* 欧动集市任务详情已完成.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B80F02901C225C8F009CE9D8 /* 欧动集市任务详情已完成.jpg */; };
+		B80F02FE1C225C8F009CE9D8 /* 欧动集市任务详情已完成.psd in Resources */ = {isa = PBXBuildFile; fileRef = B80F02911C225C8F009CE9D8 /* 欧动集市任务详情已完成.psd */; };
+		B80F02FF1C225C8F009CE9D8 /* 欧动集市任务详情已派遣.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B80F02921C225C8F009CE9D8 /* 欧动集市任务详情已派遣.jpg */; };
+		B80F03001C225C8F009CE9D8 /* 欧动集市任务详情已派遣.psd in Resources */ = {isa = PBXBuildFile; fileRef = B80F02931C225C8F009CE9D8 /* 欧动集市任务详情已派遣.psd */; };
+		B80F03011C225C8F009CE9D8 /* 欧动集市任务详情等待派遣.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B80F02941C225C8F009CE9D8 /* 欧动集市任务详情等待派遣.jpg */; };
+		B80F03021C225C8F009CE9D8 /* 欧动集市任务详情等待派遣.psd in Resources */ = {isa = PBXBuildFile; fileRef = B80F02951C225C8F009CE9D8 /* 欧动集市任务详情等待派遣.psd */; };
+		B80F03031C225C8F009CE9D8 /* 欧动集市发布任务.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B80F02961C225C8F009CE9D8 /* 欧动集市发布任务.jpg */; };
+		B80F03041C225C8F009CE9D8 /* 欧动集市发布任务.psd in Resources */ = {isa = PBXBuildFile; fileRef = B80F02971C225C8F009CE9D8 /* 欧动集市发布任务.psd */; };
+		B80F03051C225C8F009CE9D8 /* 欧动集市标签关键字搜索页 搜索态.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B80F02981C225C8F009CE9D8 /* 欧动集市标签关键字搜索页 搜索态.jpg */; };
+		B80F03061C225C8F009CE9D8 /* 欧动集市标签关键字搜索页 搜索态.psd in Resources */ = {isa = PBXBuildFile; fileRef = B80F02991C225C8F009CE9D8 /* 欧动集市标签关键字搜索页 搜索态.psd */; };
+		B80F03071C225C8F009CE9D8 /* 欧动集市首页.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B80F029A1C225C8F009CE9D8 /* 欧动集市首页.jpg */; };
+		B80F03081C225C8F009CE9D8 /* 欧动集市首页.psd in Resources */ = {isa = PBXBuildFile; fileRef = B80F029B1C225C8F009CE9D8 /* 欧动集市首页.psd */; };
+		B80F03091C225C8F009CE9D8 /* 欧动集市标签搜索页.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B80F029D1C225C8F009CE9D8 /* 欧动集市标签搜索页.jpg */; };
+		B80F030A1C225C8F009CE9D8 /* 欧动集市标签搜索页.psd in Resources */ = {isa = PBXBuildFile; fileRef = B80F029E1C225C8F009CE9D8 /* 欧动集市标签搜索页.psd */; };
+		B80F030B1C225C8F009CE9D8 /* 规范- 任务详情页.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B80F029F1C225C8F009CE9D8 /* 规范- 任务详情页.jpg */; };
+		B80F030C1C225C8F009CE9D8 /* 规范- 任务详情页.psd in Resources */ = {isa = PBXBuildFile; fileRef = B80F02A01C225C8F009CE9D8 /* 规范- 任务详情页.psd */; };
+		B80F030D1C225C8F009CE9D8 /* 规范-欧动集市发布任务.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B80F02A11C225C8F009CE9D8 /* 规范-欧动集市发布任务.jpg */; };
+		B80F030E1C225C8F009CE9D8 /* 规范-欧动集市发布任务.psd in Resources */ = {isa = PBXBuildFile; fileRef = B80F02A21C225C8F009CE9D8 /* 规范-欧动集市发布任务.psd */; };
+		B80F030F1C225C8F009CE9D8 /* 规范-欧动集市首页 .jpg in Resources */ = {isa = PBXBuildFile; fileRef = B80F02A31C225C8F009CE9D8 /* 规范-欧动集市首页 .jpg */; };
+		B80F03101C225C8F009CE9D8 /* 规范-欧动集市首页 .psd in Resources */ = {isa = PBXBuildFile; fileRef = B80F02A41C225C8F009CE9D8 /* 规范-欧动集市首页 .psd */; };
+		B80F03111C225C8F009CE9D8 /* 任务详情上拉按钮@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02A71C225C8F009CE9D8 /* 任务详情上拉按钮@1x.png */; };
+		B80F03121C225C8F009CE9D8 /* 任务详情上拉按钮@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02A81C225C8F009CE9D8 /* 任务详情上拉按钮@2x.png */; };
+		B80F03131C225C8F009CE9D8 /* 任务详情上拉按钮@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02A91C225C8F009CE9D8 /* 任务详情上拉按钮@3x.png */; };
+		B80F03141C225C8F009CE9D8 /* 任务详情下拉按钮@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02AA1C225C8F009CE9D8 /* 任务详情下拉按钮@1x.png */; };
+		B80F03151C225C8F009CE9D8 /* 任务详情下拉按钮@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02AB1C225C8F009CE9D8 /* 任务详情下拉按钮@2x.png */; };
+		B80F03161C225C8F009CE9D8 /* 任务详情下拉按钮@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02AC1C225C8F009CE9D8 /* 任务详情下拉按钮@3x.png */; };
+		B80F03171C225C8F009CE9D8 /* 喜欢icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02AD1C225C8F009CE9D8 /* 喜欢icon@1x.png */; };
+		B80F03181C225C8F009CE9D8 /* 喜欢icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02AE1C225C8F009CE9D8 /* 喜欢icon@2x.png */; };
+		B80F03191C225C8F009CE9D8 /* 喜欢icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02AF1C225C8F009CE9D8 /* 喜欢icon@3x.png */; };
+		B80F031A1C225C8F009CE9D8 /* 时间下拉箭头@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02B11C225C8F009CE9D8 /* 时间下拉箭头@1x.png */; };
+		B80F031B1C225C8F009CE9D8 /* 时间下拉箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02B21C225C8F009CE9D8 /* 时间下拉箭头@2x.png */; };
+		B80F031C1C225C8F009CE9D8 /* 时间下拉箭头@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02B31C225C8F009CE9D8 /* 时间下拉箭头@3x.png */; };
+		B80F031D1C225C8F009CE9D8 /* 选择标签icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02B41C225C8F009CE9D8 /* 选择标签icon@1x.png */; };
+		B80F031E1C225C8F009CE9D8 /* 选择标签icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02B51C225C8F009CE9D8 /* 选择标签icon@2x.png */; };
+		B80F031F1C225C8F009CE9D8 /* 选择标签icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02B61C225C8F009CE9D8 /* 选择标签icon@3x.png */; };
+		B80F03201C225C8F009CE9D8 /* 搜索光标icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02B81C225C8F009CE9D8 /* 搜索光标icon@1x.png */; };
+		B80F03211C225C8F009CE9D8 /* 搜索光标icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02B91C225C8F009CE9D8 /* 搜索光标icon@2x.png */; };
+		B80F03221C225C8F009CE9D8 /* 搜索光标icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02BA1C225C8F009CE9D8 /* 搜索光标icon@3x.png */; };
+		B80F03231C225C8F009CE9D8 /* 搜索取消icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02BB1C225C8F009CE9D8 /* 搜索取消icon@1x.png */; };
+		B80F03241C225C8F009CE9D8 /* 搜索取消icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02BC1C225C8F009CE9D8 /* 搜索取消icon@2x.png */; };
+		B80F03251C225C8F009CE9D8 /* 搜索取消icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02BD1C225C8F009CE9D8 /* 搜索取消icon@3x.png */; };
+		B80F03261C225C8F009CE9D8 /* 个人中心icon点击态@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02BF1C225C8F009CE9D8 /* 个人中心icon点击态@1x.png */; };
+		B80F03271C225C8F009CE9D8 /* 个人中心icon点击态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02C01C225C8F009CE9D8 /* 个人中心icon点击态@2x.png */; };
+		B80F03281C225C8F009CE9D8 /* 个人中心icon点击态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02C11C225C8F009CE9D8 /* 个人中心icon点击态@3x.png */; };
+		B80F03291C225C8F009CE9D8 /* 个人中心icon默认态@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02C21C225C8F009CE9D8 /* 个人中心icon默认态@1x.png */; };
+		B80F032A1C225C8F009CE9D8 /* 个人中心icon默认态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02C31C225C8F009CE9D8 /* 个人中心icon默认态@2x.png */; };
+		B80F032B1C225C8F009CE9D8 /* 个人中心icon默认态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02C41C225C8F009CE9D8 /* 个人中心icon默认态@3x.png */; };
+		B80F032C1C225C8F009CE9D8 /* 中心活动icon点击态@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02C51C225C8F009CE9D8 /* 中心活动icon点击态@1x.png */; };
+		B80F032D1C225C8F009CE9D8 /* 中心活动icon点击态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02C61C225C8F009CE9D8 /* 中心活动icon点击态@2x.png */; };
+		B80F032E1C225C8F009CE9D8 /* 中心活动icon点击态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02C71C225C8F009CE9D8 /* 中心活动icon点击态@3x.png */; };
+		B80F032F1C225C8F009CE9D8 /* 中心活动icon默认态@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02C81C225C8F009CE9D8 /* 中心活动icon默认态@1x.png */; };
+		B80F03301C225C8F009CE9D8 /* 中心活动icon默认态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02C91C225C8F009CE9D8 /* 中心活动icon默认态@2x.png */; };
+		B80F03311C225C8F009CE9D8 /* 中心活动icon默认态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02CA1C225C8F009CE9D8 /* 中心活动icon默认态@3x.png */; };
+		B80F03321C225C8F009CE9D8 /* 任务开始按钮中对勾@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02CB1C225C8F009CE9D8 /* 任务开始按钮中对勾@1x.png */; };
+		B80F03331C225C8F009CE9D8 /* 任务开始按钮中对勾@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02CC1C225C8F009CE9D8 /* 任务开始按钮中对勾@2x.png */; };
+		B80F03341C225C8F009CE9D8 /* 任务开始按钮中对勾@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02CD1C225C8F009CE9D8 /* 任务开始按钮中对勾@3x.png */; };
+		B80F03351C225C8F009CE9D8 /* 任务筛选上拉箭头@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02CE1C225C8F009CE9D8 /* 任务筛选上拉箭头@1x.png */; };
+		B80F03361C225C8F009CE9D8 /* 任务筛选上拉箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02CF1C225C8F009CE9D8 /* 任务筛选上拉箭头@2x.png */; };
+		B80F03371C225C8F009CE9D8 /* 任务筛选上拉箭头@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02D01C225C8F009CE9D8 /* 任务筛选上拉箭头@3x.png */; };
+		B80F03381C225C8F009CE9D8 /* 任务筛选下拉箭头@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02D11C225C8F009CE9D8 /* 任务筛选下拉箭头@1x.png */; };
+		B80F03391C225C8F009CE9D8 /* 任务筛选下拉箭头@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02D21C225C8F009CE9D8 /* 任务筛选下拉箭头@2x.png */; };
+		B80F033A1C225C8F009CE9D8 /* 任务筛选下拉箭头@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02D31C225C8F009CE9D8 /* 任务筛选下拉箭头@3x.png */; };
+		B80F033B1C225C8F009CE9D8 /* 发布任务icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02D41C225C8F009CE9D8 /* 发布任务icon@1x.png */; };
+		B80F033C1C225C8F009CE9D8 /* 发布任务icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02D51C225C8F009CE9D8 /* 发布任务icon@2x.png */; };
+		B80F033D1C225C8F009CE9D8 /* 发布任务icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02D61C225C8F009CE9D8 /* 发布任务icon@3x.png */; };
+		B80F033E1C225C8F009CE9D8 /* 定位icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02D71C225C8F009CE9D8 /* 定位icon@1x.png */; };
+		B80F033F1C225C8F009CE9D8 /* 定位icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02D81C225C8F009CE9D8 /* 定位icon@2x.png */; };
+		B80F03401C225C8F009CE9D8 /* 定位icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02D91C225C8F009CE9D8 /* 定位icon@3x.png */; };
+		B80F03411C225C8F009CE9D8 /* 搜索放大镜icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02DA1C225C8F009CE9D8 /* 搜索放大镜icon@1x.png */; };
+		B80F03421C225C8F009CE9D8 /* 搜索放大镜icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02DB1C225C8F009CE9D8 /* 搜索放大镜icon@2x.png */; };
+		B80F03431C225C8F009CE9D8 /* 搜索放大镜icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02DC1C225C8F009CE9D8 /* 搜索放大镜icon@3x.png */; };
+		B80F03441C225C8F009CE9D8 /* 标签中端按钮部分@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02DD1C225C8F009CE9D8 /* 标签中端按钮部分@1x.png */; };
+		B80F03451C225C8F009CE9D8 /* 标签中端按钮部分@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02DE1C225C8F009CE9D8 /* 标签中端按钮部分@2x.png */; };
+		B80F03461C225C8F009CE9D8 /* 标签中端按钮部分@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02DF1C225C8F009CE9D8 /* 标签中端按钮部分@3x.png */; };
+		B80F03471C225C8F009CE9D8 /* 标签右端按钮部分@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02E01C225C8F009CE9D8 /* 标签右端按钮部分@1x.png */; };
+		B80F03481C225C8F009CE9D8 /* 标签右端按钮部分@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02E11C225C8F009CE9D8 /* 标签右端按钮部分@2x.png */; };
+		B80F03491C225C8F009CE9D8 /* 标签右端按钮部分@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02E21C225C8F009CE9D8 /* 标签右端按钮部分@3x.png */; };
+		B80F034A1C225C8F009CE9D8 /* 标签左端按钮部分@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02E31C225C8F009CE9D8 /* 标签左端按钮部分@1x.png */; };
+		B80F034B1C225C8F009CE9D8 /* 标签左端按钮部分@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02E41C225C8F009CE9D8 /* 标签左端按钮部分@2x.png */; };
+		B80F034C1C225C8F009CE9D8 /* 标签左端按钮部分@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02E51C225C8F009CE9D8 /* 标签左端按钮部分@3x.png */; };
+		B80F034D1C225C8F009CE9D8 /* 标签栏大按钮@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02E61C225C8F009CE9D8 /* 标签栏大按钮@1x.png */; };
+		B80F034E1C225C8F009CE9D8 /* 标签栏大按钮@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02E71C225C8F009CE9D8 /* 标签栏大按钮@2x.png */; };
+		B80F034F1C225C8F009CE9D8 /* 标签栏大按钮@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02E81C225C8F009CE9D8 /* 标签栏大按钮@3x.png */; };
+		B80F03501C225C8F009CE9D8 /* 欧动社区icon点击态@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02E91C225C8F009CE9D8 /* 欧动社区icon点击态@1x.png */; };
+		B80F03511C225C8F009CE9D8 /* 欧动社区icon点击态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02EA1C225C8F009CE9D8 /* 欧动社区icon点击态@2x.png */; };
+		B80F03521C225C8F009CE9D8 /* 欧动社区icon点击态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02EB1C225C8F009CE9D8 /* 欧动社区icon点击态@3x.png */; };
+		B80F03531C225C8F009CE9D8 /* 欧动社区icon默认态@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02EC1C225C8F009CE9D8 /* 欧动社区icon默认态@1x.png */; };
+		B80F03541C225C8F009CE9D8 /* 欧动社区icon默认态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02ED1C225C8F009CE9D8 /* 欧动社区icon默认态@2x.png */; };
+		B80F03551C225C8F009CE9D8 /* 欧动社区icon默认态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02EE1C225C8F009CE9D8 /* 欧动社区icon默认态@3x.png */; };
+		B80F03561C225C8F009CE9D8 /* 欧动集市icon点击态@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02EF1C225C8F009CE9D8 /* 欧动集市icon点击态@1x.png */; };
+		B80F03571C225C8F009CE9D8 /* 欧动集市icon点击态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02F01C225C8F009CE9D8 /* 欧动集市icon点击态@2x.png */; };
+		B80F03591C225C8F009CE9D8 /* 欧动集市icon默认态@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02F21C225C8F009CE9D8 /* 欧动集市icon默认态@1x.png */; };
+		B80F035A1C225C8F009CE9D8 /* 欧动集市icon默认态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02F31C225C8F009CE9D8 /* 欧动集市icon默认态@2x.png */; };
+		B80F035B1C225C8F009CE9D8 /* 欧动集市icon默认态@3x.psd in Resources */ = {isa = PBXBuildFile; fileRef = B80F02F41C225C8F009CE9D8 /* 欧动集市icon默认态@3x.psd */; };
+		B80F035C1C225C8F009CE9D8 /* 首页发现icon点击态@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02F51C225C8F009CE9D8 /* 首页发现icon点击态@1x.png */; };
+		B80F035D1C225C8F009CE9D8 /* 首页发现icon点击态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02F61C225C8F009CE9D8 /* 首页发现icon点击态@2x.png */; };
+		B80F035E1C225C8F009CE9D8 /* 首页发现icon点击态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02F71C225C8F009CE9D8 /* 首页发现icon点击态@3x.png */; };
+		B80F035F1C225C8F009CE9D8 /* 首页发现icon默认态@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02F81C225C8F009CE9D8 /* 首页发现icon默认态@1x.png */; };
+		B80F03601C225C8F009CE9D8 /* 首页发现icon默认态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02F91C225C8F009CE9D8 /* 首页发现icon默认态@2x.png */; };
+		B80F03611C225C8F009CE9D8 /* 首页发现icon默认态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F02FA1C225C8F009CE9D8 /* 首页发现icon默认态@3x.png */; };
+		B80F03651C225E67009CE9D8 /* ODBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F03641C225E67009CE9D8 /* ODBaseViewController.m */; };
+		B80F03681C225E9A009CE9D8 /* ODHomeFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F03671C225E9A009CE9D8 /* ODHomeFoundViewController.m */; };
+		B80F036B1C225EB5009CE9D8 /* ODCenterActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F036A1C225EB5009CE9D8 /* ODCenterActivityViewController.m */; };
+		B80F036E1C225ECE009CE9D8 /* ODCommumityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F036D1C225ECE009CE9D8 /* ODCommumityViewController.m */; };
+		B80F03711C225EE4009CE9D8 /* ODBazaarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F03701C225EE4009CE9D8 /* ODBazaarViewController.m */; };
+		B80F03741C225EF9009CE9D8 /* ODPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F03731C225EF9009CE9D8 /* ODPersonalCenterViewController.m */; };
+		B80F03771C226349009CE9D8 /* ODClassMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F03761C226349009CE9D8 /* ODClassMethod.m */; };
+		B80F037A1C22636F009CE9D8 /* ODColorConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F03791C22636F009CE9D8 /* ODColorConversion.m */; };
+		B80F037D1C2264FB009CE9D8 /* ODAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F037C1C2264FB009CE9D8 /* ODAPIManager.m */; };
+		B80F037F1C227691009CE9D8 /* 欧动集市icon点击态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F037E1C227691009CE9D8 /* 欧动集市icon点击态@3x.png */; };
+		B80F03811C227698009CE9D8 /* 欧动集市icon默认态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F03801C227698009CE9D8 /* 欧动集市icon默认态@3x.png */; };
+		B80F038C1C22A982009CE9D8 /* ODAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F038B1C22A982009CE9D8 /* ODAppModel.m */; };
+		B80F039B1C22BABC009CE9D8 /* ODBazaarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F03991C22BABC009CE9D8 /* ODBazaarViewCell.m */; };
+		B80F039C1C22BABC009CE9D8 /* ODBazaarViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80F039A1C22BABC009CE9D8 /* ODBazaarViewCell.xib */; };
+		B83445231C24067900FDBA37 /* ODBazaarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B83445221C24067900FDBA37 /* ODBazaarModel.m */; };
+		B83C6B671C224F640063ED92 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B661C224F640063ED92 /* main.m */; };
+		B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B691C224F640063ED92 /* AppDelegate.m */; };
+		B83C6B6C1C224F640063ED92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B83C6B6B1C224F640063ED92 /* Assets.xcassets */; };
+		B83C6B6F1C224F640063ED92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83C6B6D1C224F640063ED92 /* LaunchScreen.storyboard */; };
+		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
+		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
+		B83C6B9F1C22562C0063ED92 /* ODTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B9E1C22562C0063ED92 /* ODTabBarController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B83C6B761C224F640063ED92 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B83C6B5A1C224F630063ED92 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B83C6B611C224F640063ED92;
+			remoteInfo = ODApp;
+		};
+		B83C6B811C224F640063ED92 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B83C6B5A1C224F630063ED92 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B83C6B611C224F640063ED92;
+			remoteInfo = ODApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		92E55588697041BF02F9C6E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B80F028E1C225C8F009CE9D8 /* 欧动集市任务详情任务过期.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "欧动集市任务详情任务过期.jpg"; sourceTree = "<group>"; };
+		B80F028F1C225C8F009CE9D8 /* 欧动集市任务详情任务过期.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "欧动集市任务详情任务过期.psd"; sourceTree = "<group>"; };
+		B80F02901C225C8F009CE9D8 /* 欧动集市任务详情已完成.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "欧动集市任务详情已完成.jpg"; sourceTree = "<group>"; };
+		B80F02911C225C8F009CE9D8 /* 欧动集市任务详情已完成.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "欧动集市任务详情已完成.psd"; sourceTree = "<group>"; };
+		B80F02921C225C8F009CE9D8 /* 欧动集市任务详情已派遣.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "欧动集市任务详情已派遣.jpg"; sourceTree = "<group>"; };
+		B80F02931C225C8F009CE9D8 /* 欧动集市任务详情已派遣.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "欧动集市任务详情已派遣.psd"; sourceTree = "<group>"; };
+		B80F02941C225C8F009CE9D8 /* 欧动集市任务详情等待派遣.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "欧动集市任务详情等待派遣.jpg"; sourceTree = "<group>"; };
+		B80F02951C225C8F009CE9D8 /* 欧动集市任务详情等待派遣.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "欧动集市任务详情等待派遣.psd"; sourceTree = "<group>"; };
+		B80F02961C225C8F009CE9D8 /* 欧动集市发布任务.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "欧动集市发布任务.jpg"; sourceTree = "<group>"; };
+		B80F02971C225C8F009CE9D8 /* 欧动集市发布任务.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "欧动集市发布任务.psd"; sourceTree = "<group>"; };
+		B80F02981C225C8F009CE9D8 /* 欧动集市标签关键字搜索页 搜索态.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "欧动集市标签关键字搜索页 搜索态.jpg"; sourceTree = "<group>"; };
+		B80F02991C225C8F009CE9D8 /* 欧动集市标签关键字搜索页 搜索态.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "欧动集市标签关键字搜索页 搜索态.psd"; sourceTree = "<group>"; };
+		B80F029A1C225C8F009CE9D8 /* 欧动集市首页.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "欧动集市首页.jpg"; sourceTree = "<group>"; };
+		B80F029B1C225C8F009CE9D8 /* 欧动集市首页.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "欧动集市首页.psd"; sourceTree = "<group>"; };
+		B80F029D1C225C8F009CE9D8 /* 欧动集市标签搜索页.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "欧动集市标签搜索页.jpg"; sourceTree = "<group>"; };
+		B80F029E1C225C8F009CE9D8 /* 欧动集市标签搜索页.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "欧动集市标签搜索页.psd"; sourceTree = "<group>"; };
+		B80F029F1C225C8F009CE9D8 /* 规范- 任务详情页.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "规范- 任务详情页.jpg"; sourceTree = "<group>"; };
+		B80F02A01C225C8F009CE9D8 /* 规范- 任务详情页.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "规范- 任务详情页.psd"; sourceTree = "<group>"; };
+		B80F02A11C225C8F009CE9D8 /* 规范-欧动集市发布任务.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "规范-欧动集市发布任务.jpg"; sourceTree = "<group>"; };
+		B80F02A21C225C8F009CE9D8 /* 规范-欧动集市发布任务.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "规范-欧动集市发布任务.psd"; sourceTree = "<group>"; };
+		B80F02A31C225C8F009CE9D8 /* 规范-欧动集市首页 .jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "规范-欧动集市首页 .jpg"; sourceTree = "<group>"; };
+		B80F02A41C225C8F009CE9D8 /* 规范-欧动集市首页 .psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "规范-欧动集市首页 .psd"; sourceTree = "<group>"; };
+		B80F02A71C225C8F009CE9D8 /* 任务详情上拉按钮@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务详情上拉按钮@1x.png"; sourceTree = "<group>"; };
+		B80F02A81C225C8F009CE9D8 /* 任务详情上拉按钮@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务详情上拉按钮@2x.png"; sourceTree = "<group>"; };
+		B80F02A91C225C8F009CE9D8 /* 任务详情上拉按钮@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务详情上拉按钮@3x.png"; sourceTree = "<group>"; };
+		B80F02AA1C225C8F009CE9D8 /* 任务详情下拉按钮@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务详情下拉按钮@1x.png"; sourceTree = "<group>"; };
+		B80F02AB1C225C8F009CE9D8 /* 任务详情下拉按钮@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务详情下拉按钮@2x.png"; sourceTree = "<group>"; };
+		B80F02AC1C225C8F009CE9D8 /* 任务详情下拉按钮@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务详情下拉按钮@3x.png"; sourceTree = "<group>"; };
+		B80F02AD1C225C8F009CE9D8 /* 喜欢icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "喜欢icon@1x.png"; sourceTree = "<group>"; };
+		B80F02AE1C225C8F009CE9D8 /* 喜欢icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "喜欢icon@2x.png"; sourceTree = "<group>"; };
+		B80F02AF1C225C8F009CE9D8 /* 喜欢icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "喜欢icon@3x.png"; sourceTree = "<group>"; };
+		B80F02B11C225C8F009CE9D8 /* 时间下拉箭头@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "时间下拉箭头@1x.png"; sourceTree = "<group>"; };
+		B80F02B21C225C8F009CE9D8 /* 时间下拉箭头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "时间下拉箭头@2x.png"; sourceTree = "<group>"; };
+		B80F02B31C225C8F009CE9D8 /* 时间下拉箭头@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "时间下拉箭头@3x.png"; sourceTree = "<group>"; };
+		B80F02B41C225C8F009CE9D8 /* 选择标签icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "选择标签icon@1x.png"; sourceTree = "<group>"; };
+		B80F02B51C225C8F009CE9D8 /* 选择标签icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "选择标签icon@2x.png"; sourceTree = "<group>"; };
+		B80F02B61C225C8F009CE9D8 /* 选择标签icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "选择标签icon@3x.png"; sourceTree = "<group>"; };
+		B80F02B81C225C8F009CE9D8 /* 搜索光标icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索光标icon@1x.png"; sourceTree = "<group>"; };
+		B80F02B91C225C8F009CE9D8 /* 搜索光标icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索光标icon@2x.png"; sourceTree = "<group>"; };
+		B80F02BA1C225C8F009CE9D8 /* 搜索光标icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索光标icon@3x.png"; sourceTree = "<group>"; };
+		B80F02BB1C225C8F009CE9D8 /* 搜索取消icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索取消icon@1x.png"; sourceTree = "<group>"; };
+		B80F02BC1C225C8F009CE9D8 /* 搜索取消icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索取消icon@2x.png"; sourceTree = "<group>"; };
+		B80F02BD1C225C8F009CE9D8 /* 搜索取消icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索取消icon@3x.png"; sourceTree = "<group>"; };
+		B80F02BF1C225C8F009CE9D8 /* 个人中心icon点击态@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人中心icon点击态@1x.png"; sourceTree = "<group>"; };
+		B80F02C01C225C8F009CE9D8 /* 个人中心icon点击态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人中心icon点击态@2x.png"; sourceTree = "<group>"; };
+		B80F02C11C225C8F009CE9D8 /* 个人中心icon点击态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人中心icon点击态@3x.png"; sourceTree = "<group>"; };
+		B80F02C21C225C8F009CE9D8 /* 个人中心icon默认态@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人中心icon默认态@1x.png"; sourceTree = "<group>"; };
+		B80F02C31C225C8F009CE9D8 /* 个人中心icon默认态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人中心icon默认态@2x.png"; sourceTree = "<group>"; };
+		B80F02C41C225C8F009CE9D8 /* 个人中心icon默认态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "个人中心icon默认态@3x.png"; sourceTree = "<group>"; };
+		B80F02C51C225C8F009CE9D8 /* 中心活动icon点击态@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "中心活动icon点击态@1x.png"; sourceTree = "<group>"; };
+		B80F02C61C225C8F009CE9D8 /* 中心活动icon点击态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "中心活动icon点击态@2x.png"; sourceTree = "<group>"; };
+		B80F02C71C225C8F009CE9D8 /* 中心活动icon点击态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "中心活动icon点击态@3x.png"; sourceTree = "<group>"; };
+		B80F02C81C225C8F009CE9D8 /* 中心活动icon默认态@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "中心活动icon默认态@1x.png"; sourceTree = "<group>"; };
+		B80F02C91C225C8F009CE9D8 /* 中心活动icon默认态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "中心活动icon默认态@2x.png"; sourceTree = "<group>"; };
+		B80F02CA1C225C8F009CE9D8 /* 中心活动icon默认态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "中心活动icon默认态@3x.png"; sourceTree = "<group>"; };
+		B80F02CB1C225C8F009CE9D8 /* 任务开始按钮中对勾@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务开始按钮中对勾@1x.png"; sourceTree = "<group>"; };
+		B80F02CC1C225C8F009CE9D8 /* 任务开始按钮中对勾@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务开始按钮中对勾@2x.png"; sourceTree = "<group>"; };
+		B80F02CD1C225C8F009CE9D8 /* 任务开始按钮中对勾@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务开始按钮中对勾@3x.png"; sourceTree = "<group>"; };
+		B80F02CE1C225C8F009CE9D8 /* 任务筛选上拉箭头@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务筛选上拉箭头@1x.png"; sourceTree = "<group>"; };
+		B80F02CF1C225C8F009CE9D8 /* 任务筛选上拉箭头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务筛选上拉箭头@2x.png"; sourceTree = "<group>"; };
+		B80F02D01C225C8F009CE9D8 /* 任务筛选上拉箭头@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务筛选上拉箭头@3x.png"; sourceTree = "<group>"; };
+		B80F02D11C225C8F009CE9D8 /* 任务筛选下拉箭头@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务筛选下拉箭头@1x.png"; sourceTree = "<group>"; };
+		B80F02D21C225C8F009CE9D8 /* 任务筛选下拉箭头@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务筛选下拉箭头@2x.png"; sourceTree = "<group>"; };
+		B80F02D31C225C8F009CE9D8 /* 任务筛选下拉箭头@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "任务筛选下拉箭头@3x.png"; sourceTree = "<group>"; };
+		B80F02D41C225C8F009CE9D8 /* 发布任务icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发布任务icon@1x.png"; sourceTree = "<group>"; };
+		B80F02D51C225C8F009CE9D8 /* 发布任务icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发布任务icon@2x.png"; sourceTree = "<group>"; };
+		B80F02D61C225C8F009CE9D8 /* 发布任务icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发布任务icon@3x.png"; sourceTree = "<group>"; };
+		B80F02D71C225C8F009CE9D8 /* 定位icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "定位icon@1x.png"; sourceTree = "<group>"; };
+		B80F02D81C225C8F009CE9D8 /* 定位icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "定位icon@2x.png"; sourceTree = "<group>"; };
+		B80F02D91C225C8F009CE9D8 /* 定位icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "定位icon@3x.png"; sourceTree = "<group>"; };
+		B80F02DA1C225C8F009CE9D8 /* 搜索放大镜icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索放大镜icon@1x.png"; sourceTree = "<group>"; };
+		B80F02DB1C225C8F009CE9D8 /* 搜索放大镜icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索放大镜icon@2x.png"; sourceTree = "<group>"; };
+		B80F02DC1C225C8F009CE9D8 /* 搜索放大镜icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索放大镜icon@3x.png"; sourceTree = "<group>"; };
+		B80F02DD1C225C8F009CE9D8 /* 标签中端按钮部分@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签中端按钮部分@1x.png"; sourceTree = "<group>"; };
+		B80F02DE1C225C8F009CE9D8 /* 标签中端按钮部分@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签中端按钮部分@2x.png"; sourceTree = "<group>"; };
+		B80F02DF1C225C8F009CE9D8 /* 标签中端按钮部分@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签中端按钮部分@3x.png"; sourceTree = "<group>"; };
+		B80F02E01C225C8F009CE9D8 /* 标签右端按钮部分@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签右端按钮部分@1x.png"; sourceTree = "<group>"; };
+		B80F02E11C225C8F009CE9D8 /* 标签右端按钮部分@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签右端按钮部分@2x.png"; sourceTree = "<group>"; };
+		B80F02E21C225C8F009CE9D8 /* 标签右端按钮部分@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签右端按钮部分@3x.png"; sourceTree = "<group>"; };
+		B80F02E31C225C8F009CE9D8 /* 标签左端按钮部分@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签左端按钮部分@1x.png"; sourceTree = "<group>"; };
+		B80F02E41C225C8F009CE9D8 /* 标签左端按钮部分@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签左端按钮部分@2x.png"; sourceTree = "<group>"; };
+		B80F02E51C225C8F009CE9D8 /* 标签左端按钮部分@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签左端按钮部分@3x.png"; sourceTree = "<group>"; };
+		B80F02E61C225C8F009CE9D8 /* 标签栏大按钮@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签栏大按钮@1x.png"; sourceTree = "<group>"; };
+		B80F02E71C225C8F009CE9D8 /* 标签栏大按钮@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签栏大按钮@2x.png"; sourceTree = "<group>"; };
+		B80F02E81C225C8F009CE9D8 /* 标签栏大按钮@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签栏大按钮@3x.png"; sourceTree = "<group>"; };
+		B80F02E91C225C8F009CE9D8 /* 欧动社区icon点击态@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动社区icon点击态@1x.png"; sourceTree = "<group>"; };
+		B80F02EA1C225C8F009CE9D8 /* 欧动社区icon点击态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动社区icon点击态@2x.png"; sourceTree = "<group>"; };
+		B80F02EB1C225C8F009CE9D8 /* 欧动社区icon点击态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动社区icon点击态@3x.png"; sourceTree = "<group>"; };
+		B80F02EC1C225C8F009CE9D8 /* 欧动社区icon默认态@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动社区icon默认态@1x.png"; sourceTree = "<group>"; };
+		B80F02ED1C225C8F009CE9D8 /* 欧动社区icon默认态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动社区icon默认态@2x.png"; sourceTree = "<group>"; };
+		B80F02EE1C225C8F009CE9D8 /* 欧动社区icon默认态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动社区icon默认态@3x.png"; sourceTree = "<group>"; };
+		B80F02EF1C225C8F009CE9D8 /* 欧动集市icon点击态@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动集市icon点击态@1x.png"; sourceTree = "<group>"; };
+		B80F02F01C225C8F009CE9D8 /* 欧动集市icon点击态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动集市icon点击态@2x.png"; sourceTree = "<group>"; };
+		B80F02F21C225C8F009CE9D8 /* 欧动集市icon默认态@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动集市icon默认态@1x.png"; sourceTree = "<group>"; };
+		B80F02F31C225C8F009CE9D8 /* 欧动集市icon默认态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动集市icon默认态@2x.png"; sourceTree = "<group>"; };
+		B80F02F41C225C8F009CE9D8 /* 欧动集市icon默认态@3x.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "欧动集市icon默认态@3x.psd"; sourceTree = "<group>"; };
+		B80F02F51C225C8F009CE9D8 /* 首页发现icon点击态@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页发现icon点击态@1x.png"; sourceTree = "<group>"; };
+		B80F02F61C225C8F009CE9D8 /* 首页发现icon点击态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页发现icon点击态@2x.png"; sourceTree = "<group>"; };
+		B80F02F71C225C8F009CE9D8 /* 首页发现icon点击态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页发现icon点击态@3x.png"; sourceTree = "<group>"; };
+		B80F02F81C225C8F009CE9D8 /* 首页发现icon默认态@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页发现icon默认态@1x.png"; sourceTree = "<group>"; };
+		B80F02F91C225C8F009CE9D8 /* 首页发现icon默认态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页发现icon默认态@2x.png"; sourceTree = "<group>"; };
+		B80F02FA1C225C8F009CE9D8 /* 首页发现icon默认态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页发现icon默认态@3x.png"; sourceTree = "<group>"; };
+		B80F03631C225E67009CE9D8 /* ODBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBaseViewController.h; sourceTree = "<group>"; };
+		B80F03641C225E67009CE9D8 /* ODBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBaseViewController.m; sourceTree = "<group>"; };
+		B80F03661C225E9A009CE9D8 /* ODHomeFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHomeFoundViewController.h; sourceTree = "<group>"; };
+		B80F03671C225E9A009CE9D8 /* ODHomeFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeFoundViewController.m; sourceTree = "<group>"; };
+		B80F03691C225EB5009CE9D8 /* ODCenterActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCenterActivityViewController.h; sourceTree = "<group>"; };
+		B80F036A1C225EB5009CE9D8 /* ODCenterActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCenterActivityViewController.m; sourceTree = "<group>"; };
+		B80F036C1C225ECE009CE9D8 /* ODCommumityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommumityViewController.h; sourceTree = "<group>"; };
+		B80F036D1C225ECE009CE9D8 /* ODCommumityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommumityViewController.m; sourceTree = "<group>"; };
+		B80F036F1C225EE4009CE9D8 /* ODBazaarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarViewController.h; sourceTree = "<group>"; };
+		B80F03701C225EE4009CE9D8 /* ODBazaarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarViewController.m; sourceTree = "<group>"; };
+		B80F03721C225EF9009CE9D8 /* ODPersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPersonalCenterViewController.h; sourceTree = "<group>"; };
+		B80F03731C225EF9009CE9D8 /* ODPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPersonalCenterViewController.m; sourceTree = "<group>"; };
+		B80F03751C226349009CE9D8 /* ODClassMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODClassMethod.h; sourceTree = "<group>"; };
+		B80F03761C226349009CE9D8 /* ODClassMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODClassMethod.m; sourceTree = "<group>"; };
+		B80F03781C22636F009CE9D8 /* ODColorConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODColorConversion.h; sourceTree = "<group>"; };
+		B80F03791C22636F009CE9D8 /* ODColorConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODColorConversion.m; sourceTree = "<group>"; };
+		B80F037B1C2264FB009CE9D8 /* ODAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAPIManager.h; sourceTree = "<group>"; };
+		B80F037C1C2264FB009CE9D8 /* ODAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAPIManager.m; sourceTree = "<group>"; };
+		B80F037E1C227691009CE9D8 /* 欧动集市icon点击态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动集市icon点击态@3x.png"; sourceTree = "<group>"; };
+		B80F03801C227698009CE9D8 /* 欧动集市icon默认态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动集市icon默认态@3x.png"; sourceTree = "<group>"; };
+		B80F038A1C22A982009CE9D8 /* ODAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppModel.h; sourceTree = "<group>"; };
+		B80F038B1C22A982009CE9D8 /* ODAppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAppModel.m; sourceTree = "<group>"; };
+		B80F03981C22BABC009CE9D8 /* ODBazaarViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarViewCell.h; sourceTree = "<group>"; };
+		B80F03991C22BABC009CE9D8 /* ODBazaarViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarViewCell.m; sourceTree = "<group>"; };
+		B80F039A1C22BABC009CE9D8 /* ODBazaarViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarViewCell.xib; sourceTree = "<group>"; };
+		B83445211C24067900FDBA37 /* ODBazaarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarModel.h; sourceTree = "<group>"; };
+		B83445221C24067900FDBA37 /* ODBazaarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarModel.m; sourceTree = "<group>"; };
+		B83C6B621C224F640063ED92 /* ODApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B83C6B661C224F640063ED92 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B83C6B681C224F640063ED92 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B83C6B691C224F640063ED92 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B83C6B6B1C224F640063ED92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B83C6B6E1C224F640063ED92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B83C6B701C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B83C6B751C224F640063ED92 /* ODAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ODAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B83C6B791C224F640063ED92 /* ODAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODAppTests.m; sourceTree = "<group>"; };
+		B83C6B7B1C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B83C6B801C224F640063ED92 /* ODAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ODAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B83C6B841C224F640063ED92 /* ODAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODAppUITests.m; sourceTree = "<group>"; };
+		B83C6B861C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B83C6B921C2252F30063ED92 /* ODApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ODApp-Prefix.pch"; sourceTree = "<group>"; };
+		B83C6B931C22532B0063ED92 /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
+		B83C6B9D1C22562C0063ED92 /* ODTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTabBarController.h; sourceTree = "<group>"; };
+		B83C6B9E1C22562C0063ED92 /* ODTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTabBarController.m; sourceTree = "<group>"; };
+		C3D6EA47D0FE49655335B119 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B83C6B5F1C224F640063ED92 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				453C139C602C89AF557B0F7E /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B83C6B721C224F640063ED92 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B83C6B7D1C224F640063ED92 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		830910F0D69A70031BEA3AFD /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C3D6EA47D0FE49655335B119 /* Pods.debug.xcconfig */,
+				E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B80F028A1C225C41009CE9D8 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				B80F028C1C225C41009CE9D8 /* Resource */,
+				B80F028B1C225C41009CE9D8 /* MyControl */,
+			);
+			name = Utility;
+			path = ODApp/Utility;
+			sourceTree = "<group>";
+		};
+		B80F028B1C225C41009CE9D8 /* MyControl */ = {
+			isa = PBXGroup;
+			children = (
+				B80F03751C226349009CE9D8 /* ODClassMethod.h */,
+				B80F03761C226349009CE9D8 /* ODClassMethod.m */,
+				B80F03781C22636F009CE9D8 /* ODColorConversion.h */,
+				B80F03791C22636F009CE9D8 /* ODColorConversion.m */,
+				B80F037B1C2264FB009CE9D8 /* ODAPIManager.h */,
+				B80F037C1C2264FB009CE9D8 /* ODAPIManager.m */,
+			);
+			path = MyControl;
+			sourceTree = "<group>";
+		};
+		B80F028C1C225C41009CE9D8 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				B80F028D1C225C8F009CE9D8 /* Image */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		B80F028D1C225C8F009CE9D8 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				B80F028E1C225C8F009CE9D8 /* 欧动集市任务详情任务过期.jpg */,
+				B80F028F1C225C8F009CE9D8 /* 欧动集市任务详情任务过期.psd */,
+				B80F02901C225C8F009CE9D8 /* 欧动集市任务详情已完成.jpg */,
+				B80F02911C225C8F009CE9D8 /* 欧动集市任务详情已完成.psd */,
+				B80F02921C225C8F009CE9D8 /* 欧动集市任务详情已派遣.jpg */,
+				B80F02931C225C8F009CE9D8 /* 欧动集市任务详情已派遣.psd */,
+				B80F02941C225C8F009CE9D8 /* 欧动集市任务详情等待派遣.jpg */,
+				B80F02951C225C8F009CE9D8 /* 欧动集市任务详情等待派遣.psd */,
+				B80F02961C225C8F009CE9D8 /* 欧动集市发布任务.jpg */,
+				B80F02971C225C8F009CE9D8 /* 欧动集市发布任务.psd */,
+				B80F02981C225C8F009CE9D8 /* 欧动集市标签关键字搜索页 搜索态.jpg */,
+				B80F02991C225C8F009CE9D8 /* 欧动集市标签关键字搜索页 搜索态.psd */,
+				B80F029A1C225C8F009CE9D8 /* 欧动集市首页.jpg */,
+				B80F029B1C225C8F009CE9D8 /* 欧动集市首页.psd */,
+				B80F029C1C225C8F009CE9D8 /* 规范 */,
+				B80F02A51C225C8F009CE9D8 /* 资源包 */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		B80F029C1C225C8F009CE9D8 /* 规范 */ = {
+			isa = PBXGroup;
+			children = (
+				B80F029D1C225C8F009CE9D8 /* 欧动集市标签搜索页.jpg */,
+				B80F029E1C225C8F009CE9D8 /* 欧动集市标签搜索页.psd */,
+				B80F029F1C225C8F009CE9D8 /* 规范- 任务详情页.jpg */,
+				B80F02A01C225C8F009CE9D8 /* 规范- 任务详情页.psd */,
+				B80F02A11C225C8F009CE9D8 /* 规范-欧动集市发布任务.jpg */,
+				B80F02A21C225C8F009CE9D8 /* 规范-欧动集市发布任务.psd */,
+				B80F02A31C225C8F009CE9D8 /* 规范-欧动集市首页 .jpg */,
+				B80F02A41C225C8F009CE9D8 /* 规范-欧动集市首页 .psd */,
+			);
+			path = "规范";
+			sourceTree = "<group>";
+		};
+		B80F02A51C225C8F009CE9D8 /* 资源包 */ = {
+			isa = PBXGroup;
+			children = (
+				B80F02A61C225C8F009CE9D8 /* 任务详情页 */,
+				B80F02B01C225C8F009CE9D8 /* 发布任务页 */,
+				B80F02B71C225C8F009CE9D8 /* 搜索页 */,
+				B80F02BE1C225C8F009CE9D8 /* 欧动集市首页 */,
+			);
+			path = "资源包";
+			sourceTree = "<group>";
+		};
+		B80F02A61C225C8F009CE9D8 /* 任务详情页 */ = {
+			isa = PBXGroup;
+			children = (
+				B80F02A71C225C8F009CE9D8 /* 任务详情上拉按钮@1x.png */,
+				B80F02A81C225C8F009CE9D8 /* 任务详情上拉按钮@2x.png */,
+				B80F02A91C225C8F009CE9D8 /* 任务详情上拉按钮@3x.png */,
+				B80F02AA1C225C8F009CE9D8 /* 任务详情下拉按钮@1x.png */,
+				B80F02AB1C225C8F009CE9D8 /* 任务详情下拉按钮@2x.png */,
+				B80F02AC1C225C8F009CE9D8 /* 任务详情下拉按钮@3x.png */,
+				B80F02AD1C225C8F009CE9D8 /* 喜欢icon@1x.png */,
+				B80F02AE1C225C8F009CE9D8 /* 喜欢icon@2x.png */,
+				B80F02AF1C225C8F009CE9D8 /* 喜欢icon@3x.png */,
+			);
+			path = "任务详情页";
+			sourceTree = "<group>";
+		};
+		B80F02B01C225C8F009CE9D8 /* 发布任务页 */ = {
+			isa = PBXGroup;
+			children = (
+				B80F02B11C225C8F009CE9D8 /* 时间下拉箭头@1x.png */,
+				B80F02B21C225C8F009CE9D8 /* 时间下拉箭头@2x.png */,
+				B80F02B31C225C8F009CE9D8 /* 时间下拉箭头@3x.png */,
+				B80F02B41C225C8F009CE9D8 /* 选择标签icon@1x.png */,
+				B80F02B51C225C8F009CE9D8 /* 选择标签icon@2x.png */,
+				B80F02B61C225C8F009CE9D8 /* 选择标签icon@3x.png */,
+			);
+			path = "发布任务页";
+			sourceTree = "<group>";
+		};
+		B80F02B71C225C8F009CE9D8 /* 搜索页 */ = {
+			isa = PBXGroup;
+			children = (
+				B80F02B81C225C8F009CE9D8 /* 搜索光标icon@1x.png */,
+				B80F02B91C225C8F009CE9D8 /* 搜索光标icon@2x.png */,
+				B80F02BA1C225C8F009CE9D8 /* 搜索光标icon@3x.png */,
+				B80F02BB1C225C8F009CE9D8 /* 搜索取消icon@1x.png */,
+				B80F02BC1C225C8F009CE9D8 /* 搜索取消icon@2x.png */,
+				B80F02BD1C225C8F009CE9D8 /* 搜索取消icon@3x.png */,
+			);
+			path = "搜索页";
+			sourceTree = "<group>";
+		};
+		B80F02BE1C225C8F009CE9D8 /* 欧动集市首页 */ = {
+			isa = PBXGroup;
+			children = (
+				B80F02BF1C225C8F009CE9D8 /* 个人中心icon点击态@1x.png */,
+				B80F02C01C225C8F009CE9D8 /* 个人中心icon点击态@2x.png */,
+				B80F02C11C225C8F009CE9D8 /* 个人中心icon点击态@3x.png */,
+				B80F02C21C225C8F009CE9D8 /* 个人中心icon默认态@1x.png */,
+				B80F02C31C225C8F009CE9D8 /* 个人中心icon默认态@2x.png */,
+				B80F02C41C225C8F009CE9D8 /* 个人中心icon默认态@3x.png */,
+				B80F02C51C225C8F009CE9D8 /* 中心活动icon点击态@1x.png */,
+				B80F02C61C225C8F009CE9D8 /* 中心活动icon点击态@2x.png */,
+				B80F02C71C225C8F009CE9D8 /* 中心活动icon点击态@3x.png */,
+				B80F02C81C225C8F009CE9D8 /* 中心活动icon默认态@1x.png */,
+				B80F02C91C225C8F009CE9D8 /* 中心活动icon默认态@2x.png */,
+				B80F02CA1C225C8F009CE9D8 /* 中心活动icon默认态@3x.png */,
+				B80F02CB1C225C8F009CE9D8 /* 任务开始按钮中对勾@1x.png */,
+				B80F02CC1C225C8F009CE9D8 /* 任务开始按钮中对勾@2x.png */,
+				B80F02CD1C225C8F009CE9D8 /* 任务开始按钮中对勾@3x.png */,
+				B80F02CE1C225C8F009CE9D8 /* 任务筛选上拉箭头@1x.png */,
+				B80F02CF1C225C8F009CE9D8 /* 任务筛选上拉箭头@2x.png */,
+				B80F02D01C225C8F009CE9D8 /* 任务筛选上拉箭头@3x.png */,
+				B80F02D11C225C8F009CE9D8 /* 任务筛选下拉箭头@1x.png */,
+				B80F02D21C225C8F009CE9D8 /* 任务筛选下拉箭头@2x.png */,
+				B80F02D31C225C8F009CE9D8 /* 任务筛选下拉箭头@3x.png */,
+				B80F02D41C225C8F009CE9D8 /* 发布任务icon@1x.png */,
+				B80F02D51C225C8F009CE9D8 /* 发布任务icon@2x.png */,
+				B80F02D61C225C8F009CE9D8 /* 发布任务icon@3x.png */,
+				B80F02D71C225C8F009CE9D8 /* 定位icon@1x.png */,
+				B80F02D81C225C8F009CE9D8 /* 定位icon@2x.png */,
+				B80F02D91C225C8F009CE9D8 /* 定位icon@3x.png */,
+				B80F02DA1C225C8F009CE9D8 /* 搜索放大镜icon@1x.png */,
+				B80F02DB1C225C8F009CE9D8 /* 搜索放大镜icon@2x.png */,
+				B80F02DC1C225C8F009CE9D8 /* 搜索放大镜icon@3x.png */,
+				B80F02DD1C225C8F009CE9D8 /* 标签中端按钮部分@1x.png */,
+				B80F02DE1C225C8F009CE9D8 /* 标签中端按钮部分@2x.png */,
+				B80F02DF1C225C8F009CE9D8 /* 标签中端按钮部分@3x.png */,
+				B80F02E01C225C8F009CE9D8 /* 标签右端按钮部分@1x.png */,
+				B80F02E11C225C8F009CE9D8 /* 标签右端按钮部分@2x.png */,
+				B80F02E21C225C8F009CE9D8 /* 标签右端按钮部分@3x.png */,
+				B80F02E31C225C8F009CE9D8 /* 标签左端按钮部分@1x.png */,
+				B80F02E41C225C8F009CE9D8 /* 标签左端按钮部分@2x.png */,
+				B80F02E51C225C8F009CE9D8 /* 标签左端按钮部分@3x.png */,
+				B80F02E61C225C8F009CE9D8 /* 标签栏大按钮@1x.png */,
+				B80F02E71C225C8F009CE9D8 /* 标签栏大按钮@2x.png */,
+				B80F02E81C225C8F009CE9D8 /* 标签栏大按钮@3x.png */,
+				B80F02E91C225C8F009CE9D8 /* 欧动社区icon点击态@1x.png */,
+				B80F02EA1C225C8F009CE9D8 /* 欧动社区icon点击态@2x.png */,
+				B80F02EB1C225C8F009CE9D8 /* 欧动社区icon点击态@3x.png */,
+				B80F02EC1C225C8F009CE9D8 /* 欧动社区icon默认态@1x.png */,
+				B80F02ED1C225C8F009CE9D8 /* 欧动社区icon默认态@2x.png */,
+				B80F02EE1C225C8F009CE9D8 /* 欧动社区icon默认态@3x.png */,
+				B80F02EF1C225C8F009CE9D8 /* 欧动集市icon点击态@1x.png */,
+				B80F02F01C225C8F009CE9D8 /* 欧动集市icon点击态@2x.png */,
+				B80F037E1C227691009CE9D8 /* 欧动集市icon点击态@3x.png */,
+				B80F02F21C225C8F009CE9D8 /* 欧动集市icon默认态@1x.png */,
+				B80F02F31C225C8F009CE9D8 /* 欧动集市icon默认态@2x.png */,
+				B80F03801C227698009CE9D8 /* 欧动集市icon默认态@3x.png */,
+				B80F02F41C225C8F009CE9D8 /* 欧动集市icon默认态@3x.psd */,
+				B80F02F51C225C8F009CE9D8 /* 首页发现icon点击态@1x.png */,
+				B80F02F61C225C8F009CE9D8 /* 首页发现icon点击态@2x.png */,
+				B80F02F71C225C8F009CE9D8 /* 首页发现icon点击态@3x.png */,
+				B80F02F81C225C8F009CE9D8 /* 首页发现icon默认态@1x.png */,
+				B80F02F91C225C8F009CE9D8 /* 首页发现icon默认态@2x.png */,
+				B80F02FA1C225C8F009CE9D8 /* 首页发现icon默认态@3x.png */,
+			);
+			path = "欧动集市首页";
+			sourceTree = "<group>";
+		};
+		B80F03621C225E5C009CE9D8 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B80F03631C225E67009CE9D8 /* ODBaseViewController.h */,
+				B80F03641C225E67009CE9D8 /* ODBaseViewController.m */,
+			);
+			path = BaseViewController;
+			sourceTree = "<group>";
+		};
+		B80F03831C22A8DE009CE9D8 /* ODModel */ = {
+			isa = PBXGroup;
+			children = (
+				B80F038A1C22A982009CE9D8 /* ODAppModel.h */,
+				B80F038B1C22A982009CE9D8 /* ODAppModel.m */,
+			);
+			path = ODModel;
+			sourceTree = "<group>";
+		};
+		B80F03971C22BA9C009CE9D8 /* BazaarView */ = {
+			isa = PBXGroup;
+			children = (
+				B80F03981C22BABC009CE9D8 /* ODBazaarViewCell.h */,
+				B80F03991C22BABC009CE9D8 /* ODBazaarViewCell.m */,
+				B80F039A1C22BABC009CE9D8 /* ODBazaarViewCell.xib */,
+			);
+			path = BazaarView;
+			sourceTree = "<group>";
+		};
+		B83445201C24067900FDBA37 /* BazaarModel */ = {
+			isa = PBXGroup;
+			children = (
+				B83445211C24067900FDBA37 /* ODBazaarModel.h */,
+				B83445221C24067900FDBA37 /* ODBazaarModel.m */,
+			);
+			path = BazaarModel;
+			sourceTree = "<group>";
+		};
+		B83C6B591C224F630063ED92 = {
+			isa = PBXGroup;
+			children = (
+				B80F028A1C225C41009CE9D8 /* Utility */,
+				B83C6B951C22549E0063ED92 /* Model */,
+				B83C6B961C22549E0063ED92 /* View */,
+				B83C6B941C22549E0063ED92 /* Controller */,
+				B83C6B641C224F640063ED92 /* ODApp */,
+				B83C6B781C224F640063ED92 /* ODAppTests */,
+				B83C6B831C224F640063ED92 /* ODAppUITests */,
+				B83C6B631C224F640063ED92 /* Products */,
+				830910F0D69A70031BEA3AFD /* Pods */,
+				BE90C887BE6078782C6B85F6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B83C6B631C224F640063ED92 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B83C6B621C224F640063ED92 /* ODApp.app */,
+				B83C6B751C224F640063ED92 /* ODAppTests.xctest */,
+				B83C6B801C224F640063ED92 /* ODAppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B83C6B641C224F640063ED92 /* ODApp */ = {
+			isa = PBXGroup;
+			children = (
+				B83C6B681C224F640063ED92 /* AppDelegate.h */,
+				B83C6B691C224F640063ED92 /* AppDelegate.m */,
+				B83C6B6B1C224F640063ED92 /* Assets.xcassets */,
+				B83C6B6D1C224F640063ED92 /* LaunchScreen.storyboard */,
+				B83C6B701C224F640063ED92 /* Info.plist */,
+				B83C6B921C2252F30063ED92 /* ODApp-Prefix.pch */,
+				B83C6B931C22532B0063ED92 /* Define.h */,
+				B83C6B651C224F640063ED92 /* Supporting Files */,
+			);
+			path = ODApp;
+			sourceTree = "<group>";
+		};
+		B83C6B651C224F640063ED92 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B83C6B661C224F640063ED92 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B83C6B781C224F640063ED92 /* ODAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				B83C6B791C224F640063ED92 /* ODAppTests.m */,
+				B83C6B7B1C224F640063ED92 /* Info.plist */,
+			);
+			path = ODAppTests;
+			sourceTree = "<group>";
+		};
+		B83C6B831C224F640063ED92 /* ODAppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B83C6B841C224F640063ED92 /* ODAppUITests.m */,
+				B83C6B861C224F640063ED92 /* Info.plist */,
+			);
+			path = ODAppUITests;
+			sourceTree = "<group>";
+		};
+		B83C6B941C22549E0063ED92 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B80F03621C225E5C009CE9D8 /* BaseViewController */,
+				B83C6B9C1C22562C0063ED92 /* TabBarController */,
+				B83C6BD11C225B1A0063ED92 /* HomeFound */,
+				B83C6BCB1C225B1A0063ED92 /* CenterActivity */,
+				B83C6BC81C225B1A0063ED92 /* Bazaar */,
+				B83C6BCE1C225B1A0063ED92 /* Community */,
+				B83C6BD41C225B1A0063ED92 /* PersonalCenter */,
+			);
+			name = Controller;
+			path = ODApp/Controller;
+			sourceTree = "<group>";
+		};
+		B83C6B951C22549E0063ED92 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B80F03831C22A8DE009CE9D8 /* ODModel */,
+				B83445201C24067900FDBA37 /* BazaarModel */,
+			);
+			name = Model;
+			path = ODApp/Model;
+			sourceTree = "<group>";
+		};
+		B83C6B961C22549E0063ED92 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B80F03971C22BA9C009CE9D8 /* BazaarView */,
+			);
+			name = View;
+			path = ODApp/View;
+			sourceTree = "<group>";
+		};
+		B83C6B9C1C22562C0063ED92 /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				B83C6B9D1C22562C0063ED92 /* ODTabBarController.h */,
+				B83C6B9E1C22562C0063ED92 /* ODTabBarController.m */,
+			);
+			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		B83C6BC81C225B1A0063ED92 /* Bazaar */ = {
+			isa = PBXGroup;
+			children = (
+				B80F036F1C225EE4009CE9D8 /* ODBazaarViewController.h */,
+				B80F03701C225EE4009CE9D8 /* ODBazaarViewController.m */,
+			);
+			path = Bazaar;
+			sourceTree = "<group>";
+		};
+		B83C6BCB1C225B1A0063ED92 /* CenterActivity */ = {
+			isa = PBXGroup;
+			children = (
+				B80F03691C225EB5009CE9D8 /* ODCenterActivityViewController.h */,
+				B80F036A1C225EB5009CE9D8 /* ODCenterActivityViewController.m */,
+			);
+			path = CenterActivity;
+			sourceTree = "<group>";
+		};
+		B83C6BCE1C225B1A0063ED92 /* Community */ = {
+			isa = PBXGroup;
+			children = (
+				B80F036C1C225ECE009CE9D8 /* ODCommumityViewController.h */,
+				B80F036D1C225ECE009CE9D8 /* ODCommumityViewController.m */,
+			);
+			path = Community;
+			sourceTree = "<group>";
+		};
+		B83C6BD11C225B1A0063ED92 /* HomeFound */ = {
+			isa = PBXGroup;
+			children = (
+				B80F03661C225E9A009CE9D8 /* ODHomeFoundViewController.h */,
+				B80F03671C225E9A009CE9D8 /* ODHomeFoundViewController.m */,
+			);
+			path = HomeFound;
+			sourceTree = "<group>";
+		};
+		B83C6BD41C225B1A0063ED92 /* PersonalCenter */ = {
+			isa = PBXGroup;
+			children = (
+				B80F03721C225EF9009CE9D8 /* ODPersonalCenterViewController.h */,
+				B80F03731C225EF9009CE9D8 /* ODPersonalCenterViewController.m */,
+			);
+			path = PersonalCenter;
+			sourceTree = "<group>";
+		};
+		BE90C887BE6078782C6B85F6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				92E55588697041BF02F9C6E1 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B83C6B611C224F640063ED92 /* ODApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B83C6B891C224F640063ED92 /* Build configuration list for PBXNativeTarget "ODApp" */;
+			buildPhases = (
+				2872E34B8C82197324EB472D /* Check Pods Manifest.lock */,
+				B83C6B5E1C224F640063ED92 /* Sources */,
+				B83C6B5F1C224F640063ED92 /* Frameworks */,
+				B83C6B601C224F640063ED92 /* Resources */,
+				C990F7F189A4D1E84CFCEDA6 /* Embed Pods Frameworks */,
+				CDADE34B4B51B5CDC770320B /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ODApp;
+			productName = ODApp;
+			productReference = B83C6B621C224F640063ED92 /* ODApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B83C6B741C224F640063ED92 /* ODAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B83C6B8C1C224F640063ED92 /* Build configuration list for PBXNativeTarget "ODAppTests" */;
+			buildPhases = (
+				B83C6B711C224F640063ED92 /* Sources */,
+				B83C6B721C224F640063ED92 /* Frameworks */,
+				B83C6B731C224F640063ED92 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B83C6B771C224F640063ED92 /* PBXTargetDependency */,
+			);
+			name = ODAppTests;
+			productName = ODAppTests;
+			productReference = B83C6B751C224F640063ED92 /* ODAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B83C6B7F1C224F640063ED92 /* ODAppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B83C6B8F1C224F640063ED92 /* Build configuration list for PBXNativeTarget "ODAppUITests" */;
+			buildPhases = (
+				B83C6B7C1C224F640063ED92 /* Sources */,
+				B83C6B7D1C224F640063ED92 /* Frameworks */,
+				B83C6B7E1C224F640063ED92 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B83C6B821C224F640063ED92 /* PBXTargetDependency */,
+			);
+			name = ODAppUITests;
+			productName = ODAppUITests;
+			productReference = B83C6B801C224F640063ED92 /* ODAppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B83C6B5A1C224F630063ED92 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Odong-YG";
+				TargetAttributes = {
+					B83C6B611C224F640063ED92 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					B83C6B741C224F640063ED92 = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = B83C6B611C224F640063ED92;
+					};
+					B83C6B7F1C224F640063ED92 = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = B83C6B611C224F640063ED92;
+					};
+				};
+			};
+			buildConfigurationList = B83C6B5D1C224F630063ED92 /* Build configuration list for PBXProject "ODApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B83C6B591C224F630063ED92;
+			productRefGroup = B83C6B631C224F640063ED92 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B83C6B611C224F640063ED92 /* ODApp */,
+				B83C6B741C224F640063ED92 /* ODAppTests */,
+				B83C6B7F1C224F640063ED92 /* ODAppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B83C6B601C224F640063ED92 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B80F03091C225C8F009CE9D8 /* 欧动集市标签搜索页.jpg in Resources */,
+				B80F03491C225C8F009CE9D8 /* 标签右端按钮部分@3x.png in Resources */,
+				B80F03121C225C8F009CE9D8 /* 任务详情上拉按钮@2x.png in Resources */,
+				B80F03201C225C8F009CE9D8 /* 搜索光标icon@1x.png in Resources */,
+				B80F03401C225C8F009CE9D8 /* 定位icon@3x.png in Resources */,
+				B80F031C1C225C8F009CE9D8 /* 时间下拉箭头@3x.png in Resources */,
+				B80F035E1C225C8F009CE9D8 /* 首页发现icon点击态@3x.png in Resources */,
+				B80F03361C225C8F009CE9D8 /* 任务筛选上拉箭头@2x.png in Resources */,
+				B80F03101C225C8F009CE9D8 /* 规范-欧动集市首页 .psd in Resources */,
+				B80F03551C225C8F009CE9D8 /* 欧动社区icon默认态@3x.png in Resources */,
+				B80F030E1C225C8F009CE9D8 /* 规范-欧动集市发布任务.psd in Resources */,
+				B80F03151C225C8F009CE9D8 /* 任务详情下拉按钮@2x.png in Resources */,
+				B80F032E1C225C8F009CE9D8 /* 中心活动icon点击态@3x.png in Resources */,
+				B80F03591C225C8F009CE9D8 /* 欧动集市icon默认态@1x.png in Resources */,
+				B80F03501C225C8F009CE9D8 /* 欧动社区icon点击态@1x.png in Resources */,
+				B80F03031C225C8F009CE9D8 /* 欧动集市发布任务.jpg in Resources */,
+				B80F033F1C225C8F009CE9D8 /* 定位icon@2x.png in Resources */,
+				B80F03141C225C8F009CE9D8 /* 任务详情下拉按钮@1x.png in Resources */,
+				B80F03351C225C8F009CE9D8 /* 任务筛选上拉箭头@1x.png in Resources */,
+				B80F030B1C225C8F009CE9D8 /* 规范- 任务详情页.jpg in Resources */,
+				B80F034B1C225C8F009CE9D8 /* 标签左端按钮部分@2x.png in Resources */,
+				B80F03571C225C8F009CE9D8 /* 欧动集市icon点击态@2x.png in Resources */,
+				B80F03561C225C8F009CE9D8 /* 欧动集市icon点击态@1x.png in Resources */,
+				B80F03291C225C8F009CE9D8 /* 个人中心icon默认态@1x.png in Resources */,
+				B80F03081C225C8F009CE9D8 /* 欧动集市首页.psd in Resources */,
+				B80F03161C225C8F009CE9D8 /* 任务详情下拉按钮@3x.png in Resources */,
+				B80F035F1C225C8F009CE9D8 /* 首页发现icon默认态@1x.png in Resources */,
+				B80F031A1C225C8F009CE9D8 /* 时间下拉箭头@1x.png in Resources */,
+				B80F03461C225C8F009CE9D8 /* 标签中端按钮部分@3x.png in Resources */,
+				B80F034E1C225C8F009CE9D8 /* 标签栏大按钮@2x.png in Resources */,
+				B80F03541C225C8F009CE9D8 /* 欧动社区icon默认态@2x.png in Resources */,
+				B80F033B1C225C8F009CE9D8 /* 发布任务icon@1x.png in Resources */,
+				B80F02FE1C225C8F009CE9D8 /* 欧动集市任务详情已完成.psd in Resources */,
+				B80F032D1C225C8F009CE9D8 /* 中心活动icon点击态@2x.png in Resources */,
+				B80F037F1C227691009CE9D8 /* 欧动集市icon点击态@3x.png in Resources */,
+				B83C6B6C1C224F640063ED92 /* Assets.xcassets in Resources */,
+				B80F033C1C225C8F009CE9D8 /* 发布任务icon@2x.png in Resources */,
+				B80F03271C225C8F009CE9D8 /* 个人中心icon点击态@2x.png in Resources */,
+				B80F03211C225C8F009CE9D8 /* 搜索光标icon@2x.png in Resources */,
+				B80F03331C225C8F009CE9D8 /* 任务开始按钮中对勾@2x.png in Resources */,
+				B80F031E1C225C8F009CE9D8 /* 选择标签icon@2x.png in Resources */,
+				B80F03281C225C8F009CE9D8 /* 个人中心icon点击态@3x.png in Resources */,
+				B80F03441C225C8F009CE9D8 /* 标签中端按钮部分@1x.png in Resources */,
+				B80F03321C225C8F009CE9D8 /* 任务开始按钮中对勾@1x.png in Resources */,
+				B80F03451C225C8F009CE9D8 /* 标签中端按钮部分@2x.png in Resources */,
+				B80F031D1C225C8F009CE9D8 /* 选择标签icon@1x.png in Resources */,
+				B80F03111C225C8F009CE9D8 /* 任务详情上拉按钮@1x.png in Resources */,
+				B80F030C1C225C8F009CE9D8 /* 规范- 任务详情页.psd in Resources */,
+				B80F02FC1C225C8F009CE9D8 /* 欧动集市任务详情任务过期.psd in Resources */,
+				B80F035D1C225C8F009CE9D8 /* 首页发现icon点击态@2x.png in Resources */,
+				B80F03041C225C8F009CE9D8 /* 欧动集市发布任务.psd in Resources */,
+				B80F035B1C225C8F009CE9D8 /* 欧动集市icon默认态@3x.psd in Resources */,
+				B80F032A1C225C8F009CE9D8 /* 个人中心icon默认态@2x.png in Resources */,
+				B80F03431C225C8F009CE9D8 /* 搜索放大镜icon@3x.png in Resources */,
+				B80F03411C225C8F009CE9D8 /* 搜索放大镜icon@1x.png in Resources */,
+				B80F03471C225C8F009CE9D8 /* 标签右端按钮部分@1x.png in Resources */,
+				B80F03381C225C8F009CE9D8 /* 任务筛选下拉箭头@1x.png in Resources */,
+				B80F030D1C225C8F009CE9D8 /* 规范-欧动集市发布任务.jpg in Resources */,
+				B80F03371C225C8F009CE9D8 /* 任务筛选上拉箭头@3x.png in Resources */,
+				B80F032C1C225C8F009CE9D8 /* 中心活动icon点击态@1x.png in Resources */,
+				B80F034C1C225C8F009CE9D8 /* 标签左端按钮部分@3x.png in Resources */,
+				B80F03521C225C8F009CE9D8 /* 欧动社区icon点击态@3x.png in Resources */,
+				B80F034D1C225C8F009CE9D8 /* 标签栏大按钮@1x.png in Resources */,
+				B80F039C1C22BABC009CE9D8 /* ODBazaarViewCell.xib in Resources */,
+				B80F03181C225C8F009CE9D8 /* 喜欢icon@2x.png in Resources */,
+				B80F03061C225C8F009CE9D8 /* 欧动集市标签关键字搜索页 搜索态.psd in Resources */,
+				B83C6B6F1C224F640063ED92 /* LaunchScreen.storyboard in Resources */,
+				B80F03221C225C8F009CE9D8 /* 搜索光标icon@3x.png in Resources */,
+				B80F032B1C225C8F009CE9D8 /* 个人中心icon默认态@3x.png in Resources */,
+				B80F034F1C225C8F009CE9D8 /* 标签栏大按钮@3x.png in Resources */,
+				B80F034A1C225C8F009CE9D8 /* 标签左端按钮部分@1x.png in Resources */,
+				B80F03051C225C8F009CE9D8 /* 欧动集市标签关键字搜索页 搜索态.jpg in Resources */,
+				B80F031F1C225C8F009CE9D8 /* 选择标签icon@3x.png in Resources */,
+				B80F03241C225C8F009CE9D8 /* 搜索取消icon@2x.png in Resources */,
+				B80F03311C225C8F009CE9D8 /* 中心活动icon默认态@3x.png in Resources */,
+				B80F03021C225C8F009CE9D8 /* 欧动集市任务详情等待派遣.psd in Resources */,
+				B80F03481C225C8F009CE9D8 /* 标签右端按钮部分@2x.png in Resources */,
+				B80F030A1C225C8F009CE9D8 /* 欧动集市标签搜索页.psd in Resources */,
+				B80F03531C225C8F009CE9D8 /* 欧动社区icon默认态@1x.png in Resources */,
+				B80F033D1C225C8F009CE9D8 /* 发布任务icon@3x.png in Resources */,
+				B80F035C1C225C8F009CE9D8 /* 首页发现icon点击态@1x.png in Resources */,
+				B80F03421C225C8F009CE9D8 /* 搜索放大镜icon@2x.png in Resources */,
+				B80F03301C225C8F009CE9D8 /* 中心活动icon默认态@2x.png in Resources */,
+				B80F03261C225C8F009CE9D8 /* 个人中心icon点击态@1x.png in Resources */,
+				B80F030F1C225C8F009CE9D8 /* 规范-欧动集市首页 .jpg in Resources */,
+				B80F02FF1C225C8F009CE9D8 /* 欧动集市任务详情已派遣.jpg in Resources */,
+				B80F03511C225C8F009CE9D8 /* 欧动社区icon点击态@2x.png in Resources */,
+				B80F031B1C225C8F009CE9D8 /* 时间下拉箭头@2x.png in Resources */,
+				B80F03001C225C8F009CE9D8 /* 欧动集市任务详情已派遣.psd in Resources */,
+				B80F02FB1C225C8F009CE9D8 /* 欧动集市任务详情任务过期.jpg in Resources */,
+				B80F03231C225C8F009CE9D8 /* 搜索取消icon@1x.png in Resources */,
+				B80F03391C225C8F009CE9D8 /* 任务筛选下拉箭头@2x.png in Resources */,
+				B80F033E1C225C8F009CE9D8 /* 定位icon@1x.png in Resources */,
+				B80F035A1C225C8F009CE9D8 /* 欧动集市icon默认态@2x.png in Resources */,
+				B80F03171C225C8F009CE9D8 /* 喜欢icon@1x.png in Resources */,
+				B80F03341C225C8F009CE9D8 /* 任务开始按钮中对勾@3x.png in Resources */,
+				B80F033A1C225C8F009CE9D8 /* 任务筛选下拉箭头@3x.png in Resources */,
+				B80F03251C225C8F009CE9D8 /* 搜索取消icon@3x.png in Resources */,
+				B80F03601C225C8F009CE9D8 /* 首页发现icon默认态@2x.png in Resources */,
+				B80F03611C225C8F009CE9D8 /* 首页发现icon默认态@3x.png in Resources */,
+				B80F03131C225C8F009CE9D8 /* 任务详情上拉按钮@3x.png in Resources */,
+				B80F03011C225C8F009CE9D8 /* 欧动集市任务详情等待派遣.jpg in Resources */,
+				B80F02FD1C225C8F009CE9D8 /* 欧动集市任务详情已完成.jpg in Resources */,
+				B80F03071C225C8F009CE9D8 /* 欧动集市首页.jpg in Resources */,
+				B80F032F1C225C8F009CE9D8 /* 中心活动icon默认态@1x.png in Resources */,
+				B80F03191C225C8F009CE9D8 /* 喜欢icon@3x.png in Resources */,
+				B80F03811C227698009CE9D8 /* 欧动集市icon默认态@3x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B83C6B731C224F640063ED92 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B83C6B7E1C224F640063ED92 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2872E34B8C82197324EB472D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C990F7F189A4D1E84CFCEDA6 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDADE34B4B51B5CDC770320B /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B83C6B5E1C224F640063ED92 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B80F037A1C22636F009CE9D8 /* ODColorConversion.m in Sources */,
+				B83445231C24067900FDBA37 /* ODBazaarModel.m in Sources */,
+				B80F036B1C225EB5009CE9D8 /* ODCenterActivityViewController.m in Sources */,
+				B80F036E1C225ECE009CE9D8 /* ODCommumityViewController.m in Sources */,
+				B80F03771C226349009CE9D8 /* ODClassMethod.m in Sources */,
+				B80F038C1C22A982009CE9D8 /* ODAppModel.m in Sources */,
+				B80F03711C225EE4009CE9D8 /* ODBazaarViewController.m in Sources */,
+				B80F039B1C22BABC009CE9D8 /* ODBazaarViewCell.m in Sources */,
+				B80F037D1C2264FB009CE9D8 /* ODAPIManager.m in Sources */,
+				B80F03741C225EF9009CE9D8 /* ODPersonalCenterViewController.m in Sources */,
+				B83C6B9F1C22562C0063ED92 /* ODTabBarController.m in Sources */,
+				B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */,
+				B80F03681C225E9A009CE9D8 /* ODHomeFoundViewController.m in Sources */,
+				B83C6B671C224F640063ED92 /* main.m in Sources */,
+				B80F03651C225E67009CE9D8 /* ODBaseViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B83C6B711C224F640063ED92 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B83C6B7C1C224F640063ED92 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B83C6B771C224F640063ED92 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B83C6B611C224F640063ED92 /* ODApp */;
+			targetProxy = B83C6B761C224F640063ED92 /* PBXContainerItemProxy */;
+		};
+		B83C6B821C224F640063ED92 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B83C6B611C224F640063ED92 /* ODApp */;
+			targetProxy = B83C6B811C224F640063ED92 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B83C6B6D1C224F640063ED92 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B83C6B6E1C224F640063ED92 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B83C6B871C224F640063ED92 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B83C6B881C224F640063ED92 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B83C6B8A1C224F640063ED92 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3D6EA47D0FE49655335B119 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ODApp/ODApp-Prefix.pch";
+				INFOPLIST_FILE = ODApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Odong.ODApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(SOURCE_ROOT)/**";
+			};
+			name = Debug;
+		};
+		B83C6B8B1C224F640063ED92 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ODApp/ODApp-Prefix.pch";
+				INFOPLIST_FILE = ODApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Odong.ODApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "$(SOURCE_ROOT)/**";
+			};
+			name = Release;
+		};
+		B83C6B8D1C224F640063ED92 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ODAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Odong.ODAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ODApp.app/ODApp";
+			};
+			name = Debug;
+		};
+		B83C6B8E1C224F640063ED92 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ODAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Odong.ODAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ODApp.app/ODApp";
+			};
+			name = Release;
+		};
+		B83C6B901C224F640063ED92 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ODAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Odong.ODAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ODApp;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		B83C6B911C224F640063ED92 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = ODAppUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Odong.ODAppUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = ODApp;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B83C6B5D1C224F630063ED92 /* Build configuration list for PBXProject "ODApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B83C6B871C224F640063ED92 /* Debug */,
+				B83C6B881C224F640063ED92 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B83C6B891C224F640063ED92 /* Build configuration list for PBXNativeTarget "ODApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B83C6B8A1C224F640063ED92 /* Debug */,
+				B83C6B8B1C224F640063ED92 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B83C6B8C1C224F640063ED92 /* Build configuration list for PBXNativeTarget "ODAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B83C6B8D1C224F640063ED92 /* Debug */,
+				B83C6B8E1C224F640063ED92 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B83C6B8F1C224F640063ED92 /* Build configuration list for PBXNativeTarget "ODAppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B83C6B901C224F640063ED92 /* Debug */,
+				B83C6B911C224F640063ED92 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B83C6B5A1C224F630063ED92 /* Project object */;
+}
