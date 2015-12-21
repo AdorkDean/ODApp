@@ -49,7 +49,8 @@
 
 -(void)releaseButtonClick:(UIButton *)button
 {
-    
+    ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
+    [self.navigationController pushViewController:releaseTask animated:YES];
 }
 
 #pragma mark -创建任务筛选和搜索按钮
@@ -89,7 +90,8 @@
 
 -(void)searchButtonClick:(UIButton *)button
 {
-    
+    ODBazaarLabelSearchViewController *labelSearch = [[ODBazaarLabelSearchViewController alloc]init];
+    [self.navigationController pushViewController:labelSearch animated:YES];
 }
 
 #pragma mark - 初始化manager
@@ -105,7 +107,7 @@
 {
     NSDictionary *parameter = @{};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kUnlimitTaskUrl paramater:signParameter];
+    [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
 }
 
 #pragma mark - 请求数据
@@ -186,6 +188,23 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     return CGSizeMake(kScreenSize.width, 40);
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

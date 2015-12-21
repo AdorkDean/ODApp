@@ -11,9 +11,10 @@
 #import "ODColorConversion.h"
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
-#import "ODBazaarModel.h"
 #import "ODBazaarCollectionCell.h"
 #import "ODBazaarHeaderView.h"
+#import "ODBazaarReleaseTaskViewController.h"
+#import "ODBazaarLabelSearchViewController.h"
 
 @interface ODBazaarViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 

@@ -11,4 +11,6 @@
 
 @interface ODTabBarController : UITabBarController
 
+@property(nonatomic,strong)UIImageView *imageView;
+
 @end

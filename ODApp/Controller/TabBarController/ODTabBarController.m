@@ -10,7 +10,6 @@
 
 @interface ODTabBarController ()
 
-@property(nonatomic,strong)UIImageView *imageView;
 
 @end
 
@@ -87,6 +86,8 @@
         }
     }
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
