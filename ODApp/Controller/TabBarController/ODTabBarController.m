@@ -53,8 +53,9 @@
     for (NSInteger i = 0 ; i < titleArray.count; i++) {
         
         //此处必须用UIButtonTypeCustom
+        CGFloat space = (kScreenSize.width - 24.5*5)/5;
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(26.25 + (24.5+50)*i, 7.5, 24.5, 24.5);
+        button.frame = CGRectMake(0.5 * space + (24.5+space)*i, 7.5, 24.5, 24.5);
         button.tag = i+1;
         [button setBackgroundImage:[[UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
         [button setBackgroundImage:[[UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateSelected];

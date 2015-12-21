@@ -21,8 +21,7 @@
     [self navigationInit];
     [self createScreeningAndSearchButton];
     [self createRequest];
-    [self createTableView];
-    [self createTableViewHeaderView];
+    [self createCollectionView];
     [self joiningTogetherParmeters];
 }
 
@@ -124,76 +123,69 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
             }
-            [weakSelf.tableView reloadData];
+            [weakSelf.collectionView reloadData];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
     }];
 }
 
-
-#pragma mark - 创建tableView
--(void)createTableView
+#pragma mark - 创建CollectionView
+-(void)createCollectionView
 {
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 117, kScreenSize.width, kScreenSize.height - 117 -55) style:UITableViewStylePlain];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    [self.tableView registerNib:[UINib nibWithNibName:@"ODBazaarViewCell" bundle:nil] forCellReuseIdentifier:kBazaarCellId];
-    [self.view addSubview:self.tableView];
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    flowLayout.minimumInteritemSpacing = 5;
+    flowLayout.minimumLineSpacing = 5;
+    flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,117, kScreenSize.width, kScreenSize.height - 117 - 55) collectionViewLayout:flowLayout];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarCellId];
+    [self.collectionView registerClass:[ODBazaarHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];
+    [self.view addSubview:self.collectionView];
+    
 }
 
-#pragma mark - 创建tableView的头视图
--(void)createTableViewHeaderView
-{
-    UIView *view = [ODClassMethod creatViewWithFrame:CGRectMake(0, 117, kScreenSize.width, 40) tag:0 color:@"#ffffff"];
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 7.5, 100, 25) text:@"最新任务" font:16 alignment:@"left" color:@"#000000" alpha:1];
-    UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 39, kScreenSize.width , 1) tag:0 color:@"#f3f3f3"];
-    [view addSubview:label];
-    [view addSubview:lineView];
-    self.tableView.tableHeaderView = view;
-}
-
-#pragma mark - UITableViewDelegate
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return self.dataArray.count;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+#pragma mark - UICollectionViewDelegate
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    ODBazaarViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kBazaarCellId];
+    return self.dataArray.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODBazaarCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarCellId forIndexPath:indexPath];
     ODBazaarModel *model = self.dataArray[indexPath.row];
-    [cell showDataWithModel:model];
+    [cell shodDataWithModel:model];
+    cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     return cell;
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120;
+    return CGSizeMake(kScreenSize.width, 120);
 }
 
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    UIView *view = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 10) tag:0 color:@"#d9d9d9"];
-    return view;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    if (section == self.dataArray.count-1) {
-        return 0;
+    static NSString *viewId = @"supple";
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        ODBazaarHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:viewId forIndexPath:indexPath];
+        return headerView;
     }
-    return 10;
+    return nil;
+    
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return 0;
+    return CGSizeMake(kScreenSize.width, 40);
 }
 
 - (void)didReceiveMemoryWarning {

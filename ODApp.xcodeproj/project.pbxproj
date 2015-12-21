@@ -122,8 +122,6 @@
 		B80F037F1C227691009CE9D8 /* 欧动集市icon点击态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F037E1C227691009CE9D8 /* 欧动集市icon点击态@3x.png */; };
 		B80F03811C227698009CE9D8 /* 欧动集市icon默认态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F03801C227698009CE9D8 /* 欧动集市icon默认态@3x.png */; };
 		B80F038C1C22A982009CE9D8 /* ODAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F038B1C22A982009CE9D8 /* ODAppModel.m */; };
-		B80F039B1C22BABC009CE9D8 /* ODBazaarViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F03991C22BABC009CE9D8 /* ODBazaarViewCell.m */; };
-		B80F039C1C22BABC009CE9D8 /* ODBazaarViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80F039A1C22BABC009CE9D8 /* ODBazaarViewCell.xib */; };
 		B83445231C24067900FDBA37 /* ODBazaarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B83445221C24067900FDBA37 /* ODBazaarModel.m */; };
 		B83C6B671C224F640063ED92 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B661C224F640063ED92 /* main.m */; };
 		B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B691C224F640063ED92 /* AppDelegate.m */; };
@@ -132,6 +130,9 @@
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
 		B83C6B9F1C22562C0063ED92 /* ODTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B9E1C22562C0063ED92 /* ODTabBarController.m */; };
+		B88FB9491C27B89800F46D85 /* ODBazaarCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B88FB9471C27B89800F46D85 /* ODBazaarCollectionCell.m */; };
+		B88FB94A1C27B89800F46D85 /* ODBazaarCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B88FB9481C27B89800F46D85 /* ODBazaarCollectionCell.xib */; };
+		B88FB94D1C27BA2F00F46D85 /* ODBazaarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B88FB94C1C27BA2F00F46D85 /* ODBazaarHeaderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -277,9 +278,6 @@
 		B80F03801C227698009CE9D8 /* 欧动集市icon默认态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动集市icon默认态@3x.png"; sourceTree = "<group>"; };
 		B80F038A1C22A982009CE9D8 /* ODAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppModel.h; sourceTree = "<group>"; };
 		B80F038B1C22A982009CE9D8 /* ODAppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAppModel.m; sourceTree = "<group>"; };
-		B80F03981C22BABC009CE9D8 /* ODBazaarViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarViewCell.h; sourceTree = "<group>"; };
-		B80F03991C22BABC009CE9D8 /* ODBazaarViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarViewCell.m; sourceTree = "<group>"; };
-		B80F039A1C22BABC009CE9D8 /* ODBazaarViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarViewCell.xib; sourceTree = "<group>"; };
 		B83445211C24067900FDBA37 /* ODBazaarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarModel.h; sourceTree = "<group>"; };
 		B83445221C24067900FDBA37 /* ODBazaarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarModel.m; sourceTree = "<group>"; };
 		B83C6B621C224F640063ED92 /* ODApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,6 +297,11 @@
 		B83C6B931C22532B0063ED92 /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		B83C6B9D1C22562C0063ED92 /* ODTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTabBarController.h; sourceTree = "<group>"; };
 		B83C6B9E1C22562C0063ED92 /* ODTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTabBarController.m; sourceTree = "<group>"; };
+		B88FB9461C27B89800F46D85 /* ODBazaarCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarCollectionCell.h; sourceTree = "<group>"; };
+		B88FB9471C27B89800F46D85 /* ODBazaarCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarCollectionCell.m; sourceTree = "<group>"; };
+		B88FB9481C27B89800F46D85 /* ODBazaarCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarCollectionCell.xib; sourceTree = "<group>"; };
+		B88FB94B1C27BA2F00F46D85 /* ODBazaarHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarHeaderView.h; sourceTree = "<group>"; };
+		B88FB94C1C27BA2F00F46D85 /* ODBazaarHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarHeaderView.m; sourceTree = "<group>"; };
 		C3D6EA47D0FE49655335B119 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -549,9 +552,9 @@
 		B80F03971C22BA9C009CE9D8 /* BazaarView */ = {
 			isa = PBXGroup;
 			children = (
-				B80F03981C22BABC009CE9D8 /* ODBazaarViewCell.h */,
-				B80F03991C22BABC009CE9D8 /* ODBazaarViewCell.m */,
-				B80F039A1C22BABC009CE9D8 /* ODBazaarViewCell.xib */,
+				B88FB9461C27B89800F46D85 /* ODBazaarCollectionCell.h */,
+				B88FB9471C27B89800F46D85 /* ODBazaarCollectionCell.m */,
+				B88FB9481C27B89800F46D85 /* ODBazaarCollectionCell.xib */,
 			);
 			path = BazaarView;
 			sourceTree = "<group>";
@@ -680,6 +683,8 @@
 			children = (
 				B80F036F1C225EE4009CE9D8 /* ODBazaarViewController.h */,
 				B80F03701C225EE4009CE9D8 /* ODBazaarViewController.m */,
+				B88FB94B1C27BA2F00F46D85 /* ODBazaarHeaderView.h */,
+				B88FB94C1C27BA2F00F46D85 /* ODBazaarHeaderView.m */,
 			);
 			path = Bazaar;
 			sourceTree = "<group>";
@@ -865,6 +870,7 @@
 				B80F03461C225C8F009CE9D8 /* 标签中端按钮部分@3x.png in Resources */,
 				B80F034E1C225C8F009CE9D8 /* 标签栏大按钮@2x.png in Resources */,
 				B80F03541C225C8F009CE9D8 /* 欧动社区icon默认态@2x.png in Resources */,
+				B88FB94A1C27B89800F46D85 /* ODBazaarCollectionCell.xib in Resources */,
 				B80F033B1C225C8F009CE9D8 /* 发布任务icon@1x.png in Resources */,
 				B80F02FE1C225C8F009CE9D8 /* 欧动集市任务详情已完成.psd in Resources */,
 				B80F032D1C225C8F009CE9D8 /* 中心活动icon点击态@2x.png in Resources */,
@@ -897,7 +903,6 @@
 				B80F034C1C225C8F009CE9D8 /* 标签左端按钮部分@3x.png in Resources */,
 				B80F03521C225C8F009CE9D8 /* 欧动社区icon点击态@3x.png in Resources */,
 				B80F034D1C225C8F009CE9D8 /* 标签栏大按钮@1x.png in Resources */,
-				B80F039C1C22BABC009CE9D8 /* ODBazaarViewCell.xib in Resources */,
 				B80F03181C225C8F009CE9D8 /* 喜欢icon@2x.png in Resources */,
 				B80F03061C225C8F009CE9D8 /* 欧动集市标签关键字搜索页 搜索态.psd in Resources */,
 				B83C6B6F1C224F640063ED92 /* LaunchScreen.storyboard in Resources */,
@@ -1020,12 +1025,13 @@
 				B80F03771C226349009CE9D8 /* ODClassMethod.m in Sources */,
 				B80F038C1C22A982009CE9D8 /* ODAppModel.m in Sources */,
 				B80F03711C225EE4009CE9D8 /* ODBazaarViewController.m in Sources */,
-				B80F039B1C22BABC009CE9D8 /* ODBazaarViewCell.m in Sources */,
+				B88FB94D1C27BA2F00F46D85 /* ODBazaarHeaderView.m in Sources */,
 				B80F037D1C2264FB009CE9D8 /* ODAPIManager.m in Sources */,
 				B80F03741C225EF9009CE9D8 /* ODPersonalCenterViewController.m in Sources */,
 				B83C6B9F1C22562C0063ED92 /* ODTabBarController.m in Sources */,
 				B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */,
 				B80F03681C225E9A009CE9D8 /* ODHomeFoundViewController.m in Sources */,
+				B88FB9491C27B89800F46D85 /* ODBazaarCollectionCell.m in Sources */,
 				B83C6B671C224F640063ED92 /* main.m in Sources */,
 				B80F03651C225E67009CE9D8 /* ODBaseViewController.m in Sources */,
 			);

@@ -9,7 +9,7 @@
 #ifndef Define_h
 #define Define_h
 
-#define kBazaarCellId @"ODBazaarViewCell"
+#define kBazaarCellId @"ODBazaarCollectionCell"
 
 #define kScreenSize [UIScreen mainScreen].bounds.size
 #define kRGBAWithColor(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]

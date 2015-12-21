@@ -12,11 +12,12 @@
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
 #import "ODBazaarModel.h"
-#import "ODBazaarViewCell.h"
+#import "ODBazaarCollectionCell.h"
+#import "ODBazaarHeaderView.h"
 
-@interface ODBazaarViewController : ODBaseViewController<UITableViewDelegate,UITableViewDataSource>
+@interface ODBazaarViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)UIView *headView;
