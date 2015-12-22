@@ -33,7 +33,7 @@
     [self.view addSubview:self.headView];
     
     //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 32, 80, 20) text:@"欧动集市" font:17 alignment:@"center" color:@"#000000" alpha:1];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 32, 80, 20) text:@"欧动集市" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
@@ -57,7 +57,7 @@
 -(void)createScreeningAndSearchButton
 {
     //任务筛选
-    UIButton *screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 75, 112, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"任务筛选" font:16];
+    UIButton *screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 75, 112, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"任务筛选" font:15];
     [screeningButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     screeningButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25);
     screeningButton.layer.masksToBounds = YES;
@@ -69,7 +69,7 @@
     UIImageView *screeningIamgeView = [ODClassMethod creatImageViewWithFrame:CGRectMake(85, 12, 20, 12) imageName:@"任务筛选下拉箭头" tag:0];
     [screeningButton addSubview:screeningIamgeView];
     
-    UIButton *searchButton = [ODClassMethod creatButtonWithFrame:CGRectMake(127, 75, kScreenSize.width-137, 35) target:self sel:@selector(searchButtonClick:) tag:0 image:nil title:@"请输入您要搜索的关键字" font:16];
+    UIButton *searchButton = [ODClassMethod creatButtonWithFrame:CGRectMake(127, 75, kScreenSize.width-137, 35) target:self sel:@selector(searchButtonClick:) tag:0 image:nil title:@"请输入您要搜索的关键字" font:15];
     [searchButton setTitleColor:[ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
     searchButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     searchButton.layer.masksToBounds = YES;
@@ -79,7 +79,7 @@
     searchButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.headView addSubview:searchButton];
     
-    UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(15, 7, 20, 20) imageName:@"搜索放大镜icon" tag:0];
+    UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(5, 7, 20, 20) imageName:@"搜索放大镜icon" tag:0];
     [searchButton addSubview:searchImageView];
 }
 

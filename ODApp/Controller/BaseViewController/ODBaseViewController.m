@@ -21,7 +21,7 @@
 
 - (void)addTitleViewWithName:(NSString *)name {
     
-    UILabel *titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 100, 30) text:name font:17 alignment:@"center" color:@"#000000" alpha:1];
+    UILabel *titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 100, 30) text:name font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
     titleLabel.backgroundColor = [UIColor clearColor];
     self.navigationItem.titleView = titleLabel;
 }

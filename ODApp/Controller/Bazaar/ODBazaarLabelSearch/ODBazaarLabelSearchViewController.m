@@ -34,7 +34,7 @@
     [self.view addSubview:self.headView];
     
     //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 32, 80, 20) text:@"欧动集市" font:17 alignment:@"center" color:@"#000000" alpha:1];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 32, 80, 20) text:@"欧动集市" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     

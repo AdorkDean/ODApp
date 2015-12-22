@@ -24,7 +24,9 @@
                             font:(NSInteger)size
                        alignment:(NSString *)alignment
                            color:(NSString *)color
-                           alpha:(float)opacity;
+                           alpha:(float)opacity
+                    maskToBounds:(BOOL)maskToBounds;
+
 
 //创建button可以创建 标题按钮和 图片按钮
 + (UIButton *)creatButtonWithFrame:(CGRect)frame
@@ -50,7 +52,11 @@
 //创建UITextView
 +(UITextView *)creatTextViewWithFrame:(CGRect)frame
                              delegate:(id <UITextViewDelegate>)delegate
-                                  tag:(NSInteger)tag;
+                                  tag:(NSInteger)tag
+                                 font:(NSInteger)size
+                                color:(NSString *)color
+                                alpha:(float)opacity
+                         maskToBounds:(BOOL)maskToBounds;
 
 
 @end
