@@ -34,8 +34,18 @@
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     if (isLeft) {
+        if (name.length == 2) {
+            button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 60);
+        }else{
+            button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
+        }
         self.navigationItem.leftBarButtonItem = item;
     }else {
+        if (name.length == 2) {
+           button.titleEdgeInsets = UIEdgeInsetsMake(0, 60, 0, 0);
+        }else{
+            button.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
+        }
         self.navigationItem.rightBarButtonItem = item;
     }
 }
