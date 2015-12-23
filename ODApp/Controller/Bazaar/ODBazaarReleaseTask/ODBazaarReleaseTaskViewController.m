@@ -22,8 +22,10 @@
     [self createScrollView];
     [self createTitleTextView];
     [self createTimeLabel];
+    [self createTimeChooseButton];
     [self createTaskDetailTextView];
     [self createTaskRewardLabel];
+    [self createRequest];
 }
 
 #pragma mark - 初始化导航
@@ -34,20 +36,19 @@
     [self.view addSubview:self.headView];
     
     //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"新任务" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"新任务" font:16 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
     //取消按钮
-    UIButton *cancelButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28,35, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:17];
+    UIButton *cancelButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28,35, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     [cancelButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:cancelButton];
     
     //确认按钮
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 28,35, 20) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:17];
+    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 28,35, 20) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:16];
     [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:confirmButton];
-
 }
 
 -(void)backButtonClick:(UIButton *)button
@@ -65,6 +66,7 @@
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0,64, kScreenSize.width, kScreenSize.height - 64)];
     self.scrollView.userInteractionEnabled = YES;
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 500);
     [self.view addSubview:self.scrollView];
 }
 
@@ -72,6 +74,7 @@
 -(void)createTitleTextView
 {
     self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 140) delegate:self tag:10 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.titleTextView.delegate = self;
     [self.scrollView addSubview:self.titleTextView];
     self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4, kScreenSize.width - 20, 30) text:@"请输入任务标题" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     self.titleLabel.backgroundColor = [UIColor clearColor];
@@ -90,28 +93,76 @@
         [self.scrollView addSubview:label];
     }
     
-    //开始日期
+    //开始日期label
     self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+4*width, 148, 5*width, 30.5) text:nil font:16 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.startDateLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.startDateLabel];
     
-    //结束日期
+    //结束日期label
     self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+4*width, 182.5, 5*width, 30.5) text:nil font:16 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.endDateLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.endDateLabel];
     
-    //开始时间
+    //开始时间label
     self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+9*width, 148, 3*width, 30.5) text:nil font:16 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.startTimeLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.startTimeLabel];
     
-    //结束时间
+    //结束时间label
     self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+9*width, 182.5, 3*width, 30.5) text:nil font:16 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.endTimeLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.endTimeLabel];
 }
 
+#pragma mark - 创建时间选择button
+-(void)createTimeChooseButton
+{
+    CGFloat width = (kScreenSize.width - 16)/12;
+    //开始日期button
+    UIView *startDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    [self.startDateLabel addSubview:startDateLineView];
+    UIButton *startDateButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5*width - 25, 10, 20, 14) target:self sel:@selector(startDateButtonClick:) tag:0 image:@"时间下拉箭头" title:nil font:0];
+    [self.startDateLabel addSubview:startDateButton];
+    
+    //结束日期button
+    UIView *endDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    [self.endDateLabel addSubview:endDateLineView];
+    UIButton *endDateButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5*width - 25, 10, 20, 14) target:self sel:@selector(endDateButtonClick:) tag:0 image:@"时间下拉箭头" title:nil font:0];
+    [self.endDateLabel addSubview:endDateButton];
+    
+    //开始时间button
+    UIView *startTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    [self.startTimeLabel addSubview:startTimeLineView];
+    UIButton *startTimeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(3*width - 25, 10, 20, 14) target:self sel:@selector(startTimeButtonClick:) tag:0 image:@"时间下拉箭头" title:nil font:0];
+    [self.startTimeLabel addSubview:startTimeButton];
+    
+    //结束时间button
+    UIView *endTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    [self.endTimeLabel addSubview:endTimeLineView];
+    UIButton *endTimeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(3*width - 25, 10, 20, 14) target:self sel:@selector(endTimeButtonClick:) tag:0 image:@"时间下拉箭头" title:nil font:0];
+    [self.endTimeLabel addSubview:endTimeButton];
+}
+
+//开始日期
 -(void)startDateButtonClick:(UIButton *)button
+{
+    
+}
+
+//结束日期
+-(void)endDateButtonClick:(UIButton *)button
+{
+    
+}
+
+//开始时间
+-(void)startTimeButtonClick:(UIButton *)button
+{
+    
+}
+
+//结束时间
+-(void)endTimeButtonClick:(UIButton *)button
 {
     
 }
@@ -121,6 +172,7 @@
 {
     self.taskDetailTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 217, kScreenSize.width - 8, 245) delegate:self tag:11 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.scrollView addSubview:self.taskDetailTextView];
+    self.taskDetailTextView.delegate = self;
     self.taskDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 217, kScreenSize.width - 20, 30) text:@"请输入任务详情" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     self.taskDetailLabel.backgroundColor = [UIColor clearColor];
     [self.scrollView addSubview:self.taskDetailLabel];
@@ -138,13 +190,38 @@
     
     UIButton *button = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 8 - 25, 10, 20, 14) target:self sel:@selector(taskRewardButtonClick:) tag:0 image:@"时间下拉箭头" title:nil font:0];
     [self.taskRewardLabel addSubview:button];
-     self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 500);
 }
 
 //任务奖励
 -(void)taskRewardButtonClick:(UIButton *)button
 {
+   
+}
 
+#pragma mark - 初始化manager
+-(void)createRequest
+{
+    self.manager = [AFHTTPRequestOperationManager manager];
+}
+
+#pragma mark - 拼接参数
+-(void)joiningTogetherParmeters
+{
+    NSDictionary *parameter = @{};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self pushDataWithUrl:kBazaarReleaseTaskUrl parameter:signParameter];
+}
+
+#pragma mark - 提交数据
+-(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
+{
+    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+        NSLog(@"error");
+    }];
+    
 }
 
 #pragma mark - UITextViewDelegate
@@ -193,7 +270,6 @@
     ODTabBarController * tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.imageView.alpha = 1.0;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

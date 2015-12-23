@@ -16,5 +16,8 @@
 
 #define kBazaarUnlimitTaskUrl @"http://api.odong.com/1.0/task/list"
 #define kBazaarLabelSearchUrl @"http://api.odong.com/1.0/task/tag/search"
+#define kBazaarReleaseTaskUrl @"http://api.odong.com/1.0/task/task/add"
+#define kBazaarTaskDetailUrl @"http://api.odong.com/1.0/task/detail"
+#define kBazaarAcceptTaskUrl @"http://api.odong.com/1.0/task/apply"
 
 #endif /* Define_h */

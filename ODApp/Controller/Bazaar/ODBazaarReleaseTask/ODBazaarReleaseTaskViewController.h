@@ -8,9 +8,14 @@
 
 #import "ODBaseViewController.h"
 #import "ODTabBarController.h"
+#import "ODClassMethod.h"
+#import "ODColorConversion.h"
+#import "ODAPIManager.h"
+#import "AFNetworking.h"
 
 @interface ODBazaarReleaseTaskViewController : ODBaseViewController<UITextViewDelegate>
 
+@property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UITextView *titleTextView;

@@ -34,17 +34,17 @@
     [self.view addSubview:self.headView];
     
     //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 32, 80, 20) text:@"欧动集市" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 32, 80, 20) text:@"欧动集市" font:16 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
     //取消按钮
-    UIButton *cancelButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 32,35, 20) target:self sel:@selector(cancelButtonClick:) tag:0 image:nil title:@"取消" font:17];
+    UIButton *cancelButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 32,35, 20) target:self sel:@selector(cancelButtonClick:) tag:0 image:nil title:@"取消" font:16];
     [cancelButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:cancelButton];
     
     //确认按钮
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 32,35, 20) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:17];
+    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 32,35, 20) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:16];
     [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:confirmButton];
 
@@ -74,29 +74,25 @@
 {
     //显示cancel按钮
     [searchBar setShowsCancelButton:YES animated:YES];
-    return YES;//开始编辑
+    return YES;
 }
 
 -(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 {
     //隐藏cancel按钮
     [searchBar setShowsCancelButton:NO animated:YES];
-    return YES;//结束编辑
+    return YES;
 }
 
-//点击cancel时候调用
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     //清空内容
     searchBar.text = @"";
-    //searchBar收键盘
     [searchBar resignFirstResponder];
 }
 
-//点击search的时候调用
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    
     [self joiningTogetherParmeters];
 }
 
@@ -192,7 +188,6 @@
     ODTabBarController * tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.imageView.alpha = 1.0;
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

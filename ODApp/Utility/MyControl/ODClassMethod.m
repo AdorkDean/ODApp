@@ -17,7 +17,6 @@
     label.font = [UIFont systemFontOfSize:size];
     label.textColor = [ODColorConversion colorWithHexString:color alpha:opacity];
     label.numberOfLines = 0;
-    label.userInteractionEnabled = YES;
     
     if ([alignment isEqualToString:@"left"]) {
         label.textAlignment = NSTextAlignmentLeft;

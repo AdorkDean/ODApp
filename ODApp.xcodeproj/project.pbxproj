@@ -122,6 +122,9 @@
 		B80F037F1C227691009CE9D8 /* 欧动集市icon点击态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F037E1C227691009CE9D8 /* 欧动集市icon点击态@3x.png */; };
 		B80F03811C227698009CE9D8 /* 欧动集市icon默认态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B80F03801C227698009CE9D8 /* 欧动集市icon默认态@3x.png */; };
 		B80F038C1C22A982009CE9D8 /* ODAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F038B1C22A982009CE9D8 /* ODAppModel.m */; };
+		B8228C861C2A726C000A8C68 /* ODBazaarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8228C851C2A726C000A8C68 /* ODBazaarDetailViewController.m */; };
+		B8228C8A1C2A7BA7000A8C68 /* ODBazaarDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8228C891C2A7BA7000A8C68 /* ODBazaarDetailModel.m */; };
+		B8228C8D1C2A93FB000A8C68 /* ODHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = B8228C8C1C2A93FB000A8C68 /* ODHelp.m */; };
 		B83C6B671C224F640063ED92 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B661C224F640063ED92 /* main.m */; };
 		B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B691C224F640063ED92 /* AppDelegate.m */; };
 		B83C6B6C1C224F640063ED92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B83C6B6B1C224F640063ED92 /* Assets.xcassets */; };
@@ -280,6 +283,12 @@
 		B80F03801C227698009CE9D8 /* 欧动集市icon默认态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动集市icon默认态@3x.png"; sourceTree = "<group>"; };
 		B80F038A1C22A982009CE9D8 /* ODAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppModel.h; sourceTree = "<group>"; };
 		B80F038B1C22A982009CE9D8 /* ODAppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAppModel.m; sourceTree = "<group>"; };
+		B8228C841C2A726C000A8C68 /* ODBazaarDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailViewController.h; sourceTree = "<group>"; };
+		B8228C851C2A726C000A8C68 /* ODBazaarDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarDetailViewController.m; sourceTree = "<group>"; };
+		B8228C881C2A7BA7000A8C68 /* ODBazaarDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailModel.h; sourceTree = "<group>"; };
+		B8228C891C2A7BA7000A8C68 /* ODBazaarDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarDetailModel.m; sourceTree = "<group>"; };
+		B8228C8B1C2A93FB000A8C68 /* ODHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHelp.h; sourceTree = "<group>"; };
+		B8228C8C1C2A93FB000A8C68 /* ODHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHelp.m; sourceTree = "<group>"; };
 		B83C6B621C224F640063ED92 /* ODApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B661C224F640063ED92 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B83C6B681C224F640063ED92 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -366,6 +375,8 @@
 				B80F03791C22636F009CE9D8 /* ODColorConversion.m */,
 				B80F037B1C2264FB009CE9D8 /* ODAPIManager.h */,
 				B80F037C1C2264FB009CE9D8 /* ODAPIManager.m */,
+				B8228C8B1C2A93FB000A8C68 /* ODHelp.h */,
+				B8228C8C1C2A93FB000A8C68 /* ODHelp.m */,
 			);
 			path = MyControl;
 			sourceTree = "<group>";
@@ -565,6 +576,24 @@
 			path = BazaarView;
 			sourceTree = "<group>";
 		};
+		B8228C831C2A7216000A8C68 /* ODBazaarDetail */ = {
+			isa = PBXGroup;
+			children = (
+				B8228C841C2A726C000A8C68 /* ODBazaarDetailViewController.h */,
+				B8228C851C2A726C000A8C68 /* ODBazaarDetailViewController.m */,
+			);
+			path = ODBazaarDetail;
+			sourceTree = "<group>";
+		};
+		B8228C871C2A7B8F000A8C68 /* ODBazaarDetailModel */ = {
+			isa = PBXGroup;
+			children = (
+				B8228C881C2A7BA7000A8C68 /* ODBazaarDetailModel.h */,
+				B8228C891C2A7BA7000A8C68 /* ODBazaarDetailModel.m */,
+			);
+			path = ODBazaarDetailModel;
+			sourceTree = "<group>";
+		};
 		B83C6B591C224F630063ED92 = {
 			isa = PBXGroup;
 			children = (
@@ -682,6 +711,7 @@
 				B80F03701C225EE4009CE9D8 /* ODBazaarViewController.m */,
 				B88FB94B1C27BA2F00F46D85 /* ODBazaarHeaderView.h */,
 				B88FB94C1C27BA2F00F46D85 /* ODBazaarHeaderView.m */,
+				B8228C831C2A7216000A8C68 /* ODBazaarDetail */,
 				B88FB9531C27CE7900F46D85 /* ODBazaarReleaseTask */,
 				B88FB94F1C27CD5C00F46D85 /* ODBazaarLabelSearch */,
 			);
@@ -747,6 +777,7 @@
 			children = (
 				B88FB95D1C27F94E00F46D85 /* ODBazaarModel.h */,
 				B88FB95E1C27F94E00F46D85 /* ODBazaarModel.m */,
+				B8228C871C2A7B8F000A8C68 /* ODBazaarDetailModel */,
 			);
 			path = BazaarModel;
 			sourceTree = "<group>";
@@ -829,6 +860,7 @@
 				TargetAttributes = {
 					B83C6B611C224F640063ED92 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = BD385EGBMB;
 					};
 					B83C6B741C224F640063ED92 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -1060,7 +1092,10 @@
 				B80F03681C225E9A009CE9D8 /* ODHomeFoundViewController.m in Sources */,
 				B88FB9491C27B89800F46D85 /* ODBazaarCollectionCell.m in Sources */,
 				B88FB9561C27CF1700F46D85 /* ODBazaarReleaseTaskViewController.m in Sources */,
+				B8228C8D1C2A93FB000A8C68 /* ODHelp.m in Sources */,
+				B8228C8A1C2A7BA7000A8C68 /* ODBazaarDetailModel.m in Sources */,
 				B83C6B671C224F640063ED92 /* main.m in Sources */,
+				B8228C861C2A726C000A8C68 /* ODBazaarDetailViewController.m in Sources */,
 				B80F03651C225E67009CE9D8 /* ODBaseViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1196,11 +1231,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ODApp/ODApp-Prefix.pch";
 				INFOPLIST_FILE = ODApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Odong.ODApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "OD-YG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SOURCE_ROOT)/**";
 			};
@@ -1212,11 +1249,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ODApp/ODApp-Prefix.pch";
 				INFOPLIST_FILE = ODApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Odong.ODApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "OD-YG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				USER_HEADER_SEARCH_PATHS = "$(SOURCE_ROOT)/**";
 			};
