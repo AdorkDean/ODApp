@@ -13,6 +13,13 @@
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
 
+typedef enum {
+    // 开始日期
+    DateTypeOfStart = 0,
+    // 结束日期
+    DateTypeOfEnd,
+}DateType;
+
 @interface ODBazaarReleaseTaskViewController : ODBaseViewController<UITextViewDelegate>
 
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
@@ -27,5 +34,8 @@
 @property(nonatomic,strong)UILabel *startTimeLabel;
 @property(nonatomic,strong)UILabel *endTimeLabel;
 @property(nonatomic,strong)UILabel *taskRewardLabel;
+
+@property(nonatomic,strong)UIView *backPickerView;
+@property(nonatomic,strong)UIDatePicker *datePicker;
 
 @end

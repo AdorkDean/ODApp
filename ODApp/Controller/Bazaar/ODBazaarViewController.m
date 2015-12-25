@@ -85,34 +85,58 @@
 
 -(void)screeningButtonClick:(UIButton *)button
 {
-    UIViewController *vc = [[UIViewController alloc]init];
-    vc.view.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
-    NSArray *array = @[@"全部",@"已派遣",@"已完成",@"已过期"];
+    UIViewController *controller = [[UIViewController alloc]init];
+    controller.view.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    NSArray *array = @[@"全部",@"等待派遣",@"已派遣",@"已完成",@"已过期"];
     for (NSInteger i = 0; i < array.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setTitle:array[i] forState:UIControlStateNormal];
-        button.frame = CGRectMake(0, 5 + 35*i, 100, 30);
+        button.frame = CGRectMake(0, 30*i, 100, 30);
         button.tag = i+10;
+        [button setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [vc.view addSubview:button];
+        [controller.view addSubview:button];
         }
     //设置弹出模式
-    vc.modalPresentationStyle = UIModalPresentationPopover;
-    vc.preferredContentSize = CGSizeMake(100, 140);
-    UIPopoverPresentationController *popVC = vc.popoverPresentationController;
-    vc.popoverPresentationController.sourceView = button;
-    vc.popoverPresentationController.sourceRect = button.bounds;
+    controller.modalPresentationStyle = UIModalPresentationPopover;
+    controller.preferredContentSize = CGSizeMake(100, 150);
+    UIPopoverPresentationController *popVC = controller.popoverPresentationController;
+    controller.popoverPresentationController.sourceView = button;
+    controller.popoverPresentationController.sourceRect = button.bounds;
     popVC.permittedArrowDirections = UIPopoverArrowDirectionUp;
     popVC.delegate = self;
-    [self presentViewController:vc animated:YES completion:nil];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 
 -(void)buttonClick:(UIButton *)button
 {
-    
+    [self.dataArray removeAllObjects];
+    if (button.tag==10) {
+        [self joiningTogetherParmeters];
+    }else if (button.tag == 11){
+        self.status = @"1";
+        [self joiningTogetherParmetersWithTaskStatus];
+    }else if (button.tag == 12){
+        self.status = @"2";
+        [self joiningTogetherParmetersWithTaskStatus];
+    }else if (button.tag == 13){
+        self.status = @"4";
+        [self joiningTogetherParmetersWithTaskStatus];
+    }else{
+        self.status = @"-2";
+        [self joiningTogetherParmetersWithTaskStatus];
+    }
+    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
+#pragma mark - 根据任务状态拼接参数
+-(void)joiningTogetherParmetersWithTaskStatus
+{
+    NSDictionary *parameter = @{@"task_status":self.status};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
+}
 #pragma mark - pop协议方法
 
 //如果要想在iPhone上也能弹出泡泡的样式必须要实现下面协议的方法

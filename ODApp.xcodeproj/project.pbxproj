@@ -132,6 +132,7 @@
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
 		B83C6B9F1C22562C0063ED92 /* ODTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B9E1C22562C0063ED92 /* ODTabBarController.m */; };
+		B846F8231C2BF4F000DE0BD4 /* ODBazaarReleaseTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B88FB9551C27CF1700F46D85 /* ODBazaarReleaseTaskViewController.m */; };
 		B88FB9491C27B89800F46D85 /* ODBazaarCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B88FB9471C27B89800F46D85 /* ODBazaarCollectionCell.m */; };
 		B88FB94A1C27B89800F46D85 /* ODBazaarCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B88FB9481C27B89800F46D85 /* ODBazaarCollectionCell.xib */; };
 		B88FB94D1C27BA2F00F46D85 /* ODBazaarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B88FB94C1C27BA2F00F46D85 /* ODBazaarHeaderView.m */; };
@@ -1113,6 +1114,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */,
+				B846F8231C2BF4F000DE0BD4 /* ODBazaarReleaseTaskViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1235,7 +1237,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ODApp/ODApp-Prefix.pch";
 				INFOPLIST_FILE = ODApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "OD-YG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1253,7 +1255,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ODApp/ODApp-Prefix.pch";
 				INFOPLIST_FILE = ODApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "OD-YG";
 				PRODUCT_NAME = "$(TARGET_NAME)";

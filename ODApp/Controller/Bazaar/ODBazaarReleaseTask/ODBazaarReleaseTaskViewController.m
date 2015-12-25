@@ -78,6 +78,7 @@
     [self.scrollView addSubview:self.titleTextView];
     self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4, kScreenSize.width - 20, 30) text:@"请输入任务标题" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.titleLabel];
     
 }
@@ -94,7 +95,7 @@
     }
     
     //开始日期label
-    self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+4*width, 148, 5*width, 30.5) text:nil font:16 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
+    self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+4*width, 148, 5*width, 30.5) text:[[nss]] font:16 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.startDateLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.startDateLabel];
     
@@ -146,25 +147,75 @@
 //开始日期
 -(void)startDateButtonClick:(UIButton *)button
 {
-    
+    [self setUpDatePickerViewWihtButton:button];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
 }
 
 //结束日期
 -(void)endDateButtonClick:(UIButton *)button
 {
-    
+    [self setUpDatePickerViewWihtButton:button];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
 }
 
 //开始时间
 -(void)startTimeButtonClick:(UIButton *)button
 {
-    
+    [self setUpDatePickerViewWihtButton:button];
+    self.datePicker.datePickerMode = UIDatePickerModeTime;
 }
 
 //结束时间
 -(void)endTimeButtonClick:(UIButton *)button
 {
+    [self setUpDatePickerViewWihtButton:button];
+    self.datePicker.datePickerMode = UIDatePickerModeTime;
+}
+
+#pragma mark - 初始化datePickerView
+-(void)setUpDatePickerViewWihtButton:(UIButton *)button
+{
+    self.backPickerView = [ODClassMethod creatViewWithFrame:CGRectMake(4, kScreenSize.height-64-250, kScreenSize.width-8, 300) tag:0 color:@"f3f3f3"];
+    [self.scrollView addSubview:self.backPickerView];
     
+    //显示中文
+    self.datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width-8, 200)];
+    NSLocale *locale = [[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"];
+    self.datePicker.locale = locale;
+    //只能选择大于当前时间的日期
+    [self.datePicker setMinimumDate:[NSDate date]];
+    [self.backPickerView addSubview:self.datePicker];
+    
+    UIButton *cancelPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 200, kScreenSize.width/2-4, 50) target:self sel:@selector(cancelPickerButtonClick:) tag:0 image:nil title:@"取消" font:16];
+    [self.backPickerView addSubview:cancelPickerButton];
+    UIButton *confirmPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width/2-4, 200, kScreenSize.width/2-4, 50) target:self sel:@selector(confirmPickerButtonClick:) tag:0 image:nil title:@"确认" font:16];
+    [self.backPickerView addSubview:confirmPickerButton];
+}
+
+//确认datePickerView
+-(void)confirmPickerButtonClick:(UIButton *)button
+{
+    self.startDateLabel.text = [self timeFormat];
+}
+
+//取消datePickerView
+-(void)cancelPickerButtonClick:(UIButton *)button
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.backPickerView.alpha = 0;
+    } completion:^(BOOL finished) {
+        [self.backPickerView removeFromSuperview];
+    }];
+}
+
+//时间格式
+- (NSString *)timeFormat
+{
+    NSDate *selected = [self.datePicker date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:selected];
+    return currentOlderOneDateStr;
 }
 
 #pragma mark - 创建taskDetailTextView
@@ -175,6 +226,7 @@
     self.taskDetailTextView.delegate = self;
     self.taskDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 217, kScreenSize.width - 20, 30) text:@"请输入任务详情" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     self.taskDetailLabel.backgroundColor = [UIColor clearColor];
+    self.taskDetailLabel.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.taskDetailLabel];
 }
 
