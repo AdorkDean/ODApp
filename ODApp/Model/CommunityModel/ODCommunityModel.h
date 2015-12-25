@@ -16,6 +16,13 @@
 @property(nonatomic,copy)NSString *user_id;
 @property(nonatomic,copy)NSString *view_num;
 
+//user
+@property(nonatomic,copy)NSString *nick;
+@property(nonatomic,copy)NSString *gender;
+@property(nonatomic,copy)NSString *sign;
+@property(nonatomic,copy)NSString *avatar;
+@property(nonatomic,copy)NSString *open_id;
+@property(nonatomic,copy)NSString *avatar_url;
 /**
  *   "id": 790,
  "title": "hdhdhdhdhdhdhddhdhhdhdhdhdhghd",

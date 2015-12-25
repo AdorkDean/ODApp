@@ -7,13 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ODCommunityModel.h"
+#import "UIButton+WebCache.h"
+#import "ODColorConversion.h"
 
 @interface ODCommunityCollectionCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *titlelabel;
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
 @property (weak, nonatomic) IBOutlet UIButton *headButton;
 - (IBAction)headButton:(UIButton *)sender;
+
+-(void)showDateWithModel:(ODCommunityModel *)model;
+
 @end

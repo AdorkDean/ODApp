@@ -74,7 +74,6 @@
 -(void)createTitleTextView
 {
     self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 140) delegate:self tag:10 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
-    self.titleTextView.delegate = self;
     [self.scrollView addSubview:self.titleTextView];
     self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4, kScreenSize.width - 20, 30) text:@"请输入任务标题" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     self.titleLabel.backgroundColor = [UIColor clearColor];
@@ -223,7 +222,6 @@
 {
     self.taskDetailTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 217, kScreenSize.width - 8, 245) delegate:self tag:11 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.scrollView addSubview:self.taskDetailTextView];
-    self.taskDetailTextView.delegate = self;
     self.taskDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 217, kScreenSize.width - 20, 30) text:@"请输入任务详情" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     self.taskDetailLabel.backgroundColor = [UIColor clearColor];
     self.taskDetailLabel.userInteractionEnabled = NO;
