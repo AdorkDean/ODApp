@@ -27,7 +27,7 @@
 
 -(void)shodDataWithModel:(ODBazaarModel *)model
 {
-    self.headButton.backgroundColor = [UIColor grayColor];
+    [self.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:model.avatar] forState:UIControlStateNormal];
     self.titleLabel.text = model.title;
     self.contentLabel.text = model.content;
     self.nameLabel.text = model.user_nick;

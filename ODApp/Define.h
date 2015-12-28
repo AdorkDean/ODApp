@@ -24,6 +24,7 @@
 #define kCommunityBbsListUrl @"http://api.odong.com/1.0/bbs/list/latest"
 #define kCommunityReleaseBbsUrl @"http://api.odong.com/1.0/bbs/create"
 #define kCommunityBbsDetailUrl @"http://api.odong.com/1.0/bbs/view"
+#define kCommunityBbsSearchUrl @"http://api.odong.com/1.0/bbs/search"
 
 
 #endif /* Define_h */

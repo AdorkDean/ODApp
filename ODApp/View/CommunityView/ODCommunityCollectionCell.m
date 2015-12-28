@@ -24,8 +24,6 @@
 
 -(void)showDateWithModel:(ODCommunityModel *)model
 {
-    
-    self.headButton.backgroundColor = [UIColor grayColor];
     self.titleLabel.text = model.title;
     self.contentLabel.text = model.content;
     self.countLabel.text = [NSString stringWithFormat:@"浏览次数 %@",model.view_num];

@@ -18,6 +18,7 @@
 @property(nonatomic,copy)NSString *user_nick;
 @property(nonatomic,copy)NSString *task_start_date;
 @property(nonatomic,copy)NSString *apply_num;
+@property(nonatomic,copy)NSString *avatar;
 
 /**
  *  "title": "asdasd",

@@ -19,7 +19,9 @@
     
     self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
     [self navigationInit];
-    [self createSearchBar];
+    [self createSearchTextField];
+    [self createRequest];
+    [self joiningTogetherParmeters];
 }
 
 #pragma mark - 初始化导航
@@ -46,12 +48,9 @@
 }
 
 #pragma mark - 创建searchBar
--(void)createSearchBar
+-(void)createSearchTextField
 {
-    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(4, 68, kScreenSize.width - 8, 29)];
-    searchBar.delegate = self;
-    searchBar.placeholder = @"标签关键字";
-    [self.view addSubview:searchBar];
+    
 }
 
 #pragma mark - UISearchBarDelegate
@@ -75,9 +74,109 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-   
+ 
 }
 
+#pragma mark - 初始化manager
+-(void)createRequest
+{
+    self.manager = [AFHTTPRequestOperationManager manager];
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    self.dataArray = [[NSMutableArray alloc]init];
+    self.userArray = [[NSMutableArray alloc]init];
+}
+
+#pragma mark - 拼接参数
+-(void)joiningTogetherParmeters
+{
+    NSDictionary *parameter = @{@"kw":@"",@"suggest":@"0",@"page":@"1"};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:kCommunityBbsSearchUrl paramater:signParameter];
+}
+
+#pragma mark - 请求数据
+-(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)parameter
+{
+    __weak typeof (self)weakSelf = self;
+    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        if (responseObject) {
+            NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSDictionary *result = dcit[@"result"];
+            NSDictionary *bbs_list = result[@"bbs_list"];
+            for (id bbsKey in bbs_list) {
+                NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
+                NSDictionary *itemDict = bbs_list[key];
+                ODCommunityModel *model = [[ODCommunityModel alloc]init];
+                [model setValuesForKeysWithDictionary:itemDict];
+                [weakSelf.dataArray addObject:model];
+            }
+            
+            NSDictionary *users = result[@"users"];
+            for (id userKey in users) {
+                NSString *key = [NSString stringWithFormat:@"%@",userKey];
+                NSDictionary *itemDict = users[key];
+                ODCommunityModel *model = [[ODCommunityModel alloc]init];
+                [model setValuesForKeysWithDictionary:itemDict];
+                [weakSelf.userArray addObject:model];
+            }
+            
+            [weakSelf.collectionView reloadData];
+            [weakSelf createCollectionView];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+    }];
+}
+
+
+#pragma mark - 创建collectionView
+-(void)createCollectionView
+{
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    flowLayout.minimumInteritemSpacing = 5;
+    flowLayout.minimumLineSpacing = 5;
+    flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,101, kScreenSize.width, kScreenSize.height - 101) collectionViewLayout:flowLayout];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
+    [self.view addSubview:self.collectionView];
+    
+}
+
+#pragma mark - UICollectionViewDelegate
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommunityCellId forIndexPath:indexPath];
+    ODCommunityModel *model = self.dataArray[indexPath.row];
+    cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    [cell showDateWithModel:model];
+    for (NSInteger i = 0; i < self.userArray.count; i++) {
+        ODCommunityModel *userModel = self.userArray[i];
+        if ([[NSString stringWithFormat:@"%@",model.user_id] isEqualToString:[NSString stringWithFormat:@"%@",userModel.id]]) {
+            cell.nameLabel.text = userModel.nick;
+            [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+        }
+    }
+    return cell;
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(kScreenSize.width, 120);
+}
 
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated

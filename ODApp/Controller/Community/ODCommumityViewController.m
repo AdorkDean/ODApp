@@ -86,6 +86,7 @@
     self.dataArray = [[NSMutableArray alloc]init];
     self.userArray = [[NSMutableArray alloc]init];
 }
+
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
@@ -167,6 +168,7 @@
         ODCommunityModel *userModel = self.userArray[i];
         if ([[NSString stringWithFormat:@"%@",model.user_id] isEqualToString:[NSString stringWithFormat:@"%@",userModel.id]]) {
             cell.nameLabel.text = userModel.nick;
+            [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
         }
     }
     return cell;
@@ -198,7 +200,7 @@
 {
     ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc]init];
     ODCommunityModel *model = self.dataArray[indexPath.row];
-    detailController.user_id = model.user_id;
+    detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
     [self.navigationController pushViewController:detailController animated:YES];
 }
 

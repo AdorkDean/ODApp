@@ -12,12 +12,22 @@
 #import "ODClassMethod.h"
 #import "ODColorConversion.h"
 #import "AFNetworking.h"
+#import "ODCommunityDetailModel.h"
+#import "UIButton+WebCache.h"
+#import "UIImageView+WebCache.h"
+#import "ODHelp.h"
 
 @interface ODCommunityDetailViewController : ODBaseViewController
 
+@property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)UIView *headView;
-@property(nonatomic,copy)NSString *user_id;
+@property(nonatomic,copy)NSString *bbs_id;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
+@property(nonatomic,strong)NSMutableArray *resultArray;
+@property(nonatomic,strong)NSMutableArray *userArray;
+@property(nonatomic,strong)NSArray *bbs_imgArray;
+@property(nonatomic,strong)UIView *userView;
+@property(nonatomic,strong)UIView *bbsView;
 
 @end
 

@@ -114,7 +114,6 @@
 		B85453401C2D1E73007258BC /* 定位icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B85452A11C2D1E73007258BC /* 定位icon@1x.png */; };
 		B85453411C2D1E73007258BC /* 定位icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B85452A21C2D1E73007258BC /* 定位icon@2x.png */; };
 		B85453421C2D1E73007258BC /* 定位icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B85452A31C2D1E73007258BC /* 定位icon@3x.png */; };
-		B85453431C2D1E73007258BC /* 搜索放大镜icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B85452A41C2D1E73007258BC /* 搜索放大镜icon@1x.png */; };
 		B85453441C2D1E73007258BC /* 搜索放大镜icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B85452A51C2D1E73007258BC /* 搜索放大镜icon@2x.png */; };
 		B85453451C2D1E73007258BC /* 搜索放大镜icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B85452A61C2D1E73007258BC /* 搜索放大镜icon@3x.png */; };
 		B85453461C2D1E73007258BC /* 标签中端按钮部分@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B85452A71C2D1E73007258BC /* 标签中端按钮部分@1x.png */; };
@@ -190,6 +189,7 @@
 		B85453931C2D3F35007258BC /* ODCommunityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85453921C2D3F35007258BC /* ODCommunityDetailViewController.m */; };
 		B85453961C2D3F72007258BC /* ODCommunityKeyWordSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85453951C2D3F72007258BC /* ODCommunityKeyWordSearchViewController.m */; };
 		B85453991C2D3F8E007258BC /* ODCommunityReleaseTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85453981C2D3F8E007258BC /* ODCommunityReleaseTopicViewController.m */; };
+		B85A48A41C30DF43002FE367 /* ODCommunityDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B85A48A31C30DF43002FE367 /* ODCommunityDetailModel.m */; };
 		B88FB9491C27B89800F46D85 /* ODBazaarCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B88FB9471C27B89800F46D85 /* ODBazaarCollectionCell.m */; };
 		B88FB94A1C27B89800F46D85 /* ODBazaarCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B88FB9481C27B89800F46D85 /* ODBazaarCollectionCell.xib */; };
 		B88FB94D1C27BA2F00F46D85 /* ODBazaarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B88FB94C1C27BA2F00F46D85 /* ODBazaarHeaderView.m */; };
@@ -348,7 +348,6 @@
 		B85452A11C2D1E73007258BC /* 定位icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "定位icon@1x.png"; sourceTree = "<group>"; };
 		B85452A21C2D1E73007258BC /* 定位icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "定位icon@2x.png"; sourceTree = "<group>"; };
 		B85452A31C2D1E73007258BC /* 定位icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "定位icon@3x.png"; sourceTree = "<group>"; };
-		B85452A41C2D1E73007258BC /* 搜索放大镜icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索放大镜icon@1x.png"; sourceTree = "<group>"; };
 		B85452A51C2D1E73007258BC /* 搜索放大镜icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索放大镜icon@2x.png"; sourceTree = "<group>"; };
 		B85452A61C2D1E73007258BC /* 搜索放大镜icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "搜索放大镜icon@3x.png"; sourceTree = "<group>"; };
 		B85452A71C2D1E73007258BC /* 标签中端按钮部分@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "标签中端按钮部分@1x.png"; sourceTree = "<group>"; };
@@ -428,6 +427,8 @@
 		B85453951C2D3F72007258BC /* ODCommunityKeyWordSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityKeyWordSearchViewController.m; sourceTree = "<group>"; };
 		B85453971C2D3F8E007258BC /* ODCommunityReleaseTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityReleaseTopicViewController.h; sourceTree = "<group>"; };
 		B85453981C2D3F8E007258BC /* ODCommunityReleaseTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityReleaseTopicViewController.m; sourceTree = "<group>"; };
+		B85A48A21C30DF43002FE367 /* ODCommunityDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityDetailModel.h; sourceTree = "<group>"; };
+		B85A48A31C30DF43002FE367 /* ODCommunityDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityDetailModel.m; sourceTree = "<group>"; };
 		B88FB9461C27B89800F46D85 /* ODBazaarCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarCollectionCell.h; sourceTree = "<group>"; };
 		B88FB9471C27B89800F46D85 /* ODBazaarCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarCollectionCell.m; sourceTree = "<group>"; };
 		B88FB9481C27B89800F46D85 /* ODBazaarCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarCollectionCell.xib; sourceTree = "<group>"; };
@@ -717,6 +718,7 @@
 			children = (
 				B8544F461C2D158D007258BC /* ODCommunityModel.h */,
 				B8544F471C2D158D007258BC /* ODCommunityModel.m */,
+				B85A489E1C30D537002FE367 /* CommunityDetailModel */,
 			);
 			path = CommunityModel;
 			sourceTree = "<group>";
@@ -907,7 +909,6 @@
 				B85452A11C2D1E73007258BC /* 定位icon@1x.png */,
 				B85452A21C2D1E73007258BC /* 定位icon@2x.png */,
 				B85452A31C2D1E73007258BC /* 定位icon@3x.png */,
-				B85452A41C2D1E73007258BC /* 搜索放大镜icon@1x.png */,
 				B85452A51C2D1E73007258BC /* 搜索放大镜icon@2x.png */,
 				B85452A61C2D1E73007258BC /* 搜索放大镜icon@3x.png */,
 				B85452A71C2D1E73007258BC /* 标签中端按钮部分@1x.png */,
@@ -1054,6 +1055,15 @@
 				B85453981C2D3F8E007258BC /* ODCommunityReleaseTopicViewController.m */,
 			);
 			path = CommunityReleaseTopic;
+			sourceTree = "<group>";
+		};
+		B85A489E1C30D537002FE367 /* CommunityDetailModel */ = {
+			isa = PBXGroup;
+			children = (
+				B85A48A21C30DF43002FE367 /* ODCommunityDetailModel.h */,
+				B85A48A31C30DF43002FE367 /* ODCommunityDetailModel.m */,
+			);
+			path = CommunityDetailModel;
 			sourceTree = "<group>";
 		};
 		B88FB95C1C27F94E00F46D85 /* BazaarModel */ = {
@@ -1215,7 +1225,6 @@
 				B854534C1C2D1E73007258BC /* 标签左端按钮部分@1x.png in Resources */,
 				B85453581C2D1E73007258BC /* 欧动集市icon点击态@1x.png in Resources */,
 				B85453201C2D1E73007258BC /* 选择标签icon@2x.png in Resources */,
-				B85453431C2D1E73007258BC /* 搜索放大镜icon@1x.png in Resources */,
 				B85453151C2D1E73007258BC /* 分享页关闭icon@3x.png in Resources */,
 				B85453261C2D1E73007258BC /* 搜索取消icon@2x.png in Resources */,
 				B85453891C2D1E73007258BC /* 场地预约icon@2x.png in Resources */,
@@ -1429,6 +1438,7 @@
 				B83C6B9F1C22562C0063ED92 /* ODTabBarController.m in Sources */,
 				B85453961C2D3F72007258BC /* ODCommunityKeyWordSearchViewController.m in Sources */,
 				B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */,
+				B85A48A41C30DF43002FE367 /* ODCommunityDetailModel.m in Sources */,
 				B8544F581C2D173D007258BC /* ODBazaarReleaseTaskViewController.m in Sources */,
 				B80F03681C225E9A009CE9D8 /* ODHomeFoundViewController.m in Sources */,
 				B88FB9491C27B89800F46D85 /* ODBazaarCollectionCell.m in Sources */,

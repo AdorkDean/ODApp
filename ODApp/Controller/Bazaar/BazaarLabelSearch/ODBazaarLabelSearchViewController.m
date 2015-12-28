@@ -20,7 +20,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self navigationInit];
-    [self createSearchBar];
+    [self createSearchTextField];
     [self createRequest];
 }
 
@@ -59,12 +59,9 @@
 }
 
 #pragma mark - 创建searchBar
--(void)createSearchBar
+-(void)createSearchTextField
 {
-    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(17.5, 75, kScreenSize.width - 35, 35)];
-    searchBar.delegate = self;
-    searchBar.placeholder = @"标签关键字";
-    [self.headView addSubview:searchBar];
+
 }
 
 #pragma mark - UISearchBarDelegate

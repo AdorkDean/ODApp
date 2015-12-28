@@ -10,10 +10,16 @@
 #import "ODTabBarController.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
+#import "ODCommunityModel.h"
+#import "ODCommunityCollectionCell.h"
 
-@interface ODCommunityKeyWordSearchViewController : ODBaseViewController<UISearchBarDelegate>
+@interface ODCommunityKeyWordSearchViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate,UISearchBarDelegate>
 
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager * manager;
+@property(nonatomic,strong)UITextField *searchTextField;
+@property(nonatomic,strong)UICollectionView *collectionView;
+@property(nonatomic,strong)NSMutableArray *dataArray;
+@property(nonatomic,strong)NSMutableArray *userArray;
 
 @end

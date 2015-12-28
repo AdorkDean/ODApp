@@ -93,6 +93,7 @@
     
     //头像
     UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 13.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"sds" font:0];
+    [userHeaderButton sd_setBackgroundImageWithURL:[NSURL URLWithString:detailModel.avatar] forState:UIControlStateNormal];
     userHeaderButton.layer.masksToBounds = YES;
     userHeaderButton.layer.cornerRadius = 24;
     userHeaderButton.backgroundColor = [UIColor grayColor];
