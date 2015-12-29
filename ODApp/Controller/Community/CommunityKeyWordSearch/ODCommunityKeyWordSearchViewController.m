@@ -19,7 +19,7 @@
     
     self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
     [self navigationInit];
-    [self createSearchTextField];
+    [self createSearchBar];
     [self createRequest];
     [self joiningTogetherParmeters];
 }
@@ -48,8 +48,9 @@
 }
 
 #pragma mark - 创建searchBar
--(void)createSearchTextField
+-(void)createSearchBar
 {
+   
     
 }
 
@@ -137,7 +138,7 @@
     flowLayout.minimumInteritemSpacing = 5;
     flowLayout.minimumLineSpacing = 5;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,101, kScreenSize.width, kScreenSize.height - 101) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,114, kScreenSize.width, kScreenSize.height - 114) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];

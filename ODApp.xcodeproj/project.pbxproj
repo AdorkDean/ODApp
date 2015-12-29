@@ -30,7 +30,6 @@
 		B8544A6A1C2D0C41007258BC /* ODCommunityCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8544A681C2D0C41007258BC /* ODCommunityCollectionCell.xib */; };
 		B8544F481C2D158D007258BC /* ODCommunityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8544F471C2D158D007258BC /* ODCommunityModel.m */; };
 		B8544F4F1C2D16F9007258BC /* ODBazaarDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8544F4E1C2D16F9007258BC /* ODBazaarDetailModel.m */; };
-		B8544F521C2D1717007258BC /* ODBazaarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8544F511C2D1717007258BC /* ODBazaarDetailViewController.m */; };
 		B8544F551C2D1730007258BC /* ODBazaarLabelSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8544F541C2D1730007258BC /* ODBazaarLabelSearchViewController.m */; };
 		B8544F581C2D173D007258BC /* ODBazaarReleaseTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8544F571C2D173D007258BC /* ODBazaarReleaseTaskViewController.m */; };
 		B85452F21C2D1E73007258BC /* 密码错误icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = B854524D1C2D1E73007258BC /* 密码错误icon@1x.png */; };
@@ -194,6 +193,7 @@
 		B88FB94A1C27B89800F46D85 /* ODBazaarCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B88FB9481C27B89800F46D85 /* ODBazaarCollectionCell.xib */; };
 		B88FB94D1C27BA2F00F46D85 /* ODBazaarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B88FB94C1C27BA2F00F46D85 /* ODBazaarHeaderView.m */; };
 		B88FB95F1C27F94E00F46D85 /* ODBazaarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B88FB95E1C27F94E00F46D85 /* ODBazaarModel.m */; };
+		B8F2D1E11C327C3000518714 /* ODBazaarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8F2D1E01C327C3000518714 /* ODBazaarDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -261,8 +261,6 @@
 		B8544F471C2D158D007258BC /* ODCommunityModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityModel.m; sourceTree = "<group>"; };
 		B8544F4D1C2D16F9007258BC /* ODBazaarDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailModel.h; sourceTree = "<group>"; };
 		B8544F4E1C2D16F9007258BC /* ODBazaarDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarDetailModel.m; sourceTree = "<group>"; };
-		B8544F501C2D1717007258BC /* ODBazaarDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailViewController.h; sourceTree = "<group>"; };
-		B8544F511C2D1717007258BC /* ODBazaarDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarDetailViewController.m; sourceTree = "<group>"; };
 		B8544F531C2D1730007258BC /* ODBazaarLabelSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarLabelSearchViewController.h; sourceTree = "<group>"; };
 		B8544F541C2D1730007258BC /* ODBazaarLabelSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarLabelSearchViewController.m; sourceTree = "<group>"; };
 		B8544F561C2D173D007258BC /* ODBazaarReleaseTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseTaskViewController.h; sourceTree = "<group>"; };
@@ -436,6 +434,8 @@
 		B88FB94C1C27BA2F00F46D85 /* ODBazaarHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarHeaderView.m; sourceTree = "<group>"; };
 		B88FB95D1C27F94E00F46D85 /* ODBazaarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarModel.h; sourceTree = "<group>"; };
 		B88FB95E1C27F94E00F46D85 /* ODBazaarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarModel.m; sourceTree = "<group>"; };
+		B8F2D1DF1C327C3000518714 /* ODBazaarDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailViewController.h; sourceTree = "<group>"; };
+		B8F2D1E01C327C3000518714 /* ODBazaarDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarDetailViewController.m; sourceTree = "<group>"; };
 		C3D6EA47D0FE49655335B119 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -735,8 +735,8 @@
 		B8544F4A1C2D16C5007258BC /* BazaarDetail */ = {
 			isa = PBXGroup;
 			children = (
-				B8544F501C2D1717007258BC /* ODBazaarDetailViewController.h */,
-				B8544F511C2D1717007258BC /* ODBazaarDetailViewController.m */,
+				B8F2D1DF1C327C3000518714 /* ODBazaarDetailViewController.h */,
+				B8F2D1E01C327C3000518714 /* ODBazaarDetailViewController.m */,
 			);
 			path = BazaarDetail;
 			sourceTree = "<group>";
@@ -1422,6 +1422,7 @@
 				B80F037A1C22636F009CE9D8 /* ODColorConversion.m in Sources */,
 				B80F036B1C225EB5009CE9D8 /* ODCenterActivityViewController.m in Sources */,
 				B80F036E1C225ECE009CE9D8 /* ODCommumityViewController.m in Sources */,
+				B8F2D1E11C327C3000518714 /* ODBazaarDetailViewController.m in Sources */,
 				B8544F481C2D158D007258BC /* ODCommunityModel.m in Sources */,
 				B80F03771C226349009CE9D8 /* ODClassMethod.m in Sources */,
 				B80F038C1C22A982009CE9D8 /* ODAppModel.m in Sources */,
@@ -1431,7 +1432,6 @@
 				B88FB95F1C27F94E00F46D85 /* ODBazaarModel.m in Sources */,
 				B88FB94D1C27BA2F00F46D85 /* ODBazaarHeaderView.m in Sources */,
 				B80F037D1C2264FB009CE9D8 /* ODAPIManager.m in Sources */,
-				B8544F521C2D1717007258BC /* ODBazaarDetailViewController.m in Sources */,
 				B8544A691C2D0C41007258BC /* ODCommunityCollectionCell.m in Sources */,
 				B80F03741C225EF9009CE9D8 /* ODPersonalCenterViewController.m in Sources */,
 				B8544F551C2D1730007258BC /* ODBazaarLabelSearchViewController.m in Sources */,

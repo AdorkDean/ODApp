@@ -13,7 +13,7 @@
 #import "ODCommunityModel.h"
 #import "ODCommunityCollectionCell.h"
 
-@interface ODCommunityKeyWordSearchViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UITextFieldDelegate,UISearchBarDelegate>
+@interface ODCommunityKeyWordSearchViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate>
 
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager * manager;

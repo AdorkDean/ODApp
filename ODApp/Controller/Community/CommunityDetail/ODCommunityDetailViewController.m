@@ -19,7 +19,7 @@
  
     self.view.backgroundColor = [UIColor whiteColor];
     [self navigationInit];
-    [self createSCrollView];
+    [self createScrollView];
     [self createRequest];
     [self joiningTogetherParmeters];
 }
@@ -98,7 +98,7 @@
 }
 
 #pragma mark - 创建scrollView
--(void)createSCrollView;
+-(void)createScrollView;
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)];
     self.scrollView.userInteractionEnabled = YES;

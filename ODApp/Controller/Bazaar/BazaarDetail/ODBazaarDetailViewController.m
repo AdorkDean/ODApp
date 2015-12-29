@@ -2,7 +2,7 @@
 //  ODBazaarDetailViewController.m
 //  ODApp
 //
-//  Created by Odong-YG on 15/12/23.
+//  Created by Odong-YG on 15/12/29.
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
 
@@ -16,10 +16,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+  
     self.view.backgroundColor = [UIColor whiteColor];
     [self navigationInit];
+    [self createScrollView];
     [self createRequest];
+    
 }
 
 #pragma mark - 初始化导航
@@ -34,10 +36,10 @@
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
-    //取消按钮
-    UIButton *cancelButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28,35, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    [cancelButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    [self.headView addSubview:cancelButton];
+    //返回按钮
+    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28,32, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
+    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [self.headView addSubview:backButton];
 }
 
 -(void)backButtonClick:(UIButton *)button
@@ -45,6 +47,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - 创建scrollView
+-(void)createScrollView
+{
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, kScreenSize.width,kScreenSize.height-64)];
+    self.scrollView.userInteractionEnabled = YES;
+    [self.view addSubview:self.scrollView];
+}
 #pragma mark - 初始化manager
 -(void)createRequest
 {
@@ -76,7 +85,8 @@
             [weakSelf.dataArray addObject:detailModel];
         }
         [self createUserInfoView];
-        [self createTaskDetailView];
+        [self createTaskTopDetailView];
+        [self createTaskBottomDetailView];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         NSLog(@"error");
@@ -88,8 +98,8 @@
 -(void)createUserInfoView
 {
     ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
-    self.userView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, 64, kScreenSize.width-25, 76) tag:0 color:@"#ffffff"];
-    [self.view addSubview:self.userView];
+    self.userView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, 0, kScreenSize.width-25, 76) tag:0 color:@"#ffffff"];
+    [self.scrollView addSubview:self.userView];
     
     //头像
     UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 13.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"sds" font:0];
@@ -144,20 +154,20 @@
     }];
 }
 
-#pragma mark - 创建任务详情试图
--(void)createTaskDetailView
+#pragma mark - 创建TaskTopDetailView
+-(void)createTaskTopDetailView
 {
     ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
-    self.taskView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, 140, kScreenSize.width-25, 100) tag:0 color:@"#ffffff"];
-    [self.view addSubview:self.taskView];
+    self.taskTopView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(self.userView.frame), kScreenSize.width-25, 100) tag:0 color:@"#ffffff"];
+    [self.scrollView addSubview:self.taskTopView];
     //标题
     UILabel *taskTitleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 17.5, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.title width:kScreenSize.width-25 fontSize:15]) text:detailModel.title font:15 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
-    [self.taskView addSubview:taskTitleLabel];
+    [self.taskTopView addSubview:taskTitleLabel];
     
     //任务内容
     UILabel *contentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(taskTitleLabel.frame)+17.5, 80, 30) text:@"任务内容 :" font:14 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
     contentLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"ffd802" alpha:1].CGColor;
-    [self.taskView addSubview:contentLabel];
+    [self.taskTopView addSubview:contentLabel];
 
     CGRect frame ;
     CGFloat height = [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:15];
@@ -166,46 +176,104 @@
     }else{
         frame = CGRectMake(0, CGRectGetMaxY(contentLabel.frame)+10,kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:15]);
     }
-    UILabel *taskContentLabel = [ODClassMethod creatLabelWithFrame:frame text:detailModel.content font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
-    taskContentLabel.numberOfLines = 4;
-    [self.taskView addSubview:taskContentLabel];
+    self.taskContentLabel = [ODClassMethod creatLabelWithFrame:frame text:detailModel.content font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
+    self.taskContentLabel.numberOfLines = 4;
+    [self.taskTopView addSubview:self.taskContentLabel];
+    self.taskTopView.frame = CGRectMake(12.5, CGRectGetMaxY(self.userView.frame), kScreenSize.width-25, self.taskContentLabel.frame.size.height+self.taskContentLabel.frame.origin.y);
     
+}
+
+#pragma mark - 创建TaskBottomDetailView
+-(void)createTaskBottomDetailView
+{
+    ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
+    CGFloat height = [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:15];
+    self.taskBottomView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(self.taskTopView.frame)+10, kScreenSize.width-25, 100) tag:0 color:@"#ffffff"];
+    [self.scrollView addSubview:self.taskBottomView];
+    
+    CGFloat labelHeight;
+    CGFloat buttonHeight;
+    if (height < 80) {
+        labelHeight = 0;
+        buttonHeight = 0;
+    }else{
+        labelHeight = 30;
+        buttonHeight = 22;
+    }
     //显示全部内容
-    UILabel *allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.taskView.frame.size.width-130, CGRectGetMaxY(taskContentLabel.frame)+10, 100, 30) text:@"显示全部内容" font:15 alignment:@"center" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    [self.taskView addSubview:allLabel];
+    self.allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.taskBottomView.frame.size.width-130, 0, 100, labelHeight) text:@"显示全部内容" font:15 alignment:@"center" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    [self.taskBottomView addSubview:self.allLabel];
     
-    UIButton *allButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.taskView.frame.size.width-30, CGRectGetMaxY(taskContentLabel.frame)+14, 25, 22) target:self sel:@selector(allButtonClick:) tag:0 image:@"任务详情下拉按钮" title:nil font:0];
-    [self.taskView addSubview:allButton];
-    
+    UIButton *allButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.taskBottomView.frame.size.width-30,4, 25, buttonHeight) target:self sel:@selector(allButtonClick:) tag:0 image:@"任务详情下拉按钮" title:nil font:0];
+    [self.taskBottomView addSubview:allButton];
     //任务奖励
-    UILabel *rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(allLabel.frame)+10, 80, 30) text:@"任务奖励 :" font:14 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
+    UILabel *rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.allLabel.frame)+10, 80, 30) text:@"任务奖励 :" font:14 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
     rewardLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"ffd802" alpha:1].CGColor;
-    [self.taskView addSubview:rewardLabel];
+    [self.taskBottomView addSubview:rewardLabel];
     
     UILabel *taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(rewardLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.reward_name width:kScreenSize.width-25 fontSize:15]) text:detailModel.reward_name font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
-    [self.taskView addSubview:taskRewardLabel];
+    [self.taskBottomView addSubview:taskRewardLabel];
     
     //任务时间
     UILabel *timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(taskRewardLabel.frame)+17.5,80, 30) text:@"任务时间 :" font:14 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
     timeLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"ffd802" alpha:1].CGColor;
-    [self.taskView addSubview:timeLabel];
+    [self.taskBottomView addSubview:timeLabel];
     
     UILabel *dateTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.task_datetime width:kScreenSize.width-25 fontSize:15]) text:detailModel.task_datetime font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
-    [self.taskView addSubview:dateTimeLabel];
+    [self.taskBottomView addSubview:dateTimeLabel];
     
     UILabel *createTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(dateTimeLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.task_created_at width:kScreenSize.width fontSize:13]) text:detailModel.task_created_at font:13 alignment:@"right" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    [self.taskView addSubview:createTimeLabel];
+    [self.taskBottomView addSubview:createTimeLabel];
     
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, CGRectGetMaxY(createTimeLabel.frame)+10, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
-    [self.taskView addSubview:lineView];
+    [self.taskBottomView addSubview:lineView];
     
-    self.taskView.frame = CGRectMake(12.5, 140, kScreenSize.width-25, lineView.frame.origin.y + lineView.frame.size.height);
-}
+    self.taskBottomView.frame = CGRectMake(12.5, CGRectGetMaxY(self.taskTopView.frame)+10, kScreenSize.width-25, lineView.frame.size.height+lineView.frame.origin.y);
 
+}
 
 -(void)allButtonClick:(UIButton *)button
 {
+    static BOOL buttonClicked = NO;
     
+    if (buttonClicked) {
+        
+        [button setBackgroundImage:[UIImage imageNamed:@"任务详情下拉按钮"] forState:UIControlStateNormal];
+        self.allLabel.text = @"显示全部内容";
+        [self hiddenViewWhenButtonClickAgain:button];
+        buttonClicked = NO;
+        
+    }else{
+        [button setBackgroundImage:[UIImage imageNamed:@"任务详情上拉按钮"] forState:UIControlStateNormal];
+        self.allLabel.text = @"隐藏全部内容";
+        [self showViewWhenButtonClick:button];
+        buttonClicked = YES;
+    }
+}
+
+-(void)showViewWhenButtonClick:(UIButton *)button
+{
+    ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
+    CGRect frame = self.taskContentLabel.frame;
+    frame.size.height = [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:15];
+    self.taskContentLabel.frame = frame;
+    self.taskContentLabel.numberOfLines = 0;
+    self.taskTopView.frame = CGRectMake(12.5, CGRectGetMaxY(self.userView.frame), kScreenSize.width-25, self.taskContentLabel.frame.size.height+self.taskContentLabel.frame.origin.y);
+    frame = self.taskBottomView.frame;
+    frame.origin.y = CGRectGetMaxY(self.taskTopView.frame)+10;
+    self.taskBottomView.frame = frame;
+}
+
+-(void)hiddenViewWhenButtonClickAgain:(UIButton *)button
+{
+    CGRect frame = self.taskContentLabel.frame;
+    frame.size.height = 80;
+    self.taskContentLabel.frame = frame;
+    self.taskContentLabel.numberOfLines = 4;
+    self.taskTopView.frame = CGRectMake(12.5, CGRectGetMaxY(self.userView.frame), kScreenSize.width-25, self.taskContentLabel.frame.size.height+self.taskContentLabel.frame.origin.y);
+    frame = self.taskBottomView.frame;
+    frame.origin.y = CGRectGetMaxY(self.taskTopView.frame)+10;
+    self.taskBottomView.frame = frame;
 }
 
 #pragma mark - 试图将要出现
@@ -223,10 +291,12 @@
     tabBar.imageView.alpha = 1.0;
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 
 @end
