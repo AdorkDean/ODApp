@@ -26,6 +26,9 @@
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
 		B83C6B9F1C22562C0063ED92 /* ODTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B9E1C22562C0063ED92 /* ODTabBarController.m */; };
+		B84AABC31C33B1F4006556DC /* ODCommunityDetailReplyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84AABC21C33B1F4006556DC /* ODCommunityDetailReplyViewController.m */; };
+		B84AABC81C33DF17006556DC /* ODCommunityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B84AABC61C33DF17006556DC /* ODCommunityDetailCell.m */; };
+		B84AABC91C33DF17006556DC /* ODCommunityDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B84AABC71C33DF17006556DC /* ODCommunityDetailCell.xib */; };
 		B8544A691C2D0C41007258BC /* ODCommunityCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8544A671C2D0C41007258BC /* ODCommunityCollectionCell.m */; };
 		B8544A6A1C2D0C41007258BC /* ODCommunityCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8544A681C2D0C41007258BC /* ODCommunityCollectionCell.xib */; };
 		B8544F481C2D158D007258BC /* ODCommunityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8544F471C2D158D007258BC /* ODCommunityModel.m */; };
@@ -254,6 +257,11 @@
 		B83C6B931C22532B0063ED92 /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		B83C6B9D1C22562C0063ED92 /* ODTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTabBarController.h; sourceTree = "<group>"; };
 		B83C6B9E1C22562C0063ED92 /* ODTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTabBarController.m; sourceTree = "<group>"; };
+		B84AABC11C33B1F4006556DC /* ODCommunityDetailReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityDetailReplyViewController.h; sourceTree = "<group>"; };
+		B84AABC21C33B1F4006556DC /* ODCommunityDetailReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityDetailReplyViewController.m; sourceTree = "<group>"; };
+		B84AABC51C33DF17006556DC /* ODCommunityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityDetailCell.h; sourceTree = "<group>"; };
+		B84AABC61C33DF17006556DC /* ODCommunityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityDetailCell.m; sourceTree = "<group>"; };
+		B84AABC71C33DF17006556DC /* ODCommunityDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODCommunityDetailCell.xib; sourceTree = "<group>"; };
 		B8544A661C2D0C41007258BC /* ODCommunityCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityCollectionCell.h; sourceTree = "<group>"; };
 		B8544A671C2D0C41007258BC /* ODCommunityCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityCollectionCell.m; sourceTree = "<group>"; };
 		B8544A681C2D0C41007258BC /* ODCommunityCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODCommunityCollectionCell.xib; sourceTree = "<group>"; };
@@ -703,12 +711,32 @@
 			path = PersonalCenter;
 			sourceTree = "<group>";
 		};
+		B84AABC01C33B1BF006556DC /* CommunityDetailReply */ = {
+			isa = PBXGroup;
+			children = (
+				B84AABC11C33B1F4006556DC /* ODCommunityDetailReplyViewController.h */,
+				B84AABC21C33B1F4006556DC /* ODCommunityDetailReplyViewController.m */,
+			);
+			path = CommunityDetailReply;
+			sourceTree = "<group>";
+		};
+		B84AABC41C33DEE2006556DC /* CommunityDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				B84AABC51C33DF17006556DC /* ODCommunityDetailCell.h */,
+				B84AABC61C33DF17006556DC /* ODCommunityDetailCell.m */,
+				B84AABC71C33DF17006556DC /* ODCommunityDetailCell.xib */,
+			);
+			path = CommunityDetailView;
+			sourceTree = "<group>";
+		};
 		B8544A651C2D0C01007258BC /* CommunityView */ = {
 			isa = PBXGroup;
 			children = (
 				B8544A661C2D0C41007258BC /* ODCommunityCollectionCell.h */,
 				B8544A671C2D0C41007258BC /* ODCommunityCollectionCell.m */,
 				B8544A681C2D0C41007258BC /* ODCommunityCollectionCell.xib */,
+				B84AABC41C33DEE2006556DC /* CommunityDetailView */,
 			);
 			path = CommunityView;
 			sourceTree = "<group>";
@@ -1035,6 +1063,7 @@
 			children = (
 				B85453911C2D3F35007258BC /* ODCommunityDetailViewController.h */,
 				B85453921C2D3F35007258BC /* ODCommunityDetailViewController.m */,
+				B84AABC01C33B1BF006556DC /* CommunityDetailReply */,
 			);
 			path = CommunityDetail;
 			sourceTree = "<group>";
@@ -1329,6 +1358,7 @@
 				B85453071C2D1E73007258BC /* 登录框icon@1x.png in Resources */,
 				B83C6B6F1C224F640063ED92 /* LaunchScreen.storyboard in Resources */,
 				B854531D1C2D1E73007258BC /* 时间下拉箭头@2x.png in Resources */,
+				B84AABC91C33DF17006556DC /* ODCommunityDetailCell.xib in Resources */,
 				B854534B1C2D1E73007258BC /* 标签右端按钮部分@3x.png in Resources */,
 				B85453561C2D1E73007258BC /* 欧动社区icon默认态@2x.png in Resources */,
 				B85453781C2D1E73007258BC /* 中心预约icon@3x.png in Resources */,
@@ -1434,6 +1464,7 @@
 				B80F037D1C2264FB009CE9D8 /* ODAPIManager.m in Sources */,
 				B8544A691C2D0C41007258BC /* ODCommunityCollectionCell.m in Sources */,
 				B80F03741C225EF9009CE9D8 /* ODPersonalCenterViewController.m in Sources */,
+				B84AABC81C33DF17006556DC /* ODCommunityDetailCell.m in Sources */,
 				B8544F551C2D1730007258BC /* ODBazaarLabelSearchViewController.m in Sources */,
 				B83C6B9F1C22562C0063ED92 /* ODTabBarController.m in Sources */,
 				B85453961C2D3F72007258BC /* ODCommunityKeyWordSearchViewController.m in Sources */,
@@ -1447,6 +1478,7 @@
 				B83C6B671C224F640063ED92 /* main.m in Sources */,
 				B85453991C2D3F8E007258BC /* ODCommunityReleaseTopicViewController.m in Sources */,
 				B80F03651C225E67009CE9D8 /* ODBaseViewController.m in Sources */,
+				B84AABC31C33B1F4006556DC /* ODCommunityDetailReplyViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

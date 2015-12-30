@@ -28,4 +28,5 @@
 @property(nonatomic,strong)UIView *taskBottomView;
 @property(nonatomic,strong)UILabel *taskContentLabel;
 @property(nonatomic,strong)UILabel *allLabel;
+@property(nonatomic,strong)NSString *task_status;
 @end

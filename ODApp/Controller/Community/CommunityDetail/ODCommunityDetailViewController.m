@@ -21,7 +21,7 @@
     [self navigationInit];
     [self createScrollView];
     [self createRequest];
-    [self joiningTogetherParmeters];
+    [self joiningTogetherParmetersWithUserInfo:YES];
 }
 
 #pragma mark - 初始化导航
@@ -66,13 +66,21 @@
 }
 
 #pragma mark - 拼接参数
--(void)joiningTogetherParmeters
+-(void)joiningTogetherParmetersWithUserInfo:(BOOL)userInfo
 {
-    NSDictionary *parameter = @{@"id":self.bbs_id};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kCommunityBbsDetailUrl paramater:signParameter];
+    if (userInfo) {
+        NSDictionary *parameter = @{@"id":self.bbs_id};
+        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        [self downLoadDataWithUrl:kCommunityBbsDetailUrl paramater:signParameter];
+    }else{
+        NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":@""};
+        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        [self downLoadDataWithUrl:kCommunityBbsListUrl paramater:signParameter];
+    }
+
 }
 
+#pragma mark - 请求发帖人信息
 -(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)paramater
 {
     __weak typeof (self)weakSelf = self;
@@ -136,7 +144,8 @@
 
 -(void)userHeaderButtonClick:(UIButton *)button
 {
-    
+    ODCommunityDetailReplyViewController *detailReply = [[ODCommunityDetailReplyViewController alloc]init];
+    [self.navigationController pushViewController:detailReply animated:YES];
 }
 
 #pragma marl - 创建bbs详情试图
@@ -186,6 +195,34 @@
 -(void)deleteButtonClick:(UIButton *)button
 {
     
+}
+
+
+#pragma mark - 创建tableView
+-(void)createTableView
+{
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.tableView registerNib:[UINib nibWithNibName:@"ODCommunityDetailCell" bundle:nil] forCellReuseIdentifier:kCommunityDetailCellId];
+    [self.view addSubview:self.tableView];
+}
+
+#pragma mark - tableViewDelegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODCommunityDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:kCommunityDetailCellId];
+    return cell;
 }
 
 #pragma mark - 试图将要出现

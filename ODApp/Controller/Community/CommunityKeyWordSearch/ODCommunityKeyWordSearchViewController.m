@@ -21,23 +21,22 @@
     [self navigationInit];
     [self createSearchBar];
     [self createRequest];
-    [self joiningTogetherParmeters];
 }
 
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
     self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
+    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 117) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
     
     //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"欧动社区" font:16 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 32, 80, 20) text:@"欧动社区" font:16 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
-    //返回按钮
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28,32, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
+    //取消按钮
+    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 32,35, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
 }
@@ -50,8 +49,12 @@
 #pragma mark - 创建searchBar
 -(void)createSearchBar
 {
-   
-    
+    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(12.5, 70, kScreenSize.width-25, 30)];
+    [[[[ searchBar. subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
+    searchBar.backgroundColor = [UIColor clearColor];
+    searchBar.delegate = self;
+    searchBar.placeholder = @"标签关键字";
+    [self.headView addSubview:searchBar];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -75,7 +78,7 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
- 
+     [self joiningTogetherParmeters];
 }
 
 #pragma mark - 初始化manager

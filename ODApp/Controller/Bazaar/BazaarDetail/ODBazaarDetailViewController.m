@@ -118,13 +118,26 @@
     [self.userView addSubview:userSignLabel];
     
     //接受任务
-    UIButton *taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-100, 20, 100, 35) target:self sel:@selector(taskButtonClick:) tag:0 image:nil title:@"接受任务" font:14];
-    taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd801" alpha:1];
-    [taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    UIButton *taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-100, 20, 100, 35) target:nil sel:nil tag:0 image:nil title:@"" font:14];
+    taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    [taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#d0d0d0" alpha:1] forState:UIControlStateNormal];
     taskButton.layer.masksToBounds = YES;
     taskButton.layer.cornerRadius = 5;
     taskButton.layer.borderWidth = 1;
     taskButton.layer.borderColor = [ODColorConversion colorWithHexString:@"b0b0b0" alpha:1].CGColor;
+    if ([self.task_status isEqualToString:@"1"]) {
+        [taskButton setTitle:@"接受任务" forState:UIControlStateNormal];
+        [taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd801" alpha:1];
+        [taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    }else if ([self.task_status isEqualToString:@"2"]){
+        [taskButton setTitle:@"正在完成" forState:UIControlStateNormal];
+         [taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+    }else if ([self.task_status isEqualToString:@"4"]){
+        [taskButton setTitle:@"已完成" forState:UIControlStateNormal];
+    }else if ([self.task_status isEqualToString:@"-2"]){
+        [taskButton setTitle:@"任务过期" forState:UIControlStateNormal];
+    }
     [self.userView addSubview:taskButton];
     
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 75, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];

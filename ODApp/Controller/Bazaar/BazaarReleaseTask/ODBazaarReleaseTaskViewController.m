@@ -121,98 +121,97 @@
     //开始日期button
     UIView *startDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
     [self.startDateLabel addSubview:startDateLineView];
-    UIButton *startDateButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5*width - 25, 10, 20, 14) target:self sel:@selector(startDateButtonClick:) tag:0 image:@"时间下拉箭头" title:nil font:0];
+    UIButton *startDateButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5*width - 25, 10, 20, 14) target:self sel:@selector(buttonClick:) tag:100 image:@"时间下拉箭头" title:nil font:0];
     [self.startDateLabel addSubview:startDateButton];
     
     //结束日期button
     UIView *endDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
     [self.endDateLabel addSubview:endDateLineView];
-    UIButton *endDateButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5*width - 25, 10, 20, 14) target:self sel:@selector(endDateButtonClick:) tag:0 image:@"时间下拉箭头" title:nil font:0];
+    UIButton *endDateButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5*width - 25, 10, 20, 14) target:self sel:@selector(buttonClick:) tag:101 image:@"时间下拉箭头" title:nil font:0];
     [self.endDateLabel addSubview:endDateButton];
     
     //开始时间button
     UIView *startTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
     [self.startTimeLabel addSubview:startTimeLineView];
-    UIButton *startTimeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(3*width - 25, 10, 20, 14) target:self sel:@selector(startTimeButtonClick:) tag:0 image:@"时间下拉箭头" title:nil font:0];
+    UIButton *startTimeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(3*width - 25, 10, 20, 14) target:self sel:@selector(buttonClick:) tag:102 image:@"时间下拉箭头" title:nil font:0];
     [self.startTimeLabel addSubview:startTimeButton];
     
     //结束时间button
     UIView *endTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
     [self.endTimeLabel addSubview:endTimeLineView];
-    UIButton *endTimeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(3*width - 25, 10, 20, 14) target:self sel:@selector(endTimeButtonClick:) tag:0 image:@"时间下拉箭头" title:nil font:0];
+    UIButton *endTimeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(3*width - 25, 10, 20, 14) target:self sel:@selector(buttonClick:) tag:103 image:@"时间下拉箭头" title:nil font:0];
     [self.endTimeLabel addSubview:endTimeButton];
 }
 
-//开始日期
--(void)startDateButtonClick:(UIButton *)button
+-(void)buttonClick:(UIButton *)button
 {
+    [self.backPickerView removeFromSuperview];
     [self setUpDatePickerViewWihtButton:button];
-    self.datePicker.datePickerMode = UIDatePickerModeDate;
-}
-
-//结束日期
--(void)endDateButtonClick:(UIButton *)button
-{
-    [self setUpDatePickerViewWihtButton:button];
-    self.datePicker.datePickerMode = UIDatePickerModeDate;
-}
-
-//开始时间
--(void)startTimeButtonClick:(UIButton *)button
-{
-    [self setUpDatePickerViewWihtButton:button];
-    self.datePicker.datePickerMode = UIDatePickerModeTime;
-}
-
-//结束时间
--(void)endTimeButtonClick:(UIButton *)button
-{
-    [self setUpDatePickerViewWihtButton:button];
-    self.datePicker.datePickerMode = UIDatePickerModeTime;
 }
 
 #pragma mark - 初始化datePickerView
 -(void)setUpDatePickerViewWihtButton:(UIButton *)button
 {
-    self.backPickerView = [ODClassMethod creatViewWithFrame:CGRectMake(4, kScreenSize.height-64-250, kScreenSize.width-8, 300) tag:0 color:@"f3f3f3"];
-    [self.scrollView addSubview:self.backPickerView];
+    self.backPickerView = [ODClassMethod creatViewWithFrame:CGRectMake(4, kScreenSize.height-200, kScreenSize.width-8, 200) tag:0 color:@"f3f3f3"];
+    [self.view addSubview:self.backPickerView];
     
     //显示中文
-    self.datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width-8, 200)];
+    self.datePicker = [[UIDatePicker alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width-8, 150)];
     NSLocale *locale = [[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"];
     self.datePicker.locale = locale;
     //只能选择大于当前时间的日期
     [self.datePicker setMinimumDate:[NSDate date]];
     [self.backPickerView addSubview:self.datePicker];
     
-    UIButton *cancelPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 200, kScreenSize.width/2-4, 50) target:self sel:@selector(cancelPickerButtonClick:) tag:0 image:nil title:@"取消" font:16];
+    UIButton *cancelPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 150, kScreenSize.width/2-4, 50) target:self sel:@selector(cancelPickerButtonClick:) tag:0 image:nil title:@"取消" font:16];
     [self.backPickerView addSubview:cancelPickerButton];
-    UIButton *confirmPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width/2-4, 200, kScreenSize.width/2-4, 50) target:self sel:@selector(confirmPickerButtonClick:) tag:0 image:nil title:@"确认" font:16];
+    UIButton *confirmPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width/2-4, 150, kScreenSize.width/2-4, 50) target:self sel:@selector(confirmPickerButtonClick:) tag:0 image:nil title:@"确认" font:16];
+    confirmPickerButton.tag = button.tag + 10;
     [self.backPickerView addSubview:confirmPickerButton];
+    if (button.tag == 100 || button.tag == 101) {
+        self.datePicker.datePickerMode = UIDatePickerModeDate;
+    }else{
+        self.datePicker.datePickerMode = UIDatePickerModeTime;
+    }
 }
 
 //确认datePickerView
 -(void)confirmPickerButtonClick:(UIButton *)button
 {
-    self.startDateLabel.text = [self timeFormat];
+    switch (button.tag) {
+        case 110:
+            self.startDateLabel.text = [self timeFormatDate:YES];
+            break;
+        case 111:
+            self.endDateLabel.text = [self timeFormatDate:YES];
+            break;
+        case 112:
+            self.startTimeLabel.text = [self timeFormatDate:NO];
+            break;
+        case 113:
+            self.endTimeLabel.text = [self timeFormatDate:NO];
+            break;
+        default:
+            break;
+    }
 }
 
 //取消datePickerView
 -(void)cancelPickerButtonClick:(UIButton *)button
 {
-    [UIView animateWithDuration:0.5 animations:^{
-        self.backPickerView.alpha = 0;
-    } completion:^(BOOL finished) {
-        [self.backPickerView removeFromSuperview];
-    }];
+    [self.backPickerView removeFromSuperview];
 }
 
 //时间格式
-- (NSString *)timeFormat
+- (NSString *)timeFormatDate:(BOOL)isDate
 {
     NSDate *selected = [self.datePicker date];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    if (isDate) {
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    }else{
+        [dateFormatter setDateFormat:@"HH"];
+    }
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:selected];
     return currentOlderOneDateStr;
 }

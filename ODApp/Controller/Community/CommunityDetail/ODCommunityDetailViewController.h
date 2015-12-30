@@ -16,8 +16,10 @@
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
 #import "ODHelp.h"
+#import "ODCommunityDetailReplyViewController.h"
+#import "ODCommunityDetailCell.h"
 
-@interface ODCommunityDetailViewController : ODBaseViewController
+@interface ODCommunityDetailViewController : ODBaseViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)UIView *headView;
@@ -28,6 +30,8 @@
 @property(nonatomic,strong)NSArray *bbs_imgArray;
 @property(nonatomic,strong)UIView *userView;
 @property(nonatomic,strong)UIView *bbsView;
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)NSMutableArray *dataArray;
 
 @end
 

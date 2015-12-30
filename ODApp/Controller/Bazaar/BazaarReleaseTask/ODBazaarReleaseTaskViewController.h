@@ -37,5 +37,6 @@ typedef enum {
 
 @property(nonatomic,strong)UIView *backPickerView;
 @property(nonatomic,strong)UIDatePicker *datePicker;
+@property(nonatomic,strong)UIButton *lastClickButton;
 
 @end

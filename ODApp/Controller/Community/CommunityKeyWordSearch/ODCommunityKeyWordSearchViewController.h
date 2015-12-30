@@ -17,7 +17,6 @@
 
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager * manager;
-@property(nonatomic,strong)UITextField *searchTextField;
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)NSMutableArray *userArray;
