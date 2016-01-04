@@ -19,8 +19,6 @@
     self.nameLabel.textColor = [ODColorConversion colorWithHexString:@"#000000" alpha:1];
 }
 
-- (IBAction)headButton:(UIButton *)sender {
-}
 
 -(void)showDateWithModel:(ODCommunityModel *)model
 {

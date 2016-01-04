@@ -180,16 +180,16 @@
 {
     switch (button.tag) {
         case 110:
-            self.startDateLabel.text = [self timeFormatDate:YES];
+            self.startDateLabel.text = [NSString stringWithFormat:@" %@",[self timeFormatDate:YES]];
             break;
         case 111:
-            self.endDateLabel.text = [self timeFormatDate:YES];
+            self.endDateLabel.text = [NSString stringWithFormat:@" %@",[self timeFormatDate:YES]];
             break;
         case 112:
-            self.startTimeLabel.text = [self timeFormatDate:NO];
+            self.startTimeLabel.text = [NSString stringWithFormat:@" %@",[self timeFormatDate:NO]];
             break;
         case 113:
-            self.endTimeLabel.text = [self timeFormatDate:NO];
+            self.endTimeLabel.text = [NSString stringWithFormat:@" %@",[self timeFormatDate:NO]];
             break;
         default:
             break;
@@ -210,7 +210,7 @@
     if (isDate) {
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     }else{
-        [dateFormatter setDateFormat:@"HH"];
+        [dateFormatter setDateFormat:@"HH-mm"];
     }
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:selected];
     return currentOlderOneDateStr;
@@ -244,7 +244,8 @@
 //任务奖励
 -(void)taskRewardButtonClick:(UIButton *)button
 {
-   
+    ODBazaarReleaseRewardViewController *reward = [[ODBazaarReleaseRewardViewController alloc]init];
+    [self.navigationController pushViewController:reward animated:YES];
 }
 
 #pragma mark - 初始化manager

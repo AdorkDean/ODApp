@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ODCommunityDetailModel.h"
+#import "ODColorConversion.h"
 
 @interface ODCommunityDetailCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *headButton;
@@ -16,11 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
-
-- (IBAction)headButton:(UIButton *)sender;
-- (IBAction)replyButton:(UIButton *)sender;
-- (IBAction)deleteButton:(UIButton *)sender;
-
--(void)showDataWithModel:(ODCommunityDetailModel *)model;
+@property (weak, nonatomic) IBOutlet UIImageView *lineImageView;
 
 @end

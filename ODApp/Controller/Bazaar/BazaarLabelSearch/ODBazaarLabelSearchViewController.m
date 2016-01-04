@@ -76,6 +76,16 @@
     return YES;
 }
 
+-(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    searchBar.showsCancelButton = YES;
+    for (id oc in [searchBar subviews]) {
+        if ([oc isKindOfClass:[UIButton class]]) {
+            UIButton *cancel = (UIButton *)oc;
+            [cancel setTitle:@"取消" forState:UIControlStateNormal];
+        }
+    }
+}
 -(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 {
     [searchBar setShowsCancelButton:NO animated:YES];
@@ -117,6 +127,7 @@
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
+            [self.dataArray removeAllObjects];
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSArray *result = dict[@"result"];
             for (NSDictionary *itemDict in result) {

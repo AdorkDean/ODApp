@@ -90,7 +90,7 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{};
+    NSDictionary *parameter = @{@"page":@"2"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsListUrl paramater:signParameter];
 }

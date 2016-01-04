@@ -16,6 +16,8 @@
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UITextView *textView;
 @property(nonatomic,strong)UILabel *label;
+@property(nonatomic,copy)NSString *bbs_id;
+@property(nonatomic,copy)NSString *parent_id;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 
 @end

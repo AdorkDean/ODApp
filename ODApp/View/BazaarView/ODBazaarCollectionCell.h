@@ -13,7 +13,6 @@
 
 @interface ODBazaarCollectionCell : UICollectionViewCell
 
-- (IBAction)headButton:(UIButton *)sender;
 @property (weak, nonatomic) IBOutlet UIButton *headButton;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;

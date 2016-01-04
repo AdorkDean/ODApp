@@ -192,6 +192,7 @@
 		B85453961C2D3F72007258BC /* ODCommunityKeyWordSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85453951C2D3F72007258BC /* ODCommunityKeyWordSearchViewController.m */; };
 		B85453991C2D3F8E007258BC /* ODCommunityReleaseTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85453981C2D3F8E007258BC /* ODCommunityReleaseTopicViewController.m */; };
 		B85A48A41C30DF43002FE367 /* ODCommunityDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B85A48A31C30DF43002FE367 /* ODCommunityDetailModel.m */; };
+		B872716B1C3A79B000B36305 /* ODBazaarReleaseRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B872716A1C3A79B000B36305 /* ODBazaarReleaseRewardViewController.m */; };
 		B88FB9491C27B89800F46D85 /* ODBazaarCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B88FB9471C27B89800F46D85 /* ODBazaarCollectionCell.m */; };
 		B88FB94A1C27B89800F46D85 /* ODBazaarCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B88FB9481C27B89800F46D85 /* ODBazaarCollectionCell.xib */; };
 		B88FB94D1C27BA2F00F46D85 /* ODBazaarHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B88FB94C1C27BA2F00F46D85 /* ODBazaarHeaderView.m */; };
@@ -435,6 +436,8 @@
 		B85453981C2D3F8E007258BC /* ODCommunityReleaseTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityReleaseTopicViewController.m; sourceTree = "<group>"; };
 		B85A48A21C30DF43002FE367 /* ODCommunityDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityDetailModel.h; sourceTree = "<group>"; };
 		B85A48A31C30DF43002FE367 /* ODCommunityDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityDetailModel.m; sourceTree = "<group>"; };
+		B87271691C3A79B000B36305 /* ODBazaarReleaseRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseRewardViewController.h; sourceTree = "<group>"; };
+		B872716A1C3A79B000B36305 /* ODBazaarReleaseRewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseRewardViewController.m; sourceTree = "<group>"; };
 		B88FB9461C27B89800F46D85 /* ODBazaarCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarCollectionCell.h; sourceTree = "<group>"; };
 		B88FB9471C27B89800F46D85 /* ODBazaarCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarCollectionCell.m; sourceTree = "<group>"; };
 		B88FB9481C27B89800F46D85 /* ODBazaarCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarCollectionCell.xib; sourceTree = "<group>"; };
@@ -783,6 +786,8 @@
 			children = (
 				B8544F561C2D173D007258BC /* ODBazaarReleaseTaskViewController.h */,
 				B8544F571C2D173D007258BC /* ODBazaarReleaseTaskViewController.m */,
+				B87271691C3A79B000B36305 /* ODBazaarReleaseRewardViewController.h */,
+				B872716A1C3A79B000B36305 /* ODBazaarReleaseRewardViewController.m */,
 			);
 			path = BazaarReleaseTask;
 			sourceTree = "<group>";
@@ -1461,6 +1466,7 @@
 				B85453931C2D3F35007258BC /* ODCommunityDetailViewController.m in Sources */,
 				B88FB95F1C27F94E00F46D85 /* ODBazaarModel.m in Sources */,
 				B88FB94D1C27BA2F00F46D85 /* ODBazaarHeaderView.m in Sources */,
+				B872716B1C3A79B000B36305 /* ODBazaarReleaseRewardViewController.m in Sources */,
 				B80F037D1C2264FB009CE9D8 /* ODAPIManager.m in Sources */,
 				B8544A691C2D0C41007258BC /* ODCommunityCollectionCell.m in Sources */,
 				B80F03741C225EF9009CE9D8 /* ODPersonalCenterViewController.m in Sources */,

@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
 @property (weak, nonatomic) IBOutlet UIButton *headButton;
-- (IBAction)headButton:(UIButton *)sender;
+
 
 -(void)showDateWithModel:(ODCommunityModel *)model;
 

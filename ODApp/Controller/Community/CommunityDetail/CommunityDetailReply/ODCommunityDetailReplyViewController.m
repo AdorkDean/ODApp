@@ -55,7 +55,10 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
-    
+    NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"content":self.textView.text,@"parent_id":self.parent_id,@"open_id":@"766148455eed214ed1f8"};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    NSLog(@"+++%@",signParameter);
+    [self pushDataWithUrl:kCommunityBbsReplyUrl parameter:signParameter];
 }
 
 #pragma mark - 初始化manager
@@ -64,18 +67,13 @@
     self.manager = [AFHTTPRequestOperationManager manager];
 }
 
-#pragma mark - 拼接参数
--(void)joiningTogetherParmeters
-{
-    NSDictionary *parameter = @{@"bbs_id":@"",@"content":self.textView.text,@"parent_id":@"",@"opne_id":@""};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self pushDataWithUrl:kBazaarReleaseTaskUrl parameter:signParameter];
-}
-
+#pragma mark - 提交数据
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@",responseObject);
+        if ([responseObject[@"status"]isEqualToString:@"success"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"error");
     }];
@@ -110,7 +108,11 @@
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-   self.label.text = @"请输入回复TA的内容";
+    if (textView.text.length) {
+        self.label.text = @"";
+    }else{
+        self.label.text = @"请输入回复TA的内容";
+    }
 }
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event

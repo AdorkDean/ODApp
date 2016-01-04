@@ -31,9 +31,20 @@
     self.titleLabel.text = model.title;
     self.contentLabel.text = model.content;
     self.nameLabel.text = model.user_nick;
-    self.timeLabel.text = model.task_start_date;
+    //设置Label显示不同大小的字体
+    NSString *time = [[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."];
+    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
+    [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
+    self.timeLabel.attributedText = noteStr;
+    NSString *status = [NSString stringWithFormat:@"%@",model.task_status];
+    if ([status isEqualToString:@"1"]) {
+        self.statusLabel.text = @"任务开始";
+    }else if ([status isEqualToString:@"2"]){
+        self.statusLabel.text = @"进行中";
+    }else if ([status isEqualToString:@"-2"]){
+        self.statusLabel.text = @"任务过期";
+    }
 }
 
-- (IBAction)headButton:(UIButton *)sender {
-}
+
 @end

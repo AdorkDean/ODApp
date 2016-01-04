@@ -12,13 +12,8 @@
 #import "ODColorConversion.h"
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
+#import "ODBazaarReleaseRewardViewController.h"
 
-typedef enum {
-    // 开始日期
-    DateTypeOfStart = 0,
-    // 结束日期
-    DateTypeOfEnd,
-}DateType;
 
 @interface ODBazaarReleaseTaskViewController : ODBaseViewController<UITextViewDelegate>
 

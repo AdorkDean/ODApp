@@ -26,7 +26,7 @@
 #define kCommunityReleaseBbsUrl @"http://woquapi.odong.com/1.0/bbs/create"
 #define kCommunityBbsDetailUrl @"http://woquapi.odong.com/1.0/bbs/view"
 #define kCommunityBbsSearchUrl @"http://woquapi.odong.com/1.0/bbs/search"
-#define kCommunityBbsReplyUrl @"http://woquapi.odong.com/1.0/bbs/reply"
 #define kCommunityBbsReplyListUrl @"http://woquapi.odong.com/1.0/bbs/reply/list"
+#define kCommunityBbsReplyUrl @"http://woquapi.odong.com/1.0/bbs/reply"
 
 #endif /* Define_h */

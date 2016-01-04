@@ -18,7 +18,10 @@
 @property(nonatomic,copy)NSString *nick;
 @property(nonatomic,copy)NSString *sign;
 @property(nonatomic,copy)NSString *avatar_url;
+@property(nonatomic,copy)NSString *bbs_id;
+@property(nonatomic,copy)NSString *parent_user_nick;
 @property(nonatomic,strong)NSArray *bbs_imgs;
+
 
 /**
  *   "id": 816,

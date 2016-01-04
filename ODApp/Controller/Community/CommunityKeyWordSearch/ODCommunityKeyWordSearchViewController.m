@@ -39,11 +39,21 @@
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 32,35, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
+    
+    //确认按钮
+    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 32,35, 20) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:16];
+    [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [self.headView addSubview:confirmButton];
 }
 
 -(void)backButtonClick:(UIButton *)button
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)confirmButtonClick:(UIButton *)button
+{
+    [self joiningTogetherParmeters];
 }
 
 #pragma mark - 创建searchBar
@@ -105,6 +115,7 @@
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
+            [self.dataArray removeAllObjects];
             NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dcit[@"result"];
             NSDictionary *bbs_list = result[@"bbs_list"];
