@@ -12,6 +12,7 @@
 #import "ODAPIManager.h"
 #import "ODColorConversion.h"
 #import "AFNetworking.h"
+#import "ODBazaarSearchCell.h"
 
 
 @interface ODBazaarLabelSearchViewController : ODBaseViewController<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
@@ -20,5 +21,6 @@
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)UIView *headView;
+@property(nonatomic,strong)UISearchBar *searchBar;
 
 @end

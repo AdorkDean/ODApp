@@ -175,6 +175,8 @@
     UIImageView *imageView = nil;
     UILabel *timeLabel = nil;
     UIButton *deleteButton = nil;
+    //创建时间
+    NSString *time = [[resultModel.created_at substringFromIndex:5] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
     if (resultModel.bbs_imgs.count) {
         //图片
         for (NSInteger i = 0; i < resultModel.bbs_imgs.count; i++) {
@@ -182,20 +184,26 @@
             [imageView sd_setImageWithURL:[NSURL URLWithString:resultModel.bbs_imgs[i]]];
             [self.bbsView addSubview:imageView];
         }
-        //创建时间
-        NSString *time = [[resultModel.created_at substringFromIndex:5] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
-        timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width-182.5, CGRectGetMaxY(imageView.frame)+17.5, 120, 20) text:time font:15 alignment:@"right" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
+        if ([self.open_id isEqualToString:@"123"]) {
+            //删除按钮
+            deleteButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-50, CGRectGetMaxY(imageView.frame)+17.5, 40, 20) target:self sel:@selector(deleteButtonClick:) tag:0 image:nil title:@"删除" font:15];
+            [self.bbsView addSubview:deleteButton];
+        }else{
+            
+        }
+        timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width-142.5-deleteButton.frame.size.width, CGRectGetMaxY(imageView.frame)+17.5, 120, 20) text:time font:15 alignment:@"right" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
         [self.bbsView addSubview:timeLabel];
-        //删除按钮
-        deleteButton = [ODClassMethod creatButtonWithFrame:CGRectMake(CGRectGetMaxX(timeLabel.frame)+10, CGRectGetMaxY(imageView.frame)+17.5, 40, 20) target:self sel:@selector(deleteButtonClick:) tag:0 image:nil title:@"删除" font:15];
-        [self.bbsView addSubview:deleteButton];
+      
     }else{
-        timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width-162.5, CGRectGetMaxY(bbsContentLabel.frame)+17.5, 100, 20) text:resultModel.created_at font:15 alignment:@"right" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
+        if ([self.open_id isEqualToString:@"123"]) {
+            deleteButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-50, CGRectGetMaxY(bbsContentLabel.frame)+17.5, 40, 20) target:self sel:@selector(deleteButtonClick:) tag:0 image:nil title:@"删除" font:15];
+            [self.bbsView addSubview:deleteButton];
+        }else{
+            
+        }
+        timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width-142.5-deleteButton.frame.size.width, CGRectGetMaxY(bbsContentLabel.frame)+17.5, 120, 20) text:time font:15 alignment:@"right" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
         [self.bbsView addSubview:timeLabel];
-        deleteButton = [ODClassMethod creatButtonWithFrame:CGRectMake(CGRectGetMaxX(timeLabel.frame)+10, CGRectGetMaxY(bbsContentLabel.frame)+17.5, 40, 20) target:self sel:@selector(deleteButtonClick:) tag:0 image:nil title:@"删除" font:15];
-        [self.bbsView addSubview:deleteButton];
     }
-    
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
     [self.bbsView addSubview:lineView];
     self.bbsView.frame = CGRectMake(0, 76, kScreenSize.width, lineView.frame.origin.y+lineView.frame.size.height);
@@ -233,17 +241,12 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODCommunityDetailModel *userModel = [[ODCommunityDetailModel alloc]init];;
-    if (self.dataArray.count) {
-        userModel = [self.dataArray objectAtIndex:0];
-    }
-    
     ODCommunityDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:kCommunityDetailCellId];
     ODCommunityDetailModel *model = self.dataArray[indexPath.row];
    
-    [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+    [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:model.user[@"avatar_url"]] forState:UIControlStateNormal];
     [cell.replyButton addTarget:self action:@selector(replyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    cell.nickName.text = userModel.nick;
+    cell.nickName.text = model.user[@"nick"];
     NSString *time = [[model.created_at substringFromIndex:5] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
     cell.timeLabel.text = [NSString stringWithFormat:@"%@ %ld楼",time,indexPath.row+1];
    
@@ -253,12 +256,34 @@
     [noteStr addAttribute:NSForegroundColorAttributeName value:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange(0, 2)];
     [noteStr addAttribute:NSForegroundColorAttributeName value:[ODColorConversion colorWithHexString:@"#000000" alpha:1] range:NSMakeRange(3, [model.parent_user_nick length])];
     cell.contentLabel.attributedText = noteStr;
+
+    //根据内容的多少来设置contentLabel的高度
+    CGRect contentFrame = cell.contentLabel.frame;
+    contentFrame.size.height = [ODHelp textHeightFromTextString:str width:kScreenSize.width-26 fontSize:14];
+    cell.contentLabel.frame = contentFrame;
+    
+    [cell.deleteButton addTarget:self action:@selector(cellDeleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    CGRect frame = cell.deleteButton.frame;
+    CGRect timeFrame = cell.timeLabel.frame;
+    if ([self.open_id isEqualToString:@"123"]) {
+        frame.size.width = 42;
+        timeFrame.origin.x = kScreenSize.width-13-42-cell.timeLabel.frame.size.width;
+    }else{
+        frame.size.width = 0;
+        timeFrame.origin.x = kScreenSize.width-13-cell.timeLabel.frame.size.width;
+    }
+    frame.origin.y = CGRectGetMaxY(cell.contentLabel.frame)+7;
+    cell.deleteButton.frame = frame;
+    timeFrame.origin.y = CGRectGetMaxY(cell.contentLabel.frame)+7;
+    cell.timeLabel.frame = timeFrame;
+    cell.lineImageView.frame = CGRectMake(13, CGRectGetMaxY(cell.timeLabel.frame)+5, kScreenSize.width-26, 1);
+    self.height = cell.lineImageView.frame.origin.y+cell.lineImageView.frame.size.height;
     return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 150;
+    return self.height;
 }
 
 -(void)replyButtonClick:(UIButton *)button
@@ -271,6 +296,11 @@
         detailReply.parent_id = [NSString stringWithFormat:@"3"];
     }
     [self.navigationController pushViewController:detailReply animated:YES];
+}
+
+-(void)cellDeleteButtonClick:(UIButton *)button
+{
+    
 }
 
 #pragma mark - 创建底部回复按钮

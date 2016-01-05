@@ -55,18 +55,22 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
-    [self joiningTogetherParmeters];
+    if (self.searchBar.text.length) {
+        [self joiningTogetherParmeters];
+    }else{
+        
+    }
 }
 
 #pragma mark - 创建searchBar
 -(void)createSearchBar
 {
-    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(12.5, 70, kScreenSize.width-25, 30)];
-    [[[[ searchBar. subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
-    searchBar.backgroundColor = [UIColor clearColor];
-    searchBar.delegate = self;
-    searchBar.placeholder = @"标签关键字";
-    [self.headView addSubview:searchBar];
+    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(12.5, 70, kScreenSize.width-25, 30)];
+    [[[[ self.searchBar. subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
+    self.searchBar.backgroundColor = [UIColor clearColor];
+    self.searchBar.delegate = self;
+    self.searchBar.placeholder = @"标签关键字";
+    [self.headView addSubview:self.searchBar];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -76,16 +80,6 @@
     return YES;
 }
 
--(void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
-{
-    searchBar.showsCancelButton = YES;
-    for (id oc in [searchBar subviews]) {
-        if ([oc isKindOfClass:[UIButton class]]) {
-            UIButton *cancel = (UIButton *)oc;
-            [cancel setTitle:@"取消" forState:UIControlStateNormal];
-        }
-    }
-}
 -(BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar
 {
     [searchBar setShowsCancelButton:NO animated:YES];
@@ -150,8 +144,8 @@
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,117, kScreenSize.width, kScreenSize.height -117) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    [self.tableView setSeparatorColor:[ODColorConversion colorWithHexString:@"#f3f3f3" alpha:1]];
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerNib:[UINib nibWithNibName:@"ODBazaarSearchCell" bundle:nil] forCellReuseIdentifier:kBazaaeSearchCellId];
     [self.view addSubview:self.tableView];
 }
 
@@ -168,12 +162,8 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellId = @"cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId];
-    }
-    cell.textLabel.text = self.dataArray[indexPath.row];
+    ODBazaarSearchCell *cell = [tableView dequeueReusableCellWithIdentifier:kBazaaeSearchCellId];
+    cell.nameLabel.text = self.dataArray[indexPath.row];
     return cell;
 }
 

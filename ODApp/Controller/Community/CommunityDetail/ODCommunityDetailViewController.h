@@ -33,6 +33,8 @@
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)UIView *tabelHeaderView;
+@property(nonatomic,copy)NSString *open_id;
+@property(nonatomic)CGFloat height;
 
 @end
 

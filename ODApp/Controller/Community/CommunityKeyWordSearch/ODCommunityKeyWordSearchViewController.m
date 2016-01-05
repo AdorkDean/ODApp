@@ -53,18 +53,22 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
-    [self joiningTogetherParmeters];
+    if (self.searchBar.text.length>0) {
+        [self joiningTogetherParmeters];
+    }else{
+        
+    }
 }
 
 #pragma mark - 创建searchBar
 -(void)createSearchBar
 {
-    UISearchBar *searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(12.5, 70, kScreenSize.width-25, 30)];
-    [[[[ searchBar. subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
-    searchBar.backgroundColor = [UIColor clearColor];
-    searchBar.delegate = self;
-    searchBar.placeholder = @"标签关键字";
-    [self.headView addSubview:searchBar];
+    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(12.5, 70, kScreenSize.width-25, 30)];
+    [[[[ self.searchBar. subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
+    self.searchBar.backgroundColor = [UIColor clearColor];
+    self.searchBar.delegate = self;
+    self.searchBar.placeholder = @"标签关键字";
+    [self.headView addSubview:self.searchBar];
 }
 
 #pragma mark - UISearchBarDelegate

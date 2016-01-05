@@ -20,8 +20,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [self navigationInit];
     [self createRequest];
-    [self createTaskRewardLabel];
-    
+    [self joiningTogetherParmeters];
 }
 
 #pragma mark - 初始化导航
@@ -54,7 +53,10 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
-    
+    if (self.taskRewardBlock) {
+        self.taskRewardBlock([self.dataArray objectAtIndex:self.count],[self.idArray objectAtIndex:self.count]);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 初始化manager
@@ -62,25 +64,87 @@
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    self.dataArray = [[NSMutableArray alloc]init];
+    self.idArray = [[NSMutableArray alloc]init];
 }
 
-#pragma mark - 创建任务奖励试图
--(void)createTaskRewardLabel
+#pragma mark - 拼接参数
+-(void)joiningTogetherParmeters
 {
-    self.taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(4, 68, kScreenSize.width - 8, 34) text:@"  选择任务奖励" font:16 alignment:@"left" color:@"#b0b0b0"  alpha:1 maskToBounds:YES];
-    self.taskRewardLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
-    [self.view addSubview:self.taskRewardLabel];
-    
-    UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(kScreenSize.width - 8 - 30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
-    [self.taskRewardLabel addSubview:lineView];
-    
-    UIButton *button = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 8 - 25, 10, 20, 14) target:self sel:@selector(taskRewardButtonClick:) tag:0 image:@"时间下拉箭头" title:nil font:0];
-    [self.taskRewardLabel addSubview:button];
+    NSDictionary *parameter = @{};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:kBazaarReleaseRewardUrl parameter:signParameter];
 }
 
--(void)taskRewardButtonClick:(UIButton *)button
+#pragma mark - 请求数据
+-(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
-    
+    __weak typeof (self)weakSelf = self;
+    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if (responseObject) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSDictionary *result = dict[@"result"];
+            NSArray *task_reward = result[@"task_reward"];
+            for (NSDictionary *itemDict in task_reward) {
+                NSString *name = itemDict[@"name"];
+                NSString *id = [NSString stringWithFormat:@"%@",itemDict[@"id"]];
+                [weakSelf.dataArray addObject:name];
+                [weakSelf.idArray addObject:id];
+            }
+            [weakSelf.tableView reloadData];
+            [weakSelf createTableView];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+    }];
+}
+
+
+#pragma mark - 创建tableView
+-(void)createTableView
+{
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,64, kScreenSize.width, kScreenSize.height-64) style:UITableViewStylePlain];
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.tableView registerNib:[UINib nibWithNibName:@"ODBazaarSearchCell" bundle:nil] forCellReuseIdentifier:kBazaaeSearchCellId];
+    [self.view addSubview:self.tableView];
+}
+
+#pragma mark - UITableViewDelegate
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODBazaarSearchCell *cell = [tableView dequeueReusableCellWithIdentifier:kBazaaeSearchCellId];
+    cell.nameLabel.text = self.dataArray[indexPath.row];
+    if (indexPath.row==0) {
+        self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-40, 15,20, 20)];
+        self.imageView.image = [UIImage imageNamed:@"时间下拉箭头"];
+        [cell addSubview:self.imageView];
+    }
+    return cell;
+}
+
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 50;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODBazaarSearchCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    self.count = indexPath.row;
+    [cell addSubview:self.imageView];
 }
 
 #pragma mark - 试图将要出现

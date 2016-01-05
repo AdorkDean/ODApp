@@ -20,5 +20,5 @@
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)NSMutableArray *userArray;
-
+@property(nonatomic,strong)UISearchBar *searchBar;
 @end

@@ -232,10 +232,12 @@
     timeLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"ffd802" alpha:1].CGColor;
     [self.taskBottomView addSubview:timeLabel];
     
-    UILabel *dateTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.task_datetime width:kScreenSize.width-25 fontSize:15]) text:detailModel.task_datetime font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
+    NSString *startTime = [[detailModel.task_datetime substringWithRange:NSMakeRange(5, 14)] stringByReplacingOccurrencesOfString:@"/" withString:@"."];
+    NSString *endTime = [[detailModel.task_datetime substringFromIndex:24] stringByReplacingOccurrencesOfString:@"/" withString:@"."];
+    UILabel *dateTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.task_datetime width:kScreenSize.width-25 fontSize:15]) text:[startTime stringByAppendingString:endTime] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
     [self.taskBottomView addSubview:dateTimeLabel];
     
-    UILabel *createTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(dateTimeLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.task_created_at width:kScreenSize.width fontSize:13]) text:detailModel.task_created_at font:13 alignment:@"right" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    UILabel *createTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(dateTimeLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.task_created_at width:kScreenSize.width fontSize:13]) text:[detailModel.task_created_at stringByReplacingOccurrencesOfString:@"/" withString:@"-"] font:13 alignment:@"right" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     [self.taskBottomView addSubview:createTimeLabel];
     
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, CGRectGetMaxY(createTimeLabel.frame)+10, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];

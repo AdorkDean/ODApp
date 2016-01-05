@@ -32,6 +32,6 @@
 
 @property(nonatomic,strong)UIView *backPickerView;
 @property(nonatomic,strong)UIDatePicker *datePicker;
-@property(nonatomic,strong)UIButton *lastClickButton;
+@property(nonatomic,strong)NSString *reward_id;
 
 @end

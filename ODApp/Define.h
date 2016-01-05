@@ -10,6 +10,7 @@
 #define Define_h
 
 #define kBazaarCellId @"ODBazaarCollectionCell"
+#define kBazaaeSearchCellId @"ODBazaarSearchCell"
 #define kCommunityCellId @"ODCommunityCollectionCell"
 #define kCommunityDetailCellId @"ODCommunityDetailCell"
 
@@ -21,6 +22,7 @@
 #define kBazaarReleaseTaskUrl @"http://woquapi.odong.com/1.0/task/task/add"
 #define kBazaarTaskDetailUrl @"http://woquapi.odong.com/1.0/task/detail"
 #define kBazaarAcceptTaskUrl @"http://woquapi.odong.com/1.0/task/apply"
+#define kBazaarReleaseRewardUrl @"http://woquapi.odong.com/1.0/other/config/info"
 
 #define kCommunityBbsListUrl @"http://woquapi.odong.com/1.0/bbs/list/latest"
 #define kCommunityReleaseBbsUrl @"http://woquapi.odong.com/1.0/bbs/create"

@@ -58,7 +58,7 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
-    
+    [self joiningTogetherParmeters];
 }
 
 #pragma mark - 创建scrollView
@@ -88,28 +88,28 @@
     CGFloat width = (kScreenSize.width - 16)/12;
     NSArray *array = @[@"开始时间",@"结束时间"];
     for (NSInteger i = 0; i < array.count; i++) {
-        UILabel * label = [ODClassMethod creatLabelWithFrame:CGRectMake(4, 148+(30.5+4)*i, 4*width, 30.5) text:array[i] font:16 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
+        UILabel * label = [ODClassMethod creatLabelWithFrame:CGRectMake(4, 148+(30.5+4)*i, 3.5*width, 30.5) text:array[i] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
         label.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
         [self.scrollView addSubview:label];
     }
     
     //开始日期label
-    self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+4*width, 148, 5*width, 30.5) text:nil font:16 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
+    self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+3.5*width, 148, 5*width, 30.5) text:nil font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.startDateLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.startDateLabel];
     
     //结束日期label
-    self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+4*width, 182.5, 5*width, 30.5) text:nil font:16 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
+    self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+3.5*width, 182.5, 5*width, 30.5) text:nil font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.endDateLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.endDateLabel];
     
     //开始时间label
-    self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+9*width, 148, 3*width, 30.5) text:nil font:16 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
+    self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+8.5*width, 148, 3.5*width, 30.5) text:nil font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.startTimeLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.startTimeLabel];
     
     //结束时间label
-    self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+9*width, 182.5, 3*width, 30.5) text:nil font:16 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
+    self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+8.5*width, 182.5, 3.5*width, 30.5) text:nil font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.endTimeLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.endTimeLabel];
 }
@@ -131,15 +131,15 @@
     [self.endDateLabel addSubview:endDateButton];
     
     //开始时间button
-    UIView *startTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    UIView *startTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
     [self.startTimeLabel addSubview:startTimeLineView];
-    UIButton *startTimeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(3*width - 25, 10, 20, 14) target:self sel:@selector(buttonClick:) tag:102 image:@"时间下拉箭头" title:nil font:0];
+    UIButton *startTimeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(3.5*width - 25, 10, 20, 14) target:self sel:@selector(buttonClick:) tag:102 image:@"时间下拉箭头" title:nil font:0];
     [self.startTimeLabel addSubview:startTimeButton];
     
     //结束时间button
-    UIView *endTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    UIView *endTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
     [self.endTimeLabel addSubview:endTimeLineView];
-    UIButton *endTimeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(3*width - 25, 10, 20, 14) target:self sel:@selector(buttonClick:) tag:103 image:@"时间下拉箭头" title:nil font:0];
+    UIButton *endTimeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(3.5*width - 25, 10, 20, 14) target:self sel:@selector(buttonClick:) tag:103 image:@"时间下拉箭头" title:nil font:0];
     [self.endTimeLabel addSubview:endTimeButton];
 }
 
@@ -180,16 +180,16 @@
 {
     switch (button.tag) {
         case 110:
-            self.startDateLabel.text = [NSString stringWithFormat:@" %@",[self timeFormatDate:YES]];
+            self.startDateLabel.text = [NSString stringWithFormat:@"  %@",[self timeFormatDate:YES]];
             break;
         case 111:
-            self.endDateLabel.text = [NSString stringWithFormat:@" %@",[self timeFormatDate:YES]];
+            self.endDateLabel.text = [NSString stringWithFormat:@"  %@",[self timeFormatDate:YES]];
             break;
         case 112:
-            self.startTimeLabel.text = [NSString stringWithFormat:@" %@",[self timeFormatDate:NO]];
+            self.startTimeLabel.text = [NSString stringWithFormat:@"  %@",[self timeFormatDate:NO]];
             break;
         case 113:
-            self.endTimeLabel.text = [NSString stringWithFormat:@" %@",[self timeFormatDate:NO]];
+            self.endTimeLabel.text = [NSString stringWithFormat:@"  %@",[self timeFormatDate:NO]];
             break;
         default:
             break;
@@ -210,7 +210,7 @@
     if (isDate) {
         [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     }else{
-        [dateFormatter setDateFormat:@"HH-mm"];
+        [dateFormatter setDateFormat:@"HH:mm"];
     }
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:selected];
     return currentOlderOneDateStr;
@@ -246,6 +246,10 @@
 {
     ODBazaarReleaseRewardViewController *reward = [[ODBazaarReleaseRewardViewController alloc]init];
     [self.navigationController pushViewController:reward animated:YES];
+    reward.taskRewardBlock = ^(NSString *name,NSString *reward_id){
+        self.taskRewardLabel.text = [NSString stringWithFormat:@"  %@",name];
+        self.reward_id = reward_id;
+    };
 }
 
 #pragma mark - 初始化manager
@@ -257,8 +261,9 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{};
+    NSDictionary *parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text substringFromIndex:2] stringByAppendingString:[self.startTimeLabel.text substringFromIndex:1]],@"end_time":[[self.endDateLabel.text substringFromIndex:2] stringByAppendingString:[self.endTimeLabel.text substringFromIndex:1]],@"content":self.taskDetailTextView.text,@"reward_id":self.reward_id,@"open_id":@"766148455eed214ed1f8"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    NSLog(@"%@",signParameter);
     [self pushDataWithUrl:kBazaarReleaseTaskUrl parameter:signParameter];
 }
 
@@ -266,7 +271,7 @@
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
+        NSLog(@"%@",responseObject);
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         NSLog(@"error");
