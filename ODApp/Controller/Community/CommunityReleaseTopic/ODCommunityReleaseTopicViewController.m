@@ -18,10 +18,11 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    [self createRequest];
     [self navigationInit];
     [self createTextView];
     [self createAddPicButton];
-    [self createRequest];
+    
 }
 
 #pragma mark - 初始化导航
@@ -54,7 +55,7 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
-    [self joiningTogetherParmeters];
+
 }
 
 #pragma mark - 创建textView
@@ -121,6 +122,73 @@
 
 -(void)addPicButtonClick:(UIButton *)button
 {
+    [self loadImagePickerControllerWithType:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
+#pragma mark - 加载相册
+-(void)loadImagePickerControllerWithType:(UIImagePickerControllerQualityType *)type
+{
+    //实例化一个对象
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    //设置资源类型
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+#pragma mark - 自己处理cancel
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+//点击确定之后
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    NSString *sourceType = info[UIImagePickerControllerMediaType];
+    if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
+        UIImage *image = info[UIImagePickerControllerEditedImage];
+        //图片转化为data
+        NSData *imageData;
+        if (UIImagePNGRepresentation(image)==nil) {
+            imageData = UIImageJPEGRepresentation(image,1);
+
+        }else{
+            imageData = UIImagePNGRepresentation(image);
+        }
+        NSString *str = @"data:image/jpeg;base64,";
+        NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+        [self createParameter:strData];
+        [self.addPicButton setBackgroundImage:image forState:UIControlStateNormal];
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)createParameter:(NSString *)str
+{
+    NSDictionary *parameter = @{@"File":str};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    NSLog(@"%@",signParameter);
+    [self pushImageWithUrl:kPushImageUrl parameter:signParameter];
+}
+//上传图片返回数据
+-(void)pushImageWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if (responseObject) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSLog(@"%@",dict);
+            NSDictionary *result = dict[@"result"];
+            NSString *str = result[@"File"];
+            NSLog(@"-----%@",str);
+           
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"error");
+    }];
     
 }
 
@@ -128,27 +196,26 @@
 -(void)createRequest
 {
     self.manager = [AFHTTPRequestOperationManager manager];
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 }
-
-#pragma mark - 拼接参数
--(void)joiningTogetherParmeters
-{
-    NSDictionary *parameter = @{};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self pushDataWithUrl:kCommunityReleaseBbsUrl parameter:signParameter];
-}
-
-#pragma mark - 提交数据
--(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
-{
-    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
-        NSLog(@"error");
-    }];
-    
-}
+//
+//#pragma mark - 拼接参数
+//-(void)joiningTogetherParmeters
+//{
+//    NSDictionary *parameter = @{};
+//    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+//    [self pushDataWithUrl:kCommunityReleaseBbsUrl parameter:signParameter];
+//}
+//
+//#pragma mark - 上传数据
+//-(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
+//{
+//    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//        NSLog(@"%@",responseObject);
+//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+//        
+//    }];
+//}
 
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
