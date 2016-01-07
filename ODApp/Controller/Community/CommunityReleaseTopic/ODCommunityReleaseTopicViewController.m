@@ -22,6 +22,7 @@
     [self navigationInit];
     [self createTextView];
     [self createAddPicButton];
+    self.count = 1;
     
 }
 
@@ -55,7 +56,7 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
-
+    [self joiningTogetherParmeters];
 }
 
 #pragma mark - 创建textView
@@ -116,25 +117,47 @@
 {
     CGFloat width = (kScreenSize.width-20)/4;
     self.addPicButton = [ODClassMethod creatButtonWithFrame:CGRectMake(4, CGRectGetMaxY(self.topicContentTextView.frame)+4, width, width) target:self sel:@selector(addPicButtonClick:) tag:0 image:@"发布新话题－默认icon" title:nil font:0];
+    self.addPicButton.layer.masksToBounds = YES;
+    self.addPicButton.layer.cornerRadius = 5;
+    self.addPicButton.layer.borderWidth = 1;
+    self.addPicButton.layer.borderColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1].CGColor;
     [self.view addSubview:self.addPicButton];
-    
 }
 
 -(void)addPicButtonClick:(UIButton *)button
 {
-    [self loadImagePickerControllerWithType:UIImagePickerControllerSourceTypePhotoLibrary];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
+    [actionSheet showInView:self.view];
 }
 
-#pragma mark - 加载相册
--(void)loadImagePickerControllerWithType:(UIImagePickerControllerQualityType *)type
+#pragma mark - UIActionSheetDelegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    //实例化一个对象
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-    //设置资源类型
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.delegate = self;
     imagePicker.allowsEditing = YES;
-    [self presentViewController:imagePicker animated:YES completion:nil];
+    
+    switch (buttonIndex) {
+        case 0:
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                [self presentViewController:imagePicker animated:YES completion:nil];
+            }
+            else {
+                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您当前的照相机不可用" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
+                [alert addAction:sure];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+            break;
+        case 1:
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+
+            break;
+        default:
+            break;
+    }
 }
 
 #pragma mark - 自己处理cancel
@@ -148,30 +171,33 @@
 {
     NSString *sourceType = info[UIImagePickerControllerMediaType];
     if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
-        UIImage *image = info[UIImagePickerControllerEditedImage];
+        self.image = info[UIImagePickerControllerEditedImage];
+        CGSize imageSize = self.image.size;
+        imageSize.height = 200;
+        imageSize.width = 200;
         //图片转化为data
         NSData *imageData;
-        if (UIImagePNGRepresentation(image)==nil) {
-            imageData = UIImageJPEGRepresentation(image,1);
-
+        self.image = [self imageWithImage:self.image scaledToSize:imageSize];
+        if (UIImagePNGRepresentation(self.image)==nil) {
+            imageData = UIImageJPEGRepresentation(self.image,0.5);
         }else{
-            imageData = UIImagePNGRepresentation(image);
+            imageData = UIImagePNGRepresentation(self.image);
         }
         NSString *str = @"data:image/jpeg;base64,";
         NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
         [self createParameter:strData];
-        [self.addPicButton setBackgroundImage:image forState:UIControlStateNormal];
+        [self addImageViewWithImage:self.image];
     }
-    [picker dismissViewControllerAnimated:YES completion:nil];
+     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)createParameter:(NSString *)str
 {
     NSDictionary *parameter = @{@"File":str};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSLog(@"%@",signParameter);
     [self pushImageWithUrl:kPushImageUrl parameter:signParameter];
 }
+
 //上传图片返回数据
 -(void)pushImageWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
@@ -180,42 +206,72 @@
     [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSLog(@"%@",dict);
             NSDictionary *result = dict[@"result"];
             NSString *str = result[@"File"];
-            NSLog(@"-----%@",str);
-           
+            if (self.imgsString==nil) {
+                self.imgsString = str;
+                NSLog(@"%@",self.imgsString);
+            }else{
+                self.imgsString = [[self.imgsString stringByAppendingString:@"|"] stringByAppendingString:str];
+            }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"error");
     }];
-    
+}
+
+//压缩尺寸
+-(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+#pragma mark - 添加图片
+-(void)addImageViewWithImage:(UIImage *)image
+{
+    UIImageView *imageView = [[UIImageView alloc]init];
+    imageView.frame = self.addPicButton.frame;
+    imageView.image = image;
+    imageView.layer.masksToBounds = YES;
+    imageView.layer.cornerRadius = 5;
+    [self.view addSubview:imageView];
+    if (self.count>=9) {
+        self.addPicButton.hidden = YES;
+    }else{
+        CGFloat width = (kScreenSize.width-20)/4;
+        [self.addPicButton setFrame:CGRectMake(4+(width+4)*(self.count%4), CGRectGetMaxY(self.topicContentTextView.frame)+4+(4+width)*(self.count/4), width, width)];
+        self.count++;
+    }
+
 }
 
 #pragma mark - 初始化manager
 -(void)createRequest
 {
     self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 }
-//
-//#pragma mark - 拼接参数
-//-(void)joiningTogetherParmeters
-//{
-//    NSDictionary *parameter = @{};
-//    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-//    [self pushDataWithUrl:kCommunityReleaseBbsUrl parameter:signParameter];
-//}
-//
-//#pragma mark - 上传数据
-//-(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
-//{
-//    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        NSLog(@"%@",responseObject);
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//        
-//    }];
-//}
+
+#pragma mark - 拼接参数
+-(void)joiningTogetherParmeters
+{
+    NSDictionary *parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"imgs":self.imgsString,@"open_id":@"766148455eed214ed1f8"};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self pushDataWithUrl:kCommunityReleaseBbsUrl parameter:signParameter];
+}
+
+#pragma mark - 上传数据
+-(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
+{
+    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"%@",responseObject);
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+    }];
+}
 
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated

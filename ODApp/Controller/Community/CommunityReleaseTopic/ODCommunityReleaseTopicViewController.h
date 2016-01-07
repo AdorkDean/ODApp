@@ -13,7 +13,7 @@
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
 
-@interface ODCommunityReleaseTopicViewController : ODBaseViewController<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface ODCommunityReleaseTopicViewController : ODBaseViewController<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UITextView *titleTextView;
@@ -22,5 +22,7 @@
 @property(nonatomic,strong)UILabel *topicContentLabel;
 @property(nonatomic,strong)UIButton *addPicButton;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-
+@property(nonatomic)NSInteger count;
+@property(nonatomic,strong)UIImage *image;
+@property(nonatomic,copy)NSString *imgsString;
 @end
