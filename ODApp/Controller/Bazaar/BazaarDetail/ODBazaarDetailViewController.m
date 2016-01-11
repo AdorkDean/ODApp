@@ -60,6 +60,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.dataArray = [[NSMutableArray alloc]init];
+    self.picArray = [[NSMutableArray alloc]init];
     [self joiningTogetherParmeters];
 }
 
@@ -83,6 +84,12 @@
             ODBazaarDetailModel *detailModel = [[ODBazaarDetailModel alloc]init];
             [detailModel setValuesForKeysWithDictionary:result];
             [weakSelf.dataArray addObject:detailModel];
+            NSArray *applys = result[@"applys"];
+            for (NSDictionary *itemDict in applys) {
+                ODBazaarDetailModel *model = [[ODBazaarDetailModel alloc]init];
+                [model setValuesForKeysWithDictionary:itemDict];
+                [self.picArray addObject:model];
+            }
         }
         [self createUserInfoView];
         [self createTaskTopDetailView];
@@ -118,7 +125,7 @@
     [self.userView addSubview:userSignLabel];
     
     //接受任务
-    UIButton *taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-100, 20, 100, 35) target:nil sel:nil tag:0 image:nil title:@"" font:14];
+    UIButton *taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-80, 20, 80, 35) target:nil sel:nil tag:0 image:nil title:@"" font:14];
     taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#d0d0d0" alpha:1] forState:UIControlStateNormal];
     taskButton.layer.masksToBounds = YES;
@@ -244,6 +251,19 @@
     [self.taskBottomView addSubview:lineView];
     
     self.taskBottomView.frame = CGRectMake(12.5, CGRectGetMaxY(self.taskTopView.frame)+10, kScreenSize.width-25, lineView.frame.size.height+lineView.frame.origin.y);
+   
+    ODBazaarDetailLayout *layout = [[ODBazaarDetailLayout alloc]initWithAnim:HJCarouselAnimLinear];
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    layout.itemSize = CGSizeMake(160, 200);
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.taskBottomView.frame)+10, kScreenSize.width, 200) collectionViewLayout:layout];
+    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.showsVerticalScrollIndicator = NO;
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarDetailCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarDetailCellId];
+    [self.scrollView addSubview:self.collectionView];
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+230);
 
 }
 
@@ -277,6 +297,9 @@
     frame = self.taskBottomView.frame;
     frame.origin.y = CGRectGetMaxY(self.taskTopView.frame)+10;
     self.taskBottomView.frame = frame;
+    
+    self.collectionView.frame = CGRectMake(0, CGRectGetMaxY(self.taskBottomView.frame)+10, kScreenSize.width, 200);
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+230);
 }
 
 -(void)hiddenViewWhenButtonClickAgain:(UIButton *)button
@@ -289,6 +312,64 @@
     frame = self.taskBottomView.frame;
     frame.origin.y = CGRectGetMaxY(self.taskTopView.frame)+10;
     self.taskBottomView.frame = frame;
+    self.collectionView.frame = CGRectMake(0, CGRectGetMaxY(self.taskBottomView.frame)+10, kScreenSize.width, 200);
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+230);
+}
+
+- (NSIndexPath *)curIndexPath {
+    NSArray *indexPaths = [self.collectionView indexPathsForVisibleItems];
+    NSIndexPath *curIndexPath = nil;
+    NSInteger curzIndex = 0;
+    for (NSIndexPath *path in indexPaths.objectEnumerator) {
+        UICollectionViewLayoutAttributes *attributes = [self.collectionView layoutAttributesForItemAtIndexPath:path];
+        if (!curIndexPath) {
+            curIndexPath = path;
+            curzIndex = attributes.zIndex;
+            continue;
+        }
+        if (attributes.zIndex > curzIndex) {
+            curIndexPath = path;
+            curzIndex = attributes.zIndex;
+        }
+    }
+    return curIndexPath;
+}
+
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    NSIndexPath *curIndexPath = [self curIndexPath];
+    if (indexPath.row == curIndexPath.row) {
+        return YES;
+    }
+    
+    [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+    
+    return NO;
+}
+
+
+
+#pragma mark - UICollectionViewDelegate
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.picArray.count;
+}
+
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODBazaarDetailCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarDetailCellId forIndexPath:indexPath];
+    ODBazaarDetailModel *model = self.picArray[indexPath.row];
+    [cell.imageV sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
+    cell.nickLabel.text = model.user_nick;
+    cell.signLabel.text = model.user_sign;
+    cell.layer.masksToBounds = YES;
+    cell.layer.borderColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1].CGColor;
+    cell.layer.borderWidth = 1;
+    return cell;
 }
 
 #pragma mark - 试图将要出现

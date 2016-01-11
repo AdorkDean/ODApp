@@ -17,12 +17,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self navigationInit];
     [self createScreeningAndSearchButton];
     [self createRequest];
     [self createCollectionView];
     [self joiningTogetherParmeters];
+    
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self joiningTogetherParmeters];
+    }];
+    
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [self loadMoreData];
+    }];
+
+}
+
+-(void)loadMoreData
+{
+    self.count ++;
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
 }
 
 #pragma mark - 初始化导航
@@ -162,7 +180,8 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{};
+    self.count = 1;
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
 }
@@ -173,6 +192,9 @@
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
+        if (self.count == 1) {
+            [self.dataArray removeAllObjects];
+        }
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
@@ -183,6 +205,8 @@
                 [weakSelf.dataArray addObject:model];
             }
             [weakSelf.collectionView reloadData];
+            [self.collectionView.mj_header endRefreshing];
+            [self.collectionView.mj_footer endRefreshing];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         

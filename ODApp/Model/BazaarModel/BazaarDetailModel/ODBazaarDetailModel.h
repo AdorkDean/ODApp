@@ -21,6 +21,7 @@
 @property(nonatomic,copy)NSString *task_created_at;
 @property(nonatomic,copy)NSString *task_datetime;
 @property(nonatomic,copy)NSString *reward_name;
+
 /**
  *   "task_id": 1,
  "title": "找人帮忙买车票",

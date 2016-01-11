@@ -17,10 +17,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.count = 1;
     self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
     [self navigationInit];
-    [self createSearchBar];
     [self createRequest];
+    [self createSearchBar];
+    [self createCollectionView];
+
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self joiningTogetherParmeters];
+    }];
+    
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [self loadMoreData];
+    }];
+
+}
+
+//加载更多
+-(void)loadMoreData
+{
+    self.count ++;
+    NSDictionary *parameter = @{@"kw":self.searchBar.text,@"suggest":@"0",@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:kCommunityBbsSearchUrl paramater:signParameter];
 }
 
 #pragma mark - 初始化导航
@@ -107,7 +127,8 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{@"kw":@"",@"suggest":@"0",@"page":@"1"};
+    self.count = 1;
+    NSDictionary *parameter = @{@"kw":self.searchBar.text,@"suggest":@"0",@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsSearchUrl paramater:signParameter];
 }
@@ -117,6 +138,10 @@
 {
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        if (self.count == 1) {
+            [self.dataArray removeAllObjects];
+        }
         
         if (responseObject) {
             [self.dataArray removeAllObjects];
@@ -141,7 +166,9 @@
             }
             
             [weakSelf.collectionView reloadData];
-            [weakSelf createCollectionView];
+            [weakSelf.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_footer endRefreshing];
+            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -197,6 +224,13 @@
     return CGSizeMake(kScreenSize.width, 120);
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc]init];
+    ODCommunityModel *model = self.dataArray[indexPath.row];
+    detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
+    [self.navigationController pushViewController:detailController animated:YES];
+}
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
 {

@@ -16,6 +16,7 @@
 #import "ODBazaarReleaseTaskViewController.h"
 #import "ODBazaarLabelSearchViewController.h"
 #import "ODBazaarDetailViewController.h"
+#import "MJRefresh.h"
 
 @interface ODBazaarViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIPopoverPresentationControllerDelegate>
 
@@ -24,4 +25,5 @@
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,copy)NSString *status;
+@property(nonatomic)NSInteger count;
 @end

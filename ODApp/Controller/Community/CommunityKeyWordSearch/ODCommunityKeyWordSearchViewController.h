@@ -12,6 +12,8 @@
 #import "ODAPIManager.h"
 #import "ODCommunityModel.h"
 #import "ODCommunityCollectionCell.h"
+#import "ODCommunityDetailViewController.h"
+#import "MJRefresh.h"
 
 @interface ODCommunityKeyWordSearchViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate>
 
@@ -21,4 +23,6 @@
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)NSMutableArray *userArray;
 @property(nonatomic,strong)UISearchBar *searchBar;
+@property(nonatomic)NSInteger count;
+
 @end

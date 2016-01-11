@@ -14,8 +14,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *nickName;
 @property (weak, nonatomic) IBOutlet UIButton *replyButton;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property (weak, nonatomic) IBOutlet UIImageView *lineImageView;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentTextViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelSpace;
+//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelSpace;
 
 @end

@@ -31,7 +31,7 @@
     [self.view addSubview:self.headView];
     
     //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"新任务" font:16 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"任务奖励" font:16 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     

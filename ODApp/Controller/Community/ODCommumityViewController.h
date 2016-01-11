@@ -17,7 +17,7 @@
 #import "ODCommunityReleaseTopicViewController.h"
 #import "ODCommunityDetailViewController.h"
 #import "ODCommunityKeyWordSearchViewController.h"
-
+#import "MJRefresh.h"
 
 @interface ODCommumityViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -26,5 +26,6 @@
 @property(nonatomic,strong)NSMutableArray *userArray;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)UIView *headView;
+@property(nonatomic)NSInteger count;
 
 @end

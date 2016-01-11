@@ -11,6 +11,7 @@
 
 #define kBazaarCellId @"ODBazaarCollectionCell"
 #define kBazaaeSearchCellId @"ODBazaarSearchCell"
+#define kBazaarDetailCellId @"ODBazaarDetailCollectionCell"
 #define kCommunityCellId @"ODCommunityCollectionCell"
 #define kCommunityDetailCellId @"ODCommunityDetailCell"
 

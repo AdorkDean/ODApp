@@ -258,26 +258,18 @@
     cell.contentLabel.attributedText = noteStr;
 
     //根据内容的多少来设置contentLabel的高度
-    CGRect contentFrame = cell.contentLabel.frame;
-    contentFrame.size.height = [ODHelp textHeightFromTextString:str width:kScreenSize.width-26 fontSize:14];
-    cell.contentLabel.frame = contentFrame;
+    CGFloat height = [ODHelp textHeightFromTextString:str width:kScreenSize.width-26 fontSize:14];
+    cell.contentLabelHeight.constant = height;
     
     [cell.deleteButton addTarget:self action:@selector(cellDeleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    CGRect frame = cell.deleteButton.frame;
-    CGRect timeFrame = cell.timeLabel.frame;
-    if ([self.open_id isEqualToString:@"123"]) {
-        frame.size.width = 42;
-        timeFrame.origin.x = kScreenSize.width-13-42-cell.timeLabel.frame.size.width;
+    if ([self.open_id isEqualToString:@"11"]) {
+        
     }else{
-        frame.size.width = 0;
-        timeFrame.origin.x = kScreenSize.width-13-cell.timeLabel.frame.size.width;
+        [cell.deleteButton removeFromSuperview];
+        cell.timeLabelSpace.constant = 13;
+
     }
-    frame.origin.y = CGRectGetMaxY(cell.contentLabel.frame)+7;
-    cell.deleteButton.frame = frame;
-    timeFrame.origin.y = CGRectGetMaxY(cell.contentLabel.frame)+7;
-    cell.timeLabel.frame = timeFrame;
-    cell.lineImageView.frame = CGRectMake(13, CGRectGetMaxY(cell.timeLabel.frame)+5, kScreenSize.width-26, 1);
-    self.height = cell.lineImageView.frame.origin.y+cell.lineImageView.frame.size.height;
+    self.height = 40+height+22+26;
     return cell;
 }
 
