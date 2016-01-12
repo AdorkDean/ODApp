@@ -13,14 +13,23 @@
 #import "ODColorConversion.h"
 #import "AFNetworking.h"
 #import "ODBazaarSearchCell.h"
+#import "ODBazaarCollectionCell.h"
+#import "MJRefresh.h"
+#import "ODBazaarModel.h"
+#import "ODBazaarDetailViewController.h"
 
 
-@interface ODBazaarLabelSearchViewController : ODBaseViewController<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
+@interface ODBazaarLabelSearchViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UISearchBarDelegate>
 
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UISearchBar *searchBar;
+@property(nonatomic)NSInteger count;
+@property(nonatomic,copy)NSString *keyText;
+@property(nonatomic,strong)NSTimer *timer;
+@property(nonatomic)NSInteger currentTime;
+@property(nonatomic,strong)UILabel *promptLabel;
 
 @end

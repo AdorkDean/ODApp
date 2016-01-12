@@ -17,12 +17,57 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.count = 1;
+    self.currentTime = 3;
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    [self createTimer];
     [self navigationInit];
     [self createSearchBar];
     [self createRequest];
+    [self createCollectionView];
+    
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self joiningTogetherParmeters];
+    }];
+    
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [self loadMoreData];
+    }];
+    
 }
+
+//创建定时器
+-(void)createTimer
+{
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerClick) userInfo:nil repeats:YES];
+    //先关闭定时器
+    [self.timer setFireDate:[NSDate distantFuture]];
+}
+
+//定时器相应事件
+-(void)timerClick
+{
+    self.currentTime -- ;
+    if (self.currentTime == 0) {
+        [UIView animateWithDuration:3 animations:^{
+            self.promptLabel.alpha = 0;
+            [self.promptLabel removeFromSuperview];
+        }];
+        self.currentTime = 3;
+    }
+}
+
+
+#pragma mark - 加载更多
+-(void)loadMoreData
+{
+    self.count ++;
+    NSDictionary *parameter = @{@"search":self.keyText,@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl parameter:signParameter];
+}
+
 
 #pragma mark - 初始化导航
 -(void)navigationInit
@@ -55,11 +100,18 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
-    if (self.searchBar.text.length) {
+    if (self.searchBar.text.length>0) {
+        self.keyText = [NSString stringWithFormat:@"%@",self.searchBar.text];
         [self joiningTogetherParmeters];
     }else{
-        
+        [UIView animateWithDuration:1 animations:^{
+            self.promptLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-120)/2, (kScreenSize.height-30)/2, 120, 30) text:@"请输入搜索内容" font:14 alignment:@"center" color:@"#ffffff" alpha:1 maskToBounds:YES];
+            self.promptLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
+            [self.view addSubview:self.promptLabel];
+            [self.timer setFireDate:[NSDate distantPast]];
+        }];
     }
+
 }
 
 #pragma mark - 创建searchBar
@@ -94,6 +146,7 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    self.keyText = [NSString stringWithFormat:@"%@",self.searchBar.text];
     [self joiningTogetherParmeters];
 }
 
@@ -109,9 +162,10 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{};
+    self.count = 1;
+    NSDictionary *parameter = @{@"search":self.keyText,@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kBazaarLabelSearchUrl parameter:signParameter];
+    [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl parameter:signParameter];
 }
 
 #pragma mark - 请求数据
@@ -120,16 +174,21 @@
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        if (responseObject) {
+        if (self.count == 1) {
             [self.dataArray removeAllObjects];
+        }
+        if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSArray *result = dict[@"result"];
-            for (NSDictionary *itemDict in result) {
-                NSString *title = itemDict[@"title"];
-                [self.dataArray addObject:title];
+            NSDictionary *result = dict[@"result"];
+            NSArray *tasks = result[@"tasks"];
+            for (NSDictionary *itemDict in tasks) {
+                ODBazaarModel *model = [[ODBazaarModel alloc]init];
+                [model setValuesForKeysWithDictionary:itemDict];
+                [weakSelf.dataArray addObject:model];
             }
-            [weakSelf.tableView reloadData];
-            [weakSelf createTableView];
+            [weakSelf.collectionView reloadData];
+            [weakSelf.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_footer endRefreshing];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -137,40 +196,54 @@
     }];
     
 }
-
-#pragma mark - 创建tableView
--(void)createTableView
+#pragma mark - 创建collectionView
+-(void)createCollectionView
 {
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,117, kScreenSize.width, kScreenSize.height -117) style:UITableViewStylePlain];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerNib:[UINib nibWithNibName:@"ODBazaarSearchCell" bundle:nil] forCellReuseIdentifier:kBazaaeSearchCellId];
-    [self.view addSubview:self.tableView];
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    flowLayout.minimumInteritemSpacing = 5;
+    flowLayout.minimumLineSpacing = 5;
+    flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,114, kScreenSize.width, kScreenSize.height - 114) collectionViewLayout:flowLayout];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarCellId];
+    [self.view addSubview:self.collectionView];
+    
 }
 
-#pragma mark - UITableViewDelegate
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+#pragma mark - UICollectionViewDelegate
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.dataArray.count;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODBazaarSearchCell *cell = [tableView dequeueReusableCellWithIdentifier:kBazaaeSearchCellId];
-    cell.nameLabel.text = self.dataArray[indexPath.row];
+    ODBazaarCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarCellId forIndexPath:indexPath];
+    ODBazaarModel *model = self.dataArray[indexPath.row];
+    [cell shodDataWithModel:model];
+    cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     return cell;
 }
 
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return CGSizeMake(kScreenSize.width, 120);
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
+    ODBazaarModel *model = self.dataArray[indexPath.row];
+    bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+    bazaarDetail.task_status = [NSString stringWithFormat:@"%@",model.task_status];
+    [self.navigationController pushViewController:bazaarDetail animated:YES];
 }
 
 #pragma mark - 试图将要出现

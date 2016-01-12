@@ -77,7 +77,6 @@
     }else{
         NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":@"1"};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-        NSLog(@"%@",signParameter);
         [self downLoadDataWithUrl:kCommunityBbsReplyListUrl paramater:signParameter withUserInfo:NO];
     }
 }

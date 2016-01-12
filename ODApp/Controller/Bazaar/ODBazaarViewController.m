@@ -35,6 +35,7 @@
 
 }
 
+#pragma mark - 加载更多
 -(void)loadMoreData
 {
     self.count ++;
@@ -283,6 +284,8 @@
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self joiningTogetherParmeters];
+    [self.dataArray removeAllObjects];
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
 }

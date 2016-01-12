@@ -17,13 +17,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.count = 1;
+    self.currentTime = 3;
     self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    [self createTimer];
     [self createRequest];
     [self navigationInit];
     [self createTextView];
     [self createAddPicButton];
-    self.count = 1;
+   
     
+}
+
+//创建定时器
+-(void)createTimer
+{
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerClick) userInfo:nil repeats:YES];
+    //先关闭定时器
+    [self.timer setFireDate:[NSDate distantFuture]];
+}
+
+//定时器相应事件
+-(void)timerClick
+{
+    self.currentTime -- ;
+    if (self.currentTime == 0) {
+        [UIView animateWithDuration:3 animations:^{
+            self.promptLabel.alpha = 0;
+            [self.promptLabel removeFromSuperview];
+        }];
+        self.currentTime = 3;
+    }
 }
 
 #pragma mark - 初始化导航
@@ -56,7 +80,21 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
-    [self joiningTogetherParmeters];
+    if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length>0) {
+        [self joiningTogetherParmeters];
+    }else{
+        [UIView animateWithDuration:1 animations:^{
+            self.promptLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-120)/2, (kScreenSize.height-30)/2, 120, 30) text:@"请输入话题标题" font:14 alignment:@"center" color:@"#ffffff" alpha:1 maskToBounds:YES];
+            self.promptLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
+            [self.view addSubview:self.promptLabel];
+            [self.timer setFireDate:[NSDate distantPast]];
+        }];
+        if (self.titleTextView.text.length == 0) {
+            self.promptLabel.text = @"请输入话题标题";
+        }else{
+             self.promptLabel.text = @"请输入话题内容";
+        }
+    }
 }
 
 #pragma mark - 创建textView
@@ -258,7 +296,12 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"imgs":self.imgsString,@"open_id":@"766148455eed214ed1f8"};
+    NSDictionary *parameter;
+    if (self.imgsString.length==0) {
+        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"open_id":@"766148455eed214ed1f8"};
+    }else{
+        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"imgs":self.imgsString,@"open_id":@"766148455eed214ed1f8"};
+    }
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:kCommunityReleaseBbsUrl parameter:signParameter];
 }
@@ -267,11 +310,15 @@
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if ([responseObject[@"status"]isEqualToString:@"success"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
         NSLog(@"%@",responseObject);
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
     }];
 }
+
 
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated

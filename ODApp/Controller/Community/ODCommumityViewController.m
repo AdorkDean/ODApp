@@ -35,6 +35,7 @@
 
 }
 
+#pragma mark - 加载更多
 -(void)loadMoreData
 {
     self.count ++;
@@ -129,7 +130,12 @@
             NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dcit[@"result"];
             NSDictionary *bbs_list = result[@"bbs_list"];
-            for (id bbsKey in bbs_list) {
+            NSArray *allkeys = [bbs_list allKeys];
+            allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NSComparisonResult result = [obj1 compare:obj2];
+                return result == NSOrderedAscending;
+            }];
+            for (id bbsKey in allkeys) {
                 NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
                 NSDictionary *itemDict = bbs_list[key];
                 ODCommunityModel *model = [[ODCommunityModel alloc]init];
@@ -232,6 +238,8 @@
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self joiningTogetherParmeters];
+    [self.dataArray removeAllObjects];
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
 }

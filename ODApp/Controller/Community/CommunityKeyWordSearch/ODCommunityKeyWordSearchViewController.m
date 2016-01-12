@@ -18,7 +18,9 @@
     [super viewDidLoad];
     
     self.count = 1;
+    self.currentTime = 3;
     self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    [self createTimer];
     [self navigationInit];
     [self createRequest];
     [self createSearchBar];
@@ -34,11 +36,34 @@
 
 }
 
-//加载更多
+
+//创建定时器
+-(void)createTimer
+{
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerClick) userInfo:nil repeats:YES];
+    //先关闭定时器
+    [self.timer setFireDate:[NSDate distantFuture]];
+}
+
+//定时器相应事件
+-(void)timerClick
+{
+    self.currentTime -- ;
+    if (self.currentTime == 0) {
+        [UIView animateWithDuration:3 animations:^{
+            self.promptLabel.alpha = 0;
+            [self.promptLabel removeFromSuperview];
+        }];
+        self.currentTime = 3;
+    }
+}
+
+
+#pragma mark - 加载更多
 -(void)loadMoreData
 {
     self.count ++;
-    NSDictionary *parameter = @{@"kw":self.searchBar.text,@"suggest":@"0",@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"kw":self.keyText,@"suggest":@"0",@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsSearchUrl paramater:signParameter];
 }
@@ -74,9 +99,15 @@
 -(void)confirmButtonClick:(UIButton *)button
 {
     if (self.searchBar.text.length>0) {
+        self.keyText = [NSString stringWithFormat:@"%@",self.searchBar.text];
         [self joiningTogetherParmeters];
     }else{
-        
+        [UIView animateWithDuration:1 animations:^{
+            self.promptLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-120)/2, (kScreenSize.height-30)/2, 120, 30) text:@"请输入搜索内容" font:14 alignment:@"center" color:@"#ffffff" alpha:1 maskToBounds:YES];
+            self.promptLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
+            [self.view addSubview:self.promptLabel];
+            [self.timer setFireDate:[NSDate distantPast]];
+        }];
     }
 }
 
@@ -112,6 +143,7 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+     self.keyText = [NSString stringWithFormat:@"%@",self.searchBar.text];
      [self joiningTogetherParmeters];
 }
 
@@ -128,7 +160,7 @@
 -(void)joiningTogetherParmeters
 {
     self.count = 1;
-    NSDictionary *parameter = @{@"kw":self.searchBar.text,@"suggest":@"0",@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"kw":self.keyText,@"suggest":@"0",@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsSearchUrl paramater:signParameter];
 }
@@ -144,7 +176,7 @@
         }
         
         if (responseObject) {
-            [self.dataArray removeAllObjects];
+           
             NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dcit[@"result"];
             NSDictionary *bbs_list = result[@"bbs_list"];
@@ -164,7 +196,6 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.userArray addObject:model];
             }
-            
             [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];

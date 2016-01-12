@@ -17,8 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.currentTime = 3;
     self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
     [self navigationInit];
+    [self createTimer];
     [self createScrollView];
     [self createTitleTextView];
     [self createTimeLabel];
@@ -28,6 +30,27 @@
     [self createRequest];
 }
 
+
+//创建定时器
+-(void)createTimer
+{
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerClick) userInfo:nil repeats:YES];
+    //先关闭定时器
+    [self.timer setFireDate:[NSDate distantFuture]];
+}
+
+//定时器相应事件
+-(void)timerClick
+{
+    self.currentTime -- ;
+    if (self.currentTime == 0) {
+        [UIView animateWithDuration:3 animations:^{
+            self.promptLabel.alpha = 0;
+            [self.promptLabel removeFromSuperview];
+        }];
+        self.currentTime = 3;
+    }
+}
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
@@ -58,9 +81,59 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
-    [self joiningTogetherParmeters];
+    NSString *startDate = self.startDateLabel.text;
+    NSString *endDate = self.endDateLabel.text;
+    NSComparisonResult dateResult =[startDate compare:endDate];
+    
+    NSString *startTime = self.startTimeLabel.text;
+    NSString *endTime = self.endTimeLabel.text;
+    NSComparisonResult timeResult = [startTime compare:endTime];
+    
+    if (self.titleTextView.text.length>0&&self.taskDetailTextView.text.length>0) {
+        if (dateResult == NSOrderedDescending){
+            [self createPromptLabelWithFrame:CGRectMake((kScreenSize.width-180)/2, (kScreenSize.height-30)/2, 180, 30) text:@"开始日期不能晚于结束日期"];
+        }else if (timeResult != NSOrderedAscending){
+            [self createPromptLabelWithFrame:CGRectMake((kScreenSize.width-180)/2, (kScreenSize.height-30)/2, 180, 30) text:@"开始时间不能晚于结束时间"];
+        }else if ([self.startTimeLabel.text compare:[self getCurrentDate:NO]]== NSOrderedAscending){
+            [self createPromptLabelWithFrame:CGRectMake((kScreenSize.width-180)/2, (kScreenSize.height-30)/2, 180, 30) text:@"开始时间不能早于当前时间"];
+        }else if ([self.endTimeLabel.text compare:[self getCurrentDate:NO]]== NSOrderedAscending){
+            [self createPromptLabelWithFrame:CGRectMake((kScreenSize.width-180)/2, (kScreenSize.height-30)/2, 180, 30) text:@"结束时间不能早于当前时间"];
+        }else{
+            [self joiningTogetherParmeters];
+        }
+    }else{
+        if (self.titleTextView.text.length == 0) {
+            [self createPromptLabelWithFrame:CGRectMake((kScreenSize.width-120)/2, (kScreenSize.height-30)/2, 120, 30) text:@"请输入任务标题"];
+        }else if (self.taskDetailTextView.text.length == 0){
+            [self createPromptLabelWithFrame:CGRectMake((kScreenSize.width-120)/2, (kScreenSize.height-30)/2, 120, 30) text:@"请输入任务内容"];
+        }
+    }
 }
 
+//获取当前时间
+- (NSString *)getCurrentDate:(BOOL)isDate
+{
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    if (isDate) {
+        [dateFormatter setDateFormat:@"  yyyy-MM-dd"];
+    }else{
+        [dateFormatter setDateFormat:@"  HH:mm"];
+    }
+    NSString *currentDateStr = [dateFormatter stringFromDate:currentDate];
+    return currentDateStr;
+}
+
+-(void)createPromptLabelWithFrame:(CGRect)frame text:(NSString *)text
+{
+    [UIView animateWithDuration:1 animations:^{
+        self.promptLabel = [ODClassMethod creatLabelWithFrame:frame text:text font:14 alignment:@"center" color:@"#ffffff" alpha:1 maskToBounds:YES];
+        self.promptLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
+        [self.view addSubview:self.promptLabel];
+        [self.timer setFireDate:[NSDate distantPast]];
+    }];
+
+}
 #pragma mark - 创建scrollView
 -(void)createScrollView
 {
@@ -93,23 +166,32 @@
         [self.scrollView addSubview:label];
     }
     
+    NSDate *currentDate = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    
+    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc]init];
+    [timeFormatter setDateFormat:@"HH:mm"];
+    NSString *timeString = [timeFormatter stringFromDate:currentDate];
+
     //开始日期label
-    self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+3.5*width, 148, 5*width, 30.5) text:nil font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
+    self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+3.5*width, 148, 5*width, 30.5) text:[NSString stringWithFormat:@"  %@",dateString] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.startDateLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.startDateLabel];
     
     //结束日期label
-    self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+3.5*width, 182.5, 5*width, 30.5) text:nil font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
+    self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+3.5*width, 182.5, 5*width, 30.5) text:[NSString stringWithFormat:@"  %@",dateString] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.endDateLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.endDateLabel];
     
     //开始时间label
-    self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+8.5*width, 148, 3.5*width, 30.5) text:nil font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
+    self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+8.5*width, 148, 3.5*width, 30.5) text:[NSString stringWithFormat:@"  %@",timeString] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.startTimeLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.startTimeLabel];
     
     //结束时间label
-    self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+8.5*width, 182.5, 3.5*width, 30.5) text:nil font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
+    self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+8.5*width, 182.5, 3.5*width, 30.5) text:[NSString stringWithFormat:@"  %@",timeString] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
     self.endTimeLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.endTimeLabel];
 }
@@ -261,7 +343,7 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text substringFromIndex:2] stringByAppendingString:[self.startTimeLabel.text substringFromIndex:1]],@"end_time":[[self.endDateLabel.text substringFromIndex:2] stringByAppendingString:[self.endTimeLabel.text substringFromIndex:1]],@"content":self.taskDetailTextView.text,@"reward_id":self.reward_id,@"open_id":@"766148455eed214ed1f8"};
+    NSDictionary *parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text substringFromIndex:2] stringByAppendingString:[self.startTimeLabel.text substringFromIndex:1]],@"end_time":[[self.endDateLabel.text substringFromIndex:2] stringByAppendingString:[self.endTimeLabel.text substringFromIndex:1]],@"content":self.taskDetailTextView.text,@"reward_id":self.reward_id,@"open_id":@"3268479568a4a7a9e4fc"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     NSLog(@"%@",signParameter);
     [self pushDataWithUrl:kBazaarReleaseTaskUrl parameter:signParameter];
@@ -271,7 +353,9 @@
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@",responseObject);
+        if ([responseObject[@"status"]isEqualToString:@"success"]) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         NSLog(@"error");

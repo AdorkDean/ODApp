@@ -32,7 +32,7 @@
     self.contentLabel.text = model.content;
     self.nameLabel.text = model.user_nick;
     //设置Label显示不同大小的字体
-    NSString *time = [[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."];
+    NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];
     NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
     [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
     self.timeLabel.attributedText = noteStr;

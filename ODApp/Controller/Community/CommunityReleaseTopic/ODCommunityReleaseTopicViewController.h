@@ -25,4 +25,8 @@
 @property(nonatomic)NSInteger count;
 @property(nonatomic,strong)UIImage *image;
 @property(nonatomic,copy)NSString *imgsString;
+@property(nonatomic,strong)NSTimer *timer;
+@property(nonatomic)NSInteger currentTime;
+@property(nonatomic,strong)UILabel *promptLabel;
+
 @end

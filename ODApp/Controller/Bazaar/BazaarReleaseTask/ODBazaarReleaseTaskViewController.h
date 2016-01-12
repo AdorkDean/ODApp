@@ -34,4 +34,8 @@
 @property(nonatomic,strong)UIDatePicker *datePicker;
 @property(nonatomic,strong)NSString *reward_id;
 
+@property(nonatomic,strong)NSTimer *timer;
+@property(nonatomic)NSInteger currentTime;
+@property(nonatomic,strong)UILabel *promptLabel;
+
 @end
