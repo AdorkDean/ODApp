@@ -20,8 +20,7 @@
     self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
     [self navigationInit];
     [self createRequest];
-    [self createTextView];
-    
+    [self createTextView];    
     
 }
 
@@ -55,16 +54,26 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
-    NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"content":self.textView.text,@"parent_id":self.parent_id,@"open_id":@"766148455eed214ed1f8"};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSLog(@"+++%@",signParameter);
-    [self pushDataWithUrl:kCommunityBbsReplyUrl parameter:signParameter];
+    if (self.textView.text.length>0) {
+        [self joiningTogetherParmeters];
+    }else{
+        [self createUIAlertControllerWithTitle:@"请输入回复内容"];
+    }
 }
 
 #pragma mark - 初始化manager
 -(void)createRequest
 {
     self.manager = [AFHTTPRequestOperationManager manager];
+}
+
+
+#pragma mark - 拼接参数
+-(void)joiningTogetherParmeters
+{
+    NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"content":self.textView.text,@"parent_id":self.parent_id,@"open_id":@"766148455eed214ed1f8"};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self pushDataWithUrl:kCommunityBbsReplyUrl parameter:signParameter];
 }
 
 #pragma mark - 提交数据
@@ -118,6 +127,14 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.textView resignFirstResponder];
+}
+
+#pragma mark - 创建提示信息
+-(void)createUIAlertControllerWithTitle:(NSString *)title
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - 试图将要出现

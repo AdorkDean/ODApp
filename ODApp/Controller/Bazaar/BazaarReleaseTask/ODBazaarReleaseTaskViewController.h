@@ -33,9 +33,6 @@
 @property(nonatomic,strong)UIView *backPickerView;
 @property(nonatomic,strong)UIDatePicker *datePicker;
 @property(nonatomic,strong)NSString *reward_id;
-
-@property(nonatomic,strong)NSTimer *timer;
-@property(nonatomic)NSInteger currentTime;
-@property(nonatomic,strong)UILabel *promptLabel;
+@property(nonatomic,copy)void(^myBlock)(NSString *refresh);
 
 @end

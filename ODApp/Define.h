@@ -32,5 +32,6 @@
 #define kCommunityBbsReplyListUrl @"http://woquapi.odong.com/1.0/bbs/reply/list"
 #define kCommunityBbsReplyUrl @"http://woquapi.odong.com/1.0/bbs/reply"
 #define kPushImageUrl @"http://woquapi.odong.com/1.0/other/base64/upload"
+#define kDeleteReplyUrl @"http://woquapi.odong.com/1.0/bbs/del"
 
 #endif /* Define_h */

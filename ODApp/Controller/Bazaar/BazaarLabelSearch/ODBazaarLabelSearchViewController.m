@@ -18,10 +18,9 @@
     [super viewDidLoad];
     
     self.count = 1;
-    self.currentTime = 3;
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self createTimer];
+
     [self navigationInit];
     [self createSearchBar];
     [self createRequest];
@@ -36,28 +35,6 @@
     }];
     
 }
-
-//创建定时器
--(void)createTimer
-{
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerClick) userInfo:nil repeats:YES];
-    //先关闭定时器
-    [self.timer setFireDate:[NSDate distantFuture]];
-}
-
-//定时器相应事件
--(void)timerClick
-{
-    self.currentTime -- ;
-    if (self.currentTime == 0) {
-        [UIView animateWithDuration:3 animations:^{
-            self.promptLabel.alpha = 0;
-            [self.promptLabel removeFromSuperview];
-        }];
-        self.currentTime = 3;
-    }
-}
-
 
 #pragma mark - 加载更多
 -(void)loadMoreData
@@ -104,14 +81,8 @@
         self.keyText = [NSString stringWithFormat:@"%@",self.searchBar.text];
         [self joiningTogetherParmeters];
     }else{
-        [UIView animateWithDuration:1 animations:^{
-            self.promptLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-120)/2, (kScreenSize.height-30)/2, 120, 30) text:@"请输入搜索内容" font:14 alignment:@"center" color:@"#ffffff" alpha:1 maskToBounds:YES];
-            self.promptLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-            [self.view addSubview:self.promptLabel];
-            [self.timer setFireDate:[NSDate distantPast]];
-        }];
+        [self createUIAlertControllerWithTitle:@"请输入搜索内容"];
     }
-
 }
 
 #pragma mark - 创建searchBar
@@ -244,6 +215,14 @@
     bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
     bazaarDetail.task_status = [NSString stringWithFormat:@"%@",model.task_status];
     [self.navigationController pushViewController:bazaarDetail animated:YES];
+}
+
+#pragma mark - 创建提示信息
+-(void)createUIAlertControllerWithTitle:(NSString *)title
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - 试图将要出现

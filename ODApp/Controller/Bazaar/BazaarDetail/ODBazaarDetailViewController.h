@@ -34,4 +34,5 @@
 @property(nonatomic,strong)UILabel *allLabel;
 @property(nonatomic,strong)NSString *task_status;
 @property(nonatomic,strong)UICollectionView *collectionView;
+@property(nonatomic,strong)UIButton *taskButton;
 @end

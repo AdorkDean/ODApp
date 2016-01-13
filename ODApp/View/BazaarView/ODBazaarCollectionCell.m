@@ -36,14 +36,17 @@
     NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
     [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
     self.timeLabel.attributedText = noteStr;
-    NSString *status = [NSString stringWithFormat:@"%@",model.task_status];
-    if ([status isEqualToString:@"1"]) {
-        self.statusLabel.text = @"任务开始";
-    }else if ([status isEqualToString:@"2"]){
-        self.statusLabel.text = @"进行中";
-    }else if ([status isEqualToString:@"-2"]){
-        self.statusLabel.text = @"任务过期";
-    }
+    self.statusLabel.text = @"任务开始";
+//    NSString *status = [NSString stringWithFormat:@"%@",model.task_status];
+//    if ([status isEqualToString:@"1"]) {
+//        self.statusLabel.text = @"任务开始";
+//    }else if ([status isEqualToString:@"2"]){
+//        self.statusLabel.text = @"进行中";
+//    }else if ([status isEqualToString:@"4"]){
+//        self.statusLabel.text = @"已完成";
+//    }else if ([status isEqualToString:@"-2"]){
+//        self.statusLabel.text = @"已过期";
+//    }
 }
 
 

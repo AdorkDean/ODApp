@@ -125,27 +125,22 @@
     [self.userView addSubview:userSignLabel];
     
     //接受任务
-    UIButton *taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-80, 20, 80, 35) target:nil sel:nil tag:0 image:nil title:@"" font:14];
-    taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
-    [taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#d0d0d0" alpha:1] forState:UIControlStateNormal];
-    taskButton.layer.masksToBounds = YES;
-    taskButton.layer.cornerRadius = 5;
-    taskButton.layer.borderWidth = 1;
-    taskButton.layer.borderColor = [ODColorConversion colorWithHexString:@"b0b0b0" alpha:1].CGColor;
+    self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-80, 20, 80, 35) target:nil sel:nil tag:0 image:nil title:@"" font:14];
+    self.taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    [self.taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#d0d0d0" alpha:1] forState:UIControlStateNormal];
+    self.taskButton.layer.masksToBounds = YES;
+    self.taskButton.layer.cornerRadius = 5;
+    self.taskButton.layer.borderWidth = 1;
+    self.taskButton.layer.borderColor = [ODColorConversion colorWithHexString:@"b0b0b0" alpha:1].CGColor;
     if ([self.task_status isEqualToString:@"1"]) {
-        [taskButton setTitle:@"接受任务" forState:UIControlStateNormal];
-        [taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-        taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd801" alpha:1];
-        [taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }else if ([self.task_status isEqualToString:@"2"]){
-        [taskButton setTitle:@"正在完成" forState:UIControlStateNormal];
-         [taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
-    }else if ([self.task_status isEqualToString:@"4"]){
-        [taskButton setTitle:@"已完成" forState:UIControlStateNormal];
+        [self.taskButton setTitle:@"接受任务" forState:UIControlStateNormal];
+        [self.taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        self.taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd801" alpha:1];
+        [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }else if ([self.task_status isEqualToString:@"-2"]){
-        [taskButton setTitle:@"任务过期" forState:UIControlStateNormal];
+        [self.taskButton setTitle:@"任务过期" forState:UIControlStateNormal];
     }
-    [self.userView addSubview:taskButton];
+    [self.userView addSubview:self.taskButton];
     
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 75, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
     [self.userView addSubview:lineView];
@@ -158,7 +153,7 @@
 
 -(void)taskButtonClick:(UIButton *)button
 {
-    NSDictionary *parameter = @{@"task_id":self.task_id};
+    NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":@"766148455eed214ed1f8"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:kBazaarAcceptTaskUrl parameter:signParameter];
 }
@@ -169,6 +164,11 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         NSLog(@"%@",responseObject);
+        if ([responseObject[@"status"]isEqualToString:@"success"]) {
+            [self.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
+            [self.taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+            self.taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+        }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
     }];
@@ -232,6 +232,9 @@
     [self.taskBottomView addSubview:rewardLabel];
     
     UILabel *taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(rewardLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.reward_name width:kScreenSize.width-25 fontSize:15]) text:detailModel.reward_name font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
+    if (detailModel.reward_name.length==0) {
+        taskRewardLabel.text = @"该任务没有奖励";
+    }
     [self.taskBottomView addSubview:taskRewardLabel];
     
     //任务时间

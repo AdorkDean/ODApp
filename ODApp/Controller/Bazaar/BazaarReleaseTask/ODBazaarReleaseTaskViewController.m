@@ -16,11 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.currentTime = 3;
+
     self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
     [self navigationInit];
-    [self createTimer];
     [self createScrollView];
     [self createTitleTextView];
     [self createTimeLabel];
@@ -31,26 +29,6 @@
 }
 
 
-//创建定时器
--(void)createTimer
-{
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerClick) userInfo:nil repeats:YES];
-    //先关闭定时器
-    [self.timer setFireDate:[NSDate distantFuture]];
-}
-
-//定时器相应事件
--(void)timerClick
-{
-    self.currentTime -- ;
-    if (self.currentTime == 0) {
-        [UIView animateWithDuration:3 animations:^{
-            self.promptLabel.alpha = 0;
-            [self.promptLabel removeFromSuperview];
-        }];
-        self.currentTime = 3;
-    }
-}
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
@@ -91,21 +69,21 @@
     
     if (self.titleTextView.text.length>0&&self.taskDetailTextView.text.length>0) {
         if (dateResult == NSOrderedDescending){
-            [self createPromptLabelWithFrame:CGRectMake((kScreenSize.width-180)/2, (kScreenSize.height-30)/2, 180, 30) text:@"开始日期不能晚于结束日期"];
-        }else if (timeResult != NSOrderedAscending){
-            [self createPromptLabelWithFrame:CGRectMake((kScreenSize.width-180)/2, (kScreenSize.height-30)/2, 180, 30) text:@"开始时间不能晚于结束时间"];
-        }else if ([self.startTimeLabel.text compare:[self getCurrentDate:NO]]== NSOrderedAscending){
-            [self createPromptLabelWithFrame:CGRectMake((kScreenSize.width-180)/2, (kScreenSize.height-30)/2, 180, 30) text:@"开始时间不能早于当前时间"];
-        }else if ([self.endTimeLabel.text compare:[self getCurrentDate:NO]]== NSOrderedAscending){
-            [self createPromptLabelWithFrame:CGRectMake((kScreenSize.width-180)/2, (kScreenSize.height-30)/2, 180, 30) text:@"结束时间不能早于当前时间"];
+            [self createUIAlertControllerWithTitle:@"结束日期不得早于开始日期"];
+        }else if (timeResult == NSOrderedDescending || timeResult == NSOrderedSame){
+            [self createUIAlertControllerWithTitle:@"结束时间不得早于开始时间"];
+        }else if ([self.startTimeLabel.text compare:[self getCurrentDate:NO]]!= NSOrderedDescending){
+            [self createUIAlertControllerWithTitle:@"开始时间不能早于当前时间"];
+        }else if ([self.endDateLabel.text compare:[self getCurrentDate:NO]]== NSOrderedAscending){
+            [self createUIAlertControllerWithTitle:@"开始日期不能早于当前日期"];
         }else{
             [self joiningTogetherParmeters];
         }
     }else{
         if (self.titleTextView.text.length == 0) {
-            [self createPromptLabelWithFrame:CGRectMake((kScreenSize.width-120)/2, (kScreenSize.height-30)/2, 120, 30) text:@"请输入任务标题"];
+            [self createUIAlertControllerWithTitle:@"请输入任务标题"];
         }else if (self.taskDetailTextView.text.length == 0){
-            [self createPromptLabelWithFrame:CGRectMake((kScreenSize.width-120)/2, (kScreenSize.height-30)/2, 120, 30) text:@"请输入任务内容"];
+            [self createUIAlertControllerWithTitle:@"请输入任务内容"];
         }
     }
 }
@@ -124,16 +102,6 @@
     return currentDateStr;
 }
 
--(void)createPromptLabelWithFrame:(CGRect)frame text:(NSString *)text
-{
-    [UIView animateWithDuration:1 animations:^{
-        self.promptLabel = [ODClassMethod creatLabelWithFrame:frame text:text font:14 alignment:@"center" color:@"#ffffff" alpha:1 maskToBounds:YES];
-        self.promptLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-        [self.view addSubview:self.promptLabel];
-        [self.timer setFireDate:[NSDate distantPast]];
-    }];
-
-}
 #pragma mark - 创建scrollView
 -(void)createScrollView
 {
@@ -343,9 +311,15 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text substringFromIndex:2] stringByAppendingString:[self.startTimeLabel.text substringFromIndex:1]],@"end_time":[[self.endDateLabel.text substringFromIndex:2] stringByAppendingString:[self.endTimeLabel.text substringFromIndex:1]],@"content":self.taskDetailTextView.text,@"reward_id":self.reward_id,@"open_id":@"3268479568a4a7a9e4fc"};
+    NSDictionary *parameter;
+    if ([self.taskRewardLabel.text isEqualToString:@"  选择任务奖励"]) {
+        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text substringFromIndex:2] stringByAppendingString:[self.startTimeLabel.text substringFromIndex:1]],@"end_time":[[self.endDateLabel.text substringFromIndex:2] stringByAppendingString:[self.endTimeLabel.text substringFromIndex:1]],@"content":self.taskDetailTextView.text,@"open_id":@"3268479568a4a7a9e4fc"};
+
+    }else{
+        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text substringFromIndex:2] stringByAppendingString:[self.startTimeLabel.text substringFromIndex:1]],@"end_time":[[self.endDateLabel.text substringFromIndex:2] stringByAppendingString:[self.endTimeLabel.text substringFromIndex:1]],@"content":self.taskDetailTextView.text,@"reward_id":self.reward_id,@"open_id":@"3268479568a4a7a9e4fc"};
+    }
+  
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSLog(@"%@",signParameter);
     [self pushDataWithUrl:kBazaarReleaseTaskUrl parameter:signParameter];
 }
 
@@ -354,6 +328,9 @@
 {
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
+            if (self.myBlock) {
+                self.myBlock([NSString stringWithFormat:@"refresh"]);
+            }
             [self.navigationController popViewControllerAnimated:YES];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -394,6 +371,15 @@
         }
     }
 }
+
+#pragma mark - 创建提示信息
+-(void)createUIAlertControllerWithTitle:(NSString *)title
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
 
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated

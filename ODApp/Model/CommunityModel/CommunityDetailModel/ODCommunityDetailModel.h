@@ -22,6 +22,7 @@
 @property(nonatomic,copy)NSString *parent_user_nick;
 @property(nonatomic,strong)NSArray *bbs_imgs;
 @property(nonatomic,strong)NSDictionary *user;
+@property(nonatomic,copy)NSString *id;
 
 
 /**

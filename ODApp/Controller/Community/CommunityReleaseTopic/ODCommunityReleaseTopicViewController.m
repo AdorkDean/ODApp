@@ -18,36 +18,13 @@
     [super viewDidLoad];
     
     self.count = 1;
-    self.currentTime = 3;
     self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
-    [self createTimer];
     [self createRequest];
     [self navigationInit];
     [self createTextView];
     [self createAddPicButton];
    
     
-}
-
-//创建定时器
--(void)createTimer
-{
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerClick) userInfo:nil repeats:YES];
-    //先关闭定时器
-    [self.timer setFireDate:[NSDate distantFuture]];
-}
-
-//定时器相应事件
--(void)timerClick
-{
-    self.currentTime -- ;
-    if (self.currentTime == 0) {
-        [UIView animateWithDuration:3 animations:^{
-            self.promptLabel.alpha = 0;
-            [self.promptLabel removeFromSuperview];
-        }];
-        self.currentTime = 3;
-    }
 }
 
 #pragma mark - 初始化导航
@@ -82,18 +59,10 @@
 {
     if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length>0) {
         [self joiningTogetherParmeters];
+    }else if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length==0){
+        [self createUIAlertControllerWithTitle:@"请输入话题内容"];
     }else{
-        [UIView animateWithDuration:1 animations:^{
-            self.promptLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-120)/2, (kScreenSize.height-30)/2, 120, 30) text:@"请输入话题标题" font:14 alignment:@"center" color:@"#ffffff" alpha:1 maskToBounds:YES];
-            self.promptLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-            [self.view addSubview:self.promptLabel];
-            [self.timer setFireDate:[NSDate distantPast]];
-        }];
-        if (self.titleTextView.text.length == 0) {
-            self.promptLabel.text = @"请输入话题标题";
-        }else{
-             self.promptLabel.text = @"请输入话题内容";
-        }
+        [self createUIAlertControllerWithTitle:@"请输入话题标题"];
     }
 }
 
@@ -182,10 +151,7 @@
                 [self presentViewController:imagePicker animated:YES completion:nil];
             }
             else {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您当前的照相机不可用" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
-                [alert addAction:sure];
-                [self presentViewController:alert animated:YES completion:nil];
+                [self createUIAlertControllerWithTitle:@"您当前的照相机不可用"];
             }
             break;
         case 1:
@@ -311,6 +277,9 @@
 {
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
+            if (self.myBlock) {
+                self.myBlock([NSString stringWithFormat:@"refresh"]);
+            }
             [self.navigationController popViewControllerAnimated:YES];
         }
         NSLog(@"%@",responseObject);
@@ -319,6 +288,14 @@
     }];
 }
 
+
+#pragma mark - 创建提示信息
+-(void)createUIAlertControllerWithTitle:(NSString *)title
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated

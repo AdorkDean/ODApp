@@ -18,6 +18,7 @@
 #import "ODHelp.h"
 #import "ODCommunityDetailReplyViewController.h"
 #import "ODCommunityDetailCell.h"
+#import "MJRefresh.h"
 
 @interface ODCommunityDetailViewController : ODBaseViewController<UITableViewDelegate,UITableViewDataSource>
 
@@ -35,6 +36,8 @@
 @property(nonatomic,strong)UIView *tabelHeaderView;
 @property(nonatomic,copy)NSString *open_id;
 @property(nonatomic)CGFloat height;
+@property(nonatomic)NSInteger count;
+@property(nonatomic,copy)void(^myBlock)(NSString *refresh);
 
 @end
 

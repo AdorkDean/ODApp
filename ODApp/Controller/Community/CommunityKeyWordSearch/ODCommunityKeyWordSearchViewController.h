@@ -25,8 +25,6 @@
 @property(nonatomic,strong)UISearchBar *searchBar;
 @property(nonatomic)NSInteger count;
 @property(nonatomic,copy)NSString *keyText;
-@property(nonatomic,strong)NSTimer *timer;
-@property(nonatomic)NSInteger currentTime;
-@property(nonatomic,strong)UILabel *promptLabel;
+
 
 @end

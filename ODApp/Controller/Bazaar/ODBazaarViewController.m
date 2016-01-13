@@ -23,6 +23,7 @@
     [self createScreeningAndSearchButton];
     [self createRequest];
     [self createCollectionView];
+    self.status = @"0";
     [self joiningTogetherParmeters];
     
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -69,6 +70,10 @@
 -(void)releaseButtonClick:(UIButton *)button
 {
     ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
+    releaseTask.myBlock = ^(NSString *release){
+        self.refresh = release;
+    };
+    NSLog(@"%@",self.refresh);
     [self.navigationController pushViewController:releaseTask animated:YES];
 }
 
@@ -76,17 +81,17 @@
 -(void)createScreeningAndSearchButton
 {
     //任务筛选
-    UIButton *screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 75, 100, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"任务筛选" font:15];
-    [screeningButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    screeningButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25);
-    screeningButton.layer.masksToBounds = YES;
-    screeningButton.layer.cornerRadius = 10;
-    screeningButton.layer.borderColor = [ODColorConversion colorWithHexString:@"484848" alpha:1].CGColor;
-    screeningButton.layer.borderWidth = 1;
-    [self.headView addSubview:screeningButton];
+    self.screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 75, 100, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"全部" font:15];
+    [self.screeningButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    self.screeningButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25);
+    self.screeningButton.layer.masksToBounds = YES;
+    self.screeningButton.layer.cornerRadius = 10;
+    self.screeningButton.layer.borderColor = [ODColorConversion colorWithHexString:@"484848" alpha:1].CGColor;
+    self.screeningButton.layer.borderWidth = 1;
+    [self.headView addSubview:self.screeningButton];
     
     UIImageView *screeningIamgeView = [ODClassMethod creatImageViewWithFrame:CGRectMake(75, 12, 16, 12) imageName:@"任务筛选下拉箭头" tag:0];
-    [screeningButton addSubview:screeningIamgeView];
+    [self.screeningButton addSubview:screeningIamgeView];
     
     UIButton *searchButton = [ODClassMethod creatButtonWithFrame:CGRectMake(115, 75, kScreenSize.width-125, 35) target:self sel:@selector(searchButtonClick:) tag:0 image:nil title:@"请输入您要搜索的关键字" font:15];
     [searchButton setTitleColor:[ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
@@ -106,7 +111,7 @@
 {
     UIViewController *controller = [[UIViewController alloc]init];
     controller.view.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
-    NSArray *array = @[@"全部",@"等待派遣",@"已派遣",@"已完成",@"已过期"];
+    NSArray *array = @[@"待派遣",@"正在完成",@"已完成",@"已过期",@"全部"];
     for (NSInteger i = 0; i < array.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setTitle:array[i] forState:UIControlStateNormal];
@@ -132,19 +137,24 @@
 {
     [self.dataArray removeAllObjects];
     if (button.tag==10) {
-        [self joiningTogetherParmeters];
-    }else if (button.tag == 11){
         self.status = @"1";
+        [self.screeningButton setTitle:@"待派遣" forState:UIControlStateNormal];
+        [self joiningTogetherParmetersWithTaskStatus];
+    }else if (button.tag == 11){
+        self.status = @"2";
+        [self.screeningButton setTitle:@"正在完成" forState:UIControlStateNormal];
         [self joiningTogetherParmetersWithTaskStatus];
     }else if (button.tag == 12){
-        self.status = @"2";
+        self.status = @"4";
+        [self.screeningButton setTitle:@"已完成" forState:UIControlStateNormal];
         [self joiningTogetherParmetersWithTaskStatus];
     }else if (button.tag == 13){
-        self.status = @"4";
+        self.status = @"-2";
+        [self.screeningButton setTitle:@"已过期" forState:UIControlStateNormal];
         [self joiningTogetherParmetersWithTaskStatus];
     }else{
-        self.status = @"-2";
-        [self joiningTogetherParmetersWithTaskStatus];
+        [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
+        [self joiningTogetherParmeters];
     }
     [self dismissViewControllerAnimated:NO completion:nil];
 }
@@ -182,7 +192,7 @@
 -(void)joiningTogetherParmeters
 {
     self.count = 1;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
 }
@@ -284,8 +294,10 @@
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self joiningTogetherParmeters];
-    [self.dataArray removeAllObjects];
+    if ([self.refresh isEqualToString:@"refresh"]) {
+        [self.collectionView.mj_header beginRefreshing];
+        [self.dataArray removeAllObjects];
+    }
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
 }
@@ -293,6 +305,7 @@
 #pragma mark - 试图将要消失
 -(void)viewWillDisappear:(BOOL)animated
 {
+    self.refresh = @"";
     [super viewWillDisappear:animated];
     self.navigationController.navigationBar.hidden = NO;
 }

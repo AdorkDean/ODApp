@@ -70,6 +70,9 @@
 -(void)publishButtonClick:(UIButton *)button
 {
     ODCommunityReleaseTopicViewController *releaseTopic = [[ODCommunityReleaseTopicViewController alloc]init];
+    releaseTopic.myBlock = ^(NSString *refresh){
+        self.refresh = refresh;
+    };
     [self.navigationController pushViewController:releaseTopic animated:YES];
 }
 
@@ -230,6 +233,9 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc]init];
+    detailController.myBlock = ^(NSString *refresh){
+        self.refresh = refresh;
+    };
     ODCommunityModel *model = self.dataArray[indexPath.row];
     detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
     [self.navigationController pushViewController:detailController animated:YES];
@@ -238,8 +244,10 @@
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
 {
-    [self joiningTogetherParmeters];
-    [self.dataArray removeAllObjects];
+    if ([self.refresh isEqualToString:@"refresh"]) {
+        [self.collectionView.mj_header beginRefreshing];
+        [self.dataArray removeAllObjects];
+    }
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
 }
@@ -247,6 +255,7 @@
 #pragma mark - 试图将要消失
 -(void)viewWillDisappear:(BOOL)animated
 {
+    self.refresh = @"";
     [super viewWillDisappear:animated];
     self.navigationController.navigationBar.hidden = NO;
 }

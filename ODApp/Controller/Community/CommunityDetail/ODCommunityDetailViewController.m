@@ -16,13 +16,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
+    
+    self.count = 1;
     self.view.backgroundColor = [UIColor whiteColor];
     [self navigationInit];
     [self createReplyButton];
     [self createRequest];
     [self joiningTogetherParmetersWithUserInfo:YES];
+       
     
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self joiningTogetherParmetersWithUserInfo:NO];
+    }];
+    
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [self loadMoreData];
+    }];
+
+    
+}
+
+#pragma mark - 加载更多
+-(void)loadMoreData
+{
+    self.count ++;
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:kCommunityBbsReplyListUrl paramater:signParameter withUserInfo:NO];
 }
 
 #pragma mark - 初始化导航
@@ -75,7 +95,8 @@
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self downLoadDataWithUrl:kCommunityBbsDetailUrl paramater:signParameter withUserInfo:YES];
     }else{
-        NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":@"1"};
+        self.count = 1;
+        NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self downLoadDataWithUrl:kCommunityBbsReplyListUrl paramater:signParameter withUserInfo:NO];
     }
@@ -113,9 +134,10 @@
                     [model setValuesForKeysWithDictionary:itemDict];
                     [self.dataArray addObject:model];
                 }
-                
-                [weakSelf.tableView reloadData];
                 [weakSelf createTableView];
+                [weakSelf.tableView reloadData];
+                [weakSelf.tableView.mj_header endRefreshing];
+                [weakSelf.tableView.mj_footer endRefreshing];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -183,7 +205,7 @@
             [imageView sd_setImageWithURL:[NSURL URLWithString:resultModel.bbs_imgs[i]]];
             [self.bbsView addSubview:imageView];
         }
-        if ([self.open_id isEqualToString:@"123"]) {
+        if (1) {
             //删除按钮
             deleteButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-50, CGRectGetMaxY(imageView.frame)+17.5, 40, 20) target:self sel:@selector(deleteButtonClick:) tag:0 image:nil title:@"删除" font:15];
             [self.bbsView addSubview:deleteButton];
@@ -194,7 +216,7 @@
         [self.bbsView addSubview:timeLabel];
       
     }else{
-        if ([self.open_id isEqualToString:@"123"]) {
+        if (1) {
             deleteButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-50, CGRectGetMaxY(bbsContentLabel.frame)+17.5, 40, 20) target:self sel:@selector(deleteButtonClick:) tag:0 image:nil title:@"删除" font:15];
             [self.bbsView addSubview:deleteButton];
         }else{
@@ -211,7 +233,14 @@
 
 -(void)deleteButtonClick:(UIButton *)button
 {
-    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除话题" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        NSDictionary *parameter = @{@"id":self.bbs_id,@"type":@"1",@"open_id":@"766148455eed214ed1f8"};
+        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter isBbs:YES];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 
@@ -250,24 +279,31 @@
     cell.timeLabel.text = [NSString stringWithFormat:@"%@ %ld楼",time,indexPath.row+1];
    
     //设置contentLabel显示不同的字体颜色
-    NSString *str = [NSString stringWithFormat:@"回复 %@ : %@",model.parent_user_nick,model.content];
-    NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:str];
-    [noteStr addAttribute:NSForegroundColorAttributeName value:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange(0, 2)];
-    [noteStr addAttribute:NSForegroundColorAttributeName value:[ODColorConversion colorWithHexString:@"#000000" alpha:1] range:NSMakeRange(3, [model.parent_user_nick length])];
-    cell.contentLabel.attributedText = noteStr;
-
-    //根据内容的多少来设置contentLabel的高度
-    CGFloat height = [ODHelp textHeightFromTextString:str width:kScreenSize.width-26 fontSize:14];
-    cell.contentLabelHeight.constant = height;
-    
-    [cell.deleteButton addTarget:self action:@selector(cellDeleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    if ([self.open_id isEqualToString:@"11"]) {
-        
-    }else{
+    CGFloat height;
+    if ([model.content isEqualToString:@"该楼层已删除"]) {
+        cell.contentLabel.text = model.content;
+        height = [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-26 fontSize:14];
+        cell.contentLabelHeight.constant = height;
         [cell.deleteButton removeFromSuperview];
         cell.timeLabelSpace.constant = 13;
-
+    }else{
+        NSString *str = [NSString stringWithFormat:@"回复 %@ : %@",model.parent_user_nick,model.content];
+        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:str];
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange(0, 2)];
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[ODColorConversion colorWithHexString:@"#000000" alpha:1] range:NSMakeRange(3, [model.parent_user_nick length])];
+        cell.contentLabel.attributedText = noteStr;
+        
+        //根据内容的多少来设置contentLabel的高度
+        height = [ODHelp textHeightFromTextString:str width:kScreenSize.width-26 fontSize:14];
+        cell.contentLabelHeight.constant = height;
+        if (1) {
+            
+        }else{
+            [cell.deleteButton removeFromSuperview];
+            cell.timeLabelSpace.constant = 13;
+        }
     }
+    [cell.deleteButton addTarget:self action:@selector(cellDeleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     self.height = 40+height+22+26;
     return cell;
 }
@@ -291,7 +327,42 @@
 
 -(void)cellDeleteButtonClick:(UIButton *)button
 {
-    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除回复" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        ODCommunityDetailCell *cell = (ODCommunityDetailCell *)button.superview.superview;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        ODCommunityDetailModel *model = self.dataArray[indexPath.row];
+        NSDictionary *parameter = @{@"id":[NSString stringWithFormat:@"%@",model.id],@"type":@"3",@"open_id":@"766148455eed214ed1f8"};
+        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter isBbs:NO];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
+
+#pragma mark－ 提交数据
+-(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isBbs:(BOOL)isBbs
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if (isBbs) {
+            NSLog(@"%@",responseObject);
+            if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                if (self.myBlock) {
+                    self.myBlock(@"refresh");
+                }
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }else{
+            NSLog(@"%@",responseObject);
+            if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                [self joiningTogetherParmetersWithUserInfo:NO];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+    }];
 }
 
 #pragma mark - 创建底部回复按钮
@@ -302,6 +373,7 @@
     [button setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.view addSubview:button];
 }
+
 
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated

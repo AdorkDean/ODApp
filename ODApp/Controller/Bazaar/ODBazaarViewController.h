@@ -26,4 +26,6 @@
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,copy)NSString *status;
 @property(nonatomic)NSInteger count;
+@property(nonatomic,strong)UIButton *screeningButton;
+@property(nonatomic,copy)NSString *refresh;
 @end
