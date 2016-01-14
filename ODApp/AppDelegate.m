@@ -21,6 +21,7 @@
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [[ODTabBarController alloc]init];
     [self.window makeKeyAndVisible];
+
     return YES;
 }
 
