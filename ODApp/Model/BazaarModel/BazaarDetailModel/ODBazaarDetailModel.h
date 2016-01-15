@@ -23,6 +23,7 @@
 @property(nonatomic,copy)NSString *reward_name;
 @property(nonatomic,copy)NSString *task_status;
 
+
 /**
  *   "task_id": 1,
  "title": "找人帮忙买车票",
