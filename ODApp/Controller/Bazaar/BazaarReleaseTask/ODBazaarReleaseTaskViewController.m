@@ -70,10 +70,15 @@
     if (self.titleTextView.text.length>0&&self.taskDetailTextView.text.length>0) {
         if (dateResult == NSOrderedDescending){
             [self createUIAlertControllerWithTitle:@"结束日期不得早于开始日期"];
-        }else if (timeResult == NSOrderedDescending || timeResult == NSOrderedSame){
-            [self createUIAlertControllerWithTitle:@"结束时间不得早于开始时间"];
-        }else if ([self.startTimeLabel.text compare:[self getCurrentDate:NO]]!= NSOrderedDescending){
-            [self createUIAlertControllerWithTitle:@"开始时间不能早于当前时间"];
+        }
+        else if (dateResult == NSOrderedSame){
+        
+            if (timeResult == NSOrderedDescending || timeResult == NSOrderedSame){
+                [self createUIAlertControllerWithTitle:@"结束时间不得早于开始时间"];
+            }else if ([self.startTimeLabel.text compare:[self getCurrentDate:NO]]!= NSOrderedDescending){
+                [self createUIAlertControllerWithTitle:@"开始时间不能早于当前时间"];
+            }
+
         }else if ([self.endDateLabel.text compare:[self getCurrentDate:NO]]== NSOrderedAscending){
             [self createUIAlertControllerWithTitle:@"开始日期不能早于当前日期"];
         }else{

@@ -1845,6 +1845,8 @@
 		B83C38D91C48A0E9007B16FB /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				B83C38E41C48A0E9007B16FB /* ODMyApplyActivity */,
+				B83C38E71C48A0E9007B16FB /* ODMyOrderRecord */,
 				B83C38DA1C48A0E9007B16FB /* banyuan.png */,
 				B83C38DB1C48A0E9007B16FB /* bianji.png */,
 				B83C38DC1C48A0E9007B16FB /* ODBindingMobileController.h */,
@@ -1855,8 +1857,6 @@
 				B83C38E11C48A0E9007B16FB /* ODInformationController.m */,
 				B83C38E21C48A0E9007B16FB /* ODLandMainController.h */,
 				B83C38E31C48A0E9007B16FB /* ODLandMainController.m */,
-				B83C38E41C48A0E9007B16FB /* ODMyApplyActivity */,
-				B83C38E71C48A0E9007B16FB /* ODMyOrderRecord */,
 				B83C38EC1C48A0E9007B16FB /* ODMyTaskController.h */,
 				B83C38ED1C48A0E9007B16FB /* ODMyTaskController.m */,
 				B83C38EE1C48A0E9007B16FB /* ODMyTopicController.h */,
