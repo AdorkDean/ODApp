@@ -23,7 +23,6 @@
     self.window.rootViewController = [[ODTabBarController alloc]init];
     [self.window makeKeyAndVisible];
     
-    
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     manager.enable = YES;
     manager.shouldResignOnTouchOutside = YES;
