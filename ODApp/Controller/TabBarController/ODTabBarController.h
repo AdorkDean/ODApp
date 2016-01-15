@@ -13,4 +13,6 @@
 
 @property(nonatomic,strong)UIImageView *imageView;
 
+@property (assign,nonatomic) NSInteger currentIndex;
+
 @end

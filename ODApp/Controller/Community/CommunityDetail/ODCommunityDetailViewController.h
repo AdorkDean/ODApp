@@ -19,6 +19,7 @@
 #import "ODCommunityDetailReplyViewController.h"
 #import "ODCommunityDetailCell.h"
 #import "MJRefresh.h"
+#import "ODPersonalCenterViewController.h"
 
 @interface ODCommunityDetailViewController : ODBaseViewController<UITableViewDelegate,UITableViewDataSource>
 

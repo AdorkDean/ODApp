@@ -9,14 +9,28 @@
 #ifndef Define_h
 #define Define_h
 
+
 #define kBazaarCellId @"ODBazaarCollectionCell"
 #define kBazaaeSearchCellId @"ODBazaarSearchCell"
 #define kBazaarDetailCellId @"ODBazaarDetailCollectionCell"
 #define kCommunityCellId @"ODCommunityCollectionCell"
 #define kCommunityDetailCellId @"ODCommunityDetailCell"
+#define kMyApplyActivityCellId @"ONMyApplyActivityCell"
+#define kMyOrderRecordCellId @"ODMyOrderRecordCell"
+
+#import "ODUserInformation.h"
 
 #define kScreenSize [UIScreen mainScreen].bounds.size
 #define kRGBAWithColor(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
+
+#define iPhone4_4S ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 960), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define iPhone5_5s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define iPhone6_6s ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(750, 1334), [[UIScreen mainScreen] currentMode].size) : NO)
+
+#define iPhone6_6sPlus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1920, 1080), [[UIScreen mainScreen] currentMode].size) : NO)
+
 
 #define kBazaarUnlimitTaskUrl @"http://woquapi.odong.com/1.0/task/list"
 #define kBazaarLabelSearchUrl @"http://woquapi.odong.com/1.0/task/tag/search"
@@ -33,5 +47,17 @@
 #define kCommunityBbsReplyUrl @"http://woquapi.odong.com/1.0/bbs/reply"
 #define kPushImageUrl @"http://woquapi.odong.com/1.0/other/base64/upload"
 #define kDeleteReplyUrl @"http://woquapi.odong.com/1.0/bbs/del"
+
+#define kHomeFoundListUrl @"http://woquapi.odong.com/1.0/bbs/list"
+
+#define kHomeFoundPictureUrl @"http://woquapi.odong.com/1.0/other/banner"
+
+#define kMyOrderRecordUrl @"http://woquapi.odong.com/1.0/store/orders"
+
+#define kMyOrderDetailUrl @"http://woquapi.odong.com/1.0/store/info/order"
+
+#define kMyApplyActivityUrl @"http://woquapi.odong.com/1.0/store/apply/my"
+
+#define kCancelMyOrderUrl @"http://woquapi.odong.com/1.0/store/cancel/order"
 
 #endif /* Define_h */

@@ -17,6 +17,7 @@
 #import "ODBazaarLabelSearchViewController.h"
 #import "ODBazaarDetailViewController.h"
 #import "MJRefresh.h"
+#import "ODPersonalCenterViewController.h"
 
 @interface ODBazaarViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIPopoverPresentationControllerDelegate>
 

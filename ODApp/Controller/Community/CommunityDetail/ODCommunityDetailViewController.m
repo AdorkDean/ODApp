@@ -315,14 +315,22 @@
 
 -(void)replyButtonClick:(UIButton *)button
 {
-    ODCommunityDetailReplyViewController *detailReply = [[ODCommunityDetailReplyViewController alloc]init];
-    detailReply.bbs_id = [NSString stringWithFormat:@"%@",self.bbs_id];
-    if ([button.titleLabel.text isEqualToString:@"回复TA"]) {
-        detailReply.parent_id = [NSString stringWithFormat:@"0"];
+    if ([ODUserInformation getData].openID) {
+        
+        ODCommunityDetailReplyViewController *detailReply = [[ODCommunityDetailReplyViewController alloc]init];
+        detailReply.bbs_id = [NSString stringWithFormat:@"%@",self.bbs_id];
+        if ([button.titleLabel.text isEqualToString:@"回复TA"]) {
+            detailReply.parent_id = [NSString stringWithFormat:@"0"];
+        }else{
+            detailReply.parent_id = [NSString stringWithFormat:@"3"];
+        }
+        [self.navigationController pushViewController:detailReply animated:YES];
+        
     }else{
-        detailReply.parent_id = [NSString stringWithFormat:@"3"];
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController pushViewController:personalCenter animated:YES];
     }
-    [self.navigationController pushViewController:detailReply animated:YES];
+
 }
 
 -(void)cellDeleteButtonClick:(UIButton *)button

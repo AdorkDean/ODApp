@@ -18,6 +18,11 @@
  类似于工厂设计模式
  */
 
+
++(UILabel *)creatLabelWithFrame:(CGRect)frame text:(NSString *)text font:(NSInteger)size alignment:(NSString *)alignment color:(NSString *)color alpha:(float)opacity;
+
+
+
 //创建label
 + (UILabel *)creatLabelWithFrame:(CGRect)frame
                             text:(NSString *)text
@@ -51,7 +56,7 @@
 
 //创建UITextView
 +(UITextView *)creatTextViewWithFrame:(CGRect)frame
-                             delegate:(id <UITextViewDelegate>)delegate
+                             delegate:(id<UITextViewDelegate>)delegate
                                   tag:(NSInteger)tag
                                  font:(NSInteger)size
                                 color:(NSString *)color

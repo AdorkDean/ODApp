@@ -21,6 +21,7 @@
 @property(nonatomic,copy)NSString *task_created_at;
 @property(nonatomic,copy)NSString *task_datetime;
 @property(nonatomic,copy)NSString *reward_name;
+@property(nonatomic,copy)NSString *task_status;
 
 /**
  *   "task_id": 1,

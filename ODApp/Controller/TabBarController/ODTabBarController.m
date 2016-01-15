@@ -7,8 +7,9 @@
 //
 
 #import "ODTabBarController.h"
-
+#import "ODPersonalCenterViewController.H"
 @interface ODTabBarController ()
+
 
 
 @end
@@ -27,7 +28,7 @@
     NSArray *controllerArray = @[@"HomeFound",@"CenterActivity",@"Bazaar",@"Commumity",@"PersonalCenter"];
     NSMutableArray *mArray = [[NSMutableArray alloc]init];
     for (NSInteger i = 0; i < controllerArray.count; i++) {
-       
+        
         NSString * str = [NSString stringWithFormat:@"OD%@ViewController",controllerArray[i]];
         Class vcClass = NSClassFromString(str);
         UIViewController *controller = [[vcClass alloc]init];
@@ -48,7 +49,7 @@
     
     NSArray *titleArray = @[@"首页发现",@"中心活动",@"欧动集市",@"欧动社区",@"个人中心"];
     NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
-  
+    
     for (NSInteger i = 0 ; i < titleArray.count; i++) {
         
         //此处必须用UIButtonTypeCustom
@@ -77,7 +78,11 @@
     NSInteger index = button.tag-1;
     button.selected = YES;
     self.selectedIndex = index;
- 
+    if (index != 4)
+    {
+        self.currentIndex = self.selectedIndex;
+    }
+    
     for (NSInteger i = 0; i<5; i++) {
         UIButton *newButton= (UIButton *)[self.imageView viewWithTag:1+i];
         if (i!=index) {
@@ -86,8 +91,6 @@
         }
     }
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

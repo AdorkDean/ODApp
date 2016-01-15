@@ -18,6 +18,7 @@
 #import "ODCommunityDetailViewController.h"
 #import "ODCommunityKeyWordSearchViewController.h"
 #import "MJRefresh.h"
+#import "ODPersonalCenterViewController.h"
 
 @interface ODCommumityViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource>
 

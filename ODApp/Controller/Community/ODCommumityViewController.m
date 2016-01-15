@@ -69,11 +69,18 @@
 
 -(void)publishButtonClick:(UIButton *)button
 {
-    ODCommunityReleaseTopicViewController *releaseTopic = [[ODCommunityReleaseTopicViewController alloc]init];
-    releaseTopic.myBlock = ^(NSString *refresh){
-        self.refresh = refresh;
-    };
-    [self.navigationController pushViewController:releaseTopic animated:YES];
+    if ([ODUserInformation getData].openID) {
+        
+        ODCommunityReleaseTopicViewController *releaseTopic = [[ODCommunityReleaseTopicViewController alloc]init];
+        releaseTopic.myBlock = ^(NSString *refresh){
+            self.refresh = refresh;
+        };
+        [self.navigationController pushViewController:releaseTopic animated:YES];
+
+    }else{
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController pushViewController:personalCenter animated:YES];
+    }
 }
 
 #pragma mark - 关键字搜索
@@ -250,6 +257,11 @@
     }
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
+    
+    
+    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+    tabBar.imageView.alpha = 1;
+
 }
 
 #pragma mark - 试图将要消失

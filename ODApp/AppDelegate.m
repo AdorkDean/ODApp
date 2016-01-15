@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ODTabBarController.h"
+#import "IQKeyboardManager.h"
 @interface AppDelegate ()
 
 @end
@@ -21,6 +22,17 @@
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = [[ODTabBarController alloc]init];
     [self.window makeKeyAndVisible];
+    
+    
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable = YES;
+    manager.shouldResignOnTouchOutside = YES;
+    manager.shouldToolbarUsesTextFieldTintColor = YES;
+    manager.enableAutoToolbar = NO;
+
+    
+    
+    
     return YES;
 }
 

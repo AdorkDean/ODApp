@@ -69,12 +69,17 @@
 
 -(void)releaseButtonClick:(UIButton *)button
 {
-    ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
-    releaseTask.myBlock = ^(NSString *release){
-        self.refresh = release;
-    };
-    NSLog(@"%@",self.refresh);
-    [self.navigationController pushViewController:releaseTask animated:YES];
+    if ([ODUserInformation getData].openID) {
+        ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
+        releaseTask.myBlock = ^(NSString *release){
+            self.refresh = release;
+        };
+        [self.navigationController pushViewController:releaseTask animated:YES];
+    }else{
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController pushViewController:personalCenter animated:YES];
+    }
+
 }
 
 #pragma mark -创建任务筛选和搜索按钮
@@ -294,6 +299,10 @@
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+    tabBar.imageView.alpha = 1;
+
     if ([self.refresh isEqualToString:@"refresh"]) {
         [self.collectionView.mj_header beginRefreshing];
         [self.dataArray removeAllObjects];

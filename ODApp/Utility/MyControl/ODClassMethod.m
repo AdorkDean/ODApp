@@ -10,6 +10,25 @@
 
 @implementation ODClassMethod
 
++(UILabel *)creatLabelWithFrame:(CGRect)frame text:(NSString *)text font:(NSInteger)size alignment:(NSString *)alignment color:(NSString *)color alpha:(float)opacity
+{
+    UILabel *label = [[UILabel alloc] initWithFrame:frame];
+    label.text = text;
+    label.font = [UIFont systemFontOfSize:size];
+    label.textColor = [ODColorConversion colorWithHexString:color alpha:opacity];
+    label.numberOfLines = 0;
+    
+    if ([alignment isEqualToString:@"left"]) {
+        label.textAlignment = NSTextAlignmentLeft;
+    }else if ([alignment isEqualToString:@"center"]){
+        label.textAlignment = NSTextAlignmentCenter;
+    }else{
+        label.textAlignment = NSTextAlignmentRight;
+    }
+    return label;
+}
+
+
 +(UILabel *)creatLabelWithFrame:(CGRect)frame text:(NSString *)text font:(NSInteger)size alignment:(NSString *)alignment color:(NSString *)color alpha:(float)opacity maskToBounds:(BOOL)maskToBounds
 {
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
@@ -35,6 +54,7 @@
     }
     return label;
 }
+
 
 + (UIButton *)creatButtonWithFrame:(CGRect)frame target:(id)target sel:(SEL)sel tag:(NSInteger)tag image:(NSString *)name title:(NSString *)title font:(NSInteger)size 
 {
@@ -107,13 +127,5 @@
 }
 
 
-+(UILabel *)setLayerWithRadius:(NSInteger)radius borderColor:(NSString *)color borderWidth:(NSInteger)width
-{
-    UILabel *label = [[UILabel alloc]init];
-    label.layer.masksToBounds = YES;
-    label.layer.cornerRadius = radius;
-    label.layer.borderColor = [ODColorConversion colorWithHexString:color alpha:1].CGColor;
-    label.layer.borderWidth = width;
-    return label;
-}
+
 @end

@@ -21,7 +21,7 @@
 
 - (void)addTitleViewWithName:(NSString *)name {
     
-    UILabel *titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 100, 30) text:name font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 100, 30) text:name font:17 alignment:@"center" color:@"#000000" alpha:1];
     titleLabel.backgroundColor = [UIColor clearColor];
     self.navigationItem.titleView = titleLabel;
 }
@@ -34,18 +34,8 @@
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     if (isLeft) {
-        if (name.length == 2) {
-            button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 60);
-        }else{
-            button.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 20);
-        }
         self.navigationItem.leftBarButtonItem = item;
     }else {
-        if (name.length == 2) {
-           button.titleEdgeInsets = UIEdgeInsetsMake(0, 60, 0, 0);
-        }else{
-            button.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
-        }
         self.navigationItem.rightBarButtonItem = item;
     }
 }
