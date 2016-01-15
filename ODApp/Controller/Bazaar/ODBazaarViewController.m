@@ -293,6 +293,7 @@
     ODBazaarModel *model = self.dataArray[indexPath.row];
     bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
     bazaarDetail.task_status = [NSString stringWithFormat:@"%@",model.task_status];
+    bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
     [self.navigationController pushViewController:bazaarDetail animated:YES];
 }
 

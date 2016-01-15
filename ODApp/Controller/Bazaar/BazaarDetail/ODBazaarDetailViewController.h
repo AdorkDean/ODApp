@@ -35,4 +35,5 @@
 @property(nonatomic,strong)NSString *task_status;
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)UIButton *taskButton;
+@property(nonatomic,copy)NSString *open_id;
 @end

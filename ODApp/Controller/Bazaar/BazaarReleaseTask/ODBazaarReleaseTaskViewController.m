@@ -308,15 +308,16 @@
     self.manager = [AFHTTPRequestOperationManager manager];
 }
 
+
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
     NSDictionary *parameter;
     if ([self.taskRewardLabel.text isEqualToString:@"  选择任务奖励"]) {
-        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text substringFromIndex:2] stringByAppendingString:[self.startTimeLabel.text substringFromIndex:1]],@"end_time":[[self.endDateLabel.text substringFromIndex:2] stringByAppendingString:[self.endTimeLabel.text substringFromIndex:1]],@"content":self.taskDetailTextView.text,@"open_id":@"3268479568a4a7a9e4fc"};
+        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text substringFromIndex:2] stringByAppendingString:[self.startTimeLabel.text substringFromIndex:1]],@"end_time":[[self.endDateLabel.text substringFromIndex:2] stringByAppendingString:[self.endTimeLabel.text substringFromIndex:1]],@"content":self.taskDetailTextView.text,@"open_id":[ODUserInformation getData].openID};
 
     }else{
-        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text substringFromIndex:2] stringByAppendingString:[self.startTimeLabel.text substringFromIndex:1]],@"end_time":[[self.endDateLabel.text substringFromIndex:2] stringByAppendingString:[self.endTimeLabel.text substringFromIndex:1]],@"content":self.taskDetailTextView.text,@"reward_id":self.reward_id,@"open_id":@"3268479568a4a7a9e4fc"};
+        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text substringFromIndex:2] stringByAppendingString:[self.startTimeLabel.text substringFromIndex:1]],@"end_time":[[self.endDateLabel.text substringFromIndex:2] stringByAppendingString:[self.endTimeLabel.text substringFromIndex:1]],@"content":self.taskDetailTextView.text,@"reward_id":self.reward_id,@"open_id":[ODUserInformation getData].openID};
     }
   
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
