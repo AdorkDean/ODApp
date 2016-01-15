@@ -20,6 +20,9 @@
 
 #import "ODUserInformation.h"
 
+
+
+
 #define kScreenSize [UIScreen mainScreen].bounds.size
 #define kRGBAWithColor(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]
 
@@ -31,7 +34,7 @@
 
 #define iPhone6_6sPlus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1920, 1080), [[UIScreen mainScreen] currentMode].size) : NO)
 
-
+//#define   
 #define kBazaarUnlimitTaskUrl @"http://woquapi.odong.com/1.0/task/list"
 #define kBazaarLabelSearchUrl @"http://woquapi.odong.com/1.0/task/tag/search"
 #define kBazaarReleaseTaskUrl @"http://woquapi.odong.com/1.0/task/task/add"

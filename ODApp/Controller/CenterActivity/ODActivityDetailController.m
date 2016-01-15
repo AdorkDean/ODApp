@@ -48,7 +48,7 @@
    
      [self getData];
     
-    
+    self.openId = [ODUserInformation getData].openID;
     
        
 }

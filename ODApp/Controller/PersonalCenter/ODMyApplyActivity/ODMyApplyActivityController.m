@@ -154,7 +154,11 @@
     
     vc.activityId = [NSString stringWithFormat:@"%@", model.activity_id];
     vc.storeId = [NSString stringWithFormat:@"%@", model.store_id];
-//    vc.open_id = self.open_id;
+    
+    NSString *openId = [ODUserInformation getData].openID;
+    
+    
+    vc.openId = openId;
     
     
     [self.navigationController pushViewController:vc animated:YES];
