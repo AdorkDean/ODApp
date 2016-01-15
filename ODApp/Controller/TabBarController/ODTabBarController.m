@@ -10,8 +10,6 @@
 #import "ODPersonalCenterViewController.H"
 @interface ODTabBarController ()
 
-
-
 @end
 
 @implementation ODTabBarController
