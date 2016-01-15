@@ -168,24 +168,34 @@
 -(void)taskButtonClick:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"删除任务"]) {
-        
+        NSDictionary *parameter = @{@"task_id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation getData].openID};
+        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        NSLog(@"%@",signParameter);
+        [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter isDelete:YES];
     }else{
         NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation getData].openID};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-        [self pushDataWithUrl:kBazaarAcceptTaskUrl parameter:signParameter];
+        [self pushDataWithUrl:kBazaarAcceptTaskUrl parameter:signParameter isDelete:NO];
     }
 }
 
 #pragma mark - 提交数据
--(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
+-(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isDelete:(BOOL)isDelete
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@",responseObject);
-        if ([responseObject[@"status"]isEqualToString:@"success"]) {
-            [self.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
-            [self.taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
-            self.taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+
+        if (isDelete) {
+            if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+            
+        }else{
+            if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                [self.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
+                [self.taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+                self.taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+            }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
