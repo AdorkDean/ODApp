@@ -133,7 +133,11 @@
     self.taskButton.layer.borderWidth = 1;
     self.taskButton.layer.borderColor = [ODColorConversion colorWithHexString:@"b0b0b0" alpha:1].CGColor;
     
-    if ([[ODUserInformation getData].openID isEqualToString:detailModel.open_id]) {
+    NSLog(@"%@",self.open_id);
+    NSLog(@"++++++++%@",[ODUserInformation getData].openID);
+    if ([[ODUserInformation getData].openID isEqualToString:self.open_id]) {
+        [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
         [self.taskButton setTitle:@"删除任务" forState:UIControlStateNormal];
         [self.userView addSubview:self.taskButton];
     }else{
@@ -163,9 +167,13 @@
 
 -(void)taskButtonClick:(UIButton *)button
 {
-    NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":@"766148455eed214ed1f8"};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self pushDataWithUrl:kBazaarAcceptTaskUrl parameter:signParameter];
+    if ([button.titleLabel.text isEqualToString:@"删除任务"]) {
+        
+    }else{
+        NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation getData].openID};
+        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        [self pushDataWithUrl:kBazaarAcceptTaskUrl parameter:signParameter];
+    }
 }
 
 #pragma mark - 提交数据

@@ -1510,10 +1510,10 @@
 		B83C385B1C48A0E9007B16FB /* BazaarReleaseTask */ = {
 			isa = PBXGroup;
 			children = (
-				B83C385C1C48A0E9007B16FB /* ODBazaarReleaseRewardViewController.h */,
-				B83C385D1C48A0E9007B16FB /* ODBazaarReleaseRewardViewController.m */,
 				B83C385E1C48A0E9007B16FB /* ODBazaarReleaseTaskViewController.h */,
 				B83C385F1C48A0E9007B16FB /* ODBazaarReleaseTaskViewController.m */,
+				B83C385C1C48A0E9007B16FB /* ODBazaarReleaseRewardViewController.h */,
+				B83C385D1C48A0E9007B16FB /* ODBazaarReleaseRewardViewController.m */,
 			);
 			path = BazaarReleaseTask;
 			sourceTree = "<group>";
