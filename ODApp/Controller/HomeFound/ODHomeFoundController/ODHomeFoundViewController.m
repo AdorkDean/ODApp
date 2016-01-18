@@ -28,6 +28,7 @@
     self.dataArray = [[NSMutableArray alloc] init];
     self.userArray = [[NSMutableArray alloc] init];
     
+    
     [self navigationInit];
     
     [self createCollectionView];
@@ -94,10 +95,12 @@
                 ODCommunityModel *model = [[ODCommunityModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
+    
             }
+
             
             [weakSelf mySort:weakSelf.dataArray];
-     
+    
             
             
             NSDictionary *users = result[@"users"];

@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self navigationInit];
@@ -225,6 +227,7 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
             }
+            
             [weakSelf.collectionView reloadData];
             [self.collectionView.mj_header endRefreshing];
             [self.collectionView.mj_footer endRefreshing];
@@ -264,11 +267,30 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     ODBazaarCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarCellId forIndexPath:indexPath];
     ODBazaarModel *model = self.dataArray[indexPath.row];
+    
+    [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+    
     [cell shodDataWithModel:model];
     cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     return cell;
+}
+
+- (void)othersInformationClick:(UIButton *)button
+{
+
+    ODBazaarCollectionCell *cell = (ODBazaarCollectionCell *)button.superview.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODBazaarModel *model = self.dataArray[indexPath.row];
+    
+    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+    
+    
+    vc.open_id = model.open_id;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -294,6 +316,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+
     ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
     ODBazaarModel *model = self.dataArray[indexPath.row];
     bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
@@ -303,6 +326,7 @@
         self.refresh = del;
     };
     [self.navigationController pushViewController:bazaarDetail animated:YES];
+
 }
 
 #pragma mark - 试图将要出现

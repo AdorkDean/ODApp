@@ -57,12 +57,9 @@
 - (void)cancelOrderButtonClick:(UIButton *)button
 {
 
-    NSString *openId = [ODUserInformation getData].openID;
-  
-    
     self.managers = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameter = @{@"open_id":openId,@"order_id":self.order_id};
+    NSDictionary *parameter = @{@"open_id":self.open_id,@"order_id":self.order_id};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {

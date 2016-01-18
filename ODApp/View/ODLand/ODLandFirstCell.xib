@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -81,12 +81,13 @@
             </constraints>
             <size key="customSize" width="516" height="91"/>
             <connections>
+                <outlet property="centerImageView" destination="aPq-zG-j3y" id="1OK-Ic-l1g"/>
                 <outlet property="nickNameLabel" destination="YKp-Jl-7gc" id="4dW-pl-lSv"/>
                 <outlet property="qrcodeImageView" destination="Cpz-Y8-mXb" id="i2b-2z-XQ4"/>
                 <outlet property="signatureLabel" destination="7DA-lh-xNf" id="IEd-Y7-gtY"/>
                 <outlet property="userImageView" destination="O7F-aF-Voa" id="r7y-n5-I4H"/>
             </connections>
-            <point key="canvasLocation" x="786" y="198.5"/>
+            <point key="canvasLocation" x="523" y="180.5"/>
         </collectionViewCell>
     </objects>
     <resources>

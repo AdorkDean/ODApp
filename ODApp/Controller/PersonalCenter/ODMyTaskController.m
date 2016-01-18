@@ -77,9 +77,7 @@
     [self creatScroller];
     
     
-    self.openID = [ODUserInformation getData].openID;
-    
-    
+       
 }
 
 #pragma mark - lifeCycle
@@ -106,7 +104,7 @@
     [self.view addSubview:self.headView];
     
     
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:@"我的话题" font:17 alignment:@"center" color:@"#000000" alpha:1];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 180) / 2, 28, 180, 20) text:@"我的任务" font:17 alignment:@"center" color:@"#000000" alpha:1];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
@@ -423,7 +421,7 @@
     
     self.firstManager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"1" , @"open_id":@"3268479568a4a7a9e4fc"};
+    NSDictionary *parameters = @{@"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"1" , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
@@ -482,7 +480,7 @@
     
     self.secondManager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"2" , @"open_id":@"3268479568a4a7a9e4fc"};
+    NSDictionary *parameters = @{@"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"2" , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     

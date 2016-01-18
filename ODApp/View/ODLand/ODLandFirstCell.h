@@ -10,6 +10,7 @@
 
 @interface ODLandFirstCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *centerImageView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 @property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;

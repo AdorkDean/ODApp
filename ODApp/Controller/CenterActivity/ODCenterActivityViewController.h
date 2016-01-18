@@ -14,6 +14,6 @@
 @property (nonatomic , copy) NSString *centerName;
 @property (nonatomic , copy) NSString *storeId;
 
-
+@property (nonatomic, assign) BOOL isChange;
 
 @end

@@ -234,6 +234,7 @@
     }else if (indexPath.section == 1){
         
         ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
+        vc.open_id = self.model.open_id;
         
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -241,16 +242,24 @@
         
         ODMyApplyActivityController *vc = [[ODMyApplyActivityController alloc] init];
         
+        vc.open_id = self.model.open_id;
+        
         [self.navigationController pushViewController:vc animated:YES];
     }
 else if (indexPath.section ==3) {
     
         ODMyTopicController *vc = [[ODMyTopicController alloc] init];
+    
+        vc.open_id = self.model.open_id;
+    
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.section ==4) {
         
         ODMyTaskController *vc = [[ODMyTaskController alloc] init];
+        
+        vc.open_id = self.model.open_id;
+        
         [self.navigationController pushViewController:vc animated:YES];
         
     }

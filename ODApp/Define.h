@@ -60,4 +60,6 @@
 
 #define kCancelMyOrderUrl @"http://woquapi.odong.com/1.0/store/cancel/order"
 
+#define kOthersInformationUrl @"http://woquapi.odong.com/1.0/user/info"
+
 #endif /* Define_h */

@@ -19,7 +19,11 @@
 #import "MJRefresh.h"
 #import "ODPersonalCenterViewController.h"
 
+#import "ODOthersInformationController.h"
+
 @interface ODBazaarViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIPopoverPresentationControllerDelegate>
+
+@property (nonatomic, copy) NSString *open_id;
 
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
@@ -29,4 +33,6 @@
 @property(nonatomic)NSInteger count;
 @property(nonatomic,strong)UIButton *screeningButton;
 @property(nonatomic,copy)NSString *refresh;
+
+
 @end
