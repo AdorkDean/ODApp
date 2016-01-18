@@ -22,8 +22,8 @@
     [self navigationInit];
     [self createReplyButton];
     [self createRequest];
-    [self joiningTogetherParmetersWithUserInfo:YES];
-       
+    [self createTableView];
+    [self joiningTogetherParmetersWithUserInfo:NO];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self joiningTogetherParmetersWithUserInfo:NO];
@@ -32,17 +32,16 @@
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [self loadMoreData];
     }];
-
-    
+ 
 }
 
 #pragma mark - 加载更多
 -(void)loadMoreData
 {
     self.count ++;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kCommunityBbsReplyListUrl paramater:signParameter withUserInfo:NO];
+    [self downLoadTableDataWithUrl:kCommunityBbsReplyListUrl paramater:signParameter];
 }
 
 #pragma mark - 初始化导航
@@ -93,22 +92,21 @@
     if (userInfo) {
         NSDictionary *parameter = @{@"id":self.bbs_id};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-        [self downLoadDataWithUrl:kCommunityBbsDetailUrl paramater:signParameter withUserInfo:YES];
+        [self downLoadDataWithUrl:kCommunityBbsDetailUrl paramater:signParameter];
     }else{
         self.count = 1;
         NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-        [self downLoadDataWithUrl:kCommunityBbsReplyListUrl paramater:signParameter withUserInfo:NO];
+        [self downLoadTableDataWithUrl:kCommunityBbsReplyListUrl paramater:signParameter];
     }
 }
 
 #pragma mark - 请求发帖人信息
--(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)paramater withUserInfo:(BOOL)userInfo
+-(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)paramater
 {
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:paramater success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        if (userInfo) {
             if (responseObject) {
                 NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
                 NSDictionary *result = dict[@"result"];
@@ -122,25 +120,36 @@
                 [weakSelf.userArray addObject:userModel];
                 [weakSelf createUserInfoView];
                 [weakSelf createBBSDetailView];
-                [self joiningTogetherParmetersWithUserInfo:NO];
-            }
-        }else{
-            if (responseObject) {
-                [self.dataArray removeAllObjects];
-                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-                NSArray *result = dict[@"result"];
-                for (NSDictionary *itemDict in result) {
-                    ODCommunityDetailModel *model = [[ODCommunityDetailModel alloc]init];
-                    [model setValuesForKeysWithDictionary:itemDict];
-                    [self.dataArray addObject:model];
-                }
-                [weakSelf createTableView];
+                weakSelf.tableView.tableHeaderView = weakSelf.tabelHeaderView;
                 [weakSelf.tableView reloadData];
                 [weakSelf.tableView.mj_header endRefreshing];
                 [weakSelf.tableView.mj_footer endRefreshing];
             }
-        }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    }];
+}
+
+-(void)downLoadTableDataWithUrl:(NSString *)url paramater:(NSDictionary *)paramater
+{
+    __weak typeof (self)weakSelf = self;
+    [self.manager GET:url parameters:paramater success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if (responseObject) {
+            
+            if (weakSelf.count == 1) {
+                [self.dataArray removeAllObjects];
+            }
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSArray *result = dict[@"result"];
+            for (NSDictionary *itemDict in result) {
+                ODCommunityDetailModel *model = [[ODCommunityDetailModel alloc]init];
+                [model setValuesForKeysWithDictionary:itemDict];
+                [weakSelf.dataArray addObject:model];
+            }
+            [weakSelf joiningTogetherParmetersWithUserInfo:YES];
+        }
+
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
     }];
 }
 
@@ -254,7 +263,6 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:@"ODCommunityDetailCell" bundle:nil] forCellReuseIdentifier:kCommunityDetailCellId];
     [self.view addSubview:self.tableView];
-    self.tableView.tableHeaderView = self.tabelHeaderView;
 }
 
 #pragma mark - tableViewDelegate
