@@ -170,9 +170,14 @@
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter isDelete:YES];
     }else{
-        NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation getData].openID};
-        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-        [self pushDataWithUrl:kBazaarAcceptTaskUrl parameter:signParameter isDelete:NO];
+        if ([ODUserInformation getData].openID) {
+            NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation getData].openID};
+            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+            [self pushDataWithUrl:kBazaarAcceptTaskUrl parameter:signParameter isDelete:NO];
+        }else{
+            ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+            [self.navigationController pushViewController:personalCenter animated:YES];
+        }
     }
 }
 
@@ -191,6 +196,7 @@
             }
             
         }else{
+            NSLog(@"%@",responseObject);
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 [self.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
                 [self.taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];

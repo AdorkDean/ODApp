@@ -164,6 +164,7 @@
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [self joiningTogetherParmeters];
     }
+    [self.collectionView.mj_header beginRefreshing];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
@@ -312,6 +313,8 @@
     tabBar.imageView.alpha = 1;
 
     if ([self.refresh isEqualToString:@"release"]) {
+        self.status = @"0";
+        [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [self.collectionView.mj_header beginRefreshing];
         [self.dataArray removeAllObjects];
     }else if ([self.refresh isEqualToString:@"del"]){
