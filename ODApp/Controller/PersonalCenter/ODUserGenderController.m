@@ -9,7 +9,7 @@
 #import "ODUserGenderController.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
-#import "ODUserInformation.h"
+
 @interface ODUserGenderController ()
 
 @property (nonatomic , strong) UIView *headView;

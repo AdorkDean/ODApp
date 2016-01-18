@@ -11,7 +11,6 @@
 @interface ODChangePassWordController : ODBaseViewController
 
 @property (nonatomic , copy) NSString *topTitle;
-@property(nonatomic,copy)void(^informationBlock)(NSString *phone , NSString *password);
 
 
 

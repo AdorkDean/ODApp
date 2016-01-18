@@ -10,7 +10,6 @@
 #import "ODBindingMobileView.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
-#import "ODUserInformation.h"
 @interface ODBindingMobileController ()
 
 @property (nonatomic , strong) ODBindingMobileView *bindMobileView;

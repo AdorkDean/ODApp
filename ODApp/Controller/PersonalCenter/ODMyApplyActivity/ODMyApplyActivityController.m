@@ -137,6 +137,7 @@
     ONMyApplyActivityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMyApplyActivityCellId forIndexPath:indexPath];
     ODMyApplyActivityModel *model = self.dataArray[indexPath.row];
     cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    cell.layer.cornerRadius = 7;
     [cell showDataWithModel:model];
     
     return cell;

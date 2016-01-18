@@ -109,8 +109,8 @@
 
     UICollectionViewFlowLayout *flowLayout = [[ UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 5;
-    flowLayout.minimumLineSpacing = 5;
-    flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    flowLayout.minimumLineSpacing = 3;
+    flowLayout.sectionInset = UIEdgeInsetsMake(3, 3, 3, 3);
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)collectionViewLayout:flowLayout];
     
     self.collectionView.delegate = self;
@@ -155,7 +155,7 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return CGSizeMake(kScreenSize.width, 170);
+    return CGSizeMake(kScreenSize.width - 6, 170);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

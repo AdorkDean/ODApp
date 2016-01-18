@@ -21,7 +21,6 @@
 #import "ODMyTaskController.h"
 #import "ODMyApplyActivityController.h"
 #import "ODMyOrderRecordController.h"
-#import "ODUserInformation.h"
 @interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
@@ -63,11 +62,19 @@
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"mobile":@"18501765896",@"passwd":@"123456"};
+<<<<<<< HEAD
+    NSDictionary *parameters = @{@"mobile":@"17751503997",@"passwd":@"123456"};
+=======
+    
+    NSString *openId = [ODUserInformation getData].openID;
+    
+    
+    NSDictionary *parameters = @{@"open_id":openId};
+>>>>>>> 8696bdf088abd53fef2abbf8c7df8a2cc7dfdbc8
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.odong.com/1.0/user/login1";
+    NSString *url = @"http://woquapi.odong.com/1.0/user/info";
     
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -158,17 +165,11 @@
             cell.signatureLabel.text = self.model.sign;
             
         }
-    
-        
         
         return cell;
-        
-        
-        
 
     }else{
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
-        
         
         if (indexPath.section == 1) {
             cell.titleLabel.text = @"我的中心预约";
@@ -188,24 +189,18 @@
           
             cell.titleLabel.text = @"分享我们的app";
             cell.coverImageView.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd802" alpha:1];
-
             
         }else if (indexPath.section == 7) {
-            
             
             cell.titleLabel.text = @"      退出登录";
             cell.titleLabel.textAlignment = NSTextAlignmentCenter;
             [cell.arrowImageView removeFromSuperview];
           
         }
-
-        
+    
         return cell;
         
-
     }
-   
-    
 }
 
 
@@ -219,33 +214,29 @@
     return 1;
 }
 
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
         
         ODInformationController *vc = [[ODInformationController alloc] init];
         
+<<<<<<< HEAD
         vc.informationBlock = ^(NSString *phone , NSString *password){
             
             self.phoneNumber = phone;
             self.password = password;
             
-            
-            
         };
-
-        
         
         vc.phoneNumber = self.phoneNumber;
         vc.password = self.password;
+=======
+>>>>>>> 8696bdf088abd53fef2abbf8c7df8a2cc7dfdbc8
         
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.section == 1){
         
         ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
-        
-
         
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -253,18 +244,14 @@
         
         ODMyApplyActivityController *vc = [[ODMyApplyActivityController alloc] init];
         
-
-        
         [self.navigationController pushViewController:vc animated:YES];
     }
 else if (indexPath.section ==3) {
-        
-        
+    
         ODMyTopicController *vc = [[ODMyTopicController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.section ==4) {
-        
         
         ODMyTaskController *vc = [[ODMyTaskController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
@@ -274,13 +261,14 @@ else if (indexPath.section ==3) {
          ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
          tabBar.selectedIndex = 0;
         [self.navigationController popViewControllerAnimated:YES];
-//        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
-//         
+       
          [ODUserInformation getData].openID = nil;
+<<<<<<< HEAD
 //
 //         
 //        [self.navigationController pushViewController:vc animated:YES];
-         
+=======
+>>>>>>> 8696bdf088abd53fef2abbf8c7df8a2cc7dfdbc8
          
          if (self.navigationController.viewControllers.count > 1)
          {
@@ -288,7 +276,6 @@ else if (indexPath.section ==3) {
          }
          else
          {
-//             ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
              tabBar.selectedIndex = tabBar.currentIndex;
              
              NSInteger index = tabBar.selectedIndex;
@@ -298,14 +285,8 @@ else if (indexPath.section ==3) {
                  newButton.selected = i == index;
              }
          }
-
-         
-         
-        
     }
 }
-
-
 
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -315,14 +296,14 @@ else if (indexPath.section ==3) {
     }else {
          return CGSizeMake(kScreenSize.width , 30);
     }
-   
-    
 }
+
 //动态设置每个分区的缩进量
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
+
 //动态设置每个分区的最小行间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
@@ -331,17 +312,19 @@ else if (indexPath.section ==3) {
     
    
 }
+
 //动态返回不同区的列间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
     return 0;
 }
+
 //动态设置区头的高度(根据不同的分区)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     return CGSizeMake(0,0);
-    
 }
+
 //动态设置区尾的高度(根据不同的分区)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
@@ -350,10 +333,7 @@ else if (indexPath.section ==3) {
     }else{
         return CGSizeMake(0, 5);
     }
-   
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

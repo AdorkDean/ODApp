@@ -98,8 +98,9 @@
     UIImageView *screeningIamgeView = [ODClassMethod creatImageViewWithFrame:CGRectMake(75, 12, 16, 12) imageName:@"任务筛选下拉箭头" tag:0];
     [self.screeningButton addSubview:screeningIamgeView];
     
-    UIButton *searchButton = [ODClassMethod creatButtonWithFrame:CGRectMake(115, 75, kScreenSize.width-125, 35) target:self sel:@selector(searchButtonClick:) tag:0 image:nil title:@"请输入您要搜索的关键字" font:15];
+    UIButton *searchButton = [ODClassMethod creatButtonWithFrame:CGRectMake(115, 75, kScreenSize.width-125, 35) target:self sel:@selector(searchButtonClick:) tag:0 image:nil title:@"  请输入您要搜索的关键字" font:15];
     [searchButton setTitleColor:[ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+    searchButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     searchButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     searchButton.layer.masksToBounds = YES;
     searchButton.layer.cornerRadius = 10;
@@ -108,7 +109,7 @@
     searchButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [self.headView addSubview:searchButton];
     
-    UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(20, 10, 16, 16) imageName:@"搜索放大镜icon" tag:0];
+    UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(7, 10, 16, 16) imageName:@"搜索放大镜icon" tag:0];
     [searchButton addSubview:searchImageView];
 }
 

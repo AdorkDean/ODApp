@@ -69,13 +69,18 @@
     [self.dataArray removeAllObjects];
     
     
-    self.manager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"mobile":self.phoneNumber,@"passwd":self.password};
+    
+    
+    self.manager = [AFHTTPRequestOperationManager manager];
+    NSString *openId = [ODUserInformation getData].openID;
+    
+    
+    NSDictionary *parameters = @{@"open_id":openId};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.odong.com/1.0/user/login1";
+    NSString *url = @"http://woquapi.odong.com/1.0/user/info";
     
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -217,9 +222,6 @@
 -(void)fanhui:(UIButton *)sender
 {
     
-    if (self.informationBlock) {
-        self.informationBlock(self.phoneNumber, self.password);
-    }
     
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -318,8 +320,8 @@
         
         
     self.informationView.phoneLabel.text = text;
-    self.phoneNumber = text;
-            
+
+        
         
     };
 
@@ -335,15 +337,7 @@
     
     ODChangePassWordController *vc = [[ODChangePassWordController alloc] init];
     
-    vc.informationBlock = ^(NSString *phone , NSString *password){
-        
-        self.phoneNumber = phone;
-        self.password = password;
-        
-        
-              
-    };
-
+  
     vc.topTitle = @"修改密码";
     
     [self.navigationController pushViewController:vc animated:YES];
