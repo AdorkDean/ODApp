@@ -132,9 +132,7 @@
     self.taskButton.layer.cornerRadius = 5;
     self.taskButton.layer.borderWidth = 1;
     self.taskButton.layer.borderColor = [ODColorConversion colorWithHexString:@"b0b0b0" alpha:1].CGColor;
-    
-    NSLog(@"%@",self.open_id);
-    NSLog(@"++++++++%@",[ODUserInformation getData].openID);
+
     if ([[ODUserInformation getData].openID isEqualToString:self.open_id]) {
         [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
@@ -170,7 +168,6 @@
     if ([button.titleLabel.text isEqualToString:@"删除任务"]) {
         NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation getData].openID};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-        NSLog(@"%@",signParameter);
         [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter isDelete:YES];
     }else{
         NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation getData].openID};

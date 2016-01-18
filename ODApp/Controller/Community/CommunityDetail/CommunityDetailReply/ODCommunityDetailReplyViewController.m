@@ -71,7 +71,7 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"content":self.textView.text,@"parent_id":self.parent_id,@"open_id":@"766148455eed214ed1f8"};
+    NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"content":self.textView.text,@"parent_id":self.parent_id,@"open_id":[ODUserInformation getData].openID};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:kCommunityBbsReplyUrl parameter:signParameter];
 }

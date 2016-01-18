@@ -23,6 +23,7 @@
 @property(nonatomic,strong)NSArray *bbs_imgs;
 @property(nonatomic,strong)NSDictionary *user;
 @property(nonatomic,copy)NSString *id;
+@property(nonatomic,copy)NSString *open_id;
 
 
 /**

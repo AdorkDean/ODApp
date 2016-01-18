@@ -264,9 +264,9 @@
 {
     NSDictionary *parameter;
     if (self.imgsString.length==0) {
-        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"open_id":@"766148455eed214ed1f8"};
+        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"open_id":[ODUserInformation getData].openID};
     }else{
-        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"imgs":self.imgsString,@"open_id":@"766148455eed214ed1f8"};
+        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"imgs":self.imgsString,@"open_id":[ODUserInformation getData].openID};
     }
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:kCommunityReleaseBbsUrl parameter:signParameter];
