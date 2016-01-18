@@ -62,15 +62,13 @@
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     
-<<<<<<< HEAD
-    NSDictionary *parameters = @{@"mobile":@"17751503997",@"passwd":@"123456"};
-=======
+
     
     NSString *openId = [ODUserInformation getData].openID;
     
     
     NSDictionary *parameters = @{@"open_id":openId};
->>>>>>> 8696bdf088abd53fef2abbf8c7df8a2cc7dfdbc8
+
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
@@ -220,18 +218,17 @@
         
         ODInformationController *vc = [[ODInformationController alloc] init];
         
-<<<<<<< HEAD
-        vc.informationBlock = ^(NSString *phone , NSString *password){
-            
-            self.phoneNumber = phone;
-            self.password = password;
-            
-        };
-        
-        vc.phoneNumber = self.phoneNumber;
-        vc.password = self.password;
-=======
->>>>>>> 8696bdf088abd53fef2abbf8c7df8a2cc7dfdbc8
+
+//        vc.informationBlock = ^(NSString *phone , NSString *password){
+//            
+//            self.phoneNumber = phone;
+//            self.password = password;
+//            
+//        };
+//        
+//        vc.phoneNumber = self.phoneNumber;
+//        vc.password = self.password;
+
         
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.section == 1){
@@ -263,12 +260,11 @@ else if (indexPath.section ==3) {
         [self.navigationController popViewControllerAnimated:YES];
        
          [ODUserInformation getData].openID = nil;
-<<<<<<< HEAD
+
 //
 //         
 //        [self.navigationController pushViewController:vc animated:YES];
-=======
->>>>>>> 8696bdf088abd53fef2abbf8c7df8a2cc7dfdbc8
+
          
          if (self.navigationController.viewControllers.count > 1)
          {

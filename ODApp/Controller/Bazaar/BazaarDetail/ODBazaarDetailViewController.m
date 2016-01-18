@@ -168,7 +168,7 @@
 -(void)taskButtonClick:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"删除任务"]) {
-        NSDictionary *parameter = @{@"task_id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation getData].openID};
+        NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation getData].openID};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         NSLog(@"%@",signParameter);
         [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter isDelete:YES];
