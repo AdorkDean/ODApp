@@ -71,19 +71,26 @@
         if (dateResult == NSOrderedDescending){
             [self createUIAlertControllerWithTitle:@"结束日期不得早于开始日期"];
         }
+        else if ([self.endDateLabel.text compare:[self getCurrentDate:NO]]== NSOrderedAscending){
+            [self createUIAlertControllerWithTitle:@"开始日期不能早于当前日期"];
+        }
         else if (dateResult == NSOrderedSame){
         
             if (timeResult == NSOrderedDescending || timeResult == NSOrderedSame){
                 [self createUIAlertControllerWithTitle:@"结束时间不得早于开始时间"];
-            }else if ([self.startTimeLabel.text compare:[self getCurrentDate:NO]]!= NSOrderedDescending){
+            }
+            else if ([self.startTimeLabel.text compare:[self getCurrentDate:NO]]!= NSOrderedDescending){
                 [self createUIAlertControllerWithTitle:@"开始时间不能早于当前时间"];
             }
-
-        }else if ([self.endDateLabel.text compare:[self getCurrentDate:NO]]== NSOrderedAscending){
-            [self createUIAlertControllerWithTitle:@"开始日期不能早于当前日期"];
-        }else{
+            else{
+                [self joiningTogetherParmeters];
+            }
+        }
+        
+        else{
             [self joiningTogetherParmeters];
         }
+
     }else{
         if (self.titleTextView.text.length == 0) {
             [self createUIAlertControllerWithTitle:@"请输入任务标题"];
@@ -215,7 +222,7 @@
     NSLocale *locale = [[NSLocale alloc]initWithLocaleIdentifier:@"zh_CN"];
     self.datePicker.locale = locale;
     //只能选择大于当前时间的日期
-    [self.datePicker setMinimumDate:[NSDate date]];
+//    [self.datePicker setMinimumDate:[NSDate date]];
     [self.backPickerView addSubview:self.datePicker];
     
     UIButton *cancelPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 150, kScreenSize.width/2-4, 50) target:self sel:@selector(cancelPickerButtonClick:) tag:0 image:nil title:@"取消" font:16];
@@ -249,6 +256,7 @@
         default:
             break;
     }
+    [self.backPickerView removeFromSuperview];
 }
 
 //取消datePickerView
@@ -326,6 +334,7 @@
     }
   
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    NSLog(@"%@",signParameter);
     [self pushDataWithUrl:kBazaarReleaseTaskUrl parameter:signParameter];
 }
 

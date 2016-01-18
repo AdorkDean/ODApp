@@ -94,6 +94,8 @@
                 ODCommunityModel *model = [[ODCommunityModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
+                
+                
             }
             
             NSDictionary *users = result[@"users"];
