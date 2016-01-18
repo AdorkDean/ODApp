@@ -36,4 +36,5 @@
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)UIButton *taskButton;
 @property(nonatomic,copy)NSString *open_id;
+@property(nonatomic,copy)void(^myBlock)(NSString *del);
 @end

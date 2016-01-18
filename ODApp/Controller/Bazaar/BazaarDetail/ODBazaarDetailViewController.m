@@ -184,6 +184,9 @@
 
         if (isDelete) {
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                if (self.myBlock) {
+                    self.myBlock([NSString stringWithFormat:@"del"]);
+                }
                 [self.navigationController popViewControllerAnimated:YES];
             }
             

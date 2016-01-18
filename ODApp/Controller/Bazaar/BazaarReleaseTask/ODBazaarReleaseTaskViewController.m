@@ -344,7 +344,7 @@
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             if (self.myBlock) {
-                self.myBlock([NSString stringWithFormat:@"refresh"]);
+                self.myBlock([NSString stringWithFormat:@"release"]);
             }
             [self.navigationController popViewControllerAnimated:YES];
         }

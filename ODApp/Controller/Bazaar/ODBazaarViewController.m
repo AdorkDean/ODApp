@@ -39,8 +39,9 @@
 #pragma mark - 加载更多
 -(void)loadMoreData
 {
+    NSLog(@"%@",self.status);
     self.count ++;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
 }
@@ -159,6 +160,7 @@
         [self.screeningButton setTitle:@"已过期" forState:UIControlStateNormal];
         [self joiningTogetherParmetersWithTaskStatus];
     }else{
+        self.status = @"0";
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [self joiningTogetherParmeters];
     }
@@ -168,7 +170,8 @@
 #pragma mark - 根据任务状态拼接参数
 -(void)joiningTogetherParmetersWithTaskStatus
 {
-    NSDictionary *parameter = @{@"task_status":self.status};
+    self.count = 1;
+    NSDictionary *parameter = @{@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
 }
@@ -295,6 +298,9 @@
     bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
     bazaarDetail.task_status = [NSString stringWithFormat:@"%@",model.task_status];
     bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
+    bazaarDetail.myBlock = ^(NSString *del){
+        self.refresh = del;
+    };
     [self.navigationController pushViewController:bazaarDetail animated:YES];
 }
 
@@ -305,7 +311,10 @@
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.imageView.alpha = 1;
 
-    if ([self.refresh isEqualToString:@"refresh"]) {
+    if ([self.refresh isEqualToString:@"release"]) {
+        [self.collectionView.mj_header beginRefreshing];
+        [self.dataArray removeAllObjects];
+    }else if ([self.refresh isEqualToString:@"del"]){
         [self.collectionView.mj_header beginRefreshing];
         [self.dataArray removeAllObjects];
     }

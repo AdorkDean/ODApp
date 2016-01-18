@@ -94,9 +94,11 @@
                 ODCommunityModel *model = [[ODCommunityModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
-                
-                
             }
+            
+            [weakSelf mySort:weakSelf.dataArray];
+     
+            
             
             NSDictionary *users = result[@"users"];
             for (id userKey in users) {
@@ -113,6 +115,26 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
     }];
+}
+
+-(NSMutableArray *)mySort:(NSMutableArray *)mArray
+{
+    
+    NSInteger i ,j ,count;
+    NSObject *temp;
+    count = mArray.count+1;
+    for (i = count - 1; i >= 0; i--) {
+        for (j= 0 ; j < i - 1 ; j++) {
+            ODCommunityModel *model1 = [self.dataArray objectAtIndex:j];
+            ODCommunityModel *model2 = [self.dataArray objectAtIndex:j+1];
+            if ([model1.view_num compare:model2.view_num]<0) {
+                temp = [mArray objectAtIndex:j];
+                [mArray replaceObjectAtIndex:j withObject:[mArray objectAtIndex:j+1]];
+                [mArray replaceObjectAtIndex:j+1 withObject:temp];
+            }
+        }
+    }
+    return mArray;
 }
 
 - (void)getcycleScrollViewRequest
