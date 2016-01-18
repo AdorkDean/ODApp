@@ -15,7 +15,7 @@
 #import "ODBazaarModel.h"
 #import "UIImageView+WebCache.h"
 #import "ODBazaarDetailViewController.h"
-#import "ODUserInformation.h"
+
 @interface ODMyTaskController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
 @property(nonatomic , strong) UIView *headView;

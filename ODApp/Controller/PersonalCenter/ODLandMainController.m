@@ -21,7 +21,6 @@
 #import "ODMyTaskController.h"
 #import "ODMyApplyActivityController.h"
 #import "ODMyOrderRecordController.h"
-#import "ODUserInformation.h"
 @interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
@@ -63,11 +62,19 @@
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     
+<<<<<<< HEAD
     NSDictionary *parameters = @{@"mobile":@"17751503997",@"passwd":@"123456"};
+=======
+    
+    NSString *openId = [ODUserInformation getData].openID;
+    
+    
+    NSDictionary *parameters = @{@"open_id":openId};
+>>>>>>> 8696bdf088abd53fef2abbf8c7df8a2cc7dfdbc8
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.odong.com/1.0/user/login1";
+    NSString *url = @"http://woquapi.odong.com/1.0/user/info";
     
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -213,6 +220,7 @@
         
         ODInformationController *vc = [[ODInformationController alloc] init];
         
+<<<<<<< HEAD
         vc.informationBlock = ^(NSString *phone , NSString *password){
             
             self.phoneNumber = phone;
@@ -222,6 +230,8 @@
         
         vc.phoneNumber = self.phoneNumber;
         vc.password = self.password;
+=======
+>>>>>>> 8696bdf088abd53fef2abbf8c7df8a2cc7dfdbc8
         
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.section == 1){
@@ -251,12 +261,14 @@ else if (indexPath.section ==3) {
          ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
          tabBar.selectedIndex = 0;
         [self.navigationController popViewControllerAnimated:YES];
-//        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
-//         
+       
          [ODUserInformation getData].openID = nil;
+<<<<<<< HEAD
 //
 //         
 //        [self.navigationController pushViewController:vc animated:YES];
+=======
+>>>>>>> 8696bdf088abd53fef2abbf8c7df8a2cc7dfdbc8
          
          if (self.navigationController.viewControllers.count > 1)
          {
@@ -264,7 +276,6 @@ else if (indexPath.section ==3) {
          }
          else
          {
-//             ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
              tabBar.selectedIndex = tabBar.currentIndex;
              
              NSInteger index = tabBar.selectedIndex;

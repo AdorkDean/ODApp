@@ -9,7 +9,7 @@
 #import "ODUserNickNameController.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
-#import "ODUserInformation.h"
+
 @interface ODUserNickNameController ()
 
 @property (nonatomic , strong) UIView *headView;

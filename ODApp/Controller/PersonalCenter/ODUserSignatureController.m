@@ -9,7 +9,7 @@
 #import "ODUserSignatureController.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
-#import "ODUserInformation.h"
+
 @interface ODUserSignatureController ()<UITextViewDelegate>
 
 @property (nonatomic , strong) UIView *headView;

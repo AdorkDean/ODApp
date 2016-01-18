@@ -201,10 +201,7 @@
       
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             
-            if (self.informationBlock) {
-                self.informationBlock(self.registView.phoneNumber.text , self.registView.password.text);
-            }
-
+        
             
             
             [self.navigationController popViewControllerAnimated:YES];
