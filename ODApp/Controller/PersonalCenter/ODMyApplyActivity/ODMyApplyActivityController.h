@@ -25,7 +25,7 @@
 
 @interface ODMyApplyActivityController : ODBaseViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
-
+@property (nonatomic, copy) NSString *open_id;
 
 @property (nonatomic, strong) UIView *headView;
 

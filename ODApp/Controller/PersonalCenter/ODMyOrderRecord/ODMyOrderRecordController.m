@@ -45,7 +45,7 @@
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"#f3f3f3"];
     [self.view addSubview:self.headView];
     
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160) / 2, 28, 160, 20) text:@"我的预约纪录" font:17 alignment:@"center" color:@"#000000" alpha:1];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160) / 2, 28, 160, 20) text:self.centerTitle font:17 alignment:@"center" color:@"#000000" alpha:1];
     [self.headView addSubview:label];
     
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28, 32, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
@@ -70,12 +70,8 @@
 
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-  
-    
-    NSString *openId = [ODUserInformation getData].openID;
    
-    
-    NSDictionary *parameter = @{@"open_id":openId,@"page":@"1"};
+    NSDictionary *parameter = @{@"open_id":self.open_id,@"page":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
@@ -164,7 +160,7 @@
     ODMyOrderDetailController *vc = [[ODMyOrderDetailController alloc] init];
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
     
-   
+    vc.open_id = self.open_id;
     vc.order_id = [NSString stringWithFormat:@"%@",model.order_id];
     
     [self.navigationController pushViewController:vc animated:YES];

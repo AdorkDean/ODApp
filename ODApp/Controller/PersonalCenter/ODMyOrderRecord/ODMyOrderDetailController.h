@@ -17,6 +17,8 @@
 
 @interface ODMyOrderDetailController : ODBaseViewController
 
+@property (nonatomic, copy) NSString *open_id;
+
 @property (nonatomic, strong) UIView *headView;
 
 @property (nonatomic, strong) UIView *orderView;

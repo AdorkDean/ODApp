@@ -52,6 +52,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.isChange = NO;
     
     self.centerNumber = 1;
     
@@ -68,7 +69,7 @@
 
     [self navigationInit];
     [self createCollectionView];
-    
+    [self getCenter];
    
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self downRefresh];
@@ -127,7 +128,11 @@
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.imageView.alpha = 1;
 
-     [self.collectionView.mj_header beginRefreshing];
+    if (self.isChange == YES) {
+        [self.collectionView.mj_header beginRefreshing];
+    }
+    
+    
 
 }
 
@@ -161,7 +166,7 @@
             
             
             ChoseCenterModel *model = self.centerArray[self.centerNumber - 1];
-            NSString *storeId = [NSString stringWithFormat:@"%d" , model.storeId];
+            NSString *storeId = [NSString stringWithFormat:@"%ld" , (long)model.storeId];
             self.storeId = storeId;
             self.centerName = model.name;
             [self getLunBoPicture];
@@ -357,6 +362,8 @@
 
 - (void)searchButtonClick:(UIButton *)sender
 {
+    
+    self.isChange = YES;
     
     ODChoseCenterController *vc = [[ODChoseCenterController alloc] init];
     

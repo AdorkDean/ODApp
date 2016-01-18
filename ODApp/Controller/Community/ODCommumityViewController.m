@@ -204,6 +204,9 @@
     ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommunityCellId forIndexPath:indexPath];
     ODCommunityModel *model = self.dataArray[indexPath.row];
     cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    
+    [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+    
     [cell showDateWithModel:model];
     for (NSInteger i = 0; i < self.userArray.count; i++) {
         ODCommunityModel *userModel = self.userArray[i];
@@ -212,7 +215,21 @@
             [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
         }
     }
+    
+    
     return cell;
+}
+
+- (void)othersInformationClick:(UIButton *)button{
+
+    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview;
+    NSIndexPath *indexpath = [self.collectionView indexPathForCell:cell];
+    ODCommunityModel *model = self.userArray[indexpath.row];
+    
+    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+    vc.open_id = model.open_id;
+
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

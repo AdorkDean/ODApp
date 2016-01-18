@@ -21,7 +21,9 @@
 
 @interface ODMyOrderRecordController : ODBaseViewController<UICollectionViewDataSource,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
+@property (nonatomic, copy)NSString *centerTitle;
 
+@property (nonatomic, copy) NSString *open_id;
 
 @property (nonatomic, strong)UIView *headView;
 

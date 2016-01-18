@@ -10,8 +10,10 @@
 
 @interface ODMyTopicController : ODBaseViewController
 
+@property (nonatomic, copy) NSString *centerTitle;
+
 @property (nonatomic , copy) NSString *refresh;
 
-
+@property (nonatomic, copy) NSString *open_id;
 
 @end
