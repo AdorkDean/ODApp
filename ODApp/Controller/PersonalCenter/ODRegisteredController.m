@@ -188,8 +188,10 @@
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
          
             ODLandMainController *vc = [[ODLandMainController alloc] init];
-            vc.phoneNumber = self.registView.phoneNumber.text;
-            vc.password = self.registView.password.text;
+            NSMutableDictionary *dic = responseObject[@"result"];
+            NSString *openId = dic[@"open_id"];
+            
+            [ODUserInformation getData].openID = openId;
             [self.navigationController pushViewController:vc animated:YES];
             
         }

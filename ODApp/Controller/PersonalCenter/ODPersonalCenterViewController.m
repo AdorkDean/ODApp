@@ -17,7 +17,7 @@
 #import "ODLandMainController.h"
 #import "ODTabBarController.h"
 #import "ODChangePassWordController.h"
-#import "ODUserInformation.h"
+
 @interface ODPersonalCenterViewController ()<UITableViewDataSource , UITableViewDelegate>
 
 @property (nonatomic , strong) UIView *headView;
@@ -254,9 +254,6 @@
       
              ODLandMainController *vc = [[ODLandMainController alloc] init];
             
-            vc.phoneNumber = self.landView.accountTextField.text;
-            vc.password = self.landView.passwordTextField.text;
-            
             
             
             NSMutableDictionary *dic = responseObject[@"result"];
@@ -287,7 +284,7 @@
                     newButton.selected = i == index;
                 }
                
-//                   [self.navigationController pushViewController:vc animated:YES];
+                   [self.navigationController pushViewController:vc animated:YES];
             }
 
          

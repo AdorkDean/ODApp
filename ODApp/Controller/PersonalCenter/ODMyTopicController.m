@@ -14,7 +14,7 @@
 #import "ODCommunityCollectionCell.h"
 #import "ODCommunityModel.h"
 #import "ODCommunityDetailViewController.h"
-#import "ODUserInformation.h"
+
 @interface ODMyTopicController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
 @property(nonatomic , strong) UIView *headView;
