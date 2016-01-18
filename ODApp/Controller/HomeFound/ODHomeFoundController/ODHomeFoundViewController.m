@@ -95,16 +95,12 @@
                 ODCommunityModel *model = [[ODCommunityModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
-<<<<<<< HEAD
-     
+    
             }
-            
-=======
-            }
+
             
             [weakSelf mySort:weakSelf.dataArray];
-     
->>>>>>> 9f5f036c3e5aa98c6b76d6720bc72665b75efc29
+    
             
             
             NSDictionary *users = result[@"users"];

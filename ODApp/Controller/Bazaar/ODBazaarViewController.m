@@ -315,17 +315,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-<<<<<<< HEAD
 
-
-        ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
-        ODBazaarModel *model = self.dataArray[indexPath.row];
-        
-        bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
-        bazaarDetail.task_status = [NSString stringWithFormat:@"%@",model.task_status];
-        bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
-        [self.navigationController pushViewController:bazaarDetail animated:YES];
-=======
     ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
     ODBazaarModel *model = self.dataArray[indexPath.row];
     bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
@@ -335,7 +325,7 @@
         self.refresh = del;
     };
     [self.navigationController pushViewController:bazaarDetail animated:YES];
->>>>>>> 9f5f036c3e5aa98c6b76d6720bc72665b75efc29
+
 }
 
 #pragma mark - 试图将要出现
