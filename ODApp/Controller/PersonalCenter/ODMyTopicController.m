@@ -100,7 +100,7 @@
     [self.view addSubview:self.headView];
     
     
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 180) / 2, 28, 180, 20) text:self.centerTitle font:17 alignment:@"center" color:@"#000000" alpha:1];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 180) / 2, 28, 180, 20) text:@"我的话题" font:17 alignment:@"center" color:@"#000000" alpha:1];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     

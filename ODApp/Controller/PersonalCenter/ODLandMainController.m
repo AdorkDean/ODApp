@@ -21,6 +21,7 @@
 #import "ODMyTaskController.h"
 #import "ODMyApplyActivityController.h"
 #import "ODMyOrderRecordController.h"
+#import "ODUserEvaluationController.h"
 @interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
@@ -219,23 +220,14 @@
         
         ODInformationController *vc = [[ODInformationController alloc] init];
         
-
-//        vc.informationBlock = ^(NSString *phone , NSString *password){
-//            
-//            self.phoneNumber = phone;
-//            self.password = password;
-//            
-//        };
-//        
-//        vc.phoneNumber = self.phoneNumber;
-//        vc.password = self.password;
-
+    [self.navigationController pushViewController:vc animated:YES];
         
-        [self.navigationController pushViewController:vc animated:YES];
+        
     }else if (indexPath.section == 1){
         
         ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
         vc.open_id = self.model.open_id;
+        vc.centerTitle = @"我的中心预约";
         
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -263,6 +255,18 @@ else if (indexPath.section ==3) {
         
         [self.navigationController pushViewController:vc animated:YES];
         
+    }else if (indexPath.section == 5) {
+        
+        ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
+        
+        vc.typeTitle = @"我收到的评价";
+        vc.openId = [ODUserInformation getData].openID;
+        
+        
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
     }
      else if (indexPath.section ==7) {
          ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
@@ -271,9 +275,7 @@ else if (indexPath.section ==3) {
        
          [ODUserInformation getData].openID = nil;
 
-//
-//         
-//        [self.navigationController pushViewController:vc animated:YES];
+
 
          
          if (self.navigationController.viewControllers.count > 1)
