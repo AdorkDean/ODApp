@@ -30,7 +30,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mima.png" translatesAutoresizingMaskIntoConstraints="NO" id="uXA-gM-Gec">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mima" translatesAutoresizingMaskIntoConstraints="NO" id="uXA-gM-Gec">
                     <rect key="frame" x="30" y="231" width="25" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="GhQ-wp-bVS"/>
@@ -65,7 +65,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zhanghu.png" translatesAutoresizingMaskIntoConstraints="NO" id="GOL-v0-DR9">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zhanghu" translatesAutoresizingMaskIntoConstraints="NO" id="GOL-v0-DR9">
                     <rect key="frame" x="30" y="171" width="25" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="25" id="GwO-mm-8a6"/>
@@ -133,7 +133,7 @@
         </view>
     </objects>
     <resources>
-        <image name="mima.png" width="50" height="50"/>
-        <image name="zhanghu.png" width="50" height="50"/>
+        <image name="mima" width="50" height="50"/>
+        <image name="zhanghu" width="50" height="50"/>
     </resources>
 </document>

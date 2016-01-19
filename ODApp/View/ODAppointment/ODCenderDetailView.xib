@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
@@ -49,7 +50,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="didian.png" translatesAutoresizingMaskIntoConstraints="NO" id="g0J-WV-Sx0">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="didian" translatesAutoresizingMaskIntoConstraints="NO" id="g0J-WV-Sx0">
                     <rect key="frame" x="15" y="235" width="15" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="Pc3-69-cMl"/>
@@ -95,7 +96,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shijian.png" translatesAutoresizingMaskIntoConstraints="NO" id="scO-Xu-FFt">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shijian" translatesAutoresizingMaskIntoConstraints="NO" id="scO-Xu-FFt">
                     <rect key="frame" x="15" y="284" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="VhU-4u-8cn"/>
@@ -125,14 +126,14 @@
                         <constraint firstAttribute="height" constant="150" id="ZUJ-lQ-3dG"/>
                     </constraints>
                 </scrollView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dianhua.png" translatesAutoresizingMaskIntoConstraints="NO" id="HNR-6G-KPk">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dianhua" translatesAutoresizingMaskIntoConstraints="NO" id="HNR-6G-KPk">
                     <rect key="frame" x="15" y="196" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="e5h-ee-oGa"/>
                         <constraint firstAttribute="width" constant="20" id="eRA-Y8-mGu"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dianpu.png" translatesAutoresizingMaskIntoConstraints="NO" id="ggY-Rn-wEc">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dianpu" translatesAutoresizingMaskIntoConstraints="NO" id="ggY-Rn-wEc">
                     <rect key="frame" x="15" y="160" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="WDU-Y2-tld"/>
@@ -253,9 +254,9 @@
         </view>
     </objects>
     <resources>
-        <image name="dianhua.png" width="98" height="86"/>
-        <image name="dianpu.png" width="1024" height="1024"/>
-        <image name="didian.png" width="72" height="93"/>
-        <image name="shijian.png" width="90" height="90"/>
+        <image name="dianhua" width="98" height="86"/>
+        <image name="dianpu" width="1024" height="1024"/>
+        <image name="didian" width="72" height="93"/>
+        <image name="shijian" width="90" height="90"/>
     </resources>
 </document>
