@@ -16,6 +16,7 @@
 		9D14AA171C2AA88B00696929 /* LunBoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D14AA161C2AA88B00696929 /* LunBoModel.m */; };
 		9D4DF64A1C3A5651001A4434 /* ODlandingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D4DF6491C3A5651001A4434 /* ODlandingView.m */; };
 		9D4DF64C1C3A5669001A4434 /* ODlandingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D4DF64B1C3A5669001A4434 /* ODlandingView.xib */; };
+		9D5EBA221C4DD08A00581A66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9D5EBA211C4DD08A00581A66 /* Assets.xcassets */; };
 		9D6498331C31342A005CFAF8 /* CenterDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D6498311C31342A005CFAF8 /* CenterDetailCell.m */; };
 		9D6498341C31342A005CFAF8 /* CenterDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D6498321C31342A005CFAF8 /* CenterDetailCell.xib */; };
 		9D68D8271C43832D00BD3FD2 /* ODTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D68D8251C43832D00BD3FD2 /* ODTopicCell.m */; };
@@ -336,7 +337,6 @@
 		B83C39501C48A0E9007B16FB /* ODTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C39021C48A0E9007B16FB /* ODTabBarController.m */; };
 		B83C6B671C224F640063ED92 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B661C224F640063ED92 /* main.m */; };
 		B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B691C224F640063ED92 /* AppDelegate.m */; };
-		B83C6B6C1C224F640063ED92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B83C6B6B1C224F640063ED92 /* Assets.xcassets */; };
 		B83C6B6F1C224F640063ED92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83C6B6D1C224F640063ED92 /* LaunchScreen.storyboard */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
@@ -379,6 +379,7 @@
 		9D4DF6481C3A5651001A4434 /* ODlandingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODlandingView.h; path = ../ODAppointment/ODlandingView.h; sourceTree = "<group>"; };
 		9D4DF6491C3A5651001A4434 /* ODlandingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODlandingView.m; path = ../ODAppointment/ODlandingView.m; sourceTree = "<group>"; };
 		9D4DF64B1C3A5669001A4434 /* ODlandingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ODlandingView.xib; path = ../ODAppointment/ODlandingView.xib; sourceTree = "<group>"; };
+		9D5EBA211C4DD08A00581A66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9D6498301C31342A005CFAF8 /* CenterDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterDetailCell.h; sourceTree = "<group>"; };
 		9D6498311C31342A005CFAF8 /* CenterDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterDetailCell.m; sourceTree = "<group>"; };
 		9D6498321C31342A005CFAF8 /* CenterDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterDetailCell.xib; sourceTree = "<group>"; };
@@ -803,7 +804,6 @@
 		B83C6B661C224F640063ED92 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B83C6B681C224F640063ED92 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B83C6B691C224F640063ED92 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B83C6B6B1C224F640063ED92 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B83C6B6E1C224F640063ED92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B83C6B701C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B83C6B751C224F640063ED92 /* ODAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ODAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1960,7 +1960,7 @@
 			children = (
 				B83C6B681C224F640063ED92 /* AppDelegate.h */,
 				B83C6B691C224F640063ED92 /* AppDelegate.m */,
-				B83C6B6B1C224F640063ED92 /* Assets.xcassets */,
+				9D5EBA211C4DD08A00581A66 /* Assets.xcassets */,
 				B83C6B6D1C224F640063ED92 /* LaunchScreen.storyboard */,
 				B83C6B701C224F640063ED92 /* Info.plist */,
 				B83C6B921C2252F30063ED92 /* ODApp-Prefix.pch */,
@@ -2219,7 +2219,6 @@
 				B8046E3C1C4772C200D1FEBC /* 任务攻略图文详情图二@2x.png in Resources */,
 				B8046E631C4772C200D1FEBC /* 首页浏览量icon@2x.png in Resources */,
 				B8046E561C4772C200D1FEBC /* 首页-约场地icon@1x.png in Resources */,
-				B83C6B6C1C224F640063ED92 /* Assets.xcassets in Resources */,
 				B8046E281C4772C200D1FEBC /* 登录框icon@3x.png in Resources */,
 				B8046E641C4772C200D1FEBC /* 首页浏览量icon@3x.png in Resources */,
 				B8046DBC1C4772C200D1FEBC /* 任务详情下拉按钮@2x.png in Resources */,
@@ -2335,6 +2334,7 @@
 				B8046DD11C4772C200D1FEBC /* 搜索光标icon@2x.png in Resources */,
 				B8046DEB1C4772C200D1FEBC /* 发布任务icon@1x.png in Resources */,
 				B8046DE21C4772C200D1FEBC /* 任务开始按钮中对勾@1x.png in Resources */,
+				9D5EBA221C4DD08A00581A66 /* Assets.xcassets in Resources */,
 				B8046D9B1C4772C200D1FEBC /* 中心预约icon@2x.png in Resources */,
 				B8046DF41C4772C200D1FEBC /* 标签中端按钮部分@2x.png in Resources */,
 				B8046DB71C4772C200D1FEBC /* 话题详情-回复icon@3x.png in Resources */,
