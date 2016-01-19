@@ -27,7 +27,7 @@
         self.sign = dict[@"sign"];
         self.gender = [dict[@"gender"] integerValue];
         self.my_hot_tags = dict[@"my_hot_tags"];
-        
+        self.share_download = dict[@"share_download"];
         
     }
     return self;

@@ -23,7 +23,7 @@
 @property (nonatomic , copy) NSString *sign;
 @property (nonatomic , assign) NSInteger gender;
 @property (nonatomic , strong) NSMutableArray *my_hot_tags;
-
+@property (nonatomic , strong) NSMutableDictionary *share_download;
 
 -(instancetype)initWithDict:(NSDictionary *)dict;
 
