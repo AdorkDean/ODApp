@@ -73,8 +73,11 @@
 -(void)createCollectionView
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
+
+
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width,kScreenSize.height - 64) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[ODEvaluationCell class] forCellWithReuseIdentifier:@"item"];
@@ -170,7 +173,7 @@
 -(void)navigationInit
 {
     self.view.userInteractionEnabled = YES;
-    self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
     self.navigationController.navigationBar.hidden = YES;
     
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
@@ -185,9 +188,11 @@
     
     
     // 返回button
+
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backAction:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+
     [self.headView addSubview:backButton];
     
     

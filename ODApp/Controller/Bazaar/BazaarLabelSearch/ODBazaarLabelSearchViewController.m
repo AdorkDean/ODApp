@@ -61,13 +61,13 @@
     //取消按钮
     UIButton *cancelButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(cancelButtonClick:) tag:0 image:nil title:@"取消" font:16];
     cancelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [cancelButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [cancelButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:cancelButton];
     
     //确认按钮
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 16, 60, 44) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:16];
     confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:confirmButton];
 
 }
@@ -179,7 +179,7 @@
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,114, kScreenSize.width, kScreenSize.height - 114) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarCellId];
     [self.view addSubview:self.collectionView];
     
@@ -201,7 +201,7 @@
     ODBazaarCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarCellId forIndexPath:indexPath];
     ODBazaarModel *model = self.dataArray[indexPath.row];
     [cell shodDataWithModel:model];
-    cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     return cell;
 }
 

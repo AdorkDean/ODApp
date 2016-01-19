@@ -15,7 +15,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = text;
     label.font = [UIFont systemFontOfSize:size];
-    label.textColor = [ODColorConversion colorWithHexString:color alpha:opacity];
+    label.textColor = [UIColor colorWithHexString:color alpha:opacity];
     label.numberOfLines = 0;
     
     if ([alignment isEqualToString:@"left"]) {
@@ -34,7 +34,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = text;
     label.font = [UIFont systemFontOfSize:size];
-    label.textColor = [ODColorConversion colorWithHexString:color alpha:opacity];
+    label.textColor = [UIColor colorWithHexString:color alpha:opacity];
     label.numberOfLines = 0;
     label.userInteractionEnabled = YES;
     
@@ -50,7 +50,7 @@
         label.layer.masksToBounds = YES;
         label.layer.cornerRadius = 5;
         label.layer.borderWidth = 1;
-        label.layer.borderColor = [ODColorConversion colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+        label.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
     }
     return label;
 }
@@ -90,7 +90,7 @@
 {
     UIView *view = [[UIView alloc]initWithFrame:frame];
     view.tag = tag;
-    view.backgroundColor = [ODColorConversion colorWithHexString:color alpha:1];
+    view.backgroundColor = [UIColor colorWithHexString:color alpha:1];
     return view;
 }
 + (UITextField *)creatTextFieldWithFrame:(CGRect)frame placeHolder:(NSString *)string delegate:(id<UITextFieldDelegate>)delegate tag:(NSInteger)tag
@@ -116,12 +116,12 @@
     //设置tag值
     textView.tag = tag;
     textView.font = [UIFont systemFontOfSize:size];
-    textView.backgroundColor = [ODColorConversion colorWithHexString:color alpha:opacity];
+    textView.backgroundColor = [UIColor colorWithHexString:color alpha:opacity];
     if (maskToBounds) {
         textView.layer.masksToBounds = YES;
         textView.layer.cornerRadius = 5;
         textView.layer.borderWidth = 1;
-        textView.layer.borderColor = [ODColorConversion colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+        textView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
     }
     return textView;
 }

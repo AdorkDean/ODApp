@@ -14,11 +14,11 @@
     
     self.headButton.layer.masksToBounds = YES;
     self.headButton.layer.cornerRadius = 20;
-    self.nickName.textColor = [ODColorConversion colorWithHexString:@"#000000" alpha:1];
-    self.contentLabel.textColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-    self.timeLabel.textColor = [ODColorConversion colorWithHexString:@"#b0b0b0" alpha:1];
-    [self.replyButton setTitleColor:[ODColorConversion colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
-    self.lineImageView.backgroundColor = [ODColorConversion colorWithHexString:@"#e6e6e6" alpha:1];
+    self.nickName.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.contentLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+    self.timeLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    [self.replyButton setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
+    self.lineImageView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

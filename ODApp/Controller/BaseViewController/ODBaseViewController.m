@@ -30,7 +30,7 @@
     
     UIButton *button = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 0, 100, 30) target:target sel:action tag:0 image:nil title:name font:17];
     button.backgroundColor = [UIColor clearColor];
-    [button setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:button];
     
     if (isLeft) {

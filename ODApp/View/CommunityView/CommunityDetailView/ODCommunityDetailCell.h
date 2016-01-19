@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ODColorConversion.h"
 
 @interface ODCommunityDetailCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *headButton;

@@ -14,9 +14,9 @@
     
     self.headButton.layer.masksToBounds = YES;
     self.headButton.layer.cornerRadius = 24;
-    self.titleLabel.textColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-    self.contentLabel.textColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
-    self.nameLabel.textColor = [ODColorConversion colorWithHexString:@"#000000" alpha:1];
+    self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+    self.contentLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.nameLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
 }
 
 

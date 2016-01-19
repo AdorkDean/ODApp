@@ -39,8 +39,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.view.backgroundColor = [UIColor whiteColor];
     
-     [self navigationInit];
+    [self navigationInit];
     
     
     
@@ -115,7 +116,7 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandSecondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     
@@ -187,7 +188,7 @@
         else if (indexPath.section == 6) {
           
             cell.titleLabel.text = @"分享我们的app";
-            cell.coverImageView.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd802" alpha:1];
+            cell.coverImageView.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
             
         }else if (indexPath.section == 7) {
             
@@ -242,7 +243,7 @@ else if (indexPath.section ==3) {
     
         ODMyTopicController *vc = [[ODMyTopicController alloc] init];
     
-        vc.open_id = self.model.open_id;
+    vc.open_id = self.model.open_id;
     
         [self.navigationController pushViewController:vc animated:YES];
         

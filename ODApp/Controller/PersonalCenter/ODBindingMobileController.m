@@ -65,9 +65,11 @@
     
     
     // 返回button
+
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+
     [self.headView addSubview:backButton];
     
     

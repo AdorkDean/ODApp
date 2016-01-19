@@ -175,11 +175,10 @@
     
     
     // 返回button
-    
-    
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+
     [self.headView addSubview:confirmButton];
     
 }
@@ -189,11 +188,11 @@
     
     
    self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)];
-   self.scroller.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+   self.scroller.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     
     self.activityDetailView = [ActivityDetailView getView];
   
-    self.activityDetailView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.activityDetailView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
 
     
     
@@ -217,9 +216,9 @@
     
     self.activityDetailView.informationLabel.layer.masksToBounds = YES;
     self.activityDetailView.informationLabel.layer.cornerRadius = 5;
-    self.activityDetailView.informationLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    self.activityDetailView.informationLabel.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
     self.activityDetailView.informationLabel.layer.borderWidth = 1;
-    self.activityDetailView.informationLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    self.activityDetailView.informationLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     
     
     
@@ -237,7 +236,7 @@
         [self.activityDetailView.baoMingButton setTitle:@"人数已满" forState:UIControlStateNormal];
         [ self.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
                                                      forState:UIControlStateNormal];
-        self.activityDetailView.baoMingButton.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+        self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         self.activityDetailView.baoMingButton.userInteractionEnabled = NO;
 
         
@@ -246,12 +245,12 @@
         [self.activityDetailView.baoMingButton setTitle:@"已报名" forState:UIControlStateNormal];
         [self.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
                                          forState:UIControlStateNormal];
-        self.activityDetailView.baoMingButton.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+        self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         self.activityDetailView.baoMingButton.userInteractionEnabled = NO;
         
     }else {
         
-        self.activityDetailView.baoMingButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd801" alpha:1];
+        self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
         [self.activityDetailView.baoMingButton setTitleColor:[UIColor blueColor]
                                                     forState:UIControlStateNormal];
     }
@@ -261,26 +260,26 @@
     
     self.activityDetailView.disitionLabel.layer.masksToBounds = YES;
     self.activityDetailView.disitionLabel.layer.cornerRadius = 5;
-    self.activityDetailView.disitionLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    self.activityDetailView.disitionLabel.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
     self.activityDetailView.disitionLabel.layer.borderWidth = 1;
-    self.activityDetailView.disitionLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    self.activityDetailView.disitionLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     
     
-    self.activityDetailView.titleLabel.textColor = [ODColorConversion colorWithHexString:@"#000000" alpha:1];
+    self.activityDetailView.titleLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.activityDetailView.titleLabel.text = self.model.content;
     
     
-    self.activityDetailView.beginTimeLabel.textColor = [ODColorConversion colorWithHexString:@"#8f8f8f" alpha:1];
+    self.activityDetailView.beginTimeLabel.textColor = [UIColor colorWithHexString:@"#8f8f8f" alpha:1];
     self.activityDetailView.beginTimeLabel.text = self.model.start_time;
-    self.activityDetailView.endTimeLabel.textColor = [ODColorConversion colorWithHexString:@"#8f8f8f" alpha:1];
+    self.activityDetailView.endTimeLabel.textColor = [UIColor colorWithHexString:@"#8f8f8f" alpha:1];
     self.activityDetailView.endTimeLabel.text = self.model.end_time;
     
     
-    self.activityDetailView.centerNameLabel.textColor = [ODColorConversion colorWithHexString:@"#015afe" alpha:1];
+    self.activityDetailView.centerNameLabel.textColor = [UIColor colorWithHexString:@"#015afe" alpha:1];
     self.activityDetailView.centerNameLabel.text = self.model.store_name;
     
     
-    self.activityDetailView.addressLabel.textColor = [ODColorConversion colorWithHexString:@"#015afe" alpha:1];
+    self.activityDetailView.addressLabel.textColor = [UIColor colorWithHexString:@"#015afe" alpha:1];
     self.activityDetailView.addressLabel.text = self.model.store_address;
     
     
@@ -310,7 +309,7 @@
     self.webView.delegate = self;
       self.webView.layer.masksToBounds = YES;
     self.webView.layer.cornerRadius = 5;
-    self.webView.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    self.webView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
     self.webView.layer.borderWidth = 1;
     [self.webView loadHTMLString:self.model.remark baseURL:nil];
     
