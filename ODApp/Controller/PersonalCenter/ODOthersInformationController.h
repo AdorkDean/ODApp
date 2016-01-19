@@ -16,8 +16,8 @@
 #import "ODAPIManager.h"
 #import "ODClassMethod.h"
 #import "ODMyOrderRecordController.h"
-#import "ODMyTopicController.h"
-
+#import "ODOtherTaskController.h"
+#import "ODOtherTopicViewController.h"
 
 #import "ODLandFirstCell.h"
 #import "ODLandSecondCell.h"

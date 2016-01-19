@@ -218,7 +218,6 @@
         }
     }
     
-    
     return cell;
 }
 
