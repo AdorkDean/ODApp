@@ -51,14 +51,11 @@
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
-<<<<<<< HEAD
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28, 35, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-=======
+
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16, 44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
->>>>>>> ab9b6b0ccedcaaee159908d6427c4c8f0fa3d1a6
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+
     [self.headView addSubview:backButton];
 }
 

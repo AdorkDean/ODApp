@@ -58,13 +58,10 @@
     [self.headView addSubview:label];
     
     //发布任务按钮
-<<<<<<< HEAD
-    UIButton *publishButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 110, 32,95, 20) target:self sel:@selector(publishButtonClick:) tag:0 image:nil title:@"发表话题" font:16];
-    [publishButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-=======
+
     UIButton *publishButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 110, 16,95, 44) target:self sel:@selector(publishButtonClick:) tag:0 image:nil title:@"发表话题" font:16];
-    [publishButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
->>>>>>> ab9b6b0ccedcaaee159908d6427c4c8f0fa3d1a6
+    [publishButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+
     publishButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     [self.headView addSubview:publishButton];
     

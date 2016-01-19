@@ -61,13 +61,8 @@
     [self.headView addSubview:label];
     
     //发布任务按钮
-<<<<<<< HEAD
-    UIButton *releaseButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 110, 32,95, 20) target:self sel:@selector(releaseButtonClick:) tag:0 image:nil title:@"发布任务" font:16];
-    [releaseButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-=======
     UIButton *releaseButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 110, 16,95, 44) target:self sel:@selector(releaseButtonClick:) tag:0 image:nil title:@"发布任务" font:16];
-    [releaseButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
->>>>>>> ab9b6b0ccedcaaee159908d6427c4c8f0fa3d1a6
+    [releaseButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     releaseButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     [self.headView addSubview:releaseButton];
     

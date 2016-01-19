@@ -97,13 +97,10 @@
     
     
     // 场地预约button
-<<<<<<< HEAD
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 100, 28,90, 20) target:self sel:@selector(rightClick:) tag:0 image:nil title:@"场地预约" font:17];
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-=======
+
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 100, 16,90, 44) target:self sel:@selector(rightClick:) tag:0 image:nil title:@"场地预约" font:16];
-    [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
->>>>>>> ab9b6b0ccedcaaee159908d6427c4c8f0fa3d1a6
+    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+
     
     confirmButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     
