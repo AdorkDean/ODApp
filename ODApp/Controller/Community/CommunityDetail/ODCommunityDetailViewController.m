@@ -64,7 +64,9 @@
     [self.headView addSubview:backButton];
     
     //分享按钮
-    UIButton *shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 28, 20, 20) target:self sel:@selector(shareButtonClick:) tag:0 image:@"话题详情-分享icon" title:nil font:0];
+    UIButton *shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:nil font:0];
+    UIImageView *shareImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width-37.5, 28, 20, 20) imageName:@"话题详情-分享icon" tag:0];
+    [self.headView addSubview:shareImageView];
     [self.headView addSubview:shareButton];
 }
 
