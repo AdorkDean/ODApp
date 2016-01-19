@@ -156,7 +156,7 @@
         
         ODMyTopicController *vc = [[ODMyTopicController alloc] init];
         vc.open_id = self.model.open_id;
-        vc.centerTitle = @"他发表的话题";
+      
         
         [self.navigationController pushViewController:vc animated:YES];
         
