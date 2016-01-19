@@ -302,8 +302,6 @@
 		B83C39381C48A0E9007B16FB /* ODCenterIntroduceController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C38D21C48A0E9007B16FB /* ODCenterIntroduceController.m */; };
 		B83C39391C48A0E9007B16FB /* ODHomeFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C38D51C48A0E9007B16FB /* ODHomeFoundViewController.m */; };
 		B83C393A1C48A0E9007B16FB /* ODLazyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C38D81C48A0E9007B16FB /* ODLazyViewController.m */; };
-		B83C393B1C48A0E9007B16FB /* banyuan.png in Resources */ = {isa = PBXBuildFile; fileRef = B83C38DA1C48A0E9007B16FB /* banyuan.png */; };
-		B83C393C1C48A0E9007B16FB /* bianji.png in Resources */ = {isa = PBXBuildFile; fileRef = B83C38DB1C48A0E9007B16FB /* bianji.png */; };
 		B83C393D1C48A0E9007B16FB /* ODBindingMobileController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C38DD1C48A0E9007B16FB /* ODBindingMobileController.m */; };
 		B83C393E1C48A0E9007B16FB /* ODChangePassWordController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C38DF1C48A0E9007B16FB /* ODChangePassWordController.m */; };
 		B83C393F1C48A0E9007B16FB /* ODInformationController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C38E11C48A0E9007B16FB /* ODInformationController.m */; };
@@ -319,10 +317,6 @@
 		B83C39491C48A0E9007B16FB /* ODUserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C38F71C48A0E9007B16FB /* ODUserInformation.m */; };
 		B83C394A1C48A0E9007B16FB /* ODUserNickNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C38F91C48A0E9007B16FB /* ODUserNickNameController.m */; };
 		B83C394B1C48A0E9007B16FB /* ODUserSignatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C38FB1C48A0E9007B16FB /* ODUserSignatureController.m */; };
-		B83C394C1C48A0E9007B16FB /* seemima.png in Resources */ = {isa = PBXBuildFile; fileRef = B83C38FC1C48A0E9007B16FB /* seemima.png */; };
-		B83C394D1C48A0E9007B16FB /* xian.png in Resources */ = {isa = PBXBuildFile; fileRef = B83C38FD1C48A0E9007B16FB /* xian.png */; };
-		B83C394E1C48A0E9007B16FB /* xianshimima.png in Resources */ = {isa = PBXBuildFile; fileRef = B83C38FE1C48A0E9007B16FB /* xianshimima.png */; };
-		B83C394F1C48A0E9007B16FB /* yincangmima.png in Resources */ = {isa = PBXBuildFile; fileRef = B83C38FF1C48A0E9007B16FB /* yincangmima.png */; };
 		B83C39501C48A0E9007B16FB /* ODTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C39021C48A0E9007B16FB /* ODTabBarController.m */; };
 		B83C6B671C224F640063ED92 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B661C224F640063ED92 /* main.m */; };
 		B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B691C224F640063ED92 /* AppDelegate.m */; };
@@ -757,8 +751,6 @@
 		B83C38D51C48A0E9007B16FB /* ODHomeFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeFoundViewController.m; sourceTree = "<group>"; };
 		B83C38D71C48A0E9007B16FB /* ODLazyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLazyViewController.h; sourceTree = "<group>"; };
 		B83C38D81C48A0E9007B16FB /* ODLazyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLazyViewController.m; sourceTree = "<group>"; };
-		B83C38DA1C48A0E9007B16FB /* banyuan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banyuan.png; sourceTree = "<group>"; };
-		B83C38DB1C48A0E9007B16FB /* bianji.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bianji.png; sourceTree = "<group>"; };
 		B83C38DC1C48A0E9007B16FB /* ODBindingMobileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBindingMobileController.h; sourceTree = "<group>"; };
 		B83C38DD1C48A0E9007B16FB /* ODBindingMobileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBindingMobileController.m; sourceTree = "<group>"; };
 		B83C38DE1C48A0E9007B16FB /* ODChangePassWordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODChangePassWordController.h; sourceTree = "<group>"; };
@@ -789,10 +781,6 @@
 		B83C38F91C48A0E9007B16FB /* ODUserNickNameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserNickNameController.m; sourceTree = "<group>"; };
 		B83C38FA1C48A0E9007B16FB /* ODUserSignatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserSignatureController.h; sourceTree = "<group>"; };
 		B83C38FB1C48A0E9007B16FB /* ODUserSignatureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserSignatureController.m; sourceTree = "<group>"; };
-		B83C38FC1C48A0E9007B16FB /* seemima.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = seemima.png; sourceTree = "<group>"; };
-		B83C38FD1C48A0E9007B16FB /* xian.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xian.png; sourceTree = "<group>"; };
-		B83C38FE1C48A0E9007B16FB /* xianshimima.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = xianshimima.png; sourceTree = "<group>"; };
-		B83C38FF1C48A0E9007B16FB /* yincangmima.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yincangmima.png; sourceTree = "<group>"; };
 		B83C39011C48A0E9007B16FB /* ODTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTabBarController.h; sourceTree = "<group>"; };
 		B83C39021C48A0E9007B16FB /* ODTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTabBarController.m; sourceTree = "<group>"; };
 		B83C6B621C224F640063ED92 /* ODApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1795,8 +1783,6 @@
 				C66F0C081C4CDEC6006E999B /* ODUserEvaluationController */,
 				B83C38E71C48A0E9007B16FB /* ODMyOrderRecord */,
 				B83C38E41C48A0E9007B16FB /* ODMyApplyActivity */,
-				B83C38DA1C48A0E9007B16FB /* banyuan.png */,
-				B83C38DB1C48A0E9007B16FB /* bianji.png */,
 				B83C38DC1C48A0E9007B16FB /* ODBindingMobileController.h */,
 				B83C38DD1C48A0E9007B16FB /* ODBindingMobileController.m */,
 				B83C38DE1C48A0E9007B16FB /* ODChangePassWordController.h */,
@@ -1821,10 +1807,6 @@
 				B83C38F91C48A0E9007B16FB /* ODUserNickNameController.m */,
 				B83C38FA1C48A0E9007B16FB /* ODUserSignatureController.h */,
 				B83C38FB1C48A0E9007B16FB /* ODUserSignatureController.m */,
-				B83C38FC1C48A0E9007B16FB /* seemima.png */,
-				B83C38FD1C48A0E9007B16FB /* xian.png */,
-				B83C38FE1C48A0E9007B16FB /* xianshimima.png */,
-				B83C38FF1C48A0E9007B16FB /* yincangmima.png */,
 			);
 			path = PersonalCenter;
 			sourceTree = "<group>";
@@ -2297,7 +2279,6 @@
 				B8046E4E1C4772C200D1FEBC /* 首页-去偷懒icon@2x.png in Resources */,
 				B8046DCE1C4772C200D1FEBC /* 选择标签icon@2x.png in Resources */,
 				B8046DE01C4772C200D1FEBC /* 中心活动icon默认态@2x.png in Resources */,
-				B83C394C1C48A0E9007B16FB /* seemima.png in Resources */,
 				B8046DCD1C4772C200D1FEBC /* 选择标签icon@1x.png in Resources */,
 				B8046DE81C4772C200D1FEBC /* 任务筛选下拉箭头@1x.png in Resources */,
 				B8046DE61C4772C200D1FEBC /* 任务筛选上拉箭头@2x.png in Resources */,
@@ -2316,7 +2297,6 @@
 				D425DA2B1C4E1F7E00BDD2AE /* IQKeyboardManager.bundle in Resources */,
 				B8046D951C4772C200D1FEBC /* 中心详情页icon3@2x.png in Resources */,
 				B8046DD91C4772C200D1FEBC /* 个人中心icon默认态@1x.png in Resources */,
-				B83C394E1C48A0E9007B16FB /* xianshimima.png in Resources */,
 				B8046DE11C4772C200D1FEBC /* 中心活动icon默认态@3x.png in Resources */,
 				B8046DA31C4772C200D1FEBC /* 场地预约5@1x.png in Resources */,
 				B8046E601C4772C200D1FEBC /* 首页最新话题icon@2x.png in Resources */,
@@ -2351,7 +2331,6 @@
 				9DD00BCF1C4E393300F0EE5F /* UMSocialSDKResourcesNew.bundle in Resources */,
 				B8046D931C4772C200D1FEBC /* 中心详情页icon2@3x.png in Resources */,
 				B8046DE51C4772C200D1FEBC /* 任务筛选上拉箭头@1x.png in Resources */,
-				B83C394D1C48A0E9007B16FB /* xian.png in Resources */,
 				9DD4AECE1C322C780073F595 /* ActivityDetailView.xib in Resources */,
 				B8046E621C4772C200D1FEBC /* 首页浏览量icon@1x.png in Resources */,
 				B8046DC51C4772C200D1FEBC /* 微信分享icon@2x.png in Resources */,
@@ -2420,7 +2399,6 @@
 				B8046DA81C4772C200D1FEBC /* 场地预约6@3x.png in Resources */,
 				B8046E611C4772C200D1FEBC /* 首页最新话题icon@3x.png in Resources */,
 				B80E0BF51C4751AE00F36A17 /* ONMyApplyActivityCell.xib in Resources */,
-				B83C394F1C48A0E9007B16FB /* yincangmima.png in Resources */,
 				B8046E5F1C4772C200D1FEBC /* 首页最新话题icon@1x.png in Resources */,
 				B8046DD71C4772C200D1FEBC /* 个人中心icon点击态@2x.png in Resources */,
 				B8046DD21C4772C200D1FEBC /* 搜索光标icon@3x.png in Resources */,
@@ -2432,7 +2410,6 @@
 				B8046E241C4772C200D1FEBC /* 登录文字框icon@2x.png in Resources */,
 				9DD00BCB1C4E393300F0EE5F /* UMShareEditViewControlleriPad.xib in Resources */,
 				9DD00BCA1C4E393300F0EE5F /* UMShareEditViewController.xib in Resources */,
-				B83C393B1C48A0E9007B16FB /* banyuan.png in Resources */,
 				B8046E191C4772C200D1FEBC /* 微信朋友icon@3x.png in Resources */,
 				B8046DF81C4772C200D1FEBC /* 标签右端按钮部分@3x.png in Resources */,
 				B8046E081C4772C200D1FEBC /* 欧动集市icon默认态@1x.png in Resources */,
@@ -2460,7 +2437,6 @@
 				B8046DD01C4772C200D1FEBC /* 搜索光标icon@1x.png in Resources */,
 				B8046DFB1C4772C200D1FEBC /* 标签左端按钮部分@3x.png in Resources */,
 				B8046E031C4772C200D1FEBC /* 欧动社区icon默认态@2x.png in Resources */,
-				B83C393C1C48A0E9007B16FB /* bianji.png in Resources */,
 				B8046DED1C4772C200D1FEBC /* 发布任务icon@3x.png in Resources */,
 				B8046E351C4772C200D1FEBC /* 任务攻略图文详情图一@1x.png in Resources */,
 				9DD00BC71C4E393300F0EE5F /* UMSCommentDetailController.xib in Resources */,
