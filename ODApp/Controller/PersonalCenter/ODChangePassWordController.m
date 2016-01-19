@@ -69,8 +69,14 @@
     
     
     // 返回button
+<<<<<<< HEAD
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(-10, 28,90, 20) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:17];
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+=======
+    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
+    confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+>>>>>>> ab9b6b0ccedcaaee159908d6427c4c8f0fa3d1a6
     [self.headView addSubview:confirmButton];
     
 }

@@ -16,8 +16,8 @@
 #import "ODAPIManager.h"
 #import "ODClassMethod.h"
 #import "ODMyOrderRecordController.h"
-#import "ODOtherTopicViewController.h"
-#import "ODOtherTaskController.h"
+#import "ODMyTopicController.h"
+
 
 #import "ODLandFirstCell.h"
 #import "ODLandSecondCell.h"
@@ -38,5 +38,7 @@
 @property (nonatomic, strong) ODUserModel *model;
 
 @property (nonatomic, strong) UIView *headView;
+
+@property (nonatomic, assign) BOOL isOther;
 
 @end

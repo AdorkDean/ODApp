@@ -52,13 +52,19 @@
     [self.view addSubview:self.headView];
     
     //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"话题详情" font:16 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"话题详情" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
     //返回按钮
+<<<<<<< HEAD
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28,32, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+=======
+    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
+    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+>>>>>>> ab9b6b0ccedcaaee159908d6427c4c8f0fa3d1a6
     [self.headView addSubview:backButton];
     
     //分享按钮

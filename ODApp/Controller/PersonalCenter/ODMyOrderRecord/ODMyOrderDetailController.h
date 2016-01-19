@@ -36,7 +36,8 @@
 
 @property (nonatomic, strong)ODMyOrderDetailModel *model;
 
+@property (nonatomic, strong) UIButton *cancelOrderButton;
 
-
+@property (nonatomic, assign) BOOL isOther;
 
 @end
