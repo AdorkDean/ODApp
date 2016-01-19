@@ -161,7 +161,7 @@
     
     ODMyOrderDetailController *vc = [[ODMyOrderDetailController alloc] init];
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
-    
+  
     vc.isOther = self.isOther;
     vc.open_id = self.open_id;
     vc.order_id = [NSString stringWithFormat:@"%@",model.order_id];
