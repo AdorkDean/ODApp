@@ -806,6 +806,7 @@
 		D425DA1B1C4E1F7E00BDD2AE /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		D425DA1C1C4E1F7E00BDD2AE /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		D425DA1D1C4E1F7E00BDD2AE /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
+		D425DA341C4E233900BDD2AE /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1729,6 +1730,7 @@
 				B83C6B6D1C224F640063ED92 /* LaunchScreen.storyboard */,
 				B83C6B701C224F640063ED92 /* Info.plist */,
 				B83C6B921C2252F30063ED92 /* ODApp-Prefix.pch */,
+				D425DA341C4E233900BDD2AE /* Singleton.h */,
 				B83C6B931C22532B0063ED92 /* Define.h */,
 				B83C6B651C224F640063ED92 /* Supporting Files */,
 			);
