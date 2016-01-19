@@ -74,7 +74,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.odong.com/1.0/user/info";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/user/info";
     
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -269,6 +269,7 @@ else if (indexPath.section ==3) {
         
     }
      else if (indexPath.section ==7) {
+         NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
          ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
          tabBar.selectedIndex = 0;
         [self.navigationController popViewControllerAnimated:YES];
@@ -290,6 +291,13 @@ else if (indexPath.section ==3) {
              for (NSInteger i = 0; i < 5; i++)
              {
                  UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
+                 UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
+                 if (i!=index) {
+                     imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+                 }else{
+                     imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
+                 }
+                 
                  newButton.selected = i == index;
              }
          }

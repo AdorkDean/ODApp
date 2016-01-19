@@ -60,7 +60,7 @@
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.imageView addSubview:button];
         
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width/5-30)/2, 5, 30, 30)];
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width/5-25)/2, 7.5, 25, 25)];
         imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
         if (i==0) {
             imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
@@ -71,7 +71,7 @@
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake((kScreenSize.width/5)*i,37 , kScreenSize.width/5, 18)];
         label.text = titleArray[i];
         label.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-        label.font = [UIFont systemFontOfSize:12];
+        label.font = [UIFont systemFontOfSize:11];
         label.textAlignment = NSTextAlignmentCenter;
         [self.imageView addSubview:label];
     }
