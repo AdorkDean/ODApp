@@ -739,7 +739,7 @@
     if (self.isMai) {
         [self.yuYueView.maiButton setImage:[UIImage imageNamed:@"xuanzhong"] forState:UIControlStateNormal];
     }else{
-        [self.yuYueView.maiButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [self.yuYueView.maiButton setImage:[UIImage imageNamed:@"."] forState:UIControlStateNormal];
         
     }
     self.isMai = !self.isMai;

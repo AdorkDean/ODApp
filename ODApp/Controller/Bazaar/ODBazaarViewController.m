@@ -41,7 +41,6 @@
 #pragma mark - 加载更多
 -(void)loadMoreData
 {
-    NSLog(@"%@",self.status);
     self.count ++;
     NSDictionary *parameter = @{@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
@@ -144,7 +143,6 @@
 
 -(void)buttonClick:(UIButton *)button
 {
-    [self.dataArray removeAllObjects];
     if (button.tag==10) {
         self.status = @"1";
         [self.screeningButton setTitle:@"待派遣" forState:UIControlStateNormal];
