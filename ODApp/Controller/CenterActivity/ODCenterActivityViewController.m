@@ -85,7 +85,7 @@
 -(void)navigationInit
 {
     
-    self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.navigationController.navigationBar.hidden = YES;
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
@@ -97,8 +97,10 @@
     
     
     // 场地预约button
+
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 100, 16,90, 44) target:self sel:@selector(rightClick:) tag:0 image:nil title:@"场地预约" font:16];
-    [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+
     
     confirmButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     
@@ -399,7 +401,7 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"CenterActivityCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.view addSubview:self.collectionView];
 
@@ -430,7 +432,7 @@
   
     cell.coverImageView.layer.masksToBounds = YES;
     cell.coverImageView.layer.cornerRadius = 5;
-    cell.coverImageView.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    cell.coverImageView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
     cell.coverImageView.layer.borderWidth = 1;
     
     
@@ -441,8 +443,8 @@
     cell.titleLabel.text = model.content;
     cell.timeLabel.text = model.date_str;
     cell.addressLabel.text = model.address;
-    cell.timeLabel.textColor = [ODColorConversion colorWithHexString:@"#b1b1b1" alpha:1];
-    cell.addressLabel.textColor = [ODColorConversion colorWithHexString:@"#b1b1b1" alpha:1];
+    cell.timeLabel.textColor = [UIColor colorWithHexString:@"#b1b1b1" alpha:1];
+    cell.addressLabel.textColor = [UIColor colorWithHexString:@"#b1b1b1" alpha:1];
     [cell.ActivityImageView sd_setImageWithURL:[NSURL URLWithString:model.icon_url]];
     
     
@@ -510,19 +512,19 @@
     [self.firstHeader.cycleScrollerView setTitlesGroup:self.titleArray];
 
     
-    [self.firstHeader.searchButton setTitleColor:[ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+    [self.firstHeader.searchButton setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
     self.firstHeader.searchButton.layer.masksToBounds = YES;
     self.firstHeader.searchButton.layer.cornerRadius = 5;
-    self.firstHeader.searchButton.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    self.firstHeader.searchButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
     self.firstHeader.searchButton.layer.borderWidth = 1;
-    self.firstHeader.searchButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    self.firstHeader.searchButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     
     
     
     self.firstHeader.searchButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 5);
     self.firstHeader.searchButton.layer.masksToBounds = YES;
     self.firstHeader.searchButton.layer.cornerRadius = 5;
-    self.firstHeader.searchButton.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    self.firstHeader.searchButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
     self.firstHeader.searchButton.layer.borderWidth = 1;
    UIImageView *image = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width - 120 - 30, 8, 15, 15) imageName:@"场地预约icon2@3x" tag:0];
     
@@ -530,12 +532,12 @@
     [self.firstHeader.searchButton addTarget:self action:@selector(searchButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    [self.firstHeader.centerButton setTitleColor:[ODColorConversion colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
+    [self.firstHeader.centerButton setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
     self.firstHeader.centerButton.layer.masksToBounds = YES;
     self.firstHeader.centerButton.layer.cornerRadius = 5;
-    self.firstHeader.centerButton.layer.borderColor = [ODColorConversion colorWithHexString:@"b0b0b0" alpha:1].CGColor;
+    self.firstHeader.centerButton.layer.borderColor = [UIColor colorWithHexString:@"b0b0b0" alpha:1].CGColor;
     self.firstHeader.centerButton.layer.borderWidth = 1;
-    self.firstHeader.centerButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd801" alpha:1];
+    self.firstHeader.centerButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
     [self.firstHeader.centerButton addTarget:self action:@selector(centerDetail:) forControlEvents:UIControlEventTouchUpInside];
     
     

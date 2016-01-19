@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#e6e6e6" alpha:1];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     
     self.dataArray = [[NSMutableArray alloc] init];
     
@@ -54,9 +54,11 @@
     UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160) / 2, 28, 160, 20) text:@"我报名的活动" font:17 alignment:@"center" color:@"#000000" alpha:1];
     [self.headView addSubview:label];
     
+
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16, 44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+
     [self.headView addSubview:backButton];
     
 }
@@ -116,7 +118,7 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
-    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ONMyApplyActivityCell" bundle:nil] forCellWithReuseIdentifier:kMyApplyActivityCellId];
     [self.view addSubview:self.collectionView];
 }
@@ -137,7 +139,7 @@
 
     ONMyApplyActivityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMyApplyActivityCellId forIndexPath:indexPath];
     ODMyApplyActivityModel *model = self.dataArray[indexPath.row];
-    cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     cell.layer.cornerRadius = 7;
     [cell showDataWithModel:model];
     

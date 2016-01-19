@@ -18,10 +18,32 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.count = 1;
     [self navigationInit];
     [self createRequest];
     [self joiningTogetherParmeters];
+    [self createCollectionView];
+    
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self joiningTogetherParmeters];
+    }];
+    
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [self loadMoreData];
+    }];
+
 }
+
+#pragma mark - 加载更多
+-(void)loadMoreData
+{
+    self.count ++;
+    NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",self.count],@"open_id":self.open_id};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:kHomeFoundListUrl paramater:signParameter];
+}
+
+
 
 #pragma mark - 初始化导航
 -(void)navigationInit
@@ -37,7 +59,7 @@
     
     //取消按钮
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 32,35, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
     
 }
@@ -60,7 +82,7 @@
 -(void)joiningTogetherParmeters
 {
     self.count = 1;
-    NSDictionary *parameter = @{@"type":@"1",@"page":@"1",@"open_id":self.open_id};
+    NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",self.count],@"open_id":self.open_id};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kHomeFoundListUrl paramater:signParameter];
 }
@@ -71,12 +93,19 @@
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
+        if (self.count == 1) {
+            [self.dataArray removeAllObjects];
+        }
         if (responseObject) {
-            
             NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dcit[@"result"];
             NSDictionary *bbs_list = result[@"bbs_list"];
-            for (id bbsKey in bbs_list) {
+            NSArray *allkeys = [bbs_list allKeys];
+            allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                NSComparisonResult result = [obj1 compare:obj2];
+                return result == NSOrderedAscending;
+            }];
+            for (id bbsKey in allkeys) {
                 NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
                 NSDictionary *itemDict = bbs_list[key];
                 ODCommunityModel *model = [[ODCommunityModel alloc]init];
@@ -92,10 +121,10 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.userArray addObject:model];
             }
+            NSLog(@"%ld",self.dataArray.count);
             [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
-            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -113,7 +142,7 @@
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,64, kScreenSize.width, kScreenSize.height - 64) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
     [self.view addSubview:self.collectionView];
     
@@ -134,7 +163,7 @@
 {
     ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommunityCellId forIndexPath:indexPath];
     ODCommunityModel *model = self.dataArray[indexPath.row];
-    cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [cell showDateWithModel:model];
     for (NSInteger i = 0; i < self.userArray.count; i++) {
         ODCommunityModel *userModel = self.userArray[i];
@@ -158,10 +187,6 @@
     detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
     [self.navigationController pushViewController:detailController animated:YES];
 }
-
-
-
-
 
 
 - (void)didReceiveMemoryWarning {

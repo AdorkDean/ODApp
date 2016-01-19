@@ -23,7 +23,7 @@
 //#import <MJExtension.h>
 //其他文件就不用到 Define.h了
 //预编译文件 可以自动把这些头文件 导入到每个文件中
-
+#import "UIColor+ODExtension.h"
 #import "Define.h"
 #import "ODUserInformation.h"
 
@@ -32,6 +32,8 @@
 #else // 不是调试阶段，是发布阶段
 #define NSLog(...)
 #endif
+/** 打印方法 */
+#define NSLogFunc NSLog(@"%s", __func__);
 
 #endif
 

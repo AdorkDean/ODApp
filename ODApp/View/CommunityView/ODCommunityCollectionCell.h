@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ODCommunityModel.h"
 #import "UIButton+WebCache.h"
-#import "ODColorConversion.h"
 
 @interface ODCommunityCollectionCell : UICollectionViewCell
 

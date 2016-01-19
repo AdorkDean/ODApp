@@ -18,7 +18,7 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#e6e6e6" alpha:1];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     
     self.orderArray = [[NSMutableArray alloc] init];
     
@@ -48,9 +48,10 @@
     UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160) / 2, 28, 160, 20) text:self.centerTitle font:17 alignment:@"center" color:@"#000000" alpha:1];
     [self.headView addSubview:label];
     
+
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16, 44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
 }
 
@@ -113,7 +114,7 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
-    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODMyOrderRecordCell" bundle:nil] forCellWithReuseIdentifier:kMyOrderRecordCellId];
     
     [self.view addSubview:self.collectionView];
@@ -140,10 +141,10 @@
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
     [cell showDatawithModel:model];
     
-    cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     cell.layer.masksToBounds = YES;
     cell.layer.cornerRadius = 7;
-    cell.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    cell.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
     cell.layer.borderWidth = 1;
     
     return cell;
