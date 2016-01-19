@@ -97,12 +97,12 @@
     
     
     // 场地预约button
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 100, 28,90, 20) target:self sel:@selector(rightClick:) tag:0 image:nil title:@"场地预约" font:17];
+    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 100, 16,90, 44) target:self sel:@selector(rightClick:) tag:0 image:nil title:@"场地预约" font:16];
     [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     
     confirmButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     
-    UIImageView *releaseImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, 0, 17, 17) imageName:@"场地预约icon@3x" tag:0];
+    UIImageView *releaseImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, 14, 17, 17) imageName:@"场地预约icon@3x" tag:0];
     [confirmButton addSubview:releaseImageView];
     [self.headView addSubview:confirmButton];
     

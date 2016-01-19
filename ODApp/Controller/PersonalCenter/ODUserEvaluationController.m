@@ -12,6 +12,7 @@
 #import "AFNetworking.h"
 #import "ODEvaluationCell.h"
 #import "ODEvaluationModel.h"
+#import "ODTabBarController.h"
 @interface ODUserEvaluationController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic , strong) UIView *headView;
@@ -56,10 +57,23 @@
     
 }
 
+#pragma mark - lifeCycle
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    
+    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+    tabBar.imageView.alpha = 0;
+    
+    
+}
+
+
+
 -(void)createCollectionView
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width,kScreenSize.height - 64 - 55) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width,kScreenSize.height - 64) collectionViewLayout:self.flowLayout];
     self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
@@ -171,7 +185,8 @@
     
     
     // 返回button
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(-10, 28,90, 20) target:self sel:@selector(backAction:) tag:0 image:nil title:@"返回" font:17];
+    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backAction:) tag:0 image:nil title:@"返回" font:16];
+    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
     

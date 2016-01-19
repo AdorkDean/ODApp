@@ -54,17 +54,19 @@
     [self.view addSubview:self.headView];
     
     //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 32, 80, 20) text:@"欧动集市" font:16 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"欧动集市" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
     //取消按钮
-    UIButton *cancelButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 32,35, 20) target:self sel:@selector(cancelButtonClick:) tag:0 image:nil title:@"取消" font:16];
+    UIButton *cancelButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(cancelButtonClick:) tag:0 image:nil title:@"取消" font:16];
+    cancelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [cancelButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:cancelButton];
     
     //确认按钮
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 32,35, 20) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:16];
+    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 16, 60, 44) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:16];
+    confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:confirmButton];
 

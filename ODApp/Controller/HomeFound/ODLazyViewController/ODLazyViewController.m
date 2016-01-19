@@ -35,11 +35,12 @@
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3  "];
     [self.view addSubview:self.headView];
     
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:@"去偷懒" font:16 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:@"去偷懒" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28, 32, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
+    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16, 44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
+    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [self.headView addSubview:backButton];
 }
 
