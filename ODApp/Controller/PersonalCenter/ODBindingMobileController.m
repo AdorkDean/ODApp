@@ -159,7 +159,7 @@
     NSDictionary *parameters = @{@"mobile":self.bindMobileView.phoneTextField.text,@"type":@"4" , @"open_id":self.openId};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.odong.com/1.0/user/verify/code/send";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/user/verify/code/send";
     
     
     self.manager = [AFHTTPRequestOperationManager manager];
@@ -202,7 +202,7 @@
     NSDictionary *parameters = @{@"mobile":self.bindMobileView.phoneTextField.text,@"verify_code":self.bindMobileView.verificationTextField.text , @"open_id":self.openId};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.odong.com/1.0/user/bind/mobile";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/user/bind/mobile";
 
     
     

@@ -74,7 +74,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.odong.com/1.0/user/info";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/user/info";
     
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         

@@ -193,7 +193,7 @@
     
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.odong.com/1.0/user/change/passwd";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/user/change/passwd";
     
     self.managers = [AFHTTPRequestOperationManager manager];
     
@@ -233,7 +233,7 @@
     
     NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"type":@"3"};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    NSString *url = @"http://woquapi.odong.com/1.0/user/verify/code/send";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/user/verify/code/send";
 
     
     

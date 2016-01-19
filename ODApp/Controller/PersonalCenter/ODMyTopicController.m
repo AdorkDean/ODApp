@@ -283,7 +283,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.odong.com/1.0/bbs/list";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/bbs/list";
     
     [self.firstManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -368,7 +368,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.odong.com/1.0/bbs/list";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/bbs/list";
     
     [self.secondManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         

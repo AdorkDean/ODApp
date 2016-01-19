@@ -80,7 +80,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.odong.com/1.0/user/info";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/user/info";
     
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -417,7 +417,7 @@
         NSDictionary *parameter = @{@"File":strData};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         
-        NSString *url = @"http://woquapi.odong.com/1.0/other/base64/upload";
+        NSString *url = @"http://woquapi.test.odong.com/1.0/other/base64/upload";
         
         
         [self pushImageWithUrl:url parameter:signParameter];
@@ -481,7 +481,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.odong.com/1.0/user/change";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/user/change";
     [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         

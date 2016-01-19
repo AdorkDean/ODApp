@@ -147,7 +147,7 @@
     NSDictionary *parameter = @{@"show_type":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
-    NSString *url = @"http://woquapi.odong.com/1.0/other/store/list";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/other/store/list";
     
     
     [self.centerManager GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -195,7 +195,7 @@
     NSDictionary *parameter = @{@"store_id":self.storeId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
-    NSString *url = @"http://woquapi.odong.com/1.0/other/store/detail";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/other/store/detail";
     
        [self.phoneManager GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
@@ -228,7 +228,7 @@
     NSDictionary *parameter = @{@"position":@"4" , @"store_id":self.storeId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
-    NSString *url = @"http://woquapi.odong.com/1.0/other/banner";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/other/banner";
     
     __weak typeof (self)weakSelf = self;
     [self.managers GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -285,7 +285,7 @@
     NSDictionary *parameter = @{@"store_id":self.storeId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
-    NSString *url = @"http://woquapi.odong.com/1.0/store/apply/list";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/store/apply/list";
     
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
