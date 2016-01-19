@@ -344,7 +344,6 @@
 		C66F0C0B1C4CDEE9006E999B /* ODUserEvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C0A1C4CDEE9006E999B /* ODUserEvaluationController.m */; };
 		C66F0C101C4CDF4D006E999B /* ODEvaluationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C0F1C4CDF4D006E999B /* ODEvaluationModel.m */; };
 		C66F0C131C4CDF58006E999B /* ODEvaluationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C121C4CDF58006E999B /* ODEvaluationCell.m */; };
-		C66F0C161C4CE47F006E999B /* ODOthersTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C151C4CE47F006E999B /* ODOthersTaskController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -823,8 +822,6 @@
 		C66F0C0F1C4CDF4D006E999B /* ODEvaluationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODEvaluationModel.m; sourceTree = "<group>"; };
 		C66F0C111C4CDF58006E999B /* ODEvaluationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODEvaluationCell.h; sourceTree = "<group>"; };
 		C66F0C121C4CDF58006E999B /* ODEvaluationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODEvaluationCell.m; sourceTree = "<group>"; };
-		C66F0C141C4CE47F006E999B /* ODOthersTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOthersTaskController.h; sourceTree = "<group>"; };
-		C66F0C151C4CE47F006E999B /* ODOthersTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOthersTaskController.m; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2036,8 +2033,6 @@
 			children = (
 				C66F0C051C4CB4CB006E999B /* ODOthersInformationController.h */,
 				C66F0C061C4CB4CB006E999B /* ODOthersInformationController.m */,
-				C66F0C141C4CE47F006E999B /* ODOthersTaskController.h */,
-				C66F0C151C4CE47F006E999B /* ODOthersTaskController.m */,
 			);
 			name = ODOthersInformation;
 			sourceTree = "<group>";
@@ -2515,7 +2510,6 @@
 				9DD4AECC1C322C680073F595 /* ActivityDetailView.m in Sources */,
 				9DD622FF1C2BA02900EBDC66 /* ChoseCenterCell.m in Sources */,
 				B80E0B3F1C474C1F00F36A17 /* ODBazaarDetailCollectionCell.m in Sources */,
-				C66F0C161C4CE47F006E999B /* ODOthersTaskController.m in Sources */,
 				B83C39401C48A0E9007B16FB /* ODLandMainController.m in Sources */,
 				B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */,
 				B83C39261C48A0E9007B16FB /* TAAbstractDotView.m in Sources */,

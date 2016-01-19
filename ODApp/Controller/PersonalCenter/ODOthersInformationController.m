@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.isOther = NO;
+    
     [self navigation];
     [self createRequest];
 }
@@ -31,7 +33,8 @@
     UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160) / 2, 28, 160, 20) text:@"个人中心" font:17 alignment:@"center" color:@"#000000" alpha:1];
     [self.headView addSubview:label];
     
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28, 32, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
+    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16, 44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
+    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
 }
@@ -144,6 +147,9 @@
         vc.open_id = self.model.open_id;
         vc.centerTitle = @"他的中心预约";
         
+        self.isOther = YES;
+        vc.isOther = self.isOther;
+        
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.section == 2) {
@@ -156,10 +162,6 @@
         
     }else if (indexPath.section == 3) {
         
-        ODOthersTaskController *vc = [[ODOthersTaskController alloc] init];
-        
-        vc.open_id = self.model.open_id;
-        [self.navigationController pushViewController:vc animated:YES];
         
     }
     else if (indexPath.section == 4) {

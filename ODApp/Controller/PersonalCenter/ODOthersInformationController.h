@@ -18,7 +18,7 @@
 #import "ODColorConversion.h"
 #import "ODMyOrderRecordController.h"
 #import "ODMyTopicController.h"
-#import "ODOthersTaskController.h"
+
 
 #import "ODLandFirstCell.h"
 #import "ODLandSecondCell.h"
@@ -39,5 +39,7 @@
 @property (nonatomic, strong) ODUserModel *model;
 
 @property (nonatomic, strong) UIView *headView;
+
+@property (nonatomic, assign) BOOL isOther;
 
 @end

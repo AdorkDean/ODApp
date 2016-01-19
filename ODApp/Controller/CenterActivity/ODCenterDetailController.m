@@ -266,7 +266,8 @@ int pageNumnber = 0;
     
     
     // 返回button
-    UIButton *fanhuiButton = [ODClassMethod creatButtonWithFrame:CGRectMake(-20, 28,90, 20) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:17];
+    UIButton *fanhuiButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
+    fanhuiButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [fanhuiButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:fanhuiButton];
     

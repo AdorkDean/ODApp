@@ -33,4 +33,6 @@
 
 @property (nonatomic, strong)NSMutableArray *orderArray;
 
+@property (nonatomic, assign) BOOL isOther;
+
 @end

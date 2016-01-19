@@ -18,6 +18,7 @@
 
 @end
 
+
 @implementation ODCenterIntroduceController
 
 - (void)viewDidLoad
@@ -50,7 +51,8 @@
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28, 35, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
+    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16, 44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
+    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
 }
