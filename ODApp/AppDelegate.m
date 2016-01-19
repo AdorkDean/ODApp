@@ -9,6 +9,9 @@
 #import "AppDelegate.h"
 #import "ODTabBarController.h"
 #import "IQKeyboardManager.h"
+#import "UMSocial.h"
+#import "UMSocialWechatHandler.h"
+
 @interface AppDelegate ()
 
 @end
@@ -28,6 +31,11 @@
     manager.shouldResignOnTouchOutside = YES;
     manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = NO;
+    
+    [UMSocialData setAppKey:@"569dda54e0f55a994f0021cf"];
+    
+    [UMSocialWechatHandler setWXAppId:@"wxd25da104118aae2a" appSecret:@"5da1d304e3b05fe65e4c14deddfa56f1" url:@"http://www.umeng.com/social"];
+    
     
     return YES;
 }
