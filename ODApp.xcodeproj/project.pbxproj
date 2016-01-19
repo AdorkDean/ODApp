@@ -329,6 +329,7 @@
 		D425DA311C4E1F7E00BDD2AE /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D425DA191C4E1F7E00BDD2AE /* SDCollectionViewCell.m */; };
 		D425DA321C4E1F7E00BDD2AE /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D425DA1B1C4E1F7E00BDD2AE /* SDCycleScrollView.m */; };
 		D425DA331C4E1F7E00BDD2AE /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D425DA1D1C4E1F7E00BDD2AE /* UIView+SDExtension.m */; };
+		D425DA381C4E31C600BDD2AE /* ODHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D425DA371C4E31C600BDD2AE /* ODHttpTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -795,6 +796,8 @@
 		D425DA1C1C4E1F7E00BDD2AE /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		D425DA1D1C4E1F7E00BDD2AE /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
 		D425DA341C4E233900BDD2AE /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		D425DA361C4E31C600BDD2AE /* ODHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHttpTool.h; sourceTree = "<group>"; };
+		D425DA371C4E31C600BDD2AE /* ODHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHttpTool.m; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1397,6 +1400,7 @@
 		B80F028A1C225C41009CE9D8 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D425DA351C4E31B300BDD2AE /* Tools */,
 				D425D9E61C4E1F7E00BDD2AE /* ThirdFrame */,
 				B80F028C1C225C41009CE9D8 /* Resource */,
 				B80F028B1C225C41009CE9D8 /* MyControl */,
@@ -1945,6 +1949,15 @@
 			path = PageControl;
 			sourceTree = "<group>";
 		};
+		D425DA351C4E31B300BDD2AE /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				D425DA361C4E31C600BDD2AE /* ODHttpTool.h */,
+				D425DA371C4E31C600BDD2AE /* ODHttpTool.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2416,6 +2429,7 @@
 				B83C39091C48A0E9007B16FB /* ODBazaarHeaderView.m in Sources */,
 				9DD6231A1C2BF30500EBDC66 /* CenterDetailModel.m in Sources */,
 				B83C390A1C48A0E9007B16FB /* ODBazaarViewController.m in Sources */,
+				D425DA381C4E31C600BDD2AE /* ODHttpTool.m in Sources */,
 				B83C39081C48A0E9007B16FB /* ODBazaarReleaseTaskViewController.m in Sources */,
 				9D68D8271C43832D00BD3FD2 /* ODTopicCell.m in Sources */,
 				9D6498331C31342A005CFAF8 /* CenterDetailCell.m in Sources */,
