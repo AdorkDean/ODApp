@@ -15,7 +15,6 @@
 #import "ODTabBarController.h"
 #import "ODAPIManager.h"
 #import "ODClassMethod.h"
-#import "ODColorConversion.h"
 #import "ODMyOrderRecordController.h"
 #import "ODMyTopicController.h"
 

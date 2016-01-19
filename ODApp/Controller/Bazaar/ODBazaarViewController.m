@@ -62,7 +62,7 @@
     
     //发布任务按钮
     UIButton *releaseButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 110, 16,95, 44) target:self sel:@selector(releaseButtonClick:) tag:0 image:nil title:@"发布任务" font:16];
-    [releaseButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [releaseButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     releaseButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     [self.headView addSubview:releaseButton];
     
@@ -90,11 +90,11 @@
 {
     //任务筛选
     self.screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 75, 100, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"全部" font:15];
-    [self.screeningButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [self.screeningButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     self.screeningButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25);
     self.screeningButton.layer.masksToBounds = YES;
     self.screeningButton.layer.cornerRadius = 10;
-    self.screeningButton.layer.borderColor = [ODColorConversion colorWithHexString:@"484848" alpha:1].CGColor;
+    self.screeningButton.layer.borderColor = [UIColor colorWithHexString:@"484848" alpha:1].CGColor;
     self.screeningButton.layer.borderWidth = 1;
     [self.headView addSubview:self.screeningButton];
     
@@ -102,14 +102,14 @@
     [self.screeningButton addSubview:screeningIamgeView];
     
     UIButton *searchButton = [ODClassMethod creatButtonWithFrame:CGRectMake(115, 75, kScreenSize.width-125, 35) target:self sel:@selector(searchButtonClick:) tag:0 image:nil title:@"  请输入您要搜索的关键字" font:15];
-    [searchButton setTitleColor:[ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+    [searchButton setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
     searchButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     searchButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     searchButton.layer.masksToBounds = YES;
     searchButton.layer.cornerRadius = 10;
-    searchButton.layer.borderColor = [ODColorConversion colorWithHexString:@"484848" alpha:1].CGColor;
+    searchButton.layer.borderColor = [UIColor colorWithHexString:@"484848" alpha:1].CGColor;
     searchButton.layer.borderWidth = 1;
-    searchButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    searchButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.headView addSubview:searchButton];
     
     UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(7, 10, 16, 16) imageName:@"搜索放大镜icon" tag:0];
@@ -119,14 +119,14 @@
 -(void)screeningButtonClick:(UIButton *)button
 {
     UIViewController *controller = [[UIViewController alloc]init];
-    controller.view.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    controller.view.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     NSArray *array = @[@"待派遣",@"正在完成",@"已完成",@"已过期",@"全部"];
     for (NSInteger i = 0; i < array.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setTitle:array[i] forState:UIControlStateNormal];
         button.frame = CGRectMake(0, 30*i, 100, 30);
         button.tag = i+10;
-        [button setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [controller.view addSubview:button];
         }
@@ -247,7 +247,7 @@
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,117, kScreenSize.width, kScreenSize.height - 117 - 55) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarCellId];
     [self.collectionView registerClass:[ODBazaarHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];
     [self.view addSubview:self.collectionView];
@@ -274,7 +274,7 @@
     [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
     
     [cell shodDataWithModel:model];
-    cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     return cell;
 }
 

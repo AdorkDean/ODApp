@@ -39,7 +39,8 @@
     //返回按钮
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+
     [self.headView addSubview:backButton];
 }
 
@@ -127,23 +128,23 @@
     
     //接受任务
     self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-80, 20, 80, 35) target:nil sel:nil tag:0 image:nil title:@"" font:14];
-    self.taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
-    [self.taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#d0d0d0" alpha:1] forState:UIControlStateNormal];
+    self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#d0d0d0" alpha:1] forState:UIControlStateNormal];
     self.taskButton.layer.masksToBounds = YES;
     self.taskButton.layer.cornerRadius = 5;
     self.taskButton.layer.borderWidth = 1;
-    self.taskButton.layer.borderColor = [ODColorConversion colorWithHexString:@"b0b0b0" alpha:1].CGColor;
+    self.taskButton.layer.borderColor = [UIColor colorWithHexString:@"b0b0b0" alpha:1].CGColor;
 
     if ([[ODUserInformation getData].openID isEqualToString:self.open_id]) {
         [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+        [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
         [self.taskButton setTitle:@"删除任务" forState:UIControlStateNormal];
         [self.userView addSubview:self.taskButton];
     }else{
         if ([self.task_status isEqualToString:@"1"]) {
             [self.taskButton setTitle:@"接受任务" forState:UIControlStateNormal];
-            [self.taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-            self.taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd801" alpha:1];
+            [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+            self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
             [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
             [self.userView addSubview:self.taskButton];
         }else if ([self.task_status isEqualToString:@"-2"]){
@@ -200,8 +201,8 @@
             NSLog(@"%@",responseObject);
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 [self.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
-                [self.taskButton setTitleColor:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
-                self.taskButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+                [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+                self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -221,7 +222,7 @@
     
     //任务内容
     UILabel *contentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(taskTitleLabel.frame)+17.5, 80, 30) text:@"任务内容 :" font:14 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
-    contentLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"ffd802" alpha:1].CGColor;
+    contentLabel.layer.borderColor = [UIColor colorWithHexString:@"ffd802" alpha:1].CGColor;
     [self.taskTopView addSubview:contentLabel];
 
     CGRect frame ;
@@ -263,7 +264,7 @@
     [self.taskBottomView addSubview:allButton];
     //任务奖励
     UILabel *rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.allLabel.frame)+10, 80, 30) text:@"任务奖励 :" font:14 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
-    rewardLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"ffd802" alpha:1].CGColor;
+    rewardLabel.layer.borderColor = [UIColor colorWithHexString:@"ffd802" alpha:1].CGColor;
     [self.taskBottomView addSubview:rewardLabel];
     
     UILabel *taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(rewardLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.reward_name width:kScreenSize.width-25 fontSize:15]) text:detailModel.reward_name font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
@@ -274,7 +275,7 @@
     
     //任务时间
     UILabel *timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(taskRewardLabel.frame)+17.5,80, 30) text:@"任务时间 :" font:14 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
-    timeLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"ffd802" alpha:1].CGColor;
+    timeLabel.layer.borderColor = [UIColor colorWithHexString:@"ffd802" alpha:1].CGColor;
     [self.taskBottomView addSubview:timeLabel];
     
     NSString *startTime = [[detailModel.task_datetime substringWithRange:NSMakeRange(5, 14)] stringByReplacingOccurrencesOfString:@"/" withString:@"."];
@@ -294,7 +295,7 @@
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.itemSize = CGSizeMake(160, 200);
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.taskBottomView.frame)+10, kScreenSize.width, 200) collectionViewLayout:layout];
-    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.dataSource = self;
@@ -405,7 +406,7 @@
     cell.nickLabel.text = model.user_nick;
     cell.signLabel.text = model.user_sign;
     cell.layer.masksToBounds = YES;
-    cell.layer.borderColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1].CGColor;
+    cell.layer.borderColor = [UIColor colorWithHexString:@"#484848" alpha:1].CGColor;
     cell.layer.borderWidth = 1;
     return cell;
 }

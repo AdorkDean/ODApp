@@ -19,7 +19,7 @@
     
     [super viewDidLoad];
     
-    self.view.backgroundColor = [ODColorConversion colorWithHexString:@"e6e6e6" alpha:1];;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6" alpha:1];;
     
     self.dataArray = [[NSMutableArray alloc] init];
     self.devicesArray = [[NSMutableArray alloc] init];
@@ -38,13 +38,18 @@
     UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160) / 2, 28, 160, 20) text:@"预约详情" font:17 alignment:@"center" color:@"#000000" alpha:1];
     [self.headView addSubview:label];
     
+    
+    UIButton *cancelOrderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 110, 32, 95, 20) target:self sel:@selector(cancelOrderButtonClick:) tag:0 image:nil title:@"取消预约" font:16];
+    [cancelOrderButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [self.headView addSubview:cancelOrderButton];
+
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16, 44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
     
     self.cancelOrderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 110, 16, 95, 44) target:self sel:@selector(cancelOrderButtonClick:) tag:0 image:nil title:@"取消预约" font:16];
-    [self.cancelOrderButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [self.cancelOrderButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     
     if (self.isOther == NO) {
         [self.headView addSubview:self.cancelOrderButton];
@@ -116,12 +121,12 @@
     float labelHeight = kScreenSize.height * 25 / 400;
     
     UILabel *timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@ - %@",self.model.start_date_str,self.model.end_date_str] font:14 alignment:@"left" color:@"#000000" alpha:11];
-    timeLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    timeLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     timeLabel.layer.cornerRadius = 5;
     [self.view addSubview:timeLabel];
     
     UILabel *experienceCenterLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 1, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",self.model.store_name] font:14 alignment:@"left" color:@"#000000" alpha:1];
-    experienceCenterLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    experienceCenterLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     experienceCenterLabel.layer.cornerRadius = 5;
     [self.view addSubview:experienceCenterLabel];
     
@@ -146,7 +151,7 @@
     }
     
     UILabel *deviceDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 3, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",name] font:14 alignment:@"left" color:@"#000000" alpha:1];
-    deviceDetailLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    deviceDetailLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     deviceDetailLabel.layer.cornerRadius = 5;
     [self.view addSubview:deviceDetailLabel];
     
@@ -154,7 +159,7 @@
     [self.view addSubview:purposeLabel];
     
     UILabel *purposeDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 5, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",self.model.purpose] font:14 alignment:@"left" color:@"#000000" alpha:1];
-    purposeDetailLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    purposeDetailLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     purposeDetailLabel.layer.cornerRadius = 5;
     [self.view addSubview:purposeDetailLabel];
     
@@ -162,7 +167,7 @@
     [self.view addSubview:contentLabel];
     
     UILabel *contentDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 7, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",self.model.content] font:14 alignment:@"left" color:@"#000000" alpha:1];
-    contentDetailLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    contentDetailLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     contentDetailLabel.layer.cornerRadius = 5;
     [self.view addSubview:contentDetailLabel];
     
@@ -170,15 +175,15 @@
     [self.view addSubview:peopleNumberLabel];
     
     UILabel *peopleNumberDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 9, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"  %@",self.model.people_num]] font:14 alignment:@"left" color:@"#000000" alpha:1];
-    peopleNumberDetailLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    peopleNumberDetailLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     peopleNumberDetailLabel.layer.cornerRadius = 5;
     [self.view addSubview:peopleNumberDetailLabel];
     
     UILabel *phoneLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 10, kScreenSize.width - 10, labelHeight) text:@"  场地预约电话:" font:14 alignment:@"left" color:@"#000000" alpha:1];
-    phoneLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    phoneLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     phoneLabel.layer.cornerRadius = 5;
     phoneLabel.layer.borderWidth = 1;
-    phoneLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    phoneLabel.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     [self.view addSubview:phoneLabel];
     
     UIButton *phoneButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5 + kScreenSize.width * 2/5, 64 + 10 + spaceY * 10, 100, labelHeight) target:self sel:@selector(phoneButtonClick:) tag:0 image:nil title:self.model.store_tel font:14];
@@ -187,7 +192,7 @@
     self.checkLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 11, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",self.model.status_str ]font:14 alignment:@"center" color:@"#000000" alpha:1];
     self.checkLabel.layer.cornerRadius = 5;
     self.checkLabel.layer.borderWidth = 1;
-    self.checkLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1].CGColor;
+    self.checkLabel.layer.borderColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1].CGColor;
     [self.view addSubview:self.checkLabel];
 }
 

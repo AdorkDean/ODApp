@@ -248,7 +248,7 @@ int pageNumnber = 0;
 -(void)navigationInit
 {
     
-    self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
     self.navigationController.navigationBar.hidden = YES;
     
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
@@ -268,7 +268,8 @@ int pageNumnber = 0;
     // 返回button
     UIButton *fanhuiButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
     fanhuiButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [fanhuiButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [fanhuiButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+
     [self.headView addSubview:fanhuiButton];
     
     
@@ -285,7 +286,7 @@ int pageNumnber = 0;
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = self.centerDetailView;
     
-    self.tableView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
 
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
    
@@ -352,34 +353,34 @@ int pageNumnber = 0;
         
         
         
-        self.centerDetailView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+        self.centerDetailView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
 
         
         self.centerDetailView.detailTextView.layer.masksToBounds = YES;
         self.centerDetailView.detailTextView.layer.cornerRadius = 5;
-        self.centerDetailView.detailTextView.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.centerDetailView.detailTextView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.centerDetailView.detailTextView.layer.borderWidth = 1;
         self.centerDetailView.detailTextView.text = self.model.desc;
-        self.centerDetailView.detailTextView.textColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
+        self.centerDetailView.detailTextView.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
         self.centerDetailView.detailTextView.scrollEnabled = NO;
         
         self.centerDetailView.informationLabel.layer.masksToBounds = YES;
         self.centerDetailView.informationLabel.layer.cornerRadius = 5;
-        self.centerDetailView.informationLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.centerDetailView.informationLabel.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.centerDetailView.informationLabel.layer.borderWidth = 1;
 
-         self.centerDetailView.firstLabel.textColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-         self.centerDetailView.secondLabel.textColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-         self.centerDetailView.thirdLabel.textColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-         self.centerDetailView.fourLabel.textColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
+         self.centerDetailView.firstLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+         self.centerDetailView.secondLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+         self.centerDetailView.thirdLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+         self.centerDetailView.fourLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
 
         
         self.centerDetailView.centerNameLabel.text = self.model.name;
-        self.centerDetailView.centerNameLabel.textColor = [ODColorConversion colorWithHexString:@"#014cdb" alpha:1];
+        self.centerDetailView.centerNameLabel.textColor = [UIColor colorWithHexString:@"#014cdb" alpha:1];
         
         
         self.centerDetailView.phoneLabel.text = self.model.tel;
-        self.centerDetailView.phoneLabel.textColor = [ODColorConversion colorWithHexString:@"#014cdb" alpha:1];
+        self.centerDetailView.phoneLabel.textColor = [UIColor colorWithHexString:@"#014cdb" alpha:1];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(phoneAction:)];
         
         
@@ -387,19 +388,19 @@ int pageNumnber = 0;
         
         
         self.centerDetailView.addressLabel.text = self.model.address;
-        self.centerDetailView.addressLabel.textColor = [ODColorConversion colorWithHexString:@"#014cdb" alpha:1];
+        self.centerDetailView.addressLabel.textColor = [UIColor colorWithHexString:@"#014cdb" alpha:1];
         
         self.centerDetailView.timeTextView.text = self.model.business_hours;
-        self.centerDetailView.timeTextView.textColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
+        self.centerDetailView.timeTextView.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
         self.centerDetailView.timeTextView.scrollEnabled = NO;
         
         
-        [self.centerDetailView.appointmentButton setTitleColor:[ODColorConversion colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
+        [self.centerDetailView.appointmentButton setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
         self.centerDetailView.appointmentButton.layer.masksToBounds = YES;
        self.centerDetailView.appointmentButton.layer.cornerRadius = 5;
-        self.centerDetailView.appointmentButton.layer.borderColor = [ODColorConversion colorWithHexString:@"b0b0b0" alpha:1].CGColor;
+        self.centerDetailView.appointmentButton.layer.borderColor = [UIColor colorWithHexString:@"b0b0b0" alpha:1].CGColor;
        self.centerDetailView.appointmentButton.layer.borderWidth = 1;
-       self.centerDetailView.appointmentButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd801" alpha:1];
+       self.centerDetailView.appointmentButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
         [self.centerDetailView.appointmentButton addTarget:self action:@selector(appointmentAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
@@ -482,12 +483,12 @@ int pageNumnber = 0;
         
     }
 
-    cell.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
 
     
     cell.coverImageView.layer.masksToBounds = YES;
     cell.coverImageView.layer.cornerRadius = 7;
-    cell.coverImageView.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    cell.coverImageView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
     cell.coverImageView.layer.borderWidth = 1;
 
     
@@ -499,8 +500,8 @@ int pageNumnber = 0;
     cell.addressLabel.text = model.address;
     [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.icon_url]];
     
-    cell.timeLabel.textColor = [ODColorConversion colorWithHexString:@"#b1b1b1" alpha:1];
-    cell.addressLabel.textColor = [ODColorConversion colorWithHexString:@"#b1b1b1" alpha:1];
+    cell.timeLabel.textColor = [UIColor colorWithHexString:@"#b1b1b1" alpha:1];
+    cell.addressLabel.textColor = [UIColor colorWithHexString:@"#b1b1b1" alpha:1];
     
     return cell;
 }
@@ -524,7 +525,7 @@ int pageNumnber = 0;
     
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 100)];
-    view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
 
     
     return view;

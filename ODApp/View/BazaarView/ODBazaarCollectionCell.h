@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "UIButton+WebCache.h"
 #import "ODBazaarModel.h"
-#import "ODColorConversion.h"
 
 @interface ODBazaarCollectionCell : UICollectionViewCell
 

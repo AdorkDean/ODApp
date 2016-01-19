@@ -10,9 +10,7 @@
 
 #import "AFNetworking.h"
 #import "MJRefresh.h"
-
 #import "ODClassMethod.h"
-#import "ODColorConversion.h"
 #import "ODTabBarController.h"
 #import "ODAPIManager.h"
 #import "ONMyApplyActivityCell.h"

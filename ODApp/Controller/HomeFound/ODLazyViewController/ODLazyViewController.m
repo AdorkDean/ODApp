@@ -20,7 +20,7 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#e6e6e6" alpha:1];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     
     [self navigationInit];
     [self createJobButton];
@@ -48,18 +48,18 @@
 {
 
     UIButton *otherJobButton = [ODClassMethod creatButtonWithFrame:CGRectMake(4, 64 + 4, kScreenSize.width * 0.6, 40) target:self sel:@selector(otherJobButtonClick:) tag:0 image:nil title:@"看看别人发了什么任务" font:14];
-    otherJobButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd802" alpha:1];
-    [otherJobButton setTitleColor:[ODColorConversion colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
+    otherJobButton.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+    [otherJobButton setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
     otherJobButton.layer.cornerRadius = 7;
-    otherJobButton.layer.borderColor = [ODColorConversion colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
+    otherJobButton.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
     otherJobButton.layer.borderWidth = 1;
     [self.view addSubview:otherJobButton];
     
     UIButton *buildMyJobButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width * 0.6 + 10, 64 + 4, kScreenSize.width * 0.4 - 16, 40) target:self sel:@selector(buildMyJobButtonClick:) tag:0 image:nil title:@"我也要发任务" font:14];
-    buildMyJobButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
-    [buildMyJobButton setTitleColor:[ODColorConversion colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
+    buildMyJobButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    [buildMyJobButton setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
     buildMyJobButton.layer.cornerRadius = 7;
-    buildMyJobButton.layer.borderColor = [ODColorConversion colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
+    buildMyJobButton.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
     buildMyJobButton.layer.borderWidth = 1;
     [self.view addSubview:buildMyJobButton];
     
