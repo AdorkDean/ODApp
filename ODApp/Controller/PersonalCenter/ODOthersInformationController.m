@@ -19,6 +19,8 @@
     
     self.isOther = NO;
     
+    self.view.backgroundColor = [UIColor clearColor];
+    
     [self navigation];
     [self createRequest];
 }

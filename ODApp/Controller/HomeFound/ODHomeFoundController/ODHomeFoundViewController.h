@@ -24,7 +24,7 @@
 #import "ODcommunityHeaderView.h"
 #import "ODCenterIntroduceController.h"
 #import "ODhomeViewCollectionReusableView.h"
-
+#import "ODOthersInformationController.h"
 
 @interface ODHomeFoundViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,SDCycleScrollViewDelegate>
 
@@ -36,6 +36,8 @@
 @property (nonatomic,strong)UICollectionViewFlowLayout *flowLayout;
 
 @property (nonatomic, strong)ODhomeViewCollectionReusableView *rollPictureView;
+
+@property (nonatomic, strong) ODCommunityModel *model;
 
 @property (nonatomic, strong)AFHTTPRequestOperationManager *manager;
 @property (nonatomic, strong)AFHTTPRequestOperationManager *managers;
@@ -49,5 +51,6 @@
 @property (nonatomic, strong)NSMutableArray *dataArray;
 @property (nonatomic, strong)NSMutableArray *userArray;
 
+@property (nonatomic, strong)NSMutableArray *userArrays;
 
 @end
