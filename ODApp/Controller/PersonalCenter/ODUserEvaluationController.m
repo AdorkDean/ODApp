@@ -12,6 +12,7 @@
 #import "AFNetworking.h"
 #import "ODEvaluationCell.h"
 #import "ODEvaluationModel.h"
+#import "ODTabBarController.h"
 @interface ODUserEvaluationController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic , strong) UIView *headView;
@@ -56,10 +57,23 @@
     
 }
 
+#pragma mark - lifeCycle
+- (void)viewWillAppear:(BOOL)animated
+{
+    
+    
+    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+    tabBar.imageView.alpha = 0;
+    
+    
+}
+
+
+
 -(void)createCollectionView
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width,kScreenSize.height - 64 - 55) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width,kScreenSize.height - 64) collectionViewLayout:self.flowLayout];
     self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
