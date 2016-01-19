@@ -40,6 +40,7 @@
     [self.headView addSubview:label];
     
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16, 44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [self.headView addSubview:backButton];
 }

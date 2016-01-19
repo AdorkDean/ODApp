@@ -130,7 +130,7 @@
                 <outlet property="phoneTextField" destination="3RQ-bV-XxP" id="9Zt-af-cJM"/>
                 <outlet property="verificationTextField" destination="6zy-AH-nIE" id="GlF-UO-VvZ"/>
             </connections>
-            <point key="canvasLocation" x="499" y="362"/>
+            <point key="canvasLocation" x="289" y="346"/>
         </view>
     </objects>
 </document>
