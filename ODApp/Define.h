@@ -20,6 +20,8 @@
 
 // 方法过期
 #define ODExtensionDeprecated(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)
+// 判断手机的系统版本
+#define iOS(v) ([UIDevice currentDevice].systemVersion.doubleValue >= (v))
 
 #define kScreenSize [UIScreen mainScreen].bounds.size
 #define kRGBAWithColor(r,g,b,a) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:(a)]

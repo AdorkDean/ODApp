@@ -32,6 +32,8 @@
 #else // 不是调试阶段，是发布阶段
 #define NSLog(...)
 #endif
+/** 打印方法 */
+#define NSLogFunc NSLog(@"%s", __func__);
 
 #endif
 
