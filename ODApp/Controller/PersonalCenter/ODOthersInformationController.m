@@ -147,18 +147,16 @@
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.section == 2) {
-        
-        ODMyTopicController *vc = [[ODMyTopicController alloc] init];
-        vc.open_id = self.model.open_id;
-        vc.centerTitle = @"他发表的话题";
+        ODOtherTopicViewController *vc = [[ODOtherTopicViewController alloc]init];
+        vc.open_id = self.open_id;
         
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.section == 3) {
         
-        ODOthersTaskController *vc = [[ODOthersTaskController alloc] init];
+        ODOtherTaskController *vc = [[ODOtherTaskController alloc] init];
         
-        vc.open_id = self.model.open_id;
+        vc.openId = self.model.open_id;
         [self.navigationController pushViewController:vc animated:YES];
         
     }

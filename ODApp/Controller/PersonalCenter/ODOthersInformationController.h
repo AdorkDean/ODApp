@@ -17,8 +17,8 @@
 #import "ODClassMethod.h"
 #import "ODColorConversion.h"
 #import "ODMyOrderRecordController.h"
-#import "ODMyTopicController.h"
-#import "ODOthersTaskController.h"
+#import "ODOtherTopicViewController.h"
+#import "ODOtherTaskController.h"
 
 #import "ODLandFirstCell.h"
 #import "ODLandSecondCell.h"

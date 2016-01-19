@@ -340,11 +340,12 @@
 		B83C6B6F1C224F640063ED92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83C6B6D1C224F640063ED92 /* LaunchScreen.storyboard */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
+		B871CF9F1C4CF87400CF51BA /* ODOtherTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B871CF9E1C4CF87400CF51BA /* ODOtherTopicViewController.m */; };
+		B871CFA21C4CF9FA00CF51BA /* ODOtherTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = B871CFA11C4CF9FA00CF51BA /* ODOtherTaskController.m */; };
 		C66F0C071C4CB4CB006E999B /* ODOthersInformationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C061C4CB4CB006E999B /* ODOthersInformationController.m */; };
 		C66F0C0B1C4CDEE9006E999B /* ODUserEvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C0A1C4CDEE9006E999B /* ODUserEvaluationController.m */; };
 		C66F0C101C4CDF4D006E999B /* ODEvaluationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C0F1C4CDF4D006E999B /* ODEvaluationModel.m */; };
 		C66F0C131C4CDF58006E999B /* ODEvaluationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C121C4CDF58006E999B /* ODEvaluationCell.m */; };
-		C66F0C161C4CE47F006E999B /* ODOthersTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C151C4CE47F006E999B /* ODOthersTaskController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -814,6 +815,10 @@
 		B83C6B861C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B83C6B921C2252F30063ED92 /* ODApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ODApp-Prefix.pch"; sourceTree = "<group>"; };
 		B83C6B931C22532B0063ED92 /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
+		B871CF9D1C4CF87400CF51BA /* ODOtherTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOtherTopicViewController.h; sourceTree = "<group>"; };
+		B871CF9E1C4CF87400CF51BA /* ODOtherTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOtherTopicViewController.m; sourceTree = "<group>"; };
+		B871CFA01C4CF9FA00CF51BA /* ODOtherTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOtherTaskController.h; sourceTree = "<group>"; };
+		B871CFA11C4CF9FA00CF51BA /* ODOtherTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOtherTaskController.m; sourceTree = "<group>"; };
 		C3D6EA47D0FE49655335B119 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C66F0C051C4CB4CB006E999B /* ODOthersInformationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOthersInformationController.h; sourceTree = "<group>"; };
 		C66F0C061C4CB4CB006E999B /* ODOthersInformationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOthersInformationController.m; sourceTree = "<group>"; };
@@ -823,8 +828,6 @@
 		C66F0C0F1C4CDF4D006E999B /* ODEvaluationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODEvaluationModel.m; sourceTree = "<group>"; };
 		C66F0C111C4CDF58006E999B /* ODEvaluationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODEvaluationCell.h; sourceTree = "<group>"; };
 		C66F0C121C4CDF58006E999B /* ODEvaluationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODEvaluationCell.m; sourceTree = "<group>"; };
-		C66F0C141C4CE47F006E999B /* ODOthersTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOthersTaskController.h; sourceTree = "<group>"; };
-		C66F0C151C4CE47F006E999B /* ODOthersTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOthersTaskController.m; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2036,8 +2039,10 @@
 			children = (
 				C66F0C051C4CB4CB006E999B /* ODOthersInformationController.h */,
 				C66F0C061C4CB4CB006E999B /* ODOthersInformationController.m */,
-				C66F0C141C4CE47F006E999B /* ODOthersTaskController.h */,
-				C66F0C151C4CE47F006E999B /* ODOthersTaskController.m */,
+				B871CF9D1C4CF87400CF51BA /* ODOtherTopicViewController.h */,
+				B871CF9E1C4CF87400CF51BA /* ODOtherTopicViewController.m */,
+				B871CFA01C4CF9FA00CF51BA /* ODOtherTaskController.h */,
+				B871CFA11C4CF9FA00CF51BA /* ODOtherTaskController.m */,
 			);
 			name = ODOthersInformation;
 			sourceTree = "<group>";
@@ -2515,10 +2520,10 @@
 				9DD4AECC1C322C680073F595 /* ActivityDetailView.m in Sources */,
 				9DD622FF1C2BA02900EBDC66 /* ChoseCenterCell.m in Sources */,
 				B80E0B3F1C474C1F00F36A17 /* ODBazaarDetailCollectionCell.m in Sources */,
-				C66F0C161C4CE47F006E999B /* ODOthersTaskController.m in Sources */,
 				B83C39401C48A0E9007B16FB /* ODLandMainController.m in Sources */,
 				B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */,
 				B83C39261C48A0E9007B16FB /* TAAbstractDotView.m in Sources */,
+				B871CFA21C4CF9FA00CF51BA /* ODOtherTaskController.m in Sources */,
 				B80E0B641C474FDC00F36A17 /* ODHomeFoundModel.m in Sources */,
 				B83C393D1C48A0E9007B16FB /* ODBindingMobileController.m in Sources */,
 				B83C39471C48A0E9007B16FB /* ODRegisteredController.m in Sources */,
@@ -2530,6 +2535,7 @@
 				B83C39351C48A0E9007B16FB /* ODCommunityReleaseTopicViewController.m in Sources */,
 				C66F0C101C4CDF4D006E999B /* ODEvaluationModel.m in Sources */,
 				9DDBA4C31C3B6D090007E122 /* ODLandSecondCell.m in Sources */,
+				B871CF9F1C4CF87400CF51BA /* ODOtherTopicViewController.m in Sources */,
 				9DD481101C44C8A6004F34E3 /* ODTypeView.m in Sources */,
 				B83C39381C48A0E9007B16FB /* ODCenterIntroduceController.m in Sources */,
 				B83C39411C48A0E9007B16FB /* ODMyApplyActivityController.m in Sources */,
