@@ -27,7 +27,7 @@
     
     self.dataArray = [[NSMutableArray alloc] init];
     self.userArray = [[NSMutableArray alloc] init];
-    
+    self.userArrays = [[NSMutableArray alloc] init];
     
     [self navigationInit];
     
@@ -294,15 +294,34 @@
     cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
     [cell showDateWithModel:model];
     
+    
     for (NSInteger i = 0; i < self.userArray.count; i++) {
+        
         ODCommunityModel *userModel = self.userArray[i];
         if ([[NSString stringWithFormat:@"%@",model.user_id] isEqualToString:[NSString stringWithFormat:@"%@",userModel.id]]) {
+//            for (id key in self.userArray) {
+//                
+//                [self.userArrays addObject:key];
+//            }
             cell.nameLabel.text = userModel.nick;
             [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+            [cell.headButton addTarget:self action:@selector(headButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
     
     return cell;
+}
+
+- (void)headButtonClick:(UIButton *)button
+{
+
+    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODCommunityModel *model = self.userArrays[indexPath.row];
+    
+    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+    vc.open_id = model.open_id;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

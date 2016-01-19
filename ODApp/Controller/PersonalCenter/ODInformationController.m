@@ -201,9 +201,9 @@
     
     self.informationView.phoneLabel.text = model.mobile;
     
-    UITapGestureRecognizer *phoneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneAction)];
-    [self.informationView.phoneImageView addGestureRecognizer:phoneTap];
-    
+//    UITapGestureRecognizer *phoneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneAction)];
+//    [self.informationView.phoneImageView addGestureRecognizer:phoneTap];
+//    
     
     UITapGestureRecognizer *passWordTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(passWordAction)];
     [self.informationView.passWordImageView addGestureRecognizer:passWordTap];

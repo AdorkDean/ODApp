@@ -38,8 +38,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.view.backgroundColor = [UIColor whiteColor];
     
-     [self navigationInit];
+    [self navigationInit];
     
     
     
@@ -250,7 +251,7 @@ else if (indexPath.section ==3) {
     
         ODMyTopicController *vc = [[ODMyTopicController alloc] init];
     
-        vc.open_id = self.model.open_id;
+    vc.open_id = self.model.open_id;
     
         [self.navigationController pushViewController:vc animated:YES];
         
