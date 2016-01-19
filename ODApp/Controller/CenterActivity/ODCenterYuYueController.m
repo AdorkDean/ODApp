@@ -403,7 +403,7 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     
-    NSString *url = @"http://woquapi.odong.com/1.0/store/create/order";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/store/create/order";
     
     
     [self.manager GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -472,7 +472,7 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     
-    NSString *url = @"http://woquapi.odong.com/1.0/store/confirm/order";
+    NSString *url = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
     
     
     [self.managers GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {

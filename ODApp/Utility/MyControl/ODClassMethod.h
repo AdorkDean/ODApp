@@ -39,19 +39,19 @@
                                tag:(NSInteger)tag
                              image:(NSString *)name
                              title:(NSString *)title
-                              font:(NSInteger)size ;
+                              font:(NSInteger)size;
 //创建UIImageView
 + (UIImageView *)creatImageViewWithFrame:(CGRect)frame
-                               imageName:(NSString *)name tag:(NSInteger)tag ;
+                               imageName:(NSString *)name tag:(NSInteger)tag;
 
 //创建UIView
-+(UIView *)creatViewWithFrame:(CGRect)frame tag:(NSInteger)tag color:(NSString *)color ;
++(UIView *)creatViewWithFrame:(CGRect)frame tag:(NSInteger)tag color:(NSString *)color;
 
 //创建UITextField
 + (UITextField *)creatTextFieldWithFrame:(CGRect)frame
                              placeHolder:(NSString *)string
                                 delegate:(id <UITextFieldDelegate>)delegate
-                                     tag:(NSInteger)tag ;
+                                     tag:(NSInteger)tag;
 
 //创建UITextView
 +(UITextView *)creatTextViewWithFrame:(CGRect)frame

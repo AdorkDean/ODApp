@@ -37,6 +37,7 @@
         [self refreshdata];
         
     }];
+    
 }
 
 - (void)refreshdata
@@ -299,10 +300,10 @@
         
         ODCommunityModel *userModel = self.userArray[i];
         if ([[NSString stringWithFormat:@"%@",model.user_id] isEqualToString:[NSString stringWithFormat:@"%@",userModel.id]]) {
-//            for (id key in self.userArray) {
-//                
-//                [self.userArrays addObject:key];
-//            }
+            for (id key in self.userArray) {
+                
+                [self.userArrays addObject:key];
+            }
             cell.nameLabel.text = userModel.nick;
             [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
             [cell.headButton addTarget:self action:@selector(headButtonClick:) forControlEvents:UIControlEventTouchUpInside];
