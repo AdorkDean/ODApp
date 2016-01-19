@@ -37,7 +37,7 @@
 -(void)navigationInit
 {
     
-    self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
     self.navigationController.navigationBar.hidden = YES;
     
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
@@ -52,13 +52,13 @@
     
     // 注册button
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 60, 28,50, 20) target:self sel:@selector(registered:) tag:0 image:nil title:@"保存" font:17];
-    [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     
     
     
     // 返回button
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(-10, 28,90, 20) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:17];
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
     
     
@@ -79,7 +79,7 @@
     self.textField.backgroundColor = [UIColor whiteColor];
     self.textField.layer.masksToBounds = YES;
     self.textField.layer.cornerRadius = 5;
-    self.textField.layer.borderColor = [ODColorConversion colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
+    self.textField.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
     self.textField.layer.borderWidth = 1;
     self.textField.text = self.nickName;
     

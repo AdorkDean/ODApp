@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import "ODColorConversion.h"
 #import "ODMyApplyActivityModel.h"
 
 #import "UIImageView+WebCache.h"

@@ -70,7 +70,7 @@
     
     // 返回button
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(-10, 28,90, 20) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:17];
-    [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:confirmButton];
     
 }
@@ -117,7 +117,7 @@
         
         self.registView.registereButton.layer.masksToBounds = YES;
         self.registView.registereButton.layer.cornerRadius = 5;
-        self.registView.registereButton.layer.borderColor = [ODColorConversion colorWithHexString:@"#b0b0b0" alpha:1].CGColor;
+        self.registView.registereButton.layer.borderColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1].CGColor;
         self.registView.registereButton.layer.borderWidth = 1;
         
         

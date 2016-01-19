@@ -17,29 +17,29 @@
     self.endTimeImageView.image = [UIImage imageNamed:@"中心详情页icon"];
     
     self.centerNameLabel.text = @"中心名称:";
-    self.centerNameLabel.textColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
+    self.centerNameLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     self.centerNameLabel.font = [UIFont systemFontOfSize:12];
     
     self.beginTimeLabel.text = @"开始时间:";
-    self.beginTimeLabel.textColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
+    self.beginTimeLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     self.beginTimeLabel.font = [UIFont systemFontOfSize:12];
     
     self.endTimeLabel.text = @"结束时间:";
-    self.endTimeLabel.textColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
+    self.endTimeLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     self.endTimeLabel.font = [UIFont systemFontOfSize:12];
     
-    self.centerNameDetailLabel.textColor = [ODColorConversion colorWithHexString:@"#000000" alpha:1];
+    self.centerNameDetailLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.centerNameDetailLabel.font = [UIFont systemFontOfSize:12];
     
-    self.beginTimeDetailLabel.textColor = [ODColorConversion colorWithHexString:@"#000000" alpha:1];
+    self.beginTimeDetailLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.beginTimeDetailLabel.font = [UIFont systemFontOfSize:12];
     
-    self.endTimeDetailLabel.textColor = [ODColorConversion colorWithHexString:@"#000000" alpha:1];
+    self.endTimeDetailLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.endTimeDetailLabel.font = [UIFont systemFontOfSize:12];
     
-    self.checkStateLabel.textColor = [ODColorConversion colorWithHexString:@"#000000" alpha:1];
+    self.checkStateLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.checkStateLabel.layer.borderWidth = 1;
-    self.checkStateLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"#000000" alpha:1].CGColor;
+    self.checkStateLabel.layer.borderColor = [UIColor colorWithHexString:@"#000000" alpha:1].CGColor;
     self.checkStateLabel.font = [UIFont systemFontOfSize:10];
 }
 

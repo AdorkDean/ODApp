@@ -253,7 +253,6 @@
 		B80E0BF61C4751AE00F36A17 /* ODMyOrderRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B80E0BF21C4751AE00F36A17 /* ODMyOrderRecordCell.m */; };
 		B80E0BF71C4751AE00F36A17 /* ODMyOrderRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80E0BF31C4751AE00F36A17 /* ODMyOrderRecordCell.xib */; };
 		B80F03771C226349009CE9D8 /* ODClassMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F03761C226349009CE9D8 /* ODClassMethod.m */; };
-		B80F037A1C22636F009CE9D8 /* ODColorConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F03791C22636F009CE9D8 /* ODColorConversion.m */; };
 		B80F037D1C2264FB009CE9D8 /* ODAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F037C1C2264FB009CE9D8 /* ODAPIManager.m */; };
 		B80F038C1C22A982009CE9D8 /* ODAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B80F038B1C22A982009CE9D8 /* ODAppModel.m */; };
 		B833A6D11C474AAB00F91E9A /* ODHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = B833A6D01C474AAB00F91E9A /* ODHelp.m */; };
@@ -340,6 +339,7 @@
 		B83C6B6F1C224F640063ED92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83C6B6D1C224F640063ED92 /* LaunchScreen.storyboard */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
+		B848E8BC1C4E0E1200B16CBA /* UIColor+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B848E8BB1C4E0E1200B16CBA /* UIColor+ODExtension.m */; };
 		B871CF9F1C4CF87400CF51BA /* ODOtherTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B871CF9E1C4CF87400CF51BA /* ODOtherTopicViewController.m */; };
 		B871CFA21C4CF9FA00CF51BA /* ODOtherTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = B871CFA11C4CF9FA00CF51BA /* ODOtherTaskController.m */; };
 		C66F0C071C4CB4CB006E999B /* ODOthersInformationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C061C4CB4CB006E999B /* ODOthersInformationController.m */; };
@@ -652,8 +652,6 @@
 		B80E0BF21C4751AE00F36A17 /* ODMyOrderRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyOrderRecordCell.m; sourceTree = "<group>"; };
 		B80E0BF31C4751AE00F36A17 /* ODMyOrderRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyOrderRecordCell.xib; sourceTree = "<group>"; };
 		B80F03761C226349009CE9D8 /* ODClassMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODClassMethod.m; sourceTree = "<group>"; };
-		B80F03781C22636F009CE9D8 /* ODColorConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODColorConversion.h; sourceTree = "<group>"; };
-		B80F03791C22636F009CE9D8 /* ODColorConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODColorConversion.m; sourceTree = "<group>"; };
 		B80F037B1C2264FB009CE9D8 /* ODAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAPIManager.h; sourceTree = "<group>"; };
 		B80F037C1C2264FB009CE9D8 /* ODAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAPIManager.m; sourceTree = "<group>"; };
 		B80F038A1C22A982009CE9D8 /* ODAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppModel.h; sourceTree = "<group>"; };
@@ -815,6 +813,8 @@
 		B83C6B861C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B83C6B921C2252F30063ED92 /* ODApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ODApp-Prefix.pch"; sourceTree = "<group>"; };
 		B83C6B931C22532B0063ED92 /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
+		B848E8BA1C4E0E1200B16CBA /* UIColor+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ODExtension.h"; sourceTree = "<group>"; };
+		B848E8BB1C4E0E1200B16CBA /* UIColor+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ODExtension.m"; sourceTree = "<group>"; };
 		B871CF9D1C4CF87400CF51BA /* ODOtherTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOtherTopicViewController.h; sourceTree = "<group>"; };
 		B871CF9E1C4CF87400CF51BA /* ODOtherTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOtherTopicViewController.m; sourceTree = "<group>"; };
 		B871CFA01C4CF9FA00CF51BA /* ODOtherTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOtherTaskController.h; sourceTree = "<group>"; };
@@ -1442,8 +1442,8 @@
 			children = (
 				B80E0B471C474C7900F36A17 /* ODClassMethod.h */,
 				B80F03761C226349009CE9D8 /* ODClassMethod.m */,
-				B80F03781C22636F009CE9D8 /* ODColorConversion.h */,
-				B80F03791C22636F009CE9D8 /* ODColorConversion.m */,
+				B848E8BA1C4E0E1200B16CBA /* UIColor+ODExtension.h */,
+				B848E8BB1C4E0E1200B16CBA /* UIColor+ODExtension.m */,
 				B80F037B1C2264FB009CE9D8 /* ODAPIManager.h */,
 				B80F037C1C2264FB009CE9D8 /* ODAPIManager.m */,
 				B833A6CF1C474AAB00F91E9A /* ODHelp.h */,
@@ -2481,7 +2481,6 @@
 				B83C39141C48A0E9007B16FB /* IQKeyboardManager.m in Sources */,
 				B83C39421C48A0E9007B16FB /* ODMyOrderDetailController.m in Sources */,
 				B80E0B451C474C1F00F36A17 /* ODCommunityCollectionCell.m in Sources */,
-				B80F037A1C22636F009CE9D8 /* ODColorConversion.m in Sources */,
 				9D14AA141C2A999B00696929 /* CenterActivityModel.m in Sources */,
 				B80E0B2A1C474C0500F36A17 /* ODBazaarDetailModel.m in Sources */,
 				9D4DF64A1C3A5651001A4434 /* ODlandingView.m in Sources */,
@@ -2536,6 +2535,7 @@
 				C66F0C101C4CDF4D006E999B /* ODEvaluationModel.m in Sources */,
 				9DDBA4C31C3B6D090007E122 /* ODLandSecondCell.m in Sources */,
 				B871CF9F1C4CF87400CF51BA /* ODOtherTopicViewController.m in Sources */,
+				B848E8BC1C4E0E1200B16CBA /* UIColor+ODExtension.m in Sources */,
 				9DD481101C44C8A6004F34E3 /* ODTypeView.m in Sources */,
 				B83C39381C48A0E9007B16FB /* ODCenterIntroduceController.m in Sources */,
 				B83C39411C48A0E9007B16FB /* ODMyApplyActivityController.m in Sources */,

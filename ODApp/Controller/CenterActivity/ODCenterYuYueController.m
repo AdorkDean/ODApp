@@ -86,7 +86,7 @@
 #pragma mark - 初始化
 -(void)navigationInit
 {
-     self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
    
     
     self.navigationController.navigationBar.hidden = YES;
@@ -101,7 +101,7 @@
     
     // 返回button
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(-10, 28,90, 20) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:17];
-    [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:confirmButton];
     
 
@@ -114,7 +114,7 @@
     
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
-     self.tableView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -155,12 +155,12 @@
         
      
         
-         self.yuYueView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+         self.yuYueView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         
         
         self.yuYueView.computerButton.layer.masksToBounds = YES;
         self.yuYueView.computerButton.layer.cornerRadius = 2;
-        self.yuYueView.computerButton.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.yuYueView.computerButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.yuYueView.computerButton.layer.borderWidth = 1;
         [self.yuYueView.computerButton addTarget:self action:@selector(computerAction:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -169,88 +169,88 @@
 
         self.yuYueView.touYingButton.layer.masksToBounds = YES;
         self.yuYueView.touYingButton.layer.cornerRadius = 2;
-        self.yuYueView.touYingButton.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.yuYueView.touYingButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.yuYueView.touYingButton.layer.borderWidth = 1;
         [self.yuYueView.touYingButton addTarget:self action:@selector(touYingAction:) forControlEvents:UIControlEventTouchUpInside];
 
 
         self.yuYueView.yinXiangButton.layer.masksToBounds = YES;
         self.yuYueView.yinXiangButton.layer.cornerRadius = 2;
-        self.yuYueView.yinXiangButton.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.yuYueView.yinXiangButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.yuYueView.yinXiangButton.layer.borderWidth = 1;
         [self.yuYueView.yinXiangButton addTarget:self action:@selector(yinXiangAction:) forControlEvents:UIControlEventTouchUpInside];
 
         self.yuYueView.maiButton.layer.masksToBounds = YES;
         self.yuYueView.maiButton.layer.cornerRadius = 2;
-        self.yuYueView.maiButton.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.yuYueView.maiButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.yuYueView.maiButton.layer.borderWidth = 1;
         [self.yuYueView.maiButton addTarget:self action:@selector(maiAction:) forControlEvents:UIControlEventTouchUpInside];
 
         
         self.yuYueView.sheBeiLabel.layer.masksToBounds = YES;
         self.yuYueView.sheBeiLabel.layer.cornerRadius = 5;
-        self.yuYueView.sheBeiLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.yuYueView.sheBeiLabel.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.yuYueView.sheBeiLabel.layer.borderWidth = 1;
 
         
         self.yuYueView.pursoseTextView.layer.masksToBounds = YES;
         self.yuYueView.pursoseTextView.layer.cornerRadius = 5;
-        self.yuYueView.pursoseTextView.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.yuYueView.pursoseTextView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.yuYueView.pursoseTextView.layer.borderWidth = 1;
 
 
         self.yuYueView.contentTextView.layer.masksToBounds = YES;
         self.yuYueView.contentTextView.layer.cornerRadius = 5;
-        self.yuYueView.contentTextView.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.yuYueView.contentTextView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.yuYueView.contentTextView.layer.borderWidth = 1;
 
         
         self.yuYueView.peopleNumberTextField.layer.masksToBounds = YES;
         self.yuYueView.peopleNumberTextField.layer.cornerRadius = 5;
-        self.yuYueView.peopleNumberTextField.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.yuYueView.peopleNumberTextField.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.yuYueView.peopleNumberTextField.layer.borderWidth = 1;
      
         
         self.yuYueView.phoneLabel.layer.masksToBounds = YES;
         self.yuYueView.phoneLabel.layer.cornerRadius = 5;
-        self.yuYueView.phoneLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.yuYueView.phoneLabel.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.yuYueView.phoneLabel.layer.borderWidth = 1;
 
 
 
         self.yuYueView.yuYueButton.layer.masksToBounds = YES;
         self.yuYueView.yuYueButton.layer.cornerRadius = 5;
-        self.yuYueView.yuYueButton.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.yuYueView.yuYueButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.yuYueView.yuYueButton.layer.borderWidth = 1;
-        self.yuYueView.yuYueButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd801" alpha:1];
+        self.yuYueView.yuYueButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
        
-    [self.yuYueView.yuYueButton setTitleColor:[ODColorConversion colorWithHexString:@"#49494b" alpha:1]
+    [self.yuYueView.yuYueButton setTitleColor:[UIColor colorWithHexString:@"#49494b" alpha:1]
  forState:UIControlStateNormal];
         [self.yuYueView.yuYueButton addTarget:self action:@selector(yuYueAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
         
-        self.yuYueView.beginText.textColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
-        self.yuYueView.endText.textColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
-        self.yuYueView.sheBeiText.textColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
-        self.yuYueView.purposeText.textColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
-        self.yuYueView.contentText.textColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
-        self.yuYueView.peopleNumberText.textColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
-        self.yuYueView.btimeText.tintColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-        self.yuYueView.eTimeText.tintColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-        self.yuYueView.computerText.textColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-        self.yuYueView.touyingText.textColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-        self.yuYueView.yinxiangText.textColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-        self.yuYueView.yuYueText.textColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
-        self.yuYueView.centerText.tintColor = [ODColorConversion colorWithHexString:@"#484848" alpha:1];
+        self.yuYueView.beginText.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+        self.yuYueView.endText.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+        self.yuYueView.sheBeiText.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+        self.yuYueView.purposeText.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+        self.yuYueView.contentText.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+        self.yuYueView.peopleNumberText.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+        self.yuYueView.btimeText.tintColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+        self.yuYueView.eTimeText.tintColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+        self.yuYueView.computerText.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+        self.yuYueView.touyingText.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+        self.yuYueView.yinxiangText.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+        self.yuYueView.yuYueText.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+        self.yuYueView.centerText.tintColor = [UIColor colorWithHexString:@"#484848" alpha:1];
         
         
         self.yuYueView.centerText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 5);
         self.yuYueView.centerText.layer.masksToBounds = YES;
         self.yuYueView.centerText.layer.cornerRadius = 5;
-        self.yuYueView.centerText.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.yuYueView.centerText.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.yuYueView.centerText.layer.borderWidth = 1;
-        self.yuYueView.centerText.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+        self.yuYueView.centerText.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         UIImageView *lImage = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width - 30, 5, 15, 15) imageName:@"场地预约icon2@3x" tag:0];
         
         [ self.yuYueView.centerText addSubview:lImage];
@@ -264,7 +264,7 @@
         
         [self.yuYueView.phoneText setTitle:self.phoneNumber forState:UIControlStateNormal];
         
-        [self.yuYueView.phoneText setTitleColor:[ODColorConversion colorWithHexString:@"#004ed9" alpha:1]
+        [self.yuYueView.phoneText setTitleColor:[UIColor colorWithHexString:@"#004ed9" alpha:1]
                                          forState:UIControlStateNormal];
       
         [self.yuYueView.phoneText addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -344,7 +344,7 @@
         
         self.yuYueView.btimeText.layer.masksToBounds = YES;
         self.yuYueView.btimeText.layer.cornerRadius = 5;
-        self.yuYueView.btimeText.layer.borderColor = [ODColorConversion colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        self.yuYueView.btimeText.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
         self.yuYueView.btimeText.layer.borderWidth = 1;
      
         
@@ -519,7 +519,7 @@
 - (void)choseBeginTime:(UIButton *)sender
 {
     self.picker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 150, kScreenSize.width, 150)];
-    self.picker.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.picker.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
  
     self.picker.datePickerMode = UIDatePickerModeDateAndTime;
     
@@ -531,7 +531,7 @@
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
      self.cancelButton.frame = CGRectMake(0, kScreenSize.height - 180, kScreenSize.width / 2, 30);
     [ self.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-     self.cancelButton.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+     self.cancelButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [ self.cancelButton addTarget:self action:@selector(quXiaoAction:) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -539,7 +539,7 @@
    self.queDingButton = [UIButton buttonWithType:UIButtonTypeSystem];
      self.queDingButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 180, kScreenSize.width / 2, 30);
     [self.queDingButton setTitle:@"确定" forState:UIControlStateNormal];
-    self.queDingButton.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.queDingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.queDingButton addTarget:self action:@selector(queDingAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview: self.queDingButton];

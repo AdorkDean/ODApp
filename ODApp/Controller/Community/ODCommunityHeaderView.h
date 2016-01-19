@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "ODClassMethod.h"
-#import "ODColorConversion.h"
 
 @interface ODCommunityHeaderView : UICollectionReusableView
 

@@ -18,7 +18,7 @@
     [super viewDidLoad];
     
     self.count = 1;
-    self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self createRequest];
     [self navigationInit];
     [self createTextView];
@@ -41,12 +41,12 @@
     
     //取消按钮
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28,35, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
     
     //确认按钮
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 28,35, 20) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:16];
-    [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:confirmButton];
 }
 
@@ -127,7 +127,7 @@
     self.addPicButton.layer.masksToBounds = YES;
     self.addPicButton.layer.cornerRadius = 5;
     self.addPicButton.layer.borderWidth = 1;
-    self.addPicButton.layer.borderColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1].CGColor;
+    self.addPicButton.layer.borderColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1].CGColor;
     [self.view addSubview:self.addPicButton];
 }
 

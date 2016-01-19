@@ -83,7 +83,7 @@
 -(void)navigationInit
 {
     self.view.userInteractionEnabled = YES;
-    self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
     self.navigationController.navigationBar.hidden = YES;
     
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
@@ -98,12 +98,12 @@
     
     // 注册button
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 60, 28,50, 20) target:self sel:@selector(registered:) tag:0 image:nil title:@"注册" font:17];
-    [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:confirmButton];
     
     // 返回button
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(-10, 28,90, 20) target:self sel:@selector(backAction:) tag:0 image:nil title:@"返回" font:17];
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
 
     
@@ -118,7 +118,7 @@
     
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.tableView.userInteractionEnabled = YES;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -143,26 +143,26 @@
     if (_landView == nil) {
         self.landView = [ODlandingView getView];
         self.landView.userInteractionEnabled = YES;
-        self.landView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+        self.landView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         
         
         self.landView.accountLabel.layer.masksToBounds = YES;
         self.landView.accountLabel.layer.cornerRadius = 20;
-        self.landView.accountLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
+        self.landView.accountLabel.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
         self.landView.accountLabel.layer.borderWidth = 1;
 
         
         self.landView.passwordLabel.layer.masksToBounds = YES;
         self.landView.passwordLabel.layer.cornerRadius = 20;
-        self.landView.passwordLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
+        self.landView.passwordLabel.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
         self.landView.passwordLabel.layer.borderWidth = 1;
         
         
         self.landView.landButton.layer.masksToBounds = YES;
         self.landView.landButton.layer.cornerRadius = 20;
-        self.landView.landButton.layer.borderColor = [ODColorConversion colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
+        self.landView.landButton.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
         self.landView.landButton.layer.borderWidth = 1;
-        self.landView.landButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd801" alpha:1];
+        self.landView.landButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
         [self.landView.landButton addTarget:self action:@selector(landAction:) forControlEvents:UIControlEventTouchUpInside];
         self.landView.passwordTextField.secureTextEntry = YES;
         

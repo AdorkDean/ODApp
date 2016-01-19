@@ -58,7 +58,7 @@
     
     //返回按钮
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28,32, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
     
     //分享按钮
@@ -211,7 +211,7 @@
     if (resultModel.bbs_imgs.count) {
         //图片
         for (NSInteger i = 0; i < resultModel.bbs_imgs.count; i++) {
-            imageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, CGRectGetMaxY(bbsContentLabel.frame)+17.5+(140+10)*i, kScreenSize.width, 140) imageName:nil tag:0];
+            imageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, CGRectGetMaxY(bbsContentLabel.frame)+17.5+(300+10)*i, kScreenSize.width, 300) imageName:nil tag:0];
             [imageView sd_setImageWithURL:[NSURL URLWithString:resultModel.bbs_imgs[i]]];
             [self.bbsView addSubview:imageView];
         }
@@ -298,8 +298,8 @@
     }else{
         NSString *str = [NSString stringWithFormat:@"回复 %@ : %@",model.parent_user_nick,model.content];
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:str];
-        [noteStr addAttribute:NSForegroundColorAttributeName value:[ODColorConversion colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange(0, 2)];
-        [noteStr addAttribute:NSForegroundColorAttributeName value:[ODColorConversion colorWithHexString:@"#000000" alpha:1] range:NSMakeRange(3, [model.parent_user_nick length])];
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange(0, 2)];
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#000000" alpha:1] range:NSMakeRange(3, [model.parent_user_nick length])];
         cell.contentLabel.attributedText = noteStr;
         
         //根据内容的多少来设置contentLabel的高度
@@ -386,8 +386,8 @@
 -(void)createReplyButton
 {
     UIButton *button = [ODClassMethod creatButtonWithFrame:CGRectMake(0, kScreenSize.height - 50, kScreenSize.width, 50) target:self sel:@selector(replyButtonClick:) tag:0 image:nil title:@"回复TA" font:16];
-    button.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd801" alpha:1];
-    [button setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
+    [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.view addSubview:button];
 }
 

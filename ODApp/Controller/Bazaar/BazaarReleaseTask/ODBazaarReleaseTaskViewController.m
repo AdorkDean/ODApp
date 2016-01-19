@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.view.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self navigationInit];
     [self createScrollView];
     [self createTitleTextView];
@@ -43,12 +43,12 @@
     
     //返回按钮
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 28,35, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    [backButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
     
     //确认按钮
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 28,35, 20) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:16];
-    [confirmButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:confirmButton];
 }
 
@@ -142,7 +142,7 @@
     NSArray *array = @[@"开始时间",@"结束时间"];
     for (NSInteger i = 0; i < array.count; i++) {
         UILabel * label = [ODClassMethod creatLabelWithFrame:CGRectMake(4, 148+(30.5+4)*i, 3.5*width, 30.5) text:array[i] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
-        label.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+        label.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         [self.scrollView addSubview:label];
     }
     
@@ -157,22 +157,22 @@
 
     //开始日期label
     self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+3.5*width, 148, 5*width, 30.5) text:[NSString stringWithFormat:@"  %@",dateString] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
-    self.startDateLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    self.startDateLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.startDateLabel];
     
     //结束日期label
     self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+3.5*width, 182.5, 5*width, 30.5) text:[NSString stringWithFormat:@"  %@",dateString] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
-    self.endDateLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    self.endDateLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.endDateLabel];
     
     //开始时间label
     self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+8.5*width, 148, 3.5*width, 30.5) text:[NSString stringWithFormat:@"  %@",timeString] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
-    self.startTimeLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    self.startTimeLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.startTimeLabel];
     
     //结束时间label
     self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+8.5*width, 182.5, 3.5*width, 30.5) text:[NSString stringWithFormat:@"  %@",timeString] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
-    self.endTimeLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    self.endTimeLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.endTimeLabel];
 }
 
@@ -294,7 +294,7 @@
 -(void)createTaskRewardLabel
 {
     self.taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(4, 465, kScreenSize.width - 8, 34) text:@"  选择任务奖励" font:16 alignment:@"left" color:@"#b0b0b0"  alpha:1 maskToBounds:YES];
-    self.taskRewardLabel.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    self.taskRewardLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.taskRewardLabel];
     
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(kScreenSize.width - 8 - 30, 10, 1, 14) tag:0 color:@"#b0b0b0"];

@@ -1,15 +1,14 @@
 //
-//  ODColorConversion.m
+//  UIColor+ODExtension.m
 //  ODApp
 //
-//  Created by Odong-YG on 15/12/17.
-//  Copyright © 2015年 Odong-YG. All rights reserved.
+//  Created by Odong-YG on 16/1/19.
+//  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 
-#import "ODColorConversion.h"
+#import "UIColor+ODExtension.h"
 
-@implementation ODColorConversion
-
+@implementation UIColor (ODExtension)
 + (UIColor *) colorWithHexString: (NSString *)color alpha:(float)opacity
 {
     NSString *cString = [[color stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]uppercaseString];

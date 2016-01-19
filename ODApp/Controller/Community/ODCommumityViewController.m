@@ -59,7 +59,7 @@
     
     //发布任务按钮
     UIButton *publishButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 110, 32,95, 20) target:self sel:@selector(publishButtonClick:) tag:0 image:nil title:@"发表话题" font:16];
-    [publishButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [publishButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     publishButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     [self.headView addSubview:publishButton];
     
@@ -94,9 +94,9 @@
     searchButton.layer.masksToBounds = YES;
     searchButton.layer.cornerRadius = 5;
     searchButton.layer.borderWidth = 1;
-    [searchButton setTitleColor:[ODColorConversion colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    searchButton.layer.borderColor = [ODColorConversion colorWithHexString:@"000000" alpha:1].CGColor;
-    searchButton.backgroundColor = [ODColorConversion colorWithHexString:@"#ffd801" alpha:1];
+    [searchButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    searchButton.layer.borderColor = [UIColor colorWithHexString:@"000000" alpha:1].CGColor;
+    searchButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
     [view addSubview:searchButton];
     
     UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake(20, 0, 100, 29) text:@"关键字搜索" font:16 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
@@ -181,7 +181,7 @@
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,101, kScreenSize.width, kScreenSize.height - 101 - 55) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [ODColorConversion colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
     [self.collectionView registerClass:[ODCommunityHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];
     [self.view addSubview:self.collectionView];
@@ -203,7 +203,7 @@
 {
     ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommunityCellId forIndexPath:indexPath];
     ODCommunityModel *model = self.dataArray[indexPath.row];
-    cell.backgroundColor = [ODColorConversion colorWithHexString:@"#ffffff" alpha:1];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     
     [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
     

@@ -12,12 +12,12 @@
 
 - (void)awakeFromNib {
     
-    self.timelabel.textColor = [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
+    self.timelabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     
-    self.adressLabel.textColor =  [ODColorConversion colorWithHexString:@"#8e8e8e" alpha:1];
+    self.adressLabel.textColor =  [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     self.adressLabel.layer.cornerRadius = 4;
     self.checkLabel.layer.borderWidth = 1;
-    self.checkLabel.layer.borderColor = [ODColorConversion colorWithHexString:@"#000000" alpha:1].CGColor;
+    self.checkLabel.layer.borderColor = [UIColor colorWithHexString:@"#000000" alpha:1].CGColor;
     
 }
 
