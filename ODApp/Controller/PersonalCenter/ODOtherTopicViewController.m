@@ -121,7 +121,6 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.userArray addObject:model];
             }
-            NSLog(@"%ld",self.dataArray.count);
             [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];

@@ -107,10 +107,6 @@
     [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
 
     [self.headView addSubview:backButton];
-
-    
-    
-    
     
 }
 
@@ -186,6 +182,7 @@
 
 - (void)backAction:(UIButton *)sender
 {
+    NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
     if (self.navigationController.viewControllers.count > 1)
     {
         [self.navigationController popViewControllerAnimated:YES];
@@ -199,6 +196,13 @@
         for (NSInteger i = 0; i < 5; i++)
         {
             UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
+            UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
+            if (i!=index) {
+              imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+            }else{
+                imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
+            }
+
             newButton.selected = i == index;
         }
     }
@@ -273,8 +277,7 @@
             else
             {
                 
-               
-
+               NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
                 
                 ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
                 tabBar.selectedIndex = tabBar.currentIndex;
@@ -283,6 +286,13 @@
                 for (NSInteger i = 0; i < 5; i++)
                 {
                     UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
+                    UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
+                    if (i!=index) {
+                        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+                    }else{
+                        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
+                    }
+                    
                     newButton.selected = i == index;
                 }
                
