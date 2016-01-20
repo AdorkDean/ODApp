@@ -18,7 +18,7 @@
  */
 
 
-+(UILabel *)creatLabelWithFrame:(CGRect)frame text:(NSString *)text font:(NSInteger)size alignment:(NSString *)alignment color:(NSString *)color alpha:(float)opacity ;
++(UILabel *)creatLabelWithFrame:(CGRect)frame text:(NSString *)text font:(NSInteger)size alignment:(NSString *)alignment color:(NSString *)color alpha:(float)opacity;
 
 
 
@@ -39,7 +39,7 @@
                                tag:(NSInteger)tag
                              image:(NSString *)name
                              title:(NSString *)title
-                              font:(NSInteger)size ;
+                              font:(NSInteger)size;
 //创建UIImageView
 + (UIImageView *)creatImageViewWithFrame:(CGRect)frame
                                imageName:(NSString *)name tag:(NSInteger)tag;
