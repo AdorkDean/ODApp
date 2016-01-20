@@ -14,7 +14,7 @@
 #import "AFNetworking.h"
 #import "ODUserInformation.h"
 
-@interface ODCenterYuYueController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate>
+@interface ODCenterYuYueController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate , UITextFieldDelegate>
 
 
 @property(nonatomic , strong) UIView *headView;
@@ -359,10 +359,33 @@
         self.yuYueView.eTimeText.tag = 222;
         
         
+        self.yuYueView.peopleNumberTextField.delegate = self;
+           self.yuYueView.peopleNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
+        
+        
         
     }
     return _yuYueView;
 }
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.yuYueView.peopleNumberTextField) {
+        if (string.length == 0) return YES;
+        
+        NSInteger existedLength = textField.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = string.length;
+        if (existedLength - selectedLength + replaceLength > 3) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+
 
 
 - (void)yuYueAction:(UIButton *)sender
