@@ -168,9 +168,16 @@
 -(void)taskButtonClick:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"删除任务"]) {
-        NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation getData].openID};
-        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-        [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter isDelete:YES];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除话题" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation getData].openID};
+            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+            [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter isDelete:YES];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+
     }else{
         if ([ODUserInformation getData].openID) {
             NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation getData].openID};
