@@ -11,6 +11,7 @@
 #import "ODTabBarController.h"
 #import "ODBazaarViewController.h"
 #import "ODBazaarReleaseTaskViewController.h"
+#import "ODUserInformation.h"
 
 @interface ODLazyViewController : ODBaseViewController<UIScrollViewDelegate>
 
@@ -19,5 +20,6 @@
 @property (nonatomic, strong)UIScrollView *scrollView;
 
 @property (nonatomic)BOOL isJob;
+
 
 @end

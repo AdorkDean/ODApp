@@ -1672,10 +1672,10 @@
 		B83C38641C48A0E9007B16FB /* CenterActivity */ = {
 			isa = PBXGroup;
 			children = (
-				B83C38991C48A0E9007B16FB /* ODActivityDetailController.h */,
-				B83C389A1C48A0E9007B16FB /* ODActivityDetailController.m */,
 				B83C389B1C48A0E9007B16FB /* ODCenterActivityViewController.h */,
 				B83C389C1C48A0E9007B16FB /* ODCenterActivityViewController.m */,
+				B83C38991C48A0E9007B16FB /* ODActivityDetailController.h */,
+				B83C389A1C48A0E9007B16FB /* ODActivityDetailController.m */,
 				B83C389D1C48A0E9007B16FB /* ODCenterDetailController.h */,
 				B83C389E1C48A0E9007B16FB /* ODCenterDetailController.m */,
 				B83C389F1C48A0E9007B16FB /* ODCenterPactureController.h */,
