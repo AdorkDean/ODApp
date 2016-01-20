@@ -341,10 +341,8 @@
         self.status = @"9";
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [self.collectionView.mj_header beginRefreshing];
-        [self.dataArray removeAllObjects];
     }else if ([self.refresh isEqualToString:@"del"]){
         [self.collectionView.mj_header beginRefreshing];
-        [self.dataArray removeAllObjects];
     }
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
