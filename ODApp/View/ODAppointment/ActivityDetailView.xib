@@ -79,7 +79,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dianpu.png" translatesAutoresizingMaskIntoConstraints="NO" id="1c6-CM-Gxa">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dianpu" translatesAutoresizingMaskIntoConstraints="NO" id="1c6-CM-Gxa">
                     <rect key="frame" x="25" y="260" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="DAS-ks-Upy"/>
@@ -105,7 +105,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="didian.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jbh-rp-gP3">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="didian" translatesAutoresizingMaskIntoConstraints="NO" id="Jbh-rp-gP3">
                     <rect key="frame" x="27" y="301" width="15" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="Z7j-Hw-MiP"/>
@@ -179,7 +179,7 @@
         </view>
     </objects>
     <resources>
-        <image name="dianpu.png" width="1024" height="1024"/>
-        <image name="didian.png" width="72" height="93"/>
+        <image name="dianpu" width="1024" height="1024"/>
+        <image name="didian" width="72" height="93"/>
     </resources>
 </document>

@@ -92,20 +92,22 @@
     view.userInteractionEnabled = YES;
     [self.view addSubview:view];
     
-    UIButton *searchButton = [ODClassMethod creatButtonWithFrame:CGRectMake(4, 4, kScreenSize.width-8, 29) target:self sel:@selector(searchButtonClick:) tag:0 image:nil title:@" " font:0];
-    searchButton.layer.masksToBounds = YES;
-    searchButton.layer.cornerRadius = 5;
-    searchButton.layer.borderWidth = 1;
-    [searchButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    searchButton.layer.borderColor = [UIColor colorWithHexString:@"000000" alpha:1].CGColor;
-    searchButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
-    [view addSubview:searchButton];
+    UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(4, 4, kScreenSize.width-8, 29) imageName:@"" tag:0];
+    searchImageView.layer.masksToBounds = YES;
+    searchImageView.layer.cornerRadius = 5;
+    searchImageView.layer.borderWidth = 1;
+    searchImageView.userInteractionEnabled = YES;
+    searchImageView.layer.borderColor = [UIColor colorWithHexString:@"000000" alpha:1].CGColor;
+    searchImageView.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
+    UITapGestureRecognizer *searchTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchButtonClick)];
+    [searchImageView addGestureRecognizer:searchTap];
+    [view addSubview:searchImageView];
     
     UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake(20, 0, 100, 29) text:@"关键字搜索" font:16 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
-    [searchButton addSubview:label];
+    [searchImageView addSubview:label];
 }
 
--(void)searchButtonClick:(UIButton *)button
+-(void)searchButtonClick
 {
     ODCommunityKeyWordSearchViewController *keyWordSearch = [[ODCommunityKeyWordSearchViewController alloc]init];
     [self.navigationController pushViewController:keyWordSearch animated:YES];

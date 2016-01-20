@@ -343,7 +343,7 @@
                 <outlet property="yuYueButton" destination="ayB-ay-RcL" id="TX9-Xy-4bB"/>
                 <outlet property="yuYueText" destination="NGx-gz-xai" id="eI6-UR-yLz"/>
             </connections>
-            <point key="canvasLocation" x="816" y="42"/>
+            <point key="canvasLocation" x="693" y="10"/>
         </view>
     </objects>
 </document>

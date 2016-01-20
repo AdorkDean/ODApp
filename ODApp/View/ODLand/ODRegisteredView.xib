@@ -83,7 +83,7 @@
                         <constraint firstAttribute="height" constant="20" id="A86-v1-jnc"/>
                         <constraint firstAttribute="width" constant="25" id="xbP-6C-eJf"/>
                     </constraints>
-                    <state key="normal" title="Button" image="yincangmima.png"/>
+                    <state key="normal" title="Button" image="yincangmima"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYN-ES-akg">
                     <rect key="frame" x="5" y="191" width="310" height="1"/>
@@ -151,6 +151,6 @@
         </view>
     </objects>
     <resources>
-        <image name="yincangmima.png" width="50" height="50"/>
+        <image name="yincangmima" width="50" height="50"/>
     </resources>
 </document>

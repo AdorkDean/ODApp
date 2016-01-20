@@ -34,7 +34,10 @@
 
 #define iPhone6_6sPlus ([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(1920, 1080), [[UIScreen mainScreen] currentMode].size) : NO)
 
-//#define   
+//#define
+
+#define kBaseUrl @"http://woquapi.test.odong.com/"
+
 #define kBazaarUnlimitTaskUrl @"http://woquapi.test.odong.com/1.0/task/list"
 #define kBazaarLabelSearchUrl @"http://woquapi.test.odong.com/1.0/task/tag/search"
 #define kBazaarReleaseTaskUrl @"http://woquapi.test.odong.com/1.0/task/task/add"
@@ -53,12 +56,10 @@
 
 #define kHomeFoundListUrl @"http://woquapi.test.odong.com/1.0/bbs/list"
 #define kHomeFoundPictureUrl @"http://woquapi.test.odong.com/1.0/other/banner"
-
 #define kMyOrderRecordUrl @"http://woquapi.test.odong.com/1.0/store/orders"
 #define kMyOrderDetailUrl @"http://woquapi.test.odong.com/1.0/store/info/order"
 #define kMyApplyActivityUrl @"http://woquapi.test.odong.com/1.0/store/apply/my"
 #define kCancelMyOrderUrl @"http://woquapi.test.odong.com/1.0/store/cancel/order"
-
 #define kOthersInformationUrl @"http://woquapi.test.odong.com/1.0/user/info"
 
 #endif /* Define_h */

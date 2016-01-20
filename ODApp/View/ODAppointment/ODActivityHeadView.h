@@ -12,8 +12,8 @@
 
 
 @property (nonatomic , strong) SDCycleScrollView *cycleScrollerView;
+@property (nonatomic ,strong)UIButton *searchButton;
 
-@property (nonatomic , strong) UIButton *searchButton;
 @property (nonatomic , strong) UIButton *centerButton;
 
 @end
