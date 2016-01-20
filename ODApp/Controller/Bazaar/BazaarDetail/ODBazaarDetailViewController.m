@@ -7,8 +7,9 @@
 //
 
 #import "ODBazaarDetailViewController.h"
+#import "UMSocial.h"
 
-@interface ODBazaarDetailViewController ()
+@interface ODBazaarDetailViewController ()<UMSocialUIDelegate>
 
 @end
 
@@ -40,14 +41,54 @@
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
     [self.headView addSubview:backButton];
+    
+    //分享按钮
+    UIButton *shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:nil font:0];
+    UIImageView *shareImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width-37.5, 28, 20, 20) imageName:@"话题详情-分享icon" tag:0];
+    [self.headView addSubview:shareImageView];
+    [self.headView addSubview:shareButton];
+
 }
 
 -(void)backButtonClick:(UIButton *)button
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+-(void)shareButtonClick:(UIButton *)button
+{
+    ODBazaarDetailModel *model = self.dataArray[0];
+    NSString *url = model.share[@"icon"];
+    NSString *content = model.share[@"desc"];
+    NSString *link = model.share[@"link"];
+    NSString *title = model.share[@"title"];
+    
+    
+    
+    
+    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:url];
+    
+    
+    
+    
+    
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+    
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+    
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+    
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:@"569dda54e0f55a994f0021cf"
+                                      shareText:content
+                                     shareImage:nil
+                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                       delegate:self];
+    
+}
+
 
 #pragma mark - 创建scrollView
 -(void)createScrollView
@@ -326,7 +367,7 @@
         
     }else{
         [button setBackgroundImage:[UIImage imageNamed:@"任务详情上拉按钮"] forState:UIControlStateNormal];
-        self.allLabel.text = @"隐藏全部内容";
+        self.allLabel.text = @"隐藏部分内容";
         [self showViewWhenButtonClick:button];
         buttonClicked = YES;
     }

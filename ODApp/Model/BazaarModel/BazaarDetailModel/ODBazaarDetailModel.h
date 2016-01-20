@@ -22,6 +22,7 @@
 @property(nonatomic,copy)NSString *task_datetime;
 @property(nonatomic,copy)NSString *reward_name;
 @property(nonatomic,copy)NSString *task_status;
+@property (nonatomic,strong) NSMutableDictionary *share;
 
 
 /**

@@ -25,7 +25,7 @@
     [self createScreeningAndSearchButton];
     [self createRequest];
     [self createCollectionView];
-    self.status = @"0";
+    self.status = @"9";
     [self joiningTogetherParmeters];
     
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -163,7 +163,7 @@
         [self.screeningButton setTitle:@"已过期" forState:UIControlStateNormal];
         [self joiningTogetherParmetersWithTaskStatus];
     }else{
-        self.status = @"0";
+        self.status = @"9";
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [self joiningTogetherParmeters];
     }
@@ -336,9 +336,9 @@
     
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.imageView.alpha = 1;
-
+    
     if ([self.refresh isEqualToString:@"release"]) {
-        self.status = @"0";
+        self.status = @"9";
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [self.collectionView.mj_header beginRefreshing];
         [self.dataArray removeAllObjects];

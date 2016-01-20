@@ -25,7 +25,12 @@
     [self createCollectionView];
 
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self joiningTogetherParmeters];
+        if (self.searchBar.text.length>0) {
+            [self joiningTogetherParmeters];
+        }else{
+            [self.collectionView.mj_header endRefreshing];
+        }
+
     }];
     
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{

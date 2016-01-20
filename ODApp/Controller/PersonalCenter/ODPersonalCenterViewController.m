@@ -270,7 +270,9 @@
         
         NSLog(@"%@",responseObject);
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
-      
+            
+            self.landView.accountTextField.text = @"";
+            self.landView.passwordTextField.text = @"";
              ODLandMainController *vc = [[ODLandMainController alloc] init];
             
             

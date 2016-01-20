@@ -111,8 +111,8 @@
     NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.selectedIndex = 2;
-    
     NSInteger index = 2;
+
     for (NSInteger i = 0; i < 5; i++) {
         UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
         UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];

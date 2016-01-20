@@ -21,6 +21,7 @@
 #import "ODPersonalCenterViewController.h"
 #import "ODOthersInformationController.h"
 
+
 @interface ODCommumityViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property(nonatomic,strong)UICollectionView *collectionView;
