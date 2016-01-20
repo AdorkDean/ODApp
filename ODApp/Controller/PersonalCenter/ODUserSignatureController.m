@@ -89,11 +89,13 @@
 
     
     
-    if ([self.signature isEqualToString:@""]) {
+    if ([self.signature isEqualToString:@"未设置签名"]) {
+        
+
         self.textView.text = NSLocalizedString(@"请输入个人签名", nil);//提示语
         self.textView.selectedRange=NSMakeRange(0,0) ;//光标起始位置
         self.textView.delegate=self;
-
+        
     }else{
         self.textView.text = self.signature;
     }
@@ -216,13 +218,16 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        
-        
     }];
-
-    
-    
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+    tabBar.imageView.alpha = 0;
+}
+
 
 
 @end

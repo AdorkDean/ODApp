@@ -8,6 +8,8 @@
 
 #import "ODBaseViewController.h"
 
+#import "ODTabBarController.h"
+
 @interface ODUserSignatureController : ODBaseViewController
 
 

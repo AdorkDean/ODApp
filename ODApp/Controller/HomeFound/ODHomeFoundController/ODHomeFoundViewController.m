@@ -256,34 +256,13 @@
 
     }else{
         ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
+        
+        vc.centerName = @"上海第二工业大学体验中心";
+        vc.phoneNumber = @"13524776010";
+        vc.storeId = @"1";
         [self.navigationController pushViewController:vc animated:YES];
-        
-//        {
-//            
-//            
-//            if ([ODUserInformation getData].openID == nil) {
-//                ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
-//                [self.navigationController pushViewController:vc animated:YES];
-//                
-//                
-//            }else {
-//                ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
-//                
-//                vc.centerName = self.centerName;
-//                vc.storeId = self.storeId;
-//                vc.phoneNumber = self.phoneNumber;
-//                [self.navigationController pushViewController:vc animated:YES];
-//                
-//            }
-//            
-//            
-//            
-//            
-//        }
-        
 
-    }
-    
+    }    
 }
 
 - (void)createCollectionView
