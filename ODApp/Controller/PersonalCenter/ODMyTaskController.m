@@ -576,7 +576,7 @@
             cell.typeLabel.text = @"进行中";
         }else if ([status isEqualToString:@"3"]) {
             
-            cell.typeLabel.text = @"交付";
+            cell.typeLabel.text = @"已交付";
         }else if ([status isEqualToString:@"4"]) {
             
             cell.typeLabel.text = @"确认完成";

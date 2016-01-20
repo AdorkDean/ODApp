@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 
-@interface ODChangePassWordController ()
+@interface ODChangePassWordController ()<UITextFieldDelegate>
 
 @property(nonatomic , strong) UIView *headView;
 @property(nonatomic , strong) ODRegisteredView *registView;
@@ -138,15 +138,61 @@
         [self.registView.seePassword addTarget:self action:@selector(seePassword:) forControlEvents:UIControlEventTouchUpInside];
         
         
+        self.registView.phoneNumber.delegate = self;
+        self.registView.phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
+
+        
+        
+        
     }
     return _registView;
 }
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.registView.phoneNumber) {
+        if (string.length == 0) return YES;
+        
+        NSInteger existedLength = textField.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = string.length;
+        if (existedLength - selectedLength + replaceLength > 11) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
 
 #pragma mark - 点击事件
 - (void)registere:(UIButton *)sender
 {
     
-    [self changePassWord];
+    
+    if ([self.registView.phoneNumber.text isEqualToString:@""]) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+        [alter show];
+        
+    }else if ([self.registView.verification.text isEqualToString:@""]) {
+        
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入验证码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+        [alter show];
+        
+        
+    }else if ([self.registView.password.text isEqualToString:@""]) {
+        
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入密码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+        [alter show];
+        
+        
+    }else {
+        [self changePassWord];
+
+    }
+
+    
     
 
 }
@@ -155,7 +201,15 @@
 {
     
     
-    [self getCode];
+    if ([self.registView.phoneNumber.text isEqualToString:@""]) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+        [alter show];
+    }else {
+        
+        [self getCode];
+        
+    }
+
     
     
 }

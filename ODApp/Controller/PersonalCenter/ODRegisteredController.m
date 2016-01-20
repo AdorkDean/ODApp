@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODLandMainController.h"
-@interface ODRegisteredController ()
+@interface ODRegisteredController ()<UITextFieldDelegate>
 
 @property(nonatomic , strong) UIView *headView;
 @property(nonatomic , strong) ODRegisteredView *registView;
@@ -124,15 +124,60 @@
            [self.registView.seePassword addTarget:self action:@selector(seePassword:) forControlEvents:UIControlEventTouchUpInside];
         
         
+        
+        self.registView.phoneNumber.delegate = self;
+        self.registView.phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
+        
+        
+        
+        
     }
     return _registView;
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.registView.phoneNumber) {
+        if (string.length == 0) return YES;
+        
+        NSInteger existedLength = textField.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = string.length;
+        if (existedLength - selectedLength + replaceLength > 11) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+
+
 #pragma mark - 点击事件
 - (void)registere:(UIButton *)sender
 {
-    
-    [self getRegest];
+    if ([self.registView.phoneNumber.text isEqualToString:@""]) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+        [alter show];
+
+    }else if ([self.registView.verification.text isEqualToString:@""]) {
+        
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入验证码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+        [alter show];
+
+        
+    }else if ([self.registView.password.text isEqualToString:@""]) {
+        
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入密码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+        [alter show];
+        
+        
+    }
+
+    else {
+          [self getRegest];
+    }
+  
     
 }
 
@@ -140,8 +185,14 @@
 - (void)getVerification:(UIButton *)sender
 {
     
-    
-    [self getCode];
+    if ([self.registView.phoneNumber.text isEqualToString:@""]) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+        [alter show];
+    }else {
+        
+        [self getCode];
+
+    }
     
     
     
@@ -176,6 +227,9 @@
 #pragma mark - 请求数据
 -(void)getRegest
 {
+    
+    
+    
     
     NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"passwd":self.registView.password.text,@"verify_code":self.registView.verification.text};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
