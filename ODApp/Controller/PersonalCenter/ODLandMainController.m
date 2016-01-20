@@ -347,7 +347,7 @@ else if (indexPath.section ==3) {
     if (indexPath.section == 0) {
          return CGSizeMake(kScreenSize.width , 90);
     }else {
-         return CGSizeMake(kScreenSize.width , 30);
+         return CGSizeMake(kScreenSize.width , 40);
     }
 }
 

@@ -45,6 +45,9 @@
 
 @property (nonatomic , copy) NSString *phoneNumber;
 
+
+
+
 @end
 
 @implementation ODCenterActivityViewController
@@ -52,8 +55,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.isChange = NO;
-    
+   
+    self.isRefresh = NO;
+
     self.centerNumber = 1;
     
     self.dataArray = [[NSMutableArray alloc] init];
@@ -130,13 +134,20 @@
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.imageView.alpha = 1;
 
-    if (self.isChange == YES) {
+    if (self.isRefresh) {
         [self.collectionView.mj_header beginRefreshing];
     }
     
     
 
 }
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.isRefresh = NO;
+}
+
 
 
 #pragma mark - 请求数据
@@ -350,6 +361,7 @@
         ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
         
        
+             
         vc.storeId = self.storeId;
         
         
@@ -365,22 +377,28 @@
 - (void)searchButtonClick:(UIButton *)sender
 {
     
-    self.isChange = YES;
+   
     
     ODChoseCenterController *vc = [[ODChoseCenterController alloc] init];
     
     
       vc.storeCenterNameBlock = ^(NSString *name , NSString *storeId , NSInteger storeNumber){
        
-      
-          self.centerNumber = storeNumber;
-          
-          
-          [self.firstHeader.searchButton setTitle:name forState:UIControlStateNormal];
+        self.centerNumber = storeNumber;
+        [self.firstHeader.searchButton setTitle:name forState:UIControlStateNormal];
           
           
     };
 
+    
+    vc.isRefreshBlock = ^(BOOL isRefresh){
+        
+        self.isRefresh = isRefresh;
+        
+    };
+
+    
+    
     
     [self.navigationController pushViewController:vc animated:YES];
     

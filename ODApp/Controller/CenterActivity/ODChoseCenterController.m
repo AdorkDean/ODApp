@@ -169,10 +169,15 @@
     NSString *storeId = [NSString stringWithFormat:@"%ld" , (long)model.storeId];
     
        
-        if (self.storeCenterNameBlock) {
-            self.storeCenterNameBlock(model.name , storeId , model.storeId);
-        }
-
+    if (self.storeCenterNameBlock) {
+        self.storeCenterNameBlock(model.name , storeId , model.storeId);
+    }
+    
+    if (self.isRefreshBlock) {
+        self.isRefreshBlock(YES);
+    }
+    
+    
     
     [self.navigationController popViewControllerAnimated:YES];
     

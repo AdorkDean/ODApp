@@ -43,6 +43,9 @@ int pageNumnber = 0;
 
 @property(nonatomic,strong) NSMutableArray *dataArray;
 
+
+
+
 @end
 
 @implementation ODCenterDetailController
@@ -53,7 +56,6 @@ int pageNumnber = 0;
     
     
     
-  
     
      [self getData];
   
@@ -120,6 +122,8 @@ int pageNumnber = 0;
 
 -(void)fanhui:(UIButton *)sender
 {
+  
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -163,44 +167,6 @@ int pageNumnber = 0;
 }
 
 #pragma mark - 请求数据
-- (void)getDetailData
-{
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    self.dataArray = [[NSMutableArray alloc] init];
-    
-    
-    NSDictionary *parameter = @{@"store_id":self.storeId};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    NSString *url = @"http://woquapi.test.odong.com/1.0/store/apply/list";
-    
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        if (responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSMutableArray *result = dict[@"result"];
-            
-            [weakSelf.dataArray removeAllObjects];
-            
-            for (NSDictionary *itemDict in result) {
-                CenterActivityModel *model = [[CenterActivityModel alloc] initWithDict:itemDict];
-                
-                
-                [weakSelf.dataArray addObject:model];
-            }
-           
-            [weakSelf.tableView reloadData];
-        }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
-    }];
-    
-
-}
-
-
 
 - (void)getData
 {
@@ -293,7 +259,7 @@ int pageNumnber = 0;
     [self.tableView registerNib:[UINib nibWithNibName:@"CenterDetailCell" bundle:nil] forCellReuseIdentifier:@"item"];
     
     
-      [self getDetailData];
+    
     
     [self.view addSubview:self.tableView];
     
@@ -507,18 +473,6 @@ int pageNumnber = 0;
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CenterActivityModel *model = self.dataArray[indexPath.section];
-    ODActivityDetailController *vc =  [[ODActivityDetailController alloc] init];
-    vc.activityId = [NSString stringWithFormat:@"%ld" , (long)model.activity_id];
-    vc.storeId = self.storeId;
-   
-    
-     
-    [self.navigationController pushViewController:vc animated:YES];
-    
-}
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -551,7 +505,7 @@ int pageNumnber = 0;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.dataArray.count;
+    return 0;
 }
 
 

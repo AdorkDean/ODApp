@@ -12,7 +12,7 @@
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
 #import "ODBazaarReleaseRewardViewController.h"
-
+#import "ODBazaarViewController.h"
 
 @interface ODBazaarReleaseTaskViewController : ODBaseViewController<UITextViewDelegate>
 
@@ -33,5 +33,9 @@
 @property(nonatomic,strong)UIDatePicker *datePicker;
 @property(nonatomic,strong)NSString *reward_id;
 @property(nonatomic,copy)void(^myBlock)(NSString *refresh);
+
+@property (nonatomic, assign) BOOL isJob;
+
+@property (nonatomic, assign) BOOL isBazaar;
 
 @end

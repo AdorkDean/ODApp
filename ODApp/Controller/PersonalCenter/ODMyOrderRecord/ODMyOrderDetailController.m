@@ -62,7 +62,7 @@
 
     if ([self.checkLabel.text isEqualToString:@"已取消"]) {
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"预约已经取消了" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"订单已经取消" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }else{
