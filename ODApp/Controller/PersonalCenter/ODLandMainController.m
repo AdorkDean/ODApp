@@ -302,39 +302,43 @@ else if (indexPath.section ==3) {
         
     }
      else if (indexPath.section ==7) {
-         NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
-         ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-         tabBar.selectedIndex = 0;
-        [self.navigationController popViewControllerAnimated:YES];
-       
-         [ODUserInformation getData].openID = nil;
-
-
-
          
-         if (self.navigationController.viewControllers.count > 1)
-         {
-             [self.navigationController popViewControllerAnimated:YES];
-         }
-         else
-         {
-             tabBar.selectedIndex = tabBar.currentIndex;
+         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否退出登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
+         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
              
-             NSInteger index = tabBar.selectedIndex;
-             for (NSInteger i = 0; i < 5; i++)
+             NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
+             ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+             tabBar.selectedIndex = 0;
+             [self.navigationController popViewControllerAnimated:YES];
+             
+             [ODUserInformation getData].openID = nil;
+             
+             if (self.navigationController.viewControllers.count > 1)
              {
-                 UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
-                 UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-                 if (i!=index) {
-                     imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
-                 }else{
-                     imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
-                 }
-                 
-                 newButton.selected = i == index;
+                 [self.navigationController popViewControllerAnimated:YES];
              }
-         }
-    }
+             else
+             {
+                 tabBar.selectedIndex = tabBar.currentIndex;
+                 
+                 NSInteger index = tabBar.selectedIndex;
+                 for (NSInteger i = 0; i < 5; i++)
+                 {
+                     UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
+                     UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
+                     if (i!=index) {
+                         imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+                     }else{
+                         imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
+                     }
+                     
+                     newButton.selected = i == index;
+                 }
+             }
+         }]];
+         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+         [self presentViewController:alert animated:YES completion:nil];
+     }
 }
 
 //动态设置每个item的大小
