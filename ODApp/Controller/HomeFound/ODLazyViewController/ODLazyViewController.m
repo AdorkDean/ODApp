@@ -131,24 +131,16 @@
 - (void)buildMyJobButtonClick:(UIButton *)button
 {
 
+    self.isJob = NO;
     if ([ODUserInformation getData].openID == nil) {
         ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
         tabBar.selectedIndex = 4;
-//        NSInteger index = 4;
-//        for (NSInteger i = 0; i < 5; i++) {
-//            UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1 + i];
-//            if (i != index) {
-//                newButton.selected = NO;
-//            }else{
-//                newButton.selected = YES;
-//            }
-//        }
+
     }
     else{
-    
-        self.isJob =NO;
-        
+  
         ODBazaarReleaseTaskViewController *vc = [[ODBazaarReleaseTaskViewController alloc] init];
+        vc.isBazaar = NO;
         [self.navigationController pushViewController:vc animated:YES];
     }    
 }
@@ -166,8 +158,6 @@
 
     if (self.isJob) {
         [self.navigationController popToRootViewControllerAnimated:YES];
-    }else{
-    
     }
 }
 

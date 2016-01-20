@@ -16,6 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
 
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self navigationInit];
@@ -348,11 +350,37 @@
             if (self.myBlock) {
                 self.myBlock([NSString stringWithFormat:@"release"]);
             }
-            [self.navigationController popViewControllerAnimated:YES];
+        
+            self.isJob = YES;
+        
+            if (self.isBazaar == NO) {
+                NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
+                ODTabBarController *tabbar = (ODTabBarController *)self.navigationController.tabBarController;
+                tabbar.selectedIndex = 2;
+                
+                NSInteger index = 2;
+                for (NSInteger i = 0; i < 5; i++) {
+                    UIButton *newButton= (UIButton *)[tabbar.imageView viewWithTag:1+i];
+                    UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
+                    
+                    if (i!=index) {
+                        newButton.selected =NO;
+                        //                    button.selected = YES;
+                        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+                        
+                    }else{
+                        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
+                    }
+                }
+            }
+            else{
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        NSLog(@"error");
+        NSLog(@"_____error");
     }];
     
 }
@@ -401,10 +429,17 @@
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    if (self.isJob) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    
     self.navigationController.navigationBar.hidden = YES;
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.imageView.alpha = 0;
 }
+
+
 
 #pragma mark - 试图将要消失
 -(void)viewWillDisappear:(BOOL)animated

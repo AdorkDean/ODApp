@@ -73,6 +73,9 @@
 {
     if ([ODUserInformation getData].openID) {
         ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
+        
+        releaseTask.isBazaar = YES;
+        
         releaseTask.myBlock = ^(NSString *release){
             self.refresh = release;
         };
