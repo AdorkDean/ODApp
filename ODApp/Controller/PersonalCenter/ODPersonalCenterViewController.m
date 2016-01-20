@@ -25,12 +25,19 @@
 @property (nonatomic , strong) ODlandingView *landView;
 @property (nonatomic, strong) IQKeyboardReturnKeyHandler *returnKeyHandler;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property (nonatomic , assign) NSInteger pageNumber;
+
+
+
 @end
 
 @implementation ODPersonalCenterViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    self.pageNumber = 0;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
       
@@ -74,6 +81,13 @@
   
     
     
+}
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.pageNumber = 0;
 }
 
 
@@ -321,8 +335,18 @@
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
             
+            self.pageNumber++;
+            if (self.pageNumber==3) {
+                [self createUIAlertControllerWithTitle:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册"];
+                
+                
+
+            }else {
+                   [self createUIAlertControllerWithTitle:responseObject[@"message"]];
+            }
             
-            [self createUIAlertControllerWithTitle:responseObject[@"message"]];
+            
+         
             
             
         }

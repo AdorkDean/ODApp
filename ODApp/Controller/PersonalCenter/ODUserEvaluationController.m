@@ -144,7 +144,17 @@
             
             [self.collectionView.mj_header endRefreshing];
             [self.collectionView.mj_footer endRefreshing];
-            [self.collectionView reloadData];
+            
+            if (self.dataArray.count == 0) {
+                UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.view addSubview:nothingLabel];
+            }
+            
+            else{
+                [self.collectionView reloadData];
+            }
+            
+            
 
             
             
