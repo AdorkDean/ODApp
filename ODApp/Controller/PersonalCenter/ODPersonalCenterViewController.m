@@ -227,8 +227,21 @@
 
 - (void)landAction:(UIButton *)sender
 {
+    if ([self.landView.accountTextField.text isEqualToString:@""]) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+        [alter show];
+
+    }else if ([self.landView.passwordTextField.text isEqualToString:@""]) {
+        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入密码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+        [alter show];
+
+    }
     
-    [self landToView];
+    else {
+          [self landToView];
+    }
+    
+  
     
     
 }
