@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		453C139C602C89AF557B0F7E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E55588697041BF02F9C6E1 /* libPods.a */; };
+		9D02B4481C4F6D4E0098E003 /* MyPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D02B4471C4F6D4E0098E003 /* MyPageControl.m */; };
 		9D0E77371C3CBA8E00C73A05 /* ODBindingMobileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D0E77361C3CBA8E00C73A05 /* ODBindingMobileView.m */; };
 		9D0E77391C3CBA9900C73A05 /* ODBindingMobileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D0E77381C3CBA9900C73A05 /* ODBindingMobileView.xib */; };
 		9D14AA0E1C2A856800696929 /* CenterActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D14AA0C1C2A856800696929 /* CenterActivityCell.m */; };
@@ -320,7 +321,6 @@
 		B83C39501C48A0E9007B16FB /* ODTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C39021C48A0E9007B16FB /* ODTabBarController.m */; };
 		B83C6B671C224F640063ED92 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B661C224F640063ED92 /* main.m */; };
 		B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B691C224F640063ED92 /* AppDelegate.m */; };
-		B83C6B6F1C224F640063ED92 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B83C6B6D1C224F640063ED92 /* LaunchScreen.storyboard */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
 		B848E8BC1C4E0E1200B16CBA /* UIColor+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B848E8BB1C4E0E1200B16CBA /* UIColor+ODExtension.m */; };
@@ -373,6 +373,8 @@
 
 /* Begin PBXFileReference section */
 		92E55588697041BF02F9C6E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D02B4461C4F6D4E0098E003 /* MyPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPageControl.h; sourceTree = "<group>"; };
+		9D02B4471C4F6D4E0098E003 /* MyPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPageControl.m; sourceTree = "<group>"; };
 		9D0E77351C3CBA8E00C73A05 /* ODBindingMobileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBindingMobileView.h; sourceTree = "<group>"; };
 		9D0E77361C3CBA8E00C73A05 /* ODBindingMobileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBindingMobileView.m; sourceTree = "<group>"; };
 		9D0E77381C3CBA9900C73A05 /* ODBindingMobileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBindingMobileView.xib; sourceTree = "<group>"; };
@@ -787,7 +789,6 @@
 		B83C6B661C224F640063ED92 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B83C6B681C224F640063ED92 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B83C6B691C224F640063ED92 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B83C6B6E1C224F640063ED92 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B83C6B701C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B83C6B751C224F640063ED92 /* ODAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ODAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B791C224F640063ED92 /* ODAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODAppTests.m; sourceTree = "<group>"; };
@@ -1871,8 +1872,9 @@
 			children = (
 				B83C6B681C224F640063ED92 /* AppDelegate.h */,
 				B83C6B691C224F640063ED92 /* AppDelegate.m */,
+				9D02B4461C4F6D4E0098E003 /* MyPageControl.h */,
+				9D02B4471C4F6D4E0098E003 /* MyPageControl.m */,
 				9D5EBA211C4DD08A00581A66 /* Assets.xcassets */,
-				B83C6B6D1C224F640063ED92 /* LaunchScreen.storyboard */,
 				B83C6B701C224F640063ED92 /* Info.plist */,
 				B83C6B921C2252F30063ED92 /* ODApp-Prefix.pch */,
 				D425DA341C4E233900BDD2AE /* Singleton.h */,
@@ -2327,7 +2329,6 @@
 				9DD00BC51C4E393300F0EE5F /* UMSocialLocalizable.strings in Resources */,
 				B8046DD41C4772C200D1FEBC /* 搜索取消icon@2x.png in Resources */,
 				B8046E501C4772C200D1FEBC /* 首页-去版聊icon@1x.png in Resources */,
-				B83C6B6F1C224F640063ED92 /* LaunchScreen.storyboard in Resources */,
 				9DD00BCF1C4E393300F0EE5F /* UMSocialSDKResourcesNew.bundle in Resources */,
 				B8046D931C4772C200D1FEBC /* 中心详情页icon2@3x.png in Resources */,
 				B8046DE51C4772C200D1FEBC /* 任务筛选上拉箭头@1x.png in Resources */,
@@ -2520,6 +2521,7 @@
 				B80E0B451C474C1F00F36A17 /* ODCommunityCollectionCell.m in Sources */,
 				9D14AA141C2A999B00696929 /* CenterActivityModel.m in Sources */,
 				B80E0B2A1C474C0500F36A17 /* ODBazaarDetailModel.m in Sources */,
+				9D02B4481C4F6D4E0098E003 /* MyPageControl.m in Sources */,
 				D425DA1E1C4E1F7E00BDD2AE /* IQNSArray+Sort.m in Sources */,
 				D425DA301C4E1F7E00BDD2AE /* TAPageControl.m in Sources */,
 				D425DA331C4E1F7E00BDD2AE /* UIView+SDExtension.m in Sources */,
@@ -2671,14 +2673,6 @@
 			name = UMSocialLocalizable.strings;
 			sourceTree = "<group>";
 		};
-		B83C6B6D1C224F640063ED92 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B83C6B6E1C224F640063ED92 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -2770,6 +2764,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -2796,6 +2791,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
