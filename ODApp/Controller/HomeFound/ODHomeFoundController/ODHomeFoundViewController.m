@@ -242,25 +242,49 @@
         ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
         tabBar.selectedIndex = 4;
         
-        NSInteger index = 4;
-        for (NSInteger i = 0; i < 5; i++) {
-            UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
-            
-            if (i != index) {
-                newButton.selected = NO;
-            }else{
-                newButton.selected = YES;
-            }
-        }
+//        NSInteger index = 4;
+//        for (NSInteger i = 0; i < 5; i++) {
+//            UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
+//            
+//            if (i != index) {
+//                newButton.selected = NO;
+//            }else{
+//                newButton.selected = YES;
+//            }
+//        }
         
 
     }else{
         ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+        
+//        {
+//            
+//            
+//            if ([ODUserInformation getData].openID == nil) {
+//                ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
+//                [self.navigationController pushViewController:vc animated:YES];
+//                
+//                
+//            }else {
+//                ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
+//                
+//                vc.centerName = self.centerName;
+//                vc.storeId = self.storeId;
+//                vc.phoneNumber = self.phoneNumber;
+//                [self.navigationController pushViewController:vc animated:YES];
+//                
+//            }
+//            
+//            
+//            
+//            
+//        }
+        
 
     }
     
-   }
+}
 
 - (void)createCollectionView
 {
