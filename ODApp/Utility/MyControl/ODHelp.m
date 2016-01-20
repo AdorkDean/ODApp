@@ -40,6 +40,7 @@
         //返回计算出的行高
         return rect.size.height;
         
+        
     }else {
         //iOS7之前
         /*
@@ -57,5 +58,6 @@
     
     return [[[UIDevice currentDevice] systemVersion] doubleValue];
 }
+
 
 @end
