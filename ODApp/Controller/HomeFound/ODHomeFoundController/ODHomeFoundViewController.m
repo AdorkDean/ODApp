@@ -192,18 +192,22 @@
 
 - (void)chatButtonClick:(UIButton *)button
 {
-    
+    NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.selectedIndex = 3;
     
     NSInteger index = 3;
     for (NSInteger i = 0; i < 5; i++) {
         UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
+        UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
         
-        if (i != index) {
-            newButton.selected = NO;
+        if (i!=index) {
+            newButton.selected =NO;
+            button.selected = YES;
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+            
         }else{
-            newButton.selected = YES;
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
         }
     }
 }
@@ -211,17 +215,22 @@
 - (void)activityButtonClick:(UIButton *)button
 {
 
+    NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
     ODTabBarController *tabbar = (ODTabBarController *)self.navigationController.tabBarController;
     tabbar.selectedIndex = 1;
     
     NSInteger index = 1;
     for (NSInteger i = 0; i < 5; i++) {
         UIButton *newButton= (UIButton *)[tabbar.imageView viewWithTag:1+i];
+        UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
         
         if (i!=index) {
-            newButton.selected = NO;
+            newButton.selected =NO;
+            button.selected = YES;
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+            
         }else{
-            newButton.selected = YES;
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
         }
     }
 }
