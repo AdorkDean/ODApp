@@ -342,8 +342,8 @@
         [self.firstCollectionView.mj_header endRefreshing];
         [self.firstCollectionView.mj_footer endRefreshing];
         if (self.FirstDataArray.count == 0) {
-            UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.view addSubview:nothingLabel];
+            UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+            [self.scrollView addSubview:nothingLabel];
         }
         
         else{
@@ -434,8 +434,8 @@
         [self.secondCollectionView.mj_header endRefreshing];
         [self.secondCollectionView.mj_footer endRefreshing];
         if (self.secondDataArray.count == 0) {
-            UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.view addSubview:nothingLabel];
+            UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2 + kScreenSize.width, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+            [self.scrollView addSubview:nothingLabel];
         }
         
         else{

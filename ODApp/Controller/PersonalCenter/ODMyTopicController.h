@@ -16,4 +16,6 @@
 
 @property (nonatomic, copy) NSString *open_id;
 
+
+
 @end
