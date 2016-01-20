@@ -341,7 +341,15 @@
         
         [self.firstCollectionView.mj_header endRefreshing];
         [self.firstCollectionView.mj_footer endRefreshing];
-        [self.firstCollectionView reloadData];
+        if (self.FirstDataArray.count == 0) {
+            UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+            [self.view addSubview:nothingLabel];
+        }
+        
+        else{
+            [self.firstCollectionView reloadData];
+        }
+
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -425,7 +433,15 @@
         
         [self.secondCollectionView.mj_header endRefreshing];
         [self.secondCollectionView.mj_footer endRefreshing];
-        [self.secondCollectionView reloadData];
+        if (self.secondDataArray.count == 0) {
+            UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+            [self.view addSubview:nothingLabel];
+        }
+        
+        else{
+            [self.secondCollectionView reloadData];
+        }
+
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
