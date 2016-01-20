@@ -18,7 +18,7 @@
  */
 
 
-+(UILabel *)creatLabelWithFrame:(CGRect)frame text:(NSString *)text font:(NSInteger)size alignment:(NSString *)alignment color:(NSString *)color alpha:(float)opacity ODExtensionDeprecated("不建议使用");
++(UILabel *)creatLabelWithFrame:(CGRect)frame text:(NSString *)text font:(NSInteger)size alignment:(NSString *)alignment color:(NSString *)color alpha:(float)opacity;
 
 
 
@@ -29,8 +29,7 @@
                        alignment:(NSString *)alignment
                            color:(NSString *)color
                            alpha:(float)opacity
-                    maskToBounds:(BOOL)maskToBounds
- ODExtensionDeprecated("不建议使用");
+                    maskToBounds:(BOOL)maskToBounds;
 
 
 //创建button可以创建 标题按钮和 图片按钮
@@ -40,19 +39,19 @@
                                tag:(NSInteger)tag
                              image:(NSString *)name
                              title:(NSString *)title
-                              font:(NSInteger)size ODExtensionDeprecated("不建议使用") ;
+                              font:(NSInteger)size;
 //创建UIImageView
 + (UIImageView *)creatImageViewWithFrame:(CGRect)frame
-                               imageName:(NSString *)name tag:(NSInteger)tag ODExtensionDeprecated("不建议使用");
+                               imageName:(NSString *)name tag:(NSInteger)tag;
 
 //创建UIView
-+(UIView *)creatViewWithFrame:(CGRect)frame tag:(NSInteger)tag color:(NSString *)color ODExtensionDeprecated("不建议使用");
++(UIView *)creatViewWithFrame:(CGRect)frame tag:(NSInteger)tag color:(NSString *)color;
 
 //创建UITextField
 + (UITextField *)creatTextFieldWithFrame:(CGRect)frame
                              placeHolder:(NSString *)string
                                 delegate:(id <UITextFieldDelegate>)delegate
-                                     tag:(NSInteger)tag ODExtensionDeprecated("不建议使用");
+                                     tag:(NSInteger)tag;
 
 //创建UITextView
 +(UITextView *)creatTextViewWithFrame:(CGRect)frame
@@ -61,7 +60,7 @@
                                  font:(NSInteger)size
                                 color:(NSString *)color
                                 alpha:(float)opacity
-                         maskToBounds:(BOOL)maskToBounds ODExtensionDeprecated("不建议使用");
+                         maskToBounds:(BOOL)maskToBounds;
 
 
 @end
