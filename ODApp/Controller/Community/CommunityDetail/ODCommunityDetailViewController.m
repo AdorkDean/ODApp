@@ -218,8 +218,7 @@
 
 -(void)userHeaderButtonClick:(UIButton *)button
 {
-    ODCommunityDetailReplyViewController *detailReply = [[ODCommunityDetailReplyViewController alloc]init];
-    [self.navigationController pushViewController:detailReply animated:YES];
+
 }
 
 #pragma marl - 创建bbs详情试图

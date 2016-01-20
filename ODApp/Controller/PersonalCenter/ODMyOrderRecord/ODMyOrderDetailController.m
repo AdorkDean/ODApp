@@ -60,18 +60,34 @@
 - (void)cancelOrderButtonClick:(UIButton *)button
 {
 
-    self.managers = [AFHTTPRequestOperationManager manager];
+    if ([self.checkLabel.text isEqualToString:@"已取消"]) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"预约已经取消了" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
     
-    NSDictionary *parameter = @{@"open_id":self.open_id,@"order_id":self.order_id};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您确定要取消预约嘛？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            self.managers = [AFHTTPRequestOperationManager manager];
+            
+            NSDictionary *parameter = @{@"open_id":self.open_id,@"order_id":self.order_id};
+            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+            
+            [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                
+                self.checkLabel.text = @"已取消";
+                
+            } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+                
+            }];
+        }]];
         
-        self.checkLabel.text = @"已取消";   
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
-    }];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 - (void)getOrderDetailRequest{
@@ -181,7 +197,7 @@
     UIButton *phoneButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5 + kScreenSize.width * 2/5, 64 + 10 + spaceY * 10, 100, labelHeight) target:self sel:@selector(phoneButtonClick:) tag:0 image:nil title:self.model.store_tel font:14];
     [self.view addSubview:phoneButton];
     
-    self.checkLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 11, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",self.model.status_str ]font:14 alignment:@"center" color:@"#000000" alpha:1];
+    self.checkLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 11, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"%@",self.model.status_str ]font:14 alignment:@"center" color:@"#000000" alpha:1];
     self.checkLabel.layer.cornerRadius = 5;
     self.checkLabel.layer.borderWidth = 1;
     self.checkLabel.layer.borderColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1].CGColor;
