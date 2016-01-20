@@ -26,12 +26,14 @@
         float spaceX = (kScreenSize.width - 40 * 2 - 40 * 4) / 3;
 
         self.lazyButton = [ODClassMethod creatButtonWithFrame:CGRectMake(40 - 20, 64 + kScreenSize.height / 4.4 + 20 - 10, 65, 80) target:self sel:nil tag:0 image:@"" title:nil font:0];
+        
         UIImageView *lazyImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(40, 64 + kScreenSize.height / 4.4 + 20, 35, 21) imageName:@"首页-去偷懒icon" tag:0];
+        
         [self addSubview:lazyImageView];
         [self addSubview:self.lazyButton];
         
         self.lazyLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(35, 64 + kScreenSize.height / 4.4 + 60, 40, 15) text:@"去偷懒" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
-        self.lazyLabel.userInteractionEnabled = YES;
+        self.lazyLabel.userInteractionEnabled = NO;
         [self addSubview:self.lazyLabel];
         
         self.chatButton = [ODClassMethod creatButtonWithFrame:CGRectMake(40 + 40 + spaceX - 20, 64 + kScreenSize.height / 4.4 + 15 - 10, 65, 80) target:self sel:nil tag:0 image:@"" title:nil font:0];
@@ -40,6 +42,7 @@
         [self addSubview:self.chatButton];
         
         self.chatLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(35 + 40 + spaceX, 64 + kScreenSize.height / 4.4 + 60, 40, 15) text:@"去版聊" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+        self.chatLabel.userInteractionEnabled = NO;
         [self addSubview:self.chatLabel];
         
         self.activityButton = [ODClassMethod creatButtonWithFrame:CGRectMake(40 + 40 * 2 + spaceX * 2 - 20, 64 + kScreenSize.height / 4.4 + 15 - 10, 65, 80) target:self sel:nil tag:0 image:@"" title:nil font:0];
@@ -48,6 +51,7 @@
         [self addSubview:self.activityButton];
         
         self.activityLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(35 + 40 * 2 + spaceX * 2, 64 + kScreenSize.height / 4.4 + 60, 40, 15) text:@"找活动" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+        self.activityLabel.userInteractionEnabled = NO;
         [self addSubview:self.activityLabel];
         
         self.placeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(40 + 40 * 3 + spaceX * 3 - 20, 64 + kScreenSize.height / 4.4 + 15 - 10, 65, 80) target:self sel:nil tag:0 image:@"" title:nil font:0];
@@ -56,6 +60,7 @@
         [self addSubview:self.placeButton];
         
         self.placeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(35 + 40 * 3 + spaceX * 3, 64 + kScreenSize.height / 4.4 + 60, 40, 15) text:@"约场地" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+        self.placeLabel.userInteractionEnabled = NO;
         [self addSubview:self.placeLabel];
 
         self.themeView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 64 + kScreenSize.height / 4.4 + 195 / 2, kScreenSize.width, 24) tag:0 color:@"#f3f3f3"];
