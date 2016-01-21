@@ -95,6 +95,7 @@
         
         if (self.count == 1) {
             [self.dataArray removeAllObjects];
+            [self.noReusltLabel removeFromSuperview];
         }
         if (responseObject) {
             NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -123,8 +124,8 @@
             }
             
             if (self.userArray.count == 0) {
-                UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [self.view addSubview:nothingLabel];
+                self.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.view addSubview:self.noReusltLabel];
             }
             
             else{

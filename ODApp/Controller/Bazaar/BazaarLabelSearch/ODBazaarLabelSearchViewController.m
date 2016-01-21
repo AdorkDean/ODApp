@@ -156,6 +156,7 @@
         
         if (self.count == 1) {
             [self.dataArray removeAllObjects];
+            [self.noReusltLabel  removeFromSuperview];
         }
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -171,7 +172,9 @@
             [weakSelf.collectionView.mj_footer endRefreshing];
             
             if (weakSelf.dataArray.count == 0) {
-                [self createUIAlertControllerWithTitle:@"没有符合条件的任务,试试其它关键字吧!"];
+
+                self.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 180)/2, kScreenSize.height/2, 180, 30) text:@"没有符合条件的任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.view addSubview:self.noReusltLabel];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

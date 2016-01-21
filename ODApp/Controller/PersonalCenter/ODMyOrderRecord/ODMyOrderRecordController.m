@@ -79,7 +79,10 @@
     __weak typeof (self)weakSelf = self;
     [self.manager GET:kMyOrderRecordUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
+        [self.noReusltLabel removeFromSuperview];
+        
         if (responseObject) {
+            
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
             [self.orderArray removeAllObjects];
@@ -94,8 +97,8 @@
             }
 
             if (self.orderArray.count == 0) {
-                UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无预约" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [self.view addSubview:nothingLabel];
+                self.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无预约" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.view addSubview:self.noReusltLabel];
             }
             
             else{
