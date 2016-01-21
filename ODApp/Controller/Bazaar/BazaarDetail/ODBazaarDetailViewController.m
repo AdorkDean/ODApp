@@ -308,7 +308,6 @@
     }
     //显示全部内容
     self.allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.taskBottomView.frame.size.width-130, 0, 100, labelHeight) text:@"显示全部内容" font:15 alignment:@"center" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    self.allLabel.backgroundColor = [UIColor redColor];
     [self.taskBottomView addSubview:self.allLabel];
     
     UIButton *allButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.taskBottomView.frame.size.width-30,4, 25, buttonHeight) target:self sel:@selector(allButtonClick:) tag:0 image:@"任务详情下拉按钮" title:nil font:0];
