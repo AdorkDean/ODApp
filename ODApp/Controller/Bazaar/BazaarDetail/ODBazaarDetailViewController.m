@@ -210,7 +210,7 @@
 {
     if ([button.titleLabel.text isEqualToString:@"删除任务"]) {
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除话题" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation getData].openID};
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
@@ -246,8 +246,10 @@
             }
             
         }else{
-            NSLog(@"%@",responseObject);
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                if (self.myBlock) {
+                    self.myBlock([NSString stringWithFormat:@"accept"]);
+                }
                 [self.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
                 [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
                 self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
@@ -306,6 +308,7 @@
     }
     //显示全部内容
     self.allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.taskBottomView.frame.size.width-130, 0, 100, labelHeight) text:@"显示全部内容" font:15 alignment:@"center" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    self.allLabel.backgroundColor = [UIColor redColor];
     [self.taskBottomView addSubview:self.allLabel];
     
     UIButton *allButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.taskBottomView.frame.size.width-30,4, 25, buttonHeight) target:self sel:@selector(allButtonClick:) tag:0 image:@"任务详情下拉按钮" title:nil font:0];
@@ -341,8 +344,8 @@
    
     ODBazaarDetailLayout *layout = [[ODBazaarDetailLayout alloc]initWithAnim:HJCarouselAnimLinear];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    layout.itemSize = CGSizeMake(160, 200);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.taskBottomView.frame)+10, kScreenSize.width, 200) collectionViewLayout:layout];
+    layout.itemSize = CGSizeMake(120, 150);
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.taskBottomView.frame)+10, kScreenSize.width, 150) collectionViewLayout:layout];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.showsVerticalScrollIndicator = NO;
@@ -350,7 +353,7 @@
     self.collectionView.delegate = self;
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarDetailCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarDetailCellId];
     [self.scrollView addSubview:self.collectionView];
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+230);
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+180);
 
 }
 
@@ -359,7 +362,6 @@
     static BOOL buttonClicked = NO;
     
     if (buttonClicked) {
-        
         [button setBackgroundImage:[UIImage imageNamed:@"任务详情下拉按钮"] forState:UIControlStateNormal];
         self.allLabel.text = @"显示全部内容";
         [self hiddenViewWhenButtonClickAgain:button];
@@ -367,7 +369,7 @@
         
     }else{
         [button setBackgroundImage:[UIImage imageNamed:@"任务详情上拉按钮"] forState:UIControlStateNormal];
-        self.allLabel.text = @"隐藏部分内容";
+        self.allLabel.text = @"隐藏全部内容";
         [self showViewWhenButtonClick:button];
         buttonClicked = YES;
     }
@@ -457,6 +459,30 @@
     cell.layer.borderColor = [UIColor colorWithHexString:@"#484848" alpha:1].CGColor;
     cell.layer.borderWidth = 1;
     return cell;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODBazaarDetailModel *model = self.picArray[indexPath.row];
+    if ([[ODUserInformation getData].openID isEqualToString:self.open_id]) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否委派" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            NSDictionary *parameter = @{@"task_id":self.task_id,@"apply_open_id":model.open_id};
+            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            [manager GET:kBazaarTaskDelegateUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                if ([responseObject[@"status"] isEqualToString:@"success"]) {
+                    NSLog(@"%@",responseObject[@"status"]);
+                }
+            } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+                
+            }];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 #pragma mark - 试图将要出现
