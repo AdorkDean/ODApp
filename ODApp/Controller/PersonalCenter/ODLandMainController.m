@@ -90,8 +90,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        
-        
     }];
 
 }
@@ -113,7 +111,7 @@
     
     
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 20, kScreenSize.width, kScreenSize.height - 20) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 20, kScreenSize.width, kScreenSize.height - 55 - 20) collectionViewLayout:self.flowLayout];
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;

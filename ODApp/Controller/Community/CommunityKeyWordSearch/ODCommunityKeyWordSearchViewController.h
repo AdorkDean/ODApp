@@ -26,5 +26,6 @@
 @property(nonatomic)NSInteger count;
 @property(nonatomic,copy)NSString *keyText;
 
+@property (nonatomic, strong) UILabel *noReusltLabel;
 
 @end

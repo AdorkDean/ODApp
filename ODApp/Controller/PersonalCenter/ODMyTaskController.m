@@ -43,6 +43,9 @@
 
 @property (nonatomic, copy) NSString *openID;
 
+@property (nonatomic , strong) UILabel *firstLabel;
+@property (nonatomic , strong) UILabel *secondLabel;
+
 
 @end
 
@@ -431,15 +434,20 @@
     [self.firstManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
-        if ([countNumber isEqualToString:@"1"]) {
-            [self.FirstDataArray removeAllObjects];
-            
-        }
         
         
         
         if (responseObject) {
             
+            
+            if ([countNumber isEqualToString:@"1"]) {
+                [self.FirstDataArray removeAllObjects];
+                
+                [self.firstLabel removeFromSuperview];
+                
+                
+            }
+
             
             NSDictionary *result = responseObject[@"result"];
             NSArray *tasks = result[@"tasks"];
@@ -450,28 +458,25 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [self.FirstDataArray addObject:model];
             }
-            
-            
-            
+   
         }
+        
+        
+             if (self.FirstDataArray.count == 0) {
+           self.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40, self.scrollView.center.y / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+            [self.scrollView addSubview:self.firstLabel];
+        }
+        
+        [self.firstCollectionView.mj_header endRefreshing];
+        [self.firstCollectionView.mj_footer endRefreshing];
+
+        [self.firstCollectionView reloadData];
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
         [self.firstCollectionView.mj_header endRefreshing];
         [self.firstCollectionView.mj_footer endRefreshing];
-        if (self.FirstDataArray.count == 0) {
-            UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.view addSubview:nothingLabel];
-        }
-        
-        else{
-            [self.firstCollectionView reloadData];
-        }
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-        
         
     }];
     
@@ -497,15 +502,18 @@
     [self.secondManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
-        if ([countNumber isEqualToString:@"1"]) {
-            [self.secondDataArray removeAllObjects];
-            
-        }
         
         
         
         if (responseObject) {
             
+            if ([countNumber isEqualToString:@"1"]) {
+                [self.secondDataArray removeAllObjects];
+                [self.secondLabel removeFromSuperview];
+                
+                
+            }
+
             
             NSDictionary *result = responseObject[@"result"];
             NSArray *tasks = result[@"tasks"];
@@ -522,30 +530,28 @@
         }
         
         
+        
+        if (self.secondDataArray.count == 0) {
+           self.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40 + self.scrollView.frame.size.width, self.scrollView.center.y / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+            [self.scrollView addSubview:self.secondLabel];
+        }
+        
+        
         [self.secondCollectionView.mj_header endRefreshing];
         [self.secondCollectionView.mj_footer endRefreshing];
-        if (self.secondDataArray.count == 0) {
-            UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.view addSubview:nothingLabel];
-        }
-        
-        else{
-            [self.secondCollectionView reloadData];
-        }
-        
+        [self.secondCollectionView reloadData];
+
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        
+        [self.secondCollectionView.mj_header endRefreshing];
+        [self.secondCollectionView.mj_footer endRefreshing];
         
     }];
     
-    
-    
-    
-    
+      
 }
 
 

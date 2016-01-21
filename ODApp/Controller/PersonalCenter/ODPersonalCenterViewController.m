@@ -48,8 +48,6 @@
     self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
     self.returnKeyHandler.toolbarManageBehaviour = IQAutoToolbarBySubviews;
     
-      
-    
 
 }
 
@@ -78,9 +76,7 @@
 
     }
     
-  
-    
-    
+
 }
 
 
@@ -182,10 +178,7 @@
         
         
         [self.landView.forgetPassWordButton addTarget:self action:@selector(forgetPassawordAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        
-        
+
         
         
     }

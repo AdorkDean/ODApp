@@ -18,7 +18,7 @@
 #import "ODBazaarDetailViewController.h"
 
 
-@interface ODBazaarLabelSearchViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UISearchBarDelegate>
+@interface ODBazaarLabelSearchViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UISearchBarDelegate ,UITextFieldDelegate>
 
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
@@ -28,5 +28,6 @@
 @property(nonatomic)NSInteger count;
 @property(nonatomic,copy)NSString *keyText;
 
+@property (nonatomic, strong) UILabel *noReusltLabel;
 
 @end

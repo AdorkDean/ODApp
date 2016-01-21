@@ -10,6 +10,6 @@
 
 @interface ODAppModel : NSObject
 
--(void)setValue:(id)value forUndefinedKey:(NSString *)key ODExtensionDeprecated("过期");
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key;
 
 @end

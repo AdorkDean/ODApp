@@ -117,9 +117,7 @@
                 [self.navigationController popViewControllerAnimated:YES];
                 
             }
-            
-            
-            
+
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {

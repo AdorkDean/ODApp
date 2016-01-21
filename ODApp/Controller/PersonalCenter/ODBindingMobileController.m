@@ -72,9 +72,6 @@
 
     [self.headView addSubview:backButton];
     
-    
-    
-    
 }
 
 -(void)createTimer
@@ -176,24 +173,15 @@
             [self.timer setFireDate:[NSDate distantPast]];
         }else if (responseObject[@"error"]){
             
-            
-            
-            
+      
         }  else if ([responseObject[@"status"]isEqualToString:@"error"]){
             
             
             [self createUIAlertControllerWithTitle:responseObject[@"message"]];
-            
-            
         }
-        
-        
-        
-        
+       
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-        
+     
     }];
 }
 
@@ -225,17 +213,11 @@
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             
             [self createUIAlertControllerWithTitle:responseObject[@"message"]];
-            
-            
+       
         }
-        
-        
-        
-        
+      
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-             
+       
         
     }];
 }

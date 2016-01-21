@@ -100,9 +100,7 @@
         self.textView.text = self.signature;
     }
   
-    
-  
-    
+ 
     [self.view addSubview:self.textView];
     
     
@@ -203,9 +201,7 @@
                 [self.navigationController popViewControllerAnimated:YES];
 
             }
-            
-            
-           
+   
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
