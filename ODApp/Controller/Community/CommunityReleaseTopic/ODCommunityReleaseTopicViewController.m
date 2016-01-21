@@ -302,13 +302,13 @@
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"%@",responseObject);
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             if (self.myBlock) {
                 self.myBlock([NSString stringWithFormat:@"refresh"]);
             }
             [self.navigationController popViewControllerAnimated:YES];
         }
-        NSLog(@"%@",responseObject);
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
     }];

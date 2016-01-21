@@ -273,7 +273,6 @@
 {
     if ([self.refresh isEqualToString:@"refresh"]) {
         [self.collectionView.mj_header beginRefreshing];
-        [self.dataArray removeAllObjects];
     }
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
