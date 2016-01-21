@@ -351,19 +351,14 @@
             [self.firstCollectionView reloadData];
         }
 
-        
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        
+        [self.firstCollectionView.mj_header endRefreshing];
+        [self.firstCollectionView.mj_footer endRefreshing];
         
     }];
-    
-    
-
-    
-    
+   
 }
 
 -(void)secondGetData
@@ -449,13 +444,11 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        
+        [self.secondCollectionView.mj_header endRefreshing];
+        [self.secondCollectionView.mj_footer endRefreshing];
         
     }];
-    
-
-    
-    
+  
 }
 
 
@@ -497,12 +490,7 @@
 
     }
     
-    
-    
-    
-   
-    
-    
+
     return cell;
 }
 
@@ -546,10 +534,7 @@
         detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
         [self.navigationController pushViewController:detailController animated:YES];
     }
-    
-  
-    
-    
+
 }
 
 

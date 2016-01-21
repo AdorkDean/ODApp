@@ -121,27 +121,17 @@
             [self.dataArray removeAllObjects];
             [self.noReusltLabel removeFromSuperview];
         }
-        
-        
-        
+     
         if (responseObject) {
-            
-            
-          
+
             NSMutableDictionary *dic = responseObject[@"result"];
             for (NSMutableDictionary *miniDic in dic) {
                 ODEvaluationModel *model = [[ODEvaluationModel alloc] init];
                 [model setValuesForKeysWithDictionary:miniDic];
                 [self.dataArray addObject:model];
-                
-             
-                
-                
+      
             }
-            
-            
-            
-            
+
             [self.collectionView.mj_header endRefreshing];
             [self.collectionView.mj_footer endRefreshing];
             
@@ -153,29 +143,16 @@
             else{
                 [self.collectionView reloadData];
             }
-            
-            
-
-            
-            
+ 
         }
-        
-        
-      
-        
-        
+   
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-        
+  
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
         
     }];
-    
-    
-    
   
-    
-    
 }
 
 
@@ -194,9 +171,7 @@
     
     centerNameLabe.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:centerNameLabe];
-    
-    
-    
+
     // 返回button
 
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backAction:) tag:0 image:nil title:@"返回" font:16];
@@ -204,11 +179,7 @@
     [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
 
     [self.headView addSubview:backButton];
-    
-    
-    
-    
-    
+ 
 }
 
 #pragma mark - 点击事件
@@ -216,11 +187,8 @@
 - (void)backAction:(UIButton *)sender
 {
    
-    
    [self.navigationController popViewControllerAnimated:YES];
-    
-    
-    
+
 }
 
 #pragma mark - UICollectionViewDelegate

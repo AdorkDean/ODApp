@@ -68,10 +68,7 @@
 {
     [self.dataArray removeAllObjects];
     
-    
-    
-    
-    
+
     self.manager = [AFHTTPRequestOperationManager manager];
     NSString *openId = [ODUserInformation getData].openID;
     
@@ -87,9 +84,7 @@
         
         NSMutableDictionary *dic = responseObject[@"result"];
         ODUserModel *model = [[ODUserModel alloc] initWithDict:dic];
-        
-        
-        
+   
         [self.dataArray addObject:model];
         
         [self createTableView];
@@ -98,9 +93,7 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        
-        
-        
+ 
     }];
     
 }
@@ -243,22 +236,14 @@
             self.informationView.signatureLabel.text = [NSString stringWithFormat:@"未设置签名"];
         }else{
             
-            
             self.informationView.signatureLabel.text = text;
             
         }
 
-        
-        
-        
     };
-    
-    
-    
+
     [self.navigationController pushViewController:vc animated:YES];
-    
-    
-    
+
     
 }
 
@@ -277,14 +262,11 @@
             self.informationView.nickNameLabel.text = [NSString stringWithFormat:@"未设置昵称"];
         }else{
             
-            
             self.informationView.nickNameLabel.text = text;
             
         }
         
-        
     };
-
     
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -322,13 +304,11 @@
         
         
     self.informationView.phoneLabel.text = text;
-
-        
+   
         
     };
 
-    
-    
+
     [self.navigationController pushViewController:vc animated:YES];
     
     
@@ -343,7 +323,6 @@
     vc.topTitle = @"修改密码";
     
     [self.navigationController pushViewController:vc animated:YES];
-
     
 }
 
@@ -522,9 +501,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
-    
-    
-    
+
     return cell;
 }
 
