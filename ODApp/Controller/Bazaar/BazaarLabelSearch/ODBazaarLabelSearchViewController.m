@@ -85,6 +85,7 @@
 {
     if (self.searchBar.text.length>0) {
         self.keyText = [NSString stringWithFormat:@"%@",self.searchBar.text];
+        [self.searchBar resignFirstResponder];
         [self joiningTogetherParmeters];
     }else{
         [self createUIAlertControllerWithTitle:@"请输入搜索内容"];
@@ -100,12 +101,14 @@
     self.searchBar.delegate = self;
     self.searchBar.placeholder = @"标签关键字";
     [self.headView addSubview:self.searchBar];
+    
 }
+
 
 #pragma mark - UISearchBarDelegate
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    [searchBar setShowsCancelButton:YES animated:YES];
+    [searchBar setShowsCancelButton:NO animated:YES];
     return YES;
 }
 
@@ -166,6 +169,10 @@
             [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
+            
+            if (weakSelf.dataArray.count == 0) {
+                [self createUIAlertControllerWithTitle:@"没有符合条件的任务,试试其它关键字吧!"];
+            }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
