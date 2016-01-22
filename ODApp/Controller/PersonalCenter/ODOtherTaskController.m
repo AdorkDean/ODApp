@@ -136,10 +136,8 @@
         
         if ([countNumber isEqualToString:@"1"]) {
             [self.dataArray removeAllObjects];
-            
+            [self.noReusltLabel removeFromSuperview];
         }
-        
-        
         
         if (responseObject) {
             
@@ -153,32 +151,24 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [self.dataArray addObject:model];
             }
-            
-            
-            
         }
-        
-        
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
         if (self.dataArray.count == 0) {
-            UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.view addSubview:nothingLabel];
+            self.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+            [self.view addSubview:self.noReusltLabel];
         }
         
         else{
             [self.collectionView reloadData];
         }
         
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        
-        
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
         
     }];
-    
-
 }
 
 
@@ -193,18 +183,13 @@
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
     
-    
     UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 180) / 2, 28, 180, 20) text:@"他发起的任务" font:17 alignment:@"center" color:@"#000000" alpha:1];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
-    
-    
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(-10, 28,90, 20) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:17];
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:confirmButton];
-    
-    
     
 }
 
@@ -229,14 +214,10 @@
     cell.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
     cell.userImageView.layer.borderWidth = 1;
     
-    
-    
-    
-        ODBazaarModel *model = self.dataArray[indexPath.row];
-        
-        
-        
-        [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
+  
+    ODBazaarModel *model = self.dataArray[indexPath.row];
+  
+    [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
         
         cell.nickLabel.text = model.user_nick;
         cell.titleLabel.text = model.title;

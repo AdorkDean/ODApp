@@ -93,11 +93,6 @@
 #pragma mark - UITextViewDelegate
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    }
-    
     if (textView == self.titleTextView) {
         if (text.length == 0) return YES;
         
@@ -159,7 +154,10 @@
 
 -(void)addPicButtonClick:(UIButton *)button
 {
+    [self.titleTextView resignFirstResponder];
+    [self.topicContentTextView resignFirstResponder];
     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
+    
     [actionSheet showInView:self.view];
 }
 

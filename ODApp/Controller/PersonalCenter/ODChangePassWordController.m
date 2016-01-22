@@ -43,8 +43,7 @@
     
     self.currentTime = 60;
 
-    
-    
+   
 }
 
 
@@ -192,9 +191,6 @@
 
     }
 
-    
-    
-
 }
 
 - (void)getVerification:(UIButton *)sender
@@ -209,8 +205,6 @@
         [self getCode];
         
     }
-
-    
     
 }
 
@@ -231,7 +225,6 @@
     self.seePassWord = !self.seePassWord;
     
 }
-
 
 
 -(void)fanhui:(UIButton *)sender
@@ -258,9 +251,7 @@
       
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             
-        
-            
-            
+         
             [self.navigationController popViewControllerAnimated:YES];
         }
         
@@ -269,17 +260,11 @@
             [self createUIAlertControllerWithTitle:responseObject[@"message"]];
             
         }
-        
-        
-        
+
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        
-        
-        
-        
-        
+   
     }];
 }
 

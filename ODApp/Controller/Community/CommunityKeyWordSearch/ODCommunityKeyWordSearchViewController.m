@@ -83,6 +83,7 @@
 {
     if (self.searchBar.text.length>0) {
         self.keyText = [NSString stringWithFormat:@"%@",self.searchBar.text];
+        [self.searchBar resignFirstResponder];
         [self joiningTogetherParmeters];
     }else{
         [self createUIAlertControllerWithTitle:@"请输入搜索内容"];
@@ -103,7 +104,7 @@
 #pragma mark - UISearchBarDelegate
 -(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-    [searchBar setShowsCancelButton:YES animated:YES];
+    [searchBar setShowsCancelButton:NO animated:YES];
     return YES;
 }
 
@@ -151,6 +152,7 @@
         
         if (self.count == 1) {
             [self.dataArray removeAllObjects];
+            [self.noReusltLabel removeFromSuperview];
         }
         
         if (responseObject) {
@@ -178,9 +180,16 @@
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
             
+            if (weakSelf.dataArray.count == 0) {
+                self.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 180)/2, kScreenSize.height/2, 180, 30) text:@"没有符合条件的任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.view addSubview:self.noReusltLabel];
+            }
+            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
     }];
 }
 

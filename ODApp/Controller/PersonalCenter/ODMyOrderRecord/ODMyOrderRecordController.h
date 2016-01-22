@@ -33,4 +33,6 @@
 
 @property (nonatomic, assign) BOOL isOther;
 
+@property (nonatomic, strong) UILabel *noReusltLabel;
+
 @end

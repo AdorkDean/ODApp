@@ -10,10 +10,10 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 
-@interface ODUserSignatureController ()<UITextFieldDelegate>
+@interface ODUserSignatureController ()<UITextViewDelegate>
 
 @property (nonatomic , strong) UIView *headView;
-@property (nonatomic , strong) UITextField *textField;
+@property (nonatomic , strong) UITextView *textView;
 @property(nonatomic,strong) AFHTTPRequestOperationManager *manager;
 
 
@@ -26,9 +26,8 @@
     // Do any additional setup after loading the view.
     
     
-    [self navigationInit];
-    [self creatTextField];
-   
+     [self navigationInit];
+     [self creatTextView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,7 +53,7 @@
     
     
     // 注册button
-    
+
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 60, 16,50, 44) target:self sel:@selector(registered:) tag:0 image:nil title:@"保存" font:16];
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     
@@ -63,7 +62,7 @@
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    
+
     [self.headView addSubview:backButton];
     
     
@@ -74,50 +73,99 @@
     
 }
 
-
-- (void)creatTextField
+- (void)creatTextView
 {
-    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(4, 68, kScreenSize.width - 8, 30)];
+    
+    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(4, 68, kScreenSize.width - 8, 100)];
     
     
-    [self.textField setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.textField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
-    self.textField.backgroundColor = [UIColor whiteColor];
-    self.textField.layer.masksToBounds = YES;
-    self.textField.layer.cornerRadius = 5;
-    self.textField.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
-    self.textField.layer.borderWidth = 1;
-    self.textField.delegate = self;
+    
+    self.textView.layer.masksToBounds = YES;
+    self.textView.layer.cornerRadius = 5;
+    self.textView.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
+    self.textView.layer.borderWidth = 1;
+    self.textView.textColor = [UIColor lightGrayColor];//设置提示内容颜色
+    self.textView.scrollEnabled = NO;
 
     
     
     if ([self.signature isEqualToString:@"未设置签名"]) {
-          self.textField.placeholder = @"请设置签名";
-    }else
-    {
-          self.textField.text = self.signature;
+        
+
+        self.textView.text = NSLocalizedString(@"请输入个人签名", nil);//提示语
+        self.textView.selectedRange=NSMakeRange(0,0) ;//光标起始位置
+        self.textView.delegate=self;
+        
+    }else{
+        self.textView.text = self.signature;
     }
   
+ 
+    [self.view addSubview:self.textView];
     
-      [self.view addSubview:self.textField];
+    
     
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+#pragma mark - textViewDelegate
+- (void)textViewDidChangeSelection:(UITextView *)textView
 {
-    if (textField == self.textField) {
-        if (string.length == 0) return YES;
-        
-        NSInteger existedLength = textField.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = string.length;
-        if (existedLength - selectedLength + replaceLength > 20) {
-            return NO;
-        }
+    if (textView.textColor==[UIColor lightGrayColor])//如果是提示内容，光标放置开始位置
+    {
+        NSRange range;
+        range.location = 0;
+        range.length = 0;
+        textView.selectedRange = range;
     }
+}
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text
+{
+    if (![text isEqualToString:@""] && textView.textColor==[UIColor lightGrayColor])//如果不是delete响应,当前是提示信息，修改其属性
+    {
+        textView.text=@"";//置空
+        textView.textColor=[UIColor blackColor];
+    }
+    
+    if ([text isEqualToString:@"\n"])//回车事件
+    {
+        if ([textView.text isEqualToString:@""])//如果直接回车，显示提示内容
+        {
+            textView.textColor=[UIColor lightGrayColor];
+          
+            textView.text=NSLocalizedString(@"请输入个人签名", nil);
+                
+                
+        }
+        [textView resignFirstResponder];//隐藏键盘
+        return NO;
+    }
+    return YES;
+}
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""])
+    {
+        textView.textColor = [UIColor lightGrayColor];
+       
+        textView.text=NSLocalizedString(@"请输入个人签名", nil);
+            
+        
+    
+    }
+    
+       
+}
+
+#pragma mark - textFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
     
     return YES;
 }
+
+
 
 
 #pragma mark - 点击事件
@@ -130,11 +178,11 @@
 
 - (void)registered:(UIButton *)sender
 {
-    NSString *openID = [ODUserInformation getData].openID;
+     NSString *openID = [ODUserInformation getData].openID;
     
     self.manager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"user_sign":self.textField.text , @"open_id":openID};
+    NSDictionary *parameters = @{@"user_sign":self.textView.text , @"open_id":openID};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
@@ -146,25 +194,21 @@
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             if (self.getTextBlock) {
                 if (self.getTextBlock) {
-                    self.getTextBlock(self.textField.text);
+                    self.getTextBlock(self.textView.text);
                 }
                 
                 
                 [self.navigationController popViewControllerAnimated:YES];
-                
+
             }
-            
-            
-            
+   
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             UIAlertView *alter = [[UIAlertView alloc] initWithTitle:nil message:responseObject[@"message"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alter show];
         }
-        
-        
-        
+      
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
@@ -177,7 +221,6 @@
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.imageView.alpha = 0;
 }
-
 
 
 @end

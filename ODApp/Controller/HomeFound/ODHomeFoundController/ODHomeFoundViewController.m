@@ -10,7 +10,9 @@
 #import "ODUserInformation.h"
 
 @interface ODHomeFoundViewController ()
-
+{
+    NSMutableDictionary *userInfoDic;
+}
 @end
 
 @implementation ODHomeFoundViewController
@@ -26,8 +28,7 @@
     self.pictureDetailArray = [[NSMutableArray alloc] init];
     
     self.dataArray = [[NSMutableArray alloc] init];
-    self.userArray = [[NSMutableArray alloc] init];
-    self.userArrays = [[NSMutableArray alloc] init];
+    userInfoDic = [NSMutableDictionary dictionary];
     
     [self navigationInit];
     
@@ -85,7 +86,6 @@
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
             [self.dataArray removeAllObjects];
-            [self.userArray removeAllObjects];
             
             NSDictionary *result = dict[@"result"];
             
@@ -110,13 +110,14 @@
                 NSDictionary *itemDict = users[key];
                 ODCommunityModel *model = [[ODCommunityModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.userArray addObject:model];
+                [userInfoDic setObject:model forKey:userKey];
             }
             
             [self getcycleScrollViewRequest];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        [self.collectionView.mj_header endRefreshing];
         
     }];
 }
@@ -179,6 +180,7 @@
             
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        [self.collectionView.mj_header endRefreshing];
         
     }];
 }
@@ -306,22 +308,11 @@
     ODCommunityModel *model = self.dataArray[indexPath.row];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [cell showDateWithModel:model];
-    
-    
-    for (NSInteger i = 0; i < self.userArray.count; i++) {
-        
-        ODCommunityModel *userModel = self.userArray[i];
-        if ([[NSString stringWithFormat:@"%@",model.user_id] isEqualToString:[NSString stringWithFormat:@"%@",userModel.id]]) {
-            for (id key in self.userArray) {
-                
-                [self.userArrays addObject:key];
-            }
-            cell.nameLabel.text = userModel.nick;
-            [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
-            [cell.headButton addTarget:self action:@selector(headButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        }
-    }
-    
+    [cell.headButton addTarget:self action:@selector(headButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+    cell.nameLabel.text = [userInfoDic[userId]nick];
+    [cell.headButton sd_setBackgroundImageWithURL: [NSURL URLWithString:[userInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
+
     return cell;
 }
 
@@ -329,11 +320,11 @@
 {
 
     ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview;
-    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-    ODCommunityModel *model = self.userArrays[indexPath.row];
-    
+    NSIndexPath *indexpath = [self.collectionView indexPathForCell:cell];
+    ODCommunityModel *model = self.dataArray[indexpath.row];
+    NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-    vc.open_id = model.open_id;
+    vc.open_id = [userInfoDic[userId]open_id];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

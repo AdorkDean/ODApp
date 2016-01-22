@@ -48,8 +48,8 @@
 
 //最新话题数组
 @property (nonatomic, strong)NSMutableArray *dataArray;
-@property (nonatomic, strong)NSMutableArray *userArray;
 
-@property (nonatomic, strong)NSMutableArray *userArrays;
+
+
 
 @end

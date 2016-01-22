@@ -105,7 +105,7 @@
     [UMSocialSnsService presentSnsIconSheetView:self
                                          appKey:@"569dda54e0f55a994f0021cf"
                                       shareText:content
-                                     shareImage:nil
+                                      shareImage:nil
                                 shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
                                        delegate:self];
 
@@ -160,6 +160,9 @@
                 [weakSelf.tableView.mj_footer endRefreshing];
             }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     }];
 }
 
@@ -183,7 +186,6 @@
         }
 
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
     }];
 }
 

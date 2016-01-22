@@ -42,6 +42,7 @@
 #define kBazaarLabelSearchUrl @"http://woquapi.test.odong.com/1.0/task/tag/search"
 #define kBazaarReleaseTaskUrl @"http://woquapi.test.odong.com/1.0/task/task/add"
 #define kBazaarTaskDetailUrl @"http://woquapi.test.odong.com/1.0/task/detail"
+#define kBazaarTaskDelegateUrl @"http://woquapi.test.odong.com/1.0/task/accept"
 #define kBazaarAcceptTaskUrl @"http://woquapi.test.odong.com/1.0/task/apply"
 #define kBazaarReleaseRewardUrl @"http://woquapi.test.odong.com/1.0/other/config/info"
 

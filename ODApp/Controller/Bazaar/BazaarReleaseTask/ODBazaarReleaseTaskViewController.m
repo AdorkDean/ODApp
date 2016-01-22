@@ -71,6 +71,7 @@
     NSString *endTime = self.endTimeLabel.text;
     NSComparisonResult timeResult = [startTime compare:endTime];
     
+    
     if (self.titleTextView.text.length>0&&self.taskDetailTextView.text.length>0) {
         if (dateResult == NSOrderedDescending){
             [self createUIAlertControllerWithTitle:@"结束日期不得早于开始日期"];
@@ -95,6 +96,7 @@
             [self joiningTogetherParmeters];
         }
 
+
     }else{
         if (self.titleTextView.text.length == 0) {
             [self createUIAlertControllerWithTitle:@"请输入任务标题"];
@@ -114,8 +116,8 @@
     }else{
         [dateFormatter setDateFormat:@"  HH:mm"];
     }
-    NSString *currentDateStr = [dateFormatter stringFromDate:currentDate];
-    return currentDateStr;
+    self.currentDateStr = [dateFormatter stringFromDate:currentDate];
+    return self.currentDateStr;
 }
 
 #pragma mark - 创建scrollView
@@ -213,6 +215,7 @@
 {
     [self.backPickerView removeFromSuperview];
     [self setUpDatePickerViewWihtButton:button];
+    
 }
 
 #pragma mark - 初始化datePickerView
@@ -388,10 +391,6 @@
 #pragma mark - UITextViewDelegate
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if ([text isEqualToString:@"\n"]) {
-        [textView resignFirstResponder];
-        return NO;
-    }
     
     if (textView == self.titleTextView) {
         if (text.length == 0) return YES;
