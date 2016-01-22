@@ -295,6 +295,7 @@
     ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
     CGFloat height = [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:15];
     self.taskBottomView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(self.taskTopView.frame)+10, kScreenSize.width-25, 100) tag:0 color:@"#ffffff"];
+    self.taskBottomView.userInteractionEnabled = YES;
     [self.scrollView addSubview:self.taskBottomView];
     
     CGFloat labelHeight;
@@ -307,15 +308,18 @@
         buttonHeight = 22;
     }
     //显示全部内容
-//    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(allButtonClick:)];
-//    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.taskBottomView.frame.size.width-130, 0, 130, labelHeight)];
-    self.allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.taskBottomView.frame.size.width-130, 0, 100, labelHeight) text:@"显示全部内容" font:15 alignment:@"center" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    [self.taskBottomView addSubview:self.allLabel];
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(allButtonClick)];
+    self.allView = [[UIView alloc]initWithFrame:CGRectMake(self.taskBottomView.frame.size.width-130, 0, 130, labelHeight)];
+    [self.allView addGestureRecognizer:gesture];
+    [self.taskBottomView addSubview:self.allView];
     
-    UIButton *allButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.taskBottomView.frame.size.width-30,4, 25, buttonHeight) target:self sel:@selector(allButtonClick:) tag:0 image:@"任务详情下拉按钮" title:nil font:0];
-    [self.taskBottomView addSubview:allButton];
+    self.allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 100, labelHeight) text:@"显示全部内容" font:15 alignment:@"center" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    [self.allView addSubview:self.allLabel];
+    
+    self.allImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(100,4, 25, buttonHeight) imageName:@"任务详情下拉按钮" tag:0];
+    [self.allView addSubview:self.allImageView];
     //任务奖励
-    UILabel *rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.allLabel.frame)+10, 80, 30) text:@"任务奖励 :" font:14 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
+    UILabel *rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.allView.frame)+10, 80, 30) text:@"任务奖励 :" font:14 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
     rewardLabel.layer.borderColor = [UIColor colorWithHexString:@"ffd802" alpha:1].CGColor;
     [self.taskBottomView addSubview:rewardLabel];
     
@@ -358,25 +362,25 @@
 
 }
 
--(void)allButtonClick:(UIButton *)button
+-(void)allButtonClick
 {
     static BOOL buttonClicked = NO;
     
     if (buttonClicked) {
-        [button setBackgroundImage:[UIImage imageNamed:@"任务详情下拉按钮"] forState:UIControlStateNormal];
+        [self.allImageView setImage:[UIImage imageNamed:@"任务详情下拉按钮"]];
         self.allLabel.text = @"显示全部内容";
-        [self hiddenViewWhenButtonClickAgain:button];
+        [self hiddenPartView];
         buttonClicked = NO;
         
     }else{
-        [button setBackgroundImage:[UIImage imageNamed:@"任务详情上拉按钮"] forState:UIControlStateNormal];
-        self.allLabel.text = @"隐藏全部内容";
-        [self showViewWhenButtonClick:button];
+        [self.allImageView setImage:[UIImage imageNamed:@"任务详情上拉按钮"]];
+        self.allLabel.text = @"隐藏部分内容";
+        [self showAllView];
         buttonClicked = YES;
     }
 }
 
--(void)showViewWhenButtonClick:(UIButton *)button
+-(void)showAllView
 {
     ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
     CGRect frame = self.taskContentLabel.frame;
@@ -392,7 +396,7 @@
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+230);
 }
 
--(void)hiddenViewWhenButtonClickAgain:(UIButton *)button
+-(void)hiddenPartView
 {
     CGRect frame = self.taskContentLabel.frame;
     frame.size.height = 80;

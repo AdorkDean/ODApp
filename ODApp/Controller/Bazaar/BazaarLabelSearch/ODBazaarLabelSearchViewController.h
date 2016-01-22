@@ -11,7 +11,6 @@
 #import "ODClassMethod.h"
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
-#import "ODBazaarSearchCell.h"
 #import "ODBazaarCollectionCell.h"
 #import "MJRefresh.h"
 #import "ODBazaarModel.h"

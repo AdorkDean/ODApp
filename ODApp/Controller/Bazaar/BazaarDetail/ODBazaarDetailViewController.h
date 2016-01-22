@@ -26,15 +26,17 @@
 @property(nonatomic,strong)NSMutableArray *picArray;
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)UIView *headView;
-@property(nonatomic,copy)NSString *task_id;
 @property(nonatomic,strong)UIView *userView;
 @property(nonatomic,strong)UIView *taskTopView;
 @property(nonatomic,strong)UIView *taskBottomView;
 @property(nonatomic,strong)UILabel *taskContentLabel;
 @property(nonatomic,strong)UILabel *allLabel;
+@property(nonatomic,strong)UIImageView *allImageView;
+@property(nonatomic,strong)UIView *allView;
 @property(nonatomic,strong)NSString *task_status;
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)UIButton *taskButton;
 @property(nonatomic,copy)NSString *open_id;
+@property(nonatomic,copy)NSString *task_id;
 @property(nonatomic,copy)void(^myBlock)(NSString *del);
 @end
