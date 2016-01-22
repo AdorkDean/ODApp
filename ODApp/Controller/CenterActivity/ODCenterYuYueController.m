@@ -71,14 +71,20 @@
     
     
     
+<<<<<<< HEAD
 
     self.isPop = NO;
 
+=======
+>>>>>>> cee850c7d9e7371ad7e4e885bf9f8683b4474636
     self.timeArray = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
     self.timeDataArray = [[NSArray alloc] init];
     self.keysArray = [[NSArray alloc] init];
+<<<<<<< HEAD
 
+=======
+>>>>>>> cee850c7d9e7371ad7e4e885bf9f8683b4474636
     self.isComputer = YES;
     self.isTouYing = YES;
     self.isYinXiang = YES;
@@ -169,6 +175,7 @@
 -(void)createUIAlertControllerWithTitle:(NSString *)title
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
+<<<<<<< HEAD
 
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -179,8 +186,10 @@
     }]];
 
 //    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+=======
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+>>>>>>> cee850c7d9e7371ad7e4e885bf9f8683b4474636
     [self presentViewController:alert animated:YES completion:nil];
-    
 }
 
 
@@ -705,6 +714,7 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
+<<<<<<< HEAD
 
             self.isPop = YES;
             [self createUIAlertControllerWithTitle:@"感谢您的预约请等待审核"];
@@ -714,6 +724,11 @@
             [self createUIAlertControllerWithTitle:@"预约成功"];
             
 
+=======
+            
+            [self createUIAlertControllerWithTitle:@"预约成功"];
+            
+>>>>>>> cee850c7d9e7371ad7e4e885bf9f8683b4474636
             
             
             
@@ -1078,6 +1093,7 @@
 
 #pragma mark - textViewDelegate
 
+<<<<<<< HEAD
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     
@@ -1102,9 +1118,83 @@
     
   
     
+=======
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    
+    if (textView == self.yuYueView.pursoseTextView) {
+       
+        if (text.length == 0) return YES;
+        
+        NSInteger existedLength = textView.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = text.length;
+        if (existedLength - selectedLength + replaceLength > 20) {
+            return NO;
+        }
+        
+        if ([text isEqualToString:@"\n"]) {
+            [textView resignFirstResponder];
+            return NO;
+
+        }
+            
+        
+        
+    }
+    
+    if (textView == self.yuYueView.contentTextView) {
+        if (text.length == 0) return YES;
+        
+        NSInteger existedLength = textView.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = text.length;
+        if (existedLength - selectedLength + replaceLength > 100) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+>>>>>>> cee850c7d9e7371ad7e4e885bf9f8683b4474636
 
 }
 
+<<<<<<< HEAD
+=======
+
+
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    
+    
+    if (textView == self.yuYueView.pursoseTextView) {
+        
+        
+        
+        if ([textView.text isEqualToString:NSLocalizedString(@"输入活动目的", nil)]) {
+            self.yuYueView.pursoseTextView.text=NSLocalizedString(@"", nil);
+            self.yuYueView.pursoseTextView.textColor = [UIColor blackColor];
+        }else{
+            ;
+        }
+
+    }else if (textView == self.yuYueView.contentTextView) {
+        if ([textView.text isEqualToString:NSLocalizedString(@"输入活动内容", nil)]) {
+            self.yuYueView.contentTextView.text=NSLocalizedString(@"", nil);
+            self.yuYueView.contentTextView.textColor = [UIColor blackColor];
+        }else{
+            ;
+        }
+
+    }
+    
+  
+    
+
+}
+
+>>>>>>> cee850c7d9e7371ad7e4e885bf9f8683b4474636
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
     if ([textView.text isEqualToString:@""])
@@ -1122,11 +1212,11 @@
 
 
 #pragma mark - textfieldDelegate
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
+//-(BOOL)textFieldShouldReturn:(UITextField *)textField
+//{
+//    [textField resignFirstResponder];
+//    return YES;
+//}
 
 
 #pragma mark - tableViewDelegate
