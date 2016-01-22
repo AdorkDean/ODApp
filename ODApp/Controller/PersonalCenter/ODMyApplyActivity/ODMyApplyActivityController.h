@@ -33,4 +33,6 @@
 
 @property (nonatomic, strong)NSMutableArray *dataArray;
 
+@property (nonatomic, strong) UILabel *noReusltLabel;
+
 @end
