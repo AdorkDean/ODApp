@@ -226,7 +226,7 @@
         
         ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
         vc.open_id = self.model.open_id;
-        vc.centerTitle = @"我的中心预约";
+        vc.centerTitle = @"我的预约纪录";
         
         [self.navigationController pushViewController:vc animated:YES];
         

@@ -26,4 +26,10 @@
 @property(nonatomic,copy)NSString *imgsString;
 @property(nonatomic,copy)void(^myBlock)(NSString *refresh);
 
+@property (nonatomic, strong) UIImageView *imageView;
+
+@property (nonatomic, strong) UIButton *deletePicButton;
+
+@property (nonatomic, assign) float width;
+
 @end

@@ -71,10 +71,16 @@
     
     
     
+
+
+    self.isPop = NO;
+
+
     self.timeArray = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
     self.timeDataArray = [[NSArray alloc] init];
     self.keysArray = [[NSArray alloc] init];
+
     self.isComputer = YES;
     self.isTouYing = YES;
     self.isYinXiang = YES;
@@ -165,7 +171,17 @@
 -(void)createUIAlertControllerWithTitle:(NSString *)title
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+
+
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (self.isPop) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+ 
+    }]];
+
+
     [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -307,19 +323,14 @@
         [self.yuYueView.phoneText addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
-        self.yuYueView.pursoseTextView.textColor = [UIColor lightGrayColor];//设置提示内容颜色
-        self.yuYueView.pursoseTextView.text = NSLocalizedString(@"输入活动目的", nil);//提示语
-        self.yuYueView.pursoseTextView.selectedRange=NSMakeRange(0,0) ;//光标起始位置
+        self.yuYueView.pursoseTextView.textColor = [UIColor lightGrayColor];
+        self.yuYueView.pursoseTextView.text = NSLocalizedString(@"输入活动目的", nil);
         self.yuYueView.pursoseTextView.delegate=self;
-        self.yuYueView.pursoseTextView.tag = 111;
-        self.yuYueView.pursoseTextView.scrollEnabled = NO;
+
         
-        self.yuYueView.contentTextView.textColor = [UIColor lightGrayColor];//设置提示内容颜色
-        self.yuYueView.contentTextView.text = NSLocalizedString(@"输入活动内容", nil);//提示语
-        self.yuYueView.contentTextView.selectedRange=NSMakeRange(0,0) ;//光标起始位置
+        self.yuYueView.contentTextView.textColor = [UIColor lightGrayColor];
+        self.yuYueView.contentTextView.text = NSLocalizedString(@"输入活动内容", nil);
         self.yuYueView.contentTextView.delegate=self;
-        self.yuYueView.contentTextView.tag = 222;
-        self.yuYueView.contentTextView.scrollEnabled = NO;
         
         
         
@@ -696,9 +707,14 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
+
+            self.isPop = YES;
+            [self createUIAlertControllerWithTitle:@"感谢您的预约请等待审核"];
+
+
+              [self createUIAlertControllerWithTitle:@"预约成功"];
             
-            [self createUIAlertControllerWithTitle:@"预约成功"];
-            
+
             
             
             
@@ -997,11 +1013,7 @@
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
     [self.view addSubview:callWebview];
     
-    
-    
-    
 }
-
 
 
 - (void)computerAction:(UIButton *)sender
@@ -1062,70 +1074,88 @@
 
 
 #pragma mark - textViewDelegate
-- (void)textViewDidChangeSelection:(UITextView *)textView
+
+
+-(void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if (textView.textColor==[UIColor lightGrayColor])//如果是提示内容，光标放置开始位置
-    {
-        NSRange range;
-        range.location = 0;
-        range.length = 0;
-        textView.selectedRange = range;
+    
+    
+    if (textView == self.yuYueView.pursoseTextView) {
+        if ([textView.text isEqualToString:NSLocalizedString(@"输入活动目的", nil)]) {
+            self.yuYueView.pursoseTextView.text=NSLocalizedString(@"", nil);
+            self.yuYueView.pursoseTextView.textColor = [UIColor blackColor];
+        }else{
+            ;
+        }
+
+    }else if (textView == self.yuYueView.contentTextView) {
+        if ([textView.text isEqualToString:NSLocalizedString(@"输入活动内容", nil)]) {
+            self.yuYueView.contentTextView.text=NSLocalizedString(@"", nil);
+            self.yuYueView.contentTextView.textColor = [UIColor blackColor];
+        }else{
+            ;
+        }
     }
 }
 
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString*)text
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if (![text isEqualToString:@""] && textView.textColor==[UIColor lightGrayColor])//如果不是delete响应,当前是提示信息，修改其属性
-    {
-        textView.text=@"";//置空
-        textView.textColor=[UIColor blackColor];
+    
+    if (textView == self.yuYueView.pursoseTextView) {
+       
+        if (text.length == 0) return YES;
+        
+        NSInteger existedLength = textView.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = text.length;
+        if (existedLength - selectedLength + replaceLength > 20) {
+            return NO;
+        }
+        
+        if ([text isEqualToString:@"\n"]) {
+            [textView resignFirstResponder];
+            return NO;
+
+        }
     }
     
-    if ([text isEqualToString:@"\n"])//回车事件
-    {
-        if ([textView.text isEqualToString:@""])//如果直接回车，显示提示内容
-        {
-            textView.textColor=[UIColor lightGrayColor];
-            if (textView.tag == 111) {
-                textView.text=NSLocalizedString(@"输入活动目的", nil);
-                
-            }else{
-                textView.text=NSLocalizedString(@"输入活动内容", nil);
-            }
-            
+    if (textView == self.yuYueView.contentTextView) {
+        if (text.length == 0) return YES;
+        
+        NSInteger existedLength = textView.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = text.length;
+        if (existedLength - selectedLength + replaceLength > 100) {
+            return NO;
         }
-        [textView resignFirstResponder];//隐藏键盘
-        return NO;
     }
+    
     return YES;
 }
 
 
-- (void)textViewDidChange:(UITextView *)textView
+-(void)textViewDidEndEditing:(UITextView *)textView
 {
     if ([textView.text isEqualToString:@""])
     {
         textView.textColor = [UIColor lightGrayColor];
-        if (textView.tag == 111) {
+        if (textView == self.yuYueView.pursoseTextView) {
             textView.text=NSLocalizedString(@"输入活动目的", nil);
             
         }else{
             textView.text=NSLocalizedString(@"输入活动内容", nil);
         }
     }
-    
-    
-    
-    
-    
 }
 
+
 #pragma mark - textfieldDelegate
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
+//-(BOOL)textFieldShouldReturn:(UITextField *)textField
+//{
+//    [textField resignFirstResponder];
+//    return YES;
+//}
 
 
 #pragma mark - tableViewDelegate
@@ -1136,9 +1166,6 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
-    
-    
-    
     
     return cell;
 }
@@ -1152,9 +1179,6 @@
 {
     return 0;
 }
-
-
-
 
 
 - (void)didReceiveMemoryWarning {

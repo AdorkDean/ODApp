@@ -21,8 +21,6 @@
 @property (nonatomic , strong) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) UIScrollView * scrollView;
 
-
-
 @property (nonatomic , strong) UICollectionViewFlowLayout *firstFlowLayout;
 @property (nonatomic , strong) UICollectionView *firstCollectionView;
 @property (nonatomic , assign) NSInteger firstPage;
@@ -38,9 +36,7 @@
 @property (nonatomic, strong) NSMutableArray *secondDataArray;
 @property (nonatomic, strong) NSMutableArray *secondUserArray;
 
-
 @property (nonatomic, copy) NSString *openID;
-
 
 @end
 
@@ -50,26 +46,19 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
     self.firstPage = 1;
     self.secondPage = 1;
-    
     
     self.FirstDataArray = [NSMutableArray array];
     self.firstUserArray = [NSMutableArray array];
     self.secondDataArray = [NSMutableArray array];
     self.secondUserArray = [NSMutableArray array];
     
-        
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
     
     [self navigationInit];
     [self creatSegment];
     [self creatScroller];
-    
-    
-       
 }
 
 #pragma mark - lifeCycle
@@ -83,10 +72,7 @@
     
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.imageView.alpha = 0;
-
-
 }
-
 
 #pragma mark - 初始化
 
@@ -99,20 +85,15 @@
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
     
-    
     UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 180) / 2, 28, 180, 20) text:@"我的话题" font:17 alignment:@"center" color:@"#000000" alpha:1];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
-    
     
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
     confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
 
     [self.headView addSubview:confirmButton];
-    
-    
-    
 }
 
 
@@ -140,7 +121,6 @@
     [self.segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     
     [self.view addSubview:self.segmentedControl];
-    
 }
 
 
@@ -160,7 +140,6 @@
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
     
-    
     self.firstFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 102) collectionViewLayout:self.firstFlowLayout];
     self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
@@ -170,27 +149,19 @@
     
     self.firstCollectionView.tag = 111;
     
-    
-    
-    
     self.firstCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self firstDownRefresh];
     }];
-    
     
     self.firstCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
         [self firstLoadMoreData];
     }];
     
-    
-    
     [self.firstCollectionView.mj_header beginRefreshing];
     
     [self.scrollView addSubview:self.firstCollectionView];
-    
-    
-    
+
     self.secondFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width,0, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 102) collectionViewLayout:self.secondFlowLayout];
     self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
@@ -204,36 +175,22 @@
         [self secondDownRefresh];
     }];
     
-    
     self.secondCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
         [self secondLoadMoreData];
     }];
-    
-    
-    
+ 
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    
     [self.scrollView addSubview:self.secondCollectionView];
-    
-    
-    
-    
 }
-
 
 
 -(void)fanhui:(UIButton *)sender
 {
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-
-
-
-
-
 
 #pragma mark - 刷新
 - (void)firstDownRefresh
@@ -241,16 +198,12 @@
     
     self.firstPage = 1;
     [self firstGetData];
-    
-    
 }
-
 
 - (void)firstLoadMoreData
 {
     self.firstPage++;
     [self firstGetData];
-    
 }
 
 - (void)secondDownRefresh
@@ -258,10 +211,7 @@
     
     self.secondPage = 1;
     [self secondGetData];
-    
-    
 }
-
 
 - (void)secondLoadMoreData
 {
@@ -270,35 +220,27 @@
     
 }
 
-
 #pragma mark - 请求数据
 -(void)firstGetData
 {
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.firstPage];
-    
     
     self.firstManager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters = @{@"type":@"1",@"page":countNumber , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    
     NSString *url = @"http://woquapi.test.odong.com/1.0/bbs/list";
     
     [self.firstManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
         
         if ([countNumber isEqualToString:@"1"]) {
             [self.FirstDataArray removeAllObjects];
             [self.firstUserArray removeAllObjects];
             [self.noResultLeftLabel removeFromSuperview];
         }
-        
-        
-        
+ 
         if (responseObject) {
-            
-            
             
             NSMutableDictionary *result = responseObject[@"result"];
             NSMutableDictionary *bbs_list = result[@"bbs_list"];
@@ -309,17 +251,13 @@
                 return result == NSOrderedAscending;
             }];
             
-            
             for (id bbsKey in allkeys) {
                 NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
                 NSMutableDictionary *itemDict = bbs_list[key];
                 ODCommunityModel *model = [[ODCommunityModel alloc] init];
                 
                 [model setValuesForKeysWithDictionary:itemDict];
-                
-                
-                
-                
+        
                 [self.FirstDataArray addObject:model];
             }
             
@@ -329,16 +267,10 @@
                 NSMutableDictionary *itemDict = users[key];
                 ODCommunityModel *model = [[ODCommunityModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
-                
-                
-                
-                
+          
                 [self.firstUserArray addObject:model];
             }
-            
-            
         }
-        
         
         [self.firstCollectionView.mj_header endRefreshing];
         [self.firstCollectionView.mj_footer endRefreshing];
@@ -353,12 +285,10 @@
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        
         [self.firstCollectionView.mj_header endRefreshing];
         [self.firstCollectionView.mj_footer endRefreshing];
         
     }];
-   
 }
 
 -(void)secondGetData
@@ -371,11 +301,9 @@
     NSDictionary *parameters = @{@"type":@"2",@"page":countNumber , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    
     NSString *url = @"http://woquapi.test.odong.com/1.0/bbs/list";
     
     [self.secondManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
         
         if (responseObject) {
             
@@ -385,12 +313,8 @@
                 [self.noReusltRightLabel removeFromSuperview];
             }
             
-            
-            
             NSMutableDictionary *result = responseObject[@"result"];
             NSMutableDictionary *bbs_list = result[@"bbs_list"];
-            
-            
             
             NSArray *allkeys = [bbs_list allKeys];
             allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
@@ -398,15 +322,12 @@
                 return result == NSOrderedDescending;
             }];
             
-            
-            
             for (id bbsKey in allkeys) {
                 NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
                 NSMutableDictionary *itemDict = bbs_list[key];
                 ODCommunityModel *model = [[ODCommunityModel alloc] init];
                 
                 [model setValuesForKeysWithDictionary:itemDict];
-                
                 
                 [self.secondDataArray addObject:model];
             }
@@ -418,15 +339,9 @@
                 ODCommunityModel *model = [[ODCommunityModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 
-                
-                
-                
                 [self.secondUserArray addObject:model];
             }
-            
-            
         }
-        
         
         [self.secondCollectionView.mj_header endRefreshing];
         [self.secondCollectionView.mj_footer endRefreshing];
@@ -438,17 +353,13 @@
         else{
             [self.secondCollectionView reloadData];
         }
-
-        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
         
         [self.secondCollectionView.mj_header endRefreshing];
         [self.secondCollectionView.mj_footer endRefreshing];
         
     }];
-  
 }
 
 
@@ -457,13 +368,9 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
-    
     ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
     
-    
     cell.backgroundColor = [UIColor whiteColor];
-    
     
     if (collectionView.tag == 111) {
         ODCommunityModel *userModel = self.firstUserArray[0];
@@ -474,8 +381,6 @@
         cell.contentLabel.text = detailModel.content;
         NSString *count = [NSString stringWithFormat:@"%@" , detailModel.view_num];
         cell.countLabel.text = [NSString stringWithFormat:@"浏览次数:%@" , count];
-
-        
         
     }else if (collectionView.tag == 222) {
         
@@ -490,7 +395,6 @@
 
     }
     
-
     return cell;
 }
 
@@ -514,15 +418,11 @@
 {
       ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc]init];
     
-    
     detailController.myBlock = ^(NSString *refresh){
         self.refresh = refresh;
     };
 
-    
-    
     if (collectionView.tag == 111) {
-      
         
         ODCommunityModel *model = self.FirstDataArray[indexPath.row];
         detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
@@ -536,8 +436,6 @@
     }
 
 }
-
-
 
 
 //动态设置每个item的大小
@@ -583,9 +481,7 @@
     
     int page = scrollView.contentOffset.x / self.view.frame.size.width;
     
-    
     self.segmentedControl.selectedSegmentIndex  = page;
-    
     
 }
 
