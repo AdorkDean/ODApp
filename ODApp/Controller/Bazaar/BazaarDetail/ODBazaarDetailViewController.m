@@ -53,6 +53,7 @@
 
 -(void)backButtonClick:(UIButton *)button
 {
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -63,16 +64,9 @@
     NSString *content = model.share[@"desc"];
     NSString *link = model.share[@"link"];
     NSString *title = model.share[@"title"];
-    
-    
-    
-    
+
     [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:url];
-    
-    
-    
-    
-    
+
     [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
     [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
     
@@ -97,6 +91,8 @@
     self.scrollView.userInteractionEnabled = YES;
     [self.view addSubview:self.scrollView];
 }
+
+
 #pragma mark - 初始化manager
 -(void)createRequest
 {
@@ -107,6 +103,7 @@
     [self joiningTogetherParmeters];
 }
 
+
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
@@ -114,6 +111,7 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarTaskDetailUrl parameter:signParameter];
 }
+
 
 #pragma mark - 请求数据
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter

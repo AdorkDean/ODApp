@@ -481,9 +481,7 @@
     
     int page = scrollView.contentOffset.x / self.view.frame.size.width;
     
-    
     self.segmentedControl.selectedSegmentIndex  = page;
-    
     
 }
 

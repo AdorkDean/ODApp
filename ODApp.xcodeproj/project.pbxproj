@@ -326,6 +326,9 @@
 		B848E8BC1C4E0E1200B16CBA /* UIColor+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B848E8BB1C4E0E1200B16CBA /* UIColor+ODExtension.m */; };
 		B871CF9F1C4CF87400CF51BA /* ODOtherTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B871CF9E1C4CF87400CF51BA /* ODOtherTopicViewController.m */; };
 		B871CFA21C4CF9FA00CF51BA /* ODOtherTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = B871CFA11C4CF9FA00CF51BA /* ODOtherTaskController.m */; };
+		C658B9091C5238B80079B399 /* 活动目的icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = C658B9061C5238B80079B399 /* 活动目的icon@1x.png */; };
+		C658B90A1C5238B80079B399 /* 活动目的icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C658B9071C5238B80079B399 /* 活动目的icon@2x.png */; };
+		C658B90B1C5238B80079B399 /* 活动目的icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C658B9081C5238B80079B399 /* 活动目的icon@3x.png */; };
 		C66F0C071C4CB4CB006E999B /* ODOthersInformationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C061C4CB4CB006E999B /* ODOthersInformationController.m */; };
 		C66F0C0B1C4CDEE9006E999B /* ODUserEvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C0A1C4CDEE9006E999B /* ODUserEvaluationController.m */; };
 		C66F0C101C4CDF4D006E999B /* ODEvaluationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C0F1C4CDF4D006E999B /* ODEvaluationModel.m */; };
@@ -805,6 +808,9 @@
 		B871CFA01C4CF9FA00CF51BA /* ODOtherTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOtherTaskController.h; sourceTree = "<group>"; };
 		B871CFA11C4CF9FA00CF51BA /* ODOtherTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOtherTaskController.m; sourceTree = "<group>"; };
 		C3D6EA47D0FE49655335B119 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		C658B9061C5238B80079B399 /* 活动目的icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动目的icon@1x.png"; sourceTree = "<group>"; };
+		C658B9071C5238B80079B399 /* 活动目的icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动目的icon@2x.png"; sourceTree = "<group>"; };
+		C658B9081C5238B80079B399 /* 活动目的icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动目的icon@3x.png"; sourceTree = "<group>"; };
 		C66F0C051C4CB4CB006E999B /* ODOthersInformationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOthersInformationController.h; sourceTree = "<group>"; };
 		C66F0C061C4CB4CB006E999B /* ODOthersInformationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOthersInformationController.m; sourceTree = "<group>"; };
 		C66F0C091C4CDEE5006E999B /* ODUserEvaluationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserEvaluationController.h; sourceTree = "<group>"; };
@@ -1118,6 +1124,9 @@
 		B8046CB91C4772C200D1FEBC /* 场地预约 */ = {
 			isa = PBXGroup;
 			children = (
+				C658B9061C5238B80079B399 /* 活动目的icon@1x.png */,
+				C658B9071C5238B80079B399 /* 活动目的icon@2x.png */,
+				C658B9081C5238B80079B399 /* 活动目的icon@3x.png */,
 				B8046CBA1C4772C200D1FEBC /* 中心预约icon@1x.png */,
 				B8046CBB1C4772C200D1FEBC /* 中心预约icon@2x.png */,
 				B8046CBC1C4772C200D1FEBC /* 中心预约icon@3x.png */,
@@ -2262,6 +2271,7 @@
 				B8046E051C4772C200D1FEBC /* 欧动集市icon点击态@1x.png in Resources */,
 				B8046DA41C4772C200D1FEBC /* 场地预约5@2x.png in Resources */,
 				B8046E0B1C4772C200D1FEBC /* 首页发现icon点击态@1x.png in Resources */,
+				C658B90B1C5238B80079B399 /* 活动目的icon@3x.png in Resources */,
 				B8046DCB1C4772C200D1FEBC /* 时间下拉箭头@2x.png in Resources */,
 				B8046DB31C4772C200D1FEBC /* 话题详情-分享icon@2x.png in Resources */,
 				B8046DFF1C4772C200D1FEBC /* 欧动社区icon点击态@1x.png in Resources */,
@@ -2284,6 +2294,7 @@
 				B8046DCD1C4772C200D1FEBC /* 选择标签icon@1x.png in Resources */,
 				B8046DE81C4772C200D1FEBC /* 任务筛选下拉箭头@1x.png in Resources */,
 				B8046DE61C4772C200D1FEBC /* 任务筛选上拉箭头@2x.png in Resources */,
+				C658B9091C5238B80079B399 /* 活动目的icon@1x.png in Resources */,
 				B8046E381C4772C200D1FEBC /* 任务攻略图文详情图三@1x.png in Resources */,
 				B8046D9C1C4772C200D1FEBC /* 中心预约icon@3x.png in Resources */,
 				B8046DAC1C4772C200D1FEBC /* 场地预约icon@1x.png in Resources */,
@@ -2315,6 +2326,7 @@
 				B8046E231C4772C200D1FEBC /* 登录文字框icon@1x.png in Resources */,
 				B8046E4F1C4772C200D1FEBC /* 首页-去偷懒icon@3x.png in Resources */,
 				B8046E221C4772C200D1FEBC /* 登录密码icon@3x.png in Resources */,
+				C658B90A1C5238B80079B399 /* 活动目的icon@2x.png in Resources */,
 				9DDBA4BF1C3B6B030007E122 /* ODLandFirstCell.xib in Resources */,
 				B8046DDD1C4772C200D1FEBC /* 中心活动icon点击态@2x.png in Resources */,
 				B8046DA71C4772C200D1FEBC /* 场地预约6@2x.png in Resources */,

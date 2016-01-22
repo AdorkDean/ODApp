@@ -16,7 +16,6 @@
 @property (nonatomic , strong) UITextField *textField;
 @property(nonatomic,strong) AFHTTPRequestOperationManager *manager;
 
-
 @end
 
 @implementation ODUserSignatureController
@@ -25,9 +24,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
-     [self navigationInit];
-      [self creatTextField];
+    [self navigationInit];
+    [self creatTextField];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,12 +49,9 @@
     centerNameLabe.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:centerNameLabe];
     
-    
     // 注册button
-
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 60, 16,50, 44) target:self sel:@selector(registered:) tag:0 image:nil title:@"保存" font:16];
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    
     
     // 返回button
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
@@ -65,12 +60,8 @@
 
     [self.headView addSubview:backButton];
     
-    
     [self.headView addSubview:confirmButton];
-    
-    
-    
-    
+  
 }
 
 - (void)creatTextField
@@ -116,14 +107,12 @@
 }
 
 
-
-
 #pragma mark - 点击事件
 -(void)fanhui:(UIButton *)sender
 {
     
     [self.navigationController popViewControllerAnimated:YES];
-    
+
 }
 
 - (void)registered:(UIButton *)sender
@@ -147,11 +136,9 @@
                     self.getTextBlock(self.textField.text);
                 }
                 
-                
                 [self.navigationController popViewControllerAnimated:YES];
 
             }
-   
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {

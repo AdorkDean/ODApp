@@ -34,10 +34,8 @@
     
      [self navigationInit];
     [self createTimer];
-    
-    
+        
      self.seePassWord = NO;
-    
     
      self.currentTime = 60;
     
@@ -46,6 +44,7 @@
 
 - (void)loadView
 {
+    
     [super loadView];
     self.view = self.registView;
 }
@@ -65,9 +64,7 @@
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
-    
     // 返回button
-
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
     confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
@@ -98,39 +95,30 @@
     }
 }
 
-
 #pragma mark - 懒加载
 - (ODRegisteredView *)registView
 {
     if (_registView == nil) {
         
-          self.registView = [ODRegisteredView getView];
-        
+        self.registView = [ODRegisteredView getView];
         
         self.registView.registereButton.layer.masksToBounds = YES;
-         self.registView.registereButton.layer.cornerRadius = 5;
-         self.registView.registereButton.layer.borderColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1].CGColor;
-         self.registView.registereButton.layer.borderWidth = 1;
-
+        self.registView.registereButton.layer.cornerRadius = 5;
+        self.registView.registereButton.layer.borderColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1].CGColor;
+        self.registView.registereButton.layer.borderWidth = 1;
         
         self.registView.password.secureTextEntry = YES;
         
-                
         [self.registView.getVerification addTarget:self action:@selector(getVerification:) forControlEvents:UIControlEventTouchUpInside];
         
         [self.registView.registereButton addTarget:self action:@selector(registere:) forControlEvents:UIControlEventTouchUpInside];
         
         
-           [self.registView.seePassword addTarget:self action:@selector(seePassword:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        
+        [self.registView.seePassword addTarget:self action:@selector(seePassword:) forControlEvents:UIControlEventTouchUpInside];
+       
         self.registView.phoneNumber.delegate = self;
         self.registView.phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
-        
-        
-        
-        
+     
     }
     return _registView;
 }
@@ -152,7 +140,6 @@
 }
 
 
-
 #pragma mark - 点击事件
 - (void)registere:(UIButton *)sender
 {
@@ -164,21 +151,18 @@
         
         UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入验证码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
         [alter show];
-
         
     }else if ([self.registView.password.text isEqualToString:@""]) {
         
         UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入密码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
         [alter show];
-        
-        
+     
     }
 
     else {
           [self getRegest];
     }
-  
-    
+   
 }
 
 
@@ -193,9 +177,7 @@
         [self getCode];
 
     }
-    
-    
-    
+   
 }
 
 - (void)seePassword:(UIButton *)sender
@@ -210,7 +192,6 @@
         
         [self.registView.seePassword setImage:[UIImage imageNamed:@"yincangmima"] forState:UIControlStateNormal];
         
-        
     }
     self.seePassWord = !self.seePassWord;
     
@@ -219,18 +200,15 @@
 
 -(void)fanhui:(UIButton *)sender
 {
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 
 #pragma mark - 请求数据
 -(void)getRegest
 {
-    
-    
-    
-    
+  
     NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"passwd":self.registView.password.text,@"verify_code":self.registView.verification.text};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
@@ -257,15 +235,8 @@
             UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
             [alter show];
         }
-
-        
-        
-        
+    
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-        
-        
         
         
     }];
@@ -274,20 +245,16 @@
 
 -(void)getCode
 {
-    
-    
+        
     NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"type":@"1"};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/verify/code/send";
-
-    
-    
-     self.manager = [AFHTTPRequestOperationManager manager];
+   
+    self.manager = [AFHTTPRequestOperationManager manager];
     
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"%@",responseObject);
-   
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             //启动定时器
@@ -297,23 +264,12 @@
             UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
             [alter show];
         }
-        
-
-        
-        
-        
+       
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        
-     
-       
-        
+
     }];
 }
-
-
-
-
 
 
 - (void)didReceiveMemoryWarning {

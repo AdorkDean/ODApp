@@ -16,17 +16,17 @@
 - (void)showDatawithModel:(ODMyOrderRecordModel *)model;
 
 
+@property (weak, nonatomic) IBOutlet UIImageView *centerPurposeImageView;
+@property (weak, nonatomic) IBOutlet UILabel *centerPurposeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *centerPurposeDetailLabel;
+
 @property (weak, nonatomic) IBOutlet UIImageView *centerNameImageView;
 @property (weak, nonatomic) IBOutlet UILabel *centerNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *centerNameDetailLabel;
 
-@property (weak, nonatomic) IBOutlet UIImageView *beginTimeImageView;
-@property (weak, nonatomic) IBOutlet UILabel *beginTimeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *beginTimeDetailLabel;
-
-@property (weak, nonatomic) IBOutlet UIImageView *endTimeImageView;
-@property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *endTimeDetailLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *timeImageView;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeDetailLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *checkStateLabel;
 
