@@ -10,7 +10,7 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 
-@interface ODUserNickNameController ()
+@interface ODUserNickNameController ()<UITextFieldDelegate>
 
 @property (nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITextField *textField;
@@ -84,9 +84,7 @@
     self.textField.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
     self.textField.layer.borderWidth = 1;
     self.textField.text = self.nickName;
-    
-    
-    
+    self.textField.delegate = self;
     [self.view addSubview:self.textField];
     
 }
@@ -137,15 +135,27 @@
     
 }
 
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.textField) {
+        if (string.length == 0) return YES;
+        
+        NSInteger existedLength = textField.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = string.length;
+        if (existedLength - selectedLength + replaceLength > 15) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
 
 
 
 -(void)fanhui:(UIButton *)sender
 {
-    
-    
-    
-    
+        
     [self.navigationController popViewControllerAnimated:YES];
     
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -180,10 +180,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xyc-dA-QMU">
-                    <rect key="frame" x="100" y="510" width="150" height="20"/>
+                    <rect key="frame" x="100" y="510" width="225" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="4Yl-Qw-PmG"/>
-                        <constraint firstAttribute="width" constant="150" id="WLf-F8-CTd"/>
                     </constraints>
                     <state key="normal" title="0459-888888"/>
                 </button>
@@ -237,8 +236,8 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入参加人数" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2O-VZ-0LB">
-                    <rect key="frame" x="5" y="467" width="320" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入参加人数" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2O-VZ-0LB">
+                    <rect key="frame" x="5" y="465" width="320" height="30"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Y2p-cB-KUD"/>
@@ -252,6 +251,7 @@
                 <constraint firstItem="Xyc-dA-QMU" firstAttribute="leading" secondItem="NGx-gz-xai" secondAttribute="trailing" id="2nS-sM-3Dh"/>
                 <constraint firstItem="DMe-Bw-VoJ" firstAttribute="top" secondItem="QSr-AF-cie" secondAttribute="bottom" constant="10" id="3dx-80-hsU"/>
                 <constraint firstItem="l7W-0o-0Dr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4bb-G7-Ku6"/>
+                <constraint firstAttribute="trailing" secondItem="Xyc-dA-QMU" secondAttribute="trailing" constant="5" id="4dQ-G4-B6c"/>
                 <constraint firstItem="0UC-Su-qDh" firstAttribute="top" secondItem="fZh-X8-SSk" secondAttribute="bottom" constant="10" id="5an-DM-TLy"/>
                 <constraint firstItem="Vf5-1H-Xbc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="5zk-22-D0P"/>
                 <constraint firstItem="fZh-X8-SSk" firstAttribute="top" secondItem="BK5-ae-hLW" secondAttribute="bottom" constant="10" id="63D-kg-yxB"/>
