@@ -310,7 +310,7 @@
         self.yuYueView.pursoseTextView.textColor = [UIColor lightGrayColor];
         self.yuYueView.pursoseTextView.text = NSLocalizedString(@"输入活动目的", nil);
         self.yuYueView.pursoseTextView.delegate=self;
-
+        self.yuYueView.pursoseTextView.scrollEnabled = NO;
         
         self.yuYueView.contentTextView.textColor = [UIColor lightGrayColor];
         self.yuYueView.contentTextView.text = NSLocalizedString(@"输入活动内容", nil);
@@ -692,7 +692,11 @@
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
             
-            [self createUIAlertControllerWithTitle:@"预约成功"];
+            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"是否退出预约" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
+            alter.delegate = self;
+            alter.tag = 222;
+            [alter show];
+
             
             
             
@@ -722,6 +726,9 @@
 
 -(void)fanhui:(UIButton *)sender
 {
+    
+    [self.yuYueView.pursoseTextView resignFirstResponder];
+    [self.yuYueView.contentTextView resignFirstResponder];
     UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"是否退出预约" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alter.delegate = self;
     alter.tag = 111;
@@ -736,6 +743,8 @@
         if (buttonIndex == 0) {
             ;
         }else {
+            
+           
             [self.navigationController popViewControllerAnimated:YES];
             
         }
