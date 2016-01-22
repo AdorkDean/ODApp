@@ -34,6 +34,8 @@
 @property(nonatomic,strong)NSString *reward_id;
 @property(nonatomic,copy)void(^myBlock)(NSString *refresh);
 
+@property (nonatomic, copy) NSString *currentDateStr;
+
 @property (nonatomic, assign) BOOL isJob;
 
 @property (nonatomic, assign) BOOL isBazaar;

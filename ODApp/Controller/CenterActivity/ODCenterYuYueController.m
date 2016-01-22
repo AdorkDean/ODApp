@@ -304,6 +304,7 @@
             
             
               UIImageView *images = [ODClassMethod creatImageViewWithFrame:CGRectMake(self.yuYueView.btimeText.frame.size.width, 6, 15, 15) imageName:@"downjiantou" tag:0];
+            self.yuYueView.eTimeText.layer.cornerRadius = 5;
             [ self.yuYueView.eTimeText addSubview:images];
 
             
