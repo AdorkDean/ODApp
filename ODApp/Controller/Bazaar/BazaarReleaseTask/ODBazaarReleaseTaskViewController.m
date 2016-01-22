@@ -17,14 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self navigationInit];
     [self createScrollView];
     [self createTitleTextView];
     [self createTimeLabel];
-    [self createTimeChooseButton];
     [self createTaskDetailTextView];
     [self createTaskRewardLabel];
     [self createRequest];
@@ -160,66 +157,122 @@
     NSDateFormatter *timeFormatter = [[NSDateFormatter alloc]init];
     [timeFormatter setDateFormat:@"HH:mm"];
     NSString *timeString = [timeFormatter stringFromDate:currentDate];
-
+    
     //开始日期label
-    self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+3.5*width, 148, 5*width, 30.5) text:[NSString stringWithFormat:@"  %@",dateString] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
-    self.startDateLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    [self.scrollView addSubview:self.startDateLabel];
+    UITapGestureRecognizer *startDateGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startDateGestureClick)];
+    UIView *startDateView = [ODClassMethod creatViewWithFrame:CGRectMake(8+3.5*width, 148, 5*width, 30.5) tag:0 color:@"#ffffff"];
+    [startDateView addGestureRecognizer:startDateGesture];
+    startDateView.layer.masksToBounds = YES;
+    startDateView.layer.cornerRadius = 5;
+    startDateView.layer.borderWidth = 1;
+    startDateView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    [self.scrollView addSubview:startDateView];
+    
+    self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",dateString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+    [startDateView addSubview:self.startDateLabel];
+    
+    
+    UIView *startDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    [startDateView addSubview:startDateLineView];
+    UIImageView *startDateImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(5*width - 25, 10, 20, 14) imageName:@"时间下拉箭头" tag:0];
+    [startDateView addSubview:startDateImageView];
     
     //结束日期label
-    self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(8+3.5*width, 182.5, 5*width, 30.5) text:[NSString stringWithFormat:@"  %@",dateString] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
-    self.endDateLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    [self.scrollView addSubview:self.endDateLabel];
+    UITapGestureRecognizer *endDateGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(endDateGestureClick)];
+    UIView *endDateView = [ODClassMethod creatViewWithFrame:CGRectMake(8+3.5*width, 182.5, 5*width, 30.5) tag:0 color:@"#ffffff"];
+    [endDateView addGestureRecognizer:endDateGesture];
+    endDateView.layer.masksToBounds = YES;
+    endDateView.layer.cornerRadius = 5;
+    endDateView.layer.borderWidth = 1;
+    endDateView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    [self.scrollView addSubview:endDateView];
+    
+    self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",dateString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+    [endDateView addSubview:self.endDateLabel];
+    
+    UIView *endDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    [endDateView addSubview:endDateLineView];
+    UIImageView *endDateImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(5*width - 25, 10, 20, 14) imageName:@"时间下拉箭头" tag:0];
+    [endDateView addSubview:endDateImageView];
     
     //开始时间label
-    self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+8.5*width, 148, 3.5*width, 30.5) text:[NSString stringWithFormat:@"  %@",timeString] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
-    self.startTimeLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    [self.scrollView addSubview:self.startTimeLabel];
+    UITapGestureRecognizer *startTimeGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startTimeGestureClick)];
+    UIView *startTimeView = [ODClassMethod creatViewWithFrame:CGRectMake(12+8.5*width, 148, 3.5*width, 30.5) tag:0 color:@"#ffffff"];
+    [startTimeView addGestureRecognizer:startTimeGesture];
+    startTimeView.layer.masksToBounds = YES;
+    startTimeView.layer.cornerRadius = 5;
+    startTimeView.layer.borderWidth = 1;
+    startTimeView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    [self.scrollView addSubview:startTimeView];
+    self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",timeString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+    [startTimeView addSubview:self.startTimeLabel];
+    
+    UIView *startTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    [startTimeView addSubview:startTimeLineView];
+    UIImageView *startTimeImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(3.5*width - 25, 10, 20, 14) imageName:@"时间下拉箭头" tag:0];
+    [startTimeView addSubview:startTimeImageView];
+
     
     //结束时间label
-    self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12+8.5*width, 182.5, 3.5*width, 30.5) text:[NSString stringWithFormat:@"  %@",timeString] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:YES];
-    self.endTimeLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    [self.scrollView addSubview:self.endTimeLabel];
-}
-
-#pragma mark - 创建时间选择button
--(void)createTimeChooseButton
-{
-    CGFloat width = (kScreenSize.width - 16)/12;
-    //开始日期button
-    UIView *startDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
-    [self.startDateLabel addSubview:startDateLineView];
-    UIButton *startDateButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5*width - 25, 10, 20, 14) target:self sel:@selector(buttonClick:) tag:100 image:@"时间下拉箭头" title:nil font:0];
-    [self.startDateLabel addSubview:startDateButton];
+    UITapGestureRecognizer *endTimeGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(endTimeGestureClick)];
+    UIView *endTimeView = [ODClassMethod creatViewWithFrame:CGRectMake(12+8.5*width, 182.5, 3.5*width, 30.5) tag:0 color:@"#ffffff"];
+    [endTimeView addGestureRecognizer:endTimeGesture];
+    endTimeView.layer.masksToBounds = YES;
+    endTimeView.layer.cornerRadius = 5;
+    endTimeView.layer.borderWidth = 1;
+    endTimeView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    [self.scrollView addSubview:endTimeView];
     
-    //结束日期button
-    UIView *endDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
-    [self.endDateLabel addSubview:endDateLineView];
-    UIButton *endDateButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5*width - 25, 10, 20, 14) target:self sel:@selector(buttonClick:) tag:101 image:@"时间下拉箭头" title:nil font:0];
-    [self.endDateLabel addSubview:endDateButton];
-    
-    //开始时间button
-    UIView *startTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
-    [self.startTimeLabel addSubview:startTimeLineView];
-    UIButton *startTimeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(3.5*width - 25, 10, 20, 14) target:self sel:@selector(buttonClick:) tag:102 image:@"时间下拉箭头" title:nil font:0];
-    [self.startTimeLabel addSubview:startTimeButton];
-    
-    //结束时间button
+    self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",timeString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+    [endTimeView addSubview:self.endTimeLabel];
     UIView *endTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
-    [self.endTimeLabel addSubview:endTimeLineView];
-    UIButton *endTimeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(3.5*width - 25, 10, 20, 14) target:self sel:@selector(buttonClick:) tag:103 image:@"时间下拉箭头" title:nil font:0];
-    [self.endTimeLabel addSubview:endTimeButton];
+    [endTimeView addSubview:endTimeLineView];
+    UIImageView *endTimeImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(3.5*width - 25, 10, 20, 14) imageName:@"时间下拉箭头" tag:0];
+    [endTimeView addSubview:endTimeImageView];
 }
 
--(void)buttonClick:(UIButton *)button
+-(void)startDateGestureClick
 {
+    [self.titleTextView resignFirstResponder];
+    [self.taskDetailTextView resignFirstResponder];
     [self.backPickerView removeFromSuperview];
-    [self setUpDatePickerViewWihtButton:button];
-    
+    [self setUpDatePickerView];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    self.type = @"startDate";
+}
+
+-(void)endDateGestureClick
+{
+    [self.titleTextView resignFirstResponder];
+    [self.taskDetailTextView resignFirstResponder];
+    [self.backPickerView removeFromSuperview];
+    [self setUpDatePickerView];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    self.type = @"endDate";
+}
+
+-(void)startTimeGestureClick
+{
+    [self.titleTextView resignFirstResponder];
+    [self.taskDetailTextView resignFirstResponder];
+    [self.backPickerView removeFromSuperview];
+    [self setUpDatePickerView];
+    self.datePicker.datePickerMode = UIDatePickerModeTime;
+    self.type = @"startTime";
+}
+
+-(void)endTimeGestureClick
+{
+    [self.titleTextView resignFirstResponder];
+    [self.taskDetailTextView resignFirstResponder];
+    [self.backPickerView removeFromSuperview];
+    [self setUpDatePickerView];
+    self.datePicker.datePickerMode = UIDatePickerModeTime;
+    self.type = @"endTime";
 }
 
 #pragma mark - 初始化datePickerView
--(void)setUpDatePickerViewWihtButton:(UIButton *)button
+-(void)setUpDatePickerView
 {
     self.backPickerView = [ODClassMethod creatViewWithFrame:CGRectMake(4, kScreenSize.height-200, kScreenSize.width-8, 200) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.backPickerView];
@@ -235,34 +288,22 @@
     UIButton *cancelPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 150, kScreenSize.width/2-4, 50) target:self sel:@selector(cancelPickerButtonClick:) tag:0 image:nil title:@"取消" font:16];
     [self.backPickerView addSubview:cancelPickerButton];
     UIButton *confirmPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width/2-4, 150, kScreenSize.width/2-4, 50) target:self sel:@selector(confirmPickerButtonClick:) tag:0 image:nil title:@"确认" font:16];
-    confirmPickerButton.tag = button.tag + 10;
     [self.backPickerView addSubview:confirmPickerButton];
-    if (button.tag == 100 || button.tag == 101) {
-        self.datePicker.datePickerMode = UIDatePickerModeDate;
-    }else{
-        self.datePicker.datePickerMode = UIDatePickerModeTime;
-    }
 }
 
 //确认datePickerView
 -(void)confirmPickerButtonClick:(UIButton *)button
 {
-    switch (button.tag) {
-        case 110:
-            self.startDateLabel.text = [NSString stringWithFormat:@"  %@",[self timeFormatDate:YES]];
-            break;
-        case 111:
-            self.endDateLabel.text = [NSString stringWithFormat:@"  %@",[self timeFormatDate:YES]];
-            break;
-        case 112:
-            self.startTimeLabel.text = [NSString stringWithFormat:@"  %@",[self timeFormatDate:NO]];
-            break;
-        case 113:
-            self.endTimeLabel.text = [NSString stringWithFormat:@"  %@",[self timeFormatDate:NO]];
-            break;
-        default:
-            break;
+    if ([self.type isEqualToString:@"startDate"]) {
+        self.startDateLabel.text = [NSString stringWithFormat:@"%@",[self timeFormatDate:YES]];
+    }else if ([self.type isEqualToString:@"endDate"]){
+        self.endDateLabel.text = [NSString stringWithFormat:@"%@",[self timeFormatDate:YES]];
+    }else if ([self.type isEqualToString:@"startTime"]){
+        self.startTimeLabel.text = [NSString stringWithFormat:@"%@",[self timeFormatDate:NO]];
+    }else if ([self.type isEqualToString:@"endTime"]){
+        self.endTimeLabel.text = [NSString stringWithFormat:@"%@",[self timeFormatDate:NO]];
     }
+    self.type = nil;
     [self.backPickerView removeFromSuperview];
 }
 
@@ -300,19 +341,26 @@
 #pragma mark - 创建TaskRewardLabel
 -(void)createTaskRewardLabel
 {
-    self.taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(4, 465, kScreenSize.width - 8, 34) text:@"  选择任务奖励" font:16 alignment:@"left" color:@"#b0b0b0"  alpha:1 maskToBounds:YES];
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(taskRewardClick)];
+    UIView *taskeRewardView = [ODClassMethod creatViewWithFrame:CGRectMake(4, 465, kScreenSize.width - 8, 34) tag:0 color:@"#ffffff"];
+    [taskeRewardView addGestureRecognizer:gesture];
+    taskeRewardView.layer.masksToBounds = YES;
+    taskeRewardView.layer.cornerRadius = 5;
+    taskeRewardView.layer.borderWidth = 1;
+    taskeRewardView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    [self.scrollView addSubview:taskeRewardView];
+    self.taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, kScreenSize.width - 8, 34) text:@"  选择任务奖励" font:16 alignment:@"left" color:@"#b0b0b0"  alpha:1 maskToBounds:NO];
     self.taskRewardLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    [self.scrollView addSubview:self.taskRewardLabel];
+    [taskeRewardView addSubview:self.taskRewardLabel];
     
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(kScreenSize.width - 8 - 30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
-    [self.taskRewardLabel addSubview:lineView];
-    
-    UIButton *button = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 8 - 25, 10, 20, 14) target:self sel:@selector(taskRewardButtonClick:) tag:0 image:@"时间下拉箭头" title:nil font:0];
-    [self.taskRewardLabel addSubview:button];
+    [taskeRewardView addSubview:lineView];
+    UIImageView *imageVidew = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width - 8 - 25, 10, 20, 14) imageName:@"时间下拉箭头" tag:0];
+    [taskeRewardView addSubview:imageVidew];
 }
 
 //任务奖励
--(void)taskRewardButtonClick:(UIButton *)button
+-(void)taskRewardClick
 {
     ODBazaarReleaseRewardViewController *reward = [[ODBazaarReleaseRewardViewController alloc]init];
     [self.navigationController pushViewController:reward animated:YES];
@@ -334,10 +382,10 @@
 {
     NSDictionary *parameter;
     if ([self.taskRewardLabel.text isEqualToString:@"  选择任务奖励"]) {
-        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text substringFromIndex:2] stringByAppendingString:[self.startTimeLabel.text substringFromIndex:1]],@"end_time":[[self.endDateLabel.text substringFromIndex:2] stringByAppendingString:[self.endTimeLabel.text substringFromIndex:1]],@"content":self.taskDetailTextView.text,@"open_id":[ODUserInformation getData].openID};
+        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[self.startDateLabel.text stringByAppendingString:self.startTimeLabel.text],@"end_time":[self.endDateLabel.text stringByAppendingString:self.endTimeLabel.text],@"content":self.taskDetailTextView.text,@"open_id":[ODUserInformation getData].openID};
 
     }else{
-        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text substringFromIndex:2] stringByAppendingString:[self.startTimeLabel.text substringFromIndex:1]],@"end_time":[[self.endDateLabel.text substringFromIndex:2] stringByAppendingString:[self.endTimeLabel.text substringFromIndex:1]],@"content":self.taskDetailTextView.text,@"reward_id":self.reward_id,@"open_id":[ODUserInformation getData].openID};
+        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[self.startDateLabel.text stringByAppendingString:self.startTimeLabel.text],@"end_time":[self.endDateLabel.text stringByAppendingString:self.endTimeLabel.text],@"end_time":[self.startDateLabel.text stringByAppendingString:self.startTimeLabel.text],@"end_time":[self.endDateLabel.text stringByAppendingString:self.endTimeLabel.text],@"content":self.taskDetailTextView.text,@"reward_id":self.reward_id,@"open_id":[ODUserInformation getData].openID};
     }
   
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];

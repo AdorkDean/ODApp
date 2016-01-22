@@ -26,12 +26,8 @@
     
     [self navigationInit];
     [self creatTextField];
-    
-    
-    
+   
 }
-
-
 
 #pragma mark - 初始化导航
 -(void)navigationInit
@@ -49,25 +45,18 @@
     centerNameLabe.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:centerNameLabe];
     
-    
     // 注册button
-
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 60, 16,50, 44) target:self sel:@selector(registered:) tag:0 image:nil title:@"保存" font:16];
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
 
-    
     // 返回button
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
 
     [self.headView addSubview:backButton];
-    
-    
-    
-    
+
     [self.headView addSubview:confirmButton];
-    
     
 }
 
@@ -93,13 +82,12 @@
 - (void)registered:(UIButton *)sender
 {
     
-     NSString *openID = [ODUserInformation getData].openID;
+    NSString *openID = [ODUserInformation getData].openID;
     
     self.manager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters = @{@"nick":self.textField.text , @"open_id":openID};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/change";
     
@@ -110,7 +98,6 @@
                 if (self.getTextBlock) {
                     self.getTextBlock(self.textField.text);
                 }
-                
                 
                 [self.navigationController popViewControllerAnimated:YES];
                 
@@ -123,15 +110,10 @@
             [alter show];
         }
         
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        
-        
     }];
-    
-    
     
 }
 
@@ -151,17 +133,12 @@
     return YES;
 }
 
-
-
 -(void)fanhui:(UIButton *)sender
 {
         
     [self.navigationController popViewControllerAnimated:YES];
     
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -28,7 +28,6 @@
 @property (nonatomic , assign) NSInteger pageNumber;
 
 
-
 @end
 
 @implementation ODPersonalCenterViewController
@@ -36,19 +35,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     self.pageNumber = 0;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
       
     [self navigationInit];
     
-    
     self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
     self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
     self.returnKeyHandler.toolbarManageBehaviour = IQAutoToolbarBySubviews;
     
-
 }
 
 
@@ -75,8 +71,6 @@
         tabBar.imageView.alpha = 0;
 
     }
-    
-
 }
 
 
@@ -104,8 +98,7 @@
     
     centerNameLabe.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:centerNameLabe];
-    
-    
+        
     // 注册button
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 60, 16,50, 44) target:self sel:@selector(registered:) tag:0 image:nil title:@"注册" font:16];
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
@@ -124,7 +117,6 @@
 - (void)createTableView
 {
     
-    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.tableView.userInteractionEnabled = YES;
@@ -132,7 +124,6 @@
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = self.landView;
     [self.view addSubview:self.tableView];
-    
     
 }
 
@@ -153,19 +144,16 @@
         self.landView.userInteractionEnabled = YES;
         self.landView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         
-        
         self.landView.accountLabel.layer.masksToBounds = YES;
         self.landView.accountLabel.layer.cornerRadius = 20;
         self.landView.accountLabel.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
         self.landView.accountLabel.layer.borderWidth = 1;
-
         
         self.landView.passwordLabel.layer.masksToBounds = YES;
         self.landView.passwordLabel.layer.cornerRadius = 20;
         self.landView.passwordLabel.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
         self.landView.passwordLabel.layer.borderWidth = 1;
-        
-        
+    
         self.landView.landButton.layer.masksToBounds = YES;
         self.landView.landButton.layer.cornerRadius = 20;
         self.landView.landButton.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
@@ -174,13 +162,8 @@
         [self.landView.landButton addTarget:self action:@selector(landAction:) forControlEvents:UIControlEventTouchUpInside];
         self.landView.passwordTextField.secureTextEntry = YES;
         
-        
-        
-        
         [self.landView.forgetPassWordButton addTarget:self action:@selector(forgetPassawordAction:) forControlEvents:UIControlEventTouchUpInside];
-
-        
-        
+       
     }
     return _landView;
 }
@@ -213,8 +196,6 @@
             newButton.selected = i == index;
         }
     }
-    
-
 }
 
 
@@ -223,11 +204,9 @@
     
     ODChangePassWordController *vc = [[ODChangePassWordController alloc] init];
     
-    
     vc.topTitle = @"忘记密码";
     
     [self.navigationController pushViewController:vc animated:YES];
-    
     
 }
 
@@ -247,10 +226,7 @@
     else {
           [self landToView];
     }
-    
-  
-    
-    
+   
 }
 
 - (void)registered:(UIButton *)sender
@@ -260,16 +236,13 @@
 }
 
 
-
 #pragma mark - 请求数据
 -(void)landToView
 {
     NSDictionary *parameters = @{@"mobile":self.landView.accountTextField.text,@"passwd":self.landView.passwordTextField.text};
             NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/login1";
-    
     
     self.manager = [AFHTTPRequestOperationManager manager];
 
@@ -282,19 +255,13 @@
             self.landView.passwordTextField.text = @"";
              ODLandMainController *vc = [[ODLandMainController alloc] init];
             
-            
-            
             NSMutableDictionary *dic = responseObject[@"result"];
             NSString *openId = dic[@"open_id"];
             
             [ODUserInformation getData].openID = openId;
-            
-           
-            
+       
             if (self.navigationController.viewControllers.count > 1)
             {
-              
-                
                 
                 UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"登陆成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
                 [alter show];
@@ -332,41 +299,26 @@
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [alter dismissWithClickedButtonIndex:0 animated:YES];
                   
-
                 });
 
                   [self.navigationController pushViewController:vc animated:YES];
             }
-
          
-
-            
-            
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
             
             self.pageNumber++;
             if (self.pageNumber==3) {
                 [self createUIAlertControllerWithTitle:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册"];
-                
-                
 
             }else {
                    [self createUIAlertControllerWithTitle:responseObject[@"message"]];
             }
-            
-            
-         
-            
-            
+  
         }
-        
-               
-        
+
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-        
+ 
         
     }];
 }
@@ -382,9 +334,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
-    
-    
-    
     return cell;
 }
 
@@ -397,9 +346,6 @@
 {
     return 0;
 }
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

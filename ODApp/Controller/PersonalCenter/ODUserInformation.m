@@ -21,6 +21,4 @@
     return userInformation;
 }
 
-
-
 @end

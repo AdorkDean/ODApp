@@ -10,17 +10,18 @@
 #import "ODTabBarController.h"
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
-#import "ODBazaarSearchCell.h"
+#import "ODBazaarRewardCollectionCell.h"
 
-@interface ODBazaarReleaseRewardViewController : ODBaseViewController<UITableViewDataSource,UITableViewDelegate>
+@interface ODBazaarReleaseRewardViewController : ODBaseViewController<UICollectionViewDataSource,UICollectionViewDelegate,UITextFieldDelegate>
 
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UILabel *taskRewardLabel;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)NSMutableArray *idArray;
-@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)UIImageView *imageView;
+@property(nonatomic,strong)UITextField *textField;
 @property(nonatomic)NSInteger count;
 @property(nonatomic,copy)void(^taskRewardBlock)(NSString *name,NSString *reward_id);
 @end

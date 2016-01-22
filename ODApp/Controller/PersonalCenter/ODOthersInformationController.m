@@ -149,7 +149,7 @@
         ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
         
         vc.open_id = self.model.open_id;
-        vc.centerTitle = @"他的中心预约";
+        vc.centerTitle = @"他的预约纪录";
         
         self.isOther = YES;
         vc.isOther = self.isOther;
