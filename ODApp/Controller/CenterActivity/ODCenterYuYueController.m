@@ -71,10 +71,16 @@
     
     
     
+
+
+    self.isPop = NO;
+
+
     self.timeArray = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
     self.timeDataArray = [[NSArray alloc] init];
     self.keysArray = [[NSArray alloc] init];
+
     self.isComputer = YES;
     self.isTouYing = YES;
     self.isYinXiang = YES;
@@ -165,7 +171,17 @@
 -(void)createUIAlertControllerWithTitle:(NSString *)title
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+
+
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (self.isPop) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+ 
+    }]];
+
+
     [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -310,7 +326,7 @@
         self.yuYueView.pursoseTextView.textColor = [UIColor lightGrayColor];
         self.yuYueView.pursoseTextView.text = NSLocalizedString(@"输入活动目的", nil);
         self.yuYueView.pursoseTextView.delegate=self;
-        self.yuYueView.pursoseTextView.scrollEnabled = NO;
+
         
         self.yuYueView.contentTextView.textColor = [UIColor lightGrayColor];
         self.yuYueView.contentTextView.text = NSLocalizedString(@"输入活动内容", nil);
@@ -691,13 +707,14 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-            
-            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"是否退出预约" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles:@"确定", nil];
-            alter.delegate = self;
-            alter.tag = 222;
-            [alter show];
 
+            self.isPop = YES;
+            [self createUIAlertControllerWithTitle:@"感谢您的预约请等待审核"];
+
+
+              [self createUIAlertControllerWithTitle:@"预约成功"];
             
+
             
             
             
@@ -726,9 +743,6 @@
 
 -(void)fanhui:(UIButton *)sender
 {
-    
-    [self.yuYueView.pursoseTextView resignFirstResponder];
-    [self.yuYueView.contentTextView resignFirstResponder];
     UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"是否退出预约" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alter.delegate = self;
     alter.tag = 111;
@@ -743,8 +757,6 @@
         if (buttonIndex == 0) {
             ;
         }else {
-            
-           
             [self.navigationController popViewControllerAnimated:YES];
             
         }
@@ -1067,6 +1079,30 @@
 
 #pragma mark - textViewDelegate
 
+
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    
+    
+    if (textView == self.yuYueView.pursoseTextView) {
+        if ([textView.text isEqualToString:NSLocalizedString(@"输入活动目的", nil)]) {
+            self.yuYueView.pursoseTextView.text=NSLocalizedString(@"", nil);
+            self.yuYueView.pursoseTextView.textColor = [UIColor blackColor];
+        }else{
+            ;
+        }
+
+    }else if (textView == self.yuYueView.contentTextView) {
+        if ([textView.text isEqualToString:NSLocalizedString(@"输入活动内容", nil)]) {
+            self.yuYueView.contentTextView.text=NSLocalizedString(@"", nil);
+            self.yuYueView.contentTextView.textColor = [UIColor blackColor];
+        }else{
+            ;
+        }
+    }
+}
+
+
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     
@@ -1105,38 +1141,6 @@
     return YES;
 }
 
-
-
-
--(void)textViewDidBeginEditing:(UITextView *)textView
-{
-    
-    
-    if (textView == self.yuYueView.pursoseTextView) {
-        
-        
-        
-        if ([textView.text isEqualToString:NSLocalizedString(@"输入活动目的", nil)]) {
-            self.yuYueView.pursoseTextView.text=NSLocalizedString(@"", nil);
-            self.yuYueView.pursoseTextView.textColor = [UIColor blackColor];
-        }else{
-            ;
-        }
-
-    }else if (textView == self.yuYueView.contentTextView) {
-        if ([textView.text isEqualToString:NSLocalizedString(@"输入活动内容", nil)]) {
-            self.yuYueView.contentTextView.text=NSLocalizedString(@"", nil);
-            self.yuYueView.contentTextView.textColor = [UIColor blackColor];
-        }else{
-            ;
-        }
-
-    }
-    
-  
-    
-
-}
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
