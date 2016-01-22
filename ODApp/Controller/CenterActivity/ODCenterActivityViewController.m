@@ -25,6 +25,7 @@
 #import "ODUserInformation.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODTabBarController.h"
+
 @interface ODCenterActivityViewController ()<UIScrollViewDelegate ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , SDCycleScrollViewDelegate>
 
 @property(nonatomic , strong) UIView *headView;
@@ -73,13 +74,12 @@
 
     [self navigationInit];
     [self createCollectionView];
-    [self getCenter];
    
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self downRefresh];
     }];
     
-    
+     [self.collectionView.mj_header beginRefreshing];
 }
 
 
@@ -186,6 +186,9 @@
             [self getData];
             [self getPhoneNumber];
             
+        }else{
+            [self.collectionView.mj_header endRefreshing];
+
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -194,6 +197,10 @@
         
         
     }];
+    
+    
+    
+    
     
     
     
@@ -266,6 +273,8 @@
                 NSString *pictureDetail = itemDict[@"banner_url"];
                 NSString *title = itemDict[@"title"];
                 
+                
+                          
                 
                 [weakSelf.pictureArray addObject:picture];
                 [weakSelf.pictureDetailArray addObject:pictureDetail];
@@ -358,17 +367,21 @@
 {
     
     
-    if (![self.storeId isEqualToString:@"0"]) {
-        ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
-        
-       
-             
-        vc.storeId = self.storeId;
+    if ([self.storeId isEqualToString:@"0"]|| self.storeId == nil || [self.storeId isEqualToString:@""]) {
         
         
-        [self.navigationController pushViewController:vc animated:YES];
-    }else {
         ;
+        
+    }else {
+              ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
+              
+              
+              
+              vc.storeId = self.storeId;
+              
+              
+              [self.navigationController pushViewController:vc animated:YES];
+
     }
    
     
@@ -466,6 +479,9 @@
     cell.addressLabel.textColor = [UIColor colorWithHexString:@"#b1b1b1" alpha:1];
     [cell.ActivityImageView sd_setImageWithURL:[NSURL URLWithString:model.icon_url]];
     
+   
+    
+   
     
     
     return cell;

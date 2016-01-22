@@ -14,7 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import "ODTabBarController.h"
 #import "ODUserInformation.h"
-
+#import "ODCenterDetailController.h"
 @interface ODActivityDetailController ()<UITableViewDelegate , UIWebViewDelegate>
 
 
@@ -88,6 +88,35 @@
         
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
+            
+            NSString *need_verify = [NSString stringWithFormat:@"%ld" , (long)self.model.need_verify];
+            
+            if ([need_verify isEqualToString:@"1"]) {
+                
+                
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"报名成功" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alter show];
+                
+                
+                [self.activityDetailView.baoMingButton setTitle:@"已报名" forState:UIControlStateNormal];
+                [self.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
+                                                            forState:UIControlStateNormal];
+                self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+                self.activityDetailView.baoMingButton.userInteractionEnabled = NO;
+
+            }else{
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"已报名等待审核" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alter show];
+                
+                
+                [self.activityDetailView.baoMingButton setTitle:@"已报名" forState:UIControlStateNormal];
+                [self.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
+                                                            forState:UIControlStateNormal];
+                self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+                self.activityDetailView.baoMingButton.userInteractionEnabled = NO;
+
+            }
             
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
@@ -275,8 +304,12 @@
     self.activityDetailView.endTimeLabel.text = self.model.end_time;
     
     
-    self.activityDetailView.centerNameLabel.textColor = [UIColor colorWithHexString:@"#015afe" alpha:1];
-    self.activityDetailView.centerNameLabel.text = self.model.store_name;
+ 
+    
+    [self.activityDetailView.centerNameButton setTitleColor:[UIColor colorWithHexString:@"#015afe" alpha:1] forState:UIControlStateNormal];
+    [self.activityDetailView.centerNameButton setTitle:self.model.store_name forState:UIControlStateNormal];
+    [self.activityDetailView.centerNameButton addTarget:self action:@selector(goCenter:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     
     self.activityDetailView.addressLabel.textColor = [UIColor colorWithHexString:@"#015afe" alpha:1];
@@ -346,6 +379,18 @@
 
 
 #pragma mark - 点击事件
+
+
+- (void)goCenter:(UIButton *)sender
+{
+    ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
+    
+       
+    vc.storeId = self.storeId;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 - (void)baoMingAction:(UIButton *)sender
 {
     
