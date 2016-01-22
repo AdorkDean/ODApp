@@ -23,7 +23,7 @@
     [self navigationInit];
     [self createTextView];
     [self createAddPicButton];
-   
+
     
 }
 
@@ -152,6 +152,7 @@
     [self.view addSubview:self.addPicButton];
 }
 
+
 -(void)addPicButtonClick:(UIButton *)button
 {
     [self.titleTextView resignFirstResponder];
@@ -261,20 +262,36 @@
 #pragma mark - 添加图片
 -(void)addImageViewWithImage:(UIImage *)image
 {
-    UIImageView *imageView = [[UIImageView alloc]init];
-    imageView.frame = self.addPicButton.frame;
-    imageView.image = image;
-    imageView.layer.masksToBounds = YES;
-    imageView.layer.cornerRadius = 5;
-    [self.view addSubview:imageView];
-    if (self.count>=9) {
+    
+    self.width = (kScreenSize.width-20)/4;
+    
+    self.imageView = [[UIImageView alloc]init];
+    self.imageView.frame = self.addPicButton.frame;
+
+    self.imageView.image = image;
+    self.imageView.layer.masksToBounds = YES;
+    self.imageView.layer.cornerRadius = 5;
+    self.imageView.userInteractionEnabled = YES;
+    [self.view addSubview:self.imageView];
+    
+    self.deletePicButton = [[UIButton alloc] init];
+
+    self.deletePicButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.width - 15, 0, 15, 15) target:self sel:@selector(deletePicButton:) tag:0 image:@"搜索取消icon" title:@"" font:0];
+    [self.imageView addSubview:self.deletePicButton];
+    
+    if (self.count >= 9) {
         self.addPicButton.hidden = YES;
     }else{
-        CGFloat width = (kScreenSize.width-20)/4;
-        [self.addPicButton setFrame:CGRectMake(4+(width+4)*(self.count%4), CGRectGetMaxY(self.topicContentTextView.frame)+4+(4+width)*(self.count/4), width, width)];
+        [self.addPicButton setFrame:CGRectMake(4 + (self.width + 4) * (self.count%4), CGRectGetMaxY(self.topicContentTextView.frame) + 4 + (4+self.width) * (self.count/4), self.width, self.width)];
         self.count++;
     }
 
+}
+
+
+- (void)deletePicButton:(UIButton *)button{
+
+    [self.imageView removeFromSuperview];
 }
 
 #pragma mark - 初始化manager

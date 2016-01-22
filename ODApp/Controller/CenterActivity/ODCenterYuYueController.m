@@ -53,7 +53,7 @@
     
     
     
-   
+    self.isPop = NO;
     self.isComputer = YES;
     self.isTouYing = YES;
     self.isYinXiang = YES;
@@ -133,9 +133,13 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        if (self.isPop) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+ 
     }]];
     [self presentViewController:alert animated:YES completion:nil];
+    
 }
 
 
@@ -511,7 +515,7 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-       
+            self.isPop = YES;
             [self createUIAlertControllerWithTitle:@"感谢您的预约请等待审核"];
 
             
