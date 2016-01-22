@@ -1058,11 +1058,55 @@
 
 #pragma mark - textViewDelegate
 
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    
+    if (textView == self.yuYueView.pursoseTextView) {
+       
+        if (text.length == 0) return YES;
+        
+        NSInteger existedLength = textView.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = text.length;
+        if (existedLength - selectedLength + replaceLength > 20) {
+            return NO;
+        }
+        
+        if ([text isEqualToString:@"\n"]) {
+            [textView resignFirstResponder];
+            return NO;
+
+        }
+            
+        
+        
+    }
+    
+    if (textView == self.yuYueView.contentTextView) {
+        if (text.length == 0) return YES;
+        
+        NSInteger existedLength = textView.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = text.length;
+        if (existedLength - selectedLength + replaceLength > 100) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+
+
+
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     
     
     if (textView == self.yuYueView.pursoseTextView) {
+        
+        
+        
         if ([textView.text isEqualToString:NSLocalizedString(@"输入活动目的", nil)]) {
             self.yuYueView.pursoseTextView.text=NSLocalizedString(@"", nil);
             self.yuYueView.pursoseTextView.textColor = [UIColor blackColor];
@@ -1102,11 +1146,11 @@
 
 
 #pragma mark - textfieldDelegate
--(BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
-}
+//-(BOOL)textFieldShouldReturn:(UITextField *)textField
+//{
+//    [textField resignFirstResponder];
+//    return YES;
+//}
 
 
 #pragma mark - tableViewDelegate

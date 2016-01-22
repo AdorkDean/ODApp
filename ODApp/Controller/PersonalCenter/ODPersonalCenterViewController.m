@@ -293,6 +293,16 @@
             
             if (self.navigationController.viewControllers.count > 1)
             {
+              
+                
+                
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"登陆成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
+                [alter show];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [alter dismissWithClickedButtonIndex:0 animated:YES];
+                    
+                });
+                
                 [self.navigationController popViewControllerAnimated:YES];
                 
             }
@@ -317,8 +327,15 @@
                     
                     newButton.selected = i == index;
                 }
-               
-                   [self.navigationController pushViewController:vc animated:YES];
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"登陆成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
+                [alter show];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    [alter dismissWithClickedButtonIndex:0 animated:YES];
+                  
+
+                });
+
+                  [self.navigationController pushViewController:vc animated:YES];
             }
 
          

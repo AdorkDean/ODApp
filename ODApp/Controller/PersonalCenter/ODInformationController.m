@@ -318,7 +318,9 @@
 {
     
     ODChangePassWordController *vc = [[ODChangePassWordController alloc] init];
+    ODUserModel *model = self.dataArray[0];
     
+    vc.phoneNumber = model.mobile;
   
     vc.topTitle = @"修改密码";
     

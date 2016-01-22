@@ -62,7 +62,7 @@
     [self.view addSubview:self.headView];
     
     // 选择中心label
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:self.title font:17 alignment:@"center" color:@"#000000" alpha:1];
+    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:self.topTitle font:17 alignment:@"center" color:@"#000000" alpha:1];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
@@ -123,9 +123,14 @@
         self.registView.registereButton.layer.borderWidth = 1;
         
         
+        if ([self.topTitle isEqualToString:@"修改密码"]) {
+            self.registView.phoneNumber.userInteractionEnabled = NO;
+            self.registView.phoneNumber.text = self.phoneNumber;
+        }
+        
         
         self.registView.password.secureTextEntry = YES;
-        
+     
         
         
         [self.registView.getVerification addTarget:self action:@selector(getVerification:) forControlEvents:UIControlEventTouchUpInside];
