@@ -100,9 +100,7 @@
         self.textView.text = self.signature;
     }
   
-    
-  
-    
+ 
     [self.view addSubview:self.textView];
     
     
@@ -203,18 +201,14 @@
                 [self.navigationController popViewControllerAnimated:YES];
 
             }
-            
-            
-           
+   
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             UIAlertView *alter = [[UIAlertView alloc] initWithTitle:nil message:responseObject[@"message"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alter show];
         }
-
-     
-        
+      
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
@@ -227,7 +221,6 @@
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.imageView.alpha = 0;
 }
-
 
 
 @end

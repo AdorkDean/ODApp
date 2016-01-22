@@ -9,10 +9,14 @@
 #import "ODCommumityViewController.h"
 
 @interface ODCommumityViewController ()
-
+{
+    NSMutableDictionary *userInfoDic;
+}
 @end
 
 @implementation ODCommumityViewController
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -119,7 +123,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.dataArray = [[NSMutableArray alloc]init];
-    self.userArray = [[NSMutableArray alloc]init];
+    userInfoDic = [NSMutableDictionary dictionary];
 }
 
 #pragma mark - 拼接参数
@@ -163,15 +167,17 @@
                 NSDictionary *itemDict = users[key];
                 ODCommunityModel *model = [[ODCommunityModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.userArray addObject:model];
+                [userInfoDic setObject:model forKey:userKey];
             }
-            
+
             [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
     }];
 }
 
@@ -210,16 +216,10 @@
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     
     [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-    
     [cell showDateWithModel:model];
-    for (NSInteger i = 0; i < self.userArray.count; i++) {
-        ODCommunityModel *userModel = self.userArray[i];
-        if ([[NSString stringWithFormat:@"%@",model.user_id] isEqualToString:[NSString stringWithFormat:@"%@",userModel.id]]) {
-            cell.nameLabel.text = userModel.nick;
-            [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
-        }
-    }
-    
+    NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+    cell.nameLabel.text = [userInfoDic[userId]nick];
+    [cell.headButton sd_setBackgroundImageWithURL: [NSURL URLWithString:[userInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
     return cell;
 }
 
@@ -227,11 +227,10 @@
 
     ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview;
     NSIndexPath *indexpath = [self.collectionView indexPathForCell:cell];
-    ODCommunityModel *model = self.userArray[indexpath.row];
-    
+    ODCommunityModel *model = self.dataArray[indexpath.row];
+    NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-    vc.open_id = model.open_id;
-
+    vc.open_id = [userInfoDic[userId]open_id];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

@@ -234,7 +234,8 @@
             [self.collectionView.mj_footer endRefreshing];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+        [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
     }];
 }
 
@@ -326,6 +327,9 @@
     bazaarDetail.myBlock = ^(NSString *del){
         self.refresh = del;
     };
+    if ([self.refresh isEqualToString:@"accept"]) {
+        [bazaarDetail.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
+    }
     [self.navigationController pushViewController:bazaarDetail animated:YES];
 
 }
@@ -342,6 +346,8 @@
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [self.collectionView.mj_header beginRefreshing];
     }else if ([self.refresh isEqualToString:@"del"]){
+        [self.collectionView.mj_header beginRefreshing];
+    }else if ([self.refresh isEqualToString:@"accept"]){
         [self.collectionView.mj_header beginRefreshing];
     }
     [super viewWillAppear:animated];

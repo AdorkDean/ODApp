@@ -291,6 +291,7 @@
         if ([countNumber isEqualToString:@"1"]) {
             [self.FirstDataArray removeAllObjects];
             [self.firstUserArray removeAllObjects];
+            [self.noResultLeftLabel removeFromSuperview];
         }
         
         
@@ -342,27 +343,22 @@
         [self.firstCollectionView.mj_header endRefreshing];
         [self.firstCollectionView.mj_footer endRefreshing];
         if (self.FirstDataArray.count == 0) {
-            UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.scrollView addSubview:nothingLabel];
+            self.noResultLeftLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+            [self.scrollView addSubview:self.noResultLeftLabel];
         }
         
         else{
             [self.firstCollectionView reloadData];
         }
 
-        
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        
+        [self.firstCollectionView.mj_header endRefreshing];
+        [self.firstCollectionView.mj_footer endRefreshing];
         
     }];
-    
-    
-
-    
-    
+   
 }
 
 -(void)secondGetData
@@ -386,6 +382,7 @@
             if ([countNumber isEqualToString:@"1"]) {
                 [self.secondDataArray removeAllObjects];
                 [self.secondUserArray removeAllObjects];
+                [self.noReusltRightLabel removeFromSuperview];
             }
             
             
@@ -434,8 +431,8 @@
         [self.secondCollectionView.mj_header endRefreshing];
         [self.secondCollectionView.mj_footer endRefreshing];
         if (self.secondDataArray.count == 0) {
-            UILabel *nothingLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2 + kScreenSize.width, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.scrollView addSubview:nothingLabel];
+            self.noReusltRightLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2 + kScreenSize.width, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+            [self.scrollView addSubview:self.noReusltRightLabel];
         }
         
         else{
@@ -447,13 +444,11 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        
+        [self.secondCollectionView.mj_header endRefreshing];
+        [self.secondCollectionView.mj_footer endRefreshing];
         
     }];
-    
-
-    
-    
+  
 }
 
 
@@ -495,12 +490,7 @@
 
     }
     
-    
-    
-    
-   
-    
-    
+
     return cell;
 }
 
@@ -544,10 +534,7 @@
         detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
         [self.navigationController pushViewController:detailController animated:YES];
     }
-    
-  
-    
-    
+
 }
 
 

@@ -131,7 +131,10 @@
 -(void)createUIAlertControllerWithTitle:(NSString *)title
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }]];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
@@ -508,7 +511,7 @@
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
        
-            [self createUIAlertControllerWithTitle:@"预约成功"];
+            [self createUIAlertControllerWithTitle:@"感谢您的预约请等待审核"];
 
             
             

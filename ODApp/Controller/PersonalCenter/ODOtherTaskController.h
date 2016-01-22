@@ -12,5 +12,6 @@
 
 @property (nonatomic , copy) NSString *openId;
 
+@property (nonatomic, strong) UILabel *noReusltLabel;
 
 @end

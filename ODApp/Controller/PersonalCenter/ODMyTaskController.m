@@ -458,9 +458,7 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [self.FirstDataArray addObject:model];
             }
-            
-            
-            
+   
         }
         
         
@@ -477,7 +475,8 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        
+        [self.firstCollectionView.mj_header endRefreshing];
+        [self.firstCollectionView.mj_footer endRefreshing];
         
     }];
     
@@ -547,14 +546,12 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        
+        [self.secondCollectionView.mj_header endRefreshing];
+        [self.secondCollectionView.mj_footer endRefreshing];
         
     }];
     
-    
-    
-    
-    
+      
 }
 
 
