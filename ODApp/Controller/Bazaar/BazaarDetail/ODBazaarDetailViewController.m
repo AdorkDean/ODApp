@@ -307,6 +307,8 @@
         buttonHeight = 22;
     }
     //显示全部内容
+//    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(allButtonClick:)];
+//    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(self.taskBottomView.frame.size.width-130, 0, 130, labelHeight)];
     self.allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.taskBottomView.frame.size.width-130, 0, 100, labelHeight) text:@"显示全部内容" font:15 alignment:@"center" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     [self.taskBottomView addSubview:self.allLabel];
     
