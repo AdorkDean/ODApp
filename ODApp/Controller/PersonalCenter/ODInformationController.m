@@ -39,7 +39,7 @@
     // Do any additional setup after loading the view.
     
     
- 
+    
     
     self.dataArray = [[NSMutableArray alloc] init];
     
@@ -116,17 +116,17 @@
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
     
-  
+    
     UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:@"个人中心" font:17 alignment:@"center" color:@"#000000" alpha:1];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
     
     
-
+    
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
     confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
+    
     [self.headView addSubview:confirmButton];
     
 }
@@ -159,7 +159,7 @@
     self.informationView.userImageView.layer.cornerRadius = 45;
     self.informationView.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
     self.informationView.userImageView.layer.borderWidth = 1;
-
+    
     
     if ([model.sign isEqualToString:@""]) {
         self.informationView.signatureLabel.text = @"未设置签名";
@@ -169,10 +169,10 @@
         self.informationView.signatureLabel.text = model.sign;
         
     }
-
+    
     UITapGestureRecognizer *signatureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signatureAction)];
     [self.informationView.signatureImageView addGestureRecognizer:signatureTap];
-
+    
     
     
     if ([model.nick isEqualToString:@""]) {
@@ -181,12 +181,12 @@
         self.informationView.nickNameLabel.text = model.nick;
         
     }
-
+    
     UITapGestureRecognizer *nickNameTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nickNameAction)];
     [self.informationView.nickNameImageView addGestureRecognizer:nickNameTap];
     
     NSString *gender = [NSString stringWithFormat:@"%ld" , (long)model.gender];
-
+    
     
     if ([gender isEqualToString:@"1"]) {
         self.informationView.genderLabel.text = @"男";
@@ -194,7 +194,7 @@
         self.informationView.genderLabel.text = @"女";
         
     }
-
+    
     
     UITapGestureRecognizer *genderTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(genderAction)];
     [self.informationView.genderImageView addGestureRecognizer:genderTap];
@@ -202,13 +202,13 @@
     
     self.informationView.phoneLabel.text = model.mobile;
     
-//    UITapGestureRecognizer *phoneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneAction)];
-//    [self.informationView.phoneImageView addGestureRecognizer:phoneTap];
-//    
+    //    UITapGestureRecognizer *phoneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneAction)];
+    //    [self.informationView.phoneImageView addGestureRecognizer:phoneTap];
+    //
     
     UITapGestureRecognizer *passWordTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(passWordAction)];
     [self.informationView.passWordImageView addGestureRecognizer:passWordTap];
-
+    
     [self.informationView.codeImageView sd_setImageWithURL:[NSURL URLWithString:model.qrcode]];
     
     
@@ -233,12 +233,12 @@
     
     ODUserSignatureController *vc = [[ODUserSignatureController alloc] init];
     
-  
+    
     vc.signature =self.informationView.signatureLabel.text;
     
     vc.getTextBlock = ^(NSString *text){
         
-     
+        
         if ([text isEqualToString:@""]) {
             self.informationView.signatureLabel.text = [NSString stringWithFormat:@"未设置签名"];
         }else{
@@ -247,7 +247,7 @@
             self.informationView.signatureLabel.text = text;
             
         }
-
+        
         
         
         
@@ -267,9 +267,9 @@
     
     ODUserNickNameController *vc = [[ODUserNickNameController alloc] init];
     
-  
+    
     vc.nickName =  self.informationView.nickNameLabel.text;
-   
+    
     vc.getTextBlock = ^(NSString *text){
         
         
@@ -284,7 +284,7 @@
         
         
     };
-
+    
     
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -295,17 +295,17 @@
 {
     
     ODUserGenderController *vc = [[ODUserGenderController alloc] init];
-     
+    
     vc.getTextBlock = ^(NSString *text){
         
-    if ([text isEqualToString:@"1"]) {
+        if ([text isEqualToString:@"1"]) {
             self.informationView.genderLabel.text = @"男";
         }else if ([text isEqualToString:@"2"]){
             self.informationView.genderLabel.text = @"女";
             
         }
-      };
-
+    };
+    
     [self.navigationController pushViewController:vc animated:YES];
     
     
@@ -315,18 +315,18 @@
 {
     
     ODBindingMobileController *vc = [[ODBindingMobileController alloc] init];
-   
+    
     
     
     vc.getTextBlock = ^(NSString *text){
         
         
-    self.informationView.phoneLabel.text = text;
-
+        self.informationView.phoneLabel.text = text;
+        
         
         
     };
-
+    
     
     
     [self.navigationController pushViewController:vc animated:YES];
@@ -339,11 +339,11 @@
     
     ODChangePassWordController *vc = [[ODChangePassWordController alloc] init];
     
-  
+    
     vc.topTitle = @"修改密码";
     
     [self.navigationController pushViewController:vc animated:YES];
-
+    
     
 }
 
@@ -351,7 +351,7 @@
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
     [actionSheet showInView:self.view];
-
+    
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -422,7 +422,7 @@
         
         
         [self pushImageWithUrl:url parameter:signParameter];
-
+        
         
     }
 }
@@ -448,22 +448,22 @@
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-  
+    
     [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
             NSString *str = result[@"File"];
-           
-                self.imgsString = str;
-                
-                
-                [self saveImge];
             
-        
+            self.imgsString = str;
+            
+            
+            [self saveImge];
+            
+            
         }
-     
-      
+        
+        
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"error");
     }];
@@ -477,7 +477,7 @@
     
     ODUserModel *model = self.dataArray[0];
     NSString *open_id = model.open_id;
-
+    
     NSDictionary *parameters = @{@"avatar": self.imgsString , @"open_id":open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
@@ -487,10 +487,10 @@
         
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
-           
             
-       
-               [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+            
+            
+            [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
             
         }
         
@@ -498,7 +498,7 @@
             UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
             [alter show];
         }
-
+        
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -507,7 +507,7 @@
         
         
     }];
-
+    
     
     
 }

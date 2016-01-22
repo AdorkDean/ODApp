@@ -169,7 +169,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T5A-lY-qGF">
-                    <rect key="frame" x="5" y="505" width="315" height="30"/>
+                    <rect key="frame" x="5" y="505" width="320" height="30"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Qbb-rh-iMh"/>
@@ -189,10 +189,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xyc-dA-QMU">
-                    <rect key="frame" x="100" y="510" width="150" height="20"/>
+                    <rect key="frame" x="100" y="510" width="225" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="4Yl-Qw-PmG"/>
-                        <constraint firstAttribute="width" constant="150" id="WLf-F8-CTd"/>
                     </constraints>
                     <state key="normal" title="0459-888888"/>
                 </button>
@@ -252,6 +251,7 @@
                 <constraint firstItem="Xyc-dA-QMU" firstAttribute="leading" secondItem="NGx-gz-xai" secondAttribute="trailing" id="2nS-sM-3Dh"/>
                 <constraint firstItem="DMe-Bw-VoJ" firstAttribute="top" secondItem="QSr-AF-cie" secondAttribute="bottom" constant="10" id="3dx-80-hsU"/>
                 <constraint firstItem="l7W-0o-0Dr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="4bb-G7-Ku6"/>
+                <constraint firstAttribute="trailing" secondItem="Xyc-dA-QMU" secondAttribute="trailing" constant="5" id="4dQ-G4-B6c"/>
                 <constraint firstItem="0UC-Su-qDh" firstAttribute="top" secondItem="fZh-X8-SSk" secondAttribute="bottom" constant="10" id="5an-DM-TLy"/>
                 <constraint firstItem="Vf5-1H-Xbc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="5zk-22-D0P"/>
                 <constraint firstItem="fZh-X8-SSk" firstAttribute="top" secondItem="BK5-ae-hLW" secondAttribute="bottom" constant="10" id="63D-kg-yxB"/>
@@ -312,7 +312,7 @@
                 <constraint firstAttribute="trailing" secondItem="ayB-ay-RcL" secondAttribute="trailing" constant="10" id="vn0-Lj-o9i"/>
                 <constraint firstItem="3y4-ws-Ija" firstAttribute="top" secondItem="BK5-ae-hLW" secondAttribute="bottom" constant="20" id="x9K-aJ-RBC"/>
                 <constraint firstItem="X1Z-iD-DqS" firstAttribute="leading" secondItem="dZf-wd-UgG" secondAttribute="trailing" constant="5" id="xFB-Ps-Jlb"/>
-                <constraint firstAttribute="trailing" secondItem="T5A-lY-qGF" secondAttribute="trailing" constant="10" id="xgm-KO-HaS"/>
+                <constraint firstAttribute="trailing" secondItem="T5A-lY-qGF" secondAttribute="trailing" constant="5" id="xgm-KO-HaS"/>
                 <constraint firstAttribute="trailing" secondItem="f3r-HU-mHi" secondAttribute="trailing" constant="5" id="xqM-k9-WSY"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

@@ -12,7 +12,7 @@
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "MyPageControl.h"
-@interface AppDelegate ()
+@interface AppDelegate ()<UIScrollViewDelegate>
 {
     NSUncaughtExceptionHandler *    _uncaughtExceptionHandler;
 }
@@ -133,16 +133,14 @@ void UncaughtExceptionHandler(NSException *exception)
         
     }else {
         
-        self.length = 350;
+        self.length = 330;
         
     }
     
     
-    self.pageControl = [[MyPageControl alloc] initWithFrame:CGRectMake( self.ViewController.view.center.x - 50,  self.ViewController.view.center.y + self.length, 200, 30) normalImage:[UIImage imageNamed:@"selected.png"] highlightedImage:[UIImage imageNamed:@"noselected.png"] dotsNumber:4 sideLength:15 dotsGap:10];
-    self.pageControl.delegate = self;
+     self.pageControl = [[MyPageControl alloc] initWithFrame:CGRectMake( self.ViewController.view.center.x - 50,  self.ViewController.view.center.y + self.length, 200, 30) normalImage:[UIImage imageNamed:@"selected.png"] highlightedImage:[UIImage imageNamed:@"noselected.png"] dotsNumber:4 sideLength:15 dotsGap:10];
     
-    
-    self.pageControl.backgroundColor = [UIColor clearColor];
+     self.pageControl.backgroundColor = [UIColor clearColor];
     
     
     
