@@ -359,7 +359,7 @@
         [self.secondCollectionView.mj_header endRefreshing];
         [self.secondCollectionView.mj_footer endRefreshing];
         
-    }]
+    }];
 }
 
 
