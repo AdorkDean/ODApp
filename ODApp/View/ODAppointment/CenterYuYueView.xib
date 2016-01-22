@@ -159,17 +159,8 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入参加人数" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2O-VZ-0LB">
-                    <rect key="frame" x="5" y="465" width="320" height="30"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="Y2p-cB-KUD"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T5A-lY-qGF">
-                    <rect key="frame" x="5" y="505" width="315" height="30"/>
+                    <rect key="frame" x="5" y="505" width="320" height="30"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Qbb-rh-iMh"/>
@@ -246,6 +237,15 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入参加人数" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="P2O-VZ-0LB">
+                    <rect key="frame" x="5" y="467" width="320" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Y2p-cB-KUD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -312,7 +312,7 @@
                 <constraint firstAttribute="trailing" secondItem="ayB-ay-RcL" secondAttribute="trailing" constant="10" id="vn0-Lj-o9i"/>
                 <constraint firstItem="3y4-ws-Ija" firstAttribute="top" secondItem="BK5-ae-hLW" secondAttribute="bottom" constant="20" id="x9K-aJ-RBC"/>
                 <constraint firstItem="X1Z-iD-DqS" firstAttribute="leading" secondItem="dZf-wd-UgG" secondAttribute="trailing" constant="5" id="xFB-Ps-Jlb"/>
-                <constraint firstAttribute="trailing" secondItem="T5A-lY-qGF" secondAttribute="trailing" constant="10" id="xgm-KO-HaS"/>
+                <constraint firstAttribute="trailing" secondItem="T5A-lY-qGF" secondAttribute="trailing" constant="5" id="xgm-KO-HaS"/>
                 <constraint firstAttribute="trailing" secondItem="f3r-HU-mHi" secondAttribute="trailing" constant="5" id="xqM-k9-WSY"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
