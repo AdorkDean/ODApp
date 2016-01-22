@@ -1013,11 +1013,7 @@
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
     [self.view addSubview:callWebview];
     
-    
-    
-    
 }
-
 
 
 - (void)computerAction:(UIButton *)sender
@@ -1122,9 +1118,6 @@
             return NO;
 
         }
-            
-        
-        
     }
     
     if (textView == self.yuYueView.contentTextView) {
@@ -1157,7 +1150,6 @@
 }
 
 
-
 #pragma mark - textfieldDelegate
 //-(BOOL)textFieldShouldReturn:(UITextField *)textField
 //{
@@ -1175,9 +1167,6 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
     }
     
-    
-    
-    
     return cell;
 }
 
@@ -1190,9 +1179,6 @@
 {
     return 0;
 }
-
-
-
 
 
 - (void)didReceiveMemoryWarning {
