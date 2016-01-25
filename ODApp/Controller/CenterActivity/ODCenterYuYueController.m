@@ -471,13 +471,22 @@
     
 }
 
+- (AFHTTPRequestOperationManager *)timeManager
+{
+    if (!_timeManager)
+    {
+        _timeManager = [AFHTTPRequestOperationManager manager];
+    }
+    return _timeManager;
+}
+
 
 - (void)getData
 {
     
+    NSLog(@"_____%@" , self.start_datetime);
+    NSLog(@"_____%@" , self.storeId);
     
-    
-    self.timeManager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters = @{@"store_id":self.storeId , @"start_datetime":self.start_datetime};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
@@ -886,15 +895,17 @@
     
     
     
-    if ( !self.yuYueView.eTimeText.userInteractionEnabled) {
-        self.yuYueView.btimeText.userInteractionEnabled = YES;
-        self.yuYueView.eTimeText.userInteractionEnabled = YES;
-    }else {
-        
-        self.yuYueView.btimeText.userInteractionEnabled = YES;
-        self.yuYueView.eTimeText.userInteractionEnabled = YES;
-        
-    }
+//    if ( !self.yuYueView.eTimeText.userInteractionEnabled) {
+//        self.yuYueView.btimeText.userInteractionEnabled = YES;
+//        self.yuYueView.eTimeText.userInteractionEnabled = YES;
+//    }else {
+//        
+//        self.yuYueView.btimeText.userInteractionEnabled = YES;
+//        self.yuYueView.eTimeText.userInteractionEnabled = YES;
+//        
+//    }
+    self.yuYueView.btimeText.userInteractionEnabled = YES;
+    self.yuYueView.eTimeText.userInteractionEnabled = YES;
     
     [self.picker removeFromSuperview];
     [self.cancelButton removeFromSuperview];
@@ -985,19 +996,21 @@
     }
     
     
-    if (!self.yuYueView.eTimeText.userInteractionEnabled) {
-        
-        self.yuYueView.btimeText.userInteractionEnabled = YES;
-        self.yuYueView.eTimeText.userInteractionEnabled = YES;
-        
-    }else {
-        
-        self.yuYueView.btimeText.userInteractionEnabled = YES;
-        self.yuYueView.eTimeText.userInteractionEnabled = YES;
-        
-    }
+//    if (!self.yuYueView.eTimeText.userInteractionEnabled) {
+//        
+//        self.yuYueView.btimeText.userInteractionEnabled = YES;
+//        self.yuYueView.eTimeText.userInteractionEnabled = YES;
+//        
+//    }else {
+//        
+//        self.yuYueView.btimeText.userInteractionEnabled = YES;
+//        self.yuYueView.eTimeText.userInteractionEnabled = YES;
+//        
+//    }
     
-    
+    self.yuYueView.btimeText.userInteractionEnabled = YES;
+    self.yuYueView.eTimeText.userInteractionEnabled = YES;
+
     [self.picker removeFromSuperview];
     [self.cancelButton removeFromSuperview];
     [self.queDingButton removeFromSuperview];
