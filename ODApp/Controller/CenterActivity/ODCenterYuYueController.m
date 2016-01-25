@@ -440,20 +440,53 @@
 - (void)yuYueAction:(UIButton *)sender
 {
     
+    if ([self.yuYueView.btimeText.titleLabel.text isEqualToString:@"填写开始时间"]) {
+        
+        [self createUIAlertControllerWithTitle:@"请填写开始时间"];
+      
+
+    }else if ([self.yuYueView.eTimeText.titleLabel.text isEqualToString:@"填写结束时间"]) {
+        
+        [self createUIAlertControllerWithTitle:@"请填写结束时间"];
+        
+    }else if ([self.yuYueView.pursoseTextView.text isEqualToString:@""] || [self.yuYueView.pursoseTextView.text isEqualToString:@"输入活动目的"]) {
+        
+        [self createUIAlertControllerWithTitle:@"请输入活动目的"];
+        
+    }else if ([self.yuYueView.contentTextView.text isEqualToString:@""] || [self.yuYueView.contentTextView.text isEqualToString:@"输入活动内容"]) {
+        
+       [self createUIAlertControllerWithTitle:@"请输入活动内容"];
+        
+    }else if ([self.yuYueView.peopleNumberTextField.text isEqualToString:@""]) {
+      
+        [self createUIAlertControllerWithTitle:@"请输入参加人数"];
+        
+    } else {
+        
+        [self getOrderId];
+
+    }
     
-    [self getOrderId];
     
     
-    
+}
+
+- (AFHTTPRequestOperationManager *)timeManager
+{
+    if (!_timeManager)
+    {
+        _timeManager = [AFHTTPRequestOperationManager manager];
+    }
+    return _timeManager;
 }
 
 
 - (void)getData
 {
     
+    NSLog(@"_____%@" , self.start_datetime);
+    NSLog(@"_____%@" , self.storeId);
     
-    
-    self.timeManager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters = @{@"store_id":self.storeId , @"start_datetime":self.start_datetime};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
@@ -691,7 +724,7 @@
     
     
     
-    NSDictionary *parameter = @{@"start_datetime":self.beginTime , @" end_datetime":self.endTime , @"store_id":self.storeId , @"order_id":self.orderID ,@"purpose":self.yuYueView.pursoseTextView.text ,@"content":self.yuYueView.contentTextView.text ,@"people_num":self.yuYueView.peopleNumberTextField.text ,@"remark":@"无" ,@"devices":equipment ,@"open_id":self.openId};
+    NSDictionary *parameter = @{@"start_datetime":self.beginTime , @"end_datetime":self.endTime , @"store_id":self.storeId , @"order_id":self.orderID ,@"purpose":self.yuYueView.pursoseTextView.text ,@"content":self.yuYueView.contentTextView.text ,@"people_num":self.yuYueView.peopleNumberTextField.text ,@"remark":@"无" ,@"devices":equipment ,@"open_id":self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     
@@ -862,15 +895,17 @@
     
     
     
-    if ( !self.yuYueView.eTimeText.userInteractionEnabled) {
-        self.yuYueView.btimeText.userInteractionEnabled = YES;
-        self.yuYueView.eTimeText.userInteractionEnabled = YES;
-    }else {
-        
-        self.yuYueView.btimeText.userInteractionEnabled = YES;
-        self.yuYueView.eTimeText.userInteractionEnabled = YES;
-        
-    }
+//    if ( !self.yuYueView.eTimeText.userInteractionEnabled) {
+//        self.yuYueView.btimeText.userInteractionEnabled = YES;
+//        self.yuYueView.eTimeText.userInteractionEnabled = YES;
+//    }else {
+//        
+//        self.yuYueView.btimeText.userInteractionEnabled = YES;
+//        self.yuYueView.eTimeText.userInteractionEnabled = YES;
+//        
+//    }
+    self.yuYueView.btimeText.userInteractionEnabled = YES;
+    self.yuYueView.eTimeText.userInteractionEnabled = YES;
     
     [self.picker removeFromSuperview];
     [self.cancelButton removeFromSuperview];
@@ -961,19 +996,21 @@
     }
     
     
-    if (!self.yuYueView.eTimeText.userInteractionEnabled) {
-        
-        self.yuYueView.btimeText.userInteractionEnabled = YES;
-        self.yuYueView.eTimeText.userInteractionEnabled = YES;
-        
-    }else {
-        
-        self.yuYueView.btimeText.userInteractionEnabled = YES;
-        self.yuYueView.eTimeText.userInteractionEnabled = YES;
-        
-    }
+//    if (!self.yuYueView.eTimeText.userInteractionEnabled) {
+//        
+//        self.yuYueView.btimeText.userInteractionEnabled = YES;
+//        self.yuYueView.eTimeText.userInteractionEnabled = YES;
+//        
+//    }else {
+//        
+//        self.yuYueView.btimeText.userInteractionEnabled = YES;
+//        self.yuYueView.eTimeText.userInteractionEnabled = YES;
+//        
+//    }
     
-    
+    self.yuYueView.btimeText.userInteractionEnabled = YES;
+    self.yuYueView.eTimeText.userInteractionEnabled = YES;
+
     [self.picker removeFromSuperview];
     [self.cancelButton removeFromSuperview];
     [self.queDingButton removeFromSuperview];

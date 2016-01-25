@@ -276,7 +276,7 @@
                 
                 UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"登陆成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
                 [alter show];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [alter dismissWithClickedButtonIndex:0 animated:YES];
                     
                 });
