@@ -312,6 +312,14 @@ else if (indexPath.section ==3) {
              [ODUserInformation getData].openID = nil;
              NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
              [user setObject:nil forKey:@"openId"];
+            
+             
+             UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"已退出登录" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
+             [alter show];
+             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                 [alter dismissWithClickedButtonIndex:0 animated:YES];
+                 
+             });
 
              
              
