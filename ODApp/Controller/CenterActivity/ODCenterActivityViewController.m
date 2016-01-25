@@ -369,18 +369,13 @@
     
     if ([self.storeId isEqualToString:@"0"]|| self.storeId == nil || [self.storeId isEqualToString:@""]) {
         
-        
         ;
         
     }else {
-              ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
-              
-              
-              
-              vc.storeId = self.storeId;
-              
-              
-              [self.navigationController pushViewController:vc animated:YES];
+        
+        ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
+        vc.storeId = self.storeId;
+        [self.navigationController pushViewController:vc animated:YES];
 
     }
    
@@ -390,30 +385,21 @@
 
 - (void)searchButtonClick:(UIButton *)sender
 {
-    
-   
-    
     ODChoseCenterController *vc = [[ODChoseCenterController alloc] init];
-    
-    
-      vc.storeCenterNameBlock = ^(NSString *name , NSString *storeId , NSInteger storeNumber){
-       
-        self.centerNumber = storeNumber;
-        [self.firstHeader.searchButton setTitle:name forState:UIControlStateNormal];
+    vc.storeCenterNameBlock = ^(NSString *name , NSString *storeId , NSInteger storeNumber){
+    self.centerNumber = storeNumber;
+    [self.firstHeader.searchButton setTitle:name forState:UIControlStateNormal];
           
           
     };
 
     
     vc.isRefreshBlock = ^(BOOL isRefresh){
-        
+    
         self.isRefresh = isRefresh;
         
     };
 
-    
-    
-    
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -425,21 +411,14 @@
     
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64 - 55) collectionViewLayout:self.flowLayout];
-
- 
     [self.collectionView registerClass:[ODActivityHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"firstHeader"];
-
-    
-    
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"CenterActivityCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.view addSubview:self.collectionView];
 
-    
-    
-    
+  
 }
 
 
@@ -448,40 +427,8 @@
 {
     CenterActivityCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
     
-    
-    
-    if (iPhone4_4S) {
-        cell.toRightSpace.constant = 210;
-    }else if (iPhone5_5s){
-        cell.toRightSpace.constant = 210;
-    }else if (iPhone6_6s){
-        cell.toRightSpace.constant = 260;
-    }else{
-        cell.toRightSpace.constant = 300;
-
-    }
-
-  
-    cell.coverImageView.layer.masksToBounds = YES;
-    cell.coverImageView.layer.cornerRadius = 5;
-    cell.coverImageView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-    cell.coverImageView.layer.borderWidth = 1;
-    
-    
-   
     CenterActivityModel *model = self.dataArray[indexPath.row];
-    
-    
-    cell.titleLabel.text = model.content;
-    cell.timeLabel.text = model.date_str;
-    cell.addressLabel.text = model.address;
-    cell.timeLabel.textColor = [UIColor colorWithHexString:@"#b1b1b1" alpha:1];
-    cell.addressLabel.textColor = [UIColor colorWithHexString:@"#b1b1b1" alpha:1];
-    NSURL *url = [NSURL URLWithString:model.icon_url];
-    [cell.ActivityImageView sd_setImageWithURL:url];
-    
-    
-    
+    cell.model = model;
     return cell;
 }
 
@@ -506,27 +453,18 @@
     
     if ([ODUserInformation getData].openID == nil) {
         
-
-        
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
 
-        
-        
-
+     
     }else{
-        
-   
         
         vc.activityId = [NSString stringWithFormat:@"%ld" , (long)model.activity_id];
         vc.storeId = self.storeId;
         vc.openId =   [ODUserInformation getData].openID;
-
         [self.navigationController pushViewController:vc animated:YES];
 
     }
-    
-    
     
     
 }
@@ -540,40 +478,14 @@
     
     
     
+    
     self.firstHeader.cycleScrollerView.delegate = self;
     [self.firstHeader.cycleScrollerView setImageURLStringsGroup:self.pictureArray];
     [self.firstHeader.cycleScrollerView setTitlesGroup:self.titleArray];
-
-    
-    [self.firstHeader.searchButton setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
-    self.firstHeader.searchButton.layer.masksToBounds = YES;
-    self.firstHeader.searchButton.layer.cornerRadius = 5;
-    self.firstHeader.searchButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-    self.firstHeader.searchButton.layer.borderWidth = 1;
-    self.firstHeader.searchButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     
     
-    
-    self.firstHeader.searchButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 5);
-    self.firstHeader.searchButton.layer.masksToBounds = YES;
-    self.firstHeader.searchButton.layer.cornerRadius = 5;
-    self.firstHeader.searchButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-    self.firstHeader.searchButton.layer.borderWidth = 1;
-   UIImageView *image = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width - 120 - 30, 8, 15, 15) imageName:@"场地预约icon2@3x" tag:0];
-    
-    [self.firstHeader.searchButton addSubview:image];
     [self.firstHeader.searchButton addTarget:self action:@selector(searchButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    [self.firstHeader.centerButton setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
-    self.firstHeader.centerButton.layer.masksToBounds = YES;
-    self.firstHeader.centerButton.layer.cornerRadius = 5;
-    self.firstHeader.centerButton.layer.borderColor = [UIColor colorWithHexString:@"b0b0b0" alpha:1].CGColor;
-    self.firstHeader.centerButton.layer.borderWidth = 1;
-    self.firstHeader.centerButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
     [self.firstHeader.centerButton addTarget:self action:@selector(centerDetail:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
     [self.firstHeader.searchButton setTitle:self.centerName forState:UIControlStateNormal];
     
     
@@ -623,12 +535,8 @@
     
   
     ODCenterPactureController *vc = [[ODCenterPactureController alloc] init];
-    
-    
     vc.activityName = self.titleArray[index];
     vc.webUrl = self.pictureDetailArray[index];
-    
-    
     [self.navigationController pushViewController:vc animated:YES];
     
     
