@@ -266,8 +266,6 @@
     self.width = (kScreenSize.width-20)/4;
     
     self.imageView = [[UIImageView alloc]init];
-    self.imageView.frame = self.addPicButton.frame;
-
     self.imageView.image = image;
     self.imageView.layer.masksToBounds = YES;
     self.imageView.layer.cornerRadius = 5;
@@ -279,10 +277,11 @@
     self.deletePicButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.width - 15, 0, 15, 15) target:self sel:@selector(deletePicButton:) tag:0 image:@"搜索取消icon" title:@"" font:0];
     [self.imageView addSubview:self.deletePicButton];
     
-    if (self.count >= 9) {
+    if (self.count > 9) {
         [self.addPicButton setFrame:CGRectMake(4 + (self.width + 4) * (self.count%4), CGRectGetMaxY(self.topicContentTextView.frame) + 4 + (4+self.width) * (self.count/4), self.width, self.width)];
 //        self.addPicButton.hidden = YES;
     }else{
+        self.imageView.frame = self.addPicButton.frame;
         [self.addPicButton setFrame:CGRectMake(4 + (self.width + 4) * (self.count%4), CGRectGetMaxY(self.topicContentTextView.frame) + 4 + (4+self.width) * (self.count/4), self.width, self.width)];
         self.count++;
     }
