@@ -258,8 +258,6 @@
 		B80E0B2D1C474C0500F36A17 /* ODCommunityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B80E0B291C474C0500F36A17 /* ODCommunityModel.m */; };
 		B80E0B3F1C474C1F00F36A17 /* ODBazaarDetailCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B80E0B311C474C1F00F36A17 /* ODBazaarDetailCollectionCell.m */; };
 		B80E0B401C474C1F00F36A17 /* ODBazaarDetailCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80E0B321C474C1F00F36A17 /* ODBazaarDetailCollectionCell.xib */; };
-		B80E0B411C474C1F00F36A17 /* ODBazaarSearchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B80E0B351C474C1F00F36A17 /* ODBazaarSearchCell.m */; };
-		B80E0B421C474C1F00F36A17 /* ODBazaarSearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80E0B361C474C1F00F36A17 /* ODBazaarSearchCell.xib */; };
 		B80E0B431C474C1F00F36A17 /* ODCommunityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B80E0B3A1C474C1F00F36A17 /* ODCommunityDetailCell.m */; };
 		B80E0B441C474C1F00F36A17 /* ODCommunityDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B80E0B3B1C474C1F00F36A17 /* ODCommunityDetailCell.xib */; };
 		B80E0B451C474C1F00F36A17 /* ODCommunityCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B80E0B3D1C474C1F00F36A17 /* ODCommunityCollectionCell.m */; };
@@ -324,6 +322,8 @@
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
 		B848E8BC1C4E0E1200B16CBA /* UIColor+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B848E8BB1C4E0E1200B16CBA /* UIColor+ODExtension.m */; };
+		B855A79E1C52218D0038F559 /* ODBazaarRewardCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B855A79C1C52218D0038F559 /* ODBazaarRewardCollectionCell.m */; };
+		B855A79F1C52218D0038F559 /* ODBazaarRewardCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B855A79D1C52218D0038F559 /* ODBazaarRewardCollectionCell.xib */; };
 		B871CF9F1C4CF87400CF51BA /* ODOtherTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B871CF9E1C4CF87400CF51BA /* ODOtherTopicViewController.m */; };
 		B871CFA21C4CF9FA00CF51BA /* ODOtherTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = B871CFA11C4CF9FA00CF51BA /* ODOtherTaskController.m */; };
 		C658B9091C5238B80079B399 /* 活动目的icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = C658B9061C5238B80079B399 /* 活动目的icon@1x.png */; };
@@ -672,9 +672,6 @@
 		B80E0B301C474C1F00F36A17 /* ODBazaarDetailCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailCollectionCell.h; sourceTree = "<group>"; };
 		B80E0B311C474C1F00F36A17 /* ODBazaarDetailCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarDetailCollectionCell.m; sourceTree = "<group>"; };
 		B80E0B321C474C1F00F36A17 /* ODBazaarDetailCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarDetailCollectionCell.xib; sourceTree = "<group>"; };
-		B80E0B341C474C1F00F36A17 /* ODBazaarSearchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarSearchCell.h; sourceTree = "<group>"; };
-		B80E0B351C474C1F00F36A17 /* ODBazaarSearchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarSearchCell.m; sourceTree = "<group>"; };
-		B80E0B361C474C1F00F36A17 /* ODBazaarSearchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarSearchCell.xib; sourceTree = "<group>"; };
 		B80E0B391C474C1F00F36A17 /* ODCommunityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityDetailCell.h; sourceTree = "<group>"; };
 		B80E0B3A1C474C1F00F36A17 /* ODCommunityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityDetailCell.m; sourceTree = "<group>"; };
 		B80E0B3B1C474C1F00F36A17 /* ODCommunityDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODCommunityDetailCell.xib; sourceTree = "<group>"; };
@@ -803,6 +800,9 @@
 		B83C6B931C22532B0063ED92 /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		B848E8BA1C4E0E1200B16CBA /* UIColor+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ODExtension.h"; sourceTree = "<group>"; };
 		B848E8BB1C4E0E1200B16CBA /* UIColor+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ODExtension.m"; sourceTree = "<group>"; };
+		B855A79B1C52218D0038F559 /* ODBazaarRewardCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarRewardCollectionCell.h; sourceTree = "<group>"; };
+		B855A79C1C52218D0038F559 /* ODBazaarRewardCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarRewardCollectionCell.m; sourceTree = "<group>"; };
+		B855A79D1C52218D0038F559 /* ODBazaarRewardCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarRewardCollectionCell.xib; sourceTree = "<group>"; };
 		B871CF9D1C4CF87400CF51BA /* ODOtherTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOtherTopicViewController.h; sourceTree = "<group>"; };
 		B871CF9E1C4CF87400CF51BA /* ODOtherTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOtherTopicViewController.m; sourceTree = "<group>"; };
 		B871CFA01C4CF9FA00CF51BA /* ODOtherTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOtherTaskController.h; sourceTree = "<group>"; };
@@ -1441,7 +1441,6 @@
 				B80E0B491C474D3700F36A17 /* ODBazaarCollectionCell.m */,
 				B80E0B4A1C474D3700F36A17 /* ODBazaarCollectionCell.xib */,
 				B80E0B2F1C474C1F00F36A17 /* BazaarDetailView */,
-				B80E0B331C474C1F00F36A17 /* BazaarSearchView */,
 			);
 			path = BazaarView;
 			sourceTree = "<group>";
@@ -1452,18 +1451,11 @@
 				B80E0B301C474C1F00F36A17 /* ODBazaarDetailCollectionCell.h */,
 				B80E0B311C474C1F00F36A17 /* ODBazaarDetailCollectionCell.m */,
 				B80E0B321C474C1F00F36A17 /* ODBazaarDetailCollectionCell.xib */,
+				B855A79B1C52218D0038F559 /* ODBazaarRewardCollectionCell.h */,
+				B855A79C1C52218D0038F559 /* ODBazaarRewardCollectionCell.m */,
+				B855A79D1C52218D0038F559 /* ODBazaarRewardCollectionCell.xib */,
 			);
 			path = BazaarDetailView;
-			sourceTree = "<group>";
-		};
-		B80E0B331C474C1F00F36A17 /* BazaarSearchView */ = {
-			isa = PBXGroup;
-			children = (
-				B80E0B341C474C1F00F36A17 /* ODBazaarSearchCell.h */,
-				B80E0B351C474C1F00F36A17 /* ODBazaarSearchCell.m */,
-				B80E0B361C474C1F00F36A17 /* ODBazaarSearchCell.xib */,
-			);
-			path = BazaarSearchView;
 			sourceTree = "<group>";
 		};
 		B80E0B371C474C1F00F36A17 /* CommunityView */ = {
@@ -2281,6 +2273,7 @@
 				B8046E3C1C4772C200D1FEBC /* 任务攻略图文详情图二@2x.png in Resources */,
 				B8046E631C4772C200D1FEBC /* 首页浏览量icon@2x.png in Resources */,
 				B8046E561C4772C200D1FEBC /* 首页-约场地icon@1x.png in Resources */,
+				B855A79F1C52218D0038F559 /* ODBazaarRewardCollectionCell.xib in Resources */,
 				B8046E281C4772C200D1FEBC /* 登录框icon@3x.png in Resources */,
 				B8046E641C4772C200D1FEBC /* 首页浏览量icon@3x.png in Resources */,
 				B8046DBC1C4772C200D1FEBC /* 任务详情下拉按钮@2x.png in Resources */,
@@ -2355,7 +2348,6 @@
 				B8046DC61C4772C200D1FEBC /* 微信分享icon@3x.png in Resources */,
 				9DD00BC81C4E393300F0EE5F /* UMSCommentInputController.xib in Resources */,
 				B8046DFE1C4772C200D1FEBC /* 标签栏大按钮@3x.png in Resources */,
-				B80E0B421C474C1F00F36A17 /* ODBazaarSearchCell.xib in Resources */,
 				B8046DB41C4772C200D1FEBC /* 话题详情-分享icon@3x.png in Resources */,
 				B8046DEE1C4772C200D1FEBC /* 定位icon@1x.png in Resources */,
 				B8046E271C4772C200D1FEBC /* 登录框icon@2x.png in Resources */,
@@ -2553,7 +2545,6 @@
 				B83C39491C48A0E9007B16FB /* ODUserInformation.m in Sources */,
 				B83C39501C48A0E9007B16FB /* ODTabBarController.m in Sources */,
 				B83C39231C48A0E9007B16FB /* ODChoseCenterController.m in Sources */,
-				B80E0B411C474C1F00F36A17 /* ODBazaarSearchCell.m in Sources */,
 				B83C39071C48A0E9007B16FB /* ODBazaarReleaseRewardViewController.m in Sources */,
 				9D69B5401C3A3993009039A4 /* ODActivityHeadView.m in Sources */,
 				C66F0C0B1C4CDEE9006E999B /* ODUserEvaluationController.m in Sources */,
@@ -2582,6 +2573,7 @@
 				B83C393D1C48A0E9007B16FB /* ODBindingMobileController.m in Sources */,
 				B83C39471C48A0E9007B16FB /* ODRegisteredController.m in Sources */,
 				B80E0B5D1C474FD300F36A17 /* ODhomeViewCollectionReusableView.m in Sources */,
+				B855A79E1C52218D0038F559 /* ODBazaarRewardCollectionCell.m in Sources */,
 				B83C39061C48A0E9007B16FB /* ODBazaarLabelSearchViewController.m in Sources */,
 				B833A6D11C474AAB00F91E9A /* ODHelp.m in Sources */,
 				B80E0BF61C4751AE00F36A17 /* ODMyOrderRecordCell.m in Sources */,

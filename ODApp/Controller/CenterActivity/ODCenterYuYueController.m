@@ -571,7 +571,8 @@
         }else{
             if ([self.start_datetime isEqualToString:@""]) {
                 
-                ;
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请选择开始时间" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alter show];
                 
                 
             }else{
@@ -582,7 +583,6 @@
                 [self.view addSubview: self.queDingButton];
                 [self.view addSubview: self.cancelButton];
                 [self.view addSubview:self.picker];
-                
                 
                 
                 
@@ -701,10 +701,6 @@
     [self.managers GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         
-        
-        
-        
-        
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
 
@@ -716,16 +712,13 @@
             
 
             
-            
-            
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
             
             
             [self createUIAlertControllerWithTitle:responseObject[@"message"]];
             
-            
-            
+                 
         }
         
         

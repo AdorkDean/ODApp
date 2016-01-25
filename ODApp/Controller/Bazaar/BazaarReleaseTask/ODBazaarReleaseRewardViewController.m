@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self navigationInit];
     [self createRequest];
     [self joiningTogetherParmeters];
@@ -46,6 +46,16 @@
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
 
     [self.headView addSubview:confirmButton];
+    
+    UIView *view = [ODClassMethod creatViewWithFrame:CGRectMake(4, 68, kScreenSize.width-8, 40) tag:0 color:@"#ffffff"];
+    view.layer.masksToBounds = YES;
+    view.layer.cornerRadius = 5;
+    view.layer.borderWidth = 1;
+    view.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    [self.view addSubview:view];
+    self.textField = [ODClassMethod creatTextFieldWithFrame:CGRectMake(8,0, kScreenSize.width-16, 40) placeHolder:@"请输入任务奖励" delegate:self tag:0];
+    [view addSubview:self.textField];
+    
 }
 
 -(void)backButtonClick:(UIButton *)button
@@ -56,7 +66,7 @@
 -(void)confirmButtonClick:(UIButton *)button
 {
     if (self.taskRewardBlock) {
-        self.taskRewardBlock([self.dataArray objectAtIndex:self.count],[self.idArray objectAtIndex:self.count]);
+        self.taskRewardBlock(self.textField.text,[self.idArray objectAtIndex:self.count]);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -93,8 +103,9 @@
                 [weakSelf.dataArray addObject:name];
                 [weakSelf.idArray addObject:id];
             }
-            [weakSelf.tableView reloadData];
-            [weakSelf createTableView];
+            [weakSelf createCollectionView];
+            [weakSelf.collectionView reloadData];
+            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -103,52 +114,76 @@
 
 
 #pragma mark - 创建tableView
--(void)createTableView
+-(void)createCollectionView
 {
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,64, kScreenSize.width, kScreenSize.height-64) style:UITableViewStylePlain];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerNib:[UINib nibWithNibName:@"ODBazaarSearchCell" bundle:nil] forCellReuseIdentifier:kBazaaeSearchCellId];
-    [self.view addSubview:self.tableView];
+    UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
+    flowLayout.minimumInteritemSpacing = 0;
+    flowLayout.minimumLineSpacing = 0;
+    flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(4,112, kScreenSize.width-8, kScreenSize.height-112) collectionViewLayout:flowLayout];
+    self.collectionView.dataSource = self;
+    self.collectionView.delegate = self;
+    self.collectionView.layer.masksToBounds = YES;
+    self.collectionView.layer.cornerRadius = 5;
+    self.collectionView.layer.borderWidth = 1;
+    self.collectionView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarRewardCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarRewardCellId];
+    [self.view addSubview:self.collectionView];
 }
 
-#pragma mark - UITableViewDelegate
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+#pragma mark - UICollectionViewDelegate
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.dataArray.count;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODBazaarSearchCell *cell = [tableView dequeueReusableCellWithIdentifier:kBazaaeSearchCellId];
+    ODBazaarRewardCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarRewardCellId forIndexPath:indexPath];
     cell.nameLabel.text = self.dataArray[indexPath.row];
     if (indexPath.row==0) {
         self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-40, 15,20, 20)];
         self.imageView.image = [UIImage imageNamed:@"时间下拉箭头"];
-        [cell addSubview:self.imageView];
     }
     return cell;
 }
 
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 50;
+    return CGSizeMake(kScreenSize.width, 40);
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODBazaarSearchCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    self.textField.text = self.dataArray[indexPath.row];
+    ODBazaarRewardCollectionCell *cell = (ODBazaarRewardCollectionCell *)[self.collectionView cellForItemAtIndexPath:indexPath];
     self.count = indexPath.row;
     [cell addSubview:self.imageView];
+
 }
 
+#pragma mark - UITextFieldDelegate
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([string isEqualToString:@"\n"]) {
+        [textField resignFirstResponder];
+        return NO;
+    }
+
+    NSInteger existedLength = textField.text.length;
+    NSInteger selectedLength = range.length;
+    NSInteger replaceLength = string.length;
+    if (existedLength - selectedLength + replaceLength > 30) {
+            return NO;
+    }
+    return YES;
+}
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
 {
