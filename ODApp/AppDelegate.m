@@ -87,7 +87,7 @@ void UncaughtExceptionHandler(NSException *exception)
     manager.enableAutoToolbar = NO;
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSString *openId = [user objectForKey:@"openId"];
+    NSString *openId = [user objectForKey:@"userOpenId"];
     [ODUserInformation getData].openID = openId;
 
     

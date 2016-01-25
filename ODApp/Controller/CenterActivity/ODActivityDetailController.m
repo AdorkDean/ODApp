@@ -50,7 +50,7 @@
     
     self.openId = [ODUserInformation getData].openID;
     
-       
+           
 }
 
 
@@ -92,7 +92,7 @@
             
             NSString *need_verify = [NSString stringWithFormat:@"%ld" , (long)self.model.need_verify];
             
-            if ([need_verify isEqualToString:@"1"]) {
+            if ([need_verify isEqualToString:@"0"]) {
                 
                 
                 UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"报名成功" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
@@ -262,22 +262,43 @@
     
     if ([status isEqualToString:@"-2"]) {
         
-        [self.activityDetailView.baoMingButton setTitle:@"人数已满" forState:UIControlStateNormal];
+        [self.activityDetailView.baoMingButton setTitle:@"报名时间已结束" forState:UIControlStateNormal];
         [ self.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
                                                      forState:UIControlStateNormal];
         self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         self.activityDetailView.baoMingButton.userInteractionEnabled = NO;
 
         
-    }else if (![status isEqualToString:@"-100"]) {
+    } else if ([status isEqualToString:@"-3"]) {
         
-        [self.activityDetailView.baoMingButton setTitle:@"已报名" forState:UIControlStateNormal];
+        [self.activityDetailView.baoMingButton setTitle:[NSString stringWithFormat:@"报名%@开始" , self.model.apply_start_time] forState:UIControlStateNormal];
+        [ self.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
+                                                     forState:UIControlStateNormal];
+        self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        self.activityDetailView.baoMingButton.userInteractionEnabled = NO;
+        
+        
+    }
+
+    
+    
+    else if ([status isEqualToString:@"-4"] ||[status isEqualToString:@"-5"] ) {
+        
+        [self.activityDetailView.baoMingButton setTitle:@"人数已满" forState:UIControlStateNormal];
         [self.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
                                          forState:UIControlStateNormal];
         self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         self.activityDetailView.baoMingButton.userInteractionEnabled = NO;
         
-    }else {
+    }else if (![status isEqualToString:@"-100"]) {
+        [self.activityDetailView.baoMingButton setTitle:@"已报名" forState:UIControlStateNormal];
+        [self.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
+                                                    forState:UIControlStateNormal];
+        self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        self.activityDetailView.baoMingButton.userInteractionEnabled = NO;
+    }
+    
+    else {
         
         self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
         [self.activityDetailView.baoMingButton setTitleColor:[UIColor blueColor]
