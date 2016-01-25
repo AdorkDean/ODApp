@@ -219,7 +219,7 @@
     
     [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"%@",responseObject);
+     
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
          
             ODLandMainController *vc = [[ODLandMainController alloc] init];
@@ -254,7 +254,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@",responseObject);
+    
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             //启动定时器
