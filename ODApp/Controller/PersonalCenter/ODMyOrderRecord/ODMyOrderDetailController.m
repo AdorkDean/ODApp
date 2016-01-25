@@ -137,21 +137,27 @@
 
 - (void)createOrderView{
 
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)];
+    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    
+    
+    
+    
     float spaceY = kScreenSize.height * 28/400;
     float labelHeight = kScreenSize.height * 25 / 400;
     
-    UILabel *timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@ - %@",self.model.start_date_str,self.model.end_date_str] font:14 alignment:@"left" color:@"#000000" alpha:11];
+    UILabel *timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5,  10, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@ - %@",self.model.start_date_str,self.model.end_date_str] font:14 alignment:@"left" color:@"#000000" alpha:11];
     timeLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     timeLabel.layer.cornerRadius = 5;
-    [self.view addSubview:timeLabel];
+    [self.scrollView addSubview:timeLabel];
     
-    UILabel *experienceCenterLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 1, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",self.model.store_name] font:14 alignment:@"left" color:@"#000000" alpha:1];
+    UILabel *experienceCenterLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 10 + spaceY * 1, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",self.model.store_name] font:14 alignment:@"left" color:@"#000000" alpha:1];
     experienceCenterLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     experienceCenterLabel.layer.cornerRadius = 5;
-    [self.view addSubview:experienceCenterLabel];
+    [self.scrollView addSubview:experienceCenterLabel];
     
-    UILabel *deviceLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 2, kScreenSize.width - 10, labelHeight) text:@"      需要使用的中心设备" font:14 alignment:@"left" color:@"#8e8e8e" alpha:1];
-    [self.view addSubview:deviceLabel];
+    UILabel *deviceLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 10 + spaceY * 2, kScreenSize.width - 10, labelHeight) text:@"      需要使用的中心设备" font:14 alignment:@"left" color:@"#8e8e8e" alpha:1];
+    [self.scrollView addSubview:deviceLabel];
     
     NSString *name = [[NSMutableString alloc] init];
 
@@ -170,50 +176,59 @@
         name = [NSString stringWithFormat:@"%@,%@,%@,%@",self.devicesArray[0],self.devicesArray[1],self.devicesArray[2],self.devicesArray[3]];
     }
     
-    UILabel *deviceDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 3, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",name] font:14 alignment:@"left" color:@"#000000" alpha:1];
+    UILabel *deviceDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 10 + spaceY * 3, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",name] font:14 alignment:@"left" color:@"#000000" alpha:1];
     deviceDetailLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     deviceDetailLabel.layer.cornerRadius = 5;
-    [self.view addSubview:deviceDetailLabel];
+    [self.scrollView addSubview:deviceDetailLabel];
     
-    UILabel *purposeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 4, kScreenSize.width - 10, labelHeight) text:@"      活动目的" font:14 alignment:@"left" color:@"#8e8e8e" alpha:1];
-    [self.view addSubview:purposeLabel];
+    UILabel *purposeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 10 + spaceY * 4, kScreenSize.width - 10, labelHeight) text:@"      活动目的" font:14 alignment:@"left" color:@"#8e8e8e" alpha:1];
+    [self.scrollView addSubview:purposeLabel];
     
-    UILabel *purposeDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 5, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",self.model.purpose] font:14 alignment:@"left" color:@"#000000" alpha:1];
+    UILabel *purposeDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 10 + spaceY * 5, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",self.model.purpose] font:14 alignment:@"left" color:@"#000000" alpha:1];
     purposeDetailLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     purposeDetailLabel.layer.cornerRadius = 5;
-    [self.view addSubview:purposeDetailLabel];
+    [self.scrollView addSubview:purposeDetailLabel];
     
-    UILabel *contentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 6, kScreenSize.width - 10, labelHeight) text:@"      活动内容" font:14 alignment:@"left" color:@"#8e8e8e" alpha:1];
-    [self.view addSubview:contentLabel];
+    UILabel *contentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 10 + spaceY * 6, kScreenSize.width - 10, labelHeight) text:@"      活动内容" font:14 alignment:@"left" color:@"#8e8e8e" alpha:1];
+    [self.scrollView addSubview:contentLabel];
     
-    UILabel *contentDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 7, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"  %@",self.model.content] font:14 alignment:@"left" color:@"#000000" alpha:1];
+    //动态设置活动内容的高度
+    
+    NSInteger contentDetailLabelHeight = [ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width - 10 fontSize:14];
+    
+    UILabel *contentDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 10 + spaceY * 7, kScreenSize.width - 10,[ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width - 10 fontSize:14] ) text:[NSString stringWithFormat:@"  %@",self.model.content] font:14 alignment:@"left" color:@"#000000" alpha:1];
+    
     contentDetailLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     contentDetailLabel.layer.cornerRadius = 5;
-    [self.view addSubview:contentDetailLabel];
+    [self.scrollView addSubview:contentDetailLabel];
     
-    UILabel *peopleNumberLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 8, kScreenSize.width - 10, labelHeight) text:@"      参加人数" font:14 alignment:@"left" color:@"#8e8e8e" alpha:1];
-    [self.view addSubview:peopleNumberLabel];
+    UILabel *peopleNumberLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 10 + spaceY * 8 + contentDetailLabelHeight - labelHeight, kScreenSize.width - 10, labelHeight) text:@"      参加人数" font:14 alignment:@"left" color:@"#8e8e8e" alpha:1];
+    [self.scrollView addSubview:peopleNumberLabel];
     
-    UILabel *peopleNumberDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 9, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"  %@",self.model.people_num]] font:14 alignment:@"left" color:@"#000000" alpha:1];
+    UILabel *peopleNumberDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 10 + spaceY * 9 + contentDetailLabelHeight - labelHeight, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"  %@",self.model.people_num]] font:14 alignment:@"left" color:@"#000000" alpha:1];
     peopleNumberDetailLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     peopleNumberDetailLabel.layer.cornerRadius = 5;
-    [self.view addSubview:peopleNumberDetailLabel];
+    [self.scrollView addSubview:peopleNumberDetailLabel];
     
-    UILabel *phoneLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 10, kScreenSize.width - 10, labelHeight) text:@"  场地预约电话:" font:14 alignment:@"left" color:@"#000000" alpha:1];
+    UILabel *phoneLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5,  10 + spaceY * 10 + contentDetailLabelHeight - labelHeight, kScreenSize.width - 10, labelHeight) text:@"  场地预约电话:" font:14 alignment:@"left" color:@"#000000" alpha:1];
     phoneLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     phoneLabel.layer.cornerRadius = 5;
     phoneLabel.layer.borderWidth = 1;
     phoneLabel.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
-    [self.view addSubview:phoneLabel];
+    [self.scrollView addSubview:phoneLabel];
     
-    UIButton *phoneButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5 + kScreenSize.width * 2/5, 64 + 10 + spaceY * 10, 100, labelHeight) target:self sel:@selector(phoneButtonClick:) tag:0 image:nil title:self.model.store_tel font:14];
-    [self.view addSubview:phoneButton];
+    UIButton *phoneButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5 + kScreenSize.width * 2/5, 10 + spaceY * 10 + contentDetailLabelHeight - labelHeight, 100, labelHeight) target:self sel:@selector(phoneButtonClick:) tag:0 image:nil title:self.model.store_tel font:14];
+    [self.scrollView addSubview:phoneButton];
     
-    self.checkLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 64 + 10 + spaceY * 11, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"%@",self.model.status_str ]font:14 alignment:@"center" color:@"#000000" alpha:1];
+    self.checkLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, 10 + spaceY * 11 + contentDetailLabelHeight - labelHeight, kScreenSize.width - 10, labelHeight) text:[NSString stringWithFormat:@"%@",self.model.status_str ]font:14 alignment:@"center" color:@"#000000" alpha:1];
     self.checkLabel.layer.cornerRadius = 5;
     self.checkLabel.layer.borderWidth = 1;
     self.checkLabel.layer.borderColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1].CGColor;
-    [self.view addSubview:self.checkLabel];
+    
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width, CGRectGetMaxY(self.checkLabel.frame) + 3);
+    
+    [self.scrollView addSubview:self.checkLabel];
+    [self.view addSubview:self.scrollView];
 }
 
 - (void)phoneButtonClick:(UIButton *)button{
@@ -223,6 +238,7 @@
     [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
     [self.view addSubview:callWebView];
 }
+
 
 - (void)viewWillAppear:(BOOL)animated{
     

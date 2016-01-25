@@ -14,6 +14,7 @@
 #import "ODMyOrderDetailModel.h"
 #import "ODTabBarController.h"
 #import "ODAPIManager.h"
+#import "ODHelp.h"
 
 @interface ODMyOrderDetailController : ODBaseViewController
 
@@ -21,7 +22,7 @@
 
 @property (nonatomic, strong) UIView *headView;
 
-@property (nonatomic, strong) UIView *orderView;
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 @property (nonatomic, strong) UILabel *checkLabel;
 
