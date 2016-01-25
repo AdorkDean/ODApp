@@ -18,24 +18,33 @@
 {
     [super viewDidLoad];
     
+    self.count = 1;
+    
     self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     
     self.orderArray = [[NSMutableArray alloc] init];
     
     [self navigationInit];
-    
-//    [self createNoMore];
-  
+
     [self createCollectionView];
+    [self createRequest];
+    [self joiningTogetherParmeters];
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self refreshData];
+        [self joiningTogetherParmeters];
     }];
+    
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        [self loadMoreData];
+    }];
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     
-    [self getCollectionListRequest];
+    [self joiningTogetherParmeters];
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.imageView.alpha = 0;
 }
@@ -57,43 +66,51 @@
     [self.headView addSubview:backButton];
 }
 
-//- (void)createNoMore{
-//
-//    self.noMoreLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 90) / 2, kScreenSize.height - 30, 180, 30) text:@"您没有更多内容了" font:14 alignment:@"center" color:@"#000000" alpha:1];
-//    [self.view addSubview:self.noMoreLabel];
-//}
-
 - (void)backButtonClick:(UIButton *)button
 {
     
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)refreshData
+- (void)loadMoreData
 {
-
-    [self getCollectionListRequest];
+    
+    self.count ++;
+    NSDictionary *parameter = @{@"open_id":self.open_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:kMyOrderRecordUrl paramater:signParameter];
 }
 
-- (void)getCollectionListRequest
+- (void)createRequest
 {
 
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-   
-    NSDictionary *parameter = @{@"open_id":self.open_id,@"page":@"1"};
+}
+
+-(void)joiningTogetherParmeters
+{
+    self.count = 1;
+    NSDictionary *parameter = @{@"open_id":self.open_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:kMyOrderRecordUrl paramater:signParameter];
+}
+
+-(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)parameter
+{
     
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:kMyOrderRecordUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         [self.noReusltLabel removeFromSuperview];
+        
+        if (self.count == 1) {
+            [self.orderArray removeAllObjects];
+        }
         
         if (responseObject) {
             
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            [self.orderArray removeAllObjects];
             
             NSDictionary *result = dict[@"result"];
             for (NSDictionary *itemDict in result) {
@@ -109,16 +126,20 @@
                 [self.view addSubview:self.noReusltLabel];
             }
             
-            else{
-                [self.collectionView reloadData];
-            }
+            [self.collectionView reloadData];
+            
             [weakSelf.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_footer endRefreshing];
+            
+            if (result.count == 0) {
+                [weakSelf.collectionView.mj_footer noticeNoMoreData];
+            }
         }
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         [self.collectionView.mj_header endRefreshing];
-        
+        [self.collectionView.mj_footer endRefreshing];
     }];
 }
 
@@ -129,7 +150,7 @@
     UICollectionViewFlowLayout *flowLayout = [[ UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 5;
     flowLayout.minimumLineSpacing = 3;
-    flowLayout.sectionInset = UIEdgeInsetsMake(3, 3, 30, 3);
+    flowLayout.sectionInset = UIEdgeInsetsMake(3, 3, 3, 3);
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)collectionViewLayout:flowLayout];
     
     self.collectionView.delegate = self;

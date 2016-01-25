@@ -208,199 +208,27 @@
         
         
         
-        self.yuYueView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-        
-        
-        self.yuYueView.computerButton.layer.masksToBounds = YES;
-        self.yuYueView.computerButton.layer.cornerRadius = 2;
-        self.yuYueView.computerButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.computerButton.layer.borderWidth = 1;
         [self.yuYueView.computerButton addTarget:self action:@selector(computerAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        
-        
-        self.yuYueView.touYingButton.layer.masksToBounds = YES;
-        self.yuYueView.touYingButton.layer.cornerRadius = 2;
-        self.yuYueView.touYingButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.touYingButton.layer.borderWidth = 1;
+
         [self.yuYueView.touYingButton addTarget:self action:@selector(touYingAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        self.yuYueView.yinXiangButton.layer.masksToBounds = YES;
-        self.yuYueView.yinXiangButton.layer.cornerRadius = 2;
-        self.yuYueView.yinXiangButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.yinXiangButton.layer.borderWidth = 1;
         [self.yuYueView.yinXiangButton addTarget:self action:@selector(yinXiangAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        self.yuYueView.maiButton.layer.masksToBounds = YES;
-        self.yuYueView.maiButton.layer.cornerRadius = 2;
-        self.yuYueView.maiButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.maiButton.layer.borderWidth = 1;
         [self.yuYueView.maiButton addTarget:self action:@selector(maiAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        self.yuYueView.sheBeiLabel.layer.masksToBounds = YES;
-        self.yuYueView.sheBeiLabel.layer.cornerRadius = 5;
-        self.yuYueView.sheBeiLabel.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.sheBeiLabel.layer.borderWidth = 1;
-        
-        
-        self.yuYueView.pursoseTextView.layer.masksToBounds = YES;
-        self.yuYueView.pursoseTextView.layer.cornerRadius = 5;
-        self.yuYueView.pursoseTextView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.pursoseTextView.layer.borderWidth = 1;
-        
-        
-        self.yuYueView.contentTextView.layer.masksToBounds = YES;
-        self.yuYueView.contentTextView.layer.cornerRadius = 5;
-        self.yuYueView.contentTextView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.contentTextView.layer.borderWidth = 1;
-        
-        
-        self.yuYueView.peopleNumberTextField.layer.masksToBounds = YES;
-        self.yuYueView.peopleNumberTextField.layer.cornerRadius = 5;
-        self.yuYueView.peopleNumberTextField.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.peopleNumberTextField.layer.borderWidth = 1;
-        
-        
-        self.yuYueView.phoneLabel.layer.masksToBounds = YES;
-        self.yuYueView.phoneLabel.layer.cornerRadius = 5;
-        self.yuYueView.phoneLabel.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.phoneLabel.layer.borderWidth = 1;
-        
-        
-        
-        self.yuYueView.yuYueButton.layer.masksToBounds = YES;
-        self.yuYueView.yuYueButton.layer.cornerRadius = 5;
-        self.yuYueView.yuYueButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.yuYueButton.layer.borderWidth = 1;
-        self.yuYueView.yuYueButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
-        
-        [self.yuYueView.yuYueButton setTitleColor:[UIColor colorWithHexString:@"#49494b" alpha:1]
-                                         forState:UIControlStateNormal];
+
         [self.yuYueView.yuYueButton addTarget:self action:@selector(yuYueAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        
-        self.yuYueView.beginText.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-        self.yuYueView.endText.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-        self.yuYueView.sheBeiText.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-        self.yuYueView.purposeText.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-        self.yuYueView.contentText.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-        self.yuYueView.peopleNumberText.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-        self.yuYueView.btimeText.tintColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-        self.yuYueView.eTimeText.tintColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-        self.yuYueView.computerText.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-        self.yuYueView.touyingText.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-        self.yuYueView.yinxiangText.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-        self.yuYueView.yuYueText.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-        self.yuYueView.centerText.tintColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-        
-        
-        self.yuYueView.centerText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 5);
-        self.yuYueView.centerText.layer.masksToBounds = YES;
-        self.yuYueView.centerText.layer.cornerRadius = 5;
-        self.yuYueView.centerText.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.centerText.layer.borderWidth = 1;
-        self.yuYueView.centerText.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-        UIImageView *lImage = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width - 30, 5, 15, 15) imageName:@"场地预约icon2@3x" tag:0];
-        
-        [ self.yuYueView.centerText addSubview:lImage];
-        
-        
         [self.yuYueView.centerText addTarget:self action:@selector(choseCenter:) forControlEvents:UIControlEventTouchUpInside];
-        
+
         [self.yuYueView.centerText  setTitle:self.centerName forState:UIControlStateNormal];
-        
-        
+   
         
         [self.yuYueView.phoneText setTitle:self.phoneNumber forState:UIControlStateNormal];
-        
-        [self.yuYueView.phoneText setTitleColor:[UIColor colorWithHexString:@"#004ed9" alpha:1]
-                                       forState:UIControlStateNormal];
+
         
         [self.yuYueView.phoneText addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        self.yuYueView.pursoseTextView.textColor = [UIColor lightGrayColor];
-        self.yuYueView.pursoseTextView.text = NSLocalizedString(@"输入活动目的", nil);
+
         self.yuYueView.pursoseTextView.delegate=self;
-
-        
-        self.yuYueView.contentTextView.textColor = [UIColor lightGrayColor];
-        self.yuYueView.contentTextView.text = NSLocalizedString(@"输入活动内容", nil);
         self.yuYueView.contentTextView.delegate=self;
-        
-        
-        
-        if (iPhone6_6s) {
-            
-            
-            self.yuYueView.btimeText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 8);
-            self.yuYueView.eTimeText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 8);
-            
-            
-            UIImageView *image = [ODClassMethod creatImageViewWithFrame:CGRectMake(self.yuYueView.btimeText.frame.size.width, 6, 15, 15) imageName:@"downjiantou" tag:0];
-            [ self.yuYueView.btimeText addSubview:image];
-            
-            
-            UIImageView *images = [ODClassMethod creatImageViewWithFrame:CGRectMake(self.yuYueView.btimeText.frame.size.width, 6, 15, 15) imageName:@"downjiantou" tag:0];
-            [ self.yuYueView.eTimeText addSubview:images];
-            
-            
-            
-            
-        } else if (iPhone4_4S || iPhone5_5s)
-        {
-            
-            self.yuYueView.btimeText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 8);
-            self.yuYueView.eTimeText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 8);
-            
-            
-            UIImageView *image = [ODClassMethod creatImageViewWithFrame:CGRectMake(self.yuYueView.btimeText.frame.size.width - 25, 6, 15, 15) imageName:@"downjiantou" tag:0];
-            [ self.yuYueView.btimeText addSubview:image];
-            
-            
-            
-            UIImageView *images = [ODClassMethod creatImageViewWithFrame:CGRectMake(self.yuYueView.btimeText.frame.size.width - 25, 6, 15, 15) imageName:@"downjiantou" tag:0];
-            [ self.yuYueView.eTimeText addSubview:images];
-            
-            
-        }
-        else
-        {
-            
-            self.yuYueView.btimeText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 9);
-            self.yuYueView.eTimeText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 9);
-            
-            
-            UIImageView *image = [ODClassMethod creatImageViewWithFrame:CGRectMake(self.yuYueView.btimeText.frame.size.width + 20, 6, 15, 15) imageName:@"downjiantou" tag:0];
-            [ self.yuYueView.btimeText addSubview:image];
-            
-            
-            
-            UIImageView *images = [ODClassMethod creatImageViewWithFrame:CGRectMake(self.yuYueView.btimeText.frame.size.width + 20, 6, 15, 15) imageName:@"downjiantou" tag:0];
-            [ self.yuYueView.eTimeText addSubview:images];
-            
-            
-            
-        }
-        
-        
-        
-        
-        self.yuYueView.btimeText.layer.masksToBounds = YES;
-        self.yuYueView.btimeText.layer.cornerRadius = 5;
-        self.yuYueView.btimeText.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.btimeText.layer.borderWidth = 1;
-        
-        self.yuYueView.eTimeText.layer.masksToBounds = YES;
-        self.yuYueView.eTimeText.layer.cornerRadius = 5;
-        self.yuYueView.eTimeText.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.yuYueView.eTimeText.layer.borderWidth = 1;
-
-        
+    
+     
         [self.yuYueView.btimeText addTarget:self action:@selector(choseBeginTime:) forControlEvents:UIControlEventTouchUpInside];
         self.yuYueView.btimeText.tag = 111;
         
@@ -409,7 +237,7 @@
         
         
         self.yuYueView.peopleNumberTextField.delegate = self;
-        self.yuYueView.peopleNumberTextField.keyboardType = UIKeyboardTypeNumberPad;
+     
         
         
         
@@ -484,20 +312,17 @@
 - (void)getData
 {
     
-    NSLog(@"_____%@" , self.start_datetime);
-    NSLog(@"_____%@" , self.storeId);
-    
     
     NSDictionary *parameters = @{@"store_id":self.storeId , @"start_datetime":self.start_datetime};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    
+      __weak typeof (self)weakSelf = self;
     NSString *url = @"http://woquapi.test.odong.com/1.0/store/timeline";
     
     [self.timeManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
-        NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         //获取完整路径
         NSString *documentsPath = [path objectAtIndex:0];
         NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"TimeList.plist"];
@@ -510,21 +335,21 @@
             
             
             [timesArray removeAllObjects];
-            self.timeStr = @"";
+            weakSelf.timeStr = @"";
             
             NSMutableDictionary *dic = responseObject[@"result"];
             
             
             
-            self.keysArray = [dic allKeys];
-            self.keysArray = [self.keysArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            weakSelf.keysArray = [dic allKeys];
+            weakSelf.keysArray = [weakSelf.keysArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                 NSComparisonResult result = [obj1 compare:obj2];
                 return result == NSOrderedDescending;
             }];
             
             
-            for (int i = 0; i < self.keysArray.count; i++) {
-                NSMutableDictionary *dic1 = dic[self.keysArray[i]];
+            for (int i = 0; i < weakSelf.keysArray.count; i++) {
+                NSMutableDictionary *dic1 = dic[weakSelf.keysArray[i]];
                 NSString *str = dic1[@"date_left_str"];
                 NSMutableDictionary *dataDic = [[NSMutableDictionary alloc]init];
                 [dataDic setObject:str forKey:@"date"];
@@ -566,56 +391,56 @@
         
         
         
-        self.dataArray = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
+        weakSelf.dataArray = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
         
-        self.timeDataArray = [[self.dataArray objectAtIndex:0] objectForKey:@"time"];
-        
-        
-        self.picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 150, kScreenSize.width, 150)];
-        self.picker.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-        self.picker.delegate = self;
-        self.picker.dataSource = self;
-        
-        self.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        self.cancelButton.frame = CGRectMake(0, kScreenSize.height - 180, kScreenSize.width / 2, 30);
-        [self.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-        self.cancelButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-        [self.cancelButton addTarget:self action:@selector(quXiaoAction:) forControlEvents:UIControlEventTouchUpInside];
+        weakSelf.timeDataArray = [[weakSelf.dataArray objectAtIndex:0] objectForKey:@"time"];
         
         
+        weakSelf.picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 150, kScreenSize.width, 150)];
+        weakSelf.picker.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        weakSelf.picker.delegate = weakSelf;
+        weakSelf.picker.dataSource = weakSelf;
         
-        self.queDingButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        self.queDingButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 180, kScreenSize.width / 2, 30);
-        [self.queDingButton setTitle:@"确定" forState:UIControlStateNormal];
-        self.queDingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-        [self.queDingButton addTarget:self action:@selector(queDingAction:) forControlEvents:UIControlEventTouchUpInside];
+        weakSelf.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        weakSelf.cancelButton.frame = CGRectMake(0, kScreenSize.height - 180, kScreenSize.width / 2, 30);
+        [weakSelf.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        weakSelf.cancelButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        [weakSelf.cancelButton addTarget:weakSelf action:@selector(quXiaoAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
         
-        if (self.isBeginTime) {
+        weakSelf.queDingButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        weakSelf.queDingButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 180, kScreenSize.width / 2, 30);
+        [weakSelf.queDingButton setTitle:@"确定" forState:UIControlStateNormal];
+        weakSelf.queDingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        [weakSelf.queDingButton addTarget:weakSelf action:@selector(queDingAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        
+        if (weakSelf.isBeginTime) {
             
-            self.yuYueView.btimeText.userInteractionEnabled = NO;
-            self.yuYueView.eTimeText.userInteractionEnabled = NO;
-            [self.view addSubview: self.queDingButton];
-            [self.view addSubview: self.cancelButton];
-            [self.view addSubview:self.picker];
+            weakSelf.yuYueView.btimeText.userInteractionEnabled = NO;
+            weakSelf.yuYueView.eTimeText.userInteractionEnabled = NO;
+            [weakSelf.view addSubview: weakSelf.queDingButton];
+            [weakSelf.view addSubview: weakSelf.cancelButton];
+            [weakSelf.view addSubview:weakSelf.picker];
             
             
         }else{
-            if ([self.start_datetime isEqualToString:@""]) {
+            if ([weakSelf.start_datetime isEqualToString:@""]) {
                 
-                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请选择开始时间" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请选择开始时间" message:nil delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 [alter show];
                 
                 
             }else{
                 
                 
-                self.yuYueView.btimeText.userInteractionEnabled = NO;
-                self.yuYueView.eTimeText.userInteractionEnabled = NO;
-                [self.view addSubview: self.queDingButton];
-                [self.view addSubview: self.cancelButton];
-                [self.view addSubview:self.picker];
+                weakSelf.yuYueView.btimeText.userInteractionEnabled = NO;
+                weakSelf.yuYueView.eTimeText.userInteractionEnabled = NO;
+                [weakSelf.view addSubview: weakSelf.queDingButton];
+                [weakSelf.view addSubview: weakSelf.cancelButton];
+                [weakSelf.view addSubview:weakSelf.picker];
                 
                 
                 
@@ -626,12 +451,12 @@
         
         
         
-        [self.tableView reloadData];
+        [weakSelf.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        
+        NSLog(@"%@",error.description);
         
     }];
     

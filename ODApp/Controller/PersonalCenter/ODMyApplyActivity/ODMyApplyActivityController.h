@@ -35,4 +35,5 @@
 
 @property (nonatomic, strong) UILabel *noReusltLabel;
 
+
 @end

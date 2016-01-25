@@ -60,12 +60,24 @@
 - (void)cancelOrderButtonClick:(UIButton *)button
 {
 
-    if ([self.checkLabel.text isEqualToString:@"已取消"]) {
+    if ([self.checkLabel.text isEqualToString:@"已取消"] || [self.checkLabel.text isEqualToString:@"后台取消"]) {
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"订单已经取消" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
-    }else{
+    }else if ([self.checkLabel.text isEqualToString:@"前台已确认"]) {
+    
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"订单已生成,请联系客服" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else if ([self.checkLabel.text isEqualToString:@"到场已确认"] || [self.checkLabel.text isEqualToString:@"到场未确认"]) {
+    
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"已到活动时间，无需进行取消" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    
+    else{
     
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您确定要取消预约吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
