@@ -27,7 +27,10 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *disitionLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *centerNameLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *centerNameButton;
+
+
 
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 

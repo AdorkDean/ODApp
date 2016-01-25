@@ -45,6 +45,9 @@
     self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
     self.returnKeyHandler.toolbarManageBehaviour = IQAutoToolbarBySubviews;
     
+    
+      
+    
 }
 
 
@@ -248,24 +251,32 @@
 
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"%@",responseObject);
+       
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
+            
             
             self.landView.accountTextField.text = @"";
             self.landView.passwordTextField.text = @"";
-             ODLandMainController *vc = [[ODLandMainController alloc] init];
+            ODLandMainController *vc = [[ODLandMainController alloc] init];
             
             NSMutableDictionary *dic = responseObject[@"result"];
             NSString *openId = dic[@"open_id"];
             
             [ODUserInformation getData].openID = openId;
+            
+            
+            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+            [user setObject:openId forKey:@"openId"];
+
+            
        
             if (self.navigationController.viewControllers.count > 1)
             {
                 
                 UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"登陆成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
                 [alter show];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [alter dismissWithClickedButtonIndex:0 animated:YES];
                     
                 });
@@ -296,7 +307,7 @@
                 }
                 UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"登陆成功" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
                 [alter show];
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [alter dismissWithClickedButtonIndex:0 animated:YES];
                   
                 });

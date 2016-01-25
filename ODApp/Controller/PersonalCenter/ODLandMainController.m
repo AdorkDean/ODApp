@@ -310,6 +310,12 @@ else if (indexPath.section ==3) {
              [self.navigationController popViewControllerAnimated:YES];
              
              [ODUserInformation getData].openID = nil;
+             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+             [user setObject:nil forKey:@"openId"];
+
+             
+             
+             
              
              if (self.navigationController.viewControllers.count > 1)
              {
