@@ -355,6 +355,8 @@
 		D425DA311C4E1F7E00BDD2AE /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D425DA191C4E1F7E00BDD2AE /* SDCollectionViewCell.m */; };
 		D425DA321C4E1F7E00BDD2AE /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D425DA1B1C4E1F7E00BDD2AE /* SDCycleScrollView.m */; };
 		D425DA331C4E1F7E00BDD2AE /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D425DA1D1C4E1F7E00BDD2AE /* UIView+SDExtension.m */; };
+		D4D070AA1C55C819008527C9 /* ODHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070A91C55C819008527C9 /* ODHttpTool.m */; };
+		D4D070AD1C55C886008527C9 /* NSURL+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070AC1C55C886008527C9 /* NSURL+ODExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -866,6 +868,10 @@
 		D425DA1C1C4E1F7E00BDD2AE /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		D425DA1D1C4E1F7E00BDD2AE /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
 		D425DA341C4E233900BDD2AE /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		D4D070A81C55C819008527C9 /* ODHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHttpTool.h; sourceTree = "<group>"; };
+		D4D070A91C55C819008527C9 /* ODHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHttpTool.m; sourceTree = "<group>"; };
+		D4D070AB1C55C886008527C9 /* NSURL+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+ODExtension.h"; sourceTree = "<group>"; };
+		D4D070AC1C55C886008527C9 /* NSURL+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+ODExtension.m"; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1562,6 +1568,8 @@
 		B80F028A1C225C41009CE9D8 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D4D070A61C55C819008527C9 /* Category */,
+				D4D070A71C55C819008527C9 /* Tools */,
 				D425D9E61C4E1F7E00BDD2AE /* ThirdFrame */,
 				B80F028C1C225C41009CE9D8 /* Resource */,
 				B80F028B1C225C41009CE9D8 /* MyControl */,
@@ -2120,6 +2128,24 @@
 			path = PageControl;
 			sourceTree = "<group>";
 		};
+		D4D070A61C55C819008527C9 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				D4D070AB1C55C886008527C9 /* NSURL+ODExtension.h */,
+				D4D070AC1C55C886008527C9 /* NSURL+ODExtension.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		D4D070A71C55C819008527C9 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				D4D070A81C55C819008527C9 /* ODHttpTool.h */,
+				D4D070A91C55C819008527C9 /* ODHttpTool.m */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2540,6 +2566,7 @@
 				B80F038C1C22A982009CE9D8 /* ODAppModel.m in Sources */,
 				9D14AA0E1C2A856800696929 /* CenterActivityCell.m in Sources */,
 				B83C394A1C48A0E9007B16FB /* ODUserNickNameController.m in Sources */,
+				D4D070AD1C55C886008527C9 /* NSURL+ODExtension.m in Sources */,
 				D425DA271C4E1F7E00BDD2AE /* IQBarButtonItem.m in Sources */,
 				9DDBA4C71C3BAB330007E122 /* ODUserModel.m in Sources */,
 				B83C39491C48A0E9007B16FB /* ODUserInformation.m in Sources */,
@@ -2562,6 +2589,7 @@
 				B83C39391C48A0E9007B16FB /* ODHomeFoundViewController.m in Sources */,
 				B83C39441C48A0E9007B16FB /* ODMyTaskController.m in Sources */,
 				9DD623031C2BA32500EBDC66 /* ChoseCenterModel.m in Sources */,
+				D4D070AA1C55C819008527C9 /* ODHttpTool.m in Sources */,
 				B83C39361C48A0E9007B16FB /* ODCommumityViewController.m in Sources */,
 				9DD4AECC1C322C680073F595 /* ActivityDetailView.m in Sources */,
 				9DD622FF1C2BA02900EBDC66 /* ChoseCenterCell.m in Sources */,
