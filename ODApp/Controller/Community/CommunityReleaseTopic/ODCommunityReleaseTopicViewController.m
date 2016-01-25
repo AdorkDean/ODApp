@@ -280,7 +280,8 @@
     [self.imageView addSubview:self.deletePicButton];
     
     if (self.count >= 9) {
-        self.addPicButton.hidden = YES;
+        [self.addPicButton setFrame:CGRectMake(4 + (self.width + 4) * (self.count%4), CGRectGetMaxY(self.topicContentTextView.frame) + 4 + (4+self.width) * (self.count/4), self.width, self.width)];
+//        self.addPicButton.hidden = YES;
     }else{
         [self.addPicButton setFrame:CGRectMake(4 + (self.width + 4) * (self.count%4), CGRectGetMaxY(self.topicContentTextView.frame) + 4 + (4+self.width) * (self.count/4), self.width, self.width)];
         self.count++;

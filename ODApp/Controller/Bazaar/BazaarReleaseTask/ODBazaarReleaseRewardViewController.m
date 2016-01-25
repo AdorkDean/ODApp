@@ -103,8 +103,9 @@
                 [weakSelf.dataArray addObject:name];
                 [weakSelf.idArray addObject:id];
             }
-            [weakSelf.collectionView reloadData];
             [weakSelf createCollectionView];
+            [weakSelf.collectionView reloadData];
+            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -116,10 +117,10 @@
 -(void)createCollectionView
 {
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    flowLayout.minimumInteritemSpacing = 5;
-    flowLayout.minimumLineSpacing = 5;
+    flowLayout.minimumInteritemSpacing = 0;
+    flowLayout.minimumLineSpacing = 0;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(4,112, kScreenSize.width-8, kScreenSize.height - 112) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(4,112, kScreenSize.width-8, kScreenSize.height-112) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.layer.masksToBounds = YES;

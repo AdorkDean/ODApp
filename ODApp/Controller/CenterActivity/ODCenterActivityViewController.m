@@ -479,7 +479,6 @@
     cell.addressLabel.textColor = [UIColor colorWithHexString:@"#b1b1b1" alpha:1];
     NSURL *url = [NSURL URLWithString:model.icon_url];
     [cell.ActivityImageView sd_setImageWithURL:url];
-    
     return cell;
 }
 

@@ -45,6 +45,9 @@
     self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
     self.returnKeyHandler.toolbarManageBehaviour = IQAutoToolbarBySubviews;
     
+    
+      
+    
 }
 
 
@@ -248,17 +251,25 @@
 
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        NSLog(@"%@",responseObject);
+       
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
+            
             
             self.landView.accountTextField.text = @"";
             self.landView.passwordTextField.text = @"";
-             ODLandMainController *vc = [[ODLandMainController alloc] init];
+            ODLandMainController *vc = [[ODLandMainController alloc] init];
             
             NSMutableDictionary *dic = responseObject[@"result"];
             NSString *openId = dic[@"open_id"];
             
             [ODUserInformation getData].openID = openId;
+            
+            
+            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+            [user setObject:openId forKey:@"openId"];
+
+            
        
             if (self.navigationController.viewControllers.count > 1)
             {
