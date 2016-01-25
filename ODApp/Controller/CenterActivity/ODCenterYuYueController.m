@@ -718,18 +718,7 @@
     beginTime = [beginTime stringByAppendingString:self.btimeStr];
     self.start_datetime = beginTime;
     
-    
-    
-//    if ( !self.yuYueView.eTimeText.userInteractionEnabled) {
-//        self.yuYueView.btimeText.userInteractionEnabled = YES;
-//        self.yuYueView.eTimeText.userInteractionEnabled = YES;
-//    }else {
-//        
-//        self.yuYueView.btimeText.userInteractionEnabled = YES;
-//        self.yuYueView.eTimeText.userInteractionEnabled = YES;
-//        
-//    }
-    self.yuYueView.btimeText.userInteractionEnabled = YES;
+     self.yuYueView.btimeText.userInteractionEnabled = YES;
     self.yuYueView.eTimeText.userInteractionEnabled = YES;
     
     [self.picker removeFromSuperview];
@@ -821,17 +810,6 @@
     }
     
     
-//    if (!self.yuYueView.eTimeText.userInteractionEnabled) {
-//        
-//        self.yuYueView.btimeText.userInteractionEnabled = YES;
-//        self.yuYueView.eTimeText.userInteractionEnabled = YES;
-//        
-//    }else {
-//        
-//        self.yuYueView.btimeText.userInteractionEnabled = YES;
-//        self.yuYueView.eTimeText.userInteractionEnabled = YES;
-//        
-//    }
     
     self.yuYueView.btimeText.userInteractionEnabled = YES;
     self.yuYueView.eTimeText.userInteractionEnabled = YES;
