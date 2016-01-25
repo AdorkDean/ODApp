@@ -37,5 +37,6 @@
 
 @property (nonatomic, strong) UILabel *noMoreLabel;
 
+@property (nonatomic, assign) NSInteger count;
 
 @end

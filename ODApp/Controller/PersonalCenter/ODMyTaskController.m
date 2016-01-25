@@ -458,19 +458,18 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [self.FirstDataArray addObject:model];
             }
+            
+            if (self.FirstDataArray.count == 0) {
+                self.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40, self.scrollView.center.y / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.scrollView addSubview:self.firstLabel];
+            }
    
-        }
-        
-        
-             if (self.FirstDataArray.count == 0) {
-           self.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40, self.scrollView.center.y / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.scrollView addSubview:self.firstLabel];
-        }
-        
-        [self.firstCollectionView.mj_header endRefreshing];
-        [self.firstCollectionView.mj_footer endRefreshing];
+            [self.firstCollectionView.mj_header endRefreshing];
+            [self.firstCollectionView.mj_footer endRefreshing];
+            
+            [self.firstCollectionView reloadData];
 
-        [self.firstCollectionView reloadData];
+        }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

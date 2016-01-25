@@ -232,6 +232,10 @@
             [weakSelf.collectionView reloadData];
             [self.collectionView.mj_header endRefreshing];
             [self.collectionView.mj_footer endRefreshing];
+            
+            if (result.count == 0) {
+                [weakSelf.collectionView.mj_footer noticeNoMoreData];
+            }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [self.collectionView.mj_header endRefreshing];

@@ -173,6 +173,10 @@
             [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
+            
+            if (result.count == 0) {
+                [weakSelf.collectionView.mj_footer noticeNoMoreData];
+            }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
