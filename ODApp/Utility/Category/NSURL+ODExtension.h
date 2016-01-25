@@ -9,4 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface NSURL (ODExtension)
++ (instancetype)OD_URLWithString:(NSString *)URLString;
 @end

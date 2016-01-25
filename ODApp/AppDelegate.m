@@ -43,7 +43,7 @@ void UncaughtExceptionHandler(NSException *exception)
                         "错误详情:<br>%@<br>--------------------------<br>%@<br>---------------------<br>%@",
                         name,reason,[arr componentsJoinedByString:@"<br>"]];
     
-    NSURL *url = [NSURL URLWithString:[urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURL *url = [NSURL OD_URLWithString:urlStr];
     [[UIApplication sharedApplication] openURL:url];
 }
 
