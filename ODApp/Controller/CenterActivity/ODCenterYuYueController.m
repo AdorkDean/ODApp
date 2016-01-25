@@ -440,8 +440,32 @@
 - (void)yuYueAction:(UIButton *)sender
 {
     
-    
-    [self getOrderId];
+    if ([self.yuYueView.btimeText.titleLabel.text isEqualToString:@"填写开始时间"]) {
+        
+        [self createUIAlertControllerWithTitle:@"请填写开始时间"];
+      
+
+    }else if ([self.yuYueView.eTimeText.titleLabel.text isEqualToString:@"填写结束时间"]) {
+        
+        [self createUIAlertControllerWithTitle:@"请填写结束时间"];
+        
+    }else if ([self.yuYueView.pursoseTextView.text isEqualToString:@""] || [self.yuYueView.pursoseTextView.text isEqualToString:@"输入活动目的"]) {
+        
+        [self createUIAlertControllerWithTitle:@"请输入活动目的"];
+        
+    }else if ([self.yuYueView.contentTextView.text isEqualToString:@""] || [self.yuYueView.contentTextView.text isEqualToString:@"输入活动内容"]) {
+        
+       [self createUIAlertControllerWithTitle:@"请输入活动内容"];
+        
+    }else if ([self.yuYueView.peopleNumberTextField.text isEqualToString:@""]) {
+      
+        [self createUIAlertControllerWithTitle:@"请输入参加人数"];
+        
+    } else {
+        
+        [self getOrderId];
+
+    }
     
     
     
@@ -691,7 +715,7 @@
     
     
     
-    NSDictionary *parameter = @{@"start_datetime":self.beginTime , @" end_datetime":self.endTime , @"store_id":self.storeId , @"order_id":self.orderID ,@"purpose":self.yuYueView.pursoseTextView.text ,@"content":self.yuYueView.contentTextView.text ,@"people_num":self.yuYueView.peopleNumberTextField.text ,@"remark":@"无" ,@"devices":equipment ,@"open_id":self.openId};
+    NSDictionary *parameter = @{@"start_datetime":self.beginTime , @"end_datetime":self.endTime , @"store_id":self.storeId , @"order_id":self.orderID ,@"purpose":self.yuYueView.pursoseTextView.text ,@"content":self.yuYueView.contentTextView.text ,@"people_num":self.yuYueView.peopleNumberTextField.text ,@"remark":@"无" ,@"devices":equipment ,@"open_id":self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     

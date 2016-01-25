@@ -477,12 +477,8 @@
     cell.addressLabel.text = model.address;
     cell.timeLabel.textColor = [UIColor colorWithHexString:@"#b1b1b1" alpha:1];
     cell.addressLabel.textColor = [UIColor colorWithHexString:@"#b1b1b1" alpha:1];
-    [cell.ActivityImageView sd_setImageWithURL:[NSURL URLWithString:model.icon_url]];
-    
-   
-        
-    
-    
+    NSURL *url = [NSURL URLWithString:model.icon_url];
+    [cell.ActivityImageView sd_setImageWithURL:url];
     return cell;
 }
 

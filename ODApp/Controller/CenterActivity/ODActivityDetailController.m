@@ -154,7 +154,7 @@
     
     NSDictionary *parameter = @{@"activity_id":self.activityId , @"store_id":self.storeId ,@"open_id":self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSLog(@"%@",signParameter); 
+  
     NSString *url = @"http://woquapi.test.odong.com/1.0/store/apply/detail";
     
     __weak typeof (self)weakSelf = self;

@@ -164,7 +164,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"%@",responseObject);
+     
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             
