@@ -480,8 +480,7 @@
     [cell.ActivityImageView sd_setImageWithURL:[NSURL URLWithString:model.icon_url]];
     
    
-    
-   
+        
     
     
     return cell;
