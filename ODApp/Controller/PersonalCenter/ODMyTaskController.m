@@ -432,23 +432,16 @@
     NSString *url = @"http://woquapi.test.odong.com/1.0/task/list";
     
     [self.firstManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        
-        
-        
-        
+ 
         if (responseObject) {
-            
             
             if ([countNumber isEqualToString:@"1"]) {
                 [self.FirstDataArray removeAllObjects];
                 
                 [self.firstLabel removeFromSuperview];
-                
-                
+    
             }
-
-            
+   
             NSDictionary *result = responseObject[@"result"];
             NSArray *tasks = result[@"tasks"];
             
@@ -458,38 +451,32 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [self.FirstDataArray addObject:model];
             }
-            
+
             if (self.FirstDataArray.count == 0) {
                 self.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40, self.scrollView.center.y / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [self.scrollView addSubview:self.firstLabel];
             }
-   
+            [self.firstCollectionView reloadData];
             [self.firstCollectionView.mj_header endRefreshing];
             [self.firstCollectionView.mj_footer endRefreshing];
             
-            [self.firstCollectionView reloadData];
-
+            if (result.count == 0) {
+                [self.firstCollectionView.mj_footer noticeNoMoreData];
+            }
         }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
         
         [self.firstCollectionView.mj_header endRefreshing];
         [self.firstCollectionView.mj_footer endRefreshing];
         
     }];
-    
-
-    
-    
-    
 }
 
 -(void)secondGetData
 {
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.secondPage];
-    
-    
+        
     self.secondManager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters = @{@"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"2" , @"open_id":self.open_id};

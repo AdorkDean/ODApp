@@ -27,7 +27,6 @@
     [self navigationInit];
 
     [self createCollectionView];
-//    [self createNoMore];
     [self createRequest];
     [self joiningTogetherParmeters];
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -65,13 +64,6 @@
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
-}
-
-- (void)createNoMore{
-
-    self.noMoreLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 140) / 2, self.collectionView.frame.size.height - 30, 140, 30) text:@"您没有更多内容了" font:14 alignment:@"center" color:@"#000000" alpha:1];
-    [self.collectionView addSubview:self.noMoreLabel];
-    
 }
 
 - (void)backButtonClick:(UIButton *)button
@@ -134,16 +126,14 @@
                 [self.view addSubview:self.noReusltLabel];
             }
             
-            else{
-                [self.collectionView reloadData];
-            }
+            [self.collectionView reloadData];
+            
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
             
             if (result.count == 0) {
                 [weakSelf.collectionView.mj_footer noticeNoMoreData];
             }
-            
         }
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
