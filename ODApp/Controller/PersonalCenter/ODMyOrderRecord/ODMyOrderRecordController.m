@@ -23,6 +23,8 @@
     self.orderArray = [[NSMutableArray alloc] init];
     
     [self navigationInit];
+    
+//    [self createNoMore];
   
     [self createCollectionView];
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -54,6 +56,12 @@
     [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
 }
+
+//- (void)createNoMore{
+//
+//    self.noMoreLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 90) / 2, kScreenSize.height - 30, 180, 30) text:@"您没有更多内容了" font:14 alignment:@"center" color:@"#000000" alpha:1];
+//    [self.view addSubview:self.noMoreLabel];
+//}
 
 - (void)backButtonClick:(UIButton *)button
 {
@@ -121,7 +129,7 @@
     UICollectionViewFlowLayout *flowLayout = [[ UICollectionViewFlowLayout alloc] init];
     flowLayout.minimumInteritemSpacing = 5;
     flowLayout.minimumLineSpacing = 3;
-    flowLayout.sectionInset = UIEdgeInsetsMake(3, 3, 3, 3);
+    flowLayout.sectionInset = UIEdgeInsetsMake(3, 3, 30, 3);
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)collectionViewLayout:flowLayout];
     
     self.collectionView.delegate = self;
@@ -180,6 +188,8 @@
     vc.isOther = self.isOther;
     vc.open_id = self.open_id;
     vc.order_id = [NSString stringWithFormat:@"%@",model.order_id];
+    
+
     
     [self.navigationController pushViewController:vc animated:YES];
 }
