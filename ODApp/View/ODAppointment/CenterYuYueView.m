@@ -15,6 +15,22 @@
     CenterYuYueView *view =  [[[NSBundle mainBundle] loadNibNamed:@"CenterYuYueView" owner:nil options:nil] firstObject];
     
     
+    
+    if (iPhone4_4S) {
+        view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height + 100);
+    }else if (iPhone5_5s)
+    {
+        view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height + 50);
+    }else if (iPhone6_6s) {
+        
+       view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 70);
+    }else {
+        view.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 100);
+    }
+    
+
+    
+    
     view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     
     
