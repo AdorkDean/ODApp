@@ -8,9 +8,10 @@
 
 #import "NSURL+ODExtension.h"
 #import <objc/message.h>
+
 @implementation NSURL (ODExtension)
 
-+ (void)load
++ (void)initialize
 {
     Method OD_URLWithStringMethod = class_getClassMethod(self, @selector(OD_URLWithString:));
     Method urlWithStringMethod = class_getClassMethod(self, @selector(URLWithString:));
@@ -22,4 +23,5 @@
     NSString *string = [URLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     return [NSURL OD_URLWithString:string];
 }
+
 @end
