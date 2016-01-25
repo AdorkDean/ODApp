@@ -67,7 +67,7 @@
         [self presentViewController:alert animated:YES completion:nil];
     }else{
     
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您确定要取消预约嘛？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您确定要取消预约吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             self.managers = [AFHTTPRequestOperationManager manager];
