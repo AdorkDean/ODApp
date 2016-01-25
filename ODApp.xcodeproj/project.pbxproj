@@ -321,7 +321,6 @@
 		B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B691C224F640063ED92 /* AppDelegate.m */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
-		B848E8BC1C4E0E1200B16CBA /* UIColor+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = B848E8BB1C4E0E1200B16CBA /* UIColor+ODExtension.m */; };
 		B855A79E1C52218D0038F559 /* ODBazaarRewardCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B855A79C1C52218D0038F559 /* ODBazaarRewardCollectionCell.m */; };
 		B855A79F1C52218D0038F559 /* ODBazaarRewardCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B855A79D1C52218D0038F559 /* ODBazaarRewardCollectionCell.xib */; };
 		B871CF9F1C4CF87400CF51BA /* ODOtherTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B871CF9E1C4CF87400CF51BA /* ODOtherTopicViewController.m */; };
@@ -356,7 +355,8 @@
 		D425DA321C4E1F7E00BDD2AE /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D425DA1B1C4E1F7E00BDD2AE /* SDCycleScrollView.m */; };
 		D425DA331C4E1F7E00BDD2AE /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D425DA1D1C4E1F7E00BDD2AE /* UIView+SDExtension.m */; };
 		D4D070AA1C55C819008527C9 /* ODHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070A91C55C819008527C9 /* ODHttpTool.m */; };
-		D4D070AD1C55C886008527C9 /* NSURL+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070AC1C55C886008527C9 /* NSURL+ODExtension.m */; };
+		D4D070B41C5600CB008527C9 /* UIColor+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070B31C5600CB008527C9 /* UIColor+ODExtension.m */; };
+		D4D070B71C56019F008527C9 /* NSURL+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070B61C56019F008527C9 /* NSURL+ODExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -800,8 +800,6 @@
 		B83C6B861C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B83C6B921C2252F30063ED92 /* ODApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ODApp-Prefix.pch"; sourceTree = "<group>"; };
 		B83C6B931C22532B0063ED92 /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
-		B848E8BA1C4E0E1200B16CBA /* UIColor+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ODExtension.h"; sourceTree = "<group>"; };
-		B848E8BB1C4E0E1200B16CBA /* UIColor+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ODExtension.m"; sourceTree = "<group>"; };
 		B855A79B1C52218D0038F559 /* ODBazaarRewardCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarRewardCollectionCell.h; sourceTree = "<group>"; };
 		B855A79C1C52218D0038F559 /* ODBazaarRewardCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarRewardCollectionCell.m; sourceTree = "<group>"; };
 		B855A79D1C52218D0038F559 /* ODBazaarRewardCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarRewardCollectionCell.xib; sourceTree = "<group>"; };
@@ -870,8 +868,10 @@
 		D425DA341C4E233900BDD2AE /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
 		D4D070A81C55C819008527C9 /* ODHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHttpTool.h; sourceTree = "<group>"; };
 		D4D070A91C55C819008527C9 /* ODHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHttpTool.m; sourceTree = "<group>"; };
-		D4D070AB1C55C886008527C9 /* NSURL+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+ODExtension.h"; sourceTree = "<group>"; };
-		D4D070AC1C55C886008527C9 /* NSURL+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+ODExtension.m"; sourceTree = "<group>"; };
+		D4D070B21C5600CB008527C9 /* UIColor+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ODExtension.h"; sourceTree = "<group>"; };
+		D4D070B31C5600CB008527C9 /* UIColor+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ODExtension.m"; sourceTree = "<group>"; };
+		D4D070B51C56019F008527C9 /* NSURL+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+ODExtension.h"; sourceTree = "<group>"; };
+		D4D070B61C56019F008527C9 /* NSURL+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+ODExtension.m"; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1583,8 +1583,6 @@
 			children = (
 				B80E0B471C474C7900F36A17 /* ODClassMethod.h */,
 				B80F03761C226349009CE9D8 /* ODClassMethod.m */,
-				B848E8BA1C4E0E1200B16CBA /* UIColor+ODExtension.h */,
-				B848E8BB1C4E0E1200B16CBA /* UIColor+ODExtension.m */,
 				B80F037B1C2264FB009CE9D8 /* ODAPIManager.h */,
 				B80F037C1C2264FB009CE9D8 /* ODAPIManager.m */,
 				B833A6CF1C474AAB00F91E9A /* ODHelp.h */,
@@ -2131,8 +2129,10 @@
 		D4D070A61C55C819008527C9 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				D4D070AB1C55C886008527C9 /* NSURL+ODExtension.h */,
-				D4D070AC1C55C886008527C9 /* NSURL+ODExtension.m */,
+				D4D070B21C5600CB008527C9 /* UIColor+ODExtension.h */,
+				D4D070B31C5600CB008527C9 /* UIColor+ODExtension.m */,
+				D4D070B51C56019F008527C9 /* NSURL+ODExtension.h */,
+				D4D070B61C56019F008527C9 /* NSURL+ODExtension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2566,7 +2566,7 @@
 				B80F038C1C22A982009CE9D8 /* ODAppModel.m in Sources */,
 				9D14AA0E1C2A856800696929 /* CenterActivityCell.m in Sources */,
 				B83C394A1C48A0E9007B16FB /* ODUserNickNameController.m in Sources */,
-				D4D070AD1C55C886008527C9 /* NSURL+ODExtension.m in Sources */,
+				D4D070B41C5600CB008527C9 /* UIColor+ODExtension.m in Sources */,
 				D425DA271C4E1F7E00BDD2AE /* IQBarButtonItem.m in Sources */,
 				9DDBA4C71C3BAB330007E122 /* ODUserModel.m in Sources */,
 				B83C39491C48A0E9007B16FB /* ODUserInformation.m in Sources */,
@@ -2609,7 +2609,6 @@
 				C66F0C101C4CDF4D006E999B /* ODEvaluationModel.m in Sources */,
 				9DDBA4C31C3B6D090007E122 /* ODLandSecondCell.m in Sources */,
 				B871CF9F1C4CF87400CF51BA /* ODOtherTopicViewController.m in Sources */,
-				B848E8BC1C4E0E1200B16CBA /* UIColor+ODExtension.m in Sources */,
 				9DD481101C44C8A6004F34E3 /* ODTypeView.m in Sources */,
 				B83C39381C48A0E9007B16FB /* ODCenterIntroduceController.m in Sources */,
 				D425DA201C4E1F7E00BDD2AE /* IQUIView+Hierarchy.m in Sources */,
@@ -2651,6 +2650,7 @@
 				B83C39341C48A0E9007B16FB /* ODCommunityKeyWordSearchViewController.m in Sources */,
 				B83C39221C48A0E9007B16FB /* ODCenterYuYueController.m in Sources */,
 				9DDBA4BE1C3B6B030007E122 /* ODLandFirstCell.m in Sources */,
+				D4D070B71C56019F008527C9 /* NSURL+ODExtension.m in Sources */,
 				D425DA211C4E1F7E00BDD2AE /* IQUIViewController+Additions.m in Sources */,
 				B80E0B2B1C474C0500F36A17 /* ODBazaarModel.m in Sources */,
 				B80E0B2D1C474C0500F36A17 /* ODCommunityModel.m in Sources */,
