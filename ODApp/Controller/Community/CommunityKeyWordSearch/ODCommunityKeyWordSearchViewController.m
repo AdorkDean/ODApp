@@ -185,6 +185,10 @@
                 [self.view addSubview:self.noReusltLabel];
             }
             
+            if (bbs_list.count == 0) {
+                [self.collectionView.footer noticeNoMoreData];
+            }
+            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
