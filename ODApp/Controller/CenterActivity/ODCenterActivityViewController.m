@@ -476,9 +476,6 @@
    
     self.firstHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"firstHeader" forIndexPath:indexPath];
     
-    
-    
-    
     self.firstHeader.cycleScrollerView.delegate = self;
     [self.firstHeader.cycleScrollerView setImageURLStringsGroup:self.pictureArray];
     [self.firstHeader.cycleScrollerView setTitlesGroup:self.titleArray];
@@ -531,20 +528,13 @@
 #pragma mark - SDCycleScrollViewDelegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
 {
-    
-    
-  
     ODCenterPactureController *vc = [[ODCenterPactureController alloc] init];
     vc.activityName = self.titleArray[index];
     vc.webUrl = self.pictureDetailArray[index];
     [self.navigationController pushViewController:vc animated:YES];
     
     
-    
 }
-
-
-
 
 
 - (void)didReceiveMemoryWarning {

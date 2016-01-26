@@ -216,14 +216,13 @@
 {
     
     
-   self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)];
-   self.scroller.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)];
+    self.scroller.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     
     self.activityDetailView = [ActivityDetailView getView];
-  
+    
     
     [self.activityDetailView.titleImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.icon_url]];
-    
     [self.activityDetailView.baoMingButton addTarget:self action:@selector(baoMingAction:) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -236,7 +235,7 @@
                                                      forState:UIControlStateNormal];
         self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         self.activityDetailView.baoMingButton.userInteractionEnabled = NO;
-
+        
         
     } else if ([status isEqualToString:@"-3"]) {
         
@@ -248,14 +247,14 @@
         
         
     }
-
+    
     
     
     else if ([status isEqualToString:@"-4"] ||[status isEqualToString:@"-5"] ) {
         
         [self.activityDetailView.baoMingButton setTitle:@"人数已满" forState:UIControlStateNormal];
         [self.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
-                                         forState:UIControlStateNormal];
+                                                    forState:UIControlStateNormal];
         self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         self.activityDetailView.baoMingButton.userInteractionEnabled = NO;
         
@@ -273,10 +272,7 @@
         [self.activityDetailView.baoMingButton setTitleColor:[UIColor blueColor]
                                                     forState:UIControlStateNormal];
     }
-
     
-    
-
     
     self.activityDetailView.titleLabel.text = self.model.content;
     self.activityDetailView.beginTimeLabel.text = self.model.start_time;
@@ -286,14 +282,9 @@
     [self.activityDetailView.centerNameButton addTarget:self action:@selector(goCenter:) forControlEvents:UIControlEventTouchUpInside];
     
     
-    
-
-  
-    
-    
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(4, self.activityDetailView.frame.size.height, kScreenSize.width - 8, 300)];
     self.webView.delegate = self;
-      self.webView.layer.masksToBounds = YES;
+    self.webView.layer.masksToBounds = YES;
     self.webView.layer.cornerRadius = 5;
     self.webView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
     self.webView.layer.borderWidth = 1;
@@ -304,9 +295,6 @@
     [self.view addSubview:self.scroller];
     
     
-    
-    
-    
 }
 
 #pragma mark - WebViewDelegate
@@ -314,31 +302,19 @@
 
 
    CGFloat height = [[self.webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"]floatValue];
-
-    
    self.webView.frame = CGRectMake(4, self.activityDetailView.frame.size.height, kScreenSize.width - 8, height + 55);
-    
-    //关闭webView上下滑动
+   //关闭webView上下滑动
     UIScrollView *tempView=(UIScrollView *)[self.webView.subviews objectAtIndex:0];
     tempView.scrollEnabled=NO;
-
-  
-    
-   self.scroller.contentSize = CGSizeMake(kScreenSize.width, height + self.activityDetailView.frame.size.height + 55);
-
-    
+    self.scroller.contentSize = CGSizeMake(kScreenSize.width, height + self.activityDetailView.frame.size.height + 60);
     
 }
 
 
 #pragma mark - 点击事件
-
-
 - (void)goCenter:(UIButton *)sender
 {
     ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
-    
-       
     vc.storeId = self.storeId;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -346,16 +322,9 @@
 
 - (void)baoMingAction:(UIButton *)sender
 {
-    
-    
-    
     [self saveData];
   
-
 }
-
-
-
 
 -(void)fanhui:(UIButton *)sender
 {
@@ -369,14 +338,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

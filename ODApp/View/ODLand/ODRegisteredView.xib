@@ -16,6 +16,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="l05-DE-XHR"/>
                     </constraints>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>

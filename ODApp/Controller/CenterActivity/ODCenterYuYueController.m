@@ -240,7 +240,7 @@
     
     if ([self.yuYueView.btimeText.titleLabel.text isEqualToString:@"填写开始时间"]) {
         
-        [self createUIAlertControllerWithTitle:@"请填写开始时间"];
+        [self createUIAlertControllerWithTitle:@"请选择时间"];
       
 
     }else if ([self.yuYueView.eTimeText.titleLabel.text isEqualToString:@"填写结束时间"]) {
@@ -269,6 +269,9 @@
 
 - (void)getData
 {
+    
+    
+  
     
     self.timeManager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"store_id":self.storeId , @"start_datetime":self.start_datetime};
@@ -605,7 +608,7 @@
     beginTime = [beginTime stringByAppendingString:self.btimeStr];
     self.start_datetime = beginTime;
     
-     self.yuYueView.btimeText.userInteractionEnabled = YES;
+    self.yuYueView.btimeText.userInteractionEnabled = YES;
     self.yuYueView.eTimeText.userInteractionEnabled = YES;
     
     [self.picker removeFromSuperview];
@@ -713,10 +716,26 @@
     ODChoseCenterController *vc = [[ODChoseCenterController alloc] init];
     
     
-    vc.storeCenterNameBlock = ^(NSString *name , NSString *storeId , NSInteger storeNumber){
+        vc.storeCenterNameBlock = ^(NSString *name , NSString *storeId , NSInteger storeNumber){
         
         [self.yuYueView.centerText setTitle:name forState:UIControlStateNormal];
-        self.storeId = storeId;
+            
+            
+            if ([self.storeId isEqualToString:storeId]) {
+                
+                ;
+
+            }else{
+                self.storeId = storeId;
+                self.start_datetime = @"";
+                
+                [self.yuYueView.btimeText setTitle:@"填写开始时间" forState:UIControlStateNormal];
+                [self.yuYueView.eTimeText setTitle:@"填写结束时间" forState:UIControlStateNormal];
+                self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:15];
+                self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:15];
+            }
+            
+            
     };
     
     [self.navigationController pushViewController:vc animated:YES];
@@ -796,8 +815,6 @@
 #pragma mark - textViewDelegate
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
-    
-    
     if (textView == self.yuYueView.pursoseTextView) {
         if ([textView.text isEqualToString:NSLocalizedString(@"输入活动目的", nil)]) {
             self.yuYueView.pursoseTextView.text=NSLocalizedString(@"", nil);

@@ -174,7 +174,7 @@
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
         
         if (indexPath.section == 1) {
-            cell.titleLabel.text = @"我的中心预约";
+            cell.titleLabel.text = @"我的预约记录";
             
         }else if (indexPath.section == 2) {
             cell.titleLabel.text = @"我报名的活动";
