@@ -78,6 +78,10 @@ void UncaughtExceptionHandler(NSException *exception)
 - (void)gotoMain
 {
     [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"isRuned"];
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *openId = [user objectForKey:@"userOpenId"];
+    [ODUserInformation getData].openID = openId;
+
     self.window.rootViewController = [[ODTabBarController alloc]init];
     
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
@@ -86,10 +90,7 @@ void UncaughtExceptionHandler(NSException *exception)
     manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = NO;
     
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSString *openId = [user objectForKey:@"userOpenId"];
-    [ODUserInformation getData].openID = openId;
-
+ 
     
     [UMSocialData setAppKey:@"569dda54e0f55a994f0021cf"];
     
