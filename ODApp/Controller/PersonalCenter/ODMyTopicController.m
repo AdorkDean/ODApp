@@ -376,7 +376,15 @@
         ODCommunityModel *userModel = self.firstUserArray[0];
         ODCommunityModel *detailModel = self.FirstDataArray[indexPath.row];
         cell.nameLabel.text = userModel.nick;
-        [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+        
+        
+        
+        
+        [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+        
+
+        
+        
         cell.titleLabel.text = detailModel.title;
         cell.contentLabel.text = detailModel.content;
         NSString *count = [NSString stringWithFormat:@"%@" , detailModel.view_num];
@@ -387,7 +395,8 @@
         ODCommunityModel *userModel = self.secondUserArray[0];
         ODCommunityModel *detailModel = self.secondDataArray[indexPath.row];
         cell.nameLabel.text = userModel.nick;
-        [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+        [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+        
         cell.titleLabel.text = detailModel.title;
         cell.contentLabel.text = detailModel.content;
         NSString *count = [NSString stringWithFormat:@"%@" , detailModel.view_num];
@@ -442,7 +451,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return CGSizeMake(kScreenSize.width , 140);
+    return CGSizeMake(kScreenSize.width , 120);
     
 }
 //动态设置每个分区的缩进量
