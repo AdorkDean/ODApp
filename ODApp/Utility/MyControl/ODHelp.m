@@ -37,8 +37,13 @@
         
         NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:size]};
         CGRect rect = [text boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine attributes:dict context:nil];
-        //返回计算出的行高
-        return rect.size.height;
+        
+
+            return rect.size.height;
+
+        
+        
+        
         
         
     }else {
@@ -52,6 +57,45 @@
         return textSize.height;//返回 计算出得行高
     }
 }
+
++ (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat) textWidth miniHeight:(CGFloat)miniHeight fontSize:(CGFloat)size{
+
+    if ([ODHelp getCurrentIOS] >= 7.0) {
+        //iOS7之后
+        /*
+         第一个参数: 预设空间 宽度固定  高度预设 一个最大值
+         第二个参数: 行间距
+         第三个参数: 属性字典 可以设置字体大小
+         */
+        //xxxxxxxxxxxxxxxxxx
+        //ghjdgkfgsfgskdgfjk
+        //sdhgfsdjkhgfjd
+
+        
+        NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:size]};
+        CGRect rect = [text boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine attributes:dict context:nil];
+        
+        if (rect.size.height / size < 2) {
+            return miniHeight;
+        }else{
+            //返回计算出的行高
+            return rect.size.height + 10;
+
+        }
+  
+        
+    }else {
+        //iOS7之前
+        /*
+         1.第一个参数  设置的字体固定大小
+         2.预设 宽度和高度 宽度是固定的 高度一般写成最大值
+         3.换行模式 字符换行
+         */
+        CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:size] constrainedToSize:CGSizeMake(textWidth, MAXFLOAT) lineBreakMode:NSLineBreakByCharWrapping];
+        return textSize.height;//返回 计算出得行高
+    }
+}
+
 
 //获取iOS版本号
 + (double)getCurrentIOS {

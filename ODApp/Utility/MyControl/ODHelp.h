@@ -15,7 +15,14 @@
 //@"1419055200" -> 转化 日期字符串
 + (NSString *)dateStringFromNumberTimer:(NSString *)timerStr;
 //根据字符串内容的多少  在固定宽度 下计算出实际的行高
+
 + (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat)textWidth fontSize:(CGFloat)size;
+
++ (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat) textWidth miniHeight:(CGFloat)miniHeight fontSize:(CGFloat)size;
+
++ (CGFloat)textHeightFromLabel:(UILabel *)label TextString:(NSString *)text width:(CGFloat) textWidth miniHeight:(CGFloat)miniHeight fontSize:(CGFloat)size;
+
+
 //获取 当前设备版本
 + (double)getCurrentIOS;
 
