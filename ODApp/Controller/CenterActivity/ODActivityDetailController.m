@@ -48,7 +48,7 @@
    
      [self getData];
     
-    self.openId = [ODUserInformation getData].openID;
+     self.openId = [ODUserInformation getData].openID;
     
            
 }
@@ -221,40 +221,9 @@
     
     self.activityDetailView = [ActivityDetailView getView];
   
-    self.activityDetailView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-
     
+    [self.activityDetailView.titleImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.icon_url]];
     
-    if (iPhone4_4S) {
-        self.activityDetailView.imageHight.constant = 200;
-    }else if (iPhone5_5s)
-    {
-        self.activityDetailView.imageHight.constant = 200;
-    }else if (iPhone6_6s)
-    {
-        self.activityDetailView.imageHight.constant = 250;
-    }else {
-        self.activityDetailView.imageHight.constant = 270;
-    }
-
-    self.activityDetailView.frame = CGRectMake(0, 0, kScreenSize.width, 250 + self.activityDetailView.imageHight.constant);
-    
-    
-    
-    [self.activityDetailView.titleImageView sd_setImageWithURL:[NSURL URLWithString:self.model.icon_url]];
-    
-    self.activityDetailView.informationLabel.layer.masksToBounds = YES;
-    self.activityDetailView.informationLabel.layer.cornerRadius = 5;
-    self.activityDetailView.informationLabel.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-    self.activityDetailView.informationLabel.layer.borderWidth = 1;
-    self.activityDetailView.informationLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    
-    
-    
-    self.activityDetailView.baoMingButton.layer.masksToBounds = YES;
-    self.activityDetailView.baoMingButton.layer.cornerRadius = 5;
-    self.activityDetailView.baoMingButton.layer.borderColor = [UIColor blackColor].CGColor;
-    self.activityDetailView.baoMingButton.layer.borderWidth = 1;
     [self.activityDetailView.baoMingButton addTarget:self action:@selector(baoMingAction:) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -307,56 +276,19 @@
 
     
     
+
     
-    self.activityDetailView.disitionLabel.layer.masksToBounds = YES;
-    self.activityDetailView.disitionLabel.layer.cornerRadius = 5;
-    self.activityDetailView.disitionLabel.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-    self.activityDetailView.disitionLabel.layer.borderWidth = 1;
-    self.activityDetailView.disitionLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    
-    
-    self.activityDetailView.titleLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.activityDetailView.titleLabel.text = self.model.content;
-    
-    
-    self.activityDetailView.beginTimeLabel.textColor = [UIColor colorWithHexString:@"#8f8f8f" alpha:1];
     self.activityDetailView.beginTimeLabel.text = self.model.start_time;
-    self.activityDetailView.endTimeLabel.textColor = [UIColor colorWithHexString:@"#8f8f8f" alpha:1];
     self.activityDetailView.endTimeLabel.text = self.model.end_time;
-    
-    
- 
-    
-    [self.activityDetailView.centerNameButton setTitleColor:[UIColor colorWithHexString:@"#015afe" alpha:1] forState:UIControlStateNormal];
+    self.activityDetailView.addressLabel.text = self.model.store_address;
     [self.activityDetailView.centerNameButton setTitle:self.model.store_name forState:UIControlStateNormal];
     [self.activityDetailView.centerNameButton addTarget:self action:@selector(goCenter:) forControlEvents:UIControlEventTouchUpInside];
     
     
     
-    self.activityDetailView.addressLabel.textColor = [UIColor colorWithHexString:@"#015afe" alpha:1];
-    self.activityDetailView.addressLabel.text = self.model.store_address;
-    
-    
-    if (iPhone4_4S) {
-        self.activityDetailView.beginTimeLabel.font = [UIFont systemFontOfSize:13];
-        self.activityDetailView.endTimeLabel.font = [UIFont systemFontOfSize:13];
-        
-        
-    }else if (iPhone5_5s) {
-        
-        self.activityDetailView.beginTimeLabel.font = [UIFont systemFontOfSize:13];
-        self.activityDetailView.endTimeLabel.font = [UIFont systemFontOfSize:13];
-    }else if (iPhone6_6s){
-        self.activityDetailView.beginTimeLabel.font = [UIFont systemFontOfSize:16];
-        self.activityDetailView.endTimeLabel.font = [UIFont systemFontOfSize:16];
-    }else {
-        
-        self.activityDetailView.beginTimeLabel.font = [UIFont systemFontOfSize:16];
-        self.activityDetailView.endTimeLabel.font = [UIFont systemFontOfSize:16];
-        
-    }
 
- 
+  
     
     
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(4, self.activityDetailView.frame.size.height, kScreenSize.width - 8, 300)];

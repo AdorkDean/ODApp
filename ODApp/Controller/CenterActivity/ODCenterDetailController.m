@@ -283,23 +283,7 @@ int pageNumnber = 0;
         
         self.centerDetailView = [ODCenderDetailView getView];
         
-      
-        
-        if (iPhone4_4S) {
-            self.centerDetailView.scrollerHeight.constant = 210;
-            
-        }else if (iPhone5_5s) {
-            
-            self.centerDetailView.scrollerHeight.constant = 210;
-        }else if (iPhone6_6s) {
-            
-            self.centerDetailView.scrollerHeight.constant = 270;
-            
-        }else {
-            self.centerDetailView.scrollerHeight.constant = 290;
-        }
-        
-        
+              
         if (iPhone4_4S) {
             self.centerDetailView.frame = CGRectMake(0, 0, kScreenSize.width, 230 + kScreenSize.height / 10 +  self.centerDetailView.scrollerHeight.constant +  rect.size.height);
             
@@ -319,54 +303,15 @@ int pageNumnber = 0;
         
         
         
-        self.centerDetailView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-
-        
-        self.centerDetailView.detailTextView.layer.masksToBounds = YES;
-        self.centerDetailView.detailTextView.layer.cornerRadius = 5;
-        self.centerDetailView.detailTextView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.centerDetailView.detailTextView.layer.borderWidth = 1;
         self.centerDetailView.detailTextView.text = self.model.desc;
-        self.centerDetailView.detailTextView.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-        self.centerDetailView.detailTextView.scrollEnabled = NO;
-        
-        self.centerDetailView.informationLabel.layer.masksToBounds = YES;
-        self.centerDetailView.informationLabel.layer.cornerRadius = 5;
-        self.centerDetailView.informationLabel.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        self.centerDetailView.informationLabel.layer.borderWidth = 1;
-
-         self.centerDetailView.firstLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-         self.centerDetailView.secondLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-         self.centerDetailView.thirdLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-         self.centerDetailView.fourLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-
-        
         self.centerDetailView.centerNameLabel.text = self.model.name;
-        self.centerDetailView.centerNameLabel.textColor = [UIColor colorWithHexString:@"#014cdb" alpha:1];
-        
-        
         self.centerDetailView.phoneLabel.text = self.model.tel;
-        self.centerDetailView.phoneLabel.textColor = [UIColor colorWithHexString:@"#014cdb" alpha:1];
+        self.centerDetailView.addressLabel.text = self.model.address;
+        self.centerDetailView.timeTextView.text = self.model.business_hours;
+
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(phoneAction:)];
-        
-        
         [self.centerDetailView.phoneLabel addGestureRecognizer:tap];
         
-        
-        self.centerDetailView.addressLabel.text = self.model.address;
-        self.centerDetailView.addressLabel.textColor = [UIColor colorWithHexString:@"#014cdb" alpha:1];
-        
-        self.centerDetailView.timeTextView.text = self.model.business_hours;
-        self.centerDetailView.timeTextView.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-        self.centerDetailView.timeTextView.scrollEnabled = NO;
-        
-        
-        [self.centerDetailView.appointmentButton setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
-        self.centerDetailView.appointmentButton.layer.masksToBounds = YES;
-       self.centerDetailView.appointmentButton.layer.cornerRadius = 5;
-        self.centerDetailView.appointmentButton.layer.borderColor = [UIColor colorWithHexString:@"b0b0b0" alpha:1].CGColor;
-       self.centerDetailView.appointmentButton.layer.borderWidth = 1;
-       self.centerDetailView.appointmentButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
         [self.centerDetailView.appointmentButton addTarget:self action:@selector(appointmentAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
@@ -382,44 +327,27 @@ int pageNumnber = 0;
         // 创建图片
         for (int i = 0; i < self.model.pics.count; i++) {
             
-            
             // 创建imageView;
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * kScreenSize.width, 0, kScreenSize.width, self.centerDetailView.scrollerHeight.constant)];
-            
             NSString *url = self.model.pics[i];
-            
-            [imageView sd_setImageWithURL:[NSURL URLWithString:url]];
-            
-            
+            [imageView sd_setImageWithURL:[NSURL OD_URLWithString:url]];
             // imageView添加到scroller上
             [self.centerDetailView.scrollerView addSubview:imageView];
             
-            
         }
-        
         
         // 创建pageControl
         self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(self.view.center.x - 50, self.centerDetailView.scrollerHeight.constant - 30, 100, 20)];
         self.pageControl.backgroundColor = [UIColor clearColor];
-        
         // 给pageControl设置点的个数
         self.pageControl.numberOfPages = self.model.pics.count;
-        
-        
         // 设置默认选中的点
         self.pageControl.currentPage = 0;
-        
         // 当前选中点的颜色
         self.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-        
         // 未被选中点的颜色
         self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-        
-        
         self.pageControl.userInteractionEnabled = YES;
-        
-        
-        
         [self.centerDetailView addSubview:self.pageControl];
         
         
@@ -434,57 +362,18 @@ int pageNumnber = 0;
 {
      CenterDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"item" forIndexPath:indexPath];
 
-    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-
-    
-    
-    if (iPhone4_4S) {
-        cell.toRightSpace.constant = 210;
-    }else if (iPhone5_5s){
-        cell.toRightSpace.constant = 210;
-    }else if (iPhone6_6s){
-        cell.toRightSpace.constant = 260;
-    }else{
-        cell.toRightSpace.constant = 300;
-        
-    }
-
-    cell.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-
-    
-    cell.coverImageView.layer.masksToBounds = YES;
-    cell.coverImageView.layer.cornerRadius = 7;
-    cell.coverImageView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-    cell.coverImageView.layer.borderWidth = 1;
-
-    
     
     CenterActivityModel *model = self.dataArray[indexPath.section];
     
-    cell.titleLabel.text = model.content;
-    cell.timeLabel.text = model.date_str;
-    cell.addressLabel.text = model.address;
-    [cell.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.icon_url]];
+    cell.model = model;
     
-    cell.timeLabel.textColor = [UIColor colorWithHexString:@"#b1b1b1" alpha:1];
-    cell.addressLabel.textColor = [UIColor colorWithHexString:@"#b1b1b1" alpha:1];
+    
+      
     
     return cell;
 }
 
 
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 100)];
-    view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-
-    
-    return view;
-    
-}
 
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section

@@ -100,9 +100,6 @@
     self.openId = [ODUserInformation getData].openID;
     
     
-    
-    
-    
 }
 
 #pragma mark - lifeCycle
@@ -140,7 +137,6 @@
     
     
     // 返回button
-    
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
     confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
@@ -154,8 +150,6 @@
 
 - (void)createTableView
 {
-    
-    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     
@@ -193,53 +187,29 @@
         self.yuYueView = [CenterYuYueView getView];
         
         
-        if (iPhone4_4S) {
-            self.yuYueView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height + 100);
-        }else if (iPhone5_5s)
-        {
-            self.yuYueView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height + 50);
-        }else if (iPhone6_6s) {
-            
-            self.yuYueView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 70);
-        }else {
-            self.yuYueView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - 100);
-        }
-        
-        
-        
-        
         [self.yuYueView.computerButton addTarget:self action:@selector(computerAction:) forControlEvents:UIControlEventTouchUpInside];
-
         [self.yuYueView.touYingButton addTarget:self action:@selector(touYingAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.yuYueView.yinXiangButton addTarget:self action:@selector(yinXiangAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.yuYueView.maiButton addTarget:self action:@selector(maiAction:) forControlEvents:UIControlEventTouchUpInside];
-
         [self.yuYueView.yuYueButton addTarget:self action:@selector(yuYueAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.yuYueView.centerText addTarget:self action:@selector(choseCenter:) forControlEvents:UIControlEventTouchUpInside];
+        [self.yuYueView.phoneText addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.yuYueView.btimeText addTarget:self action:@selector(choseBeginTime:) forControlEvents:UIControlEventTouchUpInside];
+        self.yuYueView.btimeText.tag = 111;
+        [self.yuYueView.eTimeText addTarget:self action:@selector(choseBeginTime:) forControlEvents:UIControlEventTouchUpInside];
+        self.yuYueView.eTimeText.tag = 222;
 
         [self.yuYueView.centerText  setTitle:self.centerName forState:UIControlStateNormal];
-   
-        
         [self.yuYueView.phoneText setTitle:self.phoneNumber forState:UIControlStateNormal];
-
-        
-        [self.yuYueView.phoneText addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
 
         self.yuYueView.pursoseTextView.delegate=self;
         self.yuYueView.contentTextView.delegate=self;
     
      
-        [self.yuYueView.btimeText addTarget:self action:@selector(choseBeginTime:) forControlEvents:UIControlEventTouchUpInside];
-        self.yuYueView.btimeText.tag = 111;
-        
-        [self.yuYueView.eTimeText addTarget:self action:@selector(choseBeginTime:) forControlEvents:UIControlEventTouchUpInside];
-        self.yuYueView.eTimeText.tag = 222;
         
         
         self.yuYueView.peopleNumberTextField.delegate = self;
      
-        
-        
         
     }
     return _yuYueView;
@@ -295,24 +265,12 @@
 
     }
     
-    
-    
 }
-
-- (AFHTTPRequestOperationManager *)timeManager
-{
-    if (!_timeManager)
-    {
-        _timeManager = [AFHTTPRequestOperationManager manager];
-    }
-    return _timeManager;
-}
-
 
 - (void)getData
 {
     
-    
+    self.timeManager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"store_id":self.storeId , @"start_datetime":self.start_datetime};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
@@ -320,27 +278,17 @@
     NSString *url = @"http://woquapi.test.odong.com/1.0/store/timeline";
     
     [self.timeManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         //获取完整路径
         NSString *documentsPath = [path objectAtIndex:0];
         NSString *plistPath = [documentsPath stringByAppendingPathComponent:@"TimeList.plist"];
         NSMutableArray *timesArray = [[NSMutableArray alloc ] init];
         
-        
-        
-        
         if (responseObject) {
-            
             
             [timesArray removeAllObjects];
             weakSelf.timeStr = @"";
-            
             NSMutableDictionary *dic = responseObject[@"result"];
-            
-            
-            
             weakSelf.keysArray = [dic allKeys];
             weakSelf.keysArray = [weakSelf.keysArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                 NSComparisonResult result = [obj1 compare:obj2];
@@ -353,16 +301,13 @@
                 NSString *str = dic1[@"date_left_str"];
                 NSMutableDictionary *dataDic = [[NSMutableDictionary alloc]init];
                 [dataDic setObject:str forKey:@"date"];
-                
                 NSMutableArray *timeArray = dic1[@"cao"];
                 NSMutableArray *dataTimeArray = [[NSMutableArray alloc] init];
                 for (NSMutableDictionary *dic2 in timeArray) {
                     
-                    NSInteger status = [dic2[@"status"] integerValue];
+                NSInteger status = [dic2[@"status"] integerValue];
                     
-                    
-                    
-                    if (status == 1) {
+                if (status == 1) {
                         NSString *time = dic2[@"time"];
                         
                         [dataTimeArray addObject:time];
@@ -370,8 +315,6 @@
                     }else {
                         ;
                     }
-                    
-                    
                     
                 }
                 
@@ -382,17 +325,12 @@
                 
             }
             
-            
-            
             [timesArray writeToFile:plistPath atomically:YES];
             
             
         }
         
-        
-        
         weakSelf.dataArray = [[NSMutableArray alloc] initWithContentsOfFile:plistPath];
-        
         weakSelf.timeDataArray = [[weakSelf.dataArray objectAtIndex:0] objectForKey:@"time"];
         
         
@@ -442,21 +380,13 @@
                 [weakSelf.view addSubview: weakSelf.cancelButton];
                 [weakSelf.view addSubview:weakSelf.picker];
                 
-                
-                
             }
         }
-        
-        
-        
-        
         
         [weakSelf.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        
-        NSLog(@"%@",error.description);
         
     }];
     
@@ -468,59 +398,37 @@
 #pragma mark - 请求数据
 - (void)getOrderId
 {
-    
-    
     self.manager = [AFHTTPRequestOperationManager manager];
-    
     
     self.beginTime = [self.yearStr stringByAppendingString:@" "];
     self.beginTime = [self.beginTime stringByAppendingString:self.btimeStr];
     self.endTime = [self.yearStr stringByAppendingString:@" "];
     self.endTime = [self.endTime stringByAppendingString:self.eimeStr];
     
-    
-    
     NSDictionary *parameter = @{@"start_datetime":self.beginTime , @" end_datetime":self.endTime , @"store_id":self.storeId , @"open_id":self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    
     NSString *url = @"http://woquapi.test.odong.com/1.0/store/create/order";
-    
-    
     [self.manager GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
             NSMutableDictionary *dic = responseObject[@"result"];
-            
             self.orderID = [NSString stringWithFormat:@"%@" , dic[@"order_id"]];
-            
-            
             [self saveData];
-            
-            
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
             
             [self createUIAlertControllerWithTitle:responseObject[@"message"]];
             
-            
-            
         }
-        
-        
         
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         
-        
-        
     }];
-    
-    
     
 }
 
@@ -546,16 +454,9 @@
     }
     
     NSString *equipment = [NSString stringWithFormat:@"%@,%@,%@,%@" , computerY , touYingY , yinXingY , maiY];
-    
-    
-    
     NSDictionary *parameter = @{@"start_datetime":self.beginTime , @"end_datetime":self.endTime , @"store_id":self.storeId , @"order_id":self.orderID ,@"purpose":self.yuYueView.pursoseTextView.text ,@"content":self.yuYueView.contentTextView.text ,@"people_num":self.yuYueView.peopleNumberTextField.text ,@"remark":@"无" ,@"devices":equipment ,@"open_id":self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    
     NSString *url = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
-    
-    
     [self.managers GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         
@@ -572,18 +473,13 @@
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            
-            
-            [self createUIAlertControllerWithTitle:responseObject[@"message"]];
+        [self createUIAlertControllerWithTitle:responseObject[@"message"]];
             
                  
         }
         
         
-        
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
-        
         
         
     }];
@@ -591,7 +487,6 @@
 }
 
 #pragma mark - 点击事件
-
 -(void)fanhui:(UIButton *)sender
 {
     UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"是否退出预约" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
@@ -678,16 +573,12 @@
     }
 }
 
-
-
 // 当用户选中UIPickerViewDataSource中指定列和列表项时激发该方法
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     
-    
     switch (component) {
         case 0:
-            
             
             self.timeDataArray = [[self.dataArray objectAtIndex:row] objectForKey:@"time"];
             self.dateStr = [[self.dataArray objectAtIndex:row] objectForKey:@"date"];
@@ -700,13 +591,9 @@
             self.timeStr = self.timeDataArray[row];
             break;
             
-            
     }
-    
-    
+  
 }
-
-
 
 - (void)quXiaoAction:(UIButton *)sender
 {
@@ -907,8 +794,6 @@
 
 
 #pragma mark - textViewDelegate
-
-
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     
@@ -982,15 +867,6 @@
     }
 }
 
-
-#pragma mark - textfieldDelegate
-//-(BOOL)textFieldShouldReturn:(UITextField *)textField
-//{
-//    [textField resignFirstResponder];
-//    return YES;
-//}
-
-
 #pragma mark - tableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -1019,14 +895,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
