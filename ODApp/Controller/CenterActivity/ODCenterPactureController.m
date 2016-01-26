@@ -7,7 +7,7 @@
 //
 
 #import "ODCenterPactureController.h"
-
+#import "ODTabBarController.h"
 @interface ODCenterPactureController ()
 
 @property(nonatomic , strong) UIView *headView;
@@ -29,6 +29,13 @@
    
     
     
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+    tabBar.imageView.alpha = 0;
 }
 
 - (void)fanhui:(UIButton *)sender
@@ -62,10 +69,8 @@
     [self.headView addSubview:confirmButton];
     
     
-    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64 - 55)];
-    NSString *openId = @"766148455eed214ed1f8";
-    NSString *newWebUrl = [self.webUrl stringByAppendingString:openId];
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:newWebUrl]];
+    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)];
+    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:self.webUrl]];
     [self.view addSubview:web];
     [web loadRequest:request];
 

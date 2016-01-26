@@ -232,8 +232,21 @@
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-            [alter show];
+            
+            if (self.registView.password.text.length < 6 || self.registView.password.text.length > 26 ) {
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"密码仅支持6到26位" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+                [alter show];
+
+            }else {
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+                [alter show];
+
+            }
+            
+            
+            
+            
+            
         }
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

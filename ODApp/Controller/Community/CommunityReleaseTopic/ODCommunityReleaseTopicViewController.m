@@ -17,7 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.count = 1;
+    self.imageArray = [[NSMutableArray alloc]init];
+    self.strArray = [[NSMutableArray alloc]init];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self createRequest];
     [self navigationInit];
@@ -155,11 +156,14 @@
 
 -(void)addPicButtonClick:(UIButton *)button
 {
-    [self.titleTextView resignFirstResponder];
-    [self.topicContentTextView resignFirstResponder];
-    UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
-    
-    [actionSheet showInView:self.view];
+    if (self.imageArray.count < 9) {
+        [self.titleTextView resignFirstResponder];
+        [self.topicContentTextView resignFirstResponder];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
+        [actionSheet showInView:self.view];
+    }else{
+        [self createUIAlertControllerWithTitle:@"已达图片最大上传数"];
+    }
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -200,22 +204,23 @@
 {
     NSString *sourceType = info[UIImagePickerControllerMediaType];
     if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
-        self.image = info[UIImagePickerControllerEditedImage];
-        CGSize imageSize = self.image.size;
+        UIImage *pickedImage = info[UIImagePickerControllerEditedImage];
+        CGSize imageSize = pickedImage.size;
         imageSize.height = 200;
         imageSize.width = 200;
         //图片转化为data
         NSData *imageData;
-        self.image = [self imageWithImage:self.image scaledToSize:imageSize];
-        if (UIImagePNGRepresentation(self.image)==nil) {
-            imageData = UIImageJPEGRepresentation(self.image,0.5);
+        pickedImage = [self imageWithImage:pickedImage scaledToSize:imageSize];
+        if (UIImagePNGRepresentation(pickedImage)==nil) {
+            imageData = UIImageJPEGRepresentation(pickedImage,0.5);
         }else{
-            imageData = UIImagePNGRepresentation(self.image);
+            imageData = UIImagePNGRepresentation(pickedImage);
         }
         NSString *str = @"data:image/jpeg;base64,";
         NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+        [self.imageArray addObject:pickedImage];
         [self createParameter:strData];
-        [self addImageViewWithImage:self.image];
+        [self reloadImageButtons];
     }
      [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -237,12 +242,7 @@
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
             NSString *str = result[@"File"];
-            if (self.imgsString==nil) {
-                self.imgsString = str;
-                NSLog(@"%@",self.imgsString);
-            }else{
-                self.imgsString = [[self.imgsString stringByAppendingString:@"|"] stringByAppendingString:str];
-            }
+            [self.strArray addObject:str];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"error");
@@ -259,39 +259,43 @@
     return newImage;
 }
 
-#pragma mark - 添加图片
--(void)addImageViewWithImage:(UIImage *)image
+- (void)reloadImageButtons
 {
-    
-    self.width = (kScreenSize.width-20)/4;
-    
-    self.imageView = [[UIImageView alloc]init];
-    self.imageView.image = image;
-    self.imageView.layer.masksToBounds = YES;
-    self.imageView.layer.cornerRadius = 5;
-    self.imageView.userInteractionEnabled = YES;
-    [self.view addSubview:self.imageView];
-    
-    self.deletePicButton = [[UIButton alloc] init];
-
-    self.deletePicButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.width - 15, 0, 15, 15) target:self sel:@selector(deletePicButton:) tag:0 image:@"搜索取消icon" title:@"" font:0];
-    [self.imageView addSubview:self.deletePicButton];
-    
-    if (self.count > 9) {
-        [self.addPicButton setFrame:CGRectMake(4 + (self.width + 4) * (self.count%4), CGRectGetMaxY(self.topicContentTextView.frame) + 4 + (4+self.width) * (self.count/4), self.width, self.width)];
-//        self.addPicButton.hidden = YES;
-    }else{
-        self.imageView.frame = self.addPicButton.frame;
-        [self.addPicButton setFrame:CGRectMake(4 + (self.width + 4) * (self.count%4), CGRectGetMaxY(self.topicContentTextView.frame) + 4 + (4+self.width) * (self.count/4), self.width, self.width)];
-        self.count++;
+    NSInteger width = (kScreenSize.width-20)/4;
+    for (UIButton *view in self.view.subviews)
+    {
+        if ([view isKindOfClass:[UIButton class]] && ![view isEqual:self.addPicButton])
+        {
+            [view removeFromSuperview];
+        }
     }
+    
+    for (NSInteger i = 0; i < self.imageArray.count; i++) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button setBackgroundImage:self.imageArray[i] forState:UIControlStateNormal];
+        button.layer.masksToBounds = YES;
+        button.layer.cornerRadius = 5;
+        button.tag = 10010+i;
+        [button addTarget:self action:@selector(deletePicClick:) forControlEvents:UIControlEventTouchUpInside];
+            button.frame = CGRectMake(4 + (width + 4) * (i % 4), CGRectGetMaxY(self.topicContentTextView.frame) + 4 + (4+width) * (i / 4), width, width);
+        [self.view addSubview:button];
+    }
+    [self.addPicButton setFrame:CGRectMake(4 + (width + 4) * (self.imageArray.count % 4), CGRectGetMaxY(self.topicContentTextView.frame) + 4 + (4+width) * (self.imageArray.count / 4), width, width)];
 
 }
 
-
-- (void)deletePicButton:(UIButton *)button{
-
-    [self.imageView removeFromSuperview];
+#pragma mark - 删除图片
+-(void)deletePicClick:(UIButton *)button
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除图片" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [button removeFromSuperview];
+        [self.imageArray removeObject:button.currentBackgroundImage];
+        [self.strArray removeObjectAtIndex:button.tag-10010];
+        [self reloadImageButtons];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - 初始化manager
@@ -304,10 +308,20 @@
 -(void)joiningTogetherParmeters
 {
     NSDictionary *parameter;
-    if (self.imgsString.length==0) {
+    NSString *imageStr = [[NSString alloc] init];
+    for (NSInteger i = 0; i < self.strArray.count; i++) {
+        if (i==0) {
+            imageStr = self.strArray[i];
+        }else{
+            NSString *str = self.strArray[i];
+            imageStr = [[imageStr stringByAppendingString:@"|"] stringByAppendingString:str];
+        }
+    }
+    if (imageStr.length==0) {
         parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"open_id":[ODUserInformation getData].openID};
     }else{
-        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"imgs":self.imgsString,@"open_id":[ODUserInformation getData].openID};
+        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"imgs":imageStr,@"open_id":[ODUserInformation getData].openID};
+        NSLog(@"%@",parameter);
     }
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:kCommunityReleaseBbsUrl parameter:signParameter];
@@ -325,7 +339,7 @@
             [self.navigationController popViewControllerAnimated:YES];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+        NSLog(@"%@",error);
     }];
 }
 

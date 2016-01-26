@@ -147,8 +147,11 @@
         cell.userImageView.layer.borderWidth = 1;
         
         
-        [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:self.model.avatar]];
-        [cell.qrcodeImageView sd_setImageWithURL:[NSURL URLWithString:self.model.qrcode]];
+        
+             
+        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.avatar]];
+        [cell.qrcodeImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.qrcode]];
+
         
 
         if ([self.model.nick isEqualToString:@""]) {
@@ -171,7 +174,7 @@
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
         
         if (indexPath.section == 1) {
-            cell.titleLabel.text = @"我的中心预约";
+            cell.titleLabel.text = @"我的预约记录";
             
         }else if (indexPath.section == 2) {
             cell.titleLabel.text = @"我报名的活动";

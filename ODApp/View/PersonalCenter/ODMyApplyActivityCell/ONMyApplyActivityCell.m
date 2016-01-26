@@ -23,7 +23,11 @@
 
 - (void)showDataWithModel:(ODMyApplyActivityModel *)model{
 
-    [self.titleImageView sd_setImageWithURL:[NSURL URLWithString:model.icon_url]];
+   
+    
+    [self.titleImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.icon_url]];
+
+    
     
     self.titleLabel.text = model.content;
     self.timelabel.text = model.date_str;

@@ -425,7 +425,7 @@
     
     self.firstManager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"1" , @"open_id":self.open_id};
+    NSDictionary *parameters = @{ @"city_id":@"321" , @"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"1" , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
@@ -479,7 +479,7 @@
         
     self.secondManager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"2" , @"open_id":self.open_id};
+    NSDictionary *parameters = @{@"city_id":@"321" ,@"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"2" , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
@@ -556,12 +556,9 @@
     
     
     if (collectionView.tag == 111) {
+        
         ODBazaarModel *model = self.FirstDataArray[indexPath.row];
-        
-        
-        
-        [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
-        
+        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
         cell.nickLabel.text = model.user_nick;
         cell.titleLabel.text = model.title;
         cell.contentLabel.text = model.content;
@@ -601,13 +598,13 @@
         [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
         cell.timeLabel.attributedText = noteStr;
         
-
+        
     }else if (collectionView.tag == 222) {
         ODBazaarModel *model = self.secondDataArray[indexPath.row];
         
         
         
-        [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
+        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
         
         cell.nickLabel.text = model.user_nick;
         cell.titleLabel.text = model.title;
@@ -618,7 +615,7 @@
         
         if ([status isEqualToString:@"1"]) {
             cell.typeLabel.text = @"等待派单";
-             cell.typeLabel.textColor = [UIColor redColor];
+            cell.typeLabel.textColor = [UIColor redColor];
             
         }else if ([status isEqualToString:@"2"]) {
             
@@ -647,13 +644,10 @@
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
         [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
         cell.timeLabel.attributedText = noteStr;
-
+        
     }
     
-    
-    
-    
-    return cell;
+       return cell;
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -754,23 +748,10 @@
 }
 
 
-
-
-
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
