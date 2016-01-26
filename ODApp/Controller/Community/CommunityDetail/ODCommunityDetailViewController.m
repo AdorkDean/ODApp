@@ -199,7 +199,7 @@
     
     //头像
     UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 13.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"sds" font:0];
-    [userHeaderButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+    [userHeaderButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
     userHeaderButton.layer.masksToBounds = YES;
     userHeaderButton.layer.cornerRadius = 24;
     userHeaderButton.backgroundColor = [UIColor grayColor];
@@ -247,7 +247,7 @@
         //图片
         for (NSInteger i = 0; i < resultModel.bbs_imgs.count; i++) {
             imageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, CGRectGetMaxY(bbsContentLabel.frame)+17.5+(300+10)*i, kScreenSize.width, 300) imageName:nil tag:0];
-            [imageView sd_setImageWithURL:[NSURL URLWithString:resultModel.bbs_imgs[i]]];
+            [imageView sd_setImageWithURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]]];
             [self.bbsView addSubview:imageView];
         }
         if ([[ODUserInformation getData].openID isEqualToString:userModel.open_id]) {
@@ -316,7 +316,7 @@
     ODCommunityDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:kCommunityDetailCellId];
     ODCommunityDetailModel *model = self.dataArray[indexPath.row];
    
-    [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:model.user[@"avatar_url"]] forState:UIControlStateNormal];
+    [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar_url"]] forState:UIControlStateNormal];
     [cell.replyButton addTarget:self action:@selector(replyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.nickName.text = model.user[@"nick"];
     NSString *time = [[model.created_at substringFromIndex:5] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
