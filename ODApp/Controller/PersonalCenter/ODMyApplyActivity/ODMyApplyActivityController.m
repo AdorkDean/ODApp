@@ -77,7 +77,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    NSDictionary *parameter = @{@"open_id":openId,@"type":@"1"};
+    NSDictionary *parameter = @{@"open_id":openId,@"type":@"0"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;

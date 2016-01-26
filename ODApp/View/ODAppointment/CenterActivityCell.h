@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CenterActivityModel.h"
 @interface CenterActivityCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *ActivityImageView;
@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toRightSpace;
 @property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
+@property (nonatomic , strong) CenterActivityModel *model;
+
 
 
 @end

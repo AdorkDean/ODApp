@@ -267,7 +267,7 @@
             
             
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-            [user setObject:openId forKey:@"openId"];
+            [user setObject:openId forKey:@"userOpenId"];
 
             
        
@@ -319,7 +319,7 @@
             
             
             self.pageNumber++;
-            if (self.pageNumber==3) {
+            if (self.pageNumber >= 3) {
                 [self createUIAlertControllerWithTitle:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册"];
 
             }else {

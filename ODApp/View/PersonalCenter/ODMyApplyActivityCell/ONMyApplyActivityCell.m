@@ -30,12 +30,13 @@
     
     self.adressLabel.text = model.address;
     NSString *str = [NSString stringWithFormat:@"%@",model.status];
+    self.checkLabel.layer.cornerRadius = 5;
     if ([str isEqualToString: @"0"]) {
-        self.checkLabel.text = @"审核中";
+        self.checkLabel.text = @"报名审核中";
     }else if ([str isEqualToString: @"1"]){
-        self.checkLabel.text = @"审核通过";
+        self.checkLabel.text = @"审核已通过";
     }else  {
-        self.checkLabel.text = @"审核失败";
+        self.checkLabel.text = @"审核未通过";
     }
 }
 

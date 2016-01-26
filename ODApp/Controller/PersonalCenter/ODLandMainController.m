@@ -309,6 +309,7 @@ else if (indexPath.section ==3) {
              tabBar.selectedIndex = 0;
              [self.navigationController popViewControllerAnimated:YES];
              
+             //清空数据
              [ODUserInformation getData].openID = nil;
              NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
              [user setObject:nil forKey:@"openId"];
@@ -321,10 +322,7 @@ else if (indexPath.section ==3) {
                  
              });
 
-             
-             
-             
-             
+                         
              if (self.navigationController.viewControllers.count > 1)
              {
                  [self.navigationController popViewControllerAnimated:YES];

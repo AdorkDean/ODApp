@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "CenterActivityModel.h"
 @interface CenterDetailCell : UITableViewCell
 
 
@@ -21,7 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *toRightSpace;
 
-
+@property (nonatomic , strong) CenterActivityModel *model;
 
 
 @end
