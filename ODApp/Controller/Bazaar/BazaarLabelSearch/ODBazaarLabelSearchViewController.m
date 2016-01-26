@@ -176,9 +176,14 @@
                 self.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 180)/2, kScreenSize.height/2, 180, 30) text:@"没有符合条件的任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [self.view addSubview:self.noReusltLabel];
             }
+            
+            if (tasks.count == 0) {
+                [self.collectionView.footer noticeNoMoreData];
+            }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
+        [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
     }];
     

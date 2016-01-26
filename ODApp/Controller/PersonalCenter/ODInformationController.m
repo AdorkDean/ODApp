@@ -142,7 +142,10 @@
     
     ODUserModel *model = self.dataArray[0];
     
-    [self.informationView.userImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
+    
+      [self.informationView.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
+    
+    
     UITapGestureRecognizer *pictMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(picAction)];
     [self.informationView.userImageView addGestureRecognizer:pictMap];
     
@@ -202,9 +205,7 @@
     UITapGestureRecognizer *passWordTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(passWordAction)];
     [self.informationView.passWordImageView addGestureRecognizer:passWordTap];
 
-    [self.informationView.codeImageView sd_setImageWithURL:[NSURL URLWithString:model.qrcode]];
-    
-    
+        [self.informationView.codeImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.qrcode]];
     
     self.tableView.tableHeaderView = self.informationView;
     [self.view addSubview:self.tableView];

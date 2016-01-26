@@ -15,13 +15,13 @@
     
     
     if (iPhone4_4S) {
-        self.toRightSpace.constant = 210;
+        self.toRightSpace.constant = 190;
     }else if (iPhone5_5s){
-        self.toRightSpace.constant = 210;
+        self.toRightSpace.constant = 190;
     }else if (iPhone6_6s){
-        self.toRightSpace.constant = 260;
+        self.toRightSpace.constant = 240;
     }else{
-        self.toRightSpace.constant = 300;
+        self.toRightSpace.constant = 280;
         
     }
     

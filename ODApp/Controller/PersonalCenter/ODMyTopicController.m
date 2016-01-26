@@ -270,18 +270,24 @@
           
                 [self.firstUserArray addObject:model];
             }
+            
+            [self.firstCollectionView.mj_header endRefreshing];
+            [self.firstCollectionView.mj_footer endRefreshing];
+            if (self.FirstDataArray.count == 0) {
+                self.noResultLeftLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.scrollView addSubview:self.noResultLeftLabel];
+            }
+            
+            else{
+                [self.firstCollectionView reloadData];
+            }
+            if (bbs_list.count == 0) {
+                [self.firstCollectionView.mj_footer noticeNoMoreData];
+            }
+            
         }
         
-        [self.firstCollectionView.mj_header endRefreshing];
-        [self.firstCollectionView.mj_footer endRefreshing];
-        if (self.FirstDataArray.count == 0) {
-            self.noResultLeftLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.scrollView addSubview:self.noResultLeftLabel];
-        }
         
-        else{
-            [self.firstCollectionView reloadData];
-        }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -341,18 +347,23 @@
                 
                 [self.secondUserArray addObject:model];
             }
+            [self.secondCollectionView.mj_header endRefreshing];
+            [self.secondCollectionView.mj_footer endRefreshing];
+            if (self.secondDataArray.count == 0) {
+                self.noReusltRightLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2 + kScreenSize.width, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.scrollView addSubview:self.noReusltRightLabel];
+            }
+            
+            else{
+                [self.secondCollectionView reloadData];
+            }
+            
+            if (bbs_list.count == 0) {
+                [self.secondCollectionView.mj_footer noticeNoMoreData];
+            }
         }
         
-        [self.secondCollectionView.mj_header endRefreshing];
-        [self.secondCollectionView.mj_footer endRefreshing];
-        if (self.secondDataArray.count == 0) {
-            self.noReusltRightLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2 + kScreenSize.width, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.scrollView addSubview:self.noReusltRightLabel];
-        }
         
-        else{
-            [self.secondCollectionView reloadData];
-        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -376,7 +387,15 @@
         ODCommunityModel *userModel = self.firstUserArray[0];
         ODCommunityModel *detailModel = self.FirstDataArray[indexPath.row];
         cell.nameLabel.text = userModel.nick;
-        [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+        
+        
+        
+        
+        [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+        
+
+        
+        
         cell.titleLabel.text = detailModel.title;
         cell.contentLabel.text = detailModel.content;
         NSString *count = [NSString stringWithFormat:@"%@" , detailModel.view_num];
@@ -387,7 +406,8 @@
         ODCommunityModel *userModel = self.secondUserArray[0];
         ODCommunityModel *detailModel = self.secondDataArray[indexPath.row];
         cell.nameLabel.text = userModel.nick;
-        [cell.headButton sd_setBackgroundImageWithURL:[NSURL URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+        [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+        
         cell.titleLabel.text = detailModel.title;
         cell.contentLabel.text = detailModel.content;
         NSString *count = [NSString stringWithFormat:@"%@" , detailModel.view_num];
@@ -442,7 +462,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return CGSizeMake(kScreenSize.width , 140);
+    return CGSizeMake(kScreenSize.width , 120);
     
 }
 //动态设置每个分区的缩进量

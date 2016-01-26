@@ -147,8 +147,11 @@
         cell.userImageView.layer.borderWidth = 1;
         
         
+        
+             
         [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.avatar]];
         [cell.qrcodeImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.qrcode]];
+
         
 
         if ([self.model.nick isEqualToString:@""]) {
