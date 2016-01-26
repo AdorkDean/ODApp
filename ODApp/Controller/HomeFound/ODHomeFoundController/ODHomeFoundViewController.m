@@ -311,7 +311,7 @@
     [cell.headButton addTarget:self action:@selector(headButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     cell.nameLabel.text = [userInfoDic[userId]nick];
-    [cell.headButton sd_setBackgroundImageWithURL: [NSURL URLWithString:[userInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
+    [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[userInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
 
     return cell;
 }

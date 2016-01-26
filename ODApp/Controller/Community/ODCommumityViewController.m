@@ -174,7 +174,7 @@
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
             
-            if (result.count == 0) {
+            if (bbs_list.count == 0) {
                 [weakSelf.collectionView.mj_footer noticeNoMoreData];
             }
         }
@@ -223,7 +223,7 @@
     [cell showDateWithModel:model];
     NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     cell.nameLabel.text = [userInfoDic[userId]nick];
-    [cell.headButton sd_setBackgroundImageWithURL: [NSURL URLWithString:[userInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
+    [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[userInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
     return cell;
 }
 

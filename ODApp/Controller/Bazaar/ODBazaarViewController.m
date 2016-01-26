@@ -233,7 +233,7 @@
             [self.collectionView.mj_header endRefreshing];
             [self.collectionView.mj_footer endRefreshing];
             
-            if (result.count == 0) {
+            if (tasks.count == 0) {
                 [weakSelf.collectionView.mj_footer noticeNoMoreData];
             }
         }

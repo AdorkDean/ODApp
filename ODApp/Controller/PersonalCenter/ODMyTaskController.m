@@ -460,7 +460,7 @@
             [self.firstCollectionView.mj_header endRefreshing];
             [self.firstCollectionView.mj_footer endRefreshing];
             
-            if (result.count == 0) {
+            if (tasks.count == 0) {
                 [self.firstCollectionView.mj_footer noticeNoMoreData];
             }
         }
@@ -511,23 +511,19 @@
                 [self.secondDataArray addObject:model];
             }
             
+            if (self.secondDataArray.count == 0) {
+                self.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40 + self.scrollView.frame.size.width, self.scrollView.center.y / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.scrollView addSubview:self.secondLabel];
+            }
             
+            [self.secondCollectionView.mj_header endRefreshing];
+            [self.secondCollectionView.mj_footer endRefreshing];
+            [self.secondCollectionView reloadData];
             
+            if (tasks.count == 0) {
+                [self.secondCollectionView.mj_footer noticeNoMoreData];
+            }
         }
-        
-        
-        
-        if (self.secondDataArray.count == 0) {
-           self.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40 + self.scrollView.frame.size.width, self.scrollView.center.y / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.scrollView addSubview:self.secondLabel];
-        }
-        
-        
-        [self.secondCollectionView.mj_header endRefreshing];
-        [self.secondCollectionView.mj_footer endRefreshing];
-        [self.secondCollectionView reloadData];
-
-        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -564,7 +560,10 @@
         
         
         
-        [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
+      
+        
+        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
+
         
         cell.nickLabel.text = model.user_nick;
         cell.titleLabel.text = model.title;
@@ -611,7 +610,7 @@
         
         
         
-        [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
+        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
         
         cell.nickLabel.text = model.user_nick;
         cell.titleLabel.text = model.title;

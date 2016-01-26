@@ -21,15 +21,10 @@
 @property(nonatomic,strong)UILabel *topicContentLabel;
 @property(nonatomic,strong)UIButton *addPicButton;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic)NSInteger count;
-@property(nonatomic,strong)UIImage *image;
-@property(nonatomic,copy)NSString *imgsString;
+@property(nonatomic,strong)NSMutableArray *imageArray;
+@property(nonatomic,strong)NSMutableArray *strArray;
 @property(nonatomic,copy)void(^myBlock)(NSString *refresh);
 
-@property (nonatomic, strong) UIImageView *imageView;
 
-@property (nonatomic, strong) UIButton *deletePicButton;
-
-@property (nonatomic, assign) float width;
 
 @end

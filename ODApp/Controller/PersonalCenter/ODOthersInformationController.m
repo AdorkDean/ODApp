@@ -99,8 +99,8 @@
         cell.userImageView.layer.borderWidth = 1;
         
         
-        [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:self.model.avatar]];
-        [cell.qrcodeImageView sd_setImageWithURL:[NSURL URLWithString:self.model.qrcode]];
+        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.avatar]];
+        [cell.qrcodeImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.qrcode]];
         
         [cell.qrcodeImageView removeFromSuperview];
         [cell.centerImageView removeFromSuperview];
