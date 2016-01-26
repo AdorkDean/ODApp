@@ -270,18 +270,24 @@
           
                 [self.firstUserArray addObject:model];
             }
+            
+            [self.firstCollectionView.mj_header endRefreshing];
+            [self.firstCollectionView.mj_footer endRefreshing];
+            if (self.FirstDataArray.count == 0) {
+                self.noResultLeftLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.scrollView addSubview:self.noResultLeftLabel];
+            }
+            
+            else{
+                [self.firstCollectionView reloadData];
+            }
+            if (bbs_list.count == 0) {
+                [self.firstCollectionView.mj_footer noticeNoMoreData];
+            }
+            
         }
         
-        [self.firstCollectionView.mj_header endRefreshing];
-        [self.firstCollectionView.mj_footer endRefreshing];
-        if (self.FirstDataArray.count == 0) {
-            self.noResultLeftLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.scrollView addSubview:self.noResultLeftLabel];
-        }
         
-        else{
-            [self.firstCollectionView reloadData];
-        }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -341,18 +347,23 @@
                 
                 [self.secondUserArray addObject:model];
             }
+            [self.secondCollectionView.mj_header endRefreshing];
+            [self.secondCollectionView.mj_footer endRefreshing];
+            if (self.secondDataArray.count == 0) {
+                self.noReusltRightLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2 + kScreenSize.width, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.scrollView addSubview:self.noReusltRightLabel];
+            }
+            
+            else{
+                [self.secondCollectionView reloadData];
+            }
+            
+            if (bbs_list.count == 0) {
+                [self.secondCollectionView.mj_footer noticeNoMoreData];
+            }
         }
         
-        [self.secondCollectionView.mj_header endRefreshing];
-        [self.secondCollectionView.mj_footer endRefreshing];
-        if (self.secondDataArray.count == 0) {
-            self.noReusltRightLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2 + kScreenSize.width, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [self.scrollView addSubview:self.noReusltRightLabel];
-        }
         
-        else{
-            [self.secondCollectionView reloadData];
-        }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

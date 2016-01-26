@@ -143,6 +143,10 @@
             else{
                 [self.collectionView reloadData];
             }
+            
+            if (dic.count == 0) {
+                [self.collectionView.mj_footer noticeNoMoreData];
+            }
  
         }
    
