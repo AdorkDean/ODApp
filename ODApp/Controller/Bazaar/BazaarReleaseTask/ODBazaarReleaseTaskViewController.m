@@ -60,40 +60,8 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
-    NSString *startDate = self.startDateLabel.text;
-    NSString *endDate = self.endDateLabel.text;
-    NSComparisonResult dateResult =[startDate compare:endDate];
-    
-    NSString *startTime = self.startTimeLabel.text;
-    NSString *endTime = self.endTimeLabel.text;
-    NSComparisonResult timeResult = [startTime compare:endTime];
-    
-    
     if (self.titleTextView.text.length>0&&self.taskDetailTextView.text.length>0) {
-        if (dateResult == NSOrderedDescending){
-            [self createUIAlertControllerWithTitle:@"结束日期不得早于开始日期"];
-        }
-        else if ([self.endDateLabel.text compare:[self getCurrentDate:NO]]== NSOrderedAscending){
-            [self createUIAlertControllerWithTitle:@"开始日期不能早于当前日期"];
-        }
-        else if (dateResult == NSOrderedSame){
-        
-            if (timeResult == NSOrderedDescending || timeResult == NSOrderedSame){
-                [self createUIAlertControllerWithTitle:@"结束时间不得早于开始时间"];
-            }
-            else if ([self.startTimeLabel.text compare:[self getCurrentDate:NO]]!= NSOrderedDescending){
-                [self createUIAlertControllerWithTitle:@"开始时间不能早于当前时间"];
-            }
-            else{
-                [self joiningTogetherParmeters];
-            }
-        }
-        
-        else{
-            [self joiningTogetherParmeters];
-        }
-
-
+        [self joiningTogetherParmeters];
     }else{
         if (self.titleTextView.text.length == 0) {
             [self createUIAlertControllerWithTitle:@"请输入任务标题"];
@@ -101,20 +69,6 @@
             [self createUIAlertControllerWithTitle:@"请输入任务内容"];
         }
     }
-}
-
-//获取当前时间
-- (NSString *)getCurrentDate:(BOOL)isDate
-{
-    NSDate *currentDate = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    if (isDate) {
-        [dateFormatter setDateFormat:@"  yyyy-MM-dd"];
-    }else{
-        [dateFormatter setDateFormat:@"  HH:mm"];
-    }
-    self.currentDateStr = [dateFormatter stringFromDate:currentDate];
-    return self.currentDateStr;
 }
 
 #pragma mark - 创建scrollView
@@ -150,14 +104,30 @@
     }
     
     NSDate *currentDate = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    NSString *dateString = [dateFormatter stringFromDate:currentDate];
+    NSTimeInterval timeInterval = [currentDate timeIntervalSince1970];
+    NSTimeInterval startTime = timeInterval + 1800;
+    NSTimeInterval endTime = timeInterval + 86400;
     
-    NSDateFormatter *timeFormatter = [[NSDateFormatter alloc]init];
-    [timeFormatter setDateFormat:@"HH:mm"];
-    NSString *timeString = [timeFormatter stringFromDate:currentDate];
+    //开始
+    NSDate *startDate = [NSDate dateWithTimeIntervalSince1970:startTime];
+    NSDateFormatter *startDateFormatter = [[NSDateFormatter alloc]init];
+    [startDateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *startDateString = [startDateFormatter stringFromDate:startDate];
     
+    NSDateFormatter *startTimeFormatter = [[NSDateFormatter alloc]init];
+    [startTimeFormatter setDateFormat:@"HH:mm"];
+    NSString *startTimeString = [startTimeFormatter stringFromDate:startDate];
+    
+    //结束
+    NSDate *endDate = [NSDate dateWithTimeIntervalSince1970:endTime];
+    NSDateFormatter *endDateFormatter = [[NSDateFormatter alloc]init];
+    [endDateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *endDateString = [endDateFormatter stringFromDate:endDate];
+    
+    NSDateFormatter *endTimeFormatter = [[NSDateFormatter alloc]init];
+    [endTimeFormatter setDateFormat:@"HH:mm"];
+    NSString *endTimeString = [endTimeFormatter stringFromDate:endDate];
+
     //开始日期label
     UITapGestureRecognizer *startDateGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(startDateGestureClick)];
     UIView *startDateView = [ODClassMethod creatViewWithFrame:CGRectMake(8+3.5*width, 148, 5*width, 30.5) tag:0 color:@"#ffffff"];
@@ -168,7 +138,7 @@
     startDateView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
     [self.scrollView addSubview:startDateView];
     
-    self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",dateString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+    self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",startDateString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [startDateView addSubview:self.startDateLabel];
     
     
@@ -178,6 +148,7 @@
     [startDateView addSubview:startDateImageView];
     
     //结束日期label
+//     NSDate *nextDat = [NSDate dateWithTimeInterval:24*60*60 sinceDate:date];
     UITapGestureRecognizer *endDateGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(endDateGestureClick)];
     UIView *endDateView = [ODClassMethod creatViewWithFrame:CGRectMake(8+3.5*width, 182.5, 5*width, 30.5) tag:0 color:@"#ffffff"];
     [endDateView addGestureRecognizer:endDateGesture];
@@ -187,7 +158,7 @@
     endDateView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
     [self.scrollView addSubview:endDateView];
     
-    self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",dateString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+    self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",endDateString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [endDateView addSubview:self.endDateLabel];
     
     UIView *endDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
@@ -204,7 +175,7 @@
     startTimeView.layer.borderWidth = 1;
     startTimeView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
     [self.scrollView addSubview:startTimeView];
-    self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",timeString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+    self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",startTimeString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [startTimeView addSubview:self.startTimeLabel];
     
     UIView *startTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
@@ -223,7 +194,7 @@
     endTimeView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
     [self.scrollView addSubview:endTimeView];
     
-    self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",timeString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+    self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",endTimeString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [endTimeView addSubview:self.endTimeLabel];
     UIView *endTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
     [endTimeView addSubview:endTimeLineView];
@@ -374,6 +345,7 @@
 -(void)createRequest
 {
     self.manager = [AFHTTPRequestOperationManager manager];
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 }
 
 
@@ -389,7 +361,6 @@
     }
   
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSLog(@"%@",signParameter);
     [self pushDataWithUrl:kBazaarReleaseTaskUrl parameter:signParameter];
 }
 
@@ -397,13 +368,15 @@
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        if ([responseObject[@"status"]isEqualToString:@"success"]) {
+        
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+        NSString *status = dict[@"status"];
+        if ([status isEqualToString:@"success"]) {
             if (self.myBlock) {
                 self.myBlock([NSString stringWithFormat:@"release"]);
             }
-        
+            
             self.isJob = YES;
-        
             if (self.isBazaar == NO) {
                 NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
                 ODTabBarController *tabbar = (ODTabBarController *)self.navigationController.tabBarController;
@@ -427,7 +400,9 @@
             else{
                 [self.navigationController popViewControllerAnimated:YES];
             }
-
+        }else{
+            NSString *message = dict[@"message"];
+            [self createUIAlertControllerWithTitle:message];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         

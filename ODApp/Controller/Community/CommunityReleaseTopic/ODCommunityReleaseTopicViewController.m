@@ -171,7 +171,6 @@
 {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
     imagePicker.delegate = self;
-    imagePicker.allowsEditing = YES;
     
     switch (buttonIndex) {
         case 0:
@@ -204,15 +203,12 @@
 {
     NSString *sourceType = info[UIImagePickerControllerMediaType];
     if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
-        UIImage *pickedImage = info[UIImagePickerControllerEditedImage];
-        CGSize imageSize = pickedImage.size;
-        imageSize.height = 200;
-        imageSize.width = 200;
+        UIImage *pickedImage = info[UIImagePickerControllerOriginalImage];
         //图片转化为data
         NSData *imageData;
-        pickedImage = [self imageWithImage:pickedImage scaledToSize:imageSize];
+        pickedImage = [self scaleImage:pickedImage];;
         if (UIImagePNGRepresentation(pickedImage)==nil) {
-            imageData = UIImageJPEGRepresentation(pickedImage,0.5);
+            imageData = UIImageJPEGRepresentation(pickedImage,0.4);
         }else{
             imageData = UIImagePNGRepresentation(pickedImage);
         }
@@ -220,7 +216,7 @@
         NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
         [self.imageArray addObject:pickedImage];
         [self createParameter:strData];
-        [self reloadImageButtons];
+        
     }
      [picker dismissViewControllerAnimated:YES completion:nil];
 }
@@ -238,11 +234,13 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
             NSString *str = result[@"File"];
             [self.strArray addObject:str];
+            [self reloadImageButtons];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"error");
@@ -250,13 +248,18 @@
 }
 
 //压缩尺寸
--(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
+-(UIImage *) scaleImage:(UIImage *)image
 {
-    UIGraphicsBeginImageContext(newSize);
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    CGSize size = CGSizeMake(image.size.width * 0.4, image.size.height * 0.4);
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    transform = CGAffineTransformScale(transform,0.4, 0.4);
+    CGContextConcatCTM(context, transform);
+    [image drawAtPoint:CGPointMake(0.0f, 0.0f)];
+    UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return newImage;
+    return newimg;
 }
 
 - (void)reloadImageButtons
@@ -331,7 +334,6 @@
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"%@",responseObject);
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             if (self.myBlock) {
                 self.myBlock([NSString stringWithFormat:@"refresh"]);
