@@ -13,7 +13,7 @@
 #import "AFNetworking.h"
 
 
-@interface ODCommunityReleaseTopicViewController : ODBaseViewController<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
+@interface ODCommunityReleaseTopicViewController : ODBaseViewController<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate, MBProgressHUDDelegate>
 
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UITextView *titleTextView;
@@ -26,6 +26,8 @@
 @property(nonatomic,strong)NSMutableArray *strArray;
 @property(nonatomic,copy)void(^myBlock)(NSString *refresh);
 
+@property (nonatomic, strong) UIImage *pickedImage;
 
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
