@@ -210,7 +210,7 @@
     
     vc.topTitle = @"忘记密码";
     
-    [self.navigationController pushViewController:vc animated:YES];
+    [self presentViewController:vc animated:YES completion:nil];
     
 }
 
@@ -236,7 +236,7 @@
 - (void)registered:(UIButton *)sender
 {
     ODRegisteredController *vc = [[ODRegisteredController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
 

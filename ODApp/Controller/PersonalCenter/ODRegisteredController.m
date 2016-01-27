@@ -204,7 +204,7 @@
 -(void)fanhui:(UIButton *)sender
 {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - 创建提示信息
