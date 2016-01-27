@@ -78,6 +78,7 @@ void UncaughtExceptionHandler(NSException *exception)
 - (void)gotoMain
 {
     [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"isRuned"];
+    
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *openId = [user objectForKey:@"userOpenId"];
     [ODUserInformation getData].openID = openId;

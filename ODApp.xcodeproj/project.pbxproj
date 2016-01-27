@@ -24,6 +24,7 @@
 		9D68D8271C43832D00BD3FD2 /* ODTopicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D68D8251C43832D00BD3FD2 /* ODTopicCell.m */; };
 		9D68D8281C43832D00BD3FD2 /* ODTopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D68D8261C43832D00BD3FD2 /* ODTopicCell.xib */; };
 		9D69B5401C3A3993009039A4 /* ODActivityHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69B53F1C3A3993009039A4 /* ODActivityHeadView.m */; };
+		9D85CD8D1C578031008525FD /* ODTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D85CD8C1C578031008525FD /* ODTopicModel.m */; };
 		9DD00BC51C4E393300F0EE5F /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DD00BA41C4E393300F0EE5F /* UMSocialLocalizable.strings */; };
 		9DD00BC61C4E393300F0EE5F /* libUMSocial_Sdk_4.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BB21C4E393300F0EE5F /* libUMSocial_Sdk_4.4.a */; };
 		9DD00BC71C4E393300F0EE5F /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DD00BB41C4E393300F0EE5F /* UMSCommentDetailController.xib */; };
@@ -403,6 +404,8 @@
 		9D68D8261C43832D00BD3FD2 /* ODTopicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODTopicCell.xib; sourceTree = "<group>"; };
 		9D69B53E1C3A3993009039A4 /* ODActivityHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityHeadView.h; sourceTree = "<group>"; };
 		9D69B53F1C3A3993009039A4 /* ODActivityHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityHeadView.m; sourceTree = "<group>"; };
+		9D85CD8B1C578031008525FD /* ODTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTopicModel.h; sourceTree = "<group>"; };
+		9D85CD8C1C578031008525FD /* ODTopicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTopicModel.m; sourceTree = "<group>"; };
 		9DD00BA51C4E393300F0EE5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
 		9DD00BA71C4E393300F0EE5F /* UMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocial.h; sourceTree = "<group>"; };
 		9DD00BA81C4E393300F0EE5F /* UMSocialAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialAccountManager.h; sourceTree = "<group>"; };
@@ -1803,6 +1806,8 @@
 				B83C38ED1C48A0E9007B16FB /* ODMyTaskController.m */,
 				B83C38EE1C48A0E9007B16FB /* ODMyTopicController.h */,
 				B83C38EF1C48A0E9007B16FB /* ODMyTopicController.m */,
+				9D85CD8B1C578031008525FD /* ODTopicModel.h */,
+				9D85CD8C1C578031008525FD /* ODTopicModel.m */,
 				B83C38F01C48A0E9007B16FB /* ODPersonalCenterViewController.h */,
 				B83C38F11C48A0E9007B16FB /* ODPersonalCenterViewController.m */,
 				B83C38F21C48A0E9007B16FB /* ODRegisteredController.h */,
@@ -2614,6 +2619,7 @@
 				D425DA201C4E1F7E00BDD2AE /* IQUIView+Hierarchy.m in Sources */,
 				D425DA2D1C4E1F7E00BDD2AE /* TAAbstractDotView.m in Sources */,
 				B83C39411C48A0E9007B16FB /* ODMyApplyActivityController.m in Sources */,
+				9D85CD8D1C578031008525FD /* ODTopicModel.m in Sources */,
 				B83C393F1C48A0E9007B16FB /* ODInformationController.m in Sources */,
 				B80E0BF41C4751AE00F36A17 /* ONMyApplyActivityCell.m in Sources */,
 				B83C393E1C48A0E9007B16FB /* ODChangePassWordController.m in Sources */,
