@@ -217,7 +217,7 @@
   
     ODBazaarModel *model = self.dataArray[indexPath.row];
   
-    [cell.userImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar]];
+    [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
         
         cell.nickLabel.text = model.user_nick;
         cell.titleLabel.text = model.title;

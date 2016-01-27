@@ -26,17 +26,21 @@
 @property (nonatomic , assign) NSInteger firstPage;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *firstManager;
 @property (nonatomic, strong) NSMutableArray *FirstDataArray;
-@property (nonatomic, strong) NSMutableArray *firstUserArray;
-@property (nonatomic , copy) NSString *type;
+@property (nonatomic , strong) NSMutableDictionary *firstUserInfoDic;
+@property (nonatomic , strong) UILabel *firstLabel;
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *secondFlowLayout;
 @property (nonatomic , strong) UICollectionView *secondCollectionView;
 @property (nonatomic , assign) NSInteger secondPage;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *secondManager;
 @property (nonatomic, strong) NSMutableArray *secondDataArray;
-@property (nonatomic, strong) NSMutableArray *secondUserArray;
+@property (nonatomic , strong) NSMutableDictionary *secondUserInfoDic;
+@property (nonatomic , strong) UILabel *secondLabel;
 
+@property (nonatomic , copy) NSString *type;
 @property (nonatomic, copy) NSString *openID;
+
+
 
 @end
 
@@ -50,9 +54,13 @@
     self.secondPage = 1;
     
     self.FirstDataArray = [NSMutableArray array];
-    self.firstUserArray = [NSMutableArray array];
     self.secondDataArray = [NSMutableArray array];
-    self.secondUserArray = [NSMutableArray array];
+    self.firstUserInfoDic = [[NSMutableDictionary alloc] init];
+    self.secondUserInfoDic = [[NSMutableDictionary alloc] init];
+    
+    
+    
+    self.open_id = [ODUserInformation getData].openID;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -227,74 +235,67 @@
     
     self.firstManager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"type":@"1",@"page":countNumber , @"open_id":self.open_id};
+    NSDictionary *parameters = @{ @"type":@"1",@"page":countNumber , @"city_id":@"321" ,@"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/bbs/list";
     
-    [self.firstManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
+    __weak typeof (self)weakSelf = self;
+    [self.firstManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
         
         if ([countNumber isEqualToString:@"1"]) {
-            [self.FirstDataArray removeAllObjects];
-            [self.firstUserArray removeAllObjects];
-            [self.noResultLeftLabel removeFromSuperview];
+            [weakSelf.FirstDataArray removeAllObjects];
+            [weakSelf.firstLabel removeFromSuperview];
+            [weakSelf.secondUserInfoDic removeAllObjects];
         }
- 
+        
         if (responseObject) {
-            
-            NSMutableDictionary *result = responseObject[@"result"];
-            NSMutableDictionary *bbs_list = result[@"bbs_list"];
-            
+            NSDictionary *result = responseObject[@"result"];
+            NSDictionary *bbs_list = result[@"bbs_list"];
             NSArray *allkeys = [bbs_list allKeys];
             allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                 NSComparisonResult result = [obj1 compare:obj2];
                 return result == NSOrderedAscending;
             }];
             
+            
             for (id bbsKey in allkeys) {
                 NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
-                NSMutableDictionary *itemDict = bbs_list[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc] init];
-                
+                NSDictionary *itemDict = bbs_list[key];
+                ODCommunityModel *model = [[ODCommunityModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
-        
-                [self.FirstDataArray addObject:model];
+                [weakSelf.FirstDataArray addObject:model];
             }
             
-            NSMutableDictionary *users = result[@"users"];
+            NSDictionary *users = result[@"users"];
             for (id userKey in users) {
                 NSString *key = [NSString stringWithFormat:@"%@",userKey];
-                NSMutableDictionary *itemDict = users[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc] init];
+                NSDictionary *itemDict = users[key];
+                ODCommunityModel *model = [[ODCommunityModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
-          
-                [self.firstUserArray addObject:model];
+                [self.firstUserInfoDic setObject:model forKey:userKey];
             }
-            
-            [self.firstCollectionView.mj_header endRefreshing];
-            [self.firstCollectionView.mj_footer endRefreshing];
             if (self.FirstDataArray.count == 0) {
-                self.noResultLeftLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [self.scrollView addSubview:self.noResultLeftLabel];
+                self.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40, self.scrollView.center.y / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.scrollView addSubview:self.firstLabel];
             }
-            
-            else{
-                [self.firstCollectionView reloadData];
-            }
-            if (bbs_list.count == 0) {
-                [self.firstCollectionView.mj_footer noticeNoMoreData];
-            }
-            
-        }
-        
-        
 
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [weakSelf.firstCollectionView reloadData];
+            [weakSelf.firstCollectionView.mj_header endRefreshing];
+            [weakSelf.firstCollectionView.mj_footer endRefreshing];
+            
+            if (bbs_list.count == 0) {
+                [weakSelf.firstCollectionView.mj_footer noticeNoMoreData];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         [self.firstCollectionView.mj_header endRefreshing];
         [self.firstCollectionView.mj_footer endRefreshing];
-        
     }];
+    
 }
 
 -(void)secondGetData
@@ -304,72 +305,70 @@
     
     self.secondManager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"type":@"2",@"page":countNumber , @"open_id":self.open_id};
+    NSDictionary *parameters = @{ @"type":@"2",@"page":countNumber, @"city_id":@"321" , @"open_id":self.open_id  , @"call_array":@"1"};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/bbs/list";
     
-    [self.secondManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    __weak typeof (self)weakSelf = self;
+    [self.secondManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        if (responseObject) {
-            
-            if ([countNumber isEqualToString:@"1"]) {
-                [self.secondDataArray removeAllObjects];
-                [self.secondUserArray removeAllObjects];
-                [self.noReusltRightLabel removeFromSuperview];
-            }
-            
-            NSMutableDictionary *result = responseObject[@"result"];
-            NSMutableDictionary *bbs_list = result[@"bbs_list"];
-            
-            NSArray *allkeys = [bbs_list allKeys];
-            allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                NSComparisonResult result = [obj1 compare:obj2];
-                return result == NSOrderedDescending;
-            }];
-            
-            for (id bbsKey in allkeys) {
-                NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
-                NSMutableDictionary *itemDict = bbs_list[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc] init];
-                
-                [model setValuesForKeysWithDictionary:itemDict];
-                
-                [self.secondDataArray addObject:model];
-            }
-            
-            NSMutableDictionary *users = result[@"users"];
-            for (id userKey in users) {
-                NSString *key = [NSString stringWithFormat:@"%@",userKey];
-                NSMutableDictionary *itemDict = users[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc] init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                
-                [self.secondUserArray addObject:model];
-            }
-            [self.secondCollectionView.mj_header endRefreshing];
-            [self.secondCollectionView.mj_footer endRefreshing];
-            if (self.secondDataArray.count == 0) {
-                self.noReusltRightLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2 + kScreenSize.width, (kScreenSize.height - 102)/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [self.scrollView addSubview:self.noReusltRightLabel];
-            }
-            
-            else{
-                [self.secondCollectionView reloadData];
-            }
-            
-            if (bbs_list.count == 0) {
-                [self.secondCollectionView.mj_footer noticeNoMoreData];
-            }
+        
+        if ([countNumber isEqualToString:@"1"]) {
+            [weakSelf.secondDataArray removeAllObjects];
+            [weakSelf.secondLabel removeFromSuperview];
+            [weakSelf.secondUserInfoDic removeAllObjects];
         }
         
         
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (responseObject) {
+            NSDictionary *result = responseObject[@"result"];
+            NSDictionary *bbs_list = result[@"bbs_list"];
+            NSDictionary *users = result[@"users"];
+            
+            
+            
+            for (NSMutableDictionary *dic in bbs_list) {
+                
+                
+                
+                ODCommunityModel *model = [[ODCommunityModel alloc]init];
+                [model setValuesForKeysWithDictionary:dic];
+                [weakSelf.secondDataArray addObject:model];
+            }
+            
+            
+            for (id userKey in users) {
+                NSString *key = [NSString stringWithFormat:@"%@",userKey];
+                NSDictionary *itemDict = users[key];
+                ODCommunityModel *model = [[ODCommunityModel alloc]init];
+                [model setValuesForKeysWithDictionary:itemDict];
+                [self.secondUserInfoDic setObject:model forKey:userKey];
+            }
+            
+            
+            
+            
+            
+            if (self.secondDataArray.count == 0) {
+                self.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40 + self.scrollView.frame.size.width, self.scrollView.center.y / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [self.scrollView addSubview:self.secondLabel];
+            }
+
+            
+            [weakSelf.secondCollectionView reloadData];
+            [weakSelf.secondCollectionView.mj_header endRefreshing];
+            [weakSelf.secondCollectionView.mj_footer endRefreshing];
+            
+            if (bbs_list.count == 0) {
+                [weakSelf.secondCollectionView.mj_footer noticeNoMoreData];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         [self.secondCollectionView.mj_header endRefreshing];
         [self.secondCollectionView.mj_footer endRefreshing];
-        
     }];
 }
 
@@ -384,34 +383,27 @@
     cell.backgroundColor = [UIColor whiteColor];
     
     if (collectionView.tag == 111) {
-        ODCommunityModel *userModel = self.firstUserArray[0];
-        ODCommunityModel *detailModel = self.FirstDataArray[indexPath.row];
-        cell.nameLabel.text = userModel.nick;
+        ODCommunityModel *model = self.FirstDataArray[indexPath.row];
+        cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         
-        
-        
-        
-        [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
-        
+        [cell showDateWithModel:model];
+        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+        cell.nameLabel.text = [self.firstUserInfoDic[userId]nick];
+        [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.firstUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
 
-        
-        
-        cell.titleLabel.text = detailModel.title;
-        cell.contentLabel.text = detailModel.content;
-        NSString *count = [NSString stringWithFormat:@"%@" , detailModel.view_num];
-        cell.countLabel.text = [NSString stringWithFormat:@"浏览次数:%@" , count];
         
     }else if (collectionView.tag == 222) {
         
-        ODCommunityModel *userModel = self.secondUserArray[0];
-        ODCommunityModel *detailModel = self.secondDataArray[indexPath.row];
-        cell.nameLabel.text = userModel.nick;
-        [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+        ODCommunityModel *model = self.secondDataArray[indexPath.row];
+        cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         
-        cell.titleLabel.text = detailModel.title;
-        cell.contentLabel.text = detailModel.content;
-        NSString *count = [NSString stringWithFormat:@"%@" , detailModel.view_num];
-        cell.countLabel.text = [NSString stringWithFormat:@"浏览次数:%@" , count];
+        [cell showDateWithModel:model];
+        
+        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+        cell.nameLabel.text = [self.secondUserInfoDic[userId]nick];
+        [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.secondUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
+        
+
 
     }
     

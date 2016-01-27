@@ -355,6 +355,8 @@
             cell.timeLabelSpace.constant = 13;
         }
     }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell.deleteButton addTarget:self action:@selector(cellDeleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     self.height = 40+height+22+26;
     return cell;
@@ -364,6 +366,7 @@
 {
     return self.height;
 }
+
 
 -(void)replyButtonClick:(UIButton *)button
 {

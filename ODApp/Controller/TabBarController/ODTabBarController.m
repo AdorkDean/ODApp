@@ -23,11 +23,11 @@
 
 - (void)createViewControllers
 {
-    NSArray *controllerArray = @[@"HomeFound",@"CenterActivity",@"Bazaar",@"Commumity",@"PersonalCenter"];
+    NSArray *controllerArray = @[@"HomeFoundViewController",@"CenterActivityViewController",@"BazaarViewController",@"CommumityViewController",@"LandMainController"];
     NSMutableArray *mArray = [[NSMutableArray alloc]init];
     for (NSInteger i = 0; i < controllerArray.count; i++) {
         
-        NSString * str = [NSString stringWithFormat:@"OD%@ViewController",controllerArray[i]];
+        NSString * str = [NSString stringWithFormat:@"OD%@",controllerArray[i]];
         Class vcClass = NSClassFromString(str);
         UIViewController *controller = [[vcClass alloc]init];
         UINavigationController *navController = [[UINavigationController alloc]initWithRootViewController:controller];
@@ -52,11 +52,11 @@
         
         //此处必须用UIButtonTypeCustom
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-//        button.frame = CGRectMake(0.5 * space + (30+space)*i, 5, 30, 30);
+        //        button.frame = CGRectMake(0.5 * space + (30+space)*i, 5, 30, 30);
         button.frame = CGRectMake((kScreenSize.width/5)*i, 0, kScreenSize.width/5, 55);
         button.tag = i+1;
-//        [button setBackgroundImage:[[UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-//        [button setBackgroundImage:[[UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateSelected];
+        //        [button setBackgroundImage:[[UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+        //        [button setBackgroundImage:[[UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateSelected];
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.imageView addSubview:button];
         
@@ -84,16 +84,31 @@
     
     NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
     NSInteger index = button.tag-1;
-    button.selected = YES;
-    self.selectedIndex = index;
-    if (index != 4)
+    if (index == 4 && [[ODUserInformation getData].openID isEqualToString:@""])
     {
-        self.currentIndex = self.selectedIndex;
+        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
     }
+    else
+    {
+        self.selectedIndex = index;
+        if (index != 4)
+        {
+            self.currentIndex = self.selectedIndex;
+        }
+    }
+    
+    
+    
+    
     
     for (NSInteger i = 0; i<5; i++) {
         UIButton *newButton= (UIButton *)[self.imageView viewWithTag:1+i];
         UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
+        
+        
+        
+        
         if (i!=index) {
             newButton.selected =NO;
             button.selected = YES;
