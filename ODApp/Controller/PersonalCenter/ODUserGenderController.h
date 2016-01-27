@@ -7,6 +7,7 @@
 //
 
 #import "ODBaseViewController.h"
+#import "ODTabBarController.h"
 
 @interface ODUserGenderController : ODBaseViewController
 

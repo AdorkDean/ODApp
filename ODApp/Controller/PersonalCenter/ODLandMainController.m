@@ -23,7 +23,12 @@
 #import "ODMyOrderRecordController.h"
 #import "ODUserEvaluationController.h"
 #import "UMSocial.h"
-@interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>
+
+
+
+@interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>{
+
+}
 
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
@@ -322,15 +327,8 @@
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             [user setObject:@"" forKey:KUserDefaultsOpenId];
             
-            
-            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"已退出登录" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
-            [alter show];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [alter dismissWithClickedButtonIndex:0 animated:YES];
-                
-            });
-            
-            
+            [self createProgressHUDWithAlpha:1.0 withAfterDelay:1.0 title:@"已退出登录"];
+           
             tabBar.selectedIndex = tabBar.currentIndex;
             
             NSInteger index = tabBar.selectedIndex;
@@ -351,6 +349,8 @@
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
+
+
 
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

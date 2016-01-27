@@ -350,10 +350,8 @@
                 [self presentViewController:self.imagePicker animated:YES completion:nil];
             }
             else {
-                UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您当前的照相机不可用" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil];
-                [alert addAction:sure];
-                [self presentViewController:alert animated:YES completion:nil];
+                
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
             }
             break;
         case 1:

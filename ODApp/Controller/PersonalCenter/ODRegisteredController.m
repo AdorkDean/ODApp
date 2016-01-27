@@ -11,6 +11,8 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODLandMainController.h"
+
+
 @interface ODRegisteredController ()<UITextFieldDelegate>
 
 @property(nonatomic , strong) UIView *headView;
@@ -144,19 +146,15 @@
 - (void)registere:(UIButton *)sender
 {
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
 
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
+        
     }else if ([self.registView.verification.text isEqualToString:@""]) {
         
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入验证码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入验证码"];
     }else if ([self.registView.password.text isEqualToString:@""]) {
-        
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入密码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
-     
+
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入密码"];
     }
 
     else {
@@ -170,8 +168,9 @@
 {
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
+        
+
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
     }else {
         
         [self getCode];
@@ -201,9 +200,8 @@
 -(void)fanhui:(UIButton *)sender
 {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-
 
 #pragma mark - 请求数据
 -(void)getRegest
@@ -214,12 +212,10 @@
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/register";
 
-    
     self.managers = [AFHTTPRequestOperationManager manager];
     
     [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-     
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
          
             ODLandMainController *vc = [[ODLandMainController alloc] init];
@@ -234,19 +230,14 @@
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             
             if (self.registView.password.text.length < 6 || self.registView.password.text.length > 26 ) {
-                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"密码仅支持6到26位" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-                [alter show];
 
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"密码仅支持6到26位"];
+                
             }else {
-                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-                [alter show];
 
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
             }
-            
-            
-            
-            
-            
+    
         }
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -274,8 +265,8 @@
             [self.timer setFireDate:[NSDate distantPast]];        }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-            [alter show];
+            
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

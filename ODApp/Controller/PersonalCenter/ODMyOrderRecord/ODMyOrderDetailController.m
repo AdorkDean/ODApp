@@ -62,19 +62,13 @@
 
     if ([self.checkLabel.text isEqualToString:@"已取消"] || [self.checkLabel.text isEqualToString:@"后台取消"]) {
         
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"订单已经取消" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"订单已经取消"];
     }else if ([self.checkLabel.text isEqualToString:@"前台已确认"]) {
     
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"订单已生成,请联系客服" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"订单已生成,请联系客服"];
     }else if ([self.checkLabel.text isEqualToString:@"到场已确认"] || [self.checkLabel.text isEqualToString:@"未到场"]) {
     
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"已到活动时间，无需进行取消" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"已到活动时间，无需进行取消"];
     }
     
     else{
@@ -89,6 +83,7 @@
             
             [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                 
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"取消订单成功"];
                 self.checkLabel.text = @"已取消";
                 
             } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

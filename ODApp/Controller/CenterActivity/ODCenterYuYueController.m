@@ -16,7 +16,6 @@
 
 @interface ODCenterYuYueController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate , UITextFieldDelegate , UIPickerViewDataSource , UIPickerViewDelegate>
 
-
 @property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) CenterYuYueView *yuYueView;
@@ -31,6 +30,7 @@
 
 @property (nonatomic  , strong) UIButton *cancelButton;
 @property (nonatomic  , strong) UIButton *queDingButton;
+@property (nonatomic , strong) UILabel *timeLabel;
 @property (nonatomic  , assign) BOOL isBeginTime;
 
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
@@ -68,13 +68,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    
-    
-
-
-    self.isPop = NO;
-
 
     self.timeArray = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
@@ -161,25 +154,6 @@
     
 }
 
-//创建警告框
--(void)createUIAlertControllerWithTitle:(NSString *)title
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-
-
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        if (self.isPop) {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
- 
-    }]];
-
-
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-
 #pragma mark - 懒加载
 - (CenterYuYueView *)yuYueView
 {
@@ -205,9 +179,6 @@
         self.yuYueView.pursoseTextView.delegate=self;
         self.yuYueView.contentTextView.delegate=self;
     
-     
-        
-        
         self.yuYueView.peopleNumberTextField.delegate = self;
      
         
@@ -240,25 +211,22 @@
     
     if ([self.yuYueView.btimeText.titleLabel.text isEqualToString:@"填写开始时间"]) {
         
-        [self createUIAlertControllerWithTitle:@"请选择时间"];
-      
+        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请选择时间"];
 
     }else if ([self.yuYueView.eTimeText.titleLabel.text isEqualToString:@"填写结束时间"]) {
         
-        [self createUIAlertControllerWithTitle:@"请填写结束时间"];
+
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请填写结束时间"];
+    }else if ([self.yuYueView.pursoseTextView.text isEqualToString:@""] || [self.yuYueView.pursoseTextView.text isEqualToString:@"请填写结束时间"]) {
         
-    }else if ([self.yuYueView.pursoseTextView.text isEqualToString:@""] || [self.yuYueView.pursoseTextView.text isEqualToString:@"输入活动目的"]) {
-        
-        [self createUIAlertControllerWithTitle:@"请输入活动目的"];
-        
-    }else if ([self.yuYueView.contentTextView.text isEqualToString:@""] || [self.yuYueView.contentTextView.text isEqualToString:@"输入活动内容"]) {
-        
-       [self createUIAlertControllerWithTitle:@"请输入活动内容"];
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入活动目的"];
+    }else if ([self.yuYueView.contentTextView.text isEqualToString:@""] || [self.yuYueView.contentTextView.text isEqualToString:@"请输入活动目的"]) {
+
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入活动内容"];
     }else if ([self.yuYueView.peopleNumberTextField.text isEqualToString:@""]) {
       
-        [self createUIAlertControllerWithTitle:@"请输入参加人数"];
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入参加人数"];
     } else {
         
         [self getOrderId];
@@ -269,10 +237,6 @@
 
 - (void)getData
 {
-    
-    
-  
-    
     self.timeManager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"store_id":self.storeId , @"start_datetime":self.start_datetime};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
@@ -338,24 +302,32 @@
         
         
         weakSelf.picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 150, kScreenSize.width, 150)];
-        weakSelf.picker.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        weakSelf.picker.backgroundColor = [UIColor whiteColor];
         weakSelf.picker.delegate = weakSelf;
         weakSelf.picker.dataSource = weakSelf;
         
         weakSelf.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        weakSelf.cancelButton.frame = CGRectMake(0, kScreenSize.height - 180, kScreenSize.width / 2, 30);
+        weakSelf.cancelButton.frame = CGRectMake(0, kScreenSize.height - 180, 50, 30);
         [weakSelf.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         weakSelf.cancelButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         [weakSelf.cancelButton addTarget:weakSelf action:@selector(quXiaoAction:) forControlEvents:UIControlEventTouchUpInside];
+        weakSelf.cancelButton.titleLabel.font = [UIFont systemFontOfSize:17];
+        
+        
+        weakSelf.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, kScreenSize.height - 180, kScreenSize.width - 100, 30)];
+        weakSelf.timeLabel.text = @"选择时间";
+        weakSelf.timeLabel.font = [UIFont systemFontOfSize:20];
+        weakSelf.timeLabel.textAlignment = NSTextAlignmentCenter;
+        weakSelf.timeLabel.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         
         
         
         weakSelf.queDingButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        weakSelf.queDingButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 180, kScreenSize.width / 2, 30);
+        weakSelf.queDingButton.frame = CGRectMake(kScreenSize.width - 50, kScreenSize.height - 180, 50, 30);
         [weakSelf.queDingButton setTitle:@"确定" forState:UIControlStateNormal];
         weakSelf.queDingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         [weakSelf.queDingButton addTarget:weakSelf action:@selector(queDingAction:) forControlEvents:UIControlEventTouchUpInside];
-        
+        weakSelf.queDingButton.titleLabel.font = [UIFont systemFontOfSize:17];
         
         
         if (weakSelf.isBeginTime) {
@@ -364,16 +336,14 @@
             weakSelf.yuYueView.eTimeText.userInteractionEnabled = NO;
             [weakSelf.view addSubview: weakSelf.queDingButton];
             [weakSelf.view addSubview: weakSelf.cancelButton];
+             [weakSelf.view addSubview: weakSelf.timeLabel];
             [weakSelf.view addSubview:weakSelf.picker];
             
             
         }else{
             if ([weakSelf.start_datetime isEqualToString:@""]) {
                 
-                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请选择开始时间" message:nil delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alter show];
-                
-                
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请选择开始时间"];
             }else{
                 
                 
@@ -381,6 +351,7 @@
                 weakSelf.yuYueView.eTimeText.userInteractionEnabled = NO;
                 [weakSelf.view addSubview: weakSelf.queDingButton];
                 [weakSelf.view addSubview: weakSelf.cancelButton];
+                 [weakSelf.view addSubview: weakSelf.timeLabel];
                 [weakSelf.view addSubview:weakSelf.picker];
                 
             }
@@ -422,9 +393,7 @@
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            
-            [self createUIAlertControllerWithTitle:responseObject[@"message"]];
-            
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
         
         
@@ -465,23 +434,16 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-
-            self.isPop = YES;
-            [self createUIAlertControllerWithTitle:@"感谢您的预约请等待审核"];
-
-
-              [self createUIAlertControllerWithTitle:@"预约成功"];
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"感谢您的预约请等待审核"];
             
-
+            
+            [self.navigationController popViewControllerAnimated:YES];
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-        [self createUIAlertControllerWithTitle:responseObject[@"message"]];
-            
-                 
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:responseObject[@"message"]];
         }
-        
-        
+  
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         
@@ -614,6 +576,7 @@
     [self.picker removeFromSuperview];
     [self.cancelButton removeFromSuperview];
     [self.queDingButton removeFromSuperview];
+    [self.timeLabel removeFromSuperview];
     
     
     
@@ -707,6 +670,7 @@
     [self.picker removeFromSuperview];
     [self.cancelButton removeFromSuperview];
     [self.queDingButton removeFromSuperview];
+    [self.timeLabel removeFromSuperview];
 }
 
 

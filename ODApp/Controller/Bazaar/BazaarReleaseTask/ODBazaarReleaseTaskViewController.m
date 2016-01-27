@@ -9,7 +9,6 @@
 #import "ODBazaarReleaseTaskViewController.h"
 
 @interface ODBazaarReleaseTaskViewController ()
-
 @end
 
 @implementation ODBazaarReleaseTaskViewController
@@ -64,9 +63,11 @@
         [self joiningTogetherParmeters];
     }else{
         if (self.titleTextView.text.length == 0) {
-            [self createUIAlertControllerWithTitle:@"请输入任务标题"];
+            
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入任务标题"];
         }else if (self.taskDetailTextView.text.length == 0){
-            [self createUIAlertControllerWithTitle:@"请输入任务内容"];
+            
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入任务内容"];
         }
     }
 }
@@ -401,11 +402,15 @@
                 }
             }
             else{
+                
+                
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"任务发布成功"];
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }else{
             NSString *message = dict[@"message"];
-            [self createUIAlertControllerWithTitle:message];
+            
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:message];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -463,14 +468,6 @@
             self.taskDetailLabel.text = @"请输入任务详情";
         }
     }
-}
-
-#pragma mark - 创建提示信息
--(void)createUIAlertControllerWithTitle:(NSString *)title
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

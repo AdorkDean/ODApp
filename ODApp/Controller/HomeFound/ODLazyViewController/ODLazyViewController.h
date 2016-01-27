@@ -13,6 +13,8 @@
 #import "ODBazaarReleaseTaskViewController.h"
 #import "ODUserInformation.h"
 
+#import "ODPersonalCenterViewController.h"
+
 @interface ODLazyViewController : ODBaseViewController<UIScrollViewDelegate>
 
 @property (nonatomic, strong)UIView *headView;

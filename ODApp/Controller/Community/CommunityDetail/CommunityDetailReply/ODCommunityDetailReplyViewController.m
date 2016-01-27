@@ -115,13 +115,13 @@
     [HUD hide:YES afterDelay:0.8];
 }
 
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-    // Remove HUD from screen when the HUD was hidded
-    [HUD removeFromSuperview];
-
-
-    HUD = nil;
-}
+//- (void)hudWasHidden:(MBProgressHUD *)hud {
+//    // Remove HUD from screen when the HUD was hidded
+//    [HUD removeFromSuperview];
+//
+//
+//    HUD = nil;
+//}
 
 #pragma mark - 创建textView
 -(void)createTextView

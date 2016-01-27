@@ -132,10 +132,10 @@
 {
 
     self.isJob = NO;
-    if ([ODUserInformation getData].openID == nil) {
-        ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-        tabBar.selectedIndex = 4;
-
+    if ([[ODUserInformation getData].openID isEqualToString:@""]) {
+       
+        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
     }
     else{
   

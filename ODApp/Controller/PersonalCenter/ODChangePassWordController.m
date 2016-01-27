@@ -11,8 +11,8 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 
-@interface ODChangePassWordController ()<UITextFieldDelegate>
 
+@interface ODChangePassWordController ()<UITextFieldDelegate>
 @property(nonatomic , strong) UIView *headView;
 @property(nonatomic , strong) ODRegisteredView *registView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
@@ -84,14 +84,6 @@
     [self.timer setFireDate:[NSDate distantFuture]];
 }
 
-//创建警告框
--(void)createUIAlertControllerWithTitle:(NSString *)title
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
 
 #pragma mark - 定时器事件
 -(void)timerClick
@@ -144,10 +136,7 @@
         
         self.registView.phoneNumber.delegate = self;
         self.registView.phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
-
-        
-        
-        
+   
     }
     return _registView;
 }
@@ -176,21 +165,15 @@
     
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
+
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
         
     }else if ([self.registView.verification.text isEqualToString:@""]) {
         
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入验证码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
-        
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入验证码"];
     }else if ([self.registView.password.text isEqualToString:@""]) {
         
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入密码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
-        
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入密码"];
     }else {
         [self changePassWord];
 
@@ -203,8 +186,8 @@
     
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
+
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
     }else {
         
         [self getCode];
@@ -234,7 +217,13 @@
 
 -(void)fanhui:(UIButton *)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if ([self.topTitle isEqualToString:@"修改密码"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+         [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+   
 }
 
 
@@ -262,8 +251,7 @@
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             
-            [self createUIAlertControllerWithTitle:responseObject[@"message"]];
-            
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
 
         
@@ -293,7 +281,7 @@
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
            
-            [self createUIAlertControllerWithTitle:responseObject[@"message"]];
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
 
               
@@ -306,7 +294,11 @@
     }];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
 
+    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+    tabBar.imageView.alpha = 0;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
