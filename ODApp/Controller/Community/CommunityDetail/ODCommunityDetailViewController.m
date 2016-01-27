@@ -156,8 +156,10 @@
                 [weakSelf createBBSDetailView];
                 weakSelf.tableView.tableHeaderView = weakSelf.tabelHeaderView;
                 [weakSelf.tableView reloadData];
-                [weakSelf.tableView.mj_header endRefreshing];
-                [weakSelf.tableView.mj_footer endRefreshing];
+
+                
+
+                
             }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -183,6 +185,12 @@
                 [weakSelf.dataArray addObject:model];
             }
             [weakSelf joiningTogetherParmetersWithUserInfo:YES];
+            [weakSelf.tableView.mj_header endRefreshing];
+            [weakSelf.tableView.mj_footer endRefreshing];
+            
+            if (result.count == 0) {
+                [self.tableView.mj_footer noticeNoMoreData];
+            }
         }
 
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

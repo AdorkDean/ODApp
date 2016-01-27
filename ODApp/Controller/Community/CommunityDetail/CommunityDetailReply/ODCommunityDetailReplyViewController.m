@@ -8,7 +8,12 @@
 
 #import "ODCommunityDetailReplyViewController.h"
 
-@interface ODCommunityDetailReplyViewController ()
+@interface ODCommunityDetailReplyViewController (){
+
+    MBProgressHUD *HUD;
+}
+
+
 
 @end
 
@@ -81,13 +86,41 @@
 #pragma mark - 提交数据
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
+    
+
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             [self.navigationController popViewControllerAnimated:YES];
+            
+            [self CreateProgressHud];
+            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"error");
     }];
+}
+
+- (void)CreateProgressHud
+{
+
+    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    HUD.delegate  = self;
+    
+    HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:0.7];
+    HUD.mode = MBProgressHUDModeText;
+    HUD.labelText = @"回复成功";
+    HUD.margin = 8.f;
+    HUD.yOffset = 150.f;
+    HUD.removeFromSuperViewOnHide = YES;
+    [HUD hide:YES afterDelay:0.8];
+}
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    // Remove HUD from screen when the HUD was hidded
+    [HUD removeFromSuperview];
+
+
+    HUD = nil;
 }
 
 #pragma mark - 创建textView

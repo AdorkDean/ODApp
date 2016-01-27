@@ -16,8 +16,5 @@
 
 @property (nonatomic, copy) NSString *open_id;
 
-@property (nonatomic, strong) UILabel *noResultLeftLabel;
-
-@property (nonatomic, strong) UILabel *noReusltRightLabel;
 
 @end
