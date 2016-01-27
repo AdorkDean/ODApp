@@ -9,7 +9,7 @@
 #ifndef Define_h
 #define Define_h
 
-
+#define KUserDefaultsOpenId @"userOpenId"
 #define kBazaarCellId @"ODBazaarCollectionCell"
 #define kBazaarRewardCellId @"ODBazaarRewardCollectionCell"
 #define kBazaarDetailCellId @"ODBazaarDetailCollectionCell"

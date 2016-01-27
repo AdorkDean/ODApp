@@ -38,7 +38,7 @@
     self.pageNumber = 0;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-      
+    
     [self navigationInit];
     
     self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
@@ -46,7 +46,7 @@
     self.returnKeyHandler.toolbarManageBehaviour = IQAutoToolbarBySubviews;
     
     
-      
+    
     
 }
 
@@ -55,7 +55,7 @@
 {
     
     self.view = self.landView;
-   
+    
 }
 
 #pragma mark - lifeCycle
@@ -63,17 +63,21 @@
 {
     [super viewWillAppear:animated];
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-
-    if ([ODUserInformation getData].openID) {
-        
-        ODLandMainController *vc = [[ODLandMainController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-              tabBar.imageView.alpha = 1;
-              
-    }else{
-        tabBar.imageView.alpha = 0;
-
-    }
+    //
+    //    if ([ODUserInformation getData].openID) {
+    //
+    //        ODLandMainController *vc = [[ODLandMainController alloc] init];
+    //        [self.navigationController pushViewController:vc animated:YES];
+    //              tabBar.imageView.alpha = 1;
+    //
+    //    }else{
+    //        tabBar.imageView.alpha = 0;
+    //
+    //    }
+    
+    
+    tabBar.imageView.alpha = 0;
+    
 }
 
 
@@ -101,7 +105,7 @@
     
     centerNameLabe.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:centerNameLabe];
-        
+    
     // 注册button
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 60, 16,50, 44) target:self sel:@selector(registered:) tag:0 image:nil title:@"注册" font:16];
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
@@ -111,7 +115,7 @@
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backAction:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
+    
     [self.headView addSubview:backButton];
     
 }
@@ -156,7 +160,7 @@
         self.landView.passwordLabel.layer.cornerRadius = 20;
         self.landView.passwordLabel.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
         self.landView.passwordLabel.layer.borderWidth = 1;
-    
+        
         self.landView.landButton.layer.masksToBounds = YES;
         self.landView.landButton.layer.cornerRadius = 20;
         self.landView.landButton.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
@@ -166,7 +170,7 @@
         self.landView.passwordTextField.secureTextEntry = YES;
         
         [self.landView.forgetPassWordButton addTarget:self action:@selector(forgetPassawordAction:) forControlEvents:UIControlEventTouchUpInside];
-       
+        
     }
     return _landView;
 }
@@ -176,29 +180,26 @@
 - (void)backAction:(UIButton *)sender
 {
     NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
-    if (self.navigationController.viewControllers.count > 1)
+    //        ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+    ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    tabBar.selectedIndex = tabBar.currentIndex;
+    
+    NSInteger index = tabBar.selectedIndex;
+    for (NSInteger i = 0; i < 5; i++)
     {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    else
-    {
-        ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-        tabBar.selectedIndex = tabBar.currentIndex;
-        
-        NSInteger index = tabBar.selectedIndex;
-        for (NSInteger i = 0; i < 5; i++)
-        {
-            UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
-            UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-            if (i!=index) {
-              imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
-            }else{
-                imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
-            }
-
-            newButton.selected = i == index;
+        UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
+        UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
+        if (i!=index) {
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+        }else{
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
         }
+        
+        newButton.selected = i == index;
     }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 
@@ -219,17 +220,17 @@
     if ([self.landView.accountTextField.text isEqualToString:@""]) {
         UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
         [alter show];
-
+        
     }else if ([self.landView.passwordTextField.text isEqualToString:@""]) {
         UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入密码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
         [alter show];
-
+        
     }
     
     else {
-          [self landToView];
+        [self landToView];
     }
-   
+    
 }
 
 - (void)registered:(UIButton *)sender
@@ -243,21 +244,27 @@
 -(void)landToView
 {
     NSDictionary *parameters = @{@"mobile":self.landView.accountTextField.text,@"passwd":self.landView.passwordTextField.text};
-            NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/login1";
     
     self.manager = [AFHTTPRequestOperationManager manager];
-
+    
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-       
+        
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
             
-            
+            [self dismissViewControllerAnimated:YES completion:nil];
+
             self.landView.accountTextField.text = @"";
             self.landView.passwordTextField.text = @"";
+          
+            ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            tabBar.selectedIndex = tabBar.currentIndex;
+            
+            
             ODLandMainController *vc = [[ODLandMainController alloc] init];
             
             NSMutableDictionary *dic = responseObject[@"result"];
@@ -267,10 +274,9 @@
             
             
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-            [user setObject:openId forKey:@"userOpenId"];
-
+            [user setObject:openId forKey:KUserDefaultsOpenId];
             
-       
+            
             if (self.navigationController.viewControllers.count > 1)
             {
                 
@@ -281,15 +287,16 @@
                     
                 });
                 
-                [self.navigationController popViewControllerAnimated:YES];
+                
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                 
             }
             else
             {
                 
-               NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
+                NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
                 
-                ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+                ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
                 tabBar.selectedIndex = tabBar.currentIndex;
                 
                 NSInteger index = tabBar.selectedIndex;
@@ -309,27 +316,30 @@
                 [alter show];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [alter dismissWithClickedButtonIndex:0 animated:YES];
-                  
+                    
                 });
-
-                  [self.navigationController pushViewController:vc animated:YES];
+                
+                
+                [self.navigationController presentViewController:vc animated:YES completion:nil];
             }
+            
          
+            
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
             
             self.pageNumber++;
             if (self.pageNumber >= 3) {
                 [self createUIAlertControllerWithTitle:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册"];
-
+                
             }else {
-                   [self createUIAlertControllerWithTitle:responseObject[@"message"]];
+                [self createUIAlertControllerWithTitle:responseObject[@"message"]];
             }
-  
+            
         }
-
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
- 
+        
         
     }];
 }
