@@ -11,10 +11,9 @@
 #import "ODClassMethod.h"
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
-#import "MBProgressHUD.h"
 
 
-@interface ODCommunityReleaseTopicViewController : ODBaseViewController<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate, MBProgressHUDDelegate>
+@interface ODCommunityReleaseTopicViewController : ODBaseViewController<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
 
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UITextView *titleTextView;

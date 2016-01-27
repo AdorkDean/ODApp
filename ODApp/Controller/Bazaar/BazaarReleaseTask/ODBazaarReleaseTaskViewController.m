@@ -8,11 +8,7 @@
 
 #import "ODBazaarReleaseTaskViewController.h"
 
-@interface ODBazaarReleaseTaskViewController (){
-
-    MBProgressHUD *HUD;
-}
-
+@interface ODBazaarReleaseTaskViewController ()
 @end
 
 @implementation ODBazaarReleaseTaskViewController
@@ -67,9 +63,11 @@
         [self joiningTogetherParmeters];
     }else{
         if (self.titleTextView.text.length == 0) {
-            [self CreateProgressHudTitle:@"请输入任务标题" withAlpha:0.8f withAfterDelay:0.8f];
+            
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入任务标题"];
         }else if (self.taskDetailTextView.text.length == 0){
-            [self CreateProgressHudTitle:@"请输入任务内容" withAlpha:0.8f withAfterDelay:0.8f];
+            
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入任务内容"];
         }
     }
 }
@@ -405,12 +403,14 @@
             }
             else{
                 
-                [self CreateProgressHudTitle:@"任务发布成功" withAlpha:1.0f withAfterDelay:1.0f];
+                
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"任务发布成功"];
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }else{
             NSString *message = dict[@"message"];
-            [self CreateProgressHudTitle:message withAlpha:1.0f withAfterDelay:1.0f];
+            
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:message];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -468,23 +468,6 @@
             self.taskDetailLabel.text = @"请输入任务详情";
         }
     }
-}
-
-#pragma mark - 创建提示信息
-- (void)CreateProgressHudTitle:(NSString *)title withAlpha:(float)alpha withAfterDelay:(float)afterDelay
-{
-    
-    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    HUD.delegate  = self;
-    
-    HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
-    HUD.mode = MBProgressHUDModeText;
-    HUD.labelText = title;
-    HUD.margin = 8.f;
-    HUD.yOffset = 150.f;
-    HUD.removeFromSuperViewOnHide = YES;
-    [HUD hide:YES afterDelay:afterDelay];
-    
 }
 
 

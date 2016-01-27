@@ -11,13 +11,8 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 
-#import "MBProgressHUD.h"
 
-@interface ODChangePassWordController ()<UITextFieldDelegate, MBProgressHUDDelegate>{
-
-    MBProgressHUD *HUD;
-}
-
+@interface ODChangePassWordController ()<UITextFieldDelegate>
 @property(nonatomic , strong) UIView *headView;
 @property(nonatomic , strong) ODRegisteredView *registView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
@@ -90,23 +85,6 @@
 }
 
 
-#pragma mark - 创建提示信息
-- (void)CreateProgressHudTitle:(NSString *)title withAlpha:(float)alpha withAfterDelay:(float)afterDelay
-{
-    
-    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    HUD.delegate  = self;
-    
-    HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
-    HUD.mode = MBProgressHUDModeText;
-    HUD.labelText = title;
-    HUD.margin = 8.f;
-    HUD.yOffset = 150.f;
-    HUD.removeFromSuperViewOnHide = YES;
-    [HUD hide:YES afterDelay:afterDelay];
-    
-}
-
 #pragma mark - 定时器事件
 -(void)timerClick
 {
@@ -158,10 +136,7 @@
         
         self.registView.phoneNumber.delegate = self;
         self.registView.phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
-
-        
-        
-        
+   
     }
     return _registView;
 }
@@ -191,16 +166,14 @@
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
 
-        [self CreateProgressHudTitle:@"请输入手机号" withAlpha:0.8f withAfterDelay:0.8f];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
         
     }else if ([self.registView.verification.text isEqualToString:@""]) {
         
-        [self CreateProgressHudTitle:@"请输入验证码" withAlpha:0.8f withAfterDelay:0.8f];
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入验证码"];
     }else if ([self.registView.password.text isEqualToString:@""]) {
         
-        [self CreateProgressHudTitle:@"请输入密码" withAlpha:0.8f withAfterDelay:0.8f];
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入密码"];
     }else {
         [self changePassWord];
 
@@ -214,7 +187,7 @@
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
 
-        [self CreateProgressHudTitle:@"请输入手机号" withAlpha:0.8f withAfterDelay:0.8f];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
     }else {
         
         [self getCode];
@@ -278,7 +251,7 @@
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             
-            [self CreateProgressHudTitle:responseObject[@"message"] withAlpha:0.8f withAfterDelay:0.8f];
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
 
         
@@ -308,7 +281,7 @@
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
            
-            [self CreateProgressHudTitle:responseObject[@"message"] withAlpha:0.8f withAfterDelay:0.8f];
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
 
               
@@ -321,7 +294,11 @@
     }];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
 
+    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+    tabBar.imageView.alpha = 0;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

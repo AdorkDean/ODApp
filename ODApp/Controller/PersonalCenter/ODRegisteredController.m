@@ -12,12 +12,8 @@
 #import "ODAPIManager.h"
 #import "ODLandMainController.h"
 
-#import "MBProgressHUD.h"
 
-@interface ODRegisteredController ()<UITextFieldDelegate, MBProgressHUDDelegate>{
-
-    MBProgressHUD *HUD;
-}
+@interface ODRegisteredController ()<UITextFieldDelegate>
 
 @property(nonatomic , strong) UIView *headView;
 @property(nonatomic , strong) ODRegisteredView *registView;
@@ -150,16 +146,15 @@
 - (void)registere:(UIButton *)sender
 {
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
-        
-        [self CreateProgressHudTitle:@"请输入手机号" withAlpha:0.8f withAfterDelay:0.8f];
 
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
+        
     }else if ([self.registView.verification.text isEqualToString:@""]) {
         
-        [self CreateProgressHudTitle:@"请输入验证码" withAlpha:0.8f withAfterDelay:0.8f];
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入验证码"];
     }else if ([self.registView.password.text isEqualToString:@""]) {
 
-        [self CreateProgressHudTitle:@"请输入密码" withAlpha:0.8f withAfterDelay:0.8f];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入密码"];
     }
 
     else {
@@ -174,7 +169,8 @@
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
         
-        [self CreateProgressHudTitle:@"请输入手机号" withAlpha:0.8f withAfterDelay:0.8f];
+
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
     }else {
         
         [self getCode];
@@ -207,23 +203,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - 创建提示信息
-- (void)CreateProgressHudTitle:(NSString *)title withAlpha:(float)alpha withAfterDelay:(float)afterDelay
-{
-    
-    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    HUD.delegate  = self;
-    
-    HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
-    HUD.mode = MBProgressHUDModeText;
-    HUD.labelText = title;
-    HUD.margin = 8.f;
-    HUD.yOffset = 150.f;
-    HUD.removeFromSuperViewOnHide = YES;
-    [HUD hide:YES afterDelay:afterDelay];
-    
-}
-
 #pragma mark - 请求数据
 -(void)getRegest
 {
@@ -252,11 +231,11 @@
             
             if (self.registView.password.text.length < 6 || self.registView.password.text.length > 26 ) {
 
-                [self CreateProgressHudTitle:@"密码仅支持6到26位" withAlpha:0.8f withAfterDelay:0.8f];
-
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"密码仅支持6到26位"];
+                
             }else {
 
-                [self CreateProgressHudTitle:responseObject[@"message"] withAlpha:0.8f withAfterDelay:0.8f];
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
             }
     
         }
@@ -287,7 +266,7 @@
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             
-            [self CreateProgressHudTitle:responseObject[@"message"] withAlpha:0.8f withAfterDelay:0.8f];
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

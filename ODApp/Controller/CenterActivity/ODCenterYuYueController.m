@@ -14,13 +14,7 @@
 #import "AFNetworking.h"
 #import "ODUserInformation.h"
 
-#import "MBProgressHUD.h"
-
-@interface ODCenterYuYueController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate , UITextFieldDelegate , UIPickerViewDataSource , UIPickerViewDelegate , MBProgressHUDDelegate>{
-
-    MBProgressHUD *HUD;
-}
-
+@interface ODCenterYuYueController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate , UITextFieldDelegate , UIPickerViewDataSource , UIPickerViewDelegate>
 
 @property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
@@ -217,24 +211,22 @@
     
     if ([self.yuYueView.btimeText.titleLabel.text isEqualToString:@"填写开始时间"]) {
         
-        [self CreateProgressHudTitle:@"请选择时间" withAlpha:0.8f withAfterDelay:0.8f];
-      
+        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请选择时间"];
 
     }else if ([self.yuYueView.eTimeText.titleLabel.text isEqualToString:@"填写结束时间"]) {
         
-        [self CreateProgressHudTitle:@"请填写结束时间" withAlpha:0.8f withAfterDelay:0.8f];
-        
-    }else if ([self.yuYueView.pursoseTextView.text isEqualToString:@""] || [self.yuYueView.pursoseTextView.text isEqualToString:@"输入活动目的"]) {
-        
-        [self CreateProgressHudTitle:@"请输入活动目的" withAlpha:0.8f withAfterDelay:0.8f];
-        
-    }else if ([self.yuYueView.contentTextView.text isEqualToString:@""] || [self.yuYueView.contentTextView.text isEqualToString:@"输入活动内容"]) {
 
-        [self CreateProgressHudTitle:@"请输入活动内容" withAlpha:0.8f withAfterDelay:0.8f];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请填写结束时间"];
+    }else if ([self.yuYueView.pursoseTextView.text isEqualToString:@""] || [self.yuYueView.pursoseTextView.text isEqualToString:@"请填写结束时间"]) {
         
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入活动目的"];
+    }else if ([self.yuYueView.contentTextView.text isEqualToString:@""] || [self.yuYueView.contentTextView.text isEqualToString:@"请输入活动目的"]) {
+
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入活动内容"];
     }else if ([self.yuYueView.peopleNumberTextField.text isEqualToString:@""]) {
       
-        [self CreateProgressHudTitle:@"请输入参加人数" withAlpha:0.8f withAfterDelay:0.8f];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入参加人数"];
     } else {
         
         [self getOrderId];
@@ -351,9 +343,7 @@
         }else{
             if ([weakSelf.start_datetime isEqualToString:@""]) {
                 
-                
-                [self CreateProgressHudTitle:@"请选择开始时间" withAlpha:0.8f withAfterDelay:0.8f];
-                
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请选择开始时间"];
             }else{
                 
                 
@@ -403,8 +393,7 @@
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            [self CreateProgressHudTitle:responseObject[@"message"] withAlpha:1.0f withAfterDelay:1.0f];
-            
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
         
         
@@ -445,13 +434,14 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-            [self CreateProgressHudTitle:@"感谢您的预约请等待审核" withAlpha:1.0f withAfterDelay:1.0f];
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"感谢您的预约请等待审核"];
+            
             
             [self.navigationController popViewControllerAnimated:YES];
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            [self CreateProgressHudTitle:responseObject[@"message"] withAlpha:1.0f withAfterDelay:1.0f];
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:responseObject[@"message"]];
         }
   
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -459,23 +449,6 @@
         
     }];
     
-}
-
-#pragma mark - 创建提示信息
-- (void)CreateProgressHudTitle:(NSString *)title withAlpha:(float)alpha withAfterDelay:(float)afterDelay
-{
-    
-    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    HUD.delegate  = self;
-    
-    HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
-    HUD.mode = MBProgressHUDModeText;
-    HUD.labelText = title;
-    HUD.margin = 8.f;
-    HUD.yOffset = 150.f;
-    HUD.removeFromSuperViewOnHide = YES;
-    [HUD hide:YES afterDelay:afterDelay];
-   
 }
 
 #pragma mark - 点击事件

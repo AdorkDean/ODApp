@@ -8,10 +8,7 @@
 
 #import "ODCommunityReleaseTopicViewController.h"
 
-@interface ODCommunityReleaseTopicViewController (){
-
-    MBProgressHUD *HUD;
-}
+@interface ODCommunityReleaseTopicViewController ()
 
 @end
 
@@ -67,9 +64,11 @@
     if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length>0) {
         [self joiningTogetherParmeters];
     }else if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length==0){
-        [self CreateProgressHudTitle:@"请输入话题内容" withAlpha:0.8f withAfterDelay:0.8f];
+        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入话题内容"];
     }else{
-        [self CreateProgressHudTitle:@"请输入话题标题" withAlpha:0.8f withAfterDelay:0.8f];
+
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入话题标题"];
     }
 }
 
@@ -165,7 +164,8 @@
         UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
         [actionSheet showInView:self.view];
     }else{
-        [self CreateProgressHudTitle:@"已达图片最大上传数" withAlpha:0.8f withAfterDelay:0.8f];
+        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"已达图片最大上传数"];
     }
 }
 
@@ -182,7 +182,8 @@
                 [self presentViewController:imagePicker animated:YES completion:nil];
             }
             else {
-                [self CreateProgressHudTitle:@"您当前的照相机不可用" withAlpha:0.8f withAfterDelay:0.8f];
+                
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
             }
             break;
         case 1:
@@ -342,7 +343,7 @@
                 self.myBlock([NSString stringWithFormat:@"refresh"]);
             }
             
-            [self CreateProgressHudTitle:@"话题发布成功" withAlpha:1.0f withAfterDelay:1.0f];
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"话题发布成功"];
             [self.navigationController popViewControllerAnimated:YES];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -351,22 +352,7 @@
 }
 
 
-#pragma mark - 创建提示信息
-- (void)CreateProgressHudTitle:(NSString *)title withAlpha:(float)alpha withAfterDelay:(float)afterDelay
-{
-    
-    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    HUD.delegate  = self;
-    
-    HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
-    HUD.mode = MBProgressHUDModeText;
-    HUD.labelText = title;
-    HUD.margin = 8.f;
-    HUD.yOffset = 150.f;
-    HUD.removeFromSuperViewOnHide = YES;
-    [HUD hide:YES afterDelay:afterDelay];
-    
-}
+
 
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated

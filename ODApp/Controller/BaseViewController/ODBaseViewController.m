@@ -39,7 +39,23 @@
         self.navigationItem.rightBarButtonItem = item;
     }
 }
+#pragma mark - 创建提示信息
+- (void)createProgressHUDWithAlpha:(float)alpha withAfterDelay:(float)afterDelay title:(NSString *)title
+{
+    
+    self.HUD = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
 
+    self.HUD.delegate  = self;
+    
+    self.HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
+    self.HUD.mode = MBProgressHUDModeText;
+    self.HUD.labelText = title;
+    self.HUD.margin = 8.f;
+    self.HUD.yOffset = 150.f;
+    self.HUD.removeFromSuperViewOnHide = YES;
+    [self.HUD hide:YES afterDelay:afterDelay];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
