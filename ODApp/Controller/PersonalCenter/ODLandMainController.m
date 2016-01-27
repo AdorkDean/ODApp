@@ -45,6 +45,7 @@
     [self navigationInit];
     
     
+    NSLog(@"_____%@" , [ODUserInformation getData].openID);
     
     
 }
@@ -52,10 +53,10 @@
 #pragma mark - lifeCycle
 - (void)viewWillAppear:(BOOL)animated
 {
-
+    
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.imageView.alpha = 1;
-
+    
     [self getData];
 }
 
@@ -65,13 +66,16 @@
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     
-
+    
     
     NSString *openId = [ODUserInformation getData].openID;
     
     
+    NSLog(@"____%@" , openId);
+    
+    
     NSDictionary *parameters = @{@"open_id":openId};
-
+    
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
@@ -79,11 +83,11 @@
     
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-                 
-         NSMutableDictionary *dic = responseObject[@"result"];
+        
+        NSMutableDictionary *dic = responseObject[@"result"];
         self.model = [[ODUserModel alloc] initWithDict:dic];
         
-         [self createCollectionView];
+        [self createCollectionView];
         [self.collectionView reloadData];
         
         
@@ -91,7 +95,7 @@
         
         
     }];
-
+    
 }
 
 
@@ -100,10 +104,10 @@
 -(void)navigationInit
 {
     
-
+    
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.hidden = YES;
-       
+    
 }
 
 -(void)createCollectionView
@@ -148,19 +152,19 @@
         
         
         
-             
+        
         [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.avatar]];
         [cell.qrcodeImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.qrcode]];
-
         
-
+        
+        
         if ([self.model.nick isEqualToString:@""]) {
-           cell.nickNameLabel.text = [NSString stringWithFormat:@"您还未设置昵称"];
+            cell.nickNameLabel.text = [NSString stringWithFormat:@"您还未设置昵称"];
         }else{
-           cell.nickNameLabel.text = self.model.nick;
+            cell.nickNameLabel.text = self.model.nick;
             
         }
-
+        
         if ([self.model.sign isEqualToString:@""]) {
             cell.signatureLabel.text = [NSString stringWithFormat:@"您还未设置签名"];
         }else{
@@ -169,7 +173,7 @@
         }
         
         return cell;
-
+        
     }else{
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
         
@@ -178,17 +182,17 @@
             
         }else if (indexPath.section == 2) {
             cell.titleLabel.text = @"我报名的活动";
-
+            
         }else if (indexPath.section == 3) {
             cell.titleLabel.text = @"我的话题";
         }else if (indexPath.section == 4) {
             cell.titleLabel.text = @"我的任务";
         }else if (indexPath.section == 5) {
-             cell.titleLabel.text = @"我收到的评价";
+            cell.titleLabel.text = @"我收到的评价";
         }
         
         else if (indexPath.section == 6) {
-          
+            
             cell.titleLabel.text = @"分享我们的app";
             cell.coverImageView.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
             
@@ -197,9 +201,9 @@
             cell.titleLabel.text = @"      退出登录";
             cell.titleLabel.textAlignment = NSTextAlignmentCenter;
             [cell.arrowImageView removeFromSuperview];
-          
+            
         }
-    
+        
         return cell;
         
     }
@@ -222,7 +226,7 @@
         
         ODInformationController *vc = [[ODInformationController alloc] init];
         
-    [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController pushViewController:vc animated:YES];
         
         
     }else if (indexPath.section == 1){
@@ -241,12 +245,12 @@
         
         [self.navigationController pushViewController:vc animated:YES];
     }
-else if (indexPath.section ==3) {
-    
+    else if (indexPath.section ==3) {
+        
         ODMyTopicController *vc = [[ODMyTopicController alloc] init];
-    
-    vc.open_id = self.model.open_id;
-    
+        
+        vc.open_id = self.model.open_id;
+        
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.section ==4) {
@@ -302,65 +306,59 @@ else if (indexPath.section ==3) {
         
         
     }
-     else if (indexPath.section ==7) {
-         
-         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否退出登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
-         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-             
-             NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
-             ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-             tabBar.selectedIndex = 0;
-             [self.navigationController popViewControllerAnimated:YES];
-             
-             //清空数据
-             [ODUserInformation getData].openID = nil;
-             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-             [user setObject:nil forKey:@"openId"];
+    else if (indexPath.section ==7) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否退出登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-             
-             UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"已退出登录" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
-             [alter show];
-             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                 [alter dismissWithClickedButtonIndex:0 animated:YES];
-                 
-             });
-
-                         
-             if (self.navigationController.viewControllers.count > 1)
-             {
-                 [self.navigationController popViewControllerAnimated:YES];
-             }
-             else
-             {
-                 tabBar.selectedIndex = tabBar.currentIndex;
-                 
-                 NSInteger index = tabBar.selectedIndex;
-                 for (NSInteger i = 0; i < 5; i++)
-                 {
-                     UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
-                     UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-                     if (i!=index) {
-                         imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
-                     }else{
-                         imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
-                     }
-                     
-                     newButton.selected = i == index;
-                 }
-             }
-         }]];
-         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-         [self presentViewController:alert animated:YES completion:nil];
-     }
+            NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
+            ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            ;
+            tabBar.selectedIndex = 0;
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            
+            //清空数据
+            [ODUserInformation getData].openID = @"";
+            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+            [user setObject:@"" forKey:KUserDefaultsOpenId];
+            
+            
+            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"已退出登录" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: nil];
+            [alter show];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [alter dismissWithClickedButtonIndex:0 animated:YES];
+                
+            });
+            
+            
+            tabBar.selectedIndex = tabBar.currentIndex;
+            
+            NSInteger index = tabBar.selectedIndex;
+            for (NSInteger i = 0; i < 5; i++)
+            {
+                UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
+                UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
+                if (i!=index) {
+                    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+                }else{
+                    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
+                }
+                
+                newButton.selected = i == index;
+            }
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-         return CGSizeMake(kScreenSize.width , 90);
+        return CGSizeMake(kScreenSize.width , 90);
     }else {
-         return CGSizeMake(kScreenSize.width , 40);
+        return CGSizeMake(kScreenSize.width , 40);
     }
 }
 
@@ -376,7 +374,7 @@ else if (indexPath.section ==3) {
     
     return 5;
     
-   
+    
 }
 
 //动态返回不同区的列间距
@@ -395,7 +393,7 @@ else if (indexPath.section ==3) {
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
     if (section == 6) {
-         return CGSizeMake(0, 30);
+        return CGSizeMake(0, 30);
     }else{
         return CGSizeMake(0, 5);
     }
@@ -407,13 +405,13 @@ else if (indexPath.section ==3) {
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

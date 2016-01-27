@@ -80,7 +80,7 @@ void UncaughtExceptionHandler(NSException *exception)
     [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"isRuned"];
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    NSString *openId = [user objectForKey:@"userOpenId"];
+    NSString *openId = [user objectForKey:KUserDefaultsOpenId];
     [ODUserInformation getData].openID = openId;
 
     self.window.rootViewController = [[ODTabBarController alloc]init];
