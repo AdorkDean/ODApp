@@ -5,7 +5,7 @@
 //  Created by Odong-YG on 15/12/17.
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
-
+#import "ODTabBarButton.h"
 #import "ODTabBarController.h"
 #import "ODPersonalCenterViewController.H"
 @interface ODTabBarController ()
@@ -48,32 +48,20 @@
     NSArray *titleArray = @[@"首页发现",@"中心活动",@"欧动集市",@"欧动社区",@"个人中心"];
     NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
     
-    for (NSInteger i = 0 ; i < titleArray.count; i++) {
-        
-        //此处必须用UIButtonTypeCustom
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        //        button.frame = CGRectMake(0.5 * space + (30+space)*i, 5, 30, 30);
+    for (NSInteger i = 0 ; i < titleArray.count; i++)
+    {
+        ODTabBarButton *button = [ODTabBarButton buttonWithType:UIButtonTypeCustom];
         button.frame = CGRectMake((kScreenSize.width/5)*i, 0, kScreenSize.width/5, 55);
         button.tag = i+1;
-        //        [button setBackgroundImage:[[UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
-        //        [button setBackgroundImage:[[UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateSelected];
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.imageView addSubview:button];
-        
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]] forState:UIControlStateSelected];
+        [button setTitle:titleArray[i] forState:UIControlStateNormal];
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width/5-25)/2, 7.5, 25, 25)];
-        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
-        if (i==0) {
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
-        }
+
         imageView.tag = i+6;
         [button addSubview:imageView];
-        
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake((kScreenSize.width/5)*i,37 , kScreenSize.width/5, 18)];
-        label.text = titleArray[i];
-        label.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-        label.font = [UIFont systemFontOfSize:11];
-        label.textAlignment = NSTextAlignmentCenter;
-        [self.imageView addSubview:label];
     }
     UIButton *button= (UIButton *)[self.imageView viewWithTag:1];
     button.selected = YES;
@@ -97,10 +85,6 @@
             self.currentIndex = self.selectedIndex;
         }
     }
-    
-    
-    
-    
     
     for (NSInteger i = 0; i<5; i++) {
         UIButton *newButton= (UIButton *)[self.imageView viewWithTag:1+i];

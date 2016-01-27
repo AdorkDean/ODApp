@@ -251,7 +251,15 @@
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+            if (self.registView.password.text.length < 6 || self.registView.password.text.length > 26 ) {
+                
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"密码仅支持6到26位"];
+                
+            }else {
+                
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+            }
+
         }
 
         

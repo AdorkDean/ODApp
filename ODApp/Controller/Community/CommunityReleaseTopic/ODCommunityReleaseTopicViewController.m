@@ -207,29 +207,45 @@
 {
     NSString *sourceType = info[UIImagePickerControllerMediaType];
     if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
-        UIImage *pickedImage = info[UIImagePickerControllerOriginalImage];
+        self.pickedImage = info[UIImagePickerControllerOriginalImage];
+        
+        [self createProgressHUDTitle];
+    
+    
         //图片转化为data
         NSData *imageData;
-        pickedImage = [self scaleImage:pickedImage];;
-        if (UIImagePNGRepresentation(pickedImage)==nil) {
-            imageData = UIImageJPEGRepresentation(pickedImage,0.4);
+        self.pickedImage = [self scaleImage:self.pickedImage];;
+        if (UIImagePNGRepresentation(self.pickedImage)==nil) {
+            imageData = UIImageJPEGRepresentation(self.pickedImage,0.4);
         }else{
-            imageData = UIImagePNGRepresentation(pickedImage);
+            imageData = UIImagePNGRepresentation(self.pickedImage);
         }
         NSString *str = @"data:image/jpeg;base64,";
         NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
-        [self.imageArray addObject:pickedImage];
+        [self.imageArray addObject:self.pickedImage];
         [self createParameter:strData];
         
     }
      [picker dismissViewControllerAnimated:YES completion:nil];
+  
 }
+
+- (void)createProgressHUDTitle{
+ 
+    self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    [self.navigationController.view addSubview:self.hud ];
+    self.hud.delegate = self;
+    self.hud.labelText = @"图片上传中";
+    
+}
+
 
 -(void)createParameter:(NSString *)str
 {
     NSDictionary *parameter = @{@"File":str};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushImageWithUrl:kPushImageUrl parameter:signParameter];
+
 }
 
 //上传图片返回数据
@@ -245,6 +261,7 @@
             NSString *str = result[@"File"];
             [self.strArray addObject:str];
             [self reloadImageButtons];
+
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"error");
@@ -289,7 +306,10 @@
     }
     [self.addPicButton setFrame:CGRectMake(4 + (width + 4) * (self.imageArray.count % 4), CGRectGetMaxY(self.topicContentTextView.frame) + 4 + (4+width) * (self.imageArray.count / 4), width, width)];
 
+    [self.hud hide:NO afterDelay:0];
 }
+
+
 
 #pragma mark - 删除图片
 -(void)deletePicClick:(UIButton *)button
