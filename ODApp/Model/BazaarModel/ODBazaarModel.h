@@ -14,6 +14,7 @@
 @property(nonatomic,copy)NSString *title;
 @property(nonatomic,copy)NSString *content;
 @property(nonatomic,copy)NSString *task_status;
+@property(nonatomic,copy)NSString *task_status_name;
 @property(nonatomic,copy)NSString *open_id;
 @property(nonatomic,copy)NSString *user_nick;
 @property(nonatomic,copy)NSString *task_start_date;

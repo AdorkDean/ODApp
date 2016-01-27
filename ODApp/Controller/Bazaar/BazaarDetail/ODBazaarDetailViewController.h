@@ -24,6 +24,7 @@
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)NSMutableArray *picArray;
+@property(nonatomic,strong)NSArray *applys;
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UIView *userView;
@@ -33,7 +34,7 @@
 @property(nonatomic,strong)UILabel *allLabel;
 @property(nonatomic,strong)UIImageView *allImageView;
 @property(nonatomic,strong)UIView *allView;
-@property(nonatomic,strong)NSString *task_status;
+@property(nonatomic,strong)NSString *task_status_name;
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)UIButton *taskButton;
 @property(nonatomic,copy)NSString *open_id;
