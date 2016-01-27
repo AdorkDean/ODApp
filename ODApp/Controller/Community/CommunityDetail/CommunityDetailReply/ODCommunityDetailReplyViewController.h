@@ -11,11 +11,8 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 
-#import "MBProgressHUD.h"
 
-
-
-@interface ODCommunityDetailReplyViewController : ODBaseViewController<UITextViewDelegate, MBProgressHUDDelegate>
+@interface ODCommunityDetailReplyViewController : ODBaseViewController<UITextViewDelegate>
 
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UITextView *textView;
