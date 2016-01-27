@@ -194,7 +194,7 @@
 
 - (void)chatButtonClick:(UIButton *)button
 {
-    NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
+    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.selectedIndex = 3;
     
@@ -206,10 +206,10 @@
         if (i!=index) {
             newButton.selected =NO;
             button.selected = YES;
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
             
         }else{
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
         }
     }
 }
@@ -217,7 +217,7 @@
 - (void)activityButtonClick:(UIButton *)button
 {
 
-    NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
+    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
     ODTabBarController *tabbar = (ODTabBarController *)self.navigationController.tabBarController;
     tabbar.selectedIndex = 1;
     
@@ -229,10 +229,10 @@
         if (i!=index) {
             newButton.selected =NO;
             button.selected = YES;
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
             
         }else{
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
         }
     }
 }

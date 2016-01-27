@@ -125,8 +125,8 @@
             ODBazaarDetailModel *detailModel = [[ODBazaarDetailModel alloc]init];
             [detailModel setValuesForKeysWithDictionary:result];
             [weakSelf.dataArray addObject:detailModel];
-            NSArray *applys = result[@"applys"];
-            for (NSDictionary *itemDict in applys) {
+            self.applys = result[@"applys"];
+            for (NSDictionary *itemDict in _applys) {
                 ODBazaarDetailModel *model = [[ODBazaarDetailModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [self.picArray addObject:model];
@@ -173,27 +173,76 @@
     self.taskButton.layer.cornerRadius = 5;
     self.taskButton.layer.borderWidth = 1;
     self.taskButton.layer.borderColor = [UIColor colorWithHexString:@"b0b0b0" alpha:1].CGColor;
+    [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.userView addSubview:self.taskButton];
 
     if ([[ODUserInformation getData].openID isEqualToString:self.open_id]) {
-        [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
-        [self.taskButton setTitle:@"删除任务" forState:UIControlStateNormal];
-        [self.userView addSubview:self.taskButton];
+        
+        if ([self.task_status_name isEqualToString:@"待派遣"]) {
+            [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitle:@"删除任务" forState:UIControlStateNormal];
+        }else if ([self.task_status_name isEqualToString:@"交付"]){
+            [self.taskButton setTitle:@"确认完成" forState:UIControlStateNormal];
+        }else if ([self.task_status_name isEqualToString:@"确认完成"]){
+            [self.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
+        }else if ([self.task_status_name isEqualToString:@"进行中"]){
+            [self.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
+        }
+        else if ([self.task_status_name isEqualToString:@"过期"]){
+            [self.taskButton setTitle:@"过期任务" forState:UIControlStateNormal];
+        }
+        
     }else{
-        if ([self.task_status isEqualToString:@"1"]) {
-            [self.taskButton setTitle:@"接受任务" forState:UIControlStateNormal];
+        NSString *open_id = @"";
+        for (NSDictionary *dict in self.applys) {
+            NSString *str = dict[@"open_id"];
+            if ([str isEqualToString:[ODUserInformation getData].openID]) {
+                open_id = str;
+            }
+        }
+        if ([self.task_status_name isEqualToString:@"待派遣"] && open_id.length > 0) {
+           [self.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
+        }else if ([self.task_status_name isEqualToString:@"待派遣"] && open_id.length == 0){
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
             self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
-            [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-            [self.userView addSubview:self.taskButton];
-        }else if ([self.task_status isEqualToString:@"-2"]){
-            [self.taskButton setTitle:@"任务过期" forState:UIControlStateNormal];
-            [self.userView addSubview:self.taskButton];
-        }else{
+            [self.taskButton setTitle:@"接受任务" forState:UIControlStateNormal];
+        }else if ([self.task_status_name isEqualToString:@"确认完成"] && open_id.length > 0 ){
+            [self.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
+        }else if ([self.task_status_name isEqualToString:@"进行中"] && open_id.length > 0){
+            [self.taskButton setTitle:@"确认提交" forState:UIControlStateNormal];
+        }else if ([self.task_status_name isEqualToString:@"交付"] && open_id.length > 0){
+            [self.taskButton setTitle:@"已提交" forState:UIControlStateNormal];
+        }else if ([self.task_status_name isEqualToString:@"确认完成"] && open_id.length == 0){
+            [self.taskButton removeFromSuperview];
             userNickLabel.frame = CGRectMake(60, 10, self.userView.frame.size.width-60, 20);
             userSignLabel.frame = CGRectMake(60, 30, self.userView.frame.size.width-60, 40);
+        }else if ([self.task_status_name isEqualToString:@"进行中"] && open_id.length == 0){
+            [self.taskButton removeFromSuperview];
+            userNickLabel.frame = CGRectMake(60, 10, self.userView.frame.size.width-60, 20);
+            userSignLabel.frame = CGRectMake(60, 30, self.userView.frame.size.width-60, 40);
+        }else if ([self.task_status_name isEqualToString:@"交付"] && open_id.length == 0){
+            [self.taskButton removeFromSuperview];
+            userNickLabel.frame = CGRectMake(60, 10, self.userView.frame.size.width-60, 20);
+            userSignLabel.frame = CGRectMake(60, 30, self.userView.frame.size.width-60, 40);
+        }else if ([self.task_status_name isEqualToString:@"过期"]){
+            [self.taskButton setTitle:@"过期任务" forState:UIControlStateNormal];
         }
     }
+//else{
+//        if ([self.task_status isEqualToString:@"1"]) {
+//            [self.taskButton setTitle:@"接受任务" forState:UIControlStateNormal];
+//            [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+//            self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
+//            [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//            [self.userView addSubview:self.taskButton];
+//        }else if ([self.task_status isEqualToString:@"-2"]){
+//            [self.taskButton setTitle:@"任务过期" forState:UIControlStateNormal];
+//            [self.userView addSubview:self.taskButton];
+//        }else{
+//            userNickLabel.frame = CGRectMake(60, 10, self.userView.frame.size.width-60, 20);
+//            userSignLabel.frame = CGRectMake(60, 30, self.userView.frame.size.width-60, 40);
+//        }
+//    }
     
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 75, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
     [self.userView addSubview:lineView];
@@ -206,36 +255,43 @@
 
 -(void)taskButtonClick:(UIButton *)button
 {
-    if ([button.titleLabel.text isEqualToString:@"删除任务"]) {
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation getData].openID};
-            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-            [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter isDelete:YES];
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
-
-    }else{
-        if ([ODUserInformation getData].openID) {
+    if ([ODUserInformation getData].openID) {
+        if ([button.titleLabel.text isEqualToString:@"删除任务"]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation getData].openID};
+                NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+                [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter withName:@"删除任务"];
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+        }else if ([button.titleLabel.text isEqualToString:@"接受任务"]){
             NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation getData].openID};
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-            [self pushDataWithUrl:kBazaarAcceptTaskUrl parameter:signParameter isDelete:NO];
-        }else{
-            ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
-            [self.navigationController pushViewController:personalCenter animated:YES];
+            [self pushDataWithUrl:kBazaarAcceptTaskUrl parameter:signParameter withName:@"接受任务"];
+        }else if ([button.titleLabel.text isEqualToString:@"确认提交"]){
+            NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation getData].openID};
+            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+            [self pushDataWithUrl:kBazaarTaskReceiveCompleteUrl parameter:signParameter withName:@"确认提交"];
+        }else if ([button.titleLabel.text isEqualToString:@"确认完成"]){
+            NSDictionary *parameter = @{@"task_id":self.task_id,@"comment":@"sdsdsd",@"open_id":[ODUserInformation getData].openID};
+            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+            [self pushDataWithUrl:kBazaarTaskInitiateCompleteUrl parameter:signParameter withName:@"确认完成"];
         }
+        
+    }else{
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController pushViewController:personalCenter animated:YES];
     }
 }
 
 #pragma mark - 提交数据
--(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isDelete:(BOOL)isDelete
+-(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter withName:(NSString *)name
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
 
-        if (isDelete) {
+        if ([name isEqualToString:@"删除任务"]) {
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 if (self.myBlock) {
                     self.myBlock([NSString stringWithFormat:@"del"]);
@@ -243,7 +299,7 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }
             
-        }else{
+        }else if ([name isEqualToString:@"接受任务"]) {
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 if (self.myBlock) {
                     self.myBlock([NSString stringWithFormat:@"accept"]);
@@ -252,6 +308,10 @@
                 [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
                 self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
             }
+        }else if ([name isEqualToString:@"确认提交"]){
+            NSLog(@"+++++++%@",responseObject);
+        }else if ([name isEqualToString:@"确认完成"]){
+            NSLog(@"------%@",responseObject);
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -480,7 +540,6 @@
                     NSLog(@"%@",responseObject[@"status"]);
                 }
             } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-                
             }];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
