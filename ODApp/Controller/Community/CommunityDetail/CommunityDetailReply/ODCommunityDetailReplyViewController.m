@@ -64,7 +64,7 @@
     if (self.textView.text.length>0) {
         [self joiningTogetherParmeters];
     }else{
-        [self createUIAlertControllerWithTitle:@"请输入回复内容"];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入回复内容"];
     }
 }
 
@@ -92,7 +92,7 @@
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             [self.navigationController popViewControllerAnimated:YES];
             
-            [self CreateProgressHud];
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"回复成功"];
             
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -100,20 +100,6 @@
     }];
 }
 
-- (void)CreateProgressHud
-{
-
-    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    HUD.delegate  = self;
-    
-    HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:0.7];
-    HUD.mode = MBProgressHUDModeText;
-    HUD.labelText = @"回复成功";
-    HUD.margin = 8.f;
-    HUD.yOffset = 150.f;
-    HUD.removeFromSuperViewOnHide = YES;
-    [HUD hide:YES afterDelay:0.8];
-}
 
 //- (void)hudWasHidden:(MBProgressHUD *)hud {
 //    // Remove HUD from screen when the HUD was hidded
@@ -171,13 +157,7 @@
     [self.textView resignFirstResponder];
 }
 
-#pragma mark - 创建提示信息
--(void)createUIAlertControllerWithTitle:(NSString *)title
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
-}
+
 
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
