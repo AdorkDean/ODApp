@@ -310,7 +310,7 @@
         
         
         weakSelf.picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 150, kScreenSize.width, 150)];
-        weakSelf.picker.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        weakSelf.picker.backgroundColor = [UIColor whiteColor];
         weakSelf.picker.delegate = weakSelf;
         weakSelf.picker.dataSource = weakSelf;
         
