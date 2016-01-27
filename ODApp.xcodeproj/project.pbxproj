@@ -464,6 +464,8 @@
 		D4D070AA1C55C819008527C9 /* ODHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070A91C55C819008527C9 /* ODHttpTool.m */; };
 		D4D070B41C5600CB008527C9 /* UIColor+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070B31C5600CB008527C9 /* UIColor+ODExtension.m */; };
 		D4D070B71C56019F008527C9 /* NSURL+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070B61C56019F008527C9 /* NSURL+ODExtension.m */; };
+		D4D070BE1C58D9A4008527C9 /* ODTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070BD1C58D9A4008527C9 /* ODTabBarButton.m */; };
+		D4D070C11C58D9BC008527C9 /* ODTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070C01C58D9BC008527C9 /* ODTabBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1088,6 +1090,10 @@
 		D4D070B31C5600CB008527C9 /* UIColor+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ODExtension.m"; sourceTree = "<group>"; };
 		D4D070B51C56019F008527C9 /* NSURL+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+ODExtension.h"; sourceTree = "<group>"; };
 		D4D070B61C56019F008527C9 /* NSURL+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+ODExtension.m"; sourceTree = "<group>"; };
+		D4D070BC1C58D9A4008527C9 /* ODTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTabBarButton.h; sourceTree = "<group>"; };
+		D4D070BD1C58D9A4008527C9 /* ODTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTabBarButton.m; sourceTree = "<group>"; };
+		D4D070BF1C58D9BC008527C9 /* ODTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTabBar.h; sourceTree = "<group>"; };
+		D4D070C01C58D9BC008527C9 /* ODTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTabBar.m; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2161,6 +2167,7 @@
 		B83C6B961C22549E0063ED92 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				D4D070BB1C58D9A4008527C9 /* TabBar */,
 				B80E0B5A1C474FD300F36A17 /* HomeFoundView */,
 				B80E0B2E1C474C1F00F36A17 /* BazaarView */,
 				B80E0B371C474C1F00F36A17 /* CommunityView */,
@@ -2486,6 +2493,17 @@
 				D4D070A91C55C819008527C9 /* ODHttpTool.m */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		D4D070BB1C58D9A4008527C9 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				D4D070BC1C58D9A4008527C9 /* ODTabBarButton.h */,
+				D4D070BD1C58D9A4008527C9 /* ODTabBarButton.m */,
+				D4D070BF1C58D9BC008527C9 /* ODTabBar.h */,
+				D4D070C01C58D9BC008527C9 /* ODTabBar.m */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3052,12 +3070,14 @@
 				B855A79E1C52218D0038F559 /* ODBazaarRewardCollectionCell.m in Sources */,
 				B83C39061C48A0E9007B16FB /* ODBazaarLabelSearchViewController.m in Sources */,
 				B833A6D11C474AAB00F91E9A /* ODHelp.m in Sources */,
+				D4D070BE1C58D9A4008527C9 /* ODTabBarButton.m in Sources */,
 				B80E0BF61C4751AE00F36A17 /* ODMyOrderRecordCell.m in Sources */,
 				B83C39351C48A0E9007B16FB /* ODCommunityReleaseTopicViewController.m in Sources */,
 				C66F0C101C4CDF4D006E999B /* ODEvaluationModel.m in Sources */,
 				9DDBA4C31C3B6D090007E122 /* ODLandSecondCell.m in Sources */,
 				B871CF9F1C4CF87400CF51BA /* ODOtherTopicViewController.m in Sources */,
 				9DD481101C44C8A6004F34E3 /* ODTypeView.m in Sources */,
+				D4D070C11C58D9BC008527C9 /* ODTabBar.m in Sources */,
 				B83C39381C48A0E9007B16FB /* ODCenterIntroduceController.m in Sources */,
 				D425DA201C4E1F7E00BDD2AE /* IQUIView+Hierarchy.m in Sources */,
 				D425DA2D1C4E1F7E00BDD2AE /* TAAbstractDotView.m in Sources */,
