@@ -18,7 +18,6 @@
     [super viewDidLoad];
     
     
-    
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self navigationInit];
@@ -205,7 +204,7 @@
 -(void)joiningTogetherParmeters
 {
     self.count = 1;
-    NSDictionary *parameter = @{@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld",self.count],@" city_id":@"321"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
 }
@@ -257,7 +256,6 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarCellId];
     [self.collectionView registerClass:[ODBazaarHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];
     [self.view addSubview:self.collectionView];
-    
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -290,10 +288,7 @@
     ODBazaarCollectionCell *cell = (ODBazaarCollectionCell *)button.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODBazaarModel *model = self.dataArray[indexPath.row];
-    
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-    
-    
     vc.open_id = model.open_id;
     [self.navigationController pushViewController:vc animated:YES];
     

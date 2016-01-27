@@ -11,7 +11,11 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 
-@interface ODCommunityDetailReplyViewController : ODBaseViewController<UITextViewDelegate>
+#import "MBProgressHUD.h"
+
+
+
+@interface ODCommunityDetailReplyViewController : ODBaseViewController<UITextViewDelegate, MBProgressHUDDelegate>
 
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UITextView *textView;
@@ -19,6 +23,7 @@
 @property(nonatomic,copy)NSString *bbs_id;
 @property(nonatomic,copy)NSString *parent_id;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
+
 
 
 @end
