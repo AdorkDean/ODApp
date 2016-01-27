@@ -23,5 +23,5 @@
 @property(nonatomic,strong)UIImageView *imageView;
 @property(nonatomic,strong)UITextField *textField;
 @property(nonatomic)NSInteger count;
-@property(nonatomic,copy)void(^taskRewardBlock)(NSString *name,NSString *reward_id);
+@property(nonatomic,copy)void(^taskRewardBlock)(NSString *name);
 @end

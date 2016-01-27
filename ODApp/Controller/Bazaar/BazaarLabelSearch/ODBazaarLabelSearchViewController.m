@@ -43,10 +43,15 @@
 #pragma mark - 加载更多
 -(void)loadMoreData
 {
-    self.count ++;
-    NSDictionary *parameter = @{@"search":self.keyText,@"page":[NSString stringWithFormat:@"%ld",self.count]};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl parameter:signParameter];
+    if (self.searchBar.text.length>0) {
+        self.count ++;
+        NSDictionary *parameter = @{@"search":self.searchBar.text,@"page":[NSString stringWithFormat:@"%ld",self.count]};
+        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl parameter:signParameter];
+    }else{
+        [self.collectionView.mj_footer endRefreshing];
+    }
+
 }
 
 
@@ -84,7 +89,6 @@
 -(void)confirmButtonClick:(UIButton *)button
 {
     if (self.searchBar.text.length>0) {
-        self.keyText = [NSString stringWithFormat:@"%@",self.searchBar.text];
         [self.searchBar resignFirstResponder];
         [self joiningTogetherParmeters];
     }else{
@@ -126,7 +130,6 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    self.keyText = [NSString stringWithFormat:@"%@",self.searchBar.text];
     [self joiningTogetherParmeters];
 }
 
@@ -143,8 +146,9 @@
 -(void)joiningTogetherParmeters
 {
     self.count = 1;
-    NSDictionary *parameter = @{@"search":self.keyText,@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"search":self.searchBar.text,@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl parameter:signParameter];
 }
 

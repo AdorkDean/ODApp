@@ -70,20 +70,20 @@
 
 -(void)releaseButtonClick:(UIButton *)button
 {
-    if ([ODUserInformation getData].openID) {
+    if ([[ODUserInformation getData].openID isEqualToString:@""]) {
+       
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
+
+    }else{
         ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
-        
         releaseTask.isBazaar = YES;
         
         releaseTask.myBlock = ^(NSString *release){
             self.refresh = release;
         };
         [self.navigationController pushViewController:releaseTask animated:YES];
-    }else{
-        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
-        [self.navigationController pushViewController:personalCenter animated:YES];
     }
-
 }
 
 #pragma mark -创建任务筛选和搜索按钮

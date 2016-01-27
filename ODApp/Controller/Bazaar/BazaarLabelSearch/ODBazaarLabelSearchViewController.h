@@ -25,8 +25,6 @@
 @property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UISearchBar *searchBar;
 @property(nonatomic)NSInteger count;
-@property(nonatomic,copy)NSString *keyText;
-
 @property (nonatomic, strong) UILabel *noReusltLabel;
 
 @end
