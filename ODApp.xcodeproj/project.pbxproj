@@ -25,6 +25,7 @@
 		9D68D8281C43832D00BD3FD2 /* ODTopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D68D8261C43832D00BD3FD2 /* ODTopicCell.xib */; };
 		9D69B5401C3A3993009039A4 /* ODActivityHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69B53F1C3A3993009039A4 /* ODActivityHeadView.m */; };
 		9D85CD8D1C578031008525FD /* ODTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D85CD8C1C578031008525FD /* ODTopicModel.m */; };
+		9DC0AE481C585F850001D8BA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC0AE471C585F850001D8BA /* MBProgressHUD.m */; };
 		9DD00BC51C4E393300F0EE5F /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DD00BA41C4E393300F0EE5F /* UMSocialLocalizable.strings */; };
 		9DD00BC61C4E393300F0EE5F /* libUMSocial_Sdk_4.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BB21C4E393300F0EE5F /* libUMSocial_Sdk_4.4.a */; };
 		9DD00BC71C4E393300F0EE5F /* UMSCommentDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DD00BB41C4E393300F0EE5F /* UMSCommentDetailController.xib */; };
@@ -406,6 +407,8 @@
 		9D69B53F1C3A3993009039A4 /* ODActivityHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityHeadView.m; sourceTree = "<group>"; };
 		9D85CD8B1C578031008525FD /* ODTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTopicModel.h; sourceTree = "<group>"; };
 		9D85CD8C1C578031008525FD /* ODTopicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTopicModel.m; sourceTree = "<group>"; };
+		9DC0AE461C585F850001D8BA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		9DC0AE471C585F850001D8BA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		9DD00BA51C4E393300F0EE5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
 		9DD00BA71C4E393300F0EE5F /* UMSocial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocial.h; sourceTree = "<group>"; };
 		9DD00BA81C4E393300F0EE5F /* UMSocialAccountManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialAccountManager.h; sourceTree = "<group>"; };
@@ -960,6 +963,15 @@
 				9DD4AED21C32523F0073F595 /* ActivityModel.m */,
 			);
 			path = ODAppointment;
+			sourceTree = "<group>";
+		};
+		9DC0AE451C585F850001D8BA /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				9DC0AE461C585F850001D8BA /* MBProgressHUD.h */,
+				9DC0AE471C585F850001D8BA /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		9DD00BA21C4E393300F0EE5F /* umeng_ios_social_sdk_4.4_arm64_custom */ = {
@@ -2008,6 +2020,7 @@
 		D425D9E61C4E1F7E00BDD2AE /* ThirdFrame */ = {
 			isa = PBXGroup;
 			children = (
+				9DC0AE451C585F850001D8BA /* MBProgressHUD */,
 				9DD00BA21C4E393300F0EE5F /* umeng_ios_social_sdk_4.4_arm64_custom */,
 				D425D9E71C4E1F7E00BDD2AE /* IQKeyBoardManager */,
 				D425DA0C1C4E1F7E00BDD2AE /* SDCycleScrollView */,
@@ -2573,6 +2586,7 @@
 				9D14AA0E1C2A856800696929 /* CenterActivityCell.m in Sources */,
 				B83C394A1C48A0E9007B16FB /* ODUserNickNameController.m in Sources */,
 				D4D070B41C5600CB008527C9 /* UIColor+ODExtension.m in Sources */,
+				9DC0AE481C585F850001D8BA /* MBProgressHUD.m in Sources */,
 				D425DA271C4E1F7E00BDD2AE /* IQBarButtonItem.m in Sources */,
 				9DDBA4C71C3BAB330007E122 /* ODUserModel.m in Sources */,
 				B83C39491C48A0E9007B16FB /* ODUserInformation.m in Sources */,
