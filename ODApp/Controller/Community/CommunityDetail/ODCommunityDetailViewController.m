@@ -157,8 +157,7 @@
                 weakSelf.tableView.tableHeaderView = weakSelf.tabelHeaderView;
                 [weakSelf.tableView reloadData];
 
-                
-
+    
                 
             }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -228,7 +227,14 @@
 
 -(void)userHeaderButtonClick:(UIButton *)button
 {
-
+    ODCommunityDetailModel *model = [self.userArray objectAtIndex:0];
+    if ([[ODUserInformation getData].openID isEqualToString:model.open_id]) {
+        
+    }else{
+        ODOthersInformationController *otherInfo = [[ODOthersInformationController alloc]init];
+        otherInfo.open_id = model.open_id;
+        [self.navigationController pushViewController:otherInfo animated:YES];
+    }
 }
 
 #pragma marl - 创建bbs详情试图
@@ -325,6 +331,7 @@
     ODCommunityDetailModel *model = self.dataArray[indexPath.row];
    
     [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar_url"]] forState:UIControlStateNormal];
+    [cell.headButton addTarget:self action:@selector(cellHeadButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.replyButton addTarget:self action:@selector(replyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.nickName.text = model.user[@"nick"];
     NSString *time = [[model.created_at substringFromIndex:5] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
@@ -367,6 +374,20 @@
     return self.height;
 }
 
+-(void)cellHeadButtonClick:(UIButton *)button
+{
+    ODCommunityDetailCell *cell = (ODCommunityDetailCell *)button.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    ODCommunityDetailModel *model = self.dataArray[indexPath.row];
+    if ([[ODUserInformation getData].openID isEqualToString:model.user[@"open_id"]]) {
+        
+    }else{
+        ODOthersInformationController *otherInfo = [[ODOthersInformationController alloc]init];
+        otherInfo.open_id = [NSString stringWithFormat:@"%@",model.user[@"open_id"]];
+        [self.navigationController pushViewController:otherInfo animated:YES];
+    }
+    
+}
 
 -(void)replyButtonClick:(UIButton *)button
 {

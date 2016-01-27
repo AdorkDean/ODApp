@@ -45,7 +45,7 @@
 
 - (void)backButtonClick:(UIButton *)button{
 
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)createRequest{
