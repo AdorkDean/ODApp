@@ -244,7 +244,13 @@
 
 -(void)fanhui:(UIButton *)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if ([self.topTitle isEqualToString:@"修改密码"]) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+         [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    
+   
 }
 
 
