@@ -167,7 +167,7 @@
 
 - (void)backAction:(UIButton *)sender
 {
-    NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
+    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
     //        ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     tabBar.selectedIndex = tabBar.currentIndex;
@@ -178,9 +178,9 @@
         UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
         UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
         if (i!=index) {
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
         }else{
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
+            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
         }
         
         newButton.selected = i == index;
@@ -260,7 +260,7 @@
             
             
             
-            NSArray *imageArray = @[@"首页发现icon",@"中心活动icon",@"欧动集市icon",@"欧动社区icon",@"个人中心icon"];
+            NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
             
             ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             tabBar.selectedIndex = tabBar.currentIndex;
@@ -271,9 +271,9 @@
                 UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
                 UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
                 if (i!=index) {
-                    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@默认态",imageArray[i]]];
+                    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
                 }else{
-                    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@点击态",imageArray[i]]];
+                    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
                 }
                 
                 newButton.selected = i == index;
