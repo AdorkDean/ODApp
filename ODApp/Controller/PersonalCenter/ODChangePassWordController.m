@@ -244,7 +244,7 @@
 
 -(void)fanhui:(UIButton *)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

@@ -36,6 +36,7 @@
 
 @property (nonatomic  , strong) UIButton *cancelButton;
 @property (nonatomic  , strong) UIButton *queDingButton;
+@property (nonatomic , strong) UILabel *timeLabel;
 @property (nonatomic  , assign) BOOL isBeginTime;
 
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
@@ -184,9 +185,6 @@
         self.yuYueView.pursoseTextView.delegate=self;
         self.yuYueView.contentTextView.delegate=self;
     
-     
-        
-        
         self.yuYueView.peopleNumberTextField.delegate = self;
      
         
@@ -247,10 +245,6 @@
 
 - (void)getData
 {
-    
-    
-  
-    
     self.timeManager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"store_id":self.storeId , @"start_datetime":self.start_datetime};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
@@ -321,19 +315,27 @@
         weakSelf.picker.dataSource = weakSelf;
         
         weakSelf.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        weakSelf.cancelButton.frame = CGRectMake(0, kScreenSize.height - 180, kScreenSize.width / 2, 30);
+        weakSelf.cancelButton.frame = CGRectMake(0, kScreenSize.height - 180, 50, 30);
         [weakSelf.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         weakSelf.cancelButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         [weakSelf.cancelButton addTarget:weakSelf action:@selector(quXiaoAction:) forControlEvents:UIControlEventTouchUpInside];
+        weakSelf.cancelButton.titleLabel.font = [UIFont systemFontOfSize:17];
+        
+        
+        weakSelf.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, kScreenSize.height - 180, kScreenSize.width - 100, 30)];
+        weakSelf.timeLabel.text = @"选择时间";
+        weakSelf.timeLabel.font = [UIFont systemFontOfSize:20];
+        weakSelf.timeLabel.textAlignment = NSTextAlignmentCenter;
+        weakSelf.timeLabel.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         
         
         
         weakSelf.queDingButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        weakSelf.queDingButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 180, kScreenSize.width / 2, 30);
+        weakSelf.queDingButton.frame = CGRectMake(kScreenSize.width - 50, kScreenSize.height - 180, 50, 30);
         [weakSelf.queDingButton setTitle:@"确定" forState:UIControlStateNormal];
         weakSelf.queDingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         [weakSelf.queDingButton addTarget:weakSelf action:@selector(queDingAction:) forControlEvents:UIControlEventTouchUpInside];
-        
+        weakSelf.queDingButton.titleLabel.font = [UIFont systemFontOfSize:17];
         
         
         if (weakSelf.isBeginTime) {
@@ -342,6 +344,7 @@
             weakSelf.yuYueView.eTimeText.userInteractionEnabled = NO;
             [weakSelf.view addSubview: weakSelf.queDingButton];
             [weakSelf.view addSubview: weakSelf.cancelButton];
+             [weakSelf.view addSubview: weakSelf.timeLabel];
             [weakSelf.view addSubview:weakSelf.picker];
             
             
@@ -358,6 +361,7 @@
                 weakSelf.yuYueView.eTimeText.userInteractionEnabled = NO;
                 [weakSelf.view addSubview: weakSelf.queDingButton];
                 [weakSelf.view addSubview: weakSelf.cancelButton];
+                 [weakSelf.view addSubview: weakSelf.timeLabel];
                 [weakSelf.view addSubview:weakSelf.picker];
                 
             }
@@ -443,7 +447,7 @@
             
             [self CreateProgressHudTitle:@"感谢您的预约请等待审核" withAlpha:1.0f withAfterDelay:1.0f];
             
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            [self.navigationController popViewControllerAnimated:YES];
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
@@ -599,6 +603,7 @@
     [self.picker removeFromSuperview];
     [self.cancelButton removeFromSuperview];
     [self.queDingButton removeFromSuperview];
+    [self.timeLabel removeFromSuperview];
     
     
     
@@ -692,6 +697,7 @@
     [self.picker removeFromSuperview];
     [self.cancelButton removeFromSuperview];
     [self.queDingButton removeFromSuperview];
+    [self.timeLabel removeFromSuperview];
 }
 
 
