@@ -50,6 +50,7 @@
     self.HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
     self.HUD.mode = MBProgressHUDModeText;
     self.HUD.labelText = title;
+    
     self.HUD.margin = 8.f;
     self.HUD.yOffset = 150.f;
     self.HUD.removeFromSuperViewOnHide = YES;
