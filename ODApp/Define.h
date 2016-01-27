@@ -45,6 +45,8 @@
 #define kBazaarTaskDelegateUrl @"http://woquapi.test.odong.com/1.0/task/accept"
 #define kBazaarAcceptTaskUrl @"http://woquapi.test.odong.com/1.0/task/apply"
 #define kBazaarReleaseRewardUrl @"http://woquapi.test.odong.com/1.0/other/config/info"
+#define kBazaarTaskReceiveCompleteUrl @"http://woquapi.test.odong.com/1.0/task/delivery" //接收人确认完成
+#define kBazaarTaskInitiateCompleteUrl @"http://woquapi.test.odong.com/1.0/task/confirm" //发起人确认完成
 
 #define kCommunityBbsListUrl @"http://woquapi.test.odong.com/1.0/bbs/list/latest"
 #define kCommunityReleaseBbsUrl @"http://woquapi.test.odong.com/1.0/bbs/create"

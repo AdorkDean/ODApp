@@ -282,7 +282,6 @@
 		B833A6D11C474AAB00F91E9A /* ODHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = B833A6D01C474AAB00F91E9A /* ODHelp.m */; };
 		B83C39031C48A0E9007B16FB /* ODBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C38511C48A0E9007B16FB /* ODBaseViewController.m */; };
 		B83C39041C48A0E9007B16FB /* ODBazaarDetailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C38551C48A0E9007B16FB /* ODBazaarDetailLayout.m */; };
-		B83C39051C48A0E9007B16FB /* ODBazaarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C38571C48A0E9007B16FB /* ODBazaarDetailViewController.m */; };
 		B83C39061C48A0E9007B16FB /* ODBazaarLabelSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C385A1C48A0E9007B16FB /* ODBazaarLabelSearchViewController.m */; };
 		B83C39071C48A0E9007B16FB /* ODBazaarReleaseRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C385D1C48A0E9007B16FB /* ODBazaarReleaseRewardViewController.m */; };
 		B83C39081C48A0E9007B16FB /* ODBazaarReleaseTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C385F1C48A0E9007B16FB /* ODBazaarReleaseTaskViewController.m */; };
@@ -323,6 +322,7 @@
 		B83C6B6A1C224F640063ED92 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B691C224F640063ED92 /* AppDelegate.m */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
+		B852CFAC1C58C9260031ABBD /* ODBazaarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B852CFAB1C58C9260031ABBD /* ODBazaarDetailViewController.m */; };
 		B855A79E1C52218D0038F559 /* ODBazaarRewardCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B855A79C1C52218D0038F559 /* ODBazaarRewardCollectionCell.m */; };
 		B855A79F1C52218D0038F559 /* ODBazaarRewardCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B855A79D1C52218D0038F559 /* ODBazaarRewardCollectionCell.xib */; };
 		B871CF9F1C4CF87400CF51BA /* ODOtherTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B871CF9E1C4CF87400CF51BA /* ODOtherTopicViewController.m */; };
@@ -719,8 +719,6 @@
 		B83C38511C48A0E9007B16FB /* ODBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBaseViewController.m; sourceTree = "<group>"; };
 		B83C38541C48A0E9007B16FB /* ODBazaarDetailLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailLayout.h; sourceTree = "<group>"; };
 		B83C38551C48A0E9007B16FB /* ODBazaarDetailLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarDetailLayout.m; sourceTree = "<group>"; };
-		B83C38561C48A0E9007B16FB /* ODBazaarDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailViewController.h; sourceTree = "<group>"; };
-		B83C38571C48A0E9007B16FB /* ODBazaarDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarDetailViewController.m; sourceTree = "<group>"; };
 		B83C38591C48A0E9007B16FB /* ODBazaarLabelSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarLabelSearchViewController.h; sourceTree = "<group>"; };
 		B83C385A1C48A0E9007B16FB /* ODBazaarLabelSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarLabelSearchViewController.m; sourceTree = "<group>"; };
 		B83C385C1C48A0E9007B16FB /* ODBazaarReleaseRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseRewardViewController.h; sourceTree = "<group>"; };
@@ -806,6 +804,8 @@
 		B83C6B861C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B83C6B921C2252F30063ED92 /* ODApp-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ODApp-Prefix.pch"; sourceTree = "<group>"; };
 		B83C6B931C22532B0063ED92 /* Define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
+		B852CFAA1C58C9260031ABBD /* ODBazaarDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailViewController.h; sourceTree = "<group>"; };
+		B852CFAB1C58C9260031ABBD /* ODBazaarDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarDetailViewController.m; sourceTree = "<group>"; };
 		B855A79B1C52218D0038F559 /* ODBazaarRewardCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarRewardCollectionCell.h; sourceTree = "<group>"; };
 		B855A79C1C52218D0038F559 /* ODBazaarRewardCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarRewardCollectionCell.m; sourceTree = "<group>"; };
 		B855A79D1C52218D0038F559 /* ODBazaarRewardCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarRewardCollectionCell.xib; sourceTree = "<group>"; };
@@ -1664,8 +1664,8 @@
 		B83C38531C48A0E9007B16FB /* BazaarDetail */ = {
 			isa = PBXGroup;
 			children = (
-				B83C38561C48A0E9007B16FB /* ODBazaarDetailViewController.h */,
-				B83C38571C48A0E9007B16FB /* ODBazaarDetailViewController.m */,
+				B852CFAA1C58C9260031ABBD /* ODBazaarDetailViewController.h */,
+				B852CFAB1C58C9260031ABBD /* ODBazaarDetailViewController.m */,
 				B83C38541C48A0E9007B16FB /* ODBazaarDetailLayout.h */,
 				B83C38551C48A0E9007B16FB /* ODBazaarDetailLayout.m */,
 			);
@@ -2583,6 +2583,7 @@
 				B83C391E1C48A0E9007B16FB /* ODActivityDetailController.m in Sources */,
 				B83C393A1C48A0E9007B16FB /* ODLazyViewController.m in Sources */,
 				B80F038C1C22A982009CE9D8 /* ODAppModel.m in Sources */,
+				B852CFAC1C58C9260031ABBD /* ODBazaarDetailViewController.m in Sources */,
 				9D14AA0E1C2A856800696929 /* CenterActivityCell.m in Sources */,
 				B83C394A1C48A0E9007B16FB /* ODUserNickNameController.m in Sources */,
 				D4D070B41C5600CB008527C9 /* UIColor+ODExtension.m in Sources */,
@@ -2677,7 +2678,6 @@
 				D425DA261C4E1F7E00BDD2AE /* IQTextView.m in Sources */,
 				9DF21E1B1C2D203400022063 /* CenterYuYueView.m in Sources */,
 				B83C39201C48A0E9007B16FB /* ODCenterDetailController.m in Sources */,
-				B83C39051C48A0E9007B16FB /* ODBazaarDetailViewController.m in Sources */,
 				B83C39031C48A0E9007B16FB /* ODBaseViewController.m in Sources */,
 				B83C6B671C224F640063ED92 /* main.m in Sources */,
 				9DD481151C44C90E004F34E3 /* ODTaskCell.m in Sources */,

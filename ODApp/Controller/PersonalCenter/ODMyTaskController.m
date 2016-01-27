@@ -673,13 +673,12 @@
         ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
         ODBazaarModel *model = self.FirstDataArray[indexPath.row];
         bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
-        bazaarDetail.task_status = [NSString stringWithFormat:@"%@",model.task_status];
         [self.navigationController pushViewController:bazaarDetail animated:YES];
     }else if (collectionView.tag == 222) {
         ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
         ODBazaarModel *model = self.secondDataArray[indexPath.row];
         bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
-        bazaarDetail.task_status = [NSString stringWithFormat:@"%@",model.task_status];
+  
         [self.navigationController pushViewController:bazaarDetail animated:YES];
 
     }
