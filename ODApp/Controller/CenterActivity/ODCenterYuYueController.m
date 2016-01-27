@@ -14,7 +14,12 @@
 #import "AFNetworking.h"
 #import "ODUserInformation.h"
 
-@interface ODCenterYuYueController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate , UITextFieldDelegate , UIPickerViewDataSource , UIPickerViewDelegate>
+#import "MBProgressHUD.h"
+
+@interface ODCenterYuYueController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate , UITextFieldDelegate , UIPickerViewDataSource , UIPickerViewDelegate , MBProgressHUDDelegate>{
+
+    MBProgressHUD *HUD;
+}
 
 
 @property(nonatomic , strong) UIView *headView;
@@ -68,13 +73,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    
-    
-
-
-    self.isPop = NO;
-
 
     self.timeArray = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
@@ -161,25 +159,6 @@
     
 }
 
-//创建警告框
--(void)createUIAlertControllerWithTitle:(NSString *)title
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-
-
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        if (self.isPop) {
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
- 
-    }]];
-
-
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-
 #pragma mark - 懒加载
 - (CenterYuYueView *)yuYueView
 {
@@ -240,25 +219,24 @@
     
     if ([self.yuYueView.btimeText.titleLabel.text isEqualToString:@"填写开始时间"]) {
         
-        [self createUIAlertControllerWithTitle:@"请选择时间"];
+        [self CreateProgressHudTitle:@"请选择时间" withAlpha:0.8f withAfterDelay:0.8f];
       
 
     }else if ([self.yuYueView.eTimeText.titleLabel.text isEqualToString:@"填写结束时间"]) {
         
-        [self createUIAlertControllerWithTitle:@"请填写结束时间"];
+        [self CreateProgressHudTitle:@"请填写结束时间" withAlpha:0.8f withAfterDelay:0.8f];
         
     }else if ([self.yuYueView.pursoseTextView.text isEqualToString:@""] || [self.yuYueView.pursoseTextView.text isEqualToString:@"输入活动目的"]) {
         
-        [self createUIAlertControllerWithTitle:@"请输入活动目的"];
+        [self CreateProgressHudTitle:@"请输入活动目的" withAlpha:0.8f withAfterDelay:0.8f];
         
     }else if ([self.yuYueView.contentTextView.text isEqualToString:@""] || [self.yuYueView.contentTextView.text isEqualToString:@"输入活动内容"]) {
-        
-       [self createUIAlertControllerWithTitle:@"请输入活动内容"];
+
+        [self CreateProgressHudTitle:@"请输入活动内容" withAlpha:0.8f withAfterDelay:0.8f];
         
     }else if ([self.yuYueView.peopleNumberTextField.text isEqualToString:@""]) {
       
-        [self createUIAlertControllerWithTitle:@"请输入参加人数"];
-        
+        [self CreateProgressHudTitle:@"请输入参加人数" withAlpha:0.8f withAfterDelay:0.8f];
     } else {
         
         [self getOrderId];
@@ -366,9 +344,8 @@
         }else{
             if ([weakSelf.start_datetime isEqualToString:@""]) {
                 
-                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请选择开始时间" message:nil delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles: nil];
-                [alter show];
                 
+                [self CreateProgressHudTitle:@"请选择开始时间" withAlpha:0.8f withAfterDelay:0.8f];
                 
             }else{
                 
@@ -418,8 +395,7 @@
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            
-            [self createUIAlertControllerWithTitle:responseObject[@"message"]];
+            [self CreateProgressHudTitle:responseObject[@"message"] withAlpha:1.0f withAfterDelay:1.0f];
             
         }
         
@@ -461,28 +437,37 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-
-            self.isPop = YES;
-            [self createUIAlertControllerWithTitle:@"感谢您的预约请等待审核"];
-
-
-              [self createUIAlertControllerWithTitle:@"预约成功"];
+            [self CreateProgressHudTitle:@"感谢您的预约请等待审核" withAlpha:1.0f withAfterDelay:1.0f];
             
-
+            [self.navigationController popToRootViewControllerAnimated:YES];
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-        [self createUIAlertControllerWithTitle:responseObject[@"message"]];
-            
-                 
+            [self CreateProgressHudTitle:responseObject[@"message"] withAlpha:1.0f withAfterDelay:1.0f];
         }
-        
-        
+  
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         
     }];
     
+}
+
+#pragma mark - 创建提示信息
+- (void)CreateProgressHudTitle:(NSString *)title withAlpha:(float)alpha withAfterDelay:(float)afterDelay
+{
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    HUD.delegate  = self;
+    
+    HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
+    HUD.mode = MBProgressHUDModeText;
+    HUD.labelText = title;
+    HUD.margin = 8.f;
+    HUD.yOffset = 150.f;
+    HUD.removeFromSuperViewOnHide = YES;
+    [HUD hide:YES afterDelay:afterDelay];
+   
 }
 
 #pragma mark - 点击事件

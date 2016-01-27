@@ -8,7 +8,10 @@
 
 #import "ODCommunityReleaseTopicViewController.h"
 
-@interface ODCommunityReleaseTopicViewController ()
+@interface ODCommunityReleaseTopicViewController (){
+
+    MBProgressHUD *HUD;
+}
 
 @end
 
@@ -64,9 +67,9 @@
     if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length>0) {
         [self joiningTogetherParmeters];
     }else if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length==0){
-        [self createUIAlertControllerWithTitle:@"请输入话题内容"];
+        [self CreateProgressHudTitle:@"请输入话题内容" withAlpha:0.8f withAfterDelay:0.8f];
     }else{
-        [self createUIAlertControllerWithTitle:@"请输入话题标题"];
+        [self CreateProgressHudTitle:@"请输入话题标题" withAlpha:0.8f withAfterDelay:0.8f];
     }
 }
 
@@ -162,7 +165,7 @@
         UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
         [actionSheet showInView:self.view];
     }else{
-        [self createUIAlertControllerWithTitle:@"已达图片最大上传数"];
+        [self CreateProgressHudTitle:@"已达图片最大上传数" withAlpha:0.8f withAfterDelay:0.8f];
     }
 }
 
@@ -179,7 +182,7 @@
                 [self presentViewController:imagePicker animated:YES completion:nil];
             }
             else {
-                [self createUIAlertControllerWithTitle:@"您当前的照相机不可用"];
+                [self CreateProgressHudTitle:@"您当前的照相机不可用" withAlpha:0.8f withAfterDelay:0.8f];
             }
             break;
         case 1:
@@ -338,6 +341,8 @@
             if (self.myBlock) {
                 self.myBlock([NSString stringWithFormat:@"refresh"]);
             }
+            
+            [self CreateProgressHudTitle:@"话题发布成功" withAlpha:1.0f withAfterDelay:1.0f];
             [self.navigationController popViewControllerAnimated:YES];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -347,11 +352,20 @@
 
 
 #pragma mark - 创建提示信息
--(void)createUIAlertControllerWithTitle:(NSString *)title
+- (void)CreateProgressHudTitle:(NSString *)title withAlpha:(float)alpha withAfterDelay:(float)afterDelay
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    HUD.delegate  = self;
+    
+    HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
+    HUD.mode = MBProgressHUDModeText;
+    HUD.labelText = title;
+    HUD.margin = 8.f;
+    HUD.yOffset = 150.f;
+    HUD.removeFromSuperViewOnHide = YES;
+    [HUD hide:YES afterDelay:afterDelay];
+    
 }
 
 #pragma mark - 试图将要出现

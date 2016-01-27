@@ -14,7 +14,9 @@
 #import "ODBazaarReleaseRewardViewController.h"
 #import "ODBazaarViewController.h"
 
-@interface ODBazaarReleaseTaskViewController : ODBaseViewController<UITextViewDelegate>
+#import "MBProgressHUD.h"
+
+@interface ODBazaarReleaseTaskViewController : ODBaseViewController<UITextViewDelegate, MBProgressHUDDelegate>
 
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)UIScrollView *scrollView;

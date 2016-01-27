@@ -66,7 +66,7 @@
 -(void)confirmButtonClick:(UIButton *)button
 {
     if (self.taskRewardBlock) {
-        self.taskRewardBlock(self.textField.text,[self.idArray objectAtIndex:self.count]);
+        self.taskRewardBlock(self.textField.text);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

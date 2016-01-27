@@ -23,7 +23,13 @@
 #import "ODMyOrderRecordController.h"
 #import "ODUserEvaluationController.h"
 #import "UMSocial.h"
-@interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>
+
+#import "MBProgressHUD.h"
+
+@interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate, MBProgressHUDDelegate>{
+
+    MBProgressHUD *HUD;
+}
 
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
@@ -350,6 +356,23 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }
+}
+
+#pragma mark - 创建提示信息
+- (void)CreateProgressHudTitle:(NSString *)title withAlpha:(float)alpha withAfterDelay:(float)afterDelay
+{
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    HUD.delegate  = self;
+    
+    HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
+    HUD.mode = MBProgressHUDModeText;
+    HUD.labelText = title;
+    HUD.margin = 8.f;
+    HUD.yOffset = 150.f;
+    HUD.removeFromSuperViewOnHide = YES;
+    [HUD hide:YES afterDelay:afterDelay];
+    
 }
 
 //动态设置每个item的大小

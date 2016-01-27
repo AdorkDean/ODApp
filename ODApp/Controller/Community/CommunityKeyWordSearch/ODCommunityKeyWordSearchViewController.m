@@ -42,10 +42,15 @@
 #pragma mark - 加载更多
 -(void)loadMoreData
 {
-    self.count ++;
-    NSDictionary *parameter = @{@"kw":self.keyText,@"suggest":@"0",@"page":[NSString stringWithFormat:@"%ld",self.count]};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kCommunityBbsSearchUrl paramater:signParameter];
+    if (self.searchBar.text.length>0) {
+        self.count ++;
+        NSDictionary *parameter = @{@"kw":self.searchBar.text,@"suggest":@"0",@"page":[NSString stringWithFormat:@"%ld",self.count]};
+        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        [self downLoadDataWithUrl:kCommunityBbsSearchUrl paramater:signParameter];
+    }else{
+        [self.collectionView.mj_footer endRefreshing];
+    }
+ 
 }
 
 #pragma mark - 初始化导航
@@ -122,8 +127,7 @@
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-     self.keyText = [NSString stringWithFormat:@"%@",self.searchBar.text];
-     [self joiningTogetherParmeters];
+    [self joiningTogetherParmeters];
 }
 
 #pragma mark - 初始化manager

@@ -132,7 +132,7 @@
 {
 
     self.isJob = NO;
-    if ([ODUserInformation getData].openID == nil) {
+    if ([[ODUserInformation getData].openID isEqualToString:@""]) {
         ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
         tabBar.selectedIndex = 4;
 
