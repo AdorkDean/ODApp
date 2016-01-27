@@ -8,11 +8,7 @@
 
 #import "ODCommunityDetailReplyViewController.h"
 
-@interface ODCommunityDetailReplyViewController (){
-
-    MBProgressHUD *HUD;
-}
-
+@interface ODCommunityDetailReplyViewController ()
 
 
 @end
