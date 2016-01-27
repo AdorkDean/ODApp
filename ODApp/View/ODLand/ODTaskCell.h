@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ODTaskCell : UICollectionViewCell
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *nickLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;

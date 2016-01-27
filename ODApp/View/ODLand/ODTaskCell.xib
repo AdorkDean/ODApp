@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="471" height="158"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="等待派单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LeY-F3-wVY">
-                        <rect key="frame" x="10" y="10" width="451" height="15"/>
+                        <rect key="frame" x="10" y="10" width="361" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="D14-1v-IKD"/>
                         </constraints>
@@ -72,18 +72,31 @@
                             <constraint firstAttribute="width" constant="60" id="RHt-lB-4SU"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnp-Dq-FLU">
+                        <rect key="frame" x="411" y="10" width="50" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="Pio-Hl-t7c"/>
+                            <constraint firstAttribute="width" constant="50" id="RyO-M0-Mrx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="删除">
+                            <color key="titleColor" red="1" green="0.1849362474" blue="0.14802274000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstItem="cyH-b6-alE" firstAttribute="leading" secondItem="Jy0-n7-BA4" secondAttribute="trailing" constant="20" id="14x-6H-yal"/>
                 <constraint firstItem="F9a-QS-a0y" firstAttribute="top" secondItem="bPM-Rj-3Ku" secondAttribute="bottom" constant="10" id="3tz-oW-p0L"/>
-                <constraint firstAttribute="trailing" secondItem="LeY-F3-wVY" secondAttribute="trailing" constant="10" id="4nV-PB-oaG"/>
+                <constraint firstAttribute="trailing" secondItem="LeY-F3-wVY" secondAttribute="trailing" constant="100" id="4nV-PB-oaG"/>
                 <constraint firstItem="QoO-72-jz7" firstAttribute="top" secondItem="Jy0-n7-BA4" secondAttribute="bottom" constant="10" id="6PF-9P-oFX"/>
                 <constraint firstAttribute="bottom" secondItem="mYd-ld-qeF" secondAttribute="bottom" constant="10" id="8Dj-Em-jdn"/>
                 <constraint firstItem="cyH-b6-alE" firstAttribute="top" secondItem="F9a-QS-a0y" secondAttribute="bottom" constant="10" id="ANE-fa-VyM"/>
+                <constraint firstAttribute="trailing" secondItem="cnp-Dq-FLU" secondAttribute="trailing" constant="10" id="BG8-no-zeq"/>
                 <constraint firstItem="LeY-F3-wVY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="Bj2-Yt-Pjp"/>
                 <constraint firstItem="QoO-72-jz7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="Bwi-XM-U9t"/>
+                <constraint firstItem="cnp-Dq-FLU" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="CQT-iU-r3e"/>
                 <constraint firstAttribute="trailing" secondItem="QoO-72-jz7" secondAttribute="trailing" constant="150" id="JpE-Lk-qxY"/>
                 <constraint firstAttribute="trailing" secondItem="mYd-ld-qeF" secondAttribute="trailing" constant="10" id="MJO-8A-Thm"/>
                 <constraint firstAttribute="trailing" secondItem="cyH-b6-alE" secondAttribute="trailing" constant="10" id="U4V-N9-yVh"/>
@@ -99,6 +112,7 @@
             <size key="customSize" width="471" height="158"/>
             <connections>
                 <outlet property="contentLabel" destination="cyH-b6-alE" id="f7V-cn-8fg"/>
+                <outlet property="deleteButton" destination="cnp-Dq-FLU" id="z7U-dV-F7z"/>
                 <outlet property="nickLabel" destination="QoO-72-jz7" id="Ltt-6p-h3L"/>
                 <outlet property="timeLabel" destination="mYd-ld-qeF" id="k9v-cC-xzR"/>
                 <outlet property="titleLabel" destination="F9a-QS-a0y" id="9hA-4p-OT1"/>

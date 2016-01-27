@@ -38,6 +38,9 @@
 @property (nonatomic, strong) AFHTTPRequestOperationManager *secondManager;
 @property (nonatomic, strong) NSMutableArray *secondDataArray;
 
+
+@property (nonatomic, strong) AFHTTPRequestOperationManager *delateManager;
+
 @property (nonatomic , strong) UIButton *allTaskButton;
 
 
@@ -290,6 +293,82 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)deleteAction:(UIButton *)sender
+{
+    
+    if (sender.tag == 111) {
+        ODTaskCell *cell = (ODTaskCell *)sender.superview.superview;
+        
+        NSIndexPath *indexPath = [self.firstCollectionView indexPathForCell:cell];
+          ODBazaarModel *model = self.FirstDataArray[indexPath.row];
+        
+         NSString *taskId = [NSString stringWithFormat:@"%@" , model.task_id];        
+        
+        [self delegateTaskWith:taskId];
+        
+    }else{
+        ODTaskCell *cell = (ODTaskCell *)sender.superview.superview;
+        
+        NSIndexPath *indexPath = [self.secondCollectionView indexPathForCell:cell];
+          ODBazaarModel *model = self.secondDataArray[indexPath.row];
+          NSString *taskId = [NSString stringWithFormat:@"%@" , model.task_id];
+        
+       [self delegateTaskWith:taskId];
+
+    
+    }
+    
+    
+  
+    
+    
+    
+  
+}
+
+- (void)delegateTaskWith:(NSString *)taskId
+{
+    
+    
+    
+    self.delateManager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"id":taskId , @"type":@"2",@"open_id":self.open_id};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    
+    NSString *url = @"http://woquapi.test.odong.com/1.0/bbs/del";
+    
+    [self.delateManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if (responseObject) {
+            
+            
+            
+            NSLog(@"_____%@" , responseObject);
+            
+            if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                
+                 self.firstPage = 1;
+                 self.secondPage = 1;
+                
+                [self.firstCollectionView.mj_header beginRefreshing];
+                [self.secondCollectionView.mj_header beginRefreshing];
+                
+                
+            }
+            
+            
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+
+    
+    
+}
 
 
 #pragma mark - 选择类型
@@ -554,6 +633,11 @@
     cell.userImageView.layer.borderWidth = 1;
 
     
+    [cell.deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+    
     
     if (collectionView.tag == 111) {
         
@@ -564,7 +648,17 @@
         cell.contentLabel.text = model.content;
         
         
+        cell.deleteButton.tag = 111;
+        
         NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
+        
+        
+        if ([status isEqualToString:@"-2"]||[status isEqualToString:@"-1"]) {
+            cell.deleteButton.hidden = NO;
+        }else{
+            cell.deleteButton.hidden = YES;
+        }
+        
         
         if ([status isEqualToString:@"1"]) {
             cell.typeLabel.text = @"等待派单";
@@ -609,9 +703,18 @@
         cell.nickLabel.text = model.user_nick;
         cell.titleLabel.text = model.title;
         cell.contentLabel.text = model.content;
-        
+          cell.deleteButton.tag = 222;
         
         NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
+        
+        
+        if ([status isEqualToString:@"-2"]||[status isEqualToString:@"-1"]) {
+            cell.deleteButton.hidden = NO;
+        }else{
+            cell.deleteButton.hidden = YES;
+        }
+
+        
         
         if ([status isEqualToString:@"1"]) {
             cell.typeLabel.text = @"等待派单";
@@ -670,17 +773,36 @@
 {
     
     if (collectionView.tag == 111) {
-        ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
-        ODBazaarModel *model = self.FirstDataArray[indexPath.row];
-        bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
-        [self.navigationController pushViewController:bazaarDetail animated:YES];
+        
+         ODBazaarModel *model = self.FirstDataArray[indexPath.row];
+        NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
+        if ([status isEqualToString:@"-1"]) {
+            ;
+        }else{
+            ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
+            
+            bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+            [self.navigationController pushViewController:bazaarDetail animated:YES];
+        }
+        
+        
+      
     }else if (collectionView.tag == 222) {
-        ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
-        ODBazaarModel *model = self.secondDataArray[indexPath.row];
-        bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
-  
-        [self.navigationController pushViewController:bazaarDetail animated:YES];
+        
+         ODBazaarModel *model = self.secondDataArray[indexPath.row];
+          NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
+        
+        if ([status isEqualToString:@"-1"]) {
+            ;
+        }else{
+            ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
+            
+            bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+            
+            [self.navigationController pushViewController:bazaarDetail animated:YES];
 
+        }
+      
     }
     
     
