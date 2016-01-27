@@ -241,8 +241,8 @@
 {
 
     if ([[ODUserInformation getData].openID isEqualToString:@""]) {
-        ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-        tabBar.selectedIndex = 4;
+        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
 
     }else{
         ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
