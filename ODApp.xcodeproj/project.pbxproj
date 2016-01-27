@@ -328,7 +328,7 @@
 		C658B9091C5238B80079B399 /* 活动目的icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = C658B9061C5238B80079B399 /* 活动目的icon@1x.png */; };
 		C658B90A1C5238B80079B399 /* 活动目的icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C658B9071C5238B80079B399 /* 活动目的icon@2x.png */; };
 		C658B90B1C5238B80079B399 /* 活动目的icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = C658B9081C5238B80079B399 /* 活动目的icon@3x.png */; };
-		C6641A021C57726D00F3C730 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C6641A011C57726D00F3C730 /* MBProgressHUD.m */; };
+		C6641A0B1C585B9F00F3C730 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C6641A0A1C585B9F00F3C730 /* MBProgressHUD.m */; };
 		C66F0C071C4CB4CB006E999B /* ODOthersInformationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C061C4CB4CB006E999B /* ODOthersInformationController.m */; };
 		C66F0C0B1C4CDEE9006E999B /* ODUserEvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C0A1C4CDEE9006E999B /* ODUserEvaluationController.m */; };
 		C66F0C101C4CDF4D006E999B /* ODEvaluationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C66F0C0F1C4CDF4D006E999B /* ODEvaluationModel.m */; };
@@ -812,8 +812,8 @@
 		C658B9061C5238B80079B399 /* 活动目的icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动目的icon@1x.png"; sourceTree = "<group>"; };
 		C658B9071C5238B80079B399 /* 活动目的icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动目的icon@2x.png"; sourceTree = "<group>"; };
 		C658B9081C5238B80079B399 /* 活动目的icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动目的icon@3x.png"; sourceTree = "<group>"; };
-		C6641A001C57726D00F3C730 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		C6641A011C57726D00F3C730 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		C6641A091C585B9F00F3C730 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		C6641A0A1C585B9F00F3C730 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		C66F0C051C4CB4CB006E999B /* ODOthersInformationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOthersInformationController.h; sourceTree = "<group>"; };
 		C66F0C061C4CB4CB006E999B /* ODOthersInformationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOthersInformationController.m; sourceTree = "<group>"; };
 		C66F0C091C4CDEE5006E999B /* ODUserEvaluationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserEvaluationController.h; sourceTree = "<group>"; };
@@ -1963,14 +1963,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		C66419FF1C57726D00F3C730 /* MBProgressHUD */ = {
+		C6641A081C585B9F00F3C730 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				C6641A001C57726D00F3C730 /* MBProgressHUD.h */,
-				C6641A011C57726D00F3C730 /* MBProgressHUD.m */,
+				C6641A091C585B9F00F3C730 /* MBProgressHUD.h */,
+				C6641A0A1C585B9F00F3C730 /* MBProgressHUD.m */,
 			);
-			name = MBProgressHUD;
-			path = ../../View/MBProgressHUD;
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		C66F0C041C4CB45E006E999B /* ODOthersInformation */ = {
@@ -2016,7 +2015,7 @@
 		D425D9E61C4E1F7E00BDD2AE /* ThirdFrame */ = {
 			isa = PBXGroup;
 			children = (
-				C66419FF1C57726D00F3C730 /* MBProgressHUD */,
+				C6641A081C585B9F00F3C730 /* MBProgressHUD */,
 				9DD00BA21C4E393300F0EE5F /* umeng_ios_social_sdk_4.4_arm64_custom */,
 				D425D9E71C4E1F7E00BDD2AE /* IQKeyBoardManager */,
 				D425DA0C1C4E1F7E00BDD2AE /* SDCycleScrollView */,
@@ -2655,7 +2654,7 @@
 				D425DA2E1C4E1F7E00BDD2AE /* TAAnimatedDotView.m in Sources */,
 				B83C39451C48A0E9007B16FB /* ODMyTopicController.m in Sources */,
 				D425DA1F1C4E1F7E00BDD2AE /* IQUITextFieldView+Additions.m in Sources */,
-				C6641A021C57726D00F3C730 /* MBProgressHUD.m in Sources */,
+				C6641A0B1C585B9F00F3C730 /* MBProgressHUD.m in Sources */,
 				B83C39461C48A0E9007B16FB /* ODPersonalCenterViewController.m in Sources */,
 				B83C394B1C48A0E9007B16FB /* ODUserSignatureController.m in Sources */,
 				B80E0B2C1C474C0500F36A17 /* ODCommunityDetailModel.m in Sources */,

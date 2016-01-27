@@ -8,12 +8,13 @@
 
 #import "ODBaseViewController.h"
 
+
+
+
 @interface ODCenterYuYueController : ODBaseViewController
 
 @property (nonatomic , copy) NSString *centerName;
 @property (nonatomic , copy) NSString *storeId;
 @property (nonatomic , copy) NSString *phoneNumber;
-
-@property (nonatomic, assign) BOOL isPop;
 
 @end

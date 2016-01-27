@@ -18,7 +18,12 @@
 #import "ODTabBarController.h"
 #import "ODChangePassWordController.h"
 
-@interface ODPersonalCenterViewController ()<UITableViewDataSource , UITableViewDelegate>
+#import "MBProgressHUD.h"
+
+@interface ODPersonalCenterViewController ()<UITableViewDataSource , UITableViewDelegate, MBProgressHUDDelegate>{
+
+    MBProgressHUD *HUD;
+}
 
 @property (nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
@@ -130,13 +135,23 @@
     
 }
 
-//创建警告框
--(void)createUIAlertControllerWithTitle:(NSString *)title
+#pragma mark - 创建提示信息
+- (void)CreateProgressHudTitle:(NSString *)title withAlpha:(float)alpha withAfterDelay:(float)afterDelay
 {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    HUD.delegate  = self;
+    
+    HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
+    HUD.mode = MBProgressHUDModeText;
+    HUD.labelText = title;
+    HUD.margin = 8.f;
+    HUD.yOffset = 150.f;
+    HUD.removeFromSuperViewOnHide = YES;
+    [HUD hide:YES afterDelay:afterDelay];
+    
 }
+
 
 
 #pragma mark - 懒加载
@@ -217,13 +232,12 @@
 - (void)landAction:(UIButton *)sender
 {
     if ([self.landView.accountTextField.text isEqualToString:@""]) {
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
+
+        [self CreateProgressHudTitle:@"请输入手机号" withAlpha:0.8f withAfterDelay:0.8f];
 
     }else if ([self.landView.passwordTextField.text isEqualToString:@""]) {
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入密码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
 
+        [self CreateProgressHudTitle:@"请输入密码" withAlpha:0.8f withAfterDelay:0.8f];
     }
     
     else {
@@ -320,10 +334,12 @@
             
             self.pageNumber++;
             if (self.pageNumber >= 3) {
-                [self createUIAlertControllerWithTitle:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册"];
+                
+                [self CreateProgressHudTitle:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册" withAlpha:0.8f withAfterDelay:1.0f];
 
             }else {
-                   [self createUIAlertControllerWithTitle:responseObject[@"message"]];
+        
+                [self CreateProgressHudTitle:responseObject[@"message"] withAlpha:0.8f withAfterDelay:1.0f];
             }
   
         }

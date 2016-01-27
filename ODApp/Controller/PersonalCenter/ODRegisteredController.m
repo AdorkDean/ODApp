@@ -11,7 +11,13 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODLandMainController.h"
-@interface ODRegisteredController ()<UITextFieldDelegate>
+
+#import "MBProgressHUD.h"
+
+@interface ODRegisteredController ()<UITextFieldDelegate, MBProgressHUDDelegate>{
+
+    MBProgressHUD *HUD;
+}
 
 @property(nonatomic , strong) UIView *headView;
 @property(nonatomic , strong) ODRegisteredView *registView;
@@ -144,19 +150,16 @@
 - (void)registere:(UIButton *)sender
 {
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
+        
+        [self CreateProgressHudTitle:@"请输入手机号" withAlpha:0.8f withAfterDelay:0.8f];
 
     }else if ([self.registView.verification.text isEqualToString:@""]) {
         
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入验证码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
+        [self CreateProgressHudTitle:@"请输入验证码" withAlpha:0.8f withAfterDelay:0.8f];
         
     }else if ([self.registView.password.text isEqualToString:@""]) {
-        
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入密码" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
-     
+
+        [self CreateProgressHudTitle:@"请输入密码" withAlpha:0.8f withAfterDelay:0.8f];
     }
 
     else {
@@ -170,8 +173,8 @@
 {
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
-        UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"请输入手机号" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-        [alter show];
+        
+        [self CreateProgressHudTitle:@"请输入手机号" withAlpha:0.8f withAfterDelay:0.8f];
     }else {
         
         [self getCode];
@@ -204,6 +207,22 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - 创建提示信息
+- (void)CreateProgressHudTitle:(NSString *)title withAlpha:(float)alpha withAfterDelay:(float)afterDelay
+{
+    
+    HUD = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    HUD.delegate  = self;
+    
+    HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
+    HUD.mode = MBProgressHUDModeText;
+    HUD.labelText = title;
+    HUD.margin = 8.f;
+    HUD.yOffset = 150.f;
+    HUD.removeFromSuperViewOnHide = YES;
+    [HUD hide:YES afterDelay:afterDelay];
+    
+}
 
 #pragma mark - 请求数据
 -(void)getRegest
@@ -214,12 +233,10 @@
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/register";
 
-    
     self.managers = [AFHTTPRequestOperationManager manager];
     
     [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-     
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
          
             ODLandMainController *vc = [[ODLandMainController alloc] init];
@@ -234,19 +251,14 @@
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             
             if (self.registView.password.text.length < 6 || self.registView.password.text.length > 26 ) {
-                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"密码仅支持6到26位" message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-                [alter show];
+
+                [self CreateProgressHudTitle:@"密码仅支持6到26位" withAlpha:0.8f withAfterDelay:0.8f];
 
             }else {
-                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-                [alter show];
 
+                [self CreateProgressHudTitle:responseObject[@"message"] withAlpha:0.8f withAfterDelay:0.8f];
             }
-            
-            
-            
-            
-            
+    
         }
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -274,8 +286,8 @@
             [self.timer setFireDate:[NSDate distantPast]];        }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-            [alter show];
+            
+            [self CreateProgressHudTitle:responseObject[@"message"] withAlpha:0.8f withAfterDelay:0.8f];
         }
        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
