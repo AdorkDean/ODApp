@@ -53,5 +53,8 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollerHeight;
 
+@property (weak, nonatomic) IBOutlet UIImageView *addressImageView;
+
+
 
 @end
