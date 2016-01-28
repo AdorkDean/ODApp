@@ -256,9 +256,6 @@ int pageNumnber = 0;
    
     [self.tableView registerNib:[UINib nibWithNibName:@"CenterDetailCell" bundle:nil] forCellReuseIdentifier:@"item"];
     
-    
-    
-    
     [self.view addSubview:self.tableView];
     
     
