@@ -10,7 +10,7 @@
 
 @interface ODTabBarController : UITabBarController
 
-@property(nonatomic,strong)UIImageView *imageView;
+//@property(nonatomic,strong)UIImageView *imageView;
 
 @property (assign,nonatomic) NSInteger currentIndex;
 

@@ -387,19 +387,19 @@
                 tabbar.selectedIndex = 2;
                 
                 NSInteger index = 2;
-                for (NSInteger i = 0; i < 5; i++) {
-                    UIButton *newButton= (UIButton *)[tabbar.imageView viewWithTag:1+i];
-                    UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-                    
-                    if (i!=index) {
-                        newButton.selected =NO;
-                        //                    button.selected = YES;
-                        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
-                        
-                    }else{
-                        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
-                    }
-                }
+//                for (NSInteger i = 0; i < 5; i++) {
+//                    UIButton *newButton= (UIButton *)[tabbar.imageView viewWithTag:1+i];
+//                    UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
+//                    
+//                    if (i!=index) {
+//                        newButton.selected =NO;
+//                        //                    button.selected = YES;
+//                        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
+//                        
+//                    }else{
+//                        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
+//                    }
+//                }
             }
             else{
                 
@@ -480,8 +480,10 @@
     }
     
     self.navigationController.navigationBar.hidden = YES;
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 0;
+    self.tabBarController.tabBar.hidden = YES;
+
 }
 
 
@@ -489,8 +491,10 @@
 #pragma mark - 试图将要消失
 -(void)viewWillDisappear:(BOOL)animated
 {
-    ODTabBarController * tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1.0;
+//    ODTabBarController * tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 1.0;
+    self.tabBarController.tabBar.hidden = NO;
+
 }
 
 - (void)didReceiveMemoryWarning {

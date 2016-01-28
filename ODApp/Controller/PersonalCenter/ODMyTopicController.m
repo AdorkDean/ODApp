@@ -78,8 +78,10 @@
         [self.secondCollectionView.mj_header beginRefreshing];
     }
     
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 0;
+    self.tabBarController.tabBar.hidden = YES;
+    
 }
 
 #pragma mark - 初始化
