@@ -68,7 +68,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyL-Fi-GVj">
-                    <rect key="frame" x="10" y="275" width="300" height="1"/>
+                    <rect key="frame" x="10" y="280" width="300" height="1"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="LJC-sQ-p4d"/>
@@ -78,7 +78,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中心运营时间:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3P-gG-bgE">
-                    <rect key="frame" x="40" y="284" width="95" height="20"/>
+                    <rect key="frame" x="40" y="289" width="95" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="Iza-M3-z44"/>
                         <constraint firstAttribute="width" constant="95" id="eBo-Bj-wAX"/>
@@ -88,14 +88,14 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shijian" translatesAutoresizingMaskIntoConstraints="NO" id="scO-Xu-FFt">
-                    <rect key="frame" x="15" y="284" width="20" height="20"/>
+                    <rect key="frame" x="15" y="289" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="VhU-4u-8cn"/>
                         <constraint firstAttribute="width" constant="20" id="ZFu-Es-FF5"/>
                     </constraints>
                 </imageView>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sC3-Ui-PXG">
-                    <rect key="frame" x="135" y="276" width="175" height="60"/>
+                    <rect key="frame" x="135" y="281" width="175" height="60"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="s40-ME-MhP"/>
@@ -171,10 +171,10 @@
                     </state>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jmP-hF-6Cp">
-                    <rect key="frame" x="110" y="229" width="200" height="40"/>
+                    <rect key="frame" x="110" y="229" width="200" height="45"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Ynh-KR-cWE"/>
+                        <constraint firstAttribute="height" constant="45" id="Ynh-KR-cWE"/>
                     </constraints>
                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -192,7 +192,7 @@
                 <constraint firstItem="sC3-Ui-PXG" firstAttribute="top" secondItem="eyL-Fi-GVj" secondAttribute="bottom" id="8GO-q9-sQa"/>
                 <constraint firstAttribute="trailing" secondItem="sC3-Ui-PXG" secondAttribute="trailing" constant="10" id="Alo-aa-OqI"/>
                 <constraint firstItem="DkE-tf-wbm" firstAttribute="top" secondItem="54T-Et-I2q" secondAttribute="bottom" constant="10" id="BQt-fX-97l"/>
-                <constraint firstItem="eyL-Fi-GVj" firstAttribute="top" secondItem="hg1-d8-oPT" secondAttribute="bottom" constant="20" id="G4x-2Y-9Kq"/>
+                <constraint firstItem="eyL-Fi-GVj" firstAttribute="top" secondItem="hg1-d8-oPT" secondAttribute="bottom" constant="25" id="G4x-2Y-9Kq"/>
                 <constraint firstAttribute="trailing" secondItem="RTH-or-qXN" secondAttribute="trailing" constant="10" id="GzA-lk-vhR"/>
                 <constraint firstItem="g0J-WV-Sx0" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="HEW-vh-kuC"/>
                 <constraint firstItem="ggY-Rn-wEc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="K1i-7I-mNM"/>
