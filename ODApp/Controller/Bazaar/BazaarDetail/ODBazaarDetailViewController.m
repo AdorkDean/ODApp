@@ -46,7 +46,8 @@
     
     //分享按钮
     if ([self.task_status_name isEqualToString:@"过期"]&& [[ODUserInformation getData].openID isEqualToString:self.open_id]) {
-         self.shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:@"删除" font:0];
+         self.shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-61.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:@"删除" font:16];
+        [self.shareButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     }else{
         self.shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:nil font:0];
         UIImageView *shareImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width-37.5, 28, 20, 20) imageName:@"话题详情-分享icon" tag:0];
@@ -66,6 +67,14 @@
 {
     if ([button.titleLabel.text isEqualToString:@"删除"]) {
         
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation getData].openID};
+            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+            [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter withName:@"删除任务"];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
     }else{
         ODBazaarDetailModel *model = self.dataArray[0];
         NSString *url = model.share[@"icon"];
@@ -281,7 +290,6 @@
             [self presentViewController:alert animated:YES completion:nil];
         }else if ([button.titleLabel.text isEqualToString:@"接受任务"]){
             if ([[ODUserInformation getData].openID isEqualToString:@""]) {
-                
                 ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
                 [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
                 
@@ -583,7 +591,7 @@
     ODBazaarDetailModel *model = self.picArray[indexPath.row];
     NSString *str = [NSString stringWithFormat:@"%@",model.apply_status];
     if ([[ODUserInformation getData].openID isEqualToString:self.open_id]) {
-        if ([str isEqualToString:@"0"] && self.num == 1) {
+        if ([str isEqualToString:@"0"] && [self.task_status_name isEqualToString:@"待派遣"]) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否委派" message:nil preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
@@ -593,7 +601,6 @@
                 [manager GET:kBazaarTaskDelegateUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                     if ([responseObject[@"status"] isEqualToString:@"success"]) {
                         NSLog(@"%@",responseObject[@"status"]);
-                        self.num ++ ;
                         [self.picArray removeAllObjects];
                         [self.picArray addObject:model];
                         [self.collectionView reloadData];

@@ -156,6 +156,10 @@
                 [weakSelf createBBSDetailView];
                 weakSelf.tableView.tableHeaderView = weakSelf.tabelHeaderView;
                 [weakSelf.tableView reloadData];
+                if (weakSelf.dataArray.count)
+                {
+                    [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:weakSelf.dataArray.count - 1 inSection:0]atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+                }
 
     
                 
@@ -173,7 +177,7 @@
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:paramater success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if (responseObject) {
-            
+
             if (weakSelf.count == 1) {
                 [self.dataArray removeAllObjects];
             }
@@ -411,6 +415,9 @@
         }else{
             detailReply.parent_id = [NSString stringWithFormat:@"3"];
         }
+        detailReply.myBlock = ^(NSString *str){
+            self.refresh = str;
+        };
         [self.navigationController pushViewController:detailReply animated:YES];
     }
 }
@@ -469,12 +476,20 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self joiningTogetherParmetersWithUserInfo:NO];
+   
+    if ([self.refresh isEqualToString:@"refresh"]) {
+        
+        [self joiningTogetherParmetersWithUserInfo:NO];
+    }
     self.navigationController.navigationBar.hidden = YES;
 
 }
 
-
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    self.refresh = @"";
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

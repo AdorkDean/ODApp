@@ -86,6 +86,9 @@
 
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
+            if (self.myBlock) {
+                self.myBlock([NSString stringWithFormat:@"refresh"]);
+            }
             [self.navigationController popViewControllerAnimated:YES];
             
             [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"回复成功"];
