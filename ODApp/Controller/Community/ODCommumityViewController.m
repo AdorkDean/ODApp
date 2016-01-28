@@ -182,6 +182,7 @@
         
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 

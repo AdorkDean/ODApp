@@ -120,6 +120,9 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [self.collectionView.mj_header endRefreshing];
         
+        [self.collectionView.mj_header endRefreshing];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        
     }];
 }
 

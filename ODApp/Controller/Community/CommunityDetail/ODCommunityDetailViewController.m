@@ -164,6 +164,7 @@
         
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -193,6 +194,10 @@
         }
 
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
