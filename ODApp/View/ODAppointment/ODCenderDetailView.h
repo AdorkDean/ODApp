@@ -28,7 +28,9 @@
 
 
 @property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+
+
+@property (weak, nonatomic) IBOutlet UITextView *addressTextView;
 
 
 @property (weak, nonatomic) IBOutlet UITextView *timeTextView;

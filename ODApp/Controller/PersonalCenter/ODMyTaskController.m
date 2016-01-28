@@ -653,7 +653,7 @@
         NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
         
         
-        if ([status isEqualToString:@"-2"]||[status isEqualToString:@"-1"]) {
+        if ([status isEqualToString:@"-1"]) {
             cell.deleteButton.hidden = NO;
         }else{
             cell.deleteButton.hidden = YES;
@@ -708,7 +708,7 @@
         NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
         
         
-        if ([status isEqualToString:@"-2"]||[status isEqualToString:@"-1"]) {
+        if ([status isEqualToString:@"-1"]) {
             cell.deleteButton.hidden = NO;
         }else{
             cell.deleteButton.hidden = YES;
