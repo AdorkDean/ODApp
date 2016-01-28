@@ -47,7 +47,7 @@
     [self setupOneChildVc:[[ODNavigationController alloc]initWithRootViewController:[[ODCenterActivityViewController alloc]init]] image:[NSString stringWithFormat:@"%@_default",imageArray[1]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[1]] title:titleArray[1]];
     [self setupOneChildVc:[[ODNavigationController alloc]initWithRootViewController:[[ODBazaarViewController alloc]init]] image:[NSString stringWithFormat:@"%@_default",imageArray[2]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[2]] title:titleArray[2]];
     [self setupOneChildVc:[[ODNavigationController alloc]initWithRootViewController:[[ODCommumityViewController alloc]init]] image:[NSString stringWithFormat:@"%@_default",imageArray[3]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[3]] title:titleArray[3]];
-    [self setupOneChildVc:[[ODLandMainController alloc]init] image:[NSString stringWithFormat:@"%@_default",imageArray[4]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[4]] title:titleArray[4]];
+    [self setupOneChildVc:[[ODNavigationController alloc]initWithRootViewController:[[ODLandMainController alloc]init]] image:[NSString stringWithFormat:@"%@_default",imageArray[4]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[4]] title:titleArray[4]];
 }
 
 -(void)setTabBar

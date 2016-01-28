@@ -15,8 +15,28 @@
     
     
     self.backgroundColor = [UIColor whiteColor];
- 
+    self.reasonTextView.scrollEnabled = NO;
+
     
 }
+
+
+- (void)setModel:(ODBazaarModel *)model
+{
+    if (_model != model) {
+        
+        _model = model;
+    }
+    
+    
+    
+    self.titleLabel.text = model.title;
+    self.reasonTextView.text = model.reason;
+    
+    
+    
+}
+
+
 
 @end
