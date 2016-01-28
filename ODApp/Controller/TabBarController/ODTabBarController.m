@@ -30,6 +30,7 @@
     [super viewDidLoad];
     [self createViewControllers];
     [self setTabBar];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -42,12 +43,11 @@
 {
     NSArray *titleArray = @[@"首页发现",@"中心活动",@"欧动集市",@"欧动社区",@"个人中心"];
     NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
-    
-    [self setupOneChildVc:[[ODNavigationController alloc]initWithRootViewController:[[ODHomeFoundViewController alloc]init]] image:[NSString stringWithFormat:@"%@_default",imageArray[0]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[0]] title:titleArray[0]];
-    [self setupOneChildVc:[[ODNavigationController alloc]initWithRootViewController:[[ODCenterActivityViewController alloc]init]] image:[NSString stringWithFormat:@"%@_default",imageArray[1]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[1]] title:titleArray[1]];
-    [self setupOneChildVc:[[ODNavigationController alloc]initWithRootViewController:[[ODBazaarViewController alloc]init]] image:[NSString stringWithFormat:@"%@_default",imageArray[2]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[2]] title:titleArray[2]];
-    [self setupOneChildVc:[[ODNavigationController alloc]initWithRootViewController:[[ODCommumityViewController alloc]init]] image:[NSString stringWithFormat:@"%@_default",imageArray[3]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[3]] title:titleArray[3]];
-    [self setupOneChildVc:[[ODNavigationController alloc]initWithRootViewController:[[ODLandMainController alloc]init]] image:[NSString stringWithFormat:@"%@_default",imageArray[4]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[4]] title:titleArray[4]];
+    NSArray *controllers = @[[[ODHomeFoundViewController alloc]init],[[ODCenterActivityViewController alloc]init],[[ODBazaarViewController alloc]init],[[ODCommumityViewController alloc]init],[[ODLandMainController alloc]init]];
+    for (NSInteger i = 0; i < controllers.count; i++)
+    {
+        [self setupOneChildVc:[[ODNavigationController alloc]initWithRootViewController:controllers[i]] image:[NSString stringWithFormat:@"%@_default",imageArray[i]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[i]] title:titleArray[i]];
+    }
 }
 
 -(void)setTabBar
@@ -78,7 +78,7 @@
 #pragma mark - ODTabBarDelegate
 - (void)od_tabBar:(ODTabBar *)od_tabBar selectIndex:(NSInteger)selectIndex
 {
-    if (selectIndex == 4 && [[ODUserInformation getData].openID isEqualToString:@""])
+    if (selectIndex == 4 && [ODUserInformation getData].openID.length == 0)
     {
         self.selectedIndex = self.currentIndex;
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];

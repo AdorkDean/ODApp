@@ -56,9 +56,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-   
+    
     self.isRefresh = NO;
-
+    
     self.centerNumber = 1;
     
     self.dataArray = [[NSMutableArray alloc] init];
@@ -66,20 +66,20 @@
     self.pictureArray = [[NSMutableArray alloc] init];
     self.pictureDetailArray = [[NSMutableArray alloc] init];
     self.titleArray = [[NSMutableArray alloc] init];
-
+    
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-  
-
+    
+    
     [self navigationInit];
     [self createCollectionView];
-   
+    
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self downRefresh];
     }];
     
-     [self.collectionView.mj_header beginRefreshing];
+    [self.collectionView.mj_header beginRefreshing];
 }
 
 
@@ -92,6 +92,8 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.navigationController.navigationBar.hidden = YES;
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
+    self.view.userInteractionEnabled = YES;
+    self.headView.userInteractionEnabled = YES;
     [self.view addSubview:self.headView];
     
     // 中心活动label
@@ -101,10 +103,10 @@
     
     
     // 场地预约button
-
+    
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 100, 16,90, 44) target:self sel:@selector(rightClick:) tag:0 image:nil title:@"场地预约" font:16];
     [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
+    
     
     confirmButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     
@@ -120,8 +122,8 @@
 #pragma mark - 刷新
 - (void)downRefresh
 {
-     [self getCenter];
-   
+    [self getCenter];
+    
     
 }
 
@@ -137,7 +139,7 @@
     }
     
     
-
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -186,7 +188,7 @@
             
         }else{
             [self.collectionView.mj_header endRefreshing];
-
+            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -195,11 +197,6 @@
         [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
         
     }];
-    
-    
-    
-    
-    
     
     
 }
@@ -216,7 +213,7 @@
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/other/store/detail";
     
-       [self.phoneManager GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [self.phoneManager GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -225,14 +222,14 @@
             
             self.phoneNumber = result[@"tel"];
             
-                      
+            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
     }];
-
+    
     
 }
 
@@ -257,22 +254,22 @@
         if (responseObject) {
             
             
-              [self.pictureArray removeAllObjects];
-              [self.pictureDetailArray removeAllObjects];
-              [self.titleArray removeAllObjects];
+            [self.pictureArray removeAllObjects];
+            [self.pictureDetailArray removeAllObjects];
+            [self.titleArray removeAllObjects];
             
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSMutableArray *result = dict[@"result"];
             
-                        
+            
             for (NSDictionary *itemDict in result) {
-             
+                
                 NSString *picture = itemDict[@"img_url"];
                 NSString *pictureDetail = itemDict[@"banner_url"];
                 NSString *title = itemDict[@"title"];
                 
                 
-                          
+                
                 
                 [weakSelf.pictureArray addObject:picture];
                 [weakSelf.pictureDetailArray addObject:pictureDetail];
@@ -281,8 +278,8 @@
             }
             
             [weakSelf.collectionView reloadData];
-          
-           
+            
+            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -330,7 +327,7 @@
         
     }];
     
-   
+    
 }
 
 
@@ -352,7 +349,7 @@
         vc.storeId = self.storeId;
         vc.phoneNumber = self.phoneNumber;
         [self.navigationController pushViewController:vc animated:YES];
-
+        
     }
     
     
@@ -374,9 +371,9 @@
         ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
         vc.storeId = self.storeId;
         [self.navigationController pushViewController:vc animated:YES];
-
+        
     }
-   
+    
     
 }
 
@@ -385,19 +382,19 @@
 {
     ODChoseCenterController *vc = [[ODChoseCenterController alloc] init];
     vc.storeCenterNameBlock = ^(NSString *name , NSString *storeId , NSInteger storeNumber){
-    self.centerNumber = storeNumber;
-    [self.firstHeader.searchButton setTitle:name forState:UIControlStateNormal];
-          
-          
+        self.centerNumber = storeNumber;
+        
+        self.firstHeader.centerNameLabel.text = name;
+        
     };
-
+    
     
     vc.isRefreshBlock = ^(BOOL isRefresh){
-    
+        
         self.isRefresh = isRefresh;
         
     };
-
+    
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -415,8 +412,8 @@
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"CenterActivityCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.view addSubview:self.collectionView];
-
-  
+    
+    
 }
 
 
@@ -446,22 +443,22 @@
     
     ODActivityDetailController *vc = [[ODActivityDetailController alloc] init];
     
-     CenterActivityModel *model = self.dataArray[indexPath.row];
+    CenterActivityModel *model = self.dataArray[indexPath.row];
     
     
     if ([[ODUserInformation getData].openID isEqualToString:@""]) {
         
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
-
-     
+        
+        
     }else{
         
         vc.activityId = [NSString stringWithFormat:@"%ld" , (long)model.activity_id];
         vc.storeId = self.storeId;
         vc.openId =   [ODUserInformation getData].openID;
         [self.navigationController pushViewController:vc animated:YES];
-
+        
     }
     
     
@@ -471,7 +468,7 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     
-   
+    
     self.firstHeader = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"firstHeader" forIndexPath:indexPath];
     
     self.firstHeader.cycleScrollerView.delegate = self;
@@ -479,10 +476,16 @@
     [self.firstHeader.cycleScrollerView setTitlesGroup:self.titleArray];
     
     
-    [self.firstHeader.searchButton addTarget:self action:@selector(searchButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.firstHeader.centerButton addTarget:self action:@selector(centerDetail:) forControlEvents:UIControlEventTouchUpInside];
-    [self.firstHeader.searchButton setTitle:self.centerName forState:UIControlStateNormal];
     
+    
+    UITapGestureRecognizer *searchTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchButtonClick:)];
+    [self.firstHeader.coverImageView addGestureRecognizer:searchTap];
+    
+    
+    
+    [self.firstHeader.centerButton addTarget:self action:@selector(centerDetail:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.firstHeader.centerNameLabel.text = self.centerName;
     
     return self.firstHeader;
     
