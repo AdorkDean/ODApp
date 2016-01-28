@@ -61,6 +61,9 @@
 {
     [self.tabBar layoutSubviews];
     self.selectedViewController = self.childViewControllers[selectedIndex];
+    if (selectedIndex == 4 && [[ODUserInformation getData].openID isEqualToString:@""])
+        return;
+    self.currentIndex = selectedIndex;
 }
 
 - (void)setupOneChildVc:(UIViewController *)childVc image:(NSString *)image selectedImage:(NSString *)selectedImage title:(NSString *)title
