@@ -3266,8 +3266,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ODApp/Others/ODApp-Prefix.pch";
-				INFOPLIST_FILE = ODApp/Info.plist;
+				GCC_PREFIX_HEADER = "ODApp/Others/Public/ODApp-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/ODApp/Others/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -3293,8 +3293,8 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "ODApp/Others/ODApp-Prefix.pch";
-				INFOPLIST_FILE = ODApp/Info.plist;
+				GCC_PREFIX_HEADER = "ODApp/Others/Public/ODApp-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/ODApp/Others/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
