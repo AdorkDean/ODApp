@@ -607,9 +607,7 @@
         if ([status isEqualToString:@"-1"]) {
             ODViolationsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
             
-            cell.titleLabel.text = model.title;
-            cell.reasonTextView.text = model.reason;
-            cell.reasonTextView.scrollEnabled = NO;
+            cell.model = model;
             [cell.deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
             return cell;
 
@@ -617,82 +615,20 @@
         }else{
             
             ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
-            [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
-            cell.nickLabel.text = model.user_nick;
-            cell.titleLabel.text = model.title;
-            cell.contentLabel.text = model.content;
             
-            if ([status isEqualToString:@"1"]) {
-                cell.typeLabel.text = @"等待派单";
-                cell.typeLabel.textColor = [UIColor redColor];
-                
-            }else if ([status isEqualToString:@"2"]) {
-                
-                cell.typeLabel.text = @"进行中";
-            }else if ([status isEqualToString:@"3"]) {
-                
-                cell.typeLabel.text = @"已交付";
-            }else if ([status isEqualToString:@"4"]) {
-                
-                cell.typeLabel.text = @"任务完成";
-            }else if ([status isEqualToString:@"-2"]) {
-                
-                cell.typeLabel.text = @"过期任务";
-                cell.typeLabel.textColor = [UIColor lightGrayColor];
-            }else if ([status isEqualToString:@"0"]) {
-                
-                cell.typeLabel.text = @"无效";
-            }
-
+            cell.model = model;
             
-            //设置Label显示不同大小的字体
-            NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];
-            NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
-            [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
-            cell.timeLabel.attributedText = noteStr;
             return cell;
-
 
         }
         
     }else {
         
         ODBazaarModel *model = self.secondDataArray[indexPath.row];
-        NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
+     
         ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
-        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
-        cell.nickLabel.text = model.user_nick;
-        cell.titleLabel.text = model.title;
-        cell.contentLabel.text = model.content;
         
-        if ([status isEqualToString:@"1"]) {
-            cell.typeLabel.text = @"等待派单";
-            cell.typeLabel.textColor = [UIColor redColor];
-            
-        }else if ([status isEqualToString:@"2"]) {
-            
-            cell.typeLabel.text = @"进行中";
-        }else if ([status isEqualToString:@"3"]) {
-            
-            cell.typeLabel.text = @"已交付";
-        }else if ([status isEqualToString:@"4"]) {
-            
-            cell.typeLabel.text = @"任务完成";
-        }else if ([status isEqualToString:@"-2"]) {
-            
-            cell.typeLabel.text = @"过期任务";
-            cell.typeLabel.textColor = [UIColor lightGrayColor];
-        }else if ([status isEqualToString:@"0"]) {
-            
-            cell.typeLabel.text = @"无效";
-        }
-        
-        
-        //设置Label显示不同大小的字体
-        NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];
-        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
-        [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
-        cell.timeLabel.attributedText = noteStr;
+        cell.model = model;
         
         return cell;
         
