@@ -267,6 +267,7 @@
         for (NSInteger i = 0; i < resultModel.bbs_imgs.count; i++) {
             imageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, CGRectGetMaxY(bbsContentLabel.frame)+17.5+(300+10)*i, kScreenSize.width, 300) imageName:nil tag:0];
             [imageView sd_setImageWithURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]]];
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
             [self.bbsView addSubview:imageView];
         }
         if ([[ODUserInformation getData].openID isEqualToString:userModel.open_id]) {
