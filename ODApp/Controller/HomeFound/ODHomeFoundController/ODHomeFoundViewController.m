@@ -81,7 +81,7 @@
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
-            [self.dataArray removeAllObjects];
+            [weakSelf.dataArray removeAllObjects];
             
             NSDictionary *result = dict[@"result"];
             
@@ -94,11 +94,8 @@
                 [weakSelf.dataArray addObject:model];
     
             }
-
-            
+          
             [weakSelf mySort:weakSelf.dataArray];
-    
-            
             
             NSDictionary *users = result[@"users"];
             for (id userKey in users) {
@@ -109,14 +106,14 @@
                 [userInfoDic setObject:model forKey:userKey];
             }
             
-            [self getcycleScrollViewRequest];
+            [weakSelf getcycleScrollViewRequest];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [self.collectionView.mj_header endRefreshing];
+        [weakSelf.collectionView.mj_header endRefreshing];
         
-        [self.collectionView.mj_header endRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
         
     }];
 }
@@ -156,9 +153,9 @@
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
-            [self.pictureArray removeAllObjects];
-            [self.titleArray removeAllObjects];
-            [self.pictureDetailArray removeAllObjects];
+            [weakSelf.pictureArray removeAllObjects];
+            [weakSelf.titleArray removeAllObjects];
+            [weakSelf.pictureDetailArray removeAllObjects];
             
             NSMutableArray *result = dict[@"result"];
             
@@ -179,7 +176,7 @@
             
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [self.collectionView.mj_header endRefreshing];
+        [weakSelf.collectionView.mj_header endRefreshing];
         
     }];
 }
@@ -276,7 +273,13 @@
     NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     vc.open_id = [userInfoDic[userId]open_id];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([[ODUserInformation getData].openID isEqualToString:[userInfoDic[userId]open_id]]) {
+        
+    }else{
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

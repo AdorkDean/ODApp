@@ -273,11 +273,11 @@
                 NSDictionary *itemDict = users[key];
                 ODCommunityModel *model = [[ODCommunityModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
-                [self.firstUserInfoDic setObject:model forKey:userKey];
+                [weakSelf.firstUserInfoDic setObject:model forKey:userKey];
             }
-            if (self.FirstDataArray.count == 0) {
-                self.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40, self.scrollView.center.y / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [self.scrollView addSubview:self.firstLabel];
+            if (weakSelf.FirstDataArray.count == 0) {
+                weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40, weakSelf.scrollView.center.y / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [weakSelf.scrollView addSubview:weakSelf.firstLabel];
             }
 
             [weakSelf.firstCollectionView reloadData];
@@ -290,9 +290,9 @@
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        [self.firstCollectionView.mj_header endRefreshing];
-        [self.firstCollectionView.mj_footer endRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.firstCollectionView.mj_header endRefreshing];
+        [weakSelf.firstCollectionView.mj_footer endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
 }
@@ -319,43 +319,32 @@
             [weakSelf.secondUserInfoDic removeAllObjects];
         }
         
-        
-        
+
         if (responseObject) {
             NSDictionary *result = responseObject[@"result"];
             NSDictionary *bbs_list = result[@"bbs_list"];
             NSDictionary *users = result[@"users"];
-            
-            
-            
+
             for (NSMutableDictionary *dic in bbs_list) {
-                
-                
-                
-                ODCommunityModel *model = [[ODCommunityModel alloc]init];
-                [model setValuesForKeysWithDictionary:dic];
-                [weakSelf.secondDataArray addObject:model];
-            }
-            
+
+            ODCommunityModel *model = [[ODCommunityModel alloc]init];
+            [model setValuesForKeysWithDictionary:dic];
+            [weakSelf.secondDataArray addObject:model];
+        }
             
             for (id userKey in users) {
                 NSString *key = [NSString stringWithFormat:@"%@",userKey];
                 NSDictionary *itemDict = users[key];
                 ODCommunityModel *model = [[ODCommunityModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
-                [self.secondUserInfoDic setObject:model forKey:userKey];
+                [weakSelf.secondUserInfoDic setObject:model forKey:userKey];
             }
             
-            
-            
-            
-            
-            if (self.secondDataArray.count == 0) {
-                self.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40 + self.scrollView.frame.size.width, self.scrollView.center.y / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [self.scrollView addSubview:self.secondLabel];
+            if (weakSelf.secondDataArray.count == 0) {
+                weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40 + weakSelf.scrollView.frame.size.width, weakSelf.scrollView.center.y / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [weakSelf.scrollView addSubview:weakSelf.secondLabel];
             }
-
-            
+ 
             [weakSelf.secondCollectionView reloadData];
             [weakSelf.secondCollectionView.mj_header endRefreshing];
             [weakSelf.secondCollectionView.mj_footer endRefreshing];
@@ -366,9 +355,9 @@
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        [self.secondCollectionView.mj_header endRefreshing];
-        [self.secondCollectionView.mj_footer endRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.secondCollectionView.mj_header endRefreshing];
+        [weakSelf.secondCollectionView.mj_footer endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 

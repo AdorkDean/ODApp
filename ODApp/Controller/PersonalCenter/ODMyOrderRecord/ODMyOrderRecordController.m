@@ -101,10 +101,10 @@
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        [self.noReusltLabel removeFromSuperview];
+        [weakSelf.noReusltLabel removeFromSuperview];
         
-        if (self.count == 1) {
-            [self.orderArray removeAllObjects];
+        if (weakSelf.count == 1) {
+            [weakSelf.orderArray removeAllObjects];
         }
         
         if (responseObject) {
@@ -120,12 +120,12 @@
    
             }
 
-            if (self.orderArray.count == 0) {
-                self.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无预约" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [self.view addSubview:self.noReusltLabel];
+            if (weakSelf.orderArray.count == 0) {
+                weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无预约" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [weakSelf.view addSubview:self.noReusltLabel];
             }
             
-            [self.collectionView reloadData];
+            [weakSelf.collectionView reloadData];
             
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
@@ -137,9 +137,9 @@
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        [self.collectionView.mj_header endRefreshing];
-        [self.collectionView.mj_footer endRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf.collectionView.mj_footer endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 

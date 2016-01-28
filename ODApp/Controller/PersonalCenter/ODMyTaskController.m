@@ -297,7 +297,7 @@
     
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/bbs/del";
-    
+    __weak typeof (self)weakSelf = self;
     [self.delateManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (responseObject) {
@@ -305,17 +305,17 @@
             
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 
-                 self.firstPage = 1;
-                 self.secondPage = 1;
+                 weakSelf.firstPage = 1;
+                 weakSelf.secondPage = 1;
                 
-                [self.firstCollectionView.mj_header beginRefreshing];
-                [self.secondCollectionView.mj_header beginRefreshing];
+                [weakSelf.firstCollectionView.mj_header beginRefreshing];
+                [weakSelf.secondCollectionView.mj_header beginRefreshing];
                 
                 
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                 
                 
-               [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+               [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
                 
                 
             }
@@ -324,9 +324,9 @@
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self.firstCollectionView.mj_header beginRefreshing];
-        [self.secondCollectionView.mj_header beginRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.firstCollectionView.mj_header beginRefreshing];
+        [weakSelf.secondCollectionView.mj_header beginRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 
     
@@ -472,15 +472,15 @@
     
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/task/list";
-    
+    __weak typeof (self)weakSelf = self;
     [self.firstManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
  
         if (responseObject) {
             
             if ([countNumber isEqualToString:@"1"]) {
-                [self.FirstDataArray removeAllObjects];
+                [weakSelf.FirstDataArray removeAllObjects];
                 
-                [self.firstLabel removeFromSuperview];
+                [weakSelf.firstLabel removeFromSuperview];
     
             }
    
@@ -491,27 +491,27 @@
             for (NSDictionary *itemDict in tasks) {
                 ODBazaarModel *model = [[ODBazaarModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
-                [self.FirstDataArray addObject:model];
+                [weakSelf.FirstDataArray addObject:model];
             }
 
-            if (self.FirstDataArray.count == 0) {
-                self.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40, self.scrollView.center.y / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [self.scrollView addSubview:self.firstLabel];
+            if (weakSelf.FirstDataArray.count == 0) {
+                weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40, self.scrollView.center.y / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [weakSelf.scrollView addSubview:self.firstLabel];
             }
-            [self.firstCollectionView reloadData];
-            [self.firstCollectionView.mj_header endRefreshing];
-            [self.firstCollectionView.mj_footer endRefreshing];
+            [weakSelf.firstCollectionView reloadData];
+            [weakSelf.firstCollectionView.mj_header endRefreshing];
+            [weakSelf.firstCollectionView.mj_footer endRefreshing];
             
             if (tasks.count == 0) {
-                [self.firstCollectionView.mj_footer noticeNoMoreData];
+                [weakSelf.firstCollectionView.mj_footer noticeNoMoreData];
             }
         }
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        [self.firstCollectionView.mj_header endRefreshing];
-        [self.firstCollectionView.mj_footer endRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.firstCollectionView.mj_header endRefreshing];
+        [weakSelf.firstCollectionView.mj_footer endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -526,23 +526,17 @@
     
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/task/list";
-    
+    __weak typeof (self)weakSelf = self;
     [self.secondManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        
-        
-        
-        
+
         if (responseObject) {
             
             if ([countNumber isEqualToString:@"1"]) {
-                [self.secondDataArray removeAllObjects];
-                [self.secondLabel removeFromSuperview];
-                
+                [weakSelf.secondDataArray removeAllObjects];
+                [weakSelf.secondLabel removeFromSuperview];
                 
             }
-
-            
+     
             NSDictionary *result = responseObject[@"result"];
             NSArray *tasks = result[@"tasks"];
             
@@ -555,33 +549,31 @@
                 if (![task_status isEqualToString:@"-1"]) {
                     ODBazaarModel *model = [[ODBazaarModel alloc]init];
                     [model setValuesForKeysWithDictionary:itemDict];
-                    [self.secondDataArray addObject:model];
+                    [weakSelf.secondDataArray addObject:model];
                 }
-                
-                
-              
+
             }
             
-            if (self.secondDataArray.count == 0) {
-                self.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40 + self.scrollView.frame.size.width, self.scrollView.center.y / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [self.scrollView addSubview:self.secondLabel];
+            if (weakSelf.secondDataArray.count == 0) {
+                weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40 + weakSelf.scrollView.frame.size.width, weakSelf.scrollView.center.y / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [weakSelf.scrollView addSubview:self.secondLabel];
             }
             
-            [self.secondCollectionView.mj_header endRefreshing];
-            [self.secondCollectionView.mj_footer endRefreshing];
-            [self.secondCollectionView reloadData];
+            [weakSelf.secondCollectionView.mj_header endRefreshing];
+            [weakSelf.secondCollectionView.mj_footer endRefreshing];
+            [weakSelf.secondCollectionView reloadData];
             
             if (tasks.count == 0) {
-                [self.secondCollectionView.mj_footer noticeNoMoreData];
+                [weakSelf.secondCollectionView.mj_footer noticeNoMoreData];
             }
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        [self.secondCollectionView.mj_header endRefreshing];
-        [self.secondCollectionView.mj_footer endRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.secondCollectionView.mj_header endRefreshing];
+        [weakSelf.secondCollectionView.mj_footer endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
       

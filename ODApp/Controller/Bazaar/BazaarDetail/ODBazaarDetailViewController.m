@@ -45,10 +45,14 @@
     [self.headView addSubview:backButton];
     
     //分享按钮
-    UIButton *shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:nil font:0];
-    UIImageView *shareImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width-37.5, 28, 20, 20) imageName:@"话题详情-分享icon" tag:0];
-    [self.headView addSubview:shareImageView];
-    [self.headView addSubview:shareButton];
+    if ([self.task_status_name isEqualToString:@"过期"]&& [[ODUserInformation getData].openID isEqualToString:self.open_id]) {
+         self.shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:@"删除" font:0];
+    }else{
+        self.shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:nil font:0];
+        UIImageView *shareImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width-37.5, 28, 20, 20) imageName:@"话题详情-分享icon" tag:0];
+        [self.headView addSubview:shareImageView];
+    }
+    [self.headView addSubview:self.shareButton];
 
 }
 
@@ -60,31 +64,34 @@
 
 -(void)shareButtonClick:(UIButton *)button
 {
-    ODBazaarDetailModel *model = self.dataArray[0];
-    NSString *url = model.share[@"icon"];
-    NSString *content = model.share[@"desc"];
-    NSString *link = model.share[@"link"];
-    NSString *title = model.share[@"title"];
+    if ([button.titleLabel.text isEqualToString:@"删除"]) {
+        
+    }else{
+        ODBazaarDetailModel *model = self.dataArray[0];
+        NSString *url = model.share[@"icon"];
+        NSString *content = model.share[@"desc"];
+        NSString *link = model.share[@"link"];
+        NSString *title = model.share[@"title"];
+        
+        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:url];
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+        
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+        
+        [UMSocialSnsService presentSnsIconSheetView:self
+                                             appKey:@"569dda54e0f55a994f0021cf"
+                                          shareText:content
+                                         shareImage:nil
+                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                           delegate:self];
+        
 
-    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:url];
-
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-    
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-    
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-    
-    [UMSocialSnsService presentSnsIconSheetView:self
-                                         appKey:@"569dda54e0f55a994f0021cf"
-                                      shareText:content
-                                     shareImage:nil
-                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                       delegate:self];
-    
+    }
 }
-
-
 #pragma mark - 创建scrollView
 -(void)createScrollView
 {
@@ -126,22 +133,16 @@
             ODBazaarDetailModel *detailModel = [[ODBazaarDetailModel alloc]init];
             [detailModel setValuesForKeysWithDictionary:result];
             [weakSelf.dataArray addObject:detailModel];
-            self.applys = result[@"applys"];
+            weakSelf.applys = result[@"applys"];
             for (NSDictionary *itemDict in _applys) {
                 ODBazaarDetailModel *model = [[ODBazaarDetailModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
-                NSString *status = [NSString stringWithFormat:@"%@",model.apply_status];
-                if ([status isEqualToString:@"1"]) {
-                    [self.picArray addObject:model];
-                    NSLog(@"--------%ld",self.picArray.count);
-                }
-                [self.picArray addObject:model];
-                NSLog(@"+++++++++%ld",self.picArray.count);
+                [weakSelf.picArray addObject:model];
             }
         }
-        [self createUserInfoView];
-        [self createTaskTopDetailView];
-        [self createTaskBottomDetailView];
+        [weakSelf createUserInfoView];
+        [weakSelf createTaskTopDetailView];
+        [weakSelf createTaskBottomDetailView];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         NSLog(@"error");
@@ -308,45 +309,47 @@
 #pragma mark - 提交数据
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter withName:(NSString *)name
 {
+    __weak typeof (self)weakSelf = self;
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
 
         if ([name isEqualToString:@"删除任务"]) {
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                if (self.myBlock) {
-                    self.myBlock([NSString stringWithFormat:@"del"]);
+                if (weakSelf.myBlock) {
+                    weakSelf.myBlock([NSString stringWithFormat:@"del"]);
                 }
-                [self.navigationController popViewControllerAnimated:YES];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
             }
             
         }else if ([name isEqualToString:@"接受任务"]) {
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                if (self.myBlock) {
-                    self.myBlock([NSString stringWithFormat:@"accept"]);
+                if (weakSelf.myBlock) {
+                    weakSelf.myBlock([NSString stringWithFormat:@"accept"]);
                 }
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"接受成功"];
-                [self.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
-                [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
-                self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"接受成功"];
+                [weakSelf.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
+                [weakSelf.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+                weakSelf.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
             }
         }else if ([name isEqualToString:@"确认提交"]){
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                if (self.myBlock) {
-                    self.myBlock([NSString stringWithFormat:@"submit"]);
+                if (weakSelf.myBlock) {
+                    weakSelf.myBlock([NSString stringWithFormat:@"submit"]);
                 }
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"提交成功"];
-                [self.taskButton setTitle:@"已提交" forState:UIControlStateNormal];
+                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"提交成功"];
+                [weakSelf.taskButton setTitle:@"已提交" forState:UIControlStateNormal];
             }
              NSLog(@"------%@",responseObject);
         }else if ([name isEqualToString:@"确认完成"]){
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                if (self.myBlock) {
-                    self.myBlock([NSString stringWithFormat:@"complete"]);
+                if (weakSelf.myBlock) {
+                    weakSelf.myBlock([NSString stringWithFormat:@"complete"]);
                 }
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"确认成功"];
-                [self.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
+                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"确认成功"];
+                [weakSelf.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
             }
-            NSLog(@"------%@",responseObject);
+
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -589,15 +592,17 @@
                 NSDictionary *parameter = @{@"task_id":self.task_id,@"apply_open_id":model.open_id};
                 NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
                 AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                
+                __weak typeof (self)weakSelf = self;
                 [manager GET:kBazaarTaskDelegateUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                     if ([responseObject[@"status"] isEqualToString:@"success"]) {
                         NSLog(@"%@",responseObject[@"status"]);
-                        self.num ++ ;
-                        [self.picArray removeAllObjects];
-                        [self.picArray addObject:model];
-                        [self.collectionView reloadData];
-                        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"委派成功"];
-                        [self.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
+                        weakSelf.num ++ ;
+                        [weakSelf.picArray removeAllObjects];
+                        [weakSelf.picArray addObject:model];
+                        [weakSelf.collectionView reloadData];
+                        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"委派成功"];
+                        [weakSelf.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
                     }
                 } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
                 }];

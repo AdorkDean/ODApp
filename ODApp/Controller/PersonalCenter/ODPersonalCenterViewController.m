@@ -229,17 +229,17 @@
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/login1";
     
     self.manager = [AFHTTPRequestOperationManager manager];
-    
+    __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
             
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
 
-            self.landView.accountTextField.text = @"";
-            self.landView.passwordTextField.text = @"";
+            weakSelf.landView.accountTextField.text = @"";
+            weakSelf.landView.passwordTextField.text = @"";
             
             
             NSMutableDictionary *dic = responseObject[@"result"];
@@ -251,44 +251,28 @@
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             [user setObject:openId forKey:KUserDefaultsOpenId];
             
-            
-            
-//            NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
-            
             ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             tabBar.selectedIndex = tabBar.currentIndex;
             
-//            NSInteger index = tabBar.selectedIndex;
-//            for (NSInteger i = 0; i < 5; i++)
-//            {
-//                UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
-//                UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-//                if (i!=index) {
-//                    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
-//                }else{
-//                    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
-//                }
-//                
-//                newButton.selected = i == index;
-//            }
+
             ODHomeFoundViewController *vc1 = [[ODHomeFoundViewController alloc] init];
             
-            [self.navigationController presentViewController:vc1 animated:YES completion:nil];
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"登陆成功"];
+            [weakSelf.navigationController presentViewController:vc1 animated:YES completion:nil];
+            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"登陆成功"];
             
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
             
-            self.pageNumber++;
-            if (self.pageNumber >= 3) {
+            weakSelf.pageNumber++;
+            if (weakSelf.pageNumber >= 3) {
                 
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册"];
+                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册"];
                 
             }else {
                 
                 
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:responseObject[@"message"]];
+                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:responseObject[@"message"]];
             }
             
         }

@@ -82,12 +82,12 @@
     __weak typeof (self)weakSelf = self;
     [self.manager GET:kMyApplyActivityUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        [self.noReusltLabel removeFromSuperview];
+        [weakSelf.noReusltLabel removeFromSuperview];
         
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
-            [self.dataArray removeAllObjects];
+            [weakSelf.dataArray removeAllObjects];
             
             
             NSDictionary *result = dict[@"result"];
@@ -98,20 +98,20 @@
                 
             }
             
-            if (self.dataArray.count == 0) {
-                self.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无活动" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [self.view addSubview:self.noReusltLabel];
+            if (weakSelf.dataArray.count == 0) {
+                weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无活动" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [weakSelf.view addSubview:self.noReusltLabel];
             }
             else{
                 [weakSelf.collectionView reloadData];
             }
             
-            [self.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_header endRefreshing];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        [self.collectionView.mj_header endRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 

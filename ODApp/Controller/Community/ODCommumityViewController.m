@@ -144,8 +144,8 @@
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        if (self.count == 1) {
-            [self.dataArray removeAllObjects];
+        if (weakSelf.count == 1) {
+            [weakSelf.dataArray removeAllObjects];
         }
         if (responseObject) {
             NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -183,9 +183,9 @@
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
-        [self.collectionView.mj_header endRefreshing];
-        [self.collectionView.mj_footer endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf.collectionView.mj_footer endRefreshing];
         
     }];
 }
@@ -240,7 +240,13 @@
     NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     vc.open_id = [userInfoDic[userId]open_id];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if ([[ODUserInformation getData].openID isEqualToString:[userInfoDic[userId]open_id]]) {
+        
+    }else{
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

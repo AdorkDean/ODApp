@@ -65,17 +65,17 @@
     
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/info";
-    
+    __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         NSMutableDictionary *dic = responseObject[@"result"];
         ODUserModel *model = [[ODUserModel alloc] initWithDict:dic];
    
-        [self.dataArray addObject:model];
+        [weakSelf.dataArray addObject:model];
         
-        [self createTableView];
-        [self.tableView reloadData];
+        [weakSelf createTableView];
+        [weakSelf.tableView reloadData];
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -416,21 +416,19 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
   
+    __weak typeof (self)weakSelf = self;
     [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
             NSString *str = result[@"File"];
            
-                self.imgsString = str;
-                
-                
-                [self saveImge];
-            
-        
+            weakSelf.imgsString = str;
+   
+            [weakSelf saveImge];
+
         }
-     
-      
+  
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
        
     }];
@@ -450,6 +448,7 @@
     
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/change";
+    __weak typeof (self)weakSelf = self;
     [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
@@ -457,12 +456,12 @@
            
             
        
-               [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+               [weakSelf.imagePicker dismissViewControllerAnimated:YES completion:nil];
             
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
+            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:weakSelf cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
             [alter show];
         }
 

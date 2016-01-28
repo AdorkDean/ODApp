@@ -1445,13 +1445,13 @@
 		D4D070D61C59B9FA008527C9 /* Bazaar */ = {
 			isa = PBXGroup;
 			children = (
+				D4D070E61C59B9FA008527C9 /* ODBazaarViewController.h */,
+				D4D070E71C59B9FA008527C9 /* ODBazaarViewController.m */,
+				D4D070E41C59B9FA008527C9 /* ODBazaarHeaderView.h */,
+				D4D070E51C59B9FA008527C9 /* ODBazaarHeaderView.m */,
 				D4D070D71C59B9FA008527C9 /* BazaarDetail */,
 				D4D070DC1C59B9FA008527C9 /* BazaarLabelSearch */,
 				D4D070DF1C59B9FA008527C9 /* BazaarReleaseTask */,
-				D4D070E41C59B9FA008527C9 /* ODBazaarHeaderView.h */,
-				D4D070E51C59B9FA008527C9 /* ODBazaarHeaderView.m */,
-				D4D070E61C59B9FA008527C9 /* ODBazaarViewController.h */,
-				D4D070E71C59B9FA008527C9 /* ODBazaarViewController.m */,
 			);
 			path = Bazaar;
 			sourceTree = "<group>";
@@ -1459,10 +1459,10 @@
 		D4D070D71C59B9FA008527C9 /* BazaarDetail */ = {
 			isa = PBXGroup;
 			children = (
-				D4D070D81C59B9FA008527C9 /* ODBazaarDetailLayout.h */,
-				D4D070D91C59B9FA008527C9 /* ODBazaarDetailLayout.m */,
 				D4D070DA1C59B9FA008527C9 /* ODBazaarDetailViewController.h */,
 				D4D070DB1C59B9FA008527C9 /* ODBazaarDetailViewController.m */,
+				D4D070D81C59B9FA008527C9 /* ODBazaarDetailLayout.h */,
+				D4D070D91C59B9FA008527C9 /* ODBazaarDetailLayout.m */,
 			);
 			path = BazaarDetail;
 			sourceTree = "<group>";
@@ -1479,10 +1479,10 @@
 		D4D070DF1C59B9FA008527C9 /* BazaarReleaseTask */ = {
 			isa = PBXGroup;
 			children = (
-				D4D070E01C59B9FA008527C9 /* ODBazaarReleaseRewardViewController.h */,
-				D4D070E11C59B9FA008527C9 /* ODBazaarReleaseRewardViewController.m */,
 				D4D070E21C59B9FA008527C9 /* ODBazaarReleaseTaskViewController.h */,
 				D4D070E31C59B9FA008527C9 /* ODBazaarReleaseTaskViewController.m */,
+				D4D070E01C59B9FA008527C9 /* ODBazaarReleaseRewardViewController.h */,
+				D4D070E11C59B9FA008527C9 /* ODBazaarReleaseRewardViewController.m */,
 			);
 			path = BazaarReleaseTask;
 			sourceTree = "<group>";
@@ -1503,13 +1503,13 @@
 		D4D070F51C59B9FA008527C9 /* Community */ = {
 			isa = PBXGroup;
 			children = (
-				D4D070F61C59B9FA008527C9 /* CommunityDetail */,
-				D4D070FC1C59B9FA008527C9 /* CommunityKeyWordSearch */,
-				D4D070FF1C59B9FA008527C9 /* CommunityReleaseTopic */,
 				D4D071021C59B9FA008527C9 /* ODCommumityViewController.h */,
 				D4D071031C59B9FA008527C9 /* ODCommumityViewController.m */,
 				D4D071041C59B9FA008527C9 /* ODCommunityHeaderView.h */,
 				D4D071051C59B9FA008527C9 /* ODCommunityHeaderView.m */,
+				D4D070F61C59B9FA008527C9 /* CommunityDetail */,
+				D4D070FC1C59B9FA008527C9 /* CommunityKeyWordSearch */,
+				D4D070FF1C59B9FA008527C9 /* CommunityReleaseTopic */,
 			);
 			path = Community;
 			sourceTree = "<group>";
@@ -1517,9 +1517,9 @@
 		D4D070F61C59B9FA008527C9 /* CommunityDetail */ = {
 			isa = PBXGroup;
 			children = (
-				D4D070F71C59B9FA008527C9 /* CommunityDetailReply */,
 				D4D070FA1C59B9FA008527C9 /* ODCommunityDetailViewController.h */,
 				D4D070FB1C59B9FA008527C9 /* ODCommunityDetailViewController.m */,
+				D4D070F71C59B9FA008527C9 /* CommunityDetailReply */,
 			);
 			path = CommunityDetail;
 			sourceTree = "<group>";

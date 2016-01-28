@@ -377,41 +377,28 @@
 #pragma mark - 提交数据
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
+    
+    __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         NSString *status = dict[@"status"];
         if ([status isEqualToString:@"success"]) {
-            if (self.myBlock) {
-                self.myBlock([NSString stringWithFormat:@"release"]);
+            if (weakSelf.myBlock) {
+                weakSelf.myBlock([NSString stringWithFormat:@"release"]);
             }
             
-            self.isJob = YES;
-            if (self.isBazaar == NO) {
-//                NSArray *imageArray =@[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
+            weakSelf.isJob = YES;
+            if (weakSelf.isBazaar == NO) {
+
                 ODTabBarController *tabbar = (ODTabBarController *)self.navigationController.tabBarController;
                 tabbar.selectedIndex = 2;
-                
-//                NSInteger index = 2;
-//                for (NSInteger i = 0; i < 5; i++) {
-//                    UIButton *newButton= (UIButton *)[tabbar.imageView viewWithTag:1+i];
-//                    UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-//                    
-//                    if (i!=index) {
-//                        newButton.selected =NO;
-//                        //                    button.selected = YES;
-//                        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
-//                        
-//                    }else{
-//                        imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
-//                    }
-//                }
+
             }
             else{
-                
-                
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"任务发布成功"];
-                [self.navigationController popViewControllerAnimated:YES];
+            
+                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"任务发布成功"];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
             }
         }else{
             NSString *message = dict[@"message"];
@@ -424,7 +411,7 @@
                 message = @"请输入内容";
             }
             
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:message];
+            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:message];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         

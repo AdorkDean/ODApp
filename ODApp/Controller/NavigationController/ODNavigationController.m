@@ -26,18 +26,10 @@
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
+    viewController.hidesBottomBarWhenPushed = self.childViewControllers.count > 0;
     [super pushViewController:viewController animated:animated];
-    self.tabBarController.tabBar.hidden = YES;
 }
 
-#pragma mark - UINavigationControllerDelegate
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    if (viewController == self.childViewControllers[0])
-    {
-        self.interactivePopGestureRecognizer.delegate = _touchDelegate;
-        viewController.tabBarController.tabBar.hidden = NO;
-    }
-}
+
 
 @end

@@ -162,9 +162,9 @@
             }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -175,7 +175,7 @@
         if (responseObject) {
             
             if (weakSelf.count == 1) {
-                [self.dataArray removeAllObjects];
+                [weakSelf.dataArray removeAllObjects];
             }
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSArray *result = dict[@"result"];
@@ -189,15 +189,15 @@
             [weakSelf.tableView.mj_footer endRefreshing];
             
             if (result.count == 0) {
-                [self.tableView.mj_footer noticeNoMoreData];
+                [weakSelf.tableView.mj_footer noticeNoMoreData];
             }
         }
 
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -267,6 +267,7 @@
         for (NSInteger i = 0; i < resultModel.bbs_imgs.count; i++) {
             imageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, CGRectGetMaxY(bbsContentLabel.frame)+17.5+(300+10)*i, kScreenSize.width, 300) imageName:nil tag:0];
             [imageView sd_setImageWithURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]]];
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
             [self.bbsView addSubview:imageView];
         }
         if ([[ODUserInformation getData].openID isEqualToString:userModel.open_id]) {
@@ -396,7 +397,13 @@
 
 -(void)replyButtonClick:(UIButton *)button
 {
-    if ([ODUserInformation getData].openID) {
+ 
+    if ([[ODUserInformation getData].openID isEqualToString:@""]) {
+        
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
+        
+    }else{
         
         ODCommunityDetailReplyViewController *detailReply = [[ODCommunityDetailReplyViewController alloc]init];
         detailReply.bbs_id = [NSString stringWithFormat:@"%@",self.bbs_id];
@@ -406,12 +413,7 @@
             detailReply.parent_id = [NSString stringWithFormat:@"3"];
         }
         [self.navigationController pushViewController:detailReply animated:YES];
-        
-    }else{
-        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
-        [self.navigationController pushViewController:personalCenter animated:YES];
     }
-
 }
 
 -(void)cellDeleteButtonClick:(UIButton *)button
@@ -434,19 +436,21 @@
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isBbs:(BOOL)isBbs
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    __weak typeof (self)weakSelf = self;
     [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if (isBbs) {
             NSLog(@"%@",responseObject);
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                if (self.myBlock) {
-                    self.myBlock(@"refresh");
+                if (weakSelf.myBlock) {
+                    weakSelf.myBlock(@"refresh");
                 }
-                [self.navigationController popViewControllerAnimated:YES];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
             }
         }else{
             NSLog(@"%@",responseObject);
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                [self joiningTogetherParmetersWithUserInfo:NO];
+                [weakSelf joiningTogetherParmetersWithUserInfo:NO];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

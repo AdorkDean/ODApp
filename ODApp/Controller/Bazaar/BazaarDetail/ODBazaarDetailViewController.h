@@ -38,6 +38,7 @@
 @property(nonatomic,strong)NSString *task_status_name;
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)UIButton *taskButton;
+@property(nonatomic,strong)UIButton *shareButton;
 @property(nonatomic,copy)NSString *open_id;
 @property(nonatomic,copy)NSString *task_id;
 @property(nonatomic)NSInteger num;

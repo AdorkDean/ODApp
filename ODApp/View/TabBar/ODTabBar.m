@@ -16,6 +16,7 @@
     if (self = [super initWithFrame:frame])
     {
         self.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+        self.tintColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     }
     return self;
 }
@@ -54,7 +55,6 @@
                 else if ([subView isKindOfClass:NSClassFromString(@"UITabBarButtonLabel")])
                 {
                     [subView setValue:@(NSTextAlignmentCenter) forKeyPath:@"textAlignment"];
-                    [subView setValue:[UIColor colorWithHexString:@"#484848" alpha:1] forKeyPath:@"textColor"];
                     subView.frame = CGRectMake(0, 37, self.od_width / 5, 18);
                 }
             }

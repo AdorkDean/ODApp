@@ -223,7 +223,7 @@
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/register";
 
     self.managers = [AFHTTPRequestOperationManager manager];
-    
+    __weak typeof (self)weakSelf = self;
     [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
@@ -233,19 +233,19 @@
             NSString *openId = dic[@"open_id"];
             
             [ODUserInformation getData].openID = openId;
-            [self.navigationController pushViewController:vc animated:YES];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
             
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             
-            if (self.registView.password.text.length < 6 || self.registView.password.text.length > 26 ) {
+            if (weakSelf.registView.password.text.length < 6 || weakSelf.registView.password.text.length > 26 ) {
 
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"密码仅支持6到26位"];
+                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"密码仅支持6到26位"];
                 
             }else {
 
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
             }
     
         }
@@ -266,17 +266,17 @@
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/verify/code/send";
    
     self.manager = [AFHTTPRequestOperationManager manager];
-    
+    __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             //启动定时器
-            [self.timer setFireDate:[NSDate distantPast]];        }
+            [weakSelf.timer setFireDate:[NSDate distantPast]];        }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

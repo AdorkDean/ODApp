@@ -112,21 +112,21 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/change";
-    
+    __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
-            if (self.getTextBlock) {
-                if (self.getTextBlock) {
-                    self.getTextBlock(@"1");
+            if (weakSelf.getTextBlock) {
+                if (weakSelf.getTextBlock) {
+                    weakSelf.getTextBlock(@"1");
                 }
              
-                [self.navigationController popViewControllerAnimated:YES];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
             }
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -143,22 +143,22 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/change";
-    
+    __weak typeof (self)weakSelf = self;
     [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
-            if (self.getTextBlock) {
-                if (self.getTextBlock) {
-                    self.getTextBlock(@"2");
+            if (weakSelf.getTextBlock) {
+                if (weakSelf.getTextBlock) {
+                    weakSelf.getTextBlock(@"2");
                 }
                 
-                [self.navigationController popViewControllerAnimated:YES];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
                 
             }
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
       
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
