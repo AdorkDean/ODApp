@@ -20,6 +20,7 @@
 @property(nonatomic,copy)NSString *task_start_date;
 @property(nonatomic,copy)NSString *apply_num;
 @property(nonatomic,copy)NSString *avatar;
+@property(nonatomic,copy)NSString *reason;
 
 /**
  *  "title": "asdasd",

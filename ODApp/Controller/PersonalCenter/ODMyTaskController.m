@@ -15,7 +15,7 @@
 #import "ODBazaarModel.h"
 #import "UIImageView+WebCache.h"
 #import "ODBazaarDetailViewController.h"
-
+#import "ODViolationsCell.h"
 @interface ODMyTaskController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
 @property(nonatomic , strong) UIView *headView;
@@ -181,13 +181,12 @@
     self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.firstCollectionView.dataSource = self;
     self.firstCollectionView.delegate = self;
-    [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
+    [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
+    [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODViolationsCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
+    
+    
     
     self.firstCollectionView.tag = 111;
-    
-    
-    
-    
     self.firstCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self firstDownRefresh];
     }];
@@ -211,7 +210,8 @@
     self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.secondCollectionView.dataSource = self;
     self.secondCollectionView.delegate = self;
-    [self.secondCollectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
+    [self.secondCollectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
+    [self.secondCollectionView registerNib:[UINib nibWithNibName:@"ODViolationsCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     
     self.secondCollectionView.tag = 222;
     
@@ -318,12 +318,7 @@
     
     }
     
-    
-  
-    
-    
-    
-  
+   
 }
 
 - (void)delegateTaskWith:(NSString *)taskId
@@ -343,9 +338,6 @@
         
         if (responseObject) {
             
-            
-            
-            NSLog(@"_____%@" , responseObject);
             
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 
@@ -621,136 +613,124 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
-    
-    ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
-    
-    
-    cell.userImageView.layer.masksToBounds = YES;
-    cell.userImageView.layer.cornerRadius = 30;
-    cell.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
-    cell.userImageView.layer.borderWidth = 1;
-
-    
-    [cell.deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    
-    
-    
     if (collectionView.tag == 111) {
         
         ODBazaarModel *model = self.FirstDataArray[indexPath.row];
-        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
-        cell.nickLabel.text = model.user_nick;
-        cell.titleLabel.text = model.title;
-        cell.contentLabel.text = model.content;
-        
-        
-        cell.deleteButton.tag = 111;
-        
         NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
         
-        
         if ([status isEqualToString:@"-1"]) {
-            cell.deleteButton.hidden = NO;
-        }else{
-            cell.deleteButton.hidden = YES;
-        }
-        
-        
-        if ([status isEqualToString:@"1"]) {
-            cell.typeLabel.text = @"等待派单";
-             cell.typeLabel.textColor = [UIColor redColor];
+            ODViolationsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
             
-        }else if ([status isEqualToString:@"2"]) {
-            
-            cell.typeLabel.text = @"进行中";
-        }else if ([status isEqualToString:@"3"]) {
-            
-            cell.typeLabel.text = @"已交付";
-        }else if ([status isEqualToString:@"4"]) {
-            
-            cell.typeLabel.text = @"确认完成";
-        }else if ([status isEqualToString:@"-1"]) {
-            
-            cell.typeLabel.text = @"违规";
-        }else if ([status isEqualToString:@"-2"]) {
-            
-            cell.typeLabel.text = @"过期任务";
-            cell.typeLabel.textColor = [UIColor lightGrayColor];
-        }else if ([status isEqualToString:@"0"]) {
-            
-            cell.typeLabel.text = @"无效";
-        }
-        
-               
-        //设置Label显示不同大小的字体
-        NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];
-        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
-        [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
-        cell.timeLabel.attributedText = noteStr;
-        
-        
-    }else if (collectionView.tag == 222) {
-        ODBazaarModel *model = self.secondDataArray[indexPath.row];
-        
-        
-        
-        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
-        
-        cell.nickLabel.text = model.user_nick;
-        cell.titleLabel.text = model.title;
-        cell.contentLabel.text = model.content;
-          cell.deleteButton.tag = 222;
-        
-        NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
-        
-        
-        if ([status isEqualToString:@"-1"]) {
-            cell.deleteButton.hidden = NO;
-        }else{
-            cell.deleteButton.hidden = YES;
-        }
+            cell.titleLabel.text = model.title;
+            cell.reasonTextView.text = model.reason;
+            cell.reasonTextView.scrollEnabled = NO;
+            cell.deleteButton.tag = 111;
+            [cell.deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+            return cell;
 
-        
-        
-        if ([status isEqualToString:@"1"]) {
-            cell.typeLabel.text = @"等待派单";
-            cell.typeLabel.textColor = [UIColor redColor];
+
+        }else{
             
-        }else if ([status isEqualToString:@"2"]) {
+            ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
+            [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
+            cell.nickLabel.text = model.user_nick;
+            cell.titleLabel.text = model.title;
+            cell.contentLabel.text = model.content;
             
-            cell.typeLabel.text = @"进行中";
-        }else if ([status isEqualToString:@"3"]) {
+            if ([status isEqualToString:@"1"]) {
+                cell.typeLabel.text = @"等待派单";
+                cell.typeLabel.textColor = [UIColor redColor];
+                
+            }else if ([status isEqualToString:@"2"]) {
+                
+                cell.typeLabel.text = @"进行中";
+            }else if ([status isEqualToString:@"3"]) {
+                
+                cell.typeLabel.text = @"已交付";
+            }else if ([status isEqualToString:@"4"]) {
+                
+                cell.typeLabel.text = @"任务完成";
+            }else if ([status isEqualToString:@"-2"]) {
+                
+                cell.typeLabel.text = @"过期任务";
+                cell.typeLabel.textColor = [UIColor lightGrayColor];
+            }else if ([status isEqualToString:@"0"]) {
+                
+                cell.typeLabel.text = @"无效";
+            }
+
             
-            cell.typeLabel.text = @"交付";
-        }else if ([status isEqualToString:@"4"]) {
-            
-            cell.typeLabel.text = @"确认完成";
-        }else if ([status isEqualToString:@"-1"]) {
-            
-            cell.typeLabel.text = @"违规";
-        }else if ([status isEqualToString:@"-2"]) {
-            
-            cell.typeLabel.text = @"过期任务";
-            cell.typeLabel.textColor = [UIColor lightGrayColor];
-        }else if ([status isEqualToString:@"0"]) {
-            
-            cell.typeLabel.text = @"无效";
+            //设置Label显示不同大小的字体
+            NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];
+            NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
+            [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
+            cell.timeLabel.attributedText = noteStr;
+            return cell;
+
+
         }
         
+    }else {
         
-        //设置Label显示不同大小的字体
-        NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];
-        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
-        [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
-        cell.timeLabel.attributedText = noteStr;
+        ODBazaarModel *model = self.secondDataArray[indexPath.row];
+        NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
+        
+        if ([status isEqualToString:@"-1"]) {
+            
+            ODViolationsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
+            cell.titleLabel.text = model.title;
+            cell.reasonTextView.text = model.reason;
+            cell.reasonTextView.scrollEnabled = NO;
+            cell.deleteButton.tag = 222;
+            [cell.deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+
+            return cell;
+            
+        }else{
+            
+            
+            ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
+            [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
+            cell.nickLabel.text = model.user_nick;
+            cell.titleLabel.text = model.title;
+            cell.contentLabel.text = model.content;
+            
+            if ([status isEqualToString:@"1"]) {
+                cell.typeLabel.text = @"等待派单";
+                cell.typeLabel.textColor = [UIColor redColor];
+                
+            }else if ([status isEqualToString:@"2"]) {
+                
+                cell.typeLabel.text = @"进行中";
+            }else if ([status isEqualToString:@"3"]) {
+                
+                cell.typeLabel.text = @"已交付";
+            }else if ([status isEqualToString:@"4"]) {
+                
+                cell.typeLabel.text = @"任务完成";
+            }else if ([status isEqualToString:@"-2"]) {
+                
+                cell.typeLabel.text = @"过期任务";
+                cell.typeLabel.textColor = [UIColor lightGrayColor];
+            }else if ([status isEqualToString:@"0"]) {
+                
+                cell.typeLabel.text = @"无效";
+            }
+
+            
+            //设置Label显示不同大小的字体
+            NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];
+            NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
+            [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
+            cell.timeLabel.attributedText = noteStr;
+           
+              return cell;
+        }
         
     }
     
-       return cell;
+
+
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -782,6 +762,7 @@
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+            bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
             [self.navigationController pushViewController:bazaarDetail animated:YES];
         }
         
@@ -798,7 +779,7 @@
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
-            
+            bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
             [self.navigationController pushViewController:bazaarDetail animated:YES];
 
         }

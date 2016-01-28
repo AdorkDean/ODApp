@@ -25,6 +25,8 @@
 		9D68D8281C43832D00BD3FD2 /* ODTopicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D68D8261C43832D00BD3FD2 /* ODTopicCell.xib */; };
 		9D69B5401C3A3993009039A4 /* ODActivityHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D69B53F1C3A3993009039A4 /* ODActivityHeadView.m */; };
 		9D85CD8D1C578031008525FD /* ODTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D85CD8C1C578031008525FD /* ODTopicModel.m */; };
+		9D9E58CA1C59BFF6009B87E8 /* ODViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E58C81C59BFF6009B87E8 /* ODViolationsCell.m */; };
+		9D9E58CB1C59BFF6009B87E8 /* ODViolationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D9E58C91C59BFF6009B87E8 /* ODViolationsCell.xib */; };
 		9DC0AE481C585F850001D8BA /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC0AE471C585F850001D8BA /* MBProgressHUD.m */; };
 		9DD00BC51C4E393300F0EE5F /* UMSocialLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9DD00BA41C4E393300F0EE5F /* UMSocialLocalizable.strings */; };
 		9DD00BC61C4E393300F0EE5F /* libUMSocial_Sdk_4.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BB21C4E393300F0EE5F /* libUMSocial_Sdk_4.4.a */; };
@@ -514,6 +516,9 @@
 		9D69B53F1C3A3993009039A4 /* ODActivityHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityHeadView.m; sourceTree = "<group>"; };
 		9D85CD8B1C578031008525FD /* ODTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTopicModel.h; sourceTree = "<group>"; };
 		9D85CD8C1C578031008525FD /* ODTopicModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTopicModel.m; sourceTree = "<group>"; };
+		9D9E58C71C59BFF6009B87E8 /* ODViolationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODViolationsCell.h; sourceTree = "<group>"; };
+		9D9E58C81C59BFF6009B87E8 /* ODViolationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODViolationsCell.m; sourceTree = "<group>"; };
+		9D9E58C91C59BFF6009B87E8 /* ODViolationsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODViolationsCell.xib; sourceTree = "<group>"; };
 		9DC0AE461C585F850001D8BA /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		9DC0AE471C585F850001D8BA /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		9DD00BA51C4E393300F0EE5F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/UMSocialLocalizable.strings; sourceTree = "<group>"; };
@@ -1307,6 +1312,9 @@
 				9DD481121C44C90E004F34E3 /* ODTaskCell.h */,
 				9DD481131C44C90E004F34E3 /* ODTaskCell.m */,
 				9DD481141C44C90E004F34E3 /* ODTaskCell.xib */,
+				9D9E58C71C59BFF6009B87E8 /* ODViolationsCell.h */,
+				9D9E58C81C59BFF6009B87E8 /* ODViolationsCell.m */,
+				9D9E58C91C59BFF6009B87E8 /* ODViolationsCell.xib */,
 				9DDBA4C51C3BAB330007E122 /* ODUserModel.h */,
 				9DDBA4C61C3BAB330007E122 /* ODUserModel.m */,
 			);
@@ -2734,6 +2742,7 @@
 				9DD00BCD1C4E393300F0EE5F /* UMSnsAccountViewController.xib in Resources */,
 				C6641A891C58BCB100F3C730 /* button_quadratic element@2x.png in Resources */,
 				B8046E231C4772C200D1FEBC /* 登录文字框icon@1x.png in Resources */,
+				9D9E58CB1C59BFF6009B87E8 /* ODViolationsCell.xib in Resources */,
 				B8046E4F1C4772C200D1FEBC /* 首页-去偷懒icon@3x.png in Resources */,
 				C6641A801C58BCB100F3C730 /* button_Life@2x.png in Resources */,
 				C6641AD21C58BCB100F3C730 /* icon_share@3x.png in Resources */,
@@ -3051,6 +3060,7 @@
 				B80E0B431C474C1F00F36A17 /* ODCommunityDetailCell.m in Sources */,
 				D425DA311C4E1F7E00BDD2AE /* SDCollectionViewCell.m in Sources */,
 				D425DA231C4E1F7E00BDD2AE /* IQKeyboardManager.m in Sources */,
+				9D9E58CA1C59BFF6009B87E8 /* ODViolationsCell.m in Sources */,
 				B83C39431C48A0E9007B16FB /* ODMyOrderRecordController.m in Sources */,
 				B80E0BE91C4751A200F36A17 /* ODMyOrderDetailModel.m in Sources */,
 				9DD98C631C3E175800B98DD9 /* ODInformationView.m in Sources */,
