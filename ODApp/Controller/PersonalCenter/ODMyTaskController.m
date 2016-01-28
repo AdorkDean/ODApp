@@ -351,8 +351,9 @@
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
+        [self.firstCollectionView.mj_header beginRefreshing];
+        [self.secondCollectionView.mj_header beginRefreshing];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 
     
@@ -537,7 +538,7 @@
         
         [self.firstCollectionView.mj_header endRefreshing];
         [self.firstCollectionView.mj_footer endRefreshing];
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -598,7 +599,7 @@
         
         [self.secondCollectionView.mj_header endRefreshing];
         [self.secondCollectionView.mj_footer endRefreshing];
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
       
