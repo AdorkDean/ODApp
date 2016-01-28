@@ -467,6 +467,7 @@
 		D4D075441C59BA9B008527C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0753B1C59BA9B008527C9 /* main.m */; };
 		D4D075451C59BA9B008527C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D075411C59BA9B008527C9 /* Assets.xcassets */; };
 		D4D075461C59BA9B008527C9 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4D075421C59BA9B008527C9 /* Info.plist */; };
+		D4D075491C59BBEE008527C9 /* ODAppConst.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075481C59BBEE008527C9 /* ODAppConst.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1095,6 +1096,8 @@
 		D4D0753F1C59BA9B008527C9 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
 		D4D075411C59BA9B008527C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4D075421C59BA9B008527C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D4D075471C59BBEE008527C9 /* ODAppConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppConst.h; sourceTree = "<group>"; };
+		D4D075481C59BBEE008527C9 /* ODAppConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAppConst.m; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -2487,8 +2490,10 @@
 			isa = PBXGroup;
 			children = (
 				D4D0753D1C59BA9B008527C9 /* Define.h */,
-				D4D0753E1C59BA9B008527C9 /* ODApp-Prefix.pch */,
 				D4D0753F1C59BA9B008527C9 /* Singleton.h */,
+				D4D0753E1C59BA9B008527C9 /* ODApp-Prefix.pch */,
+				D4D075471C59BBEE008527C9 /* ODAppConst.h */,
+				D4D075481C59BBEE008527C9 /* ODAppConst.m */,
 			);
 			path = Public;
 			sourceTree = "<group>";
@@ -3122,6 +3127,7 @@
 				D4D073821C59B9FA008527C9 /* ODCenterIntroduceController.m in Sources */,
 				D4D073781C59B9FA008527C9 /* ODCenterDetailController.m in Sources */,
 				D4D0738D1C59B9FA008527C9 /* ODMyTopicController.m in Sources */,
+				D4D075491C59BBEE008527C9 /* ODAppConst.m in Sources */,
 				D4D073A51C59B9FA008527C9 /* NSURL+ODExtension.m in Sources */,
 				D4D075141C59B9FA008527C9 /* ODInformationView.m in Sources */,
 				D4D074F51C59B9FA008527C9 /* ODBazaarRewardCollectionCell.m in Sources */,
