@@ -12,6 +12,20 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    
+    
+    self.backgroundColor = [UIColor whiteColor];
+    
+    
+    self.userImageView.layer.masksToBounds = YES;
+    self.userImageView.layer.cornerRadius = 30;
+    self.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
+    self.userImageView.layer.borderWidth = 1;
+    
+    
+    
+    
 }
 
 @end

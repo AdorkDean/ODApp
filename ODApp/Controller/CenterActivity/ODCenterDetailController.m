@@ -303,6 +303,7 @@ int pageNumnber = 0;
         self.centerDetailView.centerNameLabel.text = self.model.name;
         self.centerDetailView.phoneLabel.text = self.model.tel;
         self.centerDetailView.addressTextView.text = self.model.address;
+        self.centerDetailView.addressTextView.scrollEnabled = NO;
         self.centerDetailView.timeTextView.text = self.model.business_hours;
 
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(phoneAction:)];
