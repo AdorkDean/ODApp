@@ -162,39 +162,39 @@
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/other/store/list";
     
-    
+    __weak typeof (self)weakSelf = self;
     [self.centerManager GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
             
-            [self.centerArray removeAllObjects];
+            [weakSelf.centerArray removeAllObjects];
             
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSMutableDictionary *result = dict[@"result"];
             
             for (NSMutableDictionary *dic in result) {
                 ChoseCenterModel *model = [[ChoseCenterModel alloc] initWithDict:dic];
-                [self.centerArray addObject:model];
+                [weakSelf.centerArray addObject:model];
             }
             
             
             ChoseCenterModel *model = self.centerArray[self.centerNumber - 1];
             NSString *storeId = [NSString stringWithFormat:@"%ld" , (long)model.storeId];
-            self.storeId = storeId;
-            self.centerName = model.name;
-            [self getLunBoPicture];
-            [self getData];
-            [self getPhoneNumber];
+            weakSelf.storeId = storeId;
+            weakSelf.centerName = model.name;
+            [weakSelf getLunBoPicture];
+            [weakSelf getData];
+            [weakSelf getPhoneNumber];
             
         }else{
-            [self.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_header endRefreshing];
             
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         
-        [self.collectionView.mj_header endRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
         
     }];
     
@@ -212,7 +212,7 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/other/store/detail";
-    
+    __weak typeof (self)weakSelf = self;
     [self.phoneManager GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
@@ -220,14 +220,14 @@
             NSMutableDictionary *result = dict[@"result"];
             
             
-            self.phoneNumber = result[@"tel"];
+            weakSelf.phoneNumber = result[@"tel"];
             
             
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        [self.collectionView.mj_header endRefreshing];
-        [self.collectionView.mj_footer endRefreshing];
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf.collectionView.mj_footer endRefreshing];
     }];
     
     
@@ -254,9 +254,9 @@
         if (responseObject) {
             
             
-            [self.pictureArray removeAllObjects];
-            [self.pictureDetailArray removeAllObjects];
-            [self.titleArray removeAllObjects];
+            [weakSelf.pictureArray removeAllObjects];
+            [weakSelf.pictureDetailArray removeAllObjects];
+            [weakSelf.titleArray removeAllObjects];
             
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSMutableArray *result = dict[@"result"];
@@ -320,11 +320,13 @@
                 
                 [weakSelf.dataArray addObject:model];
             }
-            [self.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView reloadData];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
     

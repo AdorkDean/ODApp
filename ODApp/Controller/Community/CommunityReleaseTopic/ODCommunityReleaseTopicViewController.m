@@ -258,15 +258,17 @@
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    __weak typeof (self)weakSelf = self;
     [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
             NSString *str = result[@"File"];
-            [self.strArray addObject:str];
-            [self reloadImageButtons];
-            NSLog(@"%@",self.strArray);
+            [weakSelf.strArray addObject:str];
+            [weakSelf reloadImageButtons];
+            NSLog(@"%@",weakSelf.strArray);
 
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -363,24 +365,25 @@
 #pragma mark - 上传数据
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
+    __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
 
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
-            if (self.myBlock) {
-                self.myBlock([NSString stringWithFormat:@"refresh"]);
+            if (weakSelf.myBlock) {
+                weakSelf.myBlock([NSString stringWithFormat:@"refresh"]);
             }
             
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"话题发布成功"];
-            [self.navigationController popViewControllerAnimated:YES];
+            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"话题发布成功"];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }
         if ([responseObject[@"status"]isEqualToString:@"error"]){
             if ([responseObject[@"message"] isEqualToString:@"title not found"]) {
                 
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入标题"];
+                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入标题"];
             }else{
             
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入内容"];
+                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入内容"];
             }
             
             

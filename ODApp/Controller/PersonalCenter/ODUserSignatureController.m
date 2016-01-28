@@ -123,26 +123,25 @@
     
     NSDictionary *parameters = @{@"user_sign":self.textField.text , @"open_id":openID};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
+    __weakSelf
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/change";
-    
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
-            if (self.getTextBlock) {
-                if (self.getTextBlock) {
-                    self.getTextBlock(self.textField.text);
+            if (weakSelf.getTextBlock) {
+                if (weakSelf.getTextBlock) {
+                    weakSelf.getTextBlock(self.textField.text);
                 }
                 
-                [self.navigationController popViewControllerAnimated:YES];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
 
             }
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:nil message:responseObject[@"message"] delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:nil message:responseObject[@"message"] delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles: nil];
             [alter show];
         }
       

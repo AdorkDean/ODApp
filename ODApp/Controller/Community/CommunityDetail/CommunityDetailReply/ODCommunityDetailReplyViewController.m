@@ -84,14 +84,18 @@
 {
     
 
+    __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
-            if (self.myBlock) {
-                self.myBlock([NSString stringWithFormat:@"refresh"]);
+
+            if (weakSelf.myBlock) {
+                weakSelf.myBlock([NSString stringWithFormat:@"refresh"]);
             }
-            [self.navigationController popViewControllerAnimated:YES];
             
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"回复成功"];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+
+            
+            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"回复成功"];
             
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

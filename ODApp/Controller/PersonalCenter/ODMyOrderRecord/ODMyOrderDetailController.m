@@ -81,10 +81,11 @@
             NSDictionary *parameter = @{@"open_id":self.open_id,@"order_id":self.order_id};
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
             
+            __weak typeof (self)weakSelf = self;
             [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                 
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"取消订单成功"];
-                self.checkLabel.text = @"已取消";
+                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"取消订单成功"];
+                weakSelf.checkLabel.text = @"已取消";
                 
             } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
                 
@@ -112,9 +113,9 @@
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
             NSDictionary *result = dict[@"result"];
-            self.model = [[ODMyOrderDetailModel alloc]init];
-            [self.model setValuesForKeysWithDictionary:result];
-            [self.dataArray addObject:self.model];
+            weakSelf.model = [[ODMyOrderDetailModel alloc]init];
+            [weakSelf.model setValuesForKeysWithDictionary:result];
+            [weakSelf.dataArray addObject:self.model];
             
             NSDictionary *devices = result[@"devices"];
             for (NSDictionary *itemDict in devices) {

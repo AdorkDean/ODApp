@@ -85,14 +85,15 @@
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/info";
     
+    __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         NSMutableDictionary *dic = responseObject[@"result"];
-        self.model = [[ODUserModel alloc] initWithDict:dic];
+        weakSelf.model = [[ODUserModel alloc] initWithDict:dic];
         
-        [self createCollectionView];
-        [self.collectionView reloadData];
+        [weakSelf createCollectionView];
+        [weakSelf.collectionView reloadData];
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
