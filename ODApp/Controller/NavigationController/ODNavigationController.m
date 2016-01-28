@@ -8,7 +8,9 @@
 
 #import "ODNavigationController.h"
 
-@interface ODNavigationController () <UIGestureRecognizerDelegate>
+@interface ODNavigationController () <UINavigationControllerDelegate>
+
+@property (nonatomic, strong) id touchDelegate;
 
 @end
 
@@ -17,7 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationBar.barTintColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-    self.interactivePopGestureRecognizer.delegate = self;
+    _touchDelegate = self.interactivePopGestureRecognizer.delegate;
+    self.delegate = self;
 
 }
 
@@ -30,7 +33,7 @@
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
     UIViewController *vc = [super popViewControllerAnimated:animated];
-    self.tabBarController.tabBar.hidden = NO;
+//    self.tabBarController.tabBar.hidden = NO;
     return vc;
 }
 
@@ -38,10 +41,18 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    NSLog(@"gestureRecgnizer = %@,,childControllers = %zd",gestureRecognizer,self.childViewControllers.count);
-    
     return self.childViewControllers.count > 1;
 }
 
+#pragma mark - UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (viewController == self.childViewControllers[0])
+    {
+        self.interactivePopGestureRecognizer.delegate = _touchDelegate;
+        self.tabBarController.tabBar.hidden = NO;
+    }
+}
 
 @end
