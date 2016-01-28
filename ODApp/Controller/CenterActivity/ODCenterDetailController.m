@@ -21,6 +21,7 @@
 #import "ODTabBarController.h"
 #import "ODUserInformation.h"
 #import "ODPersonalCenterViewController.h"
+#import "ODCenterPactureController.h"
 int pageNumnber = 0;
 
 @interface ODCenterDetailController ()<UITableViewDataSource , UITableViewDelegate>
@@ -86,9 +87,8 @@ int pageNumnber = 0;
     [super viewWillDisappear:animated];
     [self.myTimer invalidate];
     self.myTimer = nil;
-   
+    
 }
-
 #pragma mark - 点击事件
 - (void)appointmentAction:(UIButton *)sender
 {
@@ -123,15 +123,29 @@ int pageNumnber = 0;
 
 - (void)phoneAction:(UITapGestureRecognizer *)sender
 {
-    
-    
-    
-    
+        
     NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.centerDetailView.phoneLabel.text];
     
     UIWebView * callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
     [self.view addSubview:callWebview];
+    
+    
+    
+    
+}
+
+
+- (void)addressAction:(UITapGestureRecognizer *)sender
+{
+   
+    ODCenterPactureController *vc = [[ODCenterPactureController alloc] init];
+    
+      NSString *webUrl = [NSString stringWithFormat:@"http://h5.odong.com/map/search?lng=%@&lat=%@" , self.model.lng , self.model.lat];
+    
+    vc.webUrl = webUrl;
+    vc.activityName = self.model.name;
+    [self.navigationController pushViewController:vc animated:YES];
     
     
     
@@ -299,12 +313,21 @@ int pageNumnber = 0;
         self.centerDetailView.addressTextView.text = self.model.address;
         self.centerDetailView.addressTextView.scrollEnabled = NO;
         self.centerDetailView.timeTextView.text = self.model.business_hours;
-
+        
+        
+        
+        
+        
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(phoneAction:)];
         [self.centerDetailView.phoneLabel addGestureRecognizer:tap];
         
         [self.centerDetailView.appointmentButton addTarget:self action:@selector(appointmentAction:) forControlEvents:UIControlEventTouchUpInside];
         
+        
+        UITapGestureRecognizer *addressTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addressAction:)];
+        [self.centerDetailView.addressImageView addGestureRecognizer:addressTap];
+        
+     
         
         
         // 设置scrollerView的内容视图大小
