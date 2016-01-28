@@ -40,5 +40,6 @@
 @property(nonatomic,strong)UIButton *taskButton;
 @property(nonatomic,copy)NSString *open_id;
 @property(nonatomic,copy)NSString *task_id;
+@property(nonatomic)NSInteger num;
 @property(nonatomic,copy)void(^myBlock)(NSString *del);
 @end

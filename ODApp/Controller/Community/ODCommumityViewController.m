@@ -75,7 +75,13 @@
 
 -(void)publishButtonClick:(UIButton *)button
 {
-    if ([ODUserInformation getData].openID) {
+    
+    if ([[ODUserInformation getData].openID isEqualToString:@""]) {
+        
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
+        
+    }else{
         
         ODCommunityReleaseTopicViewController *releaseTopic = [[ODCommunityReleaseTopicViewController alloc]init];
         releaseTopic.myBlock = ^(NSString *refresh){
@@ -83,9 +89,6 @@
         };
         [self.navigationController pushViewController:releaseTopic animated:YES];
 
-    }else{
-        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
-        [self.navigationController pushViewController:personalCenter animated:YES];
     }
 }
 
