@@ -93,7 +93,7 @@ int pageNumnber = 0;
 - (void)appointmentAction:(UIButton *)sender
 {
     
-    if ([[ODUserInformation getData].openID isEqualToString:@""]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];

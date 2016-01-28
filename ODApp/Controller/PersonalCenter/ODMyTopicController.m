@@ -60,7 +60,7 @@
     
     
     
-    self.open_id = [ODUserInformation getData].openID;
+    self.open_id = [ODUserInformation sharedODUserInformation].openID;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     

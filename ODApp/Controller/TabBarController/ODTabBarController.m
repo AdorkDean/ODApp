@@ -61,7 +61,7 @@
 {
     [self.tabBar layoutSubviews];
     self.selectedViewController = self.childViewControllers[selectedIndex];
-    if (selectedIndex == 4 && [ODUserInformation getData].openID.length == 0)        return;
+    if (selectedIndex == 4 && [ODUserInformation sharedODUserInformation].openID.length == 0)        return;
     self.currentIndex = selectedIndex;
 }
 
@@ -77,7 +77,7 @@
 #pragma mark - ODTabBarDelegate
 - (void)od_tabBar:(ODTabBar *)od_tabBar selectIndex:(NSInteger)selectIndex
 {
-    if (selectIndex == 4 && [ODUserInformation getData].openID.length == 0)
+    if (selectIndex == 4 && [ODUserInformation sharedODUserInformation].openID.length == 0)
     {
         self.selectedIndex = self.currentIndex;
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];

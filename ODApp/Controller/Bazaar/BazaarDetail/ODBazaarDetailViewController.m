@@ -45,7 +45,7 @@
     [self.headView addSubview:backButton];
     
     //分享按钮
-    if ([self.task_status_name isEqualToString:@"过期"]&& [[ODUserInformation getData].openID isEqualToString:self.open_id]) {
+    if ([self.task_status_name isEqualToString:@"过期"]&& [[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
          self.shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-61.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:@"删除" font:16];
         [self.shareButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     }else{
@@ -69,7 +69,7 @@
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation getData].openID};
+            NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation sharedODUserInformation].openID};
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
             [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter withName:@"删除任务"];
         }]];
@@ -193,7 +193,7 @@
     [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.userView addSubview:self.taskButton];
 
-    if ([[ODUserInformation getData].openID isEqualToString:self.open_id]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
         
         if ([self.task_status_name isEqualToString:@"待派遣"]) {
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
@@ -220,10 +220,10 @@
             ODBazaarDetailModel *model = self.picArray[i];
             NSString *ID = model.open_id;
             NSString *status = [NSString stringWithFormat:@"%@",model.apply_status];
-            if ([ID isEqualToString:[ODUserInformation getData].openID] && [status isEqualToString:@"1"]) {
+            if ([ID isEqualToString:[ODUserInformation sharedODUserInformation].openID] && [status isEqualToString:@"1"]) {
                 open_id = ID;
                 apply_status = @"1";
-            }else if ([ID isEqualToString:[ODUserInformation getData].openID] && [status isEqualToString:@"0"]){
+            }else if ([ID isEqualToString:[ODUserInformation sharedODUserInformation].openID] && [status isEqualToString:@"0"]){
                 apply_status = @"0";
             }
         }
@@ -267,7 +267,7 @@
 
 -(void)userHeaderButtonClick:(UIButton *)button
 {
-    if ([[ODUserInformation getData].openID isEqualToString:self.open_id]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
         
     }else{
         ODOthersInformationController *otherInfo = [[ODOthersInformationController alloc]init];
@@ -278,32 +278,32 @@
 
 -(void)taskButtonClick:(UIButton *)button
 {
-    if ([ODUserInformation getData].openID) {
+    if ([ODUserInformation sharedODUserInformation].openID) {
         if ([button.titleLabel.text isEqualToString:@"删除任务"]) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation getData].openID};
+                NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation sharedODUserInformation].openID};
                 NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
                 [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter withName:@"删除任务"];
             }]];
             [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:alert animated:YES completion:nil];
         }else if ([button.titleLabel.text isEqualToString:@"接受任务"]){
-            if ([[ODUserInformation getData].openID isEqualToString:@""]) {
+            if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
                 ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
                 [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
                 
             }else{
-                NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation getData].openID};
+                NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation sharedODUserInformation].openID};
                 NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
                 [self pushDataWithUrl:kBazaarAcceptTaskUrl parameter:signParameter withName:@"接受任务"];
             }
         }else if ([button.titleLabel.text isEqualToString:@"确认提交"]){
-            NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation getData].openID};
+            NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation sharedODUserInformation].openID};
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
             [self pushDataWithUrl:kBazaarTaskReceiveCompleteUrl parameter:signParameter withName:@"确认提交"];
         }else if ([button.titleLabel.text isEqualToString:@"确认完成"]){
-            NSDictionary *parameter = @{@"task_id":self.task_id,@"comment":@"sdsdsd",@"open_id":[ODUserInformation getData].openID};
+            NSDictionary *parameter = @{@"task_id":self.task_id,@"comment":@"sdsdsd",@"open_id":[ODUserInformation sharedODUserInformation].openID};
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
             [self pushDataWithUrl:kBazaarTaskInitiateCompleteUrl parameter:signParameter withName:@"确认完成"];
         }
@@ -592,7 +592,7 @@
 {
     ODBazaarDetailModel *model = self.picArray[indexPath.row];
     NSString *str = [NSString stringWithFormat:@"%@",model.apply_status];
-    if ([[ODUserInformation getData].openID isEqualToString:self.open_id]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
         if ([str isEqualToString:@"0"] && [self.task_status_name isEqualToString:@"待派遣"]) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否委派" message:nil preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

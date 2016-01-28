@@ -339,7 +339,7 @@
 {
     
     
-    if ([[ODUserInformation getData].openID isEqualToString:@""]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
         
@@ -446,7 +446,7 @@
     CenterActivityModel *model = self.dataArray[indexPath.row];
     
     
-    if ([[ODUserInformation getData].openID isEqualToString:@""]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
@@ -456,7 +456,7 @@
         
         vc.activityId = [NSString stringWithFormat:@"%ld" , (long)model.activity_id];
         vc.storeId = self.storeId;
-        vc.openId =   [ODUserInformation getData].openID;
+        vc.openId =   [ODUserInformation sharedODUserInformation].openID;
         [self.navigationController pushViewController:vc animated:YES];
         
     }

@@ -69,7 +69,7 @@
 
 -(void)releaseButtonClick:(UIButton *)button
 {
-    if ([[ODUserInformation getData].openID isEqualToString:@""]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
        
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
@@ -297,7 +297,7 @@
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     vc.open_id = model.open_id;
     
-    if ([[ODUserInformation getData].openID isEqualToString:model.open_id]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.open_id]) {
         
     }else{
       

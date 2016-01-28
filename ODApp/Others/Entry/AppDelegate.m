@@ -81,7 +81,7 @@ void UncaughtExceptionHandler(NSException *exception)
     
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *openId = [user objectForKey:KUserDefaultsOpenId];
-    [ODUserInformation getData].openID = openId ? openId : @"";
+    [ODUserInformation sharedODUserInformation].openID = openId ? openId : @"";
 
     
       

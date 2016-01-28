@@ -41,7 +41,7 @@
     
     self.currentTime = 60;
 
-     self.openId = [ODUserInformation getData].openID;
+     self.openId = [ODUserInformation sharedODUserInformation].openID;
     
 }
 

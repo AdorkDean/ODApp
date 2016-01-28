@@ -57,7 +57,7 @@
     
 
     self.manager = [AFHTTPRequestOperationManager manager];
-    NSString *openId = [ODUserInformation getData].openID;
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     
     
     NSDictionary *parameters = @{@"open_id":openId};

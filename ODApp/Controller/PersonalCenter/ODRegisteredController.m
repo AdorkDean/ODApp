@@ -232,7 +232,7 @@
             NSMutableDictionary *dic = responseObject[@"result"];
             NSString *openId = dic[@"open_id"];
             
-            [ODUserInformation getData].openID = openId;
+            [ODUserInformation sharedODUserInformation].openID = openId;
             [weakSelf.navigationController pushViewController:vc animated:YES];
             
         }

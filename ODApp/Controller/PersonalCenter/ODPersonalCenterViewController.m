@@ -245,7 +245,7 @@
             NSMutableDictionary *dic = responseObject[@"result"];
             NSString *openId = dic[@"open_id"];
             
-            [ODUserInformation getData].openID = openId;
+            [ODUserInformation sharedODUserInformation].openID = openId;
             
             
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];

@@ -200,7 +200,7 @@
 - (void)placeButtonClick:(UIButton *)button
 {
 
-    if ([[ODUserInformation getData].openID isEqualToString:@""]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
 
@@ -273,7 +273,7 @@
     NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     vc.open_id = [userInfoDic[userId]open_id];
-    if ([[ODUserInformation getData].openID isEqualToString:[userInfoDic[userId]open_id]]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:[userInfoDic[userId]open_id]]) {
         
     }else{
         
