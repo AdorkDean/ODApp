@@ -18,35 +18,16 @@
 #import "ODPersonalCenterViewController.h"
 
 @interface ODTabBarController ()<ODTabBarDelegate>
-/**
- *  tabBar的item
- */
-@property (nonatomic, strong) NSMutableArray *tabBarItems;
 
 @end
 
 @implementation ODTabBarController
 
-#pragma mark - lazyLoad
-//懒加载
-- (NSMutableArray *)tabBarItems
-{
-    if (!_tabBarItems)
-    {
-        _tabBarItems = [NSMutableArray array];
-    }
-    return _tabBarItems;
-}
-- (void)setSelectedIndex:(NSUInteger)selectedIndex
-{
-    [self.tabBar layoutSubviews];
-    self.selectedViewController = self.childViewControllers[selectedIndex];
-}
 
 #pragma mark - init
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
     [self createViewControllers];
     [self setTabBar];
 }
@@ -56,6 +37,7 @@
     [super viewWillAppear:animated];
     [self.tabBar layoutSubviews];
 }
+
 - (void)createViewControllers
 {
     NSArray *titleArray = @[@"首页发现",@"中心活动",@"欧动集市",@"欧动社区",@"个人中心"];
@@ -73,13 +55,13 @@
     ODTabBar *tabBar = [[ODTabBar alloc]init];
     [self setValue:tabBar forKeyPath:@"tabBar"];
     tabBar.od_delegate = self;
-//    self.tabBar.hidden = YES;
-//    ODTabBar *tabBar = [[ODTabBar alloc]initWithFrame:self.tabBar.bounds];
-//    tabBar.tabBarItems = self.tabBarItems;
-//    tabBar.od_delegate = self;
-//    [self.tabBar addSubview:tabBar];
 }
 
+- (void)setSelectedIndex:(NSUInteger)selectedIndex
+{
+    [self.tabBar layoutSubviews];
+    self.selectedViewController = self.childViewControllers[selectedIndex];
+}
 
 - (void)setupOneChildVc:(UIViewController *)childVc image:(NSString *)image selectedImage:(NSString *)selectedImage title:(NSString *)title
 {
@@ -87,7 +69,6 @@
             
     if (image.length) childVc.tabBarItem.image = [[UIImage imageNamed:image]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     if (selectedImage.length) childVc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImage]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    [self.tabBarItems addObject:childVc.tabBarItem];
     [self addChildViewController:childVc];
 }
 
