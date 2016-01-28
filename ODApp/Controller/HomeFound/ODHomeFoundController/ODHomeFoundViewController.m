@@ -314,7 +314,13 @@
     NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     vc.open_id = [userInfoDic[userId]open_id];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([[ODUserInformation getData].openID isEqualToString:[userInfoDic[userId]open_id]]) {
+        
+    }else{
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

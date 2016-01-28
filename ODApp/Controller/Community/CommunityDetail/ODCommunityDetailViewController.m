@@ -396,7 +396,13 @@
 
 -(void)replyButtonClick:(UIButton *)button
 {
-    if ([ODUserInformation getData].openID) {
+ 
+    if ([[ODUserInformation getData].openID isEqualToString:@""]) {
+        
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
+        
+    }else{
         
         ODCommunityDetailReplyViewController *detailReply = [[ODCommunityDetailReplyViewController alloc]init];
         detailReply.bbs_id = [NSString stringWithFormat:@"%@",self.bbs_id];
@@ -406,12 +412,7 @@
             detailReply.parent_id = [NSString stringWithFormat:@"3"];
         }
         [self.navigationController pushViewController:detailReply animated:YES];
-        
-    }else{
-        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
-        [self.navigationController pushViewController:personalCenter animated:YES];
     }
-
 }
 
 -(void)cellDeleteButtonClick:(UIButton *)button

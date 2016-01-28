@@ -36,7 +36,6 @@
     }];
 
 }
-
 #pragma mark - 加载更多
 -(void)loadMoreData
 {
@@ -139,7 +138,9 @@
     controller.popoverPresentationController.sourceRect = button.bounds;
     popVC.permittedArrowDirections = UIPopoverArrowDirectionUp;
     popVC.delegate = self;
-    [self presentViewController:controller animated:YES completion:nil];
+    
+    [self presentViewController:controller animated:YES completion:^{
+    }];
 }
 
 
@@ -167,7 +168,9 @@
         [self joiningTogetherParmeters];
     }
     [self.collectionView.mj_header beginRefreshing];
-    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    [self dismissViewControllerAnimated:NO completion:^{
+    }];
 }
 
 #pragma mark - 根据任务状态拼接参数
@@ -212,11 +215,12 @@
 #pragma mark - 请求数据
 -(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)parameter
 {
+  
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        if (self.count == 1) {
-            [self.dataArray removeAllObjects];
+        if (weakSelf.count == 1) {
+            [weakSelf.dataArray removeAllObjects];
         }
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -229,17 +233,19 @@
             }
             
             [weakSelf.collectionView reloadData];
-            [self.collectionView.mj_header endRefreshing];
-            [self.collectionView.mj_footer endRefreshing];
+            [weakSelf.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_footer endRefreshing];
             
             if (tasks.count == 0) {
                 [weakSelf.collectionView.mj_footer noticeNoMoreData];
             }
+           
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [self.collectionView.mj_header endRefreshing];
-        [self.collectionView.mj_footer endRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf.collectionView.mj_footer endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+
     }];
 }
 
@@ -285,14 +291,18 @@
 
 - (void)othersInformationClick:(UIButton *)button
 {
-
     ODBazaarCollectionCell *cell = (ODBazaarCollectionCell *)button.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODBazaarModel *model = self.dataArray[indexPath.row];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     vc.open_id = model.open_id;
-    [self.navigationController pushViewController:vc animated:YES];
     
+    if ([[ODUserInformation getData].openID isEqualToString:model.open_id]) {
+        
+    }else{
+      
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -353,6 +363,13 @@
     }else if ([self.refresh isEqualToString:@"complete"]){
         [self.collectionView.mj_header beginRefreshing];
     }
+    if (self.navigationController.childViewControllers.count > 1) {
+        self.status = @"9";
+        [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
+        [self.collectionView.mj_header beginRefreshing];
+    }
+
+
     
     self.navigationController.navigationBar.hidden = YES;
 }
