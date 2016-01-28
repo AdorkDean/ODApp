@@ -735,7 +735,10 @@
     
     int page = scrollView.contentOffset.x / self.view.frame.size.width;
   
-        
+    
+    self.showType = YES;
+    [self.typeView removeFromSuperview];
+    
     self.segmentedControl.selectedSegmentIndex  = page;
     
     

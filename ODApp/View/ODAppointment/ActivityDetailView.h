@@ -23,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *baoMingButton;
 
 
+@property (weak, nonatomic) IBOutlet UIImageView *addressImageView;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *disitionLabel;
@@ -32,9 +33,10 @@
 
 
 
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UITextView *addressTextView;
 
-@property (weak, nonatomic) IBOutlet UIWebView *detailWebView;
+
+
 
 +(instancetype)getView;
 
