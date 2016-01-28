@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		453C139C602C89AF557B0F7E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E55588697041BF02F9C6E1 /* libPods.a */; };
+		9D16BDD31C59EEDA003627CD /* ODViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D16BDD11C59EEDA003627CD /* ODViolationsCell.m */; };
+		9D16BDD41C59EEDA003627CD /* ODViolationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D16BDD21C59EEDA003627CD /* ODViolationsCell.xib */; };
 		9DD00BDB1C4E397E00F0EE5F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDA1C4E397E00F0EE5F /* Security.framework */; };
 		9DD00BDD1C4E398B00F0EE5F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */; };
 		9DD00BDF1C4E399700F0EE5F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */; };
@@ -489,6 +491,9 @@
 
 /* Begin PBXFileReference section */
 		92E55588697041BF02F9C6E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D16BDD01C59EEDA003627CD /* ODViolationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODViolationsCell.h; sourceTree = "<group>"; };
+		9D16BDD11C59EEDA003627CD /* ODViolationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODViolationsCell.m; sourceTree = "<group>"; };
+		9D16BDD21C59EEDA003627CD /* ODViolationsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODViolationsCell.xib; sourceTree = "<group>"; };
 		9DD00BDA1C4E397E00F0EE5F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -2403,6 +2408,9 @@
 				D4D073501C59B9FA008527C9 /* ODTaskCell.h */,
 				D4D073511C59B9FA008527C9 /* ODTaskCell.m */,
 				D4D073521C59B9FA008527C9 /* ODTaskCell.xib */,
+				9D16BDD01C59EEDA003627CD /* ODViolationsCell.h */,
+				9D16BDD11C59EEDA003627CD /* ODViolationsCell.m */,
+				9D16BDD21C59EEDA003627CD /* ODViolationsCell.xib */,
 				D4D073531C59B9FA008527C9 /* ODTopicCell.h */,
 				D4D073541C59B9FA008527C9 /* ODTopicCell.m */,
 				D4D073551C59B9FA008527C9 /* ODTopicCell.xib */,
@@ -2708,6 +2716,7 @@
 				D4D0740E1C59B9FA008527C9 /* 搜索放大镜icon@3x.png in Resources */,
 				D4D0747E1C59B9FA008527C9 /* icon_community_Selected@1x.png in Resources */,
 				D4D0745F1C59B9FA008527C9 /* button_Movies@3x.png in Resources */,
+				9D16BDD41C59EEDA003627CD /* ODViolationsCell.xib in Resources */,
 				D4D074A11C59B9FA008527C9 /* icon_market_Selected@3x.png in Resources */,
 				D4D075151C59B9FA008527C9 /* ODInformationView.xib in Resources */,
 				D4D074231C59B9FA008527C9 /* 欧动集市icon点击态@3x.png in Resources */,
@@ -3056,6 +3065,7 @@
 				D4D075011C59B9FA008527C9 /* CenterActivityCell.m in Sources */,
 				D4D074FE1C59B9FA008527C9 /* ActivityDetailView.m in Sources */,
 				D4D073741C59B9FA008527C9 /* ODBazaarHeaderView.m in Sources */,
+				9D16BDD31C59EEDA003627CD /* ODViolationsCell.m in Sources */,
 				D4D075161C59B9FA008527C9 /* ODLandFirstCell.m in Sources */,
 				D4D0751A1C59B9FA008527C9 /* ODRegisteredView.m in Sources */,
 				D4D075031C59B9FA008527C9 /* CenterActivityModel.m in Sources */,
