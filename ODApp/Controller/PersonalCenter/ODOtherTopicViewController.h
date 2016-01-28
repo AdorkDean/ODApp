@@ -17,7 +17,7 @@
 #import "MJRefresh.h"
 
 
-@interface ODOtherTopicViewController : UIViewController<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface ODOtherTopicViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource>
 
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSMutableArray *dataArray;

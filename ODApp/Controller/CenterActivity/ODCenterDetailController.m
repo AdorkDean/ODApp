@@ -196,24 +196,18 @@ int pageNumnber = 0;
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSMutableDictionary *result = dict[@"result"];
+
+            weakSelf.model = [[CenterDetailModel alloc] initWithDict:result];
+
+            [weakSelf createTableView];
             
-          
-            self.model = [[CenterDetailModel alloc] initWithDict:result];
-            
-          
-                       [weakSelf createTableView];
-            
-                       [weakSelf.tableView reloadData];
+            [weakSelf.tableView reloadData];
            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         
-        
-        
     }];
-    
-    
 }
 
 

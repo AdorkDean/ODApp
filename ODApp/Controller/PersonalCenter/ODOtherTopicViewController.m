@@ -93,9 +93,9 @@
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        if (self.count == 1) {
-            [self.dataArray removeAllObjects];
-            [self.noReusltLabel removeFromSuperview];
+        if (weakSelf.count == 1) {
+            [weakSelf.dataArray removeAllObjects];
+            [weakSelf.noReusltLabel removeFromSuperview];
         }
         if (responseObject) {
             NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -123,13 +123,13 @@
                 [weakSelf.userArray addObject:model];
             }
             
-            if (self.userArray.count == 0) {
-                self.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [self.view addSubview:self.noReusltLabel];
+            if (weakSelf.userArray.count == 0) {
+                weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [weakSelf.view addSubview:self.noReusltLabel];
             }
             
             else{
-                [self.collectionView reloadData];
+                [weakSelf.collectionView reloadData];
             }
             
             [weakSelf.collectionView.mj_header endRefreshing];
@@ -137,8 +137,9 @@
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        [self.collectionView.mj_header endRefreshing];
-        [self.collectionView.mj_footer endRefreshing];
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf.collectionView.mj_footer endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 

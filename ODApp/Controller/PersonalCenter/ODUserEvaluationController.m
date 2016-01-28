@@ -101,13 +101,13 @@
     
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/comment/list";
-    
+    __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([countNumber isEqualToString:@"1"]) {
-            [self.dataArray removeAllObjects];
-            [self.noReusltLabel removeFromSuperview];
+            [weakSelf.dataArray removeAllObjects];
+            [weakSelf.noReusltLabel removeFromSuperview];
         }
      
         if (responseObject) {
@@ -116,33 +116,33 @@
             for (NSMutableDictionary *miniDic in dic) {
                 ODEvaluationModel *model = [[ODEvaluationModel alloc] init];
                 [model setValuesForKeysWithDictionary:miniDic];
-                [self.dataArray addObject:model];
+                [weakSelf.dataArray addObject:model];
       
             }
 
-            [self.collectionView.mj_header endRefreshing];
-            [self.collectionView.mj_footer endRefreshing];
+            [weakSelf.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_footer endRefreshing];
             
-            if (self.dataArray.count == 0) {
-                self.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [self.view addSubview:self.noReusltLabel];
+            if (weakSelf.dataArray.count == 0) {
+                weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [weakSelf.view addSubview:self.noReusltLabel];
             }
             
             else{
-                [self.collectionView reloadData];
+                [weakSelf.collectionView reloadData];
             }
             
             if (dic.count == 0) {
-                [self.collectionView.mj_footer noticeNoMoreData];
+                [weakSelf.collectionView.mj_footer noticeNoMoreData];
             }
  
         }
    
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
   
-        [self.collectionView.mj_header endRefreshing];
-        [self.collectionView.mj_footer endRefreshing];
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf.collectionView.mj_footer endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
         
     }];
   

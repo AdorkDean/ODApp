@@ -69,7 +69,7 @@
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/store/apply";
     
-    
+    __weak typeof (self)weakSelf = self;
     [self.managers GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         
@@ -81,26 +81,26 @@
             if ([need_verify isEqualToString:@"0"]) {
                 
                 
-                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"报名成功" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"报名成功" message:nil delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 [alter show];
                 
                 
-                [self.activityDetailView.baoMingButton setTitle:@"已报名" forState:UIControlStateNormal];
-                [self.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
+                [weakSelf.activityDetailView.baoMingButton setTitle:@"已报名" forState:UIControlStateNormal];
+                [weakSelf.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
                                                             forState:UIControlStateNormal];
-                self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-                self.activityDetailView.baoMingButton.userInteractionEnabled = NO;
+                weakSelf.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+                weakSelf.activityDetailView.baoMingButton.userInteractionEnabled = NO;
 
             }else{
-                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"已报名等待审核" message:nil delegate:self cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"已报名等待审核" message:nil delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles: nil];
                 [alter show];
                 
                 
-                [self.activityDetailView.baoMingButton setTitle:@"已报名" forState:UIControlStateNormal];
-                [self.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
+                [weakSelf.activityDetailView.baoMingButton setTitle:@"已报名" forState:UIControlStateNormal];
+                [weakSelf.activityDetailView.baoMingButton setTitleColor:[UIColor blackColor]
                                                             forState:UIControlStateNormal];
-                self.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-                self.activityDetailView.baoMingButton.userInteractionEnabled = NO;
+                weakSelf.activityDetailView.baoMingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+                weakSelf.activityDetailView.baoMingButton.userInteractionEnabled = NO;
 
             }
             
@@ -109,7 +109,7 @@
             
             
             
-            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:self cancelButtonTitle:nil otherButtonTitles: @"确定", nil];
+            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:weakSelf cancelButtonTitle:nil otherButtonTitles: @"确定", nil];
             [alter show];
             
             
@@ -154,7 +154,7 @@
             
             
                    
-            self.model = [[ActivityModel alloc] initWithDict:result];
+            weakSelf.model = [[ActivityModel alloc] initWithDict:result];
             
             
             

@@ -371,18 +371,20 @@
     NSDictionary *parameter = @{@"start_datetime":self.beginTime , @" end_datetime":self.endTime , @"store_id":self.storeId , @"open_id":self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     NSString *url = @"http://woquapi.test.odong.com/1.0/store/create/order";
+    
+    __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
             NSMutableDictionary *dic = responseObject[@"result"];
-            self.orderID = [NSString stringWithFormat:@"%@" , dic[@"order_id"]];
-            [self saveData];
+            weakSelf.orderID = [NSString stringWithFormat:@"%@" , dic[@"order_id"]];
+            [weakSelf saveData];
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
         
         
@@ -418,19 +420,21 @@
     NSDictionary *parameter = @{@"start_datetime":self.beginTime , @"end_datetime":self.endTime , @"store_id":self.storeId , @"order_id":self.orderID ,@"purpose":self.yuYueView.pursoseTextView.text ,@"content":self.yuYueView.contentTextView.text ,@"people_num":self.yuYueView.peopleNumberTextField.text ,@"remark":@"无" ,@"devices":equipment ,@"open_id":self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     NSString *url = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
+    
+    __weak typeof (self)weakSelf = self;
     [self.managers GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"感谢您的预约请等待审核"];
+            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"感谢您的预约请等待审核"];
             
             
-            [self.navigationController popViewControllerAnimated:YES];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:responseObject[@"message"]];
+            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:responseObject[@"message"]];
         }
   
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

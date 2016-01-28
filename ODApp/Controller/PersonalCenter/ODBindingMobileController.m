@@ -160,9 +160,9 @@
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/verify/code/send";
     
+     self.manager = [AFHTTPRequestOperationManager manager];
     
-    self.manager = [AFHTTPRequestOperationManager manager];
-    
+    __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
      
         
@@ -170,14 +170,14 @@
             
             
             //启动定时器
-            [self.timer setFireDate:[NSDate distantPast]];
+            [weakSelf.timer setFireDate:[NSDate distantPast]];
         }else if (responseObject[@"error"]){
             
       
         }  else if ([responseObject[@"status"]isEqualToString:@"error"]){
             
             
-            [self createUIAlertControllerWithTitle:responseObject[@"message"]];
+            [weakSelf createUIAlertControllerWithTitle:responseObject[@"message"]];
         }
        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -197,22 +197,22 @@
     
     
     self.managers = [AFHTTPRequestOperationManager manager];
-    
+    __weak typeof (self)weakSelf = self;
     [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
      
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
-            if (self.getTextBlock) {
-                self.getTextBlock(self.bindMobileView.phoneTextField.text);
+            if (weakSelf.getTextBlock) {
+                weakSelf.getTextBlock(self.bindMobileView.phoneTextField.text);
             }
             
             
-            [self.navigationController popViewControllerAnimated:YES];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             
-            [self createUIAlertControllerWithTitle:responseObject[@"message"]];
+            [weakSelf createUIAlertControllerWithTitle:responseObject[@"message"]];
        
         }
       

@@ -62,7 +62,7 @@
             
             for (NSMutableDictionary *dic in result) {
                 ChoseCenterModel *model = [[ChoseCenterModel alloc] initWithDict:dic];
-                [self.dataArray addObject:model];
+                [weakSelf.dataArray addObject:model];
             }
             
             
