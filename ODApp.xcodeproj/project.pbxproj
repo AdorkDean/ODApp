@@ -464,12 +464,13 @@
 		D4D075271C59B9FA008527C9 /* ODMyOrderRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D073671C59B9FA008527C9 /* ODMyOrderRecordCell.m */; };
 		D4D075281C59B9FA008527C9 /* ODMyOrderRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D073681C59B9FA008527C9 /* ODMyOrderRecordCell.xib */; };
 		D4D075291C59B9FA008527C9 /* ODTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0736B1C59B9FA008527C9 /* ODTabBar.m */; };
-		D4D0752A1C59B9FA008527C9 /* ODTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0736D1C59B9FA008527C9 /* ODTabBarButton.m */; };
 		D4D075431C59BA9B008527C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0753A1C59BA9B008527C9 /* AppDelegate.m */; };
 		D4D075441C59BA9B008527C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0753B1C59BA9B008527C9 /* main.m */; };
 		D4D075451C59BA9B008527C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D075411C59BA9B008527C9 /* Assets.xcassets */; };
 		D4D075461C59BA9B008527C9 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D4D075421C59BA9B008527C9 /* Info.plist */; };
 		D4D075491C59BBEE008527C9 /* ODAppConst.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075481C59BBEE008527C9 /* ODAppConst.m */; };
+		D4D0754D1C59C0CA008527C9 /* UIView+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0754C1C59C0CA008527C9 /* UIView+ODExtension.m */; };
+		D4D075511C59C436008527C9 /* ODNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075501C59C436008527C9 /* ODNavigationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1091,8 +1092,6 @@
 		D4D073681C59B9FA008527C9 /* ODMyOrderRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyOrderRecordCell.xib; sourceTree = "<group>"; };
 		D4D0736A1C59B9FA008527C9 /* ODTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTabBar.h; sourceTree = "<group>"; };
 		D4D0736B1C59B9FA008527C9 /* ODTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTabBar.m; sourceTree = "<group>"; };
-		D4D0736C1C59B9FA008527C9 /* ODTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTabBarButton.h; sourceTree = "<group>"; };
-		D4D0736D1C59B9FA008527C9 /* ODTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTabBarButton.m; sourceTree = "<group>"; };
 		D4D075391C59BA9B008527C9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D4D0753A1C59BA9B008527C9 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D4D0753B1C59BA9B008527C9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1103,6 +1102,10 @@
 		D4D075421C59BA9B008527C9 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4D075471C59BBEE008527C9 /* ODAppConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppConst.h; sourceTree = "<group>"; };
 		D4D075481C59BBEE008527C9 /* ODAppConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAppConst.m; sourceTree = "<group>"; };
+		D4D0754B1C59C0CA008527C9 /* UIView+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ODExtension.h"; sourceTree = "<group>"; };
+		D4D0754C1C59C0CA008527C9 /* UIView+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ODExtension.m"; sourceTree = "<group>"; };
+		D4D0754F1C59C436008527C9 /* ODNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNavigationController.h; sourceTree = "<group>"; };
+		D4D075501C59C436008527C9 /* ODNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNavigationController.m; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1179,9 +1182,9 @@
 			isa = PBXGroup;
 			children = (
 				D4D0752B1C59BA45008527C9 /* Others */,
+				D4D0715E1C59B9FA008527C9 /* Utility */,
 				D4D070D21C59B9FA008527C9 /* Controller */,
 				D4D0713E1C59B9FA008527C9 /* Model */,
-				D4D0715E1C59B9FA008527C9 /* Utility */,
 				D4D073071C59B9FA008527C9 /* View */,
 			);
 			path = ODApp;
@@ -1224,6 +1227,7 @@
 		D4D070D21C59B9FA008527C9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D4D0754E1C59C41F008527C9 /* NavigationController */,
 				D4D0713B1C59B9FA008527C9 /* TabBarController */,
 				D4D070D31C59B9FA008527C9 /* BaseViewController */,
 				D4D071061C59B9FA008527C9 /* HomeFound */,
@@ -1588,6 +1592,8 @@
 				D4D071611C59B9FA008527C9 /* NSURL+ODExtension.m */,
 				D4D071621C59B9FA008527C9 /* UIColor+ODExtension.h */,
 				D4D071631C59B9FA008527C9 /* UIColor+ODExtension.m */,
+				D4D0754B1C59C0CA008527C9 /* UIView+ODExtension.h */,
+				D4D0754C1C59C0CA008527C9 /* UIView+ODExtension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2468,8 +2474,6 @@
 			children = (
 				D4D0736A1C59B9FA008527C9 /* ODTabBar.h */,
 				D4D0736B1C59B9FA008527C9 /* ODTabBar.m */,
-				D4D0736C1C59B9FA008527C9 /* ODTabBarButton.h */,
-				D4D0736D1C59B9FA008527C9 /* ODTabBarButton.m */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -2513,6 +2517,15 @@
 				D4D075421C59BA9B008527C9 /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		D4D0754E1C59C41F008527C9 /* NavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				D4D0754F1C59C436008527C9 /* ODNavigationController.h */,
+				D4D075501C59C436008527C9 /* ODNavigationController.m */,
+			);
+			path = NavigationController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3027,7 +3040,6 @@
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
 				D4D073901C59B9FA008527C9 /* ODOtherTopicViewController.m in Sources */,
-				D4D0752A1C59B9FA008527C9 /* ODTabBarButton.m in Sources */,
 				D4D0738C1C59B9FA008527C9 /* ODMyTaskController.m in Sources */,
 				D4D073A41C59B9FA008527C9 /* ODMyOrderRecordModel.m in Sources */,
 				D4D074E01C59B9FA008527C9 /* SDCollectionViewCell.m in Sources */,
@@ -3099,6 +3111,7 @@
 				D4D073811C59B9FA008527C9 /* ODCommunityHeaderView.m in Sources */,
 				D4D073861C59B9FA008527C9 /* ODChangePassWordController.m in Sources */,
 				D4D075121C59B9FA008527C9 /* ODBindingMobileView.m in Sources */,
+				D4D0754D1C59C0CA008527C9 /* UIView+ODExtension.m in Sources */,
 				D4D0739D1C59B9FA008527C9 /* ODCommunityModel.m in Sources */,
 				D4D073851C59B9FA008527C9 /* ODBindingMobileController.m in Sources */,
 				D4D074FD1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.m in Sources */,
@@ -3118,6 +3131,7 @@
 				D4D074D21C59B9FA008527C9 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				D4D074E11C59B9FA008527C9 /* SDCycleScrollView.m in Sources */,
 				D4D075241C59B9FA008527C9 /* ODEvaluationCell.m in Sources */,
+				D4D075511C59C436008527C9 /* ODNavigationController.m in Sources */,
 				D4D073911C59B9FA008527C9 /* ODPersonalCenterViewController.m in Sources */,
 				D4D073721C59B9FA008527C9 /* ODBazaarReleaseRewardViewController.m in Sources */,
 				D4D0750C1C59B9FA008527C9 /* LunBoModel.m in Sources */,
