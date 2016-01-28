@@ -172,6 +172,11 @@
 - (void)getVerification:(UIButton *)sender
 {
     
+    [self.registView.phoneNumber resignFirstResponder];
+    [self.registView.verification resignFirstResponder];
+    [self.registView.password resignFirstResponder];
+
+    
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
         
 

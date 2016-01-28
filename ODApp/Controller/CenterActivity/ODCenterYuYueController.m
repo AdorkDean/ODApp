@@ -342,7 +342,7 @@
             
             
         }else{
-            if ([weakSelf.start_datetime isEqualToString:@""]) {
+            if ([self.yuYueView.btimeText.titleLabel.text isEqualToString:@"填写开始时间"]) {
                 
                 [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请选择开始时间"];
             }else{
