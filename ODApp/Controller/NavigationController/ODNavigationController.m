@@ -8,7 +8,7 @@
 
 #import "ODNavigationController.h"
 
-@interface ODNavigationController ()
+@interface ODNavigationController () <UIGestureRecognizerDelegate>
 
 @end
 
@@ -17,21 +17,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationBar.barTintColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.interactivePopGestureRecognizer.delegate = self;
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    self.tabBarController.tabBar.hidden = YES;
+    [super pushViewController:viewController animated:animated];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated
+{
+    UIViewController *vc = [super popViewControllerAnimated:animated];
+    self.tabBarController.tabBar.hidden = NO;
+    return vc;
 }
-*/
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    NSLog(@"gestureRecgnizer = %@,,childControllers = %zd",gestureRecognizer,self.childViewControllers.count);
+    
+    return self.childViewControllers.count > 1;
+}
+
 
 @end
