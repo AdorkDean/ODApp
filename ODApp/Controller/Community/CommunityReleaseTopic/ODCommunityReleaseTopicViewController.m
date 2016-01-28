@@ -261,6 +261,7 @@
             NSString *str = result[@"File"];
             [self.strArray addObject:str];
             [self reloadImageButtons];
+            NSLog(@"%@",self.strArray);
 
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

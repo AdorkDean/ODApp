@@ -57,7 +57,7 @@
     view.fourLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     view.phoneLabel.textColor = [UIColor colorWithHexString:@"#014cdb" alpha:1];
     view.centerNameLabel.textColor = [UIColor colorWithHexString:@"#014cdb" alpha:1];
-    view.addressLabel.textColor = [UIColor colorWithHexString:@"#014cdb" alpha:1];
+    view.addressTextView.textColor = [UIColor colorWithHexString:@"#014cdb" alpha:1];
     view.timeTextView.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     view.timeTextView.scrollEnabled = NO;
    

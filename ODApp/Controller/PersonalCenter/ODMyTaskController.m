@@ -653,7 +653,7 @@
         NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
         
         
-        if ([status isEqualToString:@"-2"]||[status isEqualToString:@"-1"]) {
+        if ([status isEqualToString:@"-1"]) {
             cell.deleteButton.hidden = NO;
         }else{
             cell.deleteButton.hidden = YES;
@@ -708,7 +708,7 @@
         NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
         
         
-        if ([status isEqualToString:@"-2"]||[status isEqualToString:@"-1"]) {
+        if ([status isEqualToString:@"-1"]) {
             cell.deleteButton.hidden = NO;
         }else{
             cell.deleteButton.hidden = YES;
@@ -780,6 +780,8 @@
             ;
         }else{
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
+            bazaarDetail.task_status_name = model.task_status_name;
+            bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
             [self.navigationController pushViewController:bazaarDetail animated:YES];
@@ -798,6 +800,8 @@
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+            bazaarDetail.task_status_name = model.task_status_name;
+            bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
             
             [self.navigationController pushViewController:bazaarDetail animated:YES];
 

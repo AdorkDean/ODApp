@@ -227,10 +227,6 @@ int pageNumnber = 0;
     [self.headView addSubview:self.centerNameLabe];
     
     
-    
-    
-    
-    
     // 返回button
     UIButton *fanhuiButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
     fanhuiButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -306,7 +302,7 @@ int pageNumnber = 0;
         self.centerDetailView.detailTextView.text = self.model.desc;
         self.centerDetailView.centerNameLabel.text = self.model.name;
         self.centerDetailView.phoneLabel.text = self.model.tel;
-        self.centerDetailView.addressLabel.text = self.model.address;
+        self.centerDetailView.addressTextView.text = self.model.address;
         self.centerDetailView.timeTextView.text = self.model.business_hours;
 
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(phoneAction:)];
