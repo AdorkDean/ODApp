@@ -105,7 +105,7 @@
                 <outlet property="typeLabel" destination="LeY-F3-wVY" id="TN6-1w-8yS"/>
                 <outlet property="userImageView" destination="Jy0-n7-BA4" id="zX1-x1-xQz"/>
             </connections>
-            <point key="canvasLocation" x="41.5" y="188"/>
+            <point key="canvasLocation" x="205.5" y="305"/>
         </collectionViewCell>
     </objects>
     <resources>

@@ -10,4 +10,10 @@
 
 @interface ODViolationsCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (weak, nonatomic) IBOutlet UITextView *reasonTextView;
+
 @end
