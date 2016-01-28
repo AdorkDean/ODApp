@@ -348,6 +348,10 @@
         [self.collectionView.mj_header beginRefreshing];
     }else if ([self.refresh isEqualToString:@"accept"]){
         [self.collectionView.mj_header beginRefreshing];
+    }else if ([self.refresh isEqualToString:@"submit"]){
+        [self.collectionView.mj_header beginRefreshing];
+    }else if ([self.refresh isEqualToString:@"complete"]){
+        [self.collectionView.mj_header beginRefreshing];
     }
     
     self.navigationController.navigationBar.hidden = YES;

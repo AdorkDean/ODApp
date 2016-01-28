@@ -1371,6 +1371,60 @@
 			name = ODUserInformation;
 			sourceTree = "<group>";
 		};
+		C64273351C5A14F800C38A85 /* ODCenterActivity */ = {
+			isa = PBXGroup;
+			children = (
+				D4D070EB1C59B9FA008527C9 /* ODCenterActivityViewController.h */,
+				D4D070EC1C59B9FA008527C9 /* ODCenterActivityViewController.m */,
+			);
+			name = ODCenterActivity;
+			sourceTree = "<group>";
+		};
+		C64273361C5A153B00C38A85 /* ODCenterDetail */ = {
+			isa = PBXGroup;
+			children = (
+				D4D070ED1C59B9FA008527C9 /* ODCenterDetailController.h */,
+				D4D070EE1C59B9FA008527C9 /* ODCenterDetailController.m */,
+			);
+			name = ODCenterDetail;
+			sourceTree = "<group>";
+		};
+		C64273371C5A159800C38A85 /* ODActivityDetail */ = {
+			isa = PBXGroup;
+			children = (
+				D4D070E91C59B9FA008527C9 /* ODActivityDetailController.h */,
+				D4D070EA1C59B9FA008527C9 /* ODActivityDetailController.m */,
+			);
+			name = ODActivityDetail;
+			sourceTree = "<group>";
+		};
+		C64273381C5A15D300C38A85 /* ODCenterPicture */ = {
+			isa = PBXGroup;
+			children = (
+				D4D070EF1C59B9FA008527C9 /* ODCenterPactureController.h */,
+				D4D070F01C59B9FA008527C9 /* ODCenterPactureController.m */,
+			);
+			name = ODCenterPicture;
+			sourceTree = "<group>";
+		};
+		C64273391C5A15F200C38A85 /* ODCenterOrder */ = {
+			isa = PBXGroup;
+			children = (
+				D4D070F11C59B9FA008527C9 /* ODCenterYuYueController.h */,
+				D4D070F21C59B9FA008527C9 /* ODCenterYuYueController.m */,
+			);
+			name = ODCenterOrder;
+			sourceTree = "<group>";
+		};
+		C642733A1C5A160400C38A85 /* ODChoseCenter */ = {
+			isa = PBXGroup;
+			children = (
+				D4D070F31C59B9FA008527C9 /* ODChoseCenterController.h */,
+				D4D070F41C59B9FA008527C9 /* ODChoseCenterController.m */,
+			);
+			name = ODChoseCenter;
+			sourceTree = "<group>";
+		};
 		D4D070D21C59B9FA008527C9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -1443,18 +1497,12 @@
 		D4D070E81C59B9FA008527C9 /* CenterActivity */ = {
 			isa = PBXGroup;
 			children = (
-				D4D070E91C59B9FA008527C9 /* ODActivityDetailController.h */,
-				D4D070EA1C59B9FA008527C9 /* ODActivityDetailController.m */,
-				D4D070EB1C59B9FA008527C9 /* ODCenterActivityViewController.h */,
-				D4D070EC1C59B9FA008527C9 /* ODCenterActivityViewController.m */,
-				D4D070ED1C59B9FA008527C9 /* ODCenterDetailController.h */,
-				D4D070EE1C59B9FA008527C9 /* ODCenterDetailController.m */,
-				D4D070EF1C59B9FA008527C9 /* ODCenterPactureController.h */,
-				D4D070F01C59B9FA008527C9 /* ODCenterPactureController.m */,
-				D4D070F11C59B9FA008527C9 /* ODCenterYuYueController.h */,
-				D4D070F21C59B9FA008527C9 /* ODCenterYuYueController.m */,
-				D4D070F31C59B9FA008527C9 /* ODChoseCenterController.h */,
-				D4D070F41C59B9FA008527C9 /* ODChoseCenterController.m */,
+				C64273351C5A14F800C38A85 /* ODCenterActivity */,
+				C64273391C5A15F200C38A85 /* ODCenterOrder */,
+				C64273381C5A15D300C38A85 /* ODCenterPicture */,
+				C64273361C5A153B00C38A85 /* ODCenterDetail */,
+				C642733A1C5A160400C38A85 /* ODChoseCenter */,
+				C64273371C5A159800C38A85 /* ODActivityDetail */,
 			);
 			path = CenterActivity;
 			sourceTree = "<group>";
