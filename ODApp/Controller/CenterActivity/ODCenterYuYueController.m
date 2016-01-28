@@ -38,7 +38,6 @@
 @property(nonatomic,strong)AFHTTPRequestOperationManager *timeManager;
 
 
-@property (nonatomic , strong) NSMutableArray *timeArray;
 
 
 @property (nonatomic , copy) NSString *beginTime;
@@ -46,9 +45,10 @@
 @property (nonatomic , copy) NSString *orderID;
 
 @property (nonatomic , copy) NSString *openId;
+@property (nonatomic , strong) NSMutableArray *timeArray;
 
 @property (nonatomic , strong) NSMutableArray *dataArray;
-@property (nonatomic , strong) NSArray *timeDataArray;
+@property (nonatomic , strong) NSMutableArray *timeDataArray;
 @property (nonatomic , strong) NSArray *keysArray;
 
 @property (nonatomic , strong) NSString *dateStr;
@@ -71,7 +71,7 @@
 
     self.timeArray = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
-    self.timeDataArray = [[NSArray alloc] init];
+    self.timeDataArray = [[NSMutableArray alloc] init];
     self.keysArray = [[NSArray alloc] init];
 
     self.isComputer = YES;
@@ -98,6 +98,9 @@
 - (void)viewWillAppear:(BOOL)animated{
 
     [super viewWillAppear:animated];
+    self.dateStr = @"";
+    self.timeStr = @"";
+    self.yearStr = @"";
     self.navigationController.navigationBar.hidden = YES;
 }
 
@@ -226,6 +229,10 @@
 
 - (void)getData
 {
+    
+    
+    NSLog(@"____%@" , self.start_datetime);
+    
     self.timeManager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"store_id":self.storeId , @"start_datetime":self.start_datetime};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
@@ -242,10 +249,19 @@
         
         if (responseObject) {
             
-            [timesArray removeAllObjects];
+            [self.timeArray removeAllObjects];
+            [self.dataArray removeAllObjects];
+            [self.timeDataArray removeAllObjects];
+            
             weakSelf.timeStr = @"";
             NSMutableDictionary *dic = responseObject[@"result"];
+           
+        
+            
             weakSelf.keysArray = [dic allKeys];
+            
+            
+            
             weakSelf.keysArray = [weakSelf.keysArray sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
                 NSComparisonResult result = [obj1 compare:obj2];
                 return result == NSOrderedDescending;
@@ -363,10 +379,6 @@
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     
-    self.beginTime = [self.yearStr stringByAppendingString:@" "];
-    self.beginTime = [self.beginTime stringByAppendingString:self.btimeStr];
-    self.endTime = [self.yearStr stringByAppendingString:@" "];
-    self.endTime = [self.endTime stringByAppendingString:self.eimeStr];
     
     NSDictionary *parameter = @{@"start_datetime":self.beginTime , @" end_datetime":self.endTime , @"store_id":self.storeId , @"open_id":self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
@@ -413,6 +425,8 @@
     if (!self.isMai) {
         maiY = @"4";
     }
+    
+    
     
     NSString *equipment = [NSString stringWithFormat:@"%@,%@,%@,%@" , computerY , touYingY , yinXingY , maiY];
     NSDictionary *parameter = @{@"start_datetime":self.beginTime , @"end_datetime":self.endTime , @"store_id":self.storeId , @"order_id":self.orderID ,@"purpose":self.yuYueView.pursoseTextView.text ,@"content":self.yuYueView.contentTextView.text ,@"people_num":self.yuYueView.peopleNumberTextField.text ,@"remark":@"无" ,@"devices":equipment ,@"open_id":self.openId};
@@ -469,6 +483,8 @@
 - (void)choseBeginTime:(UIButton *)sender
 {
     
+    
+    self.yuYueView.centerText.userInteractionEnabled = NO;
     
     if (sender.tag == 111) {
         
@@ -551,16 +567,13 @@
 
 - (void)quXiaoAction:(UIButton *)sender
 {
-    if ([self.yearStr isEqualToString:@""]) {
-        self.yearStr = self.keysArray[0];
-    }
     
-    NSString *beginTime = [self.yearStr stringByAppendingString:@" "];
-    beginTime = [beginTime stringByAppendingString:self.btimeStr];
-    self.start_datetime = beginTime;
+    self.start_datetime = self.beginTime;
+    
     
     self.yuYueView.btimeText.userInteractionEnabled = YES;
     self.yuYueView.eTimeText.userInteractionEnabled = YES;
+    self.yuYueView.centerText.userInteractionEnabled = YES;
     
     [self.picker removeFromSuperview];
     [self.cancelButton removeFromSuperview];
@@ -576,11 +589,9 @@
 {
     
     
-    
     if ([self.yearStr isEqualToString:@""]) {
         self.yearStr = self.keysArray[0];
     }
-    
     
     
     if (self.isBeginTime) {
@@ -592,12 +603,15 @@
             self.timeDataArray = [[self.dataArray objectAtIndex:0] objectForKey:@"time"];
             self.timeStr = self.timeDataArray[0];
         }
-        self.btimeStr = self.timeStr;
+        
+      
+        
+        
         NSString *time = [self.dateStr stringByAppendingString:self.timeStr];
         
         [self.yuYueView.btimeText setTitle:time forState:UIControlStateNormal];
         [self.yuYueView.eTimeText setTitle:@"填写结束时间" forState:UIControlStateNormal];
-        self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:15];
+         self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:15];
         
         
         if (iPhone4_4S || iPhone5_5s) {
@@ -613,10 +627,13 @@
             
         }
         
-        NSString *beginTime = [self.yearStr stringByAppendingString:@" "];
-        beginTime = [beginTime stringByAppendingString:self.btimeStr];
-        self.start_datetime = beginTime;
         
+        
+        
+        NSString *beginTime = [self.yearStr stringByAppendingString:@" "];
+        NSString *newBeginTime = [beginTime stringByAppendingString:self.timeStr];
+        self.beginTime = newBeginTime;
+        self.start_datetime = newBeginTime;
         
         
     }else {
@@ -630,9 +647,8 @@
             self.timeStr = self.timeDataArray[0];
         }
         
-        self.eimeStr = self.timeStr;
+      
         NSString *time = [self.dateStr stringByAppendingString:self.timeStr];
-        
         [self.yuYueView.eTimeText setTitle:time forState:UIControlStateNormal];
         
         
@@ -648,6 +664,14 @@
             
         }
         
+        self.eimeStr = self.timeStr;
+        NSString *endTime = [self.yearStr stringByAppendingString:@" "];
+        endTime = [endTime stringByAppendingString:self.eimeStr];
+        self.endTime = endTime;
+
+        
+    
+        
         
     }
     
@@ -655,6 +679,7 @@
     
     self.yuYueView.btimeText.userInteractionEnabled = YES;
     self.yuYueView.eTimeText.userInteractionEnabled = YES;
+    self.yuYueView.centerText.userInteractionEnabled = YES;
 
     [self.picker removeFromSuperview];
     [self.cancelButton removeFromSuperview];

@@ -61,21 +61,21 @@
     [view.centerNameButton setTitleColor:[UIColor colorWithHexString:@"#015afe" alpha:1] forState:UIControlStateNormal];
 
     if (iPhone4_4S) {
-       view.beginTimeLabel.font = [UIFont systemFontOfSize:13];
-        view.endTimeLabel.font = [UIFont systemFontOfSize:13];
+       view.beginTimeLabel.font = [UIFont systemFontOfSize:12];
+        view.endTimeLabel.font = [UIFont systemFontOfSize:12];
         
         
     }else if (iPhone5_5s) {
         
-       view.beginTimeLabel.font = [UIFont systemFontOfSize:13];
-       view.endTimeLabel.font = [UIFont systemFontOfSize:13];
+       view.beginTimeLabel.font = [UIFont systemFontOfSize:12];
+       view.endTimeLabel.font = [UIFont systemFontOfSize:12];
     }else if (iPhone6_6s){
-        view.beginTimeLabel.font = [UIFont systemFontOfSize:16];
-       view.endTimeLabel.font = [UIFont systemFontOfSize:16];
+        view.beginTimeLabel.font = [UIFont systemFontOfSize:15];
+       view.endTimeLabel.font = [UIFont systemFontOfSize:15];
     }else {
         
-       view.beginTimeLabel.font = [UIFont systemFontOfSize:16];
-       view.endTimeLabel.font = [UIFont systemFontOfSize:16];
+       view.beginTimeLabel.font = [UIFont systemFontOfSize:15];
+       view.endTimeLabel.font = [UIFont systemFontOfSize:15];
         
     }
 
