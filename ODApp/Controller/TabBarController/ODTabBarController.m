@@ -61,8 +61,7 @@
 {
     [self.tabBar layoutSubviews];
     self.selectedViewController = self.childViewControllers[selectedIndex];
-    if (selectedIndex == 4 && [[ODUserInformation getData].openID isEqualToString:@""])
-        return;
+    if (selectedIndex == 4 && [ODUserInformation getData].openID.length == 0)        return;
     self.currentIndex = selectedIndex;
 }
 
