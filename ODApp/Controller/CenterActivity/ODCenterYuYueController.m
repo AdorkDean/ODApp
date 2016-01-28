@@ -342,7 +342,7 @@
             
             
         }else{
-            if ([weakSelf.start_datetime isEqualToString:@""]) {
+            if ([self.yuYueView.btimeText.titleLabel.text isEqualToString:@"填写开始时间"]) {
                 
                 [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请选择开始时间"];
             }else{
@@ -678,30 +678,32 @@
 
 - (void)choseCenter:(UIButton *)sender
 {
+    
     ODChoseCenterController *vc = [[ODChoseCenterController alloc] init];
     
-    
-        vc.storeCenterNameBlock = ^(NSString *name , NSString *storeId , NSInteger storeNumber){
+    vc.storeCenterNameBlock = ^(NSString *name , NSString *storeId , NSInteger storeNumber){
         
         [self.yuYueView.centerText setTitle:name forState:UIControlStateNormal];
-            
-            
-            if ([self.storeId isEqualToString:storeId]) {
+ 
+        if ([self.storeId isEqualToString:storeId]) {
                 
                 ;
 
-            }else{
-                self.storeId = storeId;
-                self.start_datetime = @"";
-                
-                [self.yuYueView.btimeText setTitle:@"填写开始时间" forState:UIControlStateNormal];
-                [self.yuYueView.eTimeText setTitle:@"填写结束时间" forState:UIControlStateNormal];
-                self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:15];
-                self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:15];
-            }
+        }else{
+            self.storeId = storeId;
+            self.start_datetime = @"";
             
-            
+            [self.yuYueView.btimeText setTitle:@"填写开始时间" forState:UIControlStateNormal];
+            [self.yuYueView.eTimeText setTitle:@"填写结束时间" forState:UIControlStateNormal];
+            self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:15];
+            self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:15];
+        }
     };
+    
+    [self.picker removeFromSuperview];
+    [self.cancelButton removeFromSuperview];
+    [self.queDingButton removeFromSuperview];
+    [self.timeLabel removeFromSuperview];
     
     [self.navigationController pushViewController:vc animated:YES];
     

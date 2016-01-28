@@ -16,7 +16,6 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="l05-DE-XHR"/>
                     </constraints>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -148,7 +147,7 @@
                 <outlet property="seePassword" destination="z65-fQ-3Sk" id="ppH-iV-2le"/>
                 <outlet property="verification" destination="Xt7-46-5kf" id="Reo-Z1-zuW"/>
             </connections>
-            <point key="canvasLocation" x="-69" y="248"/>
+            <point key="canvasLocation" x="87" y="246"/>
         </view>
     </objects>
     <resources>

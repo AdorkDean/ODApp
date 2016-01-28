@@ -168,7 +168,7 @@
 
 - (void)backAction:(UIButton *)sender
 {
-    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
+//    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
     //        ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     tabBar.selectedIndex = tabBar.currentIndex;
@@ -206,6 +206,9 @@
 
 - (void)landAction:(UIButton *)sender
 {
+    
+    [self.landView.accountTextField resignFirstResponder];
+    [self.landView.passwordTextField resignFirstResponder];
     if ([self.landView.accountTextField.text isEqualToString:@""]) {
         
         [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];

@@ -84,9 +84,7 @@ void UncaughtExceptionHandler(NSException *exception)
     [ODUserInformation getData].openID = openId ? openId : @"";
 
     
-    NSLog(@"_____%@" , openId);
-    
-    
+      
     self.window.rootViewController = [[ODTabBarController alloc]init];
     
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];

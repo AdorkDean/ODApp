@@ -118,8 +118,10 @@
         if ([self.topTitle isEqualToString:@"修改密码"]) {
             self.registView.phoneNumber.userInteractionEnabled = NO;
             self.registView.phoneNumber.text = self.phoneNumber;
+            self.registView.phoneNumber.textColor = [UIColor lightGrayColor];
         }
         
+     
         
         self.registView.password.secureTextEntry = YES;
      
@@ -163,6 +165,15 @@
 - (void)registere:(UIButton *)sender
 {
     
+    [self.registView.phoneNumber resignFirstResponder];
+    [self.registView.verification resignFirstResponder];
+    [self.registView.password resignFirstResponder];
+    
+    [self.registView.phoneNumber resignFirstResponder];
+    [self.registView.password resignFirstResponder];
+    [self.registView.verification resignFirstResponder];
+
+    
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
 
@@ -183,6 +194,10 @@
 
 - (void)getVerification:(UIButton *)sender
 {
+    
+      [self.registView.phoneNumber resignFirstResponder];
+      [self.registView.password resignFirstResponder];
+      [self.registView.verification resignFirstResponder];
     
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {

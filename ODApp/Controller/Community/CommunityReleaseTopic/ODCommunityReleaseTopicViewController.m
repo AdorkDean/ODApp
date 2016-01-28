@@ -61,6 +61,10 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
+    
+    [self.titleTextView resignFirstResponder];
+    [self.topicContentTextView resignFirstResponder];
+    
     if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length>0) {
         [self joiningTogetherParmeters];
     }else if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length==0){
@@ -70,6 +74,7 @@
 
         [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入话题标题"];
     }
+    
 }
 
 #pragma mark - 创建textView
@@ -359,6 +364,8 @@
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             if (self.myBlock) {
                 self.myBlock([NSString stringWithFormat:@"refresh"]);
@@ -366,6 +373,17 @@
             
             [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"话题发布成功"];
             [self.navigationController popViewControllerAnimated:YES];
+        }
+        if ([responseObject[@"status"]isEqualToString:@"error"]){
+            if ([responseObject[@"message"] isEqualToString:@"title not found"]) {
+                
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入标题"];
+            }else{
+            
+                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入内容"];
+            }
+            
+            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error);
