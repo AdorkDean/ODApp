@@ -18,6 +18,7 @@
 #import "ODBazaarDetailCollectionCell.h"
 #import "UIImageView+WebCache.h"
 #import "ODPersonalCenterViewController.h"
+#import "ODOthersInformationController.h"
 
 @interface ODBazaarDetailViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextViewDelegate>
 

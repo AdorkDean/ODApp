@@ -228,21 +228,6 @@
             [self.taskButton setTitle:@"过期任务" forState:UIControlStateNormal];
         }
     }
-//else{
-//        if ([self.task_status isEqualToString:@"1"]) {
-//            [self.taskButton setTitle:@"接受任务" forState:UIControlStateNormal];
-//            [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-//            self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
-//            [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-//            [self.userView addSubview:self.taskButton];
-//        }else if ([self.task_status isEqualToString:@"-2"]){
-//            [self.taskButton setTitle:@"任务过期" forState:UIControlStateNormal];
-//            [self.userView addSubview:self.taskButton];
-//        }else{
-//            userNickLabel.frame = CGRectMake(60, 10, self.userView.frame.size.width-60, 20);
-//            userSignLabel.frame = CGRectMake(60, 30, self.userView.frame.size.width-60, 40);
-//        }
-//    }
     
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 75, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
     [self.userView addSubview:lineView];
@@ -250,7 +235,13 @@
 
 -(void)userHeaderButtonClick:(UIButton *)button
 {
-    
+    if ([[ODUserInformation getData].openID isEqualToString:self.open_id]) {
+        
+    }else{
+        ODOthersInformationController *otherInfo = [[ODOthersInformationController alloc]init];
+        otherInfo.open_id  = self.open_id;
+        [self.navigationController pushViewController:otherInfo animated:YES];
+    }
 }
 
 -(void)taskButtonClick:(UIButton *)button
@@ -508,42 +499,62 @@
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.picArray.count;
+    NSString *str = [[NSString alloc]init];
+    for (NSInteger i = 0 ; i < self.picArray.count; i++) {
+        ODBazaarDetailModel *model = self.picArray[i];
+        NSString *applyStatus = [NSString stringWithFormat:@"%@",model.apply_status];
+        if ([applyStatus isEqualToString:@"1"]) {
+            str = applyStatus;
+        }
+    }
+    
+    if ([str isEqualToString:@"1"]) {
+        return 1;
+    }else{
+        return self.picArray.count;
+    }
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+
     ODBazaarDetailCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarDetailCellId forIndexPath:indexPath];
     ODBazaarDetailModel *model = self.picArray[indexPath.row];
+   
     [cell.imageV sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
     cell.nickLabel.text = model.user_nick;
     cell.signLabel.text = model.user_sign;
     cell.layer.masksToBounds = YES;
     cell.layer.borderColor = [UIColor colorWithHexString:@"#484848" alpha:1].CGColor;
     cell.layer.borderWidth = 1;
+
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODBazaarDetailModel *model = self.picArray[indexPath.row];
+    NSString *str = [NSString stringWithFormat:@"%@",model.apply_status];
     if ([[ODUserInformation getData].openID isEqualToString:self.open_id]) {
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否委派" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        if ([str isEqualToString:@"0"]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否委派" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+                NSDictionary *parameter = @{@"task_id":self.task_id,@"apply_open_id":model.open_id};
+                NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                [manager GET:kBazaarTaskDelegateUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                    if ([responseObject[@"status"] isEqualToString:@"success"]) {
+                        NSLog(@"%@",responseObject[@"status"]);
+                    }
+                } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+                }];
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+        }else{
             
-            NSDictionary *parameter = @{@"task_id":self.task_id,@"apply_open_id":model.open_id};
-            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            [manager GET:kBazaarTaskDelegateUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                if ([responseObject[@"status"] isEqualToString:@"success"]) {
-                    NSLog(@"%@",responseObject[@"status"]);
-                }
-            } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-            }];
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
+        }
     }
 }
 

@@ -87,7 +87,6 @@
 -(void)confirmButtonClick:(UIButton *)button
 {
     if (self.searchBar.text.length>0) {
-        self.keyText = [NSString stringWithFormat:@"%@",self.searchBar.text];
         [self.searchBar resignFirstResponder];
         [self joiningTogetherParmeters];
     }else{
@@ -143,7 +142,7 @@
 -(void)joiningTogetherParmeters
 {
     self.count = 1;
-    NSDictionary *parameter = @{@"kw":self.keyText,@"suggest":@"0",@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"kw":self.searchBar.text,@"suggest":@"0",@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsSearchUrl paramater:signParameter];
 }
