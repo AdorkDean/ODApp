@@ -38,7 +38,7 @@
 /** 打印方法 */
 #define NSLogFunc NSLog(@"%s", __func__);
 
-/*＊  self弱引用 */
+/**  self弱引用 */
 #define __weakSelf __weak typeof (self)weakSelf = self;
 
 #endif
