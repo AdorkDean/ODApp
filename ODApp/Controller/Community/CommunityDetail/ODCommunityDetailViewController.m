@@ -464,15 +464,17 @@
 {
     [self joiningTogetherParmetersWithUserInfo:NO];
     self.navigationController.navigationBar.hidden = YES;
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 0;
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 #pragma mark - 试图将要消失
 -(void)viewWillDisappear:(BOOL)animated
 {
-    ODTabBarController * tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1.0;
+//    ODTabBarController * tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 1.0;
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

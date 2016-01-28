@@ -280,9 +280,10 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1;
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 1;
 
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 #pragma mark - 试图将要消失

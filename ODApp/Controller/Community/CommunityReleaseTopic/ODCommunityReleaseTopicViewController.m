@@ -261,6 +261,7 @@
             NSString *str = result[@"File"];
             [self.strArray addObject:str];
             [self reloadImageButtons];
+            NSLog(@"%@",self.strArray);
 
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -378,15 +379,18 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     self.navigationController.navigationBar.hidden = YES;
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 0;
+
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 #pragma mark - 试图将要消失
 -(void)viewWillDisappear:(BOOL)animated
 {
-    ODTabBarController * tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1.0;
+//    ODTabBarController * tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 1.0;
+    self.tabBarController.tabBar.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

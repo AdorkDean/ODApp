@@ -337,8 +337,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1;
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 1;
+    self.tabBarController.tabBar.hidden = NO;
     
     if ([self.refresh isEqualToString:@"release"]) {
         self.status = @"9";

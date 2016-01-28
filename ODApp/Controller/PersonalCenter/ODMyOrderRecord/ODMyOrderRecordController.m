@@ -45,8 +45,9 @@
 {
     
     [self joiningTogetherParmeters];
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 0;
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 - (void)navigationInit

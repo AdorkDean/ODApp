@@ -51,9 +51,10 @@
 {
     
     self.navigationController.navigationBar.hidden = YES;
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1;
-    
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 1;
+
+    self.tabBarController.tabBar.hidden = NO;
     [self getHotThemeRequest];
 }
 
@@ -194,47 +195,47 @@
 
 - (void)chatButtonClick:(UIButton *)button
 {
-    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
+//    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
     ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     tabBar.selectedIndex = 3;
     
-    NSInteger index = 3;
-    for (NSInteger i = 0; i < 5; i++) {
-        UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
-        UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-        
-        if (i!=index) {
-            newButton.selected =NO;
-            button.selected = YES;
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
-            
-        }else{
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
-        }
-    }
+//    NSInteger index = 3;
+//    for (NSInteger i = 0; i < 5; i++) {
+//        UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
+//        UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
+//        
+//        if (i!=index) {
+//            newButton.selected =NO;
+//            button.selected = YES;
+//            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
+//            
+//        }else{
+//            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
+//        }
+//    }
 }
 
 - (void)activityButtonClick:(UIButton *)button
 {
 
-    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
+//    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
     ODTabBarController *tabbar = (ODTabBarController *)self.navigationController.tabBarController;
     tabbar.selectedIndex = 1;
     
-    NSInteger index = 1;
-    for (NSInteger i = 0; i < 5; i++) {
-        UIButton *newButton= (UIButton *)[tabbar.imageView viewWithTag:1+i];
-        UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-        
-        if (i!=index) {
-            newButton.selected =NO;
-            button.selected = YES;
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
-            
-        }else{
-            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
-        }
-    }
+//    NSInteger index = 1;
+//    for (NSInteger i = 0; i < 5; i++) {
+//        UIButton *newButton= (UIButton *)[tabbar.imageView viewWithTag:1+i];
+//        UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
+//        
+//        if (i!=index) {
+//            newButton.selected =NO;
+//            button.selected = YES;
+//            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
+//            
+//        }else{
+//            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
+//        }
+//    }
 }
 
 - (void)placeButtonClick:(UIButton *)button

@@ -77,9 +77,9 @@ int pageNumnber = 0;
     self.myTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop]addTimer:self.myTimer forMode:NSRunLoopCommonModes];
     
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
-
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 0;
+    self.tabBarController.tabBar.hidden = YES;
     
 }
 
@@ -89,9 +89,9 @@ int pageNumnber = 0;
     [self.myTimer invalidate];
     self.myTimer = nil;
     
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1;
-
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 1;
+    self.tabBarController.tabBar.hidden = NO;
    
 }
 

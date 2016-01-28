@@ -59,16 +59,16 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 
 -(void)viewWillDisappear:(BOOL)animated
 {
     
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1.0;
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 #pragma mark - 连接数据

@@ -131,9 +131,10 @@
 {
     [super viewWillAppear:animated];
     
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1;
-
+//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
+//    tabBar.imageView.alpha = 1;
+    self.tabBarController.tabBar.hidden = NO;
+    
     if (self.isRefresh) {
         [self.collectionView.mj_header beginRefreshing];
     }
