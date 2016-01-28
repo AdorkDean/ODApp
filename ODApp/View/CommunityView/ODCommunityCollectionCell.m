@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     
     self.headButton.layer.masksToBounds = YES;
-    self.headButton.layer.cornerRadius = 24;
+    self.headButton.layer.cornerRadius = 30;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     self.nameLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
