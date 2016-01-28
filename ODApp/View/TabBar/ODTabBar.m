@@ -8,7 +8,6 @@
 #define KBaseTag 2500
 
 #import "ODTabBar.h"
-#import "ODTabBarButton.h"
 
 @implementation ODTabBar
 
@@ -19,22 +18,6 @@
         self.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     }
     return self;
-}
-
-- (void)setTabBarItems:(NSArray *)tabBarItems
-{
-    _tabBarItems = tabBarItems;
-    for (NSInteger i = 0; i < tabBarItems.count; i ++)
-    {
-        UITabBarItem *item = _tabBarItems[i];
-        ODTabBarButton *button = [ODTabBarButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake((kScreenSize.width/5) * i, 0, kScreenSize.width / 5, ODTabBarHeight);
-        button.tag = i + KBaseTag;
-        [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [button setImage:item.image forState:UIControlStateNormal];
-        [button setImage:item.selectedImage forState:UIControlStateSelected];
-        [button setTitle:item.title forState:UIControlStateNormal];
-    }
 }
 
 - (void)buttonClick:(UIControl *)control

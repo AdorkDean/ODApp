@@ -464,7 +464,6 @@
 		D4D075271C59B9FA008527C9 /* ODMyOrderRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D073671C59B9FA008527C9 /* ODMyOrderRecordCell.m */; };
 		D4D075281C59B9FA008527C9 /* ODMyOrderRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D073681C59B9FA008527C9 /* ODMyOrderRecordCell.xib */; };
 		D4D075291C59B9FA008527C9 /* ODTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0736B1C59B9FA008527C9 /* ODTabBar.m */; };
-		D4D0752A1C59B9FA008527C9 /* ODTabBarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0736D1C59B9FA008527C9 /* ODTabBarButton.m */; };
 		D4D075431C59BA9B008527C9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0753A1C59BA9B008527C9 /* AppDelegate.m */; };
 		D4D075441C59BA9B008527C9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0753B1C59BA9B008527C9 /* main.m */; };
 		D4D075451C59BA9B008527C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4D075411C59BA9B008527C9 /* Assets.xcassets */; };
@@ -1093,8 +1092,6 @@
 		D4D073681C59B9FA008527C9 /* ODMyOrderRecordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyOrderRecordCell.xib; sourceTree = "<group>"; };
 		D4D0736A1C59B9FA008527C9 /* ODTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTabBar.h; sourceTree = "<group>"; };
 		D4D0736B1C59B9FA008527C9 /* ODTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTabBar.m; sourceTree = "<group>"; };
-		D4D0736C1C59B9FA008527C9 /* ODTabBarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTabBarButton.h; sourceTree = "<group>"; };
-		D4D0736D1C59B9FA008527C9 /* ODTabBarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTabBarButton.m; sourceTree = "<group>"; };
 		D4D075391C59BA9B008527C9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D4D0753A1C59BA9B008527C9 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		D4D0753B1C59BA9B008527C9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -2477,8 +2474,6 @@
 			children = (
 				D4D0736A1C59B9FA008527C9 /* ODTabBar.h */,
 				D4D0736B1C59B9FA008527C9 /* ODTabBar.m */,
-				D4D0736C1C59B9FA008527C9 /* ODTabBarButton.h */,
-				D4D0736D1C59B9FA008527C9 /* ODTabBarButton.m */,
 			);
 			path = TabBar;
 			sourceTree = "<group>";
@@ -3045,7 +3040,6 @@
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
 				D4D073901C59B9FA008527C9 /* ODOtherTopicViewController.m in Sources */,
-				D4D0752A1C59B9FA008527C9 /* ODTabBarButton.m in Sources */,
 				D4D0738C1C59B9FA008527C9 /* ODMyTaskController.m in Sources */,
 				D4D073A41C59B9FA008527C9 /* ODMyOrderRecordModel.m in Sources */,
 				D4D074E01C59B9FA008527C9 /* SDCollectionViewCell.m in Sources */,
