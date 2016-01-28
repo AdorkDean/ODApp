@@ -359,7 +359,7 @@
 
     }else{
    
-        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text],@"end_time":[[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text],@"content":self.taskDetailTextView.text,@"reward_name":[self.taskRewardLabel.text substringFromIndex:3],@"open_id":[ODUserInformation getData].openID};
+        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text],@"end_time":[[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text],@"content":self.taskDetailTextView.text,@"reward_name":[self.taskRewardLabel.text substringFromIndex:2],@"open_id":[ODUserInformation getData].openID};
         
         NSLog(@"%@",parameter);
     }
