@@ -59,6 +59,11 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
+    
+    [self.titleTextView resignFirstResponder];
+    [self.taskDetailTextView resignFirstResponder];
+    [self.backPickerView removeFromSuperview];
+    
     if (self.titleTextView.text.length>0&&self.taskDetailTextView.text.length>0) {
         [self joiningTogetherParmeters];
     }else{
@@ -267,6 +272,7 @@
 //确认datePickerView
 -(void)confirmPickerButtonClick:(UIButton *)button
 {
+    
     if ([self.type isEqualToString:@"startDate"]) {
         self.startDateLabel.text = [NSString stringWithFormat:@"%@",[self timeFormatDate:YES]];
     }else if ([self.type isEqualToString:@"endDate"]){
@@ -382,11 +388,11 @@
             
             self.isJob = YES;
             if (self.isBazaar == NO) {
-                NSArray *imageArray =@[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
+//                NSArray *imageArray =@[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
                 ODTabBarController *tabbar = (ODTabBarController *)self.navigationController.tabBarController;
                 tabbar.selectedIndex = 2;
                 
-                NSInteger index = 2;
+//                NSInteger index = 2;
 //                for (NSInteger i = 0; i < 5; i++) {
 //                    UIButton *newButton= (UIButton *)[tabbar.imageView viewWithTag:1+i];
 //                    UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
@@ -409,6 +415,14 @@
             }
         }else{
             NSString *message = dict[@"message"];
+            
+            if ([dict[@"message"] isEqualToString:@"title not found"]) {
+                message = @"请输入标题";
+            }
+            else{
+            
+                message = @"请输入内容";
+            }
             
             [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:message];
         }

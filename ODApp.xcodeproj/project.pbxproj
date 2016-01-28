@@ -1220,10 +1220,10 @@
 			isa = PBXGroup;
 			children = (
 				D4D070D31C59B9FA008527C9 /* BaseViewController */,
-				D4D070D61C59B9FA008527C9 /* Bazaar */,
-				D4D070E81C59B9FA008527C9 /* CenterActivity */,
-				D4D070F51C59B9FA008527C9 /* Community */,
 				D4D071061C59B9FA008527C9 /* HomeFound */,
+				D4D070E81C59B9FA008527C9 /* CenterActivity */,
+				D4D070D61C59B9FA008527C9 /* Bazaar */,
+				D4D070F51C59B9FA008527C9 /* Community */,
 				D4D071101C59B9FA008527C9 /* PersonalCenter */,
 				D4D0713B1C59B9FA008527C9 /* TabBarController */,
 			);
