@@ -55,7 +55,7 @@
     view.titleLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     view.beginTimeLabel.textColor = [UIColor colorWithHexString:@"#8f8f8f" alpha:1];
     view.endTimeLabel.textColor = [UIColor colorWithHexString:@"#8f8f8f" alpha:1];
-    view.addressLabel.textColor = [UIColor colorWithHexString:@"#015afe" alpha:1];
+    view.addressTextView.textColor = [UIColor colorWithHexString:@"#015afe" alpha:1];
 
     
     [view.centerNameButton setTitleColor:[UIColor colorWithHexString:@"#015afe" alpha:1] forState:UIControlStateNormal];
