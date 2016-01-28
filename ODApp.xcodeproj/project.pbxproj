@@ -1219,13 +1219,13 @@
 		D4D070D21C59B9FA008527C9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D4D0713B1C59B9FA008527C9 /* TabBarController */,
 				D4D070D31C59B9FA008527C9 /* BaseViewController */,
 				D4D071061C59B9FA008527C9 /* HomeFound */,
 				D4D070E81C59B9FA008527C9 /* CenterActivity */,
 				D4D070D61C59B9FA008527C9 /* Bazaar */,
 				D4D070F51C59B9FA008527C9 /* Community */,
 				D4D071101C59B9FA008527C9 /* PersonalCenter */,
-				D4D0713B1C59B9FA008527C9 /* TabBarController */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1394,6 +1394,8 @@
 		D4D071101C59B9FA008527C9 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				D4D071191C59B9FA008527C9 /* ODMyApplyActivity */,
+				D4D0711C1C59B9FA008527C9 /* ODMyOrderRecord */,
 				D4D071111C59B9FA008527C9 /* ODBindingMobileController.h */,
 				D4D071121C59B9FA008527C9 /* ODBindingMobileController.m */,
 				D4D071131C59B9FA008527C9 /* ODChangePassWordController.h */,
@@ -1402,8 +1404,6 @@
 				D4D071161C59B9FA008527C9 /* ODInformationController.m */,
 				D4D071171C59B9FA008527C9 /* ODLandMainController.h */,
 				D4D071181C59B9FA008527C9 /* ODLandMainController.m */,
-				D4D071191C59B9FA008527C9 /* ODMyApplyActivity */,
-				D4D0711C1C59B9FA008527C9 /* ODMyOrderRecord */,
 				D4D071211C59B9FA008527C9 /* ODMyTaskController.h */,
 				D4D071221C59B9FA008527C9 /* ODMyTaskController.m */,
 				D4D071231C59B9FA008527C9 /* ODMyTopicController.h */,

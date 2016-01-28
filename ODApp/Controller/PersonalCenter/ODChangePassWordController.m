@@ -165,6 +165,9 @@
 - (void)registere:(UIButton *)sender
 {
     
+    [self.registView.phoneNumber resignFirstResponder];
+    [self.registView.verification resignFirstResponder];
+    [self.registView.password resignFirstResponder];
     
     [self.registView.phoneNumber resignFirstResponder];
     [self.registView.password resignFirstResponder];
