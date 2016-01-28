@@ -19,6 +19,7 @@
         self.titleLabel.font = [UIFont systemFontOfSize:11];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
+        self.backgroundColor = [UIColor blackColor];
     }
     return self;
 }

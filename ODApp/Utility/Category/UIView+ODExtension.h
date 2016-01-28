@@ -1,0 +1,27 @@
+//
+//  UIView+ODExtension.h
+//  ODApp
+//
+//  Created by 刘培壮 on 16/1/28.
+//  Copyright © 2016年 Odong-YG. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface UIView (ODExtension)
+@property (nonatomic, assign) CGSize od_size;
+@property (nonatomic, assign) CGFloat od_width;
+@property (nonatomic, assign) CGFloat od_height;
+@property (nonatomic, assign) CGFloat od_x;
+@property (nonatomic, assign) CGFloat od_y;
+@property (nonatomic, assign) CGFloat od_centerX;
+@property (nonatomic, assign) CGFloat od_centerY;
+
++ (instancetype)od_viewFromXib;
+
+/**
+ *  判断self和view是否重叠
+ */
+- (BOOL)od_intersectsWithView:(UIView *)view;
+
+@end

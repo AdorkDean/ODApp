@@ -27,6 +27,7 @@
 #import "ODAppConst.h"
 #import "NSURL+ODExtension.h"
 #import "UIColor+ODExtension.h"
+#import "UIView+ODExtension.h"
 #import "ODUserInformation.h"
 
 #ifdef DEBUG // 如果定义了DEBUG这个宏，说明是处在调试阶段
