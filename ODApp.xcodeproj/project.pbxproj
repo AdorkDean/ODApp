@@ -1245,13 +1245,6 @@
 			name = ODEvalation;
 			sourceTree = "<group>";
 		};
-		C64273271C5A0C2C00C38A85 /* ODShareApp */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ODShareApp;
-			sourceTree = "<group>";
-		};
 		C64273281C5A0C5D00C38A85 /* ODTask */ = {
 			isa = PBXGroup;
 			children = (
@@ -1607,7 +1600,6 @@
 				C64273251C5A0B6B00C38A85 /* ODTopic */,
 				C64273281C5A0C5D00C38A85 /* ODTask */,
 				C64273261C5A0BB100C38A85 /* ODEvalation */,
-				C64273271C5A0C2C00C38A85 /* ODShareApp */,
 			);
 			path = PersonalCenter;
 			sourceTree = "<group>";
