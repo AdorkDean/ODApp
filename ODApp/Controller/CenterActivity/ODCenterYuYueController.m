@@ -95,23 +95,7 @@
     
 }
 
-#pragma mark - lifeCycle
--(void)viewWillAppear:(BOOL)animated
-{
-    
-//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-//    tabBar.imageView.alpha = 0;
-    
-    self.tabBarController.tabBar.hidden = YES;
-}
 
--(void)viewWillDisappear:(BOOL)animated
-{
-    
-//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-//    tabBar.imageView.alpha = 1.0;
-    self.tabBarController.tabBar.hidden = NO;
-}
 
 
 #pragma mark - 初始化
