@@ -185,7 +185,7 @@
     UILabel *contentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, CGRectGetMaxY(purposeDetailLabel.frame) + 5, kScreenSize.width - 10, 35) text:@"      活动内容" font:14 alignment:@"left" color:@"#8e8e8e" alpha:1];
     [self.scrollView addSubview:contentLabel];
         
-    UILabel *contentDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, CGRectGetMaxY(contentLabel.frame) + 5, kScreenSize.width - 10,[ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width - 10 miniHeight:35 fontSize:14] ) text:[NSString stringWithFormat:@"     %@",self.model.content] font:14 alignment:@"left" color:@"#000000" alpha:1];
+    UILabel *contentDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5, CGRectGetMaxY(contentLabel.frame) + 5, kScreenSize.width - 10,[ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width - 10 miniHeight:35 fontSize:14] ) text:[NSString stringWithFormat:@"  %@",self.model.content] font:14 alignment:@"left" color:@"#000000" alpha:1];
     
     contentDetailLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     contentDetailLabel.layer.masksToBounds = YES;
@@ -233,14 +233,6 @@
     [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
     [self.view addSubview:callWebView];
 }
-
-
-- (void)viewWillAppear:(BOOL)animated{
-    
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
-}
-
 
 
 - (void)didReceiveMemoryWarning

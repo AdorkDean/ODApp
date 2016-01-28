@@ -49,19 +49,6 @@
     
 }
 
-#pragma mark - lifeCycle
--(void)viewWillAppear:(BOOL)animated
-{
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1.0;
-}
 
 #pragma mark - 请求数据
 - (void)getData

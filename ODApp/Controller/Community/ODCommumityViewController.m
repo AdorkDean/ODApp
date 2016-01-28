@@ -183,8 +183,10 @@
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
+        
     }];
 }
 
@@ -277,17 +279,15 @@
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
 {
+    
+    [super viewWillAppear:animated];
     if ([self.refresh isEqualToString:@"refresh"]) {
         [self.collectionView.mj_header beginRefreshing];
     }
-    [super viewWillAppear:animated];
+    
     self.navigationController.navigationBar.hidden = YES;
     
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1;
-
 }
-
 #pragma mark - 试图将要消失
 -(void)viewWillDisappear:(BOOL)animated
 {

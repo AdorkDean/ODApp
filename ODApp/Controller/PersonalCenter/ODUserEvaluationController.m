@@ -57,18 +57,6 @@
     
 }
 
-#pragma mark - lifeCycle
-- (void)viewWillAppear:(BOOL)animated
-{
-    
-    
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
-    
-    
-}
-
-
 
 -(void)createCollectionView
 {
@@ -154,6 +142,7 @@
   
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
         
     }];
   

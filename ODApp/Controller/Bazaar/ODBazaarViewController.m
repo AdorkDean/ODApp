@@ -239,6 +239,7 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -336,9 +337,8 @@
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
 {
-    
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1;
+    [super viewWillAppear:animated];
+
     
     if ([self.refresh isEqualToString:@"release"]) {
         self.status = @"9";
@@ -353,7 +353,7 @@
     }else if ([self.refresh isEqualToString:@"complete"]){
         [self.collectionView.mj_header beginRefreshing];
     }
-    [super viewWillAppear:animated];
+    
     self.navigationController.navigationBar.hidden = YES;
 }
 

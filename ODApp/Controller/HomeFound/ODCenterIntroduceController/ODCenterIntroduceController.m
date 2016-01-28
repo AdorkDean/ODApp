@@ -31,12 +31,6 @@
     [self createWebView];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
-}
 
 - (void)navigationInit
 {

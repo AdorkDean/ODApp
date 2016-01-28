@@ -145,6 +145,11 @@
 #pragma mark - 点击事件
 - (void)registere:(UIButton *)sender
 {
+    
+    [self.registView.phoneNumber resignFirstResponder];
+    [self.registView.verification resignFirstResponder];
+    [self.registView.password resignFirstResponder];
+    
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
 
         [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
@@ -166,6 +171,11 @@
 
 - (void)getVerification:(UIButton *)sender
 {
+    
+    [self.registView.phoneNumber resignFirstResponder];
+    [self.registView.verification resignFirstResponder];
+    [self.registView.password resignFirstResponder];
+
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
         

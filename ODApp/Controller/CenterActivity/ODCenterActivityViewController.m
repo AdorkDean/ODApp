@@ -131,9 +131,7 @@
 {
     [super viewWillAppear:animated];
     
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1;
-
+    
     if (self.isRefresh) {
         [self.collectionView.mj_header beginRefreshing];
     }
@@ -194,7 +192,7 @@
         
         
         [self.collectionView.mj_header endRefreshing];
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
         
     }];
     

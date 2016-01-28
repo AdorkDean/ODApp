@@ -10,10 +10,7 @@
 
 @interface ODMyTaskController : ODBaseViewController
 
-
-
 @property (nonatomic, copy) NSString *open_id;
-
 
 
 @end

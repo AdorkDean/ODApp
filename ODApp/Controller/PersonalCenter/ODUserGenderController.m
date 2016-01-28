@@ -175,12 +175,6 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

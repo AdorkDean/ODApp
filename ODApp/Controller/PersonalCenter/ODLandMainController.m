@@ -44,7 +44,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    if (![ODUserInformation getData].openID.length)
+        return;
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self navigationInit];
@@ -59,9 +60,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 1;
-    
+    [super viewWillAppear:animated];
     [self getData];
 }
 
@@ -316,7 +315,6 @@
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否退出登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
             ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             ;
             tabBar.selectedIndex = 0;
@@ -330,21 +328,7 @@
             [self createProgressHUDWithAlpha:1.0 withAfterDelay:1.0 title:@"已退出登录"];
            
             tabBar.selectedIndex = tabBar.currentIndex;
-            
-            NSInteger index = tabBar.selectedIndex;
-            for (NSInteger i = 0; i < 5; i++)
-            {
-                UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
-                UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-                if (i!=index) {
-                    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
-                }else{
-                    imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
-                }
-                
-                newButton.selected = i == index;
-            }
-        }]];
+    }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }

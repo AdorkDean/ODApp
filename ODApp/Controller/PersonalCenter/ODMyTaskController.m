@@ -15,7 +15,7 @@
 #import "ODBazaarModel.h"
 #import "UIImageView+WebCache.h"
 #import "ODBazaarDetailViewController.h"
-
+#import "ODViolationsCell.h"
 @interface ODMyTaskController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
 @property(nonatomic , strong) UIView *headView;
@@ -86,16 +86,7 @@
        
 }
 
-#pragma mark - lifeCycle
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.imageView.alpha = 0;
-    
-    
-}
+
 
 
 #pragma mark - 初始化
@@ -181,27 +172,21 @@
     self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.firstCollectionView.dataSource = self;
     self.firstCollectionView.delegate = self;
-    [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
+    
+    [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
+    [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODViolationsCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
+    
+    
     
     self.firstCollectionView.tag = 111;
-    
-    
-    
-    
     self.firstCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self firstDownRefresh];
     }];
-    
-    
     self.firstCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
         [self firstLoadMoreData];
     }];
-    
-    
-    
     [self.firstCollectionView.mj_header beginRefreshing];
-    
     [self.scrollView addSubview:self.firstCollectionView];
     
     
@@ -211,22 +196,18 @@
     self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.secondCollectionView.dataSource = self;
     self.secondCollectionView.delegate = self;
-    [self.secondCollectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
+    
+    [self.secondCollectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
+    [self.secondCollectionView registerNib:[UINib nibWithNibName:@"ODViolationsCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     
     self.secondCollectionView.tag = 222;
-    
     self.secondCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self secondDownRefresh];
     }];
-    
-    
     self.secondCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
         [self secondLoadMoreData];
     }];
-    
-    
-    
     [self.secondCollectionView.mj_header beginRefreshing];
     
     
@@ -296,34 +277,13 @@
 - (void)deleteAction:(UIButton *)sender
 {
     
-    if (sender.tag == 111) {
-        ODTaskCell *cell = (ODTaskCell *)sender.superview.superview;
-        
-        NSIndexPath *indexPath = [self.firstCollectionView indexPathForCell:cell];
-          ODBazaarModel *model = self.FirstDataArray[indexPath.row];
-        
-         NSString *taskId = [NSString stringWithFormat:@"%@" , model.task_id];        
-        
-        [self delegateTaskWith:taskId];
-        
-    }else{
-        ODTaskCell *cell = (ODTaskCell *)sender.superview.superview;
-        
-        NSIndexPath *indexPath = [self.secondCollectionView indexPathForCell:cell];
-          ODBazaarModel *model = self.secondDataArray[indexPath.row];
-          NSString *taskId = [NSString stringWithFormat:@"%@" , model.task_id];
-        
-       [self delegateTaskWith:taskId];
-
+    ODTaskCell *cell = (ODTaskCell *)sender.superview.superview;
+    NSIndexPath *indexPath = [self.firstCollectionView indexPathForCell:cell];
+    ODBazaarModel *model = self.FirstDataArray[indexPath.row];
+    NSString *taskId = [NSString stringWithFormat:@"%@" , model.task_id];
+    [self delegateTaskWith:taskId];
     
-    }
-    
-    
-  
-    
-    
-    
-  
+   
 }
 
 - (void)delegateTaskWith:(NSString *)taskId
@@ -332,7 +292,6 @@
     
     
     self.delateManager = [AFHTTPRequestOperationManager manager];
-    
     NSDictionary *parameters = @{@"id":taskId , @"type":@"2",@"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
@@ -344,9 +303,6 @@
         if (responseObject) {
             
             
-            
-            NSLog(@"_____%@" , responseObject);
-            
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 
                  self.firstPage = 1;
@@ -356,14 +312,21 @@
                 [self.secondCollectionView.mj_header beginRefreshing];
                 
                 
+            }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
+                
+                
+               [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+                
+                
             }
             
             
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
+        [self.firstCollectionView.mj_header beginRefreshing];
+        [self.secondCollectionView.mj_header beginRefreshing];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 
     
@@ -548,7 +511,7 @@
         
         [self.firstCollectionView.mj_header endRefreshing];
         [self.firstCollectionView.mj_footer endRefreshing];
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -585,9 +548,18 @@
             
             
             for (NSDictionary *itemDict in tasks) {
-                ODBazaarModel *model = [[ODBazaarModel alloc]init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [self.secondDataArray addObject:model];
+                
+                NSString *task_status = [NSString stringWithFormat:@"%@" ,  itemDict[@"task_status"]];
+                
+                
+                if (![task_status isEqualToString:@"-1"]) {
+                    ODBazaarModel *model = [[ODBazaarModel alloc]init];
+                    [model setValuesForKeysWithDictionary:itemDict];
+                    [self.secondDataArray addObject:model];
+                }
+                
+                
+              
             }
             
             if (self.secondDataArray.count == 0) {
@@ -609,7 +581,7 @@
         
         [self.secondCollectionView.mj_header endRefreshing];
         [self.secondCollectionView.mj_footer endRefreshing];
-        
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
       
@@ -621,136 +593,44 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
-    
-    ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
-    
-    
-    cell.userImageView.layer.masksToBounds = YES;
-    cell.userImageView.layer.cornerRadius = 30;
-    cell.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
-    cell.userImageView.layer.borderWidth = 1;
-
-    
-    [cell.deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    
-    
-    
     if (collectionView.tag == 111) {
         
         ODBazaarModel *model = self.FirstDataArray[indexPath.row];
-        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
-        cell.nickLabel.text = model.user_nick;
-        cell.titleLabel.text = model.title;
-        cell.contentLabel.text = model.content;
-        
-        
-        cell.deleteButton.tag = 111;
-        
         NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
         
-        
         if ([status isEqualToString:@"-1"]) {
-            cell.deleteButton.hidden = NO;
-        }else{
-            cell.deleteButton.hidden = YES;
-        }
-        
-        
-        if ([status isEqualToString:@"1"]) {
-            cell.typeLabel.text = @"等待派单";
-             cell.typeLabel.textColor = [UIColor redColor];
+            ODViolationsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
             
-        }else if ([status isEqualToString:@"2"]) {
-            
-            cell.typeLabel.text = @"进行中";
-        }else if ([status isEqualToString:@"3"]) {
-            
-            cell.typeLabel.text = @"已交付";
-        }else if ([status isEqualToString:@"4"]) {
-            
-            cell.typeLabel.text = @"确认完成";
-        }else if ([status isEqualToString:@"-1"]) {
-            
-            cell.typeLabel.text = @"违规";
-        }else if ([status isEqualToString:@"-2"]) {
-            
-            cell.typeLabel.text = @"过期任务";
-            cell.typeLabel.textColor = [UIColor lightGrayColor];
-        }else if ([status isEqualToString:@"0"]) {
-            
-            cell.typeLabel.text = @"无效";
-        }
-        
-               
-        //设置Label显示不同大小的字体
-        NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];
-        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
-        [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
-        cell.timeLabel.attributedText = noteStr;
-        
-        
-    }else if (collectionView.tag == 222) {
-        ODBazaarModel *model = self.secondDataArray[indexPath.row];
-        
-        
-        
-        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
-        
-        cell.nickLabel.text = model.user_nick;
-        cell.titleLabel.text = model.title;
-        cell.contentLabel.text = model.content;
-          cell.deleteButton.tag = 222;
-        
-        NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
-        
-        
-        if ([status isEqualToString:@"-1"]) {
-            cell.deleteButton.hidden = NO;
-        }else{
-            cell.deleteButton.hidden = YES;
-        }
+            cell.model = model;
+            [cell.deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
+            return cell;
 
-        
-        
-        if ([status isEqualToString:@"1"]) {
-            cell.typeLabel.text = @"等待派单";
-            cell.typeLabel.textColor = [UIColor redColor];
+
+        }else{
             
-        }else if ([status isEqualToString:@"2"]) {
+            ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
             
-            cell.typeLabel.text = @"进行中";
-        }else if ([status isEqualToString:@"3"]) {
+            cell.model = model;
             
-            cell.typeLabel.text = @"交付";
-        }else if ([status isEqualToString:@"4"]) {
-            
-            cell.typeLabel.text = @"确认完成";
-        }else if ([status isEqualToString:@"-1"]) {
-            
-            cell.typeLabel.text = @"违规";
-        }else if ([status isEqualToString:@"-2"]) {
-            
-            cell.typeLabel.text = @"过期任务";
-            cell.typeLabel.textColor = [UIColor lightGrayColor];
-        }else if ([status isEqualToString:@"0"]) {
-            
-            cell.typeLabel.text = @"无效";
+            return cell;
+
         }
         
+    }else {
         
-        //设置Label显示不同大小的字体
-        NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];
-        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
-        [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
-        cell.timeLabel.attributedText = noteStr;
+        ODBazaarModel *model = self.secondDataArray[indexPath.row];
+     
+        ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
+        
+        cell.model = model;
+        
+        return cell;
+        
         
     }
     
-       return cell;
+
+
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -780,10 +660,9 @@
             ;
         }else{
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
-            bazaarDetail.task_status_name = model.task_status_name;
-            bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+            bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
             [self.navigationController pushViewController:bazaarDetail animated:YES];
         }
         
@@ -800,9 +679,7 @@
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
-            bazaarDetail.task_status_name = model.task_status_name;
-            bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
-            
+            bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
             [self.navigationController pushViewController:bazaarDetail animated:YES];
 
         }
