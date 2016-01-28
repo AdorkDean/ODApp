@@ -60,10 +60,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     
-//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-//    tabBar.imageView.alpha = 1;
-
-    self.tabBarController.tabBar.hidden = NO;
+    [super viewWillAppear:animated];
     [self getData];
 }
 

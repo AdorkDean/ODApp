@@ -42,31 +42,12 @@
     self.PageNumber = 1;
     self.dataArray = [[NSMutableArray alloc] init];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    
-    
-    
+  
     [self navigationInit];
     [self createCollection];
-    
-    
-    
+   
     
 }
-
-
-#pragma mark - lifeCycle
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-//    tabBar.imageView.alpha = 0;
-        self.tabBarController.tabBar.hidden = YES;
-    
-}
-
-
 
 - (void)createCollection
 {
@@ -77,8 +58,7 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
-    
-    
+        
     
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self downRefresh];
