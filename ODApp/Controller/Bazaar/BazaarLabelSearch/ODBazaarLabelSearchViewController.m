@@ -258,20 +258,6 @@
 
 }
 
-#pragma mark - 试图将要消失
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    self.tabBarController.tabBar.hidden = YES;
-}
--(void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-//    ODTabBarController * tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-//    tabBar.imageView.alpha = 1.0;
-
-    self.tabBarController.tabBar.hidden = NO;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
