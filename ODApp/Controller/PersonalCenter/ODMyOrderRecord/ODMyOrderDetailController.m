@@ -235,15 +235,6 @@
 }
 
 
-- (void)viewWillAppear:(BOOL)animated{
-    
-//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-//    tabBar.imageView.alpha = 0;
-    self.tabBarController.tabBar.hidden = YES;
-}
-
-
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

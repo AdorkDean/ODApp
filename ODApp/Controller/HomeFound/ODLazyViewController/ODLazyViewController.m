@@ -147,18 +147,12 @@
     }    
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    
-//    self.navigationController.navigationBar.hidden = YES;
-//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-//    tabBar.imageView.alpha = 0;
-    self.tabBarController.tabBar.hidden = YES;
-}
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
 
+    [super viewWillDisappear:animated];
     if (self.isJob) {
         [self.navigationController popToRootViewControllerAnimated:YES];
     }

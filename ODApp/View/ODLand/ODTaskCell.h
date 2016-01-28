@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ODBazaarModel.h"
 @interface ODTaskCell : UICollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *nickLabel;
@@ -16,5 +16,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
+@property (nonatomic ,strong) ODBazaarModel *model;
+
+
 
 @end

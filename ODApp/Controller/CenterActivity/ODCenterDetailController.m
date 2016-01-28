@@ -72,26 +72,20 @@ int pageNumnber = 0;
 #pragma mark - lifeCycle
 - (void)viewWillAppear:(BOOL)animated
 {
-    
+    [super viewWillAppear:animated];
     pageNumnber = 0;
     self.myTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop]addTimer:self.myTimer forMode:NSRunLoopCommonModes];
     
-//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-//    tabBar.imageView.alpha = 0;
-    self.tabBarController.tabBar.hidden = YES;
     
 }
 
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [self.myTimer invalidate];
     self.myTimer = nil;
-    
-//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-//    tabBar.imageView.alpha = 1;
-    self.tabBarController.tabBar.hidden = NO;
    
 }
 

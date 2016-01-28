@@ -55,21 +55,6 @@
 
 
 
-#pragma mark - lifeCycle
--(void)viewWillAppear:(BOOL)animated
-{
-    
-//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    self.tabBarController.tabBar.hidden = YES;
-}
-
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    
-//    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    self.tabBarController.tabBar.hidden = YES;
-}
 
 #pragma mark - 连接数据
 - (void)saveData
