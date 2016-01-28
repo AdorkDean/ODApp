@@ -118,8 +118,10 @@
         if ([self.topTitle isEqualToString:@"修改密码"]) {
             self.registView.phoneNumber.userInteractionEnabled = NO;
             self.registView.phoneNumber.text = self.phoneNumber;
+            self.registView.phoneNumber.textColor = [UIColor lightGrayColor];
         }
         
+     
         
         self.registView.password.secureTextEntry = YES;
      
