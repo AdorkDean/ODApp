@@ -12,10 +12,6 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    
-    self.backgroundColor = [UIColor whiteColor];
-
-    
 }
 
 @end
