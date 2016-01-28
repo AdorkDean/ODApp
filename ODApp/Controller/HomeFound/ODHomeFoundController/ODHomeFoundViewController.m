@@ -22,7 +22,6 @@
     [super viewDidLoad];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
     self.pictureArray = [[NSMutableArray alloc] init];
     self.titleArray = [[NSMutableArray alloc] init];
     self.pictureDetailArray = [[NSMutableArray alloc] init];
@@ -51,7 +50,6 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
-
     [self getHotThemeRequest];
 }
 
@@ -188,54 +186,18 @@
 
 - (void)lazyButtonClick:(UIButton *)button
 {
-
     ODLazyViewController *vc = [[ODLazyViewController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)chatButtonClick:(UIButton *)button
 {
-//    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.selectedIndex = 3;
-    
-//    NSInteger index = 3;
-//    for (NSInteger i = 0; i < 5; i++) {
-//        UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
-//        UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-//        
-//        if (i!=index) {
-//            newButton.selected =NO;
-//            button.selected = YES;
-//            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
-//            
-//        }else{
-//            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
-//        }
-//    }
+    self.tabBarController.selectedIndex = 3;
 }
 
 - (void)activityButtonClick:(UIButton *)button
 {
-
-//    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
-    ODTabBarController *tabbar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabbar.selectedIndex = 1;
-    
-//    NSInteger index = 1;
-//    for (NSInteger i = 0; i < 5; i++) {
-//        UIButton *newButton= (UIButton *)[tabbar.imageView viewWithTag:1+i];
-//        UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-//        
-//        if (i!=index) {
-//            newButton.selected =NO;
-//            button.selected = YES;
-//            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
-//            
-//        }else{
-//            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
-//        }
-//    }
+    self.tabBarController.selectedIndex = 1;
 }
 
 - (void)placeButtonClick:(UIButton *)button

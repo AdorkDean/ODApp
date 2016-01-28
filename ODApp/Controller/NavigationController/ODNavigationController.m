@@ -16,29 +16,18 @@
 
 @implementation ODNavigationController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.navigationBar.barTintColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     _touchDelegate = self.interactivePopGestureRecognizer.delegate;
     self.delegate = self;
-
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    self.tabBarController.tabBar.hidden = YES;
+    viewController.hidesBottomBarWhenPushed = self.childViewControllers.count > 0;
     [super pushViewController:viewController animated:animated];
-}
-
-#pragma mark - UINavigationControllerDelegate
-
-- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
-{
-    if (viewController == self.childViewControllers[0])
-    {
-        self.interactivePopGestureRecognizer.delegate = _touchDelegate;
-        self.tabBarController.tabBar.hidden = NO;
-    }
 }
 
 @end

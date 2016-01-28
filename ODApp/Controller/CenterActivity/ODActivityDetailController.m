@@ -15,6 +15,7 @@
 #import "ODTabBarController.h"
 #import "ODUserInformation.h"
 #import "ODCenterDetailController.h"
+#import "ODCenterPactureController.h"
 @interface ODActivityDetailController ()<UITableViewDelegate , UIWebViewDelegate>
 
 
@@ -177,7 +178,7 @@
 -(void)navigationInit
 {
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.view.userInteractionEnabled = YES;
     self.navigationController.navigationBar.hidden = YES;
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
@@ -203,9 +204,9 @@
     
     self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)];
     self.scroller.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    
+    self.scroller.userInteractionEnabled = YES;
     self.activityDetailView = [ActivityDetailView getView];
-    
+    self.activityDetailView.userInteractionEnabled = YES;
     
     [self.activityDetailView.titleImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.icon_url]];
     [self.activityDetailView.baoMingButton addTarget:self action:@selector(baoMingAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -262,9 +263,13 @@
     self.activityDetailView.titleLabel.text = self.model.content;
     self.activityDetailView.beginTimeLabel.text = self.model.start_time;
     self.activityDetailView.endTimeLabel.text = self.model.end_time;
-    self.activityDetailView.addressLabel.text = self.model.store_address;
+    self.activityDetailView.addressTextView.text = self.model.store_address;
     [self.activityDetailView.centerNameButton setTitle:self.model.store_name forState:UIControlStateNormal];
     [self.activityDetailView.centerNameButton addTarget:self action:@selector(goCenter:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UITapGestureRecognizer *addressTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(addressAction:)];
+    [self.activityDetailView.addressImageView addGestureRecognizer:addressTap];
+    
     
     
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(4, self.activityDetailView.frame.size.height, kScreenSize.width - 8, 300)];
@@ -287,11 +292,11 @@
 
 
    CGFloat height = [[self.webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"]floatValue];
-   self.webView.frame = CGRectMake(4, self.activityDetailView.frame.size.height, kScreenSize.width - 8, height + 55);
+   self.webView.frame = CGRectMake(4, self.activityDetailView.frame.size.height + 20, kScreenSize.width - 8, height + 55);
    //关闭webView上下滑动
     UIScrollView *tempView=(UIScrollView *)[self.webView.subviews objectAtIndex:0];
     tempView.scrollEnabled=NO;
-    self.scroller.contentSize = CGSizeMake(kScreenSize.width, height + self.activityDetailView.frame.size.height + 60);
+    self.scroller.contentSize = CGSizeMake(kScreenSize.width, height + self.activityDetailView.frame.size.height + 80);
     
 }
 
@@ -316,6 +321,21 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)addressAction:(UITapGestureRecognizer *)sender
+{
+    
+    ODCenterPactureController *vc = [[ODCenterPactureController alloc] init];
+    
+    NSString *webUrl = [NSString stringWithFormat:@"http://h5.odong.com/map/search?lng=%@&lat=%@" , self.model.lng , self.model.lat];
+    
+    vc.webUrl = webUrl;
+    vc.activityName = self.model.store_name;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

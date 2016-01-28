@@ -38,10 +38,10 @@
     UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:@"去偷懒" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
     label.backgroundColor = [UIColor clearColor];
     [self.headView addSubview:label];
-    
+
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16, 44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];
 }
 
@@ -108,26 +108,9 @@
 {
     
     self.isJob =YES;
-    
-    
-//    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
-    ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
-    tabBar.selectedIndex = 2;
-//    NSInteger index = 2;
 
-//    for (NSInteger i = 0; i < 5; i++) {
-//        UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
-//        UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-//        
-//        if (i!=index) {
-//            newButton.selected =NO;
-//            button.selected = YES;
-//            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
-//            
-//        }else{
-//            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
-//        }
-//    }
+    self.tabBarController.selectedIndex = 2;
+
 }
 
 - (void)buildMyJobButtonClick:(UIButton *)button
@@ -146,8 +129,11 @@
         [self.navigationController pushViewController:vc animated:YES];
     }    
 }
-
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
