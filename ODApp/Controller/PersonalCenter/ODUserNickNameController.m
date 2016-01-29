@@ -82,7 +82,7 @@
 - (void)registered:(UIButton *)sender
 {
     
-    NSString *openID = [ODUserInformation getData].openID;
+    NSString *openID = [ODUserInformation sharedODUserInformation].openID;
     
     self.manager = [AFHTTPRequestOperationManager manager];
     
@@ -90,7 +90,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     NSString *url = @"http://woquapi.test.odong.com/1.0/user/change";
-    __weak typeof (self)weakSelf = self;
+    __weakSelf
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {

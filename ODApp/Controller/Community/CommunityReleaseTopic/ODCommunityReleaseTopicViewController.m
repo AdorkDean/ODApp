@@ -353,9 +353,9 @@
         }
     }
     if (imageStr.length==0) {
-        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"open_id":[ODUserInformation getData].openID};
+        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"open_id":[ODUserInformation sharedODUserInformation].openID};
     }else{
-        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"imgs":imageStr,@"open_id":[ODUserInformation getData].openID};
+        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"imgs":imageStr,@"open_id":[ODUserInformation sharedODUserInformation].openID};
         NSLog(@"%@",parameter);
     }
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];

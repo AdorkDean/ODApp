@@ -74,7 +74,7 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"content":self.textView.text,@"parent_id":self.parent_id,@"open_id":[ODUserInformation getData].openID};
+    NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"content":self.textView.text,@"parent_id":self.parent_id,@"open_id":[ODUserInformation sharedODUserInformation].openID};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:kCommunityBbsReplyUrl parameter:signParameter];
 }
@@ -87,7 +87,13 @@
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
+
+            if (weakSelf.myBlock) {
+                weakSelf.myBlock([NSString stringWithFormat:@"refresh"]);
+            }
+            
             [weakSelf.navigationController popViewControllerAnimated:YES];
+
             
             [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"回复成功"];
             

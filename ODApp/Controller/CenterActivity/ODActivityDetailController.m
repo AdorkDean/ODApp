@@ -16,6 +16,7 @@
 #import "ODUserInformation.h"
 #import "ODCenterDetailController.h"
 #import "ODCenterPactureController.h"
+
 @interface ODActivityDetailController ()<UITableViewDelegate , UIWebViewDelegate>
 
 
@@ -49,7 +50,7 @@
    
      [self getData];
     
-     self.openId = [ODUserInformation getData].openID;
+     self.openId = [ODUserInformation sharedODUserInformation].openID;
     
            
 }

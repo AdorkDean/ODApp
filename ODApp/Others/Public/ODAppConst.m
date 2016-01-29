@@ -10,6 +10,7 @@ NSString * const ODCommonURL = @"http://woquapi.test.odong.com/";
 NSString * const ODCommonURL = @"http://woquapi.test.odong.com/";
 #endif
 
+/********* 请求URL接口 **********/
 NSString * const kBazaarUnlimitTaskUrl = @"http://woquapi.test.odong.com/1.0/task/list";
 NSString * const kBazaarLabelSearchUrl = @"http://woquapi.test.odong.com/1.0/task/tag/search";
 NSString * const kBazaarReleaseTaskUrl = @"http://woquapi.test.odong.com/1.0/task/task/add";

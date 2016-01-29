@@ -117,7 +117,7 @@
 
 - (void)registered:(UIButton *)sender
 {
-     NSString *openID = [ODUserInformation getData].openID;
+     NSString *openID = [ODUserInformation sharedODUserInformation].openID;
     
     self.manager = [AFHTTPRequestOperationManager manager];
     

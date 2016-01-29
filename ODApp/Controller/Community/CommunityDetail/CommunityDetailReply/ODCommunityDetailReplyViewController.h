@@ -20,7 +20,7 @@
 @property(nonatomic,copy)NSString *bbs_id;
 @property(nonatomic,copy)NSString *parent_id;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-
+@property(nonatomic,copy)void(^myBlock)(NSString *refresh);
 
 
 @end

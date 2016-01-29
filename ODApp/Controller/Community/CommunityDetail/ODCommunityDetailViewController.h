@@ -39,6 +39,7 @@
 @property(nonatomic)CGFloat height;
 @property(nonatomic)NSInteger count;
 @property(nonatomic,copy)void(^myBlock)(NSString *refresh);
+@property(nonatomic,copy)NSString *refresh;
 
 @end
 
