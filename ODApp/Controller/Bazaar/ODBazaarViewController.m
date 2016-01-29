@@ -362,14 +362,14 @@
         [self.collectionView.mj_header beginRefreshing];
     }else if ([self.refresh isEqualToString:@"complete"]){
         [self.collectionView.mj_header beginRefreshing];
+    }else if ([self.refresh isEqualToString:@"delegate"]){
+        [self.collectionView.mj_header beginRefreshing];
     }
     if (self.navigationController.childViewControllers.count > 1) {
         self.status = @"9";
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [self.collectionView.mj_header beginRefreshing];
     }
-
-
     
     self.navigationController.navigationBar.hidden = YES;
 }
