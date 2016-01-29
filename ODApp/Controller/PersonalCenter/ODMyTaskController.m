@@ -87,7 +87,23 @@
 }
 
 
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    
+    if ([self.isRefresh isEqualToString:@"del"]) {
+        
+        [self.firstCollectionView.mj_header beginRefreshing];
+        [self.secondCollectionView.mj_header beginRefreshing];
+        
+    }
+    
+    
+    self.showType = YES;
+    [self.typeView removeFromSuperview];
+    
+}
 
 #pragma mark - 初始化
 
@@ -288,9 +304,6 @@
 
 - (void)delegateTaskWith:(NSString *)taskId
 {
-    
-    
-    
     self.delateManager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"id":taskId , @"type":@"2",@"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
@@ -305,8 +318,6 @@
             
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 
-                 weakSelf.firstPage = 1;
-                 weakSelf.secondPage = 1;
                 
                 [weakSelf.firstCollectionView.mj_header beginRefreshing];
                 [weakSelf.secondCollectionView.mj_header beginRefreshing];
@@ -652,6 +663,12 @@
             ;
         }else{
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
+            bazaarDetail.myBlock = ^(NSString *del){
+                
+            self.isRefresh = del;
+                
+                
+            };
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
             bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
@@ -670,6 +687,15 @@
             ;
         }else{
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
+            
+            bazaarDetail.myBlock = ^(NSString *del){
+                
+                self.isRefresh = del;
+                
+                
+            };
+
+            
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
             bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];

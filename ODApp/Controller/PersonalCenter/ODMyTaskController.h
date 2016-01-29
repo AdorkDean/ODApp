@@ -12,5 +12,6 @@
 
 @property (nonatomic, copy) NSString *open_id;
 
+@property (nonatomic , copy) NSString *isRefresh;
 
 @end
