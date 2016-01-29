@@ -420,16 +420,35 @@
 }
 
 #pragma mark - UITextViewDelegate
-NSString *text = @"";
+
+
+NSString *titleText = @"";
+NSString *taskDetailText = @"";
 - (void)textViewDidChange:(UITextView *)textView
 {
-    if (textView.text.length <= 20)
+    if (textView == self.titleTextView)
     {
-        text = textView.text;
+        if (textView.text.length > 30)
+        {
+            textView.text = titleText;
+        }
+        else
+        {
+            titleText = textView.text;
+        }
     }
-    else
+    else if (textView == self.taskDetailTextView)
     {
-        textView.text = text;
+        if (textView.text.length > 500)
+        {
+            textView.text = taskDetailText;
+        }
+        else
+        {
+            taskDetailText = textView.text;
+        }
+
+
     }
 }
 
@@ -460,10 +479,6 @@ NSString *text = @"";
     return YES;
 }
 
-- (BOOL)textViewShouldEndEditing:(UITextView *)textView
-{
-    return textView.text.length < 20;
-}
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     if (textView.tag == 10) {
