@@ -32,6 +32,7 @@
 @property(nonatomic,strong)NSArray *bbs_imgArray;
 @property(nonatomic,strong)UIView *userView;
 @property(nonatomic,strong)UIView *bbsView;
+@property(nonatomic,strong)UIView *lineView;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)UIView *tabelHeaderView;
