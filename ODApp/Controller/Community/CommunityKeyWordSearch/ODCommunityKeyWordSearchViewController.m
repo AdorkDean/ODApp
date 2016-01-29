@@ -87,11 +87,13 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
+    [self.searchBar resignFirstResponder];
+    
     if (self.searchBar.text.length>0) {
-        [self.searchBar resignFirstResponder];
+        
         [self joiningTogetherParmeters];
     }else{
-        [self createUIAlertControllerWithTitle:@"请输入搜索内容"];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入搜索内容"];
     }
 }
 
