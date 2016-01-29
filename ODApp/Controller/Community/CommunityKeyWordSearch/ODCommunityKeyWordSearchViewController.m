@@ -87,11 +87,13 @@
 
 -(void)confirmButtonClick:(UIButton *)button
 {
+    [self.searchBar resignFirstResponder];
+    
     if (self.searchBar.text.length>0) {
-        [self.searchBar resignFirstResponder];
+        
         [self joiningTogetherParmeters];
     }else{
-        [self createUIAlertControllerWithTitle:@"请输入搜索内容"];
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入搜索内容"];
     }
 }
 
@@ -259,14 +261,6 @@
     ODCommunityModel *model = self.dataArray[indexPath.row];
     detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
     [self.navigationController pushViewController:detailController animated:YES];
-}
-
-#pragma mark - 创建提示信息
--(void)createUIAlertControllerWithTitle:(NSString *)title
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - 试图将要出现
