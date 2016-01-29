@@ -654,6 +654,7 @@
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+            bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
             bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
             [self.navigationController pushViewController:bazaarDetail animated:YES];
         }
@@ -663,13 +664,20 @@
     }else if (collectionView.tag == 222) {
         
          ODBazaarModel *model = self.secondDataArray[indexPath.row];
-         ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
-         bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
-         bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
-         [self.navigationController pushViewController:bazaarDetail animated:YES];
-
+          NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
         
-    
+        if ([status isEqualToString:@"-1"]) {
+            ;
+        }else{
+            ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
+            
+            bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+            bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
+            bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
+            [self.navigationController pushViewController:bazaarDetail animated:YES];
+
+        }
+      
     }
     
     

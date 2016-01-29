@@ -592,7 +592,6 @@
 {
     ODBazaarDetailModel *model = self.picArray[indexPath.row];
     NSString *str = [NSString stringWithFormat:@"%@",model.apply_status];
-
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
         if ([str isEqualToString:@"0"] && [self.task_status_name isEqualToString:@"待派遣"] && self.num == 1) {
            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否委派" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -613,6 +612,9 @@
                         [weakSelf.collectionView reloadData];
                         [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"委派成功"];
                         [weakSelf.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
+                        if (self.myBlock) {
+                            self.myBlock([NSString stringWithFormat:@"delegate"]);
+                        }
 
                     }
                 } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
