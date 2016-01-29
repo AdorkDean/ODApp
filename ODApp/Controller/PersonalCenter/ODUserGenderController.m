@@ -24,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.openID = [ODUserInformation getData].openID;
+    self.openID = [ODUserInformation sharedODUserInformation].openID;
     
      [self navigationInit];
      [self createView];

@@ -9,16 +9,6 @@
 #import "ODUserInformation.h"
 
 @implementation ODUserInformation
-
-+ (ODUserInformation *)getData
-{
-    static ODUserInformation *userInformation = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        userInformation = [ODUserInformation new];
-    });
-    
-    return userInformation;
-}
+Single_Implementation(ODUserInformation)
 
 @end

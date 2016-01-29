@@ -90,7 +90,7 @@
     [self createTableView];
     
     
-    self.openId = [ODUserInformation getData].openID;
+    self.openId = [ODUserInformation sharedODUserInformation].openID;
     
     
 }

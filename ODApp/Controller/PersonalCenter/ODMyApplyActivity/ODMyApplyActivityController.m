@@ -71,7 +71,7 @@
 - (void)getCollectionViewRequest
 {
 
-    NSString *openId = [ODUserInformation getData].openID;
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -168,7 +168,7 @@
     vc.activityId = [NSString stringWithFormat:@"%@", model.activity_id];
     vc.storeId = [NSString stringWithFormat:@"%@", model.store_id];
     
-    NSString *openId = [ODUserInformation getData].openID;
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     
     
     vc.openId = openId;

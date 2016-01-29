@@ -44,14 +44,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (![ODUserInformation getData].openID.length)
+    if (![ODUserInformation sharedODUserInformation].openID.length)
         return;
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self navigationInit];
-    
-    
-    NSLog(@"_____%@" , [ODUserInformation getData].openID);
     
     
 }
@@ -72,7 +69,7 @@
     
     
     
-    NSString *openId = [ODUserInformation getData].openID;
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     
     
     NSLog(@"____%@" , openId);
@@ -271,7 +268,7 @@
         ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
         
         vc.typeTitle = @"我收到的评价";
-        vc.openId = [ODUserInformation getData].openID;
+        vc.openId = [ODUserInformation sharedODUserInformation].openID;
         
         
         
@@ -322,7 +319,7 @@
             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             
             //清空数据
-            [ODUserInformation getData].openID = @"";
+            [ODUserInformation sharedODUserInformation].openID = @"";
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             [user setObject:@"" forKey:KUserDefaultsOpenId];
             

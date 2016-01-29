@@ -237,7 +237,7 @@
 -(void)userHeaderButtonClick:(UIButton *)button
 {
     ODCommunityDetailModel *model = [self.userArray objectAtIndex:0];
-    if ([[ODUserInformation getData].openID isEqualToString:model.open_id]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.open_id]) {
         
     }else{
         ODOthersInformationController *otherInfo = [[ODOthersInformationController alloc]init];
@@ -274,7 +274,7 @@
             imageView.contentMode = UIViewContentModeScaleAspectFill;
             [self.bbsView addSubview:imageView];
         }
-        if ([[ODUserInformation getData].openID isEqualToString:userModel.open_id]) {
+        if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:userModel.open_id]) {
             //删除按钮
             deleteButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-50, CGRectGetMaxY(imageView.frame)+17.5, 40, 20) target:self sel:@selector(deleteButtonClick:) tag:0 image:nil title:@"删除" font:15];
             [self.bbsView addSubview:deleteButton];
@@ -285,7 +285,7 @@
         [self.bbsView addSubview:timeLabel];
       
     }else{
-        if ([[ODUserInformation getData].openID isEqualToString:userModel.open_id]) {
+        if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:userModel.open_id]) {
             deleteButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-50, CGRectGetMaxY(bbsContentLabel.frame)+17.5, 40, 20) target:self sel:@selector(deleteButtonClick:) tag:0 image:nil title:@"删除" font:15];
             [self.bbsView addSubview:deleteButton];
         }else{
@@ -304,7 +304,7 @@
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除话题" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSDictionary *parameter = @{@"id":self.bbs_id,@"type":@"1",@"open_id":[ODUserInformation getData].openID};
+        NSDictionary *parameter = @{@"id":self.bbs_id,@"type":@"1",@"open_id":[ODUserInformation sharedODUserInformation].openID};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter isBbs:YES];
     }]];
@@ -365,7 +365,7 @@
         //根据内容的多少来设置contentLabel的高度
         height = [ODHelp textHeightFromTextString:str width:kScreenSize.width-26 fontSize:14];
         cell.contentLabelHeight.constant = height;
-        if ([[ODUserInformation getData].openID isEqualToString:[NSString stringWithFormat:@"%@",model.user[@"open_id"]]]) {
+        if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:[NSString stringWithFormat:@"%@",model.user[@"open_id"]]]) {
             
         }else{
             [cell.deleteButton removeFromSuperview];
@@ -389,7 +389,7 @@
     ODCommunityDetailCell *cell = (ODCommunityDetailCell *)button.superview.superview;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     ODCommunityDetailModel *model = self.dataArray[indexPath.row];
-    if ([[ODUserInformation getData].openID isEqualToString:model.user[@"open_id"]]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]]) {
         
     }else{
         ODOthersInformationController *otherInfo = [[ODOthersInformationController alloc]init];
@@ -402,7 +402,7 @@
 -(void)replyButtonClick:(UIButton *)button
 {
  
-    if ([[ODUserInformation getData].openID isEqualToString:@""]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
@@ -430,7 +430,7 @@
         ODCommunityDetailCell *cell = (ODCommunityDetailCell *)button.superview.superview;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         ODCommunityDetailModel *model = self.dataArray[indexPath.row];
-        NSDictionary *parameter = @{@"id":[NSString stringWithFormat:@"%@",model.id],@"type":@"3",@"open_id":[ODUserInformation getData].openID};
+        NSDictionary *parameter = @{@"id":[NSString stringWithFormat:@"%@",model.id],@"type":@"3",@"open_id":[ODUserInformation sharedODUserInformation].openID};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter isBbs:NO];
     }]];

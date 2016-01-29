@@ -361,11 +361,11 @@
 {
     NSDictionary *parameter;
     if ([self.taskRewardLabel.text isEqualToString:@"  选择任务奖励"]) {
-        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text],@"end_time":[[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text],@"content":self.taskDetailTextView.text,@"open_id":[ODUserInformation getData].openID};
+        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text],@"end_time":[[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text],@"content":self.taskDetailTextView.text,@"open_id":[ODUserInformation sharedODUserInformation].openID};
 
     }else{
    
-        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text],@"end_time":[[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text],@"content":self.taskDetailTextView.text,@"reward_name":[self.taskRewardLabel.text substringFromIndex:2],@"open_id":[ODUserInformation getData].openID};
+        parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text],@"end_time":[[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text],@"content":self.taskDetailTextView.text,@"reward_name":[self.taskRewardLabel.text substringFromIndex:2],@"open_id":[ODUserInformation sharedODUserInformation].openID};
         
         NSLog(@"%@",parameter);
     }
