@@ -281,6 +281,8 @@
             }];
             imageView.contentMode = UIViewContentModeScaleAspectFill;
             [self.bbsView addSubview:imageView];
+            
+            
         }
         if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:userModel.open_id]) {
             //删除按钮

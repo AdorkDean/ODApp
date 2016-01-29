@@ -373,7 +373,7 @@
             if (weakSelf.myBlock) {
                 weakSelf.myBlock([NSString stringWithFormat:@"refresh"]);
             }
-            
+            NSLog(@"%@",responseObject);
             [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"话题发布成功"];
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
