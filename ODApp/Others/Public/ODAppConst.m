@@ -3,6 +3,12 @@
 /** TabBar的高度 */
 CGFloat const ODTabBarHeight = 55;
 
+/** 显示集市的通知 */
+NSString *const ODNotificationShowBazaar = @"ODShowBazaarNotification";
+
+/** 刷新我的话题通知 */
+NSString *const ODNotificationMyTaskRefresh = @"ODNotificationMyTaskRefresh";
+
 /** 统一的URL */
 #ifdef DEBUG
 NSString * const ODCommonURL = @"http://woquapi.test.odong.com/";

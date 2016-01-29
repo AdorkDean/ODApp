@@ -447,8 +447,6 @@ NSString *taskDetailText = @"";
         {
             taskDetailText = textView.text;
         }
-
-
     }
 }
 

@@ -17,7 +17,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    __weakSelf
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationShowBazaar object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
+       
+        weakSelf.status = @"9";
+        [weakSelf.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
+        [weakSelf.collectionView.mj_header beginRefreshing];
+
+    }];
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self navigationInit];
@@ -366,12 +373,6 @@
         [self.collectionView.mj_header beginRefreshing];
     }
     
-    if (self.navigationController.childViewControllers.count > 1) {
-        self.status = @"9";
-        [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
-        [self.collectionView.mj_header beginRefreshing];
-    }
-    
     self.navigationController.navigationBar.hidden = YES;
 }
 
@@ -383,6 +384,10 @@
     self.navigationController.navigationBar.hidden = NO;
 }
 
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

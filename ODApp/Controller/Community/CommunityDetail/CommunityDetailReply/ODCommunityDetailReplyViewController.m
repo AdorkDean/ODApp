@@ -92,9 +92,8 @@
                 weakSelf.myBlock([NSString stringWithFormat:@"refresh"]);
             }
             
+            [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationMyTaskRefresh object:nil];
             [weakSelf.navigationController popViewControllerAnimated:YES];
-
-            
             [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"回复成功"];
             
         }
@@ -102,15 +101,6 @@
         NSLog(@"error");
     }];
 }
-
-
-//- (void)hudWasHidden:(MBProgressHUD *)hud {
-//    // Remove HUD from screen when the HUD was hidded
-//    [HUD removeFromSuperview];
-//
-//
-//    HUD = nil;
-//}
 
 #pragma mark - 创建textView
 -(void)createTextView
