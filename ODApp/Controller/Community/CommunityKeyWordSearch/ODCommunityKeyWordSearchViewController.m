@@ -263,14 +263,6 @@
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
-#pragma mark - 创建提示信息
--(void)createUIAlertControllerWithTitle:(NSString *)title
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
 {
