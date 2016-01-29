@@ -273,6 +273,8 @@
             [imageView sd_setImageWithURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]]];
             imageView.contentMode = UIViewContentModeScaleAspectFill;
             [self.bbsView addSubview:imageView];
+            
+            
         }
         if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:userModel.open_id]) {
             //删除按钮
