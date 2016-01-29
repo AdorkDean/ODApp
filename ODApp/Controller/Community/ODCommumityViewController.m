@@ -43,9 +43,9 @@
 -(void)loadMoreData
 {
     self.count ++;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"type":@"4",@"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":@"0",@"call_array":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kCommunityBbsListUrl paramater:signParameter];
+    [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
 
 
@@ -133,9 +133,9 @@
 -(void)joiningTogetherParmeters
 {
     self.count = 1;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"type":@"4",@"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":@"0",@"call_array":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kCommunityBbsListUrl paramater:signParameter];
+    [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
 
 #pragma mark - 请求数据
@@ -151,14 +151,12 @@
             NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dcit[@"result"];
             NSDictionary *bbs_list = result[@"bbs_list"];
-            NSArray *allkeys = [bbs_list allKeys];
-            allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                NSComparisonResult result = [obj1 compare:obj2];
-                return result == NSOrderedAscending;
-            }];
-            for (id bbsKey in allkeys) {
-                NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
-                NSDictionary *itemDict = bbs_list[key];
+//            NSArray *allkeys = [bbs_list allKeys];
+//            allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+//                NSComparisonResult result = [obj1 compare:obj2];
+//                return result == NSOrderedAscending;
+//            }];
+            for (NSDictionary *itemDict in bbs_list) {
                 ODCommunityModel *model = [[ODCommunityModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
