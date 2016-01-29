@@ -24,7 +24,7 @@
 
 - (void)buttonClick:(UIControl *)control
 {
-     if ([self.od_delegate respondsToSelector:@selector(od_tabBar:selectIndex:)])
+    if ([self.od_delegate respondsToSelector:@selector(od_tabBar:selectIndex:)])
     {
         [_od_delegate od_tabBar:self selectIndex:control.tag - KBaseTag];
     }

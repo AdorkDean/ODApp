@@ -78,30 +78,36 @@
 
 -(void)shareButtonClick:(UIButton *)button
 {
-    ODCommunityDetailModel *model = self.resultArray[0];
-    
-    
-    NSString *url = model.share[@"icon"];
-    NSString *content = model.share[@"desc"];
-    NSString *link = model.share[@"link"];
-    NSString *title = model.share[@"title"];
-    
-    
-    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:url];
-    
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-    
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-    
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-    
-    [UMSocialSnsService presentSnsIconSheetView:self
-                                         appKey:@"569dda54e0f55a994f0021cf"
-                                      shareText:content
-                                      shareImage:nil
-                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                       delegate:self];
+       
+    @try {
+        
+        ODCommunityDetailModel *model = self.resultArray[0];
+        NSString *url = model.share[@"icon"];
+        NSString *content = model.share[@"desc"];
+        NSString *link = model.share[@"link"];
+        NSString *title = model.share[@"title"];
+
+        
+        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+        
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+        
+        [UMSocialSnsService presentSnsIconSheetView:self
+                                             appKey:@"569dda54e0f55a994f0021cf"
+                                          shareText:content
+                                         shareImage:nil
+                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                           delegate:self];
+        
+    }
+    @catch (NSException *exception) {
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常无法分享"];
+    }
 
 }
 
@@ -264,12 +270,19 @@
             imageView = [ODClassMethod creatImageViewWithFrame:CGRectZero imageName:nil tag:0];
             [imageView sd_setImageWithURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
             {
-               [imageView sizeToFit];
+                @try {
+#warning 有bug
+                    [imageView sizeToFit];
+                    imageView.frame = CGRectMake(0, CGRectGetMaxY(bbsContentLabel.frame)+ 17.5+(imageView.od_height * (kScreenSize.width / imageView.od_width)+10)*i, kScreenSize.width, imageView.od_height * (kScreenSize.width / imageView.od_width));
+                    imageView.contentMode = UIViewContentModeScaleAspectFill;
+                    [self.bbsView addSubview:imageView];
 
-                imageView.frame = CGRectMake(0, CGRectGetMaxY(bbsContentLabel.frame)+ 17.5+(imageView.od_height * (kScreenSize.width / imageView.od_width)+10)*i, kScreenSize.width, imageView.od_height * (kScreenSize.width / imageView.od_width));
-                imageView.contentMode = UIViewContentModeScaleAspectFill;
-                [self.bbsView addSubview:imageView];
-                if (i == resultModel.bbs_imgs.count-1)
+                }
+                @catch (NSException *exception) {
+                     
+                }
+                
+                 if (i == resultModel.bbs_imgs.count-1)
                 {
                     frame = imageView.frame;
                     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:userModel.open_id])
