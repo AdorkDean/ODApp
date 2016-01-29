@@ -189,16 +189,17 @@
     cell.backgroundColor = [UIColor whiteColor];
     
     
-    cell.userImageView.layer.masksToBounds = YES;
-    cell.userImageView.layer.cornerRadius = 30;
-    cell.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
-    cell.userImageView.layer.borderWidth = 1;
+    cell.userImageViewButton.layer.masksToBounds = YES;
+    cell.userImageViewButton.layer.cornerRadius = 30;
+    cell.userImageViewButton.layer.borderColor = [UIColor clearColor].CGColor;
+    cell.userImageViewButton.layer.borderWidth = 1;
     
   
     ODBazaarModel *model = self.dataArray[indexPath.row];
   
-    [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
-        
+    [cell.userImageViewButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal];
+    
+ 
         cell.nickLabel.text = model.user_nick;
         cell.titleLabel.text = model.title;
         cell.contentLabel.text = model.content;

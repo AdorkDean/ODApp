@@ -16,6 +16,7 @@
 #import "UIImageView+WebCache.h"
 #import "ODBazaarDetailViewController.h"
 #import "ODViolationsCell.h"
+#import "ODOthersInformationController.h"
 @interface ODMyTaskController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
 @property(nonatomic , strong) UIView *headView;
@@ -61,22 +62,12 @@
     
     self.firstPage = 1;
     self.secondPage = 1;
-    
-    
+    self.type = @"0";
+    self.isRefresh = @"";
+    self.showType = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.FirstDataArray = [NSMutableArray array];
     self.secondDataArray = [NSMutableArray array];
-    
-    
-    self.type = @"0";
-    
-    
-  
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    
-    self.showType = YES;
-    
     
     [self navigationInit];
     [self creatSegment];
@@ -86,6 +77,32 @@
        
 }
 
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    
+    if (![self.isRefresh isEqualToString:@""]) {
+        
+        [self.firstCollectionView.mj_header beginRefreshing];
+        [self.secondCollectionView.mj_header beginRefreshing];
+        
+    }
+    
+    
+    self.showType = YES;
+    [self.typeView removeFromSuperview];
+    
+}
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.isRefresh = @"";
+
+    
+}
 
 
 
@@ -176,15 +193,16 @@
     [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
     [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODViolationsCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     
-    
+    __weakSelf
+
     
     self.firstCollectionView.tag = 111;
     self.firstCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self firstDownRefresh];
+        [weakSelf firstDownRefresh];
     }];
     self.firstCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
-        [self firstLoadMoreData];
+        [weakSelf firstLoadMoreData];
     }];
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.scrollView addSubview:self.firstCollectionView];
@@ -202,11 +220,11 @@
     
     self.secondCollectionView.tag = 222;
     self.secondCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self secondDownRefresh];
+        [weakSelf secondDownRefresh];
     }];
     self.secondCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
-        [self secondLoadMoreData];
+        [weakSelf secondLoadMoreData];
     }];
     [self.secondCollectionView.mj_header beginRefreshing];
     
@@ -275,6 +293,7 @@
 }
 
 - (void)deleteAction:(UIButton *)sender
+
 {
     
     ODTaskCell *cell = (ODTaskCell *)sender.superview.superview;
@@ -286,11 +305,41 @@
    
 }
 
+- (void)othersInformationClick:(UIButton *)sender{
+    
+    ODTaskCell *cell = (ODTaskCell *)sender.superview.superview;
+    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+    
+    
+    if (sender.tag == 111) {
+        
+    NSIndexPath *indexpath = [self.firstCollectionView indexPathForCell:cell];
+    ODBazaarModel *model = self.FirstDataArray[indexpath.row];
+    vc.open_id = model.open_id;
+    [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        
+        NSIndexPath *indexpath = [self.secondCollectionView indexPathForCell:cell];
+        ODBazaarModel *model = self.secondDataArray[indexpath.row];
+        vc.open_id = model.open_id;
+        [self.navigationController pushViewController:vc animated:YES];
+
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
 - (void)delegateTaskWith:(NSString *)taskId
 {
-    
-    
-    
     self.delateManager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"id":taskId , @"type":@"2",@"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
@@ -305,8 +354,6 @@
             
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 
-                 weakSelf.firstPage = 1;
-                 weakSelf.secondPage = 1;
                 
                 [weakSelf.firstCollectionView.mj_header beginRefreshing];
                 [weakSelf.secondCollectionView.mj_header beginRefreshing];
@@ -603,6 +650,9 @@
             ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
             
             cell.model = model;
+            [cell.userImageViewButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+            cell.userImageViewButton.tag = 111;
+
             
             return cell;
 
@@ -615,6 +665,9 @@
         ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
         
         cell.model = model;
+        [cell.userImageViewButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+        cell.userImageViewButton.tag = 222;
+
         
         return cell;
         
@@ -652,6 +705,12 @@
             ;
         }else{
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
+            bazaarDetail.myBlock = ^(NSString *del){
+                
+            self.isRefresh = del;
+                
+                
+            };
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
             bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
@@ -670,6 +729,15 @@
             ;
         }else{
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
+            
+            bazaarDetail.myBlock = ^(NSString *del){
+                
+                self.isRefresh = del;
+                
+                
+            };
+
+            
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
             bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];

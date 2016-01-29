@@ -26,6 +26,7 @@
 
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         if (self.searchBar.text.length>0) {
+            
             [self joiningTogetherParmeters];
         }else{
             [self.collectionView.mj_header endRefreshing];
@@ -150,6 +151,8 @@
 #pragma mark - 请求数据
 -(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)parameter
 {
+    
+    [self.searchBar resignFirstResponder];
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         

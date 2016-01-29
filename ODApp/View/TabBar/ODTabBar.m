@@ -17,6 +17,7 @@
     {
         self.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
         self.tintColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+        self.tintAdjustmentMode = UIViewTintAdjustmentModeDimmed;
     }
     return self;
 }
@@ -42,9 +43,9 @@
         if ([control isKindOfClass:NSClassFromString(@"UITabBarButton")])
         {
             control.frame = CGRectMake(control.od_x, 0, self.od_width / 5, self.od_height);
-
             control.tag = KBaseTag + tabBarButtonIndex;
             [control addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
+            [control addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchDown];
             for (UIView *subView in control.subviews)
             {
                 if ([subView isKindOfClass:NSClassFromString(@"UITabBarSwappableImageView")])

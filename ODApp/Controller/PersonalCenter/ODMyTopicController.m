@@ -14,7 +14,7 @@
 #import "ODCommunityCollectionCell.h"
 #import "ODCommunityModel.h"
 #import "ODCommunityDetailViewController.h"
-
+#import "ODOthersInformationController.h"
 @interface ODMyTopicController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
 @property(nonatomic , strong) UIView *headView;
@@ -154,14 +154,15 @@
     [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     
     self.firstCollectionView.tag = 111;
-    
+    __weakSelf
+
     self.firstCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self firstDownRefresh];
+        [weakSelf firstDownRefresh];
     }];
     
     self.firstCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
-        [self firstLoadMoreData];
+        [weakSelf firstLoadMoreData];
     }];
     
     [self.firstCollectionView.mj_header beginRefreshing];
@@ -176,14 +177,13 @@
     [self.secondCollectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     
     self.secondCollectionView.tag = 222;
-    
     self.secondCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self secondDownRefresh];
+        [weakSelf secondDownRefresh];
     }];
     
     self.secondCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
-        [self secondLoadMoreData];
+        [weakSelf secondLoadMoreData];
     }];
  
     [self.secondCollectionView.mj_header beginRefreshing];
@@ -231,6 +231,7 @@
 {
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.firstPage];
     
+    
     self.firstManager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters = @{ @"type":@"1",@"page":countNumber , @"city_id":@"321" ,@"open_id":self.open_id};
@@ -246,7 +247,7 @@
         if ([countNumber isEqualToString:@"1"]) {
             [weakSelf.FirstDataArray removeAllObjects];
             [weakSelf.firstLabel removeFromSuperview];
-            [weakSelf.secondUserInfoDic removeAllObjects];
+            [weakSelf.firstUserInfoDic removeAllObjects];
         }
         
         if (responseObject) {
@@ -302,6 +303,8 @@
     
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.secondPage];
     
+    
+    
     self.secondManager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters = @{ @"type":@"2",@"page":countNumber, @"city_id":@"321" , @"open_id":self.open_id  , @"call_array":@"1"};
@@ -319,26 +322,27 @@
             [weakSelf.secondUserInfoDic removeAllObjects];
         }
         
-
-        if (responseObject) {
+        
+        if (responseObject)
+        {
             NSDictionary *result = responseObject[@"result"];
             NSDictionary *bbs_list = result[@"bbs_list"];
             NSDictionary *users = result[@"users"];
-
-            for (NSMutableDictionary *dic in bbs_list) {
-
-            ODCommunityModel *model = [[ODCommunityModel alloc]init];
-            [model setValuesForKeysWithDictionary:dic];
-            [weakSelf.secondDataArray addObject:model];
-        }
-            
-            for (id userKey in users) {
+            for (NSMutableDictionary *dic in bbs_list)
+            {
+                ODCommunityModel *model = [[ODCommunityModel alloc]init];
+                [model setValuesForKeysWithDictionary:dic];
+                [weakSelf.secondDataArray addObject:model];
+            }
+            for (id userKey in users)
+            {
                 NSString *key = [NSString stringWithFormat:@"%@",userKey];
                 NSDictionary *itemDict = users[key];
                 ODCommunityModel *model = [[ODCommunityModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.secondUserInfoDic setObject:model forKey:userKey];
             }
+            
             
             if (weakSelf.secondDataArray.count == 0) {
                 weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40 + weakSelf.scrollView.frame.size.width, weakSelf.scrollView.center.y / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
@@ -379,6 +383,8 @@
         NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
         cell.nameLabel.text = [self.firstUserInfoDic[userId]nick];
         [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.firstUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
+        [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+        cell.headButton.tag = 111;
 
         
     }else if (collectionView.tag == 222) {
@@ -390,14 +396,50 @@
         
         NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
         cell.nameLabel.text = [self.secondUserInfoDic[userId]nick];
-        [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.secondUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
         
+        
+        [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.secondUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
+        [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+        cell.headButton.tag = 222;
 
 
     }
     
     return cell;
 }
+
+- (void)othersInformationClick:(UIButton *)sender{
+    
+      ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)sender.superview.superview;
+      ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+    
+    
+    if (sender.tag == 111) {
+        
+        NSIndexPath *indexpath = [self.firstCollectionView indexPathForCell:cell];
+        ODCommunityModel *model = self.FirstDataArray[indexpath.row];
+        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+        vc.open_id = [self.firstUserInfoDic[userId]open_id];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        
+        NSIndexPath *indexpath = [self.secondCollectionView indexPathForCell:cell];
+        ODCommunityModel *model = self.secondDataArray[indexpath.row];
+        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+        vc.open_id = [self.secondUserInfoDic[userId]open_id];
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }
+    
+  
+  
+  
+
+
+
+}
+
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {

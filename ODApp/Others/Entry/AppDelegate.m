@@ -54,7 +54,9 @@ void UncaughtExceptionHandler(NSException *exception)
     
     [self.window makeKeyAndVisible];
     
-    
+    _uncaughtExceptionHandler = NSGetUncaughtExceptionHandler();
+    NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
+
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isRuned"] boolValue]) {
         
         //进入主界面
