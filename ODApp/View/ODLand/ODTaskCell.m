@@ -8,6 +8,7 @@
 
 #import "ODTaskCell.h"
 #import "UIImageView+WebCache.h"
+#import "UIButton+WebCache.h"
 @implementation ODTaskCell
 
 - (void)awakeFromNib {
@@ -18,10 +19,10 @@
     self.backgroundColor = [UIColor whiteColor];
     
     
-    self.userImageView.layer.masksToBounds = YES;
-    self.userImageView.layer.cornerRadius = 30;
-    self.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
-    self.userImageView.layer.borderWidth = 1;
+    self.userImageViewButton.layer.masksToBounds = YES;
+    self.userImageViewButton.layer.cornerRadius = 30;
+    self.userImageViewButton.layer.borderColor = [UIColor clearColor].CGColor;
+    self.userImageViewButton.layer.borderWidth = 1;
     
     
     
@@ -35,9 +36,13 @@
         _model = model;
     }
     
-      NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
+    NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
    
-    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
+   
+    [self.userImageViewButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal];
+    
+    
+    
     self.nickLabel.text = model.user_nick;
     self.titleLabel.text = model.title;
     self.contentLabel.text = model.content;

@@ -110,6 +110,7 @@
     self.isJob =YES;
 
     self.tabBarController.selectedIndex = 2;
+    [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationShowBazaar object:nil];
 
 }
 

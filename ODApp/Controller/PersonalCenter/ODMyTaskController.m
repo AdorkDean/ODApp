@@ -16,6 +16,7 @@
 #import "UIImageView+WebCache.h"
 #import "ODBazaarDetailViewController.h"
 #import "ODViolationsCell.h"
+#import "ODOthersInformationController.h"
 @interface ODMyTaskController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
 @property(nonatomic , strong) UIView *headView;
@@ -58,25 +59,14 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
     self.firstPage = 1;
     self.secondPage = 1;
-    
-    
+    self.type = @"0";
+    self.isRefresh = @"";
+    self.showType = YES;
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.FirstDataArray = [NSMutableArray array];
     self.secondDataArray = [NSMutableArray array];
-    
-    
-    self.type = @"0";
-    
-    
-  
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    
-    self.showType = YES;
-    
     
     [self navigationInit];
     [self creatSegment];
@@ -89,10 +79,18 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    
     [super viewWillAppear:animated];
     
+    __weakSelf
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationMyTaskRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf.firstCollectionView.mj_header beginRefreshing];
+        [weakSelf.secondCollectionView.mj_header beginRefreshing];
+    }];
+
     
-    if ([self.isRefresh isEqualToString:@"del"]) {
+    
+    if (![self.isRefresh isEqualToString:@""]) {
         
         [self.firstCollectionView.mj_header beginRefreshing];
         [self.secondCollectionView.mj_header beginRefreshing];
@@ -104,6 +102,16 @@
     [self.typeView removeFromSuperview];
     
 }
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.isRefresh = @"";
+
+    
+}
+
+
 
 #pragma mark - 初始化
 
@@ -192,15 +200,16 @@
     [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
     [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODViolationsCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     
-    
+    __weakSelf
+
     
     self.firstCollectionView.tag = 111;
     self.firstCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self firstDownRefresh];
+        [weakSelf firstDownRefresh];
     }];
     self.firstCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
-        [self firstLoadMoreData];
+        [weakSelf firstLoadMoreData];
     }];
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.scrollView addSubview:self.firstCollectionView];
@@ -218,11 +227,11 @@
     
     self.secondCollectionView.tag = 222;
     self.secondCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self secondDownRefresh];
+        [weakSelf secondDownRefresh];
     }];
     self.secondCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
-        [self secondLoadMoreData];
+        [weakSelf secondLoadMoreData];
     }];
     [self.secondCollectionView.mj_header beginRefreshing];
     
@@ -291,6 +300,7 @@
 }
 
 - (void)deleteAction:(UIButton *)sender
+
 {
     
     ODTaskCell *cell = (ODTaskCell *)sender.superview.superview;
@@ -301,6 +311,39 @@
     
    
 }
+
+- (void)othersInformationClick:(UIButton *)sender{
+    
+    ODTaskCell *cell = (ODTaskCell *)sender.superview.superview;
+    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+    
+    
+    if (sender.tag == 111) {
+        
+    NSIndexPath *indexpath = [self.firstCollectionView indexPathForCell:cell];
+    ODBazaarModel *model = self.FirstDataArray[indexpath.row];
+    vc.open_id = model.open_id;
+    [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        
+        NSIndexPath *indexpath = [self.secondCollectionView indexPathForCell:cell];
+        ODBazaarModel *model = self.secondDataArray[indexpath.row];
+        vc.open_id = model.open_id;
+        [self.navigationController pushViewController:vc animated:YES];
+
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+}
+
+
 
 - (void)delegateTaskWith:(NSString *)taskId
 {
@@ -614,6 +657,9 @@
             ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
             
             cell.model = model;
+            [cell.userImageViewButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+            cell.userImageViewButton.tag = 111;
+
             
             return cell;
 
@@ -626,6 +672,9 @@
         ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
         
         cell.model = model;
+        [cell.userImageViewButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+        cell.userImageViewButton.tag = 222;
+
         
         return cell;
         
@@ -776,7 +825,10 @@
     [self.scrollView setContentOffset:point animated:YES];
 }
 
-
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

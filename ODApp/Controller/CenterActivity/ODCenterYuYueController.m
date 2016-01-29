@@ -803,7 +803,8 @@
         if ([textView.text isEqualToString:NSLocalizedString(@"输入活动目的", nil)]) {
             self.yuYueView.pursoseTextView.text=NSLocalizedString(@"", nil);
             self.yuYueView.pursoseTextView.textColor = [UIColor blackColor];
-        }else{
+        }        
+        else{
             ;
         }
 
@@ -816,6 +817,38 @@
         }
     }
 }
+
+NSString *pursoseText = @"";
+NSString *contentText = @"";
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView == self.yuYueView.pursoseTextView)
+    {
+        if (textView.text.length > 20)
+        {
+            textView.text = pursoseText;
+        }
+        else
+        {
+            pursoseText = textView.text;
+        }
+    }
+    else if (textView == self.yuYueView.contentTextView)
+    {
+        if (textView.text.length > 100)
+        {
+            textView.text = contentText;
+        }
+        else
+        {
+            contentText = textView.text;
+        }
+        
+        
+    }
+}
+
+
 
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
