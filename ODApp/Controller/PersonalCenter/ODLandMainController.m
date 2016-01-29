@@ -284,29 +284,21 @@
         
         
         
-        
-        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:url];
-        
-        
-        
-        
-        
-        [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-        [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-        
-        [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-        
-        [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-        
-        [UMSocialSnsService presentSnsIconSheetView:self
-                                             appKey:@"569dda54e0f55a994f0021cf"
-                                          shareText:content
-                                         shareImage:nil
-                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                           delegate:self];
+            [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:url];
+            [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+            [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+            [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+            [UMSocialSnsService presentSnsIconSheetView:self
+                                                 appKey:@"569dda54e0f55a994f0021cf"
+                                              shareText:content
+                                             shareImage:nil
+                                        shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                               delegate:self];
+
         
         
-        
+            
     }
     else if (indexPath.section ==7) {
         
