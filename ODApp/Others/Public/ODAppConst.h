@@ -6,7 +6,8 @@ UIKIT_EXTERN CGFloat const ODTabBarHeight;
 /** 统一的URL */
 UIKIT_EXTERN NSString * const ODCommonURL;
 
-/** 请求URL接口 */
+/********* 请求URL接口 **********/
+
 UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDetailUrl;
@@ -14,7 +15,9 @@ UIKIT_EXTERN NSString * const kBazaarTaskDelegateUrl;
 UIKIT_EXTERN NSString * const kBazaarLabelSearchUrl;
 UIKIT_EXTERN NSString * const kBazaarAcceptTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseRewardUrl;
+/** 接收人确认完成 */
 UIKIT_EXTERN NSString * const kBazaarTaskReceiveCompleteUrl;
+/** 发起人确认完成 */
 UIKIT_EXTERN NSString * const kBazaarTaskInitiateCompleteUrl;
 
 UIKIT_EXTERN NSString * const kCommunityBbsListUrl;

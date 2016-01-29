@@ -9,20 +9,10 @@
 #ifndef ODApp_Prefix_pch
 #define ODApp_Prefix_pch
 
-// Include any system framework and library headers here that should be included in all compilation units.
-// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
-
-
-//#ifndef __IPHONE_3_0
-//#warning "This project uses features only available in iOS SDK 3.0 and later."
-//#endif
 
 #ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#import <Foundation/Foundation.h>
 
-//其他文件就不用到 Define.h了
-//预编译文件 可以自动把这些头文件 导入到每个文件中
+/***  导入公共头文件 预编译文件 可以自动把这些头文件 导入到每个文件中 ***/
 #import "Define.h"
 #import "ODAppConst.h"
 #import "NSURL+ODExtension.h"
@@ -30,17 +20,29 @@
 #import "UIView+ODExtension.h"
 #import "ODUserInformation.h"
 
+/***  自定义Log函数 ***/
 #ifdef DEBUG // 如果定义了DEBUG这个宏，说明是处在调试阶段
 #define NSLog(...) NSLog(__VA_ARGS__);
 #else // 不是调试阶段，是发布阶段
 #define NSLog(...)
 #endif
+
+/**************************  从这里开始写宏定义 ************************************/
+
 /** 打印方法 */
 #define NSLogFunc NSLog(@"%s", __func__);
 
 /**  self弱引用 */
 #define __weakSelf __weak typeof (self)weakSelf = self;
 
+/**  方法过期 */
+#define ODExtensionDeprecated(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)
+
+/**  判断手机的系统版本 */
+#define iOS(v) ([UIDevice currentDevice].systemVersion.doubleValue >= (v))
+
+
+/**************************  后面不能写宏定义 *************************************/
 #endif
 
 #endif /* ODApp_Prefix_pch */

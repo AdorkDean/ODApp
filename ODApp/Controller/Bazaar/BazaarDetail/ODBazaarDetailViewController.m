@@ -592,9 +592,10 @@
 {
     ODBazaarDetailModel *model = self.picArray[indexPath.row];
     NSString *str = [NSString stringWithFormat:@"%@",model.apply_status];
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
-        if ([str isEqualToString:@"0"] && [self.task_status_name isEqualToString:@"待派遣"]) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否委派" message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+    if ([[ODUserInformation getData].openID isEqualToString:self.open_id]) {
+        if ([str isEqualToString:@"0"] && [self.task_status_name isEqualToString:@"待派遣"] && self.num == 1) {
+           UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否委派" message:nil preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
                 NSDictionary *parameter = @{@"task_id":self.task_id,@"apply_open_id":model.open_id};
