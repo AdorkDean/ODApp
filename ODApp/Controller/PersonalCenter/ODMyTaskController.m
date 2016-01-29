@@ -740,6 +740,10 @@
 #pragma mark - UISegmentDelegate
 - (void)segmentAction:(UISegmentedControl *)sender
 {
+    self.showType = YES;
+    [self.typeView removeFromSuperview];
+
+    
     CGPoint point = CGPointMake(self.scrollView.frame.size.width * sender.selectedSegmentIndex, 0);
     [self.scrollView setContentOffset:point animated:YES];
 }
