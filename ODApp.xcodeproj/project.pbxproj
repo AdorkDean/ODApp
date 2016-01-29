@@ -60,7 +60,6 @@
 		D4D073931C59B9FA008527C9 /* ODTopicModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D071301C59B9FA008527C9 /* ODTopicModel.m */; };
 		D4D073941C59B9FA008527C9 /* ODUserEvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D071321C59B9FA008527C9 /* ODUserEvaluationController.m */; };
 		D4D073951C59B9FA008527C9 /* ODUserGenderController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D071341C59B9FA008527C9 /* ODUserGenderController.m */; };
-		D4D073961C59B9FA008527C9 /* ODUserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D071361C59B9FA008527C9 /* ODUserInformation.m */; };
 		D4D073971C59B9FA008527C9 /* ODUserNickNameController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D071381C59B9FA008527C9 /* ODUserNickNameController.m */; };
 		D4D073981C59B9FA008527C9 /* ODUserSignatureController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0713A1C59B9FA008527C9 /* ODUserSignatureController.m */; };
 		D4D073991C59B9FA008527C9 /* ODTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0713D1C59B9FA008527C9 /* ODTabBarController.m */; };
@@ -471,6 +470,7 @@
 		D4D075491C59BBEE008527C9 /* ODAppConst.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075481C59BBEE008527C9 /* ODAppConst.m */; };
 		D4D0754D1C59C0CA008527C9 /* UIView+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0754C1C59C0CA008527C9 /* UIView+ODExtension.m */; };
 		D4D075511C59C436008527C9 /* ODNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075501C59C436008527C9 /* ODNavigationController.m */; };
+		D4D075541C5B015D008527C9 /* ODUserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075531C5B015D008527C9 /* ODUserInformation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -591,8 +591,6 @@
 		D4D071321C59B9FA008527C9 /* ODUserEvaluationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserEvaluationController.m; sourceTree = "<group>"; };
 		D4D071331C59B9FA008527C9 /* ODUserGenderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserGenderController.h; sourceTree = "<group>"; };
 		D4D071341C59B9FA008527C9 /* ODUserGenderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserGenderController.m; sourceTree = "<group>"; };
-		D4D071351C59B9FA008527C9 /* ODUserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserInformation.h; sourceTree = "<group>"; };
-		D4D071361C59B9FA008527C9 /* ODUserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserInformation.m; sourceTree = "<group>"; };
 		D4D071371C59B9FA008527C9 /* ODUserNickNameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserNickNameController.h; sourceTree = "<group>"; };
 		D4D071381C59B9FA008527C9 /* ODUserNickNameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserNickNameController.m; sourceTree = "<group>"; };
 		D4D071391C59B9FA008527C9 /* ODUserSignatureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserSignatureController.h; sourceTree = "<group>"; };
@@ -1106,6 +1104,8 @@
 		D4D0754C1C59C0CA008527C9 /* UIView+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ODExtension.m"; sourceTree = "<group>"; };
 		D4D0754F1C59C436008527C9 /* ODNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNavigationController.h; sourceTree = "<group>"; };
 		D4D075501C59C436008527C9 /* ODNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNavigationController.m; sourceTree = "<group>"; };
+		D4D075521C5B015D008527C9 /* ODUserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserInformation.h; sourceTree = "<group>"; };
+		D4D075531C5B015D008527C9 /* ODUserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserInformation.m; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1353,8 +1353,6 @@
 			children = (
 				D4D071151C59B9FA008527C9 /* ODInformationController.h */,
 				D4D071161C59B9FA008527C9 /* ODInformationController.m */,
-				D4D071351C59B9FA008527C9 /* ODUserInformation.h */,
-				D4D071361C59B9FA008527C9 /* ODUserInformation.m */,
 				C64273311C5A104E00C38A85 /* ODUserChangeSignature */,
 				C64273301C5A100400C38A85 /* ODUserChangeName */,
 				C642732F1C5A0F9400C38A85 /* ODUserChangeGender */,
@@ -1708,6 +1706,8 @@
 		D4D071531C59B9FA008527C9 /* PersonalCenterModel */ = {
 			isa = PBXGroup;
 			children = (
+				D4D075521C5B015D008527C9 /* ODUserInformation.h */,
+				D4D075531C5B015D008527C9 /* ODUserInformation.m */,
 				D4D071591C59B9FA008527C9 /* ODOrderRecordModel */,
 				D4D071561C59B9FA008527C9 /* ODApplyActivityModel */,
 				C642732C1C5A0E7E00C38A85 /* ODTopicModel */,
@@ -3257,7 +3257,7 @@
 				D4D074CF1C59B9FA008527C9 /* IQUIViewController+Additions.m in Sources */,
 				D4D0736F1C59B9FA008527C9 /* ODBazaarDetailLayout.m in Sources */,
 				D4D073991C59B9FA008527C9 /* ODTabBarController.m in Sources */,
-				D4D073961C59B9FA008527C9 /* ODUserInformation.m in Sources */,
+				D4D075541C5B015D008527C9 /* ODUserInformation.m in Sources */,
 				D4D0739F1C59B9FA008527C9 /* ODHomeFoundModel.m in Sources */,
 				D4D075431C59BA9B008527C9 /* AppDelegate.m in Sources */,
 				D4D073951C59B9FA008527C9 /* ODUserGenderController.m in Sources */,
