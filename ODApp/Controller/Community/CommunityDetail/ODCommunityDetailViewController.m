@@ -270,9 +270,19 @@
         //图片
         for (NSInteger i = 0; i < resultModel.bbs_imgs.count; i++) {
             imageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, CGRectGetMaxY(bbsContentLabel.frame)+17.5+(300+10)*i, kScreenSize.width, 300) imageName:nil tag:0];
-            [imageView sd_setImageWithURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]]];
+            NSLog(@"%@",NSStringFromCGRect(imageView.frame));
+            [imageView sd_setImageWithURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                            [imageView sizeToFit];
+                imageView.od_size = CGSizeMake(kScreenSize.width, imageView.od_height * (kScreenSize.width / imageView.od_width));
+                if (i == resultModel.bbs_imgs.count - 1)
+                {
+                    
+                }
+            }];
             imageView.contentMode = UIViewContentModeScaleAspectFill;
             [self.bbsView addSubview:imageView];
+            
+            
         }
         if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:userModel.open_id]) {
             //删除按钮

@@ -421,9 +421,21 @@
 }
 
 #pragma mark - UITextViewDelegate
+NSString *text = @"";
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView.text.length <= 20)
+    {
+        text = textView.text;
+    }
+    else
+    {
+        textView.text = text;
+    }
+}
+
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    
     if (textView == self.titleTextView) {
         if (text.length == 0) return YES;
         
@@ -449,6 +461,10 @@
     return YES;
 }
 
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    return textView.text.length < 20;
+}
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     if (textView.tag == 10) {
