@@ -3,6 +3,15 @@
 /** TabBar的高度 */
 UIKIT_EXTERN CGFloat const ODTabBarHeight;
 
+/********** 通知 ************/
+
+
+/** 显示集市的通知 */
+UIKIT_EXTERN NSString *const ODNotificationShowBazaar;
+
+/** 刷新我的话题通知 */
+UIKIT_EXTERN NSString *const ODNotificationMyTaskRefresh;
+
 /** 统一的URL */
 UIKIT_EXTERN NSString * const ODCommonURL;
 

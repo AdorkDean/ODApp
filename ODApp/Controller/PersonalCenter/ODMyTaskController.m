@@ -59,7 +59,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
     self.firstPage = 1;
     self.secondPage = 1;
     self.type = @"0";
@@ -80,7 +79,15 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    
     [super viewWillAppear:animated];
+    
+    __weakSelf
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationMyTaskRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf.firstCollectionView.mj_header beginRefreshing];
+        [weakSelf.secondCollectionView.mj_header beginRefreshing];
+    }];
+
     
     
     if (![self.isRefresh isEqualToString:@""]) {
@@ -818,7 +825,10 @@
     [self.scrollView setContentOffset:point animated:YES];
 }
 
-
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
