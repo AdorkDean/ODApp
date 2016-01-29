@@ -421,41 +421,42 @@
 }
 
 #pragma mark - UITextViewDelegate
+NSString *text = @"";
 - (void)textViewDidChange:(UITextView *)textView
 {
-    if (textView.text.length > 20)
+    if (textView.text.length <= 20)
     {
-        [self.view endEditing:YES];
+        text = textView.text;
+    }
+    else
+    {
+        textView.text = text;
     }
 }
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    if (textView.text.length > 20)
-    {
-        return NO;
+    if (textView == self.titleTextView) {
+        if (text.length == 0) return YES;
+        
+        NSInteger existedLength = textView.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = text.length;
+        if (existedLength - selectedLength + replaceLength > 30) {
+            return NO;
+        }
     }
-//    if (textView == self.titleTextView) {
-//        if (text.length == 0) return YES;
-//        
-//        NSInteger existedLength = textView.text.length;
-//        NSInteger selectedLength = range.length;
-//        NSInteger replaceLength = text.length;
-//        if (existedLength - selectedLength + replaceLength > 30) {
-//            return NO;
-//        }
-//    }
-//    
-//    if (textView == self.taskDetailTextView) {
-//        if (text.length == 0) return YES;
-//        
-//        NSInteger existedLength = textView.text.length;
-//        NSInteger selectedLength = range.length;
-//        NSInteger replaceLength = text.length;
-//        if (existedLength - selectedLength + replaceLength > 500) {
-//            return NO;
-//        }
-//    }
+    
+    if (textView == self.taskDetailTextView) {
+        if (text.length == 0) return YES;
+        
+        NSInteger existedLength = textView.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = text.length;
+        if (existedLength - selectedLength + replaceLength > 500) {
+            return NO;
+        }
+    }
 
     return YES;
 }
