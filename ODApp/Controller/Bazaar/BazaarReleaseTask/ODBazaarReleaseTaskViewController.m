@@ -421,34 +421,49 @@
 }
 
 #pragma mark - UITextViewDelegate
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView.text.length > 20)
+    {
+        [self.view endEditing:YES];
+    }
+}
+
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-    
-    if (textView == self.titleTextView) {
-        if (text.length == 0) return YES;
-        
-        NSInteger existedLength = textView.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = text.length;
-        if (existedLength - selectedLength + replaceLength > 30) {
-            return NO;
-        }
+    if (textView.text.length > 20)
+    {
+        return NO;
     }
-    
-    if (textView == self.taskDetailTextView) {
-        if (text.length == 0) return YES;
-        
-        NSInteger existedLength = textView.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = text.length;
-        if (existedLength - selectedLength + replaceLength > 500) {
-            return NO;
-        }
-    }
+//    if (textView == self.titleTextView) {
+//        if (text.length == 0) return YES;
+//        
+//        NSInteger existedLength = textView.text.length;
+//        NSInteger selectedLength = range.length;
+//        NSInteger replaceLength = text.length;
+//        if (existedLength - selectedLength + replaceLength > 30) {
+//            return NO;
+//        }
+//    }
+//    
+//    if (textView == self.taskDetailTextView) {
+//        if (text.length == 0) return YES;
+//        
+//        NSInteger existedLength = textView.text.length;
+//        NSInteger selectedLength = range.length;
+//        NSInteger replaceLength = text.length;
+//        if (existedLength - selectedLength + replaceLength > 500) {
+//            return NO;
+//        }
+//    }
 
     return YES;
 }
 
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    return textView.text.length < 20;
+}
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     if (textView.tag == 10) {

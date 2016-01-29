@@ -18,6 +18,7 @@
 #import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
 #import "ODChangePassWordController.h"
+
 @interface ODInformationController ()<UITableViewDataSource , UITableViewDelegate ,UIImagePickerControllerDelegate , UIActionSheetDelegate , UINavigationControllerDelegate>
 
 @property (nonatomic , strong) UIView *headView;
@@ -192,7 +193,7 @@
     UITapGestureRecognizer *passWordTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(passWordAction)];
     [self.informationView.passWordImageView addGestureRecognizer:passWordTap];
 
-        [self.informationView.codeImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.qrcode]];
+    [self.informationView.codeImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.qrcode]];
     
     self.tableView.tableHeaderView = self.informationView;
     [self.view addSubview:self.tableView];
