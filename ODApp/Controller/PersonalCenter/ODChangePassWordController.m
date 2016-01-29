@@ -169,12 +169,6 @@
     [self.registView.verification resignFirstResponder];
     [self.registView.password resignFirstResponder];
     
-    [self.registView.phoneNumber resignFirstResponder];
-    [self.registView.password resignFirstResponder];
-    [self.registView.verification resignFirstResponder];
-
-    
-    
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
 
         [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];

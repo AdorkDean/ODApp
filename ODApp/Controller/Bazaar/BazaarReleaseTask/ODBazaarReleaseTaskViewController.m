@@ -414,8 +414,7 @@
             [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:message];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
-        NSLog(@"_____error");
+        NSLogError
     }];
     
 }

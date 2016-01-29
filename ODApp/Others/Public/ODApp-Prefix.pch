@@ -31,6 +31,8 @@
 
 /** 打印方法 */
 #define NSLogFunc NSLog(@"%s", __func__);
+/** 打印错误信息  */
+#define NSLogError  NSLog(@"_____error______ = %@",error);
 
 /**  self弱引用 */
 #define __weakSelf __weak typeof (self)weakSelf = self;

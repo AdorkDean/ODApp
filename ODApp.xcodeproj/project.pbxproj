@@ -1356,8 +1356,8 @@
 				C64273311C5A104E00C38A85 /* ODUserChangeSignature */,
 				C64273301C5A100400C38A85 /* ODUserChangeName */,
 				C642732F1C5A0F9400C38A85 /* ODUserChangeGender */,
-				C64273321C5A10E000C38A85 /* ODBindingMobile */,
 				C64273291C5A0CC000C38A85 /* ODChangePassWord */,
+				C64273321C5A10E000C38A85 /* ODBindingMobile */,
 			);
 			name = ODUserInformation;
 			sourceTree = "<group>";
@@ -1389,13 +1389,13 @@
 			name = ODActivityDetail;
 			sourceTree = "<group>";
 		};
-		C64273381C5A15D300C38A85 /* ODCenterPicture */ = {
+		C64273381C5A15D300C38A85 /* ODCenterMap */ = {
 			isa = PBXGroup;
 			children = (
 				D4D070EF1C59B9FA008527C9 /* ODCenterPactureController.h */,
 				D4D070F01C59B9FA008527C9 /* ODCenterPactureController.m */,
 			);
-			name = ODCenterPicture;
+			name = ODCenterMap;
 			sourceTree = "<group>";
 		};
 		C64273391C5A15F200C38A85 /* ODCenterOrder */ = {
@@ -1490,7 +1490,7 @@
 			children = (
 				C64273351C5A14F800C38A85 /* ODCenterActivity */,
 				C64273391C5A15F200C38A85 /* ODCenterOrder */,
-				C64273381C5A15D300C38A85 /* ODCenterPicture */,
+				C64273381C5A15D300C38A85 /* ODCenterMap */,
 				C64273361C5A153B00C38A85 /* ODCenterDetail */,
 				C642733A1C5A160400C38A85 /* ODChoseCenter */,
 				C64273371C5A159800C38A85 /* ODActivityDetail */,
