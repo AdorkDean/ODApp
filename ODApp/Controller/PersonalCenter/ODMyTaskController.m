@@ -654,6 +654,7 @@
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+            bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
             bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
             [self.navigationController pushViewController:bazaarDetail animated:YES];
         }
@@ -671,6 +672,7 @@
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
             
             bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+            bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
             bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
             [self.navigationController pushViewController:bazaarDetail animated:YES];
 

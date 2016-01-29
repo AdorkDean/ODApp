@@ -157,24 +157,8 @@
 
 - (void)backAction:(UIButton *)sender
 {
-//    NSArray *imageArray = @[@"icon_home-find",@"icon_Center - activity",@"icon_market",@"icon_community",@"icon_Personal Center"];
-    //        ODTabBarController *tabBar = (ODTabBarController *)self.navigationController.tabBarController;
     ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
     tabBar.selectedIndex = tabBar.currentIndex;
-    
-//    NSInteger index = tabBar.selectedIndex;
-//    for (NSInteger i = 0; i < 5; i++)
-//    {
-//        UIButton *newButton = (UIButton *)[tabBar.imageView viewWithTag:1+i];
-//        UIImageView *imageView = (UIImageView *)[newButton viewWithTag:6+i];
-//        if (i!=index) {
-//            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_default",imageArray[i]]];
-//        }else{
-//            imageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_Selected",imageArray[i]]];
-//        }
-//        
-//        newButton.selected = i == index;
-//    }
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
