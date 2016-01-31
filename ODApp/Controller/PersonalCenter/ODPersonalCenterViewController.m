@@ -39,7 +39,7 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    [self navigationInit];
+    [self setTitle:@"登陆"];
     
     self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
     self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
@@ -77,12 +77,6 @@
     
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
-    
-    // 登陆label
-    UILabel *centerNameLabe = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width / 2 - 110, 28, 220, 20) text:@"登陆" font:17 alignment:@"center" color:@"#000000" alpha:1];
-    
-    centerNameLabe.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:centerNameLabe];
     
     // 注册button
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 60, 16,50, 44) target:self sel:@selector(registered:) tag:0 image:nil title:@"注册" font:16];

@@ -19,9 +19,9 @@
     
     self.count = 1;
     self.view.backgroundColor = [UIColor whiteColor];
+    self.title = @"欧动集市";
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    [self navigationInit];
     [self createSearchBar];
     [self createRequest];
     [self createCollectionView];
@@ -58,16 +58,7 @@
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 117) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"欧动集市" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
-    
-    //取消按钮
+     //取消按钮
     UIButton *cancelButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(cancelButtonClick:) tag:0 image:nil title:@"取消" font:16];
     cancelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     [cancelButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
@@ -243,22 +234,6 @@
     ODBazaarModel *model = self.dataArray[indexPath.row];
     bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
     [self.navigationController pushViewController:bazaarDetail animated:YES];
-}
-
-
-
-#pragma mark - 试图将要出现
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
-
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

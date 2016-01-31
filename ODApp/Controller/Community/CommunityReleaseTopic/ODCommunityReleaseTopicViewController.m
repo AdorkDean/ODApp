@@ -21,7 +21,7 @@
     self.strArray = [[NSMutableArray alloc]init];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self createRequest];
-    [self navigationInit];
+    [self setTitle:@"新话题"];
     [self createTextView];
     [self createAddPicButton];
 
@@ -35,12 +35,7 @@
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
     
-    //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"新话题" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
-    
-    //取消按钮
+        //取消按钮
 
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -422,16 +417,6 @@ NSString *topicContentText = @"";
         NSLog(@"%@",error);
     }];
 }
-
-
-#pragma mark - 试图将要出现
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
-
-}
-
 
 
 - (void)didReceiveMemoryWarning {

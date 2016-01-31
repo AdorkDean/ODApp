@@ -34,7 +34,7 @@
     // Do any additional setup after loading the view.
     
     
-    [self navigationInit];
+    [self setTitle:self.topTitle];
     [self createTimer];
     
     
@@ -60,11 +60,7 @@
     self.navigationController.navigationBar.hidden = YES;
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
-    
-    // 选择中心label
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:self.topTitle font:17 alignment:@"center" color:@"#000000" alpha:1];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
+
     
     
     // 返回button

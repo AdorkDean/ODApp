@@ -24,10 +24,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.title = self.activityTitle;
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self navigationInit];
     [self createWebView];
 }
 
@@ -36,14 +34,7 @@
 {
 
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    self.navigationController.navigationBar.hidden = YES;
-    
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 180) / 2, 28, 180, 20) text:self.activityTitle font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
+  
     
 
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16, 44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];

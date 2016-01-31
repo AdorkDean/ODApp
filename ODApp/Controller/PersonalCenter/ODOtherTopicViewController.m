@@ -19,7 +19,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.count = 1;
-    [self navigationInit];
+    [self setTitle:@"他发表的话题"];
     [self createRequest];
     [self joiningTogetherParmeters];
     [self createCollectionView];
@@ -52,12 +52,7 @@
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
     
-    //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-150)/2, 32, 150, 20) text:@"他发表的话题" font:16 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
-    
-    //取消按钮
+       //取消按钮
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 32,35, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.headView addSubview:backButton];

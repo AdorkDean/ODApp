@@ -471,6 +471,7 @@
 		D4D0754D1C59C0CA008527C9 /* UIView+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0754C1C59C0CA008527C9 /* UIView+ODExtension.m */; };
 		D4D075511C59C436008527C9 /* ODNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075501C59C436008527C9 /* ODNavigationController.m */; };
 		D4D075541C5B015D008527C9 /* ODUserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075531C5B015D008527C9 /* ODUserInformation.m */; };
+		D4D075571C5DB53A008527C9 /* UIImage+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075561C5DB53A008527C9 /* UIImage+ODExtension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1106,6 +1107,8 @@
 		D4D075501C59C436008527C9 /* ODNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNavigationController.m; sourceTree = "<group>"; };
 		D4D075521C5B015D008527C9 /* ODUserInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserInformation.h; sourceTree = "<group>"; };
 		D4D075531C5B015D008527C9 /* ODUserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserInformation.m; sourceTree = "<group>"; };
+		D4D075551C5DB53A008527C9 /* UIImage+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ODExtension.h"; sourceTree = "<group>"; };
+		D4D075561C5DB53A008527C9 /* UIImage+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ODExtension.m"; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1759,6 +1762,8 @@
 				D4D071631C59B9FA008527C9 /* UIColor+ODExtension.m */,
 				D4D0754B1C59C0CA008527C9 /* UIView+ODExtension.h */,
 				D4D0754C1C59C0CA008527C9 /* UIView+ODExtension.m */,
+				D4D075551C5DB53A008527C9 /* UIImage+ODExtension.h */,
+				D4D075561C5DB53A008527C9 /* UIImage+ODExtension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3200,6 +3205,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4D075571C5DB53A008527C9 /* UIImage+ODExtension.m in Sources */,
 				D4D074DE1C59B9FA008527C9 /* TADotView.m in Sources */,
 				D4D074E21C59B9FA008527C9 /* UIView+SDExtension.m in Sources */,
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,

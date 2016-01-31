@@ -27,7 +27,7 @@
     }];
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self navigationInit];
+    [self setTitle:@"欧动集市"];
     [self createScreeningAndSearchButton];
     [self createRequest];
     [self createCollectionView];
@@ -55,15 +55,6 @@
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 117) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"欧动集市" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
-    
     //发布任务按钮
     UIButton *releaseButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 110, 16,95, 44) target:self sel:@selector(releaseButtonClick:) tag:0 image:nil title:@"发布任务" font:16];
     [releaseButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
@@ -372,16 +363,13 @@
     }else if ([self.refresh isEqualToString:@"delegate"]){
         [self.collectionView.mj_header beginRefreshing];
     }
-    
-    self.navigationController.navigationBar.hidden = YES;
-}
+    }
 
 #pragma mark - 试图将要消失
 -(void)viewWillDisappear:(BOOL)animated
 {
     self.refresh = @"";
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.hidden = NO;
 }
 
 -(void)dealloc

@@ -16,12 +16,27 @@
 
 @implementation ODNavigationController
 
++ (void)initialize
+{
+    UINavigationBar *navigationBar = [UINavigationBar appearance];
+    [navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"#ffd802" alpha:1]]
+                       forBarPosition:UIBarPositionAny
+                           barMetrics:UIBarMetricsDefault];
+    [navigationBar setShadowImage:[UIImage new]];
+    navigationBar.translucent = YES;
+    navigationBar.hidden = YES;
+    NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
+    dictM[NSForegroundColorAttributeName] = [UIColor blackColor];
+    dictM[NSFontAttributeName] = [UIFont systemFontOfSize:17];
+    [navigationBar setTitleTextAttributes:dictM];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationBar.barTintColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     _touchDelegate = self.interactivePopGestureRecognizer.delegate;
     self.delegate = self;
+
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated

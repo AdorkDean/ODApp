@@ -18,17 +18,10 @@
 
 @implementation ODCenterPactureController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    
-    [self navigationInit];
-    
-    
-   
-    
-    
+    self.title = self.activityName;
 }
 
 
@@ -49,10 +42,6 @@
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
     
-    // 选择中心label
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 150) / 2, 28, 150, 20) text:self.activityName font:17 alignment:@"center" color:@"#000000" alpha:1];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
     
     
     // 返回button

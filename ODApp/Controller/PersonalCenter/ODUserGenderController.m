@@ -26,7 +26,7 @@
     
     self.openID = [ODUserInformation sharedODUserInformation].openID;
     
-     [self navigationInit];
+     [self setTitle:@"修改性别"];
      [self createView];
  
 }
@@ -40,12 +40,7 @@
     
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
-    
-    // 登陆label
-    UILabel *centerNameLabe = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width / 2 - 110, 28, 220, 20) text:@"修改性别" font:17 alignment:@"center" color:@"#000000" alpha:1];
-    
-    centerNameLabe.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:centerNameLabe];
+
     
     // 返回button
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];

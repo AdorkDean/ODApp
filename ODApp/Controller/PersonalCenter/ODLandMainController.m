@@ -43,12 +43,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     if (![ODUserInformation sharedODUserInformation].openID.length)
         return;
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self navigationInit];
     
     
 }
@@ -102,16 +99,6 @@
 
 
 #pragma mark - 初始化
-
--(void)navigationInit
-{
-    
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.hidden = YES;
-    
-}
-
 -(void)createCollectionView
 {
     
