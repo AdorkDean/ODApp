@@ -286,14 +286,14 @@
     [self.rollPictureView.cycleSecrollerView setImageURLStringsGroup:self.pictureArray];
     [self.rollPictureView.cycleSecrollerView setTitlesGroup:self.titleArray];
     
-    [self.rollPictureView.lazyButton addTarget:self action:@selector(lazyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    [self.rollPictureView.chatButton addTarget:self action:@selector(chatButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.rollPictureView.activityButton addTarget:self action:@selector(activityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.rollPictureView.placeButton addTarget:self action:@selector(placeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.rollPictureView.lazyButton addTarget:self action:@selector(lazyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    
+//    [self.rollPictureView.chatButton addTarget:self action:@selector(chatButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [self.rollPictureView.activityButton addTarget:self action:@selector(activityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    [self.rollPictureView.placeButton addTarget:self action:@selector(placeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     return self.rollPictureView;
 }

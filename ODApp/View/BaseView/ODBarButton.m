@@ -9,12 +9,20 @@
 #import "ODBarButton.h"
 
 @implementation ODBarButton
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    if (self = [super initWithFrame:frame])
+    {
+        self.titleLabel.font = [UIFont systemFontOfSize:16];
+    }
+    return self;
+}
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
 
-    [self.imageView sizeToFit];
+    [self.imageView setOd_size:CGSizeMake(20, 20)];
     [self.titleLabel sizeToFit];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     
