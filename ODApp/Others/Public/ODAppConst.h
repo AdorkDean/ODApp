@@ -8,14 +8,14 @@ UIKIT_EXTERN CGFloat const ODTabBarHeight;
 
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
-UIKIT_EXTERN NSString *const KUserDefaultsOpenId; 
+UIKIT_EXTERN NSString * const KUserDefaultsOpenId;
 
 #pragma mark - 通知
 /** 显示集市的通知 */
-UIKIT_EXTERN NSString *const ODNotificationShowBazaar;
+UIKIT_EXTERN NSString * const ODNotificationShowBazaar;
 
 /** 刷新我的话题通知 */
-UIKIT_EXTERN NSString *const ODNotificationMyTaskRefresh;
+UIKIT_EXTERN NSString * const ODNotificationMyTaskRefresh;
 
 
 #pragma mark - 请求URL接口 

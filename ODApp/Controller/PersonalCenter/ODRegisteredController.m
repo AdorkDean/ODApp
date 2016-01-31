@@ -30,17 +30,13 @@
 
 @implementation ODRegisteredController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-     [self navigationInit];
+    self.navigationItem.title = @"账号注册";
     [self createTimer];
-        
-     self.seePassWord = NO;
-    
-     self.currentTime = 60;
-    
+    self.seePassWord = NO;
+    self.currentTime = 60;
 }
 
 
@@ -62,9 +58,6 @@
     [self.view addSubview:self.headView];
     
     // 选择中心label
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:@"账号注册" font:17 alignment:@"center" color:@"#000000" alpha:1];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
     
     // 返回button
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];

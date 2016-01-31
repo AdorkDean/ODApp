@@ -5,7 +5,7 @@
 //  Created by Odong-YG on 15/12/17.
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
-
+#import "ODNavigationController.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODTabBarController.h"
 #import "ODHomeFoundViewController.h"
@@ -38,24 +38,20 @@
     self.pageNumber = 0;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    [self navigationInit];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
+    self.navigationItem.title = @"登陆";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(registered:) color:nil highColor:nil title:@"注册"];
     
     self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
     self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
     self.returnKeyHandler.toolbarManageBehaviour = IQAutoToolbarBySubviews;
-    
-    
-    
-    
 }
 
 
--(void)loadView
+- (void)loadView
 {
-    
     self.view = self.landView;
-    
 }
 
 
@@ -64,41 +60,6 @@
     [super viewWillDisappear:animated];
     self.pageNumber = 0;
 }
-
-
-#pragma mark - 初始化
-
-
--(void)navigationInit
-{
-    self.view.userInteractionEnabled = YES;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
-    self.navigationController.navigationBar.hidden = YES;
-    
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    // 登陆label
-    UILabel *centerNameLabe = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width / 2 - 110, 28, 220, 20) text:@"登陆" font:17 alignment:@"center" color:@"#000000" alpha:1];
-    
-    centerNameLabe.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:centerNameLabe];
-    
-    // 注册button
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 60, 16,50, 44) target:self sel:@selector(registered:) tag:0 image:nil title:@"注册" font:16];
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    [self.headView addSubview:confirmButton];
-    
-    // 返回button
-    
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backAction:) tag:0 image:nil title:@"返回" font:16];
-    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    
-    [self.headView addSubview:backButton];
-    
-}
-
 
 - (void)createTableView
 {
@@ -158,17 +119,14 @@
 
 - (void)backAction:(UIButton *)sender
 {
-    ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    tabBar.selectedIndex = tabBar.currentIndex;
-    
+    self.tabBarController.selectedIndex = ((ODTabBarController *)self.tabBarController).currentIndex;
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 
 
 - (void)forgetPassawordAction:(UIButton *)sender
 {
-    
+
     ODChangePassWordController *vc = [[ODChangePassWordController alloc] init];
     
     vc.topTitle = @"忘记密码";

@@ -21,6 +21,7 @@
 {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"首页";
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.pictureArray = [[NSMutableArray alloc] init];
     self.titleArray = [[NSMutableArray alloc] init];
@@ -28,8 +29,6 @@
     
     self.dataArray = [[NSMutableArray alloc] init];
     userInfoDic = [NSMutableDictionary dictionary];
-    
-    [self navigationInit];
     
     [self createCollectionView];
     
@@ -49,21 +48,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
     [self getHotThemeRequest];
-}
-
-#pragma mark - 初始化导航
--(void)navigationInit
-{
-   
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:@"首页" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
 }
 
 - (void)getHotThemeRequest
@@ -341,17 +326,4 @@
     
     return CGSizeMake(0, 0);
 }
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    
-    [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.hidden = NO;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end

@@ -74,7 +74,7 @@
     
     
     
-    [self navigationInit];
+    self.navigationItem.title = @"中心活动";
     [self createCollectionView];
     
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -90,20 +90,6 @@
 #pragma mark - 初始化
 -(void)navigationInit
 {
-    
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    self.view.userInteractionEnabled = YES;
-    self.headView.userInteractionEnabled = YES;
-    [self.view addSubview:self.headView];
-    
-    // 中心活动label
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:@"中心活动" font:17 alignment:@"center" color:@"#000000" alpha:1];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
-    
-    
     // 场地预约button
     
     UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 100, 16,90, 44) target:self sel:@selector(rightClick:) tag:0 image:nil title:@"场地预约" font:16];

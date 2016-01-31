@@ -23,7 +23,7 @@
     
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self navigationInit];
+    self.navigationItem.title = @"欧动社区";
     [self createKeyWordView];
     [self createRequest];
     [self joiningTogetherParmeters];
@@ -56,10 +56,6 @@
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
     
-    //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"欧动社区" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
     
     //发布任务按钮
 
@@ -289,15 +285,12 @@
         [self.collectionView.mj_header beginRefreshing];
     }
     
-    self.navigationController.navigationBar.hidden = YES;
-    
 }
 #pragma mark - 试图将要消失
 -(void)viewWillDisappear:(BOOL)animated
 {
     self.refresh = @"";
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.hidden = NO;
 }
 
 - (void)didReceiveMemoryWarning {

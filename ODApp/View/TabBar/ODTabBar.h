@@ -17,10 +17,6 @@
 
 @interface ODTabBar : UITabBar
 /**
- *  tabBarItems
- */
-@property (nonatomic, strong) NSArray *tabBarItems;
-/**
  *  代理
  */
 @property(nonatomic, weak) id <ODTabBarDelegate> od_delegate;

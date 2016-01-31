@@ -80,7 +80,8 @@
     if (selectIndex == 4 && [ODUserInformation sharedODUserInformation].openID.length == 0)
     {
         self.selectedIndex = self.currentIndex;
-        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
+        ODPersonalCenterViewController *perVC = [[ODPersonalCenterViewController alloc] init];
+        ODNavigationController *vc = [[ODNavigationController alloc]initWithRootViewController:perVC];
         [self presentViewController:vc animated:YES completion:nil];
     }
     else

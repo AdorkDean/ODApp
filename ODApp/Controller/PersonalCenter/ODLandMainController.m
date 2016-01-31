@@ -43,14 +43,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     if (![ODUserInformation sharedODUserInformation].openID.length)
         return;
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self navigationInit];
-    
-    
+    self.navigationItem.title = @"登录个人中心";
+    self.navigationController.navigationBarHidden = YES;
 }
 
 #pragma mark - lifeCycle
@@ -102,16 +99,6 @@
 
 
 #pragma mark - 初始化
-
--(void)navigationInit
-{
-    
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.hidden = YES;
-    
-}
-
 -(void)createCollectionView
 {
     

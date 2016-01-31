@@ -20,7 +20,7 @@
     __weakSelf
     self.count = 1;
     self.view.backgroundColor = [UIColor whiteColor];
-    [self navigationInit];
+    self.navigationItem.title = @"话题详情";
     [self createReplyButton];
     [self createRequest];
     [self joiningTogetherParmetersWithUserInfo:YES];
@@ -51,10 +51,7 @@
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
     
-    //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"话题详情" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
+
     
     //返回按钮
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
@@ -522,7 +519,6 @@
         
         [self joiningTogetherParmetersWithUserInfo:NO];
     }
-    self.navigationController.navigationBar.hidden = YES;
 }
 
 -(void)viewDidDisappear:(BOOL)animated

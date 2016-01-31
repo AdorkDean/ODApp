@@ -86,7 +86,7 @@
     self.eimeStr = @"";
     self.yearStr = @"";
     self.start_datetime = @"";
-    [self navigationInit];
+    self.navigationItem.title = @"场地预约";
     [self createTableView];
     
     
@@ -101,7 +101,6 @@
     self.dateStr = @"";
     self.timeStr = @"";
     self.yearStr = @"";
-    self.navigationController.navigationBar.hidden = YES;
 }
 
 
@@ -116,9 +115,6 @@
     [self.view addSubview:self.headView];
     
     // 中心活动label
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:@"场地预约" font:17 alignment:@"center" color:@"#000000" alpha:1];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
     
     
     // 返回button
