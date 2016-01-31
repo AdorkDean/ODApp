@@ -26,7 +26,6 @@
 #import "ODPersonalCenterViewController.h"
 #import "ODTabBarController.h"
 #import "ODCollectionController.h"
-#import "ODContactAddressController.h"
 #import "ODOrderController.h"
 @interface ODCenterActivityViewController ()<UIScrollViewDelegate ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , SDCycleScrollViewDelegate>
 
@@ -332,7 +331,7 @@
 //        
 //    }
     
-    ODOrderController *vc = [[ODOrderController alloc] init];
+    ODCollectionController *vc = [[ODCollectionController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
     
     

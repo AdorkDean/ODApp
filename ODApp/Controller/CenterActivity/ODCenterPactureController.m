@@ -10,9 +10,6 @@
 #import "ODTabBarController.h"
 @interface ODCenterPactureController ()
 
-
-
-
 @end
 
 @implementation ODCenterPactureController
@@ -31,6 +28,5 @@
     [self.view addSubview:web];
     [web loadRequest:request];
 }
-
 
 @end

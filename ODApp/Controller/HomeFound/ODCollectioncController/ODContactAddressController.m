@@ -46,7 +46,7 @@
 {
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 , kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0 , kScreenSize.width, kScreenSize.height - 50) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
 
@@ -120,7 +120,7 @@
     if (section == 0) {
         return 1;
     }else{
-        return 2;
+        return 3;
     }
 }
 

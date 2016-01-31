@@ -7,17 +7,17 @@
 //
 
 #import "ODOrderController.h"
-#import "ODOrderView.h"
 #import "ODOrderCell.h"
 #import "ODContactAddressController.h"
+#import "ODOrderHeadView.h"
 @interface ODOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
-@property (nonatomic , strong) ODOrderView *orderView;
+
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property (nonatomic , strong) UILabel *amountLabel;
-
+@property (nonatomic ,strong) ODOrderHeadView *headView;
 
 @end
 
@@ -29,7 +29,6 @@
     
     
     [self navigationInit];
-    [self createView];
     [self createCollectionView];
 
     
@@ -40,43 +39,25 @@
 #pragma mark - 初始化
 -(void)navigationInit
 {
-    
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.view.userInteractionEnabled = YES;
     self.navigationItem.title = @"提交订单";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
     
     
-    
 }
 
-- (void)createView
-{
-    
-    self.orderView = [ODOrderView getView];
-    self.orderView.frame = CGRectMake(0, 64, kScreenSize.width, 190);
-    [self.view addSubview:self.orderView];
-    
-    
-    
-    UITapGestureRecognizer *addressTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addressAction)];
-    [self.orderView.addressImgeView addGestureRecognizer:addressTap];
-    
-    
-    
-}
 
 #pragma mark - 初始化
 -(void)createCollectionView
 {
-    
-    
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 220 + 64, kScreenSize.width, kScreenSize.height - 220 - 64) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - 50) collectionViewLayout:self.flowLayout];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    
+    [self.collectionView registerClass:[ODOrderHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
+
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODOrderCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.view addSubview:self.collectionView];
     
@@ -131,6 +112,22 @@
     
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    self.headView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+    
+    UITapGestureRecognizer *addressTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addressAction)];
+    [self.headView.orderView.addressImgeView addGestureRecognizer:addressTap];
+   
+    
+    return self.headView;
+    
+}
+
+
+
 
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -159,7 +156,7 @@
 //动态设置区头的高度(根据不同的分区)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(0, 0);
+    return CGSizeMake(kScreenSize.width, 200);
     
 }
 //动态设置区尾的高度(根据不同的分区)

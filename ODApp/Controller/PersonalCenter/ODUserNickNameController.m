@@ -129,12 +129,6 @@
     return YES;
 }
 
--(void)fanhui:(UIButton *)sender
-{
-        
-    [self.navigationController popViewControllerAnimated:YES];
-    
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

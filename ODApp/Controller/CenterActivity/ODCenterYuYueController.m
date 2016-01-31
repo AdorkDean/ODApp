@@ -88,7 +88,7 @@
     self.navigationItem.title = @"场地预约";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
     [self createTableView];
-    
+    [self navigationInit];
     
     self.openId = [ODUserInformation sharedODUserInformation].openID;
     
@@ -103,9 +103,20 @@
     self.yearStr = @"";
 }
 
+#pragma mark - 初始化
+-(void)navigationInit
+{
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.view.userInteractionEnabled = YES;
+    self.navigationItem.title = @"场地预约";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
+    
+    
+    
+}
 - (void)createTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     
     self.tableView.dataSource = self;
@@ -200,8 +211,6 @@
 - (void)getData
 {
     
-    
-    NSLog(@"____%@" , self.start_datetime);
     
     self.timeManager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"store_id":self.storeId , @"start_datetime":self.start_datetime};

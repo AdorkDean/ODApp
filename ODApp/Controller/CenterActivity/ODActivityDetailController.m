@@ -41,7 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"中心活动";
+    [self navigationInit];
     [self getData];
     self.openId = [ODUserInformation sharedODUserInformation].openID;
 }
@@ -166,11 +166,18 @@
     
 }
 
+#pragma mark - 初始化
+-(void)navigationInit
+{    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.view.userInteractionEnabled = YES;
+    self.navigationItem.title = @"中心活动";
+}
 - (void)creatView
 {
     
     
-    self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)];
+    self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
     self.scroller.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.scroller.userInteractionEnabled = YES;
     self.activityDetailView = [ActivityDetailView getView];
