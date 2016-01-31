@@ -72,6 +72,9 @@
 - (void)saveAddress{
     
     
+  
+    
+    
     self.manager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters = @{@"tel":self.addAddressView.phoneTextField.text , @"address":self.addAddressView.addressTextField.text,@"name":self.addAddressView.nameTextField.text , @"is_default":self.is_default, @"open_id":self.open_id};
@@ -86,7 +89,11 @@
         [weakSelf.navigationController popViewControllerAnimated:YES];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"保存成功"];
            
-           }
+           
+        }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
+            
+      [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];            
+        }
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

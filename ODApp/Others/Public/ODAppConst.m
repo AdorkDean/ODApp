@@ -59,3 +59,5 @@ NSString * const kCancelMyOrderUrl = @"http://woquapi.test.odong.com/1.0/store/c
 NSString * const kOthersInformationUrl = @"http://woquapi.test.odong.com/1.0/user/info";
 NSString * const kSaveAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/add";
 NSString * const kGetAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/list";
+NSString * const kDeleteAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/del";
+

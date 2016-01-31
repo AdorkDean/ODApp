@@ -25,6 +25,7 @@
 		9DC05DFA1C5DF66000181DFE /* ODOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC05DF81C5DF66000181DFE /* ODOrderCell.m */; };
 		9DC05DFB1C5DF66000181DFE /* ODOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC05DF91C5DF66000181DFE /* ODOrderCell.xib */; };
 		9DC05DFE1C5E054100181DFE /* ODOrderHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC05DFD1C5E054100181DFE /* ODOrderHeadView.m */; };
+		9DC05E011C5E31CE00181DFE /* ODAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC05E001C5E31CE00181DFE /* ODAddressModel.m */; };
 		9DD00BDB1C4E397E00F0EE5F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDA1C4E397E00F0EE5F /* Security.framework */; };
 		9DD00BDD1C4E398B00F0EE5F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */; };
 		9DD00BDF1C4E399700F0EE5F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */; };
@@ -530,6 +531,8 @@
 		9DC05DF91C5DF66000181DFE /* ODOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODOrderCell.xib; sourceTree = "<group>"; };
 		9DC05DFC1C5E054100181DFE /* ODOrderHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderHeadView.h; sourceTree = "<group>"; };
 		9DC05DFD1C5E054100181DFE /* ODOrderHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderHeadView.m; sourceTree = "<group>"; };
+		9DC05DFF1C5E31CE00181DFE /* ODAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAddressModel.h; sourceTree = "<group>"; };
+		9DC05E001C5E31CE00181DFE /* ODAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAddressModel.m; sourceTree = "<group>"; };
 		9DD00BDA1C4E397E00F0EE5F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1220,6 +1223,8 @@
 				9DC05DF91C5DF66000181DFE /* ODOrderCell.xib */,
 				9DC05DFC1C5E054100181DFE /* ODOrderHeadView.h */,
 				9DC05DFD1C5E054100181DFE /* ODOrderHeadView.m */,
+				9DC05DFF1C5E31CE00181DFE /* ODAddressModel.h */,
+				9DC05E001C5E31CE00181DFE /* ODAddressModel.m */,
 			);
 			path = ODCollectioncController;
 			sourceTree = "<group>";
@@ -2946,7 +2951,6 @@
 				D4D074491C59B9FA008527C9 /* 任务攻略图文详情图三@2x.png in Resources */,
 				D4D073BB1C59B9FA008527C9 /* 场地预约4@3x.png in Resources */,
 				D4D074761C59B9FA008527C9 /* icon_circle_small@2x.png in Resources */,
-				D4D0747C1C59B9FA008527C9 /* icon_community_default@2x.png in Resources */,
 				C64D40C11C5E2D06003BFFA0 /* Skills profile page_share@2x.png in Resources */,
 				D4D073B21C59B9FA008527C9 /* 中心详情页icon@3x.png in Resources */,
 				D4D074871C59B9FA008527C9 /* icon_gesture@1x.png in Resources */,
@@ -2974,7 +2978,6 @@
 				D4D073FC1C59B9FA008527C9 /* 中心活动icon默认态@2x.png in Resources */,
 				D4D073DA1C59B9FA008527C9 /* 任务详情页分享icon@1x.png in Resources */,
 				C64D40BB1C5E2D06003BFFA0 /* Skills profile page_icon_Not certified@2x.png in Resources */,
-				D4D074AA1C59B9FA008527C9 /* icon_Personal Center_Selected@3x.png in Resources */,
 				D4D074B11C59B9FA008527C9 /* icon_Skill_small@1x.png in Resources */,
 				C64D40AF1C5E2D06003BFFA0 /* Skills profile page_icon_arrow_upper@2x.png in Resources */,
 				D4D073D21C59B9FA008527C9 /* 话题详情-回复icon@2x.png in Resources */,
@@ -3006,7 +3009,6 @@
 				D4D073B41C59B9FA008527C9 /* 中心预约icon@2x.png in Resources */,
 				D4D0741A1C59B9FA008527C9 /* 标签栏大按钮@3x.png in Resources */,
 				D4D0742C1C59B9FA008527C9 /* 首页发现icon默认态@3x.png in Resources */,
-				D4D074921C59B9FA008527C9 /* icon_home-find_Selected@3x.png in Resources */,
 				C64D40BF1C5E2D06003BFFA0 /* Skills profile page_icon_share@3x.png in Resources */,
 				D4D073C21C59B9FA008527C9 /* 场地预约icon2@1x.png in Resources */,
 				C64D40AE1C5E2D06003BFFA0 /* Skills profile page_icon_arrow_upper@1x.png in Resources */,
@@ -3182,8 +3184,6 @@
 				D4D074C31C59B9FA008527C9 /* 首页-约场地icon@1x.png in Resources */,
 				D4D074101C59B9FA008527C9 /* 标签中端按钮部分@2x.png in Resources */,
 				C64D40C21C5E2D06003BFFA0 /* Skills profile page_share@3x.png in Resources */,
-				D4D074A71C59B9FA008527C9 /* icon_Personal Center_default@3x.png in Resources */,
-				D4D0747B1C59B9FA008527C9 /* icon_community_default@1x.png in Resources */,
 				D4D074FA1C59B9FA008527C9 /* ODCommunityDetailCell.xib in Resources */,
 				D4D074C21C59B9FA008527C9 /* 首页-找活动icon@3x.png in Resources */,
 				D4D074771C59B9FA008527C9 /* icon_circle_small@3x.png in Resources */,
@@ -3210,7 +3210,6 @@
 				D4D074091C59B9FA008527C9 /* 发布任务icon@3x.png in Resources */,
 				D4D074BA1C59B9FA008527C9 /* 首页-去偷懒icon@1x.png in Resources */,
 				D4D074521C59B9FA008527C9 /* button_beautiful@2x.png in Resources */,
-				D4D0748D1C59B9FA008527C9 /* icon_home-find_default@1x.png in Resources */,
 				C64D40B21C5E2D06003BFFA0 /* Skills profile page_icon_Collection@2x.png in Resources */,
 				D4D074531C59B9FA008527C9 /* button_beautiful@3x.png in Resources */,
 				D4D074BB1C59B9FA008527C9 /* 首页-去偷懒icon@2x.png in Resources */,
@@ -3244,7 +3243,6 @@
 				D4D0751D1C59B9FA008527C9 /* ODTaskCell.xib in Resources */,
 				D4D075191C59B9FA008527C9 /* ODLandSecondCell.xib in Resources */,
 				D4D074B01C59B9FA008527C9 /* icon_Skill_big@3x.png in Resources */,
-				D4D074A61C59B9FA008527C9 /* icon_Personal Center_default@2x.png in Resources */,
 				C64D40B71C5E2D06003BFFA0 /* Skills profile page_icon_More right@1x.png in Resources */,
 				D4D074BF1C59B9FA008527C9 /* 首页-去版聊icon@3x.png in Resources */,
 			);
@@ -3450,6 +3448,7 @@
 				D4D073821C59B9FA008527C9 /* ODCenterIntroduceController.m in Sources */,
 				D4D073781C59B9FA008527C9 /* ODCenterDetailController.m in Sources */,
 				D4D0738D1C59B9FA008527C9 /* ODMyTopicController.m in Sources */,
+				9DC05E011C5E31CE00181DFE /* ODAddressModel.m in Sources */,
 				D4D075491C59BBEE008527C9 /* ODAppConst.m in Sources */,
 				9DC05DFA1C5DF66000181DFE /* ODOrderCell.m in Sources */,
 				D4D073A51C59B9FA008527C9 /* NSURL+ODExtension.m in Sources */,
