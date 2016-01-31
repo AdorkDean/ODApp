@@ -15,7 +15,6 @@
 @interface ODContactAddressController ()<UITableViewDataSource , UITableViewDelegate>
 
 
-@property (nonatomic , strong) UILabel *centerNameLabe;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic , copy) NSString *open_id;
@@ -23,18 +22,15 @@
 
 @implementation ODContactAddressController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationItem.title = @"联系地址";
     
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
 
-      [self navigationInit];
       [self createTableView];
       [self getData];
-      
-    
-    
 }
 
 - (void)getData
@@ -71,23 +67,6 @@
     }];
     
 
-}
-
-
-
-
-#pragma mark - 初始化
-
--(void)navigationInit
-{
-    
-       
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    self.view.userInteractionEnabled = YES;
-    self.navigationItem.title = @"联系地址";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
-    
-    
 }
 
 - (void)createTableView
@@ -136,11 +115,6 @@
 {
     ODAddAddressController *vc = [[ODAddAddressController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)fanhui:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - tableViewDelegate

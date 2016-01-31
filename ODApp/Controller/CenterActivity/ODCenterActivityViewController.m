@@ -29,7 +29,6 @@
 #import "ODOrderController.h"
 @interface ODCenterActivityViewController ()<UIScrollViewDelegate ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , SDCycleScrollViewDelegate>
 
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property (nonatomic, strong) ODActivityHeadView *firstHeader;
@@ -91,10 +90,7 @@
 -(void)navigationInit
 {
     self.navigationItem.title = @"中心活动";
-    
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonImageLeft target:self action:@selector(rightClick:) image:[UIImage imageNamed:@"场地预约icon"] highImage:nil textColor:nil highColor:nil title:@"场地预约"];
-    
-    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeImageLeft target:self action:@selector(rightClick:) image:[UIImage imageNamed:@"场地预约icon"] highImage:nil textColor:nil highColor:nil title:@"场地预约"];
 }
 
 

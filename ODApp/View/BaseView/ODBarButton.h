@@ -10,15 +10,15 @@
 
 typedef NS_ENUM(NSInteger, ODBarButtonType) {
     /** 默认 */
-    ODBarButtonDefault = 0,
+    ODBarButtonTypeDefault = 0,
     /** 图左文右 */
-    ODBarButtonImageUp = 1,
+    ODBarButtonTypeImageUp = 1,
     /** 图上文下 */
-    ODBarButtonImageLeft = 2,
+    ODBarButtonTypeImageLeft = 2,
     /** 文上图下 */
-    ODBarButtonTextUp = 3,
+    ODBarButtonTypeTextUp = 3,
     /** 文左图右 */
-    ODBarButtonTextLeft = 4
+    ODBarButtonTypeTextLeft = 4
 };
 @interface ODBarButton : UIButton
 
@@ -26,5 +26,7 @@ typedef NS_ENUM(NSInteger, ODBarButtonType) {
  *  按钮类型
  */
 @property(nonatomic, assign) ODBarButtonType barButtonType;
+
+- (void)setTarget:(id)target action:(SEL)action title:(NSString *)title;
 
 @end

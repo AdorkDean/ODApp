@@ -40,22 +40,11 @@ int pageNumnber = 0;
 
 @implementation ODCenterDetailController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self navigationInit];
-    [self getData];
- 
-}
-
-
-#pragma mark - 初始化
--(void)navigationInit
+- (void)viewDidLoad
 {
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    self.view.userInteractionEnabled = YES;
+    [super viewDidLoad];
     self.navigationItem.title = @"中心详情";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
-    
+    [self getData];
 }
 
 #pragma mark - lifeCycle
@@ -97,12 +86,6 @@ int pageNumnber = 0;
 
     }
   }
-
-
--(void)fanhui:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 - (void)phoneAction:(UITapGestureRecognizer *)sender
 {

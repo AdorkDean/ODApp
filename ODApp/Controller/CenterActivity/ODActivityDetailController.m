@@ -20,7 +20,6 @@
 @interface ODActivityDetailController ()<UITableViewDelegate , UIWebViewDelegate>
 
 
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) ActivityDetailView *activityDetailView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
@@ -170,17 +169,10 @@
 #pragma mark - 初始化
 -(void)navigationInit
 {    
-  
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.view.userInteractionEnabled = YES;
     self.navigationItem.title = @"中心活动";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
-
-    
-    
-    
 }
-
 - (void)creatView
 {
     
@@ -297,11 +289,6 @@
 {
     [self saveData];
   
-}
-
--(void)fanhui:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)addressAction:(UITapGestureRecognizer *)sender

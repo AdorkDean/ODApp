@@ -10,7 +10,6 @@
 #import "ODCollectionCell.h"
 @interface ODCollectionController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UILabel *centerNameLabe;
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
@@ -19,42 +18,17 @@
 
 @implementation ODCollectionController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self createCollectionView];
     
-    
-      [self navigationInit];
-      [self createCollectionView];
-    
-    
-}
-
-#pragma mark - 初始化
-
--(void)navigationInit
-{
-    
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    self.view.userInteractionEnabled = YES;
     self.navigationItem.title = @"TA们收藏过";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
-    
-    
-    
-}
-
-
-- (void)fanhui:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 初始化
 -(void)createCollectionView
 {
-    
-    
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height) collectionViewLayout:self.flowLayout];
     self.collectionView.backgroundColor = [UIColor whiteColor];
@@ -63,10 +37,6 @@
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.view addSubview:self.collectionView];
-    
-    
-    
-    
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -137,22 +107,5 @@
 {
     return CGSizeMake(0, 0);
 }
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

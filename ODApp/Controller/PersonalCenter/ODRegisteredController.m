@@ -5,7 +5,7 @@
 //  Created by zhz on 16/1/4.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
-
+#import "ODNavigationBarView.h"
 #import "ODRegisteredController.h"
 #import "ODRegisteredView.h"
 #import "AFNetworking.h"
@@ -15,7 +15,6 @@
 
 @interface ODRegisteredController ()<UITextFieldDelegate>
 
-@property(nonatomic , strong) UIView *headView;
 @property(nonatomic , strong) ODRegisteredView *registView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *managers;
@@ -33,7 +32,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"账号注册";
+    [self navigationInit];
     [self createTimer];
     self.seePassWord = NO;
     self.currentTime = 60;
@@ -42,30 +41,18 @@
 
 - (void)loadView
 {
-    
-    [super loadView];
     self.view = self.registView;
 }
 
 
 #pragma mark - 初始化
-
--(void)navigationInit
+- (void)navigationInit
 {
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    // 选择中心label
-    
-    // 返回button
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:confirmButton];
-    
+    ODNavigationBarView *naviView = [ODNavigationBarView navigationBarView];
+    naviView.title = @"账号注册";
+    [naviView.leftBarButton setTarget:self action:@selector(fanhui:) title:@"返回"];
+    naviView.rightBarButton = nil;
+    [self.view addSubview:naviView];
 }
 
 -(void)createTimer

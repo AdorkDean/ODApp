@@ -20,8 +20,6 @@
 
 @property (nonatomic, copy) NSString *open_id;
 
-@property (nonatomic, strong) UIView *headView;
-
 @property (nonatomic, strong) UIScrollView *scrollView;
 
 @property (nonatomic, strong) UILabel *checkLabel;

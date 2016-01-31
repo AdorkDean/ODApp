@@ -16,7 +16,6 @@
 
 @interface ODCenterYuYueController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate , UITextFieldDelegate , UIPickerViewDataSource , UIPickerViewDelegate>
 
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) CenterYuYueView *yuYueView;
 
@@ -86,6 +85,8 @@
     self.eimeStr = @"";
     self.yearStr = @"";
     self.start_datetime = @"";
+    self.navigationItem.title = @"场地预约";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
     [self createTableView];
     [self navigationInit];
     
@@ -102,7 +103,6 @@
     self.yearStr = @"";
 }
 
-
 #pragma mark - 初始化
 -(void)navigationInit
 {
@@ -114,8 +114,6 @@
     
     
 }
-
-
 - (void)createTableView
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height) style:UITableViewStylePlain];

@@ -18,24 +18,22 @@
     [super viewDidLoad];
     
     self.count = 1;
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"欧动集市";
     self.automaticallyAdjustsScrollViewInsets = NO;
-
+    [self navigationInit];
     [self createSearchBar];
     [self createRequest];
     [self createCollectionView];
-    
+    __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        if (self.searchBar.text.length>0) {
-            [self joiningTogetherParmeters];
+        if (weakSelf.searchBar.text.length>0) {
+            [weakSelf joiningTogetherParmeters];
         }else{
-            [self.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_header endRefreshing];
         }
     }];
     
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [self loadMoreData];
+        [weakSelf loadMoreData];
     }];
     
 }
@@ -57,24 +55,9 @@
 
 #pragma mark - 初始化导航
 -(void)navigationInit
-{
-     //取消按钮
-    UIButton *cancelButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(cancelButtonClick:) tag:0 image:nil title:@"取消" font:16];
-    cancelButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [cancelButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    [self.headView addSubview:cancelButton];
-    
-    //确认按钮
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 16, 60, 44) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:16];
-    confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    [self.headView addSubview:confirmButton];
-
-}
-
--(void)cancelButtonClick:(UIButton *)button
-{
-    [self.navigationController popViewControllerAnimated:YES];
+{    
+    self.navigationItem.title = @"欧动集市";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
 }
 
 -(void)confirmButtonClick:(UIButton *)button
@@ -96,8 +79,7 @@
     self.searchBar.backgroundColor = [UIColor clearColor];
     self.searchBar.delegate = self;
     self.searchBar.placeholder = @"标签关键字";
-    [self.headView addSubview:self.searchBar];
-    
+    self.navigationItem.titleView = self.searchBar;
 }
 
 

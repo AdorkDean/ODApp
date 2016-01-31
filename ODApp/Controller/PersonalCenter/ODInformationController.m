@@ -21,7 +21,6 @@
 
 @interface ODInformationController ()<UITableViewDataSource , UITableViewDelegate ,UIImagePickerControllerDelegate , UIActionSheetDelegate , UINavigationControllerDelegate>
 
-@property (nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , strong) ODInformationView *informationView;
@@ -87,26 +86,6 @@
 }
 
 
-
-#pragma mark - 初始化
--(void)navigationInit
-{
-    self.view.userInteractionEnabled = YES;
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-
-    
-    
-
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:confirmButton];
-    
-}
 
 - (void)createTableView
 {
@@ -198,14 +177,6 @@
 }
 
 #pragma mark - 点击事件
-
--(void)fanhui:(UIButton *)sender
-{
-    
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)signatureAction
 {
     

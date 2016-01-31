@@ -27,7 +27,6 @@
 @property(nonatomic,strong)NSMutableArray *picArray;
 @property(nonatomic,strong)NSArray *applys;
 @property(nonatomic,strong)UIScrollView *scrollView;
-@property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UIView *userView;
 @property(nonatomic,strong)UIView *taskTopView;
 @property(nonatomic,strong)UIView *taskBottomView;

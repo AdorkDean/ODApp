@@ -27,19 +27,18 @@
     }];
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationItem.title = @"欧动集市";
+    [self navigationInit];
     [self createScreeningAndSearchButton];
     [self createRequest];
     [self createCollectionView];
     self.status = @"9";
     [self joiningTogetherParmeters];
-    
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self joiningTogetherParmeters];
+        [weakSelf joiningTogetherParmeters];
     }];
     
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [self loadMoreData];
+        [weakSelf loadMoreData];
     }];
 
 }
@@ -55,14 +54,8 @@
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
-    //发布任务按钮
-    UIButton *releaseButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 110, 16,95, 44) target:self sel:@selector(releaseButtonClick:) tag:0 image:nil title:@"发布任务" font:16];
-    [releaseButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    releaseButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
-    [self.headView addSubview:releaseButton];
-    
-    UIImageView *releaseImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, 12, 20, 20) imageName:@"发布任务icon" tag:0];
-    [releaseButton addSubview:releaseImageView];
+    self.navigationItem.title = @"欧动集市";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(releaseButtonClick:) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil textColor:nil highColor:nil title:@"发布任务"];
 }
 
 -(void)releaseButtonClick:(UIButton *)button

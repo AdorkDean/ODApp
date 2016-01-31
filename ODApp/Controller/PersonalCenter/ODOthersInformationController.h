@@ -37,8 +37,6 @@
 
 @property (nonatomic, strong) ODUserModel *model;
 
-@property (nonatomic, strong) UIView *headView;
-
 @property (nonatomic, assign) BOOL isOther;
 
 @end

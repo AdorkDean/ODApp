@@ -23,7 +23,6 @@
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)NSMutableArray *userArray;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic,strong)UIView *headView;
 @property(nonatomic)NSInteger count;
 @property(nonatomic,copy)NSString *refresh;
 @property(nonatomic,copy)NSString *open_id;
