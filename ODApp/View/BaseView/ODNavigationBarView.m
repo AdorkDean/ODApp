@@ -15,16 +15,14 @@
     if (self = [super initWithFrame:frame])
     {
         self.backgroundColor = [UIColor colorWithHexString:@"ffd802" alpha:1];
-        // 注册button
+        // 左边button
+        ODBarButton *leftBtn = [ODBarButton buttonWithType:UIButtonTypeCustom];
+        [self addSubview:leftBtn];
+        self.leftBarButton = leftBtn;
+        // 右边button
         ODBarButton *rightBtn = [ODBarButton buttonWithType:UIButtonTypeCustom];
-        rightBtn.frame = CGRectMake(kScreenSize.width - 60, 16,50, 44);
         [self addSubview:rightBtn];
         self.rightBarButton = rightBtn;
-        // 返回button
-        ODBarButton *backButton = [ODBarButton buttonWithType:UIButtonTypeCustom];
-        backButton.frame = CGRectMake(17.5, 16,44, 44);
-        [self addSubview:backButton];
-        self.leftBarButton = backButton;
     }
     return self;
 }
@@ -32,6 +30,18 @@
 + (instancetype)navigationBarView
 {
     return [[self alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, ODNavigationHeight)];
+}
+
+- (void)setLeftBarButton:(ODBarButton *)leftBarButton
+{
+    _leftBarButton = leftBarButton;
+    _leftBarButton.frame = CGRectMake(17.5, (self.od_height - leftBarButton.od_height ) / 2 - 10,leftBarButton.od_width, leftBarButton.od_height);
+}
+
+- (void)setRightBarButton:(ODBarButton *)rightBarButton
+{
+    _rightBarButton = rightBarButton;
+    _rightBarButton.frame = CGRectMake(kScreenSize.width - 60,(self.od_height - rightBarButton.od_height ) / 2,rightBarButton.od_width, rightBarButton.od_height);
 }
 
 - (void)setTitle:(NSString *)title

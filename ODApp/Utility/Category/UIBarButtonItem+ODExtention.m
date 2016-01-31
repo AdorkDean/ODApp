@@ -11,7 +11,7 @@
 @implementation UIBarButtonItem (ODExtention)
 + (instancetype)OD_itemWithTarget:(id)target action:(SEL)action image:(UIImage *)image highImage:(UIImage *)highImage
 {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    ODBarButton *button = [ODBarButton buttonWithType:UIButtonTypeCustom];
     [button setImage:image forState:UIControlStateNormal];
     [button setImage:highImage ? highImage : image forState:UIControlStateHighlighted];
     [button sizeToFit];
@@ -21,7 +21,7 @@
 
 + (instancetype)OD_itemWithTarget:(id)target action:(SEL)action color:(UIColor *)color highColor:(UIColor *)highColor title:(NSString *)title
 {
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    ODBarButton *button = [ODBarButton buttonWithType:UIButtonTypeCustom];
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:color ? color : [UIColor blackColor] forState:UIControlStateNormal];
     [button setTitleColor:highColor ? highColor : [UIColor blackColor] forState:UIControlStateHighlighted];
