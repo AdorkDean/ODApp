@@ -55,3 +55,5 @@ UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
 UIKIT_EXTERN NSString * const kMyApplyActivityUrl;
 UIKIT_EXTERN NSString * const kCancelMyOrderUrl;
 UIKIT_EXTERN NSString * const kOthersInformationUrl;
+UIKIT_EXTERN NSString * const kSaveAddressUrl;
+UIKIT_EXTERN NSString * const kGetAddressUrl;

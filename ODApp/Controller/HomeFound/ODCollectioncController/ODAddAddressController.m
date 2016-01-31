@@ -8,13 +8,18 @@
 
 #import "ODAddAddressController.h"
 #import "ODAddAddressView.h"
+#import "AFNetworking.h"
+#import "ODAPIManager.h"
+
 @interface ODAddAddressController ()
 
-@property(nonatomic , strong) UIView *headView;
+
 @property (nonatomic , strong) UILabel *centerNameLabe;
 @property (nonatomic , strong) ODAddAddressView *addAddressView;
 @property (nonatomic , assign) BOOL isdefault;
-
+@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property (nonatomic , copy) NSString *open_id;
+@property (nonatomic , copy) NSString *is_default;
 @end
 
 @implementation ODAddAddressController
@@ -24,6 +29,11 @@
     // Do any additional setup after loading the view.
     
     self.isdefault = YES;
+    self.is_default = @"0";
+    self.open_id = [ODUserInformation sharedODUserInformation].openID;
+    
+    
+  
     
     [self navigationInit];
     [self createView];
@@ -67,8 +77,45 @@
 
 - (void)saveAction:(UIButton *)sender
 {
+    [self saveAddress];
+}
+
+- (void)saveAddress{
+    
+    
+    self.manager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"tel":self.addAddressView.phoneTextField.text , @"address":self.addAddressView.addressTextField.text,@"name":self.addAddressView.nameTextField.text , @"is_default":self.is_default, @"open_id":self.open_id};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    __weak typeof (self)weakSelf = self;
+    [self.manager GET:kSaveAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+        
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"保存成功"];
+           
+           }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+      
+        
+        
+        
+        
+        
+        
+    }];
+
+    
+    
     
 }
+
 
 
 - (void)defaultAction:(UIButton *)sender
@@ -76,9 +123,10 @@
     
     if (self.isdefault) {
         [self.addAddressView.defaultButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
+       self.is_default = @"1";
     }else{
         [self.addAddressView.defaultButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-        
+        self.is_default = @"0";
     }
     self.isdefault = !self.isdefault;
 
