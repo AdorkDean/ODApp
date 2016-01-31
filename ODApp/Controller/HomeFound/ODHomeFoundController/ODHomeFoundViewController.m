@@ -22,7 +22,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"首页";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"上海"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"上海"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.pictureArray = [[NSMutableArray alloc] init];
     self.titleArray = [[NSMutableArray alloc] init];

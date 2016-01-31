@@ -15,7 +15,6 @@
 #import "ODTabBarController.h"
 @interface ODUserEvaluationController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
@@ -146,35 +145,6 @@
         
     }];
   
-}
-
-
-#pragma mark - 初始化
--(void)navigationInit
-{
-    self.view.userInteractionEnabled = YES;
-    self.navigationController.navigationBar.hidden = YES;
-    
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    // 返回button
-
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backAction:) tag:0 image:nil title:@"返回" font:16];
-    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:backButton];
- 
-}
-
-#pragma mark - 点击事件
-
-- (void)backAction:(UIButton *)sender
-{
-   
-   [self.navigationController popViewControllerAnimated:YES];
-
 }
 
 #pragma mark - UICollectionViewDelegate

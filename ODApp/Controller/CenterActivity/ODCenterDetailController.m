@@ -26,35 +26,25 @@ int pageNumnber = 0;
 
 @interface ODCenterDetailController ()<UITableViewDataSource , UITableViewDelegate>
 
-
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) ODCenderDetailView *centerDetailView;
-
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *managers;
 @property(nonatomic,strong)CenterDetailModel *model;
-
 @property(nonatomic,strong)UIPageControl *pageControl;
-
-
 @property (nonatomic , strong) UILabel *centerNameLabe;
-
 @property(nonatomic,strong) NSTimer *myTimer;
-
-@property(nonatomic,strong) NSMutableArray *dataArray;
-
-
 
 
 @end
 
 @implementation ODCenterDetailController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    [self getData];
     self.navigationItem.title = @"中心详情";
+    [self getData];
 }
 
 #pragma mark - lifeCycle
@@ -86,12 +76,9 @@ int pageNumnber = 0;
         [self presentViewController:vc animated:YES completion:nil];
         
         
-        
-        
     }else{
+        
         ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
-        
-        
         vc.centerName = self.model.name;
         vc.storeId = self.storeId;
         vc.phoneNumber = self.centerDetailView.phoneLabel.text;
@@ -100,24 +87,14 @@ int pageNumnber = 0;
     }
   }
 
-
--(void)fanhui:(UIButton *)sender
-{
-  
-    
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)phoneAction:(UITapGestureRecognizer *)sender
 {
         
-    NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.centerDetailView.phoneLabel.text];
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.centerDetailView.phoneLabel.text];
     
-    UIWebView * callWebview = [[UIWebView alloc] init];
+    UIWebView *callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
     [self.view addSubview:callWebview];
-    
-    
     
     
 }
@@ -133,10 +110,7 @@ int pageNumnber = 0;
     vc.webUrl = webUrl;
     vc.activityName = self.model.name;
     [self.navigationController pushViewController:vc animated:YES];
-    
-    
-    
-    
+     
 }
 
 
@@ -169,9 +143,6 @@ int pageNumnber = 0;
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    
-    
-    
     NSDictionary *parameter = @{@"store_id":self.storeId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
@@ -199,22 +170,14 @@ int pageNumnber = 0;
 
 
 #pragma mark - 初始化
-
 - (void)createTableView
 {
-    
-    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0 , kScreenSize.width, kScreenSize.height) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = self.centerDetailView;
-    
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-   
-    [self.tableView registerNib:[UINib nibWithNibName:@"CenterDetailCell" bundle:nil] forCellReuseIdentifier:@"item"];
-    
     [self.view addSubview:self.tableView];
     
     
@@ -324,15 +287,12 @@ int pageNumnber = 0;
 #pragma mark - UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-     CenterDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:@"item" forIndexPath:indexPath];
-
+    NSString *cellID = @"cellId";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
+    }
     
-    CenterActivityModel *model = self.dataArray[indexPath.section];
-    
-    cell.model = model;
-    
-    
-      
     
     return cell;
 }
@@ -340,26 +300,17 @@ int pageNumnber = 0;
 
 
 
--(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 0;
-}
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 135;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
     return 0;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

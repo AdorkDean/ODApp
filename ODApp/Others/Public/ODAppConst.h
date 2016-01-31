@@ -3,7 +3,7 @@
 #pragma mark - UI相关常量
 /** TabBar的高度 */
 UIKIT_EXTERN CGFloat const ODTabBarHeight;
-
+UIKIT_EXTERN CGFloat const ODNavigationHeight;
 
 
 #pragma mark - 通用的Key

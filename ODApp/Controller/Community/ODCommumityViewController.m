@@ -23,7 +23,7 @@
     
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationItem.title = @"欧动社区";
+    [self navigationInit];
     [self createKeyWordView];
     [self createRequest];
     [self joiningTogetherParmeters];
@@ -52,22 +52,10 @@
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    
-    //发布任务按钮
-
-    UIButton *publishButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 110, 16,95, 44) target:self sel:@selector(publishButtonClick:) tag:0 image:nil title:@"发表话题" font:16];
-    [publishButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    publishButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
-    [self.headView addSubview:publishButton];
-    
-    UIImageView *publishImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, 12, 20, 20) imageName:@"发布任务icon" tag:0];
-    [publishButton addSubview:publishImageView];
-}
+    self.navigationItem.title = @"欧动社区";
+   //发布任务按钮
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(publishButtonClick:) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil textColor:nil highColor:nil title:@"发表话题"];
+ }
 
 -(void)publishButtonClick:(UIButton *)button
 {

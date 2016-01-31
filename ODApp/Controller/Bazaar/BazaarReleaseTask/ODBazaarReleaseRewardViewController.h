@@ -14,7 +14,6 @@
 
 @interface ODBazaarReleaseRewardViewController : ODBaseViewController<UICollectionViewDataSource,UICollectionViewDelegate,UITextFieldDelegate>
 
-@property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UILabel *taskRewardLabel;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)NSMutableArray *dataArray;

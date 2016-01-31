@@ -12,7 +12,6 @@
 
 @interface ODUserGenderController ()
 
-@property (nonatomic , strong) UIView *headView;
 @property(nonatomic,strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong) AFHTTPRequestOperationManager *managers;
 @property(nonatomic,copy) NSString *openID;
@@ -30,27 +29,6 @@
      [self createView];
  
 }
-#pragma mark - 初始化
--(void)navigationInit
-{
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.view.userInteractionEnabled = YES;
-    self.navigationController.navigationBar.hidden = YES;
-    
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-
-    
-    // 返回button
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:backButton];
-   
-}
-
 
 - (void)createView
 {
@@ -161,29 +139,5 @@
         
     }];
 }
-
-
--(void)fanhui:(UIButton *)sender
-{
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

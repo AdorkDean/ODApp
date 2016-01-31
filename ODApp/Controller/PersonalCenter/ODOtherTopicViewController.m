@@ -23,13 +23,13 @@
     [self createRequest];
     [self joiningTogetherParmeters];
     [self createCollectionView];
-    
+    __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self joiningTogetherParmeters];
+        [weakSelf joiningTogetherParmeters];
     }];
     
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [self loadMoreData];
+        [weakSelf loadMoreData];
     }];
 
 }
@@ -43,26 +43,6 @@
     [self downLoadDataWithUrl:kHomeFoundListUrl paramater:signParameter];
 }
 
-
-
-#pragma mark - 初始化导航
--(void)navigationInit
-{
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-       //取消按钮
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 32,35, 20) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    [self.headView addSubview:backButton];
-    
-}
-
--(void)backButtonClick:(UIButton *)button
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 #pragma mark - 初始化manager
 -(void)createRequest

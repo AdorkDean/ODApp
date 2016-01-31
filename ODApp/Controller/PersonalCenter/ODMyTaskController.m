@@ -19,7 +19,6 @@
 #import "ODOthersInformationController.h"
 @interface ODMyTaskController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
-@property(nonatomic , strong) UIView *headView;
 @property(nonatomic , strong) ODTypeView *typeView;
 @property (nonatomic , strong) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) UIScrollView * scrollView;
@@ -67,8 +66,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.FirstDataArray = [NSMutableArray array];
     self.secondDataArray = [NSMutableArray array];
-    
-    self.navigationItem.title = @"我的任务";
+    [self navigationInit];
     [self creatSegment];
     [self creatScroller];
     
@@ -111,34 +109,10 @@
     
 }
 
-
-
-#pragma mark - 初始化
-
 -(void)navigationInit
 {
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.view.userInteractionEnabled = YES;
-    
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-
-    
-    
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:confirmButton];
-    
-    
-    self.allTaskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 100, 16,90, 44) target:self sel:@selector(typeAction:) tag:0 image:nil title:@"全部任务V" font:16];
-    
-    self.allTaskButton.tintColor= [UIColor blackColor];
-    
-    [self.headView addSubview:self.allTaskButton];
-    
+    self.navigationItem.title = @"我的任务";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"全部任务V"];
 }
 
 
@@ -288,11 +262,6 @@
     
     self.showType = !self.showType;
     
-}
-
--(void)fanhui:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)deleteAction:(UIButton *)sender

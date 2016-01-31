@@ -11,7 +11,6 @@
 #import "ODAddAddressController.h"
 @interface ODContactAddressController ()<UITableViewDataSource , UITableViewDelegate>
 
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UILabel *centerNameLabe;
 @property (nonatomic , strong) UITableView *tableView;
 
@@ -19,52 +18,18 @@
 
 @implementation ODContactAddressController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-      [self navigationInit];
-      [self createTableView];
-    
-    
-}
-
-#pragma mark - 初始化
-
--(void)navigationInit
+- (void)viewDidLoad
 {
-    
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    self.view.userInteractionEnabled = YES;
-    self.navigationController.navigationBar.hidden = YES;
-    
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    // 中心活动label
-    self.centerNameLabe = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width / 2 - 110, 28, 220, 20) text:@"联系地址" font:17 alignment:@"center" color:@"#000000" alpha:1];
-    
-    self.centerNameLabe.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:self.centerNameLabe];
-    
-    
-    // 返回button
-    UIButton *fanhuiButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    fanhuiButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [fanhuiButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    
-    [self.headView addSubview:fanhuiButton];
-    
-    
-    
-    
+    [super viewDidLoad];
+    self.navigationItem.title = @"联系地址";
+    [self createTableView];
 }
 
 - (void)createTableView
 {
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 , kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0 , kScreenSize.width, kScreenSize.height - 50) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
 
@@ -108,11 +73,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)fanhui:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 #pragma mark - tableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -138,7 +98,7 @@
     if (section == 0) {
         return 1;
     }else{
-        return 2;
+        return 3;
     }
 }
 

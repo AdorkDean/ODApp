@@ -25,17 +25,6 @@
     [self createRequest];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
-}
-
-- (void)backButtonClick:(UIButton *)button{
-
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 - (void)createRequest{
 
     self.manager = [AFHTTPRequestOperationManager manager];

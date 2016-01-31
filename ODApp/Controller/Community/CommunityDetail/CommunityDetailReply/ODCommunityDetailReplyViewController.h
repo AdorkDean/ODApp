@@ -14,7 +14,6 @@
 
 @interface ODCommunityDetailReplyViewController : ODBaseViewController<UITextViewDelegate>
 
-@property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UITextView *textView;
 @property(nonatomic,strong)UILabel *label;
 @property(nonatomic,copy)NSString *bbs_id;

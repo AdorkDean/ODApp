@@ -22,7 +22,7 @@ static NSString *const ODSkillDetailReusableVIEW = @"ODSkillDetailReusableView";
     self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6" alpha:1];
     
     self.navigationItem.title = self.personTitle;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonImageLeft) target:self action:@selector(backClick:) image:nil highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"返回"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(backClick:) image:nil highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"返回"];
     
     [self createSkillDetailView];
     [self creatPayView];

@@ -10,12 +10,20 @@
 
 @implementation ODOrderView
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
++(instancetype)getView
+{
+    ODOrderView *view =  [[[NSBundle mainBundle] loadNibNamed:@"ODOrderView" owner:nil options:nil] firstObject];
+    
+    
+    view.userInteractionEnabled = YES;
+    view.lineLabel.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    
+    
+    return view;
+    
+    
+    
+    
 }
-*/
 
 @end
