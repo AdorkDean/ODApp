@@ -47,7 +47,7 @@
 {
     ODNavigationBarView *navigationView = [ODNavigationBarView navigationBarView];
     navigationView.title = self.topTitle;
-    [navigationView.leftBarButton setTarget:self action:@selector(fanhui:) title:@"返回"];
+    navigationView.leftBarButton = [ODBarButton barButtonWithTarget:self action:@selector(fanhui:) title:@"返回"];
     [self.view addSubview:navigationView];
 }
 
