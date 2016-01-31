@@ -18,28 +18,11 @@
 
 @implementation ODContactAddressController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-      [self navigationInit];
-      [self createTableView];
-    
-    
-}
-
-#pragma mark - 初始化
-
--(void)navigationInit
+- (void)viewDidLoad
 {
-    
-       
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    self.view.userInteractionEnabled = YES;
+    [super viewDidLoad];
     self.navigationItem.title = @"联系地址";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
-    
-    
+    [self createTableView];
 }
 
 - (void)createTableView
@@ -88,11 +71,6 @@
 {
     ODAddAddressController *vc = [[ODAddAddressController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)fanhui:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - tableViewDelegate

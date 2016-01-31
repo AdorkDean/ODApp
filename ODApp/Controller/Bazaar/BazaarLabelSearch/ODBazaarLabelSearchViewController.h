@@ -22,7 +22,6 @@
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UISearchBar *searchBar;
 @property(nonatomic)NSInteger count;
 @property (nonatomic, strong) UILabel *noReusltLabel;

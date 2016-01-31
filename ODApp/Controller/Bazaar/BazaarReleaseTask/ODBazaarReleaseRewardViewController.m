@@ -42,11 +42,6 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
 }
 
--(void)backButtonClick:(UIButton *)button
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 -(void)confirmButtonClick:(UIButton *)button
 {
     if (self.taskRewardBlock) {

@@ -20,7 +20,6 @@
 
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)UIScrollView *scrollView;
-@property(nonatomic,strong)UIView *headView;
 @property(nonatomic,strong)UITextView *titleTextView;
 @property(nonatomic,strong)UILabel *titleLabel;
 @property(nonatomic,strong)UITextView *taskDetailTextView;

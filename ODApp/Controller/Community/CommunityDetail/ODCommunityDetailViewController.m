@@ -23,6 +23,7 @@
     self.navigationItem.title = @"话题详情";
     [self createReplyButton];
     [self createRequest];
+    [self navigationItem];
     [self joiningTogetherParmetersWithUserInfo:YES];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -47,29 +48,8 @@
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-
-    
-    //返回按钮
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:backButton];
-    
-    //分享按钮
-    UIButton *shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:nil font:0];
-    UIImageView *shareImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width-37.5, 28, 20, 20) imageName:@"话题详情-分享icon" tag:0];
-    [self.headView addSubview:shareImageView];
-    [self.headView addSubview:shareButton];
-}
-
--(void)backButtonClick:(UIButton *)button
-{
-    [self.navigationController popViewControllerAnimated:YES];
+    self.navigationItem.title = @"话题详情";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick:) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
 }
 
 

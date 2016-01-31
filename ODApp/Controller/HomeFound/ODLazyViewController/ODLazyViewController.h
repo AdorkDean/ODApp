@@ -17,8 +17,6 @@
 
 @interface ODLazyViewController : ODBaseViewController<UIScrollViewDelegate>
 
-@property (nonatomic, strong)UIView *headView;
-
 @property (nonatomic, strong)UIScrollView *scrollView;
 
 @property (nonatomic)BOOL isJob;

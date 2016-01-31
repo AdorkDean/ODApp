@@ -21,7 +21,6 @@
 
 @interface ODPersonalCenterViewController ()<UITableViewDataSource , UITableViewDelegate>
 
-@property (nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) ODlandingView *landView;
 @property (nonatomic, strong) IQKeyboardReturnKeyHandler *returnKeyHandler;

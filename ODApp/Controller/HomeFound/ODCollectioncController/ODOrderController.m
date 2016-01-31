@@ -23,30 +23,12 @@
 
 @implementation ODOrderController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    
-    [self navigationInit];
-    [self createCollectionView];
-
-    
-    
-    
-}
-
-#pragma mark - 初始化
--(void)navigationInit
+- (void)viewDidLoad
 {
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    self.view.userInteractionEnabled = YES;
+    [super viewDidLoad];
     self.navigationItem.title = @"提交订单";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
-    
-    
+    [self createCollectionView];
 }
-
 
 #pragma mark - 初始化
 -(void)createCollectionView
@@ -167,31 +149,9 @@
 
 - (void)addressAction
 {
-    
     ODContactAddressController *vc = [[ODContactAddressController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
-
-- (void)fanhui:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

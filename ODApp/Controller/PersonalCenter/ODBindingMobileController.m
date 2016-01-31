@@ -13,7 +13,6 @@
 @interface ODBindingMobileController ()
 
 @property (nonatomic , strong) ODBindingMobileView *bindMobileView;
-@property (nonatomic , strong) UIView *headView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *managers;
 //定时器
@@ -42,18 +41,6 @@
     self.currentTime = 60;
 
      self.openId = [ODUserInformation sharedODUserInformation].openID;
-    
-}
-
-#pragma mark - 初始化导航
--(void)navigationInit
-{
-    // 返回button
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:backButton];
     
 }
 

@@ -24,7 +24,6 @@
 @interface ODCommunityDetailViewController : ODBaseViewController<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UIScrollView *scrollView;
-@property(nonatomic,strong)UIView *headView;
 @property(nonatomic,copy)NSString *bbs_id;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)NSMutableArray *resultArray;

@@ -18,7 +18,6 @@
 
 @interface ODCenterIntroduceController : ODBaseViewController
 
-@property (nonatomic, strong) UIView *headView;
 @property (nonatomic, strong) UIWebView *webView;
 
 @property (nonatomic, strong)NSString *activityTitle;

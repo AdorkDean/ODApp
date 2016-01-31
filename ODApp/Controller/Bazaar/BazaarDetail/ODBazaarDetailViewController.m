@@ -30,11 +30,6 @@
 #warning 需要更改。。。改完请删除注释。。
 -(void)navigationInit
 {
-     //返回按钮
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    
     //分享按钮
     if ([self.task_status_name isEqualToString:@"过期"]&& [[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
          self.shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-61.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:@"删除" font:16];
@@ -43,12 +38,6 @@
         self.shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:nil font:0];
         UIImageView *shareImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width-37.5, 28, 20, 20) imageName:@"话题详情-分享icon" tag:0];
     }
-}
-
--(void)backButtonClick:(UIButton *)button
-{
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)shareButtonClick:(UIButton *)button

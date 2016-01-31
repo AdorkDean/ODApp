@@ -25,8 +25,6 @@
 
 @property (nonatomic, copy) NSString *open_id;
 
-@property (nonatomic, strong) UIView *headView;
-
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
