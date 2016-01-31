@@ -13,7 +13,7 @@
 {
     if (self = [super initWithFrame:frame])
     {
-        self.titleLabel.font = [UIFont systemFontOfSize:16];
+        self.titleLabel.font = [UIFont systemFontOfSize:13.5];
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     return self;
@@ -23,7 +23,7 @@
 {
     [super layoutSubviews];
 
-    [self.imageView setOd_size:CGSizeMake(20, 20)];
+    [self.imageView sizeToFit];
     [self.titleLabel sizeToFit];
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     
