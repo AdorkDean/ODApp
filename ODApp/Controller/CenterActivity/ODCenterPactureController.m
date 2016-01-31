@@ -10,9 +10,6 @@
 #import "ODTabBarController.h"
 @interface ODCenterPactureController ()
 
-@property(nonatomic , strong) UIView *headView;
-
-
 
 @end
 
@@ -21,9 +18,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = self.activityName;
+    [self navigationInit];
+  
 }
 
+#pragma mark - 初始化导航
+-(void)navigationInit
+{
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.view.userInteractionEnabled = YES;
+    self.navigationItem.title = self.activityName;
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
+    
+    
+    
+    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0,0, kScreenSize.width, kScreenSize.height)];
+    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:self.webUrl]];
+    [self.view addSubview:web];
+    [web loadRequest:request];
+    
+    
+    
+    
+}
 
 
 - (void)fanhui:(UIButton *)sender
@@ -34,34 +51,6 @@
 
 
 
-#pragma mark - 初始化导航
--(void)navigationInit
-{
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    
-    
-    // 返回button
-
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:confirmButton];
-    
-    
-    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)];
-    NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:self.webUrl]];
-    [self.view addSubview:web];
-    [web loadRequest:request];
-
-    
-  
-    
-}
 
 
 

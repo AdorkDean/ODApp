@@ -24,6 +24,7 @@
 		9DC05DF61C5DEE4400181DFE /* ODOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC05DF51C5DEE4400181DFE /* ODOrderView.xib */; };
 		9DC05DFA1C5DF66000181DFE /* ODOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC05DF81C5DF66000181DFE /* ODOrderCell.m */; };
 		9DC05DFB1C5DF66000181DFE /* ODOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC05DF91C5DF66000181DFE /* ODOrderCell.xib */; };
+		9DC05DFE1C5E054100181DFE /* ODOrderHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC05DFD1C5E054100181DFE /* ODOrderHeadView.m */; };
 		9DD00BDB1C4E397E00F0EE5F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDA1C4E397E00F0EE5F /* Security.framework */; };
 		9DD00BDD1C4E398B00F0EE5F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */; };
 		9DD00BDF1C4E399700F0EE5F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */; };
@@ -535,6 +536,8 @@
 		9DC05DF71C5DF66000181DFE /* ODOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderCell.h; sourceTree = "<group>"; };
 		9DC05DF81C5DF66000181DFE /* ODOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderCell.m; sourceTree = "<group>"; };
 		9DC05DF91C5DF66000181DFE /* ODOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODOrderCell.xib; sourceTree = "<group>"; };
+		9DC05DFC1C5E054100181DFE /* ODOrderHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderHeadView.h; sourceTree = "<group>"; };
+		9DC05DFD1C5E054100181DFE /* ODOrderHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderHeadView.m; sourceTree = "<group>"; };
 		9DD00BDA1C4E397E00F0EE5F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1228,6 +1231,8 @@
 				9DC05DF71C5DF66000181DFE /* ODOrderCell.h */,
 				9DC05DF81C5DF66000181DFE /* ODOrderCell.m */,
 				9DC05DF91C5DF66000181DFE /* ODOrderCell.xib */,
+				9DC05DFC1C5E054100181DFE /* ODOrderHeadView.h */,
+				9DC05DFD1C5E054100181DFE /* ODOrderHeadView.m */,
 			);
 			path = ODCollectioncController;
 			sourceTree = "<group>";
@@ -3350,6 +3355,7 @@
 				D4D074DC1C59B9FA008527C9 /* TAAbstractDotView.m in Sources */,
 				D4D0755E1C5DED01008527C9 /* ODBarButton.m in Sources */,
 				D4D074DA1C59B9FA008527C9 /* MBProgressHUD.m in Sources */,
+				9DC05DFE1C5E054100181DFE /* ODOrderHeadView.m in Sources */,
 				D4D0738B1C59B9FA008527C9 /* ODMyOrderRecordController.m in Sources */,
 				D4D074F21C59B9FA008527C9 /* ODHttpTool.m in Sources */,
 				D4D073921C59B9FA008527C9 /* ODRegisteredController.m in Sources */,

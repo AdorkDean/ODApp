@@ -26,7 +26,6 @@
 #import "ODPersonalCenterViewController.h"
 #import "ODTabBarController.h"
 #import "ODCollectionController.h"
-#import "ODContactAddressController.h"
 #import "ODOrderController.h"
 @interface ODCenterActivityViewController ()<UIScrollViewDelegate ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , SDCycleScrollViewDelegate>
 
@@ -92,13 +91,9 @@
 -(void)navigationInit
 {
     self.navigationItem.title = @"中心活动";
-//    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(rightClick:) color:nil highColor:nil title:@"场地预约"];
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonImageLeft target:self action:@selector(rightClick:) image:[UIImage imageNamed:@"场地预约icon"] highImage:nil textColor:nil highColor:nil title:@"场地预约"];
     
-    
-//    UIImageView *releaseImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, 14, 17, 17) imageName:@"场地预约icon@3x" tag:0];
-
     
 }
 
@@ -340,7 +335,7 @@
 //        
 //    }
     
-    ODOrderController *vc = [[ODOrderController alloc] init];
+    ODCollectionController *vc = [[ODCollectionController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
     
     

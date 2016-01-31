@@ -38,28 +38,11 @@
 {
     
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    self.navigationController.navigationBar.hidden = YES;
     self.view.userInteractionEnabled = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    // 中心活动label
-    self.centerNameLabe = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width / 2 - 110, 28, 220, 20) text:@"新增地址" font:17 alignment:@"center" color:@"#000000" alpha:1];
-    
-    self.centerNameLabe.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:self.centerNameLabe];
-    
-    
-    // 返回button
-    UIButton *fanhuiButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    fanhuiButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [fanhuiButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    
-    [self.headView addSubview:fanhuiButton];
-    
-    UIButton *saveButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 60, 16,50, 44) target:self sel:@selector(saveAction:) tag:0 image:nil title:@"保存" font:16];
-    [saveButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    [self.headView addSubview:saveButton];
+    self.navigationItem.title = @"新增地址";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(saveAction:) color:nil highColor:nil title:@"保存"];
+
 
     
     

@@ -16,6 +16,8 @@
     
     
     view.userInteractionEnabled = YES;
+    view.lineLabel.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    
     
     return view;
     
