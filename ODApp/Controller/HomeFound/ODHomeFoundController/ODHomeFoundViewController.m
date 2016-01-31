@@ -22,6 +22,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"首页";
+//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem o]
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.pictureArray = [[NSMutableArray alloc] init];
     self.titleArray = [[NSMutableArray alloc] init];
@@ -50,6 +51,17 @@
     [super viewWillAppear:animated];
     [self getHotThemeRequest];
 }
+
+//- (void)crateLocationButton
+//{
+//
+//    UIButton *locationButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 35, 50, 20) target:self sel:@selector(locationButtonClick:) tag:0 image:@"" title:nil font:0];
+//    UIImageView *locationImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(8, 35, 9, 12) imageName:@"icon_location" tag:0];
+//    self.locationLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(CGRectGetMaxX(locationImageView.frame) + 3, 30, 40, 20) text:@"全国" font:12 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
+//    self.locationLabel.userInteractionEnabled = NO;
+//
+//    
+//}
 
 - (void)getHotThemeRequest
 {
@@ -166,29 +178,21 @@
     }];
 }
 
-- (void)lazyButtonClick:(UIButton *)button
-{
-    ODLazyViewController *vc = [[ODLazyViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
 
-- (void)chatButtonClick:(UIButton *)button
-{
-    self.tabBarController.selectedIndex = 3;
-}
 
-- (void)activityButtonClick:(UIButton *)button
+- (void)findActivityButtonClick:(UIButton *)button
 {
+
     self.tabBarController.selectedIndex = 1;
 }
 
-- (void)placeButtonClick:(UIButton *)button
+- (void)orderPlaceButtonClick:(UIButton *)button
 {
-
+    
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
-
+        
     }else{
         ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
         
@@ -196,9 +200,101 @@
         vc.phoneNumber = @"13524776010";
         vc.storeId = @"1";
         [self.navigationController pushViewController:vc animated:YES];
-
-    }    
+        
+    }
 }
+
+- (void)findFavorableButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)findJobButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)searchCircleButtonClick:(UIButton *)button
+{
+    
+    self.tabBarController.selectedIndex = 3;
+}
+
+- (void)searchHelpButtonClick:(UIButton *)button
+{
+    
+    self.tabBarController.selectedIndex = 2;
+}
+
+- (void)changeSkillButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)moreButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)emotionButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)funnyButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)moviesButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)quadraticButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)lifeButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)starButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)beautifulButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)petButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)gestureButtonClick:(UIButton *)button
+{
+    
+    [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"加入更多"];
+}
+
+
 
 - (void)createCollectionView
 {
@@ -286,14 +382,27 @@
     [self.rollPictureView.cycleSecrollerView setImageURLStringsGroup:self.pictureArray];
     [self.rollPictureView.cycleSecrollerView setTitlesGroup:self.titleArray];
     
-//    [self.rollPictureView.lazyButton addTarget:self action:@selector(lazyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    
-//    [self.rollPictureView.chatButton addTarget:self action:@selector(chatButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [self.rollPictureView.activityButton addTarget:self action:@selector(activityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    [self.rollPictureView.placeButton addTarget:self action:@selector(placeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.findActivityButton addTarget:self action:@selector(findActivityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.orderPlaceButton addTarget:self action:@selector(orderPlaceButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.findFavorableButton addTarget:self action:@selector(findFavorableButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.findJobButton addTarget:self action:@selector(findJobButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.rollPictureView.searchCircleButton addTarget:self action:@selector(searchCircleButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.searchHelpButton addTarget:self action:@selector(searchHelpButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.changeSkillButton addTarget:self action:@selector(changeSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.rollPictureView.emotionButton addTarget:self action:@selector(emotionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.funnyButton addTarget:self action:@selector(funnyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.moviesButton addTarget:self action:@selector(moviesButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.quadraticButton addTarget:self action:@selector(quadraticButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.rollPictureView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.beautifulButton addTarget:self action:@selector(beautifulButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.petButton addTarget:self action:@selector(petButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.rollPictureView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     return self.rollPictureView;
 }
@@ -318,7 +427,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     
-    return CGSizeMake(0, 64 + kScreenSize.height / 4.4 + 195 / 2 + 24);
+    return CGSizeMake(0, 1 + CGRectGetMaxY(self.rollPictureView.changeSkillView.frame));
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
