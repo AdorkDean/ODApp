@@ -331,7 +331,7 @@
 //        
 //    }
     
-    ODCollectionController *vc = [[ODCollectionController alloc] init];
+    ODOrderController *vc = [[ODOrderController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
     
     
