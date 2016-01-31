@@ -54,7 +54,6 @@
     self.view = self.landView;
 }
 
-
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
