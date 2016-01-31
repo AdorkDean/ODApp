@@ -22,7 +22,7 @@
     
     self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     
-    [self navigationInit];
+    self.navigationItem.title = @"去偷懒";
     [self createJobButton];
     [self createScrollView];
 }
@@ -35,9 +35,6 @@
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3  "];
     [self.view addSubview:self.headView];
     
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:@"去偷懒" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
 
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16, 44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
     backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -129,11 +126,6 @@
         vc.isBazaar = NO;
         [self.navigationController pushViewController:vc animated:YES];
     }    
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
 }
 
 - (void)viewWillDisappear:(BOOL)animated

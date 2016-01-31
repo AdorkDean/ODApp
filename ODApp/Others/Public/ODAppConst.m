@@ -1,14 +1,25 @@
 #import <UIKit/UIKit.h>
 
+#pragma mark - UI相关常量
 /** TabBar的高度 */
 CGFloat const ODTabBarHeight = 55;
 
+
+
+#pragma mark - 通用的Key
+/** 偏好设置保存用户信息 */
+NSString *const KUserDefaultsOpenId = @"userOpenId";
+
+
+
+#pragma mark - 通知
 /** 显示集市的通知 */
 NSString *const ODNotificationShowBazaar = @"ODShowBazaarNotification";
 
 /** 刷新我的话题通知 */
 NSString *const ODNotificationMyTaskRefresh = @"ODNotificationMyTaskRefresh";
 
+#pragma mark - 请求URL接口
 /** 统一的URL */
 #ifdef DEBUG
 NSString * const ODCommonURL = @"http://woquapi.test.odong.com/";
@@ -16,7 +27,6 @@ NSString * const ODCommonURL = @"http://woquapi.test.odong.com/";
 NSString * const ODCommonURL = @"http://woquapi.test.odong.com/";
 #endif
 
-/********* 请求URL接口 **********/
 NSString * const kBazaarUnlimitTaskUrl = @"http://woquapi.test.odong.com/1.0/task/list";
 NSString * const kBazaarLabelSearchUrl = @"http://woquapi.test.odong.com/1.0/task/tag/search";
 NSString * const kBazaarReleaseTaskUrl = @"http://woquapi.test.odong.com/1.0/task/task/add";
@@ -33,6 +43,7 @@ NSString * const kCommunityBbsDetailUrl = @"http://woquapi.test.odong.com/1.0/bb
 NSString * const kCommunityBbsSearchUrl = @"http://woquapi.test.odong.com/1.0/bbs/search";
 NSString * const kCommunityBbsReplyListUrl = @"http://woquapi.test.odong.com/1.0/bbs/reply/list";
 NSString * const kCommunityBbsReplyUrl = @"http://woquapi.test.odong.com/1.0/bbs/reply";
+NSString * const kCommunityBbsLatestUrl = @"http://woquapi.test.odong.com/1.0/bbs/list";
 
 NSString * const kPushImageUrl = @"http://woquapi.test.odong.com/1.0/other/base64/upload";
 NSString * const kDeleteReplyUrl = @"http://woquapi.test.odong.com/1.0/bbs/del";

@@ -86,7 +86,7 @@
     self.eimeStr = @"";
     self.yearStr = @"";
     self.start_datetime = @"";
-    [self navigationInit];
+    self.navigationItem.title = @"场地预约";
     [self createTableView];
     
     
@@ -101,7 +101,6 @@
     self.dateStr = @"";
     self.timeStr = @"";
     self.yearStr = @"";
-    self.navigationController.navigationBar.hidden = YES;
 }
 
 
@@ -116,9 +115,6 @@
     [self.view addSubview:self.headView];
     
     // 中心活动label
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:@"场地预约" font:17 alignment:@"center" color:@"#000000" alpha:1];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
     
     
     // 返回button
@@ -803,7 +799,8 @@
         if ([textView.text isEqualToString:NSLocalizedString(@"输入活动目的", nil)]) {
             self.yuYueView.pursoseTextView.text=NSLocalizedString(@"", nil);
             self.yuYueView.pursoseTextView.textColor = [UIColor blackColor];
-        }else{
+        }        
+        else{
             ;
         }
 
@@ -816,6 +813,38 @@
         }
     }
 }
+
+NSString *pursoseText = @"";
+NSString *contentText = @"";
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView == self.yuYueView.pursoseTextView)
+    {
+        if (textView.text.length > 20)
+        {
+            textView.text = pursoseText;
+        }
+        else
+        {
+            pursoseText = textView.text;
+        }
+    }
+    else if (textView == self.yuYueView.contentTextView)
+    {
+        if (textView.text.length > 100)
+        {
+            textView.text = contentText;
+        }
+        else
+        {
+            contentText = textView.text;
+        }
+        
+        
+    }
+}
+
+
 
 
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text

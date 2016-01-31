@@ -43,14 +43,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     if (![ODUserInformation sharedODUserInformation].openID.length)
         return;
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self navigationInit];
-    
-    
+    self.navigationItem.title = @"登录个人中心";
+    self.navigationController.navigationBarHidden = YES;
 }
 
 #pragma mark - lifeCycle
@@ -102,16 +99,6 @@
 
 
 #pragma mark - 初始化
-
--(void)navigationInit
-{
-    
-    
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.hidden = YES;
-    
-}
-
 -(void)createCollectionView
 {
     
@@ -284,26 +271,18 @@
         
         
         
-        
-        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:url];
-        
-        
-        
-        
-        
+        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
         [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-        
         [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-        
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-        
         [UMSocialSnsService presentSnsIconSheetView:self
                                              appKey:@"569dda54e0f55a994f0021cf"
                                           shareText:content
                                          shareImage:nil
                                     shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
                                            delegate:self];
+      
         
         
         

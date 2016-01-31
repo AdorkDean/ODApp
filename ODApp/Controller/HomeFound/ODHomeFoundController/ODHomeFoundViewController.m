@@ -21,6 +21,7 @@
 {
     [super viewDidLoad];
     
+    self.navigationItem.title = @"首页";
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.pictureArray = [[NSMutableArray alloc] init];
     self.titleArray = [[NSMutableArray alloc] init];
@@ -28,8 +29,6 @@
     
     self.dataArray = [[NSMutableArray alloc] init];
     userInfoDic = [NSMutableDictionary dictionary];
-    
-    [self navigationInit];
     
     [self createCollectionView];
     
@@ -49,35 +48,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
     [self getHotThemeRequest];
-}
-
-#pragma mark - 初始化导航
--(void)navigationInit
-{
-   
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20) text:@"首页" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
-    
-    UIButton *locationButton = [ODClassMethod creatButtonWithFrame:CGRectMake(8, 30, 40, 20) target:self sel:@selector(locationButtonClick:) tag:0 image:nil title:@"" font:0];
-    UIImageView *locationImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(8, 34, 9, 11.5) imageName:@"icon_location" tag:0];
-    UILabel *locationLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(19, 30, 30, 20) text:@"全国" font:12 alignment:@"left" color:@"#000000" alpha:1];
-    [self.headView addSubview:locationButton];
-    [self.headView addSubview:locationImageView];
-    [self.headView addSubview:locationLabel];
-    
-}
-
-- (void)locationButtonClick:(UIButton *)button
-{
-
-    
 }
 
 - (void)getHotThemeRequest
@@ -127,7 +98,7 @@
         [weakSelf.collectionView.mj_header endRefreshing];
         
         [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
         
     }];
 }
@@ -195,14 +166,23 @@
     }];
 }
 
-
-- (void)findActivityButtonClick:(UIButton *)button
+- (void)lazyButtonClick:(UIButton *)button
 {
+    ODLazyViewController *vc = [[ODLazyViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
+- (void)chatButtonClick:(UIButton *)button
+{
+    self.tabBarController.selectedIndex = 3;
+}
+
+- (void)activityButtonClick:(UIButton *)button
+{
     self.tabBarController.selectedIndex = 1;
 }
 
-- (void)orderPlaceButtonClick:(UIButton *)button
+- (void)placeButtonClick:(UIButton *)button
 {
 
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
@@ -211,103 +191,13 @@
 
     }else{
         ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
-
+        
         vc.centerName = @"上海第二工业大学体验中心";
         vc.phoneNumber = @"13524776010";
         vc.storeId = @"1";
         [self.navigationController pushViewController:vc animated:YES];
 
-    }
-}
-
-- (void)findFavorableButtonClick:(UIButton *)button
-{
-    
-    
-}
-
-- (void)findJobButtonClick:(UIButton *)button
-{
-    
-    
-}
-
-- (void)searchCircleButtonClick:(UIButton *)button
-{
-    
-    self.tabBarController.selectedIndex = 3;
-}
-
-- (void)searchHelpButtonClick:(UIButton *)button
-{
-    
-    self.tabBarController.selectedIndex = 2;
-}
-
-- (void)changeSkillButtonClick:(UIButton *)button
-{
-    
-    
-}
-
-- (void)moreButtonClick:(UIButton *)button
-{
-    
-    
-}
-
-- (void)emotionButtonClick:(UIButton *)button
-{
-    
-    
-}
-
-- (void)funnyButtonClick:(UIButton *)button
-{
-    
-    
-}
-
-- (void)moviesButtonClick:(UIButton *)button
-{
-    
-    
-}
-
-- (void)quadraticButtonClick:(UIButton *)button
-{
-    
-    
-}
-
-- (void)lifeButtonClick:(UIButton *)button
-{
-    
-    
-}
-
-- (void)starButtonClick:(UIButton *)button
-{
-    
-    
-}
-
-- (void)beautifulButtonClick:(UIButton *)button
-{
-    
-    
-}
-
-- (void)petButtonClick:(UIButton *)button
-{
-    
-    
-}
-
-- (void)gestureButtonClick:(UIButton *)button
-{
-    
-    [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"加入更多"];
+    }    
 }
 
 - (void)createCollectionView
@@ -396,28 +286,14 @@
     [self.rollPictureView.cycleSecrollerView setImageURLStringsGroup:self.pictureArray];
     [self.rollPictureView.cycleSecrollerView setTitlesGroup:self.titleArray];
     
-    [self.rollPictureView.findActivityButton addTarget:self action:@selector(findActivityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.orderPlaceButton addTarget:self action:@selector(orderPlaceButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.findFavorableButton addTarget:self action:@selector(findFavorableButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.findJobButton addTarget:self action:@selector(findJobButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.lazyButton addTarget:self action:@selector(lazyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.rollPictureView.searchCircleButton addTarget:self action:@selector(searchCircleButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.searchHelpButton addTarget:self action:@selector(searchHelpButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.changeSkillButton addTarget:self action:@selector(changeSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
- 
     
-    [self.rollPictureView.emotionButton addTarget:self action:@selector(emotionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.funnyButton addTarget:self action:@selector(funnyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.moviesButton addTarget:self action:@selector(moviesButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.quadraticButton addTarget:self action:@selector(quadraticButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.chatButton addTarget:self action:@selector(chatButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.rollPictureView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.starButton addTarget:self action:@selector(starButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.beautifulButton addTarget:self action:@selector(beautifulButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.petButton addTarget:self action:@selector(petButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.activityButton addTarget:self action:@selector(activityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.rollPictureView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rollPictureView.placeButton addTarget:self action:@selector(placeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
     return self.rollPictureView;
 }
@@ -442,7 +318,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     
-    return CGSizeMake(0, 1 + CGRectGetMaxY(self.rollPictureView.changeSkillView.frame));
+    return CGSizeMake(0, 64 + kScreenSize.height / 4.4 + 195 / 2 + 24);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
@@ -450,17 +326,4 @@
     
     return CGSizeMake(0, 0);
 }
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    
-    [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.hidden = NO;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end

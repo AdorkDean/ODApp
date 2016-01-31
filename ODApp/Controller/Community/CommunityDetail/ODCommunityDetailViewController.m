@@ -20,10 +20,10 @@
     __weakSelf
     self.count = 1;
     self.view.backgroundColor = [UIColor whiteColor];
-    [self navigationInit];
+    self.navigationItem.title = @"话题详情";
     [self createReplyButton];
     [self createRequest];
-    [self joiningTogetherParmetersWithUserInfo:NO];
+    [self joiningTogetherParmetersWithUserInfo:YES];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf joiningTogetherParmetersWithUserInfo:NO];
@@ -51,10 +51,7 @@
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
     
-    //标题
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width-80)/2, 28, 80, 20) text:@"话题详情" font:17 alignment:@"center" color:@"#000000" alpha:1 maskToBounds:NO];
-    label.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:label];
+
     
     //返回按钮
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
@@ -78,30 +75,36 @@
 
 -(void)shareButtonClick:(UIButton *)button
 {
-    ODCommunityDetailModel *model = self.resultArray[0];
-    
-    
-    NSString *url = model.share[@"icon"];
-    NSString *content = model.share[@"desc"];
-    NSString *link = model.share[@"link"];
-    NSString *title = model.share[@"title"];
-    
-    
-    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:url];
-    
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-    
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-    
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-    
-    [UMSocialSnsService presentSnsIconSheetView:self
-                                         appKey:@"569dda54e0f55a994f0021cf"
-                                      shareText:content
-                                      shareImage:nil
-                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                       delegate:self];
+       
+    @try {
+        
+        ODCommunityDetailModel *model = self.resultArray[0];
+        NSString *url = model.share[@"icon"];
+        NSString *content = model.share[@"desc"];
+        NSString *link = model.share[@"link"];
+        NSString *title = model.share[@"title"];
+
+        
+        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+        
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+        
+        [UMSocialSnsService presentSnsIconSheetView:self
+                                             appKey:@"569dda54e0f55a994f0021cf"
+                                          shareText:content
+                                         shareImage:nil
+                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                           delegate:self];
+        
+    }
+    @catch (NSException *exception) {
+        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常无法分享"];
+    }
 
 }
 
@@ -148,22 +151,10 @@
                 [weakSelf.userArray addObject:userModel];
                 [weakSelf createUserInfoView];
                 [weakSelf createBBSDetailView];
-    
-                [weakSelf.tableView reloadData];
-                if (weakSelf.dataArray.count){
-                    if ([weakSelf.refresh isEqualToString:@"refresh"]) {
-                        [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:weakSelf.dataArray.count - 1 inSection:0]atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-                    }
-                }
-                [weakSelf.tableView.mj_header endRefreshing];
-                [weakSelf.tableView.mj_footer endRefreshing];
-                
+                [weakSelf joiningTogetherParmetersWithUserInfo:NO];
             }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        [weakSelf.tableView.mj_header endRefreshing];
-        [weakSelf.tableView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -182,15 +173,26 @@
                 ODCommunityDetailModel *model = [[ODCommunityDetailModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
+                NSLog(@"%@",model.user[@"open_id"]);
             }
-            [weakSelf joiningTogetherParmetersWithUserInfo:YES];
             
             if (result.count == 0) {
                 [weakSelf.tableView.mj_footer noticeNoMoreData];
             }
+            
+            [weakSelf.tableView reloadData];
+            if (weakSelf.dataArray.count){
+                if ([weakSelf.refresh isEqualToString:@"refresh"]) {
+                    [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:weakSelf.dataArray.count - 1 inSection:0]atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+                }
+            }
+            [weakSelf.tableView.mj_header endRefreshing];
+            [weakSelf.tableView.mj_footer endRefreshing];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -265,12 +267,19 @@
             imageView = [ODClassMethod creatImageViewWithFrame:CGRectZero imageName:nil tag:0];
             [imageView sd_setImageWithURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
             {
-               [imageView sizeToFit];
+                @try {
+#warning 有bug
+                    [imageView sizeToFit];
+                    imageView.frame = CGRectMake(0, CGRectGetMaxY(bbsContentLabel.frame)+ 17.5+(imageView.od_height * (kScreenSize.width / imageView.od_width)+10)*i, kScreenSize.width, imageView.od_height * (kScreenSize.width / imageView.od_width));
+                    imageView.contentMode = UIViewContentModeScaleAspectFill;
+                    [self.bbsView addSubview:imageView];
 
-                imageView.frame = CGRectMake(0, CGRectGetMaxY(bbsContentLabel.frame)+ 17.5+(imageView.od_height * (kScreenSize.width / imageView.od_width)+10)*i, kScreenSize.width, imageView.od_height * (kScreenSize.width / imageView.od_width));
-                imageView.contentMode = UIViewContentModeScaleAspectFill;
-                [self.bbsView addSubview:imageView];
-                if (i == resultModel.bbs_imgs.count-1)
+                }
+                @catch (NSException *exception) {
+                     
+                }
+                
+                 if (i == resultModel.bbs_imgs.count-1)
                 {
                     frame = imageView.frame;
                     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:userModel.open_id])
@@ -369,11 +378,12 @@
    
     //设置contentLabel显示不同的字体颜色
     CGFloat height;
+
     if ([model.content isEqualToString:@"该楼层已删除"]) {
         cell.contentLabel.text = model.content;
         height = [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-26 fontSize:14];
         cell.contentLabelHeight.constant = height;
-        [cell.deleteButton removeFromSuperview];
+        cell.deleteButton.hidden = YES;
         cell.timeLabelSpace.constant = 13;
     }else{
         NSString *str = [NSString stringWithFormat:@"回复 %@ : %@",model.parent_user_nick,model.content];
@@ -386,9 +396,10 @@
         height = [ODHelp textHeightFromTextString:str width:kScreenSize.width-26 fontSize:14];
         cell.contentLabelHeight.constant = height;
         if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:[NSString stringWithFormat:@"%@",model.user[@"open_id"]]]) {
-            
+            [cell.deleteButton setHidden:NO];
+            cell.timeLabelSpace.constant = cell.timeLabelSpaceConstant;
         }else{
-            [cell.deleteButton removeFromSuperview];
+            [cell.deleteButton setHidden:YES];
             cell.timeLabelSpace.constant = 13;
         }
     }
@@ -421,7 +432,6 @@
 
 -(void)replyButtonClick:(UIButton *)button
 {
- 
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
@@ -434,7 +444,10 @@
         if ([button.titleLabel.text isEqualToString:@"回复TA"]) {
             detailReply.parent_id = [NSString stringWithFormat:@"0"];
         }else{
-            detailReply.parent_id = [NSString stringWithFormat:@"3"];
+            ODCommunityDetailCell *cell = (ODCommunityDetailCell *)button.superview.superview;
+            NSIndexPath *indexpath = [self.tableView indexPathForCell:cell];
+            ODCommunityDetailModel *model = self.dataArray[indexpath.row];
+            detailReply.parent_id = [NSString stringWithFormat:@"%@",model.id];
         }
         __weakSelf
         detailReply.myBlock = ^(NSString *str){
@@ -506,7 +519,6 @@
         
         [self joiningTogetherParmetersWithUserInfo:NO];
     }
-    self.navigationController.navigationBar.hidden = YES;
 }
 
 -(void)viewDidDisappear:(BOOL)animated

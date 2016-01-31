@@ -27,14 +27,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
+
     self.pageNumber = 1;
     self.dataArray = [[NSMutableArray alloc] init];
     
    
     
-    [self navigationInit];
+    self.navigationItem.title = self.typeTitle;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
@@ -153,18 +153,11 @@
 -(void)navigationInit
 {
     self.view.userInteractionEnabled = YES;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
     self.navigationController.navigationBar.hidden = YES;
     
     self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.headView];
     
-    // 登陆label
-    UILabel *centerNameLabe = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width / 2 - 110, 28, 220, 20) text:self.typeTitle font:17 alignment:@"center" color:@"#000000" alpha:1];
-    
-    centerNameLabe.backgroundColor = [UIColor clearColor];
-    [self.headView addSubview:centerNameLabe];
-
     // 返回button
 
     UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backAction:) tag:0 image:nil title:@"返回" font:16];

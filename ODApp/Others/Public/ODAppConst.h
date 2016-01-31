@@ -1,22 +1,27 @@
 #import <UIKit/UIKit.h>
 
+#pragma mark - UI相关常量
 /** TabBar的高度 */
 UIKIT_EXTERN CGFloat const ODTabBarHeight;
 
-/********** 通知 ************/
 
 
+#pragma mark - 通用的Key
+/** 偏好设置保存用户信息 */
+UIKIT_EXTERN NSString * const KUserDefaultsOpenId;
+
+#pragma mark - 通知
 /** 显示集市的通知 */
-UIKIT_EXTERN NSString *const ODNotificationShowBazaar;
+UIKIT_EXTERN NSString * const ODNotificationShowBazaar;
 
 /** 刷新我的话题通知 */
-UIKIT_EXTERN NSString *const ODNotificationMyTaskRefresh;
+UIKIT_EXTERN NSString * const ODNotificationMyTaskRefresh;
 
+
+#pragma mark - 请求URL接口 
 /** 统一的URL */
 UIKIT_EXTERN NSString *const ODCommonURL;
 
-
-/********* 请求URL接口 **********/
 
 UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
@@ -36,6 +41,7 @@ UIKIT_EXTERN NSString * const kCommunityBbsDetailUrl;
 UIKIT_EXTERN NSString * const kCommunityBbsSearchUrl;
 UIKIT_EXTERN NSString * const kCommunityBbsReplyListUrl;
 UIKIT_EXTERN NSString * const kCommunityBbsReplyUrl;
+UIKIT_EXTERN NSString * const kCommunityBbsLatestUrl;
 
 UIKIT_EXTERN NSString * const kPushImageUrl;
 UIKIT_EXTERN NSString * const kDeleteReplyUrl;
