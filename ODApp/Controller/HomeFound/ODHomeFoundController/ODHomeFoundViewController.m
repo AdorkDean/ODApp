@@ -22,7 +22,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"首页";
-//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem o]
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"上海"];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.pictureArray = [[NSMutableArray alloc] init];
     self.titleArray = [[NSMutableArray alloc] init];
@@ -52,16 +52,13 @@
     [self getHotThemeRequest];
 }
 
-//- (void)crateLocationButton
-//{
-//
-//    UIButton *locationButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 35, 50, 20) target:self sel:@selector(locationButtonClick:) tag:0 image:@"" title:nil font:0];
-//    UIImageView *locationImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(8, 35, 9, 12) imageName:@"icon_location" tag:0];
-//    self.locationLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(CGRectGetMaxX(locationImageView.frame) + 3, 30, 40, 20) text:@"全国" font:12 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
-//    self.locationLabel.userInteractionEnabled = NO;
-//
-//    
-//}
+
+- (void)locationButtonClick:(UIButton *)button
+{
+
+    
+}
+
 
 - (void)getHotThemeRequest
 {
@@ -243,7 +240,8 @@
 - (void)emotionButtonClick:(UIButton *)button
 {
     
-    
+    ODSkillDetailController *vc = [[ODSkillDetailController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)funnyButtonClick:(UIButton *)button

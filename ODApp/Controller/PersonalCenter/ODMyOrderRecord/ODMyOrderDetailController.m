@@ -19,7 +19,7 @@
     
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6" alpha:1];;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6" alpha:1];
     
     self.dataArray = [[NSMutableArray alloc] init];
     self.devicesArray = [[NSMutableArray alloc] init];

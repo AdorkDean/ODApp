@@ -26,7 +26,7 @@
 #import "ODOthersInformationController.h"
 #import "ODPersonalCenterViewController.h"
 
-
+#import "ODSkillDetailController.h"
 
 @interface ODHomeFoundViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,SDCycleScrollViewDelegate>
 
