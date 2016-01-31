@@ -33,7 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"账号注册"];
+    self.navigationItem.title = @"账号注册";
     [self createTimer];
     self.seePassWord = NO;
     self.currentTime = 60;

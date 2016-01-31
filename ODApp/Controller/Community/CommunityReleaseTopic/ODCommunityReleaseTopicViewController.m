@@ -21,7 +21,7 @@
     self.strArray = [[NSMutableArray alloc]init];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self createRequest];
-    [self setTitle:@"新话题"];
+    self.navigationItem.title = @"新话题";
     [self createTextView];
     [self createAddPicButton];
 

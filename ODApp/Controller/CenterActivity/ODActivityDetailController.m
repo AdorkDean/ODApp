@@ -42,7 +42,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"中心活动";
+    self.navigationItem.title = @"中心活动";
     [self getData];
     self.openId = [ODUserInformation sharedODUserInformation].openID;
 }

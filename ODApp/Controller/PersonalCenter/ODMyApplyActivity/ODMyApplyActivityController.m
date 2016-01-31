@@ -21,7 +21,7 @@
     
     self.dataArray = [[NSMutableArray alloc] init];
     
-    [self setTitle:@"我报名的活动"];
+    self.navigationItem.title = @"我报名的活动";
   
     [self createCollectionView];
     

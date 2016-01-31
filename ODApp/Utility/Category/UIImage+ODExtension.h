@@ -10,6 +10,6 @@
 
 @interface UIImage (ODExtension)
 
-+ (UIImage *)imageWithColor:(UIColor *)color;
++ (UIImage *)OD_imageWithColor:(UIColor *)color;
 
 @end

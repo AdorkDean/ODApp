@@ -24,7 +24,7 @@
     self.dataArray = [[NSMutableArray alloc] init];
     self.devicesArray = [[NSMutableArray alloc] init];
     
-    [self setTitle:@"预约详情"];
+    self.navigationItem.title = @"预约详情";
     [self getOrderDetailRequest];
 }
 

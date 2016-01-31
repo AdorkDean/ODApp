@@ -24,7 +24,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = self.activityTitle;
+    self.navigationItem.title = self.activityTitle;
     self.view.backgroundColor = [UIColor whiteColor];
     [self createWebView];
 }

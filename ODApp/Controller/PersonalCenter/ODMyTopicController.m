@@ -64,7 +64,7 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    [self setTitle:@"我的话题"];
+    self.navigationItem.title = @"我的话题";
     [self creatSegment];
     [self creatScroller];
 }

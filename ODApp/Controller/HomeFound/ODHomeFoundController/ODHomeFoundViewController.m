@@ -21,7 +21,7 @@
 {
     [super viewDidLoad];
     
-    self.title = @"首页";
+    self.navigationItem.title = @"首页";
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.pictureArray = [[NSMutableArray alloc] init];
     self.titleArray = [[NSMutableArray alloc] init];

@@ -32,7 +32,7 @@
     // Do any additional setup after loading the view.
     
     
-      [self setTitle:@"绑定手机"];
+      self.navigationItem.title = @"绑定手机";
     
     [self.view addSubview:self.bindMobileView];
     

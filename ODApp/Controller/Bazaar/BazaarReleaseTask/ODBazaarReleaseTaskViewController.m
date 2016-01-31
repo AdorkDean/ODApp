@@ -17,7 +17,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    [self setTitle:@"新任务"];
+    self.navigationItem.title = @"新任务";
     [self createScrollView];
     [self createTitleTextView];
     [self createTimeLabel];

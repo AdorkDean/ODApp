@@ -86,7 +86,7 @@
     self.eimeStr = @"";
     self.yearStr = @"";
     self.start_datetime = @"";
-    [self setTitle:@"场地预约"];
+    self.navigationItem.title = @"场地预约";
     [self createTableView];
     
     

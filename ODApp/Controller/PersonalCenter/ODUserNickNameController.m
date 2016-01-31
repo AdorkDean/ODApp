@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view.
     
     
-    [self setTitle:@"修改昵称"];
+    self.navigationItem.title = @"修改昵称";
     [self creatTextField];
    
 }

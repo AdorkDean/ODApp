@@ -23,7 +23,7 @@
     
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self setTitle:@"欧动社区"];
+    self.navigationItem.title = @"欧动社区";
     [self createKeyWordView];
     [self createRequest];
     [self joiningTogetherParmeters];

@@ -68,7 +68,7 @@
     self.FirstDataArray = [NSMutableArray array];
     self.secondDataArray = [NSMutableArray array];
     
-    [self setTitle:@"我的任务"];
+    self.navigationItem.title = @"我的任务";
     [self creatSegment];
     [self creatScroller];
     

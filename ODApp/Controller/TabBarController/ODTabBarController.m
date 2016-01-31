@@ -17,7 +17,7 @@
 
 #import "ODPersonalCenterViewController.h"
 
-@interface ODTabBarController ()
+@interface ODTabBarController ()<ODTabBarDelegate>
 
 @end
 
@@ -54,26 +54,15 @@
 {
     ODTabBar *tabBar = [[ODTabBar alloc]init];
     [self setValue:tabBar forKeyPath:@"tabBar"];
+    tabBar.od_delegate = self;
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
+    [self.tabBar layoutSubviews];
     self.selectedViewController = self.childViewControllers[selectedIndex];
-    
-    if (selectedIndex == 4 && [ODUserInformation sharedODUserInformation].openID.length == 0)
-    {
-        self.selectedIndex = self.currentIndex;
-        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
-        [self presentViewController:vc animated:YES completion:nil];
-    }
-    else
-    {
-        self.selectedIndex = selectedIndex;
-        if (selectedIndex != 4)
-        {
-            self.currentIndex = self.selectedIndex;
-        }
-    }
+    if (selectedIndex == 4 && [ODUserInformation sharedODUserInformation].openID.length == 0)        return;
+    self.currentIndex = selectedIndex;
 }
 
 - (void)setupOneChildVc:(UIViewController *)childVc image:(NSString *)image selectedImage:(NSString *)selectedImage title:(NSString *)title
@@ -88,20 +77,21 @@
 #pragma mark - ODTabBarDelegate
 - (void)od_tabBar:(ODTabBar *)od_tabBar selectIndex:(NSInteger)selectIndex
 {
-//    if (selectIndex == 4 && [ODUserInformation sharedODUserInformation].openID.length == 0)
-//    {
-//        self.selectedIndex = self.currentIndex;
-//        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
-//        [self presentViewController:vc animated:YES completion:nil];
-//    }
-//    else
-//    {
-//        self.selectedIndex = selectIndex;
-//        if (selectIndex != 4)
-//        {
-//            self.currentIndex = self.selectedIndex;
-//        }
-//    }
+    if (selectIndex == 4 && [ODUserInformation sharedODUserInformation].openID.length == 0)
+    {
+        self.selectedIndex = self.currentIndex;
+        ODPersonalCenterViewController *perVC = [[ODPersonalCenterViewController alloc] init];
+        ODNavigationController *vc = [[ODNavigationController alloc]initWithRootViewController:perVC];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+    else
+    {
+        self.selectedIndex = selectIndex;
+        if (selectIndex != 4)
+        {
+            self.currentIndex = self.selectedIndex;
+        }
+    }
 }
 
 @end

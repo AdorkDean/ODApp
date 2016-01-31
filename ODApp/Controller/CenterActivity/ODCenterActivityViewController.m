@@ -72,7 +72,7 @@
     
     
     
-    [self setTitle:@"中心活动"];
+    self.navigationItem.title = @"中心活动";
     [self createCollectionView];
     
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{

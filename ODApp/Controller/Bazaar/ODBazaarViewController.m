@@ -27,7 +27,7 @@
     }];
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self setTitle:@"欧动集市"];
+    self.navigationItem.title = @"欧动集市";
     [self createScreeningAndSearchButton];
     [self createRequest];
     [self createCollectionView];

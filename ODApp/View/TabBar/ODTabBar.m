@@ -22,6 +22,15 @@
     return self;
 }
 
+- (void)buttonClick:(UIControl *)control
+{
+    if ([self.od_delegate respondsToSelector:@selector(od_tabBar:selectIndex:)])
+    {
+        [_od_delegate od_tabBar:self selectIndex:control.tag - KBaseTag];
+    }
+    [self layoutSubviews];
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -33,7 +42,7 @@
         if ([control isKindOfClass:NSClassFromString(@"UITabBarButton")])
         {
             control.frame = CGRectMake(control.od_x, 0, self.od_width / 5, self.od_height);
-            [control addTarget:self action:@selector(layoutSubviews) forControlEvents:UIControlEventAllEvents];
+            [control addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventAllEvents];
             for (UIView *subView in control.subviews)
             {
                 if ([subView isKindOfClass:NSClassFromString(@"UITabBarSwappableImageView")])
@@ -45,6 +54,13 @@
                 {
                     [subView setValue:@(NSTextAlignmentCenter) forKeyPath:@"textAlignment"];
                     subView.frame = CGRectMake(0, 37, self.od_width / 5, 18);
+                    @try {
+                        control.tag = KBaseTag + [[self.items valueForKeyPath:@"title"]indexOfObject:[subView valueForKeyPath:@"text"]];
+                    }
+                    @catch (NSException *exception)
+                    {
+                        
+                    }
                 }
             }
         }

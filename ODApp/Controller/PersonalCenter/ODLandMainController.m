@@ -46,8 +46,8 @@
     if (![ODUserInformation sharedODUserInformation].openID.length)
         return;
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    
+    self.navigationItem.title = @"登录个人中心";
+    self.navigationController.navigationBarHidden = YES;
 }
 
 #pragma mark - lifeCycle

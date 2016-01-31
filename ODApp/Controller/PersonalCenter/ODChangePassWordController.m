@@ -34,7 +34,7 @@
     // Do any additional setup after loading the view.
     
     
-    [self setTitle:self.topTitle];
+    self.navigationItem.title = self.topTitle;
     [self createTimer];
     
     

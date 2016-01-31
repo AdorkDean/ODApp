@@ -19,7 +19,7 @@
     
     self.count = 1;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    [self setTitle:@"欧动社区"];
+    self.navigationItem.title = @"欧动社区";
     [self createRequest];
     [self createSearchBar];
     [self createCollectionView];

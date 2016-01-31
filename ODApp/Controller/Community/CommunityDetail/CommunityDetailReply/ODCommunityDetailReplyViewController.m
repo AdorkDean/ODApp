@@ -19,7 +19,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    [self setTitle:@"回复"];
+    self.navigationItem.title = @"回复";
     [self createRequest];
     [self createTextView];    
     

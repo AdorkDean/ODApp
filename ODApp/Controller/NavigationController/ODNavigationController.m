@@ -8,7 +8,7 @@
 
 #import "ODNavigationController.h"
 
-@interface ODNavigationController () <UINavigationControllerDelegate>
+@interface ODNavigationController () <UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) id touchDelegate;
 
@@ -19,7 +19,7 @@
 + (void)initialize
 {
     UINavigationBar *navigationBar = [UINavigationBar appearance];
-    [navigationBar setBackgroundImage:[UIImage imageWithColor:[UIColor colorWithHexString:@"#ffd802" alpha:1]]
+    [navigationBar setBackgroundImage:[UIImage OD_imageWithColor:[UIColor colorWithHexString:@"#ffd802" alpha:1]]
                        forBarPosition:UIBarPositionAny
                            barMetrics:UIBarMetricsDefault];
     [navigationBar setShadowImage:[UIImage new]];
@@ -36,15 +36,31 @@
     [super viewDidLoad];
     _touchDelegate = self.interactivePopGestureRecognizer.delegate;
     self.delegate = self;
-
+    self.interactivePopGestureRecognizer.enabled = NO;
+    
+    // 自己创建一个全屏手势,调用系统的滑动返回功能
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self.interactivePopGestureRecognizer.delegate action:@selector(handleNavigationTransition:)];
+    
+    pan.delegate = self;
+    
+    [self.view addGestureRecognizer:pan];
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    viewController.hidesBottomBarWhenPushed = self.childViewControllers.count > 0;
+    if (self.childViewControllers.count > 0)
+    {
+        viewController.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(popViewControllerAnimated:) color:nil highColor:nil title:@"返回"];
+         viewController.hidesBottomBarWhenPushed = YES;
+    }
     [super pushViewController:viewController animated:animated];
 }
 
+#pragma mark - <UIGestureRecognizerDelegate>
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+    return self.childViewControllers.count > 1;
+}
 
 
 @end

@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-    self.title = @"任务详情";
+    self.navigationItem.title = @"任务详情";
     self.num = 1;
     self.view.backgroundColor = [UIColor whiteColor];
     [self createScrollView];

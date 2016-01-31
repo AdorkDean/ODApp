@@ -22,7 +22,7 @@
     
     self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     
-    [self setTitle:@"去偷懒"];
+    self.navigationItem.title = @"去偷懒";
     [self createJobButton];
     [self createScrollView];
 }

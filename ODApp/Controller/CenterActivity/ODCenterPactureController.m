@@ -21,7 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = self.activityName;
+    self.navigationItem.title = self.activityName;
 }
 
 

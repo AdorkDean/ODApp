@@ -19,7 +19,7 @@
     
     self.count = 1;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"欧动集市";
+    self.navigationItem.title = @"欧动集市";
     self.automaticallyAdjustsScrollViewInsets = NO;
 
     [self createSearchBar];

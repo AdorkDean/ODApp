@@ -26,7 +26,7 @@
     
     self.openID = [ODUserInformation sharedODUserInformation].openID;
     
-     [self setTitle:@"修改性别"];
+     self.navigationItem.title = @"修改性别";
      [self createView];
  
 }

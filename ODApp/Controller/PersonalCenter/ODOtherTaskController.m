@@ -43,7 +43,7 @@
     self.dataArray = [[NSMutableArray alloc] init];
     self.automaticallyAdjustsScrollViewInsets = NO;
   
-    [self setTitle:@"他发起的任务"];
+    self.navigationItem.title = @"他发起的任务";
     [self createCollection];
    
     

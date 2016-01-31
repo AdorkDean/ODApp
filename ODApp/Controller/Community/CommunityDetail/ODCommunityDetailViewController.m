@@ -20,7 +20,7 @@
     __weakSelf
     self.count = 1;
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setTitle:@"话题详情"];
+    self.navigationItem.title = @"话题详情";
     [self createReplyButton];
     [self createRequest];
     [self joiningTogetherParmetersWithUserInfo:YES];

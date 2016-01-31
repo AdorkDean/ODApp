@@ -45,7 +45,7 @@
     self.dataArray = [[NSMutableArray alloc] init];
     
     [self getData];
-    [self setTitle:@"个人中心"];
+    self.navigationItem.title = @"个人中心";
     
     
 }

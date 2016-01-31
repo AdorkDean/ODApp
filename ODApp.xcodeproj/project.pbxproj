@@ -472,6 +472,7 @@
 		D4D075511C59C436008527C9 /* ODNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075501C59C436008527C9 /* ODNavigationController.m */; };
 		D4D075541C5B015D008527C9 /* ODUserInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075531C5B015D008527C9 /* ODUserInformation.m */; };
 		D4D075571C5DB53A008527C9 /* UIImage+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075561C5DB53A008527C9 /* UIImage+ODExtension.m */; };
+		D4D0755A1C5DD926008527C9 /* UIBarButtonItem+ODExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075591C5DD926008527C9 /* UIBarButtonItem+ODExtention.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -523,33 +524,33 @@
 		D4D070E01C59B9FA008527C9 /* ODBazaarReleaseRewardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseRewardViewController.h; sourceTree = "<group>"; };
 		D4D070E11C59B9FA008527C9 /* ODBazaarReleaseRewardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseRewardViewController.m; sourceTree = "<group>"; };
 		D4D070E21C59B9FA008527C9 /* ODBazaarReleaseTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseTaskViewController.h; sourceTree = "<group>"; };
-		D4D070E31C59B9FA008527C9 /* ODBazaarReleaseTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseTaskViewController.m; sourceTree = "<group>"; };
+		D4D070E31C59B9FA008527C9 /* ODBazaarReleaseTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODBazaarReleaseTaskViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D070E41C59B9FA008527C9 /* ODBazaarHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarHeaderView.h; sourceTree = "<group>"; };
 		D4D070E51C59B9FA008527C9 /* ODBazaarHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarHeaderView.m; sourceTree = "<group>"; };
 		D4D070E61C59B9FA008527C9 /* ODBazaarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarViewController.h; sourceTree = "<group>"; };
-		D4D070E71C59B9FA008527C9 /* ODBazaarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarViewController.m; sourceTree = "<group>"; };
+		D4D070E71C59B9FA008527C9 /* ODBazaarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODBazaarViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D070E91C59B9FA008527C9 /* ODActivityDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityDetailController.h; sourceTree = "<group>"; };
 		D4D070EA1C59B9FA008527C9 /* ODActivityDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityDetailController.m; sourceTree = "<group>"; };
 		D4D070EB1C59B9FA008527C9 /* ODCenterActivityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCenterActivityViewController.h; sourceTree = "<group>"; };
-		D4D070EC1C59B9FA008527C9 /* ODCenterActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCenterActivityViewController.m; sourceTree = "<group>"; };
+		D4D070EC1C59B9FA008527C9 /* ODCenterActivityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODCenterActivityViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D070ED1C59B9FA008527C9 /* ODCenterDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCenterDetailController.h; sourceTree = "<group>"; };
 		D4D070EE1C59B9FA008527C9 /* ODCenterDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCenterDetailController.m; sourceTree = "<group>"; };
 		D4D070EF1C59B9FA008527C9 /* ODCenterPactureController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCenterPactureController.h; sourceTree = "<group>"; };
 		D4D070F01C59B9FA008527C9 /* ODCenterPactureController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCenterPactureController.m; sourceTree = "<group>"; };
 		D4D070F11C59B9FA008527C9 /* ODCenterYuYueController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCenterYuYueController.h; sourceTree = "<group>"; };
-		D4D070F21C59B9FA008527C9 /* ODCenterYuYueController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCenterYuYueController.m; sourceTree = "<group>"; };
+		D4D070F21C59B9FA008527C9 /* ODCenterYuYueController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODCenterYuYueController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D070F31C59B9FA008527C9 /* ODChoseCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODChoseCenterController.h; sourceTree = "<group>"; };
-		D4D070F41C59B9FA008527C9 /* ODChoseCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODChoseCenterController.m; sourceTree = "<group>"; };
+		D4D070F41C59B9FA008527C9 /* ODChoseCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODChoseCenterController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D070F81C59B9FA008527C9 /* ODCommunityDetailReplyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityDetailReplyViewController.h; sourceTree = "<group>"; };
-		D4D070F91C59B9FA008527C9 /* ODCommunityDetailReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityDetailReplyViewController.m; sourceTree = "<group>"; };
+		D4D070F91C59B9FA008527C9 /* ODCommunityDetailReplyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODCommunityDetailReplyViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D070FA1C59B9FA008527C9 /* ODCommunityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityDetailViewController.h; sourceTree = "<group>"; };
-		D4D070FB1C59B9FA008527C9 /* ODCommunityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityDetailViewController.m; sourceTree = "<group>"; };
+		D4D070FB1C59B9FA008527C9 /* ODCommunityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODCommunityDetailViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D070FD1C59B9FA008527C9 /* ODCommunityKeyWordSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityKeyWordSearchViewController.h; sourceTree = "<group>"; };
-		D4D070FE1C59B9FA008527C9 /* ODCommunityKeyWordSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityKeyWordSearchViewController.m; sourceTree = "<group>"; };
+		D4D070FE1C59B9FA008527C9 /* ODCommunityKeyWordSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODCommunityKeyWordSearchViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D071001C59B9FA008527C9 /* ODCommunityReleaseTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityReleaseTopicViewController.h; sourceTree = "<group>"; };
-		D4D071011C59B9FA008527C9 /* ODCommunityReleaseTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityReleaseTopicViewController.m; sourceTree = "<group>"; };
+		D4D071011C59B9FA008527C9 /* ODCommunityReleaseTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODCommunityReleaseTopicViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D071021C59B9FA008527C9 /* ODCommumityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommumityViewController.h; sourceTree = "<group>"; };
-		D4D071031C59B9FA008527C9 /* ODCommumityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommumityViewController.m; sourceTree = "<group>"; };
+		D4D071031C59B9FA008527C9 /* ODCommumityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODCommumityViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D071041C59B9FA008527C9 /* ODCommunityHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityHeaderView.h; sourceTree = "<group>"; };
 		D4D071051C59B9FA008527C9 /* ODCommunityHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityHeaderView.m; sourceTree = "<group>"; };
 		D4D071081C59B9FA008527C9 /* ODCenterIntroduceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCenterIntroduceController.h; sourceTree = "<group>"; };
@@ -557,33 +558,33 @@
 		D4D0710B1C59B9FA008527C9 /* ODHomeFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHomeFoundViewController.h; sourceTree = "<group>"; };
 		D4D0710C1C59B9FA008527C9 /* ODHomeFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeFoundViewController.m; sourceTree = "<group>"; };
 		D4D0710E1C59B9FA008527C9 /* ODLazyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLazyViewController.h; sourceTree = "<group>"; };
-		D4D0710F1C59B9FA008527C9 /* ODLazyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLazyViewController.m; sourceTree = "<group>"; };
+		D4D0710F1C59B9FA008527C9 /* ODLazyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODLazyViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D071111C59B9FA008527C9 /* ODBindingMobileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBindingMobileController.h; sourceTree = "<group>"; };
-		D4D071121C59B9FA008527C9 /* ODBindingMobileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBindingMobileController.m; sourceTree = "<group>"; };
+		D4D071121C59B9FA008527C9 /* ODBindingMobileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODBindingMobileController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D071131C59B9FA008527C9 /* ODChangePassWordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODChangePassWordController.h; sourceTree = "<group>"; };
-		D4D071141C59B9FA008527C9 /* ODChangePassWordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODChangePassWordController.m; sourceTree = "<group>"; };
+		D4D071141C59B9FA008527C9 /* ODChangePassWordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODChangePassWordController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D071151C59B9FA008527C9 /* ODInformationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODInformationController.h; sourceTree = "<group>"; };
-		D4D071161C59B9FA008527C9 /* ODInformationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODInformationController.m; sourceTree = "<group>"; };
+		D4D071161C59B9FA008527C9 /* ODInformationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODInformationController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D071171C59B9FA008527C9 /* ODLandMainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLandMainController.h; sourceTree = "<group>"; };
 		D4D071181C59B9FA008527C9 /* ODLandMainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLandMainController.m; sourceTree = "<group>"; };
 		D4D0711A1C59B9FA008527C9 /* ODMyApplyActivityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyApplyActivityController.h; sourceTree = "<group>"; };
-		D4D0711B1C59B9FA008527C9 /* ODMyApplyActivityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyApplyActivityController.m; sourceTree = "<group>"; };
+		D4D0711B1C59B9FA008527C9 /* ODMyApplyActivityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODMyApplyActivityController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D0711D1C59B9FA008527C9 /* ODMyOrderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyOrderDetailController.h; sourceTree = "<group>"; };
-		D4D0711E1C59B9FA008527C9 /* ODMyOrderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyOrderDetailController.m; sourceTree = "<group>"; };
+		D4D0711E1C59B9FA008527C9 /* ODMyOrderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODMyOrderDetailController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D0711F1C59B9FA008527C9 /* ODMyOrderRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyOrderRecordController.h; sourceTree = "<group>"; };
-		D4D071201C59B9FA008527C9 /* ODMyOrderRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyOrderRecordController.m; sourceTree = "<group>"; };
+		D4D071201C59B9FA008527C9 /* ODMyOrderRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODMyOrderRecordController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D071211C59B9FA008527C9 /* ODMyTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyTaskController.h; sourceTree = "<group>"; };
-		D4D071221C59B9FA008527C9 /* ODMyTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyTaskController.m; sourceTree = "<group>"; };
+		D4D071221C59B9FA008527C9 /* ODMyTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODMyTaskController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D071231C59B9FA008527C9 /* ODMyTopicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODMyTopicController.h; path = ../ODMyTopicController.h; sourceTree = "<group>"; };
-		D4D071241C59B9FA008527C9 /* ODMyTopicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODMyTopicController.m; path = ../ODMyTopicController.m; sourceTree = "<group>"; };
+		D4D071241C59B9FA008527C9 /* ODMyTopicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ODMyTopicController.m; path = ../ODMyTopicController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D071251C59B9FA008527C9 /* ODOthersInformationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOthersInformationController.h; sourceTree = "<group>"; };
-		D4D071261C59B9FA008527C9 /* ODOthersInformationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOthersInformationController.m; sourceTree = "<group>"; };
+		D4D071261C59B9FA008527C9 /* ODOthersInformationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODOthersInformationController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D071271C59B9FA008527C9 /* ODOtherTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOtherTaskController.h; sourceTree = "<group>"; };
-		D4D071281C59B9FA008527C9 /* ODOtherTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOtherTaskController.m; sourceTree = "<group>"; };
+		D4D071281C59B9FA008527C9 /* ODOtherTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODOtherTaskController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D071291C59B9FA008527C9 /* ODOtherTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODOtherTopicViewController.h; path = ../ODOtherTopicViewController.h; sourceTree = "<group>"; };
-		D4D0712A1C59B9FA008527C9 /* ODOtherTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODOtherTopicViewController.m; path = ../ODOtherTopicViewController.m; sourceTree = "<group>"; };
+		D4D0712A1C59B9FA008527C9 /* ODOtherTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = ODOtherTopicViewController.m; path = ../ODOtherTopicViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D0712B1C59B9FA008527C9 /* ODPersonalCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPersonalCenterViewController.h; sourceTree = "<group>"; };
-		D4D0712C1C59B9FA008527C9 /* ODPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPersonalCenterViewController.m; sourceTree = "<group>"; };
+		D4D0712C1C59B9FA008527C9 /* ODPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODPersonalCenterViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D0712D1C59B9FA008527C9 /* ODRegisteredController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRegisteredController.h; sourceTree = "<group>"; };
 		D4D0712E1C59B9FA008527C9 /* ODRegisteredController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRegisteredController.m; sourceTree = "<group>"; };
 		D4D0712F1C59B9FA008527C9 /* ODTopicModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODTopicModel.h; path = ../../Controller/PersonalCenter/ODTopicModel.h; sourceTree = "<group>"; };
@@ -943,7 +944,7 @@
 		D4D072BB1C59B9FA008527C9 /* IQBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQBarButtonItem.h; sourceTree = "<group>"; };
 		D4D072BC1C59B9FA008527C9 /* IQBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQBarButtonItem.m; sourceTree = "<group>"; };
 		D4D072BD1C59B9FA008527C9 /* IQTitleBarButtonItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQTitleBarButtonItem.h; sourceTree = "<group>"; };
-		D4D072BE1C59B9FA008527C9 /* IQTitleBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQTitleBarButtonItem.m; sourceTree = "<group>"; };
+		D4D072BE1C59B9FA008527C9 /* IQTitleBarButtonItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IQTitleBarButtonItem.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D4D072BF1C59B9FA008527C9 /* IQToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQToolbar.h; sourceTree = "<group>"; };
 		D4D072C01C59B9FA008527C9 /* IQToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQToolbar.m; sourceTree = "<group>"; };
 		D4D072C11C59B9FA008527C9 /* IQUIView+IQKeyboardToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+IQKeyboardToolbar.h"; sourceTree = "<group>"; };
@@ -1109,6 +1110,8 @@
 		D4D075531C5B015D008527C9 /* ODUserInformation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserInformation.m; sourceTree = "<group>"; };
 		D4D075551C5DB53A008527C9 /* UIImage+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ODExtension.h"; sourceTree = "<group>"; };
 		D4D075561C5DB53A008527C9 /* UIImage+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ODExtension.m"; sourceTree = "<group>"; };
+		D4D075581C5DD926008527C9 /* UIBarButtonItem+ODExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+ODExtention.h"; sourceTree = "<group>"; };
+		D4D075591C5DD926008527C9 /* UIBarButtonItem+ODExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+ODExtention.m"; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1764,6 +1767,8 @@
 				D4D0754C1C59C0CA008527C9 /* UIView+ODExtension.m */,
 				D4D075551C5DB53A008527C9 /* UIImage+ODExtension.h */,
 				D4D075561C5DB53A008527C9 /* UIImage+ODExtension.m */,
+				D4D075581C5DD926008527C9 /* UIBarButtonItem+ODExtention.h */,
+				D4D075591C5DD926008527C9 /* UIBarButtonItem+ODExtention.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -3211,6 +3216,7 @@
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
 				D4D073901C59B9FA008527C9 /* ODOtherTopicViewController.m in Sources */,
+				D4D0755A1C5DD926008527C9 /* UIBarButtonItem+ODExtention.m in Sources */,
 				D4D0738C1C59B9FA008527C9 /* ODMyTaskController.m in Sources */,
 				D4D073A41C59B9FA008527C9 /* ODMyOrderRecordModel.m in Sources */,
 				D4D074E01C59B9FA008527C9 /* SDCollectionViewCell.m in Sources */,

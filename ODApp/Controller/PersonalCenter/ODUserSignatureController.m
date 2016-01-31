@@ -24,7 +24,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    [self setTitle:@"修改签名"];
+    self.navigationItem.title = @"修改签名";
     [self creatTextField];
 }
 

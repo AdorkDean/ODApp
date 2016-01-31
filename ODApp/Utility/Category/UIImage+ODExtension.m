@@ -10,7 +10,7 @@
 
 @implementation UIImage (ODExtension)
 
-+ (UIImage *)imageWithColor:(UIColor *)color
++ (UIImage *)OD_imageWithColor:(UIColor *)color
 {
     CGRect rect=CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);

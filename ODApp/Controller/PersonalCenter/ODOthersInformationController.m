@@ -21,7 +21,7 @@
     
     self.view.backgroundColor = [UIColor clearColor];
     
-    [self setTitle:@"个人中心"];
+    self.navigationItem.title = @"个人中心";
     [self createRequest];
 }
 

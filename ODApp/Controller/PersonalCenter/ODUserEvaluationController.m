@@ -34,7 +34,7 @@
     
    
     
-    [self setTitle:self.typeTitle];
+    self.navigationItem.title = self.typeTitle;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     

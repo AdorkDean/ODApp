@@ -19,7 +19,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     self.count = 1;
-    [self setTitle:@"他发表的话题"];
+    self.navigationItem.title = @"他发表的话题";
     [self createRequest];
     [self joiningTogetherParmeters];
     [self createCollectionView];

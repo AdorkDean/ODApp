@@ -54,7 +54,7 @@ int pageNumnber = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self getData];
-    self.title =  @"中心详情";
+    self.navigationItem.title = @"中心详情";
 }
 
 #pragma mark - lifeCycle

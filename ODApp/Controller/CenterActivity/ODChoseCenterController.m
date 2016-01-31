@@ -32,7 +32,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-     [self setTitle:@"选择中心"];
+     self.navigationItem.title = @"选择中心";
      [self createCollectionView];
      [self getData];
     

@@ -24,7 +24,7 @@
     
     self.orderArray = [[NSMutableArray alloc] init];
     
-    [self setTitle:self.centerTitle];
+    self.navigationItem.title = self.centerTitle;
 
     [self createCollectionView];
     [self createRequest];

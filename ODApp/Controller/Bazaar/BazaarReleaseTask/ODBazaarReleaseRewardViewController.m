@@ -18,7 +18,7 @@
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    [self setTitle:@"任务奖励"];
+    self.navigationItem.title = @"任务奖励";
     [self createRequest];
     [self joiningTogetherParmeters];
 }
