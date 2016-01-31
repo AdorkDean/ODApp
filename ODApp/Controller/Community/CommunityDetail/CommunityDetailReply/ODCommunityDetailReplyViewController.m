@@ -115,6 +115,23 @@
 }
 
 #pragma mark - UITextViewDelegate
+
+NSString *titleText1 = @"";
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView == self.textView)
+    {
+        if (textView.text.length > 500)
+        {
+            textView.text = titleText1;
+        }
+        else
+        {
+            titleText1 = textView.text;
+        }
+    }
+}
+
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if (textView == self.textView) {

@@ -11,7 +11,7 @@
 @implementation ODCommunityDetailCell
 
 - (void)awakeFromNib {
-    
+    self.timeLabelSpaceConstant = self.timeLabelSpace.constant;
     self.headButton.layer.masksToBounds = YES;
     self.headButton.layer.cornerRadius = 20;
     self.nickName.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];

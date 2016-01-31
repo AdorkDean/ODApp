@@ -22,5 +22,10 @@
 	<string>1</string>
 	<key>CFBundleDisplayName</key>
 	<string>我去</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>wechat</string>
+		<string>weixin</string>
+	</array>
 </dict>
 </plist>

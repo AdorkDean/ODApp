@@ -40,6 +40,7 @@ UIKIT_EXTERN NSString * const kCommunityBbsDetailUrl;
 UIKIT_EXTERN NSString * const kCommunityBbsSearchUrl;
 UIKIT_EXTERN NSString * const kCommunityBbsReplyListUrl;
 UIKIT_EXTERN NSString * const kCommunityBbsReplyUrl;
+UIKIT_EXTERN NSString * const kCommunityBbsLatestUrl;
 
 UIKIT_EXTERN NSString * const kPushImageUrl;
 UIKIT_EXTERN NSString * const kDeleteReplyUrl;

@@ -54,7 +54,7 @@
         
     }else if ([status isEqualToString:@"2"]) {
         
-        self.typeLabel.text = @"进行中";
+        self.typeLabel.text = @"正在进行";
         self.typeLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"3"]) {
         

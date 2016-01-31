@@ -99,6 +99,36 @@
 }
 
 #pragma mark - UITextViewDelegate
+
+
+NSString *titleText2 = @"";
+NSString *topicContentText = @"";
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView == self.titleTextView)
+    {
+        if (textView.text.length > 30)
+        {
+            textView.text = titleText2;
+        }
+        else
+        {
+            titleText2 = textView.text;
+        }
+    }
+    else if (textView == self.topicContentTextView)
+    {
+        if (textView.text.length > 500)
+        {
+            textView.text = topicContentText;
+        }
+        else
+        {
+            topicContentText = textView.text;
+        }
+    }
+}
+
 -(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if (textView == self.titleTextView) {

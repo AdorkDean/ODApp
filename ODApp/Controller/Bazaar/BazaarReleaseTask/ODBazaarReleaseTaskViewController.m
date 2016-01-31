@@ -421,7 +421,6 @@
 
 #pragma mark - UITextViewDelegate
 
-
 NSString *titleText = @"";
 NSString *taskDetailText = @"";
 - (void)textViewDidChange:(UITextView *)textView

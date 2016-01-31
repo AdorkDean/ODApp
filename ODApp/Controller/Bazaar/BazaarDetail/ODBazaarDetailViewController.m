@@ -76,28 +76,34 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        ODBazaarDetailModel *model = self.dataArray[0];
-        NSString *url = model.share[@"icon"];
-        NSString *content = model.share[@"desc"];
-        NSString *link = model.share[@"link"];
-        NSString *title = model.share[@"title"];
-        
-        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:url];
-        
-        [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-        [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-        
-        [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-        
-        [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-        
-        [UMSocialSnsService presentSnsIconSheetView:self
-                                             appKey:@"569dda54e0f55a994f0021cf"
-                                          shareText:content
-                                         shareImage:nil
-                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                           delegate:self];
-        
+        @try {
+            ODBazaarDetailModel *model = self.dataArray[0];
+            NSString *url = model.share[@"icon"];
+            NSString *content = model.share[@"desc"];
+            NSString *link = model.share[@"link"];
+            NSString *title = model.share[@"title"];
+            
+            [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+            [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+            
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+            
+            [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+            
+            [UMSocialSnsService presentSnsIconSheetView:self
+                                                 appKey:@"569dda54e0f55a994f0021cf"
+                                              shareText:content
+                                             shareImage:nil
+                                        shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                               delegate:self];
+
+        }
+        @catch (NSException *exception) {
+            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常无法分享"];
+        }
+            
 
     }
 }
