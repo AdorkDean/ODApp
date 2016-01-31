@@ -11,7 +11,6 @@
 #import "ODAddAddressController.h"
 @interface ODContactAddressController ()<UITableViewDataSource , UITableViewDelegate>
 
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UILabel *centerNameLabe;
 @property (nonatomic , strong) UITableView *tableView;
 

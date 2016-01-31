@@ -119,19 +119,8 @@
 
 - (void)bindingAction:(UIButton *)sender
 {
-    
     [self bingdingPhone];
-    
 }
-
-
--(void)fanhui:(UIButton *)sender
-{
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    
-}
-
 
 #pragma mark - 请求数据
 

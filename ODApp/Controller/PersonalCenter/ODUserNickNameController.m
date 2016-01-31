@@ -77,7 +77,7 @@
 #pragma mark - 点击事件
 - (void)registered:(UIButton *)sender
 {
-    
+
     NSString *openID = [ODUserInformation sharedODUserInformation].openID;
     
     self.manager = [AFHTTPRequestOperationManager manager];

@@ -20,7 +20,6 @@
 @interface ODActivityDetailController ()<UITableViewDelegate , UIWebViewDelegate>
 
 
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) ActivityDetailView *activityDetailView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
@@ -167,18 +166,6 @@
     
 }
 
-#pragma mark - 初始化
--(void)navigationInit
-{    
-    // 返回button
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-
-    [self.headView addSubview:confirmButton];
-    
-}
-
 - (void)creatView
 {
     
@@ -295,11 +282,6 @@
 {
     [self saveData];
   
-}
-
--(void)fanhui:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)addressAction:(UITapGestureRecognizer *)sender

@@ -16,7 +16,6 @@
 
 @interface ODCenterYuYueController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate , UITextFieldDelegate , UIPickerViewDataSource , UIPickerViewDelegate>
 
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) CenterYuYueView *yuYueView;
 
@@ -87,6 +86,7 @@
     self.yearStr = @"";
     self.start_datetime = @"";
     self.navigationItem.title = @"场地预约";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
     [self createTableView];
     
     
@@ -102,32 +102,6 @@
     self.timeStr = @"";
     self.yearStr = @"";
 }
-
-
-#pragma mark - 初始化
--(void)navigationInit
-{
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    
-    
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    // 中心活动label
-    
-    
-    // 返回button
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    
-    [self.headView addSubview:confirmButton];
-    
-    
-    
-}
-
 
 - (void)createTableView
 {

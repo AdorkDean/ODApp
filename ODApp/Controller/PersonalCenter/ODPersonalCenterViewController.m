@@ -5,6 +5,7 @@
 //  Created by Odong-YG on 15/12/17.
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
+#import "ODNavigationBarView.h"
 #import "ODNavigationController.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODTabBarController.h"
@@ -32,17 +33,14 @@
 
 @implementation ODPersonalCenterViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
+    [self navigationInit];
     self.pageNumber = 0;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
-    self.navigationItem.title = @"登陆";
-    
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(registered:) color:nil highColor:nil title:@"注册"];
     
     self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
     self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
@@ -63,7 +61,6 @@
 
 - (void)createTableView
 {
-    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.tableView.userInteractionEnabled = YES;
@@ -73,6 +70,16 @@
     [self.view addSubview:self.tableView];
     
 }
+
+- (void)navigationInit
+{
+    ODNavigationBarView *naviView = [ODNavigationBarView navigationBarView];
+    [naviView.leftBarButton setTarget:self action:@selector(backAction:) title:@"返回"];
+    [naviView.rightBarButton setTarget:self action:@selector(registered:) title:@"注册"];
+    [self.view addSubview:naviView];
+}
+
+
 
 //创建警告框
 -(void)createUIAlertControllerWithTitle:(NSString *)title

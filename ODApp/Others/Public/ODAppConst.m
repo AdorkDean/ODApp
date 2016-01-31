@@ -3,7 +3,7 @@
 #pragma mark - UI相关常量
 /** TabBar的高度 */
 CGFloat const ODTabBarHeight = 55;
-
+CGFloat const ODNavigationHeight = 64;
 
 
 #pragma mark - 通用的Key

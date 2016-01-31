@@ -14,6 +14,7 @@
     if (self = [super initWithFrame:frame])
     {
         self.titleLabel.font = [UIFont systemFontOfSize:16];
+        [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     return self;
 }
@@ -28,7 +29,7 @@
     
     switch (self.barButtonType)
     {
-        case ODBarButtonImageLeft:
+        case ODBarButtonTypeImageLeft:
         {
             self.imageView.od_x = 0;
             self.imageView.od_y = (self.od_height - self.imageView.od_height) / 2;
@@ -36,7 +37,7 @@
             self.titleLabel.od_y = (self.od_height - self.titleLabel.od_height) / 2;
         }
             break;
-        case ODBarButtonImageUp:
+        case ODBarButtonTypeImageUp:
         {
             self.imageView.od_y = 0;
             self.imageView.od_x = (self.od_width - self.imageView.od_width) / 2;
@@ -44,7 +45,7 @@
             self.titleLabel.od_x = (self.od_width - self.titleLabel.od_width) / 2;
         }
             break;
-        case ODBarButtonTextLeft:
+        case ODBarButtonTypeTextLeft:
         {
             self.titleLabel.od_x = 0;
             self.titleLabel.od_y = (self.od_height - self.titleLabel.od_height) / 2;
@@ -52,7 +53,7 @@
             self.imageView.od_y = (self.od_height - self.imageView.od_height) / 2;
         }
             break;
-        case ODBarButtonTextUp:
+        case ODBarButtonTypeTextUp:
         {
             self.titleLabel.od_y = 0;
             self.titleLabel.od_x = (self.od_width - self.titleLabel.od_width) / 2;
@@ -63,6 +64,13 @@
         default:
             break;
     }
+}
+
+- (void)setTarget:(id)target action:(SEL)action title:(NSString *)title
+{
+    [self setTitle:title forState:UIControlStateNormal];
+    [self sizeToFit];
+    [self addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
 }
 
 @end

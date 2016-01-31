@@ -27,7 +27,6 @@ int pageNumnber = 0;
 @interface ODCenterDetailController ()<UITableViewDataSource , UITableViewDelegate>
 
 
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) ODCenderDetailView *centerDetailView;
 
