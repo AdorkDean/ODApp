@@ -25,7 +25,9 @@
 #import "ODUserInformation.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODTabBarController.h"
-
+#import "ODCollectionController.h"
+#import "ODContactAddressController.h"
+#import "ODOrderController.h"
 @interface ODCenterActivityViewController ()<UIScrollViewDelegate ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , SDCycleScrollViewDelegate>
 
 @property(nonatomic , strong) UIView *headView;
@@ -339,22 +341,23 @@
 {
     
     
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
-        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
-        [self presentViewController:vc animated:YES completion:nil];
-        
-        
-    }else {
-        ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
-        
-        vc.centerName = self.centerName;
-        vc.storeId = self.storeId;
-        vc.phoneNumber = self.phoneNumber;
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }
+//    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+//        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
+//        [self presentViewController:vc animated:YES completion:nil];
+//        
+//        
+//    }else {
+//        ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
+//        
+//        vc.centerName = self.centerName;
+//        vc.storeId = self.storeId;
+//        vc.phoneNumber = self.phoneNumber;
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+//    }
     
-    
+    ODOrderController *vc = [[ODOrderController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
     
     
 }
