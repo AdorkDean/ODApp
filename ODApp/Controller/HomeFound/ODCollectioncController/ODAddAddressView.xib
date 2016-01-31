@@ -149,7 +149,7 @@
                 <outlet property="nameTextField" destination="wcz-fz-TOJ" id="A1Y-wH-CTw"/>
                 <outlet property="phoneTextField" destination="e5T-6Z-ObQ" id="5Tk-fH-zKj"/>
             </connections>
-            <point key="canvasLocation" x="450" y="365"/>
+            <point key="canvasLocation" x="-13" y="212"/>
         </view>
     </objects>
     <resources>
