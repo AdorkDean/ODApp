@@ -62,13 +62,13 @@
 
     if ([self.checkLabel.text isEqualToString:@"已取消"] || [self.checkLabel.text isEqualToString:@"后台取消"]) {
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"订单已经取消"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"订单已经取消"];
     }else if ([self.checkLabel.text isEqualToString:@"前台已确认"]) {
     
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"订单已生成,请联系客服"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"订单已生成,请联系客服"];
     }else if ([self.checkLabel.text isEqualToString:@"到场已确认"] || [self.checkLabel.text isEqualToString:@"未到场"]) {
     
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"已到活动时间，无需进行取消"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"已到活动时间，无需进行取消"];
     }
     
     else{
@@ -84,7 +84,7 @@
             __weak typeof (self)weakSelf = self;
             [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                 
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"取消订单成功"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
                 weakSelf.checkLabel.text = @"已取消";
                 
             } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

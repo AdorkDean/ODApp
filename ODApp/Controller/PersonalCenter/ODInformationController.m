@@ -339,7 +339,7 @@
             }
             else {
                 
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
+                [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
             }
             break;
         case 1:

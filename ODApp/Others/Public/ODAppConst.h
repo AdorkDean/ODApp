@@ -13,7 +13,8 @@ UIKIT_EXTERN NSString *const ODNotificationShowBazaar;
 UIKIT_EXTERN NSString *const ODNotificationMyTaskRefresh;
 
 /** 统一的URL */
-UIKIT_EXTERN NSString * const ODCommonURL;
+UIKIT_EXTERN NSString *const ODCommonURL;
+
 
 /********* 请求URL接口 **********/
 

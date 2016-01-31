@@ -93,7 +93,7 @@
         [self.searchBar resignFirstResponder];
         [self joiningTogetherParmeters];
     }else{
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入搜索内容"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入搜索内容"];
     }
 }
 
@@ -192,7 +192,7 @@
         
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
 }

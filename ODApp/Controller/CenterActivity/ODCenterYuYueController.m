@@ -204,21 +204,21 @@
     if ([self.yuYueView.btimeText.titleLabel.text isEqualToString:@"填写开始时间"]) {
         
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请选择时间"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请选择时间"];
 
     }else if ([self.yuYueView.eTimeText.titleLabel.text isEqualToString:@"填写结束时间"]) {
         
 
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请填写结束时间"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请填写结束时间"];
     }else if ([self.yuYueView.pursoseTextView.text isEqualToString:@""] || [self.yuYueView.pursoseTextView.text isEqualToString:@"请填写结束时间"]) {
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入活动目的"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入活动目的"];
     }else if ([self.yuYueView.contentTextView.text isEqualToString:@""] || [self.yuYueView.contentTextView.text isEqualToString:@"请输入活动目的"]) {
 
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入活动内容"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入活动内容"];
     }else if ([self.yuYueView.peopleNumberTextField.text isEqualToString:@""]) {
       
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入参加人数"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入参加人数"];
     } else {
         
         [self getOrderId];
@@ -348,7 +348,7 @@
         }else{
             if ([self.yuYueView.btimeText.titleLabel.text isEqualToString:@"填写开始时间"]) {
                 
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请选择开始时间"];
+                [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请选择开始时间"];
             }else{
                 
                 
@@ -396,7 +396,7 @@
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
         
         
@@ -441,14 +441,14 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"感谢您的预约请等待审核"];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"感谢您的预约请等待审核"];
             
             
             [weakSelf.navigationController popViewControllerAnimated:YES];
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:responseObject[@"message"]];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
         }
   
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

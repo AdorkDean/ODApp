@@ -171,14 +171,14 @@
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
 
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入手机号"];
         
     }else if ([self.registView.verification.text isEqualToString:@""]) {
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入验证码"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入验证码"];
     }else if ([self.registView.password.text isEqualToString:@""]) {
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入密码"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入密码"];
     }else {
         [self changePassWord];
 
@@ -196,7 +196,7 @@
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
 
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入手机号"];
     }else {
         
         [self getCode];
@@ -263,11 +263,11 @@
             
             if (weakSelf.registView.password.text.length < 6 || weakSelf.registView.password.text.length > 26 ) {
                 
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"密码仅支持6到26位"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"密码仅支持6到26位"];
                 
             }else {
                 
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
             }
 
         }
@@ -300,7 +300,7 @@
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
            
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
 
               

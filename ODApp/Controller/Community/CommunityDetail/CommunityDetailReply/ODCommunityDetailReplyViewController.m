@@ -60,7 +60,7 @@
     if (self.textView.text.length>0) {
         [self joiningTogetherParmeters];
     }else{
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入回复内容"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入回复内容"];
     }
 }
 
@@ -94,7 +94,7 @@
             
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationMyTaskRefresh object:nil];
             [weakSelf.navigationController popViewControllerAnimated:YES];
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"回复成功"];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"回复成功"];
             
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
