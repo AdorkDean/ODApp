@@ -332,7 +332,7 @@
                 if (weakSelf.myBlock) {
                     weakSelf.myBlock([NSString stringWithFormat:@"accept"]);
                 }
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"接受成功"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"接受成功"];
                 [weakSelf.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
                 [weakSelf.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
                 weakSelf.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
@@ -342,7 +342,7 @@
                 if (weakSelf.myBlock) {
                     weakSelf.myBlock([NSString stringWithFormat:@"submit"]);
                 }
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"提交成功"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提交成功"];
                 [weakSelf.taskButton setTitle:@"已提交" forState:UIControlStateNormal];
             }
              NSLog(@"------%@",responseObject);
@@ -351,7 +351,7 @@
                 if (weakSelf.myBlock) {
                     weakSelf.myBlock([NSString stringWithFormat:@"complete"]);
                 }
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"确认成功"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"确认成功"];
                 [weakSelf.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
             }
 
@@ -607,7 +607,7 @@
                         [weakSelf.picArray removeAllObjects];
                         [weakSelf.picArray addObject:model];
                         [weakSelf.collectionView reloadData];
-                        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"委派成功"];
+                        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"委派成功"];
                         [weakSelf.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
                         if (self.myBlock) {
                             self.myBlock([NSString stringWithFormat:@"delegate"]);

@@ -30,13 +30,6 @@
     [super viewDidLoad];
     [self createViewControllers];
     [self setTabBar];
-
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.tabBar layoutSubviews];
 }
 
 - (void)createViewControllers

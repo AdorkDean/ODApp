@@ -34,7 +34,7 @@
 
     self.HUD.delegate  = self;
     
-    self.HUD.color = [UIColor colorWithHexString:@"#8e8e8e" alpha:alpha];
+    self.HUD.color = [UIColor colorWithHexString:@"#000000" alpha:alpha];
     self.HUD.mode = MBProgressHUDModeText;
     self.HUD.labelText = title;
     
