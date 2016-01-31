@@ -142,11 +142,11 @@
     [self.landView.passwordTextField resignFirstResponder];
     if ([self.landView.accountTextField.text isEqualToString:@""]) {
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入手机号"];
         
     }else if ([self.landView.passwordTextField.text isEqualToString:@""]) {
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入密码"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入密码"];
     }
     
     else {
@@ -200,7 +200,7 @@
             ODHomeFoundViewController *vc1 = [[ODHomeFoundViewController alloc] init];
             
             [weakSelf.navigationController presentViewController:vc1 animated:YES completion:nil];
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"登陆成功"];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"登陆成功"];
             
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
@@ -209,12 +209,12 @@
             weakSelf.pageNumber++;
             if (weakSelf.pageNumber >= 3) {
                 
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册"];
                 
             }else {
                 
                 
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:responseObject[@"message"]];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
             }
             
         }

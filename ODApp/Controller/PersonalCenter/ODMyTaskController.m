@@ -365,7 +365,7 @@
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                 
                 
-               [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+               [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
                 
                 
             }
@@ -376,7 +376,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [weakSelf.firstCollectionView.mj_header beginRefreshing];
         [weakSelf.secondCollectionView.mj_header beginRefreshing];
-        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 
     
@@ -561,7 +561,7 @@
         
         [weakSelf.firstCollectionView.mj_header endRefreshing];
         [weakSelf.firstCollectionView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -623,7 +623,7 @@
         
         [weakSelf.secondCollectionView.mj_header endRefreshing];
         [weakSelf.secondCollectionView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
       

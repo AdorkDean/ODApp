@@ -25,7 +25,9 @@
 #import "ODUserInformation.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODTabBarController.h"
-
+#import "ODCollectionController.h"
+#import "ODContactAddressController.h"
+#import "ODOrderController.h"
 @interface ODCenterActivityViewController ()<UIScrollViewDelegate ,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , SDCycleScrollViewDelegate>
 
 @property(nonatomic , strong) UIView *headView;
@@ -71,8 +73,9 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     
-    
-    self.navigationItem.title = @"中心活动";
+    [self navigationInit];
+  
+
     [self createCollectionView];
     
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -88,17 +91,13 @@
 #pragma mark - 初始化
 -(void)navigationInit
 {
-    // 场地预约button
-    
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 100, 16,90, 44) target:self sel:@selector(rightClick:) tag:0 image:nil title:@"场地预约" font:16];
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    self.navigationItem.title = @"中心活动";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(rightClick:) color:nil highColor:nil title:@"场地预约"];
     
     
-    confirmButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
     
-    UIImageView *releaseImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, 14, 17, 17) imageName:@"场地预约icon@3x" tag:0];
-    [confirmButton addSubview:releaseImageView];
-    [self.headView addSubview:confirmButton];
+//    UIImageView *releaseImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(0, 14, 17, 17) imageName:@"场地预约icon@3x" tag:0];
+
     
 }
 
@@ -180,7 +179,7 @@
         
         
         [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
         
     }];
     
@@ -312,7 +311,7 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
     
@@ -325,22 +324,23 @@
 {
     
     
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
-        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
-        [self presentViewController:vc animated:YES completion:nil];
-        
-        
-    }else {
-        ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
-        
-        vc.centerName = self.centerName;
-        vc.storeId = self.storeId;
-        vc.phoneNumber = self.phoneNumber;
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }
+//    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+//        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
+//        [self presentViewController:vc animated:YES completion:nil];
+//        
+//        
+//    }else {
+//        ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
+//        
+//        vc.centerName = self.centerName;
+//        vc.storeId = self.storeId;
+//        vc.phoneNumber = self.phoneNumber;
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+//    }
     
-    
+    ODOrderController *vc = [[ODOrderController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
     
     
 }
@@ -391,7 +391,7 @@
 -(void)createCollectionView
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64 - 55) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 55 - 64) collectionViewLayout:self.flowLayout];
     [self.collectionView registerClass:[ODActivityHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"firstHeader"];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
