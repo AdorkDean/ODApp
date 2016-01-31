@@ -21,6 +21,9 @@
 		9DC05DEE1C5DDB4000181DFE /* ODAddAddressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC05DED1C5DDB4000181DFE /* ODAddAddressView.xib */; };
 		9DC05DF11C5DE63D00181DFE /* ODOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC05DF01C5DE63D00181DFE /* ODOrderController.m */; };
 		9DC05DF41C5DE74A00181DFE /* ODOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC05DF31C5DE74A00181DFE /* ODOrderView.m */; };
+		9DC05DF61C5DEE4400181DFE /* ODOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC05DF51C5DEE4400181DFE /* ODOrderView.xib */; };
+		9DC05DFA1C5DF66000181DFE /* ODOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC05DF81C5DF66000181DFE /* ODOrderCell.m */; };
+		9DC05DFB1C5DF66000181DFE /* ODOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC05DF91C5DF66000181DFE /* ODOrderCell.xib */; };
 		9DD00BDB1C4E397E00F0EE5F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDA1C4E397E00F0EE5F /* Security.framework */; };
 		9DD00BDD1C4E398B00F0EE5F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */; };
 		9DD00BDF1C4E399700F0EE5F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */; };
@@ -527,6 +530,10 @@
 		9DC05DF01C5DE63D00181DFE /* ODOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderController.m; sourceTree = "<group>"; };
 		9DC05DF21C5DE74A00181DFE /* ODOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderView.h; sourceTree = "<group>"; };
 		9DC05DF31C5DE74A00181DFE /* ODOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderView.m; sourceTree = "<group>"; };
+		9DC05DF51C5DEE4400181DFE /* ODOrderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODOrderView.xib; sourceTree = "<group>"; };
+		9DC05DF71C5DF66000181DFE /* ODOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderCell.h; sourceTree = "<group>"; };
+		9DC05DF81C5DF66000181DFE /* ODOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderCell.m; sourceTree = "<group>"; };
+		9DC05DF91C5DF66000181DFE /* ODOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODOrderCell.xib; sourceTree = "<group>"; };
 		9DD00BDA1C4E397E00F0EE5F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1214,6 +1221,10 @@
 				9DC05DF01C5DE63D00181DFE /* ODOrderController.m */,
 				9DC05DF21C5DE74A00181DFE /* ODOrderView.h */,
 				9DC05DF31C5DE74A00181DFE /* ODOrderView.m */,
+				9DC05DF51C5DEE4400181DFE /* ODOrderView.xib */,
+				9DC05DF71C5DF66000181DFE /* ODOrderCell.h */,
+				9DC05DF81C5DF66000181DFE /* ODOrderCell.m */,
+				9DC05DF91C5DF66000181DFE /* ODOrderCell.xib */,
 			);
 			path = ODCollectioncController;
 			sourceTree = "<group>";
@@ -2981,6 +2992,7 @@
 				D4D074CB1C59B9FA008527C9 /* 首页浏览量icon@3x.png in Resources */,
 				D4D0740C1C59B9FA008527C9 /* 定位icon@3x.png in Resources */,
 				D4D074F61C59B9FA008527C9 /* ODBazaarRewardCollectionCell.xib in Resources */,
+				9DC05DF61C5DEE4400181DFE /* ODOrderView.xib in Resources */,
 				D4D074071C59B9FA008527C9 /* 发布任务icon@1x.png in Resources */,
 				D4D0743F1C59B9FA008527C9 /* 登录文字框icon@1x.png in Resources */,
 				D4D0744C1C59B9FA008527C9 /* 任务攻略图文详情图二@2x.png in Resources */,
@@ -3130,6 +3142,7 @@
 				D4D0745B1C59B9FA008527C9 /* button_Life@2x.png in Resources */,
 				D4D073F61C59B9FA008527C9 /* 个人中心icon默认态@2x.png in Resources */,
 				D4D073FB1C59B9FA008527C9 /* 中心活动icon默认态@1x.png in Resources */,
+				9DC05DFB1C5DF66000181DFE /* ODOrderCell.xib in Resources */,
 				D4D075211C59B9FA008527C9 /* ODTypeView.xib in Resources */,
 				D4D073E41C59B9FA008527C9 /* 朋友圈分享icon@2x.png in Resources */,
 				D4D074C31C59B9FA008527C9 /* 首页-约场地icon@1x.png in Resources */,
@@ -3397,6 +3410,7 @@
 				D4D073781C59B9FA008527C9 /* ODCenterDetailController.m in Sources */,
 				D4D0738D1C59B9FA008527C9 /* ODMyTopicController.m in Sources */,
 				D4D075491C59BBEE008527C9 /* ODAppConst.m in Sources */,
+				9DC05DFA1C5DF66000181DFE /* ODOrderCell.m in Sources */,
 				D4D073A51C59B9FA008527C9 /* NSURL+ODExtension.m in Sources */,
 				D4D075141C59B9FA008527C9 /* ODInformationView.m in Sources */,
 				D4D074F51C59B9FA008527C9 /* ODBazaarRewardCollectionCell.m in Sources */,

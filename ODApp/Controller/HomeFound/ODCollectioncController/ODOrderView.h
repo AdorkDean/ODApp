@@ -10,4 +10,8 @@
 
 @interface ODOrderView : UIView
 
+@property (weak, nonatomic) IBOutlet UIImageView *addressImgeView;
+
++(instancetype)getView;
+
 @end
