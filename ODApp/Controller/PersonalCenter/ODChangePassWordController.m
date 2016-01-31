@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 
+#import "ODNavigationBarView.h"
 #import "ODChangePassWordController.h"
 #import "ODRegisteredView.h"
 #import "AFNetworking.h"
@@ -28,29 +29,26 @@
 
 @implementation ODChangePassWordController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    
-    self.navigationItem.title = self.topTitle;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
+    [self navigationInit];
     [self createTimer];
-    
-    
     self.seePassWord = NO;
-    
-    
     self.currentTime = 60;
-
-   
 }
-
 
 - (void)loadView
 {
-    [super loadView];
     self.view = self.registView;
+}
+
+- (void)navigationInit
+{
+    ODNavigationBarView *navigationView = [ODNavigationBarView navigationBarView];
+    navigationView.title = self.topTitle;
+    [navigationView.leftBarButton setTarget:self action:@selector(fanhui:) title:@"返回"];
+    [self.view addSubview:navigationView];
 }
 
 -(void)createTimer

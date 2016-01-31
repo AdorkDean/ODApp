@@ -34,4 +34,14 @@
     return [[self alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, ODNavigationHeight)];
 }
 
+- (void)setTitle:(NSString *)title
+{
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake((kScreenSize.width - 80) / 2, 28, 80, 20)];
+    label.text = title;
+    label.font = [UIFont systemFontOfSize:17];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor blackColor];
+    label.backgroundColor = [UIColor clearColor];
+    [self addSubview:label];
+}
 @end

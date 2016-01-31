@@ -48,8 +48,8 @@
 #pragma mark - 初始化
 - (void)navigationInit
 {
-    self.navigationItem.title = @"账号注册";
     ODNavigationBarView *naviView = [ODNavigationBarView navigationBarView];
+    naviView.title = @"账号注册";
     [naviView.leftBarButton setTarget:self action:@selector(fanhui:) title:@"返回"];
     naviView.rightBarButton = nil;
     [self.view addSubview:naviView];

@@ -20,6 +20,7 @@
  */
 @property(nonatomic, weak) ODBarButton *rightBarButton;
 
+@property(nonatomic, copy) NSString *title;
 
 + (instancetype)navigationBarView;
 @end
