@@ -16,7 +16,7 @@
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
-@property (nonatomic , strong) UILabel *amountLabel;
+@property (nonatomic , strong) UILabel *allPriceLabel;
 @property (nonatomic ,strong) ODOrderHeadView *headView;
 
 @end
@@ -44,11 +44,28 @@
     [self.view addSubview:self.collectionView];
     
     
-    self.amountLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 50, kScreenSize.width - 100, 50)];
-    self.amountLabel.text = @"订单金额：10元";
-    self.amountLabel.textAlignment = NSTextAlignmentCenter;
-    self.amountLabel.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.amountLabel];
+    UIImageView *amountImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 50, kScreenSize.width - 100, 50)];
+    amountImageView.backgroundColor = [UIColor whiteColor];
+    
+    
+    UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10,90, 30)];
+    priceLabel.text = @"订单金额：";
+    priceLabel.backgroundColor = [UIColor whiteColor];
+    [amountImageView addSubview:priceLabel];
+    
+    
+    self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 10, amountImageView.frame.size.width - 110, 30)];
+    self.allPriceLabel.text = @"10元";
+    self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
+    self.allPriceLabel.textColor = [UIColor redColor];
+    [amountImageView addSubview:self.allPriceLabel];
+    
+    
+    [self.view addSubview:amountImageView];
+    
+    
+    
+    
     
     UIButton *saveOrderButton = [UIButton buttonWithType:UIButtonTypeSystem];
     saveOrderButton.frame = CGRectMake(kScreenSize.width - 100, kScreenSize.height - 50, 100, 50);

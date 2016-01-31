@@ -9,11 +9,15 @@
 #import "ODContactAddressController.h"
 #import "ODAddressCell.h"
 #import "ODAddAddressController.h"
+#import "AFNetworking.h"
+#import "ODAPIManager.h"
+
 @interface ODContactAddressController ()<UITableViewDataSource , UITableViewDelegate>
 
-@property (nonatomic , strong) UILabel *centerNameLabe;
-@property (nonatomic , strong) UITableView *tableView;
 
+@property (nonatomic , strong) UITableView *tableView;
+@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property (nonatomic , copy) NSString *open_id;
 @end
 
 @implementation ODContactAddressController
@@ -22,7 +26,47 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"联系地址";
-    [self createTableView];
+    
+    self.open_id = [ODUserInformation sharedODUserInformation].openID;
+
+      [self createTableView];
+      [self getData];
+}
+
+- (void)getData
+{
+    self.manager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"open_id":self.open_id};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    __weak typeof (self)weakSelf = self;
+    [self.manager GET:kGetAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
+          
+            NSLog(@"____%@" , responseObject);
+            
+            
+        }
+        
+        
+          [weakSelf.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        
+        
+        
+        
+        
+        
+    }];
+    
+
 }
 
 - (void)createTableView
@@ -82,6 +126,19 @@
         [cell.lineLabel removeFromSuperview];
     }
     
+    if (indexPath.section == 0) {
+        
+        
+        NSString *dizhi = @"上海市杨福区98号";
+        NSString *str = [NSString stringWithFormat:@"[默认]%@",dizhi];
+        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:str];
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange(0, 4)];
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#000000" alpha:1] range:NSMakeRange(4, dizhi.length)];
+        cell.addressLabel.attributedText = noteStr;
+
+        
+       
+    }
    
     
     
