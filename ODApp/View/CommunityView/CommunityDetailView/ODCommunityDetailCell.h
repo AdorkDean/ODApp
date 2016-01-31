@@ -19,6 +19,8 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelSpace;
+
+@property (assign,nonatomic) CGFloat timeLabelSpaceConstant;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelSpace;
 
 @end
