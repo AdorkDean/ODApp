@@ -40,6 +40,7 @@
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf loadMoreData];
     }];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(releaseButtonClick:) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil];
 
 }
 #pragma mark - 加载更多
@@ -50,6 +51,7 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
 }
+
 
 #pragma mark - 初始化导航
 -(void)navigationInit
@@ -247,12 +249,11 @@
     flowLayout.minimumInteritemSpacing = 5;
     flowLayout.minimumLineSpacing = 5;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,117, kScreenSize.width, kScreenSize.height - 117 - 55) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,ODTopY, kScreenSize.width, KControllerHeight - 55) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarCellId];
-    [self.collectionView registerClass:[ODBazaarHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];
     [self.view addSubview:self.collectionView];
 }
 
@@ -301,21 +302,6 @@
     return CGSizeMake(kScreenSize.width, 120);
 }
 
--(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *viewId = @"supple";
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        ODBazaarHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:viewId forIndexPath:indexPath];
-        return headerView;
-    }
-    return nil;
-    
-}
-
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    return CGSizeMake(kScreenSize.width, 40);
-}
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

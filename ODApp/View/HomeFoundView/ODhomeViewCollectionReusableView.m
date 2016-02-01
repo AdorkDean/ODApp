@@ -58,7 +58,7 @@
 
  
         self.searchCircleButton = [ODClassMethod creatButtonWithFrame:CGRectMake(aroundSpace - 20, CGRectGetMaxY(self.findActivityLabel.frame) + 10, 80, 50) target:self sel:nil tag:0 image:@"" title:nil font:0];
-        UIImageView *searchCircleImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(aroundSpace, CGRectGetMaxY(self.findActivityLabel.frame) + 10, 36.5, 30) imageName:@"icon_circle_small" tag:0];
+        UIImageView *searchCircleImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(aroundSpace, CGRectGetMaxY(self.findActivityLabel.frame) + 10, 36.5, 30) imageName:@"icon_circle_big" tag:0];
         self.searchCircleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(aroundSpace, CGRectGetMaxY(searchCircleImageView.frame) + 5, labelWidth, labelHeight) text:@"寻圈子" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
         self.searchCircleLabel.userInteractionEnabled = NO;
         [self addSubview:searchCircleImageView];

@@ -126,7 +126,7 @@
     flowLayout.minimumInteritemSpacing = 5;
     flowLayout.minimumLineSpacing = 5;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,64, kScreenSize.width, kScreenSize.height - 64) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,ODTopY, kScreenSize.width, KControllerHeight) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
@@ -155,7 +155,7 @@
     for (NSInteger i = 0; i < self.userArray.count; i++) {
         ODCommunityModel *userModel = self.userArray[i];
         if ([[NSString stringWithFormat:@"%@",model.user_id] isEqualToString:[NSString stringWithFormat:@"%@",userModel.id]]) {
-            cell.nameLabel.text = userModel.nick;
+            cell.nickLabel.text = userModel.nick;
             [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
         }
     }

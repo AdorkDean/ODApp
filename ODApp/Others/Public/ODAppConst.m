@@ -4,7 +4,8 @@
 /** TabBar的高度 */
 CGFloat const ODTabBarHeight = 55;
 CGFloat const ODNavigationHeight = 64;
-
+CGFloat const ODLeftMargin = 17.5;
+CGFloat const ODTopY = 0;
 
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
@@ -61,3 +62,5 @@ NSString * const kCancelMyOrderUrl = @"http://woquapi.test.odong.com/1.0/store/c
 NSString * const kOthersInformationUrl = @"http://woquapi.test.odong.com/1.0/user/info";
 NSString * const kSaveAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/add";
 NSString * const kGetAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/list";
+NSString * const kDeleteAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/del";
+NSString * const kEditeAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/edit";

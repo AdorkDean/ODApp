@@ -91,7 +91,7 @@
 {
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -101,7 +101,7 @@
     
     self.informationView = [ODInformationView getView];
     self.informationView.userInteractionEnabled = YES;
-    self.informationView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height + 20);
+    self.informationView.frame = CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight + 20);
     
     ODUserModel *model = self.dataArray[0];
     

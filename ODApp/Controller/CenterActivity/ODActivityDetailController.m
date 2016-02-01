@@ -177,7 +177,7 @@
 {
     
     
-    self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
+    self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight)];
     self.scroller.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.scroller.userInteractionEnabled = YES;
     self.activityDetailView = [ActivityDetailView getView];

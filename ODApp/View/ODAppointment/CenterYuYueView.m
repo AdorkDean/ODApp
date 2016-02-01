@@ -122,7 +122,7 @@
     view.centerText.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
     view.centerText.layer.borderWidth = 1;
     view.centerText.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    UIImageView *lImage = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width - 30, 5, 15, 15) imageName:@"场地预约icon2@3x" tag:0];
+    UIImageView *lImage = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width - 30, 5, 15, 15) imageName:@"场地预约icon2" tag:0];
     
     [view.centerText addSubview:lImage];
     

@@ -11,7 +11,6 @@
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
 #import "ODBazaarCollectionCell.h"
-#import "ODBazaarHeaderView.h"
 #import "ODBazaarReleaseTaskViewController.h"
 #import "ODBazaarLabelSearchViewController.h"
 #import "ODBazaarDetailViewController.h"

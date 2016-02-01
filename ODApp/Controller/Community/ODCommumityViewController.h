@@ -13,7 +13,6 @@
 #import "AFNetworking.h"
 #import "ODCommunityModel.h"
 #import "ODCommunityCollectionCell.h"
-#import "ODCommunityHeaderView.h"
 #import "ODCommunityReleaseTopicViewController.h"
 #import "ODCommunityDetailViewController.h"
 #import "ODCommunityKeyWordSearchViewController.h"

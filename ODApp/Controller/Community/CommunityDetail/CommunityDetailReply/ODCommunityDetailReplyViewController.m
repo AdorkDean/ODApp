@@ -17,20 +17,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self navigationInit];
+    
+    self.navigationItem.title = @"回复";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
     [self createRequest];
     [self createTextView];
 }
 
-#pragma mark - 初始化导航
--(void)navigationInit
-{
-    self.navigationItem.title = @"回复";
-   //确认按钮
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
-}
 
--(void)confirmButtonClick:(UIButton *)button
+-(void)confirmButtonClick
 {
     if (self.textView.text.length>0) {
         [self joiningTogetherParmeters];
@@ -80,7 +75,7 @@
 #pragma mark - 创建textView
 -(void)createTextView
 {
-    self.textView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 68, kScreenSize.width-8, 140) delegate:self tag:0 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.textView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4 + ODTopY, kScreenSize.width-8, 140) delegate:self tag:0 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.view addSubview:self.textView];
     
     self.label = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 68, kScreenSize.width-20, 30) text:@"请输入回复TA的内容" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
@@ -91,18 +86,18 @@
 
 #pragma mark - UITextViewDelegate
 
-NSString *titleText1 = @"";
+NSString *replyTitleText = @"";
 - (void)textViewDidChange:(UITextView *)textView
 {
     if (textView == self.textView)
     {
         if (textView.text.length > 500)
         {
-            textView.text = titleText1;
+            textView.text = replyTitleText;
         }
         else
         {
-            titleText1 = textView.text;
+            replyTitleText = textView.text;
         }
     }
 }

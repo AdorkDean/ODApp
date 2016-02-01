@@ -20,13 +20,6 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
 }
 
-- (void)addTitleViewWithName:(NSString *)name {
-    
-    UILabel *titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 100, 30) text:name font:17 alignment:@"center" color:@"#000000" alpha:1];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    self.navigationItem.titleView = titleLabel;
-}
-
 #pragma mark - 创建提示信息
 - (void)createProgressHUDWithAlpha:(float)alpha withAfterDelay:(float)afterDelay title:(NSString *)title
 {

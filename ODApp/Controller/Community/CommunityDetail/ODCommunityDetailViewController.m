@@ -21,9 +21,10 @@
     self.count = 1;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"话题详情";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
+    
     [self createReplyButton];
     [self createRequest];
-    [self navigationItem];
     [self joiningTogetherParmetersWithUserInfo:YES];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -45,15 +46,8 @@
     [self downLoadTableDataWithUrl:kCommunityBbsReplyListUrl paramater:signParameter];
 }
 
-#pragma mark - 初始化导航
--(void)navigationInit
-{
-    self.navigationItem.title = @"话题详情";
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick:) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
-}
-
-
--(void)shareButtonClick:(UIButton *)button
+#pragma mark - 分享
+-(void)shareButtonClick
 {
        
     @try {
@@ -180,12 +174,12 @@
 -(void)createUserInfoView
 {
     ODCommunityDetailModel *userModel = [self.userArray objectAtIndex:0];
-    self.tabelHeaderView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 64, kScreenSize.width, 100) tag:0 color:@"#ffffff"];
+    self.tabelHeaderView = [ODClassMethod creatViewWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, 100) tag:0 color:@"#ffffff"];
     self.userView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, 0, kScreenSize.width-25, 76) tag:0 color:@"#ffffff"];
     [self.tabelHeaderView addSubview:self.userView];
     
     //头像
-    UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 13.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"sds" font:0];
+    UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 13.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"" font:0];
     [userHeaderButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
     userHeaderButton.layer.masksToBounds = YES;
     userHeaderButton.layer.cornerRadius = 24;

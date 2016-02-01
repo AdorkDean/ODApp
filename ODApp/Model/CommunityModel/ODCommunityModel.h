@@ -15,6 +15,8 @@
 @property(nonatomic,copy)NSString *content;
 @property(nonatomic,copy)NSString *user_id;
 @property(nonatomic,copy)NSString *view_num;
+@property(nonatomic,copy)NSString *created_at;
+@property(nonatomic,strong)NSArray *imgs;
 
 //user
 @property(nonatomic,copy)NSString *nick;

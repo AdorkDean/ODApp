@@ -19,22 +19,20 @@
     
     self.imageArray = [[NSMutableArray alloc]init];
     self.strArray = [[NSMutableArray alloc]init];
-    [self navigationInit];
+    self.navigationItem.title = @"新话题";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"取消"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
     [self createRequest];
     [self createTextView];
     [self createAddPicButton];
 }
 
-#pragma mark - 初始化导航
--(void)navigationInit
+-(void)cancelButtonClick
 {
-    self.navigationItem.title = @"新话题";
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
--(void)confirmButtonClick:(UIButton *)button
+-(void)confirmButtonClick
 {
-    
     [self.titleTextView resignFirstResponder];
     [self.topicContentTextView resignFirstResponder];
     
@@ -72,9 +70,7 @@
 }
 
 #pragma mark - UITextViewDelegate
-
-
-NSString *titleText2 = @"";
+NSString *TitleText = @"";
 NSString *topicContentText = @"";
 - (void)textViewDidChange:(UITextView *)textView
 {
@@ -82,11 +78,11 @@ NSString *topicContentText = @"";
     {
         if (textView.text.length > 30)
         {
-            textView.text = titleText2;
+            textView.text = TitleText;
         }
         else
         {
-            titleText2 = textView.text;
+            TitleText = textView.text;
         }
     }
     else if (textView == self.topicContentTextView)

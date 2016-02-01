@@ -60,9 +60,8 @@
     
     
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"我的话题";
     [self creatSegment];
     [self creatScroller];
@@ -87,7 +86,7 @@
     self.segmentedControl.layer.cornerRadius = 7;
     self.segmentedControl.layer.borderWidth = 1;
     self.segmentedControl.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
-    
+    self.segmentedControl.backgroundColor = [UIColor whiteColor];
     self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
     
     self.segmentedControl.selectedSegmentIndex = 0;
@@ -350,7 +349,7 @@
         
         [cell showDateWithModel:model];
         NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
-        cell.nameLabel.text = [self.firstUserInfoDic[userId]nick];
+        cell.nickLabel.text = [self.firstUserInfoDic[userId]nick];
         [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.firstUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
         [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
         cell.headButton.tag = 111;
@@ -364,7 +363,7 @@
         [cell showDateWithModel:model];
         
         NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
-        cell.nameLabel.text = [self.secondUserInfoDic[userId]nick];
+        cell.nickLabel.text = [self.secondUserInfoDic[userId]nick];
         
         
         [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.secondUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];

@@ -60,7 +60,7 @@
 
 - (void)createTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.tableView.userInteractionEnabled = YES;
     self.tableView.dataSource = self;
@@ -74,8 +74,8 @@
 {
     ODNavigationBarView *naviView = [ODNavigationBarView navigationBarView];
     naviView.title = @"登陆";
-    [naviView.leftBarButton setTarget:self action:@selector(backAction:) title:@"返回"];
-    [naviView.rightBarButton setTarget:self action:@selector(registered:) title:@"注册"];
+    naviView.leftBarButton = [ODBarButton barButtonWithTarget:self action:@selector(backAction:) title:@"返回"];
+    naviView.rightBarButton = [ODBarButton barButtonWithTarget:self action:@selector(registered:) title:@"注册"];;
     [self.view addSubview:naviView];
 }
 
