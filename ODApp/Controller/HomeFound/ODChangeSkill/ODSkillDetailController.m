@@ -43,7 +43,7 @@
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
-    self.scrollView.frame = CGRectMake(10, 64, kScreenSize.width, kScreenSize.height - 64 - 50);
+    self.scrollView.frame = CGRectMake(10, ODTopY, kScreenSize.width, KControllerHeight - 50 - ODNavigationHeight);
 }
 #pragma mark - actions
 - (void)shareButtonClick:(UIButton *)button
@@ -93,9 +93,6 @@
     [self.view addSubview:self.scrollView];
 }
 
-
-
-
 - (void)createSkillDetailRequest
 {
 
@@ -128,7 +125,6 @@
         
         
     }];
-    
 }
 
 - (void)setImageView
@@ -174,27 +170,21 @@
             }];
         }
     }
-
 }
 
 - (void)createCollectView
 {
-
     UIImageView *leftImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.scrollView.frame) - 50, 15, 15)];
     [leftImageView setImage:[UIImage imageNamed:@"Skills profile page_icon_More left"]];
     [self.scrollView addSubview:leftImageView];
     UIImageView *rightImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenSize.width - 20, CGRectGetMaxY(self.scrollView.frame) - 50, 15, 15)];
     [leftImageView setImage:[UIImage imageNamed:@"Skills profile page_icon_More right"]];
     [self.scrollView addSubview:rightImageView];
-    
 }
-
-
 
 - (void)creatPayView
 {
-    
-    self.payView = [ODClassMethod creatViewWithFrame:CGRectMake(0, kScreenSize.height - 50, kScreenSize.width, 50) tag:0 color:@"#ffffff"];
+    self.payView = [ODClassMethod creatViewWithFrame:CGRectMake(0, KControllerHeight - 50 - ODNavigationHeight, kScreenSize.width, 50) tag:0 color:@"#ffffff"];
     self.payView.layer.borderWidth = 1;
     self.payView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     
@@ -213,7 +203,6 @@
     [self.payView addSubview:self.payButton];
     [self.view addSubview:self.payView];
 }
-
 
 
 @end
