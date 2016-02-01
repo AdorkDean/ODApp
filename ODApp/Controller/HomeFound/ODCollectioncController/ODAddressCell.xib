@@ -14,18 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="455" height="107"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="冯李杰" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veu-2g-gh3">
-                        <rect key="frame" x="20" y="20" width="60" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="60" id="OJh-wd-4Ax"/>
-                            <constraint firstAttribute="height" constant="20" id="uRu-NF-2LB"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13555555555" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bf-hR-AyE">
-                        <rect key="frame" x="90" y="20" width="150" height="20"/>
+                        <rect key="frame" x="80" y="20" width="150" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="150" id="4TB-0q-gN6"/>
                             <constraint firstAttribute="height" constant="20" id="wzB-AO-sJm"/>
@@ -53,6 +43,16 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="冯李杰" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veu-2g-gh3">
+                        <rect key="frame" x="20" y="20" width="60" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="OJh-wd-4Ax"/>
+                            <constraint firstAttribute="height" constant="20" id="uRu-NF-2LB"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="s9U-gA-eLA" secondAttribute="trailing" id="8Uz-sC-plt"/>
@@ -61,7 +61,7 @@
                     <constraint firstItem="veu-2g-gh3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="al2-cU-GQp"/>
                     <constraint firstItem="veu-2g-gh3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="e12-g1-hme"/>
                     <constraint firstItem="9bf-hR-AyE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="g9d-tX-2lM"/>
-                    <constraint firstItem="9bf-hR-AyE" firstAttribute="leading" secondItem="veu-2g-gh3" secondAttribute="trailing" constant="10" id="js8-ao-2JA"/>
+                    <constraint firstItem="9bf-hR-AyE" firstAttribute="leading" secondItem="veu-2g-gh3" secondAttribute="trailing" id="js8-ao-2JA"/>
                     <constraint firstAttribute="bottom" secondItem="s9U-gA-eLA" secondAttribute="bottom" id="sAQ-Vu-baN"/>
                     <constraint firstAttribute="trailing" secondItem="tem-WB-bgm" secondAttribute="trailing" constant="10" id="sbu-L3-aR5"/>
                     <constraint firstItem="s9U-gA-eLA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="vlg-Gr-hNr"/>

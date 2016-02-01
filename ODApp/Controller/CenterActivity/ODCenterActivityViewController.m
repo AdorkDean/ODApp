@@ -360,18 +360,19 @@
 
 - (void)searchButtonClick:(UIButton *)sender
 {
+    __weakSelf
     ODChoseCenterController *vc = [[ODChoseCenterController alloc] init];
     vc.storeCenterNameBlock = ^(NSString *name , NSString *storeId , NSInteger storeNumber){
-        self.centerNumber = storeNumber;
+        weakSelf.centerNumber = storeNumber;
         
-        self.firstHeader.centerNameLabel.text = name;
+        weakSelf.firstHeader.centerNameLabel.text = name;
         
     };
     
     
     vc.isRefreshBlock = ^(BOOL isRefresh){
         
-        self.isRefresh = isRefresh;
+        weakSelf.isRefresh = isRefresh;
         
     };
     

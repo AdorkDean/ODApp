@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *lineLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 
 
 +(instancetype)getView;
