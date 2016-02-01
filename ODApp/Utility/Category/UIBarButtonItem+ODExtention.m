@@ -13,8 +13,8 @@
 + (instancetype)OD_itemWithTarget:(id)target action:(SEL)action image:(UIImage *)image highImage:(UIImage *)highImage
 {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setImage:image forState:UIControlStateNormal];
-    [button setImage:highImage forState:UIControlStateHighlighted];
+    [button setImage:[image imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)]  forState:UIControlStateNormal];
+    [button setImage:[highImage imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] forState:UIControlStateHighlighted];
     [button sizeToFit];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     return [[self alloc] initWithCustomView:button];

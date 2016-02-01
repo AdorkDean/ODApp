@@ -21,6 +21,9 @@
     self.count = 1;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"话题详情";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"返回"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
+    
     [self createReplyButton];
     [self createRequest];
     [self joiningTogetherParmetersWithUserInfo:YES];
@@ -44,36 +47,13 @@
     [self downLoadTableDataWithUrl:kCommunityBbsReplyListUrl paramater:signParameter];
 }
 
-#pragma mark - 初始化导航
--(void)navigationInit
-{
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-
-    
-    //返回按钮
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:backButton];
-    
-    //分享按钮
-    UIButton *shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:nil font:0];
-    UIImageView *shareImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width-37.5, 28, 20, 20) imageName:@"话题详情-分享icon" tag:0];
-    [self.headView addSubview:shareImageView];
-    [self.headView addSubview:shareButton];
-}
-
--(void)backButtonClick:(UIButton *)button
+-(void)backButtonClick
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-
--(void)shareButtonClick:(UIButton *)button
+#pragma mark - 分享
+-(void)shareButtonClick
 {
        
     @try {
@@ -205,7 +185,7 @@
     [self.tabelHeaderView addSubview:self.userView];
     
     //头像
-    UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 13.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"sds" font:0];
+    UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 13.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"" font:0];
     [userHeaderButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
     userHeaderButton.layer.masksToBounds = YES;
     userHeaderButton.layer.cornerRadius = 24;

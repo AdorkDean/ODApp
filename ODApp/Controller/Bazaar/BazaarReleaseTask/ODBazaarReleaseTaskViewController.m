@@ -71,7 +71,7 @@
 #pragma mark - 创建scrollView
 -(void)createScrollView
 {
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0,64, kScreenSize.width, kScreenSize.height - 64)];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0,0, kScreenSize.width, kScreenSize.height )];
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 500);
     [self.view addSubview:self.scrollView];

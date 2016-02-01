@@ -20,39 +20,19 @@
     
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.navigationItem.title = @"回复";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"返回"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
     [self createRequest];
     [self createTextView];    
     
 }
 
-#pragma mark - 初始化导航
--(void)navigationInit
-{
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    //标题
-    
-    //返回按钮
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    [self.headView addSubview:backButton];
-    
-    //确认按钮
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 16,35, 44) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:16];
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:confirmButton];
-}
-
--(void)backButtonClick:(UIButton *)button
+-(void)backButtonClick
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
--(void)confirmButtonClick:(UIButton *)button
+-(void)confirmButtonClick
 {
     if (self.textView.text.length>0) {
         [self joiningTogetherParmeters];
@@ -113,18 +93,18 @@
 
 #pragma mark - UITextViewDelegate
 
-NSString *titleText1 = @"";
+NSString *replyTitleText = @"";
 - (void)textViewDidChange:(UITextView *)textView
 {
     if (textView == self.textView)
     {
         if (textView.text.length > 500)
         {
-            textView.text = titleText1;
+            textView.text = replyTitleText;
         }
         else
         {
-            titleText1 = textView.text;
+            replyTitleText = textView.text;
         }
     }
 }

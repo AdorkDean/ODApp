@@ -17,27 +17,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.navigationItem.title = @"任务奖励";
     [self createRequest];
+    [self navigationInit];
     [self joiningTogetherParmeters];
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backButtonClick:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"返回"];
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
+    
+    
+
 }
 
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
-    //返回按钮
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    [self.headView addSubview:backButton];
-    
-    //确认按钮
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 16,35, 44) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:16];
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:confirmButton];
-    
     UIView *view = [ODClassMethod creatViewWithFrame:CGRectMake(4, 68, kScreenSize.width-8, 40) tag:0 color:@"#ffffff"];
     view.layer.masksToBounds = YES;
     view.layer.cornerRadius = 5;

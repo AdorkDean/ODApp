@@ -27,7 +27,6 @@
 @property(nonatomic,copy)void(^myBlock)(NSString *refresh);
 
 @property (nonatomic, strong) UIImage *pickedImage;
-
 @property (nonatomic, strong) MBProgressHUD *hud;
 
 @end

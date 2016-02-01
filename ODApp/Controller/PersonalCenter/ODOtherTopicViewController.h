@@ -12,7 +12,6 @@
 #import "AFNetworking.h"
 #import "ODCommunityModel.h"
 #import "ODCommunityCollectionCell.h"
-#import "ODCommunityHeaderView.h"
 #import "ODCommunityDetailViewController.h"
 #import "MJRefresh.h"
 

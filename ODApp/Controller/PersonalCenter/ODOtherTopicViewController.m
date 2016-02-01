@@ -175,7 +175,7 @@
     for (NSInteger i = 0; i < self.userArray.count; i++) {
         ODCommunityModel *userModel = self.userArray[i];
         if ([[NSString stringWithFormat:@"%@",model.user_id] isEqualToString:[NSString stringWithFormat:@"%@",userModel.id]]) {
-            cell.nameLabel.text = userModel.nick;
+            cell.nickLabel.text = userModel.nick;
             [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
         }
     }

@@ -378,7 +378,7 @@
         
         [cell showDateWithModel:model];
         NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
-        cell.nameLabel.text = [self.firstUserInfoDic[userId]nick];
+        cell.nickLabel.text = [self.firstUserInfoDic[userId]nick];
         [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.firstUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
         [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
         cell.headButton.tag = 111;
@@ -392,7 +392,7 @@
         [cell showDateWithModel:model];
         
         NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
-        cell.nameLabel.text = [self.secondUserInfoDic[userId]nick];
+        cell.nickLabel.text = [self.secondUserInfoDic[userId]nick];
         
         
         [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.secondUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];

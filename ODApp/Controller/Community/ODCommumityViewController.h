@@ -13,7 +13,6 @@
 #import "AFNetworking.h"
 #import "ODCommunityModel.h"
 #import "ODCommunityCollectionCell.h"
-#import "ODCommunityHeaderView.h"
 #import "ODCommunityReleaseTopicViewController.h"
 #import "ODCommunityDetailViewController.h"
 #import "ODCommunityKeyWordSearchViewController.h"
@@ -27,7 +26,6 @@
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic,strong)UIView *headView;
 @property(nonatomic)NSInteger count;
 @property(nonatomic,copy)NSString *refresh;
 
