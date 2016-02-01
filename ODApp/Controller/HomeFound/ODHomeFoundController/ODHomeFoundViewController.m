@@ -298,7 +298,7 @@
 {
 
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64 - 55) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - 55) collectionViewLayout:self.flowLayout];
     
     self.flowLayout.minimumInteritemSpacing = 5;
     self.flowLayout.minimumLineSpacing = 2;
@@ -375,10 +375,22 @@
     
     self.rollPictureView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"rollPictureView" forIndexPath:indexPath];
     
-    self.rollPictureView.cycleSecrollerView.delegate = self;
+
     
-    [self.rollPictureView.cycleSecrollerView setImageURLStringsGroup:self.pictureArray];
-    [self.rollPictureView.cycleSecrollerView setTitlesGroup:self.titleArray];
+    self.rollPictureView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 30) * 2/3 * self.pictureArray.count , 130);
+    self.rollPictureView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 30) * 2/3, 0);
+//    self.rollPictureView.scrollView.pagingEnabled = YES;
+    self.rollPictureView.scrollView.delegate = self;
+    self.rollPictureView.scrollView.showsHorizontalScrollIndicator = NO;
+    self.rollPictureView.scrollView.showsVerticalScrollIndicator = NO;
+    
+    for (int i = 0; i < self.pictureArray.count; i++) {
+        UIImageView *pictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kScreenSize.width - 30) * 2/3 * i, 0, (kScreenSize.width - 30) * 2/3, 130)];
+        [pictureImageView sd_setImageWithURL:[NSURL URLWithString:self.pictureArray[i]]];
+        pictureImageView.userInteractionEnabled = YES;
+        [self.rollPictureView.scrollView addSubview:pictureImageView];
+    }
+    
     
     [self.rollPictureView.findActivityButton addTarget:self action:@selector(findActivityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.rollPictureView.orderPlaceButton addTarget:self action:@selector(orderPlaceButtonClick:) forControlEvents:UIControlEventTouchUpInside];

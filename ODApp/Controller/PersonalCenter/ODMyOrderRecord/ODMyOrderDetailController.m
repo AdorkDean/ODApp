@@ -92,7 +92,7 @@
             NSDictionary *result = dict[@"result"];
             weakSelf.model = [[ODMyOrderDetailModel alloc]init];
             [weakSelf.model setValuesForKeysWithDictionary:result];
-            [weakSelf.dataArray addObject:self.model];
+            [weakSelf.dataArray addObject:weakSelf.model];
             
             NSDictionary *devices = result[@"devices"];
             for (NSDictionary *itemDict in devices) {
@@ -110,7 +110,7 @@
 
 - (void)createOrderView{
 
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight)];
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     
     UILabel *timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5,  10, kScreenSize.width - 10, 35) text:[NSString stringWithFormat:@"  %@ - %@",self.model.start_date_str,self.model.end_date_str] font:14 alignment:@"left" color:@"#000000" alpha:11];

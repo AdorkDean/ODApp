@@ -54,7 +54,7 @@
 {
     
     self.addAddressView = [ODAddAddressView getView];
-    self.addAddressView.frame = CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64);
+    self.addAddressView.frame = CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight);
     self.addAddressView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.view addSubview:self.addAddressView];
     

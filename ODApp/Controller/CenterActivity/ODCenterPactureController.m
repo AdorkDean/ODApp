@@ -23,7 +23,7 @@
 
 - (void)initWebView
 {
-    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
+    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight)];
     NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:self.webUrl]];
     [self.view addSubview:web];
     [web loadRequest:request];
