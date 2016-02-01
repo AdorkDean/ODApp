@@ -12,54 +12,195 @@
 
 @end
 
-static NSString *const ODSkillDetailReusableVIEW = @"ODSkillDetailReusableView";
 @implementation ODSkillDetailController
 
+#pragma mark - lazyLoad
+- (UIScrollView *)scrollView
+{
+    if (_scrollView == nil)
+    {
 
+        self.scrollView = [[UIScrollView alloc] init];
+        self.scrollView.backgroundColor = [UIColor whiteColor];
+    }
+    return _scrollView;
+}
+
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6" alpha:1];
+    self.view.backgroundColor = [UIColor whiteColor];
     
-    self.navigationItem.title = self.personTitle;
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(backClick:) image:nil highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"返回"];
+    self.navigationItem.title = self.skillDetailModel.user.nick;
     
-    [self createSkillDetailView];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeDefault) target:self action:@selector(shareButtonClick:) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil textColor:nil highColor:nil title:nil];
+    
     [self creatPayView];
+    [self createSkillDetailRequest];
 }
 
-- (void)backClick:(UIButton *)button
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    self.scrollView.frame = CGRectMake(10, 64, kScreenSize.width, kScreenSize.height - 64 - 50);
+}
+#pragma mark - actions
+- (void)shareButtonClick:(UIButton *)button
 {
 
-    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
+- (void)collectButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)leftButtonClick:(UIButton *)button
+{
+
+    
+}
+
+- (void)rightButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+- (void)payButtonClick:(UIButton *)button
+{
+    
+    ODOrderController *vc = [[ODOrderController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - init
 
 - (void)createSkillDetailView{
 
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - 55)];
-    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 150) / 2, 10, 150, 20) text:self.skillDetailModel.title font:16 alignment:@"center" color:@"#000000" alpha:1];
+    self.priceLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 100) / 2, CGRectGetMaxY(self.titleLabel.frame) + 5, 100, 20) text:[NSString stringWithFormat:@"%@元 / %@",self.skillDetailModel.price,self.skillDetailModel.unit] font:15 alignment:@"center" color:@"#000000" alpha:1];
     
-    self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 150) / 2, 10, 150, 20) text:@"我去＊代买早饭" font:16 alignment:@"center" color:@"#000000" alpha:1];
-    self.priceLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 100) / 2, CGRectGetMaxY(self.titleLabel.frame) + 5, 100, 20) text:@"10元 / 次" font:15 alignment:@"center" color:@"#000000" alpha:1];
-    
-    self.contentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, CGRectGetMaxY(self.priceLabel.frame) + 10, kScreenSize.width - 20,[ODHelp textHeightFromTextString:@"dfsdfsdf" width:kScreenSize.width - 10 miniHeight:20 fontSize:14] ) text:@"dfdfs" font:14 alignment:@"left" color:@"#000000" alpha:1];
+    self.contentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.priceLabel.frame) + 10, kScreenSize.width - 20,[ODHelp textHeightFromTextString:self.skillDetailModel.content width:kScreenSize.width - 10 miniHeight:20 fontSize:14] ) text:self.skillDetailModel.content font:14 alignment:@"left" color:@"#000000" alpha:1];
     [self.scrollView addSubview:self.titleLabel];
     [self.scrollView addSubview:self.priceLabel];
     [self.scrollView addSubview:self.contentLabel];
     
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height);
+    
     [self.view addSubview:self.scrollView];
+}
+
+
+
+
+- (void)createSkillDetailRequest
+{
+
+    self.manager = [AFHTTPRequestOperationManager manager];
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    self.pictureArray = [[NSMutableArray alloc] init];
+    
+    NSDictionary *parameter = @{@"swap_id":@"1601"};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weakSelf
+    [self.manager GET:ODSkillDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if (responseObject) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            NSDictionary *result = dict[@"result"];
+            
+            weakSelf.skillDetailModel = [ODSkillDetailModel mj_objectWithKeyValues:result];
+            
+            for (ODSkillDetailImgBigModel *imgBbigModel in weakSelf.skillDetailModel.imgs_big) {
+                [weakSelf.pictureArray addObject:imgBbigModel.img_url];
+            }
+            weakSelf.navigationItem.title = weakSelf.skillDetailModel.user.nick;
+            [weakSelf createSkillDetailView];
+            [weakSelf setImageView];
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+        
+    }];
     
 }
+
+- (void)setImageView
+{
+    if (self.pictureArray.count)
+    {
+        for (NSInteger i = 0; i < self.pictureArray.count; i++)
+        {
+            UIImageView *picImageView = [[UIImageView alloc]init];
+            __weakSelf
+            [picImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.pictureArray[i]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                @try {
+                    [picImageView sizeToFit];
+                    //图片缩放比例
+                    float scale = (kScreenSize.width - 20) / picImageView.od_width;
+                    picImageView.frame = CGRectMake(0, CGRectGetMaxY(weakSelf.contentLabel.frame) + 5 + (picImageView.od_height * scale + 5) * i,kScreenSize.width - 20 , picImageView.od_height * scale);
+                    [weakSelf.scrollView addSubview:picImageView];
+                    picImageView.contentMode = UIViewContentModeScaleAspectFill;
+                    
+                    UIImageView *collectImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(picImageView.frame) + 10, 180, 40)];
+                    [collectImageView setImage:[UIImage imageNamed:@"Skills profile page_share"]];
+                    [self.scrollView addSubview:collectImageView];
+                    
+                    UIButton *leftButton = [[UIButton alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(collectImageView.frame) + 10, 15, 15)];
+                    [leftButton setImage:[UIImage imageNamed:@"Skills profile page_icon_More left"] forState:UIControlStateNormal];
+                    [leftButton addTarget:self action:@selector(leftButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.scrollView addSubview:leftButton];
+                    
+                    UIButton *rightButton = [[UIButton alloc] initWithFrame:CGRectMake(kScreenSize.width - 20 - 35, CGRectGetMaxY(collectImageView.frame) + 10, 15, 15)];
+                    [rightButton setImage:[UIImage imageNamed:@"Skills profile page_icon_More right"] forState:UIControlStateNormal];
+                    [rightButton addTarget:self action:@selector(rightButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                    [self.scrollView addSubview:rightButton];
+                    
+                    if (i == self.pictureArray.count - 1)
+                    {
+                        self.scrollView.contentSize = CGSizeMake(kScreenSize.width, CGRectGetMaxY(rightButton.frame) + 20);
+                    }
+                }
+                @catch (NSException *exception) {
+                    
+                }
+                
+            }];
+        }
+    }
+
+}
+
+- (void)createCollectView
+{
+
+    UIImageView *leftImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.scrollView.frame) - 50, 15, 15)];
+    [leftImageView setImage:[UIImage imageNamed:@"Skills profile page_icon_More left"]];
+    [self.scrollView addSubview:leftImageView];
+    UIImageView *rightImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenSize.width - 20, CGRectGetMaxY(self.scrollView.frame) - 50, 15, 15)];
+    [leftImageView setImage:[UIImage imageNamed:@"Skills profile page_icon_More right"]];
+    [self.scrollView addSubview:rightImageView];
+    
+}
+
+
 
 - (void)creatPayView
 {
     
-    self.payView = [ODClassMethod creatViewWithFrame:CGRectMake(0, kScreenSize.height - 54, kScreenSize.width, 54) tag:0 color:@"#ffffff"];
-    self.collectButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 0, 80, 54) target:self sel:@selector(collectButtonClick:) tag:0 image:nil title:@"" font:0];
-    self.collectImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(15, 20, 15, 15) imageName:@"Skills profile page_icon_Collection" tag:0];
-    UILabel *collectLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(35, 20, 30, 15) text:@"收藏" font:15 alignment:@"left" color:@"#000000" alpha:1];
+    self.payView = [ODClassMethod creatViewWithFrame:CGRectMake(0, kScreenSize.height - 50, kScreenSize.width, 50) tag:0 color:@"#ffffff"];
+    self.payView.layer.borderWidth = 1;
+    self.payView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    
+    self.collectButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 0, 80, 50) target:self sel:@selector(collectButtonClick:) tag:0 image:nil title:@"" font:0];
+    self.collectImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(15, 18, 15, 15) imageName:@"Skills profile page_icon_Collection" tag:0];
+    UILabel *collectLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(35, 18, 30, 15) text:@"收藏" font:15 alignment:@"left" color:@"#000000" alpha:1];
     collectLabel.userInteractionEnabled = NO;
     
     self.payButton = [ODClassMethod creatButtonWithFrame:CGRectMake(80, 0, kScreenSize.width - 80, 54) target:self sel:@selector(payButtonClick:) tag:0 image:@"" title:@"立即购买" font:15];
@@ -73,34 +214,6 @@ static NSString *const ODSkillDetailReusableVIEW = @"ODSkillDetailReusableView";
     [self.view addSubview:self.payView];
 }
 
-- (void)collectButtonClick:(UIButton *)button
-{
 
-    
-}
-
-- (void)payButtonClick:(UIButton *)button
-{
-    
-    ODOrderController *vc = [[ODOrderController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

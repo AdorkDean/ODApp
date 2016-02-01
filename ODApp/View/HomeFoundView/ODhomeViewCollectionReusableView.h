@@ -47,6 +47,8 @@
 
 @property (nonatomic, strong)UIView *hotActivityView;
 
+@property (nonatomic, strong)UIScrollView *scrollView;
+
 @property (nonatomic, strong)UIView *searchCircleView;
 
 @property (nonatomic, strong)UIButton *emotionButton;

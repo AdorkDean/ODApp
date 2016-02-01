@@ -92,7 +92,7 @@
             NSDictionary *result = dict[@"result"];
             weakSelf.model = [[ODMyOrderDetailModel alloc]init];
             [weakSelf.model setValuesForKeysWithDictionary:result];
-            [weakSelf.dataArray addObject:self.model];
+            [weakSelf.dataArray addObject:weakSelf.model];
             
             NSDictionary *devices = result[@"devices"];
             for (NSDictionary *itemDict in devices) {
