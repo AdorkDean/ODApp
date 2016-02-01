@@ -115,27 +115,6 @@
 		D47DD5B21C5EE7FD00267C0C /* 活动目的icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD48D1C5EE7FC00267C0C /* 活动目的icon@1x.png */; };
 		D47DD5B31C5EE7FD00267C0C /* 活动目的icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD48E1C5EE7FC00267C0C /* 活动目的icon@2x.png */; };
 		D47DD5B41C5EE7FD00267C0C /* 活动目的icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD48F1C5EE7FC00267C0C /* 活动目的icon@3x.png */; };
-		D47DD5B51C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4911C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@1x.png */; };
-		D47DD5B61C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4921C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@2x.png */; };
-		D47DD5B71C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4931C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@3x.png */; };
-		D47DD5B81C5EE7FD00267C0C /* Skills profile page_icon_Collection@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4941C5EE7FD00267C0C /* Skills profile page_icon_Collection@1x.png */; };
-		D47DD5B91C5EE7FD00267C0C /* Skills profile page_icon_Collection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4951C5EE7FD00267C0C /* Skills profile page_icon_Collection@2x.png */; };
-		D47DD5BA1C5EE7FD00267C0C /* Skills profile page_icon_Collection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4961C5EE7FD00267C0C /* Skills profile page_icon_Collection@3x.png */; };
-		D47DD5BB1C5EE7FD00267C0C /* Skills profile page_icon_More left@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4971C5EE7FD00267C0C /* Skills profile page_icon_More left@1x.png */; };
-		D47DD5BC1C5EE7FD00267C0C /* Skills profile page_icon_More left@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4981C5EE7FD00267C0C /* Skills profile page_icon_More left@2x.png */; };
-		D47DD5BD1C5EE7FD00267C0C /* Skills profile page_icon_More left@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4991C5EE7FD00267C0C /* Skills profile page_icon_More left@3x.png */; };
-		D47DD5BE1C5EE7FD00267C0C /* Skills profile page_icon_More right@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD49A1C5EE7FD00267C0C /* Skills profile page_icon_More right@1x.png */; };
-		D47DD5BF1C5EE7FD00267C0C /* Skills profile page_icon_More right@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD49B1C5EE7FD00267C0C /* Skills profile page_icon_More right@2x.png */; };
-		D47DD5C01C5EE7FD00267C0C /* Skills profile page_icon_More right@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD49C1C5EE7FD00267C0C /* Skills profile page_icon_More right@3x.png */; };
-		D47DD5C11C5EE7FD00267C0C /* Skills profile page_icon_Not certified@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD49D1C5EE7FD00267C0C /* Skills profile page_icon_Not certified@1x.png */; };
-		D47DD5C21C5EE7FD00267C0C /* Skills profile page_icon_Not certified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD49E1C5EE7FD00267C0C /* Skills profile page_icon_Not certified@2x.png */; };
-		D47DD5C31C5EE7FD00267C0C /* Skills profile page_icon_Not certified@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD49F1C5EE7FD00267C0C /* Skills profile page_icon_Not certified@3x.png */; };
-		D47DD5C41C5EE7FD00267C0C /* Skills profile page_icon_share@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4A01C5EE7FD00267C0C /* Skills profile page_icon_share@1x.png */; };
-		D47DD5C51C5EE7FD00267C0C /* Skills profile page_icon_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4A11C5EE7FD00267C0C /* Skills profile page_icon_share@2x.png */; };
-		D47DD5C61C5EE7FD00267C0C /* Skills profile page_icon_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4A21C5EE7FD00267C0C /* Skills profile page_icon_share@3x.png */; };
-		D47DD5C71C5EE7FD00267C0C /* Skills profile page_share@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4A31C5EE7FD00267C0C /* Skills profile page_share@1x.png */; };
-		D47DD5C81C5EE7FD00267C0C /* Skills profile page_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4A41C5EE7FD00267C0C /* Skills profile page_share@2x.png */; };
-		D47DD5C91C5EE7FD00267C0C /* Skills profile page_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4A51C5EE7FD00267C0C /* Skills profile page_share@3x.png */; };
 		D47DD5CA1C5EE7FD00267C0C /* 发布新话题－默认icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4A81C5EE7FD00267C0C /* 发布新话题－默认icon@1x.png */; };
 		D47DD5CB1C5EE7FD00267C0C /* 发布新话题－默认icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4A91C5EE7FD00267C0C /* 发布新话题－默认icon@2x.png */; };
 		D47DD5CC1C5EE7FD00267C0C /* 发布新话题－默认icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD4AA1C5EE7FD00267C0C /* 发布新话题－默认icon@3x.png */; };
@@ -227,7 +206,6 @@
 		D47DD6221C5EE7FD00267C0C /* 欧动集市icon点击态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5061C5EE7FD00267C0C /* 欧动集市icon点击态@3x.png */; };
 		D47DD6231C5EE7FD00267C0C /* 欧动集市icon默认态@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5071C5EE7FD00267C0C /* 欧动集市icon默认态@1x.png */; };
 		D47DD6241C5EE7FD00267C0C /* 欧动集市icon默认态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5081C5EE7FD00267C0C /* 欧动集市icon默认态@2x.png */; };
-		D47DD6251C5EE7FD00267C0C /* 欧动集市icon默认态@3x.psd in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5091C5EE7FD00267C0C /* 欧动集市icon默认态@3x.psd */; };
 		D47DD6261C5EE7FD00267C0C /* 首页发现icon点击态@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD50A1C5EE7FD00267C0C /* 首页发现icon点击态@1x.png */; };
 		D47DD6271C5EE7FD00267C0C /* 首页发现icon点击态@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD50B1C5EE7FD00267C0C /* 首页发现icon点击态@2x.png */; };
 		D47DD6281C5EE7FD00267C0C /* 首页发现icon点击态@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD50C1C5EE7FD00267C0C /* 首页发现icon点击态@3x.png */; };
@@ -270,79 +248,6 @@
 		D47DD64D1C5EE7FD00267C0C /* 我也要发布任务icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5351C5EE7FD00267C0C /* 我也要发布任务icon@1x.png */; };
 		D47DD64E1C5EE7FD00267C0C /* 我也要发布任务icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5361C5EE7FD00267C0C /* 我也要发布任务icon@2x.png */; };
 		D47DD64F1C5EE7FD00267C0C /* 我也要发布任务icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5371C5EE7FD00267C0C /* 我也要发布任务icon@3x.png */; };
-		D47DD6501C5EE7FD00267C0C /* button_beautiful@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5391C5EE7FD00267C0C /* button_beautiful@1x.png */; };
-		D47DD6511C5EE7FD00267C0C /* button_beautiful@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD53A1C5EE7FD00267C0C /* button_beautiful@2x.png */; };
-		D47DD6521C5EE7FD00267C0C /* button_beautiful@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD53B1C5EE7FD00267C0C /* button_beautiful@3x.png */; };
-		D47DD6531C5EE7FD00267C0C /* button_emotion@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD53C1C5EE7FD00267C0C /* button_emotion@1x.png */; };
-		D47DD6541C5EE7FD00267C0C /* button_emotion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD53D1C5EE7FD00267C0C /* button_emotion@2x.png */; };
-		D47DD6551C5EE7FD00267C0C /* button_emotion@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD53E1C5EE7FD00267C0C /* button_emotion@3x.png */; };
-		D47DD6561C5EE7FD00267C0C /* button_Funny@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD53F1C5EE7FD00267C0C /* button_Funny@1x.png */; };
-		D47DD6571C5EE7FD00267C0C /* button_Funny@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5401C5EE7FD00267C0C /* button_Funny@2x.png */; };
-		D47DD6581C5EE7FD00267C0C /* button_Funny@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5411C5EE7FD00267C0C /* button_Funny@3x.png */; };
-		D47DD6591C5EE7FD00267C0C /* button_Life@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5421C5EE7FD00267C0C /* button_Life@1x.png */; };
-		D47DD65A1C5EE7FD00267C0C /* button_Life@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5431C5EE7FD00267C0C /* button_Life@2x.png */; };
-		D47DD65B1C5EE7FD00267C0C /* button_Life@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5441C5EE7FD00267C0C /* button_Life@3x.png */; };
-		D47DD65C1C5EE7FD00267C0C /* button_Movies@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5451C5EE7FD00267C0C /* button_Movies@1x.png */; };
-		D47DD65D1C5EE7FD00267C0C /* button_Movies@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5461C5EE7FD00267C0C /* button_Movies@2x.png */; };
-		D47DD65E1C5EE7FD00267C0C /* button_Movies@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5471C5EE7FD00267C0C /* button_Movies@3x.png */; };
-		D47DD65F1C5EE7FD00267C0C /* button_Pet@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5481C5EE7FD00267C0C /* button_Pet@1x.png */; };
-		D47DD6601C5EE7FD00267C0C /* button_Pet@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5491C5EE7FD00267C0C /* button_Pet@2x.png */; };
-		D47DD6611C5EE7FD00267C0C /* button_Pet@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD54A1C5EE7FD00267C0C /* button_Pet@3x.png */; };
-		D47DD6621C5EE7FD00267C0C /* button_quadratic element@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD54B1C5EE7FD00267C0C /* button_quadratic element@1x.png */; };
-		D47DD6631C5EE7FD00267C0C /* button_quadratic element@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD54C1C5EE7FD00267C0C /* button_quadratic element@2x.png */; };
-		D47DD6641C5EE7FD00267C0C /* button_quadratic element@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD54D1C5EE7FD00267C0C /* button_quadratic element@3x.png */; };
-		D47DD6651C5EE7FD00267C0C /* button_Star@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD54E1C5EE7FD00267C0C /* button_Star@1x.png */; };
-		D47DD6661C5EE7FD00267C0C /* button_Star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD54F1C5EE7FD00267C0C /* button_Star@2x.png */; };
-		D47DD6671C5EE7FD00267C0C /* button_Star@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5501C5EE7FD00267C0C /* button_Star@3x.png */; };
-		D47DD6681C5EE7FD00267C0C /* icon_activity@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5511C5EE7FD00267C0C /* icon_activity@1x.png */; };
-		D47DD6691C5EE7FD00267C0C /* icon_activity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5521C5EE7FD00267C0C /* icon_activity@2x.png */; };
-		D47DD66A1C5EE7FD00267C0C /* icon_activity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5531C5EE7FD00267C0C /* icon_activity@3x.png */; };
-		D47DD66B1C5EE7FD00267C0C /* icon_circle_big@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5541C5EE7FD00267C0C /* icon_circle_big@1x.png */; };
-		D47DD66C1C5EE7FD00267C0C /* icon_circle_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5551C5EE7FD00267C0C /* icon_circle_big@2x.png */; };
-		D47DD66D1C5EE7FD00267C0C /* icon_circle_big@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5561C5EE7FD00267C0C /* icon_circle_big@3x.png */; };
-		D47DD66E1C5EE7FD00267C0C /* icon_circle_small@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5571C5EE7FD00267C0C /* icon_circle_small@1x.png */; };
-		D47DD66F1C5EE7FD00267C0C /* icon_circle_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5581C5EE7FD00267C0C /* icon_circle_small@2x.png */; };
-		D47DD6701C5EE7FD00267C0C /* icon_circle_small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5591C5EE7FD00267C0C /* icon_circle_small@3x.png */; };
-		D47DD6711C5EE7FD00267C0C /* icon_Collection@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD55A1C5EE7FD00267C0C /* icon_Collection@1x.png */; };
-		D47DD6721C5EE7FD00267C0C /* icon_Collection@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD55B1C5EE7FD00267C0C /* icon_Collection@2x.png */; };
-		D47DD6731C5EE7FD00267C0C /* icon_Collection@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD55C1C5EE7FD00267C0C /* icon_Collection@3x.png */; };
-		D47DD6741C5EE7FD00267C0C /* icon_Discount@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD55D1C5EE7FD00267C0C /* icon_Discount@1x.png */; };
-		D47DD6751C5EE7FD00267C0C /* icon_Discount@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD55E1C5EE7FD00267C0C /* icon_Discount@2x.png */; };
-		D47DD6761C5EE7FD00267C0C /* icon_Discount@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD55F1C5EE7FD00267C0C /* icon_Discount@3x.png */; };
-		D47DD6771C5EE7FD00267C0C /* icon_field@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5601C5EE7FD00267C0C /* icon_field@1x.png */; };
-		D47DD6781C5EE7FD00267C0C /* icon_field@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5611C5EE7FD00267C0C /* icon_field@2x.png */; };
-		D47DD6791C5EE7FD00267C0C /* icon_field@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5621C5EE7FD00267C0C /* icon_field@3x.png */; };
-		D47DD67A1C5EE7FD00267C0C /* icon_gesture@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5631C5EE7FD00267C0C /* icon_gesture@1x.png */; };
-		D47DD67B1C5EE7FD00267C0C /* icon_gesture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5641C5EE7FD00267C0C /* icon_gesture@2x.png */; };
-		D47DD67C1C5EE7FD00267C0C /* icon_gesture@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5651C5EE7FD00267C0C /* icon_gesture@3x.png */; };
-		D47DD67D1C5EE7FD00267C0C /* icon_help@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5661C5EE7FD00267C0C /* icon_help@1x.png */; };
-		D47DD67E1C5EE7FD00267C0C /* icon_help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5671C5EE7FD00267C0C /* icon_help@2x.png */; };
-		D47DD67F1C5EE7FD00267C0C /* icon_help@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5681C5EE7FD00267C0C /* icon_help@3x.png */; };
-		D47DD6801C5EE7FD00267C0C /* icon_Hot activity@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5691C5EE7FD00267C0C /* icon_Hot activity@1x.png */; };
-		D47DD6811C5EE7FD00267C0C /* icon_Hot activity@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD56A1C5EE7FD00267C0C /* icon_Hot activity@2x.png */; };
-		D47DD6821C5EE7FD00267C0C /* icon_Hot activity@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD56B1C5EE7FD00267C0C /* icon_Hot activity@3x.png */; };
-		D47DD6831C5EE7FD00267C0C /* icon_location@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD56C1C5EE7FD00267C0C /* icon_location@2x.png */; };
-		D47DD6841C5EE7FD00267C0C /* icon_man@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD56D1C5EE7FD00267C0C /* icon_man@1x.png */; };
-		D47DD6851C5EE7FD00267C0C /* icon_man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD56E1C5EE7FD00267C0C /* icon_man@2x.png */; };
-		D47DD6861C5EE7FD00267C0C /* icon_man@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD56F1C5EE7FD00267C0C /* icon_man@3x.png */; };
-		D47DD6871C5EE7FD00267C0C /* icon_more@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5701C5EE7FD00267C0C /* icon_more@1x.png */; };
-		D47DD6881C5EE7FD00267C0C /* icon_more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5711C5EE7FD00267C0C /* icon_more@2x.png */; };
-		D47DD6891C5EE7FD00267C0C /* icon_more@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5721C5EE7FD00267C0C /* icon_more@3x.png */; };
-		D47DD68A1C5EE7FD00267C0C /* icon_share@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5731C5EE7FD00267C0C /* icon_share@1x.png */; };
-		D47DD68B1C5EE7FD00267C0C /* icon_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5741C5EE7FD00267C0C /* icon_share@2x.png */; };
-		D47DD68C1C5EE7FD00267C0C /* icon_share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5751C5EE7FD00267C0C /* icon_share@3x.png */; };
-		D47DD68D1C5EE7FD00267C0C /* icon_Skill_big@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5761C5EE7FD00267C0C /* icon_Skill_big@1x.png */; };
-		D47DD68E1C5EE7FD00267C0C /* icon_Skill_big@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5771C5EE7FD00267C0C /* icon_Skill_big@2x.png */; };
-		D47DD68F1C5EE7FD00267C0C /* icon_Skill_big@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5781C5EE7FD00267C0C /* icon_Skill_big@3x.png */; };
-		D47DD6901C5EE7FD00267C0C /* icon_Skill_small@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5791C5EE7FD00267C0C /* icon_Skill_small@1x.png */; };
-		D47DD6911C5EE7FD00267C0C /* icon_Skill_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD57A1C5EE7FD00267C0C /* icon_Skill_small@2x.png */; };
-		D47DD6921C5EE7FD00267C0C /* icon_Skill_small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD57B1C5EE7FD00267C0C /* icon_Skill_small@3x.png */; };
-		D47DD6931C5EE7FD00267C0C /* icon_woman@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD57C1C5EE7FD00267C0C /* icon_woman@1x.png */; };
-		D47DD6941C5EE7FD00267C0C /* icon_woman@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD57D1C5EE7FD00267C0C /* icon_woman@2x.png */; };
-		D47DD6951C5EE7FD00267C0C /* icon_woman@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD57E1C5EE7FD00267C0C /* icon_woman@3x.png */; };
-		D47DD6961C5EE7FD00267C0C /* icon_Work-study@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD57F1C5EE7FD00267C0C /* icon_Work-study@1x.png */; };
-		D47DD6971C5EE7FD00267C0C /* icon_Work-study@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5801C5EE7FD00267C0C /* icon_Work-study@2x.png */; };
-		D47DD6981C5EE7FD00267C0C /* icon_Work-study@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5811C5EE7FD00267C0C /* icon_Work-study@3x.png */; };
 		D47DD6991C5EE7FD00267C0C /* 首页-去偷懒icon@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5821C5EE7FD00267C0C /* 首页-去偷懒icon@1x.png */; };
 		D47DD69A1C5EE7FD00267C0C /* 首页-去偷懒icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5831C5EE7FD00267C0C /* 首页-去偷懒icon@2x.png */; };
 		D47DD69B1C5EE7FD00267C0C /* 首页-去偷懒icon@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D47DD5841C5EE7FD00267C0C /* 首页-去偷懒icon@3x.png */; };
@@ -679,27 +584,6 @@
 		D47DD48D1C5EE7FC00267C0C /* 活动目的icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动目的icon@1x.png"; sourceTree = "<group>"; };
 		D47DD48E1C5EE7FC00267C0C /* 活动目的icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动目的icon@2x.png"; sourceTree = "<group>"; };
 		D47DD48F1C5EE7FC00267C0C /* 活动目的icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "活动目的icon@3x.png"; sourceTree = "<group>"; };
-		D47DD4911C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_arrow_upper@1x.png"; sourceTree = "<group>"; };
-		D47DD4921C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_arrow_upper@2x.png"; sourceTree = "<group>"; };
-		D47DD4931C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_arrow_upper@3x.png"; sourceTree = "<group>"; };
-		D47DD4941C5EE7FD00267C0C /* Skills profile page_icon_Collection@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_Collection@1x.png"; sourceTree = "<group>"; };
-		D47DD4951C5EE7FD00267C0C /* Skills profile page_icon_Collection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_Collection@2x.png"; sourceTree = "<group>"; };
-		D47DD4961C5EE7FD00267C0C /* Skills profile page_icon_Collection@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_Collection@3x.png"; sourceTree = "<group>"; };
-		D47DD4971C5EE7FD00267C0C /* Skills profile page_icon_More left@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_More left@1x.png"; sourceTree = "<group>"; };
-		D47DD4981C5EE7FD00267C0C /* Skills profile page_icon_More left@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_More left@2x.png"; sourceTree = "<group>"; };
-		D47DD4991C5EE7FD00267C0C /* Skills profile page_icon_More left@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_More left@3x.png"; sourceTree = "<group>"; };
-		D47DD49A1C5EE7FD00267C0C /* Skills profile page_icon_More right@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_More right@1x.png"; sourceTree = "<group>"; };
-		D47DD49B1C5EE7FD00267C0C /* Skills profile page_icon_More right@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_More right@2x.png"; sourceTree = "<group>"; };
-		D47DD49C1C5EE7FD00267C0C /* Skills profile page_icon_More right@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_More right@3x.png"; sourceTree = "<group>"; };
-		D47DD49D1C5EE7FD00267C0C /* Skills profile page_icon_Not certified@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_Not certified@1x.png"; sourceTree = "<group>"; };
-		D47DD49E1C5EE7FD00267C0C /* Skills profile page_icon_Not certified@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_Not certified@2x.png"; sourceTree = "<group>"; };
-		D47DD49F1C5EE7FD00267C0C /* Skills profile page_icon_Not certified@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_Not certified@3x.png"; sourceTree = "<group>"; };
-		D47DD4A01C5EE7FD00267C0C /* Skills profile page_icon_share@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_share@1x.png"; sourceTree = "<group>"; };
-		D47DD4A11C5EE7FD00267C0C /* Skills profile page_icon_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_share@2x.png"; sourceTree = "<group>"; };
-		D47DD4A21C5EE7FD00267C0C /* Skills profile page_icon_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_icon_share@3x.png"; sourceTree = "<group>"; };
-		D47DD4A31C5EE7FD00267C0C /* Skills profile page_share@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_share@1x.png"; sourceTree = "<group>"; };
-		D47DD4A41C5EE7FD00267C0C /* Skills profile page_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_share@2x.png"; sourceTree = "<group>"; };
-		D47DD4A51C5EE7FD00267C0C /* Skills profile page_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Skills profile page_share@3x.png"; sourceTree = "<group>"; };
 		D47DD4A81C5EE7FD00267C0C /* 发布新话题－默认icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发布新话题－默认icon@1x.png"; sourceTree = "<group>"; };
 		D47DD4A91C5EE7FD00267C0C /* 发布新话题－默认icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发布新话题－默认icon@2x.png"; sourceTree = "<group>"; };
 		D47DD4AA1C5EE7FD00267C0C /* 发布新话题－默认icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "发布新话题－默认icon@3x.png"; sourceTree = "<group>"; };
@@ -791,7 +675,6 @@
 		D47DD5061C5EE7FD00267C0C /* 欧动集市icon点击态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动集市icon点击态@3x.png"; sourceTree = "<group>"; };
 		D47DD5071C5EE7FD00267C0C /* 欧动集市icon默认态@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动集市icon默认态@1x.png"; sourceTree = "<group>"; };
 		D47DD5081C5EE7FD00267C0C /* 欧动集市icon默认态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "欧动集市icon默认态@2x.png"; sourceTree = "<group>"; };
-		D47DD5091C5EE7FD00267C0C /* 欧动集市icon默认态@3x.psd */ = {isa = PBXFileReference; lastKnownFileType = file; path = "欧动集市icon默认态@3x.psd"; sourceTree = "<group>"; };
 		D47DD50A1C5EE7FD00267C0C /* 首页发现icon点击态@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页发现icon点击态@1x.png"; sourceTree = "<group>"; };
 		D47DD50B1C5EE7FD00267C0C /* 首页发现icon点击态@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页发现icon点击态@2x.png"; sourceTree = "<group>"; };
 		D47DD50C1C5EE7FD00267C0C /* 首页发现icon点击态@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页发现icon点击态@3x.png"; sourceTree = "<group>"; };
@@ -834,79 +717,6 @@
 		D47DD5351C5EE7FD00267C0C /* 我也要发布任务icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我也要发布任务icon@1x.png"; sourceTree = "<group>"; };
 		D47DD5361C5EE7FD00267C0C /* 我也要发布任务icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我也要发布任务icon@2x.png"; sourceTree = "<group>"; };
 		D47DD5371C5EE7FD00267C0C /* 我也要发布任务icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "我也要发布任务icon@3x.png"; sourceTree = "<group>"; };
-		D47DD5391C5EE7FD00267C0C /* button_beautiful@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_beautiful@1x.png"; sourceTree = "<group>"; };
-		D47DD53A1C5EE7FD00267C0C /* button_beautiful@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_beautiful@2x.png"; sourceTree = "<group>"; };
-		D47DD53B1C5EE7FD00267C0C /* button_beautiful@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_beautiful@3x.png"; sourceTree = "<group>"; };
-		D47DD53C1C5EE7FD00267C0C /* button_emotion@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_emotion@1x.png"; sourceTree = "<group>"; };
-		D47DD53D1C5EE7FD00267C0C /* button_emotion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_emotion@2x.png"; sourceTree = "<group>"; };
-		D47DD53E1C5EE7FD00267C0C /* button_emotion@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_emotion@3x.png"; sourceTree = "<group>"; };
-		D47DD53F1C5EE7FD00267C0C /* button_Funny@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Funny@1x.png"; sourceTree = "<group>"; };
-		D47DD5401C5EE7FD00267C0C /* button_Funny@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Funny@2x.png"; sourceTree = "<group>"; };
-		D47DD5411C5EE7FD00267C0C /* button_Funny@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Funny@3x.png"; sourceTree = "<group>"; };
-		D47DD5421C5EE7FD00267C0C /* button_Life@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Life@1x.png"; sourceTree = "<group>"; };
-		D47DD5431C5EE7FD00267C0C /* button_Life@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Life@2x.png"; sourceTree = "<group>"; };
-		D47DD5441C5EE7FD00267C0C /* button_Life@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Life@3x.png"; sourceTree = "<group>"; };
-		D47DD5451C5EE7FD00267C0C /* button_Movies@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Movies@1x.png"; sourceTree = "<group>"; };
-		D47DD5461C5EE7FD00267C0C /* button_Movies@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Movies@2x.png"; sourceTree = "<group>"; };
-		D47DD5471C5EE7FD00267C0C /* button_Movies@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Movies@3x.png"; sourceTree = "<group>"; };
-		D47DD5481C5EE7FD00267C0C /* button_Pet@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Pet@1x.png"; sourceTree = "<group>"; };
-		D47DD5491C5EE7FD00267C0C /* button_Pet@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Pet@2x.png"; sourceTree = "<group>"; };
-		D47DD54A1C5EE7FD00267C0C /* button_Pet@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Pet@3x.png"; sourceTree = "<group>"; };
-		D47DD54B1C5EE7FD00267C0C /* button_quadratic element@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_quadratic element@1x.png"; sourceTree = "<group>"; };
-		D47DD54C1C5EE7FD00267C0C /* button_quadratic element@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_quadratic element@2x.png"; sourceTree = "<group>"; };
-		D47DD54D1C5EE7FD00267C0C /* button_quadratic element@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_quadratic element@3x.png"; sourceTree = "<group>"; };
-		D47DD54E1C5EE7FD00267C0C /* button_Star@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Star@1x.png"; sourceTree = "<group>"; };
-		D47DD54F1C5EE7FD00267C0C /* button_Star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Star@2x.png"; sourceTree = "<group>"; };
-		D47DD5501C5EE7FD00267C0C /* button_Star@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_Star@3x.png"; sourceTree = "<group>"; };
-		D47DD5511C5EE7FD00267C0C /* icon_activity@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_activity@1x.png"; sourceTree = "<group>"; };
-		D47DD5521C5EE7FD00267C0C /* icon_activity@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_activity@2x.png"; sourceTree = "<group>"; };
-		D47DD5531C5EE7FD00267C0C /* icon_activity@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_activity@3x.png"; sourceTree = "<group>"; };
-		D47DD5541C5EE7FD00267C0C /* icon_circle_big@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_circle_big@1x.png"; sourceTree = "<group>"; };
-		D47DD5551C5EE7FD00267C0C /* icon_circle_big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_circle_big@2x.png"; sourceTree = "<group>"; };
-		D47DD5561C5EE7FD00267C0C /* icon_circle_big@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_circle_big@3x.png"; sourceTree = "<group>"; };
-		D47DD5571C5EE7FD00267C0C /* icon_circle_small@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_circle_small@1x.png"; sourceTree = "<group>"; };
-		D47DD5581C5EE7FD00267C0C /* icon_circle_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_circle_small@2x.png"; sourceTree = "<group>"; };
-		D47DD5591C5EE7FD00267C0C /* icon_circle_small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_circle_small@3x.png"; sourceTree = "<group>"; };
-		D47DD55A1C5EE7FD00267C0C /* icon_Collection@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Collection@1x.png"; sourceTree = "<group>"; };
-		D47DD55B1C5EE7FD00267C0C /* icon_Collection@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Collection@2x.png"; sourceTree = "<group>"; };
-		D47DD55C1C5EE7FD00267C0C /* icon_Collection@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Collection@3x.png"; sourceTree = "<group>"; };
-		D47DD55D1C5EE7FD00267C0C /* icon_Discount@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Discount@1x.png"; sourceTree = "<group>"; };
-		D47DD55E1C5EE7FD00267C0C /* icon_Discount@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Discount@2x.png"; sourceTree = "<group>"; };
-		D47DD55F1C5EE7FD00267C0C /* icon_Discount@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Discount@3x.png"; sourceTree = "<group>"; };
-		D47DD5601C5EE7FD00267C0C /* icon_field@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_field@1x.png"; sourceTree = "<group>"; };
-		D47DD5611C5EE7FD00267C0C /* icon_field@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_field@2x.png"; sourceTree = "<group>"; };
-		D47DD5621C5EE7FD00267C0C /* icon_field@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_field@3x.png"; sourceTree = "<group>"; };
-		D47DD5631C5EE7FD00267C0C /* icon_gesture@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_gesture@1x.png"; sourceTree = "<group>"; };
-		D47DD5641C5EE7FD00267C0C /* icon_gesture@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_gesture@2x.png"; sourceTree = "<group>"; };
-		D47DD5651C5EE7FD00267C0C /* icon_gesture@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_gesture@3x.png"; sourceTree = "<group>"; };
-		D47DD5661C5EE7FD00267C0C /* icon_help@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_help@1x.png"; sourceTree = "<group>"; };
-		D47DD5671C5EE7FD00267C0C /* icon_help@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_help@2x.png"; sourceTree = "<group>"; };
-		D47DD5681C5EE7FD00267C0C /* icon_help@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_help@3x.png"; sourceTree = "<group>"; };
-		D47DD5691C5EE7FD00267C0C /* icon_Hot activity@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Hot activity@1x.png"; sourceTree = "<group>"; };
-		D47DD56A1C5EE7FD00267C0C /* icon_Hot activity@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Hot activity@2x.png"; sourceTree = "<group>"; };
-		D47DD56B1C5EE7FD00267C0C /* icon_Hot activity@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Hot activity@3x.png"; sourceTree = "<group>"; };
-		D47DD56C1C5EE7FD00267C0C /* icon_location@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_location@2x.png"; sourceTree = "<group>"; };
-		D47DD56D1C5EE7FD00267C0C /* icon_man@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_man@1x.png"; sourceTree = "<group>"; };
-		D47DD56E1C5EE7FD00267C0C /* icon_man@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_man@2x.png"; sourceTree = "<group>"; };
-		D47DD56F1C5EE7FD00267C0C /* icon_man@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_man@3x.png"; sourceTree = "<group>"; };
-		D47DD5701C5EE7FD00267C0C /* icon_more@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_more@1x.png"; sourceTree = "<group>"; };
-		D47DD5711C5EE7FD00267C0C /* icon_more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_more@2x.png"; sourceTree = "<group>"; };
-		D47DD5721C5EE7FD00267C0C /* icon_more@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_more@3x.png"; sourceTree = "<group>"; };
-		D47DD5731C5EE7FD00267C0C /* icon_share@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_share@1x.png"; sourceTree = "<group>"; };
-		D47DD5741C5EE7FD00267C0C /* icon_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_share@2x.png"; sourceTree = "<group>"; };
-		D47DD5751C5EE7FD00267C0C /* icon_share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_share@3x.png"; sourceTree = "<group>"; };
-		D47DD5761C5EE7FD00267C0C /* icon_Skill_big@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Skill_big@1x.png"; sourceTree = "<group>"; };
-		D47DD5771C5EE7FD00267C0C /* icon_Skill_big@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Skill_big@2x.png"; sourceTree = "<group>"; };
-		D47DD5781C5EE7FD00267C0C /* icon_Skill_big@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Skill_big@3x.png"; sourceTree = "<group>"; };
-		D47DD5791C5EE7FD00267C0C /* icon_Skill_small@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Skill_small@1x.png"; sourceTree = "<group>"; };
-		D47DD57A1C5EE7FD00267C0C /* icon_Skill_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Skill_small@2x.png"; sourceTree = "<group>"; };
-		D47DD57B1C5EE7FD00267C0C /* icon_Skill_small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Skill_small@3x.png"; sourceTree = "<group>"; };
-		D47DD57C1C5EE7FD00267C0C /* icon_woman@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_woman@1x.png"; sourceTree = "<group>"; };
-		D47DD57D1C5EE7FD00267C0C /* icon_woman@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_woman@2x.png"; sourceTree = "<group>"; };
-		D47DD57E1C5EE7FD00267C0C /* icon_woman@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_woman@3x.png"; sourceTree = "<group>"; };
-		D47DD57F1C5EE7FD00267C0C /* icon_Work-study@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Work-study@1x.png"; sourceTree = "<group>"; };
-		D47DD5801C5EE7FD00267C0C /* icon_Work-study@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Work-study@2x.png"; sourceTree = "<group>"; };
-		D47DD5811C5EE7FD00267C0C /* icon_Work-study@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_Work-study@3x.png"; sourceTree = "<group>"; };
 		D47DD5821C5EE7FD00267C0C /* 首页-去偷懒icon@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页-去偷懒icon@1x.png"; sourceTree = "<group>"; };
 		D47DD5831C5EE7FD00267C0C /* 首页-去偷懒icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页-去偷懒icon@2x.png"; sourceTree = "<group>"; };
 		D47DD5841C5EE7FD00267C0C /* 首页-去偷懒icon@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "首页-去偷懒icon@3x.png"; sourceTree = "<group>"; };
@@ -1780,7 +1590,6 @@
 			isa = PBXGroup;
 			children = (
 				D47DD46B1C5EE7FC00267C0C /* 中心预约 */,
-				D47DD4901C5EE7FD00267C0C /* 技能简介-资源包 */,
 				D47DD4A61C5EE7FD00267C0C /* 欧动社区 */,
 				D47DD4B11C5EE7FD00267C0C /* 欧动集市 */,
 				D47DD5101C5EE7FD00267C0C /* 登录 */,
@@ -1851,34 +1660,6 @@
 				D47DD48F1C5EE7FC00267C0C /* 活动目的icon@3x.png */,
 			);
 			path = "场地预约";
-			sourceTree = "<group>";
-		};
-		D47DD4901C5EE7FD00267C0C /* 技能简介-资源包 */ = {
-			isa = PBXGroup;
-			children = (
-				D47DD4911C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@1x.png */,
-				D47DD4921C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@2x.png */,
-				D47DD4931C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@3x.png */,
-				D47DD4941C5EE7FD00267C0C /* Skills profile page_icon_Collection@1x.png */,
-				D47DD4951C5EE7FD00267C0C /* Skills profile page_icon_Collection@2x.png */,
-				D47DD4961C5EE7FD00267C0C /* Skills profile page_icon_Collection@3x.png */,
-				D47DD4971C5EE7FD00267C0C /* Skills profile page_icon_More left@1x.png */,
-				D47DD4981C5EE7FD00267C0C /* Skills profile page_icon_More left@2x.png */,
-				D47DD4991C5EE7FD00267C0C /* Skills profile page_icon_More left@3x.png */,
-				D47DD49A1C5EE7FD00267C0C /* Skills profile page_icon_More right@1x.png */,
-				D47DD49B1C5EE7FD00267C0C /* Skills profile page_icon_More right@2x.png */,
-				D47DD49C1C5EE7FD00267C0C /* Skills profile page_icon_More right@3x.png */,
-				D47DD49D1C5EE7FD00267C0C /* Skills profile page_icon_Not certified@1x.png */,
-				D47DD49E1C5EE7FD00267C0C /* Skills profile page_icon_Not certified@2x.png */,
-				D47DD49F1C5EE7FD00267C0C /* Skills profile page_icon_Not certified@3x.png */,
-				D47DD4A01C5EE7FD00267C0C /* Skills profile page_icon_share@1x.png */,
-				D47DD4A11C5EE7FD00267C0C /* Skills profile page_icon_share@2x.png */,
-				D47DD4A21C5EE7FD00267C0C /* Skills profile page_icon_share@3x.png */,
-				D47DD4A31C5EE7FD00267C0C /* Skills profile page_share@1x.png */,
-				D47DD4A41C5EE7FD00267C0C /* Skills profile page_share@2x.png */,
-				D47DD4A51C5EE7FD00267C0C /* Skills profile page_share@3x.png */,
-			);
-			path = "技能简介-资源包";
 			sourceTree = "<group>";
 		};
 		D47DD4A61C5EE7FD00267C0C /* 欧动社区 */ = {
@@ -2030,7 +1811,6 @@
 				D47DD5061C5EE7FD00267C0C /* 欧动集市icon点击态@3x.png */,
 				D47DD5071C5EE7FD00267C0C /* 欧动集市icon默认态@1x.png */,
 				D47DD5081C5EE7FD00267C0C /* 欧动集市icon默认态@2x.png */,
-				D47DD5091C5EE7FD00267C0C /* 欧动集市icon默认态@3x.psd */,
 				D47DD50A1C5EE7FD00267C0C /* 首页发现icon点击态@1x.png */,
 				D47DD50B1C5EE7FD00267C0C /* 首页发现icon点击态@2x.png */,
 				D47DD50C1C5EE7FD00267C0C /* 首页发现icon点击态@3x.png */,
@@ -2084,7 +1864,6 @@
 			isa = PBXGroup;
 			children = (
 				D47DD52B1C5EE7FD00267C0C /* 去偷懒 */,
-				D47DD5381C5EE7FD00267C0C /* 新版首页资源包 */,
 				D47DD5821C5EE7FD00267C0C /* 首页-去偷懒icon@1x.png */,
 				D47DD5831C5EE7FD00267C0C /* 首页-去偷懒icon@2x.png */,
 				D47DD5841C5EE7FD00267C0C /* 首页-去偷懒icon@3x.png */,
@@ -2124,86 +1903,6 @@
 				D47DD5371C5EE7FD00267C0C /* 我也要发布任务icon@3x.png */,
 			);
 			path = "去偷懒";
-			sourceTree = "<group>";
-		};
-		D47DD5381C5EE7FD00267C0C /* 新版首页资源包 */ = {
-			isa = PBXGroup;
-			children = (
-				D47DD5391C5EE7FD00267C0C /* button_beautiful@1x.png */,
-				D47DD53A1C5EE7FD00267C0C /* button_beautiful@2x.png */,
-				D47DD53B1C5EE7FD00267C0C /* button_beautiful@3x.png */,
-				D47DD53C1C5EE7FD00267C0C /* button_emotion@1x.png */,
-				D47DD53D1C5EE7FD00267C0C /* button_emotion@2x.png */,
-				D47DD53E1C5EE7FD00267C0C /* button_emotion@3x.png */,
-				D47DD53F1C5EE7FD00267C0C /* button_Funny@1x.png */,
-				D47DD5401C5EE7FD00267C0C /* button_Funny@2x.png */,
-				D47DD5411C5EE7FD00267C0C /* button_Funny@3x.png */,
-				D47DD5421C5EE7FD00267C0C /* button_Life@1x.png */,
-				D47DD5431C5EE7FD00267C0C /* button_Life@2x.png */,
-				D47DD5441C5EE7FD00267C0C /* button_Life@3x.png */,
-				D47DD5451C5EE7FD00267C0C /* button_Movies@1x.png */,
-				D47DD5461C5EE7FD00267C0C /* button_Movies@2x.png */,
-				D47DD5471C5EE7FD00267C0C /* button_Movies@3x.png */,
-				D47DD5481C5EE7FD00267C0C /* button_Pet@1x.png */,
-				D47DD5491C5EE7FD00267C0C /* button_Pet@2x.png */,
-				D47DD54A1C5EE7FD00267C0C /* button_Pet@3x.png */,
-				D47DD54B1C5EE7FD00267C0C /* button_quadratic element@1x.png */,
-				D47DD54C1C5EE7FD00267C0C /* button_quadratic element@2x.png */,
-				D47DD54D1C5EE7FD00267C0C /* button_quadratic element@3x.png */,
-				D47DD54E1C5EE7FD00267C0C /* button_Star@1x.png */,
-				D47DD54F1C5EE7FD00267C0C /* button_Star@2x.png */,
-				D47DD5501C5EE7FD00267C0C /* button_Star@3x.png */,
-				D47DD5511C5EE7FD00267C0C /* icon_activity@1x.png */,
-				D47DD5521C5EE7FD00267C0C /* icon_activity@2x.png */,
-				D47DD5531C5EE7FD00267C0C /* icon_activity@3x.png */,
-				D47DD5541C5EE7FD00267C0C /* icon_circle_big@1x.png */,
-				D47DD5551C5EE7FD00267C0C /* icon_circle_big@2x.png */,
-				D47DD5561C5EE7FD00267C0C /* icon_circle_big@3x.png */,
-				D47DD5571C5EE7FD00267C0C /* icon_circle_small@1x.png */,
-				D47DD5581C5EE7FD00267C0C /* icon_circle_small@2x.png */,
-				D47DD5591C5EE7FD00267C0C /* icon_circle_small@3x.png */,
-				D47DD55A1C5EE7FD00267C0C /* icon_Collection@1x.png */,
-				D47DD55B1C5EE7FD00267C0C /* icon_Collection@2x.png */,
-				D47DD55C1C5EE7FD00267C0C /* icon_Collection@3x.png */,
-				D47DD55D1C5EE7FD00267C0C /* icon_Discount@1x.png */,
-				D47DD55E1C5EE7FD00267C0C /* icon_Discount@2x.png */,
-				D47DD55F1C5EE7FD00267C0C /* icon_Discount@3x.png */,
-				D47DD5601C5EE7FD00267C0C /* icon_field@1x.png */,
-				D47DD5611C5EE7FD00267C0C /* icon_field@2x.png */,
-				D47DD5621C5EE7FD00267C0C /* icon_field@3x.png */,
-				D47DD5631C5EE7FD00267C0C /* icon_gesture@1x.png */,
-				D47DD5641C5EE7FD00267C0C /* icon_gesture@2x.png */,
-				D47DD5651C5EE7FD00267C0C /* icon_gesture@3x.png */,
-				D47DD5661C5EE7FD00267C0C /* icon_help@1x.png */,
-				D47DD5671C5EE7FD00267C0C /* icon_help@2x.png */,
-				D47DD5681C5EE7FD00267C0C /* icon_help@3x.png */,
-				D47DD5691C5EE7FD00267C0C /* icon_Hot activity@1x.png */,
-				D47DD56A1C5EE7FD00267C0C /* icon_Hot activity@2x.png */,
-				D47DD56B1C5EE7FD00267C0C /* icon_Hot activity@3x.png */,
-				D47DD56C1C5EE7FD00267C0C /* icon_location@2x.png */,
-				D47DD56D1C5EE7FD00267C0C /* icon_man@1x.png */,
-				D47DD56E1C5EE7FD00267C0C /* icon_man@2x.png */,
-				D47DD56F1C5EE7FD00267C0C /* icon_man@3x.png */,
-				D47DD5701C5EE7FD00267C0C /* icon_more@1x.png */,
-				D47DD5711C5EE7FD00267C0C /* icon_more@2x.png */,
-				D47DD5721C5EE7FD00267C0C /* icon_more@3x.png */,
-				D47DD5731C5EE7FD00267C0C /* icon_share@1x.png */,
-				D47DD5741C5EE7FD00267C0C /* icon_share@2x.png */,
-				D47DD5751C5EE7FD00267C0C /* icon_share@3x.png */,
-				D47DD5761C5EE7FD00267C0C /* icon_Skill_big@1x.png */,
-				D47DD5771C5EE7FD00267C0C /* icon_Skill_big@2x.png */,
-				D47DD5781C5EE7FD00267C0C /* icon_Skill_big@3x.png */,
-				D47DD5791C5EE7FD00267C0C /* icon_Skill_small@1x.png */,
-				D47DD57A1C5EE7FD00267C0C /* icon_Skill_small@2x.png */,
-				D47DD57B1C5EE7FD00267C0C /* icon_Skill_small@3x.png */,
-				D47DD57C1C5EE7FD00267C0C /* icon_woman@1x.png */,
-				D47DD57D1C5EE7FD00267C0C /* icon_woman@2x.png */,
-				D47DD57E1C5EE7FD00267C0C /* icon_woman@3x.png */,
-				D47DD57F1C5EE7FD00267C0C /* icon_Work-study@1x.png */,
-				D47DD5801C5EE7FD00267C0C /* icon_Work-study@2x.png */,
-				D47DD5811C5EE7FD00267C0C /* icon_Work-study@3x.png */,
-			);
-			path = "新版首页资源包";
 			sourceTree = "<group>";
 		};
 		D4D070D21C59B9FA008527C9 /* Controller */ = {
@@ -2902,25 +2601,16 @@
 			files = (
 				D47DD69D1C5EE7FD00267C0C /* 首页-去版聊icon@2x.png in Resources */,
 				D47DD6391C5EE7FD00267C0C /* 用户名icon@2x.png in Resources */,
-				D47DD68B1C5EE7FD00267C0C /* icon_share@2x.png in Resources */,
 				D47DD6141C5EE7FD00267C0C /* 标签左端按钮部分@1x.png in Resources */,
 				D47DD5F31C5EE7FD00267C0C /* 个人中心icon点击态@3x.png in Resources */,
 				D47DD69A1C5EE7FD00267C0C /* 首页-去偷懒icon@2x.png in Resources */,
-				D47DD6651C5EE7FD00267C0C /* button_Star@1x.png in Resources */,
-				D47DD5C91C5EE7FD00267C0C /* Skills profile page_share@3x.png in Resources */,
-				D47DD6671C5EE7FD00267C0C /* button_Star@3x.png in Resources */,
-				D47DD67E1C5EE7FD00267C0C /* icon_help@2x.png in Resources */,
 				D47DD5A11C5EE7FD00267C0C /* 场地预约3@2x.png in Resources */,
-				D47DD6931C5EE7FD00267C0C /* icon_woman@1x.png in Resources */,
 				D47DD6241C5EE7FD00267C0C /* 欧动集市icon默认态@2x.png in Resources */,
-				D47DD5BA1C5EE7FD00267C0C /* Skills profile page_icon_Collection@3x.png in Resources */,
 				D47DD64A1C5EE7FD00267C0C /* 任务攻略图文详情图二@1x.png in Resources */,
 				D47DD6A61C5EE7FD00267C0C /* 首页最新话题icon@2x.png in Resources */,
 				D47DD5CC1C5EE7FD00267C0C /* 发布新话题－默认icon@3x.png in Resources */,
-				D47DD6591C5EE7FD00267C0C /* button_Life@1x.png in Resources */,
 				D47DD5D91C5EE7FD00267C0C /* 任务详情页分享icon@1x.png in Resources */,
 				D47DD62E1C5EE7FD00267C0C /* 密码错误icon@3x.png in Resources */,
-				D47DD66A1C5EE7FD00267C0C /* icon_activity@3x.png in Resources */,
 				D47DD6421C5EE7FD00267C0C /* 登录框icon@2x.png in Resources */,
 				D47DD5941C5EE7FD00267C0C /* 中心详情页icon2@1x.png in Resources */,
 				9DC05DEE1C5DDB4000181DFE /* ODAddAddressView.xib in Resources */,
@@ -2929,10 +2619,7 @@
 				D47DD6481C5EE7FD00267C0C /* 任务攻略图文详情图三@2x.png in Resources */,
 				D4D0751F1C59B9FA008527C9 /* ODTopicCell.xib in Resources */,
 				D4D075111C59B9FA008527C9 /* ODlandingView.xib in Resources */,
-				D47DD5C71C5EE7FD00267C0C /* Skills profile page_share@1x.png in Resources */,
-				D47DD65B1C5EE7FD00267C0C /* button_Life@3x.png in Resources */,
 				D47DD5E91C5EE7FD00267C0C /* 选择标签icon@2x.png in Resources */,
-				D47DD6951C5EE7FD00267C0C /* icon_woman@3x.png in Resources */,
 				D4D075171C59B9FA008527C9 /* ODLandFirstCell.xib in Resources */,
 				D47DD5971C5EE7FD00267C0C /* 中心详情页icon3@1x.png in Resources */,
 				D47DD6011C5EE7FD00267C0C /* 任务筛选上拉箭头@2x.png in Resources */,
@@ -2952,20 +2639,15 @@
 				D47DD45D1C5EE7DB00267C0C /* UMSCommentInputController.xib in Resources */,
 				D4D0750A1C59B9FA008527C9 /* ChoseCenterCell.xib in Resources */,
 				D47DD6121C5EE7FD00267C0C /* 标签右端按钮部分@2x.png in Resources */,
-				D47DD6941C5EE7FD00267C0C /* icon_woman@2x.png in Resources */,
 				D47DD64D1C5EE7FD00267C0C /* 我也要发布任务icon@1x.png in Resources */,
 				D47DD6111C5EE7FD00267C0C /* 标签右端按钮部分@1x.png in Resources */,
 				D47DD5A71C5EE7FD00267C0C /* 场地预约5@2x.png in Resources */,
 				D47DD5A31C5EE7FD00267C0C /* 场地预约4@1x.png in Resources */,
 				D47DD5FB1C5EE7FD00267C0C /* 中心活动icon默认态@2x.png in Resources */,
 				D47DD5E61C5EE7FD00267C0C /* 时间下拉箭头@2x.png in Resources */,
-				D47DD65A1C5EE7FD00267C0C /* button_Life@2x.png in Resources */,
-				D47DD65F1C5EE7FD00267C0C /* button_Pet@1x.png in Resources */,
 				D4D074F41C59B9FA008527C9 /* ODBazaarDetailCollectionCell.xib in Resources */,
 				D47DD61D1C5EE7FD00267C0C /* 欧动社区icon默认态@1x.png in Resources */,
-				D47DD6501C5EE7FD00267C0C /* button_beautiful@1x.png in Resources */,
 				D47DD4681C5EE7DB00267C0C /* read_me.txt in Resources */,
-				D47DD6821C5EE7FD00267C0C /* icon_Hot activity@3x.png in Resources */,
 				D47DD5D11C5EE7FD00267C0C /* 话题详情-回复icon@2x.png in Resources */,
 				D47DD59A1C5EE7FD00267C0C /* 中心详情页icon@1x.png in Resources */,
 				D47DD59F1C5EE7FD00267C0C /* 中心预约icon@3x.png in Resources */,
@@ -2978,29 +2660,19 @@
 				D47DD6101C5EE7FD00267C0C /* 标签中端按钮部分@3x.png in Resources */,
 				D47DD5B31C5EE7FD00267C0C /* 活动目的icon@2x.png in Resources */,
 				D47DD5B21C5EE7FD00267C0C /* 活动目的icon@1x.png in Resources */,
-				D47DD5B61C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@2x.png in Resources */,
-				D47DD6711C5EE7FD00267C0C /* icon_Collection@1x.png in Resources */,
 				D47DD5E71C5EE7FD00267C0C /* 时间下拉箭头@3x.png in Resources */,
-				D47DD6921C5EE7FD00267C0C /* icon_Skill_small@3x.png in Resources */,
 				D47DD6341C5EE7FD00267C0C /* 微信朋友icon@3x.png in Resources */,
 				D47DD45C1C5EE7DB00267C0C /* UMSCommentDetailController.xib in Resources */,
-				D47DD5B91C5EE7FD00267C0C /* Skills profile page_icon_Collection@2x.png in Resources */,
 				D47DD5B01C5EE7FD00267C0C /* 场地预约icon@2x.png in Resources */,
 				D47DD5A21C5EE7FD00267C0C /* 场地预约3@3x.png in Resources */,
 				D47DD5ED1C5EE7FD00267C0C /* 搜索光标icon@3x.png in Resources */,
 				D47DD69B1C5EE7FD00267C0C /* 首页-去偷懒icon@3x.png in Resources */,
-				D47DD6981C5EE7FD00267C0C /* icon_Work-study@3x.png in Resources */,
-				D47DD6721C5EE7FD00267C0C /* icon_Collection@2x.png in Resources */,
 				D47DD6491C5EE7FD00267C0C /* 任务攻略图文详情图三@3x.png in Resources */,
 				D47DD6331C5EE7FD00267C0C /* 微信朋友icon@2x.png in Resources */,
 				D47DD6021C5EE7FD00267C0C /* 任务筛选上拉箭头@3x.png in Resources */,
-				D47DD5C31C5EE7FD00267C0C /* Skills profile page_icon_Not certified@3x.png in Resources */,
 				9D16BDD41C59EEDA003627CD /* ODViolationsCell.xib in Resources */,
-				D47DD6601C5EE7FD00267C0C /* button_Pet@2x.png in Resources */,
 				D47DD6171C5EE7FD00267C0C /* 标签栏大按钮@1x.png in Resources */,
 				D47DD5A51C5EE7FD00267C0C /* 场地预约4@3x.png in Resources */,
-				D47DD5B71C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@3x.png in Resources */,
-				D47DD6611C5EE7FD00267C0C /* button_Pet@3x.png in Resources */,
 				D47DD5D61C5EE7FD00267C0C /* 任务详情下拉按钮@1x.png in Resources */,
 				D47DD5981C5EE7FD00267C0C /* 中心详情页icon3@2x.png in Resources */,
 				D47DD6201C5EE7FD00267C0C /* 欧动集市icon点击态@1x.png in Resources */,
@@ -3008,24 +2680,15 @@
 				D4D075151C59B9FA008527C9 /* ODInformationView.xib in Resources */,
 				D47DD6A71C5EE7FD00267C0C /* 首页最新话题icon@3x.png in Resources */,
 				D47DD5A61C5EE7FD00267C0C /* 场地预约5@1x.png in Resources */,
-				D47DD67A1C5EE7FD00267C0C /* icon_gesture@1x.png in Resources */,
 				D47DD6471C5EE7FD00267C0C /* 任务攻略图文详情图三@1x.png in Resources */,
 				D4D074F61C59B9FA008527C9 /* ODBazaarRewardCollectionCell.xib in Resources */,
 				D47DD5951C5EE7FD00267C0C /* 中心详情页icon2@2x.png in Resources */,
 				D47DD5F61C5EE7FD00267C0C /* 个人中心icon默认态@3x.png in Resources */,
 				D47DD6AA1C5EE7FD00267C0C /* 首页浏览量icon@3x.png in Resources */,
-				D47DD6581C5EE7FD00267C0C /* button_Funny@3x.png in Resources */,
-				D47DD6631C5EE7FD00267C0C /* button_quadratic element@2x.png in Resources */,
 				9DC05DF61C5DEE4400181DFE /* ODOrderView.xib in Resources */,
-				D47DD6891C5EE7FD00267C0C /* icon_more@3x.png in Resources */,
-				D47DD6661C5EE7FD00267C0C /* button_Star@2x.png in Resources */,
-				D47DD6761C5EE7FD00267C0C /* icon_Discount@3x.png in Resources */,
 				D47DD45A1C5EE7DB00267C0C /* UMSocialLocalizable.strings in Resources */,
 				D47DD61B1C5EE7FD00267C0C /* 欧动社区icon点击态@2x.png in Resources */,
 				D47DD5AA1C5EE7FD00267C0C /* 场地预约6@2x.png in Resources */,
-				D47DD5C41C5EE7FD00267C0C /* Skills profile page_icon_share@1x.png in Resources */,
-				D47DD6541C5EE7FD00267C0C /* button_emotion@2x.png in Resources */,
-				D47DD6851C5EE7FD00267C0C /* icon_man@2x.png in Resources */,
 				D47DD5D51C5EE7FD00267C0C /* 任务详情上拉按钮@3x.png in Resources */,
 				D47DD6431C5EE7FD00267C0C /* 登录框icon@3x.png in Resources */,
 				D47DD69E1C5EE7FD00267C0C /* 首页-去版聊icon@3x.png in Resources */,
@@ -3033,55 +2696,38 @@
 				D47DD5961C5EE7FD00267C0C /* 中心详情页icon2@3x.png in Resources */,
 				D47DD69C1C5EE7FD00267C0C /* 首页-去版聊icon@1x.png in Resources */,
 				D47DD5F51C5EE7FD00267C0C /* 个人中心icon默认态@2x.png in Resources */,
-				D47DD6521C5EE7FD00267C0C /* button_beautiful@3x.png in Resources */,
 				D4D0750F1C59B9FA008527C9 /* ODCenderDetailView.xib in Resources */,
-				D47DD66C1C5EE7FD00267C0C /* icon_circle_big@2x.png in Resources */,
 				D47DD6A91C5EE7FD00267C0C /* 首页浏览量icon@2x.png in Resources */,
 				D4D075451C59BA9B008527C9 /* Assets.xcassets in Resources */,
 				D47DD63F1C5EE7FD00267C0C /* 登录文字框icon@2x.png in Resources */,
 				D47DD6361C5EE7FD00267C0C /* 朋友圈icon@2x.png in Resources */,
 				D47DD6A41C5EE7FD00267C0C /* 首页-约场地icon@3x.png in Resources */,
-				D47DD6971C5EE7FD00267C0C /* icon_Work-study@2x.png in Resources */,
 				D47DD6A01C5EE7FD00267C0C /* 首页-找活动icon@2x.png in Resources */,
 				D47DD4621C5EE7DB00267C0C /* UMSnsAccountViewController.xib in Resources */,
 				D47DD62C1C5EE7FD00267C0C /* 密码错误icon@1x.png in Resources */,
-				D47DD6511C5EE7FD00267C0C /* button_beautiful@2x.png in Resources */,
-				D47DD5C51C5EE7FD00267C0C /* Skills profile page_icon_share@2x.png in Resources */,
-				D47DD6531C5EE7FD00267C0C /* button_emotion@1x.png in Resources */,
 				D47DD5AC1C5EE7FD00267C0C /* 场地预约icon2@1x.png in Resources */,
 				D47DD69F1C5EE7FD00267C0C /* 首页-找活动icon@1x.png in Resources */,
 				D47DD6A21C5EE7FD00267C0C /* 首页-约场地icon@1x.png in Resources */,
 				D47DD5FC1C5EE7FD00267C0C /* 中心活动icon默认态@3x.png in Resources */,
-				D47DD5C61C5EE7FD00267C0C /* Skills profile page_icon_share@3x.png in Resources */,
 				D47DD60C1C5EE7FD00267C0C /* 搜索放大镜icon@2x.png in Resources */,
 				D47DD4641C5EE7DB00267C0C /* UMSocialSDKResourcesNew.bundle in Resources */,
 				D47DD5E21C5EE7FD00267C0C /* 朋友圈分享icon@1x.png in Resources */,
-				D47DD6801C5EE7FD00267C0C /* icon_Hot activity@1x.png in Resources */,
-				D47DD5BB1C5EE7FD00267C0C /* Skills profile page_icon_More left@1x.png in Resources */,
-				D47DD68E1C5EE7FD00267C0C /* icon_Skill_big@2x.png in Resources */,
 				D47DD45F1C5EE7DB00267C0C /* UMShareEditViewController.xib in Resources */,
 				D47DD4611C5EE7DB00267C0C /* UMSLoginViewController.xib in Resources */,
-				D47DD6831C5EE7FD00267C0C /* icon_location@2x.png in Resources */,
 				D47DD6291C5EE7FD00267C0C /* 首页发现icon默认态@1x.png in Resources */,
-				D47DD68C1C5EE7FD00267C0C /* icon_share@3x.png in Resources */,
 				D47DD61F1C5EE7FD00267C0C /* 欧动社区icon默认态@3x.png in Resources */,
-				D47DD5C81C5EE7FD00267C0C /* Skills profile page_share@2x.png in Resources */,
 				D4D075051C59B9FA008527C9 /* CenterDetailCell.xib in Resources */,
 				D47DD6191C5EE7FD00267C0C /* 标签栏大按钮@3x.png in Resources */,
-				D47DD6791C5EE7FD00267C0C /* icon_field@3x.png in Resources */,
 				D47DD6351C5EE7FD00267C0C /* 朋友圈icon@1x.png in Resources */,
 				D47DD5EF1C5EE7FD00267C0C /* 搜索取消icon@2x.png in Resources */,
 				D47DD5A41C5EE7FD00267C0C /* 场地预约4@2x.png in Resources */,
 				D47DD60F1C5EE7FD00267C0C /* 标签中端按钮部分@2x.png in Resources */,
-				D47DD5B51C5EE7FD00267C0C /* Skills profile page_icon_arrow_upper@1x.png in Resources */,
 				D47DD6091C5EE7FD00267C0C /* 定位icon@1x.png in Resources */,
 				D47DD59B1C5EE7FD00267C0C /* 中心详情页icon@2x.png in Resources */,
 				D47DD5A81C5EE7FD00267C0C /* 场地预约5@3x.png in Resources */,
-				D47DD65D1C5EE7FD00267C0C /* button_Movies@2x.png in Resources */,
 				D47DD64C1C5EE7FD00267C0C /* 任务攻略图文详情图二@3x.png in Resources */,
 				D47DD62F1C5EE7FD00267C0C /* 密码错误多次icon@1x.png in Resources */,
 				D47DD5AE1C5EE7FD00267C0C /* 场地预约icon2@3x.png in Resources */,
-				D47DD5C01C5EE7FD00267C0C /* Skills profile page_icon_More right@3x.png in Resources */,
 				D47DD5FD1C5EE7FD00267C0C /* 任务开始按钮中对勾@1x.png in Resources */,
 				D47DD6461C5EE7FD00267C0C /* 任务攻略图文详情图一@3x.png in Resources */,
 				D47DD6211C5EE7FD00267C0C /* 欧动集市icon点击态@2x.png in Resources */,
@@ -3089,26 +2735,19 @@
 				D4D075281C59B9FA008527C9 /* ODMyOrderRecordCell.xib in Resources */,
 				D4D075261C59B9FA008527C9 /* ONMyApplyActivityCell.xib in Resources */,
 				D47DD62D1C5EE7FD00267C0C /* 密码错误icon@2x.png in Resources */,
-				D47DD67D1C5EE7FD00267C0C /* icon_help@1x.png in Resources */,
 				D47DD5E51C5EE7FD00267C0C /* 时间下拉箭头@1x.png in Resources */,
-				D47DD6811C5EE7FD00267C0C /* icon_Hot activity@2x.png in Resources */,
 				D47DD5CB1C5EE7FD00267C0C /* 发布新话题－默认icon@2x.png in Resources */,
 				D4D075461C59BA9B008527C9 /* Info.plist in Resources */,
 				D47DD5D71C5EE7FD00267C0C /* 任务详情下拉按钮@2x.png in Resources */,
 				D47DD63D1C5EE7FD00267C0C /* 登录密码icon@3x.png in Resources */,
 				D4D074FC1C59B9FA008527C9 /* ODCommunityCollectionCell.xib in Resources */,
-				D47DD5B81C5EE7FD00267C0C /* Skills profile page_icon_Collection@1x.png in Resources */,
 				D47DD5E31C5EE7FD00267C0C /* 朋友圈分享icon@2x.png in Resources */,
-				D47DD6771C5EE7FD00267C0C /* icon_field@1x.png in Resources */,
-				D47DD6751C5EE7FD00267C0C /* icon_Discount@2x.png in Resources */,
 				D47DD5F91C5EE7FD00267C0C /* 中心活动icon点击态@3x.png in Resources */,
 				D47DD59E1C5EE7FD00267C0C /* 中心预约icon@2x.png in Resources */,
 				D47DD5CE1C5EE7FD00267C0C /* 话题详情-分享icon@2x.png in Resources */,
 				D47DD5EB1C5EE7FD00267C0C /* 搜索光标icon@1x.png in Resources */,
 				D47DD6001C5EE7FD00267C0C /* 任务筛选上拉箭头@1x.png in Resources */,
-				D47DD6911C5EE7FD00267C0C /* icon_Skill_small@2x.png in Resources */,
 				D47DD60B1C5EE7FD00267C0C /* 定位icon@3x.png in Resources */,
-				D47DD5C11C5EE7FD00267C0C /* Skills profile page_icon_Not certified@1x.png in Resources */,
 				D47DD6371C5EE7FD00267C0C /* 朋友圈icon@3x.png in Resources */,
 				D47DD5CF1C5EE7FD00267C0C /* 话题详情-分享icon@3x.png in Resources */,
 				D4D0751B1C59B9FA008527C9 /* ODRegisteredView.xib in Resources */,
@@ -3119,14 +2758,9 @@
 				D47DD6181C5EE7FD00267C0C /* 标签栏大按钮@2x.png in Resources */,
 				D47DD6451C5EE7FD00267C0C /* 任务攻略图文详情图一@2x.png in Resources */,
 				D47DD6151C5EE7FD00267C0C /* 标签左端按钮部分@2x.png in Resources */,
-				D47DD6871C5EE7FD00267C0C /* icon_more@1x.png in Resources */,
 				D47DD60D1C5EE7FD00267C0C /* 搜索放大镜icon@3x.png in Resources */,
 				D47DD63A1C5EE7FD00267C0C /* 用户名icon@3x.png in Resources */,
-				D47DD6621C5EE7FD00267C0C /* button_quadratic element@1x.png in Resources */,
 				D47DD6991C5EE7FD00267C0C /* 首页-去偷懒icon@1x.png in Resources */,
-				D47DD5BD1C5EE7FD00267C0C /* Skills profile page_icon_More left@3x.png in Resources */,
-				D47DD6251C5EE7FD00267C0C /* 欧动集市icon默认态@3x.psd in Resources */,
-				D47DD67F1C5EE7FD00267C0C /* icon_help@3x.png in Resources */,
 				D47DD61E1C5EE7FD00267C0C /* 欧动社区icon默认态@2x.png in Resources */,
 				D47DD6261C5EE7FD00267C0C /* 首页发现icon点击态@1x.png in Resources */,
 				D47DD64F1C5EE7FD00267C0C /* 我也要发布任务icon@3x.png in Resources */,
@@ -3138,56 +2772,37 @@
 				D47DD6221C5EE7FD00267C0C /* 欧动集市icon点击态@3x.png in Resources */,
 				D47DD6071C5EE7FD00267C0C /* 发布任务icon@2x.png in Resources */,
 				D47DD61C1C5EE7FD00267C0C /* 欧动社区icon点击态@3x.png in Resources */,
-				D47DD65E1C5EE7FD00267C0C /* button_Movies@3x.png in Resources */,
 				D47DD5A91C5EE7FD00267C0C /* 场地预约6@1x.png in Resources */,
-				D47DD6961C5EE7FD00267C0C /* icon_Work-study@1x.png in Resources */,
-				D47DD6731C5EE7FD00267C0C /* icon_Collection@3x.png in Resources */,
 				D47DD59C1C5EE7FD00267C0C /* 中心详情页icon@3x.png in Resources */,
-				D47DD5BC1C5EE7FD00267C0C /* Skills profile page_icon_More left@2x.png in Resources */,
 				D47DD6161C5EE7FD00267C0C /* 标签左端按钮部分@3x.png in Resources */,
 				D47DD6321C5EE7FD00267C0C /* 微信朋友icon@1x.png in Resources */,
 				D47DD6A51C5EE7FD00267C0C /* 首页最新话题icon@1x.png in Resources */,
 				D47DD5E81C5EE7FD00267C0C /* 选择标签icon@1x.png in Resources */,
-				D47DD66D1C5EE7FD00267C0C /* icon_circle_big@3x.png in Resources */,
 				D4D074F81C59B9FA008527C9 /* ODBazaarCollectionCell.xib in Resources */,
 				D47DD60E1C5EE7FD00267C0C /* 标签中端按钮部分@1x.png in Resources */,
-				D47DD6741C5EE7FD00267C0C /* icon_Discount@1x.png in Resources */,
-				D47DD6841C5EE7FD00267C0C /* icon_man@1x.png in Resources */,
 				D47DD6A81C5EE7FD00267C0C /* 首页浏览量icon@1x.png in Resources */,
 				D47DD6031C5EE7FD00267C0C /* 任务筛选下拉箭头@1x.png in Resources */,
 				D47DD5AB1C5EE7FD00267C0C /* 场地预约6@3x.png in Resources */,
 				D4D074FF1C59B9FA008527C9 /* ActivityDetailView.xib in Resources */,
 				D47DD5F41C5EE7FD00267C0C /* 个人中心icon默认态@1x.png in Resources */,
-				D47DD6571C5EE7FD00267C0C /* button_Funny@2x.png in Resources */,
-				D47DD68D1C5EE7FD00267C0C /* icon_Skill_big@1x.png in Resources */,
 				D47DD5DE1C5EE7FD00267C0C /* 分享页关闭icon@3x.png in Resources */,
-				D47DD6861C5EE7FD00267C0C /* icon_man@3x.png in Resources */,
 				D47DD5F81C5EE7FD00267C0C /* 中心活动icon点击态@2x.png in Resources */,
 				D47DD6051C5EE7FD00267C0C /* 任务筛选下拉箭头@3x.png in Resources */,
-				D47DD6881C5EE7FD00267C0C /* icon_more@2x.png in Resources */,
 				D47DD6441C5EE7FD00267C0C /* 任务攻略图文详情图一@1x.png in Resources */,
-				D47DD5BF1C5EE7FD00267C0C /* Skills profile page_icon_More right@2x.png in Resources */,
 				D47DD5DB1C5EE7FD00267C0C /* 任务详情页分享icon@3x.png in Resources */,
-				D47DD65C1C5EE7FD00267C0C /* button_Movies@1x.png in Resources */,
 				D47DD5F21C5EE7FD00267C0C /* 个人中心icon点击态@2x.png in Resources */,
-				D47DD66F1C5EE7FD00267C0C /* icon_circle_small@2x.png in Resources */,
 				D47DD6231C5EE7FD00267C0C /* 欧动集市icon默认态@1x.png in Resources */,
-				D47DD6551C5EE7FD00267C0C /* button_emotion@3x.png in Resources */,
 				D47DD5DF1C5EE7FD00267C0C /* 微信分享icon@1x.png in Resources */,
 				D47DD6081C5EE7FD00267C0C /* 发布任务icon@3x.png in Resources */,
-				D47DD67B1C5EE7FD00267C0C /* icon_gesture@2x.png in Resources */,
 				D47DD6061C5EE7FD00267C0C /* 发布任务icon@1x.png in Resources */,
 				D47DD5E11C5EE7FD00267C0C /* 微信分享icon@3x.png in Resources */,
 				D4D075131C59B9FA008527C9 /* ODBindingMobileView.xib in Resources */,
-				D47DD5C21C5EE7FD00267C0C /* Skills profile page_icon_Not certified@2x.png in Resources */,
 				D47DD63E1C5EE7FD00267C0C /* 登录文字框icon@1x.png in Resources */,
 				D47DD5B41C5EE7FD00267C0C /* 活动目的icon@3x.png in Resources */,
 				9DC05DFB1C5DF66000181DFE /* ODOrderCell.xib in Resources */,
-				D47DD6781C5EE7FD00267C0C /* icon_field@2x.png in Resources */,
 				D47DD62A1C5EE7FD00267C0C /* 首页发现icon默认态@2x.png in Resources */,
 				D47DD5A01C5EE7FD00267C0C /* 场地预约3@1x.png in Resources */,
 				D4D075211C59B9FA008527C9 /* ODTypeView.xib in Resources */,
-				D47DD6691C5EE7FD00267C0C /* icon_activity@2x.png in Resources */,
 				D47DD5CA1C5EE7FD00267C0C /* 发布新话题－默认icon@1x.png in Resources */,
 				D4D074FA1C59B9FA008527C9 /* ODCommunityDetailCell.xib in Resources */,
 				D47DD5E41C5EE7FD00267C0C /* 朋友圈分享icon@3x.png in Resources */,
@@ -3196,31 +2811,20 @@
 				D47DD61A1C5EE7FD00267C0C /* 欧动社区icon点击态@1x.png in Resources */,
 				D47DD6401C5EE7FD00267C0C /* 登录文字框icon@3x.png in Resources */,
 				D47DD5991C5EE7FD00267C0C /* 中心详情页icon3@3x.png in Resources */,
-				D47DD6681C5EE7FD00267C0C /* icon_activity@1x.png in Resources */,
 				D47DD63B1C5EE7FD00267C0C /* 登录密码icon@1x.png in Resources */,
 				D4D075021C59B9FA008527C9 /* CenterActivityCell.xib in Resources */,
-				D47DD5BE1C5EE7FD00267C0C /* Skills profile page_icon_More right@1x.png in Resources */,
-				D47DD6561C5EE7FD00267C0C /* button_Funny@1x.png in Resources */,
-				D47DD66E1C5EE7FD00267C0C /* icon_circle_small@1x.png in Resources */,
-				D47DD66B1C5EE7FD00267C0C /* icon_circle_big@1x.png in Resources */,
 				D4D075081C59B9FA008527C9 /* CenterYuYueView.xib in Resources */,
 				D47DD5DA1C5EE7FD00267C0C /* 任务详情页分享icon@2x.png in Resources */,
-				D47DD6641C5EE7FD00267C0C /* button_quadratic element@3x.png in Resources */,
 				D47DD6041C5EE7FD00267C0C /* 任务筛选下拉箭头@2x.png in Resources */,
-				D47DD67C1C5EE7FD00267C0C /* icon_gesture@3x.png in Resources */,
 				D47DD6301C5EE7FD00267C0C /* 密码错误多次icon@2x.png in Resources */,
-				D47DD6701C5EE7FD00267C0C /* icon_circle_small@3x.png in Resources */,
 				D47DD5CD1C5EE7FD00267C0C /* 话题详情-分享icon@1x.png in Resources */,
 				D47DD64E1C5EE7FD00267C0C /* 我也要发布任务icon@2x.png in Resources */,
 				D47DD6A31C5EE7FD00267C0C /* 首页-约场地icon@2x.png in Resources */,
 				D47DD62B1C5EE7FD00267C0C /* 首页发现icon默认态@3x.png in Resources */,
 				D4D0751D1C59B9FA008527C9 /* ODTaskCell.xib in Resources */,
-				D47DD68F1C5EE7FD00267C0C /* icon_Skill_big@3x.png in Resources */,
 				D47DD5D31C5EE7FD00267C0C /* 任务详情上拉按钮@1x.png in Resources */,
-				D47DD68A1C5EE7FD00267C0C /* icon_share@1x.png in Resources */,
 				D47DD6381C5EE7FD00267C0C /* 用户名icon@1x.png in Resources */,
 				D4D075191C59B9FA008527C9 /* ODLandSecondCell.xib in Resources */,
-				D47DD6901C5EE7FD00267C0C /* icon_Skill_small@1x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
