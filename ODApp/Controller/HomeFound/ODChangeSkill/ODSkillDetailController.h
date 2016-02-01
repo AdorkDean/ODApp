@@ -9,7 +9,6 @@
 #import "ODBaseViewController.h"
 
 #import "AFNetworking.h"
-#import <MJExtension.h>
 #import "UIImageView+WebCache.h"
 
 #import "ODSkillDetailReusableView.h"

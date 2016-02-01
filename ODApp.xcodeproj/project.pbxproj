@@ -35,6 +35,9 @@
 		9DD00BE91C4E39D800F0EE5F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BE81C4E39D800F0EE5F /* libz.tbd */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
+		B840C6051C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B840C6021C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.m */; };
+		B840C6061C5F97E100DF8C74 /* ODBazaarExchangeSkillDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B840C6041C5F97E100DF8C74 /* ODBazaarExchangeSkillDetailViewController.m */; };
+		B840C6091C5F982F00DF8C74 /* ODBazaarExchangeSkillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B840C6081C5F982F00DF8C74 /* ODBazaarExchangeSkillModel.m */; };
 		C64D40931C5E08D9003BFFA0 /* ODSkillDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D40921C5E08D9003BFFA0 /* ODSkillDetailController.m */; };
 		C64D40971C5E0E17003BFFA0 /* ODSkillDetailReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D40961C5E0E17003BFFA0 /* ODSkillDetailReusableView.m */; };
 		C64D45661C5EFEB9003BFFA0 /* ODSkillDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45651C5EFEB9003BFFA0 /* ODSkillDetailModel.m */; };
@@ -271,6 +274,12 @@
 		B83C6B801C224F640063ED92 /* ODAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ODAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B841C224F640063ED92 /* ODAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODAppUITests.m; sourceTree = "<group>"; };
 		B83C6B861C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B840C6011C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaaeExchangeSkillViewController.h; sourceTree = "<group>"; };
+		B840C6021C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaaeExchangeSkillViewController.m; sourceTree = "<group>"; };
+		B840C6031C5F97E100DF8C74 /* ODBazaarExchangeSkillDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarExchangeSkillDetailViewController.h; sourceTree = "<group>"; };
+		B840C6041C5F97E100DF8C74 /* ODBazaarExchangeSkillDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarExchangeSkillDetailViewController.m; sourceTree = "<group>"; };
+		B840C6071C5F982F00DF8C74 /* ODBazaarExchangeSkillModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarExchangeSkillModel.h; sourceTree = "<group>"; };
+		B840C6081C5F982F00DF8C74 /* ODBazaarExchangeSkillModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarExchangeSkillModel.m; sourceTree = "<group>"; };
 		C3D6EA47D0FE49655335B119 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C64D40911C5E08D9003BFFA0 /* ODSkillDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSkillDetailController.h; sourceTree = "<group>"; };
 		C64D40921C5E08D9003BFFA0 /* ODSkillDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSkillDetailController.m; sourceTree = "<group>"; };
@@ -1281,6 +1290,10 @@
 		D4D070D61C59B9FA008527C9 /* Bazaar */ = {
 			isa = PBXGroup;
 			children = (
+				B840C6011C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.h */,
+				B840C6021C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.m */,
+				B840C6031C5F97E100DF8C74 /* ODBazaarExchangeSkillDetailViewController.h */,
+				B840C6041C5F97E100DF8C74 /* ODBazaarExchangeSkillDetailViewController.m */,
 				D4D070E61C59B9FA008527C9 /* ODBazaarViewController.h */,
 				D4D070E71C59B9FA008527C9 /* ODBazaarViewController.m */,
 				D4D070D71C59B9FA008527C9 /* BazaarDetail */,
@@ -1484,6 +1497,8 @@
 		D4D0713F1C59B9FA008527C9 /* BazaarModel */ = {
 			isa = PBXGroup;
 			children = (
+				B840C6071C5F982F00DF8C74 /* ODBazaarExchangeSkillModel.h */,
+				B840C6081C5F982F00DF8C74 /* ODBazaarExchangeSkillModel.m */,
 				D4D071401C59B9FA008527C9 /* BazaarDetailModel */,
 				D4D071431C59B9FA008527C9 /* ODBazaarModel.h */,
 				D4D071441C59B9FA008527C9 /* ODBazaarModel.m */,
@@ -2089,6 +2104,7 @@
 				D4D0737F1C59B9FA008527C9 /* ODCommunityReleaseTopicViewController.m in Sources */,
 				C64D45F41C5F8C6F003BFFA0 /* IQToolbar.m in Sources */,
 				C64D46141C5F8C6F003BFFA0 /* ODHelp.m in Sources */,
+				B840C6091C5F982F00DF8C74 /* ODBazaarExchangeSkillModel.m in Sources */,
 				D4D073981C59B9FA008527C9 /* ODUserSignatureController.m in Sources */,
 				D4D075061C59B9FA008527C9 /* CenterDetailModel.m in Sources */,
 				D4D0737A1C59B9FA008527C9 /* ODCenterYuYueController.m in Sources */,
@@ -2097,6 +2113,7 @@
 				D4D074FB1C59B9FA008527C9 /* ODCommunityCollectionCell.m in Sources */,
 				D4D0755E1C5DED01008527C9 /* ODBarButton.m in Sources */,
 				9DC05DFE1C5E054100181DFE /* ODOrderHeadView.m in Sources */,
+				B840C6051C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.m in Sources */,
 				D4D0738B1C59B9FA008527C9 /* ODMyOrderRecordController.m in Sources */,
 				C64D45FA1C5F8C6F003BFFA0 /* MBProgressHUD.m in Sources */,
 				D4D073921C59B9FA008527C9 /* ODRegisteredController.m in Sources */,
@@ -2192,6 +2209,7 @@
 				C64D45F71C5F8C6F003BFFA0 /* UITableViewCell+JZExtension.m in Sources */,
 				D4D073821C59B9FA008527C9 /* ODCenterIntroduceController.m in Sources */,
 				D4D073781C59B9FA008527C9 /* ODCenterDetailController.m in Sources */,
+				B840C6061C5F97E100DF8C74 /* ODBazaarExchangeSkillDetailViewController.m in Sources */,
 				D4D0738D1C59B9FA008527C9 /* ODMyTopicController.m in Sources */,
 				D4D075491C59BBEE008527C9 /* ODAppConst.m in Sources */,
 				9DC05DFA1C5DF66000181DFE /* ODOrderCell.m in Sources */,
