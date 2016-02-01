@@ -18,6 +18,7 @@
 #import "ODPersonalCenterViewController.h"
 #import "ODOthersInformationController.h"
 #import "ODLazyViewController.h"
+#import "ODBazaaeExchangeSkillViewController.h"
 
 @interface ODBazaarViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIPopoverPresentationControllerDelegate>
 
