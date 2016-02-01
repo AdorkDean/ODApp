@@ -27,7 +27,6 @@
     }];
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self navigationInit];
     [self createScreeningAndSearchButton];
     [self createRequest];
     [self createCollectionView];
@@ -40,6 +39,8 @@
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf loadMoreData];
     }];
+    
+    self.navigationItem.title = @"欧动集市";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(releaseButtonClick:) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil];
 
 }
@@ -52,13 +53,6 @@
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
 }
 
-
-#pragma mark - 初始化导航
--(void)navigationInit
-{
-    self.navigationItem.title = @"欧动集市";
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(releaseButtonClick:) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil textColor:nil highColor:nil title:@"发布任务"];
-}
 
 -(void)releaseButtonClick:(UIButton *)button
 {
@@ -306,19 +300,21 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
-    ODBazaarModel *model = self.dataArray[indexPath.row];
-    bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
-    bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
-    bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
-    bazaarDetail.myBlock = ^(NSString *del){
-        self.refresh = del;
-    };
-    if ([self.refresh isEqualToString:@"accept"]) {
-        [bazaarDetail.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
-    }
-    [self.navigationController pushViewController:bazaarDetail animated:YES];
-
+//    ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
+//    ODBazaarModel *model = self.dataArray[indexPath.row];
+//    bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+//    bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
+//    bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
+//    bazaarDetail.myBlock = ^(NSString *del){
+//        self.refresh = del;
+//    };
+//    if ([self.refresh isEqualToString:@"accept"]) {
+//        [bazaarDetail.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
+//    }
+//    [self.navigationController pushViewController:bazaarDetail animated:YES];
+    
+    ODBazaaeExchangeSkillViewController *controller = [[ODBazaaeExchangeSkillViewController alloc]init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - 试图将要出现

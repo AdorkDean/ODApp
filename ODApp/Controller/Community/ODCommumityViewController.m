@@ -24,7 +24,6 @@
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"欧动社区";
-    [self navigationInit];
     [self createRequest];
     [self joiningTogetherParmeters];
     [self createCollectionView];
@@ -37,8 +36,9 @@
         [self loadMoreData];
     }];
     
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(searchButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"搜索"];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(publishButtonClick:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"发布任务"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(searchButtonClick) image:[UIImage imageNamed:@"search"] highImage:nil];
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(publishButtonClick) image:[UIImage imageNamed:@"plus"] highImage:nil];
 
 }
 
@@ -51,15 +51,13 @@
     [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
 
-#pragma mark - 初始化导航
--(void)navigationInit
+-(void)searchButtonClick
 {
-    self.navigationItem.title = @"欧动社区";
-   //发布任务按钮
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(publishButtonClick:) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil textColor:nil highColor:nil title:@"发表话题"];
- }
-
--(void)publishButtonClick:(UIButton *)button
+    ODCommunityKeyWordSearchViewController *keyWordSearch = [[ODCommunityKeyWordSearchViewController alloc]init];
+    [self.navigationController pushViewController:keyWordSearch animated:YES];
+}
+                                             
+-(void)publishButtonClick
 {
     
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
@@ -78,11 +76,7 @@
     }
 }
 
--(void)searchButtonClick
-{
-    ODCommunityKeyWordSearchViewController *keyWordSearch = [[ODCommunityKeyWordSearchViewController alloc]init];
-    [self.navigationController pushViewController:keyWordSearch animated:YES];
-}
+
 
 #pragma mark - 初始化manager
 -(void)createRequest
