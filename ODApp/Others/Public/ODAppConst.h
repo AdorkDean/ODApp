@@ -53,6 +53,8 @@ UIKIT_EXTERN NSString * const kDeleteReplyUrl;
 UIKIT_EXTERN NSString * const kHomeFoundListUrl;
 UIKIT_EXTERN NSString * const kHomeFoundPictureUrl;
 
+UIKIT_EXTERN NSString * const ODSkillDetailUrl;
+
 UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
 
