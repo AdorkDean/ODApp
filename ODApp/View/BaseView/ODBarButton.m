@@ -9,6 +9,7 @@
 #import "ODBarButton.h"
 
 @implementation ODBarButton
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame])
@@ -17,6 +18,22 @@
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
     return self;
+}
+
+- (instancetype)initWithTarget:(id)target action:(SEL)action title:(NSString *)title
+{
+    if (self = [super init])
+    {
+        [self setTitle:title forState:UIControlStateNormal];
+        [self sizeToFit];
+        [self addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    }
+    return self;
+}
+
++ (instancetype)barButtonWithTarget:(id)target action:(SEL)action title:(NSString *)title
+{
+    return [[self alloc]initWithTarget:target action:action title:title];
 }
 
 - (void)layoutSubviews
@@ -65,12 +82,4 @@
             break;
     }
 }
-
-- (void)setTarget:(id)target action:(SEL)action title:(NSString *)title
-{
-    [self setTitle:title forState:UIControlStateNormal];
-    [self sizeToFit];
-    [self addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
-}
-
 @end

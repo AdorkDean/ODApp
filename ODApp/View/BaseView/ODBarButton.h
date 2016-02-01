@@ -26,7 +26,8 @@ typedef NS_ENUM(NSInteger, ODBarButtonType) {
  *  按钮类型
  */
 @property(nonatomic, assign) ODBarButtonType barButtonType;
+- (instancetype)initWithTarget:(id)target action:(SEL)action title:(NSString *)title;
 
-- (void)setTarget:(id)target action:(SEL)action title:(NSString *)title;
++ (instancetype)barButtonWithTarget:(id)target action:(SEL)action title:(NSString *)title;
 
 @end

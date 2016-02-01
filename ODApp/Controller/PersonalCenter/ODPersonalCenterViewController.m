@@ -74,8 +74,8 @@
 {
     ODNavigationBarView *naviView = [ODNavigationBarView navigationBarView];
     naviView.title = @"登陆";
-    [naviView.leftBarButton setTarget:self action:@selector(backAction:) title:@"返回"];
-    [naviView.rightBarButton setTarget:self action:@selector(registered:) title:@"注册"];
+    naviView.leftBarButton = [ODBarButton barButtonWithTarget:self action:@selector(backAction:) title:@"返回"];
+    naviView.rightBarButton = [ODBarButton barButtonWithTarget:self action:@selector(registered:) title:@"注册"];;
     [self.view addSubview:naviView];
 }
 
