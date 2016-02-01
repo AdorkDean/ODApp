@@ -82,7 +82,7 @@
     if (_bindMobileView == nil) {
         self.bindMobileView = [ODBindingMobileView getView];
         
-        self.bindMobileView.frame = CGRectMake(0, 64, kScreenSize.width, kScreenSize.height);
+        self.bindMobileView.frame = CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight);
         
         
         [self.bindMobileView.getCodelButton addTarget:self action:@selector(getCodeAction:) forControlEvents:UIControlEventTouchUpInside];

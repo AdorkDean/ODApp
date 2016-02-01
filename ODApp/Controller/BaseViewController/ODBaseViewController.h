@@ -12,7 +12,6 @@
 @interface ODBaseViewController : UIViewController <MBProgressHUDDelegate>
 @property (nonatomic,strong)    MBProgressHUD *HUD;
 //导航的标题视图
-- (void)addTitleViewWithName:(NSString *)name;
 
 - (void)createProgressHUDWithAlpha:(float)alpha withAfterDelay:(float)afterDelay title:(NSString *)title ;
 @end

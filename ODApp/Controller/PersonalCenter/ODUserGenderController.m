@@ -33,7 +33,7 @@
 - (void)createView
 {
     
-    UIImageView *manView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, 40)];
+    UIImageView *manView = [[UIImageView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, 40)];
     manView.backgroundColor = [UIColor whiteColor];
     manView.userInteractionEnabled = YES;
     [self.view addSubview:manView];

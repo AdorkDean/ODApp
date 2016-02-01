@@ -16,10 +16,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.navigationItem.title = @"任务奖励";
     [self navigationInit];
     [self initjiangliView];
     [self createRequest];
+    [self navigationInit];
     [self joiningTogetherParmeters];
+
 }
 
 - (void)initjiangliView

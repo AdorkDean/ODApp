@@ -23,8 +23,8 @@
     
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationItem.title = @"欧动社区";
     [self navigationInit];
-    [self createKeyWordView];
     [self createRequest];
     [self joiningTogetherParmeters];
     [self createCollectionView];
@@ -36,6 +36,9 @@
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [self loadMoreData];
     }];
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(searchButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"搜索"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(publishButtonClick:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"发布任务"];
 
 }
 
@@ -47,7 +50,6 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
-
 
 #pragma mark - 初始化导航
 -(void)navigationInit
@@ -74,28 +76,6 @@
         [self.navigationController pushViewController:releaseTopic animated:YES];
 
     }
-}
-
-#pragma mark - 关键字搜索
--(void)createKeyWordView
-{
-    UIView *view = [ODClassMethod creatViewWithFrame:CGRectMake(0, 64, kScreenSize.width, 37) tag:0 color:@"#d9d9d9"];
-    view.userInteractionEnabled = YES;
-    [self.view addSubview:view];
-    
-    UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(4, 4, kScreenSize.width-8, 29) imageName:@"" tag:0];
-    searchImageView.layer.masksToBounds = YES;
-    searchImageView.layer.cornerRadius = 5;
-    searchImageView.layer.borderWidth = 1;
-    searchImageView.userInteractionEnabled = YES;
-    searchImageView.layer.borderColor = [UIColor colorWithHexString:@"000000" alpha:1].CGColor;
-    searchImageView.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
-    UITapGestureRecognizer *searchTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchButtonClick)];
-    [searchImageView addGestureRecognizer:searchTap];
-    [view addSubview:searchImageView];
-    
-    UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake(20, 0, 100, 29) text:@"关键字搜索" font:16 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
-    [searchImageView addSubview:label];
 }
 
 -(void)searchButtonClick
@@ -179,12 +159,11 @@
     flowLayout.minimumInteritemSpacing = 5;
     flowLayout.minimumLineSpacing = 5;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,101, kScreenSize.width, kScreenSize.height - 101 - 55) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,ODTopY, kScreenSize.width, KControllerHeight - 55) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
-    [self.collectionView registerClass:[ODCommunityHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];
     [self.view addSubview:self.collectionView];
 
 }
@@ -204,14 +183,42 @@
 {
     ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommunityCellId forIndexPath:indexPath];
     ODCommunityModel *model = self.dataArray[indexPath.row];
-    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    
-    [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell showDateWithModel:model];
     NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
-    cell.nameLabel.text = [userInfoDic[userId]nick];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[userInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
+    cell.nickLabel.text = [userInfoDic[userId]nick];
+    cell.signLabel.text = [userInfoDic[userId]sign];
+    [cell showDateWithModel:model];
+    CGFloat height = [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14];
+    cell.contentLabelHeight.constant = height;
+    if (model.imgs.count) {
+        for (id vc in cell.picView.subviews) {
+            [vc removeFromSuperview];
+        }
+        if (model.imgs.count==4) {
+            for (NSInteger i = 0; i < model.imgs.count; i++) {
+                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((90+5)*(i%2), (90+5)*(i/2), 90, 90)];
+                [imageView sd_setImageWithURL:[NSURL OD_URLWithString:model.imgs[i]]];
+                [cell.picView addSubview:imageView];
+            }
+            cell.PicConstraintHeight.constant = 195;
+        }else{
+            for (NSInteger i = 0;i < model.imgs.count ; i++) {
+                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((90+5)*(i%3), (90+5)*(i/3), 90, 90)];
+                [imageView sd_setImageWithURL:[NSURL OD_URLWithString:model.imgs[i]]];
+                [cell.picView addSubview:imageView];
+            }
+            cell.PicConstraintHeight.constant = 90+(90+5)*(model.imgs.count/3);
+        }
+    }else{
+        for (id vc in cell.picView.subviews) {
+            [vc removeFromSuperview];
+        }
+        cell.PicConstraintHeight.constant = 0;
+    }
     return cell;
+
 }
 
 - (void)othersInformationClick:(UIButton *)button{
@@ -233,24 +240,7 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(kScreenSize.width, 120);
-}
-
--(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
-    
-    static NSString *viewId = @"supple";
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        ODCommunityHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:viewId forIndexPath:indexPath];
-        return headerView;
-    }
-    return nil;
-}
-
-
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    return CGSizeMake(kScreenSize.width, 40);
+    return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -264,6 +254,21 @@
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
+//动态计算cell的高度
+-(CGFloat)returnHight:(ODCommunityModel *)model
+{
+    if (model.imgs.count==0) {
+        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14];
+    }else if (model.imgs.count>0&&model.imgs.count<4){
+        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+90;
+    }else if (model.imgs.count>=4&&model.imgs.count<7){
+        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+185;
+    }else if (model.imgs.count>=7&&model.imgs.count<9){
+        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+280;
+    }else{
+        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+280;
+    }
+}
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated
 {

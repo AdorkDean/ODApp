@@ -73,11 +73,11 @@
     
     [self navigationInit];
   
-
+    __weakSelf
     [self createCollectionView];
     
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self downRefresh];
+        [weakSelf downRefresh];
     }];
     
     [self.collectionView.mj_header beginRefreshing];
@@ -314,27 +314,8 @@
 #pragma mark - 点击事件
 -(void)rightClick:(UIButton *)button
 {
-    
-    
-//    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
-//        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
-//        [self presentViewController:vc animated:YES completion:nil];
-//        
-//        
-//    }else {
-//        ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
-//        
-//        vc.centerName = self.centerName;
-//        vc.storeId = self.storeId;
-//        vc.phoneNumber = self.phoneNumber;
-//        [self.navigationController pushViewController:vc animated:YES];
-//        
-//    }
-    
     ODOrderController *vc = [[ODOrderController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-    
-    
 }
 
 
@@ -384,7 +365,7 @@
 -(void)createCollectionView
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 55 - 64) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - 55 ) collectionViewLayout:self.flowLayout];
     [self.collectionView registerClass:[ODActivityHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"firstHeader"];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
