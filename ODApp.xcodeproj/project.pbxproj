@@ -85,6 +85,8 @@
 		D47DD6B11C5EEE3400267C0C /* ODAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D47DD6AC1C5EEE3400267C0C /* ODAPIManager.m */; };
 		D47DD6B21C5EEE3400267C0C /* ODClassMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = D47DD6AE1C5EEE3400267C0C /* ODClassMethod.m */; };
 		D47DD6B31C5EEE3400267C0C /* ODHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = D47DD6B01C5EEE3400267C0C /* ODHelp.m */; };
+		D4AB30101C5F8B89003E92B9 /* ODNewActivityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AB300F1C5F8B89003E92B9 /* ODNewActivityCenterViewController.m */; };
+		D4AB30191C5F91E8003E92B9 /* ODCenterActivityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4AB30171C5F91E8003E92B9 /* ODCenterActivityListViewController.m */; };
 		D4D0736E1C59B9FA008527C9 /* ODBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070D51C59B9FA008527C9 /* ODBaseViewController.m */; };
 		D4D0736F1C59B9FA008527C9 /* ODBazaarDetailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070D91C59B9FA008527C9 /* ODBazaarDetailLayout.m */; };
 		D4D073701C59B9FA008527C9 /* ODBazaarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070DB1C59B9FA008527C9 /* ODBazaarDetailViewController.m */; };
@@ -371,6 +373,10 @@
 		D47DD6AE1C5EEE3400267C0C /* ODClassMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODClassMethod.m; sourceTree = "<group>"; };
 		D47DD6AF1C5EEE3400267C0C /* ODHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHelp.h; sourceTree = "<group>"; };
 		D47DD6B01C5EEE3400267C0C /* ODHelp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHelp.m; sourceTree = "<group>"; };
+		D4AB300E1C5F8B89003E92B9 /* ODNewActivityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCenterViewController.h; sourceTree = "<group>"; };
+		D4AB300F1C5F8B89003E92B9 /* ODNewActivityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewActivityCenterViewController.m; sourceTree = "<group>"; };
+		D4AB30161C5F91E8003E92B9 /* ODCenterActivityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCenterActivityListViewController.h; sourceTree = "<group>"; };
+		D4AB30171C5F91E8003E92B9 /* ODCenterActivityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCenterActivityListViewController.m; sourceTree = "<group>"; };
 		D4D070D41C59B9FA008527C9 /* ODBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBaseViewController.h; sourceTree = "<group>"; };
 		D4D070D51C59B9FA008527C9 /* ODBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBaseViewController.m; sourceTree = "<group>"; };
 		D4D070D81C59B9FA008527C9 /* ODBazaarDetailLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailLayout.h; sourceTree = "<group>"; };
@@ -1197,12 +1203,24 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		D4AB300D1C5F8B4A003E92B9 /* ODActivityCenter */ = {
+			isa = PBXGroup;
+			children = (
+				D4AB300E1C5F8B89003E92B9 /* ODNewActivityCenterViewController.h */,
+				D4AB300F1C5F8B89003E92B9 /* ODNewActivityCenterViewController.m */,
+				D4AB30161C5F91E8003E92B9 /* ODCenterActivityListViewController.h */,
+				D4AB30171C5F91E8003E92B9 /* ODCenterActivityListViewController.m */,
+			);
+			path = ODActivityCenter;
+			sourceTree = "<group>";
+		};
 		D4D070D21C59B9FA008527C9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				D4D0754E1C59C41F008527C9 /* NavigationController */,
 				D4D0713B1C59B9FA008527C9 /* TabBarController */,
 				D4D070D31C59B9FA008527C9 /* BaseViewController */,
+				D4AB300D1C5F8B4A003E92B9 /* ODActivityCenter */,
 				D4D071061C59B9FA008527C9 /* HomeFound */,
 				D4D070E81C59B9FA008527C9 /* CenterActivity */,
 				D4D070D61C59B9FA008527C9 /* Bazaar */,
@@ -2043,6 +2061,7 @@
 				D4D074FB1C59B9FA008527C9 /* ODCommunityCollectionCell.m in Sources */,
 				D4D0755E1C5DED01008527C9 /* ODBarButton.m in Sources */,
 				D47DD4511C5EE7DB00267C0C /* MBProgressHUD.m in Sources */,
+				D4AB30191C5F91E8003E92B9 /* ODCenterActivityListViewController.m in Sources */,
 				9DC05DFE1C5E054100181DFE /* ODOrderHeadView.m in Sources */,
 				D4D0738B1C59B9FA008527C9 /* ODMyOrderRecordController.m in Sources */,
 				D47DD44F1C5EE7DB00267C0C /* IQUIView+IQKeyboardToolbar.m in Sources */,
@@ -2111,6 +2130,7 @@
 				D4D073911C59B9FA008527C9 /* ODPersonalCenterViewController.m in Sources */,
 				D4D073721C59B9FA008527C9 /* ODBazaarReleaseRewardViewController.m in Sources */,
 				D4D0750C1C59B9FA008527C9 /* LunBoModel.m in Sources */,
+				D4AB30101C5F8B89003E92B9 /* ODNewActivityCenterViewController.m in Sources */,
 				D4D0739C1C59B9FA008527C9 /* ODCommunityDetailModel.m in Sources */,
 				9DC05DE51C5DB2F800181DFE /* ODAddressCell.m in Sources */,
 				9DC05DDD1C5DAA5E00181DFE /* ODCollectionCell.m in Sources */,
