@@ -18,6 +18,8 @@
 @property (nonatomic , strong) ODAddAddressView *addAddressView;
 @property (nonatomic , assign) BOOL isdefault;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property (nonatomic, strong) AFHTTPRequestOperationManager *editeManager;
+@property (nonatomic, strong) AFHTTPRequestOperationManager *deleteManager;
 @property (nonatomic , copy) NSString *open_id;
 @property (nonatomic , copy) NSString *is_default;
 @end
@@ -26,14 +28,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-      self.isdefault = YES;
-     self.is_default = @"0";
+    
+    self.isdefault = YES;
+    self.is_default = @"0";
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     
     
   
     
-
+    
 
     [self navigationInit];
     [self createView];
@@ -43,7 +46,7 @@
 
 -(void)navigationInit
 {
-    self.navigationItem.title = @"新增地址";
+    self.navigationItem.title = self.typeTitle;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(saveAction:) color:nil highColor:nil title:@"保存"];
 }
 
@@ -60,14 +63,69 @@
     [self.addAddressView.defaultButton addTarget:self action:@selector(defaultAction:) forControlEvents:UIControlEventTouchUpInside];
     
     
+    if (!self.isAdd) {
+        self.addAddressView.nameTextField.text = self.addressModel.name;
+        self.addAddressView.addressTextField.text = self.addressModel.address;
+        self.addAddressView.phoneTextField.text = self.addressModel.tel;
+    };
     
     
 }
 
 - (void)saveAction:(UIButton *)sender
 {
-    [self saveAddress];
+    if (self.isAdd) {
+         [self saveAddress];
+    }else{
+        [self editeAddress];
+    }
+   
 }
+
+- (void)editeAddress{
+    
+    
+    self.editeManager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"user_address_id":self.addressId, @"tel":self.addAddressView.phoneTextField.text , @"address":self.addAddressView.addressTextField.text,@"name":self.addAddressView.nameTextField.text , @"is_default":self.is_default, @"open_id":self.open_id};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    __weak typeof (self)weakSelf = self;
+    [self.editeManager GET:kSaveAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"修改成功"];
+            [weakSelf deleteAddress];
+            
+            
+        }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
+            
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+        }
+        
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        
+        
+        
+        
+        
+        
+    }];
+    
+
+    
+    
+    
+}
+
+
+
 
 - (void)saveAddress{
     
@@ -112,6 +170,23 @@
     
 }
 
+- (void)deleteAddress
+{
+    self.deleteManager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"user_address_id":self.addressId ,@"open_id":self.open_id};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    [self.deleteManager GET:kDeleteAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+       
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+}
 
 
 - (void)defaultAction:(UIButton *)sender

@@ -60,9 +60,8 @@
     
     
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"我的话题";
     [self creatSegment];
     [self creatScroller];
@@ -87,7 +86,7 @@
     self.segmentedControl.layer.cornerRadius = 7;
     self.segmentedControl.layer.borderWidth = 1;
     self.segmentedControl.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
-    
+    self.segmentedControl.backgroundColor = [UIColor whiteColor];
     self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
     
     self.segmentedControl.selectedSegmentIndex = 0;

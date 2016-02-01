@@ -91,7 +91,7 @@
 {
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;

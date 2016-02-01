@@ -60,4 +60,4 @@ NSString * const kOthersInformationUrl = @"http://woquapi.test.odong.com/1.0/use
 NSString * const kSaveAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/add";
 NSString * const kGetAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/list";
 NSString * const kDeleteAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/del";
-
+NSString * const kEditeAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/edit";

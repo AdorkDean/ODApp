@@ -39,6 +39,8 @@
     self.defaultArray = [[NSMutableArray alloc] init];
     
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
+    self.view.userInteractionEnabled = YES;
+    
     [self getData];
 }
 
@@ -116,7 +118,6 @@
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64 , kScreenSize.width, kScreenSize.height - 64 - 50) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-
     
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     
@@ -154,6 +155,8 @@
 - (void)addAddressAction
 {
     ODAddAddressController *vc = [[ODAddAddressController alloc] init];
+    vc.typeTitle = @"新增地址";
+    vc.isAdd = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -165,23 +168,30 @@
     if (indexPath.section == 0) {
         [cell.lineLabel removeFromSuperview];
         
-        ODAddressModel *model = self.defaultArray[0];
-        cell.nameLabel.text = model.name;
-        cell.phoneLabel.text = model.tel;
-        
-        NSString *str = [NSString stringWithFormat:@"[默认]%@",model.address];
-        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:str];
-        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange(0, 4)];
-        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#000000" alpha:1] range:NSMakeRange(4, model.address.length)];
-        cell.addressLabel.attributedText = noteStr;
+        if (self.defaultArray.count == 0) {
+            ;
+        }else{
+            ODAddressModel *model = self.defaultArray[0];
+            cell.nameLabel.text = model.name;
+            cell.phoneLabel.text = model.tel;
+            
+            NSString *str = [NSString stringWithFormat:@"[默认]%@",model.address];
+            NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:str];
+            [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange(0, 4)];
+            [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#000000" alpha:1] range:NSMakeRange(4, model.address.length)];
+            cell.addressLabel.attributedText = noteStr;
 
+        }
+     
         
         
     }
     
     if (indexPath.section == 1) {
         
-        
+        if (indexPath.row == self.dataArray.count - 1) {
+            [cell.lineLabel removeFromSuperview];
+        }
         ODAddressModel *model = self.dataArray[indexPath.row];
         cell.nameLabel.text = model.name;
         cell.phoneLabel.text = model.tel;
@@ -203,7 +213,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 1;
+        if (self.defaultArray.count == 0) {
+            return 0;
+        }else{
+            return 1;
+        }
     }else{
         return self.dataArray.count;
     }
@@ -215,11 +229,21 @@
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
     
     if (section == 0) {
-        return 20;
-    }else {
+    if (self.defaultArray.count == 0)
+    {
+        return 0;
+        
+    }else
+    {
+       return 20;
+        
+    }
+    }else
+    {
         return 0;
     }
 }
@@ -241,30 +265,51 @@
 }
 
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    [super setEditing:editing animated:animated];
-    [self.tableView setEditing:editing animated:YES];
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
     if (indexPath.section == 0) {
-        return NO;
+         ODAddressModel *model = self.defaultArray[indexPath.row];
+        
+        if (self.getAddressBlock) {
+            self.getAddressBlock(model.address);
+        }
+
+        [self.navigationController popViewControllerAnimated:YES];
+        
     }else{
-        return YES;
+        
+        ODAddressModel *model = self.dataArray[indexPath.row];
+        if (self.getAddressBlock) {
+            self.getAddressBlock(model.address);
+        }
+        
+       [self.navigationController popViewControllerAnimated:YES];
+        
     }
 }
 
-#pragma mark 在滑动手势删除某一行的时候，显示出更多的按钮
+////此方法是UIViewController的编辑方法,让他的根视图上的处于编辑状态
+//- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+//{
+//    
+//    [super setEditing:editing animated:animated];
+//    //当Viewcontroller编辑时,让tableView处于可编辑
+//    [self.tableView setEditing:editing animated:YES];
+//}
+
+#pragma mark - 编辑(删除,插入)
+//设置编辑对象限制;可根据(区号 行号)编辑那些是可编辑,那些不可编辑
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    
+//    return YES; //表示不可编辑
+//}
+
 - (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
  
 {
     
     // 添加一个删除按钮
-    
     UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         
         
@@ -273,23 +318,23 @@
         
         if (indexPath.section == 0) {
             
-            ODAddressModel *model = self.defaultArray[0];
+            ODAddressModel *model = self.defaultArray[indexPath.row];
             address_id = [NSString stringWithFormat:@"%@" , model.id];
-            
-            
-              [self.defaultArray  removeObjectAtIndex:indexPath.row];
+            [self.defaultArray  removeObjectAtIndex:indexPath.row];
+            [self.tableView reloadData];
             
         }else{
             
             ODAddressModel *model = self.dataArray[indexPath.row];
             address_id = [NSString stringWithFormat:@"%@" , model.id];
             [self.dataArray removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
+
             
         }
         
         
-       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
-        [self deleteAddressWithAddress_id:address_id];
+            [self deleteAddressWithAddress_id:address_id];
         
   
         
@@ -299,7 +344,27 @@
  
     UITableViewRowAction *editeAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"编辑"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
         
-        NSLog(@"点击了置顶");
+        ODAddAddressController *vc = [[ODAddAddressController alloc] init];
+        vc.typeTitle = @"编辑地址";
+        vc.isAdd = NO;
+        if (indexPath.section == 0) {
+            ODAddressModel *model = self.defaultArray[indexPath.row];
+            
+            NSString *addressId = [NSString stringWithFormat:@"%@" , model.id];
+            vc.addressId = addressId;
+            vc.addressModel = model;
+            [self.navigationController pushViewController:vc animated:YES];
+
+            
+        }else{
+            
+            ODAddressModel *model = self.dataArray[indexPath.row];
+            NSString *addressId = [NSString stringWithFormat:@"%@" , model.id];
+            vc.addressId = addressId;
+            vc.addressModel = model;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
         
     }];
     
@@ -321,19 +386,12 @@
     NSDictionary *parameters = @{@"user_address_id":address_id ,@"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    __weak typeof (self)weakSelf = self;
     [self.deleteManager GET:kDeleteAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
     [self getData];
        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-        
-        
-        
-        
         
         
     }];

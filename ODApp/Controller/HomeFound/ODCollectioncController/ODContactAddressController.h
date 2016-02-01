@@ -10,4 +10,8 @@
 
 @interface ODContactAddressController : ODBaseViewController
 
+@property(nonatomic,copy)void(^getAddressBlock)(NSString *address);
+
+
+
 @end

@@ -112,6 +112,7 @@
 -(void)navigationInit
 {
     self.navigationItem.title = @"我的任务";
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"全部任务V"];
 }
 
@@ -126,7 +127,7 @@
     self.segmentedControl.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
     
     self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
-    
+    self.segmentedControl.backgroundColor = [UIColor whiteColor];
     self.segmentedControl.selectedSegmentIndex = 0;
     
     NSDictionary *selectedTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:15],

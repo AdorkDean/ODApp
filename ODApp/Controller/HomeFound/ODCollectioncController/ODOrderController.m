@@ -167,6 +167,19 @@
 - (void)addressAction
 {
     ODContactAddressController *vc = [[ODContactAddressController alloc] init];
+    
+    __weakSelf
+    vc.getAddressBlock = ^(NSString *address){
+        
+        weakSelf.headView.orderView.addressLabel.text = address;
+
+        
+        
+    };
+
+    
+    
+    
     [self.navigationController pushViewController:vc animated:YES];
     
 }
