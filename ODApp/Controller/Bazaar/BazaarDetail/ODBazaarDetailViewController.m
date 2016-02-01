@@ -27,14 +27,9 @@
 }
 
 #pragma mark - 初始化导航
+#warning 需要更改。。。改完请删除注释。。
 -(void)navigationInit
 {
-     //返回按钮
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    [self.headView addSubview:backButton];
-    
     //分享按钮
     if ([self.task_status_name isEqualToString:@"过期"]&& [[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
          self.shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-61.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:@"删除" font:16];
@@ -42,16 +37,7 @@
     }else{
         self.shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:nil font:0];
         UIImageView *shareImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width-37.5, 28, 20, 20) imageName:@"话题详情-分享icon" tag:0];
-        [self.headView addSubview:shareImageView];
     }
-    [self.headView addSubview:self.shareButton];
-
-}
-
--(void)backButtonClick:(UIButton *)button
-{
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)shareButtonClick:(UIButton *)button
@@ -332,7 +318,7 @@
                 if (weakSelf.myBlock) {
                     weakSelf.myBlock([NSString stringWithFormat:@"accept"]);
                 }
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"接受成功"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"接受成功"];
                 [weakSelf.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
                 [weakSelf.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
                 weakSelf.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
@@ -342,7 +328,7 @@
                 if (weakSelf.myBlock) {
                     weakSelf.myBlock([NSString stringWithFormat:@"submit"]);
                 }
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"提交成功"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提交成功"];
                 [weakSelf.taskButton setTitle:@"已提交" forState:UIControlStateNormal];
             }
              NSLog(@"------%@",responseObject);
@@ -351,7 +337,7 @@
                 if (weakSelf.myBlock) {
                     weakSelf.myBlock([NSString stringWithFormat:@"complete"]);
                 }
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"确认成功"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"确认成功"];
                 [weakSelf.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
             }
 
@@ -607,7 +593,7 @@
                         [weakSelf.picArray removeAllObjects];
                         [weakSelf.picArray addObject:model];
                         [weakSelf.collectionView reloadData];
-                        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"委派成功"];
+                        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"委派成功"];
                         [weakSelf.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
                         if (self.myBlock) {
                             self.myBlock([NSString stringWithFormat:@"delegate"]);

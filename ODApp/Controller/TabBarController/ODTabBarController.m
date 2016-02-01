@@ -30,13 +30,6 @@
     [super viewDidLoad];
     [self createViewControllers];
     [self setTabBar];
-
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self.tabBar layoutSubviews];
 }
 
 - (void)createViewControllers
@@ -59,7 +52,6 @@
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex
 {
-    [self.tabBar layoutSubviews];
     self.selectedViewController = self.childViewControllers[selectedIndex];
     if (selectedIndex == 4 && [ODUserInformation sharedODUserInformation].openID.length == 0)        return;
     self.currentIndex = selectedIndex;
@@ -81,8 +73,7 @@
     {
         self.selectedIndex = self.currentIndex;
         ODPersonalCenterViewController *perVC = [[ODPersonalCenterViewController alloc] init];
-        ODNavigationController *vc = [[ODNavigationController alloc]initWithRootViewController:perVC];
-        [self presentViewController:vc animated:YES completion:nil];
+        [self presentViewController:perVC animated:YES completion:nil];
     }
     else
     {

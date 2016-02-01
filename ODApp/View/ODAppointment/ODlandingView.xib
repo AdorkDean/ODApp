@@ -81,9 +81,10 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aG-wC-PVX">
-                    <rect key="frame" x="30" y="294" width="260" height="20"/>
+                    <rect key="frame" x="230" y="294" width="60" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="ALu-no-Gfa"/>
+                        <constraint firstAttribute="width" constant="60" id="aYG-5v-qGu"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <state key="normal" title="忘记密码">
@@ -97,7 +98,6 @@
                 <constraint firstAttribute="trailing" secondItem="A1e-kA-3Gh" secondAttribute="trailing" constant="20" id="2JQ-1Z-ACc"/>
                 <constraint firstItem="uXA-gM-Gec" firstAttribute="top" secondItem="A1e-kA-3Gh" secondAttribute="bottom" constant="27" id="AQg-BH-nje"/>
                 <constraint firstItem="Mhv-Pk-Nb6" firstAttribute="leading" secondItem="GOL-v0-DR9" secondAttribute="trailing" constant="10" id="BsR-Ui-C1E"/>
-                <constraint firstItem="3aG-wC-PVX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="GhS-aA-uir"/>
                 <constraint firstItem="GOL-v0-DR9" firstAttribute="top" secondItem="aQk-GQ-b7V" secondAttribute="bottom" constant="47" id="JFE-1o-gua"/>
                 <constraint firstItem="gg2-ay-KDY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="OMm-ci-dve"/>
                 <constraint firstItem="GOL-v0-DR9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="Ssb-Wl-cWt"/>

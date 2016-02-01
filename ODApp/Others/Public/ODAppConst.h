@@ -3,8 +3,8 @@
 #pragma mark - UI相关常量
 /** TabBar的高度 */
 UIKIT_EXTERN CGFloat const ODTabBarHeight;
-
-
+UIKIT_EXTERN CGFloat const ODNavigationHeight;
+UIKIT_EXTERN CGFloat const ODLeftMargin;
 
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
@@ -20,7 +20,8 @@ UIKIT_EXTERN NSString * const ODNotificationMyTaskRefresh;
 
 #pragma mark - 请求URL接口 
 /** 统一的URL */
-UIKIT_EXTERN NSString * const ODCommonURL;
+UIKIT_EXTERN NSString *const ODCommonURL;
+
 
 UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
@@ -54,3 +55,6 @@ UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
 UIKIT_EXTERN NSString * const kMyApplyActivityUrl;
 UIKIT_EXTERN NSString * const kCancelMyOrderUrl;
 UIKIT_EXTERN NSString * const kOthersInformationUrl;
+UIKIT_EXTERN NSString * const kSaveAddressUrl;
+UIKIT_EXTERN NSString * const kGetAddressUrl;
+UIKIT_EXTERN NSString * const kDeleteAddressUrl;

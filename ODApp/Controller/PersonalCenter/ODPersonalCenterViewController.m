@@ -5,6 +5,7 @@
 //  Created by Odong-YG on 15/12/17.
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
+#import "ODNavigationBarView.h"
 #import "ODNavigationController.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODTabBarController.h"
@@ -20,7 +21,6 @@
 
 @interface ODPersonalCenterViewController ()<UITableViewDataSource , UITableViewDelegate>
 
-@property (nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) ODlandingView *landView;
 @property (nonatomic, strong) IQKeyboardReturnKeyHandler *returnKeyHandler;
@@ -32,16 +32,14 @@
 
 @implementation ODPersonalCenterViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
+    [self navigationInit];
     self.pageNumber = 0;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
-    self.navigationItem.title = @"登陆";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(registered:) color:nil highColor:nil title:@"注册"];
     
     self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
     self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
@@ -54,7 +52,6 @@
     self.view = self.landView;
 }
 
-
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -63,7 +60,6 @@
 
 - (void)createTableView
 {
-    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.tableView.userInteractionEnabled = YES;
@@ -73,6 +69,17 @@
     [self.view addSubview:self.tableView];
     
 }
+
+- (void)navigationInit
+{
+    ODNavigationBarView *naviView = [ODNavigationBarView navigationBarView];
+    naviView.title = @"登陆";
+    naviView.leftBarButton = [ODBarButton barButtonWithTarget:self action:@selector(backAction:) title:@"返回"];
+    naviView.rightBarButton = [ODBarButton barButtonWithTarget:self action:@selector(registered:) title:@"注册"];;
+    [self.view addSubview:naviView];
+}
+
+
 
 //创建警告框
 -(void)createUIAlertControllerWithTitle:(NSString *)title
@@ -143,11 +150,11 @@
     [self.landView.passwordTextField resignFirstResponder];
     if ([self.landView.accountTextField.text isEqualToString:@""]) {
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入手机号"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入手机号"];
         
     }else if ([self.landView.passwordTextField.text isEqualToString:@""]) {
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入密码"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入密码"];
     }
     
     else {
@@ -201,7 +208,7 @@
             ODHomeFoundViewController *vc1 = [[ODHomeFoundViewController alloc] init];
             
             [weakSelf.navigationController presentViewController:vc1 animated:YES completion:nil];
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"登陆成功"];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"登陆成功"];
             
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
@@ -210,12 +217,12 @@
             weakSelf.pageNumber++;
             if (weakSelf.pageNumber >= 3) {
                 
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册"];
                 
             }else {
                 
                 
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:responseObject[@"message"]];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
             }
             
         }

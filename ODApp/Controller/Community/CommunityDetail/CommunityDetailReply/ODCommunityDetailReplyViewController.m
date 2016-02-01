@@ -18,26 +18,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.navigationItem.title = @"回复";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"返回"];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
     [self createRequest];
-    [self createTextView];    
-    
+    [self createTextView];
 }
 
--(void)backButtonClick
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
 
 -(void)confirmButtonClick
 {
     if (self.textView.text.length>0) {
         [self joiningTogetherParmeters];
     }else{
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入回复内容"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入回复内容"];
     }
 }
 
@@ -71,7 +64,7 @@
             
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationMyTaskRefresh object:nil];
             [weakSelf.navigationController popViewControllerAnimated:YES];
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"回复成功"];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"回复成功"];
             
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

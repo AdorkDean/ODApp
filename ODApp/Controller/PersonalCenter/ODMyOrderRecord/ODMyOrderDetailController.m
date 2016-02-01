@@ -19,39 +19,19 @@
     
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithHexString:@"e6e6e6" alpha:1];;
-    
     self.dataArray = [[NSMutableArray alloc] init];
     self.devicesArray = [[NSMutableArray alloc] init];
-    
-    self.navigationItem.title = @"预约详情";
+    [self navigationInit];
     [self getOrderDetailRequest];
 }
 
 - (void)navigationInit
 {
-        
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"#f3f3f3"];
-    [self.view addSubview:self.headView];
-
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16, 44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    [self.headView addSubview:backButton];
-    
-    if (self.isOther == NO) {
-        self.cancelOrderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 110, 16, 95, 44) target:self sel:@selector(cancelOrderButtonClick:) tag:0 image:nil title:@"取消预约" font:16];
-        [self.cancelOrderButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-        
-        [self.headView addSubview:self.cancelOrderButton];
-    }
-}
-
-- (void)backButtonClick:(UIButton *)button
-{
-    
-    [self.navigationController popViewControllerAnimated:YES];
+    self.navigationItem.title = @"预约详情";
+    if (self.isOther == NO)
+    {
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelOrderButtonClick:) color:nil highColor:nil title:@"取消预约"];
+     }
 }
 
 - (void)cancelOrderButtonClick:(UIButton *)button
@@ -59,13 +39,13 @@
 
     if ([self.checkLabel.text isEqualToString:@"已取消"] || [self.checkLabel.text isEqualToString:@"后台取消"]) {
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"订单已经取消"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"订单已经取消"];
     }else if ([self.checkLabel.text isEqualToString:@"前台已确认"]) {
     
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"订单已生成,请联系客服"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"订单已生成,请联系客服"];
     }else if ([self.checkLabel.text isEqualToString:@"到场已确认"] || [self.checkLabel.text isEqualToString:@"未到场"]) {
     
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"已到活动时间，无需进行取消"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"已到活动时间，无需进行取消"];
     }
     
     else{
@@ -81,7 +61,7 @@
             __weak typeof (self)weakSelf = self;
             [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                 
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"取消订单成功"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
                 weakSelf.checkLabel.text = @"已取消";
                 
             } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

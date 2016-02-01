@@ -20,26 +20,24 @@
     [super viewDidLoad];
     
     self.count = 1;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    self.navigationItem.title = @"欧动社区";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"取消"];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
+  
+    [self navigationInit];
     [self createRequest];
     [self createSearchBar];
     [self createCollectionView];
-
+    __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        if (self.searchBar.text.length>0) {
+        if (weakSelf.searchBar.text.length>0) {
             
-            [self joiningTogetherParmeters];
+            [weakSelf joiningTogetherParmeters];
         }else{
-            [self.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_header endRefreshing];
         }
 
     }];
     
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [self loadMoreData];
+        [weakSelf loadMoreData];
     }];
 
 }
@@ -63,6 +61,13 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - 初始化导航
+-(void)navigationInit
+{    
+    self.navigationItem.title = @"欧动社区";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"取消"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];}
+
 -(void)confirmButtonClick
 {
     [self.searchBar resignFirstResponder];
@@ -71,7 +76,7 @@
         
         [self joiningTogetherParmeters];
     }else{
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入搜索内容"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入搜索内容"];
     }
 }
 
@@ -84,6 +89,7 @@
     self.searchBar.delegate = self;
     self.searchBar.placeholder = @"标签关键字";
     [self.view addSubview:self.searchBar];
+//    [self.navigationItem setTitleView:self.searchBar];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -181,7 +187,7 @@
         
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 

@@ -20,7 +20,6 @@
 @interface ODActivityDetailController ()<UITableViewDelegate , UIWebViewDelegate>
 
 
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) ActivityDetailView *activityDetailView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
@@ -42,7 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"中心活动";
+    [self navigationInit];
     [self getData];
     self.openId = [ODUserInformation sharedODUserInformation].openID;
 }
@@ -170,20 +169,15 @@
 #pragma mark - 初始化
 -(void)navigationInit
 {    
-    // 返回button
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-
-    [self.headView addSubview:confirmButton];
-    
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.view.userInteractionEnabled = YES;
+    self.navigationItem.title = @"中心活动";
 }
-
 - (void)creatView
 {
     
     
-    self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64)];
+    self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
     self.scroller.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.scroller.userInteractionEnabled = YES;
     self.activityDetailView = [ActivityDetailView getView];
@@ -295,11 +289,6 @@
 {
     [self saveData];
   
-}
-
--(void)fanhui:(UIButton *)sender
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)addressAction:(UITapGestureRecognizer *)sender

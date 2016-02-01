@@ -17,7 +17,6 @@
 #import "ODOthersInformationController.h"
 @interface ODMyTopicController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) UIScrollView * scrollView;
 
@@ -61,9 +60,8 @@
     
     
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"我的话题";
     [self creatSegment];
     [self creatScroller];
@@ -80,26 +78,6 @@
     
 }
 
-#pragma mark - 初始化
-
--(void)navigationInit
-{
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.view.userInteractionEnabled = YES;
-    
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:confirmButton];
-}
-
-
 -(void)creatSegment
 {
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发表的", @"我回复的"]];
@@ -108,7 +86,7 @@
     self.segmentedControl.layer.cornerRadius = 7;
     self.segmentedControl.layer.borderWidth = 1;
     self.segmentedControl.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
-    
+    self.segmentedControl.backgroundColor = [UIColor whiteColor];
     self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
     
     self.segmentedControl.selectedSegmentIndex = 0;
@@ -186,13 +164,6 @@
     [self.secondCollectionView.mj_header beginRefreshing];
     
     [self.scrollView addSubview:self.secondCollectionView];
-}
-
-
--(void)fanhui:(UIButton *)sender
-{
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 刷新
@@ -290,7 +261,7 @@
         
         [weakSelf.firstCollectionView.mj_header endRefreshing];
         [weakSelf.firstCollectionView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
 }
@@ -358,7 +329,7 @@
         
         [weakSelf.secondCollectionView.mj_header endRefreshing];
         [weakSelf.secondCollectionView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 

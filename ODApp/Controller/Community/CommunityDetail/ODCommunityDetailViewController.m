@@ -21,7 +21,6 @@
     self.count = 1;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"话题详情";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"返回"];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
     
     [self createReplyButton];
@@ -45,11 +44,6 @@
     NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadTableDataWithUrl:kCommunityBbsReplyListUrl paramater:signParameter];
-}
-
--(void)backButtonClick
-{
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 分享

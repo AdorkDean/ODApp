@@ -27,13 +27,12 @@
     }];
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationItem.title = @"欧动集市";
+    [self navigationInit];
     [self createScreeningAndSearchButton];
     [self createRequest];
     [self createCollectionView];
     self.status = @"9";
     [self joiningTogetherParmeters];
-    
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf joiningTogetherParmeters];
     }];
@@ -51,6 +50,14 @@
     NSDictionary *parameter = @{@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
+}
+
+
+#pragma mark - 初始化导航
+-(void)navigationInit
+{
+    self.navigationItem.title = @"欧动集市";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(releaseButtonClick:) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil textColor:nil highColor:nil title:@"发布任务"];
 }
 
 -(void)releaseButtonClick:(UIButton *)button
@@ -230,7 +237,7 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
 
     }];
 }

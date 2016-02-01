@@ -16,8 +16,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    self.navigationItem.title = @"新任务";
+    [self navigationInit];
     [self createScrollView];
     [self createTitleTextView];
     [self createTimeLabel];
@@ -30,22 +29,8 @@
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
-    //返回按钮
-    UIButton *backButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(backButtonClick:) tag:0 image:nil title:@"返回" font:16];
-    backButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [backButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    [self.headView addSubview:backButton];
-    
-    //确认按钮
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width - 35 - 17.5, 16,35, 44) target:self sel:@selector(confirmButtonClick:) tag:0 image:nil title:@"确认" font:16];
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-
-    [self.headView addSubview:confirmButton];
-}
-
--(void)backButtonClick:(UIButton *)button
-{
-    [self.navigationController popViewControllerAnimated:YES];
+    self.navigationItem.title = @"新任务";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
 }
 
 -(void)confirmButtonClick:(UIButton *)button
@@ -60,10 +45,10 @@
     }else{
         if (self.titleTextView.text.length == 0) {
             
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入任务标题"];
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入任务标题"];
         }else if (self.taskDetailTextView.text.length == 0){
             
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入任务内容"];
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入任务内容"];
         }
     }
 }
@@ -388,7 +373,7 @@
             }
             else{
             
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"任务发布成功"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"任务发布成功"];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
             }
         }else{
@@ -402,7 +387,7 @@
                 message = @"请输入内容";
             }
             
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:message];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:message];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLogError

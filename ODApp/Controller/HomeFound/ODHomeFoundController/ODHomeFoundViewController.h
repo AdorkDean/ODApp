@@ -23,13 +23,13 @@
 #import "ODCenterIntroduceController.h"
 #import "ODhomeViewCollectionReusableView.h"
 #import "ODOthersInformationController.h"
-
 #import "ODPersonalCenterViewController.h"
+
+#import "ODSkillDetailController.h"
 
 @interface ODHomeFoundViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,SDCycleScrollViewDelegate>
 
-
-@property (nonatomic, strong)UIView *headView;
+@property (nonatomic, strong)UILabel *locationLabel;
 
 @property (nonatomic, strong)UICollectionView *collectionView;
 

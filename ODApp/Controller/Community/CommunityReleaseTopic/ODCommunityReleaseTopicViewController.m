@@ -19,22 +19,18 @@
     
     self.imageArray = [[NSMutableArray alloc]init];
     self.strArray = [[NSMutableArray alloc]init];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.navigationItem.title = @"新话题";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"取消"];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
     [self createRequest];
     [self createTextView];
     [self createAddPicButton];
-
-    
 }
 
 -(void)cancelButtonClick
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 -(void)confirmButtonClick
 {
     [self.titleTextView resignFirstResponder];
@@ -44,10 +40,10 @@
         [self joiningTogetherParmeters];
     }else if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length==0){
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入话题内容"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入话题内容"];
     }else{
 
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入话题标题"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入话题标题"];
     }
     
 }
@@ -173,7 +169,7 @@ NSString *topicContentText = @"";
         [actionSheet showInView:self.view];
     }else{
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"已达图片最大上传数"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已达图片最大上传数"];
     }
 }
 
@@ -191,7 +187,7 @@ NSString *topicContentText = @"";
             }
             else {
                 
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
+                [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
             }
             break;
         case 1:
@@ -377,16 +373,16 @@ NSString *topicContentText = @"";
                 weakSelf.myBlock([NSString stringWithFormat:@"refresh"]);
             }
             NSLog(@"%@",responseObject);
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"话题发布成功"];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"话题发布成功"];
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
         if ([responseObject[@"status"]isEqualToString:@"error"]){
             if ([responseObject[@"message"] isEqualToString:@"title not found"]) {
                 
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入标题"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入标题"];
             }else{
             
-                [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入内容"];
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入内容"];
             }
             
             

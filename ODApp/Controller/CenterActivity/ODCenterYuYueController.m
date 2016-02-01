@@ -16,7 +16,6 @@
 
 @interface ODCenterYuYueController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate , UITextFieldDelegate , UIPickerViewDataSource , UIPickerViewDelegate>
 
-@property(nonatomic , strong) UIView *headView;
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) CenterYuYueView *yuYueView;
 
@@ -87,8 +86,9 @@
     self.yearStr = @"";
     self.start_datetime = @"";
     self.navigationItem.title = @"场地预约";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
     [self createTableView];
-    
+    [self navigationInit];
     
     self.openId = [ODUserInformation sharedODUserInformation].openID;
     
@@ -103,35 +103,20 @@
     self.yearStr = @"";
 }
 
-
 #pragma mark - 初始化
 -(void)navigationInit
 {
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    
-    
-    self.navigationController.navigationBar.hidden = YES;
-    self.headView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 64) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.headView];
-    
-    // 中心活动label
-    
-    
-    // 返回button
-    UIButton *confirmButton = [ODClassMethod creatButtonWithFrame:CGRectMake(17.5, 16,44, 44) target:self sel:@selector(fanhui:) tag:0 image:nil title:@"返回" font:16];
-    confirmButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [confirmButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    
-    [self.headView addSubview:confirmButton];
+    self.view.userInteractionEnabled = YES;
+    self.navigationItem.title = @"场地预约";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
     
     
     
 }
-
-
 - (void)createTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     
     self.tableView.dataSource = self;
@@ -200,21 +185,21 @@
     if ([self.yuYueView.btimeText.titleLabel.text isEqualToString:@"填写开始时间"]) {
         
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请选择时间"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请选择时间"];
 
     }else if ([self.yuYueView.eTimeText.titleLabel.text isEqualToString:@"填写结束时间"]) {
         
 
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请填写结束时间"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请填写结束时间"];
     }else if ([self.yuYueView.pursoseTextView.text isEqualToString:@""] || [self.yuYueView.pursoseTextView.text isEqualToString:@"请填写结束时间"]) {
         
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入活动目的"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入活动目的"];
     }else if ([self.yuYueView.contentTextView.text isEqualToString:@""] || [self.yuYueView.contentTextView.text isEqualToString:@"请输入活动目的"]) {
 
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入活动内容"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入活动内容"];
     }else if ([self.yuYueView.peopleNumberTextField.text isEqualToString:@""]) {
       
-        [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请输入参加人数"];
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入参加人数"];
     } else {
         
         [self getOrderId];
@@ -226,8 +211,6 @@
 - (void)getData
 {
     
-    
-    NSLog(@"____%@" , self.start_datetime);
     
     self.timeManager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameters = @{@"store_id":self.storeId , @"start_datetime":self.start_datetime};
@@ -344,7 +327,7 @@
         }else{
             if ([self.yuYueView.btimeText.titleLabel.text isEqualToString:@"填写开始时间"]) {
                 
-                [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"请选择开始时间"];
+                [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请选择开始时间"];
             }else{
                 
                 
@@ -392,7 +375,7 @@
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:responseObject[@"message"]];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
         }
         
         
@@ -437,14 +420,14 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:@"感谢您的预约请等待审核"];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"感谢您的预约请等待审核"];
             
             
             [weakSelf.navigationController popViewControllerAnimated:YES];
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:1.0f title:responseObject[@"message"]];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
         }
   
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

@@ -20,20 +20,15 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.navigationItem.title = @"任务奖励";
+    [self navigationInit];
+    [self initjiangliView];
     [self createRequest];
     [self navigationInit];
     [self joiningTogetherParmeters];
-    
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backButtonClick:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"返回"];
-    
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
-    
-    
 
 }
 
-#pragma mark - 初始化导航
--(void)navigationInit
+- (void)initjiangliView
 {
     UIView *view = [ODClassMethod creatViewWithFrame:CGRectMake(4, 68, kScreenSize.width-8, 40) tag:0 color:@"#ffffff"];
     view.layer.masksToBounds = YES;
@@ -45,10 +40,12 @@
     [view addSubview:self.textField];
     
 }
-
--(void)backButtonClick:(UIButton *)button
+#pragma mark - 初始化导航
+-(void)navigationInit
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.navigationItem.title = @"任务奖励";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
 }
 
 -(void)confirmButtonClick:(UIButton *)button
