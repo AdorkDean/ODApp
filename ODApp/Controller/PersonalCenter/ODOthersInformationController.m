@@ -52,7 +52,7 @@
 {
 
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height - 20) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - 20) collectionViewLayout:self.flowLayout];
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;

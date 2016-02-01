@@ -174,7 +174,7 @@
 -(void)createUserInfoView
 {
     ODCommunityDetailModel *userModel = [self.userArray objectAtIndex:0];
-    self.tabelHeaderView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 64, kScreenSize.width, 100) tag:0 color:@"#ffffff"];
+    self.tabelHeaderView = [ODClassMethod creatViewWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, 100) tag:0 color:@"#ffffff"];
     self.userView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, 0, kScreenSize.width-25, 76) tag:0 color:@"#ffffff"];
     [self.tabelHeaderView addSubview:self.userView];
     

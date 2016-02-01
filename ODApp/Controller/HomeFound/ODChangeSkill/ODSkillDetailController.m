@@ -37,7 +37,7 @@ static NSString *const ODSkillDetailReusableVIEW = @"ODSkillDetailReusableView";
 
 - (void)createSkillDetailView{
 
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - 55)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - 55)];
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     
     self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 150) / 2, 10, 150, 20) text:@"我去＊代买早饭" font:16 alignment:@"center" color:@"#000000" alpha:1];

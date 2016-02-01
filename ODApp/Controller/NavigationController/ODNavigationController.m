@@ -23,8 +23,6 @@
                        forBarPosition:UIBarPositionAny
                            barMetrics:UIBarMetricsDefault];
     [navigationBar setShadowImage:[UIImage new]];
-    navigationBar.translucent = YES;
-    navigationBar.hidden = YES;
     NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
     dictM[NSForegroundColorAttributeName] = [UIColor blackColor];
     dictM[NSFontAttributeName] = [UIFont systemFontOfSize:17];

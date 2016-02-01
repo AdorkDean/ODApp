@@ -5,6 +5,7 @@
 UIKIT_EXTERN CGFloat const ODTabBarHeight;
 UIKIT_EXTERN CGFloat const ODNavigationHeight;
 UIKIT_EXTERN CGFloat const ODLeftMargin;
+UIKIT_EXTERN CGFloat const ODTopY;
 
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
