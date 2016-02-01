@@ -3,8 +3,11 @@
 #pragma mark - UI相关常量
 /** TabBar的高度 */
 UIKIT_EXTERN CGFloat const ODTabBarHeight;
+/** 导航控制器的高度 */
 UIKIT_EXTERN CGFloat const ODNavigationHeight;
+/** 控件的左边间距 */
 UIKIT_EXTERN CGFloat const ODLeftMargin;
+/** 控制器View的顶部坐标y */
 UIKIT_EXTERN CGFloat const ODTopY;
 
 #pragma mark - 通用的Key
