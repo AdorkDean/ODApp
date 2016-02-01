@@ -206,7 +206,7 @@
 
 - (void)timeAction
 {
-    self.choseTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenSize.height / 2, kScreenSize.width,kScreenSize.height / 2)];
+    self.choseTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, (kScreenSize.height - ODNavigationHeight)/ 2, kScreenSize.width,kScreenSize.height - (kScreenSize.height - ODNavigationHeight)/ 2)];
     self.choseTimeView.userInteractionEnabled = YES;
     self.choseTimeView.backgroundColor = [UIColor whiteColor];
     
