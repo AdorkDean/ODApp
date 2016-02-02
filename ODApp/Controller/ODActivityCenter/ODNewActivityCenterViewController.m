@@ -81,9 +81,8 @@ static NSString * const cellId = @"newActivityCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODNewActivityCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     ODActivityDetailViewController *detailViewController = [[ODActivityDetailViewController alloc] initWithNibName:nil bundle:nil];
-    detailViewController.acitityId = cell.model.activity_id;
+    detailViewController.acitityId = [self.resultLists[indexPath.row]activity_id];
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 

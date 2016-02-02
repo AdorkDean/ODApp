@@ -220,6 +220,15 @@
 		D4F76D4C1C605EA700D59F02 /* ODActivityListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D4B1C605EA700D59F02 /* ODActivityListModel.m */; };
 		D4F76D521C607B1600D59F02 /* NSObject+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D511C607B1600D59F02 /* NSObject+Log.m */; };
 		D4F76D551C6090EC00D59F02 /* ODActivityDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D541C6090EC00D59F02 /* ODActivityDetailModel.m */; };
+		D4F76D5F1C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D5D1C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.m */; };
+		D4F76D601C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F76D5E1C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.xib */; };
+		D4F76D641C60B8B800D59F02 /* ODActivityDetailInfoViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D621C60B8B800D59F02 /* ODActivityDetailInfoViewCell.m */; };
+		D4F76D651C60B8B800D59F02 /* ODActivityDetailInfoViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F76D631C60B8B800D59F02 /* ODActivityDetailInfoViewCell.xib */; };
+		D4F76D6C1C60C55E00D59F02 /* ODActivityVIPCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D6A1C60C55E00D59F02 /* ODActivityVIPCell.m */; };
+		D4F76D6D1C60C55E00D59F02 /* ODActivityVIPCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F76D6B1C60C55E00D59F02 /* ODActivityVIPCell.xib */; };
+		D4F76D721C60CC8400D59F02 /* ODLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D6F1C60CC8400D59F02 /* ODLikeModel.m */; };
+		D4F76D731C60CC8400D59F02 /* TimeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D711C60CC8400D59F02 /* TimeButton.m */; };
+		D4F76D761C60CCC400D59F02 /* ODHomeFoundFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D751C60CCC400D59F02 /* ODHomeFoundFooterView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -635,6 +644,21 @@
 		D4F76D531C6090EC00D59F02 /* ODActivityDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityDetailModel.h; sourceTree = "<group>"; };
 		D4F76D541C6090EC00D59F02 /* ODActivityDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityDetailModel.m; sourceTree = "<group>"; };
 		D4F76D561C6094B600D59F02 /* ODModelDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODModelDefine.h; sourceTree = "<group>"; };
+		D4F76D5C1C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityDetailHeadImgViewCell.h; sourceTree = "<group>"; };
+		D4F76D5D1C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityDetailHeadImgViewCell.m; sourceTree = "<group>"; };
+		D4F76D5E1C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODActivityDetailHeadImgViewCell.xib; sourceTree = "<group>"; };
+		D4F76D611C60B8B800D59F02 /* ODActivityDetailInfoViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityDetailInfoViewCell.h; sourceTree = "<group>"; };
+		D4F76D621C60B8B800D59F02 /* ODActivityDetailInfoViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityDetailInfoViewCell.m; sourceTree = "<group>"; };
+		D4F76D631C60B8B800D59F02 /* ODActivityDetailInfoViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODActivityDetailInfoViewCell.xib; sourceTree = "<group>"; };
+		D4F76D691C60C55E00D59F02 /* ODActivityVIPCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityVIPCell.h; sourceTree = "<group>"; };
+		D4F76D6A1C60C55E00D59F02 /* ODActivityVIPCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityVIPCell.m; sourceTree = "<group>"; };
+		D4F76D6B1C60C55E00D59F02 /* ODActivityVIPCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODActivityVIPCell.xib; sourceTree = "<group>"; };
+		D4F76D6E1C60CC8400D59F02 /* ODLikeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLikeModel.h; sourceTree = "<group>"; };
+		D4F76D6F1C60CC8400D59F02 /* ODLikeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLikeModel.m; sourceTree = "<group>"; };
+		D4F76D701C60CC8400D59F02 /* TimeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeButton.h; sourceTree = "<group>"; };
+		D4F76D711C60CC8400D59F02 /* TimeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeButton.m; sourceTree = "<group>"; };
+		D4F76D741C60CCC400D59F02 /* ODHomeFoundFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHomeFoundFooterView.h; sourceTree = "<group>"; };
+		D4F76D751C60CCC400D59F02 /* ODHomeFoundFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeFoundFooterView.m; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -688,6 +712,10 @@
 		9DC05DD61C5DA7B900181DFE /* ODCollectioncController */ = {
 			isa = PBXGroup;
 			children = (
+				D4F76D6E1C60CC8400D59F02 /* ODLikeModel.h */,
+				D4F76D6F1C60CC8400D59F02 /* ODLikeModel.m */,
+				D4F76D701C60CC8400D59F02 /* TimeButton.h */,
+				D4F76D711C60CC8400D59F02 /* TimeButton.m */,
 				C64D46161C5F8D6F003BFFA0 /* DataButton.h */,
 				C64D46171C5F8D6F003BFFA0 /* DataButton.m */,
 				C64D46181C5F8D6F003BFFA0 /* ODAddressModel.h */,
@@ -1062,6 +1090,13 @@
 			name = ODChoseCenter;
 			sourceTree = "<group>";
 		};
+		C64D40901C5E088A003BFFA0 /* ODChangeSkill */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ODChangeSkill;
+			sourceTree = "<group>";
+		};
 		C64D40941C5E0DC6003BFFA0 /* ODSkillDetailView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1366,6 +1401,15 @@
 				D46C90361C6043DA004942E7 /* ODNewActivityCell.h */,
 				D46C90371C6043DA004942E7 /* ODNewActivityCell.m */,
 				D46C903E1C605841004942E7 /* ODNewActivityCell.xib */,
+				D4F76D5C1C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.h */,
+				D4F76D5D1C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.m */,
+				D4F76D5E1C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.xib */,
+				D4F76D611C60B8B800D59F02 /* ODActivityDetailInfoViewCell.h */,
+				D4F76D621C60B8B800D59F02 /* ODActivityDetailInfoViewCell.m */,
+				D4F76D631C60B8B800D59F02 /* ODActivityDetailInfoViewCell.xib */,
+				D4F76D691C60C55E00D59F02 /* ODActivityVIPCell.h */,
+				D4F76D6A1C60C55E00D59F02 /* ODActivityVIPCell.m */,
+				D4F76D6B1C60C55E00D59F02 /* ODActivityVIPCell.xib */,
 			);
 			path = ODActivityCenter;
 			sourceTree = "<group>";
@@ -1502,6 +1546,7 @@
 		D4D071061C59B9FA008527C9 /* HomeFound */ = {
 			isa = PBXGroup;
 			children = (
+				C64D40901C5E088A003BFFA0 /* ODChangeSkill */,
 				9DC05DD61C5DA7B900181DFE /* ODCollectioncController */,
 				D4D071071C59B9FA008527C9 /* ODCenterIntroduceController */,
 				D4D0710A1C59B9FA008527C9 /* ODHomeFoundController */,
@@ -1754,6 +1799,8 @@
 		D4D0731B1C59B9FA008527C9 /* HomeFoundView */ = {
 			isa = PBXGroup;
 			children = (
+				D4F76D741C60CCC400D59F02 /* ODHomeFoundFooterView.h */,
+				D4F76D751C60CCC400D59F02 /* ODHomeFoundFooterView.m */,
 				C64D40941C5E0DC6003BFFA0 /* ODSkillDetailView */,
 				D4D0731C1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.h */,
 				D4D0731D1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.m */,
@@ -2076,6 +2123,7 @@
 				D4D0751F1C59B9FA008527C9 /* ODTopicCell.xib in Resources */,
 				D4D075111C59B9FA008527C9 /* ODlandingView.xib in Resources */,
 				D4D075171C59B9FA008527C9 /* ODLandFirstCell.xib in Resources */,
+				D4F76D6D1C60C55E00D59F02 /* ODActivityVIPCell.xib in Resources */,
 				C64D45F61C5F8C6F003BFFA0 /* IQKeyboardManager.bundle in Resources */,
 				D4D0750A1C59B9FA008527C9 /* ChoseCenterCell.xib in Resources */,
 				D4D074F41C59B9FA008527C9 /* ODBazaarDetailCollectionCell.xib in Resources */,
@@ -2089,7 +2137,9 @@
 				C64D46111C5F8C6F003BFFA0 /* read_me.txt in Resources */,
 				D4D074F61C59B9FA008527C9 /* ODBazaarRewardCollectionCell.xib in Resources */,
 				9DC05DF61C5DEE4400181DFE /* ODOrderView.xib in Resources */,
+				D4F76D651C60B8B800D59F02 /* ODActivityDetailInfoViewCell.xib in Resources */,
 				C64D460A1C5F8C6F003BFFA0 /* UMSLoginViewController.xib in Resources */,
+				D4F76D601C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.xib in Resources */,
 				C64D46071C5F8C6F003BFFA0 /* UMSCommentInputControlleriPad.xib in Resources */,
 				9DC05DE61C5DB2F800181DFE /* ODAddressCell.xib in Resources */,
 				D4D0750F1C59B9FA008527C9 /* ODCenderDetailView.xib in Resources */,
@@ -2188,6 +2238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C64D45E71C5F8C6F003BFFA0 /* UIImage+ODExtension.m in Sources */,
+				D4F76D721C60CC8400D59F02 /* ODLikeModel.m in Sources */,
 				9DC05DE91C5DD90C00181DFE /* ODAddAddressController.m in Sources */,
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
@@ -2210,6 +2261,7 @@
 				D4D0737D1C59B9FA008527C9 /* ODCommunityDetailViewController.m in Sources */,
 				C64D45661C5EFEB9003BFFA0 /* ODSkillDetailModel.m in Sources */,
 				C64D45FB1C5F8C6F003BFFA0 /* NSData+SDDataCache.m in Sources */,
+				D4F76D6C1C60C55E00D59F02 /* ODActivityVIPCell.m in Sources */,
 				D4D073881C59B9FA008527C9 /* ODLandMainController.m in Sources */,
 				C64D45EE1C5F8C6F003BFFA0 /* IQKeyboardManager.m in Sources */,
 				D4D075041C59B9FA008527C9 /* CenterDetailCell.m in Sources */,
@@ -2230,6 +2282,7 @@
 				B840C6051C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.m in Sources */,
 				D4D0738B1C59B9FA008527C9 /* ODMyOrderRecordController.m in Sources */,
 				C64D45FA1C5F8C6F003BFFA0 /* MBProgressHUD.m in Sources */,
+				D4F76D641C60B8B800D59F02 /* ODActivityDetailInfoViewCell.m in Sources */,
 				D4D073921C59B9FA008527C9 /* ODRegisteredController.m in Sources */,
 				D4F76D521C607B1600D59F02 /* NSObject+Log.m in Sources */,
 				D4D075231C59B9FA008527C9 /* MyPageControl.m in Sources */,
@@ -2300,6 +2353,7 @@
 				D4D073701C59B9FA008527C9 /* ODBazaarDetailViewController.m in Sources */,
 				C64D45E51C5F8C6F003BFFA0 /* UIBarButtonItem+ODExtention.m in Sources */,
 				D46C903B1C604F79004942E7 /* ODActivityDetailViewController.m in Sources */,
+				D4F76D761C60CCC400D59F02 /* ODHomeFoundFooterView.m in Sources */,
 				D4D073A11C59B9FA008527C9 /* ODEvaluationModel.m in Sources */,
 				C64D46011C5F8C6F003BFFA0 /* SDCycleScrollView.m in Sources */,
 				D4D075241C59B9FA008527C9 /* ODEvaluationCell.m in Sources */,
@@ -2309,6 +2363,7 @@
 				D4D0750C1C59B9FA008527C9 /* LunBoModel.m in Sources */,
 				C64D45F11C5F8C6F003BFFA0 /* IQTextView.m in Sources */,
 				D4D0739C1C59B9FA008527C9 /* ODCommunityDetailModel.m in Sources */,
+				D4F76D5F1C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.m in Sources */,
 				C64D45F01C5F8C6F003BFFA0 /* IQSegmentedNextPrevious.m in Sources */,
 				9DC05DE51C5DB2F800181DFE /* ODAddressCell.m in Sources */,
 				9DC05DDD1C5DAA5E00181DFE /* ODCollectionCell.m in Sources */,
@@ -2323,6 +2378,7 @@
 				D4D073711C59B9FA008527C9 /* ODBazaarLabelSearchViewController.m in Sources */,
 				D4D0737B1C59B9FA008527C9 /* ODChoseCenterController.m in Sources */,
 				D4D075071C59B9FA008527C9 /* CenterYuYueView.m in Sources */,
+				D4F76D731C60CC8400D59F02 /* TimeButton.m in Sources */,
 				D4F76D4C1C605EA700D59F02 /* ODActivityListModel.m in Sources */,
 				C64D45F81C5F8C6F003BFFA0 /* UITableViewRowAction+JZExtension.m in Sources */,
 				D46C90381C6043DA004942E7 /* ODNewActivityCell.m in Sources */,
