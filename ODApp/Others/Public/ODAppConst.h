@@ -68,6 +68,8 @@ UIKIT_EXTERN NSString * const kGetAddressUrl;
 UIKIT_EXTERN NSString * const kDeleteAddressUrl;
 
 
-UIKIT_EXTERN NSString * const KActivityListUrl;
 UIKIT_EXTERN NSString * const kGetServecTimeUrl;
 UIKIT_EXTERN NSString * const kSaveOrderUrl;
+
+UIKIT_EXTERN NSString * const KActivityListUrl;
+UIKIT_EXTERN NSString * const KActivityDetailUrl;
