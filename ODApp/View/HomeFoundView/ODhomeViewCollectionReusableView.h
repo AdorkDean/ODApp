@@ -7,12 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "SDCycleScrollView.h"
 #import "ODClassMethod.h"
 
 @interface ODhomeViewCollectionReusableView : UICollectionReusableView
-
-@property (nonatomic, strong)SDCycleScrollView *cycleSecrollerView;
 
 @property (nonatomic, strong)UIView *activityView;
 
