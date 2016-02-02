@@ -17,6 +17,7 @@
     if (self) {
         
         
+        
         UIView *moreSkillView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 5, kScreenSize.width, 20) tag:0 color:@"#ffffff"];
 
         UIImageView *moreSkillImageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenSize.width / 2 - 80,  6, 12, 8)];
