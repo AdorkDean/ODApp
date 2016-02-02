@@ -14,6 +14,8 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "ODBazaarExchangeSkillModel.h"
 #import "ODHelp.h"
+#import "ODOthersInformationController.h"
+#import "ODOrderController.h"
 
 @interface ODBazaarExchangeSkillDetailViewController : ODBaseViewController
 
