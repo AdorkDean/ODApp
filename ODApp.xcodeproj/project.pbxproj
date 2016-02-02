@@ -11,6 +11,7 @@
 		9D16BDD31C59EEDA003627CD /* ODViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D16BDD11C59EEDA003627CD /* ODViolationsCell.m */; };
 		9D16BDD41C59EEDA003627CD /* ODViolationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D16BDD21C59EEDA003627CD /* ODViolationsCell.xib */; };
 		9D412FEB1C60913F00FF57DF /* ODLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D412FEA1C60913F00FF57DF /* ODLikeModel.m */; };
+		9D412FEE1C60A90C00FF57DF /* TimeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D412FED1C60A90C00FF57DF /* TimeButton.m */; };
 		9DC05DD91C5DA82500181DFE /* ODCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC05DD81C5DA82500181DFE /* ODCollectionController.m */; };
 		9DC05DDD1C5DAA5E00181DFE /* ODCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DC05DDB1C5DAA5E00181DFE /* ODCollectionCell.m */; };
 		9DC05DDE1C5DAA5E00181DFE /* ODCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DC05DDC1C5DAA5E00181DFE /* ODCollectionCell.xib */; };
@@ -246,6 +247,8 @@
 		9D16BDD21C59EEDA003627CD /* ODViolationsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODViolationsCell.xib; sourceTree = "<group>"; };
 		9D412FE91C60913F00FF57DF /* ODLikeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLikeModel.h; sourceTree = "<group>"; };
 		9D412FEA1C60913F00FF57DF /* ODLikeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLikeModel.m; sourceTree = "<group>"; };
+		9D412FEC1C60A90C00FF57DF /* TimeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimeButton.h; sourceTree = "<group>"; };
+		9D412FED1C60A90C00FF57DF /* TimeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeButton.m; sourceTree = "<group>"; };
 		9DC05DD71C5DA82500181DFE /* ODCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODCollectionController.h; path = ../ODCollectionController.h; sourceTree = "<group>"; };
 		9DC05DD81C5DA82500181DFE /* ODCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODCollectionController.m; path = ../ODCollectionController.m; sourceTree = "<group>"; };
 		9DC05DDA1C5DAA5E00181DFE /* ODCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCollectionCell.h; sourceTree = "<group>"; };
@@ -690,6 +693,8 @@
 			children = (
 				C64D46161C5F8D6F003BFFA0 /* DataButton.h */,
 				C64D46171C5F8D6F003BFFA0 /* DataButton.m */,
+				9D412FEC1C60A90C00FF57DF /* TimeButton.h */,
+				9D412FED1C60A90C00FF57DF /* TimeButton.m */,
 				C64D46181C5F8D6F003BFFA0 /* ODAddressModel.h */,
 				C64D46191C5F8D6F003BFFA0 /* ODAddressModel.m */,
 				C64D461C1C5F8D6F003BFFA0 /* ODOrderDataModel.h */,
@@ -2192,6 +2197,7 @@
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
 				D4D073901C59B9FA008527C9 /* ODOtherTopicViewController.m in Sources */,
+				9D412FEE1C60A90C00FF57DF /* TimeButton.m in Sources */,
 				C64D45FD1C5F8C6F003BFFA0 /* TAAnimatedDotView.m in Sources */,
 				D4D0738C1C59B9FA008527C9 /* ODMyTaskController.m in Sources */,
 				D4D073A41C59B9FA008527C9 /* ODMyOrderRecordModel.m in Sources */,
