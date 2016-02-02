@@ -18,7 +18,6 @@
 {
     
     [super viewDidLoad];
-    
     self.dataArray = [[NSMutableArray alloc] init];
     self.devicesArray = [[NSMutableArray alloc] init];
     [self navigationInit];
@@ -110,7 +109,7 @@
 
 - (void)createOrderView{
 
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight)];
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight)];
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     
     UILabel *timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(5,  10, kScreenSize.width - 10, 35) text:[NSString stringWithFormat:@"  %@ - %@",self.model.start_date_str,self.model.end_date_str] font:14 alignment:@"left" color:@"#000000" alpha:11];
