@@ -16,7 +16,6 @@
 
 @property (nonatomic , strong) UILabel *centerNameLabe;
 @property (nonatomic , strong) ODAddAddressView *addAddressView;
-@property (nonatomic , assign) BOOL isdefault;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *editeManager;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *deleteManager;
@@ -29,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.isdefault = YES;
+   
     self.is_default = @"0";
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     
@@ -61,6 +60,18 @@
     
     
     [self.addAddressView.defaultButton addTarget:self action:@selector(defaultAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    if (self.isDefault) {
+        [self.addAddressView.defaultButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
+        self.is_default = @"1";
+
+    }else {
+        [self.addAddressView.defaultButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
+        self.is_default = @"0";
+
+    }
+  
     
     
     if (!self.isAdd) {
@@ -96,8 +107,7 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"修改成功"];
+         
             [weakSelf deleteAddress];
             
             
@@ -129,10 +139,7 @@
 
 - (void)saveAddress{
     
-    
-  
-    
-    
+        
     self.manager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters = @{@"tel":self.addAddressView.phoneTextField.text , @"address":self.addAddressView.addressTextField.text,@"name":self.addAddressView.nameTextField.text , @"is_default":self.is_default, @"open_id":self.open_id};
@@ -160,9 +167,6 @@
         
         
         
-        
-        
-        
     }];
 
     
@@ -177,10 +181,19 @@
     NSDictionary *parameters = @{@"user_address_id":self.addressId ,@"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
+      __weak typeof (self)weakSelf = self;
     [self.deleteManager GET:kDeleteAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
        
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
+         
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"修改成功"];
+           
+        }
         
+             
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
@@ -192,14 +205,14 @@
 - (void)defaultAction:(UIButton *)sender
 {
     
-    if (self.isdefault) {
+    if (!self.isDefault) {
         [self.addAddressView.defaultButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
        self.is_default = @"1";
     }else{
         [self.addAddressView.defaultButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
         self.is_default = @"0";
     }
-    self.isdefault = !self.isdefault;
+    self.isDefault = !self.isDefault;
 
     
 }

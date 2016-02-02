@@ -14,5 +14,7 @@
 @property (nonatomic , assign) BOOL isAdd;
 @property (nonatomic , copy) NSString *addressId;
 @property (nonatomic , strong) ODAddressModel *addressModel;
+@property (nonatomic , assign) BOOL isDefault;
+
 
 @end
