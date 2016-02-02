@@ -52,9 +52,9 @@
 -(void)createTextView
 {
     //标题
-    self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 68, kScreenSize.width-8, 53) delegate:self tag:100 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4+ODTopY, kScreenSize.width-8, 53) delegate:self tag:100 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.view addSubview:self.titleTextView];
-    self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 68, kScreenSize.width - 20, 30) text:@"请输入话题标题" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4+ODTopY, kScreenSize.width - 20, 30) text:@"请输入话题标题" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     self.titleLabel.backgroundColor = [UIColor clearColor];
     self.titleLabel.userInteractionEnabled = NO;
     [self.view addSubview:self.titleLabel];
