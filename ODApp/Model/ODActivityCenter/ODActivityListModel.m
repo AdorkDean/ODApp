@@ -12,16 +12,4 @@
 
 @end
 
-
-@implementation ODActivityListResultModel
-
-+ (void)initialize
-{
-    [ODActivityListResultModel mj_setupObjectClassInArray:^NSDictionary *{
-        return @{
-                 @"result" : [ODActivityListModel class]
-                 };
-    }];
-}
-
-@end
+ODRequestArrayToModel(ODActivityListModel)

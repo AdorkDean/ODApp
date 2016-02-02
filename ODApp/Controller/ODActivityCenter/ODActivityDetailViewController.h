@@ -9,5 +9,8 @@
 #import "ODBaseViewController.h"
 
 @interface ODActivityDetailViewController : ODBaseViewController
-
+/**
+ *  活动id
+ */
+@property(nonatomic, assign) NSInteger acitityId;
 @end

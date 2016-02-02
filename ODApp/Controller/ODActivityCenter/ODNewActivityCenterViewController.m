@@ -54,7 +54,7 @@ static NSString * const cellId = @"newActivityCell";
 {
     __weakSelf
     NSDictionary *parameter = @{@"city_id":@"1"};
-    [ODHttpTool getWithURL:KActivityListUrl parameters:parameter modelClass:[ODActivityListResultModel class] success:^(id json)
+    [ODHttpTool getWithURL:KActivityListUrl parameters:parameter modelClass:[ODActivityListModel class] success:^(id json)
     {
         weakSelf.resultLists = [json result];
         [weakSelf.tableView reloadData];
@@ -82,7 +82,9 @@ static NSString * const cellId = @"newActivityCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    ODNewActivityCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     ODActivityDetailViewController *detailViewController = [[ODActivityDetailViewController alloc] initWithNibName:nil bundle:nil];
+    detailViewController.acitityId = cell.model.activity_id;
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 

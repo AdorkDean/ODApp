@@ -100,9 +100,7 @@
 		C64D46211C5F8D6F003BFFA0 /* ODOrderDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D461D1C5F8D6F003BFFA0 /* ODOrderDataModel.m */; };
 		C66125F51C604CCD002739D6 /* ODSkillCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C66125F31C604CCD002739D6 /* ODSkillCollectCell.m */; };
 		C66125F61C604CCD002739D6 /* ODSkillCollectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66125F41C604CCD002739D6 /* ODSkillCollectCell.xib */; };
-		D46C902F1C6041B4004942E7 /* ODCenterActivityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C902C1C6041B4004942E7 /* ODCenterActivityListViewController.m */; };
 		D46C90301C6041B4004942E7 /* ODNewActivityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */; };
-		D46C90341C604325004942E7 /* ODCenterActivityListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D46C90331C604325004942E7 /* ODCenterActivityListViewController.storyboard */; };
 		D46C90381C6043DA004942E7 /* ODNewActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C90371C6043DA004942E7 /* ODNewActivityCell.m */; };
 		D46C903B1C604F79004942E7 /* ODActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C903A1C604F79004942E7 /* ODActivityDetailViewController.m */; };
 		D46C903F1C605841004942E7 /* ODNewActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46C903E1C605841004942E7 /* ODNewActivityCell.xib */; };
@@ -223,6 +221,7 @@
 		D4D075611C5E0E0A008527C9 /* ODNavigationBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D075601C5E0E0A008527C9 /* ODNavigationBarView.m */; };
 		D4F76D4C1C605EA700D59F02 /* ODActivityListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D4B1C605EA700D59F02 /* ODActivityListModel.m */; };
 		D4F76D521C607B1600D59F02 /* NSObject+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D511C607B1600D59F02 /* NSObject+Log.m */; };
+		D4F76D551C6090EC00D59F02 /* ODActivityDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D541C6090EC00D59F02 /* ODActivityDetailModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -419,11 +418,8 @@
 		C66125F21C604CCD002739D6 /* ODSkillCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSkillCollectCell.h; sourceTree = "<group>"; };
 		C66125F31C604CCD002739D6 /* ODSkillCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSkillCollectCell.m; sourceTree = "<group>"; };
 		C66125F41C604CCD002739D6 /* ODSkillCollectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODSkillCollectCell.xib; sourceTree = "<group>"; };
-		D46C902B1C6041B4004942E7 /* ODCenterActivityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCenterActivityListViewController.h; sourceTree = "<group>"; };
-		D46C902C1C6041B4004942E7 /* ODCenterActivityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCenterActivityListViewController.m; sourceTree = "<group>"; };
 		D46C902D1C6041B4004942E7 /* ODNewActivityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCenterViewController.h; sourceTree = "<group>"; };
 		D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewActivityCenterViewController.m; sourceTree = "<group>"; };
-		D46C90331C604325004942E7 /* ODCenterActivityListViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ODCenterActivityListViewController.storyboard; sourceTree = "<group>"; };
 		D46C90361C6043DA004942E7 /* ODNewActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCell.h; sourceTree = "<group>"; };
 		D46C90371C6043DA004942E7 /* ODNewActivityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewActivityCell.m; sourceTree = "<group>"; };
 		D46C90391C604F79004942E7 /* ODActivityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityDetailViewController.h; sourceTree = "<group>"; };
@@ -641,6 +637,9 @@
 		D4F76D4B1C605EA700D59F02 /* ODActivityListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityListModel.m; sourceTree = "<group>"; };
 		D4F76D501C607B1600D59F02 /* NSObject+Log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Log.h"; sourceTree = "<group>"; };
 		D4F76D511C607B1600D59F02 /* NSObject+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Log.m"; sourceTree = "<group>"; };
+		D4F76D531C6090EC00D59F02 /* ODActivityDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityDetailModel.h; sourceTree = "<group>"; };
+		D4F76D541C6090EC00D59F02 /* ODActivityDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityDetailModel.m; sourceTree = "<group>"; };
+		D4F76D561C6094B600D59F02 /* ODModelDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODModelDefine.h; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1378,9 +1377,6 @@
 			children = (
 				D46C902D1C6041B4004942E7 /* ODNewActivityCenterViewController.h */,
 				D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */,
-				D46C902B1C6041B4004942E7 /* ODCenterActivityListViewController.h */,
-				D46C902C1C6041B4004942E7 /* ODCenterActivityListViewController.m */,
-				D46C90331C604325004942E7 /* ODCenterActivityListViewController.storyboard */,
 				D46C90391C604F79004942E7 /* ODActivityDetailViewController.h */,
 				D46C903A1C604F79004942E7 /* ODActivityDetailViewController.m */,
 			);
@@ -1942,6 +1938,7 @@
 			children = (
 				D4D0753D1C59BA9B008527C9 /* Define.h */,
 				D4D0753F1C59BA9B008527C9 /* Singleton.h */,
+				D4F76D561C6094B600D59F02 /* ODModelDefine.h */,
 				D4D0753E1C59BA9B008527C9 /* ODApp-Prefix.pch */,
 				D4D075471C59BBEE008527C9 /* ODAppConst.h */,
 				D4D075481C59BBEE008527C9 /* ODAppConst.m */,
@@ -1983,6 +1980,8 @@
 			children = (
 				D4F76D4A1C605EA700D59F02 /* ODActivityListModel.h */,
 				D4F76D4B1C605EA700D59F02 /* ODActivityListModel.m */,
+				D4F76D531C6090EC00D59F02 /* ODActivityDetailModel.h */,
+				D4F76D541C6090EC00D59F02 /* ODActivityDetailModel.m */,
 			);
 			path = ODActivityCenter;
 			sourceTree = "<group>";
@@ -2135,7 +2134,6 @@
 				9DC05DFB1C5DF66000181DFE /* ODOrderCell.xib in Resources */,
 				D4D075211C59B9FA008527C9 /* ODTypeView.xib in Resources */,
 				D4D074FA1C59B9FA008527C9 /* ODCommunityDetailCell.xib in Resources */,
-				D46C90341C604325004942E7 /* ODCenterActivityListViewController.storyboard in Resources */,
 				D4D075021C59B9FA008527C9 /* CenterActivityCell.xib in Resources */,
 				C64D46091C5F8C6F003BFFA0 /* UMShareEditViewControlleriPad.xib in Resources */,
 				D4D075081C59B9FA008527C9 /* CenterYuYueView.xib in Resources */,
@@ -2288,7 +2286,6 @@
 				D4D0736F1C59B9FA008527C9 /* ODBazaarDetailLayout.m in Sources */,
 				9DC05DF11C5DE63D00181DFE /* ODOrderController.m in Sources */,
 				D4D073991C59B9FA008527C9 /* ODTabBarController.m in Sources */,
-				D46C902F1C6041B4004942E7 /* ODCenterActivityListViewController.m in Sources */,
 				D4D075541C5B015D008527C9 /* ODUserInformation.m in Sources */,
 				B84F2E701C607D450057DF9E /* ODBazaarRequestHelpViewController.m in Sources */,
 				D4D0739F1C59B9FA008527C9 /* ODHomeFoundModel.m in Sources */,
@@ -2367,6 +2364,7 @@
 				C64D46021C5F8C6F003BFFA0 /* UIView+SDExtension.m in Sources */,
 				C64D45FF1C5F8C6F003BFFA0 /* TAPageControl.m in Sources */,
 				D4D075141C59B9FA008527C9 /* ODInformationView.m in Sources */,
+				D4F76D551C6090EC00D59F02 /* ODActivityDetailModel.m in Sources */,
 				D4D074F51C59B9FA008527C9 /* ODBazaarRewardCollectionCell.m in Sources */,
 				D4D075001C59B9FA008527C9 /* ActivityModel.m in Sources */,
 			);

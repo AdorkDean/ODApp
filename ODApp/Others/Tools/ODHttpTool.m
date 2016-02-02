@@ -37,7 +37,7 @@ NSString * const requestSuccessStatus = @"success";
                 resultDic = [resultDic lastObject];
             }
             [NSObject resolveDict:resultDic];
-            NSObject *model = [modeleClass mj_objectWithKeyValues:responseObject];
+            NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
             success(model);
         }
         else
@@ -91,7 +91,7 @@ NSString * const requestSuccessStatus = @"success";
                 resultDic = [resultDic lastObject];
             }
             [NSObject resolveDict:resultDic];
-            NSObject *model = [modeleClass mj_objectWithKeyValues:responseObject];
+            NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
             success(model);
         }
         else
@@ -135,7 +135,7 @@ NSString * const requestSuccessStatus = @"success";
                 resultDic = [resultDic lastObject];
             }
             [NSObject resolveDict:resultDic];
-            NSObject *model = [modeleClass mj_objectWithKeyValues:responseObject];
+            NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
             success(model);
         }
         else

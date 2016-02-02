@@ -1,15 +1,14 @@
 //
-//  ODActivityListModel.h
+//  ODActivityDetailModel.h
 //  ODApp
 //
 //  Created by 刘培壮 on 16/2/2.
-//  Copyright © 2016年 Odong-YG. All rights reserved.
+//  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-
-@interface ODActivityListModel : NSObject
+@interface ODActivityDetailModel : NSObject
 
 @property (nonatomic, assign) int apply_cnt;
 
@@ -34,5 +33,4 @@
 @property (nonatomic, strong) NSString *date_hint;
 
 @end
-
-ODRequestModelProperty(ODActivityListModel)
+ODRequestModelProperty(ODActivityDetailModel)
