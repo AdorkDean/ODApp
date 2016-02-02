@@ -331,7 +331,10 @@
         
         __weakSelf
         if (self.getAddressBlock) {
-            weakSelf.getAddressBlock(model.address);
+            
+       
+            
+            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id]);
         }
 
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -341,7 +344,7 @@
         __weakSelf
         ODAddressModel *model = self.dataArray[indexPath.row];
         if (self.getAddressBlock) {
-            weakSelf.getAddressBlock(model.address);
+            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id]);
         }
         
        [weakSelf.navigationController popViewControllerAnimated:YES];
