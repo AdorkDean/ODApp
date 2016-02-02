@@ -34,6 +34,8 @@ UIKIT_EXTERN NSString * const kBazaarTaskDelegateUrl;
 UIKIT_EXTERN NSString * const kBazaarLabelSearchUrl;
 UIKIT_EXTERN NSString * const kBazaarAcceptTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseRewardUrl;
+UIKIT_EXTERN NSString * const kBazaarExchangeSkillUrl;
+UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailUrl;
 /** 接收人确认完成 */
 UIKIT_EXTERN NSString * const kBazaarTaskReceiveCompleteUrl;
 /** 发起人确认完成 */
@@ -52,6 +54,8 @@ UIKIT_EXTERN NSString * const kDeleteReplyUrl;
 
 UIKIT_EXTERN NSString * const kHomeFoundListUrl;
 UIKIT_EXTERN NSString * const kHomeFoundPictureUrl;
+
+UIKIT_EXTERN NSString * const ODSkillDetailUrl;
 
 UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;

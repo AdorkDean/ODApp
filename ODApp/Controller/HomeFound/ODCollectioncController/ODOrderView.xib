@@ -68,10 +68,9 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uep-Mu-CRu">
-                    <rect key="frame" x="50" y="61" width="70" height="20"/>
+                    <rect key="frame" x="50" y="61" width="175" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="Qex-RW-tQM"/>
-                        <constraint firstAttribute="width" constant="70" id="dnD-GW-3rS"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -216,6 +215,7 @@
                 <constraint firstAttribute="trailing" secondItem="2Vr-Vp-h4N" secondAttribute="trailing" constant="10" id="aaI-B0-zbR"/>
                 <constraint firstItem="rvF-nN-J1f" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="blo-DG-Wh3"/>
                 <constraint firstItem="Uep-Mu-CRu" firstAttribute="leading" secondItem="rvF-nN-J1f" secondAttribute="trailing" constant="10" id="bn2-Jw-UGS"/>
+                <constraint firstItem="qav-Pi-Rpf" firstAttribute="leading" secondItem="Uep-Mu-CRu" secondAttribute="trailing" id="eat-gX-bZ9"/>
                 <constraint firstItem="2Vr-Vp-h4N" firstAttribute="top" secondItem="Idg-CB-ujf" secondAttribute="bottom" constant="7" id="gan-Ve-DM3"/>
                 <constraint firstItem="rvF-nN-J1f" firstAttribute="top" secondItem="ICJ-ZU-1Ge" secondAttribute="bottom" constant="10" id="hJh-yz-SDs"/>
                 <constraint firstItem="4zp-aH-epa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jQO-gj-H37"/>
@@ -234,16 +234,18 @@
             <connections>
                 <outlet property="addressImgeView" destination="J8J-dT-IHF" id="bTZ-6R-lMZ"/>
                 <outlet property="addressLabel" destination="Xgi-Xy-0ll" id="l6U-fS-HuI"/>
+                <outlet property="choseTimeView" destination="LP8-rZ-br7" id="uOM-mP-eZQ"/>
                 <outlet property="lineLabel" destination="4zp-aH-epa" id="nRQ-Kw-Img"/>
+                <outlet property="timeLabel" destination="Uep-Mu-CRu" id="KdX-ia-MpN"/>
             </connections>
             <point key="canvasLocation" x="346" y="416"/>
         </view>
     </objects>
     <resources>
-        <image name="Skills profile page_icon_arrow_upper" width="14" height="25"/>
-        <image name="icon_Message" width="30" height="30"/>
-        <image name="icon_service address" width="23" height="32"/>
-        <image name="icon_service mode" width="30" height="30"/>
-        <image name="icon_service time" width="30" height="30"/>
+        <image name="Skills profile page_icon_arrow_upper" width="7" height="12"/>
+        <image name="icon_Message" width="15" height="15"/>
+        <image name="icon_service address" width="11" height="16"/>
+        <image name="icon_service mode" width="15" height="15"/>
+        <image name="icon_service time" width="15" height="15"/>
     </resources>
 </document>

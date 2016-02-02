@@ -15,7 +15,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *lineLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *choseTimeView;
 
 +(instancetype)getView;
 
