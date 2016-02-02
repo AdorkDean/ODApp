@@ -35,4 +35,4 @@
 
 @end
 
-ODRequestModelProperty(ODActivityListModel)
+ODRequestResultIsArrayProperty(ODActivityListModel)

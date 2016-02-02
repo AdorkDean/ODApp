@@ -12,4 +12,5 @@
 
 @end
 
-ODRequestArrayToModel(ODActivityDetailModel)
+
+ODRequestResultIsDictionaryImplementation(ODActivityDetailModel)
