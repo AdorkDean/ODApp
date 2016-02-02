@@ -76,11 +76,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-        
-        
-        
-        
-        
+            
         
     }];
     
@@ -102,7 +98,7 @@
     [self.view addSubview:self.collectionView];
     
     
-    UIImageView *amountImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 50, kScreenSize.width - 100, 50)];
+    UIImageView *amountImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 50 - ODNavigationHeight, kScreenSize.width - 100, 50)];
     amountImageView.backgroundColor = [UIColor whiteColor];
     
     
@@ -124,7 +120,7 @@
     
     
     UIButton *saveOrderButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    saveOrderButton.frame = CGRectMake(kScreenSize.width - 100, kScreenSize.height - 50, 100, 50);
+    saveOrderButton.frame = CGRectMake(kScreenSize.width - 100, kScreenSize.height - 50 - ODNavigationHeight, 100, 50);
     saveOrderButton.backgroundColor = [UIColor redColor];
     [saveOrderButton setTitle:@"提交订单" forState:UIControlStateNormal];
     [saveOrderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -206,7 +202,7 @@
 
 - (void)timeAction
 {
-    self.choseTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, (kScreenSize.height - ODNavigationHeight)/ 2, kScreenSize.width,kScreenSize.height - (kScreenSize.height - ODNavigationHeight)/ 2)];
+    self.choseTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, KScreenHeight / 2 - ODNavigationHeight, kScreenSize.width,KScreenHeight / 2)];
     self.choseTimeView.userInteractionEnabled = YES;
     self.choseTimeView.backgroundColor = [UIColor whiteColor];
     

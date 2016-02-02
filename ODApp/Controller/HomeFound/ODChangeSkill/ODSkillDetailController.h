@@ -42,7 +42,7 @@
 @property (nonatomic, strong)UIButton *payButton;
 
 @property (nonatomic, strong)UICollectionView *collectionView;
-
+@property (nonatomic, strong)NSMutableArray *collectArray;
 
 
 
