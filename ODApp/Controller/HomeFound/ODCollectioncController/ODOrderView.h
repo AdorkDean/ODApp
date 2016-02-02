@@ -19,6 +19,10 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *choseTimeView;
 
+@property (weak, nonatomic) IBOutlet UITextView *messageTextView;
+
+
+
 +(instancetype)getView;
 
 @end

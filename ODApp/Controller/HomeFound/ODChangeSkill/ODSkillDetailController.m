@@ -205,4 +205,27 @@
 }
 
 
+#pragma mark - 创建CollectionView
+- (void)createCollectionView
+{
+    
+    UICollectionViewFlowLayout *flowLayout = [[ UICollectionViewFlowLayout alloc] init];
+    flowLayout.minimumInteritemSpacing = 5;
+    flowLayout.minimumLineSpacing = 3;
+    flowLayout.sectionInset = UIEdgeInsetsMake(3, 3, 3, 3);
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight)collectionViewLayout:flowLayout];
+    
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
+    
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"ODMyOrderRecordCell" bundle:nil] forCellWithReuseIdentifier:kMyOrderRecordCellId];
+    
+    [self.view addSubview:self.collectionView];
+}
+
+
+
+
+
 @end
