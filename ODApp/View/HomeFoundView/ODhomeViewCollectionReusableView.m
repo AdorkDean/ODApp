@@ -15,7 +15,7 @@
     self = [super initWithFrame:frame];
     if (self) {
 
-        //title的八个按钮
+        #pragma mark - Top Eight Button
         self.activityView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 130) tag:0 color:@"#ffffff"];
         [self addSubview:self.activityView];
         
@@ -55,7 +55,6 @@
         [self addSubview:finJobImageView];
         [self addSubview:self.findJobButton];
         [self addSubview:self.findJobLabel];
-
  
         self.searchCircleButton = [ODClassMethod creatButtonWithFrame:CGRectMake(aroundSpace - 20, CGRectGetMaxY(self.findActivityLabel.frame) + 10, 80, 50) target:self sel:nil tag:0 image:@"" title:nil font:0];
         UIImageView *searchCircleImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(aroundSpace, CGRectGetMaxY(self.findActivityLabel.frame) + 10, 36.5, 30) imageName:@"icon_circle_big" tag:0];
@@ -89,7 +88,7 @@
         [self addSubview:self.moreButton];
         [self addSubview:self.moreLabel];
         
-       //热门活动
+        #pragma mark - Hot Activity
         self.hotActivityView = [ODClassMethod creatViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.activityView.frame) + 5, kScreenSize.width, 160) tag:0 color:@"#ffffff"];
         [self addSubview:self.hotActivityView];
         
@@ -99,13 +98,12 @@
         UILabel *hotActivityLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(CGRectGetMaxX(hotActivityImageView.frame) + 5, 5, 60, 20) text:@"热门活动" font:14 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
         [self.hotActivityView addSubview:hotActivityLabel];
         
-        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(hotActivityLabel.frame) + 5, (kScreenSize.width - 30), 160)];
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(hotActivityLabel.frame) + 5, (kScreenSize.width - 15), 120)];
         [self.hotActivityView addSubview:self.scrollView];
         
-        //寻圈子
+        #pragma mark - Search Circle
         self.searchCircleView = [ODClassMethod creatViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.hotActivityView.frame) + 5, kScreenSize.width, 180) tag:0 color:@"#ffffff"];
         [self addSubview:self.searchCircleView];
-
         
         UIImageView *searchCircleImage = [ODClassMethod creatImageViewWithFrame:CGRectMake(8, 10, 15, 12) imageName:@"icon_circle_small" tag:0];
         UILabel *searchCircleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(CGRectGetMaxX(searchCircleImage.frame)+ 5, 5, 60, 20) text:@"寻圈子" font:14 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
@@ -127,7 +125,6 @@
         self.quadraticButton = [ODClassMethod creatButtonWithFrame:CGRectMake(CGRectGetMaxX(self.moviesButton.frame), CGRectGetMaxY(searchCircleLabel.frame) + 5, kScreenSize.width / 4, 65) target:0 sel:nil tag:0 image:@"button_quadratic element" title:@"" font:0];
         [self.searchCircleView addSubview:self.quadraticButton];
         
-
         self.lifeButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, CGRectGetMaxY(self.emotionButton.frame), kScreenSize.width / 4, 65) target:0 sel:nil tag:0 image:@"button_Life" title:@"" font:0];
         [self.searchCircleView addSubview:self.lifeButton];
         
@@ -146,10 +143,7 @@
         [self.gestureButton setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
         [self.searchCircleView addSubview:self.gestureButton];
         
-        
-        
-        
-        //技能交换
+        #pragma mark - Skill Change
         self.changeSkillView = [ODClassMethod creatViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchCircleView.frame) + 5, kScreenSize.width, 30) tag:0 color:@"#ffffff"];
         [self addSubview: self.changeSkillView];
         
@@ -158,6 +152,7 @@
         
         [self.changeSkillView addSubview:changeSkillImage];
         [self.changeSkillView addSubview:changeSkillLabel];
+        
     }
     
     return self;

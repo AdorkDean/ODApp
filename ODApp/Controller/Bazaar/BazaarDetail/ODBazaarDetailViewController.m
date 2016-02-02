@@ -78,7 +78,7 @@
 
         }
         @catch (NSException *exception) {
-            [self createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常无法分享"];
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
         }
             
 

@@ -14,6 +14,7 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "DataButton.h"
+#import "TimeButton.h"
 #import "UIImageView+WebCache.h"
 
 @interface ODOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UITextViewDelegate>
@@ -51,9 +52,9 @@
     [self createCollectionView];
 }
 
--(void)viewWillDisappear:(BOOL)animated
+-(void)viewDidDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
     [self.choseTimeView removeFromSuperview];
 }
 
@@ -136,9 +137,9 @@
     
     UIButton *saveOrderButton = [UIButton buttonWithType:UIButtonTypeSystem];
     saveOrderButton.frame = CGRectMake(kScreenSize.width - 100, kScreenSize.height - 50 - ODNavigationHeight, 100, 50);
-    saveOrderButton.backgroundColor = [UIColor redColor];
+    saveOrderButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     [saveOrderButton setTitle:@"提交订单" forState:UIControlStateNormal];
-    [saveOrderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [saveOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [saveOrderButton addTarget:self action:@selector(saveOrderAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:saveOrderButton];
     
@@ -348,6 +349,7 @@ NSString *message = @"";
 
 - (void)timeAction
 {
+    [self.choseTimeView removeFromSuperview];
     self.choseTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, KScreenHeight / 2 - ODNavigationHeight, kScreenSize.width,KScreenHeight / 2)];
     self.choseTimeView.userInteractionEnabled = YES;
     self.choseTimeView.backgroundColor = [UIColor whiteColor];
@@ -431,29 +433,25 @@ NSString *message = @"";
 - (void)createButtonWithNumber:(NSInteger)number
 {
     
+    for (int i = 0; i < 15; i++) {
+        TimeButton *button = [self.choseTimeView viewWithTag:888 + i];
+        [button removeFromSuperview];
+    }
+    
     ODOrderDataModel *model = self.dataArray[number];
     NSMutableArray *timeArray = model.times;
     self.selectDataArray = model.times;
     
     for (int i = 0; i < 4; i++) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.frame = CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 90,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4);
-        button.backgroundColor = [UIColor whiteColor];
-        
-        button.layer.masksToBounds = YES;
-        button.layer.cornerRadius = 0;
-        button.layer.borderWidth = 0.5;
-        button.layer.borderColor = [UIColor blackColor].CGColor;
-        
-        
-        button.tag = 888 + i;
+        TimeButton *button = [[TimeButton alloc] initWithFrame: CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 80,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4)];
+         button.tag = 888 + i;
         [button addTarget:self action:@selector(ChosetimeAction:) forControlEvents:UIControlEventTouchUpInside];
         
         NSMutableDictionary *dic = timeArray[i];
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor lightGrayColor];
+            button.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         }
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
         [ self.choseTimeView addSubview:button];
@@ -461,13 +459,7 @@ NSString *message = @"";
     
     
     for (int i = 0; i < 4; i++) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.frame = CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 90 + ( self.choseTimeView.frame.size.height - 80) / 4,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4);
-        button.backgroundColor = [UIColor whiteColor];
-        button.layer.masksToBounds = YES;
-        button.layer.cornerRadius = 0;
-        button.layer.borderWidth = 0.5;
-        button.layer.borderColor = [UIColor blackColor].CGColor;
+        TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 80 + ( self.choseTimeView.frame.size.height - 80) / 4,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4)];
         
         button.tag = 888 + i + 4;
         [button addTarget:self action:@selector(ChosetimeAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -475,7 +467,7 @@ NSString *message = @"";
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor lightGrayColor];
+          button.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         }
         
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
@@ -483,13 +475,8 @@ NSString *message = @"";
     }
     
     for (int i = 0; i < 4; i++) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.frame = CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 90 + 2 *( self.choseTimeView.frame.size.height - 80) / 4,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4);
-        button.backgroundColor = [UIColor whiteColor];
-        button.layer.masksToBounds = YES;
-        button.layer.cornerRadius = 0;
-        button.layer.borderWidth = 0.5;
-        button.layer.borderColor = [UIColor blackColor].CGColor;
+        TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 80 + 2 *( self.choseTimeView.frame.size.height - 80) / 4,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4)];
+      
         
         button.tag = 888 + i + 8;
         [button addTarget:self action:@selector(ChosetimeAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -497,27 +484,20 @@ NSString *message = @"";
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor lightGrayColor];
+           button.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         }
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
         [ self.choseTimeView addSubview:button];
     }
     for (int i = 0; i < 3; i++) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        button.frame = CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 90 + 3 *( self.choseTimeView.frame.size.height - 80) / 4,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4);
-        button.backgroundColor = [UIColor whiteColor];
-        button.layer.masksToBounds = YES;
-        button.layer.cornerRadius = 0;
-        button.layer.borderWidth = 0.5;
-        button.layer.borderColor = [UIColor blackColor].CGColor;
-        
+        TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 80 + 3 *( self.choseTimeView.frame.size.height - 80) / 4,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4)];
         button.tag = 888 + i + 12;
         [button addTarget:self action:@selector(ChosetimeAction:) forControlEvents:UIControlEventTouchUpInside];
         NSMutableDictionary *dic = timeArray[i + 12];
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor lightGrayColor];
+           button.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         }
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
         
@@ -527,7 +507,7 @@ NSString *message = @"";
 }
 
 
-- (void)ChosetimeAction:(UIButton *)sender
+- (void)ChosetimeAction:(TimeButton *)sender
 {
     [self.choseTimeView removeFromSuperview];
     NSMutableDictionary *dic = self.selectDataArray[sender.tag - 888];

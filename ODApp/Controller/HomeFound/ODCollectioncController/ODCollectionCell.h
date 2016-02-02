@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ODLikeModel.h"
 @interface ODCollectionCell : UICollectionViewCell
 
 
@@ -19,5 +19,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 
+@property (nonatomic , strong) ODLikeModel *model;
 
 @end
