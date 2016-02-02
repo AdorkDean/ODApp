@@ -1,17 +1,15 @@
 //
-//  ODNewActivityCenterViewController.m
+//  ODActivityDetailViewController.m
 //  ODApp
 //
-//  Created by 刘培壮 on 16/2/1.
+//  Created by 刘培壮 on 16/2/2.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 #import "ODHttpTool.h"
-#import "ODActivitylistModel.h"
-#import "ODNewActivityCell.h"
-#import "ODNewActivityCenterViewController.h"
+#import "ODActivityDetailModel.h"
 #import "ODActivityDetailViewController.h"
 
-@interface ODNewActivityCenterViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ODActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong)UITableView *tableView;
 
@@ -19,9 +17,11 @@
  *  从服务器获取到的数据
  */
 @property (nonatomic, strong) NSArray *resultLists;
+
+
 @end
 
-@implementation ODNewActivityCenterViewController
+@implementation ODActivityDetailViewController
 
 static NSString * const cellId = @"newActivityCell";
 
@@ -33,36 +33,32 @@ static NSString * const cellId = @"newActivityCell";
         UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODTabBarHeight) style:UITableViewStylePlain];
         tableView.delegate = self;
         tableView.dataSource = self;
-        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODNewActivityCell class]) bundle:nil] forCellReuseIdentifier:cellId];
         tableView.tableFooterView = [UIView new];
         tableView.rowHeight = 98;
-       _tableView = tableView;
+        _tableView = tableView;
     }
     return _tableView;
 }
 
-#pragma mark - lifeCycle
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"中心活动列表";
-    [self.view addSubview:self.tableView];
+    self.navigationItem.title = @"活动详情";
     [self requestData];
 }
 
 -(void)requestData
 {
     __weakSelf
-    NSDictionary *parameter = @{@"city_id":@"1"};
-    [ODHttpTool getWithURL:KActivityListUrl parameters:parameter modelClass:[ODActivityListModel class] success:^(id json)
-    {
-        weakSelf.resultLists = [json result];
-        [weakSelf.tableView reloadData];
-    }
+    NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue]};
+    [ODHttpTool getWithURL:KActivityListUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id json)
+     {
+         [weakSelf.tableView reloadData];
+     }
                    failure:^(NSError *error)
-    {
-        
-    }];
+     {
+         
+     }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -73,8 +69,7 @@ static NSString * const cellId = @"newActivityCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODNewActivityCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    cell.model = self.resultLists[indexPath.row];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     return cell;
 }
 
@@ -82,10 +77,9 @@ static NSString * const cellId = @"newActivityCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODNewActivityCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     ODActivityDetailViewController *detailViewController = [[ODActivityDetailViewController alloc] initWithNibName:nil bundle:nil];
-    detailViewController.acitityId = cell.model.activity_id;
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
+
 
 @end

@@ -24,7 +24,7 @@ UIKIT_EXTERN NSString * const ODNotificationMyTaskRefresh;
 
 #pragma mark - 请求URL接口 
 /** 统一的URL */
-UIKIT_EXTERN NSString *const ODCommonURL;
+UIKIT_EXTERN NSString *const ODBaseURL;
 
 
 UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
@@ -66,5 +66,8 @@ UIKIT_EXTERN NSString * const kOthersInformationUrl;
 UIKIT_EXTERN NSString * const kSaveAddressUrl;
 UIKIT_EXTERN NSString * const kGetAddressUrl;
 UIKIT_EXTERN NSString * const kDeleteAddressUrl;
+
+
+UIKIT_EXTERN NSString * const KActivityListUrl;
 UIKIT_EXTERN NSString * const kGetServecTimeUrl;
 UIKIT_EXTERN NSString * const kSaveOrderUrl;
