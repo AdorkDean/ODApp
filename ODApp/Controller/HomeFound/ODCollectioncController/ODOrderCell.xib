@@ -89,9 +89,13 @@
             </constraints>
             <size key="customSize" width="471" height="230"/>
             <connections>
+                <outlet property="nickLabel" destination="18K-H7-lEL" id="T5r-RI-4zR"/>
+                <outlet property="orderImageView" destination="6oy-bE-xci" id="0zE-V7-t7Q"/>
+                <outlet property="orderPrice" destination="JLF-HH-d7x" id="nZP-Xg-Lkz"/>
+                <outlet property="orderTitle" destination="VE1-X3-MJh" id="ZdZ-LC-dLA"/>
                 <outlet property="userImgeView" destination="Jxm-Pg-g8r" id="RYs-Fr-0sR"/>
             </connections>
-            <point key="canvasLocation" x="412.5" y="243"/>
+            <point key="canvasLocation" x="-358.5" y="103"/>
         </collectionViewCell>
     </objects>
 </document>

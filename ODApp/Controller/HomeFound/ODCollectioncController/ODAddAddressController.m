@@ -32,11 +32,7 @@
     self.is_default = @"0";
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     
-    
   
-    
-    
-
     [self navigationInit];
     [self createView];
 }
@@ -85,12 +81,54 @@
 
 - (void)saveAction:(UIButton *)sender
 {
-    if (self.isAdd) {
-         [self saveAddress];
-    }else{
-        [self editeAddress];
-    }
+    
+    
    
+    
+    if (self.isAdd) {
+        
+        
+        if([self.addAddressView.nameTextField.text isEqualToString:@"请输入姓名"] ||[self.addAddressView.nameTextField.text isEqualToString:@""] )
+        {
+            
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入姓名"];
+            
+        }else if ([self.addAddressView.phoneTextField.text isEqualToString:@"请输入手机号"] || self.addAddressView.phoneTextField.text.length < 8 || self.addAddressView.phoneTextField.text.length > 11)
+        {
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入正确手机号"];
+            
+        }else if ([self.addAddressView.addressTextField.text isEqualToString:@"请输入联系地址"] || [self.addAddressView.addressTextField.text isEqualToString:@""])
+        {
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
+            
+            
+        }else{
+              [self saveAddress];
+        }
+
+        
+        
+    }else{
+        
+        if([self.addAddressView.nameTextField.text isEqualToString:@"请输入姓名"] ||[self.addAddressView.nameTextField.text isEqualToString:@""] )
+        {
+            
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入姓名"];
+            
+        }else if ([self.addAddressView.phoneTextField.text isEqualToString:@"请输入手机号"] || self.addAddressView.phoneTextField.text.length < 8 || self.addAddressView.phoneTextField.text.length > 11)
+        {
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入正确手机号"];
+            
+        }else if ([self.addAddressView.addressTextField.text isEqualToString:@"请输入联系地址"] || [self.addAddressView.addressTextField.text isEqualToString:@""])
+        {
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
+            
+            
+        }else{
+            [self editeAddress];
+        }
+        
+    }
 }
 
 - (void)editeAddress{
@@ -121,15 +159,7 @@
         
         
         
-        
-        
-        
-        
-        
     }];
-    
-
-    
     
     
 }

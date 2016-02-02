@@ -14,22 +14,23 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "DataButton.h"
-@interface ODOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+#import "UIImageView+WebCache.h"
+
+@interface ODOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UITextViewDelegate>
 
 @property(nonatomic,strong)UIButton *selectedButton;
-
+@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property (nonatomic , strong) UILabel *allPriceLabel;
 @property (nonatomic ,strong) ODOrderHeadView *headView;
-@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
-
+@property (nonatomic, strong) AFHTTPRequestOperationManager *orderManager;
 @property (nonatomic , strong) UIView *choseTimeView;
 @property (nonatomic , strong) UIScrollView *scroller;
-
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , strong) NSMutableArray *selectDataArray;
-
+@property (nonatomic , copy) NSString *openId;
+@property (nonatomic ,copy) NSString *addressId;
 
 @end
 
@@ -38,6 +39,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.openId = [ODUserInformation sharedODUserInformation].openID;
+    
+    
     [self getData];
     
     self.dataArray = [[NSMutableArray alloc] init];
@@ -46,17 +51,24 @@
     [self createCollectionView];
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.choseTimeView removeFromSuperview];
+}
+
+
 
 - (void)getData
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"swap_id":@"1827"};
+    NSDictionary *parameters = @{@"swap_id":[NSString stringWithFormat:@"%@" , self.informationModel.swap_id]};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/swap/service/time";
+ 
     
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kGetServecTimeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if (responseObject) {
@@ -88,7 +100,7 @@
 -(void)createCollectionView
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width,KControllerHeight - 50) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width,kScreenSize.height - 115) collectionViewLayout:self.flowLayout];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
@@ -102,6 +114,9 @@
     amountImageView.backgroundColor = [UIColor whiteColor];
     
     
+    
+    
+    
     UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10,90, 30)];
     priceLabel.text = @"订单金额：";
     priceLabel.backgroundColor = [UIColor whiteColor];
@@ -109,7 +124,7 @@
     
     
     self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 10, amountImageView.frame.size.width - 110, 30)];
-    self.allPriceLabel.text = @"10元";
+    self.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , self.informationModel.price];
     self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
     self.allPriceLabel.textColor = [UIColor redColor];
     [amountImageView addSubview:self.allPriceLabel];
@@ -124,12 +139,60 @@
     saveOrderButton.backgroundColor = [UIColor redColor];
     [saveOrderButton setTitle:@"提交订单" forState:UIControlStateNormal];
     [saveOrderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [saveOrderButton addTarget:self action:@selector(saveOrderAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:saveOrderButton];
     
     
     
     
 }
+
+
+- (void)saveOrderAction:(UIButton *)sender
+{
+    if ([self.headView.orderView.timeLabel.text isEqualToString:@"服务时间"]) {
+         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入服务时间"];
+    }else if ([self.headView.orderView.addressLabel.text isEqualToString:@"联系地址"]){
+         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
+    }else{
+        
+         [self saveOrder];
+    }
+   
+}
+
+
+- (void)saveOrder
+{
+    self.orderManager = [AFHTTPRequestOperationManager manager];
+    
+    NSString *swap_id = [NSString stringWithFormat:@"%@" , self.informationModel.swap_id];
+    
+    
+    NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": self.headView.orderView.timeLabel.text , @"user_address_id":self.addressId , @"comment":self.headView.orderView.messageTextView.text};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+       __weak typeof (self)weakSelf = self;
+    [self.orderManager GET:kSaveOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+          [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提交订单成功"];
+        }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
+            
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        
+        
+    }];
+
+}
+
 
 #pragma mark - UICollectionViewDelegate
 
@@ -138,6 +201,13 @@
     ODOrderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
     
     
+ 
+    [cell.userImgeView sd_setImageWithURL:[NSURL OD_URLWithString:self.informationModel.user[@"avatar"]]];
+    cell.nickLabel.text = self.informationModel.user[@"nick"];
+    cell.orderTitle.text = self.informationModel.title;
+    cell.orderPrice.text = [NSString stringWithFormat:@"%@元/%@" , self.informationModel.price , self.informationModel.unit];
+    NSString *url = self.informationModel.imgs_small[0][@"img_url"];
+    [cell.orderImageView sd_setImageWithURL:[NSURL OD_URLWithString:url]];
     
     
     
@@ -172,16 +242,92 @@
     
     UITapGestureRecognizer *addressTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addressAction)];
     [self.headView.orderView.addressImgeView addGestureRecognizer:addressTap];
-    
-    
     UITapGestureRecognizer *timeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeAction)];
     [self.headView.orderView.choseTimeView addGestureRecognizer:timeTap];
+    
+    
+    self.headView.orderView.messageTextView.delegate = self;
+    
     
     return self.headView;
     
 }
 
 
+#pragma mark - textViewDelegate
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if (textView == self.headView.orderView.messageTextView) {
+        if ([textView.text isEqualToString:NSLocalizedString(@"给他留言", nil)]) {
+            self.headView.orderView.messageTextView.text=NSLocalizedString(@"", nil);
+             self.headView.orderView.messageTextView.textColor = [UIColor blackColor];
+        }
+        else{
+            ;
+        }
+        
+    }
+}
+
+NSString *message = @"";
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView == self.headView.orderView.messageTextView)
+    {
+        if (textView.text.length > 20)
+        {
+            textView.text = message;
+        }
+        else
+        {
+            message = textView.text;
+        }
+    }
+  
+}
+
+
+
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    
+    if (textView == self.headView.orderView.messageTextView) {
+        
+        if (text.length == 0) return YES;
+        
+        NSInteger existedLength = textView.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = text.length;
+        if (existedLength - selectedLength + replaceLength > 20) {
+            return NO;
+        }
+        
+        if ([text isEqualToString:@"\n"]) {
+            [textView resignFirstResponder];
+            return NO;
+            
+        }
+    }
+    
+    
+    return YES;
+}
+
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""])
+    {
+        textView.textColor = [UIColor lightGrayColor];
+        if (textView == self.headView.orderView.messageTextView) {
+            textView.text=NSLocalizedString(@"给他留言", nil);
+            
+        
+        }
+    }
+}
 
 
 //动态设置每个item的大小
@@ -394,10 +540,10 @@
     ODContactAddressController *vc = [[ODContactAddressController alloc] init];
     
     __weakSelf
-    vc.getAddressBlock = ^(NSString *address){
+    vc.getAddressBlock = ^(NSString *address , NSString *addrssId){
         
         weakSelf.headView.orderView.addressLabel.text = address;
-        
+        weakSelf.addressId = addrssId;
     };
     
     

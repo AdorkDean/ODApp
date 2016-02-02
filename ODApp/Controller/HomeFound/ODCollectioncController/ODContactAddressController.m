@@ -117,7 +117,7 @@
 {
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY , kScreenSize.width, kScreenSize.height) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY , kScreenSize.width, kScreenSize.height - 110) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
@@ -331,7 +331,10 @@
         
         __weakSelf
         if (self.getAddressBlock) {
-            weakSelf.getAddressBlock(model.address);
+            
+       
+            
+            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id]);
         }
 
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -341,7 +344,7 @@
         __weakSelf
         ODAddressModel *model = self.dataArray[indexPath.row];
         if (self.getAddressBlock) {
-            weakSelf.getAddressBlock(model.address);
+            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id]);
         }
         
        [weakSelf.navigationController popViewControllerAnimated:YES];

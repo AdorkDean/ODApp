@@ -66,3 +66,5 @@ NSString * const kSaveAddressUrl = @"http://woquapi.test.odong.com/1.0/user/addr
 NSString * const kGetAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/list";
 NSString * const kDeleteAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/del";
 NSString * const kEditeAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/edit";
+NSString * const kGetServecTimeUrl = @"http://woquapi.test.odong.com/1.0/swap/service/time";
+NSString * const kSaveOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/order";

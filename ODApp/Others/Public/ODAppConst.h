@@ -66,3 +66,5 @@ UIKIT_EXTERN NSString * const kOthersInformationUrl;
 UIKIT_EXTERN NSString * const kSaveAddressUrl;
 UIKIT_EXTERN NSString * const kGetAddressUrl;
 UIKIT_EXTERN NSString * const kDeleteAddressUrl;
+UIKIT_EXTERN NSString * const kGetServecTimeUrl;
+UIKIT_EXTERN NSString * const kSaveOrderUrl;
