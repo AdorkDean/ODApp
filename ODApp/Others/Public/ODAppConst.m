@@ -23,9 +23,9 @@ NSString *const ODNotificationMyTaskRefresh = @"ODNotificationMyTaskRefresh";
 #pragma mark - 请求URL接口
 /** 统一的URL */
 #ifdef DEBUG
-NSString * const ODCommonURL = @"http://woquapi.test.odong.com/";
+NSString * const ODBaseURL = @"http://woquapi.test.odong.com/1.0/";
 #else
-NSString * const ODCommonURL = @"http://woquapi.test.odong.com/";
+NSString * const ODBaseURL = @"http://woquapi.test.odong.com/1.0/";
 #endif
 
 NSString * const kBazaarUnlimitTaskUrl = @"http://woquapi.test.odong.com/1.0/task/list";
@@ -66,3 +66,5 @@ NSString * const kSaveAddressUrl = @"http://woquapi.test.odong.com/1.0/user/addr
 NSString * const kGetAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/list";
 NSString * const kDeleteAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/del";
 NSString * const kEditeAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/edit";
+
+NSString * const KActivityListUrl = @"store/activity/list";
