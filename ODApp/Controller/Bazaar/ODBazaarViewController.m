@@ -34,15 +34,23 @@
         [button setTitle:array[i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
         [button setBackgroundColor:[UIColor colorWithHexString:@"#ffffff" alpha:1]];
-        [button setFrame:CGRectMake((kScreenSize.width/2)*i, 0, kScreenSize.width/2, 39)];
+        [button setFrame:CGRectMake((kScreenSize.width/2)*i, 0, kScreenSize.width/2, 40)];
+        [button addTarget:self action:@selector(changeController:) forControlEvents:UIControlEventTouchUpInside];
+        button.tag = 10010+i;
         [self.view addSubview:button];
         
         if (i == 0) {
-            self.lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 40, kScreenSize.width/2, 1)];
+            self.lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 38, kScreenSize.width/2, 2)];
             self.lineView.backgroundColor = [UIColor yellowColor];
-            [button addSubview:self.lineView];
+            [self.view addSubview:self.lineView];
         }
     }
+}
+
+-(void)changeController:(UIButton *)button
+{
+    CGPoint point = CGPointMake(kScreenSize.width*(button.tag-10010), 0);
+    [self.scrollView setContentOffset:point animated:YES];
 }
 
 -(void)createScrollView
@@ -50,9 +58,10 @@
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 40,kScreenSize.width, kScreenSize.height-ODNavigationHeight-40-55)];
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.pagingEnabled = YES;
+    self.scrollView.delegate = self;
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.bounces = NO;
-    self.scrollView.contentSize = CGSizeMake(2*kScreenSize.width, kScreenSize.height - ODNavigationHeight - 55);
+    self.scrollView.contentSize = CGSizeMake(2*kScreenSize.width, kScreenSize.height - ODNavigationHeight - 40- 55);
     [self.view addSubview:self.scrollView];
     
     ODBazaaeExchangeSkillViewController *exchangeSkill = [[ODBazaaeExchangeSkillViewController alloc]init];
@@ -66,8 +75,20 @@
     
     [self addChildViewController:exchangeSkill];
     [self addChildViewController:requestHelp];
-    
 }
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if (![scrollView isEqual:self.scrollView])
+        return;
+    
+    NSInteger i = scrollView.contentOffset.x / self.view.frame.size.width;
+    self.lineView.frame = CGRectMake((kScreenSize.width/2)*i, 38, kScreenSize.width/2, 2);
+    [self.view addSubview:self.lineView];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
