@@ -39,11 +39,11 @@
     self.dataArray = [[NSMutableArray alloc] init];
     self.defaultArray = [[NSMutableArray alloc] init];
     self.tableViewReuseIdentifier = NSStringFromClass([UITableViewCell class]);
-
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     self.view.userInteractionEnabled = YES;
     
-    [self getData];
+   
 }
 
 
@@ -117,7 +117,7 @@
 {
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY , kScreenSize.width, KControllerHeight - 50) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY , kScreenSize.width, kScreenSize.height - 110) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
@@ -129,26 +129,13 @@
     
     [self.view addSubview:self.tableView];
     
-    UIImageView *addAddressImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 50, kScreenSize.width, 50)];
-    
+    UIImageView *addAddressImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 50 - ODNavigationHeight, kScreenSize.width, 50)];
+
+    addAddressImageView.image = [UIImage imageNamed:@"button_Add address"];
     addAddressImageView.backgroundColor = [UIColor whiteColor];
     addAddressImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *addAddressTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addAddressAction)];
     [addAddressImageView addGestureRecognizer:addAddressTap];
-    UIImageView *add = [[UIImageView alloc] initWithFrame:CGRectMake(addAddressImageView.center.x - 60, 12, 20, 20)];
-    add.image = [UIImage imageNamed:@"发布任务icon"];
-    [addAddressImageView addSubview:add];
-    
-    UIButton *addAddressButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    addAddressButton.frame = CGRectMake(addAddressImageView.center.x - 40, 12, 100, 20);
-    [addAddressButton setTitle:@"新增收货地址" forState:UIControlStateNormal];
-    [addAddressButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    addAddressButton.titleLabel.font = [UIFont systemFontOfSize: 15];
-    addAddressButton.userInteractionEnabled = NO;
-  
-    
-    [addAddressImageView addSubview:addAddressButton];
-    
     [self.view addSubview:addAddressImageView];
 
     
@@ -273,7 +260,7 @@
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     __weakSelf
-    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[UIImage imageNamed:@"button_delete"] handler:^(UITableViewRowAction * _Nullable action, NSIndexPath * _Nullable indexPath) {
+    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[UIImage imageNamed:@"icon_delete"] handler:^(UITableViewRowAction * _Nullable action, NSIndexPath * _Nullable indexPath) {
         [weakSelf setEditing:false animated:true];
         
         NSString *address_id = @"";
@@ -300,10 +287,10 @@
         
 
     }];
-    action1.backgroundColor = kRGBAWithColor(252, 77, 84, 1);
+    action1.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     
   
-    UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[UIImage imageNamed:@"button_edit"] handler:^(UITableViewRowAction * _Nullable action, NSIndexPath * _Nullable indexPath) {
+    UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[UIImage imageNamed:@"icon_edit"] handler:^(UITableViewRowAction * _Nullable action, NSIndexPath * _Nullable indexPath) {
         [weakSelf setEditing:false animated:true];
         
         ODAddAddressController *vc = [[ODAddAddressController alloc] init];
@@ -311,7 +298,7 @@
                 vc.isAdd = NO;
                 if (indexPath.section == 0) {
                     ODAddressModel *model = self.defaultArray[indexPath.row];
-        
+                    vc.isDefault = YES;
                     NSString *addressId = [NSString stringWithFormat:@"%@" , model.id];
                     vc.addressId = addressId;
                     vc.addressModel = model;
@@ -322,6 +309,7 @@
         
                     ODAddressModel *model = self.dataArray[indexPath.row];
                     NSString *addressId = [NSString stringWithFormat:@"%@" , model.id];
+                      vc.isDefault = NO;
                     vc.addressId = addressId;
                     vc.addressModel = model;
                     [weakSelf.navigationController pushViewController:vc animated:YES];
@@ -330,109 +318,39 @@
 
         
     }];
-    action2.backgroundColor = kRGBAWithColor(254, 210, 12, 1);
-    
+    action2.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+
     return @[action1 , action2];
 }
 
 
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (indexPath.section == 0) {
-//         ODAddressModel *model = self.defaultArray[indexPath.row];
-//        
-//        if (self.getAddressBlock) {
-//            self.getAddressBlock(model.address);
-//        }
-//
-//        [self.navigationController popViewControllerAnimated:YES];
-//        
-//    }else{
-//        
-//        ODAddressModel *model = self.dataArray[indexPath.row];
-//        if (self.getAddressBlock) {
-//            self.getAddressBlock(model.address);
-//        }
-//        
-//       [self.navigationController popViewControllerAnimated:YES];
-//        
-//    }
-//}
-//
-//
-//- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
-// 
-//{
-//    
-//    // 添加一个删除按钮
-//    UITableViewRowAction *deleteRowAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"删除"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-//        
-//        
-//        NSString *address_id = @"";
-//        
-//        
-//        if (indexPath.section == 0) {
-//            
-//            ODAddressModel *model = self.defaultArray[indexPath.row];
-//            address_id = [NSString stringWithFormat:@"%@" , model.id];
-//            [self.defaultArray  removeObjectAtIndex:indexPath.row];
-//            [self.tableView reloadData];
-//            
-//        }else{
-//            
-//            ODAddressModel *model = self.dataArray[indexPath.row];
-//            address_id = [NSString stringWithFormat:@"%@" , model.id];
-//            [self.dataArray removeObjectAtIndex:indexPath.row];
-//            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
-//
-//            
-//        }
-//        
-//        
-//            [self deleteAddressWithAddress_id:address_id];
-//        
-//  
-//        
-//    }];
-//    
-//    
-// 
-//    UITableViewRowAction *editeAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"编辑"handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
-//        
-//        ODAddAddressController *vc = [[ODAddAddressController alloc] init];
-//        vc.typeTitle = @"编辑地址";
-//        vc.isAdd = NO;
-//        if (indexPath.section == 0) {
-//            ODAddressModel *model = self.defaultArray[indexPath.row];
-//            
-//            NSString *addressId = [NSString stringWithFormat:@"%@" , model.id];
-//            vc.addressId = addressId;
-//            vc.addressModel = model;
-//            [self.navigationController pushViewController:vc animated:YES];
-//
-//            
-//        }else{
-//            
-//            ODAddressModel *model = self.dataArray[indexPath.row];
-//            NSString *addressId = [NSString stringWithFormat:@"%@" , model.id];
-//            vc.addressId = addressId;
-//            vc.addressModel = model;
-//            [self.navigationController pushViewController:vc animated:YES];
-//            
-//        }
-//        
-//    }];
-//    
-//    editeAction.backgroundColor = [UIColor blueColor];
-//  
-//    
-//    
-//    // 将设置好的按钮放到数组中返回
-//    return @[deleteRowAction, editeAction];
-//    
-//    
-//    
-//}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+         ODAddressModel *model = self.defaultArray[indexPath.row];
+        
+        __weakSelf
+        if (self.getAddressBlock) {
+            
+       
+            
+            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id]);
+        }
+
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+        
+    }else{
+        
+        __weakSelf
+        ODAddressModel *model = self.dataArray[indexPath.row];
+        if (self.getAddressBlock) {
+            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id]);
+        }
+        
+       [weakSelf.navigationController popViewControllerAnimated:YES];
+        
+    }
+}
 
 - (void)deleteAddressWithAddress_id:(NSString *)address_id
 {

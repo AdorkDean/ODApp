@@ -317,7 +317,7 @@
 {
     if (!_tableView)
     {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, kScreenSize.width, kScreenSize.height-64-50) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -477,7 +477,7 @@
 #pragma mark - 创建底部回复按钮
 -(void)createReplyButton
 {
-    UIButton *button = [ODClassMethod creatButtonWithFrame:CGRectMake(0, kScreenSize.height - 50, kScreenSize.width, 50) target:self sel:@selector(replyButtonClick:) tag:0 image:nil title:@"回复TA" font:16];
+    UIButton *button = [ODClassMethod creatButtonWithFrame:CGRectMake(0, kScreenSize.height-50-ODNavigationHeight, kScreenSize.width, 50) target:self sel:@selector(replyButtonClick:) tag:0 image:nil title:@"回复TA" font:16];
     button.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
     [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.view addSubview:button];

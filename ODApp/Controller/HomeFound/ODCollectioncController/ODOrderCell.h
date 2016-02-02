@@ -12,8 +12,12 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *userImgeView;
 
+@property (weak, nonatomic) IBOutlet UILabel *nickLabel;
 
 
+@property (weak, nonatomic) IBOutlet UIImageView *orderImageView;
 
+@property (weak, nonatomic) IBOutlet UILabel *orderTitle;
+@property (weak, nonatomic) IBOutlet UILabel *orderPrice;
 
 @end

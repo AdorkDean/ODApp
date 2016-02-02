@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.page = 1;
     [self createRequest];
     [self joiningTogetherParmeters];
@@ -67,10 +68,10 @@
     flowLayout.minimumInteritemSpacing = 5;
     flowLayout.minimumLineSpacing = 5;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,64, kScreenSize.width, kScreenSize.height - 64 - 55) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,ODTopY, kScreenSize.width,kScreenSize.height - 64-55) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
     [self.view addSubview:self.collectionView];
 }
@@ -89,6 +90,7 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODBazaarExchangeSkillCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
     cell.nickLabel.text = model.user[@"nick"];
