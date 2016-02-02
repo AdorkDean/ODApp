@@ -81,7 +81,7 @@
 -(void)creatSegment
 {
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发表的", @"我回复的"]];
-    self.segmentedControl.frame = CGRectMake(4, 68, kScreenSize.width - 8, 30);
+    self.segmentedControl.frame = CGRectMake(4, 10, kScreenSize.width - 8, 30);
     self.segmentedControl.clipsToBounds = YES;
     self.segmentedControl.layer.cornerRadius = 7;
     self.segmentedControl.layer.borderWidth = 1;
@@ -107,8 +107,8 @@
 
 - (void)creatScroller
 {
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 102, kScreenSize.width, kScreenSize.height)];
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height - 102);
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, kScreenSize.width, kScreenSize.height - 40)];
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height - 40);
     self.scrollView.backgroundColor =[UIColor whiteColor];
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.alwaysBounceVertical = YES;
@@ -122,7 +122,7 @@
     [self.view addSubview:self.scrollView];
     
     self.firstFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 102) collectionViewLayout:self.firstFlowLayout];
+    self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.firstFlowLayout];
     self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.firstCollectionView.dataSource = self;
     self.firstCollectionView.delegate = self;
@@ -145,7 +145,7 @@
     [self.scrollView addSubview:self.firstCollectionView];
 
     self.secondFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width,0, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 102) collectionViewLayout:self.secondFlowLayout];
+    self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width,10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.secondFlowLayout];
     self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.secondCollectionView.dataSource = self;
     self.secondCollectionView.delegate = self;
