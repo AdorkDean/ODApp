@@ -24,7 +24,8 @@
 - (void)addViews
 {
     
-    self.backgroundColor = [UIColor whiteColor];
+    
+     self.backgroundColor = [UIColor whiteColor];
     [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     
     

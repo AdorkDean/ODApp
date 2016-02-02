@@ -52,9 +52,9 @@
     [self createCollectionView];
 }
 
--(void)viewWillDisappear:(BOOL)animated
+-(void)viewDidDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
     [self.choseTimeView removeFromSuperview];
 }
 
@@ -349,6 +349,7 @@ NSString *message = @"";
 
 - (void)timeAction
 {
+    [self.choseTimeView removeFromSuperview];
     self.choseTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, KScreenHeight / 2 - ODNavigationHeight, kScreenSize.width,KScreenHeight / 2)];
     self.choseTimeView.userInteractionEnabled = YES;
     self.choseTimeView.backgroundColor = [UIColor whiteColor];
@@ -431,6 +432,11 @@ NSString *message = @"";
 
 - (void)createButtonWithNumber:(NSInteger)number
 {
+    
+    for (int i = 0; i < 15; i++) {
+        TimeButton *button = [self.choseTimeView viewWithTag:888 + i];
+        [button removeFromSuperview];
+    }
     
     ODOrderDataModel *model = self.dataArray[number];
     NSMutableArray *timeArray = model.times;
