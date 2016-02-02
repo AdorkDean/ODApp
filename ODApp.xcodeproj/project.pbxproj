@@ -94,7 +94,6 @@
 		C64D461F1C5F8D6F003BFFA0 /* ODAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D46191C5F8D6F003BFFA0 /* ODAddressModel.m */; };
 		C64D46211C5F8D6F003BFFA0 /* ODOrderDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D461D1C5F8D6F003BFFA0 /* ODOrderDataModel.m */; };
 		C6F97AED1C6093A50037975C /* ODLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F97AEC1C6093A50037975C /* ODLocationController.m */; };
-		D46C902F1C6041B4004942E7 /* ODCenterActivityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C902C1C6041B4004942E7 /* ODCenterActivityListViewController.m */; };
 		D46C90301C6041B4004942E7 /* ODNewActivityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */; };
 		D4D0736E1C59B9FA008527C9 /* ODBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070D51C59B9FA008527C9 /* ODBaseViewController.m */; };
 		D4D0736F1C59B9FA008527C9 /* ODBazaarDetailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070D91C59B9FA008527C9 /* ODBazaarDetailLayout.m */; };
@@ -398,8 +397,6 @@
 		C64D461D1C5F8D6F003BFFA0 /* ODOrderDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderDataModel.m; sourceTree = "<group>"; };
 		C6F97AEB1C6093A50037975C /* ODLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLocationController.h; sourceTree = "<group>"; };
 		C6F97AEC1C6093A50037975C /* ODLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLocationController.m; sourceTree = "<group>"; };
-		D46C902B1C6041B4004942E7 /* ODCenterActivityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCenterActivityListViewController.h; sourceTree = "<group>"; };
-		D46C902C1C6041B4004942E7 /* ODCenterActivityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCenterActivityListViewController.m; sourceTree = "<group>"; };
 		D46C902D1C6041B4004942E7 /* ODNewActivityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCenterViewController.h; sourceTree = "<group>"; };
 		D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewActivityCenterViewController.m; sourceTree = "<group>"; };
 		D4D070D41C59B9FA008527C9 /* ODBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBaseViewController.h; sourceTree = "<group>"; };
@@ -1249,8 +1246,6 @@
 		D46C902A1C6041B4004942E7 /* ODActivityCenter */ = {
 			isa = PBXGroup;
 			children = (
-				D46C902B1C6041B4004942E7 /* ODCenterActivityListViewController.h */,
-				D46C902C1C6041B4004942E7 /* ODCenterActivityListViewController.m */,
 				D46C902D1C6041B4004942E7 /* ODNewActivityCenterViewController.h */,
 				D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */,
 			);
@@ -2137,7 +2132,6 @@
 				D4D0736F1C59B9FA008527C9 /* ODBazaarDetailLayout.m in Sources */,
 				9DC05DF11C5DE63D00181DFE /* ODOrderController.m in Sources */,
 				D4D073991C59B9FA008527C9 /* ODTabBarController.m in Sources */,
-				D46C902F1C6041B4004942E7 /* ODCenterActivityListViewController.m in Sources */,
 				D4D075541C5B015D008527C9 /* ODUserInformation.m in Sources */,
 				D4D0739F1C59B9FA008527C9 /* ODHomeFoundModel.m in Sources */,
 				D4D075431C59BA9B008527C9 /* AppDelegate.m in Sources */,
