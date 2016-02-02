@@ -12,6 +12,8 @@
 @interface ODHomeFoundViewController ()
 {
     NSMutableDictionary *userInfoDic;
+    
+//    NSInteger image_I;
 }
 @end
 
@@ -22,12 +24,13 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"首页";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"上海"];
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:self.locationButton.titleLabel.text];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
     self.pictureArray = [[NSMutableArray alloc] init];
     self.titleArray = [[NSMutableArray alloc] init];
     self.pictureDetailArray = [[NSMutableArray alloc] init];
-    
     self.dataArray = [[NSMutableArray alloc] init];
     userInfoDic = [NSMutableDictionary dictionary];
     
@@ -40,76 +43,16 @@
     
 }
 
-- (void)refreshdata
-{
-    
-    [self getHotThemeRequest];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getHotThemeRequest];
+    [self getSkillChangeRequest];
 }
 
-
-- (void)locationButtonClick:(UIButton *)button
-{
-
-    
-}
-
-
-- (void)getHotThemeRequest
+- (void)refreshdata
 {
     
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-    NSDictionary *parameter = @{@"type":@"3",@"page":@"1"};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:kHomeFoundListUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        if (responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            [weakSelf.dataArray removeAllObjects];
-            
-            NSDictionary *result = dict[@"result"];
-            
-            NSDictionary *bbs_list = result[@"bbs_list"];
-            for (id bbsKey in bbs_list) {
-                NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
-                NSDictionary *itemDict = bbs_list[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc] init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.dataArray addObject:model];
-    
-            }
-          
-            [weakSelf mySort:weakSelf.dataArray];
-            
-            NSDictionary *users = result[@"users"];
-            for (id userKey in users) {
-                NSString *key = [NSString stringWithFormat:@"%@",userKey];
-                NSDictionary *itemDict = users[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc] init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [userInfoDic setObject:model forKey:userKey];
-            }
-            
-            [weakSelf getcycleScrollViewRequest];
-        }
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [weakSelf.collectionView.mj_header endRefreshing];
-        
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:1.0f withAfterDelay:0.8f title:@"网络异常"];
-        
-    }];
+    [self getSkillChangeRequest];
 }
 
 -(NSMutableArray *)mySort:(NSMutableArray *)mArray
@@ -132,7 +75,18 @@
     return mArray;
 }
 
-- (void)getcycleScrollViewRequest
+#pragma mark - Location Button
+
+- (void)CreateLocationButtonAction
+{
+
+    [self.locationButton addTarget:self action:@selector(locationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+}
+
+#pragma mark - Request Data
+
+// Hot Activity
+- (void)getScrollViewRequest
 {
     
     self.managers = [AFHTTPRequestOperationManager manager];
@@ -162,12 +116,9 @@
                 [weakSelf.titleArray addObject:title];
                 [weakSelf.pictureArray addObject:img_url];
                 [weakSelf.pictureDetailArray addObject:banner_url];
-                
             }
-            
             [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
-            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [weakSelf.collectionView.mj_header endRefreshing];
@@ -175,8 +126,70 @@
     }];
 }
 
+// Skill Change
+- (void)getSkillChangeRequest
+{
+    
+    self.manager = [AFHTTPRequestOperationManager manager];
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSDictionary *parameter = @{@"type":@"3",@"page":@"1"};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weak typeof (self)weakSelf = self;
+    [self.manager GET:kHomeFoundListUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        if (responseObject) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            
+            [weakSelf.dataArray removeAllObjects];
+            
+            NSDictionary *result = dict[@"result"];
+            NSDictionary *bbs_list = result[@"bbs_list"];
+            for (id bbsKey in bbs_list) {
+                NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
+                NSDictionary *itemDict = bbs_list[key];
+                ODCommunityModel *model = [[ODCommunityModel alloc] init];
+                [model setValuesForKeysWithDictionary:itemDict];
+                [weakSelf.dataArray addObject:model];
+            }
+          
+            [weakSelf mySort:weakSelf.dataArray];
+            
+            NSDictionary *users = result[@"users"];
+            for (id userKey in users) {
+                NSString *key = [NSString stringWithFormat:@"%@",userKey];
+                NSDictionary *itemDict = users[key];
+                ODCommunityModel *model = [[ODCommunityModel alloc] init];
+                [model setValuesForKeysWithDictionary:itemDict];
+                [userInfoDic setObject:model forKey:userKey];
+            }
+            
+            [weakSelf getScrollViewRequest];
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        [weakSelf.collectionView.mj_header endRefreshing];
+        
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        
+    }];
+}
 
 
+
+
+#pragma mark - Action
+
+// Location Button
+- (void)locationButtonClick:(UIButton *)button
+{
+    
+    
+}
+
+//Toop Eight Button
 - (void)findActivityButtonClick:(UIButton *)button
 {
 
@@ -197,7 +210,6 @@
         vc.phoneNumber = @"13524776010";
         vc.storeId = @"1";
         [self.navigationController pushViewController:vc animated:YES];
-        
     }
 }
 
@@ -237,11 +249,23 @@
     
 }
 
+//Hot Activity
+- (void)imageButtonClick:(UIButton *)button
+{
+
+    ODCenterIntroduceController *vc = [[ODCenterIntroduceController alloc] init];
+    
+    vc.activityTitle = self.titleArray[button.tag - 100];
+    vc.webUrl = self.pictureDetailArray[button.tag - 100];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+//Search Circle
 - (void)emotionButtonClick:(UIButton *)button
 {
     
-    ODSkillDetailController *vc = [[ODSkillDetailController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 - (void)funnyButtonClick:(UIButton *)button
@@ -292,7 +316,26 @@
     [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"加入更多"];
 }
 
+// Skill Change
+- (void)headButtonClick:(UIButton *)button
+{
+    
+    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview;
+    NSIndexPath *indexpath = [self.collectionView indexPathForCell:cell];
+    ODCommunityModel *model = self.dataArray[indexpath.row];
+    NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+    vc.open_id = [userInfoDic[userId]open_id];
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:[userInfoDic[userId]open_id]]) {
+        
+    }else{
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+}
 
+#pragma mark - CreateUICollectionView
 
 - (void)createCollectionView
 {
@@ -304,7 +347,7 @@
     self.flowLayout.minimumLineSpacing = 2;
     self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
-    [self.collectionView registerClass:[ODhomeViewCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"rollPictureView"];
+    [self.collectionView registerClass:[ODhomeViewCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"rsusableView"];
    
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
@@ -343,24 +386,6 @@
     return cell;
 }
 
-- (void)headButtonClick:(UIButton *)button
-{
-
-    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview;
-    NSIndexPath *indexpath = [self.collectionView indexPathForCell:cell];
-    ODCommunityModel *model = self.dataArray[indexpath.row];
-    NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
-    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-    vc.open_id = [userInfoDic[userId]open_id];
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:[userInfoDic[userId]open_id]]) {
-        
-    }else{
-        
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-
-}
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -373,59 +398,53 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     
-    self.rollPictureView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"rollPictureView" forIndexPath:indexPath];
-    
+    self.rsusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"rsusableView" forIndexPath:indexPath];
 
-    
-    self.rollPictureView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 30) * 2/3 * self.pictureArray.count , 130);
-    self.rollPictureView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 30) * 2/3, 0);
-//    self.rollPictureView.scrollView.pagingEnabled = YES;
-    self.rollPictureView.scrollView.delegate = self;
-    self.rollPictureView.scrollView.showsHorizontalScrollIndicator = NO;
-    self.rollPictureView.scrollView.showsVerticalScrollIndicator = NO;
+    self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 2/3 * self.pictureArray.count , 0);
+    self.rsusableView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 15) * 2/3, 0);
+//    self.rsusableView.scrollView.pagingEnabled = YES;
+    self.rsusableView.scrollView.delegate = self;
+    self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
+    self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;
     
     for (int i = 0; i < self.pictureArray.count; i++) {
-        UIImageView *pictureImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kScreenSize.width - 30) * 2/3 * i, 0, (kScreenSize.width - 30) * 2/3, 130)];
-        [pictureImageView sd_setImageWithURL:[NSURL URLWithString:self.pictureArray[i]]];
-        pictureImageView.userInteractionEnabled = YES;
-        [self.rollPictureView.scrollView addSubview:pictureImageView];
+        
+        UIButton *imageButton;
+        if (i < self.pictureArray.count - 1) {
+            imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3 - 8, 120)];
+        }else{
+            imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3, 120)];
+        }
+        [imageButton sd_setBackgroundImageWithURL:[NSURL URLWithString:self.pictureArray[i]] forState:UIControlStateNormal];
+        
+        imageButton.tag = 100 + i;
+        [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.scrollView addSubview:imageButton];
     }
     
+    // Top Eight Button
+    [self.rsusableView.findActivityButton addTarget:self action:@selector(findActivityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.orderPlaceButton addTarget:self action:@selector(orderPlaceButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.findFavorableButton addTarget:self action:@selector(findFavorableButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.findJobButton addTarget:self action:@selector(findJobButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.searchCircleButton addTarget:self action:@selector(searchCircleButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.searchHelpButton addTarget:self action:@selector(searchHelpButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.changeSkillButton addTarget:self action:@selector(changeSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.rollPictureView.findActivityButton addTarget:self action:@selector(findActivityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.orderPlaceButton addTarget:self action:@selector(orderPlaceButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.findFavorableButton addTarget:self action:@selector(findFavorableButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.findJobButton addTarget:self action:@selector(findJobButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    // Search Circle
+    [self.rsusableView.emotionButton addTarget:self action:@selector(emotionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.funnyButton addTarget:self action:@selector(funnyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.moviesButton addTarget:self action:@selector(moviesButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.quadraticButton addTarget:self action:@selector(quadraticButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.beautifulButton addTarget:self action:@selector(beautifulButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.petButton addTarget:self action:@selector(petButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.rollPictureView.searchCircleButton addTarget:self action:@selector(searchCircleButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.searchHelpButton addTarget:self action:@selector(searchHelpButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.changeSkillButton addTarget:self action:@selector(changeSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.rsusableView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self.rollPictureView.emotionButton addTarget:self action:@selector(emotionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.funnyButton addTarget:self action:@selector(funnyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.moviesButton addTarget:self action:@selector(moviesButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.quadraticButton addTarget:self action:@selector(quadraticButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.rollPictureView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.beautifulButton addTarget:self action:@selector(beautifulButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rollPictureView.petButton addTarget:self action:@selector(petButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.rollPictureView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return self.rollPictureView;
-}
-
-- (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
-{
-    
-    ODCenterIntroduceController *vc = [[ODCenterIntroduceController alloc] init];
-    
-    vc.activityTitle = self.titleArray[index];
-    vc.webUrl = self.pictureDetailArray[index];
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    return self.rsusableView;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -437,7 +456,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     
-    return CGSizeMake(0, 1 + CGRectGetMaxY(self.rollPictureView.changeSkillView.frame));
+    return CGSizeMake(0, 1 + CGRectGetMaxY(self.rsusableView.changeSkillView.frame));
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
@@ -445,4 +464,6 @@
     
     return CGSizeMake(0, 0);
 }
+
+
 @end

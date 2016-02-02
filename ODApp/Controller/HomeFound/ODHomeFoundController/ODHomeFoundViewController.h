@@ -26,17 +26,16 @@
 #import "ODOthersInformationController.h"
 #import "ODPersonalCenterViewController.h"
 
-#import "ODSkillDetailController.h"
 
-@interface ODHomeFoundViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate,SDCycleScrollViewDelegate>
+@interface ODHomeFoundViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
 
-@property (nonatomic, strong)UILabel *locationLabel;
+@property (nonatomic, strong)UIButton *locationButton;
 
 @property (nonatomic, strong)UICollectionView *collectionView;
 
 @property (nonatomic,strong)UICollectionViewFlowLayout *flowLayout;
 
-@property (nonatomic, strong)ODhomeViewCollectionReusableView *rollPictureView;
+@property (nonatomic, strong)ODhomeViewCollectionReusableView *rsusableView;
 
 @property (nonatomic, strong) ODCommunityModel *model;
 
