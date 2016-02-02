@@ -51,12 +51,19 @@
     [self createCollectionView];
 }
 
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.choseTimeView removeFromSuperview];
+}
+
+
 
 - (void)getData
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"swap_id":@"1827"};
+    NSDictionary *parameters = @{@"swap_id":[NSString stringWithFormat:@"%@" , self.informationModel.swap_id]};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
  
@@ -93,7 +100,7 @@
 -(void)createCollectionView
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width,KControllerHeight - 110) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width,kScreenSize.height - 115) collectionViewLayout:self.flowLayout];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;

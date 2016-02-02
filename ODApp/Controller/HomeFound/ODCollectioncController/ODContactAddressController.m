@@ -117,7 +117,7 @@
 {
     
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY , kScreenSize.width, kScreenSize.height) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY , kScreenSize.width, kScreenSize.height - 110) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
