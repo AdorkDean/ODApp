@@ -229,6 +229,8 @@
 		D4F76D721C60CC8400D59F02 /* ODLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D6F1C60CC8400D59F02 /* ODLikeModel.m */; };
 		D4F76D731C60CC8400D59F02 /* TimeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D711C60CC8400D59F02 /* TimeButton.m */; };
 		D4F76D761C60CCC400D59F02 /* ODHomeFoundFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D751C60CCC400D59F02 /* ODHomeFoundFooterView.m */; };
+		D4F76D7A1C60CEC400D59F02 /* ODActivityDetailContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D781C60CEC400D59F02 /* ODActivityDetailContentCell.m */; };
+		D4F76D7B1C60CEC400D59F02 /* ODActivityDetailContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F76D791C60CEC400D59F02 /* ODActivityDetailContentCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -659,6 +661,9 @@
 		D4F76D711C60CC8400D59F02 /* TimeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeButton.m; sourceTree = "<group>"; };
 		D4F76D741C60CCC400D59F02 /* ODHomeFoundFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHomeFoundFooterView.h; sourceTree = "<group>"; };
 		D4F76D751C60CCC400D59F02 /* ODHomeFoundFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeFoundFooterView.m; sourceTree = "<group>"; };
+		D4F76D771C60CEC400D59F02 /* ODActivityDetailContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityDetailContentCell.h; sourceTree = "<group>"; };
+		D4F76D781C60CEC400D59F02 /* ODActivityDetailContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityDetailContentCell.m; sourceTree = "<group>"; };
+		D4F76D791C60CEC400D59F02 /* ODActivityDetailContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODActivityDetailContentCell.xib; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1410,6 +1415,9 @@
 				D4F76D691C60C55E00D59F02 /* ODActivityVIPCell.h */,
 				D4F76D6A1C60C55E00D59F02 /* ODActivityVIPCell.m */,
 				D4F76D6B1C60C55E00D59F02 /* ODActivityVIPCell.xib */,
+				D4F76D771C60CEC400D59F02 /* ODActivityDetailContentCell.h */,
+				D4F76D781C60CEC400D59F02 /* ODActivityDetailContentCell.m */,
+				D4F76D791C60CEC400D59F02 /* ODActivityDetailContentCell.xib */,
 			);
 			path = ODActivityCenter;
 			sourceTree = "<group>";
@@ -2132,6 +2140,7 @@
 				C64D46061C5F8C6F003BFFA0 /* UMSCommentInputController.xib in Resources */,
 				9D16BDD41C59EEDA003627CD /* ODViolationsCell.xib in Resources */,
 				C64D46031C5F8C6F003BFFA0 /* UMSocialLocalizable.strings in Resources */,
+				D4F76D7B1C60CEC400D59F02 /* ODActivityDetailContentCell.xib in Resources */,
 				D4D075151C59B9FA008527C9 /* ODInformationView.xib in Resources */,
 				C64D46051C5F8C6F003BFFA0 /* UMSCommentDetailController.xib in Resources */,
 				C64D46111C5F8C6F003BFFA0 /* read_me.txt in Resources */,
@@ -2348,6 +2357,7 @@
 				C64D45EF1C5F8C6F003BFFA0 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				D4D075181C59B9FA008527C9 /* ODLandSecondCell.m in Sources */,
 				D4D0738F1C59B9FA008527C9 /* ODOtherTaskController.m in Sources */,
+				D4F76D7A1C60CEC400D59F02 /* ODActivityDetailContentCell.m in Sources */,
 				D4D073A21C59B9FA008527C9 /* ODMyApplyActivityModel.m in Sources */,
 				D4D073841C59B9FA008527C9 /* ODLazyViewController.m in Sources */,
 				D4D073701C59B9FA008527C9 /* ODBazaarDetailViewController.m in Sources */,

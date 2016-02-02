@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *VIPHeadImgView;
 @property (weak, nonatomic) IBOutlet UILabel *VIPName;
 @property (weak, nonatomic) IBOutlet UILabel *VIPInfoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *VIPDutyLabel;
 
 @end

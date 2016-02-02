@@ -13,6 +13,7 @@
 #import "ODActivityDetailHeadImgViewCell.h"
 #import "ODActivityDetailInfoViewCell.h"
 #import "ODActivityVIPCell.h"
+#import "ODActivityDetailContentCell.h"
 
 @interface ODActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -30,6 +31,7 @@
 static NSString * const detailInfoCell = @"detailInfoCell";
 static NSString * const headImgCell = @"headImgCell";
 static NSString * const VIPCell = @"VIPCell";
+static NSString * const detailContentCell = @"detailContentCell";
 #pragma mark - lazyLoad
 - (UITableView *)tableView
 {
@@ -43,6 +45,7 @@ static NSString * const VIPCell = @"VIPCell";
         [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailHeadImgViewCell class]) bundle:nil] forCellReuseIdentifier:headImgCell];
         [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailInfoViewCell class]) bundle:nil] forCellReuseIdentifier:detailInfoCell];
         [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityVIPCell class]) bundle:nil] forCellReuseIdentifier:VIPCell];
+        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailContentCell class]) bundle:nil] forCellReuseIdentifier:detailContentCell];
         _tableView = tableView;
     }
     return _tableView;
@@ -74,7 +77,7 @@ static NSString * const VIPCell = @"VIPCell";
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 10;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -140,14 +143,24 @@ static NSString * const VIPCell = @"VIPCell";
             break;
         case 6:
         {
+#warning 缺少字段
             cell = [tableView dequeueReusableCellWithIdentifier:VIPCell];
             [[(ODActivityVIPCell *)cell VIPHeadImgView] sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url]];
-            
+            [[(ODActivityVIPCell *)cell VIPName]setText:self.resultModel.contact_info];
+            [[(ODActivityVIPCell *)cell VIPInfoLabel]setText:self.resultModel.store_name];
+            [[(ODActivityVIPCell *)cell VIPDutyLabel]setText:self.resultModel.store_name];
         }
             break;
-        case 7:
+        case 7: //报名人
         {
-            
+#warning 测试
+            cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+            UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(ODLeftMargin, 17.5, cell.od_width - ODLeftMargin * 2, 13.5)];
+            label.font = [UIFont systemFontOfSize:13.5];
+            label.textAlignment = NSTextAlignmentLeft;
+            label.text = @"活动详情";
+            [cell.contentView addSubview:label];
+
         }
             break;
         case 8:
@@ -162,7 +175,8 @@ static NSString * const VIPCell = @"VIPCell";
             break;
         case 9:
         {
-            
+            cell = [tableView dequeueReusableCellWithIdentifier:detailContentCell];
+            [(ODActivityDetailContentCell *)cell contentLabel].text = self.resultModel.remark;
         }
             break;
         case 10:
@@ -236,7 +250,7 @@ static NSString * const VIPCell = @"VIPCell";
             break;
         case 9: // 活动详情内容
         {
-            
+            return [tableView cellForRowAtIndexPath:indexPath].od_height;
         }
             break;
         case 10: // 分享和赞
@@ -249,5 +263,17 @@ static NSString * const VIPCell = @"VIPCell";
             break;
     }
     return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 9)
+    {
+        return 100;
+    }
+    else
+    {
+        return 40;
+    }
 }
 @end
