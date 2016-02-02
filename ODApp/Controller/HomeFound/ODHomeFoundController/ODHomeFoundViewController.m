@@ -341,7 +341,7 @@
 {
 
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - 55) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight) collectionViewLayout:self.flowLayout];
     
     self.flowLayout.minimumInteritemSpacing = 5;
     self.flowLayout.minimumLineSpacing = 2;
