@@ -43,7 +43,6 @@
 		B84F2E6D1C607D0A0057DF9E /* ODBazaarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84F2E6C1C607D0A0057DF9E /* ODBazaarViewController.m */; };
 		B84F2E701C607D450057DF9E /* ODBazaarRequestHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84F2E6F1C607D450057DF9E /* ODBazaarRequestHelpViewController.m */; };
 		B84F2E741C60A1AD0057DF9E /* ODCommunityShowPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84F2E731C60A1AD0057DF9E /* ODCommunityShowPicViewController.m */; };
-		C64D40931C5E08D9003BFFA0 /* ODSkillDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D40921C5E08D9003BFFA0 /* ODSkillDetailController.m */; };
 		C64D40971C5E0E17003BFFA0 /* ODSkillDetailReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D40961C5E0E17003BFFA0 /* ODSkillDetailReusableView.m */; };
 		C64D45661C5EFEB9003BFFA0 /* ODSkillDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45651C5EFEB9003BFFA0 /* ODSkillDetailModel.m */; };
 		C64D45E41C5F8C6F003BFFA0 /* NSURL+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45691C5F8C6F003BFFA0 /* NSURL+ODExtension.m */; };
@@ -99,8 +98,7 @@
 		C64D461E1C5F8D6F003BFFA0 /* DataButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D46171C5F8D6F003BFFA0 /* DataButton.m */; };
 		C64D461F1C5F8D6F003BFFA0 /* ODAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D46191C5F8D6F003BFFA0 /* ODAddressModel.m */; };
 		C64D46211C5F8D6F003BFFA0 /* ODOrderDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D461D1C5F8D6F003BFFA0 /* ODOrderDataModel.m */; };
-		C66125F51C604CCD002739D6 /* ODSkillCollectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C66125F31C604CCD002739D6 /* ODSkillCollectCell.m */; };
-		C66125F61C604CCD002739D6 /* ODSkillCollectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66125F41C604CCD002739D6 /* ODSkillCollectCell.xib */; };
+		C6F97B3E1C60CBC90037975C /* ODHomeFoundFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F97B3D1C60CBC90037975C /* ODHomeFoundFooterView.m */; };
 		D46C90301C6041B4004942E7 /* ODNewActivityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */; };
 		D46C90381C6043DA004942E7 /* ODNewActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C90371C6043DA004942E7 /* ODNewActivityCell.m */; };
 		D46C903B1C604F79004942E7 /* ODActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C903A1C604F79004942E7 /* ODActivityDetailViewController.m */; };
@@ -303,8 +301,6 @@
 		B84F2E721C60A1AD0057DF9E /* ODCommunityShowPicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityShowPicViewController.h; sourceTree = "<group>"; };
 		B84F2E731C60A1AD0057DF9E /* ODCommunityShowPicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityShowPicViewController.m; sourceTree = "<group>"; };
 		C3D6EA47D0FE49655335B119 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		C64D40911C5E08D9003BFFA0 /* ODSkillDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSkillDetailController.h; sourceTree = "<group>"; };
-		C64D40921C5E08D9003BFFA0 /* ODSkillDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSkillDetailController.m; sourceTree = "<group>"; };
 		C64D40951C5E0E17003BFFA0 /* ODSkillDetailReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSkillDetailReusableView.h; sourceTree = "<group>"; };
 		C64D40961C5E0E17003BFFA0 /* ODSkillDetailReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSkillDetailReusableView.m; sourceTree = "<group>"; };
 		C64D45641C5EFEB9003BFFA0 /* ODSkillDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSkillDetailModel.h; sourceTree = "<group>"; };
@@ -418,9 +414,8 @@
 		C64D46191C5F8D6F003BFFA0 /* ODAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAddressModel.m; sourceTree = "<group>"; };
 		C64D461C1C5F8D6F003BFFA0 /* ODOrderDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderDataModel.h; sourceTree = "<group>"; };
 		C64D461D1C5F8D6F003BFFA0 /* ODOrderDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderDataModel.m; sourceTree = "<group>"; };
-		C66125F21C604CCD002739D6 /* ODSkillCollectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSkillCollectCell.h; sourceTree = "<group>"; };
-		C66125F31C604CCD002739D6 /* ODSkillCollectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSkillCollectCell.m; sourceTree = "<group>"; };
-		C66125F41C604CCD002739D6 /* ODSkillCollectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODSkillCollectCell.xib; sourceTree = "<group>"; };
+		C6F97B3C1C60CBC90037975C /* ODHomeFoundFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHomeFoundFooterView.h; sourceTree = "<group>"; };
+		C6F97B3D1C60CBC90037975C /* ODHomeFoundFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeFoundFooterView.m; sourceTree = "<group>"; };
 		D46C902D1C6041B4004942E7 /* ODNewActivityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCenterViewController.h; sourceTree = "<group>"; };
 		D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewActivityCenterViewController.m; sourceTree = "<group>"; };
 		D46C90361C6043DA004942E7 /* ODNewActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCell.h; sourceTree = "<group>"; };
@@ -1070,23 +1065,11 @@
 			name = ODChoseCenter;
 			sourceTree = "<group>";
 		};
-		C64D40901C5E088A003BFFA0 /* ODChangeSkill */ = {
-			isa = PBXGroup;
-			children = (
-				C64D40911C5E08D9003BFFA0 /* ODSkillDetailController.h */,
-				C64D40921C5E08D9003BFFA0 /* ODSkillDetailController.m */,
-			);
-			path = ODChangeSkill;
-			sourceTree = "<group>";
-		};
 		C64D40941C5E0DC6003BFFA0 /* ODSkillDetailView */ = {
 			isa = PBXGroup;
 			children = (
 				C64D40951C5E0E17003BFFA0 /* ODSkillDetailReusableView.h */,
 				C64D40961C5E0E17003BFFA0 /* ODSkillDetailReusableView.m */,
-				C66125F21C604CCD002739D6 /* ODSkillCollectCell.h */,
-				C66125F31C604CCD002739D6 /* ODSkillCollectCell.m */,
-				C66125F41C604CCD002739D6 /* ODSkillCollectCell.xib */,
 			);
 			name = ODSkillDetailView;
 			sourceTree = "<group>";
@@ -1369,6 +1352,15 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		C6F97B3B1C60CB990037975C /* ODHomeFooterView */ = {
+			isa = PBXGroup;
+			children = (
+				C6F97B3C1C60CBC90037975C /* ODHomeFoundFooterView.h */,
+				C6F97B3D1C60CBC90037975C /* ODHomeFoundFooterView.m */,
+			);
+			name = ODHomeFooterView;
+			sourceTree = "<group>";
+		};
 		D46C902A1C6041B4004942E7 /* ODActivityCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1522,7 +1514,6 @@
 		D4D071061C59B9FA008527C9 /* HomeFound */ = {
 			isa = PBXGroup;
 			children = (
-				C64D40901C5E088A003BFFA0 /* ODChangeSkill */,
 				9DC05DD61C5DA7B900181DFE /* ODCollectioncController */,
 				D4D071071C59B9FA008527C9 /* ODCenterIntroduceController */,
 				D4D0710A1C59B9FA008527C9 /* ODHomeFoundController */,
@@ -1775,6 +1766,7 @@
 		D4D0731B1C59B9FA008527C9 /* HomeFoundView */ = {
 			isa = PBXGroup;
 			children = (
+				C6F97B3B1C60CB990037975C /* ODHomeFooterView */,
 				C64D40941C5E0DC6003BFFA0 /* ODSkillDetailView */,
 				D4D0731C1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.h */,
 				D4D0731D1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.m */,
@@ -2122,7 +2114,6 @@
 				D4D075261C59B9FA008527C9 /* ONMyApplyActivityCell.xib in Resources */,
 				D4D075461C59BA9B008527C9 /* Info.plist in Resources */,
 				D4D074FC1C59B9FA008527C9 /* ODCommunityCollectionCell.xib in Resources */,
-				C66125F61C604CCD002739D6 /* ODSkillCollectCell.xib in Resources */,
 				D4D0751B1C59B9FA008527C9 /* ODRegisteredView.xib in Resources */,
 				9DC05DDE1C5DAA5E00181DFE /* ODCollectionCell.xib in Resources */,
 				D4D074F81C59B9FA008527C9 /* ODBazaarCollectionCell.xib in Resources */,
@@ -2210,7 +2201,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C64D45E71C5F8C6F003BFFA0 /* UIImage+ODExtension.m in Sources */,
-				C66125F51C604CCD002739D6 /* ODSkillCollectCell.m in Sources */,
+				C6F97B3E1C60CBC90037975C /* ODHomeFoundFooterView.m in Sources */,
 				9DC05DE91C5DD90C00181DFE /* ODAddAddressController.m in Sources */,
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
@@ -2218,7 +2209,6 @@
 				C64D45FD1C5F8C6F003BFFA0 /* TAAnimatedDotView.m in Sources */,
 				D4D0738C1C59B9FA008527C9 /* ODMyTaskController.m in Sources */,
 				D4D073A41C59B9FA008527C9 /* ODMyOrderRecordModel.m in Sources */,
-				C64D40931C5E08D9003BFFA0 /* ODSkillDetailController.m in Sources */,
 				D4D0738E1C59B9FA008527C9 /* ODOthersInformationController.m in Sources */,
 				D4D075251C59B9FA008527C9 /* ONMyApplyActivityCell.m in Sources */,
 				D4D0737C1C59B9FA008527C9 /* ODCommunityDetailReplyViewController.m in Sources */,
