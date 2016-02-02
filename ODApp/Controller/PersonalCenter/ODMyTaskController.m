@@ -221,7 +221,7 @@
     self.typeView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.typeView.layer.borderWidth = 1;
     self.typeView.layer.borderColor = [UIColor blackColor].CGColor;
-    self.typeView.frame = CGRectMake(kScreenSize.width - 100, 64, 100, 185);
+    self.typeView.frame = CGRectMake(kScreenSize.width - 100, 0, 100, 185);
     [self.view addSubview:self.typeView];
     
     
