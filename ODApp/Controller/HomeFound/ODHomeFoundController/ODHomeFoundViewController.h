@@ -25,7 +25,7 @@
 #import "ODhomeViewCollectionReusableView.h"
 #import "ODOthersInformationController.h"
 #import "ODPersonalCenterViewController.h"
-
+#import "ODHomeFoundFooterView.h"
 
 @interface ODHomeFoundViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
 
@@ -36,6 +36,7 @@
 @property (nonatomic,strong)UICollectionViewFlowLayout *flowLayout;
 
 @property (nonatomic, strong)ODhomeViewCollectionReusableView *rsusableView;
+@property (nonatomic ,strong)ODHomeFoundFooterView *footerView;
 
 @property (nonatomic, strong) ODCommunityModel *model;
 

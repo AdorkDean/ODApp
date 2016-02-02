@@ -98,6 +98,7 @@
 		C64D461E1C5F8D6F003BFFA0 /* DataButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D46171C5F8D6F003BFFA0 /* DataButton.m */; };
 		C64D461F1C5F8D6F003BFFA0 /* ODAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D46191C5F8D6F003BFFA0 /* ODAddressModel.m */; };
 		C64D46211C5F8D6F003BFFA0 /* ODOrderDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D461D1C5F8D6F003BFFA0 /* ODOrderDataModel.m */; };
+		C6F97B3A1C60B6AD0037975C /* ODHomeFoundFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F97B391C60B6AD0037975C /* ODHomeFoundFooterView.m */; };
 		D46C90301C6041B4004942E7 /* ODNewActivityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */; };
 		D46C90381C6043DA004942E7 /* ODNewActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C90371C6043DA004942E7 /* ODNewActivityCell.m */; };
 		D46C903B1C604F79004942E7 /* ODActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C903A1C604F79004942E7 /* ODActivityDetailViewController.m */; };
@@ -413,6 +414,8 @@
 		C64D46191C5F8D6F003BFFA0 /* ODAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAddressModel.m; sourceTree = "<group>"; };
 		C64D461C1C5F8D6F003BFFA0 /* ODOrderDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderDataModel.h; sourceTree = "<group>"; };
 		C64D461D1C5F8D6F003BFFA0 /* ODOrderDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderDataModel.m; sourceTree = "<group>"; };
+		C6F97B381C60B6AD0037975C /* ODHomeFoundFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHomeFoundFooterView.h; sourceTree = "<group>"; };
+		C6F97B391C60B6AD0037975C /* ODHomeFoundFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeFoundFooterView.m; sourceTree = "<group>"; };
 		D46C902D1C6041B4004942E7 /* ODNewActivityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCenterViewController.h; sourceTree = "<group>"; };
 		D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewActivityCenterViewController.m; sourceTree = "<group>"; };
 		D46C90361C6043DA004942E7 /* ODNewActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCell.h; sourceTree = "<group>"; };
@@ -1349,6 +1352,24 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		C6F97B361C60B6310037975C /* ODHomeHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				D4D0731C1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.h */,
+				D4D0731D1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.m */,
+			);
+			name = ODHomeHeaderView;
+			sourceTree = "<group>";
+		};
+		C6F97B371C60B6470037975C /* ODHomeFooterView */ = {
+			isa = PBXGroup;
+			children = (
+				C6F97B381C60B6AD0037975C /* ODHomeFoundFooterView.h */,
+				C6F97B391C60B6AD0037975C /* ODHomeFoundFooterView.m */,
+			);
+			name = ODHomeFooterView;
+			sourceTree = "<group>";
+		};
 		D46C902A1C6041B4004942E7 /* ODActivityCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1754,9 +1775,9 @@
 		D4D0731B1C59B9FA008527C9 /* HomeFoundView */ = {
 			isa = PBXGroup;
 			children = (
+				C6F97B371C60B6470037975C /* ODHomeFooterView */,
+				C6F97B361C60B6310037975C /* ODHomeHeaderView */,
 				C64D40941C5E0DC6003BFFA0 /* ODSkillDetailView */,
-				D4D0731C1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.h */,
-				D4D0731D1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.m */,
 			);
 			path = HomeFoundView;
 			sourceTree = "<group>";
@@ -2188,6 +2209,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C64D45E71C5F8C6F003BFFA0 /* UIImage+ODExtension.m in Sources */,
+				C6F97B3A1C60B6AD0037975C /* ODHomeFoundFooterView.m in Sources */,
 				9DC05DE91C5DD90C00181DFE /* ODAddAddressController.m in Sources */,
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
