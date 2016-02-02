@@ -10,5 +10,13 @@
 
 @implementation ODActivityDetailContentCell
 
+- (CGFloat)height
+{
+    // 强制布局cell内部的所有子控件(label根据文字多少计算出自己最真实的尺寸)
+    [self layoutIfNeeded];
+    // 计算cell的高度
+    self.contentLabel.numberOfLines = 0;
+    return CGRectGetMaxY(self.contentLabel.frame) + 12.5;
+}
 
 @end

@@ -10,5 +10,9 @@
 
 @interface ODActivityDetailContentCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+/**
+ *  cell的高度
+ */
+@property(nonatomic, assign) CGFloat height;
 
 @end

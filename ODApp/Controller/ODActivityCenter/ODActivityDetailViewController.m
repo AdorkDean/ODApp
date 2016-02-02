@@ -32,6 +32,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 static NSString * const headImgCell = @"headImgCell";
 static NSString * const VIPCell = @"VIPCell";
 static NSString * const detailContentCell = @"detailContentCell";
+
 #pragma mark - lazyLoad
 - (UITableView *)tableView
 {
@@ -41,7 +42,7 @@ static NSString * const detailContentCell = @"detailContentCell";
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.tableFooterView = [UIView new];
-        tableView.rowHeight = 98;
+        tableView.estimatedRowHeight = 200;
         [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailHeadImgViewCell class]) bundle:nil] forCellReuseIdentifier:headImgCell];
         [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailInfoViewCell class]) bundle:nil] forCellReuseIdentifier:detailInfoCell];
         [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityVIPCell class]) bundle:nil] forCellReuseIdentifier:VIPCell];
@@ -198,7 +199,7 @@ static NSString * const detailContentCell = @"detailContentCell";
 {
    
 }
-
+ODActivityDetailContentCell *detailCell;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.row)
@@ -250,7 +251,13 @@ static NSString * const detailContentCell = @"detailContentCell";
             break;
         case 9: // 活动详情内容
         {
-            return [tableView cellForRowAtIndexPath:indexPath].od_height;
+            // 创建一个cell（cell的作用：根据模型数据布局所有的子控件，进而计算出cell的高度）
+            if (!detailCell) {
+                detailCell = [tableView dequeueReusableCellWithIdentifier:detailContentCell];
+            }
+            // 设置模型数据
+            detailCell.contentLabel.text = self.resultModel.remark;
+            return detailCell.height;
         }
             break;
         case 10: // 分享和赞
