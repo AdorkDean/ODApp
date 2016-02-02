@@ -184,6 +184,7 @@
 {
     ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
     ODOrderController *orderController = [[ODOrderController alloc]init];
+    orderController.informationModel = model;
     [self.navigationController pushViewController:orderController animated:YES];
 }
 
