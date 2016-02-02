@@ -306,7 +306,7 @@
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             [user setObject:@"" forKey:KUserDefaultsOpenId];
             
-            [self createProgressHUDWithAlpha:1.0 withAfterDelay:1.0 title:@"已退出登录"];
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0 title:@"已退出登录"];
            
             tabBar.selectedIndex = tabBar.currentIndex;
     }]];

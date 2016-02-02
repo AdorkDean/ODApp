@@ -39,7 +39,6 @@
         [weakSelf loadMoreData];
     }];
     
-//    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(releaseButtonClick:) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil];
 }
 
 #pragma mark - 加载更多
@@ -51,42 +50,23 @@
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
 }
 
-
--(void)releaseButtonClick:(UIButton *)button
-{
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
-        
-        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
-        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
-        
-    }else{
-        ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
-        releaseTask.isBazaar = YES;
-        
-        releaseTask.myBlock = ^(NSString *release){
-            self.refresh = release;
-        };
-        [self.navigationController pushViewController:releaseTask animated:YES];
-    }
-}
-
 #pragma mark -创建任务筛选和搜索按钮
 -(void)createScreeningAndSearchButton
 {
     //任务筛选
-    self.screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 75, 100, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"全部" font:15];
+    self.screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 10, 100, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"全部" font:15];
     [self.screeningButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     self.screeningButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25);
     self.screeningButton.layer.masksToBounds = YES;
     self.screeningButton.layer.cornerRadius = 10;
     self.screeningButton.layer.borderColor = [UIColor colorWithHexString:@"484848" alpha:1].CGColor;
     self.screeningButton.layer.borderWidth = 1;
-    [self.headView addSubview:self.screeningButton];
+    [self.view addSubview:self.screeningButton];
     
     UIImageView *screeningIamgeView = [ODClassMethod creatImageViewWithFrame:CGRectMake(75, 12, 16, 12) imageName:@"任务筛选下拉箭头" tag:0];
     [self.screeningButton addSubview:screeningIamgeView];
     
-    UIButton *searchButton = [ODClassMethod creatButtonWithFrame:CGRectMake(115, 75, kScreenSize.width-125, 35) target:self sel:@selector(searchButtonClick:) tag:0 image:nil title:@"  请输入您要搜索的关键字" font:15];
+    UIButton *searchButton = [ODClassMethod creatButtonWithFrame:CGRectMake(115, 10, kScreenSize.width-125, 35) target:self sel:@selector(searchButtonClick:) tag:0 image:nil title:@"  请输入您要搜索的关键字" font:15];
     [searchButton setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
     searchButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     searchButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
@@ -94,10 +74,10 @@
     searchButton.layer.cornerRadius = 10;
     searchButton.layer.borderColor = [UIColor colorWithHexString:@"484848" alpha:1].CGColor;
     searchButton.layer.borderWidth = 1;
-    searchButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    [self.headView addSubview:searchButton];
+//    searchButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:0.1];
+    [self.view addSubview:searchButton];
     
-    UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(7, 10, 16, 16) imageName:@"搜索放大镜icon" tag:0];
+    UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(7, 10, 16, 16) imageName:@"search" tag:0];
     [searchButton addSubview:searchImageView];
 }
 
@@ -241,7 +221,7 @@
     flowLayout.minimumInteritemSpacing = 5;
     flowLayout.minimumLineSpacing = 5;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,ODTopY, kScreenSize.width, KControllerHeight - 55) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,55, kScreenSize.width,kScreenSize.height-64-85-55) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
@@ -298,21 +278,19 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    //    ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
-    //    ODBazaarModel *model = self.dataArray[indexPath.row];
-    //    bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
-    //    bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
-    //    bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
-    //    bazaarDetail.myBlock = ^(NSString *del){
-    //        self.refresh = del;
-    //    };
-    //    if ([self.refresh isEqualToString:@"accept"]) {
-    //        [bazaarDetail.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
-    //    }
-    //    [self.navigationController pushViewController:bazaarDetail animated:YES];
+        ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
+        ODBazaarModel *model = self.dataArray[indexPath.row];
+        bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+        bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
+        bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
+        bazaarDetail.myBlock = ^(NSString *del){
+            self.refresh = del;
+        };
+        if ([self.refresh isEqualToString:@"accept"]) {
+            [bazaarDetail.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
+        }
+        [self.navigationController pushViewController:bazaarDetail animated:YES];
     
-    ODBazaaeExchangeSkillViewController *controller = [[ODBazaaeExchangeSkillViewController alloc]init];
-    [self.navigationController pushViewController:controller animated:YES];
 }
 
 #pragma mark - 试图将要出现

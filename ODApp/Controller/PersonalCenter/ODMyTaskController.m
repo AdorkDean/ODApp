@@ -120,7 +120,7 @@
 -(void)creatSegment
 {
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发布的", @"我接受的"]];
-    self.segmentedControl.frame = CGRectMake(4, 68, kScreenSize.width - 8, 30);
+    self.segmentedControl.frame = CGRectMake(4, 10, kScreenSize.width - 8, 30);
     self.segmentedControl.clipsToBounds = YES;
     self.segmentedControl.layer.cornerRadius = 7;
     self.segmentedControl.layer.borderWidth = 1;
@@ -147,8 +147,8 @@
 
 - (void)creatScroller
 {
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 102, kScreenSize.width, kScreenSize.height)];
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height - 102);
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, kScreenSize.width, kScreenSize.height - 40)];
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height - 40);
     self.scrollView.backgroundColor =[UIColor whiteColor];
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.alwaysBounceVertical = YES;
@@ -163,7 +163,7 @@
     
     
     self.firstFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 102) collectionViewLayout:self.firstFlowLayout];
+    self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.firstFlowLayout];
     self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.firstCollectionView.dataSource = self;
     self.firstCollectionView.delegate = self;
@@ -188,7 +188,7 @@
     
     
     self.secondFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width,0, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 102) collectionViewLayout:self.secondFlowLayout];
+    self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width,10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.secondFlowLayout];
     self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.secondCollectionView.dataSource = self;
     self.secondCollectionView.delegate = self;
@@ -221,7 +221,7 @@
     self.typeView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.typeView.layer.borderWidth = 1;
     self.typeView.layer.borderColor = [UIColor blackColor].CGColor;
-    self.typeView.frame = CGRectMake(kScreenSize.width - 100, 64, 100, 185);
+    self.typeView.frame = CGRectMake(kScreenSize.width - 100, 0, 100, 185);
     [self.view addSubview:self.typeView];
     
     
@@ -344,8 +344,8 @@
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf.firstCollectionView.mj_header beginRefreshing];
-        [weakSelf.secondCollectionView.mj_header beginRefreshing];
+        [weakSelf.firstCollectionView.mj_header endRefreshing];
+        [weakSelf.secondCollectionView.mj_header endRefreshing];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 

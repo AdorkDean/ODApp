@@ -11,10 +11,10 @@
 #import "ODBazaarExchangeSkillModel.h"
 #import "ODBazaarExchangeSkillCollectionCell.h"
 #import "AFNetworking.h"
-#import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
 #import "ODAPIManager.h"
 #import "ODHelp.h"
+#import "ODCommunityShowPicViewController.h"
 
 @interface ODBazaaeExchangeSkillViewController : ODBaseViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 

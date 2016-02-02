@@ -5,7 +5,6 @@
 //  Created by 刘培壮 on 16/2/1.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
-#import "ODHttpTool.h"
 #import "ODActivitylistModel.h"
 #import "ODNewActivityCell.h"
 #import "ODNewActivityCenterViewController.h"

@@ -9,7 +9,6 @@
 #import "ODBaseViewController.h"
 #import "ODAPIManager.h"
 #import "ODClassMethod.h"
-
 #import "AFNetworking.h"
 #import "ODCommunityModel.h"
 #import "ODCommunityCollectionCell.h"
@@ -19,7 +18,7 @@
 #import "MJRefresh.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODOthersInformationController.h"
-
+#import "ODCommunityShowPicViewController.h"
 
 @interface ODCommumityViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource>
 
