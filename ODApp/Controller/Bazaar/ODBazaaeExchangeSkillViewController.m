@@ -104,17 +104,21 @@
         if (model.imgs_small.count==4) {
             for (NSInteger i = 0; i < model.imgs_small.count; i++) {
                 NSDictionary *dict = model.imgs_small[i];
-                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((90+5)*(i%2), (90+5)*(i/2), 90, 90)];
-                [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]]];
-                [cell.picView addSubview:imageView];
+                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((90+5)*(i%2), (90+5)*(i/2), 90, 90)];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
+                [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+                imageButton.tag = 10*indexPath.row+i;
+                [cell.picView addSubview:imageButton];
             }
             cell.picViewConstraintHeight.constant = 195;
         }else{
             for (NSInteger i = 0;i < model.imgs_small.count ; i++) {
                 NSDictionary *dict = model.imgs_small[i];
-                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((90+5)*(i%3), (90+5)*(i/3), 90, 90)];
-                [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]]];
-                [cell.picView addSubview:imageView];
+                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((90+5)*(i%3), (90+5)*(i/3), 90, 90)];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
+                [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+                imageButton.tag = 10*indexPath.row+i;
+                [cell.picView addSubview:imageButton];
             }
             cell.picViewConstraintHeight.constant = 90+(90+5)*(model.imgs_small.count/3);
         }
@@ -126,6 +130,19 @@
     }
 
     return cell;
+}
+
+-(void)imageButtonClicked:(UIButton *)button
+{
+    
+    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *)button.superview.superview.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
+    picController.photos = model.imgs_small;
+    picController.selectedIndex = button.tag-10*indexPath.row;
+    picController.skill = @"skill";
+    [self.navigationController pushViewController:picController animated:YES];
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

@@ -179,7 +179,7 @@
     ODCommunityModel *model = self.dataArray[indexPath.row];
     NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.headButton addTarget:self action:@selector(otherInformationClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[userInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
     cell.nickLabel.text = [userInfoDic[userId]nick];
     cell.signLabel.text = [userInfoDic[userId]sign];
@@ -192,16 +192,20 @@
         }
         if (model.imgs.count==4) {
             for (NSInteger i = 0; i < model.imgs.count; i++) {
-                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((90+5)*(i%2), (90+5)*(i/2), 90, 90)];
-                [imageView sd_setImageWithURL:[NSURL OD_URLWithString:model.imgs[i]]];
-                [cell.picView addSubview:imageView];
+                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((90+5)*(i%2), (90+5)*(i/2), 90, 90)];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
+                [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                imageButton.tag = 10*indexPath.row+i;
+                [cell.picView addSubview:imageButton];
             }
             cell.PicConstraintHeight.constant = 195;
         }else{
             for (NSInteger i = 0;i < model.imgs.count ; i++) {
-                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((90+5)*(i%3), (90+5)*(i/3), 90, 90)];
-                [imageView sd_setImageWithURL:[NSURL OD_URLWithString:model.imgs[i]]];
-                [cell.picView addSubview:imageView];
+                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((90+5)*(i%3), (90+5)*(i/3), 90, 90)];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
+                [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                imageButton.tag = 10*indexPath.row+i;
+                [cell.picView addSubview:imageButton];
             }
             cell.PicConstraintHeight.constant = 90+(90+5)*(model.imgs.count/3);
         }
@@ -215,11 +219,22 @@
 
 }
 
-- (void)othersInformationClick:(UIButton *)button{
+-(void)imageButtonClick:(UIButton *)button
+{
+    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODCommunityModel *model = self.dataArray[indexPath.row];
+    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
+    picController.photos = model.imgs;
+    picController.selectedIndex = button.tag-10*indexPath.row;
+    [self.navigationController pushViewController:picController animated:YES];
+}
 
+- (void)otherInformationClick:(UIButton *)button
+{
     ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview;
-    NSIndexPath *indexpath = [self.collectionView indexPathForCell:cell];
-    ODCommunityModel *model = self.dataArray[indexpath.row];
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODCommunityModel *model = self.dataArray[indexPath.row];
     NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     vc.open_id = [userInfoDic[userId]open_id];

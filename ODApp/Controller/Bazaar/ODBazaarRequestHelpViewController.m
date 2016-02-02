@@ -39,7 +39,6 @@
         [weakSelf loadMoreData];
     }];
     
-//    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(releaseButtonClick:) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil];
 }
 
 #pragma mark - 加载更多
@@ -49,25 +48,6 @@
     NSDictionary *parameter = @{@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld",self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
-}
-
-
--(void)releaseButtonClick:(UIButton *)button
-{
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
-        
-        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
-        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
-        
-    }else{
-        ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
-        releaseTask.isBazaar = YES;
-        
-        releaseTask.myBlock = ^(NSString *release){
-            self.refresh = release;
-        };
-        [self.navigationController pushViewController:releaseTask animated:YES];
-    }
 }
 
 #pragma mark -创建任务筛选和搜索按钮

@@ -42,6 +42,7 @@
 		B84F2E6A1C6044BF0057DF9E /* ODBazaarExchangeSkillCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B84F2E681C6044BF0057DF9E /* ODBazaarExchangeSkillCollectionCell.xib */; };
 		B84F2E6D1C607D0A0057DF9E /* ODBazaarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84F2E6C1C607D0A0057DF9E /* ODBazaarViewController.m */; };
 		B84F2E701C607D450057DF9E /* ODBazaarRequestHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84F2E6F1C607D450057DF9E /* ODBazaarRequestHelpViewController.m */; };
+		B84F2E741C60A1AD0057DF9E /* ODCommunityShowPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84F2E731C60A1AD0057DF9E /* ODCommunityShowPicViewController.m */; };
 		C64D40931C5E08D9003BFFA0 /* ODSkillDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D40921C5E08D9003BFFA0 /* ODSkillDetailController.m */; };
 		C64D40971C5E0E17003BFFA0 /* ODSkillDetailReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D40961C5E0E17003BFFA0 /* ODSkillDetailReusableView.m */; };
 		C64D45661C5EFEB9003BFFA0 /* ODSkillDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45651C5EFEB9003BFFA0 /* ODSkillDetailModel.m */; };
@@ -299,6 +300,8 @@
 		B84F2E6C1C607D0A0057DF9E /* ODBazaarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarViewController.m; sourceTree = "<group>"; };
 		B84F2E6E1C607D450057DF9E /* ODBazaarRequestHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarRequestHelpViewController.h; sourceTree = "<group>"; };
 		B84F2E6F1C607D450057DF9E /* ODBazaarRequestHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarRequestHelpViewController.m; sourceTree = "<group>"; };
+		B84F2E721C60A1AD0057DF9E /* ODCommunityShowPicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityShowPicViewController.h; sourceTree = "<group>"; };
+		B84F2E731C60A1AD0057DF9E /* ODCommunityShowPicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityShowPicViewController.m; sourceTree = "<group>"; };
 		C3D6EA47D0FE49655335B119 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		C64D40911C5E08D9003BFFA0 /* ODSkillDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSkillDetailController.h; sourceTree = "<group>"; };
 		C64D40921C5E08D9003BFFA0 /* ODSkillDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSkillDetailController.m; sourceTree = "<group>"; };
@@ -850,6 +853,15 @@
 			name = BazaarExchangeSkillView;
 			sourceTree = "<group>";
 		};
+		B84F2E711C60A1750057DF9E /* CommunityShowPic */ = {
+			isa = PBXGroup;
+			children = (
+				B84F2E721C60A1AD0057DF9E /* ODCommunityShowPicViewController.h */,
+				B84F2E731C60A1AD0057DF9E /* ODCommunityShowPicViewController.m */,
+			);
+			name = CommunityShowPic;
+			sourceTree = "<group>";
+		};
 		BE90C887BE6078782C6B85F6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1357,21 +1369,6 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
-		C650223F1C5B8D2900C4A7B4 /* ChangeSkill */ = {
-			isa = PBXGroup;
-			children = (
-				C65022441C5B915F00C4A7B4 /* SbumitBill */,
-			);
-			path = ChangeSkill;
-			sourceTree = "<group>";
-		};
-		C65022441C5B915F00C4A7B4 /* SbumitBill */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = SbumitBill;
-			sourceTree = "<group>";
-		};
 		D46C902A1C6041B4004942E7 /* ODActivityCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1398,7 +1395,6 @@
 			children = (
 				D4D0754E1C59C41F008527C9 /* NavigationController */,
 				D4D0713B1C59B9FA008527C9 /* TabBarController */,
-				C650223F1C5B8D2900C4A7B4 /* ChangeSkill */,
 				D4D071061C59B9FA008527C9 /* HomeFound */,
 				D4D070D31C59B9FA008527C9 /* BaseViewController */,
 				D46C902A1C6041B4004942E7 /* ODActivityCenter */,
@@ -1478,6 +1474,7 @@
 			children = (
 				D4D071021C59B9FA008527C9 /* ODCommumityViewController.h */,
 				D4D071031C59B9FA008527C9 /* ODCommumityViewController.m */,
+				B84F2E711C60A1750057DF9E /* CommunityShowPic */,
 				D4D070F61C59B9FA008527C9 /* CommunityDetail */,
 				D4D070FC1C59B9FA008527C9 /* CommunityKeyWordSearch */,
 				D4D070FF1C59B9FA008527C9 /* CommunityReleaseTopic */,
@@ -2301,6 +2298,7 @@
 				D4D073931C59B9FA008527C9 /* ODTopicModel.m in Sources */,
 				D4D0739A1C59B9FA008527C9 /* ODBazaarDetailModel.m in Sources */,
 				D4D0739E1C59B9FA008527C9 /* ODCenterIntroduceModel.m in Sources */,
+				B84F2E741C60A1AD0057DF9E /* ODCommunityShowPicViewController.m in Sources */,
 				D4D0750B1C59B9FA008527C9 /* ChoseCenterModel.m in Sources */,
 				C64D45FC1C5F8C6F003BFFA0 /* TAAbstractDotView.m in Sources */,
 				D4D073971C59B9FA008527C9 /* ODUserNickNameController.m in Sources */,
