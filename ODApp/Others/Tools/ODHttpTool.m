@@ -8,7 +8,6 @@
 #import <AFNetworking.h>
 #import "ODHttpTool.h"
 #import "ODAPIManager.h"
-#import "NSObject+Log.h"
 
 NSString * const requestStatus = @"status";
 NSString * const requsetResult = @"result";
@@ -36,7 +35,7 @@ NSString * const requestSuccessStatus = @"success";
             {
                 resultDic = [resultDic lastObject];
             }
-            [NSObject resolveDict:resultDic];
+            [resultDic NSLogProperty];
             NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
             success(model);
         }
@@ -90,7 +89,7 @@ NSString * const requestSuccessStatus = @"success";
             {
                 resultDic = [resultDic lastObject];
             }
-            [NSObject resolveDict:resultDic];
+            [resultDic NSLogProperty];
             NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
             success(model);
         }
@@ -134,7 +133,7 @@ NSString * const requestSuccessStatus = @"success";
             {
                 resultDic = [resultDic lastObject];
             }
-            [NSObject resolveDict:resultDic];
+            [resultDic NSLogProperty];
             NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
             success(model);
         }
