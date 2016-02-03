@@ -151,12 +151,9 @@
         UILabel *changeSkillLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(CGRectGetMaxX(changeSkillImage.frame) + 10, 10, 80, 14) text:@"技能交换" font:14 alignment:@"left" color:@"#000000" alpha:1];
         
         [self.changeSkillView addSubview:changeSkillImage];
-        [self.changeSkillView addSubview:changeSkillLabel];
-        
+        [self.changeSkillView addSubview:changeSkillLabel];        
     }
-    
     return self;
-    
 }
 
 

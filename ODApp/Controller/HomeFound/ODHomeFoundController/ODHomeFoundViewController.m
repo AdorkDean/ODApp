@@ -489,15 +489,15 @@
 {
     CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs_small.count==0) {
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13];
-    }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+width;
-    }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+2*width+5;
+        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13];
+    }else if (model.imgs_small.count > 0 && model.imgs_small.count < 4){
+        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13] + width;
+    }else if (model.imgs_small.count >= 4 &&model.imgs_small.count < 7){
+        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13] + 2 * width + 5;
     }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+3*width+10;
+        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13] + 3 * width + 10;
     }else{
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+3*width+10;
+        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13] + 3 * width + 10;
     }
 }
 

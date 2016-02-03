@@ -1806,9 +1806,9 @@
 			children = (
 				D4F76D741C60CCC400D59F02 /* ODHomeFoundFooterView.h */,
 				D4F76D751C60CCC400D59F02 /* ODHomeFoundFooterView.m */,
-				C64D40941C5E0DC6003BFFA0 /* ODSkillDetailView */,
 				D4D0731C1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.h */,
 				D4D0731D1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.m */,
+				C64D40941C5E0DC6003BFFA0 /* ODSkillDetailView */,
 			);
 			path = HomeFoundView;
 			sourceTree = "<group>";
