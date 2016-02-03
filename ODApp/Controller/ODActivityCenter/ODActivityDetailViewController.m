@@ -152,7 +152,9 @@ static NSString * const bottomCell = @"bottomCell";
     {
         ODActivityDetailVIPModel *vipModel = self.resultModel.savants[indexPath.row - 6];
         cell = [tableView dequeueReusableCellWithIdentifier:VIPCell];
-        [[(ODActivityVIPCell *)cell VIPHeadImgView] sd_setImageWithURL:[NSURL OD_URLWithString:[vipModel avatar]]];
+        [[(ODActivityVIPCell *)cell VIPHeadImgView] sd_setImageWithURL:[NSURL OD_URLWithString:[vipModel avatar]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [image OD_circleImage];
+        }];
         [[(ODActivityVIPCell *)cell VIPName]setText:vipModel.nick];
         [[(ODActivityVIPCell *)cell VIPInfoLabel]setText:vipModel.school_name];
         [[(ODActivityVIPCell *)cell VIPDutyLabel]setText:vipModel.profile];
@@ -209,7 +211,7 @@ ODActivityDetailContentCell *detailCell;
     }
     else if (indexPath.row <= 5 + self.activityVIPs.count) // 嘉宾信息
     {
-        return 58;
+        return 137 / 2;
     }
     else if (indexPath.row == 5 + 1 + self.activityVIPs.count) //报名人
     {
