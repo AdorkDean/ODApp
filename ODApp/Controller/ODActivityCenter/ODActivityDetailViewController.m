@@ -89,6 +89,8 @@ static NSString * const activePersonCell = @"activePersonCell";
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.offset(0);
     }];
+    [btn layoutIfNeeded];
+    bottonBtnHeight = btn.od_height;
 }
 
 - (void)registTableViewClass
