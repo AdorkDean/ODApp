@@ -235,6 +235,8 @@
 		D4F76DCF1C61B01200D59F02 /* ODActivityDetailContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F76DCA1C61B01200D59F02 /* ODActivityDetailContentCell.xib */; };
 		D4F76DD31C61B04700D59F02 /* ODCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DD21C61B04700D59F02 /* ODCollectionController.m */; };
 		D4F76DD71C61B07B00D59F02 /* ODLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DD61C61B07B00D59F02 /* ODLikeModel.m */; };
+		D4F76DDB1C61BB4D00D59F02 /* ODActivityPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DD91C61BB4D00D59F02 /* ODActivityPersonCell.m */; };
+		D4F76DDC1C61BB4D00D59F02 /* ODActivityPersonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F76DDA1C61BB4D00D59F02 /* ODActivityPersonCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -675,6 +677,9 @@
 		D4F76DD21C61B04700D59F02 /* ODCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCollectionController.m; sourceTree = "<group>"; };
 		D4F76DD51C61B07B00D59F02 /* ODLikeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLikeModel.h; sourceTree = "<group>"; };
 		D4F76DD61C61B07B00D59F02 /* ODLikeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLikeModel.m; sourceTree = "<group>"; };
+		D4F76DD81C61BB4D00D59F02 /* ODActivityPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityPersonCell.h; sourceTree = "<group>"; };
+		D4F76DD91C61BB4D00D59F02 /* ODActivityPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityPersonCell.m; sourceTree = "<group>"; };
+		D4F76DDA1C61BB4D00D59F02 /* ODActivityPersonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODActivityPersonCell.xib; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1386,6 +1391,9 @@
 				D4F76DC51C61B01200D59F02 /* ODActivityBottomCell.xib */,
 				D4F76DC61C61B01200D59F02 /* ODActivityDetailBtn.h */,
 				D4F76DC71C61B01200D59F02 /* ODActivityDetailBtn.m */,
+				D4F76DD81C61BB4D00D59F02 /* ODActivityPersonCell.h */,
+				D4F76DD91C61BB4D00D59F02 /* ODActivityPersonCell.m */,
+				D4F76DDA1C61BB4D00D59F02 /* ODActivityPersonCell.xib */,
 				D4F76DC81C61B01200D59F02 /* ODActivityDetailContentCell.h */,
 				D4F76DC91C61B01200D59F02 /* ODActivityDetailContentCell.m */,
 				D4F76DCA1C61B01200D59F02 /* ODActivityDetailContentCell.xib */,
@@ -2204,6 +2212,7 @@
 				C64D460D1C5F8C6F003BFFA0 /* UMSocialSDKResourcesNew.bundle in Resources */,
 				D46C903F1C605841004942E7 /* ODNewActivityCell.xib in Resources */,
 				C64D46061C5F8C6F003BFFA0 /* UMSCommentInputController.xib in Resources */,
+				D4F76DDC1C61BB4D00D59F02 /* ODActivityPersonCell.xib in Resources */,
 				9D16BDD41C59EEDA003627CD /* ODViolationsCell.xib in Resources */,
 				C64D46031C5F8C6F003BFFA0 /* UMSocialLocalizable.strings in Resources */,
 				D4D075151C59B9FA008527C9 /* ODInformationView.xib in Resources */,
@@ -2315,6 +2324,7 @@
 			files = (
 				C64D45E71C5F8C6F003BFFA0 /* UIImage+ODExtension.m in Sources */,
 				D4F76DCB1C61B01200D59F02 /* ODActivityBottomCell.m in Sources */,
+				D4F76DDB1C61BB4D00D59F02 /* ODActivityPersonCell.m in Sources */,
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
 				D4D073901C59B9FA008527C9 /* ODOtherTopicViewController.m in Sources */,

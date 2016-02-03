@@ -26,7 +26,7 @@
     [ODActivityDetailModel mj_setupObjectClassInArray:^NSDictionary *{
         return @{
                  @"savants" :[ODActivityDetailVIPModel class],
-//                 @"applies" :[ODActivityDetailAppliesModel class]
+                 @"applies" :[ODActivityDetailAppliesModel class]
         };
     }];
 }
