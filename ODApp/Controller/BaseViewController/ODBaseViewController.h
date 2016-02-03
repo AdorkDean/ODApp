@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "ODClassMethod.h"
 #import "MBProgressHUD.h"
+#import "ODHttpTool.h"
+
 @interface ODBaseViewController : UIViewController <MBProgressHUDDelegate>
 @property (nonatomic,strong)    MBProgressHUD *HUD;
 //导航的标题视图

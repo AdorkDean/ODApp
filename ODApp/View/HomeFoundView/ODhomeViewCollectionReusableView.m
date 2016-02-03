@@ -152,6 +152,7 @@
         
         [self.changeSkillView addSubview:changeSkillImage];
         [self.changeSkillView addSubview:changeSkillLabel];
+        
     }
     
     return self;

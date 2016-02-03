@@ -83,13 +83,12 @@
 #pragma mark - 创建searchBar
 -(void)createSearchBar
 {
-    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(10, 70, kScreenSize.width-20, 30)];
+    self.searchBar = [[UISearchBar alloc]initWithFrame:CGRectMake(10, 8, kScreenSize.width-20, 30)];
     [[[[ self.searchBar. subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
-    self.searchBar.backgroundColor = [UIColor clearColor];
+    self.searchBar.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     self.searchBar.delegate = self;
     self.searchBar.placeholder = @"标签关键字";
     [self.view addSubview:self.searchBar];
-//    [self.navigationItem setTitleView:self.searchBar];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -199,7 +198,7 @@
     flowLayout.minimumInteritemSpacing = 5;
     flowLayout.minimumLineSpacing = 5;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,106, kScreenSize.width, kScreenSize.height - 106) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,46, kScreenSize.width, kScreenSize.height - 110) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];

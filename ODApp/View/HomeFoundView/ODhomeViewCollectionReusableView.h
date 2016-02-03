@@ -60,7 +60,9 @@
 
 @property (nonatomic, strong)UIButton *gestureButton;
 
-
 @property (nonatomic, strong)UIView *changeSkillView;
+
+@property (nonatomic, strong)UIButton *moreSkillButton;
+
 
 @end

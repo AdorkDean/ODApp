@@ -9,6 +9,8 @@
 #import "ODHomeFoundViewController.h"
 #import "ODUserInformation.h"
 
+
+#define cellID @"ODBazaarExchangeSkillCollectionCell"
 @interface ODHomeFoundViewController ()
 {
     NSMutableDictionary *userInfoDic;
@@ -35,7 +37,8 @@
     userInfoDic = [NSMutableDictionary dictionary];
     
     [self createCollectionView];
-    
+    [self getScrollViewRequest];
+    [self getSkillChangeRequest];
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self refreshdata];
         
@@ -43,11 +46,11 @@
     
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self getSkillChangeRequest];
-}
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+////    [self getSkillChangeRequest];
+//}
 
 - (void)refreshdata
 {
@@ -133,39 +136,21 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    NSDictionary *parameter = @{@"type":@"3",@"page":@"1"};
+    NSDictionary *parameter = @{@"city_id":@"0",@"page":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:kHomeFoundListUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [self.manager GET:kBazaarExchangeSkillUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            [weakSelf.dataArray removeAllObjects];
-            
-            NSDictionary *result = dict[@"result"];
-            NSDictionary *bbs_list = result[@"bbs_list"];
-            for (id bbsKey in bbs_list) {
-                NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
-                NSDictionary *itemDict = bbs_list[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc] init];
+            NSArray *result = dict[@"result"];
+            for (NSDictionary *itemDict in result) {
+                ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
             }
-          
-            [weakSelf mySort:weakSelf.dataArray];
-            
-            NSDictionary *users = result[@"users"];
-            for (id userKey in users) {
-                NSString *key = [NSString stringWithFormat:@"%@",userKey];
-                NSDictionary *itemDict = users[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc] init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [userInfoDic setObject:model forKey:userKey];
-            }
-            
-            [weakSelf getScrollViewRequest];
+            [weakSelf createCollectionView];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -313,7 +298,7 @@
 - (void)gestureButtonClick:(UIButton *)button
 {
     
-    [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"加入更多"];
+    self.tabBarController.selectedIndex = 3;
 }
 
 // Skill Change
@@ -335,6 +320,12 @@
     
 }
 
+- (void)moreSkillButtonClick:(UIButton *)button
+{
+
+    self.tabBarController.selectedIndex = 2;
+}
+
 #pragma mark - CreateUICollectionView
 
 - (void)createCollectionView
@@ -347,12 +338,14 @@
     self.flowLayout.minimumLineSpacing = 2;
     self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
-    [self.collectionView registerClass:[ODhomeViewCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"rsusableView"];
+    [self.collectionView registerClass:[ODhomeViewCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];
    
+    [self.collectionView registerClass:[ODHomeFoundFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"supple"];
+    
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
+    [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
     
     [self.view addSubview:self.collectionView];
 }
@@ -374,83 +367,135 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommunityCellId forIndexPath:indexPath];
-    ODCommunityModel *model = self.dataArray[indexPath.row];
+    ODBazaarExchangeSkillCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    [cell showDateWithModel:model];
+    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+    [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
     [cell.headButton addTarget:self action:@selector(headButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
-    cell.nickLabel.text = [userInfoDic[userId]nick];
-    [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[userInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
+    cell.nickLabel.text = model.user[@"nick"];
+    [cell showDatasWithModel:model];
+    
+    if (model.imgs_small.count) {
+        for (id vc in cell.picView.subviews) {
+            [vc removeFromSuperview];
+        }
+        if (model.imgs_small.count==4) {
+            for (NSInteger i = 0; i < model.imgs_small.count; i++) {
+                NSDictionary *dict = model.imgs_small[i];
+                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((90+5)*(i%2), (90+5)*(i/2), 90, 90)];
+                [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]]];
+                [cell.picView addSubview:imageView];
+            }
+            cell.picViewConstraintHeight.constant = 195;
+        }else{
+            for (NSInteger i = 0;i < model.imgs_small.count ; i++) {
+                NSDictionary *dict = model.imgs_small[i];
+                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((90+5)*(i%3), (90+5)*(i/3), 90, 90)];
+                [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]]];
+                [cell.picView addSubview:imageView];
+            }
+            cell.picViewConstraintHeight.constant = 90+(90+5)*(model.imgs_small.count/3);
+        }
+    }else{
+        for (id vc in cell.picView.subviews) {
+            [vc removeFromSuperview];
+        }
+        cell.picViewConstraintHeight.constant = 0;
+    }
 
+    
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc] init];
-    ODCommunityModel *model = self.dataArray[indexPath.row];
-    detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
-    [self.navigationController pushViewController:detailController animated:YES];
+    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+    ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc]init];
+    detailControler.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
+    [self.navigationController pushViewController:detailControler animated:YES];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     
-    self.rsusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"rsusableView" forIndexPath:indexPath];
-
-    self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 2/3 * self.pictureArray.count , 0);
-    self.rsusableView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 15) * 2/3, 0);
-//    self.rsusableView.scrollView.pagingEnabled = YES;
-    self.rsusableView.scrollView.delegate = self;
-    self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
-    self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;
+    static NSString *viewId = @"supple";
     
-    for (int i = 0; i < self.pictureArray.count; i++) {
+    self.rsusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:viewId forIndexPath:indexPath];
+    
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 2/3 * self.pictureArray.count , 0);
+        self.rsusableView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 15) * 2/3, 0);
+        //    self.rsusableView.scrollView.pagingEnabled = YES;
+        self.rsusableView.scrollView.delegate = self;
+        self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
+        self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;
         
-        UIButton *imageButton;
-        if (i < self.pictureArray.count - 1) {
-            imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3 - 8, 120)];
-        }else{
-            imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3, 120)];
+        for (int i = 0; i < self.pictureArray.count; i++) {
+            
+            UIButton *imageButton;
+            if (i < self.pictureArray.count - 1) {
+                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3 - 8, 120)];
+            }else{
+                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3, 120)];
+            }
+            [imageButton sd_setBackgroundImageWithURL:[NSURL URLWithString:self.pictureArray[i]] forState:UIControlStateNormal];
+            
+            imageButton.tag = 100 + i;
+            [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+            [self.rsusableView.scrollView addSubview:imageButton];
         }
-        [imageButton sd_setBackgroundImageWithURL:[NSURL URLWithString:self.pictureArray[i]] forState:UIControlStateNormal];
         
-        imageButton.tag = 100 + i;
-        [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.scrollView addSubview:imageButton];
+        // Top Eight Button
+        [self.rsusableView.findActivityButton addTarget:self action:@selector(findActivityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.orderPlaceButton addTarget:self action:@selector(orderPlaceButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.findFavorableButton addTarget:self action:@selector(findFavorableButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.findJobButton addTarget:self action:@selector(findJobButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.searchCircleButton addTarget:self action:@selector(searchCircleButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.searchHelpButton addTarget:self action:@selector(searchHelpButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.changeSkillButton addTarget:self action:@selector(changeSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        // Search Circle
+        [self.rsusableView.emotionButton addTarget:self action:@selector(emotionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.funnyButton addTarget:self action:@selector(funnyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.moviesButton addTarget:self action:@selector(moviesButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.quadraticButton addTarget:self action:@selector(quadraticButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.beautifulButton addTarget:self action:@selector(beautifulButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.petButton addTarget:self action:@selector(petButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.rsusableView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+     
+    }else if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
+    
+        [self.rsusableView.moreSkillButton addTarget:self action:@selector(moreSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
-    
-    // Top Eight Button
-    [self.rsusableView.findActivityButton addTarget:self action:@selector(findActivityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.orderPlaceButton addTarget:self action:@selector(orderPlaceButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.findFavorableButton addTarget:self action:@selector(findFavorableButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.findJobButton addTarget:self action:@selector(findJobButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.searchCircleButton addTarget:self action:@selector(searchCircleButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.searchHelpButton addTarget:self action:@selector(searchHelpButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.changeSkillButton addTarget:self action:@selector(changeSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Search Circle
-    [self.rsusableView.emotionButton addTarget:self action:@selector(emotionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.funnyButton addTarget:self action:@selector(funnyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.moviesButton addTarget:self action:@selector(moviesButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.quadraticButton addTarget:self action:@selector(quadraticButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.beautifulButton addTarget:self action:@selector(beautifulButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [self.rsusableView.petButton addTarget:self action:@selector(petButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.rsusableView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
     return self.rsusableView;
 }
+
+//动态计算cell的高度
+-(CGFloat)returnHight:(ODBazaarExchangeSkillModel *)model
+{
+    if (model.imgs_small.count==0) {
+        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13];
+    }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
+        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+90;
+    }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
+        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+185;
+    }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
+        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+280;
+    }else{
+        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+280;
+    }
+}
+
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return CGSizeMake(kScreenSize.width, 120);
+    return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
@@ -459,11 +504,13 @@
     return CGSizeMake(0, 1 + CGRectGetMaxY(self.rsusableView.changeSkillView.frame));
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    
-    return CGSizeMake(0, 0);
+
+    return CGSizeMake(0, 30);
 }
+
+
 
 
 @end

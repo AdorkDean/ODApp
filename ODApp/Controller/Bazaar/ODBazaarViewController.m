@@ -23,7 +23,24 @@
     
     self.navigationItem.title = @"欧动集市";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(releaseButtonClick:) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil];
-    
+}
+
+-(void)releaseButtonClick:(UIButton *)button
+{
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+        
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
+        
+    }else{
+        ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
+        releaseTask.isBazaar = YES;
+        
+        releaseTask.myBlock = ^(NSString *release){
+//            self.refresh = release;
+        };
+        [self.navigationController pushViewController:releaseTask animated:YES];
+    }
 }
 
 -(void)createSkillAndHelpButton
@@ -50,6 +67,9 @@
 -(void)changeController:(UIButton *)button
 {
     CGPoint point = CGPointMake(kScreenSize.width*(button.tag-10010), 0);
+    NSInteger i = point.x / self.view.frame.size.width;
+    self.lineView.frame = CGRectMake((kScreenSize.width/2)*i, 38, kScreenSize.width/2, 2);
+    [self.view addSubview:self.lineView];
     [self.scrollView setContentOffset:point animated:YES];
 }
 
@@ -82,7 +102,6 @@
 {
     if (![scrollView isEqual:self.scrollView])
         return;
-    
     NSInteger i = scrollView.contentOffset.x / self.view.frame.size.width;
     self.lineView.frame = CGRectMake((kScreenSize.width/2)*i, 38, kScreenSize.width/2, 2);
     [self.view addSubview:self.lineView];
