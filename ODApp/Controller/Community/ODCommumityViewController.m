@@ -269,15 +269,15 @@
 {
     CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs.count==0) {
-        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14];
+        return 120+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14];
     }else if (model.imgs.count>0&&model.imgs.count<4){
-        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+width;
+        return 120+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+width;
     }else if (model.imgs.count>=4&&model.imgs.count<7){
-        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+2*width+5;
+        return 120+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+2*width+5;
     }else if (model.imgs.count>=7&&model.imgs.count<9){
-        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+3*width+10;
+        return 120+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+3*width+10;
     }else{
-        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+3*width+10;
+        return 120+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+3*width+10;
     }
 }
 #pragma mark - 试图将要出现
