@@ -98,6 +98,7 @@
 		C64D461E1C5F8D6F003BFFA0 /* DataButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D46171C5F8D6F003BFFA0 /* DataButton.m */; };
 		C64D461F1C5F8D6F003BFFA0 /* ODAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D46191C5F8D6F003BFFA0 /* ODAddressModel.m */; };
 		C64D46211C5F8D6F003BFFA0 /* ODOrderDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D461D1C5F8D6F003BFFA0 /* ODOrderDataModel.m */; };
+		C6F97B421C619B7B0037975C /* ODLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F97B411C619B7B0037975C /* ODLocationController.m */; };
 		D46C90301C6041B4004942E7 /* ODNewActivityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */; };
 		D46C90381C6043DA004942E7 /* ODNewActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C90371C6043DA004942E7 /* ODNewActivityCell.m */; };
 		D46C903B1C604F79004942E7 /* ODActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C903A1C604F79004942E7 /* ODActivityDetailViewController.m */; };
@@ -422,6 +423,8 @@
 		C64D46191C5F8D6F003BFFA0 /* ODAddressModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAddressModel.m; sourceTree = "<group>"; };
 		C64D461C1C5F8D6F003BFFA0 /* ODOrderDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderDataModel.h; sourceTree = "<group>"; };
 		C64D461D1C5F8D6F003BFFA0 /* ODOrderDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderDataModel.m; sourceTree = "<group>"; };
+		C6F97B401C619B7B0037975C /* ODLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLocationController.h; sourceTree = "<group>"; };
+		C6F97B411C619B7B0037975C /* ODLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLocationController.m; sourceTree = "<group>"; };
 		D46C902D1C6041B4004942E7 /* ODNewActivityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCenterViewController.h; sourceTree = "<group>"; };
 		D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewActivityCenterViewController.m; sourceTree = "<group>"; };
 		D46C90361C6043DA004942E7 /* ODNewActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCell.h; sourceTree = "<group>"; };
@@ -1384,6 +1387,15 @@
 			path = Tools;
 			sourceTree = "<group>";
 		};
+		C6F97B3F1C619B7B0037975C /* ODLocationController */ = {
+			isa = PBXGroup;
+			children = (
+				C6F97B401C619B7B0037975C /* ODLocationController.h */,
+				C6F97B411C619B7B0037975C /* ODLocationController.m */,
+			);
+			path = ODLocationController;
+			sourceTree = "<group>";
+		};
 		D46C902A1C6041B4004942E7 /* ODActivityCenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -1546,10 +1558,11 @@
 		D4D071061C59B9FA008527C9 /* HomeFound */ = {
 			isa = PBXGroup;
 			children = (
+				D4D0710A1C59B9FA008527C9 /* ODHomeFoundController */,
+				C6F97B3F1C619B7B0037975C /* ODLocationController */,
 				C64D40901C5E088A003BFFA0 /* ODChangeSkill */,
 				9DC05DD61C5DA7B900181DFE /* ODCollectioncController */,
 				D4D071071C59B9FA008527C9 /* ODCenterIntroduceController */,
-				D4D0710A1C59B9FA008527C9 /* ODHomeFoundController */,
 				D4D0710D1C59B9FA008527C9 /* ODLazyViewController */,
 			);
 			path = HomeFound;
@@ -2292,6 +2305,7 @@
 				9D16BDD31C59EEDA003627CD /* ODViolationsCell.m in Sources */,
 				D4D075161C59B9FA008527C9 /* ODLandFirstCell.m in Sources */,
 				D4D0751A1C59B9FA008527C9 /* ODRegisteredView.m in Sources */,
+				C6F97B421C619B7B0037975C /* ODLocationController.m in Sources */,
 				D4D075031C59B9FA008527C9 /* CenterActivityModel.m in Sources */,
 				D4D075101C59B9FA008527C9 /* ODlandingView.m in Sources */,
 				C64D46001C5F8C6F003BFFA0 /* SDCollectionViewCell.m in Sources */,
