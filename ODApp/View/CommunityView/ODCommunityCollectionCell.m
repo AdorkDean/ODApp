@@ -15,8 +15,8 @@
     self.headButton.layer.masksToBounds = YES;
     self.headButton.layer.cornerRadius = 30;
     self.nickLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-    self.signLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-    self.timeLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+    self.signLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.timeLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
 }
 

@@ -26,7 +26,7 @@
                             <constraint firstAttribute="height" constant="21" id="Kqc-eT-TMV"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJR-PQ-Jvk">
@@ -36,12 +36,13 @@
                             <constraint firstAttribute="height" constant="21" id="P1Q-vf-zMn"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_man" translatesAutoresizingMaskIntoConstraints="NO" id="4Gf-N6-WPl">
                         <rect key="frame" x="87" y="48" width="10" height="20"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="10" id="bFo-Ye-I2J"/>
                             <constraint firstAttribute="height" constant="20" id="jzO-SA-KOr"/>
                         </constraints>
                     </imageView>
@@ -52,7 +53,7 @@
                             <constraint firstAttribute="width" constant="250" id="Wyg-9h-23H"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hr6-EL-V7w">
@@ -69,7 +70,7 @@
                             <constraint firstAttribute="height" constant="22" id="p1I-oo-aCR"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_Collection" translatesAutoresizingMaskIntoConstraints="NO" id="dDI-L7-eOR">
@@ -86,7 +87,7 @@
                             <constraint firstAttribute="height" constant="21" id="x8P-7j-SIn"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwH-6z-Myb">
@@ -96,7 +97,7 @@
                             <constraint firstAttribute="height" constant="21" id="gys-mZ-Les"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_share" translatesAutoresizingMaskIntoConstraints="NO" id="JdT-4Q-zLf">
@@ -145,6 +146,7 @@
             <connections>
                 <outlet property="contentLabel" destination="UI7-aa-fLA" id="5V1-wc-YrA"/>
                 <outlet property="contentLabelConstraintHeight" destination="p1I-oo-aCR" id="Xu5-sS-Qyp"/>
+                <outlet property="genderImageView" destination="4Gf-N6-WPl" id="Arw-1J-1KB"/>
                 <outlet property="headButton" destination="bCh-Ex-1yr" id="jCo-3G-zML"/>
                 <outlet property="loveLabel" destination="OwH-6z-Myb" id="XN3-IF-H1W"/>
                 <outlet property="nickLabel" destination="fT4-PT-V8T" id="m1M-1g-vPw"/>
@@ -160,6 +162,6 @@
     <resources>
         <image name="icon_Collection" width="12" height="11"/>
         <image name="icon_man" width="6" height="12"/>
-        <image name="icon_share" width="11" height="11"/>
+        <image name="icon_share" width="15" height="15"/>
     </resources>
 </document>

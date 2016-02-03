@@ -8,7 +8,28 @@
 
 #import "ODActivityDetailModel.h"
 
+@implementation ODActivityDetailAppliesModel
+
+
+@end
+
+@implementation ODActivityDetailVIPModel
+
+
+@end
+
 @implementation ODActivityDetailModel
+
++ (void)initialize
+{
+    
+    [ODActivityDetailModel mj_setupObjectClassInArray:^NSDictionary *{
+        return @{
+                 @"savants" :[ODActivityDetailVIPModel class],
+//                 @"applies" :[ODActivityDetailAppliesModel class]
+        };
+    }];
+}
 
 @end
 

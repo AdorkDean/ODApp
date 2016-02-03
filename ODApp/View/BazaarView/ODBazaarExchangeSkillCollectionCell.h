@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *loveLabel;
 @property (weak, nonatomic) IBOutlet UILabel *shareLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *genderImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *picViewConstraintHeight;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelConstraintHeight;
