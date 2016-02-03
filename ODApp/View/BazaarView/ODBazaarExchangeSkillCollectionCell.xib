@@ -20,19 +20,10 @@
                             <constraint firstAttribute="width" constant="60" id="pFp-dq-Wwi"/>
                         </constraints>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjv-ul-Sja">
-                        <rect key="frame" x="87" y="17" width="190" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJR-PQ-Jvk">
+                        <rect key="frame" x="290" y="17" width="68" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="Kqc-eT-TMV"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJR-PQ-Jvk">
-                        <rect key="frame" x="280" y="17" width="78" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="68" id="Mgt-3I-eg7"/>
+                            <constraint firstAttribute="width" constant="68" id="Mgt-3I-eg7" userLabel="width = 78"/>
                             <constraint firstAttribute="height" constant="21" id="P1Q-vf-zMn"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -107,6 +98,15 @@
                             <constraint firstAttribute="height" constant="20" id="fQT-pq-NIV"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjv-ul-Sja">
+                        <rect key="frame" x="87" y="17" width="200" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Kqc-eT-TMV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>

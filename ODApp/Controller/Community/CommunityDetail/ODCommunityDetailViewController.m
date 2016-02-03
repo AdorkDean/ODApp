@@ -223,7 +223,7 @@
     [self.bbsView addSubview:bbsTitleLabel];
     
     //bbs内容
-    UILabel *bbsContentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12.5, CGRectGetMaxY(bbsTitleLabel.frame)+17.5,kScreenSize.width-25, [ODHelp textHeightFromTextString:resultModel.content width:kScreenSize.width-25 fontSize:15]) text:resultModel.content font:14 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
+    UILabel *bbsContentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12.5, CGRectGetMaxY(bbsTitleLabel.frame)+17.5,kScreenSize.width-25, [ODHelp textHeightFromTextString:resultModel.content width:kScreenSize.width-25 fontSize:15]) text:resultModel.content font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
     [self.bbsView addSubview:bbsContentLabel];
 
     __weakSelf
