@@ -13,7 +13,7 @@
 
 @interface ODActivityPersonCell ()
 
-@property (weak, nonatomic) IBOutlet UIView *headImgsView;
+@property (weak, nonatomic) IBOutlet UIScrollView *headImgsView;
 
 @end
 

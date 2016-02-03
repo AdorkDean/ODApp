@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dr5-BW-M3Q">
-                        <rect key="frame" x="17.5" y="17.5" width="34" height="13.5"/>
+                        <rect key="frame" x="17" y="17" width="34" height="13.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="13.5" id="aWv-6K-LTu"/>
                         </constraints>
@@ -23,25 +23,48 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ne2-Pu-Yt9">
-                        <rect key="frame" x="17" y="31" width="285.5" height="64.5"/>
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mlE-Xr-f16">
+                        <rect key="frame" x="17" y="30" width="285" height="65"/>
+                    </scrollView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="89C-98-uJV">
+                        <rect key="frame" x="301" y="30" width="19" height="65"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Skills profile page_icon_arrow_upper" translatesAutoresizingMaskIntoConstraints="NO" id="w1V-nv-svb">
+                                <rect key="frame" x="-6" y="27" width="7" height="12.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="12.5" id="FKN-eS-h9J"/>
+                                    <constraint firstAttribute="width" constant="7" id="Lbm-se-Vyy"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="w1V-nv-svb" firstAttribute="centerY" secondItem="89C-98-uJV" secondAttribute="centerY" id="gps-jM-Eaj"/>
+                            <constraint firstAttribute="trailing" secondItem="w1V-nv-svb" secondAttribute="trailing" constant="18" id="qvR-Y6-taJ"/>
+                        </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="ne2-Pu-Yt9" secondAttribute="trailing" constant="17.5" id="3P1-Zu-bjN"/>
-                    <constraint firstItem="ne2-Pu-Yt9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17.5" id="5qF-2e-ed0"/>
+                    <constraint firstItem="89C-98-uJV" firstAttribute="top" secondItem="mlE-Xr-f16" secondAttribute="top" id="2wh-Sl-iEb"/>
+                    <constraint firstItem="mlE-Xr-f16" firstAttribute="top" secondItem="dr5-BW-M3Q" secondAttribute="bottom" id="5Tl-DG-vPv"/>
+                    <constraint firstItem="89C-98-uJV" firstAttribute="leading" secondItem="mlE-Xr-f16" secondAttribute="trailing" constant="-1.5" id="AG9-FS-fnI"/>
+                    <constraint firstAttribute="trailing" secondItem="mlE-Xr-f16" secondAttribute="trailing" constant="17.5" id="DR6-t9-AFD"/>
                     <constraint firstItem="dr5-BW-M3Q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17.5" id="IgD-8l-OOe"/>
                     <constraint firstItem="dr5-BW-M3Q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17.5" id="S4L-Hs-jSI"/>
-                    <constraint firstAttribute="bottom" secondItem="ne2-Pu-Yt9" secondAttribute="bottom" id="Xpl-To-C0m"/>
-                    <constraint firstItem="ne2-Pu-Yt9" firstAttribute="top" secondItem="dr5-BW-M3Q" secondAttribute="bottom" id="kiS-dw-Cee"/>
+                    <constraint firstAttribute="trailing" secondItem="89C-98-uJV" secondAttribute="trailing" id="aur-of-qBS"/>
+                    <constraint firstItem="mlE-Xr-f16" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17.5" id="mcn-Pe-jwy"/>
+                    <constraint firstAttribute="bottom" secondItem="mlE-Xr-f16" secondAttribute="bottom" id="oA3-R7-B0x"/>
+                    <constraint firstAttribute="bottom" secondItem="89C-98-uJV" secondAttribute="bottom" id="pAw-MN-WRG"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="activePersonNumLabel" destination="dr5-BW-M3Q" id="Rzh-NA-qu2"/>
-                <outlet property="headImgsView" destination="ne2-Pu-Yt9" id="6GO-dh-3hU"/>
+                <outlet property="headImgsView" destination="mlE-Xr-f16" id="3xo-LR-0k3"/>
             </connections>
             <point key="canvasLocation" x="228" y="247"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="Skills profile page_icon_arrow_upper" width="7" height="12"/>
+    </resources>
 </document>
