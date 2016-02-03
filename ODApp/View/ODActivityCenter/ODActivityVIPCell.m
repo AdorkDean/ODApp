@@ -9,10 +9,5 @@
 #import "ODActivityVIPCell.h"
 
 @implementation ODActivityVIPCell
-- (void)awakeFromNib
-{
-    self.VIPHeadImgView.layer.cornerRadius = self.VIPHeadImgView.od_height / 2;
-    self.VIPHeadImgView.layer.masksToBounds = YES;
-}
 
 @end

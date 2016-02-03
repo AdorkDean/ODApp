@@ -8,7 +8,12 @@
 
 #import "ODBaseViewController.h"
 
+#import <MAMapKit/MAMapKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
 
-@interface ODLocationController : ODBaseViewController
+@interface ODLocationController : ODBaseViewController<MAMapViewDelegate, AMapSearchDelegate>
+
+@property (nonatomic, strong) UIImageView *centerImageView;
+
 
 @end

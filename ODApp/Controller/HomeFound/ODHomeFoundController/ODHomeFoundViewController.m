@@ -14,8 +14,6 @@
 @interface ODHomeFoundViewController ()
 {
     NSMutableDictionary *userInfoDic;
-    
-//    NSInteger image_I;
 }
 @end
 
@@ -171,7 +169,8 @@
 - (void)locationButtonClick:(UIButton *)button
 {
     
-    
+    ODLocationController *vc = [[ODLocationController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //Toop Eight Button
@@ -524,7 +523,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
 
-    return CGSizeMake(0, 30);
+    return CGSizeMake(0, 42);
 }
 
 

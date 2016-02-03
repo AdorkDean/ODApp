@@ -22,4 +22,22 @@
     return theImage;
 }
 
+- (instancetype)OD_circleImage
+{
+    UIGraphicsBeginImageContext(self.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGRect rect = CGRectMake(0, 0, self.size.width, self.size.height);
+    CGContextAddEllipseInRect(context, rect);
+    CGContextClip(context);
+    [self drawInRect:rect];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
++ (instancetype)OD_circleImageNamed:(NSString *)name
+{
+    return [[self imageNamed:name] OD_circleImage];
+}
+
 @end
