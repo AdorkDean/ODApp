@@ -20,6 +20,7 @@
 @interface ODActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong)UITableView *tableView;
+
 /**
  *  活动嘉宾
  */
@@ -55,14 +56,8 @@ static NSString * const activePersonCell = @"activePersonCell";
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.tableFooterView = [UIView new];
-        tableView.estimatedRowHeight = 200;
-        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailHeadImgViewCell class]) bundle:nil] forCellReuseIdentifier:headImgCell];
-        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailInfoViewCell class]) bundle:nil] forCellReuseIdentifier:detailInfoCell];
-        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityVIPCell class]) bundle:nil] forCellReuseIdentifier:VIPCell];
-        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailContentCell class]) bundle:nil] forCellReuseIdentifier:detailContentCell];
-        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityBottomCell class]) bundle:nil] forCellReuseIdentifier:bottomCell];
-        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityPersonCell class]) bundle:nil] forCellReuseIdentifier:activePersonCell];
         _tableView = tableView;
+        [self.view addSubview:_tableView];
     }
     return _tableView;
 }
@@ -71,10 +66,20 @@ static NSString * const activePersonCell = @"activePersonCell";
 {
     [super viewDidLoad];
     self.navigationItem.title = @"活动详情";
-    [self.view addSubview:self.tableView];
+    [self registTableViewClass];
     [self requestData];
 }
 
+- (void)registTableViewClass
+{
+    self.tableView.estimatedRowHeight = 200;
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailHeadImgViewCell class]) bundle:nil] forCellReuseIdentifier:headImgCell];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailInfoViewCell class]) bundle:nil] forCellReuseIdentifier:detailInfoCell];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityVIPCell class]) bundle:nil] forCellReuseIdentifier:VIPCell];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailContentCell class]) bundle:nil] forCellReuseIdentifier:detailContentCell];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityBottomCell class]) bundle:nil] forCellReuseIdentifier:bottomCell];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityPersonCell class]) bundle:nil] forCellReuseIdentifier:activePersonCell];
+}
 -(void)requestData
 {
     __weakSelf
