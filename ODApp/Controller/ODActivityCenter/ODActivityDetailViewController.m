@@ -173,7 +173,6 @@ static NSString * const activePersonCell = @"activePersonCell";
         cell = [tableView dequeueReusableCellWithIdentifier:activePersonCell];
         [(ODActivityPersonCell *)cell activePersonNumLabel].text = [NSString stringWithFormat:@"%d人已报名",self.resultModel.apply_cnt];
         [(ODActivityPersonCell *)cell setActivePersons:self.resultModel.applies];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if (indexPath.row == 5 + 3 + self.activityVIPs.count)
     {
@@ -238,15 +237,4 @@ ODActivityDetailContentCell *detailCell;
     return 0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 9)
-    {
-        return 100;
-    }
-    else
-    {
-        return 40;
-    }
-}
 @end
