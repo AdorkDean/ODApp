@@ -32,6 +32,7 @@
     [self drawInRect:rect];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
+    
     return image;
 }
 
@@ -39,5 +40,4 @@
 {
     return [[self imageNamed:name] OD_circleImage];
 }
-
 @end

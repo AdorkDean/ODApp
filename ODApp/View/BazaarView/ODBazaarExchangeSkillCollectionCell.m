@@ -30,5 +30,11 @@
     self.contentLabel.text = model.content;
     self.loveLabel.text = [NSString stringWithFormat:@"%@",model.love_num];
     self.shareLabel.text = [NSString stringWithFormat:@"%@",model.share_num];
+    NSString *gender = [NSString stringWithFormat:@"%@",model.user[@"gender"]];
+    if ([gender isEqualToString:@"2"]) {
+        self.genderImageView.image = [UIImage imageNamed:@"icon_woman"];
+    }else{
+        self.genderImageView.image = [UIImage imageNamed:@"icon_man"];
+    }
 }
 @end

@@ -15,10 +15,12 @@
 #import "ODActivityDetailInfoViewCell.h"
 #import "ODActivityVIPCell.h"
 #import "ODActivityDetailContentCell.h"
+#import "ODActivityPersonCell.h"
 
 @interface ODActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (nonatomic, strong)UITableView *tableView;
+
 /**
  *  活动嘉宾
  */
@@ -42,6 +44,7 @@ static NSString * const headImgCell = @"headImgCell";
 static NSString * const VIPCell = @"VIPCell";
 static NSString * const detailContentCell = @"detailContentCell";
 static NSString * const bottomCell = @"bottomCell";
+static NSString * const activePersonCell = @"activePersonCell";
 
 #pragma mark - lazyLoad
 
@@ -53,13 +56,8 @@ static NSString * const bottomCell = @"bottomCell";
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.tableFooterView = [UIView new];
-        tableView.estimatedRowHeight = 200;
-        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailHeadImgViewCell class]) bundle:nil] forCellReuseIdentifier:headImgCell];
-        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailInfoViewCell class]) bundle:nil] forCellReuseIdentifier:detailInfoCell];
-        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityVIPCell class]) bundle:nil] forCellReuseIdentifier:VIPCell];
-        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailContentCell class]) bundle:nil] forCellReuseIdentifier:detailContentCell];
-        [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityBottomCell class]) bundle:nil] forCellReuseIdentifier:bottomCell];
         _tableView = tableView;
+        [self.view addSubview:_tableView];
     }
     return _tableView;
 }
@@ -68,10 +66,20 @@ static NSString * const bottomCell = @"bottomCell";
 {
     [super viewDidLoad];
     self.navigationItem.title = @"活动详情";
-    [self.view addSubview:self.tableView];
+    [self registTableViewClass];
     [self requestData];
 }
 
+- (void)registTableViewClass
+{
+    self.tableView.estimatedRowHeight = 200;
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailHeadImgViewCell class]) bundle:nil] forCellReuseIdentifier:headImgCell];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailInfoViewCell class]) bundle:nil] forCellReuseIdentifier:detailInfoCell];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityVIPCell class]) bundle:nil] forCellReuseIdentifier:VIPCell];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailContentCell class]) bundle:nil] forCellReuseIdentifier:detailContentCell];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityBottomCell class]) bundle:nil] forCellReuseIdentifier:bottomCell];
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityPersonCell class]) bundle:nil] forCellReuseIdentifier:activePersonCell];
+}
 -(void)requestData
 {
     __weakSelf
@@ -153,7 +161,7 @@ static NSString * const bottomCell = @"bottomCell";
         ODActivityDetailVIPModel *vipModel = self.resultModel.savants[indexPath.row - 6];
         cell = [tableView dequeueReusableCellWithIdentifier:VIPCell];
         [[(ODActivityVIPCell *)cell VIPHeadImgView] sd_setImageWithURL:[NSURL OD_URLWithString:[vipModel avatar]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            [image OD_circleImage];
+             [[(ODActivityVIPCell *)cell VIPHeadImgView]setImage:[image OD_circleImage]];
         }];
         [[(ODActivityVIPCell *)cell VIPName]setText:vipModel.nick];
         [[(ODActivityVIPCell *)cell VIPInfoLabel]setText:vipModel.school_name];
@@ -162,14 +170,10 @@ static NSString * const bottomCell = @"bottomCell";
     }
     else if (indexPath.row == 5 + 1 + self.activityVIPs.count) //报名人
     {
-#warning 测试
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
-        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(ODLeftMargin, 17.5, cell.od_width - ODLeftMargin * 2, 13.5)];
-        label.font = [UIFont systemFontOfSize:13.5];
-        label.textAlignment = NSTextAlignmentLeft;
-        label.text = @"活动详情";
-        [cell.contentView addSubview:label];
-        
+        cell = [tableView dequeueReusableCellWithIdentifier:activePersonCell];
+        [(ODActivityPersonCell *)cell activePersonNumLabel].text = [NSString stringWithFormat:@"%d人已报名",self.resultModel.apply_cnt];
+        [(ODActivityPersonCell *)cell setActivePersons:self.resultModel.applies];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else if (indexPath.row == 5 + 3 + self.activityVIPs.count)
     {
@@ -179,6 +183,8 @@ static NSString * const bottomCell = @"bottomCell";
     else if (indexPath.row == 5 + 4 + self.activityVIPs.count)
     {
         cell = [tableView dequeueReusableCellWithIdentifier:bottomCell];
+        [[(ODActivityBottomCell *)cell shareBtn]setTitle:[NSString stringWithFormat:@"分享 %d",self.resultModel.share_cnt] forState:UIControlStateNormal];
+        [[(ODActivityBottomCell *)cell goodBtn]setTitle:[NSString stringWithFormat:@"赞 %d",self.resultModel.love_cnt] forState:UIControlStateNormal];
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;

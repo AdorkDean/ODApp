@@ -439,8 +439,8 @@
     self.rsusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:viewId forIndexPath:indexPath];
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 2/3 * self.pictureArray.count , 0);
-        self.rsusableView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 15) * 2/3, 0);
+        self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 17.5) * 2/3 * self.pictureArray.count , 0);
+        self.rsusableView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 17.5) * 2/3, 0);
         //    self.rsusableView.scrollView.pagingEnabled = YES;
         self.rsusableView.scrollView.delegate = self;
         self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
@@ -450,9 +450,9 @@
             
             UIButton *imageButton;
             if (i < self.pictureArray.count - 1) {
-                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3 - 8, 120)];
+                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 17.5) * 2/3 * i, 0, (kScreenSize.width - 17.5) * 2/3 - 8, 110)];
             }else{
-                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3, 120)];
+                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 17.5) * 2/3 * i, 0, (kScreenSize.width - 17.5) * 2/3, 110)];
             }
             [imageButton sd_setBackgroundImageWithURL:[NSURL URLWithString:self.pictureArray[i]] forState:UIControlStateNormal];
             

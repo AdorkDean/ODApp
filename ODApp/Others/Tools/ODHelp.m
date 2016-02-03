@@ -37,6 +37,7 @@
         
         
         NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:size]};
+//        NSString *str = [text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         CGRect rect = [text boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine attributes:dict context:nil];
         //返回计算出的行高
         return rect.size.height;
