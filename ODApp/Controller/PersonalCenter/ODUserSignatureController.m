@@ -33,7 +33,7 @@
 }
 - (void)creatTextField
 {
-    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(4, 68, kScreenSize.width - 8, 30)];
+    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 30)];
     self.textField.placeholder = @"请输入昵称";
     [self.textField setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
     [self.textField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];

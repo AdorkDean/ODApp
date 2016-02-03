@@ -44,7 +44,7 @@ static NSString * const cellId = @"newActivityCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"中心活动列表";
+    self.navigationItem.title = @"中心活动";
     [self.view addSubview:self.tableView];
     [self requestData];
 }
