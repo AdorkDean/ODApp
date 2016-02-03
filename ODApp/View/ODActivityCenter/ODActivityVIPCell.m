@@ -12,7 +12,7 @@
 - (void)awakeFromNib
 {
     self.VIPHeadImgView.layer.cornerRadius = self.VIPHeadImgView.od_height / 2;
-    self.VIPHeadImgView.clipsToBounds = YES;
+    self.VIPHeadImgView.layer.masksToBounds = YES;
 }
 
 @end

@@ -8,6 +8,47 @@
 
 #import <Foundation/Foundation.h>
 
+@interface ODActivityDetailAppliesModel : NSObject
+
+@property (nonatomic, assign) int gender;
+
+@property (nonatomic, strong) NSString *nick;
+
+@property (nonatomic, strong) NSString *avatar;
+
+@property (nonatomic, assign) int id;
+
+@property (nonatomic, strong) NSString *open_id;
+
+@property (nonatomic, strong) NSString *sign;
+
+@property (nonatomic, strong) NSString *avatar_url;
+
+@end
+
+@interface ODActivityDetailVIPModel : NSObject
+
+@property (nonatomic, strong) NSString *avatar;
+
+@property (nonatomic, strong) NSString *nick;
+
+@property (nonatomic, assign) int gender;
+
+@property (nonatomic, strong) NSString *sign;
+
+@property (nonatomic, strong) NSString *title;
+
+@property (nonatomic, strong) NSString *open_id;
+
+@property (nonatomic, assign) int user_auth_status;
+
+@property (nonatomic, strong) NSString *profile;
+
+@property (nonatomic, strong) NSString *school_name;
+
+@end
+
+
 @interface ODActivityDetailModel : NSObject
 
 @property (nonatomic, assign) int love_cnt;
@@ -46,7 +87,7 @@
 
 @property (nonatomic, strong) NSString *lat;
 
-@property (nonatomic, assign) NSArray *savants;
+@property (nonatomic, strong) NSArray *savants;
 
 @property (nonatomic, assign) int apply_status;
 

@@ -9,7 +9,6 @@
 #import "ODActivityDetailContentCell.h"
 
 @implementation ODActivityDetailContentCell
-
 - (CGFloat)height
 {
     // 强制布局cell内部的所有子控件(label根据文字多少计算出自己最真实的尺寸)
