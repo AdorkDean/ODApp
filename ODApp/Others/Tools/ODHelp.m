@@ -35,16 +35,12 @@
         //ghjdgkfgsfgskdgfjk
         //sdhgfsdjkhgfjd
         
+        
         NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:size]};
         CGRect rect = [text boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine attributes:dict context:nil];
-        
+        //返回计算出的行高
+        return rect.size.height;
 
-            return rect.size.height;
-
-        
-        
-        
-        
         
     }else {
         //iOS7之前
