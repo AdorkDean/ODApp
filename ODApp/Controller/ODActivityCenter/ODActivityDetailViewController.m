@@ -82,12 +82,13 @@ static NSString * const activePersonCell = @"activePersonCell";
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:@"button_sign up"] forState:UIControlStateNormal];
-    [btn.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.bottom.left.right.offset(0);
-    }];
+    [btn addTarget:self action:@selector(report:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
     [btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.offset(0);
+    }];
+    [btn.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.left.right.offset(0);
     }];
     [btn layoutIfNeeded];
     bottonBtnHeight = btn.od_height;
@@ -118,6 +119,11 @@ static NSString * const activePersonCell = @"activePersonCell";
      {
          
      }];
+}
+
+- (void)report:(UIButton *)btn
+{
+    
 }
 
 #pragma mark - UITableViewDataSource
