@@ -18,6 +18,9 @@ UIKIT_EXTERN NSString * const KUserDefaultsOpenId;
 /** 显示集市的通知 */
 UIKIT_EXTERN NSString * const ODNotificationShowBazaar;
 
+/** 定位城市的通知 */
+UIKIT_EXTERN NSString *const ODNotificationLocation;
+
 /** 刷新我的话题通知 */
 UIKIT_EXTERN NSString * const ODNotificationMyTaskRefresh;
 

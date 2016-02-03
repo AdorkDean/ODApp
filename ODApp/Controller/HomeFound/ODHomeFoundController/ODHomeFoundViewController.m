@@ -23,9 +23,13 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"首页";
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLocation:) name:ODNotificationLocation object:nil];
     
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:self.locationButton.titleLabel.text];
+    
+    
+    self.navigationItem.title = @"首页";
+//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.pictureArray = [[NSMutableArray alloc] init];
@@ -44,11 +48,11 @@
     
 }
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-////    [self getSkillChangeRequest];
-//}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];//}
+}
 
 - (void)refreshdata
 {
@@ -76,7 +80,7 @@
     return mArray;
 }
 
-#pragma mark - Location Button
+#pragma mark - Location
 
 - (void)CreateLocationButtonAction
 {
@@ -165,12 +169,18 @@
 
 #pragma mark - Action
 
-// Location Button
+// Location
 - (void)locationButtonClick:(UIButton *)button
 {
     
     ODLocationController *vc = [[ODLocationController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)notificationLocation:(NSNotification *)locationButtonText
+{
+    
+    [self.locationButton setTitle:locationButtonText.userInfo[@"cityName"] forState:UIControlStateNormal];
 }
 
 //Toop Eight Button
@@ -523,7 +533,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
 
-    return CGSizeMake(0, 42);
+    return CGSizeMake(0, 40);
 }
 
 

@@ -12,7 +12,20 @@
 
 +(instancetype)getView
 {
-    return [[[NSBundle mainBundle] loadNibNamed:@"ODRegisteredView" owner:nil options:nil] firstObject];
+    ODRegisteredView *view =  [[[NSBundle mainBundle] loadNibNamed:@"ODRegisteredView" owner:nil options:nil] firstObject];
+    
+    
+   view.backgroundColor = [UIColor whiteColor];
+   view.registereButton.layer.masksToBounds = YES;
+   view.registereButton.layer.cornerRadius = 5;
+   view.registereButton.layer.borderColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1].CGColor;
+   view.registereButton.layer.borderWidth = 1;
+   view.password.secureTextEntry = YES;
+   view.phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
+    
+       
+
+    return view;
     
 }
 
