@@ -233,6 +233,7 @@
 		D4F76D7F1C6194CD00D59F02 /* ODActivityBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D7D1C6194CD00D59F02 /* ODActivityBottomCell.m */; };
 		D4F76D801C6194CD00D59F02 /* ODActivityBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F76D7E1C6194CD00D59F02 /* ODActivityBottomCell.xib */; };
 		D4F76D831C61A08B00D59F02 /* NSDictionary+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D821C61A08B00D59F02 /* NSDictionary+ODExtension.m */; };
+		D4F76D861C61A87200D59F02 /* ODActivityDetailBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76D851C61A87100D59F02 /* ODActivityDetailBtn.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -669,6 +670,8 @@
 		D4F76D7E1C6194CD00D59F02 /* ODActivityBottomCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODActivityBottomCell.xib; sourceTree = "<group>"; };
 		D4F76D811C61A08B00D59F02 /* NSDictionary+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ODExtension.h"; sourceTree = "<group>"; };
 		D4F76D821C61A08B00D59F02 /* NSDictionary+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ODExtension.m"; sourceTree = "<group>"; };
+		D4F76D841C61A87100D59F02 /* ODActivityDetailBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityDetailBtn.h; sourceTree = "<group>"; };
+		D4F76D851C61A87100D59F02 /* ODActivityDetailBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityDetailBtn.m; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1426,6 +1429,8 @@
 				D4F76D7C1C6194CD00D59F02 /* ODActivityBottomCell.h */,
 				D4F76D7D1C6194CD00D59F02 /* ODActivityBottomCell.m */,
 				D4F76D7E1C6194CD00D59F02 /* ODActivityBottomCell.xib */,
+				D4F76D841C61A87100D59F02 /* ODActivityDetailBtn.h */,
+				D4F76D851C61A87100D59F02 /* ODActivityDetailBtn.m */,
 			);
 			path = ODActivityCenter;
 			sourceTree = "<group>";
@@ -2370,6 +2375,7 @@
 				D4D073A21C59B9FA008527C9 /* ODMyApplyActivityModel.m in Sources */,
 				D4D073841C59B9FA008527C9 /* ODLazyViewController.m in Sources */,
 				D4D073701C59B9FA008527C9 /* ODBazaarDetailViewController.m in Sources */,
+				D4F76D861C61A87200D59F02 /* ODActivityDetailBtn.m in Sources */,
 				C64D45E51C5F8C6F003BFFA0 /* UIBarButtonItem+ODExtention.m in Sources */,
 				D46C903B1C604F79004942E7 /* ODActivityDetailViewController.m in Sources */,
 				D4F76D761C60CCC400D59F02 /* ODHomeFoundFooterView.m in Sources */,
