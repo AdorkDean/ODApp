@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 #import "ODHttpTool.h"
+#import "masonry.h"
 #import "UIImageView+WebCache.h"
 #import "ODActivityDetailModel.h"
 #import "ODActivityDetailViewController.h"
@@ -18,7 +19,9 @@
 #import "ODActivityPersonCell.h"
 
 @interface ODActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
-
+{
+    NSInteger bottonBtnHeight;
+}
 @property (nonatomic, strong)UITableView *tableView;
 
 /**
@@ -39,6 +42,7 @@
 
 @implementation ODActivityDetailViewController
 
+
 static NSString * const detailInfoCell = @"detailInfoCell";
 static NSString * const headImgCell = @"headImgCell";
 static NSString * const VIPCell = @"VIPCell";
@@ -52,7 +56,7 @@ static NSString * const activePersonCell = @"activePersonCell";
 {
     if (!_tableView)
     {
-        UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight - bottonBtnHeight) style:UITableViewStylePlain];
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.tableFooterView = [UIView new];
@@ -62,12 +66,32 @@ static NSString * const activePersonCell = @"activePersonCell";
     return _tableView;
 }
 
+#pragma mark - lifeCycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationItem.title = @"活动详情";
+    [self createBottomButton];
     [self registTableViewClass];
     [self requestData];
+}
+
+#pragma mark - init
+- (void)createBottomButton
+{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:@"button_sign up"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(report:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.offset(0);
+    }];
+    [btn.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.left.right.offset(0);
+    }];
+    [btn layoutIfNeeded];
+    bottonBtnHeight = btn.od_height;
 }
 
 - (void)registTableViewClass
@@ -95,6 +119,11 @@ static NSString * const activePersonCell = @"activePersonCell";
      {
          
      }];
+}
+
+- (void)report:(UIButton *)btn
+{
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -166,7 +195,6 @@ static NSString * const activePersonCell = @"activePersonCell";
         [[(ODActivityVIPCell *)cell VIPName]setText:vipModel.nick];
         [[(ODActivityVIPCell *)cell VIPInfoLabel]setText:vipModel.school_name];
         [[(ODActivityVIPCell *)cell VIPDutyLabel]setText:vipModel.profile];
-        
     }
     else if (indexPath.row == 5 + 1 + self.activityVIPs.count) //报名人
     {
