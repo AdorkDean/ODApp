@@ -20,26 +20,17 @@
                             <constraint firstAttribute="width" constant="60" id="pFp-dq-Wwi"/>
                         </constraints>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjv-ul-Sja">
-                        <rect key="frame" x="87" y="17" width="200" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="Kqc-eT-TMV"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJR-PQ-Jvk">
                         <rect key="frame" x="290" y="17" width="68" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="68" id="Mgt-3I-eg7"/>
+                            <constraint firstAttribute="width" constant="68" id="Mgt-3I-eg7" userLabel="width = 78"/>
                             <constraint firstAttribute="height" constant="21" id="P1Q-vf-zMn"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_man" translatesAutoresizingMaskIntoConstraints="NO" id="4Gf-N6-WPl">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Gf-N6-WPl">
                         <rect key="frame" x="87" y="48" width="10" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="bFo-Ye-I2J"/>
@@ -107,6 +98,15 @@
                             <constraint firstAttribute="height" constant="20" id="fQT-pq-NIV"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjv-ul-Sja">
+                        <rect key="frame" x="87" y="17" width="200" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Kqc-eT-TMV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -161,7 +161,6 @@
     </objects>
     <resources>
         <image name="icon_Collection" width="12" height="11"/>
-        <image name="icon_man" width="6" height="12"/>
         <image name="icon_share" width="15" height="15"/>
     </resources>
 </document>
