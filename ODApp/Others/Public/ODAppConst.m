@@ -17,6 +17,9 @@ NSString *const KUserDefaultsOpenId = @"userOpenId";
 /** 显示集市的通知 */
 NSString *const ODNotificationShowBazaar = @"ODShowBazaarNotification";
 
+/** 定位城市的通知 */
+NSString *const ODNotificationLocation = @"ODNotificationLocation";
+
 /** 刷新我的话题通知 */
 NSString *const ODNotificationMyTaskRefresh = @"ODNotificationMyTaskRefresh";
 

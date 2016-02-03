@@ -13,4 +13,6 @@
 Single_Interface(ODUserInformation)
 @property(nonatomic ,copy) NSString *openID;
 
+@property (nonatomic, copy) NSString *locationCity;
+
 @end
