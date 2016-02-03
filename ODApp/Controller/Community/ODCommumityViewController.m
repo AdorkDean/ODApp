@@ -153,7 +153,7 @@
     flowLayout.minimumInteritemSpacing = 5;
     flowLayout.minimumLineSpacing = 5;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,ODTopY, kScreenSize.width, KControllerHeight - 55) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0, kScreenSize.width, kScreenSize.height-64-55) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
@@ -186,28 +186,29 @@
     [cell showDateWithModel:model];
     CGFloat height = [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14];
     cell.contentLabelHeight.constant = height;
+    CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs.count) {
         for (id vc in cell.picView.subviews) {
             [vc removeFromSuperview];
         }
         if (model.imgs.count==4) {
             for (NSInteger i = 0; i < model.imgs.count; i++) {
-                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((90+5)*(i%2), (90+5)*(i/2), 90, 90)];
+                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
                 [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
                 [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
             }
-            cell.PicConstraintHeight.constant = 195;
+            cell.PicConstraintHeight.constant = 2*width+5;
         }else{
             for (NSInteger i = 0;i < model.imgs.count ; i++) {
-                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((90+5)*(i%3), (90+5)*(i/3), 90, 90)];
+                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
                 [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
                 [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
             }
-            cell.PicConstraintHeight.constant = 90+(90+5)*(model.imgs.count/3);
+            cell.PicConstraintHeight.constant = width+(width+5)*(model.imgs.count/3);
         }
     }else{
         for (id vc in cell.picView.subviews) {
@@ -266,16 +267,17 @@
 //动态计算cell的高度
 -(CGFloat)returnHight:(ODCommunityModel *)model
 {
+    CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs.count==0) {
         return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14];
     }else if (model.imgs.count>0&&model.imgs.count<4){
-        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+90;
+        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+width;
     }else if (model.imgs.count>=4&&model.imgs.count<7){
-        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+185;
+        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+2*width+5;
     }else if (model.imgs.count>=7&&model.imgs.count<9){
-        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+280;
+        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+3*width+10;
     }else{
-        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+280;
+        return 100+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+3*width+10;
     }
 }
 #pragma mark - 试图将要出现

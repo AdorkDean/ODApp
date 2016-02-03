@@ -30,7 +30,7 @@
     layout.minimumInteritemSpacing = 0;
     layout.itemSize = CGSizeMake(KScreenWidth, KScreenHeight);
     layout.minimumLineSpacing = 0;
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-100) collectionViewLayout:layout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height) collectionViewLayout:layout];
     self.collectionView.backgroundColor = [UIColor blackColor];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
@@ -52,7 +52,7 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellId forIndexPath:indexPath];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(20,100, kScreenSize.width-40, kScreenSize.height-200)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,100, kScreenSize.width, kScreenSize.height-200)];
     if ([self.skill isEqualToString:@"skill"]) {
         NSDictionary *dict = self.photos[indexPath.row];
         [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]]];
@@ -63,6 +63,10 @@
     return cell;
 }
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(void)createCountLabel
 {
@@ -90,6 +94,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     self.skill = @"";
+    self.navigationController.navigationBar.hidden = NO;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
