@@ -335,7 +335,7 @@
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight-ODTabBarHeight) collectionViewLayout:self.flowLayout];
     
     self.flowLayout.minimumInteritemSpacing = 5;
-    self.flowLayout.minimumLineSpacing = 2;
+    self.flowLayout.minimumLineSpacing = 5;
     self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     [self.collectionView registerClass:[ODhomeViewCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];
@@ -374,7 +374,7 @@
     [cell.headButton addTarget:self action:@selector(headButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.nickLabel.text = model.user[@"nick"];
     [cell showDatasWithModel:model];
-    
+    CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs_small.count) {
         for (id vc in cell.picView.subviews) {
             [vc removeFromSuperview];
@@ -382,19 +382,23 @@
         if (model.imgs_small.count==4) {
             for (NSInteger i = 0; i < model.imgs_small.count; i++) {
                 NSDictionary *dict = model.imgs_small[i];
-                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((90+5)*(i%2), (90+5)*(i/2), 90, 90)];
-                [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]]];
-                [cell.picView addSubview:imageView];
+                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
+                [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+                imageButton.tag = 10*indexPath.row+i;
+                [cell.picView addSubview:imageButton];
             }
-            cell.picViewConstraintHeight.constant = 195;
+            cell.picViewConstraintHeight.constant = 2*width+5;
         }else{
             for (NSInteger i = 0;i < model.imgs_small.count ; i++) {
                 NSDictionary *dict = model.imgs_small[i];
-                UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((90+5)*(i%3), (90+5)*(i/3), 90, 90)];
-                [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]]];
-                [cell.picView addSubview:imageView];
+                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
+                [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
+                imageButton.tag = 10*indexPath.row+i;
+                [cell.picView addSubview:imageButton];
             }
-            cell.picViewConstraintHeight.constant = 90+(90+5)*(model.imgs_small.count/3);
+            cell.picViewConstraintHeight.constant = width+(width+5)*(model.imgs_small.count/3);
         }
     }else{
         for (id vc in cell.picView.subviews) {
@@ -405,6 +409,18 @@
 
     
     return cell;
+}
+
+-(void)imageButtonClicked:(UIButton *)button
+{
+    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *)button.superview.superview.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
+    picController.photos = model.imgs_small;
+    picController.selectedIndex = button.tag-10*indexPath.row;
+    picController.skill = @"skill";
+    [self.navigationController pushViewController:picController animated:YES];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -478,16 +494,17 @@
 //动态计算cell的高度
 -(CGFloat)returnHight:(ODBazaarExchangeSkillModel *)model
 {
+    CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs_small.count==0) {
         return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13];
     }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+90;
+        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+width;
     }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+185;
+        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+2*width+5;
     }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+280;
+        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+3*width+10;
     }else{
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+280;
+        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+3*width+10;
     }
 }
 
