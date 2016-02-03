@@ -23,13 +23,7 @@
 {
     [super viewDidLoad];
     
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notificationLocation:) name:ODNotificationLocation object:nil];
-    
-    
-    
     self.navigationItem.title = @"首页";
-//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.pictureArray = [[NSMutableArray alloc] init];
@@ -45,7 +39,6 @@
         [self refreshdata];
         
     }];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -164,9 +157,6 @@
     }];
 }
 
-
-
-
 #pragma mark - Action
 
 // Location
@@ -175,12 +165,6 @@
     
     ODLocationController *vc = [[ODLocationController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)notificationLocation:(NSNotification *)locationButtonText
-{
-    
-    [self.locationButton setTitle:locationButtonText.userInfo[@"cityName"] forState:UIControlStateNormal];
 }
 
 //Toop Eight Button
