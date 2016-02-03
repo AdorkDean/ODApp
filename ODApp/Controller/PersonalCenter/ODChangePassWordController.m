@@ -33,22 +33,29 @@
 {
     [super viewDidLoad];
     [self navigationInit];
+    [self.view addSubview:self.registView];
     [self createTimer];
     self.seePassWord = NO;
     self.currentTime = 60;
 }
 
-- (void)loadView
-{
-    self.view = self.registView;
-}
 
 - (void)navigationInit
 {
-    ODNavigationBarView *navigationView = [ODNavigationBarView navigationBarView];
-    navigationView.title = self.topTitle;
-    navigationView.leftBarButton = [ODBarButton barButtonWithTarget:self action:@selector(fanhui:) title:@"返回"];
-    [self.view addSubview:navigationView];
+    if ([self.topTitle isEqualToString:@"忘记密码"]) {
+        
+        ODNavigationBarView *naviView = [ODNavigationBarView navigationBarView];
+        naviView.title = @"忘记密码";
+        naviView.leftBarButton = [ODBarButton barButtonWithTarget:self action:@selector(fanhui:) title:@"返回"];
+        [self.view addSubview:naviView];
+
+        
+    }else {
+        
+        self.navigationItem.title = @"修改密码";
+
+    }
+    
 }
 
 -(void)createTimer
@@ -81,8 +88,13 @@
     if (_registView == nil) {
         
         self.registView = [ODRegisteredView getView];
-        
-        
+        if ([self.topTitle isEqualToString:@"忘记密码"]) {
+              self.registView.frame = CGRectMake(0, 64, kScreenSize.width, kScreenSize.height);
+        }else {
+            self.registView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
+
+        }
+        self.registView.backgroundColor = [UIColor whiteColor];
         self.registView.registereButton.layer.masksToBounds = YES;
         self.registView.registereButton.layer.cornerRadius = 5;
         self.registView.registereButton.layer.borderColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1].CGColor;

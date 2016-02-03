@@ -31,14 +31,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZHL-Sk-gB8">
-                        <rect key="frame" x="90" y="50" width="20" height="20"/>
+                        <rect key="frame" x="90" y="50" width="15" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="20" id="m1F-CS-rsI"/>
-                            <constraint firstAttribute="height" constant="20" id="tvV-9H-PC0"/>
+                            <constraint firstAttribute="width" constant="15" id="m1F-CS-rsI"/>
+                            <constraint firstAttribute="height" constant="15" id="tvV-9H-PC0"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="唐小楼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gzI-ae-AmQ">
-                        <rect key="frame" x="115" y="50" width="176" height="20"/>
+                        <rect key="frame" x="110" y="50" width="181" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="2HI-im-1tZ"/>
                         </constraints>
