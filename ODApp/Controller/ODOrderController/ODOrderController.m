@@ -201,15 +201,9 @@
 {
     ODOrderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
     
-    
+    cell.model = self.informationModel;
  
-    [cell.userImgeView sd_setImageWithURL:[NSURL OD_URLWithString:self.informationModel.user[@"avatar"]]];
-    cell.nickLabel.text = self.informationModel.user[@"nick"];
-    cell.orderTitle.text = self.informationModel.title;
-    cell.orderPrice.text = [NSString stringWithFormat:@"%@元/%@" , self.informationModel.price , self.informationModel.unit];
-    NSString *url = self.informationModel.imgs_small[0][@"img_url"];
-    [cell.orderImageView sd_setImageWithURL:[NSURL OD_URLWithString:url]];
-    
+      
     
     
     return cell;

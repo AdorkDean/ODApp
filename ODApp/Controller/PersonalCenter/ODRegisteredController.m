@@ -79,22 +79,11 @@
         
         self.registView = [ODRegisteredView getView];
         self.registView.frame = CGRectMake(0, 64, kScreenSize.width, kScreenSize.height);
-        self.registView.registereButton.layer.masksToBounds = YES;
-        self.registView.registereButton.layer.cornerRadius = 5;
-        self.registView.registereButton.layer.borderColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1].CGColor;
-        self.registView.registereButton.layer.borderWidth = 1;
-        
-        self.registView.password.secureTextEntry = YES;
-        
         [self.registView.getVerification addTarget:self action:@selector(getVerification:) forControlEvents:UIControlEventTouchUpInside];
-        
         [self.registView.registereButton addTarget:self action:@selector(registere:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
         [self.registView.seePassword addTarget:self action:@selector(seePassword:) forControlEvents:UIControlEventTouchUpInside];
-       
         self.registView.phoneNumber.delegate = self;
-        self.registView.phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
+       
      
     }
     return _registView;

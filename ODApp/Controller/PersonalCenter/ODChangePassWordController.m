@@ -88,42 +88,27 @@
     if (_registView == nil) {
         
         self.registView = [ODRegisteredView getView];
+        
         if ([self.topTitle isEqualToString:@"忘记密码"]) {
               self.registView.frame = CGRectMake(0, 64, kScreenSize.width, kScreenSize.height);
         }else {
             self.registView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
 
         }
-        self.registView.backgroundColor = [UIColor whiteColor];
-        self.registView.registereButton.layer.masksToBounds = YES;
-        self.registView.registereButton.layer.cornerRadius = 5;
-        self.registView.registereButton.layer.borderColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1].CGColor;
-        self.registView.registereButton.layer.borderWidth = 1;
-        
-        
         if ([self.topTitle isEqualToString:@"修改密码"]) {
             self.registView.phoneNumber.userInteractionEnabled = NO;
             self.registView.phoneNumber.text = self.phoneNumber;
             self.registView.phoneNumber.textColor = [UIColor lightGrayColor];
         }
         
-     
-        
-        self.registView.password.secureTextEntry = YES;
-     
-        
-        
         [self.registView.getVerification addTarget:self action:@selector(getVerification:) forControlEvents:UIControlEventTouchUpInside];
-        
         [self.registView.registereButton addTarget:self action:@selector(registere:) forControlEvents:UIControlEventTouchUpInside];
-        
         [self.registView.registereButton setTitle:@"确认修改" forState:UIControlStateNormal];
-        
         [self.registView.seePassword addTarget:self action:@selector(seePassword:) forControlEvents:UIControlEventTouchUpInside];
         
         
         self.registView.phoneNumber.delegate = self;
-        self.registView.phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
+       
    
     }
     return _registView;

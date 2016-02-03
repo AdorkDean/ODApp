@@ -161,15 +161,8 @@
             ;
         }else{
             ODAddressModel *model = self.defaultArray[0];
-            cell.nameLabel.text = model.name;
-            cell.phoneLabel.text = model.tel;
-            
-            NSString *str = [NSString stringWithFormat:@"[默认]%@",model.address];
-            NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:str];
-            [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange(0, 4)];
-            [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#000000" alpha:1] range:NSMakeRange(4, model.address.length)];
-            cell.addressLabel.attributedText = noteStr;
-
+            cell.isDefault = @"1";
+            cell.model = model;
         }
      
         
@@ -182,9 +175,8 @@
             [cell.lineLabel removeFromSuperview];
         }
         ODAddressModel *model = self.dataArray[indexPath.row];
-        cell.nameLabel.text = model.name;
-        cell.phoneLabel.text = model.tel;
-        cell.addressLabel.text = model.address;
+        cell.isDefault = @"2";
+        cell.model = model;
         
        
     }
