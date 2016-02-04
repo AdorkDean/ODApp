@@ -18,6 +18,7 @@
 		9DD00BE51C4E39C400F0EE5F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BE41C4E39C400F0EE5F /* CoreTelephony.framework */; };
 		9DD00BE71C4E39D000F0EE5F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BE61C4E39D000F0EE5F /* libstdc++.tbd */; };
 		9DD00BE91C4E39D800F0EE5F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BE81C4E39D800F0EE5F /* libz.tbd */; };
+		B8398AAB1C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8398AAA1C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.m */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
 		B840C6051C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B840C6021C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.m */; };
@@ -267,6 +268,8 @@
 		9DD00BE41C4E39C400F0EE5F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		9DD00BE61C4E39D000F0EE5F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		9DD00BE81C4E39D800F0EE5F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		B8398AA91C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseSkillViewController.h; sourceTree = "<group>"; };
+		B8398AAA1C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseSkillViewController.m; sourceTree = "<group>"; };
 		B83C6B621C224F640063ED92 /* ODApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B751C224F640063ED92 /* ODAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ODAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B791C224F640063ED92 /* ODAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODAppTests.m; sourceTree = "<group>"; };
@@ -794,6 +797,7 @@
 				B840C6011C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.h */,
 				B840C6021C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.m */,
 				B84F2E611C60435E0057DF9E /* ODBazaarExchangeSkillDetail */,
+				B85502311C61DB0800319359 /* BazaarReleaseSkill */,
 			);
 			name = BazaarEXchangeSkill;
 			sourceTree = "<group>";
@@ -854,6 +858,15 @@
 				B84F2E731C60A1AD0057DF9E /* ODCommunityShowPicViewController.m */,
 			);
 			name = CommunityShowPic;
+			sourceTree = "<group>";
+		};
+		B85502311C61DB0800319359 /* BazaarReleaseSkill */ = {
+			isa = PBXGroup;
+			children = (
+				B8398AA91C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.h */,
+				B8398AAA1C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.m */,
+			);
+			name = BazaarReleaseSkill;
 			sourceTree = "<group>";
 		};
 		BE90C887BE6078782C6B85F6 /* Frameworks */ = {
@@ -2473,6 +2486,7 @@
 				D4D075491C59BBEE008527C9 /* ODAppConst.m in Sources */,
 				C64D46021C5F8C6F003BFFA0 /* UIView+SDExtension.m in Sources */,
 				C64D45FF1C5F8C6F003BFFA0 /* TAPageControl.m in Sources */,
+				B8398AAB1C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.m in Sources */,
 				D4D075141C59B9FA008527C9 /* ODInformationView.m in Sources */,
 				D4F76D551C6090EC00D59F02 /* ODActivityDetailModel.m in Sources */,
 				D4D074F51C59B9FA008527C9 /* ODBazaarRewardCollectionCell.m in Sources */,

@@ -4,7 +4,7 @@ pod 'MJRefresh', '~> 3.0.7'
 pod 'Masonry', '~> 0.6.3’
 pod 'MJExtension'
 pod 'SVProgressHUD'
-pod 'AMapLocation', '~> 1.1.1'
+pod 'AMapLocation'
 platform :ios, '7.0' #手机的系统
 pod 'AMap3DMap'  #3D地图SDK
 #pod 'AMap2DMap' #2D地图SDK (2D和3D不能同时使⽤用)

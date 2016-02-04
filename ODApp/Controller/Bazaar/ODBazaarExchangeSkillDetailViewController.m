@@ -61,7 +61,6 @@
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
     self.scrollView.userInteractionEnabled = YES;
-    self.scrollView.bounces = NO;
     [self.view addSubview:self.scrollView];
 }
 
@@ -179,7 +178,7 @@
 #pragma mark - 底部收藏购买试图
 - (void)createBottomView
 {
-    UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, KControllerHeight - 50 - ODNavigationHeight, kScreenSize.width, 50)];
+    UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenSize.height-64-50, kScreenSize.width, 50)];
     [bottomView setBackgroundColor:[UIColor colorWithHexString:@"#d9d9d9" alpha:1]];
     [self.view addSubview:bottomView];
     

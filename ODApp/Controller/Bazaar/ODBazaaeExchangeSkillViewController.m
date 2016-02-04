@@ -95,8 +95,6 @@
     [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
     cell.nickLabel.text = model.user[@"nick"];
     [cell showDatasWithModel:model];
-    CGFloat height = [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13];
-    cell.contentLabelConstraintHeight.constant = height;
     CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs_small.count) {
         for (id vc in cell.picView.subviews) {
@@ -164,15 +162,15 @@
 {
     CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs_small.count==0) {
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13];
+        return 180;
     }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+width;
+        return 180+width;
     }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+2*width+5;
+        return 180+2*width+5;
     }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+3*width+10;
+        return 180+3*width+10;
     }else{
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+3*width+10;
+        return 180+3*width+10;
     }
 }
 
