@@ -16,7 +16,7 @@
     
       [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    
+    self.contentView.userInteractionEnabled = YES;
     
 }
 

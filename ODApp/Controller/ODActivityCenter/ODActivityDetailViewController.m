@@ -178,6 +178,8 @@ static NSString * const activePersonCell = @"activePersonCell";
     {
         cell = [tableView dequeueReusableCellWithIdentifier:detailContentCell];
         [(ODActivityDetailContentCell *)cell contentLabel].text = self.resultModel.remark;
+        
+            
     }
     else if (indexPath.row == 5 + 4 + self.activityVIPs.count)
     {
