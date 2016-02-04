@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -11,9 +11,33 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bmm-0y-Ext" customClass="ODActivityDetailBtn">
+                        <rect key="frame" x="0.0" y="0.0" width="160" height="44"/>
+                        <state key="normal" title="Button"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ine-vW-jzD" customClass="ODActivityDetailBtn">
+                        <rect key="frame" x="160" y="0.0" width="160" height="44"/>
+                        <state key="normal" title="Button"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ine-vW-jzD" firstAttribute="leading" secondItem="bmm-0y-Ext" secondAttribute="trailing" id="1tP-e1-93n"/>
+                    <constraint firstItem="bmm-0y-Ext" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="8fK-az-GBC"/>
+                    <constraint firstItem="bmm-0y-Ext" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="GQo-uU-chD"/>
+                    <constraint firstItem="ine-vW-jzD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Krl-Wn-WL6"/>
+                    <constraint firstAttribute="bottom" secondItem="ine-vW-jzD" secondAttribute="bottom" id="MvF-OD-0a2"/>
+                    <constraint firstItem="ine-vW-jzD" firstAttribute="width" secondItem="bmm-0y-Ext" secondAttribute="width" id="N0v-Va-TiF"/>
+                    <constraint firstAttribute="trailing" secondItem="ine-vW-jzD" secondAttribute="trailing" id="VDR-Uk-iIr"/>
+                    <constraint firstAttribute="bottom" secondItem="bmm-0y-Ext" secondAttribute="bottom" id="eQ9-es-29X"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="goodBtn" destination="ine-vW-jzD" id="HPT-U6-itr"/>
+                <outlet property="shareBtn" destination="bmm-0y-Ext" id="Gji-Ub-riA"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

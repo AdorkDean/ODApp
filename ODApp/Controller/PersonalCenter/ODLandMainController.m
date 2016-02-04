@@ -23,7 +23,7 @@
 #import "ODMyOrderRecordController.h"
 #import "ODUserEvaluationController.h"
 #import "UMSocial.h"
-
+#import "ODMyOrderController.h"
 
 
 @interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>{
@@ -67,14 +67,7 @@
 - (void)getData
 {
     self.manager = [AFHTTPRequestOperationManager manager];
-    
-    
-    
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-    
-    
-    NSLog(@"____%@" , openId);
-    
     
     NSDictionary *parameters = @{@"open_id":openId};
     
@@ -180,16 +173,21 @@
             cell.titleLabel.text = @"我的话题";
         }else if (indexPath.section == 4) {
             cell.titleLabel.text = @"我的任务";
-        }else if (indexPath.section == 5) {
-            cell.titleLabel.text = @"我收到的评价";
         }
         
-        else if (indexPath.section == 6) {
+        
+        else if (indexPath.section == 5) {
+            cell.titleLabel.text = @"我收到的评价";
+        }else if (indexPath.section == 6) {
+            cell.titleLabel.text = @"我的订单";
+        }
+        
+        else if (indexPath.section == 7) {
             
             cell.titleLabel.text = @"分享我们的app";
             cell.coverImageView.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
             
-        }else if (indexPath.section == 7) {
+        }else if (indexPath.section == 8) {
             
             cell.titleLabel.text = @"      退出登录";
             cell.titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -205,7 +203,7 @@
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 8;
+    return 9;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -267,6 +265,15 @@
         
         
     }else if (indexPath.section == 6) {
+       
+        
+        ODMyOrderController *vc = [[ODMyOrderController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+    }
+    else if (indexPath.section == 7) {
         
         NSString *url = self.model.share_download[@"icon"];
         NSString *content = self.model.share_download[@"desc"];
@@ -291,7 +298,7 @@
         
         
     }
-    else if (indexPath.section ==7) {
+    else if (indexPath.section ==8) {
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否退出登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -357,7 +364,7 @@
 //动态设置区尾的高度(根据不同的分区)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    if (section == 6) {
+    if (section == 7) {
         return CGSizeMake(0, 30);
     }else{
         return CGSizeMake(0, 5);

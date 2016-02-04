@@ -31,17 +31,11 @@
     [_mapView setZoomLevel:20 animated:YES];
     [self.view addSubview:_mapView];
     
-    
     //配置用户Key
     [AMapSearchServices sharedServices].apiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
     //初始化检索对象
     _search = [[AMapSearchAPI alloc] init];
     _search.delegate = self;
-    
-    
-    
-    
-    
     
 }
 
@@ -52,7 +46,6 @@ updatingLocation:(BOOL)updatingLocation{
         _mapView.showsUserLocation = NO;
         [_mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
         
-        
         //构造AMapReGeocodeSearchRequest对象
         AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
         regeo.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
@@ -62,11 +55,9 @@ updatingLocation:(BOOL)updatingLocation{
         //发起逆地理编码
         [_search AMapReGoecodeSearch: regeo];
         
-        
         //构造AMapPOIAroundSearchRequest对象，设置周边请求参数
         AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
         request.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
-        
         
         // types属性表示限定搜索POI的类别，默认为：餐饮服务|商务住宅|生活服务
         // POI的类型共分为20种大类别，分别为：
@@ -80,8 +71,6 @@ updatingLocation:(BOOL)updatingLocation{
         
         //发起周边搜索
         [_search AMapPOIAroundSearch: request];
-        
-        
     }
 }
 
@@ -92,19 +81,12 @@ updatingLocation:(BOOL)updatingLocation{
     {
         return;
     }
-    
-    
     //通过 AMapPOISearchResponse 对象处理搜索结果
     for (AMapPOI *p in response.pois) {
         NSString *strPoi = [NSString stringWithFormat:@"%@", p.name];
         
         NSLog(@"strPoi ->____%@" , strPoi);
-        
-        
     }
-    
-    
-    
 }
 
 //实现逆地理编码的回调函数
@@ -113,21 +95,14 @@ updatingLocation:(BOOL)updatingLocation{
     if(response.regeocode != nil)
     {
         //通过AMapReGeocodeSearchResponse对象处理搜索结果
-        NSString *result = [NSString stringWithFormat:@"ReGeocode: %@", response.regeocode.addressComponent.province];
+        NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
+        if (result.length == 0) {
+            result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
+        }
         
-        
-        NSLog(@"result -> _____%@" , result);
-        
-        
-        
-        
+        [ODUserInformation sharedODUserInformation].locationCity = result;
     }
 }
-
-
-
-
-
 
 //中心标识图像
 -(UIImageView *)centerImageView{
@@ -143,16 +118,12 @@ updatingLocation:(BOOL)updatingLocation{
     return _centerImageView;
 }
 
-
-
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     [self.view addSubview:self.centerImageView];
     
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

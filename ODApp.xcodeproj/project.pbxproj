@@ -18,7 +18,14 @@
 		9DD00BE51C4E39C400F0EE5F /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BE41C4E39C400F0EE5F /* CoreTelephony.framework */; };
 		9DD00BE71C4E39D000F0EE5F /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BE61C4E39D000F0EE5F /* libstdc++.tbd */; };
 		9DD00BE91C4E39D800F0EE5F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BE81C4E39D800F0EE5F /* libz.tbd */; };
-		B8398AAB1C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8398AAA1C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.m */; };
+		9DDC9B641C62ECFF000D688F /* ODMyOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B631C62ECFF000D688F /* ODMyOrderController.m */; };
+		9DDC9B681C62EDB9000D688F /* ODMyOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B661C62EDB9000D688F /* ODMyOrderCell.m */; };
+		9DDC9B691C62EDB9000D688F /* ODMyOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDC9B671C62EDB9000D688F /* ODMyOrderCell.xib */; };
+		9DDC9B6C1C62F1EF000D688F /* ODMyOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B6B1C62F1EF000D688F /* ODMyOrderModel.m */; };
+		9DDC9B6F1C631A24000D688F /* ODOrderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B6E1C631A24000D688F /* ODOrderDetailController.m */; };
+		9DDC9B721C631D81000D688F /* ODOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B711C631D81000D688F /* ODOrderDetailView.m */; };
+		9DDC9B741C631EB8000D688F /* ODOrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDC9B731C631EB8000D688F /* ODOrderDetailView.xib */; };
+		9DDC9B771C6334BA000D688F /* ODOrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B761C6334BA000D688F /* ODOrderDetailModel.m */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
 		B840C6051C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B840C6021C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.m */; };
@@ -233,9 +240,10 @@
 		D4F76DCC1C61B01200D59F02 /* ODActivityBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F76DC51C61B01200D59F02 /* ODActivityBottomCell.xib */; };
 		D4F76DCD1C61B01200D59F02 /* ODActivityDetailBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DC71C61B01200D59F02 /* ODActivityDetailBtn.m */; };
 		D4F76DCE1C61B01200D59F02 /* ODActivityDetailContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DC91C61B01200D59F02 /* ODActivityDetailContentCell.m */; };
-		D4F76DCF1C61B01200D59F02 /* ODActivityDetailContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F76DCA1C61B01200D59F02 /* ODActivityDetailContentCell.xib */; };
 		D4F76DD31C61B04700D59F02 /* ODCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DD21C61B04700D59F02 /* ODCollectionController.m */; };
 		D4F76DD71C61B07B00D59F02 /* ODLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DD61C61B07B00D59F02 /* ODLikeModel.m */; };
+		D4F76DDB1C61BB4D00D59F02 /* ODActivityPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DD91C61BB4D00D59F02 /* ODActivityPersonCell.m */; };
+		D4F76DDC1C61BB4D00D59F02 /* ODActivityPersonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F76DDA1C61BB4D00D59F02 /* ODActivityPersonCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -268,8 +276,20 @@
 		9DD00BE41C4E39C400F0EE5F /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		9DD00BE61C4E39D000F0EE5F /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		9DD00BE81C4E39D800F0EE5F /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		B8398AA91C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseSkillViewController.h; sourceTree = "<group>"; };
-		B8398AAA1C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseSkillViewController.m; sourceTree = "<group>"; };
+		9DDC9B621C62ECFF000D688F /* ODMyOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyOrderController.h; sourceTree = "<group>"; };
+		9DDC9B631C62ECFF000D688F /* ODMyOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyOrderController.m; sourceTree = "<group>"; };
+		9DDC9B651C62EDB9000D688F /* ODMyOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyOrderCell.h; sourceTree = "<group>"; };
+		9DDC9B661C62EDB9000D688F /* ODMyOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyOrderCell.m; sourceTree = "<group>"; };
+		9DDC9B671C62EDB9000D688F /* ODMyOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyOrderCell.xib; sourceTree = "<group>"; };
+		9DDC9B6A1C62F1EF000D688F /* ODMyOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyOrderModel.h; sourceTree = "<group>"; };
+		9DDC9B6B1C62F1EF000D688F /* ODMyOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyOrderModel.m; sourceTree = "<group>"; };
+		9DDC9B6D1C631A24000D688F /* ODOrderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderDetailController.h; sourceTree = "<group>"; };
+		9DDC9B6E1C631A24000D688F /* ODOrderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderDetailController.m; sourceTree = "<group>"; };
+		9DDC9B701C631D81000D688F /* ODOrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderDetailView.h; sourceTree = "<group>"; };
+		9DDC9B711C631D81000D688F /* ODOrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderDetailView.m; sourceTree = "<group>"; };
+		9DDC9B731C631EB8000D688F /* ODOrderDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODOrderDetailView.xib; sourceTree = "<group>"; };
+		9DDC9B751C6334BA000D688F /* ODOrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderDetailModel.h; sourceTree = "<group>"; };
+		9DDC9B761C6334BA000D688F /* ODOrderDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderDetailModel.m; sourceTree = "<group>"; };
 		B83C6B621C224F640063ED92 /* ODApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B751C224F640063ED92 /* ODAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ODAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B791C224F640063ED92 /* ODAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODAppTests.m; sourceTree = "<group>"; };
@@ -673,11 +693,13 @@
 		D4F76DC71C61B01200D59F02 /* ODActivityDetailBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityDetailBtn.m; sourceTree = "<group>"; };
 		D4F76DC81C61B01200D59F02 /* ODActivityDetailContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityDetailContentCell.h; sourceTree = "<group>"; };
 		D4F76DC91C61B01200D59F02 /* ODActivityDetailContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityDetailContentCell.m; sourceTree = "<group>"; };
-		D4F76DCA1C61B01200D59F02 /* ODActivityDetailContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODActivityDetailContentCell.xib; sourceTree = "<group>"; };
 		D4F76DD11C61B04700D59F02 /* ODCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCollectionController.h; sourceTree = "<group>"; };
 		D4F76DD21C61B04700D59F02 /* ODCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCollectionController.m; sourceTree = "<group>"; };
 		D4F76DD51C61B07B00D59F02 /* ODLikeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLikeModel.h; sourceTree = "<group>"; };
 		D4F76DD61C61B07B00D59F02 /* ODLikeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLikeModel.m; sourceTree = "<group>"; };
+		D4F76DD81C61BB4D00D59F02 /* ODActivityPersonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityPersonCell.h; sourceTree = "<group>"; };
+		D4F76DD91C61BB4D00D59F02 /* ODActivityPersonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityPersonCell.m; sourceTree = "<group>"; };
+		D4F76DDA1C61BB4D00D59F02 /* ODActivityPersonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODActivityPersonCell.xib; sourceTree = "<group>"; };
 		E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -797,7 +819,6 @@
 				B840C6011C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.h */,
 				B840C6021C5F97E100DF8C74 /* ODBazaaeExchangeSkillViewController.m */,
 				B84F2E611C60435E0057DF9E /* ODBazaarExchangeSkillDetail */,
-				B85502311C61DB0800319359 /* BazaarReleaseSkill */,
 			);
 			name = BazaarEXchangeSkill;
 			sourceTree = "<group>";
@@ -858,15 +879,6 @@
 				B84F2E731C60A1AD0057DF9E /* ODCommunityShowPicViewController.m */,
 			);
 			name = CommunityShowPic;
-			sourceTree = "<group>";
-		};
-		B85502311C61DB0800319359 /* BazaarReleaseSkill */ = {
-			isa = PBXGroup;
-			children = (
-				B8398AA91C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.h */,
-				B8398AAA1C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.m */,
-			);
-			name = BazaarReleaseSkill;
 			sourceTree = "<group>";
 		};
 		BE90C887BE6078782C6B85F6 /* Frameworks */ = {
@@ -1399,9 +1411,11 @@
 				D4F76DC51C61B01200D59F02 /* ODActivityBottomCell.xib */,
 				D4F76DC61C61B01200D59F02 /* ODActivityDetailBtn.h */,
 				D4F76DC71C61B01200D59F02 /* ODActivityDetailBtn.m */,
+				D4F76DD81C61BB4D00D59F02 /* ODActivityPersonCell.h */,
+				D4F76DD91C61BB4D00D59F02 /* ODActivityPersonCell.m */,
+				D4F76DDA1C61BB4D00D59F02 /* ODActivityPersonCell.xib */,
 				D4F76DC81C61B01200D59F02 /* ODActivityDetailContentCell.h */,
 				D4F76DC91C61B01200D59F02 /* ODActivityDetailContentCell.m */,
-				D4F76DCA1C61B01200D59F02 /* ODActivityDetailContentCell.xib */,
 				D46C90361C6043DA004942E7 /* ODNewActivityCell.h */,
 				D46C90371C6043DA004942E7 /* ODNewActivityCell.m */,
 				D46C903E1C605841004942E7 /* ODNewActivityCell.xib */,
@@ -1811,9 +1825,9 @@
 			children = (
 				D4F76D741C60CCC400D59F02 /* ODHomeFoundFooterView.h */,
 				D4F76D751C60CCC400D59F02 /* ODHomeFoundFooterView.m */,
-				C64D40941C5E0DC6003BFFA0 /* ODSkillDetailView */,
 				D4D0731C1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.h */,
 				D4D0731D1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.m */,
+				C64D40941C5E0DC6003BFFA0 /* ODSkillDetailView */,
 			);
 			path = HomeFoundView;
 			sourceTree = "<group>";
@@ -2028,6 +2042,10 @@
 				D4F76D8B1C61AE8C00D59F02 /* ODContactAddressController.m */,
 				D4F76D8C1C61AE8C00D59F02 /* ODOrderController.h */,
 				D4F76D8D1C61AE8C00D59F02 /* ODOrderController.m */,
+				9DDC9B621C62ECFF000D688F /* ODMyOrderController.h */,
+				9DDC9B631C62ECFF000D688F /* ODMyOrderController.m */,
+				9DDC9B6D1C631A24000D688F /* ODOrderDetailController.h */,
+				9DDC9B6E1C631A24000D688F /* ODOrderDetailController.m */,
 			);
 			path = ODOrderController;
 			sourceTree = "<group>";
@@ -2059,6 +2077,12 @@
 				D4F76DA11C61AEA100D59F02 /* ODOrderView.h */,
 				D4F76DA21C61AEA100D59F02 /* ODOrderView.m */,
 				D4F76DA31C61AEA100D59F02 /* ODOrderView.xib */,
+				9DDC9B651C62EDB9000D688F /* ODMyOrderCell.h */,
+				9DDC9B661C62EDB9000D688F /* ODMyOrderCell.m */,
+				9DDC9B671C62EDB9000D688F /* ODMyOrderCell.xib */,
+				9DDC9B701C631D81000D688F /* ODOrderDetailView.h */,
+				9DDC9B711C631D81000D688F /* ODOrderDetailView.m */,
+				9DDC9B731C631EB8000D688F /* ODOrderDetailView.xib */,
 			);
 			path = ODOrderView;
 			sourceTree = "<group>";
@@ -2074,6 +2098,10 @@
 				D4F76DB81C61AEAD00D59F02 /* ODOrderDataModel.m */,
 				D4F76DB91C61AEAD00D59F02 /* TimeButton.h */,
 				D4F76DBA1C61AEAD00D59F02 /* TimeButton.m */,
+				9DDC9B6A1C62F1EF000D688F /* ODMyOrderModel.h */,
+				9DDC9B6B1C62F1EF000D688F /* ODMyOrderModel.m */,
+				9DDC9B751C6334BA000D688F /* ODOrderDetailModel.h */,
+				9DDC9B761C6334BA000D688F /* ODOrderDetailModel.m */,
 			);
 			path = ODOderModel;
 			sourceTree = "<group>";
@@ -2215,8 +2243,10 @@
 				D4D0750A1C59B9FA008527C9 /* ChoseCenterCell.xib in Resources */,
 				D4D074F41C59B9FA008527C9 /* ODBazaarDetailCollectionCell.xib in Resources */,
 				C64D460D1C5F8C6F003BFFA0 /* UMSocialSDKResourcesNew.bundle in Resources */,
+				9DDC9B741C631EB8000D688F /* ODOrderDetailView.xib in Resources */,
 				D46C903F1C605841004942E7 /* ODNewActivityCell.xib in Resources */,
 				C64D46061C5F8C6F003BFFA0 /* UMSCommentInputController.xib in Resources */,
+				D4F76DDC1C61BB4D00D59F02 /* ODActivityPersonCell.xib in Resources */,
 				9D16BDD41C59EEDA003627CD /* ODViolationsCell.xib in Resources */,
 				C64D46031C5F8C6F003BFFA0 /* UMSocialLocalizable.strings in Resources */,
 				D4D075151C59B9FA008527C9 /* ODInformationView.xib in Resources */,
@@ -2251,8 +2281,8 @@
 				D4D075081C59B9FA008527C9 /* CenterYuYueView.xib in Resources */,
 				D4D0751D1C59B9FA008527C9 /* ODTaskCell.xib in Resources */,
 				D4D075191C59B9FA008527C9 /* ODLandSecondCell.xib in Resources */,
+				9DDC9B691C62EDB9000D688F /* ODMyOrderCell.xib in Resources */,
 				D4F76DCC1C61B01200D59F02 /* ODActivityBottomCell.xib in Resources */,
-				D4F76DCF1C61B01200D59F02 /* ODActivityDetailContentCell.xib in Resources */,
 				C64D460C1C5F8C6F003BFFA0 /* UMSShareListController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2328,6 +2358,7 @@
 			files = (
 				C64D45E71C5F8C6F003BFFA0 /* UIImage+ODExtension.m in Sources */,
 				D4F76DCB1C61B01200D59F02 /* ODActivityBottomCell.m in Sources */,
+				D4F76DDB1C61BB4D00D59F02 /* ODActivityPersonCell.m in Sources */,
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
 				D4D073901C59B9FA008527C9 /* ODOtherTopicViewController.m in Sources */,
@@ -2358,6 +2389,8 @@
 				D4D075041C59B9FA008527C9 /* CenterDetailCell.m in Sources */,
 				D46C90301C6041B4004942E7 /* ODNewActivityCenterViewController.m in Sources */,
 				D4D0751E1C59B9FA008527C9 /* ODTopicCell.m in Sources */,
+				9DDC9B641C62ECFF000D688F /* ODMyOrderController.m in Sources */,
+				9DDC9B771C6334BA000D688F /* ODOrderDetailModel.m in Sources */,
 				D4D0737F1C59B9FA008527C9 /* ODCommunityReleaseTopicViewController.m in Sources */,
 				C64D45F41C5F8C6F003BFFA0 /* IQToolbar.m in Sources */,
 				C64D46141C5F8C6F003BFFA0 /* ODHelp.m in Sources */,
@@ -2389,6 +2422,7 @@
 				C64D45E61C5F8C6F003BFFA0 /* UIColor+ODExtension.m in Sources */,
 				B84F2E691C6044BF0057DF9E /* ODBazaarExchangeSkillCollectionCell.m in Sources */,
 				D4D074F91C59B9FA008527C9 /* ODCommunityDetailCell.m in Sources */,
+				9DDC9B721C631D81000D688F /* ODOrderDetailView.m in Sources */,
 				D4F76DD71C61B07B00D59F02 /* ODLikeModel.m in Sources */,
 				D4D074F31C59B9FA008527C9 /* ODBazaarDetailCollectionCell.m in Sources */,
 				D4D073871C59B9FA008527C9 /* ODInformationController.m in Sources */,
@@ -2396,6 +2430,8 @@
 				D4D0739B1C59B9FA008527C9 /* ODBazaarModel.m in Sources */,
 				C64D45EA1C5F8C6F003BFFA0 /* IQUITextFieldView+Additions.m in Sources */,
 				C64D45E91C5F8C6F003BFFA0 /* IQNSArray+Sort.m in Sources */,
+				9DDC9B6F1C631A24000D688F /* ODOrderDetailController.m in Sources */,
+				9DDC9B681C62EDB9000D688F /* ODMyOrderCell.m in Sources */,
 				D4D075221C59B9FA008527C9 /* ODUserModel.m in Sources */,
 				C64D45E81C5F8C6F003BFFA0 /* UIView+ODExtension.m in Sources */,
 				C64D45E41C5F8C6F003BFFA0 /* NSURL+ODExtension.m in Sources */,
@@ -2452,6 +2488,7 @@
 				D4D073A11C59B9FA008527C9 /* ODEvaluationModel.m in Sources */,
 				C64D46011C5F8C6F003BFFA0 /* SDCycleScrollView.m in Sources */,
 				D4D075241C59B9FA008527C9 /* ODEvaluationCell.m in Sources */,
+				9DDC9B6C1C62F1EF000D688F /* ODMyOrderModel.m in Sources */,
 				D4D075511C59C436008527C9 /* ODNavigationController.m in Sources */,
 				D4F76DAA1C61AEA100D59F02 /* ODOrderCell.m in Sources */,
 				D4D073911C59B9FA008527C9 /* ODPersonalCenterViewController.m in Sources */,
@@ -2486,7 +2523,6 @@
 				D4D075491C59BBEE008527C9 /* ODAppConst.m in Sources */,
 				C64D46021C5F8C6F003BFFA0 /* UIView+SDExtension.m in Sources */,
 				C64D45FF1C5F8C6F003BFFA0 /* TAPageControl.m in Sources */,
-				B8398AAB1C62FE2800FF8F09 /* ODBazaarReleaseSkillViewController.m in Sources */,
 				D4D075141C59B9FA008527C9 /* ODInformationView.m in Sources */,
 				D4F76D551C6090EC00D59F02 /* ODActivityDetailModel.m in Sources */,
 				D4D074F51C59B9FA008527C9 /* ODBazaarRewardCollectionCell.m in Sources */,

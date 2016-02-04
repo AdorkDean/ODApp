@@ -11,8 +11,6 @@ CGFloat const ODTopY = 0;
 /** 偏好设置保存用户信息 */
 NSString *const KUserDefaultsOpenId = @"userOpenId";
 
-
-
 #pragma mark - 通知
 /** 显示集市的通知 */
 NSString *const ODNotificationShowBazaar = @"ODShowBazaarNotification";
@@ -73,4 +71,6 @@ NSString * const kSaveOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/order"
 NSString * const KActivityListUrl = @"store/activity/list";
 NSString * const KActivityDetailUrl = @"store/apply/detail2";
 NSString * const kGetLikeListUrl = @"http://woquapi.test.odong.com/1.0/swap/love/list";
+NSString * const kGetMyOrderListUrl = @"http://woquapi.test.odong.com/1.0/swap/order/list";
+NSString * const kOrderDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/order/info";
 

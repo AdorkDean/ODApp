@@ -10,8 +10,11 @@
 
 @implementation ODActivityBottomCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+    [self.shareBtn setImage:[UIImage imageNamed:@"icon_share_activity"] forState:UIControlStateNormal];
+    [self.goodBtn setImage:[UIImage imageNamed:@"icon_Zambia_default"] forState:UIControlStateNormal];
+    [self.goodBtn setImage:[UIImage imageNamed:@"icon_Zambia_Selected"] forState:UIControlStateSelected];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

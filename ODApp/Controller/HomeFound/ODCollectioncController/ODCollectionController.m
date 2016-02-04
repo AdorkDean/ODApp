@@ -15,7 +15,7 @@
 #import "ODOthersInformationController.h"
 @interface ODCollectionController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic , strong) UILabel *centerNameLabe;
+
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property (nonatomic , assign) NSInteger page;
@@ -55,18 +55,12 @@
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 
                 
-            
-                
-                
                 if ([countNumber isEqualToString:@"1"]) {
                     [self.dataArray removeAllObjects];
                 }
                 
              
                 NSMutableDictionary *dic = responseObject[@"result"];
-                
-              
-                          
                 
                 for (NSMutableDictionary *miniDic in dic) {
                     ODLikeModel *model = [[ODLikeModel alloc] init];
@@ -95,7 +89,6 @@
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 
-     
     
    
 }
@@ -106,7 +99,6 @@
     
     self.page = 1;
     [self getData];
-    
     
 }
 
@@ -148,9 +140,7 @@
     ODLikeModel *model = self.dataArray[indexPath.row];
     cell.model = model;
     
-    
-    
-    
+        
     return cell;
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

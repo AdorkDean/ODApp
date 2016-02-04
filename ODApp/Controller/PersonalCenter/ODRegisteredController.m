@@ -32,17 +32,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.view addSubview:self.registView];
     [self navigationInit];
     [self createTimer];
     self.seePassWord = NO;
     self.currentTime = 60;
 }
 
-
-- (void)loadView
-{
-    self.view = self.registView;
-}
 
 
 #pragma mark - 初始化
@@ -82,23 +78,12 @@
     if (_registView == nil) {
         
         self.registView = [ODRegisteredView getView];
-        
-        self.registView.registereButton.layer.masksToBounds = YES;
-        self.registView.registereButton.layer.cornerRadius = 5;
-        self.registView.registereButton.layer.borderColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1].CGColor;
-        self.registView.registereButton.layer.borderWidth = 1;
-        
-        self.registView.password.secureTextEntry = YES;
-        
+        self.registView.frame = CGRectMake(0, 64, kScreenSize.width, kScreenSize.height);
         [self.registView.getVerification addTarget:self action:@selector(getVerification:) forControlEvents:UIControlEventTouchUpInside];
-        
         [self.registView.registereButton addTarget:self action:@selector(registere:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
         [self.registView.seePassword addTarget:self action:@selector(seePassword:) forControlEvents:UIControlEventTouchUpInside];
-       
         self.registView.phoneNumber.delegate = self;
-        self.registView.phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
+       
      
     }
     return _registView;

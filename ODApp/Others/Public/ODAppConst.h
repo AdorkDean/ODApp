@@ -74,3 +74,5 @@ UIKIT_EXTERN NSString * const kSaveOrderUrl;
 UIKIT_EXTERN NSString * const KActivityListUrl;
 UIKIT_EXTERN NSString * const KActivityDetailUrl;
 UIKIT_EXTERN NSString * const kGetLikeListUrl;
+UIKIT_EXTERN NSString * const kGetMyOrderListUrl;
+UIKIT_EXTERN NSString * const kOrderDetailUrl;

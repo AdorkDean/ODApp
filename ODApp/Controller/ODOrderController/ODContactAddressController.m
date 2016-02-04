@@ -36,21 +36,24 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"联系地址";
+    self.view.userInteractionEnabled = YES;
     self.dataArray = [[NSMutableArray alloc] init];
     self.defaultArray = [[NSMutableArray alloc] init];
     self.tableViewReuseIdentifier = NSStringFromClass([UITableViewCell class]);
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
-    self.view.userInteractionEnabled = YES;
-    
+   
+      [self getData];
    
 }
 
 
-- (void)viewWillAppear:(BOOL)animated{
+-(void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
     [self getData];
 }
+
 
 - (void)getData
 {
@@ -66,8 +69,8 @@
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
           
-            [self.defaultArray removeAllObjects];
-            [self.dataArray removeAllObjects];
+            [weakSelf.defaultArray removeAllObjects];
+            [weakSelf.dataArray removeAllObjects];
             
             
             NSMutableDictionary *dic = responseObject[@"result"];
@@ -76,16 +79,14 @@
                 NSString *is_default = [NSString stringWithFormat:@"%@" , miniDic[@"is_default"]];
                 
                 
-                
-                
                 if ([is_default isEqualToString:@"1"]) {
                     ODAddressModel *model = [[ODAddressModel alloc] init];
                     [model setValuesForKeysWithDictionary:miniDic];
-                    [self.defaultArray addObject:model];
+                    [weakSelf.defaultArray addObject:model];
                 }else{
                     ODAddressModel *model = [[ODAddressModel alloc] init];
                     [model setValuesForKeysWithDictionary:miniDic];
-                    [self.dataArray addObject:model];
+                    [weakSelf.dataArray addObject:model];
 
                 }
                 
@@ -96,14 +97,10 @@
             
         }
         
-          [self createTableView];
+          [weakSelf createTableView];
           [weakSelf.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-        
-        
         
         
         
@@ -118,13 +115,11 @@
     
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY , kScreenSize.width, kScreenSize.height - 110) style:UITableViewStylePlain];
+    self.tableView.userInteractionEnabled = YES;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    
     [self.tableView registerNib:[UINib nibWithNibName:@"ODAddressCell" bundle:nil] forCellReuseIdentifier:@"item"];
     
     [self.view addSubview:self.tableView];
@@ -161,15 +156,8 @@
             ;
         }else{
             ODAddressModel *model = self.defaultArray[0];
-            cell.nameLabel.text = model.name;
-            cell.phoneLabel.text = model.tel;
-            
-            NSString *str = [NSString stringWithFormat:@"[默认]%@",model.address];
-            NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:str];
-            [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange(0, 4)];
-            [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#000000" alpha:1] range:NSMakeRange(4, model.address.length)];
-            cell.addressLabel.attributedText = noteStr;
-
+            cell.isDefault = @"1";
+            cell.model = model;
         }
      
         
@@ -182,9 +170,8 @@
             [cell.lineLabel removeFromSuperview];
         }
         ODAddressModel *model = self.dataArray[indexPath.row];
-        cell.nameLabel.text = model.name;
-        cell.phoneLabel.text = model.tel;
-        cell.addressLabel.text = model.address;
+        cell.isDefault = @"2";
+        cell.model = model;
         
        
     }
@@ -242,11 +229,13 @@
     if (section == 0) {
         UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 0)];
         view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        view.userInteractionEnabled = YES;
         return view;
 
     }else{
         UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         view.backgroundColor = [UIColor clearColor];
+        view.userInteractionEnabled = YES;
         return view;
     }
     

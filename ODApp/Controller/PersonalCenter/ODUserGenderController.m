@@ -33,7 +33,7 @@
 - (void)createView
 {
     
-    UIImageView *manView = [[UIImageView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, 40)];
+    UIImageView *manView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 40)];
     manView.backgroundColor = [UIColor whiteColor];
     manView.userInteractionEnabled = YES;
     [self.view addSubview:manView];
@@ -49,7 +49,7 @@
     firstArror.image = [UIImage imageNamed:@"rightjiantou"];
     [manView addSubview:firstArror];
     
-    UIImageView *firstLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, 64 + manView.frame.size.height, kScreenSize.width, 1)];
+    UIImageView *firstLine = [[UIImageView alloc] initWithFrame:CGRectMake(0,  manView.frame.size.height, kScreenSize.width, 1)];
     firstLine.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:firstLine];
    
