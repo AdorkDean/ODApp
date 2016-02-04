@@ -10,6 +10,7 @@
 
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
+#import "ODUserInformation.h"
 
 @interface ODLocationController : ODBaseViewController<MAMapViewDelegate, AMapSearchDelegate>
 

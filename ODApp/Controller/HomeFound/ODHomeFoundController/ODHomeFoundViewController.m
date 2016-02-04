@@ -24,8 +24,6 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"首页";
-    
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:self.locationButton.titleLabel.text];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.pictureArray = [[NSMutableArray alloc] init];
@@ -41,14 +39,13 @@
         [self refreshdata];
         
     }];
-    
 }
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-////    [self getSkillChangeRequest];
-//}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];//}
+}
 
 - (void)refreshdata
 {
@@ -76,7 +73,7 @@
     return mArray;
 }
 
-#pragma mark - Location Button
+#pragma mark - Location
 
 - (void)CreateLocationButtonAction
 {
@@ -160,12 +157,9 @@
     }];
 }
 
-
-
-
 #pragma mark - Action
 
-// Location Button
+// Location
 - (void)locationButtonClick:(UIButton *)button
 {
     
@@ -493,17 +487,17 @@
 //动态计算cell的高度
 -(CGFloat)returnHight:(ODBazaarExchangeSkillModel *)model
 {
-    CGFloat width=kScreenSize.width>320?90:70;
-    if (model.imgs_small.count==0) {
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13];
-    }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+width;
-    }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+2*width+5;
-    }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+3*width+10;
+    CGFloat width = kScreenSize.width > 320 ? 90 : 70;
+    if (model.imgs_small.count == 0) {
+        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13];
+    }else if (model.imgs_small.count > 0 && model.imgs_small.count < 4){
+        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13] + width;
+    }else if (model.imgs_small.count >= 4 &&model.imgs_small.count < 7){
+        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13] + 2 * width + 5;
+    }else if (model.imgs_small.count >= 7&&model.imgs_small.count < 9){
+        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13] + 3 * width + 10;
     }else{
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+3*width+10;
+        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13] + 3 * width + 10;
     }
 }
 
@@ -523,7 +517,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
 
-    return CGSizeMake(0, 42);
+    return CGSizeMake(0, 40);
 }
 
 

@@ -11,8 +11,6 @@ CGFloat const ODTopY = 0;
 /** 偏好设置保存用户信息 */
 NSString *const KUserDefaultsOpenId = @"userOpenId";
 
-
-
 #pragma mark - 通知
 /** 显示集市的通知 */
 NSString *const ODNotificationShowBazaar = @"ODShowBazaarNotification";

@@ -232,7 +232,6 @@
 		D4F76DCC1C61B01200D59F02 /* ODActivityBottomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F76DC51C61B01200D59F02 /* ODActivityBottomCell.xib */; };
 		D4F76DCD1C61B01200D59F02 /* ODActivityDetailBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DC71C61B01200D59F02 /* ODActivityDetailBtn.m */; };
 		D4F76DCE1C61B01200D59F02 /* ODActivityDetailContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DC91C61B01200D59F02 /* ODActivityDetailContentCell.m */; };
-		D4F76DCF1C61B01200D59F02 /* ODActivityDetailContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4F76DCA1C61B01200D59F02 /* ODActivityDetailContentCell.xib */; };
 		D4F76DD31C61B04700D59F02 /* ODCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DD21C61B04700D59F02 /* ODCollectionController.m */; };
 		D4F76DD71C61B07B00D59F02 /* ODLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DD61C61B07B00D59F02 /* ODLikeModel.m */; };
 		D4F76DDB1C61BB4D00D59F02 /* ODActivityPersonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DD91C61BB4D00D59F02 /* ODActivityPersonCell.m */; };
@@ -672,7 +671,6 @@
 		D4F76DC71C61B01200D59F02 /* ODActivityDetailBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityDetailBtn.m; sourceTree = "<group>"; };
 		D4F76DC81C61B01200D59F02 /* ODActivityDetailContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivityDetailContentCell.h; sourceTree = "<group>"; };
 		D4F76DC91C61B01200D59F02 /* ODActivityDetailContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivityDetailContentCell.m; sourceTree = "<group>"; };
-		D4F76DCA1C61B01200D59F02 /* ODActivityDetailContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODActivityDetailContentCell.xib; sourceTree = "<group>"; };
 		D4F76DD11C61B04700D59F02 /* ODCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCollectionController.h; sourceTree = "<group>"; };
 		D4F76DD21C61B04700D59F02 /* ODCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCollectionController.m; sourceTree = "<group>"; };
 		D4F76DD51C61B07B00D59F02 /* ODLikeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLikeModel.h; sourceTree = "<group>"; };
@@ -1396,7 +1394,6 @@
 				D4F76DDA1C61BB4D00D59F02 /* ODActivityPersonCell.xib */,
 				D4F76DC81C61B01200D59F02 /* ODActivityDetailContentCell.h */,
 				D4F76DC91C61B01200D59F02 /* ODActivityDetailContentCell.m */,
-				D4F76DCA1C61B01200D59F02 /* ODActivityDetailContentCell.xib */,
 				D46C90361C6043DA004942E7 /* ODNewActivityCell.h */,
 				D46C90371C6043DA004942E7 /* ODNewActivityCell.m */,
 				D46C903E1C605841004942E7 /* ODNewActivityCell.xib */,
@@ -1806,9 +1803,9 @@
 			children = (
 				D4F76D741C60CCC400D59F02 /* ODHomeFoundFooterView.h */,
 				D4F76D751C60CCC400D59F02 /* ODHomeFoundFooterView.m */,
-				C64D40941C5E0DC6003BFFA0 /* ODSkillDetailView */,
 				D4D0731C1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.h */,
 				D4D0731D1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.m */,
+				C64D40941C5E0DC6003BFFA0 /* ODSkillDetailView */,
 			);
 			path = HomeFoundView;
 			sourceTree = "<group>";
@@ -2248,7 +2245,6 @@
 				D4D0751D1C59B9FA008527C9 /* ODTaskCell.xib in Resources */,
 				D4D075191C59B9FA008527C9 /* ODLandSecondCell.xib in Resources */,
 				D4F76DCC1C61B01200D59F02 /* ODActivityBottomCell.xib in Resources */,
-				D4F76DCF1C61B01200D59F02 /* ODActivityDetailContentCell.xib in Resources */,
 				C64D460C1C5F8C6F003BFFA0 /* UMSShareListController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

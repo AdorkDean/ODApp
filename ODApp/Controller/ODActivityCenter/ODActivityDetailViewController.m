@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 #import "ODHttpTool.h"
+#import "masonry.h"
 #import "UIImageView+WebCache.h"
 #import "ODActivityDetailModel.h"
 #import "ODActivityDetailViewController.h"
@@ -17,8 +18,10 @@
 #import "ODActivityDetailContentCell.h"
 #import "ODActivityPersonCell.h"
 
-@interface ODActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate>
-
+@interface ODActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate>
+{
+    NSInteger bottonBtnHeight;
+}
 @property (nonatomic, strong)UITableView *tableView;
 
 /**
@@ -34,10 +37,15 @@
  */
 @property (nonatomic, strong) ODActivityDetailModel *resultModel;
 
+/**
+ *  webView
+ */
+@property(nonatomic, strong) UIWebView *webView;
 
 @end
 
 @implementation ODActivityDetailViewController
+
 
 static NSString * const detailInfoCell = @"detailInfoCell";
 static NSString * const headImgCell = @"headImgCell";
@@ -47,12 +55,26 @@ static NSString * const bottomCell = @"bottomCell";
 static NSString * const activePersonCell = @"activePersonCell";
 
 #pragma mark - lazyLoad
+- (UIWebView *)webView
+{
+    if (!_webView)
+    {
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(17.5, 12.5, kScreenSize.width - 35, 10)];
+        webView.delegate = self;
+        webView.layer.masksToBounds = YES;
+        webView.layer.cornerRadius = 5;
+        webView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        webView.layer.borderWidth = 1;
+        _webView = webView;
+    }
+    return _webView;
+}
 
 - (UITableView *)tableView
 {
     if (!_tableView)
     {
-        UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight - bottonBtnHeight) style:UITableViewStylePlain];
         tableView.delegate = self;
         tableView.dataSource = self;
         tableView.tableFooterView = [UIView new];
@@ -62,12 +84,32 @@ static NSString * const activePersonCell = @"activePersonCell";
     return _tableView;
 }
 
+#pragma mark - lifeCycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.navigationItem.title = @"活动详情";
+    [self createBottomButton];
     [self registTableViewClass];
     [self requestData];
+}
+
+#pragma mark - init
+- (void)createBottomButton
+{
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:@"button_sign up"] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(report:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.right.offset(0);
+    }];
+    [btn.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.bottom.left.right.offset(0);
+    }];
+    [btn layoutIfNeeded];
+    bottonBtnHeight = btn.od_height;
 }
 
 - (void)registTableViewClass
@@ -95,6 +137,11 @@ static NSString * const activePersonCell = @"activePersonCell";
      {
          
      }];
+}
+
+- (void)report:(UIButton *)btn
+{
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -166,7 +213,6 @@ static NSString * const activePersonCell = @"activePersonCell";
         [[(ODActivityVIPCell *)cell VIPName]setText:vipModel.nick];
         [[(ODActivityVIPCell *)cell VIPInfoLabel]setText:vipModel.school_name];
         [[(ODActivityVIPCell *)cell VIPDutyLabel]setText:vipModel.profile];
-        
     }
     else if (indexPath.row == 5 + 1 + self.activityVIPs.count) //报名人
     {
@@ -174,12 +220,11 @@ static NSString * const activePersonCell = @"activePersonCell";
         [(ODActivityPersonCell *)cell activePersonNumLabel].text = [NSString stringWithFormat:@"%d人已报名",self.resultModel.apply_cnt];
         [(ODActivityPersonCell *)cell setActivePersons:self.resultModel.applies];
     }
-    else if (indexPath.row == 5 + 3 + self.activityVIPs.count)
+    else if (indexPath.row == 8 + self.activityVIPs.count)
     {
-        cell = [tableView dequeueReusableCellWithIdentifier:detailContentCell];
-        [(ODActivityDetailContentCell *)cell contentLabel].text = self.resultModel.remark;
-        
-            
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        [cell.contentView addSubview:self.webView];
+        [self.webView loadHTMLString:self.resultModel.remark baseURL:nil];
     }
     else if (indexPath.row == 5 + 4 + self.activityVIPs.count)
     {
@@ -197,7 +242,6 @@ static NSString * const activePersonCell = @"activePersonCell";
 {
     
 }
-ODActivityDetailContentCell *detailCell;
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) // 图片
@@ -226,11 +270,11 @@ ODActivityDetailContentCell *detailCell;
     }
     else if (indexPath.row == 5 + 3 + self.activityVIPs.count)
     {
-        if (!detailCell) {
-            detailCell = [tableView dequeueReusableCellWithIdentifier:detailContentCell];
-        }
-        detailCell.contentLabel.text = self.resultModel.remark;
-        return detailCell.height;
+//        if (!detailCell) {
+//            detailCell = [tableView dequeueReusableCellWithIdentifier:detailContentCell];
+//        }
+//        [[detailCell contentWebView]loadHTMLString:self.resultModel.remark baseURL:nil];
+        return self.webView.od_height + 12.5;
     }
     else if (indexPath.row == 5 + 4 + self.activityVIPs.count)
     {
@@ -238,5 +282,17 @@ ODActivityDetailContentCell *detailCell;
     }
     return 0;
 }
-
+#pragma mark - WebViewDelegate
+UITableViewCell *detailCell;
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+//    detailCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 + self.activityVIPs.count inSection:0]];
+    CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"]floatValue];
+    webView.od_height = height;
+    [self tableView:self.tableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:8 + self.activityVIPs.count inSection:0]];
+    //关闭webView上下滑动
+    UIScrollView *tempView = (UIScrollView *)[webView.subviews objectAtIndex:0];
+    tempView.scrollEnabled = NO;
+    
+}
 @end
