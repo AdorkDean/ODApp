@@ -71,4 +71,6 @@ NSString * const kSaveOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/order"
 NSString * const KActivityListUrl = @"store/activity/list";
 NSString * const KActivityDetailUrl = @"store/apply/detail2";
 NSString * const kGetLikeListUrl = @"http://woquapi.test.odong.com/1.0/swap/love/list";
+NSString * const kGetMyOrderListUrl = @"http://woquapi.test.odong.com/1.0/swap/order/list";
+NSString * const kOrderDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/order/info";
 

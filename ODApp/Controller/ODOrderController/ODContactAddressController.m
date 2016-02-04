@@ -43,15 +43,15 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
    
-    
+      [self getData];
    
 }
 
 
--(void)viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-      [self getData];
+    [super viewWillAppear:animated];
+    [self getData];
 }
 
 

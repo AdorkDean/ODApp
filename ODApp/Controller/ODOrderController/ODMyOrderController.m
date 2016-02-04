@@ -1,19 +1,19 @@
 //
-//  ODCollectionController.m
+//  ODMyOrderController.m
 //  ODApp
 //
-//  Created by zhz on 16/1/31.
-//  Copyright © 2016年 Odong-YG. All rights reserved.
+//  Created by zhz on 16/2/4.
+//  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODCollectionController.h"
-#import "ODCollectionCell.h"
+#import "ODMyOrderController.h"
+#import "ODMyOrderModel.h"
 #import "MJRefresh.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
-#import "ODLikeModel.h"
-#import "ODOthersInformationController.h"
-@interface ODCollectionController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+#import "ODMyOrderCell.h"
+#import "ODOrderDetailController.h"
+@interface ODMyOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
@@ -21,19 +21,25 @@
 @property (nonatomic , assign) NSInteger page;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic , strong) NSMutableArray *dataArray;
+@property (nonatomic , copy) NSString *open_id;
+
 @end
 
-@implementation ODCollectionController
+@implementation ODMyOrderController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-     self.page = 1;
+    // Do any additional setup after loading the view.
+    
+    self.page = 1;
+    self.open_id = [ODUserInformation sharedODUserInformation].openID;
     self.dataArray = [[NSMutableArray alloc] init];
     [self getData];
     [self createCollectionView];
+
+    self.navigationItem.title = @"已购买订单";
     
-    self.navigationItem.title = @"TA们收藏过";
+    
 }
 
 - (void)getData
@@ -43,11 +49,11 @@
     
     self.manager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"swap_id":self.swap_id , @"page":countNumber , @"open_id":self.open_id};
+    NSDictionary *parameters = @{@"page":countNumber , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:kGetLikeListUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kGetMyOrderListUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (responseObject) {
             
@@ -59,11 +65,11 @@
                     [self.dataArray removeAllObjects];
                 }
                 
-             
+                
                 NSMutableDictionary *dic = responseObject[@"result"];
                 
                 for (NSMutableDictionary *miniDic in dic) {
-                    ODLikeModel *model = [[ODLikeModel alloc] init];
+                    ODMyOrderModel *model = [[ODMyOrderModel alloc] init];
                     [model setValuesForKeysWithDictionary:miniDic];
                     [self.dataArray addObject:model];
                 }
@@ -88,9 +94,9 @@
         [weakSelf.collectionView.mj_footer endRefreshing];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
-
     
-   
+    
+    
 }
 
 #pragma mark - 刷新
@@ -116,7 +122,7 @@
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor whiteColor];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -126,8 +132,8 @@
         
         [self LoadMoreData];
     }];
-
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ODCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
+    
+    [self.collectionView registerNib:[UINib nibWithNibName:@"ODMyOrderCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.view addSubview:self.collectionView];
 }
 
@@ -135,12 +141,13 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
+    ODMyOrderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
     
-    ODLikeModel *model = self.dataArray[indexPath.row];
+    ODMyOrderModel *model = self.dataArray[indexPath.row];
+    
     cell.model = model;
     
-        
+    
     return cell;
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -157,12 +164,10 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-    ODLikeModel *model = self.dataArray[indexPath.row];
-    vc.open_id = model.open_id;
-    [self.navigationController pushViewController:vc animated:YES];
-  
-    
+      ODMyOrderModel *model = self.dataArray[indexPath.row];
+      ODOrderDetailController *vc = [[ODOrderDetailController alloc] init];
+      vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
+      [self.navigationController pushViewController:vc animated:YES];
     
     
 }
@@ -172,10 +177,23 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return CGSizeMake(kScreenSize.width , 100);
+    return CGSizeMake(kScreenSize.width , 180);
     
     
     
 }
+
+//动态设置每个分区的最小行间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 10;
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 @end
