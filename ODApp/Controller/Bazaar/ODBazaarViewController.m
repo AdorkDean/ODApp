@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self createSkillAndHelpButton];
     [self createScrollView];
@@ -24,6 +24,7 @@
     self.navigationItem.title = @"欧动集市";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(releaseButtonClick:) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil];
 }
+
 
 -(void)releaseButtonClick:(UIButton *)button
 {
@@ -33,13 +34,18 @@
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
         
     }else{
-        ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
-        releaseTask.isBazaar = YES;
         
-        releaseTask.myBlock = ^(NSString *release){
-//            self.refresh = release;
-        };
-        [self.navigationController pushViewController:releaseTask animated:YES];
+        
+//        ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
+//        releaseTask.isBazaar = YES;
+//        
+//        releaseTask.myBlock = ^(NSString *release){
+////            self.refresh = release;
+//        };
+//        [self.navigationController pushViewController:releaseTask animated:YES];
+        
+        ODBazaarReleaseSkillViewController *releaseSkill = [[ODBazaarReleaseSkillViewController alloc]init];
+        [self.navigationController pushViewController:releaseSkill animated:YES];
     }
 }
 

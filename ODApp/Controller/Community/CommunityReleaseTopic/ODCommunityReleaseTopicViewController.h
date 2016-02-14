@@ -24,7 +24,6 @@
 @property(nonatomic,strong)NSMutableArray *imageArray;
 @property(nonatomic,strong)NSMutableArray *strArray;
 @property(nonatomic,copy)void(^myBlock)(NSString *refresh);
-
 @property (nonatomic, strong) UIImage *pickedImage;
 @property (nonatomic, strong) MBProgressHUD *hud;
 

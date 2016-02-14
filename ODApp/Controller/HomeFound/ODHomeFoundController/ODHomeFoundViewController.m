@@ -24,6 +24,8 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"首页";
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:self.locationButton.titleLabel.text];
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.pictureArray = [[NSMutableArray alloc] init];
@@ -39,13 +41,14 @@
         [self refreshdata];
         
     }];
+    
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];//}
-}
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+////    [self getSkillChangeRequest];
+//}
 
 - (void)refreshdata
 {
@@ -73,7 +76,7 @@
     return mArray;
 }
 
-#pragma mark - Location
+#pragma mark - Location Button
 
 - (void)CreateLocationButtonAction
 {
@@ -157,9 +160,12 @@
     }];
 }
 
+
+
+
 #pragma mark - Action
 
-// Location
+// Location Button
 - (void)locationButtonClick:(UIButton *)button
 {
     
@@ -433,8 +439,8 @@
     self.rsusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:viewId forIndexPath:indexPath];
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 17.5) * 2/3 * self.pictureArray.count , 0);
-        self.rsusableView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 17.5) * 2/3, 0);
+        self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 2/3 * self.pictureArray.count , 0);
+        self.rsusableView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 15) * 2/3, 0);
         //    self.rsusableView.scrollView.pagingEnabled = YES;
         self.rsusableView.scrollView.delegate = self;
         self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
@@ -444,9 +450,9 @@
             
             UIButton *imageButton;
             if (i < self.pictureArray.count - 1) {
-                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 17.5) * 2/3 * i, 0, (kScreenSize.width - 17.5) * 2/3 - 8, 110)];
+                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3 - 8, 120)];
             }else{
-                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 17.5) * 2/3 * i, 0, (kScreenSize.width - 17.5) * 2/3, 110)];
+                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3, 120)];
             }
             [imageButton sd_setBackgroundImageWithURL:[NSURL URLWithString:self.pictureArray[i]] forState:UIControlStateNormal];
             
@@ -487,17 +493,17 @@
 //动态计算cell的高度
 -(CGFloat)returnHight:(ODBazaarExchangeSkillModel *)model
 {
-    CGFloat width = kScreenSize.width > 320 ? 90 : 70;
-    if (model.imgs_small.count == 0) {
-        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13];
-    }else if (model.imgs_small.count > 0 && model.imgs_small.count < 4){
-        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13] + width;
-    }else if (model.imgs_small.count >= 4 &&model.imgs_small.count < 7){
-        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13] + 2 * width + 5;
-    }else if (model.imgs_small.count >= 7&&model.imgs_small.count < 9){
-        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13] + 3 * width + 10;
+    CGFloat width=kScreenSize.width>320?90:70;
+    if (model.imgs_small.count==0) {
+        return 180;
+    }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
+        return 180+width;
+    }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
+        return 180+2*width+5;
+    }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
+        return 180+3*width+10;
     }else{
-        return 148 + [ODHelp textHeightFromTextString:model.content width:kScreenSize.width - 115 fontSize:13] + 3 * width + 10;
+        return 180+3*width+10;
     }
 }
 
@@ -517,7 +523,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
 
-    return CGSizeMake(0, 40);
+    return CGSizeMake(0, 42);
 }
 
 

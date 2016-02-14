@@ -16,6 +16,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self navigationInit];
     [self createScrollView];
     [self createTitleTextView];
@@ -56,16 +57,16 @@
 #pragma mark - 创建scrollView
 -(void)createScrollView
 {
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0,ODTopY, kScreenSize.width, KControllerHeight)];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0,0, kScreenSize.width, kScreenSize.height-64)];
     self.scrollView.userInteractionEnabled = YES;
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 500);
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 504);
     [self.view addSubview:self.scrollView];
 }
 
 #pragma mark - 创建titleTextView
 -(void)createTitleTextView
 {
-    self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 140) delegate:self tag:10 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 140) delegate:self tag:0 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.scrollView addSubview:self.titleTextView];
     self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4, kScreenSize.width - 20, 30) text:@"请输入任务标题" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     self.titleLabel.backgroundColor = [UIColor clearColor];
@@ -285,7 +286,7 @@
 #pragma mark - 创建taskDetailTextView
 -(void)createTaskDetailTextView
 {
-    self.taskDetailTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 217, kScreenSize.width - 8, 245) delegate:self tag:11 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.taskDetailTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 217, kScreenSize.width - 8, 245) delegate:self tag:0 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.scrollView addSubview:self.taskDetailTextView];
     self.taskDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 217, kScreenSize.width - 20, 30) text:@"请输入任务详情" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     self.taskDetailLabel.backgroundColor = [UIColor clearColor];
@@ -397,73 +398,43 @@
 
 #pragma mark - UITextViewDelegate
 
-NSString *titleText = @"";
+NSString *taskTitleText = @"";
 NSString *taskDetailText = @"";
+
 - (void)textViewDidChange:(UITextView *)textView
 {
-    if (textView == self.titleTextView)
-    {
-        if (textView.text.length > 30)
-        {
-            textView.text = titleText;
+    if (textView == self.titleTextView){
+        if (textView.text.length > 30){
+            textView.text = [textView.text substringToIndex:30];
+        }else{
+            taskTitleText = textView.text;
         }
-        else
-        {
-            titleText = textView.text;
+        
+        if (self.titleTextView.text.length == 0) {
+            self.titleLabel.text = @"请输入任务标题";
+        }else{
+            self.titleLabel.text = @"";
         }
     }
-    else if (textView == self.taskDetailTextView)
-    {
-        if (textView.text.length > 500)
-        {
-            textView.text = taskDetailText;
-        }
-        else
-        {
+    else if (textView == self.taskDetailTextView){
+        if (textView.text.length > 500){
+            textView.text = [textView.text substringToIndex:500];
+        }else{
             taskDetailText = textView.text;
         }
-    }
-}
-
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    if (textView == self.titleTextView) {
-        if (text.length == 0) return YES;
         
-        NSInteger existedLength = textView.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = text.length;
-        if (existedLength - selectedLength + replaceLength > 30) {
-            return NO;
+        if (self.taskDetailTextView.text.length == 0) {
+            self.taskDetailLabel.text = @"请输入任务详情";
+        }else{
+            self.taskDetailLabel.text = @""; 
         }
     }
-    
-    if (textView == self.taskDetailTextView) {
-        if (text.length == 0) return YES;
-        
-        NSInteger existedLength = textView.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = text.length;
-        if (existedLength - selectedLength + replaceLength > 500) {
-            return NO;
-        }
-    }
-
-    return YES;
 }
 
--(void)textViewDidBeginEditing:(UITextView *)textView
-{
-    if (textView.tag == 10) {
-        self.titleLabel.text = @"";
-    }else{
-        self.taskDetailLabel.text = @"";
-    }
-}
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    if (textView.tag == 10) {
+    if (textView == self.titleTextView) {
         if (textView.text.length == 0) {
             self.titleLabel.text = @"请输入任务标题";
         }

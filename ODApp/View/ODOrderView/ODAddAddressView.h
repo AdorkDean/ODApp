@@ -18,4 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *addressTextField;
 
 +(instancetype)getView;
+
+
+
 @end
