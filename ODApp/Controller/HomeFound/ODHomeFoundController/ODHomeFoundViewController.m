@@ -22,7 +22,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    __weakSelf
     self.navigationItem.title = @"首页";
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:self.locationButton.titleLabel.text];
@@ -38,7 +38,7 @@
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self refreshdata];
+        [weakSelf refreshdata];
         
     }];
     

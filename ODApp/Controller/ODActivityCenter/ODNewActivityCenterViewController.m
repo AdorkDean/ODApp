@@ -12,7 +12,7 @@
 
 @interface ODNewActivityCenterViewController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, strong)UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 
 /**
  *  从服务器获取到的数据
@@ -29,7 +29,7 @@ static NSString * const cellId = @"newActivityCell";
 {
     if (!_tableView)
     {
-        UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODTabBarHeight) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODTabBarHeight - ODNavigationHeight) style:UITableViewStylePlain];
         tableView.delegate = self;
         tableView.dataSource = self;
         [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODNewActivityCell class]) bundle:nil] forCellReuseIdentifier:cellId];
