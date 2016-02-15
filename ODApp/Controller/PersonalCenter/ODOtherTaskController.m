@@ -106,7 +106,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/task/list";
+    NSString *url = @"http://woquapi.odong.com/1.0/task/list";
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         

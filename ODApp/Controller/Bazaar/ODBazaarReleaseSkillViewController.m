@@ -82,7 +82,10 @@
     [topView addSubview:self.titleCountLabel ];
     
     self.titleTextField = [[UITextField alloc]initWithFrame:CGRectMake(120, 20, kScreenSize.width-170, 20)];
+    self.titleTextField.placeholder = @"如:叫PS、陪看电影、代买早饭等";
+
     self.titleTextField.placeholder = @"代买早饭";
+
     self.titleTextField.font = [UIFont systemFontOfSize:13];
     self.titleTextField.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.titleTextField.delegate = self;
@@ -143,6 +146,14 @@
     [self.addPicButton addTarget:self action:@selector(addPicButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.picView addSubview:self.addPicButton];
     
+
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 0.4*width, 0.2*width)];
+    imageView.image = [UIImage imageNamed:@"button_Cover label_one"];
+    imageView.tag = 9;
+    [self.addPicButton addSubview:imageView];
+    
+
+
     self.imageArray = [[NSMutableArray alloc]init];
     self.strArray = [[NSMutableArray alloc]init];
 }
@@ -419,7 +430,54 @@
             }
         }
     }
+
+    
+    if (button.tag == 10 || button.tag==11) {
+        [self createServiceTimeView];
+    }
+    if (button.tag == 12) {
+        [self.timeView removeFromSuperview];
+        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
+    }
 }
+
+-(void)createServiceTimeView
+{
+    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(serviceTimeClick:)];
+    self.timeView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bottomView.frame), kScreenSize.width, 50)];
+    self.timeView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    [self.timeView addGestureRecognizer:gesture];
+    [self.scrollView addSubview:self.timeView];
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 15, 100, 20)];
+    label.text = @"可服务时间";
+    label.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    label.font = [UIFont systemFontOfSize:14];
+    [self.timeView addSubview:label];
+    
+    UILabel *setLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-100, 15, 50, 20)];
+    setLabel.text = @"请设置";
+    setLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    setLabel.font = [UIFont systemFontOfSize:14];
+    setLabel.textAlignment = NSTextAlignmentRight;
+    [self.timeView addSubview:setLabel];
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-32.5, 17.5, 15, 15)];
+    imageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
+    [self.timeView addSubview:imageView];
+    
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
+
+}
+
+-(void)serviceTimeClick:(UITapGestureRecognizer *)gesture
+{
+    ODBazaarReleaseSkillTimeViewController *timeController = [[ODBazaarReleaseSkillTimeViewController alloc]init];
+    [self.navigationController pushViewController:timeController animated:YES];
+}
+
+
+
 
 -(void)createReleaseButton
 {

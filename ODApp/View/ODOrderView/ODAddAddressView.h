@@ -15,7 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
 
-@property (weak, nonatomic) IBOutlet UITextField *addressTextField;
+
+@property (weak, nonatomic) IBOutlet UITextView *addressTextView;
 
 +(instancetype)getView;
 

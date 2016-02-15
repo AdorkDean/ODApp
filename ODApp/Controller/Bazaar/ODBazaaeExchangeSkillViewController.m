@@ -22,9 +22,29 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.page = 1;
     [self createRequest];
+    [self createCollectionView];
     [self joiningTogetherParmeters];
+    
+    __weakSelf
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf joiningTogetherParmeters];
+    }];
+    
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf loadMoreData];
+    }];
+
+    
+
 }
 
+-(void)loadMoreData
+{
+    self.page ++;
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0"};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
+}
 -(void)createRequest
 {
     self.manager = [AFHTTPRequestOperationManager manager];
@@ -47,18 +67,26 @@
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
+            
+            if (weakSelf.page == 1) {
+                [weakSelf.dataArray removeAllObjects];
+            }
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSArray *result = dict[@"result"];
             for (NSDictionary *itemDict in result) {
                 ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
+                [weakSelf.collectionView reloadData];
+                [weakSelf.collectionView.mj_header endRefreshing];
+                [weakSelf.collectionView.mj_footer endRefreshing];
             }
-            [weakSelf createCollectionView];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf.collectionView.mj_footer endRefreshing];
+
     }];
 }
 
@@ -153,6 +181,7 @@
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc]init];
     detailControler.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
+    NSLog(@"%@",detailControler.swap_id);
     [self.navigationController pushViewController:detailControler animated:YES];
     
 }

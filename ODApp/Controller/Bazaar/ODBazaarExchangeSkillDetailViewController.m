@@ -7,7 +7,7 @@
 //
 
 #import "ODBazaarExchangeSkillDetailViewController.h"
-
+#import "ODSecondOrderController.h"
 @interface ODBazaarExchangeSkillDetailViewController ()
 
 @end
@@ -28,6 +28,7 @@
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    self.dataArray = [[NSMutableArray alloc]init];
 }
 
 #pragma mark - 拼接参数
@@ -46,8 +47,10 @@
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
-            weakSelf.model = [[ODBazaarExchangeSkillModel alloc]init];
-            [weakSelf.model setValuesForKeysWithDictionary:result];
+            ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
+            [model setValuesForKeysWithDictionary:result];
+            [weakSelf.dataArray addObject:model];
+            NSLog(@"%ld",model.loves.count);
             [weakSelf createUserInfoView];
             [weakSelf createDetailView];
             [weakSelf createBottomView];
@@ -61,29 +64,35 @@
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
     self.scrollView.userInteractionEnabled = YES;
+
+    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 3000);
+
+
     [self.view addSubview:self.scrollView];
 }
 
 -(void)createUserInfoView
 {
+    ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(otherInfoClick)];
-    UIView *userInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 80)];
+    UIView *userInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 60)];
     userInfoView.backgroundColor = [UIColor whiteColor];
     [userInfoView addGestureRecognizer:gesture];
     [self.scrollView addSubview:userInfoView];
     
-    UIButton *headButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 60, 60)];
+    UIButton *headButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 40, 40)];
     headButton.layer.masksToBounds = YES;
-    headButton.layer.cornerRadius = 30;
-    [headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.model.user[@"avatar"]] forState:UIControlStateNormal];
+    headButton.layer.cornerRadius = 20;
+    [headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
     [userInfoView addSubview:headButton];
     
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(80, 32.5, 10,15)];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(60, 22.5, 10,15)];
     imageView.image = [UIImage imageNamed:@"Skills profile page_icon_Not certified"];
     [userInfoView addSubview:imageView];
     
-    UILabel *certificationLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 30, kScreenSize.width-100-50, 20)];
-    NSString *user_auth_status = [NSString stringWithFormat:@"%@",self.model.user[@"user_auth_status"]];
+    UILabel *certificationLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 20, kScreenSize.width-80-50, 20)];
+    NSString *user_auth_status = [NSString stringWithFormat:@"%@",model.user[@"user_auth_status"]];
     if ([user_auth_status isEqualToString:@"0"]) {
         certificationLabel.text = @"未认证";
     }else if ([user_auth_status isEqualToString:@"0"]){
@@ -91,26 +100,28 @@
     }
     [userInfoView addSubview:certificationLabel];
     
-    UIImageView *arrowImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-25, 32.5, 15, 15)];
+    UIImageView *arrowImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-25, 22.5, 15, 15)];
     arrowImageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
     [userInfoView addSubview:arrowImageView];
 }
 
 -(void)otherInfoClick
 {
+    ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
     ODOthersInformationController *otherInfo = [[ODOthersInformationController alloc]init];
-    otherInfo.open_id = self.model.user[@"open_id"];
+    otherInfo.open_id = model.user[@"open_id"];
     [self.navigationController pushViewController:otherInfo animated:YES];
 }
 
 -(void)createDetailView
 {
-    UIView *detailView = [[UIView alloc]initWithFrame:CGRectMake(0, 85, kScreenSize.width, 200)];
+    ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
+    UIView *detailView = [[UIView alloc]initWithFrame:CGRectMake(0, 65, kScreenSize.width, 2000)];
     detailView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:detailView];
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, kScreenSize.width, 20)];
-    titleLabel.text = [NSString stringWithFormat:@"我去 %@",self.model.title];
+    titleLabel.text = [NSString stringWithFormat:@"我去 %@",model.title];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [detailView addSubview:titleLabel];
     
@@ -120,58 +131,65 @@
     priceLabel.textAlignment = NSTextAlignmentCenter;
     [detailView addSubview:priceLabel];
     
-    UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(priceLabel.frame)+10, kScreenSize.width-20, [ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width-20 fontSize:14])];
-    contentLabel.text = self.model.content;
+    UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(priceLabel.frame)+10, kScreenSize.width-20, [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14])];
+    contentLabel.text = model.content;
     [detailView addSubview:contentLabel];
     
+    
     __block CGRect frame;
-    __weakSelf;
-    if (self.model.imgs_small.count) {
-        for (NSInteger i = 0; i < self.model.imgs_small.count; i++) {
-            NSDictionary *dict = self.model.imgs_small[i];
-            UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectZero];
-            [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                
-                [imageView sizeToFit];
-                imageView.frame = CGRectMake(10, CGRectGetMaxY(contentLabel.frame)+ 10+(imageView.od_height * ((kScreenSize.width-20) / imageView.od_width)+10)*i, kScreenSize.width-20, imageView.od_height * ((kScreenSize.width-20) / imageView.od_width));
-                imageView.contentMode = UIViewContentModeScaleAspectFill;
-                [detailView addSubview:imageView];
-                
-                if (i==weakSelf.model.imgs_small.count-1) {
+    for (NSInteger i = 0; i < model.imgs_big.count; i++) {
+        NSDictionary *dict = model.imgs_big[i];
+        UIImageView *imageView = [[UIImageView alloc]init];
+        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            [imageView sizeToFit];
+            CGFloat multiple = imageView.od_width/(kScreenSize.width-20);
+            CGFloat height = imageView.od_height/multiple;
+            if (i==0) {
+                imageView.frame = CGRectMake(10, CGRectGetMaxY(contentLabel.frame)+10,kScreenSize.width-20,height);
+                frame = imageView.frame;
+            }else{
+                if (i==model.imgs_big.count-1) {
+                    imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
+
+                    UIImageView *loveIamgeView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
+                    loveIamgeView.image = [UIImage imageNamed:@"Skills profile page_share"];
+                    [detailView addSubview:loveIamgeView];
+                        
+                    if (model.loves.count) {
+                        for (NSInteger i = 0; i < model.loves.count; i++) {
+                            CGFloat width = 40;
+                            NSDictionary *dict = model.loves[i];
+                            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake((kScreenSize.width-(model.loves.count-1)*10-model.loves.count*width)/2+(width+10)*i, CGRectGetMaxY(loveIamgeView.frame)+10, width, width)];
+                            button.layer.masksToBounds = YES;
+                            button.layer.cornerRadius = 20;
+                            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"avatar"]] forState:UIControlStateNormal];
+                            [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                            [detailView addSubview:button];
+                        }
+                        detailView.frame = CGRectMake(0, 65, kScreenSize.width, loveIamgeView.frame.origin.y+loveIamgeView.frame.size.height+60);
+                    }else{
+                        detailView.frame = CGRectMake(0, 65, kScreenSize.width, loveIamgeView.frame.origin.y+loveIamgeView.frame.size.height+10);
+                    }
+                    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+detailView.frame.size.height);
+                }else{
+                    imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
                     frame = imageView.frame;
                 }
-            }];
-        }
-        
-        UIImageView *loveIamgeView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(frame) + 10, 180, 40)];
-        loveIamgeView.image = [UIImage imageNamed:@"Skills profile page_share"];
-        [detailView addSubview:loveIamgeView];
-        
-        UIButton *button = nil;
-        if (self.model.loves.count) {
-            for (NSInteger i = 0; i < self.model.loves.count; i++) {
-                CGFloat width = 40;
-                NSDictionary *dict = self.model.loves[i];
-                button = [[UIButton alloc]initWithFrame:CGRectMake(((kScreenSize.width-(self.model.loves.count*width-10*(self.model.loves.count-1)))/2 + (width+10)*i), CGRectGetMaxY(loveIamgeView.frame)+10, width, width)];
-                button.layer.masksToBounds = YES;
-                button.layer.cornerRadius = 20;
-                [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"avatar"]] forState:UIControlStateNormal];
-                [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-                [detailView addSubview:button];
             }
-        }
-        
-        detailView.frame = CGRectMake(0, 85, kScreenSize.width, button.frame.origin.y + button.frame.size.height + 10);
-        self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 85+detailView.frame.size.height);
+            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            [detailView addSubview:imageView];
+        }];
     }
 }
 
 #pragma mark - 收藏人列表点击事件
 -(void)lovesListButtonClick:(UIButton *)button
 {
+    ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
     ODCollectionController *collection = [[ODCollectionController alloc]init];
-    collection.open_id = self.model.user[@"open_id"];
-    collection.swap_id = [NSString stringWithFormat:@"%@",self.model.swap_id];
+    collection.open_id = model.user[@"open_id"];
+    collection.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
     [self.navigationController pushViewController:collection animated:YES];
 }
 
@@ -213,9 +231,22 @@
 #pragma mark - 立即购买事件
 -(void)payButtonClick:(UIButton *)button
 {
-    ODOrderController *orderController = [[ODOrderController alloc]init];
-    orderController.informationModel = self.model;
-    [self.navigationController pushViewController:orderController animated:YES];
+    
+    ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
+    
+    
+    NSString *type = [NSString stringWithFormat:@"%@" ,model.swap_type];
+    
+    if ([type isEqualToString:@"2"]) {
+        ODSecondOrderController *vc  =[[ODSecondOrderController alloc] init];
+        vc.informationModel = model;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        ODOrderController *orderController = [[ODOrderController alloc]init];
+        orderController.informationModel = model;
+        [self.navigationController pushViewController:orderController animated:YES];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {

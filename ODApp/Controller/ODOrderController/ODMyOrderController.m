@@ -37,10 +37,29 @@
     [self getData];
     [self createCollectionView];
 
+
     self.navigationItem.title = @"已购买订单";
     
     
 }
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if ([self.isRefresh isEqualToString:@"1"]) {
+        [self.collectionView.mj_header beginRefreshing];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.isRefresh = @"";
+}
+
+
+
 
 - (void)getData
 {
@@ -167,6 +186,18 @@
       ODMyOrderModel *model = self.dataArray[indexPath.row];
       ODOrderDetailController *vc = [[ODOrderDetailController alloc] init];
       vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
+
+      vc.orderType = model.status_str;
+    
+    
+    __weakSelf
+    vc.getRefresh = ^(NSString *isRefresh){
+        
+       
+        weakSelf.isRefresh = isRefresh;
+    };
+
+    
       [self.navigationController pushViewController:vc animated:YES];
     
     
@@ -177,7 +208,11 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
+
+    return CGSizeMake(kScreenSize.width , 120);
+
     return CGSizeMake(kScreenSize.width , 180);
+
     
     
     
@@ -186,7 +221,11 @@
 //动态设置每个分区的最小行间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
+
+    return 6;
+
     return 10;
+
 }
 
 
