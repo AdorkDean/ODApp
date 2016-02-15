@@ -42,7 +42,7 @@
  
     
     self.dataArray = [[NSMutableArray alloc] init];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     [self getData];
     self.navigationItem.title = @"个人中心";
     
@@ -90,9 +90,9 @@
 - (void)createTableView
 {
     
-    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+   
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 20) style:UITableViewStylePlain];
+      
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.userInteractionEnabled = YES;
@@ -101,7 +101,6 @@
     
     self.informationView = [ODInformationView getView];
     self.informationView.userInteractionEnabled = YES;
-    self.informationView.frame = CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height + 10);
     
     ODUserModel *model = self.dataArray[0];
     
@@ -115,7 +114,7 @@
     
     
     self.informationView.userImageView.layer.masksToBounds = YES;
-    self.informationView.userImageView.layer.cornerRadius = 45;
+    self.informationView.userImageView.layer.cornerRadius = 47.5;
     self.informationView.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
     self.informationView.userImageView.layer.borderWidth = 1;
 

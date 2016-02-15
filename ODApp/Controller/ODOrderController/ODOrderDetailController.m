@@ -130,6 +130,8 @@
 {
     self.delateManager = [AFHTTPRequestOperationManager manager];
     
+    
+      
     NSDictionary *parameters = @{@"order_id":self.order_id , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     

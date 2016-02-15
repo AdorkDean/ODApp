@@ -11,7 +11,8 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODLandMainController.h"
-
+#import  "ODTabBarController.h"
+#import "ODHomeFoundViewController.h"
 
 @interface ODRegisteredController ()<UITextFieldDelegate>
 
@@ -83,6 +84,7 @@
         [self.registView.registereButton addTarget:self action:@selector(registere:) forControlEvents:UIControlEventTouchUpInside];
         [self.registView.seePassword addTarget:self action:@selector(seePassword:) forControlEvents:UIControlEventTouchUpInside];
         self.registView.phoneNumber.delegate = self;
+        self.registView.password.delegate = self;
        
      
     }
@@ -100,6 +102,16 @@
         if (existedLength - selectedLength + replaceLength > 11) {
             return NO;
         }
+    }else if (textField == self.registView.password) {
+        if (string.length == 0) return YES;
+        
+        NSInteger existedLength = textField.text.length;
+        NSInteger selectedLength = range.length;
+        NSInteger replaceLength = string.length;
+        if (existedLength - selectedLength + replaceLength > 26) {
+            return NO;
+        }
+
     }
     
     return YES;
@@ -121,9 +133,9 @@
     }else if ([self.registView.verification.text isEqualToString:@""]) {
         
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入验证码"];
-    }else if ([self.registView.password.text isEqualToString:@""]) {
+    }else if (self.registView.password.text.length < 6 || self.registView.password.text.length > 26) {
 
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入密码"];
+          [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"密码仅支持6到26位"];
     }
 
     else {
@@ -191,26 +203,32 @@
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
          
-            ODLandMainController *vc = [[ODLandMainController alloc] init];
+          
             NSMutableDictionary *dic = responseObject[@"result"];
             NSString *openId = dic[@"open_id"];
             
             [ODUserInformation sharedODUserInformation].openID = openId;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
+            
+            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+            [user setObject:openId forKey:KUserDefaultsOpenId];
+            
+            ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            tabBar.selectedIndex = tabBar.currentIndex;
+            
+            
+            ODHomeFoundViewController *vc1 = [[ODHomeFoundViewController alloc] init];
+            
+            [weakSelf.navigationController presentViewController:vc1 animated:YES completion:nil];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"注册成功"];
             
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             
-            if (weakSelf.registView.password.text.length < 6 || weakSelf.registView.password.text.length > 26 ) {
-
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"密码仅支持6到26位"];
-                
-            }else {
-
+       
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
-            }
-    
+           
         }
     
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

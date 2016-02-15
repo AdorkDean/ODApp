@@ -129,6 +129,8 @@
         ODLandFirstCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
         
         
+             
+        
         cell.model = self.model;
         
         

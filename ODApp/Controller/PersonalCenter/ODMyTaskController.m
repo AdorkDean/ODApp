@@ -362,7 +362,8 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    [self.allTaskButton setTitle:@"全部任务V" forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"全部任务V"];
+
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -376,7 +377,8 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    [self.allTaskButton setTitle:@"等待派单V" forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"等待派单V"];
+
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -388,11 +390,10 @@
 
     self.type = @"2";
     
-      [self.firstCollectionView.mj_header beginRefreshing];
-      [self.secondCollectionView.mj_header beginRefreshing];
+    [self.firstCollectionView.mj_header beginRefreshing];
+    [self.secondCollectionView.mj_header beginRefreshing];
     
-      [self.allTaskButton setTitle:@"等待完成V" forState:UIControlStateNormal];
-    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"等待完成V"];
     [self.typeView removeFromSuperview];
     self.showType = YES;
     
@@ -405,7 +406,9 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    [self.allTaskButton setTitle:@"完成任务V" forState:UIControlStateNormal];
+  
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"完成任务V"];
+
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -420,7 +423,8 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    [self.allTaskButton setTitle:@"过期任务V" forState:UIControlStateNormal];
+      self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"过期任务V"];
+
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -434,8 +438,8 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    [self.allTaskButton setTitle:@"违规任务V" forState:UIControlStateNormal];
-    
+      self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"违规任务V"];
+
     [self.typeView removeFromSuperview];
     self.showType = YES;
 
@@ -558,14 +562,9 @@
             
             for (NSDictionary *itemDict in tasks) {
                 
-                NSString *task_status = [NSString stringWithFormat:@"%@" ,  itemDict[@"task_status"]];
-                
-                
-                if (![task_status isEqualToString:@"-1"]) {
-                    ODBazaarModel *model = [[ODBazaarModel alloc]init];
-                    [model setValuesForKeysWithDictionary:itemDict];
-                    [weakSelf.secondDataArray addObject:model];
-                }
+                ODBazaarModel *model = [[ODBazaarModel alloc]init];
+                [model setValuesForKeysWithDictionary:itemDict];
+                [weakSelf.secondDataArray addObject:model];
 
             }
             
@@ -629,20 +628,29 @@
     }else {
         
         ODBazaarModel *model = self.secondDataArray[indexPath.row];
-     
-        ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
+        NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
         
-        cell.model = model;
-        [cell.userImageViewButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-        cell.userImageViewButton.tag = 222;
-
-        
-        return cell;
-        
-        
+        if ([status isEqualToString:@"-1"]) {
+            ODViolationsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
+            
+            cell.model = model;
+            [cell.deleteButton removeFromSuperview];
+            return cell;
+            
+            
+        }else{
+            
+            ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
+            
+            cell.model = model;
+            [cell.userImageViewButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+            cell.userImageViewButton.tag = 222;
+            
+            
+            return cell;
+            
+        }
     }
-    
-
 
 }
 
