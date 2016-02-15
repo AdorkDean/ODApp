@@ -38,7 +38,7 @@
 -(void)loadMoreData
 {
     self.count ++;
-    NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",self.count],@"open_id":self.open_id};
+    NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",(long)self.count],@"open_id":self.open_id};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kHomeFoundListUrl paramater:signParameter];
 }
@@ -57,7 +57,7 @@
 -(void)joiningTogetherParmeters
 {
     self.count = 1;
-    NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",self.count],@"open_id":self.open_id};
+    NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",(long)self.count],@"open_id":self.open_id};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kHomeFoundListUrl paramater:signParameter];
 }

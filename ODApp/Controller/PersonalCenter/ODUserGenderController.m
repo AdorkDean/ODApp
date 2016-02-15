@@ -84,9 +84,9 @@
     NSDictionary *parameters = @{@"gender":@"1", @"open_id":self.openID};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/change";
+   
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kChangeUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             if (weakSelf.getTextBlock) {
@@ -115,9 +115,9 @@
     NSDictionary *parameters = @{@"gender":@"2", @"open_id":self.openID};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/change";
+   
     __weak typeof (self)weakSelf = self;
-    [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.managers GET:kChangeUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             if (weakSelf.getTextBlock) {

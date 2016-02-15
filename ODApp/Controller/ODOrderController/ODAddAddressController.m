@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 
-@interface ODAddAddressController ()
+@interface ODAddAddressController ()<UITextViewDelegate>
 
 
 @property (nonatomic , strong) UILabel *centerNameLabe;
@@ -68,16 +68,70 @@
 
     }
   
-    
+    self.addAddressView.addressTextView.delegate = self;
     
     if (!self.isAdd) {
         self.addAddressView.nameTextField.text = self.addressModel.name;
-        self.addAddressView.addressTextField.text = self.addressModel.address;
+        self.addAddressView.addressTextView.text = self.addressModel.address;
         self.addAddressView.phoneTextField.text = self.addressModel.tel;
     };
     
     
 }
+
+
+#pragma mark - textViewDelegate
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if (textView == self.addAddressView.addressTextView) {
+        if ([textView.text isEqualToString:NSLocalizedString(@"请输入联系地址", nil)]) {
+           self.addAddressView.addressTextView.text=NSLocalizedString(@"", nil);
+           self.addAddressView.addressTextView.textColor = [UIColor blackColor];
+        }
+        else{
+            ;
+        }
+        
+    }
+}
+
+
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    
+    NSString *message = @"";
+    
+    if (textView == self.addAddressView.addressTextView)
+    {
+        if (textView.text.length > 10)
+        {
+            textView.text = [textView.text substringToIndex:10];
+        }
+        else
+        {
+            message = textView.text;
+        }
+    }
+    
+}
+
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""])
+    {
+        textView.textColor = [UIColor lightGrayColor];
+        if (textView == self.addAddressView.addressTextView) {
+            textView.text=NSLocalizedString(@"请输入联系地址", nil);
+            
+            
+        }
+    }
+}
+
+
+
 
 - (void)saveAction:(UIButton *)sender
 {
@@ -94,7 +148,7 @@
         {
             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入正确手机号"];
             
-        }else if ([self.addAddressView.addressTextField.text isEqualToString:@"请输入联系地址"] || [self.addAddressView.addressTextField.text isEqualToString:@""])
+        }else if ([self.addAddressView.addressTextView.text isEqualToString:@"请输入联系地址"] || [self.addAddressView.addressTextView.text isEqualToString:@""])
         {
             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
             
@@ -116,7 +170,7 @@
         {
             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入正确手机号"];
             
-        }else if ([self.addAddressView.addressTextField.text isEqualToString:@"请输入联系地址"] || [self.addAddressView.addressTextField.text isEqualToString:@""])
+        }else if ([self.addAddressView.addressTextView.text isEqualToString:@"请输入联系地址"] || [self.addAddressView.addressTextView.text isEqualToString:@""])
         {
             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
             
@@ -133,7 +187,7 @@
     
     self.editeManager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"user_address_id":self.addressId, @"tel":self.addAddressView.phoneTextField.text , @"address":self.addAddressView.addressTextField.text,@"name":self.addAddressView.nameTextField.text , @"is_default":self.is_default, @"open_id":self.open_id};
+    NSDictionary *parameters = @{@"user_address_id":self.addressId, @"tel":self.addAddressView.phoneTextField.text , @"address":self.addAddressView.addressTextView.text,@"name":self.addAddressView.nameTextField.text , @"is_default":self.is_default, @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     __weak typeof (self)weakSelf = self;
@@ -169,7 +223,7 @@
         
     self.manager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"tel":self.addAddressView.phoneTextField.text , @"address":self.addAddressView.addressTextField.text,@"name":self.addAddressView.nameTextField.text , @"is_default":self.is_default, @"open_id":self.open_id};
+    NSDictionary *parameters = @{@"tel":self.addAddressView.phoneTextField.text , @"address":self.addAddressView.addressTextView.text,@"name":self.addAddressView.nameTextField.text , @"is_default":self.is_default, @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     __weak typeof (self)weakSelf = self;

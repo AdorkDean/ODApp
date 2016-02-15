@@ -15,7 +15,7 @@
 #import "ODOthersInformationController.h"
 @interface ODCollectionController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic , strong) UILabel *centerNameLabe;
+
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property (nonatomic , assign) NSInteger page;

@@ -98,10 +98,8 @@
     NSDictionary *parameters = @{@"type":@"1", @"page":countNumber, @"open_id":self.openId};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/comment/list";
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kGetCommentUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([countNumber isEqualToString:@"1"]) {

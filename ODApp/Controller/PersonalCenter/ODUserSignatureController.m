@@ -92,8 +92,8 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weakSelf
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/change";
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+  
+    [self.manager GET:kChangeUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {

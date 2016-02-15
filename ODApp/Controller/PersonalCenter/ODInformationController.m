@@ -64,9 +64,9 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/info";
+  
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kGetUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         NSMutableDictionary *dic = responseObject[@"result"];
@@ -353,10 +353,8 @@
         NSDictionary *parameter = @{@"File":strData};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         
-        NSString *url = @"http://woquapi.test.odong.com/1.0/other/base64/upload";
-        
-        
-        [self pushImageWithUrl:url parameter:signParameter];
+            
+        [self pushImageWithUrl:kGetImageDataUrl parameter:signParameter];
 
         
     }
@@ -415,9 +413,8 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/change";
-    __weak typeof (self)weakSelf = self;
-    [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      __weak typeof (self)weakSelf = self;
+    [self.managers GET:kChangeUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {

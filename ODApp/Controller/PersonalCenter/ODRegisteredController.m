@@ -184,11 +184,10 @@
     NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"passwd":self.registView.password.text,@"verify_code":self.registView.verification.text};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/register";
-
+  
     self.managers = [AFHTTPRequestOperationManager manager];
     __weak typeof (self)weakSelf = self;
-    [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.managers GET:kRegistUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
          
@@ -227,11 +226,10 @@
     NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"type":@"1"};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/verify/code/send";
-   
+    
     self.manager = [AFHTTPRequestOperationManager manager];
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kGetCodeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
