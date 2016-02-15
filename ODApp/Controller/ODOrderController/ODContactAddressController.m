@@ -43,6 +43,9 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
    
+
+      [self getData];
+
    
 }
 

@@ -295,4 +295,5 @@ UITableViewCell *detailCell;
     tempView.scrollEnabled = NO;
     
 }
+
 @end

@@ -25,7 +25,11 @@
 @property (nonatomic , strong) NSMutableDictionary *user;
 @property (nonatomic , strong) NSMutableArray *loves;
 
+
 @property (nonatomic , strong) NSMutableDictionary *share;
+
+
+
 @property (nonatomic , copy) NSString *order_id;
 @property (nonatomic , copy) NSString *order_status;
 @property (nonatomic , copy) NSString *comment;
@@ -38,10 +42,10 @@
 @property (nonatomic , copy) NSString *total_price;
 @property (nonatomic , copy) NSString *pay_status;
 
+
 @property (nonatomic , copy) NSString *name;
 @property (nonatomic , copy) NSString *tel;
 @property (nonatomic , copy) NSString *order_created_at;
-
 
 
 @end

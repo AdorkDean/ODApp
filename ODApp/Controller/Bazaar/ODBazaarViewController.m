@@ -35,6 +35,7 @@
         
     }else{
         
+
         if (self.index == 0) {
             ODBazaarReleaseSkillViewController *releaseSkill = [[ODBazaarReleaseSkillViewController alloc]init];
             [self.navigationController pushViewController:releaseSkill animated:YES];
@@ -47,6 +48,11 @@
             };
             [self.navigationController pushViewController:releaseTask animated:YES];
         }
+
+        
+        ODBazaarReleaseSkillViewController *releaseSkill = [[ODBazaarReleaseSkillViewController alloc]init];
+        [self.navigationController pushViewController:releaseSkill animated:YES];
+
     }
 }
 

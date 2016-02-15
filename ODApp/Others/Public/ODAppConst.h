@@ -75,6 +75,7 @@ UIKIT_EXTERN NSString * const KActivityDetailUrl;
 UIKIT_EXTERN NSString * const kGetLikeListUrl;
 UIKIT_EXTERN NSString * const kGetMyOrderListUrl;
 UIKIT_EXTERN NSString * const kOrderDetailUrl;
+
 UIKIT_EXTERN NSString * const kDelateOrderUrl;
 
 UIKIT_EXTERN NSString * const kGetUserInformationUrl;
@@ -90,4 +91,6 @@ UIKIT_EXTERN NSString * const kDelateTaskUrl;
 UIKIT_EXTERN NSString * const kGetCommentUrl;
 UIKIT_EXTERN NSString * const kCreateOrderUrl;
 UIKIT_EXTERN NSString * const kGetStoreTimeUrl;
+
+
 

@@ -64,8 +64,11 @@
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
     self.scrollView.userInteractionEnabled = YES;
+
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 3000);
+
+
     [self.view addSubview:self.scrollView];
 }
 

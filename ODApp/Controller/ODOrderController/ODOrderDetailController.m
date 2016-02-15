@@ -10,17 +10,21 @@
 #import "ODOrderDetailView.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
+
 #import "ODOrderDetailModel.h"
 #import "UIButton+WebCache.h"
+
+
+
 @interface ODOrderDetailController ()<UITableViewDataSource , UITableViewDelegate>
 
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) ODOrderDetailView *orderDetailView;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+
 @property (nonatomic, strong) AFHTTPRequestOperationManager *delateManager;
 @property (nonatomic , copy) NSString *open_id;
 @property (nonatomic , strong) NSMutableArray *dataArray;
-
 
 
 @end
@@ -30,10 +34,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.open_id = [ODUserInformation sharedODUserInformation].openID;
-    self.dataArray = [[NSMutableArray alloc] init];
+
+      self.dataArray = [[NSMutableArray alloc] init];
+
+      self.open_id = [ODUserInformation sharedODUserInformation].openID;
     self.navigationItem.title = @"订单详情";
-    [self getData];
+      [self getData];
+     [self creatView];
+
     
     
 }
@@ -41,7 +49,6 @@
 
 - (void)getData
 {
-    
     self.manager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters = @{@"order_id":self.order_id , @"open_id":self.open_id};
@@ -55,11 +62,14 @@
             
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 
+
                 [self.dataArray removeAllObjects];
                 NSMutableDictionary *dic = responseObject[@"result"];
                 ODOrderDetailModel *model = [[ODOrderDetailModel alloc] init];
                 [model setValuesForKeysWithDictionary:dic];
                 [self.dataArray addObject:model];
+                
+                
                 
                 
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
@@ -70,7 +80,11 @@
                 
             }
             
+
             [weakSelf creatView];
+
+        
+
             [weakSelf.tableView reloadData];
             
         }
@@ -85,7 +99,10 @@
 
 - (void)creatView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height + 100) style:UITableViewStylePlain];
+
+  
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 64 - 50) style:UITableViewStylePlain];
+
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = self.orderDetailView;
@@ -98,7 +115,10 @@
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
     cancelButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
     [cancelButton setBackgroundImage:[UIImage imageNamed:@"button_Cancel order"] forState:UIControlStateNormal];
+
     [cancelButton addTarget:self action:@selector(delateOrder:) forControlEvents:UIControlEventTouchUpInside];
+
+
     UIButton *payButton = [UIButton buttonWithType:UIButtonTypeSystem];
     payButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
     [payButton setBackgroundImage:[UIImage imageNamed:@"button_Pay immediately"] forState:UIControlStateNormal];
@@ -107,6 +127,7 @@
     
 
 }
+
 
 - (void)delateOrder:(UIButton *)sender
 {
@@ -158,10 +179,13 @@
 
 
 
+
+
 - (ODOrderDetailView *)orderDetailView
 {
     if (_orderDetailView == nil) {
         self.orderDetailView = [ODOrderDetailView getView];
+
         
         ODOrderDetailModel *model = self.dataArray[0];
         NSMutableDictionary *userDic = model.user;
@@ -183,6 +207,9 @@
         self.orderDetailView.orderTimeLabel.text = model.order_created_at;
         self.orderDetailView.orderIdLabel.text = [NSString stringWithFormat:@"%@" , model.order_id];
         
+
+
+
     }
     
     return _orderDetailView;

@@ -89,38 +89,18 @@
 NSString *replyTitleText = @"";
 - (void)textViewDidChange:(UITextView *)textView
 {
-    if (textView == self.textView)
-    {
-        if (textView.text.length > 500)
-        {
-            textView.text = replyTitleText;
-        }
-        else
-        {
-            replyTitleText = textView.text;
-        }
+    if (textView.text.length > 10){
+        textView.text = [textView.text substringToIndex:10];
+    }else{
+        replyTitleText = textView.text;
     }
-}
-
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    if (textView == self.textView) {
-        if (text.length == 0) return YES;
-        
-        NSInteger existedLength = textView.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = text.length;
-        if (existedLength - selectedLength + replaceLength > 500) {
-            return NO;
-        }
+    
+    if (textView.text.length == 0) {
+        self.label.text = @"请输入回复TA的内容";
+    }else{
+        self.label.text = @"";
     }
 
-    return YES;
-}
-
--(void)textViewDidBeginEditing:(UITextView *)textView
-{
-   self.label.text = @"";
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView

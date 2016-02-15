@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIView *picView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *PicConstraintHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeight;
+
 
 
 -(void)showDateWithModel:(ODCommunityModel *)model;
