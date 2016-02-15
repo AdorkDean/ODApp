@@ -116,7 +116,7 @@
 }
 - (void)createTableView
 {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) style:UITableViewStylePlain];
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
     
     self.tableView.dataSource = self;
@@ -284,20 +284,20 @@
         weakSelf.timeDataArray = [[weakSelf.dataArray objectAtIndex:0] objectForKey:@"time"];
         
         
-        weakSelf.picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 150, kScreenSize.width, 150)];
+        weakSelf.picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 200, kScreenSize.width, 150)];
         weakSelf.picker.backgroundColor = [UIColor whiteColor];
         weakSelf.picker.delegate = weakSelf;
         weakSelf.picker.dataSource = weakSelf;
         
         weakSelf.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        weakSelf.cancelButton.frame = CGRectMake(0, kScreenSize.height - 180, 50, 30);
+        weakSelf.cancelButton.frame = CGRectMake(0, kScreenSize.height - 230, 50, 30);
         [weakSelf.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         weakSelf.cancelButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         [weakSelf.cancelButton addTarget:weakSelf action:@selector(quXiaoAction:) forControlEvents:UIControlEventTouchUpInside];
         weakSelf.cancelButton.titleLabel.font = [UIFont systemFontOfSize:17];
         
         
-        weakSelf.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, kScreenSize.height - 180, kScreenSize.width - 100, 30)];
+        weakSelf.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, kScreenSize.height - 230, kScreenSize.width - 100, 30)];
         weakSelf.timeLabel.text = @"选择时间";
         weakSelf.timeLabel.font = [UIFont systemFontOfSize:20];
         weakSelf.timeLabel.textAlignment = NSTextAlignmentCenter;
@@ -306,7 +306,7 @@
         
         
         weakSelf.queDingButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        weakSelf.queDingButton.frame = CGRectMake(kScreenSize.width - 50, kScreenSize.height - 180, 50, 30);
+        weakSelf.queDingButton.frame = CGRectMake(kScreenSize.width - 50, kScreenSize.height - 230, 50, 30);
         [weakSelf.queDingButton setTitle:@"确定" forState:UIControlStateNormal];
         weakSelf.queDingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
         [weakSelf.queDingButton addTarget:weakSelf action:@selector(queDingAction:) forControlEvents:UIControlEventTouchUpInside];

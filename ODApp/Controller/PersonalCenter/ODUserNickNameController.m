@@ -10,9 +10,9 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 
-@interface ODUserNickNameController ()<UITextFieldDelegate>
+@interface ODUserNickNameController ()<UITextViewDelegate>
 
-@property (nonatomic , strong) UITextField *textField;
+@property (nonatomic , strong) UITextView *textView;
 @property(nonatomic,strong) AFHTTPRequestOperationManager *manager;
 @end
 
@@ -22,7 +22,7 @@
 {
     [super viewDidLoad];
     [self navigationInit];
-    [self creatTextField];
+     [self creatTextView];
 }
 
 #pragma mark - 初始化导航
@@ -34,76 +34,116 @@
 }
 
 
-- (void)creatTextField
+- (void)creatTextView
 {
-    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 30)];
-    self.textField.placeholder = @"请输入昵称";
-    [self.textField setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.textField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
-    self.textField.backgroundColor = [UIColor whiteColor];
-    self.textField.layer.masksToBounds = YES;
-    self.textField.layer.cornerRadius = 5;
-    self.textField.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
-    self.textField.layer.borderWidth = 1;
-    self.textField.text = self.nickName;
-    self.textField.delegate = self;
-    [self.view addSubview:self.textField];
+    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 30)];
+    self.textView.backgroundColor = [UIColor whiteColor];
+    self.textView.layer.masksToBounds = YES;
+    self.textView.layer.cornerRadius = 5;
+    self.textView.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
+    self.textView.layer.borderWidth = 1;
+    
+    if ([self.nickName isEqualToString:@"未设置昵称"] || [self.nickName isEqualToString:@"请输入昵称"]) {
+        self.textView.text = @"请输入昵称";
+        self.textView.textColor = [UIColor lightGrayColor];
+        
+    }else {
+        self.textView.text = self.nickName;
+    }
+    
+    self.textView.font = [UIFont systemFontOfSize:14];
+    
+    self.textView.delegate = self;
+    [self.view addSubview:self.textView];
     
 }
+
+
+#pragma mark - UITextViewDelegate
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@"请输入昵称"]) {
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor];
+    }
+}
+
+
+
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    
+    NSString *replyTitleText = @"";
+    if (textView.text.length > 10){
+        textView.text = [textView.text substringToIndex:10];
+    }else{
+        replyTitleText = textView.text;
+    }
+    
+    
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([self.textView.text isEqualToString:@"请输入昵称"] || [self.textView.text isEqualToString:@""]) {
+        self.textView.text = @"请输入昵称";
+        self.textView.textColor = [UIColor lightGrayColor];
+    }
+    
+    
+    
+}
+
 
 #pragma mark - 点击事件
 - (void)registered:(UIButton *)sender
 {
 
-    NSString *openID = [ODUserInformation sharedODUserInformation].openID;
     
-    self.manager = [AFHTTPRequestOperationManager manager];
-    
-    NSDictionary *parameters = @{@"nick":self.textField.text , @"open_id":openID};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-  
-    __weakSelf
-    [self.manager GET:kChangeUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    if([self.textView.text isEqualToString:@""] || [self.textView.text isEqualToString:@"请输入昵称"])
+    {
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入昵称"];
+
+    }else {
+        NSString *openID = [ODUserInformation sharedODUserInformation].openID;
         
-        if ([responseObject[@"status"]isEqualToString:@"success"]) {
-            if (weakSelf.getTextBlock) {
+        self.manager = [AFHTTPRequestOperationManager manager];
+        
+        NSDictionary *parameters = @{@"nick":self.textView.text , @"open_id":openID};
+        NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+        
+        
+        __weakSelf
+        [self.manager GET:kChangeUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 if (weakSelf.getTextBlock) {
-                    weakSelf.getTextBlock(weakSelf.textField.text);
+                    if (weakSelf.getTextBlock) {
+                        weakSelf.getTextBlock(weakSelf.textView.text);
+                    }
+                    
+                    [weakSelf.navigationController popViewControllerAnimated:YES];
+                    
                 }
                 
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-                
             }
+            
+            else if ([responseObject[@"status"]isEqualToString:@"error"]) {
+                UIAlertView *alter = [[UIAlertView alloc] initWithTitle:nil message:responseObject[@"message"] delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alter show];
+            }
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+            
+        }];
 
-        }
-        
-        else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:nil message:responseObject[@"message"] delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alter show];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-    }];
-    
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if (textField == self.textField) {
-        if (string.length == 0) return YES;
-        
-        NSInteger existedLength = textField.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = string.length;
-        if (existedLength - selectedLength + replaceLength > 15) {
-            return NO;
-        }
     }
     
-    return YES;
+    
+    
 }
+
 
 @end

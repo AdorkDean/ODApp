@@ -129,33 +129,11 @@
         ODLandFirstCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
         
         
-        cell.userImageView.layer.masksToBounds = YES;
-        cell.userImageView.layer.cornerRadius = 35;
-        cell.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
-        cell.userImageView.layer.borderWidth = 1;
+        cell.model = self.model;
         
         
         
-        
-        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.avatar]];
-        [cell.qrcodeImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.qrcode]];
-        
-        
-        
-        if ([self.model.nick isEqualToString:@""]) {
-            cell.nickNameLabel.text = [NSString stringWithFormat:@"您还未设置昵称"];
-        }else{
-            cell.nickNameLabel.text = self.model.nick;
-            
-        }
-        
-        if ([self.model.sign isEqualToString:@""]) {
-            cell.signatureLabel.text = [NSString stringWithFormat:@"您还未设置签名"];
-        }else{
-            cell.signatureLabel.text = self.model.sign;
-            
-        }
-        
+              
         return cell;
         
     }else{
@@ -326,7 +304,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return CGSizeMake(kScreenSize.width , 90);
+        return CGSizeMake(kScreenSize.width , 80);
     }else {
         return CGSizeMake(kScreenSize.width , 40);
     }
@@ -342,7 +320,7 @@
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     
-    return 5;
+    return 4;
     
     
 }

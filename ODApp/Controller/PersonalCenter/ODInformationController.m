@@ -188,7 +188,7 @@
     vc.getTextBlock = ^(NSString *text){
         
      
-        if ([text isEqualToString:@""]) {
+        if ([text isEqualToString:@""] || [text isEqualToString:@"请输入签名"]) {
             self.informationView.signatureLabel.text = [NSString stringWithFormat:@"未设置签名"];
         }else{
             
@@ -214,7 +214,7 @@
     vc.getTextBlock = ^(NSString *text){
         
         
-        if ([text isEqualToString:@""]) {
+        if ([text isEqualToString:@""]||[text isEqualToString:@"请输入昵称"]) {
             self.informationView.nickNameLabel.text = [NSString stringWithFormat:@"未设置昵称"];
         }else{
             
