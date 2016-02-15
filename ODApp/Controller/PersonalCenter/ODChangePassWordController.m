@@ -214,12 +214,11 @@
     
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.odong.com/1.0/user/change/passwd";
-    
+      
     self.managers = [AFHTTPRequestOperationManager manager];
     
     __weak typeof (self)weakSelf = self;
-    [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.managers GET:kChangePassWorldUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
       
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
@@ -254,14 +253,11 @@
     
     NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"type":@"3"};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    NSString *url = @"http://woquapi.odong.com/1.0/user/verify/code/send";
-
-    
-    
+      
     self.manager = [AFHTTPRequestOperationManager manager];
     
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kGetCodeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             //启动定时器

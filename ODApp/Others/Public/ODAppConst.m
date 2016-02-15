@@ -88,6 +88,5 @@ NSString * const kDelateTaskUrl = @"http://woquapi.odong.com/1.0/bbs/del";
 NSString * const kGetCommentUrl = @"http://woquapi.odong.com/1.0/user/comment/list";
 NSString * const kCreateOrderUrl = @"http://woquapi.odong.com/1.0/store/create/order";
 NSString * const kGetStoreTimeUrl = @"http://woquapi.odong.com/1.0/store/timeline";
-
-
+NSString * const kSaveStoreOrderUrl = @"http://woquapi.odong.com/1.0/store/confirm/order";
 

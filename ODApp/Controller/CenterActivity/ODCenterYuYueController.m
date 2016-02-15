@@ -217,9 +217,8 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
       __weak typeof (self)weakSelf = self;
-    NSString *url = @"http://woquapi.odong.com/1.0/store/timeline";
-    
-    [self.timeManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+       
+    [self.timeManager GET:kGetStoreTimeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
     NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         //获取完整路径
         NSString *documentsPath = [path objectAtIndex:0];
@@ -361,10 +360,8 @@
     
     NSDictionary *parameter = @{@"start_datetime":self.beginTime , @" end_datetime":self.endTime , @"store_id":self.storeId , @"open_id":self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSString *url = @"http://woquapi.odong.com/1.0/store/create/order";
-    
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+     __weak typeof (self)weakSelf = self;
+    [self.manager GET:kCreateOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
