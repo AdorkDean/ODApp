@@ -10,9 +10,9 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 
-@interface ODUserSignatureController ()<UITextFieldDelegate>
+@interface ODUserSignatureController ()<UITextViewDelegate>
 
-@property (nonatomic , strong) UITextField *textField;
+@property (nonatomic , strong) UITextView *textView;
 @property(nonatomic,strong) AFHTTPRequestOperationManager *manager;
 
 @end
@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self creatTextField];
+    [self creatTextView];
     [self navigationInit];
 }
 
@@ -31,46 +31,67 @@
     // 注册button
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(registered:) color:nil highColor:nil title:@"保存"];
 }
-- (void)creatTextField
+- (void)creatTextView
 {
-    self.textField = [[UITextField alloc] initWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 30)];
-    self.textField.placeholder = @"请输入昵称";
-    [self.textField setValue:[UIColor lightGrayColor] forKeyPath:@"_placeholderLabel.textColor"];
-    [self.textField setValue:[UIFont boldSystemFontOfSize:14] forKeyPath:@"_placeholderLabel.font"];
-    self.textField.backgroundColor = [UIColor whiteColor];
-    self.textField.layer.masksToBounds = YES;
-    self.textField.layer.cornerRadius = 5;
-    self.textField.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
-    self.textField.layer.borderWidth = 1;
-    self.textField.text = self.signature;
-    self.textField.delegate = self;
-    [self.view addSubview:self.textField];
+    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 30)];
+    self.textView.backgroundColor = [UIColor whiteColor];
+    self.textView.layer.masksToBounds = YES;
+    self.textView.layer.cornerRadius = 5;
+    self.textView.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
+    self.textView.layer.borderWidth = 1;
     
-}
+    if ([self.signature isEqualToString:@"未设置签名"] || [self.signature isEqualToString:@"请输入签名"]) {
+        self.textView.text = @"请输入签名";
+        self.textView.textColor = [UIColor lightGrayColor];
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if (textField == self.textField) {
-        if (string.length == 0) return YES;
-        
-        NSInteger existedLength = textField.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = string.length;
-        if (existedLength - selectedLength + replaceLength > 20) {
-            return NO;
-        }
+    }else {
+        self.textView.text = self.signature;
     }
     
-    return YES;
+    self.textView.font = [UIFont systemFontOfSize:14];
+    
+    self.textView.delegate = self;
+    [self.view addSubview:self.textView];
+    
 }
 
 
-#pragma mark - textFieldDelegate
--(BOOL)textFieldShouldReturn:(UITextField *)textField
+#pragma mark - UITextViewDelegate
+
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    [textField resignFirstResponder];
+    if ([textView.text isEqualToString:@"请输入签名"]) {
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor];
+    }
+}
+
+
+
+
+- (void)textViewDidChange:(UITextView *)textView
+{
     
-    return YES;
+    NSString *replyTitleText = @"";
+    if (textView.text.length > 10){
+        textView.text = [textView.text substringToIndex:10];
+    }else{
+        replyTitleText = textView.text;
+    }
+    
+    
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([self.textView.text isEqualToString:@"请输入签名"] || [self.textView.text isEqualToString:@""]) {
+          self.textView.text = @"请输入签名";
+          self.textView.textColor = [UIColor lightGrayColor];
+    }
+    
+  
+    
 }
 
 
@@ -88,7 +109,7 @@
     
     self.manager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"user_sign":self.textField.text , @"open_id":openID};
+    NSDictionary *parameters = @{@"user_sign":self.textView.text , @"open_id":openID};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weakSelf
     
@@ -99,7 +120,7 @@
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             if (weakSelf.getTextBlock) {
                 if (weakSelf.getTextBlock) {
-                    weakSelf.getTextBlock(self.textField.text);
+                    weakSelf.getTextBlock(self.textView.text);
                 }
                 
                 [weakSelf.navigationController popViewControllerAnimated:YES];

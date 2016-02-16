@@ -24,7 +24,7 @@
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic, copy) NSString *tableViewReuseIdentifier;
 
-
+@property (nonatomic , copy) NSString *isAddress;
 
 
 
@@ -35,18 +35,55 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"联系地址";
-    self.view.userInteractionEnabled = YES;
+   
+  
     self.dataArray = [[NSMutableArray alloc] init];
     self.defaultArray = [[NSMutableArray alloc] init];
     self.tableViewReuseIdentifier = NSStringFromClass([UITableViewCell class]);
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
-   
-
+    [self navigationInit];
       [self getData];
 
    
+}
+
+-(void)navigationInit
+{
+    self.view.userInteractionEnabled = YES;
+    self.navigationItem.title = @"联系地址";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
+}
+
+- (void)backAction:(UIButton *)sender
+{
+    
+    if ([self.isAddress isEqualToString:@"1"]) {
+        __weakSelf
+        if (self.getAddressBlock) {
+            
+            
+            
+            weakSelf.getAddressBlock(@"" , @"" , @"1");
+        }
+        
+        
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+        
+    }else{
+        
+          [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+               
+    
+    
+    
+  
+        
+    
+    
+    
 }
 
 
@@ -325,7 +362,7 @@
             
        
             
-            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id]);
+            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id] , @"2");
         }
 
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -335,7 +372,7 @@
         __weakSelf
         ODAddressModel *model = self.dataArray[indexPath.row];
         if (self.getAddressBlock) {
-            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id]);
+            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id] , @"2");
         }
         
        [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -352,8 +389,27 @@
     
     [self.deleteManager GET:kDeleteAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-    [self getData];
-       
+        __weak typeof (self)weakSelf = self;
+          if ([responseObject[@"status"] isEqualToString:@"success"]) {
+              
+              if ([self.addressId isEqualToString:address_id]) {
+                  weakSelf.isAddress = @"1";
+              }else {
+                  weakSelf.isAddress = @"2";
+              }
+              
+              [weakSelf getData];
+
+              
+              
+          }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
+              
+              [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+          }
+
+        
+        
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

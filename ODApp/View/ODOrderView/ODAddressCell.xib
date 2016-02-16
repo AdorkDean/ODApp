@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13555555555" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9bf-hR-AyE">
-                        <rect key="frame" x="83" y="18" width="150" height="20"/>
+                        <rect key="frame" x="88" y="18" width="150" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="150" id="4TB-0q-gN6"/>
                             <constraint firstAttribute="height" constant="20" id="wzB-AO-sJm"/>
@@ -34,9 +34,9 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="冯李杰" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="veu-2g-gh3">
-                        <rect key="frame" x="18" y="18" width="50" height="20"/>
+                        <rect key="frame" x="18" y="18" width="70" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="50" id="OJh-wd-4Ax"/>
+                            <constraint firstAttribute="width" constant="70" id="OJh-wd-4Ax"/>
                             <constraint firstAttribute="height" constant="20" id="uRu-NF-2LB"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -58,7 +58,7 @@
                     <constraint firstItem="veu-2g-gh3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="al2-cU-GQp"/>
                     <constraint firstItem="veu-2g-gh3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="e12-g1-hme"/>
                     <constraint firstItem="9bf-hR-AyE" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="g9d-tX-2lM"/>
-                    <constraint firstItem="9bf-hR-AyE" firstAttribute="leading" secondItem="veu-2g-gh3" secondAttribute="trailing" constant="15" id="js8-ao-2JA"/>
+                    <constraint firstItem="9bf-hR-AyE" firstAttribute="leading" secondItem="veu-2g-gh3" secondAttribute="trailing" id="js8-ao-2JA"/>
                     <constraint firstAttribute="bottom" secondItem="s9U-gA-eLA" secondAttribute="bottom" id="sAQ-Vu-baN"/>
                     <constraint firstAttribute="trailing" secondItem="tem-WB-bgm" secondAttribute="trailing" constant="10" id="sbu-L3-aR5"/>
                     <constraint firstItem="s9U-gA-eLA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="vlg-Gr-hNr"/>

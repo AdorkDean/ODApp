@@ -10,7 +10,6 @@
 #import "ODOrderDetailView.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
-
 #import "ODOrderDetailModel.h"
 #import "UIButton+WebCache.h"
 
@@ -38,11 +37,9 @@
       self.dataArray = [[NSMutableArray alloc] init];
 
       self.open_id = [ODUserInformation sharedODUserInformation].openID;
-    self.navigationItem.title = @"订单详情";
+      self.navigationItem.title = @"订单详情";
       [self getData];
-     [self creatView];
-
-    
+      
     
 }
 
@@ -101,7 +98,7 @@
 {
 
   
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 64 - 50) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height + 100) style:UITableViewStylePlain];
 
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -133,6 +130,8 @@
 {
     self.delateManager = [AFHTTPRequestOperationManager manager];
     
+    
+      
     NSDictionary *parameters = @{@"order_id":self.order_id , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     

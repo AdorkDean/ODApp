@@ -13,6 +13,7 @@
 #import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
 #import "ODOrderSecondHeadView.h"
+#import "ODAddressModel.h"
 @interface ODSecondOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UITextViewDelegate>
 
 
@@ -23,6 +24,8 @@
 @property (nonatomic ,copy) NSString *addressId;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *orderManager;
 @property (nonatomic , copy) NSString *openId;
+@property (nonatomic , strong) NSMutableArray *addressArray;
+@property (nonatomic , strong) AFHTTPRequestOperationManager *addressManager;
 @end
 
 @implementation ODSecondOrderController
@@ -32,11 +35,63 @@
    
     
     self.openId = [ODUserInformation sharedODUserInformation].openID;
-
+    self.addressArray = [[NSMutableArray alloc] init];
     self.navigationItem.title = @"提交订单";
+    
+      [self getAddress];
      [self createCollectionView];
     
 }
+
+- (void)getAddress
+{
+    self.addressManager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"open_id":self.openId};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    __weak typeof (self)weakSelf = self;
+    [self.addressManager GET:kGetAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
+            
+            
+            [weakSelf.addressArray removeAllObjects];
+            
+            
+            NSMutableDictionary *dic = responseObject[@"result"];
+            
+            for (NSMutableDictionary *miniDic in dic) {
+                NSString *is_default = [NSString stringWithFormat:@"%@" , miniDic[@"is_default"]];
+                
+                
+                if ([is_default isEqualToString:@"1"]) {
+                    ODAddressModel *model = [[ODAddressModel alloc] init];
+                    [model setValuesForKeysWithDictionary:miniDic];
+                    [weakSelf.addressArray addObject:model];
+                }
+                
+                
+            }
+            
+            
+        }
+        
+        
+        [weakSelf.collectionView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        
+        
+    }];
+    
+}
+
+
 
 #pragma mark - 初始化
 -(void)createCollectionView
@@ -105,8 +160,7 @@
     self.orderManager = [AFHTTPRequestOperationManager manager];
     
     
- 
-    
+      
     NSString *swap_id = [NSString stringWithFormat:@"%@" , self.informationModel.swap_id];
     
   
@@ -191,6 +245,18 @@
          self.headView.secondOrderView.typeLabel.text = @"快递服务";
     }
     
+    if (self.addressArray.count == 0) {
+        self.headView.secondOrderView.addressLabel.text = @"联系地址";
+    }else{
+        ODAddressModel *model = self.addressArray[0];
+        self.headView.secondOrderView.addressLabel.text = model.address;
+        self.addressId = [NSString stringWithFormat:@"%@" , model.id];
+        
+        
+    }
+
+    
+    
     return self.headView;
     
 }
@@ -253,12 +319,20 @@
     ODContactAddressController *vc = [[ODContactAddressController alloc] init];
     
     __weakSelf
-    vc.getAddressBlock = ^(NSString *address , NSString *addrssId){
+    vc.getAddressBlock = ^(NSString *address , NSString *addrssId , NSString *isAddress ){
         
-        weakSelf.headView.secondOrderView.addressLabel.text = address;
-        weakSelf.addressId = addrssId;
+        if ([isAddress isEqualToString:@"1"]) {
+            weakSelf.headView.secondOrderView.addressLabel.text = @"联系地址";
+            weakSelf.addressId = nil;
+        }else{
+            weakSelf.headView.secondOrderView.addressLabel.text = address;
+            weakSelf.addressId = addrssId;
+
+        }
+        
     };
     
+    vc.addressId = self.addressId;
     
     [self.navigationController pushViewController:vc animated:YES];
     

@@ -74,6 +74,10 @@
         self.addAddressView.nameTextField.text = self.addressModel.name;
         self.addAddressView.addressTextView.text = self.addressModel.address;
         self.addAddressView.phoneTextField.text = self.addressModel.tel;
+    }else {
+        self.addAddressView.addressTextView.text = @"请输入联系地址";
+        self.addAddressView.addressTextView.textColor = [UIColor lightGrayColor];
+
     };
     
     
@@ -84,8 +88,8 @@
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     if (textView == self.addAddressView.addressTextView) {
-        if ([textView.text isEqualToString:NSLocalizedString(@"请输入联系地址", nil)]) {
-           self.addAddressView.addressTextView.text=NSLocalizedString(@"", nil);
+        if ([textView.text isEqualToString:@"请输入联系地址"]) {
+           self.addAddressView.addressTextView.text = @"";
            self.addAddressView.addressTextView.textColor = [UIColor blackColor];
         }
         else{
@@ -119,15 +123,17 @@
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    if ([textView.text isEqualToString:@""])
-    {
-        textView.textColor = [UIColor lightGrayColor];
-        if (textView == self.addAddressView.addressTextView) {
-            textView.text=NSLocalizedString(@"请输入联系地址", nil);
-            
-            
+       
+    
+    if (textView == self.addAddressView.addressTextView) {
+        if ([textView.text isEqualToString:@""]) {
+             textView.textColor = [UIColor lightGrayColor];
+            textView.text=@"请输入联系地址";
+
         }
     }
+    
+    
 }
 
 
@@ -135,7 +141,14 @@
 
 - (void)saveAction:(UIButton *)sender
 {
-        
+    
+    [self.addAddressView.nameTextField resignFirstResponder];
+     [self.addAddressView.addressTextView resignFirstResponder];
+    [self.addAddressView.phoneTextField resignFirstResponder];
+
+    
+    
+    
     if (self.isAdd) {
         
         

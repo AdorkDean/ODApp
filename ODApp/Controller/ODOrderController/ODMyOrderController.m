@@ -209,9 +209,9 @@
 {
     
 
-    return CGSizeMake(kScreenSize.width , 120);
+   
 
-    return CGSizeMake(kScreenSize.width , 180);
+    return CGSizeMake(kScreenSize.width , 120);
 
     
     
@@ -224,8 +224,7 @@
 
     return 6;
 
-    return 10;
-
+  
 }
 
 

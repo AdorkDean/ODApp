@@ -105,7 +105,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="aSM-fe-hbO"/>
                     </constraints>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
