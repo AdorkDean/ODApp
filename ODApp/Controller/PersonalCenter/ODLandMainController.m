@@ -79,6 +79,11 @@
         
         
         NSMutableDictionary *dic = responseObject[@"result"];
+        
+        
+      
+        
+        
         weakSelf.model = [[ODUserModel alloc] initWithDict:dic];
         
         [weakSelf createCollectionView];
@@ -251,12 +256,21 @@
     }
     else if (indexPath.section == 7) {
         
-        NSString *url = self.model.share_download[@"icon"];
-        NSString *content = self.model.share_download[@"desc"];
-        NSString *link = self.model.share_download[@"link"];
-        NSString *title = self.model.share_download[@"title"];
+        NSString *url = self.model.share[@"icon"];
+        NSString *content = self.model.share[@"desc"];
+        NSString *link = self.model.share[@"link"];
+        NSString *title = self.model.share[@"title"];
         
         
+        
+        
+        
+        NSLog(@"_____%@" , url);
+        NSLog(@"_____%@" , content);
+        
+        NSLog(@"_____%@" , link);
+        NSLog(@"_____%@" , title);
+
         
         [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
@@ -264,13 +278,16 @@
         [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
         [UMSocialSnsService presentSnsIconSheetView:self
-                                             appKey:@"569dda54e0f55a994f0021cf"
+                                             appKey:kGetUMAppkey
                                           shareText:content
                                          shareImage:nil
                                     shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
                                            delegate:self];
       
         
+        
+        
+     
         
         
     }
