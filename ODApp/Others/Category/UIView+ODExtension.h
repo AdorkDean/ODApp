@@ -24,4 +24,8 @@
  */
 - (BOOL)od_intersectsWithView:(UIView *)view;
 
+/**
+ *  View的底部添加一条横线
+ */
+- (void)addLineOnBottom;
 @end

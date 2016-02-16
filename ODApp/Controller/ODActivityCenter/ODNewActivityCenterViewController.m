@@ -8,6 +8,7 @@
 #import "ODActivitylistModel.h"
 #import "ODNewActivityCell.h"
 #import "ODNewActivityCenterViewController.h"
+#import "ODNewActivityDetailViewController.h"
 #import "ODActivityDetailViewController.h"
 
 @interface ODNewActivityCenterViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -81,7 +82,7 @@ static NSString * const cellId = @"newActivityCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODActivityDetailViewController *detailViewController = [[ODActivityDetailViewController alloc] initWithNibName:nil bundle:nil];
+    ODNewActivityDetailViewController *detailViewController = [[ODNewActivityDetailViewController alloc] initWithNibName:nil bundle:nil];
     detailViewController.acitityId = [self.resultLists[indexPath.row]activity_id];
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
