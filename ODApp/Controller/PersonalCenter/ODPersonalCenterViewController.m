@@ -166,6 +166,7 @@
 - (void)registered:(UIButton *)sender
 {
     ODRegisteredController *vc = [[ODRegisteredController alloc] init];
+    vc.personalVC = self;
     [self presentViewController:vc animated:YES completion:nil];
 }
 
@@ -199,13 +200,15 @@
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             [user setObject:openId forKey:KUserDefaultsOpenId];
             
-            ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            tabBar.selectedIndex = tabBar.currentIndex;
-            
 
-            ODHomeFoundViewController *vc1 = [[ODHomeFoundViewController alloc] init];
+
             
-            [weakSelf.navigationController presentViewController:vc1 animated:YES completion:nil];
+            [weakSelf dismissViewControllerAnimated:YES completion:^{
+                ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                tabBar.selectedIndex = tabBar.currentIndex;
+                
+            }];
+
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"登陆成功"];
             
             

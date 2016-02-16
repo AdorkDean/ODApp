@@ -140,7 +140,12 @@
 
     else {
           [self getRegest];
+        
     }
+    
+    
+    
+  
    
 }
 
@@ -213,14 +218,13 @@
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             [user setObject:openId forKey:KUserDefaultsOpenId];
             
-            ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            tabBar.selectedIndex = tabBar.currentIndex;
+            [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+                ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                tabBar.selectedIndex = tabBar.currentIndex;
+            }];
             
-            
-            ODHomeFoundViewController *vc1 = [[ODHomeFoundViewController alloc] init];
-            
-            [weakSelf.navigationController presentViewController:vc1 animated:YES completion:nil];
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"注册成功"];
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"注册成功"];
+
             
         }
         

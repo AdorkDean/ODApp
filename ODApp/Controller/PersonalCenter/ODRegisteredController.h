@@ -8,6 +8,7 @@
 
 #import "ODBaseViewController.h"
 
+@class ODPersonalCenterViewController;
 @interface ODRegisteredController : ODBaseViewController
-
+@property (nonatomic,strong)ODPersonalCenterViewController *personalVC;
 @end

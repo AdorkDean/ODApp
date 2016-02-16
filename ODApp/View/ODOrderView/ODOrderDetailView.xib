@@ -91,7 +91,7 @@
                         <constraint firstAttribute="width" constant="75" id="Ka6-aS-2I2"/>
                     </constraints>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代买早饭" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7b-y0-4SV">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代买早饭" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F7b-y0-4SV">
                     <rect key="frame" x="103" y="128" width="60" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="fsd-YU-z0Q"/>
