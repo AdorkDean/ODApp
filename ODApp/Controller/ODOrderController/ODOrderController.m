@@ -16,7 +16,7 @@
 #import "DataButton.h"
 #import "TimeButton.h"
 #import "UIImageView+WebCache.h"
-
+#import "ODAddressModel.h"
 @interface ODOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UITextViewDelegate>
 
 @property(nonatomic,strong)UIButton *selectedButton;
@@ -26,12 +26,15 @@
 @property (nonatomic , strong) UILabel *allPriceLabel;
 @property (nonatomic ,strong) ODOrderHeadView *headView;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *orderManager;
+@property (nonatomic , strong) AFHTTPRequestOperationManager *addressManager;
 @property (nonatomic , strong) UIView *choseTimeView;
 @property (nonatomic , strong) UIScrollView *scroller;
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , strong) NSMutableArray *selectDataArray;
+@property (nonatomic , strong) NSMutableArray *addressArray;
 @property (nonatomic , copy) NSString *openId;
 @property (nonatomic ,copy) NSString *addressId;
+
 
 @end
 
@@ -41,14 +44,17 @@
 {
     [super viewDidLoad];
     
+    
     self.openId = [ODUserInformation sharedODUserInformation].openID;
-    
-    
-    [self getData];
-    
     self.dataArray = [[NSMutableArray alloc] init];
     self.selectDataArray = [[NSMutableArray alloc] init];
+    self.addressArray = [[NSMutableArray alloc] init];
     self.navigationItem.title = @"提交订单";
+
+    
+    [self getData];
+    [self getAddress];
+    
     [self createCollectionView];
 }
 
@@ -59,6 +65,54 @@
 }
 
 
+
+- (void)getAddress
+{
+    self.addressManager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"open_id":self.openId};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    __weak typeof (self)weakSelf = self;
+    [self.addressManager GET:kGetAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
+            
+         
+            [weakSelf.addressArray removeAllObjects];
+            
+            
+            NSMutableDictionary *dic = responseObject[@"result"];
+            
+            for (NSMutableDictionary *miniDic in dic) {
+                NSString *is_default = [NSString stringWithFormat:@"%@" , miniDic[@"is_default"]];
+                
+                
+                if ([is_default isEqualToString:@"1"]) {
+                    ODAddressModel *model = [[ODAddressModel alloc] init];
+                    [model setValuesForKeysWithDictionary:miniDic];
+                    [weakSelf.addressArray addObject:model];
+                }
+                
+                
+            }
+            
+            
+        }
+        
+      
+        [weakSelf.collectionView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        
+        
+    }];
+
+}
 
 - (void)getData
 {
@@ -251,6 +305,17 @@
         self.headView.orderView.typeLabel.text = @"线上服务";
     }
     
+    if (self.addressArray.count == 0) {
+        self.headView.orderView.addressLabel.text = @"联系地址";
+    }else{
+        ODAddressModel *model = self.addressArray[0];
+         self.headView.orderView.addressLabel.text = model.address;
+        self.addressId = [NSString stringWithFormat:@"%@" , model.id];
+        
+      
+    }
+
+   
     
     self.headView.orderView.messageTextView.delegate = self;
     
@@ -498,12 +563,20 @@
     ODContactAddressController *vc = [[ODContactAddressController alloc] init];
     
     __weakSelf
-    vc.getAddressBlock = ^(NSString *address , NSString *addrssId){
+    vc.getAddressBlock = ^(NSString *address , NSString *addrssId , NSString *isAddress ){
         
-        weakSelf.headView.orderView.addressLabel.text = address;
-        weakSelf.addressId = addrssId;
+        if ([isAddress isEqualToString:@"1"]) {
+            weakSelf.headView.orderView.addressLabel.text = @"联系地址";
+            weakSelf.addressId = nil;
+        }else{
+            weakSelf.headView.orderView.addressLabel.text = address;
+            weakSelf.addressId = addrssId;
+            
+        }
+        
     };
     
+    vc.addressId = self.addressId;
     
     [self.navigationController pushViewController:vc animated:YES];
     

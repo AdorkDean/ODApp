@@ -44,7 +44,7 @@ NSString * const kCommunityBbsDetailUrl = @"http://woquapi.test.odong.com/1.0/bb
 NSString * const kCommunityBbsSearchUrl = @"http://woquapi.test.odong.com/1.0/bbs/search";
 NSString * const kCommunityBbsReplyListUrl = @"http://woquapi.test.odong.com/1.0/bbs/reply/list";
 NSString * const kCommunityBbsReplyUrl = @"http://woquapi.test.odong.com/1.0/bbs/reply";
-NSString * const kCommunityBbsLatestUrl = @"http://woquapi.odong.com/1.0/bbs/list";
+NSString * const kCommunityBbsLatestUrl = @"http://woquapi.test.odong.com/1.0/bbs/list";
 
 NSString * const kPushImageUrl = @"http://woquapi.test.odong.com/1.0/other/base64/upload";
 NSString * const kDeleteReplyUrl = @"http://woquapi.test.odong.com/1.0/bbs/del";
