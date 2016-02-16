@@ -201,7 +201,7 @@
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,46, kScreenSize.width, kScreenSize.height - 110) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
     [self.view addSubview:self.collectionView];
     

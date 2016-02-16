@@ -28,7 +28,7 @@
         view.scrollerHeight.constant = 290;
     }
 
-   view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+   view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     
     
     view.detailTextView.layer.masksToBounds = YES;

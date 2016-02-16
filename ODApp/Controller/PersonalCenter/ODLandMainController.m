@@ -103,7 +103,7 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandSecondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     
@@ -142,7 +142,7 @@
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
         
         if (indexPath.section == 1) {
-            cell.titleLabel.text = @"我的预约记录";
+            cell.titleLabel.text = @"我的中心预约";
             
         }else if (indexPath.section == 2) {
             cell.titleLabel.text = @"我报名的活动";
@@ -155,9 +155,11 @@
         
         
         else if (indexPath.section == 5) {
-            cell.titleLabel.text = @"我收到的评价";
-        }else if (indexPath.section == 6) {
+           
             cell.titleLabel.text = @"我的订单";
+        }else if (indexPath.section == 6) {
+           
+             cell.titleLabel.text = @"我收到的评价";
         }
         
         else if (indexPath.section == 7) {
@@ -232,23 +234,19 @@
         
     }else if (indexPath.section == 5) {
         
-        ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
-        
-        vc.typeTitle = @"我收到的评价";
-        vc.openId = [ODUserInformation sharedODUserInformation].openID;
-        
-        
-        
+        ODMyOrderController *vc = [[ODMyOrderController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-        
+
         
     }else if (indexPath.section == 6) {
        
         
-        ODMyOrderController *vc = [[ODMyOrderController alloc] init];
+        
+        ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
+        vc.typeTitle = @"我收到的评价";
+        vc.openId = [ODUserInformation sharedODUserInformation].openID;
         [self.navigationController pushViewController:vc animated:YES];
-        
-        
+
         
     }
     else if (indexPath.section == 7) {
@@ -308,7 +306,7 @@
     if (indexPath.section == 0) {
         return CGSizeMake(kScreenSize.width , 80);
     }else {
-        return CGSizeMake(kScreenSize.width , 40);
+        return CGSizeMake(kScreenSize.width , 30);
     }
 }
 

@@ -39,7 +39,7 @@
     self.pageNumber = 0;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];;
     
     self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
     self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
@@ -61,7 +61,7 @@
 - (void)createTableView
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.tableView.userInteractionEnabled = YES;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -96,7 +96,7 @@
     if (_landView == nil) {
         self.landView = [ODlandingView getView];
         self.landView.userInteractionEnabled = YES;
-        self.landView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        self.landView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         
         self.landView.accountLabel.layer.masksToBounds = YES;
         self.landView.accountLabel.layer.cornerRadius = 20;

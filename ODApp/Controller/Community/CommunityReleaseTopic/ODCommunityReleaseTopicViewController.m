@@ -122,7 +122,7 @@ NSString *topicContentText = @"";
     self.addPicButton.layer.masksToBounds = YES;
     self.addPicButton.layer.cornerRadius = 5;
     self.addPicButton.layer.borderWidth = 1;
-    self.addPicButton.layer.borderColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1].CGColor;
+    self.addPicButton.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     [self.view addSubview:self.addPicButton];
 }
 

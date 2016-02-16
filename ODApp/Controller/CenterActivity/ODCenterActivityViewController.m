@@ -369,7 +369,7 @@
     [self.collectionView registerClass:[ODActivityHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"firstHeader"];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"CenterActivityCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.view addSubview:self.collectionView];
     

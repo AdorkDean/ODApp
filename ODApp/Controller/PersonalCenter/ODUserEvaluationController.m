@@ -26,20 +26,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
-
+    
     self.pageNumber = 1;
     self.dataArray = [[NSMutableArray alloc] init];
-    
-   
-    
     self.navigationItem.title = self.typeTitle;
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
-    
-    
-  
     [self createCollectionView];
     
     
@@ -63,8 +54,7 @@
 
 
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width,KControllerHeight) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[ODEvaluationCell class] forCellWithReuseIdentifier:@"item"];
@@ -94,7 +84,6 @@
     
     
     self.manager = [AFHTTPRequestOperationManager manager];
-    
     NSDictionary *parameters = @{@"type":@"1", @"page":countNumber, @"open_id":self.openId};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
@@ -168,8 +157,6 @@
 }
 
 
-
-
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -179,31 +166,10 @@
     
     
 }
-//动态设置每个分区的缩进量
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(0, 0, 0, 0);
-}
 //动态设置每个分区的最小行间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 5;
-}
-//动态返回不同区的列间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0;
-}
-//动态设置区头的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    return CGSizeMake(0, 0);
-    
-}
-//动态设置区尾的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-{
-    return CGSizeMake(0, 0);
 }
 
 
@@ -212,14 +178,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
