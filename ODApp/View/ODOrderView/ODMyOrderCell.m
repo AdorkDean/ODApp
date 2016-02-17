@@ -38,9 +38,9 @@
     self.nikeLabel.text = model.swap_user_nick;
     self.nikeLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     self.titleLabel.text = [NSString stringWithFormat:@"我去 · %@" , model.swap_title];
-    self.priceLabel.text = [NSString stringWithFormat:@"%@/%@" , model.swap_price , model.swap_unit];
+    self.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" , model.swap_price , model.swap_unit];
     self.priceLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    self.dateLabel.text = model.service_time;
+    self.dateLabel.text = model.order_created_at;
     self.dateLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     self.statusLabel.text = model.status_str;
 

@@ -86,7 +86,7 @@
             
             NSMutableDictionary *dic = responseObject[@"result"];
             
-            NSMutableDictionary *addressDic = dic[@"default"];
+            NSMutableDictionary *addressDic = dic[@"def"];
             
             
             if (addressDic.count != 0) {

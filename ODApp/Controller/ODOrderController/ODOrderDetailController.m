@@ -202,7 +202,19 @@
         self.orderDetailView.typeLabel.text = self.orderType;
         self.orderDetailView.addressNameLabel.text = model.name;
         self.orderDetailView.addressPhoneLabel.text = model.tel;
-        self.orderDetailView.serviceTimeLabel.text = model.service_time;
+        
+        NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
+        
+        if (![swap_type isEqualToString:@"3"]) {
+            
+             self.orderDetailView.serviceTimeLabel.text = model.address;
+            self.orderDetailView.serviceTypeLabel.text = @"服务地址:";
+        }else{
+            self.orderDetailView.serviceTimeLabel.text = model.service_time;
+               self.orderDetailView.serviceTypeLabel.text = @"服务时间:";
+
+        }
+        
         self.orderDetailView.orderTimeLabel.text = model.order_created_at;
         self.orderDetailView.orderIdLabel.text = [NSString stringWithFormat:@"%@" , model.order_id];
         

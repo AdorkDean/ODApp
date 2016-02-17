@@ -8,17 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "ODLikeModel.h"
+#import "ODApplyModel.h"
 @interface ODCollectionCell : UICollectionViewCell
 
 
 @property (weak, nonatomic) IBOutlet UIButton *userImageButton;
-
 @property (weak, nonatomic) IBOutlet UILabel *schoolLabel;
-
 @property (weak, nonatomic) IBOutlet UIImageView *hisPictureView;
-
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-
+@property (nonatomic , strong) ODApplyModel *applyModel;
 @property (nonatomic , strong) ODLikeModel *model;
+
+
+- (void)setWithApplyModel:(ODApplyModel *)model;
+- (void)setWithLikeModel:(ODLikeModel *)model;
 
 @end

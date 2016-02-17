@@ -19,7 +19,12 @@
 #import "ODActivitybottomView.h"
 #import "ODActivityDetailInfoViewCell.h"
 
-@interface ODNewActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,ODPersonalCenterVCDelegate>
+#import "ODCenterPactureController.h"
+#import "UMSocial.h"
+#import "ODCenterDetailController.h"
+#import "ODApplyListViewController.h"
+
+@interface ODNewActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,UMSocialUIDelegate,ODPersonalCenterVCDelegate>
 
 /**
  *  活动嘉宾
@@ -205,6 +210,14 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     if (!_activePeopleView)
     {
         ODActivePersonInfoView *view = [[ODActivePersonInfoView alloc]initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.peopleNumLabel.frame), KScreenWidth - ODLeftMargin * 2, 50)];
+        
+        view.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *applyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(applyAction)];
+        [view addGestureRecognizer:applyTap];
+        
+        
+        
         [self.baseScrollV addSubview:view];
         _activePeopleView = view;
     }
@@ -280,6 +293,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.view.userInteractionEnabled = YES;
     self.navigationItem.title = @"活动详情";
     [self requestData];
 }
@@ -357,9 +371,11 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     if (tableView == self.infoTableView)
     {
         ODActivityDetailInfoViewCell *cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         if (indexPath.row == 0)//时间
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
+             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             [cell iconImgView].image = [UIImage imageNamed:@"icon_service time"];
             [cell detailInfoLabel].text = self.resultModel.time_str;
             [cell statusLabel].text = self.resultModel.apply_status_str;
@@ -368,6 +384,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         else if (indexPath.row == 1)//地点
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
+             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             [cell iconImgView].image = [UIImage imageNamed:@"icon_service address"];
             [cell detailInfoLabel].text = self.resultModel.store_address;
             [cell statusLabel].hidden = YES;
@@ -375,6 +392,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         else if (indexPath.row == 2)//组织人
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
+             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             [cell iconImgView].image = [UIImage imageNamed:@"icon_Edit name"];
             NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"由 %@ 组织",self.resultModel.organization_name]];
             [attributeString addAttributes:
@@ -391,6 +409,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     {
         ODActivityDetailVIPModel *vipModel = self.resultModel.savants[indexPath.row];
         ODActivityVIPCell *cell = [tableView dequeueReusableCellWithIdentifier:VIPCell];
+         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [[cell VIPHeadImgView] sd_setImageWithURL:[NSURL OD_URLWithString:[vipModel avatar]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [[(ODActivityVIPCell *)cell VIPHeadImgView]setImage:[image OD_circleImage]];
         }];
@@ -401,6 +420,50 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     }
     return nil;
 }
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 1) {
+        
+        
+   
+        if (self.resultModel.is_online == 1) {
+            ;
+        }else{
+            
+            
+            if (self.resultModel.store_id > 0) {
+                
+                ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
+                vc.storeId = [NSString stringWithFormat:@"%d" , self.resultModel.store_id];
+                vc.activityID = [NSString stringWithFormat:@"%d" , self.resultModel.activity_id];
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+                
+                
+            }else {
+                
+                ODCenterPactureController *vc = [[ODCenterPactureController alloc] init];
+                
+                NSString *webUrl = [NSString stringWithFormat:@"http://h5.odong.com/map/search?lng=%@&lat=%@" , self.resultModel.lng , self.resultModel.lat];
+                vc.webUrl = webUrl;
+                vc.activityName = self.resultModel.store_name;
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }
+            
+        }
+
+            
+            
+            
+        }
+        
+       
+}
+
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -426,6 +489,9 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     self.bottomButtonView.od_y = CGRectGetMaxY(webView.frame);
     [self.bottomButtonView addLineOnBottom];
     [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %d",self.resultModel.share_cnt] forState:UIControlStateNormal];
+    
+    [[self.bottomButtonView shareBtn] addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
+    
     [[self.bottomButtonView goodBtn]setTitle:[NSString stringWithFormat:@"赞 %d",self.resultModel.love_cnt] forState:UIControlStateNormal];
 }
 
@@ -436,6 +502,43 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 }
 
 #pragma mark - action
+
+- (void)applyAction
+{
+    
+        
+    ODApplyListViewController *vc = [[ODApplyListViewController alloc] init];
+    vc.activity_id = [NSString stringWithFormat:@"%d" , self.resultModel.activity_id];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+}
+
+
+
+- (void)share:(UIButton *)sender
+{
+    
+    NSString *url = self.resultModel.share[@"icon"];
+    NSString *content = self.resultModel.share[@"desc"];
+    NSString *link = self.resultModel.share[@"link"];
+    NSString *title = self.resultModel.share[@"title"];
+    
+    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:kGetUMAppkey
+                                      shareText:content
+                                     shareImage:nil
+                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                       delegate:self];
+
+}
+
+
 - (void)report:(UIButton *)btn
 {
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;

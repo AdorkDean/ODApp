@@ -101,6 +101,8 @@
 
 @property (nonatomic, strong) NSString *content;
 
+@property (nonatomic, strong) NSMutableDictionary *share;
+
 @end
 
 ODRequestResultIsDictionaryProperty(ODActivityDetailModel)
