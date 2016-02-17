@@ -157,9 +157,9 @@
             
             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入姓名"];
             
-        }else if ([self.addAddressView.phoneTextField.text isEqualToString:@"请输入手机号"] || self.addAddressView.phoneTextField.text.length < 8 || self.addAddressView.phoneTextField.text.length > 11)
+        }else if ([self.addAddressView.phoneTextField.text isEqualToString:@"请输入手机号"] || [self.addAddressView.phoneTextField.text isEqualToString:@""])
         {
-            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入正确手机号"];
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入手机号"];
             
         }else if ([self.addAddressView.addressTextView.text isEqualToString:@"请输入联系地址"] || [self.addAddressView.addressTextView.text isEqualToString:@""])
         {
@@ -179,7 +179,7 @@
             
             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入姓名"];
             
-        }else if ([self.addAddressView.phoneTextField.text isEqualToString:@"请输入手机号"] || self.addAddressView.phoneTextField.text.length < 8 || self.addAddressView.phoneTextField.text.length > 11)
+        }else if ([self.addAddressView.phoneTextField.text isEqualToString:@"请输入手机号"] || [self.addAddressView.phoneTextField.text isEqualToString:@""])
         {
             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入正确手机号"];
             

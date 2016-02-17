@@ -113,25 +113,32 @@
             
             
             NSMutableDictionary *dic = responseObject[@"result"];
-          
-            for (NSMutableDictionary *miniDic in dic) {
-                NSString *is_default = [NSString stringWithFormat:@"%@" , miniDic[@"is_default"]];
+            NSMutableDictionary *mainDic = dic[@"default"];
+            NSMutableDictionary *otherDic = dic[@"list"];
+            
+            
+            
+            if (mainDic.count != 0) {
+                ODAddressModel *model = [[ODAddressModel alloc] init];
+                [model setValuesForKeysWithDictionary:mainDic];
+                [weakSelf.defaultArray addObject:model];
+
+            }
+         
+            
+            for (NSMutableDictionary *miniDic in otherDic) {
+             
                 
                 
-                if ([is_default isEqualToString:@"1"]) {
-                    ODAddressModel *model = [[ODAddressModel alloc] init];
-                    [model setValuesForKeysWithDictionary:miniDic];
-                    [weakSelf.defaultArray addObject:model];
-                }else{
-                    ODAddressModel *model = [[ODAddressModel alloc] init];
+                   ODAddressModel *model = [[ODAddressModel alloc] init];
                     [model setValuesForKeysWithDictionary:miniDic];
                     [weakSelf.dataArray addObject:model];
 
                 }
                 
-                
-                
-            }
+        
+        
+            
             
             
         }
@@ -188,6 +195,10 @@
 {
     ODAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:@"item" forIndexPath:indexPath];
     
+    
+   
+    
+    
     if (indexPath.section == 0) {
         [cell.lineLabel removeFromSuperview];
         
@@ -227,6 +238,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    
+   
+    
+    
     if (section == 0) {
         if (self.defaultArray.count == 0) {
             return 0;
