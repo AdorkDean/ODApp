@@ -58,8 +58,11 @@ UIKIT_EXTERN NSString * const kHomeFoundListUrl;
 UIKIT_EXTERN NSString * const kHomeFoundPictureUrl;
 
 UIKIT_EXTERN NSString * const ODSkillDetailUrl;
-
-
+UIKIT_EXTERN NSString * const ODFindJobUrl;
+UIKIT_EXTERN NSString * const ODHotActivityUrl;
+UIKIT_EXTERN NSString * const ODHomeFoundUrl;
+UIKIT_EXTERN NSString * const ODCityListUrl;
+UIKIT_EXTERN NSString * const ODHomeChangeSkillUrl;
 
 UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;

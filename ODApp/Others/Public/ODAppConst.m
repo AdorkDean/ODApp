@@ -55,6 +55,12 @@ NSString * const kHomeFoundPictureUrl = @"http://woquapi.test.odong.com/1.0/othe
 
 NSString * const ODSkillDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/info";
 
+NSString * const ODCityListUrl = @"other/city/list";
+NSString * const ODHomeFoundUrl = @"other/home";
+NSString * const ODHomeChangeSkillUrl = @"http://woquapi.test.odong.com/1.0/other/home";
+NSString *const ODFindJobUrl = @"http://www.myjob500.com/user/extloginpf";
+NSString * const ODHotActivityUrl = @"http://woquapi.test.odong.com/1.0/doc/store/activity/list";
+
 NSString * const kMyOrderRecordUrl = @"http://woquapi.test.odong.com/1.0/store/orders";
 NSString * const kMyOrderDetailUrl = @"http://woquapi.test.odong.com/1.0/store/info/order";
 
