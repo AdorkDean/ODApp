@@ -5,8 +5,8 @@
 //  Created by 刘培壮 on 16/2/17.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
-#import "ODActivityDetailModel.h"
 #import "UIImageView+WebCache.h"
+#import "ODActivityDetailModel.h"
 #import "ODActivePersonInfoView.h"
 
 @implementation ODActivePersonInfoView
@@ -41,7 +41,7 @@
 {
     CGFloat imgVTBDistance = 0;
     CGFloat imgVWH = 75 / 2;
-    for (NSInteger i = 0; i < activePersons.count && activePersons.count <= 8; i++)
+    for (NSInteger i = 0; i < activePersons.count && (imgVWH + 10) * (i + 1) < self.od_width; i++)
     {
         ODActivityDetailAppliesModel *model = activePersons[i];
         UIImageView *imgV = [[UIImageView alloc]initWithFrame:CGRectMake((imgVWH + 10) * i, imgVTBDistance, imgVWH, imgVWH)];

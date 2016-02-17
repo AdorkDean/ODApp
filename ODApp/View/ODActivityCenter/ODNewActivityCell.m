@@ -28,7 +28,7 @@
     self.titleLabel.text = model.content;
     self.timeLabel.text = model.date_str;
     self.addressLabel.text = model.address;
-    self.numberLabel.text = [NSString stringWithFormat:@"%zd人报名",model.browse_num];
+    self.numberLabel.text = [NSString stringWithFormat:@"%zd人报名",model.apply_cnt];
 }
 
 - (void)awakeFromNib
