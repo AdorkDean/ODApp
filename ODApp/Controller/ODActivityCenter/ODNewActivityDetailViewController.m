@@ -218,7 +218,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         label.frame = CGRectMake(0, CGRectGetMaxY(self.activePeopleView.frame), KScreenWidth, labelHeight);
         label.textLabel.text = @"活动详情";
         [label layoutIfNeeded];
-        NSLog(@"%@",NSStringFromCGRect(label.frame));
         [label addLineFromPoint:CGPointMake(0, label.od_y)];
         [label addLineFromPoint:CGPointMake(label.textLabel.od_x,label.od_height)];
         label.textLabel.font = [UIFont systemFontOfSize:13.5];
@@ -310,18 +309,25 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     self.activityApplies = self.resultModel.applies;
     [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
     {
-        [weakSelf.headImageView sizeToFit];
+        weakSelf.headImageView.od_width = KScreenWidth;
+        weakSelf.headImageView.od_height = image.size.height * KScreenWidth / image.size.width;
         [weakSelf.headImageView addLineOnBottom];
         weakSelf.titleLabel.text = weakSelf.resultModel.content;
         weakSelf.infoTableView.hidden = NO;
         weakSelf.VIPLabel.od_height = weakSelf.resultModel.savants.count ? labelHeight : 0;
         weakSelf.VIPTableView.od_height = weakSelf.resultModel.savants.count *
         137 / 2;
-        weakSelf.peopleNumLabel.textLabel.text = [NSString stringWithFormat:@"%d人已报名",weakSelf.resultModel.apply_cnt];
-        [weakSelf.activePeopleView setActivePersons:self.resultModel.applies];
-        weakSelf.activePeopleView.od_height = weakSelf.resultModel.apply_cnt ? weakSelf.activePeopleView.od_height : 0 ;
-        UIView *lastView = weakSelf.resultModel.apply_cnt ? weakSelf.activePeopleView : weakSelf.peopleNumLabel;
-        [lastView addLineFromPoint:CGPointMake(- ODLeftMargin, lastView.od_height)];
+        if (weakSelf.resultModel.apply_cnt)
+        {
+            weakSelf.peopleNumLabel.textLabel.text = [NSString stringWithFormat:@"%d人已报名",weakSelf.resultModel.apply_cnt];
+            [weakSelf.activePeopleView setActivePersons:self.resultModel.applies];
+            [weakSelf.activePeopleView addLineFromPoint:CGPointMake(- ODLeftMargin, weakSelf.activePeopleView.od_height)];
+        }
+        else
+        {
+            weakSelf.peopleNumLabel.od_height = 0;
+            weakSelf.activePeopleView.od_height = 0;
+        }
         weakSelf.activeContentLabel.hidden = NO;
         [weakSelf.webView loadHTMLString:weakSelf.resultModel.remark baseURL:nil];
     }];
@@ -348,29 +354,29 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         if (indexPath.row == 0)//时间
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
-            [(ODActivityDetailInfoViewCell *)cell iconImgView].image = [UIImage imageNamed:@"icon_service time"];
-            [(ODActivityDetailInfoViewCell *)cell detailInfoLabel].text = self.resultModel.time_str;
-            [(ODActivityDetailInfoViewCell *)cell statusLabel].text = self.resultModel.apply_status_str;
-            [(ODActivityDetailInfoViewCell *)cell statusLabel].hidden = NO;
+            [cell iconImgView].image = [UIImage imageNamed:@"icon_service time"];
+            [cell detailInfoLabel].text = self.resultModel.time_str;
+            [cell statusLabel].text = self.resultModel.apply_status_str;
+            [cell statusLabel].hidden = NO;
         }
         else if (indexPath.row == 1)//地点
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
-            [(ODActivityDetailInfoViewCell *)cell iconImgView].image = [UIImage imageNamed:@"icon_service address"];
-            [(ODActivityDetailInfoViewCell *)cell detailInfoLabel ].text = self.resultModel.store_address;
-            [(ODActivityDetailInfoViewCell *)cell statusLabel].hidden = YES;
+            [cell iconImgView].image = [UIImage imageNamed:@"icon_service address"];
+            [cell detailInfoLabel].text = self.resultModel.store_address;
+            [cell statusLabel].hidden = YES;
         }
         else if (indexPath.row == 2)//组织人
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
-            [(ODActivityDetailInfoViewCell *)cell iconImgView].image = [UIImage imageNamed:@"icon_Edit name"];
-            NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"由 %@ 组织",self.resultModel.store_name]];
+            [cell iconImgView].image = [UIImage imageNamed:@"icon_Edit name"];
+            NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"由 %@ 组织",self.resultModel.organization_name]];
             [attributeString addAttributes:
              @{
                NSForegroundColorAttributeName : [UIColor colorWithHexString:@"3963b2" alpha:1]
                }range:NSMakeRange(2, attributeString.length - 5)];
-            [(ODActivityDetailInfoViewCell *)cell detailInfoLabel].attributedText = attributeString;
-            [(ODActivityDetailInfoViewCell *)cell statusLabel].hidden = YES;
+            [cell detailInfoLabel].attributedText = attributeString;
+            [cell statusLabel].hidden = YES;
         }
 
         return cell;
