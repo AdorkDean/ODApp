@@ -8,6 +8,8 @@
 
 #import "ODBaseViewController.h"
 
+#import <MAMapKit/MAMapKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 
@@ -27,8 +29,10 @@
 #import "ODPersonalCenterViewController.h"
 #import "ODHomeFoundFooterView.h"
 #import "ODLocationController.h"
+#import "ODFindJobController.h"
+#import "ODNewActivityDetailViewController.h"
 
-@interface ODHomeFoundViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
+@interface ODHomeFoundViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate, MAMapViewDelegate, AMapSearchDelegate>
 
 @property (nonatomic, strong)UIButton *locationButton;
 
@@ -45,9 +49,8 @@
 @property (nonatomic, strong)AFHTTPRequestOperationManager *managers;
 
 //滚动窗口数组
-@property (nonatomic, strong)NSMutableArray *pictureArray;
-@property (nonatomic, strong)NSMutableArray *pictureDetailArray;
-@property (nonatomic, strong)NSMutableArray *titleArray;
+@property (nonatomic, strong)NSArray *pictureArray;
+@property (nonatomic, strong)NSArray *pictureIdArray;
 
 //最新话题数组
 @property (nonatomic, strong)NSMutableArray *dataArray;

@@ -51,7 +51,7 @@ NSString * const requestSuccessStatus = @"success";
     }
          failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
-        NSLog(@"error === %@",error.description);
+        NSLog(@"error === %@ ,manager = %@",error.description,manager);
         if (error)
         {
             failure(error);
