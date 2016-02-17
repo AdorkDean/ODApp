@@ -11,6 +11,7 @@
 #import "ODActivityDetailViewController.h"
 #import "ODNewActivityDetailViewController.h"
 
+#import "ODActivePersonInfoView.h"
 #import "ODTitleLabelView.h"
 #import "ODActivityVIPCell.h"
 #import "ODActivitybottomView.h"
@@ -71,7 +72,7 @@
 /**
  *  报名人数View
  */
-@property (nonatomic, strong) UIView *activePeopleView;
+@property (nonatomic, strong) ODActivePersonInfoView *activePeopleView;
 
 /**
  *  活动内容label
@@ -198,11 +199,11 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     return _peopleNumLabel;
 }
 
-- (UIView *)activePeopleView
+- (ODActivePersonInfoView *)activePeopleView
 {
     if (!_activePeopleView)
     {
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.peopleNumLabel.frame), KScreenWidth - ODLeftMargin * 2, 50)];
+        ODActivePersonInfoView *view = [[ODActivePersonInfoView alloc]initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.peopleNumLabel.frame), KScreenWidth - ODLeftMargin * 2, 50)];
         [self.baseScrollV addSubview:view];
         _activePeopleView = view;
     }
@@ -317,13 +318,12 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         weakSelf.VIPTableView.od_height = weakSelf.resultModel.savants.count *
         137 / 2;
         weakSelf.peopleNumLabel.textLabel.text = [NSString stringWithFormat:@"%d人已报名",weakSelf.resultModel.apply_cnt];
-//        [(ODActivityPersonCell *)cell setActivePersons:self.resultModel.applies];
+        [weakSelf.activePeopleView setActivePersons:self.resultModel.applies];
         weakSelf.activePeopleView.od_height = weakSelf.resultModel.apply_cnt ? weakSelf.activePeopleView.od_height : 0 ;
         UIView *lastView = weakSelf.resultModel.apply_cnt ? weakSelf.activePeopleView : weakSelf.peopleNumLabel;
         [lastView addLineFromPoint:CGPointMake(- ODLeftMargin, lastView.od_height)];
         weakSelf.activeContentLabel.hidden = NO;
         [weakSelf.webView loadHTMLString:weakSelf.resultModel.remark baseURL:nil];
-        
     }];
 }
 #pragma mark - UITableViewDataSource
@@ -411,7 +411,8 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     float clientheight = [clientheight_str floatValue];
     webView.od_height = clientheight + 12.5;
     [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(webView.frame))];
-    self.bottomButtonView.hidden = NO;
+    [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %d",self.resultModel.share_cnt] forState:UIControlStateNormal];
+    [[self.bottomButtonView goodBtn]setTitle:[NSString stringWithFormat:@"赞 %d",self.resultModel.love_cnt] forState:UIControlStateNormal];
 }
 
 #pragma mark - action
