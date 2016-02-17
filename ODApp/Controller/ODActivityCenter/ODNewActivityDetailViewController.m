@@ -363,9 +363,11 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     if (tableView == self.infoTableView)
     {
         ODActivityDetailInfoViewCell *cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         if (indexPath.row == 0)//时间
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
+             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             [cell iconImgView].image = [UIImage imageNamed:@"icon_service time"];
             [cell detailInfoLabel].text = self.resultModel.time_str;
             [cell statusLabel].text = self.resultModel.apply_status_str;
@@ -374,6 +376,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         else if (indexPath.row == 1)//地点
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
+             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             [cell iconImgView].image = [UIImage imageNamed:@"icon_service address"];
             [cell detailInfoLabel].text = self.resultModel.store_address;
             [cell statusLabel].hidden = YES;
@@ -381,6 +384,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         else if (indexPath.row == 2)//组织人
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
+             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             [cell iconImgView].image = [UIImage imageNamed:@"icon_Edit name"];
             NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"由 %@ 组织",self.resultModel.organization_name]];
             [attributeString addAttributes:
@@ -397,6 +401,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     {
         ODActivityDetailVIPModel *vipModel = self.resultModel.savants[indexPath.row];
         ODActivityVIPCell *cell = [tableView dequeueReusableCellWithIdentifier:VIPCell];
+         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [[cell VIPHeadImgView] sd_setImageWithURL:[NSURL OD_URLWithString:[vipModel avatar]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [[(ODActivityVIPCell *)cell VIPHeadImgView]setImage:[image OD_circleImage]];
         }];
