@@ -10,6 +10,14 @@
 
 @implementation ODActivityDetailBtn
 
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+
+    }
+    return self;
+}
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -20,5 +28,19 @@
     self.imageView.center = CGPointMake(50 + (self.titleLabel.od_width) / 2, self.od_centerY);
     self.titleLabel.center = CGPointMake(CGRectGetMaxX(self.imageView.frame) + 12.5 + self.titleLabel.od_width / 2, self.od_centerY);
 }
-
+- (void)setOD_selectedState:(BOOL)OD_selectedState
+{
+    _OD_selectedState = OD_selectedState;
+    if (OD_selectedState)
+    {
+        [self setImage:[self imageForState:UIControlStateSelected] forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self setImage:[self imageForState:UIControlStateHighlighted] forState:UIControlStateNormal];
+    }
+}
+- (void)setSelected:(BOOL)selected
+{
+}
 @end

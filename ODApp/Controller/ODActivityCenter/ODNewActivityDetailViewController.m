@@ -260,6 +260,8 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     if (!_bottomButtonView)
     {
         ODActivitybottomView *view = [[NSBundle mainBundle]loadNibNamed:NSStringFromClass([ODActivitybottomView class]) owner:nil options:nil][0];
+        [view.shareBtn addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
+        [view.goodBtn addTarget:self action:@selector(clickGood:) forControlEvents:UIControlEventTouchUpInside];
         view.frame = CGRectMake(0, CGRectGetMaxY(self.webView.frame), KScreenWidth, 50);
         [self.baseScrollV addSubview:view];
         self.baseScrollV.contentSize = CGSizeMake(KScreenWidth, CGRectGetMaxY(view.frame));
@@ -324,9 +326,16 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     }
     [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
     {
-        weakSelf.headImageView.od_width = KScreenWidth;
-        weakSelf.headImageView.od_height = image.size.height * KScreenWidth / image.size.width;
-        [weakSelf.headImageView addLineOnBottom];
+        if (!image)
+        {
+            weakSelf.headImageView.od_height = 0;
+        }
+        else
+        {
+            weakSelf.headImageView.od_width = KScreenWidth;
+            weakSelf.headImageView.od_height = image.size.height * KScreenWidth / image.size.width;
+            [weakSelf.headImageView addLineOnBottom];
+        }
         weakSelf.titleLabel.text = weakSelf.resultModel.content;
         weakSelf.infoTableView.hidden = NO;
         weakSelf.VIPLabel.od_height = weakSelf.resultModel.savants.count ? labelHeight : 0;
@@ -490,7 +499,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     [self.bottomButtonView addLineOnBottom];
     [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %d",self.resultModel.share_cnt] forState:UIControlStateNormal];
     
-    [[self.bottomButtonView shareBtn] addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
     
     [[self.bottomButtonView goodBtn]setTitle:[NSString stringWithFormat:@"赞 %d",self.resultModel.love_cnt] forState:UIControlStateNormal];
 }
@@ -538,8 +546,13 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 
 }
 
+- (void)clickGood:(ODActivityDetailBtn *)btn
+{
+    btn.OD_selectedState = !btn.OD_selectedState;
+    [[self.bottomButtonView goodBtn]setTitle:[NSString stringWithFormat:@"赞 %d",self.resultModel.love_cnt + btn.OD_selectedState] forState:UIControlStateNormal];
+}
 
-- (void)report:(UIButton *)btn
+- (void)report:(ODActivityDetailBtn *)btn
 {
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     if (openId.length == 0)
