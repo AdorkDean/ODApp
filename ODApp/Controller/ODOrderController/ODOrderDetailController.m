@@ -103,7 +103,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = self.orderDetailView;
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.view addSubview:self.tableView];
     

@@ -197,7 +197,7 @@
 - (void)createBottomView
 {
     UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenSize.height-64-50, kScreenSize.width, 50)];
-    [bottomView setBackgroundColor:[UIColor colorWithHexString:@"#d9d9d9" alpha:1]];
+    [bottomView setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6" alpha:1]];
     [self.view addSubview:bottomView];
     
     UIButton *loveButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 50)];

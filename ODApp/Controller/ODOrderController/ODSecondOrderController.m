@@ -63,18 +63,20 @@
             
             NSMutableDictionary *dic = responseObject[@"result"];
             
-            for (NSMutableDictionary *miniDic in dic) {
-                NSString *is_default = [NSString stringWithFormat:@"%@" , miniDic[@"is_default"]];
-                
-                
-                if ([is_default isEqualToString:@"1"]) {
-                    ODAddressModel *model = [[ODAddressModel alloc] init];
-                    [model setValuesForKeysWithDictionary:miniDic];
-                    [weakSelf.addressArray addObject:model];
-                }
-                
-                
+            NSMutableDictionary *addressDic = dic[@"default"];
+            
+            
+            if (addressDic.count != 0) {
+                ODAddressModel *model = [[ODAddressModel alloc] init];
+                [model setValuesForKeysWithDictionary:addressDic];
+                [weakSelf.addressArray addObject:model];
+
             }
+            
+            
+            
+                
+        
             
             
         }
@@ -98,7 +100,7 @@
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width,kScreenSize.height - 115) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[ODOrderSecondHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];

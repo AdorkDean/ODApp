@@ -106,7 +106,7 @@
 #pragma mark - 初始化
 -(void)navigationInit
 {
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+
     self.view.userInteractionEnabled = YES;
     self.navigationItem.title = @"场地预约";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
@@ -117,8 +117,7 @@
 - (void)createTableView
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-    
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = self.yuYueView;
@@ -151,6 +150,14 @@
 
         self.yuYueView.pursoseTextView.delegate=self;
         self.yuYueView.contentTextView.delegate=self;
+        self.yuYueView.pursoseTextView.scrollEnabled = NO;
+        
+        self.yuYueView.pursoseTextView.text = @"输入活动目的";
+        self.yuYueView.pursoseTextView.textColor = [UIColor lightGrayColor];
+        
+        self.yuYueView.contentTextView.text = @"输入活动内容";
+        self.yuYueView.contentTextView.textColor = [UIColor lightGrayColor];
+        
     
         self.yuYueView.peopleNumberTextField.delegate = self;
      
@@ -191,10 +198,10 @@
         
 
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请填写结束时间"];
-    }else if ([self.yuYueView.pursoseTextView.text isEqualToString:@""] || [self.yuYueView.pursoseTextView.text isEqualToString:@"请填写结束时间"]) {
+    }else if ([self.yuYueView.pursoseTextView.text isEqualToString:@""] || [self.yuYueView.pursoseTextView.text isEqualToString:@"输入活动目的"]) {
         
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入活动目的"];
-    }else if ([self.yuYueView.contentTextView.text isEqualToString:@""] || [self.yuYueView.contentTextView.text isEqualToString:@"请输入活动目的"]) {
+    }else if ([self.yuYueView.contentTextView.text isEqualToString:@""] || [self.yuYueView.contentTextView.text isEqualToString:@"输入活动内容"]) {
 
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入活动内容"];
     }else if ([self.yuYueView.peopleNumberTextField.text isEqualToString:@""]) {
@@ -292,7 +299,7 @@
         weakSelf.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
         weakSelf.cancelButton.frame = CGRectMake(0, kScreenSize.height - 230, 50, 30);
         [weakSelf.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-        weakSelf.cancelButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        weakSelf.cancelButton.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         [weakSelf.cancelButton addTarget:weakSelf action:@selector(quXiaoAction:) forControlEvents:UIControlEventTouchUpInside];
         weakSelf.cancelButton.titleLabel.font = [UIFont systemFontOfSize:17];
         
@@ -301,14 +308,14 @@
         weakSelf.timeLabel.text = @"选择时间";
         weakSelf.timeLabel.font = [UIFont systemFontOfSize:20];
         weakSelf.timeLabel.textAlignment = NSTextAlignmentCenter;
-        weakSelf.timeLabel.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        weakSelf.timeLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         
         
         
         weakSelf.queDingButton = [UIButton buttonWithType:UIButtonTypeSystem];
         weakSelf.queDingButton.frame = CGRectMake(kScreenSize.width - 50, kScreenSize.height - 230, 50, 30);
         [weakSelf.queDingButton setTitle:@"确定" forState:UIControlStateNormal];
-        weakSelf.queDingButton.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        weakSelf.queDingButton.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         [weakSelf.queDingButton addTarget:weakSelf action:@selector(queDingAction:) forControlEvents:UIControlEventTouchUpInside];
         weakSelf.queDingButton.titleLabel.font = [UIFont systemFontOfSize:17];
         
@@ -409,10 +416,8 @@
     NSString *equipment = [NSString stringWithFormat:@"%@,%@,%@,%@" , computerY , touYingY , yinXingY , maiY];
     NSDictionary *parameter = @{@"start_datetime":self.beginTime , @"end_datetime":self.endTime , @"store_id":self.storeId , @"order_id":self.orderID ,@"purpose":self.yuYueView.pursoseTextView.text ,@"content":self.yuYueView.contentTextView.text ,@"people_num":self.yuYueView.peopleNumberTextField.text ,@"remark":@"无" ,@"devices":equipment ,@"open_id":self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSString *url = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
-    
-    __weak typeof (self)weakSelf = self;
-    [self.managers GET:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+     __weak typeof (self)weakSelf = self;
+    [self.managers GET:kSaveOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
@@ -773,110 +778,75 @@
 
 
 #pragma mark - textViewDelegate
--(void)textViewDidBeginEditing:(UITextView *)textView
+- (void)textViewDidBeginEditing:(UITextView *)textView
 {
+    
     if (textView == self.yuYueView.pursoseTextView) {
-        if ([textView.text isEqualToString:NSLocalizedString(@"输入活动目的", nil)]) {
-            self.yuYueView.pursoseTextView.text=NSLocalizedString(@"", nil);
-            self.yuYueView.pursoseTextView.textColor = [UIColor blackColor];
-        }        
-        else{
-            ;
+        if ([textView.text isEqualToString:@"输入活动目的"]) {
+            textView.text = @"";
+            textView.textColor = [UIColor blackColor];
         }
 
     }else if (textView == self.yuYueView.contentTextView) {
-        if ([textView.text isEqualToString:NSLocalizedString(@"输入活动内容", nil)]) {
-            self.yuYueView.contentTextView.text=NSLocalizedString(@"", nil);
-            self.yuYueView.contentTextView.textColor = [UIColor blackColor];
-        }else{
-            ;
+        if ([textView.text isEqualToString:@"输入活动内容"]) {
+            textView.text = @"";
+            textView.textColor = [UIColor blackColor];
         }
+
     }
-}
+    
+  }
+
+
+
 
 - (void)textViewDidChange:(UITextView *)textView
 {
-    NSString *pursoseText = @"";
-    NSString *contentText = @"";
-
     
-    if (textView == self.yuYueView.pursoseTextView)
-    {
-        if (textView.text.length > 20)
-        {
-            textView.text = pursoseText;
-        }
-        else
-        {
-            pursoseText = textView.text;
-        }
-    }
-    else if (textView == self.yuYueView.contentTextView)
-    {
-        if (textView.text.length > 100)
-        {
-            textView.text = contentText;
-        }
-        else
-        {
-            contentText = textView.text;
-        }
-        
-        
-    }
-}
-
-
-
-
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
+    NSString *purposeText = @"";
+    NSString *contentText = @"";
+    
     
     if (textView == self.yuYueView.pursoseTextView) {
-       
-        if (text.length == 0) return YES;
-        
-        NSInteger existedLength = textView.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = text.length;
-        if (existedLength - selectedLength + replaceLength > 20) {
-            return NO;
+        if (textView.text.length > 20){
+            textView.text = [textView.text substringToIndex:20];
+        }else{
+            purposeText = textView.text;
         }
-        
-        if ([text isEqualToString:@"\n"]) {
-            [textView resignFirstResponder];
-            return NO;
 
+    }else if (textView == self.yuYueView.contentTextView) {
+        if (textView.text.length > 100){
+            textView.text = [textView.text substringToIndex:100];
+        }else{
+            contentText = textView.text;
         }
+
     }
     
-    if (textView == self.yuYueView.contentTextView) {
-        if (text.length == 0) return YES;
-        
-        NSInteger existedLength = textView.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = text.length;
-        if (existedLength - selectedLength + replaceLength > 100) {
-            return NO;
-        }
-    }
     
-    return YES;
+    
 }
-
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    if ([textView.text isEqualToString:@""])
-    {
-        textView.textColor = [UIColor lightGrayColor];
-        if (textView == self.yuYueView.pursoseTextView) {
-            textView.text=NSLocalizedString(@"输入活动目的", nil);
-            
-        }else{
-            textView.text=NSLocalizedString(@"输入活动内容", nil);
+    
+    if (textView == self.yuYueView.pursoseTextView) {
+        if ([self.yuYueView.pursoseTextView.text isEqualToString:@"输入活动目的"] || [self.yuYueView.pursoseTextView.text isEqualToString:@""]) {
+            self.yuYueView.pursoseTextView.text = @"输入活动目的";
+             self.yuYueView.pursoseTextView.textColor = [UIColor lightGrayColor];
         }
+
+    }else if (textView == self.yuYueView.contentTextView) {
+        if ([self.yuYueView.contentTextView.text isEqualToString:@"输入活动内容"] || [self.yuYueView.contentTextView.text isEqualToString:@""]) {
+            self.yuYueView.contentTextView.text = @"输入活动内容";
+            self.yuYueView.contentTextView.textColor = [UIColor lightGrayColor];
+        }
+
     }
+    
+    
+    
+    
 }
 
 #pragma mark - tableViewDelegate

@@ -79,6 +79,11 @@
         
         
         NSMutableDictionary *dic = responseObject[@"result"];
+        
+        
+      
+        
+        
         weakSelf.model = [[ODUserModel alloc] initWithDict:dic];
         
         [weakSelf createCollectionView];
@@ -103,7 +108,7 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandSecondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     
@@ -142,7 +147,7 @@
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
         
         if (indexPath.section == 1) {
-            cell.titleLabel.text = @"我的预约记录";
+            cell.titleLabel.text = @"我的中心预约";
             
         }else if (indexPath.section == 2) {
             cell.titleLabel.text = @"我报名的活动";
@@ -155,9 +160,11 @@
         
         
         else if (indexPath.section == 5) {
-            cell.titleLabel.text = @"我收到的评价";
-        }else if (indexPath.section == 6) {
+           
             cell.titleLabel.text = @"我的订单";
+        }else if (indexPath.section == 6) {
+           
+             cell.titleLabel.text = @"我收到的评价";
         }
         
         else if (indexPath.section == 7) {
@@ -232,33 +239,38 @@
         
     }else if (indexPath.section == 5) {
         
-        ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
-        
-        vc.typeTitle = @"我收到的评价";
-        vc.openId = [ODUserInformation sharedODUserInformation].openID;
-        
-        
-        
+        ODMyOrderController *vc = [[ODMyOrderController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-        
+
         
     }else if (indexPath.section == 6) {
        
         
-        ODMyOrderController *vc = [[ODMyOrderController alloc] init];
+        
+        ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
+        vc.typeTitle = @"我收到的评价";
+        vc.openId = [ODUserInformation sharedODUserInformation].openID;
         [self.navigationController pushViewController:vc animated:YES];
-        
-        
+
         
     }
     else if (indexPath.section == 7) {
         
-        NSString *url = self.model.share_download[@"icon"];
-        NSString *content = self.model.share_download[@"desc"];
-        NSString *link = self.model.share_download[@"link"];
-        NSString *title = self.model.share_download[@"title"];
+        NSString *url = self.model.share[@"icon"];
+        NSString *content = self.model.share[@"desc"];
+        NSString *link = self.model.share[@"link"];
+        NSString *title = self.model.share[@"title"];
         
         
+        
+        
+        
+        NSLog(@"_____%@" , url);
+        NSLog(@"_____%@" , content);
+        
+        NSLog(@"_____%@" , link);
+        NSLog(@"_____%@" , title);
+
         
         [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
@@ -266,13 +278,16 @@
         [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
         [UMSocialSnsService presentSnsIconSheetView:self
-                                             appKey:@"569dda54e0f55a994f0021cf"
+                                             appKey:kGetUMAppkey
                                           shareText:content
                                          shareImage:nil
                                     shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
                                            delegate:self];
       
         
+        
+        
+     
         
         
     }
@@ -308,7 +323,7 @@
     if (indexPath.section == 0) {
         return CGSizeMake(kScreenSize.width , 80);
     }else {
-        return CGSizeMake(kScreenSize.width , 40);
+        return CGSizeMake(kScreenSize.width , 30);
     }
 }
 

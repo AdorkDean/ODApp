@@ -16,7 +16,7 @@
     
     
     view.userInteractionEnabled = YES;
-    view.lineLabel.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    view.lineLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     view.messageTextView.scrollEnabled = NO;
     
     return view;

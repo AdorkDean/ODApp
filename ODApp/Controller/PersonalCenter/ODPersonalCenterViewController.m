@@ -11,7 +11,6 @@
 #import "ODTabBarController.h"
 #import "ODHomeFoundViewController.h"
 #import "ODlandingView.h"
-#import "IQKeyboardReturnKeyHandler.h"
 #import "ODRegisteredController.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
@@ -23,7 +22,6 @@
 
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) ODlandingView *landView;
-@property (nonatomic, strong) IQKeyboardReturnKeyHandler *returnKeyHandler;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic , assign) NSInteger pageNumber;
 
@@ -39,16 +37,16 @@
     self.pageNumber = 0;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];;
     
-    self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
-    self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
-    self.returnKeyHandler.toolbarManageBehaviour = IQAutoToolbarBySubviews;
+
+
 }
 
 
 - (void)loadView
 {
+   
     self.view = self.landView;
 }
 
@@ -61,7 +59,7 @@
 - (void)createTableView
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.tableView.userInteractionEnabled = YES;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -95,26 +93,9 @@
 {
     if (_landView == nil) {
         self.landView = [ODlandingView getView];
-        self.landView.userInteractionEnabled = YES;
-        self.landView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
-        
-        self.landView.accountLabel.layer.masksToBounds = YES;
-        self.landView.accountLabel.layer.cornerRadius = 20;
-        self.landView.accountLabel.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
-        self.landView.accountLabel.layer.borderWidth = 1;
-        
-        self.landView.passwordLabel.layer.masksToBounds = YES;
-        self.landView.passwordLabel.layer.cornerRadius = 20;
-        self.landView.passwordLabel.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
-        self.landView.passwordLabel.layer.borderWidth = 1;
-        
-        self.landView.landButton.layer.masksToBounds = YES;
-        self.landView.landButton.layer.cornerRadius = 20;
-        self.landView.landButton.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
-        self.landView.landButton.layer.borderWidth = 1;
-        self.landView.landButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
+      
         [self.landView.landButton addTarget:self action:@selector(landAction:) forControlEvents:UIControlEventTouchUpInside];
-        self.landView.passwordTextField.secureTextEntry = YES;
+     
         
         [self.landView.forgetPassWordButton addTarget:self action:@selector(forgetPassawordAction:) forControlEvents:UIControlEventTouchUpInside];
         

@@ -91,3 +91,8 @@ NSString * const kCreateOrderUrl = @"http://woquapi.test.odong.com/1.0/store/cre
 NSString * const kGetStoreTimeUrl = @"http://woquapi.test.odong.com/1.0/store/timeline";
 NSString * const kSaveStoreOrderUrl = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
 
+
+NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
+NSString * const kGetWXAppId = @"wxd25da104118aae2a";
+NSString * const kGetWXAppSecret = @"5da1d304e3b05fe65e4c14deddfa56f1";
+

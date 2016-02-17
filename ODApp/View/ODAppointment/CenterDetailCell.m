@@ -36,7 +36,7 @@
             
         }
         
-        self.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        self.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         [self setSelectionStyle:UITableViewCellSelectionStyleNone];
 
         

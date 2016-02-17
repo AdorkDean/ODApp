@@ -164,7 +164,7 @@
     
     self.firstFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.firstFlowLayout];
-    self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.firstCollectionView.dataSource = self;
     self.firstCollectionView.delegate = self;
     
@@ -189,7 +189,7 @@
     
     self.secondFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width,10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.secondFlowLayout];
-    self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.secondCollectionView.dataSource = self;
     self.secondCollectionView.delegate = self;
     
@@ -218,7 +218,7 @@
 {
     
     self.typeView = [ODTypeView getView];
-    self.typeView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.typeView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.typeView.layer.borderWidth = 1;
     self.typeView.layer.borderColor = [UIColor blackColor].CGColor;
     self.typeView.frame = CGRectMake(kScreenSize.width - 100, 0, 100, 185);
@@ -737,31 +737,10 @@
     return CGSizeMake(kScreenSize.width , 140);
     
 }
-//动态设置每个分区的缩进量
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(0, 0, 0, 0);
-}
 //动态设置每个分区的最小行间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 5;
-}
-//动态返回不同区的列间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0;
-}
-//动态设置区头的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    return CGSizeMake(0, 0);
-    
-}
-//动态设置区尾的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-{
-    return CGSizeMake(0, 0);
 }
 
 
