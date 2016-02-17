@@ -108,8 +108,13 @@
 
 - (void)addLineOnBottom
 {
+    [self addLineFromPoint:CGPointMake(0, self.od_height)];
+}
+
+- (void)addLineFromPoint:(CGPoint)point
+{
     UIView *lineView = [[UIView alloc]init];
-    lineView.frame = CGRectMake(0, self.od_height - .5, self.od_width, .5);
+    lineView.frame = CGRectMake(point.x, point.y - .5, KScreenWidth + ODLeftMargin, .5);
     lineView.backgroundColor = [UIColor colorWithHexString:@"e6e6e6" alpha:1];
     [self addSubview:lineView];
 }
