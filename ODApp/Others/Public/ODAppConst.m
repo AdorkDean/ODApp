@@ -13,10 +13,11 @@ NSString *const KUserDefaultsOpenId = @"userOpenId";
 
 #pragma mark - 通知
 /** 显示集市的通知 */
-NSString *const ODNotificationShowBazaar = @"ODShowBazaarNotification";
+NSString * const ODNotificationShowBazaar = @"ODShowBazaarNotification";
 
 /** 刷新我的话题通知 */
-NSString *const ODNotificationMyTaskRefresh = @"ODNotificationMyTaskRefresh";
+NSString * const ODNotificationMyTaskRefresh = @"ODNotificationMyTaskRefresh";
+NSString * const ODNotificationActivityApllySuccess = @"ODNotificationActivityApllySuccess";
 
 #pragma mark - 请求URL接口
 /** 统一的URL */
@@ -70,6 +71,7 @@ NSString * const kSaveOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/order"
 
 NSString * const KActivityListUrl = @"store/activity/list";
 NSString * const KActivityDetailUrl = @"store/apply/detail2";
+NSString * const KActivityApplyUrl = @"store/activity/apply";
 
 NSString * const kGetLikeListUrl = @"http://woquapi.test.odong.com/1.0/swap/love/list";
 NSString * const kGetMyOrderListUrl = @"http://woquapi.test.odong.com/1.0/swap/order/list";
