@@ -181,6 +181,9 @@ static NSString * const activePersonCell = @"activePersonCell";
         cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
         [(ODActivityDetailInfoViewCell *)cell iconImgView].image = [UIImage imageNamed:@"icon_service address"];
         [(ODActivityDetailInfoViewCell *)cell detailInfoLabel ].text = self.resultModel.store_address;
+        
+        
+             
         [(ODActivityDetailInfoViewCell *)cell statusLabel].hidden = YES;
     }
     else if (indexPath.row == 4)//组织人
@@ -241,6 +244,18 @@ static NSString * const activePersonCell = @"activePersonCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    if (indexPath.row == 3) {
+      
+            
+            NSLog(@"_____%@" , self.resultModel.store_address);
+            
+      
+    
+    }
+    
+    
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

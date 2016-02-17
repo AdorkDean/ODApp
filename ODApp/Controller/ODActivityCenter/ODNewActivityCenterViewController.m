@@ -5,6 +5,7 @@
 //  Created by 刘培壮 on 16/2/1.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
+#import "mjrefresh.h"
 #import "ODActivitylistModel.h"
 #import "ODNewActivityCell.h"
 #import "ODNewActivityCenterViewController.h"
@@ -35,7 +36,9 @@ static NSString * const cellId = @"newActivityCell";
         tableView.dataSource = self;
         [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODNewActivityCell class]) bundle:nil] forCellReuseIdentifier:cellId];
         tableView.tableFooterView = [UIView new];
+        tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
         tableView.rowHeight = 98;
+        [self.view addSubview:tableView];
        _tableView = tableView;
     }
     return _tableView;
@@ -46,10 +49,14 @@ static NSString * const cellId = @"newActivityCell";
 {
     [super viewDidLoad];
     self.navigationItem.title = @"中心活动";
-    [self.view addSubview:self.tableView];
-    [self requestData];
+    [self.tableView.mj_header beginRefreshing];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(requestData) name:ODNotificationActivityApllySuccess object:nil];
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 -(void)requestData
 {
     __weakSelf
@@ -57,11 +64,12 @@ static NSString * const cellId = @"newActivityCell";
     [ODHttpTool getWithURL:KActivityListUrl parameters:parameter modelClass:[ODActivityListModel class] success:^(id json)
     {
         weakSelf.resultLists = [json result];
+        [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView reloadData];
     }
                    failure:^(NSError *error)
     {
-        
+        [weakSelf.tableView.mj_header endRefreshing];
     }];
 }
 

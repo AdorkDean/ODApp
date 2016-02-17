@@ -21,11 +21,12 @@ UIKIT_EXTERN NSString * const ODNotificationShowBazaar;
 /** 刷新我的话题通知 */
 UIKIT_EXTERN NSString * const ODNotificationMyTaskRefresh;
 
+/** 报名成功以后的通知 */
+UIKIT_EXTERN NSString * const ODNotificationActivityApllySuccess;
 
 #pragma mark - 请求URL接口 
 /** 统一的URL */
 UIKIT_EXTERN NSString *const ODBaseURL;
-
 
 UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
@@ -73,8 +74,11 @@ UIKIT_EXTERN NSString * const kGetAddressUrl;
 UIKIT_EXTERN NSString * const kDeleteAddressUrl;
 UIKIT_EXTERN NSString * const kGetServecTimeUrl;
 UIKIT_EXTERN NSString * const kSaveOrderUrl;
+
 UIKIT_EXTERN NSString * const KActivityListUrl;
 UIKIT_EXTERN NSString * const KActivityDetailUrl;
+UIKIT_EXTERN NSString * const KActivityApplyUrl;
+
 UIKIT_EXTERN NSString * const kGetLikeListUrl;
 UIKIT_EXTERN NSString * const kGetMyOrderListUrl;
 UIKIT_EXTERN NSString * const kOrderDetailUrl;
@@ -94,6 +98,7 @@ UIKIT_EXTERN NSString * const kDelateTaskUrl;
 UIKIT_EXTERN NSString * const kGetCommentUrl;
 UIKIT_EXTERN NSString * const kCreateOrderUrl;
 UIKIT_EXTERN NSString * const kGetStoreTimeUrl;
+UIKIT_EXTERN NSString * const kGetApplyListUrl;
 
 UIKIT_EXTERN NSString * const kGetUMAppkey;
 UIKIT_EXTERN NSString * const kGetWXAppId;

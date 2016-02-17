@@ -20,11 +20,11 @@
     view.backgroundColor = [UIColor whiteColor];
     
     
-    view.serviceTypeLabel.layer.masksToBounds = YES;
-    view.serviceTypeLabel.layer.cornerRadius = 5;
-    view.serviceTypeLabel.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
-    view.serviceTypeLabel.textColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-    view.serviceTypeLabel.layer.borderWidth = 1;
+    view.swapTypeLabel.layer.masksToBounds = YES;
+    view.swapTypeLabel.layer.cornerRadius = 5;
+    view.swapTypeLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    view.swapTypeLabel.textColor = [UIColor lightGrayColor];
+    view.swapTypeLabel.layer.borderWidth = 1;
     
     view.userButtonView.layer.masksToBounds = YES;
     view.userButtonView.layer.cornerRadius = 19;

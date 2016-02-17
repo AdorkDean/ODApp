@@ -28,4 +28,10 @@
  *  View的底部添加一条横线
  */
 - (void)addLineOnBottom;
+
+/**
+ *  在指定位置添加一条横线
+ */
+- (void)addLineFromPoint:(CGPoint)point;
+
 @end

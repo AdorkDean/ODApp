@@ -91,32 +91,6 @@
     return _registView;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if (textField == self.registView.phoneNumber) {
-        if (string.length == 0) return YES;
-        
-        NSInteger existedLength = textField.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = string.length;
-        if (existedLength - selectedLength + replaceLength > 11) {
-            return NO;
-        }
-    }else if (textField == self.registView.password) {
-        if (string.length == 0) return YES;
-        
-        NSInteger existedLength = textField.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = string.length;
-        if (existedLength - selectedLength + replaceLength > 26) {
-            return NO;
-        }
-
-    }
-    
-    return YES;
-}
-
 
 #pragma mark - 点击事件
 - (void)registere:(UIButton *)sender

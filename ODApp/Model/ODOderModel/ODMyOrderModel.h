@@ -25,5 +25,6 @@
 @property (nonatomic , copy) NSString *order_status;
 @property (nonatomic , copy) NSString *pay_status;
 @property (nonatomic , copy) NSString *status_str;
+@property (nonatomic , copy) NSString *order_created_at;
 
 @end

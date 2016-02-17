@@ -6,17 +6,25 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 #import "masonry.h"
+#import "svprogressHud.h"
 #import "UIImageView+WebCache.h"
 #import "ODActivityDetailModel.h"
 #import "ODActivityDetailViewController.h"
 #import "ODNewActivityDetailViewController.h"
+#import "ODPersonalCenterViewController.h"
 
+#import "ODActivePersonInfoView.h"
 #import "ODTitleLabelView.h"
 #import "ODActivityVIPCell.h"
 #import "ODActivitybottomView.h"
 #import "ODActivityDetailInfoViewCell.h"
 
-@interface ODNewActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate>
+#import "ODCenterPactureController.h"
+#import "UMSocial.h"
+#import "ODCenterDetailController.h"
+#import "ODApplyListViewController.h"
+
+@interface ODNewActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,UMSocialUIDelegate,ODPersonalCenterVCDelegate>
 
 /**
  *  活动嘉宾
@@ -71,7 +79,7 @@
 /**
  *  报名人数View
  */
-@property (nonatomic, strong) UIView *activePeopleView;
+@property (nonatomic, strong) ODActivePersonInfoView *activePeopleView;
 
 /**
  *  活动内容label
@@ -103,7 +111,6 @@ static NSString * const VIPCell = @"VIPCell";
 static NSString * const detailInfoCell = @"detailInfoCell";
 
 #pragma mark - lazyLoad
-
 - (UIScrollView *)baseScrollV
 {
     if (!_baseScrollV)
@@ -178,7 +185,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         _VIPTableView.delegate = self;
         _VIPTableView.dataSource = self;
         _VIPTableView.tableFooterView = [UIView new];
-        [_VIPTableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailInfoViewCell class]) bundle:nil] forCellReuseIdentifier:detailInfoCell];
+        [_VIPTableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityVIPCell class]) bundle:nil] forCellReuseIdentifier:VIPCell];
         [_VIPTableView addLineOnBottom];
         [self.baseScrollV addSubview:_VIPTableView];
     }
@@ -198,11 +205,19 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     return _peopleNumLabel;
 }
 
-- (UIView *)activePeopleView
+- (ODActivePersonInfoView *)activePeopleView
 {
     if (!_activePeopleView)
     {
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.peopleNumLabel.frame), KScreenWidth - ODLeftMargin * 2, 50)];
+        ODActivePersonInfoView *view = [[ODActivePersonInfoView alloc]initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.peopleNumLabel.frame), KScreenWidth - ODLeftMargin * 2, 50)];
+        
+        view.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *applyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(applyAction)];
+        [view addGestureRecognizer:applyTap];
+        
+        
+        
         [self.baseScrollV addSubview:view];
         _activePeopleView = view;
     }
@@ -216,7 +231,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         ODTitleLabelView *label = [[NSBundle mainBundle]loadNibNamed:NSStringFromClass([ODTitleLabelView class]) owner:nil options:nil][0];
         label.frame = CGRectMake(0, CGRectGetMaxY(self.activePeopleView.frame), KScreenWidth, labelHeight);
         label.textLabel.text = @"活动详情";
-        [label.textLabel addLineOnBottom];
         label.textLabel.font = [UIFont systemFontOfSize:13.5];
         [self.baseScrollV addSubview:label];
         _activeContentLabel = label;
@@ -228,13 +242,13 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 {
     if (!_webView)
     {
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.activeContentLabel.frame), kScreenSize.width - ODLeftMargin * 2, 0)];
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.activeContentLabel.frame) + 12.5, kScreenSize.width - ODLeftMargin * 2, 10)];
         webView.delegate = self;
         webView.layer.masksToBounds = YES;
         webView.layer.cornerRadius = 5;
         webView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        webView.scrollView.showsHorizontalScrollIndicator = NO;
         webView.scrollView.scrollEnabled = NO;
-        [webView addLineOnBottom];
         [self.baseScrollV addSubview:webView];
         _webView = webView;
     }
@@ -279,13 +293,14 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.view.userInteractionEnabled = YES;
     self.navigationItem.title = @"活动详情";
     [self requestData];
 }
 
 -(void)requestData
 {
-    __weakSelf
+     __weakSelf
     NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue]};
     [ODHttpTool getWithURL:KActivityDetailUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
      {
@@ -303,22 +318,40 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     __weakSelf
     self.activityVIPs = self.resultModel.savants;
     self.activityApplies = self.resultModel.applies;
+    if ([[self.activityApplies valueForKeyPath:@"open_id"]containsObject:[ODUserInformation sharedODUserInformation].openID])
+    {
+        self.reportButton.enabled = NO;
+    }
     [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
     {
-        [weakSelf.headImageView sizeToFit];
+        weakSelf.headImageView.od_width = KScreenWidth;
+        weakSelf.headImageView.od_height = image.size.height * KScreenWidth / image.size.width;
+        [weakSelf.headImageView addLineOnBottom];
         weakSelf.titleLabel.text = weakSelf.resultModel.content;
         weakSelf.infoTableView.hidden = NO;
         weakSelf.VIPLabel.od_height = weakSelf.resultModel.savants.count ? labelHeight : 0;
         weakSelf.VIPTableView.od_height = weakSelf.resultModel.savants.count *
         137 / 2;
-        weakSelf.peopleNumLabel.textLabel.text = [NSString stringWithFormat:@"%d人已报名",weakSelf.resultModel.apply_cnt];
-//        [(ODActivityPersonCell *)cell setActivePersons:self.resultModel.applies];
-        weakSelf.activePeopleView.od_height = weakSelf.resultModel.apply_cnt ? weakSelf.activePeopleView.od_height : 0 ;
-        weakSelf.activeContentLabel.hidden = NO;
-        [weakSelf.webView loadHTMLString:self.resultModel.remark baseURL:nil];
-        
+        if (weakSelf.resultModel.apply_cnt)
+        {
+            weakSelf.peopleNumLabel.textLabel.text = [NSString stringWithFormat:@"%d人已报名",weakSelf.resultModel.apply_cnt];
+            [weakSelf.activePeopleView setActivePersons:self.resultModel.applies];
+            [weakSelf.activePeopleView addLineFromPoint:CGPointMake(- ODLeftMargin, weakSelf.activePeopleView.od_height)];
+        }
+        else
+        {
+            weakSelf.peopleNumLabel.od_height = 0;
+            weakSelf.activePeopleView.od_height = 0;
+        }
+        weakSelf.activeContentLabel.od_y = CGRectGetMaxY(weakSelf.activePeopleView.frame);
+        [weakSelf.activeContentLabel layoutIfNeeded];
+        [weakSelf.activeContentLabel addLineFromPoint:CGPointMake(0, weakSelf.activeContentLabel.od_y)];
+        [weakSelf.activeContentLabel addLineFromPoint:CGPointMake(weakSelf.activeContentLabel.textLabel.od_x,weakSelf.activeContentLabel.od_height)];
+        weakSelf.webView.od_y = CGRectGetMaxY(weakSelf.activeContentLabel.frame) + 12.5;
+        [weakSelf.webView loadHTMLString:weakSelf.resultModel.remark baseURL:nil];
     }];
 }
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -338,32 +371,36 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     if (tableView == self.infoTableView)
     {
         ODActivityDetailInfoViewCell *cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         if (indexPath.row == 0)//时间
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
-            [(ODActivityDetailInfoViewCell *)cell iconImgView].image = [UIImage imageNamed:@"icon_service time"];
-            [(ODActivityDetailInfoViewCell *)cell detailInfoLabel].text = self.resultModel.time_str;
-            [(ODActivityDetailInfoViewCell *)cell statusLabel].text = self.resultModel.apply_status_str;
-            [(ODActivityDetailInfoViewCell *)cell statusLabel].hidden = NO;
+             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [cell iconImgView].image = [UIImage imageNamed:@"icon_service time"];
+            [cell detailInfoLabel].text = self.resultModel.time_str;
+            [cell statusLabel].text = self.resultModel.apply_status_str;
+            [cell statusLabel].hidden = NO;
         }
         else if (indexPath.row == 1)//地点
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
-            [(ODActivityDetailInfoViewCell *)cell iconImgView].image = [UIImage imageNamed:@"icon_service address"];
-            [(ODActivityDetailInfoViewCell *)cell detailInfoLabel ].text = self.resultModel.store_address;
-            [(ODActivityDetailInfoViewCell *)cell statusLabel].hidden = YES;
+             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [cell iconImgView].image = [UIImage imageNamed:@"icon_service address"];
+            [cell detailInfoLabel].text = self.resultModel.store_address;
+            [cell statusLabel].hidden = YES;
         }
         else if (indexPath.row == 2)//组织人
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
-            [(ODActivityDetailInfoViewCell *)cell iconImgView].image = [UIImage imageNamed:@"icon_Edit name"];
-            NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"由 %@ 组织",self.resultModel.store_name]];
+             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [cell iconImgView].image = [UIImage imageNamed:@"icon_Edit name"];
+            NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc]initWithString:[NSString stringWithFormat:@"由 %@ 组织",self.resultModel.organization_name]];
             [attributeString addAttributes:
              @{
                NSForegroundColorAttributeName : [UIColor colorWithHexString:@"3963b2" alpha:1]
                }range:NSMakeRange(2, attributeString.length - 5)];
-            [(ODActivityDetailInfoViewCell *)cell detailInfoLabel].attributedText = attributeString;
-            [(ODActivityDetailInfoViewCell *)cell statusLabel].hidden = YES;
+            [cell detailInfoLabel].attributedText = attributeString;
+            [cell statusLabel].hidden = YES;
         }
 
         return cell;
@@ -372,6 +409,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     {
         ODActivityDetailVIPModel *vipModel = self.resultModel.savants[indexPath.row];
         ODActivityVIPCell *cell = [tableView dequeueReusableCellWithIdentifier:VIPCell];
+         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [[cell VIPHeadImgView] sd_setImageWithURL:[NSURL OD_URLWithString:[vipModel avatar]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [[(ODActivityVIPCell *)cell VIPHeadImgView]setImage:[image OD_circleImage]];
         }];
@@ -382,6 +420,50 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     }
     return nil;
 }
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 1) {
+        
+        
+   
+        if (self.resultModel.is_online == 1) {
+            ;
+        }else{
+            
+            
+            if (self.resultModel.store_id > 0) {
+                
+                ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
+                vc.storeId = [NSString stringWithFormat:@"%d" , self.resultModel.store_id];
+                vc.activityID = [NSString stringWithFormat:@"%d" , self.resultModel.activity_id];
+                
+                [self.navigationController pushViewController:vc animated:YES];
+                
+                
+                
+            }else {
+                
+                ODCenterPactureController *vc = [[ODCenterPactureController alloc] init];
+                
+                NSString *webUrl = [NSString stringWithFormat:@"http://h5.odong.com/map/search?lng=%@&lat=%@" , self.resultModel.lng , self.resultModel.lat];
+                vc.webUrl = webUrl;
+                vc.activityName = self.resultModel.store_name;
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }
+            
+        }
+
+            
+            
+            
+        }
+        
+       
+}
+
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -400,16 +482,91 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 #pragma mark - WebViewDelegate
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"]floatValue];
-    webView.od_height = height;
-    webView.scrollView.contentSize = CGSizeMake(webView.od_width, height);
+    NSString * clientheight_str = [webView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"];
+    float clientheight = [clientheight_str floatValue];
+    webView.od_height = clientheight + 12.5;
+    [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(webView.frame))];
+    self.bottomButtonView.od_y = CGRectGetMaxY(webView.frame);
+    [self.bottomButtonView addLineOnBottom];
+    [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %d",self.resultModel.share_cnt] forState:UIControlStateNormal];
+    
+    [[self.bottomButtonView shareBtn] addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [[self.bottomButtonView goodBtn]setTitle:[NSString stringWithFormat:@"赞 %d",self.resultModel.love_cnt] forState:UIControlStateNormal];
+}
 
-    self.bottomButtonView.hidden = NO;
+#pragma mark - ODPersonalCenterVCDelegate
+- (void)personalHasLoginSuccess
+{
+    [self reportRequest];
 }
 
 #pragma mark - action
-- (void)report:(UIButton *)btn
+
+- (void)applyAction
 {
     
+        
+    ODApplyListViewController *vc = [[ODApplyListViewController alloc] init];
+    vc.activity_id = [NSString stringWithFormat:@"%d" , self.resultModel.activity_id];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
 }
+
+
+
+- (void)share:(UIButton *)sender
+{
+    
+    NSString *url = self.resultModel.share[@"icon"];
+    NSString *content = self.resultModel.share[@"desc"];
+    NSString *link = self.resultModel.share[@"link"];
+    NSString *title = self.resultModel.share[@"title"];
+    
+    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+    [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+    [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+    [UMSocialSnsService presentSnsIconSheetView:self
+                                         appKey:kGetUMAppkey
+                                      shareText:content
+                                     shareImage:nil
+                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                       delegate:self];
+
+}
+
+
+- (void)report:(UIButton *)btn
+{
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+    if (openId.length == 0)
+    {
+        ODPersonalCenterViewController *perV = [[ODPersonalCenterViewController alloc]init];
+        [self presentViewController:perV animated:YES completion:nil];
+    }
+    else
+    {
+        [self reportRequest];
+    }
+}
+
+- (void)reportRequest
+{
+    NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id",[ODUserInformation sharedODUserInformation].openID,@"open_id", nil];
+    [ODHttpTool getWithURL:KActivityApplyUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
+     {
+         [self requestData];
+         self.reportButton.enabled = NO;
+         [SVProgressHUD showSuccessWithStatus:@"报名成功"];
+         [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationActivityApllySuccess object:nil];
+     }
+                   failure:^(NSError *error)
+     {
+         
+     }];
+}
+
 @end

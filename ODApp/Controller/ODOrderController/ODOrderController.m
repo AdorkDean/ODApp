@@ -86,18 +86,19 @@
             
             NSMutableDictionary *dic = responseObject[@"result"];
             
-            for (NSMutableDictionary *miniDic in dic) {
-                NSString *is_default = [NSString stringWithFormat:@"%@" , miniDic[@"is_default"]];
-                
-                
-                if ([is_default isEqualToString:@"1"]) {
-                    ODAddressModel *model = [[ODAddressModel alloc] init];
-                    [model setValuesForKeysWithDictionary:miniDic];
-                    [weakSelf.addressArray addObject:model];
-                }
-                
-                
+            NSMutableDictionary *addressDic = dic[@"def"];
+            
+            
+            if (addressDic.count != 0) {
+                ODAddressModel *model = [[ODAddressModel alloc] init];
+                [model setValuesForKeysWithDictionary:addressDic];
+                [weakSelf.addressArray addObject:model];
+
             }
+          
+            
+          
+            
             
             
         }

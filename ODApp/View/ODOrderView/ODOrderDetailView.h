@@ -12,6 +12,11 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 
+
+@property (weak, nonatomic) IBOutlet UILabel *swapTypeLabel;
+
+
+
 @property (weak, nonatomic) IBOutlet UIButton *userButtonView;
 
 @property (weak, nonatomic) IBOutlet UILabel *nickLabel;
@@ -19,7 +24,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *contentButtonView;
 
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *serviceTypeLabel;
+
+
+
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
 @property (weak, nonatomic) IBOutlet UILabel *allPriceLabel;

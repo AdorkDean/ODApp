@@ -10,9 +10,9 @@
 
 @implementation ODTitleLabelView
 
-//- (void)awakeFromNib
-//{
-//    [self addLineOnBottom];
-//}
+- (void)awakeFromNib
+{
+    [self addLineOnBottom];
+}
 
 @end

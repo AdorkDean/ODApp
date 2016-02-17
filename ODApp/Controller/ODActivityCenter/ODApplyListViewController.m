@@ -1,39 +1,45 @@
 //
-//  ODCollectionController.m
+//  ODApplyListViewController.m
 //  ODApp
 //
-//  Created by zhz on 16/1/31.
-//  Copyright © 2016年 Odong-YG. All rights reserved.
+//  Created by zhz on 16/2/17.
+//  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODCollectionController.h"
+#import "ODApplyListViewController.h"
 #import "ODCollectionCell.h"
 #import "MJRefresh.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
-#import "ODLikeModel.h"
 #import "ODOthersInformationController.h"
-@interface ODCollectionController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
-
+#import "ODApplyModel.h"
+@interface ODApplyListViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property (nonatomic , assign) NSInteger page;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic , strong) NSMutableArray *dataArray;
+
+@property (nonatomic ,copy)NSString *open_id;
+
+
 @end
 
-@implementation ODCollectionController
+@implementation ODApplyListViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-     self.page = 1;
+    
+    self.open_id = [ODUserInformation sharedODUserInformation].openID;
+    
+    self.page = 1;
     self.dataArray = [[NSMutableArray alloc] init];
     [self getData];
     [self createCollectionView];
     
-    self.navigationItem.title = @"TA们收藏过";
+    self.navigationItem.title = @"TA们申请过";
+
 }
 
 - (void)getData
@@ -41,14 +47,14 @@
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.page];
     
     
-      
+    
     self.manager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"swap_id":self.swap_id , @"page":countNumber , @"open_id":self.open_id};
+    NSDictionary *parameters = @{@"activity_id":self.activity_id , @"page":countNumber , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:kGetLikeListUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kGetApplyListUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (responseObject) {
             
@@ -60,11 +66,11 @@
                     [self.dataArray removeAllObjects];
                 }
                 
-             
+                
                 NSMutableDictionary *dic = responseObject[@"result"];
                 
                 for (NSMutableDictionary *miniDic in dic) {
-                    ODLikeModel *model = [[ODLikeModel alloc] init];
+                    ODApplyModel *model = [[ODApplyModel alloc] init];
                     [model setValuesForKeysWithDictionary:miniDic];
                     [self.dataArray addObject:model];
                 }
@@ -89,9 +95,9 @@
         [weakSelf.collectionView.mj_footer endRefreshing];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
-
     
-   
+    
+    
 }
 
 #pragma mark - 刷新
@@ -127,7 +133,7 @@
         
         [self LoadMoreData];
     }];
-
+    
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.view addSubview:self.collectionView];
 }
@@ -138,9 +144,10 @@
 {
     ODCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
     
-    ODLikeModel *model = self.dataArray[indexPath.row];
-    [cell setWithLikeModel:model];
-        
+    ODApplyModel *model = self.dataArray[indexPath.row];
+   
+    [cell setWithApplyModel:model];
+    
     return cell;
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -161,7 +168,7 @@
     ODLikeModel *model = self.dataArray[indexPath.row];
     vc.open_id = model.open_id;
     [self.navigationController pushViewController:vc animated:YES];
-  
+    
     
     
     
