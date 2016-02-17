@@ -13,6 +13,7 @@
 #import "ODAPIManager.h"
 #import "ODMyOrderCell.h"
 #import "ODOrderDetailController.h"
+#import "ODSecondOrderDetailController.h"
 @interface ODMyOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
@@ -184,21 +185,49 @@
 {
     
       ODMyOrderModel *model = self.dataArray[indexPath.row];
-      ODOrderDetailController *vc = [[ODOrderDetailController alloc] init];
-      vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
-
-      vc.orderType = model.status_str;
     
     
-    __weakSelf
-    vc.getRefresh = ^(NSString *isRefresh){
+      NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
+    
+    
+    
+      
+    if ([swap_type isEqualToString:@"1"]) {
+        ODSecondOrderDetailController *vc = [[ODSecondOrderDetailController alloc] init];
+        vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
+        vc.orderType = model.status_str;
+        [self.navigationController pushViewController:vc animated:YES];
         
-       
-        weakSelf.isRefresh = isRefresh;
-    };
+        __weakSelf
+        vc.getRefresh = ^(NSString *isRefresh){
+            
+            
+            weakSelf.isRefresh = isRefresh;
+        };
+        
 
+    }else{
+        
+        
+        ODOrderDetailController *vc = [[ODOrderDetailController alloc] init];
+        vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
+        vc.orderType = model.status_str;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        __weakSelf
+        vc.getRefresh = ^(NSString *isRefresh){
+            
+            
+            weakSelf.isRefresh = isRefresh;
+        };
+
+        
+    }
     
-      [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
+    
     
     
 }
