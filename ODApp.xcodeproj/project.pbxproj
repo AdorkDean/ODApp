@@ -2626,11 +2626,8 @@
 				D4D073781C59B9FA008527C9 /* ODCenterDetailController.m in Sources */,
 				D4D0738D1C59B9FA008527C9 /* ODMyTopicController.m in Sources */,
 				D4D075491C59BBEE008527C9 /* ODAppConst.m in Sources */,
-<<<<<<< HEAD
 				9DF2E98C1C74654A00F77976 /* ODSecondOrderDetailController.m in Sources */,
-=======
 				C66B88201C741D0A00F60E3D /* ODFindJobController.m in Sources */,
->>>>>>> edb1996cc788751fddeb98c204400b0f58222e6a
 				C64D46021C5F8C6F003BFFA0 /* UIView+SDExtension.m in Sources */,
 				C64D45FF1C5F8C6F003BFFA0 /* TAPageControl.m in Sources */,
 				D4D075141C59B9FA008527C9 /* ODInformationView.m in Sources */,
