@@ -11,6 +11,7 @@
 #import "ODActivityDetailViewController.h"
 #import "ODNewActivityDetailViewController.h"
 
+#import "ODActivePersonInfoView.h"
 #import "ODTitleLabelView.h"
 #import "ODActivityVIPCell.h"
 #import "ODActivitybottomView.h"
@@ -71,7 +72,7 @@
 /**
  *  报名人数View
  */
-@property (nonatomic, strong) UIView *activePeopleView;
+@property (nonatomic, strong) ODActivePersonInfoView *activePeopleView;
 
 /**
  *  活动内容label
@@ -198,11 +199,11 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     return _peopleNumLabel;
 }
 
-- (UIView *)activePeopleView
+- (ODActivePersonInfoView *)activePeopleView
 {
     if (!_activePeopleView)
     {
-        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.peopleNumLabel.frame), KScreenWidth - ODLeftMargin * 2, 50)];
+        ODActivePersonInfoView *view = [[ODActivePersonInfoView alloc]initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.peopleNumLabel.frame), KScreenWidth - ODLeftMargin * 2, 50)];
         [self.baseScrollV addSubview:view];
         _activePeopleView = view;
     }
@@ -216,7 +217,10 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         ODTitleLabelView *label = [[NSBundle mainBundle]loadNibNamed:NSStringFromClass([ODTitleLabelView class]) owner:nil options:nil][0];
         label.frame = CGRectMake(0, CGRectGetMaxY(self.activePeopleView.frame), KScreenWidth, labelHeight);
         label.textLabel.text = @"活动详情";
-        [label.textLabel addLineOnBottom];
+        [label layoutIfNeeded];
+        NSLog(@"%@",NSStringFromCGRect(label.frame));
+        [label addLineFromPoint:CGPointMake(0, label.od_y)];
+        [label addLineFromPoint:CGPointMake(label.textLabel.od_x,label.od_height)];
         label.textLabel.font = [UIFont systemFontOfSize:13.5];
         [self.baseScrollV addSubview:label];
         _activeContentLabel = label;
@@ -228,13 +232,13 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 {
     if (!_webView)
     {
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.activeContentLabel.frame), kScreenSize.width - ODLeftMargin * 2, 0)];
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.activeContentLabel.frame) + 12.5, kScreenSize.width - ODLeftMargin * 2, 10)];
         webView.delegate = self;
         webView.layer.masksToBounds = YES;
         webView.layer.cornerRadius = 5;
         webView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        webView.scrollView.showsHorizontalScrollIndicator = NO;
         webView.scrollView.scrollEnabled = NO;
-        [webView addLineOnBottom];
         [self.baseScrollV addSubview:webView];
         _webView = webView;
     }
@@ -247,6 +251,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     {
         ODActivitybottomView *view = [[NSBundle mainBundle]loadNibNamed:NSStringFromClass([ODActivitybottomView class]) owner:nil options:nil][0];
         view.frame = CGRectMake(0, CGRectGetMaxY(self.webView.frame), KScreenWidth, 50);
+        [view addLineOnBottom];
         [self.baseScrollV addSubview:view];
         self.baseScrollV.contentSize = CGSizeMake(KScreenWidth, CGRectGetMaxY(view.frame));
         _bottomButtonView = view;
@@ -306,17 +311,19 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
     {
         [weakSelf.headImageView sizeToFit];
+        [weakSelf.headImageView addLineOnBottom];
         weakSelf.titleLabel.text = weakSelf.resultModel.content;
         weakSelf.infoTableView.hidden = NO;
         weakSelf.VIPLabel.od_height = weakSelf.resultModel.savants.count ? labelHeight : 0;
         weakSelf.VIPTableView.od_height = weakSelf.resultModel.savants.count *
         137 / 2;
         weakSelf.peopleNumLabel.textLabel.text = [NSString stringWithFormat:@"%d人已报名",weakSelf.resultModel.apply_cnt];
-//        [(ODActivityPersonCell *)cell setActivePersons:self.resultModel.applies];
+        [weakSelf.activePeopleView setActivePersons:self.resultModel.applies];
         weakSelf.activePeopleView.od_height = weakSelf.resultModel.apply_cnt ? weakSelf.activePeopleView.od_height : 0 ;
+        UIView *lastView = weakSelf.resultModel.apply_cnt ? weakSelf.activePeopleView : weakSelf.peopleNumLabel;
+        [lastView addLineFromPoint:CGPointMake(- ODLeftMargin, lastView.od_height)];
         weakSelf.activeContentLabel.hidden = NO;
-        [weakSelf.webView loadHTMLString:self.resultModel.remark baseURL:nil];
-        
+        [weakSelf.webView loadHTMLString:weakSelf.resultModel.remark baseURL:nil];
     }];
 }
 #pragma mark - UITableViewDataSource
@@ -400,11 +407,12 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 #pragma mark - WebViewDelegate
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"]floatValue];
-    webView.od_height = height;
-    webView.scrollView.contentSize = CGSizeMake(webView.od_width, height);
-
-    self.bottomButtonView.hidden = NO;
+    NSString * clientheight_str = [webView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"];
+    float clientheight = [clientheight_str floatValue];
+    webView.od_height = clientheight + 12.5;
+    [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(webView.frame))];
+    [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %d",self.resultModel.share_cnt] forState:UIControlStateNormal];
+    [[self.bottomButtonView goodBtn]setTitle:[NSString stringWithFormat:@"赞 %d",self.resultModel.love_cnt] forState:UIControlStateNormal];
 }
 
 #pragma mark - action

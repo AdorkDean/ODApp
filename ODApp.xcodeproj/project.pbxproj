@@ -116,6 +116,7 @@
 		D44423931C72E4D7005B4CFE /* ODTitleLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D44423921C72E4D7005B4CFE /* ODTitleLabelView.xib */; };
 		D44423961C72F898005B4CFE /* ODActivitybottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = D44423951C72F898005B4CFE /* ODActivitybottomView.m */; };
 		D444239A1C72F8B8005B4CFE /* ODActivitybottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D44423991C72F8B8005B4CFE /* ODActivitybottomView.xib */; };
+		D444239D1C742118005B4CFE /* ODActivePersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D444239C1C742118005B4CFE /* ODActivePersonInfoView.m */; };
 		D46C90301C6041B4004942E7 /* ODNewActivityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */; };
 		D46C90381C6043DA004942E7 /* ODNewActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C90371C6043DA004942E7 /* ODNewActivityCell.m */; };
 		D46C903B1C604F79004942E7 /* ODActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C903A1C604F79004942E7 /* ODActivityDetailViewController.m */; };
@@ -483,6 +484,8 @@
 		D44423941C72F898005B4CFE /* ODActivitybottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivitybottomView.h; sourceTree = "<group>"; };
 		D44423951C72F898005B4CFE /* ODActivitybottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivitybottomView.m; sourceTree = "<group>"; };
 		D44423991C72F8B8005B4CFE /* ODActivitybottomView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODActivitybottomView.xib; sourceTree = "<group>"; };
+		D444239B1C742118005B4CFE /* ODActivePersonInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActivePersonInfoView.h; sourceTree = "<group>"; };
+		D444239C1C742118005B4CFE /* ODActivePersonInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivePersonInfoView.m; sourceTree = "<group>"; };
 		D46C902D1C6041B4004942E7 /* ODNewActivityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCenterViewController.h; sourceTree = "<group>"; };
 		D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewActivityCenterViewController.m; sourceTree = "<group>"; };
 		D46C90361C6043DA004942E7 /* ODNewActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCell.h; sourceTree = "<group>"; };
@@ -1509,6 +1512,8 @@
 				D44423941C72F898005B4CFE /* ODActivitybottomView.h */,
 				D44423951C72F898005B4CFE /* ODActivitybottomView.m */,
 				D44423991C72F8B8005B4CFE /* ODActivitybottomView.xib */,
+				D444239B1C742118005B4CFE /* ODActivePersonInfoView.h */,
+				D444239C1C742118005B4CFE /* ODActivePersonInfoView.m */,
 			);
 			path = ODActivityCenter;
 			sourceTree = "<group>";
@@ -2530,6 +2535,7 @@
 				9DEDCF6B1C64B3FC003015C6 /* ODBazaarDetailCollectionCell.m in Sources */,
 				D4F76D4C1C605EA700D59F02 /* ODActivityListModel.m in Sources */,
 				9DEDCF461C64B3ED003015C6 /* ODBazaaeExchangeSkillViewController.m in Sources */,
+				D444239D1C742118005B4CFE /* ODActivePersonInfoView.m in Sources */,
 				C64D45F81C5F8C6F003BFFA0 /* UITableViewRowAction+JZExtension.m in Sources */,
 				9DEDCF711C64B3FC003015C6 /* ODBazaarExchangeSkillCollectionCell.m in Sources */,
 				D46C90381C6043DA004942E7 /* ODNewActivityCell.m in Sources */,
