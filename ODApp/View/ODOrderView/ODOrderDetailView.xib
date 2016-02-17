@@ -468,9 +468,10 @@
                 <outlet property="priceLabel" destination="8vW-eg-mGE" id="mhn-0F-Gne"/>
                 <outlet property="secondLabel" destination="Fhr-xC-Evz" id="46S-dy-QYG"/>
                 <outlet property="serviceTimeLabel" destination="LBP-rz-nn4" id="bSq-OB-mfn"/>
-                <outlet property="serviceTypeLabel" destination="fYe-m4-qXc" id="C66-A1-WX8"/>
+                <outlet property="serviceTypeLabel" destination="bOb-x9-BJN" id="gBs-FQ-Y3e"/>
                 <outlet property="sevenLabel" destination="SUZ-vI-aZ8" id="nGC-Du-Pd6"/>
                 <outlet property="sixLabel" destination="y2L-Yj-Uwl" id="FNt-GF-SPV"/>
+                <outlet property="swapTypeLabel" destination="fYe-m4-qXc" id="6hJ-L6-30d"/>
                 <outlet property="tenLabel" destination="XXE-Um-nvh" id="6WT-Le-4au"/>
                 <outlet property="thirdLabel" destination="dq2-Wz-tsi" id="azP-Yz-VTP"/>
                 <outlet property="typeLabel" destination="u2V-Ex-rtj" id="zAm-Wb-utv"/>

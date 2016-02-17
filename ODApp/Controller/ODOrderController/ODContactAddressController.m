@@ -113,7 +113,7 @@
             
             
             NSMutableDictionary *dic = responseObject[@"result"];
-            NSMutableDictionary *mainDic = dic[@"default"];
+            NSMutableDictionary *mainDic = dic[@"def"];
             NSMutableDictionary *otherDic = dic[@"list"];
             
             
