@@ -19,7 +19,7 @@
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
         [self addGestureRecognizer:tap];
         UIImageView *rightIMGV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Skills profile page_icon_arrow_upper"]];
-        rightIMGV.center = CGPointMake(KScreenWidth - ODLeftMargin - rightIMGV.od_width * 2, 75 / 4);
+        rightIMGV.center = CGPointMake(KScreenWidth - ODLeftMargin * 2 - rightIMGV.od_width, 75 / 4);
         [self addSubview:rightIMGV];
     }
     return self;
@@ -29,7 +29,7 @@
 {
     if (!_headImgsView)
     {
-        _headImgsView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth - ODLeftMargin, 50)];
+        _headImgsView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth - ODLeftMargin * 2, 50)];
         [self addSubview:_headImgsView];
         _headImgsView.userInteractionEnabled = NO;
         _headImgsView.scrollEnabled = NO;
