@@ -172,7 +172,7 @@
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,46, kScreenSize.width, kScreenSize.height - 110) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarCellId];
     [self.view addSubview:self.collectionView];
     
@@ -208,6 +208,8 @@
     ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
     ODBazaarModel *model = self.dataArray[indexPath.row];
     bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+    bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@",model.task_status_name];
+    bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
     [self.navigationController pushViewController:bazaarDetail animated:YES];
 }
 

@@ -22,7 +22,7 @@
    view.registereButton.layer.borderWidth = 1;
    view.password.secureTextEntry = YES;
    view.phoneNumber.keyboardType = UIKeyboardTypeNumberPad;
-    
+    view.password.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
        
 
     return view;

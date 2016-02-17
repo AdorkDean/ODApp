@@ -37,7 +37,7 @@ NSString * const kBazaarTaskReceiveCompleteUrl = @"http://woquapi.test.odong.com
 NSString * const kBazaarTaskInitiateCompleteUrl = @"http://woquapi.test.odong.com/1.0/task/confirm";
 NSString * const kBazaarExchangeSkillUrl = @"http://woquapi.test.odong.com/1.0/swap/list";
 NSString * const kBazaarExchangeSkillDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/info";
-
+NSString * const kBazaarReleaseSkillTimeUrl = @"http://woquapi.test.odong.com/1.0/swap/schedule";
 NSString * const kCommunityBbsListUrl = @"http://woquapi.test.odong.com/1.0/bbs/list/latest";
 NSString * const kCommunityReleaseBbsUrl = @"http://woquapi.test.odong.com/1.0/bbs/create";
 NSString * const kCommunityBbsDetailUrl = @"http://woquapi.test.odong.com/1.0/bbs/view";
@@ -70,5 +70,29 @@ NSString * const kSaveOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/order"
 
 NSString * const KActivityListUrl = @"store/activity/list";
 NSString * const KActivityDetailUrl = @"store/apply/detail2";
+
 NSString * const kGetLikeListUrl = @"http://woquapi.test.odong.com/1.0/swap/love/list";
+NSString * const kGetMyOrderListUrl = @"http://woquapi.test.odong.com/1.0/swap/order/list";
+NSString * const kOrderDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/order/info";
+NSString * const kDelateOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/order/cancel";
+
+NSString * const kGetUserInformationUrl = @"http://woquapi.test.odong.com/1.0/user/info";
+NSString * const kGetImageDataUrl = @"http://woquapi.test.odong.com/1.0/other/base64/upload";
+NSString * const kChangeUserInformationUrl = @"http://woquapi.test.odong.com/1.0/user/change";
+NSString * const kChangePassWorldUrl = @"http://woquapi.test.odong.com/1.0/user/change/passwd";
+NSString * const kGetCodeUrl = @"http://woquapi.test.odong.com/1.0/user/verify/code/send";
+NSString * const kLoginUrl = @"http://woquapi.test.odong.com/1.0/user/login1";
+NSString * const kRegistUrl = @"http://woquapi.test.odong.com/1.0/user/register";
+NSString * const kGetTopicUrl = @"http://woquapi.test.odong.com/1.0/bbs/list";
+NSString * const kGetTaskUrl = @"http://woquapi.test.odong.com/1.0/task/list";
+NSString * const kDelateTaskUrl = @"http://woquapi.test.odong.com/1.0/bbs/del";
+NSString * const kGetCommentUrl = @"http://woquapi.test.odong.com/1.0/user/comment/list";
+NSString * const kCreateOrderUrl = @"http://woquapi.test.odong.com/1.0/store/create/order";
+NSString * const kGetStoreTimeUrl = @"http://woquapi.test.odong.com/1.0/store/timeline";
+NSString * const kSaveStoreOrderUrl = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
+
+
+NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
+NSString * const kGetWXAppId = @"wxd25da104118aae2a";
+NSString * const kGetWXAppSecret = @"5da1d304e3b05fe65e4c14deddfa56f1";
 

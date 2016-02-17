@@ -36,6 +36,7 @@ UIKIT_EXTERN NSString * const kBazaarAcceptTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseRewardUrl;
 UIKIT_EXTERN NSString * const kBazaarExchangeSkillUrl;
 UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailUrl;
+UIKIT_EXTERN NSString * const kBazaarReleaseSkillTimeUrl;
 /** 接收人确认完成 */
 UIKIT_EXTERN NSString * const kBazaarTaskReceiveCompleteUrl;
 /** 发起人确认完成 */
@@ -57,20 +58,42 @@ UIKIT_EXTERN NSString * const kHomeFoundPictureUrl;
 
 UIKIT_EXTERN NSString * const ODSkillDetailUrl;
 
+
+
 UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
-
 UIKIT_EXTERN NSString * const kMyApplyActivityUrl;
 UIKIT_EXTERN NSString * const kCancelMyOrderUrl;
 UIKIT_EXTERN NSString * const kOthersInformationUrl;
 UIKIT_EXTERN NSString * const kSaveAddressUrl;
 UIKIT_EXTERN NSString * const kGetAddressUrl;
 UIKIT_EXTERN NSString * const kDeleteAddressUrl;
-
-
 UIKIT_EXTERN NSString * const kGetServecTimeUrl;
 UIKIT_EXTERN NSString * const kSaveOrderUrl;
-
 UIKIT_EXTERN NSString * const KActivityListUrl;
 UIKIT_EXTERN NSString * const KActivityDetailUrl;
 UIKIT_EXTERN NSString * const kGetLikeListUrl;
+UIKIT_EXTERN NSString * const kGetMyOrderListUrl;
+UIKIT_EXTERN NSString * const kOrderDetailUrl;
+
+UIKIT_EXTERN NSString * const kDelateOrderUrl;
+
+UIKIT_EXTERN NSString * const kGetUserInformationUrl;
+UIKIT_EXTERN NSString * const kGetImageDataUrl;
+UIKIT_EXTERN NSString * const kChangeUserInformationUrl;
+UIKIT_EXTERN NSString * const kChangePassWorldUrl;
+UIKIT_EXTERN NSString * const kGetCodeUrl;
+UIKIT_EXTERN NSString * const kLoginUrl;
+UIKIT_EXTERN NSString * const kRegistUrl;
+UIKIT_EXTERN NSString * const kGetTopicUrl;
+UIKIT_EXTERN NSString * const kGetTaskUrl;
+UIKIT_EXTERN NSString * const kDelateTaskUrl;
+UIKIT_EXTERN NSString * const kGetCommentUrl;
+UIKIT_EXTERN NSString * const kCreateOrderUrl;
+UIKIT_EXTERN NSString * const kGetStoreTimeUrl;
+
+UIKIT_EXTERN NSString * const kGetUMAppkey;
+UIKIT_EXTERN NSString * const kGetWXAppId;
+UIKIT_EXTERN NSString * const kGetWXAppSecret;
+
+

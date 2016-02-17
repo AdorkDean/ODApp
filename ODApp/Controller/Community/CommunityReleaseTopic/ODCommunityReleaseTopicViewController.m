@@ -52,7 +52,7 @@
 -(void)createTextView
 {
     //标题
-    self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4+ODTopY, kScreenSize.width-8, 53) delegate:self tag:100 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4+ODTopY, kScreenSize.width-8, 53) delegate:self tag:0 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.view addSubview:self.titleTextView];
     self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4+ODTopY, kScreenSize.width - 20, 30) text:@"请输入话题标题" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     self.titleLabel.backgroundColor = [UIColor clearColor];
@@ -70,73 +70,40 @@
 }
 
 #pragma mark - UITextViewDelegate
-NSString *TitleText = @"";
+NSString *topicTitleText = @"";
 NSString *topicContentText = @"";
 - (void)textViewDidChange:(UITextView *)textView
 {
-    if (textView == self.titleTextView)
-    {
-        if (textView.text.length > 30)
-        {
-            textView.text = TitleText;
+    if (textView == self.titleTextView){
+        if (textView.text.length > 30){
+            textView.text = [textView.text substringToIndex:30];
+        }else{
+            topicTitleText = textView.text;
         }
-        else
-        {
-            TitleText = textView.text;
+        
+        if (self.titleTextView.text.length == 0) {
+            self.titleLabel.text = @"请输入话题标题";
+        }else{
+            self.titleLabel.text = @"";
         }
-    }
-    else if (textView == self.topicContentTextView)
-    {
-        if (textView.text.length > 500)
-        {
-            textView.text = topicContentText;
-        }
-        else
-        {
+    }else if (textView == self.topicContentTextView){
+        if (textView.text.length > 500){
+            textView.text = [textView.text substringToIndex:500];
+        }else{
             topicContentText = textView.text;
         }
-    }
-}
-
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    if (textView == self.titleTextView) {
-        if (text.length == 0) return YES;
         
-        NSInteger existedLength = textView.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = text.length;
-        if (existedLength - selectedLength + replaceLength > 30) {
-            return NO;
+        if (self.topicContentTextView.text.length == 0) {
+            self.topicContentLabel.text = @"请输入话题内容";
+        }else{
+            self.topicContentLabel.text = @"";
         }
-    }
-    
-    if (textView == self.topicContentTextView) {
-        if (text.length == 0) return YES;
-        
-        NSInteger existedLength = textView.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = text.length;
-        if (existedLength - selectedLength + replaceLength > 500) {
-            return NO;
-        }
-    }
-    
-    return YES;
-}
-
--(void)textViewDidBeginEditing:(UITextView *)textView
-{
-    if (textView.tag == 100) {
-        self.titleLabel.text = @"";
-    }else{
-        self.topicContentLabel.text = @"";
     }
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    if (textView.tag == 100) {
+    if (textView == self.titleTextView) {
         if (textView.text.length == 0) {
             self.titleLabel.text = @"请输入话题标题";
         }
@@ -155,7 +122,7 @@ NSString *topicContentText = @"";
     self.addPicButton.layer.masksToBounds = YES;
     self.addPicButton.layer.cornerRadius = 5;
     self.addPicButton.layer.borderWidth = 1;
-    self.addPicButton.layer.borderColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1].CGColor;
+    self.addPicButton.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     [self.view addSubview:self.addPicButton];
 }
 

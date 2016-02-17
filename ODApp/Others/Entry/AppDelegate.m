@@ -97,9 +97,9 @@ void UncaughtExceptionHandler(NSException *exception)
     
  
     
-    [UMSocialData setAppKey:@"569dda54e0f55a994f0021cf"];
+    [UMSocialData setAppKey:kGetUMAppkey];
     
-    [UMSocialWechatHandler setWXAppId:@"wxd25da104118aae2a" appSecret:@"5da1d304e3b05fe65e4c14deddfa56f1" url:@"http://www.umeng.com/social"];
+    [UMSocialWechatHandler setWXAppId:kGetWXAppId appSecret:kGetWXAppSecret url:@"http://www.umeng.com/social"];
     
 }
 

@@ -12,4 +12,8 @@
 
 @property (nonatomic , strong) ODBazaarExchangeSkillModel *informationModel;
 
+
+
+
+
 @end

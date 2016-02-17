@@ -156,7 +156,7 @@
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0, kScreenSize.width, kScreenSize.height-64-55) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
     [self.view addSubview:self.collectionView];
 
@@ -184,8 +184,6 @@
     cell.nickLabel.text = [userInfoDic[userId]nick];
     cell.signLabel.text = [userInfoDic[userId]sign];
     [cell showDateWithModel:model];
-    CGFloat height = [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14];
-    cell.contentLabelHeight.constant = height;
     CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs.count) {
         for (id vc in cell.picView.subviews) {
@@ -269,15 +267,15 @@
 {
     CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs.count==0) {
-        return 120+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14];
+        return 135;
     }else if (model.imgs.count>0&&model.imgs.count<4){
-        return 120+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+width;
+        return 135+width;
     }else if (model.imgs.count>=4&&model.imgs.count<7){
-        return 120+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+2*width+5;
+        return 135+2*width+5;
     }else if (model.imgs.count>=7&&model.imgs.count<9){
-        return 120+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+3*width+10;
+        return 135+3*width+10;
     }else{
-        return 120+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14]+3*width+10;
+        return 135+3*width+10;
     }
 }
 #pragma mark - 试图将要出现

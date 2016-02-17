@@ -22,9 +22,29 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.page = 1;
     [self createRequest];
+    [self createCollectionView];
     [self joiningTogetherParmeters];
+    
+    __weakSelf
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf joiningTogetherParmeters];
+    }];
+    
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf loadMoreData];
+    }];
+
+    
+
 }
 
+-(void)loadMoreData
+{
+    self.page ++;
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0"};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
+}
 -(void)createRequest
 {
     self.manager = [AFHTTPRequestOperationManager manager];
@@ -47,18 +67,26 @@
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
+            
+            if (weakSelf.page == 1) {
+                [weakSelf.dataArray removeAllObjects];
+            }
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSArray *result = dict[@"result"];
             for (NSDictionary *itemDict in result) {
                 ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
+                [weakSelf.collectionView reloadData];
+                [weakSelf.collectionView.mj_header endRefreshing];
+                [weakSelf.collectionView.mj_footer endRefreshing];
             }
-            [weakSelf createCollectionView];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf.collectionView.mj_footer endRefreshing];
+
     }];
 }
 
@@ -71,7 +99,7 @@
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0, kScreenSize.width,kScreenSize.height-64-40-55) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
     [self.view addSubview:self.collectionView];
 }
@@ -95,8 +123,6 @@
     [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
     cell.nickLabel.text = model.user[@"nick"];
     [cell showDatasWithModel:model];
-    CGFloat height = [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13];
-    cell.contentLabelConstraintHeight.constant = height;
     CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs_small.count) {
         for (id vc in cell.picView.subviews) {
@@ -155,6 +181,7 @@
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc]init];
     detailControler.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
+    NSLog(@"%@",detailControler.swap_id);
     [self.navigationController pushViewController:detailControler animated:YES];
     
 }
@@ -164,15 +191,15 @@
 {
     CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs_small.count==0) {
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13];
+        return 180;
     }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+width;
+        return 180+width;
     }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+2*width+5;
+        return 180+2*width+5;
     }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+3*width+10;
+        return 180+3*width+10;
     }else{
-        return 148+[ODHelp textHeightFromTextString:model.content width:kScreenSize.width-115 fontSize:13]+3*width+10;
+        return 180+3*width+10;
     }
 }
 

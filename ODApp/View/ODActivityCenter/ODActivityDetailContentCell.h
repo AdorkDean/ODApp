@@ -9,10 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @interface ODActivityDetailContentCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+
+/**
+ *  mark
+ */
+@property (weak, nonatomic) UIWebView *contentWebView;
+
 /**
  *  cell的高度
  */
 @property(nonatomic, assign) CGFloat height;
+
+
+
+
 
 @end

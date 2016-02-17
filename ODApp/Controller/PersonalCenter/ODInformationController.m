@@ -42,7 +42,7 @@
  
     
     self.dataArray = [[NSMutableArray alloc] init];
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     [self getData];
     self.navigationItem.title = @"个人中心";
     
@@ -64,9 +64,9 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/info";
+  
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kGetUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         NSMutableDictionary *dic = responseObject[@"result"];
@@ -90,9 +90,9 @@
 - (void)createTableView
 {
     
-    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 64) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+   
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 20) style:UITableViewStylePlain];
+      
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.userInteractionEnabled = YES;
@@ -101,7 +101,6 @@
     
     self.informationView = [ODInformationView getView];
     self.informationView.userInteractionEnabled = YES;
-    self.informationView.frame = CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height + 10);
     
     ODUserModel *model = self.dataArray[0];
     
@@ -115,7 +114,7 @@
     
     
     self.informationView.userImageView.layer.masksToBounds = YES;
-    self.informationView.userImageView.layer.cornerRadius = 45;
+    self.informationView.userImageView.layer.cornerRadius = 47.5;
     self.informationView.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
     self.informationView.userImageView.layer.borderWidth = 1;
 
@@ -188,7 +187,7 @@
     vc.getTextBlock = ^(NSString *text){
         
      
-        if ([text isEqualToString:@""]) {
+        if ([text isEqualToString:@""] || [text isEqualToString:@"请输入签名"]) {
             self.informationView.signatureLabel.text = [NSString stringWithFormat:@"未设置签名"];
         }else{
             
@@ -214,7 +213,7 @@
     vc.getTextBlock = ^(NSString *text){
         
         
-        if ([text isEqualToString:@""]) {
+        if ([text isEqualToString:@""]||[text isEqualToString:@"请输入昵称"]) {
             self.informationView.nickNameLabel.text = [NSString stringWithFormat:@"未设置昵称"];
         }else{
             
@@ -353,10 +352,8 @@
         NSDictionary *parameter = @{@"File":strData};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         
-        NSString *url = @"http://woquapi.test.odong.com/1.0/other/base64/upload";
-        
-        
-        [self pushImageWithUrl:url parameter:signParameter];
+            
+        [self pushImageWithUrl:kGetImageDataUrl parameter:signParameter];
 
         
     }
@@ -415,9 +412,8 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/change";
-    __weak typeof (self)weakSelf = self;
-    [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+      __weak typeof (self)weakSelf = self;
+    [self.managers GET:kChangeUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {

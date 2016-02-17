@@ -164,7 +164,7 @@
     
     self.firstFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.firstFlowLayout];
-    self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.firstCollectionView.dataSource = self;
     self.firstCollectionView.delegate = self;
     
@@ -189,7 +189,7 @@
     
     self.secondFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width,10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.secondFlowLayout];
-    self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.secondCollectionView.dataSource = self;
     self.secondCollectionView.delegate = self;
     
@@ -218,7 +218,7 @@
 {
     
     self.typeView = [ODTypeView getView];
-    self.typeView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.typeView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.typeView.layer.borderWidth = 1;
     self.typeView.layer.borderColor = [UIColor blackColor].CGColor;
     self.typeView.frame = CGRectMake(kScreenSize.width - 100, 0, 100, 185);
@@ -318,9 +318,9 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/bbs/del";
+ 
     __weak typeof (self)weakSelf = self;
-    [self.delateManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.delateManager GET:kDelateTaskUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (responseObject) {
             
@@ -362,7 +362,8 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    [self.allTaskButton setTitle:@"全部任务V" forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"全部任务V"];
+
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -376,7 +377,8 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    [self.allTaskButton setTitle:@"等待派单V" forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"等待派单V"];
+
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -388,11 +390,10 @@
 
     self.type = @"2";
     
-      [self.firstCollectionView.mj_header beginRefreshing];
-      [self.secondCollectionView.mj_header beginRefreshing];
+    [self.firstCollectionView.mj_header beginRefreshing];
+    [self.secondCollectionView.mj_header beginRefreshing];
     
-      [self.allTaskButton setTitle:@"等待完成V" forState:UIControlStateNormal];
-    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"等待完成V"];
     [self.typeView removeFromSuperview];
     self.showType = YES;
     
@@ -405,7 +406,9 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    [self.allTaskButton setTitle:@"完成任务V" forState:UIControlStateNormal];
+  
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"完成任务V"];
+
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -420,7 +423,8 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    [self.allTaskButton setTitle:@"过期任务V" forState:UIControlStateNormal];
+      self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"过期任务V"];
+
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -434,8 +438,8 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    [self.allTaskButton setTitle:@"违规任务V" forState:UIControlStateNormal];
-    
+      self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"违规任务V"];
+
     [self.typeView removeFromSuperview];
     self.showType = YES;
 
@@ -490,10 +494,8 @@
     NSDictionary *parameters = @{ @"city_id":@"321" , @"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"1" , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    
-    NSString *url = @"http://woquapi.test.odong.com/1.0/task/list";
     __weak typeof (self)weakSelf = self;
-    [self.firstManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.firstManager GET:kGetTaskUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
  
         if (responseObject) {
             
@@ -543,11 +545,8 @@
     
     NSDictionary *parameters = @{@"city_id":@"321" ,@"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"2" , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    
-    NSString *url = @"http://woquapi.test.odong.com/1.0/task/list";
     __weak typeof (self)weakSelf = self;
-    [self.secondManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.secondManager GET:kGetTaskUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         if (responseObject) {
             
@@ -563,14 +562,9 @@
             
             for (NSDictionary *itemDict in tasks) {
                 
-                NSString *task_status = [NSString stringWithFormat:@"%@" ,  itemDict[@"task_status"]];
-                
-                
-                if (![task_status isEqualToString:@"-1"]) {
-                    ODBazaarModel *model = [[ODBazaarModel alloc]init];
-                    [model setValuesForKeysWithDictionary:itemDict];
-                    [weakSelf.secondDataArray addObject:model];
-                }
+                ODBazaarModel *model = [[ODBazaarModel alloc]init];
+                [model setValuesForKeysWithDictionary:itemDict];
+                [weakSelf.secondDataArray addObject:model];
 
             }
             
@@ -634,20 +628,29 @@
     }else {
         
         ODBazaarModel *model = self.secondDataArray[indexPath.row];
-     
-        ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
+        NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
         
-        cell.model = model;
-        [cell.userImageViewButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-        cell.userImageViewButton.tag = 222;
-
-        
-        return cell;
-        
-        
+        if ([status isEqualToString:@"-1"]) {
+            ODViolationsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
+            
+            cell.model = model;
+            [cell.deleteButton removeFromSuperview];
+            return cell;
+            
+            
+        }else{
+            
+            ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
+            
+            cell.model = model;
+            [cell.userImageViewButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+            cell.userImageViewButton.tag = 222;
+            
+            
+            return cell;
+            
+        }
     }
-    
-
 
 }
 
@@ -734,31 +737,10 @@
     return CGSizeMake(kScreenSize.width , 140);
     
 }
-//动态设置每个分区的缩进量
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(0, 0, 0, 0);
-}
 //动态设置每个分区的最小行间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 5;
-}
-//动态返回不同区的列间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0;
-}
-//动态设置区头的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    return CGSizeMake(0, 0);
-    
-}
-//动态设置区尾的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-{
-    return CGSizeMake(0, 0);
 }
 
 

@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextView *messageTextView;
 
+@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 
 
 +(instancetype)getView;

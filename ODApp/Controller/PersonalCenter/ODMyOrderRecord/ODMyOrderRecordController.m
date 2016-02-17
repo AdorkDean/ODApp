@@ -52,7 +52,7 @@
 {
     
     self.count ++;
-    NSDictionary *parameter = @{@"open_id":self.open_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"open_id":self.open_id,@"page":[NSString stringWithFormat:@"%ld",(long)self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kMyOrderRecordUrl paramater:signParameter];
 }
@@ -67,7 +67,7 @@
 -(void)joiningTogetherParmeters
 {
     self.count = 1;
-    NSDictionary *parameter = @{@"open_id":self.open_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"open_id":self.open_id,@"page":[NSString stringWithFormat:@"%ld",(long)self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kMyOrderRecordUrl paramater:signParameter];
 }
@@ -133,7 +133,7 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODMyOrderRecordCell" bundle:nil] forCellWithReuseIdentifier:kMyOrderRecordCellId];
     
     [self.view addSubview:self.collectionView];

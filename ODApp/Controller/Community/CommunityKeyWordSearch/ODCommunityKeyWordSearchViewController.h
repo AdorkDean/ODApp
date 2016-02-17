@@ -14,6 +14,7 @@
 #import "ODCommunityCollectionCell.h"
 #import "ODCommunityDetailViewController.h"
 #import "MJRefresh.h"
+#import "ODCommunityShowPicViewController.h"
 
 @interface ODCommunityKeyWordSearchViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate>
 

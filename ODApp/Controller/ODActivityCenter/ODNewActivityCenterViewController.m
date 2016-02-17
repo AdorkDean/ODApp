@@ -8,11 +8,12 @@
 #import "ODActivitylistModel.h"
 #import "ODNewActivityCell.h"
 #import "ODNewActivityCenterViewController.h"
+#import "ODNewActivityDetailViewController.h"
 #import "ODActivityDetailViewController.h"
 
 @interface ODNewActivityCenterViewController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property (nonatomic, strong)UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 
 /**
  *  从服务器获取到的数据
@@ -29,7 +30,7 @@ static NSString * const cellId = @"newActivityCell";
 {
     if (!_tableView)
     {
-        UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODTabBarHeight) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODTabBarHeight - ODNavigationHeight) style:UITableViewStylePlain];
         tableView.delegate = self;
         tableView.dataSource = self;
         [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODNewActivityCell class]) bundle:nil] forCellReuseIdentifier:cellId];
@@ -81,7 +82,7 @@ static NSString * const cellId = @"newActivityCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODActivityDetailViewController *detailViewController = [[ODActivityDetailViewController alloc] initWithNibName:nil bundle:nil];
+    ODNewActivityDetailViewController *detailViewController = [[ODNewActivityDetailViewController alloc] initWithNibName:nil bundle:nil];
     detailViewController.acitityId = [self.resultLists[indexPath.row]activity_id];
     [self.navigationController pushViewController:detailViewController animated:YES];
 }

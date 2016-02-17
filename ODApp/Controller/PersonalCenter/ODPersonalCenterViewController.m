@@ -39,7 +39,7 @@
     self.pageNumber = 0;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];;
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];;
     
     self.returnKeyHandler = [[IQKeyboardReturnKeyHandler alloc] initWithViewController:self];
     self.returnKeyHandler.lastTextFieldReturnKeyType = UIReturnKeyDone;
@@ -61,7 +61,7 @@
 - (void)createTableView
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.tableView.userInteractionEnabled = YES;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -96,7 +96,7 @@
     if (_landView == nil) {
         self.landView = [ODlandingView getView];
         self.landView.userInteractionEnabled = YES;
-        self.landView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        self.landView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         
         self.landView.accountLabel.layer.masksToBounds = YES;
         self.landView.accountLabel.layer.cornerRadius = 20;
@@ -166,6 +166,7 @@
 - (void)registered:(UIButton *)sender
 {
     ODRegisteredController *vc = [[ODRegisteredController alloc] init];
+    vc.personalVC = self;
     [self presentViewController:vc animated:YES completion:nil];
 }
 
@@ -176,11 +177,9 @@
     NSDictionary *parameters = @{@"mobile":self.landView.accountTextField.text,@"passwd":self.landView.passwordTextField.text};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/login1";
-    
-    self.manager = [AFHTTPRequestOperationManager manager];
+      self.manager = [AFHTTPRequestOperationManager manager];
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kLoginUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
@@ -201,13 +200,15 @@
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             [user setObject:openId forKey:KUserDefaultsOpenId];
             
-            ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            tabBar.selectedIndex = tabBar.currentIndex;
-            
 
-            ODHomeFoundViewController *vc1 = [[ODHomeFoundViewController alloc] init];
+
             
-            [weakSelf.navigationController presentViewController:vc1 animated:YES completion:nil];
+            [weakSelf dismissViewControllerAnimated:YES completion:^{
+                ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+                tabBar.selectedIndex = tabBar.currentIndex;
+                
+            }];
+
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"登陆成功"];
             
             

@@ -36,7 +36,10 @@ NSString * const requestSuccessStatus = @"success";
             {
                 resultDic = [resultDic lastObject];
             }
-            [resultDic NSLogProperty];
+            if ([resultDic isKindOfClass:[NSDictionary class]])
+            {
+                [resultDic NSLogProperty];
+            }
             NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
             success(model);
         }
@@ -91,7 +94,10 @@ NSString * const requestSuccessStatus = @"success";
             {
                 resultDic = [resultDic lastObject];
             }
-            [resultDic NSLogProperty];
+            if ([resultDic isKindOfClass:[NSDictionary class]])
+            {
+                [resultDic NSLogProperty];
+            }
             NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
             success(model);
         }
@@ -135,7 +141,10 @@ NSString * const requestSuccessStatus = @"success";
             {
                 resultDic = [resultDic lastObject];
             }
-            [resultDic NSLogProperty];
+            if ([resultDic isKindOfClass:[NSDictionary class]])
+            {
+                [resultDic NSLogProperty];
+            }
             NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
             success(model);
         }

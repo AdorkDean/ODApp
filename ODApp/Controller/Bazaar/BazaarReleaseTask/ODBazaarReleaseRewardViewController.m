@@ -18,7 +18,7 @@
     [super viewDidLoad];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.navigationItem.title = @"任务奖励";
     [self navigationInit];
     [self initjiangliView];
@@ -30,7 +30,7 @@
 
 - (void)initjiangliView
 {
-    UIView *view = [ODClassMethod creatViewWithFrame:CGRectMake(4, 68, kScreenSize.width-8, 40) tag:0 color:@"#ffffff"];
+    UIView *view = [ODClassMethod creatViewWithFrame:CGRectMake(4, 4, kScreenSize.width-8, 40) tag:0 color:@"#ffffff"];
     view.layer.masksToBounds = YES;
     view.layer.cornerRadius = 5;
     view.layer.borderWidth = 1;
@@ -43,7 +43,7 @@
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.navigationItem.title = @"任务奖励";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
 }
@@ -105,7 +105,7 @@
     flowLayout.minimumInteritemSpacing = 0;
     flowLayout.minimumLineSpacing = 0;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(4,112, kScreenSize.width-8, kScreenSize.height-112) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(4,48, kScreenSize.width-8, kScreenSize.height-112) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.layer.masksToBounds = YES;
