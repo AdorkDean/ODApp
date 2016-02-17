@@ -16,8 +16,8 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ymE-Vt-V8o">
                         <rect key="frame" x="10" y="10" width="60" height="60"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="60" id="ZH0-rH-VJx"/>
-                            <constraint firstAttribute="width" constant="60" id="s6C-ei-DIL"/>
+                            <constraint firstAttribute="width" constant="60" id="arG-a1-T9R"/>
+                            <constraint firstAttribute="height" constant="60" id="zJZ-BP-oYg"/>
                         </constraints>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jd4-Hb-HJ5">
@@ -97,7 +97,7 @@
                 <outlet property="signLabel" destination="HvG-In-Poa" id="EnQ-ly-LO3"/>
                 <outlet property="timeLabel" destination="alo-U0-Phx" id="fig-xz-w4Q"/>
             </connections>
-            <point key="canvasLocation" x="594.5" y="470"/>
+            <point key="canvasLocation" x="1004.5" y="423"/>
         </collectionViewCell>
     </objects>
 </document>

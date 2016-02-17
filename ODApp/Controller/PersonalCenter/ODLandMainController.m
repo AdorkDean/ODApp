@@ -262,16 +262,6 @@
         NSString *title = self.model.share[@"title"];
         
         
-        
-        
-        
-        NSLog(@"_____%@" , url);
-        NSLog(@"_____%@" , content);
-        
-        NSLog(@"_____%@" , link);
-        NSLog(@"_____%@" , title);
-
-        
         [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
         [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
@@ -284,12 +274,7 @@
                                     shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
                                            delegate:self];
       
-        
-        
-        
-     
-        
-        
+              
     }
     else if (indexPath.section ==8) {
         
