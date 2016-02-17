@@ -90,7 +90,7 @@ NSString * const kGetCommentUrl = @"http://woquapi.test.odong.com/1.0/user/comme
 NSString * const kCreateOrderUrl = @"http://woquapi.test.odong.com/1.0/store/create/order";
 NSString * const kGetStoreTimeUrl = @"http://woquapi.test.odong.com/1.0/store/timeline";
 NSString * const kSaveStoreOrderUrl = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
-
+NSString * const kGetApplyListUrl = @"http://woquapi.test.odong.com/1.0/store/apply/users";
 
 NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
 NSString * const kGetWXAppId = @"wxd25da104118aae2a";

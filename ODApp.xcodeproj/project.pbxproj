@@ -55,6 +55,8 @@
 		9DEDCF721C64B3FC003015C6 /* ODBazaarExchangeSkillCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDCF671C64B3FC003015C6 /* ODBazaarExchangeSkillCollectionCell.xib */; };
 		9DEDCF731C64B3FC003015C6 /* ODBazaarReleaseSkillTimeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCF691C64B3FC003015C6 /* ODBazaarReleaseSkillTimeViewCell.m */; };
 		9DEDCF741C64B3FC003015C6 /* ODBazaarReleaseSkillTimeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DEDCF6A1C64B3FC003015C6 /* ODBazaarReleaseSkillTimeViewCell.xib */; };
+		9DF2E9861C74481700F77976 /* ODApplyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF2E9851C74481700F77976 /* ODApplyListViewController.m */; };
+		9DF2E9891C74527F00F77976 /* ODApplyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF2E9881C74527F00F77976 /* ODApplyModel.m */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
 		B84F2E741C60A1AD0057DF9E /* ODCommunityShowPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84F2E731C60A1AD0057DF9E /* ODCommunityShowPicViewController.m */; };
@@ -357,6 +359,10 @@
 		9DEDCF681C64B3FC003015C6 /* ODBazaarReleaseSkillTimeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseSkillTimeViewCell.h; sourceTree = "<group>"; };
 		9DEDCF691C64B3FC003015C6 /* ODBazaarReleaseSkillTimeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseSkillTimeViewCell.m; sourceTree = "<group>"; };
 		9DEDCF6A1C64B3FC003015C6 /* ODBazaarReleaseSkillTimeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarReleaseSkillTimeViewCell.xib; sourceTree = "<group>"; };
+		9DF2E9841C74481700F77976 /* ODApplyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODApplyListViewController.h; sourceTree = "<group>"; };
+		9DF2E9851C74481700F77976 /* ODApplyListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODApplyListViewController.m; sourceTree = "<group>"; };
+		9DF2E9871C74527F00F77976 /* ODApplyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODApplyModel.h; sourceTree = "<group>"; };
+		9DF2E9881C74527F00F77976 /* ODApplyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODApplyModel.m; sourceTree = "<group>"; };
 		B83C6B621C224F640063ED92 /* ODApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B751C224F640063ED92 /* ODAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ODAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B791C224F640063ED92 /* ODAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODAppTests.m; sourceTree = "<group>"; };
@@ -1477,6 +1483,8 @@
 				D444238D1C71BE23005B4CFE /* ODNewActivityDetailViewController.m */,
 				D46C90391C604F79004942E7 /* ODActivityDetailViewController.h */,
 				D46C903A1C604F79004942E7 /* ODActivityDetailViewController.m */,
+				9DF2E9841C74481700F77976 /* ODApplyListViewController.h */,
+				9DF2E9851C74481700F77976 /* ODApplyListViewController.m */,
 			);
 			path = ODActivityCenter;
 			sourceTree = "<group>";
@@ -2033,6 +2041,8 @@
 				D4F76D4B1C605EA700D59F02 /* ODActivityListModel.m */,
 				D4F76D531C6090EC00D59F02 /* ODActivityDetailModel.h */,
 				D4F76D541C6090EC00D59F02 /* ODActivityDetailModel.m */,
+				9DF2E9871C74527F00F77976 /* ODApplyModel.h */,
+				9DF2E9881C74527F00F77976 /* ODApplyModel.m */,
 			);
 			path = ODActivityCenter;
 			sourceTree = "<group>";
@@ -2414,6 +2424,7 @@
 				9DEDCF581C64B3F4003015C6 /* ODBazaarModel.m in Sources */,
 				D44423911C72E4C4005B4CFE /* ODTitleLabelView.m in Sources */,
 				9DDC9B771C6334BA000D688F /* ODOrderDetailModel.m in Sources */,
+				9DF2E9891C74527F00F77976 /* ODApplyModel.m in Sources */,
 				D4D0737F1C59B9FA008527C9 /* ODCommunityReleaseTopicViewController.m in Sources */,
 				C64D45F41C5F8C6F003BFFA0 /* IQToolbar.m in Sources */,
 				C64D46141C5F8C6F003BFFA0 /* ODHelp.m in Sources */,
@@ -2533,6 +2544,7 @@
 				D4D0737B1C59B9FA008527C9 /* ODChoseCenterController.m in Sources */,
 				D4D075071C59B9FA008527C9 /* CenterYuYueView.m in Sources */,
 				9DEDCF6B1C64B3FC003015C6 /* ODBazaarDetailCollectionCell.m in Sources */,
+				9DF2E9861C74481700F77976 /* ODApplyListViewController.m in Sources */,
 				D4F76D4C1C605EA700D59F02 /* ODActivityListModel.m in Sources */,
 				9DEDCF461C64B3ED003015C6 /* ODBazaaeExchangeSkillViewController.m in Sources */,
 				D444239D1C742118005B4CFE /* ODActivePersonInfoView.m in Sources */,
