@@ -10,11 +10,23 @@
 
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
+
+#import "AFNetworking.h"
+
 #import "ODUserInformation.h"
 
-@interface ODLocationController : ODBaseViewController<MAMapViewDelegate, AMapSearchDelegate>
+#import "ODLocationCell.h"
+#import "ODLocationModel.h"
 
-@property (nonatomic, strong) UIImageView *centerImageView;
+@interface ODLocationController : ODBaseViewController<MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+
+
+@property (nonatomic, strong) NSMutableArray *cityListArray;
+
+@property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+@property (nonatomic, strong) UICollectionView *collectionView;
+
+@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
 
 @end

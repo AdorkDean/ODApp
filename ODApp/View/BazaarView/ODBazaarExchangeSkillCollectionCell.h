@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ODBazaarExchangeSkillModel.h"
+#import "ODHomeInfoModel.h"
 
 @interface ODBazaarExchangeSkillCollectionCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIButton *headButton;
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *shareLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *genderImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *picViewConstraintHeight;
+
 
 -(void)showDatasWithModel:(ODBazaarExchangeSkillModel *)model;
 

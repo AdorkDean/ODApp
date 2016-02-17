@@ -13,10 +13,11 @@ NSString *const KUserDefaultsOpenId = @"userOpenId";
 
 #pragma mark - 通知
 /** 显示集市的通知 */
-NSString *const ODNotificationShowBazaar = @"ODShowBazaarNotification";
+NSString * const ODNotificationShowBazaar = @"ODShowBazaarNotification";
 
 /** 刷新我的话题通知 */
-NSString *const ODNotificationMyTaskRefresh = @"ODNotificationMyTaskRefresh";
+NSString * const ODNotificationMyTaskRefresh = @"ODNotificationMyTaskRefresh";
+NSString * const ODNotificationActivityApllySuccess = @"ODNotificationActivityApllySuccess";
 
 #pragma mark - 请求URL接口
 /** 统一的URL */
@@ -54,6 +55,12 @@ NSString * const kHomeFoundPictureUrl = @"http://woquapi.test.odong.com/1.0/othe
 
 NSString * const ODSkillDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/info";
 
+NSString * const ODCityListUrl = @"other/city/list";
+NSString * const ODHomeFoundUrl = @"other/home";
+NSString * const ODHomeChangeSkillUrl = @"http://woquapi.test.odong.com/1.0/other/home";
+NSString *const ODFindJobUrl = @"http://www.myjob500.com/user/extloginpf";
+NSString * const ODHotActivityUrl = @"http://woquapi.test.odong.com/1.0/doc/store/activity/list";
+
 NSString * const kMyOrderRecordUrl = @"http://woquapi.test.odong.com/1.0/store/orders";
 NSString * const kMyOrderDetailUrl = @"http://woquapi.test.odong.com/1.0/store/info/order";
 
@@ -70,6 +77,7 @@ NSString * const kSaveOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/order"
 
 NSString * const KActivityListUrl = @"store/activity/list";
 NSString * const KActivityDetailUrl = @"store/apply/detail2";
+NSString * const KActivityApplyUrl = @"store/activity/apply";
 
 NSString * const kGetLikeListUrl = @"http://woquapi.test.odong.com/1.0/swap/love/list";
 NSString * const kGetMyOrderListUrl = @"http://woquapi.test.odong.com/1.0/swap/order/list";

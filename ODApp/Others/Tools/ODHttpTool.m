@@ -12,6 +12,7 @@
 
 NSString * const requestStatus = @"status";
 NSString * const requsetResult = @"result";
+NSString * const requsetMessage = @"message";
 NSString * const requestSuccessStatus = @"success";
 
 @implementation ODHttpTool
@@ -45,13 +46,13 @@ NSString * const requestSuccessStatus = @"success";
         }
         else
         {
-            [SVProgressHUD showErrorWithStatus:responseObject[requsetResult] maskType:(SVProgressHUDMaskTypeGradient)];
+            [SVProgressHUD showErrorWithStatus:responseObject[requsetMessage] maskType:(SVProgressHUDMaskTypeGradient)];
             failure(responseObject[requestStatus]);
         }
     }
          failure:^(AFHTTPRequestOperation *operation, NSError *error)
      {
-        NSLog(@"error === %@",error.description);
+        NSLog(@"error === %@ ,manager = %@",error.description,manager);
         if (error)
         {
             failure(error);

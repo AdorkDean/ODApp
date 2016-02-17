@@ -187,7 +187,7 @@
             [weakSelf dismissViewControllerAnimated:YES completion:^{
                 ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
                 tabBar.selectedIndex = tabBar.currentIndex;
-                
+                [weakSelf.delegate personalHasLoginSuccess];
             }];
 
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"登陆成功"];
