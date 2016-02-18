@@ -113,6 +113,8 @@ NSString * const kSaveStoreOrderUrl = @"http://woquapi.test.odong.com/1.0/store/
 NSString * const kGetApplyListUrl = @"http://woquapi.test.odong.com/1.0/store/apply/users";
 NSString * const kGiveOpinionUrl = @"http://woquapi.test.odong.com/1.0/other/feedback";
 
+NSString * const ODPersonalReleaseTaskUrl = @"swap/list";
+
 NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
 NSString * const kGetWXAppId = @"wxd25da104118aae2a";
 NSString * const kGetWXAppSecret = @"5da1d304e3b05fe65e4c14deddfa56f1";

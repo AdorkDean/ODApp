@@ -15,6 +15,6 @@ Single_Interface(ODUserInformation)
 
 @property (nonatomic, copy) NSString *locationCity;
 
-@property (nonatomic, assign) NSInteger cityID;
+@property (nonatomic, copy) NSString *cityID;
 
 @end

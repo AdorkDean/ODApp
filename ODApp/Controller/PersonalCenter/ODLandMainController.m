@@ -152,8 +152,24 @@
         
         return cell;
         
+
+    }else if (indexPath.section == 1) {
+        
+        ODLandThirdCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"third" forIndexPath:indexPath];
+        
+        [cell.buyButton addTarget:self action:@selector(alreadyBuyAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.releaseButton addTarget:self action:@selector(releaseAction:) forControlEvents:UIControlEventTouchUpInside];
+
+        [cell.collectionButton addTarget:self action:@selector(collectionAction:) forControlEvents:UIControlEventTouchUpInside];
+
+        
+        
+        return cell;
+        
     }
     
+
     
     else{
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
@@ -201,7 +217,20 @@
     
 }
 
+- (void)releaseAction:(UIButton *)sender
+{
+    
+    ODReleaseController *vc = [[ODReleaseController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES]; 
+}
 
+- (void)collectionAction:(UIButton *)sender
+{
+    
+
+    
+    
+}
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
