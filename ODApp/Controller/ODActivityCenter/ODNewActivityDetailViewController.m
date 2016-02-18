@@ -329,10 +329,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     __weakSelf
     self.activityVIPs = self.resultModel.savants;
     self.activityApplies = self.resultModel.applies;
-    if ([[self.activityApplies valueForKeyPath:@"open_id"]containsObject:[ODUserInformation sharedODUserInformation].openID])
-    {
-        self.reportButton.enabled = NO;
-    }
+    self.reportButton.enabled = self.resultModel.apply_status != 1;
     [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
     {
         if (!image)
@@ -346,7 +343,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
             [weakSelf.headImageView addLineOnBottom];
         }
         weakSelf.titleLabel.text = weakSelf.resultModel.content;
-        weakSelf.infoTableView.hidden = NO;
+        [weakSelf.infoTableView reloadData];
         weakSelf.VIPLabel.od_height = weakSelf.resultModel.savants.count ? labelHeight : 0;
         weakSelf.VIPTableView.od_height = weakSelf.resultModel.savants.count *
         137 / 2;
