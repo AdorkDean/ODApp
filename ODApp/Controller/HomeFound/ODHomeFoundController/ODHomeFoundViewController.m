@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
 
+#import "ODBazaarViewController.h"
 #import "ODHomeFoundViewController.h"
 #import "ODUserInformation.h"
 #import "ODHomeInfoModel.h"
@@ -31,8 +32,11 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.pictureArray = [[NSMutableArray alloc] init];
-
     self.dataArray = [[NSMutableArray alloc] init];
+    
+    self.cityIdArray = [[NSMutableArray alloc] init];
+    self.cityListArray = [[NSMutableArray alloc] init];
+    
     userInfoDic = [NSMutableDictionary dictionary];
     
     [self createCollectionView];
@@ -43,14 +47,14 @@
         
     }];
     
-        [MAMapServices sharedServices].apiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
+        [MAMapServices sharedServices].apiKey = ODLocationApiKey;
         _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
         _mapView.delegate = self;
         _mapView.showsUserLocation = YES;
         [_mapView setZoomLevel:20 animated:YES];
     
         //配置用户Key
-        [AMapSearchServices sharedServices].apiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
+        [AMapSearchServices sharedServices].apiKey = ODLocationApiKey;
         //初始化检索对象
         _search = [[AMapSearchAPI alloc] init];
         _search.delegate = self;
@@ -221,14 +225,16 @@
 {
     
     self.tabBarController.selectedIndex = 2;
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationSearchHelp object:nil];
+    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
+    vc.index = 1;
 }
 
 - (void)changeSkillButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 2;
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationChangeSkill object:nil];
+    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
+    vc.index = 0;
+    
 }
 
 - (void)moreButtonClick:(UIButton *)button
@@ -600,11 +606,37 @@ updatingLocation:(BOOL)updatingLocation{
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
             [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
+
+            for (NSDictionary *cityInformation in self.cityListArray) {
+                for (NSString *cityName in [cityInformation allValues]) {
+                    if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityName]) {
+                        [ODUserInformation sharedODUserInformation].cityID = [cityInformation[@"id"] integerValue];
+                    }
+                }
+            }
+            
             [self locationCity];
         }]];
 
         [self presentViewController:alert animated:YES completion:nil];
     }
+}
+
+- (void)getLocationCityRequest
+{
+
+    NSDictionary *parameter = @{@"region_name":@"上海"};
+    [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
+        
+        ODLocationModel *mode = [model result];
+        self.cityListArray = [mode.all valueForKeyPath:@"name"];
+        self.cityIdArray = [mode.all valueForKey:@"id"];
+        [self.collectionView reloadData];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
 }
 
 
