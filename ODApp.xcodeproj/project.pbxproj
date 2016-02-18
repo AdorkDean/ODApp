@@ -14,6 +14,9 @@
 		9D205C7C1C7173B500B6499B /* ODMyOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D205C7B1C7173B500B6499B /* ODMyOrderCell.xib */; };
 		9DBF7EE31C7576220085875E /* ODLandThirdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EE21C7576220085875E /* ODLandThirdCell.m */; };
 		9DBF7EE71C7595A30085875E /* ODGiveOpinionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EE61C7595A30085875E /* ODGiveOpinionController.m */; };
+		9DBF7EEA1C759B1C0085875E /* ODPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EE91C759B1C0085875E /* ODPayController.m */; };
+		9DBF7EED1C75A0C90085875E /* ODPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EEC1C75A0C90085875E /* ODPayView.m */; };
+		9DBF7EEF1C75A0D60085875E /* ODPayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBF7EEE1C75A0D60085875E /* ODPayView.xib */; };
 		9DD00BDB1C4E397E00F0EE5F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDA1C4E397E00F0EE5F /* Security.framework */; };
 		9DD00BDD1C4E398B00F0EE5F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */; };
 		9DD00BDF1C4E399700F0EE5F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */; };
@@ -301,6 +304,11 @@
 		9DBF7EE21C7576220085875E /* ODLandThirdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLandThirdCell.m; sourceTree = "<group>"; };
 		9DBF7EE51C7595A30085875E /* ODGiveOpinionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODGiveOpinionController.h; sourceTree = "<group>"; };
 		9DBF7EE61C7595A30085875E /* ODGiveOpinionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODGiveOpinionController.m; sourceTree = "<group>"; };
+		9DBF7EE81C759B1C0085875E /* ODPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPayController.h; sourceTree = "<group>"; };
+		9DBF7EE91C759B1C0085875E /* ODPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPayController.m; sourceTree = "<group>"; };
+		9DBF7EEB1C75A0C90085875E /* ODPayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPayView.h; sourceTree = "<group>"; };
+		9DBF7EEC1C75A0C90085875E /* ODPayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPayView.m; sourceTree = "<group>"; };
+		9DBF7EEE1C75A0D60085875E /* ODPayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODPayView.xib; sourceTree = "<group>"; };
 		9DD00BDA1C4E397E00F0EE5F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -2137,6 +2145,8 @@
 				9DDC9B6E1C631A24000D688F /* ODOrderDetailController.m */,
 				9DF2E98A1C74654A00F77976 /* ODSecondOrderDetailController.h */,
 				9DF2E98B1C74654A00F77976 /* ODSecondOrderDetailController.m */,
+				9DBF7EE81C759B1C0085875E /* ODPayController.h */,
+				9DBF7EE91C759B1C0085875E /* ODPayController.m */,
 			);
 			path = ODOrderController;
 			sourceTree = "<group>";
@@ -2168,6 +2178,9 @@
 				D4F76DA11C61AEA100D59F02 /* ODOrderView.h */,
 				D4F76DA21C61AEA100D59F02 /* ODOrderView.m */,
 				D4F76DA31C61AEA100D59F02 /* ODOrderView.xib */,
+				9DBF7EEB1C75A0C90085875E /* ODPayView.h */,
+				9DBF7EEC1C75A0C90085875E /* ODPayView.m */,
+				9DBF7EEE1C75A0D60085875E /* ODPayView.xib */,
 				9DDC9B8E1C635793000D688F /* ODOrderSecondHeadView.h */,
 				9DDC9B8F1C635793000D688F /* ODOrderSecondHeadView.m */,
 				9DDC9B901C635793000D688F /* ODSecondOrderView.h */,
@@ -2332,6 +2345,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9DBF7EEF1C75A0D60085875E /* ODPayView.xib in Resources */,
 				C64D46081C5F8C6F003BFFA0 /* UMShareEditViewController.xib in Resources */,
 				D4D0751F1C59B9FA008527C9 /* ODTopicCell.xib in Resources */,
 				D4D075111C59B9FA008527C9 /* ODlandingView.xib in Resources */,
@@ -2541,10 +2555,12 @@
 				D4F76DD71C61B07B00D59F02 /* ODLikeModel.m in Sources */,
 				9DEDCF4B1C64B3ED003015C6 /* ODBazaarViewController.m in Sources */,
 				C66B882A1C7449AC00F60E3D /* ODLocationModel.m in Sources */,
+				9DBF7EED1C75A0C90085875E /* ODPayView.m in Sources */,
 				D4D073871C59B9FA008527C9 /* ODInformationController.m in Sources */,
 				D4F76DD31C61B04700D59F02 /* ODCollectionController.m in Sources */,
 				C64D45EA1C5F8C6F003BFFA0 /* IQUITextFieldView+Additions.m in Sources */,
 				C64D45E91C5F8C6F003BFFA0 /* IQNSArray+Sort.m in Sources */,
+				9DBF7EEA1C759B1C0085875E /* ODPayController.m in Sources */,
 				9DDC9B6F1C631A24000D688F /* ODOrderDetailController.m in Sources */,
 				9DDC9B681C62EDB9000D688F /* ODMyOrderCell.m in Sources */,
 				D4D075221C59B9FA008527C9 /* ODUserModel.m in Sources */,

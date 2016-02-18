@@ -17,6 +17,7 @@
 #import "TimeButton.h"
 #import "UIImageView+WebCache.h"
 #import "ODAddressModel.h"
+#import "ODPayController.h"
 @interface ODOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UITextViewDelegate>
 
 @property(nonatomic,strong)UIButton *selectedButton;
@@ -206,14 +207,20 @@
 
 - (void)saveOrderAction:(UIButton *)sender
 {
-    if ([self.headView.orderView.timeLabel.text isEqualToString:@"服务时间"]) {
-         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入服务时间"];
-    }else if ([self.headView.orderView.addressLabel.text isEqualToString:@"联系地址"]){
-         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
-    }else{
-        
-         [self saveOrder];
-    }
+
+    
+    ODPayController *vc = [[ODPayController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    //    if ([self.headView.orderView.timeLabel.text isEqualToString:@"服务时间"]) {
+//         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入服务时间"];
+//    }else if ([self.headView.orderView.addressLabel.text isEqualToString:@"联系地址"]){
+//         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
+//    }else{
+//        
+//         [self saveOrder];
+//    }
    
 }
 
