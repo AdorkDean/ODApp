@@ -15,6 +15,7 @@
 #import "ODAPIManager.h"
 #import "ODHelp.h"
 #import "ODCommunityShowPicViewController.h"
+#import "MJRefresh.h"
 
 @interface ODBazaaeExchangeSkillViewController : ODBaseViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 

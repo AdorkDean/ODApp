@@ -35,17 +35,18 @@
         
     }else{
         
-        
-//        ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
-//        releaseTask.isBazaar = YES;
-//        
-//        releaseTask.myBlock = ^(NSString *release){
-////            self.refresh = release;
-//        };
-//        [self.navigationController pushViewController:releaseTask animated:YES];
-        
-        ODBazaarReleaseSkillViewController *releaseSkill = [[ODBazaarReleaseSkillViewController alloc]init];
-        [self.navigationController pushViewController:releaseSkill animated:YES];
+        if (self.index == 0) {
+            ODBazaarReleaseSkillViewController *releaseSkill = [[ODBazaarReleaseSkillViewController alloc]init];
+            [self.navigationController pushViewController:releaseSkill animated:YES];
+        }else{
+            ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
+            releaseTask.isBazaar = YES;
+            
+            releaseTask.myBlock = ^(NSString *release){
+                //            self.refresh = release;
+            };
+            [self.navigationController pushViewController:releaseTask animated:YES];
+        }
     }
 }
 
@@ -74,6 +75,7 @@
 {
     CGPoint point = CGPointMake(kScreenSize.width*(button.tag-10010), 0);
     NSInteger i = point.x / self.view.frame.size.width;
+    self.index = i;
     self.lineView.frame = CGRectMake((kScreenSize.width/2)*i, 38, kScreenSize.width/2, 2);
     [self.view addSubview:self.lineView];
     [self.scrollView setContentOffset:point animated:YES];
@@ -109,6 +111,7 @@
     if (![scrollView isEqual:self.scrollView])
         return;
     NSInteger i = scrollView.contentOffset.x / self.view.frame.size.width;
+    self.index = i;
     self.lineView.frame = CGRectMake((kScreenSize.width/2)*i, 38, kScreenSize.width/2, 2);
     [self.view addSubview:self.lineView];
 }

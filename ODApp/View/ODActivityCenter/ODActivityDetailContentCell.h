@@ -19,5 +19,6 @@
  *  cell的高度
  */
 @property(nonatomic, assign) CGFloat height;
+@property(weak, nonatomic)UILabel *contentLabel;
 
 @end

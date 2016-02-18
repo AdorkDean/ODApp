@@ -24,5 +24,6 @@
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,copy)NSString *swap_id;
 @property(nonatomic,strong)ODBazaarExchangeSkillModel *model;
+@property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)UILabel *loveLabel;
 @end

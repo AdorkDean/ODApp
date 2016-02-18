@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 #include "ODAPIManager.h"
 #import "UIButton+WebCache.h"
+#import "ODBazaarReleaseSkillTimeViewController.h"
 
 @interface ODBazaarReleaseSkillViewController : ODBaseViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate>
 
@@ -24,6 +25,7 @@
 @property(nonatomic,strong)UITextField *unitTextField;
 @property(nonatomic,strong)UIView *picView;
 @property(nonatomic,strong)UIView *bottomView;
+@property(nonatomic,strong)UIView *timeView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,copy)NSString *avatar;
