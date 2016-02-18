@@ -25,7 +25,7 @@
 
 -(void)showDatasWithModel:(ODBazaarExchangeSkillModel *)model
 {
-    self.titleLabel.text = [NSString stringWithFormat:@"我去 · %@",model.title];
+    self.titleLabel.text = model.title;
     self.priceLabel.text = [[[NSString stringWithFormat:@"%@",model.price] stringByAppendingString:@"/"]stringByAppendingString:model.unit];
     self.contentLabel.text = model.content;
     self.loveLabel.text = [NSString stringWithFormat:@"%@",model.love_num];

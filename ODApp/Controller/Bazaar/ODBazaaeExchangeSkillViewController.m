@@ -41,7 +41,7 @@
 -(void)loadMoreData
 {
     self.page ++;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0"};
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
 }
@@ -56,8 +56,9 @@
 -(void)joiningTogetherParmeters
 {
     self.page = 1;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0"};
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    NSLog(@"%@",signParameter);
     [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
 }
 
