@@ -104,7 +104,7 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_Alipay Payment" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-Hq-LQv">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_Alipay Payment-1" translatesAutoresizingMaskIntoConstraints="NO" id="FFS-Hq-LQv">
                     <rect key="frame" x="18" y="168" width="15" height="12"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="15" id="BhQ-zi-VlU"/>
@@ -222,12 +222,12 @@
                 <outlet property="treasurePayButton" destination="okh-zX-9Jh" id="dtC-ng-XGs"/>
                 <outlet property="weixinPaybutton" destination="3mS-0j-Ou7" id="4Ky-Xk-cG1"/>
             </connections>
-            <point key="canvasLocation" x="328" y="326"/>
+            <point key="canvasLocation" x="577" y="321"/>
         </view>
     </objects>
     <resources>
         <image name="button_Pay immediately" width="187" height="49"/>
-        <image name="icon_Alipay Payment" width="15" height="12"/>
+        <image name="icon_Alipay Payment-1" width="15" height="12"/>
         <image name="icon_Default address_default" width="15" height="15"/>
         <image name="icon_WeChat Payment" width="15" height="12"/>
     </resources>
