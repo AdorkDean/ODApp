@@ -77,6 +77,13 @@
     }
 }
 
+- (void)reciveNotification
+{
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchHelp) name:ODNotificationSearchHelp object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSkill) name:ODNotificationChangeSkill object:nil];
+}
+
 -(void)changeController:(UIButton *)button
 {
     CGPoint point = CGPointMake(kScreenSize.width*(button.tag-10010), 0);

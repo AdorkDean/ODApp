@@ -215,12 +215,14 @@
 {
     
     self.tabBarController.selectedIndex = 2;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationSearchHelp object:nil];
 }
 
 - (void)changeSkillButtonClick:(UIButton *)button
 {
     
     self.tabBarController.selectedIndex = 2;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationChangeSkill object:nil];
 }
 
 - (void)moreButtonClick:(UIButton *)button

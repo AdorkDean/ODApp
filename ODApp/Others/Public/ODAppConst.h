@@ -24,6 +24,14 @@ UIKIT_EXTERN NSString * const ODNotificationMyTaskRefresh;
 /** 报名成功以后的通知 */
 UIKIT_EXTERN NSString * const ODNotificationActivityApllySuccess;
 
+/**  求帮助的通知 */
+UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
+
+/**  换技能通知 */
+UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
+
+
+
 #pragma mark - 请求URL接口 
 /** 统一的URL */
 UIKIT_EXTERN NSString *const ODBaseURL;
