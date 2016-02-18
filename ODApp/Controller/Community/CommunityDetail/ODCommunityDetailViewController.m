@@ -7,7 +7,7 @@
 //
 
 #import "ODCommunityDetailViewController.h"
-#import "UMSocial.h"
+
 @interface ODCommunityDetailViewController ()<UMSocialUIDelegate>
 
 @end

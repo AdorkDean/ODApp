@@ -18,6 +18,7 @@
 #import "ODCommunityDetailReplyViewController.h"
 #import "ODCommunityDetailCell.h"
 #import "MJRefresh.h"
+#import "UMSocial.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODOthersInformationController.h"
 
