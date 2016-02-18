@@ -48,11 +48,6 @@
             };
             [self.navigationController pushViewController:releaseTask animated:YES];
         }
-        
-        
-        ODBazaarReleaseSkillViewController *releaseSkill = [[ODBazaarReleaseSkillViewController alloc]init];
-        [self.navigationController pushViewController:releaseSkill animated:YES];
-        
     }
 }
 

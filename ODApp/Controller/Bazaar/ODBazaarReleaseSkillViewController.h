@@ -11,6 +11,7 @@
 #include "ODAPIManager.h"
 #import "UIButton+WebCache.h"
 #import "ODBazaarReleaseSkillTimeViewController.h"
+#import "MBProgressHUD.h"
 
 @interface ODBazaarReleaseSkillViewController : ODBaseViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate>
 
@@ -34,4 +35,5 @@
 @property(nonatomic,strong)NSMutableArray *imageArray;
 @property(nonatomic,strong)NSMutableArray *strArray;
 @property(nonatomic,strong)UIButton *selectedButton;
+@property (nonatomic, strong) MBProgressHUD *hud;
 @end
