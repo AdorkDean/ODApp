@@ -323,6 +323,9 @@
     [super viewWillDisappear:animated];
 }
 
+
+
+
 -(void)dealloc
 {
     [[NSNotificationCenter defaultCenter]removeObserver:self];
