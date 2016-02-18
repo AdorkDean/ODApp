@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
 
+#import "ODBazaarViewController.h"
 #import "ODHomeFoundViewController.h"
 #import "ODUserInformation.h"
 #import "ODHomeInfoModel.h"
@@ -27,30 +28,34 @@
     __weakSelf
     self.navigationItem.title = @"首页";
     
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.pictureArray = [[NSMutableArray alloc] init];
-
     self.dataArray = [[NSMutableArray alloc] init];
+    
+    self.cityListArray = [[NSArray alloc] init];
+    
     userInfoDic = [NSMutableDictionary dictionary];
+    
+    [self getLocationCityRequest];
     
     [self createCollectionView];
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
+    
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf refreshdata];
         
     }];
     
-        [MAMapServices sharedServices].apiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
+        [MAMapServices sharedServices].apiKey = ODLocationApiKey;
         _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
         _mapView.delegate = self;
         _mapView.showsUserLocation = YES;
         [_mapView setZoomLevel:20 animated:YES];
     
         //配置用户Key
-        [AMapSearchServices sharedServices].apiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
+        [AMapSearchServices sharedServices].apiKey = ODLocationApiKey;
         //初始化检索对象
         _search = [[AMapSearchAPI alloc] init];
         _search.delegate = self;
@@ -60,14 +65,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
     [self locationCity];
-}
-
-- (void)locationCity
-{
-
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
 }
 
 - (void)refreshdata
@@ -75,7 +73,6 @@
     
     [self getSkillChangeRequest];
 }
-
 
 -(NSMutableArray *)mySort:(NSMutableArray *)mArray
 {
@@ -97,8 +94,14 @@
     return mArray;
 }
 
-#pragma mark - Location Button
+#pragma mark - 显示定位城市
+- (void)locationCity
+{
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
+}
 
+#pragma mark - 定位城市按钮
 - (void)CreateLocationButtonAction
 {
 
@@ -106,7 +109,25 @@
 }
 
 #pragma mark - Request Data
-// Hot Activity
+
+#pragma mark - 定位城市数据请求
+- (void)getLocationCityRequest
+{
+    
+    NSDictionary *parameter = @{@"region_name":@""};
+    [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
+        
+        ODLocationModel *mode = [model result];
+        self.cityListArray = mode.all;
+        [self.collectionView reloadData];
+        
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
+
+#pragma mark - 热门活动数据请求
 - (void)getScrollViewRequest
 {
     NSDictionary *parameter = @{@"city_id":@"0"};
@@ -123,12 +144,8 @@
     }];
 }
 
-// Skill Change
-
-
-
+#pragma mark - 技能交换数据请求
 - (void)getSkillChangeRequest
-
 {
     
     self.manager = [AFHTTPRequestOperationManager manager];
@@ -161,12 +178,8 @@
     }];
 }
 
-
-
-
 #pragma mark - Action
-
-// Location Button
+#pragma mark - 定位按钮点击事件
 - (void)locationButtonClick:(UIButton *)button
 {
     
@@ -174,7 +187,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-//Toop Eight Button
+#pragma mark - 顶部8个按钮点击事件
 - (void)findActivityButtonClick:(UIButton *)button
 {
 
@@ -221,23 +234,25 @@
 {
     
     self.tabBarController.selectedIndex = 2;
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationSearchHelp object:nil];
+    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
+    vc.index = 1;
 }
 
 - (void)changeSkillButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 2;
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationChangeSkill object:nil];
+    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
+    vc.index = 0;
+    
 }
 
 - (void)moreButtonClick:(UIButton *)button
 {
     
-    
+    [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"敬请期待"];
 }
 
-//Hot Activity
+#pragma mark - 热门活动图片点击事件
 - (void)imageButtonClick:(UIButton *)button
 {
 
@@ -249,7 +264,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-//Search Circle
+#pragma mark - 寻圈子8个按钮点击事件
 - (void)emotionButtonClick:(UIButton *)button
 {
     
@@ -304,7 +319,7 @@
     self.tabBarController.selectedIndex = 3;
 }
 
-// Skill Change
+#pragma mark - 用户头像点击事件
 - (void)headButtonClick:(UIButton *)button
 {
     
@@ -323,14 +338,30 @@
     
 }
 
+#pragma mark - 了解更多技能点击事件
 - (void)moreSkillButtonClick:(UIButton *)button
 {
 
     self.tabBarController.selectedIndex = 2;
+    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
+    vc.index = 0;
 }
 
-#pragma mark - CreateUICollectionView
+#pragma mark - 技能交换cell图片点击事件
+-(void)imageButtonClicked:(UIButton *)button
+{
+    
+    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *)button.superview.superview.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
+    picController.photos = model.imgs_small;
+    picController.selectedIndex = button.tag-10*indexPath.row;
+    picController.skill = @"skill";
+    [self.navigationController pushViewController:picController animated:YES];
+}
 
+#pragma mark - Create UICollectionView
 - (void)createCollectionView
 {
 
@@ -354,7 +385,6 @@
 }
 
 #pragma mark - UICollectionViewDelegate
-
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     
@@ -409,21 +439,7 @@
         }
         cell.picViewConstraintHeight.constant = 0;
     }
-
-    
     return cell;
-}
-
--(void)imageButtonClicked:(UIButton *)button
-{
-    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *)button.superview.superview.superview;
-    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
-    picController.photos = model.imgs_small;
-    picController.selectedIndex = button.tag-10*indexPath.row;
-    picController.skill = @"skill";
-    [self.navigationController pushViewController:picController animated:YES];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -443,20 +459,23 @@
     self.rsusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:viewId forIndexPath:indexPath];
     
     if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 2/3 * self.pictureArray.count , 0);
-        self.rsusableView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 15) * 2/3, 0);
+        
+        // Hot Activity
+        self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 7/12 * self.pictureArray.count , 0);
+        self.rsusableView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 15) * 7/12, 0);
         //    self.rsusableView.scrollView.pagingEnabled = YES;
         self.rsusableView.scrollView.delegate = self;
         self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
         self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;
         
         for (int i = 0; i < self.pictureArray.count; i++) {
+
             
             UIButton *imageButton;
             if (i < self.pictureArray.count - 1) {
-                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3 - 8, 120)];
+                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7/12 * i, 0, (kScreenSize.width - 15) * 7/12 - 8, 120)];
             }else{
-                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3, 120)];
+                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7/12 * i, 0, (kScreenSize.width - 15) * 7/12, 120)];
             }
             [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.pictureArray[i]] forState:UIControlStateNormal];
             
@@ -511,7 +530,6 @@
     }
 }
 
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -530,6 +548,7 @@
     return CGSizeMake(0, 42);
 }
 
+#pragma mark - AMapSearchDelegate
 //地图定位成功回调
 -(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
 updatingLocation:(BOOL)updatingLocation{
@@ -550,11 +569,6 @@ updatingLocation:(BOOL)updatingLocation{
         AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
         request.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
 
-        // types属性表示限定搜索POI的类别，默认为：餐饮服务|商务住宅|生活服务
-        // POI的类型共分为20种大类别，分别为：
-        // 汽车服务|汽车销售|汽车维修|摩托车服务|餐饮服务|购物服务|生活服务|体育休闲服务|
-        // 医疗保健服务|住宿服务|风景名胜|商务住宅|政府机构及社会团体|科教文化服务|
-        // 交通设施服务|金融保险服务|公司企业|道路附属设施|地名地址信息|公共设施
         request.keywords = @"";
         request.types = @"";
         request.sortrule = 0;
@@ -580,32 +594,47 @@ updatingLocation:(BOOL)updatingLocation{
     }
 }
 
-//实现逆地理编码的回调函数
-- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
-{
-    if(response.regeocode != nil)
-    {
-        //通过AMapReGeocodeSearchResponse对象处理搜索结果
-        NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
-        if (result.length == 0) {
-            result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
-        }
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",result] message:nil preferredStyle:UIAlertControllerStyleAlert];
-    
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            [ODUserInformation sharedODUserInformation].locationCity = result;
-            [self locationCity];
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-            [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
-            [self locationCity];
-        }]];
+////实现逆地理编码的回调函数
+//- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
+//{
+//    if(response.regeocode != nil)
+//    {
+//        //通过AMapReGeocodeSearchResponse对象处理搜索结果
+//        NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
+//        if (result.length == 0) {
+//            result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
+//        }
+//
+//        NSString *cityResult = [result substringToIndex:[result length] - 1];
+//        
+//        
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
+//    
+//        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            
+//            [ODUserInformation sharedODUserInformation].locationCity = cityResult;
+//            
+//            for (NSDictionary *cityInformation in self.cityListArray) {
+//                
+////                NSString *cityName = [NSString stringWithFormat:@"%@市",cityInformation[@"name"]];
+//                
+//                if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityInformation[@"name"]]) {
+//                    [ODUserInformation sharedODUserInformation].cityID = cityInformation[@"id"];
+//                }             
+//            }
+//            [self locationCity];
+//        }]];
+//        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//            
+//            [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
+//            [ODUserInformation sharedODUserInformation].cityID = @"1";
+//            [self locationCity];
+//        }]];
+//
+//        [self presentViewController:alert animated:YES completion:nil];
+//    }
+//}
 
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-}
 
 
 @end
