@@ -142,7 +142,7 @@
     [self.addPicButton setBackgroundImage:[UIImage imageNamed:@"button_Add pictures"] forState:UIControlStateNormal];
     [self.addPicButton addTarget:self action:@selector(addPicButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.picView addSubview:self.addPicButton];
-    
+
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 0.4*width, 0.2*width)];
     imageView.image = [UIImage imageNamed:@"button_Cover label_one"];
     imageView.tag = 9;
@@ -433,7 +433,7 @@
             }
         }
     }
-    
+
     if (button.tag == 10 || button.tag==11) {
         [self createServiceTimeView];
     }
@@ -477,6 +477,7 @@
     ODBazaarReleaseSkillTimeViewController *timeController = [[ODBazaarReleaseSkillTimeViewController alloc]init];
     [self.navigationController pushViewController:timeController animated:YES];
 }
+
 -(void)createReleaseButton
 {
     UIButton *releaseButton = [[UIButton alloc]initWithFrame:CGRectMake(0, kScreenSize.height-64-50, kScreenSize.width, 50)];
@@ -489,7 +490,8 @@
 
 -(void)releaseButtonClick:(UIButton *)button
 {
-    
+    ODBazaarReleaseSkillTimeViewController *skillTime = [[ODBazaarReleaseSkillTimeViewController alloc]init];
+    [self.navigationController pushViewController:skillTime animated:YES];
 }
 
 #pragma mark - UITextFieldDelegate

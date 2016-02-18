@@ -7,7 +7,7 @@
 //
 
 #import "ODBazaarExchangeSkillDetailViewController.h"
-
+#import "ODSecondOrderController.h"
 @interface ODBazaarExchangeSkillDetailViewController ()
 
 @end
@@ -66,6 +66,7 @@
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 3000);
+
     [self.view addSubview:self.scrollView];
 }
 
@@ -194,7 +195,7 @@
 - (void)createBottomView
 {
     UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenSize.height-64-50, kScreenSize.width, 50)];
-    [bottomView setBackgroundColor:[UIColor colorWithHexString:@"#d9d9d9" alpha:1]];
+    [bottomView setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6" alpha:1]];
     [self.view addSubview:bottomView];
     
     UIButton *loveButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 50)];
@@ -228,9 +229,22 @@
 #pragma mark - 立即购买事件
 -(void)payButtonClick:(UIButton *)button
 {
-    ODOrderController *orderController = [[ODOrderController alloc]init];
-    orderController.informationModel = self.model;
-    [self.navigationController pushViewController:orderController animated:YES];
+    
+    ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
+    
+    
+    NSString *type = [NSString stringWithFormat:@"%@" ,model.swap_type];
+    
+    if ([type isEqualToString:@"2"]) {
+        ODSecondOrderController *vc  =[[ODSecondOrderController alloc] init];
+        vc.informationModel = model;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        ODOrderController *orderController = [[ODOrderController alloc]init];
+        orderController.informationModel = model;
+        [self.navigationController pushViewController:orderController animated:YES];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {

@@ -34,7 +34,6 @@
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
         
     }else{
-        
         if (self.index == 0) {
             ODBazaarReleaseSkillViewController *releaseSkill = [[ODBazaarReleaseSkillViewController alloc]init];
             [self.navigationController pushViewController:releaseSkill animated:YES];
@@ -69,6 +68,13 @@
             [self.view addSubview:self.lineView];
         }
     }
+}
+
+- (void)reciveNotification
+{
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchHelp) name:ODNotificationSearchHelp object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSkill) name:ODNotificationChangeSkill object:nil];
 }
 
 -(void)changeController:(UIButton *)button

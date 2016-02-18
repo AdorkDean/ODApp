@@ -6,12 +6,23 @@
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
 
+
 #import "ODBaseViewController.h"
 
 #import "ODHomeFoundViewController.h"
 
+@protocol ODPersonalCenterVCDelegate <NSObject>
+
+- (void)personalHasLoginSuccess;
+
+@end
+
 @interface ODPersonalCenterViewController : ODBaseViewController
 
+/**
+ *  代理
+ */
+@property(nonatomic, weak) id <ODPersonalCenterVCDelegate> delegate;
 
 
 @end

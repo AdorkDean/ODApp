@@ -56,7 +56,7 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandSecondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
 
@@ -71,15 +71,9 @@
     if (indexPath.section == 0) {
         ODLandFirstCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
         
-        cell.userImageView.layer.masksToBounds = YES;
-        cell.userImageView.layer.cornerRadius = 35;
-        cell.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
-        cell.userImageView.layer.borderWidth = 1;
-        
         
         [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.avatar]];
-        [cell.qrcodeImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.qrcode]];
-        
+              
         [cell.qrcodeImageView removeFromSuperview];
         [cell.centerImageView removeFromSuperview];
         

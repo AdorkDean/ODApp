@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -17,9 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="356" height="34"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的预约" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gy3-Up-ShN">
-                        <rect key="frame" x="10" y="5" width="296" height="24"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的预约" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gy3-Up-ShN">
+                        <rect key="frame" x="18" y="5" width="288" height="24"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -39,7 +39,7 @@
                 <constraint firstAttribute="bottom" secondItem="Gy3-Up-ShN" secondAttribute="bottom" constant="5" id="T4U-fj-e98"/>
                 <constraint firstAttribute="trailing" secondItem="YzX-AY-n9a" secondAttribute="trailing" id="Wzm-3j-9bS"/>
                 <constraint firstAttribute="trailing" secondItem="9Ev-bB-nPp" secondAttribute="trailing" constant="10" id="a8z-2L-gkd"/>
-                <constraint firstItem="Gy3-Up-ShN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="iud-XF-YTD"/>
+                <constraint firstItem="Gy3-Up-ShN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="18" id="iud-XF-YTD"/>
                 <constraint firstItem="Gy3-Up-ShN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="jSp-W6-rVK"/>
                 <constraint firstAttribute="bottom" secondItem="YzX-AY-n9a" secondAttribute="bottom" id="pQa-Fm-E2z"/>
                 <constraint firstItem="9Ev-bB-nPp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="qXy-a6-VbY"/>

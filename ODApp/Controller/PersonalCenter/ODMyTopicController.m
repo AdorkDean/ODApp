@@ -58,13 +58,14 @@
     self.secondUserInfoDic = [[NSMutableDictionary alloc] init];
     
     
-    
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"我的话题";
+    
     [self creatSegment];
     [self creatScroller];
+    [self createCollectionView];
 }
 
 #pragma mark - lifeCycle
@@ -78,6 +79,8 @@
     
 }
 
+
+#pragma mark - 初始化
 -(void)creatSegment
 {
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发表的", @"我回复的"]];
@@ -112,59 +115,60 @@
     self.scrollView.backgroundColor =[UIColor whiteColor];
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.alwaysBounceVertical = YES;
-    
-    // 弹簧效果
     self.scrollView.bounces = NO;
     self.scrollView.showsHorizontalScrollIndicator = NO;
-    // 是否开启分页
     self.scrollView.pagingEnabled = YES;
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
     
+   
+}
+
+- (void)createCollectionView
+{
+    __weakSelf
+    
+    // 我发表的collectionView
     self.firstFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.firstFlowLayout];
-    self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.firstCollectionView.dataSource = self;
     self.firstCollectionView.delegate = self;
-    [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
-    
     self.firstCollectionView.tag = 111;
-    __weakSelf
-
+    [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     self.firstCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf firstDownRefresh];
     }];
-    
     self.firstCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
         [weakSelf firstLoadMoreData];
     }];
     
     [self.firstCollectionView.mj_header beginRefreshing];
-    
     [self.scrollView addSubview:self.firstCollectionView];
-
+    
+    // 我回复的collectionView
     self.secondFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width,10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.secondFlowLayout];
-    self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.secondCollectionView.dataSource = self;
     self.secondCollectionView.delegate = self;
-    [self.secondCollectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
-    
     self.secondCollectionView.tag = 222;
+    [self.secondCollectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     self.secondCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf secondDownRefresh];
     }];
-    
     self.secondCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
         [weakSelf secondLoadMoreData];
     }];
- 
-    [self.secondCollectionView.mj_header beginRefreshing];
     
+    [self.secondCollectionView.mj_header beginRefreshing];
     [self.scrollView addSubview:self.secondCollectionView];
+
 }
+
+
 
 #pragma mark - 刷新
 - (void)firstDownRefresh
@@ -205,11 +209,9 @@
     NSDictionary *parameters = @{ @"type":@"1",@"page":countNumber , @"city_id":@"321" ,@"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/bbs/list";
-    
     
     __weak typeof (self)weakSelf = self;
-    [self.firstManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [self.firstManager GET:kCommunityBbsLatestUrl parameters:signParameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         
         if ([countNumber isEqualToString:@"1"]) {
@@ -221,20 +223,27 @@
         if (responseObject) {
             NSDictionary *result = responseObject[@"result"];
             NSDictionary *bbs_list = result[@"bbs_list"];
-            NSArray *allkeys = [bbs_list allKeys];
-            allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                NSComparisonResult result = [obj1 compare:obj2];
-                return result == NSOrderedAscending;
-            }];
             
             
-            for (id bbsKey in allkeys) {
-                NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
-                NSDictionary *itemDict = bbs_list[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc]init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.FirstDataArray addObject:model];
+                     
+            if (bbs_list.count != 0) {
+                NSArray *allkeys = [bbs_list allKeys];
+                allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                    NSComparisonResult result = [obj1 compare:obj2];
+                    return result == NSOrderedAscending;
+                }];
+                
+                
+                for (id bbsKey in allkeys) {
+                    NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
+                    NSDictionary *itemDict = bbs_list[key];
+                    ODCommunityModel *model = [[ODCommunityModel alloc]init];
+                    [model setValuesForKeysWithDictionary:itemDict];
+                    [weakSelf.FirstDataArray addObject:model];
+                }
+
             }
+            
             
             NSDictionary *users = result[@"users"];
             for (id userKey in users) {
@@ -278,10 +287,9 @@
     NSDictionary *parameters = @{ @"type":@"2",@"page":countNumber, @"city_id":@"321" , @"open_id":self.open_id  , @"call_array":@"1"};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/bbs/list";
-    
+      
     __weak typeof (self)weakSelf = self;
-    [self.secondManager GET:url parameters:signParameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [self.secondManager GET:kCommunityBbsLatestUrl parameters:signParameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         
         if ([countNumber isEqualToString:@"1"]) {
@@ -333,53 +341,36 @@
     }];
 }
 
-
-#pragma mark - UICollectionViewDelegate
-
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - 点击事件
+-(void)firstImageButtonClick:(UIButton *)button
 {
-    
-    ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
-    
-    cell.backgroundColor = [UIColor whiteColor];
-    
-    if (collectionView.tag == 111) {
-        ODCommunityModel *model = self.FirstDataArray[indexPath.row];
-        cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-        
-        [cell showDateWithModel:model];
-        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
-        cell.nickLabel.text = [self.firstUserInfoDic[userId]nick];
-        [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.firstUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
-        [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-        cell.headButton.tag = 111;
-
-        
-    }else if (collectionView.tag == 222) {
-        
-        ODCommunityModel *model = self.secondDataArray[indexPath.row];
-        cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-        
-        [cell showDateWithModel:model];
-        
-        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
-        cell.nickLabel.text = [self.secondUserInfoDic[userId]nick];
-        
-        
-        [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.secondUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
-        [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-        cell.headButton.tag = 222;
-
-
-    }
-    
-    return cell;
+    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview.superview;
+    NSIndexPath *indexPath = [self.firstCollectionView indexPathForCell:cell];
+    ODCommunityModel *model = self.FirstDataArray[indexPath.row];
+    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
+    picController.photos = model.imgs;
+    picController.selectedIndex = button.tag-10*indexPath.row;
+    [self.navigationController pushViewController:picController animated:YES];
 }
 
-- (void)othersInformationClick:(UIButton *)sender{
+-(void)secondImageButtonClick:(UIButton *)button
+{
+    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview.superview;
+    NSIndexPath *indexPath = [self.secondCollectionView indexPathForCell:cell];
+    ODCommunityModel *model = self.secondDataArray[indexPath.row];
+    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
+    picController.photos = model.imgs;
+    picController.selectedIndex = button.tag-10*indexPath.row;
+    [self.navigationController pushViewController:picController animated:YES];
+}
+
+
+
+- (void)othersInformationClick:(UIButton *)sender
+{
     
-      ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)sender.superview.superview;
-      ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)sender.superview.superview;
+    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     
     
     if (sender.tag == 111) {
@@ -397,16 +388,110 @@
         NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
         vc.open_id = [self.secondUserInfoDic[userId]open_id];
         [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+    
+    
+}
+
+#pragma mark - UICollectionViewDelegate
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
+    
+    cell.backgroundColor = [UIColor whiteColor];
+    
+    if (collectionView.tag == 111) {
+        ODCommunityModel *model = self.FirstDataArray[indexPath.row];
+        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+        cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.firstUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
+        cell.nickLabel.text = [self.firstUserInfoDic[userId]nick];
+        cell.signLabel.text = [self.firstUserInfoDic[userId]sign];
+        [cell showDateWithModel:model];
+        CGFloat width=kScreenSize.width>320?90:70;
+        if (model.imgs.count) {
+            for (id vc in cell.picView.subviews) {
+                [vc removeFromSuperview];
+            }
+            if (model.imgs.count==4) {
+                for (NSInteger i = 0; i < model.imgs.count; i++) {
+                    UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
+                    [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
+                    [imageButton addTarget:self action:@selector(firstImageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                    imageButton.tag = 10*indexPath.row+i;
+                    [cell.picView addSubview:imageButton];
+                }
+                cell.PicConstraintHeight.constant = 2*width+5;
+            }else{
+                for (NSInteger i = 0;i < model.imgs.count ; i++) {
+                    UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
+                    [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
+                    [imageButton addTarget:self action:@selector(firstImageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                    imageButton.tag = 10*indexPath.row+i;
+                    [cell.picView addSubview:imageButton];
+                }
+                cell.PicConstraintHeight.constant = width+(width+5)*(model.imgs.count/3);
+            }
+        }else{
+            for (id vc in cell.picView.subviews) {
+                [vc removeFromSuperview];
+            }
+            cell.PicConstraintHeight.constant = 0;
+        }
+        cell.headButton.tag = 111;
+
+        
+    }else if (collectionView.tag == 222) {
+        
+        ODCommunityModel *model = self.secondDataArray[indexPath.row];
+        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+        cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.secondUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
+        cell.nickLabel.text = [self.secondUserInfoDic[userId]nick];
+        cell.signLabel.text = [self.secondUserInfoDic[userId]sign];
+        [cell showDateWithModel:model];
+        CGFloat width=kScreenSize.width>320?90:70;
+        if (model.imgs.count) {
+            for (id vc in cell.picView.subviews) {
+                [vc removeFromSuperview];
+            }
+            if (model.imgs.count==4) {
+                for (NSInteger i = 0; i < model.imgs.count; i++) {
+                    UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
+                    [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
+                    [imageButton addTarget:self action:@selector(secondImageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                    imageButton.tag = 10*indexPath.row+i;
+                    [cell.picView addSubview:imageButton];
+                }
+                cell.PicConstraintHeight.constant = 2*width+5;
+            }else{
+                for (NSInteger i = 0;i < model.imgs.count ; i++) {
+                    UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
+                    [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
+                    [imageButton addTarget:self action:@selector(secondImageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                    imageButton.tag = 10*indexPath.row+i;
+                    [cell.picView addSubview:imageButton];
+                }
+                cell.PicConstraintHeight.constant = width+(width+5)*(model.imgs.count/3);
+            }
+        }else{
+            for (id vc in cell.picView.subviews) {
+                [vc removeFromSuperview];
+            }
+            cell.PicConstraintHeight.constant = 0;
+        }
+        cell.headButton.tag = 222;
+
 
     }
     
-  
-  
-  
-
-
-
+    return cell;
 }
+
 
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -448,41 +533,45 @@
 
 }
 
-
-//动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    return CGSizeMake(kScreenSize.width , 120);
+    if (collectionView.tag == 111) {
+        
+         return CGSizeMake(kScreenSize.width, [self returnHight:self.FirstDataArray[indexPath.row]]);
+        
+    }else{
+        
+        return CGSizeMake(kScreenSize.width, [self returnHight:self.secondDataArray[indexPath.row]]);
+
+    }
+   
     
 }
-//动态设置每个分区的缩进量
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+
+//动态计算cell的高度
+-(CGFloat)returnHight:(ODCommunityModel *)model
 {
-    return UIEdgeInsetsMake(0, 0, 0, 0);
+    CGFloat width=kScreenSize.width>320?90:70;
+    if (model.imgs.count==0) {
+        return 135;
+    }else if (model.imgs.count>0&&model.imgs.count<4){
+        return 135+width;
+    }else if (model.imgs.count>=4&&model.imgs.count<7){
+        return 135+2*width+5;
+    }else if (model.imgs.count>=7&&model.imgs.count<9){
+        return 135+3*width+10;
+    }else{
+        return 135+3*width+10;
+    }
 }
+
+
+
 //动态设置每个分区的最小行间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 5;
 }
-//动态返回不同区的列间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0;
-}
-//动态设置区头的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    return CGSizeMake(0, 0);
-    
-}
-//动态设置区尾的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-{
-    return CGSizeMake(0, 0);
-}
-
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView

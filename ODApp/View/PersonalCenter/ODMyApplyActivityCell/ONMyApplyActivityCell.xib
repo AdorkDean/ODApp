@@ -8,10 +8,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ONMyApplyActivityCell">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
+            <rect key="frame" x="0.0" y="0.0" width="380" height="137"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="170"/>
+                <rect key="frame" x="0.0" y="0.0" width="380" height="137"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFQ-Vc-8Ov">
                         <rect key="frame" x="130" y="8" width="200" height="25"/>
@@ -22,12 +22,6 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eo5-c0-3aO">
                         <rect key="frame" x="130" y="55" width="160" height="25"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sn4-ue-9pK">
-                        <rect key="frame" x="10" y="140" width="100" height="25"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -57,15 +51,14 @@
                 <constraint firstItem="KN6-A8-3o4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="iC2-aP-db6"/>
                 <constraint firstItem="KN6-A8-3o4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="8" id="iJa-7b-VK6"/>
             </constraints>
-            <size key="customSize" width="442" height="168"/>
+            <size key="customSize" width="447" height="135"/>
             <connections>
                 <outlet property="adressLabel" destination="9We-Pz-y38" id="gVl-se-LFS"/>
-                <outlet property="checkLabel" destination="Sn4-ue-9pK" id="h7o-b8-gu2"/>
                 <outlet property="timelabel" destination="eo5-c0-3aO" id="mPX-O5-VwH"/>
                 <outlet property="titleImageView" destination="KN6-A8-3o4" id="P1n-tw-Tyg"/>
                 <outlet property="titleLabel" destination="KFQ-Vc-8Ov" id="fUh-cU-O9h"/>
             </connections>
-            <point key="canvasLocation" x="565.5" y="500"/>
+            <point key="canvasLocation" x="568" y="483.5"/>
         </collectionViewCell>
     </objects>
 </document>

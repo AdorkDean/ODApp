@@ -51,7 +51,7 @@
     
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width,KControllerHeight) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
@@ -106,9 +106,9 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/task/list";
+   
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kGetTaskUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([countNumber isEqualToString:@"1"]) {

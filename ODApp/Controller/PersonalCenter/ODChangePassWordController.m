@@ -108,6 +108,7 @@
         
         
         self.registView.phoneNumber.delegate = self;
+        self.registView.password.delegate = self;
        
    
     }
@@ -115,21 +116,6 @@
 }
 
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if (textField == self.registView.phoneNumber) {
-        if (string.length == 0) return YES;
-        
-        NSInteger existedLength = textField.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = string.length;
-        if (existedLength - selectedLength + replaceLength > 11) {
-            return NO;
-        }
-    }
-    
-    return YES;
-}
 
 
 #pragma mark - 点击事件
@@ -147,9 +133,9 @@
     }else if ([self.registView.verification.text isEqualToString:@""]) {
         
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入验证码"];
-    }else if ([self.registView.password.text isEqualToString:@""]) {
+    }else if (self.registView.password.text.length < 6 || self.registView.password.text.length > 26 ) {
         
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入密码"];
+           [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"密码仅支持6到26位"];
     }else {
         [self changePassWord];
 
@@ -179,14 +165,18 @@
 - (void)seePassword:(UIButton *)sender
 {
     
+  
+    
     if (!self.seePassWord) {
         self.registView.password.secureTextEntry = NO;
         [self.registView.seePassword setImage:[UIImage imageNamed:@"xianshimima"] forState:UIControlStateNormal];
+      
         
     }else{
         self.registView.password.secureTextEntry = YES;
         
         [self.registView.seePassword setImage:[UIImage imageNamed:@"yincangmima"] forState:UIControlStateNormal];
+        
         
         
     }
@@ -214,12 +204,11 @@
     
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/change/passwd";
-    
+      
     self.managers = [AFHTTPRequestOperationManager manager];
     
     __weak typeof (self)weakSelf = self;
-    [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.managers GET:kChangePassWorldUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
       
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
@@ -230,14 +219,9 @@
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
             
-            if (weakSelf.registView.password.text.length < 6 || weakSelf.registView.password.text.length > 26 ) {
-                
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"密码仅支持6到26位"];
-                
-            }else {
-                
+            
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
-            }
+          
 
         }
 
@@ -254,14 +238,11 @@
     
     NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"type":@"3"};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/verify/code/send";
-
-    
-    
+      
     self.manager = [AFHTTPRequestOperationManager manager];
     
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kGetCodeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             //启动定时器

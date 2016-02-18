@@ -18,7 +18,7 @@
     [super viewDidLoad];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.navigationItem.title = @"任务奖励";
     [self navigationInit];
     [self initjiangliView];
@@ -43,7 +43,7 @@
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.navigationItem.title = @"任务奖励";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
 }

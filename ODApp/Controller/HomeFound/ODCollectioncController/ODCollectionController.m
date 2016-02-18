@@ -41,6 +41,7 @@
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.page];
     
     
+      
     self.manager = [AFHTTPRequestOperationManager manager];
     
     NSDictionary *parameters = @{@"swap_id":self.swap_id , @"page":countNumber , @"open_id":self.open_id};
@@ -138,8 +139,7 @@
     ODCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
     
     ODLikeModel *model = self.dataArray[indexPath.row];
-    cell.model = model;
-    
+    [cell setWithLikeModel:model];
         
     return cell;
 }
@@ -172,7 +172,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return CGSizeMake(kScreenSize.width , 100);
+    return CGSizeMake(kScreenSize.width , 68);
     
     
     

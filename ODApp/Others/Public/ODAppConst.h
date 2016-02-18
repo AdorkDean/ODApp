@@ -21,11 +21,20 @@ UIKIT_EXTERN NSString * const ODNotificationShowBazaar;
 /** 刷新我的话题通知 */
 UIKIT_EXTERN NSString * const ODNotificationMyTaskRefresh;
 
+/** 报名成功以后的通知 */
+UIKIT_EXTERN NSString * const ODNotificationActivityApllySuccess;
+
+/**  求帮助的通知 */
+UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
+
+/**  换技能通知 */
+UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
+
+
 
 #pragma mark - 请求URL接口 
 /** 统一的URL */
 UIKIT_EXTERN NSString *const ODBaseURL;
-
 
 UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
@@ -57,23 +66,50 @@ UIKIT_EXTERN NSString * const kHomeFoundListUrl;
 UIKIT_EXTERN NSString * const kHomeFoundPictureUrl;
 
 UIKIT_EXTERN NSString * const ODSkillDetailUrl;
+UIKIT_EXTERN NSString * const ODFindJobUrl;
+UIKIT_EXTERN NSString * const ODHotActivityUrl;
+UIKIT_EXTERN NSString * const ODHomeFoundUrl;
+UIKIT_EXTERN NSString * const ODCityListUrl;
+UIKIT_EXTERN NSString * const ODHomeChangeSkillUrl;
 
 UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
-
 UIKIT_EXTERN NSString * const kMyApplyActivityUrl;
 UIKIT_EXTERN NSString * const kCancelMyOrderUrl;
 UIKIT_EXTERN NSString * const kOthersInformationUrl;
 UIKIT_EXTERN NSString * const kSaveAddressUrl;
 UIKIT_EXTERN NSString * const kGetAddressUrl;
 UIKIT_EXTERN NSString * const kDeleteAddressUrl;
-
-
 UIKIT_EXTERN NSString * const kGetServecTimeUrl;
 UIKIT_EXTERN NSString * const kSaveOrderUrl;
 
 UIKIT_EXTERN NSString * const KActivityListUrl;
 UIKIT_EXTERN NSString * const KActivityDetailUrl;
+UIKIT_EXTERN NSString * const KActivityApplyUrl;
+
 UIKIT_EXTERN NSString * const kGetLikeListUrl;
 UIKIT_EXTERN NSString * const kGetMyOrderListUrl;
 UIKIT_EXTERN NSString * const kOrderDetailUrl;
+
+UIKIT_EXTERN NSString * const kDelateOrderUrl;
+
+UIKIT_EXTERN NSString * const kGetUserInformationUrl;
+UIKIT_EXTERN NSString * const kGetImageDataUrl;
+UIKIT_EXTERN NSString * const kChangeUserInformationUrl;
+UIKIT_EXTERN NSString * const kChangePassWorldUrl;
+UIKIT_EXTERN NSString * const kGetCodeUrl;
+UIKIT_EXTERN NSString * const kLoginUrl;
+UIKIT_EXTERN NSString * const kRegistUrl;
+UIKIT_EXTERN NSString * const kGetTopicUrl;
+UIKIT_EXTERN NSString * const kGetTaskUrl;
+UIKIT_EXTERN NSString * const kDelateTaskUrl;
+UIKIT_EXTERN NSString * const kGetCommentUrl;
+UIKIT_EXTERN NSString * const kCreateOrderUrl;
+UIKIT_EXTERN NSString * const kGetStoreTimeUrl;
+UIKIT_EXTERN NSString * const kGetApplyListUrl;
+
+UIKIT_EXTERN NSString * const kGetUMAppkey;
+UIKIT_EXTERN NSString * const kGetWXAppId;
+UIKIT_EXTERN NSString * const kGetWXAppSecret;
+
+

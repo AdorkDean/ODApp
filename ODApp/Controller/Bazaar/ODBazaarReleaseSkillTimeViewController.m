@@ -97,6 +97,7 @@
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 70, kScreenSize.width, kScreenSize.height-64-70)];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:@"ODBazaarReleaseSkillTimeViewCell" bundle:nil] forCellReuseIdentifier:cellID];
     [self.view addSubview:self.tableView];
 }
@@ -115,35 +116,6 @@
 {
     ODBazaarReleaseSkillTimeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     ODBazaarReleaseSkillTimeModel *model = [[ODBazaarReleaseSkillTimeModel alloc]init];
-    if (indexPath.section == 0) {
-        for (NSInteger i = 0; i < 3;i++) {
-          model = [self.dataArray objectAtIndex:i];
-        }
-    }else if (indexPath.section == 1){
-        for (NSInteger i = 3; i < 6;i++) {
-            model = [self.dataArray objectAtIndex:i];
-        }
-    }else if (indexPath.section == 2){
-        for (NSInteger i = 6; i < 9;i++) {
-            model = [self.dataArray objectAtIndex:i];
-        }
-    }else if (indexPath.section == 3){
-        for (NSInteger i = 9; i < 12;i++) {
-            model = [self.dataArray objectAtIndex:i];
-        }
-    }else if (indexPath.section == 4){
-        for (NSInteger i = 12; i < 15;i++) {
-            model = [self.dataArray objectAtIndex:i];
-        }
-    }else if (indexPath.section == 5){
-        for (NSInteger i = 15; i < 18;i++) {
-            model = [self.dataArray objectAtIndex:i];
-        }
-    }else if (indexPath.section == 6){
-        for (NSInteger i = 18; i < 21;i++) {
-            model = [self.dataArray objectAtIndex:i];
-        }
-    }
     [cell showDataWithModel:model];
     return cell;
 }
@@ -155,6 +127,8 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    UIView *view = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, kScreenSize.width-10, 20)];
+    view.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     NSArray *array = @[@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六",@"星期日"];
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, kScreenSize.width-10, 20)];
     label.text = [array objectAtIndex:section];
@@ -167,6 +141,7 @@
 {
     return 50;
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

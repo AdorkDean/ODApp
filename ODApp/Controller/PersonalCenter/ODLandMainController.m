@@ -73,14 +73,17 @@
     
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    
-    NSString *url = @"http://woquapi.test.odong.com/1.0/user/info";
-    
+        
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kGetUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         NSMutableDictionary *dic = responseObject[@"result"];
+        
+        
+      
+        
+        
         weakSelf.model = [[ODUserModel alloc] initWithDict:dic];
         
         [weakSelf createCollectionView];
@@ -105,7 +108,7 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandSecondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     
@@ -131,40 +134,20 @@
         ODLandFirstCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
         
         
-        cell.userImageView.layer.masksToBounds = YES;
-        cell.userImageView.layer.cornerRadius = 35;
-        cell.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
-        cell.userImageView.layer.borderWidth = 1;
+             
+        
+        cell.model = self.model;
         
         
         
-        
-        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.avatar]];
-        [cell.qrcodeImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.qrcode]];
-        
-        
-        
-        if ([self.model.nick isEqualToString:@""]) {
-            cell.nickNameLabel.text = [NSString stringWithFormat:@"您还未设置昵称"];
-        }else{
-            cell.nickNameLabel.text = self.model.nick;
-            
-        }
-        
-        if ([self.model.sign isEqualToString:@""]) {
-            cell.signatureLabel.text = [NSString stringWithFormat:@"您还未设置签名"];
-        }else{
-            cell.signatureLabel.text = self.model.sign;
-            
-        }
-        
+              
         return cell;
         
     }else{
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
         
         if (indexPath.section == 1) {
-            cell.titleLabel.text = @"我的预约记录";
+            cell.titleLabel.text = @"我的中心预约";
             
         }else if (indexPath.section == 2) {
             cell.titleLabel.text = @"我报名的活动";
@@ -177,9 +160,11 @@
         
         
         else if (indexPath.section == 5) {
-            cell.titleLabel.text = @"我收到的评价";
-        }else if (indexPath.section == 6) {
+           
             cell.titleLabel.text = @"我的订单";
+        }else if (indexPath.section == 6) {
+           
+             cell.titleLabel.text = @"我收到的评价";
         }
         
         else if (indexPath.section == 7) {
@@ -254,32 +239,27 @@
         
     }else if (indexPath.section == 5) {
         
-        ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
-        
-        vc.typeTitle = @"我收到的评价";
-        vc.openId = [ODUserInformation sharedODUserInformation].openID;
-        
-        
-        
+        ODMyOrderController *vc = [[ODMyOrderController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-        
+
         
     }else if (indexPath.section == 6) {
        
         
-        ODMyOrderController *vc = [[ODMyOrderController alloc] init];
+        
+        ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
+        vc.typeTitle = @"我收到的评价";
+        vc.openId = [ODUserInformation sharedODUserInformation].openID;
         [self.navigationController pushViewController:vc animated:YES];
-        
-        
+
         
     }
     else if (indexPath.section == 7) {
         
-        NSString *url = self.model.share_download[@"icon"];
-        NSString *content = self.model.share_download[@"desc"];
-        NSString *link = self.model.share_download[@"link"];
-        NSString *title = self.model.share_download[@"title"];
-        
+        NSString *url = self.model.share[@"icon"];
+        NSString *content = self.model.share[@"desc"];
+        NSString *link = self.model.share[@"link"];
+        NSString *title = self.model.share[@"title"];
         
         
         [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -288,15 +268,13 @@
         [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
         [UMSocialSnsService presentSnsIconSheetView:self
-                                             appKey:@"569dda54e0f55a994f0021cf"
+                                             appKey:kGetUMAppkey
                                           shareText:content
                                          shareImage:nil
                                     shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
                                            delegate:self];
       
-        
-        
-        
+              
     }
     else if (indexPath.section ==8) {
         
@@ -328,9 +306,9 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        return CGSizeMake(kScreenSize.width , 90);
+        return CGSizeMake(kScreenSize.width , 80);
     }else {
-        return CGSizeMake(kScreenSize.width , 40);
+        return CGSizeMake(kScreenSize.width , 30);
     }
 }
 
@@ -344,7 +322,7 @@
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     
-    return 5;
+    return 4;
     
     
 }

@@ -13,6 +13,7 @@
 #import "ODAPIManager.h"
 #import "ODMyOrderCell.h"
 #import "ODOrderDetailController.h"
+#import "ODSecondOrderDetailController.h"
 @interface ODMyOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
@@ -37,10 +38,29 @@
     [self getData];
     [self createCollectionView];
 
+
     self.navigationItem.title = @"已购买订单";
     
     
 }
+
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if ([self.isRefresh isEqualToString:@"1"]) {
+        [self.collectionView.mj_header beginRefreshing];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    self.isRefresh = @"";
+}
+
+
+
 
 - (void)getData
 {
@@ -122,7 +142,7 @@
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -165,9 +185,51 @@
 {
     
       ODMyOrderModel *model = self.dataArray[indexPath.row];
-      ODOrderDetailController *vc = [[ODOrderDetailController alloc] init];
-      vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
-      [self.navigationController pushViewController:vc animated:YES];
+    
+    
+      NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
+    
+    
+    
+      
+    if ([swap_type isEqualToString:@"1"]) {
+        ODSecondOrderDetailController *vc = [[ODSecondOrderDetailController alloc] init];
+        vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
+        
+              
+        vc.orderType = model.status_str;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        __weakSelf
+        vc.getRefresh = ^(NSString *isRefresh){
+            
+            
+            weakSelf.isRefresh = isRefresh;
+        };
+        
+
+    }else{
+        
+        
+        ODOrderDetailController *vc = [[ODOrderDetailController alloc] init];
+        vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
+        vc.orderType = model.status_str;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        __weakSelf
+        vc.getRefresh = ^(NSString *isRefresh){
+            
+            
+            weakSelf.isRefresh = isRefresh;
+        };
+
+        
+    }
+    
+    
+    
+    
+    
     
     
 }
@@ -177,7 +239,11 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return CGSizeMake(kScreenSize.width , 180);
+
+   
+
+    return CGSizeMake(kScreenSize.width , 120);
+
     
     
     
@@ -186,7 +252,10 @@
 //动态设置每个分区的最小行间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 10;
+
+    return 6;
+
+  
 }
 
 

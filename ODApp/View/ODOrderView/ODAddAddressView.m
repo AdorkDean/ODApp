@@ -17,7 +17,8 @@
     
     view.userInteractionEnabled = YES;
     view.phoneTextField.keyboardType = UIKeyboardTypeNumberPad;
-   
+    view.addressTextView.scrollEnabled = YES;
+    
     return view;
     
     

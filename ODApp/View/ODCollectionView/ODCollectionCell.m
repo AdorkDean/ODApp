@@ -16,7 +16,7 @@
     
     
     self.userImageButton.layer.masksToBounds = YES;
-    self.userImageButton.layer.cornerRadius = 30;
+    self.userImageButton.layer.cornerRadius = 24;
     self.userImageButton.layer.borderColor = [UIColor clearColor].CGColor;
     self.userImageButton.layer.borderWidth = 1;
 
@@ -25,17 +25,13 @@
 }
 
 
-- (void)setModel:(ODLikeModel *)model
+
+-(void)setWithLikeModel:(ODLikeModel *)model
 {
-    if (_model != model) {
-        
-        _model = model;
-    }
-    
     
     [self.userImageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal];
     self.schoolLabel.text = model.school_name;
-    self.nameLabel.text = model.name;
+    self.nameLabel.text = model.nick;
     self.userImageButton.userInteractionEnabled = NO;
     NSString *gender = [NSString stringWithFormat:@"%@" , model.gender];
     if ([gender isEqualToString:@"0"]) {
@@ -44,13 +40,37 @@
         
     }else{
         
-          self.hisPictureView.image = [UIImage imageNamed:@"icon_man"];
+        self.hisPictureView.image = [UIImage imageNamed:@"icon_man"];
     }
     
-       
+    
+    
 }
 
 
+
+
+
+-(void)setWithApplyModel:(ODApplyModel *)model
+{
+    
+    [self.userImageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar_url] forState:UIControlStateNormal];
+    self.schoolLabel.text = model.nick;
+    self.nameLabel.text = model.sign;
+    self.userImageButton.userInteractionEnabled = NO;
+    NSString *gender = [NSString stringWithFormat:@"%@" , model.gender];
+    if ([gender isEqualToString:@"0"]) {
+        
+        self.hisPictureView.image = [UIImage imageNamed:@"icon_woman"];
+        
+    }else{
+        
+        self.hisPictureView.image = [UIImage imageNamed:@"icon_man"];
+    }
+
+    
+    
+}
 
 
 @end

@@ -24,7 +24,7 @@
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic, copy) NSString *tableViewReuseIdentifier;
 
-
+@property (nonatomic , copy) NSString *isAddress;
 
 
 
@@ -35,16 +35,55 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"联系地址";
-    self.view.userInteractionEnabled = YES;
+   
+  
     self.dataArray = [[NSMutableArray alloc] init];
     self.defaultArray = [[NSMutableArray alloc] init];
     self.tableViewReuseIdentifier = NSStringFromClass([UITableViewCell class]);
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
-   
+    [self navigationInit];
       [self getData];
+
    
+}
+
+-(void)navigationInit
+{
+    self.view.userInteractionEnabled = YES;
+    self.navigationItem.title = @"联系地址";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
+}
+
+- (void)backAction:(UIButton *)sender
+{
+    
+    if ([self.isAddress isEqualToString:@"1"]) {
+        __weakSelf
+        if (self.getAddressBlock) {
+            
+            
+            
+            weakSelf.getAddressBlock(@"" , @"" , @"1");
+        }
+        
+        
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+        
+    }else{
+        
+          [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+               
+    
+    
+    
+  
+        
+    
+    
+    
 }
 
 
@@ -74,25 +113,32 @@
             
             
             NSMutableDictionary *dic = responseObject[@"result"];
-          
-            for (NSMutableDictionary *miniDic in dic) {
-                NSString *is_default = [NSString stringWithFormat:@"%@" , miniDic[@"is_default"]];
+            NSMutableDictionary *mainDic = dic[@"def"];
+            NSMutableDictionary *otherDic = dic[@"list"];
+            
+            
+            
+            if (mainDic.count != 0) {
+                ODAddressModel *model = [[ODAddressModel alloc] init];
+                [model setValuesForKeysWithDictionary:mainDic];
+                [weakSelf.defaultArray addObject:model];
+
+            }
+         
+            
+            for (NSMutableDictionary *miniDic in otherDic) {
+             
                 
                 
-                if ([is_default isEqualToString:@"1"]) {
-                    ODAddressModel *model = [[ODAddressModel alloc] init];
-                    [model setValuesForKeysWithDictionary:miniDic];
-                    [weakSelf.defaultArray addObject:model];
-                }else{
-                    ODAddressModel *model = [[ODAddressModel alloc] init];
+                   ODAddressModel *model = [[ODAddressModel alloc] init];
                     [model setValuesForKeysWithDictionary:miniDic];
                     [weakSelf.dataArray addObject:model];
 
                 }
                 
-                
-                
-            }
+        
+        
+            
             
             
         }
@@ -118,7 +164,7 @@
     self.tableView.userInteractionEnabled = YES;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:@"ODAddressCell" bundle:nil] forCellReuseIdentifier:@"item"];
     
@@ -148,6 +194,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ODAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:@"item" forIndexPath:indexPath];
+    
+    
+   
+    
     
     if (indexPath.section == 0) {
         [cell.lineLabel removeFromSuperview];
@@ -183,11 +233,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    return 80;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    
+   
+    
+    
     if (section == 0) {
         if (self.defaultArray.count == 0) {
             return 0;
@@ -215,7 +269,7 @@
         
     }else
     {
-       return 20;
+       return 13;
         
     }
     }else
@@ -228,7 +282,7 @@
 {
     if (section == 0) {
         UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 0)];
-        view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+        view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         view.userInteractionEnabled = YES;
         return view;
 
@@ -323,7 +377,7 @@
             
        
             
-            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id]);
+            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id] , @"2");
         }
 
         [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -333,7 +387,7 @@
         __weakSelf
         ODAddressModel *model = self.dataArray[indexPath.row];
         if (self.getAddressBlock) {
-            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id]);
+            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id] , @"2");
         }
         
        [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -350,8 +404,27 @@
     
     [self.deleteManager GET:kDeleteAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-    [self getData];
-       
+        __weak typeof (self)weakSelf = self;
+          if ([responseObject[@"status"] isEqualToString:@"success"]) {
+              
+              if ([self.addressId isEqualToString:address_id]) {
+                  weakSelf.isAddress = @"1";
+              }else {
+                  weakSelf.isAddress = @"2";
+              }
+              
+              [weakSelf getData];
+
+              
+              
+          }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
+              
+              [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+          }
+
+        
+        
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

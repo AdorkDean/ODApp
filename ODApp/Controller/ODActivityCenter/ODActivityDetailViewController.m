@@ -21,6 +21,7 @@
 @interface ODActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate>
 {
     NSInteger bottonBtnHeight;
+    CGFloat webCellHeight;
 }
 @property (nonatomic, strong)UITableView *tableView;
 
@@ -180,6 +181,9 @@ static NSString * const activePersonCell = @"activePersonCell";
         cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
         [(ODActivityDetailInfoViewCell *)cell iconImgView].image = [UIImage imageNamed:@"icon_service address"];
         [(ODActivityDetailInfoViewCell *)cell detailInfoLabel ].text = self.resultModel.store_address;
+        
+        
+             
         [(ODActivityDetailInfoViewCell *)cell statusLabel].hidden = YES;
     }
     else if (indexPath.row == 4)//组织人
@@ -241,6 +245,18 @@ static NSString * const activePersonCell = @"activePersonCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    
+    if (indexPath.row == 3) {
+      
+            
+            NSLog(@"_____%@" , self.resultModel.store_address);
+            
+      
+    
+    }
+    
+    
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -270,11 +286,10 @@ static NSString * const activePersonCell = @"activePersonCell";
     }
     else if (indexPath.row == 5 + 3 + self.activityVIPs.count)
     {
-//        if (!detailCell) {
-//            detailCell = [tableView dequeueReusableCellWithIdentifier:detailContentCell];
-//        }
-//        [[detailCell contentWebView]loadHTMLString:self.resultModel.remark baseURL:nil];
-        return self.webView.od_height + 12.5;
+        return [[self.webView stringByEvaluatingJavaScriptFromString: @"document.body.scrollHeight"] floatValue];
+//        CGFloat heitgh = [self evaluateJSWithHtmlContent:self.webView htmlStr:self.resultModel.remark JSStr:@""];
+//        NSLog(@"%f",webCellHeight);
+//        return webCellHeight;
     }
     else if (indexPath.row == 5 + 4 + self.activityVIPs.count)
     {
@@ -284,15 +299,32 @@ static NSString * const activePersonCell = @"activePersonCell";
 }
 #pragma mark - WebViewDelegate
 UITableViewCell *detailCell;
+BOOL hasReload = NO;
 -(void)webViewDidFinishLoad:(UIWebView *)webView
 {
-//    detailCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 + self.activityVIPs.count inSection:0]];
+    detailCell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:8 + self.activityVIPs.count inSection:0]];
     CGFloat height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight"]floatValue];
     webView.od_height = height;
+    webCellHeight = height;
+
     [self tableView:self.tableView heightForRowAtIndexPath:[NSIndexPath indexPathForRow:8 + self.activityVIPs.count inSection:0]];
+    if (!hasReload && height)
+    {
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:8 + self.activityVIPs.count inSection:0]] withRowAnimation:(UITableViewRowAnimationNone)];
+        hasReload = YES;
+    }
     //关闭webView上下滑动
-    UIScrollView *tempView = (UIScrollView *)[webView.subviews objectAtIndex:0];
-    tempView.scrollEnabled = NO;
-    
+    webView.scrollView.scrollEnabled = NO;
+}
+- (CGFloat)evaluateJSWithHtmlContent:(UIWebView *)webView htmlStr:(NSString *)str JSStr:(NSString *)JSStr
+{
+    NSString *re = [NSString stringWithFormat:@"document.body.innerHTML=\"%@\";document.getElementsByName(\"answer\").style.display=\"none\"",str];
+    [webView stringByEvaluatingJavaScriptFromString:re];
+    [webView stringByEvaluatingJavaScriptFromString:JSStr];
+    float htmlHeight = [[webView stringByEvaluatingJavaScriptFromString:@"document.getElementById(\"AllContent\").scrollHeight"]floatValue];
+    webView.scrollView.contentSize = CGSizeMake(self.view.od_width, htmlHeight);
+    CGSize size = webView.scrollView.contentSize;
+    webView.frame = CGRectMake(17.5, 12.5, size.width - 17.5, size.width + 12.5);
+    return size.height + 25;
 }
 @end

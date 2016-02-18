@@ -16,7 +16,7 @@
 #import "DataButton.h"
 #import "TimeButton.h"
 #import "UIImageView+WebCache.h"
-
+#import "ODAddressModel.h"
 @interface ODOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UITextViewDelegate>
 
 @property(nonatomic,strong)UIButton *selectedButton;
@@ -26,12 +26,15 @@
 @property (nonatomic , strong) UILabel *allPriceLabel;
 @property (nonatomic ,strong) ODOrderHeadView *headView;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *orderManager;
+@property (nonatomic , strong) AFHTTPRequestOperationManager *addressManager;
 @property (nonatomic , strong) UIView *choseTimeView;
 @property (nonatomic , strong) UIScrollView *scroller;
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , strong) NSMutableArray *selectDataArray;
+@property (nonatomic , strong) NSMutableArray *addressArray;
 @property (nonatomic , copy) NSString *openId;
 @property (nonatomic ,copy) NSString *addressId;
+
 
 @end
 
@@ -41,14 +44,17 @@
 {
     [super viewDidLoad];
     
+    
     self.openId = [ODUserInformation sharedODUserInformation].openID;
-    
-    
-    [self getData];
-    
     self.dataArray = [[NSMutableArray alloc] init];
     self.selectDataArray = [[NSMutableArray alloc] init];
+    self.addressArray = [[NSMutableArray alloc] init];
     self.navigationItem.title = @"提交订单";
+
+    
+    [self getData];
+    [self getAddress];
+    
     [self createCollectionView];
 }
 
@@ -60,9 +66,60 @@
 
 
 
+- (void)getAddress
+{
+    self.addressManager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"open_id":self.openId};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    __weak typeof (self)weakSelf = self;
+    [self.addressManager GET:kGetAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
+            
+         
+            [weakSelf.addressArray removeAllObjects];
+            
+            
+            NSMutableDictionary *dic = responseObject[@"result"];
+            
+            NSMutableDictionary *addressDic = dic[@"def"];
+            
+            
+            if (addressDic.count != 0) {
+                ODAddressModel *model = [[ODAddressModel alloc] init];
+                [model setValuesForKeysWithDictionary:addressDic];
+                [weakSelf.addressArray addObject:model];
+
+            }
+          
+            
+          
+            
+            
+            
+        }
+        
+      
+        [weakSelf.collectionView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        
+        
+    }];
+
+}
+
 - (void)getData
 {
     self.manager = [AFHTTPRequestOperationManager manager];
+    
+    
     
     NSDictionary *parameters = @{@"swap_id":[NSString stringWithFormat:@"%@" , self.informationModel.swap_id]};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
@@ -74,6 +131,8 @@
         
         if (responseObject) {
             NSMutableDictionary *dic = responseObject[@"result"];
+            
+            
             
             
             for (NSMutableDictionary *miniDic in dic) {
@@ -101,8 +160,8 @@
 -(void)createCollectionView
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width,kScreenSize.height - 115) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width,kScreenSize.height - 120) collectionViewLayout:self.flowLayout];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[ODOrderHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
@@ -111,34 +170,30 @@
     [self.view addSubview:self.collectionView];
     
     
-    UIImageView *amountImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 50 - ODNavigationHeight, kScreenSize.width - 100, 50)];
+    UIImageView *amountImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 56 - ODNavigationHeight, kScreenSize.width - 100, 56)];
     amountImageView.backgroundColor = [UIColor whiteColor];
     
-    
-    
-    
-    
-    UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10,90, 30)];
+    UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, 18,70, 20)];
     priceLabel.text = @"订单金额：";
+    priceLabel.font = [UIFont systemFontOfSize:13];
     priceLabel.backgroundColor = [UIColor whiteColor];
     [amountImageView addSubview:priceLabel];
     
     
-    self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 10, amountImageView.frame.size.width - 110, 30)];
+    self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(88, 18, amountImageView.frame.size.width - 130, 20)];
     self.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , self.informationModel.price];
     self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
-    self.allPriceLabel.textColor = [UIColor redColor];
+    self.allPriceLabel.font = [UIFont systemFontOfSize:15];
+    self.allPriceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     [amountImageView addSubview:self.allPriceLabel];
     [self.view addSubview:amountImageView];
     
     
-    
-    
-    
     UIButton *saveOrderButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    saveOrderButton.frame = CGRectMake(kScreenSize.width - 100, kScreenSize.height - 50 - ODNavigationHeight, 100, 50);
+    saveOrderButton.frame = CGRectMake(kScreenSize.width - 100, kScreenSize.height - 56 - ODNavigationHeight, 100, 56);
     saveOrderButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     [saveOrderButton setTitle:@"提交订单" forState:UIControlStateNormal];
+    saveOrderButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [saveOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [saveOrderButton addTarget:self action:@selector(saveOrderAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:saveOrderButton];
@@ -241,6 +296,28 @@
     [self.headView.orderView.choseTimeView addGestureRecognizer:timeTap];
     
     
+    NSString *type = [NSString stringWithFormat:@"%@" , self.informationModel.swap_type];
+    if ([type isEqualToString:@"1"]) {
+        
+        
+        self.headView.orderView.typeLabel.text = @"上门服务";
+        
+    }else{
+        self.headView.orderView.typeLabel.text = @"线上服务";
+    }
+    
+    if (self.addressArray.count == 0) {
+        self.headView.orderView.addressLabel.text = @"联系地址";
+    }else{
+        ODAddressModel *model = self.addressArray[0];
+         self.headView.orderView.addressLabel.text = model.address;
+        self.addressId = [NSString stringWithFormat:@"%@" , model.id];
+        
+      
+    }
+
+   
+    
     self.headView.orderView.messageTextView.delegate = self;
     
     
@@ -253,7 +330,7 @@
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
     if (textView == self.headView.orderView.messageTextView) {
-        if ([textView.text isEqualToString:NSLocalizedString(@"给他留言", nil)]) {
+        if ([textView.text isEqualToString:NSLocalizedString(@"给ta留言", nil)]) {
             self.headView.orderView.messageTextView.text=NSLocalizedString(@"", nil);
              self.headView.orderView.messageTextView.textColor = [UIColor blackColor];
         }
@@ -264,15 +341,16 @@
     }
 }
 
-NSString *message = @"";
+
 
 - (void)textViewDidChange:(UITextView *)textView
 {
+    NSString *message = @"";
     if (textView == self.headView.orderView.messageTextView)
     {
         if (textView.text.length > 20)
         {
-            textView.text = message;
+            textView.text =[textView.text substringToIndex:20];
         }
         else
         {
@@ -280,34 +358,6 @@ NSString *message = @"";
         }
     }
   
-}
-
-
-
-
--(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
-    
-    if (textView == self.headView.orderView.messageTextView) {
-        
-        if (text.length == 0) return YES;
-        
-        NSInteger existedLength = textView.text.length;
-        NSInteger selectedLength = range.length;
-        NSInteger replaceLength = text.length;
-        if (existedLength - selectedLength + replaceLength > 20) {
-            return NO;
-        }
-        
-        if ([text isEqualToString:@"\n"]) {
-            [textView resignFirstResponder];
-            return NO;
-            
-        }
-    }
-    
-    
-    return YES;
 }
 
 
@@ -329,7 +379,7 @@ NSString *message = @"";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return CGSizeMake(kScreenSize.width , 200);
+    return CGSizeMake(kScreenSize.width , 160);
     
     
     
@@ -337,7 +387,7 @@ NSString *message = @"";
 //动态设置区头的高度(根据不同的分区)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(kScreenSize.width, 200);
+    return CGSizeMake(kScreenSize.width, 220);
     
 }
 
@@ -445,7 +495,7 @@ NSString *message = @"";
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+            button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         }
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
         [ self.choseTimeView addSubview:button];
@@ -461,7 +511,7 @@ NSString *message = @"";
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-          button.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+          button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         }
         
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
@@ -478,7 +528,7 @@ NSString *message = @"";
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-           button.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+           button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         }
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
         [ self.choseTimeView addSubview:button];
@@ -491,7 +541,7 @@ NSString *message = @"";
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-           button.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+           button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         }
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
         
@@ -514,12 +564,20 @@ NSString *message = @"";
     ODContactAddressController *vc = [[ODContactAddressController alloc] init];
     
     __weakSelf
-    vc.getAddressBlock = ^(NSString *address , NSString *addrssId){
+    vc.getAddressBlock = ^(NSString *address , NSString *addrssId , NSString *isAddress ){
         
-        weakSelf.headView.orderView.addressLabel.text = address;
-        weakSelf.addressId = addrssId;
+        if ([isAddress isEqualToString:@"1"]) {
+            weakSelf.headView.orderView.addressLabel.text = @"联系地址";
+            weakSelf.addressId = nil;
+        }else{
+            weakSelf.headView.orderView.addressLabel.text = address;
+            weakSelf.addressId = addrssId;
+            
+        }
+        
     };
     
+    vc.addressId = self.addressId;
     
     [self.navigationController pushViewController:vc animated:YES];
     

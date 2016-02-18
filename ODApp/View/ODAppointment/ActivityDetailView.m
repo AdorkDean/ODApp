@@ -15,7 +15,7 @@
     ActivityDetailView *view =  [[[NSBundle mainBundle] loadNibNamed:@"ActivityDetailView" owner:nil options:nil] firstObject];
     
     
-   view.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+   view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     
     if (iPhone4_4S) {
        view.imageHight.constant = 200;

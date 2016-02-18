@@ -22,7 +22,6 @@
 
 + (void)initialize
 {
-    
     [ODActivityDetailModel mj_setupObjectClassInArray:^NSDictionary *{
         return @{
                  @"savants" :[ODActivityDetailVIPModel class],

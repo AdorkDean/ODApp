@@ -26,6 +26,7 @@
 @property(nonatomic,strong)UIView *picView;
 @property(nonatomic,strong)UIView *bottomView;
 @property(nonatomic,strong)UIView *timeView;
+
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,copy)NSString *avatar;

@@ -224,7 +224,7 @@
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,55, kScreenSize.width,kScreenSize.height-64-95-55) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarCellId];
     [self.view addSubview:self.collectionView];
 }

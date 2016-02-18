@@ -8,12 +8,14 @@
 
 #import "ODHomeFoundViewController.h"
 #import "ODUserInformation.h"
-
+#import "ODHomeInfoModel.h"
 
 #define cellID @"ODBazaarExchangeSkillCollectionCell"
 @interface ODHomeFoundViewController ()
 {
     NSMutableDictionary *userInfoDic;
+    AMapSearchAPI *_search;
+    MAMapView *_mapView;
 }
 @end
 
@@ -22,15 +24,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    __weakSelf
     self.navigationItem.title = @"首页";
     
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:self.locationButton.titleLabel.text];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     self.pictureArray = [[NSMutableArray alloc] init];
-    self.titleArray = [[NSMutableArray alloc] init];
-    self.pictureDetailArray = [[NSMutableArray alloc] init];
+
     self.dataArray = [[NSMutableArray alloc] init];
     userInfoDic = [NSMutableDictionary dictionary];
     
@@ -38,23 +39,43 @@
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self refreshdata];
+        [weakSelf refreshdata];
         
     }];
     
+        [MAMapServices sharedServices].apiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
+        _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
+        _mapView.delegate = self;
+        _mapView.showsUserLocation = YES;
+        [_mapView setZoomLevel:20 animated:YES];
+    
+        //配置用户Key
+        [AMapSearchServices sharedServices].apiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
+        //初始化检索对象
+        _search = [[AMapSearchAPI alloc] init];
+        _search.delegate = self;
+    
 }
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-////    [self getSkillChangeRequest];
-//}
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+
+    [self locationCity];
+}
+
+- (void)locationCity
+{
+
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
+}
 
 - (void)refreshdata
 {
     
     [self getSkillChangeRequest];
 }
+
 
 -(NSMutableArray *)mySort:(NSMutableArray *)mArray
 {
@@ -85,65 +106,45 @@
 }
 
 #pragma mark - Request Data
-
 // Hot Activity
 - (void)getScrollViewRequest
 {
-    
-    self.managers = [AFHTTPRequestOperationManager manager];
-    self.managers.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-    NSDictionary *parameter = @{@"position":@"3",@"store_id":@"1"};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weak typeof (self)weakSelf = self;
-    [self.managers GET:kHomeFoundPictureUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        if (responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            [weakSelf.pictureArray removeAllObjects];
-            [weakSelf.titleArray removeAllObjects];
-            [weakSelf.pictureDetailArray removeAllObjects];
-            
-            NSMutableArray *result = dict[@"result"];
-            
-            for (NSDictionary *itemDict in result) {
-                
-                NSString *img_url = itemDict[@"img_url"];
-                NSString *banner_url = itemDict[@"banner_url"];
-                NSString *title = itemDict[@"title"];
-                
-                [weakSelf.titleArray addObject:title];
-                [weakSelf.pictureArray addObject:img_url];
-                [weakSelf.pictureDetailArray addObject:banner_url];
-            }
-            [weakSelf.collectionView reloadData];
-            [weakSelf.collectionView.mj_header endRefreshing];
-        }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [weakSelf.collectionView.mj_header endRefreshing];
+    NSDictionary *parameter = @{@"city_id":@"0"};
+    __weakSelf
+    [ODHttpTool getWithURL:ODHomeFoundUrl parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model)
+    {
+        weakSelf.pictureArray = [[[model result]activitys]valueForKeyPath:@"detail_md5"];
+        weakSelf.pictureIdArray = [[[model result]activitys] valueForKeyPath:@"id"];
+        [weakSelf.collectionView reloadData];
+    }
+                   failure:^(NSError *error)
+     {
         
     }];
 }
 
 // Skill Change
+
+
+
 - (void)getSkillChangeRequest
+
 {
     
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    NSDictionary *parameter = @{@"city_id":@"0",@"page":@"1"};
+    NSDictionary *parameter = @{@"city_id":@"0"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:kBazaarExchangeSkillUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [self.manager GET:ODHomeChangeSkillUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSArray *result = dict[@"result"];
-            for (NSDictionary *itemDict in result) {
+            NSDictionary *result = dict[@"result"];
+            NSArray *swaps = result[@"swaps"];
+            for (NSDictionary *itemDict in swaps) {
                 ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
@@ -206,7 +207,8 @@
 - (void)findJobButtonClick:(UIButton *)button
 {
     
-    
+    ODFindJobController *vc = [[ODFindJobController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)searchCircleButtonClick:(UIButton *)button
@@ -219,12 +221,14 @@
 {
     
     self.tabBarController.selectedIndex = 2;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationSearchHelp object:nil];
 }
 
 - (void)changeSkillButtonClick:(UIButton *)button
 {
     
-    
+    self.tabBarController.selectedIndex = 2;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationChangeSkill object:nil];
 }
 
 - (void)moreButtonClick:(UIButton *)button
@@ -237,10 +241,10 @@
 - (void)imageButtonClick:(UIButton *)button
 {
 
-    ODCenterIntroduceController *vc = [[ODCenterIntroduceController alloc] init];
+    ODNewActivityDetailViewController *vc = [[ODNewActivityDetailViewController alloc] init];
     
-    vc.activityTitle = self.titleArray[button.tag - 100];
-    vc.webUrl = self.pictureDetailArray[button.tag - 100];
+    
+    vc.acitityId = [self.pictureIdArray[button.tag - 100] intValue];
     
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -249,49 +253,49 @@
 - (void)emotionButtonClick:(UIButton *)button
 {
     
-    
+    self.tabBarController.selectedIndex = 3;
 }
 
 - (void)funnyButtonClick:(UIButton *)button
 {
     
-    
+    self.tabBarController.selectedIndex = 3;
 }
 
 - (void)moviesButtonClick:(UIButton *)button
 {
     
-    
+    self.tabBarController.selectedIndex = 3;
 }
 
 - (void)quadraticButtonClick:(UIButton *)button
 {
     
-    
+    self.tabBarController.selectedIndex = 3;
 }
 
 - (void)lifeButtonClick:(UIButton *)button
 {
     
-    
+    self.tabBarController.selectedIndex = 3;
 }
 
 - (void)starButtonClick:(UIButton *)button
 {
     
-    
+    self.tabBarController.selectedIndex = 3;
 }
 
 - (void)beautifulButtonClick:(UIButton *)button
 {
     
-    
+    self.tabBarController.selectedIndex = 3;
 }
 
 - (void)petButtonClick:(UIButton *)button
 {
     
-    
+    self.tabBarController.selectedIndex = 3;
 }
 
 - (void)gestureButtonClick:(UIButton *)button
@@ -343,7 +347,7 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
     
     [self.view addSubview:self.collectionView];
@@ -454,7 +458,7 @@
             }else{
                 imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 2/3 * i, 0, (kScreenSize.width - 15) * 2/3, 120)];
             }
-            [imageButton sd_setBackgroundImageWithURL:[NSURL URLWithString:self.pictureArray[i]] forState:UIControlStateNormal];
+            [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.pictureArray[i]] forState:UIControlStateNormal];
             
             imageButton.tag = 100 + i;
             [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -477,7 +481,7 @@
         [self.rsusableView.moviesButton addTarget:self action:@selector(moviesButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.rsusableView.quadraticButton addTarget:self action:@selector(quadraticButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.rsusableView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.rsusableView.starButton addTarget:self action:@selector(starButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.rsusableView.beautifulButton addTarget:self action:@selector(beautifulButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.rsusableView.petButton addTarget:self action:@selector(petButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -526,7 +530,82 @@
     return CGSizeMake(0, 42);
 }
 
+//地图定位成功回调
+-(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
+updatingLocation:(BOOL)updatingLocation{
+    if (updatingLocation) {
+        _mapView.showsUserLocation = NO;
+        [_mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
 
+        //构造AMapReGeocodeSearchRequest对象
+        AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
+        regeo.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
+        regeo.radius = 10000;
+        regeo.requireExtension = YES;
+
+        //发起逆地理编码
+        [_search AMapReGoecodeSearch: regeo];
+
+        //构造AMapPOIAroundSearchRequest对象，设置周边请求参数
+        AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
+        request.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
+
+        // types属性表示限定搜索POI的类别，默认为：餐饮服务|商务住宅|生活服务
+        // POI的类型共分为20种大类别，分别为：
+        // 汽车服务|汽车销售|汽车维修|摩托车服务|餐饮服务|购物服务|生活服务|体育休闲服务|
+        // 医疗保健服务|住宿服务|风景名胜|商务住宅|政府机构及社会团体|科教文化服务|
+        // 交通设施服务|金融保险服务|公司企业|道路附属设施|地名地址信息|公共设施
+        request.keywords = @"";
+        request.types = @"";
+        request.sortrule = 0;
+        request.requireExtension = YES;
+
+        //发起周边搜索
+        [_search AMapPOIAroundSearch: request];
+    }
+}
+
+//实现POI搜索对应的回调函数
+- (void)onPOISearchDone:(AMapPOIAroundSearchRequest *)request response:(AMapPOISearchResponse *)response
+{
+    if(response.pois.count == 0)
+    {
+        return;
+    }
+    //通过 AMapPOISearchResponse 对象处理搜索结果
+    for (AMapPOI *p in response.pois) {
+        NSString *strPoi = [NSString stringWithFormat:@"%@", p.name];
+
+        NSLog(@"strPoi ->____%@" , strPoi);
+    }
+}
+
+//实现逆地理编码的回调函数
+- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
+{
+    if(response.regeocode != nil)
+    {
+        //通过AMapReGeocodeSearchResponse对象处理搜索结果
+        NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
+        if (result.length == 0) {
+            result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
+        }
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",result] message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [ODUserInformation sharedODUserInformation].locationCity = result;
+            [self locationCity];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+            [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
+            [self locationCity];
+        }]];
+
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
 
 
 @end
