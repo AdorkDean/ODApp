@@ -144,32 +144,14 @@
         
         [cell.buyButton addTarget:self action:@selector(alreadyBuyAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        [cell.releaseButton addTarget:self action:@selector(releaseAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [cell.collectionButton addTarget:self action:@selector(releaseAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
-        
-        return cell;
-        
-
-    }else if (indexPath.section == 1) {
-        
-        ODLandThirdCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"third" forIndexPath:indexPath];
-        
-        [cell.buyButton addTarget:self action:@selector(alreadyBuyAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [cell.releaseButton addTarget:self action:@selector(releaseAction:) forControlEvents:UIControlEventTouchUpInside];
-
         [cell.collectionButton addTarget:self action:@selector(collectionAction:) forControlEvents:UIControlEventTouchUpInside];
-
+        
         
         
         return cell;
         
     }
     
-
     
     else{
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
@@ -217,19 +199,10 @@
     
 }
 
-- (void)releaseAction:(UIButton *)sender
+- (void)collectionAction:(UIButton *)button
 {
-    
-    ODReleaseController *vc = [[ODReleaseController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES]; 
-}
-
-- (void)collectionAction:(UIButton *)sender
-{
-    
-
-    
-    
+    ODPersonalCenterCollectionViewController *collection = [[ODPersonalCenterCollectionViewController alloc]init];
+    [self.navigationController pushViewController:collection animated:YES];
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView

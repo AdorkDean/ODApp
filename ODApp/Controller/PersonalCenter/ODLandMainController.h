@@ -8,7 +8,7 @@
 
 #import "ODBaseViewController.h"
 
-#import "ODReleaseController.h"
+#import "ODPersonalCenterCollectionViewController.h"
 
 @interface ODLandMainController : ODBaseViewController
 
