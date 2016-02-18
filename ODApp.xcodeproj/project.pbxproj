@@ -1582,14 +1582,14 @@
 		D4D070D21C59B9FA008527C9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				9DEDCF271C64B3ED003015C6 /* Bazaar */,
-				D4F76D871C61AE8C00D59F02 /* ODOrderController */,
 				D4D0754E1C59C41F008527C9 /* NavigationController */,
 				D4D0713B1C59B9FA008527C9 /* TabBarController */,
 				D4D071061C59B9FA008527C9 /* HomeFound */,
+				9DEDCF271C64B3ED003015C6 /* Bazaar */,
 				D4D070D31C59B9FA008527C9 /* BaseViewController */,
 				D46C902A1C6041B4004942E7 /* ODActivityCenter */,
 				D4D070E81C59B9FA008527C9 /* CenterActivity */,
+				D4F76D871C61AE8C00D59F02 /* ODOrderController */,
 				D4D070F51C59B9FA008527C9 /* Community */,
 				D4D071101C59B9FA008527C9 /* PersonalCenter */,
 			);
