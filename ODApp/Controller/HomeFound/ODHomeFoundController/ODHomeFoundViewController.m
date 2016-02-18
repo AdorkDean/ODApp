@@ -236,6 +236,7 @@
     self.tabBarController.selectedIndex = 2;
     ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     vc.index = 1;
+    [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationShowBazaar object:nil];
 }
 
 - (void)changeSkillButtonClick:(UIButton *)button

@@ -146,7 +146,7 @@
         
         [cell.releaseButton addTarget:self action:@selector(releaseAction:) forControlEvents:UIControlEventTouchUpInside];
 
-        [cell.collectionButton addTarget:self action:@selector(releaseAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.collectionButton addTarget:self action:@selector(collectionAction:) forControlEvents:UIControlEventTouchUpInside];
 
         
         
@@ -197,6 +197,21 @@
     
     ODMyOrderController *vc = [[ODMyOrderController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
+    
+    
+}
+
+- (void)releaseAction:(UIButton *)sender
+{
+    
+    ODReleaseController *vc = [[ODReleaseController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES]; 
+}
+
+- (void)collectionAction:(UIButton *)sender
+{
+    
+
     
     
 }
