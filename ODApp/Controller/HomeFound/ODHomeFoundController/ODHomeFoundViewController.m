@@ -39,6 +39,8 @@
     
     userInfoDic = [NSMutableDictionary dictionary];
     
+    [self getLocationCityRequest];
+    
     [self createCollectionView];
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
@@ -603,19 +605,30 @@ updatingLocation:(BOOL)updatingLocation{
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             [ODUserInformation sharedODUserInformation].locationCity = result;
+            
+            
+            NSLog(@"_____%@" , result);
+            
+            
+            for (NSDictionary *cityInformation in self.cityListArray) {
+                
+                
+                NSString *cityName = [NSString stringWithFormat:@"%@市",cityInformation[@"name"]];
+                
+                
+                if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityName]) {
+                    [ODUserInformation sharedODUserInformation].cityID = [cityInformation[@"id"] integerValue];
+                }
+                
+                
+            }
             [self locationCity];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
-            [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
+            [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"上海"];
 
-            for (NSDictionary *cityInformation in self.cityListArray) {
-                for (NSString *cityName in [cityInformation allValues]) {
-                    if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityName]) {
-                        [ODUserInformation sharedODUserInformation].cityID = [cityInformation[@"id"] integerValue];
-                    }
-                }
-            }
+            
             
             [self locationCity];
         }]];
@@ -631,7 +644,7 @@ updatingLocation:(BOOL)updatingLocation{
     [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
         
         ODLocationModel *mode = [model result];
-        self.cityListArray = [mode.all valueForKeyPath:@"name"];
+        self.cityListArray = mode.all;
         self.cityIdArray = [mode.all valueForKey:@"id"];
         [self.collectionView reloadData];
         
