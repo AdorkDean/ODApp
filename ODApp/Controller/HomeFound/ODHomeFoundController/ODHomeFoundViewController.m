@@ -333,6 +333,8 @@
 {
 
     self.tabBarController.selectedIndex = 2;
+    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
+    vc.index = 0;
 }
 
 #pragma mark - CreateUICollectionView
