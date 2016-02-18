@@ -24,9 +24,10 @@
 #import "ODCenterDetailController.h"
 #import "ODApplyListViewController.h"
 
-@interface ODNewActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,UMSocialUIDelegate,ODPersonalCenterVCDelegate>
+@interface ODNewActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,UMSocialUIDelegate,ODPersonalCenterVCDelegate ,UMSocialDataDelegate>
 {
     BOOL hasload;
+    NSInteger sharedTimes;
     UIView *activePeopleLineView;
 }
 
@@ -299,6 +300,11 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     self.view.backgroundColor = [UIColor whiteColor];
     self.view.userInteractionEnabled = YES;
     self.navigationItem.title = @"活动详情";
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(share:) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
+
+    
+    
     [self requestData];
 }
 
@@ -489,7 +495,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         [self.bottomButtonView addLineOnBottom];
         hasload = YES;
     }
-
+    sharedTimes = self.resultModel.share_cnt;
     [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %d",self.resultModel.share_cnt] forState:UIControlStateNormal];
     [[self.bottomButtonView goodBtn]setTitle:[NSString stringWithFormat:@"赞 %d",self.resultModel.love_cnt] forState:UIControlStateNormal];
     self.baseScrollV.contentSize = CGSizeMake(0, CGRectGetMaxY(self.bottomButtonView.frame));
@@ -531,6 +537,10 @@ static NSString * const detailInfoCell = @"detailInfoCell";
                                      shareImage:nil
                                 shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
                                        delegate:self];
+    
+    
+    
+    
 
 }
 
@@ -569,5 +579,31 @@ static NSString * const detailInfoCell = @"detailInfoCell";
          
      }];
 }
+
+
+-(void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response
+{
+   
+    if(response.responseCode == UMSResponseCodeSuccess)
+    {
+        sharedTimes ++;
+       [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %d",sharedTimes] forState:UIControlStateNormal];
+        
+        
+        NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"obj_id",@"4" ,@"type",@"微信",@"share_platform", nil];
+        [ODHttpTool getWithURL:kCallbackUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
+         {
+            [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+             
+         }
+                       failure:^(NSError *error)
+         {
+             
+         }];
+
+        
+    }
+}
+
 
 @end
