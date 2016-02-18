@@ -121,7 +121,7 @@
     [self.scrollView addSubview:detailView];
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, kScreenSize.width, 20)];
-    titleLabel.text = [NSString stringWithFormat:@"我去 · %@",model.title];
+    titleLabel.text = [NSString stringWithFormat:@"我去 %@",model.title];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [detailView addSubview:titleLabel];
     

@@ -77,23 +77,21 @@
     }
 }
 
-- (void)setIndex:(NSInteger)index
+- (void)reciveNotification
 {
-    CGPoint point = CGPointMake(KScreenWidth * index, 0);
-    NSInteger i = point.x / self.view.frame.size.width;
-    _index = i;
-    self.lineView.frame = CGRectMake((kScreenSize.width/2)*i, 38, kScreenSize.width/2, 2);
-    [self.view addSubview:self.lineView];
-    [self.scrollView setContentOffset:point animated:YES];}
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(searchHelp) name:ODNotificationSearchHelp object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeSkill) name:ODNotificationChangeSkill object:nil];
+}
 
 -(void)changeController:(UIButton *)button
 {
-    self.index = button.tag-10010;
-}
-
-- (void)selectChildViewww:(NSInteger)index
-{
-
+    CGPoint point = CGPointMake(kScreenSize.width*(button.tag-10010), 0);
+    NSInteger i = point.x / self.view.frame.size.width;
+    self.index = i;
+    self.lineView.frame = CGRectMake((kScreenSize.width/2)*i, 38, kScreenSize.width/2, 2);
+    [self.view addSubview:self.lineView];
+    [self.scrollView setContentOffset:point animated:YES];
 }
 
 -(void)createScrollView
@@ -127,6 +125,8 @@
         return;
     NSInteger i = scrollView.contentOffset.x / self.view.frame.size.width;
     self.index = i;
+    self.lineView.frame = CGRectMake((kScreenSize.width/2)*i, 38, kScreenSize.width/2, 2);
+    [self.view addSubview:self.lineView];
 }
 
 
