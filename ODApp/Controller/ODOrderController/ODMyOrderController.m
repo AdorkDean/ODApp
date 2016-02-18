@@ -195,6 +195,8 @@
     if ([swap_type isEqualToString:@"1"]) {
         ODSecondOrderDetailController *vc = [[ODSecondOrderDetailController alloc] init];
         vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
+        
+              
         vc.orderType = model.status_str;
         [self.navigationController pushViewController:vc animated:YES];
         
