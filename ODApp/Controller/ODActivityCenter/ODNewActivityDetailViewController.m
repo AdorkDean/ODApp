@@ -27,7 +27,9 @@
 @interface ODNewActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,UMSocialUIDelegate,ODPersonalCenterVCDelegate>
 {
     BOOL hasload;
+    UIView *activePeopleLineView;
 }
+
 /**
  *  活动嘉宾
  */
@@ -215,6 +217,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         view.userInteractionEnabled = YES;
         UITapGestureRecognizer *applyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(applyAction)];
         [view addGestureRecognizer:applyTap];
+        activePeopleLineView = [view addLineFromPoint:CGPointMake(- ODLeftMargin, view.od_height)];
         [self.baseScrollV addSubview:view];
         _activePeopleView = view;
     }
@@ -354,10 +357,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
             weakSelf.peopleNumLabel.od_height = 0;
             weakSelf.activePeopleView.od_height = 0;
         }
-        if (!hasload)
-        {
-            [weakSelf.activePeopleView addLineFromPoint:CGPointMake(- ODLeftMargin, weakSelf.activePeopleView.od_height)];
-        }
+        activePeopleLineView.od_y = weakSelf.activePeopleView.od_height - .5;
         weakSelf.activeContentLabel.od_y = CGRectGetMaxY(weakSelf.activePeopleView.frame);
 
         weakSelf.webView.od_y = CGRectGetMaxY(weakSelf.activeContentLabel.frame) + 12.5;
