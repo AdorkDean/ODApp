@@ -104,6 +104,7 @@ UIKIT_EXTERN NSString * const kGetCommentUrl;
 UIKIT_EXTERN NSString * const kCreateOrderUrl;
 UIKIT_EXTERN NSString * const kGetStoreTimeUrl;
 UIKIT_EXTERN NSString * const kGetApplyListUrl;
+UIKIT_EXTERN NSString * const kGiveOpinionUrl;
 
 UIKIT_EXTERN NSString * const kGetUMAppkey;
 UIKIT_EXTERN NSString * const kGetWXAppId;

@@ -13,6 +13,7 @@
 		9D205C7A1C71733700B6499B /* ODOrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D205C791C71733700B6499B /* ODOrderDetailView.xib */; };
 		9D205C7C1C7173B500B6499B /* ODMyOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D205C7B1C7173B500B6499B /* ODMyOrderCell.xib */; };
 		9DBF7EE31C7576220085875E /* ODLandThirdCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EE21C7576220085875E /* ODLandThirdCell.m */; };
+		9DBF7EE71C7595A30085875E /* ODGiveOpinionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EE61C7595A30085875E /* ODGiveOpinionController.m */; };
 		9DD00BDB1C4E397E00F0EE5F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDA1C4E397E00F0EE5F /* Security.framework */; };
 		9DD00BDD1C4E398B00F0EE5F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */; };
 		9DD00BDF1C4E399700F0EE5F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */; };
@@ -298,6 +299,8 @@
 		9D205C7B1C7173B500B6499B /* ODMyOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyOrderCell.xib; sourceTree = "<group>"; };
 		9DBF7EE11C7576220085875E /* ODLandThirdCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLandThirdCell.h; sourceTree = "<group>"; };
 		9DBF7EE21C7576220085875E /* ODLandThirdCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLandThirdCell.m; sourceTree = "<group>"; };
+		9DBF7EE51C7595A30085875E /* ODGiveOpinionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODGiveOpinionController.h; sourceTree = "<group>"; };
+		9DBF7EE61C7595A30085875E /* ODGiveOpinionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODGiveOpinionController.m; sourceTree = "<group>"; };
 		9DD00BDA1C4E397E00F0EE5F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -820,6 +823,15 @@
 				E37DA2622F302C063AEA7DF4 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		9DBF7EE41C7595860085875E /* ODGiveOpinion */ = {
+			isa = PBXGroup;
+			children = (
+				9DBF7EE51C7595A30085875E /* ODGiveOpinionController.h */,
+				9DBF7EE61C7595A30085875E /* ODGiveOpinionController.m */,
+			);
+			path = ODGiveOpinion;
 			sourceTree = "<group>";
 		};
 		9DEDCF271C64B3ED003015C6 /* Bazaar */ = {
@@ -1712,6 +1724,7 @@
 		D4D071101C59B9FA008527C9 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				9DBF7EE41C7595860085875E /* ODGiveOpinion */,
 				C642732A1C5A0D0200C38A85 /* ODPersonalCenter */,
 				C64273331C5A111F00C38A85 /* ODUserInformation */,
 				C642732D1C5A0ECE00C38A85 /* ODUserEnter */,
@@ -2466,6 +2479,7 @@
 				9DEDCF421C64B3ED003015C6 /* ODBazaarDetailViewController.m in Sources */,
 				D4D075271C59B9FA008527C9 /* ODMyOrderRecordCell.m in Sources */,
 				D4D073801C59B9FA008527C9 /* ODCommumityViewController.m in Sources */,
+				9DBF7EE71C7595A30085875E /* ODGiveOpinionController.m in Sources */,
 				D4D073761C59B9FA008527C9 /* ODActivityDetailController.m in Sources */,
 				D4D075291C59B9FA008527C9 /* ODTabBar.m in Sources */,
 				D4D0736E1C59B9FA008527C9 /* ODBaseViewController.m in Sources */,
