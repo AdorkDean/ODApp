@@ -228,7 +228,7 @@
 #pragma mark - 初始化datePickerView
 -(void)setUpDatePickerView
 {
-    self.backPickerView = [ODClassMethod creatViewWithFrame:CGRectMake(4, kScreenSize.height-200, kScreenSize.width-8, 200) tag:0 color:@"f3f3f3"];
+    self.backPickerView = [ODClassMethod creatViewWithFrame:CGRectMake(4, kScreenSize.height-200-64, kScreenSize.width-8, 200) tag:0 color:@"f3f3f3"];
     [self.view addSubview:self.backPickerView];
     
     //显示中文
