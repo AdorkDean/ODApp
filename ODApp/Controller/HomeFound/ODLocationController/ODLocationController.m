@@ -27,22 +27,9 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     self.navigationItem.title = @"选择城市";
     
     self.cityListArray = [[NSMutableArray alloc] init];
-    
+    self.cityIdArray = [[NSMutableArray alloc] init];
     [self createCollectionView];
     [self getCityListRequest];
-    
-//    [MAMapServices sharedServices].apiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
-//    _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
-//    _mapView.delegate = self;
-//    _mapView.showsUserLocation = YES;
-//    [_mapView setZoomLevel:20 animated:YES];
-//    [self.view addSubview:_mapView];
-//    
-//    //配置用户Key
-//    [AMapSearchServices sharedServices].apiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
-//    //初始化检索对象
-//    _search = [[AMapSearchAPI alloc] init];
-//    _search.delegate = self;
     
 }
 
@@ -54,7 +41,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
         
         ODLocationModel *mode = [model result];
         self.cityListArray = [mode.all valueForKeyPath:@"name"];
-
+        self.cityIdArray = [mode.all valueForKey:@"id"];
         [self.collectionView reloadData];
         
     } failure:^(NSError *error) {
@@ -91,8 +78,6 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     cell.cityNameLabel.text = self.cityListArray[indexPath.row];
     return cell;
 
-    
-    
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -109,6 +94,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 {
     
     [ODUserInformation sharedODUserInformation].locationCity = self.cityListArray[indexPath.row];
+    [ODUserInformation sharedODUserInformation].cityID = [self.cityIdArray[indexPath.row] integerValue];
     [self.navigationController popViewControllerAnimated:YES];
 
 }
