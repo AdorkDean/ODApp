@@ -19,7 +19,12 @@
     view.backgroundColor = [UIColor whiteColor];
     
     
-  
+    view.swapTypeLabel.layer.masksToBounds = YES;
+    view.swapTypeLabel.layer.cornerRadius = 5;
+    view.swapTypeLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    view.swapTypeLabel.textColor = [UIColor lightGrayColor];
+    view.swapTypeLabel.layer.borderWidth = 1;
+
     
     
     
