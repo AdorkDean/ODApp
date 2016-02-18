@@ -25,6 +25,11 @@ NSString * const ODNotificationSearchHelp = @"ODNotificationSearchHelp";
 /**  换技能通知 */
 NSString * const ODNotificationChangeSkill = @"ODNotificationChangeSkill";
 
+/** 获取地址的apiKey */
+NSString *const ODLocationApiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
+
+
+
 #pragma mark - 请求URL接口
 /** 统一的URL */
 #ifdef DEBUG
@@ -106,6 +111,9 @@ NSString * const kCreateOrderUrl = @"http://woquapi.test.odong.com/1.0/store/cre
 NSString * const kGetStoreTimeUrl = @"http://woquapi.test.odong.com/1.0/store/timeline";
 NSString * const kSaveStoreOrderUrl = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
 NSString * const kGetApplyListUrl = @"http://woquapi.test.odong.com/1.0/store/apply/users";
+NSString * const kGiveOpinionUrl = @"http://woquapi.test.odong.com/1.0/other/feedback";
+
+NSString * const ODPersonalReleaseTaskUrl = @"swap/list";
 
 NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
 NSString * const kGetWXAppId = @"wxd25da104118aae2a";

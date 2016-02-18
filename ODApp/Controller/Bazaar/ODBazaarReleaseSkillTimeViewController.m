@@ -94,7 +94,7 @@
 
 -(void)createTableView
 {
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 70, kScreenSize.width, kScreenSize.height-64-70)];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 70, kScreenSize.width, kScreenSize.height-64-70) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -128,13 +128,15 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, kScreenSize.width-10, 20)];
-    view.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    
     NSArray *array = @[@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六",@"星期日"];
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, kScreenSize.width-10, 20)];
     label.text = [array objectAtIndex:section];
     label.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
     label.font = [UIFont systemFontOfSize:14];
-    return label;
+    [view addSubview:label];
+    return view;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
