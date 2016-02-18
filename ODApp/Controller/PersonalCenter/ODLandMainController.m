@@ -34,7 +34,6 @@
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-
 @property(nonatomic,strong)ODUserModel *model;
 
 @end
@@ -146,40 +145,38 @@
     }else{
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
         
+        
         if (indexPath.section == 1) {
+              cell.titleLabel.text = @"代填";
+        }
+        
+        else if (indexPath.section == 2) {
             cell.titleLabel.text = @"我的中心预约";
             
-        }else if (indexPath.section == 2) {
+        }else if (indexPath.section == 3) {
             cell.titleLabel.text = @"我报名的活动";
             
-        }else if (indexPath.section == 3) {
-            cell.titleLabel.text = @"我的话题";
         }else if (indexPath.section == 4) {
+            cell.titleLabel.text = @"我的话题";
+        }else if (indexPath.section == 5) {
             cell.titleLabel.text = @"我的任务";
         }
         
         
-        else if (indexPath.section == 5) {
+        else if (indexPath.section == 6) {
            
-            cell.titleLabel.text = @"我的订单";
-        }else if (indexPath.section == 6) {
+            cell.titleLabel.text = @"设置";
+        }else if (indexPath.section == 7) {
            
-             cell.titleLabel.text = @"我收到的评价";
+             cell.titleLabel.text = @"意见反馈";
         }
         
-        else if (indexPath.section == 7) {
+        else if (indexPath.section == 8) {
             
             cell.titleLabel.text = @"分享我们的app";
             cell.coverImageView.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
             
-        }else if (indexPath.section == 8) {
-            
-            cell.titleLabel.text = @"      退出登录";
-            cell.titleLabel.textAlignment = NSTextAlignmentCenter;
-            [cell.arrowImageView removeFromSuperview];
-            
         }
-        
         return cell;
         
     }
@@ -202,10 +199,11 @@
         
         ODInformationController *vc = [[ODInformationController alloc] init];
         
+        
         [self.navigationController pushViewController:vc animated:YES];
         
         
-    }else if (indexPath.section == 1){
+    }else if (indexPath.section == 2){
         
         ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
         vc.open_id = self.model.open_id;
@@ -213,7 +211,7 @@
         
         [self.navigationController pushViewController:vc animated:YES];
         
-    }else if (indexPath.section == 2){
+    }else if (indexPath.section == 3){
         
         ODMyApplyActivityController *vc = [[ODMyApplyActivityController alloc] init];
         
@@ -221,7 +219,7 @@
         
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if (indexPath.section ==3) {
+    else if (indexPath.section ==4) {
         
         ODMyTopicController *vc = [[ODMyTopicController alloc] init];
         
@@ -229,7 +227,7 @@
         
         [self.navigationController pushViewController:vc animated:YES];
         
-    }else if (indexPath.section ==4) {
+    }else if (indexPath.section ==5) {
         
         ODMyTaskController *vc = [[ODMyTaskController alloc] init];
         
@@ -237,24 +235,19 @@
         
         [self.navigationController pushViewController:vc animated:YES];
         
-    }else if (indexPath.section == 5) {
-        
-        ODMyOrderController *vc = [[ODMyOrderController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-
-        
     }else if (indexPath.section == 6) {
+        
+        ;
+        
+    }else if (indexPath.section == 7) {
        
         
         
-        ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
-        vc.typeTitle = @"我收到的评价";
-        vc.openId = [ODUserInformation sharedODUserInformation].openID;
-        [self.navigationController pushViewController:vc animated:YES];
+        ;
 
         
     }
-    else if (indexPath.section == 7) {
+    else if (indexPath.section == 8) {
         
         NSString *url = self.model.share[@"icon"];
         NSString *content = self.model.share[@"desc"];
@@ -276,28 +269,28 @@
       
               
     }
-    else if (indexPath.section ==8) {
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否退出登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            ;
-            tabBar.selectedIndex = 0;
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-            
-            //清空数据
-            [ODUserInformation sharedODUserInformation].openID = @"";
-            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-            [user setObject:@"" forKey:KUserDefaultsOpenId];
-            
-            [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0 title:@"已退出登录"];
-           
-            tabBar.selectedIndex = tabBar.currentIndex;
-    }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
+//    else if (indexPath.section ==8) {
+//        
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否退出登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            
+//            ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+//            ;
+//            tabBar.selectedIndex = 0;
+//            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+//            
+//            //清空数据
+//            [ODUserInformation sharedODUserInformation].openID = @"";
+//            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+//            [user setObject:@"" forKey:KUserDefaultsOpenId];
+//            
+//            [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0 title:@"已退出登录"];
+//           
+//            tabBar.selectedIndex = tabBar.currentIndex;
+//    }]];
+//        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+//        [self presentViewController:alert animated:YES completion:nil];
+//    }
 }
 
 
@@ -307,46 +300,21 @@
 {
     if (indexPath.section == 0) {
         return CGSizeMake(kScreenSize.width , 80);
+    }else if (indexPath.section == 1) {
+         return CGSizeMake(kScreenSize.width , 100);
+        
     }else {
-        return CGSizeMake(kScreenSize.width , 30);
+        return CGSizeMake(kScreenSize.width , 40);
     }
 }
 
-//动态设置每个分区的缩进量
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(0, 0, 0, 0);
-}
-
-//动态设置每个分区的最小行间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    
-    return 4;
-    
-    
-}
-
-//动态返回不同区的列间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0;
-}
-
-//动态设置区头的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    return CGSizeMake(0,0);
-}
 
 //动态设置区尾的高度(根据不同的分区)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    if (section == 7) {
-        return CGSizeMake(0, 30);
-    }else{
-        return CGSizeMake(0, 5);
-    }
+    
+    return CGSizeMake(0, 5);
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -354,14 +322,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

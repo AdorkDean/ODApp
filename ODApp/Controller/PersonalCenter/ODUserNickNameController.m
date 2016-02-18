@@ -36,7 +36,7 @@
 
 - (void)creatTextView
 {
-    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 30)];
+    self.textView = [[UITextView alloc] initWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 40)];
     self.textView.backgroundColor = [UIColor whiteColor];
     self.textView.layer.masksToBounds = YES;
     self.textView.layer.cornerRadius = 5;
