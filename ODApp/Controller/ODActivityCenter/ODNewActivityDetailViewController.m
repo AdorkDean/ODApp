@@ -505,13 +505,9 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 
 - (void)applyAction
 {
-    
-        
     ODApplyListViewController *vc = [[ODApplyListViewController alloc] init];
     vc.activity_id = [NSString stringWithFormat:@"%d" , self.resultModel.activity_id];
     [self.navigationController pushViewController:vc animated:YES];
-    
-    
 }
 
 
