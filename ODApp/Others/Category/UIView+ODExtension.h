@@ -27,11 +27,11 @@
 /**
  *  View的底部添加一条横线
  */
-- (void)addLineOnBottom;
+- (UIView *)addLineOnBottom;
 
 /**
  *  在指定位置添加一条横线
  */
-- (void)addLineFromPoint:(CGPoint)point;
+- (UIView *)addLineFromPoint:(CGPoint)point;
 
 @end
