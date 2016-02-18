@@ -48,17 +48,17 @@
         
     }];
     
-        [MAMapServices sharedServices].apiKey = ODLocationApiKey;
-        _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
-        _mapView.delegate = self;
-        _mapView.showsUserLocation = YES;
-        [_mapView setZoomLevel:20 animated:YES];
+    [MAMapServices sharedServices].apiKey = ODLocationApiKey;
+    _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
+    _mapView.delegate = self;
+    _mapView.showsUserLocation = YES;
+    [_mapView setZoomLevel:20 animated:YES];
     
-        //配置用户Key
-        [AMapSearchServices sharedServices].apiKey = ODLocationApiKey;
-        //初始化检索对象
-        _search = [[AMapSearchAPI alloc] init];
-        _search.delegate = self;
+    //配置用户Key
+    [AMapSearchServices sharedServices].apiKey = ODLocationApiKey;
+    //初始化检索对象
+    _search = [[AMapSearchAPI alloc] init];
+    _search.delegate = self;
     
 }
 
@@ -104,7 +104,7 @@
 #pragma mark - 定位城市按钮
 - (void)CreateLocationButtonAction
 {
-
+    
     [self.locationButton addTarget:self action:@selector(locationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -133,15 +133,15 @@
     NSDictionary *parameter = @{@"city_id":@"0"};
     __weakSelf
     [ODHttpTool getWithURL:ODHomeFoundUrl parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model)
-    {
-        weakSelf.pictureArray = [[[model result]activitys]valueForKeyPath:@"detail_md5"];
-        weakSelf.pictureIdArray = [[[model result]activitys] valueForKeyPath:@"id"];
-        [weakSelf.collectionView reloadData];
-    }
+     {
+         weakSelf.pictureArray = [[[model result]activitys]valueForKeyPath:@"detail_md5"];
+         weakSelf.pictureIdArray = [[[model result]activitys] valueForKeyPath:@"id"];
+         [weakSelf.collectionView reloadData];
+     }
                    failure:^(NSError *error)
      {
-        
-    }];
+         
+     }];
 }
 
 #pragma mark - 技能交换数据请求
@@ -190,7 +190,7 @@
 #pragma mark - 顶部8个按钮点击事件
 - (void)findActivityButtonClick:(UIButton *)button
 {
-
+    
     self.tabBarController.selectedIndex = 1;
 }
 
@@ -236,6 +236,7 @@
     self.tabBarController.selectedIndex = 2;
     ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     vc.index = 1;
+    [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationShowBazaar object:nil];
 }
 
 - (void)changeSkillButtonClick:(UIButton *)button
@@ -255,7 +256,7 @@
 #pragma mark - 热门活动图片点击事件
 - (void)imageButtonClick:(UIButton *)button
 {
-
+    
     ODNewActivityDetailViewController *vc = [[ODNewActivityDetailViewController alloc] init];
     
     
@@ -341,7 +342,7 @@
 #pragma mark - 了解更多技能点击事件
 - (void)moreSkillButtonClick:(UIButton *)button
 {
-
+    
     self.tabBarController.selectedIndex = 2;
     ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     vc.index = 0;
@@ -364,7 +365,7 @@
 #pragma mark - Create UICollectionView
 - (void)createCollectionView
 {
-
+    
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight-ODTabBarHeight) collectionViewLayout:self.flowLayout];
     
@@ -373,7 +374,7 @@
     self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     [self.collectionView registerClass:[ODhomeViewCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];
-   
+    
     [self.collectionView registerClass:[ODHomeFoundFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"supple"];
     
     self.collectionView.dataSource = self;
@@ -393,7 +394,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-
+    
     return self.dataArray.count;
 }
 
@@ -469,7 +470,7 @@
         self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;
         
         for (int i = 0; i < self.pictureArray.count; i++) {
-
+            
             
             UIButton *imageButton;
             if (i < self.pictureArray.count - 1) {
@@ -505,9 +506,9 @@
         [self.rsusableView.petButton addTarget:self action:@selector(petButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
         [self.rsusableView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-     
+        
     }else if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
-    
+        
         [self.rsusableView.moreSkillButton addTarget:self action:@selector(moreSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self.rsusableView;
@@ -544,7 +545,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-
+    
     return CGSizeMake(0, 42);
 }
 
@@ -555,25 +556,25 @@ updatingLocation:(BOOL)updatingLocation{
     if (updatingLocation) {
         _mapView.showsUserLocation = NO;
         [_mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
-
+        
         //构造AMapReGeocodeSearchRequest对象
         AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
         regeo.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
         regeo.radius = 10000;
         regeo.requireExtension = YES;
-
+        
         //发起逆地理编码
         [_search AMapReGoecodeSearch: regeo];
-
+        
         //构造AMapPOIAroundSearchRequest对象，设置周边请求参数
         AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
         request.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
-
+        
         request.keywords = @"";
         request.types = @"";
         request.sortrule = 0;
         request.requireExtension = YES;
-
+        
         //发起周边搜索
         [_search AMapPOIAroundSearch: request];
     }
@@ -589,51 +590,51 @@ updatingLocation:(BOOL)updatingLocation{
     //通过 AMapPOISearchResponse 对象处理搜索结果
     for (AMapPOI *p in response.pois) {
         NSString *strPoi = [NSString stringWithFormat:@"%@", p.name];
-
+        
         NSLog(@"strPoi ->____%@" , strPoi);
     }
 }
 
-////实现逆地理编码的回调函数
-//- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
-//{
-//    if(response.regeocode != nil)
-//    {
-//        //通过AMapReGeocodeSearchResponse对象处理搜索结果
-//        NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
-//        if (result.length == 0) {
-//            result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
-//        }
-//
-//        NSString *cityResult = [result substringToIndex:[result length] - 1];
-//        
-//        
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
-//    
-//        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-//            
-//            [ODUserInformation sharedODUserInformation].locationCity = cityResult;
-//            
-//            for (NSDictionary *cityInformation in self.cityListArray) {
-//                
-////                NSString *cityName = [NSString stringWithFormat:@"%@市",cityInformation[@"name"]];
-//                
-//                if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityInformation[@"name"]]) {
-//                    [ODUserInformation sharedODUserInformation].cityID = cityInformation[@"id"];
-//                }             
-//            }
-//            [self locationCity];
-//        }]];
-//        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//            
-//            [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
-//            [ODUserInformation sharedODUserInformation].cityID = @"1";
-//            [self locationCity];
-//        }]];
-//
-//        [self presentViewController:alert animated:YES completion:nil];
-//    }
-//}
+//实现逆地理编码的回调函数
+- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
+{
+    if(response.regeocode != nil)
+    {
+        //通过AMapReGeocodeSearchResponse对象处理搜索结果
+        NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
+        if (result.length == 0) {
+            result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
+        }
+
+        NSString *cityResult = [result substringToIndex:[result length] - 1];
+
+
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+
+            [ODUserInformation sharedODUserInformation].locationCity = cityResult;
+
+            for (NSDictionary *cityInformation in self.cityListArray) {
+
+//                NSString *cityName = [NSString stringWithFormat:@"%@市",cityInformation[@"name"]];
+
+                if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityInformation[@"name"]]) {
+                    [ODUserInformation sharedODUserInformation].cityID = cityInformation[@"id"];
+                }
+            }
+            [self locationCity];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+
+            [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
+            [ODUserInformation sharedODUserInformation].cityID = @"1";
+            [self locationCity];
+        }]];
+
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
 
 
 
