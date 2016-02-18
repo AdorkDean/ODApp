@@ -16,8 +16,6 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tap:)];
-        [self addGestureRecognizer:tap];
         UIImageView *rightIMGV = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Skills profile page_icon_arrow_upper"]];
         rightIMGV.center = CGPointMake(KScreenWidth - ODLeftMargin * 2 - rightIMGV.od_width, 75 / 4);
         [self addSubview:rightIMGV];
@@ -52,8 +50,4 @@
     }
 }
 
-- (void)tap:(UITapGestureRecognizer *)tap
-{
-    
-}
 @end

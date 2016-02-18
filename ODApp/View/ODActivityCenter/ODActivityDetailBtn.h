@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ODActivityDetailBtn : UIButton
+/**
+ *  点击状态
+ */
+@property(nonatomic, assign) BOOL OD_selectedState;
 
 @end

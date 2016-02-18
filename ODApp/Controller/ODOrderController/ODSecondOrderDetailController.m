@@ -1,24 +1,22 @@
 //
-//  ODOrderDetailController.m
+//  ODSecondOrderDetailController.m
 //  ODApp
 //
-//  Created by zhz on 16/2/4.
+//  Created by zhz on 16/2/17.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODOrderDetailController.h"
-#import "ODOrderDetailView.h"
+#import "ODSecondOrderDetailController.h"
+#import "ODSecondOrderDetailView.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODOrderDetailModel.h"
 #import "UIButton+WebCache.h"
 
-
-
-@interface ODOrderDetailController ()<UITableViewDataSource , UITableViewDelegate>
+@interface ODSecondOrderDetailController ()<UITableViewDataSource , UITableViewDelegate>
 
 @property (nonatomic , strong) UITableView *tableView;
-@property (nonatomic , strong) ODOrderDetailView *orderDetailView;
+@property (nonatomic , strong) ODSecondOrderDetailView *orderDetailView;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
 @property (nonatomic, strong) AFHTTPRequestOperationManager *delateManager;
@@ -28,21 +26,22 @@
 
 @end
 
-@implementation ODOrderDetailController
+@implementation ODSecondOrderDetailController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
     
+    
+    self.dataArray = [[NSMutableArray alloc] init];
+    
+    self.open_id = [ODUserInformation sharedODUserInformation].openID;
+    self.navigationItem.title = @"订单详情";
+    [self getData];
 
-      self.dataArray = [[NSMutableArray alloc] init];
-
-      self.open_id = [ODUserInformation sharedODUserInformation].openID;
-      self.navigationItem.title = @"订单详情";
-      [self getData];
-      
+    
     
 }
-
 
 - (void)getData
 {
@@ -59,7 +58,7 @@
             
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 
-
+                
                 [self.dataArray removeAllObjects];
                 NSMutableDictionary *dic = responseObject[@"result"];
                 ODOrderDetailModel *model = [[ODOrderDetailModel alloc] init];
@@ -77,16 +76,16 @@
                 
             }
             
-
+            
             [weakSelf creatView];
-
-        
-
+            
+            
+            
             [weakSelf.tableView reloadData];
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
     
@@ -96,10 +95,10 @@
 
 - (void)creatView
 {
-
-  
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height + 100) style:UITableViewStylePlain];
-
+    
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 50) style:UITableViewStylePlain];
+    
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = self.orderDetailView;
@@ -112,17 +111,17 @@
     UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
     cancelButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
     [cancelButton setBackgroundImage:[UIImage imageNamed:@"button_Cancel order"] forState:UIControlStateNormal];
-
+    
     [cancelButton addTarget:self action:@selector(delateOrder:) forControlEvents:UIControlEventTouchUpInside];
-
-
+    
+    
     UIButton *payButton = [UIButton buttonWithType:UIButtonTypeSystem];
     payButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
     [payButton setBackgroundImage:[UIImage imageNamed:@"button_Pay immediately"] forState:UIControlStateNormal];
     [self.view addSubview:payButton];
     [self.view addSubview:cancelButton];
     
-
+    
 }
 
 
@@ -131,7 +130,7 @@
     self.delateManager = [AFHTTPRequestOperationManager manager];
     
     
-      
+    
     NSDictionary *parameters = @{@"order_id":self.order_id , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
@@ -153,8 +152,8 @@
                     
                     weakSelf.getRefresh(@"1");
                 }
-
-
+                
+                
                 [self.navigationController popViewControllerAnimated:YES];
                 
                 
@@ -173,18 +172,18 @@
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
-
+    
 }
 
 
 
 
 
-- (ODOrderDetailView *)orderDetailView
+- (ODSecondOrderDetailView *)orderDetailView
 {
     if (_orderDetailView == nil) {
-        self.orderDetailView = [ODOrderDetailView getView];
-
+        self.orderDetailView = [ODSecondOrderDetailView getView];
+        
         
         ODOrderDetailModel *model = self.dataArray[0];
         NSMutableDictionary *userDic = model.user;
@@ -203,24 +202,17 @@
         self.orderDetailView.addressNameLabel.text = model.name;
         self.orderDetailView.addressPhoneLabel.text = model.tel;
         
-        NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
-        
-        if ([swap_type isEqualToString:@"2"]) {
-            
-             self.orderDetailView.serviceTimeLabel.text = model.address;
-            self.orderDetailView.serviceTypeLabel.text = @"服务地址:";
-        }else{
-            self.orderDetailView.serviceTimeLabel.text = model.service_time;
-               self.orderDetailView.serviceTypeLabel.text = @"服务时间:";
-
-        }
-        
+                  
+        self.orderDetailView.serviceAddressLabel.text = model.address;
+        self.orderDetailView.serviceTimeLabel.text = model.service_time;
+           
         self.orderDetailView.orderTimeLabel.text = model.order_created_at;
         self.orderDetailView.orderIdLabel.text = [NSString stringWithFormat:@"%@" , model.order_id];
         
 
-
-
+            
+        
+        
     }
     
     return _orderDetailView;
@@ -250,8 +242,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-   
+    
 }
-
 
 @end
