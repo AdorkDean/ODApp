@@ -26,11 +26,8 @@
 #import "UMSocial.h"
 #import "ODMyOrderController.h"
 #import "ODGiveOpinionController.h"
-
-@interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>{
-    
-}
-
+#import "ODOperationController.h"
+@interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
@@ -172,13 +169,21 @@
         
         else if (indexPath.section == 6) {
             
-            cell.titleLabel.text = @"设置";
+            cell.titleLabel.text = @"我收到的评价";
         }else if (indexPath.section == 7) {
+            
+             cell.titleLabel.text = @"设置";
+            
+            
+        }
+        
+        
+        else if (indexPath.section == 8) {
             
             cell.titleLabel.text = @"意见反馈";
         }
         
-        else if (indexPath.section == 8) {
+        else if (indexPath.section == 9) {
             
             cell.titleLabel.text = @"分享我们的app";
             cell.coverImageView.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
@@ -207,7 +212,7 @@
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 9;
+    return 10;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -259,15 +264,33 @@
         
     }else if (indexPath.section == 6) {
         
-        ;
+        ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
         
+        vc.typeTitle = @"我收到的评价";
+        vc.openId = [ODUserInformation sharedODUserInformation].openID;
+        
+        
+        
+        [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.section == 7) {
+        
+        
+        ODOperationController *vc = [[ODOperationController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
+    }
+    
+    
+    
+    else if (indexPath.section == 8) {
         
         ODGiveOpinionController *vc = [[ODGiveOpinionController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         
     }
-    else if (indexPath.section == 8) {
+    else if (indexPath.section == 9) {
         
         NSString *url = self.model.share[@"icon"];
         NSString *content = self.model.share[@"desc"];

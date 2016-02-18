@@ -77,6 +77,19 @@ void UncaughtExceptionHandler(NSException *exception)
     return YES;
 }
 
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [UMSocialSnsService handleOpenURL:url];
+    if (result == FALSE) {
+        //调用其他SDK，例如支付宝SDK等
+    }
+    return result;
+}
+
+
+
+
 - (void)gotoMain
 {
     [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"isRuned"];

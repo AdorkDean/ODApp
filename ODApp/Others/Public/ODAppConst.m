@@ -11,6 +11,11 @@ CGFloat const ODTopY = 0;
 /** 偏好设置保存用户信息 */
 NSString *const KUserDefaultsOpenId = @"userOpenId";
 
+
+NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
+NSString * const kGetWXAppId = @"wx64423cc9497cc581";
+NSString * const kGetWXAppSecret = @"a6034898f4a370df22a358c5e6192645";
+
 #pragma mark - 通知
 /** 显示集市的通知 */
 NSString * const ODNotificationShowBazaar = @"ODShowBazaarNotification";
@@ -114,9 +119,11 @@ NSString * const kGetApplyListUrl = @"http://woquapi.test.odong.com/1.0/store/ap
 NSString * const kGiveOpinionUrl = @"http://woquapi.test.odong.com/1.0/other/feedback";
 NSString * const kCollectionUrl = @"http://woquapi.test.odong.com/1.0/user/love/list";
 
+NSString * const kCallbackUrl = @"other/share/callback";
+
+
+
 NSString * const ODPersonalReleaseTaskUrl = @"swap/list";
 
-NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
-NSString * const kGetWXAppId = @"wxd25da104118aae2a";
-NSString * const kGetWXAppSecret = @"5da1d304e3b05fe65e4c14deddfa56f1";
+
 
