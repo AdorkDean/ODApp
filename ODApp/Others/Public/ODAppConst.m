@@ -19,6 +19,12 @@ NSString * const ODNotificationShowBazaar = @"ODShowBazaarNotification";
 NSString * const ODNotificationMyTaskRefresh = @"ODNotificationMyTaskRefresh";
 NSString * const ODNotificationActivityApllySuccess = @"ODNotificationActivityApllySuccess";
 
+/**  求帮助的通知 */
+NSString * const ODNotificationSearchHelp = @"ODNotificationSearchHelp";
+
+/**  换技能通知 */
+NSString * const ODNotificationChangeSkill = @"ODNotificationChangeSkill";
+
 #pragma mark - 请求URL接口
 /** 统一的URL */
 #ifdef DEBUG

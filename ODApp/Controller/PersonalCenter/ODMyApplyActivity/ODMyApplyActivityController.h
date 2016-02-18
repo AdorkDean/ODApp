@@ -19,7 +19,7 @@
 #import "ODActivityDetailController.h"
 #import "ODCenterActivityViewController.h"
 
-
+#import "ODNewActivityDetailViewController.h"
 
 @interface ODMyApplyActivityController : ODBaseViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 
