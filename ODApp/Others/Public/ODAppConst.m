@@ -11,6 +11,10 @@ CGFloat const ODTopY = 0;
 /** 偏好设置保存用户信息 */
 NSString *const KUserDefaultsOpenId = @"userOpenId";
 
+/** 获取地址的apiKey */
+NSString *const ODLocationApiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
+
+
 #pragma mark - 通知
 /** 显示集市的通知 */
 NSString * const ODNotificationShowBazaar = @"ODShowBazaarNotification";
@@ -19,11 +23,6 @@ NSString * const ODNotificationShowBazaar = @"ODShowBazaarNotification";
 NSString * const ODNotificationMyTaskRefresh = @"ODNotificationMyTaskRefresh";
 NSString * const ODNotificationActivityApllySuccess = @"ODNotificationActivityApllySuccess";
 
-/**  求帮助的通知 */
-NSString * const ODNotificationSearchHelp = @"ODNotificationSearchHelp";
-
-/**  换技能通知 */
-NSString * const ODNotificationChangeSkill = @"ODNotificationChangeSkill";
 
 #pragma mark - 请求URL接口
 /** 统一的URL */
