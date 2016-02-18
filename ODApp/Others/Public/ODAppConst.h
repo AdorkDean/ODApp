@@ -30,6 +30,8 @@ UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
 /**  换技能通知 */
 UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
 
+/** 获取地址的apiKey */
+UIKIT_EXTERN NSString *const ODLocationApiKey;
 
 
 #pragma mark - 请求URL接口 
@@ -107,7 +109,7 @@ UIKIT_EXTERN NSString * const kGetCommentUrl;
 UIKIT_EXTERN NSString * const kCreateOrderUrl;
 UIKIT_EXTERN NSString * const kGetStoreTimeUrl;
 UIKIT_EXTERN NSString * const kGetApplyListUrl;
-
+UIKIT_EXTERN NSString * const kGiveOpinionUrl;
 UIKIT_EXTERN NSString * const kGetUMAppkey;
 UIKIT_EXTERN NSString * const kGetWXAppId;
 UIKIT_EXTERN NSString * const kGetWXAppSecret;
