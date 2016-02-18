@@ -112,6 +112,7 @@ NSString * const kGetStoreTimeUrl = @"http://woquapi.test.odong.com/1.0/store/ti
 NSString * const kSaveStoreOrderUrl = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
 NSString * const kGetApplyListUrl = @"http://woquapi.test.odong.com/1.0/store/apply/users";
 NSString * const kGiveOpinionUrl = @"http://woquapi.test.odong.com/1.0/other/feedback";
+NSString * const kCollectionUrl = @"http://woquapi.test.odong.com/1.0/user/love/list";
 
 NSString * const ODPersonalReleaseTaskUrl = @"swap/list";
 
