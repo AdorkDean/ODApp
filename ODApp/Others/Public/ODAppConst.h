@@ -113,5 +113,5 @@ UIKIT_EXTERN NSString * const kGiveOpinionUrl;
 UIKIT_EXTERN NSString * const kGetUMAppkey;
 UIKIT_EXTERN NSString * const kGetWXAppId;
 UIKIT_EXTERN NSString * const kGetWXAppSecret;
-
+UIKIT_EXTERN NSString * const kCollectionUrl;
 

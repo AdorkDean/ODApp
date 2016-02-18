@@ -144,9 +144,7 @@
         
         [cell.buyButton addTarget:self action:@selector(alreadyBuyAction:) forControlEvents:UIControlEventTouchUpInside];
         
-        [cell.releaseButton addTarget:self action:@selector(releaseAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [cell.collectionButton addTarget:self action:@selector(releaseAction:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.collectionButton addTarget:self action:@selector(collectionAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
         
@@ -201,7 +199,11 @@
     
 }
 
-
+- (void)collectionAction:(UIButton *)button
+{
+    ODPersonalCenterCollectionViewController *collection = [[ODPersonalCenterCollectionViewController alloc]init];
+    [self.navigationController pushViewController:collection animated:YES];
+}
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {

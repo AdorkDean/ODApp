@@ -67,6 +67,7 @@
 		9DF2E98C1C74654A00F77976 /* ODSecondOrderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF2E98B1C74654A00F77976 /* ODSecondOrderDetailController.m */; };
 		9DF2E98F1C74666800F77976 /* ODSecondOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF2E98E1C74666800F77976 /* ODSecondOrderDetailView.m */; };
 		9DF2E9911C74667800F77976 /* ODSecondOrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DF2E9901C74667800F77976 /* ODSecondOrderDetailView.xib */; };
+		B83900291C75C8AC00598410 /* ODPersonalCenterCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B83900281C75C8AC00598410 /* ODPersonalCenterCollectionViewController.m */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
 		B84F2E741C60A1AD0057DF9E /* ODCommunityShowPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84F2E731C60A1AD0057DF9E /* ODCommunityShowPicViewController.m */; };
@@ -397,6 +398,8 @@
 		9DF2E98D1C74666800F77976 /* ODSecondOrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSecondOrderDetailView.h; sourceTree = "<group>"; };
 		9DF2E98E1C74666800F77976 /* ODSecondOrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSecondOrderDetailView.m; sourceTree = "<group>"; };
 		9DF2E9901C74667800F77976 /* ODSecondOrderDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODSecondOrderDetailView.xib; sourceTree = "<group>"; };
+		B83900271C75C8AC00598410 /* ODPersonalCenterCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPersonalCenterCollectionViewController.h; sourceTree = "<group>"; };
+		B83900281C75C8AC00598410 /* ODPersonalCenterCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPersonalCenterCollectionViewController.m; sourceTree = "<group>"; };
 		B83C6B621C224F640063ED92 /* ODApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B751C224F640063ED92 /* ODAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ODAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B791C224F640063ED92 /* ODAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODAppTests.m; sourceTree = "<group>"; };
@@ -952,6 +955,15 @@
 				9DEDCF611C64B3FC003015C6 /* ODBazaarRewardCollectionCell.xib */,
 			);
 			path = BazaarDetailView;
+			sourceTree = "<group>";
+		};
+		B83900261C75C87F00598410 /* ODCollection */ = {
+			isa = PBXGroup;
+			children = (
+				B83900271C75C8AC00598410 /* ODPersonalCenterCollectionViewController.h */,
+				B83900281C75C8AC00598410 /* ODPersonalCenterCollectionViewController.m */,
+			);
+			path = ODCollection;
 			sourceTree = "<group>";
 		};
 		B83C6B591C224F630063ED92 = {
@@ -1738,6 +1750,7 @@
 		D4D071101C59B9FA008527C9 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				B83900261C75C87F00598410 /* ODCollection */,
 				9DBF7F001C75C3680085875E /* ODGiveOpinion */,
 				C642732A1C5A0D0200C38A85 /* ODPersonalCenter */,
 				C64273331C5A111F00C38A85 /* ODUserInformation */,
@@ -2590,6 +2603,7 @@
 				D4D0738A1C59B9FA008527C9 /* ODMyOrderDetailController.m in Sources */,
 				D4D073891C59B9FA008527C9 /* ODMyApplyActivityController.m in Sources */,
 				D4D075091C59B9FA008527C9 /* ChoseCenterCell.m in Sources */,
+				B83900291C75C8AC00598410 /* ODPersonalCenterCollectionViewController.m in Sources */,
 				D44423961C72F898005B4CFE /* ODActivitybottomView.m in Sources */,
 				D4D073831C59B9FA008527C9 /* ODHomeFoundViewController.m in Sources */,
 				C64D45F31C5F8C6F003BFFA0 /* IQTitleBarButtonItem.m in Sources */,

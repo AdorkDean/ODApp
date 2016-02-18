@@ -8,6 +8,8 @@
 
 #import "ODBaseViewController.h"
 
+#import "ODPersonalCenterCollectionViewController.h"
+
 @interface ODLandMainController : ODBaseViewController
 
 @property (nonatomic, copy) NSString *phoneNumber;
