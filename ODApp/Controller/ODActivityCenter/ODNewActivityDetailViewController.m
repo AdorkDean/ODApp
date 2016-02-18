@@ -305,7 +305,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 -(void)requestData
 {
      __weakSelf
-    NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue]};
+    NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue],@"open_id":[ODUserInformation sharedODUserInformation].openID};
     [ODHttpTool getWithURL:KActivityDetailUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
      {
          weakSelf.resultModel = [model result];
@@ -388,7 +388,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         if (indexPath.row == 0)//时间
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
-             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             [cell iconImgView].image = [UIImage imageNamed:@"icon_service time"];
             [cell detailInfoLabel].text = self.resultModel.time_str;
             [cell statusLabel].text = self.resultModel.apply_status_str;
@@ -422,7 +422,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     {
         ODActivityDetailVIPModel *vipModel = self.resultModel.savants[indexPath.row];
         ODActivityVIPCell *cell = [tableView dequeueReusableCellWithIdentifier:VIPCell];
-         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
         [[cell VIPHeadImgView] sd_setImageWithURL:[NSURL OD_URLWithString:[vipModel avatar]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [[(ODActivityVIPCell *)cell VIPHeadImgView]setImage:[image OD_circleImage]];
         }];

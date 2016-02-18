@@ -259,6 +259,7 @@
     };
     ODCommunityModel *model = self.dataArray[indexPath.row];
     detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
+    NSLog(@"%@",detailController.bbs_id);
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
