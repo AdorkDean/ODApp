@@ -9,6 +9,7 @@
 #import "ODLandMainController.h"
 #import "ODLandFirstCell.h"
 #import "ODLandSecondCell.h"
+#import "ODLandThirdCell.h"
 #import "ODTabBarController.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
@@ -24,7 +25,7 @@
 #import "ODUserEvaluationController.h"
 #import "UMSocial.h"
 #import "ODMyOrderController.h"
-
+#import "ODGiveOpinionController.h"
 
 @interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>{
 
@@ -79,10 +80,7 @@
         
         NSMutableDictionary *dic = responseObject[@"result"];
         
-        
-      
-        
-        
+                
         weakSelf.model = [[ODUserModel alloc] initWithDict:dic];
         
         [weakSelf createCollectionView];
@@ -110,9 +108,7 @@
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandSecondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
-    
-    
-    
+    [self.collectionView registerClass:[ODLandThirdCell class] forCellWithReuseIdentifier:@"third"];
     
     [self.view addSubview:self.collectionView];
     
@@ -142,15 +138,28 @@
               
         return cell;
         
-    }else{
+    }else if (indexPath.section == 1) {
+        
+        ODLandThirdCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"third" forIndexPath:indexPath];
+        
+        [cell.buyButton addTarget:self action:@selector(alreadyBuyAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.releaseButton addTarget:self action:@selector(releaseAction:) forControlEvents:UIControlEventTouchUpInside];
+
+        [cell.collectionButton addTarget:self action:@selector(releaseAction:) forControlEvents:UIControlEventTouchUpInside];
+
+        
+        
+        return cell;
+        
+    }
+    
+    
+    else{
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
         
         
-        if (indexPath.section == 1) {
-              cell.titleLabel.text = @"代填";
-        }
-        
-        else if (indexPath.section == 2) {
+         if (indexPath.section == 2) {
             cell.titleLabel.text = @"我的中心预约";
             
         }else if (indexPath.section == 3) {
@@ -181,6 +190,17 @@
         
     }
 }
+
+
+- (void)alreadyBuyAction:(UIButton *)sender
+{
+    
+    ODMyOrderController *vc = [[ODMyOrderController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+}
+
 
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -241,10 +261,8 @@
         
     }else if (indexPath.section == 7) {
        
-        
-        
-        ;
-
+        ODGiveOpinionController *vc = [[ODGiveOpinionController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
         
     }
     else if (indexPath.section == 8) {
@@ -298,11 +316,8 @@
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0 || indexPath.section == 1) {
         return CGSizeMake(kScreenSize.width , 80);
-    }else if (indexPath.section == 1) {
-         return CGSizeMake(kScreenSize.width , 100);
-        
     }else {
         return CGSizeMake(kScreenSize.width , 40);
     }
