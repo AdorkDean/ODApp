@@ -61,6 +61,12 @@
 {
     [super viewWillAppear:animated];
 
+    [self locationCity];
+}
+
+- (void)locationCity
+{
+
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
 }
 
@@ -215,12 +221,14 @@
 {
     
     self.tabBarController.selectedIndex = 2;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationSearchHelp object:nil];
 }
 
 - (void)changeSkillButtonClick:(UIButton *)button
 {
     
     self.tabBarController.selectedIndex = 2;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationChangeSkill object:nil];
 }
 
 - (void)moreButtonClick:(UIButton *)button
@@ -583,13 +591,19 @@ updatingLocation:(BOOL)updatingLocation{
             result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
         }
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",result] message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             [ODUserInformation sharedODUserInformation].locationCity = result;
+            [self locationCity];
         }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+            [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
+            [self locationCity];
+        }]];
 
-        
+        [self presentViewController:alert animated:YES completion:nil];
     }
 }
 

@@ -209,9 +209,12 @@
             
              self.orderDetailView.serviceTimeLabel.text = model.address;
             self.orderDetailView.serviceTypeLabel.text = @"服务地址:";
+             self.orderDetailView.swapTypeLabel.text = @"快递服务";
+            
         }else{
             self.orderDetailView.serviceTimeLabel.text = model.service_time;
                self.orderDetailView.serviceTypeLabel.text = @"服务时间:";
+             self.orderDetailView.swapTypeLabel.text = @"线上服务";
 
         }
         

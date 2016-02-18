@@ -132,22 +132,15 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath{
 
-    return CGSizeMake(kScreenSize.width, 170);
+    return CGSizeMake(kScreenSize.width, 140);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    ODActivityDetailController *vc = [[ODActivityDetailController alloc] init];
+    ODNewActivityDetailViewController *vc = [[ODNewActivityDetailViewController alloc] init];
     ODMyApplyActivityModel *model = self.dataArray[indexPath.row];
     
-    vc.activityId = [NSString stringWithFormat:@"%@", model.activity_id];
-    vc.storeId = [NSString stringWithFormat:@"%@", model.store_id];
-    
-    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-    
-    
-    vc.openId = openId;
-    
+    vc.acitityId = [model.activity_id intValue];
     
     [self.navigationController pushViewController:vc animated:YES];
     

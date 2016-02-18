@@ -22,6 +22,7 @@
 
 
 @property (nonatomic, strong) NSMutableArray *cityListArray;
+@property (nonatomic, strong) NSMutableArray *cityIdArray;
 
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong) UICollectionView *collectionView;

@@ -202,6 +202,9 @@
         self.orderDetailView.addressNameLabel.text = model.name;
         self.orderDetailView.addressPhoneLabel.text = model.tel;
         
+      
+        
+        self.orderDetailView.swapTypeLabel.text = @"上门服务";
                   
         self.orderDetailView.serviceAddressLabel.text = model.address;
         self.orderDetailView.serviceTimeLabel.text = model.service_time;
