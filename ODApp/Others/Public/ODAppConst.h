@@ -30,6 +30,8 @@ UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
 /**  换技能通知 */
 UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
 
+/** 获取地址的apiKey */
+UIKIT_EXTERN NSString *const ODLocationApiKey;
 
 
 #pragma mark - 请求URL接口 
