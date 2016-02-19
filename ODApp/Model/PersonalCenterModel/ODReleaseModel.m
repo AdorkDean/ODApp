@@ -10,4 +10,23 @@
 
 @implementation ODReleaseModel
 
++ (void)initialize
+{
+
+    [ODReleaseModel mj_setupObjectClassInArray:^NSDictionary *{
+        
+        return @{
+                 @"img_small":[ODReleaseLovesModel class]
+                 
+                 };
+    }];
+}
+
+
+@end
+ODRequestResultIsArrayImplementation(ODReleaseModel)
+
+@implementation ODReleaseLovesModel
+
+
 @end

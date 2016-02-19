@@ -7,12 +7,15 @@
 //
 
 #import "ODOperationController.h"
-#import "ODLandSecondCell.h"
+
 #import "ODTabBarController.h"
+#import "ODOperationFirstCell.h"
+#import "ODOperationSeccondCell.h"
 @interface ODOperationController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
-
+@property(nonatomic, assign)BOOL isClean;
+@property (nonatomic , strong) UILabel *cachesLabel;
 
 @end
 
@@ -43,7 +46,10 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-      [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandSecondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
+      [self.collectionView registerNib:[UINib nibWithNibName:@"ODOperationSeccondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
+    
+      [self.collectionView registerNib:[UINib nibWithNibName:@"ODOperationFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
+    
     
     [self.view addSubview:self.collectionView];
     
@@ -62,21 +68,48 @@
     
     
   
-        ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
+    
         
         
         if (indexPath.section == 0) {
-            cell.titleLabel.text = @"清理缓存";
             
-        }else if (indexPath.section == 1) {
+            
+        ODOperationSeccondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
+            
+            
+            self.cachesLabel = [[UILabel alloc] initWithFrame:CGRectMake(cell.contentView.frame.size.width - 150 , 10 , 60 , 20)];
+            self.cachesLabel.backgroundColor = [UIColor whiteColor];
+            self.cachesLabel.textAlignment = NSTextAlignmentLeft;
+            [cell.contentView addSubview:self.cachesLabel];
+            self.cachesLabel.text = [NSString stringWithFormat:@"%.2fM",[self filePath]];
+
+            
+       
+            return cell;
+            
+            
+            
+        }else{
+            
+            
+        
+            
+            ODOperationFirstCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
+            
             cell.titleLabel.text = @"退出登录";
+            
+            return cell;
+
+            
+            
+          
+
             
         }
             
             
             
-    return cell;
-        
+    
     
 }
 
@@ -84,29 +117,56 @@
 {
     if (indexPath.section == 0) {
         
-        ;
+        
+        if ([self.cachesLabel.text isEqualToString:@"0.00M"]) {
+              [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"没有缓存可清理"];
+        }else{
+            
+          
+            __weakSelf
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否清理缓存" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                
+           
+                [self cleanCach];
+            
+            
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+         
+            [weakSelf presentViewController:alert animated:YES completion:nil];
+
+            
+
+            
+        }
+        
+        
+        
+        
+        
     }else {
         
-        
+        __weakSelf
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否退出登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             ;
             tabBar.selectedIndex = 0;
-            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
             
             //清空数据
             [ODUserInformation sharedODUserInformation].openID = @"";
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             [user setObject:@"" forKey:KUserDefaultsOpenId];
             
-            [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0 title:@"已退出登录"];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0 title:@"已退出登录"];
             
             tabBar.selectedIndex = tabBar.currentIndex;
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
+        [weakSelf presentViewController:alert animated:YES completion:nil];
         
         
     }
@@ -145,6 +205,76 @@
 {
     return 1;
 }
+
+
+- (void)cleanCach
+{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+    NSArray *pathArray = [fileManager subpathsAtPath:cachesPath];
+    // 遍历缓存文件中所有文件
+    for (NSString *filePath in pathArray) {
+        NSString *deletePath = [cachesPath stringByAppendingPathComponent:filePath];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:deletePath]) {
+            [[NSFileManager defaultManager] removeItemAtPath:deletePath error:nil];
+            
+        }
+    }
+    
+    
+   self.cachesLabel.text = @"0.00M";
+    
+    
+}
+//#pragma mark - clearCachesSucess 方法的实现
+//- (void)clearCachesSucess
+//{
+//    if (self.isClean == NO) {
+//        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确定清除缓存?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+//        self.isClean = YES;
+//        [alertView show];
+//        
+//    }else {
+//        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"恭喜" message:@"缓存已经清空" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+//        [alertView show];
+//        
+//    }
+//    
+//    
+//    
+//}
+// 显示缓存大小 filePath 方法实现
+- (float)filePath
+{
+    NSString *cachPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+    return [self folderSizeAtPath:cachPath];
+}
+
+// 遍历文件夹 获得文件的大小，返回多少M 提示：你可以在工程界设置（m）
+- (float)folderSizeAtPath:(NSString *)folderPath
+{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if (![manager fileExistsAtPath:folderPath]) return 0;
+    NSEnumerator *childFilesEnumerator = [[manager subpathsAtPath:folderPath] objectEnumerator];
+    NSString *fileName;
+    long long folderSize = 0;
+    while ((fileName = [childFilesEnumerator nextObject]) != nil) {
+        NSString *fileAbsolutePath = [folderPath stringByAppendingPathComponent:fileName];
+        folderSize += [self fileSizeAtPath:fileAbsolutePath];
+    }
+    return folderSize / (1024 * 1024);
+}
+// fileSizeAtPath
+- (long long)fileSizeAtPath:(NSString *)filePath
+{
+    NSFileManager *manager = [NSFileManager defaultManager];
+    if ([manager fileExistsAtPath:filePath]) {
+        return [[manager attributesOfItemAtPath:filePath error:nil] fileSize];
+    }
+    return 0;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ODReleaseModel.h"
+#import "UIImageView+WebCache.h"
+#import "ODPersonalTaskButton.h"
+
 
 @interface ODReleaseCell : UICollectionViewCell
 
@@ -15,10 +19,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lovesLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *editButton;
-@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property (weak, nonatomic) IBOutlet UIView *editAndDeleteView;
+
+@property (nonatomic, strong) UIButton *editButton;
+@property (nonatomic, strong) UIButton *deleteButton;;
 
 
+@property (nonatomic, strong) ODReleaseModel *model;
 
 
 @end

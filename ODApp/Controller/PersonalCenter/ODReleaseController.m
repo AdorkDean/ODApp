@@ -21,24 +21,62 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     
     self.navigationItem.title = @"已发布的任务";
     
+    self.dataArray = [[NSArray alloc] init];
+    [self createCollectionView];
+    [self createRequestData];
+    
 }
 
-- (void) createRequestData
+- (void)createRequestData
 {
 
     __weakSelf
-    NSDictionary *parameter = @{@"page":@"1",@"city_id":@"0",@"my":@"1"};
+    NSDictionary *parameter = @{@"page":@"1",@"city_id":@"0",@"my":@"0", @"open_id":[ODUserInformation sharedODUserInformation].openID};
     [ODHttpTool getWithURL:ODPersonalReleaseTaskUrl parameters:parameter modelClass:[ODReleaseModel class] success:^(id model) {
         
-        
+        self.dataArray = [model result];
+        [weakSelf.collectionView reloadData];
     } failure:^(NSError *error) {
         
         
     }];
 }
 
+#pragma mark - Action
+- (void)editButtonClick:(UIButton *)button
+{
 
+    
+}
 
+- (void)deleteButtonClick:(UIButton *)button
+{
+
+    ODReleaseCell *cell = (ODReleaseCell *)button.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    
+    self.swap_id = self.model.swap_id;
+    
+    
+    [self deleteSkillRequest];
+}
+
+- (void)deleteSkillRequest{
+
+    self.manager = [AFHTTPRequestOperationManager manager];
+    NSLog(@"%@", self.model.swap_id);
+    NSDictionary *parameter = @{@"swap_id":self.model.swap_id};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weakSelf
+    [self.manager GET:ODPersonReleaseTaskDeleteUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"删除任务成功"];
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+        NSLog(@"_____________+++++++++++++++++++_______");
+    }];
+}
 
 
 #pragma mark - Create UICollectionView
@@ -73,20 +111,30 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    return nil;
+    ODReleaseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ODReleaseCellID forIndexPath:indexPath];
+    self.model = self.dataArray[indexPath.row];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+
+    [cell.editButton addTarget:self action:@selector(editButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [cell setModel:self.model];
+    
+    return cell;
     
 }
 
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
 
-    return CGSizeMake(KScreenWidth, 180);
+    return CGSizeMake(KScreenWidth, 138);
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    
+    ODLazyViewController *vc = [[ODLazyViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
