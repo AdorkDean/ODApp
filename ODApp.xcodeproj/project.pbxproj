@@ -10,6 +10,10 @@
 		453C139C602C89AF557B0F7E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E55588697041BF02F9C6E1 /* libPods.a */; };
 		9D16BDD31C59EEDA003627CD /* ODViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D16BDD11C59EEDA003627CD /* ODViolationsCell.m */; };
 		9D16BDD41C59EEDA003627CD /* ODViolationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D16BDD21C59EEDA003627CD /* ODViolationsCell.xib */; };
+		9D1F80FE1C76EAE000FC9C2C /* ODOperationFirstCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D1F80FC1C76EAE000FC9C2C /* ODOperationFirstCell.m */; };
+		9D1F80FF1C76EAE000FC9C2C /* ODOperationFirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D1F80FD1C76EAE000FC9C2C /* ODOperationFirstCell.xib */; };
+		9D1F81031C76EBE500FC9C2C /* ODOperationSeccondCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D1F81011C76EBE500FC9C2C /* ODOperationSeccondCell.m */; };
+		9D1F81041C76EBE500FC9C2C /* ODOperationSeccondCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D1F81021C76EBE500FC9C2C /* ODOperationSeccondCell.xib */; };
 		9D205C7A1C71733700B6499B /* ODOrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D205C791C71733700B6499B /* ODOrderDetailView.xib */; };
 		9D205C7C1C7173B500B6499B /* ODMyOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D205C7B1C7173B500B6499B /* ODMyOrderCell.xib */; };
 		9D8D9E1F1C75D7CB0064CD5A /* ODOperationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D9E1E1C75D7CB0064CD5A /* ODOperationController.m */; };
@@ -306,6 +310,12 @@
 		9D16BDD01C59EEDA003627CD /* ODViolationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODViolationsCell.h; sourceTree = "<group>"; };
 		9D16BDD11C59EEDA003627CD /* ODViolationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODViolationsCell.m; sourceTree = "<group>"; };
 		9D16BDD21C59EEDA003627CD /* ODViolationsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODViolationsCell.xib; sourceTree = "<group>"; };
+		9D1F80FB1C76EAE000FC9C2C /* ODOperationFirstCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOperationFirstCell.h; sourceTree = "<group>"; };
+		9D1F80FC1C76EAE000FC9C2C /* ODOperationFirstCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOperationFirstCell.m; sourceTree = "<group>"; };
+		9D1F80FD1C76EAE000FC9C2C /* ODOperationFirstCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODOperationFirstCell.xib; sourceTree = "<group>"; };
+		9D1F81001C76EBE500FC9C2C /* ODOperationSeccondCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOperationSeccondCell.h; sourceTree = "<group>"; };
+		9D1F81011C76EBE500FC9C2C /* ODOperationSeccondCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOperationSeccondCell.m; sourceTree = "<group>"; };
+		9D1F81021C76EBE500FC9C2C /* ODOperationSeccondCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODOperationSeccondCell.xib; sourceTree = "<group>"; };
 		9D205C791C71733700B6499B /* ODOrderDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODOrderDetailView.xib; sourceTree = "<group>"; };
 		9D205C7B1C7173B500B6499B /* ODMyOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyOrderCell.xib; sourceTree = "<group>"; };
 		9D8D9E1D1C75D7CB0064CD5A /* ODOperationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOperationController.h; sourceTree = "<group>"; };
@@ -2057,6 +2067,12 @@
 				C66B88411C75D72300F60E3D /* ODReleaseCell.xib */,
 				D4D0735F1C59B9FA008527C9 /* ODEvaluationCell.h */,
 				D4D073601C59B9FA008527C9 /* ODEvaluationCell.m */,
+				9D1F80FB1C76EAE000FC9C2C /* ODOperationFirstCell.h */,
+				9D1F80FC1C76EAE000FC9C2C /* ODOperationFirstCell.m */,
+				9D1F80FD1C76EAE000FC9C2C /* ODOperationFirstCell.xib */,
+				9D1F81001C76EBE500FC9C2C /* ODOperationSeccondCell.h */,
+				9D1F81011C76EBE500FC9C2C /* ODOperationSeccondCell.m */,
+				9D1F81021C76EBE500FC9C2C /* ODOperationSeccondCell.xib */,
 				D4D073611C59B9FA008527C9 /* ODMyApplyActivityCell */,
 				D4D073651C59B9FA008527C9 /* ODMyOrderRecordCell */,
 			);
@@ -2421,6 +2437,7 @@
 				C64D460A1C5F8C6F003BFFA0 /* UMSLoginViewController.xib in Resources */,
 				D4F76D601C60B38B00D59F02 /* ODActivityDetailHeadImgViewCell.xib in Resources */,
 				C66B88431C75D72300F60E3D /* ODReleaseCell.xib in Resources */,
+				9D1F81041C76EBE500FC9C2C /* ODOperationSeccondCell.xib in Resources */,
 				C64D46071C5F8C6F003BFFA0 /* UMSCommentInputControlleriPad.xib in Resources */,
 				D4D0750F1C59B9FA008527C9 /* ODCenderDetailView.xib in Resources */,
 				9DF2E9911C74667800F77976 /* ODSecondOrderDetailView.xib in Resources */,
@@ -2440,6 +2457,7 @@
 				D4D0751B1C59B9FA008527C9 /* ODRegisteredView.xib in Resources */,
 				D4D074FF1C59B9FA008527C9 /* ActivityDetailView.xib in Resources */,
 				D4F76DA91C61AEA100D59F02 /* ODAddressCell.xib in Resources */,
+				9D1F80FF1C76EAE000FC9C2C /* ODOperationFirstCell.xib in Resources */,
 				D4D075131C59B9FA008527C9 /* ODBindingMobileView.xib in Resources */,
 				D4D075211C59B9FA008527C9 /* ODTypeView.xib in Resources */,
 				D4D074FA1C59B9FA008527C9 /* ODCommunityDetailCell.xib in Resources */,
@@ -2541,6 +2559,7 @@
 				9DEDCF421C64B3ED003015C6 /* ODBazaarDetailViewController.m in Sources */,
 				D4D075271C59B9FA008527C9 /* ODMyOrderRecordCell.m in Sources */,
 				C66B88421C75D72300F60E3D /* ODReleaseCell.m in Sources */,
+				9D1F80FE1C76EAE000FC9C2C /* ODOperationFirstCell.m in Sources */,
 				D4D073801C59B9FA008527C9 /* ODCommumityViewController.m in Sources */,
 				D4D073761C59B9FA008527C9 /* ODActivityDetailController.m in Sources */,
 				D4D075291C59B9FA008527C9 /* ODTabBar.m in Sources */,
@@ -2696,6 +2715,7 @@
 				D4D0737B1C59B9FA008527C9 /* ODChoseCenterController.m in Sources */,
 				D4D075071C59B9FA008527C9 /* CenterYuYueView.m in Sources */,
 				9DEDCF6B1C64B3FC003015C6 /* ODBazaarDetailCollectionCell.m in Sources */,
+				9D1F81031C76EBE500FC9C2C /* ODOperationSeccondCell.m in Sources */,
 				9DF2E9861C74481700F77976 /* ODApplyListViewController.m in Sources */,
 				D4F76D4C1C605EA700D59F02 /* ODActivityListModel.m in Sources */,
 				9DEDCF461C64B3ED003015C6 /* ODBazaaeExchangeSkillViewController.m in Sources */,
