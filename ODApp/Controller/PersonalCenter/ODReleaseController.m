@@ -52,29 +52,31 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 - (void)deleteButtonClick:(UIButton *)button
 {
 
-    ODReleaseCell *cell = (ODReleaseCell *)button.superview;
+    ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     
-    self.swap_id = self.model.swap_id;
+    ODReleaseModel *model = self.dataArray[indexPath.row];
     
-    
+    self.swap_id = model.swap_id;
+ 
     [self deleteSkillRequest];
 }
 
 - (void)deleteSkillRequest{
 
     self.manager = [AFHTTPRequestOperationManager manager];
-    NSLog(@"%@", self.model.swap_id);
-    NSDictionary *parameter = @{@"swap_id":self.model.swap_id};
+    NSDictionary *parameter = @{@"swap_id":self.swap_id};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weakSelf
     [self.manager GET:ODPersonReleaseTaskDeleteUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
+        [weakSelf createRequestData];
+        NSLog(@"_____________%@", self.swap_id);
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"删除任务成功"];
+        
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
-        NSLog(@"_____________+++++++++++++++++++_______");
     }];
 }
 

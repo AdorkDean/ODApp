@@ -31,20 +31,20 @@
     self.editButton.frame = CGRectMake(0, 0, KScreenWidth / 2, 43);
     self.editButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [self.editButton setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
-    [self.editButton setImage:[UIImage imageNamed:@"icon_edit"] forState:UIControlStateNormal];
     [self.editButton setTitle:@"编辑" forState:UIControlStateNormal];
+    [self.editButton setHighlighted:YES];
+    [self.editButton setImage:[UIImage imageNamed:@"icon_edit"] forState:UIControlStateNormal];
     [self.editAndDeleteView addSubview:self.editButton];
-    
-    
-    
     
     self.deleteButton = [ODPersonalTaskButton buttonWithType:UIButtonTypeCustom];
     self.deleteButton.frame =  CGRectMake(KScreenWidth / 2, 0, KScreenWidth / 2, 43);
     self.deleteButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [self.deleteButton setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
     [self.deleteButton setTitle:@"删除" forState:UIControlStateNormal];
-    [self.editAndDeleteView addSubview:self.deleteButton];
+    [self.deleteButton setHighlighted:YES];
     [self.deleteButton setImage:[UIImage imageNamed:@"icon_delete"] forState:UIControlStateNormal];
+    [self.editAndDeleteView addSubview:self.deleteButton];
+    
 //    UIImageView *verticalLineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KScreenWidth / 2 - 0.5, 15, 1, 13)];
 //    verticalLineImageView.image = [UIImage imageNamed:@"icon_separate"];
 //    [self.editAndDeleteView addSubview:verticalLineImageView];
