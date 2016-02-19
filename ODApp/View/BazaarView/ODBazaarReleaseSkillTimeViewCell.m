@@ -22,10 +22,6 @@
     // Configure the view for the selected state
 }
 
--(void)showDataWithModel:(ODBazaarReleaseSkillTimeModel *)model
-{
-    self.timeLabel.text = model.display;
-}
 
 
 @end

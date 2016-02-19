@@ -10,9 +10,9 @@
 #import "ODBazaarReleaseSkillTimeModel.h"
 
 @interface ODBazaarReleaseSkillTimeViewCell : UITableViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIView *lineView;
-
--(void)showDataWithModel:(ODBazaarReleaseSkillTimeModel *)model;
+@property (weak, nonatomic) IBOutlet UIButton *openButton;
 
 @end
