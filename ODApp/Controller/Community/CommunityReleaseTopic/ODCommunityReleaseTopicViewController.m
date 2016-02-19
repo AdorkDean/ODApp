@@ -234,7 +234,6 @@ NSString *topicContentText = @"";
             NSString *str = result[@"File"];
             [weakSelf.strArray addObject:str];
             [weakSelf reloadImageButtons];
-            NSLog(@"%@",weakSelf.strArray);
 
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

@@ -21,6 +21,45 @@
     [self createRequest];
     [self createScrollView];
     [self joiningTogetherParmeters];
+    self.navigationItem.title = self.nick;
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
+}
+
+
+#pragma mark - 分享
+-(void)shareButtonClick
+{
+    
+    @try {
+        
+        ODBazaarExchangeSkillModel *model = self.dataArray[0];
+        NSString *url = model.share[@"icon"];
+        NSString *content = model.share[@"desc"];
+        NSString *link = model.share[@"link"];
+        NSString *title = model.share[@"title"];
+        
+        
+        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+        
+        [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+        
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+        
+        [UMSocialSnsService presentSnsIconSheetView:self
+                                             appKey:@"569dda54e0f55a994f0021cf"
+                                          shareText:content
+                                         shareImage:nil
+                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                           delegate:self];
+        
+    }
+    @catch (NSException *exception) {
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+    }
+    
 }
 
 
@@ -50,7 +89,6 @@
             ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
             [model setValuesForKeysWithDictionary:result];
             [weakSelf.dataArray addObject:model];
-            NSLog(@"%ld",model.loves.count);
             [weakSelf createUserInfoView];
             [weakSelf createDetailView];
             [weakSelf createBottomView];
@@ -65,8 +103,6 @@
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 3000);
-
     [self.view addSubview:self.scrollView];
 }
 
@@ -90,6 +126,8 @@
     [userInfoView addSubview:imageView];
     
     UILabel *certificationLabel = [[UILabel alloc]initWithFrame:CGRectMake(80, 20, kScreenSize.width-80-50, 20)];
+    certificationLabel.font = [UIFont systemFontOfSize:13];
+    certificationLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
     NSString *user_auth_status = [NSString stringWithFormat:@"%@",model.user[@"user_auth_status"]];
     if ([user_auth_status isEqualToString:@"0"]) {
         certificationLabel.text = @"未认证";
@@ -98,7 +136,7 @@
     }
     [userInfoView addSubview:certificationLabel];
     
-    UIImageView *arrowImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-25, 22.5, 15, 15)];
+    UIImageView *arrowImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-25, 25, 10, 10)];
     arrowImageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
     [userInfoView addSubview:arrowImageView];
 }
@@ -119,18 +157,21 @@
     [self.scrollView addSubview:detailView];
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, kScreenSize.width, 20)];
-    titleLabel.text = [NSString stringWithFormat:@"我去 %@",model.title];
+    titleLabel.text = [NSString stringWithFormat:@"我去 · %@",model.title];
     titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.font = [UIFont systemFontOfSize:15];
     [detailView addSubview:titleLabel];
     
     UILabel *priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(titleLabel.frame)+10, kScreenSize.width, 20)];
-    priceLabel.text = [NSString stringWithFormat:@"%@",self.model.price];
+    priceLabel.text = [[[NSString stringWithFormat:@"%@",model.price] stringByAppendingString:@"/"] stringByAppendingString:model.unit];
     priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     priceLabel.textAlignment = NSTextAlignmentCenter;
+    priceLabel.font = [UIFont systemFontOfSize:14];
     [detailView addSubview:priceLabel];
     
     UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(priceLabel.frame)+10, kScreenSize.width-20, [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14])];
     contentLabel.text = model.content;
+    contentLabel.font = [UIFont systemFontOfSize:14];
     [detailView addSubview:contentLabel];
     
     
@@ -235,15 +276,21 @@
     
     NSString *type = [NSString stringWithFormat:@"%@" ,model.swap_type];
     
-    if ([type isEqualToString:@"2"]) {
-        ODSecondOrderController *vc  =[[ODSecondOrderController alloc] init];
-        vc.informationModel = model;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else{
-        ODOrderController *orderController = [[ODOrderController alloc]init];
-        orderController.informationModel = model;
-        [self.navigationController pushViewController:orderController animated:YES];
+    if ([[[ODUserInformation sharedODUserInformation]openID] isEqualToString:@""]) {
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
         
+    }else{
+        if ([type isEqualToString:@"2"]) {
+            ODSecondOrderController *vc  =[[ODSecondOrderController alloc] init];
+            vc.informationModel = model;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            ODOrderController *orderController = [[ODOrderController alloc]init];
+            orderController.informationModel = model;
+            [self.navigationController pushViewController:orderController animated:YES];
+            
+        }
     }
 }
 

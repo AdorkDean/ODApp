@@ -14,11 +14,13 @@
 #import "AFHTTPRequestOperationManager.h"
 #import "ODBazaarExchangeSkillModel.h"
 #import "ODHelp.h"
+#import "UMSocial.h"
 #import "ODOthersInformationController.h"
 #import "ODOrderController.h"
 #import "ODCollectionController.h"
+#import "ODPersonalCenterViewController.h"
 
-@interface ODBazaarExchangeSkillDetailViewController : ODBaseViewController
+@interface ODBazaarExchangeSkillDetailViewController : ODBaseViewController<UMSocialUIDelegate>
 
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
@@ -26,4 +28,5 @@
 @property(nonatomic,strong)ODBazaarExchangeSkillModel *model;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)UILabel *loveLabel;
+@property(nonatomic,copy)NSString *nick;
 @end

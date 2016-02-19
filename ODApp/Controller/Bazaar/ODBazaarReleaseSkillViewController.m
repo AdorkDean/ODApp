@@ -207,7 +207,7 @@
     if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
         self.pickedImage = info[UIImagePickerControllerOriginalImage];
         
-//        [self createProgressHUDTitle];
+        [self createProgressHUDTitle];
         
         
         //图片转化为data
@@ -225,6 +225,16 @@
         
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+
+- (void)createProgressHUDTitle{
+    
+    self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+    [self.navigationController.view addSubview:self.hud ];
+    self.hud.delegate = self;
+    self.hud.labelText = @"图片上传中";
     
 }
 
@@ -313,6 +323,8 @@
         [self.bottomView removeFromSuperview];
         [self createBottomView];
     }
+    
+    [self.hud hide:NO afterDelay:0];
 }
 
 #pragma mark - 删除图片

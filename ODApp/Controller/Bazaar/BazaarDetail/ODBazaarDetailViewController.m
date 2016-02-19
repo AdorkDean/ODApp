@@ -19,24 +19,22 @@
     [super viewDidLoad];
   
     self.navigationItem.title = @"任务详情";
+    [self navigationInit];
     self.num = 1;
     self.view.backgroundColor = [UIColor whiteColor];
     [self createScrollView];
     [self createRequest];
-    
+
 }
 
 #pragma mark - 初始化导航
-#warning 需要更改。。。改完请删除注释。。
 -(void)navigationInit
 {
     //分享按钮
     if ([self.task_status_name isEqualToString:@"过期"]&& [[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
-         self.shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-61.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:@"删除" font:16];
-        [self.shareButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"删除"];
     }else{
-        self.shareButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-37.5, 16, 44, 44) target:self sel:@selector(shareButtonClick:) tag:0 image:@"" title:nil font:0];
-        UIImageView *shareImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width-37.5, 28, 20, 20) imageName:@"话题详情-分享icon" tag:0];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick:) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
     }
 }
 
