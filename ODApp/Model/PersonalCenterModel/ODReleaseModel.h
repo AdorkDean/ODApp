@@ -19,7 +19,7 @@
 @property (nonatomic,copy) NSString *love_num;
 @property (nonatomic,copy) NSString *share_num;
 @property (nonatomic,copy) NSString *love_id;
-@property (nonatomic,copy) NSString *imgs_small;
+@property (nonatomic,strong) NSArray *imgs_small;
 @property (nonatomic,copy) NSString *open_id;
 
 @end

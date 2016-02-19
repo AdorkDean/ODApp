@@ -19,7 +19,7 @@
 - (void)setModel:(ODReleaseModel *)model
 {
 
-//    self.titleImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.imgs_small];
+    [self.titleImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.imgs_small[0][@"img_url"]]];
     self.contentLabel.text = model.title;
     self.priceLabel.text = [NSString stringWithFormat:@"%@元/%@",model.price,model.unit];
     self.lovesLabel.text = [NSString stringWithFormat:@"%@  收藏",model.love_num];

@@ -22,18 +22,20 @@
     [super viewDidLoad];
     
     self.count = 1;
+
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"欧动社区";
     [self createRequest];
     [self joiningTogetherParmeters];
     [self createCollectionView];
     
+    __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self joiningTogetherParmeters];
+        [weakSelf joiningTogetherParmeters];
     }];
     
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [self loadMoreData];
+        [weakSelf loadMoreData];
     }];
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(searchButtonClick) image:[UIImage imageNamed:@"search"] highImage:nil];
@@ -45,8 +47,11 @@
 #pragma mark - 加载更多
 -(void)loadMoreData
 {
+    self.bbsType = self.bbsType ? self.bbsType : 4;
+    self.bbsMark = self.bbsMark ? self.bbsMark :@"";
+    
     self.count ++;
-    NSDictionary *parameter = @{@"type":@"4",@"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":@"0",@"call_array":@"1"};
+    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count], @"city_id":@"0", @"search":self.bbsMark, @"call_array":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
@@ -77,7 +82,6 @@
 }
 
 
-
 #pragma mark - 初始化manager
 -(void)createRequest
 {
@@ -90,8 +94,10 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
+    self.bbsType = self.bbsType ? self.bbsType : 4;
+    self.bbsMark = self.bbsMark ? self.bbsMark :@"";
     self.count = 1;
-    NSDictionary *parameter = @{@"type":@"4",@"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":@"0",@"call_array":@"1"};
+    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":@"0", @"search":self.bbsMark, @"call_array":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
@@ -109,11 +115,7 @@
             NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dcit[@"result"];
             NSDictionary *bbs_list = result[@"bbs_list"];
-//            NSArray *allkeys = [bbs_list allKeys];
-//            allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-//                NSComparisonResult result = [obj1 compare:obj2];
-//                return result == NSOrderedAscending;
-//            }];
+
             for (NSDictionary *itemDict in bbs_list) {
                 ODCommunityModel *model = [[ODCommunityModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
@@ -287,6 +289,8 @@
     if ([self.refresh isEqualToString:@"refresh"]) {
         [self.collectionView.mj_header beginRefreshing];
     }
+
+    
     
 }
 #pragma mark - 试图将要消失

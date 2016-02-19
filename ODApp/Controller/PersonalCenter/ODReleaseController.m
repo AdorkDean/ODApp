@@ -27,11 +27,11 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     
 }
 
-- (void) createRequestData
+- (void)createRequestData
 {
 
     __weakSelf
-    NSDictionary *parameter = @{@"page":@"1",@"city_id":@"0",@"my":@"1"};
+    NSDictionary *parameter = @{@"page":@"1",@"city_id":@"0",@"my":@"0", @"open_id":[ODUserInformation sharedODUserInformation].openID};
     [ODHttpTool getWithURL:ODPersonalReleaseTaskUrl parameters:parameter modelClass:[ODReleaseModel class] success:^(id model) {
         
         self.dataArray = [model result];
@@ -41,10 +41,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         
     }];
 }
-
-
-
-
 
 #pragma mark - Create UICollectionView
 - (void)createCollectionView
