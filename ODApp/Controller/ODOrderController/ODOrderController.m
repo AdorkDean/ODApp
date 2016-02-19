@@ -17,6 +17,7 @@
 #import "TimeButton.h"
 #import "UIImageView+WebCache.h"
 #import "ODAddressModel.h"
+#import "ODPayController.h"
 @interface ODOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UITextViewDelegate>
 
 @property(nonatomic,strong)UIButton *selectedButton;
@@ -50,7 +51,7 @@
     self.selectDataArray = [[NSMutableArray alloc] init];
     self.addressArray = [[NSMutableArray alloc] init];
     self.navigationItem.title = @"提交订单";
-
+    
     
     [self getData];
     [self getAddress];
@@ -80,7 +81,7 @@
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
             
-         
+            
             [weakSelf.addressArray removeAllObjects];
             
             
@@ -93,17 +94,17 @@
                 ODAddressModel *model = [[ODAddressModel alloc] init];
                 [model setValuesForKeysWithDictionary:addressDic];
                 [weakSelf.addressArray addObject:model];
-
+                
             }
-          
             
-          
+            
+            
             
             
             
         }
         
-      
+        
         [weakSelf.collectionView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -112,7 +113,7 @@
         
         
     }];
-
+    
 }
 
 - (void)getData
@@ -124,7 +125,7 @@
     NSDictionary *parameters = @{@"swap_id":[NSString stringWithFormat:@"%@" , self.informationModel.swap_id]};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
- 
+    
     
     [self.manager GET:kGetServecTimeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -148,7 +149,7 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         
-            
+        
         
     }];
     
@@ -206,15 +207,21 @@
 
 - (void)saveOrderAction:(UIButton *)sender
 {
-    if ([self.headView.orderView.timeLabel.text isEqualToString:@"服务时间"]) {
-         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入服务时间"];
-    }else if ([self.headView.orderView.addressLabel.text isEqualToString:@"联系地址"]){
-         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
-    }else{
-        
-         [self saveOrder];
-    }
-   
+    
+    
+    ODPayController *vc = [[ODPayController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    //    if ([self.headView.orderView.timeLabel.text isEqualToString:@"服务时间"]) {
+    //         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入服务时间"];
+    //    }else if ([self.headView.orderView.addressLabel.text isEqualToString:@"联系地址"]){
+    //         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
+    //    }else{
+    //
+    //         [self saveOrder];
+    //    }
+    
 }
 
 
@@ -227,14 +234,14 @@
     
     NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": self.headView.orderView.timeLabel.text , @"user_address_id":self.addressId , @"comment":self.headView.orderView.messageTextView.text};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-       __weak typeof (self)weakSelf = self;
+    __weak typeof (self)weakSelf = self;
     [self.orderManager GET:kSaveOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
             [weakSelf.navigationController popViewControllerAnimated:YES];
-          [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提交订单成功"];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提交订单成功"];
         }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
             
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
@@ -246,7 +253,7 @@
         
         
     }];
-
+    
 }
 
 
@@ -257,8 +264,8 @@
     ODOrderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
     
     cell.model = self.informationModel;
- 
-      
+    
+    
     
     
     return cell;
@@ -310,13 +317,13 @@
         self.headView.orderView.addressLabel.text = @"联系地址";
     }else{
         ODAddressModel *model = self.addressArray[0];
-         self.headView.orderView.addressLabel.text = model.address;
+        self.headView.orderView.addressLabel.text = model.address;
         self.addressId = [NSString stringWithFormat:@"%@" , model.id];
         
-      
+        
     }
-
-   
+    
+    
     
     self.headView.orderView.messageTextView.delegate = self;
     
@@ -332,7 +339,7 @@
     if (textView == self.headView.orderView.messageTextView) {
         if ([textView.text isEqualToString:NSLocalizedString(@"给ta留言", nil)]) {
             self.headView.orderView.messageTextView.text=NSLocalizedString(@"", nil);
-             self.headView.orderView.messageTextView.textColor = [UIColor blackColor];
+            self.headView.orderView.messageTextView.textColor = [UIColor blackColor];
         }
         else{
             ;
@@ -357,7 +364,7 @@
             message = textView.text;
         }
     }
-  
+    
 }
 
 
@@ -369,7 +376,7 @@
         if (textView == self.headView.orderView.messageTextView) {
             textView.text=NSLocalizedString(@"给他留言", nil);
             
-        
+            
         }
     }
 }
@@ -488,7 +495,7 @@
     
     for (int i = 0; i < 4; i++) {
         TimeButton *button = [[TimeButton alloc] initWithFrame: CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 80,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4)];
-         button.tag = 888 + i;
+        button.tag = 888 + i;
         [button addTarget:self action:@selector(ChosetimeAction:) forControlEvents:UIControlEventTouchUpInside];
         
         NSMutableDictionary *dic = timeArray[i];
@@ -511,7 +518,7 @@
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-          button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+            button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         }
         
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
@@ -520,7 +527,7 @@
     
     for (int i = 0; i < 4; i++) {
         TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 80 + 2 *( self.choseTimeView.frame.size.height - 80) / 4,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4)];
-      
+        
         
         button.tag = 888 + i + 8;
         [button addTarget:self action:@selector(ChosetimeAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -528,7 +535,7 @@
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-           button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+            button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         }
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
         [ self.choseTimeView addSubview:button];
@@ -541,7 +548,7 @@
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-           button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+            button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         }
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
         

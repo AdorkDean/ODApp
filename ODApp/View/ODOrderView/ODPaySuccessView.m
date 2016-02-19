@@ -40,12 +40,17 @@
     
     
     self.firstButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.firstButton.frame = CGRectMake(52.5, 300, 100, 30);
-  
+    self.firstButton.frame = CGRectMake((kScreenSize.width - 260 - 17.5) / 2, self.isSuccessLabel.frame.origin.y + 20 + 32.5, 130, 30);
+      [self.firstButton setBackgroundImage:[UIImage imageNamed:@"button_pay success_Order details_"] forState:UIControlStateNormal];
+    [self addSubview:self.firstButton];
     
-    [self.firstButton setBackgroundImage:[UIImage imageNamed:@"button_pay success_Order details_"] forState:UIControlStateNormal];
     
-      [self addSubview:self.firstButton];
+    self.secondButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.secondButton.frame = CGRectMake(self.firstButton.frame.origin.x + self.firstButton.frame.size.width + 17.5, self.isSuccessLabel.frame.origin.y + 20 + 32.5, 130, 30);
+    [self.secondButton setBackgroundImage:[UIImage imageNamed:@"button_pay success_Go shopping again_"] forState:UIControlStateNormal];
+    [self addSubview:self.secondButton];
+    
+    
     
 }
 

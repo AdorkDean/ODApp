@@ -23,13 +23,11 @@
     self.view.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     self.navigationItem.title = @"我的可服务时段";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(rightItmeClick:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"保存"];
-  
+    
     [self createTimeView];
     [self createRequest];
     [self createTableView];
     [self joiningTogetherParmeters];
-    
-    
 }
 
 -(void)rightItmeClick:(UIButton *)button
@@ -64,6 +62,7 @@
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.dataArray = [[NSMutableArray alloc]init];
 }
+
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
@@ -94,7 +93,8 @@
 
 -(void)createTableView
 {
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 70, kScreenSize.width, kScreenSize.height-64-70) style:UITableViewStyleGrouped];
+    
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 80, kScreenSize.width, kScreenSize.height-64-80) style:UITableViewStyleGrouped];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

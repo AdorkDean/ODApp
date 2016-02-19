@@ -1,20 +1,20 @@
 //
-//  ODBazaaeExchangeSkillViewController.m
+//  ODPersonalCenterCollectionViewController.m
 //  ODApp
 //
-//  Created by Odong-YG on 16/2/1.
-//  Copyright © 2016年 Odong-YG. All rights reserved.
+//  Created by Odong-YG on 16/2/18.
+//  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODBazaaeExchangeSkillViewController.h"
+#import "ODPersonalCenterCollectionViewController.h"
 
 #define cellID @"ODBazaarExchangeSkillCollectionCell"
 
-@interface ODBazaaeExchangeSkillViewController ()
+@interface ODPersonalCenterCollectionViewController ()
 
 @end
 
-@implementation ODBazaaeExchangeSkillViewController
+@implementation ODPersonalCenterCollectionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -25,6 +25,7 @@
     [self createCollectionView];
     [self joiningTogetherParmeters];
     
+    self.navigationItem.title = @"我的收藏";
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf joiningTogetherParmeters];
@@ -34,16 +35,14 @@
         [weakSelf loadMoreData];
     }];
 
-    
-
 }
 
 -(void)loadMoreData
 {
     self.page ++;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0"};
+    NSDictionary *parameter = @{@"type":@"4",@"page":[NSString stringWithFormat:@"%ld",self.page],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
+    [self downLoadDataWithUrl:kCollectionUrl parameter:signParameter];
 }
 -(void)createRequest
 {
@@ -56,10 +55,10 @@
 -(void)joiningTogetherParmeters
 {
     self.page = 1;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0"};
+    NSDictionary *parameter = @{@"type":@"4",@"page":[NSString stringWithFormat:@"%ld",self.page],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     NSLog(@"%@",signParameter);
-    [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
+    [self downLoadDataWithUrl:kCollectionUrl parameter:signParameter];
 }
 
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
@@ -87,7 +86,7 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
-
+        
     }];
 }
 
@@ -97,7 +96,7 @@
     flowLayout.minimumInteritemSpacing = 5;
     flowLayout.minimumLineSpacing = 5;
     flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0, kScreenSize.width,kScreenSize.height-64-40-55) collectionViewLayout:flowLayout];
+    self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0, kScreenSize.width,kScreenSize.height-64) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
@@ -156,7 +155,7 @@
         }
         cell.picViewConstraintHeight.constant = 0;
     }
-
+    
     return cell;
 }
 
@@ -182,7 +181,7 @@
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc]init];
     detailControler.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
-    detailControler.nick = model.user[@"nick"];
+    NSLog(@"%@",detailControler.swap_id);
     [self.navigationController pushViewController:detailControler animated:YES];
     
 }
@@ -204,10 +203,20 @@
     }
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

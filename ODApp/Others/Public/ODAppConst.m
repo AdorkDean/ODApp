@@ -9,7 +9,15 @@ CGFloat const ODTopY = 0;
 
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
-NSString *const KUserDefaultsOpenId = @"userOpenId";
+NSString * const KUserDefaultsOpenId = @"userOpenId";
+/** 友盟的apiKey */
+NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
+/** 微信的apiKey */
+NSString * const kGetWXAppId = @"wx64423cc9497cc581";
+NSString * const kGetWXAppSecret = @"a6034898f4a370df22a358c5e6192645";
+/** 高德地图的apiKey */
+NSString *const ODLocationApiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
+
 
 #pragma mark - 通知
 /** 显示集市的通知 */
@@ -25,18 +33,24 @@ NSString * const ODNotificationSearchHelp = @"ODNotificationSearchHelp";
 /**  换技能通知 */
 NSString * const ODNotificationChangeSkill = @"ODNotificationChangeSkill";
 
-/** 获取地址的apiKey */
-NSString *const ODLocationApiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
-
 
 
 #pragma mark - 请求URL接口
 /** 统一的URL */
 #ifdef DEBUG
-NSString * const ODBaseURL = @"http://woquapi.test.odong.com/1.0/";
+NSString * const ODBaseURL = @"http://woquapi.test.odong.com";
 #else
-NSString * const ODBaseURL = @"http://woquapi.test.odong.com/1.0/";
+NSString * const ODBaseURL = @"http://woquapi.test.odong.com";
 #endif
+
+NSString * const ODCityListUrl = @"/1.0/other/city/list";
+NSString * const ODHomeFoundUrl = @"/1.0/other/home";
+NSString * const KActivityListUrl = @"/1.0/store/activity/list";
+NSString * const KActivityDetailUrl = @"/1.0/store/apply/detail2";
+NSString * const KActivityApplyUrl = @"/1.0/store/activity/apply";
+NSString * const kCallbackUrl = @"/1.0/other/share/callback";
+NSString * const ODPersonalReleaseTaskUrl = @"/1.0/swap/list";
+
 
 NSString * const kBazaarUnlimitTaskUrl = @"http://woquapi.test.odong.com/1.0/task/list";
 NSString * const kBazaarLabelSearchUrl = @"http://woquapi.test.odong.com/1.0/task/tag/search";
@@ -67,8 +81,6 @@ NSString * const kHomeFoundPictureUrl = @"http://woquapi.test.odong.com/1.0/othe
 
 NSString * const ODSkillDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/info";
 
-NSString * const ODCityListUrl = @"other/city/list";
-NSString * const ODHomeFoundUrl = @"other/home";
 NSString * const ODHomeChangeSkillUrl = @"http://woquapi.test.odong.com/1.0/other/home";
 NSString *const ODFindJobUrl = @"http://www.myjob500.com/user/extloginpf";
 NSString * const ODHotActivityUrl = @"http://woquapi.test.odong.com/1.0/doc/store/activity/list";
@@ -86,10 +98,6 @@ NSString * const kEditeAddressUrl = @"http://woquapi.test.odong.com/1.0/user/add
 
 NSString * const kGetServecTimeUrl = @"http://woquapi.test.odong.com/1.0/swap/service/time";
 NSString * const kSaveOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/order";
-
-NSString * const KActivityListUrl = @"store/activity/list";
-NSString * const KActivityDetailUrl = @"store/apply/detail2";
-NSString * const KActivityApplyUrl = @"store/activity/apply";
 
 NSString * const kGetLikeListUrl = @"http://woquapi.test.odong.com/1.0/swap/love/list";
 NSString * const kGetMyOrderListUrl = @"http://woquapi.test.odong.com/1.0/swap/order/list";
@@ -112,10 +120,8 @@ NSString * const kGetStoreTimeUrl = @"http://woquapi.test.odong.com/1.0/store/ti
 NSString * const kSaveStoreOrderUrl = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
 NSString * const kGetApplyListUrl = @"http://woquapi.test.odong.com/1.0/store/apply/users";
 NSString * const kGiveOpinionUrl = @"http://woquapi.test.odong.com/1.0/other/feedback";
+NSString * const kCollectionUrl = @"http://woquapi.test.odong.com/1.0/user/love/list";
 
-NSString * const ODPersonalReleaseTaskUrl = @"swap/list";
 
-NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
-NSString * const kGetWXAppId = @"wxd25da104118aae2a";
-NSString * const kGetWXAppSecret = @"5da1d304e3b05fe65e4c14deddfa56f1";
+
 

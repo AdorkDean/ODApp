@@ -14,6 +14,16 @@ UIKIT_EXTERN CGFloat const ODTopY;
 /** 偏好设置保存用户信息 */
 UIKIT_EXTERN NSString * const KUserDefaultsOpenId;
 
+
+UIKIT_EXTERN NSString * const kGetUMAppkey;
+UIKIT_EXTERN NSString * const kGetWXAppId;
+UIKIT_EXTERN NSString * const kGetWXAppSecret;
+
+/** 高德地图的apiKey */
+UIKIT_EXTERN NSString *const ODLocationApiKey;
+
+
+
 #pragma mark - 通知
 /** 显示集市的通知 */
 UIKIT_EXTERN NSString * const ODNotificationShowBazaar;
@@ -29,9 +39,6 @@ UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
 
 /**  换技能通知 */
 UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
-
-/** 获取地址的apiKey */
-UIKIT_EXTERN NSString *const ODLocationApiKey;
 
 
 #pragma mark - 请求URL接口 
@@ -113,8 +120,7 @@ UIKIT_EXTERN NSString * const kGetApplyListUrl;
 UIKIT_EXTERN NSString * const kGiveOpinionUrl;
 UIKIT_EXTERN NSString * const ODPersonalReleaseTaskUrl;
 
-UIKIT_EXTERN NSString * const kGetUMAppkey;
-UIKIT_EXTERN NSString * const kGetWXAppId;
-UIKIT_EXTERN NSString * const kGetWXAppSecret;
+UIKIT_EXTERN NSString * const kCallbackUrl;
 
+UIKIT_EXTERN NSString * const kCollectionUrl;
 
