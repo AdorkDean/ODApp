@@ -21,7 +21,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     
     self.navigationItem.title = @"已发布的任务";
     
-//    self.dataArray = [[NSArray alloc] init];
+    self.dataArray = [[NSArray alloc] init];
     [self createCollectionView];
     [self createRequestData];
     
