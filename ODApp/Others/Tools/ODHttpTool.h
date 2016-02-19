@@ -28,7 +28,7 @@
  *  @param success    成功回调
  *  @param failure    失败回调
  */
-+ (void)postWithURL:(NSString *)URL parameters:(NSDictionary *)parameters modelClass:(Class)modeleClass success:(void (^)(id model))success failure:(void (^)(NSError *))failure;
++ (void)postWithURL:(NSString *)URL parameters:(NSDictionary *)parameters modelClass:(Class)modeleClass success:(void (^)(id model))success failure:(void (^)(NSError *error))failure;
 
 /**
  *  封装带文件的POST请求

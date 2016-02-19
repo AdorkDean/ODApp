@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ODReleaseModel.h"
+#import "UIImageView+WebCache.h"
 
 @interface ODReleaseCell : UICollectionViewCell
 
@@ -18,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *editButton;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
-
+@property (nonatomic, strong) ODReleaseModel *model;
 
 
 @end

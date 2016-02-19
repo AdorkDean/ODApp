@@ -60,7 +60,7 @@ NSString * const requestSuccessStatus = @"success";
     }];
 }
 
-+ (void)postWithURL:(NSString *)URL parameters:(NSDictionary *)parameters modelClass:(__unsafe_unretained Class)modeleClass success:(void (^)(id))success failure:(void (^)(NSError *))failure
++ (void)postWithURL:(NSString *)URL parameters:(NSDictionary *)parameters modelClass:(__unsafe_unretained Class)modeleClass success:(void (^)(id))success failure:(void (^)(NSError *error))failure
 {
     // 1.创建请求管理对象
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -88,6 +88,7 @@ NSString * const requestSuccessStatus = @"success";
     // 2.发送请求
     [manager POST:URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
+        NSLog(@"responseObject === %@",responseObject);
         if (success && [responseObject[requestStatus]isEqualToString:requestSuccessStatus])
         {
             id resultDic = responseObject[requsetResult];

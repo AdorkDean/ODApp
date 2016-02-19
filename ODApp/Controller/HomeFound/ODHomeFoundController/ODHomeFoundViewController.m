@@ -270,55 +270,81 @@
 #pragma mark - 寻圈子8个按钮点击事件
 - (void)emotionButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 3;
+    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
+    vc.bbsMark = @"情感";
+    vc.bbsType = 5;
+    [vc joiningTogetherParmeters];
 }
 
 - (void)funnyButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 3;
+    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
+    vc.bbsMark = @"搞笑";
+    vc.bbsType = 5;
+    [vc joiningTogetherParmeters];
 }
 
 - (void)moviesButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 3;
+    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
+    vc.bbsMark = @"影视";
+    vc.bbsType = 5;
+    [vc joiningTogetherParmeters];
 }
 
 - (void)quadraticButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 3;
+    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
+    vc.bbsMark = @"二次元";
+    vc.bbsType = 5;
+    [vc joiningTogetherParmeters];
 }
 
 - (void)lifeButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 3;
+    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
+    vc.bbsMark = @"生活";
+    vc.bbsType = 5;
+    [vc joiningTogetherParmeters];
 }
 
 - (void)starButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 3;
+    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
+    vc.bbsMark = @"明星";
+    vc.bbsType = 5;
+    [vc joiningTogetherParmeters];
 }
 
 - (void)beautifulButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 3;
+    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
+    vc.bbsMark = @"爱美";
+    vc.bbsType = 5;
+    [vc joiningTogetherParmeters];
 }
 
 - (void)petButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 3;
+    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
+    vc.bbsMark = @"宠物";
+    vc.bbsType = 5;
+    [vc joiningTogetherParmeters];
 }
 
 - (void)gestureButtonClick:(UIButton *)button
 {
-    
+    ODCommumityViewController *vc = [[ODCommumityViewController alloc] init];
+    vc.bbsMark = @"情感";
+    vc.bbsType = 5;
     self.tabBarController.selectedIndex = 3;
 }
 
