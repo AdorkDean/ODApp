@@ -469,14 +469,14 @@
     label.font = [UIFont systemFontOfSize:14];
     [self.timeView addSubview:label];
     
-    UILabel *setLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-100, 15, 50, 20)];
+    UILabel *setLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-85, 15, 50, 20)];
     setLabel.text = @"请设置";
     setLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
     setLabel.font = [UIFont systemFontOfSize:14];
     setLabel.textAlignment = NSTextAlignmentRight;
     [self.timeView addSubview:setLabel];
     
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-32.5, 17.5, 15, 15)];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-27.5, 20, 10, 10)];
     imageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
     [self.timeView addSubview:imageView];
     
@@ -502,8 +502,7 @@
 
 -(void)releaseButtonClick:(UIButton *)button
 {
-    ODBazaarReleaseSkillTimeViewController *skillTime = [[ODBazaarReleaseSkillTimeViewController alloc]init];
-    [self.navigationController pushViewController:skillTime animated:YES];
+    
 }
 
 #pragma mark - UITextFieldDelegate

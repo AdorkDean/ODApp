@@ -31,8 +31,6 @@ UIKIT_EXTERN NSString * const ODNotificationShowBazaar;
 /** 刷新我的话题通知 */
 UIKIT_EXTERN NSString * const ODNotificationMyTaskRefresh;
 
-/** 报名成功以后的通知 */
-UIKIT_EXTERN NSString * const ODNotificationActivityApllySuccess;
 
 /**  求帮助的通知 */
 UIKIT_EXTERN NSString * const ODNotificationSearchHelp;

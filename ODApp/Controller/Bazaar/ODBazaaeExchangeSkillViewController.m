@@ -122,6 +122,7 @@
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
+    [cell.headButton addTarget:self action:@selector(otherInfoClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.nickLabel.text = model.user[@"nick"];
     [cell showDatasWithModel:model];
     CGFloat width=kScreenSize.width>320?90:70;
@@ -170,6 +171,22 @@
     picController.selectedIndex = button.tag-10*indexPath.row;
     picController.skill = @"skill";
     [self.navigationController pushViewController:picController animated:YES];
+}
+
+-(void)otherInfoClick:(UIButton *)button
+{
+    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *)button.superview.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+    vc.open_id = model.user[@"open_id"];
+    
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]]) {
+        
+    }else{
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

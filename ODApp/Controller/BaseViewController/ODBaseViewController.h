@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ODClassMethod.h"
 #import "MBProgressHUD.h"
+#import "SVProgressHUD.h"
 #import "ODHttpTool.h"
 
 @interface ODBaseViewController : UIViewController <MBProgressHUDDelegate>

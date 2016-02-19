@@ -49,26 +49,29 @@ static NSString * const cellId = @"newActivityCell";
 {
     [super viewDidLoad];
     self.navigationItem.title = @"中心活动";
-    [self.tableView.mj_header beginRefreshing];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(requestData) name:ODNotificationActivityApllySuccess object:nil];
 }
 
-- (void)dealloc
+- (void)viewWillAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    [super viewWillAppear:animated];
+    [self.tableView.mj_header beginRefreshing];
 }
+
 -(void)requestData
 {
     __weakSelf
     NSDictionary *parameter = @{@"city_id":@"1"};
+    [SVProgressHUD showWithStatus:@"正在加载中。。"];
     [ODHttpTool getWithURL:KActivityListUrl parameters:parameter modelClass:[ODActivityListModel class] success:^(id json)
     {
         weakSelf.resultLists = [json result];
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView reloadData];
+        [SVProgressHUD dismiss];
     }
                    failure:^(NSError *error)
     {
+        [SVProgressHUD dismiss];
         [weakSelf.tableView.mj_header endRefreshing];
     }];
 }

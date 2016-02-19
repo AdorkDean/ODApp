@@ -25,7 +25,6 @@ NSString * const ODNotificationShowBazaar = @"ODShowBazaarNotification";
 
 /** 刷新我的话题通知 */
 NSString * const ODNotificationMyTaskRefresh = @"ODNotificationMyTaskRefresh";
-NSString * const ODNotificationActivityApllySuccess = @"ODNotificationActivityApllySuccess";
 
 /**  求帮助的通知 */
 NSString * const ODNotificationSearchHelp = @"ODNotificationSearchHelp";

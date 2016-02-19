@@ -311,6 +311,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 -(void)requestData
 {
      __weakSelf
+    [SVProgressHUD showWithStatus:@"正在加载"];
     NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue],@"open_id":[ODUserInformation sharedODUserInformation].openID};
     [ODHttpTool getWithURL:KActivityDetailUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
      {
@@ -320,7 +321,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
      }
                    failure:^(NSError *error)
      {
-         
+         [SVProgressHUD dismiss];
      }];
 }
 
@@ -332,6 +333,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     self.reportButton.enabled = self.resultModel.apply_status != 1;
     [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
     {
+        [SVProgressHUD dismiss];
         if (!image)
         {
             weakSelf.headImageView.od_height = 0;
@@ -564,16 +566,16 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 - (void)reportRequest
 {
     NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id",[ODUserInformation sharedODUserInformation].openID,@"open_id", nil];
+    [SVProgressHUD showWithStatus:@"正在报名中。。。"];
     [ODHttpTool getWithURL:KActivityApplyUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
      {
          [self requestData];
          self.reportButton.enabled = NO;
          [SVProgressHUD showSuccessWithStatus:@"报名成功"];
-         [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationActivityApllySuccess object:nil];
      }
                    failure:^(NSError *error)
      {
-         
+         [SVProgressHUD showErrorWithStatus:error.description];
      }];
 }
 
@@ -584,7 +586,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     if(response.responseCode == UMSResponseCodeSuccess)
     {
         sharedTimes ++;
-       [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %d",sharedTimes] forState:UIControlStateNormal];
+       [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %zd",sharedTimes] forState:UIControlStateNormal];
         
         
         NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"obj_id",@"4" ,@"type",@"微信",@"share_platform", nil];
