@@ -10,11 +10,14 @@ CGFloat const ODTopY = 0;
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 NSString * const KUserDefaultsOpenId = @"userOpenId";
-
-
+/** 友盟的apiKey */
 NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
+/** 微信的apiKey */
 NSString * const kGetWXAppId = @"wx64423cc9497cc581";
 NSString * const kGetWXAppSecret = @"a6034898f4a370df22a358c5e6192645";
+/** 高德地图的apiKey */
+NSString *const ODLocationApiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
+
 
 #pragma mark - 通知
 /** 显示集市的通知 */
@@ -29,9 +32,6 @@ NSString * const ODNotificationSearchHelp = @"ODNotificationSearchHelp";
 
 /**  换技能通知 */
 NSString * const ODNotificationChangeSkill = @"ODNotificationChangeSkill";
-
-/** 获取地址的apiKey */
-NSString *const ODLocationApiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
 
 
 

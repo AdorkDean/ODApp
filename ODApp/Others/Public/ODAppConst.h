@@ -19,6 +19,9 @@ UIKIT_EXTERN NSString * const kGetUMAppkey;
 UIKIT_EXTERN NSString * const kGetWXAppId;
 UIKIT_EXTERN NSString * const kGetWXAppSecret;
 
+/** 高德地图的apiKey */
+UIKIT_EXTERN NSString *const ODLocationApiKey;
+
 
 
 #pragma mark - 通知
@@ -36,9 +39,6 @@ UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
 
 /**  换技能通知 */
 UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
-
-/** 获取地址的apiKey */
-UIKIT_EXTERN NSString *const ODLocationApiKey;
 
 
 #pragma mark - 请求URL接口 
