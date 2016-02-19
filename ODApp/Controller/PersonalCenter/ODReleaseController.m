@@ -64,7 +64,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 - (void)deleteSkillRequest{
 
     self.manager = [AFHTTPRequestOperationManager manager];
-    NSLog(@"%@", self.model.swap_id);
     NSDictionary *parameter = @{@"swap_id":self.model.swap_id};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
