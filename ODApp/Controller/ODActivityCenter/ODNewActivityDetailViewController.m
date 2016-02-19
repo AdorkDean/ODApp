@@ -569,7 +569,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
          [self requestData];
          self.reportButton.enabled = NO;
          [SVProgressHUD showSuccessWithStatus:@"报名成功"];
-         [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationActivityApllySuccess object:nil];
      }
                    failure:^(NSError *error)
      {
@@ -584,7 +583,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     if(response.responseCode == UMSResponseCodeSuccess)
     {
         sharedTimes ++;
-       [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %d",sharedTimes] forState:UIControlStateNormal];
+       [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %zd",sharedTimes] forState:UIControlStateNormal];
         
         
         NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"obj_id",@"4" ,@"type",@"微信",@"share_platform", nil];
