@@ -42,6 +42,43 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     }];
 }
 
+#pragma mark - Action
+- (void)editButtonClick:(UIButton *)button
+{
+
+    
+}
+
+- (void)deleteButtonClick:(UIButton *)button
+{
+
+    ODReleaseCell *cell = (ODReleaseCell *)button.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    
+    self.swap_id = self.model.swap_id;
+    
+    
+    [self deleteSkillRequest];
+}
+
+- (void)deleteSkillRequest{
+
+    self.manager = [AFHTTPRequestOperationManager manager];
+    NSLog(@"%@", self.model.swap_id);
+    NSDictionary *parameter = @{@"swap_id":self.model.swap_id};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weakSelf
+    [self.manager GET:ODPersonReleaseTaskDeleteUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"删除任务成功"];
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+        NSLog(@"_____________+++++++++++++++++++_______");
+    }];
+}
+
+
 #pragma mark - Create UICollectionView
 - (void)createCollectionView
 {
@@ -75,9 +112,13 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 {
 
     ODReleaseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ODReleaseCellID forIndexPath:indexPath];
-    ODReleaseModel *model = self.dataArray[indexPath.row];
+    self.model = self.dataArray[indexPath.row];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    [cell setModel:model];
+
+    [cell.editButton addTarget:self action:@selector(editButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [cell setModel:self.model];
     
     return cell;
     
@@ -86,13 +127,14 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
 
-    return CGSizeMake(KScreenWidth, 180);
+    return CGSizeMake(KScreenWidth, 138);
 }
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    
+    ODLazyViewController *vc = [[ODLazyViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

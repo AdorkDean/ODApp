@@ -81,6 +81,8 @@ UIKIT_EXTERN NSString * const ODHomeFoundUrl;
 UIKIT_EXTERN NSString * const ODCityListUrl;
 UIKIT_EXTERN NSString * const ODHomeChangeSkillUrl;
 
+
+
 UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
 UIKIT_EXTERN NSString * const kMyApplyActivityUrl;
@@ -119,6 +121,7 @@ UIKIT_EXTERN NSString * const kGetApplyListUrl;
 
 UIKIT_EXTERN NSString * const kGiveOpinionUrl;
 UIKIT_EXTERN NSString * const ODPersonalReleaseTaskUrl;
+UIKIT_EXTERN NSString * const ODPersonReleaseTaskDeleteUrl;
 
 UIKIT_EXTERN NSString * const kCallbackUrl;
 
