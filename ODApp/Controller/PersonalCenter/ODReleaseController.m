@@ -21,6 +21,10 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     
     self.navigationItem.title = @"已发布的任务";
     
+//    self.dataArray = [[NSArray alloc] init];
+    [self createCollectionView];
+    [self createRequestData];
+    
 }
 
 - (void) createRequestData
@@ -30,7 +34,8 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     NSDictionary *parameter = @{@"page":@"1",@"city_id":@"0",@"my":@"1"};
     [ODHttpTool getWithURL:ODPersonalReleaseTaskUrl parameters:parameter modelClass:[ODReleaseModel class] success:^(id model) {
         
-        
+        self.dataArray = [model result];
+        [weakSelf.collectionView reloadData];
     } failure:^(NSError *error) {
         
         
@@ -73,7 +78,12 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 
-    return nil;
+    ODReleaseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ODReleaseCellID forIndexPath:indexPath];
+    ODReleaseModel *model = self.dataArray[indexPath.row];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    [cell setModel:model];
+    
+    return cell;
     
 }
 
