@@ -8,6 +8,7 @@
 #import "mjrefresh.h"
 #import "ODActivitylistModel.h"
 #import "ODNewActivityCell.h"
+#import "ODPersonalCenterViewController.h"
 #import "ODNewActivityCenterViewController.h"
 #import "ODNewActivityDetailViewController.h"
 #import "ODActivityDetailViewController.h"
@@ -49,26 +50,29 @@ static NSString * const cellId = @"newActivityCell";
 {
     [super viewDidLoad];
     self.navigationItem.title = @"中心活动";
-    [self.tableView.mj_header beginRefreshing];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(requestData) name:ODNotificationActivityApllySuccess object:nil];
 }
 
-- (void)dealloc
+- (void)viewWillAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
+    [super viewWillAppear:animated];
+    [self.tableView.mj_header beginRefreshing];
 }
+
 -(void)requestData
 {
     __weakSelf
     NSDictionary *parameter = @{@"city_id":@"1"};
+    [SVProgressHUD showWithStatus:@"正在加载中。。"];
     [ODHttpTool getWithURL:KActivityListUrl parameters:parameter modelClass:[ODActivityListModel class] success:^(id json)
     {
         weakSelf.resultLists = [json result];
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView reloadData];
+        [SVProgressHUD dismiss];
     }
                    failure:^(NSError *error)
     {
+        [SVProgressHUD dismiss];
         [weakSelf.tableView.mj_header endRefreshing];
     }];
 }
@@ -90,9 +94,20 @@ static NSString * const cellId = @"newActivityCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODNewActivityDetailViewController *detailViewController = [[ODNewActivityDetailViewController alloc] initWithNibName:nil bundle:nil];
-    detailViewController.acitityId = [self.resultLists[indexPath.row]activity_id];
-    [self.navigationController pushViewController:detailViewController animated:YES];
+    if ([ODUserInformation sharedODUserInformation].openID.length)
+    {
+        ODNewActivityDetailViewController *detailViewController = [[ODNewActivityDetailViewController alloc] initWithNibName:nil bundle:nil];
+        detailViewController.acitityId = [self.resultLists[indexPath.row]activity_id];
+        [self.navigationController pushViewController:detailViewController animated:YES];
+    }
+    else
+    {
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            ODPersonalCenterViewController *perV = [[ODPersonalCenterViewController alloc]init];
+            [self presentViewController:perV animated:YES completion:nil];
+        });
+    }
 }
 
 @end

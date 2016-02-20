@@ -130,8 +130,10 @@
         for (id vc in cell.picView.subviews) {
             [vc removeFromSuperview];
         }
-        if (model.imgs_small.count==4) {
-            for (NSInteger i = 0; i < model.imgs_small.count; i++) {
+        if (model.imgs_small.count==4)
+        {
+            for (NSInteger i = 0; i < model.imgs_small.count; i++)
+            {
                 NSDictionary *dict = model.imgs_small[i];
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
                 [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
@@ -140,8 +142,11 @@
                 [cell.picView addSubview:imageButton];
             }
             cell.picViewConstraintHeight.constant = 2*width+5;
-        }else{
-            for (NSInteger i = 0;i < model.imgs_small.count ; i++) {
+        }
+        else
+        {
+            for (NSInteger i = 0;i < model.imgs_small.count ; i++)
+            {
                 NSDictionary *dict = model.imgs_small[i];
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
                 [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
@@ -151,8 +156,11 @@
             }
             cell.picViewConstraintHeight.constant = width+(width+5)*(model.imgs_small.count/3);
         }
-    }else{
-        for (id vc in cell.picView.subviews) {
+    }
+    else
+    {
+        for (id vc in cell.picView.subviews)
+        {
             [vc removeFromSuperview];
         }
         cell.picViewConstraintHeight.constant = 0;

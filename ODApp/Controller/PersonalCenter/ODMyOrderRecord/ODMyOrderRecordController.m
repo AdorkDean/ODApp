@@ -99,7 +99,7 @@
 
             if (weakSelf.orderArray.count == 0) {
                 weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无预约" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [weakSelf.view addSubview:self.noReusltLabel];
+                [weakSelf.view addSubview:weakSelf.noReusltLabel];
             }
             
             [weakSelf.collectionView reloadData];
