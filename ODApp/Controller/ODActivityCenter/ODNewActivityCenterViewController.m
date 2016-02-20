@@ -102,8 +102,11 @@ static NSString * const cellId = @"newActivityCell";
     }
     else
     {
-        ODPersonalCenterViewController *perV = [[ODPersonalCenterViewController alloc]init];
-        [self presentViewController:perV animated:YES completion:nil];
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+            ODPersonalCenterViewController *perV = [[ODPersonalCenterViewController alloc]init];
+            [self presentViewController:perV animated:YES completion:nil];
+        });
     }
 }
 

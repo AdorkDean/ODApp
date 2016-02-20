@@ -624,10 +624,12 @@ updatingLocation:(BOOL)updatingLocation{
     {
         //通过AMapReGeocodeSearchResponse对象处理搜索结果
         NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
-        if (result.length == 0) {
+        if (result.length == 0)
+        {
             result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
         }
-
+else
+{
         NSString *cityResult = [result substringToIndex:[result length] - 1];
 
 
@@ -655,6 +657,7 @@ updatingLocation:(BOOL)updatingLocation{
         }]];
 
         [self presentViewController:alert animated:YES completion:nil];
+}
     }
 }
 
