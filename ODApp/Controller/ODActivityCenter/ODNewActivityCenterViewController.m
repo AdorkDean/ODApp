@@ -8,6 +8,7 @@
 #import "mjrefresh.h"
 #import "ODActivitylistModel.h"
 #import "ODNewActivityCell.h"
+#import "ODPersonalCenterViewController.h"
 #import "ODNewActivityCenterViewController.h"
 #import "ODNewActivityDetailViewController.h"
 #import "ODActivityDetailViewController.h"
@@ -93,9 +94,17 @@ static NSString * const cellId = @"newActivityCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODNewActivityDetailViewController *detailViewController = [[ODNewActivityDetailViewController alloc] initWithNibName:nil bundle:nil];
-    detailViewController.acitityId = [self.resultLists[indexPath.row]activity_id];
-    [self.navigationController pushViewController:detailViewController animated:YES];
+    if ([ODUserInformation sharedODUserInformation].openID.length)
+    {
+        ODNewActivityDetailViewController *detailViewController = [[ODNewActivityDetailViewController alloc] initWithNibName:nil bundle:nil];
+        detailViewController.acitityId = [self.resultLists[indexPath.row]activity_id];
+        [self.navigationController pushViewController:detailViewController animated:YES];
+    }
+    else
+    {
+        ODPersonalCenterViewController *perV = [[ODPersonalCenterViewController alloc]init];
+        [self presentViewController:perV animated:YES completion:nil];
+    }
 }
 
 @end
