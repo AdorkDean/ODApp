@@ -27,7 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    __weakSelf
     self.navigationItem.title = @"首页";
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -225,7 +224,7 @@
 - (void)searchCircleButtonClick:(UIButton *)button
 {
     
-    self.tabBarController.selectedIndex = 3;
+    [self giveCommumityContent:nil andBbsType:4];
 }
 
 - (void)searchHelpButtonClick:(UIButton *)button
@@ -255,78 +254,87 @@
 - (void)imageButtonClick:(UIButton *)button
 {
     
-    ODNewActivityDetailViewController *vc = [[ODNewActivityDetailViewController alloc] init];
-    
-    
-    vc.acitityId = [self.pictureIdArray[button.tag - 100] intValue];
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+        
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
+        
+    }else{
+        
+        ODNewActivityDetailViewController *vc = [[ODNewActivityDetailViewController alloc] init];
+        
+        
+        vc.acitityId = [self.pictureIdArray[button.tag - 100] intValue];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
 }
+    
+
 
 #pragma mark - 寻圈子8个按钮点击事件
 - (void)emotionButtonClick:(UIButton *)button
 {
-    [self giveCommumityContent:@"情感"];
+    [self giveCommumityContent:@"情感" andBbsType:5];
 }
 
 - (void)funnyButtonClick:(UIButton *)button
 {
 
-    [self giveCommumityContent:@"搞笑"];
+    [self giveCommumityContent:@"搞笑" andBbsType:5];
 }
 
 - (void)moviesButtonClick:(UIButton *)button
 {
-    [self giveCommumityContent:@"影视"];
+    [self giveCommumityContent:@"影视" andBbsType:5];
 }
 
 - (void)quadraticButtonClick:(UIButton *)button
 {
-    [self giveCommumityContent:@"二次元"];
+    [self giveCommumityContent:@"二次元" andBbsType:5];
 }
 
 - (void)lifeButtonClick:(UIButton *)button
 {
-    [self giveCommumityContent:@"生活"];
+
+    [self giveCommumityContent:@"生活" andBbsType:5];
 }
 
 - (void)starButtonClick:(UIButton *)button
 {
-    [self giveCommumityContent:@"明星"];
+
+    [self giveCommumityContent:@"明星" andBbsType:5];
 }
 
 - (void)beautifulButtonClick:(UIButton *)button
 {
-    [self giveCommumityContent:@"爱美"];
+ 
+    [self giveCommumityContent:@"爱美" andBbsType:5];
 }
 
 - (void)petButtonClick:(UIButton *)button
 {
-    [self giveCommumityContent:@"宠物"];
 
+    [self giveCommumityContent:@"宠物" andBbsType:5];
 }
 
 #pragma mark - 加入更多圈子点击事件
 - (void)gestureButtonClick:(UIButton *)button
 {
     
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsType = 4;
-    vc.refresh = @"refresh";
-    [vc joiningTogetherParmeters];
-
+    [self giveCommumityContent:nil andBbsType:4];
 }
 
 #pragma mark - 寻圈子跳转传值
-- (void)giveCommumityContent:(NSString *)bbsMark
+- (void)giveCommumityContent:(NSString *)bbsMark andBbsType:(float)bbsType
 {
     
     self.tabBarController.selectedIndex = 3;
     ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
     vc.bbsMark = bbsMark;
-    vc.bbsType = 5;
-    vc.refresh = @"refresh";
+    vc.bbsType = bbsType;
+    vc.refresh = YES;
     [vc joiningTogetherParmeters];
 }
 
