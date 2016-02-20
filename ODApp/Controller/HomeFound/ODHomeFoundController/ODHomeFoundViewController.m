@@ -27,7 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    __weakSelf
     self.navigationItem.title = @"首页";
     
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -45,10 +44,6 @@
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
     
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakSelf refreshdata];
-        
-    }];
     
     [MAMapServices sharedServices].apiKey = ODLocationApiKey;
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
@@ -169,10 +164,10 @@
                 [weakSelf.dataArray addObject:model];
             }
             [weakSelf createCollectionView];
+            [weakSelf.collectionView.mj_header endRefreshing];
         }
         
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [weakSelf.collectionView.mj_header endRefreshing];
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) { 
         
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
@@ -229,7 +224,7 @@
 - (void)searchCircleButtonClick:(UIButton *)button
 {
     
-    self.tabBarController.selectedIndex = 3;
+    [self giveCommumityContent:nil andBbsType:4];
 }
 
 - (void)searchHelpButtonClick:(UIButton *)button
@@ -259,106 +254,101 @@
 - (void)imageButtonClick:(UIButton *)button
 {
     
-    ODNewActivityDetailViewController *vc = [[ODNewActivityDetailViewController alloc] init];
-    
-    
-    vc.acitityId = [self.pictureIdArray[button.tag - 100] intValue];
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+        
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
+        
+    }else{
+        
+        ODNewActivityDetailViewController *vc = [[ODNewActivityDetailViewController alloc] init];
+        
+        
+        vc.acitityId = [self.pictureIdArray[button.tag - 100] intValue];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
 }
+    
+
 
 #pragma mark - 寻圈子8个按钮点击事件
 - (void)emotionButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"情感";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+    [self giveCommumityContent:@"情感" andBbsType:5];
 }
 
 - (void)funnyButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"搞笑";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+
+    [self giveCommumityContent:@"搞笑" andBbsType:5];
 }
 
 - (void)moviesButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"影视";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+    [self giveCommumityContent:@"影视" andBbsType:5];
 }
 
 - (void)quadraticButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"二次元";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+    [self giveCommumityContent:@"二次元" andBbsType:5];
 }
 
 - (void)lifeButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"生活";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+
+    [self giveCommumityContent:@"生活" andBbsType:5];
 }
 
 - (void)starButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"明星";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+
+    [self giveCommumityContent:@"明星" andBbsType:5];
 }
 
 - (void)beautifulButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"爱美";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+ 
+    [self giveCommumityContent:@"爱美" andBbsType:5];
 }
 
 - (void)petButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"宠物";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+
+    [self giveCommumityContent:@"宠物" andBbsType:5];
 }
 
+#pragma mark - 加入更多圈子点击事件
 - (void)gestureButtonClick:(UIButton *)button
 {
-    ODCommumityViewController *vc = [[ODCommumityViewController alloc] init];
-    vc.bbsMark = @"情感";
-    vc.bbsType = 5;
+    
+    [self giveCommumityContent:nil andBbsType:4];
+}
+
+#pragma mark - 寻圈子跳转传值
+- (void)giveCommumityContent:(NSString *)bbsMark andBbsType:(float)bbsType
+{
+    
     self.tabBarController.selectedIndex = 3;
+    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
+    vc.bbsMark = bbsMark;
+    vc.bbsType = bbsType;
+    vc.refresh = YES;
+    [vc joiningTogetherParmeters];
 }
 
 #pragma mark - 用户头像点击事件
 - (void)headButtonClick:(UIButton *)button
 {
     
-    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview;
-    NSIndexPath *indexpath = [self.collectionView indexPathForCell:cell];
-    ODCommunityModel *model = self.dataArray[indexpath.row];
-    NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *)button.superview.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-    vc.open_id = [userInfoDic[userId]open_id];
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:[userInfoDic[userId]open_id]]) {
+    vc.open_id = model.user[@"open_id"];
+    
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]]) {
         
     }else{
         
@@ -393,7 +383,7 @@
 #pragma mark - Create UICollectionView
 - (void)createCollectionView
 {
-    
+    __weakSelf
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight-ODTabBarHeight) collectionViewLayout:self.flowLayout];
     
@@ -409,7 +399,11 @@
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-    
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf refreshdata];
+        
+    }];
+
     [self.view addSubview:self.collectionView];
 }
 
@@ -630,10 +624,12 @@ updatingLocation:(BOOL)updatingLocation{
     {
         //通过AMapReGeocodeSearchResponse对象处理搜索结果
         NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
-        if (result.length == 0) {
+        if (result.length == 0)
+        {
             result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
         }
-
+else
+{
         NSString *cityResult = [result substringToIndex:[result length] - 1];
 
 
@@ -661,6 +657,7 @@ updatingLocation:(BOOL)updatingLocation{
         }]];
 
         [self presentViewController:alert animated:YES completion:nil];
+}
     }
 }
 

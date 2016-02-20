@@ -15,7 +15,12 @@
 @interface ODBazaarReleaseSkillTimeViewController : ODBaseViewController<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong)NSMutableArray *dataArray;
+@property(nonatomic,strong)NSMutableArray *mArray;
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
+@property(nonatomic,copy)NSString *status;
+@property(nonatomic)NSInteger index1;
+@property(nonatomic)NSInteger index2;
+@property(nonatomic)NSInteger index3;
 
 @end

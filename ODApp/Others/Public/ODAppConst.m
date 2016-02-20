@@ -25,7 +25,6 @@ NSString * const ODNotificationShowBazaar = @"ODShowBazaarNotification";
 
 /** 刷新我的话题通知 */
 NSString * const ODNotificationMyTaskRefresh = @"ODNotificationMyTaskRefresh";
-NSString * const ODNotificationActivityApllySuccess = @"ODNotificationActivityApllySuccess";
 
 /**  求帮助的通知 */
 NSString * const ODNotificationSearchHelp = @"ODNotificationSearchHelp";
@@ -49,7 +48,7 @@ NSString * const KActivityDetailUrl = @"/1.0/store/apply/detail2";
 NSString * const KActivityApplyUrl = @"/1.0/store/activity/apply";
 NSString * const kCallbackUrl = @"/1.0/other/share/callback";
 NSString * const ODPersonalReleaseTaskUrl = @"/1.0/swap/list";
-
+NSString * const ODPersonReleaseTaskDeleteUrl = @"http://woquapi.test.odong.com/1.0/swap/del";
 
 NSString * const kBazaarUnlimitTaskUrl = @"http://woquapi.test.odong.com/1.0/task/list";
 NSString * const kBazaarLabelSearchUrl = @"http://woquapi.test.odong.com/1.0/task/tag/search";
@@ -63,6 +62,8 @@ NSString * const kBazaarTaskInitiateCompleteUrl = @"http://woquapi.test.odong.co
 NSString * const kBazaarExchangeSkillUrl = @"http://woquapi.test.odong.com/1.0/swap/list";
 NSString * const kBazaarExchangeSkillDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/info";
 NSString * const kBazaarReleaseSkillTimeUrl = @"http://woquapi.test.odong.com/1.0/swap/schedule";
+NSString * const kBazaarExchangeSkillDetailLoveUrl = @"http://woquapi.test.odong.com/1.0/other/love/add";
+NSString * const kBazaarExchangeSkillDetailNotLoveUrl = @"http://woquapi.test.odong.com/1.0/other/love/del";
 
 NSString * const kCommunityBbsListUrl = @"http://woquapi.test.odong.com/1.0/bbs/list/latest";
 NSString * const kCommunityReleaseBbsUrl = @"http://woquapi.test.odong.com/1.0/bbs/create";

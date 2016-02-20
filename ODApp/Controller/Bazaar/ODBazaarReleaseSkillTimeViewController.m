@@ -19,10 +19,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.index1 = 1;
+    self.index2 = 1;
+    self.index3 = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     self.navigationItem.title = @"我的可服务时段";
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(rightItmeClick:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"保存"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(rightItmeClick:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确定"];
     
     [self createTimeView];
     [self createRequest];
@@ -41,10 +44,11 @@
     CGFloat imgWidth = (kScreenSize.width-30-90)/7;
     CGFloat labelWidth = (kScreenSize.width-15)/7;
     for (NSInteger i = 0; i < array.count; i++) {
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(15+(imgWidth+15)*i, 10, imgWidth, imgWidth)];
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(15+(imgWidth+15)*i, 12.5, imgWidth, imgWidth)];
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = imgWidth/2;
         imageView.image = [UIImage imageNamed:@"time4_icon"];
+        imageView.tag = 10+i;
         [self.view addSubview:imageView];
         
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(7.5+labelWidth*i, CGRectGetMaxY(imageView.frame)+9, labelWidth, 20)];
@@ -61,6 +65,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.dataArray = [[NSMutableArray alloc]init];
+    self.mArray = [[NSMutableArray alloc]init];
 }
 
 #pragma mark - 拼接参数
@@ -83,8 +88,17 @@
                 ODBazaarReleaseSkillTimeModel *model = [[ODBazaarReleaseSkillTimeModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
-                [weakSelf.tableView reloadData];
             }
+            
+            for (NSInteger i = 0; i < 7; i++) {
+                NSMutableArray *array = [NSMutableArray array];
+                for (NSInteger j = 0; j < 3; j++) {
+                    ODBazaarReleaseSkillTimeModel *model = [weakSelf.dataArray objectAtIndex:i*3+j];
+                    [array addObject:model];
+                }
+                [weakSelf.mArray addObject:array];
+            }
+            [weakSelf.tableView reloadData];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -93,8 +107,8 @@
 
 -(void)createTableView
 {
-    
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 80, kScreenSize.width, kScreenSize.height-64-80) style:UITableViewStyleGrouped];
+    CGFloat imgWidth = (kScreenSize.width-30-90)/7;
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 54+imgWidth, kScreenSize.width, kScreenSize.height-64-54-imgWidth) style:UITableViewStylePlain];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -104,44 +118,79 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 7;
+    return self.mArray.count;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return [[self.mArray objectAtIndex:section]count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ODBazaarReleaseSkillTimeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    ODBazaarReleaseSkillTimeModel *model = [[ODBazaarReleaseSkillTimeModel alloc]init];
-    [cell showDataWithModel:model];
+    ODBazaarReleaseSkillTimeModel *model = [[self.mArray objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    [cell.openButton addTarget:self action:@selector(openButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    cell.timeLabel.text = model.display;
+    self.status = [NSString stringWithFormat:@"%@",model.status];
     return cell;
 }
 
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return 35;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *view = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, kScreenSize.width-10, 20)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 40)];
     view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     
     NSArray *array = @[@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六",@"星期日"];
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, kScreenSize.width-10, 20)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, kScreenSize.width-10, 10)];
     label.text = [array objectAtIndex:section];
     label.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
-    label.font = [UIFont systemFontOfSize:14];
+    label.font = [UIFont systemFontOfSize:10];
     [view addSubview:label];
     return view;
 }
 
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 50;
+    return 40;
+}
+
+-(void)openButtonClick:(UIButton *)button
+{
+    ODBazaarReleaseSkillTimeViewCell *cell = (ODBazaarReleaseSkillTimeViewCell *)button.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    if (indexPath.section == 0) {
+        UIImageView *imageView = (UIImageView *)[self.view viewWithTag:10];
+    }
+    
+    if (indexPath.section == 1) {
+        
+    }
+    
+    if (indexPath.section == 2) {
+        
+    }
+    
+    if (indexPath.section == 3) {
+        
+    }
+    
+    if (indexPath.section == 4) {
+        
+    }
+    
+    if (indexPath.section == 5) {
+        
+    }
+    
+    if (indexPath.section == 6) {
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -149,14 +198,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

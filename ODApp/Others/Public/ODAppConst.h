@@ -31,8 +31,6 @@ UIKIT_EXTERN NSString * const ODNotificationShowBazaar;
 /** 刷新我的话题通知 */
 UIKIT_EXTERN NSString * const ODNotificationMyTaskRefresh;
 
-/** 报名成功以后的通知 */
-UIKIT_EXTERN NSString * const ODNotificationActivityApllySuccess;
 
 /**  求帮助的通知 */
 UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
@@ -55,6 +53,8 @@ UIKIT_EXTERN NSString * const kBazaarReleaseRewardUrl;
 UIKIT_EXTERN NSString * const kBazaarExchangeSkillUrl;
 UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseSkillTimeUrl;
+UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailLoveUrl;
+UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailNotLoveUrl;
 /** 接收人确认完成 */
 UIKIT_EXTERN NSString * const kBazaarTaskReceiveCompleteUrl;
 /** 发起人确认完成 */
@@ -80,6 +80,8 @@ UIKIT_EXTERN NSString * const ODHotActivityUrl;
 UIKIT_EXTERN NSString * const ODHomeFoundUrl;
 UIKIT_EXTERN NSString * const ODCityListUrl;
 UIKIT_EXTERN NSString * const ODHomeChangeSkillUrl;
+
+
 
 UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
@@ -119,7 +121,11 @@ UIKIT_EXTERN NSString * const kGetApplyListUrl;
 
 UIKIT_EXTERN NSString * const kGiveOpinionUrl;
 UIKIT_EXTERN NSString * const ODPersonalReleaseTaskUrl;
+<<<<<<< HEAD
 UIKIT_EXTERN NSString * const kGetPayInformationUrl;
+=======
+UIKIT_EXTERN NSString * const ODPersonReleaseTaskDeleteUrl;
+>>>>>>> 43b7123a3ea62db4960984c5e82a9c45cef1f0e7
 
 UIKIT_EXTERN NSString * const kCallbackUrl;
 

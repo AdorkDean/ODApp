@@ -58,7 +58,6 @@
     self.page = 1;
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSLog(@"%@",signParameter);
     [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
 }
 
@@ -78,6 +77,7 @@
                 ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
+            
                 [weakSelf.collectionView reloadData];
                 [weakSelf.collectionView.mj_header endRefreshing];
                 [weakSelf.collectionView.mj_footer endRefreshing];
@@ -122,6 +122,7 @@
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
+    [cell.headButton addTarget:self action:@selector(otherInfoClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.nickLabel.text = model.user[@"nick"];
     [cell showDatasWithModel:model];
     CGFloat width=kScreenSize.width>320?90:70;
@@ -129,8 +130,10 @@
         for (id vc in cell.picView.subviews) {
             [vc removeFromSuperview];
         }
-        if (model.imgs_small.count==4) {
-            for (NSInteger i = 0; i < model.imgs_small.count; i++) {
+        if (model.imgs_small.count==4)
+        {
+            for (NSInteger i = 0; i < model.imgs_small.count; i++)
+            {
                 NSDictionary *dict = model.imgs_small[i];
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
                 [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
@@ -139,8 +142,11 @@
                 [cell.picView addSubview:imageButton];
             }
             cell.picViewConstraintHeight.constant = 2*width+5;
-        }else{
-            for (NSInteger i = 0;i < model.imgs_small.count ; i++) {
+        }
+        else
+        {
+            for (NSInteger i = 0;i < model.imgs_small.count ; i++)
+            {
                 NSDictionary *dict = model.imgs_small[i];
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
                 [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
@@ -150,8 +156,11 @@
             }
             cell.picViewConstraintHeight.constant = width+(width+5)*(model.imgs_small.count/3);
         }
-    }else{
-        for (id vc in cell.picView.subviews) {
+    }
+    else
+    {
+        for (id vc in cell.picView.subviews)
+        {
             [vc removeFromSuperview];
         }
         cell.picViewConstraintHeight.constant = 0;
@@ -172,6 +181,22 @@
     [self.navigationController pushViewController:picController animated:YES];
 }
 
+-(void)otherInfoClick:(UIButton *)button
+{
+    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *)button.superview.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+    vc.open_id = model.user[@"open_id"];
+    
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]]) {
+        
+    }else{
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
@@ -183,6 +208,8 @@
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc]init];
     detailControler.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
     detailControler.nick = model.user[@"nick"];
+    detailControler.love_id = [NSString stringWithFormat:@"%@",model.love_id];
+    NSLog(@"----%@",detailControler.love_id);
     [self.navigationController pushViewController:detailControler animated:YES];
     
 }
