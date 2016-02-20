@@ -342,13 +342,13 @@
 - (void)headButtonClick:(UIButton *)button
 {
     
-    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview;
-    NSIndexPath *indexpath = [self.collectionView indexPathForCell:cell];
-    ODCommunityModel *model = self.dataArray[indexpath.row];
-    NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *)button.superview.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-    vc.open_id = [userInfoDic[userId]open_id];
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:[userInfoDic[userId]open_id]]) {
+    vc.open_id = model.user[@"open_id"];
+    
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]]) {
         
     }else{
         
