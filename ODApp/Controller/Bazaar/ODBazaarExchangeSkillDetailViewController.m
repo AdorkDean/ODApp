@@ -121,7 +121,7 @@
     [headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
     [userInfoView addSubview:headButton];
     
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(60, 22.5, 10,15)];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(60, 22.5, 11,11)];
     imageView.image = [UIImage imageNamed:@"Skills profile page_icon_Not certified"];
     [userInfoView addSubview:imageView];
     

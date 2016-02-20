@@ -126,6 +126,9 @@
                 [weakSelf createUserInfoView];
                 [weakSelf createBBSDetailView];
                 [weakSelf joiningTogetherParmetersWithUserInfo:NO];
+                
+                
+                
             }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -149,11 +152,7 @@
                 [weakSelf.dataArray addObject:model];
                 NSLog(@"%@",model.user[@"open_id"]);
             }
-            
-            if (result.count == 0) {
-                [weakSelf.tableView.mj_footer noticeNoMoreData];
-            }
-            
+
             [weakSelf.tableView reloadData];
             if (weakSelf.dataArray.count){
                 if ([weakSelf.refresh isEqualToString:@"refresh"]) {
@@ -162,6 +161,10 @@
             }
             [weakSelf.tableView.mj_header endRefreshing];
             [weakSelf.tableView.mj_footer endRefreshing];
+            
+            if (result.count == 0) {
+                [weakSelf.tableView.mj_footer noticeNoMoreData];
+            }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
