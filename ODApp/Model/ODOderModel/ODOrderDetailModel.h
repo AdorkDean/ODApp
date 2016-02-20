@@ -40,5 +40,5 @@
 @property (nonatomic , copy) NSString *order_no;
 @property (nonatomic , copy) NSString *reason_num;
 @property (nonatomic , copy) NSString *reason;
-
+@property (nonatomic , strong) NSMutableDictionary *order_user;
 @end

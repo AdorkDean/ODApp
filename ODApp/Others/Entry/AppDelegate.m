@@ -86,7 +86,34 @@ void UncaughtExceptionHandler(NSException *exception)
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-   return [WXApi handleOpenURL:url delegate:self];
+    
+    
+    NSString *urlstring = [url absoluteString];
+    
+    
+    
+    if ([urlstring containsString:@"wx64423cc9497cc581://platformId=wechat"]) {
+        BOOL result = [UMSocialSnsService handleOpenURL:url];
+        if (result == FALSE) {
+            //调用其他SDK，例如支付宝SDK等
+        }
+        return result;
+
+    }else if ([urlstring containsString:@"wx64423cc9497cc581://pay"])
+    {
+         return [WXApi handleOpenURL:url delegate:self];
+    }else {
+        return NO;
+    }
+    
+    
+    
+  
+    
+    
+  
+    
+    
 
 }
 
