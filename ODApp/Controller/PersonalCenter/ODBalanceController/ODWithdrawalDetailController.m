@@ -56,9 +56,15 @@
             
             
             
+         
+            
+            
             [self.dataArray removeAllObjects];
             
             NSMutableDictionary *dic = responseObject[@"result"];
+            
+            NSLog(@"_____%@"  ,dic);
+            
             
             for (NSMutableDictionary *miniDic in dic) {
                 ODBalanceModel *model = [[ODBalanceModel alloc] init];
