@@ -17,4 +17,8 @@ Single_Interface(ODUserInformation)
 
 @property (nonatomic, copy) NSString *cityID;
 
+@property (nonatomic , copy) NSString *orderId;
+
+
+
 @end

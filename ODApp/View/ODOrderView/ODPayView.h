@@ -22,7 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *weixinPaybutton;
 
 
-@property (weak, nonatomic) IBOutlet UILabel *payPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+
 
 @property (weak, nonatomic) IBOutlet UIButton *payButton;
 

@@ -13,7 +13,7 @@
 @property (nonatomic , strong) UIButton *buyButton;
 @property (nonatomic , strong) UIButton *releaseButton;
 @property (nonatomic , strong) UIButton *collectionButton;
-
+@property (nonatomic ,strong) UIButton *sellButton;
 
 
 

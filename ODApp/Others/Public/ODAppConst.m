@@ -122,6 +122,8 @@ NSString * const kGetApplyListUrl = @"http://woquapi.test.odong.com/1.0/store/ap
 NSString * const kGiveOpinionUrl = @"http://woquapi.test.odong.com/1.0/other/feedback";
 NSString * const kCollectionUrl = @"http://woquapi.test.odong.com/1.0/user/love/list";
 
+NSString * const kGetPayInformationUrl = @"http://woquapi.test.odong.com/1.0/pay/weixin/trade/number";
+NSString * const kBalanceUrl = @"http://woquapi.test.odong.com/1.0/user/withdraw/cash";
 
-
+NSString * const kBalanceListUrl = @"http://woquapi.test.odong.com/1.0/user/cash/list";
 

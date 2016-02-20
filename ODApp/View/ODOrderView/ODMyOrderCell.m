@@ -42,17 +42,42 @@
     self.priceLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     self.dateLabel.text = model.order_created_at;
     self.dateLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    self.statusLabel.text = model.status_str;
+   
+
+    NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
+    
+    
+    if ([status isEqualToString:@"1"]) {
+        self.statusLabel.text = @"已下单未付款";
+    }else if ([status isEqualToString:@"2"]) {
+        self.statusLabel.text = @"已付款未发货";
+    }else if ([status isEqualToString:@"3"]) {
+        self.statusLabel.text = @"已付款";
+    }else if ([status isEqualToString:@"4"]) {
+        self.statusLabel.text = @"已发货";
+    }else if ([status isEqualToString:@"5"]) {
+        self.statusLabel.text = @"已完成";
+    }else if ([status isEqualToString:@"-1"]) {
+        self.statusLabel.text = @"已取消";
+    }else if ([status isEqualToString:@"-2"]) {
+        self.statusLabel.text = @"退款申请";
+    }else if ([status isEqualToString:@"-3"]) {
+        self.statusLabel.text = @"退款已确认";
+    }else if ([status isEqualToString:@"-4"]) {
+        self.statusLabel.text = @"已退款";
+    }else if ([status isEqualToString:@"-5"]) {
+        self.statusLabel.text = @"拒绝退款";
+    }
+
+
+
+
+
+
+
 
        
     
-    if ([self.statusLabel.text isEqualToString:@"已取消"]) {
-         self.statusLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    }else{
-        self.statusLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-       
-        
-    }
     
     NSString *gender = [NSString stringWithFormat:@"%@" , model.swap_user_gender];
     if ([gender isEqualToString:@"0"]) {

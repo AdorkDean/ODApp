@@ -12,16 +12,22 @@
 #import "UMSocial.h"
 #import "UMSocialWechatHandler.h"
 #import "MyPageControl.h"
-@interface AppDelegate ()<UIScrollViewDelegate>
+#import "WXApi.h"
+#import "WXApiObject.h"
+#import "AFNetworking.h"
+#import "ODAPIManager.h"
+
+
+@interface AppDelegate ()<UIScrollViewDelegate , WXApiDelegate>
 {
-    NSUncaughtExceptionHandler *    _uncaughtExceptionHandler;
+    NSUncaughtExceptionHandler *_uncaughtExceptionHandler;
 }
 
 @property (nonatomic , strong) MyPageControl *pageControl;
 @property (nonatomic , strong) UIScrollView *scrollView;
 @property (nonatomic , strong) UIViewController *ViewController;
 @property (nonatomic , assign) NSInteger length;
-
+@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
 
 @end
@@ -54,6 +60,9 @@ void UncaughtExceptionHandler(NSException *exception)
     
     [self.window makeKeyAndVisible];
     
+    
+     [WXApi registerApp:kGetWXAppId withDescription:@"我去App"];
+    
     _uncaughtExceptionHandler = NSGetUncaughtExceptionHandler();
     NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
 
@@ -71,20 +80,14 @@ void UncaughtExceptionHandler(NSException *exception)
     }
     
     
-    
-    
-    
     return YES;
 }
 
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    BOOL result = [UMSocialSnsService handleOpenURL:url];
-    if (result == FALSE) {
-        //调用其他SDK，例如支付宝SDK等
-    }
-    return result;
+   return [WXApi handleOpenURL:url delegate:self];
+
 }
 
 
@@ -98,7 +101,7 @@ void UncaughtExceptionHandler(NSException *exception)
     NSString *openId = [user objectForKey:KUserDefaultsOpenId];
     [ODUserInformation sharedODUserInformation].openID = openId ? openId : @"";
 
-    
+   
       
     self.window.rootViewController = [[ODTabBarController alloc]init];
     
@@ -248,6 +251,98 @@ void UncaughtExceptionHandler(NSException *exception)
         
     }
     
+    
+    
+}
+
+
+
+
+
+-(void)onResp:(BaseResp*)resp
+{
+    NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+    NSString *strTitle;
+    
+    if([resp isKindOfClass:[SendMessageToWXResp class]])
+    {
+        strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
+    }
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        strTitle = [NSString stringWithFormat:@"支付结果"];
+        
+        switch (resp.errCode) {
+            case WXSuccess:{
+                strMsg = @"支付结果：成功！";
+                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
+                
+                NSString *code = [NSString stringWithFormat:@"%d" , resp.errCode];
+                
+                [self getDatawithCode:code];
+                
+                
+                
+                
+                break;
+            }
+            default:{
+                strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
+                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+                break;
+            }
+        }
+    }
+  
+
+}
+
+
+- (void)getDatawithCode:(NSString *)code
+{
+    self.manager = [AFHTTPRequestOperationManager manager];
+    
+    
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+    NSString *order_no = [ODUserInformation sharedODUserInformation].orderId;
+    
+    
+    NSLog(@"____%@" , order_no);
+    NSLog(@"_____%@" , code);
+    
+    
+    NSDictionary *parameters = @{@"order_no":order_no , @"errCode":code , @"open_id":openId};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    
+    NSString *url = @"http://woquapi.test.odong.com/1.0/pay/weixin/callback/sync";
+    
+    
+    
+    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        if (responseObject) {
+           
+            
+            
+            
+            NSLog(@"____%@" , responseObject);
+            
+            
+            
+            
+            
+        }
+        
+       
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+        
+        
+    }];
     
     
 }
