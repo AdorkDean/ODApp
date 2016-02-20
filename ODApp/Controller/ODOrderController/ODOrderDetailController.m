@@ -12,7 +12,7 @@
 #import "ODAPIManager.h"
 #import "ODOrderDetailModel.h"
 #import "UIButton+WebCache.h"
-
+#import "ODPayController.h"
 
 
 @interface ODOrderDetailController ()<UITableViewDataSource , UITableViewDelegate>
@@ -33,9 +33,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    self.view.userInteractionEnabled = YES;
 
       self.dataArray = [[NSMutableArray alloc] init];
-
       self.open_id = [ODUserInformation sharedODUserInformation].openID;
       self.navigationItem.title = @"订单详情";
       [self getData];
@@ -119,10 +120,27 @@
     UIButton *payButton = [UIButton buttonWithType:UIButtonTypeSystem];
     payButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
     [payButton setBackgroundImage:[UIImage imageNamed:@"button_Pay immediately"] forState:UIControlStateNormal];
+    
+    
+    
+    [payButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:payButton];
     [self.view addSubview:cancelButton];
     
 
+}
+
+
+- (void)payAction:(UIButton *)sender
+{
+    ODPayController *vc = [[ODPayController alloc] init];
+    ODOrderDetailModel *model = self.dataArray[0];
+    vc.orderId = [NSString stringWithFormat:@"%@" ,model.order_id];
+    vc.OrderTitle = model.title;
+    vc.price = [NSString stringWithFormat:@"%@" , model.price];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
 }
 
 

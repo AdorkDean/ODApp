@@ -20,7 +20,7 @@
     [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationShowBazaar object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
         
         weakSelf.status = @"9";
-        [weakSelf.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
+        [weakSelf.screeningButton setTitle:@"任务筛选" forState:UIControlStateNormal];
         [weakSelf.collectionView.mj_header beginRefreshing];
         
     }];
@@ -54,7 +54,7 @@
 -(void)createScreeningAndSearchButton
 {
     //任务筛选
-    self.screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 10, 100, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"全部" font:15];
+    self.screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 10, 100, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"任务筛选" font:15];
     [self.screeningButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     self.screeningButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25);
     self.screeningButton.layer.masksToBounds = YES;

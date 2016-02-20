@@ -14,6 +14,7 @@
 #import "UIImageView+WebCache.h"
 #import "ODOrderSecondHeadView.h"
 #import "ODAddressModel.h"
+#import "ODPayController.h"
 @interface ODSecondOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UITextViewDelegate>
 
 
@@ -174,8 +175,23 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提交订单成功"];
+            
+            NSMutableDictionary *dic = responseObject[@"result"];
+            
+            
+                  
+            
+            NSString *orderId = [NSString stringWithFormat:@"%@" , dic[@"order_id"]];
+            
+            
+            ODPayController *vc = [[ODPayController alloc] init];
+            vc.OrderTitle = self.informationModel.title;
+            vc.orderId = orderId;
+            vc.price = [NSString stringWithFormat:@"%@" , self.informationModel.price];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            
+            
         }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
             
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
