@@ -12,7 +12,7 @@
 #import "ODAPIManager.h"
 #import "ODOrderDetailModel.h"
 #import "UIButton+WebCache.h"
-
+#import "ODPayController.h"
 @interface ODSecondOrderDetailController ()<UITableViewDataSource , UITableViewDelegate>
 
 @property (nonatomic , strong) UITableView *tableView;
@@ -118,11 +118,25 @@
     UIButton *payButton = [UIButton buttonWithType:UIButtonTypeSystem];
     payButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
     [payButton setBackgroundImage:[UIImage imageNamed:@"button_Pay immediately"] forState:UIControlStateNormal];
+      [payButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:payButton];
     [self.view addSubview:cancelButton];
     
     
 }
+
+- (void)payAction:(UIButton *)sender
+{
+    ODPayController *vc = [[ODPayController alloc] init];
+    ODOrderDetailModel *model = self.dataArray[0];
+    vc.orderId = [NSString stringWithFormat:@"%@" ,model.order_id];
+    vc.OrderTitle = model.title;
+    vc.price = [NSString stringWithFormat:@"%@" , model.price];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
 
 
 - (void)delateOrder:(UIButton *)sender

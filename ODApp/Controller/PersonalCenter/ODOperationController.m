@@ -226,23 +226,6 @@
     
     
 }
-//#pragma mark - clearCachesSucess 方法的实现
-//- (void)clearCachesSucess
-//{
-//    if (self.isClean == NO) {
-//        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"是否确定清除缓存?" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-//        self.isClean = YES;
-//        [alertView show];
-//        
-//    }else {
-//        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"恭喜" message:@"缓存已经清空" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
-//        [alertView show];
-//        
-//    }
-//    
-//    
-//    
-//}
 // 显示缓存大小 filePath 方法实现
 - (float)filePath
 {

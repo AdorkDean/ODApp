@@ -18,10 +18,12 @@
 #import "UIImageView+WebCache.h"
 #import "ODAddressModel.h"
 #import "ODPayController.h"
+#import "ODPayController.h"
 @interface ODOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UITextViewDelegate>
 
 @property(nonatomic,strong)UIButton *selectedButton;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property (nonatomic , strong) AFHTTPRequestOperationManager *getOrderIdManger;
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property (nonatomic , strong) UILabel *allPriceLabel;
@@ -209,18 +211,17 @@
 {
     
     
-    ODPayController *vc = [[ODPayController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+  
     
     
-    //    if ([self.headView.orderView.timeLabel.text isEqualToString:@"服务时间"]) {
-    //         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入服务时间"];
-    //    }else if ([self.headView.orderView.addressLabel.text isEqualToString:@"联系地址"]){
-    //         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
-    //    }else{
-    //
-    //         [self saveOrder];
-    //    }
+        if ([self.headView.orderView.timeLabel.text isEqualToString:@"服务时间"]) {
+             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入服务时间"];
+        }else if ([self.headView.orderView.addressLabel.text isEqualToString:@"联系地址"]){
+             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
+        }else{
+    
+             [self saveOrder];
+        }
     
 }
 
@@ -240,8 +241,25 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提交订单成功"];
+          
+            NSMutableDictionary *dic = responseObject[@"result"];
+            
+            
+          
+            
+            
+            NSString *orderId = [NSString stringWithFormat:@"%@" , dic[@"order_id"]];
+            
+            
+            
+            ODPayController *vc = [[ODPayController alloc] init];
+            vc.OrderTitle = self.informationModel.title;
+            vc.orderId = orderId;
+            vc.price = [NSString stringWithFormat:@"%@" , self.informationModel.price];
+            [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        
         }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
             
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
