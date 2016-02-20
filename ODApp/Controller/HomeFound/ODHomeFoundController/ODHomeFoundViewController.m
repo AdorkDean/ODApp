@@ -44,7 +44,8 @@
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
     
-    
+    [ODUserInformation sharedODUserInformation].cityID = @"1";
+
     [MAMapServices sharedServices].apiKey = ODLocationApiKey;
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
     _mapView.delegate = self;
@@ -211,7 +212,8 @@
 - (void)findFavorableButtonClick:(UIButton *)button
 {
     
-    
+    ODDrawbackBuyerController *vc = [[ODDrawbackBuyerController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)findJobButtonClick:(UIButton *)button
@@ -657,8 +659,5 @@ updatingLocation:(BOOL)updatingLocation{
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
-
-
-
 
 @end

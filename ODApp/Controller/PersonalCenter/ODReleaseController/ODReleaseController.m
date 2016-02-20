@@ -19,7 +19,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"已发布的任务";
+    self.navigationItem.title = @"已发布";
     self.pageCount = 1;
     self.dataArray = [[NSMutableArray alloc] init];
     [self createCollectionView];
@@ -41,6 +41,15 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
         
+        if (model == nil) {
+            UILabel *noResultLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30)];
+            noResultLabel.text = @"暂无发布任务";
+            noResultLabel.font = [UIFont systemFontOfSize:16];
+            noResultLabel.textAlignment = NSTextAlignmentCenter;
+            noResultLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+            [weakSelf.view addSubview:noResultLabel];
+        }
+        
         if ([[model result]count] == 0)
         {
             [weakSelf.collectionView.mj_footer noticeNoMoreData];
@@ -49,6 +58,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         {
             if ([[weakSelf.dataArray valueForKeyPath:@"swap_id" ] containsObject:[md swap_id]])
             {
+                
             }
             else
             {
@@ -108,9 +118,18 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     __weakSelf
     [self.manager GET:ODPersonReleaseTaskDeleteUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
+        
+        NSLog(@"_____++++++_____%@",responseObject);
         [weakSelf createRequestData];
         NSLog(@"_____________%@", weakSelf.swap_id);
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"删除任务成功"];
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"删除任务成功"];
+        }else{
+        
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
+        }
+        
+        
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -144,6 +163,8 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     [self.view addSubview:self.collectionView];
 }
 
+
+#pragma mark - UICollectionViewDelegate
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
 
