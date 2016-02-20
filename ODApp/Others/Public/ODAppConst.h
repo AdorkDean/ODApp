@@ -121,11 +121,11 @@ UIKIT_EXTERN NSString * const kGetApplyListUrl;
 
 UIKIT_EXTERN NSString * const kGiveOpinionUrl;
 UIKIT_EXTERN NSString * const ODPersonalReleaseTaskUrl;
-<<<<<<< HEAD
+
 UIKIT_EXTERN NSString * const kGetPayInformationUrl;
-=======
+
 UIKIT_EXTERN NSString * const ODPersonReleaseTaskDeleteUrl;
->>>>>>> 43b7123a3ea62db4960984c5e82a9c45cef1f0e7
+
 
 UIKIT_EXTERN NSString * const kCallbackUrl;
 

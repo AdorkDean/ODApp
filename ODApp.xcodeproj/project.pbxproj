@@ -130,12 +130,24 @@
 		C64D46151C5F8C6F003BFFA0 /* ODHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45E31C5F8C6F003BFFA0 /* ODHttpTool.m */; };
 		C6522A161C770EAC00C210EE /* ODPersonalTaskButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A151C770EAC00C210EE /* ODPersonalTaskButton.m */; };
 		C6522A1C1C784B6600C210EE /* ODDrawbackBuyerController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A1B1C784B6600C210EE /* ODDrawbackBuyerController.m */; };
+		C6522A2F1C78643300C210EE /* ODReleaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A2E1C78643300C210EE /* ODReleaseController.m */; };
+		C6522A371C78648400C210EE /* ODBalanceController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A321C78648400C210EE /* ODBalanceController.m */; };
+		C6522A381C78648400C210EE /* ODWithdrawalController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A341C78648400C210EE /* ODWithdrawalController.m */; };
+		C6522A391C78648400C210EE /* ODWithdrawalDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A361C78648400C210EE /* ODWithdrawalDetailController.m */; };
+		C6522A3E1C7864B500C210EE /* ODBalanceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A3B1C7864B500C210EE /* ODBalanceModel.m */; };
+		C6522A3F1C7864B500C210EE /* ODPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A3D1C7864B500C210EE /* ODPayModel.m */; };
+		C6522A431C7864D900C210EE /* ODBalanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A411C7864D900C210EE /* ODBalanceView.m */; };
+		C6522A441C7864D900C210EE /* ODBalanceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6522A421C7864D900C210EE /* ODBalanceView.xib */; };
+		C6522A461C78650900C210EE /* ODActivityDetailContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6522A451C78650900C210EE /* ODActivityDetailContentCell.xib */; };
+		C6522A4D1C78652B00C210EE /* ODWithdrawalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A481C78652B00C210EE /* ODWithdrawalCell.m */; };
+		C6522A4E1C78652B00C210EE /* ODWithdrawalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6522A491C78652B00C210EE /* ODWithdrawalCell.xib */; };
+		C6522A4F1C78652B00C210EE /* ODWithdrawalView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A4B1C78652B00C210EE /* ODWithdrawalView.m */; };
+		C6522A501C78652B00C210EE /* ODWithdrawalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6522A4C1C78652B00C210EE /* ODWithdrawalView.xib */; };
 		C66B881B1C740EBC00F60E3D /* ODLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C66B88191C740EBC00F60E3D /* ODLocationCell.m */; };
 		C66B881C1C740EBC00F60E3D /* ODLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66B881A1C740EBC00F60E3D /* ODLocationCell.xib */; };
 		C66B88201C741D0A00F60E3D /* ODFindJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66B881F1C741D0A00F60E3D /* ODFindJobController.m */; };
 		C66B88261C743F7D00F60E3D /* ODHomeInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C66B88251C743F7D00F60E3D /* ODHomeInfoModel.m */; };
 		C66B882A1C7449AC00F60E3D /* ODLocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C66B88291C7449AC00F60E3D /* ODLocationModel.m */; };
-		C66B883B1C75C72C00F60E3D /* ODReleaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66B883A1C75C72C00F60E3D /* ODReleaseController.m */; };
 		C66B883E1C75C75400F60E3D /* ODReleaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C66B883D1C75C75400F60E3D /* ODReleaseModel.m */; };
 		C66B88421C75D72300F60E3D /* ODReleaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C66B88401C75D72300F60E3D /* ODReleaseCell.m */; };
 		C66B88431C75D72300F60E3D /* ODReleaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66B88411C75D72300F60E3D /* ODReleaseCell.xib */; };
@@ -540,6 +552,28 @@
 		C6522A151C770EAC00C210EE /* ODPersonalTaskButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPersonalTaskButton.m; sourceTree = "<group>"; };
 		C6522A1A1C784B6600C210EE /* ODDrawbackBuyerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDrawbackBuyerController.h; sourceTree = "<group>"; };
 		C6522A1B1C784B6600C210EE /* ODDrawbackBuyerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDrawbackBuyerController.m; sourceTree = "<group>"; };
+		C6522A2D1C78643300C210EE /* ODReleaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODReleaseController.h; sourceTree = "<group>"; };
+		C6522A2E1C78643300C210EE /* ODReleaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODReleaseController.m; sourceTree = "<group>"; };
+		C6522A311C78648400C210EE /* ODBalanceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBalanceController.h; sourceTree = "<group>"; };
+		C6522A321C78648400C210EE /* ODBalanceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBalanceController.m; sourceTree = "<group>"; };
+		C6522A331C78648400C210EE /* ODWithdrawalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODWithdrawalController.h; sourceTree = "<group>"; };
+		C6522A341C78648400C210EE /* ODWithdrawalController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODWithdrawalController.m; sourceTree = "<group>"; };
+		C6522A351C78648400C210EE /* ODWithdrawalDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODWithdrawalDetailController.h; sourceTree = "<group>"; };
+		C6522A361C78648400C210EE /* ODWithdrawalDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODWithdrawalDetailController.m; sourceTree = "<group>"; };
+		C6522A3A1C7864B500C210EE /* ODBalanceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODBalanceModel.h; path = ODOderModel/ODBalanceModel.h; sourceTree = "<group>"; };
+		C6522A3B1C7864B500C210EE /* ODBalanceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODBalanceModel.m; path = ODOderModel/ODBalanceModel.m; sourceTree = "<group>"; };
+		C6522A3C1C7864B500C210EE /* ODPayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODPayModel.h; path = ODOderModel/ODPayModel.h; sourceTree = "<group>"; };
+		C6522A3D1C7864B500C210EE /* ODPayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODPayModel.m; path = ODOderModel/ODPayModel.m; sourceTree = "<group>"; };
+		C6522A401C7864D900C210EE /* ODBalanceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODBalanceView.h; path = ODOrderView/ODBalanceView.h; sourceTree = "<group>"; };
+		C6522A411C7864D900C210EE /* ODBalanceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODBalanceView.m; path = ODOrderView/ODBalanceView.m; sourceTree = "<group>"; };
+		C6522A421C7864D900C210EE /* ODBalanceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ODBalanceView.xib; path = ODOrderView/ODBalanceView.xib; sourceTree = "<group>"; };
+		C6522A451C78650900C210EE /* ODActivityDetailContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ODActivityDetailContentCell.xib; path = ODActivityCenter/ODActivityDetailContentCell.xib; sourceTree = "<group>"; };
+		C6522A471C78652B00C210EE /* ODWithdrawalCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODWithdrawalCell.h; path = ODOrderView/ODWithdrawalCell.h; sourceTree = "<group>"; };
+		C6522A481C78652B00C210EE /* ODWithdrawalCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODWithdrawalCell.m; path = ODOrderView/ODWithdrawalCell.m; sourceTree = "<group>"; };
+		C6522A491C78652B00C210EE /* ODWithdrawalCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ODWithdrawalCell.xib; path = ODOrderView/ODWithdrawalCell.xib; sourceTree = "<group>"; };
+		C6522A4A1C78652B00C210EE /* ODWithdrawalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODWithdrawalView.h; path = ODOrderView/ODWithdrawalView.h; sourceTree = "<group>"; };
+		C6522A4B1C78652B00C210EE /* ODWithdrawalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODWithdrawalView.m; path = ODOrderView/ODWithdrawalView.m; sourceTree = "<group>"; };
+		C6522A4C1C78652B00C210EE /* ODWithdrawalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ODWithdrawalView.xib; path = ODOrderView/ODWithdrawalView.xib; sourceTree = "<group>"; };
 		C66B88181C740EBC00F60E3D /* ODLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLocationCell.h; sourceTree = "<group>"; };
 		C66B88191C740EBC00F60E3D /* ODLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLocationCell.m; sourceTree = "<group>"; };
 		C66B881A1C740EBC00F60E3D /* ODLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODLocationCell.xib; sourceTree = "<group>"; };
@@ -549,8 +583,6 @@
 		C66B88251C743F7D00F60E3D /* ODHomeInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeInfoModel.m; sourceTree = "<group>"; };
 		C66B88281C7449AC00F60E3D /* ODLocationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLocationModel.h; sourceTree = "<group>"; };
 		C66B88291C7449AC00F60E3D /* ODLocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLocationModel.m; sourceTree = "<group>"; };
-		C66B88391C75C72C00F60E3D /* ODReleaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODReleaseController.h; sourceTree = "<group>"; };
-		C66B883A1C75C72C00F60E3D /* ODReleaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODReleaseController.m; sourceTree = "<group>"; };
 		C66B883C1C75C75400F60E3D /* ODReleaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODReleaseModel.h; sourceTree = "<group>"; };
 		C66B883D1C75C75400F60E3D /* ODReleaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODReleaseModel.m; sourceTree = "<group>"; };
 		C66B883F1C75D72300F60E3D /* ODReleaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODReleaseCell.h; sourceTree = "<group>"; };
@@ -1569,6 +1601,28 @@
 			name = ODDrawback;
 			sourceTree = "<group>";
 		};
+		C6522A2C1C78643300C210EE /* ODReleaseController */ = {
+			isa = PBXGroup;
+			children = (
+				C6522A2D1C78643300C210EE /* ODReleaseController.h */,
+				C6522A2E1C78643300C210EE /* ODReleaseController.m */,
+			);
+			path = ODReleaseController;
+			sourceTree = "<group>";
+		};
+		C6522A301C78648400C210EE /* ODBalanceController */ = {
+			isa = PBXGroup;
+			children = (
+				C6522A311C78648400C210EE /* ODBalanceController.h */,
+				C6522A321C78648400C210EE /* ODBalanceController.m */,
+				C6522A331C78648400C210EE /* ODWithdrawalController.h */,
+				C6522A341C78648400C210EE /* ODWithdrawalController.m */,
+				C6522A351C78648400C210EE /* ODWithdrawalDetailController.h */,
+				C6522A361C78648400C210EE /* ODWithdrawalDetailController.m */,
+			);
+			path = ODBalanceController;
+			sourceTree = "<group>";
+		};
 		C66B88171C740E6000F60E3D /* ODLocationView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1791,10 +1845,10 @@
 		D4D071101C59B9FA008527C9 /* PersonalCenter */ = {
 			isa = PBXGroup;
 			children = (
+				C6522A301C78648400C210EE /* ODBalanceController */,
+				C6522A2C1C78643300C210EE /* ODReleaseController */,
 				C6522A1D1C784C0800C210EE /* ODDrawback */,
 				B839002A1C75CE8A00598410 /* ODCollection */,
-				C66B88391C75C72C00F60E3D /* ODReleaseController.h */,
-				C66B883A1C75C72C00F60E3D /* ODReleaseController.m */,
 				9DBF7F001C75C3680085875E /* ODGiveOpinion */,
 				C642732A1C5A0D0200C38A85 /* ODPersonalCenter */,
 				C64273331C5A111F00C38A85 /* ODUserInformation */,
@@ -1843,6 +1897,10 @@
 		D4D0713E1C59B9FA008527C9 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C6522A3A1C7864B500C210EE /* ODBalanceModel.h */,
+				C6522A3B1C7864B500C210EE /* ODBalanceModel.m */,
+				C6522A3C1C7864B500C210EE /* ODPayModel.h */,
+				C6522A3D1C7864B500C210EE /* ODPayModel.m */,
 				9DEDCF4C1C64B3F4003015C6 /* BazaarModel */,
 				D4F76DD41C61B07B00D59F02 /* ODCollectionModel */,
 				D4F76DB21C61AEAD00D59F02 /* ODOderModel */,
@@ -1938,6 +1996,16 @@
 		D4D073071C59B9FA008527C9 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C6522A471C78652B00C210EE /* ODWithdrawalCell.h */,
+				C6522A481C78652B00C210EE /* ODWithdrawalCell.m */,
+				C6522A491C78652B00C210EE /* ODWithdrawalCell.xib */,
+				C6522A4A1C78652B00C210EE /* ODWithdrawalView.h */,
+				C6522A4B1C78652B00C210EE /* ODWithdrawalView.m */,
+				C6522A4C1C78652B00C210EE /* ODWithdrawalView.xib */,
+				C6522A451C78650900C210EE /* ODActivityDetailContentCell.xib */,
+				C6522A401C7864D900C210EE /* ODBalanceView.h */,
+				C6522A411C7864D900C210EE /* ODBalanceView.m */,
+				C6522A421C7864D900C210EE /* ODBalanceView.xib */,
 				9DEDCF5A1C64B3FC003015C6 /* BazaarView */,
 				D4F76D911C61AEA100D59F02 /* ODCollectionView */,
 				D4F76D951C61AEA100D59F02 /* ODOrderView */,
@@ -2443,6 +2511,7 @@
 				C64D46031C5F8C6F003BFFA0 /* UMSocialLocalizable.strings in Resources */,
 				D4D075151C59B9FA008527C9 /* ODInformationView.xib in Resources */,
 				9DEDCF741C64B3FC003015C6 /* ODBazaarReleaseSkillTimeViewCell.xib in Resources */,
+				C6522A441C7864D900C210EE /* ODBalanceView.xib in Resources */,
 				D444239A1C72F8B8005B4CFE /* ODActivitybottomView.xib in Resources */,
 				C64D46051C5F8C6F003BFFA0 /* UMSCommentDetailController.xib in Resources */,
 				C64D46111C5F8C6F003BFFA0 /* read_me.txt in Resources */,
@@ -2461,6 +2530,7 @@
 				9DF2E9911C74667800F77976 /* ODSecondOrderDetailView.xib in Resources */,
 				D4D075451C59BA9B008527C9 /* Assets.xcassets in Resources */,
 				D4D075051C59B9FA008527C9 /* CenterDetailCell.xib in Resources */,
+				C6522A501C78652B00C210EE /* ODWithdrawalView.xib in Resources */,
 				9DEDCF6E1C64B3FC003015C6 /* ODBazaarRewardCollectionCell.xib in Resources */,
 				D4D075281C59B9FA008527C9 /* ODMyOrderRecordCell.xib in Resources */,
 				C64D460B1C5F8C6F003BFFA0 /* UMSnsAccountViewController.xib in Resources */,
@@ -2471,6 +2541,8 @@
 				D44423931C72E4D7005B4CFE /* ODTitleLabelView.xib in Resources */,
 				D4D075461C59BA9B008527C9 /* Info.plist in Resources */,
 				D4F76DAB1C61AEA100D59F02 /* ODOrderCell.xib in Resources */,
+				C6522A4E1C78652B00C210EE /* ODWithdrawalCell.xib in Resources */,
+				C6522A461C78650900C210EE /* ODActivityDetailContentCell.xib in Resources */,
 				D4D074FC1C59B9FA008527C9 /* ODCommunityCollectionCell.xib in Resources */,
 				D4D0751B1C59B9FA008527C9 /* ODRegisteredView.xib in Resources */,
 				D4D074FF1C59B9FA008527C9 /* ActivityDetailView.xib in Resources */,
@@ -2561,6 +2633,7 @@
 				C64D45E71C5F8C6F003BFFA0 /* UIImage+ODExtension.m in Sources */,
 				D4F76DCB1C61B01200D59F02 /* ODActivityBottomCell.m in Sources */,
 				D4F76DDB1C61BB4D00D59F02 /* ODActivityPersonCell.m in Sources */,
+				C6522A3F1C7864B500C210EE /* ODPayModel.m in Sources */,
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
 				D4D073901C59B9FA008527C9 /* ODOtherTopicViewController.m in Sources */,
@@ -2568,6 +2641,7 @@
 				D4D0738C1C59B9FA008527C9 /* ODMyTaskController.m in Sources */,
 				D4D073A41C59B9FA008527C9 /* ODMyOrderRecordModel.m in Sources */,
 				D4D0738E1C59B9FA008527C9 /* ODOthersInformationController.m in Sources */,
+				C6522A391C78648400C210EE /* ODWithdrawalDetailController.m in Sources */,
 				D4D075251C59B9FA008527C9 /* ONMyApplyActivityCell.m in Sources */,
 				D4D0737C1C59B9FA008527C9 /* ODCommunityDetailReplyViewController.m in Sources */,
 				D4D075441C59BA9B008527C9 /* main.m in Sources */,
@@ -2577,6 +2651,7 @@
 				9DEDCF421C64B3ED003015C6 /* ODBazaarDetailViewController.m in Sources */,
 				D4D075271C59B9FA008527C9 /* ODMyOrderRecordCell.m in Sources */,
 				C66B88421C75D72300F60E3D /* ODReleaseCell.m in Sources */,
+				C6522A4F1C78652B00C210EE /* ODWithdrawalView.m in Sources */,
 				9D1F80FE1C76EAE000FC9C2C /* ODOperationFirstCell.m in Sources */,
 				D4D073801C59B9FA008527C9 /* ODCommumityViewController.m in Sources */,
 				D4D073761C59B9FA008527C9 /* ODActivityDetailController.m in Sources */,
@@ -2603,6 +2678,7 @@
 				D4D0751E1C59B9FA008527C9 /* ODTopicCell.m in Sources */,
 				C6522A1C1C784B6600C210EE /* ODDrawbackBuyerController.m in Sources */,
 				9DDC9B641C62ECFF000D688F /* ODMyOrderController.m in Sources */,
+				C6522A4D1C78652B00C210EE /* ODWithdrawalCell.m in Sources */,
 				9DEDCF581C64B3F4003015C6 /* ODBazaarModel.m in Sources */,
 				D44423911C72E4C4005B4CFE /* ODTitleLabelView.m in Sources */,
 				9DDC9B771C6334BA000D688F /* ODOrderDetailModel.m in Sources */,
@@ -2618,6 +2694,7 @@
 				D4D075611C5E0E0A008527C9 /* ODNavigationBarView.m in Sources */,
 				D4F76DCE1C61B01200D59F02 /* ODActivityDetailContentCell.m in Sources */,
 				D4D074FB1C59B9FA008527C9 /* ODCommunityCollectionCell.m in Sources */,
+				C6522A431C7864D900C210EE /* ODBalanceView.m in Sources */,
 				9DEDCF591C64B3F4003015C6 /* ODBazaarReleaseSkillTimeModel.m in Sources */,
 				D4D0755E1C5DED01008527C9 /* ODBarButton.m in Sources */,
 				D4D0738B1C59B9FA008527C9 /* ODMyOrderRecordController.m in Sources */,
@@ -2634,6 +2711,7 @@
 				D4D0751A1C59B9FA008527C9 /* ODRegisteredView.m in Sources */,
 				C6F97B421C619B7B0037975C /* ODLocationController.m in Sources */,
 				D4D075031C59B9FA008527C9 /* CenterActivityModel.m in Sources */,
+				C6522A381C78648400C210EE /* ODWithdrawalController.m in Sources */,
 				D4D075101C59B9FA008527C9 /* ODlandingView.m in Sources */,
 				C64D46001C5F8C6F003BFFA0 /* SDCollectionViewCell.m in Sources */,
 				C64D45E61C5F8C6F003BFFA0 /* UIColor+ODExtension.m in Sources */,
@@ -2737,7 +2815,10 @@
 				9DEDCF6B1C64B3FC003015C6 /* ODBazaarDetailCollectionCell.m in Sources */,
 				9D1F81031C76EBE500FC9C2C /* ODOperationSeccondCell.m in Sources */,
 				9DF2E9861C74481700F77976 /* ODApplyListViewController.m in Sources */,
+				C6522A371C78648400C210EE /* ODBalanceController.m in Sources */,
 				D4F76D4C1C605EA700D59F02 /* ODActivityListModel.m in Sources */,
+				C6522A2F1C78643300C210EE /* ODReleaseController.m in Sources */,
+				C6522A3E1C7864B500C210EE /* ODBalanceModel.m in Sources */,
 				9DEDCF461C64B3ED003015C6 /* ODBazaaeExchangeSkillViewController.m in Sources */,
 				D444239D1C742118005B4CFE /* ODActivePersonInfoView.m in Sources */,
 				C64D45F81C5F8C6F003BFFA0 /* UITableViewRowAction+JZExtension.m in Sources */,
@@ -2759,7 +2840,6 @@
 				C66B88201C741D0A00F60E3D /* ODFindJobController.m in Sources */,
 				C64D46021C5F8C6F003BFFA0 /* UIView+SDExtension.m in Sources */,
 				C64D45FF1C5F8C6F003BFFA0 /* TAPageControl.m in Sources */,
-				C66B883B1C75C72C00F60E3D /* ODReleaseController.m in Sources */,
 				D4D075141C59B9FA008527C9 /* ODInformationView.m in Sources */,
 				D4F76D551C6090EC00D59F02 /* ODActivityDetailModel.m in Sources */,
 				D4D075001C59B9FA008527C9 /* ActivityModel.m in Sources */,
