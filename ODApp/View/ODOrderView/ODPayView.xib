@@ -92,7 +92,7 @@
                         <constraint firstAttribute="height" constant="20" id="qoA-zg-y48"/>
                         <constraint firstAttribute="width" constant="20" id="vDp-L1-Ppy"/>
                     </constraints>
-                    <state key="normal" title="Button" image="icon_Default address_default"/>
+                    <state key="normal" title="Button" image="icon_Default address_Selected"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0l-jK-y8L">
                     <rect key="frame" x="18" y="152" width="312" height="1"/>
@@ -153,10 +153,10 @@
                     </constraints>
                     <state key="normal" title="Button" image="button_Pay immediately"/>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZoE-NB-IeU">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7m4-ZZ-2kM">
                     <rect key="frame" x="78" y="536" width="92" height="20"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="jsS-KD-xLO"/>
+                        <constraint firstAttribute="height" constant="20" id="Vkj-07-O9G"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -174,6 +174,7 @@
                 <constraint firstItem="Vtq-2E-mVw" firstAttribute="top" secondItem="Ici-xK-Zz9" secondAttribute="bottom" constant="15" id="5os-7R-20x"/>
                 <constraint firstAttribute="trailing" secondItem="Vtq-2E-mVw" secondAttribute="trailing" id="6N4-Zc-QEx"/>
                 <constraint firstItem="X3s-e2-kki" firstAttribute="top" secondItem="D0l-jK-y8L" secondAttribute="bottom" constant="10" id="7sA-5U-FMx"/>
+                <constraint firstItem="7m4-ZZ-2kM" firstAttribute="leading" secondItem="aws-hI-53m" secondAttribute="trailing" id="9f0-er-hpN"/>
                 <constraint firstItem="JbH-ki-Tts" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="I1i-wt-Xv7"/>
                 <constraint firstItem="Ici-xK-Zz9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="K2a-xD-JhK"/>
                 <constraint firstAttribute="bottom" secondItem="yyR-fL-Sni" secondAttribute="bottom" constant="49" id="MTR-zb-xvg"/>
@@ -183,13 +184,13 @@
                 <constraint firstItem="3mS-0j-Ou7" firstAttribute="top" secondItem="hWo-es-0ep" secondAttribute="bottom" constant="15" id="TXj-DD-eL2"/>
                 <constraint firstAttribute="bottom" secondItem="MBh-Hr-0ca" secondAttribute="bottom" id="Vns-yP-11E"/>
                 <constraint firstItem="CpS-oT-H9A" firstAttribute="leading" secondItem="JbH-ki-Tts" secondAttribute="trailing" constant="10" id="XLl-Th-JMs"/>
-                <constraint firstItem="MBh-Hr-0ca" firstAttribute="leading" secondItem="ZoE-NB-IeU" secondAttribute="trailing" constant="10" id="cTU-yc-wTh"/>
                 <constraint firstAttribute="trailing" secondItem="D8D-oq-mTI" secondAttribute="trailing" constant="10" id="dbY-qR-P7W"/>
                 <constraint firstItem="okh-zX-9Jh" firstAttribute="top" secondItem="D0l-jK-y8L" secondAttribute="bottom" constant="15" id="e2g-iA-jhr"/>
                 <constraint firstItem="MBh-Hr-0ca" firstAttribute="top" secondItem="yyR-fL-Sni" secondAttribute="bottom" id="eOz-nb-fk2"/>
+                <constraint firstItem="7m4-ZZ-2kM" firstAttribute="top" secondItem="yyR-fL-Sni" secondAttribute="bottom" constant="15" id="hMc-Jx-l36"/>
                 <constraint firstItem="CpS-oT-H9A" firstAttribute="top" secondItem="hWo-es-0ep" secondAttribute="bottom" constant="10" id="iCH-3e-rfP"/>
-                <constraint firstItem="ZoE-NB-IeU" firstAttribute="leading" secondItem="aws-hI-53m" secondAttribute="trailing" id="knh-Ic-1qu"/>
                 <constraint firstAttribute="trailing" secondItem="okh-zX-9Jh" secondAttribute="trailing" constant="18" id="l4J-oc-9UQ"/>
+                <constraint firstItem="MBh-Hr-0ca" firstAttribute="leading" secondItem="7m4-ZZ-2kM" secondAttribute="trailing" constant="10" id="llE-Wy-Xt3"/>
                 <constraint firstItem="HIq-Zu-lzg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="mF9-rl-Doe"/>
                 <constraint firstItem="JbH-ki-Tts" firstAttribute="top" secondItem="hWo-es-0ep" secondAttribute="bottom" constant="15" id="mIc-5x-5Kv"/>
                 <constraint firstItem="aws-hI-53m" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="mLB-uV-pym"/>
@@ -205,7 +206,6 @@
                 <constraint firstItem="D0l-jK-y8L" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="urM-Z8-uvt"/>
                 <constraint firstAttribute="trailing" secondItem="D0l-jK-y8L" secondAttribute="trailing" id="wOf-ii-d1D"/>
                 <constraint firstItem="Ici-xK-Zz9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="xBg-dt-evh"/>
-                <constraint firstItem="ZoE-NB-IeU" firstAttribute="top" secondItem="yyR-fL-Sni" secondAttribute="bottom" constant="15" id="xEL-sB-cJx"/>
                 <constraint firstItem="X3s-e2-kki" firstAttribute="leading" secondItem="FFS-Hq-LQv" secondAttribute="trailing" constant="10" id="xqn-a1-eYG"/>
                 <constraint firstItem="D8D-oq-mTI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="yEg-Mw-s32"/>
             </constraints>
@@ -216,18 +216,19 @@
                 <outlet property="orderNameLabel" destination="D8D-oq-mTI" id="V7z-8N-UCD"/>
                 <outlet property="orderPriceLabel" destination="c6z-mN-FBA" id="rB2-jU-8mV"/>
                 <outlet property="payButton" destination="MBh-Hr-0ca" id="Dog-iE-UrY"/>
-                <outlet property="payPriceLabel" destination="ZoE-NB-IeU" id="cv1-rB-VQI"/>
+                <outlet property="priceLabel" destination="7m4-ZZ-2kM" id="2gO-gl-ONj"/>
                 <outlet property="secondLineLabel" destination="yyR-fL-Sni" id="NhR-yn-URm"/>
                 <outlet property="thirdLineLabel" destination="Vtq-2E-mVw" id="98c-iL-wIS"/>
                 <outlet property="treasurePayButton" destination="okh-zX-9Jh" id="dtC-ng-XGs"/>
                 <outlet property="weixinPaybutton" destination="3mS-0j-Ou7" id="4Ky-Xk-cG1"/>
             </connections>
-            <point key="canvasLocation" x="577" y="321"/>
+            <point key="canvasLocation" x="825" y="274"/>
         </view>
     </objects>
     <resources>
         <image name="button_Pay immediately" width="187" height="49"/>
         <image name="icon_Alipay Payment-1" width="15" height="12"/>
+        <image name="icon_Default address_Selected" width="16" height="15"/>
         <image name="icon_Default address_default" width="15" height="15"/>
         <image name="icon_WeChat Payment" width="15" height="12"/>
     </resources>

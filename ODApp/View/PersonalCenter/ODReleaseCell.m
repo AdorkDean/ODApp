@@ -44,16 +44,7 @@
     [self.deleteButton setHighlighted:YES];
     [self.deleteButton setImage:[UIImage imageNamed:@"icon_delete"] forState:UIControlStateNormal];
     [self.editAndDeleteView addSubview:self.deleteButton];
-    
-//    UIImageView *verticalLineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KScreenWidth / 2 - 0.5, 15, 1, 13)];
-//    verticalLineImageView.image = [UIImage imageNamed:@"icon_separate"];
-//    [self.editAndDeleteView addSubview:verticalLineImageView];
-//
-//    UIImageView *editImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KScreenWidth / 4 - 26, 15, 13, 13)];
-//    [self.editAndDeleteView addSubview:editImageView];
-//    UIImageView *deleteImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KScreenWidth * 3 / 4 - 26, 15, 13, 13)];
-//    [deleteImageView setImage:[UIImage imageNamed:@"icon_delete"]];
-//    [self.editAndDeleteView addSubview:deleteImageView];
+
 }
 
 - (void)setModel:(ODReleaseModel *)model

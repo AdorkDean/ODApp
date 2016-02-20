@@ -27,6 +27,7 @@
 #import "ODMyOrderController.h"
 #import "ODGiveOpinionController.h"
 #import "ODOperationController.h"
+#import "ODBalanceController.h"
 @interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
@@ -48,16 +49,16 @@
     self.navigationItem.title = @"登录个人中心";
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [super viewDidAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     [self getData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
+    [super viewDidDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
 #pragma mark - 请求数据
@@ -170,7 +171,7 @@
         
         else if (indexPath.section == 6) {
             
-            cell.titleLabel.text = @"我收到的评价";
+            cell.titleLabel.text = @"余额";
         }else if (indexPath.section == 7) {
             
              cell.titleLabel.text = @"设置";
@@ -273,14 +274,10 @@
         
     }else if (indexPath.section == 6) {
         
-        ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
-        
-        vc.typeTitle = @"我收到的评价";
-        vc.openId = [ODUserInformation sharedODUserInformation].openID;
-        
-        
-        
+        ODBalanceController *vc = [[ODBalanceController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
+        
+               
     }else if (indexPath.section == 7) {
         
         

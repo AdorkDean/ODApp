@@ -35,17 +35,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-   
-  
+    
+    
     self.dataArray = [[NSMutableArray alloc] init];
     self.defaultArray = [[NSMutableArray alloc] init];
     self.tableViewReuseIdentifier = NSStringFromClass([UITableViewCell class]);
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     [self navigationInit];
-      [self getData];
-
-   
+    [self getData];
+    
+    
 }
 
 -(void)navigationInit
@@ -72,18 +72,8 @@
         
     }else{
         
-          [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    
-               
-    
-    
-    
-  
-        
-    
-    
-    
 }
 
 
@@ -107,7 +97,7 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-          
+            
             [weakSelf.defaultArray removeAllObjects];
             [weakSelf.dataArray removeAllObjects];
             
@@ -122,29 +112,29 @@
                 ODAddressModel *model = [[ODAddressModel alloc] init];
                 [model setValuesForKeysWithDictionary:mainDic];
                 [weakSelf.defaultArray addObject:model];
-
+                
             }
-         
+            
             
             for (NSMutableDictionary *miniDic in otherDic) {
-             
                 
                 
-                   ODAddressModel *model = [[ODAddressModel alloc] init];
-                    [model setValuesForKeysWithDictionary:miniDic];
-                    [weakSelf.dataArray addObject:model];
-
-                }
                 
-        
-        
+                ODAddressModel *model = [[ODAddressModel alloc] init];
+                [model setValuesForKeysWithDictionary:miniDic];
+                [weakSelf.dataArray addObject:model];
+                
+            }
+            
+            
+            
             
             
             
         }
         
-          [weakSelf createTableView];
-          [weakSelf.tableView reloadData];
+        [weakSelf createTableView];
+        [weakSelf.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -153,7 +143,7 @@
         
     }];
     
-
+    
 }
 
 - (void)createTableView
@@ -171,14 +161,14 @@
     [self.view addSubview:self.tableView];
     
     UIImageView *addAddressImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 50 - ODNavigationHeight, kScreenSize.width, 50)];
-
+    
     addAddressImageView.image = [UIImage imageNamed:@"button_Add address"];
     addAddressImageView.backgroundColor = [UIColor whiteColor];
     addAddressImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *addAddressTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addAddressAction)];
     [addAddressImageView addGestureRecognizer:addAddressTap];
     [self.view addSubview:addAddressImageView];
-
+    
     
 }
 
@@ -196,7 +186,7 @@
     ODAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:@"item" forIndexPath:indexPath];
     
     
-   
+    
     
     
     if (indexPath.section == 0) {
@@ -209,7 +199,7 @@
             cell.isDefault = @"1";
             cell.model = model;
         }
-     
+        
         
         
     }
@@ -223,9 +213,9 @@
         cell.isDefault = @"2";
         cell.model = model;
         
-       
+        
     }
-   
+    
     
     
     return cell;
@@ -239,7 +229,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-   
+    
     
     
     if (section == 0) {
@@ -263,15 +253,15 @@
 {
     
     if (section == 0) {
-    if (self.defaultArray.count == 0)
-    {
-        return 0;
-        
-    }else
-    {
-       return 13;
-        
-    }
+        if (self.defaultArray.count == 0)
+        {
+            return 0;
+            
+        }else
+        {
+            return 13;
+            
+        }
     }else
     {
         return 0;
@@ -285,7 +275,7 @@
         view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         view.userInteractionEnabled = YES;
         return view;
-
+        
     }else{
         UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
         view.backgroundColor = [UIColor clearColor];
@@ -293,7 +283,7 @@
         return view;
     }
     
- 
+    
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -326,43 +316,43 @@
         
         
         [weakSelf deleteAddressWithAddress_id:address_id];
-
         
-
+        
+        
     }];
     action1.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     
-  
+    
     UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[UIImage imageNamed:@"icon_edit"] handler:^(UITableViewRowAction * _Nullable action, NSIndexPath * _Nullable indexPath) {
         [weakSelf setEditing:false animated:true];
         
         ODAddAddressController *vc = [[ODAddAddressController alloc] init];
-                vc.typeTitle = @"编辑地址";
-                vc.isAdd = NO;
-                if (indexPath.section == 0) {
-                    ODAddressModel *model = self.defaultArray[indexPath.row];
-                    vc.isDefault = YES;
-                    NSString *addressId = [NSString stringWithFormat:@"%@" , model.id];
-                    vc.addressId = addressId;
-                    vc.addressModel = model;
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
+        vc.typeTitle = @"编辑地址";
+        vc.isAdd = NO;
+        if (indexPath.section == 0) {
+            ODAddressModel *model = self.defaultArray[indexPath.row];
+            vc.isDefault = YES;
+            NSString *addressId = [NSString stringWithFormat:@"%@" , model.id];
+            vc.addressId = addressId;
+            vc.addressModel = model;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
+            
+        }else{
+            
+            ODAddressModel *model = self.dataArray[indexPath.row];
+            NSString *addressId = [NSString stringWithFormat:@"%@" , model.id];
+            vc.isDefault = NO;
+            vc.addressId = addressId;
+            vc.addressModel = model;
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
+        }
         
-        
-                }else{
-        
-                    ODAddressModel *model = self.dataArray[indexPath.row];
-                    NSString *addressId = [NSString stringWithFormat:@"%@" , model.id];
-                      vc.isDefault = NO;
-                    vc.addressId = addressId;
-                    vc.addressModel = model;
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
-                    
-                }
-
         
     }];
     action2.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
-
+    
     return @[action1 , action2];
 }
 
@@ -370,16 +360,16 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-         ODAddressModel *model = self.defaultArray[indexPath.row];
+        ODAddressModel *model = self.defaultArray[indexPath.row];
         
         __weakSelf
         if (self.getAddressBlock) {
             
-       
+            
             
             weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id] , @"2");
         }
-
+        
         [weakSelf.navigationController popViewControllerAnimated:YES];
         
     }else{
@@ -390,7 +380,7 @@
             weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id] , @"2");
         }
         
-       [weakSelf.navigationController popViewControllerAnimated:YES];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
         
     }
 }
@@ -404,24 +394,24 @@
     
     [self.deleteManager GET:kDeleteAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        __weak typeof (self)weakSelf = self;
-          if ([responseObject[@"status"] isEqualToString:@"success"]) {
-              
-              if ([self.addressId isEqualToString:address_id]) {
-                  weakSelf.isAddress = @"1";
-              }else {
-                  weakSelf.isAddress = @"2";
-              }
-              
-              [weakSelf getData];
-
-              
-              
-          }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-              
-              [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
-          }
-
+        __weakSelf
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
+            if ([self.addressId isEqualToString:address_id]) {
+                weakSelf.isAddress = @"1";
+            }else {
+                weakSelf.isAddress = @"2";
+            }
+            
+            [weakSelf getData];
+            
+            
+            
+        }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
+            
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+        }
+        
         
         
         
@@ -430,7 +420,7 @@
         
         
     }];
-
+    
 }
 
 
@@ -441,13 +431,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
