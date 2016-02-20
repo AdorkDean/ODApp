@@ -57,6 +57,7 @@
 		9DE951F81C785E2300D7339D /* ODWithdrawalController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE951F41C785E2300D7339D /* ODWithdrawalController.m */; };
 		9DE951F91C785E2300D7339D /* ODWithdrawalDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE951F61C785E2300D7339D /* ODWithdrawalDetailController.m */; };
 		9DE951FD1C785EF200D7339D /* ODReleaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE951FC1C785EF200D7339D /* ODReleaseController.m */; };
+		9DE952001C78636100D7339D /* ODAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE951FF1C78636100D7339D /* ODAPIManager.m */; };
 		9DEDCF411C64B3ED003015C6 /* ODBazaarDetailLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCF2A1C64B3ED003015C6 /* ODBazaarDetailLayout.m */; };
 		9DEDCF421C64B3ED003015C6 /* ODBazaarDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCF2C1C64B3ED003015C6 /* ODBazaarDetailViewController.m */; };
 		9DEDCF431C64B3ED003015C6 /* ODBazaarLabelSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCF2F1C64B3ED003015C6 /* ODBazaarLabelSearchViewController.m */; };
@@ -139,7 +140,6 @@
 		C64D460F1C5F8C6F003BFFA0 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C64D45D11C5F8C6F003BFFA0 /* libWeChatSDK.a */; };
 		C64D46101C5F8C6F003BFFA0 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C64D45D31C5F8C6F003BFFA0 /* libWeChatSDK.a */; };
 		C64D46111C5F8C6F003BFFA0 /* read_me.txt in Resources */ = {isa = PBXBuildFile; fileRef = C64D45D41C5F8C6F003BFFA0 /* read_me.txt */; };
-		C64D46121C5F8C6F003BFFA0 /* ODAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45DD1C5F8C6F003BFFA0 /* ODAPIManager.m */; };
 		C64D46131C5F8C6F003BFFA0 /* ODClassMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45DF1C5F8C6F003BFFA0 /* ODClassMethod.m */; };
 		C64D46141C5F8C6F003BFFA0 /* ODHelp.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45E11C5F8C6F003BFFA0 /* ODHelp.m */; };
 		C64D46151C5F8C6F003BFFA0 /* ODHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45E31C5F8C6F003BFFA0 /* ODHttpTool.m */; };
@@ -403,6 +403,8 @@
 		9DE951F61C785E2300D7339D /* ODWithdrawalDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODWithdrawalDetailController.m; sourceTree = "<group>"; };
 		9DE951FB1C785EF200D7339D /* ODReleaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODReleaseController.h; sourceTree = "<group>"; };
 		9DE951FC1C785EF200D7339D /* ODReleaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODReleaseController.m; sourceTree = "<group>"; };
+		9DE951FE1C78636100D7339D /* ODAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAPIManager.h; sourceTree = "<group>"; };
+		9DE951FF1C78636100D7339D /* ODAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAPIManager.m; sourceTree = "<group>"; };
 		9DEDCF291C64B3ED003015C6 /* ODBazaarDetailLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailLayout.h; sourceTree = "<group>"; };
 		9DEDCF2A1C64B3ED003015C6 /* ODBazaarDetailLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarDetailLayout.m; sourceTree = "<group>"; };
 		9DEDCF2B1C64B3ED003015C6 /* ODBazaarDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailViewController.h; sourceTree = "<group>"; };
@@ -568,8 +570,6 @@
 		C64D45D81C5F8C6F003BFFA0 /* UMSocialWechatHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMSocialWechatHandler.h; sourceTree = "<group>"; };
 		C64D45D91C5F8C6F003BFFA0 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		C64D45DA1C5F8C6F003BFFA0 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
-		C64D45DC1C5F8C6F003BFFA0 /* ODAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAPIManager.h; sourceTree = "<group>"; };
-		C64D45DD1C5F8C6F003BFFA0 /* ODAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAPIManager.m; sourceTree = "<group>"; };
 		C64D45DE1C5F8C6F003BFFA0 /* ODClassMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODClassMethod.h; sourceTree = "<group>"; };
 		C64D45DF1C5F8C6F003BFFA0 /* ODClassMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODClassMethod.m; sourceTree = "<group>"; };
 		C64D45E01C5F8C6F003BFFA0 /* ODHelp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHelp.h; sourceTree = "<group>"; };
@@ -1606,8 +1606,8 @@
 		C64D45DB1C5F8C6F003BFFA0 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				C64D45DC1C5F8C6F003BFFA0 /* ODAPIManager.h */,
-				C64D45DD1C5F8C6F003BFFA0 /* ODAPIManager.m */,
+				9DE951FE1C78636100D7339D /* ODAPIManager.h */,
+				9DE951FF1C78636100D7339D /* ODAPIManager.m */,
 				C64D45DE1C5F8C6F003BFFA0 /* ODClassMethod.h */,
 				C64D45DF1C5F8C6F003BFFA0 /* ODClassMethod.m */,
 				C64D45E01C5F8C6F003BFFA0 /* ODHelp.h */,
@@ -2641,6 +2641,7 @@
 				9D46D1481C77459200F4C0CD /* ODPayModel.m in Sources */,
 				D4D0738E1C59B9FA008527C9 /* ODOthersInformationController.m in Sources */,
 				D4D075251C59B9FA008527C9 /* ONMyApplyActivityCell.m in Sources */,
+				9DE952001C78636100D7339D /* ODAPIManager.m in Sources */,
 				9DE951E21C783C8600D7339D /* ODWithdrawalView.m in Sources */,
 				D4D0737C1C59B9FA008527C9 /* ODCommunityDetailReplyViewController.m in Sources */,
 				D4D075441C59BA9B008527C9 /* main.m in Sources */,
@@ -2765,7 +2766,6 @@
 				D4F76DAD1C61AEA100D59F02 /* ODOrderView.m in Sources */,
 				D4D073971C59B9FA008527C9 /* ODUserNickNameController.m in Sources */,
 				D4D073A01C59B9FA008527C9 /* ODAppModel.m in Sources */,
-				C64D46121C5F8C6F003BFFA0 /* ODAPIManager.m in Sources */,
 				D4D073861C59B9FA008527C9 /* ODChangePassWordController.m in Sources */,
 				D4D075121C59B9FA008527C9 /* ODBindingMobileView.m in Sources */,
 				C6522A161C770EAC00C210EE /* ODPersonalTaskButton.m in Sources */,

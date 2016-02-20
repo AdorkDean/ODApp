@@ -624,25 +624,23 @@ updatingLocation:(BOOL)updatingLocation{
     {
         //通过AMapReGeocodeSearchResponse对象处理搜索结果
         NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
-        if (result.length == 0)
-        {
+        if (result.length == 0) {
             result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
         }
-else
-{
+        
         NSString *cityResult = [result substringToIndex:[result length] - 1];
-
-
+        
+        
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
-
+        
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-
+            
             [ODUserInformation sharedODUserInformation].locationCity = cityResult;
-
+            
             for (NSDictionary *cityInformation in self.cityListArray) {
-
-//                NSString *cityName = [NSString stringWithFormat:@"%@市",cityInformation[@"name"]];
-
+                
+                //                NSString *cityName = [NSString stringWithFormat:@"%@市",cityInformation[@"name"]];
+                
                 if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityInformation[@"name"]]) {
                     [ODUserInformation sharedODUserInformation].cityID = cityInformation[@"id"];
                 }
@@ -650,16 +648,16 @@ else
             [self locationCity];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-
+            
             [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
             [ODUserInformation sharedODUserInformation].cityID = @"1";
             [self locationCity];
         }]];
-
+        
         [self presentViewController:alert animated:YES completion:nil];
-}
     }
 }
+
 
 
 
