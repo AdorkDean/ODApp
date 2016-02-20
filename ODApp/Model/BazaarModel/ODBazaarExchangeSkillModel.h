@@ -16,6 +16,7 @@
 @property(nonatomic,copy)NSString *unit;
 @property(nonatomic,copy)NSString *swap_type;
 @property(nonatomic,copy)NSString *love_num;
+@property(nonatomic,copy)NSString *love_id;
 @property(nonatomic,copy)NSString *share_num;
 @property(nonatomic,strong)NSArray *imgs_small;
 @property(nonatomic,strong)NSArray *imgs_big;

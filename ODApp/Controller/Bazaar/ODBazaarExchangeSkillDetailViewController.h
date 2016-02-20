@@ -29,4 +29,5 @@
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)UILabel *loveLabel;
 @property(nonatomic,copy)NSString *nick;
+@property(nonatomic,copy)NSString *love_id;
 @end

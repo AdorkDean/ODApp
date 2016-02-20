@@ -15,6 +15,7 @@
 
 @interface ODCommunityReleaseTopicViewController : ODBaseViewController<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate, MBProgressHUDDelegate>
 
+@property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)UITextView *titleTextView;
 @property(nonatomic,strong)UILabel *titleLabel;
 @property(nonatomic,strong)UITextView *topicContentTextView;
@@ -23,8 +24,10 @@
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)NSMutableArray *imageArray;
 @property(nonatomic,strong)NSMutableArray *strArray;
+@property(nonatomic,strong)NSMutableArray *labelArray;
+@property(nonatomic,strong)UIButton *lastSelectedButton;
 @property(nonatomic,copy)void(^myBlock)(NSString *refresh);
-@property (nonatomic, strong) UIImage *pickedImage;
-@property (nonatomic, strong) MBProgressHUD *hud;
+@property(nonatomic,strong)UIImage *pickedImage;
+@property(nonatomic,strong)MBProgressHUD *hud;
 
 @end
