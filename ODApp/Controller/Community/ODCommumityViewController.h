@@ -26,7 +26,7 @@
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic)NSInteger count;
-@property(nonatomic,copy)NSString *refresh;
+@property(nonatomic,assign) BOOL refresh;
 
 @property (nonatomic, copy) NSString *bbsMark;
 @property (nonatomic, assign) int bbsType;

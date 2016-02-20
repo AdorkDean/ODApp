@@ -17,8 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-    
+
+    self.pageCount = 1;
     self.dataArray = [[NSMutableArray alloc] init];
     
     self.navigationItem.title = @"我报名的活动";
@@ -26,8 +26,12 @@
     [self createCollectionView];
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        
+        self.pageCount = 1;
         [weakSelf downRefresh];
+    }];
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        
+        [weakSelf loadMoreData];
     }];
 }
 
@@ -43,6 +47,12 @@
     [self getCollectionViewRequest];
 }
 
+- (void)loadMoreData
+{
+    self.pageCount ++;
+    [self getCollectionViewRequest];
+}
+
 - (void)getCollectionViewRequest
 {
 
@@ -51,7 +61,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    NSDictionary *parameter = @{@"open_id":openId,@"type":@"0"};
+    NSDictionary *parameter = @{@"open_id":openId,@"type":@"0",@"page":[NSString stringWithFormat:@"%i", self.pageCount]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
@@ -59,11 +69,12 @@
         
         [weakSelf.noReusltLabel removeFromSuperview];
         
+        if (weakSelf.pageCount == 1) {
+            [weakSelf.dataArray removeAllObjects];
+        }
+        
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            [weakSelf.dataArray removeAllObjects];
-            
             
             NSDictionary *result = dict[@"result"];
             for (NSDictionary *itemDict in result) {
@@ -73,15 +84,19 @@
                 
             }
             
-            if (weakSelf.dataArray.count == 0) {
+            if (weakSelf.dataArray.count == 0 ) {
                 weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无活动" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [weakSelf.view addSubview:self.noReusltLabel];
+                [weakSelf.view addSubview:weakSelf.noReusltLabel];
             }
             else{
                 [weakSelf.collectionView reloadData];
             }
             
             [weakSelf.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_footer endRefreshing];
+            if (result.count == 0) {
+                [weakSelf.collectionView.mj_footer noticeNoMoreData];
+            }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         

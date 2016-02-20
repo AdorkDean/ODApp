@@ -31,6 +31,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     [self createRequestData];
 }
 
+#pragma mark - 加载数据请求
 - (void)createRequestData
 {
 
@@ -40,12 +41,14 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
         
- 
+        if ([[model result]count] == 0)
+        {
+            [weakSelf.collectionView.mj_footer noticeNoMoreData];
+        }
         for (id md in [model result])
         {
             if ([[weakSelf.dataArray valueForKeyPath:@"swap_id" ] containsObject:[md swap_id]])
             {
-//                [weakSelf.collectionView.mj_footer noticeNoMoreData];
             }
             else
             {
@@ -62,6 +65,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 }
 
 #pragma mark - Action
+
 - (void)editButtonClick:(UIButton *)button
 {
     ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview.superview;
@@ -94,6 +98,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+#pragma mark - 删除技能请求
 - (void)deleteSkillRequest{
 
     self.manager = [AFHTTPRequestOperationManager manager];
