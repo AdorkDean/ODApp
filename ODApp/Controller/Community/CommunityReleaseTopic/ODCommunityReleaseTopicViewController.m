@@ -42,6 +42,9 @@
     
     if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length>0) {
         [self joiningTogetherParmeters];
+        for (NSString *title in self.labelArray) {
+            NSLog(@"%@",title);
+        }
     }else if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length==0){
         
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入话题内容"];
@@ -151,27 +154,16 @@ NSString *topicContentText = @"";
 -(void)labelButtonClick:(UIButton *)button
 {
     NSString *title = button.titleLabel.text;
-    if (self.lastSelectedButton == nil) {
-        [button setTitleColor:[UIColor colorWithHexString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-        self.lastSelectedButton = button;
-        [self.labelArray addObject:title];
-    }else if (self.lastSelectedButton == button){
+    if ([self.labelArray containsObject:title]) {
         [button setTitleColor:[UIColor colorWithHexString:@"#b0b0b0" alpha:1] forState:UIControlStateNormal];
         button.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-        self.lastSelectedButton = nil;
-        [self.labelArray removeObjectAtIndex:button.tag-1];
-    }else if (self.lastSelectedButton != button && ![self.labelArray containsObject:title]){
+        [self.labelArray removeObject:title];
+    }else{
         [button setTitleColor:[UIColor colorWithHexString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
         button.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-        self.lastSelectedButton = button;
         [self.labelArray addObject:title];
-    }else if (self.lastSelectedButton != button && [self.labelArray containsObject:title]){
-        [button setTitleColor:[UIColor colorWithHexString:@"#b0b0b0" alpha:1] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-        self.lastSelectedButton = nil;
-        [self.labelArray removeObjectAtIndex:button.tag-1];
     }
+    
 }
 
 #pragma mark - 创建添加图片按钮
@@ -338,7 +330,7 @@ NSString *topicContentText = @"";
         [self.scrollView addSubview:button];
     }
     [self.addPicButton setFrame:CGRectMake(4 + (width + 4) * (self.imageArray.count % 4), CGRectGetMaxY(self.topicContentTextView.frame) + 95 + (4+width) * (self.imageArray.count / 4), width, width)];
-
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,262+(self.imageArray.count/4+1)*(width+4));
     [self.hud hide:NO afterDelay:0];
 }
 

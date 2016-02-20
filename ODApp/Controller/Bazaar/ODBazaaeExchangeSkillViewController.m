@@ -41,7 +41,7 @@
 -(void)loadMoreData
 {
     self.page ++;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0"};
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
 }
@@ -56,7 +56,7 @@
 -(void)joiningTogetherParmeters
 {
     self.page = 1;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0"};
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
 }
@@ -154,7 +154,7 @@
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
             }
-            cell.picViewConstraintHeight.constant = width+(width+5)*(model.imgs_small.count/3);
+            cell.picViewConstraintHeight.constant = width+(width+5)*((model.imgs_small.count-1)/3);
         }
     }
     else
@@ -175,7 +175,7 @@
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
-    picController.photos = model.imgs_small;
+    picController.photos = model.imgs_big;
     picController.selectedIndex = button.tag-10*indexPath.row;
     picController.skill = @"skill";
     [self.navigationController pushViewController:picController animated:YES];

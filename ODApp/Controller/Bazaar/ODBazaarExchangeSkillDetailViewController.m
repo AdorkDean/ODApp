@@ -152,29 +152,29 @@
 -(void)createDetailView
 {
     ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
-    UIView *detailView = [[UIView alloc]initWithFrame:CGRectMake(0, 65, kScreenSize.width, 2000)];
-    detailView.backgroundColor = [UIColor whiteColor];
-    [self.scrollView addSubview:detailView];
+    self.detailView = [[UIView alloc]initWithFrame:CGRectMake(0, 65, kScreenSize.width, 2000)];
+    self.detailView.backgroundColor = [UIColor whiteColor];
+    [self.scrollView addSubview:self.detailView];
     
     UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, kScreenSize.width, 20)];
     titleLabel.text = [NSString stringWithFormat:@"我去 · %@",model.title];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont systemFontOfSize:15];
-    [detailView addSubview:titleLabel];
+    [self.detailView addSubview:titleLabel];
     
     UILabel *priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(titleLabel.frame)+10, kScreenSize.width, 20)];
     priceLabel.text = [[[[NSString stringWithFormat:@"%@",model.price] stringByAppendingString:@"元"] stringByAppendingString:@"/"] stringByAppendingString:model.unit];
     priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     priceLabel.textAlignment = NSTextAlignmentCenter;
     priceLabel.font = [UIFont systemFontOfSize:14];
-    [detailView addSubview:priceLabel];
+    [self.detailView addSubview:priceLabel];
     
     UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(priceLabel.frame)+10, kScreenSize.width-20, [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14])];
     contentLabel.text = model.content;
     contentLabel.font = [UIFont systemFontOfSize:14];
-    [detailView addSubview:contentLabel];
+    [self.detailView addSubview:contentLabel];
     
-    
+    __weakSelf
     __block CGRect frame;
     for (NSInteger i = 0; i < model.imgs_big.count; i++) {
         NSDictionary *dict = model.imgs_big[i];
@@ -190,35 +190,43 @@
             }else{
                 if (i==model.imgs_big.count-1) {
                     imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
-
-                    UIImageView *loveIamgeView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
-                    loveIamgeView.image = [UIImage imageNamed:@"Skills profile page_share"];
-                    [detailView addSubview:loveIamgeView];
-                        
-                    if (model.loves.count) {
-                        for (NSInteger i = 0; i < model.loves.count; i++) {
-                            CGFloat width = 40;
-                            NSDictionary *dict = model.loves[i];
-                            UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake((kScreenSize.width-(model.loves.count-1)*10-model.loves.count*width)/2+(width+10)*i, CGRectGetMaxY(loveIamgeView.frame)+10, width, width)];
-                            button.layer.masksToBounds = YES;
-                            button.layer.cornerRadius = 20;
-                            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"avatar"]] forState:UIControlStateNormal];
-                            [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-                            [detailView addSubview:button];
-                        }
-                        detailView.frame = CGRectMake(0, 65, kScreenSize.width, loveIamgeView.frame.origin.y+loveIamgeView.frame.size.height+60);
-                    }else{
-                        detailView.frame = CGRectMake(0, 65, kScreenSize.width, loveIamgeView.frame.origin.y+loveIamgeView.frame.size.height+10);
-                    }
-                    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+detailView.frame.size.height);
+                    weakSelf.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
+                    weakSelf.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
+                    [weakSelf.detailView addSubview:weakSelf.loveImageView];
+                     weakSelf.detailView.frame = CGRectMake(0, 65, kScreenSize.width, weakSelf.loveImageView.frame.origin.y+weakSelf.loveImageView.frame.size.height+60);
+                    weakSelf.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+weakSelf.detailView.frame.size.height);
+                    
+                    [weakSelf createLoveButton];
                 }else{
                     imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
                     frame = imageView.frame;
                 }
             }
             imageView.contentMode = UIViewContentModeScaleAspectFill;
-            [detailView addSubview:imageView];
+            [self.detailView addSubview:imageView];
         }];
+    }
+}
+
+
+-(void)createLoveButton
+{
+    ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
+    if (model.loves.count) {
+        for (NSInteger i = 0; i < model.loves.count; i++) {
+            if (i<7) {
+                CGFloat width = 30;
+                NSDictionary *dict = model.loves[i];
+                UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake((kScreenSize.width-(model.loves.count-1)*10-model.loves.count*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+10, width, width)];
+                button.layer.masksToBounds = YES;
+                button.layer.cornerRadius = width/2;
+                [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"avatar"]] forState:UIControlStateNormal];
+                [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                [self.detailView addSubview:button];
+            }else{
+                
+            }
+        }
     }
 }
 
@@ -287,13 +295,11 @@
             NSDictionary *parameter = @{@"type":@"4",@"obj_id":self.swap_id,@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
             [self pushDataWithUrl:kBazaarExchangeSkillDetailLoveUrl parameter:signParameter isLove:YES];
-            NSLog(@"%@",signParameter);
-            
         }else{
             NSDictionary *parameter = @{@"love_id":self.love_id,@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-             NSLog(@"%@",signParameter);
             [self pushDataWithUrl:kBazaarExchangeSkillDetailNotLoveUrl parameter:signParameter isLove:NO];
+            NSLog(@"++++%@",signParameter);
         }
     }
 }
@@ -305,6 +311,9 @@
        if (love) {
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
                self.loveLabel.text = @"已收藏";
+               NSDictionary *dict = responseObject[@"result"];
+//               self.love_id = dict[@"love_id"];
+               NSLog(@"--%@",self.love_id);
                 NSLog(@"%@",responseObject);
            }
        }else{

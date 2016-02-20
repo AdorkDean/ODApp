@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
 
+
 -(void)shodDataWithModel:(ODBazaarModel *)model;
 
 @end

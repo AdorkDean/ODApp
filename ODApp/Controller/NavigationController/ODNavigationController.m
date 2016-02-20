@@ -25,7 +25,7 @@
     [navigationBar setShadowImage:[UIImage new]];
     NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
     dictM[NSForegroundColorAttributeName] = [UIColor blackColor];
-    dictM[NSFontAttributeName] = [UIFont systemFontOfSize:17];
+    dictM[NSFontAttributeName] = [UIFont systemFontOfSize:ODNavigationTextFont];
     [navigationBar setTitleTextAttributes:dictM];
 }
 

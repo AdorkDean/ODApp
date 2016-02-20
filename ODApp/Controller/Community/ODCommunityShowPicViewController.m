@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self createCollectionView];
     [self createCountLabel];
 }
@@ -28,14 +29,14 @@
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     layout.minimumInteritemSpacing = 0;
-    layout.itemSize = CGSizeMake(KScreenWidth, KScreenHeight);
     layout.minimumLineSpacing = 0;
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height) collectionViewLayout:layout];
     self.collectionView.backgroundColor = [UIColor blackColor];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.pagingEnabled = YES;
-    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:kCellId];
+
+    [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarPicCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:kCellId];
     [self.view addSubview:self.collectionView];
 }
 
@@ -51,16 +52,34 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellId forIndexPath:indexPath];
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0,100, kScreenSize.width, kScreenSize.height-200)];
+    ODBazaarPicCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellId forIndexPath:indexPath];
     if ([self.skill isEqualToString:@"skill"]) {
         NSDictionary *dict = self.photos[indexPath.row];
-        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]]];
+        [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [cell.picImageView sizeToFit];
+            CGFloat multiple = cell.picImageView.od_width/kScreenSize.width;
+            CGFloat height = cell.picImageView.od_height/multiple;
+            cell.picImageView.frame = CGRectMake(0, 0, kScreenSize.width, height);
+            cell.picImageView.center = CGPointMake(KScreenWidth/2, KScreenHeight/2);
+            cell.picImageView.contentMode = UIViewContentModeScaleAspectFill;
+        }];
     }else{
-        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:self.photos[indexPath.row]]];
+        [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.photos[indexPath.row]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [cell.picImageView sizeToFit];
+            CGFloat multiple = cell.picImageView.od_width/kScreenSize.width;
+            CGFloat height = cell.picImageView.od_height/multiple;
+            cell.picImageView.frame = CGRectMake(0, 0, kScreenSize.width, height);
+            cell.picImageView.center = CGPointMake(KScreenWidth/2, KScreenHeight/2);
+            cell.picImageView.contentMode = UIViewContentModeScaleAspectFill;
+        }];
     }
-    [cell.contentView addSubview:imageView];
+
     return cell;
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(kScreenSize.width, kScreenSize.height);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -70,11 +89,11 @@
 
 -(void)createCountLabel
 {
-    self.label = [[UILabel alloc]initWithFrame:CGRectMake(0, kScreenSize.height - 100, kScreenSize.width, 100)];
+    self.label = [[UILabel alloc]initWithFrame:CGRectMake(0, kScreenSize.height - 30, kScreenSize.width, 30)];
     self.label.text = [NSString stringWithFormat:@"%ld/%ld",self.selectedIndex+1,self.photos.count];
     self.label.textColor = [UIColor whiteColor];
     self.label.textAlignment = NSTextAlignmentCenter;
-    self.label.backgroundColor = [UIColor blackColor];
+    self.label.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.label];
 }
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
@@ -93,6 +112,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     self.skill = @"";
     self.navigationController.navigationBar.hidden = NO;
 }

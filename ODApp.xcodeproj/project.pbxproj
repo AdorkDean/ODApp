@@ -72,6 +72,9 @@
 		9DF2E98C1C74654A00F77976 /* ODSecondOrderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF2E98B1C74654A00F77976 /* ODSecondOrderDetailController.m */; };
 		9DF2E98F1C74666800F77976 /* ODSecondOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF2E98E1C74666800F77976 /* ODSecondOrderDetailView.m */; };
 		9DF2E9911C74667800F77976 /* ODSecondOrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DF2E9901C74667800F77976 /* ODSecondOrderDetailView.xib */; };
+		B8382A341C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8382A321C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.m */; };
+		B8382A351C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8382A331C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.xib */; };
+		B8382A391C788011002D83E7 /* ODBazaarDetailEvaluationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8382A381C788011002D83E7 /* ODBazaarDetailEvaluationViewController.m */; };
 		B839002D1C75CE8A00598410 /* ODPersonalCenterCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B839002C1C75CE8A00598410 /* ODPersonalCenterCollectionViewController.m */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
@@ -416,6 +419,11 @@
 		9DF2E98D1C74666800F77976 /* ODSecondOrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSecondOrderDetailView.h; sourceTree = "<group>"; };
 		9DF2E98E1C74666800F77976 /* ODSecondOrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSecondOrderDetailView.m; sourceTree = "<group>"; };
 		9DF2E9901C74667800F77976 /* ODSecondOrderDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODSecondOrderDetailView.xib; sourceTree = "<group>"; };
+		B8382A311C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarPicCollectionViewCell.h; sourceTree = "<group>"; };
+		B8382A321C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarPicCollectionViewCell.m; sourceTree = "<group>"; };
+		B8382A331C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarPicCollectionViewCell.xib; sourceTree = "<group>"; };
+		B8382A371C788011002D83E7 /* ODBazaarDetailEvaluationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailEvaluationViewController.h; sourceTree = "<group>"; };
+		B8382A381C788011002D83E7 /* ODBazaarDetailEvaluationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarDetailEvaluationViewController.m; sourceTree = "<group>"; };
 		B839002B1C75CE8A00598410 /* ODPersonalCenterCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPersonalCenterCollectionViewController.h; sourceTree = "<group>"; };
 		B839002C1C75CE8A00598410 /* ODPersonalCenterCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPersonalCenterCollectionViewController.m; sourceTree = "<group>"; };
 		B83C6B621C224F640063ED92 /* ODApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ODApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -903,10 +911,11 @@
 		9DEDCF281C64B3ED003015C6 /* BazaarDetail */ = {
 			isa = PBXGroup;
 			children = (
-				9DEDCF291C64B3ED003015C6 /* ODBazaarDetailLayout.h */,
-				9DEDCF2A1C64B3ED003015C6 /* ODBazaarDetailLayout.m */,
 				9DEDCF2B1C64B3ED003015C6 /* ODBazaarDetailViewController.h */,
 				9DEDCF2C1C64B3ED003015C6 /* ODBazaarDetailViewController.m */,
+				9DEDCF291C64B3ED003015C6 /* ODBazaarDetailLayout.h */,
+				9DEDCF2A1C64B3ED003015C6 /* ODBazaarDetailLayout.m */,
+				B8382A361C78789B002D83E7 /* BazaarDetailEvaluation */,
 			);
 			path = BazaarDetail;
 			sourceTree = "<group>";
@@ -957,6 +966,7 @@
 		9DEDCF5A1C64B3FC003015C6 /* BazaarView */ = {
 			isa = PBXGroup;
 			children = (
+				B8382A301C787070002D83E7 /* ODBazaarPicView */,
 				9DEDCF5B1C64B3FC003015C6 /* BazaarDetailView */,
 				9DEDCF621C64B3FC003015C6 /* ODBazaarCollectionCell.h */,
 				9DEDCF631C64B3FC003015C6 /* ODBazaarCollectionCell.m */,
@@ -982,6 +992,26 @@
 				9DEDCF611C64B3FC003015C6 /* ODBazaarRewardCollectionCell.xib */,
 			);
 			path = BazaarDetailView;
+			sourceTree = "<group>";
+		};
+		B8382A301C787070002D83E7 /* ODBazaarPicView */ = {
+			isa = PBXGroup;
+			children = (
+				B8382A311C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.h */,
+				B8382A321C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.m */,
+				B8382A331C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.xib */,
+			);
+			name = ODBazaarPicView;
+			sourceTree = "<group>";
+		};
+		B8382A361C78789B002D83E7 /* BazaarDetailEvaluation */ = {
+			isa = PBXGroup;
+			children = (
+				B8382A371C788011002D83E7 /* ODBazaarDetailEvaluationViewController.h */,
+				B8382A381C788011002D83E7 /* ODBazaarDetailEvaluationViewController.m */,
+			);
+			name = BazaarDetailEvaluation;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		B839002A1C75CE8A00598410 /* ODCollection */ = {
@@ -2417,6 +2447,7 @@
 				D4D0751F1C59B9FA008527C9 /* ODTopicCell.xib in Resources */,
 				D4D075111C59B9FA008527C9 /* ODlandingView.xib in Resources */,
 				D4F76DA51C61AEA100D59F02 /* ODCollectionCell.xib in Resources */,
+				B8382A351C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.xib in Resources */,
 				D4D075171C59B9FA008527C9 /* ODLandFirstCell.xib in Resources */,
 				D4F76D6D1C60C55E00D59F02 /* ODActivityVIPCell.xib in Resources */,
 				C64D45F61C5F8C6F003BFFA0 /* IQKeyboardManager.bundle in Resources */,
@@ -2582,6 +2613,7 @@
 				D4D073881C59B9FA008527C9 /* ODLandMainController.m in Sources */,
 				D4F76DBF1C61AEAD00D59F02 /* TimeButton.m in Sources */,
 				C64D45EE1C5F8C6F003BFFA0 /* IQKeyboardManager.m in Sources */,
+				B8382A391C788011002D83E7 /* ODBazaarDetailEvaluationViewController.m in Sources */,
 				D4D075041C59B9FA008527C9 /* CenterDetailCell.m in Sources */,
 				9DEDCF6F1C64B3FC003015C6 /* ODBazaarCollectionCell.m in Sources */,
 				D46C90301C6041B4004942E7 /* ODNewActivityCenterViewController.m in Sources */,
@@ -2625,6 +2657,7 @@
 				C64D45E61C5F8C6F003BFFA0 /* UIColor+ODExtension.m in Sources */,
 				D4D074F91C59B9FA008527C9 /* ODCommunityDetailCell.m in Sources */,
 				9DDC9B721C631D81000D688F /* ODOrderDetailView.m in Sources */,
+				B8382A341C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.m in Sources */,
 				D4F76DD71C61B07B00D59F02 /* ODLikeModel.m in Sources */,
 				9DEDCF4B1C64B3ED003015C6 /* ODBazaarViewController.m in Sources */,
 				C66B882A1C7449AC00F60E3D /* ODLocationModel.m in Sources */,

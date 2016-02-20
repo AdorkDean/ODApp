@@ -19,17 +19,20 @@
 #import "ODPersonalCenterViewController.h"
 #import "ODOthersInformationController.h"
 #import "ODCommunityShowPicViewController.h"
+#import "odbarbutton.h"
 
-@interface ODCommumityViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface ODCommumityViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UIPopoverPresentationControllerDelegate>
 
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
+@property(nonatomic,strong)ODBarButton *button;
+@property(nonatomic,strong)UIView *classView;
 @property(nonatomic)NSInteger count;
 @property(nonatomic,assign) BOOL refresh;
-
 @property (nonatomic, copy) NSString *bbsMark;
 @property (nonatomic, assign) int bbsType;
 
 - (void)joiningTogetherParmeters;
+
 @end

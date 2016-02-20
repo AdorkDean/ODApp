@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -21,7 +21,7 @@
                         </constraints>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJR-PQ-Jvk">
-                        <rect key="frame" x="320" y="16" width="37.5" height="12.5"/>
+                        <rect key="frame" x="320" y="16" width="38" height="13"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12.5" id="nQd-ye-IXJ"/>
                         </constraints>
@@ -30,20 +30,20 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Gf-N6-WPl">
-                        <rect key="frame" x="75" y="38" width="11" height="11"/>
+                        <rect key="frame" x="75" y="39" width="11" height="11"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="11" id="Fhz-pF-7FA"/>
                             <constraint firstAttribute="width" constant="11" id="yME-HB-LPx"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fT4-PT-V8T">
-                        <rect key="frame" x="92" y="38" width="28.5" height="11.5"/>
+                        <rect key="frame" x="92" y="39" width="29" height="11"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UI7-aa-fLA">
-                        <rect key="frame" x="75" y="180" width="282.5" height="16"/>
+                        <rect key="frame" x="75" y="180" width="283" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="FOw-Ka-y0Q"/>
                         </constraints>
@@ -73,7 +73,7 @@
                         <rect key="frame" x="315" y="210" width="11" height="11"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjv-ul-Sja">
-                        <rect key="frame" x="75" y="17" width="30" height="11.5"/>
+                        <rect key="frame" x="75" y="17" width="30" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="11.5" id="XfN-h5-9hU"/>
                         </constraints>
@@ -82,7 +82,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hr6-EL-V7w">
-                        <rect key="frame" x="75" y="67" width="291.5" height="100"/>
+                        <rect key="frame" x="75" y="68" width="292" height="100"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="cPg-En-IJa"/>
                         </constraints>

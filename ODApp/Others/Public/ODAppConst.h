@@ -9,7 +9,8 @@ UIKIT_EXTERN CGFloat const ODNavigationHeight;
 UIKIT_EXTERN CGFloat const ODLeftMargin;
 /** 控制器View的顶部坐标y */
 UIKIT_EXTERN CGFloat const ODTopY;
-
+/** 导航栏标题字体大小 */
+UIKIT_EXTERN CGFloat const ODNavigationTextFont;
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 UIKIT_EXTERN NSString * const KUserDefaultsOpenId;

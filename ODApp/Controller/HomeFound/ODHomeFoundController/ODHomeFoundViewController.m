@@ -454,7 +454,7 @@
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
             }
-            cell.picViewConstraintHeight.constant = width+(width+5)*(model.imgs_small.count/3);
+            cell.picViewConstraintHeight.constant = width+(width+5)*((model.imgs_small.count-1)/3);
         }
     }else{
         for (id vc in cell.picView.subviews) {

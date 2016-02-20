@@ -19,6 +19,7 @@
 #import "UIImageView+WebCache.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODOthersInformationController.h"
+#import "ODBazaarDetailEvaluationViewController.h"
 
 @interface ODBazaarDetailViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextViewDelegate>
 

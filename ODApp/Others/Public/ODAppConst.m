@@ -6,7 +6,7 @@ CGFloat const ODTabBarHeight = 55;
 CGFloat const ODNavigationHeight = 64;
 CGFloat const ODLeftMargin = 17.5;
 CGFloat const ODTopY = 0;
-
+CGFloat const ODNavigationTextFont = 17;
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 NSString * const KUserDefaultsOpenId = @"userOpenId";

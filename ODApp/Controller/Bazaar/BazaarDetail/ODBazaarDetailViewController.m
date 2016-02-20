@@ -284,9 +284,14 @@
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
             [self pushDataWithUrl:kBazaarTaskReceiveCompleteUrl parameter:signParameter withName:@"确认提交"];
         }else if ([button.titleLabel.text isEqualToString:@"确认完成"]){
-            NSDictionary *parameter = @{@"task_id":self.task_id,@"comment":@"sdsdsd",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-            [self pushDataWithUrl:kBazaarTaskInitiateCompleteUrl parameter:signParameter withName:@"确认完成"];
+            
+//            ODBazaarDetailEvaluationViewController *evaluation = [[ODBazaarDetailEvaluationViewController alloc]init];
+//            [self.navigationController pushViewController:evaluation animated:YES];
+            [self createEvaluationView];
+            
+//            NSDictionary *parameter = @{@"task_id":self.task_id,@"comment":@"sdsdsd",@"open_id":[ODUserInformation sharedODUserInformation].openID};
+//            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+//            [self pushDataWithUrl:kBazaarTaskInitiateCompleteUrl parameter:signParameter withName:@"确认完成"];
         }
         
     }else{
@@ -295,6 +300,16 @@
     }
 }
 
+-(void)createEvaluationView
+{
+    ODBazaarDetailEvaluationViewController *evaluation = [[ODBazaarDetailEvaluationViewController alloc]init];
+    evaluation.view.backgroundColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:0.8];
+
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
+    view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.5];
+    [self.view addSubview:evaluation.view];
+    
+}
 #pragma mark - 提交数据
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter withName:(NSString *)name
 {

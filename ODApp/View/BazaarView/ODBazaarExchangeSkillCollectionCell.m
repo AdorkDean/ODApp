@@ -37,4 +37,9 @@
         self.genderImageView.image = [UIImage imageNamed:@"icon_man"];
     }
 }
+- (CGFloat)height
+{
+    [self layoutIfNeeded];
+    return CGRectGetMaxY(self.shareLabel.frame) + 15;
+}
 @end
