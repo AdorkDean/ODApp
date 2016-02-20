@@ -166,35 +166,6 @@
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     if (indexPath.section == 0) {
         UIImageView *imageView = (UIImageView *)[self.view viewWithTag:10];
-        if (indexPath.row == 0 && self.index1 == 1 && self.index2 == 1 && self.index3 == 1) {
-            imageView.image = [UIImage imageNamed:@"time6_icon"];
-            self.index1 = 0;
-        }else if (indexPath.row == 0 && self.index1 == 0 && self.index2 == 1 && self.index3 == 1){
-            imageView.image = [UIImage imageNamed:@"time4_icon"];
-            self.index1 = 1;
-        }else if (indexPath.row == 1 && self.index1 == 0 && self.index2 == 1 && self.index3 == 1){
-            imageView.image = [UIImage imageNamed:@"time1_icon"];
-            self.index2 = 0;
-        }else if (indexPath.row == 2 && self.index1 == 0 && self.index2 == 1 && self.index3 == 1){
-            imageView.image = [UIImage imageNamed:@"time8_icon"];
-            self.index3 = 0;
-        }else if (indexPath.row == 2 && self.index1 == 0 && self.index2 == 0 && self.index3 == 1){
-            imageView.image = [UIImage imageNamed:@"time3_icon"];
-            self.index3 = 0;
-        }else if (indexPath.row == 1 && self.index1 == 0 && self.index2 == 1 && self.index3 == 0){
-            imageView.image = [UIImage imageNamed:@"time3_icon"];
-            self.index2 = 0;
-        }
-        else if (indexPath.row == 0 && self.index1 == 0 && self.index2 == 0 && self.index3 == 0){
-            imageView.image = [UIImage imageNamed:@"time2_icon"];
-            self.index1 = 1;
-        }else if (indexPath.row == 1 && self.index1 == 0 && self.index2 == 0 && self.index3 == 0){
-            imageView.image = [UIImage imageNamed:@"time8_icon"];
-            self.index2 = 1;
-        }else if (indexPath.row == 2 && self.index1 == 0 && self.index2 == 0 && self.index3 == 0){
-            imageView.image = [UIImage imageNamed:@"time1_icon"];
-            self.index2 = 1;
-        }
     }
     
     if (indexPath.section == 1) {

@@ -58,7 +58,6 @@
     self.page = 1;
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSLog(@"%@",signParameter);
     [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
 }
 
@@ -78,6 +77,7 @@
                 ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
+            
                 [weakSelf.collectionView reloadData];
                 [weakSelf.collectionView.mj_header endRefreshing];
                 [weakSelf.collectionView.mj_footer endRefreshing];
@@ -200,6 +200,8 @@
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc]init];
     detailControler.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
     detailControler.nick = model.user[@"nick"];
+    detailControler.love_id = [NSString stringWithFormat:@"%@",model.love_id];
+    NSLog(@"----%@",detailControler.love_id);
     [self.navigationController pushViewController:detailControler animated:YES];
     
 }
