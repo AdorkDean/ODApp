@@ -22,13 +22,12 @@
     [super viewDidLoad];
     
     self.count = 1;
-
+    self.refresh = @"";
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"欧动社区";
     [self createRequest];
     [self joiningTogetherParmeters];
     [self createCollectionView];
-    
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf joiningTogetherParmeters];
@@ -37,7 +36,6 @@
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf loadMoreData];
     }];
-    
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(searchButtonClick) image:[UIImage imageNamed:@"search"] highImage:nil];
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(publishButtonClick) image:[UIImage imageNamed:@"plus"] highImage:nil];
@@ -161,6 +159,7 @@
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
     [self.view addSubview:self.collectionView];
+    [self.collectionView.mj_header beginRefreshing];
 
 }
 
@@ -281,17 +280,12 @@
         return 135+3*width+10;
     }
 }
-#pragma mark - 试图将要出现
--(void)viewWillAppear:(BOOL)animated
+- (void)setRefresh:(NSString *)refresh
 {
-    
-    [super viewWillAppear:animated];
-    if ([self.refresh isEqualToString:@"refresh"]) {
+    if ([refresh isEqualToString:@"refresh"]) {
         [self.collectionView.mj_header beginRefreshing];
     }
 
-    
-    
 }
 #pragma mark - 试图将要消失
 -(void)viewWillDisappear:(BOOL)animated

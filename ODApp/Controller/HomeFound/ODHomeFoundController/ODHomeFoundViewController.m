@@ -45,10 +45,6 @@
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
     
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakSelf refreshdata];
-        
-    }];
     
     [MAMapServices sharedServices].apiKey = ODLocationApiKey;
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
@@ -169,10 +165,10 @@
                 [weakSelf.dataArray addObject:model];
             }
             [weakSelf createCollectionView];
+            [weakSelf.collectionView.mj_header endRefreshing];
         }
         
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [weakSelf.collectionView.mj_header endRefreshing];
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) { 
         
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
@@ -270,82 +266,68 @@
 #pragma mark - 寻圈子8个按钮点击事件
 - (void)emotionButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"情感";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+    [self giveCommumityContent:@"情感"];
 }
 
 - (void)funnyButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"搞笑";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+
+    [self giveCommumityContent:@"搞笑"];
 }
 
 - (void)moviesButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"影视";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+    [self giveCommumityContent:@"影视"];
 }
 
 - (void)quadraticButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"二次元";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+    [self giveCommumityContent:@"二次元"];
 }
 
 - (void)lifeButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"生活";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+    [self giveCommumityContent:@"生活"];
 }
 
 - (void)starButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"明星";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+    [self giveCommumityContent:@"明星"];
 }
 
 - (void)beautifulButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"爱美";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+    [self giveCommumityContent:@"爱美"];
 }
 
 - (void)petButtonClick:(UIButton *)button
 {
-    self.tabBarController.selectedIndex = 3;
-    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
-    vc.bbsMark = @"宠物";
-    vc.bbsType = 5;
-    [vc joiningTogetherParmeters];
+    [self giveCommumityContent:@"宠物"];
+
 }
 
+#pragma mark - 加入更多圈子点击事件
 - (void)gestureButtonClick:(UIButton *)button
 {
-    ODCommumityViewController *vc = [[ODCommumityViewController alloc] init];
-    vc.bbsMark = @"情感";
-    vc.bbsType = 5;
+    
     self.tabBarController.selectedIndex = 3;
+    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
+    vc.bbsType = 4;
+    vc.refresh = @"refresh";
+    [vc joiningTogetherParmeters];
+
+}
+
+#pragma mark - 寻圈子跳转传值
+- (void)giveCommumityContent:(NSString *)bbsMark
+{
+    
+    self.tabBarController.selectedIndex = 3;
+    ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
+    vc.bbsMark = bbsMark;
+    vc.bbsType = 5;
+    vc.refresh = @"refresh";
+    [vc joiningTogetherParmeters];
 }
 
 #pragma mark - 用户头像点击事件
@@ -393,7 +375,7 @@
 #pragma mark - Create UICollectionView
 - (void)createCollectionView
 {
-    
+    __weakSelf
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight-ODTabBarHeight) collectionViewLayout:self.flowLayout];
     
@@ -409,7 +391,11 @@
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-    
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf refreshdata];
+        
+    }];
+
     [self.view addSubview:self.collectionView];
 }
 
