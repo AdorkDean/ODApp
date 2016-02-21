@@ -17,6 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     __weakSelf
+    
     [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationShowBazaar object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
         
         weakSelf.status = @"9";
@@ -24,6 +25,15 @@
         [weakSelf.collectionView.mj_header beginRefreshing];
         
     }];
+    
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationReleaseTask object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
+        
+        weakSelf.status = @"9";
+        [weakSelf.screeningButton setTitle:@"任务筛选" forState:UIControlStateNormal];
+        [weakSelf.collectionView.mj_header beginRefreshing];
+        
+    }];
+    
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self createScreeningAndSearchButton];
@@ -58,27 +68,31 @@
     [self.screeningButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     self.screeningButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25);
     self.screeningButton.layer.masksToBounds = YES;
-    self.screeningButton.layer.cornerRadius = 10;
+    self.screeningButton.layer.cornerRadius = 5;
     self.screeningButton.layer.borderColor = [UIColor colorWithHexString:@"484848" alpha:1].CGColor;
     self.screeningButton.layer.borderWidth = 1;
     [self.view addSubview:self.screeningButton];
     
-    UIImageView *screeningIamgeView = [ODClassMethod creatImageViewWithFrame:CGRectMake(75, 12, 16, 12) imageName:@"任务筛选下拉箭头" tag:0];
+    UIImageView *screeningIamgeView = [ODClassMethod creatImageViewWithFrame:CGRectMake(75, 12, 15, 12) imageName:@"任务筛选下拉箭头" tag:0];
     [self.screeningButton addSubview:screeningIamgeView];
+
+    UITapGestureRecognizer *searchGestuer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchButtonClick)];
+    UIView *searchView = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-125, 35)];
+    searchView.layer.masksToBounds = YES;
+    searchView.layer.cornerRadius = 5;
+    searchView.layer.borderColor = [UIColor colorWithHexString:@"484848" alpha:1].CGColor;
+    searchView.layer.borderWidth = 1;
+    [searchView addGestureRecognizer:searchGestuer];
+    [self.view addSubview:searchView];
     
-    UIButton *searchButton = [ODClassMethod creatButtonWithFrame:CGRectMake(115, 10, kScreenSize.width-125, 35) target:self sel:@selector(searchButtonClick:) tag:0 image:nil title:@"  请输入您要搜索的关键字" font:15];
-    [searchButton setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
-    searchButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    searchButton.titleEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 0);
-    searchButton.layer.masksToBounds = YES;
-    searchButton.layer.cornerRadius = 10;
-    searchButton.layer.borderColor = [UIColor colorWithHexString:@"484848" alpha:1].CGColor;
-    searchButton.layer.borderWidth = 1;
-//    searchButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:0.1];
-    [self.view addSubview:searchButton];
+    UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(10, 10, 15, 15) imageName:@"search" tag:0];
+    [searchView addSubview:searchImageView];
     
-    UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(7, 10, 16, 16) imageName:@"search" tag:0];
-    [searchButton addSubview:searchImageView];
+    UILabel *seacrhLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(searchImageView.frame)+10, 10, searchView.frame.size.width-35, 15)];
+    seacrhLabel.text = @"请输入您要搜索的关键字";
+    seacrhLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    seacrhLabel.font = [UIFont systemFontOfSize:15];
+    [searchView addSubview:seacrhLabel];
 }
 
 -(void)screeningButtonClick:(UIButton *)button
@@ -154,7 +168,7 @@
     return UIModalPresentationNone;
 }
 
--(void)searchButtonClick:(UIButton *)button
+-(void)searchButtonClick
 {
     ODBazaarLabelSearchViewController *labelSearch = [[ODBazaarLabelSearchViewController alloc]init];
     [self.navigationController pushViewController:labelSearch animated:YES];
@@ -322,9 +336,6 @@
     self.refresh = @"";
     [super viewWillDisappear:animated];
 }
-
-
-
 
 -(void)dealloc
 {

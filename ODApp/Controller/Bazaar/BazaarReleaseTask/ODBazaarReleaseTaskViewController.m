@@ -343,8 +343,6 @@
     }else{
    
         parameter = @{@"title":self.titleTextView.text,@"tag_ids":@"",@"start_time":[[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text],@"end_time":[[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text],@"content":self.taskDetailTextView.text,@"reward_name":[self.taskRewardLabel.text substringFromIndex:2],@"open_id":[ODUserInformation sharedODUserInformation].openID};
-        
-        NSLog(@"%@",parameter);
     }
   
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
@@ -377,6 +375,9 @@
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"任务发布成功"];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
             }
+            
+            [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseTask object:nil];
+
         }else{
             NSString *message = dict[@"message"];
             

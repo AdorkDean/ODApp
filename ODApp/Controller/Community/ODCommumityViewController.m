@@ -33,7 +33,7 @@
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
-    self.button = [ODBarButton barButtonWithTarget:self action:@selector(titleButtonClick:) title:@"全部    "];
+    self.button = [ODBarButton barButtonWithTarget:self action:@selector(titleButtonClick:) title:@"社区    "];
     [self.button setImage:[UIImage imageNamed:@"jiantou_icon"] forState:UIControlStateNormal];
     [self.button.titleLabel setFont:[UIFont systemFontOfSize:ODNavigationTextFont]];
     [self.button setBarButtonType:(ODBarButtonTypeTextLeft)];

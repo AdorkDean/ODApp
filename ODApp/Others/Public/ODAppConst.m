@@ -32,6 +32,9 @@ NSString * const ODNotificationSearchHelp = @"ODNotificationSearchHelp";
 /**  换技能通知 */
 NSString * const ODNotificationChangeSkill = @"ODNotificationChangeSkill";
 
+/**  发布任务成功通知 */
+NSString * const ODNotificationReleaseTask = @"ODNotificationReleaseTask";
+
 
 #pragma mark - 请求URL接口
 /** 统一的URL */
@@ -64,6 +67,7 @@ NSString * const kBazaarExchangeSkillDetailUrl = @"http://woquapi.test.odong.com
 NSString * const kBazaarReleaseSkillTimeUrl = @"http://woquapi.test.odong.com/1.0/swap/schedule";
 NSString * const kBazaarExchangeSkillDetailLoveUrl = @"http://woquapi.test.odong.com/1.0/other/love/add";
 NSString * const kBazaarExchangeSkillDetailNotLoveUrl = @"http://woquapi.test.odong.com/1.0/other/love/del";
+NSString * const kBazaarReleaseSkillUrl = @"http://woquapi.test.odong.com/1.0/swap/create";
 
 NSString * const kCommunityBbsListUrl = @"http://woquapi.test.odong.com/1.0/bbs/list/latest";
 NSString * const kCommunityReleaseBbsUrl = @"http://woquapi.test.odong.com/1.0/bbs/create";

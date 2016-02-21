@@ -40,6 +40,9 @@ UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
 UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
 
 
+/**  发布任务成功通知 */
+UIKIT_EXTERN NSString * const ODNotificationReleaseTask;
+
 #pragma mark - 请求URL接口 
 /** 统一的URL */
 UIKIT_EXTERN NSString *const ODBaseURL;
@@ -56,6 +59,7 @@ UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseSkillTimeUrl;
 UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailLoveUrl;
 UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailNotLoveUrl;
+UIKIT_EXTERN NSString * const kBazaarReleaseSkillUrl;
 /** 接收人确认完成 */
 UIKIT_EXTERN NSString * const kBazaarTaskReceiveCompleteUrl;
 /** 发起人确认完成 */

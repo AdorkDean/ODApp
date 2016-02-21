@@ -43,4 +43,7 @@
 @property(nonatomic,copy)NSString *task_id;
 @property(nonatomic)NSInteger num;
 @property(nonatomic,copy)void(^myBlock)(NSString *del);
+@property(nonatomic,strong)UIView *evaluationView;
+@property(nonatomic,strong)UITextView *evaluationTextView;
+@property(nonatomic,strong)UILabel *placeholderLabel;
 @end

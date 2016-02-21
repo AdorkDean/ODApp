@@ -43,9 +43,6 @@
             ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc]init];
             releaseTask.isBazaar = YES;
             
-            releaseTask.myBlock = ^(NSString *release){
-                //            self.refresh = release;
-            };
             [self.navigationController pushViewController:releaseTask animated:YES];
         }
     }
@@ -88,7 +85,7 @@
 
 - (void)selectChildViewww:(NSInteger)index
 {
-    
+   
 }
 
 -(void)createScrollView

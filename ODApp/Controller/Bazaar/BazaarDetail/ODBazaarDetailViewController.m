@@ -284,14 +284,7 @@
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
             [self pushDataWithUrl:kBazaarTaskReceiveCompleteUrl parameter:signParameter withName:@"确认提交"];
         }else if ([button.titleLabel.text isEqualToString:@"确认完成"]){
-            
-//            ODBazaarDetailEvaluationViewController *evaluation = [[ODBazaarDetailEvaluationViewController alloc]init];
-//            [self.navigationController pushViewController:evaluation animated:YES];
             [self createEvaluationView];
-            
-//            NSDictionary *parameter = @{@"task_id":self.task_id,@"comment":@"sdsdsd",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-//            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-//            [self pushDataWithUrl:kBazaarTaskInitiateCompleteUrl parameter:signParameter withName:@"确认完成"];
         }
         
     }else{
@@ -302,14 +295,69 @@
 
 -(void)createEvaluationView
 {
-    ODBazaarDetailEvaluationViewController *evaluation = [[ODBazaarDetailEvaluationViewController alloc]init];
-    evaluation.view.backgroundColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:0.8];
-
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
-    view.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:0.5];
-    [self.view addSubview:evaluation.view];
+    self.evaluationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
+    self.evaluationView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:0.9];
+    [[[UIApplication sharedApplication]keyWindow] addSubview:self.evaluationView];
     
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 200, kScreenSize.width, 20)];
+    label.text = @"发表评价 , 确认完成任务";
+    label.textAlignment = NSTextAlignmentCenter;
+    label.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    label.font = [UIFont systemFontOfSize:14];
+    [self.evaluationView addSubview:label];
+    
+    self.evaluationTextView = [[UITextView alloc]initWithFrame:CGRectMake(40, CGRectGetMaxY(label.frame)+5, kScreenSize.width-80, 100)];
+    self.evaluationTextView.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    self.evaluationTextView.font = [UIFont systemFontOfSize:12];
+    self.evaluationTextView .delegate = self;
+    self.evaluationTextView.layer.masksToBounds = YES;
+    self.evaluationTextView.layer.cornerRadius = 5;
+    self.evaluationTextView.layer.borderColor = [UIColor colorWithHexString:@"#000000" alpha:1].CGColor;
+    self.evaluationTextView.layer.borderWidth = 1;
+    [self.evaluationView addSubview:self.evaluationTextView];
+    
+    self.placeholderLabel = [[UILabel alloc]initWithFrame:CGRectMake(45, CGRectGetMaxY(label.frame)+15, 200, 10)];
+    self.placeholderLabel.text = @"好评!任务完成的非常漂亮";
+    self.placeholderLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    self.placeholderLabel.font = [UIFont systemFontOfSize:12];
+    [self.evaluationView addSubview:self.placeholderLabel];
+    
+    UIButton *yesButton = [[UIButton alloc]initWithFrame:CGRectMake(40, CGRectGetMaxY(self.evaluationTextView.frame)+10, kScreenSize.width-80, 40)];
+    yesButton.layer.masksToBounds = YES;
+    yesButton.layer.cornerRadius = 5;
+    yesButton.layer.borderColor = [UIColor colorWithHexString:@"#000000" alpha:1].CGColor;
+    yesButton.layer.borderWidth = 1;
+    [yesButton setTitle:@"是的" forState:UIControlStateNormal];
+    yesButton.titleLabel.font = [UIFont systemFontOfSize:13];
+    [yesButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [yesButton setBackgroundColor:[UIColor colorWithHexString:@"#ffd802" alpha:1]];
+    [yesButton addTarget:self action:@selector(yesButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.evaluationView addSubview:yesButton];
+    
+    UIButton *offButton = [[UIButton alloc]initWithFrame:CGRectMake(kScreenSize.width-30, 20, 20, 20)];
+    [offButton setBackgroundImage:[UIImage imageNamed:@"分享页关闭icon"] forState:UIControlStateNormal];
+    [offButton addTarget: self action:@selector(offButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [self.evaluationView addSubview:offButton];
 }
+
+-(void)yesButtonClick:(UIButton *)button
+{
+    NSDictionary *parameter;
+    if (self.evaluationTextView.text.length) {
+       parameter = @{@"task_id":self.task_id,@"comment":self.evaluationTextView.text,@"open_id":[ODUserInformation sharedODUserInformation].openID};
+        
+    }else{
+        parameter = @{@"task_id":self.task_id,@"comment":@"好评!任务完成的非常漂亮",@"open_id":[ODUserInformation sharedODUserInformation].openID};
+    }
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self pushDataWithUrl:kBazaarTaskInitiateCompleteUrl parameter:signParameter withName:@"确认完成"];
+}
+
+-(void)offButtonClick:(UIButton *)button
+{
+    [self.evaluationView removeFromSuperview];
+}
+
 #pragma mark - 提交数据
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter withName:(NSString *)name
 {
@@ -344,16 +392,15 @@
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提交成功"];
                 [weakSelf.taskButton setTitle:@"已提交" forState:UIControlStateNormal];
             }
-             NSLog(@"------%@",responseObject);
         }else if ([name isEqualToString:@"确认完成"]){
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 if (weakSelf.myBlock) {
                     weakSelf.myBlock([NSString stringWithFormat:@"complete"]);
                 }
+                [weakSelf.evaluationView removeFromSuperview];
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"确认成功"];
                 [weakSelf.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
             }
-
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -624,6 +671,30 @@
     }
 }
 
+#pragma mark - UITextViewDelegate
+
+NSString *evaluationContentText = @"";
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView.text.length > 300){
+        textView.text = [textView.text substringToIndex:300];
+    }else{
+        evaluationContentText = textView.text;
+    }
+    
+    if (textView.text.length == 0) {
+        self.placeholderLabel.text = @"好评!任务完成的非常漂亮";
+    }else{
+        self.placeholderLabel.text = @"";
+    }
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    if (textView.text.length == 0) {
+        self.placeholderLabel.text = @"好评!任务完成的非常漂亮";
+    }
+}
 
 
 - (void)didReceiveMemoryWarning {
