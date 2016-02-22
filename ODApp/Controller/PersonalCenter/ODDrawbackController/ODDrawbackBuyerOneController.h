@@ -61,14 +61,14 @@
 
 @property (nonatomic, strong) UIButton *releaseButton;
 
-@property (nonatomic, copy) NSString *servicePhone;
-@property (nonatomic, copy) NSString *serviceTime;
 
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
-@property (nonatomic, assign) float darwbackMoney;
-
+@property (nonatomic, copy) NSString *darwbackMoney;
 @property (nonatomic, copy) NSString *order_id;
+@property (nonatomic, copy) NSString *servicePhone;
+@property (nonatomic, copy) NSString *serviceTime;
+
 @property (nonatomic, copy) NSString *drawbackReason;
 
 
