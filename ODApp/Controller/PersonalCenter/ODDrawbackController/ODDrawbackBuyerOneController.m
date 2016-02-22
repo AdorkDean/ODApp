@@ -460,14 +460,14 @@
 - (void)refuseButtonClick:(UIButton *)button
 {
 
-    
+    [self refuseDrawbackRequest];
 }
 
 #pragma mark - 接受 按钮点击事件
 - (void)receiveButtonClick:(UIButton *)button
 {
 
-    
+    [self receiveDrawbackRequest];
 }
 
 
@@ -554,7 +554,7 @@
         
 
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"退款成功"];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"申请退款成功"];
             [weakSelf.navigationController popToRootViewControllerAnimated:YES];
         }else{
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
