@@ -68,6 +68,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.dataArray = [[NSMutableArray alloc]init];
+    self.loveArray = [[NSMutableArray alloc]init];
 }
 
 #pragma mark - 拼接参数
@@ -89,6 +90,7 @@
             ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
             [model setValuesForKeysWithDictionary:result];
             [weakSelf.dataArray addObject:model];
+    
             [weakSelf createUserInfoView];
             [weakSelf createDetailView];
             [weakSelf createBottomView];
@@ -156,6 +158,10 @@
 -(void)createDetailView
 {
     ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
+    for (NSDictionary *dict in model.loves) {
+        NSString *avatar = dict[@"avatar"];
+        [self.loveArray addObject:avatar];
+    }
     self.detailView = [[UIView alloc]initWithFrame:CGRectMake(0, 65, kScreenSize.width, 2000)];
     self.detailView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.detailView];
@@ -215,29 +221,25 @@
 
 -(void)createLoveButton
 {
-    ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
-    
-    if (model.loves.count < 8) {
-        for (NSInteger i = 0; i < model.loves.count; i++) {
+    if (self.loveArray.count < 8) {
+        for (NSInteger i = 0; i < self.loveArray.count; i++) {
             CGFloat width = 30;
-            NSDictionary *dict = model.loves[i];
             UIButton *button = [[UIButton alloc]init];
-            button.frame = CGRectMake((kScreenSize.width-(model.loves.count-1)*10-model.loves.count*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+10, width, width);
+            button.frame = CGRectMake((kScreenSize.width-(self.loveArray.count-1)*10-self.loveArray.count*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+10, width, width);
             button.layer.masksToBounds = YES;
             button.layer.cornerRadius = width/2;
-            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"avatar"]] forState:UIControlStateNormal];
+            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.loveArray[i]] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
             [self.detailView addSubview:button];
         }
     }else{
         for (NSInteger i = 0; i < 7; i++) {
             CGFloat width = 30;
-            NSDictionary *dict = model.loves[i];
             UIButton *button = [[UIButton alloc]init];
             button.frame = CGRectMake((kScreenSize.width-6*10-7*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+10, width, width);
             button.layer.masksToBounds = YES;
             button.layer.cornerRadius = width/2;
-            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"avatar"]] forState:UIControlStateNormal];
+            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.loveArray[i]] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
             [self.detailView addSubview:button];
         }
@@ -257,7 +259,6 @@
 #pragma mark - 底部收藏购买试图
 - (void)createBottomView
 {
-    ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
     UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenSize.height-64-50, kScreenSize.width, 50)];
     [bottomView setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6" alpha:1]];
     [self.view addSubview:bottomView];
@@ -311,16 +312,21 @@
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isLove:(BOOL)love
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    __weakSelf;
    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
        if (love) {
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-               self.loveLabel.text = @"已收藏";
+    
+               NSLog(@"------%@",[ODUserInformation sharedODUserInformation].avatar);
+//               [weakSelf.loveArray addObject:avatar];
+               [weakSelf createLoveButton];
+               weakSelf.loveLabel.text = @"已收藏";
                NSDictionary *dict = responseObject[@"result"];
-               self.love_id = [NSString stringWithFormat:@"%@",dict[@"love_id"]];
+               weakSelf.love_id = [NSString stringWithFormat:@"%@",dict[@"love_id"]];
            }
        }else{
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-               self.loveLabel.text = @"收藏";
+               weakSelf.loveLabel.text = @"收藏";
            }
        }
        
