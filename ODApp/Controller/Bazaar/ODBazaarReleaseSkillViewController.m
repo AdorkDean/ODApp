@@ -516,7 +516,6 @@
         }
     }
 
-    NSLog(@"--------%@,,,,,,%@",self.timeArray,[self.timeArray description]);
     NSDictionary *parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":@"2",@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter];
@@ -525,12 +524,13 @@
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    __weakSelf;
     [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//            NSLog(@"%@",responseObject);
-//        }
-        
-         NSLog(@"%@",responseObject);
+        if ([responseObject[@"status"]isEqualToString:@"success"]) {
+            
+            [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error.debugDescription);
     }];

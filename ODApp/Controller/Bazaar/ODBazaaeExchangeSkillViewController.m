@@ -34,7 +34,9 @@
         [weakSelf loadMoreData];
     }];
 
-    
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationReleaseSkill object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf.collectionView.mj_header beginRefreshing];
+    }];
 
 }
 
@@ -212,7 +214,6 @@
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc]init];
     detailControler.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
     detailControler.nick = model.user[@"nick"];
-//    detailControler.love_id = [NSString stringWithFormat:@"%@",model.love_id];
     [self.navigationController pushViewController:detailControler animated:YES];
     
 }
@@ -232,6 +233,12 @@
     }else{
         return 135+3*width+10;
     }
+}
+
+
+-(void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {
