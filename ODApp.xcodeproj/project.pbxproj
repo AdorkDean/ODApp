@@ -168,6 +168,7 @@
 		D444239A1C72F8B8005B4CFE /* ODActivitybottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D44423991C72F8B8005B4CFE /* ODActivitybottomView.xib */; };
 		D444239D1C742118005B4CFE /* ODActivePersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D444239C1C742118005B4CFE /* ODActivePersonInfoView.m */; };
 		D44423A21C7AAABA005B4CFE /* ODRoundTimeDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = D44423A11C7AAABA005B4CFE /* ODRoundTimeDrawView.m */; };
+		D44423A41C7B007D005B4CFE /* NSDictionary+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D44423A31C7B007D005B4CFE /* NSDictionary+Log.m */; };
 		D46C90301C6041B4004942E7 /* ODNewActivityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */; };
 		D46C90381C6043DA004942E7 /* ODNewActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C90371C6043DA004942E7 /* ODNewActivityCell.m */; };
 		D46C903B1C604F79004942E7 /* ODActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C903A1C604F79004942E7 /* ODActivityDetailViewController.m */; };
@@ -629,6 +630,7 @@
 		D444239C1C742118005B4CFE /* ODActivePersonInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivePersonInfoView.m; sourceTree = "<group>"; };
 		D44423A01C7AAABA005B4CFE /* ODRoundTimeDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRoundTimeDrawView.h; sourceTree = "<group>"; };
 		D44423A11C7AAABA005B4CFE /* ODRoundTimeDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRoundTimeDrawView.m; sourceTree = "<group>"; };
+		D44423A31C7B007D005B4CFE /* NSDictionary+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Log.m"; sourceTree = "<group>"; };
 		D46C902D1C6041B4004942E7 /* ODNewActivityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCenterViewController.h; sourceTree = "<group>"; };
 		D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewActivityCenterViewController.m; sourceTree = "<group>"; };
 		D46C90361C6043DA004942E7 /* ODNewActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCell.h; sourceTree = "<group>"; };
@@ -1513,6 +1515,7 @@
 			children = (
 				D4F76DC01C61AEB800D59F02 /* NSDictionary+ODExtension.h */,
 				D4F76DC11C61AEB800D59F02 /* NSDictionary+ODExtension.m */,
+				D44423A31C7B007D005B4CFE /* NSDictionary+Log.m */,
 				C64D45681C5F8C6F003BFFA0 /* NSURL+ODExtension.h */,
 				C64D45691C5F8C6F003BFFA0 /* NSURL+ODExtension.m */,
 				C64D456A1C5F8C6F003BFFA0 /* UIBarButtonItem+ODExtention.h */,
@@ -2838,6 +2841,7 @@
 				C63FECEA1C7AA540000A8396 /* ODDrawbackBuyerOneController.m in Sources */,
 				9DEDCF491C64B3ED003015C6 /* ODBazaarReleaseSkillViewController.m in Sources */,
 				D4D0751E1C59B9FA008527C9 /* ODTopicCell.m in Sources */,
+				D44423A41C7B007D005B4CFE /* NSDictionary+Log.m in Sources */,
 				9DDC9B641C62ECFF000D688F /* ODMyOrderController.m in Sources */,
 				9DEDCF581C64B3F4003015C6 /* ODBazaarModel.m in Sources */,
 				D44423911C72E4C4005B4CFE /* ODTitleLabelView.m in Sources */,
