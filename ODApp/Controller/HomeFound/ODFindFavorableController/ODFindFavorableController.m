@@ -17,7 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"找优惠";
+    self.navigationItem.title = @"敬请期待";
     
     [self createWebView];
 }

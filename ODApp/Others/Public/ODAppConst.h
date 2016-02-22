@@ -130,7 +130,7 @@ UIKIT_EXTERN NSString * const ODPersonalReleaseTaskUrl;
 UIKIT_EXTERN NSString * const kGetPayInformationUrl;
 
 UIKIT_EXTERN NSString * const ODPersonReleaseTaskDeleteUrl;
-
+UIKIT_EXTERN NSString * const ODReleaseDrawbackUrl;
 
 UIKIT_EXTERN NSString * const kCallbackUrl;
 
