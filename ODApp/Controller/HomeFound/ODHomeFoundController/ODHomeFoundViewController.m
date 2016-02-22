@@ -70,6 +70,7 @@
 {
     
     [self getSkillChangeRequest];
+    [self getScrollViewRequest];
 }
 
 -(NSMutableArray *)mySort:(NSMutableArray *)mArray
@@ -248,9 +249,6 @@
 
 - (void)moreButtonClick:(UIButton *)button
 {
-    
-    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
     
     [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"敬请期待"];
 }
