@@ -632,7 +632,7 @@ updatingLocation:(BOOL)updatingLocation{
         NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
         if (result.length == 0)
         {
-            result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
+            cityResult = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
         }
         else
         {
