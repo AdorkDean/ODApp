@@ -68,13 +68,12 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.dataArray = [[NSMutableArray alloc]init];
-    self.loveArray = [[NSMutableArray alloc]init];
 }
 
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{@"swap_id":self.swap_id};
+    NSDictionary *parameter = @{@"swap_id":self.swap_id,@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarExchangeSkillDetailUrl parameter:signParameter];
 }
@@ -85,12 +84,13 @@
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
+            [weakSelf.dataArray removeAllObjects];
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
             ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
             [model setValuesForKeysWithDictionary:result];
             [weakSelf.dataArray addObject:model];
-    
+            weakSelf.love_id = [NSString stringWithFormat:@"%@",model.love_id];
             [weakSelf createUserInfoView];
             [weakSelf createDetailView];
             [weakSelf createBottomView];
@@ -158,10 +158,6 @@
 -(void)createDetailView
 {
     ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
-    for (NSDictionary *dict in model.loves) {
-        NSString *avatar = dict[@"avatar"];
-        [self.loveArray addObject:avatar];
-    }
     self.detailView = [[UIView alloc]initWithFrame:CGRectMake(0, 65, kScreenSize.width, 2000)];
     self.detailView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.detailView];
@@ -205,7 +201,6 @@
                     [weakSelf.detailView addSubview:weakSelf.loveImageView];
                      weakSelf.detailView.frame = CGRectMake(0, 65, kScreenSize.width, weakSelf.loveImageView.frame.origin.y+weakSelf.loveImageView.frame.size.height+60);
                     weakSelf.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+weakSelf.detailView.frame.size.height);
-                    
                     [weakSelf createLoveButton];
                 }else{
                     imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
@@ -221,25 +216,28 @@
 
 -(void)createLoveButton
 {
-    if (self.loveArray.count < 8) {
-        for (NSInteger i = 0; i < self.loveArray.count; i++) {
+    ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
+    if (model.loves.count < 8) {
+        for (NSInteger i = 0; i < model.loves.count; i++) {
+            NSDictionary *dict = model.loves[i];
             CGFloat width = 30;
             UIButton *button = [[UIButton alloc]init];
-            button.frame = CGRectMake((kScreenSize.width-(self.loveArray.count-1)*10-self.loveArray.count*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+10, width, width);
+            button.frame = CGRectMake((kScreenSize.width-(model.loves.count-1)*10-model.loves.count*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+10, width, width);
             button.layer.masksToBounds = YES;
             button.layer.cornerRadius = width/2;
-            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.loveArray[i]] forState:UIControlStateNormal];
+            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"avatar"]] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
             [self.detailView addSubview:button];
         }
     }else{
         for (NSInteger i = 0; i < 7; i++) {
+            NSDictionary *dict = model.loves[i];
             CGFloat width = 30;
             UIButton *button = [[UIButton alloc]init];
             button.frame = CGRectMake((kScreenSize.width-6*10-7*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+10, width, width);
             button.layer.masksToBounds = YES;
             button.layer.cornerRadius = width/2;
-            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.loveArray[i]] forState:UIControlStateNormal];
+            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"avatar"]] forState:UIControlStateNormal];
             [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
             [self.detailView addSubview:button];
         }
@@ -316,17 +314,17 @@
    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
        if (love) {
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-    
-               NSLog(@"------%@",[ODUserInformation sharedODUserInformation].avatar);
-//               [weakSelf.loveArray addObject:avatar];
-               [weakSelf createLoveButton];
+               [weakSelf joiningTogetherParmeters];
                weakSelf.loveLabel.text = @"已收藏";
                NSDictionary *dict = responseObject[@"result"];
                weakSelf.love_id = [NSString stringWithFormat:@"%@",dict[@"love_id"]];
+               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"收藏成功"];
            }
        }else{
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
+               [weakSelf joiningTogetherParmeters];
                weakSelf.loveLabel.text = @"收藏";
+               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"取消收藏"];
            }
        }
        

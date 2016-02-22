@@ -11,10 +11,12 @@ UIKIT_EXTERN CGFloat const ODLeftMargin;
 UIKIT_EXTERN CGFloat const ODTopY;
 /** 导航栏标题字体大小 */
 UIKIT_EXTERN CGFloat const ODNavigationTextFont;
+
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 UIKIT_EXTERN NSString * const KUserDefaultsOpenId;
 
+UIKIT_EXTERN NSString * const KUserDefaultsAvatar;
 
 UIKIT_EXTERN NSString * const kGetUMAppkey;
 UIKIT_EXTERN NSString * const kGetWXAppId;

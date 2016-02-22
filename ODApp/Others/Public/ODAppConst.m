@@ -10,6 +10,7 @@ CGFloat const ODNavigationTextFont = 17;
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 NSString * const KUserDefaultsOpenId = @"userOpenId";
+NSString * const KUserDefaultsAvatar = @"userAvatar";
 /** 友盟的apiKey */
 NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
 /** 微信的apiKey */
@@ -58,6 +59,7 @@ NSString * const KActivityDetailUrl = @"/1.0/store/apply/detail2";
 NSString * const KActivityApplyUrl = @"/1.0/store/activity/apply";
 NSString * const kCallbackUrl = @"/1.0/other/share/callback";
 NSString * const ODPersonalReleaseTaskUrl = @"/1.0/swap/list";
+
 NSString * const ODPersonReleaseTaskDeleteUrl = @"http://woquapi.test.odong.com/1.0/swap/del";
 
 NSString * const kBazaarUnlimitTaskUrl = @"http://woquapi.test.odong.com/1.0/task/list";
