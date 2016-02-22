@@ -33,10 +33,16 @@
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,copy)NSString *avatar;
 @property (nonatomic, strong) UIImage *pickedImage;
-@property(nonatomic,strong)NSMutableArray *imageArray;
+@property(nonatomic,strong)NSArray *imageArray;
 @property(nonatomic,strong)NSMutableArray *strArray;
 @property(nonatomic,strong)UIButton *selectedButton;
 @property(nonatomic,strong)NSMutableArray *timeArray;
+@property(nonatomic,copy)NSString *skillTitle;
+@property(nonatomic,copy)NSString *content;
+@property(nonatomic,copy)NSString *price;
+@property(nonatomic,copy)NSString *unit;
+@property(nonatomic,copy)NSString *swap_type;
+@property(nonatomic,copy)NSString *type;
+@property(nonatomic,strong)NSMutableArray *mArray;
 @property (nonatomic, strong) MBProgressHUD *hud;
-
 @end
