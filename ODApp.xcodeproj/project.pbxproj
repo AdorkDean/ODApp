@@ -23,6 +23,10 @@
 		9D46D1511C77486200F4C0CD /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D46D1501C77486200F4C0CD /* XMLDictionary.m */; };
 		9D8A98921C7AB5FE005BC458 /* ODCancelOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A98911C7AB5FE005BC458 /* ODCancelOrderView.m */; };
 		9D8A98941C7AB619005BC458 /* ODCancelOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8A98931C7AB619005BC458 /* ODCancelOrderView.xib */; };
+		9D8A98971C7AE8D8005BC458 /* ODMySellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A98961C7AE8D8005BC458 /* ODMySellController.m */; };
+		9D8A989A1C7AEC54005BC458 /* ODMySellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A98991C7AEC54005BC458 /* ODMySellModel.m */; };
+		9D8A989D1C7AF204005BC458 /* ODMySellDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A989C1C7AF204005BC458 /* ODMySellDetailController.m */; };
+		9D8A98A01C7B0208005BC458 /* ODSecondMySellDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A989F1C7B0208005BC458 /* ODSecondMySellDetailController.m */; };
 		9D8D9E1F1C75D7CB0064CD5A /* ODOperationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D9E1E1C75D7CB0064CD5A /* ODOperationController.m */; };
 		9DBF7EEA1C759B1C0085875E /* ODPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EE91C759B1C0085875E /* ODPayController.m */; };
 		9DBF7EED1C75A0C90085875E /* ODPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EEC1C75A0C90085875E /* ODPayView.m */; };
@@ -168,6 +172,7 @@
 		D444239A1C72F8B8005B4CFE /* ODActivitybottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D44423991C72F8B8005B4CFE /* ODActivitybottomView.xib */; };
 		D444239D1C742118005B4CFE /* ODActivePersonInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = D444239C1C742118005B4CFE /* ODActivePersonInfoView.m */; };
 		D44423A21C7AAABA005B4CFE /* ODRoundTimeDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = D44423A11C7AAABA005B4CFE /* ODRoundTimeDrawView.m */; };
+		D44423A41C7B007D005B4CFE /* NSDictionary+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = D44423A31C7B007D005B4CFE /* NSDictionary+Log.m */; };
 		D46C90301C6041B4004942E7 /* ODNewActivityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */; };
 		D46C90381C6043DA004942E7 /* ODNewActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C90371C6043DA004942E7 /* ODNewActivityCell.m */; };
 		D46C903B1C604F79004942E7 /* ODActivityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C903A1C604F79004942E7 /* ODActivityDetailViewController.m */; };
@@ -355,6 +360,14 @@
 		9D8A98901C7AB5FE005BC458 /* ODCancelOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCancelOrderView.h; sourceTree = "<group>"; };
 		9D8A98911C7AB5FE005BC458 /* ODCancelOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCancelOrderView.m; sourceTree = "<group>"; };
 		9D8A98931C7AB619005BC458 /* ODCancelOrderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODCancelOrderView.xib; sourceTree = "<group>"; };
+		9D8A98951C7AE8D8005BC458 /* ODMySellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMySellController.h; sourceTree = "<group>"; };
+		9D8A98961C7AE8D8005BC458 /* ODMySellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMySellController.m; sourceTree = "<group>"; };
+		9D8A98981C7AEC54005BC458 /* ODMySellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMySellModel.h; sourceTree = "<group>"; };
+		9D8A98991C7AEC54005BC458 /* ODMySellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMySellModel.m; sourceTree = "<group>"; };
+		9D8A989B1C7AF204005BC458 /* ODMySellDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMySellDetailController.h; sourceTree = "<group>"; };
+		9D8A989C1C7AF204005BC458 /* ODMySellDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMySellDetailController.m; sourceTree = "<group>"; };
+		9D8A989E1C7B0208005BC458 /* ODSecondMySellDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSecondMySellDetailController.h; sourceTree = "<group>"; };
+		9D8A989F1C7B0208005BC458 /* ODSecondMySellDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSecondMySellDetailController.m; sourceTree = "<group>"; };
 		9D8D9E1D1C75D7CB0064CD5A /* ODOperationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOperationController.h; sourceTree = "<group>"; };
 		9D8D9E1E1C75D7CB0064CD5A /* ODOperationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOperationController.m; sourceTree = "<group>"; };
 		9DBF7EE91C759B1C0085875E /* ODPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPayController.m; sourceTree = "<group>"; };
@@ -629,6 +642,7 @@
 		D444239C1C742118005B4CFE /* ODActivePersonInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActivePersonInfoView.m; sourceTree = "<group>"; };
 		D44423A01C7AAABA005B4CFE /* ODRoundTimeDrawView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRoundTimeDrawView.h; sourceTree = "<group>"; };
 		D44423A11C7AAABA005B4CFE /* ODRoundTimeDrawView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRoundTimeDrawView.m; sourceTree = "<group>"; };
+		D44423A31C7B007D005B4CFE /* NSDictionary+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Log.m"; sourceTree = "<group>"; };
 		D46C902D1C6041B4004942E7 /* ODNewActivityCenterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCenterViewController.h; sourceTree = "<group>"; };
 		D46C902E1C6041B4004942E7 /* ODNewActivityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewActivityCenterViewController.m; sourceTree = "<group>"; };
 		D46C90361C6043DA004942E7 /* ODNewActivityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewActivityCell.h; sourceTree = "<group>"; };
@@ -1513,6 +1527,7 @@
 			children = (
 				D4F76DC01C61AEB800D59F02 /* NSDictionary+ODExtension.h */,
 				D4F76DC11C61AEB800D59F02 /* NSDictionary+ODExtension.m */,
+				D44423A31C7B007D005B4CFE /* NSDictionary+Log.m */,
 				C64D45681C5F8C6F003BFFA0 /* NSURL+ODExtension.h */,
 				C64D45691C5F8C6F003BFFA0 /* NSURL+ODExtension.m */,
 				C64D456A1C5F8C6F003BFFA0 /* UIBarButtonItem+ODExtention.h */,
@@ -2427,6 +2442,12 @@
 				9DDC9B6E1C631A24000D688F /* ODOrderDetailController.m */,
 				9DF2E98A1C74654A00F77976 /* ODSecondOrderDetailController.h */,
 				9DF2E98B1C74654A00F77976 /* ODSecondOrderDetailController.m */,
+				9D8A98951C7AE8D8005BC458 /* ODMySellController.h */,
+				9D8A98961C7AE8D8005BC458 /* ODMySellController.m */,
+				9D8A989B1C7AF204005BC458 /* ODMySellDetailController.h */,
+				9D8A989C1C7AF204005BC458 /* ODMySellDetailController.m */,
+				9D8A989E1C7B0208005BC458 /* ODSecondMySellDetailController.h */,
+				9D8A989F1C7B0208005BC458 /* ODSecondMySellDetailController.m */,
 				9DBF7F041C75C3A80085875E /* ODPayController.h */,
 				9DBF7EE91C759B1C0085875E /* ODPayController.m */,
 				9DBF7EF01C75B45E0085875E /* ODPaySuccessController.h */,
@@ -2512,6 +2533,8 @@
 				D4F76DBA1C61AEAD00D59F02 /* TimeButton.m */,
 				9DDC9B6A1C62F1EF000D688F /* ODMyOrderModel.h */,
 				9DDC9B6B1C62F1EF000D688F /* ODMyOrderModel.m */,
+				9D8A98981C7AEC54005BC458 /* ODMySellModel.h */,
+				9D8A98991C7AEC54005BC458 /* ODMySellModel.m */,
 				9DDC9B751C6334BA000D688F /* ODOrderDetailModel.h */,
 				9DDC9B761C6334BA000D688F /* ODOrderDetailModel.m */,
 				9DE951ED1C78599F00D7339D /* ODBalanceModel.h */,
@@ -2808,6 +2831,7 @@
 				9DEDCF421C64B3ED003015C6 /* ODBazaarDetailViewController.m in Sources */,
 				D4D075271C59B9FA008527C9 /* ODMyOrderRecordCell.m in Sources */,
 				9D46D14E1C77482000F4C0CD /* CommonUtil.m in Sources */,
+				9D8A989D1C7AF204005BC458 /* ODMySellDetailController.m in Sources */,
 				C66B88421C75D72300F60E3D /* ODReleaseCell.m in Sources */,
 				9D1F80FE1C76EAE000FC9C2C /* ODOperationFirstCell.m in Sources */,
 				D4D073801C59B9FA008527C9 /* ODCommumityViewController.m in Sources */,
@@ -2838,6 +2862,7 @@
 				C63FECEA1C7AA540000A8396 /* ODDrawbackBuyerOneController.m in Sources */,
 				9DEDCF491C64B3ED003015C6 /* ODBazaarReleaseSkillViewController.m in Sources */,
 				D4D0751E1C59B9FA008527C9 /* ODTopicCell.m in Sources */,
+				D44423A41C7B007D005B4CFE /* NSDictionary+Log.m in Sources */,
 				9DDC9B641C62ECFF000D688F /* ODMyOrderController.m in Sources */,
 				9DEDCF581C64B3F4003015C6 /* ODBazaarModel.m in Sources */,
 				D44423911C72E4C4005B4CFE /* ODTitleLabelView.m in Sources */,
@@ -2853,6 +2878,7 @@
 				D4D0737A1C59B9FA008527C9 /* ODCenterYuYueController.m in Sources */,
 				D4D073941C59B9FA008527C9 /* ODUserEvaluationController.m in Sources */,
 				9DE951FD1C785EF200D7339D /* ODReleaseController.m in Sources */,
+				9D8A989A1C7AEC54005BC458 /* ODMySellModel.m in Sources */,
 				D4D075611C5E0E0A008527C9 /* ODNavigationBarView.m in Sources */,
 				D4F76DCE1C61B01200D59F02 /* ODActivityDetailContentCell.m in Sources */,
 				D4D074FB1C59B9FA008527C9 /* ODCommunityCollectionCell.m in Sources */,
@@ -2931,6 +2957,7 @@
 				D4D073A01C59B9FA008527C9 /* ODAppModel.m in Sources */,
 				D4D073861C59B9FA008527C9 /* ODChangePassWordController.m in Sources */,
 				C63FECE91C7AA540000A8396 /* ODDrawbackBuyerController.m in Sources */,
+				9D8A98A01C7B0208005BC458 /* ODSecondMySellDetailController.m in Sources */,
 				D4D075121C59B9FA008527C9 /* ODBindingMobileView.m in Sources */,
 				C6522A161C770EAC00C210EE /* ODPersonalTaskButton.m in Sources */,
 				D4D0739D1C59B9FA008527C9 /* ODCommunityModel.m in Sources */,
@@ -2995,6 +3022,7 @@
 				9DEDCF431C64B3ED003015C6 /* ODBazaarLabelSearchViewController.m in Sources */,
 				9DBF7F071C75C53E0085875E /* ODLandThirdCell.m in Sources */,
 				C64D45F71C5F8C6F003BFFA0 /* UITableViewCell+JZExtension.m in Sources */,
+				9D8A98971C7AE8D8005BC458 /* ODMySellController.m in Sources */,
 				C66B881B1C740EBC00F60E3D /* ODLocationCell.m in Sources */,
 				9DEDCF6D1C64B3FC003015C6 /* ODBazaarRewardCollectionCell.m in Sources */,
 				D4D073821C59B9FA008527C9 /* ODCenterIntroduceController.m in Sources */,

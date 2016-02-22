@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "ODMyOrderModel.h"
+#import "ODMySellModel.h"
 @interface ODMyOrderCell : UICollectionViewCell
 
 
@@ -21,6 +22,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @property (nonatomic , strong) ODMyOrderModel *model;
+
+
+- (void)dealWithSellModel:(ODMySellModel *)model;
+
+
 
 
 @end
