@@ -205,7 +205,21 @@
 - (void)reasonAction:(UIButton *)sender
 {
     
+    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
     
+    ODOrderDetailModel *model = self.dataArray[0];
+    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
+    vc.order_id = self.orderId;
+    vc.drawbackReason = model.reason;
+    vc.isService = YES;
+    vc.servicePhone = [NSString stringWithFormat:@"%@" , model.tel400];
+    vc.serviceTime = model.tel_msg;
+    vc.customerService = @"服务";
+    
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+
     
     
 }

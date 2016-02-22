@@ -143,7 +143,7 @@
         
     }else if ([status isEqualToString:@"2"]) {
         
-                
+        
         UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
         refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
         refundButton.backgroundColor = [UIColor redColor];
@@ -152,15 +152,12 @@
         [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [refundButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:refundButton];
-
+        
         
         
         
         
     }
-    
-    
-    
     
     
     
@@ -276,9 +273,7 @@
         
         
     }
-
     
-      
     
 }
 
@@ -286,6 +281,22 @@
 // 查看原因
 -(void)reasonAction:(UIButton *)sender
 {
+    
+    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    
+    ODOrderDetailModel *model = self.dataArray[0];
+    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
+    vc.order_id = self.order_id;
+    vc.drawbackReason = model.reason;
+    vc.isService = YES;
+    vc.servicePhone = [NSString stringWithFormat:@"%@" , model.tel400];
+    vc.serviceTime = model.tel_msg;
+    vc.customerService = @"服务";
+    
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
     
     
     
@@ -302,6 +313,24 @@
 {
     
 }
+
+// 申请退款
+- (void)refundAction:(UIButton *)sender
+{
+    
+    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    
+    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
+    vc.order_id = self.order_id;
+    vc.isSelectReason = YES;
+    vc.isRelease = YES;
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
 
 
 // 处理退款
@@ -323,23 +352,6 @@
 }
 
 
-// 申请退款
-- (void)refundAction:(UIButton *)sender
-{
-    
-    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
-    
-    
-    ODOrderDetailModel *model = self.dataArray[0];
-    
-    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
-    vc.order_id = self.order_id;
-    vc.servicePhone = model.tel_msg;
-    
-    
-    [self.navigationController pushViewController:vc animated:YES];
-    
-}
 
 
 #pragma mark - UITextViewDelegate
