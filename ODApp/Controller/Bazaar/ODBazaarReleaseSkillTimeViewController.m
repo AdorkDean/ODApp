@@ -76,7 +76,6 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.dataArray = [[NSMutableArray alloc]init];
-    self.mArray = [[NSMutableArray alloc]init];
 }
 
 #pragma mark - 拼接参数
@@ -95,13 +94,13 @@
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             [weakSelf.dataArray addObjectsFromArray:dict[@"result"]];
-            for (NSInteger i = 0; i < 7; i++) {
-                NSMutableArray *array = [NSMutableArray array];
-                for (NSInteger j = 0; j < 3; j++) {
-                    NSMutableDictionary *dict = [weakSelf.dataArray objectAtIndex:i*3+j];
-                    [array addObject:dict];
-                }
-                [weakSelf.mArray addObject:array];
+  
+            for (NSInteger i = 0; i < self.roundViews.count; i++)
+            {
+                ODRoundTimeDrawView *view = self.roundViews[i];
+                view.firstTimeIsFree = weakSelf.dataArray[i * 3][@"status"];
+                view.secondTimeIsFree = weakSelf.dataArray[i * 3 + 1][@"status"];
+                view.thirdTimeIsFree = weakSelf.dataArray[i * 3 + 2][@"status"];
             }
             [weakSelf.tableView reloadData];
         }
@@ -123,22 +122,21 @@
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.mArray.count;
+    return self.dataArray.count ? 7 : 0;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[self.mArray objectAtIndex:section]count];
+    return self.dataArray.count ? 3 : 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ODBazaarReleaseSkillTimeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    NSMutableDictionary *dict = [[self.mArray objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    NSMutableDictionary *dict = self.dataArray[indexPath.section * 3 + indexPath.row];
     [cell.openButton addTarget:self action:@selector(openButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.openButton setBackgroundImage:[UIImage imageNamed:@"button_on_icon"] forState:UIControlStateNormal];
     cell.timeLabel.text = dict[@"display"];
-    self.status = [NSString stringWithFormat:@"%@",dict[@"status"]];
+    cell.status = [dict[@"status"]boolValue];
     return cell;
 }
 

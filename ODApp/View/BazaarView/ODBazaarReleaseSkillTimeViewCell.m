@@ -10,17 +10,16 @@
 
 @implementation ODBazaarReleaseSkillTimeViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
     self.timeLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)setStatus:(BOOL)status
+{
+    self.openButton.selected = !status;
 }
 
 
