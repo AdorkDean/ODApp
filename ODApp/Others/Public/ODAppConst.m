@@ -139,4 +139,6 @@ NSString * const kGetPayInformationUrl = @"http://woquapi.test.odong.com/1.0/pay
 NSString * const kBalanceUrl = @"http://woquapi.test.odong.com/1.0/user/withdraw/cash";
 
 NSString * const kBalanceListUrl = @"http://woquapi.test.odong.com/1.0/user/cash/list";
+NSString * const kMySellListUrl = @"http://woquapi.test.odong.com/1.0/swap/seller/order/list";
+NSString * const kDeliveryUrl = @"http://woquapi.test.odong.com/1.0/swap/confirm/delivery";
 
