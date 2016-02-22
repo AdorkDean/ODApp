@@ -24,4 +24,10 @@
     return strM;
 
 }
+
+- (NSString *)descriptionWithLocale:(id)locale
+{
+    return [self description];
+}
+
 @end
