@@ -27,6 +27,7 @@
 @property(nonatomic,copy)NSString *swap_id;
 @property(nonatomic,strong)ODBazaarExchangeSkillModel *model;
 @property(nonatomic,strong)NSMutableArray *dataArray;
+@property(nonatomic,strong)NSMutableArray *loveArray;
 @property(nonatomic,strong)UILabel *loveLabel;
 @property(nonatomic,strong)UIImageView *loveImageView;
 @property(nonatomic,strong)UIView *detailView;

@@ -175,7 +175,12 @@
             NSMutableDictionary *dic = responseObject[@"result"];
             NSString *openId = dic[@"open_id"];
             
+            
             [ODUserInformation sharedODUserInformation].openID = openId;
+            
+            NSString *avatar = dic[@"avatar"];
+            [ODUserInformation sharedODUserInformation].avatar = avatar;
+
             
             
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];

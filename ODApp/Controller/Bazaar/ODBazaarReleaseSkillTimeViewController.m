@@ -94,10 +94,7 @@
         
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSDictionary *result = dict[@"result"];
-            for (NSMutableDictionary *itemDict in result) {
-                [weakSelf.dataArray addObject:itemDict];
-            }
+            [weakSelf.dataArray addObjectsFromArray:dict[@"result"]];
             for (NSInteger i = 0; i < 7; i++) {
                 NSMutableArray *array = [NSMutableArray array];
                 for (NSInteger j = 0; j < 3; j++) {
@@ -177,6 +174,10 @@
     ODBazaarReleaseSkillTimeViewCell *cell = (ODBazaarReleaseSkillTimeViewCell *)button.superview.superview;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     ODRoundTimeDrawView *view = self.roundViews[indexPath.section];
+    NSDictionary *dict = self.dataArray[indexPath.section * 3 + indexPath.row];
+    [dict setValue:[NSString stringWithFormat:@"%d",!button.selected] forKeyPath:@"status"];
+    NSLog(@"%@",self.dataArray);
+    
     if (indexPath.row == 0)
     {
         view.firstTimeIsFree = !button.selected;

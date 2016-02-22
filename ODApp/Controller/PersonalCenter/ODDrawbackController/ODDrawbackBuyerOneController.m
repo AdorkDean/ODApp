@@ -46,7 +46,7 @@
     
     self.drawbackMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, drawBackHeight)];
     self.drawbackMoneyLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-    self.drawbackMoneyLabel.text = [NSString stringWithFormat:@"您的退款金额：%.1f元",self.darwbackMoney];
+    self.drawbackMoneyLabel.text = [NSString stringWithFormat:@"您的退款金额：%@元",self.darwbackMoney];
     self.drawbackMoneyLabel.font = [UIFont systemFontOfSize:13.5];
     self.drawbackMoneyLabel.textAlignment = NSTextAlignmentCenter;
     self.drawbackMoneyLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
