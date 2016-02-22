@@ -34,7 +34,11 @@
     
     // 2.遍历字典，拼接字典中的键值对
     [self enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
-        [strM appendFormat:@"\t%@:%@\n",key,obj];
+        if ([obj isKindOfClass:[NSString class]])
+        {
+            obj = [NSString stringWithFormat:@"\"%@\"",obj];
+        }
+        [strM appendFormat:@"\t\"%@\":%@\n",key,obj];
     }];
     
     [strM appendFormat:@"}\n"];
