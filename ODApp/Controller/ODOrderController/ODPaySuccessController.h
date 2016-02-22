@@ -10,4 +10,8 @@
 
 @interface ODPaySuccessController : ODBaseViewController
 
+@property (nonatomic , copy) NSString *payStatus;
+@property (nonatomic , copy) NSString *orderId;
+@property (nonatomic , copy) NSString *swap_type;
+
 @end

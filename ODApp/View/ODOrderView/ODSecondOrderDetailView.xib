@@ -504,7 +504,7 @@
                 <outlet property="typeLabel" destination="6n9-8W-x9z" id="Wg5-oI-cUK"/>
                 <outlet property="userButtonView" destination="YAm-8O-oiY" id="TVv-25-149"/>
             </connections>
-            <point key="canvasLocation" x="663" y="416.5"/>
+            <point key="canvasLocation" x="100" y="394.5"/>
         </view>
     </objects>
     <resources>

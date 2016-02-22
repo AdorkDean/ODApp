@@ -256,6 +256,7 @@
             vc.OrderTitle = self.informationModel.title;
             vc.orderId = orderId;
             vc.price = [NSString stringWithFormat:@"%@" , self.informationModel.price];
+            vc.swap_type = [NSString stringWithFormat:@"%@" , self.informationModel.swap_type];
             [self.navigationController pushViewController:vc animated:YES];
         
         

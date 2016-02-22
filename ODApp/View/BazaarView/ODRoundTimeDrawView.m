@@ -60,23 +60,34 @@
         endA = startA + angle;
         //画弧
         UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:center radius:radius startAngle:startA endAngle:endA clockwise:YES];
+        
+        //添加一根线到圆心
+        [path addLineToPoint:center];
+        UIColor *color;
         //设置颜色
         if (index == 0)
         {
-            [self.firstTimeIsFree ? [UIColor redColor] : [UIColor grayColor]set];
+            color = self.firstTimeIsFree ? [UIColor redColor] : [UIColor whiteColor];
         }
         else if (index == 1)
         {
-           [self.secondTimeIsFree ? [UIColor redColor] : [UIColor grayColor]set];
+            color = self.secondTimeIsFree ? [UIColor redColor] : [UIColor whiteColor];
         }
         else if (index == 2)
         {
-            [self.thirdTimeIsFree ? [UIColor redColor] : [UIColor grayColor]set];
+            color = self.thirdTimeIsFree ? [UIColor redColor] : [UIColor whiteColor];
         }
+        [color set];
         //填充
+        [path stroke];
         [path fill];
         index ++;
     }
+    
+    UIBezierPath *path1 = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius];
+    [[UIColor redColor]set];
+    [path1 stroke];
+    
 
 }
 

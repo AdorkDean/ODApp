@@ -36,6 +36,13 @@ NSString * const ODNotificationChangeSkill = @"ODNotificationChangeSkill";
 NSString * const ODNotificationReleaseTask = @"ODNotificationReleaseTask";
 
 
+/**  支付成功通知 */
+NSString * const ODNotificationPaySuccess = @"ODNotificationPaySuccess";
+
+/**  支付失败通知 */
+NSString * const ODNotificationPayfail = @"ODNotificationPayfail";
+
+
 #pragma mark - 请求URL接口
 /** 统一的URL */
 #ifdef DEBUG
@@ -88,6 +95,8 @@ NSString * const ODSkillDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/inf
 NSString * const ODHomeChangeSkillUrl = @"http://woquapi.test.odong.com/1.0/other/home";
 NSString *const ODFindJobUrl = @"http://www.myjob500.com/user/extloginpf";
 NSString * const ODHotActivityUrl = @"http://woquapi.test.odong.com/1.0/doc/store/activity/list";
+NSString * const ODReleaseDrawbackUrl = @"http://woquapi.test.odong.com/1.0/swap/order/cancel";
+
 
 NSString * const kMyOrderRecordUrl = @"http://woquapi.test.odong.com/1.0/store/orders";
 NSString * const kMyOrderDetailUrl = @"http://woquapi.test.odong.com/1.0/store/info/order";

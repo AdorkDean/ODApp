@@ -13,7 +13,8 @@
 #import "ODOrderDetailModel.h"
 #import "UIButton+WebCache.h"
 #import "ODPayController.h"
-@interface ODSecondOrderDetailController ()<UITableViewDataSource , UITableViewDelegate>
+#import "ODCancelOrderView.h"
+@interface ODSecondOrderDetailController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate>
 
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) ODSecondOrderDetailView *orderDetailView;
@@ -23,6 +24,8 @@
 @property (nonatomic , copy) NSString *open_id;
 @property (nonatomic , strong) NSMutableArray *dataArray;
 
+
+@property (nonatomic ,strong) ODCancelOrderView *cancelOrderView;
 
 @end
 
@@ -37,11 +40,19 @@
     
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     self.navigationItem.title = @"订单详情";
-    [self getData];
+  
 
     
     
 }
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getData];
+}
+
+
 
 - (void)getData
 {
@@ -287,8 +298,106 @@
 // 取消订单
 - (void)cancelOrder:(UIButton *)sender
 {
+    self.cancelOrderView = [ODCancelOrderView getView];
+    self.cancelOrderView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
+    [self.cancelOrderView.cancelButton addTarget:self action:@selector(cancelView:) forControlEvents:UIControlEventTouchUpInside];
+      [self.cancelOrderView.submitButton addTarget:self action:@selector(submitAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.cancelOrderView.reasonTextView.delegate = self;
+    [[[UIApplication sharedApplication]keyWindow] addSubview:self.cancelOrderView];
+
+}
+
+
+#pragma mark - UITextViewDelegate
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@"请输入取消原因"]) {
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor];
+    }
+}
+
+
+
+
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入取消原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
+       self.cancelOrderView.reasonTextView.text = @"请输入取消原因";
+       self.cancelOrderView.reasonTextView.textColor = [UIColor lightGrayColor];
+    }
+    
+    
     
 }
+
+- (void)submitAction:(UIButton *)sender
+{
+    
+    
+    
+    if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入取消原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入取消原因"];
+    }else{
+        
+        
+        self.delateManager = [AFHTTPRequestOperationManager manager];
+        NSDictionary *parameters = @{@"order_id":self.order_id , @"reason":self.cancelOrderView.reasonTextView.text, @"open_id":self.open_id};
+        NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+        
+        __weak typeof (self)weakSelf = self;
+        [self.delateManager GET:kDelateOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            if (responseObject) {
+                
+                
+                if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                    
+                    
+                       [weakSelf.cancelOrderView removeFromSuperview];
+                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
+                    
+                    
+                    
+                    if (self.getRefresh) {
+                        
+                        
+                        
+                        weakSelf.getRefresh(@"1");
+                    }
+                    
+                    
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                    
+                    
+                }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
+                    
+                    
+                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+                    
+                    
+                }
+                
+                
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        }];
+        
+        
+
+        
+        
+        
+    }
+    
+    
+    
+    
+}
+
 
 // 申请退款
 - (void)refundAction:(UIButton *)sender
@@ -299,6 +408,18 @@
     
 }
 
+
+
+
+
+
+- (void)cancelView:(UIButton *)sender
+{
+    [self.cancelOrderView removeFromSuperview];
+}
+
+
+
 - (void)payAction:(UIButton *)sender
 {
     ODPayController *vc = [[ODPayController alloc] init];
@@ -306,6 +427,7 @@
     vc.orderId = [NSString stringWithFormat:@"%@" ,model.order_id];
     vc.OrderTitle = model.title;
     vc.price = [NSString stringWithFormat:@"%@" , model.price];
+    vc.swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
     [self.navigationController pushViewController:vc animated:YES];
     
 }

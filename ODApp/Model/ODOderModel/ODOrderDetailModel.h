@@ -41,4 +41,8 @@
 @property (nonatomic , copy) NSString *reason_num;
 @property (nonatomic , copy) NSString *reason;
 @property (nonatomic , strong) NSMutableDictionary *order_user;
+@property (nonatomic , copy) NSString *tel400;
+@property (nonatomic , copy) NSString *tel_msg;
+@property (nonatomic  ,copy) NSString *reject_reason;
+
 @end
