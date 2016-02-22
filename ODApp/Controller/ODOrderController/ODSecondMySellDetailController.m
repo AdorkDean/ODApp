@@ -31,6 +31,7 @@
 
 @property (nonatomic , strong) UIButton *deliveryButton;
 @property (nonatomic , strong) UIButton *DealDeliveryButton;
+@property (nonatomic , strong) UIButton *reasonButton;
 
 
 @end
@@ -56,7 +57,7 @@
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"order_id":self.order_id , @"open_id":self.open_id};
+    NSDictionary *parameters = @{@"order_id":self.orderId , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     __weak typeof (self)weakSelf = self;
@@ -102,9 +103,22 @@
 - (void)creatView
 {
     
+    ODOrderDetailModel *model = self.dataArray[0];
+    NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height + 100) style:UITableViewStylePlain];
     
+    
+    if ([status isEqualToString:@"-1"]) {
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height) style:UITableViewStylePlain];
+        
+    }else{
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height + 100) style:UITableViewStylePlain];
+        
+    }
+    
+
+    
+      
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = self.orderDetailView;
@@ -113,8 +127,7 @@
     [self.view addSubview:self.tableView];
     
     
-    ODOrderDetailModel *model = self.dataArray[0];
-    NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
+   
     
     
     if ([status isEqualToString:@"2"]) {
@@ -143,9 +156,59 @@
         
         
         
+    }else if ([status isEqualToString:@"-3"]) {
+        
+        self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
+        self.reasonButton.backgroundColor = [UIColor redColor];
+        [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
+        self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.reasonButton];
+        
+        
+        
+    }else if ([status isEqualToString:@"-5"]) {
+        
+        self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
+        self.reasonButton.backgroundColor = [UIColor redColor];
+        [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
+        self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.reasonButton];
+        
+        
+        
     }
     
     
+    
+    
+    
+    
+}
+
+
+- (void)reasonAction:(UIButton *)sender
+{
+    
+    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    
+    ODOrderDetailModel *model = self.dataArray[0];
+    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
+    vc.order_id = self.orderId;
+    vc.drawbackReason = model.reason;
+    vc.isService = YES;
+    vc.servicePhone = [NSString stringWithFormat:@"%@" , model.tel400];
+    vc.serviceTime = model.tel_msg;
+    vc.customerService = @"服务";
+    
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
     
     
     
@@ -155,8 +218,20 @@
 - (void)DealDeliveryAction:(UIButton *)sender
 {
     
+    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
     
-    NSLog(@"ergregr");
+    ODOrderDetailModel *model = self.dataArray[0];
+    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
+    vc.order_id = self.orderId;
+    vc.drawbackReason = model.reason;
+    vc.isRefuseAndReceive = YES;
+    
+    
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
 }
 
 
@@ -171,7 +246,7 @@
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     
     
-    NSDictionary *parameters = @{@"order_id":self.order_id , @"open_id":openId};
+    NSDictionary *parameters = @{@"order_id":self.orderId , @"open_id":openId};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weak typeof (self)weakSelf = self;
     [self.deliveryManager GET:kDeliveryUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -232,6 +307,40 @@
         NSMutableArray *arr = model.imgs_small;
         NSMutableDictionary *picDic = arr[0];
         
+        NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
+        
+        
+        if ([status isEqualToString:@"-1"]) {
+            self.orderDetailView.spaceToTop.constant = 150;
+            
+            
+            UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, self.orderDetailView.serviceAddressLabel.frame.origin.y + 30, kScreenSize.width, 6)];
+            line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+            [self.orderDetailView addSubview:line];
+            
+            UILabel *reason = [[UILabel alloc] initWithFrame:CGRectMake(18, line.frame.origin.y + 16, 100, 20)];
+            reason.backgroundColor = [UIColor whiteColor];
+            reason.font = [UIFont systemFontOfSize:14];
+            reason.text = @"订单取消原因";
+            reason.textAlignment = NSTextAlignmentLeft;
+            [self.orderDetailView addSubview:reason];
+            
+            UILabel *secondLine = [[UILabel alloc] initWithFrame:CGRectMake(18, reason.frame.origin.y + 30, kScreenSize.width - 18, 1)];
+            secondLine.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+            [self.orderDetailView addSubview:secondLine];
+            
+            
+            UILabel *reasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, secondLine.frame.origin.y + 11, kScreenSize.width - 36, 50)];
+            reasonLabel.backgroundColor = [UIColor whiteColor];
+            reasonLabel.font = [UIFont systemFontOfSize:14];
+            reasonLabel.numberOfLines = 0;
+            reasonLabel.text = model.reason;
+            reasonLabel.textAlignment = NSTextAlignmentLeft;
+            [self.orderDetailView addSubview:reasonLabel];
+            
+            
+        }
+
         
         
         [self.orderDetailView.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , userDic[@"avatar"]]] forState:UIControlStateNormal];
@@ -255,7 +364,7 @@
         
         
         
-        NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
+    
         
         
         if ([status isEqualToString:@"1"]) {

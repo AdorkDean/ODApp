@@ -56,7 +56,7 @@
                 <outlet property="reasonTextView" destination="9Pz-Sp-ehb" id="g88-RF-NKi"/>
                 <outlet property="submitButton" destination="Kji-FJ-LaH" id="R6x-ya-07d"/>
             </connections>
-            <point key="canvasLocation" x="534" y="394"/>
+            <point key="canvasLocation" x="-71" y="380"/>
         </view>
     </objects>
     <resources>

@@ -10,7 +10,7 @@
 #import "ODPaySuccessView.h"
 #import "ODOrderDetailController.h"
 #import "ODSecondOrderDetailController.h"
-
+#import "ODBazaarViewController.h"
 @interface ODPaySuccessController ()
 
 @property (nonatomic , strong) ODPaySuccessView *paySuccessView;
@@ -113,6 +113,14 @@
 
 - (void)goOther:(UIButton *)sender
 {
+    
+    self.tabBarController.selectedIndex = 2;
+    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
+    vc.index = 0;
+    
+    
+
+    
     
 }
 

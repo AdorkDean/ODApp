@@ -102,6 +102,9 @@ NSString *const ODFindJobUrl = @"http://www.myjob500.com/user/extloginpf";
 NSString * const ODHotActivityUrl = @"http://woquapi.test.odong.com/1.0/doc/store/activity/list";
 NSString * const ODReleaseDrawbackUrl = @"http://woquapi.test.odong.com/1.0/swap/order/cancel";
 
+NSString * const ODRefuseDrawbackUrl = @"http://woquapi.test.odong.com/1.0/swap/reject/refund";
+NSString * const ODReceiveDrawbackUrl = @"http://woquapi.test.odong.com/1.0/swap/confirm/refund";
+
 
 NSString * const kMyOrderRecordUrl = @"http://woquapi.test.odong.com/1.0/store/orders";
 NSString * const kMyOrderDetailUrl = @"http://woquapi.test.odong.com/1.0/store/info/order";
@@ -146,4 +149,6 @@ NSString * const kBalanceUrl = @"http://woquapi.test.odong.com/1.0/user/withdraw
 NSString * const kBalanceListUrl = @"http://woquapi.test.odong.com/1.0/user/cash/list";
 NSString * const kMySellListUrl = @"http://woquapi.test.odong.com/1.0/swap/seller/order/list";
 NSString * const kDeliveryUrl = @"http://woquapi.test.odong.com/1.0/swap/confirm/delivery";
+NSString * const kFinshOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/finish";
+NSString * const kEvalueUrl = @"http://woquapi.test.odong.com/1.0/swap/order/reason";
 

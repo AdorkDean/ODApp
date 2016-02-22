@@ -36,6 +36,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *nineLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tenLabel;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *spaceToTop;
+
+
+
 +(instancetype)getView;
 
 @end
