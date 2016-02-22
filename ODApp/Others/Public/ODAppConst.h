@@ -15,6 +15,7 @@ UIKIT_EXTERN CGFloat const ODNavigationTextFont;
 /** 偏好设置保存用户信息 */
 UIKIT_EXTERN NSString * const KUserDefaultsOpenId;
 
+UIKIT_EXTERN NSString * const KUserDefaultsAvatar;
 
 UIKIT_EXTERN NSString * const kGetUMAppkey;
 UIKIT_EXTERN NSString * const kGetWXAppId;

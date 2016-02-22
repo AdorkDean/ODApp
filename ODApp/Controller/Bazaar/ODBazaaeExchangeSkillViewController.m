@@ -212,7 +212,7 @@
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc]init];
     detailControler.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
     detailControler.nick = model.user[@"nick"];
-    detailControler.love_id = [NSString stringWithFormat:@"%@",model.love_id];
+//    detailControler.love_id = [NSString stringWithFormat:@"%@",model.love_id];
     [self.navigationController pushViewController:detailControler animated:YES];
     
 }

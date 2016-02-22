@@ -123,7 +123,9 @@ void UncaughtExceptionHandler(NSException *exception)
     NSString *openId = [user objectForKey:KUserDefaultsOpenId];
     [ODUserInformation sharedODUserInformation].openID = openId ? openId : @"";
 
-   
+    NSString *avatar = [user objectForKey:KUserDefaultsAvatar];
+    [ODUserInformation sharedODUserInformation].avatar = avatar ? avatar : @"";
+
       
     self.window.rootViewController = [[ODTabBarController alloc]init];
     
