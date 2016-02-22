@@ -312,7 +312,6 @@
 {
     [super viewWillAppear:animated];
     
-    
     if ([self.refresh isEqualToString:@"release"]) {
         self.status = @"9";
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];

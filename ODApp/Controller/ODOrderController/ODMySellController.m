@@ -46,9 +46,9 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if ([self.isRefresh isEqualToString:@"1"]) {
+ 
         [self.collectionView.mj_header beginRefreshing];
-    }
+   
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -186,14 +186,15 @@
     
     
     NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
-    
+    NSString *orderId = [NSString stringWithFormat:@"%@" , model.order_id];
+
     
     
     
     if ([swap_type isEqualToString:@"1"]) {
         ODMySellDetailController *vc = [[ODMySellDetailController alloc] init];
-        vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
         vc.orderType = model.status_str;
+        vc.orderId = orderId;
         [self.navigationController pushViewController:vc animated:YES];
         
         __weakSelf
@@ -208,8 +209,8 @@
         
         
         ODMySellDetailController *vc = [[ODMySellDetailController alloc] init];
-        vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
         vc.orderType = model.status_str;
+        vc.orderId = orderId;
         [self.navigationController pushViewController:vc animated:YES];
         
         __weakSelf

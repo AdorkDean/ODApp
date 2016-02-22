@@ -36,6 +36,8 @@ NSString * const ODNotificationChangeSkill = @"ODNotificationChangeSkill";
 /**  发布任务成功通知 */
 NSString * const ODNotificationReleaseTask = @"ODNotificationReleaseTask";
 
+/**  发布任务成功通知 */
+NSString * const ODNotificationReleaseSkill = @"ODNotificationReleaseSkill";
 
 /**  支付成功通知 */
 NSString * const ODNotificationPaySuccess = @"ODNotificationPaySuccess";
@@ -146,4 +148,6 @@ NSString * const kBalanceUrl = @"http://woquapi.test.odong.com/1.0/user/withdraw
 NSString * const kBalanceListUrl = @"http://woquapi.test.odong.com/1.0/user/cash/list";
 NSString * const kMySellListUrl = @"http://woquapi.test.odong.com/1.0/swap/seller/order/list";
 NSString * const kDeliveryUrl = @"http://woquapi.test.odong.com/1.0/swap/confirm/delivery";
+NSString * const kMySellDetailUrl = @"http://woquapi.test.odong.com /1.0/swap/info";
+
 

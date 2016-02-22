@@ -11,9 +11,12 @@
 @interface ODMySellDetailController : ODBaseViewController
 
 
-@property (nonatomic , copy) NSString *order_id;
+
 
 @property (nonatomic , copy) NSString *orderType;
+
+
+@property (nonatomic , copy) NSString *orderId;
 
 @property(nonatomic,copy)void(^getRefresh)(NSString *isRefresh);
 

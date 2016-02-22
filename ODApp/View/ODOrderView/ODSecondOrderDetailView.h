@@ -31,6 +31,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *orderIdLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderTimeLabel;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *spaceToTop;
+
+
+
+
 +(instancetype)getView;
 
 
