@@ -424,14 +424,11 @@
         
 
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            
-            
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"退款成功"];
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
         }else{
-            
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
         }
-        
-        
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
