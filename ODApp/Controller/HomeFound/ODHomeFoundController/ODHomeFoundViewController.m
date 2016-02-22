@@ -328,7 +328,7 @@
 - (void)gestureButtonClick:(UIButton *)button
 {
     
-    [self giveCommumityContent:nil andBbsType:4];
+    [self giveCommumityContent:nil andBbsType:5];
 }
 
 #pragma mark - 寻圈子跳转传值
