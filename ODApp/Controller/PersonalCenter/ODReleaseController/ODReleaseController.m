@@ -112,24 +112,22 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 - (void)deleteSkillRequest{
 
     self.manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *parameter = @{@"swap_id":self.swap_id};
+    NSDictionary *parameter = @{@"open_id":[ODUserInformation sharedODUserInformation].openID, @"swap_id":self.swap_id};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weakSelf
     [self.manager GET:ODPersonReleaseTaskDeleteUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        
-        NSLog(@"_____++++++_____%@",responseObject);
         [weakSelf createRequestData];
-        NSLog(@"_____________%@", weakSelf.swap_id);
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"删除任务成功"];
+            
+            [weakSelf.collectionView reloadData];
+            
         }else{
         
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
         }
-        
-        
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         

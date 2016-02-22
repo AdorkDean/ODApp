@@ -19,6 +19,6 @@ Single_Interface(ODUserInformation)
 
 @property (nonatomic , copy) NSString *orderId;
 
-
+@property(nonatomic ,copy) NSString *avatar;
 
 @end
