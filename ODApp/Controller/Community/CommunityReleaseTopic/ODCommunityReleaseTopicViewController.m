@@ -41,10 +41,6 @@
     [self.topicContentTextView resignFirstResponder];
     
     if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length>0) {
-        
-        for (NSString *title in self.labelArray) {
-            NSLog(@"%@",title);
-        }
         [self joiningTogetherParmeters];
     }else if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length==0){
         
@@ -154,7 +150,25 @@ NSString *topicContentText = @"";
 
 -(void)labelButtonClick:(UIButton *)button
 {
-    NSString *tag_ids = [NSString stringWithFormat:@"%ld",button.tag-1];
+    NSString *tag_ids;
+    if ([button.titleLabel.text isEqualToString:@"情感"]) {
+        tag_ids = @"2";
+    }else if ([button.titleLabel.text isEqualToString:@"搞笑"]){
+        tag_ids = @"3";
+    }else if ([button.titleLabel.text isEqualToString:@"影视"]){
+        tag_ids = @"8";
+    }else if ([button.titleLabel.text isEqualToString:@"二次元"]){
+        tag_ids = @"7";
+    }else if ([button.titleLabel.text isEqualToString:@"生活"]){
+        tag_ids = @"4";
+    }else if ([button.titleLabel.text isEqualToString:@"明星"]){
+        tag_ids = @"6";
+    }else if ([button.titleLabel.text isEqualToString:@"爱美"]){
+        tag_ids = @"5";
+    }else if ([button.titleLabel.text isEqualToString:@"宠物"]){
+        tag_ids = @"9";
+    }
+
     if ([self.labelArray containsObject:tag_ids]) {
         [button setTitleColor:[UIColor colorWithHexString:@"#b0b0b0" alpha:1] forState:UIControlStateNormal];
         button.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
@@ -378,8 +392,7 @@ NSString *topicContentText = @"";
             tag_ids = [[tag_ids stringByAppendingString:@"|"]stringByAppendingString:tag];
         }
     }
-    
-    NSDictionary *parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"tag_ids":tag_ids,@"imgs":imageStr,@"open_id":[ODUserInformation sharedODUserInformation].openID};
+    NSDictionary *parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"tag_ids":tag_ids,@"imgs":imageStr,@"city_id":@"321",@"open_id":[ODUserInformation sharedODUserInformation].openID};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:kCommunityReleaseBbsUrl parameter:signParameter];
 }

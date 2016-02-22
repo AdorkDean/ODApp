@@ -128,7 +128,7 @@
     }else if ([button.titleLabel.text isEqualToString:@"全部"]){
         [self.button setTitle:@"全部" forState:UIControlStateNormal];
         self.bbsMark = @"";
-        self.bbsType = 4;
+        self.bbsType = 5;
         [self joiningTogetherParmeters];
     }
 
@@ -140,11 +140,11 @@
 #pragma mark - 加载更多
 -(void)loadMoreData
 {
-    self.bbsType = self.bbsType ? self.bbsType : 4;
+    self.bbsType = self.bbsType ? self.bbsType : 5;
     self.bbsMark = self.bbsMark ? self.bbsMark :@"";
     
     self.count ++;
-    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count], @"city_id":@"0", @"search":self.bbsMark, @"call_array":@"1"};
+    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i",self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count], @"city_id":@"0", @"search":self.bbsMark, @"call_array":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
@@ -187,10 +187,12 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    self.bbsType = self.bbsType ? self.bbsType : 4;
+    self.bbsType = self.bbsType ? self.bbsType :5;
     self.bbsMark = self.bbsMark ? self.bbsMark :@"";
     self.count = 1;
     NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":@"0", @"search":self.bbsMark, @"call_array":@"1"};
+    
+    
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
@@ -363,7 +365,6 @@
     };
     ODCommunityModel *model = self.dataArray[indexPath.row];
     detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
-    NSLog(@"%@",detailController.bbs_id);
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
