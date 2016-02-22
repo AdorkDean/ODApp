@@ -51,7 +51,6 @@
     CGFloat startA = 0;
     CGFloat angle = 0;
     CGFloat endA = - M_PI_2;
-    
     NSInteger index = 0;
     for (NSNumber *num in dataArray) {
         
@@ -84,6 +83,12 @@
         [path fill];
         index ++;
     }
+    
+    UIBezierPath *path1 = [UIBezierPath bezierPathWithRoundedRect:rect cornerRadius:radius];
+    [[UIColor redColor]set];
+    [path1 stroke];
+    
+
 }
 
 
