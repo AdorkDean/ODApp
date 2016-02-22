@@ -18,9 +18,9 @@
     [super viewDidLoad];
     self.navigationItem.title = @"退款";
 //    self.isSelectReason = YES;
-    self.isService = YES;
-//    self.isRelease = YES;
-    self.isDrawbackState = YES;
+//    self.isService = YES;
+////    self.isRelease = YES;
+//    self.isDrawbackState = YES;
     [self createScrollView];
 }
 
