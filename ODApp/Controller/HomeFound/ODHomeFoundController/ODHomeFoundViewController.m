@@ -624,13 +624,17 @@ updatingLocation:(BOOL)updatingLocation{
 {
     if(response.regeocode != nil)
     {
+        NSString *cityResult;
         //通过AMapReGeocodeSearchResponse对象处理搜索结果
         NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
-        if (result.length == 0) {
+        if (result.length == 0)
+        {
             result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
         }
-        
-        NSString *cityResult = [result substringToIndex:[result length] - 1];
+        else
+        {
+            cityResult = [result substringToIndex:[result length] - 1];
+        }
         
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];

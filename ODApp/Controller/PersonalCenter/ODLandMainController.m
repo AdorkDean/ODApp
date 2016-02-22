@@ -49,16 +49,16 @@
     self.navigationItem.title = @"登录个人中心";
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     [self getData];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidDisappear:animated];
+    [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
 }
 #pragma mark - 请求数据
