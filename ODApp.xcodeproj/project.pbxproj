@@ -21,6 +21,8 @@
 		9D46D14D1C77482000F4C0CD /* AppMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D46D14A1C77482000F4C0CD /* AppMethod.m */; };
 		9D46D14E1C77482000F4C0CD /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D46D14C1C77482000F4C0CD /* CommonUtil.m */; };
 		9D46D1511C77486200F4C0CD /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D46D1501C77486200F4C0CD /* XMLDictionary.m */; };
+		9D8A98921C7AB5FE005BC458 /* ODCancelOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A98911C7AB5FE005BC458 /* ODCancelOrderView.m */; };
+		9D8A98941C7AB619005BC458 /* ODCancelOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8A98931C7AB619005BC458 /* ODCancelOrderView.xib */; };
 		9D8D9E1F1C75D7CB0064CD5A /* ODOperationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D9E1E1C75D7CB0064CD5A /* ODOperationController.m */; };
 		9DBF7EEA1C759B1C0085875E /* ODPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EE91C759B1C0085875E /* ODPayController.m */; };
 		9DBF7EED1C75A0C90085875E /* ODPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EEC1C75A0C90085875E /* ODPayView.m */; };
@@ -347,6 +349,9 @@
 		9D46D14C1C77482000F4C0CD /* CommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtil.m; sourceTree = "<group>"; };
 		9D46D14F1C77486200F4C0CD /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
 		9D46D1501C77486200F4C0CD /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
+		9D8A98901C7AB5FE005BC458 /* ODCancelOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCancelOrderView.h; sourceTree = "<group>"; };
+		9D8A98911C7AB5FE005BC458 /* ODCancelOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCancelOrderView.m; sourceTree = "<group>"; };
+		9D8A98931C7AB619005BC458 /* ODCancelOrderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODCancelOrderView.xib; sourceTree = "<group>"; };
 		9D8D9E1D1C75D7CB0064CD5A /* ODOperationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOperationController.h; sourceTree = "<group>"; };
 		9D8D9E1E1C75D7CB0064CD5A /* ODOperationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOperationController.m; sourceTree = "<group>"; };
 		9DBF7EE91C759B1C0085875E /* ODPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPayController.m; sourceTree = "<group>"; };
@@ -2439,6 +2444,9 @@
 				9DDC9B701C631D81000D688F /* ODOrderDetailView.h */,
 				9DDC9B711C631D81000D688F /* ODOrderDetailView.m */,
 				9D205C791C71733700B6499B /* ODOrderDetailView.xib */,
+				9D8A98901C7AB5FE005BC458 /* ODCancelOrderView.h */,
+				9D8A98911C7AB5FE005BC458 /* ODCancelOrderView.m */,
+				9D8A98931C7AB619005BC458 /* ODCancelOrderView.xib */,
 				9DF2E98D1C74666800F77976 /* ODSecondOrderDetailView.h */,
 				9DF2E98E1C74666800F77976 /* ODSecondOrderDetailView.m */,
 				9DF2E9901C74667800F77976 /* ODSecondOrderDetailView.xib */,
@@ -2664,6 +2672,7 @@
 				D4F76DA91C61AEA100D59F02 /* ODAddressCell.xib in Resources */,
 				9D1F80FF1C76EAE000FC9C2C /* ODOperationFirstCell.xib in Resources */,
 				D4D075131C59B9FA008527C9 /* ODBindingMobileView.xib in Resources */,
+				9D8A98941C7AB619005BC458 /* ODCancelOrderView.xib in Resources */,
 				D4D075211C59B9FA008527C9 /* ODTypeView.xib in Resources */,
 				D4D074FA1C59B9FA008527C9 /* ODCommunityDetailCell.xib in Resources */,
 				D4D075021C59B9FA008527C9 /* CenterActivityCell.xib in Resources */,
@@ -2783,6 +2792,7 @@
 				D4F76DA41C61AEA100D59F02 /* ODCollectionCell.m in Sources */,
 				9DEDCF4A1C64B3ED003015C6 /* ODBazaarRequestHelpViewController.m in Sources */,
 				9DEDCF451C64B3ED003015C6 /* ODBazaarReleaseTaskViewController.m in Sources */,
+				9D8A98921C7AB5FE005BC458 /* ODCancelOrderView.m in Sources */,
 				C64D45FB1C5F8C6F003BFFA0 /* NSData+SDDataCache.m in Sources */,
 				D4F76D6C1C60C55E00D59F02 /* ODActivityVIPCell.m in Sources */,
 				D4D073881C59B9FA008527C9 /* ODLandMainController.m in Sources */,
