@@ -84,17 +84,14 @@
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
-            for (NSDictionary *itemDict in result) {
-                ODBazaarReleaseSkillTimeModel *model = [[ODBazaarReleaseSkillTimeModel alloc]init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.dataArray addObject:model];
+            for (NSMutableDictionary *itemDict in result) {
+                [weakSelf.dataArray addObject:itemDict];
             }
-            
             for (NSInteger i = 0; i < 7; i++) {
                 NSMutableArray *array = [NSMutableArray array];
                 for (NSInteger j = 0; j < 3; j++) {
-                    ODBazaarReleaseSkillTimeModel *model = [weakSelf.dataArray objectAtIndex:i*3+j];
-                    [array addObject:model];
+                    NSMutableDictionary *dict = [weakSelf.dataArray objectAtIndex:i*3+j];
+                    [array addObject:dict];
                 }
                 [weakSelf.mArray addObject:array];
             }
@@ -129,10 +126,11 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ODBazaarReleaseSkillTimeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    ODBazaarReleaseSkillTimeModel *model = [[self.mArray objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
+    NSMutableDictionary *dict = [[self.mArray objectAtIndex:indexPath.section]objectAtIndex:indexPath.row];
     [cell.openButton addTarget:self action:@selector(openButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    cell.timeLabel.text = model.display;
-    self.status = [NSString stringWithFormat:@"%@",model.status];
+    [cell.openButton setBackgroundImage:[UIImage imageNamed:@"button_on_icon"] forState:UIControlStateNormal];
+    cell.timeLabel.text = dict[@"display"];
+    self.status = [NSString stringWithFormat:@"%@",dict[@"status"]];
     return cell;
 }
 
@@ -162,10 +160,19 @@
 
 -(void)openButtonClick:(UIButton *)button
 {
+    static BOOL isClick = NO;
+    if (isClick) {
+        [button setBackgroundImage:[UIImage imageNamed:@"button_on_icon"] forState:UIControlStateNormal];
+        isClick = NO;
+    }else{
+        [button setBackgroundImage:[UIImage imageNamed:@"button_off_icon"] forState:UIControlStateNormal];
+        isClick = YES;
+    }
     ODBazaarReleaseSkillTimeViewCell *cell = (ODBazaarReleaseSkillTimeViewCell *)button.superview.superview;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
     if (indexPath.section == 0) {
-        UIImageView *imageView = (UIImageView *)[self.view viewWithTag:10];
+        
     }
     
     if (indexPath.section == 1) {

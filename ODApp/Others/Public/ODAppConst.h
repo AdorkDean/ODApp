@@ -9,7 +9,8 @@ UIKIT_EXTERN CGFloat const ODNavigationHeight;
 UIKIT_EXTERN CGFloat const ODLeftMargin;
 /** 控制器View的顶部坐标y */
 UIKIT_EXTERN CGFloat const ODTopY;
-
+/** 导航栏标题字体大小 */
+UIKIT_EXTERN CGFloat const ODNavigationTextFont;
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 UIKIT_EXTERN NSString * const KUserDefaultsOpenId;
@@ -39,6 +40,9 @@ UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
 UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
 
 
+/**  发布任务成功通知 */
+UIKIT_EXTERN NSString * const ODNotificationReleaseTask;
+
 #pragma mark - 请求URL接口 
 /** 统一的URL */
 UIKIT_EXTERN NSString *const ODBaseURL;
@@ -55,6 +59,7 @@ UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseSkillTimeUrl;
 UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailLoveUrl;
 UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailNotLoveUrl;
+UIKIT_EXTERN NSString * const kBazaarReleaseSkillUrl;
 /** 接收人确认完成 */
 UIKIT_EXTERN NSString * const kBazaarTaskReceiveCompleteUrl;
 /** 发起人确认完成 */

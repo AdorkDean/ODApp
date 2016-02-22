@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib {
     self.headButton.layer.masksToBounds = YES;
-    self.headButton.layer.cornerRadius = 30;
+    self.headButton.layer.cornerRadius = 24;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     self.nickLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
@@ -36,5 +36,10 @@
     }else{
         self.genderImageView.image = [UIImage imageNamed:@"icon_man"];
     }
+}
+- (CGFloat)height
+{
+    [self layoutIfNeeded];
+    return CGRectGetMaxY(self.shareLabel.frame) + 15;
 }
 @end

@@ -27,7 +27,6 @@
                             <constraint firstAttribute="width" constant="41" id="JAA-Hd-pq6"/>
                             <constraint firstAttribute="height" constant="28" id="tqm-JX-aIs"/>
                         </constraints>
-                        <state key="normal" title="Button" image="button_on_icon"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5sz-km-NWH">
                         <rect key="frame" x="10" y="12" width="200" height="10"/>
@@ -59,7 +58,4 @@
             <point key="canvasLocation" x="629.5" y="457.5"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="button_on_icon" width="40" height="29"/>
-    </resources>
 </document>

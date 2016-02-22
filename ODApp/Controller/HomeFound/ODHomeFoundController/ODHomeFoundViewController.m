@@ -456,7 +456,7 @@
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
             }
-            cell.picViewConstraintHeight.constant = width+(width+5)*(model.imgs_small.count/3);
+            cell.picViewConstraintHeight.constant = width+(width+5)*((model.imgs_small.count-1)/3);
         }
     }else{
         for (id vc in cell.picView.subviews) {
@@ -543,15 +543,15 @@
 {
     CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs_small.count==0) {
-        return 180;
+        return 135;
     }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
-        return 180+width;
+        return 135+width;
     }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
-        return 180+2*width+5;
+        return 135+2*width+5;
     }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
-        return 180+3*width+10;
+        return 135+3*width+10;
     }else{
-        return 180+3*width+10;
+        return 135+3*width+10;
     }
 }
 
