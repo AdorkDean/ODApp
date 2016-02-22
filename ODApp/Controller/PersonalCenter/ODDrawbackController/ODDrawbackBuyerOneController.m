@@ -21,6 +21,7 @@
     self.isService = YES;
 //    self.isRelease = YES;
     self.isDrawbackState = YES;
+    self.isRefuseAndReceive = YES;
     [self createScrollView];
 }
 
@@ -28,9 +29,17 @@
 - (void)createScrollView
 {
 
+    float scrollViewHeight;
+    if (self.isRefuseAndReceive || self.isRelease) {
+        scrollViewHeight = KControllerHeight - ODNavigationHeight - 50;
+    }
+    else{
+        scrollViewHeight = KControllerHeight - ODNavigationHeight;
+    }
     
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight - 50)];
-    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, scrollViewHeight)];
+    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     [self.view addSubview:self.scrollView];
     
     float drawBackHeight = 43;
@@ -43,13 +52,29 @@
        drawbackReasonHeight = drawBackHeight;
     }
     
+    self.darwbackMoney = @"0.1";
     self.drawbackMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, drawBackHeight)];
     self.drawbackMoneyLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-    self.drawbackMoneyLabel.text = [NSString stringWithFormat:@"您的退款金额：%@",self.darwbackMoney];
+    
+    NSString *drawbackMoneyStr = [NSString stringWithFormat:@"您的退款金额:%@元",self.darwbackMoney];
+    NSMutableAttributedString *moneyNumberStr = [[NSMutableAttributedString alloc]initWithString:drawbackMoneyStr];
+    [moneyNumberStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange([moneyNumberStr length] - self.darwbackMoney.length -1, self.darwbackMoney.length)];
+    self.drawbackMoneyLabel.attributedText = moneyNumberStr;
     self.drawbackMoneyLabel.font = [UIFont systemFontOfSize:13.5];
     self.drawbackMoneyLabel.textAlignment = NSTextAlignmentCenter;
     self.drawbackMoneyLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.drawbackMoneyLabel];
+    
+
+    
+    self.drawbackMoneyNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.drawbackMoneyLabel.frame), 0, KScreenWidth - CGRectGetMaxX(self.drawbackMoneyLabel.frame), drawBackHeight)];
+    self.drawbackMoneyNumberLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    self.drawbackMoneyNumberLabel.text = [NSString stringWithFormat:@"%@",self.darwbackMoney];
+    self.drawbackMoneyNumberLabel.font = [UIFont systemFontOfSize:13.5];
+    self.drawbackMoneyNumberLabel.textAlignment = NSTextAlignmentLeft;
+    self.drawbackMoneyNumberLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    [self.scrollView addSubview:self.drawbackMoneyNumberLabel];
+    
     
     self.drawbackReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackMoneyLabel.frame), KScreenWidth, 22)];
     self.drawbackReasonLabel.text = @"退款原因";
@@ -142,14 +167,14 @@
         
         for (int i = 1; i < 5; i++) {
             self.drawbackReasonLineView = [[UIView alloc] initWithFrame:CGRectMake(ODLeftMargin, drawBackHeight * i, KScreenWidth, 1)];
-            self.drawbackReasonLineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+            self.drawbackReasonLineView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
             [self.drawbackReasonContentView addSubview:self.drawbackReasonLineView];
         }
     }
     else
     {
         self.drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, drawBackHeight)];
-        self.drawbackReasonContentLabel.text = @"其它";
+        self.drawbackReasonContentLabel.text = [NSString stringWithFormat:@"%@",self.drawbackReason];
         self.drawbackReasonContentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackReasonContentLabel.font = [UIFont systemFontOfSize:13.5];
         self.drawbackReasonContentLabel.textAlignment = NSTextAlignmentLeft;
@@ -198,7 +223,7 @@
         [self.scrollView addSubview:self.serviceTimeView];
         
         self.serviceTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.servicePhoneView.frame) + 1, KScreenWidth, drawBackHeight)];
-        self.serviceTimeLabel.text = [NSString stringWithFormat:@"客服时间：%@", self.serviceTime];
+        self.serviceTimeLabel.text = [NSString stringWithFormat:@"%@时间：%@",self.customerService, self.serviceTime];
         self.serviceTimeLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.serviceTimeLabel.font = [UIFont systemFontOfSize:13.5];
         self.serviceTimeLabel.textAlignment = NSTextAlignmentLeft;
@@ -230,6 +255,25 @@
         
     }
     
+    if (self.isRefuseAndReceive) {
+        self.refuseButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KControllerHeight - ODNavigationHeight - 50, KScreenWidth / 2, 50)];
+        [self.refuseButton setTitle:@"拒绝" forState:UIControlStateNormal];
+        self.refuseButton.titleLabel.font = [UIFont systemFontOfSize:13.5];
+        self.refuseButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        [self.refuseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.refuseButton.backgroundColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
+        [self.refuseButton addTarget:self action:@selector(refuseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.refuseButton];
+        
+        self.receiveButton = [[UIButton alloc] initWithFrame:CGRectMake(KScreenWidth / 2, KControllerHeight - ODNavigationHeight - 50, KScreenWidth / 2, 50)];
+        [self.receiveButton setTitle:@"接受" forState:UIControlStateNormal];
+        self.receiveButton.titleLabel.font = [UIFont systemFontOfSize:13.5];
+        self.receiveButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+        [self.receiveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.receiveButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        [self.releaseButton addTarget:self action:@selector(receiveButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.receiveButton];
+    }
 }
 
 
@@ -252,11 +296,21 @@
         self.drawbackReasonContentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         [_drawbackStateView addSubview:self.drawbackReasonContentView];
         
-        self.drawbackStateTextView = [[UITextView alloc]initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, 150)];
+        self.drawbackStateTextView = [[UITextView alloc]initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - ODLeftMargin * 2, 150)];
         self.drawbackStateTextView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackStateTextView.font = [UIFont systemFontOfSize:12];
+        self.drawbackStateTextView.text = [NSString stringWithFormat:@"%@",self.drawbackState];
         self.drawbackStateTextView.delegate = self;
         [self.drawbackReasonContentView addSubview:self.drawbackStateTextView];
+        
+        self.contentPlaceholderLabel = [[UILabel alloc]initWithFrame:CGRectMake(ODLeftMargin, 10, kScreenSize.width-35, 20)];
+        self.contentPlaceholderLabel.text = @"请输入适当的退款理由";
+        self.contentPlaceholderLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+        self.contentPlaceholderLabel.font = [UIFont systemFontOfSize:14];
+        self.contentPlaceholderLabel.userInteractionEnabled = NO;
+        [self.drawbackStateTextView addSubview:self.contentPlaceholderLabel];
+        
+        
     }
     return _drawbackStateView;
 }
@@ -402,7 +456,22 @@
     }
 }
 
-#pragma mark - 提交点击事件
+#pragma mark - 拒绝 按钮点击事件
+- (void)refuseButtonClick:(UIButton *)button
+{
+
+    
+}
+
+#pragma mark - 接受 按钮点击事件
+- (void)receiveButtonClick:(UIButton *)button
+{
+
+    
+}
+
+
+#pragma mark - 提交 按钮点击事件
 -(void)releaseButtonClick:(UIButton *)button
 {
     if (self.isSelectedReasonOne) {
@@ -422,10 +491,57 @@
         [self releaseDrawbackRequest];
     }
     if (self.isSelectedReasonOther) {
-        self.drawbackReason = self.drawbackReasonOtherLabel.text;
+        self.drawbackReason = self.drawbackStateTextView.text;
         [self releaseDrawbackRequest];
     }
 }
+
+- (void)refuseDrawbackRequest
+{
+
+    self.managerRefuse = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weakSelf
+    [self.managerRefuse GET:ODRefuseDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已拒绝"];
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+    }];
+}
+
+- (void)receiveDrawbackRequest
+{
+
+    self.managerReceive = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weakSelf
+    [self.managerReceive GET:ODReceiveDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已接受"];
+            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+        }else{
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
+        }
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+    }];
+}
+
 
 - (void)releaseDrawbackRequest{
     

@@ -16,16 +16,19 @@
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 
-@property (nonatomic, strong) UILabel *drawbackMoneyLabel;
-
 // 退款原因样式 YES：选择原因
 @property (nonatomic, assign) BOOL isSelectReason;
 // 是否需要 发布 按钮
 @property (nonatomic, assign) BOOL isRelease;
+// 是否需要 拒绝 与 接收 按钮
+@property (nonatomic, assign) BOOL isRefuseAndReceive;
 // 是否需要 联系客服 界面
 @property (nonatomic, assign) BOOL isService;
 // 一开始是否显示 退款说明
 @property (nonatomic, assign) BOOL isDrawbackState;
+
+@property (nonatomic, strong) UILabel *drawbackMoneyLabel;
+@property (nonatomic, strong) UILabel *drawbackMoneyNumberLabel;
 
 @property (nonatomic, strong) UILabel *drawbackReasonLabel;
 @property (nonatomic, strong) UIView *drawbackReasonContentView;
@@ -55,6 +58,7 @@
 @property (nonatomic, strong) UILabel *drawbackStateLabel;
 @property (nonatomic, strong) UIView *drawbackStateContentView;
 @property (nonatomic, strong) UITextView *drawbackStateTextView;
+@property (nonatomic, strong) UILabel *contentPlaceholderLabel;
 
 @property (nonatomic, strong) UILabel *contactServiceLabel;
 @property (nonatomic, strong) UIView *servicePhoneView;
@@ -66,15 +70,24 @@
 
 @property (nonatomic, strong) UIButton *releaseButton;
 
+@property (nonatomic, strong) UIButton *refuseButton;
+@property (nonatomic, strong) UIButton *receiveButton;
+
 
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property (nonatomic, strong) AFHTTPRequestOperationManager *managerRefuse;
+@property (nonatomic, strong) AFHTTPRequestOperationManager *managerReceive;
+
 
 @property (nonatomic, copy) NSString *darwbackMoney;
 @property (nonatomic, copy) NSString *order_id;
 @property (nonatomic, copy) NSString *servicePhone;
 @property (nonatomic, copy) NSString *serviceTime;
+@property (nonatomic, copy) NSString *customerService;
 
 @property (nonatomic, copy) NSString *drawbackReason;
+
+@property (nonatomic, copy) NSString *drawbackState;
 
 
 @end
