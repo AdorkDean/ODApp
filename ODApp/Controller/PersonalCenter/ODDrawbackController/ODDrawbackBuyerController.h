@@ -9,7 +9,7 @@
 #import "ODBaseViewController.h"
 
 
-@interface ODDrawbackBuyerController : ODBaseViewController<UITextFieldDelegate>
+@interface ODDrawbackBuyerController : ODBaseViewController<UITextViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 
@@ -22,7 +22,17 @@
 @property (nonatomic, strong) UILabel *drawbackReasonFourLabel;
 @property (nonatomic, strong) UILabel *drawbackReasonOtherLabel;
 
+@property (nonatomic, strong) UIButton *drawbackReasonOneButton;
+@property (nonatomic, strong) UIButton *drawbackReasonTwoButton;
+@property (nonatomic, strong) UIButton *drawbackReasonThreeButton;
+@property (nonatomic, strong) UIButton *drawbackReasonFourButton;
+@property (nonatomic, strong) UIButton *drawbackReasonOtherButton;
+
+@property (nonatomic, strong) UIView *placeView;
+
 @property (nonatomic, strong) UILabel *drawbackStateLabel;
-@property (nonatomic, strong) UITextField *drawbackStateTextField;
+@property (nonatomic, strong) UITextView *drawbackStateTextView;
+@property (nonatomic, strong) UILabel *contentPlaceholderLabel;
+
 
 @end

@@ -379,6 +379,8 @@
                 if (weakSelf.myBlock) {
                     weakSelf.myBlock([NSString stringWithFormat:@"accept"]);
                 }
+                [weakSelf.picArray removeAllObjects];
+                [weakSelf joiningTogetherParmeters];
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"接受成功"];
                 [weakSelf.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
                 [weakSelf.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
