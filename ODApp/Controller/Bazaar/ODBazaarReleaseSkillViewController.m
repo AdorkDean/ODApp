@@ -259,7 +259,6 @@
     NSDictionary *parameter = @{@"File":str};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushImageWithUrl:kPushImageUrl parameter:signParameter];
-    
 }
 
 //上传图片返回数据
@@ -277,8 +276,6 @@
             NSString *str = result[@"File"];
             [weakSelf.strArray addObject:str];
             [weakSelf reloadImageButtons];
-            NSLog(@"%@",weakSelf.strArray);
-            
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"error");
@@ -471,12 +468,12 @@
     label.font = [UIFont systemFontOfSize:14];
     [self.timeView addSubview:label];
     
-    UILabel *setLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-85, 15, 50, 20)];
-    setLabel.text = @"请设置";
-    setLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-    setLabel.font = [UIFont systemFontOfSize:14];
-    setLabel.textAlignment = NSTextAlignmentRight;
-    [self.timeView addSubview:setLabel];
+    self.setLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-95, 15, 60, 20)];
+    self.setLabel.text = @"请设置";
+    self.setLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.setLabel.font = [UIFont systemFontOfSize:14];
+    self.setLabel.textAlignment = NSTextAlignmentRight;
+    [self.timeView addSubview:self.setLabel];
     
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-27.5, 20, 10, 10)];
     imageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
@@ -489,6 +486,11 @@
 -(void)serviceTimeClick:(UITapGestureRecognizer *)gesture
 {
     ODBazaarReleaseSkillTimeViewController *timeController = [[ODBazaarReleaseSkillTimeViewController alloc]init];
+    timeController.myBlock = ^(NSMutableArray *array){
+        self.timeArray = [[NSMutableArray alloc]init];
+        self.timeArray = array;
+        self.setLabel.text = @"设置完成";
+    };
     [self.navigationController pushViewController:timeController animated:YES];
 }
 
@@ -504,7 +506,18 @@
 
 -(void)releaseButtonClick:(UIButton *)button
 {
-    NSDictionary *parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":@"2",@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":@"",@"imgs":@"",@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+    NSString *imageStr = [[NSString alloc] init];
+    for (NSInteger i = 0; i < self.strArray.count; i++) {
+        if (i==0) {
+            imageStr = self.strArray[i];
+        }else{
+            NSString *str = self.strArray[i];
+            imageStr = [[imageStr stringByAppendingString:@"|"] stringByAppendingString:str];
+        }
+    }
+
+    NSLog(@"--------%@,,,,,,%@",self.timeArray,[self.timeArray description]);
+    NSDictionary *parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":@"2",@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter];
 }
@@ -512,11 +525,14 @@
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//        if ([responseObject[@"status"]isEqualToString:@"success"]) {
+//            NSLog(@"%@",responseObject);
+//        }
         
+         NSLog(@"%@",responseObject);
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+        NSLog(@"%@",error.debugDescription);
     }];
 }
 
@@ -539,16 +555,14 @@
             self.isHaveDian = NO;
         }
         if ([string length] > 0) {
-            unichar single = [string characterAtIndex:0];//当前输入的字符
-            if ((single >= '0' && single <= '9') || single == '.') {//数据格式正确
-                //首字母不能为小数点
+            unichar single = [string characterAtIndex:0];
+            if ((single >= '0' && single <= '9') || single == '.') {
                 if([textField.text length] == 0){
                     if(single == '.') {
                         [textField.text stringByReplacingCharactersInRange:range withString:@""];
                         return NO;
                     }
                 }
-                //输入的字符是否是小数点
                 if (single == '.') {
                     if(!self.isHaveDian){
                         self.isHaveDian = YES;
@@ -558,7 +572,7 @@
                         return NO;
                     }
                 }
-            }else{//输入的数据格式不正确
+            }else{
                 [textField.text stringByReplacingCharactersInRange:range withString:@""];
                 return NO;
             }

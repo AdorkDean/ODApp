@@ -21,5 +21,5 @@
 @property(nonatomic)NSInteger index1;
 @property(nonatomic)NSInteger index2;
 @property(nonatomic)NSInteger index3;
-
+@property(nonatomic,copy)void(^myBlock)(NSMutableArray *array);
 @end

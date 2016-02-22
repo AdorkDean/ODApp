@@ -46,7 +46,10 @@
 
 -(void)rightItmeClick:(UIButton *)button
 {
-    
+    if(self.myBlock) {
+        self.myBlock(self.dataArray);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(void)createTimeView
@@ -95,9 +98,9 @@
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             [weakSelf.dataArray addObjectsFromArray:dict[@"result"]];
   
-            for (NSInteger i = 0; i < self.roundViews.count; i++)
+            for (NSInteger i = 0; i < weakSelf.roundViews.count; i++)
             {
-                ODRoundTimeDrawView *view = self.roundViews[i];
+                ODRoundTimeDrawView *view = weakSelf.roundViews[i];
                 view.firstTimeIsFree = weakSelf.dataArray[i * 3][@"status"];
                 view.secondTimeIsFree = weakSelf.dataArray[i * 3 + 1][@"status"];
                 view.thirdTimeIsFree = weakSelf.dataArray[i * 3 + 2][@"status"];

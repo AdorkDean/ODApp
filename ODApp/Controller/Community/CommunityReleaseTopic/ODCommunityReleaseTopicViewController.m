@@ -394,6 +394,7 @@ NSString *topicContentText = @"";
     }
     NSDictionary *parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"tag_ids":tag_ids,@"imgs":imageStr,@"city_id":@"321",@"open_id":[ODUserInformation sharedODUserInformation].openID};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    NSLog(@"%@",signParameter);
     [self pushDataWithUrl:kCommunityReleaseBbsUrl parameter:signParameter];
 }
 
