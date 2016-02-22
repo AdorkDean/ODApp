@@ -17,10 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"退款";
-//    self.isSelectReason = NO;
-//    self.isService = NO;
+//    self.isSelectReason = YES;
+    self.isService = YES;
 //    self.isRelease = YES;
-//    self.isDrawbackState = NO;
+    self.isDrawbackState = YES;
     [self createScrollView];
 }
 
@@ -39,7 +39,7 @@
     if (self.isSelectReason) {
         drawbackReasonHeight = (drawBackHeight + 1) * 5 - 1;
     }
-    else{    
+    else{
        drawbackReasonHeight = drawBackHeight;
     }
     
@@ -155,12 +155,18 @@
         self.drawbackReasonContentLabel.textAlignment = NSTextAlignmentLeft;
         [self.drawbackReasonContentView addSubview:self.drawbackReasonContentLabel];
     }
+    
+    float serviceGetMaxY;
     if (self.isDrawbackState) {
+        serviceGetMaxY = CGRectGetMaxY(self.drawbackReasonContentView.frame) + 22 + 150;
         [self drawbackStateView];
+    }
+    else{
+        serviceGetMaxY = CGRectGetMaxY(self.drawbackReasonContentView.frame);
     }
     
     if (self.isService) {
-        self.contactServiceLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonContentView.frame), KScreenWidth, 22)];
+        self.contactServiceLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, serviceGetMaxY, KScreenWidth, 22)];
         self.contactServiceLabel.text = @"联系客服";
         self.contactServiceLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
         self.contactServiceLabel.font = [UIFont systemFontOfSize:12];

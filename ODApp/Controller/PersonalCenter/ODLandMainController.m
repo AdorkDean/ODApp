@@ -28,6 +28,7 @@
 #import "ODGiveOpinionController.h"
 #import "ODOperationController.h"
 #import "ODBalanceController.h"
+#import "ODMySellController.h"
 @interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
@@ -146,6 +147,9 @@
         
         [cell.releaseButton addTarget:self action:@selector(releaseAction:) forControlEvents:UIControlEventTouchUpInside];
 
+        [cell.sellButton addTarget:self action:@selector(mySellAction:) forControlEvents:UIControlEventTouchUpInside];
+
+        
         
         return cell;
         
@@ -194,6 +198,15 @@
         return cell;
         
     }
+}
+
+
+- (void)mySellAction:(UIButton *)sender
+{
+    
+    ODMySellController *vc = [[ODMySellController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 
@@ -318,29 +331,7 @@
         
         
     }
-    //    else if (indexPath.section ==8) {
-    //
-    //        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否退出登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    //        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    //
-    //            ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-    //            ;
-    //            tabBar.selectedIndex = 0;
-    //            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    //
-    //            //清空数据
-    //            [ODUserInformation sharedODUserInformation].openID = @"";
-    //            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    //            [user setObject:@"" forKey:KUserDefaultsOpenId];
-    //
-    //            [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0 title:@"已退出登录"];
-    //
-    //            tabBar.selectedIndex = tabBar.currentIndex;
-    //    }]];
-    //        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    //        [self presentViewController:alert animated:YES completion:nil];
-    //    }
-}
+   }
 
 
 
