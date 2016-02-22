@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"退款";
-
+    self.view.userInteractionEnabled = YES;
     [self createScrollView];
 }
 
@@ -268,7 +268,7 @@
         self.receiveButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         [self.receiveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.receiveButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-        [self.releaseButton addTarget:self action:@selector(receiveButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.receiveButton addTarget:self action:@selector(receiveButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.receiveButton];
     }
 }
@@ -497,7 +497,12 @@
 {
 
     self.managerRefuse = [AFHTTPRequestOperationManager manager];
-    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason};
+    
+    
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+    
+    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason
+                                , @"open_id":openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weakSelf
@@ -506,7 +511,7 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已拒绝"];
-            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }else{
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
         }
@@ -520,7 +525,12 @@
 {
 
     self.managerReceive = [AFHTTPRequestOperationManager manager];
-    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason};
+    
+    
+      NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+    
+    
+    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason ,@"open_id":openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weakSelf
@@ -529,7 +539,7 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已接受"];
-            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }else{
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
         }
@@ -543,7 +553,13 @@
 - (void)releaseDrawbackRequest{
     
     self.manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason};
+    
+    
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+
+    
+    
+    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason, @"open_id":openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weakSelf
@@ -552,7 +568,7 @@
 
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"申请退款成功"];
-            [weakSelf.navigationController popToRootViewControllerAnimated:YES];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }else{
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
         }

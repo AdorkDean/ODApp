@@ -293,12 +293,31 @@
 -(void)reasonAction:(UIButton *)sender
 {
     
+    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    
+    ODOrderDetailModel *model = self.dataArray[0];
+    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
+    vc.order_id = self.order_id;
+    vc.drawbackReason = model.reason;
+    vc.isService = YES;
+    vc.servicePhone = [NSString stringWithFormat:@"%@" , model.tel400];
+    vc.serviceTime = model.tel_msg;
+    vc.customerService = @"服务";
+    
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+
+    
     
     
 }
 // 确认完成
 -(void)confirmAction:(UIButton *)sender
 {
+    
+    
+    
     
 }
 
@@ -308,6 +327,24 @@
 {
     
 }
+
+// 申请退款
+- (void)refundAction:(UIButton *)sender
+{
+    
+    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    
+    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
+    vc.order_id = self.order_id;
+    vc.isSelectReason = YES;
+    vc.isRelease = YES;
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
 
 
 // 处理退款
@@ -419,23 +456,6 @@
     
 }
 
-
-// 申请退款
-- (void)refundAction:(UIButton *)sender
-{
-    
-    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
-    
-    
-    ODOrderDetailModel *model = self.dataArray[0];
-    
-    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
-    vc.order_id = self.order_id;
-    vc.servicePhone = model.tel_msg;
-
-       [self.navigationController pushViewController:vc animated:YES];
-    
-}
 
 
 
