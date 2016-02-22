@@ -143,6 +143,8 @@
 		C6522A4E1C78652B00C210EE /* ODWithdrawalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6522A491C78652B00C210EE /* ODWithdrawalCell.xib */; };
 		C6522A4F1C78652B00C210EE /* ODWithdrawalView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A4B1C78652B00C210EE /* ODWithdrawalView.m */; };
 		C6522A501C78652B00C210EE /* ODWithdrawalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C6522A4C1C78652B00C210EE /* ODWithdrawalView.xib */; };
+		C6522A541C7880E900C210EE /* ODFindFavorableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A531C7880E900C210EE /* ODFindFavorableController.m */; };
+		C6522A571C78877E00C210EE /* ODDrawbackBuyerOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = C6522A561C78877E00C210EE /* ODDrawbackBuyerOneController.m */; };
 		C66B881B1C740EBC00F60E3D /* ODLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C66B88191C740EBC00F60E3D /* ODLocationCell.m */; };
 		C66B881C1C740EBC00F60E3D /* ODLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C66B881A1C740EBC00F60E3D /* ODLocationCell.xib */; };
 		C66B88201C741D0A00F60E3D /* ODFindJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = C66B881F1C741D0A00F60E3D /* ODFindJobController.m */; };
@@ -574,6 +576,10 @@
 		C6522A4A1C78652B00C210EE /* ODWithdrawalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODWithdrawalView.h; path = ODOrderView/ODWithdrawalView.h; sourceTree = "<group>"; };
 		C6522A4B1C78652B00C210EE /* ODWithdrawalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODWithdrawalView.m; path = ODOrderView/ODWithdrawalView.m; sourceTree = "<group>"; };
 		C6522A4C1C78652B00C210EE /* ODWithdrawalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ODWithdrawalView.xib; path = ODOrderView/ODWithdrawalView.xib; sourceTree = "<group>"; };
+		C6522A521C7880E900C210EE /* ODFindFavorableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODFindFavorableController.h; sourceTree = "<group>"; };
+		C6522A531C7880E900C210EE /* ODFindFavorableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODFindFavorableController.m; sourceTree = "<group>"; };
+		C6522A551C78877E00C210EE /* ODDrawbackBuyerOneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDrawbackBuyerOneController.h; sourceTree = "<group>"; };
+		C6522A561C78877E00C210EE /* ODDrawbackBuyerOneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDrawbackBuyerOneController.m; sourceTree = "<group>"; };
 		C66B88181C740EBC00F60E3D /* ODLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLocationCell.h; sourceTree = "<group>"; };
 		C66B88191C740EBC00F60E3D /* ODLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLocationCell.m; sourceTree = "<group>"; };
 		C66B881A1C740EBC00F60E3D /* ODLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODLocationCell.xib; sourceTree = "<group>"; };
@@ -1597,6 +1603,8 @@
 			children = (
 				C6522A1A1C784B6600C210EE /* ODDrawbackBuyerController.h */,
 				C6522A1B1C784B6600C210EE /* ODDrawbackBuyerController.m */,
+				C6522A551C78877E00C210EE /* ODDrawbackBuyerOneController.h */,
+				C6522A561C78877E00C210EE /* ODDrawbackBuyerOneController.m */,
 			);
 			name = ODDrawback;
 			sourceTree = "<group>";
@@ -1621,6 +1629,15 @@
 				C6522A361C78648400C210EE /* ODWithdrawalDetailController.m */,
 			);
 			path = ODBalanceController;
+			sourceTree = "<group>";
+		};
+		C6522A511C7880B300C210EE /* ODFindFavorableController */ = {
+			isa = PBXGroup;
+			children = (
+				C6522A521C7880E900C210EE /* ODFindFavorableController.h */,
+				C6522A531C7880E900C210EE /* ODFindFavorableController.m */,
+			);
+			name = ODFindFavorableController;
 			sourceTree = "<group>";
 		};
 		C66B88171C740E6000F60E3D /* ODLocationView */ = {
@@ -1805,6 +1822,7 @@
 			isa = PBXGroup;
 			children = (
 				D4D0710A1C59B9FA008527C9 /* ODHomeFoundController */,
+				C6522A511C7880B300C210EE /* ODFindFavorableController */,
 				C66B881D1C741CCD00F60E3D /* ODFindJobController */,
 				D4F76DD01C61B04700D59F02 /* ODCollectioncController */,
 				C6F97B3F1C619B7B0037975C /* ODLocationController */,
@@ -2698,6 +2716,7 @@
 				9DEDCF591C64B3F4003015C6 /* ODBazaarReleaseSkillTimeModel.m in Sources */,
 				D4D0755E1C5DED01008527C9 /* ODBarButton.m in Sources */,
 				D4D0738B1C59B9FA008527C9 /* ODMyOrderRecordController.m in Sources */,
+				C6522A541C7880E900C210EE /* ODFindFavorableController.m in Sources */,
 				C64D45FA1C5F8C6F003BFFA0 /* MBProgressHUD.m in Sources */,
 				9DBF7EF51C75B4AF0085875E /* ODPaySuccessView.m in Sources */,
 				D4F76D8E1C61AE8C00D59F02 /* ODAddAddressController.m in Sources */,
@@ -2814,6 +2833,7 @@
 				D4D075071C59B9FA008527C9 /* CenterYuYueView.m in Sources */,
 				9DEDCF6B1C64B3FC003015C6 /* ODBazaarDetailCollectionCell.m in Sources */,
 				9D1F81031C76EBE500FC9C2C /* ODOperationSeccondCell.m in Sources */,
+				C6522A571C78877E00C210EE /* ODDrawbackBuyerOneController.m in Sources */,
 				9DF2E9861C74481700F77976 /* ODApplyListViewController.m in Sources */,
 				C6522A371C78648400C210EE /* ODBalanceController.m in Sources */,
 				D4F76D4C1C605EA700D59F02 /* ODActivityListModel.m in Sources */,

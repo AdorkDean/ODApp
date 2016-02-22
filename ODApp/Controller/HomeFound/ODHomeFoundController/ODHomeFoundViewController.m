@@ -31,6 +31,8 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    [ODUserInformation sharedODUserInformation].cityID = @"1";
+    
     self.pictureArray = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
     
@@ -43,8 +45,6 @@
     [self createCollectionView];
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
-    
-    [ODUserInformation sharedODUserInformation].cityID = @"1";
 
     [MAMapServices sharedServices].apiKey = ODLocationApiKey;
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
@@ -212,7 +212,7 @@
 - (void)findFavorableButtonClick:(UIButton *)button
 {
     
-    ODDrawbackBuyerController *vc = [[ODDrawbackBuyerController alloc] init];
+    ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -248,6 +248,9 @@
 
 - (void)moreButtonClick:(UIButton *)button
 {
+    
+    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
     
     [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"敬请期待"];
 }
