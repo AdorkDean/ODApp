@@ -14,6 +14,7 @@
 #import "UIButton+WebCache.h"
 #import "ODPayController.h"
 #import "ODCancelOrderView.h"
+#import "ODDrawbackBuyerOneController.h"
 @interface ODSecondOrderDetailController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate>
 
 @property (nonatomic , strong) UITableView *tableView;
@@ -138,14 +139,38 @@
         refundButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
         refundButton.backgroundColor = [UIColor redColor];
         [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
-         refundButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        refundButton.titleLabel.font=[UIFont systemFontOfSize:13];
         [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [refundButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
+        [refundButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:refundButton];
         
         
         
-    }else if ([status isEqualToString:@"1"]) {
+    }else if ([status isEqualToString:@"2"]) {
+        
+        
+        UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
+        refundButton.backgroundColor = [UIColor redColor];
+        [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
+        refundButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [refundButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:refundButton];
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    else if ([status isEqualToString:@"1"]) {
         
         
         
@@ -174,8 +199,8 @@
         dealRefundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
         dealRefundButton.backgroundColor = [UIColor redColor];
         [dealRefundButton setTitle:@"处理退款" forState:UIControlStateNormal];
-          dealRefundButton.titleLabel.font=[UIFont systemFontOfSize:13];
-          [dealRefundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        dealRefundButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        [dealRefundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [dealRefundButton addTarget:self action:@selector(dealRefundAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:dealRefundButton];
         
@@ -189,8 +214,8 @@
         evaluationButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
         evaluationButton.backgroundColor = [UIColor redColor];
         [evaluationButton setTitle:@"评价" forState:UIControlStateNormal];
-          evaluationButton.titleLabel.font=[UIFont systemFontOfSize:13];
-       [evaluationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        evaluationButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        [evaluationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [evaluationButton addTarget:self action:@selector(evaluationAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:evaluationButton];
         
@@ -205,8 +230,8 @@
         refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
         refundButton.backgroundColor = [UIColor lightGrayColor];
         [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
-          refundButton.titleLabel.font=[UIFont systemFontOfSize:13];
-          [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        refundButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [refundButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:refundButton];
         
@@ -216,8 +241,8 @@
         confirmButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
         confirmButton.backgroundColor = [UIColor redColor];
         [confirmButton setTitle:@"确认完成" forState:UIControlStateNormal];
-          confirmButton.titleLabel.font=[UIFont systemFontOfSize:13];
-          [confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        confirmButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        [confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [confirmButton addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:confirmButton];
         
@@ -233,8 +258,8 @@
         reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
         reasonButton.backgroundColor = [UIColor redColor];
         [reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
-          reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
-          [reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        [reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:reasonButton];
         
@@ -256,7 +281,6 @@
         
         
     }
-
     
     
     
@@ -403,8 +427,16 @@
 - (void)refundAction:(UIButton *)sender
 {
     
+    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
     
     
+    ODOrderDetailModel *model = self.dataArray[0];
+    
+    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
+    vc.order_id = self.order_id;
+    vc.servicePhone = model.tel_msg;
+
+       [self.navigationController pushViewController:vc animated:YES];
     
 }
 

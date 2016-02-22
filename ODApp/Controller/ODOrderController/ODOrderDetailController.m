@@ -14,7 +14,7 @@
 #import "UIButton+WebCache.h"
 #import "ODPayController.h"
 #import "ODCancelOrderView.h"
-
+#import "ODDrawbackBuyerOneController.h"
 @interface ODOrderDetailController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate>
 
 @property (nonatomic , strong) UITableView *tableView;
@@ -130,7 +130,7 @@
         [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
         refundButton.titleLabel.font=[UIFont systemFontOfSize:13];
         [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [refundButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
+        [refundButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:refundButton];
         
         
@@ -144,7 +144,7 @@
         [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
         refundButton.titleLabel.font=[UIFont systemFontOfSize:13];
         [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [refundButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
+        [refundButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:refundButton];
 
         
@@ -317,6 +317,25 @@
 }
 
 
+// 申请退款
+- (void)refundAction:(UIButton *)sender
+{
+    
+    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    
+    
+    ODOrderDetailModel *model = self.dataArray[0];
+    
+    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
+    vc.order_id = self.order_id;
+    vc.servicePhone = model.tel_msg;
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
 #pragma mark - UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
@@ -407,14 +426,6 @@
     
 }
 
-// 申请退款
-- (void)refundAction:(UIButton *)sender
-{
-    
-    
-    
-    
-}
 
 - (void)cancelView:(UIButton *)sender
 {
