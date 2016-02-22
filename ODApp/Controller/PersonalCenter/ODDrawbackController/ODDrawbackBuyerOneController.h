@@ -20,11 +20,11 @@
 
 // 退款原因样式 YES：选择原因
 @property (nonatomic, assign) BOOL isSelectReason;
-// 是否需要“发布”按钮
+// 是否需要 发布 按钮
 @property (nonatomic, assign) BOOL isRelease;
-// 是否需要联系客服界面
+// 是否需要 联系客服 界面
 @property (nonatomic, assign) BOOL isService;
-// 一开始是否显示退款说明
+// 一开始是否显示 退款说明
 @property (nonatomic, assign) BOOL isDrawbackState;
 
 @property (nonatomic, strong) UILabel *drawbackReasonLabel;

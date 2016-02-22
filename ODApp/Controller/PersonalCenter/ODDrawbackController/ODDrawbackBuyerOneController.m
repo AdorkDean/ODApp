@@ -37,11 +37,10 @@
     
     float drawbackReasonHeight;
     if (self.isSelectReason) {
-        drawbackReasonHeight = drawBackHeight;
-    }
-    else{
-    
         drawbackReasonHeight = (drawBackHeight + 1) * 5 - 1;
+    }
+    else{    
+       drawbackReasonHeight = drawBackHeight;
     }
     
     self.drawbackMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, drawBackHeight)];
@@ -65,15 +64,6 @@
     
     
     if (self.isSelectReason) {
-        self.drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, drawBackHeight)];
-        self.drawbackReasonContentLabel.text = @"其它";
-        self.drawbackReasonContentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-        self.drawbackReasonContentLabel.font = [UIFont systemFontOfSize:13.5];
-        self.drawbackReasonContentLabel.textAlignment = NSTextAlignmentLeft;
-        [self.drawbackReasonContentView addSubview:self.drawbackReasonContentLabel];
-    }
-    else
-    {
         
         float reasonLabelLeftMargin = 25;
         
@@ -102,7 +92,7 @@
         self.drawbackReasonTwoButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonOneLabel.frame) + 1 + 12.5, 20, 20)];
         [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
         [self.drawbackReasonTwoButton addTarget:self action:@selector(drawbackReasonTwoButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-
+        
         [self.drawbackReasonContentView addSubview:self.drawbackReasonTwoButton];
         
         
@@ -117,7 +107,7 @@
         self.drawbackReasonThreeButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonTwoLabel.frame) + 1 + 12.5, 20, 20)];
         [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
         [self.drawbackReasonThreeButton addTarget:self action:@selector(drawbackReasonThreeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-
+        
         [self.drawbackReasonContentView addSubview:self.drawbackReasonThreeButton];
         
         
@@ -132,7 +122,7 @@
         self.drawbackReasonFourButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonThreeLabel.frame) + 1 + 12.5, 20, 20)];
         [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
         [self.drawbackReasonFourButton addTarget:self action:@selector(drawbackReasonFourButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-
+        
         [self.drawbackReasonContentView addSubview:self.drawbackReasonFourButton];
         
         
@@ -147,7 +137,7 @@
         self.drawbackReasonOtherButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonFourLabel.frame) + 1 + 12.5, 20, 20)];
         [self.drawbackReasonOtherButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
         [self.drawbackReasonOtherButton addTarget:self action:@selector(drawbackReasonOtherButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-
+        
         [self.drawbackReasonContentView addSubview:self.drawbackReasonOtherButton];
         
         for (int i = 1; i < 5; i++) {
@@ -156,11 +146,18 @@
             [self.drawbackReasonContentView addSubview:self.drawbackReasonLineView];
         }
     }
-    
+    else
+    {
+        self.drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, drawBackHeight)];
+        self.drawbackReasonContentLabel.text = @"其它";
+        self.drawbackReasonContentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        self.drawbackReasonContentLabel.font = [UIFont systemFontOfSize:13.5];
+        self.drawbackReasonContentLabel.textAlignment = NSTextAlignmentLeft;
+        [self.drawbackReasonContentView addSubview:self.drawbackReasonContentLabel];
+    }
     if (self.isDrawbackState) {
         [self drawbackStateView];
     }
-    
     
     if (self.isService) {
         self.contactServiceLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonContentView.frame), KScreenWidth, 22)];
