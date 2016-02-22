@@ -54,4 +54,24 @@
     }
    
 }
+
+- (NSString *)descriptionWithLocale:(id)locale{
+    // 1.定义字符创保存拼接结果
+    NSMutableString *strM = [NSMutableString string];
+    [strM appendFormat:@"{\n"];
+    
+    // 2.遍历字典，拼接字典中的键值对
+    [self enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[NSString class]])
+        {
+            obj = [NSString stringWithFormat:@"\"%@\"",obj];
+        }
+        [strM appendFormat:@"\t\"%@\":%@\n",key,obj];
+    }];
+    
+    [strM appendFormat:@"}\n"];
+    return strM;
+}
+
+
 @end

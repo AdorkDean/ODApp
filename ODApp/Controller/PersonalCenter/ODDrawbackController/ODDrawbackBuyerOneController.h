@@ -18,9 +18,13 @@
 
 @property (nonatomic, strong) UILabel *drawbackMoneyLabel;
 
+// 退款原因样式 YES：选择原因
 @property (nonatomic, assign) BOOL isSelectReason;
+// 是否需要 发布 按钮
 @property (nonatomic, assign) BOOL isRelease;
+// 是否需要 联系客服 界面
 @property (nonatomic, assign) BOOL isService;
+// 一开始是否显示 退款说明
 @property (nonatomic, assign) BOOL isDrawbackState;
 
 @property (nonatomic, strong) UILabel *drawbackReasonLabel;
@@ -47,6 +51,7 @@
 @property (nonatomic, strong) UIButton *drawbackReasonFourButton;
 @property (nonatomic, strong) UIButton *drawbackReasonOtherButton;
 
+@property (nonatomic, strong) UIView *drawbackStateView;
 @property (nonatomic, strong) UILabel *drawbackStateLabel;
 @property (nonatomic, strong) UIView *drawbackStateContentView;
 @property (nonatomic, strong) UITextView *drawbackStateTextView;

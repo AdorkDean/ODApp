@@ -22,5 +22,4 @@
 
 - (void)setWithApplyModel:(ODApplyModel *)model;
 - (void)setWithLikeModel:(ODLikeModel *)model;
-
 @end

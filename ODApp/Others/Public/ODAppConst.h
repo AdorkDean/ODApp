@@ -147,3 +147,5 @@ UIKIT_EXTERN NSString * const kCallbackUrl;
 UIKIT_EXTERN NSString * const kCollectionUrl;
 UIKIT_EXTERN NSString * const kBalanceUrl;
 UIKIT_EXTERN NSString * const kBalanceListUrl;
+UIKIT_EXTERN NSString * const kMySellListUrl;
+UIKIT_EXTERN NSString * const kDeliveryUrl;
