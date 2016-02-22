@@ -17,10 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"退款";
-    self.isSelectReason = NO;
-    self.isDrawbackState = YES;
-    self.isService = YES;
-    self.isRelease = YES;
+//    self.isSelectReason = NO;
+//    self.isService = NO;
+//    self.isRelease = YES;
+//    self.isDrawbackState = NO;
     [self createScrollView];
 }
 
@@ -46,7 +46,7 @@
     
     self.drawbackMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, drawBackHeight)];
     self.drawbackMoneyLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-    self.drawbackMoneyLabel.text = [NSString stringWithFormat:@"您的退款金额：%@元",self.darwbackMoney];
+    self.drawbackMoneyLabel.text = [NSString stringWithFormat:@"您的退款金额：%@",self.darwbackMoney];
     self.drawbackMoneyLabel.font = [UIFont systemFontOfSize:13.5];
     self.drawbackMoneyLabel.textAlignment = NSTextAlignmentCenter;
     self.drawbackMoneyLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
@@ -158,23 +158,7 @@
     }
     
     if (self.isDrawbackState) {
-        self.drawbackStateLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonContentView.frame), KScreenWidth, 22)];
-        self.drawbackStateLabel.text = @"退款说明";
-        self.drawbackStateLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-        self.drawbackStateLabel.font = [UIFont systemFontOfSize:12];
-        self.drawbackStateLabel.textAlignment = NSTextAlignmentLeft;
-        [self.scrollView addSubview:self.drawbackStateLabel];
-        
-        
-        self.drawbackReasonContentView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.drawbackStateLabel.frame), KScreenWidth, 150)];
-        self.drawbackReasonContentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-        [self.scrollView addSubview:self.drawbackReasonContentView];
-        
-        self.drawbackStateTextView = [[UITextView alloc]initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, 150)];
-        self.drawbackStateTextView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-        self.drawbackStateTextView.font = [UIFont systemFontOfSize:12];
-        self.drawbackStateTextView.delegate = self;
-        [self.drawbackReasonContentView addSubview:self.drawbackStateTextView];
+        [self drawbackStateView];
     }
     
     
@@ -245,6 +229,36 @@
     
 }
 
+
+-(UIView *)drawbackStateView
+{
+
+    if (!_drawbackStateView) {
+        _drawbackStateView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.drawbackReasonContentView.frame), KScreenWidth, 22 + 150)];
+        self.servicePhoneView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        [self.scrollView addSubview:_drawbackStateView];
+        
+        self.drawbackStateLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, 22)];
+        self.drawbackStateLabel.text = @"退款说明";
+        self.drawbackStateLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+        self.drawbackStateLabel.font = [UIFont systemFontOfSize:12];
+        self.drawbackStateLabel.textAlignment = NSTextAlignmentLeft;
+        [_drawbackStateView addSubview:self.drawbackStateLabel];
+        
+        self.drawbackReasonContentView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.drawbackStateLabel.frame), KScreenWidth, 150)];
+        self.drawbackReasonContentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        [_drawbackStateView addSubview:self.drawbackReasonContentView];
+        
+        self.drawbackStateTextView = [[UITextView alloc]initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, 150)];
+        self.drawbackStateTextView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        self.drawbackStateTextView.font = [UIFont systemFontOfSize:12];
+        self.drawbackStateTextView.delegate = self;
+        [self.drawbackReasonContentView addSubview:self.drawbackStateTextView];
+    }
+    return _drawbackStateView;
+}
+
+
 #pragma mark - Action
 
 #pragma mark - 退款原因点击事件
@@ -252,6 +266,7 @@
 {
     if (!self.isSelectedReasonOne) {
         [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
+        self.isSelectedReasonOne = !self.isSelectedReasonOne;
         
         if (self.isSelectedReasonTwo) {
             [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
@@ -270,16 +285,14 @@
             self.isSelectedReasonOther = !self.isSelectedReasonOther;
         }
     }
-    else{
-        [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-    }
-    self.isSelectedReasonOne = !self.isSelectedReasonOne;
+    self.drawbackStateView.hidden = YES;
 }
 
 -(void)drawbackReasonTwoButtonClick:(UIButton *)button
 {
     if (!self.isSelectedReasonTwo) {
         [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
+        self.isSelectedReasonTwo = !self.isSelectedReasonTwo;
         
         if (self.isSelectedReasonOne) {
             [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
@@ -298,16 +311,14 @@
             self.isSelectedReasonOther = !self.isSelectedReasonOther;
         }
     }
-    else{
-        [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-    }
-    self.isSelectedReasonTwo = !self.isSelectedReasonTwo;
+    self.drawbackStateView.hidden = YES;
 }
 
 -(void)drawbackReasonThreeButtonClick:(UIButton *)button
 {
     if (!self.isSelectedReasonThree) {
         [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
+        self.isSelectedReasonThree = !self.isSelectedReasonThree;
         
         if (self.isSelectedReasonOne) {
             [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
@@ -326,16 +337,14 @@
             self.isSelectedReasonOther = !self.isSelectedReasonOther;
         }
     }
-    else{
-        [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-    }
-    self.isSelectedReasonThree = !self.isSelectedReasonThree;
+    self.drawbackStateView.hidden = YES;
 }
 
 -(void)drawbackReasonFourButtonClick:(UIButton *)button
 {
     if (!self.isSelectedReasonFour) {
         [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
+        self.isSelectedReasonFour = !self.isSelectedReasonFour;
         
         if (self.isSelectedReasonOne) {
             [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
@@ -354,16 +363,15 @@
             self.isSelectedReasonOther = !self.isSelectedReasonOther;
         }
     }
-    else{
-        [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-    }
-    self.isSelectedReasonFour = !self.isSelectedReasonFour;
+    self.drawbackStateView.hidden = YES;
 }
 
 -(void)drawbackReasonOtherButtonClick:(UIButton *)button
 {
+    
     if (!self.isSelectedReasonOther) {
         [self.drawbackReasonOtherButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
+        self.isSelectedReasonOther = !self.isSelectedReasonOther;
         
         if (self.isSelectedReasonOne) {
             [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
@@ -381,11 +389,14 @@
             [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonFour = !self.isSelectedReasonFour;
         }
+    }    
+    if (self.isSelectedReasonOther) {
+        
+        self.drawbackStateView.hidden = NO;
     }
-    else{
-        [self.drawbackReasonOtherButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
+    else {
+        self.drawbackStateView.hidden = YES;
     }
-    self.isSelectedReasonOther = !self.isSelectedReasonOther;
 }
 
 #pragma mark - 提交点击事件

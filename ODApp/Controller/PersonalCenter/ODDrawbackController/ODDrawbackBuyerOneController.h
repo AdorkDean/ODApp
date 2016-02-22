@@ -47,6 +47,7 @@
 @property (nonatomic, strong) UIButton *drawbackReasonFourButton;
 @property (nonatomic, strong) UIButton *drawbackReasonOtherButton;
 
+@property (nonatomic, strong) UIView *drawbackStateView;
 @property (nonatomic, strong) UILabel *drawbackStateLabel;
 @property (nonatomic, strong) UIView *drawbackStateContentView;
 @property (nonatomic, strong) UITextView *drawbackStateTextView;
