@@ -70,6 +70,7 @@
 {
     
     [self getSkillChangeRequest];
+    [self getScrollViewRequest];
 }
 
 -(NSMutableArray *)mySort:(NSMutableArray *)mArray

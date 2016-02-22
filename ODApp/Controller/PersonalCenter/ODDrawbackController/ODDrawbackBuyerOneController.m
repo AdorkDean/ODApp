@@ -48,7 +48,6 @@
        drawbackReasonHeight = drawBackHeight;
     }
     
-    self.darwbackMoney = @"0.1";
     self.drawbackMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, drawBackHeight)];
     self.drawbackMoneyLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     
@@ -170,6 +169,8 @@
     else
     {
         self.drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, drawBackHeight)];
+        
+        
         self.drawbackReasonContentLabel.text = [NSString stringWithFormat:@"%@",self.drawbackReason];
         self.drawbackReasonContentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackReasonContentLabel.font = [UIFont systemFontOfSize:13.5];
