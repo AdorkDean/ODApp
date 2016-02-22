@@ -148,6 +148,10 @@
    
     [cell setWithApplyModel:model];
     
+    
+    
+    
+    
     return cell;
 }
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
