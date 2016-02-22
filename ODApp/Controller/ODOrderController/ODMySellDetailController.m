@@ -31,6 +31,8 @@
 
 @property (nonatomic , strong) UIButton *deliveryButton;
 @property (nonatomic , strong) UIButton *DealDeliveryButton;
+@property (nonatomic , strong) UIButton *reasonButton;
+
 
 
 @end
@@ -162,8 +164,46 @@
         
         
         
+    }else if ([status isEqualToString:@"-3"]) {
+        
+        self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
+        self.reasonButton.backgroundColor = [UIColor redColor];
+        [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
+        self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.reasonButton];
+        
+        
+        
+    }else if ([status isEqualToString:@"-5"]) {
+        
+        self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
+        self.reasonButton.backgroundColor = [UIColor redColor];
+        [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
+        self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.reasonButton];
+        
+        
+        
     }
 
+
+
+    
+    
+    
+    
+}
+
+
+
+- (void)reasonAction:(UIButton *)sender
+{
     
     
     
@@ -175,6 +215,15 @@
 {
     
     ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    
+       ODOrderDetailModel *model = self.dataArray[0];
+    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
+    vc.order_id = self.orderId;
+    vc.drawbackReason = model.reason;
+    vc.isRefuseAndReceive = YES;
+    
+    
+    
     
     [self.navigationController pushViewController:vc animated:YES];
     
