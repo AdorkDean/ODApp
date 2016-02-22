@@ -459,7 +459,7 @@
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
             }
-            cell.picViewConstraintHeight.constant = width+(width+5)*(model.imgs_small.count/3);
+            cell.picViewConstraintHeight.constant = width+(width+5)*((model.imgs_small.count-1)/3);
         }
     }else{
         for (id vc in cell.picView.subviews) {
@@ -546,15 +546,15 @@
 {
     CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs_small.count==0) {
-        return 180;
+        return 135;
     }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
-        return 180+width;
+        return 135+width;
     }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
-        return 180+2*width+5;
+        return 135+2*width+5;
     }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
-        return 180+3*width+10;
+        return 135+3*width+10;
     }else{
-        return 180+3*width+10;
+        return 135+3*width+10;
     }
 }
 
@@ -627,13 +627,17 @@ updatingLocation:(BOOL)updatingLocation{
 {
     if(response.regeocode != nil)
     {
+        NSString *cityResult;
         //通过AMapReGeocodeSearchResponse对象处理搜索结果
         NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
-        if (result.length == 0) {
+        if (result.length == 0)
+        {
             result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
         }
-        
-        NSString *cityResult = [result substringToIndex:[result length] - 1];
+        else
+        {
+            cityResult = [result substringToIndex:[result length] - 1];
+        }
         
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];

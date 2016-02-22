@@ -24,14 +24,117 @@
     self.count = 1;
     self.refresh = @"";
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationItem.title = @"欧动社区";
+    [self navigationInit];
     [self createRequest];
     [self joiningTogetherParmeters];
     [self createCollectionView];
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(searchButtonClick) image:[UIImage imageNamed:@"search"] highImage:nil];
-    
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(publishButtonClick) image:[UIImage imageNamed:@"plus"] highImage:nil];
+}
 
+#pragma mark - 初始化导航
+-(void)navigationInit
+{
+    self.button = [ODBarButton barButtonWithTarget:self action:@selector(titleButtonClick:) title:@"社区    "];
+    [self.button setImage:[UIImage imageNamed:@"jiantou_icon"] forState:UIControlStateNormal];
+    [self.button.titleLabel setFont:[UIFont systemFontOfSize:ODNavigationTextFont]];
+    [self.button setBarButtonType:(ODBarButtonTypeTextLeft)];
+    self.navigationItem.titleView = self.button;
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(searchButtonClick) image:[UIImage imageNamed:@"search"] highImage:nil];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(publishButtonClick) image:[UIImage imageNamed:@"plus"] highImage:nil];
+}
+
+-(void)titleButtonClick:(UIButton *)button
+{
+    UIViewController *controller = [[UIViewController alloc]init];
+    controller.view.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+    controller.view.layer.borderColor = [UIColor colorWithHexString:@"#000000" alpha:1].CGColor;
+    controller.view.layer.borderWidth = 1;
+    controller.view.layer.cornerRadius = 10;
+
+    NSArray *array = @[@"情感",@"搞笑",@"影视",@"二次元",@"生活",@"明星",@"爱美",@"宠物",@"全部"];
+    for (NSInteger i = 0 ; i < array.count ; i++) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
+        [button setFrame:CGRectMake(0, 30*i, 140, 29)];
+        [button setTitle:array[i] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(titleViewLabelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [controller.view addSubview:button];
+        
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(button.frame)+1, 100, 1)];
+        lineView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        [controller.view addSubview:lineView];
+    }
+    //设置弹出模式
+    controller.modalPresentationStyle = UIModalPresentationPopover;
+    controller.preferredContentSize = CGSizeMake(140, 270);
+    UIPopoverPresentationController *popVC = controller.popoverPresentationController;
+    controller.popoverPresentationController.sourceView = button;
+    controller.popoverPresentationController.sourceRect = button.bounds;
+    popVC.permittedArrowDirections = UIPopoverArrowDirectionUp;
+    popVC.delegate = self;
+    
+    [self presentViewController:controller animated:YES completion:^{
+    }];
+
+}
+
+//如果要想在iPhone上也能弹出泡泡的样式必须要实现下面协议的方法
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
+    
+    return UIModalPresentationNone;
+}
+-(void)titleViewLabelButtonClick:(UIButton *)button
+{
+    if ([button.titleLabel.text isEqualToString:@"情感"]) {
+        [self.button setTitle:@"情感" forState:UIControlStateNormal];
+        self.bbsMark = @"情感";
+        self.bbsType = 5;
+        [self joiningTogetherParmeters];
+    }else if ([button.titleLabel.text isEqualToString:@"搞笑"]){
+        [self.button setTitle:@"搞笑" forState:UIControlStateNormal];
+        self.bbsMark = @"搞笑";
+        self.bbsType = 5;
+        [self joiningTogetherParmeters];
+    }else if ([button.titleLabel.text isEqualToString:@"影视"]){
+        [self.button setTitle:@"影视" forState:UIControlStateNormal];
+        self.bbsMark = @"影视";
+        self.bbsType = 5;
+        [self joiningTogetherParmeters];
+    }else if ([button.titleLabel.text isEqualToString:@"二次元"]){
+        [self.button setTitle:@"二次元" forState:UIControlStateNormal];
+        self.bbsMark = @"二次元";
+        self.bbsType = 5;
+        [self joiningTogetherParmeters];
+    }else if ([button.titleLabel.text isEqualToString:@"生活"]){
+        [self.button setTitle:@"生活" forState:UIControlStateNormal];
+        self.bbsMark = @"生活";
+        self.bbsType = 5;
+        [self joiningTogetherParmeters];
+    }else if ([button.titleLabel.text isEqualToString:@"明星"]){
+        [self.button setTitle:@"明星" forState:UIControlStateNormal];
+        self.bbsMark = @"明星";
+        self.bbsType = 5;
+        [self joiningTogetherParmeters];
+    }else if ([button.titleLabel.text isEqualToString:@"爱美"]){
+        [self.button setTitle:@"爱美" forState:UIControlStateNormal];
+        self.bbsMark = @"爱美";
+        self.bbsType = 5;
+        [self joiningTogetherParmeters];
+    }else if ([button.titleLabel.text isEqualToString:@"宠物"]){
+        [self.button setTitle:@"宠物" forState:UIControlStateNormal];
+        self.bbsMark = @"宠物";
+        self.bbsType = 5;
+        [self joiningTogetherParmeters];
+    }else if ([button.titleLabel.text isEqualToString:@"全部"]){
+        [self.button setTitle:@"全部" forState:UIControlStateNormal];
+        self.bbsMark = @"";
+        self.bbsType = 4;
+        [self joiningTogetherParmeters];
+    }
+
+    [self.collectionView.mj_header beginRefreshing];
+    [self dismissViewControllerAnimated:NO completion:^{
+    }];
 }
 
 #pragma mark - 加载更多
@@ -225,7 +328,7 @@
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODCommunityModel *model = self.dataArray[indexPath.row];
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
-    picController.photos = model.imgs;
+    picController.photos = model.imgs_big;
     picController.selectedIndex = button.tag-10*indexPath.row;
     [self.navigationController pushViewController:picController animated:YES];
 }

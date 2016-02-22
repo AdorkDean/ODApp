@@ -9,6 +9,7 @@
 #import "ODBaseViewController.h"
 #import "UIImageView+WebCache.h"
 #import "ODCommunityModel.h"
+#import "ODBazaarPicCollectionViewCell.h"
 
 @interface ODCommunityShowPicViewController : ODBaseViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate>
 

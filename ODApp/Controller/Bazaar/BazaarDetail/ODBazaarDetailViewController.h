@@ -19,6 +19,7 @@
 #import "UIImageView+WebCache.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODOthersInformationController.h"
+#import "ODBazaarDetailEvaluationViewController.h"
 
 @interface ODBazaarDetailViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITextViewDelegate>
 
@@ -42,4 +43,7 @@
 @property(nonatomic,copy)NSString *task_id;
 @property(nonatomic)NSInteger num;
 @property(nonatomic,copy)void(^myBlock)(NSString *del);
+@property(nonatomic,strong)UIView *evaluationView;
+@property(nonatomic,strong)UITextView *evaluationTextView;
+@property(nonatomic,strong)UILabel *placeholderLabel;
 @end

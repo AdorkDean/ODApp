@@ -13,7 +13,7 @@
 #import "ODBazaarReleaseSkillTimeViewController.h"
 #import "MBProgressHUD.h"
 
-@interface ODBazaarReleaseSkillViewController : ODBaseViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate>
+@interface ODBazaarReleaseSkillViewController : ODBaseViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIScrollViewDelegate>
 
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)UITextField *titleTextField;
@@ -27,7 +27,7 @@
 @property(nonatomic,strong)UIView *picView;
 @property(nonatomic,strong)UIView *bottomView;
 @property(nonatomic,strong)UIView *timeView;
-
+@property(nonatomic)BOOL isHaveDian;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,copy)NSString *avatar;
@@ -36,4 +36,5 @@
 @property(nonatomic,strong)NSMutableArray *strArray;
 @property(nonatomic,strong)UIButton *selectedButton;
 @property (nonatomic, strong) MBProgressHUD *hud;
+
 @end

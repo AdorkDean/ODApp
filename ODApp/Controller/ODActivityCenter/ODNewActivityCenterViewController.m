@@ -61,7 +61,11 @@ static NSString * const cellId = @"newActivityCell";
 -(void)requestData
 {
     __weakSelf
-    NSDictionary *parameter = @{@"city_id":[ODUserInformation sharedODUserInformation].cityID};
+    
+    NSString *cityId = [NSString stringWithFormat:@"%@" ,[ODUserInformation sharedODUserInformation].cityID ];
+    
+    
+    NSDictionary *parameter = @{@"city_id":cityId};
     [SVProgressHUD showWithStatus:@"正在加载中。。"];
     [ODHttpTool getWithURL:KActivityListUrl parameters:parameter modelClass:[ODActivityListModel class] success:^(id json)
     {

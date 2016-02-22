@@ -32,6 +32,7 @@
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.scrollView.userInteractionEnabled = YES;
+    self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
 }
 
@@ -447,11 +448,12 @@
     }
 
     if (button.tag == 10 || button.tag==11) {
+        [self.timeView removeFromSuperview];
         [self createServiceTimeView];
     }
     if (button.tag == 12) {
-        [self.timeView removeFromSuperview];
         self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
+        [self.timeView removeFromSuperview];
     }
 }
 
@@ -465,13 +467,13 @@
     
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 15, 100, 20)];
     label.text = @"可服务时间";
-    label.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    label.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     label.font = [UIFont systemFontOfSize:14];
     [self.timeView addSubview:label];
     
     UILabel *setLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-85, 15, 50, 20)];
     setLabel.text = @"请设置";
-    setLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    setLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     setLabel.font = [UIFont systemFontOfSize:14];
     setLabel.textAlignment = NSTextAlignmentRight;
     [self.timeView addSubview:setLabel];
@@ -479,9 +481,8 @@
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-27.5, 20, 10, 10)];
     imageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
     [self.timeView addSubview:imageView];
-    
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
 
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
 }
 
 -(void)serviceTimeClick:(UITapGestureRecognizer *)gesture
@@ -502,11 +503,24 @@
 
 -(void)releaseButtonClick:(UIButton *)button
 {
-    
+    NSDictionary *parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":@"2",@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":@"",@"imgs":@"",@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter];
 }
 
-#pragma mark - UITextFieldDelegate
+-(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+    }];
+}
 
+
+#pragma mark - UITextFieldDelegate
 -(void)textFieldDidChange:(UITextField *)textField
 {
     if (textField == self.titleTextField) {
@@ -517,8 +531,44 @@
     }
 }
 
-#pragma mark - UITextViewDelegate
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.priceTextField) {
+        if ([textField.text rangeOfString:@"."].location == NSNotFound) {
+            self.isHaveDian = NO;
+        }
+        if ([string length] > 0) {
+            unichar single = [string characterAtIndex:0];//当前输入的字符
+            if ((single >= '0' && single <= '9') || single == '.') {//数据格式正确
+                //首字母不能为小数点
+                if([textField.text length] == 0){
+                    if(single == '.') {
+                        [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                        return NO;
+                    }
+                }
+                //输入的字符是否是小数点
+                if (single == '.') {
+                    if(!self.isHaveDian){
+                        self.isHaveDian = YES;
+                        return YES;
+                    }else{
+                        [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                        return NO;
+                    }
+                }
+            }else{//输入的数据格式不正确
+                [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                return NO;
+            }
+        }else{
+            return YES;
+        }
+    }
+    return YES;
+}
 
+#pragma mark - UITextViewDelegate
 NSString *skillContentText = @"";
 - (void)textViewDidChange:(UITextView *)textView
 {
@@ -543,6 +593,8 @@ NSString *skillContentText = @"";
        self.contentPlaceholderLabel.text = @"请输入任务标题";
    }
 }
+
+#pragma mark - UIScrollViewDelegate
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

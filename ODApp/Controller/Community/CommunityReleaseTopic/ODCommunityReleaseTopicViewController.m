@@ -41,6 +41,10 @@
     [self.topicContentTextView resignFirstResponder];
     
     if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length>0) {
+        
+        for (NSString *title in self.labelArray) {
+            NSLog(@"%@",title);
+        }
         [self joiningTogetherParmeters];
     }else if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length==0){
         
@@ -150,27 +154,15 @@ NSString *topicContentText = @"";
 
 -(void)labelButtonClick:(UIButton *)button
 {
-    NSString *title = button.titleLabel.text;
-    if (self.lastSelectedButton == nil) {
-        [button setTitleColor:[UIColor colorWithHexString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-        self.lastSelectedButton = button;
-        [self.labelArray addObject:title];
-    }else if (self.lastSelectedButton == button){
+    NSString *tag_ids = [NSString stringWithFormat:@"%ld",button.tag-1];
+    if ([self.labelArray containsObject:tag_ids]) {
         [button setTitleColor:[UIColor colorWithHexString:@"#b0b0b0" alpha:1] forState:UIControlStateNormal];
         button.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-        self.lastSelectedButton = nil;
-        [self.labelArray removeObjectAtIndex:button.tag-1];
-    }else if (self.lastSelectedButton != button && ![self.labelArray containsObject:title]){
+        [self.labelArray removeObject:tag_ids];
+    }else{
         [button setTitleColor:[UIColor colorWithHexString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
         button.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-        self.lastSelectedButton = button;
-        [self.labelArray addObject:title];
-    }else if (self.lastSelectedButton != button && [self.labelArray containsObject:title]){
-        [button setTitleColor:[UIColor colorWithHexString:@"#b0b0b0" alpha:1] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-        self.lastSelectedButton = nil;
-        [self.labelArray removeObjectAtIndex:button.tag-1];
+        [self.labelArray addObject:tag_ids];
     }
 }
 
@@ -338,7 +330,7 @@ NSString *topicContentText = @"";
         [self.scrollView addSubview:button];
     }
     [self.addPicButton setFrame:CGRectMake(4 + (width + 4) * (self.imageArray.count % 4), CGRectGetMaxY(self.topicContentTextView.frame) + 95 + (4+width) * (self.imageArray.count / 4), width, width)];
-
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,262+(self.imageArray.count/4+1)*(width+4));
     [self.hud hide:NO afterDelay:0];
 }
 
@@ -367,7 +359,6 @@ NSString *topicContentText = @"";
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter;
     NSString *imageStr = [[NSString alloc] init];
     for (NSInteger i = 0; i < self.strArray.count; i++) {
         if (i==0) {
@@ -377,11 +368,18 @@ NSString *topicContentText = @"";
             imageStr = [[imageStr stringByAppendingString:@"|"] stringByAppendingString:str];
         }
     }
-    if (imageStr.length==0) {
-        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"open_id":[ODUserInformation sharedODUserInformation].openID};
-    }else{
-        parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"imgs":imageStr,@"open_id":[ODUserInformation sharedODUserInformation].openID};
+    
+    NSString *tag_ids = [[NSString alloc]init];
+    for (NSInteger i = 0; i < self.labelArray.count; i++) {
+        if (i==0) {
+            tag_ids = self.labelArray[i];
+        }else{
+            NSString *tag = self.labelArray[i];
+            tag_ids = [[tag_ids stringByAppendingString:@"|"]stringByAppendingString:tag];
+        }
     }
+    
+    NSDictionary *parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"tag_ids":tag_ids,@"imgs":imageStr,@"open_id":[ODUserInformation sharedODUserInformation].openID};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:kCommunityReleaseBbsUrl parameter:signParameter];
 }

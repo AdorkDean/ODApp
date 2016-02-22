@@ -41,7 +41,7 @@
 -(void)loadMoreData
 {
     self.page ++;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0"};
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
 }
@@ -56,7 +56,7 @@
 -(void)joiningTogetherParmeters
 {
     self.page = 1;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0"};
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
 }
@@ -158,7 +158,7 @@
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
             }
-            cell.picViewConstraintHeight.constant = width+(width+5)*(model.imgs_small.count/3);
+            cell.picViewConstraintHeight.constant = width+(width+5)*((model.imgs_small.count-1)/3);
         }
     }
     else
@@ -179,7 +179,7 @@
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
-    picController.photos = model.imgs_small;
+    picController.photos = model.imgs_big;
     picController.selectedIndex = button.tag-10*indexPath.row;
     picController.skill = @"skill";
     [self.navigationController pushViewController:picController animated:YES];
@@ -213,7 +213,6 @@
     detailControler.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
     detailControler.nick = model.user[@"nick"];
     detailControler.love_id = [NSString stringWithFormat:@"%@",model.love_id];
-    NSLog(@"----%@",detailControler.love_id);
     [self.navigationController pushViewController:detailControler animated:YES];
     
 }
@@ -223,15 +222,15 @@
 {
     CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs_small.count==0) {
-        return 180;
+        return 135;
     }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
-        return 180+width;
+        return 135+width;
     }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
-        return 180+2*width+5;
+        return 135+2*width+5;
     }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
-        return 180+3*width+10;
+        return 135+3*width+10;
     }else{
-        return 180+3*width+10;
+        return 135+3*width+10;
     }
 }
 

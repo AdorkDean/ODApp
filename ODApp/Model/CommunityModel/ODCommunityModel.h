@@ -17,6 +17,7 @@
 @property(nonatomic,copy)NSString *view_num;
 @property(nonatomic,copy)NSString *created_at;
 @property(nonatomic,strong)NSArray *imgs;
+@property(nonatomic,strong)NSArray *imgs_big;
 
 //user
 @property(nonatomic,copy)NSString *nick;
