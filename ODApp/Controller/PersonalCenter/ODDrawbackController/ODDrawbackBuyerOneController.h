@@ -22,17 +22,22 @@
 @property (nonatomic, assign) BOOL isRelease;
 // 是否需要 拒绝 与 接收 按钮
 @property (nonatomic, assign) BOOL isRefuseAndReceive;
-// 是否需要 联系客服 界面
+// 是否需要 联系客服 版块
 @property (nonatomic, assign) BOOL isService;
 // 一开始是否显示 退款说明
 @property (nonatomic, assign) BOOL isDrawbackState;
+// 是否需要 拒绝原因 版块
+@property (nonatomic, assign) BOOL isRefuseReason;;
 
 @property (nonatomic, strong) UILabel *drawbackMoneyLabel;
-@property (nonatomic, strong) UILabel *drawbackMoneyNumberLabel;
 
 @property (nonatomic, strong) UILabel *drawbackReasonLabel;
 @property (nonatomic, strong) UIView *drawbackReasonContentView;
 @property (nonatomic, strong) UILabel *drawbackReasonContentLabel;
+
+@property (nonatomic, strong) UILabel *refuseReasonLabel;
+@property (nonatomic, strong) UIView *refuseReasonContentView;
+@property (nonatomic, strong) UILabel *refuseReasonContentLabel;
 
 @property (nonatomic, assign) BOOL isSelectedReasonOne;
 @property (nonatomic, assign) BOOL isSelectedReasonTwo;
@@ -86,8 +91,9 @@
 @property (nonatomic, copy) NSString *customerService;
 
 @property (nonatomic, copy) NSString *drawbackReason;
-
+@property (nonatomic, copy) NSString *refuseReason;
 @property (nonatomic, copy) NSString *drawbackState;
 
+@property (nonatomic, copy) NSString *confirmButtonContent;
 
 @end
