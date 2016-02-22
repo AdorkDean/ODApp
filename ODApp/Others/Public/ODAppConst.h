@@ -45,6 +45,9 @@ UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
 /**  发布任务成功通知 */
 UIKIT_EXTERN NSString * const ODNotificationReleaseTask;
 
+/**  发布技能成功通知 */
+UIKIT_EXTERN NSString * const ODNotificationReleaseSkill;
+
 
 /**  支付成功通知 */
 UIKIT_EXTERN NSString * const ODNotificationPaySuccess;

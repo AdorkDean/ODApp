@@ -26,6 +26,7 @@
 @property(nonatomic,strong)UITextField *unitTextField;
 @property(nonatomic,strong)UIView *picView;
 @property(nonatomic,strong)UIView *bottomView;
+@property(nonatomic,strong)UILabel *setLabel;
 @property(nonatomic,strong)UIView *timeView;
 @property(nonatomic)BOOL isHaveDian;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
@@ -35,6 +36,7 @@
 @property(nonatomic,strong)NSMutableArray *imageArray;
 @property(nonatomic,strong)NSMutableArray *strArray;
 @property(nonatomic,strong)UIButton *selectedButton;
+@property(nonatomic,strong)NSMutableArray *timeArray;
 @property (nonatomic, strong) MBProgressHUD *hud;
 
 @end

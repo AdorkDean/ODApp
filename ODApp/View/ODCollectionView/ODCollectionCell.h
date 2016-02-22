@@ -20,7 +20,6 @@
 @property (nonatomic , strong) ODLikeModel *model;
 
 
--(void)setWithLikeModel:(ODLikeModel *)model;
--(void)setWithApplyModel:(ODApplyModel *)model;
-
+- (void)setWithApplyModel:(ODApplyModel *)model;
+- (void)setWithLikeModel:(ODLikeModel *)model;
 @end

@@ -86,6 +86,8 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     vc.contentTextView.text = model.content;
     vc.priceTextField.text = model.price;
     vc.unitTextField.text = model.unit;
+    
+    NSLog(@"%@",vc.titleTextField.text);
 
     [self.navigationController pushViewController:vc animated:YES];
 }

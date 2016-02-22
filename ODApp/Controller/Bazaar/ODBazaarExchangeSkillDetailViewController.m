@@ -23,6 +23,7 @@
     [self joiningTogetherParmeters];
     self.navigationItem.title = self.nick;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
+
 }
 
 
