@@ -108,11 +108,6 @@ void UncaughtExceptionHandler(NSException *exception)
     
     
     
-  
-    
-    
-  
-    
     
 
 }
@@ -305,17 +300,22 @@ void UncaughtExceptionHandler(NSException *exception)
                 NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
                 
                 NSString *code = [NSString stringWithFormat:@"%d" , resp.errCode];
+                NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:code,@"codeStatus", nil];
+                //创建通知
+                NSNotification *notification =[NSNotification notificationWithName:ODNotificationPaySuccess object:nil userInfo:dict];
+                //通过通知中心发送通知
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
                 
-                [self getDatawithCode:code];
-                
-                
-                
-                
+                              
                 break;
             }
             default:{
-                strMsg = [NSString stringWithFormat:@"支付结果：失败！retcode = %d, retstr = %@", resp.errCode,resp.errStr];
-                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+                NSString *code = [NSString stringWithFormat:@"%d" , resp.errCode];
+                NSDictionary *dict =[[NSDictionary alloc] initWithObjectsAndKeys:code,@"codeStatus", nil];
+                //创建通知
+                NSNotification *notification =[NSNotification notificationWithName:ODNotificationPayfail object:nil userInfo:dict];
+                //通过通知中心发送通知
+                [[NSNotificationCenter defaultCenter] postNotification:notification];
                 break;
             }
         }
@@ -325,54 +325,6 @@ void UncaughtExceptionHandler(NSException *exception)
 }
 
 
-- (void)getDatawithCode:(NSString *)code
-{
-    self.manager = [AFHTTPRequestOperationManager manager];
-    
-    
-    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-    NSString *order_no = [ODUserInformation sharedODUserInformation].orderId;
-    
-    
-    NSLog(@"____%@" , order_no);
-    NSLog(@"_____%@" , code);
-    
-    
-    NSDictionary *parameters = @{@"order_no":order_no , @"errCode":code , @"open_id":openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    
-    NSString *url = @"http://woquapi.test.odong.com/1.0/pay/weixin/callback/sync";
-    
-    
-    
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        
-        if (responseObject) {
-           
-            
-            
-            
-            NSLog(@"____%@" , responseObject);
-            
-            
-            
-            
-            
-        }
-        
-       
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-        
-        
-    }];
-    
-    
-}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

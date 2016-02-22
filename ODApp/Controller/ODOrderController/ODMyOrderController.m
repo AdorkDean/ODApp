@@ -37,9 +37,7 @@
     self.dataArray = [[NSMutableArray alloc] init];
     [self getData];
     [self createCollectionView];
-
-
-    self.navigationItem.title = @"已购买订单";
+     self.navigationItem.title = @"已购买订单";
     
     
 }

@@ -36,6 +36,13 @@ NSString * const ODNotificationChangeSkill = @"ODNotificationChangeSkill";
 NSString * const ODNotificationReleaseTask = @"ODNotificationReleaseTask";
 
 
+/**  支付成功通知 */
+NSString * const ODNotificationPaySuccess = @"ODNotificationPaySuccess";
+
+/**  支付失败通知 */
+NSString * const ODNotificationPayfail = @"ODNotificationPayfail";
+
+
 #pragma mark - 请求URL接口
 /** 统一的URL */
 #ifdef DEBUG

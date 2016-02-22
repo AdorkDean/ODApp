@@ -483,6 +483,7 @@
     [self.timeView addSubview:imageView];
 
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
+    [self.scrollView setContentOffset:CGPointMake(0, 62 + 50) animated:YES];
 }
 
 -(void)serviceTimeClick:(UITapGestureRecognizer *)gesture

@@ -5,16 +5,27 @@
 //  Created by Odong-YG on 16/2/5.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
-
+#import "ODRoundTimeDrawView.h"
 #import "ODBazaarReleaseSkillTimeViewController.h"
 
 #define cellID @"ODBazaarReleaseSkillTimeViewCell"
 
 @interface ODBazaarReleaseSkillTimeViewController ()
-
+/**
+ *  圆圈的数组
+ */
+@property (nonatomic, strong) NSMutableArray *roundViews;
 @end
 
 @implementation ODBazaarReleaseSkillTimeViewController
+- (NSMutableArray *)roundViews
+{
+    if (!_roundViews)
+    {
+        _roundViews = [NSMutableArray array];
+    }
+    return _roundViews;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,13 +54,13 @@
     NSArray *array = @[@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六",@"星期日"];
     CGFloat imgWidth = (kScreenSize.width-30-90)/7;
     CGFloat labelWidth = (kScreenSize.width-15)/7;
-    for (NSInteger i = 0; i < array.count; i++) {
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(15+(imgWidth+15)*i, 12.5, imgWidth, imgWidth)];
+    for (NSInteger i = 0; i < array.count; i++)
+    {
+        ODRoundTimeDrawView *imageView = [[ODRoundTimeDrawView alloc]initWithFrame:CGRectMake(15+(imgWidth+15)*i, 12.5, imgWidth, imgWidth)];
         imageView.layer.masksToBounds = YES;
         imageView.layer.cornerRadius = imgWidth/2;
-        imageView.image = [UIImage imageNamed:@"time4_icon"];
-        imageView.tag = 10+i;
         [self.view addSubview:imageView];
+        [self.roundViews addObject:imageView];
         
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(7.5+labelWidth*i, CGRectGetMaxY(imageView.frame)+9, labelWidth, 20)];
         label.text = array[i];
@@ -160,44 +171,25 @@
 
 -(void)openButtonClick:(UIButton *)button
 {
-    static BOOL isClick = NO;
-    if (isClick) {
-        [button setBackgroundImage:[UIImage imageNamed:@"button_on_icon"] forState:UIControlStateNormal];
-        isClick = NO;
-    }else{
-        [button setBackgroundImage:[UIImage imageNamed:@"button_off_icon"] forState:UIControlStateNormal];
-        isClick = YES;
-    }
+    NSLog(@"%d",button.selected);
+    button.selected = !button.isSelected;
+    NSLog(@"%d",button.selected);
     ODBazaarReleaseSkillTimeViewCell *cell = (ODBazaarReleaseSkillTimeViewCell *)button.superview.superview;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
-    if (indexPath.section == 0) {
-        
+    ODRoundTimeDrawView *view = self.roundViews[indexPath.section];
+    if (indexPath.row == 0)
+    {
+        view.firstTimeIsFree = !button.selected;
     }
-    
-    if (indexPath.section == 1) {
-        
+    else if (indexPath.row == 1)
+    {
+        view.secondTimeIsFree = !button.selected;
     }
-    
-    if (indexPath.section == 2) {
-        
+    else if (indexPath.row == 2)
+    {
+        view.thirdTimeIsFree = !button.selected;
     }
-    
-    if (indexPath.section == 3) {
-        
-    }
-    
-    if (indexPath.section == 4) {
-        
-    }
-    
-    if (indexPath.section == 5) {
-        
-    }
-    
-    if (indexPath.section == 6) {
-        
-    }
+
 }
 
 - (void)didReceiveMemoryWarning {

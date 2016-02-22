@@ -43,6 +43,14 @@ UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
 /**  发布任务成功通知 */
 UIKIT_EXTERN NSString * const ODNotificationReleaseTask;
 
+
+/**  支付成功通知 */
+UIKIT_EXTERN NSString * const ODNotificationPaySuccess;
+
+/**  支付失败通知 */
+UIKIT_EXTERN NSString * const ODNotificationPayfail;
+
+
 #pragma mark - 请求URL接口 
 /** 统一的URL */
 UIKIT_EXTERN NSString *const ODBaseURL;
