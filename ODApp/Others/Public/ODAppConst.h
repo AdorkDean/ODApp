@@ -155,4 +155,5 @@ UIKIT_EXTERN NSString * const kBalanceUrl;
 UIKIT_EXTERN NSString * const kBalanceListUrl;
 UIKIT_EXTERN NSString * const kMySellListUrl;
 UIKIT_EXTERN NSString * const kDeliveryUrl;
-UIKIT_EXTERN NSString * const kMySellDetailUrl;
+UIKIT_EXTERN NSString * const kFinshOrderUrl;
+UIKIT_EXTERN NSString * const kEvalueUrl;

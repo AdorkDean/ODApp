@@ -27,6 +27,7 @@
 		9D8A989A1C7AEC54005BC458 /* ODMySellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A98991C7AEC54005BC458 /* ODMySellModel.m */; };
 		9D8A989D1C7AF204005BC458 /* ODMySellDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A989C1C7AF204005BC458 /* ODMySellDetailController.m */; };
 		9D8A98A01C7B0208005BC458 /* ODSecondMySellDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A989F1C7B0208005BC458 /* ODSecondMySellDetailController.m */; };
+		9D8A98A31C7B3324005BC458 /* ODEvaluation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A98A21C7B3324005BC458 /* ODEvaluation.m */; };
 		9D8D9E1F1C75D7CB0064CD5A /* ODOperationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D9E1E1C75D7CB0064CD5A /* ODOperationController.m */; };
 		9DBF7EEA1C759B1C0085875E /* ODPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EE91C759B1C0085875E /* ODPayController.m */; };
 		9DBF7EED1C75A0C90085875E /* ODPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EEC1C75A0C90085875E /* ODPayView.m */; };
@@ -368,6 +369,8 @@
 		9D8A989C1C7AF204005BC458 /* ODMySellDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMySellDetailController.m; sourceTree = "<group>"; };
 		9D8A989E1C7B0208005BC458 /* ODSecondMySellDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSecondMySellDetailController.h; sourceTree = "<group>"; };
 		9D8A989F1C7B0208005BC458 /* ODSecondMySellDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSecondMySellDetailController.m; sourceTree = "<group>"; };
+		9D8A98A11C7B3324005BC458 /* ODEvaluation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODEvaluation.h; sourceTree = "<group>"; };
+		9D8A98A21C7B3324005BC458 /* ODEvaluation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODEvaluation.m; sourceTree = "<group>"; };
 		9D8D9E1D1C75D7CB0064CD5A /* ODOperationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOperationController.h; sourceTree = "<group>"; };
 		9D8D9E1E1C75D7CB0064CD5A /* ODOperationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOperationController.m; sourceTree = "<group>"; };
 		9DBF7EE91C759B1C0085875E /* ODPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPayController.m; sourceTree = "<group>"; };
@@ -2479,6 +2482,8 @@
 				D4F76DA11C61AEA100D59F02 /* ODOrderView.h */,
 				D4F76DA21C61AEA100D59F02 /* ODOrderView.m */,
 				D4F76DA31C61AEA100D59F02 /* ODOrderView.xib */,
+				9D8A98A11C7B3324005BC458 /* ODEvaluation.h */,
+				9D8A98A21C7B3324005BC458 /* ODEvaluation.m */,
 				9DBF7EEB1C75A0C90085875E /* ODPayView.h */,
 				9DBF7EEC1C75A0C90085875E /* ODPayView.m */,
 				9DBF7EEE1C75A0D60085875E /* ODPayView.xib */,
@@ -2854,6 +2859,7 @@
 				C64D45FB1C5F8C6F003BFFA0 /* NSData+SDDataCache.m in Sources */,
 				D4F76D6C1C60C55E00D59F02 /* ODActivityVIPCell.m in Sources */,
 				D4D073881C59B9FA008527C9 /* ODLandMainController.m in Sources */,
+				9D8A98A31C7B3324005BC458 /* ODEvaluation.m in Sources */,
 				D4F76DBF1C61AEAD00D59F02 /* TimeButton.m in Sources */,
 				D44423A21C7AAABA005B4CFE /* ODRoundTimeDrawView.m in Sources */,
 				C64D45EE1C5F8C6F003BFFA0 /* IQKeyboardManager.m in Sources */,

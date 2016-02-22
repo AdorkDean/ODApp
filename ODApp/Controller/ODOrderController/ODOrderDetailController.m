@@ -15,13 +15,18 @@
 #import "ODPayController.h"
 #import "ODCancelOrderView.h"
 #import "ODDrawbackBuyerOneController.h"
+#import "ODEvaluation.h"
 @interface ODOrderDetailController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate>
 
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) ODOrderDetailView *orderDetailView;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
-
 @property (nonatomic, strong) AFHTTPRequestOperationManager *delateManager;
+@property (nonatomic, strong) AFHTTPRequestOperationManager *finishManager;
+@property (nonatomic , strong) AFHTTPRequestOperationManager *evalueManager;
+
+
+@property (nonatomic , strong) ODEvaluation *evaluationView;
 @property (nonatomic , copy) NSString *open_id;
 @property (nonatomic , strong) NSMutableArray *dataArray;
 
@@ -305,6 +310,123 @@
 -(void)confirmAction:(UIButton *)sender
 {
     
+    self.finishManager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"order_id":self.order_id , @"open_id":self.open_id};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    __weak typeof (self)weakSelf = self;
+    [self.finishManager GET:kFinshOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        if (responseObject) {
+            
+            
+            if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                
+                
+                [self createEvaluation];
+                
+                
+                
+            }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
+                
+                
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+                
+                
+            }
+            
+            
+          
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+    }];
+    
+
+    
+    
+    
+}
+
+
+- (void)createEvaluation
+{
+    
+    self.evaluationView = [[ODEvaluation alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
+    self.evaluationView.contentTextView.delegate = self;
+    [self.evaluationView.cancelButton addTarget:self action:@selector(cancelEvaluation:) forControlEvents:UIControlEventTouchUpInside];
+    [self.evaluationView.determineButton addTarget:self action:@selector(determineButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [[[UIApplication sharedApplication]keyWindow] addSubview:self.evaluationView];
+    
+    
+    
+    
+    
+}
+
+
+- (void)determineButton:(UIButton *)sender
+{
+    
+    
+        
+        self.evalueManager = [AFHTTPRequestOperationManager manager];
+        
+        NSDictionary *parameters = @{@"order_id":self.order_id , @"reason":self.evaluationView.contentTextView.text, @"reason_num":@"2" , @"open_id":self.open_id};
+        NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+        
+        __weak typeof (self)weakSelf = self;
+        
+        
+        
+        [self.evalueManager GET:kEvalueUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+            if (responseObject) {
+                
+                
+                if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                    
+                    [weakSelf.evaluationView removeFromSuperview];
+                    
+                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"评价成功"];
+                    
+                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                    
+                    
+                }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
+                    
+                    
+                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+                    
+                    
+                }
+                
+                
+            }
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        }];
+        
+        
+        
+
+        
+        
+        
+    
+
+    
+    
+  
+    
+    
+    
+    
 }
 
 
@@ -312,6 +434,7 @@
 - (void)evaluationAction:(UIButton *)sender
 {
     
+    [self createEvaluation];
 }
 
 // 申请退款
@@ -357,10 +480,28 @@
 #pragma mark - UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if ([textView.text isEqualToString:@"请输入取消原因"]) {
-        textView.text = @"";
-        textView.textColor = [UIColor blackColor];
+    
+    
+    if (textView == self.cancelOrderView.reasonTextView) {
+        if ([textView.text isEqualToString:@"请输入取消原因"]) {
+            textView.text = @"";
+            textView.textColor = [UIColor blackColor];
+        }
+
+    }else if (textView == self.evaluationView.contentTextView) {
+        
+        if ([textView.text isEqualToString:@"请输入评价内容"]) {
+            textView.text = @"";
+            textView.textColor = [UIColor blackColor];
+        }
+
+        
+        
+        
     }
+    
+   
+
 }
 
 
@@ -369,10 +510,29 @@
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入取消原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
-        self.cancelOrderView.reasonTextView.text = @"请输入取消原因";
-        self.cancelOrderView.reasonTextView.textColor = [UIColor lightGrayColor];
+    
+    
+    if (textView == self.cancelOrderView.reasonTextView) {
+        if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入取消原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
+            self.cancelOrderView.reasonTextView.text = @"请输入取消原因";
+            self.cancelOrderView.reasonTextView.textColor = [UIColor lightGrayColor];
+        }
+        
+    }else if (textView == self.evaluationView.contentTextView) {
+        
+        if ([self.evaluationView.contentTextView.text isEqualToString:@"请输入评价内容"] || [self.evaluationView.contentTextView.text isEqualToString:@""]) {
+           self.evaluationView.contentTextView.text = @"请输入评价内容";
+            self.evaluationView.contentTextView.textColor = [UIColor lightGrayColor];
+        }
+        
+        
+        
+        
     }
+
+    
+    
+    
     
     
     
@@ -442,6 +602,12 @@
     
     
     
+}
+
+
+- (void)cancelEvaluation:(UIButton *)sender
+{
+    [self.evaluationView removeFromSuperview];
 }
 
 
