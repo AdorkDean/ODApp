@@ -574,12 +574,15 @@
 
     NSDictionary *parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-
-    if ([button.titleLabel.text isEqualToString:@"编辑"]) {
-        [self pushDataWithUrl:kBazaarEditSkillUrl parameter:signParameter];
-    }else{
-        [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter];  
-    }
+    
+    NSLog(@"%@",signParameter);
+//    if ([button.titleLabel.text isEqualToString:@"编辑"]) {
+//        [self pushDataWithUrl:kBazaarEditSkillUrl parameter:signParameter];
+//    }else{
+//        [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter];  
+//    }
+//    
+     [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter];
 }
 
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
