@@ -65,19 +65,15 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
-  
-    
-        
-        
+            
         if (indexPath.section == 0) {
             
             
         ODOperationSeccondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
             
             
-            self.cachesLabel = [[UILabel alloc] initWithFrame:CGRectMake(cell.contentView.frame.size.width - 150 , 10 , 60 , 20)];
+            self.cachesLabel = [[UILabel alloc] initWithFrame:CGRectMake(cell.contentView.frame.size.width - 120 , 10 , 60 , 20)];
+            self.cachesLabel.font = [UIFont systemFontOfSize:14];
             self.cachesLabel.backgroundColor = [UIColor whiteColor];
             self.cachesLabel.textAlignment = NSTextAlignmentLeft;
             [cell.contentView addSubview:self.cachesLabel];
@@ -192,7 +188,8 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
     
-    return CGSizeMake(0, 5);
+          return CGSizeMake(0, 20);
+     
     
 }
 

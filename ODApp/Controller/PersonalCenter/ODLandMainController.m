@@ -29,6 +29,7 @@
 #import "ODOperationController.h"
 #import "ODBalanceController.h"
 #import "ODMySellController.h"
+#import "ODEvaluationController.h"
 @interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
@@ -292,7 +293,7 @@
         
     }else if (indexPath.section == 6) {
         
-        ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
+        ODEvaluationController *vc = [[ODEvaluationController alloc] init];
         vc.typeTitle = @"我收到的评价";
         NSString *openId = [ODUserInformation sharedODUserInformation].openID;
         vc.openId = openId;

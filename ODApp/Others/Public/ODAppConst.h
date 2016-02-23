@@ -63,6 +63,11 @@ UIKIT_EXTERN NSString * const ODNotificationCancelOrder;
 /** 定位刷新 */
 UIKIT_EXTERN NSString * const ODNotificationLocationSuccessRefresh;
 
+/** 订单刷新 */
+UIKIT_EXTERN NSString * const ODNotificationOrderListRefresh;
+
+
+
 #pragma mark - 请求URL接口 
 /** 统一的URL */
 UIKIT_EXTERN NSString *const ODBaseURL;

@@ -29,6 +29,7 @@
 		9D8A98A01C7B0208005BC458 /* ODSecondMySellDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A989F1C7B0208005BC458 /* ODSecondMySellDetailController.m */; };
 		9D8A98A31C7B3324005BC458 /* ODEvaluation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A98A21C7B3324005BC458 /* ODEvaluation.m */; };
 		9D8D9E1F1C75D7CB0064CD5A /* ODOperationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8D9E1E1C75D7CB0064CD5A /* ODOperationController.m */; };
+		9DBEDECC1C7C5C6C00D528B8 /* ODEvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBEDECB1C7C5C6C00D528B8 /* ODEvaluationController.m */; };
 		9DBF7EEA1C759B1C0085875E /* ODPayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EE91C759B1C0085875E /* ODPayController.m */; };
 		9DBF7EED1C75A0C90085875E /* ODPayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DBF7EEC1C75A0C90085875E /* ODPayView.m */; };
 		9DBF7EEF1C75A0D60085875E /* ODPayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DBF7EEE1C75A0D60085875E /* ODPayView.xib */; };
@@ -372,6 +373,8 @@
 		9D8A98A21C7B3324005BC458 /* ODEvaluation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODEvaluation.m; sourceTree = "<group>"; };
 		9D8D9E1D1C75D7CB0064CD5A /* ODOperationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOperationController.h; sourceTree = "<group>"; };
 		9D8D9E1E1C75D7CB0064CD5A /* ODOperationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOperationController.m; sourceTree = "<group>"; };
+		9DBEDECA1C7C5C6C00D528B8 /* ODEvaluationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODEvaluationController.h; sourceTree = "<group>"; };
+		9DBEDECB1C7C5C6C00D528B8 /* ODEvaluationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODEvaluationController.m; sourceTree = "<group>"; };
 		9DBF7EE91C759B1C0085875E /* ODPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPayController.m; sourceTree = "<group>"; };
 		9DBF7EEB1C75A0C90085875E /* ODPayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPayView.h; sourceTree = "<group>"; };
 		9DBF7EEC1C75A0C90085875E /* ODPayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPayView.m; sourceTree = "<group>"; };
@@ -1319,6 +1322,8 @@
 			children = (
 				D4D071311C59B9FA008527C9 /* ODUserEvaluationController.h */,
 				D4D071321C59B9FA008527C9 /* ODUserEvaluationController.m */,
+				9DBEDECA1C7C5C6C00D528B8 /* ODEvaluationController.h */,
+				9DBEDECB1C7C5C6C00D528B8 /* ODEvaluationController.m */,
 			);
 			name = ODEvalation;
 			sourceTree = "<group>";
@@ -2932,6 +2937,7 @@
 				D4D0739F1C59B9FA008527C9 /* ODHomeFoundModel.m in Sources */,
 				9DDC9B981C63582B000D688F /* ODSecondOrderController.m in Sources */,
 				D4D075431C59BA9B008527C9 /* AppDelegate.m in Sources */,
+				9DBEDECC1C7C5C6C00D528B8 /* ODEvaluationController.m in Sources */,
 				D4F76DA61C61AEA100D59F02 /* ODAddAddressView.m in Sources */,
 				D4D073951C59B9FA008527C9 /* ODUserGenderController.m in Sources */,
 				D4D0738A1C59B9FA008527C9 /* ODMyOrderDetailController.m in Sources */,

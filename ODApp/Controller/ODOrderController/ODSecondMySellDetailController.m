@@ -41,6 +41,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.userInteractionEnabled = YES;
+    self.view.backgroundColor = [UIColor whiteColor];
     self.dataArray = [[NSMutableArray alloc] init];
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     self.navigationItem.title = @"订单详情";
@@ -104,7 +105,7 @@
 {
     
     self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
-    
+    self.scroller.backgroundColor = [UIColor whiteColor];
     self.scroller.userInteractionEnabled = YES;
     
     ODOrderDetailModel *model = self.dataArray[0];
@@ -112,16 +113,46 @@
     
     if ([status isEqualToString:@"-1"]) {
         
-        
-        self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 200);
-        
+        if (iPhone4_4S) {
+            
+            
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 300);
+            
+        }else if (iPhone5_5s){
+            
+            
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 100);
+            
+            
+        }else  {
+            
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 50);
+            
+            
+        }
         
     }else{
         
-        self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 150);
+        
+        if (iPhone4_4S) {
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 220);
+            
+        }else  if (iPhone5_5s){
+            
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 150);
+            
+        }else  {
+            
+            
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 50);
+            
+            
+        }
+        
         
         
     }
+    
     
     
     [self.scroller addSubview:self.orderDetailView];
@@ -134,7 +165,7 @@
         
         self.deliveryButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.deliveryButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        self.deliveryButton.backgroundColor = [UIColor redColor];
+        self.deliveryButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [ self.deliveryButton setTitle:@"确认发货" forState:UIControlStateNormal];
         self.deliveryButton.titleLabel.font=[UIFont systemFontOfSize:13];
         [ self.deliveryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -149,7 +180,7 @@
         
         self.deliveryButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.deliveryButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        self.deliveryButton.backgroundColor = [UIColor redColor];
+        self.deliveryButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [ self.deliveryButton setTitle:@"确认服务" forState:UIControlStateNormal];
         self.deliveryButton.titleLabel.font=[UIFont systemFontOfSize:13];
         [ self.deliveryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -166,7 +197,7 @@
         
         self.DealDeliveryButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.DealDeliveryButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        self.DealDeliveryButton.backgroundColor = [UIColor redColor];
+        self.DealDeliveryButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [self.DealDeliveryButton setTitle:@"处理退款" forState:UIControlStateNormal];
         self.deliveryButton.titleLabel.font=[UIFont systemFontOfSize:13];
         [self.DealDeliveryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -179,7 +210,7 @@
         
         self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        self.reasonButton.backgroundColor = [UIColor redColor];
+        self.reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
         self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
         [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -192,7 +223,7 @@
         
         self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        self.reasonButton.backgroundColor = [UIColor redColor];
+        self.reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
         self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
         [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -219,7 +250,7 @@
     ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
     
     ODOrderDetailModel *model = self.dataArray[0];
-    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
+    vc.darwbackMoney = model.price;
     vc.order_id = self.orderId;
     vc.drawbackReason = model.reason;
     vc.isService = YES;
@@ -243,15 +274,13 @@
     ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
     
     ODOrderDetailModel *model = self.dataArray[0];
-    vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
+    vc.darwbackMoney = model.price;
     vc.order_id = self.orderId;
     vc.drawbackReason = model.reason;
     vc.isRefuseAndReceive = YES;
     vc.drawbackTitle = @"退款处理";
     
-    
-    
-    
+        
     [self.navigationController pushViewController:vc animated:YES];
     
     

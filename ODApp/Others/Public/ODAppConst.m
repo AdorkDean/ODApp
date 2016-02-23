@@ -55,6 +55,10 @@ NSString * const ODNotificationCancelOrder = @"ODNotificationCancelOrder";
 /** 定位刷新 */
 NSString * const ODNotificationLocationSuccessRefresh = @"ODNotificationLocationSuccessRefresh";
 
+/** 订单刷新 */
+NSString * const ODNotificationOrderListRefresh = @"ODNotificationOrderListRefresh";
+
+
 #pragma mark - 请求URL接口
 /** 统一的URL */
 #ifdef DEBUG

@@ -586,6 +586,12 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已拒绝"];
+            
+            //创建通知
+            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
+            //通过通知中心发送通知
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }else{
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
@@ -614,6 +620,13 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已接受"];
+            
+            //创建通知
+            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
+            //通过通知中心发送通知
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
+            
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }else{
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
@@ -642,7 +655,16 @@
         
 
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"申请退款成功"];
+            
+            
+            //创建通知
+            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
+            //通过通知中心发送通知
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
+            
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }else{
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
