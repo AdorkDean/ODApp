@@ -10,7 +10,7 @@
 
 #import <CommonCrypto/CommonDigest.h>
 
-const NSString* privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
+static NSString * const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
 
 @interface NSString (ODAPIManager)
 
