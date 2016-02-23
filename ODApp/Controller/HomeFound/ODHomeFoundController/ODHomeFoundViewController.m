@@ -220,6 +220,8 @@
     [self giveCommumityContent:nil andBbsType:4];
 }
 
+
+
 - (void)searchHelpButtonClick:(UIButton *)button
 {
     self.tabBarController.selectedIndex = 2;
@@ -233,7 +235,7 @@
     self.tabBarController.selectedIndex = 2;
     ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     vc.index = 0;
-    
+    [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
 }
 
 - (void)moreButtonClick:(UIButton *)button
@@ -342,6 +344,7 @@
     self.tabBarController.selectedIndex = 2;
     ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     vc.index = 0;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseSkill object:nil];
 }
 
 #pragma mark - 技能交换cell图片点击事件
