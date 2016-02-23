@@ -152,21 +152,21 @@ NSString *topicContentText = @"";
 {
     NSString *tag_ids;
     if ([button.titleLabel.text isEqualToString:@"情感"]) {
-        tag_ids = @"2";
-    }else if ([button.titleLabel.text isEqualToString:@"搞笑"]){
-        tag_ids = @"3";
-    }else if ([button.titleLabel.text isEqualToString:@"影视"]){
-        tag_ids = @"8";
-    }else if ([button.titleLabel.text isEqualToString:@"二次元"]){
-        tag_ids = @"7";
-    }else if ([button.titleLabel.text isEqualToString:@"生活"]){
         tag_ids = @"4";
-    }else if ([button.titleLabel.text isEqualToString:@"明星"]){
-        tag_ids = @"6";
-    }else if ([button.titleLabel.text isEqualToString:@"爱美"]){
+    }else if ([button.titleLabel.text isEqualToString:@"搞笑"]){
         tag_ids = @"5";
-    }else if ([button.titleLabel.text isEqualToString:@"宠物"]){
+    }else if ([button.titleLabel.text isEqualToString:@"影视"]){
+        tag_ids = @"7";
+    }else if ([button.titleLabel.text isEqualToString:@"二次元"]){
+        tag_ids = @"8";
+    }else if ([button.titleLabel.text isEqualToString:@"生活"]){
+        tag_ids = @"6";
+    }else if ([button.titleLabel.text isEqualToString:@"明星"]){
         tag_ids = @"9";
+    }else if ([button.titleLabel.text isEqualToString:@"爱美"]){
+        tag_ids = @"11";
+    }else if ([button.titleLabel.text isEqualToString:@"宠物"]){
+        tag_ids = @"10";
     }
 
     if ([self.labelArray containsObject:tag_ids]) {
