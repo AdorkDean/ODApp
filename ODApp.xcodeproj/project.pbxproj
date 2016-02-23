@@ -1964,9 +1964,9 @@
 		D4D071061C59B9FA008527C9 /* HomeFound */ = {
 			isa = PBXGroup;
 			children = (
+				D4D0710A1C59B9FA008527C9 /* ODHomeFoundController */,
 				C63FECEB1C7AA5A6000A8396 /* ODFindFavorableController */,
 				C63FECEE1C7AA5A6000A8396 /* ODFindJobController */,
-				D4D0710A1C59B9FA008527C9 /* ODHomeFoundController */,
 				D4F76DD01C61B04700D59F02 /* ODCollectioncController */,
 				C6F97B3F1C619B7B0037975C /* ODLocationController */,
 				C64D40901C5E088A003BFFA0 /* ODChangeSkill */,
