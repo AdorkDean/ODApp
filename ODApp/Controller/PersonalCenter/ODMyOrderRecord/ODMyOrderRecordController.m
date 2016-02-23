@@ -38,14 +38,25 @@
         [self loadMoreData];
     }];
     
-    
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationCancelOrder object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        
+        [self.collectionView.mj_header beginRefreshing];
+    }];
+}
+
+- (void)dealloc{
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self joiningTogetherParmeters];
-
+    
+    if (self.isRefresh) {
+        [self.collectionView.mj_header beginRefreshing];
+        self.isRefresh = NO;
+    }
 }
 
 - (void)loadMoreData

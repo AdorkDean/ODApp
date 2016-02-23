@@ -57,6 +57,8 @@ UIKIT_EXTERN NSString * const ODNotificationPaySuccess;
 /**  支付失败通知 */
 UIKIT_EXTERN NSString * const ODNotificationPayfail;
 
+/**  支付失败通知 */
+UIKIT_EXTERN NSString * const ODNotificationCancelOrder;
 
 #pragma mark - 请求URL接口 
 /** 统一的URL */

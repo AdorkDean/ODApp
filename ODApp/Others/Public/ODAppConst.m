@@ -49,6 +49,8 @@ NSString * const ODNotificationPaySuccess = @"ODNotificationPaySuccess";
 /**  支付失败通知 */
 NSString * const ODNotificationPayfail = @"ODNotificationPayfail";
 
+/**  支付失败通知 */
+NSString * const ODNotificationCancelOrder = @"ODNotificationCancelOrder";
 
 #pragma mark - 请求URL接口
 /** 统一的URL */
