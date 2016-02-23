@@ -13,21 +13,38 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xVo-Ns-EYc">
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QoZ-pd-fJn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
-                    </imageView>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gXi-Qj-rdW">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="153"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="gXi-Qj-rdW" firstAttribute="centerY" secondItem="QoZ-pd-fJn" secondAttribute="centerY" id="00c-jW-Qyc"/>
+                            <constraint firstItem="gXi-Qj-rdW" firstAttribute="top" secondItem="QoZ-pd-fJn" secondAttribute="top" id="7Js-Ja-Rpr"/>
+                            <constraint firstAttribute="trailing" secondItem="gXi-Qj-rdW" secondAttribute="trailing" id="CvV-9U-3Xz"/>
+                            <constraint firstItem="gXi-Qj-rdW" firstAttribute="centerX" secondItem="QoZ-pd-fJn" secondAttribute="centerX" id="eZ8-CA-NSq"/>
+                            <constraint firstItem="gXi-Qj-rdW" firstAttribute="leading" secondItem="QoZ-pd-fJn" secondAttribute="leading" id="qA8-Q0-wwV"/>
+                            <constraint firstAttribute="bottom" secondItem="gXi-Qj-rdW" secondAttribute="bottom" id="sLO-eH-zU8"/>
+                        </constraints>
+                        <connections>
+                            <outlet property="delegate" destination="gTV-IL-0wX" id="ubG-Px-YRi"/>
+                        </connections>
+                    </scrollView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="xVo-Ns-EYc" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="R7Q-wf-lGF"/>
-                <constraint firstAttribute="trailing" secondItem="xVo-Ns-EYc" secondAttribute="trailing" id="Tvn-lS-0Nt"/>
-                <constraint firstItem="xVo-Ns-EYc" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="osN-t1-E8F"/>
-                <constraint firstAttribute="bottom" secondItem="xVo-Ns-EYc" secondAttribute="bottom" id="qCa-Jd-qv7"/>
+                <constraint firstItem="QoZ-pd-fJn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Zzd-Sm-O0G"/>
+                <constraint firstItem="QoZ-pd-fJn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="d75-1U-rOu"/>
+                <constraint firstAttribute="bottom" secondItem="QoZ-pd-fJn" secondAttribute="bottom" id="eAm-fm-vCn"/>
+                <constraint firstAttribute="trailing" secondItem="QoZ-pd-fJn" secondAttribute="trailing" id="oCW-gy-Awr"/>
             </constraints>
             <size key="customSize" width="400" height="153"/>
             <connections>
-                <outlet property="picImageView" destination="xVo-Ns-EYc" id="U4F-XB-j2m"/>
+                <outlet property="picImageView" destination="gXi-Qj-rdW" id="lqb-JO-uJk"/>
+                <outlet property="scrollView" destination="QoZ-pd-fJn" id="bYE-fB-tqU"/>
             </connections>
             <point key="canvasLocation" x="804.5" y="496.5"/>
         </collectionViewCell>
