@@ -148,7 +148,7 @@
     self.bbsMark = self.bbsMark ? self.bbsMark :@"";
     
     self.count ++;
-    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i",self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count], @"city_id":@"0", @"search":self.bbsMark, @"call_array":@"1"};
+    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i",self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count], @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
@@ -194,7 +194,7 @@
     self.bbsType = self.bbsType ? self.bbsType :5;
     self.bbsMark = self.bbsMark ? self.bbsMark :@"";
     self.count = 1;
-    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":@"0", @"search":self.bbsMark, @"call_array":@"1"};
+    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
     
     
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];

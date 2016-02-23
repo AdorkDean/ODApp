@@ -33,7 +33,8 @@
     
     [ODUserInformation sharedODUserInformation].cityID = @"1";
     
-    self.pictureArray = [[NSArray alloc] init];
+    self.pictureArray = [[NSMutableArray alloc] init];
+    self.pictureIdArray = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
     
     self.cityListArray = [[NSArray alloc] init];
@@ -62,6 +63,7 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         
         [weakSelf.collectionView.mj_header beginRefreshing];
+        [weakSelf getScrollViewRequest];
     }];
     
 }
@@ -227,8 +229,6 @@
     [self giveCommumityContent:nil andBbsType:4];
 }
 
-
-
 - (void)searchHelpButtonClick:(UIButton *)button
 {
     self.tabBarController.selectedIndex = 2;
@@ -364,7 +364,8 @@
     picController.photos = model.imgs_small;
     picController.selectedIndex = button.tag-10*indexPath.row;
     picController.skill = @"skill";
-    [self.navigationController pushViewController:picController animated:YES];
+//    [self.navigationController pushViewController:picController animated:YES];
+    [self presentViewController:picController animated:YES completion:nil];
 }
 
 #pragma mark - Create UICollectionView
