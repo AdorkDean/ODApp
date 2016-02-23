@@ -19,7 +19,7 @@
     
     self.isOther = NO;
     
-    self.view.backgroundColor = [UIColor clearColor];
+    self.view.backgroundColor = [UIColor whiteColor];
     
     self.navigationItem.title = @"个人中心";
     [self createRequest];
