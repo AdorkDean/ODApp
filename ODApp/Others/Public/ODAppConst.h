@@ -73,6 +73,7 @@ UIKIT_EXTERN NSString * const kBazaarReleaseSkillTimeUrl;
 UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailLoveUrl;
 UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailNotLoveUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseSkillUrl;
+UIKIT_EXTERN NSString * const kBazaarEditSkillUrl;
 /** 接收人确认完成 */
 UIKIT_EXTERN NSString * const kBazaarTaskReceiveCompleteUrl;
 /** 发起人确认完成 */

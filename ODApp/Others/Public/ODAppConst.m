@@ -79,6 +79,7 @@ NSString * const kBazaarReleaseSkillTimeUrl = @"http://woquapi.test.odong.com/1.
 NSString * const kBazaarExchangeSkillDetailLoveUrl = @"http://woquapi.test.odong.com/1.0/other/love/add";
 NSString * const kBazaarExchangeSkillDetailNotLoveUrl = @"http://woquapi.test.odong.com/1.0/other/love/del";
 NSString * const kBazaarReleaseSkillUrl = @"http://woquapi.test.odong.com/1.0/swap/create";
+NSString * const kBazaarEditSkillUrl = @"http://woquapi.test.odong.com/1.0/swap/edit";
 
 NSString * const kCommunityBbsListUrl = @"http://woquapi.test.odong.com/1.0/bbs/list/latest";
 NSString * const kCommunityReleaseBbsUrl = @"http://woquapi.test.odong.com/1.0/bbs/create";

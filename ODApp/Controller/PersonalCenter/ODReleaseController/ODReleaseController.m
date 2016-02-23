@@ -82,13 +82,14 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODReleaseModel *model = self.dataArray[indexPath.row];
     ODBazaarReleaseSkillViewController *vc = [[ODBazaarReleaseSkillViewController alloc] init];
-    vc.titleTextField.text = model.title;
-    vc.contentTextView.text = model.content;
-    vc.priceTextField.text = model.price;
-    vc.unitTextField.text = model.unit;
-    
-    NSLog(@"%@",vc.titleTextField.text);
+    vc.skillTitle = model.title;
+    vc.content = model.content;
+    vc.price = model.price;
+    vc.unit = model.unit;
+    vc.swap_type = [NSString stringWithFormat:@"%@",model.swap_type];
+    vc.type = @"编辑";
 
+    vc.imageArray = [model.imgs_small valueForKeyPath:@"img_url"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -103,7 +104,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         
         ODReleaseModel *model = weakSelf.dataArray[indexPath.row];
         weakSelf.swap_id = model.swap_id;
-        
         [weakSelf deleteSkillRequest];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -124,7 +124,9 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"删除任务成功"];
             
-            [weakSelf.collectionView reloadData];
+//            [weakSelf.collectionView reloadData];
+            [weakSelf.dataArray removeAllObjects];
+            [weakSelf createRequestData];
             
         }else{
         

@@ -13,10 +13,32 @@
 @end
 
 @implementation ODBazaarReleaseSkillViewController
+@synthesize imageArray = _imageArray;
+- (void)setImageArray:(NSArray *)imageArray
+{
+    NSLogFunc
+    _imageArray = imageArray;
+    __weakSelf
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        for (NSString *imageStr in _imageArray)
+        {
+            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:imageStr]]];
+            [weakSelf.mArray addObject:image];
+        }
+//    });
+}
 
+
+- (NSMutableArray *)mArray{
+    if (!_mArray)
+    {
+        _mArray = [[NSMutableArray alloc]init];
+    }
+    return _mArray;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    NSLogFunc
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self getUserInfo];
     [self createScrollView];
@@ -24,6 +46,7 @@
     [self createPicView];
     [self createBottomView];
     [self createReleaseButton];
+    [self reloadImageButtons];
     self.navigationItem.title = @"发布技能";
 }
 
@@ -76,7 +99,7 @@
     [topView addSubview:woQuLabel];
     
     self.titleCountLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-50, 20, 32.5, 20)];
-    self.titleCountLabel.text = [NSString stringWithFormat:@"%ld/7",self.titleTextField.text.length];
+    self.titleCountLabel.text = [NSString stringWithFormat:@"%ld/7",self.skillTitle.length];
     self.titleCountLabel.textAlignment = NSTextAlignmentRight;
     self.titleCountLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
     self.titleCountLabel.font = [UIFont systemFontOfSize:13];
@@ -88,6 +111,7 @@
     self.titleTextField.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.titleTextField.delegate = self;
     [self.titleTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    self.titleTextField.text = self.skillTitle;
     [topView addSubview:self.titleTextField];
     
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 59, kScreenSize.width, 1)];
@@ -109,11 +133,16 @@
     self.contentTextView = [[UITextView alloc]initWithFrame:CGRectMake(12, 6, kScreenSize.width-24, 134)];
     self.contentTextView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.contentTextView.font = [UIFont systemFontOfSize:12];
+    self.contentTextView.text = self.content;
     self.contentTextView.delegate = self;
     [middleView addSubview:self.contentTextView];
     
     self.contentPlaceholderLabel = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 10, kScreenSize.width-35, 20)];
-    self.contentPlaceholderLabel.text = @"提供技能 , 变身校园大卡";
+    if (self.content) {
+        self.contentPlaceholderLabel.text = @"";
+    }else{
+       self.contentPlaceholderLabel.text = @"提供技能 , 变身校园大卡";
+    }
     self.contentPlaceholderLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
     self.contentPlaceholderLabel.font = [UIFont systemFontOfSize:12];
     self.contentPlaceholderLabel.userInteractionEnabled = NO;
@@ -149,13 +178,12 @@
     imageView.tag = 9;
     [self.addPicButton addSubview:imageView];
     
-    self.imageArray = [[NSMutableArray alloc]init];
     self.strArray = [[NSMutableArray alloc]init];
 }
 
 -(void)addPicButtonClick:(UIButton *)button
 {
-    if (self.imageArray.count<5) {
+    if (self.mArray.count<5) {
         [self.titleTextField resignFirstResponder];
         [self.contentTextView resignFirstResponder];
         [self.priceTextField resignFirstResponder];
@@ -221,7 +249,7 @@
         }
         NSString *str = @"data:image/jpeg;base64,";
         NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
-        [self.imageArray addObject:self.pickedImage];
+        [self.mArray addObject:self.pickedImage];
         [self createParameter:strData];
         
     }
@@ -293,10 +321,10 @@
             [view removeFromSuperview];
         }
     }
-    
-    for (NSInteger i = 0; i < self.imageArray.count; i++) {
-        UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        [button setBackgroundImage:self.imageArray[i] forState:UIControlStateNormal];
+    NSLogFunc
+    for (NSInteger i = 0; i < self.mArray.count; i++) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        [button setBackgroundImage:self.mArray[i] forState:UIControlStateNormal];
         button.tag = 100+i;
         [button addTarget:self action:@selector(deletePicClick:) forControlEvents:UIControlEventTouchUpInside];
         button.frame = CGRectMake(17.5+(width+10)*(i%4), 10+(10+width)*(i/4), width, width);
@@ -314,10 +342,10 @@
     }
     UIImageView *imageView = (UIImageView *)[self.addPicButton viewWithTag:9];
     [imageView removeFromSuperview];
-    [self.addPicButton setFrame:CGRectMake(17.5+(width+10) * (self.imageArray.count%4), 10+(10+width)*(self.imageArray.count/4), width, width)];
+    [self.addPicButton setFrame:CGRectMake(17.5+(width+10) * (self.mArray.count%4), 10+(10+width)*(self.mArray.count/4), width, width)];
    
-    [self.picView setFrame:CGRectMake(0, 230, kScreenSize.width, 20+width+(width+10)*(self.imageArray.count/4))];
-    if (self.imageArray.count>=4) {
+    [self.picView setFrame:CGRectMake(0, 230, kScreenSize.width, 20+width+(width+10)*(self.mArray.count/4))];
+    if (self.mArray.count>=4) {
         [self.bottomView removeFromSuperview];
         [self createBottomView];
     }
@@ -328,11 +356,12 @@
 #pragma mark - 删除图片
 -(void)deletePicClick:(UIButton *)button
 {
+    NSLogFunc
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除图片" message:nil preferredStyle:UIAlertControllerStyleAlert];
     __weakSelf;
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [button removeFromSuperview];
-        [weakSelf.imageArray removeObject:button.currentBackgroundImage];
+        [weakSelf.mArray removeObject:button.currentBackgroundImage];
         [weakSelf.strArray removeObjectAtIndex:button.tag-100];
         [weakSelf reloadImageButtons];
         [weakSelf.bottomView removeFromSuperview];
@@ -368,6 +397,7 @@
     self.priceTextField.placeholder = @"输入价格";
     self.priceTextField.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.priceTextField.font = [UIFont systemFontOfSize:14];
+    self.priceTextField.text = self.price;
     self.priceTextField.delegate = self;
     [priceView addSubview:self.priceTextField];
     
@@ -390,6 +420,7 @@
     self.unitTextField.placeholder = @"如 每次/每分钟/每小时 等";
     self.unitTextField.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.unitTextField.font = [UIFont systemFontOfSize:14];
+    self.unitTextField.text = self.unit;
     self.unitTextField.delegate = self;
     [unitView addSubview:self.unitTextField];
     
@@ -417,6 +448,17 @@
         [serviceView addSubview:button];
     }
     
+    if ([self.swap_type isEqualToString:@"1"]) {
+        UIButton *button = (UIButton *)[serviceView viewWithTag:10];
+        [button setBackgroundImage:[UIImage imageNamed:@"button_Home service_Selected"] forState:UIControlStateNormal];
+    }else if ([self.swap_type isEqualToString:@"2"]){
+        UIButton *button = (UIButton *)[serviceView viewWithTag:12];
+         [button setBackgroundImage:[UIImage imageNamed:@"button_Express delivery_Selected"] forState:UIControlStateNormal];
+    }else if ([self.swap_type isEqualToString:@"3"]){
+        UIButton *button = (UIButton *)[serviceView viewWithTag:11];
+         [button setBackgroundImage:[UIImage imageNamed:@"button_Online service_Selected"] forState:UIControlStateNormal];
+    }
+    
     self.bottomView.frame = CGRectMake(0, CGRectGetMaxY(self.picView.frame)+6, kScreenSize.width, priceView.frame.size.height+unitView.frame.size.height+serviceView.frame.size.height+18);
     
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
@@ -426,6 +468,12 @@
 {
     NSArray *selectedArray = @[@"button_Home service_Selected",@"button_Online service_Selected",@"button_Express delivery_Selected"];
     NSArray *array = @[@"button_Home service_default",@"button_Online service_default",@"button_Express delivery_default"];
+    UIView *view = (UIView *)[self.bottomView viewWithTag:1];
+    for (NSInteger i = 0; i<3; i++) {
+        UIButton *button = (UIButton *)[view viewWithTag:10+i];
+        [button setBackgroundImage:[UIImage imageNamed:array[i]] forState:UIControlStateNormal];
+    }
+    
     if (self.selectedButton == nil) {
         self.selectedButton = button;
         [button setBackgroundImage:[UIImage imageNamed:selectedArray[button.tag-10]] forState:UIControlStateNormal];
@@ -433,7 +481,6 @@
         
     }else if (self.selectedButton != button){
         for (NSInteger i = 0; i < selectedArray.count; i++) {
-            UIView *view = (UIView *)[self.bottomView viewWithTag:1];
             UIButton *btn = (UIButton *)[view viewWithTag:10+i];
             if (btn == button) {
                 [button setBackgroundImage:[UIImage imageNamed:selectedArray[button.tag-10]] forState:UIControlStateNormal];
@@ -445,6 +492,11 @@
     }
 
     if (button.tag == 10 || button.tag==11) {
+        if (button.tag == 10) {
+            self.swap_type = @"1";
+        }else{
+            self.swap_type = @"2";
+        }
         [self.timeView removeFromSuperview];
         [self createServiceTimeView];
     }
@@ -497,7 +549,11 @@
 -(void)createReleaseButton
 {
     UIButton *releaseButton = [[UIButton alloc]initWithFrame:CGRectMake(0, kScreenSize.height-64-50, kScreenSize.width, 50)];
-    [releaseButton setTitle:@"发布" forState:UIControlStateNormal];
+    if ([self.type isEqualToString:@"编辑"]) {
+        [releaseButton setTitle:@"编辑" forState:UIControlStateNormal];
+    }else{
+        [releaseButton setTitle:@"发布" forState:UIControlStateNormal];
+    }
     [releaseButton setTitleColor:[UIColor colorWithHexString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
     [releaseButton setBackgroundColor:[UIColor colorWithHexString:@"#ff6666" alpha:1]];
     [releaseButton addTarget:self action:@selector(releaseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -516,9 +572,14 @@
         }
     }
 
-    NSDictionary *parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":@"2",@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+    NSDictionary *parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter];
+
+    if ([button.titleLabel.text isEqualToString:@"编辑"]) {
+        [self pushDataWithUrl:kBazaarEditSkillUrl parameter:signParameter];
+    }else{
+        [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter];  
+    }
 }
 
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
@@ -530,6 +591,7 @@
             
             [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
             [weakSelf.navigationController popViewControllerAnimated:YES];
+            NSLog(@"%@",responseObject);
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error.debugDescription);
@@ -551,6 +613,7 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if (textField == self.priceTextField) {
+        
         if ([textField.text rangeOfString:@"."].location == NSNotFound) {
             self.isHaveDian = NO;
         }
