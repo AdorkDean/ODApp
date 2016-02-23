@@ -61,7 +61,8 @@
     [strM appendFormat:@"{\n"];
     
     // 2.遍历字典，拼接字典中的键值对
-    [self enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+    [self enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop)
+    {
         if ([obj isKindOfClass:[NSString class]])
         {
             obj = [NSString stringWithFormat:@"\"%@\"",obj];
@@ -69,7 +70,7 @@
         [strM appendFormat:@"\t\"%@\":%@,\n",key,obj];
     }];
     
-    [strM replaceCharactersInRange:NSMakeRange(strM.length - 1, 1) withString:@"}\n"];
+    [strM replaceCharactersInRange:NSMakeRange(strM.length - [@",\n" length], 1) withString:@"\n}"];
     return strM;
 }
 

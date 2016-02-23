@@ -20,7 +20,7 @@
         [strM appendFormat:@"%@",obj];
         if (idx != self.count - 1)
         {
-            [strM appendString:@","];
+            [strM appendString:@",\n"];
         }
     }];
     
