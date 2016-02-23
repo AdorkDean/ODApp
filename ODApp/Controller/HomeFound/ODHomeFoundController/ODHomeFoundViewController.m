@@ -249,8 +249,8 @@
 
 - (void)moreButtonClick:(UIButton *)button
 {
-    
-    [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"敬请期待"];
+    ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 热门活动图片点击事件
