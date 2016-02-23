@@ -68,14 +68,12 @@
 
 - (void)refreshdata
 {
-    
     [self getSkillChangeRequest];
     [self getScrollViewRequest];
 }
 
 -(NSMutableArray *)mySort:(NSMutableArray *)mArray
 {
-    
     NSInteger i ,j ,count;
     NSObject *temp;
     count = mArray.count+1;
@@ -96,14 +94,12 @@
 #pragma mark - 显示定位城市
 - (void)locationCity
 {
-    
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
 }
 
 #pragma mark - 定位城市按钮
 - (void)CreateLocationButtonAction
 {
-    
     [self.locationButton addTarget:self action:@selector(locationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
@@ -112,7 +108,6 @@
 #pragma mark - 定位城市数据请求
 - (void)getLocationCityRequest
 {
-    
     NSDictionary *parameter = @{@"region_name":@""};
     [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
         
@@ -146,7 +141,6 @@
 #pragma mark - 技能交换数据请求
 - (void)getSkillChangeRequest
 {
-    
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
@@ -181,7 +175,6 @@
 #pragma mark - 定位按钮点击事件
 - (void)locationButtonClick:(UIButton *)button
 {
-    
     ODLocationController *vc = [[ODLocationController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -189,13 +182,11 @@
 #pragma mark - 顶部8个按钮点击事件
 - (void)findActivityButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 1;
 }
 
 - (void)orderPlaceButtonClick:(UIButton *)button
 {
-    
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
@@ -212,27 +203,23 @@
 
 - (void)findFavorableButtonClick:(UIButton *)button
 {
-    
     ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)findJobButtonClick:(UIButton *)button
 {
-    
     ODFindJobController *vc = [[ODFindJobController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)searchCircleButtonClick:(UIButton *)button
 {
-    
     [self giveCommumityContent:nil andBbsType:4];
 }
 
 - (void)searchHelpButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 2;
     ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     vc.index = 1;
@@ -256,7 +243,6 @@
 #pragma mark - 热门活动图片点击事件
 - (void)imageButtonClick:(UIButton *)button
 {
-    
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
@@ -270,11 +256,8 @@
         vc.acitityId = [self.pictureIdArray[button.tag - 100] intValue];
         
         [self.navigationController pushViewController:vc animated:YES];
-        
     }
 }
-    
-
 
 #pragma mark - 寻圈子8个按钮点击事件
 - (void)emotionButtonClick:(UIButton *)button
@@ -284,7 +267,6 @@
 
 - (void)funnyButtonClick:(UIButton *)button
 {
-
     [self giveCommumityContent:@"搞笑" andBbsType:5];
 }
 
@@ -300,39 +282,33 @@
 
 - (void)lifeButtonClick:(UIButton *)button
 {
-
     [self giveCommumityContent:@"生活" andBbsType:5];
 }
 
 - (void)starButtonClick:(UIButton *)button
 {
-
     [self giveCommumityContent:@"明星" andBbsType:5];
 }
 
 - (void)beautifulButtonClick:(UIButton *)button
 {
- 
     [self giveCommumityContent:@"爱美" andBbsType:5];
 }
 
 - (void)petButtonClick:(UIButton *)button
 {
-
     [self giveCommumityContent:@"宠物" andBbsType:5];
 }
 
 #pragma mark - 加入更多圈子点击事件
 - (void)gestureButtonClick:(UIButton *)button
 {
-    
     [self giveCommumityContent:nil andBbsType:5];
 }
 
 #pragma mark - 寻圈子跳转传值
 - (void)giveCommumityContent:(NSString *)bbsMark andBbsType:(float)bbsType
 {
-    
     self.tabBarController.selectedIndex = 3;
     ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
     vc.bbsMark = bbsMark;
@@ -344,7 +320,6 @@
 #pragma mark - 用户头像点击事件
 - (void)headButtonClick:(UIButton *)button
 {
-    
     ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *)button.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
@@ -357,13 +332,11 @@
         
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
 }
 
 #pragma mark - 了解更多技能点击事件
 - (void)moreSkillButtonClick:(UIButton *)button
 {
-    
     self.tabBarController.selectedIndex = 2;
     ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     vc.index = 0;
@@ -372,7 +345,6 @@
 #pragma mark - 技能交换cell图片点击事件
 -(void)imageButtonClicked:(UIButton *)button
 {
-    
     ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *)button.superview.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
@@ -413,19 +385,16 @@
 #pragma mark - UICollectionViewDelegate
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    
     return 1;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    
     return self.dataArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     ODBazaarExchangeSkillCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
@@ -470,7 +439,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc]init];
     detailControler.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
@@ -479,7 +447,6 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    
     static NSString *viewId = @"supple";
     
     self.rsusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:viewId forIndexPath:indexPath];
@@ -489,13 +456,12 @@
         // Hot Activity
         self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 7/12 * self.pictureArray.count , 0);
         self.rsusableView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 15) * 7/12, 0);
-        //    self.rsusableView.scrollView.pagingEnabled = YES;
+//        self.rsusableView.scrollView.pagingEnabled = YES;
         self.rsusableView.scrollView.delegate = self;
         self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
         self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;
         
         for (int i = 0; i < self.pictureArray.count; i++) {
-            
             
             UIButton *imageButton;
             if (i < self.pictureArray.count - 1) {
@@ -558,19 +524,18 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
 }
 
+
+#warning [ODHomeFoundFooterView changeSkillView]: unrecognized selector sent to instance 0x7f808c87d500
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    
     return CGSizeMake(0, 1 + CGRectGetMaxY(self.rsusableView.changeSkillView.frame));
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    
     return CGSizeMake(0, 42);
 }
 
@@ -636,7 +601,6 @@ updatingLocation:(BOOL)updatingLocation{
         {
             cityResult = [result substringToIndex:[result length] - 1];
         }
-        
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
         

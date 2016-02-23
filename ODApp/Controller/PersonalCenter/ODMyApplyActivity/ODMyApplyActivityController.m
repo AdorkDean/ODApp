@@ -38,7 +38,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getCollectionViewRequest];
+    
+    if (self.isRefresh) {
+        [self.collectionView.mj_header beginRefreshing];
+        self.isRefresh = NO;
+    }
+    
+//    [self getCollectionViewRequest];
 
 }
 
