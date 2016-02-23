@@ -58,11 +58,18 @@
     _search = [[AMapSearchAPI alloc] init];
     _search.delegate = self;
     
+    __weakSelf
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        
+        [weakSelf.collectionView.mj_header beginRefreshing];
+    }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [self locationCity];
 }
 
@@ -599,11 +606,13 @@ updatingLocation:(BOOL)updatingLocation{
         if (result.length == 0)
         {
             result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
+            if (result.length != 0) {
+                cityResult = [result substringToIndex:[result length] - 1];
+            }
+        }else{
+            cityResult = [result substringToIndex:[result length] - 1];
         }
 
-        cityResult = [result substringToIndex:[result length] - 1];
-
-        
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
         
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
