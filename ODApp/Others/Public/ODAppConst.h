@@ -161,3 +161,4 @@ UIKIT_EXTERN NSString * const kDeliveryUrl;
 UIKIT_EXTERN NSString * const kFinshOrderUrl;
 UIKIT_EXTERN NSString * const kEvalueUrl;
 UIKIT_EXTERN NSString * const kPayBackUrl;
+UIKIT_EXTERN NSString * const kGetOrderUrl;

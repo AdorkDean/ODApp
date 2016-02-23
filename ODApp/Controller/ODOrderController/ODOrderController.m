@@ -238,7 +238,7 @@
     NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": self.headView.orderView.timeLabel.text , @"user_address_id":self.addressId , @"comment":@""};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weak typeof (self)weakSelf = self;
-    [self.orderManager GET:kSaveOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.orderManager GET:kGetOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
