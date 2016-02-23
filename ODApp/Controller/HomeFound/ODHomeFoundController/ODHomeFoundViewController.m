@@ -33,7 +33,7 @@
     
     [ODUserInformation sharedODUserInformation].cityID = @"1";
     
-    self.pictureArray = [[NSMutableArray alloc] init];
+    self.pictureArray = [[NSArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
     
     self.cityListArray = [[NSArray alloc] init];

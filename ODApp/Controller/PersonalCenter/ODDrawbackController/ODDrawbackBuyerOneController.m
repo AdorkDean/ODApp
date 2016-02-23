@@ -265,8 +265,7 @@
         [self.releaseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.releaseButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [self.releaseButton addTarget:self action:@selector(releaseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:self.releaseButton];
-        
+        [self.view addSubview:self.releaseButton];        
     }
     
     if (self.isRefuseAndReceive) {
