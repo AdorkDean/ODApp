@@ -124,7 +124,8 @@
 #pragma mark - 热门活动数据请求
 - (void)getScrollViewRequest
 {
-    NSDictionary *parameter = @{@"city_id":[ODUserInformation sharedODUserInformation].cityID};
+    NSDictionary *parameter = @{@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
+    
     __weakSelf
     [ODHttpTool getWithURL:ODHomeFoundUrl parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model)
      {
@@ -144,7 +145,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    NSDictionary *parameter = @{@"city_id":[ODUserInformation sharedODUserInformation].cityID};
+    NSDictionary *parameter = @{@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
@@ -596,12 +597,11 @@ updatingLocation:(BOOL)updatingLocation{
         NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
         if (result.length == 0)
         {
-            cityResult = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
+            result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
         }
-        else
-        {
-            cityResult = [result substringToIndex:[result length] - 1];
-        }
+
+        cityResult = [result substringToIndex:[result length] - 1];
+
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
         
