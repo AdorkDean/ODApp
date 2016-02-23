@@ -13,21 +13,18 @@
 @end
 
 @implementation ODBazaarReleaseSkillViewController
+
 @synthesize imageArray = _imageArray;
+
 - (void)setImageArray:(NSArray *)imageArray
 {
     NSLogFunc
     _imageArray = imageArray;
-    __weakSelf
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        for (NSString *imageStr in _imageArray)
-        {
-            UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:imageStr]]];
-            [weakSelf.mArray addObject:image];
-        }
-//    });
+    for (NSString *imageStr in _imageArray){
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:imageStr]]];
+        [self.mArray addObject:image];
+    }
 }
-
 
 - (NSMutableArray *)mArray{
     if (!_mArray)
@@ -36,6 +33,14 @@
     }
     return _mArray;
 }
+
+- (NSMutableArray *)strArray{
+    if (!_strArray) {
+        _strArray = [[NSMutableArray alloc]init];
+    }
+    return _strArray;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLogFunc
@@ -177,8 +182,6 @@
     imageView.image = [UIImage imageNamed:@"button_Cover label_one"];
     imageView.tag = 9;
     [self.addPicButton addSubview:imageView];
-    
-    self.strArray = [[NSMutableArray alloc]init];
 }
 
 -(void)addPicButtonClick:(UIButton *)button
@@ -237,7 +240,6 @@
         self.pickedImage = info[UIImagePickerControllerOriginalImage];
         
         [self createProgressHUDTitle];
-        
         
         //图片转化为data
         NSData *imageData;
@@ -302,7 +304,10 @@
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
             NSString *str = result[@"File"];
+            
+            NSLog(@"%@",str);
             [weakSelf.strArray addObject:str];
+            NSLog(@"%ld",weakSelf.strArray.count);
             [weakSelf reloadImageButtons];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -572,26 +577,36 @@
         }
     }
 
-    NSDictionary *parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-
     if ([button.titleLabel.text isEqualToString:@"编辑"]) {
-        [self pushDataWithUrl:kBazaarEditSkillUrl parameter:signParameter];
+         NSDictionary *parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        [self pushDataWithUrl:kBazaarEditSkillUrl parameter:signParameter isEdit:YES];
     }else{
-        [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter];  
+         NSDictionary *parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter isEdit:NO];
     }
+    
+
 }
 
--(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
+-(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isEdit:(BOOL)isEdit
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     __weakSelf;
     [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        if ([responseObject[@"status"]isEqualToString:@"success"]) {
-            
-            [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-            NSLog(@"%@",responseObject);
+        
+        if (isEdit) {
+            if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+                NSLog(@"%@",responseObject);
+            }
+        }else{
+            if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
+                [weakSelf.navigationController popViewControllerAnimated:YES];
+                NSLog(@"%@",responseObject);
+            }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error.debugDescription);
