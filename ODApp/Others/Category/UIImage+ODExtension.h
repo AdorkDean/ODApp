@@ -14,11 +14,11 @@
  */
 + (UIImage *)OD_imageWithColor:(UIColor *)color;
 /**
- *  圆形图片
+ *  把image裁剪成圆形图片
  */
 - (instancetype)OD_circleImage;
 /**
- *  转换成圆形图片
+ *  根据图片名字转换成圆形图片
  */
 + (instancetype)OD_circleImageNamed:(NSString *)name;
 

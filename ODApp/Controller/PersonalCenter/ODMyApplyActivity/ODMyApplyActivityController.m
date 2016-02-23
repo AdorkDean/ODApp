@@ -24,6 +24,7 @@
     self.navigationItem.title = @"我报名的活动";
   
     [self createCollectionView];
+    [self getCollectionViewRequest];
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         self.pageCount = 1;
@@ -38,7 +39,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getCollectionViewRequest];
+    
+    if (self.isRefresh) {
+        [self.collectionView.mj_header beginRefreshing];
+        self.isRefresh = NO;
+    }
+    
+//    [self getCollectionViewRequest];
 
 }
 

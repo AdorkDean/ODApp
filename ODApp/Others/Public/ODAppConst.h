@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 
+
 #pragma mark - UI相关常量
 /** TabBar的高度 */
 UIKIT_EXTERN CGFloat const ODTabBarHeight;
@@ -58,6 +59,16 @@ UIKIT_EXTERN NSString * const ODNotificationPaySuccess;
 
 /**  支付失败通知 */
 UIKIT_EXTERN NSString * const ODNotificationPayfail;
+
+/**  支付失败通知 */
+UIKIT_EXTERN NSString * const ODNotificationCancelOrder;
+
+/** 定位刷新 */
+UIKIT_EXTERN NSString * const ODNotificationLocationSuccessRefresh;
+
+/** 订单刷新 */
+UIKIT_EXTERN NSString * const ODNotificationOrderListRefresh;
+
 
 
 #pragma mark - 请求URL接口 
@@ -162,3 +173,5 @@ UIKIT_EXTERN NSString * const kMySellListUrl;
 UIKIT_EXTERN NSString * const kDeliveryUrl;
 UIKIT_EXTERN NSString * const kFinshOrderUrl;
 UIKIT_EXTERN NSString * const kEvalueUrl;
+UIKIT_EXTERN NSString * const kPayBackUrl;
+UIKIT_EXTERN NSString * const kGetOrderUrl;

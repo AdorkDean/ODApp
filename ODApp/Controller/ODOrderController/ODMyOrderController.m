@@ -40,14 +40,31 @@
      self.navigationItem.title = @"已购买订单";
     
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:ODNotificationOrderListRefresh object:nil];
+    
+ 
+    
+    
+    
 }
+
+- (void)refresh:(NSNotification *)text{
+    
+    
+     [self.collectionView.mj_header beginRefreshing];
+    
+}
+
 
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self.collectionView.mj_header beginRefreshing];
+    if ([self.isRefresh isEqualToString:@"1"]) {
+        [self.collectionView.mj_header beginRefreshing];
+    }
+
 
 }
 
@@ -252,6 +269,13 @@
     return 6;
 
   
+}
+
+
+- (void)dealloc
+{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

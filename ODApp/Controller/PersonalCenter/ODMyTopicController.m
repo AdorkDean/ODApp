@@ -206,7 +206,7 @@
     
     self.firstManager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{ @"type":@"1",@"page":countNumber , @"city_id":@"321" ,@"open_id":self.open_id};
+    NSDictionary *parameters = @{ @"type":@"1",@"page":countNumber , @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID] ,@"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
@@ -284,7 +284,7 @@
     
     self.secondManager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{ @"type":@"2",@"page":countNumber, @"city_id":@"321" , @"open_id":self.open_id  , @"call_array":@"1"};
+    NSDictionary *parameters = @{ @"type":@"2",@"page":countNumber, @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID] , @"open_id":self.open_id  , @"call_array":@"1"};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
       

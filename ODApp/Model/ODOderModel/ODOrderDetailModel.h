@@ -44,5 +44,7 @@
 @property (nonatomic , copy) NSString *tel400;
 @property (nonatomic , copy) NSString *tel_msg;
 @property (nonatomic  ,copy) NSString *reject_reason;
+@property (nonatomic , copy) NSString *order_title;
+@property (nonatomic , copy) NSString *order_content;
 
 @end

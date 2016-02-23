@@ -37,13 +37,16 @@
     [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationReleaseSkill object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
         [weakSelf.collectionView.mj_header beginRefreshing];
     }];
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf.collectionView.mj_header beginRefreshing];
+    }];
 
 }
 
 -(void)loadMoreData
 {
     self.page ++;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID],@"my":@"0",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
 }

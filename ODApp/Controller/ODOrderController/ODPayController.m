@@ -28,7 +28,6 @@
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic , strong) ODPayModel *model;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *goManager;
-@property (nonatomic, strong) AFHTTPRequestOperationManager *isPayManager;
 @property (nonatomic  ,copy) NSString *payStatus;
 @property (nonatomic , copy) NSString *isPay;
 
@@ -61,64 +60,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getPayStatus];
+
 }
-
-- (void)getPayStatus
-{
-    
-    self.isPayManager = [AFHTTPRequestOperationManager manager];
-    
-    
-    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-    
-    NSDictionary *parameters = @{@"order_id":self.orderId , @"open_id":openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    __weak typeof (self)weakSelf = self;
-    [self.isPayManager GET:kOrderDetailUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        if (responseObject) {
-            
-            
-            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                
-                
-                NSMutableDictionary *dic = responseObject[@"result"];
-                
-                NSString *orderStatus = [NSString stringWithFormat:@"%@" , dic[@"order_status"]];
-                
-                if ([orderStatus isEqualToString:@"1"]) {
-                    self.isPay = @"1";
-                }else {
-                    self.isPay = @"2";
-                }
-            
-                
-                
-        
-                
-                
-            }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-                
-                
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
-                
-                
-            }
-            
-            
-            
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
-    }];
-
-    
-    
-    
-}
-
 
 
 - (void)failPay:(NSNotification *)text{
@@ -136,18 +79,15 @@
 
 
 
-- (void)successPay:(NSNotification *)text{
+- (void)successPay:(NSNotification *)text
+{
     
     
     
     NSString *code = text.userInfo[@"codeStatus"];
     self.payStatus = @"1";
-    
     [self getDatawithCode:code];
 
-    
-    
-    
     
 }
 
@@ -163,18 +103,14 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    NSString *url = @"http://woquapi.test.odong.com/1.0/pay/weixin/callback/sync";
-    
-    
-    
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kPayBackUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
          __weak typeof (self)weakSelf = self;
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             
             
+            weakSelf.isPay = @"1";
             
-             [self getPayStatus];
             
             ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
             vc.swap_type = self.swap_type;
@@ -182,7 +118,7 @@
             vc.orderId = self.orderId;
                        
             
-            [self.navigationController pushViewController:vc animated:YES];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
             
             
             
@@ -288,18 +224,20 @@
     
     
     
-    NSLog(@"_____%@" , self.isPay);
+   
     
   
     if ([self.payType isEqualToString:@"1"]) {
        
         
         if ([self.isPay isEqualToString:@"1"]) {
-            [self payMoney];
+            
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"该订单已支付"];
+
 
         }else{
             
-            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"该订单已支付"];
+            [self payMoney];
 
             
             

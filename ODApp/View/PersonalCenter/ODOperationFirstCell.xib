@@ -14,26 +14,50 @@
                 <rect key="frame" x="0.0" y="0.0" width="349" height="88"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CWE-IO-qph">
-                        <rect key="frame" x="0.0" y="0.0" width="349" height="88"/>
+                        <rect key="frame" x="30" y="0.0" width="289" height="88"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dtf-nz-l41">
+                        <rect key="frame" x="0.0" y="0.0" width="30" height="88"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwa-2x-eS4">
+                        <rect key="frame" x="319" y="0.0" width="30" height="88"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
-                <constraint firstItem="CWE-IO-qph" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="JBr-g5-9Tw"/>
+                <constraint firstItem="Vwa-2x-eS4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="DvR-PX-OJX"/>
+                <constraint firstItem="CWE-IO-qph" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="JBr-g5-9Tw"/>
+                <constraint firstAttribute="bottom" secondItem="dtf-nz-l41" secondAttribute="bottom" id="OLR-rY-HmG"/>
+                <constraint firstItem="dtf-nz-l41" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="ORd-kL-zw2"/>
+                <constraint firstItem="CWE-IO-qph" firstAttribute="leading" secondItem="dtf-nz-l41" secondAttribute="trailing" id="Qsz-g2-5qF"/>
+                <constraint firstAttribute="bottom" secondItem="Vwa-2x-eS4" secondAttribute="bottom" id="YKQ-Iy-4iV"/>
                 <constraint firstItem="CWE-IO-qph" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="euw-a4-nFf"/>
-                <constraint firstAttribute="trailing" secondItem="CWE-IO-qph" secondAttribute="trailing" id="nqV-bH-sT2"/>
+                <constraint firstItem="Vwa-2x-eS4" firstAttribute="leading" secondItem="CWE-IO-qph" secondAttribute="trailing" id="ftW-CO-YUx"/>
+                <constraint firstAttribute="trailing" secondItem="Vwa-2x-eS4" secondAttribute="trailing" id="ipd-Ak-Ig6"/>
+                <constraint firstItem="dtf-nz-l41" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="jX4-dL-ujF"/>
+                <constraint firstAttribute="trailing" secondItem="CWE-IO-qph" secondAttribute="trailing" constant="30" id="nqV-bH-sT2"/>
                 <constraint firstAttribute="bottom" secondItem="CWE-IO-qph" secondAttribute="bottom" id="sHy-SH-SMm"/>
             </constraints>
             <size key="customSize" width="349" height="88"/>
             <connections>
+                <outlet property="leftLabel" destination="dtf-nz-l41" id="9ed-Mh-sKd"/>
+                <outlet property="rightLabel" destination="Vwa-2x-eS4" id="WwS-3Z-AvN"/>
                 <outlet property="titleLabel" destination="CWE-IO-qph" id="yIC-Ww-ahv"/>
             </connections>
-            <point key="canvasLocation" x="357.5" y="261"/>
+            <point key="canvasLocation" x="14.5" y="185"/>
         </collectionViewCell>
     </objects>
 </document>

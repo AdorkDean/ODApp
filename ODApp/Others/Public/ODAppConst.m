@@ -52,6 +52,15 @@ NSString * const ODNotificationPaySuccess = @"ODNotificationPaySuccess";
 /**  支付失败通知 */
 NSString * const ODNotificationPayfail = @"ODNotificationPayfail";
 
+/**  支付失败通知 */
+NSString * const ODNotificationCancelOrder = @"ODNotificationCancelOrder";
+
+/** 定位刷新 */
+NSString * const ODNotificationLocationSuccessRefresh = @"ODNotificationLocationSuccessRefresh";
+
+/** 订单刷新 */
+NSString * const ODNotificationOrderListRefresh = @"ODNotificationOrderListRefresh";
+
 
 #pragma mark - 请求URL接口
 /** 统一的URL */
@@ -125,7 +134,10 @@ NSString * const kDeleteAddressUrl = @"http://woquapi.test.odong.com/1.0/user/ad
 NSString * const kEditeAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/edit";
 
 NSString * const kGetServecTimeUrl = @"http://woquapi.test.odong.com/1.0/swap/service/time";
-NSString * const kSaveOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/order";
+NSString * const kSaveOrderUrl = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
+
+NSString * const kGetOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/order";
+
 
 NSString * const kGetLikeListUrl = @"http://woquapi.test.odong.com/1.0/swap/love/list";
 NSString * const kGetMyOrderListUrl = @"http://woquapi.test.odong.com/1.0/swap/order/list";
@@ -158,4 +170,5 @@ NSString * const kMySellListUrl = @"http://woquapi.test.odong.com/1.0/swap/selle
 NSString * const kDeliveryUrl = @"http://woquapi.test.odong.com/1.0/swap/confirm/delivery";
 NSString * const kFinshOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/finish";
 NSString * const kEvalueUrl = @"http://woquapi.test.odong.com/1.0/swap/order/reason";
+NSString * const kPayBackUrl = @"http://woquapi.test.odong.com/1.0/pay/weixin/callback/sync";
 

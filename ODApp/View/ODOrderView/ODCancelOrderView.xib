@@ -35,6 +35,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="M3n-4R-KEg"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <state key="normal" title="提交">
                         <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -56,7 +57,7 @@
                 <outlet property="reasonTextView" destination="9Pz-Sp-ehb" id="g88-RF-NKi"/>
                 <outlet property="submitButton" destination="Kji-FJ-LaH" id="R6x-ya-07d"/>
             </connections>
-            <point key="canvasLocation" x="-71" y="380"/>
+            <point key="canvasLocation" x="98" y="379"/>
         </view>
     </objects>
     <resources>

@@ -16,7 +16,7 @@
 
 @property(nonatomic,copy)void(^getRefresh)(NSString *isRefresh);
 
-@property (nonatomic, assign) int evaluateStar;
+
 
 
 

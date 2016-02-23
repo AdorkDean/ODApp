@@ -210,10 +210,6 @@
 - (void)saveOrderAction:(UIButton *)sender
 {
     
-    
-  
-    
-    
         if ([self.headView.orderView.timeLabel.text isEqualToString:@"服务时间"]) {
              [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入服务时间"];
         }else if ([self.headView.orderView.addressLabel.text isEqualToString:@"联系地址"]){
@@ -239,19 +235,16 @@
     
     
     
-    NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": self.headView.orderView.timeLabel.text , @"user_address_id":self.addressId , @"comment":self.headView.orderView.messageTextView.text};
+    NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": self.headView.orderView.timeLabel.text , @"user_address_id":self.addressId , @"comment":@""};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weak typeof (self)weakSelf = self;
-    [self.orderManager GET:kSaveOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.orderManager GET:kGetOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
           
             NSMutableDictionary *dic = responseObject[@"result"];
-            
-            
-          
             
             
             NSString *orderId = [NSString stringWithFormat:@"%@" , dic[@"order_id"]];
@@ -306,15 +299,6 @@
 }
 
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
-    
-    
-    
-    
-}
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
@@ -339,7 +323,7 @@
     }
     
     if (self.addressArray.count == 0) {
-        self.headView.orderView.addressLabel.text = @"联系地址";
+        self.headView.orderView.addressLabel.text = @"请选择";
     }else{
         ODAddressModel *model = self.addressArray[0];
         self.headView.orderView.addressLabel.text = model.address;
@@ -350,61 +334,12 @@
     
     
     
-    self.headView.orderView.messageTextView.delegate = self;
-    
+       
     
     return self.headView;
     
 }
 
-
-#pragma mark - textViewDelegate
--(void)textViewDidBeginEditing:(UITextView *)textView
-{
-    if (textView == self.headView.orderView.messageTextView) {
-        if ([textView.text isEqualToString:NSLocalizedString(@"给ta留言", nil)]) {
-            self.headView.orderView.messageTextView.text=NSLocalizedString(@"", nil);
-            self.headView.orderView.messageTextView.textColor = [UIColor blackColor];
-        }
-        else{
-            ;
-        }
-        
-    }
-}
-
-
-
-- (void)textViewDidChange:(UITextView *)textView
-{
-    NSString *message = @"";
-    if (textView == self.headView.orderView.messageTextView)
-    {
-        if (textView.text.length > 20)
-        {
-            textView.text =[textView.text substringToIndex:20];
-        }
-        else
-        {
-            message = textView.text;
-        }
-    }
-    
-}
-
-
--(void)textViewDidEndEditing:(UITextView *)textView
-{
-    if ([textView.text isEqualToString:@""])
-    {
-        textView.textColor = [UIColor lightGrayColor];
-        if (textView == self.headView.orderView.messageTextView) {
-            textView.text=NSLocalizedString(@"给他留言", nil);
-            
-            
-        }
-    }
-}
 
 
 //动态设置每个item的大小
@@ -419,7 +354,7 @@
 //动态设置区头的高度(根据不同的分区)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(kScreenSize.width, 220);
+    return CGSizeMake(kScreenSize.width, 160);
     
 }
 

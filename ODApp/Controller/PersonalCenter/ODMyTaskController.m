@@ -486,7 +486,7 @@
     
     self.firstManager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{ @"city_id":@"321" , @"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"1" , @"open_id":self.open_id};
+    NSDictionary *parameters = @{ @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID] , @"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"1" , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     __weak typeof (self)weakSelf = self;
@@ -538,7 +538,7 @@
         
     self.secondManager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"city_id":@"321" ,@"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"2" , @"open_id":self.open_id};
+    NSDictionary *parameters = @{@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID] ,@"suggest":@"0", @"task_status":self.type, @"page":countNumber, @"my":@"2" , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weak typeof (self)weakSelf = self;
     [self.secondManager GET:kGetTaskUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {

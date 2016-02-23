@@ -33,6 +33,9 @@
         [weakSelf.collectionView.mj_header beginRefreshing];
         
     }];
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf.collectionView.mj_header beginRefreshing];
+    }];
     
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;

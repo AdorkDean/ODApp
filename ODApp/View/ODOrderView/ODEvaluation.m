@@ -25,7 +25,7 @@
 {
     
     self.backgroundColor = [UIColor whiteColor];
-    self.alpha = 0.9;
+    self.alpha = 0.95;
    
     self.userInteractionEnabled = YES;
     self.firstButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -83,9 +83,16 @@
     
     self.determineButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.determineButton.frame = CGRectMake(30, 370, kScreenSize.width - 60, 30);
-    self.determineButton.backgroundColor = [UIColor yellowColor];
+    self.determineButton.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
     [self.determineButton setTitle:@"确认完成" forState:UIControlStateNormal];
     [self.determineButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    self.determineButton.titleLabel.font = [UIFont systemFontOfSize:13];
+    self.determineButton.layer.masksToBounds = YES;
+    self.determineButton.layer.cornerRadius = 5;
+    self.determineButton.layer.borderColor = [UIColor clearColor].CGColor;
+    self.determineButton.layer.borderWidth = 1;
+
+
     [self addSubview:self.determineButton];
 
     

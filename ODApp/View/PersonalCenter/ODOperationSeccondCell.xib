@@ -21,13 +21,23 @@
                             <constraint firstAttribute="height" constant="20" id="mxg-Dy-Bbr"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7D-BI-S2g">
+                        <rect key="frame" x="350" y="10" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="FyG-wm-C28"/>
+                            <constraint firstAttribute="width" constant="20" id="pXt-lW-lDV"/>
+                        </constraints>
+                        <state key="normal" title="Button" image="场地预约icon2"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="A7D-BI-S2g" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="cR1-Fj-6JB"/>
+                <constraint firstAttribute="trailing" secondItem="A7D-BI-S2g" secondAttribute="trailing" constant="18" id="eZl-nT-eox"/>
                 <constraint firstItem="3uU-1p-nuw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="jBX-DP-QJc"/>
                 <constraint firstItem="3uU-1p-nuw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="uWy-Tv-A5h"/>
             </constraints>
@@ -35,4 +45,7 @@
             <point key="canvasLocation" x="405" y="333"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="场地预约icon2" width="7" height="12"/>
+    </resources>
 </document>
