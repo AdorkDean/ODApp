@@ -199,11 +199,10 @@
 - (void)goOther:(UIButton *)sender
 {
     
-    self.tabBarController.selectedIndex = 2;
-    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
+    ODBazaarViewController *vc = self.navigationController.childViewControllers[0];
+    [self.navigationController popToViewController:vc animated:YES];
     vc.index = 0;
     
-      
     
 }
 
