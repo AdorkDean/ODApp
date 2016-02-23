@@ -16,9 +16,9 @@
 #import "ODCancelOrderView.h"
 #import "ODDrawbackBuyerOneController.h"
 #import "ODEvaluation.h"
-@interface ODOrderDetailController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate>
+@interface ODOrderDetailController ()< UITextViewDelegate>
 
-@property (nonatomic , strong) UITableView *tableView;
+
 @property (nonatomic , strong) ODOrderDetailView *orderDetailView;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *delateManager;
@@ -33,7 +33,7 @@
 @property (nonatomic ,strong) ODCancelOrderView *cancelOrderView;
 
 @property (nonatomic, copy) NSString *evaluateStar;
-
+@property (nonatomic , strong) UIScrollView *scroller;
 
 @end
 
@@ -44,11 +44,11 @@
     
     
     self.view.userInteractionEnabled = YES;
-
-      self.dataArray = [[NSMutableArray alloc] init];
-      self.open_id = [ODUserInformation sharedODUserInformation].openID;
-      self.navigationItem.title = @"订单详情";
-     self.evaluateStar = @"1";
+    
+    self.dataArray = [[NSMutableArray alloc] init];
+    self.open_id = [ODUserInformation sharedODUserInformation].openID;
+    self.navigationItem.title = @"订单详情";
+    self.evaluateStar = @"1";
     
 }
 
@@ -74,7 +74,7 @@
             
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 
-
+                
                 [self.dataArray removeAllObjects];
                 NSMutableDictionary *dic = responseObject[@"result"];
                 ODOrderDetailModel *model = [[ODOrderDetailModel alloc] init];
@@ -92,44 +92,56 @@
                 
             }
             
-
-            [weakSelf creatView];
-            [weakSelf.tableView reloadData];
+            
+            [weakSelf createScroller];
+            
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
     
     
 }
 
-
-- (void)creatView
+- (void)createScroller
 {
+    
+    self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
+    
+    self.scroller.userInteractionEnabled = YES;
+    self.scroller.backgroundColor = [UIColor whiteColor];
+    
     ODOrderDetailModel *model = self.dataArray[0];
     NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
     
     if ([status isEqualToString:@"-1"]) {
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height) style:UITableViewStylePlain];
+        
+        
+        self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 200);
+        
         
     }else{
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height + 100) style:UITableViewStylePlain];
+        
+     
+       self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 150);
+
+        
+            
         
     }
     
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.tableHeaderView = self.orderDetailView;
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-    self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    [self.view addSubview:self.tableView];
+    
+    [self.scroller addSubview:self.orderDetailView];
     
     
-       NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
-      
-       
+    [self.view addSubview:self.scroller];
+    
+    
+    NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
+    
+    
     if ([status isEqualToString:@"3"]) {
         
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -214,14 +226,14 @@
         
         
         if ([swap_type isEqualToString:@"2"]) {
-             [confirmButton setTitle:@"确认收货" forState:UIControlStateNormal];
+            [confirmButton setTitle:@"确认收货" forState:UIControlStateNormal];
         }else {
             [confirmButton setTitle:@"确认服务" forState:UIControlStateNormal];
-
+            
         }
         
         
-       
+        
         confirmButton.titleLabel.font=[UIFont systemFontOfSize:13];
         [confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [confirmButton addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -264,7 +276,12 @@
     }
     
     
+    
+    
+    
+    
 }
+
 
 
 
@@ -282,11 +299,11 @@
     vc.servicePhone = [NSString stringWithFormat:@"%@" , model.tel400];
     vc.serviceTime = model.tel_msg;
     vc.customerService = @"服务";
-    
-    
+    vc.drawbackTitle = @"退款信息";
+    vc.refuseReason = model.reject_reason;
+    vc.isRefuseReason = YES;
     
     [self.navigationController pushViewController:vc animated:YES];
-    
     
     
     
@@ -297,7 +314,7 @@
     
     self.finishManager = [AFHTTPRequestOperationManager manager];
     
-        
+    
     NSDictionary *parameters = @{@"order_id":self.order_id , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
@@ -323,14 +340,14 @@
             }
             
             
-          
+            
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
     
-
+    
     
     
     
@@ -357,7 +374,7 @@
 
 - (void)firstButtonClicik:(UIButton *)button
 {
-
+    
     [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
@@ -369,7 +386,7 @@
 
 - (void)secondButtonClicik:(UIButton *)button
 {
-
+    
     [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
@@ -377,12 +394,12 @@
     [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     self.evaluateStar = @"2";
     self.evaluationView.titleLabel.text = @"不满意";
-
+    
 }
 
 - (void)thirdButtonClicik:(UIButton *)button
 {
-
+    
     [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
@@ -390,12 +407,12 @@
     [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     self.evaluateStar = @"3";
     self.evaluationView.titleLabel.text = @"一般";
-
+    
 }
 
 - (void)fourthButtonClicik:(UIButton *)button
 {
-
+    
     [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
@@ -403,12 +420,12 @@
     [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     self.evaluateStar = @"4";
     self.evaluationView.titleLabel.text = @"满意";
-
+    
 }
 
 - (void)fiveButtonClicik:(UIButton *)button
 {
-
+    
     [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
@@ -416,7 +433,7 @@
     [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     self.evaluateStar = @"5";
     self.evaluationView.titleLabel.text = @"非常满意";
-
+    
 }
 
 
@@ -426,61 +443,61 @@
 {
     
     
+    
+    self.evalueManager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"order_id":self.order_id , @"reason":self.evaluationView.contentTextView.text, @"reason_num":self.evaluateStar , @"open_id":self.open_id};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    __weak typeof (self)weakSelf = self;
+    
+    
+    
+    [self.evalueManager GET:kEvalueUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        self.evalueManager = [AFHTTPRequestOperationManager manager];
-        
-        NSDictionary *parameters = @{@"order_id":self.order_id , @"reason":self.evaluationView.contentTextView.text, @"reason_num":self.evaluateStar , @"open_id":self.open_id};
-        NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-        
-        __weak typeof (self)weakSelf = self;
-        
-        
-        
-        [self.evalueManager GET:kEvalueUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (responseObject) {
             
-            if (responseObject) {
+            
+            if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                
+                [weakSelf.evaluationView removeFromSuperview];
+                
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"评价成功"];
                 
                 
-                if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                    
-                    [weakSelf.evaluationView removeFromSuperview];
-                    
-                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"评价成功"];
+                
+                if (weakSelf.getRefresh) {
                     
                     
                     
-                    if (weakSelf.getRefresh) {
-                        
-                        
-                        
-                        weakSelf.getRefresh(@"1");
-                    }
-                    
-
-                    
-                    
-                    
-                    [weakSelf getData];
-                    
-                    
-                    
-                }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-                    
-                    
-                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
-                    
-                    
+                    weakSelf.getRefresh(@"1");
                 }
                 
                 
+                
+                
+                
+                [weakSelf getData];
+                
+                
+                
+            }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
+                
+                
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+                
+                
             }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
-        }];
-        
-        
-        
-
+            
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+    }];
+    
+    
+    
+    
     
     
     
@@ -505,7 +522,7 @@
     vc.order_id = self.order_id;
     vc.isSelectReason = YES;
     vc.isRelease = YES;
-    
+    vc.confirmButtonContent = @"申请退款";
     
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -539,21 +556,21 @@
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
         }
-
+        
     }else if (textView == self.evaluationView.contentTextView) {
         
         if ([textView.text isEqualToString:@"请输入评价内容"]) {
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
         }
-
+        
         
         
         
     }
     
-   
-
+    
+    
 }
 
 
@@ -573,7 +590,7 @@
     }else if (textView == self.evaluationView.contentTextView) {
         
         if ([self.evaluationView.contentTextView.text isEqualToString:@"请输入评价内容"] || [self.evaluationView.contentTextView.text isEqualToString:@""]) {
-           self.evaluationView.contentTextView.text = @"请输入评价内容";
+            self.evaluationView.contentTextView.text = @"请输入评价内容";
             self.evaluationView.contentTextView.textColor = [UIColor lightGrayColor];
         }
         
@@ -581,7 +598,7 @@
         
         
     }
-
+    
     
     
     
@@ -612,7 +629,7 @@
                 
                 if ([responseObject[@"status"]isEqualToString:@"success"]) {
                     
-                     [weakSelf.cancelOrderView removeFromSuperview];
+                    [weakSelf.cancelOrderView removeFromSuperview];
                     
                     [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
                     
@@ -689,8 +706,8 @@
 {
     if (_orderDetailView == nil) {
         self.orderDetailView = [ODOrderDetailView getView];
-
         
+        self.orderDetailView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
         ODOrderDetailModel *model = self.dataArray[0];
         NSMutableDictionary *userDic = model.user;
         NSMutableArray *arr = model.imgs_small;
@@ -699,7 +716,7 @@
         
         
         NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
-
+        
         
         if ([status isEqualToString:@"-1"]) {
             self.orderDetailView.spaceToTop.constant = 150;
@@ -731,7 +748,7 @@
             
             
         }
-
+        
         
         
         
@@ -750,22 +767,22 @@
         
         if ([swap_type isEqualToString:@"2"]) {
             
-             self.orderDetailView.serviceTimeLabel.text = model.address;
+            self.orderDetailView.serviceTimeLabel.text = model.address;
             self.orderDetailView.serviceTypeLabel.text = @"服务地址:";
-             self.orderDetailView.swapTypeLabel.text = @"快递服务";
+            self.orderDetailView.swapTypeLabel.text = @"快递服务";
             
         }else{
             self.orderDetailView.serviceTimeLabel.text = model.service_time;
-               self.orderDetailView.serviceTypeLabel.text = @"服务时间:";
-             self.orderDetailView.swapTypeLabel.text = @"线上服务";
-
+            self.orderDetailView.serviceTypeLabel.text = @"服务时间:";
+            self.orderDetailView.swapTypeLabel.text = @"线上服务";
+            
         }
         
         self.orderDetailView.orderTimeLabel.text = model.order_created_at;
         self.orderDetailView.orderIdLabel.text = [NSString stringWithFormat:@"%@" , model.order_id];
         
-
-
+        
+        
         
         
         if ([status isEqualToString:@"1"]) {
@@ -775,7 +792,7 @@
         }else if ([status isEqualToString:@"3"]) {
             self.orderDetailView.typeLabel.text = @"已付款";
         }else if ([status isEqualToString:@"4"]) {
-           self.orderDetailView.typeLabel.text = @"已发货";
+            self.orderDetailView.typeLabel.text = @"已发货";
         }else if ([status isEqualToString:@"5"]) {
             self.orderDetailView.typeLabel.text = @"已评价";
             self.orderDetailView.typeLabel.textColor = [UIColor redColor];
@@ -786,44 +803,24 @@
         }else if ([status isEqualToString:@"-3"]) {
             self.orderDetailView.typeLabel.text = @"退款已确认";
         }else if ([status isEqualToString:@"-4"]) {
-           self.orderDetailView.typeLabel.text = @"已退款";
+            self.orderDetailView.typeLabel.text = @"已退款";
         }else if ([status isEqualToString:@"-5"]) {
             self.orderDetailView.typeLabel.text = @"拒绝退款";
         }
-
         
         
-
+        
+        
     }
     
     return _orderDetailView;
 }
-#pragma mark - UITableViewDelegate
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *cellID = @"cellId";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-    }
-    
-    
-    
-    return cell;
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 0;
-}
-
 
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-   
+    
 }
 
 

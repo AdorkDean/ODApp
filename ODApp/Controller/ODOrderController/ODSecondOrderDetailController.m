@@ -16,9 +16,9 @@
 #import "ODCancelOrderView.h"
 #import "ODDrawbackBuyerOneController.h"
 #import "ODEvaluation.h"
-@interface ODSecondOrderDetailController ()<UITableViewDataSource , UITableViewDelegate , UITextViewDelegate>
+@interface ODSecondOrderDetailController ()<UITextViewDelegate>
 
-@property (nonatomic , strong) UITableView *tableView;
+
 @property (nonatomic , strong) ODSecondOrderDetailView *orderDetailView;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
@@ -29,8 +29,10 @@
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , strong) ODEvaluation *evaluationView;
 @property (nonatomic ,strong) ODCancelOrderView *cancelOrderView;
-
 @property (nonatomic , copy) NSString *evaluateStar;
+
+@property (nonatomic , strong) UIScrollView *scroller;
+
 
 @end
 
@@ -46,8 +48,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     self.navigationItem.title = @"订单详情";
-  
-
+    
+    
     
     
 }
@@ -57,6 +59,9 @@
     [super viewWillAppear:animated];
     [self getData];
 }
+
+
+
 
 
 
@@ -95,8 +100,8 @@
             }
             
             
-            [weakSelf creatView];
-            [weakSelf.tableView reloadData];
+            [weakSelf createScroller];
+            
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -107,29 +112,37 @@
     
 }
 
-
-- (void)creatView
+- (void)createScroller
 {
+    
+    self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
+    
+    self.scroller.userInteractionEnabled = YES;
+    
     ODOrderDetailModel *model = self.dataArray[0];
     NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
     
     if ([status isEqualToString:@"-1"]) {
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 100) style:UITableViewStylePlain];
+        
+        
+        self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 200);
+        
         
     }else{
-        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height + 100) style:UITableViewStylePlain];
+        
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 150);
+        
         
     }
     
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.tableHeaderView = self.orderDetailView;
-    self.tableView.backgroundColor = [UIColor whiteColor];
-    self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    [self.view addSubview:self.tableView];
+    
+    [self.scroller addSubview:self.orderDetailView];
     
     
-      
+    [self.view addSubview:self.scroller];
+    
+    
+    
     if ([status isEqualToString:@"3"]) {
         
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -193,8 +206,8 @@
         
         
     }
-        
-        
+    
+    
     else if ([status isEqualToString:@"4"]) {
         
         
@@ -256,14 +269,18 @@
         
     }
     
-
     
-      
+    
+    
     
     
     
     
 }
+
+
+
+
 
 
 // 查看原因
@@ -280,8 +297,9 @@
     vc.servicePhone = [NSString stringWithFormat:@"%@" , model.tel400];
     vc.serviceTime = model.tel_msg;
     vc.customerService = @"服务";
-    
-    
+    vc.drawbackTitle = @"退款信息";
+    vc.refuseReason = model.reject_reason;
+    vc.isRefuseReason = YES;
     
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -347,7 +365,7 @@
     [self.evaluationView.thirdButton addTarget:self action:@selector(thirdButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
     [self.evaluationView.fourthButton addTarget:self action:@selector(fourthButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
     [self.evaluationView.fiveButton addTarget:self action:@selector(fiveButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
-
+    
     [[[UIApplication sharedApplication]keyWindow] addSubview:self.evaluationView];
     
     
@@ -428,7 +446,7 @@
     
     self.evalueManager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"order_id":self.order_id , @"reason":self.evaluationView.contentTextView.text, @"reason_num":@"2" , @"open_id":self.open_id};
+    NSDictionary *parameters = @{@"order_id":self.order_id , @"reason":self.evaluationView.contentTextView.text, @"reason_num":self.evaluateStar , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     __weak typeof (self)weakSelf = self;
@@ -454,7 +472,7 @@
                     weakSelf.getRefresh(@"1");
                 }
                 
-
+                
                 
                 [weakSelf getData];
                 
@@ -475,7 +493,7 @@
     }];
     
     
-        
+    
     
     
     
@@ -493,16 +511,23 @@
 - (void)refundAction:(UIButton *)sender
 {
     
+ 
+    
+        
+    
     ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
     
     vc.darwbackMoney = self.orderDetailView.allPriceLabel.text;
     vc.order_id = self.order_id;
     vc.isSelectReason = YES;
     vc.isRelease = YES;
-    
+    vc.confirmButtonContent = @"申请退款";
     
     [self.navigationController pushViewController:vc animated:YES];
+
     
+    
+       
 }
 
 
@@ -682,17 +707,22 @@
     if (_orderDetailView == nil) {
         self.orderDetailView = [ODSecondOrderDetailView getView];
         
+        self.orderDetailView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
         
         ODOrderDetailModel *model = self.dataArray[0];
         NSMutableDictionary *userDic = model.user;
         NSMutableArray *arr = model.imgs_small;
         NSMutableDictionary *picDic = arr[0];
         
-           NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
+        NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
         
         
         
         if ([status isEqualToString:@"-1"]) {
+            
+            
+            
+            
             self.orderDetailView.spaceToTop.constant = 150;
             
             
@@ -722,7 +752,7 @@
             
             
         }
-
+        
         
         
         
@@ -733,21 +763,17 @@
         self.orderDetailView.contentLabel.text = model.title;
         self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
         self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.price];
+        
         self.orderDetailView.typeLabel.text = self.orderType;
         self.orderDetailView.addressNameLabel.text = model.name;
         self.orderDetailView.addressPhoneLabel.text = model.tel;
-        
-      
-        
         self.orderDetailView.swapTypeLabel.text = @"上门服务";
-                  
         self.orderDetailView.serviceAddressLabel.text = model.address;
         self.orderDetailView.serviceTimeLabel.text = model.service_time;
-           
         self.orderDetailView.orderTimeLabel.text = model.order_created_at;
         self.orderDetailView.orderIdLabel.text = [NSString stringWithFormat:@"%@" , model.order_id];
         
-     
+        
         
         
         if ([status isEqualToString:@"1"]) {
@@ -773,36 +799,15 @@
         }else if ([status isEqualToString:@"-5"]) {
             self.orderDetailView.typeLabel.text = @"拒绝退款";
         }
-
-            
+        
+        
+        
         
         
     }
     
     return _orderDetailView;
 }
-#pragma mark - UITableViewDelegate
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *cellID = @"cellId";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-    }
-    
-    
-    
-    return cell;
-}
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 0;
-}
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

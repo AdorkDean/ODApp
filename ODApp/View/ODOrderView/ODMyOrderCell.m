@@ -46,10 +46,7 @@
 
     NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
     
-    
-    
-  
-    
+        
     
     if ([status isEqualToString:@"1"]) {
         self.statusLabel.text = @"待支付";
