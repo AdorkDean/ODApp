@@ -66,7 +66,7 @@
         {
             obj = [NSString stringWithFormat:@"\"%@\"",obj];
         }
-        [strM appendFormat:@"\t\"%@\":%@\n",key,obj];
+        [strM appendFormat:@"\t\"%@\":%@,\n",key,obj];
     }];
     
     [strM replaceCharactersInRange:NSMakeRange(strM.length - 1, 1) withString:@"}\n"];
