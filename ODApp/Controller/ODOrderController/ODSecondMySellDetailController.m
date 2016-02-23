@@ -155,7 +155,6 @@
     
     
     
-    [self.scroller addSubview:self.orderDetailView];
     
     
     [self.view addSubview:self.scroller];
@@ -236,7 +235,7 @@
     
     
     
-    
+    [self createOrderView];
     
     
     
@@ -346,131 +345,125 @@
 }
 
 
-
-
-- (ODSecondOrderDetailView *)orderDetailView
+- (void)createOrderView
 {
-    if (_orderDetailView == nil) {
-        self.orderDetailView = [ODSecondOrderDetailView getView];
-        self.orderDetailView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
-        
-        ODOrderDetailModel *model = self.dataArray[0];
-        NSMutableDictionary *userDic = model.user;
-        NSMutableArray *arr = model.imgs_small;
-        NSMutableDictionary *picDic = arr[0];
-        
-        NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
-        
-        
-        if ([status isEqualToString:@"-1"]) {
-            self.orderDetailView.spaceToTop.constant = 150;
-            
-            
-            UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, self.orderDetailView.serviceAddressLabel.frame.origin.y + 30, kScreenSize.width, 6)];
-            line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-            [self.orderDetailView addSubview:line];
-            
-            UILabel *reason = [[UILabel alloc] initWithFrame:CGRectMake(18, line.frame.origin.y + 16, 100, 20)];
-            reason.backgroundColor = [UIColor whiteColor];
-            reason.font = [UIFont systemFontOfSize:14];
-            reason.text = @"订单取消原因";
-            reason.textAlignment = NSTextAlignmentLeft;
-            [self.orderDetailView addSubview:reason];
-            
-            UILabel *secondLine = [[UILabel alloc] initWithFrame:CGRectMake(18, reason.frame.origin.y + 30, kScreenSize.width - 18, 1)];
-            secondLine.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-            [self.orderDetailView addSubview:secondLine];
-            
-            
-            UILabel *reasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, secondLine.frame.origin.y + 11, kScreenSize.width - 36, 50)];
-            reasonLabel.backgroundColor = [UIColor whiteColor];
-            reasonLabel.font = [UIFont systemFontOfSize:14];
-            reasonLabel.numberOfLines = 0;
-            reasonLabel.text = model.reason;
-            reasonLabel.textAlignment = NSTextAlignmentLeft;
-            [self.orderDetailView addSubview:reasonLabel];
-            
-            
-        }
+    self.orderDetailView = [ODSecondOrderDetailView getView];
+    self.orderDetailView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
+    
+    ODOrderDetailModel *model = self.dataArray[0];
+    NSMutableDictionary *userDic = model.user;
+    NSMutableArray *arr = model.imgs_small;
+    NSMutableDictionary *picDic = arr[0];
+    
+    NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
+    
+    
+    if ([status isEqualToString:@"-1"]) {
+        self.orderDetailView.spaceToTop.constant = 150;
         
         
+        UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, self.orderDetailView.serviceAddressLabel.frame.origin.y + 30, kScreenSize.width, 6)];
+        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        [self.orderDetailView addSubview:line];
         
-        [self.orderDetailView.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , userDic[@"avatar"]]] forState:UIControlStateNormal];
-        [self.orderDetailView.contentButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , picDic[@"img_url"]]] forState:UIControlStateNormal];
-        self.orderDetailView.nickLabel.text = userDic[@"nick"];
-        self.orderDetailView.contentLabel.text = model.title;
-        self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
-        self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.price];
-        self.orderDetailView.typeLabel.text = self.orderType;
-        self.orderDetailView.addressNameLabel.text = model.name;
-        self.orderDetailView.addressPhoneLabel.text = model.tel;
+        UILabel *reason = [[UILabel alloc] initWithFrame:CGRectMake(18, line.frame.origin.y + 16, 100, 20)];
+        reason.backgroundColor = [UIColor whiteColor];
+        reason.font = [UIFont systemFontOfSize:14];
+        reason.text = @"订单取消原因";
+        reason.textAlignment = NSTextAlignmentLeft;
+        [self.orderDetailView addSubview:reason];
         
-        
-        self.orderDetailView.swapTypeLabel.text = @"上门服务";
-        
-        self.orderDetailView.serviceAddressLabel.text = model.address;
-        self.orderDetailView.serviceTimeLabel.text = model.service_time;
-        
-        self.orderDetailView.orderTimeLabel.text = model.order_created_at;
-        self.orderDetailView.orderIdLabel.text = [NSString stringWithFormat:@"%@" , model.order_id];
+        UILabel *secondLine = [[UILabel alloc] initWithFrame:CGRectMake(18, reason.frame.origin.y + 30, kScreenSize.width - 18, 1)];
+        secondLine.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        [self.orderDetailView addSubview:secondLine];
         
         
-        
-        
-        
-        
-        if ([status isEqualToString:@"1"]) {
-            self.orderDetailView.typeLabel.text = @"待支付";
-            self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
-        }else if ([status isEqualToString:@"2"]) {
-            self.orderDetailView.typeLabel.text = @"已付款";
-            self.orderDetailView.typeLabel.textColor = [UIColor redColor];
-        }else if ([status isEqualToString:@"3"]) {
-            self.orderDetailView.typeLabel.text = @"已付款";
-            self.orderDetailView.typeLabel.textColor = [UIColor redColor];
-        }else if ([status isEqualToString:@"4"]) {
-            
-            
-            NSString *swap_Type = [NSString stringWithFormat:@"%@" , model.swap_type];
-            
-            
-            
-            
-            
-            if ([swap_Type isEqualToString:@"2"]) {
-                
-                self.orderDetailView.typeLabel.text = @"已发货";
-                self.orderDetailView.typeLabel.textColor = [UIColor redColor];
-                
-            }else{
-                
-                self.orderDetailView.typeLabel.text = @"已服务";
-                self.orderDetailView.typeLabel.textColor = [UIColor redColor];
-            }
-            
-        }else if ([status isEqualToString:@"5"]) {
-            self.orderDetailView.typeLabel.text = @"已完成";
-        }else if ([status isEqualToString:@"-1"]) {
-            self.orderDetailView.typeLabel.text = @"已取消";
-            self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
-        }else if ([status isEqualToString:@"-2"]) {
-            self.orderDetailView.typeLabel.text = @"买家已申请退款";
-            self.orderDetailView.typeLabel.textColor = [UIColor redColor];
-        }else if ([status isEqualToString:@"-3"]) {
-            self.orderDetailView.typeLabel.text = @"退款已受理";
-            self.orderDetailView.typeLabel.textColor = [UIColor redColor];
-        }else if ([status isEqualToString:@"-4"]) {
-            self.orderDetailView.typeLabel.text = @"已退款";
-        }else if ([status isEqualToString:@"-5"]) {
-            self.orderDetailView.typeLabel.text = @"拒绝退款";
-        }
-        
-        
+        UILabel *reasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, secondLine.frame.origin.y + 11, kScreenSize.width - 36, 50)];
+        reasonLabel.backgroundColor = [UIColor whiteColor];
+        reasonLabel.font = [UIFont systemFontOfSize:14];
+        reasonLabel.numberOfLines = 0;
+        reasonLabel.text = model.reason;
+        reasonLabel.textAlignment = NSTextAlignmentLeft;
+        [self.orderDetailView addSubview:reasonLabel];
         
         
     }
     
-    return _orderDetailView;
+    
+    
+    [self.orderDetailView.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , userDic[@"avatar"]]] forState:UIControlStateNormal];
+    [self.orderDetailView.contentButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , picDic[@"img_url"]]] forState:UIControlStateNormal];
+    self.orderDetailView.nickLabel.text = userDic[@"nick"];
+    self.orderDetailView.contentLabel.text = model.title;
+    self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
+    self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.price];
+    self.orderDetailView.typeLabel.text = self.orderType;
+    self.orderDetailView.addressNameLabel.text = model.name;
+    self.orderDetailView.addressPhoneLabel.text = model.tel;
+    
+    
+    self.orderDetailView.swapTypeLabel.text = @"上门服务";
+    
+    self.orderDetailView.serviceAddressLabel.text = model.address;
+    self.orderDetailView.serviceTimeLabel.text = model.service_time;
+    
+    self.orderDetailView.orderTimeLabel.text = model.order_created_at;
+    self.orderDetailView.orderIdLabel.text = [NSString stringWithFormat:@"%@" , model.order_id];
+    
+    
+    
+    
+    
+    
+    if ([status isEqualToString:@"1"]) {
+        self.orderDetailView.typeLabel.text = @"待支付";
+        self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
+    }else if ([status isEqualToString:@"2"]) {
+        self.orderDetailView.typeLabel.text = @"已付款";
+        self.orderDetailView.typeLabel.textColor = [UIColor redColor];
+    }else if ([status isEqualToString:@"3"]) {
+        self.orderDetailView.typeLabel.text = @"已付款";
+        self.orderDetailView.typeLabel.textColor = [UIColor redColor];
+    }else if ([status isEqualToString:@"4"]) {
+        
+        
+        NSString *swap_Type = [NSString stringWithFormat:@"%@" , model.swap_type];
+        
+        
+        
+        
+        
+        if ([swap_Type isEqualToString:@"2"]) {
+            
+            self.orderDetailView.typeLabel.text = @"已发货";
+            self.orderDetailView.typeLabel.textColor = [UIColor redColor];
+            
+        }else{
+            
+            self.orderDetailView.typeLabel.text = @"已服务";
+            self.orderDetailView.typeLabel.textColor = [UIColor redColor];
+        }
+        
+    }else if ([status isEqualToString:@"5"]) {
+        self.orderDetailView.typeLabel.text = @"已评价";
+    }else if ([status isEqualToString:@"-1"]) {
+        self.orderDetailView.typeLabel.text = @"已取消";
+        self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
+    }else if ([status isEqualToString:@"-2"]) {
+        self.orderDetailView.typeLabel.text = @"买家已申请退款";
+        self.orderDetailView.typeLabel.textColor = [UIColor redColor];
+    }else if ([status isEqualToString:@"-3"]) {
+        self.orderDetailView.typeLabel.text = @"退款已受理";
+        self.orderDetailView.typeLabel.textColor = [UIColor redColor];
+    }else if ([status isEqualToString:@"-4"]) {
+        self.orderDetailView.typeLabel.text = @"已退款";
+    }else if ([status isEqualToString:@"-5"]) {
+        self.orderDetailView.typeLabel.text = @"拒绝退款";
+    }
+    
+    
+    [self.scroller addSubview:self.orderDetailView];
+
 }
 
 

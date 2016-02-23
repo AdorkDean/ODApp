@@ -186,16 +186,9 @@
     
     
     if ([status isEqualToString:@"3"]) {
-        
-        UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        cancelButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-        [cancelButton setBackgroundImage:[UIImage imageNamed:@"button_Cancel order"] forState:UIControlStateNormal];
-        [cancelButton addTarget:self action:@selector(cancelOrder:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:cancelButton];
-        
-        
+         
         UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        refundButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
+        refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
         refundButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
         refundButton.titleLabel.font=[UIFont systemFontOfSize:13];
@@ -319,9 +312,6 @@
     
     
 }
-
-
-
 
 
 
@@ -486,53 +476,64 @@
     
     
     
-    self.evalueManager = [AFHTTPRequestOperationManager manager];
-    
-    NSDictionary *parameters = @{@"order_id":self.order_id , @"reason":self.evaluationView.contentTextView.text, @"reason_num":self.evaluateStar , @"open_id":self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    __weak typeof (self)weakSelf = self;
-    
-    
-    
-    [self.evalueManager GET:kEvalueUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    if ([self.evaluationView.contentTextView.text isEqualToString:@""] || [self.evaluationView.contentTextView.text isEqualToString:@"请输入评价内容"]) {
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入评价内容"];
+    }else{
         
-        if (responseObject) {
+        
+        self.evalueManager = [AFHTTPRequestOperationManager manager];
+        
+        NSDictionary *parameters = @{@"order_id":self.order_id , @"reason":self.evaluationView.contentTextView.text, @"reason_num":self.evaluateStar , @"open_id":self.open_id};
+        NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+        
+        __weak typeof (self)weakSelf = self;
+        
+        
+        
+        [self.evalueManager GET:kEvalueUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
-            
-            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                
-                [weakSelf.evaluationView removeFromSuperview];
-                
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"评价成功"];
+            if (responseObject) {
                 
                 
-                if (self.getRefresh) {
+                if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                    
+                    [weakSelf.evaluationView removeFromSuperview];
+                    
+                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"评价成功"];
+                    
+                    
+                    if (self.getRefresh) {
+                        
+                        
+                        
+                        weakSelf.getRefresh(@"1");
+                    }
                     
                     
                     
-                    weakSelf.getRefresh(@"1");
+                    [weakSelf getData];
+                    
+                    
+                    
+                }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
+                    
+                    
+                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+                    
+                    
                 }
                 
                 
-                
-                [weakSelf getData];
-                
-                
-                
-            }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-                
-                
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
-                
-                
             }
-            
-            
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
-    }];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        }];
+        
+        
+
+        
+        
+    }
     
     
     
