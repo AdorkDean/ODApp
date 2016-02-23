@@ -7,8 +7,12 @@
 //
 
 #import "ODDrawbackBuyerOneController.h"
-
+#import "ODCancelOrderView.h"
 @interface ODDrawbackBuyerOneController ()
+
+@property (nonatomic ,strong) ODCancelOrderView *cancelOrderView;
+
+
 
 @end
 
@@ -473,7 +477,61 @@
 - (void)refuseButtonClick:(UIButton *)button
 {
 
-    [self refuseDrawbackRequest];
+    
+    self.cancelOrderView = [ODCancelOrderView getView];
+    self.cancelOrderView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
+    [self.cancelOrderView.cancelButton addTarget:self action:@selector(cancelView:) forControlEvents:UIControlEventTouchUpInside];
+    [self.cancelOrderView.submitButton addTarget:self action:@selector(submitAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.cancelOrderView.reasonTextView.text = @"请输入拒绝原因";
+    self.cancelOrderView.reasonTextView.delegate = self;
+    [[[UIApplication sharedApplication]keyWindow] addSubview:self.cancelOrderView];
+    
+    
+}
+
+
+- (void)submitAction:(UIButton *)sender
+{
+    
+    
+    
+    if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入拒绝原因"];
+    }else{
+        
+        [self refuseDrawbackRequest];
+    }
+    
+    
+    
+}
+
+#pragma mark - UITextViewDelegate
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    
+    
+    if (textView == self.cancelOrderView.reasonTextView) {
+        if ([textView.text isEqualToString:@"请输入拒绝原因"]) {
+            textView.text = @"";
+            textView.textColor = [UIColor blackColor];
+        }
+        
+    }
+    
+    
+}
+
+
+
+
+
+- (void)cancelView:(UIButton *)sender
+{
+    
+    [self.cancelOrderView removeFromSuperview];
+    
+    
 }
 
 #pragma mark - 接受 按钮点击事件
@@ -611,9 +669,30 @@
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    if (textView.text.length == 0) {
-        self.contentPlaceholderLabel.text = @"请输入适当的退款理由";
+    
+    
+    if (textView == self.cancelOrderView.reasonTextView) {
+        if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
+            self.cancelOrderView.reasonTextView.text = @"请输入拒绝原因";
+            self.cancelOrderView.reasonTextView.textColor = [UIColor lightGrayColor];
+        }
+        
+    }else if (textView == self.drawbackStateTextView) {
+        
+        
+        if (textView.text.length == 0) {
+            self.contentPlaceholderLabel.text = @"请输入适当的退款理由";
+        }
+        
+
+        
+        
     }
+
+    
+    
+    
+    
 }
 
 
