@@ -41,6 +41,8 @@ UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
 /**  换技能通知 */
 UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
 
+/**  发布任务成功通知 */
+UIKIT_EXTERN NSString * const ODNotificationCreateServiceTimeView;
 
 /**  发布任务成功通知 */
 UIKIT_EXTERN NSString * const ODNotificationReleaseTask;

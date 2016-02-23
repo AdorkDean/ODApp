@@ -32,4 +32,5 @@
 @property(nonatomic,strong)UIView *detailView;
 @property(nonatomic,copy)NSString *nick;
 @property(nonatomic,copy)NSString *love_id;
+@property(nonatomic,strong)NSMutableArray *imageArray;
 @end

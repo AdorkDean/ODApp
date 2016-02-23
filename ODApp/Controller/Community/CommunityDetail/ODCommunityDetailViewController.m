@@ -240,7 +240,7 @@
         //图片
         for ( NSInteger i = 0; i < resultModel.bbs_imgs.count; i++) {
             UIImageView *imageView = [ODClassMethod creatImageViewWithFrame:CGRectZero imageName:nil tag:0];
-            [imageView sd_setImageWithURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+            [imageView sd_setImageWithURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
             {
                 [imageView sizeToFit];
                 CGFloat multiple = imageView.od_width/kScreenSize.width;
@@ -272,14 +272,14 @@
                 weakSelf.bbsView.frame = CGRectMake(0, 76, kScreenSize.width, lineView.frame.origin.y+lineView.frame.size.height);
                 weakSelf.tabelHeaderView.frame = CGRectMake(0, 64, kScreenSize.width,weakSelf.userView.frame.size.height+weakSelf.bbsView.frame.size.height);
                 weakSelf.tableView.tableHeaderView = weakSelf.tabelHeaderView;
-                imageView.contentMode = UIViewContentModeScaleAspectFill;
+                imageView.contentMode = UIViewContentModeScaleAspectFit;
                 [weakSelf.bbsView addSubview:imageView];
             }];
         }
     }else if (resultModel.bbs_imgs.count==1){
         
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectZero];
-        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[0]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[0]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [imageView sizeToFit];
             CGFloat multiple = kScreenSize.width/imageView.od_width;
             CGFloat height = imageView.od_height*multiple;
@@ -301,7 +301,7 @@
             weakSelf.bbsView.frame = CGRectMake(0, 76, kScreenSize.width, lineView.frame.origin.y+lineView.frame.size.height);
             weakSelf.tabelHeaderView.frame = CGRectMake(0, 64, kScreenSize.width,weakSelf.userView.frame.size.height+weakSelf.bbsView.frame.size.height);
             weakSelf.tableView.tableHeaderView = weakSelf.tabelHeaderView;
-            imageView.contentMode = UIViewContentModeScaleAspectFill;
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
             [weakSelf.bbsView addSubview:imageView];
         }];
     }else if(resultModel.bbs_imgs.count==0) {
@@ -372,7 +372,7 @@
     [cell.replyButton addTarget:self action:@selector(replyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.nickName.text = model.user[@"nick"];
     NSString *time = [[model.created_at substringFromIndex:5] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
-    cell.timeLabel.text = [NSString stringWithFormat:@"%@ %ld楼",time,indexPath.row+1];
+    cell.timeLabel.text = [NSString stringWithFormat:@"%@ %@楼",time,[NSString stringWithFormat:@"%@",model.floor]];
    
     //设置contentLabel显示不同的字体颜色
     CGFloat height;
@@ -448,8 +448,9 @@
             detailReply.parent_id = [NSString stringWithFormat:@"%@",model.id];
         }
         __weakSelf
-        detailReply.myBlock = ^(NSString *str){
+        detailReply.myBlock = ^(NSString *str,ODCommunityDetailModel *model){
             weakSelf.refresh = str;
+            [weakSelf.dataArray addObject:model];
         };
         [self.navigationController pushViewController:detailReply animated:YES];
     }
@@ -512,13 +513,36 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-   
     if ([self.refresh isEqualToString:@"refresh"]) {
-        
-        [self joiningTogetherParmetersWithUserInfo:NO];
+        [self.tableView reloadData];
+        if (self.dataArray.count){
+           [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        }
     }
 }
 
+//{
+//    "bbs_id":2035,
+//    "content":"ui",
+//    "status":1,
+//    "id":1207,
+//    "created_at":"2016-02-23 19:10:35",
+//    "floor":30,
+//    "parent_user_nick":"GetAloveWith",
+//    "parent_id":1178,
+//    "updated_at":"2016-02-23 19:10:35",
+//    "user_id":1101,
+//    "user":{
+//        "gender":1,
+//        "nick":"GetAloveWith",
+//        "avatar":"b9a1a4125392b6a324728c4b0eb63b96",
+//        "id":1101,
+//        "open_id":"5176377568a2a1c8821b",
+//        "sign":"努力、是为了让才华赶上野心。",
+//        "avatar_url":"http://odfile.ufile.ucloud.com.cn/img/b9a1a4125392b6a324728c4b0eb63b96?UCloudPublicKey=ucloud19581143@qq.com14397759570001695093750&Signature=Rjygwd8MP7PIuoYrDPd9BvosRB0=&iopcmd=convert&dst=jpg&Q=80|iopcmd=thumbnail&type=8&width=200"
+//    }
+//    
+//}
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];

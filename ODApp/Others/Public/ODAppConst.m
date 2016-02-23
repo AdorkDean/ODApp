@@ -42,6 +42,9 @@ NSString * const ODNotificationReleaseSkill = @"ODNotificationReleaseSkill";
 /**  编辑成功的通知 */
 NSString * const ODNotificationEditSkill = @"ODNotificationEditSkill";
 
+/**  编辑技能创建服务时间试图 */
+NSString * const ODNotificationCreateServiceTimeView = @"ODNotificationCreateServiceTimeView";
+
 
 /**  支付成功通知 */
 NSString * const ODNotificationPaySuccess = @"ODNotificationPaySuccess";
