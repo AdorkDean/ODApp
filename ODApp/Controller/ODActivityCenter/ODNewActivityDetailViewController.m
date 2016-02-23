@@ -329,7 +329,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     __weakSelf
     self.activityVIPs = self.resultModel.savants;
     self.activityApplies = self.resultModel.applies;
-    self.reportButton.enabled = (self.resultModel.apply_status != 1) && (self.resultModel.apply_status != -6);
+    self.reportButton.enabled = (self.resultModel.apply_status != 1) && (self.resultModel.apply_status != -6) && (self.resultModel.apply_status != -4);
     [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
     {
         [SVProgressHUD dismiss];
@@ -401,7 +401,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         else if (indexPath.row == 1)//地点
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
-             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             [cell iconImgView].image = [UIImage imageNamed:@"icon_service address"];
             [cell detailInfoLabel].text = self.resultModel.store_address;
             [cell statusLabel].hidden = YES;
@@ -573,7 +573,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 
 - (void)reportRequest
 {
-    NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id",[ODUserInformation sharedODUserInformation].openID,@"open_id", nil];
+    NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id", nil];
     [SVProgressHUD showWithStatus:@"正在报名中。。。"];
     [ODHttpTool getWithURL:KActivityApplyUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
      {

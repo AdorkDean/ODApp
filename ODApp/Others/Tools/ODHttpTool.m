@@ -9,6 +9,7 @@
 #import <SVProgressHUD.h>
 #import "ODHttpTool.h"
 #import "ODAPIManager.h"
+#import "ODAPPInfoTool.h"
 
 NSString * const requestStatus = @"status";
 NSString * const requsetResult = @"result";
@@ -17,14 +18,25 @@ NSString * const requestSuccessStatus = @"success";
 
 @implementation ODHttpTool
 
++ (NSMutableDictionary *)getRequestParameter:(NSDictionary *)parameter
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:parameter];
+    [dic setValuesForKeysWithDictionary:[ODAPIManager signParameters:parameter]];
+    [dic setObject:[ODUserInformation sharedODUserInformation].openID forKey:@"open_id"];
+    [dic setObject:[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID] forKey:@"city_id"];
+    [dic setObject:@"iOS" forKey:@"platform"];
+    [dic setObject:[ODAPPInfoTool APPVersion] forKey:@"app_version"];
+    return dic;
+}
+
+
 + (void)getWithURL:(NSString *)URL parameters:(NSDictionary *)parameters modelClass:(__unsafe_unretained Class)modeleClass success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     // 1.创建请求管理对象
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     URL = [ODBaseURL stringByAppendingString:URL];
-    NSMutableDictionary *parameter = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    [parameter setValuesForKeysWithDictionary:[ODAPIManager signParameters:parameter]];
+    NSMutableDictionary *parameter = [self getRequestParameter:parameters];
     
     // 2.发送请求
     [manager GET:URL parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject)
@@ -82,11 +94,10 @@ NSString * const requestSuccessStatus = @"success";
     manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html",@"text/plain", nil];
 
     URL = [ODBaseURL stringByAppendingString:URL];
-    NSMutableDictionary *parameter = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    [parameter setValuesForKeysWithDictionary:[ODAPIManager signParameters:parameter]];
+    NSMutableDictionary *parameter = [self getRequestParameter:parameters];
     
     // 2.发送请求
-    [manager POST:URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+    [manager POST:URL parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         NSLog(@"responseObject === %@",responseObject);
         if (success && [responseObject[requestStatus]isEqualToString:requestSuccessStatus])
@@ -124,11 +135,10 @@ NSString * const requestSuccessStatus = @"success";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
     URL = [ODBaseURL stringByAppendingString:URL];
-    NSMutableDictionary *parameter = [NSMutableDictionary dictionaryWithDictionary:parameters];
-    [parameter setValuesForKeysWithDictionary:[ODAPIManager signParameters:parameter]];
+    NSMutableDictionary *parameter = [self getRequestParameter:parameters];
 
     // 2.发送请求
-    [manager POST:URL parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
+    [manager POST:URL parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData)
     {
 //        for (PCFromData *formDatas in dataArray) {
 //            [formData appendPartWithFileData:formDatas.data name:formDatas.name fileName:formDatas.filename mimeType:formDatas.mimeType];
