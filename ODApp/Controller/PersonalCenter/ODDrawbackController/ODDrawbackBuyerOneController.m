@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = self.drawbackTitle;
-    
+
     self.view.userInteractionEnabled = YES;
     [self createScrollView];
 }
@@ -199,6 +199,8 @@
     if (self.isDrawbackState) {
         serviceGetMaxY = CGRectGetMaxY(self.drawbackReasonContentView.frame) + 22 + 150;
         [self drawbackStateView];
+    }else if (self.isRefuseReason){
+        serviceGetMaxY = CGRectGetMaxY(self.refuseReasonContentView.frame);
     }
     else{
         serviceGetMaxY = CGRectGetMaxY(self.drawbackReasonContentView.frame);
