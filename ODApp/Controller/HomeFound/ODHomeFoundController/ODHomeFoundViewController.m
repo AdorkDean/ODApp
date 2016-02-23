@@ -364,7 +364,8 @@
     picController.photos = model.imgs_small;
     picController.selectedIndex = button.tag-10*indexPath.row;
     picController.skill = @"skill";
-    [self.navigationController pushViewController:picController animated:YES];
+//    [self.navigationController pushViewController:picController animated:YES];
+    [self presentViewController:picController animated:YES completion:nil];
 }
 
 #pragma mark - Create UICollectionView

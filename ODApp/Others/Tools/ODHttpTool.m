@@ -22,10 +22,10 @@ NSString * const requestSuccessStatus = @"success";
 {
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:parameter];
     [dic setValuesForKeysWithDictionary:[ODAPIManager signParameters:parameter]];
-    [dic setObject:[ODUserInformation sharedODUserInformation].openID forKey:@"open_id"];
-    [dic setObject:[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID] forKey:@"city_id"];
-    [dic setObject:@"iOS" forKey:@"platform"];
-    [dic setObject:[ODAPPInfoTool APPVersion] forKey:@"app_version"];
+//    [dic setObject:[ODUserInformation sharedODUserInformation].openID forKey:@"open_id"];
+//    [dic setObject:[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID] forKey:@"city_id"];
+//    [dic setObject:@"iOS" forKey:@"platform"];
+//    [dic setObject:[ODAPPInfoTool APPVersion] forKey:@"app_version"];
     return dic;
 }
 
