@@ -34,6 +34,8 @@
 #import "ODFindFavorableController.h"
 #import "ODUserInformation.h"
 
+#import "ODDrawbackBuyerOneController.h"
+
 @interface ODHomeFoundViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate, MAMapViewDelegate, AMapSearchDelegate>
 
 @property (nonatomic, strong)UIButton *locationButton;
@@ -51,8 +53,8 @@
 @property (nonatomic, strong)AFHTTPRequestOperationManager *managers;
 
 //滚动窗口数组
-@property (nonatomic, strong)NSArray *pictureArray;
-@property (nonatomic, strong)NSArray *pictureIdArray;
+@property (nonatomic, strong)NSMutableArray *pictureArray;
+@property (nonatomic, strong)NSMutableArray *pictureIdArray;
 
 //最新话题数组
 @property (nonatomic, strong)NSMutableArray *dataArray;

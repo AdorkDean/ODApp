@@ -189,7 +189,7 @@
 -(void)joiningTogetherParmeters
 {
     self.count = 1;
-    NSDictionary *parameter = @{@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld",self.count],@" city_id":@"321"};
+    NSDictionary *parameter = @{@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl paramater:signParameter];
 }
