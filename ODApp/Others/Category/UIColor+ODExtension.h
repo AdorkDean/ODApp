@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (ODExtension)
-+(UIColor *)colorWithHexString:(NSString *)color alpha:(float)opacity;
++ (UIColor *)colorWithHexString:(NSString *)color alpha:(float)opacity;
 
 @end
