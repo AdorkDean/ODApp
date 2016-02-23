@@ -45,10 +45,8 @@
         [self joiningTogetherParmeters];
     }else{
         if (self.titleTextView.text.length == 0) {
-            
             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入任务标题"];
         }else if (self.taskDetailTextView.text.length == 0){
-            
             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入任务内容"];
         }
     }

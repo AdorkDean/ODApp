@@ -5,7 +5,7 @@
 //  Created by Odong-YG on 15/12/23.
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
-
+#import "ODAPPInfoTool.h"
 #import "ODHelp.h"
 
 @implementation ODHelp
@@ -24,7 +24,7 @@
 //动态 计算行高
 //根据字符串的实际内容的多少 在固定的宽度和字体的大小，动态的计算出实际的高度
 + (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat)textWidth fontSize:(CGFloat)size{
-    if ([ODHelp getCurrentIOS] >= 7.0) {
+    if ([ODAPPInfoTool iOSVersion] >= 7.0) {
         //iOS7之后
         /*
          第一个参数: 预设空间 宽度固定  高度预设 一个最大值
@@ -57,7 +57,7 @@
 
 + (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat) textWidth miniHeight:(CGFloat)miniHeight fontSize:(CGFloat)size{
 
-    if ([ODHelp getCurrentIOS] >= 7.0) {
+    if ([ODAPPInfoTool iOSVersion] >= 7.0) {
         //iOS7之后
         /*
          第一个参数: 预设空间 宽度固定  高度预设 一个最大值
@@ -93,12 +93,6 @@
     }
 }
 
-
-//获取iOS版本号
-+ (double)getCurrentIOS {
-    
-    return [[[UIDevice currentDevice] systemVersion] doubleValue];
-}
 
 
 @end

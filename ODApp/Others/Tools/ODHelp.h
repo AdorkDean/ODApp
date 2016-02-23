@@ -20,10 +20,8 @@
 
 + (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat) textWidth miniHeight:(CGFloat)miniHeight fontSize:(CGFloat)size;
 
-+ (CGFloat)textHeightFromLabel:(UILabel *)label TextString:(NSString *)text width:(CGFloat) textWidth miniHeight:(CGFloat)miniHeight fontSize:(CGFloat)size;
 
 
-//获取 当前设备版本
-+ (double)getCurrentIOS;
+
 
 @end

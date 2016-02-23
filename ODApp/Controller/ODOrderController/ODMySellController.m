@@ -38,10 +38,21 @@
     [self getData];
     [self createCollectionView];
 
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:ODNotificationOrderListRefresh object:nil];
+
     self.navigationItem.title = @"已卖出";
     
 }
+
+- (void)refresh:(NSNotification *)text{
+    
+    
+    [self.collectionView.mj_header beginRefreshing];
+    
+}
+
+
+
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -256,6 +267,13 @@
     return 6;
     
     
+}
+
+
+- (void)dealloc
+{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

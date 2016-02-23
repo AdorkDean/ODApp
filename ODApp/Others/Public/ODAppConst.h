@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 
+
 #pragma mark - UI相关常量
 /** TabBar的高度 */
 UIKIT_EXTERN CGFloat const ODTabBarHeight;
@@ -41,6 +42,8 @@ UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
 /**  换技能通知 */
 UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
 
+/**  发布任务成功通知 */
+UIKIT_EXTERN NSString * const ODNotificationCreateServiceTimeView;
 
 /**  发布任务成功通知 */
 UIKIT_EXTERN NSString * const ODNotificationReleaseTask;
@@ -62,6 +65,11 @@ UIKIT_EXTERN NSString * const ODNotificationCancelOrder;
 
 /** 定位刷新 */
 UIKIT_EXTERN NSString * const ODNotificationLocationSuccessRefresh;
+
+/** 订单刷新 */
+UIKIT_EXTERN NSString * const ODNotificationOrderListRefresh;
+
+
 
 #pragma mark - 请求URL接口 
 /** 统一的URL */

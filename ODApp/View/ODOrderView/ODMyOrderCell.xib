@@ -21,16 +21,6 @@
                             <constraint firstAttribute="height" constant="30" id="soP-Yn-Qpu"/>
                         </constraints>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付成功" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8Y-5p-Gux">
-                        <rect key="frame" x="360" y="15" width="90" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="Tgm-MB-fXc"/>
-                            <constraint firstAttribute="width" constant="90" id="abt-Np-kor"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qA9-mz-tPQ">
                         <rect key="frame" x="18" y="50" width="432" height="1"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -84,19 +74,36 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宝宝" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FlE-mF-eU2">
-                        <rect key="frame" x="78" y="15" width="270" height="20"/>
+                        <rect key="frame" x="78" y="15" width="100" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Xm1-nD-0oC"/>
+                            <constraint firstAttribute="width" constant="100" id="kyK-kK-pFJ"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付成功" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8Y-5p-Gux">
+                        <rect key="frame" x="198" y="15" width="252" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Tgm-MB-fXc"/>
+                            <constraint firstAttribute="width" constant="90" id="abt-Np-kor"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="abt-Np-kor"/>
+                            </mask>
+                        </variation>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstItem="P3i-TU-DeN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="0dR-0o-dn9"/>
+                <constraint firstItem="A8Y-5p-Gux" firstAttribute="leading" secondItem="FlE-mF-eU2" secondAttribute="trailing" constant="20" id="1ha-1A-yGx"/>
                 <constraint firstItem="hbx-DT-bYo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="18" id="3ey-S5-awP"/>
                 <constraint firstItem="eMi-57-Ylh" firstAttribute="leading" secondItem="hbx-DT-bYo" secondAttribute="trailing" constant="10" id="8h8-zU-v3D"/>
                 <constraint firstItem="qA9-mz-tPQ" firstAttribute="top" secondItem="P3i-TU-DeN" secondAttribute="bottom" constant="10" id="8tr-Yx-SgH"/>
@@ -125,6 +132,7 @@
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="Nhq-oH-djG"/>
+                    <exclude reference="LMv-oA-Teb"/>
                 </mask>
             </variation>
             <connections>

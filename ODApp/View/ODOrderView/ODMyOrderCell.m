@@ -46,10 +46,7 @@
 
     NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
     
-    
-    
-  
-    
+        
     
     if ([status isEqualToString:@"1"]) {
         self.statusLabel.text = @"待支付";
@@ -162,6 +159,7 @@
         
     }else if ([status isEqualToString:@"5"]) {
         self.statusLabel.text = @"已完成";
+        self.statusLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"-1"]) {
         self.statusLabel.text = @"已取消";
         self.statusLabel.textColor = [UIColor lightGrayColor];
@@ -175,6 +173,7 @@
         self.statusLabel.text = @"已退款";
     }else if ([status isEqualToString:@"-5"]) {
         self.statusLabel.text = @"拒绝退款";
+        self.statusLabel.textColor = [UIColor redColor];
     }
     
     

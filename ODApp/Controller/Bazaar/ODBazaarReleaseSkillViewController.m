@@ -44,6 +44,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLogFunc
+    if ([self.type isEqualToString:@"编辑"]) {
+        self.navigationItem.title = @"编辑技能";
+    }else{
+        self.navigationItem.title = @"发布技能";
+    }
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self getUserInfo];
     [self createScrollView];
@@ -52,7 +57,6 @@
     [self createBottomView];
     [self createReleaseButton];
     [self reloadImageButtons];
-    self.navigationItem.title = @"发布技能";
 }
 
 -(void)createScrollView
@@ -245,7 +249,7 @@
         NSData *imageData;
         self.pickedImage = [self scaleImage:self.pickedImage];;
         if (UIImagePNGRepresentation(self.pickedImage)==nil) {
-            imageData = UIImageJPEGRepresentation(self.pickedImage,0.4);
+            imageData = UIImageJPEGRepresentation(self.pickedImage,0.3);
         }else{
             imageData = UIImagePNGRepresentation(self.pickedImage);
         }
@@ -272,11 +276,11 @@
 //压缩尺寸
 -(UIImage *) scaleImage:(UIImage *)image
 {
-    CGSize size = CGSizeMake(image.size.width * 0.4, image.size.height * 0.4);
+    CGSize size = CGSizeMake(image.size.width * 0.3, image.size.height * 0.3);
     UIGraphicsBeginImageContext(size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGAffineTransform transform = CGAffineTransformIdentity;
-    transform = CGAffineTransformScale(transform,0.4, 0.4);
+    transform = CGAffineTransformScale(transform,0.3, 0.3);
     CGContextConcatCTM(context, transform);
     [image drawAtPoint:CGPointMake(0.0f, 0.0f)];
     UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
@@ -304,10 +308,7 @@
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
             NSString *str = result[@"File"];
-            
-            NSLog(@"%@",str);
             [weakSelf.strArray addObject:str];
-            NSLog(@"%ld",weakSelf.strArray.count);
             [weakSelf reloadImageButtons];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -348,13 +349,17 @@
     UIImageView *imageView = (UIImageView *)[self.addPicButton viewWithTag:9];
     [imageView removeFromSuperview];
     [self.addPicButton setFrame:CGRectMake(17.5+(width+10) * (self.mArray.count%4), 10+(10+width)*(self.mArray.count/4), width, width)];
-   
     [self.picView setFrame:CGRectMake(0, 230, kScreenSize.width, 20+width+(width+10)*(self.mArray.count/4))];
-    if (self.mArray.count>=4) {
-        [self.bottomView removeFromSuperview];
-        [self createBottomView];
-    }
     
+    CGFloat height = self.bottomView.frame.size.height;
+    self.bottomView.frame = CGRectMake(0, CGRectGetMaxY(self.picView.frame)+6, kScreenSize.width, height);
+    if ([self.swap_type isEqualToString:@"2"]||self.swap_type == nil) {
+        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
+    }else if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]){
+        self.timeView.frame = CGRectMake(0, CGRectGetMaxY(self.bottomView.frame), kScreenSize.width, 50);
+        self.timeView.hidden = NO;
+        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
+    }
     [self.hud hide:NO afterDelay:0];
 }
 
@@ -369,8 +374,6 @@
         [weakSelf.mArray removeObject:button.currentBackgroundImage];
         [weakSelf.strArray removeObjectAtIndex:button.tag-100];
         [weakSelf reloadImageButtons];
-        [weakSelf.bottomView removeFromSuperview];
-        [weakSelf createBottomView];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
@@ -450,34 +453,24 @@
         button.tag = 10+i;
         [button setBackgroundImage:[UIImage imageNamed:array[i]] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(serviceButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        if ([self.type isEqualToString:@"编辑"]) {
+            button.userInteractionEnabled = NO;
+        }else{
+            button.userInteractionEnabled = YES;
+        }
         [serviceView addSubview:button];
     }
     
-    if ([self.swap_type isEqualToString:@"1"]) {
-        UIButton *button = (UIButton *)[serviceView viewWithTag:10];
-        [button setBackgroundImage:[UIImage imageNamed:@"button_Home service_Selected"] forState:UIControlStateNormal];
-    }else if ([self.swap_type isEqualToString:@"2"]){
-        UIButton *button = (UIButton *)[serviceView viewWithTag:12];
-         [button setBackgroundImage:[UIImage imageNamed:@"button_Express delivery_Selected"] forState:UIControlStateNormal];
-    }else if ([self.swap_type isEqualToString:@"3"]){
-        UIButton *button = (UIButton *)[serviceView viewWithTag:11];
-         [button setBackgroundImage:[UIImage imageNamed:@"button_Online service_Selected"] forState:UIControlStateNormal];
-    }
-    
     self.bottomView.frame = CGRectMake(0, CGRectGetMaxY(self.picView.frame)+6, kScreenSize.width, priceView.frame.size.height+unitView.frame.size.height+serviceView.frame.size.height+18);
-    
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
 }
 
 -(void)serviceButtonClick:(UIButton *)button
 {
+    NSInteger width = (kScreenSize.width-35-30)/4;
     NSArray *selectedArray = @[@"button_Home service_Selected",@"button_Online service_Selected",@"button_Express delivery_Selected"];
     NSArray *array = @[@"button_Home service_default",@"button_Online service_default",@"button_Express delivery_default"];
     UIView *view = (UIView *)[self.bottomView viewWithTag:1];
-    for (NSInteger i = 0; i<3; i++) {
-        UIButton *button = (UIButton *)[view viewWithTag:10+i];
-        [button setBackgroundImage:[UIImage imageNamed:array[i]] forState:UIControlStateNormal];
-    }
     
     if (self.selectedButton == nil) {
         self.selectedButton = button;
@@ -500,44 +493,51 @@
         if (button.tag == 10) {
             self.swap_type = @"1";
         }else{
-            self.swap_type = @"2";
+            self.swap_type = @"3";
         }
-        [self.timeView removeFromSuperview];
-        [self createServiceTimeView];
+        self.timeView.hidden = NO;
+        self.timeView.frame = CGRectMake(0, CGRectGetMaxY(self.bottomView.frame), kScreenSize.width, 50);
+        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
+        if (self.mArray.count >=4) {
+            [self.scrollView setContentOffset:CGPointMake(0, 59+50+width+10) animated:YES];
+        }else{
+            [self.scrollView setContentOffset:CGPointMake(0, 59+50) animated:YES];
+        }
     }
     if (button.tag == 12) {
+        self.swap_type = @"2";
+        self.timeView.hidden = YES;
         self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
-        [self.timeView removeFromSuperview];
     }
 }
 
--(void)createServiceTimeView
+-(UIView *)timeView
 {
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(serviceTimeClick:)];
-    self.timeView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bottomView.frame), kScreenSize.width, 50)];
-    self.timeView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    [self.timeView addGestureRecognizer:gesture];
-    [self.scrollView addSubview:self.timeView];
-    
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 15, 100, 20)];
-    label.text = @"可服务时间";
-    label.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-    label.font = [UIFont systemFontOfSize:14];
-    [self.timeView addSubview:label];
-    
-    self.setLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-95, 15, 60, 20)];
-    self.setLabel.text = @"请设置";
-    self.setLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-    self.setLabel.font = [UIFont systemFontOfSize:14];
-    self.setLabel.textAlignment = NSTextAlignmentRight;
-    [self.timeView addSubview:self.setLabel];
-    
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-27.5, 20, 10, 10)];
-    imageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
-    [self.timeView addSubview:imageView];
-
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
-    [self.scrollView setContentOffset:CGPointMake(0, 62 + 50) animated:YES];
+    if (!_timeView) {
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(serviceTimeClick:)];
+        _timeView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bottomView.frame), kScreenSize.width, 50)];
+        _timeView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        [_timeView addGestureRecognizer:gesture];
+        [self.scrollView addSubview:_timeView];
+        
+        UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 15, 100, 20)];
+        label.text = @"可服务时间";
+        label.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        label.font = [UIFont systemFontOfSize:14];
+        [_timeView addSubview:label];
+        
+        self.setLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-95, 15, 60, 20)];
+        self.setLabel.text = @"请设置";
+        self.setLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        self.setLabel.font = [UIFont systemFontOfSize:14];
+        self.setLabel.textAlignment = NSTextAlignmentRight;
+        [_timeView addSubview:self.setLabel];
+        
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-27.5, 20, 10, 10)];
+        imageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
+        [_timeView addSubview:imageView];
+    }
+    return _timeView;
 }
 
 -(void)serviceTimeClick:(UITapGestureRecognizer *)gesture
@@ -567,6 +567,29 @@
 
 -(void)releaseButtonClick:(UIButton *)button
 {
+    if (self.titleTextField.text.length>0&&self.contentTextView.text.length>0&&self.priceTextField.text.length>0&&self.unitTextField.text.length&&self.swap_type != nil&&self.mArray.count<=5&&self.mArray.count>=3) {
+        [self joiningTogetherParmetersWithButton:button];
+    }else{
+        if (self.titleTextField.text.length==0) {
+            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请输入标题"];
+        }else if (self.contentTextView.text.length==0){
+            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请输入内容"];
+        }else if (self.priceTextField.text.length==0){
+            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"不要钱了吗"];
+        }else if (self.unitTextField.text.length==0){
+            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"认真填写个单位吧"];
+        }else if (self.swap_type == nil){
+            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请选择你的服务方式"];
+        }else if (([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"])&&self.timeArray.count==0){
+            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请设置时间"];
+        }else if (self.mArray.count<3||self.mArray.count>5){
+            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"图需3-5张"];
+        }
+    }
+}
+
+-(void)joiningTogetherParmetersWithButton:(UIButton *)button
+{
     NSString *imageStr = [[NSString alloc] init];
     for (NSInteger i = 0; i < self.strArray.count; i++) {
         if (i==0) {
@@ -576,17 +599,30 @@
             imageStr = [[imageStr stringByAppendingString:@"|"] stringByAppendingString:str];
         }
     }
-
     if ([button.titleLabel.text isEqualToString:@"编辑"]) {
-         NSDictionary *parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
-         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        
+        NSDictionary *parameter;
+        if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
+            if (self.timeArray.count==0) {
+                [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请设置时间"];
+            }else{
+                parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+            }
+        }else if ([self.swap_type isEqualToString:@"2"]){
+           parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":@"",@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+        }
+        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self pushDataWithUrl:kBazaarEditSkillUrl parameter:signParameter isEdit:YES];
     }else{
-         NSDictionary *parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+        NSDictionary *parameter;
+        if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
+            parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+        }else if ([self.swap_type isEqualToString:@"2"]){
+            parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":@"",@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+        }
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter isEdit:NO];
     }
-    
 
 }
 
@@ -594,10 +630,11 @@
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     __weakSelf;
-    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (isEdit) {
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
                 NSLog(@"%@",responseObject);
             }
@@ -685,6 +722,31 @@ NSString *skillContentText = @"";
    if (textView.text.length == 0) {
        self.contentPlaceholderLabel.text = @"请输入任务标题";
    }
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    UIView *view = (UIView *)[self.bottomView viewWithTag:1];
+    if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
+        if ([self.swap_type isEqualToString:@"1"]) {
+            UIButton *button = (UIButton *)[view viewWithTag:10];
+            [button setBackgroundImage:[UIImage imageNamed:@"button_Home service_Selected"] forState:UIControlStateNormal];
+        }else{
+            UIButton *button = (UIButton *)[view viewWithTag:11];
+            [button setBackgroundImage:[UIImage imageNamed:@"button_Online service_Selected"] forState:UIControlStateNormal];
+        }
+        self.timeView.hidden = NO;
+        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
+        [self.scrollView setContentOffset:CGPointMake(0, 53+56) animated:YES];
+    }else if ([self.swap_type isEqualToString:@"2"]){
+        UIButton *button = (UIButton *)[view viewWithTag:12];
+        [button setBackgroundImage:[UIImage imageNamed:@"button_Express delivery_Selected"] forState:UIControlStateNormal];
+        self.timeView.hidden = YES;
+        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
+        [self.scrollView setContentOffset:CGPointMake(0, 53) animated:YES];
+    }
+    
 }
 
 #pragma mark - UIScrollViewDelegate

@@ -42,6 +42,9 @@ NSString * const ODNotificationReleaseSkill = @"ODNotificationReleaseSkill";
 /**  编辑成功的通知 */
 NSString * const ODNotificationEditSkill = @"ODNotificationEditSkill";
 
+/**  编辑技能创建服务时间试图 */
+NSString * const ODNotificationCreateServiceTimeView = @"ODNotificationCreateServiceTimeView";
+
 
 /**  支付成功通知 */
 NSString * const ODNotificationPaySuccess = @"ODNotificationPaySuccess";
@@ -54,6 +57,10 @@ NSString * const ODNotificationCancelOrder = @"ODNotificationCancelOrder";
 
 /** 定位刷新 */
 NSString * const ODNotificationLocationSuccessRefresh = @"ODNotificationLocationSuccessRefresh";
+
+/** 订单刷新 */
+NSString * const ODNotificationOrderListRefresh = @"ODNotificationOrderListRefresh";
+
 
 #pragma mark - 请求URL接口
 /** 统一的URL */

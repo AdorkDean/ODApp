@@ -316,7 +316,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     [ODHttpTool getWithURL:KActivityDetailUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
      {
          weakSelf.resultModel = [model result];
-         [self viewDidLayoutSubviews];
          [weakSelf analyzeData];
      }
                    failure:^(NSError *error)
@@ -330,7 +329,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     __weakSelf
     self.activityVIPs = self.resultModel.savants;
     self.activityApplies = self.resultModel.applies;
-    self.reportButton.enabled = self.resultModel.apply_status != 1;
+    self.reportButton.enabled = (self.resultModel.apply_status != 1) && (self.resultModel.apply_status != -6) && (self.resultModel.apply_status != -4);
     [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
     {
         [SVProgressHUD dismiss];
@@ -402,7 +401,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         else if (indexPath.row == 1)//地点
         {
             cell = [tableView dequeueReusableCellWithIdentifier:detailInfoCell];
-             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             [cell iconImgView].image = [UIImage imageNamed:@"icon_service address"];
             [cell detailInfoLabel].text = self.resultModel.store_address;
             [cell statusLabel].hidden = YES;
@@ -442,30 +441,39 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 1)
+    if (tableView == self.infoTableView)
     {
-        if (self.resultModel.is_online == 1)
+        if (indexPath.row == 1)
         {
-            [SVProgressHUD showInfoWithStatus:@"亲，这个是线上活动噢！" maskType:(SVProgressHUDMaskTypeBlack)];
-        }
-        else
-        {
-            if (self.resultModel.store_id > 0)
+            if (self.resultModel.is_online == 1)
             {
-                ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
-                vc.storeId = [NSString stringWithFormat:@"%d" , self.resultModel.store_id];
-                vc.activityID = [NSString stringWithFormat:@"%d" , self.resultModel.activity_id];
-                [self.navigationController pushViewController:vc animated:YES];
+                [SVProgressHUD showInfoWithStatus:@"亲，这个是线上活动噢！" maskType:(SVProgressHUDMaskTypeBlack)];
             }
             else
             {
-                ODCenterPactureController *vc = [[ODCenterPactureController alloc] init];
-                NSString *webUrl = [NSString stringWithFormat:@"http://h5.odong.com/map/search?lng=%@&lat=%@" , self.resultModel.lng , self.resultModel.lat];
-                vc.webUrl = webUrl;
-                vc.activityName = self.resultModel.store_name;
-                [self.navigationController pushViewController:vc animated:YES];
+                if (self.resultModel.store_id > 0)
+                {
+                    ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
+                    vc.storeId = [NSString stringWithFormat:@"%d" , self.resultModel.store_id];
+                    vc.activityID = [NSString stringWithFormat:@"%d" , self.resultModel.activity_id];
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
+                else
+                {
+                    ODCenterPactureController *vc = [[ODCenterPactureController alloc] init];
+                    NSString *webUrl = [NSString stringWithFormat:@"http://h5.odong.com/map/search?lng=%@&lat=%@" , self.resultModel.lng , self.resultModel.lat];
+                    vc.webUrl = webUrl;
+                    vc.activityName = self.resultModel.store_name;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }
             }
         }
+    }
+    else if (tableView == self.VIPTableView)
+    {
+        ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+        vc.open_id = [self.resultModel.applies[indexPath.row]open_id];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
@@ -565,17 +573,18 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 
 - (void)reportRequest
 {
-    NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id",[ODUserInformation sharedODUserInformation].openID,@"open_id", nil];
+    NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id", nil];
     [SVProgressHUD showWithStatus:@"正在报名中。。。"];
     [ODHttpTool getWithURL:KActivityApplyUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
      {
          [self requestData];
          self.reportButton.enabled = NO;
+
          [SVProgressHUD showSuccessWithStatus:@"报名成功"];
      }
                    failure:^(NSError *error)
      {
-         [SVProgressHUD showErrorWithStatus:error.description];
+
      }];
 }
 
