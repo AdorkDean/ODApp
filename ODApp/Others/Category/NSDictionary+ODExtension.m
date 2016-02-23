@@ -58,7 +58,7 @@
 - (NSString *)descriptionWithLocale:(id)locale{
     // 1.定义字符创保存拼接结果
     NSMutableString *strM = [NSMutableString string];
-    [strM appendFormat:@"{\n"];
+    [strM appendFormat:@"{"];
     
     // 2.遍历字典，拼接字典中的键值对
     [self enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
@@ -66,10 +66,11 @@
         {
             obj = [NSString stringWithFormat:@"\"%@\"",obj];
         }
-        [strM appendFormat:@"\t\"%@\":%@\n",key,obj];
+        [strM appendFormat:@"\t\"%@\":%@,",key,obj];
+        
     }];
-    
-    [strM appendFormat:@"}\n"];
+    [strM replaceCharactersInRange:NSMakeRange(strM.length - 1, 1) withString:@"}"];
+//    [strM appendFormat:@""];
     return strM;
 }
 
