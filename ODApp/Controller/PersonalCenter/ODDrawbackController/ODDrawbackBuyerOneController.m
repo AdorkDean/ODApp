@@ -21,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = self.drawbackTitle;
-    
+
     self.view.userInteractionEnabled = YES;
     [self createScrollView];
 }
@@ -199,6 +199,8 @@
     if (self.isDrawbackState) {
         serviceGetMaxY = CGRectGetMaxY(self.drawbackReasonContentView.frame) + 22 + 150;
         [self drawbackStateView];
+    }else if (self.isRefuseReason){
+        serviceGetMaxY = CGRectGetMaxY(self.refuseReasonContentView.frame);
     }
     else{
         serviceGetMaxY = CGRectGetMaxY(self.drawbackReasonContentView.frame);
@@ -265,8 +267,7 @@
         [self.releaseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.releaseButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [self.releaseButton addTarget:self action:@selector(releaseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:self.releaseButton];
-        
+        [self.view addSubview:self.releaseButton];        
     }
     
     if (self.isRefuseAndReceive) {

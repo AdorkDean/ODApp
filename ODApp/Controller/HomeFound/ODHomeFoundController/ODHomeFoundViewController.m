@@ -33,7 +33,7 @@
     
     [ODUserInformation sharedODUserInformation].cityID = @"1";
     
-    self.pictureArray = [[NSMutableArray alloc] init];
+    self.pictureArray = [[NSArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
     
     self.cityListArray = [[NSArray alloc] init];
@@ -58,11 +58,18 @@
     _search = [[AMapSearchAPI alloc] init];
     _search.delegate = self;
     
+    __weakSelf
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        
+        [weakSelf.collectionView.mj_header beginRefreshing];
+    }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [self locationCity];
 }
 
@@ -124,7 +131,8 @@
 #pragma mark - 热门活动数据请求
 - (void)getScrollViewRequest
 {
-    NSDictionary *parameter = @{@"city_id":[ODUserInformation sharedODUserInformation].cityID};
+    NSDictionary *parameter = @{@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
+    
     __weakSelf
     [ODHttpTool getWithURL:ODHomeFoundUrl parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model)
      {
@@ -144,7 +152,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    NSDictionary *parameter = @{@"city_id":[ODUserInformation sharedODUserInformation].cityID};
+    NSDictionary *parameter = @{@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
@@ -219,6 +227,8 @@
     [self giveCommumityContent:nil andBbsType:4];
 }
 
+
+
 - (void)searchHelpButtonClick:(UIButton *)button
 {
     self.tabBarController.selectedIndex = 2;
@@ -232,7 +242,7 @@
     self.tabBarController.selectedIndex = 2;
     ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     vc.index = 0;
-    
+    [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
 }
 
 - (void)moreButtonClick:(UIButton *)button
@@ -341,6 +351,7 @@
     self.tabBarController.selectedIndex = 2;
     ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     vc.index = 0;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseSkill object:nil];
 }
 
 #pragma mark - 技能交换cell图片点击事件
@@ -528,8 +539,6 @@
     return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
 }
 
-
-#warning [ODHomeFoundFooterView changeSkillView]: unrecognized selector sent to instance 0x7f808c87d500
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     return CGSizeMake(0, 1 + CGRectGetMaxY(self.rsusableView.changeSkillView.frame));
@@ -596,13 +605,14 @@ updatingLocation:(BOOL)updatingLocation{
         NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
         if (result.length == 0)
         {
-            cityResult = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
-        }
-        else
-        {
+            result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
+            if (result.length != 0) {
+                cityResult = [result substringToIndex:[result length] - 1];
+            }
+        }else{
             cityResult = [result substringToIndex:[result length] - 1];
         }
-        
+
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
         
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
