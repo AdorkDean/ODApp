@@ -28,8 +28,9 @@
 @property (nonatomic , copy) NSString *open_id;
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , strong) ODEvaluation *evaluationView;
-
 @property (nonatomic ,strong) ODCancelOrderView *cancelOrderView;
+
+@property (nonatomic , copy) NSString *evaluateStar;
 
 @end
 
@@ -39,6 +40,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.evaluateStar = @"1";
     
     self.dataArray = [[NSMutableArray alloc] init];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -127,9 +129,7 @@
     [self.view addSubview:self.tableView];
     
     
-    
-  
-    
+      
     if ([status isEqualToString:@"3"]) {
         
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -214,7 +214,7 @@
         UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeSystem];
         confirmButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
         confirmButton.backgroundColor = [UIColor redColor];
-        [confirmButton setTitle:@"确认完成" forState:UIControlStateNormal];
+        [confirmButton setTitle:@"确认服务" forState:UIControlStateNormal];
         confirmButton.titleLabel.font=[UIFont systemFontOfSize:13];
         [confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [confirmButton addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -342,7 +342,12 @@
     [self.evaluationView.cancelButton addTarget:self action:@selector(cancelEvaluation:) forControlEvents:UIControlEventTouchUpInside];
     [self.evaluationView.determineButton addTarget:self action:@selector(determineButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    
+    [self.evaluationView.firstButton addTarget:self action:@selector(firstButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
+    [self.evaluationView.secondButton addTarget:self action:@selector(secondButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
+    [self.evaluationView.thirdButton addTarget:self action:@selector(thirdButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
+    [self.evaluationView.fourthButton addTarget:self action:@selector(fourthButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
+    [self.evaluationView.fiveButton addTarget:self action:@selector(fiveButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
+
     [[[UIApplication sharedApplication]keyWindow] addSubview:self.evaluationView];
     
     
@@ -350,6 +355,70 @@
     
     
 }
+- (void)firstButtonClicik:(UIButton *)button
+{
+    
+    [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    self.evaluateStar = @"1";
+    self.evaluationView.titleLabel.text = @"非常不满意";
+}
+
+- (void)secondButtonClicik:(UIButton *)button
+{
+    
+    [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    self.evaluateStar = @"2";
+    self.evaluationView.titleLabel.text = @"不满意";
+    
+}
+
+- (void)thirdButtonClicik:(UIButton *)button
+{
+    
+    [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    self.evaluateStar = @"3";
+    self.evaluationView.titleLabel.text = @"一般";
+    
+}
+
+- (void)fourthButtonClicik:(UIButton *)button
+{
+    
+    [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    self.evaluateStar = @"4";
+    self.evaluationView.titleLabel.text = @"满意";
+    
+}
+
+- (void)fiveButtonClicik:(UIButton *)button
+{
+    
+    [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    self.evaluateStar = @"5";
+    self.evaluationView.titleLabel.text = @"非常满意";
+    
+}
+
 
 
 - (void)determineButton:(UIButton *)sender

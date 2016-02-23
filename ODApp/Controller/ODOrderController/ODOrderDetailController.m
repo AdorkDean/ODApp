@@ -32,6 +32,9 @@
 
 @property (nonatomic ,strong) ODCancelOrderView *cancelOrderView;
 
+@property (nonatomic, copy) NSString *evaluateStar;
+
+
 @end
 
 @implementation ODOrderDetailController
@@ -45,7 +48,7 @@
       self.dataArray = [[NSMutableArray alloc] init];
       self.open_id = [ODUserInformation sharedODUserInformation].openID;
       self.navigationItem.title = @"订单详情";
-    
+     self.evaluateStar = @"1";
     
 }
 
@@ -124,7 +127,8 @@
     [self.view addSubview:self.tableView];
     
     
- 
+       NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
+      
        
     if ([status isEqualToString:@"3"]) {
         
@@ -207,7 +211,17 @@
         UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeSystem];
         confirmButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
         confirmButton.backgroundColor = [UIColor redColor];
-        [confirmButton setTitle:@"确认完成" forState:UIControlStateNormal];
+        
+        
+        if ([swap_type isEqualToString:@"2"]) {
+             [confirmButton setTitle:@"确认收货" forState:UIControlStateNormal];
+        }else {
+            [confirmButton setTitle:@"确认服务" forState:UIControlStateNormal];
+
+        }
+        
+        
+       
         confirmButton.titleLabel.font=[UIFont systemFontOfSize:13];
         [confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [confirmButton addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -283,6 +297,7 @@
     
     self.finishManager = [AFHTTPRequestOperationManager manager];
     
+        
     NSDictionary *parameters = @{@"order_id":self.order_id , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
@@ -348,7 +363,8 @@
     [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
-    self.evaluateStar = 1;
+    self.evaluateStar = @"1";
+    self.evaluationView.titleLabel.text = @"非常不满意";
 }
 
 - (void)secondButtonClicik:(UIButton *)button
@@ -359,7 +375,8 @@
     [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
-    self.evaluateStar = 2;
+    self.evaluateStar = @"2";
+    self.evaluationView.titleLabel.text = @"不满意";
 
 }
 
@@ -371,7 +388,8 @@
     [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
-    self.evaluateStar = 3;
+    self.evaluateStar = @"3";
+    self.evaluationView.titleLabel.text = @"一般";
 
 }
 
@@ -383,7 +401,8 @@
     [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
-    self.evaluateStar = 4;
+    self.evaluateStar = @"4";
+    self.evaluationView.titleLabel.text = @"满意";
 
 }
 
@@ -395,7 +414,8 @@
     [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
     [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
-    self.evaluateStar = 5;
+    self.evaluateStar = @"5";
+    self.evaluationView.titleLabel.text = @"非常满意";
 
 }
 
@@ -409,7 +429,7 @@
         
         self.evalueManager = [AFHTTPRequestOperationManager manager];
         
-        NSDictionary *parameters = @{@"order_id":self.order_id , @"reason":self.evaluationView.contentTextView.text, @"reason_num":@"2" , @"open_id":self.open_id};
+        NSDictionary *parameters = @{@"order_id":self.order_id , @"reason":self.evaluationView.contentTextView.text, @"reason_num":self.evaluateStar , @"open_id":self.open_id};
         NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
         
         __weak typeof (self)weakSelf = self;
