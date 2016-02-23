@@ -171,7 +171,7 @@
 
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weak typeof (self)weakSelf = self;
-    [self.orderManager GET:kSaveOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.orderManager GET:kGetOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
