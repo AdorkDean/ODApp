@@ -562,6 +562,8 @@
     return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
 }
 
+
+#warning [ODHomeFoundFooterView changeSkillView]: unrecognized selector sent to instance 0x7f808c87d500
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     

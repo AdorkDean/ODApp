@@ -79,6 +79,9 @@
     self.isMai = YES;
     
     
+    
+      
+    
     self.dateStr = @"";
     self.timeStr = @"";
     self.btimeStr = @"";
@@ -413,6 +416,7 @@
     
     
     
+        
     NSString *equipment = [NSString stringWithFormat:@"%@,%@,%@,%@" , computerY , touYingY , yinXingY , maiY];
     NSDictionary *parameter = @{@"start_datetime":self.beginTime , @"end_datetime":self.endTime , @"store_id":self.storeId , @"order_id":self.orderID ,@"purpose":self.yuYueView.pursoseTextView.text ,@"content":self.yuYueView.contentTextView.text ,@"people_num":self.yuYueView.peopleNumberTextField.text ,@"remark":@"无" ,@"devices":equipment ,@"open_id":self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];

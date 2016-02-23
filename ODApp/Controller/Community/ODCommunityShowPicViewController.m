@@ -61,7 +61,7 @@
             CGFloat height = cell.picImageView.od_height/multiple;
             cell.picImageView.frame = CGRectMake(0, 0, kScreenSize.width, height);
             cell.picImageView.center = CGPointMake(KScreenWidth/2, KScreenHeight/2);
-            cell.picImageView.contentMode = UIViewContentModeScaleAspectFill;
+            cell.picImageView.contentMode = UIViewContentModeScaleAspectFit;
         }];
     }else{
         [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.photos[indexPath.row]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -70,7 +70,7 @@
             CGFloat height = cell.picImageView.od_height/multiple;
             cell.picImageView.frame = CGRectMake(0, 0, kScreenSize.width, height);
             cell.picImageView.center = CGPointMake(KScreenWidth/2, KScreenHeight/2);
-            cell.picImageView.contentMode = UIViewContentModeScaleAspectFill;
+            cell.picImageView.contentMode = UIViewContentModeScaleAspectFit;
         }];
     }
 
