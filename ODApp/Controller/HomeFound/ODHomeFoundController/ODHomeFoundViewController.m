@@ -129,7 +129,7 @@
 #pragma mark - 热门活动数据请求
 - (void)getScrollViewRequest
 {
-    NSDictionary *parameter = @{@"city_id":@"0"};
+    NSDictionary *parameter = @{@"city_id":[ODUserInformation sharedODUserInformation].cityID};
     __weakSelf
     [ODHttpTool getWithURL:ODHomeFoundUrl parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model)
      {
@@ -150,7 +150,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    NSDictionary *parameter = @{@"city_id":@"0"};
+    NSDictionary *parameter = @{@"city_id":[ODUserInformation sharedODUserInformation].cityID};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;

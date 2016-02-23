@@ -124,8 +124,8 @@
     [self.view addSubview:self.tableView];
     
     
-
-    
+ 
+       
     if ([status isEqualToString:@"3"]) {
         
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -185,36 +185,6 @@
         [payButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:payButton];
         
-        
-        
-        
-    }else if ([status isEqualToString:@"-2"]) {
-        
-        
-        
-        UIButton *dealRefundButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        dealRefundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        dealRefundButton.backgroundColor = [UIColor redColor];
-        [dealRefundButton setTitle:@"处理退款" forState:UIControlStateNormal];
-        dealRefundButton.titleLabel.font=[UIFont systemFontOfSize:13];
-        [dealRefundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [dealRefundButton addTarget:self action:@selector(dealRefundAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:dealRefundButton];
-        
-        
-        
-    }else if ([status isEqualToString:@"5"]) {
-        
-        
-        
-        UIButton *evaluationButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        evaluationButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        evaluationButton.backgroundColor = [UIColor redColor];
-        [evaluationButton setTitle:@"评价" forState:UIControlStateNormal];
-        evaluationButton.titleLabel.font=[UIFont systemFontOfSize:13];
-        [evaluationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [evaluationButton addTarget:self action:@selector(evaluationAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:evaluationButton];
         
         
         
@@ -281,6 +251,7 @@
     
     
 }
+
 
 
 // 查看原因
@@ -359,14 +330,76 @@
     [self.evaluationView.cancelButton addTarget:self action:@selector(cancelEvaluation:) forControlEvents:UIControlEventTouchUpInside];
     [self.evaluationView.determineButton addTarget:self action:@selector(determineButton:) forControlEvents:UIControlEventTouchUpInside];
     
+    [self.evaluationView.firstButton addTarget:self action:@selector(firstButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
+    [self.evaluationView.secondButton addTarget:self action:@selector(secondButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
+    [self.evaluationView.thirdButton addTarget:self action:@selector(thirdButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
+    [self.evaluationView.fourthButton addTarget:self action:@selector(fourthButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
+    [self.evaluationView.fiveButton addTarget:self action:@selector(fiveButtonClicik:) forControlEvents:UIControlEventTouchUpInside];
     
     [[[UIApplication sharedApplication]keyWindow] addSubview:self.evaluationView];
     
-    
-    
-    
-    
 }
+
+- (void)firstButtonClicik:(UIButton *)button
+{
+
+    [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    self.evaluateStar = 1;
+}
+
+- (void)secondButtonClicik:(UIButton *)button
+{
+
+    [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    self.evaluateStar = 2;
+
+}
+
+- (void)thirdButtonClicik:(UIButton *)button
+{
+
+    [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    self.evaluateStar = 3;
+
+}
+
+- (void)fourthButtonClicik:(UIButton *)button
+{
+
+    [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+    self.evaluateStar = 4;
+
+}
+
+- (void)fiveButtonClicik:(UIButton *)button
+{
+
+    [self.evaluationView.firstButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.secondButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.thirdButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.fourthButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    [self.evaluationView.fiveButton setImage:[UIImage imageNamed:@"3{1)]T1HQ%9R5HEQ$(3ZG0E"] forState:UIControlStateNormal];
+    self.evaluateStar = 5;
+
+}
+
+
 
 
 - (void)determineButton:(UIButton *)sender
@@ -394,7 +427,20 @@
                     
                     [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"评价成功"];
                     
-                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                    
+                    if (weakSelf.getRefresh) {
+                        
+                        
+                        
+                        weakSelf.getRefresh(@"1");
+                    }
+                    
+
+                    
+                    
+                    
+                    [weakSelf getData];
                     
                     
                     
@@ -415,14 +461,6 @@
         
         
 
-        
-        
-        
-    
-
-    
-    
-  
     
     
     
@@ -455,12 +493,6 @@
 
 
 
-
-// 处理退款
-- (void)dealRefundAction:(UIButton *)sender
-{
-    
-}
 
 // 取消订单
 - (void)cancelOrder:(UIButton *)sender
@@ -566,7 +598,7 @@
                     
                     
                     
-                    if (self.getRefresh) {
+                    if (weakSelf.getRefresh) {
                         
                         
                         
@@ -574,7 +606,7 @@
                     }
                     
                     
-                    [self.navigationController popViewControllerAnimated:YES];
+                    [weakSelf getData];
                     
                     
                     
@@ -725,11 +757,12 @@
         }else if ([status isEqualToString:@"4"]) {
            self.orderDetailView.typeLabel.text = @"已发货";
         }else if ([status isEqualToString:@"5"]) {
-            self.orderDetailView.typeLabel.text = @"已完成";
+            self.orderDetailView.typeLabel.text = @"已评价";
+            self.orderDetailView.typeLabel.textColor = [UIColor redColor];
         }else if ([status isEqualToString:@"-1"]) {
             self.orderDetailView.typeLabel.text = @"已取消";
         }else if ([status isEqualToString:@"-2"]) {
-            self.orderDetailView.typeLabel.text = @"退款申请";
+            self.orderDetailView.typeLabel.text = @"买家已申请退款";
         }else if ([status isEqualToString:@"-3"]) {
             self.orderDetailView.typeLabel.text = @"退款已确认";
         }else if ([status isEqualToString:@"-4"]) {

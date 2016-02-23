@@ -37,12 +37,13 @@
 @property(nonatomic,strong)NSMutableArray *strArray;
 @property(nonatomic,strong)UIButton *selectedButton;
 @property(nonatomic,strong)NSMutableArray *timeArray;
+@property(nonatomic,strong)NSMutableArray *mArray;
 @property(nonatomic,copy)NSString *skillTitle;
 @property(nonatomic,copy)NSString *content;
 @property(nonatomic,copy)NSString *price;
 @property(nonatomic,copy)NSString *unit;
 @property(nonatomic,copy)NSString *swap_type;
 @property(nonatomic,copy)NSString *type;
-@property(nonatomic,strong)NSMutableArray *mArray;
+@property(nonatomic,copy)NSString *swap_id;
 @property (nonatomic, strong) MBProgressHUD *hud;
 @end
