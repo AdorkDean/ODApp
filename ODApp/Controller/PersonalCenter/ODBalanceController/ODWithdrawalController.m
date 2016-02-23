@@ -38,7 +38,7 @@
         self.withdrawalView = [ODWithdrawalView getView];
         self.withdrawalView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
         
-        self.withdrawalView.prcieLabel.text = self.price;
+        self.withdrawalView.prcieLabel.text = [NSString stringWithFormat:@"￥%@" , self.price];
         self.withdrawalView.payAddressTextView.delegate = self;
         [self.withdrawalView.withdrawalButton addTarget:self action:@selector(withdrawalAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -70,7 +70,13 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     
-    NSDictionary *parameters = @{@"amount":self.withdrawalView.prcieLabel.text,@" account":self.withdrawalView.payAddressTextView.text ,  @"open_id":openId};
+    
+    
+    NSLog(@"_____%@" , self.price);
+    
+    
+    
+    NSDictionary *parameters = @{@"amount":self.price,@"account":self.withdrawalView.payAddressTextView.text ,  @"open_id":openId};
     
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     

@@ -19,8 +19,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *choseTimeView;
 
-@property (weak, nonatomic) IBOutlet UITextView *messageTextView;
-
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 
 

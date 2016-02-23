@@ -11,7 +11,9 @@
 @interface ODSecondOrderView : UIView
 
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
-@property (weak, nonatomic) IBOutlet UITextView *messageTextView;
+
+
+
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 
 @property (weak, nonatomic) IBOutlet UIImageView *addressImgeView;

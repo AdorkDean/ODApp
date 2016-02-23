@@ -29,7 +29,7 @@
                         <constraint firstAttribute="height" constant="20" id="eXd-GE-CcA"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="请输入和注册手机一致的支付宝账号" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bY8-2F-Szt">
@@ -49,7 +49,7 @@
                         <constraint firstAttribute="height" constant="1" id="ZRl-WC-I7h"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提现金额" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dsi-tm-lS5">
@@ -59,17 +59,16 @@
                         <constraint firstAttribute="width" constant="60" id="SY5-Ek-nbP"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="125" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6jT-Yw-hWv">
-                    <rect key="frame" x="33" y="169" width="100" height="30"/>
+                    <rect key="frame" x="33" y="169" width="257" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="Agl-hb-fkv"/>
-                        <constraint firstAttribute="width" constant="100" id="RhX-pa-9zI"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmR-SI-LdS">
@@ -103,6 +102,7 @@
                 <constraint firstAttribute="trailing" secondItem="mYS-AV-yPQ" secondAttribute="trailing" id="kNb-p5-Ub8"/>
                 <constraint firstItem="mYS-AV-yPQ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="n9P-H5-3xb"/>
                 <constraint firstItem="Dsi-tm-lS5" firstAttribute="top" secondItem="r55-Ni-QqC" secondAttribute="bottom" constant="20" id="oYE-CG-PLN"/>
+                <constraint firstAttribute="trailing" secondItem="6jT-Yw-hWv" secondAttribute="trailing" constant="30" id="ovJ-Lk-4N9"/>
                 <constraint firstItem="bY8-2F-Szt" firstAttribute="leading" secondItem="UID-bm-b03" secondAttribute="trailing" id="qsA-fw-dso"/>
                 <constraint firstItem="vl7-X5-2b1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="txH-Zh-Mml"/>
                 <constraint firstItem="6jT-Yw-hWv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="33" id="v0c-uL-yJl"/>
@@ -116,7 +116,7 @@
                 <outlet property="prcieLabel" destination="6jT-Yw-hWv" id="Gos-UI-s1t"/>
                 <outlet property="withdrawalButton" destination="dmR-SI-LdS" id="0bR-PB-gZG"/>
             </connections>
-            <point key="canvasLocation" x="400" y="400"/>
+            <point key="canvasLocation" x="3" y="154"/>
         </view>
     </objects>
 </document>
