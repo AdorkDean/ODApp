@@ -18,9 +18,14 @@
     // 2.遍历字典，拼接字典中的键值对
     [self enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [strM appendFormat:@"%@",obj];
+        if (idx != self.count - 1)
+        {
+            [strM appendString:@","];
+        }
     }];
     
     [strM appendFormat:@"]\n"];
+    
     return strM;
 
 }
