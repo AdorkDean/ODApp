@@ -35,4 +35,6 @@
 
 @property (nonatomic, assign) int pageCount;
 
+@property (nonatomic, assign) BOOL isRefresh;
+
 @end

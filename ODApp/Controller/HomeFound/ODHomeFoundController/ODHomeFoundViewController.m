@@ -489,7 +489,7 @@
         // Hot Activity
         self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 7/12 * self.pictureArray.count , 0);
         self.rsusableView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 15) * 7/12, 0);
-        //    self.rsusableView.scrollView.pagingEnabled = YES;
+//        self.rsusableView.scrollView.pagingEnabled = YES;
         self.rsusableView.scrollView.delegate = self;
         self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
         self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;

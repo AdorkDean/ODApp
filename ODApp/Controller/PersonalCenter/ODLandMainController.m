@@ -271,7 +271,7 @@
         ODMyApplyActivityController *vc = [[ODMyApplyActivityController alloc] init];
         
         vc.open_id = self.model.open_id;
-        
+        vc.isRefresh = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if (indexPath.section ==4) {
