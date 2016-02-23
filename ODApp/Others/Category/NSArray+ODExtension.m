@@ -9,6 +9,7 @@
 #import "NSArray+ODExtension.h"
 
 @implementation NSArray (ODExtension)
+
 - (NSString *)description
 {
     // 1.定义字符创保存拼接结果
@@ -20,7 +21,7 @@
         [strM appendFormat:@"%@",obj];
         if (idx != self.count - 1)
         {
-            [strM appendString:@","];
+            [strM appendString:@",\n"];
         }
     }];
     

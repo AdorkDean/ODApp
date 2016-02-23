@@ -39,6 +39,10 @@ NSString * const ODNotificationReleaseTask = @"ODNotificationReleaseTask";
 /**  发布任务成功通知 */
 NSString * const ODNotificationReleaseSkill = @"ODNotificationReleaseSkill";
 
+/**  编辑成功的通知 */
+NSString * const ODNotificationEditSkill = @"ODNotificationEditSkill";
+
+
 /**  支付成功通知 */
 NSString * const ODNotificationPaySuccess = @"ODNotificationPaySuccess";
 

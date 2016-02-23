@@ -102,6 +102,11 @@
 @property (nonatomic, copy) NSString *order_id;
 
 /**
+ *  退款标题
+ */
+@property (nonatomic, copy) NSString *drawbackTitle;
+
+/**
  *  退款金额
  */
 @property (nonatomic, copy) NSString *darwbackMoney;

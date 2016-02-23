@@ -16,9 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"退款";
-    
-    self.isDrawbackState = YES;
+    self.navigationItem.title = self.drawbackTitle;
     
     self.view.userInteractionEnabled = YES;
     [self createScrollView];
