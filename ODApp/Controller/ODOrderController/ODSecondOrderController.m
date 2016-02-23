@@ -167,7 +167,8 @@
     NSString *swap_id = [NSString stringWithFormat:@"%@" , self.informationModel.swap_id];
     
   
-    NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": @"" , @"user_address_id":self.addressId , @"comment": self.headView.secondOrderView.messageTextView.text};
+    NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": @"" , @"user_address_id":self.addressId , @"comment": @""};
+
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weak typeof (self)weakSelf = self;
     [self.orderManager GET:kSaveOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -252,7 +253,7 @@
     
     UITapGestureRecognizer *addressTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addressAction)];
     [self.headView.secondOrderView.addressImgeView addGestureRecognizer:addressTap];
-    self.headView.secondOrderView.messageTextView.delegate = self;
+ 
 
     
     NSString *type = [NSString stringWithFormat:@"%@" , self.informationModel.swap_type];
@@ -280,57 +281,6 @@
     
 }
 
-#pragma mark - textViewDelegate
--(void)textViewDidBeginEditing:(UITextView *)textView
-{
-    if (textView == self.headView.secondOrderView.messageTextView) {
-        if ([textView.text isEqualToString:NSLocalizedString(@"给ta留言", nil)]) {
-            self.headView.secondOrderView.messageTextView.text=NSLocalizedString(@"", nil);
-            self.headView.secondOrderView.messageTextView.textColor = [UIColor blackColor];
-        }
-        else{
-            ;
-        }
-        
-    }
-}
-
-
-
-- (void)textViewDidChange:(UITextView *)textView
-{
-    
-    NSString *message = @"";
-    
-    if (textView == self.headView.secondOrderView.messageTextView)
-    {
-        if (textView.text.length > 20)
-        {
-            textView.text = [textView.text substringToIndex:20];
-        }
-        else
-        {
-            message = textView.text;
-        }
-    }
-    
-}
-
-
--(void)textViewDidEndEditing:(UITextView *)textView
-{
-    if ([textView.text isEqualToString:@""])
-    {
-        textView.textColor = [UIColor lightGrayColor];
-        if (textView == self.headView.secondOrderView.messageTextView) {
-            textView.text=NSLocalizedString(@"给ta留言", nil);
-            
-            
-        }
-    }
-}
-
-
 
 
 - (void)addressAction
@@ -341,7 +291,7 @@
     vc.getAddressBlock = ^(NSString *address , NSString *addrssId , NSString *isAddress ){
         
         if ([isAddress isEqualToString:@"1"]) {
-            weakSelf.headView.secondOrderView.addressLabel.text = @"联系地址";
+            weakSelf.headView.secondOrderView.addressLabel.text = @"请选择";
             weakSelf.addressId = nil;
         }else{
             weakSelf.headView.secondOrderView.addressLabel.text = address;
@@ -371,7 +321,7 @@
 //动态设置区头的高度(根据不同的分区)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(kScreenSize.width, 170);
+    return CGSizeMake(kScreenSize.width, 130);
     
 }
 

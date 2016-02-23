@@ -47,7 +47,10 @@
 {
     [super viewWillAppear:animated];
  
+    if ([self.isRefresh isEqualToString:@"1"]) {
         [self.collectionView.mj_header beginRefreshing];
+    }
+
    
 }
 

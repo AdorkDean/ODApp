@@ -127,6 +127,9 @@
     [self.view addSubview:self.tableView];
     
     
+    
+  
+    
     if ([status isEqualToString:@"3"]) {
         
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -189,37 +192,10 @@
         
         
         
-    }else if ([status isEqualToString:@"-2"]) {
+    }
         
         
-        
-        UIButton *dealRefundButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        dealRefundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        dealRefundButton.backgroundColor = [UIColor redColor];
-        [dealRefundButton setTitle:@"处理退款" forState:UIControlStateNormal];
-        dealRefundButton.titleLabel.font=[UIFont systemFontOfSize:13];
-        [dealRefundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [dealRefundButton addTarget:self action:@selector(dealRefundAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:dealRefundButton];
-        
-        
-        
-    }else if ([status isEqualToString:@"5"]) {
-        
-        
-        
-        UIButton *evaluationButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        evaluationButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        evaluationButton.backgroundColor = [UIColor redColor];
-        [evaluationButton setTitle:@"评价" forState:UIControlStateNormal];
-        evaluationButton.titleLabel.font=[UIFont systemFontOfSize:13];
-        [evaluationButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [evaluationButton addTarget:self action:@selector(evaluationAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:evaluationButton];
-        
-        
-        
-    }else if ([status isEqualToString:@"4"]) {
+    else if ([status isEqualToString:@"4"]) {
         
         
         
@@ -401,7 +377,17 @@
                 
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"评价成功"];
                 
-                [self.navigationController popViewControllerAnimated:YES];
+                
+                if (self.getRefresh) {
+                    
+                    
+                    
+                    weakSelf.getRefresh(@"1");
+                }
+                
+
+                
+                [weakSelf getData];
                 
                 
                 
@@ -451,13 +437,6 @@
 }
 
 
-
-
-// 处理退款
-- (void)dealRefundAction:(UIButton *)sender
-{
-    
-}
 
 // 取消订单
 - (void)cancelOrder:(UIButton *)sender
@@ -571,8 +550,7 @@
                     }
                     
                     
-                    [self.navigationController popViewControllerAnimated:YES];
-                    
+                    [weakSelf getData];
                     
                     
                 }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
@@ -712,11 +690,13 @@
         }else if ([status isEqualToString:@"4"]) {
             self.orderDetailView.typeLabel.text = @"已发货";
         }else if ([status isEqualToString:@"5"]) {
-            self.orderDetailView.typeLabel.text = @"已完成";
+            self.orderDetailView.typeLabel.text = @"已评价";
+            self.orderDetailView.typeLabel.textColor = [UIColor redColor];
         }else if ([status isEqualToString:@"-1"]) {
             self.orderDetailView.typeLabel.text = @"已取消";
         }else if ([status isEqualToString:@"-2"]) {
-            self.orderDetailView.typeLabel.text = @"退款申请";
+            self.orderDetailView.typeLabel.text = @"买家已申请退款";
+            self.orderDetailView.typeLabel.textColor = [UIColor redColor];
         }else if ([status isEqualToString:@"-3"]) {
             self.orderDetailView.typeLabel.text = @"退款已确认";
         }else if ([status isEqualToString:@"-4"]) {

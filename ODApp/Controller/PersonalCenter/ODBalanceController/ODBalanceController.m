@@ -80,6 +80,9 @@
     
     self.balanceView.balanceLabel.text = self.balance;
     
+    self.balanceView.balanceLabel.text = [NSString stringWithFormat:@"￥%@" , self.balance];
+    
+    
     [self.balanceView.withdrawalButton addTarget:self action:@selector(withdrawalAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.balanceView.withdrawalDetailButton addTarget:self action:@selector(withdrawalDetailAction:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -93,6 +96,11 @@
 {
     
     ODWithdrawalController *vc = [[ODWithdrawalController alloc] init];
+    
+    
+  
+    
+    
     vc.price = self.balance;
     [self.navigationController pushViewController:vc animated:YES];
     
