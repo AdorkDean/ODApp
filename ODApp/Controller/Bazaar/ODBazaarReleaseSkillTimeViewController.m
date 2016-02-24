@@ -84,33 +84,39 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{@"swap_id":self.swap_id};
+    NSDictionary *parameter;
+    if (self.swap_id) {
+        parameter = @{@"swap_id":self.swap_id};
+    }else{
+        parameter = @{@"swap_id":@"0"};
+    }
+
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    NSLog(@"----%@",signParameter);
     [self downLoadDataWithUrl:kBazaarReleaseSkillTimeUrl parameter:signParameter];
 }
 
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     __weakSelf;
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
+            [SVProgressHUD dismiss];
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             [weakSelf.dataArray addObjectsFromArray:dict[@"result"]];
   
             for (NSInteger i = 0; i < weakSelf.roundViews.count; i++)
             {
                 ODRoundTimeDrawView *view = weakSelf.roundViews[i];
-                view.firstTimeIsFree = weakSelf.dataArray[i * 3][@"status"];
-                view.secondTimeIsFree = weakSelf.dataArray[i * 3 + 1][@"status"];
-                view.thirdTimeIsFree = weakSelf.dataArray[i * 3 + 2][@"status"];
+                view.firstTimeIsFree = [weakSelf.dataArray[i * 3][@"status"]boolValue];
+                view.secondTimeIsFree = [weakSelf.dataArray[i * 3 + 1][@"status"]boolValue];
+                view.thirdTimeIsFree = [weakSelf.dataArray[i * 3 + 2][@"status"]boolValue];
             }
             [weakSelf.tableView reloadData];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+         [SVProgressHUD dismiss];
     }];
 }
 
@@ -142,6 +148,10 @@
     [cell.openButton addTarget:self action:@selector(openButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.timeLabel.text = dict[@"display"];
     cell.status = [dict[@"status"]boolValue];
+//    if (indexPath.row == 0)
+//    {
+//        <#statements#>
+//    }
     return cell;
 }
 

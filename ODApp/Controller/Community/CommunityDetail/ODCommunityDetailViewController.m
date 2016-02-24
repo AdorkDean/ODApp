@@ -110,7 +110,8 @@
 -(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)paramater
 {
     __weak typeof (self)weakSelf = self;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+
+     [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [self.manager GET:url parameters:paramater success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
             if (responseObject) {
@@ -128,10 +129,11 @@
                 [weakSelf createBBSDetailView];
                 [SVProgressHUD dismiss];
                 [weakSelf joiningTogetherParmetersWithUserInfo:NO];
-                
             }
+        else
+        [SVProgressHUD dismiss];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+        [SVProgressHUD dismiss];
     }];
 }
 
@@ -237,7 +239,9 @@
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]]]];
         [self.imageArray addObject:image];
     }
-    
+
+    [SVProgressHUD dismiss];
+
     CGRect frame;
     UILabel *timeLabel = nil;
     UIButton *deleteButton = nil;
@@ -525,28 +529,7 @@
     }
 }
 
-//{
-//    "bbs_id":2035,
-//    "content":"ui",
-//    "status":1,
-//    "id":1207,
-//    "created_at":"2016-02-23 19:10:35",
-//    "floor":30,
-//    "parent_user_nick":"GetAloveWith",
-//    "parent_id":1178,
-//    "updated_at":"2016-02-23 19:10:35",
-//    "user_id":1101,
-//    "user":{
-//        "gender":1,
-//        "nick":"GetAloveWith",
-//        "avatar":"b9a1a4125392b6a324728c4b0eb63b96",
-//        "id":1101,
-//        "open_id":"5176377568a2a1c8821b",
-//        "sign":"努力、是为了让才华赶上野心。",
-//        "avatar_url":"http://odfile.ufile.ucloud.com.cn/img/b9a1a4125392b6a324728c4b0eb63b96?UCloudPublicKey=ucloud19581143@qq.com14397759570001695093750&Signature=Rjygwd8MP7PIuoYrDPd9BvosRB0=&iopcmd=convert&dst=jpg&Q=80|iopcmd=thumbnail&type=8&width=200"
-//    }
-//    
-//}
+
 -(void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];

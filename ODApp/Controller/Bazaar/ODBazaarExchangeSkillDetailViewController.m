@@ -194,7 +194,8 @@
        
         [self.imageArray addObject:image];
     }
-    
+    [SVProgressHUD dismiss];
+
     CGRect frame;
     for (NSInteger i = 0; i < self.imageArray.count; i++) {
         UIImageView *imageView = [[UIImageView alloc]init];
