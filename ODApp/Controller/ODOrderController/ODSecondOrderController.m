@@ -147,7 +147,7 @@
 - (void)saveOrderAction:(UIButton *)sender
 {
   
-    if ([self.headView.secondOrderView.addressLabel.text isEqualToString:@"联系地址"]){
+    if ([self.headView.secondOrderView.addressLabel.text isEqualToString:@"请选择"]){
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
     }else{
         
@@ -235,16 +235,6 @@
 }
 
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
-    
-    
-    
-    
-}
-
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     
@@ -256,17 +246,9 @@
  
 
     
-    NSString *type = [NSString stringWithFormat:@"%@" , self.informationModel.swap_type];
-    
-    if ([type isEqualToString:@"1"]) {
-        self.headView.secondOrderView.typeLabel.text = @"上门服务";
-    }else
-    {
-         self.headView.secondOrderView.typeLabel.text = @"快递服务";
-    }
     
     if (self.addressArray.count == 0) {
-        self.headView.secondOrderView.addressLabel.text = @"联系地址";
+        self.headView.secondOrderView.addressLabel.text = @"请选择";
     }else{
         ODAddressModel *model = self.addressArray[0];
         self.headView.secondOrderView.addressLabel.text = model.address;

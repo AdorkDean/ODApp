@@ -96,9 +96,10 @@
             [weakSelf createUserInfoView];
             [weakSelf createDetailView];
             [weakSelf createBottomView];
+            [SVProgressHUD dismiss];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [SVProgressHUD dismiss];
+        
     }];
 }
 
@@ -232,47 +233,6 @@
         [self.detailView addSubview:imageView];
         [self.detailView addSubview:imageView];
     }
-    
-    
-//    __weakSelf
-//    __block CGRect frame;
-//    for (NSInteger i = 0; i < model.imgs_big.count; i++) {
-//        NSDictionary *dict = model.imgs_big[i];
-//        UIImageView *imageView = [[UIImageView alloc]init];
-//        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//            
-//            [imageView sizeToFit];
-//            CGFloat multiple = imageView.od_width/(kScreenSize.width-20);
-//            CGFloat height = imageView.od_height/multiple;
-//            if (i==0) {
-//                imageView.frame = CGRectMake(10, CGRectGetMaxY(contentLabel.frame)+10,kScreenSize.width-20,height);
-//                frame = imageView.frame;
-//                if (model.imgs_big.count==1) {
-//                    weakSelf.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
-//                    weakSelf.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
-//                    [weakSelf.detailView addSubview:weakSelf.loveImageView];
-//                    weakSelf.detailView.frame = CGRectMake(0, 65, kScreenSize.width, weakSelf.loveImageView.frame.origin.y+weakSelf.loveImageView.frame.size.height+60);
-//                    weakSelf.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+weakSelf.detailView.frame.size.height);
-//                    [weakSelf createLoveButton];
-//                }
-//            }else{
-//                if (i==model.imgs_big.count-1) {
-//                    imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
-//                    weakSelf.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
-//                    weakSelf.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
-//                    [weakSelf.detailView addSubview:weakSelf.loveImageView];
-//                     weakSelf.detailView.frame = CGRectMake(0, 65, kScreenSize.width, weakSelf.loveImageView.frame.origin.y+weakSelf.loveImageView.frame.size.height+60);
-//                    weakSelf.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+weakSelf.detailView.frame.size.height);
-//                    [weakSelf createLoveButton];
-//                }else{
-//                    imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
-//                    frame = imageView.frame;
-//                }
-//            }
-//            imageView.contentMode = UIViewContentModeScaleAspectFit;
-//            [self.detailView addSubview:imageView];
-//        }];
-//    }
 }
 
 -(void)createLoveButton
@@ -415,15 +375,20 @@
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
         
     }else{
-        if ([type isEqualToString:@"2"]) {
-            ODSecondOrderController *vc  =[[ODSecondOrderController alloc] init];
+        if ([type isEqualToString:@"1"]) {
+            ODOrderController *vc  =[[ODOrderController alloc] init];
             vc.informationModel = model;
             [self.navigationController pushViewController:vc animated:YES];
-        }else{
-            ODOrderController *orderController = [[ODOrderController alloc]init];
+        }else if ([type isEqualToString:@"2"]) {
+            
+            ODSecondOrderController *orderController = [[ODSecondOrderController alloc]init];
             orderController.informationModel = model;
             [self.navigationController pushViewController:orderController animated:YES];
             
+        }else{
+            ODThirdOrderController *orderController = [[ODThirdOrderController alloc]init];
+            orderController.informationModel = model;
+            [self.navigationController pushViewController:orderController animated:YES];
         }
     }
 }

@@ -9,5 +9,10 @@
 #import "ODMyOrderModel.h"
 
 @implementation ODMyOrderModel
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    
+}
+
 
 @end
