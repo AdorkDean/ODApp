@@ -95,7 +95,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     vc.price = model.price;
     vc.unit = model.unit;
     vc.swap_type = [NSString stringWithFormat:@"%@",model.swap_type];
-    NSLog(@"----%@",vc.swap_type);
     vc.type = @"编辑";
     vc.imageArray = [model.imgs_small valueForKeyPath:@"img_url"];
     [vc.strArray addObjectsFromArray:[model.imgs_small valueForKeyPath:@"md5"]];

@@ -84,8 +84,10 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
-    NSDictionary *parameter = @{};
+    NSDictionary *parameter = @{@"swap_id":self.swap_id};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    NSLog(@"----%@",signParameter);
     [self downLoadDataWithUrl:kBazaarReleaseSkillTimeUrl parameter:signParameter];
 }
 
