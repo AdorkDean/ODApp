@@ -45,7 +45,8 @@
     [self createCollectionView];
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
-
+    [self getDefaultCenterNameRequest];
+    
     [MAMapServices sharedServices].apiKey = ODLocationApiKey;
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
     _mapView.delegate = self;
@@ -192,6 +193,65 @@
     }];
 }
 
+#pragma mark - 获得默认的体验中心的Name和Store_id
+- (void)getDefaultCenterNameRequest
+{
+    self.centerManager = [AFHTTPRequestOperationManager manager];
+    self.centerManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        
+    NSDictionary *parameter = @{@"show_type":@"1"};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weak typeof (self)weakSelf = self;
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+
+    [self.centerManager GET:ODStoreListUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
+        [SVProgressHUD dismiss];
+
+        if (responseObject) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSMutableArray *result = dict[@"result"];
+            
+            weakSelf.storeId = result[0][@"id"];
+            weakSelf.centerName = result[0][@"name"];
+            [weakSelf getDefaultCenterTelRequest];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    {
+        [SVProgressHUD dismiss];
+    }];
+}
+
+#pragma mark - 获得默认的体验中心的Tel
+- (void)getDefaultCenterTelRequest
+{
+    self.centerTelManager = [AFHTTPRequestOperationManager manager];
+    self.centerTelManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSDictionary *parameter = @{@"store_id":[NSString stringWithFormat:@"%@", self.storeId]};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weak typeof (self)weakSelf = self;
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+
+    [self.centerManager GET:ODStoreDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
+        [SVProgressHUD dismiss];
+
+        if (responseObject)
+        {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSDictionary *result = dict[@"result"];
+            
+            weakSelf.centerTel = result[@"tel"];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    {
+        [SVProgressHUD dismiss];
+    }];
+}
+
 #pragma mark - Action
 #pragma mark - 定位按钮点击事件
 - (void)locationButtonClick:(UIButton *)button
@@ -216,9 +276,9 @@
     {
         ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
         
-        vc.centerName = @"上海第二工业大学体验中心";
-        vc.phoneNumber = @"13524776010";
-        vc.storeId = @"1";
+        vc.centerName = self.centerName;
+        vc.storeId = [NSString stringWithFormat:@"%@",self.storeId];
+        vc.phoneNumber = self.centerTel;
         
         [self.navigationController pushViewController:vc animated:YES];
     }
