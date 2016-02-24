@@ -17,16 +17,20 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 @implementation ODReleaseController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
     self.navigationItem.title = @"已发布";
+    
     self.pageCount = 1;
     self.dataArray = [[NSMutableArray alloc] init];
+    
     [self createCollectionView];
     
     __weakSelf;
-    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationEditSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationEditSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
+    {
         [weakSelf.dataArray removeAllObjects];
         [weakSelf createRequestData];
     }];
@@ -38,17 +42,31 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     [self createRequestData];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self createRequestData];
+}
+
 #pragma mark - 加载数据请求
 - (void)createRequestData
 {
-
     __weakSelf
+    if (self.pageCount == 1) {
+        [weakSelf.dataArray removeAllObjects];
+    }
+    
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"my":@"1"};
-    [ODHttpTool getWithURL:ODPersonalReleaseTaskUrl parameters:parameter modelClass:[ODReleaseModel class] success:^(id model) {
-        [weakSelf.collectionView.mj_header endRefreshing];
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    [ODHttpTool getWithURL:ODPersonalReleaseTaskUrl parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
+    {
+        [SVProgressHUD dismiss];
+
+        
         [weakSelf.collectionView.mj_footer endRefreshing];
         
-        if (model == nil) {
+        if (model == nil)
+        {
             UILabel *noResultLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30)];
             noResultLabel.text = @"暂无发布任务";
             noResultLabel.font = [UIFont systemFontOfSize:16];
@@ -56,7 +74,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
             noResultLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
             [weakSelf.view addSubview:noResultLabel];
         }
-        
         if ([[model result]count] == 0)
         {
             [weakSelf.collectionView.mj_footer noticeNoMoreData];
@@ -73,11 +90,41 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
             }
         }
         [weakSelf.collectionView reloadData];
-        
-    } failure:^(NSError *error) {
-        [weakSelf.collectionView.mj_footer endRefreshing];
-
         [weakSelf.collectionView.mj_header endRefreshing];
+    } failure:^(NSError *error)
+    {
+        [SVProgressHUD dismiss];
+
+        [weakSelf.collectionView.mj_footer endRefreshing];
+        [weakSelf.collectionView.mj_header endRefreshing];
+    }];
+}
+
+#pragma mark - 删除技能请求
+- (void)deleteSkillRequest
+{
+    self.manager = [AFHTTPRequestOperationManager manager];
+    NSDictionary *parameter = @{@"open_id":[ODUserInformation sharedODUserInformation].openID, @"swap_id":self.swap_id};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weakSelf
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    [self.manager GET:ODPersonReleaseTaskDeleteUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
+        [SVProgressHUD dismiss];
+        [weakSelf createRequestData];
+        if ([responseObject[@"status"] isEqualToString:@"success"])
+        {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"删除任务成功"];
+            [weakSelf.dataArray removeAllObjects];
+            [weakSelf createRequestData];
+        }else
+        {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    {
+        [SVProgressHUD dismiss];
     }];
 }
 
@@ -89,6 +136,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODReleaseModel *model = self.dataArray[indexPath.row];
     ODBazaarReleaseSkillViewController *vc = [[ODBazaarReleaseSkillViewController alloc] init];
+    
     vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
     vc.skillTitle = model.title;
     vc.content = model.content;
@@ -98,52 +146,25 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     vc.type = @"编辑";
     vc.imageArray = [model.imgs_small valueForKeyPath:@"img_url"];
     [vc.strArray addObjectsFromArray:[model.imgs_small valueForKeyPath:@"md5"]];
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)deleteButtonClick:(UIButton *)button
 {
-
     __weakSelf
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除技能" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+    {
         ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview.superview;
         NSIndexPath *indexPath = [weakSelf.collectionView indexPathForCell:cell];
-        
         ODReleaseModel *model = weakSelf.dataArray[indexPath.row];
+        
         weakSelf.swap_id = model.swap_id;
         [weakSelf deleteSkillRequest];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
-}
-
-#pragma mark - 删除技能请求
-- (void)deleteSkillRequest{
-
-    self.manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *parameter = @{@"open_id":[ODUserInformation sharedODUserInformation].openID, @"swap_id":self.swap_id};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weakSelf
-    [self.manager GET:ODPersonReleaseTaskDeleteUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        [weakSelf createRequestData];
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"删除任务成功"];
-            
-//            [weakSelf.collectionView reloadData];
-            [weakSelf.dataArray removeAllObjects];
-            [weakSelf createRequestData];
-            
-        }else{
-        
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
-        }
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
-    }];
 }
 
 #pragma mark - Create UICollectionView
@@ -156,47 +177,41 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODReleaseCell" bundle:nil] forCellWithReuseIdentifier:ODReleaseCellID];
-    
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
+    {
         weakSelf.pageCount = 1;
         [weakSelf createRequestData];
     }];
    
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^
+    {
         [weakSelf loadMoreData];
     }];
-
     [self.collectionView.mj_header beginRefreshing];
     [self.view addSubview:self.collectionView];
 }
 
-
 #pragma mark - UICollectionViewDelegate
 - (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-
     return 1;
 }
 
 - (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-
     return self.dataArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
     ODReleaseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ODReleaseCellID forIndexPath:indexPath];
     self.model = self.dataArray[indexPath.row];
+    
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-
     [cell.editButton addTarget:self action:@selector(editButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    
     [cell setModel:self.model];
     
     return cell;
@@ -204,7 +219,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 - (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-
     return CGSizeMake(KScreenWidth, 138);
 }
 
@@ -212,14 +226,15 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 {
     ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     ODReleaseModel *model = self.dataArray[indexPath.row];
+    
     vc.swap_id = model.swap_id;
+    vc.nick = model.user[@"nick"];
     [self.navigationController pushViewController:vc animated:YES];
-
 }
 
 
-
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

@@ -5,7 +5,7 @@
 //  Created by zhz on 16/1/31.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
-
+#import "ODNavigationController.h"
 #import "ODOrderController.h"
 #import "ODOrderCell.h"
 #import "ODContactAddressController.h"
@@ -229,12 +229,7 @@
     NSString *swap_id = [NSString stringWithFormat:@"%@" , self.informationModel.swap_id];
     
     
-    NSLog(@"____%@" , swap_id);
-    NSLog(@"_____%@" , self.headView.orderView.timeLabel.text) ;
-      NSLog(@"_____%@" , self.addressId) ;
-    
-    
-    
+        
     NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": self.headView.orderView.timeLabel.text , @"user_address_id":self.addressId , @"comment":@""};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weak typeof (self)weakSelf = self;
@@ -539,8 +534,8 @@
     };
     
     vc.addressId = self.addressId;
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    ODNavigationController *navi = [[ODNavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:navi animated:YES completion:nil];
     
 }
 

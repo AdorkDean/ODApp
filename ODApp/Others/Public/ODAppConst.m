@@ -114,6 +114,9 @@ NSString * const kDeleteReplyUrl = @"http://woquapi.test.odong.com/1.0/bbs/del";
 NSString * const kHomeFoundListUrl = @"http://woquapi.test.odong.com/1.0/bbs/list";
 NSString * const kHomeFoundPictureUrl = @"http://woquapi.test.odong.com/1.0/other/banner";
 
+NSString *const ODStoreListUrl = @"http://woquapi.test.odong.com/1.0/other/store/list";
+NSString *const ODStoreDetailUrl = @"http://woquapi.test.odong.com/1.0/other/store/detail";
+
 NSString * const ODSkillDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/info";
 
 NSString * const ODHomeChangeSkillUrl = @"http://woquapi.test.odong.com/1.0/other/home";

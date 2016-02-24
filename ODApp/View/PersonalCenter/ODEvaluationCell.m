@@ -63,6 +63,23 @@
     
 }
 
+
+-(void)dealWithModel:(ODSecondEvaluationModel *)model
+{
+    
+    // 根据内容更改label的高度
+    CGRect rect = [model.reason boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 20,0)
+                                              options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
+                                           attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]}
+                                              context:nil];
+    self.contentLabel.frame = CGRectMake(10, 10, self.contentView.frame.size.width - 20, rect.size.height);
+    self.contentLabel.text = model.reason;
+    
+   
+}
+
+
+
 +(CGFloat)returnHight:(ODEvaluationModel *)model
 {
     //根据内容计算,更改Label的高度
@@ -81,6 +98,26 @@
     
 }
 
++ (CGFloat)returnSecondHight:(ODSecondEvaluationModel *)model
+{
+    
+    
+    //根据内容计算,更改Label的高度
+    if (model.reason) {
+        CGRect rect = [model.reason boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width - 20, 0)
+                                                  options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
+                                               attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]}
+                                                  context:nil];
+        return (rect.size.height + 30);
+    }else{
+        
+        return 30;
+        
+    }
 
+    
+    
+    
+}
 
 @end

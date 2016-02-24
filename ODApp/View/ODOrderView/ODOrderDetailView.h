@@ -10,6 +10,10 @@
 
 @interface ODOrderDetailView : UIView
 
+
+@property (weak, nonatomic) IBOutlet UIButton *phoneButton;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *typeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *swapTypeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *userButtonView;

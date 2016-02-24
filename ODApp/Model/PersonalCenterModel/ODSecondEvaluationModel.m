@@ -1,18 +1,21 @@
 //
-//  ODApplyModel.m
+//  ODSecondEvaluationModel.m
 //  ODApp
 //
-//  Created by zhz on 16/2/17.
+//  Created by zhz on 16/2/24.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODApplyModel.h"
+#import "ODSecondEvaluationModel.h"
 
-@implementation ODApplyModel
+@implementation ODSecondEvaluationModel
+
+
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key
 {
     
 }
+
 
 
 @end

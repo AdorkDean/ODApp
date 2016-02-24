@@ -463,6 +463,7 @@
                 <outlet property="nineLabel" destination="6Ao-ME-dbT" id="1og-qu-42G"/>
                 <outlet property="orderIdLabel" destination="hRg-GS-lB2" id="tIY-Ub-qHJ"/>
                 <outlet property="orderTimeLabel" destination="gGE-nT-17n" id="5R5-BF-4Xv"/>
+                <outlet property="phoneButton" destination="KlF-o4-GIw" id="AVC-0a-Ac4"/>
                 <outlet property="priceLabel" destination="8vW-eg-mGE" id="mhn-0F-Gne"/>
                 <outlet property="secondLabel" destination="Fhr-xC-Evz" id="46S-dy-QYG"/>
                 <outlet property="serviceTimeLabel" destination="LBP-rz-nn4" id="bSq-OB-mfn"/>
@@ -476,7 +477,7 @@
                 <outlet property="typeLabel" destination="u2V-Ex-rtj" id="zAm-Wb-utv"/>
                 <outlet property="userButtonView" destination="fot-AH-vqB" id="iaJ-ma-q3P"/>
             </connections>
-            <point key="canvasLocation" x="891.5" y="169"/>
+            <point key="canvasLocation" x="552.5" y="65"/>
         </view>
     </objects>
     <resources>

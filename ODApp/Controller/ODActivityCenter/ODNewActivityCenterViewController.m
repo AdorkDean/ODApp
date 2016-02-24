@@ -5,13 +5,14 @@
 //  Created by 刘培壮 on 16/2/1.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
+
 #import "mjrefresh.h"
 #import "ODActivitylistModel.h"
 #import "ODNewActivityCell.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODNewActivityCenterViewController.h"
 #import "ODNewActivityDetailViewController.h"
-#import "ODActivityDetailViewController.h"
+#import "UITableViewRowAction+JZExtension.h"
 
 @interface ODNewActivityCenterViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -119,5 +120,7 @@ Single_Implementation(ODNewActivityCenterViewController)
         });
     }
 }
+
+
 
 @end

@@ -35,18 +35,22 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 
 - (void)getCityListRequest
 {
-
+    __weakSelf
     NSDictionary *parameter = @{@"region_name":@"上海"};
-    [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
-        
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+
+    [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
+    {
+        [SVProgressHUD dismiss];
+
         ODLocationModel *mode = [model result];
-        self.cityListArray = [mode.all valueForKeyPath:@"name"];
-        self.cityIdArray = [mode.all valueForKey:@"id"];
-        [self.collectionView reloadData];
+        weakSelf.cityListArray = [mode.all valueForKeyPath:@"name"];
+        weakSelf.cityIdArray = [mode.all valueForKey:@"id"];
+        [weakSelf.collectionView reloadData];
         
-    } failure:^(NSError *error) {
-        
-        
+    } failure:^(NSError *error)
+    {
+        [SVProgressHUD dismiss];
     }];
 }
 
@@ -70,7 +74,6 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     ODLocationCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ODLocationCellID forIndexPath:indexPath];
     
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
@@ -92,10 +95,9 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     [ODUserInformation sharedODUserInformation].locationCity = self.cityListArray[indexPath.row];
     [ODUserInformation sharedODUserInformation].cityID = self.cityIdArray[indexPath.row];
-    
+
     [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationLocationSuccessRefresh object:nil];
     
     [self.navigationController popViewControllerAnimated:YES];

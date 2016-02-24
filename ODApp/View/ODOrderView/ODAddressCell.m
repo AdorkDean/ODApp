@@ -14,7 +14,7 @@
     // Initialization code
     
     
-      [self setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     self.contentView.userInteractionEnabled = YES;
     
