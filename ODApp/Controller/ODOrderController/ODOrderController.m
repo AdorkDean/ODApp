@@ -5,7 +5,7 @@
 //  Created by zhz on 16/1/31.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
-
+#import "ODNavigationController.h"
 #import "ODOrderController.h"
 #import "ODOrderCell.h"
 #import "ODContactAddressController.h"
@@ -545,8 +545,8 @@
     };
     
     vc.addressId = self.addressId;
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    ODNavigationController *navi = [[ODNavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:navi animated:YES completion:nil];
     
 }
 

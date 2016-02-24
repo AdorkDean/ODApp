@@ -303,7 +303,7 @@
     
     vc.addressId = self.addressId;
     
-    [self.navigationController pushViewController:vc animated:YES];
+    [self presentViewController:vc animated:YES completion:nil];
     
 }
 
