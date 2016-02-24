@@ -53,24 +53,39 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODBazaarPicCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellId forIndexPath:indexPath];
+    UITapGestureRecognizer *pgr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(picCkick:)];
+    [cell.picImageView addGestureRecognizer:pgr];
+    cell.picImageView.userInteractionEnabled = YES;
     if ([self.skill isEqualToString:@"skill"]) {
         NSDictionary *dict = self.photos[indexPath.row];
-        [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [cell.picImageView sizeToFit];
             CGFloat multiple = cell.picImageView.od_width/kScreenSize.width;
             CGFloat height = cell.picImageView.od_height/multiple;
             cell.picImageView.frame = CGRectMake(0, 0, kScreenSize.width, height);
             cell.picImageView.center = CGPointMake(KScreenWidth/2, KScreenHeight/2);
             cell.picImageView.contentMode = UIViewContentModeScaleAspectFit;
+            
+            cell.scrollView.contentSize = cell.picImageView.frame.size;
+            // 设置缩放比例
+            cell.scrollView.maximumZoomScale = 2.0;
+            cell.scrollView.minimumZoomScale = 1;
+            
         }];
     }else{
-        [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.photos[indexPath.row]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.photos[indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [cell.picImageView sizeToFit];
             CGFloat multiple = cell.picImageView.od_width/kScreenSize.width;
             CGFloat height = cell.picImageView.od_height/multiple;
             cell.picImageView.frame = CGRectMake(0, 0, kScreenSize.width, height);
             cell.picImageView.center = CGPointMake(KScreenWidth/2, KScreenHeight/2);
             cell.picImageView.contentMode = UIViewContentModeScaleAspectFit;
+            
+            cell.scrollView.contentSize = cell.picImageView.frame.size;
+            
+            // 设置缩放比例
+            cell.scrollView.maximumZoomScale = 2.0;
+            cell.scrollView.minimumZoomScale = 1;
         }];
     }
 
@@ -84,7 +99,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];   
 }
 
 -(void)createCountLabel
@@ -96,10 +111,17 @@
     self.label.backgroundColor = [UIColor clearColor];
     [self.view addSubview:self.label];
 }
+
+
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     NSInteger index = scrollView.contentOffset.x/kScreenSize.width;
     self.label.text = [NSString stringWithFormat:@"%ld/%ld",index+1,self.photos.count];
+}
+
+-(void)picCkick:(UITapGestureRecognizer *)pgr
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - view视图将要显示

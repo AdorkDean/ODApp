@@ -10,7 +10,7 @@
 #import "ODTabBarController.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
-
+#import "ODCommunityDetailModel.h"
 
 @interface ODCommunityDetailReplyViewController : ODBaseViewController<UITextViewDelegate>
 
@@ -19,7 +19,7 @@
 @property(nonatomic,copy)NSString *bbs_id;
 @property(nonatomic,copy)NSString *parent_id;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic,copy)void(^myBlock)(NSString *refresh);
+@property(nonatomic,copy)void(^myBlock)(NSString *refresh,ODCommunityDetailModel *model);
 
 
 @end

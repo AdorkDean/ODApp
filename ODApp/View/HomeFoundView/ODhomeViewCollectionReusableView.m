@@ -28,65 +28,65 @@
         UIImageView *findActivityImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(aroundSpace + 7.5, 15, 25.5, 30) imageName:@"icon_activity" tag:0];
         self.findActivityLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(aroundSpace, CGRectGetMaxY(findActivityImageView.frame) + 5, labelWidth, labelHeight) text:@"找活动" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
         self.findActivityLabel.userInteractionEnabled = NO;
-        [self addSubview:findActivityImageView];
-        [self addSubview:self.findActivityButton];
-        [self addSubview:self.findActivityLabel];
+        [self.activityView addSubview:findActivityImageView];
+        [self.activityView addSubview:self.findActivityButton];
+        [self.activityView addSubview:self.findActivityLabel];
         
         self.orderPlaceButton = [ODClassMethod creatButtonWithFrame:CGRectMake(aroundSpace + labelWidth + spaceX - 20, 15, 80, 50) target:self sel:nil tag:0 image:@"" title:nil font:0];
         UIImageView *orderPlaceImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(aroundSpace + labelWidth + spaceX + 5, 15, 30, 30) imageName:@"icon_field" tag:0];
         self.orderPlaceLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(aroundSpace + 40 + spaceX, CGRectGetMaxY(orderPlaceImageView.frame) + 5, labelWidth, labelHeight) text:@"约场地" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
         self.orderPlaceLabel.userInteractionEnabled = NO;
-        [self addSubview:self.orderPlaceLabel];
-        [self addSubview:orderPlaceImageView];
-        [self addSubview:self.orderPlaceButton];
+        [self.activityView addSubview:self.orderPlaceLabel];
+        [self.activityView addSubview:orderPlaceImageView];
+        [self.activityView addSubview:self.orderPlaceButton];
         
         self.findFavorableButton = [ODClassMethod creatButtonWithFrame:CGRectMake(aroundSpace + labelWidth * 2 + spaceX * 2 - 20, 15, 80, 50) target:self sel:nil tag:0 image:@"" title:nil font:0];
         UIImageView *findFavorableImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(aroundSpace + labelWidth * 2 + spaceX * 2 + 5, 15, 30, 30) imageName:@"icon_Discount" tag:0];
         self.findFavorableLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(aroundSpace + 40 * 2 + spaceX * 2, CGRectGetMaxY(findFavorableImageView.frame) + 5, labelWidth, labelHeight) text:@"找优惠" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
         self.findFavorableLabel.userInteractionEnabled = NO;
-        [self addSubview:self.findFavorableLabel];
-        [self addSubview:findFavorableImageView];
-        [self addSubview:self.findFavorableButton];
+        [self.activityView addSubview:self.findFavorableLabel];
+        [self.activityView addSubview:findFavorableImageView];
+        [self.activityView addSubview:self.findFavorableButton];
         
         self.findJobButton = [ODClassMethod creatButtonWithFrame:CGRectMake(aroundSpace + labelWidth * 3 + spaceX * 3 - 20, 15, 80, 50) target:self sel:nil tag:0 image:@"" title:nil font:0];
         UIImageView *finJobImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(aroundSpace + labelWidth * 3 + spaceX * 3 + 5, 15, 33, 30) imageName:@"icon_Work-study" tag:0];
         self.findJobLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(aroundSpace + labelWidth * 3 + spaceX * 3, CGRectGetMaxY(finJobImageView.frame) + 5, labelWidth, labelHeight) text:@"找兼职" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
         self.findJobLabel.userInteractionEnabled = NO;
-        [self addSubview:finJobImageView];
-        [self addSubview:self.findJobButton];
-        [self addSubview:self.findJobLabel];
+        [self.activityView addSubview:finJobImageView];
+        [self.activityView addSubview:self.findJobButton];
+        [self.activityView addSubview:self.findJobLabel];
  
         self.searchCircleButton = [ODClassMethod creatButtonWithFrame:CGRectMake(aroundSpace - 20, CGRectGetMaxY(self.findActivityLabel.frame) + 15, 80, 50) target:self sel:nil tag:0 image:@"" title:nil font:0];
         UIImageView *searchCircleImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(aroundSpace, CGRectGetMaxY(self.findActivityLabel.frame) + 15, 36.5, 30) imageName:@"icon_circle_big" tag:0];
         self.searchCircleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(aroundSpace, CGRectGetMaxY(searchCircleImageView.frame) + 5, labelWidth, labelHeight) text:@"寻圈子" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
         self.searchCircleLabel.userInteractionEnabled = NO;
-        [self addSubview:searchCircleImageView];
-        [self addSubview:self.searchCircleButton];
-        [self addSubview:self.searchCircleLabel];
+        [self.activityView addSubview:searchCircleImageView];
+        [self.activityView addSubview:self.searchCircleButton];
+        [self.activityView addSubview:self.searchCircleLabel];
         
         self.searchHelpButton = [ODClassMethod creatButtonWithFrame:CGRectMake(aroundSpace + labelWidth + spaceX - 20, CGRectGetMaxY(self.findActivityLabel.frame) + 15, 80, 50) target:self sel:nil tag:0 image:@"" title:nil font:0];
         UIImageView *searchHelpImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(aroundSpace + labelWidth + spaceX, CGRectGetMaxY(self.findActivityLabel.frame) + 15, 36, 30) imageName:@"icon_help" tag:0];
         self.searchHelpLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(aroundSpace + 40 + spaceX, CGRectGetMaxY(searchCircleImageView.frame) + 5, labelWidth, labelHeight) text:@"求帮助" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
         self.searchHelpLabel.userInteractionEnabled = NO;
-        [self addSubview:self.searchHelpLabel];
-        [self addSubview:searchHelpImageView];
-        [self addSubview:self.searchHelpButton];
+        [self.activityView addSubview:self.searchHelpLabel];
+        [self.activityView addSubview:searchHelpImageView];
+        [self.activityView addSubview:self.searchHelpButton];
         
         self.changeSkillButton = [ODClassMethod creatButtonWithFrame:CGRectMake(aroundSpace + labelWidth * 2 + spaceX * 2 - 20, CGRectGetMaxY(self.findActivityLabel.frame) + 15, 80, 50) target:self sel:nil tag:0 image:@"" title:nil font:0];
         UIImageView *changeSkillImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(aroundSpace + labelWidth * 2 + spaceX * 2, CGRectGetMaxY(self.findActivityLabel.frame) + 15, 38, 30) imageName:@"icon_Skill_big" tag:0];
         self.changeSkillLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(aroundSpace + 40 * 2 + spaceX * 2, CGRectGetMaxY(searchCircleImageView.frame) + 5, labelWidth, labelHeight) text:@"换技能" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
         self.changeSkillLabel.userInteractionEnabled = NO;
-        [self addSubview:self.changeSkillLabel];
-        [self addSubview:changeSkillImageView];
-        [self addSubview:self.changeSkillButton];
+        [self.activityView addSubview:self.changeSkillLabel];
+        [self.activityView addSubview:changeSkillImageView];
+        [self.activityView addSubview:self.changeSkillButton];
         
         self.moreButton = [ODClassMethod creatButtonWithFrame:CGRectMake(aroundSpace + labelWidth * 3 + spaceX * 3 - 20, CGRectGetMaxY(self.findActivityLabel.frame) + 15, 80, 50) target:self sel:nil tag:0 image:@"" title:nil font:0];
         UIImageView *moreImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(aroundSpace + labelWidth * 3 + spaceX * 3 + 5, CGRectGetMaxY(self.findActivityLabel.frame) + 15 + 3, 35, 25) imageName:@"icon_more" tag:0];
         self.moreLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(aroundSpace + labelWidth * 3 + spaceX * 3, CGRectGetMaxY(searchCircleImageView.frame) + 5, labelWidth, labelHeight) text:@"更多" font:12 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
         self.moreLabel.userInteractionEnabled = NO;
-        [self addSubview:moreImageView];
-        [self addSubview:self.moreButton];
-        [self addSubview:self.moreLabel];
+        [self.activityView addSubview:moreImageView];
+        [self.activityView addSubview:self.moreButton];
+        [self.activityView addSubview:self.moreLabel];
         
         #pragma mark - Hot Activity
         self.hotActivityView = [ODClassMethod creatViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.activityView.frame) + 6, kScreenSize.width, 160) tag:0 color:@"#ffffff"];
@@ -155,6 +155,10 @@
     }
     return self;
 }
+
+
+
+
 
 
 @end

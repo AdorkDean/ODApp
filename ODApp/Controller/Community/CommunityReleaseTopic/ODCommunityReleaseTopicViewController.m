@@ -253,7 +253,7 @@ NSString *topicContentText = @"";
         NSData *imageData;
         self.pickedImage = [self scaleImage:self.pickedImage];;
         if (UIImagePNGRepresentation(self.pickedImage)==nil) {
-            imageData = UIImageJPEGRepresentation(self.pickedImage,0.4);
+            imageData = UIImageJPEGRepresentation(self.pickedImage,0.3);
         }else{
             imageData = UIImagePNGRepresentation(self.pickedImage);
         }
@@ -310,11 +310,11 @@ NSString *topicContentText = @"";
 //压缩尺寸
 -(UIImage *) scaleImage:(UIImage *)image
 {
-    CGSize size = CGSizeMake(image.size.width * 0.4, image.size.height * 0.4);
+    CGSize size = CGSizeMake(image.size.width * 0.3, image.size.height * 0.3);
     UIGraphicsBeginImageContext(size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGAffineTransform transform = CGAffineTransformIdentity;
-    transform = CGAffineTransformScale(transform,0.4, 0.4);
+    transform = CGAffineTransformScale(transform,0.3, 0.3);
     CGContextConcatCTM(context, transform);
     [image drawAtPoint:CGPointMake(0.0f, 0.0f)];
     UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
@@ -392,7 +392,7 @@ NSString *topicContentText = @"";
             tag_ids = [[tag_ids stringByAppendingString:@"|"]stringByAppendingString:tag];
         }
     }
-    NSDictionary *parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"tag_ids":tag_ids,@"imgs":imageStr,@"city_id":@"321",@"open_id":[ODUserInformation sharedODUserInformation].openID};
+    NSDictionary *parameter = @{@"title":self.titleTextView.text,@"content":self.topicContentTextView.text,@"tag_ids":tag_ids,@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID],@"open_id":[ODUserInformation sharedODUserInformation].openID};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     NSLog(@"%@",signParameter);
     [self pushDataWithUrl:kCommunityReleaseBbsUrl parameter:signParameter];

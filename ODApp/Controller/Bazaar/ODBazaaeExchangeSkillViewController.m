@@ -61,7 +61,7 @@
 -(void)joiningTogetherParmeters
 {
     self.page = 1;
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":@"0",@"my":@"0",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID],@"my":@"0",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
 }
@@ -145,7 +145,7 @@
             {
                 NSDictionary *dict = model.imgs_small[i];
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
-                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
                 [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
@@ -158,7 +158,7 @@
             {
                 NSDictionary *dict = model.imgs_small[i];
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
-                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
                 [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
@@ -187,7 +187,7 @@
     picController.photos = model.imgs_big;
     picController.selectedIndex = button.tag-10*indexPath.row;
     picController.skill = @"skill";
-    [self.navigationController pushViewController:picController animated:YES];
+    [self.navigationController presentViewController:picController animated:YES completion:nil];
 }
 
 -(void)otherInfoClick:(UIButton *)button

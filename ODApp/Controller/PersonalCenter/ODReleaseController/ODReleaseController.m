@@ -23,6 +23,12 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     self.pageCount = 1;
     self.dataArray = [[NSMutableArray alloc] init];
     [self createCollectionView];
+    
+    __weakSelf;
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationEditSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf.dataArray removeAllObjects];
+        [weakSelf createRequestData];
+    }];
 }
 
 - (void)loadMoreData
@@ -36,7 +42,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 {
 
     __weakSelf
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"city_id":@"0",@"my":@"1", @"open_id":[ODUserInformation sharedODUserInformation].openID};
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID],@"my":@"1", @"open_id":[ODUserInformation sharedODUserInformation].openID};
     [ODHttpTool getWithURL:ODPersonalReleaseTaskUrl parameters:parameter modelClass:[ODReleaseModel class] success:^(id model) {
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
@@ -88,6 +94,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     vc.price = model.price;
     vc.unit = model.unit;
     vc.swap_type = [NSString stringWithFormat:@"%@",model.swap_type];
+    NSLog(@"----%@",vc.swap_type);
     vc.type = @"编辑";
     vc.imageArray = [model.imgs_small valueForKeyPath:@"img_url"];
     [vc.strArray addObjectsFromArray:[model.imgs_small valueForKeyPath:@"md5"]];

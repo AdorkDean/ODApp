@@ -105,7 +105,7 @@
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
     self.scrollView.userInteractionEnabled = YES;
-    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.view addSubview:self.scrollView];
 }
 
@@ -113,7 +113,7 @@
 {
     ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(otherInfoClick)];
-    UIView *userInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 60)];
+    UIView *userInfoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 65)];
     userInfoView.backgroundColor = [UIColor whiteColor];
     [userInfoView addGestureRecognizer:gesture];
     [self.scrollView addSubview:userInfoView];
@@ -142,6 +142,10 @@
     UIImageView *arrowImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-25, 25, 10, 10)];
     arrowImageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
     [userInfoView addSubview:arrowImageView];
+    
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, kScreenSize.width, 5)];
+    lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    [userInfoView addSubview:lineView];
 }
 
 -(void)otherInfoClick
@@ -181,39 +185,93 @@
     contentLabel.font = [UIFont systemFontOfSize:14];
     [self.detailView addSubview:contentLabel];
     
-    __weakSelf
-    __block CGRect frame;
+     self.imageArray = [[NSMutableArray alloc]init];
     for (NSInteger i = 0; i < model.imgs_big.count; i++) {
         NSDictionary *dict = model.imgs_big[i];
-        UIImageView *imageView = [[UIImageView alloc]init];
-        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            
-            [imageView sizeToFit];
-            CGFloat multiple = imageView.od_width/(kScreenSize.width-20);
-            CGFloat height = imageView.od_height/multiple;
-            if (i==0) {
-                imageView.frame = CGRectMake(10, CGRectGetMaxY(contentLabel.frame)+10,kScreenSize.width-20,height);
-                frame = imageView.frame;
-            }else{
-                if (i==model.imgs_big.count-1) {
-                    imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
-                    weakSelf.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
-                    weakSelf.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
-                    [weakSelf.detailView addSubview:weakSelf.loveImageView];
-                     weakSelf.detailView.frame = CGRectMake(0, 65, kScreenSize.width, weakSelf.loveImageView.frame.origin.y+weakSelf.loveImageView.frame.size.height+60);
-                    weakSelf.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+weakSelf.detailView.frame.size.height);
-                    [weakSelf createLoveButton];
-                }else{
-                    imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
-                    frame = imageView.frame;
-                }
-            }
-            imageView.contentMode = UIViewContentModeScaleAspectFill;
-            [self.detailView addSubview:imageView];
-        }];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:dict[@"img_url"]]]];
+       
+        [self.imageArray addObject:image];
     }
+    
+    CGRect frame;
+    for (NSInteger i = 0; i < self.imageArray.count; i++) {
+        UIImageView *imageView = [[UIImageView alloc]init];
+        imageView.image = self.imageArray[i];
+       
+        [imageView sizeToFit];
+        CGFloat multiple = imageView.od_width/(kScreenSize.width-20);
+        CGFloat height = imageView.od_height/multiple;
+        if (i==0) {
+            imageView.frame = CGRectMake(10, CGRectGetMaxY(contentLabel.frame)+10,kScreenSize.width-20,height);
+            frame = imageView.frame;
+            if (model.imgs_big.count==1) {
+                self.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
+                self.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
+                [self.detailView addSubview:self.loveImageView];
+                self.detailView.frame = CGRectMake(0, 65, kScreenSize.width, self.loveImageView.frame.origin.y+self.loveImageView.frame.size.height+60);
+                self.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+self.detailView.frame.size.height);
+                [self createLoveButton];
+            }
+        }else{
+            if (i==model.imgs_big.count-1) {
+                imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
+                self.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
+                self.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
+                [self.detailView addSubview:self.loveImageView];
+                self.detailView.frame = CGRectMake(0, 65, kScreenSize.width, self.loveImageView.frame.origin.y+self.loveImageView.frame.size.height+60);
+                self.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+self.detailView.frame.size.height);
+                [self createLoveButton];
+            }else{
+                imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
+                frame = imageView.frame;
+            }
+        }
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [self.detailView addSubview:imageView];
+        [self.detailView addSubview:imageView];
+    }
+    
+    
+//    __weakSelf
+//    __block CGRect frame;
+//    for (NSInteger i = 0; i < model.imgs_big.count; i++) {
+//        NSDictionary *dict = model.imgs_big[i];
+//        UIImageView *imageView = [[UIImageView alloc]init];
+//        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//            
+//            [imageView sizeToFit];
+//            CGFloat multiple = imageView.od_width/(kScreenSize.width-20);
+//            CGFloat height = imageView.od_height/multiple;
+//            if (i==0) {
+//                imageView.frame = CGRectMake(10, CGRectGetMaxY(contentLabel.frame)+10,kScreenSize.width-20,height);
+//                frame = imageView.frame;
+//                if (model.imgs_big.count==1) {
+//                    weakSelf.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
+//                    weakSelf.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
+//                    [weakSelf.detailView addSubview:weakSelf.loveImageView];
+//                    weakSelf.detailView.frame = CGRectMake(0, 65, kScreenSize.width, weakSelf.loveImageView.frame.origin.y+weakSelf.loveImageView.frame.size.height+60);
+//                    weakSelf.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+weakSelf.detailView.frame.size.height);
+//                    [weakSelf createLoveButton];
+//                }
+//            }else{
+//                if (i==model.imgs_big.count-1) {
+//                    imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
+//                    weakSelf.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
+//                    weakSelf.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
+//                    [weakSelf.detailView addSubview:weakSelf.loveImageView];
+//                     weakSelf.detailView.frame = CGRectMake(0, 65, kScreenSize.width, weakSelf.loveImageView.frame.origin.y+weakSelf.loveImageView.frame.size.height+60);
+//                    weakSelf.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+weakSelf.detailView.frame.size.height);
+//                    [weakSelf createLoveButton];
+//                }else{
+//                    imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
+//                    frame = imageView.frame;
+//                }
+//            }
+//            imageView.contentMode = UIViewContentModeScaleAspectFit;
+//            [self.detailView addSubview:imageView];
+//        }];
+//    }
 }
-
 
 -(void)createLoveButton
 {
@@ -258,23 +316,27 @@
 #pragma mark - 底部收藏购买试图
 - (void)createBottomView
 {
+    ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
     UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenSize.height-64-50, kScreenSize.width, 50)];
     [bottomView setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6" alpha:1]];
     [self.view addSubview:bottomView];
     
     UIButton *loveButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 50)];
     [loveButton addTarget:self action:@selector(loveButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    loveButton.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [bottomView addSubview:loveButton];
     
     UIImageView *loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 17.5, 15, 15)];
-    loveImageView.image = [UIImage imageNamed:@"Skills profile page_icon_Collection"];
+    
     [loveButton addSubview:loveImageView];
     
     self.loveLabel = [[UILabel alloc]initWithFrame:CGRectMake(40, 15, 50, 20)];
     if ([self.love_id isEqualToString:@"0"]) {
         self.loveLabel.text = @"收藏";
+        loveImageView.image = [UIImage imageNamed:@"Skills profile page_icon_Collection_default"];
     }else{
         self.loveLabel.text = @"已收藏";
+        loveImageView.image = [UIImage imageNamed:@"Skills profile page_icon_Collection"];
     }
     self.loveLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.loveLabel.textAlignment = NSTextAlignmentLeft;
@@ -283,9 +345,15 @@
 
     UIButton *payButton = [[UIButton alloc]initWithFrame:CGRectMake(100, 0, kScreenSize.width - 100, 50)];
     [payButton setTitle:@"立即购买" forState:UIControlStateNormal];
+    if ([model.user[@"open_id"] isEqualToString:[ODUserInformation sharedODUserInformation].openID]) {
+        [payButton setBackgroundColor:[UIColor colorWithHexString:@"#b0b0b0" alpha:1]];
+        payButton.userInteractionEnabled = NO;
+    }else{
+        [payButton setBackgroundColor:[UIColor colorWithHexString:@"#ff6666" alpha:1]];
+        payButton.userInteractionEnabled = YES;
+    }
     [payButton setTitleColor:[UIColor colorWithHexString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
     [payButton addTarget:self action:@selector(payButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [payButton setBackgroundColor:[UIColor colorWithHexString:@"#ff6666" alpha:1]];
     [bottomView addSubview:payButton];
 }
 
@@ -316,7 +384,6 @@
        if (love) {
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
                [weakSelf joiningTogetherParmeters];
-               weakSelf.loveLabel.text = @"已收藏";
                NSDictionary *dict = responseObject[@"result"];
                weakSelf.love_id = [NSString stringWithFormat:@"%@",dict[@"love_id"]];
                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"收藏成功"];
@@ -324,7 +391,6 @@
        }else{
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
                [weakSelf joiningTogetherParmeters];
-               weakSelf.loveLabel.text = @"收藏";
                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"取消收藏"];
            }
        }

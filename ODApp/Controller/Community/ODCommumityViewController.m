@@ -148,7 +148,7 @@
     self.bbsMark = self.bbsMark ? self.bbsMark :@"";
     
     self.count ++;
-    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i",self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count], @"city_id":@"0", @"search":self.bbsMark, @"call_array":@"1"};
+    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i",self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count], @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
@@ -194,7 +194,7 @@
     self.bbsType = self.bbsType ? self.bbsType :5;
     self.bbsMark = self.bbsMark ? self.bbsMark :@"";
     self.count = 1;
-    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":@"0", @"search":self.bbsMark, @"call_array":@"1"};
+    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
     
     
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
@@ -302,7 +302,7 @@
         if (model.imgs.count==4) {
             for (NSInteger i = 0; i < model.imgs.count; i++) {
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
-                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
                 [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
@@ -311,7 +311,7 @@
         }else{
             for (NSInteger i = 0;i < model.imgs.count ; i++) {
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
-                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
                 [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
@@ -336,7 +336,7 @@
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
     picController.photos = model.imgs_big;
     picController.selectedIndex = button.tag-10*indexPath.row;
-    [self.navigationController pushViewController:picController animated:YES];
+    [self presentViewController:picController animated:YES completion:nil];
 }
 
 - (void)otherInformationClick:(UIButton *)button
