@@ -9,7 +9,6 @@
 #import "svprogressHud.h"
 #import "UIImageView+WebCache.h"
 #import "ODActivityDetailModel.h"
-#import "ODActivityDetailViewController.h"
 #import "ODNewActivityDetailViewController.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODNewActivityCenterViewController.h"

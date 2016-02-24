@@ -36,8 +36,7 @@
     self.pictureArray = [[NSMutableArray alloc] init];
     self.pictureIdArray = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
-    
-    self.cityListArray = [[NSArray alloc] init];
+    self.cityListArray = [[NSMutableArray alloc] init];
     
     userInfoDic = [NSMutableDictionary dictionary];
     
@@ -60,20 +59,16 @@
     _search.delegate = self;
     
     __weakSelf
-    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-        
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
+    {
         [weakSelf.collectionView.mj_header beginRefreshing];
-        
-//        [weakSelf getScrollViewRequest];
     }];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-//    [self.collectionView.mj_header beginRefreshing];
     [self locationCity];
 }
 
@@ -119,16 +114,20 @@
 #pragma mark - 定位城市数据请求
 - (void)getLocationCityRequest
 {
+    __weakSelf
     NSDictionary *parameter = @{@"region_name":@""};
-    [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
-        
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
+    {
+        [SVProgressHUD dismiss];
         ODLocationModel *mode = [model result];
-        self.cityListArray = mode.all;
-        [self.collectionView reloadData];
-        
-    } failure:^(NSError *error) {
+        weakSelf.cityListArray = mode.all;
+        [weakSelf.collectionView reloadData];
         
         
+    } failure:^(NSError *error)
+    {
+        [SVProgressHUD dismiss];
     }];
 }
 
@@ -136,17 +135,16 @@
 - (void)getScrollViewRequest
 {
     __weakSelf
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];    [ODHttpTool getWithURL:ODHomeFoundUrl parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
+    [weakSelf.pictureArray removeAllObjects];
+    [weakSelf.pictureIdArray removeAllObjects];
+    [weakSelf.collectionView reloadData];
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    [ODHttpTool getWithURL:ODHomeFoundUrl parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
      {
          [SVProgressHUD dismiss];
-         if (weakSelf.pictureArray.count != 0) {
-             [weakSelf.pictureArray removeAllObjects];
-             [weakSelf.collectionView reloadData];
-
-
-         }
-         weakSelf.pictureArray = [[[model result]activitys]valueForKeyPath:@"detail_md5"];
-         weakSelf.pictureIdArray = [[[model result]activitys] valueForKeyPath:@"id"];
+         
+         [weakSelf.pictureArray addObjectsFromArray:[[[model result]activitys]valueForKeyPath:@"detail_md5"]];
+         [weakSelf.pictureIdArray addObjectsFromArray:[[[model result]activitys] valueForKeyPath:@"id"]];
          [weakSelf.collectionView reloadData];
      }
                    failure:^(NSError *error)
@@ -160,19 +158,24 @@
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
     NSDictionary *parameter = @{@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:ODHomeChangeSkillUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    
+    [self.manager GET:ODHomeChangeSkillUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
+        [SVProgressHUD dismiss];
+
         [weakSelf.dataArray removeAllObjects];
-        if (responseObject) {
+        if (responseObject)
+        {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
             NSArray *swaps = result[@"swaps"];
-            for (NSDictionary *itemDict in swaps) {
+            for (NSDictionary *itemDict in swaps)
+            {
                 ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
@@ -180,12 +183,12 @@
             [weakSelf createCollectionView];
             [weakSelf.collectionView.mj_header endRefreshing];
         }
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) { 
-        
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    {
+        [SVProgressHUD dismiss];
+
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
-        
     }];
 }
 
@@ -209,12 +212,14 @@
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
         
-    }else{
+    }else
+    {
         ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
         
         vc.centerName = @"上海第二工业大学体验中心";
         vc.phoneNumber = @"13524776010";
         vc.storeId = @"1";
+        
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -261,16 +266,13 @@
 #pragma mark - 热门活动图片点击事件
 - (void)imageButtonClick:(UIButton *)button
 {
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
-        
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""])
+    {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
-        
-    }else{
-        
+    }else
+    {
         ODNewActivityDetailViewController *vc = [[ODNewActivityDetailViewController alloc] init];
-        
-        
         vc.acitityId = [self.pictureIdArray[button.tag - 100] intValue];
         
         [self.navigationController pushViewController:vc animated:YES];
@@ -344,10 +346,10 @@
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     vc.open_id = model.user[@"open_id"];
     
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]])
+    {
         
     }else{
-        
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -371,7 +373,6 @@
     picController.photos = model.imgs_small;
     picController.selectedIndex = button.tag-10*indexPath.row;
     picController.skill = @"skill";
-//    [self.navigationController pushViewController:picController animated:YES];
     [self presentViewController:picController animated:YES completion:nil];
 }
 
@@ -387,16 +388,15 @@
     self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     
     [self.collectionView registerClass:[ODhomeViewCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];
-    
     [self.collectionView registerClass:[ODHomeFoundFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"supple"];
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
+    {
         [weakSelf refreshdata];
-        
     }];
 
     [self.view addSubview:self.collectionView];
@@ -422,13 +422,17 @@
     [cell.headButton addTarget:self action:@selector(headButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.nickLabel.text = model.user[@"nick"];
     [cell showDatasWithModel:model];
+    
     CGFloat width=kScreenSize.width>320?90:70;
     if (model.imgs_small.count) {
-        for (id vc in cell.picView.subviews) {
+        for (id vc in cell.picView.subviews)
+        {
             [vc removeFromSuperview];
         }
-        if (model.imgs_small.count==4) {
-            for (NSInteger i = 0; i < model.imgs_small.count; i++) {
+        if (model.imgs_small.count==4)
+        {
+            for (NSInteger i = 0; i < model.imgs_small.count; i++)
+            {
                 NSDictionary *dict = model.imgs_small[i];
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
                 [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
@@ -438,7 +442,8 @@
             }
             cell.picViewConstraintHeight.constant = 2*width+5;
         }else{
-            for (NSInteger i = 0;i < model.imgs_small.count ; i++) {
+            for (NSInteger i = 0;i < model.imgs_small.count ; i++)
+            {
                 NSDictionary *dict = model.imgs_small[i];
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
                 [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
@@ -448,8 +453,10 @@
             }
             cell.picViewConstraintHeight.constant = width+(width+5)*((model.imgs_small.count-1)/3);
         }
-    }else{
-        for (id vc in cell.picView.subviews) {
+    }else
+    {
+        for (id vc in cell.picView.subviews)
+        {
             [vc removeFromSuperview];
         }
         cell.picViewConstraintHeight.constant = 0;
@@ -460,9 +467,12 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc]init];
-    detailControler.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
-    [self.navigationController pushViewController:detailControler animated:YES];
+    ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc]init];
+    
+    vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
+    vc.nick = model.user[@"nick"];
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -471,8 +481,8 @@
     
     self.rsusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:viewId forIndexPath:indexPath];
     
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader])
+    {
         // Hot Activity
         self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 7/12 * self.pictureArray.count , 0);
         self.rsusableView.scrollView.contentOffset = CGPointMake(0, 0);
@@ -480,16 +490,17 @@
         self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
         self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;
         
-        for (int i = 0; i < self.pictureArray.count; i++) {
-            
+        for (int i = 0; i < self.pictureArray.count; i++)
+        {
             UIButton *imageButton;
-            if (i < self.pictureArray.count - 1) {
+            if (i < self.pictureArray.count - 1)
+            {
                 imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7/12 * i, 0, (kScreenSize.width - 15) * 7/12 - 8, 120)];
-            }else{
+            }else
+            {
                 imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7/12 * i, 0, (kScreenSize.width - 15) * 7/12, 120)];
             }
             [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.pictureArray[i]] forState:UIControlStateNormal];
-            
             imageButton.tag = 100 + i;
             [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
             [self.rsusableView.scrollView addSubview:imageButton];
@@ -517,8 +528,8 @@
         
         [self.rsusableView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
-    }else if ([kind isEqualToString:UICollectionElementKindSectionFooter]){
-        
+    }else if ([kind isEqualToString:UICollectionElementKindSectionFooter])
+    {
         [self.rsusableView.moreSkillButton addTarget:self action:@selector(moreSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self.rsusableView;
@@ -528,15 +539,20 @@
 -(CGFloat)returnHight:(ODBazaarExchangeSkillModel *)model
 {
     CGFloat width=kScreenSize.width>320?90:70;
-    if (model.imgs_small.count==0) {
+    if (model.imgs_small.count==0)
+    {
         return 135;
-    }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
+    }else if (model.imgs_small.count>0&&model.imgs_small.count<4)
+    {
         return 135+width;
-    }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
+    }else if (model.imgs_small.count>=4&&model.imgs_small.count<7)
+    {
         return 135+2*width+5;
-    }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
+    }else if (model.imgs_small.count>=7&&model.imgs_small.count<9)
+    {
         return 135+3*width+10;
-    }else{
+    }else
+    {
         return 135+3*width+10;
     }
 }
@@ -559,8 +575,10 @@
 #pragma mark - AMapSearchDelegate
 //地图定位成功回调
 -(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
-updatingLocation:(BOOL)updatingLocation{
-    if (updatingLocation) {
+updatingLocation:(BOOL)updatingLocation
+{
+    if (updatingLocation)
+    {
         _mapView.showsUserLocation = NO;
         [_mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
         
@@ -595,10 +613,9 @@ updatingLocation:(BOOL)updatingLocation{
         return;
     }
     //通过 AMapPOISearchResponse 对象处理搜索结果
-    for (AMapPOI *p in response.pois) {
+    for (AMapPOI *p in response.pois)
+    {
         NSString *strPoi = [NSString stringWithFormat:@"%@", p.name];
-        
-        NSLog(@"strPoi ->____%@" , strPoi);
     }
 }
 
@@ -616,33 +633,32 @@ updatingLocation:(BOOL)updatingLocation{
             if (result.length != 0) {
                 cityResult = [result substringToIndex:[result length] - 1];
             }
-        }else{
+        }else
+        {
             cityResult = [result substringToIndex:[result length] - 1];
         }
-
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
-        
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
+        __weakSelf
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+        {
             [ODUserInformation sharedODUserInformation].locationCity = cityResult;
             
-            for (NSDictionary *cityInformation in self.cityListArray) {
-                
-                //                NSString *cityName = [NSString stringWithFormat:@"%@市",cityInformation[@"name"]];
-                
-                if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityInformation[@"name"]]) {
+            for (NSDictionary *cityInformation in weakSelf.cityListArray)
+            {
+                if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityInformation[@"name"]])
+                {
                     [ODUserInformation sharedODUserInformation].cityID = cityInformation[@"id"];
                 }
             }
-            [self locationCity];
+            [weakSelf locationCity];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationLocationSuccessRefresh object:nil];
         }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
+        {
             [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
             [ODUserInformation sharedODUserInformation].cityID = @"1";
-            [self locationCity];
+            [weakSelf locationCity];
         }]];
-        
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
