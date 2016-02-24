@@ -55,17 +55,15 @@
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
             
             __weak typeof (self)weakSelf = self;
-            [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
             
             [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                 
-                [SVProgressHUD dismiss];
                 [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil];
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
                 weakSelf.checkLabel.text = @"已取消";
                 
             } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-                [SVProgressHUD dismiss];
+
             }];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -82,11 +80,9 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     
     [self.manager GET:kMyOrderDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        [SVProgressHUD dismiss];
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
@@ -104,7 +100,6 @@
         [weakSelf createOrderView];
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [SVProgressHUD dismiss];
     }];
 }
 
