@@ -17,6 +17,7 @@
 @property(nonatomic , strong) ODRegisteredView *registView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *managers;
+@property (nonatomic , strong) NSDictionary *signParameters;
 
 //定时器
 @property(nonatomic,strong)NSTimer *timer;
@@ -37,6 +38,12 @@
     [self createTimer];
     self.seePassWord = NO;
     self.currentTime = 60;
+    
+    self.signParameters = [[NSDictionary alloc] init];
+    
+    NSLog(@"______%@" , self.topTitle);
+    
+    
 }
 
 
@@ -200,6 +207,15 @@
 -(void)changePassWord
 {
     
+    
+    
+    NSLog(@"______%@" , self.registView.phoneNumber.text);
+    NSLog(@"______%@" , self.registView.password.text);
+    NSLog(@"______%@" , self.registView.verification.text);
+
+    
+    
+    
     NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"passwd":self.registView.password.text,@"verify_code":self.registView.verification.text};
     
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
@@ -214,7 +230,12 @@
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             
          
-            [weakSelf.navigationController popViewControllerAnimated:YES];
+            if ([self.topTitle isEqualToString:@"修改密码"]) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }else{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
@@ -236,13 +257,31 @@
 -(void)getCode
 {
     
-    NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"type":@"3"};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-      
+    if ([self.topTitle isEqualToString:@"忘记密码"]) {
+        
+        NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"type":@"3"};
+        self.signParameters = [ODAPIManager signParameters:parameters];
+
+        
+    }else {
+        
+        
+        NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+        
+        NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"type":@"3",@"open_id":openId};
+        self.signParameters = [ODAPIManager signParameters:parameters];
+
+        
+        
+    }
+
+ 
+  
+    
     self.manager = [AFHTTPRequestOperationManager manager];
     
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:kGetCodeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:kGetCodeUrl parameters:self.signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
             
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             //启动定时器

@@ -50,7 +50,6 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fot-AH-vqB">
                     <rect key="frame" x="18" y="54" width="38" height="38"/>
-                    <color key="backgroundColor" red="1" green="0.1849362474" blue="0.14802274000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="38" id="9j7-qn-EEO"/>
                         <constraint firstAttribute="width" constant="38" id="ZF3-Qr-SzJ"/>
@@ -85,7 +84,6 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d1C-ww-wtm">
                     <rect key="frame" x="18" y="113" width="75" height="75"/>
-                    <color key="backgroundColor" red="1" green="0.1849362474" blue="0.14802274000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="75" id="5xo-Kt-2Sd"/>
                         <constraint firstAttribute="width" constant="75" id="Ka6-aS-2I2"/>
@@ -156,7 +154,7 @@
                         <constraint firstAttribute="height" constant="20" id="cvO-Xn-ELz"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="1" green="0.1849362474" blue="0.14802274000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2S-w4-uiu">
