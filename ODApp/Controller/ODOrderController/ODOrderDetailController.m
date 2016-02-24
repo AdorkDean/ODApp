@@ -808,8 +808,6 @@
     self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
     self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.total_price];
     self.orderDetailView.typeLabel.text = self.orderType;
-    self.orderDetailView.addressNameLabel.text = model.name;
-    self.orderDetailView.addressPhoneLabel.text = model.tel;
     
     NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
     
@@ -818,8 +816,18 @@
         self.orderDetailView.serviceTimeLabel.text = model.address;
         self.orderDetailView.serviceTypeLabel.text = @"服务地址:";
         self.orderDetailView.swapTypeLabel.text = @"快递服务";
+        self.orderDetailView.addressNameLabel.text = model.name;
+        self.orderDetailView.addressPhoneLabel.text = model.tel;
+
         
     }else{
+        
+        NSMutableDictionary *dic = model.order_user;
+        
+        self.orderDetailView.addressNameLabel.text = dic[@"nick"];
+        self.orderDetailView.addressPhoneLabel.text = dic[@"mobile"];
+
+        
         self.orderDetailView.serviceTimeLabel.text = model.service_time;
         self.orderDetailView.serviceTypeLabel.text = @"服务时间:";
         self.orderDetailView.swapTypeLabel.text = @"线上服务";

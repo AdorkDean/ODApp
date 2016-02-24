@@ -218,7 +218,24 @@
         
         
         
-    }else if ([status isEqualToString:@"-5"]) {
+    }else if ([status isEqualToString:@"-4"]) {
+        
+        self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
+        self.reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
+        self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.reasonButton addTarget:self action:@selector(receiveAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.reasonButton];
+        
+        
+        
+    }
+
+    
+    
+    else if ([status isEqualToString:@"-5"]) {
         
         self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
@@ -240,6 +257,32 @@
     
     
 }
+
+
+- (void)receiveAction:(UIButton *)sender
+{
+    
+    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    
+    ODOrderDetailModel *model = self.dataArray[0];
+    vc.darwbackMoney = model.price;
+    vc.order_id = self.orderId;
+    vc.drawbackReason = model.reason;
+    vc.isService = YES;
+    vc.servicePhone = [NSString stringWithFormat:@"%@" , model.tel400];
+    vc.serviceTime = model.tel_msg;
+    vc.customerService = @"服务";
+    vc.drawbackTitle = @"退款信息";
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
+    
+    
+}
+
 
 
 
@@ -307,8 +350,6 @@
             
             
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"发货成功"];
-            
             [self.deliveryButton removeFromSuperview];
             
             
@@ -322,11 +363,8 @@
             
             
             
-            
-            
-            self.orderDetailView.typeLabel.text = @"已发货";
-            
-            
+            [self getData];
+                    
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
             
