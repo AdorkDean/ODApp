@@ -50,7 +50,7 @@
         [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
         
         [UMSocialSnsService presentSnsIconSheetView:self
-                                             appKey:@"569dda54e0f55a994f0021cf"
+                                             appKey:kGetUMAppkey
                                           shareText:content
                                          shareImage:nil
                                     shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
@@ -82,6 +82,7 @@
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     __weakSelf;
+//    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
@@ -97,7 +98,7 @@
             [weakSelf createBottomView];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+        [SVProgressHUD dismiss];
     }];
 }
 
