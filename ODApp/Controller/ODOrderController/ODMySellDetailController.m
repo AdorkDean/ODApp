@@ -34,7 +34,7 @@
 @property (nonatomic , strong) UIButton *reasonButton;
 @property (nonatomic ,strong) UIScrollView *scroller;
 
-
+@property (nonatomic , copy) NSString *phoneNumber;
 @end
 
 @implementation ODMySellDetailController
@@ -232,7 +232,26 @@
         
         
         
-    }else if ([status isEqualToString:@"-5"]) {
+    } else if ([status isEqualToString:@"-4"]) {
+        
+        self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
+        self.reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
+        self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.reasonButton addTarget:self action:@selector(receiveAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.reasonButton];
+        
+        
+        
+    }
+
+    
+    
+    
+    
+    else if ([status isEqualToString:@"-5"]) {
         
         self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
@@ -255,7 +274,29 @@
 
 
 
+- (void)receiveAction:(UIButton *)sender
+{
+    
+    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    
+    ODOrderDetailModel *model = self.dataArray[0];
+    vc.darwbackMoney = model.price;
+    vc.order_id = self.orderId;
+    vc.drawbackReason = model.reason;
+    vc.isService = YES;
+    vc.servicePhone = [NSString stringWithFormat:@"%@" , model.tel400];
+    vc.serviceTime = model.tel_msg;
+    vc.customerService = @"服务";
+    vc.drawbackTitle = @"退款信息";
+  
+    
+    [self.navigationController pushViewController:vc animated:YES];
 
+    
+    
+    
+    
+}
 
 
 - (void)reasonAction:(UIButton *)sender
@@ -325,7 +366,7 @@
             
             
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"发货成功"];
+       
             
             [self.deliveryButton removeFromSuperview];
             
@@ -342,7 +383,7 @@
             
             
             
-            self.orderDetailView.typeLabel.text = @"已发货";
+            [self getData];
             
             
             
@@ -369,7 +410,14 @@
     self.orderDetailView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
     
     ODOrderDetailModel *model = self.dataArray[0];
-    NSMutableDictionary *userDic = model.user;
+    
+    NSMutableDictionary *dic = model.order_user;
+    [self.orderDetailView.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , dic[@"avatar"]]] forState:UIControlStateNormal];
+    self.orderDetailView.nickLabel.text = dic[@"nick"];
+    
+    
+    
+  
     NSMutableArray *arr = model.imgs_small;
     NSMutableDictionary *picDic = arr[0];
     
@@ -408,25 +456,40 @@
         
     }
     
-    [self.orderDetailView.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , userDic[@"avatar"]]] forState:UIControlStateNormal];
-    [self.orderDetailView.contentButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , picDic[@"img_url"]]] forState:UIControlStateNormal];
-    self.orderDetailView.nickLabel.text = userDic[@"nick"];
+      [self.orderDetailView.contentButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , picDic[@"img_url"]]] forState:UIControlStateNormal];
+   
     self.orderDetailView.contentLabel.text = model.title;
+    self.orderDetailView.countLabel.text = [NSString stringWithFormat:@"%@" , model.num];
     self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
-    self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.price];
+    self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.total_price];
     self.orderDetailView.typeLabel.text = self.orderType;
-    self.orderDetailView.addressNameLabel.text = model.name;
-    self.orderDetailView.addressPhoneLabel.text = model.tel;
+    
+    [self.orderDetailView.phoneButton addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
+
+    
     
     NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
     
     if ([swap_type isEqualToString:@"2"]) {
+        
+        self.orderDetailView.addressNameLabel.text = model.name;
+        self.orderDetailView.addressPhoneLabel.text = model.tel;
+        self.phoneNumber = [NSString stringWithFormat:@"%@" , model.tel];
         
         self.orderDetailView.serviceTimeLabel.text = model.address;
         self.orderDetailView.serviceTypeLabel.text = @"服务地址:";
         self.orderDetailView.swapTypeLabel.text = @"快递服务";
         
     }else{
+        
+        NSMutableDictionary *dic = model.order_user;
+        
+        self.orderDetailView.addressNameLabel.text = dic[@"nick"];
+        self.orderDetailView.addressPhoneLabel.text = dic[@"mobile"];
+
+        self.phoneNumber = [NSString stringWithFormat:@"%@" , dic[@"mobile"]];
+
+        
         self.orderDetailView.serviceTimeLabel.text = model.service_time;
         self.orderDetailView.serviceTypeLabel.text = @"服务时间:";
         self.orderDetailView.swapTypeLabel.text = @"线上服务";
@@ -490,6 +553,23 @@
     
 }
 
+// 打电话
+- (void)phoneAction:(UIButton *)sender
+{
+    
+    ODOrderDetailModel *model = self.dataArray[0];
+    
+    NSMutableDictionary *dic = model.user;
+
+    
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",dic[@"mobile"]];
+    
+    UIWebView *callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [self.view addSubview:callWebview];
+    
+    
+}
 
 
 

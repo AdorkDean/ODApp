@@ -16,6 +16,7 @@
 #import "ODCommunityDetailViewController.h"
 #import "ODOthersInformationController.h"
 #import "ODEvaluationCell.h"
+#import "ODSecondEvaluationModel.h"
 @interface ODEvaluationController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
 @property (nonatomic , strong) UISegmentedControl *segmentedControl;
@@ -261,12 +262,14 @@
             NSMutableDictionary *dic = responseObject[@"result"];
             
             
+            NSLog(@"_____%@" , dic);
+            
             
             
                 for (NSMutableDictionary *miniDic in dic) {
-                    ODEvaluationModel *model = [[ODEvaluationModel alloc] init];
+                    ODSecondEvaluationModel *model = [[ODSecondEvaluationModel alloc] init];
                     [model setValuesForKeysWithDictionary:miniDic];
-                    [weakSelf.FirstDataArray addObject:model];
+                    [weakSelf.secondDataArray addObject:model];
                     
                 }
                 
@@ -312,7 +315,17 @@
     }else{
         
         cell.backgroundColor = [UIColor whiteColor];
-        cell.model = self.secondDataArray[indexPath.row];
+        
+        
+        ODSecondEvaluationModel *model = self.secondDataArray[indexPath.row];
+        
+        
+        
+        [cell dealWithModel:model];
+        
+        
+        
+
 
         
         
@@ -359,7 +372,7 @@
            return CGSizeMake(kScreenSize.width , [ODEvaluationCell returnHight:self.FirstDataArray[indexPath.row]]);
     }else{
         
-        return CGSizeMake(kScreenSize.width , [ODEvaluationCell returnHight:self.secondDataArray[indexPath.row]]);
+        return CGSizeMake(kScreenSize.width , [ODEvaluationCell returnSecondHight:self.secondDataArray[indexPath.row]]);
 
         
         

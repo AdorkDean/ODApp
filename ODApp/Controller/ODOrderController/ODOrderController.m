@@ -229,12 +229,7 @@
     NSString *swap_id = [NSString stringWithFormat:@"%@" , self.informationModel.swap_id];
     
     
-    NSLog(@"____%@" , swap_id);
-    NSLog(@"_____%@" , self.headView.orderView.timeLabel.text) ;
-      NSLog(@"_____%@" , self.addressId) ;
-    
-    
-    
+        
     NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": self.headView.orderView.timeLabel.text , @"user_address_id":self.addressId , @"comment":@""};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weak typeof (self)weakSelf = self;

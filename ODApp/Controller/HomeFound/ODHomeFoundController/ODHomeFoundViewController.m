@@ -45,7 +45,8 @@
     [self createCollectionView];
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
-
+    [self getDefaultCenterNameRequest];
+    
     [MAMapServices sharedServices].apiKey = ODLocationApiKey;
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
     _mapView.delegate = self;
@@ -83,11 +84,14 @@
     NSInteger i ,j ,count;
     NSObject *temp;
     count = mArray.count+1;
-    for (i = count - 1; i >= 0; i--) {
-        for (j= 0 ; j < i - 1 ; j++) {
+    for (i = count - 1; i >= 0; i--)
+    {
+        for (j= 0 ; j < i - 1 ; j++)
+        {
             ODCommunityModel *model1 = [self.dataArray objectAtIndex:j];
             ODCommunityModel *model2 = [self.dataArray objectAtIndex:j+1];
-            if ([model1.view_num compare:model2.view_num]<0) {
+            if ([model1.view_num compare:model2.view_num]<0)
+            {
                 temp = [mArray objectAtIndex:j];
                 [mArray replaceObjectAtIndex:j withObject:[mArray objectAtIndex:j+1]];
                 [mArray replaceObjectAtIndex:j+1 withObject:temp];
@@ -116,18 +120,15 @@
 {
     __weakSelf
     NSDictionary *parameter = @{@"region_name":@""};
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
     {
-        [SVProgressHUD dismiss];
         ODLocationModel *mode = [model result];
         weakSelf.cityListArray = mode.all;
         [weakSelf.collectionView reloadData];
         
-        
-    } failure:^(NSError *error)
+    }
+                   failure:^(NSError *error)
     {
-        [SVProgressHUD dismiss];
     }];
 }
 
@@ -138,10 +139,8 @@
     [weakSelf.pictureArray removeAllObjects];
     [weakSelf.pictureIdArray removeAllObjects];
     [weakSelf.collectionView reloadData];
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [ODHttpTool getWithURL:ODHomeFoundUrl parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
      {
-         [SVProgressHUD dismiss];
          
          [weakSelf.pictureArray addObjectsFromArray:[[[model result]activitys]valueForKeyPath:@"detail_md5"]];
          [weakSelf.pictureIdArray addObjectsFromArray:[[[model result]activitys] valueForKeyPath:@"id"]];
@@ -149,7 +148,6 @@
      }
                    failure:^(NSError *error)
      {
-         [SVProgressHUD dismiss];
      }];
 }
 
@@ -162,11 +160,9 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     
     [self.manager GET:ODHomeChangeSkillUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-        [SVProgressHUD dismiss];
 
         [weakSelf.dataArray removeAllObjects];
         if (responseObject)
@@ -183,12 +179,68 @@
             [weakSelf createCollectionView];
             [weakSelf.collectionView.mj_header endRefreshing];
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    }
+              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-        [SVProgressHUD dismiss];
 
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+    }];
+}
+
+#pragma mark - 获得默认的体验中心的Name和Store_id
+- (void)getDefaultCenterNameRequest
+{
+    self.centerManager = [AFHTTPRequestOperationManager manager];
+    self.centerManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+        
+    NSDictionary *parameter = @{@"show_type":@"1"};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weak typeof (self)weakSelf = self;
+
+    [self.centerManager GET:ODStoreListUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
+
+        if (responseObject)
+        {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSMutableArray *result = dict[@"result"];
+            
+            weakSelf.storeId = result[0][@"id"];
+            weakSelf.centerName = result[0][@"name"];
+            [weakSelf getDefaultCenterTelRequest];
+        }
+    }
+                    failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    {
+    }];
+}
+
+#pragma mark - 获得默认的体验中心的Tel
+- (void)getDefaultCenterTelRequest
+{
+    self.centerTelManager = [AFHTTPRequestOperationManager manager];
+    self.centerTelManager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSDictionary *parameter = @{@"store_id":[NSString stringWithFormat:@"%@", self.storeId]};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weak typeof (self)weakSelf = self;
+
+    [self.centerManager GET:ODStoreDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
+
+        if (responseObject)
+        {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSDictionary *result = dict[@"result"];
+            
+            weakSelf.centerTel = result[@"tel"];
+        }
+    }
+                    failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    {
     }];
 }
 
@@ -216,9 +268,9 @@
     {
         ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
         
-        vc.centerName = @"上海第二工业大学体验中心";
-        vc.phoneNumber = @"13524776010";
-        vc.storeId = @"1";
+        vc.centerName = self.centerName;
+        vc.storeId = [NSString stringWithFormat:@"%@",self.storeId];
+        vc.phoneNumber = self.centerTel;
         
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -226,8 +278,16 @@
 
 - (void)findFavorableButtonClick:(UIButton *)button
 {
-    ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""])
+    {
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
+    }
+    else
+    {
+        ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)findJobButtonClick:(UIButton *)button
@@ -349,7 +409,9 @@
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]])
     {
         
-    }else{
+    }
+    else
+    {
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -424,7 +486,8 @@
     [cell showDatasWithModel:model];
     
     CGFloat width=kScreenSize.width>320?90:70;
-    if (model.imgs_small.count) {
+    if (model.imgs_small.count)
+    {
         for (id vc in cell.picView.subviews)
         {
             [vc removeFromSuperview];
@@ -441,7 +504,9 @@
                 [cell.picView addSubview:imageButton];
             }
             cell.picViewConstraintHeight.constant = 2*width+5;
-        }else{
+        }
+        else
+        {
             for (NSInteger i = 0;i < model.imgs_small.count ; i++)
             {
                 NSDictionary *dict = model.imgs_small[i];
@@ -453,7 +518,8 @@
             }
             cell.picViewConstraintHeight.constant = width+(width+5)*((model.imgs_small.count-1)/3);
         }
-    }else
+    }
+    else
     {
         for (id vc in cell.picView.subviews)
         {
@@ -528,7 +594,8 @@
         
         [self.rsusableView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
-    }else if ([kind isEqualToString:UICollectionElementKindSectionFooter])
+    }
+    else if ([kind isEqualToString:UICollectionElementKindSectionFooter])
     {
         [self.rsusableView.moreSkillButton addTarget:self action:@selector(moreSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -542,16 +609,20 @@
     if (model.imgs_small.count==0)
     {
         return 135;
-    }else if (model.imgs_small.count>0&&model.imgs_small.count<4)
+    }
+    else if (model.imgs_small.count>0&&model.imgs_small.count<4)
     {
         return 135+width;
-    }else if (model.imgs_small.count>=4&&model.imgs_small.count<7)
+    }
+    else if (model.imgs_small.count>=4&&model.imgs_small.count<7)
     {
         return 135+2*width+5;
-    }else if (model.imgs_small.count>=7&&model.imgs_small.count<9)
+    }
+    else if (model.imgs_small.count>=7&&model.imgs_small.count<9)
     {
         return 135+3*width+10;
-    }else
+    }
+    else
     {
         return 135+3*width+10;
     }
@@ -633,7 +704,8 @@ updatingLocation:(BOOL)updatingLocation
             if (result.length != 0) {
                 cityResult = [result substringToIndex:[result length] - 1];
             }
-        }else
+        }
+        else
         {
             cityResult = [result substringToIndex:[result length] - 1];
         }
@@ -658,6 +730,7 @@ updatingLocation:(BOOL)updatingLocation
             [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
             [ODUserInformation sharedODUserInformation].cityID = @"1";
             [weakSelf locationCity];
+            
         }]];
         [self presentViewController:alert animated:YES completion:nil];
     }

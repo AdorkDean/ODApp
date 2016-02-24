@@ -40,7 +40,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationCancelOrder object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
     {
-        [weakSelf.collectionView.mj_header beginRefreshing];
+//        [weakSelf.collectionView.mj_header beginRefreshing];
     }];
 }
 
@@ -57,6 +57,7 @@
         [self.collectionView.mj_header beginRefreshing];
         self.isRefresh = NO;
     }
+    [self createRequest];
 }
 
 - (void)loadMoreData
@@ -83,6 +84,7 @@
 
 -(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)parameter
 {
+
     __weak typeof (self)weakSelf = self;
     [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {

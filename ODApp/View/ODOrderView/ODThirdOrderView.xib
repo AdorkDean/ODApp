@@ -88,9 +88,20 @@
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BP2-cy-ZyJ">
+                    <rect key="frame" x="0.0" y="91" width="320" height="6"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="6" id="iNc-Cq-T4D"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="BP2-cy-ZyJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="59F-dX-b1u"/>
                 <constraint firstItem="4G2-tp-lb4" firstAttribute="leading" secondItem="2vI-ar-k4D" secondAttribute="trailing" constant="10" id="75w-Ie-shZ"/>
                 <constraint firstAttribute="trailing" secondItem="PMM-my-Nzi" secondAttribute="trailing" id="Aa2-Y3-84b"/>
                 <constraint firstItem="ziU-dr-U0g" firstAttribute="leading" secondItem="dQ6-sR-B5s" secondAttribute="trailing" constant="10" id="DF4-Om-VZM"/>
@@ -101,7 +112,9 @@
                 <constraint firstItem="hVE-It-yan" firstAttribute="leading" secondItem="c2b-1j-6ZI" secondAttribute="trailing" constant="10" id="SLE-hH-0gf"/>
                 <constraint firstItem="PMM-my-Nzi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Tbd-8L-4Ww"/>
                 <constraint firstItem="c2b-1j-6ZI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="bUF-rF-QSe"/>
+                <constraint firstAttribute="trailing" secondItem="BP2-cy-ZyJ" secondAttribute="trailing" id="bug-EO-ary"/>
                 <constraint firstItem="4G2-tp-lb4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="cyk-s3-8PB"/>
+                <constraint firstItem="BP2-cy-ZyJ" firstAttribute="top" secondItem="PMM-my-Nzi" secondAttribute="bottom" id="fnP-ai-Wsn"/>
                 <constraint firstItem="dQ6-sR-B5s" firstAttribute="top" secondItem="loD-DA-OfR" secondAttribute="bottom" constant="10" id="h5S-P3-eaB"/>
                 <constraint firstItem="c2b-1j-6ZI" firstAttribute="top" secondItem="loD-DA-OfR" secondAttribute="bottom" constant="10" id="hX5-Yf-DW6"/>
                 <constraint firstItem="ziU-dr-U0g" firstAttribute="top" secondItem="loD-DA-OfR" secondAttribute="bottom" constant="15" id="kii-fl-YHo"/>
@@ -117,7 +130,7 @@
                 <outlet property="choseTimeView" destination="PMM-my-Nzi" id="eyO-Rs-mps"/>
                 <outlet property="timeLabel" destination="dQ6-sR-B5s" id="h48-ac-0j2"/>
             </connections>
-            <point key="canvasLocation" x="530" y="372"/>
+            <point key="canvasLocation" x="40" y="56"/>
         </view>
     </objects>
     <resources>

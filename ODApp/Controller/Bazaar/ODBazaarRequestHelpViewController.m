@@ -29,7 +29,7 @@
     [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationReleaseTask object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
         
         weakSelf.status = @"9";
-        [weakSelf.screeningButton setTitle:@"任务筛选" forState:UIControlStateNormal];
+        [weakSelf.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [weakSelf.collectionView.mj_header beginRefreshing];
         
     }];

@@ -118,7 +118,8 @@ UIKIT_EXTERN NSString * const ODHomeFoundUrl;
 UIKIT_EXTERN NSString * const ODCityListUrl;
 UIKIT_EXTERN NSString * const ODHomeChangeSkillUrl;
 
-
+UIKIT_EXTERN NSString *const ODStoreListUrl;
+UIKIT_EXTERN NSString *const ODStoreDetailUrl;
 
 UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;

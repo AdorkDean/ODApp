@@ -37,6 +37,7 @@
 @property(nonatomic,strong)NSMutableArray *strArray;
 @property(nonatomic,strong)UIButton *selectedButton;
 @property(nonatomic,strong)NSMutableArray *timeArray;
+@property(nonatomic,strong)NSMutableArray *editTimeArray;
 @property(nonatomic,strong)NSMutableArray *mArray;
 @property(nonatomic,copy)NSString *skillTitle;
 @property(nonatomic,copy)NSString *content;

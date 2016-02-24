@@ -101,26 +101,6 @@
 
 
 
-- (void)textViewDidChange:(UITextView *)textView
-{
-    
-    NSString *message = @"";
-    
-    if (textView == self.addAddressView.addressTextView)
-    {
-        if (textView.text.length > 10)
-        {
-            textView.text = [textView.text substringToIndex:10];
-        }
-        else
-        {
-            message = textView.text;
-        }
-    }
-    
-}
-
-
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
        

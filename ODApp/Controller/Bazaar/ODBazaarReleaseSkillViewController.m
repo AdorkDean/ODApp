@@ -45,6 +45,7 @@
     [super viewDidLoad];
     NSLogFunc
     if ([self.type isEqualToString:@"编辑"]) {
+        [self joiningTogetherTimeParmeters];
         self.navigationItem.title = @"编辑技能";
     }else{
         self.navigationItem.title = @"发布技能";
@@ -527,7 +528,12 @@
         [_timeView addSubview:label];
         
         self.setLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-95, 15, 60, 20)];
-        self.setLabel.text = @"请设置";
+        
+        if ([self.type isEqualToString:@"编辑"]&&([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"])) {
+            self.setLabel.text = @"设置完成";
+        }else{
+            self.setLabel.text = @"请设置";
+        }
         self.setLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.setLabel.font = [UIFont systemFontOfSize:14];
         self.setLabel.textAlignment = NSTextAlignmentRight;
@@ -581,7 +587,7 @@
             [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"认真填写个单位吧"];
         }else if (self.swap_type == nil){
             [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请选择你的服务方式"];
-        }else if (([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"])&&self.timeArray.count==0){
+        }else if (([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"])&&self.timeArray.count==0&&[button.titleLabel.text isEqualToString:@"发布"]){
             [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请设置时间"];
         }else if (self.mArray.count<3||self.mArray.count>5){
             [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"图需3-5张"];
@@ -603,14 +609,10 @@
     if ([button.titleLabel.text isEqualToString:@"编辑"]) {
         
         NSDictionary *parameter;
-        if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
-            if (self.timeArray.count==0) {
-                [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请设置时间"];
-            }else{
-                parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
-            }
-        }else if ([self.swap_type isEqualToString:@"2"]){
-           parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":@"",@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+        if (self.timeArray.count) {
+            parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+        }else{
+            parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.editTimeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self pushDataWithUrl:kBazaarEditSkillUrl parameter:signParameter isEdit:YES];
@@ -627,6 +629,31 @@
 
 }
 
+-(void)joiningTogetherTimeParmeters
+{
+    NSDictionary *parameter = @{@"swap_id":self.swap_id};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadTimeDataWithUrl:kBazaarReleaseSkillTimeUrl parameter:signParameter];
+}
+
+-(void)downLoadTimeDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    __weakSelf
+    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        if (responseObject) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSArray *result = dict[@"result"];
+            weakSelf.editTimeArray = [NSMutableArray arrayWithArray:result];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+    }];
+    
+}
+
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isEdit:(BOOL)isEdit
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -637,13 +664,17 @@
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
-                NSLog(@"%@",responseObject);
+                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"编辑成功"];
+            }else if ([responseObject[@"status"]isEqualToString:@"error"]){
+                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:responseObject[@"message"]];
             }
         }else{
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
-                NSLog(@"%@",responseObject);
+                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"创建成功"];
+            }else if ([responseObject[@"status"]isEqualToString:@"error"]){
+                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:responseObject[@"message"]];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -695,6 +726,7 @@
         }else{
             return YES;
         }
+        
     }
     return YES;
 }

@@ -168,7 +168,7 @@
     NSString *swap_id = [NSString stringWithFormat:@"%@" , self.informationModel.swap_id];
     
     
-    NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": @"" , @"user_address_id":@"" , @"comment": @""};
+    NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": @"" , @"user_address_id":@"0" , @"comment": @""};
     
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weak typeof (self)weakSelf = self;
@@ -435,7 +435,7 @@
 //动态设置区头的高度(根据不同的分区)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(kScreenSize.width, 130);
+    return CGSizeMake(kScreenSize.width, 90);
     
 }
 
