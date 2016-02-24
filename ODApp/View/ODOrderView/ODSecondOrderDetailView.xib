@@ -495,6 +495,7 @@
                 <outlet property="nickLabel" destination="GuP-V7-Tmr" id="ATP-e7-a7b"/>
                 <outlet property="orderIdLabel" destination="KSi-vC-iLA" id="tHT-Ew-0Rj"/>
                 <outlet property="orderTimeLabel" destination="leO-4y-SZN" id="knz-KS-Y3G"/>
+                <outlet property="phoneButton" destination="1EV-5E-60P" id="nGW-dA-FXZ"/>
                 <outlet property="priceLabel" destination="4Tt-84-2A9" id="JB6-Rf-DTJ"/>
                 <outlet property="serviceAddressLabel" destination="5lj-g2-wS6" id="q7T-Qf-oKc"/>
                 <outlet property="serviceTimeLabel" destination="73L-e0-Jht" id="d7v-pY-z3a"/>
