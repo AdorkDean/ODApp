@@ -28,7 +28,6 @@
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic , strong) ODPayModel *model;
 @property (nonatomic, strong) AFHTTPRequestOperationManager *goManager;
-@property (nonatomic  ,copy) NSString *payStatus;
 @property (nonatomic , copy) NSString *isPay;
 
 @end
@@ -69,7 +68,7 @@
     
     
     NSString *code = text.userInfo[@"codeStatus"];
-    self.payStatus = @"2";
+    self.isPay = @"2";
     
     [self getDatawithCode:code];
     
@@ -85,7 +84,7 @@
     
     
     NSString *code = text.userInfo[@"codeStatus"];
-    self.payStatus = @"1";
+    self.isPay = @"1";
     [self getDatawithCode:code];
 
     
@@ -109,12 +108,10 @@
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             
             
-            weakSelf.isPay = @"1";
-            
             
             ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
             vc.swap_type = self.swap_type;
-            vc.payStatus = self.payStatus;
+            vc.payStatus = self.isPay;
             vc.orderId = self.orderId;
                        
             
@@ -224,7 +221,7 @@
     
     
     
-   
+    NSLog(@"_____%@" , self.isPay);
     
   
     if ([self.payType isEqualToString:@"1"]) {

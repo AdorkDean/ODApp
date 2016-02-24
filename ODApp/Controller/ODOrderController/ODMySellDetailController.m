@@ -412,8 +412,9 @@
     [self.orderDetailView.contentButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , picDic[@"img_url"]]] forState:UIControlStateNormal];
     self.orderDetailView.nickLabel.text = userDic[@"nick"];
     self.orderDetailView.contentLabel.text = model.title;
+    self.orderDetailView.countLabel.text = [NSString stringWithFormat:@"%@" , model.num];
     self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
-    self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.price];
+    self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.total_price];
     self.orderDetailView.typeLabel.text = self.orderType;
     self.orderDetailView.addressNameLabel.text = model.name;
     self.orderDetailView.addressPhoneLabel.text = model.tel;

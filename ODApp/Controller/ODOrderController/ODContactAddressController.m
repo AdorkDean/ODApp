@@ -57,23 +57,14 @@
 
 - (void)backAction:(UIButton *)sender
 {
-    
-    if ([self.isAddress isEqualToString:@"1"]) {
-        __weakSelf
-        if (self.getAddressBlock) {
-            
-            
-            
-            weakSelf.getAddressBlock(@"" , @"" , @"1");
+    if ([self.isAddress isEqualToString:@"1"])
+    {
+        if (self.getAddressBlock)
+        {
+            self.getAddressBlock(@"" , @"" , @"1");
         }
-        
-        
-        [weakSelf.navigationController popViewControllerAnimated:YES];
-        
-    }else{
-        
-        [self.navigationController popViewControllerAnimated:YES];
     }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
@@ -228,10 +219,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
-    
-    
-    
     if (section == 0) {
         if (self.defaultArray.count == 0) {
             return 0;
@@ -359,30 +346,23 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
+    if (indexPath.section == 0)
+    {
         ODAddressModel *model = self.defaultArray[indexPath.row];
-        
-        __weakSelf
-        if (self.getAddressBlock) {
-            
-            
-            
-            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id] , @"2");
+        if (self.getAddressBlock)
+        {
+            self.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id] , @"2");
         }
-        
-        [weakSelf.navigationController popViewControllerAnimated:YES];
-        
-    }else{
-        
-        __weakSelf
-        ODAddressModel *model = self.dataArray[indexPath.row];
-        if (self.getAddressBlock) {
-            weakSelf.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id] , @"2");
-        }
-        
-        [weakSelf.navigationController popViewControllerAnimated:YES];
-        
     }
+    else
+    {
+        ODAddressModel *model = self.dataArray[indexPath.row];
+        if (self.getAddressBlock)
+        {
+            self.getAddressBlock(model.address , [NSString stringWithFormat:@"%@" , model.id] , @"2");
+        }
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)deleteAddressWithAddress_id:(NSString *)address_id
@@ -422,22 +402,5 @@
     }];
     
 }
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
