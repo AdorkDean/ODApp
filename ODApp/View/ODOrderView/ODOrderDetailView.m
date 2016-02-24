@@ -25,6 +25,7 @@
     view.swapTypeLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
     view.swapTypeLabel.textColor = [UIColor lightGrayColor];
     view.swapTypeLabel.layer.borderWidth = 1;
+    view.swapTypeLabel.textAlignment = NSTextAlignmentCenter;
     
     view.userButtonView.layer.masksToBounds = YES;
     view.userButtonView.layer.cornerRadius = 19;

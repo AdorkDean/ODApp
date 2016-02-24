@@ -80,7 +80,7 @@
         self.statusLabel.text = @"已取消";
         self.statusLabel.textColor = [UIColor lightGrayColor];
     }else if ([status isEqualToString:@"-2"]) {
-        self.statusLabel.text = @"买家已申请退款";
+        self.statusLabel.text = @"已申请退款";
         self.statusLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"-3"]) {
         self.statusLabel.text = @"退款已受理";
@@ -89,6 +89,7 @@
         self.statusLabel.text = @"已退款";
     }else if ([status isEqualToString:@"-5"]) {
         self.statusLabel.text = @"拒绝退款";
+        self.statusLabel.textColor = [UIColor redColor];
     }
 
     

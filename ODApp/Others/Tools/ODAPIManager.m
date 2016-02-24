@@ -41,7 +41,7 @@ static NSString * const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
 
 #pragma mark - 添加 sign 字段之后的参数
 
-+ (NSDictionary*)signParameters:(NSDictionary*)parameters
++ (NSMutableDictionary *)signParameters:(NSDictionary*)parameters
 {
     NSMutableDictionary* sigParameters = [NSMutableDictionary dictionaryWithDictionary: parameters];
     sigParameters[@"sign"] = [[self class] signStringWithParameters: sigParameters];

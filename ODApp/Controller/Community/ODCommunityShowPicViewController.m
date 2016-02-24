@@ -53,7 +53,7 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODBazaarPicCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCellId forIndexPath:indexPath];
-    UIPinchGestureRecognizer *pgr = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(picCkick:)];
+    UITapGestureRecognizer *pgr = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(picCkick:)];
     [cell.picImageView addGestureRecognizer:pgr];
     cell.picImageView.userInteractionEnabled = YES;
     if ([self.skill isEqualToString:@"skill"]) {
@@ -65,6 +65,12 @@
             cell.picImageView.frame = CGRectMake(0, 0, kScreenSize.width, height);
             cell.picImageView.center = CGPointMake(KScreenWidth/2, KScreenHeight/2);
             cell.picImageView.contentMode = UIViewContentModeScaleAspectFit;
+            
+            cell.scrollView.contentSize = cell.picImageView.frame.size;
+            // 设置缩放比例
+            cell.scrollView.maximumZoomScale = 2.0;
+            cell.scrollView.minimumZoomScale = 1;
+            
         }];
     }else{
         [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.photos[indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -74,6 +80,12 @@
             cell.picImageView.frame = CGRectMake(0, 0, kScreenSize.width, height);
             cell.picImageView.center = CGPointMake(KScreenWidth/2, KScreenHeight/2);
             cell.picImageView.contentMode = UIViewContentModeScaleAspectFit;
+            
+            cell.scrollView.contentSize = cell.picImageView.frame.size;
+            
+            // 设置缩放比例
+            cell.scrollView.maximumZoomScale = 2.0;
+            cell.scrollView.minimumZoomScale = 1;
         }];
     }
 
@@ -100,23 +112,16 @@
     [self.view addSubview:self.label];
 }
 
+
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     NSInteger index = scrollView.contentOffset.x/kScreenSize.width;
     self.label.text = [NSString stringWithFormat:@"%ld/%ld",index+1,self.photos.count];
 }
 
-
--(void)picCkick:(UIPinchGestureRecognizer *)pgr
+-(void)picCkick:(UITapGestureRecognizer *)pgr
 {
-    static CGFloat scale = 1;
-    pgr.view.transform = CGAffineTransformMakeScale(scale*pgr.scale, scale*pgr.scale);
-
-    if (pgr.state == UIGestureRecognizerStateEnded)
-    {
-        scale = pgr.scale <= 1 ? 1 : pgr.scale;
-    }
- 
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - view视图将要显示

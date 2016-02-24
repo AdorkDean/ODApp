@@ -14,4 +14,8 @@
     // Initialization code
 }
 
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
+    return self.picImageView;
+}
 @end
