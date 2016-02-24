@@ -9,5 +9,10 @@
 #import "ODBaseViewController.h"
 
 @interface ODNewActivityCenterViewController : ODBaseViewController
+Single_Interface(ODNewActivityCenterViewController)
+/**
+ *  是否需要刷新
+ */
+@property(nonatomic, assign) BOOL needRefresh;
 
 @end
