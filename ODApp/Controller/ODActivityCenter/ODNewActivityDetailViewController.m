@@ -12,6 +12,7 @@
 #import "ODActivityDetailViewController.h"
 #import "ODNewActivityDetailViewController.h"
 #import "ODPersonalCenterViewController.h"
+#import "ODNewActivityCenterViewController.h"
 
 #import "ODActivePersonInfoView.h"
 #import "ODTitleLabelView.h"
@@ -300,7 +301,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     self.view.backgroundColor = [UIColor whiteColor];
     self.view.userInteractionEnabled = YES;
     self.navigationItem.title = @"活动详情";
-    
+    [ODNewActivityCenterViewController sharedODNewActivityCenterViewController].needRefresh = NO;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(share:) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
 
     
@@ -311,8 +312,8 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 -(void)requestData
 {
      __weakSelf
-    [SVProgressHUD showWithStatus:@"正在加载"];
-    NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue],@"open_id":[ODUserInformation sharedODUserInformation].openID};
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue]};
     [ODHttpTool getWithURL:KActivityDetailUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
      {
          weakSelf.resultModel = [model result];
@@ -574,17 +575,18 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 - (void)reportRequest
 {
     NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id", nil];
-    [SVProgressHUD showWithStatus:@"正在报名中。。。"];
+    [SVProgressHUD showWithStatus:@"正在报名。。。"];
     [ODHttpTool getWithURL:KActivityApplyUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
      {
          [self requestData];
          self.reportButton.enabled = NO;
 
          [SVProgressHUD showSuccessWithStatus:@"报名成功"];
+         [ODNewActivityCenterViewController sharedODNewActivityCenterViewController].needRefresh = YES;
      }
                    failure:^(NSError *error)
      {
-
+         [SVProgressHUD dismiss];
      }];
 }
 
