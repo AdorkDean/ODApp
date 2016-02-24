@@ -36,11 +36,11 @@
     self.pictureArray = [[NSMutableArray alloc] init];
     self.pictureIdArray = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
-    self.cityListArray = [[NSArray alloc] init];
+    self.cityListArray = [[NSMutableArray alloc] init];
     
     userInfoDic = [NSMutableDictionary dictionary];
     
-//    [self getLocationCityRequest];
+    [self getLocationCityRequest];
     
     [self createCollectionView];
     [self getScrollViewRequest];
@@ -62,7 +62,6 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
     {
         [weakSelf.collectionView.mj_header beginRefreshing];
-//        [weakSelf getScrollViewRequest];
     }];
 }
 
@@ -112,25 +111,25 @@
 
 #pragma mark - Request Data
 
-//#pragma mark - 定位城市数据请求
-//- (void)getLocationCityRequest
-//{
-//    __weakSelf
-//    NSDictionary *parameter = @{@"region_name":@""};
-//    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
-//    [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
-//    {
-//        [SVProgressHUD dismiss];
-//        ODLocationModel *mode = [model result];
-//        weakSelf.cityListArray = mode.all;
-//        [weakSelf.collectionView reloadData];
-//        
-//        
-//    } failure:^(NSError *error)
-//    {
-//        [SVProgressHUD dismiss];
-//    }];
-//}
+#pragma mark - 定位城市数据请求
+- (void)getLocationCityRequest
+{
+    __weakSelf
+    NSDictionary *parameter = @{@"region_name":@""};
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
+    {
+        [SVProgressHUD dismiss];
+        ODLocationModel *mode = [model result];
+        weakSelf.cityListArray = mode.all;
+        [weakSelf.collectionView reloadData];
+        
+        
+    } failure:^(NSError *error)
+    {
+        [SVProgressHUD dismiss];
+    }];
+}
 
 #pragma mark - 热门活动数据请求
 - (void)getScrollViewRequest
@@ -144,7 +143,6 @@
      {
          [SVProgressHUD dismiss];
          
-
          [weakSelf.pictureArray addObjectsFromArray:[[[model result]activitys]valueForKeyPath:@"detail_md5"]];
          [weakSelf.pictureIdArray addObjectsFromArray:[[[model result]activitys] valueForKeyPath:@"id"]];
          [weakSelf.collectionView reloadData];
@@ -472,6 +470,7 @@
     ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc]init];
     
     vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
+    vc.nick = model.user[@"nick"];
     
     [self.navigationController pushViewController:vc animated:YES];
 }

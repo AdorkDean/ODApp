@@ -56,10 +56,9 @@
 @property (nonatomic, strong)NSMutableArray *pictureArray;
 @property (nonatomic, strong)NSMutableArray *pictureIdArray;
 
-//最新话题数组
+//技能交换
 @property (nonatomic, strong)NSMutableArray *dataArray;
 
-@property (nonatomic  ,strong) NSArray *cityListArray;
-
+@property (nonatomic, strong)NSMutableArray *cityListArray;
 
 @end

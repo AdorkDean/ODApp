@@ -218,7 +218,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     ODReleaseModel *model = self.dataArray[indexPath.row];
     
     vc.swap_id = model.swap_id;
-    
+    vc.nick = model.user[@"nick"];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
