@@ -293,8 +293,16 @@
 
 - (void)findFavorableButtonClick:(UIButton *)button
 {
-    ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""])
+    {
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
+    }
+    else
+    {
+        ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)findJobButtonClick:(UIButton *)button
