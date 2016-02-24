@@ -333,29 +333,158 @@
     return _drawbackStateView;
 }
 
+#pragma mark - DataRequest
+
+#pragma mark - 拒绝退款请求
+- (void)refuseDrawbackRequest
+{
+    self.managerRefuse = [AFHTTPRequestOperationManager manager];
+    
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+    
+    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.cancelOrderView.reasonTextView.text
+                                , @"open_id":openId};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weakSelf
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+
+    [self.managerRefuse GET:ODRefuseDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
+        [SVProgressHUD dismiss];
+        
+        if ([responseObject[@"status"] isEqualToString:@"success"])
+        {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已拒绝"];
+            
+            //创建通知
+            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
+            //通过通知中心发送通知
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
+            [weakSelf.cancelOrderView removeFromSuperview];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
+        }
+        
+    }
+                    failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    {
+        [SVProgressHUD dismiss];
+    }];
+}
+
+
+#pragma mark - 接受退款请求
+- (void)receiveDrawbackRequest
+{
+    self.managerReceive = [AFHTTPRequestOperationManager manager];
+    
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+    
+    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason ,@"open_id":openId};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weakSelf
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+
+    [self.managerReceive GET:ODReceiveDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
+        [SVProgressHUD dismiss];
+    
+        if ([responseObject[@"status"] isEqualToString:@"success"])
+        {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已接受"];
+            
+            //创建通知
+            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
+            //通过通知中心发送通知
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
+        }
+    }
+                     failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    {
+        [SVProgressHUD dismiss];
+    }];
+}
+
+#pragma mark - 申请退款请求
+- (void)releaseDrawbackRequest
+{
+    self.manager = [AFHTTPRequestOperationManager manager];
+
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+
+    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason, @"open_id":openId};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weakSelf
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+
+    [self.manager GET:ODReleaseDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
+        [SVProgressHUD dismiss];
+        
+        if ([responseObject[@"status"] isEqualToString:@"success"])
+        {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"申请退款成功"];
+            
+            //创建通知
+            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
+            //通过通知中心发送通知
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
+        else
+        {
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
+        }
+        
+    }
+              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    {
+        [SVProgressHUD dismiss];
+    }];
+}
+
 
 #pragma mark - Action
 
 #pragma mark - 退款原因点击事件
 -(void)drawbackReasonOneButtonClick:(UIButton *)button
 {
-    if (!self.isSelectedReasonOne) {
+    if (!self.isSelectedReasonOne)
+    {
         [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
         self.isSelectedReasonOne = !self.isSelectedReasonOne;
         
-        if (self.isSelectedReasonTwo) {
+        if (self.isSelectedReasonTwo)
+        {
             [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonTwo = !self.isSelectedReasonTwo;
         }
-        if (self.isSelectedReasonThree) {
+        if (self.isSelectedReasonThree)
+        {
             [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonThree = !self.isSelectedReasonThree;
         }
-        if (self.isSelectedReasonFour) {
+        if (self.isSelectedReasonFour)
+        {
             [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonFour = !self.isSelectedReasonFour;
         }
-        if (self.isSelectedReasonOther) {
+        if (self.isSelectedReasonOther)
+        {
             [self.drawbackReasonOtherButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonOther = !self.isSelectedReasonOther;
         }
@@ -365,23 +494,28 @@
 
 -(void)drawbackReasonTwoButtonClick:(UIButton *)button
 {
-    if (!self.isSelectedReasonTwo) {
+    if (!self.isSelectedReasonTwo)
+    {
         [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
         self.isSelectedReasonTwo = !self.isSelectedReasonTwo;
         
-        if (self.isSelectedReasonOne) {
+        if (self.isSelectedReasonOne)
+        {
             [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonOne = !self.isSelectedReasonOne;
         }
-        if (self.isSelectedReasonThree) {
+        if (self.isSelectedReasonThree)
+        {
             [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonThree = !self.isSelectedReasonThree;
         }
-        if (self.isSelectedReasonFour) {
+        if (self.isSelectedReasonFour)
+        {
             [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonFour = !self.isSelectedReasonFour;
         }
-        if (self.isSelectedReasonOther) {
+        if (self.isSelectedReasonOther)
+        {
             [self.drawbackReasonOtherButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonOther = !self.isSelectedReasonOther;
         }
@@ -391,23 +525,28 @@
 
 -(void)drawbackReasonThreeButtonClick:(UIButton *)button
 {
-    if (!self.isSelectedReasonThree) {
+    if (!self.isSelectedReasonThree)
+    {
         [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
         self.isSelectedReasonThree = !self.isSelectedReasonThree;
         
-        if (self.isSelectedReasonOne) {
+        if (self.isSelectedReasonOne)
+        {
             [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonOne = !self.isSelectedReasonOne;
         }
-        if (self.isSelectedReasonTwo) {
+        if (self.isSelectedReasonTwo)
+        {
             [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonTwo = !self.isSelectedReasonTwo;
         }
-        if (self.isSelectedReasonFour) {
+        if (self.isSelectedReasonFour)
+        {
             [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonFour = !self.isSelectedReasonFour;
         }
-        if (self.isSelectedReasonOther) {
+        if (self.isSelectedReasonOther)
+        {
             [self.drawbackReasonOtherButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonOther = !self.isSelectedReasonOther;
         }
@@ -417,23 +556,28 @@
 
 -(void)drawbackReasonFourButtonClick:(UIButton *)button
 {
-    if (!self.isSelectedReasonFour) {
+    if (!self.isSelectedReasonFour)
+    {
         [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
         self.isSelectedReasonFour = !self.isSelectedReasonFour;
         
-        if (self.isSelectedReasonOne) {
+        if (self.isSelectedReasonOne)
+        {
             [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonOne = !self.isSelectedReasonOne;
         }
-        if (self.isSelectedReasonTwo) {
+        if (self.isSelectedReasonTwo)
+        {
             [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonTwo = !self.isSelectedReasonTwo;
         }
-        if (self.isSelectedReasonThree) {
+        if (self.isSelectedReasonThree)
+        {
             [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonThree = !self.isSelectedReasonThree;
         }
-        if (self.isSelectedReasonOther) {
+        if (self.isSelectedReasonOther)
+        {
             [self.drawbackReasonOtherButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonOther = !self.isSelectedReasonOther;
         }
@@ -444,51 +588,45 @@
 -(void)drawbackReasonOtherButtonClick:(UIButton *)button
 {
     
-    if (!self.isSelectedReasonOther) {
+    if (!self.isSelectedReasonOther)
+    {
         [self.drawbackReasonOtherButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
         self.isSelectedReasonOther = !self.isSelectedReasonOther;
         
-        if (self.isSelectedReasonOne) {
+        if (self.isSelectedReasonOne)
+        {
             [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonOne = !self.isSelectedReasonOne;
         }
-        if (self.isSelectedReasonTwo) {
+        if (self.isSelectedReasonTwo)
+        {
             [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonTwo = !self.isSelectedReasonTwo;
         }
-        if (self.isSelectedReasonThree) {
+        if (self.isSelectedReasonThree)
+        {
             [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonThree = !self.isSelectedReasonThree;
         }
-        if (self.isSelectedReasonFour) {
+        if (self.isSelectedReasonFour)
+        {
             [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
             self.isSelectedReasonFour = !self.isSelectedReasonFour;
         }
     }    
-    if (self.isSelectedReasonOther) {
-        
+    if (self.isSelectedReasonOther)
+    {
         self.drawbackStateView.hidden = NO;
     }
-    else {
+    else
+    {
         self.drawbackStateView.hidden = YES;
     }
 }
 
-- (void)servicePhoneButtonClick:(UIButton *)button
-{
-    NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.servicePhoneButton.titleLabel.text];
-    UIWebView *callWebView = [[UIWebView alloc] init];
-    [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
-    [self.view addSubview:callWebView];
-    
-}
-
-
 #pragma mark - 拒绝 按钮点击事件
 - (void)refuseButtonClick:(UIButton *)button
 {
-
-    
     self.cancelOrderView = [ODCancelOrderView getView];
     self.cancelOrderView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
     [self.cancelOrderView.cancelButton addTarget:self action:@selector(cancelView:) forControlEvents:UIControlEventTouchUpInside];
@@ -496,229 +634,111 @@
     self.cancelOrderView.reasonTextView.text = @"请输入拒绝原因";
     self.cancelOrderView.reasonTextView.delegate = self;
     [[[UIApplication sharedApplication]keyWindow] addSubview:self.cancelOrderView];
-    
-    
 }
 
+#pragma mark - 拨打电话
+- (void)servicePhoneButtonClick:(UIButton *)button
+{
+    NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.servicePhoneButton.titleLabel.text];
+    UIWebView *callWebView = [[UIWebView alloc] init];
+    [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
+    [self.view addSubview:callWebView];    
+}
 
 - (void)submitAction:(UIButton *)sender
 {
-    
-    
-    
-    if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
+    if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
+    {
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入拒绝原因"];
-    }else{
-        
+    }else
+    {
         [self refuseDrawbackRequest];
     }
-    
-    
-    
+}
+
+- (void)cancelView:(UIButton *)sender
+{
+    [self.cancelOrderView removeFromSuperview];
+}
+
+#pragma mark - 接受 按钮点击事件
+- (void)receiveButtonClick:(UIButton *)button
+{
+    [self receiveDrawbackRequest];
+}
+
+#pragma mark - 提交 按钮点击事件
+-(void)releaseButtonClick:(UIButton *)button
+{
+    if (self.isSelectedReasonOne)
+    {
+        self.drawbackReason = self.drawbackReasonOneLabel.text;
+        [self releaseDrawbackRequest];
+    }
+    if (self.isSelectedReasonTwo)
+    {
+        self.drawbackReason = self.drawbackReasonTwoLabel.text;
+        [self releaseDrawbackRequest];
+    }
+    if (self.isSelectedReasonThree)
+    {
+        self.drawbackReason = self.drawbackReasonThreeLabel.text;
+        [self releaseDrawbackRequest];
+    }
+    if (self.isSelectedReasonFour)
+    {
+        self.drawbackReason = self.drawbackReasonFourLabel.text;
+        [self releaseDrawbackRequest];
+    }
+    if (self.isSelectedReasonOther)
+    {
+        self.drawbackReason = self.drawbackStateTextView.text;
+        [self releaseDrawbackRequest];
+    }
 }
 
 #pragma mark - UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    if (textView == self.cancelOrderView.reasonTextView) {
-        if ([textView.text isEqualToString:@"请输入拒绝原因"]) {
+    if (textView == self.cancelOrderView.reasonTextView)
+    {
+        if ([textView.text isEqualToString:@"请输入拒绝原因"])
+        {
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
         }
     }
 }
 
-
-- (void)cancelView:(UIButton *)sender
-{
-    
-    [self.cancelOrderView removeFromSuperview];
-    
-    
-}
-
-#pragma mark - 接受 按钮点击事件
-- (void)receiveButtonClick:(UIButton *)button
-{
-
-    [self receiveDrawbackRequest];
-}
-
-
-#pragma mark - 提交 按钮点击事件
--(void)releaseButtonClick:(UIButton *)button
-{
-    if (self.isSelectedReasonOne) {
-        self.drawbackReason = self.drawbackReasonOneLabel.text;
-        [self releaseDrawbackRequest];
-    }
-    if (self.isSelectedReasonTwo) {
-        self.drawbackReason = self.drawbackReasonTwoLabel.text;
-        [self releaseDrawbackRequest];
-    }
-    if (self.isSelectedReasonThree) {
-        self.drawbackReason = self.drawbackReasonThreeLabel.text;
-        [self releaseDrawbackRequest];
-    }
-    if (self.isSelectedReasonFour) {
-        self.drawbackReason = self.drawbackReasonFourLabel.text;
-        [self releaseDrawbackRequest];
-    }
-    if (self.isSelectedReasonOther) {
-        self.drawbackReason = self.drawbackStateTextView.text;
-        [self releaseDrawbackRequest];
-    }
-}
-
-- (void)refuseDrawbackRequest
-{
-
-    self.managerRefuse = [AFHTTPRequestOperationManager manager];
-    
-    
-    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-    
-    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.cancelOrderView.reasonTextView.text
-                                , @"open_id":openId};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weakSelf
-    [self.managerRefuse GET:ODRefuseDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已拒绝"];
-            
-            //创建通知
-            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
-            //通过通知中心发送通知
-            [[NSNotificationCenter defaultCenter] postNotification:notification];
-            
-            [weakSelf.cancelOrderView removeFromSuperview];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-        }else{
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
-        }
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
-    }];
-}
-
-- (void)receiveDrawbackRequest
-{
-
-    self.managerReceive = [AFHTTPRequestOperationManager manager];
-    
-    
-      NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-    
-    
-    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason ,@"open_id":openId};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weakSelf
-    [self.managerReceive GET:ODReceiveDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已接受"];
-            
-            //创建通知
-            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
-            //通过通知中心发送通知
-            [[NSNotificationCenter defaultCenter] postNotification:notification];
-            
-            
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-        }else{
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
-        }
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
-    }];
-}
-
-
-- (void)releaseDrawbackRequest{
-    
-    self.manager = [AFHTTPRequestOperationManager manager];
-    
-    
-    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-
-    
-    
-    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason, @"open_id":openId};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weakSelf
-    [self.manager GET:ODReleaseDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"申请退款成功"];
-            
-            
-            //创建通知
-            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
-            //通过通知中心发送通知
-            [[NSNotificationCenter defaultCenter] postNotification:notification];
-            
-            
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-        }else{
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
-        }
-        
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
-    }];
-}
-
-
-#pragma mark - UITextViewDelegate
-
 - (void)textViewDidChange:(UITextView *)textView
 {
-
-    if (textView.text.length == 0) {
+    if (textView.text.length == 0)
+    {
         self.contentPlaceholderLabel.text = @"请输入适当的退款理由";
-        
-    }else{
+    }
+    else
+    {
         self.contentPlaceholderLabel.text = @"";
-    
     }
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    
-    
-    if (textView == self.cancelOrderView.reasonTextView) {
-        if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
+    if (textView == self.cancelOrderView.reasonTextView)
+    {
+        if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
+        {
             self.cancelOrderView.reasonTextView.text = @"请输入拒绝原因";
             self.cancelOrderView.reasonTextView.textColor = [UIColor lightGrayColor];
         }
-        
-    }else if (textView == self.drawbackStateTextView) {
-        
-        
-        if (textView.text.length == 0) {
+    }
+    else if (textView == self.drawbackStateTextView)
+    {
+        if (textView.text.length == 0)
+        {
             self.contentPlaceholderLabel.text = @"请输入适当的退款理由";
         }
-        
-
-        
-        
     }
-
-    
-    
-    
-    
 }
 
 
