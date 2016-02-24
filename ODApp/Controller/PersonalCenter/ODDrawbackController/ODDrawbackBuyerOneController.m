@@ -36,8 +36,7 @@
     }
     else{
         scrollViewHeight = KControllerHeight - ODNavigationHeight;
-    }
-    
+    }    
     
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, scrollViewHeight)];
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
@@ -510,21 +509,13 @@
 #pragma mark - UITextViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
-    
-    
     if (textView == self.cancelOrderView.reasonTextView) {
         if ([textView.text isEqualToString:@"请输入拒绝原因"]) {
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
         }
-        
     }
-    
-    
 }
-
-
-
 
 
 - (void)cancelView:(UIButton *)sender

@@ -64,7 +64,7 @@
         
         [weakSelf.collectionView.mj_header beginRefreshing];
         
-        [weakSelf getScrollViewRequest];
+//        [weakSelf getScrollViewRequest];
     }];
     
 }
@@ -73,6 +73,7 @@
 {
     [super viewWillAppear:animated];
     
+//    [self.collectionView.mj_header beginRefreshing];
     [self locationCity];
 }
 
@@ -138,6 +139,12 @@
     [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];    [ODHttpTool getWithURL:ODHomeFoundUrl parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
      {
          [SVProgressHUD dismiss];
+         if (weakSelf.pictureArray.count != 0) {
+             [weakSelf.pictureArray removeAllObjects];
+             [weakSelf.collectionView reloadData];
+
+
+         }
          weakSelf.pictureArray = [[[model result]activitys]valueForKeyPath:@"detail_md5"];
          weakSelf.pictureIdArray = [[[model result]activitys] valueForKeyPath:@"id"];
          [weakSelf.collectionView reloadData];
@@ -468,8 +475,7 @@
         
         // Hot Activity
         self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 7/12 * self.pictureArray.count , 0);
-        self.rsusableView.scrollView.contentOffset = CGPointMake((kScreenSize.width - 15) * 7/12, 0);
-//        self.rsusableView.scrollView.pagingEnabled = YES;
+        self.rsusableView.scrollView.contentOffset = CGPointMake(0, 0);
         self.rsusableView.scrollView.delegate = self;
         self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
         self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;

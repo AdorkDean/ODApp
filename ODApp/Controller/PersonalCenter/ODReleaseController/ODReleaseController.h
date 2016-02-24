@@ -14,7 +14,6 @@
 #import "MJRefresh.h"
 #import "ODBazaarReleaseSkillViewController.h"
 
-
 @interface ODReleaseController : ODBaseViewController<UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 
