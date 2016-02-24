@@ -9,5 +9,10 @@
 #import "ODTopicModel.h"
 
 @implementation ODTopicModel
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    
+}
+
 
 @end

@@ -9,5 +9,10 @@
 #import "ODAddressModel.h"
 
 @implementation ODAddressModel
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    
+}
+
 
 @end
