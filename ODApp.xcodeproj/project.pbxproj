@@ -55,6 +55,10 @@
 		9DDC9B941C635793000D688F /* ODSecondOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B911C635793000D688F /* ODSecondOrderView.m */; };
 		9DDC9B951C635793000D688F /* ODSecondOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDC9B921C635793000D688F /* ODSecondOrderView.xib */; };
 		9DDC9B981C63582B000D688F /* ODSecondOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDC9B971C63582B000D688F /* ODSecondOrderController.m */; };
+		9DDDF7481C7D5CEB004D572E /* ODThirdOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDDF7471C7D5CEB004D572E /* ODThirdOrderView.m */; };
+		9DDDF74A1C7D5D02004D572E /* ODThirdOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DDDF7491C7D5D02004D572E /* ODThirdOrderView.xib */; };
+		9DDDF74D1C7D6045004D572E /* ODThirdOrderController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDDF74C1C7D6045004D572E /* ODThirdOrderController.m */; };
+		9DDDF7501C7D61F7004D572E /* ODOrderThirdHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DDDF74F1C7D61F7004D572E /* ODOrderThirdHeadView.m */; };
 		9DE951DA1C78371100D7339D /* ODBalanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE951D91C78371100D7339D /* ODBalanceView.m */; };
 		9DE951DC1C78371E00D7339D /* ODBalanceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DE951DB1C78371E00D7339D /* ODBalanceView.xib */; };
 		9DE951E21C783C8600D7339D /* ODWithdrawalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DE951E11C783C8600D7339D /* ODWithdrawalView.m */; };
@@ -417,6 +421,13 @@
 		9DDC9B921C635793000D688F /* ODSecondOrderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODSecondOrderView.xib; sourceTree = "<group>"; };
 		9DDC9B961C63582B000D688F /* ODSecondOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSecondOrderController.h; sourceTree = "<group>"; };
 		9DDC9B971C63582B000D688F /* ODSecondOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSecondOrderController.m; sourceTree = "<group>"; };
+		9DDDF7461C7D5CEB004D572E /* ODThirdOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODThirdOrderView.h; sourceTree = "<group>"; };
+		9DDDF7471C7D5CEB004D572E /* ODThirdOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODThirdOrderView.m; sourceTree = "<group>"; };
+		9DDDF7491C7D5D02004D572E /* ODThirdOrderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODThirdOrderView.xib; sourceTree = "<group>"; };
+		9DDDF74B1C7D6045004D572E /* ODThirdOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODThirdOrderController.h; sourceTree = "<group>"; };
+		9DDDF74C1C7D6045004D572E /* ODThirdOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODThirdOrderController.m; sourceTree = "<group>"; };
+		9DDDF74E1C7D61F7004D572E /* ODOrderThirdHeadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderThirdHeadView.h; sourceTree = "<group>"; };
+		9DDDF74F1C7D61F7004D572E /* ODOrderThirdHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderThirdHeadView.m; sourceTree = "<group>"; };
 		9DE951D81C78371100D7339D /* ODBalanceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBalanceView.h; sourceTree = "<group>"; };
 		9DE951D91C78371100D7339D /* ODBalanceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBalanceView.m; sourceTree = "<group>"; };
 		9DE951DB1C78371E00D7339D /* ODBalanceView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBalanceView.xib; sourceTree = "<group>"; };
@@ -2446,6 +2457,8 @@
 				D4F76D8D1C61AE8C00D59F02 /* ODOrderController.m */,
 				9DDC9B961C63582B000D688F /* ODSecondOrderController.h */,
 				9DDC9B971C63582B000D688F /* ODSecondOrderController.m */,
+				9DDDF74B1C7D6045004D572E /* ODThirdOrderController.h */,
+				9DDDF74C1C7D6045004D572E /* ODThirdOrderController.m */,
 				9DDC9B621C62ECFF000D688F /* ODMyOrderController.h */,
 				9DDC9B631C62ECFF000D688F /* ODMyOrderController.m */,
 				9DDC9B6D1C631A24000D688F /* ODOrderDetailController.h */,
@@ -2484,9 +2497,19 @@
 				D4F76D981C61AEA100D59F02 /* ODAddAddressView.xib */,
 				D4F76D9F1C61AEA100D59F02 /* ODOrderHeadView.h */,
 				D4F76DA01C61AEA100D59F02 /* ODOrderHeadView.m */,
+				9DDC9B8E1C635793000D688F /* ODOrderSecondHeadView.h */,
+				9DDC9B8F1C635793000D688F /* ODOrderSecondHeadView.m */,
+				9DDDF74E1C7D61F7004D572E /* ODOrderThirdHeadView.h */,
+				9DDDF74F1C7D61F7004D572E /* ODOrderThirdHeadView.m */,
 				D4F76DA11C61AEA100D59F02 /* ODOrderView.h */,
 				D4F76DA21C61AEA100D59F02 /* ODOrderView.m */,
 				D4F76DA31C61AEA100D59F02 /* ODOrderView.xib */,
+				9DDC9B901C635793000D688F /* ODSecondOrderView.h */,
+				9DDC9B911C635793000D688F /* ODSecondOrderView.m */,
+				9DDC9B921C635793000D688F /* ODSecondOrderView.xib */,
+				9DDDF7461C7D5CEB004D572E /* ODThirdOrderView.h */,
+				9DDDF7471C7D5CEB004D572E /* ODThirdOrderView.m */,
+				9DDDF7491C7D5D02004D572E /* ODThirdOrderView.xib */,
 				9D8A98A11C7B3324005BC458 /* ODEvaluation.h */,
 				9D8A98A21C7B3324005BC458 /* ODEvaluation.m */,
 				9DBF7EEB1C75A0C90085875E /* ODPayView.h */,
@@ -2500,11 +2523,6 @@
 				9DE951E31C783C9A00D7339D /* ODWithdrawalView.xib */,
 				9DBF7EF31C75B4AF0085875E /* ODPaySuccessView.h */,
 				9DBF7EF41C75B4AF0085875E /* ODPaySuccessView.m */,
-				9DDC9B8E1C635793000D688F /* ODOrderSecondHeadView.h */,
-				9DDC9B8F1C635793000D688F /* ODOrderSecondHeadView.m */,
-				9DDC9B901C635793000D688F /* ODSecondOrderView.h */,
-				9DDC9B911C635793000D688F /* ODSecondOrderView.m */,
-				9DDC9B921C635793000D688F /* ODSecondOrderView.xib */,
 				9DDC9B701C631D81000D688F /* ODOrderDetailView.h */,
 				9DDC9B711C631D81000D688F /* ODOrderDetailView.m */,
 				9D205C791C71733700B6499B /* ODOrderDetailView.xib */,
@@ -2744,6 +2762,7 @@
 				D4D075021C59B9FA008527C9 /* CenterActivityCell.xib in Resources */,
 				C64D46091C5F8C6F003BFFA0 /* UMShareEditViewControlleriPad.xib in Resources */,
 				D4D075081C59B9FA008527C9 /* CenterYuYueView.xib in Resources */,
+				9DDDF74A1C7D5D02004D572E /* ODThirdOrderView.xib in Resources */,
 				D4D0751D1C59B9FA008527C9 /* ODTaskCell.xib in Resources */,
 				D4D075191C59B9FA008527C9 /* ODLandSecondCell.xib in Resources */,
 				D4F76DCC1C61B01200D59F02 /* ODActivityBottomCell.xib in Resources */,
@@ -2824,6 +2843,7 @@
 				D4F76DCB1C61B01200D59F02 /* ODActivityBottomCell.m in Sources */,
 				9D46D14D1C77482000F4C0CD /* AppMethod.m in Sources */,
 				D4F76DDB1C61BB4D00D59F02 /* ODActivityPersonCell.m in Sources */,
+				9DDDF74D1C7D6045004D572E /* ODThirdOrderController.m in Sources */,
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
 				D4D073901C59B9FA008527C9 /* ODOtherTopicViewController.m in Sources */,
@@ -2883,11 +2903,13 @@
 				9DE951F81C785E2300D7339D /* ODWithdrawalController.m in Sources */,
 				9DF2E9891C74527F00F77976 /* ODApplyModel.m in Sources */,
 				D4D0737F1C59B9FA008527C9 /* ODCommunityReleaseTopicViewController.m in Sources */,
+				9DDDF7501C7D61F7004D572E /* ODOrderThirdHeadView.m in Sources */,
 				C64D45F41C5F8C6F003BFFA0 /* IQToolbar.m in Sources */,
 				D440C8611C7C6EF0000AA15B /* ODAPPInfoTool.m in Sources */,
 				C64D46141C5F8C6F003BFFA0 /* ODHelp.m in Sources */,
 				D4D073981C59B9FA008527C9 /* ODUserSignatureController.m in Sources */,
 				D4D075061C59B9FA008527C9 /* CenterDetailModel.m in Sources */,
+				9DDDF7481C7D5CEB004D572E /* ODThirdOrderView.m in Sources */,
 				D444238E1C71BE23005B4CFE /* ODNewActivityDetailViewController.m in Sources */,
 				D4D0737A1C59B9FA008527C9 /* ODCenterYuYueController.m in Sources */,
 				D4D073941C59B9FA008527C9 /* ODUserEvaluationController.m in Sources */,

@@ -218,7 +218,7 @@
                 <outlet property="timeLabel" destination="qav-Pi-Rpf" id="Uln-bC-5E5"/>
                 <outlet property="typeLabel" destination="gH2-Kp-bLV" id="sdS-5o-vBh"/>
             </connections>
-            <point key="canvasLocation" x="-27" y="110"/>
+            <point key="canvasLocation" x="130" y="105"/>
         </view>
     </objects>
     <resources>

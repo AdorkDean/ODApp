@@ -46,6 +46,10 @@
         
         if ([self.payStatus isEqualToString:@"1"]) {
             
+            
+            self.tabBarController.selectedIndex = 2;
+            
+            
              self.paySuccessView.isSuccessLabel.text = @"您的订单已支付成功";
             self.paySuccessView.isSuccessView.image = [UIImage imageNamed:@"icon_background_"];
             
@@ -199,7 +203,12 @@
 - (void)goOther:(UIButton *)sender
 {
     
-    ODBazaarViewController *vc = self.navigationController.childViewControllers[0];
+    NSLog(@"____%@" , self.tabBarController.childViewControllers);
+    
+    NSLog(@"*******%@" , self.tabBarController.childViewControllers[2].childViewControllers);
+
+    
+    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     [self.navigationController popToViewController:vc animated:YES];
     vc.index = 0;
     
