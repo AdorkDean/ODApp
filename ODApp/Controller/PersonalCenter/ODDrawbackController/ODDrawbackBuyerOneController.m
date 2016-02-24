@@ -639,7 +639,7 @@
 #pragma mark - 拨打电话
 - (void)servicePhoneButtonClick:(UIButton *)button
 {
-    NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.servicePhoneButton.titleLabel.text];
+    NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.servicePhone];
     UIWebView *callWebView = [[UIWebView alloc] init];
     [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
     [self.view addSubview:callWebView];    
