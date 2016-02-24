@@ -12,6 +12,7 @@
 #import "ODActivityDetailViewController.h"
 #import "ODNewActivityDetailViewController.h"
 #import "ODPersonalCenterViewController.h"
+#import "ODNewActivityCenterViewController.h"
 
 #import "ODActivePersonInfoView.h"
 #import "ODTitleLabelView.h"
@@ -300,7 +301,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     self.view.backgroundColor = [UIColor whiteColor];
     self.view.userInteractionEnabled = YES;
     self.navigationItem.title = @"活动详情";
-    
+    [ODNewActivityCenterViewController sharedODNewActivityCenterViewController].needRefresh = NO;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(share:) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
 
     
@@ -581,6 +582,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
          self.reportButton.enabled = NO;
 
          [SVProgressHUD showSuccessWithStatus:@"报名成功"];
+         [ODNewActivityCenterViewController sharedODNewActivityCenterViewController].needRefresh = YES;
      }
                    failure:^(NSError *error)
      {

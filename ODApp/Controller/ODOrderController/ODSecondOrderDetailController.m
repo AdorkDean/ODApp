@@ -568,6 +568,7 @@
     vc.isSelectReason = YES;
     vc.isRelease = YES;
     vc.confirmButtonContent = @"申请退款";
+      vc.drawbackTitle = @"申请退款";
     
     [self.navigationController pushViewController:vc animated:YES];
 

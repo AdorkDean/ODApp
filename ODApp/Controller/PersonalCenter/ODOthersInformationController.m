@@ -7,7 +7,7 @@
 //
 
 #import "ODOthersInformationController.h"
-
+#import "ODEvaluationController.h"
 @interface ODOthersInformationController ()
 
 @end
@@ -144,7 +144,7 @@
     }
     else if (indexPath.section == 4) {
         
-        ODUserEvaluationController *vc = [[ODUserEvaluationController alloc] init];
+        ODEvaluationController *vc = [[ODEvaluationController alloc] init];
         vc.typeTitle = @"他收到的评价";
         vc.openId = self.model.open_id;
         [self.navigationController pushViewController:vc animated:YES];

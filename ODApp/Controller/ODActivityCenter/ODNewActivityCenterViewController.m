@@ -24,8 +24,9 @@
 @end
 
 @implementation ODNewActivityCenterViewController
-
 static NSString * const cellId = @"newActivityCell";
+
+Single_Implementation(ODNewActivityCenterViewController)
 
 #pragma mark - lazyLoad
 - (UITableView *)tableView
@@ -50,18 +51,27 @@ static NSString * const cellId = @"newActivityCell";
 {
     [super viewDidLoad];
     self.navigationItem.title = @"中心活动";
+    self.needRefresh = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.tableView.mj_header beginRefreshing];
+    if (self.needRefresh)
+    {
+        [self.tableView.mj_header beginRefreshing];
+    }
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [ODNewActivityCenterViewController sharedODNewActivityCenterViewController].needRefresh = self.tabBarController.selectedIndex != 1;
+}
 -(void)requestData
 {
     __weakSelf
-    
+
     [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [ODHttpTool getWithURL:KActivityListUrl parameters:@{} modelClass:[ODActivityListModel class] success:^(id json)
     {

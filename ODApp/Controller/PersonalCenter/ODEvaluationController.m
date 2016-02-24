@@ -58,7 +58,7 @@
    
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"我的话题";
+    self.navigationItem.title = self.typeTitle;
     
     [self creatSegment];
     [self creatScroller];

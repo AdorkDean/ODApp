@@ -185,12 +185,14 @@
           
             NSMutableDictionary *dic = responseObject[@"result"];
             NSString *openId = dic[@"open_id"];
+               NSString *avatar = dic[@"avatar"];
             
             [ODUserInformation sharedODUserInformation].openID = openId;
             
             
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             [user setObject:openId forKey:KUserDefaultsOpenId];
+            [user setObject:avatar forKey:KUserDefaultsAvatar];
             
             [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
                 ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
