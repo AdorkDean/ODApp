@@ -471,10 +471,10 @@
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
-    {
-        [weakSelf refreshdata];
-    }];
+//    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
+//    {
+//        [weakSelf refreshdata];
+//    }];
 
     [self.view addSubview:self.collectionView];
 }
@@ -745,6 +745,7 @@ updatingLocation:(BOOL)updatingLocation
             [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
             [ODUserInformation sharedODUserInformation].cityID = @"1";
             [weakSelf locationCity];
+            
         }]];
         [self presentViewController:alert animated:YES completion:nil];
     }
