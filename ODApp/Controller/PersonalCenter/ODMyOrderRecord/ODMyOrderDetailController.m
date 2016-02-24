@@ -15,9 +15,9 @@
 @implementation ODMyOrderDetailController
 
 - (void)viewDidLoad
-{
-    
+{    
     [super viewDidLoad];
+    
     self.dataArray = [[NSMutableArray alloc] init];
     self.devicesArray = [[NSMutableArray alloc] init];
     [self navigationInit];
@@ -35,20 +35,17 @@
 
 - (void)cancelOrderButtonClick:(UIButton *)button
 {
-
-    if ([self.checkLabel.text isEqualToString:@"已取消"] || [self.checkLabel.text isEqualToString:@"后台取消"]) {
-        
+    if ([self.checkLabel.text isEqualToString:@"已取消"] || [self.checkLabel.text isEqualToString:@"后台取消"])
+    {
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"订单已经取消"];
-    }else if ([self.checkLabel.text isEqualToString:@"前台已确认"]) {
-    
+    }else if ([self.checkLabel.text isEqualToString:@"前台已确认"])
+    {
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"订单已生成,请联系客服"];
-    }else if ([self.checkLabel.text isEqualToString:@"到场已确认"] || [self.checkLabel.text isEqualToString:@"未到场"]) {
-    
+    }else if ([self.checkLabel.text isEqualToString:@"到场已确认"] || [self.checkLabel.text isEqualToString:@"未到场"])
+    {
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"已到活动时间，无需进行取消"];
     }
-    
     else{
-    
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您确定要取消预约吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
@@ -58,25 +55,26 @@
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
             
             __weak typeof (self)weakSelf = self;
+            [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+            
             [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                 
+                [SVProgressHUD dismiss];
                 [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil];
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
                 weakSelf.checkLabel.text = @"已取消";
                 
             } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-                
+                [SVProgressHUD dismiss];
             }];
         }]];
-        
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        
         [self presentViewController:alert animated:YES completion:nil];
     }
 }
 
-- (void)getOrderDetailRequest{
-
+- (void)getOrderDetailRequest
+{
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
    
@@ -84,8 +82,11 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    
     [self.manager GET:kMyOrderDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
+        [SVProgressHUD dismiss];
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
@@ -99,17 +100,16 @@
                 NSString *name = itemDict[@"name"];
                 [weakSelf.devicesArray addObject:name];
             }
-
         }
         [weakSelf createOrderView];
-
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        [SVProgressHUD dismiss];
     }];
 }
 
-- (void)createOrderView{
-
+- (void)createOrderView
+{
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight)];
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     
@@ -197,15 +197,12 @@
     self.checkLabel.layer.borderColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1].CGColor;
     
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width, CGRectGetMaxY(self.checkLabel.frame) + 3);
-    
-//    self.scrollView.layer.masksToBounds = YES;
-//    self.scrollView.layer.cornerRadius = 5;
     [self.scrollView addSubview:self.checkLabel];
     [self.view addSubview:self.scrollView];
 }
 
-- (void)phoneButtonClick:(UIButton *)button{
-
+- (void)phoneButtonClick:(UIButton *)button
+{
     NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.model.store_tel];
     UIWebView *callWebView = [[UIWebView alloc] init];
     [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
