@@ -312,7 +312,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 {
      __weakSelf
     [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
-    NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue],@"open_id":[ODUserInformation sharedODUserInformation].openID};
+    NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue]};
     [ODHttpTool getWithURL:KActivityDetailUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
      {
          weakSelf.resultModel = [model result];
@@ -573,7 +573,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 
 - (void)reportRequest
 {
-    NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id",[ODUserInformation sharedODUserInformation].openID,@"open_id", nil];
+    NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id", nil];
     [SVProgressHUD showWithStatus:@"正在报名。。。"];
     [ODHttpTool getWithURL:KActivityApplyUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
      {
