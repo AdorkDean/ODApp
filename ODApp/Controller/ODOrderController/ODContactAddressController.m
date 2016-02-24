@@ -280,7 +280,7 @@
 - (nullable NSArray<UITableViewRowAction *> *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     __weakSelf
-    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[UIImage imageNamed:@"icon_delete"] handler:^(UITableViewRowAction * _Nullable action, NSIndexPath * _Nullable indexPath) {
+    UITableViewRowAction *action1 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[UIImage imageNamed:@"icon_shanchu"] handler:^(UITableViewRowAction * _Nullable action, NSIndexPath * _Nullable indexPath) {
         [weakSelf setEditing:false animated:true];
         
         NSString *address_id = @"";
@@ -310,7 +310,7 @@
     action1.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     
     
-    UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[UIImage imageNamed:@"icon_edit"] handler:^(UITableViewRowAction * _Nullable action, NSIndexPath * _Nullable indexPath) {
+    UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[UIImage imageNamed:@"icon_bianji"] handler:^(UITableViewRowAction * _Nullable action, NSIndexPath * _Nullable indexPath) {
         [weakSelf setEditing:false animated:true];
         
         ODAddAddressController *vc = [[ODAddAddressController alloc] init];

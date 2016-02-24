@@ -138,19 +138,18 @@
 // 再去逛逛
 - (void)goOther:(UIButton *)sender
 {
-    
-   
-
-    
-    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
-    if (![self.navigationController.childViewControllers containsObject:vc])
+        
+    ODTabBarController *tabBar = (ODTabBarController *)self.tabBarController;
+    if (tabBar.currentIndex == 2)
     {
-        [self.navigationController addChildViewController:vc];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
-    
-     NSLog(@"*******%@" , self.tabBarController.childViewControllers[2].childViewControllers);
-    [self.navigationController popToViewController:vc animated:YES];
-    vc.index = 0;
+    else
+    {
+        tabBar.selectedIndex = 2;
+        ODBazaarViewController *vc = tabBar.childViewControllers[2].childViewControllers[0];
+        vc.index = 0;
+    }
     
     
 }

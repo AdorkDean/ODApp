@@ -410,7 +410,14 @@
     self.orderDetailView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
     
     ODOrderDetailModel *model = self.dataArray[0];
-    NSMutableDictionary *userDic = model.user;
+    
+    NSMutableDictionary *dic = model.order_user;
+    [self.orderDetailView.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , dic[@"avatar"]]] forState:UIControlStateNormal];
+    self.orderDetailView.nickLabel.text = dic[@"nick"];
+    
+    
+    
+  
     NSMutableArray *arr = model.imgs_small;
     NSMutableDictionary *picDic = arr[0];
     
@@ -449,9 +456,8 @@
         
     }
     
-    [self.orderDetailView.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , userDic[@"avatar"]]] forState:UIControlStateNormal];
-    [self.orderDetailView.contentButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , picDic[@"img_url"]]] forState:UIControlStateNormal];
-    self.orderDetailView.nickLabel.text = userDic[@"nick"];
+      [self.orderDetailView.contentButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , picDic[@"img_url"]]] forState:UIControlStateNormal];
+   
     self.orderDetailView.contentLabel.text = model.title;
     self.orderDetailView.countLabel.text = [NSString stringWithFormat:@"%@" , model.num];
     self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
@@ -551,7 +557,12 @@
 - (void)phoneAction:(UIButton *)sender
 {
     
-    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.phoneNumber];
+    ODOrderDetailModel *model = self.dataArray[0];
+    
+    NSMutableDictionary *dic = model.user;
+
+    
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",dic[@"mobile"]];
     
     UIWebView *callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];

@@ -35,7 +35,7 @@
 @property (nonatomic, copy) NSString *evaluateStar;
 @property (nonatomic , strong) UIScrollView *scroller;
 
-@property (nonatomic ,copy) NSString *phoneNumber;
+
 
 
 @end
@@ -758,11 +758,22 @@
     self.orderDetailView = [ODOrderDetailView getView];
     
     self.orderDetailView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
+    
     ODOrderDetailModel *model = self.dataArray[0];
-    NSMutableDictionary *userDic = model.user;
+    NSMutableDictionary *dic = model.user;
+    
+    
+  
+    
+    
+    [self.orderDetailView.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , dic[@"avatar"]]] forState:UIControlStateNormal];
+    self.orderDetailView.nickLabel.text = dic[@"nick"];
+
+    
     NSMutableArray *arr = model.imgs_small;
     NSMutableDictionary *picDic = arr[0];
     
+  
     
     
     NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
@@ -803,9 +814,8 @@
     
     
     
-    [self.orderDetailView.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , userDic[@"avatar"]]] forState:UIControlStateNormal];
-    [self.orderDetailView.contentButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , picDic[@"img_url"]]] forState:UIControlStateNormal];
-    self.orderDetailView.nickLabel.text = userDic[@"nick"];
+      [self.orderDetailView.contentButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , picDic[@"img_url"]]] forState:UIControlStateNormal];
+ 
     self.orderDetailView.countLabel.text = [NSString stringWithFormat:@"%@" , model.num];
     self.orderDetailView.contentLabel.text = model.title;
     self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
@@ -824,16 +834,16 @@
         self.orderDetailView.swapTypeLabel.text = @"快递服务";
         self.orderDetailView.addressNameLabel.text = model.name;
         self.orderDetailView.addressPhoneLabel.text = model.tel;
-        self.phoneNumber = [NSString stringWithFormat:@"%@" , model.tel];
+      
 
         
     }else{
         
-        NSMutableDictionary *dic = model.order_user;
+     
         
         self.orderDetailView.addressNameLabel.text = dic[@"nick"];
         self.orderDetailView.addressPhoneLabel.text = dic[@"mobile"];
-        self.phoneNumber = [NSString stringWithFormat:@"%@" , dic[@"mobile"]];
+      
         
         self.orderDetailView.serviceTimeLabel.text = model.service_time;
         self.orderDetailView.serviceTypeLabel.text = @"服务时间:";
@@ -900,8 +910,10 @@
 // 打电话
 - (void)phoneAction:(UIButton *)sender
 {
-    
-    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.phoneNumber];
+    ODOrderDetailModel *model = self.dataArray[0];
+    NSMutableDictionary *dic = model.order_user;
+
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",dic[@"mobile"]];
     
     UIWebView *callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
