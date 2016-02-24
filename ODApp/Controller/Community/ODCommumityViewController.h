@@ -32,7 +32,6 @@
 @property(nonatomic,assign) BOOL refresh;
 @property (nonatomic, copy) NSString *bbsMark;
 @property (nonatomic, assign) int bbsType;
-
 - (void)joiningTogetherParmeters;
 
 @end
