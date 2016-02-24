@@ -82,7 +82,11 @@
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     __weakSelf;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    if ([self.love isEqualToString:@"love"]) {
+        
+    }else{
+        [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    }
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
@@ -185,15 +189,17 @@
     UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(priceLabel.frame)+10, kScreenSize.width-20, [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14])];
     contentLabel.text = model.content;
     contentLabel.font = [UIFont systemFontOfSize:14];
+    contentLabel.numberOfLines = 0;
     [self.detailView addSubview:contentLabel];
     
-     self.imageArray = [[NSMutableArray alloc]init];
+    self.imageArray = [[NSMutableArray alloc]init];
     for (NSInteger i = 0; i < model.imgs_big.count; i++) {
         NSDictionary *dict = model.imgs_big[i];
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:dict[@"img_url"]]]];
        
         [self.imageArray addObject:image];
     }
+    
     [SVProgressHUD dismiss];
 
     CGRect frame;
@@ -345,6 +351,7 @@
    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
        if (love) {
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
+               self.love = @"love";
                [weakSelf joiningTogetherParmeters];
                NSDictionary *dict = responseObject[@"result"];
                weakSelf.love_id = [NSString stringWithFormat:@"%@",dict[@"love_id"]];
@@ -352,6 +359,7 @@
            }
        }else{
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
+               self.love = @"love";
                [weakSelf joiningTogetherParmeters];
                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"取消收藏"];
            }
