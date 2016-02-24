@@ -759,7 +759,8 @@
     NSMutableDictionary *picDic = arr[0];
     
     NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
-    
+    NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
+
     
     
     if ([status isEqualToString:@"-1"]) {
@@ -804,9 +805,14 @@
     [self.orderDetailView.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , userDic[@"avatar"]]] forState:UIControlStateNormal];
     [self.orderDetailView.contentButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , picDic[@"img_url"]]] forState:UIControlStateNormal];
     self.orderDetailView.nickLabel.text = userDic[@"nick"];
+    
+  
+    
+    
     self.orderDetailView.contentLabel.text = model.title;
+    self.orderDetailView.countLabel.text = [NSString stringWithFormat:@"%@" , model.num];
     self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
-    self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.price];
+    self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.total_price];
     
     self.orderDetailView.typeLabel.text = self.orderType;
     self.orderDetailView.addressNameLabel.text = model.name;
@@ -828,8 +834,17 @@
         self.orderDetailView.typeLabel.text = @"已付款";
     }else if ([status isEqualToString:@"4"]) {
         
-    self.orderDetailView.typeLabel.text = @"已服务";
-    self.orderDetailView.typeLabel.textColor = [UIColor redColor];
+        if ([swap_type isEqualToString:@"2"]) {
+            
+            self.orderDetailView.typeLabel.text = @"已发货";
+            self.orderDetailView.typeLabel.textColor = [UIColor redColor];
+            
+        }else{
+            
+            self.orderDetailView.typeLabel.text = @"已服务";
+            self.orderDetailView.typeLabel.textColor = [UIColor redColor];
+        }
+        
 
         
         
