@@ -311,7 +311,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 -(void)requestData
 {
      __weakSelf
-    [SVProgressHUD showWithStatus:@"正在加载"];
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue],@"open_id":[ODUserInformation sharedODUserInformation].openID};
     [ODHttpTool getWithURL:KActivityDetailUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
      {
@@ -573,8 +573,8 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 
 - (void)reportRequest
 {
-    NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id", nil];
-    [SVProgressHUD showWithStatus:@"正在报名中。。。"];
+    NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id",[ODUserInformation sharedODUserInformation].openID,@"open_id", nil];
+    [SVProgressHUD showWithStatus:@"正在报名。。。"];
     [ODHttpTool getWithURL:KActivityApplyUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
      {
          [self requestData];
@@ -584,7 +584,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
      }
                    failure:^(NSError *error)
      {
-
+         [SVProgressHUD dismiss];
      }];
 }
 
