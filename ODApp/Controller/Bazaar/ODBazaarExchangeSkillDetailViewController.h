@@ -19,6 +19,7 @@
 #import "ODOrderController.h"
 #import "ODCollectionController.h"
 #import "ODPersonalCenterViewController.h"
+#import "ODThirdOrderController.h"
 
 @interface ODBazaarExchangeSkillDetailViewController : ODBaseViewController<UMSocialUIDelegate>
 

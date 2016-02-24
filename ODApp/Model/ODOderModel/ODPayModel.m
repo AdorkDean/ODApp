@@ -9,5 +9,10 @@
 #import "ODPayModel.h"
 
 @implementation ODPayModel
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    
+}
+
 
 @end
