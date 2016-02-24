@@ -57,12 +57,8 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     }
     
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"my":@"1"};
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [ODHttpTool getWithURL:ODPersonalReleaseTaskUrl parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
     {
-        [SVProgressHUD dismiss];
-
-        
         [weakSelf.collectionView.mj_footer endRefreshing];
         
         if (model == nil)
@@ -93,7 +89,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         [weakSelf.collectionView.mj_header endRefreshing];
     } failure:^(NSError *error)
     {
-        [SVProgressHUD dismiss];
 
         [weakSelf.collectionView.mj_footer endRefreshing];
         [weakSelf.collectionView.mj_header endRefreshing];
@@ -189,7 +184,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     {
         [weakSelf loadMoreData];
     }];
-    [self.collectionView.mj_header beginRefreshing];
     [self.view addSubview:self.collectionView];
 }
 

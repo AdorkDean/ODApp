@@ -120,10 +120,8 @@
 {
     __weakSelf
     NSDictionary *parameter = @{@"region_name":@""};
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
     {
-        [SVProgressHUD dismiss];
         ODLocationModel *mode = [model result];
         weakSelf.cityListArray = mode.all;
         [weakSelf.collectionView reloadData];
@@ -131,7 +129,6 @@
     }
                    failure:^(NSError *error)
     {
-        [SVProgressHUD dismiss];
     }];
 }
 
@@ -142,10 +139,8 @@
     [weakSelf.pictureArray removeAllObjects];
     [weakSelf.pictureIdArray removeAllObjects];
     [weakSelf.collectionView reloadData];
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [ODHttpTool getWithURL:ODHomeFoundUrl parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
      {
-         [SVProgressHUD dismiss];
          
          [weakSelf.pictureArray addObjectsFromArray:[[[model result]activitys]valueForKeyPath:@"detail_md5"]];
          [weakSelf.pictureIdArray addObjectsFromArray:[[[model result]activitys] valueForKeyPath:@"id"]];
@@ -153,7 +148,6 @@
      }
                    failure:^(NSError *error)
      {
-         [SVProgressHUD dismiss];
      }];
 }
 
@@ -166,11 +160,9 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     
     [self.manager GET:ODHomeChangeSkillUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-        [SVProgressHUD dismiss];
 
         [weakSelf.dataArray removeAllObjects];
         if (responseObject)
@@ -190,7 +182,6 @@
     }
               failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-        [SVProgressHUD dismiss];
 
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
@@ -207,11 +198,9 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
 
     [self.centerManager GET:ODStoreListUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-        [SVProgressHUD dismiss];
 
         if (responseObject)
         {
@@ -225,7 +214,6 @@
     }
                     failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-        [SVProgressHUD dismiss];
     }];
 }
 
@@ -239,11 +227,9 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
 
     [self.centerManager GET:ODStoreDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-        [SVProgressHUD dismiss];
 
         if (responseObject)
         {
@@ -255,7 +241,6 @@
     }
                     failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-        [SVProgressHUD dismiss];
     }];
 }
 
@@ -471,10 +456,10 @@
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-//    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
-//    {
-//        [weakSelf refreshdata];
-//    }];
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
+    {
+        [weakSelf refreshdata];
+    }];
 
     [self.view addSubview:self.collectionView];
 }
