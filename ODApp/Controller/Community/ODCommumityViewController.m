@@ -195,16 +195,18 @@
     self.bbsType = self.bbsType ? self.bbsType :5;
     self.bbsMark = self.bbsMark ? self.bbsMark :@"";
     self.count = 1;
+    NSDictionary *parameter;
     if ([self.bbsMark isEqualToString:@""]) {
         [self.button setTitle:@"全部" forState:UIControlStateNormal];
+        parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
     }else if ([self.bbsMark isEqualToString:@"社区"]){
         [self.button setTitle:@"社区" forState:UIControlStateNormal];
+        parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":@"", @"call_array":@"1"};
     }else{
         [self.button setTitle:self.bbsMark forState:UIControlStateNormal];
+        parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
     }
-    NSDictionary *parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
-    
-    
+  
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
