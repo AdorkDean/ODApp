@@ -651,6 +651,7 @@ updatingLocation:(BOOL)updatingLocation
                 }
             }
             [weakSelf locationCity];
+            [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationLocationSuccessRefresh object:nil];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
         {
