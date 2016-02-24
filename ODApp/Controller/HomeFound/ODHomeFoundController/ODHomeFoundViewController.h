@@ -60,7 +60,7 @@
 //技能交换
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
-@property (nonatomic, strong) NSMutableArray *cityListArray;
+@property (nonatomic, strong) NSArray *cityListArray;
 
 @property (nonatomic, copy) NSString *centerName;
 @property (nonatomic, copy) NSString *storeId;

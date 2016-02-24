@@ -84,11 +84,14 @@
     NSInteger i ,j ,count;
     NSObject *temp;
     count = mArray.count+1;
-    for (i = count - 1; i >= 0; i--) {
-        for (j= 0 ; j < i - 1 ; j++) {
+    for (i = count - 1; i >= 0; i--)
+    {
+        for (j= 0 ; j < i - 1 ; j++)
+        {
             ODCommunityModel *model1 = [self.dataArray objectAtIndex:j];
             ODCommunityModel *model2 = [self.dataArray objectAtIndex:j+1];
-            if ([model1.view_num compare:model2.view_num]<0) {
+            if ([model1.view_num compare:model2.view_num]<0)
+            {
                 temp = [mArray objectAtIndex:j];
                 [mArray replaceObjectAtIndex:j withObject:[mArray objectAtIndex:j+1]];
                 [mArray replaceObjectAtIndex:j+1 withObject:temp];
@@ -125,8 +128,8 @@
         weakSelf.cityListArray = mode.all;
         [weakSelf.collectionView reloadData];
         
-        
-    } failure:^(NSError *error)
+    }
+                   failure:^(NSError *error)
     {
         [SVProgressHUD dismiss];
     }];
@@ -184,7 +187,8 @@
             [weakSelf createCollectionView];
             [weakSelf.collectionView.mj_header endRefreshing];
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    }
+              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
         [SVProgressHUD dismiss];
 
@@ -209,7 +213,8 @@
     {
         [SVProgressHUD dismiss];
 
-        if (responseObject) {
+        if (responseObject)
+        {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSMutableArray *result = dict[@"result"];
             
@@ -217,7 +222,8 @@
             weakSelf.centerName = result[0][@"name"];
             [weakSelf getDefaultCenterTelRequest];
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    }
+                    failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
         [SVProgressHUD dismiss];
     }];
@@ -246,7 +252,8 @@
             
             weakSelf.centerTel = result[@"tel"];
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    }
+                    failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
         [SVProgressHUD dismiss];
     }];
@@ -409,7 +416,9 @@
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]])
     {
         
-    }else{
+    }
+    else
+    {
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -484,7 +493,8 @@
     [cell showDatasWithModel:model];
     
     CGFloat width=kScreenSize.width>320?90:70;
-    if (model.imgs_small.count) {
+    if (model.imgs_small.count)
+    {
         for (id vc in cell.picView.subviews)
         {
             [vc removeFromSuperview];
@@ -501,7 +511,9 @@
                 [cell.picView addSubview:imageButton];
             }
             cell.picViewConstraintHeight.constant = 2*width+5;
-        }else{
+        }
+        else
+        {
             for (NSInteger i = 0;i < model.imgs_small.count ; i++)
             {
                 NSDictionary *dict = model.imgs_small[i];
@@ -513,7 +525,8 @@
             }
             cell.picViewConstraintHeight.constant = width+(width+5)*((model.imgs_small.count-1)/3);
         }
-    }else
+    }
+    else
     {
         for (id vc in cell.picView.subviews)
         {
@@ -588,7 +601,8 @@
         
         [self.rsusableView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         
-    }else if ([kind isEqualToString:UICollectionElementKindSectionFooter])
+    }
+    else if ([kind isEqualToString:UICollectionElementKindSectionFooter])
     {
         [self.rsusableView.moreSkillButton addTarget:self action:@selector(moreSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -602,16 +616,20 @@
     if (model.imgs_small.count==0)
     {
         return 135;
-    }else if (model.imgs_small.count>0&&model.imgs_small.count<4)
+    }
+    else if (model.imgs_small.count>0&&model.imgs_small.count<4)
     {
         return 135+width;
-    }else if (model.imgs_small.count>=4&&model.imgs_small.count<7)
+    }
+    else if (model.imgs_small.count>=4&&model.imgs_small.count<7)
     {
         return 135+2*width+5;
-    }else if (model.imgs_small.count>=7&&model.imgs_small.count<9)
+    }
+    else if (model.imgs_small.count>=7&&model.imgs_small.count<9)
     {
         return 135+3*width+10;
-    }else
+    }
+    else
     {
         return 135+3*width+10;
     }
@@ -693,7 +711,8 @@ updatingLocation:(BOOL)updatingLocation
             if (result.length != 0) {
                 cityResult = [result substringToIndex:[result length] - 1];
             }
-        }else
+        }
+        else
         {
             cityResult = [result substringToIndex:[result length] - 1];
         }
