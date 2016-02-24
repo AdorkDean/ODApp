@@ -231,6 +231,7 @@
         self.servicePhoneButton.titleLabel.font = [UIFont systemFontOfSize:13.5];
         self.servicePhoneButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         [self.servicePhoneButton setTitleColor:[UIColor colorWithHexString:@"#3c63a2" alpha:1] forState:UIControlStateNormal];
+        [self.servicePhoneButton addTarget:self action:@selector(servicePhoneButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.servicePhoneView addSubview:self.servicePhoneButton];
         
         self.serviceTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.servicePhoneView.frame) + 1, KScreenWidth, drawBackHeight)];
@@ -472,6 +473,16 @@
         self.drawbackStateView.hidden = YES;
     }
 }
+
+- (void)servicePhoneButtonClick:(UIButton *)button
+{
+    NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.servicePhoneButton.titleLabel.text];
+    UIWebView *callWebView = [[UIWebView alloc] init];
+    [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
+    [self.view addSubview:callWebView];
+    
+}
+
 
 #pragma mark - 拒绝 按钮点击事件
 - (void)refuseButtonClick:(UIButton *)button
