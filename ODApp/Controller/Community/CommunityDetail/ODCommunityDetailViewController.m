@@ -110,6 +110,7 @@
 -(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)paramater
 {
     __weak typeof (self)weakSelf = self;
+     [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [self.manager GET:url parameters:paramater success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
             if (responseObject) {
@@ -128,10 +129,11 @@
                 [weakSelf joiningTogetherParmetersWithUserInfo:NO];
                 
                 
-                
             }
+        else
+        [SVProgressHUD dismiss];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+        [SVProgressHUD dismiss];
     }];
 }
 
@@ -242,6 +244,9 @@
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]]]];
         [self.imageArray addObject:image];
     }
+    
+    [SVProgressHUD dismiss];
+
     
     __weakSelf
     CGRect frame;

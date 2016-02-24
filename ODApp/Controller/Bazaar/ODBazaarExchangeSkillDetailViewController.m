@@ -82,7 +82,7 @@
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     __weakSelf;
-//    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
@@ -193,7 +193,8 @@
        
         [self.imageArray addObject:image];
     }
-    
+    [SVProgressHUD dismiss];
+
     CGRect frame;
     for (NSInteger i = 0; i < self.imageArray.count; i++) {
         UIImageView *imageView = [[UIImageView alloc]init];
