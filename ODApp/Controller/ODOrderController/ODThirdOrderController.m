@@ -435,7 +435,7 @@
 //动态设置区头的高度(根据不同的分区)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(kScreenSize.width, 90);
+    return CGSizeMake(kScreenSize.width, 120);
     
 }
 

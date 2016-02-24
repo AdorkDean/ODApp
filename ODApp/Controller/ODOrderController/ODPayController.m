@@ -155,7 +155,8 @@
         
         
         self.payView.priceLabel.text = [NSString stringWithFormat:@"%@元" , self.price];
-        
+        self.payView.priceLabel.textColor = [UIColor redColor];
+
         self.payView.orderPriceLabel.text = [NSString stringWithFormat:@"%@元" , self.price];
         
         [self.payView.payButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -220,10 +221,6 @@
 {
     
     
-    
-    NSLog(@"_____%@" , self.isPay);
-    
-  
     if ([self.payType isEqualToString:@"1"]) {
        
         
@@ -254,9 +251,6 @@
 {
     
     
-    
-    
-    
     PayReq *request = [[PayReq alloc] init];
     
     request.partnerId = self.model.partnerid;
@@ -270,10 +264,7 @@
     request.timeStamp = self.model.timeStamp;
 
     request.sign= self.model.sign;
-    
-  
-    [ODUserInformation sharedODUserInformation].orderId = [NSString stringWithFormat:@"%@" , self.model.out_trade_no];
-
+      
     [WXApi sendReq:request];
     
     
