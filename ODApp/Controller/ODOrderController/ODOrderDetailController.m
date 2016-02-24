@@ -562,7 +562,7 @@
 // 申请退款
 - (void)refundAction:(UIButton *)sender
 {
-     ODOrderDetailModel *model = self.dataArray[0];
+    ODOrderDetailModel *model = self.dataArray[0];
     ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
     
     vc.darwbackMoney = model.price;
