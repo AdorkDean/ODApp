@@ -7,6 +7,7 @@
 //
 
 #import "ODReleaseController.h"
+#import "ODBazaarExchangeSkillDetailViewController.h"
 
 
 NSString * const ODReleaseCellID = @"ODReleaseCell";
@@ -60,7 +61,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         {
             [weakSelf.collectionView.mj_footer noticeNoMoreData];
         }
-        for (id md in [model result])
+        for (ODReleaseModel *md in [model result])
         {
             if ([[weakSelf.dataArray valueForKeyPath:@"swap_id" ] containsObject:[md swap_id]])
             {
@@ -210,7 +211,10 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-
+    ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
+    ODReleaseModel *model = self.dataArray[indexPath.row];
+    vc.swap_id = model.swap_id;
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
 
