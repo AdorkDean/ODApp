@@ -375,15 +375,20 @@
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
         
     }else{
-        if ([type isEqualToString:@"2"]) {
-            ODSecondOrderController *vc  =[[ODSecondOrderController alloc] init];
+        if ([type isEqualToString:@"1"]) {
+            ODOrderController *vc  =[[ODOrderController alloc] init];
             vc.informationModel = model;
             [self.navigationController pushViewController:vc animated:YES];
-        }else{
-            ODOrderController *orderController = [[ODOrderController alloc]init];
+        }else if ([type isEqualToString:@"2"]) {
+            
+            ODSecondOrderController *orderController = [[ODSecondOrderController alloc]init];
             orderController.informationModel = model;
             [self.navigationController pushViewController:orderController animated:YES];
             
+        }else{
+            ODThirdOrderController *orderController = [[ODThirdOrderController alloc]init];
+            orderController.informationModel = model;
+            [self.navigationController pushViewController:orderController animated:YES];
         }
     }
 }
