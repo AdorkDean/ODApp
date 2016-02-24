@@ -35,6 +35,9 @@
 @property (nonatomic, copy) NSString *evaluateStar;
 @property (nonatomic , strong) UIScrollView *scroller;
 
+@property (nonatomic ,copy) NSString *phoneNumber;
+
+
 @end
 
 @implementation ODOrderDetailController
@@ -808,6 +811,9 @@
     self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
     self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.total_price];
     self.orderDetailView.typeLabel.text = self.orderType;
+    [self.orderDetailView.phoneButton addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     
     NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
     
@@ -818,6 +824,7 @@
         self.orderDetailView.swapTypeLabel.text = @"快递服务";
         self.orderDetailView.addressNameLabel.text = model.name;
         self.orderDetailView.addressPhoneLabel.text = model.tel;
+        self.phoneNumber = [NSString stringWithFormat:@"%@" , model.tel];
 
         
     }else{
@@ -826,7 +833,7 @@
         
         self.orderDetailView.addressNameLabel.text = dic[@"nick"];
         self.orderDetailView.addressPhoneLabel.text = dic[@"mobile"];
-
+        self.phoneNumber = [NSString stringWithFormat:@"%@" , dic[@"mobile"]];
         
         self.orderDetailView.serviceTimeLabel.text = model.service_time;
         self.orderDetailView.serviceTypeLabel.text = @"服务时间:";
@@ -890,7 +897,18 @@
 
 }
 
-
+// 打电话
+- (void)phoneAction:(UIButton *)sender
+{
+    
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.phoneNumber];
+    
+    UIWebView *callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [self.view addSubview:callWebview];
+    
+    
+}
 
 
 - (void)didReceiveMemoryWarning {

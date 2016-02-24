@@ -33,7 +33,7 @@
 
 @property (nonatomic , strong) UIScrollView *scroller;
 
-
+@property (nonatomic , copy) NSString *phoneNumber;
 @end
 
 @implementation ODSecondOrderDetailController
@@ -806,7 +806,8 @@
     [self.orderDetailView.contentButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , picDic[@"img_url"]]] forState:UIControlStateNormal];
     self.orderDetailView.nickLabel.text = userDic[@"nick"];
     
-  
+    [self.orderDetailView.phoneButton addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
+
     
     
     self.orderDetailView.contentLabel.text = model.title;
@@ -817,6 +818,10 @@
     self.orderDetailView.typeLabel.text = self.orderType;
     self.orderDetailView.addressNameLabel.text = model.name;
     self.orderDetailView.addressPhoneLabel.text = model.tel;
+    
+    
+    self.phoneNumber = [NSString stringWithFormat:@"%@" , model.tel];
+    
     self.orderDetailView.swapTypeLabel.text = @"上门服务";
     self.orderDetailView.serviceAddressLabel.text = model.address;
     self.orderDetailView.serviceTimeLabel.text = model.service_time;
@@ -867,6 +872,19 @@
     
     
     [self.scroller addSubview:self.orderDetailView];
+    
+    
+}
+
+// 打电话
+- (void)phoneAction:(UIButton *)sender
+{
+    
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",self.phoneNumber];
+    
+    UIWebView *callWebview = [[UIWebView alloc] init];
+    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
+    [self.view addSubview:callWebview];
     
     
 }
