@@ -21,12 +21,19 @@ NSString * const requestSuccessStatus = @"success";
 + (NSMutableDictionary *)getRequestParameter:(NSDictionary *)parameter
 {
     NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:parameter];
-    [dic setValuesForKeysWithDictionary:[ODAPIManager signParameters:parameter]];
-//    [dic setObject:[ODUserInformation sharedODUserInformation].openID forKey:@"open_id"];
-//    [dic setObject:[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID] forKey:@"city_id"];
-//    [dic setObject:@"iOS" forKey:@"platform"];
-//    [dic setObject:[ODAPPInfoTool APPVersion] forKey:@"app_version"];
-    return dic;
+    
+    dic[@"city_id"] = [NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID];
+    dic[@"device_id"] = @"";
+    dic[@"platform"] = @"iphone";
+    dic[@"platform_version"] = @"";
+    dic[@"channel"] = @"appstore";
+    dic[@"app_version"] = [ODAPPInfoTool APPVersion];
+    dic[@"network_type"] = @"";
+    dic[@"latitude"] = @"";
+    dic[@"longitude"] = @"";
+    dic[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
+    
+    return [ODAPIManager signParameters:dic];
 }
 
 

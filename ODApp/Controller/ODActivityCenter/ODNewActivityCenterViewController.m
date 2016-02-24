@@ -62,12 +62,8 @@ static NSString * const cellId = @"newActivityCell";
 {
     __weakSelf
     
-    NSString *cityId = [NSString stringWithFormat:@"%@" ,[ODUserInformation sharedODUserInformation].cityID ];
-    
-    
-    NSDictionary *parameter = @{@"city_id":cityId};
-    [SVProgressHUD showWithStatus:@"正在加载中。。"];
-    [ODHttpTool getWithURL:KActivityListUrl parameters:parameter modelClass:[ODActivityListModel class] success:^(id json)
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    [ODHttpTool getWithURL:KActivityListUrl parameters:@{} modelClass:[ODActivityListModel class] success:^(id json)
     {
         weakSelf.resultLists = [json result];
         [weakSelf.tableView.mj_header endRefreshing];

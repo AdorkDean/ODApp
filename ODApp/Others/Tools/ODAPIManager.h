@@ -19,7 +19,7 @@
  *
  *  @return 签名之后的参数
  */
-+ (NSDictionary*)signParameters:(NSDictionary*)parameters;
++ (NSMutableDictionary *)signParameters:(NSDictionary*)parameters;
 
 
 

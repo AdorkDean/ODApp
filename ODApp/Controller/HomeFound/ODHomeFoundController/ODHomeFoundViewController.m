@@ -133,18 +133,17 @@
 #pragma mark - 热门活动数据请求
 - (void)getScrollViewRequest
 {
-    NSDictionary *parameter = @{@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
-    
     __weakSelf
-    [ODHttpTool getWithURL:ODHomeFoundUrl parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model)
+    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];    [ODHttpTool getWithURL:ODHomeFoundUrl parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
      {
+         [SVProgressHUD dismiss];
          weakSelf.pictureArray = [[[model result]activitys]valueForKeyPath:@"detail_md5"];
          weakSelf.pictureIdArray = [[[model result]activitys] valueForKeyPath:@"id"];
          [weakSelf.collectionView reloadData];
      }
                    failure:^(NSError *error)
      {
-         
+         [SVProgressHUD dismiss];
      }];
 }
 
