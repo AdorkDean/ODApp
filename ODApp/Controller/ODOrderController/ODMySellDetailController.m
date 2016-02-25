@@ -386,8 +386,9 @@
     
     ODOrderDetailModel *model = self.dataArray[0];
     
-    NSMutableDictionary *dic = model.order_user;
-     NSMutableDictionary *dic2 = model.order_user;
+    NSMutableDictionary *dic = model.user;
+    NSMutableDictionary *dic2 = model.order_user;
+
     [self.orderDetailView.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , dic[@"avatar"]]] forState:UIControlStateNormal];
     self.orderDetailView.nickLabel.text = dic[@"nick"];
     
