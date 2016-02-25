@@ -228,12 +228,14 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     ODReleaseModel *model = self.dataArray[indexPath.row];
+    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {
+        ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
+        vc.swap_id = model.swap_id;
+        vc.nick = model.user[@"nick"];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
-    vc.swap_id = model.swap_id;
-    vc.nick = model.user[@"nick"];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 

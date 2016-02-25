@@ -53,10 +53,10 @@
 {
     [super viewWillAppear:animated];
     
-//    if (self.isRefresh) {
-//        [self.collectionView.mj_header beginRefreshing];
-//        self.isRefresh = NO;
-//    }
+    if (self.isRefresh) {
+        [self.collectionView.mj_header beginRefreshing];
+        self.isRefresh = NO;
+    }
     [self createRequest];
 }
 
