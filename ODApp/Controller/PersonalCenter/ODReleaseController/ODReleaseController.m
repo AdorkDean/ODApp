@@ -68,7 +68,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         if (model == nil)
         {
             weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
-            weakSelf.noReusltLabel.text = @"暂无发布任务";
+            weakSelf.noReusltLabel.text = @"暂无技能";
             weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
             weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
             weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
@@ -235,7 +235,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         vc.nick = model.user[@"nick"];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
 }
 
 

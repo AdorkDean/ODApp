@@ -85,7 +85,7 @@
             }
             if (weakSelf.dataArray.count == 0)
             {
-                weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30) text:@"暂无收藏记录" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30) text:@"暂无收藏" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [weakSelf.view addSubview:weakSelf.noReusltLabel];
             }
             

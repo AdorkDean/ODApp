@@ -221,7 +221,7 @@
             
             if (weakSelf.FirstDataArray.count == 0)
             {
-                weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无收到的评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [weakSelf.scrollView addSubview:weakSelf.firstLabel];
             }
             
@@ -282,7 +282,7 @@
                 
             if (weakSelf.secondDataArray.count == 0)
             {
-                weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160)/2 + KScreenWidth, kScreenSize.height/2, 160, 30) text:@"暂无收到的评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160)/2 + KScreenWidth, kScreenSize.height/2, 160, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [weakSelf.scrollView addSubview:weakSelf.secondLabel];
             }
             
