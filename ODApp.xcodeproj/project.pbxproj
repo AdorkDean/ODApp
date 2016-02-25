@@ -183,6 +183,7 @@
 		D46C90381C6043DA004942E7 /* ODNewActivityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D46C90371C6043DA004942E7 /* ODNewActivityCell.m */; };
 		D46C903F1C605841004942E7 /* ODNewActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D46C903E1C605841004942E7 /* ODNewActivityCell.xib */; };
 		D46CCC341C7E9A1A005D0A91 /* ODProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D46CCC331C7E9A1A005D0A91 /* ODProgressHUD.m */; };
+		D46CCC371C7EC184005D0A91 /* ODNetClosedView.m in Sources */ = {isa = PBXBuildFile; fileRef = D46CCC361C7EC184005D0A91 /* ODNetClosedView.m */; };
 		D49F5CC71C7D915D003F2C56 /* ODNewActivityCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D49F5CC61C7D915D003F2C56 /* ODNewActivityCenterViewController.m */; };
 		D4D0736E1C59B9FA008527C9 /* ODBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070D51C59B9FA008527C9 /* ODBaseViewController.m */; };
 		D4D073761C59B9FA008527C9 /* ODActivityDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D070EA1C59B9FA008527C9 /* ODActivityDetailController.m */; };
@@ -670,6 +671,8 @@
 		D46C903E1C605841004942E7 /* ODNewActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODNewActivityCell.xib; sourceTree = "<group>"; };
 		D46CCC321C7E9A1A005D0A91 /* ODProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODProgressHUD.h; sourceTree = "<group>"; };
 		D46CCC331C7E9A1A005D0A91 /* ODProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODProgressHUD.m; sourceTree = "<group>"; };
+		D46CCC351C7EC184005D0A91 /* ODNetClosedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNetClosedView.h; sourceTree = "<group>"; };
+		D46CCC361C7EC184005D0A91 /* ODNetClosedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNetClosedView.m; sourceTree = "<group>"; };
 		D49F5CC61C7D915D003F2C56 /* ODNewActivityCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewActivityCenterViewController.m; sourceTree = "<group>"; };
 		D4D070D41C59B9FA008527C9 /* ODBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBaseViewController.h; sourceTree = "<group>"; };
 		D4D070D51C59B9FA008527C9 /* ODBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBaseViewController.m; sourceTree = "<group>"; };
@@ -1804,8 +1807,8 @@
 		C64D45DB1C5F8C6F003BFFA0 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				9D1E2C7C1C786896000827B5 /* ODAPIManager.m */,
 				9D1E2C7D1C786896000827B5 /* ODAPIManager.h */,
+				9D1E2C7C1C786896000827B5 /* ODAPIManager.m */,
 				C64D45DE1C5F8C6F003BFFA0 /* ODClassMethod.h */,
 				C64D45DF1C5F8C6F003BFFA0 /* ODClassMethod.m */,
 				C64D45E01C5F8C6F003BFFA0 /* ODHelp.h */,
@@ -1816,6 +1819,8 @@
 				C64D45E31C5F8C6F003BFFA0 /* ODHttpTool.m */,
 				D46CCC321C7E9A1A005D0A91 /* ODProgressHUD.h */,
 				D46CCC331C7E9A1A005D0A91 /* ODProgressHUD.m */,
+				D46CCC351C7EC184005D0A91 /* ODNetClosedView.h */,
+				D46CCC361C7EC184005D0A91 /* ODNetClosedView.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -3005,6 +3010,7 @@
 				D4D073851C59B9FA008527C9 /* ODBindingMobileController.m in Sources */,
 				C64D45EB1C5F8C6F003BFFA0 /* IQUIView+Hierarchy.m in Sources */,
 				D4F76D901C61AE8C00D59F02 /* ODOrderController.m in Sources */,
+				D46CCC371C7EC184005D0A91 /* ODNetClosedView.m in Sources */,
 				D4D074FD1C59B9FA008527C9 /* ODhomeViewCollectionReusableView.m in Sources */,
 				D4D075201C59B9FA008527C9 /* ODTypeView.m in Sources */,
 				C64D46131C5F8C6F003BFFA0 /* ODClassMethod.m in Sources */,

@@ -10,7 +10,6 @@
 
 @interface ODNavigationController () <UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 
-@property (nonatomic, strong) id touchDelegate;
 
 @end
 
@@ -32,16 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _touchDelegate = self.interactivePopGestureRecognizer.delegate;
-    self.delegate = self;
-    self.interactivePopGestureRecognizer.enabled = NO;
-    
-    // 自己创建一个全屏手势,调用系统的滑动返回功能
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self.interactivePopGestureRecognizer.delegate action:@selector(handleNavigationTransition:)];
-    
-    pan.delegate = self;
-    
-    [self.view addGestureRecognizer:pan];
+    self.interactivePopGestureRecognizer.delegate = self;
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
@@ -57,8 +47,16 @@
 #pragma mark - <UIGestureRecognizerDelegate>
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
+    NSLog(@"%@",self.childViewControllers);
+    if (self.childViewControllers.count > 1)
+    {
+        [self popViewControllerAnimated:YES];
+        return NO;
+    }
     return self.childViewControllers.count > 1;
 }
+
+
 
 
 @end
