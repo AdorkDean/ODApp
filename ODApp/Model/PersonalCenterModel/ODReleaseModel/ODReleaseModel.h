@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSArray *imgs_small;
 @property (nonatomic, copy) NSString *open_id;
 @property (nonatomic, strong) NSDictionary *user;
+@property (nonatomic, copy) NSString *status;
 
 @end
 ODRequestResultIsArrayProperty(ODReleaseModel)

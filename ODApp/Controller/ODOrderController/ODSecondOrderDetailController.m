@@ -116,7 +116,6 @@
 {
     
     self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
-    
     self.scroller.userInteractionEnabled = YES;
     self.scroller.backgroundColor = [UIColor whiteColor];
     ODOrderDetailModel *model = self.dataArray[0];
@@ -127,7 +126,7 @@
         if (iPhone4_4S) {
             
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 300);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 350);
             
         }else if (iPhone5_5s){
             
@@ -138,13 +137,11 @@
         }else if (iPhone6_6s) {
             
             self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 130);
-
+            
             
         }else{
             
             self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height);
-
-            
             
         }
         
@@ -153,7 +150,7 @@
         
         
         if (iPhone4_4S) {
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 220);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 270);
             
         }else  if (iPhone5_5s){
             
@@ -163,29 +160,25 @@
             
             
             self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 100);
-
+            
             
         }else{
             
             self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height);
-
+            
             
         }
         
         
-        
-        
     }
     
-    
- 
     
     
     [self.view addSubview:self.scroller];
     
     
     
-    if ([status isEqualToString:@"3"]) {
+    if ([status isEqualToString:@"3"] || [status isEqualToString:@"2"]) {
          
         UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
         refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
@@ -198,38 +191,13 @@
         
         
         
-    }else if ([status isEqualToString:@"2"]) {
-        
-        
-        UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        refundButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-        [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
-        refundButton.titleLabel.font=[UIFont systemFontOfSize:13];
-        [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [refundButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:refundButton];
-        
-        
-        
-        
-        
-    }
-    
-    
-    
-    
-    else if ([status isEqualToString:@"1"]) {
-        
-        
+    }else if ([status isEqualToString:@"1"]) {
         
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
         cancelButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
         [cancelButton setBackgroundImage:[UIImage imageNamed:@"button_Cancel order"] forState:UIControlStateNormal];
-        
         [cancelButton addTarget:self action:@selector(cancelOrder:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelButton];
-        
         
         UIButton *payButton = [UIButton buttonWithType:UIButtonTypeSystem];
         payButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
@@ -240,13 +208,7 @@
         
         
         
-    }
-    
-    
-    else if ([status isEqualToString:@"4"]) {
-        
-        
-        
+    }else if ([status isEqualToString:@"4"]) {
         
         UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
         refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
@@ -272,7 +234,7 @@
         
         
         
-    }else if ([status isEqualToString:@"-5"]) {
+    }else if ([status isEqualToString:@"-5"] || [status isEqualToString:@"-3"] || [status isEqualToString:@"-4"]) {
         
         
         
@@ -287,24 +249,7 @@
         
         
         
-    }else if ([status isEqualToString:@"-3"]) {
-        
-        
-        
-        UIButton *reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-        [reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
-        reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
-        [reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:reasonButton];
-        
-        
-        
-    }
-    
-    
+    }    
     
     [self createView];
     
@@ -320,7 +265,6 @@
 {
     
     ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
-    
     ODOrderDetailModel *model = self.dataArray[0];
     vc.darwbackMoney = model.price;
     vc.order_id = self.order_id;
@@ -331,7 +275,17 @@
     vc.customerService = @"服务";
     vc.drawbackTitle = @"退款信息";
     vc.refuseReason = model.reject_reason;
-    vc.isRefuseReason = YES;
+    
+    if ([model.reject_reason isEqualToString:@""]) {
+        
+        vc.isRefuseReason = NO;
+        
+    }else{
+        
+        vc.isRefuseReason = YES;
+        vc.refuseReason = model.reject_reason;
+    }
+    
     
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -339,6 +293,7 @@
     
     
 }
+
 // 确认完成
 -(void)confirmAction:(UIButton *)sender
 {
@@ -383,7 +338,7 @@
     
 }
 
-
+// 创建评价界面
 - (void)createEvaluation
 {
     
@@ -470,7 +425,7 @@
 }
 
 
-
+// 评价
 - (void)determineButton:(UIButton *)sender
 {
     
@@ -530,14 +485,7 @@
         }];
         
         
-
-        
-        
     }
-    
-    
-    
-    
     
     
 }
@@ -554,27 +502,17 @@
 - (void)refundAction:(UIButton *)sender
 {
     
- 
-    
-        
-    
     ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
-    
-     ODOrderDetailModel *model = self.dataArray[0];
-    
-    
+    ODOrderDetailModel *model = self.dataArray[0];
     vc.darwbackMoney = model.price;
     vc.order_id = self.order_id;
     vc.isSelectReason = YES;
     vc.isRelease = YES;
     vc.confirmButtonContent = @"申请退款";
-      vc.drawbackTitle = @"申请退款";
-    
+    vc.drawbackTitle = @"申请退款";
     [self.navigationController pushViewController:vc animated:YES];
 
     
-    
-       
 }
 
 
@@ -769,15 +707,18 @@
         
         
         
+        self.orderDetailView.spaceToTop.constant = 120;
         
-        self.orderDetailView.spaceToTop.constant = 150;
         
         
-        UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, self.orderDetailView.serviceAddressLabel.frame.origin.y + 30, kScreenSize.width, 6)];
-        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-        [self.orderDetailView addSubview:line];
+        CGRect rect = [model.address boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 93,0)
+                                                  options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
+                                               attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]}
+                                                  context:nil];
         
-        UILabel *reason = [[UILabel alloc] initWithFrame:CGRectMake(18, line.frame.origin.y + 16, 100, 20)];
+        
+         //订单取消原因
+        UILabel *reason = [[UILabel alloc] initWithFrame:CGRectMake(18, self.orderDetailView.spaceLabel.frame.origin.y + rect.size.height, 100, 20)];
         reason.backgroundColor = [UIColor whiteColor];
         reason.font = [UIFont systemFontOfSize:14];
         reason.text = @"订单取消原因";
@@ -789,13 +730,19 @@
         [self.orderDetailView addSubview:secondLine];
         
         
-        UILabel *reasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, secondLine.frame.origin.y + 11, kScreenSize.width - 36, 50)];
+        UILabel *reasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, secondLine.frame.origin.y + 5, kScreenSize.width - 36, 50)];
         reasonLabel.backgroundColor = [UIColor whiteColor];
         reasonLabel.font = [UIFont systemFontOfSize:14];
         reasonLabel.numberOfLines = 0;
         reasonLabel.text = model.reason;
         reasonLabel.textAlignment = NSTextAlignmentLeft;
         [self.orderDetailView addSubview:reasonLabel];
+        
+        
+        
+        UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, reasonLabel.frame.origin.y + 55, kScreenSize.width, 6)];
+        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        [self.orderDetailView addSubview:line];
         
         
     }
@@ -812,7 +759,7 @@
     
     self.orderDetailView.contentLabel.text = model.title;
     self.orderDetailView.countLabel.text = [NSString stringWithFormat:@"%@" , model.num];
-    self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
+    self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.order_price , model.unit];
     self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.total_price];
     
     self.orderDetailView.typeLabel.text = self.orderType;
@@ -822,6 +769,9 @@
     
     
     self.orderDetailView.swapTypeLabel.text = @"上门服务";
+    
+    
+      
     self.orderDetailView.serviceAddressLabel.text = model.address;
     self.orderDetailView.serviceTimeLabel.text = model.service_time;
     self.orderDetailView.orderTimeLabel.text = model.order_created_at;
@@ -831,11 +781,14 @@
     
     
     if ([status isEqualToString:@"1"]) {
-        self.orderDetailView.typeLabel.text = @"已下单未付款";
+        self.orderDetailView.typeLabel.text = @"待支付";
+         self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
     }else if ([status isEqualToString:@"2"]) {
-        self.orderDetailView.typeLabel.text = @"已付款未发货";
+        self.orderDetailView.typeLabel.text = @"已付款";
+         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"3"]) {
         self.orderDetailView.typeLabel.text = @"已付款";
+         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"4"]) {
         
         if ([swap_type isEqualToString:@"2"]) {
@@ -857,15 +810,19 @@
         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"-1"]) {
         self.orderDetailView.typeLabel.text = @"已取消";
+         self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
     }else if ([status isEqualToString:@"-2"]) {
-        self.orderDetailView.typeLabel.text = @"买家已申请退款";
+        self.orderDetailView.typeLabel.text = @"已申请退款";
         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"-3"]) {
-        self.orderDetailView.typeLabel.text = @"退款已确认";
+        self.orderDetailView.typeLabel.text = @"退款已受理";
+        self.orderDetailView.typeLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"-4"]) {
         self.orderDetailView.typeLabel.text = @"已退款";
+         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"-5"]) {
         self.orderDetailView.typeLabel.text = @"拒绝退款";
+         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
     }
     
     
@@ -879,7 +836,7 @@
 - (void)phoneAction:(UIButton *)sender
 {
     ODOrderDetailModel *model = self.dataArray[0];
-    NSMutableDictionary *dic = model.order_user;
+    NSMutableDictionary *dic = model.user;
     
     NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",dic[@"mobile"]];
     

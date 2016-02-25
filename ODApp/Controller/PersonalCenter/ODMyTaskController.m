@@ -286,10 +286,8 @@
     
     if (sender.tag == 111) {
         
-    NSIndexPath *indexpath = [self.firstCollectionView indexPathForCell:cell];
-    ODBazaarModel *model = self.FirstDataArray[indexpath.row];
-    vc.open_id = model.open_id;
-    [self.navigationController pushViewController:vc animated:YES];
+        ;
+        
         
     }else{
         

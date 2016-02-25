@@ -10,9 +10,39 @@
 #import "ODSecondOrderController.h"
 @interface ODBazaarExchangeSkillDetailViewController ()
 
+@property(nonatomic,strong)NSOperationQueue *queue;
+@property(nonatomic,strong)NSMutableDictionary *imagesDic;
+@property(nonatomic,strong)NSMutableDictionary *operations;
+
 @end
 
 @implementation ODBazaarExchangeSkillDetailViewController
+
+-(NSOperationQueue *)queue
+{
+    if (_queue == nil) {
+        _queue = [[NSOperationQueue alloc]init];
+        _queue.maxConcurrentOperationCount = 5;
+    }
+    return _queue;
+}
+
+- (NSMutableDictionary *)imagesDic
+{
+    if (!_imagesDic)
+    {
+        _imagesDic = [NSMutableDictionary dictionary];
+    }
+    return _imagesDic;
+}
+
+-(NSMutableDictionary *)operations
+{
+    if (_operations == nil) {
+        _operations = [NSMutableDictionary dictionary];
+    }
+    return _operations;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -115,6 +145,15 @@
     [self.view addSubview:self.scrollView];
 }
 
+- (NSMutableArray *)imageArray
+{
+    if (!_imageArray)
+    {
+        self.imageArray = [[NSMutableArray alloc]init];
+    }
+    return _imageArray;
+}
+
 -(void)createUserInfoView
 {
     ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
@@ -192,18 +231,17 @@
     contentLabel.numberOfLines = 0;
     [self.detailView addSubview:contentLabel];
     
-    self.imageArray = [[NSMutableArray alloc]init];
     for (NSInteger i = 0; i < model.imgs_big.count; i++) {
         NSDictionary *dict = model.imgs_big[i];
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:dict[@"img_url"]]]];
-       
         [self.imageArray addObject:image];
     }
     
     [SVProgressHUD dismiss];
 
     CGRect frame;
-    for (NSInteger i = 0; i < self.imageArray.count; i++) {
+    for (NSInteger i = 0; i < self.imageArray.count; i++)
+    {
         UIImageView *imageView = [[UIImageView alloc]init];
         imageView.image = self.imageArray[i];
        
@@ -221,7 +259,9 @@
                 self.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+self.detailView.frame.size.height);
                 [self createLoveButton];
             }
-        }else{
+        }
+        else
+        {
             if (i==model.imgs_big.count-1) {
                 imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
                 self.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
@@ -239,6 +279,7 @@
         [self.detailView addSubview:imageView];
         [self.detailView addSubview:imageView];
     }
+
 }
 
 -(void)createLoveButton

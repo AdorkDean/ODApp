@@ -1,4 +1,4 @@
-//
+ //
 //  ODMyOrderCell.m
 //  ODApp
 //
@@ -87,6 +87,8 @@
         self.statusLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"-4"]) {
         self.statusLabel.text = @"已退款";
+        self.statusLabel.textColor = [UIColor redColor];
+
     }else if ([status isEqualToString:@"-5"]) {
         self.statusLabel.text = @"拒绝退款";
         self.statusLabel.textColor = [UIColor redColor];
@@ -172,6 +174,8 @@
         self.statusLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"-4"]) {
         self.statusLabel.text = @"已退款";
+        self.statusLabel.textColor = [UIColor redColor];
+
     }else if ([status isEqualToString:@"-5"]) {
         self.statusLabel.text = @"拒绝退款";
         self.statusLabel.textColor = [UIColor redColor];

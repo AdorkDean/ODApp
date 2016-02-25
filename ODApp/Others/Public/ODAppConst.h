@@ -22,6 +22,9 @@ UIKIT_EXTERN NSString * const KUserDefaultsOpenId;
 
 UIKIT_EXTERN NSString * const KUserDefaultsAvatar;
 
+UIKIT_EXTERN NSString * const KUserDefaultsMobile;
+
+
 UIKIT_EXTERN NSString * const kGetUMAppkey;
 UIKIT_EXTERN NSString * const kGetWXAppId;
 UIKIT_EXTERN NSString * const kGetWXAppSecret;

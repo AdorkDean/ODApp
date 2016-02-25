@@ -27,6 +27,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *payButton;
 
+@property (weak, nonatomic) IBOutlet UIImageView *treasureImageView;
+@property (weak, nonatomic) IBOutlet UILabel *treasureLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *treasurePayButton;
 

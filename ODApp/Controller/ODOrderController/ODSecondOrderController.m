@@ -15,6 +15,7 @@
 #import "ODOrderSecondHeadView.h"
 #import "ODAddressModel.h"
 #import "ODPayController.h"
+#import "ODNavigationController.h"
 @interface ODSecondOrderController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UITextViewDelegate>
 
 
@@ -285,7 +286,9 @@
     
     vc.addressId = self.addressId;
     
-    [self presentViewController:vc animated:YES completion:nil];
+    ODNavigationController *navi = [[ODNavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:navi animated:YES completion:nil];
+
     
 }
 

@@ -10,6 +10,7 @@
 #import "ODUserInformation.h"
 @interface ODMyOrderRecordController ()
 
+
 @end
 
 @implementation ODMyOrderRecordController
@@ -39,23 +40,18 @@
     
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationCancelOrder object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
     {
-//        [weakSelf.collectionView.mj_header beginRefreshing];
+        self.isRefresh = YES;
     }];
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-//    if (self.isRefresh) {
-//        [self.collectionView.mj_header beginRefreshing];
-//        self.isRefresh = NO;
-//    }
+    if (self.isRefresh) {
+        [self.collectionView.mj_header beginRefreshing];
+        self.isRefresh = NO;
+    }
     [self createRequest];
 }
 
@@ -65,6 +61,13 @@
     [self createRequest];
 }
 
+#pragma mark - 移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - 加载数据请求
 - (void)createRequest
 {
     self.manager = [AFHTTPRequestOperationManager manager];
@@ -74,17 +77,25 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
 
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:kMyOrderRecordUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [self.manager GET:kMyOrderRecordUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
         [weakSelf.noReusltLabel removeFromSuperview];
+        
+        if (self.count == 1)
+        {
+            [weakSelf.orderArray removeAllObjects];
+        }
         
         if (responseObject)
         {
+ 
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
             for (NSDictionary *itemDict in result)
             {
                 ODMyOrderRecordModel *model = [[ODMyOrderRecordModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
+
                 if (![[self.orderArray valueForKeyPath:@"order_id"]containsObject:model.order_id])
                 {
                     [weakSelf.orderArray addObject:model];
@@ -104,10 +115,10 @@
                 [weakSelf.collectionView.mj_footer noticeNoMoreData];
             }
         }
-        
         [weakSelf.collectionView reloadData];
 
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    }
+              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
@@ -115,7 +126,7 @@
     }];
 }
 
-#pragma mark - 创建CollectionView
+#pragma mark - Crate UICollectionView
 - (void)createCollectionView
 {
     UICollectionViewFlowLayout *flowLayout = [[ UICollectionViewFlowLayout alloc] init];
@@ -169,9 +180,9 @@
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
   
     vc.isOther = self.isOther;
-    vc.open_id = self.open_id;
+    vc.open_id = self.open_id;    
     vc.order_id = [NSString stringWithFormat:@"%@",model.order_id];
-
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 

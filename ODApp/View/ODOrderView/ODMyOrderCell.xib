@@ -15,7 +15,6 @@
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3i-TU-DeN">
                         <rect key="frame" x="18" y="10" width="30" height="30"/>
-                        <color key="backgroundColor" red="1" green="0.1849362474" blue="0.14802274000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="sSt-ug-Paw"/>
                             <constraint firstAttribute="height" constant="30" id="soP-Yn-Qpu"/>
@@ -33,7 +32,6 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbx-DT-bYo">
                         <rect key="frame" x="18" y="63" width="45" height="45"/>
-                        <color key="backgroundColor" red="1" green="0.1849362474" blue="0.14802274000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="45" id="UvQ-KP-ikc"/>
                             <constraint firstAttribute="height" constant="45" id="edw-30-oN8"/>

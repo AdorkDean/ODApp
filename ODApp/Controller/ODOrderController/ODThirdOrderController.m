@@ -168,7 +168,7 @@
     NSString *swap_id = [NSString stringWithFormat:@"%@" , self.informationModel.swap_id];
     
     
-    NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": @"" , @"user_address_id":@"0" , @"comment": @""};
+    NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time":self.headView.thirdOrderView.timeLabel.text , @"user_address_id":@"0" , @"comment": @""};
     
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weak typeof (self)weakSelf = self;
@@ -395,19 +395,34 @@
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
         [ self.choseTimeView addSubview:button];
     }
-    for (int i = 0; i < 3; i++) {
-        TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 80 + 3 *( self.choseTimeView.frame.size.height - 80) / 4,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4)];
-        button.tag = 888 + i + 12;
-        [button addTarget:self action:@selector(ChosetimeAction:) forControlEvents:UIControlEventTouchUpInside];
-        NSMutableDictionary *dic = timeArray[i + 12];
-        NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
-        if (![status isEqualToString:@"1"]) {
+    for (int i = 0; i < 4; i++) {
+        
+        
+        if (i == 3) {
+            TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 80 + 3 *( self.choseTimeView.frame.size.height - 80) / 4,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4)];
+         
             button.userInteractionEnabled = NO;
             button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+            [ self.choseTimeView addSubview:button];
+
+        }else{
+            TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 80 + 3 *( self.choseTimeView.frame.size.height - 80) / 4,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4)];
+            button.tag = 888 + i + 12;
+            [button addTarget:self action:@selector(ChosetimeAction:) forControlEvents:UIControlEventTouchUpInside];
+            NSMutableDictionary *dic = timeArray[i + 12];
+            NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
+            if (![status isEqualToString:@"1"]) {
+                button.userInteractionEnabled = NO;
+                button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+            }
+            [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
+            
+            [ self.choseTimeView addSubview:button];
+
         }
-        [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
         
-        [ self.choseTimeView addSubview:button];
+        
+        
     }
     
 }

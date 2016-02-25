@@ -32,7 +32,7 @@
     self.HUD.mode = MBProgressHUDModeText;
     self.HUD.labelText = title;
     
-    self.HUD.margin = 8.f;
+    self.HUD.margin = 10.f;
     self.HUD.yOffset = 150.f;
     self.HUD.removeFromSuperViewOnHide = YES;
     [self.HUD hide:YES afterDelay:afterDelay];
