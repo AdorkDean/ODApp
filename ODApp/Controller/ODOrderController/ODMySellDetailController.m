@@ -536,12 +536,8 @@
 - (void)phoneAction:(UIButton *)sender
 {
     
-    ODOrderDetailModel *model = self.dataArray[0];
     
-    NSMutableDictionary *dic = model.order_user;
-
-    
-    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",dic[@"mobile"]];
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@", self.orderDetailView.addressPhoneLabel.text];
     
     UIWebView *callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
