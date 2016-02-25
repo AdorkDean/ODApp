@@ -34,6 +34,15 @@
         
     }];
     [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
+        weakSelf.status = @"9";
+        [weakSelf.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
+        [weakSelf.collectionView.mj_header beginRefreshing];
+    }];
+    
+    
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationQuit object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
+        weakSelf.status = @"9";
+        [weakSelf.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [weakSelf.collectionView.mj_header beginRefreshing];
     }];
     

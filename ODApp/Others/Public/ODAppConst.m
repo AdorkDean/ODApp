@@ -60,6 +60,11 @@ NSString * const ODNotificationPayfail = @"ODNotificationPayfail";
 /**  支付失败通知 */
 NSString * const ODNotificationCancelOrder = @"ODNotificationCancelOrder";
 
+
+/**  退出成功刷新集市状态 */
+NSString * const ODNotificationQuit = @"ODNotificationQuit";
+
+
 /** 定位刷新 */
 NSString * const ODNotificationLocationSuccessRefresh = @"ODNotificationLocationSuccessRefresh";
 
