@@ -168,6 +168,8 @@
             
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0 title:@"已退出登录"];
             
+            [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationQuit object:self];
+            
             tabBar.selectedIndex = tabBar.currentIndex;
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];

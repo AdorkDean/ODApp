@@ -35,6 +35,7 @@
         self.genderImageView.image = [UIImage imageNamed:@"icon_woman"];
     }else{
         self.genderImageView.image = [UIImage imageNamed:@"icon_man"];
+        self.genderImgWidthConstant.constant = 6;
     }
 }
 - (CGFloat)height
