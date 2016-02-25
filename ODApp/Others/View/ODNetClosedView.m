@@ -55,8 +55,8 @@ Single_Implementation(ODNetClosedView)
 {
     [super layoutSubviews];
     self.imageView.center = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
-    self.label1.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) + 20, self.imageView.od_width,20);
-
+    self.label1.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) + 20, self.od_width,20);
+    self.label2.frame = CGRectMake(0, CGRectGetMaxY(self.label1.frame) + 20, self.od_width, 20);
     
 }
 
