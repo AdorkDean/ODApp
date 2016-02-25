@@ -57,6 +57,12 @@
     self.dataArray = [[NSMutableArray alloc]init];
 }
 
+#pragma mark - 移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
@@ -239,10 +245,7 @@
 }
 
 
--(void)dealloc
-{
-    [[NSNotificationCenter defaultCenter]removeObserver:self];
-}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

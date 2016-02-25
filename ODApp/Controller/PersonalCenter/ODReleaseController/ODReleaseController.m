@@ -48,6 +48,12 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     [self createRequestData];
 }
 
+#pragma mark - 移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - 加载数据请求
 - (void)createRequestData
 {
@@ -68,7 +74,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         if (model == nil)
         {
             weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
-            weakSelf.noReusltLabel.text = @"暂无发布任务";
+            weakSelf.noReusltLabel.text = @"暂无技能";
             weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
             weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
             weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
@@ -119,7 +125,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         }
         else
         {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.2f title:responseObject[@"message"]];
         }
     }
               failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
@@ -130,6 +136,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 #pragma mark - Action
 
+#pragma mark - 编辑 点击事件
 - (void)editButtonClick:(UIButton *)button
 {
     ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview.superview;
@@ -153,6 +160,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     }
 }
 
+#pragma mark - 删除 点击事件
 - (void)deleteButtonClick:(UIButton *)button
 {
     __weakSelf
@@ -228,14 +236,13 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 - (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     ODReleaseModel *model = self.dataArray[indexPath.row];
-    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {
-        ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
+    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {        
         vc.swap_id = model.swap_id;
         vc.nick = model.user[@"nick"];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
 }
 
 

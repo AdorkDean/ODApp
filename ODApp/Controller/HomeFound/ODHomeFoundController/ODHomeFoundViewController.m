@@ -100,6 +100,12 @@
     return mArray;
 }
 
+#pragma mark - 移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - 显示定位城市
 - (void)locationCity
 {

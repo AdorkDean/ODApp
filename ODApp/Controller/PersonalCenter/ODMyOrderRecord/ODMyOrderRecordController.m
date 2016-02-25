@@ -44,11 +44,6 @@
     }];
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -66,6 +61,13 @@
     [self createRequest];
 }
 
+#pragma mark - 移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - 加载数据请求
 - (void)createRequest
 {
     self.manager = [AFHTTPRequestOperationManager manager];
@@ -124,7 +126,7 @@
     }];
 }
 
-#pragma mark - 创建CollectionView
+#pragma mark - Crate UICollectionView
 - (void)createCollectionView
 {
     UICollectionViewFlowLayout *flowLayout = [[ UICollectionViewFlowLayout alloc] init];
