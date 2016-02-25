@@ -55,21 +55,24 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     if (self.pageCount == 1)
     {
         [self.dataArray removeAllObjects];
+        [self.noReusltLabel removeFromSuperview];
     }
     __weakSelf
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"my":@"1"};
     [ODHttpTool getWithURL:ODPersonalReleaseTaskUrl parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
-    {
+     {
+        
+
         [weakSelf.collectionView.mj_footer endRefreshing];
         
         if (model == nil)
         {
-            UILabel *noResultLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30)];
-            noResultLabel.text = @"暂无发布任务";
-            noResultLabel.font = [UIFont systemFontOfSize:16];
-            noResultLabel.textAlignment = NSTextAlignmentCenter;
-            noResultLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-            [weakSelf.view addSubview:noResultLabel];
+            weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
+            weakSelf.noReusltLabel.text = @"暂无发布任务";
+            weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
+            weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
+            weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+            [weakSelf.view addSubview:weakSelf.noReusltLabel];
         }
         if ([[model result]count] == 0)
         {
@@ -132,19 +135,22 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODReleaseModel *model = self.dataArray[indexPath.row];
-    ODBazaarReleaseSkillViewController *vc = [[ODBazaarReleaseSkillViewController alloc] init];
     
-    vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
-    vc.skillTitle = model.title;
-    vc.content = model.content;
-    vc.price = model.price;
-    vc.unit = model.unit;
-    vc.swap_type = [NSString stringWithFormat:@"%@",model.swap_type];
-    vc.type = @"编辑";
-    vc.imageArray = [model.imgs_small valueForKeyPath:@"img_url"];
-    [vc.strArray addObjectsFromArray:[model.imgs_small valueForKeyPath:@"md5"]];
-    
-    [self.navigationController pushViewController:vc animated:YES];
+    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {
+        ODBazaarReleaseSkillViewController *vc = [[ODBazaarReleaseSkillViewController alloc] init];
+        
+        vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
+        vc.skillTitle = model.title;
+        vc.content = model.content;
+        vc.price = model.price;
+        vc.unit = model.unit;
+        vc.swap_type = [NSString stringWithFormat:@"%@",model.swap_type];
+        vc.type = @"编辑";
+        vc.imageArray = [model.imgs_small valueForKeyPath:@"img_url"];
+        [vc.strArray addObjectsFromArray:[model.imgs_small valueForKeyPath:@"md5"]];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)deleteButtonClick:(UIButton *)button
@@ -206,7 +212,9 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     self.model = self.dataArray[indexPath.row];
     
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    
     [cell.editButton addTarget:self action:@selector(editButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+
     [cell.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell setModel:self.model];
     

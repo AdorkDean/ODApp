@@ -34,17 +34,29 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="28i-zF-3yr">
+                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="28i-zF-3yr">
                         <rect key="frame" x="0.0" y="95" width="400" height="43"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="onC-zl-J0C">
+                        <rect key="frame" x="312" y="20" width="80" height="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <constraints>
+                <constraint firstItem="28i-zF-3yr" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="O0Z-VH-jYK"/>
+                <constraint firstAttribute="trailing" secondItem="onC-zl-J0C" secondAttribute="trailing" constant="8" id="e0h-3j-qjv"/>
+                <constraint firstAttribute="trailing" secondItem="28i-zF-3yr" secondAttribute="trailing" id="jHA-1e-Elj"/>
+            </constraints>
             <size key="customSize" width="366" height="197"/>
             <connections>
                 <outlet property="contentLabel" destination="VYl-Dz-2Hp" id="jgE-bk-9lC"/>
                 <outlet property="editAndDeleteView" destination="28i-zF-3yr" id="xUV-Th-eVg"/>
+                <outlet property="illegalLabel" destination="onC-zl-J0C" id="KkF-Vs-Fa7"/>
                 <outlet property="lovesLabel" destination="qpy-B6-EjT" id="Okl-s2-mOQ"/>
                 <outlet property="priceLabel" destination="4ZI-Tp-aVk" id="GyP-h3-zu5"/>
                 <outlet property="titleImageView" destination="ffB-h2-Dmd" id="aHp-D1-XyQ"/>

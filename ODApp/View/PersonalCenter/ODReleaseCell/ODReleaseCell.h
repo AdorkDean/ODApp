@@ -21,6 +21,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *editAndDeleteView;
 
+@property (weak, nonatomic) IBOutlet UILabel *illegalLabel;
+
 @property (nonatomic, strong) UIButton *editButton;
 @property (nonatomic, strong) UIButton *deleteButton;;
 

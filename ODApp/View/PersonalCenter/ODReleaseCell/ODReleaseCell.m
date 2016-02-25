@@ -47,6 +47,9 @@
     self.halvingLineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KScreenWidth / 2 - 0.5, 15, 1, 13)];
     self.halvingLineImageView.image = [UIImage imageNamed:@"icon_separate"];
     [self.editAndDeleteView addSubview:self.halvingLineImageView];
+    
+    self.illegalLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    self.illegalLabel.font = [UIFont systemFontOfSize:14];
 }
 
 - (void)setModel:(ODReleaseModel *)model
@@ -57,6 +60,12 @@
     self.priceLabel.text = [NSString stringWithFormat:@"%@元/%@",model.price,model.unit];
     self.lovesLabel.text = [NSString stringWithFormat:@"%@  收藏",model.love_num];
     self.deleteButton.tag = [model.swap_id integerValue];
+    if ([[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {
+        self.illegalLabel.text = @"违规";
+    }
+    else{    
+        self.illegalLabel.text = @"";
+    }
 }
 
 @end

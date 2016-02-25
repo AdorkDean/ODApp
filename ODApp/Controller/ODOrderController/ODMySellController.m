@@ -24,6 +24,8 @@
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , copy) NSString *open_id;
 
+@property (nonatomic, strong) UILabel *noReusltLabel;
+
 
 @end
 
@@ -84,8 +86,8 @@
     
     NSDictionary *parameters = @{@"page":countNumber , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    __weak typeof (self)weakSelf = self;
+
+    __weakSelf
     [self.manager GET:kMySellListUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (responseObject) {
@@ -95,7 +97,8 @@
                 
                 
                 if ([countNumber isEqualToString:@"1"]) {
-                    [self.dataArray removeAllObjects];
+                    [weakSelf.dataArray removeAllObjects];
+                    [weakSelf.noReusltLabel removeFromSuperview];
                 }
                 
                 
@@ -104,9 +107,13 @@
                 for (NSMutableDictionary *miniDic in dic) {
                     ODMySellModel *model = [[ODMySellModel alloc] init];
                     [model setValuesForKeysWithDictionary:miniDic];
-                    [self.dataArray addObject:model];
+                    [weakSelf.dataArray addObject:model];
                 }
-                
+                if (weakSelf.dataArray.count == 0)
+                {
+                    weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30) text:@"暂无卖出纪录" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                    [weakSelf.view addSubview:weakSelf.noReusltLabel];
+                }
                 
                 
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
