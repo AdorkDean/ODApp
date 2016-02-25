@@ -120,7 +120,7 @@
         if (iPhone4_4S) {
             
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 300);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 350);
             
         }else if (iPhone5_5s){
             
@@ -139,7 +139,7 @@
         
         
         if (iPhone4_4S) {
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 220);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 270);
             
         }else  if (iPhone5_5s){
             
@@ -418,7 +418,7 @@
      [self.orderDetailView.contentButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , picDic[@"img_url"]]] forState:UIControlStateNormal];
       self.orderDetailView.contentLabel.text = model.title;
         self.orderDetailView.countLabel.text = [NSString stringWithFormat:@"%@" , model.num];
-    self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
+    self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.order_price , model.unit];
     self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.total_price];
     self.orderDetailView.typeLabel.text = self.orderType;
     self.orderDetailView.addressNameLabel.text = model.name;
@@ -427,6 +427,8 @@
   
 
     self.orderDetailView.swapTypeLabel.text = @"上门服务";
+    
+       
     
     self.orderDetailView.serviceAddressLabel.text = model.address;
     self.orderDetailView.serviceTimeLabel.text = model.service_time;

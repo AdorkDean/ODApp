@@ -126,7 +126,7 @@
         if (iPhone4_4S) {
             
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 300);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 350);
             
         }else if (iPhone5_5s){
             
@@ -152,7 +152,7 @@
         
         
         if (iPhone4_4S) {
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 220);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 270);
             
         }else  if (iPhone5_5s){
             
@@ -175,6 +175,7 @@
         
         
     }
+    
     
     
     
@@ -736,6 +737,7 @@
     ODOrderDetailModel *model = self.dataArray[0];
     NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
     NSMutableDictionary *dic = model.user;
+    NSMutableDictionary *dic2 = model.order_user;
     NSMutableArray *arr = model.imgs_small;
     NSMutableDictionary *picDic = arr[0];
     NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
@@ -789,7 +791,7 @@
     //订单名称
     self.orderDetailView.contentLabel.text = model.title;
     //订单单价
-    self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
+    self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.order_price , model.unit];
     // 订单总价
     self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.total_price];
     // 电话按钮
@@ -807,6 +809,7 @@
         
         self.orderDetailView.serviceTypeLabel.text = @"服务地址:";
         self.orderDetailView.swapTypeLabel.text = @"快递服务";
+        
         self.orderDetailView.serviceTimeLabel.text = model.address;
         self.orderDetailView.addressNameLabel.text = model.name;
         self.orderDetailView.addressPhoneLabel.text = model.tel;
@@ -816,8 +819,8 @@
         
         self.orderDetailView.serviceTypeLabel.text = @"服务时间:";
         self.orderDetailView.swapTypeLabel.text = @"线上服务";
-        self.orderDetailView.addressNameLabel.text = dic[@"nick"];
-        self.orderDetailView.addressPhoneLabel.text = dic[@"mobile"];
+        self.orderDetailView.addressNameLabel.text = dic2[@"nick"];
+        self.orderDetailView.addressPhoneLabel.text = dic2[@"mobile"];
         self.orderDetailView.serviceTimeLabel.text = model.service_time;
         
     }

@@ -125,7 +125,7 @@
         if (iPhone4_4S) {
             
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 300);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 350);
             
         }else if (iPhone5_5s){
             
@@ -139,16 +139,16 @@
             
             
         }
-            
-            
-      
+        
+        
+        
         
         
     }else{
         
         
         if (iPhone4_4S) {
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 220);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 270);
             
         }else  if (iPhone5_5s){
             
@@ -165,7 +165,6 @@
         
         
     }
-    
     
     
     
@@ -388,6 +387,7 @@
     ODOrderDetailModel *model = self.dataArray[0];
     
     NSMutableDictionary *dic = model.order_user;
+     NSMutableDictionary *dic2 = model.order_user;
     [self.orderDetailView.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@" , dic[@"avatar"]]] forState:UIControlStateNormal];
     self.orderDetailView.nickLabel.text = dic[@"nick"];
     
@@ -436,7 +436,7 @@
    
     self.orderDetailView.contentLabel.text = model.title;
     self.orderDetailView.countLabel.text = [NSString stringWithFormat:@"%@" , model.num];
-    self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
+    self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.order_price , model.unit];
     self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.total_price];
     self.orderDetailView.typeLabel.text = self.orderType;
     
@@ -452,6 +452,8 @@
         self.orderDetailView.addressPhoneLabel.text = model.tel;
         self.phoneNumber = [NSString stringWithFormat:@"%@" , model.tel];
         
+                
+        
         self.orderDetailView.serviceTimeLabel.text = model.address;
         self.orderDetailView.serviceTypeLabel.text = @"服务地址:";
         self.orderDetailView.swapTypeLabel.text = @"快递服务";
@@ -460,8 +462,8 @@
         
         NSMutableDictionary *dic = model.order_user;
         
-        self.orderDetailView.addressNameLabel.text = dic[@"nick"];
-        self.orderDetailView.addressPhoneLabel.text = dic[@"mobile"];
+        self.orderDetailView.addressNameLabel.text = dic2[@"nick"];
+        self.orderDetailView.addressPhoneLabel.text = dic2[@"mobile"];
 
         self.phoneNumber = [NSString stringWithFormat:@"%@" , dic[@"mobile"]];
 
