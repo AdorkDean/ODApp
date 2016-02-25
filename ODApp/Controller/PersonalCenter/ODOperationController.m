@@ -160,6 +160,11 @@
             [ODUserInformation sharedODUserInformation].avatar = @"";
             [user setObject:@"" forKey:KUserDefaultsAvatar];
             
+            [ODUserInformation sharedODUserInformation].mobile = @"";
+            [user setObject:@"" forKey:KUserDefaultsMobile];
+
+            
+            
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0 title:@"已退出登录"];
             
             tabBar.selectedIndex = tabBar.currentIndex;

@@ -381,12 +381,11 @@
     
     
     if (sender.tag == 111) {
+
         
-        NSIndexPath *indexpath = [self.firstCollectionView indexPathForCell:cell];
-        ODCommunityModel *model = self.FirstDataArray[indexpath.row];
-        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
-        vc.open_id = [self.firstUserInfoDic[userId]open_id];
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        ;
+        
         
     }else{
         

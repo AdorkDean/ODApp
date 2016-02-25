@@ -126,7 +126,10 @@ void UncaughtExceptionHandler(NSException *exception)
     NSString *avatar = [user objectForKey:KUserDefaultsAvatar];
     [ODUserInformation sharedODUserInformation].avatar = avatar ? avatar : @"";
 
-      
+    NSString *mobile = [user objectForKey:KUserDefaultsMobile];
+    [ODUserInformation sharedODUserInformation].avatar = mobile ? mobile : @"";
+
+    
     self.window.rootViewController = [[ODTabBarController alloc]init];
     
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];

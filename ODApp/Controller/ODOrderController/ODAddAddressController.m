@@ -54,7 +54,9 @@
     [self.view addSubview:self.addAddressView];
     
     
+ 
     
+      
     [self.addAddressView.defaultButton addTarget:self action:@selector(defaultAction:) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -77,6 +79,7 @@
     }else {
         self.addAddressView.addressTextView.text = @"请输入联系地址";
         self.addAddressView.addressTextView.textColor = [UIColor lightGrayColor];
+        self.addAddressView.phoneTextField.text = [ODUserInformation sharedODUserInformation].mobile;
 
     };
     
