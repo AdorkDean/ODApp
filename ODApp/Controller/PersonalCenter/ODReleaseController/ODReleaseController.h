@@ -33,6 +33,6 @@
 @property (nonatomic, assign) int pageCount;
 @property (nonatomic, assign) int pageSelectedCount;
 
-
+@property (nonatomic, strong) UILabel *noReusltLabel;
 
 @end
