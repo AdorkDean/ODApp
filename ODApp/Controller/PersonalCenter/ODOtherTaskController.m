@@ -15,6 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "ODBazaarDetailViewController.h"
 #import "ODTabBarController.h"
+#import "ODViolationsCell.h"
 @interface ODOtherTaskController ()
 
 <UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
@@ -55,7 +56,7 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
-        
+    [self.collectionView registerNib:[UINib nibWithNibName:@"ODViolationsCell" bundle:nil] forCellWithReuseIdentifier:@"item1"];
     
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self downRefresh];
@@ -155,65 +156,34 @@
     
     
     
-    ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
-    
-    
-    cell.userImageViewButton.layer.masksToBounds = YES;
-    cell.userImageViewButton.layer.cornerRadius = 30;
-    cell.userImageViewButton.layer.borderColor = [UIColor clearColor].CGColor;
-    cell.userImageViewButton.layer.borderWidth = 1;
-    
-  
     ODBazaarModel *model = self.dataArray[indexPath.row];
-  
-    [cell.userImageViewButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal];
+    NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
     
- 
-        cell.nickLabel.text = model.user_nick;
-        cell.titleLabel.text = model.title;
-        cell.contentLabel.text = model.content;
+    if ([status isEqualToString:@"-1"]) {
+        ODViolationsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item1" forIndexPath:indexPath];
+        
+        [cell.deleteButton removeFromSuperview];
+        cell.model = model;
+    
+        return cell;
         
         
-        NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
+    }else{
         
-        if ([status isEqualToString:@"1"]) {
-            cell.typeLabel.text = @"等待派单";
-            cell.typeLabel.textColor = [UIColor redColor];
-            
-        }else if ([status isEqualToString:@"2"]) {
-            
-            cell.typeLabel.text = @"进行中";
-        }else if ([status isEqualToString:@"3"]) {
-            
-            cell.typeLabel.text = @"交付";
-        }else if ([status isEqualToString:@"4"]) {
-            
-            cell.typeLabel.text = @"确认完成";
-        }else if ([status isEqualToString:@"-1"]) {
-            
-            cell.typeLabel.text = @"违规";
-        }else if ([status isEqualToString:@"-2"]) {
-            
-            cell.typeLabel.text = @"过期任务";
-            cell.typeLabel.textColor = [UIColor lightGrayColor];
-        }else if ([status isEqualToString:@"0"]) {
-            
-            cell.typeLabel.text = @"无效";
-        }
+        ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
+        
+        cell.model = model;
         
         
-        //设置Label显示不同大小的字体
-        NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];
-        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
-        [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:13] range:NSMakeRange(0, 5)];
-        cell.timeLabel.attributedText = noteStr;
+        return cell;
         
-        
-       
+    }
     
     
-    return cell;
+    
+    
+    
+   
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -233,12 +203,31 @@
 {
     
    
+    
+    
     ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
     ODBazaarModel *model = self.dataArray[indexPath.row];
-    bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
-    bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
-    bazaarDetail.task_status_name = model.task_status_name;
-    [self.navigationController pushViewController:bazaarDetail animated:YES];
+    
+    
+    NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
+    
+    if ([status isEqualToString:@"-1"]) {
+        
+                        ;
+    }else{
+        
+        bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
+        bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
+        bazaarDetail.task_status_name = model.task_status_name;
+        [self.navigationController pushViewController:bazaarDetail animated:YES];
+        
+    }
+    
+    
+    
+    
+    
+  
        
     
 }

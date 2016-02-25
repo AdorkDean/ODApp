@@ -28,6 +28,11 @@
     
     [self.view addSubview:self.withdrawalView];
     
+    
+    
+    NSLog(@"_____%@" ,self.navigationItem.title );
+    
+    
 }
 
 

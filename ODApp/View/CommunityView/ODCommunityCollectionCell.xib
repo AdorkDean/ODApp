@@ -92,7 +92,7 @@
                 <outlet property="signLabel" destination="HvG-In-Poa" id="EnQ-ly-LO3"/>
                 <outlet property="timeLabel" destination="alo-U0-Phx" id="fig-xz-w4Q"/>
             </connections>
-            <point key="canvasLocation" x="1004.5" y="423"/>
+            <point key="canvasLocation" x="614.5" y="366"/>
         </collectionViewCell>
     </objects>
 </document>

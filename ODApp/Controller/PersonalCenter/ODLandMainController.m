@@ -48,20 +48,23 @@
     if (![ODUserInformation sharedODUserInformation].openID.length)
         return;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"登录个人中心";
+   
+    
+    
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = YES;
+    self.navigationController.navigationBar.hidden = YES;
     [self getData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.hidden = NO;
 }
 #pragma mark - 请求数据
 - (void)getData

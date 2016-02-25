@@ -25,6 +25,11 @@
 
 -(void)showDateWithModel:(ODCommunityModel *)model
 {
+    
+  
+    
+  
+   
     self.timeLabel.text = model.created_at;
     self.contentLabel.text = model.content;
 }
