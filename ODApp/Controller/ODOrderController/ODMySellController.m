@@ -13,6 +13,7 @@
 #import "ODAPIManager.h"
 #import "ODMyOrderCell.h"
 #import "ODMySellDetailController.h"
+#import "ODSecondMySellDetailController.h"
 @interface ODMySellController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
@@ -22,6 +23,8 @@
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , copy) NSString *open_id;
+
+@property (nonatomic, strong) UILabel *noReusltLabel;
 
 
 @end
@@ -83,8 +86,8 @@
     
     NSDictionary *parameters = @{@"page":countNumber , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    __weak typeof (self)weakSelf = self;
+
+    __weakSelf
     [self.manager GET:kMySellListUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (responseObject) {
@@ -94,7 +97,8 @@
                 
                 
                 if ([countNumber isEqualToString:@"1"]) {
-                    [self.dataArray removeAllObjects];
+                    [weakSelf.dataArray removeAllObjects];
+                    [weakSelf.noReusltLabel removeFromSuperview];
                 }
                 
                 
@@ -103,9 +107,13 @@
                 for (NSMutableDictionary *miniDic in dic) {
                     ODMySellModel *model = [[ODMySellModel alloc] init];
                     [model setValuesForKeysWithDictionary:miniDic];
-                    [self.dataArray addObject:model];
+                    [weakSelf.dataArray addObject:model];
                 }
-                
+                if (weakSelf.dataArray.count == 0)
+                {
+                    weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30) text:@"暂无订单" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                    [weakSelf.view addSubview:weakSelf.noReusltLabel];
+                }
                 
                 
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
@@ -203,10 +211,12 @@
     NSString *orderId = [NSString stringWithFormat:@"%@" , model.order_id];
 
     
+ 
+    
     
     
     if ([swap_type isEqualToString:@"1"]) {
-        ODMySellDetailController *vc = [[ODMySellDetailController alloc] init];
+        ODSecondMySellDetailController *vc = [[ODSecondMySellDetailController alloc] init];
         vc.orderType = model.status_str;
         vc.orderId = orderId;
         [self.navigationController pushViewController:vc animated:YES];

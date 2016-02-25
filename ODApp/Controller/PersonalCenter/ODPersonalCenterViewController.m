@@ -173,15 +173,22 @@
             
             
             NSMutableDictionary *dic = responseObject[@"result"];
+            
+            
+            
+            
+            
             NSString *openId = dic[@"open_id"];
             NSString *avatar = dic[@"avatar"];
+            NSString *mobile = dic[@"mobile"];
             
             [ODUserInformation sharedODUserInformation].openID = openId;
-            
+            [ODUserInformation sharedODUserInformation].mobile = mobile;
 
             NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
             [user setObject:openId forKey:KUserDefaultsOpenId];
             [user setObject:avatar forKey:KUserDefaultsAvatar];
+            [user setObject:mobile forKey:KUserDefaultsMobile];
             
             [weakSelf dismissViewControllerAnimated:YES completion:^{
                 ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;

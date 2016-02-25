@@ -25,10 +25,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7D-BI-S2g">
-                        <rect key="frame" x="350" y="10" width="20" height="20"/>
+                        <rect key="frame" x="363" y="10" width="15" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="FyG-wm-C28"/>
-                            <constraint firstAttribute="width" constant="20" id="pXt-lW-lDV"/>
+                            <constraint firstAttribute="height" constant="15" id="FyG-wm-C28"/>
+                            <constraint firstAttribute="width" constant="15" id="pXt-lW-lDV"/>
                         </constraints>
                         <state key="normal" title="Button" image="场地预约icon2"/>
                     </button>
@@ -37,7 +37,7 @@
             </view>
             <constraints>
                 <constraint firstItem="A7D-BI-S2g" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="cR1-Fj-6JB"/>
-                <constraint firstAttribute="trailing" secondItem="A7D-BI-S2g" secondAttribute="trailing" constant="18" id="eZl-nT-eox"/>
+                <constraint firstAttribute="trailing" secondItem="A7D-BI-S2g" secondAttribute="trailing" constant="10" id="eZl-nT-eox"/>
                 <constraint firstItem="3uU-1p-nuw" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="jBX-DP-QJc"/>
                 <constraint firstItem="3uU-1p-nuw" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="uWy-Tv-A5h"/>
             </constraints>

@@ -350,7 +350,13 @@
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
     picController.photos = model.imgs;
     picController.selectedIndex = button.tag-10*indexPath.row;
-    [self.navigationController pushViewController:picController animated:YES];
+   [self presentViewController:picController animated:YES completion:nil];
+    
+ 
+   
+    
+    
+    
 }
 
 -(void)secondImageButtonClick:(UIButton *)button
@@ -361,7 +367,8 @@
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
     picController.photos = model.imgs;
     picController.selectedIndex = button.tag-10*indexPath.row;
-    [self.navigationController pushViewController:picController animated:YES];
+    [self presentViewController:picController animated:YES completion:nil];
+
 }
 
 
@@ -374,12 +381,11 @@
     
     
     if (sender.tag == 111) {
+
         
-        NSIndexPath *indexpath = [self.firstCollectionView indexPathForCell:cell];
-        ODCommunityModel *model = self.FirstDataArray[indexpath.row];
-        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
-        vc.open_id = [self.firstUserInfoDic[userId]open_id];
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        ;
+        
         
     }else{
         

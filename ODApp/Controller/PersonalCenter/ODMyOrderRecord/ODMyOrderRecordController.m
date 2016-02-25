@@ -10,6 +10,7 @@
 #import "ODUserInformation.h"
 @interface ODMyOrderRecordController ()
 
+
 @end
 
 @implementation ODMyOrderRecordController
@@ -25,28 +26,22 @@
     self.orderArray = [[NSMutableArray alloc] init];    
 
     [self createCollectionView];
-    [self createRequest];
-    [self joiningTogetherParmeters];
-    
+//    [self createRequest];
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
-    {
-        [weakSelf joiningTogetherParmeters];
-    }];
+                                     {
+                                         self.count = 1;
+                                         [weakSelf createRequest];
+                                     }];
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^
-    {
-        [weakSelf loadMoreData];
-    }];
+                                     {
+                                         [weakSelf loadMoreData];
+                                     }];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationCancelOrder object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
     {
-//        [weakSelf.collectionView.mj_header beginRefreshing];
+        self.isRefresh = YES;
     }];
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -63,53 +58,55 @@
 - (void)loadMoreData
 {
     self.count ++;
-    NSDictionary *parameter = @{@"open_id":self.open_id,@"page":[NSString stringWithFormat:@"%ld",(long)self.count]};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kMyOrderRecordUrl paramater:signParameter];
+    [self createRequest];
 }
 
+#pragma mark - 移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - 加载数据请求
 - (void)createRequest
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-}
-
--(void)joiningTogetherParmeters
-{
-    self.count = 1;
+    
     NSDictionary *parameter = @{@"open_id":self.open_id,@"page":[NSString stringWithFormat:@"%ld",(long)self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kMyOrderRecordUrl paramater:signParameter];
-}
-
--(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)parameter
-{
 
     __weak typeof (self)weakSelf = self;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
-    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        [SVProgressHUD dismiss];
+    [self.manager GET:kMyOrderRecordUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
         [weakSelf.noReusltLabel removeFromSuperview];
-        if (weakSelf.count == 1)
+        
+        if (self.count == 1)
         {
             [weakSelf.orderArray removeAllObjects];
         }
+        
         if (responseObject)
         {
+ 
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];
             for (NSDictionary *itemDict in result)
             {
                 ODMyOrderRecordModel *model = [[ODMyOrderRecordModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.orderArray addObject:model];
+
+                if (![[self.orderArray valueForKeyPath:@"order_id"]containsObject:model.order_id])
+                {
+                    [weakSelf.orderArray addObject:model];
+                }
             }
             if (weakSelf.orderArray.count == 0)
             {
                 weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无预约" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [weakSelf.view addSubview:weakSelf.noReusltLabel];
             }
-            [weakSelf.collectionView reloadData];
+            
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
             
@@ -118,16 +115,18 @@
                 [weakSelf.collectionView.mj_footer noticeNoMoreData];
             }
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+        [weakSelf.collectionView reloadData];
+
+    }
+              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-        [SVProgressHUD dismiss];
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
-#pragma mark - 创建CollectionView
+#pragma mark - Crate UICollectionView
 - (void)createCollectionView
 {
     UICollectionViewFlowLayout *flowLayout = [[ UICollectionViewFlowLayout alloc] init];
@@ -140,8 +139,8 @@
     self.collectionView.dataSource = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODMyOrderRecordCell" bundle:nil] forCellWithReuseIdentifier:kMyOrderRecordCellId];
-    
-    [self.view addSubview:self.collectionView];
+
+    [self.view addSubview:self.collectionView];    
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -181,9 +180,9 @@
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
   
     vc.isOther = self.isOther;
-    vc.open_id = self.open_id;
+    vc.open_id = self.open_id;    
     vc.order_id = [NSString stringWithFormat:@"%@",model.order_id];
-
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 

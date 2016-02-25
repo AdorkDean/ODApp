@@ -11,4 +11,11 @@
 @implementation ODUserInformation
 Single_Implementation(ODUserInformation)
 
+-(void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    
+}
+
+
+
 @end

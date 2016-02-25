@@ -37,6 +37,7 @@
 @property (nonatomic , strong) UILabel *secondLabel;
 
 
+
 @end
 
 @implementation ODEvaluationController
@@ -218,6 +219,12 @@
                 
             }
             
+            if (weakSelf.FirstDataArray.count == 0)
+            {
+                weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [weakSelf.scrollView addSubview:weakSelf.firstLabel];
+            }
+            
             [weakSelf.firstCollectionView.mj_header endRefreshing];
             [weakSelf.firstCollectionView.mj_footer endRefreshing];
             [weakSelf.firstCollectionView reloadData];
@@ -273,8 +280,11 @@
                     
                 }
                 
-
-            
+            if (weakSelf.secondDataArray.count == 0)
+            {
+                weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160)/2 + KScreenWidth, kScreenSize.height/2, 160, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [weakSelf.scrollView addSubview:weakSelf.secondLabel];
+            }
             
             [weakSelf.secondCollectionView.mj_header endRefreshing];
             [weakSelf.secondCollectionView.mj_footer endRefreshing];

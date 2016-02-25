@@ -39,7 +39,6 @@
     // Do any additional setup after loading the view.
     
     self.payType = @"1";
-    
     self.navigationItem.title = @"支付订单";
     [self.view addSubview:self.payView];
     [self getData];
@@ -63,13 +62,11 @@
 }
 
 
-- (void)failPay:(NSNotification *)text{
-    
-    
+- (void)failPay:(NSNotification *)text
+{
     
     NSString *code = text.userInfo[@"codeStatus"];
     self.isPay = @"2";
-    
     [self getDatawithCode:code];
     
     
@@ -80,9 +77,6 @@
 
 - (void)successPay:(NSNotification *)text
 {
-    
-    
-    
     NSString *code = text.userInfo[@"codeStatus"];
     self.isPay = @"1";
     [self getDatawithCode:code];
@@ -147,17 +141,15 @@
         self.payView = [ODPayView getView];
         self.payView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
         
-        [self.payView.weixinPaybutton addTarget:self action:@selector(weixinPayAction:) forControlEvents:UIControlEventTouchUpInside];
+      
         
-         [self.payView.treasurePayButton addTarget:self action:@selector(treasurePayAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.payView.weixinPaybutton addTarget:self action:@selector(weixinPayAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.payView.treasurePayButton addTarget:self action:@selector(treasurePayAction:) forControlEvents:UIControlEventTouchUpInside];
                 
         self.payView.orderNameLabel.text = self.OrderTitle;
-        
-        
         self.payView.priceLabel.text = [NSString stringWithFormat:@"%@元" , self.price];
-        
+        self.payView.priceLabel.textColor = [UIColor redColor];
         self.payView.orderPriceLabel.text = [NSString stringWithFormat:@"%@元" , self.price];
-        
         [self.payView.payButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
@@ -168,39 +160,25 @@
 
 - (void)getData
 {
+    
     self.manager = [AFHTTPRequestOperationManager manager];
-    
-    
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     
-  
-    
-      
     NSDictionary *parameters = @{@"bbs_order_id":self.orderId, @"open_id":openId};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    
     
     [self.manager GET:kGetPayInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
-        if (responseObject) {
+    if (responseObject) {
           
             
             NSMutableDictionary *dic = responseObject[@"result"];
-
-                   
-             self.model = [[ODPayModel alloc] init];
-            
-          
+            self.model = [[ODPayModel alloc] init];
             [self.model setValuesForKeysWithDictionary:dic];
             
             
-            
-            
-            
-            
-            
+        
         }
         
        
@@ -219,31 +197,39 @@
 - (void)payAction:(UIButton *)sender
 {
     
-    
-    
-    NSLog(@"_____%@" , self.isPay);
-    
-  
     if ([self.payType isEqualToString:@"1"]) {
-       
+        if ([self.isPay isEqualToString:@"1"]) {
+            
+            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"该订单已支付"];
+            
+            
+        }else{
+            
+            [self payMoney];
+            
+            
+            
+        }
+
+    }else{
+        
         
         if ([self.isPay isEqualToString:@"1"]) {
             
             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"该订单已支付"];
-
-
+            
+            
         }else{
             
-            [self payMoney];
-
+             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"支付宝支付暂未开放"];
+            
             
             
         }
-        
-        
-        
+
         
     }
+        
     
     
     
@@ -252,9 +238,6 @@
 
 - (void)payMoney
 {
-    
-    
-    
     
     
     PayReq *request = [[PayReq alloc] init];
@@ -270,10 +253,7 @@
     request.timeStamp = self.model.timeStamp;
 
     request.sign= self.model.sign;
-    
-  
-    [ODUserInformation sharedODUserInformation].orderId = [NSString stringWithFormat:@"%@" , self.model.out_trade_no];
-
+      
     [WXApi sendReq:request];
     
     

@@ -41,7 +41,6 @@
     userInfoDic = [NSMutableDictionary dictionary];
     
     [self getLocationCityRequest];
-    
     [self createCollectionView];
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
@@ -101,16 +100,16 @@
     return mArray;
 }
 
+#pragma mark - 移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - 显示定位城市
 - (void)locationCity
 {
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
-}
-
-#pragma mark - 定位城市按钮
-- (void)CreateLocationButtonAction
-{
-    [self.locationButton addTarget:self action:@selector(locationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - Request Data
@@ -120,18 +119,14 @@
 {
     __weakSelf
     NSDictionary *parameter = @{@"region_name":@""};
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
     {
-        [SVProgressHUD dismiss];
         ODLocationModel *mode = [model result];
         weakSelf.cityListArray = mode.all;
         [weakSelf.collectionView reloadData];
-        
     }
                    failure:^(NSError *error)
     {
-        [SVProgressHUD dismiss];
     }];
 }
 
@@ -142,18 +137,15 @@
     [weakSelf.pictureArray removeAllObjects];
     [weakSelf.pictureIdArray removeAllObjects];
     [weakSelf.collectionView reloadData];
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [ODHttpTool getWithURL:ODHomeFoundUrl parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
      {
-         [SVProgressHUD dismiss];
-         
          [weakSelf.pictureArray addObjectsFromArray:[[[model result]activitys]valueForKeyPath:@"detail_md5"]];
          [weakSelf.pictureIdArray addObjectsFromArray:[[[model result]activitys] valueForKeyPath:@"id"]];
          [weakSelf.collectionView reloadData];
      }
                    failure:^(NSError *error)
      {
-         [SVProgressHUD dismiss];
+         
      }];
 }
 
@@ -166,12 +158,9 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     
     [self.manager GET:ODHomeChangeSkillUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-        [SVProgressHUD dismiss];
-
         [weakSelf.dataArray removeAllObjects];
         if (responseObject)
         {
@@ -190,8 +179,6 @@
     }
               failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-        [SVProgressHUD dismiss];
-
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
@@ -207,12 +194,9 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
 
     [self.centerManager GET:ODStoreListUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-        [SVProgressHUD dismiss];
-
         if (responseObject)
         {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -225,7 +209,7 @@
     }
                     failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-        [SVProgressHUD dismiss];
+        
     }];
 }
 
@@ -239,12 +223,9 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
 
     [self.centerManager GET:ODStoreDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-        [SVProgressHUD dismiss];
-
         if (responseObject)
         {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -255,7 +236,7 @@
     }
                     failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-        [SVProgressHUD dismiss];
+        
     }];
 }
 
@@ -293,22 +274,22 @@
 
 - (void)findFavorableButtonClick:(UIButton *)button
 {
+    ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)findJobButtonClick:(UIButton *)button
+{
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""])
     {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
     }
     else
-    {
-        ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
+    {    
+        ODFindJobController *vc = [[ODFindJobController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
-}
-
-- (void)findJobButtonClick:(UIButton *)button
-{
-    ODFindJobController *vc = [[ODFindJobController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)searchCircleButtonClick:(UIButton *)button
@@ -345,7 +326,8 @@
     {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
-    }else
+    }
+    else
     {
         ODNewActivityDetailViewController *vc = [[ODNewActivityDetailViewController alloc] init];
         vc.acitityId = [self.pictureIdArray[button.tag - 100] intValue];
@@ -471,10 +453,10 @@
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-//    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
-//    {
-//        [weakSelf refreshdata];
-//    }];
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
+    {
+        [weakSelf refreshdata];
+    }];
 
     [self.view addSubview:self.collectionView];
 }
@@ -577,7 +559,8 @@
             if (i < self.pictureArray.count - 1)
             {
                 imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7/12 * i, 0, (kScreenSize.width - 15) * 7/12 - 8, 120)];
-            }else
+            }
+            else
             {
                 imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7/12 * i, 0, (kScreenSize.width - 15) * 7/12, 120)];
             }
@@ -716,7 +699,8 @@ updatingLocation:(BOOL)updatingLocation
         if (result.length == 0)
         {
             result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
-            if (result.length != 0) {
+            if (result.length != 0)
+            {
                 cityResult = [result substringToIndex:[result length] - 1];
             }
         }

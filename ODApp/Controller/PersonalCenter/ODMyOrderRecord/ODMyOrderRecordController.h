@@ -37,6 +37,7 @@
 
 @property (nonatomic, assign) NSInteger count;
 
+
 @property (nonatomic, assign) BOOL isRefresh;
 
 @property (nonatomic, strong) ODMyOrderRecordCell *orderRecordCell;

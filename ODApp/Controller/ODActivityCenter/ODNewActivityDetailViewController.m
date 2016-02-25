@@ -6,7 +6,6 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 #import "masonry.h"
-#import "svprogressHud.h"
 #import "UIImageView+WebCache.h"
 #import "ODActivityDetailModel.h"
 #import "ODNewActivityDetailViewController.h"
@@ -311,7 +310,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 -(void)requestData
 {
      __weakSelf
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
+    [ODProgressHUD showProgressIsLoading];
     NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue]};
     [ODHttpTool getWithURL:KActivityDetailUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
      {
@@ -320,7 +319,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
      }
                    failure:^(NSError *error)
      {
-         [SVProgressHUD dismiss];
+         [ODProgressHUD dismiss];
      }];
 }
 
@@ -332,7 +331,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     self.reportButton.enabled = (self.resultModel.apply_status != 1) && (self.resultModel.apply_status != -6) && (self.resultModel.apply_status != -4);
     [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
     {
-        [SVProgressHUD dismiss];
+        [ODProgressHUD dismiss];
         if (!image)
         {
             weakSelf.headImageView.od_height = 0;
@@ -447,7 +446,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         {
             if (self.resultModel.is_online == 1)
             {
-                [SVProgressHUD showInfoWithStatus:@"亲，这个是线上活动噢！" maskType:(SVProgressHUDMaskTypeBlack)];
+                [ODProgressHUD showInfoWithStatus:@"亲，这个是线上活动噢！"];
             }
             else
             {
@@ -574,18 +573,18 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 - (void)reportRequest
 {
     NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id", nil];
-    [SVProgressHUD showWithStatus:@"正在报名。。。"];
+    [ODProgressHUD showProgressWithStatus:@"正在报名"];
     [ODHttpTool getWithURL:KActivityApplyUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
      {
          [self requestData];
          self.reportButton.enabled = NO;
 
-         [SVProgressHUD showSuccessWithStatus:@"报名成功"];
+         [ODProgressHUD showSuccessWithStatus:@"报名成功"];
          [ODNewActivityCenterViewController sharedODNewActivityCenterViewController].needRefresh = YES;
      }
                    failure:^(NSError *error)
      {
-         [SVProgressHUD dismiss];
+         [ODProgressHUD dismiss];
      }];
 }
 
@@ -602,7 +601,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"obj_id",@"4" ,@"type",@"微信",@"share_platform", nil];
         [ODHttpTool getWithURL:kCallbackUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
          {
-            [SVProgressHUD showSuccessWithStatus:@"分享成功"];
+            [ODProgressHUD showSuccessWithStatus:@"分享成功"];
              
          }
                        failure:^(NSError *error)

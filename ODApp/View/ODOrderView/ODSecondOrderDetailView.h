@@ -10,6 +10,14 @@
 
 @interface ODSecondOrderDetailView : UIView
 
+
+@property (weak, nonatomic) IBOutlet UILabel *firstLabel;
+
+
+@property (weak, nonatomic) IBOutlet UILabel *secondLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *thirdLabel;
+
 @property (weak, nonatomic) IBOutlet UIButton *phoneButton;
 
 
@@ -37,6 +45,7 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *spaceToTop;
 
+@property (weak, nonatomic) IBOutlet UILabel *spaceLabel;
 
 
 

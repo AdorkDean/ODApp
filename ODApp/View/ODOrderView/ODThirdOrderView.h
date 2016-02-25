@@ -10,6 +10,9 @@
 
 @interface ODThirdOrderView : UIView
 
+@property (weak, nonatomic) IBOutlet UILabel *lineLabel;
+
+
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 

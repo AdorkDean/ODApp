@@ -51,12 +51,11 @@
                                           attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]}
                                              context:nil];
     self.contentLabel.frame = CGRectMake(10, 10, self.contentView.frame.size.width - 20, rect.size.height);
-    self.contentLabel.text = model.comment;
-    
+    self.contentLabel.text = [NSString stringWithFormat:@"%@" , model.comment];
   
     
     
-    self.contentLabel.text = model.comment;
+  
     
     
     
@@ -67,13 +66,52 @@
 -(void)dealWithModel:(ODSecondEvaluationModel *)model
 {
     
-    // 根据内容更改label的高度
-    CGRect rect = [model.reason boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 20,0)
-                                              options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
-                                           attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]}
-                                              context:nil];
-    self.contentLabel.frame = CGRectMake(10, 10, self.contentView.frame.size.width - 20, rect.size.height);
-    self.contentLabel.text = model.reason;
+    
+    
+    
+    if ([model.reason isEqualToString:@""]) {
+        
+        NSString *reason_num = [NSString stringWithFormat:@"%@" , model.reason_num];
+        
+        if ([reason_num isEqualToString:@"1"]) {
+            
+            self.contentLabel.text = @"非常不满意";
+            
+        }else if ([reason_num isEqualToString:@"2"]) {
+            
+             self.contentLabel.text = @"不满意";
+            
+        }else if ([reason_num isEqualToString:@"3"]) {
+            
+            self.contentLabel.text = @"一般";
+            
+        }else if ([reason_num isEqualToString:@"4"]) {
+            
+            self.contentLabel.text = @"满意";
+            
+        }else if ([reason_num isEqualToString:@"5"]) {
+            
+            self.contentLabel.text = @"非常满意";
+            
+        }
+
+        
+       
+    self.contentLabel.frame = CGRectMake(10, 10, self.contentView.frame.size.width - 20, 20);
+        
+        
+    }else{
+        // 根据内容更改label的高度
+        CGRect rect = [model.reason boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 20,0)
+                                                 options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
+                                              attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]}
+                                                 context:nil];
+        self.contentLabel.frame = CGRectMake(10, 10, self.contentView.frame.size.width - 20, rect.size.height);
+        self.contentLabel.text = model.reason;
+
+    }
+    
+    
     
    
 }
@@ -103,7 +141,7 @@
     
     
     //根据内容计算,更改Label的高度
-    if (model.reason) {
+    if (![model.reason isEqualToString:@""]) {
         CGRect rect = [model.reason boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width - 20, 0)
                                                   options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
                                                attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]}
@@ -111,7 +149,7 @@
         return (rect.size.height + 30);
     }else{
         
-        return 30;
+        return 40;
         
     }
 

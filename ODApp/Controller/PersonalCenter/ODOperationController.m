@@ -72,13 +72,14 @@
         ODOperationSeccondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
             
             
-            self.cachesLabel = [[UILabel alloc] initWithFrame:CGRectMake(cell.contentView.frame.size.width - 120 , 10 , 60 , 20)];
+            self.cachesLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenSize.width - 90 , 7 , 50 , 20)];
             self.cachesLabel.font = [UIFont systemFontOfSize:14];
             self.cachesLabel.backgroundColor = [UIColor whiteColor];
-            self.cachesLabel.textAlignment = NSTextAlignmentLeft;
+            self.cachesLabel.textAlignment = NSTextAlignmentRight;
             [cell.contentView addSubview:self.cachesLabel];
             self.cachesLabel.text = [NSString stringWithFormat:@"%.2fM",[self filePath]];
 
+                  
             
        
             return cell;
@@ -159,6 +160,11 @@
             
             [ODUserInformation sharedODUserInformation].avatar = @"";
             [user setObject:@"" forKey:KUserDefaultsAvatar];
+            
+            [ODUserInformation sharedODUserInformation].mobile = @"";
+            [user setObject:@"" forKey:KUserDefaultsMobile];
+
+            
             
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0 title:@"已退出登录"];
             
