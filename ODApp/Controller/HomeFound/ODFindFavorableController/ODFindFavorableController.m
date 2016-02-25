@@ -24,7 +24,6 @@
 
 - (void)createWebView
 {
-    
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight)];
     
     self.webUrl = @"http://h5.odong.com/woqu/expect";
@@ -33,7 +32,8 @@
     [self.view addSubview:self.webView];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

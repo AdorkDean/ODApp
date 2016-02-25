@@ -68,38 +68,27 @@
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-    
     NSDictionary *parameters = @{@"open_id":openId};
-    
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:kGetUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        
+    [self.manager GET:kGetUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject)
+    {
         NSMutableDictionary *dic = responseObject[@"result"];
-        
-        
         weakSelf.model = [[ODUserModel alloc] initWithDict:dic];
         
         [weakSelf createCollectionView];
         [weakSelf.collectionView reloadData];
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+    }
+              failure:^(AFHTTPRequestOperation *operation, NSError *error)
+    {
         
     }];
-    
 }
-
 
 #pragma mark - 初始化
 -(void)createCollectionView
 {
-    
-    
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 20, kScreenSize.width, kScreenSize.height - 55 - 20) collectionViewLayout:self.flowLayout];
     
@@ -111,126 +100,89 @@
     [self.collectionView registerClass:[ODLandThirdCell class] forCellWithReuseIdentifier:@"third"];
     
     [self.view addSubview:self.collectionView];
-    
-    
-    
-    
 }
-
-
-
 
 #pragma mark - UICollectionViewDelegate
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     if (indexPath.section == 0) {
         ODLandFirstCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
-        
-        
-        
-        
         cell.model = self.model;
         
-        
-        
-        
         return cell;
-        
-    }else if (indexPath.section == 1) {
-        
+    }
+    else if (indexPath.section == 1)
+    {
         ODLandThirdCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"third" forIndexPath:indexPath];
         
         [cell.buyButton addTarget:self action:@selector(alreadyBuyAction:) forControlEvents:UIControlEventTouchUpInside];
-        
         [cell.collectionButton addTarget:self action:@selector(collectionAction:) forControlEvents:UIControlEventTouchUpInside];
-        
         [cell.releaseButton addTarget:self action:@selector(releaseAction:) forControlEvents:UIControlEventTouchUpInside];
-
         [cell.sellButton addTarget:self action:@selector(mySellAction:) forControlEvents:UIControlEventTouchUpInside];
-
-        
         
         return cell;
-        
     }
-    
-    
-    else{
+    else
+    {
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
-        
-        
-        if (indexPath.section == 2) {
+        if (indexPath.section == 2)
+        {
             cell.titleLabel.text = @"我的中心预约";
-            
-        }else if (indexPath.section == 3) {
+        }
+        else if (indexPath.section == 3)
+        {
             cell.titleLabel.text = @"我报名的活动";
-            
-        }else if (indexPath.section == 4) {
+        }
+        else if (indexPath.section == 4)
+        {
             cell.titleLabel.text = @"我的话题";
-        }else if (indexPath.section == 5) {
+        }
+        else if (indexPath.section == 5)
+        {
             cell.titleLabel.text = @"我的任务";
-        }else if (indexPath.section == 6) {
-            
-            
-             cell.titleLabel.text = @"我收到的评价";
-            
         }
-        
-        
-        else if (indexPath.section == 7) {
-            
+        else if (indexPath.section == 6)
+        {
+            cell.titleLabel.text = @"我收到的评价";
+        }
+        else if (indexPath.section == 7)
+        {
             cell.titleLabel.text = @"余额";
-        }else if (indexPath.section == 8) {
-            
-             cell.titleLabel.text = @"设置";
-            
-            
+        }else if (indexPath.section == 8)
+        {
+            cell.titleLabel.text = @"设置";
         }
-        
-        
-        else if (indexPath.section == 9) {
-            
+        else if (indexPath.section == 9)
+        {
             cell.titleLabel.text = @"意见反馈";
         }
-        
-        else if (indexPath.section == 10) {
-            
+        else if (indexPath.section == 10)
+        {
             cell.titleLabel.text = @"分享我们的app";
             cell.coverImageView.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
-            
         }
-        return cell;
         
+        return cell;
     }
 }
-
 
 - (void)mySellAction:(UIButton *)sender
 {
-    
     ODMySellController *vc = [[ODMySellController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-    
 }
-
 
 - (void)alreadyBuyAction:(UIButton *)sender
 {
-    
     ODMyOrderController *vc = [[ODMyOrderController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-    
-    
 }
 
 - (void)releaseAction:(UIButton *)sender
 {
-
     ODReleaseController *vc = [[ODReleaseController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
-
 }
 
 - (void)collectionAction:(UIButton *)button
@@ -251,87 +203,65 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        
+    if (indexPath.section == 0)
+    {
         ODInformationController *vc = [[ODInformationController alloc] init];
-        
-        
         [self.navigationController pushViewController:vc animated:YES];
-        
-        
-    }else if (indexPath.section == 2){
-        
+    }
+    else if (indexPath.section == 2)
+    {
         ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
         vc.open_id = self.model.open_id;
         vc.centerTitle = @"我的预约纪录";
         [self.navigationController pushViewController:vc animated:YES];
-        
-    }else if (indexPath.section == 3){
-        
+    }
+    else if (indexPath.section == 3)
+    {
         ODMyApplyActivityController *vc = [[ODMyApplyActivityController alloc] init];
-        
         vc.open_id = self.model.open_id;
         vc.isRefresh = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if (indexPath.section ==4) {
-        
+    else if (indexPath.section ==4)
+    {
         ODMyTopicController *vc = [[ODMyTopicController alloc] init];
-        
         vc.open_id = self.model.open_id;
-        
         [self.navigationController pushViewController:vc animated:YES];
-        
-    }else if (indexPath.section ==5) {
-        
+    }
+    else if (indexPath.section ==5)
+    {
         ODMyTaskController *vc = [[ODMyTaskController alloc] init];
-        
         vc.open_id = self.model.open_id;
-        
         [self.navigationController pushViewController:vc animated:YES];
-        
-    }else if (indexPath.section == 6) {
-        
+    }else if (indexPath.section == 6)
+    {
         ODEvaluationController *vc = [[ODEvaluationController alloc] init];
         vc.typeTitle = @"我收到的评价";
         NSString *openId = [ODUserInformation sharedODUserInformation].openID;
         vc.openId = openId;
         [self.navigationController pushViewController:vc animated:YES];
-        
     }
-    
-    
-    else if (indexPath.section == 7) {
-        
+    else if (indexPath.section == 7)
+    {
         ODBalanceController *vc = [[ODBalanceController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-        
-               
-    }else if (indexPath.section == 8) {
-        
-        
+    }
+    else if (indexPath.section == 8)
+    {
         ODOperationController *vc = [[ODOperationController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-        
-        
-        
     }
-    
-    
-    
-    else if (indexPath.section == 9) {
-        
+    else if (indexPath.section == 9)
+    {
         ODGiveOpinionController *vc = [[ODGiveOpinionController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-        
     }
-    else if (indexPath.section == 10) {
-        
+    else if (indexPath.section == 10)
+    {
         NSString *url = self.model.share[@"icon"];
         NSString *content = self.model.share[@"desc"];
         NSString *link = self.model.share[@"link"];
         NSString *title = self.model.share[@"title"];
-        
         
         [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
@@ -344,33 +274,30 @@
                                          shareImage:nil
                                     shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
                                            delegate:self];
-        
-        
     }
-   }
-
-
+}
 
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 || indexPath.section == 1) {
+    if (indexPath.section == 0 || indexPath.section == 1)
+    {
         return CGSizeMake(kScreenSize.width , 80);
-    }else {
+    }
+    else
+    {
         return CGSizeMake(kScreenSize.width , 40);
     }
 }
 
-
 //动态设置区尾的高度(根据不同的分区)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-    
     return CGSizeMake(0, 5);
-    
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
