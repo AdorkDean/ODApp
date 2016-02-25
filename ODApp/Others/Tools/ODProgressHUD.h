@@ -19,6 +19,7 @@
  *  网络正在请求的信息
  */
 + (void)showProgressWithStatus:(NSString *)status;
+
 /**
  *  提示信息
  */

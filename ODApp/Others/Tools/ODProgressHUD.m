@@ -10,9 +10,10 @@
 #import <SVProgressHUD.h>
 
 @implementation ODProgressHUD
+
 + (void)initialize
 {
-    [SVProgressHUD setDefaultMaskType:(SVProgressHUDMaskTypeBlack)];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
 }
 
 + (void)showProgressIsLoading

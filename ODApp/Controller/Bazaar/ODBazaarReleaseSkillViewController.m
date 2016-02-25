@@ -698,35 +698,83 @@
 {
     if (textField == self.priceTextField) {
         
+//        if ([textField.text rangeOfString:@"."].location == NSNotFound) {
+//            self.isHaveDian = NO;
+//        }
+//        if ([string length] > 0) {
+//            unichar single = [string characterAtIndex:0];
+//            if ((single >= '0' && single <= '9') || single == '.') {
+//                if([textField.text length] == 0){
+//                    if(single == '.') {
+//                        [textField.text stringByReplacingCharactersInRange:range withString:@""];
+//                        return NO;
+//                    }
+//                }
+//                if (single == '.') {
+//                    if(!self.isHaveDian){
+//                        self.isHaveDian = YES;
+//                        return YES;
+//                    }else{
+//                        [textField.text stringByReplacingCharactersInRange:range withString:@""];
+//                        return NO;
+//                    }
+//                }
+//            }else{
+//                [textField.text stringByReplacingCharactersInRange:range withString:@""];
+//                return NO;
+//            }
+//        }else{
+//            return YES;
+//        }
+        
         if ([textField.text rangeOfString:@"."].location == NSNotFound) {
             self.isHaveDian = NO;
         }
         if ([string length] > 0) {
-            unichar single = [string characterAtIndex:0];
-            if ((single >= '0' && single <= '9') || single == '.') {
-                if([textField.text length] == 0){
-                    if(single == '.') {
-                        [textField.text stringByReplacingCharactersInRange:range withString:@""];
-                        return NO;
-                    }
-                }
+            
+            unichar single = [string characterAtIndex:0];//当前输入的字符
+            if ((single >= '0' && single <= '9') || single == '.') {//数据格式正确
+                
+
+                //输入的字符是否是小数点
                 if (single == '.') {
-                    if(!self.isHaveDian){
+                    if(!self.isHaveDian)//text中还没有小数点
+                    {
                         self.isHaveDian = YES;
                         return YES;
+                        
                     }else{
+                        
                         [textField.text stringByReplacingCharactersInRange:range withString:@""];
                         return NO;
                     }
+                }else{
+                    if (self.isHaveDian) {//存在小数点
+                        
+                        //判断小数点的位数
+                        NSRange ran = [textField.text rangeOfString:@"."];
+                        if (range.location - ran.location <= 2) {
+                            return YES;
+                        }else{
+             
+                            return YES;
+                        }
+                    }else{
+                        return YES;
+                    }
                 }
-            }else{
+            }else{//输入的数据格式不正确
                 [textField.text stringByReplacingCharactersInRange:range withString:@""];
                 return NO;
             }
-        }else{
+        }
+        else
+        {
             return YES;
         }
         
+        
+//        
     }
     return YES;
 }

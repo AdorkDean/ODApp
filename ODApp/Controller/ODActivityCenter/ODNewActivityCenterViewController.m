@@ -73,17 +73,14 @@ Single_Implementation(ODNewActivityCenterViewController)
 {
     __weakSelf
 
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [ODHttpTool getWithURL:KActivityListUrl parameters:@{} modelClass:[ODActivityListModel class] success:^(id json)
     {
         weakSelf.resultLists = [json result];
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView reloadData];
-        [SVProgressHUD dismiss];
     }
                    failure:^(NSError *error)
     {
-        [SVProgressHUD dismiss];
         [weakSelf.tableView.mj_header endRefreshing];
     }];
 }

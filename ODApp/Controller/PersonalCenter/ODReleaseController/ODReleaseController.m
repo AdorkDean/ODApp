@@ -57,7 +57,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 #pragma mark - 加载数据请求
 - (void)createRequestData
 {
-
     if (self.pageCount == 1)
     {
         [self.dataArray removeAllObjects];
@@ -67,8 +66,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"my":@"1"};
     [ODHttpTool getWithURL:ODPersonalReleaseTaskUrl parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
      {
-        
-
         [weakSelf.collectionView.mj_footer endRefreshing];
         
         if (model == nil)
@@ -120,7 +117,8 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         if ([responseObject[@"status"] isEqualToString:@"success"])
         {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"删除任务成功"];
-            [weakSelf.dataArray removeAllObjects];
+
+//            [weakSelf.dataArray removeAllObjects];
             [weakSelf createRequestData];
         }
         else
