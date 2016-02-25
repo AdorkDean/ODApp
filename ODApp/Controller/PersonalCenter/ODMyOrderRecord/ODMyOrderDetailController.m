@@ -38,31 +38,35 @@
     if ([self.checkLabel.text isEqualToString:@"已取消"] || [self.checkLabel.text isEqualToString:@"后台取消"])
     {
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"订单已经取消"];
-    }else if ([self.checkLabel.text isEqualToString:@"前台已确认"])
+    }
+    else if ([self.checkLabel.text isEqualToString:@"前台已确认"])
     {
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"订单已生成,请联系客服"];
-    }else if ([self.checkLabel.text isEqualToString:@"到场已确认"] || [self.checkLabel.text isEqualToString:@"未到场"])
+    }
+    else if ([self.checkLabel.text isEqualToString:@"到场已确认"] || [self.checkLabel.text isEqualToString:@"未到场"])
     {
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"已到活动时间，无需进行取消"];
     }
-    else{
+    else
+    {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您确定要取消预约吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+        {
             self.managers = [AFHTTPRequestOperationManager manager];
             
             NSDictionary *parameter = @{@"open_id":self.open_id,@"order_id":self.order_id};
             NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
             
             __weak typeof (self)weakSelf = self;
-            
-            [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-                
+            [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+            {
                 [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil];
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
                 weakSelf.checkLabel.text = @"已取消";
                 
-            } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+            }
+                       failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+            {
 
             }];
         }]];
@@ -80,10 +84,10 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    
-    [self.manager GET:kMyOrderDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        if (responseObject) {
+    [self.manager GET:kMyOrderDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
+        if (responseObject)
+        {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             
             NSDictionary *result = dict[@"result"];
@@ -92,14 +96,18 @@
             [weakSelf.dataArray addObject:weakSelf.model];
             
             NSDictionary *devices = result[@"devices"];
-            for (NSDictionary *itemDict in devices) {
+            for (NSDictionary *itemDict in devices)
+            {
                 NSString *name = itemDict[@"name"];
                 [weakSelf.devicesArray addObject:name];
             }
         }
         [weakSelf createOrderView];
         
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    }
+              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    {
+        
     }];
 }
 
@@ -125,18 +133,23 @@
     
     NSString *name = [[NSMutableString alloc] init];
 
-    if (self.devicesArray.count == 0) {
+    if (self.devicesArray.count == 0)
+    {
         name = @"无";
     }
-    else if (self.devicesArray.count == 1){
+    else if (self.devicesArray.count == 1)
+    {
         name = self.devicesArray[0];
     }
-    else if (self.devicesArray.count == 2){
+    else if (self.devicesArray.count == 2)
+    {
         name = [NSString stringWithFormat:@"%@,%@",self.devicesArray[0],self.devicesArray[1]];
     }
-    else if (self.devicesArray.count == 3){
+    else if (self.devicesArray.count == 3)
+    {
         name = [NSString stringWithFormat:@"%@,%@,%@",self.devicesArray[0],self.devicesArray[1],self.devicesArray[2]];
-    }else{
+    }else
+    {
         name = [NSString stringWithFormat:@"%@,%@,%@,%@",self.devicesArray[0],self.devicesArray[1],self.devicesArray[2],self.devicesArray[3]];
     }
     

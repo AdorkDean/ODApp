@@ -75,10 +75,12 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
 
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:kMyOrderRecordUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    [self.manager GET:kMyOrderRecordUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    {
         [weakSelf.noReusltLabel removeFromSuperview];
         
-        if (self.count == 1) {
+        if (self.count == 1)
+        {
             [weakSelf.orderArray removeAllObjects];
         }
         
@@ -113,7 +115,8 @@
         }
         [weakSelf.collectionView reloadData];
 
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    }
+              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
@@ -175,8 +178,7 @@
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
   
     vc.isOther = self.isOther;
-    vc.open_id = self.open_id;
-    
+    vc.open_id = self.open_id;    
     vc.order_id = [NSString stringWithFormat:@"%@",model.order_id];
     
     [self.navigationController pushViewController:vc animated:YES];

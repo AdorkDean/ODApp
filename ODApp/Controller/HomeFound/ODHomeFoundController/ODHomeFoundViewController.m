@@ -125,7 +125,6 @@
         ODLocationModel *mode = [model result];
         weakSelf.cityListArray = mode.all;
         [weakSelf.collectionView reloadData];
-        
     }
                    failure:^(NSError *error)
     {
@@ -141,13 +140,13 @@
     [weakSelf.collectionView reloadData];
     [ODHttpTool getWithURL:ODHomeFoundUrl parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
      {
-         
          [weakSelf.pictureArray addObjectsFromArray:[[[model result]activitys]valueForKeyPath:@"detail_md5"]];
          [weakSelf.pictureIdArray addObjectsFromArray:[[[model result]activitys] valueForKeyPath:@"id"]];
          [weakSelf.collectionView reloadData];
      }
                    failure:^(NSError *error)
      {
+         
      }];
 }
 
@@ -163,7 +162,6 @@
     
     [self.manager GET:ODHomeChangeSkillUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-
         [weakSelf.dataArray removeAllObjects];
         if (responseObject)
         {
@@ -182,7 +180,6 @@
     }
               failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
@@ -201,7 +198,6 @@
 
     [self.centerManager GET:ODStoreListUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-
         if (responseObject)
         {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -214,6 +210,7 @@
     }
                     failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
+        
     }];
 }
 
@@ -230,7 +227,6 @@
 
     [self.centerManager GET:ODStoreDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-
         if (responseObject)
         {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -241,6 +237,7 @@
     }
                     failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
+        
     }];
 }
 
@@ -330,7 +327,8 @@
     {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
-    }else
+    }
+    else
     {
         ODNewActivityDetailViewController *vc = [[ODNewActivityDetailViewController alloc] init];
         vc.acitityId = [self.pictureIdArray[button.tag - 100] intValue];
@@ -562,7 +560,8 @@
             if (i < self.pictureArray.count - 1)
             {
                 imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7/12 * i, 0, (kScreenSize.width - 15) * 7/12 - 8, 120)];
-            }else
+            }
+            else
             {
                 imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7/12 * i, 0, (kScreenSize.width - 15) * 7/12, 120)];
             }

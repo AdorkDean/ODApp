@@ -23,8 +23,7 @@
 }
 
 - (void)createWebView
-{
-    
+{    
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight)];
 
     NSString *store_id = @"2";

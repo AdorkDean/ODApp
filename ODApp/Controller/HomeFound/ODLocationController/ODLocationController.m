@@ -12,7 +12,6 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 
 @interface ODLocationController ()
 {
-
     AMapSearchAPI *_search;
     MAMapView *_mapView;
 }

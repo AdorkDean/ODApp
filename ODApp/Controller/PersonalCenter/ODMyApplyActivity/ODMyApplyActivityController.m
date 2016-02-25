@@ -28,11 +28,13 @@
     [self getCollectionViewRequest];
     
     __weakSelf
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
+    {
         self.pageCount = 1;
         [weakSelf downRefresh];
     }];
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^
+    {
         [weakSelf loadMoreData];
     }];
 }
@@ -69,11 +71,8 @@
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [self.manager GET:kMyApplyActivityUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-        
-        [SVProgressHUD dismiss];
         [weakSelf.noReusltLabel removeFromSuperview];
         
         if (weakSelf.pageCount == 1)
@@ -108,9 +107,9 @@
                 [weakSelf.collectionView.mj_footer noticeNoMoreData];
             }
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    }
+              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-        [SVProgressHUD dismiss];
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
