@@ -879,7 +879,7 @@
     
     if ([status isEqualToString:@"1"]) {
         
-        self.orderDetailView.typeLabel.text = @"已下单未付款";
+        self.orderDetailView.typeLabel.text = @"待支付";
         
     }else if ([status isEqualToString:@"2"]) {
         
