@@ -41,7 +41,6 @@
     userInfoDic = [NSMutableDictionary dictionary];
     
     [self getLocationCityRequest];
-    
     [self createCollectionView];
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
@@ -105,12 +104,6 @@
 - (void)locationCity
 {
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
-}
-
-#pragma mark - 定位城市按钮
-- (void)CreateLocationButtonAction
-{
-    [self.locationButton addTarget:self action:@selector(locationButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - Request Data
@@ -700,7 +693,8 @@ updatingLocation:(BOOL)updatingLocation
         if (result.length == 0)
         {
             result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
-            if (result.length != 0) {
+            if (result.length != 0)
+            {
                 cityResult = [result substringToIndex:[result length] - 1];
             }
         }

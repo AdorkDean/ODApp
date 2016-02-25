@@ -46,7 +46,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     }
                    failure:^(NSError *error)
     {
-        
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 

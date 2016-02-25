@@ -67,7 +67,7 @@
             }
                        failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
             {
-
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
             }];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -107,7 +107,7 @@
     }
               failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-        
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
