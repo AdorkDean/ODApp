@@ -209,20 +209,7 @@
         
         
         
-    }else if ([status isEqualToString:@"-3"]) {
-        
-        self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        self.reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-        [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
-        self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
-        [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:self.reasonButton];
-        
-        
-        
-    }else if ([status isEqualToString:@"-4"]) {
+    }else if ([status isEqualToString:@"-3"] || [status isEqualToString:@"-4"]||[status isEqualToString:@"-5"] ) {
         
         self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
@@ -236,25 +223,6 @@
         
         
     }
-
-    
-    
-    else if ([status isEqualToString:@"-5"]) {
-        
-        self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        self.reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-        [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
-        self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
-        [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:self.reasonButton];
-        
-        
-        
-    }
-    
-    
     
     [self createOrderView];
     
@@ -499,6 +467,7 @@
         
     }else if ([status isEqualToString:@"5"]) {
         self.orderDetailView.typeLabel.text = @"已评价";
+         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"-1"]) {
         self.orderDetailView.typeLabel.text = @"已取消";
         self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
@@ -510,8 +479,10 @@
         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"-4"]) {
         self.orderDetailView.typeLabel.text = @"已退款";
+         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
     }else if ([status isEqualToString:@"-5"]) {
         self.orderDetailView.typeLabel.text = @"拒绝退款";
+        self.orderDetailView.typeLabel.textColor = [UIColor redColor];
     }
     
     
@@ -523,12 +494,8 @@
 - (void)phoneAction:(UIButton *)sender
 {
     
-    ODOrderDetailModel *model = self.dataArray[0];
     
-    NSMutableDictionary *dic = model.order_user;
-    
-    
-    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",dic[@"mobile"]];
+    NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@", self.orderDetailView.addressPhoneLabel.text];
     
     UIWebView *callWebview = [[UIWebView alloc] init];
     [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
