@@ -81,8 +81,7 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
                 [weakSelf.collectionView reloadData];
-                [weakSelf.collectionView.mj_header endRefreshing];
-                [weakSelf.collectionView.mj_footer endRefreshing];
+                
             }
             if (weakSelf.dataArray.count == 0)
             {
@@ -93,6 +92,8 @@
             if (result.count == 0) {
                 [weakSelf.collectionView.mj_footer noticeNoMoreData];
             }
+            [weakSelf.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_footer endRefreshing];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
