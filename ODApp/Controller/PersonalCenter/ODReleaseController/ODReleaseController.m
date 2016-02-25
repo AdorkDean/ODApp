@@ -119,7 +119,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         }
         else
         {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
+            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.2f title:responseObject[@"message"]];
         }
     }
               failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
