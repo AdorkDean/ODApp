@@ -126,7 +126,7 @@
         if (iPhone4_4S) {
             
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 300);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 350);
             
         }else if (iPhone5_5s){
             
@@ -137,7 +137,7 @@
         }else if (iPhone6_6s) {
             
             self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 130);
-
+            
             
         }else{
             
@@ -150,7 +150,7 @@
         
         
         if (iPhone4_4S) {
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 220);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 270);
             
         }else  if (iPhone5_5s){
             
@@ -160,17 +160,18 @@
             
             
             self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 100);
-
+            
             
         }else{
             
             self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height);
-
+            
             
         }
         
         
     }
+    
     
     
     [self.view addSubview:self.scroller];
@@ -749,7 +750,7 @@
     
     self.orderDetailView.contentLabel.text = model.title;
     self.orderDetailView.countLabel.text = [NSString stringWithFormat:@"%@" , model.num];
-    self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.price , model.unit];
+    self.orderDetailView.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" ,model.order_price , model.unit];
     self.orderDetailView.allPriceLabel.text = [NSString stringWithFormat:@"%@元" , model.total_price];
     
     self.orderDetailView.typeLabel.text = self.orderType;
@@ -759,6 +760,9 @@
     
     
     self.orderDetailView.swapTypeLabel.text = @"上门服务";
+    
+    
+      
     self.orderDetailView.serviceAddressLabel.text = model.address;
     self.orderDetailView.serviceTimeLabel.text = model.service_time;
     self.orderDetailView.orderTimeLabel.text = model.order_created_at;
