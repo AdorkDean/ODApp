@@ -152,7 +152,6 @@
                 ODCommunityDetailModel *model = [[ODCommunityDetailModel alloc]init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
-                NSLog(@"%@",model.user[@"open_id"]);
             }
 
             [weakSelf.tableView reloadData];
@@ -474,10 +473,36 @@
         ODCommunityDetailModel *model = self.dataArray[indexPath.row];
         NSDictionary *parameter = @{@"id":[NSString stringWithFormat:@"%@",model.id],@"type":@"3",@"open_id":[ODUserInformation sharedODUserInformation].openID};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-        [weakSelf pushDataWithUrl:kDeleteReplyUrl parameter:signParameter isBbs:NO];
+        [weakSelf deleteDataWithUrl:kDeleteReplyUrl parameter:signParameter button:button];
+        
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
+
+}
+
+#pragma mark - 删除回帖
+-(void)deleteDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter button:(UIButton *)button
+{
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    __weak typeof (self)weakSelf = self;
+    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        
+        if ([responseObject[@"status"]isEqualToString:@"success"]) {
+            ODCommunityDetailCell *cell = (ODCommunityDetailCell *)button.superview.superview;
+            NSIndexPath *indexPath = [weakSelf.tableView indexPathForCell:cell];
+            ODCommunityDetailModel *model = weakSelf.dataArray[indexPath.row];
+            model.content = @"该楼层已删除";
+            [weakSelf.dataArray replaceObjectAtIndex:indexPath.row withObject:model];
+            cell.deleteButton.hidden = YES;
+            cell.timeLabelSpace.constant = 13;
+            cell.contentLabel.text = @"该楼层已删除";
+        }
+
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        
+    }];
 
 }
 
@@ -499,7 +524,7 @@
         }else{
             NSLog(@"%@",responseObject);
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                [weakSelf joiningTogetherParmetersWithUserInfo:NO];
+//                [weakSelf joiningTogetherParmetersWithUserInfo:NO];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
