@@ -278,22 +278,22 @@
 
 - (void)findFavorableButtonClick:(UIButton *)button
 {
+    ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)findJobButtonClick:(UIButton *)button
+{
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""])
     {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
     }
     else
-    {
-        ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
+    {    
+        ODFindJobController *vc = [[ODFindJobController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
-}
-
-- (void)findJobButtonClick:(UIButton *)button
-{
-    ODFindJobController *vc = [[ODFindJobController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)searchCircleButtonClick:(UIButton *)button

@@ -6,8 +6,8 @@
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 #import <AFNetworking.h>
-#import <SVProgressHUD.h>
 #import "ODHttpTool.h"
+#import "ODProgressHUD.h"
 #import "ODAPIManager.h"
 #import "ODAPPInfoTool.h"
 
@@ -65,7 +65,7 @@ NSString * const requestSuccessStatus = @"success";
         }
         else
         {
-            [SVProgressHUD showErrorWithStatus:responseObject[requsetMessage] maskType:(SVProgressHUDMaskTypeGradient)];
+            [ODProgressHUD showErrorWithStatus:responseObject[requsetMessage]];
             failure(responseObject[requestStatus]);
         }
     }

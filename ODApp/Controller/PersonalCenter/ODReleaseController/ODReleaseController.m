@@ -55,6 +55,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     if (self.pageCount == 1) {
         [self.dataArray removeAllObjects];
     }
+    
     __weakSelf
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"my":@"1"};
     [ODHttpTool getWithURL:ODPersonalReleaseTaskUrl parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
