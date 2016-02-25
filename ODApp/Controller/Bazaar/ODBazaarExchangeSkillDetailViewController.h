@@ -21,7 +21,7 @@
 #import "ODPersonalCenterViewController.h"
 #import "ODThirdOrderController.h"
 
-@interface ODBazaarExchangeSkillDetailViewController : ODBaseViewController<UMSocialUIDelegate>
+@interface ODBazaarExchangeSkillDetailViewController : ODBaseViewController<UMSocialUIDelegate,UMSocialDataDelegate>
 
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
@@ -35,4 +35,5 @@
 @property(nonatomic,copy)NSString *love_id;
 @property(nonatomic,strong)NSMutableArray *imageArray;
 @property(nonatomic,copy)NSString *love;
+@property(nonatomic)NSInteger sharedTimes;
 @end
