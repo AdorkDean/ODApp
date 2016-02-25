@@ -27,7 +27,6 @@
     self.editAndDeleteView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     
     self.editButton = [ODPersonalTaskButton buttonWithType:UIButtonTypeCustom];
-
     self.editButton.frame = CGRectMake(0, 0, KScreenWidth / 2, 43);
     self.editButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [self.editButton setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
@@ -45,6 +44,9 @@
     [self.deleteButton setImage:[UIImage imageNamed:@"icon_delete"] forState:UIControlStateNormal];
     [self.editAndDeleteView addSubview:self.deleteButton];
 
+    self.halvingLineImageView = [[UIImageView alloc] initWithFrame:CGRectMake(KScreenWidth / 2 - 0.5, 15, 1, 13)];
+    self.halvingLineImageView.image = [UIImage imageNamed:@"icon_separate"];
+    [self.editAndDeleteView addSubview:self.halvingLineImageView];
 }
 
 - (void)setModel:(ODReleaseModel *)model
