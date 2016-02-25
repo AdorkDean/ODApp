@@ -45,6 +45,11 @@
  
     
     
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+    NSLog(@"______%@" , openId);
+    
+    
+    
     
 }
 

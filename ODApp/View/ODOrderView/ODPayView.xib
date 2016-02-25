@@ -219,10 +219,12 @@
                 <outlet property="priceLabel" destination="7m4-ZZ-2kM" id="2gO-gl-ONj"/>
                 <outlet property="secondLineLabel" destination="yyR-fL-Sni" id="NhR-yn-URm"/>
                 <outlet property="thirdLineLabel" destination="Vtq-2E-mVw" id="98c-iL-wIS"/>
+                <outlet property="treasureImageView" destination="FFS-Hq-LQv" id="Bey-D9-dlI"/>
+                <outlet property="treasureLabel" destination="X3s-e2-kki" id="abE-7u-AQS"/>
                 <outlet property="treasurePayButton" destination="okh-zX-9Jh" id="dtC-ng-XGs"/>
                 <outlet property="weixinPaybutton" destination="3mS-0j-Ou7" id="4Ky-Xk-cG1"/>
             </connections>
-            <point key="canvasLocation" x="825" y="274"/>
+            <point key="canvasLocation" x="288" y="274"/>
         </view>
     </objects>
     <resources>

@@ -15,9 +15,10 @@
     ODPayView *view =  [[[NSBundle mainBundle] loadNibNamed:@"ODPayView" owner:nil options:nil] firstObject];
     
     
-    view.userInteractionEnabled = YES;
-    view.backgroundColor = [UIColor whiteColor];
     
+      view.userInteractionEnabled = YES;
+  
+      view.backgroundColor = [UIColor whiteColor];
       view.firstLineLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
       view.secondLineLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
       view.thirdLineLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];

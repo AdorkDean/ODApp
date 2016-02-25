@@ -168,7 +168,7 @@
     NSString *swap_id = [NSString stringWithFormat:@"%@" , self.informationModel.swap_id];
     
     
-    NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": @"" , @"user_address_id":@"0" , @"comment": @""};
+    NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time":self.headView.thirdOrderView.timeLabel.text , @"user_address_id":@"0" , @"comment": @""};
     
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     __weak typeof (self)weakSelf = self;

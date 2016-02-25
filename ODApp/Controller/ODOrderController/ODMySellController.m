@@ -13,6 +13,7 @@
 #import "ODAPIManager.h"
 #import "ODMyOrderCell.h"
 #import "ODMySellDetailController.h"
+#import "ODSecondMySellDetailController.h"
 @interface ODMySellController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
@@ -203,10 +204,12 @@
     NSString *orderId = [NSString stringWithFormat:@"%@" , model.order_id];
 
     
+ 
+    
     
     
     if ([swap_type isEqualToString:@"1"]) {
-        ODMySellDetailController *vc = [[ODMySellDetailController alloc] init];
+        ODSecondMySellDetailController *vc = [[ODSecondMySellDetailController alloc] init];
         vc.orderType = model.status_str;
         vc.orderId = orderId;
         [self.navigationController pushViewController:vc animated:YES];

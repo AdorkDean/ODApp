@@ -230,7 +230,7 @@
         [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
         self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
         [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.reasonButton addTarget:self action:@selector(receiveAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.reasonButton];
         
         
@@ -304,8 +304,15 @@
     vc.serviceTime = model.tel_msg;
     vc.customerService = @"服务";
     vc.drawbackTitle = @"退款信息";
-    vc.refuseReason = model.reject_reason;
-    vc.isRefuseReason = YES;
+    if ([model.reject_reason isEqualToString:@""]) {
+        
+        vc.isRefuseReason = NO;
+        
+    }else{
+        
+        vc.isRefuseReason = YES;
+        vc.refuseReason = model.reject_reason;
+    }
     
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -518,7 +525,7 @@
     
     ODOrderDetailModel *model = self.dataArray[0];
     
-    NSMutableDictionary *dic = model.user;
+    NSMutableDictionary *dic = model.order_user;
     
     
     NSMutableString *str=[[NSMutableString alloc] initWithFormat:@"tel:%@",dic[@"mobile"]];
