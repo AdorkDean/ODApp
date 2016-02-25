@@ -189,7 +189,7 @@
     NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
     
     
-    if ([status isEqualToString:@"3"]) {
+    if ([status isEqualToString:@"3"] || [status isEqualToString:@"2"]) {
         
         
         UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -203,28 +203,7 @@
         
         
         
-    }else if ([status isEqualToString:@"2"]) {
-        
-        
-        UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        refundButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-        [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
-        refundButton.titleLabel.font=[UIFont systemFontOfSize:13];
-        [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [refundButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:refundButton];
-        
-        
-        
-        
-        
-    }
-    
-    
-    
-    
-    else if ([status isEqualToString:@"1"]) {
+    }else if ([status isEqualToString:@"1"]) {
         
         
         
@@ -284,37 +263,7 @@
         
         
         
-    }else if ([status isEqualToString:@"-5"]) {
-        
-        
-        
-        UIButton *reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-        [reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
-        reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
-        [reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:reasonButton];
-        
-        
-        
-    }else if ([status isEqualToString:@"-3"]) {
-        
-        
-        
-        UIButton *reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-        [reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
-        reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
-        [reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:reasonButton];
-        
-        
-        
-    }else if ([status isEqualToString:@"-4"]) {
+    }else if ([status isEqualToString:@"-5"] || [status isEqualToString:@"-3"] || [status isEqualToString:@"-4"] ) {
         
         
         
@@ -330,7 +279,6 @@
         
         
     }
-
     
     
     
@@ -512,9 +460,7 @@
 
 - (void)determineButton:(UIButton *)sender
 {
-    
-    
-    
+        
     if ([self.evaluationView.contentTextView.text isEqualToString:@""] || [self.evaluationView.contentTextView.text isEqualToString:@"请输入评价内容"]) {
            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入评价内容"];
     }else{
@@ -880,14 +826,17 @@
     if ([status isEqualToString:@"1"]) {
         
         self.orderDetailView.typeLabel.text = @"待支付";
+        self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
         
     }else if ([status isEqualToString:@"2"]) {
         
-        self.orderDetailView.typeLabel.text = @"已付款未发货";
+        self.orderDetailView.typeLabel.text = @"已付款";
+        self.orderDetailView.typeLabel.textColor = [UIColor redColor];
         
     }else if ([status isEqualToString:@"3"]) {
         
         self.orderDetailView.typeLabel.text = @"已付款";
+         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
         
     }else if ([status isEqualToString:@"4"]) {
         
@@ -911,10 +860,12 @@
     }else if ([status isEqualToString:@"-1"]) {
         
         self.orderDetailView.typeLabel.text = @"已取消";
+         self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
         
     }else if ([status isEqualToString:@"-2"]) {
         
         self.orderDetailView.typeLabel.text = @"已申请退款";
+         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
         
     }else if ([status isEqualToString:@"-3"]) {
         
@@ -924,10 +875,12 @@
     }else if ([status isEqualToString:@"-4"]) {
         
         self.orderDetailView.typeLabel.text = @"已退款";
+         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
         
     }else if ([status isEqualToString:@"-5"]) {
         
         self.orderDetailView.typeLabel.text = @"拒绝退款";
+         self.orderDetailView.typeLabel.textColor = [UIColor redColor];
     }
     
     
