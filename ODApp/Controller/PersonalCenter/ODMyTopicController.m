@@ -350,7 +350,13 @@
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
     picController.photos = model.imgs;
     picController.selectedIndex = button.tag-10*indexPath.row;
-    [self.navigationController pushViewController:picController animated:YES];
+   [self presentViewController:picController animated:YES completion:nil];
+    
+ 
+   
+    
+    
+    
 }
 
 -(void)secondImageButtonClick:(UIButton *)button
@@ -361,7 +367,8 @@
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
     picController.photos = model.imgs;
     picController.selectedIndex = button.tag-10*indexPath.row;
-    [self.navigationController pushViewController:picController animated:YES];
+    [self presentViewController:picController animated:YES completion:nil];
+
 }
 
 

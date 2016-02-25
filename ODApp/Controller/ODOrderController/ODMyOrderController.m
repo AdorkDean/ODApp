@@ -43,12 +43,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:ODNotificationOrderListRefresh object:nil];
     
  
-    
-    
-    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-    NSLog(@"______%@" , openId);
-    
-    
+       
     
     
 }

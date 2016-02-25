@@ -34,7 +34,7 @@
     self.nameLabel.text = model.nick;
     self.userImageButton.userInteractionEnabled = NO;
     NSString *gender = [NSString stringWithFormat:@"%@" , model.gender];
-    if ([gender isEqualToString:@"0"]) {
+    if ([gender isEqualToString:@"2"]) {
         
         self.hisPictureView.image = [UIImage imageNamed:@"icon_woman"];
         
