@@ -34,7 +34,7 @@
 
 @property (nonatomic, copy) NSString *evaluateStar;
 @property (nonatomic , strong) UIScrollView *scroller;
-
+@property (nonatomic , strong) UILabel *reason;
 
 
 
@@ -749,34 +749,48 @@
     
     if ([status isEqualToString:@"-1"]) {
         
-        self.orderDetailView.spaceToTop.constant = 150;
+        self.orderDetailView.spaceToTop.constant = 120;
         
+        
+        CGRect rect = [model.address boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 93,0)
+                                                 options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
+                                              attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]}
+                                                 context:nil];
         
          // 订单取消原因
-        UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, self.orderDetailView.serviceTimeLabel.frame.origin.y + 30, kScreenSize.width, 6)];
-        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-        [self.orderDetailView addSubview:line];
-        
+        if ([swap_type isEqualToString:@"2"]){
+           self.reason = [[UILabel alloc] initWithFrame:CGRectMake(18, self.orderDetailView.eightLabel.frame.origin.y + rect.size.height, 100, 20)];
+
+        }else{
+             self.reason = [[UILabel alloc] initWithFrame:CGRectMake(18, self.orderDetailView.eightLabel.frame.origin.y + 10, 100, 20)];
+        }
        
-        UILabel *reason = [[UILabel alloc] initWithFrame:CGRectMake(18, line.frame.origin.y + 16, 100, 20)];
-        reason.backgroundColor = [UIColor whiteColor];
-        reason.font = [UIFont systemFontOfSize:14];
-        reason.text = @"订单取消原因";
-        reason.textAlignment = NSTextAlignmentLeft;
-        [self.orderDetailView addSubview:reason];
-        
-        UILabel *secondLine = [[UILabel alloc] initWithFrame:CGRectMake(18, reason.frame.origin.y + 30, kScreenSize.width - 18, 1)];
+         self.reason.backgroundColor = [UIColor whiteColor];
+         self.reason.font = [UIFont systemFontOfSize:14];
+         self.reason.text = @"订单取消原因";
+         self.reason.textAlignment = NSTextAlignmentLeft;
+        [self.orderDetailView addSubview: self.reason];
+
+        UILabel *secondLine = [[UILabel alloc] initWithFrame:CGRectMake(18,  self.reason.frame.origin.y + 30, kScreenSize.width - 18, 1)];
         secondLine.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         [self.orderDetailView addSubview:secondLine];
         
         
-        UILabel *reasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, secondLine.frame.origin.y + 11, kScreenSize.width - 36, 50)];
+        UILabel *reasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, secondLine.frame.origin.y + 5, kScreenSize.width - 36, 50)];
         reasonLabel.backgroundColor = [UIColor whiteColor];
         reasonLabel.font = [UIFont systemFontOfSize:14];
         reasonLabel.numberOfLines = 0;
         reasonLabel.text = model.reason;
         reasonLabel.textAlignment = NSTextAlignmentLeft;
         [self.orderDetailView addSubview:reasonLabel];
+        
+
+        
+        UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, reasonLabel.frame.origin.y + 55, kScreenSize.width, 6)];
+        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        [self.orderDetailView addSubview:line];
+
+        
         
         
     }
