@@ -471,7 +471,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     else if (tableView == self.VIPTableView)
     {
         ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-        vc.open_id = [self.resultModel.applies[indexPath.row]open_id];
+        vc.open_id = [self.resultModel.savants[indexPath.row]open_id];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

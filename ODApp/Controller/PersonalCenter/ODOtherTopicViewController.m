@@ -76,27 +76,36 @@
             NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dcit[@"result"];
             NSDictionary *bbs_list = result[@"bbs_list"];
-            NSArray *allkeys = [bbs_list allKeys];
-            allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                NSComparisonResult result = [obj1 compare:obj2];
-                return result == NSOrderedAscending;
-            }];
-            for (id bbsKey in allkeys) {
-                NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
-                NSDictionary *itemDict = bbs_list[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc]init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.dataArray addObject:model];
+            
+            if(bbs_list.count == 0){
+                
+                ;
+            }else{
+                
+                NSArray *allkeys = [bbs_list allKeys];
+                allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+                    NSComparisonResult result = [obj1 compare:obj2];
+                    return result == NSOrderedAscending;
+                }];
+                for (id bbsKey in allkeys) {
+                    NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
+                    NSDictionary *itemDict = bbs_list[key];
+                    ODCommunityModel *model = [[ODCommunityModel alloc]init];
+                    [model setValuesForKeysWithDictionary:itemDict];
+                    [weakSelf.dataArray addObject:model];
+                }
+                
+                NSDictionary *users = result[@"users"];
+                for (id userKey in users) {
+                    NSString *key = [NSString stringWithFormat:@"%@",userKey];
+                    NSDictionary *itemDict = users[key];
+                    ODCommunityModel *model = [[ODCommunityModel alloc]init];
+                    [model setValuesForKeysWithDictionary:itemDict];
+                    [weakSelf.userArray addObject:model];
+                }
             }
             
-            NSDictionary *users = result[@"users"];
-            for (id userKey in users) {
-                NSString *key = [NSString stringWithFormat:@"%@",userKey];
-                NSDictionary *itemDict = users[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc]init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.userArray addObject:model];
-            }
+          
             
             if (weakSelf.userArray.count == 0) {
                 weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
@@ -155,6 +164,9 @@
     for (NSInteger i = 0; i < self.userArray.count; i++) {
         ODCommunityModel *userModel = self.userArray[i];
         if ([[NSString stringWithFormat:@"%@",model.user_id] isEqualToString:[NSString stringWithFormat:@"%@",userModel.id]]) {
+            
+         
+             cell.signLabel.text = userModel.sign;
             cell.nickLabel.text = userModel.nick;
             [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
         }
