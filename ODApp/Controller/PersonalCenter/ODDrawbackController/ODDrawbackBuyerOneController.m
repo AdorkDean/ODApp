@@ -27,9 +27,10 @@
     [self createScrollView];
 }
 
-
+#pragma mark - Create UIScrollView
 - (void)createScrollView
 {
+    #pragma mark - 动态设置 ScrollView 的高度
     float scrollViewHeight;
     if (self.isRefuseAndReceive || self.isRelease)
     {
@@ -43,6 +44,7 @@
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     [self.view addSubview:self.scrollView];
     
+    #pragma mark - 动态设置 退款理由 的高度
     float drawBackHeight = 43;
     float drawbackReasonHeight;
     if (self.isSelectReason)
@@ -76,6 +78,7 @@
     self.drawbackReasonContentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.drawbackReasonContentView];
     
+    #pragma mark - 退款原因版块 可选择
     if (self.isSelectReason)
     {
         float reasonLabelLeftMargin = 25;
@@ -159,6 +162,7 @@
             [self.drawbackReasonContentView addSubview:self.drawbackReasonLineView];
         }
     }
+    #pragma mark - 退款原因版块 不可选择
     else
     {
         self.drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, drawBackHeight)];
@@ -173,6 +177,7 @@
         [self.drawbackReasonContentView addSubview:self.drawbackReasonContentLabel];
     }
     
+    #pragma mark - 显示 拒绝原因 版块
     if (self.isRefuseReason)
     {
         self.refuseReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonContentView.frame), KScreenWidth, 22)];
@@ -197,6 +202,7 @@
         [self.refuseReasonContentView addSubview:self.refuseReasonContentLabel];
     }
     
+    #pragma mark - 动态设置 联系客服GetMaxY
     float serviceGetMaxY;
     if (self.isDrawbackState)
     {
@@ -212,6 +218,7 @@
         serviceGetMaxY = CGRectGetMaxY(self.drawbackReasonContentView.frame);
     }
     
+    #pragma mark - 显示 联系客服 版块
     if (self.isService)
     {
         self.contactServiceLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, serviceGetMaxY, KScreenWidth, 22)];
@@ -255,6 +262,7 @@
         [self.scrollView addSubview:self.serviceTimeLabel];
     }
     
+    #pragma mark - 动态设置 ScrollView ContentSize
     float scrollContentHeight;
     if (self.isService)
     {
@@ -271,6 +279,7 @@
     
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width,scrollContentHeight );
     
+    #pragma mark - 显示 申请退款按钮
     if (self.isRelease)
     {
         self.releaseButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KControllerHeight - ODNavigationHeight - 50, KScreenWidth, 50)];
@@ -283,6 +292,7 @@
         [self.view addSubview:self.releaseButton];        
     }
     
+    #pragma mark - 显示 拒绝and接受按钮
     if (self.isRefuseAndReceive)
     {
         self.refuseButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KControllerHeight - ODNavigationHeight - 50, KScreenWidth / 2, 50)];
@@ -305,7 +315,7 @@
     }
 }
 
-
+#pragma mark - 懒加载（退款说明）
 -(UIView *)drawbackStateView
 {
     if (!_drawbackStateView)
@@ -383,7 +393,7 @@
     }
                     failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-        
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -417,7 +427,7 @@
     }
                      failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -452,7 +462,7 @@
     }
               failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -634,31 +644,6 @@
     [[[UIApplication sharedApplication]keyWindow] addSubview:self.cancelOrderView];
 }
 
-#pragma mark - 拨打电话
-- (void)servicePhoneButtonClick:(UIButton *)button
-{
-    NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.servicePhone];
-    UIWebView *callWebView = [[UIWebView alloc] init];
-    [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
-    [self.view addSubview:callWebView];    
-}
-
-- (void)submitAction:(UIButton *)sender
-{
-    if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
-    {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入拒绝原因"];
-    }else
-    {
-        [self refuseDrawbackRequest];
-    }
-}
-
-- (void)cancelView:(UIButton *)sender
-{
-    [self.cancelOrderView removeFromSuperview];
-}
-
 #pragma mark - 接受 按钮点击事件
 - (void)receiveButtonClick:(UIButton *)button
 {
@@ -693,6 +678,32 @@
         self.drawbackReason = self.drawbackStateTextView.text;
         [self releaseDrawbackRequest];
     }
+}
+
+#pragma mark - 拨打电话
+- (void)servicePhoneButtonClick:(UIButton *)button
+{
+    NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.servicePhone];
+    UIWebView *callWebView = [[UIWebView alloc] init];
+    [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
+    [self.view addSubview:callWebView];    
+}
+
+- (void)submitAction:(UIButton *)sender
+{
+    if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
+    {
+        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入拒绝原因"];
+    }
+    else
+    {
+        [self refuseDrawbackRequest];
+    }
+}
+
+- (void)cancelView:(UIButton *)sender
+{
+    [self.cancelOrderView removeFromSuperview];
 }
 
 #pragma mark - UITextViewDelegate
