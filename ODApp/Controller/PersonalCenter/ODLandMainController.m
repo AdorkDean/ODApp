@@ -264,7 +264,6 @@
         ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
         vc.open_id = self.model.open_id;
         vc.centerTitle = @"我的预约纪录";
-        vc.isRefresh = YES;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.section == 3){
