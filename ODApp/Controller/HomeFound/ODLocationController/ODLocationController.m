@@ -21,7 +21,8 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 
 @implementation ODLocationController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
     self.navigationItem.title = @"选择城市";
@@ -30,33 +31,28 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     self.cityIdArray = [[NSMutableArray alloc] init];
     [self createCollectionView];
     [self getCityListRequest];
-    
 }
 
 - (void)getCityListRequest
 {
     __weakSelf
     NSDictionary *parameter = @{@"region_name":@"上海"};
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
-
     [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
     {
-        [SVProgressHUD dismiss];
-
         ODLocationModel *mode = [model result];
         weakSelf.cityListArray = [mode.all valueForKeyPath:@"name"];
         weakSelf.cityIdArray = [mode.all valueForKey:@"id"];
         [weakSelf.collectionView reloadData];
         
-    } failure:^(NSError *error)
+    }
+                   failure:^(NSError *error)
     {
-        [SVProgressHUD dismiss];
+        
     }];
 }
 
 - (void)createCollectionView
 {
-
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) collectionViewLayout:self.flowLayout];
     
@@ -67,7 +63,6 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLocationCell" bundle:nil] forCellWithReuseIdentifier:ODLocationCellID];
     
     [self.view addSubview:self.collectionView];
-    
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -80,7 +75,6 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     
     cell.cityNameLabel.text = self.cityListArray[indexPath.row];
     return cell;
-
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -101,26 +95,23 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationLocationSuccessRefresh object:nil];
     
     [self.navigationController popViewControllerAnimated:YES];
-
 }
-
 
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     return CGSizeMake(kScreenSize.width , 40);
 }
 
 //动态设置每个分区的最小行间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    
     return 1;
 }
 
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

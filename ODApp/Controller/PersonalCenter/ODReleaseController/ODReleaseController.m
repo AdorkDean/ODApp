@@ -88,7 +88,8 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         }
         [weakSelf.collectionView reloadData];
         [weakSelf.collectionView.mj_header endRefreshing];
-    } failure:^(NSError *error)
+    }
+                   failure:^(NSError *error)
     {
 
         [weakSelf.collectionView.mj_footer endRefreshing];
@@ -104,10 +105,8 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weakSelf
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [self.manager GET:ODPersonReleaseTaskDeleteUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-        [SVProgressHUD dismiss];
         [weakSelf createRequestData];
         if ([responseObject[@"status"] isEqualToString:@"success"])
         {
@@ -118,9 +117,10 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    }
+              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
     {
-        [SVProgressHUD dismiss];
+
     }];
 }
 
