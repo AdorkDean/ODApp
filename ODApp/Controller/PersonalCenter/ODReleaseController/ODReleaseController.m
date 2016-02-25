@@ -48,6 +48,12 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     [self createRequestData];
 }
 
+#pragma mark - 移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - 加载数据请求
 - (void)createRequestData
 {
@@ -130,6 +136,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 #pragma mark - Action
 
+#pragma mark - 编辑 点击事件
 - (void)editButtonClick:(UIButton *)button
 {
     ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview.superview;
@@ -153,6 +160,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     }
 }
 
+#pragma mark - 删除 点击事件
 - (void)deleteButtonClick:(UIButton *)button
 {
     __weakSelf

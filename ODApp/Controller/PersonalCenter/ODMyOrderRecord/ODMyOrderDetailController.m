@@ -33,6 +33,45 @@
      }
 }
 
+#pragma mark - 加载数据请求
+- (void)getOrderDetailRequest
+{
+    self.manager = [AFHTTPRequestOperationManager manager];
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    NSDictionary *parameter = @{@"order_id":self.order_id};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    __weak typeof (self)weakSelf = self;
+    [self.manager GET:kMyOrderDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+     {
+         if (responseObject)
+         {
+             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+             
+             NSDictionary *result = dict[@"result"];
+             weakSelf.model = [[ODMyOrderDetailModel alloc]init];
+             [weakSelf.model setValuesForKeysWithDictionary:result];
+             [weakSelf.dataArray addObject:weakSelf.model];
+             
+             NSDictionary *devices = result[@"devices"];
+             for (NSDictionary *itemDict in devices)
+             {
+                 NSString *name = itemDict[@"name"];
+                 [weakSelf.devicesArray addObject:name];
+             }
+         }
+         [weakSelf createOrderView];
+         
+     }
+              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+     {
+         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+     }];
+}
+
+
+#pragma mark - 取消预约 点击事件
 - (void)cancelOrderButtonClick:(UIButton *)button
 {
     if ([self.checkLabel.text isEqualToString:@"已取消"] || [self.checkLabel.text isEqualToString:@"后台取消"])
@@ -75,42 +114,17 @@
     }
 }
 
-- (void)getOrderDetailRequest
+#pragma mark - 拨打电话
+- (void)phoneButtonClick:(UIButton *)button
 {
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-   
-    NSDictionary *parameter = @{@"order_id":self.order_id};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:kMyOrderDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-    {
-        if (responseObject)
-        {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            NSDictionary *result = dict[@"result"];
-            weakSelf.model = [[ODMyOrderDetailModel alloc]init];
-            [weakSelf.model setValuesForKeysWithDictionary:result];
-            [weakSelf.dataArray addObject:weakSelf.model];
-            
-            NSDictionary *devices = result[@"devices"];
-            for (NSDictionary *itemDict in devices)
-            {
-                NSString *name = itemDict[@"name"];
-                [weakSelf.devicesArray addObject:name];
-            }
-        }
-        [weakSelf createOrderView];
-        
-    }
-              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-    {
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
-    }];
+    NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.model.store_tel];
+    UIWebView *callWebView = [[UIWebView alloc] init];
+    [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
+    [self.view addSubview:callWebView];
 }
 
+
+#pragma mark - Create UIScrollView
 - (void)createOrderView
 {
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight)];
@@ -209,13 +223,7 @@
     [self.view addSubview:self.scrollView];
 }
 
-- (void)phoneButtonClick:(UIButton *)button
-{
-    NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.model.store_tel];
-    UIWebView *callWebView = [[UIWebView alloc] init];
-    [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
-    [self.view addSubview:callWebView];
-}
+
 
 
 - (void)didReceiveMemoryWarning
