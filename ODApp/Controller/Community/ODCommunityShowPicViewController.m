@@ -72,9 +72,7 @@
     }
     
     cell.picImageView.center = CGPointMake(kScreenSize.width/2, kScreenSize.height/2);
-    cell.scrollView.maximumZoomScale = 2.0;
-    cell.scrollView.minimumZoomScale = 1;
-     cell.scrollView.contentSize = cell.picImageView.frame.size;
+    cell.scrollView.zoomScale = 1;
     return cell;
 }
 

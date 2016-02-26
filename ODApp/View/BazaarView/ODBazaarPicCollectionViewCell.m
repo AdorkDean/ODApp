@@ -10,8 +10,10 @@
 
 @implementation ODBazaarPicCollectionViewCell
 
-- (void)awakeFromNib {
-
+- (void)awakeFromNib
+{
+    self.scrollView.maximumZoomScale = 2.0;
+    self.scrollView.minimumZoomScale = 1;
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
