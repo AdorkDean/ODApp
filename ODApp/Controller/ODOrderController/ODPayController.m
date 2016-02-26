@@ -65,6 +65,9 @@
 - (void)failPay:(NSNotification *)text
 {
     
+    
+      
+    
     NSString *code = text.userInfo[@"codeStatus"];
     self.isPay = @"2";
     [self getDatawithCode:code];
@@ -77,6 +80,9 @@
 
 - (void)successPay:(NSNotification *)text
 {
+    
+    
+    
     NSString *code = text.userInfo[@"codeStatus"];
     self.isPay = @"1";
     [self getDatawithCode:code];
@@ -100,6 +106,13 @@
         
          __weak typeof (self)weakSelf = self;
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
+            
+            
+            
+            
+            
+            
+     
             
             
             

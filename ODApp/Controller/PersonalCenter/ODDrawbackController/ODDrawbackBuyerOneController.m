@@ -378,11 +378,9 @@
         {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已拒绝"];
             
-            //创建通知
-            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
-            //通过通知中心发送通知
-            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
             
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
             [weakSelf.cancelOrderView removeFromSuperview];
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
@@ -413,9 +411,8 @@
         {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已接受"];
             
-            //创建通知
-            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
-            //通过通知中心发送通知
+            NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
+            
             [[NSNotificationCenter defaultCenter] postNotification:notification];
 
             [weakSelf.navigationController popViewControllerAnimated:YES];
@@ -448,10 +445,18 @@
         {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"申请退款成功"];
             
-            //创建通知
-            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
-            //通过通知中心发送通知
+//            //创建通知
+//            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
+//            //通过通知中心发送通知
+//            [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
+            
+          
+            NSNotification *notification =[NSNotification notificationWithName:ODNotificationMyOrderThirdRefresh object:nil userInfo:nil];
+            
             [[NSNotificationCenter defaultCenter] postNotification:notification];
+            
+            
             
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }

@@ -43,7 +43,6 @@
      self.navigationItem.title = @"已购买订单";
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:ODNotificationOrderListRefresh object:nil];
     
     
        
@@ -64,12 +63,25 @@
 {
     [super viewWillAppear:animated];
     
-    if ([self.isRefresh isEqualToString:@"1"]) {
-        [self.collectionView.mj_header beginRefreshing];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationMyOrderSecondRefresh object:nil];
 
 
 }
+
+- (void)reloadData:(NSNotification *)text
+{
+    
+    
+    ODMyOrderModel *model = self.dataArray[self.indexRow];
+    model.order_status = [NSString stringWithFormat:@"%@" , text.userInfo[@"orderStatus"]];
+    [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
+    [self.collectionView reloadData];
+    
+    
+}
+
+
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -211,18 +223,23 @@
     
     
     
-      ODMyOrderModel *model = self.dataArray[indexPath.row];
+    ODMyOrderModel *model = self.dataArray[indexPath.row];
+    
+    NSString *orderStatus = [NSString stringWithFormat:@"%@" , model.order_status];
+    
+    
     
     
       NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
     
-    
+       self.indexRow = indexPath.row;
     
       
     if ([swap_type isEqualToString:@"1"]) {
         ODSecondOrderDetailController *vc = [[ODSecondOrderDetailController alloc] init];
         vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
         vc.orderType = model.status_str;
+        vc.orderStatus = orderStatus;
         [self.navigationController pushViewController:vc animated:YES];
         
         __weakSelf
@@ -239,6 +256,7 @@
         ODOrderDetailController *vc = [[ODOrderDetailController alloc] init];
         vc.order_id = [NSString stringWithFormat:@"%@" , model.order_id];
         vc.orderType = model.status_str;
+        vc.orderStatus = orderStatus;
         [self.navigationController pushViewController:vc animated:YES];
         
         __weakSelf

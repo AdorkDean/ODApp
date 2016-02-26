@@ -77,6 +77,18 @@ NSString * const ODNotificationOrderListRefresh = @"ODNotificationOrderListRefre
 NSString * const ODNotificationloveSkill = @"ODNotificationloveSkill";
 
 
+/** 已购买二级页面通知 */
+NSString * const ODNotificationMyOrderSecondRefresh = @"ODNotificationMyOrderSecondRefresh";
+/** 已购买三级页面通知 */
+NSString * const ODNotificationMyOrderThirdRefresh = @"ODNotificationMyOrderThirdRefresh";
+/** 已卖出二级页面通知 */
+NSString * const ODNotificationSellOrderSecondRefresh = @"ODNotificationSellOrderSecondRefresh";
+/** 已购买三级页面通知 */
+NSString * const ODNotificationSellOrderThirdRefresh = @"ODNotificationSellOrderThirdRefresh";
+
+
+
+
 #pragma mark - 请求URL接口
 /** 统一的URL */
 #ifdef DEBUG

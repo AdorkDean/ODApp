@@ -55,7 +55,44 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 50, 20)];
+    [button setTitle:@"返回" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    [button addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+
+    
 }
+
+- (void)backAction:(UIBarButtonItem *)sender
+{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backRefrash:) name:ODNotificationSellOrderThirdRefresh object:nil];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    
+    
+}
+
+- (void)backRefrash:(NSNotification *)text
+{
+    
+    ODOrderDetailModel *statusModel = self.dataArray[0];
+    NSString *orderStatue = [NSString stringWithFormat:@"%@" , statusModel.order_status];
+    NSDictionary *dic =[[NSDictionary alloc] initWithObjectsAndKeys:orderStatue,@"orderStatus", nil];
+    NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderSecondRefresh object:nil userInfo:dic];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:notification];
+    
+    
+    
+    
+}
+
+
+
 
 
 - (void)viewWillAppear:(BOOL)animated
@@ -67,6 +104,11 @@
 
 - (void)getData
 {
+    
+    
+  
+
+    
     self.manager = [AFHTTPRequestOperationManager manager];
     
     
@@ -88,6 +130,28 @@
                 ODOrderDetailModel *model = [[ODOrderDetailModel alloc] init];
                 [model setValuesForKeysWithDictionary:dic];
                 [self.dataArray addObject:model];
+                
+                
+                
+                ODOrderDetailModel *statusModel = self.dataArray[0];
+                NSString *orderStatue = [NSString stringWithFormat:@"%@" , statusModel.order_status];
+                
+                
+                NSLog(@"_____%@" , weakSelf.orderStatus);
+                  NSLog(@"_____%@" , orderStatue);
+                
+                
+                if (![self.orderStatus isEqualToString:orderStatue]) {
+                    
+                    
+                    NSDictionary *dic =[[NSDictionary alloc] initWithObjectsAndKeys:orderStatue,@"orderStatus", nil];
+                    NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderSecondRefresh object:nil userInfo:dic];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotification:notification];
+                    
+                }
+                
+
                 
                 
                 
@@ -351,6 +415,13 @@
             
             
             
+            ODOrderDetailModel *statusModel = self.dataArray[0];
+            self.orderStatus = [NSString stringWithFormat:@"%@" , statusModel.order_status];
+          
+       
+
+            
+            
             if (self.getRefresh) {
                 
                 
@@ -570,6 +641,11 @@
     
 }
 
+- (void)dealloc
+{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 - (void)didReceiveMemoryWarning {

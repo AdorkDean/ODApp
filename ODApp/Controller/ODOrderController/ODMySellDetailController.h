@@ -18,6 +18,11 @@
 
 @property (nonatomic , copy) NSString *orderId;
 
+
+
+@property (nonatomic , copy) NSString *orderStatus;
+
+
 @property(nonatomic,copy)void(^getRefresh)(NSString *isRefresh);
 
 
