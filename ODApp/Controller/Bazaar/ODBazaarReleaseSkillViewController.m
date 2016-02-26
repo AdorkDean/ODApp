@@ -408,6 +408,7 @@
     self.priceTextField.font = [UIFont systemFontOfSize:14];
     self.priceTextField.text = self.price;
     self.priceTextField.delegate = self;
+    self.priceTextField.keyboardType = UIKeyboardTypeNumberPad;
     [priceView addSubview:self.priceTextField];
     
     UIView *unitView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(priceView.frame)+6, kScreenSize.width, 50)];
@@ -610,18 +611,18 @@
         
         NSDictionary *parameter;
         if (self.timeArray.count) {
-            parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+            parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }else{
-            parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.editTimeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+            parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.editTimeArray description],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self pushDataWithUrl:kBazaarEditSkillUrl parameter:signParameter isEdit:YES];
     }else{
         NSDictionary *parameter;
         if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
-            parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+            parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }else if ([self.swap_type isEqualToString:@"2"]){
-            parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":@"",@"imgs":imageStr,@"city_id":@"321",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+            parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":@"",@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter isEdit:NO];
@@ -697,84 +698,35 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     if (textField == self.priceTextField) {
-        
-//        if ([textField.text rangeOfString:@"."].location == NSNotFound) {
-//            self.isHaveDian = NO;
-//        }
-//        if ([string length] > 0) {
-//            unichar single = [string characterAtIndex:0];
-//            if ((single >= '0' && single <= '9') || single == '.') {
-//                if([textField.text length] == 0){
-//                    if(single == '.') {
-//                        [textField.text stringByReplacingCharactersInRange:range withString:@""];
-//                        return NO;
-//                    }
-//                }
-//                if (single == '.') {
-//                    if(!self.isHaveDian){
-//                        self.isHaveDian = YES;
-//                        return YES;
-//                    }else{
-//                        [textField.text stringByReplacingCharactersInRange:range withString:@""];
-//                        return NO;
-//                    }
-//                }
-//            }else{
-//                [textField.text stringByReplacingCharactersInRange:range withString:@""];
-//                return NO;
-//            }
-//        }else{
-//            return YES;
-//        }
-        
         if ([textField.text rangeOfString:@"."].location == NSNotFound) {
             self.isHaveDian = NO;
         }
         if ([string length] > 0) {
-            
-            unichar single = [string characterAtIndex:0];//当前输入的字符
-            if ((single >= '0' && single <= '9') || single == '.') {//数据格式正确
-                
-
-                //输入的字符是否是小数点
-                if (single == '.') {
-                    if(!self.isHaveDian)//text中还没有小数点
-                    {
-                        self.isHaveDian = YES;
-                        return YES;
-                        
-                    }else{
-                        
+            unichar single = [string characterAtIndex:0];
+            if ((single >= '0' && single <= '9') || single == '.') {
+                if([textField.text length] == 0){
+                    if(single == '.') {
                         [textField.text stringByReplacingCharactersInRange:range withString:@""];
                         return NO;
                     }
-                }else{
-                    if (self.isHaveDian) {//存在小数点
-                        
-                        //判断小数点的位数
-                        NSRange ran = [textField.text rangeOfString:@"."];
-                        if (range.location - ran.location <= 2) {
-                            return YES;
-                        }else{
-             
-                            return YES;
-                        }
-                    }else{
+                }
+                if (single == '.') {
+                    if(!self.isHaveDian){
+                        self.isHaveDian = YES;
                         return YES;
+                    }else{
+                        [textField.text stringByReplacingCharactersInRange:range withString:@""];
+                        return NO;
                     }
                 }
-            }else{//输入的数据格式不正确
+            }else{
                 [textField.text stringByReplacingCharactersInRange:range withString:@""];
                 return NO;
             }
-        }
-        else
-        {
+        }else{
             return YES;
         }
         
-        
-//        
     }
     return YES;
 }
