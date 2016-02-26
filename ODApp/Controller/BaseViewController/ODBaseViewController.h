@@ -12,6 +12,7 @@
 #import "SVProgressHUD.h"
 #import "ODProgressHUD.h"
 #import "ODHttpTool.h"
+#import "ODNetClosedView.h"
 
 @interface ODBaseViewController : UIViewController <MBProgressHUDDelegate>
 @property (nonatomic,strong)    MBProgressHUD *HUD;

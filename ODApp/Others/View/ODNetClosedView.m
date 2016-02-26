@@ -17,7 +17,21 @@
 
 @implementation ODNetClosedView
 
-Single_Implementation(ODNetClosedView)
+
++ (instancetype)sharedView
+{
+    static dispatch_once_t once;
+    static ODNetClosedView *sharedView;
+    dispatch_once(&once, ^
+    {
+        sharedView = [[self alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        sharedView.backgroundColor = [UIColor greenColor];
+        sharedView.frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight);
+        [[UIApplication sharedApplication].keyWindow addSubview:sharedView];
+        sharedView.hidden = YES;
+    });
+    return sharedView;
+}
 
 - (UIImageView *)imageView
 {
@@ -57,12 +71,20 @@ Single_Implementation(ODNetClosedView)
     self.imageView.center = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
     self.label1.frame = CGRectMake(0, CGRectGetMaxY(self.imageView.frame) + 20, self.od_width,20);
     self.label2.frame = CGRectMake(0, CGRectGetMaxY(self.label1.frame) + 20, self.od_width, 20);
-    
 }
 
 + (instancetype)netCloseView
 {
-    return [[self sharedODNetClosedView]initWithFrame:[UIScreen mainScreen].bounds];
+    return [[self sharedView]initWithFrame:[UIScreen mainScreen].bounds];
 }
 
++ (void)show
+{
+    [[self netCloseView]setHidden:NO];
+}
+
++ (void)dismiss
+{
+    [[self netCloseView]setHidden:YES];
+}
 @end
