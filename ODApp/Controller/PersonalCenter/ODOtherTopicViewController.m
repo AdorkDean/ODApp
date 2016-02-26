@@ -103,7 +103,7 @@
                 [weakSelf.collectionView.mj_footer noticeNoMoreData];
             }
         }
-            if (weakSelf.dataArray.count == 0) {
+            if ((self.count = 1 && weakSelf.dataArray.count == 0)) {
                 weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [weakSelf.view addSubview:self.noReusltLabel];
             }
