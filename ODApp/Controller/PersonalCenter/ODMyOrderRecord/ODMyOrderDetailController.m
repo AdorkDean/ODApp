@@ -31,8 +31,22 @@
     {
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelOrderButtonClick:) color:nil highColor:nil title:@"取消预约"];
      }
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(17.5, 10, 50, 20)];
+    [button setTitle:@"返回" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    [button addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
 }
 
+- (void)backAction:(UIBarButtonItem *)sender
+{
+    
+    NSDictionary *loveDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.status_str,@"status_str", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil userInfo:loveDict];
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 #pragma mark - 加载数据请求
 - (void)getOrderDetailRequest
 {
@@ -102,6 +116,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil];
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
                 weakSelf.checkLabel.text = @"已取消";
+                weakSelf.status_str = weakSelf.checkLabel.text;
             }
                        failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
             {

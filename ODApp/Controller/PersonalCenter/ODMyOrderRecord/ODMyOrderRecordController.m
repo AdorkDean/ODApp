@@ -38,10 +38,8 @@
                                          [weakSelf loadMoreData];
                                      }];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationCancelOrder object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
-    {
-        [self createRequest];
-    }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationCancelOrder object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -53,6 +51,15 @@
         self.isRefresh = NO;
     }
 }
+
+- (void)reloadData:(NSNotification *)text
+{
+    ODMyOrderRecordModel *model = self.orderArray[self.cancelOrderRow];
+    model.status_str = [NSString stringWithFormat:@"%@", text.userInfo[@"status_str"]];
+    [self.orderArray replaceObjectAtIndex:self.cancelOrderRow withObject:model];
+    [self.collectionView reloadData];
+}
+
 
 - (void)loadMoreData
 {
