@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -21,7 +21,7 @@
                         </constraints>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJR-PQ-Jvk">
-                        <rect key="frame" x="320" y="16" width="38" height="13"/>
+                        <rect key="frame" x="320.5" y="16" width="37.5" height="13"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12.5" id="nQd-ye-IXJ"/>
                         </constraints>
@@ -30,20 +30,23 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Gf-N6-WPl">
-                        <rect key="frame" x="75" y="39" width="11" height="11"/>
+                        <rect key="frame" x="75" y="39" width="13" height="12"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="11" id="Fhz-pF-7FA"/>
-                            <constraint firstAttribute="width" constant="11" id="yME-HB-LPx"/>
+                            <constraint firstAttribute="height" constant="12" id="Fhz-pF-7FA"/>
+                            <constraint firstAttribute="width" constant="13" id="y6q-e8-94f"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fT4-PT-V8T">
-                        <rect key="frame" x="92" y="39" width="29" height="11"/>
+                        <rect key="frame" x="94" y="39" width="29" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="29" id="uKs-0A-5VI"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UI7-aa-fLA">
-                        <rect key="frame" x="75" y="180" width="283" height="16"/>
+                        <rect key="frame" x="75" y="181" width="283" height="16"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16" id="FOw-Ka-y0Q"/>
                         </constraints>
@@ -51,11 +54,11 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_Collection" translatesAutoresizingMaskIntoConstraints="NO" id="dDI-L7-eOR">
-                        <rect key="frame" x="256" y="210" width="12" height="11"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_Collection" translatesAutoresizingMaskIntoConstraints="NO" id="dDI-L7-eOR">
+                        <rect key="frame" x="256" y="211" width="12" height="11"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mZ-Wp-S8t">
-                        <rect key="frame" x="334" y="211" width="24" height="9"/>
+                        <rect key="frame" x="334" y="212" width="24" height="9"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="9" id="92T-BQ-6pj"/>
                         </constraints>
@@ -64,13 +67,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwH-6z-Myb">
-                        <rect key="frame" x="276" y="211" width="24" height="9"/>
+                        <rect key="frame" x="276" y="212" width="24" height="9"/>
                         <fontDescription key="fontDescription" type="system" pointSize="9"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_share" translatesAutoresizingMaskIntoConstraints="NO" id="JdT-4Q-zLf">
-                        <rect key="frame" x="315" y="210" width="11" height="11"/>
+                        <rect key="frame" x="315" y="211" width="11" height="11"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sjv-ul-Sja">
                         <rect key="frame" x="75" y="17" width="30" height="12"/>
@@ -82,7 +85,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hr6-EL-V7w">
-                        <rect key="frame" x="75" y="68" width="292" height="100"/>
+                        <rect key="frame" x="75" y="69" width="292" height="100"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="cPg-En-IJa"/>
                         </constraints>
@@ -122,6 +125,7 @@
             <connections>
                 <outlet property="contentLabel" destination="UI7-aa-fLA" id="5V1-wc-YrA"/>
                 <outlet property="genderImageView" destination="4Gf-N6-WPl" id="Arw-1J-1KB"/>
+                <outlet property="genderImgWidthConstant" destination="y6q-e8-94f" id="gpt-qE-zuS"/>
                 <outlet property="headButton" destination="bCh-Ex-1yr" id="jCo-3G-zML"/>
                 <outlet property="loveLabel" destination="OwH-6z-Myb" id="XN3-IF-H1W"/>
                 <outlet property="nickLabel" destination="fT4-PT-V8T" id="m1M-1g-vPw"/>

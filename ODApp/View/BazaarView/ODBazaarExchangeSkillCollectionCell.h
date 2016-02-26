@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *genderImageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *picViewConstraintHeight;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *genderImgWidthConstant;
 @property (assign,nonatomic) CGFloat height;
 -(void)showDatasWithModel:(ODBazaarExchangeSkillModel *)model;
 

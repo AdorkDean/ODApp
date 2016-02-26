@@ -10,6 +10,8 @@
 
 @interface ODNetClosedView : UIView
 
-Single_Interface(ODNetClosedView)
 
+
++ (void)show;
++ (void)dismiss;
 @end
