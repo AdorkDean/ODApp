@@ -9,7 +9,9 @@
 #import "ODOtherTopicViewController.h"
 
 @interface ODOtherTopicViewController ()
-
+{
+    NSMutableDictionary *userInfoDic;
+}
 @end
 
 @implementation ODOtherTopicViewController
@@ -38,7 +40,7 @@
 -(void)loadMoreData
 {
     self.count ++;
-    NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",(long)self.count],@"open_id":self.open_id};
+    NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",(long)self.count],@"open_id":self.open_id,@"call_array":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kHomeFoundListUrl paramater:signParameter];
 }
@@ -51,13 +53,14 @@
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.dataArray = [[NSMutableArray alloc]init];
     self.userArray = [[NSMutableArray alloc]init];
+    userInfoDic = [NSMutableDictionary dictionary];
 }
 
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
     self.count = 1;
-    NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",(long)self.count],@"open_id":self.open_id};
+    NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",(long)self.count],@"open_id":self.open_id,@"call_array":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kHomeFoundListUrl paramater:signParameter];
 }
@@ -68,46 +71,39 @@
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
+        
         if (weakSelf.count == 1) {
             [weakSelf.dataArray removeAllObjects];
-            [weakSelf.noReusltLabel removeFromSuperview];
         }
         if (responseObject) {
             NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dcit[@"result"];
             NSDictionary *bbs_list = result[@"bbs_list"];
             
-            if(bbs_list.count == 0){
-                
-                ;
-            }else{
-                
-                NSArray *allkeys = [bbs_list allKeys];
-                allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                    NSComparisonResult result = [obj1 compare:obj2];
-                    return result == NSOrderedAscending;
-                }];
-                for (id bbsKey in allkeys) {
-                    NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
-                    NSDictionary *itemDict = bbs_list[key];
-                    ODCommunityModel *model = [[ODCommunityModel alloc]init];
-                    [model setValuesForKeysWithDictionary:itemDict];
-                    [weakSelf.dataArray addObject:model];
-                }
-                
-                NSDictionary *users = result[@"users"];
-                for (id userKey in users) {
-                    NSString *key = [NSString stringWithFormat:@"%@",userKey];
-                    NSDictionary *itemDict = users[key];
-                    ODCommunityModel *model = [[ODCommunityModel alloc]init];
-                    [model setValuesForKeysWithDictionary:itemDict];
-                    [weakSelf.userArray addObject:model];
-                }
+            for (NSDictionary *itemDict in bbs_list) {
+                ODCommunityModel *model = [[ODCommunityModel alloc]init];
+                [model setValuesForKeysWithDictionary:itemDict];
+                [weakSelf.dataArray addObject:model];
             }
             
-          
+            NSDictionary *users = result[@"users"];
+            for (id userKey in users) {
+                NSString *key = [NSString stringWithFormat:@"%@",userKey];
+                NSDictionary *itemDict = users[key];
+                ODCommunityModel *model = [[ODCommunityModel alloc]init];
+                [model setValuesForKeysWithDictionary:itemDict];
+                [userInfoDic setObject:model forKey:userKey];
+            }
             
-            if (weakSelf.userArray.count == 0) {
+            [weakSelf.collectionView reloadData];
+            [weakSelf.collectionView.mj_header endRefreshing];
+            [weakSelf.collectionView.mj_footer endRefreshing];
+            
+            if (bbs_list.count == 0) {
+                [weakSelf.collectionView.mj_footer noticeNoMoreData];
+            }
+        }
+            if (weakSelf.dataArray.count == 0) {
                 weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [weakSelf.view addSubview:self.noReusltLabel];
             }
@@ -115,10 +111,7 @@
             else{
                 [weakSelf.collectionView reloadData];
             }
-            
-            [weakSelf.collectionView.mj_header endRefreshing];
-            [weakSelf.collectionView.mj_footer endRefreshing];
-        }
+        
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         [weakSelf.collectionView.mj_header endRefreshing];
@@ -159,29 +152,104 @@
 {
     ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommunityCellId forIndexPath:indexPath];
     ODCommunityModel *model = self.dataArray[indexPath.row];
+    NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    [cell.headButton addTarget:self action:@selector(otherInformationClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[userInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
+    cell.nickLabel.text = [userInfoDic[userId]nick];
+    cell.signLabel.text = [userInfoDic[userId]sign];
     [cell showDateWithModel:model];
-    for (NSInteger i = 0; i < self.userArray.count; i++) {
-        ODCommunityModel *userModel = self.userArray[i];
-        if ([[NSString stringWithFormat:@"%@",model.user_id] isEqualToString:[NSString stringWithFormat:@"%@",userModel.id]]) {
-            
-         
-             cell.signLabel.text = userModel.sign;
-            cell.nickLabel.text = userModel.nick;
-            [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
+    CGFloat width=kScreenSize.width>320?90:70;
+    if (model.imgs.count) {
+        for (id vc in cell.picView.subviews) {
+            [vc removeFromSuperview];
         }
+        if (model.imgs.count==4) {
+            for (NSInteger i = 0; i < model.imgs.count; i++) {
+                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+                [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                imageButton.tag = 10*indexPath.row+i;
+                [cell.picView addSubview:imageButton];
+            }
+            cell.PicConstraintHeight.constant = 2*width+5;
+        }else{
+            for (NSInteger i = 0;i < model.imgs.count ; i++) {
+                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+                [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+                imageButton.tag = 10*indexPath.row+i;
+                [cell.picView addSubview:imageButton];
+            }
+            cell.PicConstraintHeight.constant = width+(width+5)*(model.imgs.count/3);
+        }
+    }else{
+        for (id vc in cell.picView.subviews) {
+            [vc removeFromSuperview];
+        }
+        cell.PicConstraintHeight.constant = 0;
     }
     return cell;
 }
 
+-(void)imageButtonClick:(UIButton *)button
+{
+    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODCommunityModel *model = self.dataArray[indexPath.row];
+    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
+    picController.photos = model.imgs_big;
+    picController.selectedIndex = button.tag-10*indexPath.row;
+    [self presentViewController:picController animated:YES completion:nil];
+}
+
+- (void)otherInformationClick:(UIButton *)button
+{
+    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview;
+    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODCommunityModel *model = self.dataArray[indexPath.row];
+    NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+    vc.open_id = [userInfoDic[userId]open_id];
+    
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:[userInfoDic[userId]open_id]]) {
+        
+    }else{
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(kScreenSize.width, 120);
+    return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
 }
+
+
+//动态计算cell的高度
+-(CGFloat)returnHight:(ODCommunityModel *)model
+{
+    CGFloat width=kScreenSize.width>320?90:70;
+    if (model.imgs.count==0) {
+        return 135;
+    }else if (model.imgs.count>0&&model.imgs.count<4){
+        return 135+width;
+    }else if (model.imgs.count>=4&&model.imgs.count<7){
+        return 135+2*width+5;
+    }else if (model.imgs.count>=7&&model.imgs.count<9){
+        return 135+3*width+10;
+    }else{
+        return 135+3*width+10;
+    }
+}
+
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc]init];
+    detailController.myBlock = ^(NSString *refresh){
+        self.refresh = refresh;
+    };
     ODCommunityModel *model = self.dataArray[indexPath.row];
     detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
     [self.navigationController pushViewController:detailController animated:YES];
