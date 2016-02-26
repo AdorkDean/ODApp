@@ -33,6 +33,7 @@
     NSString *gender = [NSString stringWithFormat:@"%@",model.user[@"gender"]];
     if ([gender isEqualToString:@"2"]) {
         self.genderImageView.image = [UIImage imageNamed:@"icon_woman"];
+        self.genderImgWidthConstant.constant = 13;
     }else{
         self.genderImageView.image = [UIImage imageNamed:@"icon_man"];
         self.genderImgWidthConstant.constant = 6;
