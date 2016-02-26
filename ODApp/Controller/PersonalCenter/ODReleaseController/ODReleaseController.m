@@ -26,7 +26,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     self.pageCount = 1;
     self.dataArray = [[NSMutableArray alloc] init];
     
-    [self createCollectionView];
     [self createRequestData];
     __weakSelf;
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationEditSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
@@ -140,7 +139,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 #pragma mark - 编辑 点击事件
 - (void)editButtonClick:(UIButton *)button
 {
-    ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview.superview;
+    ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODReleaseModel *model = self.dataArray[indexPath.row];
     
@@ -171,7 +170,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除技能" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
     {
-        ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview.superview;
+        ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview;
         NSIndexPath *indexPath = [weakSelf.collectionView indexPathForCell:cell];
         ODReleaseModel *model = weakSelf.dataArray[indexPath.row];
         
@@ -183,28 +182,31 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 }
 
 #pragma mark - Create UICollectionView
-- (void)createCollectionView
+- (UICollectionView *)collectionView
 {
-    __weakSelf
-    self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.flowLayout.minimumLineSpacing = 1;
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) collectionViewLayout:self.flowLayout];
-    
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ODReleaseCell" bundle:nil] forCellWithReuseIdentifier:ODReleaseCellID];
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
-    {
-        weakSelf.pageCount = 1;
-        [weakSelf createRequestData];
-    }];
-   
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^
-    {
-        [weakSelf loadMoreData];
-    }];
-    [self.view addSubview:self.collectionView];
+    if (!_collectionView) {
+        __weakSelf
+        self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        self.flowLayout.minimumLineSpacing = 1;
+        self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) collectionViewLayout:self.flowLayout];
+        
+        self.collectionView.delegate = self;
+        self.collectionView.dataSource = self;
+        self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        [self.collectionView registerNib:[UINib nibWithNibName:@"ODReleaseCell" bundle:nil] forCellWithReuseIdentifier:ODReleaseCellID];
+        self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
+                                         {
+                                             weakSelf.pageCount = 1;
+                                             [weakSelf createRequestData];
+                                         }];
+        
+        self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^
+                                         {
+                                             [weakSelf loadMoreData];
+                                         }];
+        [self.view addSubview:self.collectionView];
+    }
+    return _collectionView;
 }
 
 #pragma mark - UICollectionViewDelegate
