@@ -31,5 +31,6 @@
 @property(nonatomic)NSInteger count;
 @property(nonatomic,strong)UIButton *screeningButton;
 @property(nonatomic,copy)NSString *refresh;
+@property(nonatomic)NSInteger indexPath;
 
 @end

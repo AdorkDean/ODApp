@@ -68,15 +68,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
      {
         [weakSelf.collectionView.mj_footer endRefreshing];
         
-        if (model == nil)
-        {
-            weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
-            weakSelf.noReusltLabel.text = @"暂无技能";
-            weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
-            weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
-            weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-            [weakSelf.view addSubview:weakSelf.noReusltLabel];
-        }
+        
         if ([[model result]count] == 0)
         {
             [weakSelf.collectionView.mj_footer noticeNoMoreData];
@@ -94,6 +86,17 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         }
         [weakSelf.collectionView reloadData];
         [weakSelf.collectionView.mj_header endRefreshing];
+         
+         
+         if (self.pageCount == 1 && self.dataArray.count == 0)
+         {
+             weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
+             weakSelf.noReusltLabel.text = @"暂无技能";
+             weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
+             weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
+             weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+             [weakSelf.view addSubview:weakSelf.noReusltLabel];
+         }
     }
                    failure:^(NSError *error)
     {

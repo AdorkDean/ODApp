@@ -78,6 +78,10 @@ UIKIT_EXTERN NSString * const ODNotificationOrderListRefresh;
 /**  退出成功刷新集市状态 */
 UIKIT_EXTERN NSString * const ODNotificationQuit;
 
+/**  回复成功后刷新 */
+UIKIT_EXTERN NSString * const ODNotificationReplySuccess;
+
+
 
 
 #pragma mark - 请求URL接口 

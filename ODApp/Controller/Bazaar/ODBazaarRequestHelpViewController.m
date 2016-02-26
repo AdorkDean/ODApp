@@ -223,6 +223,12 @@
                 [weakSelf.dataArray addObject:model];
             }
             
+            if (weakSelf.dataArray.count){
+                if ([weakSelf.refresh isEqualToString:@"refresh"]) {
+                    [weakSelf.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:weakSelf.dataArray.count-1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+                }
+            }
+            
             [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
@@ -315,6 +321,7 @@
         if ([self.refresh isEqualToString:@"accept"]) {
             [bazaarDetail.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
         }
+        self.indexPath = indexPath.row;
         [self.navigationController pushViewController:bazaarDetail animated:YES];
     
 }

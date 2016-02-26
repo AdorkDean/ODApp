@@ -25,11 +25,8 @@
 }
 
 
-- (void)setModel:(ODMyOrderModel *)model
+- (void)dealWithBuyModel:(ODMyOrderModel *)model
 {
-    if (_model != model) {
-        _model = model;
-    }
     
     [self.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.swap_user_avatar] forState:UIControlStateNormal];
     
@@ -88,7 +85,7 @@
     }else if ([status isEqualToString:@"-4"]) {
         self.statusLabel.text = @"已退款";
         self.statusLabel.textColor = [UIColor redColor];
-
+        
     }else if ([status isEqualToString:@"-5"]) {
         self.statusLabel.text = @"拒绝退款";
         self.statusLabel.textColor = [UIColor redColor];
@@ -96,21 +93,24 @@
     
     
     NSString *gender = [NSString stringWithFormat:@"%@" , model.swap_user_gender];
-    if ([gender isEqualToString:@"0"]) {
+    
+    
+    if ([gender isEqualToString:@"2"]) {
         
+          self.genderImageWith.constant = 13;
         self.gerderImgeView.image = [UIImage imageNamed:@"icon_woman"];
         
     }else{
         
+        self.genderImageWith.constant = 6;
         self.gerderImgeView.image = [UIImage imageNamed:@"icon_man"];
+       
     }
-    
+
     
     
     
 }
-
-
 
 
 - (void)dealWithSellModel:(ODMySellModel *)model
@@ -183,11 +183,12 @@
     
     
     NSString *gender = [NSString stringWithFormat:@"%@" , model.order_user_gender];
-    if ([gender isEqualToString:@"0"]) {
-        
+    if ([gender isEqualToString:@"2"]) {
+        self.genderImageWith.constant = 13;
         self.gerderImgeView.image = [UIImage imageNamed:@"icon_woman"];
         
     }else{
+        self.genderImageWith.constant = 6;
         
         self.gerderImgeView.image = [UIImage imageNamed:@"icon_man"];
     }

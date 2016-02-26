@@ -719,7 +719,7 @@
     ODOrderDetailModel *model = self.dataArray[0];
     vc.orderId = [NSString stringWithFormat:@"%@" ,model.order_id];
     vc.OrderTitle = model.title;
-    vc.price = [NSString stringWithFormat:@"%@" , model.price];
+    vc.price = [NSString stringWithFormat:@"%@" , model.total_price];
     vc.swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
     [self.navigationController pushViewController:vc animated:YES];
     
