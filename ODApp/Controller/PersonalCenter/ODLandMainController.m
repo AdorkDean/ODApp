@@ -5,7 +5,7 @@
 //  Created by zhz on 16/1/5.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
-
+#import "ODNavigationController.h"
 #import "ODLandMainController.h"
 #import "ODLandFirstCell.h"
 #import "ODLandSecondCell.h"
@@ -171,25 +171,33 @@
 - (void)mySellAction:(UIButton *)sender
 {
     ODMySellController *vc = [[ODMySellController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    ODNavigationController *nav = [[ODNavigationController alloc]initWithRootViewController:vc];
+    vc.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:vc action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)alreadyBuyAction:(UIButton *)sender
 {
     ODMyOrderController *vc = [[ODMyOrderController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    ODNavigationController *nav = [[ODNavigationController alloc]initWithRootViewController:vc];
+    vc.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:vc action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)releaseAction:(UIButton *)sender
 {
     ODReleaseController *vc = [[ODReleaseController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    ODNavigationController *nav = [[ODNavigationController alloc]initWithRootViewController:vc];
+    vc.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:vc action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)collectionAction:(UIButton *)button
 {
-    ODPersonalCenterCollectionViewController *collection = [[ODPersonalCenterCollectionViewController alloc]init];
-    [self.navigationController pushViewController:collection animated:YES];
+    ODPersonalCenterCollectionViewController *vc = [[ODPersonalCenterCollectionViewController alloc]init];
+    ODNavigationController *nav = [[ODNavigationController alloc]initWithRootViewController:vc];
+    vc.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:vc action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
+   [self presentViewController:nav animated:YES completion:nil];
 }
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -204,59 +212,58 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
+    if (indexPath.section != 10)
     {
-        ODInformationController *vc = [[ODInformationController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else if (indexPath.section == 2)
-    {
-        ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
-        vc.open_id = self.model.open_id;
-        vc.isRefresh = YES;
-        vc.centerTitle = @"我的预约纪录";
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else if (indexPath.section == 3)
-    {
-        ODMyApplyActivityController *vc = [[ODMyApplyActivityController alloc] init];
-        vc.open_id = self.model.open_id;
-        vc.isRefresh = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else if (indexPath.section ==4)
-    {
-        ODMyTopicController *vc = [[ODMyTopicController alloc] init];
-        vc.open_id = self.model.open_id;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else if (indexPath.section ==5)
-    {
-        ODMyTaskController *vc = [[ODMyTaskController alloc] init];
-        vc.open_id = self.model.open_id;
-        [self.navigationController pushViewController:vc animated:YES];
-    }else if (indexPath.section == 6)
-    {
-        ODEvaluationController *vc = [[ODEvaluationController alloc] init];
-        vc.typeTitle = @"我收到的评价";
-        NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-        vc.openId = openId;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else if (indexPath.section == 7)
-    {
-        ODBalanceController *vc = [[ODBalanceController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else if (indexPath.section == 8)
-    {
-        ODOperationController *vc = [[ODOperationController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else if (indexPath.section == 9)
-    {
-        ODGiveOpinionController *vc = [[ODGiveOpinionController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
+        UIViewController *vc;
+        if (indexPath.section == 0)
+        {
+            vc = [[ODInformationController alloc] init];
+        }
+        else if (indexPath.section == 2)
+        {
+            vc = [[ODMyOrderRecordController alloc] init];
+            [(ODMyOrderRecordController *)vc setOpen_id:self.model.open_id];
+            [(ODMyOrderRecordController *)vc setIsRefresh:YES];
+            [(ODMyOrderRecordController *)vc setCenterTitle:@"我的预约纪录"];
+        }
+        else if (indexPath.section == 3)
+        {
+            vc = [[ODMyApplyActivityController alloc] init];
+            [(ODMyApplyActivityController *)vc setOpen_id:self.model.open_id];
+            [(ODMyApplyActivityController *)vc setIsRefresh:YES];
+        }
+        else if (indexPath.section ==4)
+        {
+            vc = [[ODMyTopicController alloc] init];
+            [(ODMyTopicController *)vc setOpen_id:self.model.open_id];
+        }
+        else if (indexPath.section ==5)
+        {
+            vc = [[ODMyTaskController alloc] init];
+            [(ODMyTaskController *)vc setOpen_id:self.model.open_id];
+        }else if (indexPath.section == 6)
+        {
+            vc = [[ODEvaluationController alloc] init];
+            [(ODEvaluationController *)vc setTypeTitle:@"我收到的评价"];
+            NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+            [(ODEvaluationController *)vc setOpenId:openId];
+        }
+        else if (indexPath.section == 7)
+        {
+            vc = [[ODBalanceController alloc] init];
+        }
+        else if (indexPath.section == 8)
+        {
+            vc = [[ODOperationController alloc] init];
+        }
+        else if (indexPath.section == 9)
+        {
+            vc = [[ODGiveOpinionController alloc] init];
+        }
+        ODNavigationController *nav = [[ODNavigationController alloc]initWithRootViewController:vc];
+        vc.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:vc action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
+
+        [self presentViewController:nav animated:YES completion:nil];
     }
     else if (indexPath.section == 10)
     {
