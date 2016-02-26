@@ -75,7 +75,7 @@
     
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(replyAction:) name:ODNotificationReplySuccess object:nil];
 
     
     
@@ -85,6 +85,16 @@
     }
     
 }
+
+
+- (void)replyAction:(NSNotification *)text
+{
+    
+    [self.firstCollectionView.mj_header beginRefreshing];
+    [self.secondCollectionView.mj_header beginRefreshing];
+    
+}
+
 
 
 #pragma mark - 初始化
@@ -606,6 +616,11 @@
     [self.scrollView setContentOffset:point animated:YES];
 }
 
+- (void)dealloc
+{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 
 @end
