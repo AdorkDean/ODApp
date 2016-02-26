@@ -14,6 +14,8 @@
 @property(nonatomic,strong)NSMutableDictionary *imagesDic;
 @property(nonatomic,strong)NSMutableDictionary *operations;
 
+@property (nonatomic, copy) NSString *love_num;
+
 @end
 
 @implementation ODBazaarExchangeSkillDetailViewController
@@ -54,6 +56,21 @@
     self.navigationItem.title = self.nick;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
 
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(17.5, 10, 50, 20)];
+    [button setTitle:@"返回" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    [button addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+}
+
+- (void)backAction:(UIBarButtonItem *)sender
+{
+    
+    NSDictionary *loveDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.love_num,@"loveNumber", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationloveSkill object:nil userInfo:loveDict];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -127,6 +144,7 @@
             [model setValuesForKeysWithDictionary:result];
             [weakSelf.dataArray addObject:model];
             weakSelf.love_id = [NSString stringWithFormat:@"%@",model.love_id];
+            weakSelf.love_num = [NSString stringWithFormat:@"%@",model.love_num];
             [weakSelf createUserInfoView];
             [weakSelf createDetailView];
             [weakSelf createBottomView];

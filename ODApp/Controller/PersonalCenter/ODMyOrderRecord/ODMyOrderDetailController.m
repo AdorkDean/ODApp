@@ -102,6 +102,12 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil];
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
                 weakSelf.checkLabel.text = @"已取消";
+                weakSelf.status_str = weakSelf.checkLabel.text;
+                
+                NSDictionary *loveDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.status_str,@"status_str", nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil userInfo:loveDict];
+                
+                
             }
                        failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
             {
