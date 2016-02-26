@@ -58,37 +58,18 @@
     cell.picImageView.userInteractionEnabled = YES;
     if ([self.skill isEqualToString:@"skill"]) {
         NSDictionary *dict = self.photos[indexPath.row];
+        cell.picImageView.center = CGPointMake(kScreenSize.width/2, kScreenSize.height/2);
+        cell.scrollView.maximumZoomScale = 2.0;
+        cell.scrollView.minimumZoomScale = 1;
         [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            [cell.picImageView sizeToFit];
-            CGFloat multiple = cell.picImageView.od_width/kScreenSize.width;
-            CGFloat height = cell.picImageView.od_height/multiple;
-            cell.picImageView.frame = CGRectMake(0, 0, kScreenSize.width, height);
-            cell.picImageView.center = CGPointMake(KScreenWidth/2, KScreenHeight/2);
-            cell.picImageView.contentMode = UIViewContentModeScaleAspectFit;
-            
-            cell.scrollView.contentSize = cell.picImageView.frame.size;
-            // 设置缩放比例
-            cell.scrollView.maximumZoomScale = 2.0;
-            cell.scrollView.minimumZoomScale = 1;
-            
         }];
     }else{
+        cell.picImageView.center = CGPointMake(kScreenSize.width/2, kScreenSize.height/2);
+        cell.scrollView.maximumZoomScale = 2.0;
+        cell.scrollView.minimumZoomScale = 1;
         [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.photos[indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            [cell.picImageView sizeToFit];
-            CGFloat multiple = cell.picImageView.od_width/kScreenSize.width;
-            CGFloat height = cell.picImageView.od_height/multiple;
-            cell.picImageView.frame = CGRectMake(0, 0, kScreenSize.width, height);
-            cell.picImageView.center = CGPointMake(KScreenWidth/2, KScreenHeight/2);
-            cell.picImageView.contentMode = UIViewContentModeScaleAspectFit;
-            
-            cell.scrollView.contentSize = cell.picImageView.frame.size;
-            
-            // 设置缩放比例
-            cell.scrollView.maximumZoomScale = 2.0;
-            cell.scrollView.minimumZoomScale = 1;
         }];
     }
-
     return cell;
 }
 

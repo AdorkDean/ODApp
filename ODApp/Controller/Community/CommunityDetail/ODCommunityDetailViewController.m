@@ -98,6 +98,7 @@
         NSDictionary *parameter = @{@"id":self.bbs_id};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self downLoadDataWithUrl:kCommunityBbsDetailUrl paramater:signParameter];
+        NSLog(@"%@",signParameter);
     }else{
         self.count = 1;
         NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
@@ -110,8 +111,6 @@
 -(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)paramater
 {
     __weak typeof (self)weakSelf = self;
-
-     [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [self.manager GET:url parameters:paramater success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
             if (responseObject) {
@@ -127,13 +126,9 @@
                 [weakSelf.userArray addObject:userModel];
                 [weakSelf createUserInfoView];
                 [weakSelf createBBSDetailView];
-                [SVProgressHUD dismiss];
                 [weakSelf joiningTogetherParmetersWithUserInfo:NO];
             }
-        else
-        [SVProgressHUD dismiss];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [SVProgressHUD dismiss];
     }];
 }
 
@@ -233,100 +228,45 @@
     //创建时间
     NSString *time = [[resultModel.created_at substringFromIndex:5] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
     
-    self.imageArray = [[NSMutableArray alloc]init];
-    for (NSInteger i = 0; i < resultModel.bbs_imgs.count; i++) {
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:resultModel.bbs_imgs[i]]]];
-        [self.imageArray addObject:image];
-    }
-
-    [SVProgressHUD dismiss];
-
-    CGRect frame;
+    CGRect frame = bbsContentLabel.frame;
     UILabel *timeLabel = nil;
     UIButton *deleteButton = nil;
     UIView *lineView = nil;
-    if (self.imageArray.count>1) {
-        for ( NSInteger i = 0; i < self.imageArray.count; i++) {
-            UIImageView *imageView = [ODClassMethod creatImageViewWithFrame:CGRectZero imageName:nil tag:0];
-            imageView.image = self.imageArray[i];
-            
-            [imageView sizeToFit];
-            CGFloat multiple = imageView.od_width/kScreenSize.width;
-            CGFloat height = imageView.od_height/multiple;
-            if (i==0) {
-                imageView.frame = CGRectMake(0, CGRectGetMaxY(bbsContentLabel.frame)+17.5,kScreenSize.width,height);
-                frame = imageView.frame;
-            }else {
-                if (i==resultModel.bbs_imgs.count-1) {
-                    imageView.frame = CGRectMake(0, CGRectGetMaxY(frame)+10, kScreenSize.width, height);
-                    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:userModel.open_id]){
-                        //删除按钮
-                        deleteButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-50, CGRectGetMaxY(imageView.frame)+17.5, 40, 20) target:self sel:@selector(deleteButtonClick:) tag:0 image:nil title:@"删除" font:15];
-                        timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width-142.5-deleteButton.frame.size.width, CGRectGetMaxY(imageView.frame)+17.5, 120, 20) text:time font:15 alignment:@"right" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
-                        lineView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
-                        [self.bbsView addSubview:deleteButton];
-                    }else{
-                        timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width-142.5-deleteButton.frame.size.width, CGRectGetMaxY(imageView.frame)+17.5, 120, 20) text:time font:15 alignment:@"right" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
-                        lineView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
-                    }
-                    [self.bbsView addSubview:timeLabel];
-                    [self.bbsView addSubview:lineView];
-                    
-                }else{
-                    imageView.frame = CGRectMake(0, CGRectGetMaxY(frame)+10, kScreenSize.width, height);
-                    frame = imageView.frame;
-                }
+    for (NSInteger i = 0; i < resultModel.imgs_big.count; i++) {
+        NSDictionary *dict = resultModel.imgs_big[i];
+        UIImageView *imageView = [[UIImageView alloc]init];
+        CGFloat multiple = [dict[@"x"] floatValue]/[dict[@"y"]floatValue];
+        if ([dict[@"y"]floatValue]==0) {
+            imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, 300);
+        }else{
+           imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, (kScreenSize.width-20)/multiple)];
+        }
+        frame = imageView.frame;
+        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (error)
+            {
+                imageView.image = [UIImage imageNamed:@"errorplaceholderImage"];
             }
-            self.bbsView.frame = CGRectMake(0, 76, kScreenSize.width, lineView.frame.origin.y+lineView.frame.size.height);
-            self.tabelHeaderView.frame = CGRectMake(0, 64, kScreenSize.width,self.userView.frame.size.height+self.bbsView.frame.size.height);
-            self.tableView.tableHeaderView = self.tabelHeaderView;
-            imageView.contentMode = UIViewContentModeScaleAspectFit;
-            [self.bbsView addSubview:imageView];
-        }
-    }else if (resultModel.bbs_imgs.count==1){
-        
-        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectZero];
-        imageView.image = [self.imageArray objectAtIndex:0];
-        
-        [imageView sizeToFit];
-        CGFloat multiple = kScreenSize.width/imageView.od_width;
-        CGFloat height = imageView.od_height*multiple;
-        imageView.frame = CGRectMake(0, CGRectGetMaxY(bbsContentLabel.frame)+17.5,kScreenSize.width,height);
-        
-        if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:userModel.open_id]){
-            //删除按钮
-            deleteButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-50, CGRectGetMaxY(imageView.frame)+17.5, 40, 20) target:self sel:@selector(deleteButtonClick:) tag:0 image:nil title:@"删除" font:15];
-            timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width-142.5-deleteButton.frame.size.width, CGRectGetMaxY(imageView.frame)+17.5, 120, 20) text:time font:15 alignment:@"right" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
-            lineView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
-            [self.bbsView addSubview:deleteButton];
-            
-        }else{
-            timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width-142.5-deleteButton.frame.size.width, CGRectGetMaxY(imageView.frame)+17.5, 120, 20) text:time font:15 alignment:@"right" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
-            lineView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
-        }
-        [self.bbsView addSubview:timeLabel];
-        [self.bbsView addSubview:lineView];
-        self.bbsView.frame = CGRectMake(0, 76, kScreenSize.width, lineView.frame.origin.y+lineView.frame.size.height);
-        self.tabelHeaderView.frame = CGRectMake(0, 64, kScreenSize.width,self.userView.frame.size.height+self.bbsView.frame.size.height);
-        self.tableView.tableHeaderView = self.tabelHeaderView;
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
+
+        }];
         [self.bbsView addSubview:imageView];
-    }else if(resultModel.bbs_imgs.count==0) {
-        if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:userModel.open_id]) {
-            deleteButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-50, CGRectGetMaxY(bbsContentLabel.frame)+17.5, 40, 20) target:self sel:@selector(deleteButtonClick:) tag:0 image:nil title:@"删除" font:15];
-            [self.bbsView addSubview:deleteButton];
-        }else{
-            
-        }
-        timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width-142.5-deleteButton.frame.size.width, CGRectGetMaxY(bbsContentLabel.frame)+17.5, 120, 20) text:time font:15 alignment:@"right" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
-        [self.bbsView addSubview:timeLabel];
-        
-        lineView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
-        [self.bbsView addSubview:lineView];
-        self.bbsView.frame = CGRectMake(0, 76, kScreenSize.width, lineView.frame.origin.y+lineView.frame.size.height);
-        self.tabelHeaderView.frame = CGRectMake(0, 64, kScreenSize.width,self.userView.frame.size.height+self.bbsView.frame.size.height);
-        self.tableView.tableHeaderView = self.tabelHeaderView;
     }
+    
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:userModel.open_id]){
+        //删除按钮
+        deleteButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width-50, CGRectGetMaxY(frame)+17.5, 40, 20) target:self sel:@selector(deleteButtonClick:) tag:0 image:nil title:@"删除" font:15];
+        timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width-142.5-deleteButton.frame.size.width, CGRectGetMaxY(frame)+17.5, 120, 20) text:time font:15 alignment:@"right" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
+        lineView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
+        [self.bbsView addSubview:deleteButton];
+    }else{
+        timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(kScreenSize.width-142.5-deleteButton.frame.size.width, CGRectGetMaxY(frame)+17.5, 120, 20) text:time font:15 alignment:@"right" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
+        lineView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
+    }
+    [self.bbsView addSubview:timeLabel];
+    [self.bbsView addSubview:lineView];
+    self.bbsView.frame = CGRectMake(0, 76, kScreenSize.width, lineView.frame.origin.y+lineView.frame.size.height);
+    self.tabelHeaderView.frame = CGRectMake(0, 64, kScreenSize.width,self.userView.frame.size.height+self.bbsView.frame.size.height);
+    self.tableView.tableHeaderView = self.tabelHeaderView;
 }
 
 -(void)deleteButtonClick:(UIButton *)button
