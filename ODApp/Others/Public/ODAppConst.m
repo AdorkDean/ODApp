@@ -104,6 +104,9 @@ NSString * const KActivityDetailUrl = @"/1.0/store/apply/detail2";
 NSString * const KActivityApplyUrl = @"/1.0/store/activity/apply";
 NSString * const kCallbackUrl = @"/1.0/other/share/callback";
 NSString * const ODPersonalReleaseTaskUrl = @"/1.0/swap/list";
+NSString * const ODUrlLoveAdd = @"/1.0/other/love/add";
+NSString * const ODUrlLoveDelete = @"/1.0/other/love/del";
+
 
 NSString * const ODPersonReleaseTaskDeleteUrl = @"http://woquapi.test.odong.com/1.0/swap/del";
 
