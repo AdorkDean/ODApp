@@ -223,6 +223,12 @@
                 [weakSelf.dataArray addObject:model];
             }
             
+            if (weakSelf.dataArray.count){
+                if ([weakSelf.refresh isEqualToString:@"refresh"]) {
+                    [weakSelf.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:weakSelf.dataArray.count-1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:NO];
+                }
+            }
+            
             [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
@@ -325,14 +331,20 @@
 {
     [super viewWillAppear:animated];
     
-    
     if ([self.refresh isEqualToString:@"release"]) {
         self.status = @"9";
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [self.collectionView.mj_header beginRefreshing];
     }else if ([self.refresh isEqualToString:@"del"]){
-        [self.dataArray removeObjectAtIndex:self.indexPath];
-        [self.collectionView reloadData];
+        [self.collectionView.mj_header beginRefreshing];
+    }else if ([self.refresh isEqualToString:@"accept"]){
+        [self.collectionView.mj_header beginRefreshing];
+    }else if ([self.refresh isEqualToString:@"submit"]){
+        [self.collectionView.mj_header beginRefreshing];
+    }else if ([self.refresh isEqualToString:@"complete"]){
+        [self.collectionView.mj_header beginRefreshing];
+    }else if ([self.refresh isEqualToString:@"delegate"]){
+        [self.collectionView.mj_header beginRefreshing];
     }
 }
 

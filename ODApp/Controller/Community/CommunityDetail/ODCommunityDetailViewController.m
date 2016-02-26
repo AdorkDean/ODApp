@@ -524,7 +524,6 @@
         }else{
             NSLog(@"%@",responseObject);
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//                [weakSelf joiningTogetherParmetersWithUserInfo:NO];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
