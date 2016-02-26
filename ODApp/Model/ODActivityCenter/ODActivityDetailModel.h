@@ -63,6 +63,8 @@
 
 @property (nonatomic, assign) int activity_id;
 
+@property (nonatomic, assign) int love_id;
+
 @property (nonatomic, strong) NSString *icon_url;
 
 @property (nonatomic, assign) int apply_cnt;

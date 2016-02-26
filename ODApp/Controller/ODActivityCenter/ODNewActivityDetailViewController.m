@@ -27,6 +27,7 @@
 {
     BOOL hasload;
     NSInteger sharedTimes;
+    NSInteger loveNum;
     UIView *activePeopleLineView;
 }
 
@@ -104,6 +105,8 @@
  *  立即报名按钮
  */
 @property (nonatomic, strong) UIButton *reportButton;
+
+@property (nonatomic, assign) NSInteger love_id;
 
 @end
 
@@ -504,6 +507,9 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     sharedTimes = self.resultModel.share_cnt;
     [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %d",self.resultModel.share_cnt] forState:UIControlStateNormal];
     [[self.bottomButtonView goodBtn]setTitle:[NSString stringWithFormat:@"赞 %d",self.resultModel.love_cnt] forState:UIControlStateNormal];
+    self.bottomButtonView.goodBtn.OD_selectedState = self.resultModel.love_id != 0;
+    self.love_id = self.resultModel.love_id;
+    loveNum = self.resultModel.love_cnt;
     self.baseScrollV.contentSize = CGSizeMake(0, CGRectGetMaxY(self.bottomButtonView.frame));
 }
 
@@ -552,8 +558,28 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 
 - (void)clickGood:(ODActivityDetailBtn *)btn
 {
-    btn.OD_selectedState = !btn.OD_selectedState;
-    [[self.bottomButtonView goodBtn]setTitle:[NSString stringWithFormat:@"赞 %d",self.resultModel.love_cnt + btn.OD_selectedState] forState:UIControlStateNormal];
+    BOOL isAdd = self.love_id == 0;
+    NSDictionary *dic = isAdd ? @{@"type":@"3",@"obj_id":[@(self.resultModel.activity_id)stringValue]} : @{@"love_id":[@(self.love_id)stringValue]};
+    [ODHttpTool getWithURL:isAdd ? ODUrlLoveAdd : ODUrlLoveDelete parameters:dic modelClass:[NSObject class] success:^(id model)
+    {
+        NSDictionary *dic = model;
+        self.love_id = [dic[@"love_id"]integerValue];
+        if (self.love_id != 0)
+        {
+            loveNum ++;
+        }
+        else if (!dic)
+        {
+            loveNum --;
+        }
+        btn.OD_selectedState = !btn.OD_selectedState;
+        [[self.bottomButtonView goodBtn]setTitle:[NSString stringWithFormat:@"赞 %zd",loveNum] forState:UIControlStateNormal];
+
+    }
+                   failure:^(NSError *error)
+    {
+        
+    }];
 }
 
 - (void)report:(ODActivityDetailBtn *)btn
