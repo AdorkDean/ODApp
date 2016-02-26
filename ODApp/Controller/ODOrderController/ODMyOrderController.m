@@ -44,7 +44,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:ODNotificationOrderListRefresh object:nil];
     
- 
+    
        
     
     
@@ -187,7 +187,7 @@
     
     ODMyOrderModel *model = self.dataArray[indexPath.row];
     
-    cell.model = model;
+    [cell dealWithBuyModel:model];
     
     
     return cell;

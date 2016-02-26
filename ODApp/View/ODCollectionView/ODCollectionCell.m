@@ -35,12 +35,13 @@
     self.userImageButton.userInteractionEnabled = NO;
     NSString *gender = [NSString stringWithFormat:@"%@" , model.gender];
     if ([gender isEqualToString:@"2"]) {
-        
+         self.genderImageWith.constant = 13;
         self.hisPictureView.image = [UIImage imageNamed:@"icon_woman"];
         
     }else{
-        
+         self.genderImageWith.constant = 6;
         self.hisPictureView.image = [UIImage imageNamed:@"icon_man"];
+        
     }
     
     
@@ -59,13 +60,14 @@
     self.nameLabel.text = model.sign;
     self.userImageButton.userInteractionEnabled = NO;
     NSString *gender = [NSString stringWithFormat:@"%@" , model.gender];
-    if ([gender isEqualToString:@"0"]) {
-        
+    if ([gender isEqualToString:@"2"]) {
+         self.genderImageWith.constant = 13;
         self.hisPictureView.image = [UIImage imageNamed:@"icon_woman"];
         
     }else{
-        
+         self.genderImageWith.constant = 6;
         self.hisPictureView.image = [UIImage imageNamed:@"icon_man"];
+       
     }
 
     
