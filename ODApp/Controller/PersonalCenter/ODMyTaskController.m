@@ -94,14 +94,62 @@
     
     
     if ([self.isFirstRefresh isEqualToString:@"del"]){
-        [self.FirstDataArray removeObjectAtIndex:self.firstIndex];
+        
+        [self.FirstDataArray removeObject:self.FirstDataArray[self.firstIndex]];
+        
         [self.firstCollectionView reloadData];
+        
     }
     
     if ([self.isSecondRefresh isEqualToString:@"del"]){
-        [self.secondDataArray removeObjectAtIndex:self.secondIndex];
+        
+        [self.FirstDataArray removeObject:self.secondDataArray[self.secondIndex]];
+
+        
         [self.secondCollectionView reloadData];
     }
+    
+    
+    if (!([self.isFirstRefresh isEqualToString:@""] || [self.isFirstRefresh isEqualToString:@"del"])) {
+        
+        
+          ODBazaarModel *model = self.FirstDataArray[self.firstIndex];
+        
+        
+        
+        NSLog(@"_____%@" , self.isFirstRefresh);
+        
+        
+          model.task_status = self.isFirstRefresh;
+        
+        [self.FirstDataArray replaceObjectAtIndex:self.firstIndex withObject:model];
+        
+        [self.firstCollectionView reloadData];
+        
+        
+        
+        
+        
+        
+    }
+    
+    if (!([self.isSecondRefresh isEqualToString:@""] || [self.isSecondRefresh isEqualToString:@"del"])) {
+        
+        
+        
+        ODBazaarModel *model = self.secondDataArray[self.secondIndex];
+        
+        model.task_status = self.isSecondRefresh;
+        
+        [self.secondDataArray replaceObjectAtIndex:self.secondIndex withObject:model];
+        
+        [self.secondCollectionView reloadData];
+
+        
+        
+        
+    }
+
     
     
     self.showType = YES;

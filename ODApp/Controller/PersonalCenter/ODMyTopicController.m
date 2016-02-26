@@ -80,12 +80,12 @@
 
     
     
-    if ([self.isFirstRefresh isEqualToString:@"del"]){
+    if ([self.isFirstRefresh isEqualToString:@"refresh"]){
         [self.FirstDataArray removeObjectAtIndex:self.firstIndex];
         [self.firstCollectionView reloadData];
     }
     
-    if ([self.isSecondRefresh isEqualToString:@"del"]){
+    if ([self.isSecondRefresh isEqualToString:@"refresh"]){
         [self.secondDataArray removeObjectAtIndex:self.secondIndex];
         [self.secondCollectionView reloadData];
     }
