@@ -819,13 +819,11 @@ NSString *skillContentText = @"";
         }
         self.timeView.hidden = NO;
         self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
-        [self.scrollView setContentOffset:CGPointMake(0, 53+56) animated:YES];
     }else if ([self.swap_type isEqualToString:@"2"]){
         UIButton *button = (UIButton *)[view viewWithTag:12];
         [button setBackgroundImage:[UIImage imageNamed:@"button_Express delivery_Selected"] forState:UIControlStateNormal];
         self.timeView.hidden = YES;
         self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
-        [self.scrollView setContentOffset:CGPointMake(0, 53) animated:YES];
     }
     
 }
