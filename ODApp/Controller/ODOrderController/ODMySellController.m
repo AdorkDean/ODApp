@@ -26,6 +26,8 @@
 
 @property (nonatomic, strong) UILabel *noReusltLabel;
 
+@property (nonatomic , assign) NSInteger indexRow;
+
 
 @end
 
@@ -41,19 +43,10 @@
     [self getData];
     [self createCollectionView];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh:) name:ODNotificationOrderListRefresh object:nil];
-
+  
     self.navigationItem.title = @"已卖出";
     
 }
-
-- (void)refresh:(NSNotification *)text{
-    
-    
-    [self.collectionView.mj_header beginRefreshing];
-    
-}
-
 
 
 
@@ -61,12 +54,28 @@
 {
     [super viewWillAppear:animated];
  
-    if ([self.isRefresh isEqualToString:@"1"]) {
-        [self.collectionView.mj_header beginRefreshing];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationSellOrderSecondRefresh object:nil];
 
    
 }
+
+- (void)reloadData:(NSNotification *)text
+{
+    
+    
+    NSLog(@"_____%@" , text.userInfo[@"orderStatus"]);
+    
+    
+    ODMySellModel *model = self.dataArray[self.indexRow];
+    model.order_status = [NSString stringWithFormat:@"%@" , text.userInfo[@"orderStatus"]];
+    [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
+    [self.collectionView reloadData];
+    
+    
+}
+
+
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -209,9 +218,9 @@
     
     NSString *swap_type = [NSString stringWithFormat:@"%@" , model.swap_type];
     NSString *orderId = [NSString stringWithFormat:@"%@" , model.order_id];
-
+    NSString *orderStatus = [NSString stringWithFormat:@"%@" , model.order_status];
     
- 
+    self.indexRow = indexPath.row;
     
     
     
@@ -219,6 +228,7 @@
         ODSecondMySellDetailController *vc = [[ODSecondMySellDetailController alloc] init];
         vc.orderType = model.status_str;
         vc.orderId = orderId;
+        vc.orderStatus = orderStatus;
         [self.navigationController pushViewController:vc animated:YES];
         
         __weakSelf
@@ -235,6 +245,7 @@
         ODMySellDetailController *vc = [[ODMySellDetailController alloc] init];
         vc.orderType = model.status_str;
         vc.orderId = orderId;
+        vc.orderStatus = orderStatus;
         [self.navigationController pushViewController:vc animated:YES];
         
         __weakSelf

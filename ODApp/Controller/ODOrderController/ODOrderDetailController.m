@@ -57,9 +57,48 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     self.navigationItem.title = @"订单详情";
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 50, 20)];
+    [button setTitle:@"返回" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    [button addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+    
+    
+    
     self.evaluateStar = @"";
     
 }
+
+- (void)backAction:(UIBarButtonItem *)sender
+{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backRefrash:) name:ODNotificationMyOrderThirdRefresh object:nil];
+
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    
+    
+}
+
+- (void)backRefrash:(NSNotification *)text
+{
+    
+        ODOrderDetailModel *statusModel = self.dataArray[0];
+        NSString *orderStatue = [NSString stringWithFormat:@"%@" , statusModel.order_status];
+        NSDictionary *dic =[[NSDictionary alloc] initWithObjectsAndKeys:orderStatue,@"orderStatus", nil];
+        NSNotification *notification =[NSNotification notificationWithName:ODNotificationMyOrderSecondRefresh object:nil userInfo:dic];
+    
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+
+  
+    
+    
+}
+
+
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -90,7 +129,22 @@
                 [model setValuesForKeysWithDictionary:dic];
                 [self.dataArray addObject:model];
                 
+                ODOrderDetailModel *statusModel = self.dataArray[0];
+                NSString *orderStatue = [NSString stringWithFormat:@"%@" , statusModel.order_status];
                 
+                
+                
+                
+                if (![self.orderStatus isEqualToString:orderStatue]) {
+                    
+                    
+                    NSDictionary *dic =[[NSDictionary alloc] initWithObjectsAndKeys:orderStatue,@"orderStatus", nil];
+                    NSNotification *notification =[NSNotification notificationWithName:ODNotificationMyOrderSecondRefresh object:nil userInfo:dic];
+                    
+                    [[NSNotificationCenter defaultCenter] postNotification:notification];
+                    
+                }
+
                 
                 
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
@@ -501,7 +555,9 @@
                 
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"评价成功"];
                 
-                
+                ODOrderDetailModel *statusModel = self.dataArray[0];
+                weakSelf.orderStatus = [NSString stringWithFormat:@"%@" , statusModel.order_status];
+
                 
                 if (weakSelf.getRefresh) {
                     
@@ -667,7 +723,9 @@
                     
                     [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
                     
-                    
+                    ODOrderDetailModel *statusModel = self.dataArray[0];
+                    weakSelf.orderStatus = [NSString stringWithFormat:@"%@" , statusModel.order_status];
+
                     
                     if (weakSelf.getRefresh) {
                         
@@ -928,6 +986,12 @@
     [self.view addSubview:callWebview];
     
     
+}
+
+- (void)dealloc
+{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
