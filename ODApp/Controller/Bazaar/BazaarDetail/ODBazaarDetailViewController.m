@@ -376,8 +376,9 @@
             
         }else if ([name isEqualToString:@"接受任务"]) {
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                NSDictionary *dict = responseObject[@"result"];
                 if (weakSelf.myBlock) {
-                    weakSelf.myBlock([NSString stringWithFormat:@"accept"]);
+                    weakSelf.myBlock([NSString stringWithFormat:@"%@",dict[@"task_status"]]);
                 }
                 [weakSelf.picArray removeAllObjects];
                 [weakSelf joiningTogetherParmeters];
@@ -387,23 +388,27 @@
                 weakSelf.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
             }
         }else if ([name isEqualToString:@"确认提交"]){
+    
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                NSDictionary *dict = responseObject[@"result"];
                 if (weakSelf.myBlock) {
-                    weakSelf.myBlock([NSString stringWithFormat:@"submit"]);
+                    weakSelf.myBlock([NSString stringWithFormat:@"%@",dict[@"task_status"]]);
                 }
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提交成功"];
                 [weakSelf.taskButton setTitle:@"已提交" forState:UIControlStateNormal];
             }
         }else if ([name isEqualToString:@"确认完成"]){
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                NSDictionary *dict = responseObject[@"result"];
                 if (weakSelf.myBlock) {
-                    weakSelf.myBlock([NSString stringWithFormat:@"complete"]);
+                    weakSelf.myBlock([NSString stringWithFormat:@"%@",dict[@"task_status"]]);
                 }
                 [weakSelf.evaluationView removeFromSuperview];
                 [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"确认成功"];
                 [weakSelf.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
             }
         }
+  
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
     }];
