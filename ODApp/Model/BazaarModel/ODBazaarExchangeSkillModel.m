@@ -10,4 +10,5 @@
 
 @implementation ODBazaarExchangeSkillModel
 
+
 @end

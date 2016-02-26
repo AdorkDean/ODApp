@@ -39,9 +39,12 @@
         self.genderImgWidthConstant.constant = 6;
     }
 }
+
 - (CGFloat)height
 {
     [self layoutIfNeeded];
     return CGRectGetMaxY(self.shareLabel.frame) + 15;
 }
+
+
 @end

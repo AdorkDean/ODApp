@@ -38,10 +38,8 @@
                                          [weakSelf loadMoreData];
                                      }];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationCancelOrder object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
-    {
-        [self createRequest];
-    }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationCancelOrder object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -53,6 +51,15 @@
         self.isRefresh = NO;
     }
 }
+
+- (void)reloadData:(NSNotification *)text
+{
+    ODMyOrderRecordModel *model = self.orderArray[self.cancelOrderRow];
+    model.status_str = [NSString stringWithFormat:@"%@", text.userInfo[@"status_str"]];
+    [self.orderArray replaceObjectAtIndex:self.cancelOrderRow withObject:model];
+    [self.collectionView reloadData];
+}
+
 
 - (void)loadMoreData
 {
@@ -80,7 +87,7 @@
     {
         [weakSelf.noReusltLabel removeFromSuperview];
         
-        if (self.count == 1)
+        if (weakSelf.count == 1)
         {
             [weakSelf.orderArray removeAllObjects];
         }
@@ -95,12 +102,12 @@
                 ODMyOrderRecordModel *model = [[ODMyOrderRecordModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
 
-                if (![[self.orderArray valueForKeyPath:@"order_id"]containsObject:model.order_id])
+                if (![[weakSelf.orderArray valueForKeyPath:@"order_id"]containsObject:model.order_id])
                 {
                     [weakSelf.orderArray addObject:model];
                 }
             }
-            if (weakSelf.orderArray.count == 0)
+            if (weakSelf.count == 1 && weakSelf.orderArray.count == 0)
             {
                 weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无预约" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [weakSelf.view addSubview:weakSelf.noReusltLabel];

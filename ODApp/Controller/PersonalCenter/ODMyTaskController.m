@@ -50,6 +50,10 @@
 @property (nonatomic , strong) UILabel *secondLabel;
 
 
+@property (nonatomic , assign) NSInteger firstIndex;
+@property (nonatomic , assign) NSInteger secondIndex;
+
+
 @end
 
 @implementation ODMyTaskController
@@ -61,7 +65,8 @@
     self.firstPage = 1;
     self.secondPage = 1;
     self.type = @"0";
-    self.isRefresh = @"";
+    self.isFirstRefresh = @"";
+    self.isSecondRefresh = @"";
     self.showType = YES;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.FirstDataArray = [NSMutableArray array];
@@ -80,19 +85,22 @@
     
     [super viewWillAppear:animated];
     
-    __weakSelf
-    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationMyTaskRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-        [weakSelf.firstCollectionView.mj_header beginRefreshing];
-        [weakSelf.secondCollectionView.mj_header beginRefreshing];
-    }];
+//    __weakSelf
+//    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationMyTaskRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+//        [weakSelf.firstCollectionView.mj_header beginRefreshing];
+//        [weakSelf.secondCollectionView.mj_header beginRefreshing];
+//    }];
 
     
     
-    if (![self.isRefresh isEqualToString:@""]) {
-        
-        [self.firstCollectionView.mj_header beginRefreshing];
-        [self.secondCollectionView.mj_header beginRefreshing];
-        
+    if ([self.isFirstRefresh isEqualToString:@"del"]){
+        [self.FirstDataArray removeObjectAtIndex:self.firstIndex];
+        [self.firstCollectionView reloadData];
+    }
+    
+    if ([self.isSecondRefresh isEqualToString:@"del"]){
+        [self.secondDataArray removeObjectAtIndex:self.secondIndex];
+        [self.secondCollectionView reloadData];
     }
     
     
@@ -104,8 +112,8 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    self.isRefresh = @"";
-
+    self.isFirstRefresh = @"";
+    self.isSecondRefresh = @"";
     
 }
 
@@ -668,7 +676,11 @@
     
     if (collectionView.tag == 111) {
         
-         ODBazaarModel *model = self.FirstDataArray[indexPath.row];
+        
+        self.firstIndex = indexPath.row;
+        
+        
+        ODBazaarModel *model = self.FirstDataArray[indexPath.row];
         NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
         if ([status isEqualToString:@"-1"]) {
             ;
@@ -676,7 +688,7 @@
             ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
             bazaarDetail.myBlock = ^(NSString *del){
                 
-            self.isRefresh = del;
+            self.isFirstRefresh = del;
                 
                 
             };
@@ -691,6 +703,9 @@
       
     }else if (collectionView.tag == 222) {
         
+        
+        self.secondIndex = indexPath.row;
+        
          ODBazaarModel *model = self.secondDataArray[indexPath.row];
           NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
         
@@ -701,7 +716,7 @@
             
             bazaarDetail.myBlock = ^(NSString *del){
                 
-                self.isRefresh = del;
+                self.isSecondRefresh = del;
                 
                 
             };

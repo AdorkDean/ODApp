@@ -14,6 +14,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 @interface ODReleaseController ()
 
 @property (nonatomic, assign) long deleteRow;
+@property (nonatomic, assign) long loveRow;
 
 @end
 
@@ -34,10 +35,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     {
         [weakSelf.collectionView.mj_header beginRefreshing];
     }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationloveSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
-     {         
-         [self createRequestData];
-     }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationloveSkill object:nil];
 
 }
 
@@ -45,6 +43,14 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 {
     self.pageCount ++;
     [self createRequestData];
+}
+
+- (void)reloadData:(NSNotification *)text
+{
+    ODReleaseModel *model = self.dataArray[self.loveRow];
+    model.love_num = [NSString stringWithFormat:@"%@" , text.userInfo[@"loveNumber"]];
+    [self.dataArray replaceObjectAtIndex:self.loveRow withObject:model];
+    [self.collectionView reloadData];
 }
 
 #pragma mark - 移除通知
@@ -238,6 +244,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 {
     ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     ODReleaseModel *model = self.dataArray[indexPath.row];
+    self.loveRow = indexPath.row;
     if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"])
     {
         vc.swap_id = model.swap_id;

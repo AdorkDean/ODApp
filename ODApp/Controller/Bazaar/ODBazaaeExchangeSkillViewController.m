@@ -29,7 +29,7 @@
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf joiningTogetherParmeters];
     }];
-    
+
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf loadMoreData];
     }];
@@ -152,7 +152,11 @@
             {
                 NSDictionary *dict = model.imgs_small[i];
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
-                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    if (error){
+                        [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
+                    }
+                }];
                 [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
@@ -165,7 +169,11 @@
             {
                 NSDictionary *dict = model.imgs_small[i];
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
-                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    if (error){
+                        [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
+                    }
+                }];
                 [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
@@ -181,6 +189,7 @@
         }
         cell.picViewConstraintHeight.constant = 0;
     }
+    
 
     return cell;
 }
@@ -218,6 +227,7 @@
     return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
 }
 
+
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
@@ -232,16 +242,20 @@
 -(CGFloat)returnHight:(ODBazaarExchangeSkillModel *)model
 {
     CGFloat width=kScreenSize.width>320?90:70;
+    NSString *content = model.content;
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
+    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-93, 35) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
+    CGFloat baseHeight = size.height + 119;
     if (model.imgs_small.count==0) {
-        return 135;
+        return baseHeight;
     }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
-        return 135+width;
+        return baseHeight+width;
     }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
-        return 135+2*width+5;
+        return baseHeight+2*width+5;
     }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
-        return 135+3*width+10;
+        return baseHeight+3*width+10;
     }else{
-        return 135+3*width+10;
+        return baseHeight+3*width+10;
     }
 }
 

@@ -10,39 +10,15 @@
 #import "ODSecondOrderController.h"
 @interface ODBazaarExchangeSkillDetailViewController ()
 
-@property(nonatomic,strong)NSOperationQueue *queue;
-@property(nonatomic,strong)NSMutableDictionary *imagesDic;
-@property(nonatomic,strong)NSMutableDictionary *operations;
+
+
+@property (nonatomic, copy) NSString *love_num;
+
 
 @end
 
 @implementation ODBazaarExchangeSkillDetailViewController
 
--(NSOperationQueue *)queue
-{
-    if (_queue == nil) {
-        _queue = [[NSOperationQueue alloc]init];
-        _queue.maxConcurrentOperationCount = 5;
-    }
-    return _queue;
-}
-
-- (NSMutableDictionary *)imagesDic
-{
-    if (!_imagesDic)
-    {
-        _imagesDic = [NSMutableDictionary dictionary];
-    }
-    return _imagesDic;
-}
-
--(NSMutableDictionary *)operations
-{
-    if (_operations == nil) {
-        _operations = [NSMutableDictionary dictionary];
-    }
-    return _operations;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,6 +30,21 @@
     self.navigationItem.title = self.nick;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
 
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(17.5, 10, 50, 20)];
+    [button setTitle:@"返回" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    [button addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+}
+
+- (void)backAction:(UIBarButtonItem *)sender
+{
+    
+    NSDictionary *loveDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.love_num,@"loveNumber", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationloveSkill object:nil userInfo:loveDict];
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -112,11 +103,6 @@
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     __weakSelf;
-    if ([self.love isEqualToString:@"love"]) {
-        
-    }else{
-        [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
-    }
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
@@ -127,10 +113,10 @@
             [model setValuesForKeysWithDictionary:result];
             [weakSelf.dataArray addObject:model];
             weakSelf.love_id = [NSString stringWithFormat:@"%@",model.love_id];
+            weakSelf.love_num = [NSString stringWithFormat:@"%@",model.love_num];
             [weakSelf createUserInfoView];
             [weakSelf createDetailView];
             [weakSelf createBottomView];
-            [SVProgressHUD dismiss];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -143,15 +129,6 @@
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.view addSubview:self.scrollView];
-}
-
-- (NSMutableArray *)imageArray
-{
-    if (!_imageArray)
-    {
-        self.imageArray = [[NSMutableArray alloc]init];
-    }
-    return _imageArray;
 }
 
 -(void)createUserInfoView
@@ -208,7 +185,7 @@
 -(void)createDetailView
 {
     ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
-    self.detailView = [[UIView alloc]initWithFrame:CGRectMake(0, 65, kScreenSize.width, 2000)];
+    self.detailView = [[UIView alloc]initWithFrame:CGRectMake(0, 65, kScreenSize.width, 200)];
     self.detailView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.detailView];
     
@@ -231,55 +208,31 @@
     contentLabel.numberOfLines = 0;
     [self.detailView addSubview:contentLabel];
     
-    for (NSInteger i = 0; i < model.imgs_big.count; i++) {
+    CGRect frame = contentLabel.frame;
+    for (NSInteger i = 0; i < model.imgs_big.count ; i++) {
         NSDictionary *dict = model.imgs_big[i];
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:dict[@"img_url"]]]];
-        [self.imageArray addObject:image];
-    }
-    
-    [SVProgressHUD dismiss];
-
-    CGRect frame;
-    for (NSInteger i = 0; i < self.imageArray.count; i++)
-    {
         UIImageView *imageView = [[UIImageView alloc]init];
-        imageView.image = self.imageArray[i];
-       
-        [imageView sizeToFit];
-        CGFloat multiple = imageView.od_width/(kScreenSize.width-20);
-        CGFloat height = imageView.od_height/multiple;
-        if (i==0) {
-            imageView.frame = CGRectMake(10, CGRectGetMaxY(contentLabel.frame)+10,kScreenSize.width-20,height);
-            frame = imageView.frame;
-            if (model.imgs_big.count==1) {
-                self.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
-                self.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
-                [self.detailView addSubview:self.loveImageView];
-                self.detailView.frame = CGRectMake(0, 65, kScreenSize.width, self.loveImageView.frame.origin.y+self.loveImageView.frame.size.height+60);
-                self.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+self.detailView.frame.size.height);
-                [self createLoveButton];
-            }
+        CGFloat multiple = [dict[@"x"]floatValue]/[dict[@"y"]floatValue];
+        if ([dict[@"y"]floatValue]==0) {
+            imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, 300);
+        }else{
+            imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, (kScreenSize.width-20)/multiple)];
         }
-        else
-        {
-            if (i==model.imgs_big.count-1) {
-                imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
-                self.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width - 180) / 2, CGRectGetMaxY(imageView.frame) + 10, 180, 40)];
-                self.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
-                [self.detailView addSubview:self.loveImageView];
-                self.detailView.frame = CGRectMake(0, 65, kScreenSize.width, self.loveImageView.frame.origin.y+self.loveImageView.frame.size.height+60);
-                self.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+self.detailView.frame.size.height);
-                [self createLoveButton];
-            }else{
-                imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, height);
-                frame = imageView.frame;
+        frame = imageView.frame;
+        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (error)
+            {
+                imageView.image = [UIImage imageNamed:@"errorplaceholderImage"];
             }
-        }
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        [self.detailView addSubview:imageView];
+        }];
         [self.detailView addSubview:imageView];
     }
-
+    self.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width-180)/2, CGRectGetMaxY(frame)+10, 180, 40)];
+    self.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
+    [self.detailView addSubview:self.loveImageView];
+    self.detailView.frame = CGRectMake(0, 65, kScreenSize.width, self.loveImageView.frame.origin.y+self.loveImageView.frame.size.height+60);
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,65+self.detailView.frame.size.height);
+    [self createLoveButton];
 }
 
 -(void)createLoveButton
@@ -454,7 +407,7 @@
         NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:self.swap_id,@"obj_id",@"3",@"type",@"微信",@"share_platform", nil];
         [ODHttpTool getWithURL:kCallbackUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
          {
-             [ODProgressHUD showSuccessWithStatus:@"分享成功"];
+//             [ODProgressHUD showSuccessWithStatus:@"分享成功"];
          }
                        failure:^(NSError *error)
          {

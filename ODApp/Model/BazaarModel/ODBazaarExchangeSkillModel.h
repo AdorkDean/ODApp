@@ -23,4 +23,5 @@
 @property(nonatomic,strong)NSDictionary *user;
 @property(nonatomic,strong)NSArray *loves;
 @property(nonatomic,strong)NSMutableDictionary *share;
+
 @end

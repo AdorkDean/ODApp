@@ -199,7 +199,7 @@
             
         }else{
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 100);
             
         }
         

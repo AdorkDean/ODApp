@@ -604,25 +604,20 @@
 -(CGFloat)returnHight:(ODBazaarExchangeSkillModel *)model
 {
     CGFloat width=kScreenSize.width>320?90:70;
-    if (model.imgs_small.count==0)
-    {
-        return 135;
-    }
-    else if (model.imgs_small.count>0&&model.imgs_small.count<4)
-    {
-        return 135+width;
-    }
-    else if (model.imgs_small.count>=4&&model.imgs_small.count<7)
-    {
-        return 135+2*width+5;
-    }
-    else if (model.imgs_small.count>=7&&model.imgs_small.count<9)
-    {
-        return 135+3*width+10;
-    }
-    else
-    {
-        return 135+3*width+10;
+    NSString *content = model.content;
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
+    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-93, 35) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
+    CGFloat baseHeight = size.height + 119;
+    if (model.imgs_small.count==0) {
+        return baseHeight;
+    }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
+        return baseHeight+width;
+    }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
+        return baseHeight+2*width+5;
+    }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
+        return baseHeight+3*width+10;
+    }else{
+        return baseHeight+3*width+10;
     }
 }
 
