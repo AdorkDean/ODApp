@@ -62,12 +62,18 @@
         cell.scrollView.maximumZoomScale = 2.0;
         cell.scrollView.minimumZoomScale = 1;
         [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (error) {
+                cell.picImageView.image = [UIImage imageNamed:@"errorplaceholderImage"];
+            }
         }];
     }else{
         cell.picImageView.center = CGPointMake(kScreenSize.width/2, kScreenSize.height/2);
         cell.scrollView.maximumZoomScale = 2.0;
         cell.scrollView.minimumZoomScale = 1;
         [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.photos[indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            if (error) {
+                cell.picImageView.image = [UIImage imageNamed:@"errorplaceholderImage"];
+            }
         }];
     }
     return cell;
