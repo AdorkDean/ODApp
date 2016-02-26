@@ -30,8 +30,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     __weakSelf;
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationEditSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
     {
-        [weakSelf.dataArray removeAllObjects];
-        [weakSelf createRequestData];
+        [weakSelf.collectionView.mj_header beginRefreshing];
     }];
 }
 
@@ -145,21 +144,22 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     
     if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            ODBazaarReleaseSkillViewController *vc = [[ODBazaarReleaseSkillViewController alloc] init];
-            
-            vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
-            vc.skillTitle = model.title;
-            vc.content = model.content;
-            vc.price = model.price;
-            vc.unit = model.unit;
-            vc.swap_type = [NSString stringWithFormat:@"%@",model.swap_type];
-            vc.type = @"编辑";
-            vc.imageArray = [model.imgs_small valueForKeyPath:@"img_url"];
-            [vc.strArray addObjectsFromArray:[model.imgs_small valueForKeyPath:@"md5"]];
-            
-            [self.navigationController pushViewController:vc animated:YES];
-        });
+//        dispatch_async(dispatch_get_main_queue(), ^
+//        {
+        ODBazaarReleaseSkillViewController *vc = [[ODBazaarReleaseSkillViewController alloc] init];
+        
+        vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
+        vc.skillTitle = model.title;
+        vc.content = model.content;
+        vc.price = model.price;
+        vc.unit = model.unit;
+        vc.swap_type = [NSString stringWithFormat:@"%@",model.swap_type];
+        vc.type = @"编辑";
+        vc.imageArray = [model.imgs_small valueForKeyPath:@"img_url"];
+        [vc.strArray addObjectsFromArray:[model.imgs_small valueForKeyPath:@"md5"]];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+//        });
     }
 }
 
@@ -184,7 +184,8 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 #pragma mark - Create UICollectionView
 - (UICollectionView *)collectionView
 {
-    if (!_collectionView) {
+    if (!_collectionView)
+    {
         __weakSelf
         self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
         self.flowLayout.minimumLineSpacing = 3;
@@ -199,7 +200,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
                                              weakSelf.pageCount = 1;
                                              [weakSelf createRequestData];
                                          }];
-        
         self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^
                                          {
                                              [weakSelf loadMoreData];
@@ -226,9 +226,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     self.model = self.dataArray[indexPath.row];
     
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    
     [cell.editButton addTarget:self action:@selector(editButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-
     [cell.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell setModel:self.model];
     
@@ -244,12 +242,12 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 {
     ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     ODReleaseModel *model = self.dataArray[indexPath.row];
-    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {        
+    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"])
+    {
         vc.swap_id = model.swap_id;
         vc.nick = model.user[@"nick"];
         [self.navigationController pushViewController:vc animated:YES];
     }
-
 }
 
 

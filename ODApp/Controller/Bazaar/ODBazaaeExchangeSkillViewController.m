@@ -70,6 +70,7 @@
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID],@"my":@"0",@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kBazaarExchangeSkillUrl parameter:signParameter];
+    NSLog(@"%@",signParameter);
 }
 
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
