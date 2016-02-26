@@ -249,7 +249,7 @@
     ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
     
     ODOrderDetailModel *model = self.dataArray[0];
-    vc.darwbackMoney = model.price;
+    vc.darwbackMoney = model.total_price;
     vc.order_id = self.orderId;
     vc.drawbackReason = model.reason;
     vc.isService = YES;
@@ -274,7 +274,7 @@
     ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
     
     ODOrderDetailModel *model = self.dataArray[0];
-    vc.darwbackMoney = model.price;
+    vc.darwbackMoney = model.total_price;
     vc.order_id = self.orderId;
     vc.drawbackReason = model.reason;
     vc.isService = YES;
@@ -309,7 +309,7 @@
     ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
     
     ODOrderDetailModel *model = self.dataArray[0];
-    vc.darwbackMoney = model.price;
+    vc.darwbackMoney = model.total_price;
     vc.order_id = self.orderId;
     vc.drawbackReason = model.reason;
     vc.isRefuseAndReceive = YES;

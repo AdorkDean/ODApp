@@ -30,6 +30,7 @@
 @property (nonatomic , strong) ODEvaluation *evaluationView;
 @property (nonatomic ,strong) ODCancelOrderView *cancelOrderView;
 @property (nonatomic , copy) NSString *evaluateStar;
+@property (nonatomic , copy) NSString *evaluateContent;
 
 @property (nonatomic , strong) UIScrollView *scroller;
 
@@ -42,7 +43,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.evaluateStar = @"1";
+    self.evaluateStar = @"";
     
     self.dataArray = [[NSMutableArray alloc] init];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -266,7 +267,7 @@
     
     ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
     ODOrderDetailModel *model = self.dataArray[0];
-    vc.darwbackMoney = model.price;
+    vc.darwbackMoney = model.total_price;
     vc.order_id = self.order_id;
     vc.drawbackReason = model.reason;
     vc.isService = YES;
@@ -432,62 +433,62 @@
     
     
     if ([self.evaluationView.contentTextView.text isEqualToString:@""] || [self.evaluationView.contentTextView.text isEqualToString:@"请输入评价内容"]) {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入评价内容"];
+      
+        self.evaluateContent = @"";
+        
     }else{
         
+        self.evaluateContent = self.evaluationView.contentTextView.text;
+    }
+    self.evalueManager = [AFHTTPRequestOperationManager manager];
+    
+    NSDictionary *parameters = @{@"order_id":self.order_id , @"reason":self.evaluateContent, @"reason_num":self.evaluateStar , @"open_id":self.open_id};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    __weak typeof (self)weakSelf = self;
+    
+    
+    
+    [self.evalueManager GET:kEvalueUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-        self.evalueManager = [AFHTTPRequestOperationManager manager];
-        
-        NSDictionary *parameters = @{@"order_id":self.order_id , @"reason":self.evaluationView.contentTextView.text, @"reason_num":self.evaluateStar , @"open_id":self.open_id};
-        NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-        
-        __weak typeof (self)weakSelf = self;
-        
-        
-        
-        [self.evalueManager GET:kEvalueUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if (responseObject) {
             
-            if (responseObject) {
+            
+            if ([responseObject[@"status"]isEqualToString:@"success"]) {
+                
+                [weakSelf.evaluationView removeFromSuperview];
+                
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"评价成功"];
                 
                 
-                if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                    
-                    [weakSelf.evaluationView removeFromSuperview];
-                    
-                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"评价成功"];
-                    
-                    
-                    if (self.getRefresh) {
-                        
-                        
-                        
-                        weakSelf.getRefresh(@"1");
-                    }
+                if (self.getRefresh) {
                     
                     
                     
-                    [weakSelf getData];
-                    
-                    
-                    
-                }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-                    
-                    
-                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
-                    
-                    
+                    weakSelf.getRefresh(@"1");
                 }
                 
                 
+                
+                [weakSelf getData];
+                
+                
+                
+            }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
+                
+                
+                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+                
+                
             }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
-        }];
-        
-        
-    }
+            
+            
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+    }];
     
-    
+
 }
 
 
@@ -504,7 +505,7 @@
     
     ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
     ODOrderDetailModel *model = self.dataArray[0];
-    vc.darwbackMoney = model.price;
+    vc.darwbackMoney = model.total_price;
     vc.order_id = self.order_id;
     vc.isSelectReason = YES;
     vc.isRelease = YES;
