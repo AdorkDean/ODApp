@@ -23,8 +23,9 @@
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , copy) NSString *open_id;
-
 @property (nonatomic, strong) UILabel *noReusltLabel;
+
+@property (nonatomic , assign) NSInteger indexRow;
 
 @end
 
@@ -205,6 +206,10 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    
+    
     
       ODMyOrderModel *model = self.dataArray[indexPath.row];
     

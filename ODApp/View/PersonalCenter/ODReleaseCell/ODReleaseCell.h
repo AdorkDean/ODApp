@@ -11,6 +11,7 @@
 #import "UIImageView+WebCache.h"
 #import "ODPersonalTaskButton.h"
 
+@class ODPersonalTaskButton;
 
 @interface ODReleaseCell : UICollectionViewCell
 
@@ -18,17 +19,21 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lovesLabel;
-
-@property (weak, nonatomic) IBOutlet UIView *editAndDeleteView;
-
 @property (weak, nonatomic) IBOutlet UILabel *illegalLabel;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 
-@property (nonatomic, strong) UIButton *editButton;
-@property (nonatomic, strong) UIButton *deleteButton;;
+@property (weak, nonatomic) IBOutlet ODPersonalTaskButton *editButton;
+@property (weak, nonatomic) IBOutlet ODPersonalTaskButton *deleteButton;
+
+@property (weak, nonatomic) IBOutlet UIView *horizontalLineView;
+
+//@property (nonatomic, strong) UIButton *editButton;
+//@property (nonatomic, strong) UIButton *deleteButton;;
 
 @property (nonatomic, strong) UIImageView *halvingLineImageView;
 
 @property (nonatomic, strong) ODReleaseModel *model;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonWidthConstraint;
 
 @end
