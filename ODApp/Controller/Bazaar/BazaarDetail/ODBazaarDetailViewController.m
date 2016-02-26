@@ -655,7 +655,7 @@
                 __weak typeof (self)weakSelf = self;
                 [manager GET:kBazaarTaskDelegateUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                     if ([responseObject[@"status"] isEqualToString:@"success"]) {
-                        NSLog(@"%@",responseObject[@"status"]);
+                        NSDictionary *result = responseObject[@"result"];
 
                         weakSelf.num ++ ;
                         [weakSelf.picArray removeAllObjects];
@@ -664,7 +664,7 @@
                         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"委派成功"];
                         [weakSelf.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
                         if (self.myBlock) {
-                            self.myBlock([NSString stringWithFormat:@"delegate"]);
+                            self.myBlock([NSString stringWithFormat:@"%@",result[@"task_status"]]);
                         }
 
                     }
