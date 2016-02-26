@@ -171,9 +171,9 @@
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     ODLikeModel *model = self.dataArray[indexPath.row];
     vc.open_id = model.open_id;
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    
+    if (![vc.open_id isEqualToString:[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].openID]]) {
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
     
 }
