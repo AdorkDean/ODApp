@@ -229,7 +229,9 @@
             [weakSelf.firstCollectionView.mj_footer endRefreshing];
             [weakSelf.firstCollectionView reloadData];
         
-            
+            if (dic.count == 0) {
+                [self.firstCollectionView.mj_footer noticeNoMoreData];
+            }
         
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -290,7 +292,9 @@
             [weakSelf.secondCollectionView.mj_footer endRefreshing];
             [weakSelf.secondCollectionView reloadData];
             
-            
+            if (dic.count == 0) {
+                [self.secondCollectionView.mj_footer noticeNoMoreData];
+            }
             
         }
         
