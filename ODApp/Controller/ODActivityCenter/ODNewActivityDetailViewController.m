@@ -252,8 +252,8 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         webView.delegate = self;
         webView.layer.masksToBounds = YES;
         webView.layer.cornerRadius = 5;
-//        webView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        webView.backgroundColor = [UIColor clearColor];
+        webView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        webView.backgroundColor = [UIColor whiteColor];
         webView.scrollView.showsHorizontalScrollIndicator = NO;
         webView.scrollView.scrollEnabled = NO;
         
@@ -271,6 +271,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         [view.shareBtn addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         [view.goodBtn addTarget:self action:@selector(clickGood:) forControlEvents:UIControlEventTouchUpInside];
         view.frame = CGRectMake(0, CGRectGetMaxY(self.webView.frame), KScreenWidth, 50);
+        view.backgroundColor = [UIColor whiteColor];
         [self.baseScrollV addSubview:view];
         [self.baseScrollV bringSubviewToFront:_bottomButtonView];
         _bottomButtonView = view;
@@ -499,13 +500,13 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     float clientheight = [clientheight_str floatValue];
     webView.od_height = clientheight + 12.5;
     self.bottomButtonView.od_y = CGRectGetMaxY(webView.frame);
+    UIView *view1 ,*view2;
     if (!hasload)
     {
-        [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(webView.frame))];
-        [self.bottomButtonView addLineOnBottom];
+        view1 = [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(webView.frame))];
+        view2 = [self.bottomButtonView addLineOnBottom];
         hasload = YES;
     }
-    webView.layer.backgroundColor = [UIColor clearColor].CGColor;
     sharedTimes = self.resultModel.share_cnt;
     [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %d",self.resultModel.share_cnt] forState:UIControlStateNormal];
     [[self.bottomButtonView goodBtn]setTitle:[NSString stringWithFormat:@"赞 %d",self.resultModel.love_cnt] forState:UIControlStateNormal];
@@ -513,6 +514,9 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     self.love_id = self.resultModel.love_id;
     loveNum = self.resultModel.love_cnt;
     self.baseScrollV.contentSize = CGSizeMake(0, CGRectGetMaxY(self.bottomButtonView.frame));
+    
+    [self.baseScrollV bringSubviewToFront:view1];
+    [self.baseScrollV bringSubviewToFront:view2];
 }
 
 #pragma mark - ODPersonalCenterVCDelegate
