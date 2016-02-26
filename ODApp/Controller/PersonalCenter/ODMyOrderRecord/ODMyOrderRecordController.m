@@ -87,7 +87,7 @@
     {
         [weakSelf.noReusltLabel removeFromSuperview];
         
-        if (self.count == 1)
+        if (weakSelf.count == 1)
         {
             [weakSelf.orderArray removeAllObjects];
         }
@@ -102,12 +102,12 @@
                 ODMyOrderRecordModel *model = [[ODMyOrderRecordModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
 
-                if (![[self.orderArray valueForKeyPath:@"order_id"]containsObject:model.order_id])
+                if (![[weakSelf.orderArray valueForKeyPath:@"order_id"]containsObject:model.order_id])
                 {
                     [weakSelf.orderArray addObject:model];
                 }
             }
-            if (weakSelf.orderArray.count == 0)
+            if (weakSelf.count == 1 && weakSelf.orderArray.count == 0)
             {
                 weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无预约" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [weakSelf.view addSubview:weakSelf.noReusltLabel];

@@ -157,11 +157,25 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
+        
+    
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     ODLikeModel *model = self.dataArray[indexPath.row];
-    vc.open_id = model.open_id;
-    [self.navigationController pushViewController:vc animated:YES];
-  
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+    
+    if ([openId isEqualToString:model.open_id]) {
+        ;
+    }else{
+        
+        vc.open_id = model.open_id;
+        [self.navigationController pushViewController:vc animated:YES];
+
+        
+        
+    }
+    
+    
+   
     
     
     
