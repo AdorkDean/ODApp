@@ -39,7 +39,8 @@
 @property (nonatomic , copy) NSString *type;
 @property (nonatomic, copy) NSString *openID;
 
-
+@property (nonatomic , assign) NSInteger firstIndex;
+@property (nonatomic , assign) NSInteger secondIndex;
 
 @end
 
@@ -75,25 +76,35 @@
     
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(replyAction:) name:ODNotificationReplySuccess object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(replyAction:) name:ODNotificationReplySuccess object:nil];
 
     
     
-    if ([self.refresh isEqualToString:@"refresh"]) {
-        [self.firstCollectionView.mj_header beginRefreshing];
-        [self.secondCollectionView.mj_header beginRefreshing];
+    if ([self.isFirstRefresh isEqualToString:@"del"]){
+        [self.FirstDataArray removeObjectAtIndex:self.firstIndex];
+        [self.firstCollectionView reloadData];
     }
     
+    if ([self.isSecondRefresh isEqualToString:@"del"]){
+        [self.secondDataArray removeObjectAtIndex:self.secondIndex];
+        [self.secondCollectionView reloadData];
+    }
+    
+
+    
+    
+    
+    
 }
 
 
-- (void)replyAction:(NSNotification *)text
-{
-    
-    [self.firstCollectionView.mj_header beginRefreshing];
-    [self.secondCollectionView.mj_header beginRefreshing];
-    
-}
+//- (void)replyAction:(NSNotification *)text
+//{
+//    
+//    [self.firstCollectionView.mj_header beginRefreshing];
+//    [self.secondCollectionView.mj_header beginRefreshing];
+//    
+//}
 
 
 
@@ -548,11 +559,16 @@
 {
       ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc]init];
     
-    detailController.myBlock = ^(NSString *refresh){
-        self.refresh = refresh;
-    };
-
+  
     if (collectionView.tag == 111) {
+        
+        
+        self.firstIndex = indexPath.row;
+        
+        detailController.myBlock = ^(NSString *refresh){
+            self.isFirstRefresh = refresh;
+        };
+       
         
         ODCommunityModel *model = self.FirstDataArray[indexPath.row];
         detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
@@ -560,6 +576,15 @@
 
     }else if (collectionView.tag == 222) {
        
+           self.secondIndex = indexPath.row;
+        
+        
+        
+        detailController.myBlock = ^(NSString *refresh){
+            self.isSecondRefresh = refresh;
+        };
+
+        
         ODCommunityModel *model = self.secondDataArray[indexPath.row];
         detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
         [self.navigationController pushViewController:detailController animated:YES];
