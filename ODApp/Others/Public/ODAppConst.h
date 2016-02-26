@@ -81,7 +81,8 @@ UIKIT_EXTERN NSString * const ODNotificationQuit;
 /**  回复成功后刷新 */
 UIKIT_EXTERN NSString * const ODNotificationReplySuccess;
 
-
+/**  点击收藏的通知 */
+UIKIT_EXTERN NSString * const ODNotificationloveSkill;
 
 
 #pragma mark - 请求URL接口 

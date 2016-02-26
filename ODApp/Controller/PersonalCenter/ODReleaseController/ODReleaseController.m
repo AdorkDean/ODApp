@@ -14,7 +14,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 @interface ODReleaseController ()
 
 @property (nonatomic, assign) long deleteRow;
-@property (nonatomic, assign) long editRow;
 
 @end
 
@@ -35,6 +34,11 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     {
         [weakSelf.collectionView.mj_header beginRefreshing];
     }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationloveSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
+     {         
+         [self createRequestData];
+     }];
+
 }
 
 - (void)loadMoreData
@@ -61,7 +65,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
          {
              [self.dataArray removeAllObjects];
              [self.noReusltLabel removeFromSuperview];
-         }         
+         }
         [weakSelf.collectionView.mj_footer endRefreshing];
          
         if ([[model result]count] == 0)
@@ -73,8 +77,10 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
             if (![[weakSelf.dataArray valueForKeyPath:@"swap_id" ] containsObject:[md swap_id]])
             {
                 [weakSelf.dataArray addObject: md];
+                
             }
         }
+         
         [weakSelf.collectionView reloadData];
         [weakSelf.collectionView.mj_header endRefreshing];
         if (self.pageCount == 1 && self.dataArray.count == 0)
@@ -133,7 +139,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     
     if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"])
     {
-        
 //        dispatch_async(dispatch_get_main_queue(), ^
 //        {
         ODBazaarReleaseSkillViewController *vc = [[ODBazaarReleaseSkillViewController alloc] init];
