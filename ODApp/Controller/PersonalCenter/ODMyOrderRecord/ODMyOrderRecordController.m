@@ -10,6 +10,7 @@
 #import "ODUserInformation.h"
 @interface ODMyOrderRecordController ()
 
+@property (nonatomic, assign) long cancelOrderRow;
 
 @end
 
@@ -178,7 +179,7 @@
 {
     ODMyOrderDetailController *vc = [[ODMyOrderDetailController alloc] init];
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
-  
+    self.cancelOrderRow = indexPath.row;
     vc.isOther = self.isOther;
     vc.open_id = self.open_id;    
     vc.order_id = [NSString stringWithFormat:@"%@",model.order_id];
