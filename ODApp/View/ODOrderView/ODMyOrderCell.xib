@@ -65,14 +65,14 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MNb-9C-ZsN">
-                        <rect key="frame" x="58" y="17" width="10" height="15"/>
+                        <rect key="frame" x="58" y="17" width="13" height="12"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="10" id="T25-Pc-8uU"/>
-                            <constraint firstAttribute="height" constant="15" id="d3f-2i-Cbx"/>
+                            <constraint firstAttribute="width" constant="13" id="T25-Pc-8uU"/>
+                            <constraint firstAttribute="height" constant="12" id="d3f-2i-Cbx"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="宝宝" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FlE-mF-eU2">
-                        <rect key="frame" x="78" y="15" width="100" height="20"/>
+                        <rect key="frame" x="81" y="15" width="100" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Xm1-nD-0oC"/>
                             <constraint firstAttribute="width" constant="100" id="kyK-kK-pFJ"/>
@@ -82,7 +82,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="支付成功" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A8Y-5p-Gux">
-                        <rect key="frame" x="198" y="15" width="252" height="20"/>
+                        <rect key="frame" x="201" y="15" width="249" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="Tgm-MB-fXc"/>
                             <constraint firstAttribute="width" constant="90" id="abt-Np-kor"/>
@@ -136,6 +136,7 @@
             <connections>
                 <outlet property="contentImageView" destination="hbx-DT-bYo" id="yJV-Lp-hp3"/>
                 <outlet property="dateLabel" destination="RsG-QR-FRs" id="DhF-9R-52I"/>
+                <outlet property="genderImageWith" destination="T25-Pc-8uU" id="HxX-UN-m7l"/>
                 <outlet property="gerderImgeView" destination="MNb-9C-ZsN" id="egq-gN-YtD"/>
                 <outlet property="nikeLabel" destination="FlE-mF-eU2" id="lxl-4x-UMV"/>
                 <outlet property="priceLabel" destination="opk-So-4hd" id="jkO-Uw-UcJ"/>
@@ -143,7 +144,7 @@
                 <outlet property="titleLabel" destination="eMi-57-Ylh" id="kmL-aw-g4u"/>
                 <outlet property="userButtonView" destination="P3i-TU-DeN" id="kDg-77-D6R"/>
             </connections>
-            <point key="canvasLocation" x="70" y="152"/>
+            <point key="canvasLocation" x="129" y="127"/>
         </collectionViewCell>
     </objects>
 </document>

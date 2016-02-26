@@ -174,21 +174,22 @@
     [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.userView addSubview:self.taskButton];
 
+    NSString *task_status = [NSString stringWithFormat:@"%@",detailModel.task_status];
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
         
-        if ([self.task_status_name isEqualToString:@"待派遣"]) {
+        if ([task_status isEqualToString:@"1"]) {
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"删除任务" forState:UIControlStateNormal];
-        }else if ([self.task_status_name isEqualToString:@"进行中"]){
+        }else if ([task_status isEqualToString:@"2"]){
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
-        }else if ([self.task_status_name isEqualToString:@"交付"]){
+        }else if ([task_status isEqualToString:@"3"]){
             [self.taskButton setTitle:@"确认完成" forState:UIControlStateNormal];
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
-        }else if ([self.task_status_name isEqualToString:@"确认完成"]){
+        }else if ([task_status isEqualToString:@"4"]){
             [self.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
-        }else if ([self.task_status_name isEqualToString:@"过期"]){
+        }else if ([task_status isEqualToString:@"-2"]){
             [self.taskButton setTitle:@"过期任务" forState:UIControlStateNormal];
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"b0b0b0" alpha:1] forState:UIControlStateNormal];
         }
@@ -208,40 +209,39 @@
                 apply_status = @"0";
             }
         }
-        if ([self.task_status_name isEqualToString:@"待派遣"] && open_id.length == 0 && [apply_status isEqualToString:@"0"]) {
-           [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
-           [self.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
-        }else if ([self.task_status_name isEqualToString:@"待派遣"] && open_id.length == 0 && [apply_status isEqualToString:@""]){
+        if ([task_status isEqualToString:@"1"] && open_id.length == 0 && [apply_status isEqualToString:@"0"]) {
+            [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
+        }else if ([task_status isEqualToString:@"1"] && open_id.length == 0 && [apply_status isEqualToString:@""]){
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
             self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
             [self.taskButton setTitle:@"接受任务" forState:UIControlStateNormal];
-        }else if ([self.task_status_name isEqualToString:@"进行中"] && open_id.length > 0){
+        }else if ([task_status isEqualToString:@"2"] && open_id.length > 0){
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"确认提交" forState:UIControlStateNormal];
-        }else if ([self.task_status_name isEqualToString:@"确认完成"] && open_id.length > 0 ){
+        }else if ([task_status isEqualToString:@"4"] && open_id.length > 0 ){
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
-        }else if ([self.task_status_name isEqualToString:@"交付"] && open_id.length > 0){
+        }else if ([task_status isEqualToString:@"3"] && open_id.length > 0){
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"已提交" forState:UIControlStateNormal];
-        }else if ([self.task_status_name isEqualToString:@"确认完成"] && open_id.length == 0){
+        }else if ([task_status isEqualToString:@"4"] && open_id.length == 0){
             [self.taskButton removeFromSuperview];
             userNickLabel.frame = CGRectMake(60, 10, self.userView.frame.size.width-60, 20);
             userSignLabel.frame = CGRectMake(60, 30, self.userView.frame.size.width-60, 40);
-        }else if ([self.task_status_name isEqualToString:@"进行中"] && open_id.length == 0 ){
+        }else if ([task_status isEqualToString:@"2"] && open_id.length == 0 ){
             [self.taskButton removeFromSuperview];
             userNickLabel.frame = CGRectMake(60, 10, self.userView.frame.size.width-60, 20);
             userSignLabel.frame = CGRectMake(60, 30, self.userView.frame.size.width-60, 40);
-        }else if ([self.task_status_name isEqualToString:@"交付"] && open_id.length == 0){
+        }else if ([task_status isEqualToString:@"3"] && open_id.length == 0){
             [self.taskButton removeFromSuperview];
             userNickLabel.frame = CGRectMake(60, 10, self.userView.frame.size.width-60, 20);
             userSignLabel.frame = CGRectMake(60, 30, self.userView.frame.size.width-60, 40);
-        }else if ([self.task_status_name isEqualToString:@"过期"]){
+        }else if ([task_status isEqualToString:@"-2"]){
             [self.taskButton setTitle:@"过期任务" forState:UIControlStateNormal];
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"b0b0b0" alpha:1] forState:UIControlStateNormal];
         }
     }
-    
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 75, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
     [self.userView addSubview:lineView];
 }
@@ -636,9 +636,10 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODBazaarDetailModel *model = self.picArray[indexPath.row];
-    NSString *str = [NSString stringWithFormat:@"%@",model.apply_status];
+    ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
+    NSString *task_status = [NSString stringWithFormat:@"%@",detailModel.task_status];
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
-        if ([str isEqualToString:@"0"] && [self.task_status_name isEqualToString:@"待派遣"] && self.num == 1) {
+        if ([task_status isEqualToString:@"1"] && self.num == 1) {
            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否委派" message:nil preferredStyle:UIAlertControllerStyleAlert];
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 

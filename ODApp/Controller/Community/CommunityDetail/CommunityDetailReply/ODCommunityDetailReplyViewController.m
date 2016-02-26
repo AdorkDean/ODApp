@@ -46,7 +46,6 @@
 -(void)joiningTogetherParmeters
 {
     NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"content":self.textView.text,@"parent_id":self.parent_id,@"open_id":[ODUserInformation sharedODUserInformation].openID};
-    NSLog(@"+++%@",self.bbs_id);
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:kCommunityBbsReplyUrl parameter:signParameter];
 }
@@ -56,20 +55,6 @@
 {
     __weak typeof (self)weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//
-//            NSDictionary *result = responseObject[@"result"];
-//            if (weakSelf.myBlock) {
-//                weakSelf.myBlock([NSString stringWithFormat:@"refresh"],result);
-//            }
-//            
-//            NSLog(@"--------%@",result);
-//            [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationMyTaskRefresh object:nil];
-//            [weakSelf.navigationController popViewControllerAnimated:YES];
-//            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"回复成功"];
-//            
-//        }
-        
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
         if ([dict[@"status"]isEqualToString:@"success"]) {
             NSDictionary *result = dict[@"result"];
@@ -79,6 +64,8 @@
             if (weakSelf.myBlock) {
                 weakSelf.myBlock([NSString stringWithFormat:@"refresh"],model);
             }
+            
+            [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationReplySuccess object:nil];
             
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationMyTaskRefresh object:nil];
             [weakSelf.navigationController popViewControllerAnimated:YES];

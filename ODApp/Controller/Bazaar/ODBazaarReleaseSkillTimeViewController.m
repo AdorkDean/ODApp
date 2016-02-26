@@ -92,6 +92,7 @@
     }
 
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    NSLog(@"%@",signParameter);
     [self downLoadDataWithUrl:kBazaarReleaseSkillTimeUrl parameter:signParameter];
 }
 
@@ -148,10 +149,6 @@
     [cell.openButton addTarget:self action:@selector(openButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.timeLabel.text = dict[@"display"];
     cell.status = [dict[@"status"]boolValue];
-//    if (indexPath.row == 0)
-//    {
-//        <#statements#>
-//    }
     return cell;
 }
 

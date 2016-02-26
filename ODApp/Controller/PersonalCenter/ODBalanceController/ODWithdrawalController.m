@@ -30,8 +30,7 @@
     
     
     
-    NSLog(@"_____%@" ,self.navigationItem.title );
-    
+       
     
 }
 
