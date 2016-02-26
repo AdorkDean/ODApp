@@ -12,6 +12,10 @@
 @interface ODCollectionCell : UICollectionViewCell
 
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *genderImageWith;
+
+
+
 @property (weak, nonatomic) IBOutlet UIButton *userImageButton;
 @property (weak, nonatomic) IBOutlet UILabel *schoolLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *hisPictureView;

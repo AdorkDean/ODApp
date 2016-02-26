@@ -31,10 +31,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZHL-Sk-gB8">
-                        <rect key="frame" x="76" y="40" width="10" height="15"/>
+                        <rect key="frame" x="76" y="40" width="13" height="12"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="10" id="m1F-CS-rsI"/>
-                            <constraint firstAttribute="height" constant="15" id="tvV-9H-PC0"/>
+                            <constraint firstAttribute="width" constant="13" id="m1F-CS-rsI"/>
+                            <constraint firstAttribute="height" constant="12" id="tvV-9H-PC0"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Skills profile page_icon_arrow_upper" translatesAutoresizingMaskIntoConstraints="NO" id="PaS-s6-Hhn">
@@ -55,7 +55,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOi-zl-bOw">
-                        <rect key="frame" x="96" y="40" width="182" height="20"/>
+                        <rect key="frame" x="99" y="37" width="179" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="vdk-uj-J1q"/>
                         </constraints>
@@ -71,7 +71,7 @@
                 <constraint firstItem="CEs-Se-iez" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="30" id="FbS-NO-2Uv"/>
                 <constraint firstItem="PaS-s6-Hhn" firstAttribute="leading" secondItem="dOi-zl-bOw" secondAttribute="trailing" constant="50" id="JNZ-qW-F4d"/>
                 <constraint firstItem="ZHL-Sk-gB8" firstAttribute="leading" secondItem="WAW-dp-fNH" secondAttribute="trailing" constant="10" id="Kps-jv-cOp"/>
-                <constraint firstItem="dOi-zl-bOw" firstAttribute="top" secondItem="Dhb-tH-NhT" secondAttribute="bottom" constant="10" id="M5I-h5-cZM"/>
+                <constraint firstItem="dOi-zl-bOw" firstAttribute="top" secondItem="Dhb-tH-NhT" secondAttribute="bottom" constant="7" id="M5I-h5-cZM"/>
                 <constraint firstAttribute="bottom" secondItem="CEs-Se-iez" secondAttribute="bottom" id="PaS-jm-RVV"/>
                 <constraint firstAttribute="trailing" secondItem="CEs-Se-iez" secondAttribute="trailing" id="Tal-0m-kjs"/>
                 <constraint firstItem="Dhb-tH-NhT" firstAttribute="leading" secondItem="WAW-dp-fNH" secondAttribute="trailing" constant="10" id="VdN-h7-OjX"/>
@@ -85,6 +85,7 @@
             </constraints>
             <size key="customSize" width="353" height="88"/>
             <connections>
+                <outlet property="genderImageWith" destination="m1F-CS-rsI" id="rUT-Fq-7Ka"/>
                 <outlet property="hisPictureView" destination="ZHL-Sk-gB8" id="NHf-QD-JZK"/>
                 <outlet property="nameLabel" destination="dOi-zl-bOw" id="kxw-c0-SB3"/>
                 <outlet property="schoolLabel" destination="Dhb-tH-NhT" id="iYS-cK-fze"/>

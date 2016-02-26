@@ -12,6 +12,10 @@
 @interface ODMyOrderCell : UICollectionViewCell
 
 
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *genderImageWith;
+
+
 @property (weak, nonatomic) IBOutlet UIButton *userButtonView;
 @property (weak, nonatomic) IBOutlet UIImageView *gerderImgeView;
 @property (weak, nonatomic) IBOutlet UILabel *nikeLabel;
@@ -25,7 +29,7 @@
 
 
 - (void)dealWithSellModel:(ODMySellModel *)model;
-
+- (void)dealWithBuyModel:(ODMyOrderModel *)model;
 
 
 
