@@ -397,14 +397,18 @@
                NSDictionary *dict = responseObject[@"result"];
                weakSelf.love_id = [NSString stringWithFormat:@"%@",dict[@"love_id"]];
                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"收藏成功"];
+               
            }
        }else{
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
                self.love = @"love";
                [weakSelf joiningTogetherParmeters];
                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"取消收藏"];
+               
            }
        }
+       [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationloveSkill object:nil];
+       
        
    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
        

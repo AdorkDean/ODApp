@@ -44,6 +44,8 @@
         
         self.withdrawalView.prcieLabel.text = [NSString stringWithFormat:@"￥%@" , self.price];
         self.withdrawalView.payAddressTextView.delegate = self;
+        self.withdrawalView.withdrawalButton.enabled = ![self.price isEqualToString:@"0.00"];
+        self.withdrawalView.withdrawalButton.backgroundColor = self.withdrawalView.withdrawalButton.enabled ? [UIColor redColor] : [UIColor lightGrayColor];
         [self.withdrawalView.withdrawalButton addTarget:self action:@selector(withdrawalAction:) forControlEvents:UIControlEventTouchUpInside];
         
     }
@@ -55,8 +57,8 @@
 {
     
     
-      [self.withdrawalView.payAddressTextView resignFirstResponder];
-    
+
+    [self.view endEditing:YES];
     
     
     if ([self.withdrawalView.payAddressTextView.text isEqualToString:@"请输入和注册手机一致的支付宝账号"] || [self.withdrawalView.payAddressTextView.text isEqualToString:@""]) {

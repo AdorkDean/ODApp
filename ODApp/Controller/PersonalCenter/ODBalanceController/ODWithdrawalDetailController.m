@@ -17,6 +17,7 @@
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 @property (nonatomic , strong) NSMutableArray *dataArray;
 
+@property (nonatomic, strong) UILabel *noReusltLabel;
 
 
 @end
@@ -71,6 +72,16 @@
                 [model setValuesForKeysWithDictionary:miniDic];
                 [self.dataArray addObject:model];
             }
+            
+            if (self.dataArray.count == 0) {
+                weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
+                weakSelf.noReusltLabel.text = @"暂无提现记录";
+                weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
+                weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
+                weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+                [weakSelf.view addSubview:weakSelf.noReusltLabel];
+            }
+            
             
             [self.collectionView reloadData];
             

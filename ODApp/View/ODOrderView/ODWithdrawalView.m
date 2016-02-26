@@ -22,15 +22,9 @@
 
     
     view.withdrawalButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-
-    
-    
     
     return view;
-    
-    
-    
-    
+
 }
 
 @end
