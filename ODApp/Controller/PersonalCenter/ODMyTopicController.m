@@ -409,8 +409,19 @@
         NSIndexPath *indexpath = [self.secondCollectionView indexPathForCell:cell];
         ODCommunityModel *model = self.secondDataArray[indexpath.row];
         NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
-        vc.open_id = [self.secondUserInfoDic[userId]open_id];
-        [self.navigationController pushViewController:vc animated:YES];
+
+        
+        NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+        if ([openId isEqualToString:[self.secondUserInfoDic[userId]open_id]]) {
+            ;
+        }else{
+            vc.open_id = [self.secondUserInfoDic[userId]open_id];
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
+        
+        
+        
         
     }
     

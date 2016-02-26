@@ -19,5 +19,4 @@
 //导航的标题视图
 
 - (void)createProgressHUDWithAlpha:(float)alpha withAfterDelay:(float)afterDelay title:(NSString *)title ;
-- (void)backAction:(id)sender;
 @end
