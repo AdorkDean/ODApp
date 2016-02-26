@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     
     self.titleImageView.layer.cornerRadius = 7;
+    self.titleImageView.layer.masksToBounds = YES;
     
     self.contentLabel.font = [UIFont systemFontOfSize:14];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
