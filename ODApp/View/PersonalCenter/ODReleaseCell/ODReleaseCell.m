@@ -13,6 +13,7 @@
 - (void)awakeFromNib {
     [self.contentView bringSubviewToFront:self.lineView];
     self.titleImageView.layer.cornerRadius = 7;
+    self.titleImageView.layer.masksToBounds = YES;
     
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     
