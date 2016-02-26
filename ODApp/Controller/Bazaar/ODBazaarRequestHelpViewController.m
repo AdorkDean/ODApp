@@ -315,6 +315,7 @@
         if ([self.refresh isEqualToString:@"accept"]) {
             [bazaarDetail.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
         }
+        self.indexPath = indexPath.row;
         [self.navigationController pushViewController:bazaarDetail animated:YES];
     
 }
@@ -324,20 +325,14 @@
 {
     [super viewWillAppear:animated];
     
+    
     if ([self.refresh isEqualToString:@"release"]) {
         self.status = @"9";
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [self.collectionView.mj_header beginRefreshing];
     }else if ([self.refresh isEqualToString:@"del"]){
-        [self.collectionView.mj_header beginRefreshing];
-    }else if ([self.refresh isEqualToString:@"accept"]){
-        [self.collectionView.mj_header beginRefreshing];
-    }else if ([self.refresh isEqualToString:@"submit"]){
-        [self.collectionView.mj_header beginRefreshing];
-    }else if ([self.refresh isEqualToString:@"complete"]){
-        [self.collectionView.mj_header beginRefreshing];
-    }else if ([self.refresh isEqualToString:@"delegate"]){
-        [self.collectionView.mj_header beginRefreshing];
+        [self.dataArray removeObjectAtIndex:self.indexPath];
+        [self.collectionView reloadData];
     }
 }
 
