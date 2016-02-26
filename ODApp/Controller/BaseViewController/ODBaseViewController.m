@@ -38,11 +38,6 @@
     [self.HUD hide:YES afterDelay:afterDelay];
     
 }
-- (void)backAction:(id)sender
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

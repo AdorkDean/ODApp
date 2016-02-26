@@ -40,12 +40,7 @@
     NSArray *controllers = @[[[ODHomeFoundViewController alloc]init],[[ODNewActivityCenterViewController alloc]init],[[ODBazaarViewController alloc]init],[[ODCommumityViewController alloc]init],[[ODLandMainController alloc]init]];
     for (NSInteger i = 0; i < controllers.count; i++)
     {
-        if (i < controllers.count - 1)
-        {
-            [self setupOneChildVc:[[ODNavigationController alloc]initWithRootViewController:controllers[i]] image:[NSString stringWithFormat:@"%@_default",imageArray[i]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[i]] title:titleArray[i]];
-        }
-        else
-        [self setupOneChildVc:controllers[i] image:[NSString stringWithFormat:@"%@_default",imageArray[i]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[i]] title:titleArray[i]];
+        [self setupOneChildVc:[[ODNavigationController alloc]initWithRootViewController:controllers[i]] image:[NSString stringWithFormat:@"%@_default",imageArray[i]] selectedImage:[NSString stringWithFormat:@"%@_Selected",imageArray[i]] title:titleArray[i]];
     }
 }
 
