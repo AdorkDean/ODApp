@@ -98,8 +98,10 @@ UIKIT_EXTERN NSString * const ODNotificationloveSkill;
 
 #pragma mark - 请求URL接口 
 /** 统一的URL */
-UIKIT_EXTERN NSString *const ODBaseURL;
+UIKIT_EXTERN NSString * const ODBaseURL;
 
+UIKIT_EXTERN NSString * const ODUrlLoveAdd;
+UIKIT_EXTERN NSString * const ODUrlLoveDelete;
 UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDetailUrl;

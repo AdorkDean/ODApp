@@ -60,8 +60,14 @@ NSString * const requestSuccessStatus = @"success";
             {
                 [resultDic NSLogProperty];
             }
-            NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
-            success(model);
+            if (modeleClass == [NSObject class] && ![resultDic isKindOfClass:[NSArray class]])
+            {
+                success(resultDic);
+            }
+            else
+            {
+                success([ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject]);
+            }
         }
         else
         {
