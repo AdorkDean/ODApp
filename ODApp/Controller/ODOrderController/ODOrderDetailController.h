@@ -14,6 +14,10 @@
 
 @property (nonatomic , copy) NSString *orderType;
 
+@property (nonatomic , copy) NSString *orderStatus;
+
+
+
 @property(nonatomic,copy)void(^getRefresh)(NSString *isRefresh);
 
 

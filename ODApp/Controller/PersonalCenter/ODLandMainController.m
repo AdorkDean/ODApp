@@ -48,22 +48,16 @@
     if (![ODUserInformation sharedODUserInformation].openID.length)
         return;
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"登录个人中心";
+    self.navigationItem.title = @"个人中心";
 
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.hidden = YES;
     [self getData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    self.navigationController.navigationBar.hidden = NO;
-}
 #pragma mark - 请求数据
 - (void)getData
 {
@@ -91,7 +85,7 @@
 -(void)createCollectionView
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 20, kScreenSize.width, kScreenSize.height - 55 - 20) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - ODNavigationHeight - ODTabBarHeight) collectionViewLayout:self.flowLayout];
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
@@ -258,7 +252,7 @@
         ODGiveOpinionController *vc = [[ODGiveOpinionController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    else if (indexPath.section == 10)
+   else if (indexPath.section == 10)
     {
         NSString *url = self.model.share[@"icon"];
         NSString *content = self.model.share[@"desc"];

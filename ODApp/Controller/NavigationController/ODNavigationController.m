@@ -10,7 +10,6 @@
 
 @interface ODNavigationController () <UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 
-
 @end
 
 @implementation ODNavigationController

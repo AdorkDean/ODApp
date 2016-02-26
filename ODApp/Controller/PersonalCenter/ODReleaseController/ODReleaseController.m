@@ -13,6 +13,9 @@
 NSString * const ODReleaseCellID = @"ODReleaseCell";
 @interface ODReleaseController ()
 
+@property (nonatomic, assign) long deleteRow;
+@property (nonatomic, assign) long loveRow;
+
 @end
 
 @implementation ODReleaseController
@@ -30,9 +33,10 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     __weakSelf;
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationEditSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
     {
-        [weakSelf.dataArray removeAllObjects];
-        [weakSelf createRequestData];
+        [weakSelf.collectionView.mj_header beginRefreshing];
     }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationloveSkill object:nil];
+
 }
 
 - (void)loadMoreData
@@ -41,10 +45,12 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     [self createRequestData];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)reloadData:(NSNotification *)text
 {
-    [super viewWillAppear:animated];
-    
+    ODReleaseModel *model = self.dataArray[self.loveRow];
+    model.love_num = [NSString stringWithFormat:@"%@" , text.userInfo[@"loveNumber"]];
+    [self.dataArray replaceObjectAtIndex:self.loveRow withObject:model];
+    [self.collectionView reloadData];
 }
 
 #pragma mark - 移除通知
@@ -56,46 +62,42 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 #pragma mark - 加载数据请求
 - (void)createRequestData
 {
-    if (self.pageCount == 1)
-    {
-        [self.dataArray removeAllObjects];
-        [self.noReusltLabel removeFromSuperview];
-    }
+    
     __weakSelf
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"my":@"1"};
     [ODHttpTool getWithURL:ODPersonalReleaseTaskUrl parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
      {
+         if (self.pageCount == 1)
+         {
+             [self.dataArray removeAllObjects];
+             [self.noReusltLabel removeFromSuperview];
+         }
         [weakSelf.collectionView.mj_footer endRefreshing];
-        
-        
+         
         if ([[model result]count] == 0)
         {
             [weakSelf.collectionView.mj_footer noticeNoMoreData];
         }
         for (ODReleaseModel *md in [model result])
         {
-            if ([[weakSelf.dataArray valueForKeyPath:@"swap_id" ] containsObject:[md swap_id]])
-            {
-                
-            }
-            else
+            if (![[weakSelf.dataArray valueForKeyPath:@"swap_id" ] containsObject:[md swap_id]])
             {
                 [weakSelf.dataArray addObject: md];
+                
             }
         }
+         
         [weakSelf.collectionView reloadData];
         [weakSelf.collectionView.mj_header endRefreshing];
-         
-         
-         if (self.pageCount == 1 && self.dataArray.count == 0)
-         {
-             weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
-             weakSelf.noReusltLabel.text = @"暂无技能";
-             weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
-             weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
-             weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-             [weakSelf.view addSubview:weakSelf.noReusltLabel];
-         }
+        if (self.pageCount == 1 && self.dataArray.count == 0)
+        {
+         weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
+         weakSelf.noReusltLabel.text = @"暂无技能";
+         weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
+         weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
+         weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+         [weakSelf.view addSubview:weakSelf.noReusltLabel];
+        }
     }
                    failure:^(NSError *error)
     {
@@ -115,13 +117,11 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     __weakSelf
     [self.manager GET:ODPersonReleaseTaskDeleteUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
     {
-        [weakSelf createRequestData];
         if ([responseObject[@"status"] isEqualToString:@"success"])
         {
             [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"删除任务成功"];
-
-//            [weakSelf.dataArray removeAllObjects];
-            [weakSelf createRequestData];
+            [weakSelf.dataArray removeObject:weakSelf.dataArray[self.deleteRow]];
+            [weakSelf.collectionView reloadData];
         }
         else
         {
@@ -143,23 +143,24 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODReleaseModel *model = self.dataArray[indexPath.row];
     
-    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {
+    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"])
+    {
+//        dispatch_async(dispatch_get_main_queue(), ^
+//        {
+        ODBazaarReleaseSkillViewController *vc = [[ODBazaarReleaseSkillViewController alloc] init];
         
-        dispatch_async(dispatch_get_main_queue(), ^{
-            ODBazaarReleaseSkillViewController *vc = [[ODBazaarReleaseSkillViewController alloc] init];
-            
-            vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
-            vc.skillTitle = model.title;
-            vc.content = model.content;
-            vc.price = model.price;
-            vc.unit = model.unit;
-            vc.swap_type = [NSString stringWithFormat:@"%@",model.swap_type];
-            vc.type = @"编辑";
-            vc.imageArray = [model.imgs_small valueForKeyPath:@"img_url"];
-            [vc.strArray addObjectsFromArray:[model.imgs_small valueForKeyPath:@"md5"]];
-            
-            [self.navigationController pushViewController:vc animated:YES];
-        });
+        vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
+        vc.skillTitle = model.title;
+        vc.content = model.content;
+        vc.price = model.price;
+        vc.unit = model.unit;
+        vc.swap_type = [NSString stringWithFormat:@"%@",model.swap_type];
+        vc.type = @"编辑";
+        vc.imageArray = [model.imgs_small valueForKeyPath:@"img_url"];
+        [vc.strArray addObjectsFromArray:[model.imgs_small valueForKeyPath:@"md5"]];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+//        });
     }
 }
 
@@ -173,9 +174,10 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview;
         NSIndexPath *indexPath = [weakSelf.collectionView indexPathForCell:cell];
         ODReleaseModel *model = weakSelf.dataArray[indexPath.row];
-        
+        self.deleteRow = indexPath.row;
         weakSelf.swap_id = model.swap_id;
         [weakSelf deleteSkillRequest];
+
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
@@ -184,7 +186,8 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 #pragma mark - Create UICollectionView
 - (UICollectionView *)collectionView
 {
-    if (!_collectionView) {
+    if (!_collectionView)
+    {
         __weakSelf
         self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
         self.flowLayout.minimumLineSpacing = 3;
@@ -199,7 +202,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
                                              weakSelf.pageCount = 1;
                                              [weakSelf createRequestData];
                                          }];
-        
         self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^
                                          {
                                              [weakSelf loadMoreData];
@@ -226,9 +228,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     self.model = self.dataArray[indexPath.row];
     
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    
     [cell.editButton addTarget:self action:@selector(editButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-
     [cell.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell setModel:self.model];
     
@@ -244,12 +244,13 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 {
     ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     ODReleaseModel *model = self.dataArray[indexPath.row];
-    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {        
+    self.loveRow = indexPath.row;
+    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"])
+    {
         vc.swap_id = model.swap_id;
         vc.nick = model.user[@"nick"];
         [self.navigationController pushViewController:vc animated:YES];
     }
-
 }
 
 

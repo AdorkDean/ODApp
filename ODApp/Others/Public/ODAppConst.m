@@ -57,7 +57,7 @@ NSString * const ODNotificationPaySuccess = @"ODNotificationPaySuccess";
 /**  支付失败通知 */
 NSString * const ODNotificationPayfail = @"ODNotificationPayfail";
 
-/**  支付失败通知 */
+/**  取消预约通知 */
 NSString * const ODNotificationCancelOrder = @"ODNotificationCancelOrder";
 
 
@@ -72,6 +72,21 @@ NSString * const ODNotificationLocationSuccessRefresh = @"ODNotificationLocation
 
 /** 订单刷新 */
 NSString * const ODNotificationOrderListRefresh = @"ODNotificationOrderListRefresh";
+
+/**  点击收藏的通知 */
+NSString * const ODNotificationloveSkill = @"ODNotificationloveSkill";
+
+
+/** 已购买二级页面通知 */
+NSString * const ODNotificationMyOrderSecondRefresh = @"ODNotificationMyOrderSecondRefresh";
+/** 已购买三级页面通知 */
+NSString * const ODNotificationMyOrderThirdRefresh = @"ODNotificationMyOrderThirdRefresh";
+/** 已卖出二级页面通知 */
+NSString * const ODNotificationSellOrderSecondRefresh = @"ODNotificationSellOrderSecondRefresh";
+/** 已购买三级页面通知 */
+NSString * const ODNotificationSellOrderThirdRefresh = @"ODNotificationSellOrderThirdRefresh";
+
+
 
 
 #pragma mark - 请求URL接口

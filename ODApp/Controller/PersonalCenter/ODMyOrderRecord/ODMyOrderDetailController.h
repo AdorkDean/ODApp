@@ -39,4 +39,7 @@
 
 @property (nonatomic, assign) BOOL isOther;
 
+@property (nonatomic, copy) NSString *status_str;
+
+
 @end

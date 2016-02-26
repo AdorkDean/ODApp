@@ -10,6 +10,7 @@
 #import "ODUserInformation.h"
 @interface ODMyOrderRecordController ()
 
+@property (nonatomic, assign) long cancelOrderRow;
 
 @end
 
@@ -26,7 +27,6 @@
     self.orderArray = [[NSMutableArray alloc] init];    
 
     [self createCollectionView];
-//    [self createRequest];
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
                                      {
@@ -38,10 +38,8 @@
                                          [weakSelf loadMoreData];
                                      }];
     
-    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationCancelOrder object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
-    {
-        self.isRefresh = YES;
-    }];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationCancelOrder object:nil];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -52,8 +50,16 @@
         [self.collectionView.mj_header beginRefreshing];
         self.isRefresh = NO;
     }
-    [self createRequest];
 }
+
+- (void)reloadData:(NSNotification *)text
+{
+    ODMyOrderRecordModel *model = self.orderArray[self.cancelOrderRow];
+    model.status_str = [NSString stringWithFormat:@"%@", text.userInfo[@"status_str"]];
+    [self.orderArray replaceObjectAtIndex:self.cancelOrderRow withObject:model];
+    [self.collectionView reloadData];
+}
+
 
 - (void)loadMoreData
 {
@@ -178,7 +184,7 @@
 {
     ODMyOrderDetailController *vc = [[ODMyOrderDetailController alloc] init];
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
-  
+    self.cancelOrderRow = indexPath.row;
     vc.isOther = self.isOther;
     vc.open_id = self.open_id;    
     vc.order_id = [NSString stringWithFormat:@"%@",model.order_id];

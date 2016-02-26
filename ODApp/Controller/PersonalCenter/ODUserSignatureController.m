@@ -74,8 +74,8 @@
 {
     
     NSString *replyTitleText = @"";
-    if (textView.text.length > 10){
-        textView.text = [textView.text substringToIndex:10];
+    if (textView.text.length > 20){
+        textView.text = [textView.text substringToIndex:20];
     }else{
         replyTitleText = textView.text;
     }
