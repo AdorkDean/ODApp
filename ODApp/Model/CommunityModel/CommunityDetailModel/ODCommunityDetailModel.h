@@ -21,11 +21,13 @@
 @property(nonatomic,copy)NSString *bbs_id;
 @property(nonatomic,copy)NSString *parent_user_nick;
 @property(nonatomic,strong)NSArray *bbs_imgs;
+@property(nonatomic,strong)NSArray *imgs_big;
 @property(nonatomic,strong)NSDictionary *user;
 @property(nonatomic,copy)NSString *id;
 @property(nonatomic,copy)NSString *open_id;
 @property(nonatomic,copy)NSString *floor;
 @property (nonatomic,strong) NSMutableDictionary *share;
+
 
 /**
  *   "id": 816,

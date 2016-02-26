@@ -11,7 +11,7 @@
 @implementation ODBazaarPicCollectionViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+
 }
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView

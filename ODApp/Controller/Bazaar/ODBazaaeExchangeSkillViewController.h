@@ -23,4 +23,5 @@
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic)NSInteger page;
+@property(nonatomic)CGFloat height;
 @end

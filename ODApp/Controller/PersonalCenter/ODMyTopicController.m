@@ -368,11 +368,8 @@
     picController.photos = model.imgs;
     picController.selectedIndex = button.tag-10*indexPath.row;
    [self presentViewController:picController animated:YES completion:nil];
-    
- 
+
    
-    
-    
     
 }
 
@@ -399,10 +396,6 @@
     
     if (sender.tag == 111) {
 
-        
-        
-        ;
-        
         
     }else{
         
