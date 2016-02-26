@@ -72,6 +72,13 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
+
+    
+    
     if ([self.refresh isEqualToString:@"refresh"]) {
         [self.firstCollectionView.mj_header beginRefreshing];
         [self.secondCollectionView.mj_header beginRefreshing];
