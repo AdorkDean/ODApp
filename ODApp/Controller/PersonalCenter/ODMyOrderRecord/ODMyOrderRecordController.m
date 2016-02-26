@@ -27,7 +27,6 @@
     self.orderArray = [[NSMutableArray alloc] init];    
 
     [self createCollectionView];
-//    [self createRequest];
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
                                      {
@@ -41,7 +40,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationCancelOrder object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
     {
-        self.isRefresh = YES;
+        [self createRequest];
     }];
 }
 
@@ -53,7 +52,6 @@
         [self.collectionView.mj_header beginRefreshing];
         self.isRefresh = NO;
     }
-    [self createRequest];
 }
 
 - (void)loadMoreData
