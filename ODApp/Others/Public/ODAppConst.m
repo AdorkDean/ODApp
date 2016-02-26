@@ -64,6 +64,8 @@ NSString * const ODNotificationCancelOrder = @"ODNotificationCancelOrder";
 /**  退出成功刷新集市状态 */
 NSString * const ODNotificationQuit = @"ODNotificationQuit";
 
+/**  回复成功后刷新 */
+NSString * const ODNotificationReplySuccess = @"ODNotificationReplySuccess";
 
 /** 定位刷新 */
 NSString * const ODNotificationLocationSuccessRefresh = @"ODNotificationLocationSuccessRefresh";
