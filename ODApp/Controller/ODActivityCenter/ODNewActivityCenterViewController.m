@@ -102,10 +102,6 @@ Single_Implementation(ODNewActivityCenterViewController)
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    [ODNetClosedView show];
-    return;
-
     if ([ODUserInformation sharedODUserInformation].openID.length)
     {
         ODNewActivityDetailViewController *detailViewController = [[ODNewActivityDetailViewController alloc] initWithNibName:nil bundle:nil];
