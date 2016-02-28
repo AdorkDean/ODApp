@@ -408,7 +408,7 @@
     self.priceTextField.font = [UIFont systemFontOfSize:14];
     self.priceTextField.text = self.price;
     self.priceTextField.delegate = self;
-    self.priceTextField.keyboardType = UIKeyboardTypeNumberPad;
+    self.priceTextField.keyboardType = UIKeyboardTypeDecimalPad;
     [priceView addSubview:self.priceTextField];
     
     UIView *unitView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(priceView.frame)+6, kScreenSize.width, 50)];
