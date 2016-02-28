@@ -45,7 +45,7 @@
         self.withdrawalView.prcieLabel.text = [NSString stringWithFormat:@"￥%@" , self.price];
         self.withdrawalView.payAddressTextView.delegate = self;
         self.withdrawalView.withdrawalButton.enabled = ![self.price isEqualToString:@"0.00"];
-        self.withdrawalView.withdrawalButton.backgroundColor = self.withdrawalView.withdrawalButton.enabled ? [UIColor redColor] : [UIColor lightGrayColor];
+        self.withdrawalView.withdrawalButton.backgroundColor = self.withdrawalView.withdrawalButton.enabled ? [UIColor colorWithHexString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
         [self.withdrawalView.withdrawalButton addTarget:self action:@selector(withdrawalAction:) forControlEvents:UIControlEventTouchUpInside];
         
     }
