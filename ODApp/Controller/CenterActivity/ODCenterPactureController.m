@@ -8,7 +8,10 @@
 
 #import "ODCenterPactureController.h"
 #import "ODTabBarController.h"
-@interface ODCenterPactureController ()
+@interface ODCenterPactureController ()<UIWebViewDelegate>
+
+@property (nonatomic , strong) UIWebView *web;
+
 
 @end
 
@@ -21,12 +24,32 @@
     [self initWebView];
 }
 
+
 - (void)initWebView
 {
-    UIWebView *web = [[UIWebView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 50)];
+   self.web = [[UIWebView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 50)];
+    self.web.delegate = self;
     NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:self.webUrl]];
-    [self.view addSubview:web];
-    [web loadRequest:request];
+  
+    [self.web loadRequest:request];
 }
+
+
+-(void)webViewDidStartLoad:(UIWebView *)webView
+{
+     [ODProgressHUD showProgressIsLoading];
+    
+    
+}
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    
+      [ODProgressHUD dismiss];
+      [self.view addSubview:self.web];
+    
+}
+
+
 
 @end
