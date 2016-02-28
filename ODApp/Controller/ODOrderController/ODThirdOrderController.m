@@ -110,7 +110,12 @@
 {
         
     if ([self.headView.thirdOrderView.timeLabel.text isEqualToString:@"请选择"]){
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入服务时间"];
+        
+    
+        
+        
+        [ODProgressHUD showInfoWithStatus:@"请输入服务时间"];
+        
     }else{
         
         [self saveOrder];

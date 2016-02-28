@@ -212,7 +212,8 @@
     if ([self.payType isEqualToString:@"1"]) {
         if ([self.isPay isEqualToString:@"1"]) {
             
-            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"该订单已支付"];
+         
+            [ODProgressHUD showInfoWithStatus:@"该订单已支付"];
             
             
         }else{
@@ -228,12 +229,13 @@
         
         if ([self.isPay isEqualToString:@"1"]) {
             
-            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"该订单已支付"];
+           [ODProgressHUD showInfoWithStatus:@"该订单已支付"];
             
             
         }else{
             
-             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"支付宝支付暂未开放"];
+         
+             [ODProgressHUD showInfoWithStatus:@"支付宝支付暂未开放"];
             
             
             

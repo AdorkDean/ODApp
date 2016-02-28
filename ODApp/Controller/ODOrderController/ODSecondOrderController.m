@@ -149,7 +149,12 @@
 {
   
     if ([self.headView.secondOrderView.addressLabel.text isEqualToString:@"请选择"]){
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
+        
+    
+        
+        [ODProgressHUD showInfoWithStatus:@"请输入联系地址"];
+        
+        
     }else{
         
         [self saveOrder];

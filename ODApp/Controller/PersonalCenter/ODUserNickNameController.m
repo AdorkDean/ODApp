@@ -103,7 +103,11 @@
     
     if([self.textView.text isEqualToString:@""] || [self.textView.text isEqualToString:@"请输入昵称"])
     {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入昵称"];
+      
+        
+        
+        [ODProgressHUD showInfoWithStatus:@"请输入昵称"];
+        
 
     }else {
         NSString *openID = [ODUserInformation sharedODUserInformation].openID;
