@@ -200,6 +200,8 @@
         [actionSheet showInView:self.view];
     }else{
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已达图片最大上传数"];
+//        [ODProgressHUD showInfoWithStatus:<#(NSString *)#>]
+        
     }
     
 }
