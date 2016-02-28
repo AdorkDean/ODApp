@@ -20,7 +20,7 @@
     
     
     self.userImageViewButton.layer.masksToBounds = YES;
-    self.userImageViewButton.layer.cornerRadius = 30;
+    self.userImageViewButton.layer.cornerRadius = 24;
     self.userImageViewButton.layer.borderColor = [UIColor clearColor].CGColor;
     self.userImageViewButton.layer.borderWidth = 1;
     
