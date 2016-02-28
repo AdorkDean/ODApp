@@ -199,8 +199,8 @@
         UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
         [actionSheet showInView:self.view];
     }else{
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已达图片最大上传数"];
-//        [ODProgressHUD showInfoWithStatus:<#(NSString *)#>]
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已达图片最大上传数"];
+        [ODProgressHUD showInfoWithStatus:@"已达图片最大上传数"];
         
     }
     
@@ -220,7 +220,8 @@
             }
             else {
                 
-                [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
+//                [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
+                [ODProgressHUD showInfoWithStatus:@"您当前的照相机不可用"];
             }
             break;
         case 1:
@@ -581,19 +582,26 @@
         [self joiningTogetherParmetersWithButton:button];
     }else{
         if (self.titleTextField.text.length==0) {
-            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请输入标题"];
+//            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请输入标题"];
+            [ODProgressHUD showInfoWithStatus:@"请输入标题"];
         }else if (self.contentTextView.text.length==0){
-            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请输入内容"];
+//            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请输入内容"];
+            [ODProgressHUD showInfoWithStatus:@"请输入内容"];
         }else if (self.priceTextField.text.length==0){
-            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"不要钱了吗"];
+//            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"不要钱了吗"];
+             [ODProgressHUD showInfoWithStatus:@"不要钱了吗"];
         }else if (self.unitTextField.text.length==0){
-            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"认真填写个单位吧"];
+//            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"认真填写个单位吧"];
+             [ODProgressHUD showInfoWithStatus:@"认真填写个单位吧"];
         }else if (self.swap_type == nil){
-            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请选择你的服务方式"];
+//            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请选择你的服务方式"];
+             [ODProgressHUD showInfoWithStatus:@"请选择你的服务方式"];
         }else if (([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"])&&self.timeArray.count==0&&[button.titleLabel.text isEqualToString:@"发布"]){
-            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请设置时间"];
+//            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"请设置时间"];
+             [ODProgressHUD showInfoWithStatus:@"请设置时间"];
         }else if (self.mArray.count<3||self.mArray.count>5){
-            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"图需3-5张"];
+//            [self createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"图需3-5张"];
+             [ODProgressHUD showInfoWithStatus:@"图需3-5张"];
         }
     }
 }
@@ -667,17 +675,21 @@
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
-                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"编辑成功"];
+//                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"编辑成功"];
+                [ODProgressHUD showInfoWithStatus:@"编辑成功"];
             }else if ([responseObject[@"status"]isEqualToString:@"error"]){
-                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:responseObject[@"message"]];
+//                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:responseObject[@"message"]];
+                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
             }
         }else{
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
-                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"创建成功"];
+//                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"创建成功"];
+                 [ODProgressHUD showInfoWithStatus:@"创建成功"];
             }else if ([responseObject[@"status"]isEqualToString:@"error"]){
-                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:responseObject[@"message"]];
+//                [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:responseObject[@"message"]];
+                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

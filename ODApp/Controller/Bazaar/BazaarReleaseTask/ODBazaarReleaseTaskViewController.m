@@ -45,9 +45,11 @@
         [self joiningTogetherParmeters];
     }else{
         if (self.titleTextView.text.length == 0) {
-            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入任务标题"];
+//            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入任务标题"];
+            [ODProgressHUD showInfoWithStatus:@"请输入任务标题"];
         }else if (self.taskDetailTextView.text.length == 0){
-            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入任务内容"];
+//            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入任务内容"];
+            [ODProgressHUD showInfoWithStatus:@"请输入任务内容"];
         }
     }
 }
@@ -370,7 +372,8 @@
             }
             else{
             
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"任务发布成功"];
+//                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"任务发布成功"];
+                [ODProgressHUD showInfoWithStatus:@"任务发布成功"];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
             }
             
@@ -387,7 +390,8 @@
                 message = @"请输入内容";
             }
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:message];
+//            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:message];
+            [ODProgressHUD showInfoWithStatus:message];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLogError

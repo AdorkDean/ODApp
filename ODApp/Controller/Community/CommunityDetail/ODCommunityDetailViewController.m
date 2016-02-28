@@ -77,7 +77,8 @@
         
     }
     @catch (NSException *exception) {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
     }
 
 }
@@ -161,7 +162,8 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+//        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
 }
 

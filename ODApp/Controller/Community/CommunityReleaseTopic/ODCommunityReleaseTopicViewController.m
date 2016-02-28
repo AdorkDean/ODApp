@@ -44,10 +44,12 @@
         [self joiningTogetherParmeters];
     }else if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length==0){
         
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入话题内容"];
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入话题内容"];
+        [ODProgressHUD showInfoWithStatus:@"请输入话题内容"];
     }else{
 
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入话题标题"];
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入话题标题"];
+        [ODProgressHUD showInfoWithStatus:@"请输入话题标题"];
     }
     
 }
@@ -220,7 +222,8 @@ NSString *topicContentText = @"";
             }
             else {
                 
-                [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
+//                [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
+                [ODProgressHUD showInfoWithStatus:@"您当前的照相机不可用"];
             }
             break;
         case 1:
@@ -409,16 +412,18 @@ NSString *topicContentText = @"";
             if (weakSelf.myBlock) {
                 weakSelf.myBlock([NSString stringWithFormat:@"refresh"]);
             }
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"话题发布成功"];
+//            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"话题发布成功"];
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
         if ([responseObject[@"status"]isEqualToString:@"error"]){
             if ([responseObject[@"message"] isEqualToString:@"title not found"]) {
                 
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入标题"];
+//                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入标题"];
+                [ODProgressHUD showInfoWithStatus:@"请输入标题"];
             }else{
             
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入内容"];
+//                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入内容"];
+                [ODProgressHUD showInfoWithStatus:@"请输入内容"];
             }
             
             

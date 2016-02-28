@@ -79,8 +79,8 @@
         
     }
     @catch (NSException *exception) {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
-//        [ODProgressHUD showErrorWithStatus:@"网络异常无法分享"];
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
     }
     
 }
@@ -352,14 +352,17 @@
                [weakSelf joiningTogetherParmeters];
                NSDictionary *dict = responseObject[@"result"];
                weakSelf.love_id = [NSString stringWithFormat:@"%@",dict[@"love_id"]];
-               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"收藏成功"];
+//               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"收藏成功"];
+               [ODProgressHUD showInfoWithStatus:@"收藏成功"];
                
            }
        }else{
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
                self.love = @"love";
                [weakSelf joiningTogetherParmeters];
-               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"取消收藏"];
+//               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"取消收藏"];
+               [ODProgressHUD showInfoWithStatus:@"收藏成功"];
+
                
            }
        }
