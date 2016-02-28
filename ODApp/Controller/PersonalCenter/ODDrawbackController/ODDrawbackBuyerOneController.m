@@ -30,7 +30,7 @@
 #pragma mark - Create UIScrollView
 - (void)createScrollView
 {
-    #pragma mark - 动态设置 ScrollView 的高度
+#pragma mark - 动态设置 ScrollView 的高度
     float scrollViewHeight;
     if (self.isRefuseAndReceive || self.isRelease)
     {
@@ -44,7 +44,7 @@
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     [self.view addSubview:self.scrollView];
     
-    #pragma mark - 动态设置 退款理由 的高度
+#pragma mark - 动态设置 退款理由 的高度
     float drawBackHeight = 43;
     float drawbackReasonHeight;
     if (self.isSelectReason)
@@ -53,7 +53,7 @@
     }
     else
     {
-       drawbackReasonHeight = drawBackHeight;
+        drawbackReasonHeight = [ODHelp textHeightFromTextString:self.drawbackReason width:KScreenWidth - ODLeftMargin * 2 miniHeight:drawBackHeight fontSize:13.5];
     }
     self.drawbackMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, drawBackHeight)];
     self.drawbackMoneyLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
@@ -66,7 +66,7 @@
     self.drawbackMoneyLabel.textAlignment = NSTextAlignmentCenter;
     self.drawbackMoneyLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.drawbackMoneyLabel];
- 
+    
     self.drawbackReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackMoneyLabel.frame), KScreenWidth, 22)];
     self.drawbackReasonLabel.text = @"退款原因";
     self.drawbackReasonLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
@@ -78,7 +78,7 @@
     self.drawbackReasonContentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.drawbackReasonContentView];
     
-    #pragma mark - 退款原因版块 可选择
+#pragma mark - 退款原因版块 可选择
     if (self.isSelectReason)
     {
         float reasonLabelLeftMargin = 25;
@@ -162,22 +162,23 @@
             [self.drawbackReasonContentView addSubview:self.drawbackReasonLineView];
         }
     }
-    #pragma mark - 退款原因版块 不可选择
+#pragma mark - 退款原因版块 不可选择
     else
     {
-        self.drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, drawBackHeight)];
+        self.drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - ODLeftMargin * 2, drawBackHeight)];
         if (self.drawbackReason == nil)
         {
             self.drawbackReason = @"";
         }
         self.drawbackReasonContentLabel.text = self.drawbackReason;
+        self.drawbackReasonContentLabel.numberOfLines = 0;
         self.drawbackReasonContentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackReasonContentLabel.font = [UIFont systemFontOfSize:13.5];
         self.drawbackReasonContentLabel.textAlignment = NSTextAlignmentLeft;
         [self.drawbackReasonContentView addSubview:self.drawbackReasonContentLabel];
     }
     
-    #pragma mark - 显示 拒绝原因 版块
+#pragma mark - 显示 拒绝原因 版块
     if (self.isRefuseReason)
     {
         self.refuseReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonContentView.frame), KScreenWidth, 22)];
@@ -190,19 +191,22 @@
         self.refuseReasonLabel.textAlignment = NSTextAlignmentLeft;
         [self.scrollView addSubview:self.refuseReasonLabel];
         
+        drawbackReasonHeight = [ODHelp textHeightFromTextString:self.refuseReason width:KScreenWidth - ODLeftMargin * 2 miniHeight:drawBackHeight fontSize:13.5];
+        
         self.refuseReasonContentView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.refuseReasonLabel.frame), KScreenWidth, drawbackReasonHeight)];
         self.refuseReasonContentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         [self.scrollView addSubview:self.refuseReasonContentView];
         
-        self.refuseReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, drawBackHeight)];
+        self.refuseReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - ODLeftMargin * 2, drawBackHeight)];
         self.refuseReasonContentLabel.text = self.refuseReason;
         self.refuseReasonContentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        self.refuseReasonContentLabel.numberOfLines = 0;
         self.refuseReasonContentLabel.font = [UIFont systemFontOfSize:13.5];
         self.refuseReasonContentLabel.textAlignment = NSTextAlignmentLeft;
         [self.refuseReasonContentView addSubview:self.refuseReasonContentLabel];
     }
     
-    #pragma mark - 动态设置 联系客服GetMaxY
+#pragma mark - 动态设置 联系客服GetMaxY
     float serviceGetMaxY;
     if (self.isDrawbackState)
     {
@@ -218,7 +222,7 @@
         serviceGetMaxY = CGRectGetMaxY(self.drawbackReasonContentView.frame);
     }
     
-    #pragma mark - 显示 联系客服 版块
+#pragma mark - 显示 联系客服 版块
     if (self.isService)
     {
         self.contactServiceLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, serviceGetMaxY, KScreenWidth, 22)];
@@ -262,7 +266,7 @@
         [self.scrollView addSubview:self.serviceTimeLabel];
     }
     
-    #pragma mark - 动态设置 ScrollView ContentSize
+#pragma mark - 动态设置 ScrollView ContentSize
     float scrollContentHeight;
     if (self.isService)
     {
@@ -279,7 +283,7 @@
     
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width,scrollContentHeight );
     
-    #pragma mark - 显示 申请退款按钮
+#pragma mark - 显示 申请退款按钮
     if (self.isRelease)
     {
         self.releaseButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KControllerHeight - ODNavigationHeight - 50, KScreenWidth, 50)];
@@ -289,10 +293,10 @@
         [self.releaseButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.releaseButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [self.releaseButton addTarget:self action:@selector(releaseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:self.releaseButton];        
+        [self.view addSubview:self.releaseButton];
     }
     
-    #pragma mark - 显示 拒绝and接受按钮
+#pragma mark - 显示 拒绝and接受按钮
     if (self.isRefuseAndReceive)
     {
         self.refuseButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KControllerHeight - ODNavigationHeight - 50, KScreenWidth / 2, 50)];
@@ -367,8 +371,7 @@
     
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     
-    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.cancelOrderView.reasonTextView.text
-                                , @"open_id":openId};
+    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.cancelOrderView.reasonTextView.text, @"open_id":openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weakSelf

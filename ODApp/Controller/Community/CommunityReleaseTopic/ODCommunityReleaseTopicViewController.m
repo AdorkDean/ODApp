@@ -65,18 +65,20 @@
 -(void)createTextView
 {
     //标题
-    self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4, kScreenSize.width-8, 53) delegate:self tag:0 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4, kScreenSize.width-8, 53) delegate:self tag:0 font:13 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.titleTextView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     [self.scrollView addSubview:self.titleTextView];
-    self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4, kScreenSize.width - 20, 30) text:@"请输入话题标题" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4, kScreenSize.width - 20, 30) text:@"请输入话题标题" font:13 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    self.titleLabel.textColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
     self.titleLabel.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.titleLabel];
 
     //内容
-    self.topicContentTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, CGRectGetMaxY(self.titleTextView.frame)+4, kScreenSize.width-8, 106) delegate:self tag:0 font:16 color:@"#ffffff" alpha:101 maskToBounds:YES];
+    self.topicContentTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, CGRectGetMaxY(self.titleTextView.frame)+4, kScreenSize.width-8, 106) delegate:self tag:0 font:13 color:@"#ffffff" alpha:101 maskToBounds:YES];
+    self.topicContentTextView.textColor = [UIColor colorWithHexString:@"#7e7e7e" alpha:1];
     [self.scrollView addSubview:self.topicContentTextView];
-    self.topicContentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, CGRectGetMaxY(self.titleTextView.frame)+4, kScreenSize.width-20, 30) text:@"请输入话题内容" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    self.topicContentLabel.backgroundColor = [UIColor clearColor];
+    self.topicContentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, CGRectGetMaxY(self.titleTextView.frame)+4, kScreenSize.width-20, 30) text:@"请输入话题内容" font:13 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    self.titleLabel.textColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
     self.topicContentLabel.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.topicContentLabel];
 }
@@ -141,6 +143,7 @@ NSString *topicContentText = @"";
         button.frame = CGRectMake(4+(width+4)*(i%4), CGRectGetMaxY(label.frame)+10+(25+4)*(i/4), width, 25);
         [button setTitle:array[i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithHexString:@"#b0b0b0" alpha:1] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:14];
         [button addTarget:self action:@selector(labelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         button.layer.masksToBounds = YES;
         button.layer.cornerRadius = 5;
@@ -204,7 +207,7 @@ NSString *topicContentText = @"";
         [actionSheet showInView:self.view];
     }else{
         
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已达图片最大上传数"];
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已达图片最大上传数"];
     }
 }
 

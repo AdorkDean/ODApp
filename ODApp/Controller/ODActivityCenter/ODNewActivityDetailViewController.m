@@ -465,7 +465,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
                     ODCenterPactureController *vc = [[ODCenterPactureController alloc] init];
                     NSString *webUrl = [NSString stringWithFormat:@"http://h5.odong.com/map/search?lng=%@&lat=%@" , self.resultModel.lng , self.resultModel.lat];
                     vc.webUrl = webUrl;
-                    vc.activityName = self.resultModel.store_name;
+                    vc.activityName = self.resultModel.store_address;
                     [self.navigationController pushViewController:vc animated:YES];
                 }
             }
@@ -604,7 +604,8 @@ static NSString * const detailInfoCell = @"detailInfoCell";
          [self requestData];
          self.reportButton.enabled = NO;
 
-         [ODProgressHUD showSuccessWithStatus:@"报名成功"];
+       
+         [ODProgressHUD showInfoWithStatus:@"报名成功"];
          [ODNewActivityCenterViewController sharedODNewActivityCenterViewController].needRefresh = YES;
      }
                    failure:^(NSError *error)

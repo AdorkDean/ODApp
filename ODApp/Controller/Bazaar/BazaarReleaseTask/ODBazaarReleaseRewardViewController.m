@@ -37,6 +37,7 @@
     view.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
     [self.view addSubview:view];
     self.textField = [ODClassMethod creatTextFieldWithFrame:CGRectMake(8,0, kScreenSize.width-16, 40) placeHolder:@"请输入任务奖励" delegate:self tag:0];
+    self.textField.font = [UIFont systemFontOfSize:14];
     [view addSubview:self.textField];
     
 }
