@@ -146,12 +146,12 @@
         
         __weakSelf
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否退出登录" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
+        {
             
-            ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-            ;
-            tabBar.selectedIndex = 0;
-            [weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
+            self.tabBarController.selectedIndex = 0;
+            [weakSelf dismissViewControllerAnimated:YES completion:^{
+            }];
             
             //清空数据
             [ODUserInformation sharedODUserInformation].openID = @"";
@@ -166,14 +166,14 @@
 
             
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0 title:@"已退出登录"];
+        
+            [ODProgressHUD showInfoWithStatus:@"已退出登录"];
             
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationQuit object:self];
-            
-            tabBar.selectedIndex = tabBar.currentIndex;
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [weakSelf presentViewController:alert animated:YES completion:nil];
+        [weakSelf presentViewController:alert animated:YES completion:^{
+        }];
         
         
     }

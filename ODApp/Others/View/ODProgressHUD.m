@@ -14,6 +14,8 @@
 + (void)initialize
 {
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+//    [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
+    [SVProgressHUD setInfoImage:nil];
 }
 
 + (void)showProgressIsLoading

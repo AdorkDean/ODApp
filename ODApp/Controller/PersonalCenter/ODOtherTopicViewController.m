@@ -63,7 +63,7 @@
     self.count = 1;
     NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",(long)self.count],@"open_id":self.open_id,@"call_array":@"1"};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kHomeFoundListUrl paramater:signParameter];
+    [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
 
 #pragma mark - 请求数据
@@ -74,8 +74,11 @@
         
         
         if (weakSelf.count == 1) {
+            [self.noReusltLabel removeFromSuperview];
             [weakSelf.dataArray removeAllObjects];
         }
+        
+        
         if (responseObject) {
             NSDictionary *dcit = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dcit[@"result"];
@@ -104,20 +107,13 @@
                 [weakSelf.collectionView.mj_footer noticeNoMoreData];
             }
         }
-            if ((self.count = 1 && weakSelf.dataArray.count == 0)) {
-                weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [weakSelf.view addSubview:self.noReusltLabel];
-            }
-            
-            else{
-                [weakSelf.collectionView reloadData];
-            }
+//        
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
 }
 
@@ -168,7 +164,11 @@
         if (model.imgs.count==4) {
             for (NSInteger i = 0; i < model.imgs.count; i++) {
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
-                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    if (error){
+                        [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
+                    }
+                }];
                 [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];
@@ -177,7 +177,11 @@
         }else{
             for (NSInteger i = 0;i < model.imgs.count ; i++) {
                 UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
-                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    if (error){
+                        [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
+                    }
+                }];
                 [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
                 imageButton.tag = 10*indexPath.row+i;
                 [cell.picView addSubview:imageButton];

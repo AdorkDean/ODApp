@@ -253,8 +253,10 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         webView.layer.masksToBounds = YES;
         webView.layer.cornerRadius = 5;
         webView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        webView.backgroundColor = [UIColor whiteColor];
         webView.scrollView.showsHorizontalScrollIndicator = NO;
         webView.scrollView.scrollEnabled = NO;
+        
         [self.baseScrollV addSubview:webView];
         _webView = webView;
     }
@@ -269,7 +271,9 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         [view.shareBtn addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         [view.goodBtn addTarget:self action:@selector(clickGood:) forControlEvents:UIControlEventTouchUpInside];
         view.frame = CGRectMake(0, CGRectGetMaxY(self.webView.frame), KScreenWidth, 50);
+        view.backgroundColor = [UIColor whiteColor];
         [self.baseScrollV addSubview:view];
+        [self.baseScrollV bringSubviewToFront:_bottomButtonView];
         _bottomButtonView = view;
     }
     return _bottomButtonView;
@@ -304,8 +308,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     self.navigationItem.title = @"活动详情";
     [ODNewActivityCenterViewController sharedODNewActivityCenterViewController].needRefresh = NO;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(share:) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
-
-    
     
     [self requestData];
 }
@@ -313,7 +315,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 -(void)requestData
 {
      __weakSelf
-    [ODProgressHUD showProgressIsLoading];
     NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue]};
     [ODHttpTool getWithURL:KActivityDetailUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
      {
@@ -322,7 +323,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
      }
                    failure:^(NSError *error)
      {
-         [ODProgressHUD dismiss];
      }];
 }
 
@@ -496,7 +496,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 {
     NSString * clientheight_str = [webView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"];
     float clientheight = [clientheight_str floatValue];
-    webView.od_height = clientheight + 12.5;
+    webView.od_height = clientheight;
     self.bottomButtonView.od_y = CGRectGetMaxY(webView.frame);
     if (!hasload)
     {
@@ -626,7 +626,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"obj_id",@"4" ,@"type",@"微信",@"share_platform", nil];
         [ODHttpTool getWithURL:kCallbackUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
          {
-            [ODProgressHUD showSuccessWithStatus:@"分享成功"];
              
          }
                        failure:^(NSError *error)

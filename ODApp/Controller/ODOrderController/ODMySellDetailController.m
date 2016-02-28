@@ -159,7 +159,8 @@
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                 
                 
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+            
+                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
                 
                 
             }
@@ -170,7 +171,8 @@
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+       
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
     
     
@@ -198,7 +200,7 @@
         }else if (iPhone5_5s){
             
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 100);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 220);
             
             
         }else  {
@@ -216,7 +218,7 @@
         
         
         if (iPhone4_4S) {
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 270);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 250);
             
         }else  if (iPhone5_5s){
             
@@ -439,7 +441,8 @@
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+          
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

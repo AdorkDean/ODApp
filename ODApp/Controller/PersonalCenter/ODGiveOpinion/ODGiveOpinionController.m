@@ -127,7 +127,8 @@
             
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 
-                   [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"感谢您的反馈"];
+                
+                [ODProgressHUD showInfoWithStatus:@"感谢您的反馈"];
                 [self.navigationController popViewControllerAnimated:YES];
                 
             }

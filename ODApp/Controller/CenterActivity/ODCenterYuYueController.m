@@ -382,7 +382,11 @@
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+        
+            
+            
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+            
         }
         
         
@@ -426,14 +430,21 @@
         
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"感谢您的预约请等待审核"];
+         
+            
+            
+            [ODProgressHUD showInfoWithStatus:@"感谢您的预约请等待审核"];
             
             
             [weakSelf.navigationController popViewControllerAnimated:YES];
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]){
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:responseObject[@"message"]];
+         
+            
+            
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+            
         }
   
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

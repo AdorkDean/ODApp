@@ -152,7 +152,7 @@
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                 
                 
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+           [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
                 
                 
             }
@@ -163,7 +163,7 @@
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+         [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
     
     
@@ -189,12 +189,12 @@
         }else if (iPhone5_5s){
             
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 100);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 270);
             
             
         }else if (iPhone6_6s) {
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 130);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 150);
             
             
         }else{
@@ -208,11 +208,11 @@
         
         
         if (iPhone4_4S) {
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 270);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 290);
             
         }else  if (iPhone5_5s){
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 150);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 200);
             
         }else if (iPhone6_6s) {
             
@@ -222,7 +222,7 @@
             
         }else{
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 30);
             
             
         }
@@ -377,7 +377,7 @@
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                 
                 
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+           [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
                 
                 
             }
@@ -387,7 +387,7 @@
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+         [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
     
     
@@ -515,7 +515,8 @@
                 
                 [weakSelf.evaluationView removeFromSuperview];
                 
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"评价成功"];
+              
+                [ODProgressHUD showInfoWithStatus:@"评价成功"];
                 
                 ODOrderDetailModel *statusModel = self.dataArray[0];
                 weakSelf.orderStatus = [NSString stringWithFormat:@"%@" , statusModel.order_status];
@@ -535,7 +536,8 @@
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                 
                 
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+
                 
                 
             }
@@ -543,7 +545,7 @@
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+         [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
     
 
@@ -676,7 +678,8 @@
                     
                     [weakSelf.cancelOrderView removeFromSuperview];
                     
-                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
+                 
+                    [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
                     
                     ODOrderDetailModel *statusModel = self.dataArray[0];
                     weakSelf.orderStatus = [NSString stringWithFormat:@"%@" , statusModel.order_status];
@@ -695,7 +698,7 @@
                 }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                     
                     
-                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+                    [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
                     
                     
                 }
@@ -703,7 +706,7 @@
                 
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+            [ODProgressHUD showInfoWithStatus:@"网络异常"];
         }];
         
         

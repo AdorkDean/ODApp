@@ -129,8 +129,9 @@
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:nil message:responseObject[@"message"] delegate:weakSelf cancelButtonTitle:@"确定" otherButtonTitles: nil];
-            [alter show];
+                      
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+            
         }
       
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

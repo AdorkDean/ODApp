@@ -76,24 +76,43 @@
                 }
                 
                 
+                [weakSelf.collectionView.mj_header endRefreshing];
+                [weakSelf.collectionView.mj_footer endRefreshing];
+                [weakSelf.collectionView reloadData];
+
+                
+                if (dic.count == 0)
+                {
+                    [weakSelf.collectionView.mj_footer noticeNoMoreData];
+                
+                }
+                
+
+                
                 
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                 
                 
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+            
                 
+                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+              
                 
+                [weakSelf.collectionView.mj_header endRefreshing];
+                [weakSelf.collectionView.mj_footer endRefreshing];
+                [weakSelf.collectionView reloadData];
+
             }
             
-            [weakSelf.collectionView.mj_header endRefreshing];
-            [weakSelf.collectionView.mj_footer endRefreshing];
-            [weakSelf.collectionView reloadData];
+            
+            
+            
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
     
     

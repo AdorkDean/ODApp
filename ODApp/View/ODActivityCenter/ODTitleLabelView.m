@@ -12,7 +12,7 @@
 
 - (void)awakeFromNib
 {
-    [self addLineOnBottom];
+//    [self addLineOnBottom];
 }
 
 @end
