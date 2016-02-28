@@ -99,7 +99,6 @@
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     __weakSelf;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
@@ -117,7 +116,7 @@
             [weakSelf.tableView reloadData];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-         [SVProgressHUD dismiss];
+         
     }];
 }
 

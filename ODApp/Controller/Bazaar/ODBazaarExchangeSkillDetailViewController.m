@@ -104,7 +104,6 @@
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     __weakSelf;
-    [ODProgressHUD showProgressIsLoading];
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
@@ -119,10 +118,10 @@
             [weakSelf createUserInfoView];
             [weakSelf createDetailView];
             [weakSelf createBottomView];
-            [ODProgressHUD dismiss];
+      
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        [ODProgressHUD dismiss];
+    
     }];
 }
 
@@ -361,7 +360,7 @@
                self.love = @"love";
                [weakSelf joiningTogetherParmeters];
 //               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"取消收藏"];
-               [ODProgressHUD showInfoWithStatus:@"收藏成功"];
+               [ODProgressHUD showInfoWithStatus:@"取消收藏"];
 
                
            }
