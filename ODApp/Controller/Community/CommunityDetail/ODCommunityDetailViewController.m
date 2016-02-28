@@ -184,11 +184,11 @@
     [self.userView addSubview:userHeaderButton];
     
     //昵称
-    UILabel *userNickLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 20, 150, 15) text:userModel.nick font:13 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *userNickLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 17, 150, 13) text:userModel.nick font:13 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
     [self.userView addSubview:userNickLabel];
     
     //签名
-    UILabel *userSignLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 45, 150, 20) text:userModel.sign font:10 alignment:@"left" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
+    UILabel *userSignLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 40, 150, 25) text:userModel.sign font:10 alignment:@"left" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
     [self.userView addSubview:userSignLabel];
     userSignLabel.numberOfLines = 2;
     
