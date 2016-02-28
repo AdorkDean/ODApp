@@ -103,7 +103,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     {
         [weakSelf.collectionView.mj_footer endRefreshing];
         [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
     }];
 }
 
@@ -119,13 +118,15 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     {
         if ([responseObject[@"status"] isEqualToString:@"success"])
         {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"删除任务成功"];
+            [ODProgressHUD showInfoWithStatus:@"删除任务成功"];
+
             [weakSelf.dataArray removeObject:weakSelf.dataArray[self.deleteRow]];
             [weakSelf.collectionView reloadData];
         }
         else
         {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.2f title:responseObject[@"message"]];
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+
         }
     }
               failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)

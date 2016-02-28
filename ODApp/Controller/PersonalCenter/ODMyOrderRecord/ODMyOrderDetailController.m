@@ -66,7 +66,7 @@
      }
               failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
      {
-         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+
      }];
 }
 
@@ -76,15 +76,15 @@
 {
     if ([self.checkLabel.text isEqualToString:@"已取消"] || [self.checkLabel.text isEqualToString:@"后台取消"])
     {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"订单已经取消"];
+        [ODProgressHUD showInfoWithStatus:@"订单已经取消"];
     }
     else if ([self.checkLabel.text isEqualToString:@"前台已确认"])
     {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"订单已生成,请联系客服"];
+        [ODProgressHUD showInfoWithStatus:@"订单已生成,请联系客服"];
     }
     else if ([self.checkLabel.text isEqualToString:@"到场已确认"] || [self.checkLabel.text isEqualToString:@"未到场"])
     {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"已到活动时间，无需进行取消"];
+        [ODProgressHUD showInfoWithStatus:@"已到活动时间，无需进行取消"];
     }
     else
     {
@@ -100,18 +100,17 @@
             [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
             {
                 [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil];
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
+                [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
+
                 weakSelf.checkLabel.text = @"已取消";
                 weakSelf.status_str = weakSelf.checkLabel.text;
                 
                 NSDictionary *loveDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.status_str,@"status_str", nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil userInfo:loveDict];
-                
-                
             }
                        failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
             {
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+
             }];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];

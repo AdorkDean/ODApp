@@ -315,7 +315,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 -(void)requestData
 {
      __weakSelf
-    [ODProgressHUD showProgressIsLoading];
     NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue]};
     [ODHttpTool getWithURL:KActivityDetailUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
      {
@@ -324,7 +323,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
      }
                    failure:^(NSError *error)
      {
-         [ODProgressHUD dismiss];
      }];
 }
 

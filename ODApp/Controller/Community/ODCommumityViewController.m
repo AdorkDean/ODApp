@@ -404,8 +404,9 @@
 {
     ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc]init];
     detailController.myBlock = ^(NSString *refresh){
-        self.refresh = refresh;
+        self.releaseSuccess = refresh;
     };
+    self.indexPath = indexPath.row;
     ODCommunityModel *model = self.dataArray[indexPath.row];
     detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
     [self.navigationController pushViewController:detailController animated:YES];
@@ -435,9 +436,8 @@
     [super viewWillAppear:animated];
     
     if ([self.releaseSuccess isEqualToString:@"refresh"]) {
-        self.bbsMark = @"";
-        self.bbsType = 5;
-        [self.collectionView.mj_header beginRefreshing];
+        [self.dataArray removeObjectAtIndex:self.indexPath];
+        [self.collectionView reloadData];
     }
 }
 

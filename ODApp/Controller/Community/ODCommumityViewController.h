@@ -33,6 +33,7 @@
 @property(nonatomic,copy)NSString *releaseSuccess;
 @property (nonatomic, copy) NSString *bbsMark;
 @property (nonatomic, assign) int bbsType;
+@property(nonatomic)NSInteger indexPath;
 - (void)joiningTogetherParmeters;
 
 @end
