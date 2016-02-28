@@ -367,8 +367,7 @@
     
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     
-    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.cancelOrderView.reasonTextView.text
-                                , @"open_id":openId};
+    NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.cancelOrderView.reasonTextView.text, @"open_id":openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weakSelf
