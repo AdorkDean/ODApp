@@ -84,11 +84,12 @@
 #pragma mark - 创建textView
 -(void)createTextView
 {
-    self.textView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4 + ODTopY, kScreenSize.width-8, 140) delegate:self tag:0 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.textView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4 + ODTopY, kScreenSize.width-8, 140) delegate:self tag:0 font:13 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.textView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     [self.view addSubview:self.textView];
     
-    self.label = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4 + ODTopY, kScreenSize.width-20, 30) text:@"请输入回复TA的内容" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    self.label.backgroundColor = [UIColor clearColor];
+    self.label = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4 + ODTopY, kScreenSize.width-20, 30) text:@"请输入回复TA的内容" font:13 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    self.label.textColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
     self.label.userInteractionEnabled = NO;
     [self.view addSubview:self.label];
 }
