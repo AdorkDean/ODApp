@@ -436,9 +436,14 @@
 {
     [super viewWillAppear:animated];
     
-    if ([self.releaseSuccess isEqualToString:@"refresh"]) {
+    if ([self.releaseSuccess isEqualToString:@"delSuccess"]) {
         [self.dataArray removeObjectAtIndex:self.indexPath];
         [self.collectionView reloadData];
+    }else if ([self.releaseSuccess isEqualToString:@"refresh"]){
+        self.bbsMark = @"全部";
+        self.bbsType = 5;
+        [self joiningTogetherParmeters];
+        [self.collectionView.mj_header beginRefreshing];
     }
 }
 

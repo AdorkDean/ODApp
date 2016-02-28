@@ -27,7 +27,7 @@
                             <constraint firstAttribute="width" constant="50" id="Z6B-cA-Sw5"/>
                             <constraint firstAttribute="height" constant="20" id="awx-ca-kFN"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="回复他"/>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="话题详情-回复icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="lDK-t8-CcV">
@@ -50,25 +50,17 @@
                             <constraint firstAttribute="width" constant="150" id="YuP-29-goH"/>
                             <constraint firstAttribute="height" constant="21" id="m9V-51-5Gr"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6h-Jf-9Xh">
-                        <rect key="frame" x="320" y="122" width="42" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="42" id="NgI-Ae-cH2"/>
-                            <constraint firstAttribute="height" constant="21" id="dOc-Ki-de5"/>
-                        </constraints>
-                        <state key="normal" title="删除"/>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VHo-8X-atG">
                         <rect key="frame" x="121" y="122" width="200" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="0Ys-T2-gB8"/>
                             <constraint firstAttribute="width" constant="200" id="3gK-C4-BQs"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -78,10 +70,19 @@
                             <constraint firstAttribute="height" constant="60" id="Kft-Y4-EwT"/>
                             <constraint firstAttribute="width" constant="349" id="dQr-s0-fwD"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C6h-Jf-9Xh">
+                        <rect key="frame" x="320" y="122" width="42" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="42" id="NgI-Ae-cH2"/>
+                            <constraint firstAttribute="height" constant="21" id="dOc-Ki-de5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="删除"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="vzu-Kf-Psl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="1bY-16-O60"/>
