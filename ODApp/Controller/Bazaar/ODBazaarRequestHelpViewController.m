@@ -60,6 +60,7 @@
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf loadMoreData];
     }];
+    [self.collectionView.mj_header beginRefreshing];
     
 }
 
