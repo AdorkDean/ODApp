@@ -79,7 +79,8 @@
         
     }
     @catch (NSException *exception) {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
     }
     
 }
@@ -103,6 +104,7 @@
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     __weakSelf;
+    [ODProgressHUD showProgressIsLoading];
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
@@ -117,9 +119,10 @@
             [weakSelf createUserInfoView];
             [weakSelf createDetailView];
             [weakSelf createBottomView];
+            [ODProgressHUD dismiss];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+        [ODProgressHUD dismiss];
     }];
 }
 
@@ -349,14 +352,17 @@
                [weakSelf joiningTogetherParmeters];
                NSDictionary *dict = responseObject[@"result"];
                weakSelf.love_id = [NSString stringWithFormat:@"%@",dict[@"love_id"]];
-               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"收藏成功"];
+//               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"收藏成功"];
+               [ODProgressHUD showInfoWithStatus:@"收藏成功"];
                
            }
        }else{
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
                self.love = @"love";
                [weakSelf joiningTogetherParmeters];
-               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"取消收藏"];
+//               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"取消收藏"];
+               [ODProgressHUD showInfoWithStatus:@"收藏成功"];
+
                
            }
        }

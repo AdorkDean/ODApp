@@ -58,7 +58,7 @@
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     self.navigationItem.title = @"订单详情";
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 50, 20)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 30, 20)];
     [button setTitle:@"返回" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -150,7 +150,9 @@
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                 
                 
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+            
+                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+
                 
                 
             }
@@ -161,7 +163,10 @@
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+      
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
+
+        
     }];
     
     
@@ -411,7 +416,8 @@
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                 
                 
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+
                 
                 
             }
@@ -421,7 +427,9 @@
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        
+      [ODProgressHUD showInfoWithStatus:@"网络异常"];
+        
     }];
     
     
@@ -553,7 +561,8 @@
                 
                 [weakSelf.evaluationView removeFromSuperview];
                 
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"评价成功"];
+             
+                [ODProgressHUD showInfoWithStatus:@"评价成功"];
                 
                 ODOrderDetailModel *statusModel = self.dataArray[0];
                 weakSelf.orderStatus = [NSString stringWithFormat:@"%@" , statusModel.order_status];
@@ -575,7 +584,9 @@
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                 
                 
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+
+                
                 
                 
             }
@@ -583,7 +594,8 @@
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
+
     }];
     
 
@@ -703,7 +715,11 @@
     
     
     if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入取消原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入取消原因"];
+     
+        
+        
+        [ODProgressHUD showInfoWithStatus:@"请输入取消原因"];
+        
     }else{
         
         
@@ -721,7 +737,8 @@
                     
                     [weakSelf.cancelOrderView removeFromSuperview];
                     
-                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
+                 
+                    [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
                     
                     ODOrderDetailModel *statusModel = self.dataArray[0];
                     weakSelf.orderStatus = [NSString stringWithFormat:@"%@" , statusModel.order_status];
@@ -742,7 +759,7 @@
                 }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                     
                     
-                    [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+                 [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
                     
                     
                 }
@@ -750,7 +767,7 @@
                 
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+             [ODProgressHUD showInfoWithStatus:@"网络异常"];
         }];
         
         

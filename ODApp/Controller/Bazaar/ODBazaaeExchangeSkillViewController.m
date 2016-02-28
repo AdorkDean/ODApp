@@ -103,6 +103,7 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
 
     }];
 }
