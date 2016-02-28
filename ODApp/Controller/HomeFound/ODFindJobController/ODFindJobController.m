@@ -17,24 +17,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.navigationItem.title = @"找兼职";
-
+    
     [self createWebView];
 }
 
 - (void)createWebView
-{    
+{
     self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight)];
-
+    self.webView.delegate = self;
     NSString *store_id = @"2";
-    
     self.webUrl = [NSString stringWithFormat:@"%@?access_token=%@&store_id=%@&open_id=%@",ODFindJobUrl ,[ODUserInformation sharedODUserInformation].openID, store_id, [ODUserInformation sharedODUserInformation].openID];
     
     [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.webUrl]]];
+    
+}
+
+- (void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [ODProgressHUD showProgressIsLoading];
+}
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [ODProgressHUD dismiss];
     [self.view addSubview:self.webView];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
