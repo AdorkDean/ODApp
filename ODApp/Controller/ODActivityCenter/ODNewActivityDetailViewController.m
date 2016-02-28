@@ -465,7 +465,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
                     ODCenterPactureController *vc = [[ODCenterPactureController alloc] init];
                     NSString *webUrl = [NSString stringWithFormat:@"http://h5.odong.com/map/search?lng=%@&lat=%@" , self.resultModel.lng , self.resultModel.lat];
                     vc.webUrl = webUrl;
-                    vc.activityName = self.resultModel.store_name;
+                    vc.activityName = self.resultModel.store_address;
                     [self.navigationController pushViewController:vc animated:YES];
                 }
             }
