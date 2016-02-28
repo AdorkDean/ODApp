@@ -43,6 +43,15 @@
 
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    ODNavigationController *navi = self.presentingViewController.childViewControllers.lastObject;
+    if (navi.childViewControllers.count == 2)
+    {
+        [navi popToRootViewControllerAnimated:YES];
+    }
+}
 
 - (void)loadView
 {
