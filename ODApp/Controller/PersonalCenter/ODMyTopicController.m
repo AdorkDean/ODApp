@@ -457,7 +457,11 @@
             if (model.imgs.count==4) {
                 for (NSInteger i = 0; i < model.imgs.count; i++) {
                     UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
-                    [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
+                    [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        if (error){
+                            [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
+                        }
+                    }];
                     [imageButton addTarget:self action:@selector(firstImageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
                     imageButton.tag = 10*indexPath.row+i;
                     [cell.picView addSubview:imageButton];
@@ -466,7 +470,11 @@
             }else{
                 for (NSInteger i = 0;i < model.imgs.count ; i++) {
                     UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
-                    [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
+                    [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        if (error){
+                            [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
+                        }
+                    }];
                     [imageButton addTarget:self action:@selector(firstImageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
                     imageButton.tag = 10*indexPath.row+i;
                     [cell.picView addSubview:imageButton];
@@ -500,7 +508,11 @@
             if (model.imgs.count==4) {
                 for (NSInteger i = 0; i < model.imgs.count; i++) {
                     UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
-                    [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
+                    [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        if (error){
+                            [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
+                        }
+                    }];
                     [imageButton addTarget:self action:@selector(secondImageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
                     imageButton.tag = 10*indexPath.row+i;
                     [cell.picView addSubview:imageButton];
@@ -509,7 +521,11 @@
             }else{
                 for (NSInteger i = 0;i < model.imgs.count ; i++) {
                     UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
-                    [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal];
+                    [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        if (error){
+                            [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
+                        }
+                    }];
                     [imageButton addTarget:self action:@selector(secondImageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
                     imageButton.tag = 10*indexPath.row+i;
                     [cell.picView addSubview:imageButton];
