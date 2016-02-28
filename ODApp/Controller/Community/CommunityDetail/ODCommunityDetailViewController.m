@@ -176,7 +176,7 @@
     [self.tabelHeaderView addSubview:self.userView];
     
     //头像
-    UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 13.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"" font:0];
+    UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 17.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"" font:0];
     [userHeaderButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:userModel.avatar_url] forState:UIControlStateNormal];
     userHeaderButton.layer.masksToBounds = YES;
     userHeaderButton.layer.cornerRadius = 24;
@@ -184,11 +184,11 @@
     [self.userView addSubview:userHeaderButton];
     
     //昵称
-    UILabel *userNickLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 10, 150, 20) text:userModel.nick font:12.5 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *userNickLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 20, 150, 15) text:userModel.nick font:13 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
     [self.userView addSubview:userNickLabel];
     
     //签名
-    UILabel *userSignLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 30, 150, 40) text:userModel.sign font:13 alignment:@"left" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
+    UILabel *userSignLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 45, 150, 20) text:userModel.sign font:10 alignment:@"left" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
     [self.userView addSubview:userSignLabel];
     userSignLabel.numberOfLines = 2;
     
