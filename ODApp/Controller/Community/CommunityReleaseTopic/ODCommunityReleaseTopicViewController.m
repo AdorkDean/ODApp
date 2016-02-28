@@ -207,7 +207,7 @@ NSString *topicContentText = @"";
         [actionSheet showInView:self.view];
     }else{
         
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已达图片最大上传数"];
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已达图片最大上传数"];
     }
 }
 
@@ -275,11 +275,11 @@ NSString *topicContentText = @"";
 
 #pragma mark - 上传特效
 - (void)createProgressHUDTitle{
- 
-    self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [self.navigationController.view addSubview:self.hud ];
-    self.hud.delegate = self;
-    self.hud.labelText = @"图片上传中";
+// 
+//    self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
+//    [self.navigationController.view addSubview:self.hud ];
+//    self.hud.delegate = self;
+//    self.hud.labelText = @"图片上传中";
 }
 
 #pragma mark - 拼接参数
@@ -351,7 +351,7 @@ NSString *topicContentText = @"";
     }
     [self.addPicButton setFrame:CGRectMake(4 + (width + 4) * (self.imageArray.count % 4), CGRectGetMaxY(self.topicContentTextView.frame) + 95 + (4+width) * (self.imageArray.count / 4), width, width)];
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width,262+(self.imageArray.count/4+1)*(width+4));
-    [self.hud hide:NO afterDelay:0];
+//    [self.hud hide:NO afterDelay:0];
 }
 
 
