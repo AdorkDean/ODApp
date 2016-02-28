@@ -57,6 +57,9 @@ UIKIT_EXTERN NSString * const ODNotificationReleaseTask;
 /**  发布技能成功通知 */
 UIKIT_EXTERN NSString * const ODNotificationReleaseSkill;
 
+/**  寻圈子的通知 */
+UIKIT_EXTERN NSString * const ODNotificationSearchCircle;
+
 /**  编辑成功的通知 */
 UIKIT_EXTERN NSString * const ODNotificationEditSkill;
 

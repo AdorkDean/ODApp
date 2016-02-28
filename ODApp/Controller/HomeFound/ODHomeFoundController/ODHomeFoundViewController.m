@@ -380,18 +380,18 @@
 #pragma mark - 加入更多圈子点击事件
 - (void)gestureButtonClick:(UIButton *)button
 {
-    [self giveCommumityContent:nil andBbsType:5];
+    [self giveCommumityContent:@"社区" andBbsType:5];
 }
 
-#pragma mark - 寻圈子跳转传值
+#pragma mark - 寻圈子跳转刷新
 - (void)giveCommumityContent:(NSString *)bbsMark andBbsType:(float)bbsType
 {
     self.tabBarController.selectedIndex = 3;
     ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
     vc.bbsMark = bbsMark;
     vc.bbsType = bbsType;
-    vc.refresh = YES;
-    [vc joiningTogetherParmeters];
+    NSLog(@"%@",bbsMark);
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationSearchCircle object:nil];
 }
 
 #pragma mark - 用户头像点击事件

@@ -38,10 +38,13 @@ NSString * const ODNotificationSearchHelp = @"ODNotificationSearchHelp";
 /**  换技能通知 */
 NSString * const ODNotificationChangeSkill = @"ODNotificationChangeSkill";
 
+/**  寻圈子的通知 */
+NSString * const ODNotificationSearchCircle = @"ODNotificationSearchCircle";
+
 /**  发布任务成功通知 */
 NSString * const ODNotificationReleaseTask = @"ODNotificationReleaseTask";
 
-/**  发布任务成功通知 */
+/**  发布技能成功通知 */
 NSString * const ODNotificationReleaseSkill = @"ODNotificationReleaseSkill";
 
 /**  编辑成功的通知 */
