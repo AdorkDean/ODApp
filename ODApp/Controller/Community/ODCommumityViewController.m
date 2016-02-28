@@ -26,14 +26,33 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self navigationInit];
     [self createRequest];
-    [self joiningTogetherParmeters];
     [self createCollectionView];
+    [self joiningTogetherParmeters];
+    
+    __weakSelf
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationSearchCircle object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        
+        [weakSelf.collectionView.mj_header beginRefreshing];
+    }];
+    
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf.collectionView.mj_header beginRefreshing];
+    }];
+    
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [weakSelf joiningTogetherParmeters];
+    }];
+    
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf loadMoreData];
+    }];
+    [self.collectionView.mj_header beginRefreshing];
+
 }
 
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
-    self.bbsMark = @"社区";
     self.button = [ODBarButton barButtonWithTarget:self action:@selector(titleButtonClick:) title:@"社区    "];
     [self.button setImage:[UIImage imageNamed:@"jiantou_icon"] forState:UIControlStateNormal];
     [self.button.titleLabel setFont:[UIFont systemFontOfSize:ODNavigationTextFont]];
@@ -42,10 +61,7 @@
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(searchButtonClick) image:[UIImage imageNamed:@"search"] highImage:nil];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(publishButtonClick) image:[UIImage imageNamed:@"plus"] highImage:nil];
-    __weakSelf
-    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue ] usingBlock:^(NSNotification * _Nonnull note) {
-        [weakSelf.collectionView.mj_header beginRefreshing];
-    }];
+
 }
 
 #pragma mark - 移除通知
@@ -97,27 +113,22 @@
 -(void)titleViewLabelButtonClick:(UIButton *)button
 {
     if ([button.titleLabel.text isEqualToString:@"情感"]) {
-        [self.button setTitle:@"情感" forState:UIControlStateNormal];
         self.bbsMark = @"情感";
         self.bbsType = 5;
         [self joiningTogetherParmeters];
     }else if ([button.titleLabel.text isEqualToString:@"搞笑"]){
-        [self.button setTitle:@"搞笑" forState:UIControlStateNormal];
         self.bbsMark = @"搞笑";
         self.bbsType = 5;
         [self joiningTogetherParmeters];
     }else if ([button.titleLabel.text isEqualToString:@"影视"]){
-        [self.button setTitle:@"影视" forState:UIControlStateNormal];
         self.bbsMark = @"影视";
         self.bbsType = 5;
         [self joiningTogetherParmeters];
     }else if ([button.titleLabel.text isEqualToString:@"二次元"]){
-        [self.button setTitle:@"二次元" forState:UIControlStateNormal];
         self.bbsMark = @"二次元";
         self.bbsType = 5;
         [self joiningTogetherParmeters];
     }else if ([button.titleLabel.text isEqualToString:@"生活"]){
-        [self.button setTitle:@"生活" forState:UIControlStateNormal];
         self.bbsMark = @"生活";
         self.bbsType = 5;
         [self joiningTogetherParmeters];
@@ -127,18 +138,15 @@
         self.bbsType = 5;
         [self joiningTogetherParmeters];
     }else if ([button.titleLabel.text isEqualToString:@"爱美"]){
-        [self.button setTitle:@"爱美" forState:UIControlStateNormal];
         self.bbsMark = @"爱美";
         self.bbsType = 5;
         [self joiningTogetherParmeters];
     }else if ([button.titleLabel.text isEqualToString:@"宠物"]){
-        [self.button setTitle:@"宠物" forState:UIControlStateNormal];
         self.bbsMark = @"宠物";
         self.bbsType = 5;
         [self joiningTogetherParmeters];
     }else if ([button.titleLabel.text isEqualToString:@"全部"]){
-        [self.button setTitle:@"全部" forState:UIControlStateNormal];
-        self.bbsMark = @"";
+        self.bbsMark = @"全部";
         self.bbsType = 5;
         [self joiningTogetherParmeters];
     }
@@ -156,16 +164,17 @@
     
     self.count ++;
     NSDictionary *parameter;
-    if ([self.bbsMark isEqualToString:@""]) {
-        [self.button setTitle:@"全部" forState:UIControlStateNormal];
-        parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
-    }else if ([self.bbsMark isEqualToString:@"社区"]){
+    if ([self.bbsMark isEqualToString:@""]||[self.bbsMark isEqualToString:@"社区"]) {
         [self.button setTitle:@"社区" forState:UIControlStateNormal];
+        parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
+    }else if ([self.bbsMark isEqualToString:@"全部"]){
+        [self.button setTitle:@"全部" forState:UIControlStateNormal];
         parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":@"", @"call_array":@"1"};
     }else{
         [self.button setTitle:self.bbsMark forState:UIControlStateNormal];
         parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
     }
+    
     
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
@@ -213,11 +222,11 @@
     self.bbsMark = self.bbsMark ? self.bbsMark :@"";
     self.count = 1;
     NSDictionary *parameter;
-    if ([self.bbsMark isEqualToString:@""]) {
-        [self.button setTitle:@"全部" forState:UIControlStateNormal];
-        parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
-    }else if ([self.bbsMark isEqualToString:@"社区"]){
+    if ([self.bbsMark isEqualToString:@""]||[self.bbsMark isEqualToString:@"社区"]) {
         [self.button setTitle:@"社区" forState:UIControlStateNormal];
+        parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":@"", @"call_array":@"1"};
+    }else if ([self.bbsMark isEqualToString:@"全部"]){
+        [self.button setTitle:@"全部" forState:UIControlStateNormal];
         parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":@"", @"call_array":@"1"};
     }else{
         [self.button setTitle:self.bbsMark forState:UIControlStateNormal];
@@ -225,6 +234,7 @@
     }
   
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    NSLog(@"%@",signParameter);
     [self downLoadDataWithUrl:kCommunityBbsLatestUrl paramater:signParameter];
 }
 
@@ -289,15 +299,6 @@
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
     [self.view addSubview:self.collectionView];
-    __weakSelf
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakSelf joiningTogetherParmeters];
-    }];
-    
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [weakSelf loadMoreData];
-    }];
-//    [self.collectionView.mj_header beginRefreshing];
 
 }
 
@@ -447,6 +448,8 @@
     self.releaseSuccess = @"";
     [super viewWillDisappear:animated];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
