@@ -189,7 +189,7 @@
         
         ODCommunityReleaseTopicViewController *releaseTopic = [[ODCommunityReleaseTopicViewController alloc]init];
         releaseTopic.myBlock = ^(NSString *refresh){
-            weakSelf.refresh = refresh;
+            weakSelf.releaseSuccess = refresh;
         };
         [self.navigationController pushViewController:releaseTopic animated:YES];
 
@@ -426,17 +426,25 @@
         return 135+3*width+10;
     }
 }
-- (void)setRefresh:(BOOL)refresh
+
+
+#pragma mark - 试图将要出现
+-(void)viewWillAppear:(BOOL)animated
 {
-    if (refresh) {
+    [super viewWillAppear:animated];
+    
+    if ([self.releaseSuccess isEqualToString:@"refresh"]) {
+        self.bbsMark = @"";
+        self.bbsType = 5;
         [self.collectionView.mj_header beginRefreshing];
     }
-
 }
+
 #pragma mark - 试图将要消失
 -(void)viewWillDisappear:(BOOL)animated
 {
     self.refresh = NO;
+    self.releaseSuccess = @"";
     [super viewWillDisappear:animated];
 }
 

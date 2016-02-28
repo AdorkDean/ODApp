@@ -30,6 +30,7 @@
 @property(nonatomic,strong)UIView *classView;
 @property(nonatomic)NSInteger count;
 @property(nonatomic,assign) BOOL refresh;
+@property(nonatomic,copy)NSString *releaseSuccess;
 @property (nonatomic, copy) NSString *bbsMark;
 @property (nonatomic, assign) int bbsType;
 - (void)joiningTogetherParmeters;

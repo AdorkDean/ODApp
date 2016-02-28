@@ -253,8 +253,10 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         webView.layer.masksToBounds = YES;
         webView.layer.cornerRadius = 5;
         webView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        webView.backgroundColor = [UIColor whiteColor];
         webView.scrollView.showsHorizontalScrollIndicator = NO;
         webView.scrollView.scrollEnabled = NO;
+        
         [self.baseScrollV addSubview:webView];
         _webView = webView;
     }
@@ -269,7 +271,9 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         [view.shareBtn addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         [view.goodBtn addTarget:self action:@selector(clickGood:) forControlEvents:UIControlEventTouchUpInside];
         view.frame = CGRectMake(0, CGRectGetMaxY(self.webView.frame), KScreenWidth, 50);
+        view.backgroundColor = [UIColor whiteColor];
         [self.baseScrollV addSubview:view];
+        [self.baseScrollV bringSubviewToFront:_bottomButtonView];
         _bottomButtonView = view;
     }
     return _bottomButtonView;
@@ -304,8 +308,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     self.navigationItem.title = @"活动详情";
     [ODNewActivityCenterViewController sharedODNewActivityCenterViewController].needRefresh = NO;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(share:) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
-
-    
     
     [self requestData];
 }
@@ -498,10 +500,11 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     float clientheight = [clientheight_str floatValue];
     webView.od_height = clientheight + 12.5;
     self.bottomButtonView.od_y = CGRectGetMaxY(webView.frame);
+    UIView *view1 ,*view2;
     if (!hasload)
     {
-        [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(webView.frame))];
-        [self.bottomButtonView addLineOnBottom];
+        view1 = [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(webView.frame))];
+        view2 = [self.bottomButtonView addLineOnBottom];
         hasload = YES;
     }
     sharedTimes = self.resultModel.share_cnt;
@@ -511,6 +514,9 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     self.love_id = self.resultModel.love_id;
     loveNum = self.resultModel.love_cnt;
     self.baseScrollV.contentSize = CGSizeMake(0, CGRectGetMaxY(self.bottomButtonView.frame));
+    
+    [self.baseScrollV bringSubviewToFront:view1];
+    [self.baseScrollV bringSubviewToFront:view2];
 }
 
 #pragma mark - ODPersonalCenterVCDelegate
@@ -626,7 +632,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"obj_id",@"4" ,@"type",@"微信",@"share_platform", nil];
         [ODHttpTool getWithURL:kCallbackUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
          {
-            [ODProgressHUD showSuccessWithStatus:@"分享成功"];
              
          }
                        failure:^(NSError *error)
