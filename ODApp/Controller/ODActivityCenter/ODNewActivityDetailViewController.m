@@ -498,13 +498,12 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 {
     NSString * clientheight_str = [webView stringByEvaluatingJavaScriptFromString: @"document.body.offsetHeight"];
     float clientheight = [clientheight_str floatValue];
-    webView.od_height = clientheight + 12.5;
+    webView.od_height = clientheight;
     self.bottomButtonView.od_y = CGRectGetMaxY(webView.frame);
-    UIView *view1 ,*view2;
     if (!hasload)
     {
-        view1 = [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(webView.frame))];
-        view2 = [self.bottomButtonView addLineOnBottom];
+        [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(webView.frame))];
+        [self.bottomButtonView addLineOnBottom];
         hasload = YES;
     }
     sharedTimes = self.resultModel.share_cnt;
@@ -514,9 +513,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     self.love_id = self.resultModel.love_id;
     loveNum = self.resultModel.love_cnt;
     self.baseScrollV.contentSize = CGSizeMake(0, CGRectGetMaxY(self.bottomButtonView.frame));
-    
-    [self.baseScrollV bringSubviewToFront:view1];
-    [self.baseScrollV bringSubviewToFront:view2];
 }
 
 #pragma mark - ODPersonalCenterVCDelegate
