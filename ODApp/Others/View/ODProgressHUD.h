@@ -6,6 +6,9 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
+#define self self
+
+
 #import <Foundation/Foundation.h>
 
 @interface ODProgressHUD : NSObject
