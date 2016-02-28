@@ -23,8 +23,7 @@
 
 - (void)addViews
 {
-   
-    
+       
     self.buyButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.buyButton.frame = CGRectMake((self.frame.size.width - 200) / 5, 0, 50, 50);
     [self.buyButton setImage:[UIImage imageNamed:@"buy_icon"] forState:UIControlStateNormal];

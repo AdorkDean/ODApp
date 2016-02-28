@@ -61,7 +61,8 @@
         [self joiningTogetherParmeters];
         [self.collectionView.mj_header beginRefreshing];
     }else{
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入搜索内容"];
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入搜索内容"];
+        [ODProgressHUD showInfoWithStatus:@"请输入搜索内容"];
     }
 }
 
@@ -127,6 +128,7 @@
     
     [self.searchBar resignFirstResponder];
     __weak typeof (self)weakSelf = self;
+    [ODProgressHUD showProgressIsLoading];
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (weakSelf.count == 1) {
@@ -155,12 +157,14 @@
             if (tasks.count == 0) {
                 [self.collectionView.footer noticeNoMoreData];
             }
+            [ODProgressHUD dismiss];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+//        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
     
 }

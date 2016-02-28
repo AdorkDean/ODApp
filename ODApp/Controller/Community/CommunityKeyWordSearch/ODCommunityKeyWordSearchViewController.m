@@ -75,7 +75,8 @@
         [self joiningTogetherParmeters];
         [self.collectionView.mj_header beginRefreshing];
     }else{
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入搜索内容"];
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入搜索内容"];
+        [ODProgressHUD showInfoWithStatus:@"请输入搜索内容"];
     }
 }
 
@@ -186,7 +187,8 @@
         
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+//        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
 }
 

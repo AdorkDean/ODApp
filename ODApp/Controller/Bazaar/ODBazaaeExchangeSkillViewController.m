@@ -29,6 +29,8 @@
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf joiningTogetherParmeters];
     }];
+    
+    [self.collectionView.mj_header beginRefreshing];
 
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf loadMoreData];
@@ -103,6 +105,7 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
 
     }];
 }

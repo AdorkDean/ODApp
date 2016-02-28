@@ -211,9 +211,16 @@
 {
     
         if ([self.headView.orderView.timeLabel.text isEqualToString:@"请选择"]) {
-             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入服务时间"];
+           
+            
+            [ODProgressHUD showInfoWithStatus:@"请输入服务时间"];
+            
+            
         }else if ([self.headView.orderView.addressLabel.text isEqualToString:@"请选择"]){
-             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入联系地址"];
+          
+            
+            [ODProgressHUD showInfoWithStatus:@"请输入联系地址"];
+            
         }else{
     
              [self saveOrder];
@@ -257,7 +264,9 @@
         
         }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+       
+            
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

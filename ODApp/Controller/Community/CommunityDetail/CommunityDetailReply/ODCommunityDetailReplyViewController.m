@@ -30,7 +30,8 @@
     if (self.textView.text.length>0) {
         [self joiningTogetherParmeters];
     }else{
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入回复内容"];
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入回复内容"];
+        [ODProgressHUD showInfoWithStatus:@"请输入回复内容"];
     }
 }
 
@@ -65,11 +66,14 @@
                 weakSelf.myBlock([NSString stringWithFormat:@"refresh"],model);
             }
             
+            
+            NSLog(@"%@",dict);
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationReplySuccess object:nil];
             
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationMyTaskRefresh object:nil];
             [weakSelf.navigationController popViewControllerAnimated:YES];
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"回复成功"];
+//            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"回复成功"];
+            [ODProgressHUD showInfoWithStatus:@"回复成功"];
         }
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -80,11 +84,12 @@
 #pragma mark - 创建textView
 -(void)createTextView
 {
-    self.textView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4 + ODTopY, kScreenSize.width-8, 140) delegate:self tag:0 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.textView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4 + ODTopY, kScreenSize.width-8, 140) delegate:self tag:0 font:13 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.textView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     [self.view addSubview:self.textView];
     
-    self.label = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4 + ODTopY, kScreenSize.width-20, 30) text:@"请输入回复TA的内容" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    self.label.backgroundColor = [UIColor clearColor];
+    self.label = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4 + ODTopY, kScreenSize.width-20, 30) text:@"请输入回复TA的内容" font:13 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    self.label.textColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
     self.label.userInteractionEnabled = NO;
     [self.view addSubview:self.label];
 }
@@ -94,8 +99,8 @@
 NSString *replyTitleText = @"";
 - (void)textViewDidChange:(UITextView *)textView
 {
-    if (textView.text.length > 10){
-        textView.text = [textView.text substringToIndex:10];
+    if (textView.text.length > 250){
+        textView.text = [textView.text substringToIndex:250];
     }else{
         replyTitleText = textView.text;
     }

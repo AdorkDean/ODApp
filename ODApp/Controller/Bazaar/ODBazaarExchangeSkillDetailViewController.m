@@ -30,12 +30,7 @@
     self.navigationItem.title = self.nick;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
 
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 30, 20)];
-    [button setTitle:@"返回" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:13];
-    [button addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
 }
 
 - (void)backAction:(UIBarButtonItem *)sender
@@ -79,7 +74,8 @@
         
     }
     @catch (NSException *exception) {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
     }
     
 }
@@ -117,9 +113,10 @@
             [weakSelf createUserInfoView];
             [weakSelf createDetailView];
             [weakSelf createBottomView];
+      
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+    
     }];
 }
 
@@ -349,14 +346,17 @@
                [weakSelf joiningTogetherParmeters];
                NSDictionary *dict = responseObject[@"result"];
                weakSelf.love_id = [NSString stringWithFormat:@"%@",dict[@"love_id"]];
-               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"收藏成功"];
+//               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"收藏成功"];
+               [ODProgressHUD showInfoWithStatus:@"收藏成功"];
                
            }
        }else{
            if ([responseObject[@"status"] isEqualToString:@"success"]) {
                self.love = @"love";
                [weakSelf joiningTogetherParmeters];
-               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"取消收藏"];
+//               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"取消收藏"];
+               [ODProgressHUD showInfoWithStatus:@"取消收藏"];
+
                
            }
        }

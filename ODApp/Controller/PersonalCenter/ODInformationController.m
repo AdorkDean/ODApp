@@ -305,7 +305,10 @@
             }
             else {
                 
-                [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
+                
+                [ODProgressHUD showInfoWithStatus:@"您当前的照相机不可用"];
+                
+                
             }
             break;
         case 1:
@@ -425,8 +428,10 @@
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            UIAlertView *alter = [[UIAlertView alloc] initWithTitle:responseObject[@"message"] message:nil delegate:weakSelf cancelButtonTitle:nil otherButtonTitles: @"确定" , nil];
-            [alter show];
+                      
+            
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+            
         }
 
         

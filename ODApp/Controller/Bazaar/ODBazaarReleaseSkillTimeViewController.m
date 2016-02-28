@@ -99,11 +99,10 @@
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     __weakSelf;
-    [SVProgressHUD showWithStatus:ODAlertIsLoading maskType:(SVProgressHUDMaskTypeBlack)];
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
-            [SVProgressHUD dismiss];
+//            [SVProgressHUD dismiss];
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             [weakSelf.dataArray addObjectsFromArray:dict[@"result"]];
   
@@ -117,7 +116,7 @@
             [weakSelf.tableView reloadData];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-         [SVProgressHUD dismiss];
+         
     }];
 }
 

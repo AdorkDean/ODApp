@@ -76,7 +76,8 @@
 
         }
         @catch (NSException *exception) {
-            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+//            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+            [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
         }
             
 
@@ -134,7 +135,6 @@
         [weakSelf createTaskTopDetailView];
         [weakSelf createTaskBottomDetailView];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
         NSLog(@"error");
     }];
     
@@ -382,7 +382,8 @@
                 }
                 [weakSelf.picArray removeAllObjects];
                 [weakSelf joiningTogetherParmeters];
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"接受成功"];
+//                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"接受成功"];
+                [ODProgressHUD showInfoWithStatus:@"接受成功"];
                 [weakSelf.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
                 [weakSelf.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
                 weakSelf.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
@@ -394,7 +395,8 @@
                 if (weakSelf.myBlock) {
                     weakSelf.myBlock([NSString stringWithFormat:@"%@",dict[@"task_status"]]);
                 }
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提交成功"];
+//                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提交成功"];
+                [ODProgressHUD showInfoWithStatus:@"提交成功"];
                 [weakSelf.taskButton setTitle:@"已提交" forState:UIControlStateNormal];
             }
         }else if ([name isEqualToString:@"确认完成"]){
@@ -404,7 +406,8 @@
                     weakSelf.myBlock([NSString stringWithFormat:@"%@",dict[@"task_status"]]);
                 }
                 [weakSelf.evaluationView removeFromSuperview];
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"确认成功"];
+//                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"确认成功"];
+                [ODProgressHUD showInfoWithStatus:@"确认成功"];
                 [weakSelf.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
             }
         }
@@ -661,7 +664,8 @@
                         [weakSelf.picArray removeAllObjects];
                         [weakSelf.picArray addObject:model];
                         [weakSelf.collectionView reloadData];
-                        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"委派成功"];
+//                        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"委派成功"];
+                        [ODProgressHUD showInfoWithStatus:@"委派成功"];
                         [weakSelf.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
                         if (self.myBlock) {
                             self.myBlock([NSString stringWithFormat:@"%@",result[@"task_status"]]);

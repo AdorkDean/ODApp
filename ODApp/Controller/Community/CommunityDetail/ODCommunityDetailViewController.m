@@ -25,7 +25,7 @@
     
     [self createReplyButton];
     [self createRequest];
-    [self joiningTogetherParmetersWithUserInfo:YES];
+    [self joiningTogetherParmetersWithUserInfo:NO];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf joiningTogetherParmetersWithUserInfo:NO];
@@ -77,7 +77,8 @@
         
     }
     @catch (NSException *exception) {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
     }
 
 }
@@ -126,7 +127,7 @@
                 [weakSelf.userArray addObject:userModel];
                 [weakSelf createUserInfoView];
                 [weakSelf createBBSDetailView];
-                [weakSelf joiningTogetherParmetersWithUserInfo:NO];
+               
             }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
     }];
@@ -148,13 +149,9 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
             }
+            [weakSelf joiningTogetherParmetersWithUserInfo:YES];
 
             [weakSelf.tableView reloadData];
-            if (weakSelf.dataArray.count){
-                if ([weakSelf.refresh isEqualToString:@"refresh"]) {
-                    [weakSelf.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:weakSelf.dataArray.count - 1 inSection:0]atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-                }
-            }
             [weakSelf.tableView.mj_header endRefreshing];
             [weakSelf.tableView.mj_footer endRefreshing];
             
@@ -165,7 +162,8 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView.mj_footer endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+//        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
 }
 
@@ -186,7 +184,7 @@
     [self.userView addSubview:userHeaderButton];
     
     //昵称
-    UILabel *userNickLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 10, 100, 20) text:userModel.nick font:15 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *userNickLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 10, 150, 20) text:userModel.nick font:12.5 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
     [self.userView addSubview:userNickLabel];
     
     //签名
@@ -398,6 +396,8 @@
         detailReply.myBlock = ^(NSString *str,ODCommunityDetailModel *model){
             weakSelf.refresh = str;
             [weakSelf.dataArray addObject:model];
+            
+            NSLog(@"%ld",weakSelf.dataArray.count);
         };
         [self.navigationController pushViewController:detailReply animated:YES];
     }
@@ -487,7 +487,7 @@
     [super viewWillAppear:animated];
     if ([self.refresh isEqualToString:@"refresh"]) {
         [self.tableView reloadData];
-        if (self.dataArray.count){
+        if (self.dataArray.count && self.tableView){
            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]atScrollPosition:UITableViewScrollPositionBottom animated:NO];
         }
     }

@@ -111,7 +111,8 @@
     
     if([self.textView.text isEqualToString:@""] || [self.textView.text isEqualToString:@"请输入您的反馈内容"])
     {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入您的反馈内容"];
+      
+        [ODProgressHUD showInfoWithStatus:@"请输入您的反馈内容"];
         
     }else {
         NSString *openID = [ODUserInformation sharedODUserInformation].openID;
@@ -127,7 +128,8 @@
             
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 
-                   [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"感谢您的反馈"];
+                
+                [ODProgressHUD showInfoWithStatus:@"感谢您的反馈"];
                 [self.navigationController popViewControllerAnimated:YES];
                 
             }

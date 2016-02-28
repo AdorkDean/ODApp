@@ -116,7 +116,11 @@
         
         
         if ([self.cachesLabel.text isEqualToString:@"0.00M"]) {
-              [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"没有缓存可清理"];
+            
+            
+            [ODProgressHUD showInfoWithStatus:@"没有缓存可清理"];
+            
+            
         }else{
             
           
@@ -166,7 +170,8 @@
 
             
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0 title:@"已退出登录"];
+        
+            [ODProgressHUD showInfoWithStatus:@"已退出登录"];
             
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationQuit object:self];
         }]];

@@ -55,12 +55,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 50, 20)];
-    [button setTitle:@"返回" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:13];
-    [button addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
+
 
     
 }
@@ -159,7 +155,8 @@
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                 
                 
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+            
+                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
                 
                 
             }
@@ -170,7 +167,8 @@
             
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+       
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
     
     
@@ -439,7 +437,8 @@
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+          
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
         }
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

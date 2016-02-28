@@ -171,7 +171,7 @@
         
         
         [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+       [ODProgressHUD showInfoWithStatus:@"网络异常"];
         
     }];
     
@@ -303,7 +303,7 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
         [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+        [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
     
     
