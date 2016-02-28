@@ -461,8 +461,8 @@
         labelHeight = 0;
         buttonHeight = 0;
     }else{
-        labelHeight = 30;
-        buttonHeight = 22;
+        labelHeight = 20;
+        buttonHeight = 15;
     }
     //显示全部内容
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(allButtonClick)];
@@ -470,10 +470,10 @@
     [self.allView addGestureRecognizer:gesture];
     [self.taskBottomView addSubview:self.allView];
     
-    self.allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 80, labelHeight) text:@"显示全部内容" font:11 alignment:@"center" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    self.allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(20, 0, 80, labelHeight) text:@"显示全部内容" font:11 alignment:@"right" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     [self.allView addSubview:self.allLabel];
     
-    self.allImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(100,4, 25, buttonHeight) imageName:@"任务详情下拉按钮" tag:0];
+    self.allImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(110,4, 20, buttonHeight) imageName:@"任务详情下拉按钮" tag:0];
     [self.allView addSubview:self.allImageView];
     //任务奖励
     UILabel *rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.allView.frame)+10, 60, 20) text:@"任务奖励 :" font:11.5 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
@@ -550,7 +550,7 @@
     self.taskBottomView.frame = frame;
     
     self.collectionView.frame = CGRectMake(0, CGRectGetMaxY(self.taskBottomView.frame)+10, kScreenSize.width, 200);
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+230);
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+220);
 }
 
 -(void)hiddenPartView
@@ -564,7 +564,7 @@
     frame.origin.y = CGRectGetMaxY(self.taskTopView.frame)+10;
     self.taskBottomView.frame = frame;
     self.collectionView.frame = CGRectMake(0, CGRectGetMaxY(self.taskBottomView.frame)+10, kScreenSize.width, 200);
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+230);
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+220);
 }
 
 - (NSIndexPath *)curIndexPath {
