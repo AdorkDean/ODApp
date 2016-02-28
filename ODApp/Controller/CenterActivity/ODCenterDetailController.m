@@ -195,7 +195,7 @@ int pageNumnber = 0;
         
         CGRect rect = [self.model.desc boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 20,0)
                                                     options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
-                                                 attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:17]}
+                                                 attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11]}
                                                     context:nil];
         
         self.centerDetailView = [ODCenderDetailView getView];
