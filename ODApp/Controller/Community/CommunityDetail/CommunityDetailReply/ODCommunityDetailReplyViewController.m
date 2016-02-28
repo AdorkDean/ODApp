@@ -98,8 +98,8 @@
 NSString *replyTitleText = @"";
 - (void)textViewDidChange:(UITextView *)textView
 {
-    if (textView.text.length > 10){
-        textView.text = [textView.text substringToIndex:10];
+    if (textView.text.length > 250){
+        textView.text = [textView.text substringToIndex:250];
     }else{
         replyTitleText = textView.text;
     }

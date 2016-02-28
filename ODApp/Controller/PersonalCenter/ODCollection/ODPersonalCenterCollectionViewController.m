@@ -184,7 +184,7 @@
     picController.photos = model.imgs_small;
     picController.selectedIndex = button.tag-10*indexPath.row;
     picController.skill = @"skill";
-    [self.navigationController pushViewController:picController animated:YES];
+    [self presentViewController:picController animated:YES completion:nil];
 }
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -198,7 +198,6 @@
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc]init];
     detailControler.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
     detailControler.nick = model.user[@"nick"];
-
     [self.navigationController pushViewController:detailControler animated:YES];
     
 }

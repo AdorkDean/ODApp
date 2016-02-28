@@ -66,10 +66,10 @@
 #pragma mark - 创建titleTextView
 -(void)createTitleTextView
 {
-    self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 140) delegate:self tag:0 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 140) delegate:self tag:0 font:14 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.scrollView addSubview:self.titleTextView];
-    self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4, kScreenSize.width - 20, 30) text:@"请输入任务标题" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4, kScreenSize.width - 20, 30) text:@"请输入任务标题" font:14 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    self.titleLabel.textColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1];
     self.titleLabel.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.titleLabel];
     
@@ -81,7 +81,7 @@
     CGFloat width = (kScreenSize.width - 16)/12;
     NSArray *array = @[@"开始时间",@"结束时间"];
     for (NSInteger i = 0; i < array.count; i++) {
-        UILabel * label = [ODClassMethod creatLabelWithFrame:CGRectMake(4, 148+(30.5+4)*i, 3.5*width, 30.5) text:array[i] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
+        UILabel * label = [ODClassMethod creatLabelWithFrame:CGRectMake(4, 148+(30.5+4)*i, 3.5*width, 30.5) text:array[i] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
         label.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         [self.scrollView addSubview:label];
     }
@@ -121,7 +121,7 @@
     startDateView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
     [self.scrollView addSubview:startDateView];
     
-    self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",startDateString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+    self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",startDateString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [startDateView addSubview:self.startDateLabel];
     
     
@@ -141,7 +141,7 @@
     endDateView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
     [self.scrollView addSubview:endDateView];
     
-    self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",endDateString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+    self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",endDateString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [endDateView addSubview:self.endDateLabel];
     
     UIView *endDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
@@ -158,7 +158,7 @@
     startTimeView.layer.borderWidth = 1;
     startTimeView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
     [self.scrollView addSubview:startTimeView];
-    self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",startTimeString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+    self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",startTimeString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [startTimeView addSubview:self.startTimeLabel];
     
     UIView *startTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
@@ -177,7 +177,7 @@
     endTimeView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
     [self.scrollView addSubview:endTimeView];
     
-    self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",endTimeString] font:15 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
+    self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",endTimeString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [endTimeView addSubview:self.endTimeLabel];
     UIView *endTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5*width-30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
     [endTimeView addSubview:endTimeLineView];
@@ -248,8 +248,7 @@
 
 //确认datePickerView
 -(void)confirmPickerButtonClick:(UIButton *)button
-{
-    
+{ 
     if ([self.type isEqualToString:@"startDate"]) {
         self.startDateLabel.text = [NSString stringWithFormat:@"%@",[self timeFormatDate:YES]];
     }else if ([self.type isEqualToString:@"endDate"]){
@@ -286,10 +285,10 @@
 #pragma mark - 创建taskDetailTextView
 -(void)createTaskDetailTextView
 {
-    self.taskDetailTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 217, kScreenSize.width - 8, 245) delegate:self tag:0 font:16 color:@"#ffffff" alpha:1 maskToBounds:YES];
+    self.taskDetailTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 217, kScreenSize.width - 8, 245) delegate:self tag:0 font:14 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.scrollView addSubview:self.taskDetailTextView];
-    self.taskDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 217, kScreenSize.width - 20, 30) text:@"请输入任务详情" font:16 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    self.taskDetailLabel.backgroundColor = [UIColor clearColor];
+    self.taskDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 217, kScreenSize.width - 20, 30) text:@"请输入任务详情" font:14 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    self.taskDetailLabel.textColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
     self.taskDetailLabel.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.taskDetailLabel];
 }
@@ -305,7 +304,7 @@
     taskeRewardView.layer.borderWidth = 1;
     taskeRewardView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
     [self.scrollView addSubview:taskeRewardView];
-    self.taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, kScreenSize.width - 8, 34) text:@"  选择任务奖励" font:16 alignment:@"left" color:@"#b0b0b0"  alpha:1 maskToBounds:NO];
+    self.taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, kScreenSize.width - 8, 34) text:@"  选择任务奖励" font:13 alignment:@"left" color:@"#b0b0b0"  alpha:1 maskToBounds:NO];
     self.taskRewardLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [taskeRewardView addSubview:self.taskRewardLabel];
     
