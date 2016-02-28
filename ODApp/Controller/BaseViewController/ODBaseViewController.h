@@ -8,15 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ODClassMethod.h"
-#import "MBProgressHUD.h"
-#import "SVProgressHUD.h"
 #import "ODProgressHUD.h"
 #import "ODHttpTool.h"
 #import "ODNetClosedView.h"
 
-@interface ODBaseViewController : UIViewController <MBProgressHUDDelegate>
-@property (nonatomic,strong)    MBProgressHUD *HUD;
-//导航的标题视图
+@interface ODBaseViewController : UIViewController
 
-- (void)createProgressHUDWithAlpha:(float)alpha withAfterDelay:(float)afterDelay title:(NSString *)title ;
 @end
