@@ -198,7 +198,8 @@
             
         }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+          
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
         }
         
         
@@ -229,12 +230,22 @@
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
         
         [weakSelf.navigationController popViewControllerAnimated:YES];
-        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"保存成功"];
+      
+            
+            [ODProgressHUD showInfoWithStatus:@"保存成功"];
+            
            
            
         }else if ([responseObject[@"status"] isEqualToString:@"error"]) {
             
-      [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];            
+   
+            
+            
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+            
+ 
+            
+            
         }
         
         
@@ -266,7 +277,10 @@
             
          
             [weakSelf.navigationController popViewControllerAnimated:YES];
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"修改成功"];
+          
+            [ODProgressHUD showInfoWithStatus:@"修改成功"];
+            
+
            
         }
         

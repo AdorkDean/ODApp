@@ -166,7 +166,8 @@
 
             
             
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0 title:@"已退出登录"];
+        
+            [ODProgressHUD showInfoWithStatus:@"已退出登录"];
             
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationQuit object:self];
         }]];

@@ -99,7 +99,11 @@
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+          
+            
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+            
+            
         }
        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -131,7 +135,8 @@
         }
         
         else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:responseObject[@"message"]];
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+
         }
       
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

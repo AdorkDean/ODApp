@@ -66,7 +66,12 @@
      }
               failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
      {
-         [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+         
+         [ODProgressHUD showInfoWithStatus:@"网络异常"];
+
+         
+         
+         
      }];
 }
 
@@ -100,7 +105,8 @@
             [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
             {
                 [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil];
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"取消订单成功"];
+              
+                [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
                 weakSelf.checkLabel.text = @"已取消";
                 weakSelf.status_str = weakSelf.checkLabel.text;
                 
@@ -111,7 +117,8 @@
             }
                        failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
             {
-                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
+              
+                [ODProgressHUD showInfoWithStatus:@"网络异常"];
             }];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
