@@ -187,7 +187,7 @@
         }else if (iPhone5_5s){
             
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 100);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 250);
             
             
         }else  {
@@ -201,16 +201,16 @@
         
         
         if (iPhone4_4S) {
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 270);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 290);
             
         }else  if (iPhone5_5s){
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 150);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 190);
             
         }else  {
             
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 50);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 70);
             
             
         }

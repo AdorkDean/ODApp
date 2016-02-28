@@ -198,7 +198,7 @@
         }else if (iPhone5_5s){
             
             
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 100);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 220);
             
             
         }else  {
@@ -216,7 +216,7 @@
         
         
         if (iPhone4_4S) {
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 270);
+            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 250);
             
         }else  if (iPhone5_5s){
             
