@@ -715,7 +715,11 @@
     
     
     if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入取消原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入取消原因"];
+     
+        
+        
+        [ODProgressHUD showInfoWithStatus:@"请输入取消原因"];
+        
     }else{
         
         

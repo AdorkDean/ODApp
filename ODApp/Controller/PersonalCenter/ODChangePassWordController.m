@@ -135,14 +135,25 @@
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
 
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入手机号"];
+     
+        
+        [ODProgressHUD showInfoWithStatus:@"请输入手机号"];
+        
+        
         
     }else if ([self.registView.verification.text isEqualToString:@""]) {
         
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入验证码"];
+        
+        [ODProgressHUD showInfoWithStatus:@"请输入验证码"];
+        
+        
     }else if (self.registView.password.text.length < 6 || self.registView.password.text.length > 26 ) {
         
-           [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"密码仅支持6到26位"];
+       
+        
+        [ODProgressHUD showInfoWithStatus:@"密码仅支持6到26位"];
+        
+        
     }else {
         [self changePassWord];
 
@@ -160,7 +171,8 @@
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
 
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入手机号"];
+              
+        [ODProgressHUD showInfoWithStatus:@"请输入手机号"];
     }else {
         
         [self getCode];

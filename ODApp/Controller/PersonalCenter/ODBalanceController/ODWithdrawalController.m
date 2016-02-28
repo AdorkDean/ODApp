@@ -63,7 +63,9 @@
     
     if ([self.withdrawalView.payAddressTextView.text isEqualToString:@"请输入和注册手机一致的支付宝账号"] || [self.withdrawalView.payAddressTextView.text isEqualToString:@""]) {
         
-        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入支付宝账号"];
+      
+        [ODProgressHUD showInfoWithStatus:@"请输入支付宝账号"];
+        
     }else {
         
         [self getData];
@@ -101,7 +103,8 @@
           
             
             [self.navigationController popViewControllerAnimated:YES];
-            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提现成功"];
+         
+            [ODProgressHUD showInfoWithStatus:@"提现成功"];
 
             
         }

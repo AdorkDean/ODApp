@@ -116,7 +116,11 @@
         
         
         if ([self.cachesLabel.text isEqualToString:@"0.00M"]) {
-              [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"没有缓存可清理"];
+            
+            
+            [ODProgressHUD showInfoWithStatus:@"没有缓存可清理"];
+            
+            
         }else{
             
           
