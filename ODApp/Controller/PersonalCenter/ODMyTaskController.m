@@ -103,7 +103,7 @@
     
     if ([self.isSecondRefresh isEqualToString:@"del"]){
         
-        [self.FirstDataArray removeObject:self.secondDataArray[self.secondIndex]];
+        [self.secondDataArray removeObject:self.secondDataArray[self.secondIndex]];
 
         
         [self.secondCollectionView reloadData];
@@ -328,6 +328,14 @@
     ODTaskCell *cell = (ODTaskCell *)sender.superview.superview;
     NSIndexPath *indexPath = [self.firstCollectionView indexPathForCell:cell];
     ODBazaarModel *model = self.FirstDataArray[indexPath.row];
+    
+    [self.FirstDataArray removeObject:self.FirstDataArray[indexPath.row]];
+    
+    
+    [self.firstCollectionView reloadData];
+
+    
+    
     NSString *taskId = [NSString stringWithFormat:@"%@" , model.task_id];
     [self delegateTaskWith:taskId];
     
@@ -376,9 +384,7 @@
             
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 
-                
-                [weakSelf.firstCollectionView.mj_header beginRefreshing];
-                [weakSelf.secondCollectionView.mj_header beginRefreshing];
+
                 
                 
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
