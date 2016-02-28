@@ -55,7 +55,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(10, 10, 50, 20)];
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 30, 20)];
     [button setTitle:@"返回" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:13];
