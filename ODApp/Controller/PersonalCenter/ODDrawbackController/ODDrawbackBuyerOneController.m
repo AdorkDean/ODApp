@@ -53,7 +53,8 @@
     }
     else
     {
-       drawbackReasonHeight = drawBackHeight;
+        self.drawbackReasonContentLabel.text = self.drawbackReason;
+       drawbackReasonHeight = [ODHelp textHeightFromTextString:self.drawbackReasonContentLabel.text width:KScreenWidth - 2 * ODLeftMargin miniHeight:drawBackHeight fontSize:13.5];
     }
     self.drawbackMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, drawBackHeight)];
     self.drawbackMoneyLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
@@ -165,12 +166,13 @@
     #pragma mark - 退款原因版块 不可选择
     else
     {
-        self.drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, drawBackHeight)];
+        
+        self.drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - 2 * ODLeftMargin, drawbackReasonHeight)];
         if (self.drawbackReason == nil)
         {
             self.drawbackReason = @"";
         }
-        self.drawbackReasonContentLabel.text = self.drawbackReason;
+        
         self.drawbackReasonContentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackReasonContentLabel.font = [UIFont systemFontOfSize:13.5];
         self.drawbackReasonContentLabel.textAlignment = NSTextAlignmentLeft;
@@ -190,12 +192,12 @@
         self.refuseReasonLabel.textAlignment = NSTextAlignmentLeft;
         [self.scrollView addSubview:self.refuseReasonLabel];
         
-        self.refuseReasonContentView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.refuseReasonLabel.frame), KScreenWidth, drawbackReasonHeight)];
+        self.refuseReasonContentLabel.text = self.refuseReason;
+        self.refuseReasonContentView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.refuseReasonLabel.frame), KScreenWidth, [ODHelp textHeightFromTextString:self.refuseReasonContentLabel.text width:KScreenWidth - 2 * ODLeftMargin miniHeight:drawBackHeight fontSize:13.5])];
         self.refuseReasonContentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         [self.scrollView addSubview:self.refuseReasonContentView];
         
-        self.refuseReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, drawBackHeight)];
-        self.refuseReasonContentLabel.text = self.refuseReason;
+        self.refuseReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, [ODHelp textHeightFromTextString:self.refuseReasonContentLabel.text width:KScreenWidth - 2 * ODLeftMargin miniHeight:drawBackHeight fontSize:13.5])];
         self.refuseReasonContentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.refuseReasonContentLabel.font = [UIFont systemFontOfSize:13.5];
         self.refuseReasonContentLabel.textAlignment = NSTextAlignmentLeft;
