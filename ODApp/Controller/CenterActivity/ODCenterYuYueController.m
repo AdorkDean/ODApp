@@ -634,14 +634,14 @@
         
         
         if (iPhone4_4S || iPhone5_5s) {
-            self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:12];
+            self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:10];
             
             
         }else if (iPhone6_6s) {
-            self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:14];
+            self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:10];
             
         }else {
-            self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:15];
+            self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:10];
             
             
         }
@@ -672,14 +672,14 @@
         
         
         if (iPhone4_4S || iPhone5_5s) {
-            self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:12];
+            self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:10];
             
         }else if (iPhone6_6s) {
             
-            self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:15];
+            self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:10];
         }else {
             
-            self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:15];
+            self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:10];
             
         }
         
