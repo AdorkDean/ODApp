@@ -65,6 +65,8 @@
                 weakSelf.myBlock([NSString stringWithFormat:@"refresh"],model);
             }
             
+            
+            NSLog(@"%@",dict);
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationReplySuccess object:nil];
             
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationMyTaskRefresh object:nil];

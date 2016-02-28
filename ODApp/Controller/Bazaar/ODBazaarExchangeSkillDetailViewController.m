@@ -80,6 +80,7 @@
     }
     @catch (NSException *exception) {
         [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+//        [ODProgressHUD showErrorWithStatus:@"网络异常无法分享"];
     }
     
 }
@@ -103,6 +104,7 @@
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     __weakSelf;
+    [ODProgressHUD showProgressIsLoading];
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
@@ -117,9 +119,10 @@
             [weakSelf createUserInfoView];
             [weakSelf createDetailView];
             [weakSelf createBottomView];
+            [ODProgressHUD dismiss];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
+        [ODProgressHUD dismiss];
     }];
 }
 

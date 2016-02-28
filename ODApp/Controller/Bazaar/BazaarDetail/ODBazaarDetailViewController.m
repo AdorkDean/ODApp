@@ -77,6 +77,7 @@
         }
         @catch (NSException *exception) {
             [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
+//            [ODProgressHUD showErrorWithStatus:@"网络异常无法分享"];
         }
             
 
@@ -134,7 +135,6 @@
         [weakSelf createTaskTopDetailView];
         [weakSelf createTaskBottomDetailView];
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
         NSLog(@"error");
     }];
     
