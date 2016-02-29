@@ -13,6 +13,8 @@
 #import <SVProgressHUD.h>
 
 @implementation ODProgressHUD
+#pragma mark - 蒙版提示语
+NSString * const ODAlertIsLoading = @"正在加载。。。";
 
 + (void)initialize
 {

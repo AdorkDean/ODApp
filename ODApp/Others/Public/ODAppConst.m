@@ -1,8 +1,5 @@
 #import <UIKit/UIKit.h>
 
-#pragma mark - 蒙版提示语
-NSString * const ODAlertIsLoading = @"正在加载。。。";
-
 #pragma mark - UI相关常量
 /** TabBar的高度 */
 CGFloat const ODTabBarHeight = 55;
