@@ -156,15 +156,15 @@
     [self.userView addSubview:userHeaderButton];
     
     //昵称
-    UILabel *userNickLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 10, 100, 20) text:detailModel.user_nick font:15 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *userNickLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 10, 100, 20) text:detailModel.user_nick font:12.5 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
     [self.userView addSubview:userNickLabel];
     
     //签名
-    UILabel *userSignLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 30, 150, 40) text:detailModel.user_sign font:13 alignment:@"left" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
+    UILabel *userSignLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 30, 150, 40) text:detailModel.user_sign font:10 alignment:@"left" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
     [self.userView addSubview:userSignLabel];
     
     //接受任务
-    self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-80, 20, 80, 35) target:nil sel:nil tag:0 image:nil title:@"" font:14];
+    self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-80, 20, 80, 35) target:nil sel:nil tag:0 image:nil title:@"" font:12];
     self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#d0d0d0" alpha:1] forState:UIControlStateNormal];
     self.taskButton.layer.masksToBounds = YES;
@@ -424,22 +424,22 @@
     self.taskTopView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(self.userView.frame), kScreenSize.width-25, 100) tag:0 color:@"#ffffff"];
     [self.scrollView addSubview:self.taskTopView];
     //标题
-    UILabel *taskTitleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 17.5, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.title width:kScreenSize.width-25 fontSize:15]) text:detailModel.title font:15 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *taskTitleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 17.5, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.title width:kScreenSize.width-25 fontSize:12.5]) text:detailModel.title font:12.5 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
     [self.taskTopView addSubview:taskTitleLabel];
     
     //任务内容
-    UILabel *contentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(taskTitleLabel.frame)+17.5, 80, 30) text:@"任务内容 :" font:14 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
+    UILabel *contentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(taskTitleLabel.frame)+17.5, 60, 20) text:@"任务内容 :" font:11.5 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
     contentLabel.layer.borderColor = [UIColor colorWithHexString:@"ffd802" alpha:1].CGColor;
     [self.taskTopView addSubview:contentLabel];
 
     CGRect frame ;
-    CGFloat height = [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:15];
-    if (height > 80) {
-        frame = CGRectMake(0, CGRectGetMaxY(contentLabel.frame)+10, kScreenSize.width-25, 80);
+    CGFloat height = [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:12.5];
+    if (height > 60) {
+        frame = CGRectMake(0, CGRectGetMaxY(contentLabel.frame)+10, kScreenSize.width-25, 60);
     }else{
-        frame = CGRectMake(0, CGRectGetMaxY(contentLabel.frame)+10,kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:15]);
+        frame = CGRectMake(0, CGRectGetMaxY(contentLabel.frame)+10,kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:12.5]);
     }
-    self.taskContentLabel = [ODClassMethod creatLabelWithFrame:frame text:detailModel.content font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
+    self.taskContentLabel = [ODClassMethod creatLabelWithFrame:frame text:detailModel.content font:12.5 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
     self.taskContentLabel.numberOfLines = 4;
     [self.taskTopView addSubview:self.taskContentLabel];
     self.taskTopView.frame = CGRectMake(12.5, CGRectGetMaxY(self.userView.frame), kScreenSize.width-25, self.taskContentLabel.frame.size.height+self.taskContentLabel.frame.origin.y);
@@ -450,19 +450,19 @@
 -(void)createTaskBottomDetailView
 {
     ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
-    CGFloat height = [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:15];
+    CGFloat height = [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:12.5];
     self.taskBottomView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, CGRectGetMaxY(self.taskTopView.frame)+10, kScreenSize.width-25, 100) tag:0 color:@"#ffffff"];
     self.taskBottomView.userInteractionEnabled = YES;
     [self.scrollView addSubview:self.taskBottomView];
     
     CGFloat labelHeight;
     CGFloat buttonHeight;
-    if (height < 80) {
+    if (height < 60) {
         labelHeight = 0;
         buttonHeight = 0;
     }else{
-        labelHeight = 30;
-        buttonHeight = 22;
+        labelHeight = 20;
+        buttonHeight = 15;
     }
     //显示全部内容
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(allButtonClick)];
@@ -470,33 +470,33 @@
     [self.allView addGestureRecognizer:gesture];
     [self.taskBottomView addSubview:self.allView];
     
-    self.allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 100, labelHeight) text:@"显示全部内容" font:15 alignment:@"center" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    self.allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(20, 0, 80, labelHeight) text:@"显示全部内容" font:11 alignment:@"right" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     [self.allView addSubview:self.allLabel];
     
-    self.allImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(100,4, 25, buttonHeight) imageName:@"任务详情下拉按钮" tag:0];
+    self.allImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(110,4, 20, buttonHeight) imageName:@"任务详情下拉按钮" tag:0];
     [self.allView addSubview:self.allImageView];
     //任务奖励
-    UILabel *rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.allView.frame)+10, 80, 30) text:@"任务奖励 :" font:14 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
+    UILabel *rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.allView.frame)+10, 60, 20) text:@"任务奖励 :" font:11.5 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
     rewardLabel.layer.borderColor = [UIColor colorWithHexString:@"ffd802" alpha:1].CGColor;
     [self.taskBottomView addSubview:rewardLabel];
     
-    UILabel *taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(rewardLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.reward_name width:kScreenSize.width-25 fontSize:15]) text:detailModel.reward_name font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
+    UILabel *taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(rewardLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.reward_name width:kScreenSize.width-25 fontSize:15]) text:detailModel.reward_name font:12.5 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
     if (detailModel.reward_name.length==0) {
         taskRewardLabel.text = @"该任务没有奖励";
     }
     [self.taskBottomView addSubview:taskRewardLabel];
     
     //任务时间
-    UILabel *timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(taskRewardLabel.frame)+17.5,80, 30) text:@"任务时间 :" font:14 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
+    UILabel *timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(taskRewardLabel.frame)+17.5,60, 20) text:@"任务时间 :" font:11.5 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
     timeLabel.layer.borderColor = [UIColor colorWithHexString:@"ffd802" alpha:1].CGColor;
     [self.taskBottomView addSubview:timeLabel];
     
     NSString *startTime = [[detailModel.task_datetime substringWithRange:NSMakeRange(5, 14)] stringByReplacingOccurrencesOfString:@"/" withString:@"."];
     NSString *endTime = [[detailModel.task_datetime substringFromIndex:24] stringByReplacingOccurrencesOfString:@"/" withString:@"."];
-    UILabel *dateTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.task_datetime width:kScreenSize.width-25 fontSize:15]) text:[startTime stringByAppendingString:endTime] font:15 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
+    UILabel *dateTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(timeLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.task_datetime width:kScreenSize.width-25 fontSize:12.5]) text:[startTime stringByAppendingString:endTime] font:12.5 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
     [self.taskBottomView addSubview:dateTimeLabel];
     
-    UILabel *createTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(dateTimeLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.task_created_at width:kScreenSize.width fontSize:13]) text:[detailModel.task_created_at stringByReplacingOccurrencesOfString:@"/" withString:@"-"] font:13 alignment:@"right" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+    UILabel *createTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(dateTimeLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.task_created_at width:kScreenSize.width fontSize:10]) text:[detailModel.task_created_at stringByReplacingOccurrencesOfString:@"/" withString:@"-"] font:10 alignment:@"right" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     [self.taskBottomView addSubview:createTimeLabel];
     
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, CGRectGetMaxY(createTimeLabel.frame)+10, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
@@ -541,7 +541,7 @@
 {
     ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
     CGRect frame = self.taskContentLabel.frame;
-    frame.size.height = [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:15];
+    frame.size.height = [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:12.5];
     self.taskContentLabel.frame = frame;
     self.taskContentLabel.numberOfLines = 0;
     self.taskTopView.frame = CGRectMake(12.5, CGRectGetMaxY(self.userView.frame), kScreenSize.width-25, self.taskContentLabel.frame.size.height+self.taskContentLabel.frame.origin.y);
@@ -550,13 +550,13 @@
     self.taskBottomView.frame = frame;
     
     self.collectionView.frame = CGRectMake(0, CGRectGetMaxY(self.taskBottomView.frame)+10, kScreenSize.width, 200);
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+230);
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+220);
 }
 
 -(void)hiddenPartView
 {
     CGRect frame = self.taskContentLabel.frame;
-    frame.size.height = 80;
+    frame.size.height = 60;
     self.taskContentLabel.frame = frame;
     self.taskContentLabel.numberOfLines = 4;
     self.taskTopView.frame = CGRectMake(12.5, CGRectGetMaxY(self.userView.frame), kScreenSize.width-25, self.taskContentLabel.frame.size.height+self.taskContentLabel.frame.origin.y);
@@ -564,7 +564,7 @@
     frame.origin.y = CGRectGetMaxY(self.taskTopView.frame)+10;
     self.taskBottomView.frame = frame;
     self.collectionView.frame = CGRectMake(0, CGRectGetMaxY(self.taskBottomView.frame)+10, kScreenSize.width, 200);
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+230);
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+220);
 }
 
 - (NSIndexPath *)curIndexPath {

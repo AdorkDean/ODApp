@@ -11,6 +11,7 @@
 #import "ODClassMethod.h"
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
+#import "MBProgressHUD.h"
 
 
 @interface ODCommunityReleaseTopicViewController : ODBaseViewController<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
@@ -28,5 +29,6 @@
 @property(nonatomic,strong)UIButton *lastSelectedButton;
 @property(nonatomic,copy)void(^myBlock)(NSString *refresh);
 @property(nonatomic,strong)UIImage *pickedImage;
+@property (nonatomic, strong) MBProgressHUD *hud;
 
 @end
