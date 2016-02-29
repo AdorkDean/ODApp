@@ -25,5 +25,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *adressLabel;
 
+@property (weak, nonatomic) IBOutlet UILabel *applyNumLabel;
 
 @end

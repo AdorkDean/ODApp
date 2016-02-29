@@ -1505,13 +1505,6 @@
 			name = ODChoseCenter;
 			sourceTree = "<group>";
 		};
-		C64D40901C5E088A003BFFA0 /* ODChangeSkill */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ODChangeSkill;
-			sourceTree = "<group>";
-		};
 		C64D40941C5E0DC6003BFFA0 /* ODSkillDetailView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1909,8 +1902,8 @@
 			children = (
 				D4D0754E1C59C41F008527C9 /* NavigationController */,
 				D4D0713B1C59B9FA008527C9 /* TabBarController */,
-				D4D071061C59B9FA008527C9 /* HomeFound */,
 				D4D070D31C59B9FA008527C9 /* BaseViewController */,
+				D4D071061C59B9FA008527C9 /* HomeFound */,
 				D46C902A1C6041B4004942E7 /* ODActivityCenter */,
 				D4D070E81C59B9FA008527C9 /* CenterActivity */,
 				D4F76D871C61AE8C00D59F02 /* ODOrderController */,
@@ -2001,7 +1994,6 @@
 				C63FECEE1C7AA5A6000A8396 /* ODFindJobController */,
 				D4F76DD01C61B04700D59F02 /* ODCollectioncController */,
 				C6F97B3F1C619B7B0037975C /* ODLocationController */,
-				C64D40901C5E088A003BFFA0 /* ODChangeSkill */,
 				D4D071071C59B9FA008527C9 /* ODCenterIntroduceController */,
 				D4D0710D1C59B9FA008527C9 /* ODLazyViewController */,
 			);

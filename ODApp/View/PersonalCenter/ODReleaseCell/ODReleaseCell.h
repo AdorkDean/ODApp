@@ -27,9 +27,6 @@
 
 @property (weak, nonatomic) IBOutlet UIView *horizontalLineView;
 
-//@property (nonatomic, strong) UIButton *editButton;
-//@property (nonatomic, strong) UIButton *deleteButton;;
-
 @property (nonatomic, strong) UIImageView *halvingLineImageView;
 
 @property (nonatomic, strong) ODReleaseModel *model;

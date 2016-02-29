@@ -53,7 +53,6 @@ NSString * const ODNotificationEditSkill = @"ODNotificationEditSkill";
 /**  编辑技能创建服务时间试图 */
 NSString * const ODNotificationCreateServiceTimeView = @"ODNotificationCreateServiceTimeView";
 
-
 /**  支付成功通知 */
 NSString * const ODNotificationPaySuccess = @"ODNotificationPaySuccess";
 
@@ -63,14 +62,13 @@ NSString * const ODNotificationPayfail = @"ODNotificationPayfail";
 /**  取消预约通知 */
 NSString * const ODNotificationCancelOrder = @"ODNotificationCancelOrder";
 
-
 /**  退出成功刷新集市状态 */
 NSString * const ODNotificationQuit = @"ODNotificationQuit";
 
 /**  回复成功后刷新 */
 NSString * const ODNotificationReplySuccess = @"ODNotificationReplySuccess";
 
-/** 定位刷新 */
+/** 定位成功刷新 */
 NSString * const ODNotificationLocationSuccessRefresh = @"ODNotificationLocationSuccessRefresh";
 
 /** 订单刷新 */
@@ -78,7 +76,6 @@ NSString * const ODNotificationOrderListRefresh = @"ODNotificationOrderListRefre
 
 /**  点击收藏的通知 */
 NSString * const ODNotificationloveSkill = @"ODNotificationloveSkill";
-
 
 /** 已购买二级页面通知 */
 NSString * const ODNotificationMyOrderSecondRefresh = @"ODNotificationMyOrderSecondRefresh";
