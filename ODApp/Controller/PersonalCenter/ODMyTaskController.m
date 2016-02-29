@@ -84,15 +84,7 @@
 {
     
     [super viewWillAppear:animated];
-    
-//    __weakSelf
-//    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationMyTaskRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-//        [weakSelf.firstCollectionView.mj_header beginRefreshing];
-//        [weakSelf.secondCollectionView.mj_header beginRefreshing];
-//    }];
-
-    
-    
+     
     if ([self.isFirstRefresh isEqualToString:@"del"]){
         
         [self.FirstDataArray removeObject:self.FirstDataArray[self.firstIndex]];
@@ -101,23 +93,11 @@
         
     }
     
-    if ([self.isSecondRefresh isEqualToString:@"del"]){
-        
-        [self.secondDataArray removeObject:self.secondDataArray[self.secondIndex]];
-
-        
-        [self.secondCollectionView reloadData];
-    }
-    
     
     if (!([self.isFirstRefresh isEqualToString:@""] || [self.isFirstRefresh isEqualToString:@"del"])) {
         
         
           ODBazaarModel *model = self.FirstDataArray[self.firstIndex];
-        
-        
-        
-        NSLog(@"_____%@" , self.isFirstRefresh);
         
         
           model.task_status = self.isFirstRefresh;

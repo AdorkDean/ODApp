@@ -76,36 +76,19 @@
     
     
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(replyAction:) name:ODNotificationReplySuccess object:nil];
-
     
-    
-    if ([self.isFirstRefresh isEqualToString:@"refresh"]){
-        [self.FirstDataArray removeObjectAtIndex:self.firstIndex];
+    if ([self.isFirstRefresh isEqualToString:@"delSuccess"]){
+      
+        
+          [self.FirstDataArray removeObject:self.FirstDataArray[self.firstIndex]];
+        
+        
         [self.firstCollectionView reloadData];
     }
-    
-    if ([self.isSecondRefresh isEqualToString:@"refresh"]){
-        [self.secondDataArray removeObjectAtIndex:self.secondIndex];
-        [self.secondCollectionView reloadData];
-    }
-    
-
-    
     
     
     
 }
-
-
-//- (void)replyAction:(NSNotification *)text
-//{
-//    
-//    [self.firstCollectionView.mj_header beginRefreshing];
-//    [self.secondCollectionView.mj_header beginRefreshing];
-//    
-//}
-
 
 
 #pragma mark - 初始化
