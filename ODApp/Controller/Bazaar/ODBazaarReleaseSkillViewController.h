@@ -11,9 +11,8 @@
 #include "ODAPIManager.h"
 #import "UIButton+WebCache.h"
 #import "ODBazaarReleaseSkillTimeViewController.h"
-#import "MBProgressHUD.h"
 
-@interface ODBazaarReleaseSkillViewController : ODBaseViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIScrollViewDelegate, MBProgressHUDDelegate>
+@interface ODBazaarReleaseSkillViewController : ODBaseViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIScrollViewDelegate>
 
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)UITextField *titleTextField;
@@ -46,5 +45,4 @@
 @property(nonatomic,copy)NSString *swap_type;
 @property(nonatomic,copy)NSString *type;
 @property(nonatomic,copy)NSString *swap_id;
-@property (nonatomic, strong) MBProgressHUD *hud;
 @end
