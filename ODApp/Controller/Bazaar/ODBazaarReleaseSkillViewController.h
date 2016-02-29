@@ -13,7 +13,7 @@
 #import "ODBazaarReleaseSkillTimeViewController.h"
 #import "MBProgressHUD.h"
 
-@interface ODBazaarReleaseSkillViewController : ODBaseViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIScrollViewDelegate>
+@interface ODBazaarReleaseSkillViewController : ODBaseViewController<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextViewDelegate,UITextFieldDelegate,UIActionSheetDelegate,UIScrollViewDelegate, MBProgressHUDDelegate>
 
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)UITextField *titleTextField;

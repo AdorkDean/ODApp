@@ -21,6 +21,7 @@
 #import "ODPersonalCenterViewController.h"
 #import "ODThirdOrderController.h"
 
+
 @interface ODBazaarExchangeSkillDetailViewController : ODBaseViewController<UMSocialUIDelegate,UMSocialDataDelegate>
 
 @property(nonatomic,strong)UIScrollView *scrollView;

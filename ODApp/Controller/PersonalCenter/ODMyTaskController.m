@@ -576,7 +576,7 @@
             [weakSelf.firstCollectionView.mj_footer endRefreshing];
             
             if (tasks.count == 0) {
-                [weakSelf.firstCollectionView.mj_footer noticeNoMoreData];
+                [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
 
@@ -629,7 +629,7 @@
             [weakSelf.secondCollectionView reloadData];
             
             if (tasks.count == 0) {
-                [weakSelf.secondCollectionView.mj_footer noticeNoMoreData];
+                [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
         

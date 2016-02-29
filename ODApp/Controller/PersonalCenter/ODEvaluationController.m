@@ -230,7 +230,7 @@
             [weakSelf.firstCollectionView reloadData];
         
             if (dic.count == 0) {
-                [self.firstCollectionView.mj_footer noticeNoMoreData];
+                [self.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
             }
         
         }
@@ -293,7 +293,7 @@
             [weakSelf.secondCollectionView reloadData];
             
             if (dic.count == 0) {
-                [self.secondCollectionView.mj_footer noticeNoMoreData];
+                [self.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
             }
             
         }

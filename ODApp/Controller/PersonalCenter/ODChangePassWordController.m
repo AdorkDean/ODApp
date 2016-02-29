@@ -235,7 +235,6 @@
       
     self.managers = [AFHTTPRequestOperationManager manager];
     
-    __weak typeof (self)weakSelf = self;
     [self.managers GET:kChangePassWorldUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
       
