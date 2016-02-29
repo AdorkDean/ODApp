@@ -7,7 +7,7 @@
 //
 
 #import "ODCommunityDetailViewController.h"
-
+#import "WXApi.h"
 @interface ODCommunityDetailViewController ()<UMSocialUIDelegate>
 
 @end
@@ -50,38 +50,52 @@
 -(void)shareButtonClick
 {
        
-    @try {
+    
         
-        ODCommunityDetailModel *model = self.resultArray[0];
-        NSString *url = model.share[@"icon"];
-        NSString *content = model.share[@"desc"];
-        NSString *link = model.share[@"link"];
-        NSString *title = model.share[@"title"];
+        
+        if ([WXApi isWXAppInstalled]) {
+            
+            
+            [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
+            
+            
+            ODCommunityDetailModel *model = self.resultArray[0];
+            NSString *url = model.share[@"icon"];
+            NSString *content = model.share[@"desc"];
+            NSString *link = model.share[@"link"];
+            NSString *title = model.share[@"title"];
+            
+            
+            [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+            [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+            
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+            
+            [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+            
+            [UMSocialSnsService presentSnsIconSheetView:self
+                                                 appKey:kGetUMAppkey
+                                              shareText:content
+                                             shareImage:nil
+                                        shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                               delegate:self];
+            
+            
+        }else{
+            
+            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
+            
+            
+        }
 
-        
-        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
-        [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-        [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-        
-        [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-        
-        [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-        
-        [UMSocialSnsService presentSnsIconSheetView:self
-                                             appKey:@"569dda54e0f55a994f0021cf"
-                                          shareText:content
-                                         shareImage:nil
-                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                           delegate:self];
-        
-    }
-    @catch (NSException *exception) {
-//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
-        [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
-    }
+ 
 
 }
+
+
+
 
 -(void)createRequest
 {
@@ -156,7 +170,7 @@
             [weakSelf.tableView.mj_footer endRefreshing];
             
             if (result.count == 0) {
-                [weakSelf.tableView.mj_footer noticeNoMoreData];
+                [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -488,10 +502,10 @@
 {
     [super viewWillAppear:animated];
     if ([self.refresh isEqualToString:@"refresh"]) {
-        [self.tableView reloadData];
-        if (self.dataArray.count && self.tableView){
-           [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-        }
+//        [self.tableView reloadData];
+//        if (self.dataArray.count && self.tableView){
+//           [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+//        }
     }
 }
 

@@ -18,7 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *addressImgeView;
 
-@property (weak, nonatomic) IBOutlet UILabel *lineLabel;
+
 
 
 

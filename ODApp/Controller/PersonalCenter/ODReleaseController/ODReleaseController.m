@@ -2,8 +2,8 @@
 //  ODReleaseController.m
 //  ODApp
 //
-//  Created by 代征钏 on 16/2/18.
-//  Copyright © 2016年 Odong Org. All rights reserved.
+//  Created by Bracelet on 16/2/18.
+//  Copyright © 2016年 Odong Bracelet. All rights reserved.
 //
 
 #import "ODReleaseController.h"
@@ -65,7 +65,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     
     __weakSelf
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"my":@"1"};
-    [ODHttpTool getWithURL:ODPersonalReleaseTaskUrl parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlPersonalReleaseTask parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
      {
          if (self.pageCount == 1)
          {
@@ -76,7 +76,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
          
         if ([[model result]count] == 0)
         {
-            [weakSelf.collectionView.mj_footer noticeNoMoreData];
+            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
         }
         for (ODReleaseModel *md in [model result])
         {

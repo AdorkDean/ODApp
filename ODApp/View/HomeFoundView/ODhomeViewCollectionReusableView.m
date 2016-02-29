@@ -2,8 +2,8 @@
 //  ODhomeViewCollectionReusableView.m
 //  ODApp
 //
-//  Created by 代征钏 on 16/1/7.
-//  Copyright © 2016年 Odong-YG. All rights reserved.
+//  Created by Bracelet on 16/1/7.
+//  Copyright © 2016年 Odong Bracelet. All rights reserved.
 //
 
 #import "ODhomeViewCollectionReusableView.h"
@@ -92,7 +92,7 @@
         self.hotActivityView = [ODClassMethod creatViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.activityView.frame) + 6, kScreenSize.width, 160) tag:0 color:@"#ffffff"];
         [self addSubview:self.hotActivityView];
         
-        UIImageView *hotActivityImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(ODLeftMargin, 5, 17, 16) imageName:@"icon_Hot activity" tag:0];
+        UIImageView *hotActivityImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(ODLeftMargin, 5, 17, 16) imageName:@"icon_Hot activityNew" tag:0];
         [self.hotActivityView addSubview:hotActivityImageView];
         
         UILabel *hotActivityLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(CGRectGetMaxX(hotActivityImageView.frame) + 7.5, 5, 60, 20) text:@"热门活动" font:14 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
@@ -105,7 +105,7 @@
         self.searchCircleView = [ODClassMethod creatViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.hotActivityView.frame) + 6, kScreenSize.width, 198) tag:0 color:@"#ffffff"];
         [self addSubview:self.searchCircleView];
         
-        UIImageView *searchCircleImage = [ODClassMethod creatImageViewWithFrame:CGRectMake(ODLeftMargin, 10, 15, 12) imageName:@"icon_circle_small" tag:0];
+        UIImageView *searchCircleImage = [ODClassMethod creatImageViewWithFrame:CGRectMake(ODLeftMargin, 10, 15, 12.5) imageName:@"icon_circle_smallNew" tag:0];
         UILabel *searchCircleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(CGRectGetMaxX(searchCircleImage.frame)+ 7.5, 5, 60, 20) text:@"寻圈子" font:14 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
         [self.searchCircleView addSubview:searchCircleImage];
         [self.searchCircleView addSubview:searchCircleLabel];
@@ -147,11 +147,15 @@
         self.changeSkillView = [ODClassMethod creatViewWithFrame:CGRectMake(0, CGRectGetMaxY(self.searchCircleView.frame) + 6, kScreenSize.width, 35) tag:0 color:@"#ffffff"];
         [self addSubview: self.changeSkillView];
         
-        UIImageView *changeSkillImage = [ODClassMethod creatImageViewWithFrame:CGRectMake(ODLeftMargin, 9, 20, 16) imageName:@"icon_Skill_small" tag:0];
+        UIImageView *changeSkillImage = [ODClassMethod creatImageViewWithFrame:CGRectMake(ODLeftMargin, 9, 18, 14) imageName:@"icon_Skill_smallNew" tag:0];
         UILabel *changeSkillLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(CGRectGetMaxX(changeSkillImage.frame) + 10, 10, 80, 14) text:@"技能交换" font:14 alignment:@"left" color:@"#000000" alpha:1];
         
         [self.changeSkillView addSubview:changeSkillImage];
-        [self.changeSkillView addSubview:changeSkillLabel];        
+        [self.changeSkillView addSubview:changeSkillLabel];
+        
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.changeSkillView.frame), ODLeftMargin, 1)];
+        lineView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        [self addSubview:lineView];
     }
     return self;
 }

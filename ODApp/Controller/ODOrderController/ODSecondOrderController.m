@@ -102,7 +102,7 @@
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width,kScreenSize.height - 115) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[ODOrderSecondHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
@@ -176,7 +176,6 @@
     NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time": @"" , @"user_address_id":self.addressId , @"comment": @""};
 
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    __weak typeof (self)weakSelf = self;
     [self.orderManager GET:kGetOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         

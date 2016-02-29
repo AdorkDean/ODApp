@@ -85,16 +85,12 @@
     
     
     
-    NSLog(@"_____%@" , self.price);
-    
-    
     
     NSDictionary *parameters = @{@"amount":self.price,@"account":self.withdrawalView.payAddressTextView.text ,  @"open_id":openId};
     
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    __weak typeof (self)weakSelf = self;
     [self.manager GET:kBalanceUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
      

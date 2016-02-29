@@ -5,7 +5,7 @@
 //  ODApp
 //
 //  Created by Odong-YG on 15/12/17.
-//  Copyright © 2015年 Odong-YG. All rights reserved.
+//  Copyright © 2015年 Odong Bracelet. All rights reserved.
 //
 
 #import "ODBazaarViewController.h"
@@ -109,7 +109,7 @@
 #pragma mark - 显示定位城市
 - (void)locationCity
 {
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_location"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_locationNew"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
 }
 
 #pragma mark - Request Data
@@ -119,7 +119,7 @@
 {
     __weakSelf
     NSDictionary *parameter = @{@"region_name":@""};
-    [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
     {
         ODLocationModel *mode = [model result];
         weakSelf.cityListArray = mode.all;
@@ -137,7 +137,7 @@
     [weakSelf.pictureArray removeAllObjects];
     [weakSelf.pictureIdArray removeAllObjects];
     [weakSelf.collectionView reloadData];
-    [ODHttpTool getWithURL:ODHomeFoundUrl parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlHomeFound parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
      {
          [weakSelf.pictureArray addObjectsFromArray:[[[model result]activitys]valueForKeyPath:@"detail_md5"]];
          [weakSelf.pictureIdArray addObjectsFromArray:[[[model result]activitys] valueForKeyPath:@"id"]];
@@ -676,10 +676,10 @@ updatingLocation:(BOOL)updatingLocation
         return;
     }
     //通过 AMapPOISearchResponse 对象处理搜索结果
-    for (AMapPOI *p in response.pois)
-    {
-        NSString *strPoi = [NSString stringWithFormat:@"%@", p.name];
-    }
+//    for (AMapPOI *p in response.pois)
+//    {
+//        NSString *strPoi = [NSString stringWithFormat:@"%@", p.name];
+//    }
 }
 
 //实现逆地理编码的回调函数

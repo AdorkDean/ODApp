@@ -8,6 +8,7 @@
 
 #import "ODBazaarExchangeSkillDetailViewController.h"
 #import "ODSecondOrderController.h"
+#import "WXApi.h"
 @interface ODBazaarExchangeSkillDetailViewController ()
 
 
@@ -49,28 +50,49 @@
     
     @try {
         
-        ODBazaarExchangeSkillModel *model = self.dataArray[0];
-        NSString *url = model.share[@"icon"];
-        NSString *content = model.share[@"desc"];
-        NSString *link = model.share[@"link"];
-        NSString *title = model.share[@"title"];
         
         
-        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        if ([WXApi isWXAppInstalled]) {
+            
+            
+            [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
+            
+            
+            ODBazaarExchangeSkillModel *model = self.dataArray[0];
+            NSString *url = model.share[@"icon"];
+            NSString *content = model.share[@"desc"];
+            NSString *link = model.share[@"link"];
+            NSString *title = model.share[@"title"];
+            
+            
+            [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+            [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+            
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+            
+            [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+            
+            [UMSocialSnsService presentSnsIconSheetView:self
+                                                 appKey:kGetUMAppkey
+                                              shareText:content
+                                             shareImage:nil
+                                        shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                               delegate:self];
+            
+        }else{
+            
+            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
+            
+            
+        }
+
         
-        [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-        [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
         
-        [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
         
-        [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
         
-        [UMSocialSnsService presentSnsIconSheetView:self
-                                             appKey:kGetUMAppkey
-                                          shareText:content
-                                         shareImage:nil
-                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                           delegate:self];
+        
         
     }
     @catch (NSException *exception) {
@@ -406,8 +428,9 @@
     
     if(response.responseCode == UMSResponseCodeSuccess)
     {
+       
         NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:self.swap_id,@"obj_id",@"3",@"type",@"微信",@"share_platform", nil];
-        [ODHttpTool getWithURL:kCallbackUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
+        [ODHttpTool getWithURL:ODUrlShareCallBack parameters:infoDic modelClass:[NSObject class] success:^(id model)
          {
 //             [ODProgressHUD showSuccessWithStatus:@"分享成功"];
          }
@@ -418,7 +441,10 @@
         
         
     }
+
 }
+
+- (void)didFinishGetUMSocialDataResponse:(UMSocialResponseEntity *)response { }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

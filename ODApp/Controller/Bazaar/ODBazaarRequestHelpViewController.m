@@ -229,7 +229,7 @@
             [weakSelf.collectionView.mj_footer endRefreshing];
             
             if (tasks.count == 0) {
-                [weakSelf.collectionView.mj_footer noticeNoMoreData];
+                [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
             
         }

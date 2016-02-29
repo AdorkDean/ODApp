@@ -61,7 +61,7 @@
 
 @property (nonatomic, assign) int is_online;
 
-@property (nonatomic, assign) int activity_id;
+@property (nonatomic, assign) NSInteger activity_id;
 
 @property (nonatomic, assign) int love_id;
 

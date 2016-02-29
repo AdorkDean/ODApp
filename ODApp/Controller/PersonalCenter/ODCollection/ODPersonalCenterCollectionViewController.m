@@ -94,7 +94,7 @@
             
             
             if (result.count == 0) {
-                [weakSelf.collectionView.mj_footer noticeNoMoreData];
+                [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
            
         }

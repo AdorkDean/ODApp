@@ -2,8 +2,8 @@
 //  ODLocationController.m
 //  ODApp
 //
-//  Created by 代征钏 on 16/2/2.
-//  Copyright © 2016年 Odong-YG. All rights reserved.
+//  Created by Bracelet on 16/2/2.
+//  Copyright © 2016年 Odong Bracelet. All rights reserved.
 //
 
 #import "ODLocationController.h"
@@ -36,7 +36,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 {
     __weakSelf
     NSDictionary *parameter = @{@"region_name":@"上海"};
-    [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
     {
         ODLocationModel *mode = [model result];
         weakSelf.cityListArray = [mode.all valueForKeyPath:@"name"];

@@ -11,7 +11,7 @@
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
 #import "ChoseCenterModel.h"
-#import "ODCenterActivityViewController.h"
+
 @interface ODChoseCenterController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
@@ -27,14 +27,12 @@
 
 @implementation ODChoseCenterController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-     self.navigationItem.title = @"选择中心";
-     [self createCollectionView];
-     [self getData];
-    
+    self.navigationItem.title = @"选择中心";
+    [self createCollectionView];
+    [self getData];    
 }
 
 #pragma mark - 请求数据

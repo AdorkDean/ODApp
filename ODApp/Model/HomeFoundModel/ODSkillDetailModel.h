@@ -2,7 +2,7 @@
 //  ODSkillDetailModel.h
 //  ODApp
 //
-//  Created by 代征钏 on 16/2/1.
+//  Created by Bracelet on 16/2/1.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 

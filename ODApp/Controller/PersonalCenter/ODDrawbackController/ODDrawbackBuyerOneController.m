@@ -2,8 +2,8 @@
 //  ODDrawbackBuyerOneController.m
 //  ODApp
 //
-//  Created by 代征钏 on 16/2/20.
-//  Copyright © 2016年 Odong Org. All rights reserved.
+//  Created by Bracelet on 16/2/20.
+//  Copyright © 2016年 Odong Bracelet. All rights reserved.
 //
 
 #import "ODDrawbackBuyerOneController.h"
@@ -44,20 +44,12 @@
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     [self.view addSubview:self.scrollView];
     
-#pragma mark - 动态设置 退款理由 的高度
+#pragma mark - 退款金额
+    // 退款金额 高度
     float drawBackHeight = 43;
-    float drawbackReasonHeight;
-    if (self.isSelectReason)
-    {
-        drawbackReasonHeight = (drawBackHeight + 1) * 5 - 1;
-    }
-    else
-    {
-        drawbackReasonHeight = [ODHelp textHeightFromTextString:self.drawbackReason width:KScreenWidth - ODLeftMargin * 2 miniHeight:drawBackHeight fontSize:13.5];
-    }
+    
     self.drawbackMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, drawBackHeight)];
     self.drawbackMoneyLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-    
     NSString *drawbackMoneyStr = [NSString stringWithFormat:@"您的退款金额:%@元",self.darwbackMoney];
     NSMutableAttributedString *moneyNumberStr = [[NSMutableAttributedString alloc]initWithString:drawbackMoneyStr];
     [moneyNumberStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange([moneyNumberStr length] - self.darwbackMoney.length -1, self.darwbackMoney.length)];
@@ -67,6 +59,17 @@
     self.drawbackMoneyLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.drawbackMoneyLabel];
     
+#pragma mark - 动态设置 退款理由 的高度
+    // 退款原因内容 高度
+    float drawbackReasonHeight;
+    if (self.isSelectReason)
+    {
+        drawbackReasonHeight = (drawBackHeight + 1) * 5 - 1;
+    }
+    else
+    {
+        drawbackReasonHeight = [ODHelp textHeightFromTextString:self.drawbackReason width:KScreenWidth - ODLeftMargin * 2 miniHeight:drawBackHeight fontSize:13.5];
+    }
     self.drawbackReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackMoneyLabel.frame), KScreenWidth, 22)];
     self.drawbackReasonLabel.text = @"退款原因";
     self.drawbackReasonLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
@@ -81,9 +84,10 @@
 #pragma mark - 退款原因版块 可选择
     if (self.isSelectReason)
     {
-        float reasonLabelLeftMargin = 25;
+        // 退款原因Label 距离 屏幕左边的 距离
+        float reasonLabelLeftMargin = ODLeftMargin + 25;
         
-        self.drawbackReasonOneLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin + reasonLabelLeftMargin, 0, KScreenWidth, drawBackHeight)];
+        self.drawbackReasonOneLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, 0, KScreenWidth, drawBackHeight)];
         self.drawbackReasonOneLabel.text = @"卖家自身原因无法服务";
         self.drawbackReasonOneLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackReasonOneLabel.font = [UIFont systemFontOfSize:13.5];
@@ -97,7 +101,7 @@
         [self.drawbackReasonContentView addSubview:self.drawbackReasonOneButton];
         
         
-        self.drawbackReasonTwoLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin + reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonOneLabel.frame) + 1, KScreenWidth, drawBackHeight)];
+        self.drawbackReasonTwoLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonOneLabel.frame) + 1, KScreenWidth, drawBackHeight)];
         self.drawbackReasonTwoLabel.text = @"对服务质量不满意";
         self.drawbackReasonTwoLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackReasonTwoLabel.font = [UIFont systemFontOfSize:13.5];
@@ -111,7 +115,7 @@
         [self.drawbackReasonContentView addSubview:self.drawbackReasonTwoButton];
         
         
-        self.drawbackReasonThreeLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin + reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonTwoLabel.frame) + 1, KScreenWidth, drawBackHeight)];
+        self.drawbackReasonThreeLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonTwoLabel.frame) + 1, KScreenWidth, drawBackHeight)];
         self.drawbackReasonThreeLabel.text = @"未按时交付服务";
         self.drawbackReasonThreeLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackReasonThreeLabel.font = [UIFont systemFontOfSize:13.5];
@@ -122,11 +126,10 @@
         self.drawbackReasonThreeButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonTwoLabel.frame) + 1 + 12.5, 20, 20)];
         [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
         [self.drawbackReasonThreeButton addTarget:self action:@selector(drawbackReasonThreeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        
         [self.drawbackReasonContentView addSubview:self.drawbackReasonThreeButton];
         
         
-        self.drawbackReasonFourLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin + reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonThreeLabel.frame) + 1, KScreenWidth, drawBackHeight)];
+        self.drawbackReasonFourLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonThreeLabel.frame) + 1, KScreenWidth, drawBackHeight)];
         self.drawbackReasonFourLabel.text = @"双方已协商好退款";
         self.drawbackReasonFourLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackReasonFourLabel.font = [UIFont systemFontOfSize:13.5];
@@ -137,11 +140,10 @@
         self.drawbackReasonFourButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonThreeLabel.frame) + 1 + 12.5, 20, 20)];
         [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
         [self.drawbackReasonFourButton addTarget:self action:@selector(drawbackReasonFourButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        
         [self.drawbackReasonContentView addSubview:self.drawbackReasonFourButton];
         
         
-        self.drawbackReasonOtherLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin +reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonFourLabel.frame) + 1, KScreenWidth, drawBackHeight)];
+        self.drawbackReasonOtherLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonFourLabel.frame) + 1, KScreenWidth, drawBackHeight)];
         self.drawbackReasonOtherLabel.text = @"其它";
         self.drawbackReasonOtherLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackReasonOtherLabel.font = [UIFont systemFontOfSize:13.5];
@@ -152,7 +154,6 @@
         self.drawbackReasonOtherButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonFourLabel.frame) + 1 + 12.5, 20, 20)];
         [self.drawbackReasonOtherButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
         [self.drawbackReasonOtherButton addTarget:self action:@selector(drawbackReasonOtherButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        
         [self.drawbackReasonContentView addSubview:self.drawbackReasonOtherButton];
         
         for (int i = 1; i < 5; i++)
@@ -165,7 +166,7 @@
 #pragma mark - 退款原因版块 不可选择
     else
     {
-        self.drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - ODLeftMargin * 2, drawBackHeight)];
+        self.drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - ODLeftMargin * 2, drawbackReasonHeight)];
         if (self.drawbackReason == nil)
         {
             self.drawbackReason = @"";
@@ -197,7 +198,7 @@
         self.refuseReasonContentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         [self.scrollView addSubview:self.refuseReasonContentView];
         
-        self.refuseReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - ODLeftMargin * 2, drawBackHeight)];
+        self.refuseReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - ODLeftMargin * 2, drawbackReasonHeight)];
         self.refuseReasonContentLabel.text = self.refuseReason;
         self.refuseReasonContentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.refuseReasonContentLabel.numberOfLines = 0;
@@ -352,7 +353,7 @@
         [self.drawbackReasonContentView addSubview:self.drawbackStateTextView];
         
         self.contentPlaceholderLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, kScreenSize.width-35, 20)];
-        self.contentPlaceholderLabel.text = @"请输入适当的退款理由";
+        self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
         self.contentPlaceholderLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
         self.contentPlaceholderLabel.font = [UIFont systemFontOfSize:14];
         self.contentPlaceholderLabel.userInteractionEnabled = NO;
@@ -447,13 +448,6 @@
         if ([responseObject[@"status"] isEqualToString:@"success"])
         {
             [ODProgressHUD showInfoWithStatus:@"申请退款成功"];
-
-//            //创建通知
-//            NSNotification *notification =[NSNotification notificationWithName:ODNotificationOrderListRefresh object:nil userInfo:nil];
-//            //通过通知中心发送通知
-//            [[NSNotificationCenter defaultCenter] postNotification:notification];
-            
-            
           
             NSNotification *notification =[NSNotification notificationWithName:ODNotificationMyOrderThirdRefresh object:nil userInfo:nil];
             
@@ -645,7 +639,7 @@
     self.cancelOrderView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
     [self.cancelOrderView.cancelButton addTarget:self action:@selector(cancelView:) forControlEvents:UIControlEventTouchUpInside];
     [self.cancelOrderView.submitButton addTarget:self action:@selector(submitAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.cancelOrderView.reasonTextView.text = @"请输入拒绝原因";
+    self.cancelOrderView.reasonTextView.text = @" 请输入拒绝原因";
     self.cancelOrderView.reasonTextView.delegate = self;
     [[[UIApplication sharedApplication]keyWindow] addSubview:self.cancelOrderView];
 }
@@ -697,9 +691,9 @@
 
 - (void)submitAction:(UIButton *)sender
 {
-    if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
+    if ([self.cancelOrderView.reasonTextView.text isEqualToString:@" 请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
     {
-        [ODProgressHUD showInfoWithStatus:@"请输入拒绝原因"];
+        [ODProgressHUD showInfoWithStatus:@" 请输入拒绝原因"];
     }
     else
     {
@@ -717,7 +711,7 @@
 {
     if (textView == self.cancelOrderView.reasonTextView)
     {
-        if ([textView.text isEqualToString:@"请输入拒绝原因"])
+        if ([textView.text isEqualToString:@" 请输入拒绝原因"])
         {
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
@@ -729,7 +723,7 @@
 {
     if (textView.text.length == 0)
     {
-        self.contentPlaceholderLabel.text = @"请输入适当的退款理由";
+        self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
     }
     else
     {
@@ -741,9 +735,9 @@
 {
     if (textView == self.cancelOrderView.reasonTextView)
     {
-        if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
+        if ([self.cancelOrderView.reasonTextView.text isEqualToString:@" 请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
         {
-            self.cancelOrderView.reasonTextView.text = @"请输入拒绝原因";
+            self.cancelOrderView.reasonTextView.text = @" 请输入拒绝原因";
             self.cancelOrderView.reasonTextView.textColor = [UIColor lightGrayColor];
         }
     }
@@ -751,7 +745,7 @@
     {
         if (textView.text.length == 0)
         {
-            self.contentPlaceholderLabel.text = @"请输入适当的退款理由";
+            self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
         }
     }
 }

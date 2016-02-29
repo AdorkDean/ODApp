@@ -2,8 +2,8 @@
 //  ODFindFavorableController.m
 //  ODApp
 //
-//  Created by 代征钏 on 16/2/20.
-//  Copyright © 2016年 Odong Org. All rights reserved.
+//  Created by Bracelet on 16/2/20.
+//  Copyright © 2016年 Odong Bracelet. All rights reserved.
 //
 
 #import "ODFindFavorableController.h"

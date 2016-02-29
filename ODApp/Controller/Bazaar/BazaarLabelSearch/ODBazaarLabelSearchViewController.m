@@ -155,7 +155,7 @@
             }
             
             if (tasks.count == 0) {
-                [self.collectionView.footer noticeNoMoreData];
+                [self.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
             [ODProgressHUD dismiss];
         }

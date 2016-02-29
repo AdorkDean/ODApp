@@ -1,8 +1,5 @@
 #import <UIKit/UIKit.h>
 
-#pragma mark - 蒙版提示语
-NSString * const ODAlertIsLoading = @"正在加载。。。";
-
 #pragma mark - UI相关常量
 /** TabBar的高度 */
 CGFloat const ODTabBarHeight = 55;
@@ -53,7 +50,6 @@ NSString * const ODNotificationEditSkill = @"ODNotificationEditSkill";
 /**  编辑技能创建服务时间试图 */
 NSString * const ODNotificationCreateServiceTimeView = @"ODNotificationCreateServiceTimeView";
 
-
 /**  支付成功通知 */
 NSString * const ODNotificationPaySuccess = @"ODNotificationPaySuccess";
 
@@ -63,14 +59,13 @@ NSString * const ODNotificationPayfail = @"ODNotificationPayfail";
 /**  取消预约通知 */
 NSString * const ODNotificationCancelOrder = @"ODNotificationCancelOrder";
 
-
 /**  退出成功刷新集市状态 */
 NSString * const ODNotificationQuit = @"ODNotificationQuit";
 
 /**  回复成功后刷新 */
 NSString * const ODNotificationReplySuccess = @"ODNotificationReplySuccess";
 
-/** 定位刷新 */
+/** 定位成功刷新 */
 NSString * const ODNotificationLocationSuccessRefresh = @"ODNotificationLocationSuccessRefresh";
 
 /** 订单刷新 */
@@ -78,7 +73,6 @@ NSString * const ODNotificationOrderListRefresh = @"ODNotificationOrderListRefre
 
 /**  点击收藏的通知 */
 NSString * const ODNotificationloveSkill = @"ODNotificationloveSkill";
-
 
 /** 已购买二级页面通知 */
 NSString * const ODNotificationMyOrderSecondRefresh = @"ODNotificationMyOrderSecondRefresh";
@@ -100,15 +94,16 @@ NSString * const ODBaseURL = @"http://woquapi.odong.com";
 NSString * const ODBaseURL = @"http://woquapi.odong.com";
 #endif
 
-NSString * const ODCityListUrl = @"/1.0/other/city/list";
-NSString * const ODHomeFoundUrl = @"/1.0/other/home";
-NSString * const KActivityListUrl = @"/1.0/store/activity/list";
-NSString * const KActivityDetailUrl = @"/1.0/store/apply/detail2";
-NSString * const KActivityApplyUrl = @"/1.0/store/activity/apply";
-NSString * const kCallbackUrl = @"/1.0/other/share/callback";
-NSString * const ODPersonalReleaseTaskUrl = @"/1.0/swap/list";
+NSString * const ODUrlCityList = @"/1.0/other/city/list";
+NSString * const ODUrlHomeFound = @"/1.0/other/home";
+NSString * const ODUrlActivityList = @"/1.0/store/activity/list";
+NSString * const ODUrlActivityDetail = @"/1.0/store/apply/detail2";
+NSString * const ODUrlActivityApply = @"/1.0/store/activity/apply";
+NSString * const ODUrlShareCallBack = @"/1.0/other/share/callback";
+NSString * const ODUrlPersonalReleaseTask = @"/1.0/swap/list";
 NSString * const ODUrlLoveAdd = @"/1.0/other/love/add";
 NSString * const ODUrlLoveDelete = @"/1.0/other/love/del";
+NSString * const ODUrlMyApplyActivity = @"/1.0/store/apply/my";
 
 
 NSString * const ODPersonReleaseTaskDeleteUrl = @"http://woquapi.odong.com/1.0/swap/del";
@@ -161,7 +156,6 @@ NSString * const ODReceiveDrawbackUrl = @"http://woquapi.odong.com/1.0/swap/conf
 NSString * const kMyOrderRecordUrl = @"http://woquapi.odong.com/1.0/store/orders";
 NSString * const kMyOrderDetailUrl = @"http://woquapi.odong.com/1.0/store/info/order";
 
-NSString * const kMyApplyActivityUrl = @"http://woquapi.odong.com/1.0/store/apply/my";
 NSString * const kCancelMyOrderUrl = @"http://woquapi.odong.com/1.0/store/cancel/order";
 NSString * const kOthersInformationUrl = @"http://woquapi.odong.com/1.0/user/info";
 NSString * const kSaveAddressUrl = @"http://woquapi.odong.com/1.0/user/address/add";

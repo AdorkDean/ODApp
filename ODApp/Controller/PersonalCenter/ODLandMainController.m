@@ -30,6 +30,7 @@
 #import "ODBalanceController.h"
 #import "ODMySellController.h"
 #import "ODEvaluationController.h"
+#import "WXApi.h"
 @interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
@@ -214,7 +215,6 @@
     else if (indexPath.section == 3)
     {
         ODMyApplyActivityController *vc = [[ODMyApplyActivityController alloc] init];
-        vc.open_id = self.model.open_id;
         vc.isRefresh = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -254,24 +254,41 @@
     }
    else if (indexPath.section == 10)
     {
-        NSString *url = self.model.share[@"icon"];
-        NSString *content = self.model.share[@"desc"];
-        NSString *link = self.model.share[@"link"];
-        NSString *title = self.model.share[@"title"];
-        
-        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-        [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-        [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-        [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-        [UMSocialSnsService presentSnsIconSheetView:self
-                                             appKey:kGetUMAppkey
-                                          shareText:content
-                                         shareImage:nil
-                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                           delegate:self];
+        if ([WXApi isWXAppInstalled]) {
+            
+            
+            [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
+            
+            
+            NSString *url = self.model.share[@"icon"];
+            NSString *content = self.model.share[@"desc"];
+            NSString *link = self.model.share[@"link"];
+            NSString *title = self.model.share[@"title"];
+            
+            [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+            [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+            [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+            [UMSocialSnsService presentSnsIconSheetView:self
+                                                 appKey:kGetUMAppkey
+                                              shareText:content
+                                             shareImage:nil
+                                        shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                               delegate:self];
+            
+            
+        }else{
+            
+            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
+            
+            
+        }
+
     }
 }
+
+
 
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

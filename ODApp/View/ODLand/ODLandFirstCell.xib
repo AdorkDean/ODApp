@@ -44,18 +44,18 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cpz-Y8-mXb">
-                        <rect key="frame" x="438" y="21" width="38" height="38"/>
+                        <rect key="frame" x="451" y="21" width="38" height="38"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="38" id="AND-ZW-FX5"/>
                             <constraint firstAttribute="height" constant="38" id="CRv-eS-5Me"/>
                         </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-zG-j3y">
-                        <rect key="frame" x="486" y="25" width="20" height="20"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="场地预约icon2" translatesAutoresizingMaskIntoConstraints="NO" id="aPq-zG-j3y">
+                        <rect key="frame" x="499" y="34" width="7" height="12"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="IoE-3g-ORD"/>
-                            <constraint firstAttribute="width" constant="20" id="YnW-Ca-GeR"/>
+                            <constraint firstAttribute="height" constant="12" id="IoE-3g-ORD"/>
+                            <constraint firstAttribute="width" constant="7" id="YnW-Ca-GeR"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -75,7 +75,7 @@
                 <constraint firstAttribute="trailing" secondItem="YKp-Jl-7gc" secondAttribute="trailing" constant="90" id="Wnk-oy-TAl"/>
                 <constraint firstAttribute="trailing" secondItem="aPq-zG-j3y" secondAttribute="trailing" constant="10" id="Z6e-Vj-3WO"/>
                 <constraint firstItem="aPq-zG-j3y" firstAttribute="leading" secondItem="Cpz-Y8-mXb" secondAttribute="trailing" constant="10" id="sSW-8I-u6O"/>
-                <constraint firstItem="aPq-zG-j3y" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="25" id="sfz-k7-iu7"/>
+                <constraint firstItem="aPq-zG-j3y" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="34" id="sfz-k7-iu7"/>
                 <constraint firstItem="7DA-lh-xNf" firstAttribute="leading" secondItem="O7F-aF-Voa" secondAttribute="trailing" constant="10" id="tND-KM-FPO"/>
                 <constraint firstItem="Cpz-Y8-mXb" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="21" id="vF5-C4-a5u"/>
                 <constraint firstAttribute="trailing" secondItem="Cpz-Y8-mXb" secondAttribute="trailing" constant="35" id="zDL-Ri-BXG"/>
@@ -93,10 +93,10 @@
                 <outlet property="signatureLabel" destination="7DA-lh-xNf" id="IEd-Y7-gtY"/>
                 <outlet property="userImageView" destination="O7F-aF-Voa" id="r7y-n5-I4H"/>
             </connections>
-            <point key="canvasLocation" x="523" y="180.5"/>
+            <point key="canvasLocation" x="608" y="174.5"/>
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="rightjiantou" width="30" height="30"/>
+        <image name="场地预约icon2" width="7" height="12"/>
     </resources>
 </document>

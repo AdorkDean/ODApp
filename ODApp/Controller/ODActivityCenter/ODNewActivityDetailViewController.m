@@ -22,7 +22,7 @@
 #import "UMSocial.h"
 #import "ODCenterDetailController.h"
 #import "ODApplyListViewController.h"
-
+#import "WXApi.h"
 @interface ODNewActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,UMSocialUIDelegate,ODPersonalCenterVCDelegate ,UMSocialDataDelegate>
 {
     BOOL hasload;
@@ -127,6 +127,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     }
     return _baseScrollV;
 }
+
 
 - (UIImageView *)headImageView
 {
@@ -316,7 +317,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 {
      __weakSelf
     NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue]};
-    [ODHttpTool getWithURL:KActivityDetailUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlActivityDetail parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
      {
          weakSelf.resultModel = [model result];
          [weakSelf analyzeData];
@@ -533,23 +534,39 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 - (void)share:(UIButton *)sender
 {
     
-    NSString *url = self.resultModel.share[@"icon"];
-    NSString *content = self.resultModel.share[@"desc"];
-    NSString *link = self.resultModel.share[@"link"];
-    NSString *title = self.resultModel.share[@"title"];
-    
-    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-    [UMSocialSnsService presentSnsIconSheetView:self
-                                         appKey:kGetUMAppkey
-                                      shareText:content
-                                     shareImage:nil
-                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                       delegate:self];
-    
+    if ([WXApi isWXAppInstalled]) {
+        
+        
+        [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
+        
+        
+        NSString *url = self.resultModel.share[@"icon"];
+        NSString *content = self.resultModel.share[@"desc"];
+        NSString *link = self.resultModel.share[@"link"];
+        NSString *title = self.resultModel.share[@"title"];
+        
+        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+        [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+        [UMSocialSnsService presentSnsIconSheetView:self
+                                             appKey:kGetUMAppkey
+                                          shareText:content
+                                         shareImage:nil
+                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                           delegate:self];
+
+        
+        
+        
+    }else{
+        
+        [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
+        
+        
+    }
+
     
     
     
@@ -599,7 +616,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 - (void)reportRequest
 {
     NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id", nil];
-    [ODHttpTool getWithURL:KActivityApplyUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlActivityApply parameters:infoDic modelClass:[NSObject class] success:^(id model)
      {
          [self requestData];
          self.reportButton.enabled = NO;
@@ -620,12 +637,15 @@ static NSString * const detailInfoCell = @"detailInfoCell";
    
     if(response.responseCode == UMSResponseCodeSuccess)
     {
+        
+        
+        
         sharedTimes ++;
        [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %zd",sharedTimes] forState:UIControlStateNormal];
         
         
         NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"obj_id",@"4" ,@"type",@"微信",@"share_platform", nil];
-        [ODHttpTool getWithURL:kCallbackUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
+        [ODHttpTool getWithURL:ODUrlShareCallBack parameters:infoDic modelClass:[NSObject class] success:^(id model)
          {
              
          }
@@ -635,8 +655,8 @@ static NSString * const detailInfoCell = @"detailInfoCell";
          }];
 
         
-    }
-}
+    }}
 
+- (void)didFinishGetUMSocialDataResponse:(UMSocialResponseEntity *)response { }
 
 @end

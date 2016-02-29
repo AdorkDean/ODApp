@@ -108,13 +108,7 @@
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             
             
-            
-            
-            
-            
-     
-            
-            
+                       
             
             ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
             vc.swap_type = self.swap_type;
@@ -210,20 +204,36 @@
 {
     
     if ([self.payType isEqualToString:@"1"]) {
-        if ([self.isPay isEqualToString:@"1"]) {
+        
+        
+        
+        if ([WXApi isWXAppInstalled]) {
             
-         
-            [ODProgressHUD showInfoWithStatus:@"该订单已支付"];
-            
-            
+            if ([self.isPay isEqualToString:@"1"]) {
+                
+                
+                [ODProgressHUD showInfoWithStatus:@"该订单已支付"];
+                
+                
+            }else{
+                
+                [self payMoney];
+                
+                
+                
+            }
+
         }else{
             
-            [self payMoney];
             
-            
-            
+            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
         }
+        
 
+        
+        
+        
+   
     }else{
         
         

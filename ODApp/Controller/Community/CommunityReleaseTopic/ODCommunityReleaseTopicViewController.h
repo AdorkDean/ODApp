@@ -14,7 +14,7 @@
 #import "MBProgressHUD.h"
 
 
-@interface ODCommunityReleaseTopicViewController : ODBaseViewController<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate>
+@interface ODCommunityReleaseTopicViewController : ODBaseViewController<UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UIAlertViewDelegate,MBProgressHUDDelegate>
 
 @property(nonatomic,strong)UIScrollView *scrollView;
 @property(nonatomic,strong)UITextView *titleTextView;
