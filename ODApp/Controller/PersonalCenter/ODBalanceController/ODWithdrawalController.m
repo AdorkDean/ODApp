@@ -85,9 +85,6 @@
     
     
     
-    NSLog(@"_____%@" , self.price);
-    
-    
     
     NSDictionary *parameters = @{@"amount":self.price,@"account":self.withdrawalView.payAddressTextView.text ,  @"open_id":openId};
     

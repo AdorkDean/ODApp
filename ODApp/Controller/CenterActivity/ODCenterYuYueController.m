@@ -120,7 +120,7 @@
 - (void)createTableView
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.tableHeaderView = self.yuYueView;

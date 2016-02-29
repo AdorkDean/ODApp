@@ -82,7 +82,7 @@
                 <outlet property="withdrawalButton" destination="ho5-7g-3Vl" id="v6B-QU-ecF"/>
                 <outlet property="withdrawalDetailButton" destination="yMF-ai-B0h" id="vIp-bQ-j48"/>
             </connections>
-            <point key="canvasLocation" x="530" y="342"/>
+            <point key="canvasLocation" x="674" y="357"/>
         </view>
     </objects>
     <resources>
