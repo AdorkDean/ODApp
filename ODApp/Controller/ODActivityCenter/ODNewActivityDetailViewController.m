@@ -163,6 +163,8 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         _infoTableView.dataSource = self;
         _infoTableView.tableFooterView = [UIView new];
         [_infoTableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailInfoViewCell class]) bundle:nil] forCellReuseIdentifier:detailInfoCell];
+        _infoTableView.separatorColor = [UIColor colorWithHexString:@"e6e6e6" alpha:1];
+        _infoTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         [_infoTableView addLineOnBottom];
         [self.baseScrollV addSubview:self.infoTableView];
     }
