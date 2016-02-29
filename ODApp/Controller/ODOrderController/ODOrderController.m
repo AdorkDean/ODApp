@@ -386,11 +386,20 @@
     for (int i = 0; i < 7; i++) {
         DataButton *button = [[DataButton alloc] initWithFrame: CGRectMake(5 + i * self.scroller.frame.size.width / 3, 5 , self.scroller.frame.size.width / 3 - 10, 40)];
         if (i == 0) {
-            button.layer.borderColor = [UIColor colorWithHexString:@"#ff6666" alpha:1].CGColor;
+            
             button.dataLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
             button.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+            button.layer.masksToBounds = YES;
+            button.layer.cornerRadius = 5;
+            button.layer.borderColor = [UIColor colorWithHexString:@"#ff6666" alpha:1].CGColor;
+            button.layer.borderWidth = 1;
+            
         }else{
-            button.layer.borderColor = [UIColor lightGrayColor].CGColor;
+            button.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+            button.layer.masksToBounds = YES;
+            button.layer.cornerRadius = 5;
+            button.layer.borderWidth = 1;
+            
         }
         
         
@@ -423,6 +432,8 @@
             button.layer.borderColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1].CGColor;
             button.dataLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
             button.timeLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+            
+            
             
         }else{
             button.layer.borderColor = [UIColor colorWithHexString:@"#ff6666" alpha:1].CGColor;
