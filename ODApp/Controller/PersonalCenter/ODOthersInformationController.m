@@ -2,7 +2,7 @@
 //  ODOthersInformationController.m
 //  ODApp
 //
-//  Created by 代征钏 on 16/1/18.
+//  Created by Bracelet on 16/1/18.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 
