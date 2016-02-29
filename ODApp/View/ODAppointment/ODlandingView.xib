@@ -67,7 +67,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="W(}_}59R$]UY14$LBS$%$7H" translatesAutoresizingMaskIntoConstraints="NO" id="GOL-v0-DR9">
-                    <rect key="frame" x="36" y="157" width="25" height="30"/>
+                    <rect key="frame" x="36" y="156" width="25" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="25" id="GwO-mm-8a6"/>
                         <constraint firstAttribute="height" constant="30" id="vpC-yL-Jsl"/>
@@ -99,7 +99,7 @@
                 <constraint firstAttribute="trailing" secondItem="A1e-kA-3Gh" secondAttribute="trailing" constant="20" id="2JQ-1Z-ACc"/>
                 <constraint firstItem="uXA-gM-Gec" firstAttribute="top" secondItem="A1e-kA-3Gh" secondAttribute="bottom" constant="25" id="AQg-BH-nje"/>
                 <constraint firstItem="Mhv-Pk-Nb6" firstAttribute="leading" secondItem="GOL-v0-DR9" secondAttribute="trailing" constant="10" id="BsR-Ui-C1E"/>
-                <constraint firstItem="GOL-v0-DR9" firstAttribute="top" secondItem="aQk-GQ-b7V" secondAttribute="bottom" constant="47" id="JFE-1o-gua"/>
+                <constraint firstItem="GOL-v0-DR9" firstAttribute="top" secondItem="aQk-GQ-b7V" secondAttribute="bottom" constant="46" id="JFE-1o-gua"/>
                 <constraint firstItem="gg2-ay-KDY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="OMm-ci-dve"/>
                 <constraint firstItem="GOL-v0-DR9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="36" id="Ssb-Wl-cWt"/>
                 <constraint firstAttribute="trailing" secondItem="gg2-ay-KDY" secondAttribute="trailing" constant="20" id="TkM-kY-l4u"/>

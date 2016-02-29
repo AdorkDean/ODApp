@@ -91,13 +91,13 @@
 {
     
    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 20) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 50) style:UITableViewStylePlain];
       
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     self.tableView.userInteractionEnabled = YES;
     
-    
+     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     
     self.informationView = [ODInformationView getView];
     self.informationView.userInteractionEnabled = YES;
