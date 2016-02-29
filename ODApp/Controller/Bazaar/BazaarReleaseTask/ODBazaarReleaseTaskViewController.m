@@ -118,7 +118,7 @@
     startDateView.layer.masksToBounds = YES;
     startDateView.layer.cornerRadius = 5;
     startDateView.layer.borderWidth = 1;
-    startDateView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    startDateView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     [self.scrollView addSubview:startDateView];
     
     self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",startDateString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
@@ -138,7 +138,7 @@
     endDateView.layer.masksToBounds = YES;
     endDateView.layer.cornerRadius = 5;
     endDateView.layer.borderWidth = 1;
-    endDateView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    endDateView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     [self.scrollView addSubview:endDateView];
     
     self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",endDateString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
@@ -156,7 +156,7 @@
     startTimeView.layer.masksToBounds = YES;
     startTimeView.layer.cornerRadius = 5;
     startTimeView.layer.borderWidth = 1;
-    startTimeView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    startTimeView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     [self.scrollView addSubview:startTimeView];
     self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",startTimeString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [startTimeView addSubview:self.startTimeLabel];
@@ -174,7 +174,7 @@
     endTimeView.layer.masksToBounds = YES;
     endTimeView.layer.cornerRadius = 5;
     endTimeView.layer.borderWidth = 1;
-    endTimeView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    endTimeView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     [self.scrollView addSubview:endTimeView];
     
     self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5*width-30, 30.5) text:[NSString stringWithFormat:@"%@",endTimeString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
@@ -302,7 +302,7 @@
     taskeRewardView.layer.masksToBounds = YES;
     taskeRewardView.layer.cornerRadius = 5;
     taskeRewardView.layer.borderWidth = 1;
-    taskeRewardView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    taskeRewardView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     [self.scrollView addSubview:taskeRewardView];
     self.taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, kScreenSize.width - 8, 34) text:@"  选择任务奖励" font:13 alignment:@"left" color:@"#b0b0b0"  alpha:1 maskToBounds:NO];
     self.taskRewardLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];

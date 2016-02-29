@@ -330,6 +330,7 @@
     [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar_url"]] forState:UIControlStateNormal];
     [cell.headButton addTarget:self action:@selector(cellHeadButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.replyButton addTarget:self action:@selector(replyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//    cell.replyButton.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     cell.nickName.text = model.user[@"nick"];
     NSString *time = [[model.created_at substringFromIndex:5] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
     cell.timeLabel.text = [NSString stringWithFormat:@"%@ %@楼",time,[NSString stringWithFormat:@"%@",model.floor]];

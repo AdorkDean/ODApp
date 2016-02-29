@@ -115,13 +115,14 @@
             
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
+            [weakSelf.collectionView reloadData];
             
             if (result.count == 0)
             {
                 [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
-        [weakSelf.collectionView reloadData];
+        
 
     }
               failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
@@ -135,9 +136,8 @@
 - (void)createCollectionView
 {
     UICollectionViewFlowLayout *flowLayout = [[ UICollectionViewFlowLayout alloc] init];
-    flowLayout.minimumInteritemSpacing = 5;
-    flowLayout.minimumLineSpacing = 3;
-    flowLayout.sectionInset = UIEdgeInsetsMake(3, 3, 3, 3);
+    flowLayout.sectionInset = UIEdgeInsetsMake(4, 4, 0, 4);
+    flowLayout.minimumLineSpacing = 5;
     
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight)collectionViewLayout:flowLayout];
     self.collectionView.delegate = self;
@@ -176,7 +176,8 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(kScreenSize.width - 6, 170);
+    
+    return CGSizeMake(kScreenSize.width - 8, 150);
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

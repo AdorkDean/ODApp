@@ -603,16 +603,20 @@
 -(CGFloat)returnHight:(ODCommunityModel *)model
 {
     CGFloat width=kScreenSize.width>320?90:70;
+    NSString *content = model.content;
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
+    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-20, 35) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
+    CGFloat baseHeight = size.height + 93;
     if (model.imgs.count==0) {
-        return 135;
+        return baseHeight;
     }else if (model.imgs.count>0&&model.imgs.count<4){
-        return 135+width;
+        return baseHeight+width;
     }else if (model.imgs.count>=4&&model.imgs.count<7){
-        return 135+2*width+5;
+        return baseHeight+2*width+5;
     }else if (model.imgs.count>=7&&model.imgs.count<9){
-        return 135+3*width+10;
+        return baseHeight+3*width+10;
     }else{
-        return 135+3*width+10;
+        return baseHeight+3*width+10;
     }
 }
 

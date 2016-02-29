@@ -37,16 +37,11 @@
     [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11] range:NSMakeRange(0, 5)];
     self.timeLabel.attributedText = noteStr;
     self.statusLabel.text = @"任务开始";
-//    NSString *status = [NSString stringWithFormat:@"%@",model.task_status];
-//    if ([status isEqualToString:@"1"]) {
-//        self.statusLabel.text = @"任务开始";
-//    }else if ([status isEqualToString:@"2"]){
-//        self.statusLabel.text = @"进行中";
-//    }else if ([status isEqualToString:@"4"]){
-//        self.statusLabel.text = @"已完成";
-//    }else if ([status isEqualToString:@"-2"]){
-//        self.statusLabel.text = @"已过期";
-//    }
+    
+    NSString *content = model.content;
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:11]};
+    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-83, 30) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
+    self.contentLabelConstraint.constant = size.height;
 }
 
 
