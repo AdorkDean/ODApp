@@ -16,12 +16,21 @@
     
     
     view.userInteractionEnabled = YES;
-    view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    view.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     view.coverImageView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     view.lineLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
 
     
     view.withdrawalButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    
+    
+    view.withdrawalButton.layer.masksToBounds = YES;
+    view.withdrawalButton.layer.cornerRadius = 5;
+    view.withdrawalButton.layer.borderColor = [UIColor clearColor].CGColor;
+    view.withdrawalButton.layer.borderWidth = 1;
+    
+    
+    
     
     return view;
 
