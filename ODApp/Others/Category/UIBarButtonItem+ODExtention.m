@@ -39,8 +39,9 @@
     [button setTitleColor:highColor ? highColor : [UIColor blackColor] forState:UIControlStateHighlighted];
     [button setImage:image forState:UIControlStateNormal];
     [button setImage:highImage ? highImage : image forState:UIControlStateHighlighted];
-    [button.imageView sizeToFit];
-    [button.titleLabel sizeToFit];
+//    [button.imageView sizeToFit];
+//    [button.titleLabel sizeToFit];
+    [button sizeToFit];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     return [[self alloc]initWithCustomView:button];
 }

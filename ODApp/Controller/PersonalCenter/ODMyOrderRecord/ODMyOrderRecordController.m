@@ -115,13 +115,14 @@
             
             [weakSelf.collectionView.mj_header endRefreshing];
             [weakSelf.collectionView.mj_footer endRefreshing];
+            [weakSelf.collectionView reloadData];
             
             if (result.count == 0)
             {
                 [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
-        [weakSelf.collectionView reloadData];
+        
 
     }
               failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
@@ -176,16 +177,6 @@
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     
-//    float cellHeight = 140;
-//    float purposeLineHeight = [ODHelp textHeightFromTextString:self.orderRecordCell.centerPurposeDetailLabel.text width:KScreenWidth - 150 fontSize:13];
-//    if (purposeLineHeight / 13 > 1) {
-//        cellHeight = cellHeight + 13;
-//    }
-//    float centerNameHeight = [ODHelp textHeightFromTextString:self.orderRecordCell.centerNameDetailLabel.text width:KScreenWidth - 150 fontSize:13];
-//    if (centerNameHeight / 13 > 1) {
-//        cellHeight = cellHeight + 13;
-//    }
-//    
     return CGSizeMake(kScreenSize.width - 8, 150);
 }
 

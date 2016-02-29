@@ -135,7 +135,6 @@
 		C64D45F71C5F8C6F003BFFA0 /* UITableViewCell+JZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45991C5F8C6F003BFFA0 /* UITableViewCell+JZExtension.m */; };
 		C64D45F81C5F8C6F003BFFA0 /* UITableViewRowAction+JZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D459B1C5F8C6F003BFFA0 /* UITableViewRowAction+JZExtension.m */; };
 		C64D45F91C5F8C6F003BFFA0 /* UITableViewRowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D459C1C5F8C6F003BFFA0 /* UITableViewRowAction.m */; };
-		C64D45FA1C5F8C6F003BFFA0 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D459F1C5F8C6F003BFFA0 /* MBProgressHUD.m */; };
 		C64D45FB1C5F8C6F003BFFA0 /* NSData+SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45A21C5F8C6F003BFFA0 /* NSData+SDDataCache.m */; };
 		C64D45FC1C5F8C6F003BFFA0 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45A51C5F8C6F003BFFA0 /* TAAbstractDotView.m */; };
 		C64D45FD1C5F8C6F003BFFA0 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = C64D45A71C5F8C6F003BFFA0 /* TAAnimatedDotView.m */; };
@@ -549,8 +548,6 @@
 		C64D459A1C5F8C6F003BFFA0 /* UITableViewRowAction+JZExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewRowAction+JZExtension.h"; sourceTree = "<group>"; };
 		C64D459B1C5F8C6F003BFFA0 /* UITableViewRowAction+JZExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewRowAction+JZExtension.m"; sourceTree = "<group>"; };
 		C64D459C1C5F8C6F003BFFA0 /* UITableViewRowAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewRowAction.m; sourceTree = "<group>"; };
-		C64D459E1C5F8C6F003BFFA0 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
-		C64D459F1C5F8C6F003BFFA0 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		C64D45A11C5F8C6F003BFFA0 /* NSData+SDDataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SDDataCache.h"; sourceTree = "<group>"; };
 		C64D45A21C5F8C6F003BFFA0 /* NSData+SDDataCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SDDataCache.m"; sourceTree = "<group>"; };
 		C64D45A41C5F8C6F003BFFA0 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
@@ -1476,7 +1473,6 @@
 			children = (
 				C64D45731C5F8C6F003BFFA0 /* IQKeyBoardManager */,
 				C64D45981C5F8C6F003BFFA0 /* JZTableViewRowAction */,
-				C64D459D1C5F8C6F003BFFA0 /* MBProgressHUD */,
 				C64D45A01C5F8C6F003BFFA0 /* SDCycleScrollView */,
 			);
 			path = ThirdFrame;
@@ -1576,15 +1572,6 @@
 				C64D459C1C5F8C6F003BFFA0 /* UITableViewRowAction.m */,
 			);
 			path = JZTableViewRowAction;
-			sourceTree = "<group>";
-		};
-		C64D459D1C5F8C6F003BFFA0 /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				C64D459E1C5F8C6F003BFFA0 /* MBProgressHUD.h */,
-				C64D459F1C5F8C6F003BFFA0 /* MBProgressHUD.m */,
-			);
-			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		C64D45A01C5F8C6F003BFFA0 /* SDCycleScrollView */ = {
@@ -2714,7 +2701,6 @@
 				D4D0755E1C5DED01008527C9 /* ODBarButton.m in Sources */,
 				C63FECF21C7AA5A6000A8396 /* ODFindJobController.m in Sources */,
 				D4D0738B1C59B9FA008527C9 /* ODMyOrderRecordController.m in Sources */,
-				C64D45FA1C5F8C6F003BFFA0 /* MBProgressHUD.m in Sources */,
 				9DBF7EF51C75B4AF0085875E /* ODPaySuccessView.m in Sources */,
 				C6515DC81C7ECFB500B25760 /* ODPersonalTaskButton.m in Sources */,
 				D4F76D8E1C61AE8C00D59F02 /* ODAddAddressController.m in Sources */,
@@ -2988,6 +2974,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ODApp/Others/Public/ODApp-Prefix.pch";
@@ -2995,8 +2982,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.odong.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.odong.iosn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SOURCE_ROOT)/**";
 			};
@@ -3010,6 +2998,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ODApp/Others/Public/ODApp-Prefix.pch";
@@ -3017,8 +3006,9 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.odong.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = com.odong.iosn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SOURCE_ROOT)/**";
 			};
