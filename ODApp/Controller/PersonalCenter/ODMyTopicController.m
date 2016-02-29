@@ -274,7 +274,7 @@
             [weakSelf.firstCollectionView.mj_footer endRefreshing];
             
             if (bbs_list.count == 0) {
-                [weakSelf.firstCollectionView.mj_footer noticeNoMoreData];
+                [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -341,7 +341,7 @@
             [weakSelf.secondCollectionView.mj_footer endRefreshing];
             
             if (bbs_list.count == 0) {
-                [weakSelf.secondCollectionView.mj_footer noticeNoMoreData];
+                [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

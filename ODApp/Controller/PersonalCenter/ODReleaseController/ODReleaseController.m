@@ -76,7 +76,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
          
         if ([[model result]count] == 0)
         {
-            [weakSelf.collectionView.mj_footer noticeNoMoreData];
+            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
         }
         for (ODReleaseModel *md in [model result])
         {

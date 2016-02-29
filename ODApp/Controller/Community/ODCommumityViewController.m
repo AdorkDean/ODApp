@@ -272,7 +272,7 @@
             [weakSelf.collectionView.mj_footer endRefreshing];
             
             if (bbs_list.count == 0) {
-                [weakSelf.collectionView.mj_footer noticeNoMoreData];
+                [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
         

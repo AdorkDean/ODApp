@@ -94,7 +94,6 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    __weak typeof (self)weakSelf = self;
     [self.manager GET:kBalanceUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
      

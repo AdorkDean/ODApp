@@ -676,10 +676,10 @@ updatingLocation:(BOOL)updatingLocation
         return;
     }
     //通过 AMapPOISearchResponse 对象处理搜索结果
-    for (AMapPOI *p in response.pois)
-    {
-        NSString *strPoi = [NSString stringWithFormat:@"%@", p.name];
-    }
+//    for (AMapPOI *p in response.pois)
+//    {
+//        NSString *strPoi = [NSString stringWithFormat:@"%@", p.name];
+//    }
 }
 
 //实现逆地理编码的回调函数

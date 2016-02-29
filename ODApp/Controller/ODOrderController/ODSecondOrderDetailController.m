@@ -359,7 +359,6 @@
     NSDictionary *parameters = @{@"order_id":self.order_id , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    __weak typeof (self)weakSelf = self;
     [self.finishManager GET:kFinshOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (responseObject) {
