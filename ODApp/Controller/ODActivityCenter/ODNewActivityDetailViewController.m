@@ -22,7 +22,7 @@
 #import "UMSocial.h"
 #import "ODCenterDetailController.h"
 #import "ODApplyListViewController.h"
-
+#import "WXApi.h"
 @interface ODNewActivityDetailViewController ()<UITableViewDataSource,UITableViewDelegate,UIWebViewDelegate,UMSocialUIDelegate,ODPersonalCenterVCDelegate ,UMSocialDataDelegate>
 {
     BOOL hasload;
@@ -533,23 +533,39 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 - (void)share:(UIButton *)sender
 {
     
-    NSString *url = self.resultModel.share[@"icon"];
-    NSString *content = self.resultModel.share[@"desc"];
-    NSString *link = self.resultModel.share[@"link"];
-    NSString *title = self.resultModel.share[@"title"];
-    
-    [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-    [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-    [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-    [UMSocialSnsService presentSnsIconSheetView:self
-                                         appKey:kGetUMAppkey
-                                      shareText:content
-                                     shareImage:nil
-                                shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                       delegate:self];
-    
+    if ([WXApi isWXAppInstalled]) {
+        
+        
+        [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
+        
+        
+        NSString *url = self.resultModel.share[@"icon"];
+        NSString *content = self.resultModel.share[@"desc"];
+        NSString *link = self.resultModel.share[@"link"];
+        NSString *title = self.resultModel.share[@"title"];
+        
+        [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+        [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+        [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+        [UMSocialSnsService presentSnsIconSheetView:self
+                                             appKey:kGetUMAppkey
+                                          shareText:content
+                                         shareImage:nil
+                                    shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                           delegate:self];
+
+        
+        
+        
+    }else{
+        
+        [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
+        
+        
+    }
+
     
     
     
@@ -620,6 +636,9 @@ static NSString * const detailInfoCell = @"detailInfoCell";
    
     if(response.responseCode == UMSResponseCodeSuccess)
     {
+        
+        
+        
         sharedTimes ++;
        [[self.bottomButtonView shareBtn]setTitle:[NSString stringWithFormat:@"分享 %zd",sharedTimes] forState:UIControlStateNormal];
         
@@ -635,8 +654,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
          }];
 
         
-    }
-}
+    }}
 
 
 @end
