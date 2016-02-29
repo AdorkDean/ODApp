@@ -559,6 +559,7 @@
         self.setLabel.text = @"设置完成";
     };
     timeController.swap_id = self.swap_id;
+    timeController.dataArray = self.timeArray;
     [self.navigationController pushViewController:timeController animated:YES];
 }
 

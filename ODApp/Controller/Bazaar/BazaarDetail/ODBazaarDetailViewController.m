@@ -156,15 +156,16 @@
     [self.userView addSubview:userHeaderButton];
     
     //昵称
-    UILabel *userNickLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 10, 100, 20) text:detailModel.user_nick font:12.5 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *userNickLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 20, 150, 15) text:detailModel.user_nick font:12.5 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
     [self.userView addSubview:userNickLabel];
     
     //签名
-    UILabel *userSignLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 30, 150, 40) text:detailModel.user_sign font:10 alignment:@"left" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
+    UILabel *userSignLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 35, 150, 30) text:detailModel.user_sign font:10 alignment:@"left" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
+    userSignLabel.numberOfLines = 2;
     [self.userView addSubview:userSignLabel];
     
     //接受任务
-    self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-80, 20, 80, 35) target:nil sel:nil tag:0 image:nil title:@"" font:12];
+    self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-60, 25, 60, 25) target:nil sel:nil tag:0 image:nil title:@"" font:12];
     self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#d0d0d0" alpha:1] forState:UIControlStateNormal];
     self.taskButton.layer.masksToBounds = YES;
@@ -457,27 +458,29 @@
     
     CGFloat labelHeight;
     CGFloat buttonHeight;
+    UILabel *rewardLabel;
     if (height < 60) {
-        labelHeight = 0;
-        buttonHeight = 0;
+       rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.allView.frame)+7.5, 60, 20) text:@"任务奖励 :" font:11.5 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
+       rewardLabel.layer.borderColor = [UIColor colorWithHexString:@"ffd802" alpha:1].CGColor;
     }else{
         labelHeight = 20;
-        buttonHeight = 15;
+        buttonHeight = 16;
+        //显示全部内容
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(allButtonClick)];
+        self.allView = [[UIView alloc]initWithFrame:CGRectMake(self.taskBottomView.frame.size.width-130, 0, 130, labelHeight)];
+        [self.allView addGestureRecognizer:gesture];
+        [self.taskBottomView addSubview:self.allView];
+        
+        self.allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(20, 0, 80, labelHeight) text:@"显示全部内容" font:11 alignment:@"right" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
+        [self.allView addSubview:self.allLabel];
+        
+        self.allImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(110,1.5, 19, buttonHeight) imageName:@"任务详情下拉按钮" tag:0];
+        [self.allView addSubview:self.allImageView];
+        
+        //任务奖励
+        rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.allView.frame)+10, 60, 20) text:@"任务奖励 :" font:11.5 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
+        rewardLabel.layer.borderColor = [UIColor colorWithHexString:@"ffd802" alpha:1].CGColor;
     }
-    //显示全部内容
-    UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(allButtonClick)];
-    self.allView = [[UIView alloc]initWithFrame:CGRectMake(self.taskBottomView.frame.size.width-130, 0, 130, labelHeight)];
-    [self.allView addGestureRecognizer:gesture];
-    [self.taskBottomView addSubview:self.allView];
-    
-    self.allLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(20, 0, 80, labelHeight) text:@"显示全部内容" font:11 alignment:@"right" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    [self.allView addSubview:self.allLabel];
-    
-    self.allImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(110,4, 20, buttonHeight) imageName:@"任务详情下拉按钮" tag:0];
-    [self.allView addSubview:self.allImageView];
-    //任务奖励
-    UILabel *rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.allView.frame)+10, 60, 20) text:@"任务奖励 :" font:11.5 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
-    rewardLabel.layer.borderColor = [UIColor colorWithHexString:@"ffd802" alpha:1].CGColor;
     [self.taskBottomView addSubview:rewardLabel];
     
     UILabel *taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(rewardLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.reward_name width:kScreenSize.width-25 fontSize:15]) text:detailModel.reward_name font:12.5 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];

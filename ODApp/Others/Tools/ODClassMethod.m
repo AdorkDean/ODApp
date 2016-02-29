@@ -50,7 +50,7 @@
         label.layer.masksToBounds = YES;
         label.layer.cornerRadius = 5;
         label.layer.borderWidth = 1;
-        label.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+        label.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     }
     return label;
 }
@@ -121,7 +121,7 @@
         textView.layer.masksToBounds = YES;
         textView.layer.cornerRadius = 5;
         textView.layer.borderWidth = 1;
-        textView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+        textView.layer.borderColor = [UIColor colorWithHexString:@"e6e6e6" alpha:1].CGColor;
     }
     return textView;
 }

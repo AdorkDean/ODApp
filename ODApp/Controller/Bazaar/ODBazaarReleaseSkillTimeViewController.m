@@ -78,7 +78,14 @@
 {
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    self.dataArray = [[NSMutableArray alloc]init];
+}
+
+-(NSMutableArray *)dataArray
+{
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc]init];
+    }
+    return _dataArray;
 }
 
 #pragma mark - 拼接参数
@@ -92,7 +99,6 @@
     }
 
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSLog(@"%@",signParameter);
     [self downLoadDataWithUrl:kBazaarReleaseSkillTimeUrl parameter:signParameter];
 }
 
@@ -102,10 +108,14 @@
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
         if (responseObject) {
-//            [SVProgressHUD dismiss];
+            
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            [weakSelf.dataArray addObjectsFromArray:dict[@"result"]];
-  
+            
+            if (weakSelf.dataArray.count) {
+                
+            }else{
+                [weakSelf.dataArray addObjectsFromArray:dict[@"result"]];
+            }
             for (NSInteger i = 0; i < weakSelf.roundViews.count; i++)
             {
                 ODRoundTimeDrawView *view = weakSelf.roundViews[i];
@@ -165,7 +175,7 @@
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, kScreenSize.width-10, 10)];
     label.text = [array objectAtIndex:section];
     label.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
-    label.font = [UIFont systemFontOfSize:10];
+    label.font = [UIFont systemFontOfSize:12];
     [view addSubview:label];
     return view;
 }

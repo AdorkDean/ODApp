@@ -122,7 +122,7 @@
 
 -(void)createScrollView
 {
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-49)];
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.view addSubview:self.scrollView];
@@ -137,18 +137,18 @@
     [userInfoView addGestureRecognizer:gesture];
     [self.scrollView addSubview:userInfoView];
     
-    UIButton *headButton = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 48, 48)];
+    UIButton *headButton = [[UIButton alloc]initWithFrame:CGRectMake(17.5, 10, 40, 40)];
     headButton.layer.masksToBounds = YES;
-    headButton.layer.cornerRadius = 24;
+    headButton.layer.cornerRadius = 20;
     [headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
     [userInfoView addSubview:headButton];
     
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(68, 28, 12,12)];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(headButton.frame)+17.5, 24.25, 11.5,11.5)];
     imageView.image = [UIImage imageNamed:@"Skills profile page_icon_Not certified"];
     [userInfoView addSubview:imageView];
     
-    UILabel *certificationLabel = [[UILabel alloc]initWithFrame:CGRectMake(88, 27, kScreenSize.width-88-50, 14)];
-    certificationLabel.font = [UIFont systemFontOfSize:13];
+    UILabel *certificationLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame)+5, 24, kScreenSize.width-88-50, 12)];
+    certificationLabel.font = [UIFont systemFontOfSize:11.5];
     certificationLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
     NSString *user_auth_status = [NSString stringWithFormat:@"%@",model.user[@"user_auth_status"]];
     if ([user_auth_status isEqualToString:@"0"]) {
@@ -158,11 +158,11 @@
     }
     [userInfoView addSubview:certificationLabel];
     
-    UIImageView *arrowImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-25, 29, 10, 10)];
+    UIImageView *arrowImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-22.5, 24.25, 7, 12.5)];
     arrowImageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
     [userInfoView addSubview:arrowImageView];
     
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 68, kScreenSize.width, 5)];
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, kScreenSize.width, 6)];
     lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [userInfoView addSubview:lineView];
 }
@@ -182,26 +182,26 @@
 -(void)createDetailView
 {
     ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
-    self.detailView = [[UIView alloc]initWithFrame:CGRectMake(0, 73, kScreenSize.width, 200)];
+    self.detailView = [[UIView alloc]initWithFrame:CGRectMake(0, 66, kScreenSize.width, 200)];
     self.detailView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.detailView];
     
-    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, kScreenSize.width, 20)];
+    UILabel *titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 30, kScreenSize.width-35, 17)];
     titleLabel.text = [NSString stringWithFormat:@"我去 · %@",model.title];
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.font = [UIFont systemFontOfSize:14];
+    titleLabel.font = [UIFont systemFontOfSize:17];
     [self.detailView addSubview:titleLabel];
     
-    UILabel *priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(titleLabel.frame)+10, kScreenSize.width, 20)];
+    UILabel *priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(17.5, CGRectGetMaxY(titleLabel.frame)+10, kScreenSize.width-35, 20)];
     priceLabel.text = [[[[NSString stringWithFormat:@"%@",model.price] stringByAppendingString:@"元"] stringByAppendingString:@"/"] stringByAppendingString:model.unit];
     priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     priceLabel.textAlignment = NSTextAlignmentCenter;
-    priceLabel.font = [UIFont systemFontOfSize:13];
+    priceLabel.font = [UIFont systemFontOfSize:15];
     [self.detailView addSubview:priceLabel];
     
-    UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(priceLabel.frame)+10, kScreenSize.width-20, [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:14])];
+    UILabel *contentLabel = [[UILabel alloc]initWithFrame:CGRectMake(17.5, CGRectGetMaxY(priceLabel.frame)+37.5, kScreenSize.width-20, [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-20 fontSize:11])];
     contentLabel.text = model.content;
-    contentLabel.font = [UIFont systemFontOfSize:13];
+    contentLabel.font = [UIFont systemFontOfSize:11];
     contentLabel.numberOfLines = 0;
     [self.detailView addSubview:contentLabel];
     
@@ -211,9 +211,9 @@
         UIImageView *imageView = [[UIImageView alloc]init];
         CGFloat multiple = [dict[@"x"]floatValue]/[dict[@"y"]floatValue];
         if ([dict[@"y"]floatValue]==0) {
-            imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, 300);
+            imageView.frame = CGRectMake(17.5, CGRectGetMaxY(frame)+12.5, kScreenSize.width-35, 300);
         }else{
-            imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, (kScreenSize.width-20)/multiple)];
+            imageView = [[UIImageView alloc]initWithFrame:CGRectMake(17.5, CGRectGetMaxY(frame)+6, kScreenSize.width-35, (kScreenSize.width-35)/multiple)];
         }
         frame = imageView.frame;
         [imageView sd_setImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -224,11 +224,11 @@
         }];
         [self.detailView addSubview:imageView];
     }
-    self.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width-180)/2, CGRectGetMaxY(frame)+10, 180, 40)];
+    self.loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width-181)/2, CGRectGetMaxY(frame)+30, 181, 40)];
     self.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
     [self.detailView addSubview:self.loveImageView];
-    self.detailView.frame = CGRectMake(0, 73, kScreenSize.width, self.loveImageView.frame.origin.y+self.loveImageView.frame.size.height+60);
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,73+self.detailView.frame.size.height);
+    self.detailView.frame = CGRectMake(0, 66, kScreenSize.width, self.loveImageView.frame.origin.y+self.loveImageView.frame.size.height+60);
+    self.scrollView.contentSize = CGSizeMake(kScreenSize.width,66+self.detailView.frame.size.height);
     [self createLoveButton];
 }
 
@@ -240,7 +240,7 @@
             NSDictionary *dict = model.loves[i];
             CGFloat width = 30;
             UIButton *button = [[UIButton alloc]init];
-            button.frame = CGRectMake((kScreenSize.width-(model.loves.count-1)*10-model.loves.count*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+10, width, width);
+            button.frame = CGRectMake((kScreenSize.width-(model.loves.count-1)*10-model.loves.count*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+15, width, width);
             button.layer.masksToBounds = YES;
             button.layer.cornerRadius = width/2;
             [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"avatar"]] forState:UIControlStateNormal];
@@ -252,7 +252,7 @@
             NSDictionary *dict = model.loves[i];
             CGFloat width = 30;
             UIButton *button = [[UIButton alloc]init];
-            button.frame = CGRectMake((kScreenSize.width-6*10-7*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+10, width, width);
+            button.frame = CGRectMake((kScreenSize.width-6*10-7*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+15, width, width);
             button.layer.masksToBounds = YES;
             button.layer.cornerRadius = width/2;
             [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"avatar"]] forState:UIControlStateNormal];
@@ -276,20 +276,22 @@
 - (void)createBottomView
 {
     ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
-    UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenSize.height-64-50, kScreenSize.width, 50)];
+    UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenSize.height-64-49, kScreenSize.width, 49)];
     [bottomView setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6" alpha:1]];
     [self.view addSubview:bottomView];
     
-    UIButton *loveButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 50)];
+    UIButton *loveButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 100, 49)];
     [loveButton addTarget:self action:@selector(loveButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    loveButton.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    loveButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    loveButton.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    loveButton.layer.borderWidth = 0.5;
     [bottomView addSubview:loveButton];
     
-    UIImageView *loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 17.5, 15, 15)];
+    UIImageView *loveImageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 17, 15, 15)];
     
     [loveButton addSubview:loveImageView];
     
-    self.loveLabel = [[UILabel alloc]initWithFrame:CGRectMake(40, 15, 50, 20)];
+    self.loveLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(loveImageView.frame)+5, 18, 50, 13)];
     if ([self.love_id isEqualToString:@"0"]) {
         self.loveLabel.text = @"收藏";
         loveImageView.image = [UIImage imageNamed:@"Skills profile page_icon_Collection_default"];
@@ -299,10 +301,10 @@
     }
     self.loveLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.loveLabel.textAlignment = NSTextAlignmentLeft;
-    self.loveLabel.font = [UIFont systemFontOfSize:15];
+    self.loveLabel.font = [UIFont systemFontOfSize:12.5];
     [loveButton addSubview:self.loveLabel];
 
-    UIButton *payButton = [[UIButton alloc]initWithFrame:CGRectMake(100, 0, kScreenSize.width - 100, 50)];
+    UIButton *payButton = [[UIButton alloc]initWithFrame:CGRectMake(100, 0, kScreenSize.width - 100, 49)];
     [payButton setTitle:@"立即购买" forState:UIControlStateNormal];
     if ([model.user[@"open_id"] isEqualToString:[ODUserInformation sharedODUserInformation].openID]) {
         [payButton setBackgroundColor:[UIColor colorWithHexString:@"#b0b0b0" alpha:1]];

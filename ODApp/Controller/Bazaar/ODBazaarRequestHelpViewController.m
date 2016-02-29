@@ -77,7 +77,7 @@
 -(void)createScreeningAndSearchButton
 {
     //任务筛选
-    self.screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 10, 100, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"任务筛选" font:15];
+    self.screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 10, 112, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"任务筛选" font:15];
     [self.screeningButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
     self.screeningButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25);
     self.screeningButton.layer.masksToBounds = YES;
@@ -86,11 +86,11 @@
     self.screeningButton.layer.borderWidth = 1;
     [self.view addSubview:self.screeningButton];
     
-    UIImageView *screeningIamgeView = [ODClassMethod creatImageViewWithFrame:CGRectMake(75, 12, 15, 12) imageName:@"任务筛选下拉箭头" tag:0];
+    UIImageView *screeningIamgeView = [ODClassMethod creatImageViewWithFrame:CGRectMake(85, 13, 15, 9) imageName:@"任务筛选下拉箭头" tag:0];
     [self.screeningButton addSubview:screeningIamgeView];
 
     UITapGestureRecognizer *searchGestuer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchButtonClick)];
-    UIView *searchView = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-125, 35)];
+    UIView *searchView = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-137, 35)];
     searchView.layer.masksToBounds = YES;
     searchView.layer.cornerRadius = 5;
     searchView.layer.borderColor = [UIColor colorWithHexString:@"484848" alpha:1].CGColor;
@@ -98,7 +98,7 @@
     [searchView addGestureRecognizer:searchGestuer];
     [self.view addSubview:searchView];
     
-    UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(10, 10, 15, 15) imageName:@"search" tag:0];
+    UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(15, 10, 15, 15) imageName:@"搜索放大镜icon" tag:0];
     [searchView addSubview:searchImageView];
     
     UILabel *seacrhLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(searchImageView.frame)+10, 10, searchView.frame.size.width-35, 15)];
@@ -275,7 +275,6 @@
     ODBazaarModel *model = self.dataArray[indexPath.row];
     
     [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-    
     [cell shodDataWithModel:model];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     return cell;
@@ -299,7 +298,7 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(kScreenSize.width, 120);
+    return CGSizeMake(kScreenSize.width, 107);
 }
 
 

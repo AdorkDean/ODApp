@@ -59,8 +59,8 @@
     [self.button setBarButtonType:(ODBarButtonTypeTextLeft)];
     self.navigationItem.titleView = self.button;
     
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(searchButtonClick) image:[UIImage imageNamed:@"search"] highImage:nil];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(publishButtonClick) image:[UIImage imageNamed:@"plus"] highImage:nil];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(searchButtonClick) image:[UIImage imageNamed:@"fangdajing_icon"] highImage:nil];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(publishButtonClick) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil];
 
 }
 
@@ -81,19 +81,18 @@
     NSArray *array = @[@"情感",@"搞笑",@"影视",@"二次元",@"生活",@"明星",@"爱美",@"宠物",@"全部"];
     for (NSInteger i = 0 ; i < array.count ; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
-        [button setFrame:CGRectMake(0, 30*i, 140, 29)];
+        [button setFrame:CGRectMake(0, 30*i, 110, 29)];
         [button setTitle:array[i] forState:UIControlStateNormal];
         [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(titleViewLabelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [controller.view addSubview:button];
-        
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(20, CGRectGetMaxY(button.frame)+1, 100, 1)];
-        lineView.backgroundColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-        [controller.view addSubview:lineView];
+        UIImageView *lineImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(button.frame)+1, 80, 1)];
+        lineImage.image = [UIImage imageNamed:@"shequxuxian_icon"];
+        [controller.view addSubview:lineImage];
     }
     //设置弹出模式
     controller.modalPresentationStyle = UIModalPresentationPopover;
-    controller.preferredContentSize = CGSizeMake(140, 270);
+    controller.preferredContentSize = CGSizeMake(110, 270);
     UIPopoverPresentationController *popVC = controller.popoverPresentationController;
     controller.popoverPresentationController.sourceView = button;
     controller.popoverPresentationController.sourceRect = button.bounds;
@@ -417,16 +416,20 @@
 -(CGFloat)returnHight:(ODCommunityModel *)model
 {
     CGFloat width=kScreenSize.width>320?90:70;
+    NSString *content = model.content;
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
+    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-20, 35) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
+    CGFloat baseHeight = size.height + 93;
     if (model.imgs.count==0) {
-        return 135;
+        return baseHeight;
     }else if (model.imgs.count>0&&model.imgs.count<4){
-        return 135+width;
+        return baseHeight+width;
     }else if (model.imgs.count>=4&&model.imgs.count<7){
-        return 135+2*width+5;
+        return baseHeight+2*width+5;
     }else if (model.imgs.count>=7&&model.imgs.count<9){
-        return 135+3*width+10;
+        return baseHeight+3*width+10;
     }else{
-        return 135+3*width+10;
+        return baseHeight+3*width+10;
     }
 }
 

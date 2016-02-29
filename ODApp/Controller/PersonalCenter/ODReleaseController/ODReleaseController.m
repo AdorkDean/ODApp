@@ -146,10 +146,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     
     if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"])
     {
-//        dispatch_async(dispatch_get_main_queue(), ^
-//        {
         ODBazaarReleaseSkillViewController *vc = [[ODBazaarReleaseSkillViewController alloc] init];
-        
         vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
         vc.skillTitle = model.title;
         vc.content = model.content;
@@ -159,9 +156,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         vc.type = @"编辑";
         vc.imageArray = [model.imgs_small valueForKeyPath:@"img_url"];
         [vc.strArray addObjectsFromArray:[model.imgs_small valueForKeyPath:@"md5"]];
-        
         [self.navigationController pushViewController:vc animated:YES];
-//        });
     }
 }
 
