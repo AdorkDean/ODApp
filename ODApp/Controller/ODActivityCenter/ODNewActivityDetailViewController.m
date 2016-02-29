@@ -316,7 +316,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 {
      __weakSelf
     NSDictionary *parameter = @{@"activity_id":[@(self.acitityId)stringValue]};
-    [ODHttpTool getWithURL:KActivityDetailUrl parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlActivityDetail parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model)
      {
          weakSelf.resultModel = [model result];
          [weakSelf analyzeData];
@@ -615,7 +615,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
 - (void)reportRequest
 {
     NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"activity_id", nil];
-    [ODHttpTool getWithURL:KActivityApplyUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlActivityApply parameters:infoDic modelClass:[NSObject class] success:^(id model)
      {
          [self requestData];
          self.reportButton.enabled = NO;
@@ -644,7 +644,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         
         
         NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id)stringValue],@"obj_id",@"4" ,@"type",@"微信",@"share_platform", nil];
-        [ODHttpTool getWithURL:kCallbackUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
+        [ODHttpTool getWithURL:ODUrlShareCallBack parameters:infoDic modelClass:[NSObject class] success:^(id model)
          {
              
          }

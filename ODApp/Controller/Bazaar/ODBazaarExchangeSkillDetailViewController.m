@@ -428,7 +428,7 @@
     {
        
         NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:self.swap_id,@"obj_id",@"3",@"type",@"微信",@"share_platform", nil];
-        [ODHttpTool getWithURL:kCallbackUrl parameters:infoDic modelClass:[NSObject class] success:^(id model)
+        [ODHttpTool getWithURL:ODUrlShareCallBack parameters:infoDic modelClass:[NSObject class] success:^(id model)
          {
 //             [ODProgressHUD showSuccessWithStatus:@"分享成功"];
          }

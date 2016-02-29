@@ -119,7 +119,7 @@
 {
     __weakSelf
     NSDictionary *parameter = @{@"region_name":@""};
-    [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
     {
         ODLocationModel *mode = [model result];
         weakSelf.cityListArray = mode.all;
@@ -137,7 +137,7 @@
     [weakSelf.pictureArray removeAllObjects];
     [weakSelf.pictureIdArray removeAllObjects];
     [weakSelf.collectionView reloadData];
-    [ODHttpTool getWithURL:ODHomeFoundUrl parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlHomeFound parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
      {
          [weakSelf.pictureArray addObjectsFromArray:[[[model result]activitys]valueForKeyPath:@"detail_md5"]];
          [weakSelf.pictureIdArray addObjectsFromArray:[[[model result]activitys] valueForKeyPath:@"id"]];
