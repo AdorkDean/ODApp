@@ -148,10 +148,13 @@
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBh-Hr-0ca">
                     <rect key="frame" x="180" y="521" width="150" height="49"/>
+                    <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="Qyh-uf-Pbg"/>
                     </constraints>
-                    <state key="normal" title="Button" image="button_Pay immediately"/>
+                    <state key="normal" title="Button" image="button_Pay immediately">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7m4-ZZ-2kM">
                     <rect key="frame" x="78" y="536" width="92" height="20"/>
@@ -224,7 +227,7 @@
                 <outlet property="treasurePayButton" destination="okh-zX-9Jh" id="dtC-ng-XGs"/>
                 <outlet property="weixinPaybutton" destination="3mS-0j-Ou7" id="4Ky-Xk-cG1"/>
             </connections>
-            <point key="canvasLocation" x="288" y="274"/>
+            <point key="canvasLocation" x="470" y="267"/>
         </view>
     </objects>
     <resources>

@@ -212,14 +212,24 @@ void UncaughtExceptionHandler(NSException *exception)
             img.image=[UIImage imageNamed:arr[i]];
         }else{
             
-            img.image=[UIImage imageNamed:arr[i]];
-            UIImageView *v1 = [[UIImageView alloc] initWithFrame:CGRectMake(self.window.center.x - 70, self.window.center.y + 130, 140, 50)];
-            [v1 setImage:[UIImage imageNamed:@"begin"]];
-            img.userInteractionEnabled = YES;
-            v1.userInteractionEnabled = YES;
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-            [v1 addGestureRecognizer:tap];
-            [img addSubview:v1];
+           img.image=[UIImage imageNamed:arr[i]];
+           img.userInteractionEnabled = YES;
+            
+        UIButton *goButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        goButton.frame = CGRectMake(self.window.center.x - 70, self.window.center.y + 130, 140, 50);
+          [goButton setTitle:@"立即体验" forState:UIControlStateNormal];
+           goButton.titleLabel.font = [UIFont systemFontOfSize:17];
+           [goButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+           goButton.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+           goButton.layer.masksToBounds = YES;
+           goButton.layer.cornerRadius = 25;
+           goButton.layer.borderColor = [UIColor blackColor].CGColor;
+           goButton.layer.borderWidth = 1;
+
+            
+            [goButton addTarget:self action:@selector(tapAction:) forControlEvents:UIControlEventTouchUpInside];
+            [img addSubview:goButton];
+            
             
         }
         
@@ -232,7 +242,7 @@ void UncaughtExceptionHandler(NSException *exception)
 
 
 
-- (void)tapAction:(UITapGestureRecognizer *)sender
+- (void)tapAction:(UIButton *)sender
 {
     
     

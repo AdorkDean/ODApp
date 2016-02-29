@@ -149,7 +149,10 @@
 {
     self.navigationItem.title = @"我的任务";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"全部任务V"];
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"全部任务"];
+    
+    
 }
 
 
@@ -398,7 +401,7 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"全部任务V"];
+     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"全部任务"];
 
     
     [self.typeView removeFromSuperview];
@@ -413,8 +416,8 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"等待派单V"];
-
+    
+      self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"等待派单"];
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -429,7 +432,12 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"等待完成V"];
+  
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"等待完成"];
+
+    
+    
     [self.typeView removeFromSuperview];
     self.showType = YES;
     
@@ -443,8 +451,10 @@
     [self.secondCollectionView.mj_header beginRefreshing];
     
   
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"完成任务V"];
-
+   
+    
+     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"完成任务"];
+    
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -459,8 +469,10 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-      self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"过期任务V"];
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"过期任务"];
 
+    
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -474,8 +486,11 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-      self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"违规任务V"];
-
+    
+    
+      self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"违规任务"];
+    
+    
     [self.typeView removeFromSuperview];
     self.showType = YES;
 

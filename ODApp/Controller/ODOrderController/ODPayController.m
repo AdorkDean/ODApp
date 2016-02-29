@@ -108,13 +108,7 @@
         if ([responseObject[@"status"]isEqualToString:@"success"]) {
             
             
-            
-            
-            
-            
-     
-            
-            
+                       
             
             ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
             vc.swap_type = self.swap_type;

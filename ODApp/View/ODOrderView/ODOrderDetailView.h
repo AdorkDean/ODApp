@@ -29,16 +29,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *serviceTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderIdLabel;
 @property (weak, nonatomic) IBOutlet UILabel *orderTimeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *firstLabel;
-@property (weak, nonatomic) IBOutlet UILabel *secondLabel;
-@property (weak, nonatomic) IBOutlet UILabel *thirdLabel;
-@property (weak, nonatomic) IBOutlet UILabel *fourthLabel;
-@property (weak, nonatomic) IBOutlet UILabel *fiveLabel;
-@property (weak, nonatomic) IBOutlet UILabel *sixLabel;
-@property (weak, nonatomic) IBOutlet UILabel *sevenLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *eightLabel;
-@property (weak, nonatomic) IBOutlet UILabel *nineLabel;
-@property (weak, nonatomic) IBOutlet UILabel *tenLabel;
+
+
+
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *spaceToTop;
 
