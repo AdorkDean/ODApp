@@ -119,7 +119,7 @@
 {
     __weakSelf
     NSDictionary *parameter = @{@"region_name":@""};
-    [ODHttpTool getWithURL:ODCityListUrl parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
     {
         ODLocationModel *mode = [model result];
         weakSelf.cityListArray = mode.all;
@@ -137,7 +137,7 @@
     [weakSelf.pictureArray removeAllObjects];
     [weakSelf.pictureIdArray removeAllObjects];
     [weakSelf.collectionView reloadData];
-    [ODHttpTool getWithURL:ODHomeFoundUrl parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlHomeFound parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
      {
          [weakSelf.pictureArray addObjectsFromArray:[[[model result]activitys]valueForKeyPath:@"detail_md5"]];
          [weakSelf.pictureIdArray addObjectsFromArray:[[[model result]activitys] valueForKeyPath:@"id"]];
@@ -676,10 +676,10 @@ updatingLocation:(BOOL)updatingLocation
         return;
     }
     //通过 AMapPOISearchResponse 对象处理搜索结果
-    for (AMapPOI *p in response.pois)
-    {
-        NSString *strPoi = [NSString stringWithFormat:@"%@", p.name];
-    }
+//    for (AMapPOI *p in response.pois)
+//    {
+//        NSString *strPoi = [NSString stringWithFormat:@"%@", p.name];
+//    }
 }
 
 //实现逆地理编码的回调函数

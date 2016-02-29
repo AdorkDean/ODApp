@@ -76,36 +76,19 @@
     
     
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(replyAction:) name:ODNotificationReplySuccess object:nil];
-
     
-    
-    if ([self.isFirstRefresh isEqualToString:@"refresh"]){
-        [self.FirstDataArray removeObjectAtIndex:self.firstIndex];
+    if ([self.isFirstRefresh isEqualToString:@"delSuccess"]){
+      
+        
+          [self.FirstDataArray removeObject:self.FirstDataArray[self.firstIndex]];
+        
+        
         [self.firstCollectionView reloadData];
     }
-    
-    if ([self.isSecondRefresh isEqualToString:@"refresh"]){
-        [self.secondDataArray removeObjectAtIndex:self.secondIndex];
-        [self.secondCollectionView reloadData];
-    }
-    
-
-    
     
     
     
 }
-
-
-//- (void)replyAction:(NSNotification *)text
-//{
-//    
-//    [self.firstCollectionView.mj_header beginRefreshing];
-//    [self.secondCollectionView.mj_header beginRefreshing];
-//    
-//}
-
 
 
 #pragma mark - 初始化
@@ -291,7 +274,7 @@
             [weakSelf.firstCollectionView.mj_footer endRefreshing];
             
             if (bbs_list.count == 0) {
-                [weakSelf.firstCollectionView.mj_footer noticeNoMoreData];
+                [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -358,7 +341,7 @@
             [weakSelf.secondCollectionView.mj_footer endRefreshing];
             
             if (bbs_list.count == 0) {
-                [weakSelf.secondCollectionView.mj_footer noticeNoMoreData];
+                [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

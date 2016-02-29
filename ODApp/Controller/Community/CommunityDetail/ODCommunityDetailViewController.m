@@ -170,7 +170,7 @@
             [weakSelf.tableView.mj_footer endRefreshing];
             
             if (result.count == 0) {
-                [weakSelf.tableView.mj_footer noticeNoMoreData];
+                [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

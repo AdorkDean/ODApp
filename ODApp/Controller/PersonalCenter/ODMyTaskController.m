@@ -84,15 +84,7 @@
 {
     
     [super viewWillAppear:animated];
-    
-//    __weakSelf
-//    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationMyTaskRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-//        [weakSelf.firstCollectionView.mj_header beginRefreshing];
-//        [weakSelf.secondCollectionView.mj_header beginRefreshing];
-//    }];
-
-    
-    
+     
     if ([self.isFirstRefresh isEqualToString:@"del"]){
         
         [self.FirstDataArray removeObject:self.FirstDataArray[self.firstIndex]];
@@ -101,23 +93,11 @@
         
     }
     
-    if ([self.isSecondRefresh isEqualToString:@"del"]){
-        
-        [self.secondDataArray removeObject:self.secondDataArray[self.secondIndex]];
-
-        
-        [self.secondCollectionView reloadData];
-    }
-    
     
     if (!([self.isFirstRefresh isEqualToString:@""] || [self.isFirstRefresh isEqualToString:@"del"])) {
         
         
           ODBazaarModel *model = self.FirstDataArray[self.firstIndex];
-        
-        
-        
-        NSLog(@"_____%@" , self.isFirstRefresh);
         
         
           model.task_status = self.isFirstRefresh;
@@ -169,7 +149,10 @@
 {
     self.navigationItem.title = @"我的任务";
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"全部任务V"];
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"全部任务"];
+    
+    
 }
 
 
@@ -418,7 +401,7 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"全部任务V"];
+     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"全部任务"];
 
     
     [self.typeView removeFromSuperview];
@@ -433,8 +416,8 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"等待派单V"];
-
+    
+      self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"等待派单"];
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -449,7 +432,12 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"等待完成V"];
+  
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"等待完成"];
+
+    
+    
     [self.typeView removeFromSuperview];
     self.showType = YES;
     
@@ -463,8 +451,10 @@
     [self.secondCollectionView.mj_header beginRefreshing];
     
   
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"完成任务V"];
-
+   
+    
+     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"完成任务"];
+    
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -479,8 +469,10 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-      self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"过期任务V"];
+    
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"过期任务"];
 
+    
     
     [self.typeView removeFromSuperview];
     self.showType = YES;
@@ -494,8 +486,11 @@
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
     
-      self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(typeAction:) color:nil highColor:nil title:@"违规任务V"];
-
+    
+    
+      self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"违规任务"];
+    
+    
     [self.typeView removeFromSuperview];
     self.showType = YES;
 
@@ -581,7 +576,7 @@
             [weakSelf.firstCollectionView.mj_footer endRefreshing];
             
             if (tasks.count == 0) {
-                [weakSelf.firstCollectionView.mj_footer noticeNoMoreData];
+                [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
 
@@ -634,7 +629,7 @@
             [weakSelf.secondCollectionView reloadData];
             
             if (tasks.count == 0) {
-                [weakSelf.secondCollectionView.mj_footer noticeNoMoreData];
+                [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
             }
         }
         

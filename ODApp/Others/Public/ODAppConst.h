@@ -1,9 +1,6 @@
 #import <UIKit/UIKit.h>
 
 
-#pragma mark - 蒙版提示语
-UIKIT_EXTERN NSString * const ODAlertIsLoading;
-
 #pragma mark - UI相关常量
 /** TabBar的高度 */
 UIKIT_EXTERN CGFloat const ODTabBarHeight;
@@ -105,6 +102,16 @@ UIKIT_EXTERN NSString * const ODBaseURL;
 
 UIKIT_EXTERN NSString * const ODUrlLoveAdd;
 UIKIT_EXTERN NSString * const ODUrlLoveDelete;
+UIKIT_EXTERN NSString * const ODUrlMyApplyActivity;
+UIKIT_EXTERN NSString * const ODUrlHomeFound;
+UIKIT_EXTERN NSString * const ODUrlActivityList;
+UIKIT_EXTERN NSString * const ODUrlActivityDetail;
+UIKIT_EXTERN NSString * const ODUrlActivityApply;
+UIKIT_EXTERN NSString * const ODUrlCityList;
+UIKIT_EXTERN NSString * const ODUrlShareCallBack;
+UIKIT_EXTERN NSString * const ODUrlPersonalReleaseTask;
+
+
 UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDetailUrl;
@@ -141,16 +148,14 @@ UIKIT_EXTERN NSString * const kHomeFoundPictureUrl;
 UIKIT_EXTERN NSString * const ODSkillDetailUrl;
 UIKIT_EXTERN NSString * const ODFindJobUrl;
 UIKIT_EXTERN NSString * const ODHotActivityUrl;
-UIKIT_EXTERN NSString * const ODHomeFoundUrl;
-UIKIT_EXTERN NSString * const ODCityListUrl;
+
 UIKIT_EXTERN NSString * const ODHomeChangeSkillUrl;
 
-UIKIT_EXTERN NSString *const ODStoreListUrl;
-UIKIT_EXTERN NSString *const ODStoreDetailUrl;
+UIKIT_EXTERN NSString * const ODStoreListUrl;
+UIKIT_EXTERN NSString * const ODStoreDetailUrl;
 
 UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
-UIKIT_EXTERN NSString * const kMyApplyActivityUrl;
 UIKIT_EXTERN NSString * const kCancelMyOrderUrl;
 UIKIT_EXTERN NSString * const kOthersInformationUrl;
 UIKIT_EXTERN NSString * const kSaveAddressUrl;
@@ -159,9 +164,7 @@ UIKIT_EXTERN NSString * const kDeleteAddressUrl;
 UIKIT_EXTERN NSString * const kGetServecTimeUrl;
 UIKIT_EXTERN NSString * const kSaveOrderUrl;
 
-UIKIT_EXTERN NSString * const KActivityListUrl;
-UIKIT_EXTERN NSString * const KActivityDetailUrl;
-UIKIT_EXTERN NSString * const KActivityApplyUrl;
+
 
 UIKIT_EXTERN NSString * const kGetLikeListUrl;
 UIKIT_EXTERN NSString * const kGetMyOrderListUrl;
@@ -185,7 +188,6 @@ UIKIT_EXTERN NSString * const kGetStoreTimeUrl;
 UIKIT_EXTERN NSString * const kGetApplyListUrl;
 
 UIKIT_EXTERN NSString * const kGiveOpinionUrl;
-UIKIT_EXTERN NSString * const ODPersonalReleaseTaskUrl;
 
 UIKIT_EXTERN NSString * const kGetPayInformationUrl;
 
@@ -195,7 +197,6 @@ UIKIT_EXTERN NSString * const ODReleaseDrawbackUrl;
 UIKIT_EXTERN NSString * const ODRefuseDrawbackUrl;
 UIKIT_EXTERN NSString * const ODReceiveDrawbackUrl;
 
-UIKIT_EXTERN NSString * const kCallbackUrl;
 
 UIKIT_EXTERN NSString * const kCollectionUrl;
 UIKIT_EXTERN NSString * const kBalanceUrl;

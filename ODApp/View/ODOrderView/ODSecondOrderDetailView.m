@@ -33,9 +33,7 @@
     view.userButtonView.layer.borderWidth = 1;
 
     
-    view.firstLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-    view.secondLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-    view.thirdLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+      view.thirdLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
 
     
     

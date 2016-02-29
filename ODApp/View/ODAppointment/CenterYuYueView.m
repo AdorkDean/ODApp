@@ -31,68 +31,68 @@
 
     
     
-    view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    view.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     
     
     view.computerButton.layer.masksToBounds = YES;
     view.computerButton.layer.cornerRadius = 2;
-    view.computerButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.computerButton.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.computerButton.layer.borderWidth = 1;
     
     
     
     view.touYingButton.layer.masksToBounds = YES;
     view.touYingButton.layer.cornerRadius = 2;
-    view.touYingButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.touYingButton.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.touYingButton.layer.borderWidth = 1;
 
     
     
     view.yinXiangButton.layer.masksToBounds = YES;
     view.yinXiangButton.layer.cornerRadius = 2;
-    view.yinXiangButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.yinXiangButton.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.yinXiangButton.layer.borderWidth = 1;
     
     view.maiButton.layer.masksToBounds = YES;
     view.maiButton.layer.cornerRadius = 2;
-    view.maiButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.maiButton.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.maiButton.layer.borderWidth = 1;
     
     
     view.sheBeiLabel.layer.masksToBounds = YES;
     view.sheBeiLabel.layer.cornerRadius = 5;
-    view.sheBeiLabel.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.sheBeiLabel.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.sheBeiLabel.layer.borderWidth = 1;
     
     
     view.pursoseTextView.layer.masksToBounds = YES;
     view.pursoseTextView.layer.cornerRadius = 5;
-    view.pursoseTextView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.pursoseTextView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.pursoseTextView.layer.borderWidth = 1;
     
     
     view.contentTextView.layer.masksToBounds = YES;
     view.contentTextView.layer.cornerRadius = 5;
-    view.contentTextView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.contentTextView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.contentTextView.layer.borderWidth = 1;
     
     
     view.peopleNumberTextField.layer.masksToBounds = YES;
     view.peopleNumberTextField.layer.cornerRadius = 5;
-    view.peopleNumberTextField.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.peopleNumberTextField.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.peopleNumberTextField.layer.borderWidth = 1;
     
     
     view.phoneLabel.layer.masksToBounds = YES;
     view.phoneLabel.layer.cornerRadius = 5;
-    view.phoneLabel.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.phoneLabel.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.phoneLabel.layer.borderWidth = 1;
     
     
     
     view.yuYueButton.layer.masksToBounds = YES;
     view.yuYueButton.layer.cornerRadius = 5;
-    view.yuYueButton.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.yuYueButton.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.yuYueButton.layer.borderWidth = 1;
     view.yuYueButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
     
@@ -122,7 +122,7 @@
     view.centerText.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
     view.centerText.layer.borderWidth = 1;
     view.centerText.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    UIImageView *lImage = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width - 30, 5, 15, 15) imageName:@"场地预约icon2" tag:0];
+    UIImageView *lImage = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width - 30, 7, 7, 12.5) imageName:@"场地预约icon2" tag:0];
     
     [view.centerText addSubview:lImage];
     

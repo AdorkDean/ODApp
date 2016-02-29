@@ -11,10 +11,6 @@
 @interface ODSecondOrderDetailView : UIView
 
 
-@property (weak, nonatomic) IBOutlet UILabel *firstLabel;
-
-
-@property (weak, nonatomic) IBOutlet UILabel *secondLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *thirdLabel;
 

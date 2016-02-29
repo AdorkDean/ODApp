@@ -179,7 +179,7 @@
             }
             
             if (bbs_list.count == 0) {
-                [weakSelf.collectionView.footer noticeNoMoreData];
+                [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
             
         }

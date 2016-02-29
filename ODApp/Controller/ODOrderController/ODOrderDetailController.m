@@ -257,7 +257,7 @@
         refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
         refundButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
-        refundButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        refundButton.titleLabel.font=[UIFont systemFontOfSize:12.5];
         [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [refundButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:refundButton];
@@ -270,7 +270,13 @@
         
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
         cancelButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-        [cancelButton setBackgroundImage:[UIImage imageNamed:@"button_Cancel order"] forState:UIControlStateNormal];
+        
+        
+        cancelButton.backgroundColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
+        [cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+        cancelButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
+        
         
         [cancelButton addTarget:self action:@selector(cancelOrder:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:cancelButton];
@@ -278,7 +284,15 @@
         
         UIButton *payButton = [UIButton buttonWithType:UIButtonTypeSystem];
         payButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-        [payButton setBackgroundImage:[UIImage imageNamed:@"button_Pay immediately"] forState:UIControlStateNormal];
+        
+        payButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        [payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [payButton setTitle:@"立即支付" forState:UIControlStateNormal];
+        payButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
+        
+
+        
+        
         [payButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:payButton];
         
@@ -294,7 +308,7 @@
         refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
         refundButton.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
-        refundButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        refundButton.titleLabel.font=[UIFont systemFontOfSize:12.5];
         [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [refundButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:refundButton];
@@ -315,7 +329,7 @@
         
         
         
-        confirmButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        confirmButton.titleLabel.font=[UIFont systemFontOfSize:12.5];
         [confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [confirmButton addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:confirmButton];
@@ -332,7 +346,7 @@
         reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
         reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
-        reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        reasonButton.titleLabel.font=[UIFont systemFontOfSize:12.5];
         [reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:reasonButton];
@@ -396,7 +410,6 @@
     NSDictionary *parameters = @{@"order_id":self.order_id , @"open_id":self.open_id};
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    __weak typeof (self)weakSelf = self;
     [self.finishManager GET:kFinshOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if (responseObject) {

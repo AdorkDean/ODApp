@@ -25,6 +25,4 @@
 
 -(void)showDateWithModel:(ODCommunityModel *)model;
 
-+(CGFloat)returnHight:(ODCommunityModel *)model;
-
 @end
