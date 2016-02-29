@@ -62,8 +62,8 @@
         [self.view addSubview:button];
         
         if (i == 0) {
-            self.lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 38, kScreenSize.width/2, 2)];
-            self.lineView.backgroundColor = [UIColor yellowColor];
+            self.lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 39, kScreenSize.width/2, 1)];
+            self.lineView.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
             [self.view addSubview:self.lineView];
         }
     }
@@ -74,7 +74,7 @@
     CGPoint point = CGPointMake(KScreenWidth * index, 0);
     NSInteger i = point.x / self.view.frame.size.width;
     _index = i;
-    self.lineView.frame = CGRectMake((kScreenSize.width/2)*i, 38, kScreenSize.width/2, 2);
+    self.lineView.frame = CGRectMake((kScreenSize.width/2)*i, 39, kScreenSize.width/2, 1);
     [self.view addSubview:self.lineView];
     [self.scrollView setContentOffset:point animated:YES];}
 

@@ -18,7 +18,6 @@
     [super viewDidLoad];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.navigationItem.title = @"任务奖励";
     [self navigationInit];
     [self initjiangliView];
@@ -34,7 +33,7 @@
     view.layer.masksToBounds = YES;
     view.layer.cornerRadius = 5;
     view.layer.borderWidth = 1;
-    view.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    view.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     [self.view addSubview:view];
     self.textField = [ODClassMethod creatTextFieldWithFrame:CGRectMake(8,0, kScreenSize.width-16, 40) placeHolder:@"请输入任务奖励" delegate:self tag:0];
     self.textField.font = [UIFont systemFontOfSize:14];
@@ -44,7 +43,6 @@
 #pragma mark - 初始化导航
 -(void)navigationInit
 {
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.navigationItem.title = @"任务奖励";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
 }
@@ -112,7 +110,7 @@
     self.collectionView.layer.masksToBounds = YES;
     self.collectionView.layer.cornerRadius = 5;
     self.collectionView.layer.borderWidth = 1;
-    self.collectionView.layer.borderColor = [UIColor colorWithHexString:@"8d8d8d" alpha:1].CGColor;
+    self.collectionView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarRewardCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarRewardCellId];
     [self.view addSubview:self.collectionView];

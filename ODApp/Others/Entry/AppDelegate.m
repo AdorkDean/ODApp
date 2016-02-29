@@ -190,7 +190,7 @@ void UncaughtExceptionHandler(NSException *exception)
     }
     
     
-     self.pageControl = [[MyPageControl alloc] initWithFrame:CGRectMake( self.ViewController.view.center.x - 50,  self.ViewController.view.center.y + self.length, 200, 30) normalImage:[UIImage imageNamed:@"selected.png"] highlightedImage:[UIImage imageNamed:@"noselected.png"] dotsNumber:4 sideLength:15 dotsGap:10];
+     self.pageControl = [[MyPageControl alloc] initWithFrame:CGRectMake( self.ViewController.view.center.x - 50,  self.ViewController.view.center.y + self.length - 100, 200, 30) normalImage:[UIImage imageNamed:@"selected.png"] highlightedImage:[UIImage imageNamed:@"noselected.png"] dotsNumber:4 sideLength:15 dotsGap:10];
     
      self.pageControl.backgroundColor = [UIColor clearColor];
     
@@ -214,7 +214,6 @@ void UncaughtExceptionHandler(NSException *exception)
             
            img.image=[UIImage imageNamed:arr[i]];
            img.userInteractionEnabled = YES;
-            
         UIButton *goButton = [UIButton buttonWithType:UIButtonTypeCustom];
         goButton.frame = CGRectMake(self.window.center.x - 70, self.window.center.y + 130, 140, 50);
           [goButton setTitle:@"立即体验" forState:UIControlStateNormal];

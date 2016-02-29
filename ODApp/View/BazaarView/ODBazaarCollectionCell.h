@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelConstraint;
 
 -(void)shodDataWithModel:(ODBazaarModel *)model;
 

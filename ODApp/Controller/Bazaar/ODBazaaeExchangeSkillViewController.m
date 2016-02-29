@@ -246,9 +246,9 @@
 {
     CGFloat width=kScreenSize.width>320?90:70;
     NSString *content = model.content;
-    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
-    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-93, 35) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
-    CGFloat baseHeight = size.height + 119;
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:11]};
+    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-93, 30) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
+    CGFloat baseHeight = size.height + 121;
     if (model.imgs_small.count==0) {
         return baseHeight;
     }else if (model.imgs_small.count>0&&model.imgs_small.count<4){

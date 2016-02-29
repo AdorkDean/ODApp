@@ -29,20 +29,6 @@
     self.contentLabel.text = model.content;
 }
 
-//+(CGFloat)returnHight:(ODCommunityModel *)model
-//{
-//    CGFloat width=kScreenSize.width>320?90:70;
-//    if (model.imgs.count==0) {
-//          
-//    }else if (model.imgs.count>0&&model.imgs.count<4){
-//        return 135+width;
-//    }else if (model.imgs.count>=4&&model.imgs.count<7){
-//        return 135+2*width+5;
-//    }else if (model.imgs.count>=7&&model.imgs.count<9){
-//        return 135+3*width+10;
-//    }else{
-//        return 135+3*width+10;
-//    }
-//}
+
 
 @end
