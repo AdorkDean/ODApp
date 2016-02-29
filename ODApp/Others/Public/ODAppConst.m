@@ -106,6 +106,7 @@ NSString * const kCallbackUrl = @"/1.0/other/share/callback";
 NSString * const ODPersonalReleaseTaskUrl = @"/1.0/swap/list";
 NSString * const ODUrlLoveAdd = @"/1.0/other/love/add";
 NSString * const ODUrlLoveDelete = @"/1.0/other/love/del";
+NSString * const ODUrlMyApplyActivity = @"/1.0/store/apply/my";
 
 
 NSString * const ODPersonReleaseTaskDeleteUrl = @"http://woquapi.odong.com/1.0/swap/del";
@@ -158,7 +159,6 @@ NSString * const ODReceiveDrawbackUrl = @"http://woquapi.odong.com/1.0/swap/conf
 NSString * const kMyOrderRecordUrl = @"http://woquapi.odong.com/1.0/store/orders";
 NSString * const kMyOrderDetailUrl = @"http://woquapi.odong.com/1.0/store/info/order";
 
-NSString * const kMyApplyActivityUrl = @"http://woquapi.odong.com/1.0/store/apply/my";
 NSString * const kCancelMyOrderUrl = @"http://woquapi.odong.com/1.0/store/cancel/order";
 NSString * const kOthersInformationUrl = @"http://woquapi.odong.com/1.0/user/info";
 NSString * const kSaveAddressUrl = @"http://woquapi.odong.com/1.0/user/address/add";

@@ -105,6 +105,8 @@ UIKIT_EXTERN NSString * const ODBaseURL;
 
 UIKIT_EXTERN NSString * const ODUrlLoveAdd;
 UIKIT_EXTERN NSString * const ODUrlLoveDelete;
+UIKIT_EXTERN NSString * const ODUrlMyApplyActivity;
+
 UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDetailUrl;
@@ -150,7 +152,6 @@ UIKIT_EXTERN NSString *const ODStoreDetailUrl;
 
 UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
-UIKIT_EXTERN NSString * const kMyApplyActivityUrl;
 UIKIT_EXTERN NSString * const kCancelMyOrderUrl;
 UIKIT_EXTERN NSString * const kOthersInformationUrl;
 UIKIT_EXTERN NSString * const kSaveAddressUrl;

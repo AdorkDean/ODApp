@@ -11,7 +11,6 @@
 
 #import "ODHomeFoundViewController.h"
 #import "ODNewActivityCenterViewController.h"
-#import "ODCenterActivityViewController.h"
 #import "ODBazaarViewController.h"
 #import "ODCommumityViewController.h"
 #import "ODLandMainController.h"

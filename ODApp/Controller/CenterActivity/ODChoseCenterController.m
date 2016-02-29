@@ -11,7 +11,7 @@
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
 #import "ChoseCenterModel.h"
-#import "ODCenterActivityViewController.h"
+
 @interface ODChoseCenterController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 
 
