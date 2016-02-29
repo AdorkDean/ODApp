@@ -10,7 +10,7 @@
 
 @interface ODThirdOrderView : UIView
 
-@property (weak, nonatomic) IBOutlet UILabel *lineLabel;
+
 
 
 

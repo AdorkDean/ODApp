@@ -190,7 +190,6 @@
     
   
     self.managers = [AFHTTPRequestOperationManager manager];
-    __weak typeof (self)weakSelf = self;
     [self.managers GET:kRegistUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         if ([responseObject[@"status"]isEqualToString:@"success"]) {

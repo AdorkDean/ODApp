@@ -176,7 +176,6 @@
     NSDictionary *parameters = @{@"open_id":self.openId , @"swap_id":swap_id , @"service_time":self.headView.thirdOrderView.timeLabel.text , @"user_address_id":@"0" , @"comment": @""};
     
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    __weak typeof (self)weakSelf = self;
     [self.orderManager GET:kGetOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         
@@ -290,7 +289,9 @@
     for (int i = 0; i < 7; i++) {
         DataButton *button = [[DataButton alloc] initWithFrame: CGRectMake(5 + i * self.scroller.frame.size.width / 3, 5 , self.scroller.frame.size.width / 3 - 10, 40)];
         if (i == 0) {
-            button.layer.borderColor = [UIColor orangeColor].CGColor;
+            button.layer.borderColor = [UIColor colorWithHexString:@"#ff6666" alpha:1].CGColor;
+            button.dataLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+            button.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         }else{
             button.layer.borderColor = [UIColor lightGrayColor].CGColor;
         }
@@ -322,14 +323,14 @@
     for (NSInteger i = 0; i < 7; i++) {
         DataButton *button = [self.scroller viewWithTag:i+7];
         if (sender.tag != button.tag) {
-            button.layer.borderColor = [UIColor lightGrayColor].CGColor;
-            button.dataLabel.textColor = [UIColor lightGrayColor];
-            button.timeLabel.textColor = [UIColor lightGrayColor];
-            
+            button.layer.borderColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1].CGColor;
+            button.dataLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+            button.timeLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
         }else{
-            button.layer.borderColor = [UIColor orangeColor].CGColor;
-            button.dataLabel.textColor = [UIColor orangeColor];
-            button.timeLabel.textColor = [UIColor orangeColor];
+            button.layer.borderColor = [UIColor colorWithHexString:@"#ff6666" alpha:1].CGColor;
+            button.dataLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+            button.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+
         }
     }
     
@@ -362,10 +363,17 @@
         NSMutableDictionary *dic = timeArray[i];
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
+            
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+            button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
+            [button setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+            
+            
+        }else{
+            [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
         }
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
+        
         [ self.choseTimeView addSubview:button];
     }
     
@@ -379,8 +387,12 @@
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+            button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
+            [button setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+        }else{
+            [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
         }
+        
         
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
         [ self.choseTimeView addSubview:button];
@@ -396,7 +408,12 @@
         NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+            button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
+            [button setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+            
+        }else{
+            [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
+            
         }
         [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
         [ self.choseTimeView addSubview:button];
@@ -406,11 +423,10 @@
         
         if (i == 3) {
             TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 80 + 3 *( self.choseTimeView.frame.size.height - 80) / 4,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4)];
-         
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+            button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
             [ self.choseTimeView addSubview:button];
-
+            
         }else{
             TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i *  self.choseTimeView.frame.size.width / 4, 80 + 3 *( self.choseTimeView.frame.size.height - 80) / 4,  self.choseTimeView.frame.size.width / 4, ( self.choseTimeView.frame.size.height - 80) / 4)];
             button.tag = 888 + i + 12;
@@ -419,14 +435,18 @@
             NSString *status = [NSString stringWithFormat:@"%@" , dic[@"status"]];
             if (![status isEqualToString:@"1"]) {
                 button.userInteractionEnabled = NO;
-                button.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+                button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
+                [button setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+                
+            }else{
+                [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
+                
             }
             [button setTitle:[NSString stringWithFormat:@"%@" ,dic[@"time"]] forState:UIControlStateNormal];
             
             [ self.choseTimeView addSubview:button];
-
+            
         }
-        
         
         
     }

@@ -227,7 +227,7 @@
         self.deliveryButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
         self.deliveryButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [ self.deliveryButton setTitle:@"确认发货" forState:UIControlStateNormal];
-        self.deliveryButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        self.deliveryButton.titleLabel.font=[UIFont systemFontOfSize:12.5];
         [ self.deliveryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [ self.deliveryButton addTarget:self action:@selector(deliveryAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.deliveryButton];
@@ -242,7 +242,7 @@
         self.deliveryButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
         self.deliveryButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [ self.deliveryButton setTitle:@"确认服务" forState:UIControlStateNormal];
-        self.deliveryButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        self.deliveryButton.titleLabel.font=[UIFont systemFontOfSize:12.5];
         [ self.deliveryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [ self.deliveryButton addTarget:self action:@selector(deliveryAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.deliveryButton];
@@ -259,7 +259,7 @@
         self.DealDeliveryButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
         self.DealDeliveryButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [self.DealDeliveryButton setTitle:@"处理退款" forState:UIControlStateNormal];
-        self.deliveryButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        self.deliveryButton.titleLabel.font=[UIFont systemFontOfSize:12.5];
         [self.DealDeliveryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.DealDeliveryButton addTarget:self action:@selector(DealDeliveryAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.DealDeliveryButton];
@@ -272,7 +272,7 @@
         self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
         self.reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
         [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
-        self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:13];
+        self.reasonButton.titleLabel.font=[UIFont systemFontOfSize:12.5];
         [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.reasonButton];

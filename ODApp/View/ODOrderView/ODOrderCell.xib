@@ -15,7 +15,6 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jxm-Pg-g8r">
                         <rect key="frame" x="18" y="10" width="38" height="38"/>
-                        <color key="backgroundColor" red="1" green="0.8891084199" blue="0.39543527410000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="38" id="77Z-Bf-fKc"/>
                             <constraint firstAttribute="width" constant="38" id="a3W-M7-XOn"/>
@@ -31,7 +30,7 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wcy-6e-nIQ">
                         <rect key="frame" x="20" y="58" width="451" height="1"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="daO-XO-5ym"/>
                         </constraints>
@@ -41,7 +40,6 @@
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6oy-bE-xci">
                         <rect key="frame" x="18" y="72" width="75" height="75"/>
-                        <color key="backgroundColor" red="0.87012483750000003" green="0.2280773794" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="75" id="9Qj-C3-cN1"/>
                             <constraint firstAttribute="height" constant="75" id="NrM-jb-Uen"/>

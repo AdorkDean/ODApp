@@ -12,7 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *addressImgeView;
 
-@property (weak, nonatomic) IBOutlet UILabel *lineLabel;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;

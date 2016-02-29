@@ -128,6 +128,7 @@ static NSString * const detailInfoCell = @"detailInfoCell";
     return _baseScrollV;
 }
 
+
 - (UIImageView *)headImageView
 {
     if (!_headImageView)
@@ -656,5 +657,6 @@ static NSString * const detailInfoCell = @"detailInfoCell";
         
     }}
 
+- (void)didFinishGetUMSocialDataResponse:(UMSocialResponseEntity *)response { }
 
 @end
