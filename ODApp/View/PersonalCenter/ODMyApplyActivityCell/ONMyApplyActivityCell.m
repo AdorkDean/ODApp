@@ -2,7 +2,7 @@
 //  ONMyApplyActivityCell.m
 //  ODApp
 //
-//  Created by 代征钏 on 16/1/12.
+//  Created by Bracelet on 16/1/12.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 
@@ -12,11 +12,10 @@
 
 - (void)awakeFromNib {
     
-    self.timelabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    
+    self.timelabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];    
     self.adressLabel.textColor =  [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    self.adressLabel.layer.cornerRadius = 4;
-
+    self.titleImageView.layer.cornerRadius = 7;
+    self.titleImageView.layer.masksToBounds = YES;
     
 }
 
@@ -32,7 +31,7 @@
     self.timelabel.text = model.date_str;
     
     self.adressLabel.text = model.address;
-    NSString *str = [NSString stringWithFormat:@"%@",model.status];
+    self.applyNumLabel.text = [NSString stringWithFormat:@"%@人已报名", model.apply_cnt];
 
 }
 

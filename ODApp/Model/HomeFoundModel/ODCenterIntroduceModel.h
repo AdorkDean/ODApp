@@ -2,8 +2,8 @@
 //  ODCenterIntroduceModel.h
 //  ODApp
 //
-//  Created by 代征钏 on 16/1/6.
-//  Copyright © 2016年 Odong-YG. All rights reserved.
+//  Created by Bracelet on 16/1/6.
+//  Copyright © 2016年 Odong Bracelet. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

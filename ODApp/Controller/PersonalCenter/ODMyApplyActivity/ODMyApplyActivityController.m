@@ -2,8 +2,8 @@
 //  ODMyApplyActivityController.m
 //  ODApp
 //
-//  Created by 代征钏 on 16/1/12.
-//  Copyright © 2016年 Odong-YG. All rights reserved.
+//  Created by Bracelet on 16/1/12.
+//  Copyright © 2016年 Odong Bracelet. All rights reserved.
 //
 
 #import "ODMyApplyActivityController.h"
@@ -152,7 +152,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    return CGSizeMake(kScreenSize.width, 140);
+    return CGSizeMake(kScreenSize.width, 98);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

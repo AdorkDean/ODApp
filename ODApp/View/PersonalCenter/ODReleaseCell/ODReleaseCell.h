@@ -2,7 +2,7 @@
 //  ODReleaseCell.h
 //  ODApp
 //
-//  Created by 代征钏 on 16/2/18.
+//  Created by Bracelet on 16/2/18.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
@@ -26,9 +26,6 @@
 @property (weak, nonatomic) IBOutlet ODPersonalTaskButton *deleteButton;
 
 @property (weak, nonatomic) IBOutlet UIView *horizontalLineView;
-
-//@property (nonatomic, strong) UIButton *editButton;
-//@property (nonatomic, strong) UIButton *deleteButton;;
 
 @property (nonatomic, strong) UIImageView *halvingLineImageView;
 

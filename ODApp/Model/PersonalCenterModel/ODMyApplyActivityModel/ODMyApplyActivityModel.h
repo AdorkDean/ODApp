@@ -2,7 +2,7 @@
 //  ODMyApplyActivityModel.h
 //  ODApp
 //
-//  Created by 代征钏 on 16/1/12.
+//  Created by Bracelet on 16/1/12.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 
@@ -22,6 +22,8 @@
 @property (nonatomic, copy)NSString *address;
 
 @property (nonatomic, copy)NSString *status;
+
+@property (nonatomic, copy) NSString *apply_cnt;
 
 @end
 
