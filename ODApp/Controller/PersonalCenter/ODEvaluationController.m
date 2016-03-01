@@ -226,11 +226,14 @@
             }
             
             [weakSelf.firstCollectionView.mj_header endRefreshing];
-            [weakSelf.firstCollectionView.mj_footer endRefreshing];
             [weakSelf.firstCollectionView reloadData];
         
             if (dic.count == 0) {
-                [self.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
+                [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
+            }
+            else
+            {
+                [weakSelf.firstCollectionView.mj_footer endRefreshing];
             }
         
         }
@@ -289,13 +292,15 @@
             }
             
             [weakSelf.secondCollectionView.mj_header endRefreshing];
-            [weakSelf.secondCollectionView.mj_footer endRefreshing];
             [weakSelf.secondCollectionView reloadData];
             
             if (dic.count == 0) {
-                [self.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
+                [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
             }
-            
+            else
+            {
+                [weakSelf.secondCollectionView.mj_footer endRefreshing];
+            }
         }
         
     

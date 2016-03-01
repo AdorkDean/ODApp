@@ -167,10 +167,13 @@
 
             [weakSelf.tableView reloadData];
             [weakSelf.tableView.mj_header endRefreshing];
-            [weakSelf.tableView.mj_footer endRefreshing];
             
             if (result.count == 0) {
                 [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+            }
+            else
+            {
+                [weakSelf.tableView.mj_footer endRefreshing];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

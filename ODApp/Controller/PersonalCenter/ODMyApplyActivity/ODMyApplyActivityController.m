@@ -95,10 +95,7 @@ static NSString * const cellId = @"newActivityCell";
     __weakSelf
     [ODHttpTool getWithURL:ODUrlMyApplyActivity parameters:parameter modelClass:[ODActivityListModel class] success:^(id model)
     {
-        if ([[model result]count] == 0)
-        {
-            [weakSelf.tableView.mj_footer noticeNoMoreData];
-        }
+        
         for (ODActivityListModel *md in [model result])
         {
             if (![[weakSelf.resultLists valueForKeyPath:@"activity_id"]containsObject:@(md.activity_id)])
@@ -114,9 +111,17 @@ static NSString * const cellId = @"newActivityCell";
         else
         {
             [weakSelf.tableView reloadData];
-        }
+        }        
+        
         [weakSelf.tableView.mj_header endRefreshing];
-        [weakSelf.tableView.mj_footer endRefreshing];
+        if ([[model result]count] == 0)
+        {
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        else
+        {            
+            [weakSelf.tableView.mj_footer endRefreshing];
+        }
     }
                    failure:^(NSError *error)
     {

@@ -265,16 +265,19 @@
                 [weakSelf.firstUserInfoDic setObject:model forKey:userKey];
             }
             if (weakSelf.FirstDataArray.count == 0) {
-                weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40, weakSelf.scrollView.center.y / 2 + 32, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40, KScreenHeight / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [weakSelf.scrollView addSubview:weakSelf.firstLabel];
             }
 
             [weakSelf.firstCollectionView reloadData];
             [weakSelf.firstCollectionView.mj_header endRefreshing];
-            [weakSelf.firstCollectionView.mj_footer endRefreshing];
             
             if (bbs_list.count == 0) {
                 [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
+            }
+            else
+            {
+                [weakSelf.firstCollectionView.mj_footer endRefreshing];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -332,16 +335,19 @@
             
             
             if (weakSelf.secondDataArray.count == 0) {
-                weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40 + weakSelf.scrollView.frame.size.width, weakSelf.scrollView.center.y / 2 + 32, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40 + weakSelf.scrollView.frame.size.width, KScreenHeight / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [weakSelf.scrollView addSubview:weakSelf.secondLabel];
             }
  
             [weakSelf.secondCollectionView reloadData];
             [weakSelf.secondCollectionView.mj_header endRefreshing];
-            [weakSelf.secondCollectionView.mj_footer endRefreshing];
             
             if (bbs_list.count == 0) {
                 [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
+            }
+            else
+            {
+                [weakSelf.secondCollectionView.mj_footer endRefreshing];
             }
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

@@ -171,7 +171,6 @@
 
             [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
-            [weakSelf.collectionView.mj_footer endRefreshing];
             
             if (weakSelf.dataArray.count == 0) {
                 weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 180)/2, kScreenSize.height/2, 180, 30) text:@"没有符合条件的话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
@@ -180,6 +179,10 @@
             
             if (bbs_list.count == 0) {
                 [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+            }
+            else
+            {
+                [weakSelf.collectionView.mj_footer endRefreshing];
             }
             
         }

@@ -113,17 +113,15 @@
                 [weakSelf.view addSubview:weakSelf.noReusltLabel];
             }
             
-            
-            
+            [weakSelf.collectionView.mj_header endRefreshing];
             if (!result.count == 0)
-            {
-                [weakSelf.collectionView.mj_header endRefreshing];
+            {                
                 [weakSelf.collectionView.mj_footer endRefreshing];
-                [weakSelf.collectionView reloadData];
-                
-            }else{
+            }else
+            {
                 [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
+            [weakSelf.collectionView reloadData];
         }
         
 

@@ -72,23 +72,26 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
              [self.dataArray removeAllObjects];
              [self.noReusltLabel removeFromSuperview];
          }
-        [weakSelf.collectionView.mj_footer endRefreshing];
-         
-        if ([[model result]count] == 0)
-        {
-            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-        }
+       
         for (ODReleaseModel *md in [model result])
         {
             if (![[weakSelf.dataArray valueForKeyPath:@"swap_id" ] containsObject:[md swap_id]])
             {
                 [weakSelf.dataArray addObject: md];
-                
             }
         }
          
-        [weakSelf.collectionView reloadData];
         [weakSelf.collectionView.mj_header endRefreshing];
+        if ([[model result]count] == 0)
+        {
+            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+        }
+        else
+        {
+         [weakSelf.collectionView.mj_footer endRefreshing];
+        }
+        [weakSelf.collectionView reloadData];
+        
         if (self.pageCount == 1 && self.dataArray.count == 0)
         {
          weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
