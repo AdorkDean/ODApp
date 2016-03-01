@@ -30,5 +30,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *checkStateLabel;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineHeight;
 
 @end

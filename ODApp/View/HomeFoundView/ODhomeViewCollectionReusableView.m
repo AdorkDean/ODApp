@@ -153,9 +153,13 @@
         [self.changeSkillView addSubview:changeSkillImage];
         [self.changeSkillView addSubview:changeSkillLabel];
         
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.changeSkillView.frame), ODLeftMargin, 1)];
-        lineView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        UIView *lineSpaceView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.changeSkillView.frame), ODLeftMargin, 0.5)];
+        lineSpaceView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        [self addSubview:lineSpaceView];
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.changeSkillView.frame), KScreenWidth - ODLeftMargin, 0.5)];
+        lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         [self addSubview:lineView];
+
     }
     return self;
 }
