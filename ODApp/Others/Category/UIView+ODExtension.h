@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface UIView (ODExtension)
-@property (nonatomic, assign) CGSize od_size;
-@property (nonatomic, assign) CGFloat od_width;
-@property (nonatomic, assign) CGFloat od_height;
-@property (nonatomic, assign) CGFloat od_x;
-@property (nonatomic, assign) CGFloat od_y;
-@property (nonatomic, assign) CGFloat od_centerX;
-@property (nonatomic, assign) CGFloat od_centerY;
+@property(nonatomic, assign) CGSize od_size;
+@property(nonatomic, assign) CGFloat od_width;
+@property(nonatomic, assign) CGFloat od_height;
+@property(nonatomic, assign) CGFloat od_x;
+@property(nonatomic, assign) CGFloat od_y;
+@property(nonatomic, assign) CGFloat od_centerX;
+@property(nonatomic, assign) CGFloat od_centerY;
 
 + (instancetype)od_viewFromXib;
 

@@ -10,10 +10,10 @@
 
 @interface LunBoModel : NSObject
 
-@property (nonatomic , copy) NSString *banner_url;
-@property (nonatomic , copy) NSString *img_url;
-@property (nonatomic , copy) NSString *title;
+@property(nonatomic, copy) NSString *banner_url;
+@property(nonatomic, copy) NSString *img_url;
+@property(nonatomic, copy) NSString *title;
 
--(instancetype)initWithDict:(NSDictionary *)dict;
+- (instancetype)initWithDict:(NSDictionary *)dict;
 
 @end

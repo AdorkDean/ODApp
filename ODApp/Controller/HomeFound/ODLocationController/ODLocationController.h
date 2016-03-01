@@ -18,16 +18,16 @@
 #import "ODLocationCell.h"
 #import "ODLocationModel.h"
 
-@interface ODLocationController : ODBaseViewController<MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface ODLocationController : ODBaseViewController <MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 
-@property (nonatomic, strong) NSMutableArray *cityListArray;
-@property (nonatomic, strong) NSMutableArray *cityIdArray;
+@property(nonatomic, strong) NSMutableArray *cityListArray;
+@property(nonatomic, strong) NSMutableArray *cityIdArray;
 
-@property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+@property(nonatomic, strong) UICollectionView *collectionView;
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
 
 @end

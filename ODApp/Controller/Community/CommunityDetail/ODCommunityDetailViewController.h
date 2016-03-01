@@ -22,26 +22,26 @@
 #import "ODPersonalCenterViewController.h"
 #import "ODOthersInformationController.h"
 
-@interface ODCommunityDetailViewController : ODBaseViewController<UITableViewDelegate,UITableViewDataSource>
+@interface ODCommunityDetailViewController : ODBaseViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property(nonatomic,strong)UIScrollView *scrollView;
-@property(nonatomic,copy)NSString *bbs_id;
-@property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic,strong)NSMutableArray *resultArray;
-@property(nonatomic,strong)NSMutableArray *userArray;
-@property(nonatomic,strong)NSArray *bbs_imgArray;
-@property(nonatomic,strong)UIView *userView;
-@property(nonatomic,strong)UIView *bbsView;
-@property(nonatomic,strong)UIView *lineView;
-@property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSMutableArray *dataArray;
-@property(nonatomic,strong)NSMutableArray *imageArray;
-@property(nonatomic,strong)UIView *tabelHeaderView;
-@property(nonatomic,copy)NSString *open_id;
-@property(nonatomic)CGFloat height;
-@property(nonatomic)NSInteger count;
-@property(nonatomic,copy)void(^myBlock)(NSString *refresh);
-@property(nonatomic,copy)NSString *refresh;
+@property(nonatomic, strong) UIScrollView *scrollView;
+@property(nonatomic, copy) NSString *bbs_id;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) NSMutableArray *resultArray;
+@property(nonatomic, strong) NSMutableArray *userArray;
+@property(nonatomic, strong) NSArray *bbs_imgArray;
+@property(nonatomic, strong) UIView *userView;
+@property(nonatomic, strong) UIView *bbsView;
+@property(nonatomic, strong) UIView *lineView;
+@property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic, strong) NSMutableArray *imageArray;
+@property(nonatomic, strong) UIView *tabelHeaderView;
+@property(nonatomic, copy) NSString *open_id;
+@property(nonatomic) CGFloat height;
+@property(nonatomic) NSInteger count;
+@property(nonatomic, copy) void(^myBlock)(NSString *refresh);
+@property(nonatomic, copy) NSString *refresh;
 
 @end
 

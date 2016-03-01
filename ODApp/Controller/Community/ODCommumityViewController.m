@@ -86,7 +86,7 @@
         [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(titleViewLabelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [controller.view addSubview:button];
-        UIImageView *lineImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(button.frame)+1, 80, 1)];
+        UIImageView *lineImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(button.frame)+0.5, 80, 0.5)];
         lineImage.image = [UIImage imageNamed:@"shequxuxian_icon"];
         [controller.view addSubview:lineImage];
     }
@@ -268,10 +268,13 @@
 
             [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
-            [weakSelf.collectionView.mj_footer endRefreshing];
             
             if (bbs_list.count == 0) {
                 [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+            }
+            else
+            {
+                [weakSelf.collectionView.mj_footer endRefreshing];
             }
         }
         
@@ -417,8 +420,8 @@
 {
     CGFloat width=kScreenSize.width>320?90:70;
     NSString *content = model.content;
-    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:12]};
-    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-20, 35) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:10.5]};
+    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-20, 30) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
     CGFloat baseHeight = size.height + 93;
     if (model.imgs.count==0) {
         return baseHeight;

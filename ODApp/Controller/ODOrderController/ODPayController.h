@@ -11,11 +11,10 @@
 @interface ODPayController : ODBaseViewController
 
 
-@property (nonatomic , copy) NSString *orderId;
-@property (nonatomic , copy) NSString *OrderTitle;
-@property (nonatomic , copy) NSString *price;
-@property (nonatomic ,copy) NSString *swap_type;
-
+@property(nonatomic, copy) NSString *orderId;
+@property(nonatomic, copy) NSString *OrderTitle;
+@property(nonatomic, copy) NSString *price;
+@property(nonatomic, copy) NSString *swap_type;
 
 
 @end

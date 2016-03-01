@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 @interface ODClassMethod : NSObject
 
 
@@ -18,8 +19,7 @@
  */
 
 
-+(UILabel *)creatLabelWithFrame:(CGRect)frame text:(NSString *)text font:(NSInteger)size alignment:(NSString *)alignment color:(NSString *)color alpha:(float)opacity;
-
++ (UILabel *)creatLabelWithFrame:(CGRect)frame text:(NSString *)text font:(NSInteger)size alignment:(NSString *)alignment color:(NSString *)color alpha:(float)opacity;
 
 
 //创建label
@@ -40,12 +40,13 @@
                              image:(NSString *)name
                              title:(NSString *)title
                               font:(NSInteger)size;
+
 //创建UIImageView
 + (UIImageView *)creatImageViewWithFrame:(CGRect)frame
                                imageName:(NSString *)name tag:(NSInteger)tag;
 
 //创建UIView
-+(UIView *)creatViewWithFrame:(CGRect)frame tag:(NSInteger)tag color:(NSString *)color;
++ (UIView *)creatViewWithFrame:(CGRect)frame tag:(NSInteger)tag color:(NSString *)color;
 
 //创建UITextField
 + (UITextField *)creatTextFieldWithFrame:(CGRect)frame
@@ -54,13 +55,13 @@
                                      tag:(NSInteger)tag;
 
 //创建UITextView
-+(UITextView *)creatTextViewWithFrame:(CGRect)frame
-                             delegate:(id<UITextViewDelegate>)delegate
-                                  tag:(NSInteger)tag
-                                 font:(NSInteger)size
-                                color:(NSString *)color
-                                alpha:(float)opacity
-                         maskToBounds:(BOOL)maskToBounds;
++ (UITextView *)creatTextViewWithFrame:(CGRect)frame
+                              delegate:(id <UITextViewDelegate>)delegate
+                                   tag:(NSInteger)tag
+                                  font:(NSInteger)size
+                                 color:(NSString *)color
+                                 alpha:(float)opacity
+                          maskToBounds:(BOOL)maskToBounds;
 
 
 @end

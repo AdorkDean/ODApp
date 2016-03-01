@@ -13,7 +13,7 @@
 /**
  *  选中状态的数组
  */
-@property (nonatomic, strong) NSMutableArray *selectedArr;
+@property(nonatomic, strong) NSMutableArray *selectedArr;
 
 /**
  *  第1个时间段是否空闲

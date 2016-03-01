@@ -10,10 +10,10 @@
 
 @interface ODBazaarReleaseSkillTimeModel : ODAppModel
 
-@property(nonatomic,copy)NSString *week_display;
-@property(nonatomic,copy)NSString *week;
-@property(nonatomic,copy)NSString *display;
-@property(nonatomic,copy)NSString *status;
-@property(nonatomic,copy)NSString *hour;
+@property(nonatomic, copy) NSString *week_display;
+@property(nonatomic, copy) NSString *week;
+@property(nonatomic, copy) NSString *display;
+@property(nonatomic, copy) NSString *status;
+@property(nonatomic, copy) NSString *hour;
 
 @end

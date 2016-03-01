@@ -13,10 +13,9 @@
 @interface ODUserSignatureController : ODBaseViewController
 
 
-@property(nonatomic,copy)void(^getTextBlock)(NSString *text);
+@property(nonatomic, copy) void(^getTextBlock)(NSString *text);
 
-@property (nonatomic , copy) NSString *signature;
-
+@property(nonatomic, copy) NSString *signature;
 
 
 @end

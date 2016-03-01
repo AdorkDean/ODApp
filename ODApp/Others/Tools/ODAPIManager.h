@@ -22,5 +22,11 @@
 + (NSMutableDictionary *)signParameters:(NSDictionary *)parameters;
 
 + (NSString *)getUrl:(NSString *)uri;
++ (NSString *)getApiUrl:(NSString *)uri;
 
++ (void)getWithURL: (NSString *)URL
+            params: (NSDictionary *)params
+           success: (void (^)(id responseObject))success
+             error: (void (^)(NSString *msg))error
+           failure: (void (^)(NSError *error))failure;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "ODUserInformation.h"
+#import "ODAppConst.h"
 
 @implementation ODUserInformation
 Single_Implementation(ODUserInformation)
@@ -17,5 +18,28 @@ Single_Implementation(ODUserInformation)
 }
 
 
+
+- (void)updateUserCache:(ODUser *)user
+{
+    [ODUserInformation sharedODUserInformation].openID = user.open_id;
+        
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:user.open_id forKey:KUserDefaultsOpenId];
+    [userDefault setObject:user.avatar forKey:KUserDefaultsAvatar];
+    
+    [userDefault setObject:user.mj_keyValues forKey:kUserCache];
+}
+
+
+- (ODUser *)getUserCache
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSDictionary *userDic = [userDefault objectForKey:kUserCache];
+    if (userDic == nil) {
+        return  nil;
+    } else {
+        return [ODUser mj_objectWithKeyValues:userDic];
+    }
+}
 
 @end

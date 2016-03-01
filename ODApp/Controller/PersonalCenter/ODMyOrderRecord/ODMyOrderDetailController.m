@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong Bracelet. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODMyOrderDetailController.h"
 #import "ODUserInformation.h"
 @interface ODMyOrderDetailController ()
@@ -39,7 +40,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    NSDictionary *parameter = @{@"order_id":self.order_id};
+    NSDictionary *parameter = @{@"order_id":[NSString stringWithFormat:@"%@", self.order_id]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     
     __weak typeof (self)weakSelf = self;
@@ -139,7 +140,7 @@
     // view 距离左边的距离
     float viewLeftMargin = 4;
     // view 圆角大小
-    float viewCornerRadius = 4;
+    float viewCornerRadius = 5;
 
     
 #pragma mark - 预约时间
@@ -255,8 +256,8 @@
 #pragma mark - 审核状态
     self.checkLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(phoneLabel.frame) + viewLeftMargin, kScreenSize.width - viewLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",self.model.status_str ]font:12.5 alignment:@"center" color:@"#000000" alpha:1];
     self.checkLabel.layer.masksToBounds = YES;
-    self.checkLabel.layer.cornerRadius = 5;
-    self.checkLabel.layer.borderWidth = 0.5;
+    self.checkLabel.layer.cornerRadius = viewCornerRadius;
+    self.checkLabel.layer.borderWidth = 1;
     self.checkLabel.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width, CGRectGetMaxY(self.checkLabel.frame) + 3);
@@ -269,6 +270,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 

@@ -35,6 +35,9 @@
     [self.titleImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.imgs_small[0][@"img_url"]]];
     self.contentLabel.text = model.title;
     self.priceLabel.text = [NSString stringWithFormat:@"%@元/%@",model.price,model.unit];
+    if ([model.love_num isEqualToString:@""]) {
+        model.love_num = @"0";
+    }
     self.lovesLabel.text = [NSString stringWithFormat:@"%@  收藏",model.love_num];
     self.deleteButton.tag = [model.swap_id integerValue];
     if ([[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {

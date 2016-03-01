@@ -12,7 +12,7 @@
 
 @interface ODChangePassWordController : ODBaseViewController
 
-@property (nonatomic , copy) NSString *topTitle;
-@property (nonatomic , copy) NSString *phoneNumber;
+@property(nonatomic, copy) NSString *topTitle;
+@property(nonatomic, copy) NSString *phoneNumber;
 
 @end

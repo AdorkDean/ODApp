@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface ODBazaarPicCollectionViewCell : UICollectionViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *picImageView;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *picImageViewConstraint;
+@property(weak, nonatomic) IBOutlet UIImageView *picImageView;
+@property(weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *picImageViewConstraint;
 
 @end

@@ -12,5 +12,5 @@
 @interface ODSecondOrderController : ODBaseViewController
 
 
-@property (nonatomic , strong) ODBazaarExchangeSkillModel *informationModel;
+@property(nonatomic, strong) ODBazaarExchangeSkillModel *informationModel;
 @end

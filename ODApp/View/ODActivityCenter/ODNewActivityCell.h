@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ODActivityListModel.h"
+
 @interface ODNewActivityCell : UITableViewCell
 /**
  *  数据模型
  */
-@property (nonatomic, strong) ODActivityListModel *model;
+@property(nonatomic, strong) ODActivityListModel *model;
 @end

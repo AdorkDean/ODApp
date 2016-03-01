@@ -11,7 +11,7 @@
 
 @interface ODHomeFoundFooterView : UICollectionReusableView
 
-@property (nonatomic, strong)UIButton *moreSkillButton;
+@property(nonatomic, strong) UIButton *moreSkillButton;
 
 
 @end

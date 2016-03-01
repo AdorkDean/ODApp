@@ -21,7 +21,6 @@
     self.navigationItem.title = @"任务详情";
     [self navigationInit];
     self.num = 1;
-    self.view.backgroundColor = [UIColor whiteColor];
     [self createScrollView];
     [self createRequest];
 
@@ -105,6 +104,7 @@
 -(void)createScrollView
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width,kScreenSize.height-64)];
+    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     self.scrollView.userInteractionEnabled = YES;
     [self.view addSubview:self.scrollView];
 }
@@ -261,7 +261,7 @@
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"b0b0b0" alpha:1] forState:UIControlStateNormal];
         }
     }
-    UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 75, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
+    UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 75.5, kScreenSize.width-25, 0.5) tag:0 color:@"#e6e6e6"];
     [self.userView addSubview:lineView];
 }
 
@@ -520,7 +520,7 @@
     UILabel *createTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(dateTimeLabel.frame)+10, kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.task_created_at width:kScreenSize.width fontSize:10]) text:[detailModel.task_created_at stringByReplacingOccurrencesOfString:@"/" withString:@"-"] font:10 alignment:@"right" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
     [self.taskBottomView addSubview:createTimeLabel];
     
-    UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, CGRectGetMaxY(createTimeLabel.frame)+10, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
+    UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, CGRectGetMaxY(createTimeLabel.frame)+10.5, kScreenSize.width-25, 0.5) tag:0 color:@"#e6e6e6"];
     [self.taskBottomView addSubview:lineView];
     
     self.taskBottomView.frame = CGRectMake(12.5, CGRectGetMaxY(self.taskTopView.frame)+10, kScreenSize.width-25, lineView.frame.size.height+lineView.frame.origin.y);

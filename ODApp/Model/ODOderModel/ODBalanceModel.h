@@ -10,9 +10,9 @@
 
 @interface ODBalanceModel : NSObject
 
-@property (nonatomic , copy) NSString *amount;
-@property (nonatomic , copy) NSString *date;
-@property (nonatomic , copy) NSString *status_str;
+@property(nonatomic, copy) NSString *amount;
+@property(nonatomic, copy) NSString *date;
+@property(nonatomic, copy) NSString *status_str;
 
 
 @end

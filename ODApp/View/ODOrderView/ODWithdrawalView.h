@@ -11,18 +11,18 @@
 @interface ODWithdrawalView : UIView
 
 
-@property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
-@property (weak, nonatomic) IBOutlet UILabel *lineLabel;
+@property(weak, nonatomic) IBOutlet UIImageView *coverImageView;
+@property(weak, nonatomic) IBOutlet UILabel *lineLabel;
 
 
-@property (weak, nonatomic) IBOutlet UITextView *payAddressTextView;
+@property(weak, nonatomic) IBOutlet UITextView *payAddressTextView;
 
-@property (weak, nonatomic) IBOutlet UILabel *prcieLabel;
+@property(weak, nonatomic) IBOutlet UILabel *prcieLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *withdrawalButton;
+@property(weak, nonatomic) IBOutlet UIButton *withdrawalButton;
 
 
-+(instancetype)getView;
++ (instancetype)getView;
 
 
 @end

@@ -11,10 +11,10 @@
 #import "ODBazaarRequestHelpViewController.h"
 #import "ODBazaarReleaseSkillViewController.h"
 
-@interface ODBazaarViewController : ODBaseViewController<UIScrollViewDelegate>
+@interface ODBazaarViewController : ODBaseViewController <UIScrollViewDelegate>
 
-@property(nonatomic,strong)UIScrollView *scrollView;
-@property(nonatomic,strong)UIView *lineView;
-@property(nonatomic)NSInteger index;
+@property(nonatomic, strong) UIScrollView *scrollView;
+@property(nonatomic, strong) UIView *lineView;
+@property(nonatomic) NSInteger index;
 
 @end

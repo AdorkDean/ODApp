@@ -43,4 +43,6 @@
  */
 + (void)dismiss;
 
++ (void)showToast:(UIView *)view msg:(NSString *)msg;
+
 @end

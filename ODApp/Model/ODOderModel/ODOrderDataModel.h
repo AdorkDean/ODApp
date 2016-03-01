@@ -10,10 +10,10 @@
 
 @interface ODOrderDataModel : NSObject
 
-@property (nonatomic , copy) NSString *date;
-@property (nonatomic , copy) NSString *date_name;
-@property (nonatomic , strong) NSMutableArray *times;
+@property(nonatomic, copy) NSString *date;
+@property(nonatomic, copy) NSString *date_name;
+@property(nonatomic, strong) NSMutableArray *times;
 
--(instancetype)initWithDict:(NSDictionary *)dict;
+- (instancetype)initWithDict:(NSDictionary *)dict;
 
 @end

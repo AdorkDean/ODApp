@@ -15,25 +15,25 @@
 
 @interface ODReleaseCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *titleImageView;
-@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *lovesLabel;
-@property (weak, nonatomic) IBOutlet UILabel *illegalLabel;
-@property (weak, nonatomic) IBOutlet UIView *lineView;
+@property(weak, nonatomic) IBOutlet UIImageView *titleImageView;
+@property(weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property(weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property(weak, nonatomic) IBOutlet UILabel *lovesLabel;
+@property(weak, nonatomic) IBOutlet UILabel *illegalLabel;
+@property(weak, nonatomic) IBOutlet UIView *lineView;
 
-@property (weak, nonatomic) IBOutlet ODPersonalTaskButton *editButton;
-@property (weak, nonatomic) IBOutlet ODPersonalTaskButton *deleteButton;
+@property(weak, nonatomic) IBOutlet ODPersonalTaskButton *editButton;
+@property(weak, nonatomic) IBOutlet ODPersonalTaskButton *deleteButton;
 
-@property (weak, nonatomic) IBOutlet UIView *horizontalLineView;
+@property(weak, nonatomic) IBOutlet UIView *horizontalLineView;
 
-@property (nonatomic, strong) UIImageView *halvingLineImageView;
+@property(nonatomic, strong) UIImageView *halvingLineImageView;
 
-@property (nonatomic, strong) ODReleaseModel *model;
+@property(nonatomic, strong) ODReleaseModel *model;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonWidthConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *horicontalLineViewHeight;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *buttonWidthConstraint;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *horicontalLineViewHeight;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineViewWidth;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *lineViewWidth;
 
 @end

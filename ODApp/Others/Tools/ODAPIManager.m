@@ -7,16 +7,22 @@
 //
 
 #import "ODAPIManager.h"
-
+#import "ODAPPInfoTool.h"
 #import <CommonCrypto/CommonDigest.h>
+#import <AFNetworking.h>
+
 
 static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
+
+
 
 @interface NSString (ODAPIManager)
 
 @property(nonatomic, strong, readonly) NSString *md5;
 
 @end
+
+
 
 @implementation NSString (LingQianHelper)
 
@@ -50,6 +56,34 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     return [ODBaseURL stringByAppendingString:uri];
 }
 
++ (NSString *)getApiUrl:(NSString *)uri {
+    return [ODURL stringByAppendingString:uri];
+}
+
++ (void)getWithURL: (NSString *)URL
+            params: (NSDictionary *)params
+           success: (void (^)(id responseObject))success
+             error: (void (^)(NSString *msg))error
+           failure: (void (^)(NSError *error))failure {
+    
+    NSString *url = [self getApiUrl:URL];
+    NSMutableDictionary *reqParams = [self getRequestParameter:params];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:reqParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *data = (NSDictionary *)responseObject;
+        if ([[data objectForKey:@"status"] isEqualToString:@"success"]) {
+            success(responseObject);
+        } else {
+            error([data objectForKey:@"message"]);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        failure(error);
+    }];
+    
+}
+
 #pragma mark - 私有函数
 
 
@@ -67,6 +101,26 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
 
     return [[[[signData.md5 lowercaseString] md5] lowercaseString] substringWithRange:NSMakeRange(9, 6)];
 }
+
+
++ (NSMutableDictionary *)getRequestParameter:(NSDictionary *)parameter
+{
+    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:parameter];
+    
+    dic[@"city_id"] = [NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID];
+    dic[@"device_id"] = @"";
+    dic[@"platform"] = @"iphone";
+    dic[@"platform_version"] = @"";
+    dic[@"channel"] = @"appstore";
+    dic[@"app_version"] = [ODAPPInfoTool APPVersion];
+    dic[@"network_type"] = @"";
+    dic[@"latitude"] = @"";
+    dic[@"longitude"] = @"";
+    dic[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
+    
+    return [ODAPIManager signParameters:dic];
+}
+
 
 
 @end

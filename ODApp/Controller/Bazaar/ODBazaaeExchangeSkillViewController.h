@@ -17,11 +17,11 @@
 #import "ODCommunityShowPicViewController.h"
 #import "MJRefresh.h"
 
-@interface ODBazaaeExchangeSkillViewController : ODBaseViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface ODBazaaeExchangeSkillViewController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic,strong)UICollectionView *collectionView;
-@property(nonatomic,strong)NSMutableArray *dataArray;
-@property(nonatomic)NSInteger page;
-@property(nonatomic)CGFloat height;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic) NSInteger page;
+@property(nonatomic) CGFloat height;
 @end

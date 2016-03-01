@@ -10,16 +10,15 @@
 
 @interface ODAddAddressView : UIView
 
-@property (weak, nonatomic) IBOutlet UIButton *defaultButton;
+@property(weak, nonatomic) IBOutlet UIButton *defaultButton;
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
+@property(weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property(weak, nonatomic) IBOutlet UITextField *phoneTextField;
 
 
-@property (weak, nonatomic) IBOutlet UITextView *addressTextView;
+@property(weak, nonatomic) IBOutlet UITextView *addressTextView;
 
-+(instancetype)getView;
-
++ (instancetype)getView;
 
 
 @end

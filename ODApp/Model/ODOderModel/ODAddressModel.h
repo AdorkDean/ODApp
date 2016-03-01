@@ -10,11 +10,11 @@
 
 @interface ODAddressModel : NSObject
 
-@property (nonatomic , copy) NSString *address;
-@property (nonatomic , copy) NSString *id;
-@property (nonatomic , copy) NSString *is_default;
-@property (nonatomic , copy) NSString *name;
-@property (nonatomic , copy) NSString *tel;
+@property(nonatomic, copy) NSString *address;
+@property(nonatomic, copy) NSString *id;
+@property(nonatomic, copy) NSString *is_default;
+@property(nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString *tel;
 
 
 @end

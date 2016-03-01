@@ -11,10 +11,9 @@
 @interface ODLandSecondCell : UICollectionViewCell
 
 
-
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
-@property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
+@property(weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property(weak, nonatomic) IBOutlet UIImageView *arrowImageView;
+@property(weak, nonatomic) IBOutlet UIImageView *coverImageView;
 
 
 @end

@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong Bracelet. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODReleaseController.h"
 #import "ODBazaarExchangeSkillDetailViewController.h"
 
@@ -64,7 +65,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 {
     
     __weakSelf
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"my":@"1"};
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"city_id":@"1",@"my":@"1",@"open_id":[ODUserInformation sharedODUserInformation].openID};
     [ODHttpTool getWithURL:ODUrlPersonalReleaseTask parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
      {
          if (self.pageCount == 1)
@@ -72,23 +73,26 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
              [self.dataArray removeAllObjects];
              [self.noReusltLabel removeFromSuperview];
          }
-        [weakSelf.collectionView.mj_footer endRefreshing];
-         
-        if ([[model result]count] == 0)
-        {
-            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-        }
+       
         for (ODReleaseModel *md in [model result])
         {
             if (![[weakSelf.dataArray valueForKeyPath:@"swap_id" ] containsObject:[md swap_id]])
             {
                 [weakSelf.dataArray addObject: md];
-                
             }
         }
          
-        [weakSelf.collectionView reloadData];
         [weakSelf.collectionView.mj_header endRefreshing];
+        if ([[model result]count] == 0)
+        {
+            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+        }
+        else
+        {
+         [weakSelf.collectionView.mj_footer endRefreshing];
+        }
+        [weakSelf.collectionView reloadData];
+        
         if (self.pageCount == 1 && self.dataArray.count == 0)
         {
          weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
@@ -186,7 +190,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     {
         __weakSelf
         self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        self.flowLayout.minimumLineSpacing = 3;
+        self.flowLayout.minimumLineSpacing = 5;
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) collectionViewLayout:self.flowLayout];
         
         self.collectionView.delegate = self;
@@ -243,9 +247,11 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     self.loveRow = indexPath.row;
     if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"])
     {
-        vc.swap_id = model.swap_id;
+        vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
         vc.nick = model.user[@"nick"];
+        NSLog(@"%@",vc.swap_id);
         [self.navigationController pushViewController:vc animated:YES];
+        
     }
 }
 
@@ -254,6 +260,15 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 @end

@@ -9,6 +9,7 @@ CGFloat const ODTopY = 0;
 CGFloat const ODNavigationTextFont = 17;
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
+NSString *const kUserCache = @"kUserCache";
 NSString *const KUserDefaultsOpenId = @"userOpenId";
 NSString *const KUserDefaultsAvatar = @"userAvatar";
 NSString *const KUserDefaultsMobile = @"userMobile";
@@ -87,9 +88,11 @@ NSString *const ODNotificationSellOrderThirdRefresh = @"ODNotificationSellOrderT
 #pragma mark - 请求URL接口
 /** 统一的URL */
 #ifdef DEBUG
-NSString *const ODBaseURL = @"http://woquapi.test.odong.com/";
+NSString *const ODBaseURL = @"http://woquapi.test.odong.com";
+NSString *const ODURL = @"http://woquapi.test.odong.com/1.0";
 #else
 NSString *const ODBaseURL = @"http://woquapi.odong.com";
+NSString *const ODURL = @"http://woquapi.odong.com/1.0";
 #endif
 
 NSString *const ODUrlCityList = @"/1.0/other/city/list";

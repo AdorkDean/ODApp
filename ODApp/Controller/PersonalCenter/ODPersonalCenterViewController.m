@@ -5,6 +5,7 @@
 //  Created by Odong-YG on 15/12/17.
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODNavigationBarView.h"
 #import "ODNavigationController.h"
 #import "ODPersonalCenterViewController.h"
@@ -51,6 +52,7 @@
     {
         [navi popToRootViewControllerAnimated:YES];
     }
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 - (void)loadView
@@ -63,6 +65,7 @@
 {
     [super viewWillDisappear:animated];
     self.pageNumber = 0;
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 - (void)createTableView

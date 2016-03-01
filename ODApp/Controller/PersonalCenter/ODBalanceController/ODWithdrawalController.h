@@ -11,6 +11,6 @@
 @interface ODWithdrawalController : ODBaseViewController
 
 
-@property (nonatomic  ,copy) NSString *price;
+@property(nonatomic, copy) NSString *price;
 
 @end
