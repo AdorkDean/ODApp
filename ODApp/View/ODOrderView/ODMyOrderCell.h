@@ -25,6 +25,10 @@
 @property(weak, nonatomic) IBOutlet UILabel *priceLabel;
 @property(weak, nonatomic) IBOutlet UILabel *dateLabel;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineHeight;
+
+
+
 @property(nonatomic, strong) ODMyOrderModel *model;
 
 

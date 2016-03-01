@@ -19,8 +19,13 @@
     self.userButtonView.layer.masksToBounds = YES;
     self.userButtonView.layer.cornerRadius = 15;
     self.userButtonView.layer.borderColor = [UIColor clearColor].CGColor;
-    self.userButtonView.layer.borderWidth = 1;
+    self.userButtonView.layer.borderWidth = 0.5;
+    self.lineHeight.constant = 0.5;
     
+    self.contentImageView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    self.contentImageView.layer.masksToBounds = YES;
+    self.contentImageView.layer.borderWidth = 0.5f;
+    self.contentImageView.layer.cornerRadius = 5;
     
 }
 
