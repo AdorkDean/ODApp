@@ -1,6 +1,6 @@
 pod 'AFNetworking', '~> 2.6.2'
 pod 'SDWebImage', '~> 3.7.3'
-pod 'MJRefresh', '~> 3.0.7'
+pod 'MJRefresh'
 pod 'Masonry'
 pod 'MJExtension'
 pod 'SVProgressHUD'
@@ -11,3 +11,4 @@ pod 'AMap3DMap'  #3D地图SDK
 pod 'AMapSearch' #搜索服务SDK
 pod 'UMengSocial', '= 4.3'
 pod 'UMengAnalytics-NO-IDFA'
+pod 'Toast', '~> 3.0'

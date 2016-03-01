@@ -11,6 +11,7 @@
 
 #import "ODProgressHUD.h"
 #import <SVProgressHUD.h>
+#import <UIView+Toast.h>
 
 @implementation ODProgressHUD
 #pragma mark - 蒙版提示语
@@ -36,6 +37,12 @@ NSString * const ODAlertIsLoading = @"正在加载。。。";
 + (void)showInfoWithStatus:(NSString *)status
 {
     [SVProgressHUD showInfoWithStatus:status];
+}
+
++ (void)showToast:(UIView *)view msg:(NSString *)msg
+{
+    CGPoint center = CGPointMake(view.frame.size.width / 2, view.frame.size.height - 100);
+    [view makeToast:msg duration:3 position:[NSValue valueWithCGPoint:center]];
 }
 
 + (void)showSuccessWithStatus:(NSString *)status
