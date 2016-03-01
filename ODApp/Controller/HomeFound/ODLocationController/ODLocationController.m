@@ -94,7 +94,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 
 //动态设置每个分区的最小行间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 1;
+    return 0.5;
 }
 
 

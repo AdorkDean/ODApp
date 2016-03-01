@@ -398,8 +398,7 @@
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight - ODTabBarHeight) collectionViewLayout:self.flowLayout];
 
-    self.flowLayout.minimumInteritemSpacing = 5;
-    self.flowLayout.minimumLineSpacing = 5;
+    self.flowLayout.minimumLineSpacing = 6;
     self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
 
     [self.collectionView registerClass:[ODhomeViewCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];

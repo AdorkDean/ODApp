@@ -13,7 +13,7 @@
 - (void)awakeFromNib {
     // Initialization code
     
-    self.cityNameLabel.font = [UIFont systemFontOfSize:14];
+    self.cityNameLabel.font = [UIFont systemFontOfSize:12.5];
 }
 
 @end
