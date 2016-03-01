@@ -9,6 +9,7 @@ CGFloat const ODTopY = 0;
 CGFloat const ODNavigationTextFont = 17;
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
+NSString *const kUserCache = @"kUserCache";
 NSString *const KUserDefaultsOpenId = @"userOpenId";
 NSString *const KUserDefaultsAvatar = @"userAvatar";
 NSString *const KUserDefaultsMobile = @"userMobile";

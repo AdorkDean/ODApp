@@ -20,9 +20,8 @@ const ODNavigationTextFont;
 
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
-UIKIT_EXTERN NSString
-*
-const KUserDefaultsOpenId;
+UIKIT_EXTERN NSString * const kUserCache;
+UIKIT_EXTERN NSString * const KUserDefaultsOpenId;
 
 UIKIT_EXTERN NSString
 *

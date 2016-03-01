@@ -11,3 +11,4 @@ pod 'AMap3DMap'  #3D地图SDK
 pod 'AMapSearch' #搜索服务SDK
 pod 'UMengSocial', '= 4.3'
 pod 'UMengAnalytics-NO-IDFA'
+pod 'Toast', '~> 3.0'
