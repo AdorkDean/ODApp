@@ -141,7 +141,7 @@
                                     <state key="normal" title="Button" image="gouxuan_unselected_icon"/>
                                     <state key="selected" image="gouxuan_selected_icon"/>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="一体机" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgU-By-2eE">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一体机" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgU-By-2eE">
                                     <rect key="frame" x="20" y="8.5" width="36" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -150,9 +150,10 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="bgU-By-2eE" firstAttribute="leading" secondItem="3y4-ws-Ija" secondAttribute="trailing" constant="6" id="4lO-mG-7Ni"/>
                                 <constraint firstItem="3y4-ws-Ija" firstAttribute="centerY" secondItem="bkU-XZ-f7W" secondAttribute="centerY" id="Dke-2y-Wi3"/>
                                 <constraint firstItem="3y4-ws-Ija" firstAttribute="leading" secondItem="bkU-XZ-f7W" secondAttribute="leading" constant="4" id="fZH-Z1-L7L"/>
+                                <constraint firstItem="bgU-By-2eE" firstAttribute="centerY" secondItem="3y4-ws-Ija" secondAttribute="centerY" id="umG-Gv-aTk"/>
+                                <constraint firstItem="bgU-By-2eE" firstAttribute="leading" secondItem="3y4-ws-Ija" secondAttribute="trailing" constant="4" id="vnI-7G-lSt"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WH0-jB-pru">
