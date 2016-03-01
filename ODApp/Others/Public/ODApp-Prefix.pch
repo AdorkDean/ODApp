@@ -24,6 +24,7 @@
 #import "UIBarButtonItem+ODExtention.h"
 
 #import "ODUserInformation.h"
+#import "ODUser.h"
 
 #import "MJExtension.h"
 /***  自定义Log函数 ***/

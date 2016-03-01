@@ -14,18 +14,23 @@
 #import "ODLandMainController.h"
 #import  "ODTabBarController.h"
 #import "ODHomeFoundViewController.h"
+#import "ODUserResponse.h"
+
+
+
 
 @interface ODRegisteredController ()<UITextFieldDelegate>
 
+// 视图
 @property(nonatomic , strong) ODRegisteredView *registView;
-@property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic,strong)AFHTTPRequestOperationManager *managers;
-//定时器
+//　定时器相关
 @property(nonatomic,strong)NSTimer *timer;
-//当前秒数
 @property(nonatomic)NSInteger currentTime;
 
 @end
+
+
+
 
 @implementation ODRegisteredController
 
@@ -38,9 +43,22 @@
     self.currentTime = 60;
 }
 
+#pragma mark - 界面
 
+- (ODRegisteredView *)registView
+{
+    if (_registView == nil) {
+        self.registView = [ODRegisteredView getView];
+        self.registView.frame = CGRectMake(0, 64, kScreenSize.width, kScreenSize.height);
+        [self.registView.getVerification addTarget:self action:@selector(getVerification:) forControlEvents:UIControlEventTouchUpInside];
+        [self.registView.registereButton addTarget:self action:@selector(registere:) forControlEvents:UIControlEventTouchUpInside];
+        [self.registView.seePassword addTarget:self action:@selector(seePassword:) forControlEvents:UIControlEventTouchUpInside];
+        self.registView.phoneNumber.delegate = self;
+        self.registView.password.delegate = self;
+    }
+    return _registView;
+}
 
-#pragma mark - 初始化
 - (void)navigationInit
 {
     ODNavigationBarView *naviView = [ODNavigationBarView navigationBarView];
@@ -49,6 +67,8 @@
     [self.view addSubview:naviView];
 }
 
+
+#pragma mark - 定时器
 -(void)createTimer
 {
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerClick) userInfo:nil repeats:YES];
@@ -56,7 +76,6 @@
     [self.timer setFireDate:[NSDate distantFuture]];
 }
 
-#pragma mark - 定时器
 -(void)timerClick
 {
     self.currentTime -- ;
@@ -71,63 +90,26 @@
     }
 }
 
-#pragma mark - 懒加载
-- (ODRegisteredView *)registView
-{
-    if (_registView == nil) {
-        
-        self.registView = [ODRegisteredView getView];
-        self.registView.frame = CGRectMake(0, 64, kScreenSize.width, kScreenSize.height);
-        [self.registView.getVerification addTarget:self action:@selector(getVerification:) forControlEvents:UIControlEventTouchUpInside];
-        [self.registView.registereButton addTarget:self action:@selector(registere:) forControlEvents:UIControlEventTouchUpInside];
-        [self.registView.seePassword addTarget:self action:@selector(seePassword:) forControlEvents:UIControlEventTouchUpInside];
-        self.registView.phoneNumber.delegate = self;
-        self.registView.password.delegate = self;
-       
-     
-    }
-    return _registView;
-}
 
 
 #pragma mark - 点击事件
+
 - (void)registere:(UIButton *)sender
 {
-    
     [self.registView.phoneNumber resignFirstResponder];
     [self.registView.verification resignFirstResponder];
     [self.registView.password resignFirstResponder];
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
-
-     
-        
-        [ODProgressHUD showInfoWithStatus:@"请输入手机号"];
-        
-        
-    }else if ([self.registView.verification.text isEqualToString:@""]) {
-        
-     
-        
-         [ODProgressHUD showInfoWithStatus:@"请输入验证码"];
-        
-        
-    }else if (self.registView.password.text.length < 6 || self.registView.password.text.length > 26) {
-
-        
-          [ODProgressHUD showInfoWithStatus:@"密码仅支持6到26位"];
+        [ODProgressHUD showToast:self.view msg:@"请输入手机号"];
+    } else if ([self.registView.verification.text isEqualToString:@""]) {
+        [ODProgressHUD showToast:self.view msg:@"请输入验证码"];
+    } else if (self.registView.password.text.length < 6 || self.registView.password.text.length > 26) {
+        [ODProgressHUD showToast:self.view msg:@"密码仅支持6到26位"];
+    } else {
+        [self getRegest];
         
     }
-
-    else {
-          [self getRegest];
-        
-    }
-    
-    
-    
-  
-   
 }
 
 
@@ -138,7 +120,7 @@
     [self.registView.password resignFirstResponder];
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
-        [ODProgressHUD showInfoWithStatus:@"请输入手机号"];
+        [ODProgressHUD showToast:self.view msg:@"请输入手机号"];
     }else {
         [self getCode];
     }
@@ -159,7 +141,6 @@
 
 -(void)fanhui:(UIButton *)sender
 {
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -169,48 +150,23 @@
     NSDictionary *params = @{
                              @"mobile":self.registView.phoneNumber.text,
                              @"passwd":self.registView.password.text,
-                             @"verify_code":self.registView.verification.text};
-    NSDictionary *signParameters = [ODAPIManager signParameters:params];
-    
-  
-    self.managers = [AFHTTPRequestOperationManager manager];
-    [self.managers GET:kRegistUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                             @"verify_code":self.registView.verification.text
+                             };
+    [ODAPIManager getWithURL:@"/user/register" params:params success:^(id responseObject) {
         
-        if ([responseObject[@"status"]isEqualToString:@"success"]) {
-         
-          
-            NSMutableDictionary *dic = responseObject[@"result"];
-            NSString *openId = dic[@"open_id"];
-               NSString *avatar = dic[@"avatar"];
-            
-            [ODUserInformation sharedODUserInformation].openID = openId;
-            
-            
-            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-            [user setObject:openId forKey:KUserDefaultsOpenId];
-            [user setObject:avatar forKey:KUserDefaultsAvatar];
-            
-            [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
-                ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-                tabBar.selectedIndex = tabBar.currentIndex;
-            }];
-            
-         
-            [ODProgressHUD showInfoWithStatus:@"注册成功"];
-
-            
-        }
+        ODUserResponse *resp = [ODUserResponse mj_objectWithKeyValues:responseObject];
+        ODUser *user = resp.result;
+        [[ODUserInformation sharedODUserInformation] updateUserCache:user];
         
-        else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            
-       
-              [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-           
-        }
-    
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
+            ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            tabBar.selectedIndex = tabBar.currentIndex;
+        }];
         
-        
+        [ODProgressHUD showToast:self.view msg:@"注册成功"];
+    } error:^(NSString *msg) {
+        [ODProgressHUD showToast:self.view msg:msg];
+    } failure:^(NSError *error) {
     }];
 }
 
@@ -223,7 +179,7 @@
         // 启动定时器
         [self.timer setFireDate:[NSDate distantPast]];
     } error:^(NSString *msg) {
-        [ODProgressHUD showInfoWithStatus:msg];
+        [ODProgressHUD showToast:self.view msg:msg];
     } failure:^(NSError *error) {
         
     }];
@@ -236,6 +192,8 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+#pragma mark - umeng
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:NSStringFromClass([self class])];

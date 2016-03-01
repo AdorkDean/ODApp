@@ -179,17 +179,17 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
-    NSString *purpose = model.purpose;
-    NSDictionary *purposeDict = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
-    CGSize purposeSize = [purpose boundingRectWithSize:CGSizeMake(kScreenSize.width-125.5, 35) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:purposeDict context:nil].size;
-    NSString *name = model.position_str;
-    NSDictionary *nameDict = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
-    CGSize nameSize = [name boundingRectWithSize:CGSizeMake(kScreenSize.width-125.5, 35) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:nameDict context:nil].size;
     
-
-    return CGSizeMake(kScreenSize.width - 8, purposeSize.height+nameSize.height+120);
+    float height;
+    ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
+    height = [ODHelp textHeightFromTextString:model.purpose width:KScreenWidth - 126 fontSize:13] - 13;
+    height = height + [ODHelp textHeightFromTextString:model.position_str width:KScreenWidth - 126 fontSize:13] - 13;
+    
+    return CGSizeMake(KScreenWidth - 8, 130 + height);
+   
 }
+
+
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
