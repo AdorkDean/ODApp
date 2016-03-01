@@ -198,7 +198,7 @@
     [self.userView addSubview:userHeaderButton];
     
     //昵称
-    UILabel *userNickLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 17, 150, 13) text:userModel.nick font:13 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *userNickLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(60, 17, self.userView.frame.size.width-60, 13) text:userModel.nick font:13 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
     [self.userView addSubview:userNickLabel];
     
     //签名

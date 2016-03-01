@@ -61,11 +61,11 @@ void UncaughtExceptionHandler(NSException *exception)
     [self.window makeKeyAndVisible];
     
     
-    [WXApi registerApp:kGetWXAppId withDescription:@"我去App"];
+     [WXApi registerApp:kGetWXAppId withDescription:@"我去App"];
     
     _uncaughtExceptionHandler = NSGetUncaughtExceptionHandler();
     NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
-    
+
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isRuned"] boolValue]) {
         
         //进入主界面
@@ -98,10 +98,10 @@ void UncaughtExceptionHandler(NSException *exception)
             //调用其他SDK，例如支付宝SDK等
         }
         return result;
-        
+
     }else if ([urlstring containsString:@"wx64423cc9497cc581://pay"])
     {
-        return [WXApi handleOpenURL:url delegate:self];
+         return [WXApi handleOpenURL:url delegate:self];
     }else {
         return NO;
     }
@@ -109,7 +109,7 @@ void UncaughtExceptionHandler(NSException *exception)
     
     
     
-    
+
 }
 
 
@@ -122,13 +122,13 @@ void UncaughtExceptionHandler(NSException *exception)
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *openId = [user objectForKey:KUserDefaultsOpenId];
     [ODUserInformation sharedODUserInformation].openID = openId ? openId : @"";
-    
+
     NSString *avatar = [user objectForKey:KUserDefaultsAvatar];
     [ODUserInformation sharedODUserInformation].avatar = avatar ? avatar : @"";
-    
+
     NSString *mobile = [user objectForKey:KUserDefaultsMobile];
     [ODUserInformation sharedODUserInformation].avatar = mobile ? mobile : @"";
-    
+
     
     self.window.rootViewController = [[ODTabBarController alloc]init];
     
@@ -138,7 +138,7 @@ void UncaughtExceptionHandler(NSException *exception)
     manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = NO;
     
-    
+ 
     
     [UMSocialData setAppKey:kGetUMAppkey];
     
@@ -190,9 +190,9 @@ void UncaughtExceptionHandler(NSException *exception)
     }
     
     
-    self.pageControl = [[MyPageControl alloc] initWithFrame:CGRectMake( self.ViewController.view.center.x - 50,  self.ViewController.view.center.y * 2 - 30, 200, 30) normalImage:[UIImage imageNamed:@"selected.png"] highlightedImage:[UIImage imageNamed:@"noselected.png"] dotsNumber:4 sideLength:15 dotsGap:10];
+     self.pageControl = [[MyPageControl alloc] initWithFrame:CGRectMake( self.ViewController.view.center.x - 50,  self.ViewController.view.center.y * 2 - 30, 200, 30) normalImage:[UIImage imageNamed:@"selected.png"] highlightedImage:[UIImage imageNamed:@"noselected.png"] dotsNumber:4 sideLength:15 dotsGap:10];
     
-    self.pageControl.backgroundColor = [UIColor clearColor];
+     self.pageControl.backgroundColor = [UIColor clearColor];
     
     
     
@@ -212,19 +212,20 @@ void UncaughtExceptionHandler(NSException *exception)
             img.image=[UIImage imageNamed:arr[i]];
         }else{
             
-            img.image=[UIImage imageNamed:arr[i]];
-            img.userInteractionEnabled = YES;
-            UIButton *goButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            goButton.frame = CGRectMake(self.window.center.x - 70, self.window.center.y + 130, 140, 50);
-            [goButton setTitle:@"立即体验" forState:UIControlStateNormal];
-            goButton.titleLabel.font = [UIFont systemFontOfSize:17];
-            [goButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-            goButton.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
-            goButton.layer.masksToBounds = YES;
-            goButton.layer.cornerRadius = 25;
-            goButton.layer.borderColor = [UIColor blackColor].CGColor;
-            goButton.layer.borderWidth = 1;
+           img.image=[UIImage imageNamed:arr[i]];
+           img.userInteractionEnabled = YES;
             
+        UIButton *goButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        goButton.frame = CGRectMake(self.window.center.x - 70, self.window.center.y + 130, 140, 50);
+          [goButton setTitle:@"立即体验" forState:UIControlStateNormal];
+           goButton.titleLabel.font = [UIFont systemFontOfSize:17];
+           [goButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+           goButton.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+           goButton.layer.masksToBounds = YES;
+           goButton.layer.cornerRadius = 25;
+           goButton.layer.borderColor = [UIColor blackColor].CGColor;
+           goButton.layer.borderWidth = 1;
+
             
             [goButton addTarget:self action:@selector(tapAction:) forControlEvents:UIControlEventTouchUpInside];
             [img addSubview:goButton];
@@ -320,7 +321,7 @@ void UncaughtExceptionHandler(NSException *exception)
                 //通过通知中心发送通知
                 [[NSNotificationCenter defaultCenter] postNotification:notification];
                 
-                
+                              
                 break;
             }
             default:{
@@ -334,8 +335,8 @@ void UncaughtExceptionHandler(NSException *exception)
             }
         }
     }
-    
-    
+  
+
 }
 
 
