@@ -76,7 +76,7 @@
     self.isTouYing = YES;
     self.isYinXiang = YES;
     self.isMai = YES;
-
+    self.isBeginTime = NO;
 
     self.dateStr = @"";
     self.timeStr = @"";
@@ -579,21 +579,10 @@
 
         [self.yuYueView.btimeText setTitle:time forState:UIControlStateNormal];
         [self.yuYueView.eTimeText setTitle:@"填写结束时间" forState:UIControlStateNormal];
-        self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:13];
+        self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:10];
 
+        self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:10];
 
-        if (iPhone4_4S || iPhone5_5s) {
-            self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:12];
-
-
-        } else if (iPhone6_6s) {
-            self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:13];
-
-        } else {
-            self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:13];
-
-
-        }
 
 
         NSString *beginTime = [self.yearStr stringByAppendingString:@" "];
@@ -616,19 +605,6 @@
 
         NSString *time = [self.dateStr stringByAppendingString:self.timeStr];
         [self.yuYueView.eTimeText setTitle:time forState:UIControlStateNormal];
-
-
-        if (iPhone4_4S || iPhone5_5s) {
-            self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:12];
-
-        } else if (iPhone6_6s) {
-
-            self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:13];
-        } else {
-
-            self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:13];
-
-        }
 
         self.eimeStr = self.timeStr;
         NSString *endTime = [self.yearStr stringByAppendingString:@" "];
@@ -668,8 +644,8 @@
 
             [self.yuYueView.btimeText setTitle:@"填写开始时间" forState:UIControlStateNormal];
             [self.yuYueView.eTimeText setTitle:@"填写结束时间" forState:UIControlStateNormal];
-            self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:13];
-            self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:13];
+            self.yuYueView.btimeText.titleLabel.font = [UIFont systemFontOfSize:10];
+            self.yuYueView.eTimeText.titleLabel.font = [UIFont systemFontOfSize:10];
         }
     };
 
