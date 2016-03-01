@@ -45,7 +45,7 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
       [self.collectionView registerNib:[UINib nibWithNibName:@"ODOperationSeccondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     
       [self.collectionView registerNib:[UINib nibWithNibName:@"ODOperationFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
@@ -72,7 +72,7 @@
         ODOperationSeccondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
             
             
-            self.cachesLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenSize.width - 90 , 7 , 50 , 20)];
+            self.cachesLabel = [[UILabel alloc] initWithFrame:CGRectMake(kScreenSize.width - 90 , 12 , 50 , 20)];
             self.cachesLabel.font = [UIFont systemFontOfSize:14];
             self.cachesLabel.backgroundColor = [UIColor whiteColor];
             self.cachesLabel.textAlignment = NSTextAlignmentRight;
@@ -191,7 +191,7 @@
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-          return CGSizeMake(kScreenSize.width , 40);
+          return CGSizeMake(kScreenSize.width , 44);
     
 }
 

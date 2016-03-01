@@ -16,9 +16,7 @@
     
     self.titleLabel.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     
-    self.leftLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-
-     self.rightLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+ 
     
     
      self.titleLabel.layer.masksToBounds = YES;
