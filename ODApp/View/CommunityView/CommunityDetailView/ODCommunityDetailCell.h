@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property (weak, nonatomic) IBOutlet UIImageView *lineImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineImageViewConstraint;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelSpace;

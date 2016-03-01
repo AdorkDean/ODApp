@@ -119,11 +119,14 @@
     for (NSInteger i = 0; i < array.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setTitle:array[i] forState:UIControlStateNormal];
-        button.frame = CGRectMake(0, 30*i, 112, 30);
+        button.frame = CGRectMake(0, 30*i, 112, 29);
         button.tag = i+10;
         [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [controller.view addSubview:button];
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(7, CGRectGetMaxY(button.frame)+1, 98, 1)];
+        lineView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        [controller.view addSubview:lineView];
     }
     //设置弹出模式
     controller.modalPresentationStyle = UIModalPresentationPopover;
