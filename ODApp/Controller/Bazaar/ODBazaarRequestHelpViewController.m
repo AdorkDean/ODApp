@@ -125,7 +125,7 @@
         [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [controller.view addSubview:button];
-        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(7, CGRectGetMaxY(button.frame)+1, 98, 1)];
+        UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(7, CGRectGetMaxY(button.frame)+0.5, 98, 0.5)];
         lineView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         [controller.view addSubview:lineView];
     }

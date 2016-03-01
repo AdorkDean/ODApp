@@ -64,7 +64,7 @@
 -(void)createScrollView
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
-    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
@@ -125,7 +125,7 @@
     self.titleTextField.text = self.skillTitle;
     [topView addSubview:self.titleTextField];
     
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 59, kScreenSize.width, 1)];
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 59.5, kScreenSize.width, 0.5)];
     lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [topView addSubview:lineView];
 }
@@ -166,7 +166,7 @@
     self.contentCountLabel.font = [UIFont systemFontOfSize:12];
     [middleView addSubview:self.contentCountLabel];
     
-    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(17.5, 169, kScreenSize.width-35, 1)];
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(17.5, 169.5, kScreenSize.width-35, 0.5)];
     lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [middleView addSubview:lineView];
     
@@ -378,7 +378,7 @@
 -(void)createBottomView
 {
     self.bottomView = [[UIView alloc]init];
-    self.bottomView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.bottomView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.bottomView.userInteractionEnabled = YES;
     [self.scrollView addSubview:self.bottomView];
     
