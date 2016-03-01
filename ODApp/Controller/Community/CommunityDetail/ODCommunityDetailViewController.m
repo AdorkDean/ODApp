@@ -233,11 +233,11 @@
     self.bbsView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 76, kScreenSize.width, 100) tag:0 color:nil];
     [self.tabelHeaderView addSubview:self.bbsView];
     //bbs标题
-    UILabel *bbsTitleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12.5, 17.5, kScreenSize.width-25, [ODHelp textHeightFromTextString:resultModel.title width:kScreenSize.width-25 fontSize:12.5]) text:resultModel.title font:13 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
+    UILabel *bbsTitleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12.5, 17.5, kScreenSize.width-25, [ODHelp textHeightFromTextString:resultModel.title width:kScreenSize.width-25 fontSize:12.5]) text:resultModel.title font:12.5 alignment:@"left" color:@"#000000" alpha:1 maskToBounds:NO];
     [self.bbsView addSubview:bbsTitleLabel];
     
     //bbs内容
-    UILabel *bbsContentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12.5, CGRectGetMaxY(bbsTitleLabel.frame)+17.5,kScreenSize.width-25, [ODHelp textHeightFromTextString:resultModel.content width:kScreenSize.width-25 fontSize:13]) text:resultModel.content font:12.5 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
+    UILabel *bbsContentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(12.5, CGRectGetMaxY(bbsTitleLabel.frame)+17.5,kScreenSize.width-25, [ODHelp textHeightFromTextString:resultModel.content width:kScreenSize.width-25 fontSize:12.5]) text:resultModel.content font:12.5 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
     [self.bbsView addSubview:bbsContentLabel];
 
     //创建时间

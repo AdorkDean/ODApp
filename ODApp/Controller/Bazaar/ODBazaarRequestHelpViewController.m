@@ -241,6 +241,7 @@
     __weak typeof(self) weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
 
+        [weakSelf.noResultLabel removeFromSuperview];
         if (weakSelf.count == 1) {
             [weakSelf.dataArray removeAllObjects];
         }
@@ -252,6 +253,11 @@
                 ODBazaarModel *model = [[ODBazaarModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
+            }
+            
+            if (weakSelf.count == 1 && weakSelf.dataArray.count == 0) {
+                weakSelf.noResultLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+                [weakSelf.view addSubview:weakSelf.noResultLabel];
             }
 
             [weakSelf.collectionView reloadData];
