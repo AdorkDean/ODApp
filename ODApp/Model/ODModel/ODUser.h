@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ODShareModel.h"
 
 @interface ODUser : NSObject
 
@@ -24,5 +25,7 @@
 @property (assign, nonatomic) int gender;
 @property (assign, nonatomic) int user_auth_status;
 @property (copy, nonatomic) NSString *balance;
+@property (strong, nonatomic) ODShareModel *share;
+
 
 @end
