@@ -156,7 +156,7 @@
         UIView *lineSpaceView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.changeSkillView.frame), ODLeftMargin, 0.5)];
         lineSpaceView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         [self addSubview:lineSpaceView];
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.changeSkillView.frame), ODLeftMargin, 0.5)];
+        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.changeSkillView.frame), KScreenWidth - ODLeftMargin, 0.5)];
         lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         [self addSubview:lineView];
 
