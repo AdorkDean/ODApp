@@ -38,9 +38,7 @@
     self.pageNumber = 0;
     
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];;
-    
-
+    self.view.backgroundColor = [UIColor colorWithHexString:@"#f7f7f7" alpha:1];;
 
 }
 
@@ -71,7 +69,7 @@
 - (void)createTableView
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#f7f7f7" alpha:1];
     self.tableView.userInteractionEnabled = YES;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
@@ -83,20 +81,10 @@
 - (void)navigationInit
 {
     ODNavigationBarView *naviView = [ODNavigationBarView navigationBarView];
-    naviView.title = @"登陆";
+    naviView.title = @"登录";
     naviView.leftBarButton = [ODBarButton barButtonWithTarget:self action:@selector(backAction:) title:@"返回"];
     naviView.rightBarButton = [ODBarButton barButtonWithTarget:self action:@selector(registered:) title:@"注册"];;
     [self.view addSubview:naviView];
-}
-
-
-
-//创建警告框
--(void)createUIAlertControllerWithTitle:(NSString *)title
-{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
 }
 
 
@@ -105,12 +93,8 @@
 {
     if (_landView == nil) {
         self.landView = [ODlandingView getView];
-      
         [self.landView.landButton addTarget:self action:@selector(landAction:) forControlEvents:UIControlEventTouchUpInside];
-     
-        
         [self.landView.forgetPassWordButton addTarget:self action:@selector(forgetPassawordAction:) forControlEvents:UIControlEventTouchUpInside];
-        
     }
     return _landView;
 }
@@ -274,9 +258,10 @@
     return 0;
 }
 
+
+#pragma mark - 内存管理
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

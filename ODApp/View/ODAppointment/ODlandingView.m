@@ -19,19 +19,19 @@
     view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     
     view.accountLabel.layer.masksToBounds = YES;
-    view.accountLabel.layer.cornerRadius = 20;
-    view.accountLabel.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
-    view.accountLabel.layer.borderWidth = 1;
+    view.accountLabel.layer.cornerRadius = 25;
+    view.accountLabel.layer.borderColor = [UIColor colorWithHexString:@"#333333" alpha:1].CGColor;
+    view.accountLabel.layer.borderWidth = 0.5f;
     
     view.passwordLabel.layer.masksToBounds = YES;
-    view.passwordLabel.layer.cornerRadius = 20;
-    view.passwordLabel.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
-    view.passwordLabel.layer.borderWidth = 1;
+    view.passwordLabel.layer.cornerRadius = 25;
+    view.passwordLabel.layer.borderColor = [UIColor colorWithHexString:@"#333333" alpha:1].CGColor;
+    view.passwordLabel.layer.borderWidth = 0.5f;
     
     view.landButton.layer.masksToBounds = YES;
-    view.landButton.layer.cornerRadius = 20;
-    view.landButton.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
-    view.landButton.layer.borderWidth = 1;
+    view.landButton.layer.cornerRadius = 25;
+    view.landButton.layer.borderColor = [UIColor colorWithHexString:@"#333333" alpha:1].CGColor;
+    view.landButton.layer.borderWidth = 0.5f;
     view.landButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
     
     view.passwordTextField.secureTextEntry = YES;
