@@ -111,7 +111,7 @@
     self.collectionView.layer.cornerRadius = 5;
     self.collectionView.layer.borderWidth = 1;
     self.collectionView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarRewardCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarRewardCellId];
     [self.view addSubview:self.collectionView];
 }
@@ -129,6 +129,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODBazaarRewardCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarRewardCellId forIndexPath:indexPath];
     cell.nameLabel.text = self.dataArray[indexPath.row];
+    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     if (indexPath.row == 0) {
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenSize.width - 40, 15, 20, 20)];
         self.imageView.image = [UIImage imageNamed:@"时间下拉箭头"];

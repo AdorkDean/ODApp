@@ -190,7 +190,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     {
         __weakSelf
         self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        self.flowLayout.minimumLineSpacing = 3;
+        self.flowLayout.minimumLineSpacing = 5;
         self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) collectionViewLayout:self.flowLayout];
         
         self.collectionView.delegate = self;
