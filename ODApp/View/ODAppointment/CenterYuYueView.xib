@@ -133,7 +133,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="77.5" height="30"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3y4-ws-Ija">
-                                    <rect key="frame" x="4" y="9" width="12" height="12"/>
+                                    <rect key="frame" x="6" y="9" width="12" height="12"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="12" id="T4b-BV-BNv"/>
                                         <constraint firstAttribute="width" constant="12" id="hLX-17-fQ6"/>
@@ -142,7 +142,7 @@
                                     <state key="selected" image="gouxuan_selected_icon"/>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="一体机" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgU-By-2eE">
-                                    <rect key="frame" x="20" y="8.5" width="36" height="14.5"/>
+                                    <rect key="frame" x="22" y="8" width="36" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -151,7 +151,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="3y4-ws-Ija" firstAttribute="centerY" secondItem="bkU-XZ-f7W" secondAttribute="centerY" id="Dke-2y-Wi3"/>
-                                <constraint firstItem="3y4-ws-Ija" firstAttribute="leading" secondItem="bkU-XZ-f7W" secondAttribute="leading" constant="4" id="fZH-Z1-L7L"/>
+                                <constraint firstItem="3y4-ws-Ija" firstAttribute="leading" secondItem="bkU-XZ-f7W" secondAttribute="leading" constant="6" id="fZH-Z1-L7L"/>
                                 <constraint firstItem="bgU-By-2eE" firstAttribute="centerY" secondItem="3y4-ws-Ija" secondAttribute="centerY" id="umG-Gv-aTk"/>
                                 <constraint firstItem="bgU-By-2eE" firstAttribute="leading" secondItem="3y4-ws-Ija" secondAttribute="trailing" constant="4" id="vnI-7G-lSt"/>
                             </constraints>
@@ -165,7 +165,7 @@
                                     <state key="selected" image="gouxuan_selected_icon"/>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投影仪" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NrB-lq-lGC">
-                                    <rect key="frame" x="22" y="8.5" width="36" height="14.5"/>
+                                    <rect key="frame" x="22" y="8" width="36" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -188,7 +188,7 @@
                                     <state key="selected" image="gouxuan_selected_icon"/>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="音响" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03P-Jc-uDU">
-                                    <rect key="frame" x="22" y="8.5" width="24" height="14.5"/>
+                                    <rect key="frame" x="22" y="8" width="24" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -211,7 +211,7 @@
                                     <state key="selected" image="gouxuan_selected_icon"/>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="麦克风" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1Z-iD-DqS">
-                                    <rect key="frame" x="22" y="8.5" width="36" height="14.5"/>
+                                    <rect key="frame" x="22" y="8" width="36" height="14.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -273,12 +273,12 @@
                     <rect key="frame" x="10" y="401" width="310" height="30"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xyc-dA-QMU">
-                            <rect key="frame" x="84" y="1" width="88" height="28"/>
+                            <rect key="frame" x="87" y="1" width="88" height="28"/>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="0459-888888"/>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="场地预约电话:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGx-gz-xai">
-                            <rect key="frame" x="4" y="8" width="76" height="14.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" 场地预约电话:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NGx-gz-xai">
+                            <rect key="frame" x="4" y="8" width="79" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.28235294117647058" green="0.28235294117647058" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -293,16 +293,28 @@
                         <constraint firstItem="Xyc-dA-QMU" firstAttribute="leading" secondItem="NGx-gz-xai" secondAttribute="trailing" constant="4" id="x4Z-pJ-I3F"/>
                     </constraints>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="40a-oC-IUh">
+                    <rect key="frame" x="295" y="34" width="15" height="15"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="场地预约icon2" translatesAutoresizingMaskIntoConstraints="NO" id="kJG-uQ-CNs">
+                    <rect key="frame" x="303" y="68.5" width="7" height="12"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="downjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="CRW-X8-Cgs">
+                    <rect key="frame" x="130" y="33" width="15" height="15"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="kSv-qp-5oD" firstAttribute="top" secondItem="P2O-VZ-0LB" secondAttribute="bottom" constant="4" id="2kW-Iq-gwQ"/>
                 <constraint firstItem="iUz-uX-Ghz" firstAttribute="top" secondItem="DMe-Bw-VoJ" secondAttribute="bottom" constant="29" id="4GP-hL-L8y"/>
+                <constraint firstItem="CRW-X8-Cgs" firstAttribute="centerY" secondItem="QSr-AF-cie" secondAttribute="centerY" id="4Pf-0F-0cB"/>
                 <constraint firstAttribute="trailing" secondItem="iUz-uX-Ghz" secondAttribute="trailing" constant="10" id="4U7-vx-5l3"/>
+                <constraint firstItem="40a-oC-IUh" firstAttribute="centerY" secondItem="f3r-HU-mHi" secondAttribute="centerY" id="4X9-Qo-fOg"/>
                 <constraint firstItem="f3r-HU-mHi" firstAttribute="width" secondItem="QSr-AF-cie" secondAttribute="width" id="5dm-cG-i2O"/>
                 <constraint firstItem="f3r-HU-mHi" firstAttribute="height" secondItem="QSr-AF-cie" secondAttribute="height" id="6kk-mg-2hQ"/>
                 <constraint firstItem="BK5-ae-hLW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="81P-4d-LdC"/>
                 <constraint firstItem="l7W-0o-0Dr" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="A9s-ph-ddV"/>
+                <constraint firstAttribute="trailing" secondItem="40a-oC-IUh" secondAttribute="trailing" constant="20" id="G3h-Oc-m1u"/>
                 <constraint firstItem="iRV-Ul-byq" firstAttribute="leading" secondItem="Vf5-1H-Xbc" secondAttribute="leading" id="GNP-Rj-FyV"/>
                 <constraint firstAttribute="trailing" secondItem="3CS-93-fUf" secondAttribute="trailing" constant="10" id="KD3-hj-VlO"/>
                 <constraint firstItem="SUJ-OR-ssR" firstAttribute="leading" secondItem="l7W-0o-0Dr" secondAttribute="trailing" constant="10" id="KFx-AO-rah"/>
@@ -313,6 +325,8 @@
                 <constraint firstAttribute="trailing" secondItem="ayB-ay-RcL" secondAttribute="trailing" constant="10" id="OdR-Dv-I1e"/>
                 <constraint firstItem="EIj-C2-fs1" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="QwS-Wp-Ed8"/>
                 <constraint firstItem="0UC-Su-qDh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="STC-Dy-GJi"/>
+                <constraint firstItem="f3r-HU-mHi" firstAttribute="leading" secondItem="CRW-X8-Cgs" secondAttribute="trailing" constant="30" id="SVL-QK-rWD"/>
+                <constraint firstAttribute="trailing" secondItem="kJG-uQ-CNs" secondAttribute="trailing" constant="20" id="Sj2-dI-6Jj"/>
                 <constraint firstItem="iRV-Ul-byq" firstAttribute="top" secondItem="Vf5-1H-Xbc" secondAttribute="bottom" constant="12" id="Tyt-qt-SDd"/>
                 <constraint firstItem="DMe-Bw-VoJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="UuA-JQ-hhY"/>
                 <constraint firstItem="kSv-qp-5oD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="VRL-R0-5Ia"/>
@@ -331,6 +345,7 @@
                 <constraint firstItem="0RW-SU-fP7" firstAttribute="leading" secondItem="3CS-93-fUf" secondAttribute="leading" id="qXw-ie-VI7"/>
                 <constraint firstItem="l7W-0o-0Dr" firstAttribute="centerY" secondItem="QSr-AF-cie" secondAttribute="centerY" id="ryz-43-e3L"/>
                 <constraint firstItem="f3r-HU-mHi" firstAttribute="top" secondItem="QSr-AF-cie" secondAttribute="top" id="teo-Tu-wsE"/>
+                <constraint firstItem="kJG-uQ-CNs" firstAttribute="centerY" secondItem="DMe-Bw-VoJ" secondAttribute="centerY" id="vXa-RN-JYM"/>
                 <constraint firstItem="P2O-VZ-0LB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="vwc-tn-L1q"/>
                 <constraint firstItem="QSr-AF-cie" firstAttribute="top" secondItem="EIj-C2-fs1" secondAttribute="bottom" constant="4" id="wND-P9-hMG"/>
                 <constraint firstItem="Vf5-1H-Xbc" firstAttribute="top" secondItem="3CS-93-fUf" secondAttribute="bottom" constant="29" id="xlQ-Nx-bzK"/>
@@ -371,7 +386,9 @@
         </view>
     </objects>
     <resources>
+        <image name="downjiantou" width="15" height="15"/>
         <image name="gouxuan_selected_icon" width="12" height="12"/>
         <image name="gouxuan_unselected_icon" width="12" height="12"/>
+        <image name="场地预约icon2" width="7" height="12"/>
     </resources>
 </document>
