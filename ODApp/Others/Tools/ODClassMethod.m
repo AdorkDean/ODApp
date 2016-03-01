@@ -120,7 +120,7 @@
     if (maskToBounds) {
         textView.layer.masksToBounds = YES;
         textView.layer.cornerRadius = 5;
-        textView.layer.borderWidth = 1;
+        textView.layer.borderWidth = 0.5;
         textView.layer.borderColor = [UIColor colorWithHexString:@"e6e6e6" alpha:1].CGColor;
     }
     return textView;

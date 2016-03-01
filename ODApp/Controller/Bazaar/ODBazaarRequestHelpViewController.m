@@ -107,6 +107,7 @@
     seacrhLabel.text = @"请输入您要搜索的关键字";
     seacrhLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     seacrhLabel.font = [UIFont systemFontOfSize:15];
+    seacrhLabel.tag = 10012;
     [searchView addSubview:seacrhLabel];
 }
 
@@ -142,12 +143,14 @@
 {
     UIImageView *imageView = (UIImageView *)[self.screeningButton viewWithTag:10010];
     UIView *view = (UIView *)[self.view viewWithTag:10011];
+    UILabel *label = (UILabel *)[view viewWithTag:10012];
     if (button.tag==10) {
         self.status = @"1";
         [self.screeningButton setTitle:@"待派遣" forState:UIControlStateNormal];
         [self.screeningButton setFrame:CGRectMake(10, 10, 100, 35)];
         [imageView setFrame:CGRectMake(70, 13, 15, 9)];
         [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
+        [label setFrame:CGRectMake(40, 10, view.frame.size.width-40, 15)];
         [self joiningTogetherParmetersWithTaskStatus];
     }else if (button.tag == 11){
         self.status = @"2";
@@ -155,6 +158,7 @@
         [self.screeningButton setFrame:CGRectMake(10, 10, 112, 35)];
         [imageView setFrame:CGRectMake(85, 13, 15, 9)];
         [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
+        [label setFrame:CGRectMake(40, 10, view.frame.size.width-40, 15)];
         [self joiningTogetherParmetersWithTaskStatus];
     }else if (button.tag == 12){
         self.status = @"4";
@@ -162,6 +166,7 @@
         [self.screeningButton setFrame:CGRectMake(10, 10, 100, 35)];
         [imageView setFrame:CGRectMake(70, 13, 15, 9)];
         [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
+        [label setFrame:CGRectMake(40, 10, view.frame.size.width-40, 15)];
         [self joiningTogetherParmetersWithTaskStatus];
     }else if (button.tag == 13){
         self.status = @"-2";
@@ -169,6 +174,7 @@
         [self.screeningButton setFrame:CGRectMake(10, 10, 100, 35)];
         [imageView setFrame:CGRectMake(70, 13, 15, 9)];
         [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
+        [label setFrame:CGRectMake(40, 10, view.frame.size.width-40, 15)];
         [self joiningTogetherParmetersWithTaskStatus];
        
     }else{
@@ -177,6 +183,7 @@
         [self.screeningButton setFrame:CGRectMake(10, 10, 85, 35)];
         [imageView setFrame:CGRectMake(55, 13, 15, 9)];
         [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
+        [label setFrame:CGRectMake(40, 10, view.frame.size.width-40, 15)];
         [self joiningTogetherParmeters];
     }
     [self.collectionView.mj_header beginRefreshing];
@@ -272,7 +279,7 @@
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,55, kScreenSize.width,kScreenSize.height-64-95-55) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarCellId];
     [self.view addSubview:self.collectionView];
 }
