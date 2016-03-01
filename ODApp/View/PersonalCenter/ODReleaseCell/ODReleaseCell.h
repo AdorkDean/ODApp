@@ -32,5 +32,8 @@
 @property (nonatomic, strong) ODReleaseModel *model;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *buttonWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *horicontalLineViewHeight;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineViewWidth;
 
 @end

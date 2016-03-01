@@ -15,6 +15,9 @@
     self.titleImageView.layer.cornerRadius = 7;
     self.titleImageView.layer.masksToBounds = YES;
     
+    self.horicontalLineViewHeight.constant = 0.5;
+    self.lineViewWidth.constant = 0.5;
+    
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     
     self.priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
