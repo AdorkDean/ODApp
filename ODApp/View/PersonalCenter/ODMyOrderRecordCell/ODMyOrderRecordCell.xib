@@ -155,6 +155,7 @@
                 <outlet property="centerPurposeImageView" destination="nTO-mV-r04" id="eju-Ii-8ny"/>
                 <outlet property="centerPurposeLabel" destination="LPS-mZ-Po3" id="1bz-ct-wku"/>
                 <outlet property="checkStateLabel" destination="B2b-Nv-fOg" id="7rz-cf-WDn"/>
+                <outlet property="lineHeight" destination="JSG-dL-8kS" id="nNe-m7-QWO"/>
                 <outlet property="timeDetailLabel" destination="mha-JD-fo2" id="Ery-Kc-sEQ"/>
                 <outlet property="timeImageView" destination="Jll-jI-s0Y" id="NWx-WF-GrP"/>
                 <outlet property="timeLabel" destination="10e-Cq-3Jf" id="asw-bj-Euv"/>

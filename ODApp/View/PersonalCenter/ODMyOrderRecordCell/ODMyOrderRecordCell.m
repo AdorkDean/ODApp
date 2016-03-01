@@ -14,7 +14,8 @@
 {
     self.checkStateLabel.layer.cornerRadius = 3;
     self.checkStateLabel.layer.borderWidth = 1;
-    self.checkStateLabel.layer.borderColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1].CGColor;
+    self.checkStateLabel.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    self.lineHeight.constant = 0.5;
 }
 
 - (void)showDatawithModel:(ODMyOrderRecordModel *)model{

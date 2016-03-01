@@ -20,4 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *seePassword;
 @property (weak, nonatomic) IBOutlet UIButton *registereButton;
 
+@property (weak, nonatomic) IBOutlet UILabel *line1;
+@property (weak, nonatomic) IBOutlet UILabel *line2;
+@property (weak, nonatomic) IBOutlet UILabel *line3;
+
 @end

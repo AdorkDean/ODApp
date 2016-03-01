@@ -108,9 +108,11 @@
                 <outlet property="contentLabel" destination="VYl-Dz-2Hp" id="jgE-bk-9lC"/>
                 <outlet property="deleteButton" destination="Fmt-Zr-vjy" id="0Tk-ju-7pt"/>
                 <outlet property="editButton" destination="ZoQ-7Z-BHs" id="hLg-sL-JTN"/>
+                <outlet property="horicontalLineViewHeight" destination="yrE-Iy-v6N" id="jhq-qn-PRN"/>
                 <outlet property="horizontalLineView" destination="qOS-I0-VaY" id="2zD-OY-RVB"/>
                 <outlet property="illegalLabel" destination="onC-zl-J0C" id="KkF-Vs-Fa7"/>
                 <outlet property="lineView" destination="Rg8-lq-TXw" id="YZr-bH-A4C"/>
+                <outlet property="lineViewWidth" destination="KWO-M6-l3a" id="MCI-Mz-f3g"/>
                 <outlet property="lovesLabel" destination="qpy-B6-EjT" id="Okl-s2-mOQ"/>
                 <outlet property="priceLabel" destination="4ZI-Tp-aVk" id="GyP-h3-zu5"/>
                 <outlet property="titleImageView" destination="ffB-h2-Dmd" id="aHp-D1-XyQ"/>
