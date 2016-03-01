@@ -18,11 +18,11 @@
 @property (weak, nonatomic) IBOutlet UIButton *touYingButton;
 @property (weak, nonatomic) IBOutlet UIButton *yinXiangButton;
 @property (weak, nonatomic) IBOutlet UIButton *maiButton;
-@property (weak, nonatomic) IBOutlet UILabel *sheBeiLabel;
+@property (weak, nonatomic) IBOutlet UIView *sheBeiLabel;
 @property (weak, nonatomic) IBOutlet UITextView *pursoseTextView;
 @property (weak, nonatomic) IBOutlet UITextView *contentTextView;
 @property (weak, nonatomic) IBOutlet UITextField *peopleNumberTextField;
-@property (weak, nonatomic) IBOutlet UILabel *phoneLabel;
+@property (weak, nonatomic) IBOutlet UIView *phoneLabel;
 @property (weak, nonatomic) IBOutlet UILabel *beginText;
 @property (weak, nonatomic) IBOutlet UILabel *endText;
 @property (weak, nonatomic) IBOutlet UILabel *sheBeiText;

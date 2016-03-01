@@ -50,7 +50,6 @@
         return;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"个人中心";
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
