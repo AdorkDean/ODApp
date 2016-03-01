@@ -176,7 +176,8 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+//    float labelHeight;
+//    labelHeight = [ODHelp textHeightFromTextString:self.orderRecordCell.centerPurposeDetailLabel.text width:KScreenWidth - 118 fontSize:13];
     return CGSizeMake(kScreenSize.width - 8, 150);
 }
 
