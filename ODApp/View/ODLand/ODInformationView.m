@@ -10,9 +10,19 @@
 
 @implementation ODInformationView
 
+- (void)awakeFromNib
+{
+
+    self.lineHeight.constant = 0.5;
+    self.lineOneHeight.constant = 0.5;
+    self.lineTwoHeight.constant = 0.5;
+    self.lineThreeHeight.constant = 0.5;
+}
+
 +(instancetype)getView
 {
     return [[[NSBundle mainBundle] loadNibNamed:@"ODInformationView" owner:nil options:nil] firstObject];
+
     
 }
 

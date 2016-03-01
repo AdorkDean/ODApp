@@ -24,5 +24,16 @@
 @property (weak, nonatomic) IBOutlet UIImageView *passWordImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *codeImageView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineHeight;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineOneHeight;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineTwoHeight;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineThreeHeight;
+
+
+
+
 
 @end

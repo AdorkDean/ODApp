@@ -28,5 +28,5 @@
             params: (NSDictionary *)params
            success: (void (^)(id responseObject))success
              error: (void (^)(NSString *msg))error
-           failure: (void (^)(NSError *error))failure {
+           failure: (void (^)(NSError *error))failure;
 @end

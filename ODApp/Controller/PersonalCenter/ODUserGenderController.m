@@ -33,7 +33,7 @@
 - (void)createView
 {
     
-    UIImageView *manView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 40)];
+    UIImageView *manView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 42.5)];
     manView.backgroundColor = [UIColor whiteColor];
     manView.userInteractionEnabled = YES;
     [self.view addSubview:manView];
@@ -41,19 +41,23 @@
     UITapGestureRecognizer *manTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(manAction)];
     [manView addGestureRecognizer:manTap];
     
-    UILabel *manLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 50, 20)];
+    UILabel *manLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.5, 0, 50, 42.5)];
     manLabel.text = @"男";
+    manLabel.font = [UIFont systemFontOfSize:12.5];
     [manView addSubview:manLabel];
     
-    UIImageView *firstArror = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenSize.width - 30, 10, 20, 20)];
+    UIImageView *firstArror = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenSize.width - ODLeftMargin - 14, 14.25, 14, 14)];
     firstArror.image = [UIImage imageNamed:@"rightjiantou"];
     [manView addSubview:firstArror];
     
-    UIImageView *firstLine = [[UIImageView alloc] initWithFrame:CGRectMake(0,  manView.frame.size.height, kScreenSize.width, 1)];
-    firstLine.backgroundColor = [UIColor lightGrayColor];
+    UIImageView *firstLine = [[UIImageView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(manView.frame), kScreenSize.width - ODLeftMargin, 0.5)];
+    firstLine.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.view addSubview:firstLine];
+    UIImageView *firstSpaceLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(manView.frame), ODLeftMargin, 0.5)];
+    firstSpaceLine.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:firstSpaceLine];
    
-    UIImageView *womanView = [[UIImageView alloc] initWithFrame:CGRectMake(0, firstLine.frame.origin.y + firstLine.frame.size.height, kScreenSize.width, 40)];
+    UIImageView *womanView = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(firstLine.frame), kScreenSize.width, 42.5)];
     womanView.backgroundColor = [UIColor whiteColor];
     womanView.userInteractionEnabled = YES;
     [self.view addSubview:womanView];
@@ -61,18 +65,21 @@
     UITapGestureRecognizer *womanTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(womanAction)];
     [womanView addGestureRecognizer:womanTap];
    
-    UILabel *womanLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 50, 20)];
+    UILabel *womanLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.5, 0, 50, 42.5)];
     womanLabel.text = @"女";
+    womanLabel.font = [UIFont systemFontOfSize:12.5];
     [womanView addSubview:womanLabel];
     
-    UIImageView *secondArror = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenSize.width - 30, 10, 20, 20)];
+    UIImageView *secondArror = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenSize.width - ODLeftMargin - 14, 14.25, 14, 14)];
     secondArror.image = [UIImage imageNamed:@"rightjiantou"];
     [womanView addSubview:secondArror];
     
-    UIImageView *secondLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, womanView.frame.origin.y + womanView.frame.size.height, kScreenSize.width, 1)];
-    secondLine.backgroundColor = [UIColor lightGrayColor];
+    UIImageView *secondLine = [[UIImageView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(womanView.frame), kScreenSize.width - ODLeftMargin, 0.5)];
+    secondLine.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.view addSubview:secondLine];
-   
+    UIImageView *secondSpaceLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(womanView.frame), ODLeftMargin, 0.5)];
+    secondSpaceLine.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:secondSpaceLine];
 }
 
 #pragma mark - 点击事件
