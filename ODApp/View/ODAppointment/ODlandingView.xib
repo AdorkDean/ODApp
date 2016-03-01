@@ -20,7 +20,7 @@
                     <color key="textColor" red="0.70588235294117641" green="0.70588235294117641" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aG-wC-PVX">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3aG-wC-PVX">
                     <rect key="frame" x="240" y="200" width="60" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="1lp-7g-zkM"/>
@@ -95,7 +95,7 @@
                         <constraint firstItem="uXA-gM-Gec" firstAttribute="leading" secondItem="WJo-aX-zZx" secondAttribute="leading" constant="10" id="hcL-lR-7SE"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gg2-ay-KDY">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gg2-ay-KDY">
                     <rect key="frame" x="20" y="240" width="280" height="40"/>
                     <color key="backgroundColor" red="1" green="0.84705882352941175" blue="0.0039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
