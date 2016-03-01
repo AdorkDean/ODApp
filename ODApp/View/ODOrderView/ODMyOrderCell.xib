@@ -37,15 +37,6 @@
                             <constraint firstAttribute="height" constant="45" id="edw-30-oN8"/>
                         </constraints>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我去" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMi-57-Ylh">
-                        <rect key="frame" x="73" y="61" width="385" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="ar2-vC-Bsa"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10元/次" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="opk-So-4hd">
                         <rect key="frame" x="73" y="81" width="385" height="15"/>
                         <constraints>
@@ -96,6 +87,15 @@
                             </mask>
                         </variation>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我去" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eMi-57-Ylh">
+                        <rect key="frame" x="73" y="61" width="385" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="ar2-vC-Bsa"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
@@ -144,7 +144,7 @@
                 <outlet property="titleLabel" destination="eMi-57-Ylh" id="kmL-aw-g4u"/>
                 <outlet property="userButtonView" destination="P3i-TU-DeN" id="kDg-77-D6R"/>
             </connections>
-            <point key="canvasLocation" x="129" y="127"/>
+            <point key="canvasLocation" x="118" y="227"/>
         </collectionViewCell>
     </objects>
 </document>
