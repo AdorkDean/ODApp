@@ -208,15 +208,7 @@
 #pragma mark - 请求数据
 -(void)changePassWord
 {
-    
-    
-    
-    NSLog(@"______%@" , self.registView.phoneNumber.text);
-    NSLog(@"______%@" , self.registView.password.text);
-    NSLog(@"______%@" , self.registView.verification.text);
 
-    
-    
     
     NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"passwd":self.registView.password.text,@"verify_code":self.registView.verification.text};
     

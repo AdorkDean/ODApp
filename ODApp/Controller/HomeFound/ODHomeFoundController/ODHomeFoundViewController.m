@@ -127,7 +127,8 @@
     [weakSelf.pictureArray removeAllObjects];
     [weakSelf.pictureIdArray removeAllObjects];
     [weakSelf.collectionView reloadData];
-    [ODHttpTool getWithURL:ODUrlHomeFound parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model) {
+    NSDictionary *parameter = @{@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
+    [ODHttpTool getWithURL:ODUrlHomeFound parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model) {
                 [weakSelf.pictureArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"detail_md5"]];
                 [weakSelf.pictureIdArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"id"]];
                 [weakSelf.collectionView reloadData];
@@ -563,7 +564,8 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(0, 0.5 + CGRectGetMaxY(self.rsusableView.changeSkillView.frame));
+    
+    return CGSizeMake(0, 551.5);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {

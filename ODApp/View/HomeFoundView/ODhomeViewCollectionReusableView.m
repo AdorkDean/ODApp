@@ -162,7 +162,6 @@
         UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.changeSkillView.frame), KScreenWidth - ODLeftMargin * 2, 0.5)];
         lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         [self addSubview:lineView];
-
     }
     return self;
 }
