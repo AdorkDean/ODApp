@@ -119,13 +119,9 @@
     view.centerText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 5);
     view.centerText.layer.masksToBounds = YES;
     view.centerText.layer.cornerRadius = 5;
-    view.centerText.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.centerText.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.centerText.layer.borderWidth = 1;
     view.centerText.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    UIImageView *lImage = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width - 40, 7, 7, 12.5) imageName:@"场地预约icon2" tag:0];
-    
-    [view.centerText addSubview:lImage];
-    
     
     
     [view.phoneText setTitleColor:[UIColor colorWithHexString:@"#004ed9" alpha:1]
@@ -149,14 +145,6 @@
         view.eTimeText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 8);
         
         
-        UIImageView *image = [ODClassMethod creatImageViewWithFrame:CGRectMake(view.btimeText.frame.size.width, 6, 15, 15) imageName:@"downjiantou" tag:0];
-        [ view.btimeText addSubview:image];
-        
-        
-        UIImageView *images = [ODClassMethod creatImageViewWithFrame:CGRectMake(view.btimeText.frame.size.width, 6, 15, 15) imageName:@"downjiantou" tag:0];
-        [ view.eTimeText addSubview:images];
-        
-        
         
         
     } else if (iPhone4_4S || iPhone5_5s)
@@ -166,33 +154,12 @@
         view.eTimeText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 8);
         
         
-        UIImageView *image = [ODClassMethod creatImageViewWithFrame:CGRectMake(view.btimeText.frame.size.width - 25, 6, 15, 15) imageName:@"downjiantou" tag:0];
-        [ view.btimeText addSubview:image];
-        
-        
-        
-        UIImageView *images = [ODClassMethod creatImageViewWithFrame:CGRectMake(view.btimeText.frame.size.width - 25, 6, 15, 15) imageName:@"downjiantou" tag:0];
-        [view.eTimeText addSubview:images];
-        
-        
-    }
+      }
     else
     {
         
         view.btimeText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 9);
         view.eTimeText.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, (kScreenSize.width - 120) / 9);
-        
-        
-        UIImageView *image = [ODClassMethod creatImageViewWithFrame:CGRectMake(view.btimeText.frame.size.width + 20, 6, 15, 15) imageName:@"downjiantou" tag:0];
-        [ view.btimeText addSubview:image];
-        
-        
-        
-        UIImageView *images = [ODClassMethod creatImageViewWithFrame:CGRectMake(view.btimeText.frame.size.width + 20, 6, 15, 15) imageName:@"downjiantou" tag:0];
-        [ view.eTimeText addSubview:images];
-        
-        
-        
     }
     
     
@@ -200,12 +167,12 @@
     
     view.btimeText.layer.masksToBounds = YES;
     view.btimeText.layer.cornerRadius = 5;
-    view.btimeText.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.btimeText.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.btimeText.layer.borderWidth = 1;
     
     view.eTimeText.layer.masksToBounds = YES;
     view.eTimeText.layer.cornerRadius = 5;
-    view.eTimeText.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+    view.eTimeText.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     view.eTimeText.layer.borderWidth = 1;
     
     
