@@ -87,7 +87,7 @@ NSString *const ODNotificationSellOrderThirdRefresh = @"ODNotificationSellOrderT
 #pragma mark - 请求URL接口
 /** 统一的URL */
 #ifdef DEBUG
-NSString *const ODBaseURL = @"http://woquapi.test.odong.com/";
+NSString *const ODBaseURL = @"http://woquapi.odong.com/";
 #else
 NSString *const ODBaseURL = @"http://woquapi.odong.com";
 #endif

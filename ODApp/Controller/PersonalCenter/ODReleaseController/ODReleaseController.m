@@ -64,7 +64,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 {
     
     __weakSelf
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"my":@"1"};
+    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"city_id":@"1",@"my":@"1",@"open_id":[ODUserInformation sharedODUserInformation].openID};
     [ODHttpTool getWithURL:ODUrlPersonalReleaseTask parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
      {
          if (self.pageCount == 1)
@@ -243,9 +243,11 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     self.loveRow = indexPath.row;
     if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"])
     {
-        vc.swap_id = model.swap_id;
+        vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
         vc.nick = model.user[@"nick"];
+        NSLog(@"%@",vc.swap_id);
         [self.navigationController pushViewController:vc animated:YES];
+        
     }
 }
 
