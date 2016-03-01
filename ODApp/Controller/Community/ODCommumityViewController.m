@@ -86,7 +86,7 @@
         [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(titleViewLabelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [controller.view addSubview:button];
-        UIImageView *lineImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(button.frame)+1, 80, 1)];
+        UIImageView *lineImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(button.frame)+0.5, 80, 0.5)];
         lineImage.image = [UIImage imageNamed:@"shequxuxian_icon"];
         [controller.view addSubview:lineImage];
     }

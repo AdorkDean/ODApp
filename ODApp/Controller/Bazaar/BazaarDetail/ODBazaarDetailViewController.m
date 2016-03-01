@@ -21,7 +21,6 @@
     self.navigationItem.title = @"任务详情";
     [self navigationInit];
     self.num = 1;
-    self.view.backgroundColor = [UIColor whiteColor];
     [self createScrollView];
     [self createRequest];
 
@@ -105,6 +104,7 @@
 -(void)createScrollView
 {
     self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width,kScreenSize.height-64)];
+    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     self.scrollView.userInteractionEnabled = YES;
     [self.view addSubview:self.scrollView];
 }
