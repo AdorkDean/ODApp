@@ -124,14 +124,12 @@
     self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5 * width - 30, 30.5) text:[NSString stringWithFormat:@"%@", startDateString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [startDateView addSubview:self.startDateLabel];
 
-
-    UIView *startDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5 * width - 30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    UIView *startDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5 * width - 30, 9, 1, 12.5) tag:0 color:@"#b0b0b0"];
     [startDateView addSubview:startDateLineView];
-    UIImageView *startDateImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(5 * width - 25, 10, 20, 14) imageName:@"时间下拉箭头" tag:0];
+    UIImageView *startDateImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(5 * width - 22, 11, 15, 8.4) imageName:@"时间下拉箭头" tag:0];
     [startDateView addSubview:startDateImageView];
 
     //结束日期label
-//     NSDate *nextDat = [NSDate dateWithTimeInterval:24*60*60 sinceDate:date];
     UITapGestureRecognizer *endDateGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endDateGestureClick)];
     UIView *endDateView = [ODClassMethod creatViewWithFrame:CGRectMake(8 + 3.5 * width, 182.5, 5 * width, 30.5) tag:0 color:@"#ffffff"];
     [endDateView addGestureRecognizer:endDateGesture];
@@ -144,9 +142,9 @@
     self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5 * width - 30, 30.5) text:[NSString stringWithFormat:@"%@", endDateString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [endDateView addSubview:self.endDateLabel];
 
-    UIView *endDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5 * width - 30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    UIView *endDateLineView = [ODClassMethod creatViewWithFrame:CGRectMake(5 * width - 30, 9, 1, 12.5) tag:0 color:@"#b0b0b0"];
     [endDateView addSubview:endDateLineView];
-    UIImageView *endDateImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(5 * width - 25, 10, 20, 14) imageName:@"时间下拉箭头" tag:0];
+    UIImageView *endDateImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(5 * width - 22,11, 15, 8.4) imageName:@"时间下拉箭头" tag:0];
     [endDateView addSubview:endDateImageView];
 
     //开始时间label
@@ -161,9 +159,9 @@
     self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5 * width - 30, 30.5) text:[NSString stringWithFormat:@"%@", startTimeString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [startTimeView addSubview:self.startTimeLabel];
 
-    UIView *startTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5 * width - 30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    UIView *startTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5 * width - 30, 9, 1, 12.5) tag:0 color:@"#b0b0b0"];
     [startTimeView addSubview:startTimeLineView];
-    UIImageView *startTimeImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(3.5 * width - 25, 10, 20, 14) imageName:@"时间下拉箭头" tag:0];
+    UIImageView *startTimeImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(3.5 * width - 22, 11, 15, 8.4) imageName:@"时间下拉箭头" tag:0];
     [startTimeView addSubview:startTimeImageView];
 
 
@@ -179,9 +177,9 @@
 
     self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5 * width - 30, 30.5) text:[NSString stringWithFormat:@"%@", endTimeString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [endTimeView addSubview:self.endTimeLabel];
-    UIView *endTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5 * width - 30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
+    UIView *endTimeLineView = [ODClassMethod creatViewWithFrame:CGRectMake(3.5 * width - 30, 9, 1, 12.5) tag:0 color:@"#b0b0b0"];
     [endTimeView addSubview:endTimeLineView];
-    UIImageView *endTimeImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(3.5 * width - 25, 10, 20, 14) imageName:@"时间下拉箭头" tag:0];
+    UIImageView *endTimeImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(3.5 * width - 22, 11, 15, 8.4) imageName:@"时间下拉箭头" tag:0];
     [endTimeView addSubview:endTimeImageView];
 }
 
@@ -303,7 +301,7 @@
 
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(kScreenSize.width - 8 - 30, 10, 1, 14) tag:0 color:@"#b0b0b0"];
     [taskeRewardView addSubview:lineView];
-    UIImageView *imageVidew = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width - 8 - 25, 10, 20, 14) imageName:@"时间下拉箭头" tag:0];
+    UIImageView *imageVidew = [ODClassMethod creatImageViewWithFrame:CGRectMake(kScreenSize.width - 8 - 22, 12.8, 15, 8.4) imageName:@"时间下拉箭头" tag:0];
     [taskeRewardView addSubview:imageVidew];
 }
 
