@@ -191,7 +191,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         
         self.collectionView.delegate = self;
         self.collectionView.dataSource = self;
-        self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
         [self.collectionView registerNib:[UINib nibWithNibName:@"ODReleaseCell" bundle:nil] forCellWithReuseIdentifier:ODReleaseCellID];
         self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
                                          {

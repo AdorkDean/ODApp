@@ -54,22 +54,22 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZoQ-7Z-BHs" customClass="ODPersonalTaskButton">
                         <rect key="frame" x="0.0" y="96" width="200" height="42"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12.5"/>
-                        <state key="normal" title=" 编辑" image="icon_edit">
+                        <state key="normal" title="编辑" image="icon_edit">
                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rg8-lq-TXw">
-                        <rect key="frame" x="200" y="109" width="1" height="16"/>
-                        <color key="backgroundColor" white="0.69688548657718119" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="frame" x="200" y="111" width="1" height="13"/>
+                        <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="16" id="B2P-Jf-5KP"/>
+                            <constraint firstAttribute="height" constant="13" id="B2P-Jf-5KP"/>
                             <constraint firstAttribute="width" constant="1" id="KWO-M6-l3a"/>
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fmt-Zr-vjy" customClass="ODPersonalTaskButton">
                         <rect key="frame" x="200" y="96" width="200" height="42"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12.5"/>
-                        <state key="normal" title=" 删除" image="icon_delete">
+                        <state key="normal" title="删除" image="icon_delete">
                             <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
