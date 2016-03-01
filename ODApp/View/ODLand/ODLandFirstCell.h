@@ -17,6 +17,6 @@
 @property(weak, nonatomic) IBOutlet UILabel *signatureLabel;
 @property(weak, nonatomic) IBOutlet UIImageView *qrcodeImageView;
 
-@property(nonatomic, strong) ODUserModel *model;
+@property(nonatomic, strong) ODUser *model;
 
 @end

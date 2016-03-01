@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		3D35136A1C8588E400D36714 /* ODUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3513691C8588E400D36714 /* ODUser.m */; };
 		3D3513711C8594BD00D36714 /* ODUserResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3513701C8594BD00D36714 /* ODUserResponse.m */; };
+		3D3513741C85A2BE00D36714 /* ODShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3513731C85A2BE00D36714 /* ODShareModel.m */; };
 		453C139C602C89AF557B0F7E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E55588697041BF02F9C6E1 /* libPods.a */; };
 		9D16BDD31C59EEDA003627CD /* ODViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D16BDD11C59EEDA003627CD /* ODViolationsCell.m */; };
 		9D16BDD41C59EEDA003627CD /* ODViolationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D16BDD21C59EEDA003627CD /* ODViolationsCell.xib */; };
@@ -321,6 +322,8 @@
 		3D3513691C8588E400D36714 /* ODUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUser.m; sourceTree = "<group>"; };
 		3D35136F1C8594BD00D36714 /* ODUserResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserResponse.h; sourceTree = "<group>"; };
 		3D3513701C8594BD00D36714 /* ODUserResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserResponse.m; sourceTree = "<group>"; };
+		3D3513721C85A2BD00D36714 /* ODShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODShareModel.h; sourceTree = "<group>"; };
+		3D3513731C85A2BE00D36714 /* ODShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODShareModel.m; sourceTree = "<group>"; };
 		92E55588697041BF02F9C6E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D16BDD01C59EEDA003627CD /* ODViolationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODViolationsCell.h; sourceTree = "<group>"; };
 		9D16BDD11C59EEDA003627CD /* ODViolationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODViolationsCell.m; sourceTree = "<group>"; };
@@ -1976,6 +1979,8 @@
 				D4D071521C59B9FA008527C9 /* ODAppModel.m */,
 				3D3513681C8588E400D36714 /* ODUser.h */,
 				3D3513691C8588E400D36714 /* ODUser.m */,
+				3D3513721C85A2BD00D36714 /* ODShareModel.h */,
+				3D3513731C85A2BE00D36714 /* ODShareModel.m */,
 			);
 			path = ODModel;
 			sourceTree = "<group>";
@@ -2721,6 +2726,7 @@
 				D4D0738B1C59B9FA008527C9 /* ODMyOrderRecordController.m in Sources */,
 				9DBF7EF51C75B4AF0085875E /* ODPaySuccessView.m in Sources */,
 				C6515DC81C7ECFB500B25760 /* ODPersonalTaskButton.m in Sources */,
+				3D3513741C85A2BE00D36714 /* ODShareModel.m in Sources */,
 				D4F76D8E1C61AE8C00D59F02 /* ODAddAddressController.m in Sources */,
 				D4F76D641C60B8B800D59F02 /* ODActivityDetailInfoViewCell.m in Sources */,
 				D4D073921C59B9FA008527C9 /* ODRegisteredController.m in Sources */,

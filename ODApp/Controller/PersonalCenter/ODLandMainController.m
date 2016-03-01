@@ -32,18 +32,23 @@
 #import "ODMySellController.h"
 #import "ODEvaluationController.h"
 #import "WXApi.h"
+
+
 @interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic,strong)ODUserModel *model;
 
 @end
+
+
+
 
 @implementation ODLandMainController
 
 #pragma mark - lifeCycle
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -51,36 +56,16 @@
         return;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"个人中心";
+    
+    [self createCollectionView];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getData];
+    [self.collectionView reloadData];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-#pragma mark - 请求数据
-- (void)getData
-{
-    self.manager = [AFHTTPRequestOperationManager manager];
-    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-    NSDictionary *parameters = @{@"open_id":openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:kGetUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject)
-    {
-        NSMutableDictionary *dic = responseObject[@"result"];
-        weakSelf.model = [[ODUserModel alloc] initWithDict:dic];
-        
-        [weakSelf createCollectionView];
-        [weakSelf.collectionView reloadData];
-    }
-              failure:^(AFHTTPRequestOperation *operation, NSError *error)
-    {
-        
-    }];
 }
 
 #pragma mark - 初始化
@@ -91,7 +76,7 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandSecondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     [self.collectionView registerClass:[ODLandThirdCell class] forCellWithReuseIdentifier:@"third"];
@@ -105,7 +90,8 @@
 {
     if (indexPath.section == 0) {
         ODLandFirstCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
-        cell.model = self.model;
+        ODUser *user = [[ODUserInformation sharedODUserInformation] getUserCache];
+        cell.model = user;
         
         return cell;
     }
@@ -123,6 +109,7 @@
     else
     {
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
+        cell.coverImageView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         if (indexPath.section == 2)
         {
             cell.titleLabel.text = @"我的中心预约";
@@ -200,6 +187,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    ODUser *user = [[ODUserInformation sharedODUserInformation] getUserCache];
     if (indexPath.section == 0)
     {
         ODInformationController *vc = [[ODInformationController alloc] init];
@@ -208,7 +196,7 @@
     else if (indexPath.section == 2)
     {
         ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
-        vc.open_id = self.model.open_id;
+        vc.open_id = user.open_id;
         vc.isRefresh = YES;
         vc.centerTitle = @"我的预约纪录";
         [self.navigationController pushViewController:vc animated:YES];
@@ -222,13 +210,13 @@
     else if (indexPath.section ==4)
     {
         ODMyTopicController *vc = [[ODMyTopicController alloc] init];
-        vc.open_id = self.model.open_id;
+        vc.open_id = user.open_id;
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if (indexPath.section ==5)
     {
         ODMyTaskController *vc = [[ODMyTaskController alloc] init];
-        vc.open_id = self.model.open_id;
+        vc.open_id = user.open_id;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.section == 6)
     {
@@ -261,10 +249,10 @@
             [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
             
             
-            NSString *url = self.model.share[@"icon"];
-            NSString *content = self.model.share[@"desc"];
-            NSString *link = self.model.share[@"link"];
-            NSString *title = self.model.share[@"title"];
+            NSString *url = user.share.icon;
+            NSString *content = user.share.desc;
+            NSString *link = user.share.link;
+            NSString *title = user.share.title;
             
             [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
             [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
@@ -315,6 +303,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - umeng
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
