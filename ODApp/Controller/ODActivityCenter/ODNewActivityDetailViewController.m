@@ -309,7 +309,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
     self.activityVIPs = self.resultModel.savants;
     self.activityApplies = self.resultModel.applies;
     self.reportButton.enabled = (self.resultModel.apply_status != 1) && (self.resultModel.apply_status != -6) && (self.resultModel.apply_status != -4);
-    [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         [ODProgressHUD dismiss];
         if (!image) {
             weakSelf.headImageView.od_height = 0;
