@@ -115,6 +115,8 @@
 {
     NSDictionary *parameter = @{@"swap_id":self.swap_id,@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    
+    NSLog(@"%@",signParameter);
     [self downLoadDataWithUrl:kBazaarExchangeSkillDetailUrl parameter:signParameter];
 }
 
@@ -130,6 +132,8 @@
             ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
             [model setValuesForKeysWithDictionary:result];
             [weakSelf.dataArray addObject:model];
+            
+            NSLog(@"%@",model.title);
             weakSelf.love_id = [NSString stringWithFormat:@"%@",model.love_id];
             weakSelf.love_num = [NSString stringWithFormat:@"%@",model.love_num];
             [weakSelf createUserInfoView];
@@ -215,7 +219,8 @@
     [self.detailView addSubview:titleLabel];
     
     UILabel *priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(17.5, CGRectGetMaxY(titleLabel.frame)+10, kScreenSize.width-35, 20)];
-    priceLabel.text = [[[[NSString stringWithFormat:@"%@",model.price] stringByAppendingString:@"元"] stringByAppendingString:@"/"] stringByAppendingString:model.unit];
+//    priceLabel.text = [[[[NSString stringWithFormat:@"%@",model.price] stringByAppendingString:@"元"] stringByAppendingString:@"/"] stringByAppendingString:model.unit];
+    priceLabel.text = [NSString stringWithFormat:@"%@元/%@",model.price, model.unit];
     priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     priceLabel.textAlignment = NSTextAlignmentCenter;
     priceLabel.font = [UIFont systemFontOfSize:15];

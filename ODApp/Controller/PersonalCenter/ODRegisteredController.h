@@ -10,5 +10,5 @@
 
 @class ODPersonalCenterViewController;
 @interface ODRegisteredController : ODBaseViewController
-@property (nonatomic,strong)ODPersonalCenterViewController *personalVC;
+@property (nonatomic,weak) ODPersonalCenterViewController *personalVC;
 @end

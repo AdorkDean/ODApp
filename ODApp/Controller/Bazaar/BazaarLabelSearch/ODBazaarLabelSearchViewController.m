@@ -146,7 +146,6 @@
             }
             [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
-            [weakSelf.collectionView.mj_footer endRefreshing];
             
             if (weakSelf.dataArray.count == 0) {
 
@@ -156,6 +155,10 @@
             
             if (tasks.count == 0) {
                 [self.collectionView.mj_footer endRefreshingWithNoMoreData];
+            }
+            else
+            {
+                [weakSelf.collectionView.mj_footer endRefreshing];
             }
             [ODProgressHUD dismiss];
         }

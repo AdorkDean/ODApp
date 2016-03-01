@@ -95,14 +95,6 @@
 }
 
 
-#pragma mark - 点击事件
--(void)fanhui:(UIButton *)sender
-{
-    
-    [self.navigationController popViewControllerAnimated:YES];
-
-}
-
 - (void)registered:(UIButton *)sender
 {
      NSString *openID = [ODUserInformation sharedODUserInformation].openID;

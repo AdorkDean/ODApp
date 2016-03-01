@@ -89,9 +89,7 @@
     self.yearStr = @"";
     self.start_datetime = @"";
     self.navigationItem.title = @"场地预约";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
     [self createTableView];
-    [self navigationInit];
     
     self.openId = [ODUserInformation sharedODUserInformation].openID;
     
@@ -107,16 +105,6 @@
 }
 
 #pragma mark - 初始化
--(void)navigationInit
-{
-
-    self.view.userInteractionEnabled = YES;
-    self.navigationItem.title = @"场地预约";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:nil highColor:nil title:@"返回"];
-    
-    
-    
-}
 - (void)createTableView
 {
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) style:UITableViewStylePlain];
@@ -148,7 +136,7 @@
         [self.yuYueView.eTimeText addTarget:self action:@selector(choseBeginTime:) forControlEvents:UIControlEventTouchUpInside];
         self.yuYueView.eTimeText.tag = 222;
 
-        [self.yuYueView.centerText  setTitle:self.centerName forState:UIControlStateNormal];
+        [self.yuYueView.centerText setTitle:self.centerName forState:UIControlStateNormal];
         [self.yuYueView.phoneText setTitle:self.phoneNumber forState:UIControlStateNormal];
 
         self.yuYueView.pursoseTextView.delegate=self;

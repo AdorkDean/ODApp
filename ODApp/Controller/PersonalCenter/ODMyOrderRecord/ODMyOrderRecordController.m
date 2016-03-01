@@ -79,7 +79,7 @@
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    NSDictionary *parameter = @{@"open_id":self.open_id,@"page":[NSString stringWithFormat:@"%ld",(long)self.count]};
+    NSDictionary *parameter = @{@"open_id":[NSString stringWithFormat:@"%@",self.open_id],@"page":[NSString stringWithFormat:@"%ld",(long)self.count]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
 
     __weak typeof (self)weakSelf = self;
@@ -114,13 +114,14 @@
             }
             
             [weakSelf.collectionView.mj_header endRefreshing];
-            [weakSelf.collectionView.mj_footer endRefreshing];
-            [weakSelf.collectionView reloadData];
-            
-            if (result.count == 0)
+            if (!result.count == 0)
+            {                
+                [weakSelf.collectionView.mj_footer endRefreshing];
+            }else
             {
                 [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
+            [weakSelf.collectionView reloadData];
         }
         
 
@@ -167,7 +168,7 @@
     
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     cell.layer.masksToBounds = YES;
-    cell.layer.cornerRadius = 7;
+    cell.layer.cornerRadius = 5;
     cell.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
     cell.layer.borderWidth = 1;
     
