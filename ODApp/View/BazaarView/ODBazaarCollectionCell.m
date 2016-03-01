@@ -22,7 +22,6 @@
     self.statusLabel.layer.cornerRadius = 5;
     self.statusLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.statusLabel.backgroundColor = [UIColor colorWithHexString:@"#ffd701" alpha:1];
-
 }
 
 -(void)shodDataWithModel:(ODBazaarModel *)model
@@ -34,7 +33,7 @@
     //设置Label显示不同大小的字体
     NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];
     NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
-    [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:11] range:NSMakeRange(0, 5)];
+    [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10] range:NSMakeRange(0, 5)];
     self.timeLabel.attributedText = noteStr;
     self.statusLabel.text = @"任务开始";
     

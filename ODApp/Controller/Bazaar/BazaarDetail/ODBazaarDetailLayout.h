@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+
 typedef NS_ENUM(NSUInteger, HJCarouselAnim) {
     HJCarouselAnimLinear,
     HJCarouselAnimRotary,
@@ -19,10 +20,10 @@ typedef NS_ENUM(NSUInteger, HJCarouselAnim) {
 
 - (instancetype)initWithAnim:(HJCarouselAnim)anim;
 
-@property (readonly)  HJCarouselAnim carouselAnim;
+@property(readonly) HJCarouselAnim carouselAnim;
 
-@property (nonatomic) CGSize itemSize;
-@property (nonatomic) NSInteger visibleCount;
-@property (nonatomic) UICollectionViewScrollDirection scrollDirection;
+@property(nonatomic) CGSize itemSize;
+@property(nonatomic) NSInteger visibleCount;
+@property(nonatomic) UICollectionViewScrollDirection scrollDirection;
 
 @end

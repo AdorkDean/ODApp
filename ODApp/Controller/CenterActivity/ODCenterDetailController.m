@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCenterDetailController.h"
 #import "ODCenderDetailView.h"
 #import "ODAPIManager.h"
@@ -54,8 +55,7 @@ int pageNumnber = 0;
     pageNumnber = 0;
     self.myTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:self.myTimer forMode:NSRunLoopCommonModes];
-
-
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 
@@ -63,7 +63,7 @@ int pageNumnber = 0;
     [super viewWillDisappear:animated];
     [self.myTimer invalidate];
     self.myTimer = nil;
-
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 #pragma mark - 点击事件
@@ -292,11 +292,9 @@ int pageNumnber = 0;
     return 0;
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

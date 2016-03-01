@@ -9,13 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface ODActivityDetailInfoViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *iconImgView;
+@property(weak, nonatomic) IBOutlet UIImageView *iconImgView;
 
 /**
  *  详细信息
  */
-@property (weak, nonatomic) IBOutlet UILabel *detailInfoLabel;
+@property(weak, nonatomic) IBOutlet UILabel *detailInfoLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property(weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 @end

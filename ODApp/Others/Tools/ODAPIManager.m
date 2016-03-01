@@ -68,10 +68,9 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     
     NSString *url = [self getApiUrl:URL];
     NSMutableDictionary *reqParams = [self getRequestParameter:params];
-    NSMutableDictionary *args = [self signParameters:reqParams];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:url parameters:args success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [manager GET:url parameters:reqParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary *data = (NSDictionary *)responseObject;
         if ([[data objectForKey:@"status"] isEqualToString:@"success"]) {

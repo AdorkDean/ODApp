@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong Bracelet. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODMyOrderRecordController.h"
 #import "ODUserInformation.h"
 @interface ODMyOrderRecordController ()
@@ -50,6 +51,7 @@
         [self.collectionView.mj_header beginRefreshing];
         self.isRefresh = NO;
     }
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 - (void)reloadData:(NSNotification *)text
@@ -200,6 +202,11 @@
     
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 

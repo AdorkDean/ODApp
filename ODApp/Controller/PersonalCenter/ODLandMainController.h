@@ -13,9 +13,8 @@
 
 @interface ODLandMainController : ODBaseViewController
 
-@property (nonatomic, copy) NSString *phoneNumber;
-@property (nonatomic, copy) NSString *password;
-
+@property(nonatomic, copy) NSString *phoneNumber;
+@property(nonatomic, copy) NSString *password;
 
 
 @end

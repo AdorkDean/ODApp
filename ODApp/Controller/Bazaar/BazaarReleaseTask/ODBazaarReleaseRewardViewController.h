@@ -12,15 +12,15 @@
 #import "AFNetworking.h"
 #import "ODBazaarRewardCollectionCell.h"
 
-@interface ODBazaarReleaseRewardViewController : ODBaseViewController<UICollectionViewDataSource,UICollectionViewDelegate,UITextFieldDelegate>
+@interface ODBazaarReleaseRewardViewController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate>
 
-@property(nonatomic,strong)UILabel *taskRewardLabel;
-@property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic,strong)NSMutableArray *dataArray;
-@property(nonatomic,strong)NSMutableArray *idArray;
-@property(nonatomic,strong)UICollectionView *collectionView;
-@property(nonatomic,strong)UIImageView *imageView;
-@property(nonatomic,strong)UITextField *textField;
-@property(nonatomic)NSInteger count;
-@property(nonatomic,copy)void(^taskRewardBlock)(NSString *name);
+@property(nonatomic, strong) UILabel *taskRewardLabel;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic, strong) NSMutableArray *idArray;
+@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) UIImageView *imageView;
+@property(nonatomic, strong) UITextField *textField;
+@property(nonatomic) NSInteger count;
+@property(nonatomic, copy) void(^taskRewardBlock)(NSString *name);
 @end

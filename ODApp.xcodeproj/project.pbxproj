@@ -440,7 +440,7 @@
 		9DEDCF391C64B3ED003015C6 /* ODBazaarReleaseSkillTimeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseSkillTimeViewController.h; sourceTree = "<group>"; };
 		9DEDCF3A1C64B3ED003015C6 /* ODBazaarReleaseSkillTimeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseSkillTimeViewController.m; sourceTree = "<group>"; };
 		9DEDCF3B1C64B3ED003015C6 /* ODBazaarReleaseSkillViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseSkillViewController.h; sourceTree = "<group>"; };
-		9DEDCF3C1C64B3ED003015C6 /* ODBazaarReleaseSkillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODBazaarReleaseSkillViewController.m; path = ../ODBazaarReleaseSkillViewController.m; sourceTree = "<group>"; };
+		9DEDCF3C1C64B3ED003015C6 /* ODBazaarReleaseSkillViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseSkillViewController.m; sourceTree = "<group>"; };
 		9DEDCF3D1C64B3ED003015C6 /* ODBazaarRequestHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarRequestHelpViewController.h; sourceTree = "<group>"; };
 		9DEDCF3E1C64B3ED003015C6 /* ODBazaarRequestHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarRequestHelpViewController.m; sourceTree = "<group>"; };
 		9DEDCF3F1C64B3ED003015C6 /* ODBazaarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarViewController.h; sourceTree = "<group>"; };
@@ -931,7 +931,6 @@
 		9DEDCF281C64B3ED003015C6 /* BazaarDetail */ = {
 			isa = PBXGroup;
 			children = (
-				9DEDCF3C1C64B3ED003015C6 /* ODBazaarReleaseSkillViewController.m */,
 				9DEDCF2B1C64B3ED003015C6 /* ODBazaarDetailViewController.h */,
 				9DEDCF2C1C64B3ED003015C6 /* ODBazaarDetailViewController.m */,
 				9DEDCF291C64B3ED003015C6 /* ODBazaarDetailLayout.h */,
@@ -1183,6 +1182,7 @@
 			isa = PBXGroup;
 			children = (
 				9DEDCF3B1C64B3ED003015C6 /* ODBazaarReleaseSkillViewController.h */,
+				9DEDCF3C1C64B3ED003015C6 /* ODBazaarReleaseSkillViewController.m */,
 				B875E1011C7992D4004B1571 /* BazaarReleaseSkillTime */,
 			);
 			name = BazaarReleaseSkill;
@@ -1989,11 +1989,11 @@
 			isa = PBXGroup;
 			children = (
 				D4D0731B1C59B9FA008527C9 /* HomeFoundView */,
-				9DEDCF5A1C64B3FC003015C6 /* BazaarView */,
 				D4F76D911C61AEA100D59F02 /* ODCollectionView */,
 				D4F76D951C61AEA100D59F02 /* ODOrderView */,
 				D46C90351C6043BA004942E7 /* ODActivityCenter */,
 				D4D0755B1C5DECCB008527C9 /* BaseView */,
+				9DEDCF5A1C64B3FC003015C6 /* BazaarView */,
 				D4D073131C59B9FA008527C9 /* CommunityView */,
 				D4D0731E1C59B9FA008527C9 /* ODAppointment */,
 				D4D073401C59B9FA008527C9 /* ODLand */,

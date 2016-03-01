@@ -11,6 +11,7 @@
 @interface ODNetClosedView : UIView
 
 + (void)show;
+
 + (void)dismiss;
 
 @end

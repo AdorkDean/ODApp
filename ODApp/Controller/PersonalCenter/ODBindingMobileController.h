@@ -13,6 +13,4 @@
 @property(nonatomic, copy) void(^getTextBlock)(NSString *text);
 
 
-
-
 @end

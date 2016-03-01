@@ -18,7 +18,7 @@
  *  @param failure    失败回调
  */
 
-+ (void)getWithURL:(NSString *)URL parameters:(NSDictionary *)parameters modelClass:(Class)modeleClass success:(void (^)(id model))success failure: (void (^)(NSError *error))failure;
++ (void)getWithURL:(NSString *)URL parameters:(NSDictionary *)parameters modelClass:(Class)modeleClass success:(void (^)(id model))success failure:(void (^)(NSError *error))failure;
 
 /**
  *  封装post请求

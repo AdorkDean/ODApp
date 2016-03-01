@@ -14,14 +14,13 @@
 #import "ODAPIManager.h"
 
 
+@interface ODFindJobController : ODBaseViewController <UIWebViewDelegate>
 
-@interface ODFindJobController : ODBaseViewController<UIWebViewDelegate>
+@property(nonatomic, strong) UIWebView *webView;
 
-@property (nonatomic, strong) UIWebView *webView;
+@property(nonatomic, strong) NSString *webUrl;
 
-@property (nonatomic, strong) NSString *webUrl;
-
-@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
 
 @end

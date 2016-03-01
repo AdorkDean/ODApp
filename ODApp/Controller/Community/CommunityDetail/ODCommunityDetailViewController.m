@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCommunityDetailViewController.h"
 #import "WXApi.h"
 @interface ODCommunityDetailViewController ()<UMSocialUIDelegate>
@@ -179,7 +180,6 @@
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView.mj_footer endRefreshing];
-//        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
         [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
 }
@@ -209,7 +209,7 @@
     [self.userView addSubview:userSignLabel];
     userSignLabel.numberOfLines = 2;
     
-    UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 75, kScreenSize.width-25, 1) tag:0 color:@"#e6e6e6"];
+    UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 75.5, kScreenSize.width-25, 0.5) tag:0 color:@"#e6e6e6"];
     [self.userView addSubview:lineView];
 }
 
@@ -333,11 +333,10 @@
     [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar_url"]] forState:UIControlStateNormal];
     [cell.headButton addTarget:self action:@selector(cellHeadButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.replyButton addTarget:self action:@selector(replyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-//    cell.replyButton.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     cell.nickName.text = model.user[@"nick"];
     NSString *time = [[model.created_at substringFromIndex:5] stringByReplacingOccurrencesOfString:@"-" withString:@"."];
     cell.timeLabel.text = [NSString stringWithFormat:@"%@ %@楼",time,[NSString stringWithFormat:@"%@",model.floor]];
-   
+    cell.replyButton.titleEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 0);
     //设置contentLabel显示不同的字体颜色
     CGFloat height;
 
@@ -359,6 +358,7 @@
         cell.contentLabelHeight.constant = height;
         if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:[NSString stringWithFormat:@"%@",model.user[@"open_id"]]]) {
             [cell.deleteButton setHidden:NO];
+            cell.deleteButton.titleEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 0);
             cell.timeLabelSpace.constant = cell.timeLabelSpaceConstant;
         }else{
             [cell.deleteButton setHidden:YES];
@@ -414,9 +414,6 @@
         __weakSelf
         detailReply.myBlock = ^(NSString *str,ODCommunityDetailModel *model){
             weakSelf.refresh = str;
-            [weakSelf.dataArray addObject:model];
-            
-            NSLog(@"%ld",weakSelf.dataArray.count);
         };
         [self.navigationController pushViewController:detailReply animated:YES];
     }
@@ -473,7 +470,6 @@
     __weak typeof (self)weakSelf = self;
     [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if (isBbs) {
-            NSLog(@"%@",responseObject);
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 if (weakSelf.myBlock) {
                     weakSelf.myBlock(@"delSuccess");
@@ -481,7 +477,6 @@
                 [weakSelf.navigationController popViewControllerAnimated:YES];
             }
         }else{
-            NSLog(@"%@",responseObject);
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
             }
         }
@@ -505,11 +500,13 @@
 {
     [super viewWillAppear:animated];
     if ([self.refresh isEqualToString:@"refresh"]) {
-//        [self.tableView reloadData];
-//        if (self.dataArray.count && self.tableView){
-//           [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.dataArray.count - 1 inSection:0]atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-//        }
+        [self joiningTogetherParmetersWithUserInfo:NO];
+        if (self.dataArray.count && self.tableView){
+            [self.tableView reloadData];
+            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+        }
     }
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 
@@ -523,4 +520,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+
 @end

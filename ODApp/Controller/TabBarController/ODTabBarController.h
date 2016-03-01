@@ -10,6 +10,6 @@
 
 @interface ODTabBarController : UITabBarController
 
-@property (assign,nonatomic) NSInteger currentIndex;
+@property(assign, nonatomic) NSInteger currentIndex;
 
 @end

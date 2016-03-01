@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class ODTabBar;
+
 @protocol ODTabBarDelegate <NSObject>
 @optional
 - (void)od_tabBar:(ODTabBar *)od_tabBar selectIndex:(NSInteger)selectIndex;

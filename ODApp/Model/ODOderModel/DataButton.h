@@ -10,10 +10,8 @@
 
 @interface DataButton : UIButton
 
-@property (nonatomic , strong) UILabel *dataLabel;
-@property (nonatomic , strong) UILabel *timeLabel;
-
-
+@property(nonatomic, strong) UILabel *dataLabel;
+@property(nonatomic, strong) UILabel *timeLabel;
 
 
 @end

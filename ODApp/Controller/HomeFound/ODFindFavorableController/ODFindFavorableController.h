@@ -15,11 +15,11 @@
 
 @interface ODFindFavorableController : ODBaseViewController
 
-@property (nonatomic, strong) UIWebView *webView;
+@property(nonatomic, strong) UIWebView *webView;
 
-@property (nonatomic, strong) NSString *webUrl;
+@property(nonatomic, strong) NSString *webUrl;
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
 
 @end

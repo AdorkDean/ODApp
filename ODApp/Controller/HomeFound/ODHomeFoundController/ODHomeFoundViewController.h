@@ -35,35 +35,35 @@
 
 #import "ODDrawbackBuyerOneController.h"
 
-@interface ODHomeFoundViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UIScrollViewDelegate, MAMapViewDelegate, AMapSearchDelegate>
+@interface ODHomeFoundViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, MAMapViewDelegate, AMapSearchDelegate>
 
-@property (nonatomic, strong) UIButton *locationButton;
+@property(nonatomic, strong) UIButton *locationButton;
 
-@property (nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) UICollectionView *collectionView;
 
-@property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 
-@property (nonatomic, strong) ODhomeViewCollectionReusableView *rsusableView;
-@property (nonatomic ,strong) ODHomeFoundFooterView *footerView;
+@property(nonatomic, strong) ODhomeViewCollectionReusableView *rsusableView;
+@property(nonatomic, strong) ODHomeFoundFooterView *footerView;
 
-@property (nonatomic, strong) ODCommunityModel *model;
+@property(nonatomic, strong) ODCommunityModel *model;
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) AFHTTPRequestOperationManager *centerManager;
-@property (nonatomic, strong) AFHTTPRequestOperationManager *centerTelManager;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *centerTelManager;
 
 //滚动窗口数组
-@property (nonatomic, strong) NSMutableArray *pictureArray;
-@property (nonatomic, strong) NSMutableArray *pictureIdArray;
+@property(nonatomic, strong) NSMutableArray *pictureArray;
+@property(nonatomic, strong) NSMutableArray *pictureIdArray;
 
 //技能交换
-@property (nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic, strong) NSMutableArray *dataArray;
 
-@property (nonatomic, strong) NSArray *cityListArray;
+@property(nonatomic, strong) NSArray *cityListArray;
 
-@property (nonatomic, copy) NSString *centerName;
-@property (nonatomic, copy) NSString *storeId;
-@property (nonatomic, copy) NSString *centerTel;
+@property(nonatomic, copy) NSString *centerName;
+@property(nonatomic, copy) NSString *storeId;
+@property(nonatomic, copy) NSString *centerTel;
 
 
 @end

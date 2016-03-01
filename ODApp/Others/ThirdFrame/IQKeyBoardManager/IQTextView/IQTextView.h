@@ -33,7 +33,7 @@
 /**
  Set textView's placeholder text. Default is nil.
  */
-@property(nonatomic,copy)   NSString    *placeholder;
+@property(nonatomic, copy) NSString *placeholder;
 
 @end
 

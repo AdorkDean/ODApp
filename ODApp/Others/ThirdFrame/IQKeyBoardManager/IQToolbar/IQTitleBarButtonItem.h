@@ -26,7 +26,7 @@
 #import "IQBarButtonItem.h"
 
 #if !(__has_feature(objc_instancetype))
-    #define instancetype id
+#define instancetype id
 #endif
 
 
@@ -46,6 +46,6 @@
  @param frame Initial frame of barButtonItem
  @param title Title of barButtonItem.
  */
--(instancetype)initWithFrame:(CGRect)frame title:(NSString *)title NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithFrame:(CGRect)frame title:(NSString *)title NS_DESIGNATED_INITIALIZER;
 
 @end

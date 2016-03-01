@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODLandMainController.h"
 #import "ODLandFirstCell.h"
 #import "ODLandSecondCell.h"
@@ -57,6 +58,7 @@
 {
     [super viewWillAppear:animated];
     [self getData];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 #pragma mark - 请求数据
@@ -315,5 +317,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
 
 @end

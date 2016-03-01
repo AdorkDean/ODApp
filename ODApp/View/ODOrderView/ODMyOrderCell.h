@@ -9,28 +9,28 @@
 #import <UIKit/UIKit.h>
 #import "ODMyOrderModel.h"
 #import "ODMySellModel.h"
+
 @interface ODMyOrderCell : UICollectionViewCell
 
 
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *genderImageWith;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *genderImageWith;
 
+@property(weak, nonatomic) IBOutlet UIButton *userButtonView;
+@property(weak, nonatomic) IBOutlet UIImageView *gerderImgeView;
+@property(weak, nonatomic) IBOutlet UILabel *nikeLabel;
+@property(weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property(weak, nonatomic) IBOutlet UIButton *contentImageView;
+@property(weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property(weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property(weak, nonatomic) IBOutlet UILabel *dateLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *userButtonView;
-@property (weak, nonatomic) IBOutlet UIImageView *gerderImgeView;
-@property (weak, nonatomic) IBOutlet UILabel *nikeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
-@property (weak, nonatomic) IBOutlet UIButton *contentImageView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
-
-@property (nonatomic , strong) ODMyOrderModel *model;
+@property(nonatomic, strong) ODMyOrderModel *model;
 
 
 - (void)dealWithSellModel:(ODMySellModel *)model;
-- (void)dealWithBuyModel:(ODMyOrderModel *)model;
 
+- (void)dealWithBuyModel:(ODMyOrderModel *)model;
 
 
 @end

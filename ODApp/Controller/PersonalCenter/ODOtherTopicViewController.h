@@ -16,16 +16,16 @@
 #import "MJRefresh.h"
 
 
-@interface ODOtherTopicViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface ODOtherTopicViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property(nonatomic,strong)UICollectionView *collectionView;
-@property(nonatomic,strong)NSMutableArray *dataArray;
-@property(nonatomic,strong)NSMutableArray *userArray;
-@property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic)NSInteger count;
-@property(nonatomic,copy)NSString *refresh;
-@property(nonatomic,copy)NSString *open_id;
+@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic, strong) NSMutableArray *userArray;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic) NSInteger count;
+@property(nonatomic, copy) NSString *refresh;
+@property(nonatomic, copy) NSString *open_id;
 
-@property (nonatomic, strong) UILabel *noReusltLabel;
+@property(nonatomic, strong) UILabel *noReusltLabel;
 
 @end

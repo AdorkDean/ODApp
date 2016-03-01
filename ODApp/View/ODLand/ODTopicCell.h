@@ -11,11 +11,10 @@
 @interface ODTopicCell : UICollectionViewCell
 
 
-
-@property (weak, nonatomic) IBOutlet UIImageView *userImageView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
-@property (weak, nonatomic) IBOutlet UILabel *nickNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *countLabel;
+@property(weak, nonatomic) IBOutlet UIImageView *userImageView;
+@property(weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property(weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property(weak, nonatomic) IBOutlet UILabel *nickNameLabel;
+@property(weak, nonatomic) IBOutlet UILabel *countLabel;
 
 @end

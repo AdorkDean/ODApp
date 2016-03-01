@@ -11,9 +11,8 @@
 @interface ODEvaluationController : ODBaseViewController
 
 
-
-@property (nonatomic , copy) NSString *typeTitle;
-@property (nonatomic , copy) NSString *openId;
+@property(nonatomic, copy) NSString *typeTitle;
+@property(nonatomic, copy) NSString *openId;
 
 
 @end

@@ -10,6 +10,7 @@
 
 @interface ODNewActivityCenterViewController : ODBaseViewController
 Single_Interface(ODNewActivityCenterViewController)
+
 /**
  *  是否需要刷新
  */

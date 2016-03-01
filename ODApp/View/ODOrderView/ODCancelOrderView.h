@@ -11,15 +11,14 @@
 @interface ODCancelOrderView : UIView
 
 
-@property (weak, nonatomic) IBOutlet UITextView *reasonTextView;
+@property(weak, nonatomic) IBOutlet UITextView *reasonTextView;
 
 
-@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
+@property(weak, nonatomic) IBOutlet UIButton *cancelButton;
 
-@property (weak, nonatomic) IBOutlet UIButton *submitButton;
+@property(weak, nonatomic) IBOutlet UIButton *submitButton;
 
 
-
-+(instancetype)getView;
++ (instancetype)getView;
 
 @end

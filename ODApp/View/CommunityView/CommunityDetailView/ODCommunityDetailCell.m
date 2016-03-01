@@ -19,6 +19,7 @@
     self.timeLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
     [self.replyButton setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
     self.lineImageView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.lineImageViewConstraint.constant = 0.5;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

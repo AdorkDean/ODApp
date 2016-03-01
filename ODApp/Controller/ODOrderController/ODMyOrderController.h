@@ -11,9 +11,7 @@
 @interface ODMyOrderController : ODBaseViewController
 
 
-
-@property (nonatomic , copy) NSString *isRefresh;
-
+@property(nonatomic, copy) NSString *isRefresh;
 
 
 @end

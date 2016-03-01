@@ -10,25 +10,25 @@
 
 @interface ODMyOrderDetailModel : ODAppModel
 
-@property (nonatomic, strong)NSString *store_id;
-@property (nonatomic, strong)NSString *order_id;
+@property(nonatomic, strong) NSString *store_id;
+@property(nonatomic, strong) NSString *order_id;
 
-@property (nonatomic, strong)NSString *store_name;
+@property(nonatomic, strong) NSString *store_name;
 
-@property (nonatomic, strong)NSString *start_date_str;
-@property (nonatomic, strong)NSString *end_date_str;
+@property(nonatomic, strong) NSString *start_date_str;
+@property(nonatomic, strong) NSString *end_date_str;
 
-@property (nonatomic, strong)NSString *devices;
+@property(nonatomic, strong) NSString *devices;
 
-@property (nonatomic, strong)NSString *purpose;
+@property(nonatomic, strong) NSString *purpose;
 
-@property (nonatomic, strong)NSString *content;
+@property(nonatomic, strong) NSString *content;
 
-@property (nonatomic, strong)NSString *people_num;
+@property(nonatomic, strong) NSString *people_num;
 
-@property (nonatomic, strong)NSString *store_tel;
+@property(nonatomic, strong) NSString *store_tel;
 
-@property (nonatomic, strong)NSString *status_str;
+@property(nonatomic, strong) NSString *status_str;
 
 @end
 

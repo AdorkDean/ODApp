@@ -9,18 +9,16 @@
 #import "ODAppModel.h"
 
 
-
 @interface ODHomeFoundModel : ODAppModel
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
 
 
-@property (nonatomic, copy) NSString *banner_url;
-@property (nonatomic, copy) NSString *img_url;
-@property (nonatomic, copy) NSString *title;
+@property(nonatomic, copy) NSString *banner_url;
+@property(nonatomic, copy) NSString *img_url;
+@property(nonatomic, copy) NSString *title;
 
-@property (nonatomic, copy) NSString *activitys;
-
+@property(nonatomic, copy) NSString *activitys;
 
 
 @end

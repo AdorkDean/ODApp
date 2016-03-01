@@ -10,12 +10,12 @@
 
 @interface ODPaySuccessView : UIView
 
-@property (nonatomic , strong) UIImageView *isSuccessView;
+@property(nonatomic, strong) UIImageView *isSuccessView;
 
-@property (nonatomic , strong) UILabel *isSuccessLabel;
+@property(nonatomic, strong) UILabel *isSuccessLabel;
 
 
-@property (nonatomic , strong) UIButton *firstButton;
-@property (nonatomic , strong) UIButton *secondButton;
+@property(nonatomic, strong) UIButton *firstButton;
+@property(nonatomic, strong) UIButton *secondButton;
 
 @end
