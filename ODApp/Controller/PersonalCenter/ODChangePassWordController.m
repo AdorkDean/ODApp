@@ -184,24 +184,13 @@
 
 - (void)seePassword:(UIButton *)sender
 {
-    
-  
-    
-    if (!self.seePassWord) {
-        self.registView.password.secureTextEntry = NO;
+    if (self.registView.password.secureTextEntry == YES) {
         [self.registView.seePassword setImage:[UIImage imageNamed:@"xianshimima"] forState:UIControlStateNormal];
-      
-        
-    }else{
-        self.registView.password.secureTextEntry = YES;
-        
+        self.registView.password.secureTextEntry = NO;
+    } else {
         [self.registView.seePassword setImage:[UIImage imageNamed:@"yincangmima"] forState:UIControlStateNormal];
-        
-        
-        
+        self.registView.password.secureTextEntry = YES;
     }
-    self.seePassWord = !self.seePassWord;
-    
 }
 
 

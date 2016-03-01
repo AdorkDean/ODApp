@@ -25,8 +25,6 @@
 //当前秒数
 @property(nonatomic)NSInteger currentTime;
 
-@property (nonatomic , assign) BOOL seePassWord;
-
 @end
 
 @implementation ODRegisteredController
@@ -37,7 +35,6 @@
     [self.view addSubview:self.registView];
     [self navigationInit];
     [self createTimer];
-    self.seePassWord = NO;
     self.currentTime = 60;
 }
 
@@ -136,43 +133,27 @@
 
 - (void)getVerification:(UIButton *)sender
 {
-    
     [self.registView.phoneNumber resignFirstResponder];
     [self.registView.verification resignFirstResponder];
     [self.registView.password resignFirstResponder];
-
     
     if ([self.registView.phoneNumber.text isEqualToString:@""]) {
-        
-
-      
-        
         [ODProgressHUD showInfoWithStatus:@"请输入手机号"];
-        
-        
     }else {
-        
         [self getCode];
-
     }
    
 }
 
 - (void)seePassword:(UIButton *)sender
 {
-    
-    if (!self.seePassWord) {
-        self.registView.password.secureTextEntry = NO;
+    if (self.registView.password.secureTextEntry == YES) {
         [self.registView.seePassword setImage:[UIImage imageNamed:@"xianshimima"] forState:UIControlStateNormal];
-        
-    }else{
-        self.registView.password.secureTextEntry = YES;
-        
+        self.registView.password.secureTextEntry = NO;
+    } else {
         [self.registView.seePassword setImage:[UIImage imageNamed:@"yincangmima"] forState:UIControlStateNormal];
-        
+        self.registView.password.secureTextEntry = YES;
     }
-    self.seePassWord = !self.seePassWord;
-    
 }
 
 
@@ -185,9 +166,11 @@
 #pragma mark - 请求数据
 -(void)getRegest
 {
-  
-    NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"passwd":self.registView.password.text,@"verify_code":self.registView.verification.text};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    NSDictionary *params = @{
+                             @"mobile":self.registView.phoneNumber.text,
+                             @"passwd":self.registView.password.text,
+                             @"verify_code":self.registView.verification.text};
+    NSDictionary *signParameters = [ODAPIManager signParameters:params];
     
   
     self.managers = [AFHTTPRequestOperationManager manager];
@@ -234,35 +217,24 @@
 
 -(void)getCode
 {
-        
-    NSDictionary *parameters = @{@"mobile":self.registView.phoneNumber.text,@"type":@"1"};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    NSDictionary *parameters = @{ @"mobile":self.registView.phoneNumber.text, @"type":@"1" };
     
-    
-    self.manager = [AFHTTPRequestOperationManager manager];
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:kGetCodeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-    
+    [ODAPIManager getWithURL:@"/user/verify/code/send" params:parameters success:^(id responseObject) {
+        // 启动定时器
+        [self.timer setFireDate:[NSDate distantPast]];
+    } error:^(NSString *msg) {
+        [ODProgressHUD showInfoWithStatus:msg];
+    } failure:^(NSError *error) {
         
-        if ([responseObject[@"status"]isEqualToString:@"success"]) {
-            //启动定时器
-            [weakSelf.timer setFireDate:[NSDate distantPast]];        }
-        
-        else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            
-           [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-        }
-       
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-
     }];
 }
 
 
+
+#pragma mark - 内存管理
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
