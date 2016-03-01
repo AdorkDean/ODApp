@@ -24,7 +24,7 @@
 
 - (void)setModel:(ODActivityListModel *)model
 {
-    [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.icon_url] placeholderImage:[UIImage imageNamed:@"ActivityCenterHeadImage"]];
+    [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.icon_url] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
     self.titleLabel.text = model.content;
     self.timeLabel.text = model.date_str;
     self.addressLabel.text = model.address;

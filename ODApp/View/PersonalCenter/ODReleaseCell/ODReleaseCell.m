@@ -32,7 +32,11 @@
 - (void)setModel:(ODReleaseModel *)model
 {
 
-    [self.titleImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.imgs_small[0][@"img_url"]]];
+    [self.titleImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.imgs_small[0][@"img_url"]]placeholderImage:[UIImage imageNamed:@"placeholderImage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (error) {
+            self.titleImageView.image = [UIImage imageNamed:@"errorplaceholderImage"];
+        }
+    }];
     self.contentLabel.text = model.title;
     self.priceLabel.text = [NSString stringWithFormat:@"%@元/%@",model.price,model.unit];
     if ([model.love_num isEqualToString:@""]) {
