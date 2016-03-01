@@ -247,7 +247,7 @@
     if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
         self.pickedImage = info[UIImagePickerControllerOriginalImage];
         
-        [self createProgressHUDTitle];
+        [ODProgressHUD showProgressWithStatus:@"正在上传"];
         
         //图片转化为data
         NSData *imageData;
@@ -267,15 +267,6 @@
     
 }
 
-
-- (void)createProgressHUDTitle{
-    
-    self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [self.navigationController.view addSubview:self.hud ];
-    self.hud.delegate = self;
-    self.hud.labelText = @"图片上传中";
-    
-}
 
 //压缩尺寸
 -(UIImage *) scaleImage:(UIImage *)image
@@ -364,7 +355,7 @@
         self.timeView.hidden = NO;
         self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
     }
-    [self.hud hide:NO afterDelay:0];
+    [ODProgressHUD dismiss];
 }
 
 #pragma mark - 删除图片

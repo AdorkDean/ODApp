@@ -44,11 +44,9 @@
         [self joiningTogetherParmeters];
     }else if (self.titleTextView.text.length>0&&self.topicContentTextView.text.length==0){
         
-//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入话题内容"];
         [ODProgressHUD showInfoWithStatus:@"请输入话题内容"];
     }else{
 
-//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入话题标题"];
         [ODProgressHUD showInfoWithStatus:@"请输入话题标题"];
     }
     
@@ -206,8 +204,6 @@ NSString *topicContentText = @"";
         UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
         [actionSheet showInView:self.view];
     }else{
-        
-//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已达图片最大上传数"];
     }
 }
 
@@ -223,9 +219,8 @@ NSString *topicContentText = @"";
                 imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
                 [self presentViewController:imagePicker animated:YES completion:nil];
             }
-            else {
-                
-//                [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
+            else
+            {
                 [ODProgressHUD showInfoWithStatus:@"您当前的照相机不可用"];
             }
             break;
@@ -252,9 +247,7 @@ NSString *topicContentText = @"";
     if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
         self.pickedImage = info[UIImagePickerControllerOriginalImage];
         
-        [self createProgressHUDTitle];
-    
-    
+        [ODProgressHUD showProgressWithStatus:@"正在上传"];
         //图片转化为data
         NSData *imageData;
         self.pickedImage = [self scaleImage:self.pickedImage];;
@@ -274,13 +267,6 @@ NSString *topicContentText = @"";
 }
 
 #pragma mark - 上传特效
-- (void)createProgressHUDTitle{
- 
-    self.hud = [MBProgressHUD showHUDAddedTo:self.navigationController.view animated:YES];
-    [self.navigationController.view addSubview:self.hud ];
-    self.hud.delegate = self;
-    self.hud.labelText = @"图片上传中";
-}
 
 #pragma mark - 拼接参数
 -(void)createParameter:(NSString *)str
@@ -351,7 +337,6 @@ NSString *topicContentText = @"";
     }
     [self.addPicButton setFrame:CGRectMake(4 + (width + 4) * (self.imageArray.count % 4), CGRectGetMaxY(self.topicContentTextView.frame) + 95 + (4+width) * (self.imageArray.count / 4), width, width)];
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width,262+(self.imageArray.count/4+1)*(width+4));
-    [self.hud hide:NO afterDelay:0];
 }
 
 
@@ -415,17 +400,14 @@ NSString *topicContentText = @"";
             if (weakSelf.myBlock) {
                 weakSelf.myBlock([NSString stringWithFormat:@"refresh"]);
             }
-//            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"话题发布成功"];
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }
         if ([responseObject[@"status"]isEqualToString:@"error"]){
             if ([responseObject[@"message"] isEqualToString:@"title not found"]) {
                 
-//                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入标题"];
                 [ODProgressHUD showInfoWithStatus:@"请输入标题"];
             }else{
             
-//                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入内容"];
                 [ODProgressHUD showInfoWithStatus:@"请输入内容"];
             }
             
@@ -434,12 +416,6 @@ NSString *topicContentText = @"";
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"%@",error);
     }];
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

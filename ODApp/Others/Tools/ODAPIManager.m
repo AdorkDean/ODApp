@@ -10,27 +10,25 @@
 
 #import <CommonCrypto/CommonDigest.h>
 
-static NSString * const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
+static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
 
 @interface NSString (ODAPIManager)
 
-@property (nonatomic, strong, readonly) NSString* md5;
+@property(nonatomic, strong, readonly) NSString *md5;
 
 @end
 
 @implementation NSString (LingQianHelper)
 
-- (NSString*)md5
-{
+- (NSString *)md5 {
     const char *cStr = [self UTF8String];
     unsigned char result[16];
-    CC_MD5( cStr, (CC_LONG)strlen(cStr),result);
-    NSMutableString *hash =[NSMutableString string];
-    for (int i = 0; i < 16; i++)
-    {
+    CC_MD5(cStr, (CC_LONG) strlen(cStr), result);
+    NSMutableString *hash = [NSMutableString string];
+    for (int i = 0; i < 16; i++) {
         [hash appendFormat:@"%02X", result[i]];
     }
-    
+
     return [hash uppercaseString];
 }
 
@@ -41,12 +39,15 @@ static NSString * const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
 
 #pragma mark - 添加 sign 字段之后的参数
 
-+ (NSMutableDictionary *)signParameters:(NSDictionary*)parameters
-{
-    NSMutableDictionary* sigParameters = [NSMutableDictionary dictionaryWithDictionary: parameters];
-    sigParameters[@"sign"] = [[self class] signStringWithParameters: sigParameters];
-    
++ (NSMutableDictionary *)signParameters:(NSDictionary *)parameters {
+    NSMutableDictionary *sigParameters = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    sigParameters[@"sign"] = [[self class] signStringWithParameters:sigParameters];
+
     return sigParameters;
+}
+
++ (NSString *)getUrl:(NSString *)uri {
+    return [ODBaseURL stringByAppendingString:uri];
 }
 
 #pragma mark - 私有函数
@@ -59,15 +60,13 @@ static NSString * const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
  *
  *  @return sign
  */
-+ (NSString*)signStringWithParameters:(NSDictionary*)parameters
-{
-    NSArray* allValues = [[parameters allValues] arrayByAddingObject: privateKey];
++ (NSString *)signStringWithParameters:(NSDictionary *)parameters {
+    NSArray *allValues = [[parameters allValues] arrayByAddingObject:privateKey];
     allValues = [allValues sortedArrayUsingSelector:@selector(compare:)];
-    NSString* signData = [allValues componentsJoinedByString: @"|"];
-    
-    return [[[[signData.md5 lowercaseString] md5] lowercaseString] substringWithRange: NSMakeRange(9, 6)];
-}
+    NSString *signData = [allValues componentsJoinedByString:@"|"];
 
+    return [[[[signData.md5 lowercaseString] md5] lowercaseString] substringWithRange:NSMakeRange(9, 6)];
+}
 
 
 @end

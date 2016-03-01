@@ -27,6 +27,10 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="活动目的：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LPS-mZ-Po3">
                         <rect key="frame" x="38" y="10" width="65" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="65" id="02i-1t-ySd"/>
+                            <constraint firstAttribute="height" constant="16" id="V5C-Us-8hb"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -60,6 +64,10 @@
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="活动时间：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="10e-Cq-3Jf">
                         <rect key="frame" x="38" y="76" width="65" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="Hyq-lB-b3M"/>
+                            <constraint firstAttribute="width" constant="65" id="qN7-4A-Wdo"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -78,6 +86,10 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中心名称：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o0h-hT-YcU">
                         <rect key="frame" x="38" y="43" width="65" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="65" id="JLG-p1-1hD"/>
+                            <constraint firstAttribute="height" constant="16" id="Zbw-Wq-xjd"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.55686274509803924" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>

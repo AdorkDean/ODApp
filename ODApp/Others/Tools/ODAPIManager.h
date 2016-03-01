@@ -19,8 +19,8 @@
  *
  *  @return 签名之后的参数
  */
-+ (NSMutableDictionary *)signParameters:(NSDictionary*)parameters;
++ (NSMutableDictionary *)signParameters:(NSDictionary *)parameters;
 
-
++ (NSString *)getUrl:(NSString *)uri;
 
 @end
