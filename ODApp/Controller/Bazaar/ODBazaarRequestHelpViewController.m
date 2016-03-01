@@ -256,8 +256,7 @@
             }
             
             if (weakSelf.count == 1 && weakSelf.dataArray.count == 0) {
-                weakSelf.noResultLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0,0, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                weakSelf.noResultLabel.center = weakSelf.view.center;
+                weakSelf.noResultLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [weakSelf.view addSubview:weakSelf.noResultLabel];
             }
 
