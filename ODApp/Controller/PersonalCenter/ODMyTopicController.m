@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODMyTopicController.h"
 #import "MJRefresh.h"
 #import "AFNetworking.h"
@@ -85,8 +86,9 @@
         
         [self.firstCollectionView reloadData];
     }
-    
-    
+
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+
     
 }
 
@@ -660,5 +662,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
 
 @end

@@ -1,5 +1,3 @@
-
-
 //
 //  ODHomeFoundViewController.m
 //  ODApp
@@ -8,14 +6,15 @@
 //  Copyright © 2015年 Odong Bracelet. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaarViewController.h"
 #import "ODHomeFoundViewController.h"
 #import "ODUserInformation.h"
 #import "ODHomeInfoModel.h"
 
 #define cellID @"ODBazaarExchangeSkillCollectionCell"
-@interface ODHomeFoundViewController ()
-{
+
+@interface ODHomeFoundViewController () {
     NSMutableDictionary *userInfoDic;
     AMapSearchAPI *_search;
     MAMapView *_mapView;
@@ -24,76 +23,69 @@
 
 @implementation ODHomeFoundViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"首页";
-    
+
     self.automaticallyAdjustsScrollViewInsets = NO;
-    
+
     [ODUserInformation sharedODUserInformation].cityID = @"1";
-    
+
     self.pictureArray = [[NSMutableArray alloc] init];
     self.pictureIdArray = [[NSMutableArray alloc] init];
     self.dataArray = [[NSMutableArray alloc] init];
     self.cityListArray = [[NSMutableArray alloc] init];
-    
+
     userInfoDic = [NSMutableDictionary dictionary];
-    
+
     [self getLocationCityRequest];
     [self createCollectionView];
     [self getScrollViewRequest];
     [self getSkillChangeRequest];
     [self getDefaultCenterNameRequest];
-    
+
     [MAMapServices sharedServices].apiKey = ODLocationApiKey;
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
     _mapView.delegate = self;
     _mapView.showsUserLocation = YES;
     [_mapView setZoomLevel:20 animated:YES];
-    
+
     //配置用户Key
     [AMapSearchServices sharedServices].apiKey = ODLocationApiKey;
     //初始化检索对象
     _search = [[AMapSearchAPI alloc] init];
     _search.delegate = self;
-    
+
     __weakSelf
-    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
-    {
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
         [weakSelf.collectionView.mj_header beginRefreshing];
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     [self locationCity];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)refreshdata
-{
+- (void)refreshdata {
     [self getSkillChangeRequest];
     [self getScrollViewRequest];
 }
 
--(NSMutableArray *)mySort:(NSMutableArray *)mArray
-{
-    NSInteger i ,j ,count;
+- (NSMutableArray *)mySort:(NSMutableArray *)mArray {
+    NSInteger i, j, count;
     NSObject *temp;
-    count = mArray.count+1;
-    for (i = count - 1; i >= 0; i--)
-    {
-        for (j= 0 ; j < i - 1 ; j++)
-        {
+    count = mArray.count + 1;
+    for (i = count - 1; i >= 0; i--) {
+        for (j = 0; j < i - 1; j++) {
             ODCommunityModel *model1 = [self.dataArray objectAtIndex:j];
-            ODCommunityModel *model2 = [self.dataArray objectAtIndex:j+1];
-            if ([model1.view_num compare:model2.view_num]<0)
-            {
+            ODCommunityModel *model2 = [self.dataArray objectAtIndex:j + 1];
+            if ([model1.view_num compare:model2.view_num] < 0) {
                 temp = [mArray objectAtIndex:j];
-                [mArray replaceObjectAtIndex:j withObject:[mArray objectAtIndex:j+1]];
-                [mArray replaceObjectAtIndex:j+1 withObject:temp];
+                [mArray replaceObjectAtIndex:j withObject:[mArray objectAtIndex:j + 1]];
+                [mArray replaceObjectAtIndex:j + 1 withObject:temp];
             }
         }
     }
@@ -101,320 +93,285 @@
 }
 
 #pragma mark - 移除通知
-- (void)dealloc
-{
+
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - 显示定位城市
-- (void)locationCity
-{
+
+- (void)locationCity {
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_locationNew"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
 }
 
 #pragma mark - Request Data
 
 #pragma mark - 定位城市数据请求
-- (void)getLocationCityRequest
-{
+
+- (void)getLocationCityRequest {
     __weakSelf
-    NSDictionary *parameter = @{@"region_name":@""};
-    [ODHttpTool getWithURL:ODUrlCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model)
-    {
-        ODLocationModel *mode = [model result];
-        weakSelf.cityListArray = mode.all;
-        [weakSelf.collectionView reloadData];
-    }
-                   failure:^(NSError *error)
-    {
-    }];
+    NSDictionary *parameter = @{@"region_name" : @""};
+    [ODHttpTool getWithURL:ODUrlCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
+                ODLocationModel *mode = [model result];
+                weakSelf.cityListArray = mode.all;
+                [weakSelf.collectionView reloadData];
+            }
+                   failure:^(NSError *error) {
+                   }];
 }
 
 #pragma mark - 热门活动数据请求
-- (void)getScrollViewRequest
-{
+
+- (void)getScrollViewRequest {
     __weakSelf
     [weakSelf.pictureArray removeAllObjects];
     [weakSelf.pictureIdArray removeAllObjects];
     [weakSelf.collectionView reloadData];
-    [ODHttpTool getWithURL:ODUrlHomeFound parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model)
-     {
-         [weakSelf.pictureArray addObjectsFromArray:[[[model result]activitys]valueForKeyPath:@"detail_md5"]];
-         [weakSelf.pictureIdArray addObjectsFromArray:[[[model result]activitys] valueForKeyPath:@"id"]];
-         [weakSelf.collectionView reloadData];
-     }
-                   failure:^(NSError *error)
-     {
-         
-     }];
+    [ODHttpTool getWithURL:ODUrlHomeFound parameters:@{} modelClass:[ODHomeInfoModel class] success:^(id model) {
+                [weakSelf.pictureArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"detail_md5"]];
+                [weakSelf.pictureIdArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"id"]];
+                [weakSelf.collectionView reloadData];
+            }
+                   failure:^(NSError *error) {
+
+                   }];
 }
 
 #pragma mark - 技能交换数据请求
-- (void)getSkillChangeRequest
-{
+
+- (void)getSkillChangeRequest {
     self.manager = [AFHTTPRequestOperationManager manager];
     self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    NSDictionary *parameter = @{@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
+    NSDictionary *parameter = @{@"city_id" : [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weak typeof (self)weakSelf = self;
-    
-    [self.manager GET:ODHomeChangeSkillUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-    {
-        [weakSelf.dataArray removeAllObjects];
-        if (responseObject)
-        {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSDictionary *result = dict[@"result"];
-            NSArray *swaps = result[@"swaps"];
-            for (NSDictionary *itemDict in swaps)
-            {
-                ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc]init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.dataArray addObject:model];
+
+    __weak typeof(self) weakSelf = self;
+
+    [self.manager GET:ODHomeChangeSkillUrl parameters:signParameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
+                [weakSelf.dataArray removeAllObjects];
+                if (responseObject) {
+                    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                    NSDictionary *result = dict[@"result"];
+                    NSArray *swaps = result[@"swaps"];
+                    for (NSDictionary *itemDict in swaps) {
+                        ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc] init];
+                        [model setValuesForKeysWithDictionary:itemDict];
+                        [weakSelf.dataArray addObject:model];
+                    }
+                    [weakSelf createCollectionView];
+                    [weakSelf.collectionView.mj_header endRefreshing];
+                }
             }
-            [weakSelf createCollectionView];
-            [weakSelf.collectionView.mj_header endRefreshing];
-        }
-    }
-              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-    {
-        [weakSelf.collectionView.mj_header endRefreshing];
-    }];
+              failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
+                  [weakSelf.collectionView.mj_header endRefreshing];
+              }];
 }
 
 #pragma mark - 获得默认的体验中心的Name和Store_id
-- (void)getDefaultCenterNameRequest
-{
+
+- (void)getDefaultCenterNameRequest {
     self.centerManager = [AFHTTPRequestOperationManager manager];
     self.centerManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        
-    NSDictionary *parameter = @{@"show_type":@"1"};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weak typeof (self)weakSelf = self;
 
-    [self.centerManager GET:ODStoreListUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-    {
-        if (responseObject)
-        {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSMutableArray *result = dict[@"result"];
-            
-            weakSelf.storeId = result[0][@"id"];
-            weakSelf.centerName = result[0][@"name"];
-            [weakSelf getDefaultCenterTelRequest];
-        }
-    }
-                    failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-    {
-        
-    }];
+    NSDictionary *parameter = @{@"show_type" : @"1"};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+
+    __weak typeof(self) weakSelf = self;
+
+    [self.centerManager GET:ODStoreListUrl parameters:signParameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
+                if (responseObject) {
+                    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                    NSMutableArray *result = dict[@"result"];
+
+                    weakSelf.storeId = result[0][@"id"];
+                    weakSelf.centerName = result[0][@"name"];
+                    [weakSelf getDefaultCenterTelRequest];
+                }
+            }
+                    failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
+
+                    }];
 }
 
 #pragma mark - 获得默认的体验中心的Tel
-- (void)getDefaultCenterTelRequest
-{
+
+- (void)getDefaultCenterTelRequest {
     self.centerTelManager = [AFHTTPRequestOperationManager manager];
     self.centerTelManager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
-    NSDictionary *parameter = @{@"store_id":[NSString stringWithFormat:@"%@", self.storeId]};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weak typeof (self)weakSelf = self;
 
-    [self.centerManager GET:ODStoreDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-    {
-        if (responseObject)
-        {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSDictionary *result = dict[@"result"];
-            
-            weakSelf.centerTel = result[@"tel"];
-        }
-    }
-                    failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-    {
-        
-    }];
+    NSDictionary *parameter = @{@"store_id" : [NSString stringWithFormat:@"%@", self.storeId]};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+
+    __weak typeof(self) weakSelf = self;
+
+    [self.centerManager GET:ODStoreDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
+                if (responseObject) {
+                    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+                    NSDictionary *result = dict[@"result"];
+
+                    weakSelf.centerTel = result[@"tel"];
+                }
+            }
+                    failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
+
+                    }];
 }
 
 #pragma mark - Action
 #pragma mark - 定位按钮点击事件
-- (void)locationButtonClick:(UIButton *)button
-{
+
+- (void)locationButtonClick:(UIButton *)button {
     ODLocationController *vc = [[ODLocationController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 顶部8个按钮点击事件
-- (void)findActivityButtonClick:(UIButton *)button
-{
+
+- (void)findActivityButtonClick:(UIButton *)button {
     self.tabBarController.selectedIndex = 1;
 }
 
-- (void)orderPlaceButtonClick:(UIButton *)button
-{
+- (void)orderPlaceButtonClick:(UIButton *)button {
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
-        
-    }else
-    {
+
+    } else {
         ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
-        
+
         vc.centerName = self.centerName;
-        vc.storeId = [NSString stringWithFormat:@"%@",self.storeId];
+        vc.storeId = [NSString stringWithFormat:@"%@", self.storeId];
         vc.phoneNumber = self.centerTel;
-        
+
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
-- (void)findFavorableButtonClick:(UIButton *)button
-{
+- (void)findFavorableButtonClick:(UIButton *)button {
     ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)findJobButtonClick:(UIButton *)button
-{
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""])
-    {
-        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+- (void)findJobButtonClick:(UIButton *)button {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
     }
-    else
-    {    
+    else {
         ODFindJobController *vc = [[ODFindJobController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
-- (void)searchCircleButtonClick:(UIButton *)button
-{
+- (void)searchCircleButtonClick:(UIButton *)button {
     [self giveCommumityContent:nil andBbsType:4];
 }
 
-- (void)searchHelpButtonClick:(UIButton *)button
-{
+- (void)searchHelpButtonClick:(UIButton *)button {
     self.tabBarController.selectedIndex = 2;
     ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     vc.index = 1;
-    [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationShowBazaar object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShowBazaar object:nil];
 }
 
-- (void)changeSkillButtonClick:(UIButton *)button
-{
+- (void)changeSkillButtonClick:(UIButton *)button {
     self.tabBarController.selectedIndex = 2;
     ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     vc.index = 0;
-    [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseSkill object:nil];
 }
 
-- (void)moreButtonClick:(UIButton *)button
-{
+- (void)moreButtonClick:(UIButton *)button {
     ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - 热门活动图片点击事件
-- (void)imageButtonClick:(UIButton *)button
-{
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""])
-    {
-        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+
+- (void)imageButtonClick:(UIButton *)button {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
     }
-    else
-    {
+    else {
         ODNewActivityDetailViewController *vc = [[ODNewActivityDetailViewController alloc] init];
         vc.acitityId = [self.pictureIdArray[button.tag - 100] intValue];
-        
+
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 #pragma mark - 寻圈子8个按钮点击事件
-- (void)emotionButtonClick:(UIButton *)button
-{
+
+- (void)emotionButtonClick:(UIButton *)button {
     [self giveCommumityContent:@"情感" andBbsType:5];
 }
 
-- (void)funnyButtonClick:(UIButton *)button
-{
+- (void)funnyButtonClick:(UIButton *)button {
     [self giveCommumityContent:@"搞笑" andBbsType:5];
 }
 
-- (void)moviesButtonClick:(UIButton *)button
-{
+- (void)moviesButtonClick:(UIButton *)button {
     [self giveCommumityContent:@"影视" andBbsType:5];
 }
 
-- (void)quadraticButtonClick:(UIButton *)button
-{
+- (void)quadraticButtonClick:(UIButton *)button {
     [self giveCommumityContent:@"二次元" andBbsType:5];
 }
 
-- (void)lifeButtonClick:(UIButton *)button
-{
+- (void)lifeButtonClick:(UIButton *)button {
     [self giveCommumityContent:@"生活" andBbsType:5];
 }
 
-- (void)starButtonClick:(UIButton *)button
-{
+- (void)starButtonClick:(UIButton *)button {
     [self giveCommumityContent:@"明星" andBbsType:5];
 }
 
-- (void)beautifulButtonClick:(UIButton *)button
-{
+- (void)beautifulButtonClick:(UIButton *)button {
     [self giveCommumityContent:@"爱美" andBbsType:5];
 }
 
-- (void)petButtonClick:(UIButton *)button
-{
+- (void)petButtonClick:(UIButton *)button {
     [self giveCommumityContent:@"宠物" andBbsType:5];
 }
 
 #pragma mark - 加入更多圈子点击事件
-- (void)gestureButtonClick:(UIButton *)button
-{
+
+- (void)gestureButtonClick:(UIButton *)button {
     [self giveCommumityContent:@"社区" andBbsType:5];
 }
 
 #pragma mark - 寻圈子跳转刷新
-- (void)giveCommumityContent:(NSString *)bbsMark andBbsType:(float)bbsType
-{
+
+- (void)giveCommumityContent:(NSString *)bbsMark andBbsType:(float)bbsType {
     self.tabBarController.selectedIndex = 3;
     ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
     vc.bbsMark = bbsMark;
     vc.bbsType = bbsType;
-    NSLog(@"%@",bbsMark);
+    NSLog(@"%@", bbsMark);
     [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationSearchCircle object:nil];
 }
 
 #pragma mark - 用户头像点击事件
-- (void)headButtonClick:(UIButton *)button
-{
-    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *)button.superview.superview;
+
+- (void)headButtonClick:(UIButton *)button {
+    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *) button.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     vc.open_id = model.user[@"open_id"];
-    
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]])
-    {
-        
+
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]]) {
+
     }
-    else
-    {
+    else {
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 #pragma mark - 了解更多技能点击事件
-- (void)moreSkillButtonClick:(UIButton *)button
-{
+
+- (void)moreSkillButtonClick:(UIButton *)button {
     self.tabBarController.selectedIndex = 2;
     ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
     vc.index = 0;
@@ -422,38 +379,37 @@
 }
 
 #pragma mark - 技能交换cell图片点击事件
--(void)imageButtonClicked:(UIButton *)button
-{
-    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *)button.superview.superview.superview;
+
+- (void)imageButtonClicked:(UIButton *)button {
+    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *) button.superview.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
+    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc] init];
     picController.photos = model.imgs_small;
-    picController.selectedIndex = button.tag-10*indexPath.row;
+    picController.selectedIndex = button.tag - 10 * indexPath.row;
     picController.skill = @"skill";
     [self presentViewController:picController animated:YES completion:nil];
 }
 
 #pragma mark - Create UICollectionView
-- (void)createCollectionView
-{
+
+- (void)createCollectionView {
     __weakSelf
-    self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight-ODTabBarHeight) collectionViewLayout:self.flowLayout];
-    
+    self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight - ODTabBarHeight) collectionViewLayout:self.flowLayout];
+
     self.flowLayout.minimumInteritemSpacing = 5;
     self.flowLayout.minimumLineSpacing = 5;
     self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    
+
     [self.collectionView registerClass:[ODhomeViewCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];
     [self.collectionView registerClass:[ODHomeFoundFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"supple"];
-    
+
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
-    {
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf refreshdata];
     }];
 
@@ -461,18 +417,16 @@
 }
 
 #pragma mark - UICollectionViewDelegate
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODBazaarExchangeSkillCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
@@ -480,45 +434,37 @@
     [cell.headButton addTarget:self action:@selector(headButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.nickLabel.text = model.user[@"nick"];
     [cell showDatasWithModel:model];
-    
-    CGFloat width=kScreenSize.width>320?90:70;
-    if (model.imgs_small.count)
-    {
-        for (id vc in cell.picView.subviews)
-        {
+
+    CGFloat width = kScreenSize.width > 320 ? 90 : 70;
+    if (model.imgs_small.count) {
+        for (id vc in cell.picView.subviews) {
             [vc removeFromSuperview];
         }
-        if (model.imgs_small.count==4)
-        {
-            for (NSInteger i = 0; i < model.imgs_small.count; i++)
-            {
+        if (model.imgs_small.count == 4) {
+            for (NSInteger i = 0; i < model.imgs_small.count; i++) {
                 NSDictionary *dict = model.imgs_small[i];
-                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%2), (width+5)*(i/2), width, width)];
+                UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake((width + 5) * (i % 2), (width + 5) * (i / 2), width, width)];
                 [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
                 [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-                imageButton.tag = 10*indexPath.row+i;
+                imageButton.tag = 10 * indexPath.row + i;
                 [cell.picView addSubview:imageButton];
             }
-            cell.picViewConstraintHeight.constant = 2*width+5;
+            cell.picViewConstraintHeight.constant = 2 * width + 5;
         }
-        else
-        {
-            for (NSInteger i = 0;i < model.imgs_small.count ; i++)
-            {
+        else {
+            for (NSInteger i = 0; i < model.imgs_small.count; i++) {
                 NSDictionary *dict = model.imgs_small[i];
-                UIButton *imageButton = [[UIButton alloc]initWithFrame:CGRectMake((width+5)*(i%3), (width+5)*(i/3), width, width)];
+                UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake((width + 5) * (i % 3), (width + 5) * (i / 3), width, width)];
                 [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
                 [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-                imageButton.tag = 10*indexPath.row+i;
+                imageButton.tag = 10 * indexPath.row + i;
                 [cell.picView addSubview:imageButton];
             }
-            cell.picViewConstraintHeight.constant = width+(width+5)*((model.imgs_small.count-1)/3);
+            cell.picViewConstraintHeight.constant = width + (width + 5) * ((model.imgs_small.count - 1) / 3);
         }
     }
-    else
-    {
-        for (id vc in cell.picView.subviews)
-        {
+    else {
+        for (id vc in cell.picView.subviews) {
             [vc removeFromSuperview];
         }
         cell.picViewConstraintHeight.constant = 0;
@@ -526,49 +472,43 @@
     return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc]init];
-    
-    vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
+    ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
+
+    vc.swap_id = [NSString stringWithFormat:@"%@", model.swap_id];
     vc.nick = model.user[@"nick"];
-    
+
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     static NSString *viewId = @"supple";
-    
+
     self.rsusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:viewId forIndexPath:indexPath];
-    
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader])
-    {
+
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
         // Hot Activity
-        self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 7/12 * self.pictureArray.count , 0);
+        self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 7 / 12 * self.pictureArray.count, 0);
         self.rsusableView.scrollView.contentOffset = CGPointMake(0, 0);
         self.rsusableView.scrollView.delegate = self;
         self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
         self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;
-        
-        for (int i = 0; i < self.pictureArray.count; i++)
-        {
+
+        for (int i = 0; i < self.pictureArray.count; i++) {
             UIButton *imageButton;
-            if (i < self.pictureArray.count - 1)
-            {
-                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7/12 * i, 0, (kScreenSize.width - 15) * 7/12 - 8, 120)];
+            if (i < self.pictureArray.count - 1) {
+                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7 / 12 * i, 0, (kScreenSize.width - 15) * 7 / 12 - 8, 120)];
             }
-            else
-            {
-                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7/12 * i, 0, (kScreenSize.width - 15) * 7/12, 120)];
+            else {
+                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7 / 12 * i, 0, (kScreenSize.width - 15) * 7 / 12, 120)];
             }
             [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.pictureArray[i]] forState:UIControlStateNormal];
             imageButton.tag = 100 + i;
             [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
             [self.rsusableView.scrollView addSubview:imageButton];
         }
-        
+
         // Top Eight Button
         [self.rsusableView.findActivityButton addTarget:self action:@selector(findActivityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.rsusableView.orderPlaceButton addTarget:self action:@selector(orderPlaceButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -578,7 +518,7 @@
         [self.rsusableView.searchHelpButton addTarget:self action:@selector(searchHelpButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.rsusableView.changeSkillButton addTarget:self action:@selector(changeSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.rsusableView.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        
+
         // Search Circle
         [self.rsusableView.emotionButton addTarget:self action:@selector(emotionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.rsusableView.funnyButton addTarget:self action:@selector(funnyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -588,40 +528,37 @@
         [self.rsusableView.starButton addTarget:self action:@selector(starButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.rsusableView.beautifulButton addTarget:self action:@selector(beautifulButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.rsusableView.petButton addTarget:self action:@selector(petButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        
+
         [self.rsusableView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        
+
     }
-    else if ([kind isEqualToString:UICollectionElementKindSectionFooter])
-    {
+    else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
         [self.rsusableView.moreSkillButton addTarget:self action:@selector(moreSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return self.rsusableView;
 }
 
 //动态计算cell的高度
--(CGFloat)returnHight:(ODBazaarExchangeSkillModel *)model
-{
-    CGFloat width=kScreenSize.width>320?90:70;
+- (CGFloat)returnHight:(ODBazaarExchangeSkillModel *)model {
+    CGFloat width = kScreenSize.width > 320 ? 90 : 70;
     NSString *content = model.content;
-    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:13]};
-    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-93, 35) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
+    NSDictionary *dict = @{NSFontAttributeName : [UIFont systemFontOfSize:13]};
+    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width - 93, 35) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
     CGFloat baseHeight = size.height + 119;
-    if (model.imgs_small.count==0) {
+    if (model.imgs_small.count == 0) {
         return baseHeight;
-    }else if (model.imgs_small.count>0&&model.imgs_small.count<4){
-        return baseHeight+width;
-    }else if (model.imgs_small.count>=4&&model.imgs_small.count<7){
-        return baseHeight+2*width+5;
-    }else if (model.imgs_small.count>=7&&model.imgs_small.count<9){
-        return baseHeight+3*width+10;
-    }else{
-        return baseHeight+3*width+10;
+    } else if (model.imgs_small.count > 0 && model.imgs_small.count < 4) {
+        return baseHeight + width;
+    } else if (model.imgs_small.count >= 4 && model.imgs_small.count < 7) {
+        return baseHeight + 2 * width + 5;
+    } else if (model.imgs_small.count >= 7 && model.imgs_small.count < 9) {
+        return baseHeight + 3 * width + 10;
+    } else {
+        return baseHeight + 3 * width + 10;
     }
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
 }
 
@@ -630,49 +567,45 @@
     return CGSizeMake(0, 0.5 + CGRectGetMaxY(self.rsusableView.changeSkillView.frame));
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-{
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
     return CGSizeMake(0, 42);
 }
 
 #pragma mark - AMapSearchDelegate
+
 //地图定位成功回调
--(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
-updatingLocation:(BOOL)updatingLocation
-{
-    if (updatingLocation)
-    {
+- (void) mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
+updatingLocation:(BOOL)updatingLocation {
+    if (updatingLocation) {
         _mapView.showsUserLocation = NO;
         [_mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
-        
+
         //构造AMapReGeocodeSearchRequest对象
         AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
         regeo.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
         regeo.radius = 10000;
         regeo.requireExtension = YES;
-        
+
         //发起逆地理编码
-        [_search AMapReGoecodeSearch: regeo];
-        
+        [_search AMapReGoecodeSearch:regeo];
+
         //构造AMapPOIAroundSearchRequest对象，设置周边请求参数
         AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
         request.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
-        
+
         request.keywords = @"";
         request.types = @"";
         request.sortrule = 0;
         request.requireExtension = YES;
-        
+
         //发起周边搜索
-        [_search AMapPOIAroundSearch: request];
+        [_search AMapPOIAroundSearch:request];
     }
 }
 
 //实现POI搜索对应的回调函数
-- (void)onPOISearchDone:(AMapPOIAroundSearchRequest *)request response:(AMapPOISearchResponse *)response
-{
-    if(response.pois.count == 0)
-    {
+- (void)onPOISearchDone:(AMapPOIAroundSearchRequest *)request response:(AMapPOISearchResponse *)response {
+    if (response.pois.count == 0) {
         return;
     }
     //通过 AMapPOISearchResponse 对象处理搜索结果
@@ -683,50 +616,46 @@ updatingLocation:(BOOL)updatingLocation
 }
 
 //实现逆地理编码的回调函数
-- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response
-{
-    if(response.regeocode != nil)
-    {
+- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response {
+    if (response.regeocode != nil) {
         NSString *cityResult;
         //通过AMapReGeocodeSearchResponse对象处理搜索结果
         NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
-        if (result.length == 0)
-        {
+        if (result.length == 0) {
             result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
-            if (result.length != 0)
-            {
+            if (result.length != 0) {
                 cityResult = [result substringToIndex:[result length] - 1];
             }
         }
-        else
-        {
+        else {
             cityResult = [result substringToIndex:[result length] - 1];
         }
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@",cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@", cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
         __weakSelf
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-        {
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action) {
             [ODUserInformation sharedODUserInformation].locationCity = cityResult;
-            
-            for (NSDictionary *cityInformation in weakSelf.cityListArray)
-            {
-                if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityInformation[@"name"]])
-                {
+
+            for (NSDictionary *cityInformation in weakSelf.cityListArray) {
+                if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityInformation[@"name"]]) {
                     [ODUserInformation sharedODUserInformation].cityID = cityInformation[@"id"];
                 }
             }
             [weakSelf locationCity];
             [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationLocationSuccessRefresh object:nil];
         }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action)
-        {
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *_Nonnull action) {
             [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
             [ODUserInformation sharedODUserInformation].cityID = @"1";
             [weakSelf locationCity];
-            
+
         }]];
         [self presentViewController:alert animated:YES completion:nil];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 @end
