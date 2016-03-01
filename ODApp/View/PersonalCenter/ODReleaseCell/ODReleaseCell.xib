@@ -59,10 +59,10 @@
                         </state>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rg8-lq-TXw">
-                        <rect key="frame" x="200" y="109" width="1" height="16"/>
+                        <rect key="frame" x="200" y="111" width="1" height="13"/>
                         <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="16" id="B2P-Jf-5KP"/>
+                            <constraint firstAttribute="height" constant="13" id="B2P-Jf-5KP"/>
                             <constraint firstAttribute="width" constant="1" id="KWO-M6-l3a"/>
                         </constraints>
                     </view>
