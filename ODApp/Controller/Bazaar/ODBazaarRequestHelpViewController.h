@@ -33,4 +33,6 @@
 @property(nonatomic, copy) NSString *refresh;
 @property(nonatomic) NSInteger indexPath;
 
+@property (nonatomic, strong) UILabel *noResultLabel;
+
 @end

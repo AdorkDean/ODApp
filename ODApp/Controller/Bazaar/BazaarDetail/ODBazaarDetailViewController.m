@@ -458,11 +458,14 @@
     }else{
         frame = CGRectMake(0, CGRectGetMaxY(contentLabel.frame)+10,kScreenSize.width-25, [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:12.5]);
     }
-    self.taskContentLabel = [ODClassMethod creatLabelWithFrame:frame text:detailModel.content font:12.5 alignment:@"left" color:@"#484848" alpha:1 maskToBounds:NO];
+    self.taskContentLabel = [[UILabel alloc]initWithFrame:frame];
+    self.taskContentLabel.text = detailModel.content;
+    self.taskContentLabel.font = [UIFont systemFontOfSize:12.5];
+    self.taskContentLabel.textAlignment = NSTextAlignmentLeft;
+    self.taskContentLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.taskContentLabel.numberOfLines = 4;
     [self.taskTopView addSubview:self.taskContentLabel];
     self.taskTopView.frame = CGRectMake(12.5, CGRectGetMaxY(self.userView.frame), kScreenSize.width-25, self.taskContentLabel.frame.size.height+self.taskContentLabel.frame.origin.y);
-    
 }
 
 #pragma mark - 创建TaskBottomDetailView

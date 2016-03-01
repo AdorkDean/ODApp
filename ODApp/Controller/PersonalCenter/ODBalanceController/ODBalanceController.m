@@ -24,7 +24,8 @@
 
 @implementation ODBalanceController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
 

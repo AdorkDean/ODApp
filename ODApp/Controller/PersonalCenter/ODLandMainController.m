@@ -80,7 +80,6 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandSecondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     [self.collectionView registerClass:[ODLandThirdCell class] forCellWithReuseIdentifier:@"third"];
-    
     [self.view addSubview:self.collectionView];
 }
 
