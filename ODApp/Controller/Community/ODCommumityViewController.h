@@ -21,19 +21,20 @@
 #import "ODCommunityShowPicViewController.h"
 #import "odbarbutton.h"
 
-@interface ODCommumityViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UIPopoverPresentationControllerDelegate>
+@interface ODCommumityViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate>
 
-@property(nonatomic,strong)UICollectionView *collectionView;
-@property(nonatomic,strong)NSMutableArray *dataArray;
-@property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic,strong)ODBarButton *button;
-@property(nonatomic,strong)UIView *classView;
-@property(nonatomic)NSInteger count;
-@property(nonatomic,assign) BOOL refresh;
-@property(nonatomic,copy)NSString *releaseSuccess;
-@property (nonatomic, copy) NSString *bbsMark;
-@property (nonatomic, assign) int bbsType;
-@property(nonatomic)NSInteger indexPath;
+@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) ODBarButton *button;
+@property(nonatomic, strong) UIView *classView;
+@property(nonatomic) NSInteger count;
+@property(nonatomic, assign) BOOL refresh;
+@property(nonatomic, copy) NSString *releaseSuccess;
+@property(nonatomic, copy) NSString *bbsMark;
+@property(nonatomic, assign) int bbsType;
+@property(nonatomic) NSInteger indexPath;
+
 - (void)joiningTogetherParmeters;
 
 @end

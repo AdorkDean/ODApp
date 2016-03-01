@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODLandMainController.h"
 #import "ODLandFirstCell.h"
 #import "ODLandSecondCell.h"
@@ -57,6 +58,7 @@
 {
     [super viewWillAppear:animated];
     [self getData];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 #pragma mark - 请求数据
@@ -90,7 +92,7 @@
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandSecondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     [self.collectionView registerClass:[ODLandThirdCell class] forCellWithReuseIdentifier:@"third"];
@@ -315,5 +317,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
 
 @end

@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODUserEvaluationController.h"
 #import "MJRefresh.h"
 #import "ODAPIManager.h"
@@ -54,7 +55,7 @@
 
 
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width,KControllerHeight) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[ODEvaluationCell class] forCellWithReuseIdentifier:@"item"];
@@ -178,6 +179,15 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 

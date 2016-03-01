@@ -10,15 +10,15 @@
 
 @interface ODBalanceView : UIView
 
-@property (weak, nonatomic) IBOutlet UIImageView *balanceImageView;
+@property(weak, nonatomic) IBOutlet UIImageView *balanceImageView;
 
-@property (weak, nonatomic) IBOutlet UILabel *balanceLabel;
+@property(weak, nonatomic) IBOutlet UILabel *balanceLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *withdrawalButton;
+@property(weak, nonatomic) IBOutlet UIButton *withdrawalButton;
 
-@property (weak, nonatomic) IBOutlet UIButton *withdrawalDetailButton;
+@property(weak, nonatomic) IBOutlet UIButton *withdrawalDetailButton;
 
 
-+(instancetype)getView;
++ (instancetype)getView;
 
 @end

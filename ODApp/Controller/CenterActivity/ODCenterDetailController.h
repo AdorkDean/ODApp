@@ -10,7 +10,7 @@
 
 @interface ODCenterDetailController : ODBaseViewController
 
-@property (nonatomic , copy) NSString *storeId;
-@property (nonatomic , copy) NSString *activityID;
+@property(nonatomic, copy) NSString *storeId;
+@property(nonatomic, copy) NSString *activityID;
 
 @end

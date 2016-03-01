@@ -10,10 +10,10 @@
 
 @interface UITableViewRowAction (JZExtension)
 
-@property (nonatomic, strong, nullable) UIImage *image;
+@property(nonatomic, strong, nullable) UIImage *image;
 
-@property (nonatomic, assign) BOOL enabled;
+@property(nonatomic, assign) BOOL enabled;
 
-+ (nonnull instancetype)rowActionWithStyle:(UITableViewRowActionStyle)style image:(nullable UIImage *)image handler:(nullable void (^)(UITableViewRowAction * _Nullable action, NSIndexPath * _Nullable indexPath))handler;
++ (nonnull instancetype)rowActionWithStyle:(UITableViewRowActionStyle)style image:(nullable UIImage *)image handler:(nullable void (^)(UITableViewRowAction *_Nullable action, NSIndexPath *_Nullable indexPath))handler;
 
 @end

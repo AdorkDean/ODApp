@@ -11,10 +11,9 @@
 @interface ODActivityDetailController : ODBaseViewController
 
 
-@property (nonatomic , copy) NSString *activityId;
-@property (nonatomic , copy) NSString *storeId;
-@property (nonatomic , copy) NSString *openId;
-
+@property(nonatomic, copy) NSString *activityId;
+@property(nonatomic, copy) NSString *storeId;
+@property(nonatomic, copy) NSString *openId;
 
 
 @end

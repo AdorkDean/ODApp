@@ -10,9 +10,9 @@
 
 @interface ODLocationModel : NSObject
 
-@property (nonatomic, strong) NSDictionary *display;
-@property (nonatomic, strong) NSDictionary *requset;
-@property (nonatomic, strong) NSArray *all;
+@property(nonatomic, strong) NSDictionary *display;
+@property(nonatomic, strong) NSDictionary *requset;
+@property(nonatomic, strong) NSArray *all;
 
 @end
 
@@ -21,7 +21,7 @@ ODRequestResultIsDictionaryProperty(ODLocationModel)
 
 @interface ODCityNameModel : NSObject
 
-@property (nonatomic, copy) NSString *id;
-@property (nonatomic, copy) NSString *name;
+@property(nonatomic, copy) NSString *id;
+@property(nonatomic, copy) NSString *name;
 
 @end

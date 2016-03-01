@@ -11,9 +11,9 @@
 
 @interface ODBazaarReleaseSkillTimeViewCell : UITableViewCell
 
-@property (assign,nonatomic) BOOL status;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UIView *lineView;
-@property (weak, nonatomic) IBOutlet UIButton *openButton;
+@property(assign, nonatomic) BOOL status;
+@property(weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property(weak, nonatomic) IBOutlet UIView *lineView;
+@property(weak, nonatomic) IBOutlet UIButton *openButton;
 
 @end

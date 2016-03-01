@@ -10,7 +10,7 @@
 #import "ODActivityDetailBtn.h"
 
 @interface ODActivitybottomView : UIView
-@property (weak, nonatomic) IBOutlet ODActivityDetailBtn *shareBtn;
-@property (weak, nonatomic) IBOutlet ODActivityDetailBtn *goodBtn;
+@property(weak, nonatomic) IBOutlet ODActivityDetailBtn *shareBtn;
+@property(weak, nonatomic) IBOutlet ODActivityDetailBtn *goodBtn;
 
 @end

@@ -16,10 +16,10 @@
 
 @interface ODMyApplyActivityController : ODBaseViewController
 
-@property (nonatomic, strong) UILabel *noReusltLabel;
+@property(nonatomic, strong) UILabel *noReusltLabel;
 
-@property (nonatomic, assign) int pageCount;
+@property(nonatomic, assign) int pageCount;
 
-@property (nonatomic, assign) BOOL isRefresh;
+@property(nonatomic, assign) BOOL isRefresh;
 
 @end

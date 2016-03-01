@@ -16,16 +16,16 @@
 #import "MJRefresh.h"
 #import "ODCommunityShowPicViewController.h"
 
-@interface ODCommunityKeyWordSearchViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UISearchBarDelegate>
+@interface ODCommunityKeyWordSearchViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate>
 
-@property(nonatomic,strong)AFHTTPRequestOperationManager * manager;
-@property(nonatomic,strong)UICollectionView *collectionView;
-@property(nonatomic,strong)NSMutableArray *dataArray;
-@property(nonatomic,strong)NSMutableArray *userArray;
-@property(nonatomic,strong)UISearchBar *searchBar;
-@property(nonatomic)NSInteger count;
-@property(nonatomic,copy)NSString *keyText;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic, strong) NSMutableArray *userArray;
+@property(nonatomic, strong) UISearchBar *searchBar;
+@property(nonatomic) NSInteger count;
+@property(nonatomic, copy) NSString *keyText;
 
-@property (nonatomic, strong) UILabel *noReusltLabel;
+@property(nonatomic, strong) UILabel *noReusltLabel;
 
 @end

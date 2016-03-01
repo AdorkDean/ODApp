@@ -11,7 +11,7 @@
 @interface ODLocationCell : UICollectionViewCell
 
 
-@property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
+@property(weak, nonatomic) IBOutlet UILabel *cityNameLabel;
 
 
 @end

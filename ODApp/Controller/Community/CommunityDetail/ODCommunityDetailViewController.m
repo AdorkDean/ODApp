@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCommunityDetailViewController.h"
 #import "WXApi.h"
 @interface ODCommunityDetailViewController ()<UMSocialUIDelegate>
@@ -505,6 +506,7 @@
             [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]atScrollPosition:UITableViewScrollPositionBottom animated:NO];
         }
     }
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 
@@ -518,4 +520,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+
 @end

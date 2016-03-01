@@ -10,15 +10,12 @@
 
 @interface ODEvaluationModel : NSObject
 
-@property(nonatomic,copy)NSString *id;
-@property(nonatomic,copy)NSString *type;
-@property(nonatomic,copy)NSString *comment;
-@property(nonatomic,copy)NSString *created_at;
-@property(nonatomic,copy)NSString *task_id;
-@property(nonatomic,copy)NSString *task_title;
-
-
-
+@property(nonatomic, copy) NSString *id;
+@property(nonatomic, copy) NSString *type;
+@property(nonatomic, copy) NSString *comment;
+@property(nonatomic, copy) NSString *created_at;
+@property(nonatomic, copy) NSString *task_id;
+@property(nonatomic, copy) NSString *task_title;
 
 
 @end

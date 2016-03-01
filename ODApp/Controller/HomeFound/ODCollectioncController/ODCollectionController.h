@@ -10,6 +10,6 @@
 
 @interface ODCollectionController : ODBaseViewController
 
-@property (nonatomic ,copy)NSString *open_id;
-@property (nonatomic ,copy)NSString *swap_id;
+@property(nonatomic, copy) NSString *open_id;
+@property(nonatomic, copy) NSString *swap_id;
 @end

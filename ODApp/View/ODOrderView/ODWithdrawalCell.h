@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "ODBalanceModel.h"
+
 @interface ODWithdrawalCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property(weak, nonatomic) IBOutlet UILabel *priceLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *dataLabel;
-@property (weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property(weak, nonatomic) IBOutlet UILabel *dataLabel;
+@property(weak, nonatomic) IBOutlet UILabel *statusLabel;
 
 
-@property (nonatomic , strong) ODBalanceModel *model;
+@property(nonatomic, strong) ODBalanceModel *model;
 
 @end

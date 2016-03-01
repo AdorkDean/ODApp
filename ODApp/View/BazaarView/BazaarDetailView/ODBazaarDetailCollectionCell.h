@@ -11,8 +11,8 @@
 
 @interface ODBazaarDetailCollectionCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UIImageView *imageV;
-@property (weak, nonatomic) IBOutlet UILabel *nickLabel;
-@property (weak, nonatomic) IBOutlet UILabel *signLabel;
+@property(weak, nonatomic) IBOutlet UIImageView *imageV;
+@property(weak, nonatomic) IBOutlet UILabel *nickLabel;
+@property(weak, nonatomic) IBOutlet UILabel *signLabel;
 
 @end

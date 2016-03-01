@@ -9,19 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @interface ODCommunityDetailCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIButton *headButton;
-@property (weak, nonatomic) IBOutlet UILabel *nickName;
-@property (weak, nonatomic) IBOutlet UIButton *replyButton;
-@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
-@property (weak, nonatomic) IBOutlet UIImageView *lineImageView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineImageViewConstraint;
+@property(weak, nonatomic) IBOutlet UIButton *headButton;
+@property(weak, nonatomic) IBOutlet UILabel *nickName;
+@property(weak, nonatomic) IBOutlet UIButton *replyButton;
+@property(weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property(weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property(weak, nonatomic) IBOutlet UIButton *deleteButton;
+@property(weak, nonatomic) IBOutlet UIImageView *lineImageView;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *lineImageViewConstraint;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeight;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelSpace;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeight;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelSpace;
 
-@property (assign,nonatomic) CGFloat timeLabelSpaceConstant;
+@property(assign, nonatomic) CGFloat timeLabelSpaceConstant;
 //@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelSpace;
 
 @end

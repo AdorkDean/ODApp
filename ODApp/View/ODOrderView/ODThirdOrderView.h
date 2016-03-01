@@ -11,13 +11,10 @@
 @interface ODThirdOrderView : UIView
 
 
+@property(weak, nonatomic) IBOutlet UILabel *timeLabel;
 
+@property(weak, nonatomic) IBOutlet UIImageView *choseTimeView;
 
-
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-
-@property (weak, nonatomic) IBOutlet UIImageView *choseTimeView;
-
-+(instancetype)getView;
++ (instancetype)getView;
 
 @end

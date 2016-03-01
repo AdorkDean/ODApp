@@ -18,28 +18,28 @@
 
 @interface ODMyOrderDetailController : ODBaseViewController
 
-@property (nonatomic, copy) NSString *open_id;
+@property(nonatomic, copy) NSString *open_id;
 
-@property (nonatomic, strong) UIScrollView *scrollView;
+@property(nonatomic, strong) UIScrollView *scrollView;
 
-@property (nonatomic, strong) UILabel *checkLabel;
+@property(nonatomic, strong) UILabel *checkLabel;
 
-@property (nonatomic, strong) NSMutableArray *dataArray;
-@property (nonatomic, strong) NSMutableArray *devicesArray;
+@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic, strong) NSMutableArray *devicesArray;
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager *managers;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *managers;
 
-@property (nonatomic, copy) NSString *order_id;
+@property(nonatomic, copy) NSString *order_id;
 
-@property (nonatomic, strong)ODMyOrderDetailModel *model;
+@property(nonatomic, strong) ODMyOrderDetailModel *model;
 
-@property (nonatomic, strong) UIButton *cancelOrderButton;
+@property(nonatomic, strong) UIButton *cancelOrderButton;
 
-@property (nonatomic, assign) BOOL isOther;
+@property(nonatomic, assign) BOOL isOther;
 
-@property (nonatomic, copy) NSString *status_str;
+@property(nonatomic, copy) NSString *status_str;
 
 
 @end

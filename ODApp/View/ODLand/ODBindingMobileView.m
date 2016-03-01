@@ -10,10 +10,9 @@
 
 @implementation ODBindingMobileView
 
-+(instancetype)getView
-{
++ (instancetype)getView {
     return [[[NSBundle mainBundle] loadNibNamed:@"ODBindingMobileView" owner:nil options:nil] firstObject];
-    
+
 }
 
 @end

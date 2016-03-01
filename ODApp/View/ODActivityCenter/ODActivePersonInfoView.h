@@ -12,8 +12,8 @@
 /**
  *  模型数据
  */
-@property (nonatomic, strong) NSArray *activePersons;
+@property(nonatomic, strong) NSArray *activePersons;
 
-@property (strong, nonatomic) UIScrollView *headImgsView;
+@property(strong, nonatomic) UIScrollView *headImgsView;
 
 @end

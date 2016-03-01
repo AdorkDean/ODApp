@@ -17,29 +17,29 @@
 #import "MJRefresh.h"
 #import "AFNetworking.h"
 
-@interface ODMyOrderRecordController : ODBaseViewController<UICollectionViewDataSource,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
+@interface ODMyOrderRecordController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, copy)NSString *centerTitle;
+@property(nonatomic, copy) NSString *centerTitle;
 
-@property (nonatomic, copy) NSString *open_id;
+@property(nonatomic, copy) NSString *open_id;
 
-@property (nonatomic, strong)UICollectionView *collectionView;
+@property(nonatomic, strong) UICollectionView *collectionView;
 
-@property (nonatomic, strong)AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
-@property (nonatomic, strong)NSMutableArray *orderArray;
+@property(nonatomic, strong) NSMutableArray *orderArray;
 
-@property (nonatomic, assign) BOOL isOther;
+@property(nonatomic, assign) BOOL isOther;
 
-@property (nonatomic, strong) UILabel *noReusltLabel;
+@property(nonatomic, strong) UILabel *noReusltLabel;
 
-@property (nonatomic, strong) UILabel *noMoreLabel;
+@property(nonatomic, strong) UILabel *noMoreLabel;
 
-@property (nonatomic, assign) NSInteger count;
+@property(nonatomic, assign) NSInteger count;
 
 
-@property (nonatomic, assign) BOOL isRefresh;
+@property(nonatomic, assign) BOOL isRefresh;
 
-@property (nonatomic, strong) ODMyOrderRecordCell *orderRecordCell;
+@property(nonatomic, strong) ODMyOrderRecordCell *orderRecordCell;
 
 @end

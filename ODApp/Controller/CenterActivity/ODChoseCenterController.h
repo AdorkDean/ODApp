@@ -10,10 +10,10 @@
 
 @interface ODChoseCenterController : ODBaseViewController
 
-@property(nonatomic,copy)void(^isRefreshBlock)(BOOL isRefresh);
+@property(nonatomic, copy) void(^isRefreshBlock)(BOOL isRefresh);
 
 
-@property(nonatomic,copy)void(^storeCenterNameBlock)(NSString *name , NSString *storeId , NSInteger storeNumber);
+@property(nonatomic, copy) void(^storeCenterNameBlock)(NSString *name, NSString *storeId, NSInteger storeNumber);
 
 
 @end

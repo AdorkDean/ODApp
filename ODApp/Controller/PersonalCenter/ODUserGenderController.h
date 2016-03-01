@@ -12,6 +12,6 @@
 @interface ODUserGenderController : ODBaseViewController
 
 
-@property(nonatomic,copy)void(^getTextBlock)(NSString *text);
+@property(nonatomic, copy) void(^getTextBlock)(NSString *text);
 
 @end

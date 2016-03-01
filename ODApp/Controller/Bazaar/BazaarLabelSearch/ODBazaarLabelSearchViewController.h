@@ -17,13 +17,13 @@
 #import "ODBazaarDetailViewController.h"
 
 
-@interface ODBazaarLabelSearchViewController : ODBaseViewController<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UISearchBarDelegate ,UITextFieldDelegate>
+@interface ODBazaarLabelSearchViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITextFieldDelegate>
 
-@property(nonatomic,strong)UICollectionView *collectionView;
-@property(nonatomic,strong)NSMutableArray *dataArray;
-@property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic,strong)UISearchBar *searchBar;
-@property(nonatomic)NSInteger count;
-@property (nonatomic, strong) UILabel *noReusltLabel;
+@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) UISearchBar *searchBar;
+@property(nonatomic) NSInteger count;
+@property(nonatomic, strong) UILabel *noReusltLabel;
 
 @end

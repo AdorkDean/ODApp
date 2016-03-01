@@ -10,7 +10,7 @@
 
 @interface ODApplyListViewController : ODBaseViewController
 
-@property (nonatomic , copy) NSString *activity_id;
+@property(nonatomic, copy) NSString *activity_id;
 
 
 @end

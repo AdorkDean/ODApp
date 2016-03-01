@@ -10,10 +10,9 @@
 
 @implementation ODTypeView
 
-+(instancetype)getView
-{
++ (instancetype)getView {
     return [[[NSBundle mainBundle] loadNibNamed:@"ODTypeView" owner:nil options:nil] firstObject];
-    
+
 }
 
 @end

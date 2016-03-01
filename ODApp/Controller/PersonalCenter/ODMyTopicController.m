@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODMyTopicController.h"
 #import "MJRefresh.h"
 #import "AFNetworking.h"
@@ -85,8 +86,9 @@
         
         [self.firstCollectionView reloadData];
     }
-    
-    
+
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+
     
 }
 
@@ -142,7 +144,7 @@
     // 我发表的collectionView
     self.firstFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.firstFlowLayout];
-    self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.firstCollectionView.dataSource = self;
     self.firstCollectionView.delegate = self;
     self.firstCollectionView.tag = 111;
@@ -161,7 +163,7 @@
     // 我回复的collectionView
     self.secondFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width,10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.secondFlowLayout];
-    self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.secondCollectionView.dataSource = self;
     self.secondCollectionView.delegate = self;
     self.secondCollectionView.tag = 222;
@@ -660,5 +662,9 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
 
 @end

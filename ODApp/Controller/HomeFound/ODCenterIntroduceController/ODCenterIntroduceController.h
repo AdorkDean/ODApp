@@ -18,10 +18,10 @@
 
 @interface ODCenterIntroduceController : ODBaseViewController
 
-@property (nonatomic, strong) UIWebView *webView;
+@property(nonatomic, strong) UIWebView *webView;
 
-@property (nonatomic, strong)NSString *activityTitle;
-@property (nonatomic, strong)NSString *webUrl;
+@property(nonatomic, strong) NSString *activityTitle;
+@property(nonatomic, strong) NSString *webUrl;
 
 
 @end

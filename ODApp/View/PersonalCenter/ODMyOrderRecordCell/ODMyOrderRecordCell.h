@@ -16,20 +16,20 @@
 - (void)showDatawithModel:(ODMyOrderRecordModel *)model;
 
 
-@property (weak, nonatomic) IBOutlet UIImageView *centerPurposeImageView;
-@property (weak, nonatomic) IBOutlet UILabel *centerPurposeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *centerPurposeDetailLabel;
+@property(weak, nonatomic) IBOutlet UIImageView *centerPurposeImageView;
+@property(weak, nonatomic) IBOutlet UILabel *centerPurposeLabel;
+@property(weak, nonatomic) IBOutlet UILabel *centerPurposeDetailLabel;
 
-@property (weak, nonatomic) IBOutlet UIImageView *centerNameImageView;
-@property (weak, nonatomic) IBOutlet UILabel *centerNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *centerNameDetailLabel;
+@property(weak, nonatomic) IBOutlet UIImageView *centerNameImageView;
+@property(weak, nonatomic) IBOutlet UILabel *centerNameLabel;
+@property(weak, nonatomic) IBOutlet UILabel *centerNameDetailLabel;
 
-@property (weak, nonatomic) IBOutlet UIImageView *timeImageView;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timeDetailLabel;
+@property(weak, nonatomic) IBOutlet UIImageView *timeImageView;
+@property(weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property(weak, nonatomic) IBOutlet UILabel *timeDetailLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *checkStateLabel;
+@property(weak, nonatomic) IBOutlet UILabel *checkStateLabel;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineHeight;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *lineHeight;
 
 @end

@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaarReleaseSkillViewController.h"
 
 @interface ODBazaarReleaseSkillViewController ()
@@ -779,7 +780,7 @@ NSString *skillContentText = @"";
         self.timeView.hidden = YES;
         self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
     }
-    
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -789,6 +790,9 @@ NSString *skillContentText = @"";
     // Dispose of any resources that can be recreated.
 }
 
-
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
 
 @end
