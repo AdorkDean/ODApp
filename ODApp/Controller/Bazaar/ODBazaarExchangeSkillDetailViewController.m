@@ -206,7 +206,6 @@
     [self.detailView addSubview:titleLabel];
 
     UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(titleLabel.frame) + 10, kScreenSize.width - 35, 20)];
-//    priceLabel.text = [[[[NSString stringWithFormat:@"%@",model.price] stringByAppendingString:@"元"] stringByAppendingString:@"/"] stringByAppendingString:model.unit];
     priceLabel.text = [NSString stringWithFormat:@"%@元/%@", model.price, model.unit];
     priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     priceLabel.textAlignment = NSTextAlignmentCenter;
