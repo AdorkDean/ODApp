@@ -88,7 +88,7 @@
     [self createTableView];
     self.openId = [ODUserInformation sharedODUserInformation].openID;
 
-
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(fanhui:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"返回"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
