@@ -179,10 +179,17 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    float labelHeight;
-//    labelHeight = [ODHelp textHeightFromTextString:self.orderRecordCell.centerPurposeDetailLabel.text width:KScreenWidth - 118 fontSize:13];
-    return CGSizeMake(kScreenSize.width - 8, 150);
+    
+    float height;
+    ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
+    height = [ODHelp textHeightFromTextString:model.purpose width:KScreenWidth - 126 fontSize:13] - 13;
+    height = height + [ODHelp textHeightFromTextString:model.position_str width:KScreenWidth - 126 fontSize:13] - 13;
+    
+    return CGSizeMake(KScreenWidth - 8, 130 + height);
+   
 }
+
+
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
