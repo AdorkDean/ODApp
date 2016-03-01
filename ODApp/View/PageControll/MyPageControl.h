@@ -18,17 +18,17 @@
 
 @end
 
-@interface MyPageControl : UIView 
-{
-    UIImage         *_normalDotImage;
-    UIImage         *_highlightedDotImage;
-    NSInteger       __pageNumbers;
-    float           __dotsSize;
-    NSInteger       __dotsGap;
-    id<MyPageControlDelegate> _delegate;
+@interface MyPageControl : UIView {
+    UIImage *_normalDotImage;
+    UIImage *_highlightedDotImage;
+    NSInteger __pageNumbers;
+    float __dotsSize;
+    NSInteger __dotsGap;
+    id <MyPageControlDelegate> _delegate;
 }
 
-@property (nonatomic , assign)id<MyPageControlDelegate> delegate;
+@property(nonatomic, assign) id <MyPageControlDelegate> delegate;
+
 - (id)initWithFrame:(CGRect)frame normalImage:(UIImage *)nImage highlightedImage:(UIImage *)hImage dotsNumber:(NSInteger)pageNum sideLength:(NSInteger)size dotsGap:(NSInteger)gap;
 
 - (void)setCurrentPage:(NSInteger)pages;

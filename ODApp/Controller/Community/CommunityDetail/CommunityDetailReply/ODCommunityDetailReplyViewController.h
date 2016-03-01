@@ -12,14 +12,14 @@
 #import "ODAPIManager.h"
 #import "ODCommunityDetailModel.h"
 
-@interface ODCommunityDetailReplyViewController : ODBaseViewController<UITextViewDelegate>
+@interface ODCommunityDetailReplyViewController : ODBaseViewController <UITextViewDelegate>
 
-@property(nonatomic,strong)UITextView *textView;
-@property(nonatomic,strong)UILabel *label;
-@property(nonatomic,copy)NSString *bbs_id;
-@property(nonatomic,copy)NSString *parent_id;
-@property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
-@property(nonatomic,copy)void(^myBlock)(NSString *refresh,ODCommunityDetailModel *model);
+@property(nonatomic, strong) UITextView *textView;
+@property(nonatomic, strong) UILabel *label;
+@property(nonatomic, copy) NSString *bbs_id;
+@property(nonatomic, copy) NSString *parent_id;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, copy) void(^myBlock)(NSString *refresh, ODCommunityDetailModel *model);
 
 
 @end

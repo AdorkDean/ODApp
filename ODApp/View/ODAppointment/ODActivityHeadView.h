@@ -8,20 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "SDCycleScrollView.h"
+
 @interface ODActivityHeadView : UICollectionReusableView
 
 
-@property (nonatomic , strong) SDCycleScrollView *cycleScrollerView;
+@property(nonatomic, strong) SDCycleScrollView *cycleScrollerView;
 
 
-@property (nonatomic , strong) UIButton *centerButton;
+@property(nonatomic, strong) UIButton *centerButton;
 
 
-@property (nonatomic ,strong) UIImageView *coverImageView;
-@property (nonatomic ,strong) UILabel *centerNameLabel;
-@property (nonatomic ,strong) UIImageView *jiantou;
-
-
+@property(nonatomic, strong) UIImageView *coverImageView;
+@property(nonatomic, strong) UILabel *centerNameLabel;
+@property(nonatomic, strong) UIImageView *jiantou;
 
 
 @end

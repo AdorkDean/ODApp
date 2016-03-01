@@ -13,10 +13,12 @@
  *  颜色转图片
  */
 + (UIImage *)OD_imageWithColor:(UIColor *)color;
+
 /**
  *  把image裁剪成圆形图片
  */
 - (instancetype)OD_circleImage;
+
 /**
  *  根据图片名字转换成圆形图片
  */

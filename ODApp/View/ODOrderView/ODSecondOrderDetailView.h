@@ -11,42 +11,38 @@
 @interface ODSecondOrderDetailView : UIView
 
 
+@property(weak, nonatomic) IBOutlet UILabel *thirdLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *thirdLabel;
-
-@property (weak, nonatomic) IBOutlet UIButton *phoneButton;
-
+@property(weak, nonatomic) IBOutlet UIButton *phoneButton;
 
 
-@property (weak, nonatomic) IBOutlet UILabel *typeLabel;
+@property(weak, nonatomic) IBOutlet UILabel *typeLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *userButtonView;
+@property(weak, nonatomic) IBOutlet UIButton *userButtonView;
 
-@property (weak, nonatomic) IBOutlet UILabel *nickLabel;
+@property(weak, nonatomic) IBOutlet UILabel *nickLabel;
 
-@property (weak, nonatomic) IBOutlet UIButton *contentButtonView;
+@property(weak, nonatomic) IBOutlet UIButton *contentButtonView;
 
-@property (weak, nonatomic) IBOutlet UILabel *contentLabel;
+@property(weak, nonatomic) IBOutlet UILabel *contentLabel;
 
-@property (weak, nonatomic) IBOutlet UILabel *swapTypeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *countLabel;
-@property (weak, nonatomic) IBOutlet UILabel *allPriceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *addressNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *addressPhoneLabel;
-@property (weak, nonatomic) IBOutlet UILabel *serviceTimeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *serviceAddressLabel;
-@property (weak, nonatomic) IBOutlet UILabel *orderIdLabel;
-@property (weak, nonatomic) IBOutlet UILabel *orderTimeLabel;
+@property(weak, nonatomic) IBOutlet UILabel *swapTypeLabel;
+@property(weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property(weak, nonatomic) IBOutlet UILabel *countLabel;
+@property(weak, nonatomic) IBOutlet UILabel *allPriceLabel;
+@property(weak, nonatomic) IBOutlet UILabel *addressNameLabel;
+@property(weak, nonatomic) IBOutlet UILabel *addressPhoneLabel;
+@property(weak, nonatomic) IBOutlet UILabel *serviceTimeLabel;
+@property(weak, nonatomic) IBOutlet UILabel *serviceAddressLabel;
+@property(weak, nonatomic) IBOutlet UILabel *orderIdLabel;
+@property(weak, nonatomic) IBOutlet UILabel *orderTimeLabel;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *spaceToTop;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *spaceToTop;
 
-@property (weak, nonatomic) IBOutlet UILabel *spaceLabel;
+@property(weak, nonatomic) IBOutlet UILabel *spaceLabel;
 
 
-
-+(instancetype)getView;
-
++ (instancetype)getView;
 
 
 @end

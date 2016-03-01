@@ -11,8 +11,8 @@
 @interface ChoseCenterModel : NSObject
 
 
-@property (nonatomic , assign) NSInteger storeId;
-@property (nonatomic , copy) NSString *name;
+@property(nonatomic, assign) NSInteger storeId;
+@property(nonatomic, copy) NSString *name;
 
--(instancetype)initWithDict:(NSDictionary *)dict;
+- (instancetype)initWithDict:(NSDictionary *)dict;
 @end

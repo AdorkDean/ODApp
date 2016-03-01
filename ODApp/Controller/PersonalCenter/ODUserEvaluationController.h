@@ -10,9 +10,9 @@
 
 @interface ODUserEvaluationController : ODBaseViewController
 
-@property (nonatomic , copy) NSString *typeTitle;
-@property (nonatomic , copy) NSString *openId;
+@property(nonatomic, copy) NSString *typeTitle;
+@property(nonatomic, copy) NSString *openId;
 
-@property (nonatomic, strong) UILabel *noReusltLabel;
+@property(nonatomic, strong) UILabel *noReusltLabel;
 
 @end

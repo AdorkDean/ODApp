@@ -11,7 +11,4 @@
 @interface ODOperationSeccondCell : UICollectionViewCell
 
 
-
-
-
 @end

@@ -10,10 +10,8 @@
 
 @implementation ODUserModel
 
--(instancetype)initWithDict:(NSDictionary *)dict
-{
-    if (self = [super init])
-    {
+- (instancetype)initWithDict:(NSDictionary *)dict {
+    if (self = [super init]) {
         self.open_id = dict[@"open_id"];
         self.mobile = dict[@"mobile"];
         self.name = dict[@"name"];
@@ -28,12 +26,10 @@
         self.gender = [dict[@"gender"] integerValue];
         self.my_hot_tags = dict[@"my_hot_tags"];
         self.share = dict[@"share"];
-        
+
     }
     return self;
 }
-
-
 
 
 @end

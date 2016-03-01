@@ -10,13 +10,11 @@
 
 @interface ODTopicModel : NSObject
 
-@property(nonatomic,copy)NSString *id;
-@property(nonatomic,copy)NSString *title;
-@property(nonatomic,copy)NSString *content;
-@property(nonatomic,copy)NSString *user_id;
-@property(nonatomic,copy)NSString *view_num;
-
-
+@property(nonatomic, copy) NSString *id;
+@property(nonatomic, copy) NSString *title;
+@property(nonatomic, copy) NSString *content;
+@property(nonatomic, copy) NSString *user_id;
+@property(nonatomic, copy) NSString *view_num;
 
 
 @end

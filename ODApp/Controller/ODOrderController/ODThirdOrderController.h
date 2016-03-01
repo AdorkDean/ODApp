@@ -8,8 +8,9 @@
 
 #import "ODBaseViewController.h"
 #import "ODBazaarExchangeSkillModel.h"
+
 @interface ODThirdOrderController : ODBaseViewController
 
-@property (nonatomic , strong) ODBazaarExchangeSkillModel *informationModel;
+@property(nonatomic, strong) ODBazaarExchangeSkillModel *informationModel;
 
 @end

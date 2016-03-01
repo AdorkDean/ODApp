@@ -8,20 +8,21 @@
 
 #import <UIKit/UIKit.h>
 #import "CenterActivityModel.h"
+
 @interface CenterDetailCell : UITableViewCell
 
 
-@property (weak, nonatomic) IBOutlet UIImageView *coverImageView;
+@property(weak, nonatomic) IBOutlet UIImageView *coverImageView;
 
-@property (weak, nonatomic) IBOutlet UIImageView *titleImageView;
+@property(weak, nonatomic) IBOutlet UIImageView *titleImageView;
 
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property(weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property(weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property(weak, nonatomic) IBOutlet UILabel *addressLabel;
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toRightSpace;
+@property(weak, nonatomic) IBOutlet NSLayoutConstraint *toRightSpace;
 
-@property (nonatomic , strong) CenterActivityModel *model;
+@property(nonatomic, strong) CenterActivityModel *model;
 
 
 @end

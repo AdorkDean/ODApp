@@ -15,12 +15,11 @@
 
 #import "ODPersonalCenterViewController.h"
 
-@interface ODLazyViewController : ODBaseViewController<UIScrollViewDelegate>
+@interface ODLazyViewController : ODBaseViewController <UIScrollViewDelegate>
 
-@property (nonatomic, strong)UIScrollView *scrollView;
+@property(nonatomic, strong) UIScrollView *scrollView;
 
-@property (nonatomic)BOOL isJob;
-
+@property(nonatomic) BOOL isJob;
 
 
 @end

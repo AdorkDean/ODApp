@@ -10,23 +10,23 @@
 
 @interface ODMyOrderRecordModel : ODAppModel
 
-@property (nonatomic, copy)NSString *order_id;
-@property (nonatomic, copy)NSString *open_id;
+@property(nonatomic, copy) NSString *order_id;
+@property(nonatomic, copy) NSString *open_id;
 
-@property (nonatomic, copy)NSString *purpose;
+@property(nonatomic, copy) NSString *purpose;
 
-@property (nonatomic, copy)NSString *date_str;
+@property(nonatomic, copy) NSString *date_str;
 
-@property (nonatomic, copy)NSString *start_date_str;
-@property (nonatomic, copy)NSString *end_date_str;
+@property(nonatomic, copy) NSString *start_date_str;
+@property(nonatomic, copy) NSString *end_date_str;
 
-@property (nonatomic, copy)NSString *position_str;
+@property(nonatomic, copy) NSString *position_str;
 
-@property (nonatomic, copy)NSString *status_str;
+@property(nonatomic, copy) NSString *status_str;
 
-@property (nonatomic, copy)NSString *status;
+@property(nonatomic, copy) NSString *status;
 
-@property (nonatomic, copy)NSString *due_date;
+@property(nonatomic, copy) NSString *due_date;
 
 
 @end

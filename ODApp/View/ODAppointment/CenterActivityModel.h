@@ -10,14 +10,14 @@
 
 @interface CenterActivityModel : NSObject
 
-@property (nonatomic , assign) NSInteger activity_id;
-@property (nonatomic , copy) NSString *icon_url;
-@property (nonatomic , copy) NSString *content;
-@property (nonatomic , copy) NSString *address;
-@property (nonatomic , copy) NSString *date_str;
+@property(nonatomic, assign) NSInteger activity_id;
+@property(nonatomic, copy) NSString *icon_url;
+@property(nonatomic, copy) NSString *content;
+@property(nonatomic, copy) NSString *address;
+@property(nonatomic, copy) NSString *date_str;
 
 
--(instancetype)initWithDict:(NSDictionary *)dict;
+- (instancetype)initWithDict:(NSDictionary *)dict;
 
 
 @end

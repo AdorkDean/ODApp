@@ -11,6 +11,4 @@
 @interface TimeButton : UIButton
 
 
-
-
 @end

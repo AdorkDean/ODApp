@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ODSecondOrderView.h"
+
 @interface ODOrderSecondHeadView : UICollectionReusableView
 
-@property (nonatomic , strong) ODSecondOrderView *secondOrderView;
+@property(nonatomic, strong) ODSecondOrderView *secondOrderView;
 
 
 @end

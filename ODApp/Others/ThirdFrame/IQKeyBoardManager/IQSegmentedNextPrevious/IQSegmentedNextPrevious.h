@@ -28,7 +28,7 @@
 #import <UIKit/UISegmentedControl.h>
 
 #if !(__has_feature(objc_instancetype))
-    #define instancetype id
+#define instancetype id
 #endif
 
 
@@ -51,12 +51,12 @@
 /**
  initWithTarget:previousAction:nextAction should be used.
  */
-- (instancetype)init	__attribute__((unavailable("init is not available, should use initWithTarget:previousAction:nextAction instead")));
+- (instancetype)init    __attribute__((unavailable("init is not available, should use initWithTarget:previousAction:nextAction instead")));
 
 /**
  initWithTarget:previousAction:nextAction should be used.
  */
-+ (instancetype)new	__attribute__((unavailable("new is not available, should use initWithTarget:previousAction:nextAction instead")));
++ (instancetype)new    __attribute__((unavailable("new is not available, should use initWithTarget:previousAction:nextAction instead")));
 
 @end
 

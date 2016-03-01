@@ -24,19 +24,19 @@
 #import "ODUserEvaluationController.h"
 
 
-@interface ODOthersInformationController : ODBaseViewController<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
+@interface ODOthersInformationController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, copy) NSString *open_id;
+@property(nonatomic, copy) NSString *open_id;
 
-@property (nonatomic, copy) NSString *phoneNumber;
-@property (nonatomic, copy) NSString *password;
+@property(nonatomic, copy) NSString *phoneNumber;
+@property(nonatomic, copy) NSString *password;
 
-@property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-@property (nonatomic, strong) UICollectionView *collectionView;
-@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
-@property (nonatomic, strong) ODUserModel *model;
+@property(nonatomic, strong) ODUserModel *model;
 
-@property (nonatomic, assign) BOOL isOther;
+@property(nonatomic, assign) BOOL isOther;
 
 @end

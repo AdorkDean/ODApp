@@ -11,7 +11,7 @@
 @interface ODCenterPactureController : ODBaseViewController
 
 
-@property (nonatomic , strong) NSString *activityName;
-@property (nonatomic , strong) NSString *webUrl;
+@property(nonatomic, strong) NSString *activityName;
+@property(nonatomic, strong) NSString *webUrl;
 
 @end
