@@ -22,6 +22,9 @@
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJR-PQ-Jvk">
                         <rect key="frame" x="326" y="14" width="32" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="999" constant="32" id="Q5Q-2U-t6c"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12.5"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -114,6 +117,7 @@
                 <constraint firstItem="Sjv-ul-Sja" firstAttribute="leading" secondItem="bCh-Ex-1yr" secondAttribute="trailing" constant="10" id="oFv-WA-yeM"/>
                 <constraint firstItem="8mZ-Wp-S8t" firstAttribute="top" secondItem="UI7-aa-fLA" secondAttribute="bottom" constant="15" id="qYO-g7-cj8"/>
                 <constraint firstItem="bCh-Ex-1yr" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="rgd-WC-ag3"/>
+                <constraint firstItem="nJR-PQ-Jvk" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Sjv-ul-Sja" secondAttribute="trailing" constant="10" id="rwD-lS-Drx"/>
                 <constraint firstItem="fT4-PT-V8T" firstAttribute="top" secondItem="4Gf-N6-WPl" secondAttribute="top" id="skG-IO-4E2"/>
                 <constraint firstItem="4Gf-N6-WPl" firstAttribute="top" secondItem="Sjv-ul-Sja" secondAttribute="bottom" constant="10" id="y7m-ID-JAr"/>
                 <constraint firstItem="dDI-L7-eOR" firstAttribute="centerY" secondItem="OwH-6z-Myb" secondAttribute="centerY" id="yow-Wv-31G"/>

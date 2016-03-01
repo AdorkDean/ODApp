@@ -87,6 +87,7 @@
     [self.view addSubview:self.screeningButton];
     
     UIImageView *screeningIamgeView = [ODClassMethod creatImageViewWithFrame:CGRectMake(85, 13, 15, 9) imageName:@"任务筛选下拉箭头" tag:0];
+    screeningIamgeView.tag = 10010;
     [self.screeningButton addSubview:screeningIamgeView];
 
     UITapGestureRecognizer *searchGestuer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchButtonClick)];
@@ -96,12 +97,13 @@
     searchView.layer.borderColor = [UIColor colorWithHexString:@"484848" alpha:1].CGColor;
     searchView.layer.borderWidth = 1;
     [searchView addGestureRecognizer:searchGestuer];
+    searchView.tag = 10011;
     [self.view addSubview:searchView];
     
     UIImageView *searchImageView = [ODClassMethod creatImageViewWithFrame:CGRectMake(15, 10, 15, 15) imageName:@"搜索放大镜icon" tag:0];
     [searchView addSubview:searchImageView];
     
-    UILabel *seacrhLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(searchImageView.frame)+10, 10, searchView.frame.size.width-35, 15)];
+    UILabel *seacrhLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(searchImageView.frame)+10, 10, searchView.frame.size.width-40, 15)];
     seacrhLabel.text = @"请输入您要搜索的关键字";
     seacrhLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     seacrhLabel.font = [UIFont systemFontOfSize:15];
@@ -111,12 +113,12 @@
 -(void)screeningButtonClick:(UIButton *)button
 {
     UIViewController *controller = [[UIViewController alloc]init];
-    controller.view.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    controller.view.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     NSArray *array = @[@"待派遣",@"正在完成",@"已完成",@"已过期",@"全部"];
     for (NSInteger i = 0; i < array.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setTitle:array[i] forState:UIControlStateNormal];
-        button.frame = CGRectMake(0, 30*i, 100, 30);
+        button.frame = CGRectMake(0, 30*i, 112, 30);
         button.tag = i+10;
         [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -124,7 +126,7 @@
     }
     //设置弹出模式
     controller.modalPresentationStyle = UIModalPresentationPopover;
-    controller.preferredContentSize = CGSizeMake(100, 150);
+    controller.preferredContentSize = CGSizeMake(112, 150);
     UIPopoverPresentationController *popVC = controller.popoverPresentationController;
     controller.popoverPresentationController.sourceView = button;
     controller.popoverPresentationController.sourceRect = button.bounds;
@@ -138,25 +140,43 @@
 
 -(void)buttonClick:(UIButton *)button
 {
+    UIImageView *imageView = (UIImageView *)[self.screeningButton viewWithTag:10010];
+    UIView *view = (UIView *)[self.view viewWithTag:10011];
     if (button.tag==10) {
         self.status = @"1";
         [self.screeningButton setTitle:@"待派遣" forState:UIControlStateNormal];
+        [self.screeningButton setFrame:CGRectMake(10, 10, 100, 35)];
+        [imageView setFrame:CGRectMake(70, 13, 15, 9)];
+        [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
         [self joiningTogetherParmetersWithTaskStatus];
     }else if (button.tag == 11){
         self.status = @"2";
         [self.screeningButton setTitle:@"正在完成" forState:UIControlStateNormal];
+        [self.screeningButton setFrame:CGRectMake(10, 10, 112, 35)];
+        [imageView setFrame:CGRectMake(85, 13, 15, 9)];
+        [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
         [self joiningTogetherParmetersWithTaskStatus];
     }else if (button.tag == 12){
         self.status = @"4";
         [self.screeningButton setTitle:@"已完成" forState:UIControlStateNormal];
+        [self.screeningButton setFrame:CGRectMake(10, 10, 100, 35)];
+        [imageView setFrame:CGRectMake(70, 13, 15, 9)];
+        [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
         [self joiningTogetherParmetersWithTaskStatus];
     }else if (button.tag == 13){
         self.status = @"-2";
         [self.screeningButton setTitle:@"已过期" forState:UIControlStateNormal];
+        [self.screeningButton setFrame:CGRectMake(10, 10, 100, 35)];
+        [imageView setFrame:CGRectMake(70, 13, 15, 9)];
+        [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
         [self joiningTogetherParmetersWithTaskStatus];
+       
     }else{
         self.status = @"9";
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
+        [self.screeningButton setFrame:CGRectMake(10, 10, 85, 35)];
+        [imageView setFrame:CGRectMake(55, 13, 15, 9)];
+        [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
         [self joiningTogetherParmeters];
     }
     [self.collectionView.mj_header beginRefreshing];

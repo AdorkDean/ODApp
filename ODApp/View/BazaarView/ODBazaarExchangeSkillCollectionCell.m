@@ -19,8 +19,6 @@
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.loveLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     self.shareLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    
-    
 }
 
 -(void)showDatasWithModel:(ODBazaarExchangeSkillModel *)model
