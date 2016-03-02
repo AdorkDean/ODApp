@@ -660,8 +660,6 @@
     __weakSelf;
     [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
-        
-        NSLog(@"--------%@",operation);
         if (isEdit) {
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
