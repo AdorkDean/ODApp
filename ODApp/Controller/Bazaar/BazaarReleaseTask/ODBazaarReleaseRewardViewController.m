@@ -36,7 +36,7 @@
     view.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     [self.view addSubview:view];
     self.textField = [ODClassMethod creatTextFieldWithFrame:CGRectMake(8, 0, kScreenSize.width - 16, 40) placeHolder:@"请输入任务奖励" delegate:self tag:0];
-    self.textField.font = [UIFont systemFontOfSize:14];
+    self.textField.font = [UIFont systemFontOfSize:13];
     [view addSubview:self.textField];
 
 }
@@ -131,14 +131,14 @@
     cell.nameLabel.text = self.dataArray[indexPath.row];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     if (indexPath.row == 0) {
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenSize.width - 40, 15, 20, 20)];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenSize.width - 32.5, 18.3, 15, 8.4)];
         self.imageView.image = [UIImage imageNamed:@"时间下拉箭头"];
     }
     return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(kScreenSize.width, 40);
+    return CGSizeMake(kScreenSize.width, 45.5);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {

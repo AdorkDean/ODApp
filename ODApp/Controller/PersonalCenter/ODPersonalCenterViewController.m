@@ -18,64 +18,28 @@
 #import "ODLandMainController.h"
 #import "ODTabBarController.h"
 #import "ODChangePassWordController.h"
+#import "ODUserResponse.h"
 
-@interface ODPersonalCenterViewController ()<UITableViewDataSource , UITableViewDelegate>
 
-@property (nonatomic , strong) UITableView *tableView;
+
+@interface ODPersonalCenterViewController ()
+
 @property (nonatomic , strong) ODlandingView *landView;
-@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
-@property (nonatomic , assign) NSInteger pageNumber;
-
 
 @end
 
+
+
 @implementation ODPersonalCenterViewController
 
+
+#pragma mark - 界面
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self navigationInit];
-    self.pageNumber = 0;
-    
-    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self.view addSubview:self.landView];
     self.view.backgroundColor = [UIColor colorWithHexString:@"#f7f7f7" alpha:1];;
-
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    ODNavigationController *navi = self.presentingViewController.childViewControllers.lastObject;
-    if (navi.childViewControllers.count == 2)
-    {
-        [navi popToRootViewControllerAnimated:YES];
-    }
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)loadView
-{
-   
-    self.view = self.landView;
-}
-
--(void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    self.pageNumber = 0;
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)createTableView
-{
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight) style:UITableViewStylePlain];
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#f7f7f7" alpha:1];
-    self.tableView.userInteractionEnabled = YES;
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.tableHeaderView = self.landView;
-    [self.view addSubview:self.tableView];
-    
 }
 
 - (void)navigationInit
@@ -88,11 +52,11 @@
 }
 
 
-#pragma mark - 懒加载
 - (ODlandingView *)landView
 {
     if (_landView == nil) {
         self.landView = [ODlandingView getView];
+        self.landView.frame = CGRectMake(0, 64, kScreenSize.width, kScreenSize.height);
         [self.landView.landButton addTarget:self action:@selector(landAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.landView.forgetPassWordButton addTarget:self action:@selector(forgetPassawordAction:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -110,13 +74,9 @@
 
 - (void)forgetPassawordAction:(UIButton *)sender
 {
-
     ODChangePassWordController *vc = [[ODChangePassWordController alloc] init];
-    
     vc.topTitle = @"忘记密码";
-    
     [self presentViewController:vc animated:YES completion:nil];
-    
 }
 
 
@@ -126,22 +86,10 @@
     [self.landView.accountTextField resignFirstResponder];
     [self.landView.passwordTextField resignFirstResponder];
     if ([self.landView.accountTextField.text isEqualToString:@""]) {
-        
-        
-       
-        
-        
-        
-        
-        [ODProgressHUD showInfoWithStatus:@"请输入手机号"];
-
-        
-    }else if ([self.landView.passwordTextField.text isEqualToString:@""]) {
-        
-           [ODProgressHUD showInfoWithStatus:@"请输入密码"];
-    }
-    
-    else {
+        [ODProgressHUD showToast:self.view msg:@"请输入手机号"];
+    } else if ([self.landView.passwordTextField.text isEqualToString:@""]) {
+        [ODProgressHUD showToast:self.view msg:@"请输入密码"];
+    } else {
         [self landToView];
     }
     
@@ -158,108 +106,47 @@
 #pragma mark - 请求数据
 -(void)landToView
 {
-    NSDictionary *parameters = @{@"mobile":self.landView.accountTextField.text,@"passwd":self.landView.passwordTextField.text};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    NSDictionary *parameters = @{ @"mobile":self.landView.accountTextField.text, @"passwd":self.landView.passwordTextField.text};
     
-      self.manager = [AFHTTPRequestOperationManager manager];
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:kLoginUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [ODAPIManager getWithURL:@"/user/login1" params:parameters success:^(id responseObject) {
         
+        ODUserResponse *resp = [ODUserResponse mj_objectWithKeyValues:responseObject];
+        ODUser *user = resp.result;
+        [[ODUserInformation sharedODUserInformation] updateUserCache:user];
         
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            
-            
-            [weakSelf dismissViewControllerAnimated:YES completion:nil];
-
-            weakSelf.landView.accountTextField.text = @"";
-            weakSelf.landView.passwordTextField.text = @"";
-            
-            
-            NSMutableDictionary *dic = responseObject[@"result"];
-            
-            
-            
-            
-            
-            NSString *openId = dic[@"open_id"];
-            NSString *avatar = dic[@"avatar"];
-            NSString *mobile = dic[@"mobile"];
-            
-            [ODUserInformation sharedODUserInformation].openID = openId;
-            [ODUserInformation sharedODUserInformation].mobile = mobile;
-
-            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-            [user setObject:openId forKey:KUserDefaultsOpenId];
-            [user setObject:avatar forKey:KUserDefaultsAvatar];
-            [user setObject:mobile forKey:KUserDefaultsMobile];
-            
-            [weakSelf dismissViewControllerAnimated:YES completion:^{
-                ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
-                tabBar.selectedIndex = tabBar.currentIndex;
-                [weakSelf.delegate personalHasLoginSuccess];
-            }];
-
-         
-           [ODProgressHUD showInfoWithStatus:@"登录成功"];
-            
-            
-        }else if ([responseObject[@"status"] isEqualToString:@"error"]){
-            
-            
-            weakSelf.pageNumber++;
-            if (weakSelf.pageNumber >= 3) {
-                
-             
-                
-             
-                  [ODProgressHUD showInfoWithStatus:@"您的账号或者密码已多次输入错误，请找回密码或者重新注册"];
-                
-                
-                
-            }else {
-                
-                                
-                
-             
-                    [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-                
-
-                
+        [ODProgressHUD showToast:self.view msg:@"登录成功"];
+        [self dismissViewControllerAnimated:YES completion:^{
+            ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+            tabBar.selectedIndex = tabBar.currentIndex;
+            if (self.delegate != nil) {
+                [self.delegate personalHasLoginSuccess];
             }
-            
-        }
+        }];
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } error:^(NSString *msg) {
+        [ODProgressHUD showToast:self.view msg:msg];
         
+    } failure:^(NSError *error) {
         
     }];
 }
 
+#pragma mark - umeng
 
-#pragma mark - UITabelViewDelegate
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+-(void)viewWillDisappear:(BOOL)animated
 {
-    NSString *cellID = @"cellId";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-    }
-    
-    return cell;
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)viewWillAppear:(BOOL)animated
 {
-    return 0;
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 0;
-}
-
 
 #pragma mark - 内存管理
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
