@@ -49,6 +49,7 @@
     if(self.myBlock) {
         self.myBlock(self.dataArray);
     }
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -107,6 +108,7 @@
     __weakSelf;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
+        NSLog(@"-------%@",operation);
         if (responseObject) {
             
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
@@ -116,6 +118,7 @@
             }else{
                 [weakSelf.dataArray addObjectsFromArray:dict[@"result"]];
             }
+
             for (NSInteger i = 0; i < weakSelf.roundViews.count; i++)
             {
                 ODRoundTimeDrawView *view = weakSelf.roundViews[i];
@@ -195,7 +198,6 @@
     ODRoundTimeDrawView *view = self.roundViews[indexPath.section];
     NSDictionary *dict = self.dataArray[indexPath.section * 3 + indexPath.row];
     [dict setValue:[NSString stringWithFormat:@"%d",!button.selected] forKeyPath:@"status"];
-    NSLog(@"%@",self.dataArray);
     
     if (indexPath.row == 0)
     {

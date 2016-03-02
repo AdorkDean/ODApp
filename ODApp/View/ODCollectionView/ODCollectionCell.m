@@ -19,7 +19,7 @@
     self.userImageButton.layer.cornerRadius = 24;
     self.userImageButton.layer.borderColor = [UIColor clearColor].CGColor;
     self.userImageButton.layer.borderWidth = 1;
-
+    self.lineHeightConstraint.constant = 0.5f;
     
     
 }

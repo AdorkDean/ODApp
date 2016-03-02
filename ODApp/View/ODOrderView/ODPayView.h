@@ -32,6 +32,8 @@
 
 @property(weak, nonatomic) IBOutlet UIButton *treasurePayButton;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *thirdLineLabelConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *fourthLineLabelConstraint;
 
 + (instancetype)getView;
 

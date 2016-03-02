@@ -35,6 +35,19 @@
 
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *spaceToTop;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineOneHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineTwoHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineThreeHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineFourHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineFiveHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineSixHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineSevenHeightConstraint;
+
+
+
+
+
+
 
 + (instancetype)getView;
 

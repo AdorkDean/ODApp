@@ -10,6 +10,19 @@
 
 @implementation ODOrderDetailView
 
+-(void)awakeFromNib
+{
+
+    self.lineOneHeightConstraint.constant = 0.5;
+    self.lineTwoHeightConstraint.constant = 0.5;
+    self.lineThreeHeightConstraint.constant = 0.5;
+    self.lineFourHeightConstraint.constant = 0.5;
+    self.lineFiveHeightConstraint.constant = 0.5;
+    self.lineSixHeightConstraint.constant = 0.5;
+    self.lineSevenHeightConstraint.constant = 0.5;
+    
+}
+
 
 +(instancetype)getView
 {
