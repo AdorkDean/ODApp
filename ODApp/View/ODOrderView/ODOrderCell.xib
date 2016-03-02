@@ -85,6 +85,7 @@
             </constraints>
             <size key="customSize" width="471" height="230"/>
             <connections>
+                <outlet property="labelConstraint" destination="daO-XO-5ym" id="nha-HZ-jxi"/>
                 <outlet property="nickLabel" destination="18K-H7-lEL" id="T5r-RI-4zR"/>
                 <outlet property="orderImageView" destination="6oy-bE-xci" id="0zE-V7-t7Q"/>
                 <outlet property="orderPrice" destination="JLF-HH-d7x" id="nZP-Xg-Lkz"/>

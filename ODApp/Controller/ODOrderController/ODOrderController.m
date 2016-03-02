@@ -281,7 +281,8 @@
     [self.headView.orderView.addressImgeView addGestureRecognizer:addressTap];
     UITapGestureRecognizer *timeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeAction)];
     [self.headView.orderView.choseTimeView addGestureRecognizer:timeTap];
-
+    self.headView.orderView.firstLabelConstraint.constant = 0.5;
+    self.headView.orderView.secondLabelConstraint.constant = 0.5;
 
     self.headView.orderView.typeLabel.text = @"上门服务";
 

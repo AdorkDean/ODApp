@@ -15,6 +15,7 @@
 
 @property(weak, nonatomic) IBOutlet UIImageView *choseTimeView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelConstraint;
 + (instancetype)getView;
 
 @end

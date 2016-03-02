@@ -156,7 +156,7 @@
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(kScreenSize.width , 55);
+    return CGSizeMake(kScreenSize.width , 60);
     
 }
 
