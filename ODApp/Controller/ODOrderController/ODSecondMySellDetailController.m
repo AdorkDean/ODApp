@@ -364,6 +364,7 @@
 
 
             [self getData];
+            [ODProgressHUD showInfoWithStatus:@"操作成功"];
 
 
         } else if ([responseObject[@"status"] isEqualToString:@"error"]) {

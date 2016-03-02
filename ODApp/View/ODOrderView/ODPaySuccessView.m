@@ -10,46 +10,24 @@
 
 @implementation ODPaySuccessView
 
-
-- (instancetype)initWithFrame:(CGRect)frame
++(instancetype)getView
 {
-    if (self = [super initWithFrame:frame]) {
-        
-        [self addViews];
-    }
-    return self;
-
-}
-
-
-- (void)addViews
-{
+    ODPaySuccessView *view =  [[[NSBundle mainBundle] loadNibNamed:@"ODPaySuccessView" owner:nil options:nil] firstObject];
     
-    self.backgroundColor = [UIColor whiteColor];
+    view.userInteractionEnabled = YES;
+    view.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     
-    self.isSuccessView = [[UIImageView alloc] initWithFrame:CGRectMake(81, 50, self.frame.size.width - 162, 200)];
-  
-    [self addSubview:self.isSuccessView];
+    view.firstButton.layer.masksToBounds = YES;
+    view.firstButton.layer.cornerRadius = 5;
+    view.firstButton.layer.borderColor = [UIColor colorWithHexString:@"#333333" alpha:1.0f].CGColor;
+    view.firstButton.layer.borderWidth = 0.5f;
     
+    view.secondButton.layer.masksToBounds = YES;
+    view.secondButton.layer.cornerRadius = 5;
+    view.secondButton.layer.borderColor = [UIColor colorWithHexString:@"#333333" alpha:1.0f].CGColor;
+    view.secondButton.layer.borderWidth = 0.5f;
     
-    self.isSuccessLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, self.isSuccessView.frame.origin.y + 200 + 32.5, kScreenSize.width - 40, 20)];
-   
-    self.isSuccessLabel.textAlignment = NSTextAlignmentCenter;
-    self.isSuccessLabel.font = [UIFont systemFontOfSize:17];
-    [self addSubview:self.isSuccessLabel];
-    
-    
-    self.firstButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.firstButton.frame = CGRectMake((kScreenSize.width - 260 - 17.5) / 2, self.isSuccessLabel.frame.origin.y + 20 + 32.5, 130, 30);
-    [self addSubview:self.firstButton];
-    
-    
-    self.secondButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.secondButton.frame = CGRectMake(self.firstButton.frame.origin.x + self.firstButton.frame.size.width + 17.5, self.isSuccessLabel.frame.origin.y + 20 + 32.5, 130, 30);
-     [self addSubview:self.secondButton];
-    
-    
-    
+    return view;
 }
 
 @end
