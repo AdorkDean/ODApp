@@ -35,7 +35,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快递邮寄" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gH2-Kp-bLV">
-                    <rect key="frame" x="230" y="15" width="60" height="20"/>
+                    <rect key="frame" x="242" y="15" width="60" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="0aB-pW-F1I"/>
                         <constraint firstAttribute="height" constant="20" id="ztP-jU-wl6"/>
@@ -201,7 +201,7 @@
                 <constraint firstItem="4zp-aH-epa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="jQO-gj-H37"/>
                 <constraint firstAttribute="trailing" secondItem="LP8-rZ-br7" secondAttribute="trailing" id="jmu-nt-asz"/>
                 <constraint firstItem="2fb-an-h67" firstAttribute="top" secondItem="Aqn-0A-TcE" secondAttribute="bottom" constant="17" id="lD5-ba-TUj"/>
-                <constraint firstAttribute="trailing" secondItem="gH2-Kp-bLV" secondAttribute="trailing" constant="30" id="naw-Ys-EO4"/>
+                <constraint firstAttribute="trailing" secondItem="gH2-Kp-bLV" secondAttribute="trailing" constant="18" id="naw-Ys-EO4"/>
                 <constraint firstItem="2z5-EQ-tSV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="nga-xL-nAq"/>
                 <constraint firstItem="xuS-eu-93p" firstAttribute="leading" secondItem="eLK-5q-Wqg" secondAttribute="trailing" constant="8" id="oBA-KA-Dgy"/>
                 <constraint firstItem="Xgi-Xy-0ll" firstAttribute="top" secondItem="Aqn-0A-TcE" secondAttribute="bottom" constant="15" id="pGn-OQ-AE1"/>
