@@ -13,7 +13,11 @@
 
 @property (nonatomic ,strong) ODCancelOrderView *cancelOrderView;
 
+@property (nonatomic, assign) BOOL selectedReason;
 
+@property (nonatomic, strong) UIButton *selectReasonButton;
+
+@property (nonatomic, strong) NSArray *drawReasonArray;
 
 @end
 
@@ -88,24 +92,26 @@
         // 退款原因Label 距离 屏幕左边的 距离
         float reasonLabelLeftMargin = ODLeftMargin + 25;
         
-//        NSArray *drawReasonArray;
-//        drawReasonArray = @[@"卖家自身原因无法服务",@"对服务质量不满意",@"未按时交付服务",@"双方已协商好退款",@"其它"];
+        
+//        self.drawReasonArray = @[@"卖家自身原因无法服务",@"对服务质量不满意",@"未按时交付服务",@"双方已协商好退款",@"其它"];
 //        
-//        for (int i = 0; i < drawReasonArray.count; i++) {
+//        for (int i = 0; i < self.drawReasonArray.count; i++) {
 //            self.drawbackReasonOneLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, drawBackHeight * i, KScreenWidth, drawBackHeight)];
-//            self.drawbackReasonOneLabel.text = drawReasonArray[i];
+//            self.drawbackReasonOneLabel.text = self.drawReasonArray[i];
 //            self.drawbackReasonOneLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
 //            self.drawbackReasonOneLabel.font = [UIFont systemFontOfSize:13.5];
 //            self.drawbackReasonOneLabel.textAlignment = NSTextAlignmentLeft;
 //            self.drawbackReasonOneLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
 //            [self.drawbackReasonContentView addSubview:self.drawbackReasonOneLabel];
 //            
-//            self.drawbackReasonOneButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, drawBackHeight * i + 12.5, 20, 20)];
-//            [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-//            [self.drawbackReasonOneButton addTarget:self action:@selector(drawbackReasonButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-//            [self.drawbackReasonContentView addSubview:self.drawbackReasonOneButton];
+//            self.selectReasonButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, drawBackHeight * i + 12.5, 20, 20)];
+//            [self.selectReasonButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
+//            self.selectReasonButton.tag = 100 + i;
+//            [self.selectReasonButton addTarget:self action:@selector(drawbackReasonButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+//            [self.drawbackReasonContentView addSubview:self.selectReasonButton];
+//            
+//            
 //        }
-        
         
         
         
@@ -494,35 +500,37 @@
 
 #pragma mark - 退款原因点击事件
 
-- (void)drawbackReasonButtonClick:(UIButton *)button
-{
-    {
-        [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
-        self.isSelectedReasonOne = !self.isSelectedReasonOne;
-        
-        if (self.isSelectedReasonTwo)
-        {
-            [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-            self.isSelectedReasonTwo = !self.isSelectedReasonTwo;
-        }
-        if (self.isSelectedReasonThree)
-        {
-            [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-            self.isSelectedReasonThree = !self.isSelectedReasonThree;
-        }
-        if (self.isSelectedReasonFour)
-        {
-            [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-            self.isSelectedReasonFour = !self.isSelectedReasonFour;
-        }
-        if (self.isSelectedReasonOther)
-        {
-            [self.drawbackReasonOtherButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-            self.isSelectedReasonOther = !self.isSelectedReasonOther;
-        }
-    }
-    
-}
+//- (void)drawbackReasonButtonClick:(UIButton *)button
+//{
+//    
+//    if (!self.isSelectedReasonOne)
+//    {
+//        [button setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
+//        self.isSelectedReasonOne = !self.isSelectedReasonOne;
+//        
+//        if (self.isSelectedReasonTwo)
+//        {
+//            [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
+//            self.isSelectedReasonTwo = !self.isSelectedReasonTwo;
+//        }
+//        if (self.isSelectedReasonThree)
+//        {
+//            [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
+//            self.isSelectedReasonThree = !self.isSelectedReasonThree;
+//        }
+//        if (self.isSelectedReasonFour)
+//        {
+//            [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
+//            self.isSelectedReasonFour = !self.isSelectedReasonFour;
+//        }
+//        if (self.isSelectedReasonOther)
+//        {
+//            [self.drawbackReasonOtherButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
+//            self.isSelectedReasonOther = !self.isSelectedReasonOther;
+//        }
+//    }
+//    self.drawbackStateView.hidden = YES;
+//}
 
 
 
