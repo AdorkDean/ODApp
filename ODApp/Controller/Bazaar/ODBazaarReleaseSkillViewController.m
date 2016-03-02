@@ -8,6 +8,7 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaarReleaseSkillViewController.h"
+#import "NSArray+ODExtension.h"
 
 @interface ODBazaarReleaseSkillViewController ()
 
@@ -608,16 +609,17 @@
         
         NSDictionary *parameter;
         if (self.timeArray.count) {
-            parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+            parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray desc],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }else{
-            parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.editTimeArray description],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+            parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.editTimeArray desc],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self pushDataWithUrl:kBazaarEditSkillUrl parameter:signParameter isEdit:YES];
     }else{
+        
         NSDictionary *parameter;
         if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
-            parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray description],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+            parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray desc],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }else if ([self.swap_type isEqualToString:@"2"]){
             parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":@"",@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }
@@ -658,6 +660,8 @@
     __weakSelf;
     [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         
+        
+        NSLog(@"--------%@",operation);
         if (isEdit) {
             if ([responseObject[@"status"]isEqualToString:@"success"]) {
                 [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];

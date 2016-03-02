@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface NSArray (ODExtension)
-
+- (NSString *)desc;
 @end

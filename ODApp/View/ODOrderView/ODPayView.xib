@@ -32,7 +32,7 @@
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vtq-2E-mVw">
                     <rect key="frame" x="18" y="50" width="312" height="1"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="izP-YJ-8CG"/>
                     </constraints>
@@ -96,7 +96,7 @@
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0l-jK-y8L">
                     <rect key="frame" x="18" y="152" width="312" height="1"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="iwj-cq-K04"/>
                     </constraints>
@@ -216,12 +216,14 @@
             <connections>
                 <outlet property="firstLineLabel" destination="hWo-es-0ep" id="DYR-5B-QN4"/>
                 <outlet property="fourthLineLabel" destination="D0l-jK-y8L" id="8fg-qo-1j2"/>
+                <outlet property="fourthLineLabelConstraint" destination="iwj-cq-K04" id="WU0-yE-Uso"/>
                 <outlet property="orderNameLabel" destination="D8D-oq-mTI" id="V7z-8N-UCD"/>
                 <outlet property="orderPriceLabel" destination="c6z-mN-FBA" id="rB2-jU-8mV"/>
                 <outlet property="payButton" destination="MBh-Hr-0ca" id="Dog-iE-UrY"/>
                 <outlet property="priceLabel" destination="7m4-ZZ-2kM" id="2gO-gl-ONj"/>
                 <outlet property="secondLineLabel" destination="yyR-fL-Sni" id="NhR-yn-URm"/>
                 <outlet property="thirdLineLabel" destination="Vtq-2E-mVw" id="98c-iL-wIS"/>
+                <outlet property="thirdLineLabelConstraint" destination="izP-YJ-8CG" id="wPS-kN-kLc"/>
                 <outlet property="treasureImageView" destination="FFS-Hq-LQv" id="Bey-D9-dlI"/>
                 <outlet property="treasureLabel" destination="X3s-e2-kki" id="abE-7u-AQS"/>
                 <outlet property="treasurePayButton" destination="okh-zX-9Jh" id="dtC-ng-XGs"/>
