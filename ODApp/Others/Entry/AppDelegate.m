@@ -7,16 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import "ODAppRegister.h"
+
 #import "ODTabBarController.h"
-#import "IQKeyboardManager.h"
-#import "UMSocial.h"
-#import "UMSocialWechatHandler.h"
 #import "MyPageControl.h"
-#import "WXApi.h"
 #import "WXApiObject.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
-#import "MobClick.h"
 #import "ODAPPInfoTool.h"
 
 
@@ -54,13 +51,16 @@ void UncaughtExceptionHandler(NSException *exception) {
     [[UIApplication sharedApplication] openURL:url];
 }
 
+#pragma mark - UIApplicationDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [MobClick setAppVersion:[ODAPPInfoTool APPVersion]];
-    [MobClick startWithAppkey:@"569dda54e0f55a994f0021cf" reportPolicy:BATCH channelId:@"App Store"];
+
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
-    [WXApi registerApp:kGetWXAppId withDescription:@"我去App"];
+    [ODAppRegister registStatistics];
+    [ODAppRegister registGDMap];
+    [ODAppRegister registWechat];
+    
     _uncaughtExceptionHandler = NSGetUncaughtExceptionHandler();
     NSSetUncaughtExceptionHandler(&UncaughtExceptionHandler);
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isRuned"] boolValue]) {
@@ -70,6 +70,7 @@ void UncaughtExceptionHandler(NSException *exception) {
         // 加载引导图
         [self makeLaunchView];
     }
+    [ODAppRegister registJPushWithLaunchOption:launchOptions];
     return YES;
 }
 
@@ -97,98 +98,120 @@ void UncaughtExceptionHandler(NSException *exception) {
 }
 
 
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+    // Required
+    [JPUSHService registerDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    
+    //Optional
+    NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
+    // Required,For systems with less than or equal to iOS6
+    [JPUSHService handleRemoteNotification:userInfo];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    
+    // IOS 7 Support Required
+    [JPUSHService handleRemoteNotification:userInfo];
+    completionHandler(UIBackgroundFetchResultNewData);
+}
+- (void)applicationWillTerminate:(UIApplication *)application {
+    NSSetUncaughtExceptionHandler(_uncaughtExceptionHandler);
+}
+
+
 - (void)gotoMain {
     [[NSUserDefaults standardUserDefaults] setObject:@YES forKey:@"isRuned"];
-
+    
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     NSString *openId = [user objectForKey:KUserDefaultsOpenId];
     [ODUserInformation sharedODUserInformation].openID = openId ? openId : @"";
-
+    
     NSString *avatar = [user objectForKey:KUserDefaultsAvatar];
     [ODUserInformation sharedODUserInformation].avatar = avatar ? avatar : @"";
-
+    
     NSString *mobile = [user objectForKey:KUserDefaultsMobile];
     [ODUserInformation sharedODUserInformation].avatar = mobile ? mobile : @"";
-
-
+    
+    
     self.window.rootViewController = [[ODTabBarController alloc] init];
-
-    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
-    manager.enable = YES;
-    manager.shouldResignOnTouchOutside = YES;
-    manager.shouldToolbarUsesTextFieldTintColor = YES;
-    manager.enableAutoToolbar = NO;
-
-
-    [UMSocialData setAppKey:kGetUMAppkey];
-
-    [UMSocialWechatHandler setWXAppId:kGetWXAppId appSecret:kGetWXAppSecret url:@"http://www.umeng.com/social"];
-
+    
+    [ODAppRegister registIQKeyboardManager];
+    
+    [ODAppRegister registUMSocial];
 }
 
 - (void)makeLaunchView {
-
-
+    
+    
     self.ViewController = [[UIViewController alloc] init];
     self.ViewController.view.frame = [UIScreen mainScreen].bounds;
-
-
-
+    
+    
+    
     // 数组内存放加载引导图片
     NSArray *arr = [NSArray arrayWithObjects:@"begin1.jpg", @"begin2.jpg", @"begin3.jpg", @"begin4.jpg", @"begin5.jpg", nil];
     self.scrollView = [[UIScrollView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.scrollView.contentSize = CGSizeMake([UIScreen mainScreen].bounds.size.width * arr.count, [UIScreen mainScreen].bounds.size.height);
     self.scrollView.pagingEnabled = YES;
     self.scrollView.delegate = self;
-
+    
     //scrollerView指示条属性(默认是YES)
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
-
-
+    
+    
     if (iPhone4_4S) {
-
+        
         self.length = 200;
-
+        
     } else if (iPhone5_5s) {
-
+        
         self.length = 250;
-
-
+        
+        
     } else if (iPhone6_6s) {
-
+        
         self.length = 300;
-
-
+        
+        
     } else {
-
+        
         self.length = 330;
-
+        
     }
-
-
+    
+    
     self.pageControl = [[MyPageControl alloc] initWithFrame:CGRectMake(self.ViewController.view.center.x - 50, self.ViewController.view.center.y * 2 - 30, 200, 30) normalImage:[UIImage imageNamed:@"selected.png"] highlightedImage:[UIImage imageNamed:@"noselected.png"] dotsNumber:4 sideLength:15 dotsGap:10];
-
+    
     self.pageControl.backgroundColor = [UIColor clearColor];
-
-
+    
+    
     [self.ViewController.view addSubview:self.scrollView];
     [self.ViewController.view addSubview:self.pageControl];
-
-
+    
+    
     self.window.rootViewController = self.ViewController;
-
-
+    
+    
     for (int i = 0; i < arr.count; i++) {
         UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(i * [UIScreen mainScreen].bounds.size.width, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-
+        
         if (i < arr.count - 1) {
             img.image = [UIImage imageNamed:arr[i]];
         } else {
-
+            
             img.image = [UIImage imageNamed:arr[i]];
             img.userInteractionEnabled = YES;
-
+            
             UIButton *goButton = [UIButton buttonWithType:UIButtonTypeCustom];
             goButton.frame = CGRectMake(self.window.center.x - 70, self.window.center.y + 130, 140, 50);
             [goButton setTitle:@"立即体验" forState:UIControlStateNormal];
@@ -199,94 +222,94 @@ void UncaughtExceptionHandler(NSException *exception) {
             goButton.layer.cornerRadius = 25;
             goButton.layer.borderColor = [UIColor blackColor].CGColor;
             goButton.layer.borderWidth = 1;
-
-
+            
+            
             [goButton addTarget:self action:@selector(tapAction:) forControlEvents:UIControlEventTouchUpInside];
             [img addSubview:goButton];
-
-
+            
+            
         }
-
+        
         [self.scrollView addSubview:img];
-
+        
     }
-
+    
 }
 
 
 - (void)tapAction:(UIButton *)sender {
-
-
+    
+    
     [UIView animateWithDuration:.5 animations:^{
-
+        
         //让imageView 渐变消失
         self.scrollView.alpha = 0;
     }                completion:^(BOOL finished) {
-
+        
         //将scrollView移除
         [self.scrollView removeFromSuperview];
         //进入主界面
         [self gotoMain];
     }];
-
-
+    
+    
 }
 
 
 //停止滑动
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-
-
+    
+    
     // 拿到偏移量
     CGPoint offset = self.scrollView.contentOffset;
-
+    
     // 算出偏移了几个fram.width
     NSInteger currentIndex = offset.x / self.scrollView.frame.size.width;
-
-
+    
+    
     if (currentIndex == 4) {
-
+        
         self.pageControl.alpha = 0;
-
-
+        
+        
     } else {
-
+        
         self.pageControl.alpha = 1;
-
-
+        
+        
         // 根据currentIndex 修改pageControl显示的点的位置
         self.pageControl.currentPage = currentIndex;
-
+        
     }
-
-
+    
+    
 }
 
 
 - (void)onResp:(BaseResp *)resp {
     NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
     NSString *strTitle;
-
+    
     if ([resp isKindOfClass:[SendMessageToWXResp class]]) {
         strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
     }
     if ([resp isKindOfClass:[PayResp class]]) {
         //支付返回结果，实际支付结果需要去微信服务器端查询
         strTitle = [NSString stringWithFormat:@"支付结果"];
-
+        
         switch (resp.errCode) {
             case WXSuccess: {
                 strMsg = @"支付结果：成功！";
                 NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
-
+                
                 NSString *code = [NSString stringWithFormat:@"%d", resp.errCode];
                 NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:code, @"codeStatus", nil];
                 //创建通知
                 NSNotification *notification = [NSNotification notificationWithName:ODNotificationPaySuccess object:nil userInfo:dict];
                 //通过通知中心发送通知
                 [[NSNotificationCenter defaultCenter] postNotification:notification];
-
-
+                
+                
                 break;
             }
             default: {
@@ -300,30 +323,6 @@ void UncaughtExceptionHandler(NSException *exception) {
             }
         }
     }
-
-
 }
 
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    NSSetUncaughtExceptionHandler(_uncaughtExceptionHandler);
-}
 @end

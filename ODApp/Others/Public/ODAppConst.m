@@ -15,13 +15,7 @@ NSString *const KUserDefaultsAvatar = @"userAvatar";
 NSString *const KUserDefaultsMobile = @"userMobile";
 
 /** 友盟的apiKey */
-NSString *const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
-/** 微信的apiKey */
-NSString *const kGetWXAppId = @"wx64423cc9497cc581";
-NSString *const kGetWXAppSecret = @"a6034898f4a370df22a358c5e6192645";
-/** 高德地图的apiKey */
-NSString *const ODLocationApiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
-
+NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
 
 #pragma mark - 通知
 /** 显示集市的通知 */

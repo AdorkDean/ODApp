@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23451CAF1C85E5EF0030271B /* jpush-ios-2.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23451CAD1C85E5EF0030271B /* jpush-ios-2.1.0.a */; };
+		23451CB21C8679040030271B /* ODAppRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 23451CB11C8679040030271B /* ODAppRegister.m */; };
+		239611871C85D54A0025184B /* UIColor+ODColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 239611861C85D54A0025184B /* UIColor+ODColor.m */; };
 		3D35136A1C8588E400D36714 /* ODUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3513691C8588E400D36714 /* ODUser.m */; };
 		3D3513711C8594BD00D36714 /* ODUserResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3513701C8594BD00D36714 /* ODUserResponse.m */; };
 		3D3513741C85A2BE00D36714 /* ODShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3513731C85A2BE00D36714 /* ODShareModel.m */; };
@@ -318,6 +321,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		23451CAD1C85E5EF0030271B /* jpush-ios-2.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.0.a"; sourceTree = "<group>"; };
+		23451CAE1C85E5EF0030271B /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		23451CB01C8679040030271B /* ODAppRegister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppRegister.h; sourceTree = "<group>"; };
+		23451CB11C8679040030271B /* ODAppRegister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAppRegister.m; sourceTree = "<group>"; };
+		239611851C85D54A0025184B /* UIColor+ODColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ODColor.h"; sourceTree = "<group>"; };
+		239611861C85D54A0025184B /* UIColor+ODColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ODColor.m"; sourceTree = "<group>"; };
 		3D3513681C8588E400D36714 /* ODUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUser.h; sourceTree = "<group>"; };
 		3D3513691C8588E400D36714 /* ODUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUser.m; sourceTree = "<group>"; };
 		3D35136F1C8594BD00D36714 /* ODUserResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserResponse.h; sourceTree = "<group>"; };
@@ -863,6 +872,7 @@
 				9DD00BE31C4E39BB00F0EE5F /* libsqlite3.tbd in Frameworks */,
 				9DD00BE11C4E39A300F0EE5F /* CoreGraphics.framework in Frameworks */,
 				9DD00BDF1C4E399700F0EE5F /* SystemConfiguration.framework in Frameworks */,
+				23451CAF1C85E5EF0030271B /* jpush-ios-2.1.0.a in Frameworks */,
 				9DD00BDD1C4E398B00F0EE5F /* libiconv.tbd in Frameworks */,
 				9DD00BDB1C4E397E00F0EE5F /* Security.framework in Frameworks */,
 				453C139C602C89AF557B0F7E /* libPods.a in Frameworks */,
@@ -886,6 +896,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		23451CAC1C85E5EF0030271B /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				23451CAD1C85E5EF0030271B /* jpush-ios-2.1.0.a */,
+				23451CAE1C85E5EF0030271B /* JPUSHService.h */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
 		3D35136B1C8593F000D36714 /* ODApi */ = {
 			isa = PBXGroup;
 			children = (
@@ -1478,6 +1497,8 @@
 				C64D456B1C5F8C6F003BFFA0 /* UIBarButtonItem+ODExtention.m */,
 				C64D456C1C5F8C6F003BFFA0 /* UIColor+ODExtension.h */,
 				C64D456D1C5F8C6F003BFFA0 /* UIColor+ODExtension.m */,
+				239611851C85D54A0025184B /* UIColor+ODColor.h */,
+				239611861C85D54A0025184B /* UIColor+ODColor.m */,
 				C64D456E1C5F8C6F003BFFA0 /* UIImage+ODExtension.h */,
 				C64D456F1C5F8C6F003BFFA0 /* UIImage+ODExtension.m */,
 				C64D45701C5F8C6F003BFFA0 /* UIView+ODExtension.h */,
@@ -1489,6 +1510,7 @@
 		C64D45721C5F8C6F003BFFA0 /* ThirdFrame */ = {
 			isa = PBXGroup;
 			children = (
+				23451CAC1C85E5EF0030271B /* lib */,
 				C64D45731C5F8C6F003BFFA0 /* IQKeyBoardManager */,
 				C64D45981C5F8C6F003BFFA0 /* JZTableViewRowAction */,
 				C64D45A01C5F8C6F003BFFA0 /* SDCycleScrollView */,
@@ -1636,6 +1658,8 @@
 				D440C8601C7C6EF0000AA15B /* ODAPPInfoTool.m */,
 				C64D45E21C5F8C6F003BFFA0 /* ODHttpTool.h */,
 				C64D45E31C5F8C6F003BFFA0 /* ODHttpTool.m */,
+				23451CB01C8679040030271B /* ODAppRegister.h */,
+				23451CB11C8679040030271B /* ODAppRegister.m */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -2653,6 +2677,7 @@
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
 				D4D073901C59B9FA008527C9 /* ODOtherTopicViewController.m in Sources */,
 				C64D45FD1C5F8C6F003BFFA0 /* TAAnimatedDotView.m in Sources */,
+				23451CB21C8679040030271B /* ODAppRegister.m in Sources */,
 				D4D0738C1C59B9FA008527C9 /* ODMyTaskController.m in Sources */,
 				D4D073A41C59B9FA008527C9 /* ODMyOrderRecordModel.m in Sources */,
 				9D46D1481C77459200F4C0CD /* ODPayModel.m in Sources */,
@@ -2702,6 +2727,7 @@
 				9DDC9B641C62ECFF000D688F /* ODMyOrderController.m in Sources */,
 				9DEDCF581C64B3F4003015C6 /* ODBazaarModel.m in Sources */,
 				D44423911C72E4C4005B4CFE /* ODTitleLabelView.m in Sources */,
+				239611871C85D54A0025184B /* UIColor+ODColor.m in Sources */,
 				9DDC9B771C6334BA000D688F /* ODOrderDetailModel.m in Sources */,
 				9DE951F81C785E2300D7339D /* ODWithdrawalController.m in Sources */,
 				9DF2E9891C74527F00F77976 /* ODApplyModel.m in Sources */,
@@ -3007,10 +3033,13 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ODApp/Others/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ODApp/Others/ThirdFrame/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.odong.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "18511b99-a84a-479c-9dc4-597527dcc8c6";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SOURCE_ROOT)/**";
 			};
@@ -3031,10 +3060,13 @@
 				INFOPLIST_FILE = "$(SRCROOT)/ODApp/Others/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ODApp/Others/ThirdFrame/lib",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.odong.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "18511b99-a84a-479c-9dc4-597527dcc8c6";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$(SOURCE_ROOT)/**";
 			};
