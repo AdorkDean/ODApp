@@ -13,14 +13,9 @@
 +(instancetype)getView
 {
     ODSecondOrderView *view =  [[[NSBundle mainBundle] loadNibNamed:@"ODSecondOrderView" owner:nil options:nil] firstObject];
-    
-    
     view.userInteractionEnabled = YES;
-  
-  
+
     return view;
-    
-    
     
     
 }

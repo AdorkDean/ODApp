@@ -3,117 +3,68 @@
 
 #pragma mark - UI相关常量
 /** TabBar的高度 */
-UIKIT_EXTERN CGFloat
-const ODTabBarHeight;
+UIKIT_EXTERN CGFloat const ODTabBarHeight;
 /** 导航控制器的高度 */
-UIKIT_EXTERN CGFloat
-const ODNavigationHeight;
+UIKIT_EXTERN CGFloat const ODNavigationHeight;
 /** 控件的左边间距 */
-UIKIT_EXTERN CGFloat
-const ODLeftMargin;
+UIKIT_EXTERN CGFloat const ODLeftMargin;
 /** 控制器View的顶部坐标y */
-UIKIT_EXTERN CGFloat
-const ODTopY;
+UIKIT_EXTERN CGFloat const ODTopY;
 /** 导航栏标题字体大小 */
-UIKIT_EXTERN CGFloat
-const ODNavigationTextFont;
+UIKIT_EXTERN CGFloat const ODNavigationTextFont;
 
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 UIKIT_EXTERN NSString * const kUserCache;
 UIKIT_EXTERN NSString * const KUserDefaultsOpenId;
 
-UIKIT_EXTERN NSString
-*
-const KUserDefaultsAvatar;
+UIKIT_EXTERN NSString * const KUserDefaultsAvatar;
 
-UIKIT_EXTERN NSString
-*
-const KUserDefaultsMobile;
+UIKIT_EXTERN NSString * const KUserDefaultsMobile;
 
-
-UIKIT_EXTERN NSString
-*
-const kGetUMAppkey;
-UIKIT_EXTERN NSString
-*
-const kGetWXAppId;
-UIKIT_EXTERN NSString
-*
-const kGetWXAppSecret;
-
-/** 高德地图的apiKey */
-UIKIT_EXTERN NSString
-*
-const ODLocationApiKey;
-
+/** 友盟的apiKey */
+UIKIT_EXTERN NSString * const kGetUMAppkey;
 
 #pragma mark - 通知
 /** 显示集市的通知 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationShowBazaar;
+UIKIT_EXTERN NSString * const ODNotificationShowBazaar;
 
 /** 刷新我的话题通知 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationMyTaskRefresh;
+UIKIT_EXTERN NSString * const ODNotificationMyTaskRefresh;
 
 
 /**  求帮助的通知 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationSearchHelp;
+UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
 
 /**  换技能通知 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationChangeSkill;
+UIKIT_EXTERN NSString * const ODNotificationChangeSkill;
 
 /**  发布任务成功通知 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationCreateServiceTimeView;
+UIKIT_EXTERN NSString * const ODNotificationCreateServiceTimeView;
 
 /**  发布任务成功通知 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationReleaseTask;
+UIKIT_EXTERN NSString * const ODNotificationReleaseTask;
 
 /**  发布技能成功通知 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationReleaseSkill;
+UIKIT_EXTERN NSString * const ODNotificationReleaseSkill;
 
 /**  寻圈子的通知 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationSearchCircle;
+UIKIT_EXTERN NSString * const ODNotificationSearchCircle;
 
 /**  编辑成功的通知 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationEditSkill;
+UIKIT_EXTERN NSString * const ODNotificationEditSkill;
 
 /**  支付成功通知 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationPaySuccess;
+UIKIT_EXTERN NSString * const ODNotificationPaySuccess;
 
 /**  支付失败通知 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationPayfail;
+UIKIT_EXTERN NSString * const ODNotificationPayfail;
 
 /**  支付失败通知 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationCancelOrder;
+UIKIT_EXTERN NSString * const ODNotificationCancelOrder;
 
 /** 定位刷新 */
-UIKIT_EXTERN NSString
-*
-const ODNotificationLocationSuccessRefresh;
+UIKIT_EXTERN NSString * const ODNotificationLocationSuccessRefresh;
 
 /** 订单刷新 */
 UIKIT_EXTERN NSString

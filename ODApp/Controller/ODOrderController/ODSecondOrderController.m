@@ -222,7 +222,7 @@
 
     UITapGestureRecognizer *addressTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addressAction)];
     [self.headView.secondOrderView.addressImgeView addGestureRecognizer:addressTap];
-
+    self.headView.secondOrderView.labelConstraint.constant = 0.5;
 
     if (self.addressArray.count == 0) {
         self.headView.secondOrderView.addressLabel.text = @"请选择";

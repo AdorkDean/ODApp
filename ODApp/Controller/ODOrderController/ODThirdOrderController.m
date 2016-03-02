@@ -221,8 +221,7 @@
 
 
     self.headView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
-
-
+    self.headView.thirdOrderView.labelConstraint.constant = 0.5;
     UITapGestureRecognizer *timeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeAction)];
     [self.headView.thirdOrderView.choseTimeView addGestureRecognizer:timeTap];
 

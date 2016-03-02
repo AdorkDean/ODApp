@@ -16,6 +16,7 @@
 @property(weak, nonatomic) IBOutlet UILabel *addressLabel;
 
 @property(weak, nonatomic) IBOutlet UIImageView *addressImgeView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelConstraint;
 
 
 + (instancetype)getView;

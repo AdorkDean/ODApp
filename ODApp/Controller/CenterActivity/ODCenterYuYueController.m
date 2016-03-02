@@ -5,7 +5,7 @@
 //  Created by zhz on 15/12/25.
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
-
+#import "UIColor+ODColor.h"
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCenterYuYueController.h"
 #import "ODTabBarController.h"
@@ -289,24 +289,24 @@
         weakSelf.cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
         weakSelf.cancelButton.frame = CGRectMake(0, kScreenSize.height - 230, 50, 30);
         [weakSelf.cancelButton setTitle:@"取消" forState:UIControlStateNormal];
-        weakSelf.cancelButton.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        weakSelf.cancelButton.backgroundColor = [UIColor themeColor];
         [weakSelf.cancelButton addTarget:weakSelf action:@selector(quXiaoAction:) forControlEvents:UIControlEventTouchUpInside];
-        weakSelf.cancelButton.titleLabel.font = [UIFont systemFontOfSize:17];
+        weakSelf.cancelButton.titleLabel.font = [UIFont systemFontOfSize:10];
 
 
         weakSelf.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, kScreenSize.height - 230, kScreenSize.width - 100, 30)];
         weakSelf.timeLabel.text = @"选择时间";
-        weakSelf.timeLabel.font = [UIFont systemFontOfSize:20];
+        weakSelf.timeLabel.font = [UIFont systemFontOfSize:13];
         weakSelf.timeLabel.textAlignment = NSTextAlignmentCenter;
-        weakSelf.timeLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        weakSelf.timeLabel.backgroundColor = [UIColor themeColor];
 
 
         weakSelf.queDingButton = [UIButton buttonWithType:UIButtonTypeSystem];
         weakSelf.queDingButton.frame = CGRectMake(kScreenSize.width - 50, kScreenSize.height - 230, 50, 30);
         [weakSelf.queDingButton setTitle:@"确定" forState:UIControlStateNormal];
-        weakSelf.queDingButton.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        weakSelf.queDingButton.backgroundColor = [UIColor themeColor];
         [weakSelf.queDingButton addTarget:weakSelf action:@selector(queDingAction:) forControlEvents:UIControlEventTouchUpInside];
-        weakSelf.queDingButton.titleLabel.font = [UIFont systemFontOfSize:17];
+        weakSelf.queDingButton.titleLabel.font = [UIFont systemFontOfSize:10];
 
 
         if (weakSelf.isBeginTime) {
