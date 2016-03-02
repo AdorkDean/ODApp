@@ -16,6 +16,7 @@
 		3D35136A1C8588E400D36714 /* ODUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3513691C8588E400D36714 /* ODUser.m */; };
 		3D3513711C8594BD00D36714 /* ODUserResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3513701C8594BD00D36714 /* ODUserResponse.m */; };
 		3D3513741C85A2BE00D36714 /* ODShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3513731C85A2BE00D36714 /* ODShareModel.m */; };
+		3D3513761C86CF6B00D36714 /* ODPaySuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D3513751C86CF6B00D36714 /* ODPaySuccessView.xib */; };
 		453C139C602C89AF557B0F7E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E55588697041BF02F9C6E1 /* libPods.a */; };
 		9D16BDD31C59EEDA003627CD /* ODViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D16BDD11C59EEDA003627CD /* ODViolationsCell.m */; };
 		9D16BDD41C59EEDA003627CD /* ODViolationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D16BDD21C59EEDA003627CD /* ODViolationsCell.xib */; };
@@ -339,6 +340,7 @@
 		3D3513701C8594BD00D36714 /* ODUserResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserResponse.m; sourceTree = "<group>"; };
 		3D3513721C85A2BD00D36714 /* ODShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODShareModel.h; sourceTree = "<group>"; };
 		3D3513731C85A2BE00D36714 /* ODShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODShareModel.m; sourceTree = "<group>"; };
+		3D3513751C86CF6B00D36714 /* ODPaySuccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODPaySuccessView.xib; sourceTree = "<group>"; };
 		92E55588697041BF02F9C6E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D16BDD01C59EEDA003627CD /* ODViolationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODViolationsCell.h; sourceTree = "<group>"; };
 		9D16BDD11C59EEDA003627CD /* ODViolationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODViolationsCell.m; sourceTree = "<group>"; };
@@ -2370,6 +2372,7 @@
 				9DE951E31C783C9A00D7339D /* ODWithdrawalView.xib */,
 				9DBF7EF31C75B4AF0085875E /* ODPaySuccessView.h */,
 				9DBF7EF41C75B4AF0085875E /* ODPaySuccessView.m */,
+				3D3513751C86CF6B00D36714 /* ODPaySuccessView.xib */,
 				9DDC9B701C631D81000D688F /* ODOrderDetailView.h */,
 				9DDC9B711C631D81000D688F /* ODOrderDetailView.m */,
 				9D205C791C71733700B6499B /* ODOrderDetailView.xib */,
@@ -2509,7 +2512,7 @@
 				TargetAttributes = {
 					B83C6B611C224F640063ED92 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = 3WT82VX8WP;
+						DevelopmentTeam = J42BZDDY25;
 					};
 					B83C6B741C224F640063ED92 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -2589,6 +2592,7 @@
 				D4D074FF1C59B9FA008527C9 /* ActivityDetailView.xib in Resources */,
 				D4F76DA91C61AEA100D59F02 /* ODAddressCell.xib in Resources */,
 				9D1F80FF1C76EAE000FC9C2C /* ODOperationFirstCell.xib in Resources */,
+				3D3513761C86CF6B00D36714 /* ODPaySuccessView.xib in Resources */,
 				D4D075131C59B9FA008527C9 /* ODBindingMobileView.xib in Resources */,
 				9D8A98941C7AB619005BC458 /* ODCancelOrderView.xib in Resources */,
 				D4D075211C59B9FA008527C9 /* ODTypeView.xib in Resources */,
