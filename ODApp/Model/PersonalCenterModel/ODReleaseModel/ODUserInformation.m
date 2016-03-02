@@ -22,10 +22,12 @@ Single_Implementation(ODUserInformation)
 - (void)updateUserCache:(ODUser *)user
 {
     [ODUserInformation sharedODUserInformation].openID = user.open_id;
+    [ODUserInformation sharedODUserInformation].mobile = user.mobile;
         
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     [userDefault setObject:user.open_id forKey:KUserDefaultsOpenId];
     [userDefault setObject:user.avatar forKey:KUserDefaultsAvatar];
+    [userDefault setObject:user.mobile forKey:KUserDefaultsMobile];
     
     [userDefault setObject:user.mj_keyValues forKey:kUserCache];
 }
