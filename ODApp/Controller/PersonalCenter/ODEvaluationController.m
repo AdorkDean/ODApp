@@ -120,6 +120,7 @@
     
     // 我发表的collectionView
     self.firstFlowLayout = [[UICollectionViewFlowLayout alloc] init];
+    self.firstFlowLayout.sectionInset = UIEdgeInsetsMake(5, 0, 0, 0);
     self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.firstFlowLayout];
     self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.firstCollectionView.dataSource = self;
@@ -139,6 +140,7 @@
     
     // 我回复的collectionView
     self.secondFlowLayout = [[UICollectionViewFlowLayout alloc] init];
+    self.secondFlowLayout.sectionInset = UIEdgeInsetsMake(5, 0, 0, 0);
     self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width,10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.secondFlowLayout];
     self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.secondCollectionView.dataSource = self;
@@ -324,14 +326,15 @@
 
     ODEvaluationCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
     
-    
+    cell.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    cell.layer.borderWidth = 0.5;
     
     if (collectionView.tag == 111) {
         
         
         cell.backgroundColor = [UIColor whiteColor];
         cell.model = self.FirstDataArray[indexPath.row];
-
+        
     }else{
         
         cell.backgroundColor = [UIColor whiteColor];
