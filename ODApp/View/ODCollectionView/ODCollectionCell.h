@@ -23,6 +23,7 @@
 @property(nonatomic, strong) ODApplyModel *applyModel;
 @property(nonatomic, strong) ODLikeModel *model;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineHeightConstraint;
 
 - (void)setWithApplyModel:(ODApplyModel *)model;
 
