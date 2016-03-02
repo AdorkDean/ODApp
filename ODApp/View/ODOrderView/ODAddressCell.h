@@ -17,6 +17,11 @@
 @property(weak, nonatomic) IBOutlet UILabel *lineLabel;
 @property(nonatomic, strong) ODAddressModel *model;
 
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineonstraint;
+
+
+
 @property(nonatomic, copy) NSString *isDefault;
 
 @end
