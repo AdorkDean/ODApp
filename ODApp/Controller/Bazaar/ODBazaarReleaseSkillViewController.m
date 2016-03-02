@@ -428,7 +428,6 @@
     self.unitTextField.font = [UIFont systemFontOfSize:14];
     self.unitTextField.text = self.unit;
     self.unitTextField.delegate = self;
-    [self.unitTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [unitView addSubview:self.unitTextField];
     
     CGFloat width = (kScreenSize.width-35-40)/3;
@@ -573,7 +572,7 @@
 
 -(void)releaseButtonClick:(UIButton *)button
 {
-    if (self.titleTextField.text.length>0&&self.contentTextView.text.length>0&&self.priceTextField.text.length>0&&self.unitTextField.text.length&&self.swap_type != nil&&self.mArray.count<=5&&self.mArray.count>=3) {
+    if (self.titleTextField.text.length>0&&self.contentTextView.text.length>0&&self.priceTextField.text.length>0&&self.unitTextField.text.length>0&&self.swap_type != nil&&self.mArray.count<=5&&self.mArray.count>=3) {
         [self joiningTogetherParmetersWithButton:button];
     }else{
         if (self.titleTextField.text.length==0) {
@@ -581,15 +580,17 @@
         }else if (self.contentTextView.text.length==0){
             [ODProgressHUD showInfoWithStatus:@"请输入内容"];
         }else if (self.priceTextField.text.length==0){
-             [ODProgressHUD showInfoWithStatus:@"不要钱了吗"];
+            [ODProgressHUD showInfoWithStatus:@"不要钱了吗"];
         }else if (self.unitTextField.text.length==0){
-             [ODProgressHUD showInfoWithStatus:@"认真填写个单位吧"];
+            [ODProgressHUD showInfoWithStatus:@"认真填写个单位吧"];
+        }else if (self.unitTextField.text.length>3){
+            [ODProgressHUD showInfoWithStatus:@"单位不能超过三个字"];
         }else if (self.swap_type == nil){
-             [ODProgressHUD showInfoWithStatus:@"请选择你的服务方式"];
+            [ODProgressHUD showInfoWithStatus:@"请选择你的服务方式"];
         }else if (([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"])&&self.timeArray.count==0&&[button.titleLabel.text isEqualToString:@"发布"]){
-             [ODProgressHUD showInfoWithStatus:@"请设置时间"];
+            [ODProgressHUD showInfoWithStatus:@"请设置时间"];
         }else if (self.mArray.count<3||self.mArray.count>5){
-             [ODProgressHUD showInfoWithStatus:@"图需3-5张"];
+            [ODProgressHUD showInfoWithStatus:@"图需3-5张"];
         }
     }
 }
@@ -692,13 +693,8 @@
         }
         self.titleCountLabel.text = [NSString stringWithFormat:@"%ld/7",textField.text.length];
     }
-    
-    if (textField == self.unitTextField) {
-        if (textField.text.length>3) {
-            textField.text = [textField.text substringToIndex:3];
-        }
-    }
 }
+
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
@@ -731,10 +727,10 @@
         }else{
             return YES;
         }
-        
     }
     return YES;
 }
+
 
 #pragma mark - UITextViewDelegate
 NSString *skillContentText = @"";
