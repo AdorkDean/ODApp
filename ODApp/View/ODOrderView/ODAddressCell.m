@@ -17,7 +17,8 @@
     [self setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     self.contentView.userInteractionEnabled = YES;
-    
+ 
+    self.lineonstraint.constant = 0.5;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

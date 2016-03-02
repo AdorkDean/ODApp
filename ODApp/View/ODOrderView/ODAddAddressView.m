@@ -10,6 +10,15 @@
 
 @implementation ODAddAddressView
 
+- (void)awakeFromNib
+{
+
+    self.lineOneConstraint.constant = 0.5;
+    self.lineTwoConstraint.constant = 0.5;
+}
+
+
+
 +(instancetype)getView
 {
     ODAddAddressView *view =  [[[NSBundle mainBundle] loadNibNamed:@"ODAddAddressView" owner:nil options:nil] firstObject];

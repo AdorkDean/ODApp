@@ -172,7 +172,7 @@
     cell.layer.masksToBounds = YES;
     cell.layer.cornerRadius = 5;
     cell.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-    cell.layer.borderWidth = 1;
+    cell.layer.borderWidth = 0.5;
     
     return cell;
 }

@@ -12,5 +12,6 @@
 
 @property(weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property(weak, nonatomic) IBOutlet UIImageView *lineImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineImageViewConstraint;
 
 @end

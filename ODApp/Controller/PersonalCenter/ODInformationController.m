@@ -90,18 +90,21 @@
 
 - (void)createTableView
 {
-    
    
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 50) style:UITableViewStylePlain];
-      
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.userInteractionEnabled = YES;
-    
-     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    
-    self.informationView = [ODInformationView getView];
-    self.informationView.userInteractionEnabled = YES;
+    if (self.tableView == nil) {
+        self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 50) style:UITableViewStylePlain];
+        
+        self.tableView.dataSource = self;
+        self.tableView.delegate = self;
+        self.tableView.userInteractionEnabled = YES;
+        
+         self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+        
+        self.informationView = [ODInformationView getView];
+        self.informationView.userInteractionEnabled = YES;
+        self.tableView.tableHeaderView = self.informationView;
+        [self.view addSubview:self.tableView];
+    }
     
     ODUserModel *model = self.dataArray[0];
     
@@ -170,8 +173,6 @@
 
     [self.informationView.codeImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.qrcode]];
     
-    self.tableView.tableHeaderView = self.informationView;
-    [self.view addSubview:self.tableView];
     
     
 }
@@ -479,6 +480,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self getData];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 

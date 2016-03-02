@@ -103,17 +103,17 @@
     [self.view addSubview:self.collectionView];
 
 
-    UIImageView *amountImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 56 - ODNavigationHeight, kScreenSize.width - 100, 56)];
+    UIImageView *amountImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 49 - ODNavigationHeight, kScreenSize.width - 150, 49)];
     amountImageView.backgroundColor = [UIColor whiteColor];
 
-    UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, 18, 70, 20)];
+    UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, 17, 70, 15)];
     priceLabel.text = @"订单金额：";
     priceLabel.font = [UIFont systemFontOfSize:13];
     priceLabel.backgroundColor = [UIColor whiteColor];
     [amountImageView addSubview:priceLabel];
 
 
-    self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(88, 18, amountImageView.frame.size.width - 130, 20)];
+    self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(88, 15, amountImageView.frame.size.width - 130, 19)];
     self.allPriceLabel.text = [NSString stringWithFormat:@"%@元", self.informationModel.price];
     self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
     self.allPriceLabel.font = [UIFont systemFontOfSize:15];
@@ -123,7 +123,7 @@
 
 
     UIButton *saveOrderButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    saveOrderButton.frame = CGRectMake(kScreenSize.width - 100, kScreenSize.height - 56 - ODNavigationHeight, 100, 56);
+    saveOrderButton.frame = CGRectMake(kScreenSize.width - 150, kScreenSize.height - 49 - ODNavigationHeight, 150, 49);
     saveOrderButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     [saveOrderButton setTitle:@"提交订单" forState:UIControlStateNormal];
     saveOrderButton.titleLabel.font = [UIFont systemFontOfSize:13];
