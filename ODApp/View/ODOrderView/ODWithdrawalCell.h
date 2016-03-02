@@ -16,6 +16,7 @@
 @property(weak, nonatomic) IBOutlet UILabel *dataLabel;
 @property(weak, nonatomic) IBOutlet UILabel *statusLabel;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineHeightConstraint;
 
 @property(nonatomic, strong) ODBalanceModel *model;
 
