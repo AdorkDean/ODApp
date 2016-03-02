@@ -18,6 +18,13 @@
 
 @property(weak, nonatomic) IBOutlet UITextView *addressTextView;
 
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineOneConstraint;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineTwoConstraint;
+
+
+
 + (instancetype)getView;
 
 
