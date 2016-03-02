@@ -12,6 +12,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    self.lineHeightConstraint.constant = 0.5;
 }
 
 

@@ -41,9 +41,6 @@ NSString * const ODAlertIsLoading = @"正在加载。。。";
 
 + (void)showToast:(UIView *)view msg:(NSString *)msg
 {
-//    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-//    UIViewController *rootViewController = window.rootViewController;
-//    view = rootViewController.view;
     CGPoint center = CGPointMake(view.frame.size.width / 2, view.frame.size.height - 100);
     [view makeToast:msg duration:3 position:[NSValue valueWithCGPoint:center]];
 }
