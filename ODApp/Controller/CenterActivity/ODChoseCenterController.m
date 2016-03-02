@@ -102,7 +102,6 @@
     ChoseCenterModel *model = self.dataArray[indexPath.row];
     cell.titleLabel.text = model.name;
 
-
     return cell;
 }
 
@@ -141,7 +140,7 @@
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    return CGSizeMake(kScreenSize.width, 50);
+    return CGSizeMake(kScreenSize.width, 45.5);
 
 
 }

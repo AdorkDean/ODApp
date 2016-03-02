@@ -11,7 +11,9 @@
 @implementation ChoseCenterCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    self.titleLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.lineViewConstraint.constant = 0.5;
 }
 
 @end

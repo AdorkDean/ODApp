@@ -11,9 +11,10 @@
 @implementation ODBazaarRewardCollectionCell
 
 - (void)awakeFromNib {
-    // Initialization code
+
     self.nameLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-    self.lineImageView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.lineImageView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.lineImageViewConstraint.constant = 0.5;
 }
 
 @end
