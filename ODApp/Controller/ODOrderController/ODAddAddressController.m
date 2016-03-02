@@ -74,7 +74,7 @@
         self.addAddressView.phoneTextField.text = self.addressModel.tel;
     } else {
         self.addAddressView.addressTextView.text = @"请输入联系地址";
-        self.addAddressView.addressTextView.textColor = [UIColor lightGrayColor];
+        self.addAddressView.addressTextView.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
         self.addAddressView.phoneTextField.text = [ODUserInformation sharedODUserInformation].mobile;
 
     };
@@ -103,7 +103,7 @@
 
     if (textView == self.addAddressView.addressTextView) {
         if ([textView.text isEqualToString:@""]) {
-            textView.textColor = [UIColor lightGrayColor];
+            textView.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
             textView.text = @"请输入联系地址";
 
         }
