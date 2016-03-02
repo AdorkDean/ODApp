@@ -54,7 +54,6 @@
     [super viewDidLoad];
     if (![ODUserInformation sharedODUserInformation].openID.length)
         return;
-    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"个人中心";
     
     [self createCollectionView];
@@ -72,11 +71,11 @@
 -(void)createCollectionView
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc]init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - ODNavigationHeight - ODTabBarHeight) collectionViewLayout:self.flowLayout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - ODNavigationHeight) collectionViewLayout:self.flowLayout];
     
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandSecondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
     [self.collectionView registerClass:[ODLandThirdCell class] forCellWithReuseIdentifier:@"third"];

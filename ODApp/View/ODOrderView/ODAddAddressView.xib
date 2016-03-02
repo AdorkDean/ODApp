@@ -50,14 +50,6 @@
                         <constraint firstAttribute="height" constant="25" id="Sbl-3C-odP"/>
                     </constraints>
                 </imageView>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e5T-6Z-ObQ">
-                    <rect key="frame" x="48" y="66" width="262" height="20"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="20" id="rlW-Fl-5cz"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89a-UM-Xdz">
                     <rect key="frame" x="18" y="101" width="302" height="1"/>
                     <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
@@ -100,7 +92,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="请输入联系地址" translatesAutoresizingMaskIntoConstraints="NO" id="Xew-wa-vnr">
-                    <rect key="frame" x="48" y="112" width="262" height="40"/>
+                    <rect key="frame" x="45" y="112" width="265" height="40"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="aSM-fe-hbO"/>
@@ -109,6 +101,14 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e5T-6Z-ObQ">
+                    <rect key="frame" x="48" y="66" width="262" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="rlW-Fl-5cz"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -127,7 +127,7 @@
                 <constraint firstItem="Chs-VQ-08M" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="NPY-OO-9dS"/>
                 <constraint firstItem="kzZ-UC-EKh" firstAttribute="top" secondItem="wcz-fz-TOJ" secondAttribute="bottom" constant="15" id="QtT-Bo-dYS"/>
                 <constraint firstAttribute="trailing" secondItem="kzZ-UC-EKh" secondAttribute="trailing" id="W3B-GM-H5g"/>
-                <constraint firstItem="Xew-wa-vnr" firstAttribute="leading" secondItem="3W7-Ga-2aF" secondAttribute="trailing" constant="5" id="WTY-RE-0ML"/>
+                <constraint firstItem="Xew-wa-vnr" firstAttribute="leading" secondItem="3W7-Ga-2aF" secondAttribute="trailing" constant="2" id="WTY-RE-0ML"/>
                 <constraint firstAttribute="trailing" secondItem="89a-UM-Xdz" secondAttribute="trailing" id="ZRD-Nt-biz"/>
                 <constraint firstItem="e5T-6Z-ObQ" firstAttribute="leading" secondItem="D1C-Sx-6EH" secondAttribute="trailing" constant="5" id="ayf-fZ-LgV"/>
                 <constraint firstItem="Chs-VQ-08M" firstAttribute="top" secondItem="qzg-0d-oKP" secondAttribute="bottom" constant="6" id="dci-qc-rhg"/>

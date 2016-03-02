@@ -10,9 +10,13 @@
 		23451CAF1C85E5EF0030271B /* jpush-ios-2.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23451CAD1C85E5EF0030271B /* jpush-ios-2.1.0.a */; };
 		23451CB21C8679040030271B /* ODAppRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 23451CB11C8679040030271B /* ODAppRegister.m */; };
 		239611871C85D54A0025184B /* UIColor+ODColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 239611861C85D54A0025184B /* UIColor+ODColor.m */; };
+		23ACCFCC1C86D4B500FB9D8E /* AppMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 23ACCFC71C86D4B500FB9D8E /* AppMethod.m */; };
+		23ACCFCD1C86D4B500FB9D8E /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 23ACCFC91C86D4B500FB9D8E /* CommonUtil.m */; };
+		23ACCFCE1C86D4B500FB9D8E /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 23ACCFCB1C86D4B500FB9D8E /* XMLDictionary.m */; };
 		3D35136A1C8588E400D36714 /* ODUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3513691C8588E400D36714 /* ODUser.m */; };
 		3D3513711C8594BD00D36714 /* ODUserResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3513701C8594BD00D36714 /* ODUserResponse.m */; };
 		3D3513741C85A2BE00D36714 /* ODShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D3513731C85A2BE00D36714 /* ODShareModel.m */; };
+		3D3513761C86CF6B00D36714 /* ODPaySuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D3513751C86CF6B00D36714 /* ODPaySuccessView.xib */; };
 		453C139C602C89AF557B0F7E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E55588697041BF02F9C6E1 /* libPods.a */; };
 		9D16BDD31C59EEDA003627CD /* ODViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D16BDD11C59EEDA003627CD /* ODViolationsCell.m */; };
 		9D16BDD41C59EEDA003627CD /* ODViolationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D16BDD21C59EEDA003627CD /* ODViolationsCell.xib */; };
@@ -24,9 +28,6 @@
 		9D205C7A1C71733700B6499B /* ODOrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D205C791C71733700B6499B /* ODOrderDetailView.xib */; };
 		9D205C7C1C7173B500B6499B /* ODMyOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D205C7B1C7173B500B6499B /* ODMyOrderCell.xib */; };
 		9D46D1481C77459200F4C0CD /* ODPayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D46D1471C77459200F4C0CD /* ODPayModel.m */; };
-		9D46D14D1C77482000F4C0CD /* AppMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D46D14A1C77482000F4C0CD /* AppMethod.m */; };
-		9D46D14E1C77482000F4C0CD /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D46D14C1C77482000F4C0CD /* CommonUtil.m */; };
-		9D46D1511C77486200F4C0CD /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D46D1501C77486200F4C0CD /* XMLDictionary.m */; };
 		9D8A98921C7AB5FE005BC458 /* ODCancelOrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A98911C7AB5FE005BC458 /* ODCancelOrderView.m */; };
 		9D8A98941C7AB619005BC458 /* ODCancelOrderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D8A98931C7AB619005BC458 /* ODCancelOrderView.xib */; };
 		9D8A98971C7AE8D8005BC458 /* ODMySellController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9D8A98961C7AE8D8005BC458 /* ODMySellController.m */; };
@@ -327,12 +328,19 @@
 		23451CB11C8679040030271B /* ODAppRegister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAppRegister.m; sourceTree = "<group>"; };
 		239611851C85D54A0025184B /* UIColor+ODColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ODColor.h"; sourceTree = "<group>"; };
 		239611861C85D54A0025184B /* UIColor+ODColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ODColor.m"; sourceTree = "<group>"; };
+		23ACCFC61C86D4B500FB9D8E /* AppMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMethod.h; sourceTree = "<group>"; };
+		23ACCFC71C86D4B500FB9D8E /* AppMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMethod.m; sourceTree = "<group>"; };
+		23ACCFC81C86D4B500FB9D8E /* CommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtil.h; sourceTree = "<group>"; };
+		23ACCFC91C86D4B500FB9D8E /* CommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtil.m; sourceTree = "<group>"; };
+		23ACCFCA1C86D4B500FB9D8E /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
+		23ACCFCB1C86D4B500FB9D8E /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		3D3513681C8588E400D36714 /* ODUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUser.h; sourceTree = "<group>"; };
 		3D3513691C8588E400D36714 /* ODUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUser.m; sourceTree = "<group>"; };
 		3D35136F1C8594BD00D36714 /* ODUserResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserResponse.h; sourceTree = "<group>"; };
 		3D3513701C8594BD00D36714 /* ODUserResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserResponse.m; sourceTree = "<group>"; };
 		3D3513721C85A2BD00D36714 /* ODShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODShareModel.h; sourceTree = "<group>"; };
 		3D3513731C85A2BE00D36714 /* ODShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODShareModel.m; sourceTree = "<group>"; };
+		3D3513751C86CF6B00D36714 /* ODPaySuccessView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODPaySuccessView.xib; sourceTree = "<group>"; };
 		92E55588697041BF02F9C6E1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D16BDD01C59EEDA003627CD /* ODViolationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODViolationsCell.h; sourceTree = "<group>"; };
 		9D16BDD11C59EEDA003627CD /* ODViolationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODViolationsCell.m; sourceTree = "<group>"; };
@@ -349,12 +357,6 @@
 		9D205C7B1C7173B500B6499B /* ODMyOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyOrderCell.xib; sourceTree = "<group>"; };
 		9D46D1461C77459200F4C0CD /* ODPayModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPayModel.h; sourceTree = "<group>"; };
 		9D46D1471C77459200F4C0CD /* ODPayModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPayModel.m; sourceTree = "<group>"; };
-		9D46D1491C77482000F4C0CD /* AppMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMethod.h; sourceTree = "<group>"; };
-		9D46D14A1C77482000F4C0CD /* AppMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppMethod.m; sourceTree = "<group>"; };
-		9D46D14B1C77482000F4C0CD /* CommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtil.h; sourceTree = "<group>"; };
-		9D46D14C1C77482000F4C0CD /* CommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtil.m; sourceTree = "<group>"; };
-		9D46D14F1C77486200F4C0CD /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
-		9D46D1501C77486200F4C0CD /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		9D8A98901C7AB5FE005BC458 /* ODCancelOrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCancelOrderView.h; sourceTree = "<group>"; };
 		9D8A98911C7AB5FE005BC458 /* ODCancelOrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCancelOrderView.m; sourceTree = "<group>"; };
 		9D8A98931C7AB619005BC458 /* ODCancelOrderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODCancelOrderView.xib; sourceTree = "<group>"; };
@@ -1648,6 +1650,12 @@
 		C64D45DB1C5F8C6F003BFFA0 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				23ACCFC61C86D4B500FB9D8E /* AppMethod.h */,
+				23ACCFC71C86D4B500FB9D8E /* AppMethod.m */,
+				23ACCFC81C86D4B500FB9D8E /* CommonUtil.h */,
+				23ACCFC91C86D4B500FB9D8E /* CommonUtil.m */,
+				23ACCFCA1C86D4B500FB9D8E /* XMLDictionary.h */,
+				23ACCFCB1C86D4B500FB9D8E /* XMLDictionary.m */,
 				9D1E2C7D1C786896000827B5 /* ODAPIManager.h */,
 				9D1E2C7C1C786896000827B5 /* ODAPIManager.m */,
 				C64D45DE1C5F8C6F003BFFA0 /* ODClassMethod.h */,
@@ -2290,12 +2298,6 @@
 		D4F76D871C61AE8C00D59F02 /* ODOrderController */ = {
 			isa = PBXGroup;
 			children = (
-				9D46D1491C77482000F4C0CD /* AppMethod.h */,
-				9D46D14A1C77482000F4C0CD /* AppMethod.m */,
-				9D46D14B1C77482000F4C0CD /* CommonUtil.h */,
-				9D46D14C1C77482000F4C0CD /* CommonUtil.m */,
-				9D46D14F1C77486200F4C0CD /* XMLDictionary.h */,
-				9D46D1501C77486200F4C0CD /* XMLDictionary.m */,
 				D4F76D881C61AE8C00D59F02 /* ODAddAddressController.h */,
 				D4F76D891C61AE8C00D59F02 /* ODAddAddressController.m */,
 				D4F76D8A1C61AE8C00D59F02 /* ODContactAddressController.h */,
@@ -2370,6 +2372,7 @@
 				9DE951E31C783C9A00D7339D /* ODWithdrawalView.xib */,
 				9DBF7EF31C75B4AF0085875E /* ODPaySuccessView.h */,
 				9DBF7EF41C75B4AF0085875E /* ODPaySuccessView.m */,
+				3D3513751C86CF6B00D36714 /* ODPaySuccessView.xib */,
 				9DDC9B701C631D81000D688F /* ODOrderDetailView.h */,
 				9DDC9B711C631D81000D688F /* ODOrderDetailView.m */,
 				9D205C791C71733700B6499B /* ODOrderDetailView.xib */,
@@ -2509,7 +2512,7 @@
 				TargetAttributes = {
 					B83C6B611C224F640063ED92 = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = 3WT82VX8WP;
+						DevelopmentTeam = J42BZDDY25;
 					};
 					B83C6B741C224F640063ED92 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -2589,6 +2592,7 @@
 				D4D074FF1C59B9FA008527C9 /* ActivityDetailView.xib in Resources */,
 				D4F76DA91C61AEA100D59F02 /* ODAddressCell.xib in Resources */,
 				9D1F80FF1C76EAE000FC9C2C /* ODOperationFirstCell.xib in Resources */,
+				3D3513761C86CF6B00D36714 /* ODPaySuccessView.xib in Resources */,
 				D4D075131C59B9FA008527C9 /* ODBindingMobileView.xib in Resources */,
 				9D8A98941C7AB619005BC458 /* ODCancelOrderView.xib in Resources */,
 				D4D075211C59B9FA008527C9 /* ODTypeView.xib in Resources */,
@@ -2671,7 +2675,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C64D45E71C5F8C6F003BFFA0 /* UIImage+ODExtension.m in Sources */,
-				9D46D14D1C77482000F4C0CD /* AppMethod.m in Sources */,
 				9DDDF74D1C7D6045004D572E /* ODThirdOrderController.m in Sources */,
 				D4D0750D1C59B9FA008527C9 /* ODActivityHeadView.m in Sources */,
 				D4D073791C59B9FA008527C9 /* ODCenterPactureController.m in Sources */,
@@ -2692,9 +2695,9 @@
 				C64D45EC1C5F8C6F003BFFA0 /* IQUIViewController+Additions.m in Sources */,
 				9DEDCF421C64B3ED003015C6 /* ODBazaarDetailViewController.m in Sources */,
 				D4D075271C59B9FA008527C9 /* ODMyOrderRecordCell.m in Sources */,
-				9D46D14E1C77482000F4C0CD /* CommonUtil.m in Sources */,
 				D44423A71C7B1811005B4CFE /* NSArray+ODExtension.m in Sources */,
 				9D8A989D1C7AF204005BC458 /* ODMySellDetailController.m in Sources */,
+				23ACCFCD1C86D4B500FB9D8E /* CommonUtil.m in Sources */,
 				9D1F80FE1C76EAE000FC9C2C /* ODOperationFirstCell.m in Sources */,
 				D4D073801C59B9FA008527C9 /* ODCommumityViewController.m in Sources */,
 				D4D073761C59B9FA008527C9 /* ODActivityDetailController.m in Sources */,
@@ -2812,6 +2815,7 @@
 				C64D45F31C5F8C6F003BFFA0 /* IQTitleBarButtonItem.m in Sources */,
 				9DEDCF411C64B3ED003015C6 /* ODBazaarDetailLayout.m in Sources */,
 				9DEDCF731C64B3FC003015C6 /* ODBazaarReleaseSkillTimeViewCell.m in Sources */,
+				23ACCFCE1C86D4B500FB9D8E /* XMLDictionary.m in Sources */,
 				9DBF7F031C75C3680085875E /* ODGiveOpinionController.m in Sources */,
 				C6515DBF1C7ECF3C00B25760 /* ODUserInformation.m in Sources */,
 				D4D073931C59B9FA008527C9 /* ODTopicModel.m in Sources */,
@@ -2863,7 +2867,6 @@
 				C64D45F91C5F8C6F003BFFA0 /* UITableViewRowAction.m in Sources */,
 				C64D40971C5E0E17003BFFA0 /* ODSkillDetailReusableView.m in Sources */,
 				9DEDCF471C64B3ED003015C6 /* ODBazaarExchangeSkillDetailViewController.m in Sources */,
-				9D46D1511C77486200F4C0CD /* XMLDictionary.m in Sources */,
 				C64D46151C5F8C6F003BFFA0 /* ODHttpTool.m in Sources */,
 				C64D45F21C5F8C6F003BFFA0 /* IQBarButtonItem.m in Sources */,
 				9DEDCF571C64B3F4003015C6 /* ODBazaarExchangeSkillModel.m in Sources */,
@@ -2894,6 +2897,7 @@
 				D4D073821C59B9FA008527C9 /* ODCenterIntroduceController.m in Sources */,
 				D4D073781C59B9FA008527C9 /* ODCenterDetailController.m in Sources */,
 				D4D0738D1C59B9FA008527C9 /* ODMyTopicController.m in Sources */,
+				23ACCFCC1C86D4B500FB9D8E /* AppMethod.m in Sources */,
 				D4D075491C59BBEE008527C9 /* ODAppConst.m in Sources */,
 				9DF2E98C1C74654A00F77976 /* ODSecondOrderDetailController.m in Sources */,
 				C64D46021C5F8C6F003BFFA0 /* UIView+SDExtension.m in Sources */,

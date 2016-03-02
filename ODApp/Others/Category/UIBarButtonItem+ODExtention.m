@@ -12,6 +12,7 @@
 + (instancetype)OD_itemWithTarget:(id)target action:(SEL)action image:(UIImage *)image highImage:(UIImage *)highImage
 {
     ODBarButton *button = [ODBarButton buttonWithType:UIButtonTypeCustom];
+    
     [button setImage:image forState:UIControlStateNormal];
     [button setImage:highImage ? highImage : image forState:UIControlStateHighlighted];
     [button sizeToFit];

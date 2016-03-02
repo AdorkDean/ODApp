@@ -93,6 +93,11 @@
 @property(nonatomic, strong) ODTitleLabelView *activeContentLabel;
 
 /**
+ *  webView的底部view
+ */
+@property(nonatomic, strong) UIView *webBaseView;
+
+/**
  *  活动内容webView
  */
 @property(nonatomic, strong) UIWebView *webView;
@@ -157,7 +162,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         _infoTableView.dataSource = self;
         _infoTableView.tableFooterView = [UIView new];
         [_infoTableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityDetailInfoViewCell class]) bundle:nil] forCellReuseIdentifier:detailInfoCell];
-        _infoTableView.separatorColor = [UIColor colorWithHexString:@"e6e6e6" alpha:1];
+        _infoTableView.separatorColor = [UIColor lineColor];
         _infoTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         [_infoTableView addLineOnBottom];
         [self.baseScrollV addSubview:self.infoTableView];
@@ -185,6 +190,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         _VIPTableView.delegate = self;
         _VIPTableView.dataSource = self;
         _VIPTableView.tableFooterView = [UIView new];
+        _VIPTableView.separatorColor = [UIColor lineColor];
         [_VIPTableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODActivityVIPCell class]) bundle:nil] forCellReuseIdentifier:VIPCell];
         [_VIPTableView addLineOnBottom];
         [self.baseScrollV addSubview:_VIPTableView];
@@ -230,10 +236,20 @@ static NSString *const detailInfoCell = @"detailInfoCell";
     return _activeContentLabel;
 }
 
+- (UIView *)webBaseView
+{
+    if (!_webBaseView)
+    {
+        _webBaseView = [[UIView alloc]init];
+        [self.baseScrollV addSubview:_webBaseView];
+    }
+    return _webBaseView;
+}
+
 - (UIWebView *)webView {
     if (!_webView) {
         hasload = NO;
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.activeContentLabel.frame) + 12.5, kScreenSize.width - ODLeftMargin * 2, 10)];
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(ODLeftMargin, 12.5, kScreenSize.width - ODLeftMargin * 2, 10)];
         webView.delegate = self;
         webView.layer.masksToBounds = YES;
         webView.layer.cornerRadius = 5;
@@ -242,7 +258,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         webView.scrollView.showsHorizontalScrollIndicator = NO;
         webView.scrollView.scrollEnabled = NO;
 
-        [self.baseScrollV addSubview:webView];
+        [self.webBaseView addSubview:webView];
         _webView = webView;
     }
     return _webView;
@@ -419,7 +435,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
                 if (self.resultModel.store_id > 0) {
                     ODCenterDetailController *vc = [[ODCenterDetailController alloc] init];
                     vc.storeId = [NSString stringWithFormat:@"%d", self.resultModel.store_id];
-                    vc.activityID = [NSString stringWithFormat:@"%d", self.resultModel.activity_id];
+                    vc.activityID = [NSString stringWithFormat:@"%ld", (long)self.resultModel.activity_id];
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                 else {
@@ -454,10 +470,11 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     NSString *clientheight_str = [webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"];
     float clientheight = [clientheight_str floatValue];
-    webView.od_height = clientheight;
-    self.bottomButtonView.od_y = CGRectGetMaxY(webView.frame);
+    self.webBaseView.frame = CGRectMake(0, CGRectGetMaxY(self.activeContentLabel.frame), KScreenWidth, clientheight + 25);
+    webView.frame = CGRectMake(ODLeftMargin, 12.5, KScreenWidth - ODLeftMargin * 2, clientheight);
+    self.bottomButtonView.od_y = CGRectGetMaxY(self.webBaseView.frame);
     if (!hasload) {
-        [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(webView.frame))];
+        [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(self.webBaseView.frame))];
         [self.bottomButtonView addLineOnBottom];
         hasload = YES;
     }
@@ -480,7 +497,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 
 - (void)applyAction {
     ODApplyListViewController *vc = [[ODApplyListViewController alloc] init];
-    vc.activity_id = [NSString stringWithFormat:@"%d", self.resultModel.activity_id];
+    vc.activity_id = [NSString stringWithFormat:@"%ld", (long)self.resultModel.activity_id];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

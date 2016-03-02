@@ -94,7 +94,7 @@
 - (void)createCollectionView {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 115) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[ODOrderSecondHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
@@ -113,7 +113,7 @@
     [amountImageView addSubview:priceLabel];
 
 
-    self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(88, 15, amountImageView.frame.size.width - 130, 19)];
+    self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(88, 15, amountImageView.frame.size.width - 106, 19)];
     self.allPriceLabel.text = [NSString stringWithFormat:@"%@元", self.informationModel.price];
     self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
     self.allPriceLabel.font = [UIFont systemFontOfSize:15];

@@ -12,4 +12,5 @@
 
 + (UIColor *)themeColor;
 
++ (UIColor *)lineColor;
 @end

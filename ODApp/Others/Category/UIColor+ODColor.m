@@ -15,4 +15,9 @@
     return [UIColor colorWithHexString:@"#ffd802" alpha:1];
 }
 
++ (UIColor *)lineColor
+{
+    return [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+}
+
 @end
