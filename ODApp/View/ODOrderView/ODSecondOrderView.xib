@@ -128,6 +128,7 @@
             <connections>
                 <outlet property="addressImgeView" destination="W1Y-dk-Sk9" id="SaR-3S-0vZ"/>
                 <outlet property="addressLabel" destination="zvw-gr-5w1" id="Xka-oz-1aE"/>
+                <outlet property="labelConstraint" destination="5og-9S-ifW" id="ziE-Dc-3c1"/>
                 <outlet property="typeLabel" destination="iPz-If-NA4" id="7Fv-0z-piD"/>
             </connections>
             <point key="canvasLocation" x="215" y="170"/>

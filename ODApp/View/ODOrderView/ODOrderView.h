@@ -20,6 +20,8 @@
 
 @property(weak, nonatomic) IBOutlet UILabel *typeLabel;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *firstLabelConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *secondLabelConstraint;
 
 + (instancetype)getView;
 

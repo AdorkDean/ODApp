@@ -16,6 +16,7 @@
 @property(weak, nonatomic) IBOutlet UIImageView *orderImageView;
 @property(weak, nonatomic) IBOutlet UILabel *orderTitle;
 @property(weak, nonatomic) IBOutlet UILabel *orderPrice;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelConstraint;
 
 @property(nonatomic, strong) ODBazaarExchangeSkillModel *model;
 
