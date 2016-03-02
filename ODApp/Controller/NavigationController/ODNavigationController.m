@@ -17,7 +17,7 @@
 
 + (void)initialize {
     UINavigationBar *navigationBar = [UINavigationBar appearance];
-    [navigationBar setBackgroundImage:[UIImage OD_imageWithColor:[UIColor colorWithHexString:@"#ffd802" alpha:1]]
+    [navigationBar setBackgroundImage:[UIImage OD_imageWithColor:[UIColor themeColor]]
                        forBarPosition:UIBarPositionAny
                            barMetrics:UIBarMetricsDefault];
     [navigationBar setShadowImage:[UIImage new]];

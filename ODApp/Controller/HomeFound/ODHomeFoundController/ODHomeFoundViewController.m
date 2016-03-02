@@ -44,14 +44,11 @@
     [self getSkillChangeRequest];
     [self getDefaultCenterNameRequest];
 
-    [MAMapServices sharedServices].apiKey = ODLocationApiKey;
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
     _mapView.delegate = self;
     _mapView.showsUserLocation = YES;
     [_mapView setZoomLevel:20 animated:YES];
 
-    //配置用户Key
-    [AMapSearchServices sharedServices].apiKey = ODLocationApiKey;
     //初始化检索对象
     _search = [[AMapSearchAPI alloc] init];
     _search.delegate = self;

@@ -17,6 +17,7 @@
 #import "ODModelDefine.h"
 #import "ODAppConst.h"
 #import "NSURL+ODExtension.h"
+#import "UIColor+ODColor.h"
 #import "UIColor+ODExtension.h"
 #import "UIView+ODExtension.h"
 #import "UIImage+ODExtension.h"
