@@ -324,7 +324,7 @@
     NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [cell.headButton addTarget:self action:@selector(otherInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[userInfoDic[userId]avatar_url]] forState:UIControlStateNormal];
+    [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[userInfoDic[userId]avatar_url]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     cell.nickLabel.text = [userInfoDic[userId]nick];
     cell.signLabel.text = [userInfoDic[userId]sign];
     [cell showDateWithModel:model];
