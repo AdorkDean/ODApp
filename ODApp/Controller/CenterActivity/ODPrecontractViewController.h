@@ -10,4 +10,6 @@
 
 @interface ODPrecontractViewController : ODBaseViewController
 
+@property(nonatomic, copy) NSString *storeId;
+
 @end

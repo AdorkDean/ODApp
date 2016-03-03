@@ -218,7 +218,7 @@
 
     __weak typeof(self) weakSelf = self;
 
-    [self.timeManager GET:kGetStoreTimeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.timeManager GET:ODURL parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         //获取完整路径
         NSString *documentsPath = [path objectAtIndex:0];
@@ -358,7 +358,7 @@
     NSDictionary *parameter = @{@"start_datetime" : self.beginTime, @" end_datetime" : self.endTime, @"store_id" : self.storeId, @"open_id" : self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     __weak typeof(self) weakSelf = self;
-    [self.manager GET:kCreateOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
+    [self.manager GET:ODUrlCreateOrder parameters:signParameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
 
 
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
@@ -407,7 +407,7 @@
     NSDictionary *parameter = @{@"start_datetime" : self.beginTime, @"end_datetime" : self.endTime, @"store_id" : self.storeId, @"order_id" : self.orderID, @"purpose" : self.yuYueView.pursoseTextView.text, @"content" : self.yuYueView.contentTextView.text, @"people_num" : self.yuYueView.peopleNumberTextField.text, @"remark" : @"无", @"devices" : equipment, @"open_id" : self.openId};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     __weak typeof(self) weakSelf = self;
-    [self.managers GET:kSaveOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
+    [self.managers GET:ODUrlConfirmOrder parameters:signParameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
 
 
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
