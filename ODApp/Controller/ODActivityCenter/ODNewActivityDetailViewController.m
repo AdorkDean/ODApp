@@ -444,7 +444,10 @@ static NSString *const detailInfoCell = @"detailInfoCell";
     else if (tableView == self.VIPTableView) {
         ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
         vc.open_id = [self.resultModel.savants[indexPath.row] open_id];
-        [self.navigationController pushViewController:vc animated:YES];
+        
+        if (![vc.open_id isEqualToString:[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].openID]]) {
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
 }
 
