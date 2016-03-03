@@ -247,7 +247,7 @@ NSString *topicContentText = @"";
         NSData *imageData;
         self.pickedImage = [self scaleImage:self.pickedImage];;
         if (UIImagePNGRepresentation(self.pickedImage) == nil) {
-            imageData = UIImageJPEGRepresentation(self.pickedImage, 0.3);
+            imageData = UIImageJPEGRepresentation(self.pickedImage, 0.4);
         } else {
             imageData = UIImagePNGRepresentation(self.pickedImage);
         }
@@ -295,11 +295,11 @@ NSString *topicContentText = @"";
 
 //压缩尺寸
 - (UIImage *)scaleImage:(UIImage *)image {
-    CGSize size = CGSizeMake(image.size.width * 0.3, image.size.height * 0.3);
+    CGSize size = CGSizeMake(image.size.width * 0.4, image.size.height * 0.4);
     UIGraphicsBeginImageContext(size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGAffineTransform transform = CGAffineTransformIdentity;
-    transform = CGAffineTransformScale(transform, 0.3, 0.3);
+    transform = CGAffineTransformScale(transform, 0.4, 0.4);
     CGContextConcatCTM(context, transform);
     [image drawAtPoint:CGPointMake(0.0f, 0.0f)];
     UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
