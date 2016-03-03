@@ -99,16 +99,7 @@ static NSString *const cellId = @"newActivityCell";
             }
         }
         
-        if (weakSelf.pageCount && weakSelf.resultLists.count == 0)
-        {
-            weakSelf.noReusltLabel.hidden = NO;
-        }
-        else
-        {
-            [weakSelf.tableView reloadData];
-        }        
         
-        [weakSelf.tableView.mj_header endRefreshing];
         if ([[model result]count] == 0)
         {
             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -116,7 +107,17 @@ static NSString *const cellId = @"newActivityCell";
         else
         {            
             [weakSelf.tableView.mj_footer endRefreshing];
+        }        
+        if (weakSelf.pageCount && weakSelf.resultLists.count == 0)
+        {
+            weakSelf.noReusltLabel.hidden = NO;
         }
+        else
+        {
+            [weakSelf.tableView reloadData];
+        }
+        
+        [weakSelf.tableView.mj_header endRefreshing];
     }
                    failure:^(NSError *error)
     {

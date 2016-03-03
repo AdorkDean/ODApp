@@ -91,7 +91,6 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
 
-                [weakSelf.collectionView reloadData];
 
             }
             [weakSelf.collectionView.mj_header endRefreshing];
@@ -103,6 +102,8 @@
             {
                 [weakSelf.collectionView.mj_footer endRefreshing];
             }
+            [weakSelf.collectionView reloadData];
+
         }
 
     }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {

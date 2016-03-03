@@ -266,7 +266,6 @@
                 [userInfoDic setObject:model forKey:userKey];
             }
 
-            [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
             
             if (bbs_list.count == 0) {
@@ -276,7 +275,9 @@
             {
                 [weakSelf.collectionView.mj_footer endRefreshing];
             }
-        }
+            [weakSelf.collectionView reloadData];
+
+        }        
         
         NSLog(@"%@",operation);
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {

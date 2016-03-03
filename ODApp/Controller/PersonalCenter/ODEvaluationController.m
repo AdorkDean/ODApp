@@ -229,7 +229,6 @@
             }
             
             [weakSelf.firstCollectionView.mj_header endRefreshing];
-            [weakSelf.firstCollectionView reloadData];
         
             if (dic.count == 0) {
                 [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
@@ -238,6 +237,8 @@
             {
                 [weakSelf.firstCollectionView.mj_footer endRefreshing];
             }
+            [weakSelf.firstCollectionView reloadData];
+
         
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -295,7 +296,6 @@
             }
             
             [weakSelf.secondCollectionView.mj_header endRefreshing];
-            [weakSelf.secondCollectionView reloadData];
             
             if (dic.count == 0) {
                 [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
@@ -304,11 +304,12 @@
             {
                 [weakSelf.secondCollectionView.mj_footer endRefreshing];
             }
+            [weakSelf.secondCollectionView reloadData];
+
         }
-        
-    
-    
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    }
+                    failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+    {
         
         [weakSelf.secondCollectionView.mj_header endRefreshing];
         [weakSelf.secondCollectionView.mj_footer endRefreshing];

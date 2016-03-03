@@ -271,7 +271,6 @@
                 [weakSelf.scrollView addSubview:weakSelf.firstLabel];
             }
 
-            [weakSelf.firstCollectionView reloadData];
             [weakSelf.firstCollectionView.mj_header endRefreshing];
             
             if (bbs_list.count == 0) {
@@ -281,6 +280,8 @@
             {
                 [weakSelf.firstCollectionView.mj_footer endRefreshing];
             }
+            [weakSelf.firstCollectionView reloadData];
+
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -341,7 +342,6 @@
                 [weakSelf.scrollView addSubview:weakSelf.secondLabel];
             }
  
-            [weakSelf.secondCollectionView reloadData];
             [weakSelf.secondCollectionView.mj_header endRefreshing];
             
             if (bbs_list.count == 0) {
@@ -351,6 +351,7 @@
             {
                 [weakSelf.secondCollectionView.mj_footer endRefreshing];
             }
+            [weakSelf.secondCollectionView reloadData];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         

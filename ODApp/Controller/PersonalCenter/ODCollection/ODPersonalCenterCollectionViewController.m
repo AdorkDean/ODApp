@@ -79,7 +79,6 @@
                 ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
-                [weakSelf.collectionView reloadData];
 
             }
             if (weakSelf.dataArray.count == 0) {
@@ -97,7 +96,7 @@
             {                
                 [weakSelf.collectionView.mj_footer endRefreshing];
             }
-           
+            [weakSelf.collectionView reloadData];
         }
 
     }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
