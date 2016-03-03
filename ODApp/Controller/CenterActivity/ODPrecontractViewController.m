@@ -295,16 +295,15 @@
 - (void)requestSubmitWithOrderId:(NSString *)orderId
 {
     __weakSelf
-    NSString *content = self.footerView.contentTextView.text.length ? @"" : self.footerView.contentTextView.text;
     NSDictionary *parameter = @{
                                 @"start_datetime":self.start_dateTime,
                                 @"end_datetime":self.end_datetime,
                                 @"store_id":self.storeId,
                                 @"order_id":orderId,
                                 @"purpose":self.footerView.pupurseTextView.text,
-                                @"content":content,
+                                @"content":self.footerView.contentTextView.text,
                                 @"people_num":self.footerView.numTextView.text,
-                                @"devices":self.devices.desc,
+                                @"devices":self.devices.enumerateString,
                                 };
     [ODHttpTool getWithURL:ODUrlConfirmOrder parameters:parameter modelClass:[ODStoreSubmitOrderModel class] success:^(id model)
     {
