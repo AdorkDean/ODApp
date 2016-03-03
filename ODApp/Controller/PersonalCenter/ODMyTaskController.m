@@ -529,7 +529,6 @@
                 weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40, KScreenHeight / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
                 [weakSelf.scrollView addSubview:self.firstLabel];
             }
-            [weakSelf.firstCollectionView reloadData];
             [weakSelf.firstCollectionView.mj_header endRefreshing];
             if (tasks.count == 0) {
                 [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
@@ -538,6 +537,7 @@
             {
                 [weakSelf.firstCollectionView.mj_footer endRefreshing];
             }
+            [weakSelf.firstCollectionView reloadData];
         }
 
     }              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -584,7 +584,6 @@
             }
 
             [weakSelf.secondCollectionView.mj_header endRefreshing];
-            [weakSelf.secondCollectionView reloadData];
 
             if (tasks.count == 0) {
                 [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
@@ -593,6 +592,7 @@
             {
                 [weakSelf.secondCollectionView.mj_footer endRefreshing];
             }
+            [weakSelf.secondCollectionView reloadData];
         }
 
     }               failure:^(AFHTTPRequestOperation *operation, NSError *error) {

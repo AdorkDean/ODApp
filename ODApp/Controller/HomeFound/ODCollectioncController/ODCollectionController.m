@@ -70,7 +70,6 @@
 
 
                 [weakSelf.collectionView.mj_header endRefreshing];
-                [weakSelf.collectionView reloadData];
 
 
                 if (dic.count == 0) {
@@ -80,9 +79,10 @@
                 {
                     [weakSelf.collectionView.mj_footer endRefreshing];
                 }
-                
+                [weakSelf.collectionView reloadData];
+
            
-                           
+                
                 
             }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
                 

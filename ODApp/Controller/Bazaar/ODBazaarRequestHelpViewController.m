@@ -260,7 +260,6 @@
                 [weakSelf.view addSubview:weakSelf.noResultLabel];
             }
 
-            [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
 
             if (tasks.count == 0) {
@@ -270,6 +269,8 @@
             {
                 [weakSelf.collectionView.mj_footer endRefreshing];
             }
+            [weakSelf.collectionView reloadData];
+
             
         }
     }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
