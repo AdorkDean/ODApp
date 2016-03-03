@@ -18,7 +18,7 @@
 #import "ODPlacePreFooterView.h"
 #import "ODPickerHeaderView.h"
 
-@interface ODPrecontractViewController ()<UIPickerViewDataSource,UIPickerViewDelegate,ODPlacePreDeviceViewDelegate>
+@interface ODPrecontractViewController ()<UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate,UITextViewDelegate,ODPlacePreDeviceViewDelegate>
 {
     BOOL isSelectedStart;
     NSInteger startSelLeftRow;
@@ -200,6 +200,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.title = @"场地预约";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(back) color:nil highColor:nil title:@"返回"];
     self.storeId = @"1";
     isSelectedStart = YES;
 }
@@ -252,7 +253,7 @@
 
 - (void)requestCreateOrder
 {
-    if (self.start_dateTime.length == 0)
+    if (self.headView.startTimeBtn.currentTitle.length == 0)
     {
         [ODProgressHUD showInfoWithStatus:@"请选择开始时间"];
     }
@@ -263,6 +264,10 @@
     else if (self.footerView.pupurseTextView.text.length == 0)
     {
         [ODProgressHUD showInfoWithStatus:@"请输入活动目的"];
+    }
+    else if (self.footerView.contentTextView.text.length == 0)
+    {
+        [ODProgressHUD showInfoWithStatus:@"请输入活动内容"];
     }
     else if (self.footerView.numTextView.text.length == 0)
     {
@@ -371,6 +376,58 @@
     }
 }
 
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidChange:(UITextView *)textView {
+    
+    NSString *purposeText = @"";
+    NSString *contentText = @"";
+    NSString *numText = @"";
+    if (textView == self.footerView.pupurseTextView)
+    {
+        if (textView.text.length > 20)
+        {
+            textView.text = [textView.text substringToIndex:20];
+        }
+        else
+        {
+            purposeText = textView.text;
+        }
+    }
+    else if (textView == self.footerView.contentTextView)
+    {
+        if (textView.text.length > 100)
+        {
+            textView.text = [textView.text substringToIndex:100];
+        }
+        else
+        {
+            contentText = textView.text;
+        }
+    }
+    else if (textView == self.footerView.numTextView)
+    {
+        if (textView.text.length > 3)
+        {
+            textView.text = [textView.text substringFromIndex:3];
+        }
+        else
+        {
+            numText = textView.text;
+        }
+    }
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
 #pragma mark - ODPlacePreDeviceViewDelegate
 
 - (void)placePreDeviceView:(ODPlacePreDeviceView *)view clickedActiveDeviceBtn:(ODActiveDeviceBtn *)ActiveDeviceBtn;
@@ -469,6 +526,13 @@
     [UIView animateWithDuration:.5 animations:^{
         weakSelf.pickerBaseView.od_y = KScreenHeight;
     }];
+}
+
+- (void)back
+{
+    UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"是否退出预约" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+    alter.delegate = self;
+    [alter show];
 }
 
 - (void)endEditing
