@@ -37,7 +37,7 @@
 
 //当前环境是MRC
 
-#define SingleM(name) static id _instance;\
+#define Single_Implementation(name) static id _instance;\
 +(instancetype)allocWithZone:(struct _NSZone *)zone\
 {\
 static dispatch_once_t onceToken;\

@@ -26,5 +26,4 @@
 
 @end
 
-
 ODRequestResultIsDictionaryImplementation(ODStoreDetailModel)
