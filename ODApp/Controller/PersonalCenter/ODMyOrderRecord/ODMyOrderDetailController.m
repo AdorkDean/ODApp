@@ -31,6 +31,7 @@
     if (self.isOther == NO)
     {
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelOrderButtonClick:) color:nil highColor:nil title:@"取消预约"];
+        
      }
 }
 

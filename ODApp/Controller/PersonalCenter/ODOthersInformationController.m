@@ -125,9 +125,9 @@
         ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
         vc.open_id = self.model.open_id;
         vc.centerTitle = @"他的预约纪录";
-        vc.isOther = self.isOther;
+//        vc.isOther = self.isOther;
         vc.isRefresh = YES;
-        self.isOther = YES;
+        vc.isOther = YES;
         [self.navigationController pushViewController:vc animated:YES];
         
     }
