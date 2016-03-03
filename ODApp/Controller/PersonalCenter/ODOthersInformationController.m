@@ -71,7 +71,7 @@
     {
         ODLandFirstCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
         
-        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.avatar]];
+        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
         [cell.qrcodeImageView removeFromSuperview];
         [cell.centerImageView removeFromSuperview];
         cell.nickNameLabel.text = self.model.nick;
@@ -125,9 +125,9 @@
         ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
         vc.open_id = self.model.open_id;
         vc.centerTitle = @"他的预约纪录";
-        vc.isOther = self.isOther;
+//        vc.isOther = self.isOther;
         vc.isRefresh = YES;
-        self.isOther = YES;
+        vc.isOther = YES;
         [self.navigationController pushViewController:vc animated:YES];
         
     }

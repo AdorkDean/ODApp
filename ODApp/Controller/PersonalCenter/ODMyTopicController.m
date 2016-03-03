@@ -79,10 +79,8 @@
     
     
     if ([self.isFirstRefresh isEqualToString:@"delSuccess"]){
-      
         
-          [self.FirstDataArray removeObject:self.FirstDataArray[self.firstIndex]];
-        
+        [self.FirstDataArray removeObject:self.FirstDataArray[self.firstIndex]];
         
         [self.firstCollectionView reloadData];
     }
@@ -271,7 +269,6 @@
                 [weakSelf.scrollView addSubview:weakSelf.firstLabel];
             }
 
-            [weakSelf.firstCollectionView reloadData];
             [weakSelf.firstCollectionView.mj_header endRefreshing];
             
             if (bbs_list.count == 0) {
@@ -281,6 +278,8 @@
             {
                 [weakSelf.firstCollectionView.mj_footer endRefreshing];
             }
+            [weakSelf.firstCollectionView reloadData];
+
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -341,7 +340,6 @@
                 [weakSelf.scrollView addSubview:weakSelf.secondLabel];
             }
  
-            [weakSelf.secondCollectionView reloadData];
             [weakSelf.secondCollectionView.mj_header endRefreshing];
             
             if (bbs_list.count == 0) {
@@ -351,6 +349,7 @@
             {
                 [weakSelf.secondCollectionView.mj_footer endRefreshing];
             }
+            [weakSelf.secondCollectionView reloadData];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -527,7 +526,7 @@
             for (id vc in cell.picView.subviews) {
                 [vc removeFromSuperview];
             }
-            cell.PicConstraintHeight.constant = 0;
+            cell.PicConstraintHeight.constant = 0.5;
         }
         cell.headButton.tag = 222;
 
@@ -616,7 +615,7 @@
     CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-20, 30) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
     CGFloat baseHeight = size.height + 93;
     if (model.imgs.count==0) {
-        return baseHeight;
+        return baseHeight+0.5;
     }else if (model.imgs.count>0&&model.imgs.count<4){
         return baseHeight+width;
     }else if (model.imgs.count>=4&&model.imgs.count<7){
@@ -663,7 +662,10 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    
+   
     [super viewWillDisappear:animated];
+     self.isFirstRefresh = @"";
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 

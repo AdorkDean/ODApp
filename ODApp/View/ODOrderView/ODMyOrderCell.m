@@ -33,7 +33,7 @@
 - (void)dealWithBuyModel:(ODMyOrderModel *)model
 {
     
-    [self.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.swap_user_avatar] forState:UIControlStateNormal];
+    [self.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.swap_user_avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     
     [self.contentImageView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.swap_img] forState:UIControlStateNormal];
     
@@ -121,7 +121,7 @@
 - (void)dealWithSellModel:(ODMySellModel *)model
 {
     
-    [self.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.order_user_avatar] forState:UIControlStateNormal];
+    [self.userButtonView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.order_user_avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     
     [self.contentImageView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.swap_img] forState:UIControlStateNormal];
     

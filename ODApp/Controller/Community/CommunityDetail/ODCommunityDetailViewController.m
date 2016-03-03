@@ -166,7 +166,6 @@
             }
             [weakSelf joiningTogetherParmetersWithUserInfo:YES];
 
-            [weakSelf.tableView reloadData];
             [weakSelf.tableView.mj_header endRefreshing];
             
             if (result.count == 0) {
@@ -176,6 +175,8 @@
             {
                 [weakSelf.tableView.mj_footer endRefreshing];
             }
+            [weakSelf.tableView reloadData];
+
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         [weakSelf.tableView.mj_header endRefreshing];

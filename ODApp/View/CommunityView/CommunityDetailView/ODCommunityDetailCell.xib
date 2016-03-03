@@ -22,19 +22,19 @@
                         </constraints>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyT-vh-8Bn">
-                        <rect key="frame" x="312" y="14" width="50" height="20"/>
+                        <rect key="frame" x="312" y="16" width="50" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="Z6B-cA-Sw5"/>
-                            <constraint firstAttribute="height" constant="20" id="awx-ca-kFN"/>
+                            <constraint firstAttribute="height" constant="15" id="awx-ca-kFN"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="回复他"/>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="话题详情-回复icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="lDK-t8-CcV">
-                        <rect key="frame" x="291" y="15" width="20" height="20"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="话题详情-回复icon" translatesAutoresizingMaskIntoConstraints="NO" id="lDK-t8-CcV">
+                        <rect key="frame" x="295" y="18" width="16" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="9xs-qZ-TVH"/>
-                            <constraint firstAttribute="width" constant="20" id="Ewv-pM-iBN"/>
+                            <constraint firstAttribute="height" constant="15" id="9xs-qZ-TVH"/>
+                            <constraint firstAttribute="width" constant="16" id="Ewv-pM-iBN"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vE6-fx-hq1">
@@ -45,10 +45,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOh-V7-DoL">
-                        <rect key="frame" x="62" y="18" width="150" height="21"/>
+                        <rect key="frame" x="62" y="18" width="223" height="13"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="150" id="YuP-29-goH"/>
-                            <constraint firstAttribute="height" constant="21" id="m9V-51-5Gr"/>
+                            <constraint firstAttribute="height" constant="13" id="m9V-51-5Gr"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -87,7 +86,8 @@
                 <constraints>
                     <constraint firstItem="vzu-Kf-Psl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="1bY-16-O60"/>
                     <constraint firstItem="iOh-V7-DoL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="38y-nK-1Sn"/>
-                    <constraint firstItem="xyT-vh-8Bn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="710-Qc-GIp"/>
+                    <constraint firstItem="lDK-t8-CcV" firstAttribute="leading" secondItem="iOh-V7-DoL" secondAttribute="trailing" constant="10" id="5LD-0Z-LWM"/>
+                    <constraint firstItem="xyT-vh-8Bn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="710-Qc-GIp"/>
                     <constraint firstItem="C6h-Jf-9Xh" firstAttribute="top" secondItem="vzu-Kf-Psl" secondAttribute="bottom" constant="6" id="75R-Ml-qXJ"/>
                     <constraint firstAttribute="trailing" secondItem="C6h-Jf-9Xh" secondAttribute="trailing" constant="13" id="Ggj-i2-Qfe"/>
                     <constraint firstItem="vE6-fx-hq1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="PGU-sL-p5X"/>
@@ -97,7 +97,7 @@
                     <constraint firstAttribute="trailing" secondItem="VHo-8X-atG" secondAttribute="trailing" constant="54" id="VG5-UK-EtM"/>
                     <constraint firstItem="iOh-V7-DoL" firstAttribute="leading" secondItem="8tW-79-L6A" secondAttribute="trailing" constant="14" id="VcI-BM-gQA"/>
                     <constraint firstItem="vzu-Kf-Psl" firstAttribute="top" secondItem="8tW-79-L6A" secondAttribute="bottom" constant="8" id="WR1-eZ-RfW"/>
-                    <constraint firstItem="lDK-t8-CcV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="XJv-mT-2gl"/>
+                    <constraint firstItem="lDK-t8-CcV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="18" id="XJv-mT-2gl"/>
                     <constraint firstItem="vE6-fx-hq1" firstAttribute="top" secondItem="VHo-8X-atG" secondAttribute="bottom" constant="4" id="Yqg-ag-e4O"/>
                     <constraint firstAttribute="trailing" secondItem="vzu-Kf-Psl" secondAttribute="trailing" constant="13" id="aHR-6v-62A"/>
                     <constraint firstItem="xyT-vh-8Bn" firstAttribute="leading" secondItem="lDK-t8-CcV" secondAttribute="trailing" constant="1" id="dxT-GS-75r"/>
@@ -121,6 +121,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="话题详情-回复icon.png" width="16" height="15"/>
+        <image name="话题详情-回复icon" width="16" height="15"/>
     </resources>
 </document>

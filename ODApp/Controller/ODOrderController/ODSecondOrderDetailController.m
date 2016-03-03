@@ -54,7 +54,6 @@
 
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
 
-
 }
 
 - (void)backAction:(UIBarButtonItem *)sender {
@@ -248,7 +247,7 @@
 
         UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
         refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-        refundButton.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        refundButton.backgroundColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
         [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
         refundButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
         [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -664,7 +663,6 @@
 - (void)createView {
 
     self.orderDetailView = [ODSecondOrderDetailView getView];
-
     self.orderDetailView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
 
     ODOrderDetailModel *model = self.dataArray[0];
@@ -681,7 +679,7 @@
     if ([status isEqualToString:@"-1"]) {
 
 
-        self.orderDetailView.spaceToTop.constant = 120;
+//        self.orderDetailView.spaceToTop.constant = 120;
 
 
         CGRect rect = [model.address boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 93, 0)
@@ -694,16 +692,19 @@
         UILabel *reason = [[UILabel alloc] initWithFrame:CGRectMake(18, self.orderDetailView.spaceLabel.frame.origin.y + rect.size.height, 100, 20)];
         reason.backgroundColor = [UIColor whiteColor];
         reason.font = [UIFont systemFontOfSize:14];
+
         reason.text = @"订单取消原因";
         reason.textAlignment = NSTextAlignmentLeft;
         [self.orderDetailView addSubview:reason];
 
         UILabel *secondLine = [[UILabel alloc] initWithFrame:CGRectMake(18, reason.frame.origin.y + 30, kScreenSize.width - 18, 1)];
-        secondLine.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        secondLine.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
         [self.orderDetailView addSubview:secondLine];
 
-
-        UILabel *reasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, secondLine.frame.origin.y + 5, kScreenSize.width - 36, 50)];
+        float reasonHeight;
+        reasonHeight = [ODHelp textHeightFromTextString:model.reason width:KScreenWidth - 36 miniHeight:35 fontSize:14];
+        
+        UILabel *reasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(18, secondLine.frame.origin.y + 5, kScreenSize.width - 36, reasonHeight)];
         reasonLabel.backgroundColor = [UIColor whiteColor];
         reasonLabel.font = [UIFont systemFontOfSize:14];
         reasonLabel.numberOfLines = 0;
@@ -712,11 +713,11 @@
         [self.orderDetailView addSubview:reasonLabel];
 
 
-        UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, reasonLabel.frame.origin.y + 55, kScreenSize.width, 6)];
-        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(reasonLabel.frame), kScreenSize.width, 6)];
+        line.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
         [self.orderDetailView addSubview:line];
 
-
+        self.orderDetailView.spaceToTop.constant = reasonHeight + 62;
     }
 
 

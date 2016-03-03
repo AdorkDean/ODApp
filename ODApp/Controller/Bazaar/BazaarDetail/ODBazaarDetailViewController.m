@@ -166,7 +166,7 @@
     
     //头像
     UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 13.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"sds" font:0];
-    [userHeaderButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:detailModel.avatar] forState:UIControlStateNormal];
+    [userHeaderButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:detailModel.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     userHeaderButton.layer.masksToBounds = YES;
     userHeaderButton.layer.cornerRadius = 24;
     userHeaderButton.backgroundColor = [UIColor grayColor];
@@ -182,7 +182,7 @@
     [self.userView addSubview:userSignLabel];
     
     //接受任务
-    self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-60, 25, 60, 25) target:nil sel:nil tag:0 image:nil title:@"" font:12];
+    self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-68.5, 25, 68.5, 25) target:nil sel:nil tag:0 image:nil title:@"" font:12];
     self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#d0d0d0" alpha:1] forState:UIControlStateNormal];
     self.taskButton.layer.masksToBounds = YES;
@@ -330,8 +330,8 @@
     self.evaluationTextView .delegate = self;
     self.evaluationTextView.layer.masksToBounds = YES;
     self.evaluationTextView.layer.cornerRadius = 5;
-    self.evaluationTextView.layer.borderColor = [UIColor colorWithHexString:@"#000000" alpha:1].CGColor;
-    self.evaluationTextView.layer.borderWidth = 1;
+    self.evaluationTextView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    self.evaluationTextView.layer.borderWidth = 0.5;
     [self.evaluationView addSubview:self.evaluationTextView];
     
     self.placeholderLabel = [[UILabel alloc]initWithFrame:CGRectMake(45, CGRectGetMaxY(label.frame)+15, 200, 10)];
@@ -343,8 +343,8 @@
     UIButton *yesButton = [[UIButton alloc]initWithFrame:CGRectMake(40, CGRectGetMaxY(self.evaluationTextView.frame)+10, kScreenSize.width-80, 40)];
     yesButton.layer.masksToBounds = YES;
     yesButton.layer.cornerRadius = 5;
-    yesButton.layer.borderColor = [UIColor colorWithHexString:@"#000000" alpha:1].CGColor;
-    yesButton.layer.borderWidth = 1;
+    yesButton.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    yesButton.layer.borderWidth = 0.5;
     [yesButton setTitle:@"是的" forState:UIControlStateNormal];
     yesButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [yesButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
@@ -654,7 +654,7 @@
     ODBazaarDetailCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarDetailCellId forIndexPath:indexPath];
     ODBazaarDetailModel *model = self.picArray[indexPath.row];
    
-    [cell.imageV sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
+    [cell.imageV sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     cell.nickLabel.text = model.user_nick;
     cell.signLabel.text = model.user_sign;
     cell.layer.masksToBounds = YES;

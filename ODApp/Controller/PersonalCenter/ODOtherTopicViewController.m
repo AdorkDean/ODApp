@@ -100,7 +100,6 @@
                 [userInfoDic setObject:model forKey:userKey];
             }
             
-            [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
             
             if (weakSelf.dataArray.count == 0 && weakSelf.count == 1) {
@@ -114,8 +113,10 @@
             {
                 [weakSelf.collectionView.mj_footer endRefreshing];
             }
+            [weakSelf.collectionView reloadData];
+
         }
-//        
+//
         
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         
@@ -200,7 +201,7 @@
         for (id vc in cell.picView.subviews) {
             [vc removeFromSuperview];
         }
-        cell.PicConstraintHeight.constant = 0;
+        cell.PicConstraintHeight.constant = 0.5;
     }
     return cell;
 }
@@ -248,7 +249,7 @@
     CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-20, 30) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
     CGFloat baseHeight = size.height + 93;
     if (model.imgs.count==0) {
-        return baseHeight;
+        return baseHeight+0.5;
     }else if (model.imgs.count>0&&model.imgs.count<4){
         return baseHeight+width;
     }else if (model.imgs.count>=4&&model.imgs.count<7){

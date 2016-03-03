@@ -97,10 +97,22 @@
 #pragma mark - UITextViewDelegate
 
 NSString *replyTitleText = @"";
+int maxLength = 250;
 
 - (void)textViewDidChange:(UITextView *)textView {
-    if (textView.text.length > 250) {
-        textView.text = [textView.text substringToIndex:250];
+    if (maxLength < 250) {
+        maxLength = 250;
+    }
+    
+    if (textView.text.length > maxLength) {
+        NSString *tmp = [textView.text substringToIndex:maxLength];
+        NSData *utf8Data = [tmp dataUsingEncoding:NSUTF8StringEncoding];
+        if (utf8Data != nil) {
+            textView.text = tmp;
+            maxLength = tmp.length;
+        } else {
+            maxLength = textView.text.length;
+        }
     } else {
         replyTitleText = textView.text;
     }

@@ -91,7 +91,6 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
 
-                [weakSelf.collectionView reloadData];
 
             }
             [weakSelf.collectionView.mj_header endRefreshing];
@@ -103,6 +102,8 @@
             {
                 [weakSelf.collectionView.mj_footer endRefreshing];
             }
+            [weakSelf.collectionView reloadData];
+
         }
 
     }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
@@ -140,7 +141,7 @@
     ODBazaarExchangeSkillCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
+    [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     [cell.headButton addTarget:self action:@selector(otherInfoClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.nickLabel.text = model.user[@"nick"];
     [cell showDatasWithModel:model];

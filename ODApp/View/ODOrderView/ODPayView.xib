@@ -130,7 +130,7 @@
                     <state key="normal" title="Button" image="icon_Default address_default"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyR-fL-Sni">
-                    <rect key="frame" x="0.0" y="198" width="330" height="323"/>
+                    <rect key="frame" x="0.0" y="153" width="330" height="368"/>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -152,7 +152,8 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="Qyh-uf-Pbg"/>
                     </constraints>
-                    <state key="normal" title="Button" image="button_Pay immediately">
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <state key="normal" title="立即支付">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
@@ -171,6 +172,7 @@
                 <constraint firstItem="D0l-jK-y8L" firstAttribute="top" secondItem="CpS-oT-H9A" secondAttribute="bottom" constant="15" id="03g-oK-VPD"/>
                 <constraint firstItem="FFS-Hq-LQv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="1pg-Wb-Ne0"/>
                 <constraint firstAttribute="trailing" secondItem="c6z-mN-FBA" secondAttribute="trailing" constant="10" id="1qV-P6-MjU"/>
+                <constraint firstItem="yyR-fL-Sni" firstAttribute="top" secondItem="D0l-jK-y8L" secondAttribute="bottom" id="2hd-tx-iHC"/>
                 <constraint firstAttribute="trailing" secondItem="yyR-fL-Sni" secondAttribute="trailing" id="4f9-sK-ngp"/>
                 <constraint firstItem="c6z-mN-FBA" firstAttribute="top" secondItem="Vtq-2E-mVw" secondAttribute="bottom" constant="15" id="5LU-mv-zsq"/>
                 <constraint firstItem="hWo-es-0ep" firstAttribute="top" secondItem="HIq-Zu-lzg" secondAttribute="bottom" constant="15" id="5VH-07-kll"/>
@@ -197,7 +199,6 @@
                 <constraint firstItem="HIq-Zu-lzg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="mF9-rl-Doe"/>
                 <constraint firstItem="JbH-ki-Tts" firstAttribute="top" secondItem="hWo-es-0ep" secondAttribute="bottom" constant="15" id="mIc-5x-5Kv"/>
                 <constraint firstItem="aws-hI-53m" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="18" id="mLB-uV-pym"/>
-                <constraint firstItem="yyR-fL-Sni" firstAttribute="top" secondItem="X3s-e2-kki" secondAttribute="bottom" constant="15" id="n3l-gB-6ie"/>
                 <constraint firstItem="c6z-mN-FBA" firstAttribute="leading" secondItem="HIq-Zu-lzg" secondAttribute="trailing" id="nNT-Qa-Gal"/>
                 <constraint firstItem="HIq-Zu-lzg" firstAttribute="top" secondItem="Vtq-2E-mVw" secondAttribute="bottom" constant="15" id="pzN-hM-4GU"/>
                 <constraint firstItem="yyR-fL-Sni" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qhM-Bt-tkF"/>
@@ -233,7 +234,6 @@
         </view>
     </objects>
     <resources>
-        <image name="button_Pay immediately" width="187" height="49"/>
         <image name="icon_Alipay Payment-1" width="22" height="18"/>
         <image name="icon_Default address_Selected" width="33" height="30"/>
         <image name="icon_Default address_default" width="30" height="30"/>

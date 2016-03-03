@@ -29,13 +29,13 @@
    
     self.userInteractionEnabled = YES;
     self.firstButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.firstButton.frame = CGRectMake((self.frame.size.width - 200) / 6, 100, 40, 40);
+    self.firstButton.frame = CGRectMake((self.frame.size.width - 200) / 6, 100, 40, 30);
     [self.firstButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     [self addSubview:self.firstButton];
     
     
     self.secondButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.secondButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 2 + 40, 100, 40, 40);
+    self.secondButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 2 + 40, 100, 40, 30);
     [self.secondButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     [self addSubview:self.secondButton];
     
@@ -43,21 +43,21 @@
     
     
     self.thirdButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.thirdButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 3 + 80, 100, 40, 40);
+    self.thirdButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 3 + 80, 100, 40, 30);
     [self.thirdButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     [self addSubview:self.thirdButton];
     
     
     
     self.fourthButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.fourthButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 4 + 120, 100, 40, 40);
+    self.fourthButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 4 + 120, 100, 40, 30);
     [self.fourthButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     [self addSubview:self.fourthButton];
     
     
     
     self.fiveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.fiveButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 5 + 160, 100, 40, 40);
+    self.fiveButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 5 + 160, 100, 40, 30);
     [self.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
     [self addSubview:self.fiveButton];
 
@@ -75,14 +75,14 @@
     self.contentTextView.text = @"请输入评价内容";
     self.contentTextView.textColor = [UIColor lightGrayColor];
     self.contentTextView.layer.masksToBounds = YES;
-    self.contentTextView.layer.cornerRadius = 10;
-    self.contentTextView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    self.contentTextView.layer.borderWidth = 1;
+    self.contentTextView.layer.cornerRadius = 5;
+    self.contentTextView.layer.borderColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1.0f].CGColor;
+    self.contentTextView.layer.borderWidth = 0.5;
     [self addSubview:self.contentTextView];
     
     
     self.determineButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.determineButton.frame = CGRectMake(30, 370, kScreenSize.width - 60, 30);
+    self.determineButton.frame = CGRectMake(30, 370, kScreenSize.width - 60, 35);
     self.determineButton.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
     [self.determineButton setTitle:@"确认完成" forState:UIControlStateNormal];
     [self.determineButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -90,7 +90,7 @@
     self.determineButton.layer.masksToBounds = YES;
     self.determineButton.layer.cornerRadius = 5;
     self.determineButton.layer.borderColor = [UIColor clearColor].CGColor;
-    self.determineButton.layer.borderWidth = 1;
+    self.determineButton.layer.borderWidth = 0.5;
 
 
     [self addSubview:self.determineButton];
@@ -102,8 +102,8 @@
     
     
     
-    
-    [self addSubview:self.cancelButton];
+//    
+//    [self addSubview:self.cancelButton];
 
     
     

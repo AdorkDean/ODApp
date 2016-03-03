@@ -79,7 +79,6 @@
                 ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc] init];
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
-                [weakSelf.collectionView reloadData];
 
             }
             if (weakSelf.dataArray.count == 0) {
@@ -97,7 +96,7 @@
             {                
                 [weakSelf.collectionView.mj_footer endRefreshing];
             }
-           
+            [weakSelf.collectionView reloadData];
         }
 
     }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
@@ -134,7 +133,7 @@
     ODBazaarExchangeSkillCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
+    [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     cell.nickLabel.text = model.user[@"nick"];
     [cell showDatasWithModel:model];
     CGFloat width = kScreenSize.width > 320 ? 90 : 70;
@@ -178,7 +177,7 @@
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc] init];
-    picController.photos = model.imgs_small;
+    picController.photos = model.imgs_big;
     picController.selectedIndex = button.tag - 10 * indexPath.row;
     picController.skill = @"skill";
     [self presentViewController:picController animated:YES completion:nil];

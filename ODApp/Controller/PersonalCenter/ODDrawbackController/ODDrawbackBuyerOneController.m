@@ -13,7 +13,11 @@
 
 @property (nonatomic ,strong) ODCancelOrderView *cancelOrderView;
 
+@property (nonatomic, assign) BOOL selectedReason;
 
+@property (nonatomic, strong) UIButton *selectReasonButton;
+
+@property (nonatomic, strong) NSArray *drawReasonArray;
 
 @end
 
@@ -65,7 +69,7 @@
     float drawbackReasonHeight;
     if (self.isSelectReason)
     {
-        drawbackReasonHeight = (drawBackHeight + 1) * 5 - 1;
+        drawbackReasonHeight = (drawBackHeight + 0.5) * 5 - 0.5;
     }
     else
     {
@@ -88,29 +92,8 @@
         // 退款原因Label 距离 屏幕左边的 距离
         float reasonLabelLeftMargin = ODLeftMargin + 25;
         
-//        NSArray *drawReasonArray;
-//        drawReasonArray = @[@"卖家自身原因无法服务",@"对服务质量不满意",@"未按时交付服务",@"双方已协商好退款",@"其它"];
-//        
-//        for (int i = 0; i < drawReasonArray.count; i++) {
-//            self.drawbackReasonOneLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, drawBackHeight * i, KScreenWidth, drawBackHeight)];
-//            self.drawbackReasonOneLabel.text = drawReasonArray[i];
-//            self.drawbackReasonOneLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-//            self.drawbackReasonOneLabel.font = [UIFont systemFontOfSize:13.5];
-//            self.drawbackReasonOneLabel.textAlignment = NSTextAlignmentLeft;
-//            self.drawbackReasonOneLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-//            [self.drawbackReasonContentView addSubview:self.drawbackReasonOneLabel];
-//            
-//            self.drawbackReasonOneButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, drawBackHeight * i + 12.5, 20, 20)];
-//            [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-//            [self.drawbackReasonOneButton addTarget:self action:@selector(drawbackReasonButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-//            [self.drawbackReasonContentView addSubview:self.drawbackReasonOneButton];
-//        }
-        
-        
-        
-        
-        
-        
+//        self.drawReasonArray = @[@"卖家自身原因无法服务",@"对服务质量不满意",@"未按时交付服务",@"双方已协商好退款",@"其它"];
+
         self.drawbackReasonOneLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, 0, KScreenWidth, drawBackHeight)];
         self.drawbackReasonOneLabel.text = @"卖家自身原因无法服务";
         self.drawbackReasonOneLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
@@ -124,7 +107,13 @@
         [self.drawbackReasonOneButton addTarget:self action:@selector(drawbackReasonOneButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.drawbackReasonContentView addSubview:self.drawbackReasonOneButton];
         
-        self.drawbackReasonTwoLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonOneLabel.frame) + 1, KScreenWidth, drawBackHeight)];
+        UIButton *drawbackReasonFirstButton;
+        drawbackReasonFirstButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin + 20, 0, KScreenHeight - ODLeftMargin - 20, drawBackHeight)];
+        [drawbackReasonFirstButton addTarget:self action:@selector(drawbackReasonOneButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.drawbackReasonContentView addSubview: drawbackReasonFirstButton];
+
+        
+        self.drawbackReasonTwoLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonOneLabel.frame) + 0.5, KScreenWidth, drawBackHeight)];
         self.drawbackReasonTwoLabel.text = @"对服务质量不满意";
         self.drawbackReasonTwoLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackReasonTwoLabel.font = [UIFont systemFontOfSize:13.5];
@@ -132,13 +121,18 @@
         self.drawbackReasonTwoLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         [self.drawbackReasonContentView addSubview:self.drawbackReasonTwoLabel];
         
-        self.drawbackReasonTwoButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonOneLabel.frame) + 1 + 12.5, 20, 20)];
+        self.drawbackReasonTwoButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonOneLabel.frame) + 0.5 + 12.5, 20, 20)];
         [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
         [self.drawbackReasonTwoButton addTarget:self action:@selector(drawbackReasonTwoButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.drawbackReasonContentView addSubview:self.drawbackReasonTwoButton];
         
+        UIButton *drawbackReasonSecondButton;
+        drawbackReasonSecondButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin + 20, CGRectGetMaxY(self.drawbackReasonOneLabel.frame) + 0.5, KScreenHeight - ODLeftMargin - 20, drawBackHeight)];
+        [drawbackReasonSecondButton addTarget:self action:@selector(drawbackReasonTwoButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.drawbackReasonContentView addSubview: drawbackReasonSecondButton];
         
-        self.drawbackReasonThreeLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonTwoLabel.frame) + 1, KScreenWidth, drawBackHeight)];
+        
+        self.drawbackReasonThreeLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonTwoLabel.frame) + 0.5, KScreenWidth, drawBackHeight)];
         self.drawbackReasonThreeLabel.text = @"未按时交付服务";
         self.drawbackReasonThreeLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackReasonThreeLabel.font = [UIFont systemFontOfSize:13.5];
@@ -146,10 +140,16 @@
         self.drawbackReasonThreeLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         [self.drawbackReasonContentView addSubview:self.drawbackReasonThreeLabel];
         
-        self.drawbackReasonThreeButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonTwoLabel.frame) + 1 + 12.5, 20, 20)];
+        self.drawbackReasonThreeButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonTwoLabel.frame) + 0.5 + 12.5, 20, 20)];
         [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
         [self.drawbackReasonThreeButton addTarget:self action:@selector(drawbackReasonThreeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.drawbackReasonContentView addSubview:self.drawbackReasonThreeButton];
+        
+        UIButton *drawbackReasonThirdButton;
+        drawbackReasonThirdButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin + 20, CGRectGetMaxY(self.drawbackReasonTwoLabel.frame) + 0.5, KScreenHeight - ODLeftMargin - 20, drawBackHeight)];
+        [drawbackReasonThirdButton addTarget:self action:@selector(drawbackReasonThreeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.drawbackReasonContentView addSubview: drawbackReasonThirdButton];
+        
         
         
         self.drawbackReasonFourLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonThreeLabel.frame) + 1, KScreenWidth, drawBackHeight)];
@@ -165,6 +165,12 @@
         [self.drawbackReasonFourButton addTarget:self action:@selector(drawbackReasonFourButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.drawbackReasonContentView addSubview:self.drawbackReasonFourButton];
         
+        UIButton *drawbackReasonFourthButton;
+        drawbackReasonFourthButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin + 20, CGRectGetMaxY(self.drawbackReasonThreeLabel.frame) + 0.5, KScreenHeight - ODLeftMargin - 20, drawBackHeight)];
+        [drawbackReasonFourthButton addTarget:self action:@selector(drawbackReasonFourButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.drawbackReasonContentView addSubview: drawbackReasonFourthButton];
+        
+        
         
         self.drawbackReasonOtherLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, CGRectGetMaxY(self.drawbackReasonFourLabel.frame) + 1, KScreenWidth, drawBackHeight)];
         self.drawbackReasonOtherLabel.text = @"其它";
@@ -179,10 +185,16 @@
         [self.drawbackReasonOtherButton addTarget:self action:@selector(drawbackReasonOtherButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.drawbackReasonContentView addSubview:self.drawbackReasonOtherButton];
         
+        UIButton *drawbackReasonFifthButton;
+        drawbackReasonFifthButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin + 20, CGRectGetMaxY(self.drawbackReasonFourLabel.frame) + 0.5, KScreenHeight - ODLeftMargin - 20, drawBackHeight)];
+        [drawbackReasonFifthButton addTarget:self action:@selector(drawbackReasonOtherButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.drawbackReasonContentView addSubview: drawbackReasonFifthButton];
+        
+        
         for (int i = 1; i < 5; i++)
         {
-            self.drawbackReasonLineView = [[UIView alloc] initWithFrame:CGRectMake(ODLeftMargin, drawBackHeight * i, KScreenWidth, 1)];
-            self.drawbackReasonLineView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+            self.drawbackReasonLineView = [[UIView alloc] initWithFrame:CGRectMake(ODLeftMargin, drawBackHeight * i, KScreenWidth, 0.5)];
+            self.drawbackReasonLineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
             [self.drawbackReasonContentView addSubview:self.drawbackReasonLineView];
         }
     }
@@ -494,39 +506,6 @@
 
 #pragma mark - 退款原因点击事件
 
-- (void)drawbackReasonButtonClick:(UIButton *)button
-{
-    {
-        [self.drawbackReasonOneButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
-        self.isSelectedReasonOne = !self.isSelectedReasonOne;
-        
-        if (self.isSelectedReasonTwo)
-        {
-            [self.drawbackReasonTwoButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-            self.isSelectedReasonTwo = !self.isSelectedReasonTwo;
-        }
-        if (self.isSelectedReasonThree)
-        {
-            [self.drawbackReasonThreeButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-            self.isSelectedReasonThree = !self.isSelectedReasonThree;
-        }
-        if (self.isSelectedReasonFour)
-        {
-            [self.drawbackReasonFourButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-            self.isSelectedReasonFour = !self.isSelectedReasonFour;
-        }
-        if (self.isSelectedReasonOther)
-        {
-            [self.drawbackReasonOtherButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-            self.isSelectedReasonOther = !self.isSelectedReasonOther;
-        }
-    }
-    
-}
-
-
-
-
 -(void)drawbackReasonOneButtonClick:(UIButton *)button
 {
     if (!self.isSelectedReasonOne)
@@ -733,7 +712,15 @@
     if (self.isSelectedReasonOther)
     {
         self.drawbackReason = self.drawbackStateTextView.text;
-        [self releaseDrawbackRequest];
+        
+        if (self.drawbackStateTextView.text.length == 0)
+        {
+            [ODProgressHUD showInfoWithStatus:@"请输入退款原因"];
+        }
+        else
+        {
+            [self releaseDrawbackRequest];
+        }
     }
 }
 

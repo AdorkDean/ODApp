@@ -200,6 +200,7 @@ NSString *topicContentText = @"";
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"相册", nil];
         [actionSheet showInView:self.view];
     } else {
+         [ODProgressHUD showInfoWithStatus:@"已达图片最大上传数"];
     }
 }
 
@@ -326,6 +327,7 @@ NSString *topicContentText = @"";
     }
     [self.addPicButton setFrame:CGRectMake(4 + (width + 4) * (self.imageArray.count % 4), CGRectGetMaxY(self.topicContentTextView.frame) + 95 + (4 + width) * (self.imageArray.count / 4), width, width)];
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 262 + (self.imageArray.count / 4 + 1) * (width + 4));
+    [ODProgressHUD dismiss];
 }
 
 

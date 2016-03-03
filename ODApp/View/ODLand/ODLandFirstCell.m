@@ -31,7 +31,7 @@
 
 
     [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
-    [self.qrcodeImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.qrcode]];
+    self.qrcodeImageView.image = [UIImage imageNamed:@"qrcode_img"];
 
 
     if ([model.nick isEqualToString:@""]) {

@@ -45,7 +45,7 @@
 - (void)loadMoreData {
     if (self.searchBar.text.length > 0) {
         self.count++;
-        NSDictionary *parameter = @{@"search" : self.searchBar.text, @"task_status" : @"9", @"page" : [NSString stringWithFormat:@"%ld", self.count]};
+        NSDictionary *parameter = @{@"search" : self.searchBar.text, @"task_status":@"9",@"page" : [NSString stringWithFormat:@"%ld", self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl parameter:signParameter];
     } else {
@@ -113,7 +113,7 @@
 
 - (void)joiningTogetherParmeters {
     self.count = 1;
-    NSDictionary *parameter = @{@"search" : self.searchBar.text, @"task_status" : @"9", @"page" : [NSString stringWithFormat:@"%ld", self.count]};
+    NSDictionary *parameter = @{@"search" : self.searchBar.text, @"task_status" : @"9", @"page" : [NSString stringWithFormat:@"%ld", self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
 
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl parameter:signParameter];
@@ -125,7 +125,6 @@
 
     [self.searchBar resignFirstResponder];
     __weak typeof(self) weakSelf = self;
-    [ODProgressHUD showProgressIsLoading];
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
 
         if (weakSelf.count == 1) {
@@ -141,7 +140,6 @@
                 [model setValuesForKeysWithDictionary:itemDict];
                 [weakSelf.dataArray addObject:model];
             }
-            [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
 
             if (weakSelf.dataArray.count == 0) {
@@ -157,13 +155,13 @@
             {
                 [weakSelf.collectionView.mj_footer endRefreshing];
             }
-            [ODProgressHUD dismiss];
+            [weakSelf.collectionView reloadData];
+
         }
     }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
 
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
-//        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
         [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
 

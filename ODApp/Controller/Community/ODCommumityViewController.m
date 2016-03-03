@@ -266,7 +266,6 @@
                 [userInfoDic setObject:model forKey:userKey];
             }
 
-            [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
             
             if (bbs_list.count == 0) {
@@ -276,7 +275,9 @@
             {
                 [weakSelf.collectionView.mj_footer endRefreshing];
             }
-        }
+            [weakSelf.collectionView reloadData];
+
+        }        
         
         NSLog(@"%@",operation);
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
@@ -323,7 +324,7 @@
     NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [cell.headButton addTarget:self action:@selector(otherInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[userInfoDic[userId]avatar_url]] forState:UIControlStateNormal];
+    [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[userInfoDic[userId]avatar_url]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     cell.nickLabel.text = [userInfoDic[userId]nick];
     cell.signLabel.text = [userInfoDic[userId]sign];
     [cell showDateWithModel:model];
@@ -363,7 +364,7 @@
         for (id vc in cell.picView.subviews) {
             [vc removeFromSuperview];
         }
-        cell.PicConstraintHeight.constant = 0;
+        cell.PicConstraintHeight.constant = 0.5;
     }
     
     return cell;
@@ -416,26 +417,24 @@
 }
 
 //动态计算cell的高度
--(CGFloat)returnHight:(ODCommunityModel *)model
-{
-    CGFloat width=kScreenSize.width>320?90:70;
+- (CGFloat)returnHight:(ODCommunityModel *)model {
+    CGFloat width = kScreenSize.width > 320 ? 90 : 70;
     NSString *content = model.content;
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:10.5]};
-    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-20, 30) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
+    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-20, 35) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
     CGFloat baseHeight = size.height + 93;
-    if (model.imgs.count==0) {
-        return baseHeight;
-    }else if (model.imgs.count>0&&model.imgs.count<4){
-        return baseHeight+width;
-    }else if (model.imgs.count>=4&&model.imgs.count<7){
-        return baseHeight+2*width+5;
-    }else if (model.imgs.count>=7&&model.imgs.count<9){
-        return baseHeight+3*width+10;
-    }else{
-        return baseHeight+3*width+10;
+    if (model.imgs.count == 0) {
+        return baseHeight+0.5;
+    } else if (model.imgs.count > 0 && model.imgs.count < 4) {
+        return baseHeight + width;
+    } else if (model.imgs.count >= 4 && model.imgs.count < 7) {
+        return baseHeight + 2 * width + 5;
+    } else if (model.imgs.count >= 7 && model.imgs.count < 9) {
+        return baseHeight + 3 * width + 10;
+    } else {
+        return baseHeight + 3 * width + 10;
     }
 }
-
 
 #pragma mark - 试图将要出现
 -(void)viewWillAppear:(BOOL)animated

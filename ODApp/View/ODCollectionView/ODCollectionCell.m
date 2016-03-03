@@ -29,7 +29,7 @@
 -(void)setWithLikeModel:(ODLikeModel *)model
 {
     
-    [self.userImageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal];
+    [self.userImageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     self.schoolLabel.text = model.school_name;
     self.nameLabel.text = model.nick;
     self.userImageButton.userInteractionEnabled = NO;

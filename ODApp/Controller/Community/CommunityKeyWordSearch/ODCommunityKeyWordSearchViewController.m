@@ -47,7 +47,7 @@
 - (void)loadMoreData {
     if (self.searchBar.text.length > 0) {
         self.count++;
-        NSDictionary *parameter = @{@"kw" : self.searchBar.text, @"suggest" : @"0", @"page" : [NSString stringWithFormat:@"%ld", self.count], [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID] : @"0", @"call_array" : @"1"};
+        NSDictionary *parameter = @{@"kw":self.searchBar.text, @"suggest":@"0",@"page":[NSString stringWithFormat:@"%ld", self.count], @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"call_array":@"1"};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self downLoadDataWithUrl:kCommunityBbsSearchUrl paramater:signParameter];
     } else {
@@ -139,6 +139,9 @@
     __weak typeof(self) weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
 
+        
+        NSLog(@"%@",operation);
+        
         if (weakSelf.count == 1) {
             [weakSelf.dataArray removeAllObjects];
             [weakSelf.noReusltLabel removeFromSuperview];
@@ -165,7 +168,6 @@
                 [userInfoDic setObject:model forKey:userKey];
             }
 
-            [weakSelf.collectionView reloadData];
             [weakSelf.collectionView.mj_header endRefreshing];
             if (weakSelf.dataArray.count == 0) {
                 weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 180) / 2, kScreenSize.height / 2, 180, 30) text:@"没有符合条件的话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
@@ -179,6 +181,8 @@
             {
                 [weakSelf.collectionView.mj_footer endRefreshing];
             }
+            [weakSelf.collectionView reloadData];
+
         }
     }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
 
@@ -264,7 +268,7 @@
         for (id vc in cell.picView.subviews) {
             [vc removeFromSuperview];
         }
-        cell.PicConstraintHeight.constant = 0;
+        cell.PicConstraintHeight.constant = 0.5;
     }
     return cell;
 
@@ -317,7 +321,7 @@
     CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-20, 30) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
     CGFloat baseHeight = size.height + 93;
     if (model.imgs.count == 0) {
-        return baseHeight;
+        return baseHeight+0.5;
     } else if (model.imgs.count > 0 && model.imgs.count < 4) {
         return baseHeight + width;
     } else if (model.imgs.count >= 4 && model.imgs.count < 7) {
