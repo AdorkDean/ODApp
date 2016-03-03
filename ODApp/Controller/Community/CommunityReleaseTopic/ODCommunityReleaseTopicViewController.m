@@ -200,6 +200,7 @@ NSString *topicContentText = @"";
         UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"相册", nil];
         [actionSheet showInView:self.view];
     } else {
+         [ODProgressHUD showInfoWithStatus:@"已达图片最大上传数"];
     }
 }
 

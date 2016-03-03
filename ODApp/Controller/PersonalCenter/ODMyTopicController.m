@@ -527,7 +527,7 @@
             for (id vc in cell.picView.subviews) {
                 [vc removeFromSuperview];
             }
-            cell.PicConstraintHeight.constant = 0;
+            cell.PicConstraintHeight.constant = 0.5;
         }
         cell.headButton.tag = 222;
 
@@ -616,7 +616,7 @@
     CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-20, 30) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
     CGFloat baseHeight = size.height + 93;
     if (model.imgs.count==0) {
-        return baseHeight;
+        return baseHeight+0.5;
     }else if (model.imgs.count>0&&model.imgs.count<4){
         return baseHeight+width;
     }else if (model.imgs.count>=4&&model.imgs.count<7){

@@ -182,7 +182,7 @@
     [self.userView addSubview:userSignLabel];
     
     //接受任务
-    self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-60, 25, 60, 25) target:nil sel:nil tag:0 image:nil title:@"" font:12];
+    self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-68.5, 25, 68.5, 25) target:nil sel:nil tag:0 image:nil title:@"" font:12];
     self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#d0d0d0" alpha:1] forState:UIControlStateNormal];
     self.taskButton.layer.masksToBounds = YES;
