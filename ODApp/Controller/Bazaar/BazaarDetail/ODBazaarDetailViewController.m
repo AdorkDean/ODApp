@@ -330,8 +330,8 @@
     self.evaluationTextView .delegate = self;
     self.evaluationTextView.layer.masksToBounds = YES;
     self.evaluationTextView.layer.cornerRadius = 5;
-    self.evaluationTextView.layer.borderColor = [UIColor colorWithHexString:@"#000000" alpha:1].CGColor;
-    self.evaluationTextView.layer.borderWidth = 1;
+    self.evaluationTextView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    self.evaluationTextView.layer.borderWidth = 0.5;
     [self.evaluationView addSubview:self.evaluationTextView];
     
     self.placeholderLabel = [[UILabel alloc]initWithFrame:CGRectMake(45, CGRectGetMaxY(label.frame)+15, 200, 10)];
@@ -343,8 +343,8 @@
     UIButton *yesButton = [[UIButton alloc]initWithFrame:CGRectMake(40, CGRectGetMaxY(self.evaluationTextView.frame)+10, kScreenSize.width-80, 40)];
     yesButton.layer.masksToBounds = YES;
     yesButton.layer.cornerRadius = 5;
-    yesButton.layer.borderColor = [UIColor colorWithHexString:@"#000000" alpha:1].CGColor;
-    yesButton.layer.borderWidth = 1;
+    yesButton.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    yesButton.layer.borderWidth = 0.5;
     [yesButton setTitle:@"是的" forState:UIControlStateNormal];
     yesButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [yesButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];

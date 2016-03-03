@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -21,8 +22,8 @@
                             <constraint firstAttribute="height" constant="68" id="mu9-Rz-Ivy"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlO-lm-rV2" userLabel="第一个">
-                        <rect key="frame" x="104" y="15" width="42" height="14"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlO-lm-rV2" userLabel="第一个">
+                        <rect key="frame" x="104" y="15" width="483" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="zmR-Fx-SsN"/>
                         </constraints>
@@ -62,6 +63,7 @@
                     <constraint firstItem="GlX-Zu-RAe" firstAttribute="leading" secondItem="RlO-lm-rV2" secondAttribute="leading" id="LXg-zN-b9w"/>
                     <constraint firstItem="RlO-lm-rV2" firstAttribute="top" secondItem="Um6-Cn-mGZ" secondAttribute="top" id="Lt7-Wg-9tv"/>
                     <constraint firstItem="zDu-Tq-uIg" firstAttribute="top" secondItem="GlX-Zu-RAe" secondAttribute="bottom" constant="8" id="Oyc-Ev-Mke"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="RlO-lm-rV2" secondAttribute="trailing" constant="5" id="gHL-Oz-Om5"/>
                     <constraint firstItem="Um6-Cn-mGZ" firstAttribute="centerY" secondItem="Lyk-qT-HR7" secondAttribute="centerY" id="m1j-Vw-pR5"/>
                     <constraint firstItem="rdp-o5-OWg" firstAttribute="height" secondItem="zDu-Tq-uIg" secondAttribute="height" id="nzH-c7-BQ3"/>
                     <constraint firstItem="zDu-Tq-uIg" firstAttribute="leading" secondItem="GlX-Zu-RAe" secondAttribute="leading" id="sbw-nO-91s"/>
