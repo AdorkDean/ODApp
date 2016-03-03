@@ -79,10 +79,8 @@
     
     
     if ([self.isFirstRefresh isEqualToString:@"delSuccess"]){
-      
         
-          [self.FirstDataArray removeObject:self.FirstDataArray[self.firstIndex]];
-        
+        [self.FirstDataArray removeObject:self.FirstDataArray[self.firstIndex]];
         
         [self.firstCollectionView reloadData];
     }
@@ -664,7 +662,10 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    
+   
     [super viewWillDisappear:animated];
+     self.isFirstRefresh = @"";
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 

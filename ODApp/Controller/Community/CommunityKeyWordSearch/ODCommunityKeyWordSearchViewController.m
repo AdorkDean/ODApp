@@ -47,7 +47,7 @@
 - (void)loadMoreData {
     if (self.searchBar.text.length > 0) {
         self.count++;
-        NSDictionary *parameter = @{@"kw" : self.searchBar.text, @"suggest" : @"0", @"page" : [NSString stringWithFormat:@"%ld", self.count], [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID] : @"0", @"call_array" : @"1"};
+        NSDictionary *parameter = @{@"kw":self.searchBar.text, @"suggest":@"0",@"page":[NSString stringWithFormat:@"%ld", self.count], @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"call_array":@"1"};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self downLoadDataWithUrl:kCommunityBbsSearchUrl paramater:signParameter];
     } else {
@@ -139,6 +139,9 @@
     __weak typeof(self) weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
 
+        
+        NSLog(@"%@",operation);
+        
         if (weakSelf.count == 1) {
             [weakSelf.dataArray removeAllObjects];
             [weakSelf.noReusltLabel removeFromSuperview];

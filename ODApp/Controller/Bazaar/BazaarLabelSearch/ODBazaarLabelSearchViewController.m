@@ -45,7 +45,7 @@
 - (void)loadMoreData {
     if (self.searchBar.text.length > 0) {
         self.count++;
-        NSDictionary *parameter = @{@"search" : self.searchBar.text, @"task_status" : @"9", @"page" : [NSString stringWithFormat:@"%ld", self.count]};
+        NSDictionary *parameter = @{@"search" : self.searchBar.text, @"task_status":@"9",@"page" : [NSString stringWithFormat:@"%ld", self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl parameter:signParameter];
     } else {
@@ -113,7 +113,7 @@
 
 - (void)joiningTogetherParmeters {
     self.count = 1;
-    NSDictionary *parameter = @{@"search" : self.searchBar.text, @"task_status" : @"9", @"page" : [NSString stringWithFormat:@"%ld", self.count]};
+    NSDictionary *parameter = @{@"search" : self.searchBar.text, @"task_status" : @"9", @"page" : [NSString stringWithFormat:@"%ld", self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
 
     [self downLoadDataWithUrl:kBazaarUnlimitTaskUrl parameter:signParameter];

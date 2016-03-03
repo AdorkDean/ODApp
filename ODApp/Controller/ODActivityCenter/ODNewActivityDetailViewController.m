@@ -250,12 +250,12 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 - (UIWebView *)webView {
     if (!_webView) {
         hasload = NO;
-        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(ODLeftMargin, 12.5, kScreenSize.width - ODLeftMargin * 2, 10)];
+        UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 12.5, kScreenSize.width, 10)];
         webView.delegate = self;
         webView.layer.masksToBounds = YES;
         webView.layer.cornerRadius = 5;
         webView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-        webView.backgroundColor = [UIColor whiteColor];
+        webView.backgroundColor = [UIColor redColor];
         webView.scrollView.showsHorizontalScrollIndicator = NO;
         webView.scrollView.scrollEnabled = NO;
 
@@ -464,10 +464,15 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 #pragma mark - WebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSString *padding = @"document.body.style.paddingLeft = '15'";
+    [webView stringByEvaluatingJavaScriptFromString:padding];
+    padding = @"document.body.style.paddingRight = '15'";
+    [webView stringByEvaluatingJavaScriptFromString:padding];
+    
     NSString *clientheight_str = [webView stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight"];
     float clientheight = [clientheight_str floatValue];
     self.webBaseView.frame = CGRectMake(0, CGRectGetMaxY(self.activeContentLabel.frame), KScreenWidth, clientheight + 25);
-    webView.frame = CGRectMake(ODLeftMargin, 12.5, KScreenWidth - ODLeftMargin * 2, clientheight);
+    webView.frame = CGRectMake(0, 12.5, KScreenWidth, clientheight);
     self.bottomButtonView.od_y = CGRectGetMaxY(self.webBaseView.frame);
     if (!hasload) {
         [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(self.webBaseView.frame))];
