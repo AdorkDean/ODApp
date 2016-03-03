@@ -572,6 +572,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
                 [self requestData];
                 self.reportButton.enabled = NO;
 
+                [self requestData];
 
                 [ODProgressHUD showInfoWithStatus:@"报名成功"];
                 [ODNewActivityCenterViewController sharedODNewActivityCenterViewController].needRefresh = YES;

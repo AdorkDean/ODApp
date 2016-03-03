@@ -129,8 +129,6 @@
                     [[NSNotificationCenter defaultCenter] postNotification:notification];
 
                 }
-                
-
 
 
             } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
@@ -273,7 +271,7 @@
 
         UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
         refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-        refundButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        refundButton.backgroundColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
         [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
         refundButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
         [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -368,7 +366,7 @@
 
 
             if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            
+
 
                 [self createEvaluation];
 
