@@ -271,7 +271,7 @@
 
         UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
         refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-        refundButton.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        refundButton.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
         [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
         refundButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
         [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -747,7 +747,7 @@
         [self.orderDetailView addSubview:self.reason];
 
         UILabel *secondLine = [[UILabel alloc] initWithFrame:CGRectMake(18, self.reason.frame.origin.y + 30, kScreenSize.width - 18, 1)];
-        secondLine.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        secondLine.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
         [self.orderDetailView addSubview:secondLine];
 
 
@@ -761,7 +761,7 @@
 
 
         UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, reasonLabel.frame.origin.y + 55, kScreenSize.width, 6)];
-        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        line.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
         [self.orderDetailView addSubview:line];
 
 

@@ -437,7 +437,7 @@
         [self.orderDetailView addSubview:self.reason];
 
         UILabel *secondLine = [[UILabel alloc] initWithFrame:CGRectMake(18, self.reason.frame.origin.y + 30, kScreenSize.width - 18, 1)];
-        secondLine.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        secondLine.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
         [self.orderDetailView addSubview:secondLine];
 
 
@@ -451,7 +451,7 @@
 
 
         UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, reasonLabel.frame.origin.y + 55, kScreenSize.width, 6)];
-        line.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        line.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
         [self.orderDetailView addSubview:line];
 
 
