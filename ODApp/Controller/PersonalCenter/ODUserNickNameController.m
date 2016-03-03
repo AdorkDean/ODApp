@@ -71,6 +71,7 @@
 #pragma mark - 点击事件
 - (void)save:(UIButton *)sender
 {
+    [self.textField resignFirstResponder];
     if ([self.textField.text isEqualToString:@""]) {
         [ODProgressHUD showToast:self.view msg:@"请输入昵称"];
         return;

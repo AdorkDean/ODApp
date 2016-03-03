@@ -152,13 +152,13 @@
     [userInfoView addGestureRecognizer:gesture];
     [self.scrollView addSubview:userInfoView];
 
-    UIButton *headButton = [[UIButton alloc] initWithFrame:CGRectMake(17.5, 10, 40, 40)];
-    headButton.layer.masksToBounds = YES;
-    headButton.layer.cornerRadius = 20;
-    [headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
-    [userInfoView addSubview:headButton];
+    UIImageView *headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(17.5, 10, 40, 40)];
+    headImageView.layer.masksToBounds = YES;
+    headImageView.layer.cornerRadius = 20;
+    [headImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]]];
+    [userInfoView addSubview:headImageView];
 
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(headButton.frame) + 17.5, 24.25, 11.5, 11.5)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(headImageView.frame) + 17.5, 24.25, 11.5, 11.5)];
     imageView.image = [UIImage imageNamed:@"Skills profile page_icon_Not certified"];
     [userInfoView addSubview:imageView];
 
