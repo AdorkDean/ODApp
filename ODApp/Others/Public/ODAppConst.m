@@ -298,5 +298,6 @@ NSString *const kDeliveryUrl = @"http://woquapi.odong.com/1.0/swap/confirm/deliv
 NSString *const kFinshOrderUrl = @"http://woquapi.odong.com/1.0/swap/finish";
 NSString *const kEvalueUrl = @"http://woquapi.odong.com/1.0/swap/order/reason";
 NSString *const kPayBackUrl = @"http://woquapi.odong.com/1.0/pay/weixin/callback/sync";
+NSString *const ODStoreDetailUrl = @"http://woquapi.odong.com/1.0/other/store/detail";
 
 #endif
