@@ -177,7 +177,7 @@
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc] init];
-    picController.photos = model.imgs_small;
+    picController.photos = model.imgs_big;
     picController.selectedIndex = button.tag - 10 * indexPath.row;
     picController.skill = @"skill";
     [self presentViewController:picController animated:YES completion:nil];

@@ -120,9 +120,7 @@
                 NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
 
 
-                NSLog(@"_____%@", weakSelf.orderStatus);
-                NSLog(@"_____%@", orderStatue);
-
+    
 
                 if (![self.orderStatus isEqualToString:orderStatue]) {
 
@@ -133,6 +131,8 @@
                     [[NSNotificationCenter defaultCenter] postNotification:notification];
 
                 }
+                
+
 
 
             } else if ([responseObject[@"status"] isEqualToString:@"error"]) {

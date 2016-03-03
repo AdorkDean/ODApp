@@ -295,7 +295,7 @@
     taskeRewardView.layer.borderWidth = 1;
     taskeRewardView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
     [self.scrollView addSubview:taskeRewardView];
-    self.taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, kScreenSize.width - 8, 34) text:@"  选择任务奖励" font:13 alignment:@"left" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
+    self.taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, taskeRewardView.frame.size.width-35, 34) text:@"  选择任务奖励" font:13 alignment:@"left" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
     self.taskRewardLabel.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [taskeRewardView addSubview:self.taskRewardLabel];
 
@@ -354,14 +354,10 @@
 
             weakSelf.isJob = YES;
             if (weakSelf.isBazaar == NO) {
-
                 ODTabBarController *tabbar = (ODTabBarController *) self.navigationController.tabBarController;
                 tabbar.selectedIndex = 2;
-
             }
             else {
-
-//                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"任务发布成功"];
                 [ODProgressHUD showInfoWithStatus:@"任务发布成功"];
                 [weakSelf.navigationController popViewControllerAnimated:YES];
             }
@@ -370,16 +366,6 @@
 
         } else {
             NSString *message = dict[@"message"];
-
-            if ([dict[@"message"] isEqualToString:@"title not found"]) {
-                message = @"请输入标题";
-            }
-            else {
-
-                message = @"请输入内容";
-            }
-
-//            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:message];
             [ODProgressHUD showInfoWithStatus:message];
         }
     }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {

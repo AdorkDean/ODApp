@@ -712,7 +712,15 @@
     if (self.isSelectedReasonOther)
     {
         self.drawbackReason = self.drawbackStateTextView.text;
-        [self releaseDrawbackRequest];
+        
+        if (self.drawbackStateTextView.text.length == 0)
+        {
+            [ODProgressHUD showInfoWithStatus:@"请输入退款原因"];
+        }
+        else
+        {
+            [self releaseDrawbackRequest];
+        }
     }
 }
 

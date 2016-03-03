@@ -136,7 +136,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 
 - (UIImageView *)headImageView {
     if (!_headImageView) {
-        UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectZero];
+        UIImageView *imgV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 200)];
         [self.baseScrollV addSubview:imgV];
         _headImageView = imgV;
     }
@@ -145,9 +145,10 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.headImageView.frame), self.baseScrollV.od_width - ODLeftMargin * 2, 50)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.headImageView.frame), self.baseScrollV.od_width - ODLeftMargin * 2, [ODHelp textHeightFromTextString:self.resultModel.content width:self.baseScrollV.od_width - ODLeftMargin * 2 fontSize:15])];
         _titleLabel.font = [UIFont systemFontOfSize:15];
         _titleLabel.contentMode = UIViewContentModeCenter;
+        _titleLabel.numberOfLines = 0;
         [_titleLabel addLineOnBottom];
         [self.baseScrollV addSubview:_titleLabel];
     }
@@ -321,42 +322,34 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 }
 
 - (void)analyzeData {
-    __weakSelf
     self.activityVIPs = self.resultModel.savants;
     self.activityApplies = self.resultModel.applies;
     self.reportButton.enabled = (self.resultModel.apply_status != 1) && (self.resultModel.apply_status != -6) && (self.resultModel.apply_status != -4);
     [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        [ODProgressHUD dismiss];
-        if (!image) {
-            weakSelf.headImageView.od_height = 0;
-        }
-        else {
-            weakSelf.headImageView.od_width = KScreenWidth;
-            weakSelf.headImageView.od_height = image.size.height * KScreenWidth / image.size.width;
-            [weakSelf.headImageView addLineOnBottom];
-        }
-        weakSelf.titleLabel.text = weakSelf.resultModel.content;
-        [weakSelf.infoTableView reloadData];
-        weakSelf.VIPLabel.od_height = weakSelf.resultModel.savants.count ? labelHeight : 0;
-        weakSelf.VIPTableView.od_height = weakSelf.resultModel.savants.count *
-                137 / 2;
-        if (weakSelf.resultModel.apply_cnt) {
-            weakSelf.peopleNumLabel.textLabel.text = [NSString stringWithFormat:@"%d人已报名", weakSelf.resultModel.apply_cnt];
-            [weakSelf.activePeopleView setActivePersons:self.resultModel.applies];
-            weakSelf.peopleNumLabel.od_height = labelHeight;
-            weakSelf.activePeopleView.od_y = CGRectGetMaxY(weakSelf.peopleNumLabel.frame);
-            weakSelf.activePeopleView.od_height = 50;
-        }
-        else {
-            weakSelf.peopleNumLabel.od_height = 0;
-            weakSelf.activePeopleView.od_height = 0;
-        }
-        activePeopleLineView.od_y = weakSelf.activePeopleView.od_height - .5;
-        weakSelf.activeContentLabel.od_y = CGRectGetMaxY(weakSelf.activePeopleView.frame);
-
-        weakSelf.webView.od_y = CGRectGetMaxY(weakSelf.activeContentLabel.frame) + 12.5;
-        [weakSelf.webView loadHTMLString:weakSelf.resultModel.remark baseURL:nil];
     }];
+    
+    self.titleLabel.text = self.resultModel.content;
+    [self.infoTableView reloadData];
+    self.VIPLabel.od_height = self.resultModel.savants.count ? labelHeight : 0;
+    self.VIPTableView.od_height = self.resultModel.savants.count *
+    137 / 2;
+    if (self.resultModel.apply_cnt) {
+        self.peopleNumLabel.textLabel.text = [NSString stringWithFormat:@"%d人已报名", self.resultModel.apply_cnt];
+        [self.activePeopleView setActivePersons:self.resultModel.applies];
+        self.peopleNumLabel.od_height = labelHeight;
+        self.activePeopleView.od_y = CGRectGetMaxY(self.peopleNumLabel.frame);
+        self.activePeopleView.od_height = 50;
+    }
+    else {
+        self.peopleNumLabel.od_height = 0;
+        self.activePeopleView.od_height = 0;
+    }
+    activePeopleLineView.od_y = self.activePeopleView.od_height - .5;
+    self.activeContentLabel.od_y = CGRectGetMaxY(self.activePeopleView.frame);
+    
+    self.webView.od_y = CGRectGetMaxY(self.activeContentLabel.frame) + 12.5;
+    [self.webView loadHTMLString:self.resultModel.remark baseURL:nil];
+
 }
 
 #pragma mark - UITableViewDataSource
@@ -579,6 +572,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
                 [self requestData];
                 self.reportButton.enabled = NO;
 
+                [self requestData];
 
                 [ODProgressHUD showInfoWithStatus:@"报名成功"];
                 [ODNewActivityCenterViewController sharedODNewActivityCenterViewController].needRefresh = YES;

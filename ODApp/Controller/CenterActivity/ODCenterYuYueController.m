@@ -435,6 +435,8 @@
 #pragma mark - 点击事件
 
 - (void)fanhui:(UIButton *)sender {
+    
+ 
     UIAlertView *alter = [[UIAlertView alloc] initWithTitle:@"是否退出预约" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
     alter.delegate = self;
     alter.tag = 111;
@@ -445,6 +447,8 @@
 #pragma mark - alterviewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    
     if (alertView.tag == 111) {
         if (buttonIndex == 0) {;
         } else {

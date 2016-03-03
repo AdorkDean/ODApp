@@ -125,7 +125,6 @@
 
     [self.searchBar resignFirstResponder];
     __weak typeof(self) weakSelf = self;
-    [ODProgressHUD showProgressIsLoading];
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
 
         if (weakSelf.count == 1) {
@@ -158,13 +157,11 @@
             }
             [weakSelf.collectionView reloadData];
 
-            [ODProgressHUD dismiss];
         }
     }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
 
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
-//        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常"];
         [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
 
