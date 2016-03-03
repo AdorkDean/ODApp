@@ -235,11 +235,8 @@
         [self presentViewController:vc animated:YES completion:nil];
 
     } else {
-        ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
-
-        vc.centerName = self.centerName;
+        ODPrecontractViewController *vc = [[ODPrecontractViewController alloc] init];
         vc.storeId = [NSString stringWithFormat:@"%@", self.storeId];
-        vc.phoneNumber = self.centerTel;
 
         [self.navigationController pushViewController:vc animated:YES];
     }

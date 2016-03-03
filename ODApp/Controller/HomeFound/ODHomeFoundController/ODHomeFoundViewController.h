@@ -16,7 +16,7 @@
 #import "ODClassMethod.h"
 #import "ODAPIManager.h"
 #import "ODCommumityViewController.h"
-#import "ODCenterYuYueController.h"
+#import "ODPrecontractViewController.h"
 #import "ODTabBarController.h"
 #import "ODLazyViewController.h"
 #import "ODAPIManager.h"

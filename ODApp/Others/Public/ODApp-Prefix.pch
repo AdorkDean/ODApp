@@ -45,7 +45,8 @@
 
 /**  self弱引用 */
 #define __weakSelf __weak typeof (self)weakSelf = self;
-
+/**  self强引用 */
+#define __strongSelf  __strong __typeof(self) strongSelf = weakSelf;
 /**  方法过期 */
 #define ODExtensionDeprecated(instead) NS_DEPRECATED(2_0, 2_0, 2_0, 2_0, instead)
 
