@@ -102,8 +102,8 @@
     
     
     
-    
-    [self addSubview:self.cancelButton];
+//    
+//    [self addSubview:self.cancelButton];
 
     
     
