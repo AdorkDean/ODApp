@@ -139,6 +139,9 @@
     __weak typeof(self) weakSelf = self;
     [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
 
+        
+        NSLog(@"%@",operation);
+        
         if (weakSelf.count == 1) {
             [weakSelf.dataArray removeAllObjects];
             [weakSelf.noReusltLabel removeFromSuperview];

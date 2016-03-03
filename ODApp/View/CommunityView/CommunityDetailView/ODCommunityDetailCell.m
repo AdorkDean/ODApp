@@ -20,7 +20,6 @@
     [self.replyButton setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
     self.lineImageView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.lineImageViewConstraint.constant = 0.5;
-    self.contentLabel.backgroundColor = [UIColor redColor];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
