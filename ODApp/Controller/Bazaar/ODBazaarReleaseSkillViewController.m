@@ -572,11 +572,13 @@
 
 -(void)releaseButtonClick:(UIButton *)button
 {
-    if (self.titleTextField.text.length>0&&self.contentTextView.text.length>0&&self.priceTextField.text.length>0&&self.unitTextField.text.length>0&&self.swap_type != nil&&self.mArray.count<=5&&self.mArray.count>=3) {
+    if (self.titleTextField.text.length>0&&self.titleTextField.text.length<8&&self.contentTextView.text.length>0&&self.priceTextField.text.length>0&&self.unitTextField.text.length<4&&self.unitTextField.text.length>0&&self.swap_type != nil&&self.mArray.count<=5&&self.mArray.count>=3) {
         [self joiningTogetherParmetersWithButton:button];
     }else{
         if (self.titleTextField.text.length==0) {
             [ODProgressHUD showInfoWithStatus:@"请输入标题"];
+        }else if (self.titleTextField.text.length>7){
+            [ODProgressHUD showInfoWithStatus:@"标题不能超过七个字"];
         }else if (self.contentTextView.text.length==0){
             [ODProgressHUD showInfoWithStatus:@"请输入内容"];
         }else if (self.priceTextField.text.length==0){
@@ -688,12 +690,16 @@
 -(void)textFieldDidChange:(UITextField *)textField
 {
     if (textField == self.titleTextField) {
-        if (textField.text.length>7) {
-            textField.text = [textField.text substringToIndex:7];
-        }
         self.titleCountLabel.text = [NSString stringWithFormat:@"%ld/7",textField.text.length];
+        if (textField.text.length>7) {
+            self.titleCountLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1.0f];
+        } else {
+            self.titleCountLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1.0f];
+        }
+        
     }
 }
+
 
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
