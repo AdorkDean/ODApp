@@ -31,6 +31,7 @@
 @property(nonatomic, strong) ODPayModel *model;
 @property(nonatomic, strong) AFHTTPRequestOperationManager *goManager;
 @property(nonatomic, copy) NSString *isPay;
+@property(nonatomic, assign) int navHasSelfClass;
 
 @end
 
@@ -44,11 +45,19 @@
     self.navigationItem.title = @"支付订单";
     [self.view addSubview:self.payView];
     [self getData];
+    
+    self.navHasSelfClass = 0;
+    for (UIViewController *vc in self.navigationController.viewControllers) {
+        if ([vc class] == [ODPayController class]) {
+            self.navHasSelfClass += 1;
+        }
+    }
+    
+    if (self.navHasSelfClass == 1) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay:) name:ODNotificationPaySuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
+    }
 
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay:) name:ODNotificationPaySuccess object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
 
 
 }
@@ -273,7 +282,9 @@
 
 - (void)dealloc {
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    if (self.navHasSelfClass == 1) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
 }
 
 
