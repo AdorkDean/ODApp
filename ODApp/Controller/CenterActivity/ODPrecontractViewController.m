@@ -110,6 +110,7 @@
     if (!_deviceView)
     {
         _deviceView = [ODPlacePreDeviceView od_viewFromXib];
+        _deviceView.delegate = self;
         _deviceView.frame = CGRectMake(0, CGRectGetMaxY(self.headView.frame), KScreenWidth, _deviceView.viewHeight);
         [self.baseScrollView addSubview:_deviceView];
     }

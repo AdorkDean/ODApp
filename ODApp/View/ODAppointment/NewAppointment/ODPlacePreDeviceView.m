@@ -29,8 +29,9 @@
         ODStoreDetailDeviceListModel *model = devices[i];
         ODActiveDeviceBtn *btn = [ODActiveDeviceBtn buttonWithType:UIButtonTypeCustom];
         [btn setTitle:model.name forState:UIControlStateNormal];
+        btn.delegate = self;
         btn.deviceId = model.id;
-        btn.frame = CGRectMake((i % 4) * self.devicesView.od_width / 4, btn.od_height * (i / 4) , self.devicesView.od_width, btn.od_height);
+        btn.frame = CGRectMake((i % 4) * self.devicesView.od_width / 4, 30 * (i / 4) , self.devicesView.od_width, btn.od_height);
         [self.devicesView addSubview:btn];
     }
     self.devicesViewHeightConstraint.constant = ((devices.count - 1) / 4 + 1) * 30;
