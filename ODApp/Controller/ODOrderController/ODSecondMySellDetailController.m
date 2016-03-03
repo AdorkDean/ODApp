@@ -127,7 +127,7 @@
                     [[NSNotificationCenter defaultCenter] postNotification:notification];
 
                 }
-
+                
 
             } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
 
@@ -364,8 +364,7 @@
 
 
             [self getData];
-            [ODProgressHUD showInfoWithStatus:@"操作成功"];
-
+             [ODProgressHUD showInfoWithStatus:@"操作成功"];
 
         } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
 
