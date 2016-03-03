@@ -166,7 +166,7 @@
     
     //头像
     UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 13.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"sds" font:0];
-    [userHeaderButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:detailModel.avatar] forState:UIControlStateNormal];
+    [userHeaderButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:detailModel.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     userHeaderButton.layer.masksToBounds = YES;
     userHeaderButton.layer.cornerRadius = 24;
     userHeaderButton.backgroundColor = [UIColor grayColor];
@@ -654,7 +654,7 @@
     ODBazaarDetailCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarDetailCellId forIndexPath:indexPath];
     ODBazaarDetailModel *model = self.picArray[indexPath.row];
    
-    [cell.imageV sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
+    [cell.imageV sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     cell.nickLabel.text = model.user_nick;
     cell.signLabel.text = model.user_sign;
     cell.layer.masksToBounds = YES;

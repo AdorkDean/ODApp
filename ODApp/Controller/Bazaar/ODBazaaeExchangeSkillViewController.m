@@ -141,7 +141,7 @@
     ODBazaarExchangeSkillCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal];
+    [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     [cell.headButton addTarget:self action:@selector(otherInfoClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.nickLabel.text = model.user[@"nick"];
     [cell showDatasWithModel:model];

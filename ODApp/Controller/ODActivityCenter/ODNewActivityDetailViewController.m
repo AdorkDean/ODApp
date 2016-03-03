@@ -405,7 +405,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         ODActivityDetailVIPModel *vipModel = self.resultModel.savants[indexPath.row];
         ODActivityVIPCell *cell = [tableView dequeueReusableCellWithIdentifier:VIPCell];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [[cell VIPHeadImgView] sd_setImageWithURL:[NSURL OD_URLWithString:[vipModel avatar]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [[cell VIPHeadImgView] sd_setImageWithURL:[NSURL OD_URLWithString:[vipModel avatar]] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [[(ODActivityVIPCell *) cell VIPHeadImgView] setImage:[image OD_circleImage]];
         }];
         [[cell VIPName] setText:vipModel.nick];
