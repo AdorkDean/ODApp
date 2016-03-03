@@ -33,6 +33,12 @@
 
     self.navigationItem.title = @"支付订单";
     [self.view addSubview:self.paySuccessView];
+    [self.paySuccessView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view).with.offset(0);
+        make.left.equalTo(self.view).with.offset(0);
+        make.right.equalTo(self.view).with.offset(0);
+        make.bottom.equalTo(self.view).with.offset(0);
+    }];
 }
 
 
