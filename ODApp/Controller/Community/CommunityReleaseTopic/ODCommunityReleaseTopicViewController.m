@@ -326,6 +326,7 @@ NSString *topicContentText = @"";
     }
     [self.addPicButton setFrame:CGRectMake(4 + (width + 4) * (self.imageArray.count % 4), CGRectGetMaxY(self.topicContentTextView.frame) + 95 + (4 + width) * (self.imageArray.count / 4), width, width)];
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 262 + (self.imageArray.count / 4 + 1) * (width + 4));
+    [ODProgressHUD dismiss];
 }
 
 
