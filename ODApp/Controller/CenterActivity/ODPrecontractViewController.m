@@ -231,6 +231,7 @@
         [weakSelf.headView.placeBtn setTitle:detailModel.name forState:UIControlStateNormal];
         weakSelf.deviceView.devices = detailModel.device_list;
         [weakSelf.footerView.phoneBtn setTitle:detailModel.tel forState:UIControlStateNormal];
+        weakSelf.footerView.od_y = CGRectGetMaxY(weakSelf.deviceView.frame);
         [weakSelf requestStoreTimeline];
     }
                    failure:^(NSError *error)
@@ -281,6 +282,10 @@
     else if (self.footerView.numTextView.text.isBlank)
     {
         [ODProgressHUD showInfoWithStatus:@"请输入活动人数"];
+    }
+    else if (self.footerView.numTextView.text.integerValue == 0)
+    {
+        [ODProgressHUD showInfoWithStatus:@"活动人数不能为0"];
     }
     else
     {
@@ -385,6 +390,7 @@
 }
 
 #pragma mark - UITextViewDelegate
+
 - (void)textViewDidChange:(UITextView *)textView
 {
     if (textView == self.footerView.pupurseTextView)

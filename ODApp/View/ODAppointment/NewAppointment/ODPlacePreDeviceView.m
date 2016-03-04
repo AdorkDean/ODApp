@@ -19,7 +19,6 @@
     {
         return;
     }
-    [self layoutIfNeeded];
     for (UIView *view in self.devicesView.subviews)
     {
         [view removeFromSuperview];

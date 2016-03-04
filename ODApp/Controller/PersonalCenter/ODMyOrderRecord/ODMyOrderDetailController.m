@@ -28,11 +28,10 @@
 - (void)navigationInit
 {
     self.navigationItem.title = @"预约详情";
-    if (self.isOther == NO)
+    if (self.isOther == NO && ![self.status_str isEqualToString:@"已取消"])
     {
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelOrderButtonClick:) color:nil highColor:nil title:@"取消预约"];
-        
-     }
+    }
 }
 
 #pragma mark - 加载数据请求
@@ -103,7 +102,7 @@
             {
                 [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil];
                 [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
-
+                self.navigationItem.rightBarButtonItem = nil;
                 weakSelf.checkLabel.text = @"已取消";
                 weakSelf.navigationItem.rightBarButtonItem.customView.hidden = YES;
                 weakSelf.status_str = weakSelf.checkLabel.text;
