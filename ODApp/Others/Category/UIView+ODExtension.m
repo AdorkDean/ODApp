@@ -119,4 +119,12 @@
     [self addSubview:lineView];
     return lineView;
 }
+
+- (void)callToNum:(NSString *)numString
+{
+    NSString *telNumber = [NSString stringWithFormat:@"tel:%@",numString];
+    UIWebView *callWebView = [[UIWebView alloc] init];
+    [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
+    [self addSubview:callWebView];
+}
 @end

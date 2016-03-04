@@ -29,9 +29,6 @@
 
 - (IBAction)phoneClicked:(UIButton *)sender
 {
-    NSMutableString *str = [[NSMutableString alloc] initWithFormat:@"tel:%@", sender.currentTitle];
-    UIWebView *callWebview = [[UIWebView alloc] init];
-    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-    [self addSubview:callWebview];
+    [self callToNum:sender.currentTitle];
 }
 @end

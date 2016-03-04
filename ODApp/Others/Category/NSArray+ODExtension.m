@@ -10,7 +10,27 @@
 
 @implementation NSArray (ODExtension)
 
-- (NSString *)description
+//- (NSString *)description
+//{
+//    NSMutableString *strM = [NSMutableString string];
+//    [strM appendFormat:@"[\n"];
+//    
+//    // 2.遍历字典，拼接字典中的键值对
+//    [self enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//        [strM appendFormat:@"%@",obj];
+//        if (idx != self.count - 1)
+//        {
+//            [strM appendString:@",\n"];
+//        }
+//    }];
+//    
+//    [strM appendFormat:@"]\n"];
+//    
+//    return strM;
+//
+//}
+
+- (NSString *)desc
 {
     // 1.定义字符创保存拼接结果
     NSMutableString *strM = [NSMutableString string];
@@ -28,31 +48,23 @@
     [strM appendFormat:@"]\n"];
     
     return strM;
-
 }
 
-- (NSString *)desc
+- (NSString *)enumerateString
 {
     NSMutableString *strM = [NSMutableString string];
-    [strM appendFormat:@"[\n"];
-    
-    // 2.遍历字典，拼接字典中的键值对
     [self enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         [strM appendFormat:@"%@",obj];
         if (idx != self.count - 1)
         {
-            [strM appendString:@",\n"];
+            [strM appendString:@","];
         }
     }];
-    
-    [strM appendFormat:@"]\n"];
-    
     return strM;
 }
-
-- (NSString *)descriptionWithLocale:(id)locale
-{
-    return [self description];
-}
+//- (NSString *)descriptionWithLocale:(id)locale
+//{
+//    return [self description];
+//}
 
 @end

@@ -36,15 +36,4 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
-//- (void)layoutSubviews
-//{
-//    [super layoutSubviews];
-//    self.od_height -= 2;
-//}
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
-
 @end

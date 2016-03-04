@@ -23,6 +23,7 @@
 #import "UIImage+ODExtension.h"
 #import "NSDictionary+ODExtension.h"
 #import "NSArray+ODExtension.h"
+#import "NSString+ODExtension.h"
 #import "UIBarButtonItem+ODExtention.h"
 
 #import "ODUserInformation.h"

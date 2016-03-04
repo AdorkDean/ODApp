@@ -877,10 +877,7 @@
 - (void)phoneAction:(UIButton *)sender {
     ODOrderDetailModel *model = self.dataArray[0];
     NSMutableDictionary *dic = model.user;
-    NSMutableString *str = [[NSMutableString alloc] initWithFormat:@"tel:%@", dic[@"mobile"]];
-    UIWebView *callWebview = [[UIWebView alloc] init];
-    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-    [self.view addSubview:callWebview];
+    [self.view callToNum:dic[@"mobile"]];
 }
 
 - (void)dealloc {
