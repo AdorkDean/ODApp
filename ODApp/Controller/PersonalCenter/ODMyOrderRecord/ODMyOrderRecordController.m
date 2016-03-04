@@ -206,6 +206,7 @@
     vc.order_id = [NSString stringWithFormat:@"%@",model.order_id];
     
     [self.navigationController pushViewController:vc animated:YES];
+    vc.status_str = [self.orderArray[indexPath.row]status_str];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

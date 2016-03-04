@@ -283,6 +283,10 @@
     {
         [ODProgressHUD showInfoWithStatus:@"请输入活动人数"];
     }
+    else if (self.footerView.numTextView.text.integerValue == 0)
+    {
+        [ODProgressHUD showInfoWithStatus:@"活动人数不能为0"];
+    }
     else
     {
         __weakSelf
