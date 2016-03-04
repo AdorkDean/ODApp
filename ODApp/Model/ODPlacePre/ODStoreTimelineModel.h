@@ -27,5 +27,3 @@
 @property (nonatomic, copy) NSString *date_left_str;
 
 @end
-
-ODRequestResultIsArrayProperty(ODStoreTimelineModel)

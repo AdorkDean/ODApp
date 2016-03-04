@@ -177,7 +177,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         label.frame = CGRectMake(0, CGRectGetMaxY(self.infoTableView.frame), KScreenWidth, labelHeight);
         label.textLabel.text = @"活动嘉宾";
         label.textLabel.font = [UIFont systemFontOfSize:13.5];
-        [label.textLabel addLineOnBottom];
+//        [label.textLabel addLineOnBottom];
         [self.baseScrollV addSubview:label];
         _VIPLabel = label;
     }
@@ -229,7 +229,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         label.frame = CGRectMake(0, CGRectGetMaxY(self.activePeopleView.frame), KScreenWidth, labelHeight);
         label.textLabel.text = @"活动详情";
         label.textLabel.font = [UIFont systemFontOfSize:13.5];
-        [label addLineFromPoint:CGPointMake(0, label.od_y)];
+//        [label addLineFromPoint:CGPointMake(0, label.od_y)];
         [label addLineFromPoint:CGPointMake(label.textLabel.od_x, label.od_height)];
         [self.baseScrollV addSubview:label];
         _activeContentLabel = label;

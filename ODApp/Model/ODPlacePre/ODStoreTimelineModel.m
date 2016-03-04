@@ -25,5 +25,5 @@
 
 @end
 
-ODRequestResultIsArrayImplementation(ODStoreTimelineModel)
+ODRequestResultIsArrayAll(ODStoreTimelineModel)
 
