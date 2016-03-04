@@ -176,6 +176,7 @@
                 [weakSelf.tableView.mj_footer endRefreshing];
             }
             [weakSelf.tableView reloadData];
+              
 
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
