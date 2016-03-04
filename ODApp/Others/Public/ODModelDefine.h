@@ -1,5 +1,4 @@
 
-
 /** 拼接模型类名 */
 #define ODRequestClassName(className)       NSClassFromString([NSStringFromClass(className)stringByAppendingString:@"Response"])
 
