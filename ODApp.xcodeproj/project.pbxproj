@@ -251,8 +251,6 @@
 		D4D075041C59B9FA008527C9 /* CenterDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0732A1C59B9FA008527C9 /* CenterDetailCell.m */; };
 		D4D075051C59B9FA008527C9 /* CenterDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D0732B1C59B9FA008527C9 /* CenterDetailCell.xib */; };
 		D4D075061C59B9FA008527C9 /* CenterDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0732D1C59B9FA008527C9 /* CenterDetailModel.m */; };
-		D4D075071C59B9FA008527C9 /* CenterYuYueView.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0732F1C59B9FA008527C9 /* CenterYuYueView.m */; };
-		D4D075081C59B9FA008527C9 /* CenterYuYueView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D073301C59B9FA008527C9 /* CenterYuYueView.xib */; };
 		D4D075091C59B9FA008527C9 /* ChoseCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D073321C59B9FA008527C9 /* ChoseCenterCell.m */; };
 		D4D0750A1C59B9FA008527C9 /* ChoseCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D4D073331C59B9FA008527C9 /* ChoseCenterCell.xib */; };
 		D4D0750B1C59B9FA008527C9 /* ChoseCenterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D073351C59B9FA008527C9 /* ChoseCenterModel.m */; };
@@ -789,9 +787,6 @@
 		D4D0732B1C59B9FA008527C9 /* CenterDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterDetailCell.xib; sourceTree = "<group>"; };
 		D4D0732C1C59B9FA008527C9 /* CenterDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterDetailModel.h; sourceTree = "<group>"; };
 		D4D0732D1C59B9FA008527C9 /* CenterDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterDetailModel.m; sourceTree = "<group>"; };
-		D4D0732E1C59B9FA008527C9 /* CenterYuYueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CenterYuYueView.h; sourceTree = "<group>"; };
-		D4D0732F1C59B9FA008527C9 /* CenterYuYueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CenterYuYueView.m; sourceTree = "<group>"; };
-		D4D073301C59B9FA008527C9 /* CenterYuYueView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CenterYuYueView.xib; sourceTree = "<group>"; };
 		D4D073311C59B9FA008527C9 /* ChoseCenterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoseCenterCell.h; sourceTree = "<group>"; };
 		D4D073321C59B9FA008527C9 /* ChoseCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoseCenterCell.m; sourceTree = "<group>"; };
 		D4D073331C59B9FA008527C9 /* ChoseCenterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoseCenterCell.xib; sourceTree = "<group>"; };
@@ -2196,9 +2191,6 @@
 				D4D0732B1C59B9FA008527C9 /* CenterDetailCell.xib */,
 				D4D0732C1C59B9FA008527C9 /* CenterDetailModel.h */,
 				D4D0732D1C59B9FA008527C9 /* CenterDetailModel.m */,
-				D4D0732E1C59B9FA008527C9 /* CenterYuYueView.h */,
-				D4D0732F1C59B9FA008527C9 /* CenterYuYueView.m */,
-				D4D073301C59B9FA008527C9 /* CenterYuYueView.xib */,
 				D4D073311C59B9FA008527C9 /* ChoseCenterCell.h */,
 				D4D073321C59B9FA008527C9 /* ChoseCenterCell.m */,
 				D4D073331C59B9FA008527C9 /* ChoseCenterCell.xib */,
@@ -2687,7 +2679,6 @@
 				D4D075211C59B9FA008527C9 /* ODTypeView.xib in Resources */,
 				D4D074FA1C59B9FA008527C9 /* ODCommunityDetailCell.xib in Resources */,
 				D4D075021C59B9FA008527C9 /* CenterActivityCell.xib in Resources */,
-				D4D075081C59B9FA008527C9 /* CenterYuYueView.xib in Resources */,
 				9DDDF74A1C7D5D02004D572E /* ODThirdOrderView.xib in Resources */,
 				D4D0751D1C59B9FA008527C9 /* ODTaskCell.xib in Resources */,
 				D4D075191C59B9FA008527C9 /* ODLandSecondCell.xib in Resources */,
@@ -2975,7 +2966,6 @@
 				D4D073A31C59B9FA008527C9 /* ODMyOrderDetailModel.m in Sources */,
 				C64D45ED1C5F8C6F003BFFA0 /* IQUIWindow+Hierarchy.m in Sources */,
 				D4D0737B1C59B9FA008527C9 /* ODChoseCenterController.m in Sources */,
-				D4D075071C59B9FA008527C9 /* CenterYuYueView.m in Sources */,
 				9DEDCF6B1C64B3FC003015C6 /* ODBazaarDetailCollectionCell.m in Sources */,
 				9D1F81031C76EBE500FC9C2C /* ODOperationSeccondCell.m in Sources */,
 				9DF2E9861C74481700F77976 /* ODApplyListViewController.m in Sources */,
