@@ -344,7 +344,7 @@
 
     if ([model.content isEqualToString:@"该楼层已删除"]) {
         cell.contentLabel.text = model.content;
-        height = [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-26 fontSize:14];
+        height = [ODHelp textHeightFromTextString:model.content width:kScreenSize.width-26 fontSize:12];
         cell.contentLabelHeight.constant = height;
         cell.deleteButton.hidden = YES;
         cell.timeLabelSpace.constant = 13;
@@ -356,7 +356,7 @@
         cell.contentLabel.attributedText = noteStr;
         
         //根据内容的多少来设置contentLabel的高度
-        height = [ODHelp textHeightFromTextString:str width:kScreenSize.width-26 fontSize:14];
+        height = [ODHelp textHeightFromTextString:str width:kScreenSize.width-26 fontSize:12];
         cell.contentLabelHeight.constant = height;
         if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:[NSString stringWithFormat:@"%@",model.user[@"open_id"]]]) {
             [cell.deleteButton setHidden:NO];
