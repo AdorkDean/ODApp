@@ -60,6 +60,9 @@ NSString *const ODNotificationQuit = @"ODNotificationQuit";
 /**  回复成功后刷新 */
 NSString *const ODNotificationReplySuccess = @"ODNotificationReplySuccess";
 
+/**  登录成功后的通知 */
+NSString *const ODNotificationLoginSuccess = @"ODNotificationLoginSuccess";
+
 /** 定位成功刷新 */
 NSString *const ODNotificationLocationSuccessRefresh = @"ODNotificationLocationSuccessRefresh";
 

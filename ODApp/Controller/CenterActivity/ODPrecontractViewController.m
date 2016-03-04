@@ -5,6 +5,7 @@
 //  Created by 刘培壮 on 16/3/1.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
+#import "MobClick.h"
 #import "ODStoreDetailModel.h"
 #import "ODStoreTimelineModel.h"
 #import "ODStoreCreateOrderModel.h"
@@ -246,14 +247,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self endEditing];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
+
 
 #pragma mark - 数据请求方法
 

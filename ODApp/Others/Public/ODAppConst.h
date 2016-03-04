@@ -75,6 +75,8 @@ UIKIT_EXTERN NSString * const ODNotificationQuit;
 /**  回复成功后刷新 */
 UIKIT_EXTERN NSString * const ODNotificationReplySuccess;
 
+/**  登录成功后的通知 */
+UIKIT_EXTERN NSString * const ODNotificationLoginSuccess;
 
 /** 已购买二级页面通知 */
 UIKIT_EXTERN NSString * const ODNotificationMyOrderSecondRefresh;
