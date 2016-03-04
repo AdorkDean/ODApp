@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ODAppRegister.h"
+#import "ODUserInformation.h"
 
 #import "ODTabBarController.h"
 #import "MyPageControl.h"

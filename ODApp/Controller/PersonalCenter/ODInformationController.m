@@ -55,35 +55,16 @@
 - (void)getData
 {
     [self.dataArray removeAllObjects];
-    
-
-    self.manager = [AFHTTPRequestOperationManager manager];
-    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-    
-    
-    NSDictionary *parameters = @{@"open_id":openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    
-  
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:kGetUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        
-        NSMutableDictionary *dic = responseObject[@"result"];
-        ODUserModel *model = [[ODUserModel alloc] initWithDict:dic];
-   
-        [weakSelf.dataArray addObject:model];
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlUserInfo  parameters:@{} modelClass:[ODUserModel class] success:^(id model) {
+        ODUserModel *user = [model result];
+        [weakSelf.dataArray addObject:user];
         
         [weakSelf createTableView];
         [weakSelf.tableView reloadData];
+    } failure:^(NSError *error) {
         
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
- 
     }];
-    
 }
 
 
@@ -407,46 +388,15 @@
 
 - (void)saveImge
 {
-    
-    self.managers = [AFHTTPRequestOperationManager manager];
-    
-    ODUserModel *model = self.dataArray[0];
-    NSString *open_id = model.open_id;
-
-    NSDictionary *parameters = @{@"avatar": self.imgsString , @"open_id":open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    
-      __weak typeof (self)weakSelf = self;
-    [self.managers GET:kChangeUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        
-        if ([responseObject[@"status"]isEqualToString:@"success"]) {
-           
-            
-       
-               [weakSelf.imagePicker dismissViewControllerAnimated:YES completion:nil];
-            
-        }
-        
-        else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-                      
-            
-            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-            
-        }
-
-        
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-        
+    __weak typeof (self)weakSelf = self;
+    [ODHttpTool getWithURL:ODUrlUserChange parameters:@{} modelClass:[NSObject class] success:^(id model)
+     {
+        [weakSelf.imagePicker dismissViewControllerAnimated:YES completion:nil];
+    }
+                   failure:^(NSError *error)
+    {
         
     }];
-
-    
-    
 }
 
 

@@ -1,5 +1,5 @@
 //
-//  ODUser.h
+//  ODUserModel.h
 //  ODApp
 //
 //  Created by william on 16/3/1.
@@ -7,9 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ODShareModel.h"
 
-@interface ODUser : NSObject
+@interface ODShareModel : NSObject
+
+@property (copy, nonatomic) NSString *title;
+@property (copy, nonatomic) NSString *link;
+@property (copy, nonatomic) NSString *icon;
+@property (copy, nonatomic) NSString *desc;
+
+@end
+
+@interface ODUserModel : NSObject
 
 @property (copy, nonatomic) NSString *open_id;
 @property (copy, nonatomic) NSString *mobile;
@@ -26,6 +34,5 @@
 @property (assign, nonatomic) int user_auth_status;
 @property (copy, nonatomic) NSString *balance;
 @property (strong, nonatomic) ODShareModel *share;
-
 
 @end

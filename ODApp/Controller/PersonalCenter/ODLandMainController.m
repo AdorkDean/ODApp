@@ -88,7 +88,7 @@
 {
     if (indexPath.section == 0) {
         ODLandFirstCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
-        ODUser *user = [[ODUserInformation sharedODUserInformation] getUserCache];
+        ODUserModel *user = [[ODUserInformation sharedODUserInformation] getUserCache];
         cell.model = user;
         
         return cell;
@@ -185,7 +185,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODUser *user = [[ODUserInformation sharedODUserInformation] getUserCache];
+    ODUserModel *user = [[ODUserInformation sharedODUserInformation] getUserCache];
     if (indexPath.section == 0)
     {
         ODInformationController *vc = [[ODInformationController alloc] init];

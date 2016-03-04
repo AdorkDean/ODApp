@@ -83,15 +83,9 @@ int pageNumnber = 0;
     }
 }
 
-- (void)phoneAction:(UITapGestureRecognizer *)sender {
-
-    NSMutableString *str = [[NSMutableString alloc] initWithFormat:@"tel:%@", self.centerDetailView.phoneLabel.text];
-
-    UIWebView *callWebview = [[UIWebView alloc] init];
-    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-    [self.view addSubview:callWebview];
-
-
+- (void)phoneAction:(UITapGestureRecognizer *)sender
+{
+    [self.view callToNum:self.centerDetailView.phoneLabel.text];
 }
 
 
@@ -260,7 +254,6 @@ int pageNumnber = 0;
         self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
         self.pageControl.userInteractionEnabled = YES;
         [self.centerDetailView addSubview:self.pageControl];
-
 
     }
     return _centerDetailView;

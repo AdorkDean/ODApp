@@ -43,4 +43,3 @@
 @end
 
 
-ODRequestResultIsDictionaryProperty(ODStoreDetailModel)

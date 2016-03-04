@@ -86,69 +86,35 @@
 #pragma mark - 点击事件
 - (void)manAction
 {
-    
-    self.manager = [AFHTTPRequestOperationManager manager];
-    
     NSDictionary *parameters = @{@"gender":@"1", @"open_id":self.openID};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-   
     __weak typeof (self)weakSelf = self;
-    [self.manager GET:kChangeUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        if ([responseObject[@"status"]isEqualToString:@"success"]) {
+    [ODHttpTool getWithURL:ODUrlUserChange parameters:parameters modelClass:[NSObject class] success:^(id model) {
+        if (weakSelf.getTextBlock) {
             if (weakSelf.getTextBlock) {
-                if (weakSelf.getTextBlock) {
-                    weakSelf.getTextBlock(@"1");
-                }
-             
-                [weakSelf.navigationController popViewControllerAnimated:YES];
+                weakSelf.getTextBlock(@"1");
             }
+            
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }
+    } failure:^(NSError *error) {
         
-        else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-          
-            
-            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-            
-            
-        }
-       
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-  
     }];
 }
 
 - (void)womanAction
 {
-    self.managers = [AFHTTPRequestOperationManager manager];
-    
     NSDictionary *parameters = @{@"gender":@"2", @"open_id":self.openID};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-   
     __weak typeof (self)weakSelf = self;
-    [self.managers GET:kChangeUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        if ([responseObject[@"status"]isEqualToString:@"success"]) {
+    [ODHttpTool getWithURL:ODUrlUserChange parameters:parameters modelClass:[NSObject class] success:^(id model) {
+        if (weakSelf.getTextBlock) {
             if (weakSelf.getTextBlock) {
-                if (weakSelf.getTextBlock) {
-                    weakSelf.getTextBlock(@"2");
-                }
-                
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-                
+                weakSelf.getTextBlock(@"2");
             }
+            
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            
         }
-        
-        else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-        }
-      
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+    } failure:^(NSError *error) {
         
     }];
 }

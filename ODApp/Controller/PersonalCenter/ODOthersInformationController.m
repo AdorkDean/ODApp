@@ -29,25 +29,19 @@
 
 - (void)createRequest
 {
-    self.manager = [AFHTTPRequestOperationManager manager];
-    
+    __weakSelf
     NSDictionary *parameter = @{@"open_id":self.open_id};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:kOthersInformationUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-    {
-        NSMutableDictionary *dict = responseObject[@"result"];
-        weakSelf.model = [[ODUserModel alloc] initWithDict:dict];
-        
+    [ODHttpTool getWithURL:ODUrlUserInfo parameters:parameter modelClass:[ODUserModel class] success:^(id model)
+     {
+        weakSelf.model = [model result];
         [weakSelf createCollectionView];
         [weakSelf.collectionView reloadData];
     }
-              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-    {
+                   failure:^(NSError *error)
+     {
         
     }];
-}
+ }
 
 - (void)createCollectionView
 {

@@ -18,7 +18,7 @@
 #import "ODLandMainController.h"
 #import "ODTabBarController.h"
 #import "ODChangePassWordController.h"
-#import "ODUserResponse.h"
+#import "ODUserModel.h"
 
 
 
@@ -106,27 +106,26 @@
 #pragma mark - 请求数据
 -(void)landToView
 {
+    __weakSelf
     NSDictionary *parameters = @{ @"mobile":self.landView.accountTextField.text, @"passwd":self.landView.passwordTextField.text};
-    
-    [ODAPIManager getWithURL:@"/user/login1" params:parameters success:^(id responseObject) {
-        
-        ODUserResponse *resp = [ODUserResponse mj_objectWithKeyValues:responseObject];
-        ODUser *user = resp.result;
+    [ODHttpTool getWithURL:ODUrlUserLogin1 parameters:parameters modelClass:[ODUserModel class] success:^(id model)
+    {
+        ODUserModel *user = [model result];
         [[ODUserInformation sharedODUserInformation] updateUserCache:user];
         
         [ODProgressHUD showToast:self.view msg:@"登录成功"];
-        [self dismissViewControllerAnimated:YES completion:^{
+        [weakSelf dismissViewControllerAnimated:YES completion:^{
             ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             tabBar.selectedIndex = tabBar.currentIndex;
-            if (self.delegate != nil) {
-                [self.delegate personalHasLoginSuccess];
+            [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationloveSkill object:nil];
+            if (weakSelf.delegate != nil) {
+                [weakSelf.delegate personalHasLoginSuccess];
             }
+            
         }];
-        
-    } error:^(NSString *msg) {
-        [ODProgressHUD showToast:self.view msg:msg];
-        
-    } failure:^(NSError *error) {
+    }
+                   failure:^(NSError *error)
+    {
         
     }];
 }

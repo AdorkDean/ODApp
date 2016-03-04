@@ -26,4 +26,4 @@
 
 @end
 
-ODRequestResultIsDictionaryImplementation(ODStoreDetailModel)
+ODRequestResultIsDictionaryAll(ODStoreDetailModel)

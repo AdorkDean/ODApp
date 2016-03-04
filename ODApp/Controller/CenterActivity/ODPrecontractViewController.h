@@ -13,3 +13,4 @@
 @property(nonatomic, copy) NSString *storeId;
 
 @end
+

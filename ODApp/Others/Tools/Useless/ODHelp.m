@@ -60,15 +60,15 @@
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:size]};
     CGRect rect = [text boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine attributes:dict context:nil];
     
-    if (rect.size.height / size < 2) {
+    if (rect.size.height / size < 2)
+    {
         return miniHeight;
-    }else{
+    }
+    else
+    {
         //返回计算出的行高
         return rect.size.height + 10;
-
     }
-  
-        
 }
 
 

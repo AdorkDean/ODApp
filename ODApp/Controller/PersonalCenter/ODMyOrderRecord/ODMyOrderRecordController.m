@@ -56,10 +56,15 @@
 
 - (void)reloadData:(NSNotification *)text
 {
-    ODMyOrderRecordModel *model = self.orderArray[self.cancelOrderRow];
-    model.status_str = [NSString stringWithFormat:@"%@", text.userInfo[@"status_str"]];
-    [self.orderArray replaceObjectAtIndex:self.cancelOrderRow withObject:model];
-    [self.collectionView reloadData];
+    @try {
+        ODMyOrderRecordModel *model = self.orderArray[self.cancelOrderRow];
+        model.status_str = [NSString stringWithFormat:@"%@", text.userInfo[@"status_str"]];
+        [self.orderArray replaceObjectAtIndex:self.cancelOrderRow withObject:model];
+        [self.collectionView reloadData];
+    }
+    @catch (NSException *exception) {
+        
+    }
 }
 
 
@@ -119,7 +124,8 @@
             if (!result.count == 0)
             {                
                 [weakSelf.collectionView.mj_footer endRefreshing];
-            }else
+            }
+            else
             {
                 [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
@@ -201,14 +207,7 @@
     vc.order_id = [NSString stringWithFormat:@"%@",model.order_id];
     
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-    
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    vc.status_str = [self.orderArray[indexPath.row]status_str];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
