@@ -63,13 +63,13 @@
 
 - (void)reloadData:(NSNotification *)text {
 
+    if (self.indexRow < self.dataArray.count) {
+        ODMyOrderModel *model = self.dataArray[self.indexRow];
+        model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"orderStatus"]];
+        [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
+        [self.collectionView reloadData];
 
-    ODMyOrderModel *model = self.dataArray[self.indexRow];
-    model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"orderStatus"]];
-    [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
-    [self.collectionView reloadData];
-
-
+    }
 }
 
 
