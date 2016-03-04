@@ -124,7 +124,8 @@
             if (!result.count == 0)
             {                
                 [weakSelf.collectionView.mj_footer endRefreshing];
-            }else
+            }
+            else
             {
                 [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
             }
