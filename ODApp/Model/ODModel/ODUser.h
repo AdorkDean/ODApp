@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ODShareModel.h"
+
+@interface ODShareModel : NSObject
+
+@property (copy, nonatomic) NSString *title;
+@property (copy, nonatomic) NSString *link;
+@property (copy, nonatomic) NSString *icon;
+@property (copy, nonatomic) NSString *desc;
+
+@end
 
 @interface ODUser : NSObject
 
@@ -26,6 +34,5 @@
 @property (assign, nonatomic) int user_auth_status;
 @property (copy, nonatomic) NSString *balance;
 @property (strong, nonatomic) ODShareModel *share;
-
 
 @end

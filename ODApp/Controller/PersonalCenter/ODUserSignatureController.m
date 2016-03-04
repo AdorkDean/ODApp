@@ -10,7 +10,7 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "Masonry.h"
-#import "ODUserResponse.h"
+#import "ODUser.h"
 
 @interface ODUserSignatureController ()<UITextViewDelegate>
 
@@ -101,17 +101,14 @@
     
     ODUser *user = [[ODUserInformation sharedODUserInformation] getUserCache];
     NSDictionary *parameters = @{@"user_sign":self.textView.text , @"open_id":user.open_id};
-    
-    [ODAPIManager getWithURL:@"/user/change" params:parameters success:^(id responseObject) {
-        
+    [ODHttpTool getWithURL:ODUrlUserChange parameters:parameters modelClass:[ODUser class] success:^(id model)
+    {
         [ODProgressHUD showToast:self.view msg:@"修改成功"];
-        ODUserResponse *resp = [ODUserResponse mj_objectWithKeyValues:responseObject];
-        ODUser *user = resp.result;
+        ODUser *user = [model result];
         [[ODUserInformation sharedODUserInformation] updateUserCache:user];
         
         [self.navigationController popViewControllerAnimated:YES];
-    } error:^(NSString *msg) {
-        [ODProgressHUD showToast:self.view msg:msg];
+
     } failure:^(NSError *error) {
         
     }];

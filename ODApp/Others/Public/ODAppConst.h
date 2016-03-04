@@ -108,6 +108,13 @@ UIKIT_EXTERN NSString * const ODUrlShareCallBack;
 UIKIT_EXTERN NSString * const ODUrlPersonalReleaseTask;
 UIKIT_EXTERN NSString * const ODUrlStoreDetail;
 UIKIT_EXTERN NSString * const ODUrlStoreTime;
+UIKIT_EXTERN NSString * const ODUrlUserChange;
+UIKIT_EXTERN NSString * const ODUrlUserCodeSend;
+UIKIT_EXTERN NSString * const ODUrlUserRegist;
+UIKIT_EXTERN NSString * const ODUrlUserInfo;
+UIKIT_EXTERN NSString * const ODUrlUserChangePasswd;
+UIKIT_EXTERN NSString * const ODUrlUserLogin1;
+
 
 UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
@@ -154,7 +161,6 @@ UIKIT_EXTERN NSString * const ODStoreDetailUrl;
 UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
 UIKIT_EXTERN NSString * const kCancelMyOrderUrl;
-UIKIT_EXTERN NSString * const kOthersInformationUrl;
 UIKIT_EXTERN NSString * const kSaveAddressUrl;
 UIKIT_EXTERN NSString * const kGetAddressUrl;
 UIKIT_EXTERN NSString * const kDeleteAddressUrl;
@@ -168,9 +174,7 @@ UIKIT_EXTERN NSString * const kOrderDetailUrl;
 
 UIKIT_EXTERN NSString * const kDelateOrderUrl;
 
-UIKIT_EXTERN NSString * const kGetUserInformationUrl;
 UIKIT_EXTERN NSString * const kGetImageDataUrl;
-UIKIT_EXTERN NSString * const kChangeUserInformationUrl;
 UIKIT_EXTERN NSString * const kChangePassWorldUrl;
 UIKIT_EXTERN NSString * const kGetCodeUrl;
 UIKIT_EXTERN NSString * const kLoginUrl;
