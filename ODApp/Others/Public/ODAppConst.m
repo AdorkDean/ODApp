@@ -85,27 +85,27 @@ NSString *const ODNotificationSellOrderThirdRefresh = @"ODNotificationSellOrderT
 #pragma mark - 请求URL接口
 /** 统一的URL */
 #ifdef DEBUG
-NSString *const ODBaseURL = @"http://woquapi.test.odong.com";
+NSString *const ODBaseURL = @"http://woquapi.test.odong.com/1.0/";
 NSString *const ODURL = @"http://woquapi.test.odong.com/1.0";
 #else
-NSString *const ODBaseURL = @"http://woquapi.odong.com";
+NSString *const ODBaseURL = @"http://woquapi.odong.com/1.0/";
 NSString *const ODURL = @"http://woquapi.odong.com/1.0";
 #endif
 
-NSString *const ODUrlCityList = @"/1.0/other/city/list";
-NSString *const ODUrlHomeFound = @"/1.0/other/home";
-NSString *const ODUrlActivityList = @"/1.0/store/activity/list";
-NSString *const ODUrlActivityDetail = @"/1.0/store/apply/detail2";
-NSString *const ODUrlActivityApply = @"/1.0/store/activity/apply";
-NSString *const ODUrlShareCallBack = @"/1.0/other/share/callback";
-NSString *const ODUrlPersonalReleaseTask = @"/1.0/swap/list";
-NSString *const ODUrlLoveAdd = @"/1.0/other/love/add";
-NSString *const ODUrlLoveDelete = @"/1.0/other/love/del";
-NSString *const ODUrlMyApplyActivity = @"/1.0/store/apply/my";
-NSString *const ODUrlStoreDetail = @"/1.0/other/store/detail";
-NSString *const ODUrlStoreTime = @"/1.0/store/timeline1";
-NSString *const ODUrlConfirmOrder = @"/1.0/store/confirm/order";
-NSString *const ODUrlCreateOrder = @"/1.0/store/create/order";
+NSString *const ODUrlCityList = @"other/city/list";
+NSString *const ODUrlHomeFound = @"other/home";
+NSString *const ODUrlActivityList = @"store/activity/list";
+NSString *const ODUrlActivityDetail = @"store/apply/detail2";
+NSString *const ODUrlActivityApply = @"store/activity/apply";
+NSString *const ODUrlShareCallBack = @"other/share/callback";
+NSString *const ODUrlPersonalReleaseTask = @"swap/list";
+NSString *const ODUrlLoveAdd = @"other/love/add";
+NSString *const ODUrlLoveDelete = @"other/love/del";
+NSString *const ODUrlMyApplyActivity = @"store/apply/my";
+NSString *const ODUrlStoreDetail = @"other/store/detail";
+NSString *const ODUrlStoreTime = @"store/timeline1";
+NSString *const ODUrlConfirmOrder = @"store/confirm/order";
+NSString *const ODUrlCreateOrder = @"store/create/order";
 
 
 // 以后要改
