@@ -6,14 +6,14 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODUser.h"
+#import "ODUserModel.h"
 
 @implementation ODShareModel
 
 @end
 
-@implementation ODUser
+@implementation ODUserModel
 
 @end
 
-ODRequestResultIsDictionaryAll(ODUser)
+ODRequestResultIsDictionaryAll(ODUserModel)

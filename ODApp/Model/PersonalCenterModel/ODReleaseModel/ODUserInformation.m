@@ -19,7 +19,7 @@ Single_Implementation(ODUserInformation)
 
 
 
-- (void)updateUserCache:(ODUser *)user
+- (void)updateUserCache:(ODUserModel *)user
 {
     [ODUserInformation sharedODUserInformation].openID = user.open_id;
     [ODUserInformation sharedODUserInformation].mobile = user.mobile;
@@ -33,14 +33,14 @@ Single_Implementation(ODUserInformation)
 }
 
 
-- (ODUser *)getUserCache
+- (ODUserModel *)getUserCache
 {
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSDictionary *userDic = [userDefault objectForKey:kUserCache];
     if (userDic == nil) {
         return  nil;
     } else {
-        return [ODUser mj_objectWithKeyValues:userDic];
+        return [ODUserModel mj_objectWithKeyValues:userDic];
     }
 }
 

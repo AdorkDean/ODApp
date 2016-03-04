@@ -1,5 +1,5 @@
 //
-//  ODUser.h
+//  ODUserModel.h
 //  ODApp
 //
 //  Created by william on 16/3/1.
@@ -17,7 +17,7 @@
 
 @end
 
-@interface ODUser : NSObject
+@interface ODUserModel : NSObject
 
 @property (copy, nonatomic) NSString *open_id;
 @property (copy, nonatomic) NSString *mobile;

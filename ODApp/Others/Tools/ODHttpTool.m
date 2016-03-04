@@ -10,6 +10,7 @@
 #import "ODProgressHUD.h"
 #import "ODAPIManager.h"
 #import "ODAPPInfoTool.h"
+#import "ODUserInformation.h"
 
 NSString * const requestStatus = @"status";
 NSString * const requsetResult = @"result";

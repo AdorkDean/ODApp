@@ -48,7 +48,7 @@
 - (void)getData
 {
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlUserInfo parameters:@{} modelClass:[ODUser class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlUserInfo parameters:@{} modelClass:[ODUserModel class] success:^(id model)
     {
         weakSelf.balance = [NSString stringWithFormat:@"%@",[[model result]balance]];
         

@@ -18,7 +18,7 @@
 #import "ODLandMainController.h"
 #import "ODTabBarController.h"
 #import "ODChangePassWordController.h"
-#import "ODUser.h"
+#import "ODUserModel.h"
 
 
 
@@ -108,9 +108,9 @@
 {
     __weakSelf
     NSDictionary *parameters = @{ @"mobile":self.landView.accountTextField.text, @"passwd":self.landView.passwordTextField.text};
-    [ODHttpTool getWithURL:ODUrlUserLogin1 parameters:parameters modelClass:[ODUser class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlUserLogin1 parameters:parameters modelClass:[ODUserModel class] success:^(id model)
     {
-        ODUser *user = [model result];
+        ODUserModel *user = [model result];
         [[ODUserInformation sharedODUserInformation] updateUserCache:user];
         
         [ODProgressHUD showToast:self.view msg:@"登录成功"];

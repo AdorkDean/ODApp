@@ -24,7 +24,7 @@
 }
 
 
-- (void)setModel:(ODUser *)model {
+- (void)setModel:(ODUserModel *)model {
     if (_model != model) {
         _model = model;
     }

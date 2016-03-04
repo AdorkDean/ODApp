@@ -74,9 +74,9 @@
 -(void)getUserInfo
 {
      __weakSelf
-    [ODHttpTool getWithURL:ODUrlUserInfo parameters:@{} modelClass:[ODUser class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlUserInfo parameters:@{} modelClass:[ODUserModel class] success:^(id model)
     {
-        ODUser *user = [model result];
+        ODUserModel *user = [model result];
         weakSelf.avatar = user.avatar;
         [weakSelf createTopView];
     }
