@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 
-#import "ODUserModel.h"
+#import "ODUser.h"
 #import "ODTabBarController.h"
 #import "ODAPIManager.h"
 #import "ODClassMethod.h"
@@ -35,7 +35,7 @@
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
-@property(nonatomic, strong) ODUserModel *model;
+@property(nonatomic, strong) ODUser *model;
 
 @property(nonatomic, assign) BOOL isOther;
 

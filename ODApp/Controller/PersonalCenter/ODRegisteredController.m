@@ -14,7 +14,7 @@
 #import "ODLandMainController.h"
 #import  "ODTabBarController.h"
 #import "ODHomeFoundViewController.h"
-#import "ODUserResponse.h"
+#import "ODUser.h"
 
 
 
@@ -152,21 +152,20 @@
                              @"passwd":self.registView.password.text,
                              @"verify_code":self.registView.verification.text
                              };
-    [ODAPIManager getWithURL:@"/user/register" params:params success:^(id responseObject) {
-        
-        ODUserResponse *resp = [ODUserResponse mj_objectWithKeyValues:responseObject];
-        ODUser *user = resp.result;
+    [ODHttpTool getWithURL:ODUrlUserRegist parameters:params modelClass:[ODUser class] success:^(id model)
+     {
+        ODUser *user = [model result];
         [[ODUserInformation sharedODUserInformation] updateUserCache:user];
         
         [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
             ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             tabBar.selectedIndex = tabBar.currentIndex;
         }];
-        
         [ODProgressHUD showToast:self.view msg:@"注册成功"];
-    } error:^(NSString *msg) {
-        [ODProgressHUD showToast:self.view msg:msg];
-    } failure:^(NSError *error) {
+    }
+                   failure:^(NSError *error)
+    {
+    
     }];
 }
 
@@ -174,12 +173,10 @@
 -(void)getCode
 {
     NSDictionary *parameters = @{ @"mobile":self.registView.phoneNumber.text, @"type":@"1" };
-    
-    [ODAPIManager getWithURL:@"/user/verify/code/send" params:parameters success:^(id responseObject) {
-        // 启动定时器
+    [ODHttpTool getWithURL:ODUrlUserCodeSend parameters:parameters modelClass:[NSObject class] success:^(id model)
+     {
+        
         [self.timer setFireDate:[NSDate distantPast]];
-    } error:^(NSString *msg) {
-        [ODProgressHUD showToast:self.view msg:msg];
     } failure:^(NSError *error) {
         
     }];

@@ -53,36 +53,33 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
 }
 
 + (NSString *)getUrl:(NSString *)uri {
-    return [ODBaseURL stringByAppendingString:uri];
-}
-
-+ (NSString *)getApiUrl:(NSString *)uri {
     return [ODURL stringByAppendingString:uri];
 }
 
-+ (void)getWithURL: (NSString *)URL
-            params: (NSDictionary *)params
-           success: (void (^)(id responseObject))success
-             error: (void (^)(NSString *msg))error
-           failure: (void (^)(NSError *error))failure {
-    
-    NSString *url = [self getApiUrl:URL];
-    NSMutableDictionary *reqParams = [self getRequestParameter:params];
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:url parameters:reqParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        NSDictionary *data = (NSDictionary *)responseObject;
-        if ([[data objectForKey:@"status"] isEqualToString:@"success"]) {
-            success(responseObject);
-        } else {
-            error([data objectForKey:@"message"]);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        failure(error);
-    }];
-    
-}
+
+//+ (void)getWithURL: (NSString *)URL
+//            params: (NSDictionary *)params
+//           success: (void (^)(id responseObject))success
+//             error: (void (^)(NSString *msg))error
+//           failure: (void (^)(NSError *error))failure {
+//    
+//    NSString *url = [self getApiUrl:URL];
+//    NSMutableDictionary *reqParams = [self getRequestParameter:params];
+//    
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager GET:url parameters:reqParams success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        
+//        NSDictionary *data = (NSDictionary *)responseObject;
+//        if ([[data objectForKey:@"status"] isEqualToString:@"success"]) {
+//            success(responseObject);
+//        } else {
+//            error([data objectForKey:@"message"]);
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        failure(error);
+//    }];
+//    
+//}
 
 #pragma mark - 私有函数
 

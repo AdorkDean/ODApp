@@ -8,6 +8,12 @@
 
 #import "ODUser.h"
 
+@implementation ODShareModel
+
+@end
+
 @implementation ODUser
 
 @end
+
+ODRequestResultIsDictionaryAll(ODUser)

@@ -14,7 +14,7 @@
 #import "ODTabBarController.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
-#import "ODUserModel.h"
+#import "ODUser.h"
 #import "UIImageView+WebCache.h"
 #import "ODInformationController.h"
 #import "ODPersonalCenterViewController.h"
