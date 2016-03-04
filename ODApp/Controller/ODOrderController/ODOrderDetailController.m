@@ -110,13 +110,13 @@
             if ([responseObject[@"status"] isEqualToString:@"success"]) {
 
 
-                [self.dataArray removeAllObjects];
+                [weakSelf.dataArray removeAllObjects];
                 NSMutableDictionary *dic = responseObject[@"result"];
                 ODOrderDetailModel *model = [[ODOrderDetailModel alloc] init];
                 [model setValuesForKeysWithDictionary:dic];
-                [self.dataArray addObject:model];
+                [weakSelf.dataArray addObject:model];
 
-                ODOrderDetailModel *statusModel = self.dataArray[0];
+                ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
                 NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
 
 
