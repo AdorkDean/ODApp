@@ -170,39 +170,30 @@
 #pragma mark - 请求数据
 -(void)changePassWord
 {
+    __weakSelf
     NSDictionary *parameters = @{
                                  @"mobile":self.registView.phoneNumber.text,
                                  @"passwd":self.registView.password.text,
                                  @"verify_code":self.registView.verification.text
                                  };
-    
-    [ODAPIManager getWithURL:@"/user/change/passwd" params:parameters success:^(id responseObject) {
-        
-        if ([self.topTitle isEqualToString:@"修改密码"]) {
-            [self.navigationController popViewControllerAnimated:YES];
+    [ODHttpTool getWithURL:ODUrlUserChangePasswd parameters:parameters modelClass:[NSObject class] success:^(id model)
+    {
+        if ([weakSelf.topTitle isEqualToString:@"修改密码"]) {
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }else{
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [weakSelf dismissViewControllerAnimated:YES completion:nil];
         }
-        
-        [ODProgressHUD showToast:self.view msg:@"修改成功"];
-    } error:^(NSString *msg) {
-        [ODProgressHUD showToast:self.view msg:msg];
     } failure:^(NSError *error) {
         
     }];
 }
-
 -(void)getCode
 {
     NSDictionary *parameters = @{ @"mobile":self.registView.phoneNumber.text, @"type":@"3" };
-    
-    [ODAPIManager getWithURL:@"/user/verify/code/send" params:parameters success:^(id responseObject) {
-        // 启动定时器
+    [ODHttpTool getWithURL:ODUrlUserCodeSend parameters:parameters modelClass:[NSObject class] success:^(id model) {
         [self.timer setFireDate:[NSDate distantPast]];
-    } error:^(NSString *msg) {
-        [ODProgressHUD showToast:self.view msg:msg];
     } failure:^(NSError *error) {
-        
+
     }];
 }
 

@@ -45,31 +45,18 @@
 
 #pragma mark - 请求数据
 
-- (void)getData {
-    self.manager = [AFHTTPRequestOperationManager manager];
-    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-
-    NSDictionary *parameters = @{@"open_id" : openId};
-
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:kGetUserInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        NSMutableDictionary *dic = responseObject[@"result"];
-
-        weakSelf.balance = [NSString stringWithFormat:@"%@", dic[@"balance"]];
-
+- (void)getData
+{
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlUserInfo parameters:@{} modelClass:[ODUser class] success:^(id model)
+    {
+        weakSelf.balance = [NSString stringWithFormat:@"%@",[[model result]balance]];
+        
         [self createView];
 
-
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
+    } failure:^(NSError *error) {
+        
     }];
-
 }
 
 

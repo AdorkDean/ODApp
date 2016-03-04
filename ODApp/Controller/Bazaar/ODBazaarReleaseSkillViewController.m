@@ -73,18 +73,15 @@
 
 -(void)getUserInfo
 {
-    self.manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *parameter = @{@"open_id":[ODUserInformation sharedODUserInformation].openID};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weakSelf
-    [self.manager GET:kOthersInformationUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            NSDictionary *dict = responseObject[@"result"];
-            weakSelf.avatar = dict[@"avatar"];
-            [weakSelf createTopView];
-        }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+     __weakSelf
+    [ODHttpTool getWithURL:ODUrlUserInfo parameters:@{} modelClass:[ODUser class] success:^(id model)
+    {
+        ODUser *user = [model result];
+        weakSelf.avatar = user.avatar;
+        [weakSelf createTopView];
+    }
+                   failure:^(NSError *error)
+    {
         
     }];
 }

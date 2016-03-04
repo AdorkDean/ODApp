@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ODUserModel.h"
+#import "ODUser.h"
 
 @interface ODLandFirstCell : UICollectionViewCell
 
