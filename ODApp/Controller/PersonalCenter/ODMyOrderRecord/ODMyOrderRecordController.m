@@ -56,10 +56,15 @@
 
 - (void)reloadData:(NSNotification *)text
 {
-    ODMyOrderRecordModel *model = self.orderArray[self.cancelOrderRow];
-    model.status_str = [NSString stringWithFormat:@"%@", text.userInfo[@"status_str"]];
-    [self.orderArray replaceObjectAtIndex:self.cancelOrderRow withObject:model];
-    [self.collectionView reloadData];
+    @try {
+        ODMyOrderRecordModel *model = self.orderArray[self.cancelOrderRow];
+        model.status_str = [NSString stringWithFormat:@"%@", text.userInfo[@"status_str"]];
+        [self.orderArray replaceObjectAtIndex:self.cancelOrderRow withObject:model];
+        [self.collectionView reloadData];
+    }
+    @catch (NSException *exception) {
+        
+    }
 }
 
 

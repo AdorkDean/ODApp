@@ -105,6 +105,7 @@
                 [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
 
                 weakSelf.checkLabel.text = @"已取消";
+                weakSelf.navigationItem.rightBarButtonItem.customView.hidden = YES;
                 weakSelf.status_str = weakSelf.checkLabel.text;
                 
                 NSDictionary *loveDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.status_str,@"status_str", nil];
