@@ -8,7 +8,7 @@
 #import "Singleton.h"
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
-#import "ODUser.h"
+#import "ODUserModel.h"
 
 @interface ODUserInformation : NSObject
 
@@ -21,7 +21,7 @@ Single_Interface(ODUserInformation)
 @property(nonatomic, copy) NSString *mobile;
 
 
-- (void)updateUserCache:(ODUser *)user;
-- (ODUser *)getUserCache;
+- (void)updateUserCache:(ODUserModel *)user;
+- (ODUserModel *)getUserCache;
 
 @end

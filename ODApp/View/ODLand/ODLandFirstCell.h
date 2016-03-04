@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ODUser.h"
+#import "ODUserModel.h"
 
 @interface ODLandFirstCell : UICollectionViewCell
 
@@ -17,6 +17,6 @@
 @property(weak, nonatomic) IBOutlet UILabel *signatureLabel;
 @property(weak, nonatomic) IBOutlet UIImageView *qrcodeImageView;
 
-@property(nonatomic, strong) ODUser *model;
+@property(nonatomic, strong) ODUserModel *model;
 
 @end

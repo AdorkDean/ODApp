@@ -31,7 +31,7 @@
 {
     __weakSelf
     NSDictionary *parameter = @{@"open_id":self.open_id};
-    [ODHttpTool getWithURL:ODUrlUserInfo parameters:parameter modelClass:[ODUser class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlUserInfo parameters:parameter modelClass:[ODUserModel class] success:^(id model)
      {
         weakSelf.model = [model result];
         [weakSelf createCollectionView];

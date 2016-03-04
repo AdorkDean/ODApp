@@ -14,7 +14,7 @@
 #import "ODLandMainController.h"
 #import  "ODTabBarController.h"
 #import "ODHomeFoundViewController.h"
-#import "ODUser.h"
+#import "ODUserModel.h"
 
 
 
@@ -152,9 +152,9 @@
                              @"passwd":self.registView.password.text,
                              @"verify_code":self.registView.verification.text
                              };
-    [ODHttpTool getWithURL:ODUrlUserRegist parameters:params modelClass:[ODUser class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlUserRegist parameters:params modelClass:[ODUserModel class] success:^(id model)
      {
-        ODUser *user = [model result];
+        ODUserModel *user = [model result];
         [[ODUserInformation sharedODUserInformation] updateUserCache:user];
         
         [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:^{
