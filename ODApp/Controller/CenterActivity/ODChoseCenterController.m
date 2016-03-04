@@ -123,7 +123,8 @@
     NSString *storeId = [NSString stringWithFormat:@"%ld", (long) model.storeId];
 
 
-    if (self.storeCenterNameBlock) {
+    if (self.storeCenterNameBlock)
+    {
         self.storeCenterNameBlock(model.name, storeId, model.storeId);
     }
 

@@ -14,7 +14,7 @@
 #import "CenterDetailModel.h"
 #import "UIImageView+WebCache.h"
 #import "ODChoseCenterController.h"
-#import "ODCenterYuYueController.h"
+#import "ODPrecontractViewController.h"
 #import "CenterDetailCell.h"
 #import "MJRefresh.h"
 #import "CenterActivityModel.h"
@@ -77,25 +77,15 @@ int pageNumnber = 0;
 
 
     } else {
-
-        ODCenterYuYueController *vc = [[ODCenterYuYueController alloc] init];
-        vc.centerName = self.model.name;
-        vc.storeId = self.storeId;
-        vc.phoneNumber = self.centerDetailView.phoneLabel.text;
+        ODPrecontractViewController *vc = [[ODPrecontractViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
-
+        vc.storeId = self.storeId;
     }
 }
 
-- (void)phoneAction:(UITapGestureRecognizer *)sender {
-
-    NSMutableString *str = [[NSMutableString alloc] initWithFormat:@"tel:%@", self.centerDetailView.phoneLabel.text];
-
-    UIWebView *callWebview = [[UIWebView alloc] init];
-    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-    [self.view addSubview:callWebview];
-
-
+- (void)phoneAction:(UITapGestureRecognizer *)sender
+{
+    [self.view callToNum:self.centerDetailView.phoneLabel.text];
 }
 
 

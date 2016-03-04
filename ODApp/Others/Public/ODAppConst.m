@@ -60,6 +60,9 @@ NSString *const ODNotificationQuit = @"ODNotificationQuit";
 /**  回复成功后刷新 */
 NSString *const ODNotificationReplySuccess = @"ODNotificationReplySuccess";
 
+/**  登录成功后的通知 */
+NSString *const ODNotificationLoginSuccess = @"ODNotificationLoginSuccess";
+
 /** 定位成功刷新 */
 NSString *const ODNotificationLocationSuccessRefresh = @"ODNotificationLocationSuccessRefresh";
 
@@ -99,7 +102,10 @@ NSString *const ODUrlPersonalReleaseTask = @"/1.0/swap/list";
 NSString *const ODUrlLoveAdd = @"/1.0/other/love/add";
 NSString *const ODUrlLoveDelete = @"/1.0/other/love/del";
 NSString *const ODUrlMyApplyActivity = @"/1.0/store/apply/my";
-
+NSString *const ODUrlStoreDetail = @"/1.0/other/store/detail";
+NSString *const ODUrlStoreTime = @"/1.0/store/timeline1";
+NSString *const ODUrlConfirmOrder = @"/1.0/store/confirm/order";
+NSString *const ODUrlCreateOrder = @"/1.0/store/create/order";
 
 
 // 以后要改
@@ -163,7 +169,6 @@ NSString *const kDeleteAddressUrl = @"http://woquapi.test.odong.com/1.0/user/add
 NSString *const kEditeAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/edit";
 
 NSString *const kGetServecTimeUrl = @"http://woquapi.test.odong.com/1.0/swap/service/time";
-NSString *const kSaveOrderUrl = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
 
 NSString *const kGetOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/order";
 
@@ -184,9 +189,6 @@ NSString *const kGetTopicUrl = @"http://woquapi.test.odong.com/1.0/bbs/list";
 NSString *const kGetTaskUrl = @"http://woquapi.test.odong.com/1.0/task/list";
 NSString *const kDelateTaskUrl = @"http://woquapi.test.odong.com/1.0/bbs/del";
 NSString *const kGetCommentUrl = @"http://woquapi.test.odong.com/1.0/user/comment/list";
-NSString *const kCreateOrderUrl = @"http://woquapi.test.odong.com/1.0/store/create/order";
-NSString *const kGetStoreTimeUrl = @"http://woquapi.test.odong.com/1.0/store/timeline";
-NSString *const kSaveStoreOrderUrl = @"http://woquapi.test.odong.com/1.0/store/confirm/order";
 NSString *const kGetApplyListUrl = @"http://woquapi.test.odong.com/1.0/store/apply/users";
 NSString *const kGiveOpinionUrl = @"http://woquapi.test.odong.com/1.0/other/feedback";
 NSString *const kCollectionUrl = @"http://woquapi.test.odong.com/1.0/user/love/list";
@@ -243,7 +245,6 @@ NSString *const kHomeFoundListUrl = @"http://woquapi.odong.com/1.0/bbs/list";
 NSString *const kHomeFoundPictureUrl = @"http://woquapi.odong.com/1.0/other/banner";
 
 NSString *const ODStoreListUrl = @"http://woquapi.odong.com/1.0/other/store/list";
-NSString *const ODStoreDetailUrl = @"http://woquapi.odong.com/1.0/other/store/detail";
 
 NSString *const ODSkillDetailUrl = @"http://woquapi.odong.com/1.0/swap/info";
 
@@ -267,7 +268,6 @@ NSString *const kDeleteAddressUrl = @"http://woquapi.odong.com/1.0/user/address/
 NSString *const kEditeAddressUrl = @"http://woquapi.odong.com/1.0/user/address/edit";
 
 NSString *const kGetServecTimeUrl = @"http://woquapi.odong.com/1.0/swap/service/time";
-NSString *const kSaveOrderUrl = @"http://woquapi.odong.com/1.0/store/confirm/order";
 
 NSString *const kGetOrderUrl = @"http://woquapi.odong.com/1.0/swap/order";
 
@@ -288,9 +288,6 @@ NSString *const kGetTopicUrl = @"http://woquapi.odong.com/1.0/bbs/list";
 NSString *const kGetTaskUrl = @"http://woquapi.odong.com/1.0/task/list";
 NSString *const kDelateTaskUrl = @"http://woquapi.odong.com/1.0/bbs/del";
 NSString *const kGetCommentUrl = @"http://woquapi.odong.com/1.0/user/comment/list";
-NSString *const kCreateOrderUrl = @"http://woquapi.odong.com/1.0/store/create/order";
-NSString *const kGetStoreTimeUrl = @"http://woquapi.odong.com/1.0/store/timeline";
-NSString *const kSaveStoreOrderUrl = @"http://woquapi.odong.com/1.0/store/confirm/order";
 NSString *const kGetApplyListUrl = @"http://woquapi.odong.com/1.0/store/apply/users";
 NSString *const kGiveOpinionUrl = @"http://woquapi.odong.com/1.0/other/feedback";
 NSString *const kCollectionUrl = @"http://woquapi.odong.com/1.0/user/love/list";
@@ -304,5 +301,6 @@ NSString *const kDeliveryUrl = @"http://woquapi.odong.com/1.0/swap/confirm/deliv
 NSString *const kFinshOrderUrl = @"http://woquapi.odong.com/1.0/swap/finish";
 NSString *const kEvalueUrl = @"http://woquapi.odong.com/1.0/swap/order/reason";
 NSString *const kPayBackUrl = @"http://woquapi.odong.com/1.0/pay/weixin/callback/sync";
+NSString *const ODStoreDetailUrl = @"http://woquapi.odong.com/1.0/other/store/detail";
 
 #endif

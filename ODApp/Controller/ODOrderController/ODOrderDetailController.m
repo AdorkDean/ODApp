@@ -110,13 +110,13 @@
             if ([responseObject[@"status"] isEqualToString:@"success"]) {
 
 
-                [self.dataArray removeAllObjects];
+                [weakSelf.dataArray removeAllObjects];
                 NSMutableDictionary *dic = responseObject[@"result"];
                 ODOrderDetailModel *model = [[ODOrderDetailModel alloc] init];
                 [model setValuesForKeysWithDictionary:dic];
-                [self.dataArray addObject:model];
+                [weakSelf.dataArray addObject:model];
 
-                ODOrderDetailModel *statusModel = self.dataArray[0];
+                ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
                 NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
 
 
@@ -877,10 +877,7 @@
 - (void)phoneAction:(UIButton *)sender {
     ODOrderDetailModel *model = self.dataArray[0];
     NSMutableDictionary *dic = model.user;
-    NSMutableString *str = [[NSMutableString alloc] initWithFormat:@"tel:%@", dic[@"mobile"]];
-    UIWebView *callWebview = [[UIWebView alloc] init];
-    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-    [self.view addSubview:callWebview];
+    [self.view callToNum:dic[@"mobile"]];
 }
 
 - (void)dealloc {

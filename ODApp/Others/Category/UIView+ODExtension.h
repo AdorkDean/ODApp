@@ -34,4 +34,9 @@
  */
 - (UIView *)addLineFromPoint:(CGPoint)point;
 
+/**
+ *  打电话
+ */
+- (void)callToNum:(NSString *)numString;
+
 @end

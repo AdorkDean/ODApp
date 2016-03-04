@@ -371,9 +371,9 @@
         self.drawbackStateLabel.textAlignment = NSTextAlignmentLeft;
         [_drawbackStateView addSubview:self.drawbackStateLabel];
         
-        self.drawbackReasonContentView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.drawbackStateLabel.frame), KScreenWidth, 150)];
-        self.drawbackReasonContentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-        [_drawbackStateView addSubview:self.drawbackReasonContentView];
+        self.drawbackStateContentView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.drawbackStateLabel.frame), KScreenWidth, 150)];
+        self.drawbackStateContentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        [_drawbackStateView addSubview:self.drawbackStateContentView];
         
         self.drawbackStateTextView = [[UITextView alloc]initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - ODLeftMargin * 2, 150)];
         self.drawbackStateTextView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
@@ -385,7 +385,7 @@
         
         self.drawbackStateTextView.text = self.drawbackState;
         self.drawbackStateTextView.delegate = self;
-        [self.drawbackReasonContentView addSubview:self.drawbackStateTextView];
+        [self.drawbackStateContentView addSubview:self.drawbackStateTextView];
         
         self.contentPlaceholderLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, kScreenSize.width-35, 20)];
         self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
@@ -727,10 +727,7 @@
 #pragma mark - 拨打电话
 - (void)servicePhoneButtonClick:(UIButton *)button
 {
-    NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.servicePhone];
-    UIWebView *callWebView = [[UIWebView alloc] init];
-    [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
-    [self.view addSubview:callWebView];    
+    [self.view callToNum:self.servicePhone];
 }
 
 - (void)submitAction:(UIButton *)sender

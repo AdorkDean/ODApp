@@ -22,17 +22,4 @@
 @property(nonatomic, copy) NSString *avatar;
 @property(nonatomic, copy) NSString *reason;
 
-/**
- *  "title": "asdasd",
- "content": "asdasdasdasdasdasdasdasdasdasdasdasdasdasd",
- "task_status": -2,
- "open_id": "766148455eed214ed1f8",
- "user_nick": "oye",
- "avatar": "",
- "tags": [],
- "task_start_date": "-0001/11/30 00:00",
- "apply_num": 0,
- "apply": []
- */
-
 @end
