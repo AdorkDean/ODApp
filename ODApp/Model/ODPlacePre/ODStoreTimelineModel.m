@@ -26,3 +26,4 @@
 @end
 
 ODRequestResultIsArrayImplementation(ODStoreTimelineModel)
+
