@@ -123,10 +123,7 @@
 #pragma mark - 拨打电话
 - (void)phoneButtonClick:(UIButton *)button
 {
-    NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.model.store_tel];
-    UIWebView *callWebView = [[UIWebView alloc] init];
-    [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
-    [self.view addSubview:callWebView];
+    [self.view callToNum:self.model.store_tel];
 }
 
 

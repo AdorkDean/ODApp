@@ -124,6 +124,9 @@
         _footerView = [ODPlacePreFooterView od_viewFromXib];
         _footerView.frame = CGRectMake(0, CGRectGetMaxY(self.deviceView.frame), KScreenWidth,_footerView.viewHeight);
         [_footerView.submitBtn addTarget:self action:@selector(requestCreateOrder) forControlEvents:UIControlEventTouchUpInside];
+        _footerView.numTextView.delegate = self;
+        _footerView.contentTextView.delegate = self;
+        _footerView.pupurseTextView.delegate = self;
         [self.baseScrollView addSubview:_footerView];
         [self.baseScrollView bringSubviewToFront:self.deviceView];
         self.baseScrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(_footerView.frame));
@@ -205,6 +208,12 @@
     isSelectedStart = YES;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
@@ -261,15 +270,15 @@
     {
         [ODProgressHUD showInfoWithStatus:@"请选择结束时间"];
     }
-    else if (self.footerView.pupurseTextView.text.length == 0)
+    else if (self.footerView.pupurseTextView.text.isBlank)
     {
         [ODProgressHUD showInfoWithStatus:@"请输入活动目的"];
     }
-    else if (self.footerView.contentTextView.text.length == 0)
+    else if (self.footerView.contentTextView.text.isBlank)
     {
         [ODProgressHUD showInfoWithStatus:@"请输入活动内容"];
     }
-    else if (self.footerView.numTextView.text.length == 0)
+    else if (self.footerView.numTextView.text.isBlank)
     {
         [ODProgressHUD showInfoWithStatus:@"请输入活动人数"];
     }
@@ -376,21 +385,13 @@
 }
 
 #pragma mark - UITextViewDelegate
-
-- (void)textViewDidChange:(UITextView *)textView {
-    
-    NSString *purposeText = @"";
-    NSString *contentText = @"";
-    NSString *numText = @"";
+- (void)textViewDidChange:(UITextView *)textView
+{
     if (textView == self.footerView.pupurseTextView)
     {
         if (textView.text.length > 20)
         {
             textView.text = [textView.text substringToIndex:20];
-        }
-        else
-        {
-            purposeText = textView.text;
         }
     }
     else if (textView == self.footerView.contentTextView)
@@ -399,20 +400,12 @@
         {
             textView.text = [textView.text substringToIndex:100];
         }
-        else
-        {
-            contentText = textView.text;
-        }
     }
     else if (textView == self.footerView.numTextView)
     {
         if (textView.text.length > 3)
         {
-            textView.text = [textView.text substringFromIndex:3];
-        }
-        else
-        {
-            numText = textView.text;
+            textView.text = [textView.text substringToIndex:3];
         }
     }
 }

@@ -513,16 +513,9 @@
 }
 
 // 打电话
-- (void)phoneAction:(UIButton *)sender {
-
-
-    NSMutableString *str = [[NSMutableString alloc] initWithFormat:@"tel:%@", self.orderDetailView.addressPhoneLabel.text];
-
-    UIWebView *callWebview = [[UIWebView alloc] init];
-    [callWebview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:str]]];
-    [self.view addSubview:callWebview];
-
-
+- (void)phoneAction:(UIButton *)sender
+{
+    [self.view callToNum:self.orderDetailView.addressPhoneLabel.text];
 }
 
 - (void)dealloc {

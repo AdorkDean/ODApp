@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2314F5581C89226300A770DC /* NSString+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2314F5571C89226300A770DC /* NSString+ODExtension.m */; };
 		23451CAF1C85E5EF0030271B /* jpush-ios-2.1.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 23451CAD1C85E5EF0030271B /* jpush-ios-2.1.0.a */; };
 		23451CB21C8679040030271B /* ODAppRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 23451CB11C8679040030271B /* ODAppRegister.m */; };
 		239611871C85D54A0025184B /* UIColor+ODColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 239611861C85D54A0025184B /* UIColor+ODColor.m */; };
@@ -337,6 +338,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2314F5561C89226300A770DC /* NSString+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ODExtension.h"; sourceTree = "<group>"; };
+		2314F5571C89226300A770DC /* NSString+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ODExtension.m"; sourceTree = "<group>"; };
 		23451CAD1C85E5EF0030271B /* jpush-ios-2.1.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-2.1.0.a"; sourceTree = "<group>"; };
 		23451CAE1C85E5EF0030271B /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
 		23451CB01C8679040030271B /* ODAppRegister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppRegister.h; sourceTree = "<group>"; };
@@ -1570,6 +1573,8 @@
 				D4F76DC11C61AEB800D59F02 /* NSDictionary+ODExtension.m */,
 				D44423A51C7B1811005B4CFE /* NSArray+ODExtension.h */,
 				D44423A61C7B1811005B4CFE /* NSArray+ODExtension.m */,
+				2314F5561C89226300A770DC /* NSString+ODExtension.h */,
+				2314F5571C89226300A770DC /* NSString+ODExtension.m */,
 				C64D45681C5F8C6F003BFFA0 /* NSURL+ODExtension.h */,
 				C64D45691C5F8C6F003BFFA0 /* NSURL+ODExtension.m */,
 				C64D456A1C5F8C6F003BFFA0 /* UIBarButtonItem+ODExtention.h */,
@@ -2786,6 +2791,7 @@
 				D4D073801C59B9FA008527C9 /* ODCommumityViewController.m in Sources */,
 				D4D073761C59B9FA008527C9 /* ODActivityDetailController.m in Sources */,
 				9DE951DA1C78371100D7339D /* ODBalanceView.m in Sources */,
+				2314F5581C89226300A770DC /* NSString+ODExtension.m in Sources */,
 				D4D075291C59B9FA008527C9 /* ODTabBar.m in Sources */,
 				D4D0736E1C59B9FA008527C9 /* ODBaseViewController.m in Sources */,
 				D4D0737D1C59B9FA008527C9 /* ODCommunityDetailViewController.m in Sources */,
