@@ -5,6 +5,7 @@
 //  Created by 刘培壮 on 16/3/1.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
+#import "MobClick.h"
 #import "ODStoreDetailModel.h"
 #import "ODStoreTimelineModel.h"
 #import "ODStoreCreateOrderModel.h"
@@ -17,6 +18,22 @@
 #import "ODPlacePreDeviceView.h"
 #import "ODPlacePreFooterView.h"
 #import "ODPickerHeaderView.h"
+
+@implementation NSMutableArray (ODPrecontractViewController)
+
+- (void)addWithStatusTimes:(NSArray *)times
+{
+    [self removeAllObjects];
+    for (ODStoreTimelineCaoModel *model in times)
+    {
+        if (model.status)
+        {
+            [self addObject:model];
+        }
+    }
+}
+
+@end
 
 @interface ODPrecontractViewController ()<UIPickerViewDataSource,UIPickerViewDelegate,UIAlertViewDelegate,UITextViewDelegate,ODPlacePreDeviceViewDelegate>
 {
@@ -52,13 +69,13 @@
 @property (nonatomic,strong) NSArray *startDates;
 
 /** 右边可以选择的开始时间 */
-@property (nonatomic,strong) NSArray *startTimes;
+@property (nonatomic,strong) NSMutableArray *startTimes;
 
 /** 左边可以选择的结束日期 */
 @property (nonatomic,strong) NSArray *endDates;
 
 /** 右边可以选择的结束时间 */
-@property (nonatomic,strong) NSArray *endTimes;
+@property (nonatomic,strong) NSMutableArray *endTimes;
 
 /** 选择的日期 */
 @property (nonatomic,copy) NSString *dateStr;
@@ -78,7 +95,8 @@
 @end
 
 @implementation ODPrecontractViewController
-
+@synthesize startTimes = _startTimes;
+@synthesize endTimes = _endTimes;
 #pragma mark - 懒加载
 
 - (UIScrollView *)baseScrollView
@@ -188,6 +206,24 @@
     }
     return _start_dateTime;
 }
+
+- (NSMutableArray *)startTimes
+{
+    if (!_startTimes)
+    {
+        _startTimes = [NSMutableArray array];
+    }
+    return _startTimes;
+}
+
+- (NSMutableArray *)endTimes
+{
+    if (!_endTimes)
+    {
+        _endTimes = [NSMutableArray array];
+    }
+    return _endTimes;
+}
 #pragma mark - set方法
 
 - (void)setStoreId:(NSString *)storeId
@@ -211,14 +247,15 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self endEditing];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
+
 
 #pragma mark - 数据请求方法
 
@@ -285,7 +322,7 @@
     }
     else if (self.footerView.numTextView.text.integerValue == 0)
     {
-        [ODProgressHUD showInfoWithStatus:@"活动人数不能为0"];
+        [ODProgressHUD showInfoWithStatus:@"活动人数"];
     }
     else
     {
@@ -358,12 +395,12 @@
         case 0:
             if (isSelectedStart)
             {
-                self.startTimes = [self.startDates[row]cao];
+                [self.startTimes addWithStatusTimes:[self.startDates[row]cao]];
                 return [self.startDates[row]date_left_str];
             }
             else
             {
-                self.endTimes = [self.endDates[row]cao];
+                [self.endTimes addWithStatusTimes:[self.endDates[row]cao]];
                 [pickerView reloadComponent:1];
                 return [self.endDates[row]date_left_str];
             }

@@ -29,7 +29,6 @@
     BOOL hasload;
     NSInteger sharedTimes;
     NSInteger loveNum;
-    UIView *activePeopleLineView;
 }
 
 /**
@@ -86,6 +85,9 @@
  *  报名人数View
  */
 @property(nonatomic, strong) ODActivePersonInfoView *activePeopleView;
+
+/**  报名人数线条 */
+@property (nonatomic,strong)     UIView *activePeopleLineView;
 
 /**
  *  活动内容label
@@ -145,7 +147,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.headImageView.frame), self.baseScrollV.od_width - ODLeftMargin * 2, [ODHelp textHeightFromTextString:self.resultModel.content width:self.baseScrollV.od_width - ODLeftMargin * 2 fontSize:15])];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.headImageView.frame), self.baseScrollV.od_width - ODLeftMargin * 2, [ODHelp textHeightFromTextString:self.resultModel.content width:self.baseScrollV.od_width - ODLeftMargin * 2 fontSize:15] + 35)];
         _titleLabel.font = [UIFont systemFontOfSize:15];
         _titleLabel.contentMode = UIViewContentModeCenter;
         _titleLabel.numberOfLines = 0;
@@ -177,7 +179,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         label.frame = CGRectMake(0, CGRectGetMaxY(self.infoTableView.frame), KScreenWidth, labelHeight);
         label.textLabel.text = @"活动嘉宾";
         label.textLabel.font = [UIFont systemFontOfSize:13.5];
-        [label.textLabel addLineOnBottom];
+//        [label.textLabel addLineOnBottom];
         [self.baseScrollV addSubview:label];
         _VIPLabel = label;
     }
@@ -216,11 +218,19 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         view.userInteractionEnabled = YES;
         UITapGestureRecognizer *applyTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(applyAction)];
         [view addGestureRecognizer:applyTap];
-        activePeopleLineView = [view addLineFromPoint:CGPointMake(-ODLeftMargin, view.od_height)];
         [self.baseScrollV addSubview:view];
         _activePeopleView = view;
     }
     return _activePeopleView;
+}
+
+- (UIView *)activePeopleLineView
+{
+    if (!_activePeopleLineView)
+    {
+        _activePeopleLineView = [self.activePeopleView addLineFromPoint:CGPointMake(-ODLeftMargin, self.activePeopleView.od_height)];
+    }
+    return _activePeopleLineView;
 }
 
 - (ODTitleLabelView *)activeContentLabel {
@@ -229,7 +239,6 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         label.frame = CGRectMake(0, CGRectGetMaxY(self.activePeopleView.frame), KScreenWidth, labelHeight);
         label.textLabel.text = @"活动详情";
         label.textLabel.font = [UIFont systemFontOfSize:13.5];
-        [label addLineFromPoint:CGPointMake(0, label.od_y)];
         [label addLineFromPoint:CGPointMake(label.textLabel.od_x, label.od_height)];
         [self.baseScrollV addSubview:label];
         _activeContentLabel = label;
@@ -325,8 +334,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
     self.activityVIPs = self.resultModel.savants;
     self.activityApplies = self.resultModel.applies;
     self.reportButton.enabled = (self.resultModel.apply_status != 1) && (self.resultModel.apply_status != -6) && (self.resultModel.apply_status != -4);
-    [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    }];
+    [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
     
     self.titleLabel.text = self.resultModel.content;
     [self.infoTableView reloadData];
@@ -339,12 +347,12 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         self.peopleNumLabel.od_height = labelHeight;
         self.activePeopleView.od_y = CGRectGetMaxY(self.peopleNumLabel.frame);
         self.activePeopleView.od_height = 50;
+        self.activePeopleLineView.od_y = self.activePeopleView.od_height - .5;
     }
     else {
         self.peopleNumLabel.od_height = 0;
         self.activePeopleView.od_height = 0;
     }
-    activePeopleLineView.od_y = self.activePeopleView.od_height - .5;
     self.activeContentLabel.od_y = CGRectGetMaxY(self.activePeopleView.frame);
     
     self.webView.od_y = CGRectGetMaxY(self.activeContentLabel.frame) + 12.5;
@@ -475,7 +483,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
     webView.frame = CGRectMake(0, 12.5, KScreenWidth, clientheight);
     self.bottomButtonView.od_y = CGRectGetMaxY(self.webBaseView.frame);
     if (!hasload) {
-        [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(self.webBaseView.frame))];
+        [self.webBaseView addLineOnBottom];
         [self.bottomButtonView addLineOnBottom];
         hasload = YES;
     }

@@ -118,6 +118,7 @@
         [self dismissViewControllerAnimated:YES completion:^{
             ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
             tabBar.selectedIndex = tabBar.currentIndex;
+            [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationloveSkill object:nil];
             if (self.delegate != nil) {
                 [self.delegate personalHasLoginSuccess];
             }
