@@ -145,7 +145,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 
 - (UILabel *)titleLabel {
     if (!_titleLabel) {
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.headImageView.frame), self.baseScrollV.od_width - ODLeftMargin * 2, [ODHelp textHeightFromTextString:self.resultModel.content width:self.baseScrollV.od_width - ODLeftMargin * 2 fontSize:15])];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.headImageView.frame), self.baseScrollV.od_width - ODLeftMargin * 2, [ODHelp textHeightFromTextString:self.resultModel.content width:self.baseScrollV.od_width - ODLeftMargin * 2 fontSize:15] + 35)];
         _titleLabel.font = [UIFont systemFontOfSize:15];
         _titleLabel.contentMode = UIViewContentModeCenter;
         _titleLabel.numberOfLines = 0;
@@ -475,7 +475,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
     webView.frame = CGRectMake(0, 12.5, KScreenWidth, clientheight);
     self.bottomButtonView.od_y = CGRectGetMaxY(self.webBaseView.frame);
     if (!hasload) {
-        [self.baseScrollV addLineFromPoint:CGPointMake(0, CGRectGetMaxY(self.webBaseView.frame))];
+        [self.webBaseView addLineOnBottom];
         [self.bottomButtonView addLineOnBottom];
         hasload = YES;
     }
