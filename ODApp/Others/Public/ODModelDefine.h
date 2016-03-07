@@ -1,7 +1,4 @@
 
-/** 拼接模型类名 */
-#define ODRequestClassName(className)       NSClassFromString([NSStringFromClass(className)stringByAppendingString:@"Response"])
-
 /** .m 不包含数组的模型的内部实现 */
 #define ODRequestModelImplementation(className) \
 @implementation className  \
