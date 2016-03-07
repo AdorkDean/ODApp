@@ -92,7 +92,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
 
     __weak typeof(self) weakSelf = self;
-    [self.manager GET:kOrderDetailUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:ODUrlSwapOrderInfo parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         if (responseObject) {
 

@@ -9,6 +9,8 @@
 #import "ODCollectionCell.h"
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
+#import "ODLoveListModel.h"
+
 @implementation ODCollectionCell
 
 - (void)awakeFromNib {
@@ -24,16 +26,14 @@
     
 }
 
-
-
--(void)setWithLikeModel:(ODLikeModel *)model
+-(void)setWithLikeModel:(ODLoveListModel *)model
 {
     
     [self.userImageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     self.schoolLabel.text = model.school_name;
     self.nameLabel.text = model.nick;
     self.userImageButton.userInteractionEnabled = NO;
-    NSString *gender = [NSString stringWithFormat:@"%@" , model.gender];
+    NSString *gender = [NSString stringWithFormat:@"%@", model.gender];
     if ([gender isEqualToString:@"2"]) {
          self.genderImageWith.constant = 13;
         self.hisPictureView.image = [UIImage imageNamed:@"icon_woman"];
