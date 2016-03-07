@@ -12,8 +12,9 @@
 #import "MJRefresh.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
-#import "ODLikeModel.h"
 #import "ODOthersInformationController.h"
+
+#import "ODLoveListModel.h"
 
 @interface ODCollectionController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -27,7 +28,29 @@
 
 @implementation ODCollectionController
 
-- (void)viewDidLoad {
+#pragma mark - 懒加载
+- (NSMutableArray *)dataArray
+{
+    if (!_dataArray)
+    {
+        _dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
+
+#pragma mark - 生命周期方法
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.page = 1;
     self.dataArray = [[NSMutableArray alloc] init];
@@ -37,95 +60,7 @@
     self.navigationItem.title = @"TA们收藏过";
 }
 
-- (void)getData {
-    NSString *countNumber = [NSString stringWithFormat:@"%ld", (long) self.page];
-
-
-    self.manager = [AFHTTPRequestOperationManager manager];
-
-    NSDictionary *parameters = @{@"swap_id" : self.swap_id, @"page" : countNumber, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:kGetLikeListUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        if (responseObject) {
-
-
-            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-                if ([countNumber isEqualToString:@"1"]) {
-                    [self.dataArray removeAllObjects];
-                }
-
-
-                NSMutableDictionary *dic = responseObject[@"result"];
-
-                for (NSMutableDictionary *miniDic in dic) {
-                    ODLikeModel *model = [[ODLikeModel alloc] init];
-                    [model setValuesForKeysWithDictionary:miniDic];
-                    [self.dataArray addObject:model];
-                }
-
-
-                [weakSelf.collectionView.mj_header endRefreshing];
-
-
-                if (dic.count == 0) {
-                    [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-                }
-                else
-                {
-                    [weakSelf.collectionView.mj_footer endRefreshing];
-                }
-                [weakSelf.collectionView reloadData];
-
-           
-                
-                
-            }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-                
-                
-              
-                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-                [weakSelf.collectionView.mj_header endRefreshing];
-                [weakSelf.collectionView.mj_footer endRefreshing];
-                [weakSelf.collectionView reloadData];
-
-
-            }
-
-
-        }
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf.collectionView.mj_footer endRefreshing];
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
-    }];
-
-
-}
-
-#pragma mark - 刷新
-
-- (void)DownRefresh {
-
-    self.page = 1;
-    [self getData];
-
-}
-
-
-- (void)LoadMoreData {
-    self.page++;
-    [self getData];
-
-}
-
-
 #pragma mark - 初始化
-
 - (void)createCollectionView {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) collectionViewLayout:self.flowLayout];
@@ -136,39 +71,75 @@
         [self DownRefresh];
     }];
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-
+        
         [self LoadMoreData];
     }];
-
+    
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.view addSubview:self.collectionView];
 }
 
-#pragma mark - UICollectionViewDelegate
+#pragma mark - 获取数据
+- (void)getData
+{
+    NSString *countNumber = [NSString stringWithFormat:@"%ld", (long) self.page];
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"swap_id"] = self.swap_id;
+    params[@"page"] = countNumber;
+    params[@"open_id"] = self.open_id;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapLoveList parameters:params modelClass:[ODLoveListModel class] success:^(id model)
+    {
+        NSArray *loveListData = [model result];
+        if ([countNumber isEqualToString:@"1"]) [self.dataArray removeAllObjects];
+
+        [weakSelf.dataArray addObject:loveListData.firstObject];
+
+        [weakSelf.collectionView.mj_header endRefreshing];
+
+        if (!loveListData.count) {
+            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+        }
+        else
+        {
+            [weakSelf.collectionView.mj_footer endRefreshing];
+        }
+        [weakSelf.collectionView reloadData];
+    }
+    failure:^(NSError *error) {
+       [weakSelf.collectionView.mj_header endRefreshing];
+       [weakSelf.collectionView.mj_footer endRefreshing];
+       [ODProgressHUD showInfoWithStatus:@"网络异常"];
+    }];
+}
+
+#pragma mark - UICollectionView 数据源方法
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     ODCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
 
-    ODLikeModel *model = self.dataArray[indexPath.row];
+    ODLoveListModel *model = self.dataArray[indexPath.row];
     [cell setWithLikeModel:model];
 
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataArray.count;
-}
-
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
-
+#pragma mark - UICollectionView 代理方法
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-    ODLikeModel *model = self.dataArray[indexPath.row];
+    ODLoveListModel *model = self.dataArray[indexPath.row];
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
 
     if ([openId isEqualToString:model.open_id]) {;
@@ -176,30 +147,24 @@
 
         vc.open_id = model.open_id;
         [self.navigationController pushViewController:vc animated:YES];
-
-
     }
-
-
 }
-
-
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 
     return CGSizeMake(kScreenSize.width, 68);
-
-
+}
+#pragma mark - 监听方法
+- (void)DownRefresh {
+    self.page = 1;
+    [self getData];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
+
+- (void)LoadMoreData {
+    self.page++;
+    [self getData];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-}
 
 @end

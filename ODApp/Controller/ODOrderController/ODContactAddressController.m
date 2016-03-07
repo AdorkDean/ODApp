@@ -12,7 +12,7 @@
 #import "ODAddAddressController.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
-#import "ODAddressModel.h"
+#import "ODOrderAddressModel.h"
 #import "UITableViewRowAction+JZExtension.h"
 
 @interface ODContactAddressController () <UITableViewDataSource, UITableViewDelegate>
@@ -78,7 +78,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
 
     __weak typeof(self) weakSelf = self;
-    [self.manager GET:kGetAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:ODUrlUserGetAddress parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
 
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
@@ -94,7 +94,7 @@
 
 
             if (mainDic.count != 0) {
-                ODAddressModel *model = [[ODAddressModel alloc] init];
+                ODOrderAddressDefModel *model = [[ODOrderAddressDefModel alloc] init];
                 [model setValuesForKeysWithDictionary:mainDic];
                 [weakSelf.defaultArray addObject:model];
 
@@ -104,7 +104,7 @@
             for (NSMutableDictionary *miniDic in otherDic) {
 
 
-                ODAddressModel *model = [[ODAddressModel alloc] init];
+                ODOrderAddressDefModel *model = [[ODOrderAddressDefModel alloc] init];
                 [model setValuesForKeysWithDictionary:miniDic];
                 [weakSelf.dataArray addObject:model];
 
@@ -167,7 +167,7 @@
 
         if (self.defaultArray.count == 0) {;
         } else {
-            ODAddressModel *model = self.defaultArray[0];
+            ODOrderAddressDefModel *model = self.defaultArray[0];
             cell.isDefault = @"1";
             cell.model = model;
         }
@@ -180,7 +180,7 @@
         if (indexPath.row == self.dataArray.count - 1) {
             [cell.lineLabel removeFromSuperview];
         }
-        ODAddressModel *model = self.dataArray[indexPath.row];
+        ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
         cell.isDefault = @"2";
         cell.model = model;
 
@@ -256,14 +256,14 @@
         NSString *address_id = @"";
         if (indexPath.section == 0) {
 
-            ODAddressModel *model = self.defaultArray[indexPath.row];
+            ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
             address_id = [NSString stringWithFormat:@"%@", model.id];
             [weakSelf.defaultArray removeObjectAtIndex:indexPath.row];
             [weakSelf.tableView reloadData];
 
         } else {
 
-            ODAddressModel *model = self.dataArray[indexPath.row];
+            ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
             address_id = [NSString stringWithFormat:@"%@", model.id];
             [weakSelf.dataArray removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
@@ -286,7 +286,7 @@
         vc.typeTitle = @"编辑地址";
         vc.isAdd = NO;
         if (indexPath.section == 0) {
-            ODAddressModel *model = self.defaultArray[indexPath.row];
+            ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
             vc.isDefault = YES;
             NSString *addressId = [NSString stringWithFormat:@"%@", model.id];
             vc.addressId = addressId;
@@ -296,7 +296,7 @@
 
         } else {
 
-            ODAddressModel *model = self.dataArray[indexPath.row];
+            ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
             NSString *addressId = [NSString stringWithFormat:@"%@", model.id];
             vc.isDefault = NO;
             vc.addressId = addressId;
@@ -315,13 +315,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        ODAddressModel *model = self.defaultArray[indexPath.row];
+        ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
         if (self.getAddressBlock) {
             self.getAddressBlock(model.address, [NSString stringWithFormat:@"%@", model.id], @"2");
         }
     }
     else {
-        ODAddressModel *model = self.dataArray[indexPath.row];
+        ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
         if (self.getAddressBlock) {
             self.getAddressBlock(model.address, [NSString stringWithFormat:@"%@", model.id], @"2");
         }
