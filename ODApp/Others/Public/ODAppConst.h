@@ -22,6 +22,9 @@ UIKIT_EXTERN NSString * const KUserDefaultsAvatar;
 
 UIKIT_EXTERN NSString * const KUserDefaultsMobile;
 
+/** info.plist中记录的版本号 */
+UIKIT_EXTERN NSString * const kUserDefaultsVersionKey;
+
 /** 友盟的apiKey */
 UIKIT_EXTERN NSString * const kGetUMAppkey;
 
