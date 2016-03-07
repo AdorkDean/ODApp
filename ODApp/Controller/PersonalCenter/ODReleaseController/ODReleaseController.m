@@ -113,29 +113,17 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 #pragma mark - 删除技能请求
 - (void)deleteSkillRequest
 {
-    self.manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *parameter = @{@"open_id":[ODUserInformation sharedODUserInformation].openID, @"swap_id":self.swap_id};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
     __weakSelf
-    [self.manager GET:ODPersonReleaseTaskDeleteUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    [ODHttpTool getWithURL:ODUrlSwapDel parameters:parameter modelClass:[NSObject class] success:^(id model)
     {
-        if ([responseObject[@"status"] isEqualToString:@"success"])
-        {
-            [ODProgressHUD showInfoWithStatus:@"删除任务成功"];
-
-            [weakSelf.dataArray removeObject:weakSelf.dataArray[self.deleteRow]];
-            [weakSelf.collectionView reloadData];
-        }
-        else
-        {
-            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-        }
+        [ODProgressHUD showInfoWithStatus:@"删除任务成功"];
+        [weakSelf.dataArray removeObject:weakSelf.dataArray[self.deleteRow]];
+        [weakSelf.collectionView reloadData];
     }
-              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
+                   failure:^(NSError *error)
     {
-
+        
     }];
 }
 
