@@ -115,7 +115,8 @@ NSString * const ODUrlStoreTime = @"store/timeline1";
 NSString * const ODUrlConfirmOrder = @"store/confirm/order";
 NSString * const ODUrlCreateOrder = @"store/create/order";
 NSString * const ODUrlMyApplyActivity = @"store/apply/my";
-
+NSString * const ODUrlStoreOrders = @"store/orders";
+NSString * const ODUrlStoreInfoOrder = @"store/info/order";
 
 
 NSString * const ODUrlCityList = @"other/city/list";
@@ -125,9 +126,11 @@ NSString * const ODUrlLoveAdd = @"other/love/add";
 NSString * const ODUrlLoveDelete = @"other/love/del";
 NSString * const ODUrlStoreDetail = @"other/store/detail";
 
+NSString * const ODUrlBbsList = @"bbs/list";
 
 
 NSString * const ODUrlPersonalReleaseTask = @"swap/list";
+NSString * const ODUrlSwapDel = @"swap/del";
 
 
 
@@ -136,7 +139,7 @@ NSString * const ODUrlPayBack = @"pay/weixin/callback/sync";
 // 以后要改
 #ifdef DEBUG
 
-NSString * const ODPersonReleaseTaskDeleteUrl = @"http://woquapi.test.odong.com/1.0/swap/del";
+//NSString * const ODPersonReleaseTaskDeleteUrl = @"http://woquapi.test.odong.com/1.0/swap/del";
 
 NSString * const kBazaarUnlimitTaskUrl = @"http://woquapi.test.odong.com/1.0/task/list";
 NSString * const kBazaarReleaseTaskUrl = @"http://woquapi.test.odong.com/1.0/task/task/add";
@@ -177,8 +180,8 @@ NSString * const ODRefuseDrawbackUrl = @"http://woquapi.test.odong.com/1.0/swap/
 NSString * const ODReceiveDrawbackUrl = @"http://woquapi.test.odong.com/1.0/swap/confirm/refund";
 
 
-NSString * const kMyOrderRecordUrl = @"http://woquapi.test.odong.com/1.0/store/orders";
-NSString * const kMyOrderDetailUrl = @"http://woquapi.test.odong.com/1.0/store/info/order";
+//NSString * const kMyOrderRecordUrl = @"http://woquapi.test.odong.com/1.0/store/orders";
+//NSString * const kMyOrderDetailUrl = @"http://woquapi.test.odong.com/1.0/store/info/order";
 
 NSString * const kCancelMyOrderUrl = @"http://woquapi.test.odong.com/1.0/store/cancel/order";
 NSString * const kSaveAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/add";

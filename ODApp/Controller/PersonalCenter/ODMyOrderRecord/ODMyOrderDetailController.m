@@ -37,38 +37,18 @@
 #pragma mark - 加载数据请求
 - (void)getOrderDetailRequest
 {
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     NSDictionary *parameter = @{@"order_id":[NSString stringWithFormat:@"%@", self.order_id]};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:kMyOrderDetailUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-     {
-         if (responseObject)
-         {
-             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-             
-             NSDictionary *result = dict[@"result"];
-             weakSelf.model = [[ODMyOrderDetailModel alloc]init];
-             [weakSelf.model setValuesForKeysWithDictionary:result];
-             [weakSelf.dataArray addObject:weakSelf.model];
-             
-             NSDictionary *devices = result[@"devices"];
-             for (NSDictionary *itemDict in devices)
-             {
-                 NSString *name = itemDict[@"name"];
-                 [weakSelf.devicesArray addObject:name];
-             }
-         }
-         [weakSelf createOrderView];
-         
-     }
-              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-     {
-
-     }];
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlStoreInfoOrder parameters:parameter modelClass:[ODMyOrderDetailModel class] success:^(id model)
+    {
+        weakSelf.model = [model result];        
+        [weakSelf createOrderView];
+    }
+                   failure:^(NSError *error)
+    {
+        
+    }];
 }
 
 

@@ -83,62 +83,46 @@
 #pragma mark - 加载数据请求
 - (void)createRequest
 {
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     
     NSDictionary *parameter = @{@"open_id":[NSString stringWithFormat:@"%@",self.open_id],@"page":[NSString stringWithFormat:@"%ld",(long)self.count]};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:kMyOrderRecordUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
+    self.noReusltLabel.hidden = YES;
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlStoreOrders parameters:parameter modelClass:[ODMyOrderRecordModel class] success:^(id model)
     {
-        [weakSelf.noReusltLabel removeFromSuperview];
         
-        if (weakSelf.count == 1)
+        for (ODMyOrderRecordModel *orderModel in [model result])
         {
-            [weakSelf.orderArray removeAllObjects];
+            if (![[weakSelf.orderArray valueForKey:@"order_id"] containsObject:[orderModel order_id]]) {
+                [weakSelf.orderArray addObject:orderModel];
+            }
         }
-        
-        if (responseObject)
-        {
- 
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSDictionary *result = dict[@"result"];
-            for (NSDictionary *itemDict in result)
-            {
-                ODMyOrderRecordModel *model = [[ODMyOrderRecordModel alloc] init];
-                [model setValuesForKeysWithDictionary:itemDict];
-
-                if (![[weakSelf.orderArray valueForKeyPath:@"order_id"]containsObject:model.order_id])
-                {
-                    [weakSelf.orderArray addObject:model];
-                }
-            }
-            if (weakSelf.count == 1 && weakSelf.orderArray.count == 0)
-            {
-                weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无预约" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [weakSelf.view addSubview:weakSelf.noReusltLabel];
-            }
-            
-            [weakSelf.collectionView.mj_header endRefreshing];
-            if (!result.count == 0)
-            {                
-                [weakSelf.collectionView.mj_footer endRefreshing];
-            }
-            else
-            {
-                [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-            }
-            [weakSelf.collectionView reloadData];
-        }
-        
-
-    }
-              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-    {
         [weakSelf.collectionView.mj_header endRefreshing];
+        if ([[model result] count] == 0)
+        {
+            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+        }
+        else
+        {
+            [weakSelf.collectionView.mj_footer endRefreshing];
+        }
+        [weakSelf.collectionView reloadData];
+        
+        if (self.count == 1 && self.orderArray.count == 0)
+        {
+            weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
+            weakSelf.noReusltLabel.text = @"暂无技能";
+            weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
+            weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
+            weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+            [weakSelf.view addSubview:weakSelf.noReusltLabel];
+        }
+        
+    }
+                   failure:^(NSError *error)
+    {
         [weakSelf.collectionView.mj_footer endRefreshing];
-    }];
+        [weakSelf.collectionView.mj_header endRefreshing];
+    }];  
 }
 
 #pragma mark - Crate UICollectionView

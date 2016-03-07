@@ -118,6 +118,17 @@ UIKIT_EXTERN NSString * const ODUrlUserInfo;
 UIKIT_EXTERN NSString * const ODUrlUserChangePasswd;
 UIKIT_EXTERN NSString * const ODUrlUserLogin1;
 
+UIKIT_EXTERN NSString * const ODUrlStoreOrders;
+UIKIT_EXTERN NSString * const ODUrlStoreInfoOrder;
+
+
+UIKIT_EXTERN NSString * const ODUrlSwapDel;
+
+
+UIKIT_EXTERN NSString * const ODUrlBbsList;
+
+
+
 
 UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
