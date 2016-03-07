@@ -84,7 +84,7 @@ NSString * const ODNotificationSellOrderThirdRefresh = @"ODNotificationSellOrder
 
 #pragma mark - 请求URL接口
 /** 网页接口 */
-NSString * const ODFindJobUrl = @"http://www.myjob500.com/user/extloginpf";
+NSString * const ODWebUrlFindJob = @"http://www.myjob500.com/user/extloginpf";
 
 
 /** 统一的URL */
@@ -125,6 +125,9 @@ NSString * const ODUrlStoreDetail = @"other/store/detail";
 
 NSString * const ODUrlPersonalReleaseTask = @"swap/list";
 
+
+
+NSString * const ODUrlPayBack = @"pay/weixin/callback/sync";
 
 // 以后要改
 #ifdef DEBUG
@@ -204,7 +207,6 @@ NSString * const kMySellListUrl = @"http://woquapi.test.odong.com/1.0/swap/selle
 NSString * const kDeliveryUrl = @"http://woquapi.test.odong.com/1.0/swap/confirm/delivery";
 NSString * const kFinshOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/finish";
 NSString * const kEvalueUrl = @"http://woquapi.test.odong.com/1.0/swap/order/reason";
-NSString * const kPayBackUrl = @"http://woquapi.test.odong.com/1.0/pay/weixin/callback/sync";
 
 
 
@@ -288,7 +290,6 @@ NSString * const kMySellListUrl = @"http://woquapi.odong.com/1.0/swap/seller/ord
 NSString * const kDeliveryUrl = @"http://woquapi.odong.com/1.0/swap/confirm/delivery";
 NSString * const kFinshOrderUrl = @"http://woquapi.odong.com/1.0/swap/finish";
 NSString * const kEvalueUrl = @"http://woquapi.odong.com/1.0/swap/order/reason";
-NSString * const kPayBackUrl = @"http://woquapi.odong.com/1.0/pay/weixin/callback/sync";
 NSString * const ODStoreDetailUrl = @"http://woquapi.odong.com/1.0/other/store/detail";
 
 #endif

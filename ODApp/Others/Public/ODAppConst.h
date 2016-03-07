@@ -146,7 +146,7 @@ UIKIT_EXTERN NSString * const kDeleteReplyUrl;
 
 UIKIT_EXTERN NSString * const kHomeFoundListUrl;
 
-UIKIT_EXTERN NSString * const ODFindJobUrl;
+UIKIT_EXTERN NSString * const ODWebUrlFindJob;
 
 UIKIT_EXTERN NSString * const ODHomeChangeSkillUrl;
 
@@ -197,5 +197,5 @@ UIKIT_EXTERN NSString * const kMySellListUrl;
 UIKIT_EXTERN NSString * const kDeliveryUrl;
 UIKIT_EXTERN NSString * const kFinshOrderUrl;
 UIKIT_EXTERN NSString * const kEvalueUrl;
-UIKIT_EXTERN NSString * const kPayBackUrl;
+UIKIT_EXTERN NSString * const ODUrlPayBack;
 UIKIT_EXTERN NSString * const kGetOrderUrl;
