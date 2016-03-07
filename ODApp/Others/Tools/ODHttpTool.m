@@ -21,7 +21,7 @@ NSString * const requestSuccessStatus = @"success";
 
 + (NSMutableDictionary *)getRequestParameter:(NSDictionary *)parameter
 {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:parameter];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary ];
     
     dic[@"city_id"] = [NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID];
     dic[@"device_id"] = @"";
@@ -32,8 +32,11 @@ NSString * const requestSuccessStatus = @"success";
     dic[@"network_type"] = @"";
     dic[@"latitude"] = @"";
     dic[@"longitude"] = @"";
-    dic[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
-    
+    if (dic[@"open_id"] == nil)
+    {
+        dic[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
+    }
+    [dic setValuesForKeysWithDictionary:parameter];
     return [ODAPIManager signParameters:dic];
 }
 
