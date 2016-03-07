@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NSArray (ODExtension)
+
 - (NSString *)enumerateString;
 - (NSString *)desc;
+
 @end
