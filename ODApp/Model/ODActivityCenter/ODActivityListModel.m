@@ -8,8 +8,6 @@
 
 #import "ODActivityListModel.h"
 
-@implementation ODActivityListModel
-
-@end
+ODRequestModelImplementation(ODActivityListModel)
 
 ODRequestResultIsArrayImplementation(ODActivityListModel)

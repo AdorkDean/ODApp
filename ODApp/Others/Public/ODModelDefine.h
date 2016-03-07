@@ -2,6 +2,11 @@
 /** 拼接模型类名 */
 #define ODRequestClassName(className)       NSClassFromString([NSStringFromClass(className)stringByAppendingString:@"Response"])
 
+/** .m 不包含数组的模型的内部实现 */
+#define ODRequestModelImplementation(className) \
+@implementation className  \
+@end
+
 /** .h  请求回来的result是数组的情况 */
 #define ODRequestResultIsArrayProperty(className) \
 @interface className##Response : NSObject\
