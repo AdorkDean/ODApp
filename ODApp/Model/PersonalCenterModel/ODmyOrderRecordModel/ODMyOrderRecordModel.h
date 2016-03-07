@@ -8,7 +8,7 @@
 
 #import "ODAppModel.h"
 
-@interface ODMyOrderRecordModel : ODAppModel
+@interface ODMyOrderRecordModel : NSObject
 
 @property(nonatomic, copy) NSString *order_id;
 @property(nonatomic, copy) NSString *open_id;
@@ -30,3 +30,5 @@
 
 
 @end
+
+ODRequestResultIsArrayProperty(ODMyOrderRecordModel)
