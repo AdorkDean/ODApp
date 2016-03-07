@@ -123,7 +123,6 @@ UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDetailUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDelegateUrl;
-UIKIT_EXTERN NSString * const kBazaarLabelSearchUrl;
 UIKIT_EXTERN NSString * const kBazaarAcceptTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseRewardUrl;
 UIKIT_EXTERN NSString * const kBazaarExchangeSkillUrl;
@@ -138,7 +137,6 @@ UIKIT_EXTERN NSString * const kBazaarTaskReceiveCompleteUrl;
 /** 发起人确认完成 */
 UIKIT_EXTERN NSString * const kBazaarTaskInitiateCompleteUrl;
 
-UIKIT_EXTERN NSString * const kCommunityBbsListUrl;
 UIKIT_EXTERN NSString * const kCommunityReleaseBbsUrl;
 UIKIT_EXTERN NSString * const kCommunityBbsDetailUrl;
 UIKIT_EXTERN NSString * const kCommunityBbsSearchUrl;
@@ -150,11 +148,8 @@ UIKIT_EXTERN NSString * const kPushImageUrl;
 UIKIT_EXTERN NSString * const kDeleteReplyUrl;
 
 UIKIT_EXTERN NSString * const kHomeFoundListUrl;
-UIKIT_EXTERN NSString * const kHomeFoundPictureUrl;
 
-UIKIT_EXTERN NSString * const ODSkillDetailUrl;
 UIKIT_EXTERN NSString * const ODFindJobUrl;
-UIKIT_EXTERN NSString * const ODHotActivityUrl;
 
 UIKIT_EXTERN NSString * const ODHomeChangeSkillUrl;
 
@@ -181,8 +176,6 @@ UIKIT_EXTERN NSString * const kGetImageDataUrl;
 UIKIT_EXTERN NSString * const kChangePassWorldUrl;
 UIKIT_EXTERN NSString * const kGetCodeUrl;
 UIKIT_EXTERN NSString * const kLoginUrl;
-UIKIT_EXTERN NSString * const kRegistUrl;
-UIKIT_EXTERN NSString * const kGetTopicUrl;
 UIKIT_EXTERN NSString * const kGetTaskUrl;
 UIKIT_EXTERN NSString * const kDelateTaskUrl;
 UIKIT_EXTERN NSString * const kGetCommentUrl;
