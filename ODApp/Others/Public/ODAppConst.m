@@ -93,10 +93,8 @@ NSString * const ODWebUrlFindJob = @"http://www.myjob500.com/user/extloginpf";
 /** 统一的URL */
 #ifdef DEBUG
 NSString * const ODBaseURL = @"http://woquapi.test.odong.com/1.0/";
-NSString * const ODURL = @"http://woquapi.test.odong.com";
 #else
 NSString * const ODBaseURL = @"http://woquapi.odong.com/1.0/";
-NSString * const ODURL = @"http://woquapi.odong.com";
 #endif
 
 
