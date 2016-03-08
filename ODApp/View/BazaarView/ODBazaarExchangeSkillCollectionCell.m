@@ -21,13 +21,13 @@
     self.shareLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
 }
 
--(void)showDatasWithModel:(ODBazaarExchangeSkillModel *)model
+-(void)showDatasWithModel:(ODHomeInfoSwapModel *)model
 {
     self.titleLabel.text = model.title;
     self.priceLabel.text = [[[[NSString stringWithFormat:@"%@",model.price] stringByAppendingString:@"元"] stringByAppendingString:@"/"]stringByAppendingString:model.unit];
     self.contentLabel.text = model.content;
-    self.loveLabel.text = [NSString stringWithFormat:@"%@",model.love_num];
-    self.shareLabel.text = [NSString stringWithFormat:@"%@",model.share_num];
+    self.loveLabel.text = [NSString stringWithFormat:@"%d",model.love_num];
+    self.shareLabel.text = [NSString stringWithFormat:@"%d",model.share_num];
     NSString *gender = [NSString stringWithFormat:@"%@",model.user[@"gender"]];
     if ([gender isEqualToString:@"2"]) {
         self.genderImageView.image = [UIImage imageNamed:@"icon_woman"];

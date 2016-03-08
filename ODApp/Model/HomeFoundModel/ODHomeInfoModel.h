@@ -36,7 +36,7 @@ ODRequestResultIsDictionaryProperty(ODHomeInfoModel)
 
 @property(nonatomic, copy) NSString *title;
 
-@property(nonatomic, assign) int price;
+@property(nonatomic, copy) NSString *price;
 
 @property(nonatomic, assign) int swap_type;
 
@@ -54,6 +54,6 @@ ODRequestResultIsDictionaryProperty(ODHomeInfoModel)
 
 @property(nonatomic, strong) NSArray *loves;
 
-@property(nonatomic, assign) int swap_id;
+@property(nonatomic, copy) NSString *swap_id;
 
 @end
