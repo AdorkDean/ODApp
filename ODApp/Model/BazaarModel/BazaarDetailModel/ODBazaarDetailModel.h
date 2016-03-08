@@ -8,7 +8,20 @@
 
 #import "ODAppModel.h"
 
-@interface ODBazaarDetailModel : ODAppModel
+@interface ODBazaarDetailApplysModel : NSObject
+
+@property(nonatomic, copy) NSString *user_id;
+@property(nonatomic, copy) NSString *open_id;
+@property(nonatomic, copy) NSString *user_nick;
+@property(nonatomic, copy) NSString *avatar;
+@property(nonatomic, copy) NSString *sign;
+@property(nonatomic, copy) NSString *apply_status;
+
+@end
+
+
+
+@interface ODBazaarDetailModel : NSObject
 
 @property(nonatomic, copy) NSString *task_id;
 @property(nonatomic, copy) NSString *title;
@@ -26,6 +39,7 @@
 @property(nonatomic, copy) NSString *apply_status;
 @property(nonatomic, strong) NSMutableDictionary *share;
 
+@property(nonatomic, strong) NSArray *applys;
 
 /**
  *   "task_id": 1,

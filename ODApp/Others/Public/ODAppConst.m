@@ -125,6 +125,7 @@ NSString * const ODUrlStoreApply = @"store/apply";
 
 
 NSString * const ODUrlTaskTaskAdd = @"task/task/add";
+NSString * const ODUrlTaskDetail = @"task/detail";
 
 
 
@@ -170,7 +171,7 @@ NSString * const kBazaarLabelSearchUrl = @"http://woquapi.test.odong.com/1.0/tas
 NSString * const kBazaarUnlimitTaskUrl = @"http://woquapi.test.odong.com/1.0/task/list";
 
 //NSString * const kBazaarReleaseTaskUrl = @"http://woquapi.test.odong.com/1.0/task/task/add";
-NSString * const kBazaarTaskDetailUrl = @"http://woquapi.test.odong.com/1.0/task/detail";
+//NSString * const kBazaarTaskDetailUrl = @"http://woquapi.test.odong.com/1.0/task/detail";
 NSString * const kBazaarTaskDelegateUrl = @"http://woquapi.test.odong.com/1.0/task/accept";
 NSString * const kBazaarAcceptTaskUrl = @"http://woquapi.test.odong.com/1.0/task/apply";
 NSString * const kBazaarReleaseRewardUrl = @"http://woquapi.test.odong.com/1.0/other/config/info";
