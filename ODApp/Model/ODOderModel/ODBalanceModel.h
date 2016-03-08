@@ -14,5 +14,4 @@
 @property(nonatomic, copy) NSString *date;
 @property(nonatomic, copy) NSString *status_str;
 
-
 @end

@@ -9,10 +9,7 @@
 #import "ODMySellModel.h"
 
 @implementation ODMySellModel
--(void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    
-}
-
 
 @end
+
+ODRequestResultIsArrayAll(ODMySellModel)

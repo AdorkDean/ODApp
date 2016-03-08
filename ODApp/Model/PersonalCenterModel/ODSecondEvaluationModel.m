@@ -10,12 +10,6 @@
 
 @implementation ODSecondEvaluationModel
 
-
--(void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    
-}
-
-
-
 @end
+
+ODRequestResultIsDictionaryAll(ODSecondEvaluationModel)

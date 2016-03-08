@@ -28,12 +28,21 @@
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
-
-
 @end
 
 @implementation ODOtherTaskController
 
+
+#pragma mark - 生命周期方法
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -44,10 +53,13 @@
   
     self.navigationItem.title = @"他发起的任务";
     [self createCollection];
-   
-    
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - 初始化方法
 - (void)createCollection
 {
     
@@ -77,93 +89,71 @@
     
     
 }
-
-#pragma mark - 刷新
-- (void)downRefresh
-{
-    
-    self.PageNumber = 1;
-    [self getData];
-    
-    
-}
-
-
-- (void)loadMoreData
-{
-    self.PageNumber++;
-    [self getData];
-    
-}
-
-
+#pragma mark - 获取数据
 - (void)getData
 {
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.PageNumber];
     
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"suggest"] = @"0";
+    params[@"task_status"] = @"0";
+    params[@"page"] = countNumber;
+    params[@"my"] = @"1";
+    params[@"open_id"] = self.openId;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlTaskList parameters:params modelClass:[ODBazaarTasksModel class] success:^(id model)
+     {
+         if ([countNumber isEqualToString:@"1"]) {
+             [weakSelf.dataArray removeAllObjects];
+             [weakSelf.noReusltLabel removeFromSuperview];
+         }
+         
+         ODBazaarTasksModel *tasksModel = [model result];
+         
+         [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];
+         
+         [weakSelf.collectionView.mj_header endRefreshing];
+         if (tasksModel.tasks.count == 0) {
+             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+         }
+         else
+         {
+             [weakSelf.collectionView.mj_footer endRefreshing];
+         }
+         
+         if (weakSelf.dataArray.count == 0) {
+             weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+             [weakSelf.view addSubview:weakSelf.noReusltLabel];
+         }
+         
+         else{
+             [weakSelf.collectionView reloadData];
+         }
+         
+     } failure:^(NSError *error) {
+         [weakSelf.collectionView.mj_header endRefreshing];
+         [weakSelf.collectionView.mj_footer endRefreshing];
+         [ODProgressHUD showInfoWithStatus:@"网络异常"];
+     }];
     
-    self.manager = [AFHTTPRequestOperationManager manager];
     
-    NSDictionary *parameters = @{@"suggest":@"0", @"task_status":@"0", @"page":countNumber, @"my":@"1" , @"open_id":self.openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    
-   
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:kGetTaskUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        
-        if ([countNumber isEqualToString:@"1"]) {
-            [weakSelf.dataArray removeAllObjects];
-            [weakSelf.noReusltLabel removeFromSuperview];
-        }
-        
-        if (responseObject) {
-            
-            
-            NSDictionary *result = responseObject[@"result"];
-            NSArray *tasks = result[@"tasks"];
-            
-            
-            for (NSDictionary *itemDict in tasks) {
-                ODBazaarModel *model = [[ODBazaarModel alloc]init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.dataArray addObject:model];
-            }
-            [weakSelf.collectionView.mj_header endRefreshing];
-            if (tasks.count == 0) {
-                [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-            }
-            else
-            {
-                [weakSelf.collectionView.mj_footer endRefreshing];
-            }
-        }
-        
-        if (weakSelf.dataArray.count == 0) {
-            weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [weakSelf.view addSubview:weakSelf.noReusltLabel];
-        }
-        
-        else{
-            [weakSelf.collectionView reloadData];
-        }
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf.collectionView.mj_footer endRefreshing];
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
-    }];
+}
+#pragma mark - UICollectionView 数据源方法
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
 }
 
-#pragma mark - UICollectionViewDelegate
-
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
+    return self.dataArray.count;
     
-    
+}
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     ODBazaarModel *model = self.dataArray[indexPath.row];
     NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
     
@@ -172,7 +162,7 @@
         
         [cell.deleteButton removeFromSuperview];
         cell.model = model;
-    
+        
         return cell;
         
         
@@ -186,33 +176,10 @@
         return cell;
         
     }
-    
-    
-    
-    
-    
-   
 }
-
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 1;
-}
-
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    
-    return self.dataArray.count;
-    
-}
-
-
+#pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-   
-    
-    
     ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
     ODBazaarModel *model = self.dataArray[indexPath.row];
     
@@ -221,7 +188,7 @@
     
     if ([status isEqualToString:@"-1"]) {
         
-                        ;
+        ;
     }else{
         
         bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
@@ -230,25 +197,12 @@
         [self.navigationController pushViewController:bazaarDetail animated:YES];
         
     }
-    
-    
-    
-    
-    
-  
-       
-    
 }
-
-
-
 
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     return CGSizeMake(kScreenSize.width , 140);
-    
 }
 //动态设置每个分区的缩进量
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -276,22 +230,16 @@
 {
     return CGSizeMake(0, 0);
 }
-
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 事件方法
+- (void)downRefresh
+{
+    self.PageNumber = 1;
+    [self getData];
 }
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
+- (void)loadMoreData
+{
+    self.PageNumber++;
+    [self getData];
 }
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-}
-
 
 @end

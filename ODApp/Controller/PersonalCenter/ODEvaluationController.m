@@ -56,8 +56,6 @@
     self.FirstDataArray = [NSMutableArray array];
     self.secondDataArray = [NSMutableArray array];
   
-    
-    
    
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
@@ -195,126 +193,90 @@
 {
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.firstPage];
     
-    
-    self.firstManager = [AFHTTPRequestOperationManager manager];
-    
-     NSDictionary *parameters = @{@"type":@"1", @"page":countNumber, @"open_id":self.openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    
-    __weak typeof (self)weakSelf = self;
-    [self.firstManager GET:kGetCommentUrl parameters:signParameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        
-        if ([countNumber isEqualToString:@"1"]) {
-            [weakSelf.FirstDataArray removeAllObjects];
-            [weakSelf.firstLabel removeFromSuperview];
-           
-        }
-        
-        if (responseObject) {
-            
-            NSMutableDictionary *dic = responseObject[@"result"];
-            for (NSMutableDictionary *miniDic in dic) {
-                ODEvaluationModel *model = [[ODEvaluationModel alloc] init];
-                [model setValuesForKeysWithDictionary:miniDic];
-                [weakSelf.FirstDataArray addObject:model];
-                
-            }
-            
-            if (weakSelf.FirstDataArray.count == 0)
-            {
-                weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [weakSelf.scrollView addSubview:weakSelf.firstLabel];
-            }
-            
-            [weakSelf.firstCollectionView.mj_header endRefreshing];
-        
-            if (dic.count == 0) {
-                [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
-            }
-            else
-            {
-                [weakSelf.firstCollectionView.mj_footer endRefreshing];
-            }
-            [weakSelf.firstCollectionView reloadData];
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"type"] = @"1";
+    params[@"page"] = countNumber;
+    params[@"open_id"] = self.openId;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlUserCommentList parameters:params modelClass:[ODEvaluationModel class] success:^(id model)
+     {
+         if ([countNumber isEqualToString:@"1"]) {
+             [weakSelf.FirstDataArray removeAllObjects];
+             [weakSelf.firstLabel removeFromSuperview];
+         }
+         
+         NSArray *evaluationDatas = [model result];
+         [weakSelf.FirstDataArray addObjectsFromArray:evaluationDatas];
 
-        
-        }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        
-        [weakSelf.firstCollectionView.mj_header endRefreshing];
-        [weakSelf.firstCollectionView.mj_footer endRefreshing];
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
-    }];
-    
+         if (weakSelf.FirstDataArray.count == 0)
+         {
+             weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
+             [weakSelf.scrollView addSubview:weakSelf.firstLabel];
+         }
+
+         [weakSelf.firstCollectionView.mj_header endRefreshing];
+
+         if (evaluationDatas.count == 0) {
+             [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
+         }
+         else
+         {
+             [weakSelf.firstCollectionView.mj_footer endRefreshing];
+         }
+         
+         [weakSelf.firstCollectionView reloadData];
+  
+     } failure:^(NSError *error) {
+         [weakSelf.firstCollectionView.mj_header endRefreshing];
+         [weakSelf.firstCollectionView.mj_footer endRefreshing];
+     }];
 }
 
 -(void)secondGetData
 {
-    
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.secondPage];
     
-    
-    
-    self.secondManager = [AFHTTPRequestOperationManager manager];
-    
-    NSDictionary *parameters = @{@"type":@"3", @"page":countNumber, @"open_id":self.openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    
-    __weak typeof (self)weakSelf = self;
-    [self.secondManager GET:kGetCommentUrl parameters:signParameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        
-        if ([countNumber isEqualToString:@"1"]) {
-            [weakSelf.secondDataArray removeAllObjects];
-            [weakSelf.secondLabel removeFromSuperview];
-            
-        }
-        
-        if (responseObject) {
-            
-            NSMutableDictionary *dic = responseObject[@"result"];
-            
-            
-            NSLog(@"_____%@" , dic);
-            
-            
-            
-                for (NSMutableDictionary *miniDic in dic) {
-                    ODSecondEvaluationModel *model = [[ODSecondEvaluationModel alloc] init];
-                    [model setValuesForKeysWithDictionary:miniDic];
-                    [weakSelf.secondDataArray addObject:model];
-                    
-                }
-                
-            if (weakSelf.secondDataArray.count == 0)
-            {
-                weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160)/2 + KScreenWidth, kScreenSize.height/2, 160, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [weakSelf.scrollView addSubview:weakSelf.secondLabel];
-            }
-            
-            [weakSelf.secondCollectionView.mj_header endRefreshing];
-            
-            if (dic.count == 0) {
-                [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
-            }
-            else
-            {
-                [weakSelf.secondCollectionView.mj_footer endRefreshing];
-            }
-            [weakSelf.secondCollectionView reloadData];
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"type"] = @"3";
+    params[@"page"] = countNumber;
+    params[@"open_id"] = self.openId;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlUserCommentList parameters:params modelClass:[ODSecondEvaluationModel class] success:^(id model)
+     {
+         if ([countNumber isEqualToString:@"1"]) {
+             [weakSelf.secondDataArray removeAllObjects];
+             [weakSelf.secondLabel removeFromSuperview];
+         }
+         
+         NSArray *evaluationDatas = [model result];
+         [weakSelf.secondDataArray addObjectsFromArray:evaluationDatas];
+         
+         if (weakSelf.secondDataArray.count == 0)
+         {
+             weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160)/2 + KScreenWidth, kScreenSize.height/2, 160, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
+             [weakSelf.scrollView addSubview:weakSelf.secondLabel];
+         }
 
-        }
-    }
-                    failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-    {
-        
-        [weakSelf.secondCollectionView.mj_header endRefreshing];
-        [weakSelf.secondCollectionView.mj_footer endRefreshing];
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
-    }];
+         [weakSelf.secondCollectionView.mj_header endRefreshing];
+
+         if (evaluationDatas.count == 0) {
+             [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
+         }
+         else
+         {
+             [weakSelf.secondCollectionView.mj_footer endRefreshing];
+         }
+         
+         [weakSelf.secondCollectionView reloadData];
+ 
+     } failure:^(NSError *error) {
+         [weakSelf.firstCollectionView.mj_header endRefreshing];
+         [weakSelf.firstCollectionView.mj_footer endRefreshing];
+     }];
 }
 
 

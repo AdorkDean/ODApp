@@ -11,3 +11,16 @@
 @implementation ODBazaarModel
 
 @end
+
+@implementation ODBazaarTasksModel
++ (void)initialize
+{
+    [ODBazaarTasksModel mj_setupObjectClassInArray:^NSDictionary *{
+        return @{
+                 @"tasks":[ODBazaarModel class]
+                 };
+    }];
+}
+@end
+
+ODRequestResultIsDictionaryAll(ODBazaarTasksModel)
