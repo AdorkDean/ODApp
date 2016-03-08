@@ -121,9 +121,16 @@ UIKIT_EXTERN NSString * const ODUrlUserLogin1;
 UIKIT_EXTERN NSString * const ODUrlStoreOrders;
 UIKIT_EXTERN NSString * const ODUrlStoreInfoOrder;
 UIKIT_EXTERN NSString * const ODUrlStoreDetail;
+UIKIT_EXTERN NSString * const ODUrlStoreCancelOrder;
+
+
+
 
 
 UIKIT_EXTERN NSString * const ODUrlSwapDel;
+UIKIT_EXTERN NSString * const ODUrlSwapOrderCancel;
+UIKIT_EXTERN NSString * const ODUrlSwapRejectRefund;
+UIKIT_EXTERN NSString * const ODurlSwapConfirmRefund;
 
 
 UIKIT_EXTERN NSString * const ODUrlBbsList;

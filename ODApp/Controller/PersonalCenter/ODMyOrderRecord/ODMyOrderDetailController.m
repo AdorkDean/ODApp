@@ -72,14 +72,11 @@
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您确定要取消预约吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
         {
-            self.managers = [AFHTTPRequestOperationManager manager];
-            
             NSDictionary *parameter = @{@"open_id":self.open_id,@"order_id":self.order_id};
-            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
             
-            __weak typeof (self)weakSelf = self;
-            [self.managers GET:kCancelMyOrderUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-            {
+            __weakSelf
+            [ODHttpTool getWithURL:ODUrlStoreCancelOrder parameters:parameter modelClass:[NSObject class] success:^(id model) {
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil];
                 [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
                 self.navigationItem.rightBarButtonItem = nil;
@@ -89,11 +86,12 @@
                 
                 NSDictionary *loveDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.status_str,@"status_str", nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil userInfo:loveDict];
+                
             }
-                       failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-            {
-
+                           failure:^(NSError *error) {
+                               
             }];
+
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
