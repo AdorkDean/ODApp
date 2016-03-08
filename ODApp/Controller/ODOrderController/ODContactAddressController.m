@@ -78,7 +78,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
 
     __weak typeof(self) weakSelf = self;
-    [self.manager GET:ODUrlUserGetAddress parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:ODUrlUserAddressList parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
 
         if ([responseObject[@"status"] isEqualToString:@"success"]) {

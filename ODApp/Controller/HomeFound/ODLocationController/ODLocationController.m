@@ -34,7 +34,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 - (void)getCityListRequest {
     __weakSelf
     NSDictionary *parameter = @{@"region_name" : @"上海"};
-    [ODHttpTool getWithURL:ODUrlCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlOtherCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
                 ODLocationModel *mode = [model result];
                 weakSelf.cityListArray = [mode.all valueForKeyPath:@"name"];
                 weakSelf.cityIdArray = [mode.all valueForKey:@"id"];

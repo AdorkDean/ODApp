@@ -77,7 +77,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
 
     __weak typeof(self) weakSelf = self;
-    [self.addressManager GET:ODUrlUserGetAddress parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.addressManager GET:ODUrlUserAddressList parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
 
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
@@ -234,39 +234,6 @@
          [weakSelf.navigationController pushViewController:vc animated:YES];
      } failure:^(NSError *error) {
      }];
-    
-    
-//    [self.orderManager GET:ODUrlSwapOrder parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//
-//
-//        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-//
-//
-//            NSMutableDictionary *dic = responseObject[@"result"];
-//
-//
-//            NSString *orderId = [NSString stringWithFormat:@"%@", dic[@"order_id"]];
-//
-//
-//            ODPayController *vc = [[ODPayController alloc] init];
-//            vc.OrderTitle = self.informationModel.title;
-//            vc.orderId = orderId;
-//            vc.price = [NSString stringWithFormat:@"%@", self.informationModel.price];
-//            vc.swap_type = [NSString stringWithFormat:@"%@", self.informationModel.swap_type];
-//            [self.navigationController pushViewController:vc animated:YES];
-//
-//
-//        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-//
-//
-//            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-//        }
-//
-//    }              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//
-//
-//    }];
-
 }
 
 

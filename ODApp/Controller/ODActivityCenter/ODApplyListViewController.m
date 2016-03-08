@@ -25,11 +25,19 @@
 
 @property(nonatomic, copy) NSString *open_id;
 
-
 @end
 
 @implementation ODApplyListViewController
 
+#pragma mark - 生命周期方法
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -41,99 +49,10 @@
     [self createCollectionView];
 
     self.navigationItem.title = @"TA们申请过";
-
-}
-
-- (void)getData {
-    NSString *countNumber = [NSString stringWithFormat:@"%ld", (long) self.page];
-
-
-    self.manager = [AFHTTPRequestOperationManager manager];
-
-    NSDictionary *parameters = @{@"activity_id" : self.activity_id, @"page" : countNumber, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:kGetApplyListUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        if (responseObject) {
-
-
-            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-                if ([countNumber isEqualToString:@"1"]) {
-                    [self.dataArray removeAllObjects];
-                }
-
-
-                NSMutableDictionary *dic = responseObject[@"result"];
-
-                for (NSMutableDictionary *miniDic in dic) {
-                    ODApplyModel *model = [[ODApplyModel alloc] init];
-                    [model setValuesForKeysWithDictionary:miniDic];
-                    [self.dataArray addObject:model];
-                }
-
-                
-                if (dic.count == 0)
-                {
-                    [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-                }
-                else
-                {
-                    [weakSelf.collectionView.mj_footer endRefreshing];
-                }
-                [weakSelf.collectionView.mj_header endRefreshing];
-                [weakSelf.collectionView reloadData];
-
-
-                
-                
-            }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-                
-                
-            
-                
-                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-
-                [weakSelf.collectionView.mj_header endRefreshing];
-                [weakSelf.collectionView.mj_footer endRefreshing];
-                [weakSelf.collectionView reloadData];
-
-            }
-
-
-        }
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf.collectionView.mj_footer endRefreshing];
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
-    }];
-
-
-}
-
-#pragma mark - 刷新
-
-- (void)DownRefresh {
-
-    self.page = 1;
-    [self getData];
-
-}
-
-
-- (void)LoadMoreData {
-    self.page++;
-    [self getData];
-
 }
 
 
 #pragma mark - 初始化
-
 - (void)createCollectionView {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) collectionViewLayout:self.flowLayout];
@@ -144,16 +63,54 @@
         [self DownRefresh];
     }];
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-
+        
         [self LoadMoreData];
     }];
-
+    
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.view addSubview:self.collectionView];
 }
 
-#pragma mark - UICollectionViewDelegate
 
+#pragma mark - 获取数据
+- (void)getData {
+    NSString *countNumber = [NSString stringWithFormat:@"%ld", (long) self.page];
+
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"activity_id"] = self.activity_id;
+    params[@"page"] = countNumber;
+    params[@"open_id"] = self.open_id;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlStoreApplyUsers parameters:params modelClass:[ODApplyModel class] success:^(id model)
+     {
+         if ([countNumber isEqualToString:@"1"]) {
+             [self.dataArray removeAllObjects];
+         }
+         
+         NSArray *applyDatas = [model result];
+        [self.dataArray addObjectsFromArray:applyDatas];
+
+         if (applyDatas.count == 0)
+         {
+             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+         }
+         else
+         {
+             [weakSelf.collectionView.mj_footer endRefreshing];
+         }
+         [weakSelf.collectionView.mj_header endRefreshing];
+         [weakSelf.collectionView reloadData];
+         
+     } failure:^(NSError *error) {
+         [weakSelf.collectionView.mj_header endRefreshing];
+         [weakSelf.collectionView.mj_footer endRefreshing];
+     }];
+}
+
+
+#pragma mark - UICollectionView 数据源方法
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
 
@@ -163,16 +120,15 @@
 
     return cell;
 }
-
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
 
 
+#pragma mark - UICollectionView 代理方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
@@ -184,8 +140,6 @@
 
 
 }
-
-
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 
@@ -194,14 +148,14 @@
 
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
+#pragma mark - 事件方法
+- (void)DownRefresh {
+    self.page = 1;
+    [self getData];
 }
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
+- (void)LoadMoreData {
+    self.page++;
+    [self getData];
 }
 
 @end

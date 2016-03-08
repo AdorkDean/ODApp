@@ -37,9 +37,38 @@
 
 @implementation ODPayController
 
+#pragma mark - 懒加载
+- (ODPayView *)payView {
+    if (_payView == nil) {
+        self.payView = [ODPayView getView];
+        self.payView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
+        
+        
+        [self.payView.weixinPaybutton addTarget:self action:@selector(weixinPayAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.payView.treasurePayButton addTarget:self action:@selector(treasurePayAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.payView.orderNameLabel.text = self.OrderTitle;
+        self.payView.priceLabel.text = [NSString stringWithFormat:@"%@元", self.price];
+        self.payView.priceLabel.textColor = [UIColor redColor];
+        self.payView.orderPriceLabel.text = [NSString stringWithFormat:@"%@元", self.price];
+        [self.payView.payButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+    }
+    return _payView;
+}
+
+#pragma mark - 生命周期方法
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 
     self.payType = @"1";
     self.navigationItem.title = @"支付订单";
@@ -61,14 +90,73 @@
 
 
 }
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
+- (void)dealloc {
+    if (self.navHasSelfClass == 1) {
+        [[NSNotificationCenter defaultCenter] removeObserver:self];
+    }
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
+#pragma mark - 获取数据
+- (void)getData {
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"bbs_order_id"] = self.orderId;
+    params[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:params modelClass:[ODPayModel class] success:^(id model)
+     {
+         weakSelf.model = [model result];
+     } failure:^(NSError *error) {
+     }];
+}
+- (void)getDatawithCode:(NSString *)code {
+    //    [ODHttpTool getWithURL:<#(NSString *)#> parameters:<#(NSDictionary *)#> modelClass:<#(__unsafe_unretained Class)#> success:<#^(id model)success#> failure:<#^(NSError *error)failure#>]
+    self.manager = [AFHTTPRequestOperationManager manager];
+    
+    
+    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
+    
+    
+    NSDictionary *parameters = @{@"order_no" : self.model.out_trade_no, @"errCode" : code, @"open_id" : openId};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    
+    [self.manager GET:ODUrlPayWeixinCallbackSync parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        __weak typeof(self) weakSelf = self;
+        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+            
+            
+            ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
+            vc.swap_type = self.swap_type;
+            vc.payStatus = self.isPay;
+            vc.orderId = self.orderId;
+            
+            
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
+            
+        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
+            
+            
+            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+            
+        }
+        
+        
+    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+    
+}
 
+#pragma mark - 事件方法
 - (void)failPay:(NSNotification *)text {
 
 
@@ -79,7 +167,6 @@
 
 }
 
-
 - (void)successPay:(NSNotification *)text {
 
 
@@ -89,103 +176,6 @@
 
 
 }
-
-- (void)getDatawithCode:(NSString *)code {
-//    [ODHttpTool getWithURL:<#(NSString *)#> parameters:<#(NSDictionary *)#> modelClass:<#(__unsafe_unretained Class)#> success:<#^(id model)success#> failure:<#^(NSError *error)failure#>]
-    self.manager = [AFHTTPRequestOperationManager manager];
-
-
-    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-
-
-    NSDictionary *parameters = @{@"order_no" : self.model.out_trade_no, @"errCode" : code, @"open_id" : openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-
-    [self.manager GET:ODUrlPayBack parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        __weak typeof(self) weakSelf = self;
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-            ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
-            vc.swap_type = self.swap_type;
-            vc.payStatus = self.isPay;
-            vc.orderId = self.orderId;
-
-
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-
-
-        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-
-            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-        }
-
-
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
-    }];
-
-
-}
-
-
-#pragma mark - 懒加载
-
-- (ODPayView *)payView {
-    if (_payView == nil) {
-        self.payView = [ODPayView getView];
-        self.payView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
-
-
-        [self.payView.weixinPaybutton addTarget:self action:@selector(weixinPayAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.payView.treasurePayButton addTarget:self action:@selector(treasurePayAction:) forControlEvents:UIControlEventTouchUpInside];
-
-        self.payView.orderNameLabel.text = self.OrderTitle;
-        self.payView.priceLabel.text = [NSString stringWithFormat:@"%@元", self.price];
-        self.payView.priceLabel.textColor = [UIColor redColor];
-        self.payView.orderPriceLabel.text = [NSString stringWithFormat:@"%@元", self.price];
-        [self.payView.payButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
-
-
-    }
-    return _payView;
-}
-
-- (void)getData {
-
-    self.manager = [AFHTTPRequestOperationManager manager];
-    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-
-    NSDictionary *parameters = @{@"bbs_order_id" : self.orderId, @"open_id" : openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    [self.manager GET:kGetPayInformationUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if (responseObject) {
-
-
-            NSMutableDictionary *dic = responseObject[@"result"];
-            self.model = [[ODPayModel alloc] init];
-            [self.model setValuesForKeysWithDictionary:dic];
-
-
-        }
-
-
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
-    }];
-
-
-}
-
 
 - (void)payAction:(UIButton *)sender {
 
@@ -236,7 +226,6 @@
 
 }
 
-
 - (void)payMoney {
 
 
@@ -259,7 +248,6 @@
 
 }
 
-
 - (void)weixinPayAction:(UIButton *)sender {
 
     self.payType = @"1";
@@ -279,24 +267,6 @@
     [self.payView.weixinPaybutton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
 
 
-}
-
-- (void)dealloc {
-
-    if (self.navHasSelfClass == 1) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-    }
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 

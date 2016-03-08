@@ -22,7 +22,6 @@
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, assign) NSInteger page;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, copy) NSString *open_id;
 
@@ -30,14 +29,18 @@
 
 @property(nonatomic, assign) NSInteger indexRow;
 
-
 @end
 
 @implementation ODMySellController
 
+#pragma mark - 生命周期方法
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationSellOrderSecondRefresh object:nil];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 
     self.page = 1;
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
@@ -45,32 +48,8 @@
     [self getData];
     [self createCollectionView];
 
-
     self.navigationItem.title = @"已卖出";
-
 }
-
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationSellOrderSecondRefresh object:nil];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)reloadData:(NSNotification *)text {
-
-
-    NSLog(@"_____%@", text.userInfo[@"orderStatus"]);
-
-
-    ODMySellModel *model = self.dataArray[self.indexRow];
-    model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"orderStatus"]];
-    [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
-    [self.collectionView reloadData];
-
-
-}
-
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -78,96 +57,24 @@
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-
-- (void)getData {
-    NSString *countNumber = [NSString stringWithFormat:@"%ld", (long) self.page];
-
-
-    self.manager = [AFHTTPRequestOperationManager manager];
-
-    NSDictionary *parameters = @{@"page" : countNumber, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    __weakSelf
-    [self.manager GET:kMySellListUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        if (responseObject) {
-
-
-            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-                if ([countNumber isEqualToString:@"1"]) {
-                    [weakSelf.dataArray removeAllObjects];
-                    [weakSelf.noReusltLabel removeFromSuperview];
-                }
-
-
-                NSMutableDictionary *dic = responseObject[@"result"];
-
-                for (NSMutableDictionary *miniDic in dic) {
-                    ODMySellModel *model = [[ODMySellModel alloc] init];
-                    [model setValuesForKeysWithDictionary:miniDic];
-                    [weakSelf.dataArray addObject:model];
-                }
-                if (weakSelf.dataArray.count == 0) {
-                    weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160) / 2, kScreenSize.height / 2, 160, 30) text:@"暂无订单" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                    [weakSelf.view addSubview:weakSelf.noReusltLabel];
-                }
-
-                [weakSelf.collectionView.mj_header endRefreshing];
-
-                if (dic.count == 0) {
-                    [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-                }
-                else
-                {
-                    [weakSelf.collectionView.mj_footer endRefreshing];
-                }
-                [weakSelf.collectionView reloadData];
-                
-            }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-                
-                
-              
-                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-                [weakSelf.collectionView.mj_header endRefreshing];
-                [weakSelf.collectionView.mj_footer endRefreshing];
-                [weakSelf.collectionView reloadData];
-
-
-            }
-
-
-        }
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf.collectionView.mj_footer endRefreshing];
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
-    }];
-
-
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-#pragma mark - 刷新
-
-- (void)DownRefresh {
-
-    self.page = 1;
-    [self getData];
-
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
+- (void)reloadData:(NSNotification *)text {
 
-- (void)LoadMoreData {
-    self.page++;
-    [self getData];
+    ODMySellModel *model = self.dataArray[self.indexRow];
+    model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"orderStatus"]];
+    [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
+    [self.collectionView reloadData];
 
 }
-
 
 #pragma mark - 初始化
-
 - (void)createCollectionView {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) collectionViewLayout:self.flowLayout];
@@ -178,16 +85,60 @@
         [self DownRefresh];
     }];
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-
+        
         [self LoadMoreData];
     }];
-
+    
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODMyOrderCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.view addSubview:self.collectionView];
 }
 
-#pragma mark - UICollectionViewDelegate
+#pragma mark - 获取数据
+- (void)getData {
+    NSString *countNumber = [NSString stringWithFormat:@"%ld", (long) self.page];
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"page"] = countNumber;
+    params[@"open_id"] = self.open_id;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapSellerOrderList parameters:params modelClass:[ODMySellModel class] success:^(id model)
+     {
+         if ([countNumber isEqualToString:@"1"]) {
+             [weakSelf.dataArray removeAllObjects];
+             [weakSelf.noReusltLabel removeFromSuperview];
+         }
+         
+         NSArray *mySellDatas = [model result];
+         [weakSelf.dataArray addObjectsFromArray:mySellDatas];
+         
+         if (weakSelf.dataArray.count == 0) {
+             weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160) / 2, kScreenSize.height / 2, 160, 30) text:@"暂无订单" font:16 alignment:@"center" color:@"#000000" alpha:1];
+             [weakSelf.view addSubview:weakSelf.noReusltLabel];
+         }
 
+         [weakSelf.collectionView.mj_header endRefreshing];
+
+         if (mySellDatas.count == 0) {
+             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+         }
+         else
+         {
+             [weakSelf.collectionView.mj_footer endRefreshing];
+         }
+         [weakSelf.collectionView reloadData];
+     } failure:^(NSError *error) {
+         
+     }];
+}
+
+#pragma mark - UICollectionView 数据源方法
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return self.dataArray.count;
+}
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODMyOrderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
 
@@ -199,15 +150,7 @@
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataArray.count;
-}
-
-
+#pragma mark - UICollectionView 代理方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
     ODMyOrderModel *model = self.dataArray[indexPath.row];
@@ -256,8 +199,6 @@
 
 
 }
-
-
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 
@@ -266,7 +207,6 @@
 
 
 }
-
 //动态设置每个分区的最小行间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
 
@@ -275,16 +215,15 @@
 
 }
 
-
-- (void)dealloc {
-
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+#pragma mark - 事件方法
+- (void)DownRefresh {
+    self.page = 1;
+    [self getData];
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)LoadMoreData {
+    self.page++;
+    [self getData];
 }
 
 @end

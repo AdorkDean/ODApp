@@ -9,6 +9,10 @@
 #import "ODBazaarDetailViewController.h"
 #import "UMSocial.h"
 #import "WXApi.h"
+
+
+#define kBazaarDetailCellId @"ODBazaarDetailCollectionCell"
+
 @interface ODBazaarDetailViewController ()<UMSocialUIDelegate>
 
 @end

@@ -105,7 +105,7 @@
 - (void)getAddress
 {
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlUserGetAddress parameters: @{} modelClass:[ODOrderAddressModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlUserAddressList parameters: @{} modelClass:[ODOrderAddressModel class] success:^(id model)
      {
          ODOrderAddressModel *addressModel = [model result];
          ODOrderAddressDefModel *addressDefModel = addressModel.def;

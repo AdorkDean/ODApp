@@ -18,5 +18,4 @@
 @property(nonatomic, copy) NSString *open_id;
 @property(nonatomic, copy) NSString *avatar_url;
 
-
 @end

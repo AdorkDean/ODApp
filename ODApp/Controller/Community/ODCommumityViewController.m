@@ -8,6 +8,7 @@
 
 #import "ODCommumityViewController.h"
 
+#define kCommunityCellId @"ODCommunityCollectionCell"
 @interface ODCommumityViewController ()
 {
     NSMutableDictionary *userInfoDic;

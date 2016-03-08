@@ -339,7 +339,7 @@
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         
             
-        [self pushImageWithUrl:kGetImageDataUrl parameter:signParameter];
+        [self pushImageWithUrl:ODUrlOtherBase64Upload parameter:signParameter];
 
         
     }
