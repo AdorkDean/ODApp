@@ -3184,7 +3184,7 @@
 					"$(PROJECT_DIR)/ODApp/Others/ThirdFrame/lib",
 					"$(PROJECT_DIR)/ODApp/Others/ThirdFrame/JPushLib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.odong.iosc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.odong.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -3212,7 +3212,7 @@
 					"$(PROJECT_DIR)/ODApp/Others/ThirdFrame/lib",
 					"$(PROJECT_DIR)/ODApp/Others/ThirdFrame/JPushLib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.odong.iosc;
+				PRODUCT_BUNDLE_IDENTIFIER = com.odong.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

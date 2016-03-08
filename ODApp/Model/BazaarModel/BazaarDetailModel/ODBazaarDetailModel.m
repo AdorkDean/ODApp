@@ -9,6 +9,21 @@
 
 #import "ODBazaarDetailModel.h"
 
-@implementation ODBazaarDetailModel
+@implementation ODBazaarDetailApplysModel
+
 
 @end
+
+
+@implementation ODBazaarDetailModel
+
++ (void)initialize {
+    [ODBazaarDetailModel mj_setupObjectClassInArray:^NSDictionary *{        
+        return @{
+                 @"applys" : [ODBazaarDetailApplysModel class]
+                 };
+    }];
+}
+
+@end
+ODRequestResultIsDictionaryAll(ODBazaarDetailModel)

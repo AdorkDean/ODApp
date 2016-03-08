@@ -125,6 +125,7 @@ UIKIT_EXTERN NSString * const ODUrlStoreCancelOrder;
 
 
 UIKIT_EXTERN NSString * const ODUrlTaskTaskAdd;
+UIKIT_EXTERN NSString * const ODUrlTaskDetail;
 
 
 UIKIT_EXTERN NSString * const ODUrlSwapDel;
@@ -143,7 +144,7 @@ UIKIT_EXTERN NSString * const ODUrlOtherHome;
 
 UIKIT_EXTERN NSString * const ODUrlBazaarRequestHelp;
 //UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
-UIKIT_EXTERN NSString * const kBazaarTaskDetailUrl;
+//UIKIT_EXTERN NSString * const kBazaarTaskDetailUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDelegateUrl;
 UIKIT_EXTERN NSString * const kBazaarAcceptTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseRewardUrl;
