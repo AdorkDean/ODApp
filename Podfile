@@ -1,3 +1,6 @@
+platform :ios, ‘8.0‘
+
+target "ODApp" do
 pod 'AFNetworking', '~> 2.6.2'
 pod 'SDWebImage', '~> 3.7.3'
 pod 'MJRefresh'
@@ -12,3 +15,4 @@ pod 'AMapSearch' #搜索服务SDK
 pod 'UMengSocial', '= 4.3'
 pod 'UMengAnalytics-NO-IDFA'
 pod 'Toast', '~> 3.0'
+end

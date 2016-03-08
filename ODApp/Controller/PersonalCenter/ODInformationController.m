@@ -14,7 +14,7 @@
 #import "ODUserGenderController.h"
 #import "ODBindingMobileController.h"
 #import "ODTabBarController.h"
-#import "ODUser.h"
+#import "ODUserModel.h"
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
@@ -56,8 +56,8 @@
 {
     [self.dataArray removeAllObjects];
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlUserInfo  parameters:@{} modelClass:[ODUser class] success:^(id model) {
-        ODUser *user = [model result];
+    [ODHttpTool getWithURL:ODUrlUserInfo  parameters:@{} modelClass:[ODUserModel class] success:^(id model) {
+        ODUserModel *user = [model result];
         [weakSelf.dataArray addObject:user];
         
         [weakSelf createTableView];
@@ -87,7 +87,7 @@
         [self.view addSubview:self.tableView];
     }
     
-    ODUser *model = self.dataArray[0];
+    ODUserModel *model = self.dataArray[0];
     
     
       [self.informationView.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
@@ -256,7 +256,7 @@
 {
     
     ODChangePassWordController *vc = [[ODChangePassWordController alloc] init];
-    ODUser *model = self.dataArray[0];
+    ODUserModel *model = self.dataArray[0];
     
     vc.phoneNumber = model.mobile;
   

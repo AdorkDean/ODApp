@@ -1,8 +1,8 @@
-/** 定义result */
-#define ODModelResult @"result"
 
-/** 拼接模型类名 */
-#define ODRequestClassName(className)       NSClassFromString([NSStringFromClass(className)stringByAppendingString:@"Response"])
+/** .m 不包含数组的模型的内部实现 */
+#define ODRequestModelImplementation(className) \
+@implementation className  \
+@end
 
 /** .h  请求回来的result是数组的情况 */
 #define ODRequestResultIsArrayProperty(className) \
@@ -18,11 +18,12 @@
 { \
 [className##Response mj_setupObjectClassInArray:^NSDictionary *{ \
 return @{ \
-ODModelResult : [className class] \
+@"result" : [className class] \
 }; \
 }]; \
 } \
 @end
+
 /**  .m 综合实现请求回来的result是数组的情况 */
 #define ODRequestResultIsArrayAll(className) \
 ODRequestResultIsArrayProperty(className) \
@@ -46,6 +47,3 @@ ODRequestResultIsArrayImplementation(className)
 #define ODRequestResultIsDictionaryAll(className) \
 ODRequestResultIsDictionaryProperty(className) \
 ODRequestResultIsDictionaryImplementation(className)
-
-
-

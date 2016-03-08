@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ODAppRegister.h"
+#import "ODUserInformation.h"
 
 #import "ODTabBarController.h"
 #import "MyPageControl.h"
@@ -15,6 +16,8 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODAPPInfoTool.h"
+
+#import "ODGuideTool.h"
 
 
 @interface AppDelegate () <UIScrollViewDelegate, WXApiDelegate> {
@@ -70,6 +73,10 @@ void UncaughtExceptionHandler(NSException *exception) {
         // 加载引导图
         [self makeLaunchView];
     }
+    
+    // 根据需求选择根控制器
+//    self.window.rootViewController = [ODGuideTool chooseRootViewController];
+    
     [ODAppRegister registJPushWithLaunchOption:launchOptions];
     return YES;
 }
@@ -98,7 +105,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 }
 
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
     // Required
     [JPUSHService registerDeviceToken:deviceToken];

@@ -67,6 +67,10 @@
         {
             obj = [NSString stringWithFormat:@"\"%@\"",obj];
         }
+//        else if ([obj isKindOfClass:[NSArray class]])
+//        {
+//            obj = [obj desc];
+//        }
         [strM appendFormat:@"\t\"%@\":%@,\n",key,obj];
     }];
     

@@ -69,7 +69,7 @@
         }
         if ([self.topTitle isEqualToString:@"修改密码"]) {
             self.registView.phoneNumber.userInteractionEnabled = NO;
-            ODUser *user = [[ODUserInformation sharedODUserInformation] getUserCache];
+            ODUserModel *user = [[ODUserInformation sharedODUserInformation] getUserCache];
             self.registView.phoneNumber.text = user.mobile;
         }
         

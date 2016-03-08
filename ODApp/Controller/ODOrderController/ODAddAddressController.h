@@ -7,14 +7,14 @@
 //
 
 #import "ODBaseViewController.h"
-#import "ODAddressModel.h"
+#import "ODOrderAddressModel.h"
 
 @interface ODAddAddressController : ODBaseViewController
 
 @property(nonatomic, copy) NSString *typeTitle;
 @property(nonatomic, assign) BOOL isAdd;
 @property(nonatomic, copy) NSString *addressId;
-@property(nonatomic, strong) ODAddressModel *addressModel;
+@property(nonatomic, strong) ODOrderAddressDefModel *addressModel;
 @property(nonatomic, assign) BOOL isDefault;
 
 

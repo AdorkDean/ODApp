@@ -91,6 +91,7 @@
 }
 
 - (void)getDatawithCode:(NSString *)code {
+//    [ODHttpTool getWithURL:<#(NSString *)#> parameters:<#(NSDictionary *)#> modelClass:<#(__unsafe_unretained Class)#> success:<#^(id model)success#> failure:<#^(NSError *error)failure#>]
     self.manager = [AFHTTPRequestOperationManager manager];
 
 
@@ -101,7 +102,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
 
 
-    [self.manager GET:kPayBackUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:ODUrlPayBack parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
         __weak typeof(self) weakSelf = self;
         if ([responseObject[@"status"] isEqualToString:@"success"]) {

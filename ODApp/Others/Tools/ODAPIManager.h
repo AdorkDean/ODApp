@@ -11,7 +11,6 @@
 
 @interface ODAPIManager : NSObject
 
-
 /**
  *  签名
  *
@@ -23,9 +22,4 @@
 
 + (NSString *)getUrl:(NSString *)uri;
 
-//+ (void)getWithURL: (NSString *)URL
-//            params: (NSDictionary *)params
-//           success: (void (^)(id responseObject))success
-//             error: (void (^)(NSString *msg))error
-//           failure: (void (^)(NSError *error))failure;
 @end

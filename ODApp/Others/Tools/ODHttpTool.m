@@ -5,11 +5,16 @@
 //  Created by 刘培壮 on 16/1/19.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
+
+/** 拼接模型类名 */
+#define ODRequestClassName(className)       NSClassFromString([NSStringFromClass(className)stringByAppendingString:@"Response"])
+
 #import <AFNetworking.h>
 #import "ODHttpTool.h"
 #import "ODProgressHUD.h"
 #import "ODAPIManager.h"
 #import "ODAPPInfoTool.h"
+#import "ODUserInformation.h"
 
 NSString * const requestStatus = @"status";
 NSString * const requsetResult = @"result";
@@ -20,7 +25,7 @@ NSString * const requestSuccessStatus = @"success";
 
 + (NSMutableDictionary *)getRequestParameter:(NSDictionary *)parameter
 {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:parameter];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
     dic[@"city_id"] = [NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID];
     dic[@"device_id"] = @"";
@@ -31,8 +36,11 @@ NSString * const requestSuccessStatus = @"success";
     dic[@"network_type"] = @"";
     dic[@"latitude"] = @"";
     dic[@"longitude"] = @"";
-    dic[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
-    
+    if (dic[@"open_id"] == nil)
+    {
+        dic[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
+    }
+    [dic setValuesForKeysWithDictionary:parameter];
     return [ODAPIManager signParameters:dic];
 }
 

@@ -14,5 +14,6 @@
     
 }
 
-
 @end
+
+ODRequestResultIsArrayAll(ODMyOrderModel)

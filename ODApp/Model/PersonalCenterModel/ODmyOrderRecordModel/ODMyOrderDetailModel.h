@@ -8,27 +8,35 @@
 
 #import "ODAppModel.h"
 
-@interface ODMyOrderDetailModel : ODAppModel
+@interface ODMyOrderDetailModel : NSObject
 
-@property(nonatomic, strong) NSString *store_id;
+@property(nonatomic, copy) NSString *store_id;
 @property(nonatomic, strong) NSString *order_id;
 
-@property(nonatomic, strong) NSString *store_name;
+@property(nonatomic, copy) NSString *store_name;
 
-@property(nonatomic, strong) NSString *start_date_str;
-@property(nonatomic, strong) NSString *end_date_str;
+@property(nonatomic, copy) NSString *start_date_str;
+@property(nonatomic, copy) NSString *end_date_str;
 
-@property(nonatomic, strong) NSString *devices;
+@property(nonatomic, strong) NSArray *devices;
 
-@property(nonatomic, strong) NSString *purpose;
+@property(nonatomic, copy) NSString *purpose;
 
-@property(nonatomic, strong) NSString *content;
+@property(nonatomic, copy) NSString *content;
 
-@property(nonatomic, strong) NSString *people_num;
+@property(nonatomic, copy) NSString *people_num;
 
-@property(nonatomic, strong) NSString *store_tel;
+@property(nonatomic, copy) NSString *store_tel;
 
-@property(nonatomic, strong) NSString *status_str;
+@property(nonatomic, copy) NSString *status_str;
+
+@end
+
+@interface ODMyOrderDetailDevicesModel : NSObject
+
+@property (nonatomic, copy) NSString *id;
+@property (nonatomic, copy) NSString *name;
+
 
 @end
 

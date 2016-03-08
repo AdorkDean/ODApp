@@ -255,7 +255,6 @@ int pageNumnber = 0;
         self.pageControl.userInteractionEnabled = YES;
         [self.centerDetailView addSubview:self.pageControl];
 
-
     }
     return _centerDetailView;
 }

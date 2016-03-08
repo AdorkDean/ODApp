@@ -8,12 +8,24 @@
 
 #import "ODMyOrderDetailModel.h"
 
-@implementation ODMyOrderDetailModel
--(void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    
-}
-
+@implementation ODMyOrderDetailDevicesModel
 
 
 @end
+
+@implementation ODMyOrderDetailModel
+
++ (void)initialize
+{
+
+    [ODMyOrderDetailModel mj_setupObjectClassInArray:^NSDictionary *{
+        
+        return @{
+                 @"devices":[ODMyOrderDetailDevicesModel class]
+                 };
+    }];
+}
+
+@end
+
+ODRequestResultIsDictionaryAll(ODMyOrderDetailModel)

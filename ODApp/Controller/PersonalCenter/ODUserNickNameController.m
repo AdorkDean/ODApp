@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "Masonry.h"
-#import "ODUser.h"
+#import "ODUserModel.h"
 
 
 @interface ODUserNickNameController ()
@@ -79,9 +79,9 @@
     __weakSelf
     NSDictionary *parameters = @{@"nick":self.textField.text};
     
-    [ODHttpTool getWithURL:ODUrlUserChange parameters:parameters modelClass:[ODUser class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlUserChange parameters:parameters modelClass:[ODUserModel class] success:^(id model) {
         [ODProgressHUD showToast:self.view msg:@"修改成功"];
-        ODUser *user = [model result];
+        ODUserModel *user = [model result];
         [[ODUserInformation sharedODUserInformation] updateUserCache:user];
         
         [weakSelf.navigationController popViewControllerAnimated:YES];
