@@ -109,64 +109,41 @@
 
 #pragma mark - 请求数据
 
-- (void)getCodes {
-
-    NSDictionary *parameters = @{@"mobile" : self.bindMobileView.phoneTextField.text, @"type" : @"4", @"open_id" : self.openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    NSString *url = [ODAPIManager getUrl:@"/1.0/user/verify/code/send"];
-    self.manager = [AFHTTPRequestOperationManager manager];
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            //启动定时器
-            [weakSelf.timer setFireDate:[NSDate distantPast]];
-        } else if (responseObject[@"error"]) {
-        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-            [weakSelf createUIAlertControllerWithTitle:responseObject[@"message"]];
-        }
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
+- (void)getCodes
+{
+    __weakSelf
+    NSDictionary *parameters = @{
+                                 @"mobile" : self.bindMobileView.phoneTextField.text,
+                                 @"type" : @"4",
+                                 @"open_id" : self.openId
+                                 };
+    [ODHttpTool getWithURL:ODUrlUserCodeSend parameters:parameters modelClass:[NSObject class] success:^(id model) {
+        [weakSelf.timer setFireDate:[NSDate distantPast]];
+    } failure:^(NSError *error) {
+        
     }];
 }
 
 
-- (void)bingdingPhone {
-    NSDictionary *parameters = @{@"mobile" : self.bindMobileView.phoneTextField.text, @"verify_code" : self.bindMobileView.verificationTextField.text, @"open_id" : self.openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    NSString *url = [ODAPIManager getUrl:@"/1.0/user/bind/mobile"];
-
-    self.managers = [AFHTTPRequestOperationManager manager];
-    __weak typeof(self) weakSelf = self;
-    [self.managers GET:url parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            if (weakSelf.getTextBlock) {
-                weakSelf.getTextBlock(self.bindMobileView.phoneTextField.text);
-            }
-
-
-            [weakSelf.navigationController popViewControllerAnimated:YES];
+- (void)bingdingPhone
+{
+    __weakSelf
+    NSDictionary *parameters = @{
+                                 @"mobile" : self.bindMobileView.phoneTextField.text,
+                                 @"verify_code" : self.bindMobileView.verificationTextField.text,
+                                 @"open_id" : self.openId
+                                 };
+    [ODHttpTool getWithURL:ODUrlUserBindMoble parameters:parameters modelClass:[NSObject class] success:^(id model)
+    {
+        if (weakSelf.getTextBlock) {
+            weakSelf.getTextBlock(self.bindMobileView.phoneTextField.text);
         }
-
-        else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-            [weakSelf createUIAlertControllerWithTitle:responseObject[@"message"]];
-
-        }
-
-    }          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    }
+                   failure:^(NSError *error)
+    {
+        
     }];
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated {

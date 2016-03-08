@@ -9,9 +9,7 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODChoseCenterController.h"
 #import "ChoseCenterCell.h"
-#import "ODAPIManager.h"
-#import "AFNetworking.h"
-#import "ChoseCenterModel.h"
+#import "ODStorePlaceListModel.h"
 
 @interface ODChoseCenterController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -19,8 +17,7 @@
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
 
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
-@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic, strong) NSArray *dataArray;
 
 
 @end
@@ -36,39 +33,19 @@
 
 #pragma mark - 请求数据
 
-- (void)getData {
-
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-
-    self.dataArray = [[NSMutableArray alloc] init];
-
-
-    NSDictionary *parameter = @{@"show_type" : @"1"};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSString *url = [ODAPIManager getUrl:@"/1.0/other/store/list"];
-
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:url parameters:signParameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
-
-        if (responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSMutableDictionary *result = dict[@"result"];
-
-            for (NSMutableDictionary *dic in result) {
-                ChoseCenterModel *model = [[ChoseCenterModel alloc] initWithDict:dic];
-                [weakSelf.dataArray addObject:model];
-            }
-
-
-            [weakSelf.collectionView reloadData];
-        }
-    }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-
-
+- (void)getData
+{
+    __weakSelf
+    NSDictionary *parameter = @{@"show_type" : @"1",@"call_array":@"1"};
+    [ODHttpTool getWithURL:ODUrlOtherStoreList parameters:parameter modelClass:[ODStorePlaceListModel class] success:^(ODStorePlaceListModelResponse *model)
+    {
+        weakSelf.dataArray = model.result;
+        [weakSelf.collectionView reloadData];
+    }
+                   failure:^(NSError *error)
+    {
+        
     }];
-
-
 }
 
 
@@ -99,7 +76,7 @@
     ChoseCenterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
 
 
-    ChoseCenterModel *model = self.dataArray[indexPath.row];
+    ODStorePlaceListModel *model = self.dataArray[indexPath.row];
     cell.titleLabel.text = model.name;
 
     return cell;
@@ -114,27 +91,19 @@
 }
 
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
-
-    ChoseCenterModel *model = self.dataArray[indexPath.row];
-
-
-    NSString *storeId = [NSString stringWithFormat:@"%ld", (long) model.storeId];
-
-
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODStorePlaceListModel *model = self.dataArray[indexPath.row];
+    NSString *storeId = [NSString stringWithFormat:@"%d",model.id];
     if (self.storeCenterNameBlock)
     {
-        self.storeCenterNameBlock(model.name, storeId, model.storeId);
+        self.storeCenterNameBlock(model.name, storeId, model.id);
     }
-
-    if (self.isRefreshBlock) {
+    if (self.isRefreshBlock)
+    {
         self.isRefreshBlock(YES);
     }
-
-
     [self.navigationController popViewControllerAnimated:YES];
-
 }
 
 

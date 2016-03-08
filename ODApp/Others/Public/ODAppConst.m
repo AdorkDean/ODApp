@@ -110,6 +110,8 @@ NSString * const ODUrlUserGetAddress = @"user/address/list";
 NSString * const ODUrlUserAddressDel = @"user/address/del";
 NSString * const ODUrlUserAssressAdd = @"user/address/add";
 NSString * const kCollectionUrl = @"user/love/list";
+NSString * const ODUrlUserBindMoble = @"user/bind/mobile";
+
 
 
 NSString * const ODUrlActivityList = @"store/activity/list";
@@ -122,7 +124,7 @@ NSString * const ODUrlMyApplyActivity = @"store/apply/my";
 NSString * const ODUrlStoreOrders = @"store/orders";
 NSString * const ODUrlStoreInfoOrder = @"store/info/order";
 NSString * const ODUrlStoreCancelOrder = @"store/cancel/order";
-
+NSString * const ODUrlStoreApply = @"store/apply";
 
 
 NSString * const ODUrlTaskTaskAdd = @"task/task/add";
@@ -137,7 +139,7 @@ NSString * const ODUrlOtherHome = @"other/home";
 NSString * const ODUrlShareCallBack = @"other/share/callback";
 NSString * const ODUrlLoveAdd = @"other/love/add";
 NSString * const ODUrlLoveDelete = @"other/love/del";
-NSString * const ODUrlStoreDetail = @"other/store/detail";
+NSString * const ODUrlOtherStoreDetail = @"other/store/detail";
 NSString * const ODUrlOtherStoreList = @"other/store/list";
 
 
@@ -199,8 +201,6 @@ NSString * const kDeleteReplyUrl = @"http://woquapi.test.odong.com/1.0/bbs/del";
 
 NSString * const kHomeFoundListUrl = @"http://woquapi.test.odong.com/1.0/bbs/list";
 
-//NSString * const ODStoreListUrl = @"http://woquapi.test.odong.com/1.0/other/store/list";
-//NSString * const ODStoreDetailUrl = @"http://woquapi.test.odong.com/1.0/other/store/detail";
 
 
 //NSString * const ODHomeChangeSkillUrl = @"http://woquapi.test.odong.com/1.0/other/home";
@@ -281,9 +281,6 @@ NSString * const kDeleteReplyUrl = @"http://woquapi.odong.com/1.0/bbs/del";
 
 NSString * const kHomeFoundListUrl = @"http://woquapi.odong.com/1.0/bbs/list";
 
-NSString * const ODStoreListUrl = @"http://woquapi.odong.com/1.0/other/store/list";
-
-
 NSString * const ODHomeChangeSkillUrl = @"http://woquapi.odong.com/1.0/other/home";
 NSString * const ODReleaseDrawbackUrl = @"http://woquapi.odong.com/1.0/swap/order/cancel";
 
@@ -318,6 +315,5 @@ NSString * const kMySellListUrl = @"http://woquapi.odong.com/1.0/swap/seller/ord
 NSString * const kDeliveryUrl = @"http://woquapi.odong.com/1.0/swap/confirm/delivery";
 NSString * const kFinshOrderUrl = @"http://woquapi.odong.com/1.0/swap/finish";
 NSString * const kEvalueUrl = @"http://woquapi.odong.com/1.0/swap/order/reason";
-//NSString * const ODStoreDetailUrl = @"http://woquapi.odong.com/1.0/other/store/detail";
 
 #endif
