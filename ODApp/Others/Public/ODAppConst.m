@@ -106,21 +106,21 @@ NSString * const ODUrlUserChange = @"user/change";
 NSString * const ODUrlUserInfo = @"user/info";
 NSString * const ODUrlUserCodeSend = @"user/verify/code/send";
 NSString * const ODUrlUserChangePasswd = @"user/change/passwd";
-NSString * const ODUrlUserGetAddress = @"user/address/list";
+NSString * const ODUrlUserAddressList = @"user/address/list";
 NSString * const ODUrlUserAddressDel = @"user/address/del";
 NSString * const ODUrlUserAssressAdd = @"user/address/add";
-NSString * const kCollectionUrl = @"user/love/list";
+NSString * const ODUrlUserLoveList = @"user/love/list";
 NSString * const ODUrlUserBindMoble = @"user/bind/mobile";
 
 
 
-NSString * const ODUrlActivityList = @"store/activity/list";
-NSString * const ODUrlActivityDetail = @"store/apply/detail2";
-NSString * const ODUrlActivityApply = @"store/activity/apply";
-NSString * const ODUrlStoreTime = @"store/timeline1";
-NSString * const ODUrlConfirmOrder = @"store/confirm/order";
-NSString * const ODUrlCreateOrder = @"store/create/order";
-NSString * const ODUrlMyApplyActivity = @"store/apply/my";
+NSString * const ODUrlStoreActivityList = @"store/activity/list";
+NSString * const ODUrlStoreApplyDetail2 = @"store/apply/detail2";
+NSString * const ODUrlStoreActivityApply = @"store/activity/apply";
+NSString * const ODUrlStoreTimeline1 = @"store/timeline1";
+NSString * const ODUrlStoreConfirmOrder = @"store/confirm/order";
+NSString * const ODUrlStoreCreateOrder = @"store/create/order";
+NSString * const ODUrlStoreApplyMy = @"store/apply/my";
 NSString * const ODUrlStoreOrders = @"store/orders";
 NSString * const ODUrlStoreInfoOrder = @"store/info/order";
 NSString * const ODUrlStoreCancelOrder = @"store/cancel/order";
@@ -134,11 +134,11 @@ NSString * const ODUrlTaskDetail = @"task/detail";
 
 
 
-NSString * const ODUrlCityList = @"other/city/list";
+NSString * const ODUrlOtherCityList = @"other/city/list";
 NSString * const ODUrlOtherHome = @"other/home";
-NSString * const ODUrlShareCallBack = @"other/share/callback";
-NSString * const ODUrlLoveAdd = @"other/love/add";
-NSString * const ODUrlLoveDelete = @"other/love/del";
+NSString * const ODUrlOtherShareCallBack = @"other/share/callback";
+NSString * const ODUrlOtherLoveAdd = @"other/love/add";
+NSString * const ODUrlOtherLoveDel = @"other/love/del";
 NSString * const ODUrlOtherStoreDetail = @"other/store/detail";
 NSString * const ODUrlOtherStoreList = @"other/store/list";
 
@@ -151,7 +151,7 @@ NSString * const ODUrlBbsList = @"bbs/list";
 //NSString * const ODUrlBbsDel = @"bbs/del";
 
 
-NSString * const ODUrlPersonalReleaseTask = @"swap/list";
+NSString * const ODUrlSwapList = @"swap/list";
 NSString * const ODUrlSwapOrder = @"swap/order";
 NSString * const ODUrlSwapLoveList = @"swap/love/list";
 NSString * const ODUrlSwapOrderList = @"swap/order/list";
@@ -162,7 +162,7 @@ NSString * const ODUrlSwapRejectRefund = @"swap/reject/refund";
 NSString * const ODurlSwapConfirmRefund = @"swap/confirm/refund";
 
 
-NSString * const ODUrlPayBack = @"pay/weixin/callback/sync";
+NSString * const ODUrlPayWeixinCallbackSync = @"pay/weixin/callback/sync";
 
 // 以后要改
 #ifdef DEBUG
@@ -227,7 +227,6 @@ NSString * const kDelateTaskUrl = @"http://woquapi.test.odong.com/1.0/bbs/del";
 NSString * const kGetCommentUrl = @"http://woquapi.test.odong.com/1.0/user/comment/list";
 NSString * const kGetApplyListUrl = @"http://woquapi.test.odong.com/1.0/store/apply/users";
 NSString * const kGiveOpinionUrl = @"http://woquapi.test.odong.com/1.0/other/feedback";
-//NSString * const kCollectionUrl = @"http://woquapi.test.odong.com/1.0/user/love/list";
 
 NSString * const kGetPayInformationUrl = @"http://woquapi.test.odong.com/1.0/pay/weixin/trade/number";
 NSString * const kBalanceUrl = @"http://woquapi.test.odong.com/1.0/user/withdraw/cash";
@@ -305,7 +304,6 @@ NSString * const kDelateTaskUrl = @"http://woquapi.odong.com/1.0/bbs/del";
 NSString * const kGetCommentUrl = @"http://woquapi.odong.com/1.0/user/comment/list";
 NSString * const kGetApplyListUrl = @"http://woquapi.odong.com/1.0/store/apply/users";
 NSString * const kGiveOpinionUrl = @"http://woquapi.odong.com/1.0/other/feedback";
-NSString * const kCollectionUrl = @"http://woquapi.odong.com/1.0/user/love/list";
 
 NSString * const kGetPayInformationUrl = @"http://woquapi.odong.com/1.0/pay/weixin/trade/number";
 NSString * const kBalanceUrl = @"http://woquapi.odong.com/1.0/user/withdraw/cash";

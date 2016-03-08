@@ -66,7 +66,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     
     __weakSelf
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"city_id":@"1",@"my":@"1",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-    [ODHttpTool getWithURL:ODUrlPersonalReleaseTask parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlSwapList parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
      {
          if (self.pageCount == 1)
          {
