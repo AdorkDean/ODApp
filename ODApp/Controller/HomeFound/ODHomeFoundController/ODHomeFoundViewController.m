@@ -171,10 +171,11 @@
 {
     NSDictionary *parameter = @{@"show_type" : @"1",@"call_array":@"1"};
     __weak typeof(self) weakSelf = self;
-    [ODHttpTool getWithURL:ODUrlOtherStoreList parameters:parameter modelClass:[ODStorePlaceListModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlOtherStoreList parameters:parameter modelClass:[ODStorePlaceListModel class] success:^(ODStorePlaceListModelResponse *model)
     {
-        weakSelf.storeId = model[@"id"];
-        [self pushToPlace];
+        ODStorePlaceListModel *listModel = model.result.firstObject;
+        weakSelf.storeId = [@(listModel.id)stringValue];
+        [weakSelf pushToPlace];
     }
                    failure:^(NSError *error)
     {
