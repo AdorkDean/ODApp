@@ -10,11 +10,6 @@
 
 @implementation ODOrderDetailModel
 
--(void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    
-}
-
-
-
 @end
+
+ODRequestResultIsDictionaryAll(ODOrderDetailModel)

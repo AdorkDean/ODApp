@@ -47,7 +47,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
 
 
     self.view.userInteractionEnabled = YES;
@@ -58,8 +57,6 @@
 
 
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
-
-
 }
 
 - (void)backAction:(UIBarButtonItem *)sender {
@@ -67,8 +64,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backRefrash:) name:ODNotificationSellOrderThirdRefresh object:nil];
 
     [self.navigationController popViewControllerAnimated:YES];
-
-
 }
 
 - (void)backRefrash:(NSNotification *)text {
@@ -100,17 +95,35 @@
 //    NSDictionary *parameters = @{@" order_id" : self.orderId, @"open_id" : self.open_id};
 //    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
+    // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"order_id"] = self.orderId;
     params[@"open_id"] = self.open_id;
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlSwapOrderInfo parameters:params modelClass:[NSObject class] success:^(id model) {
-        
-        NSLogFunc;
-        
-    } failure:^(NSError *error) {
-        
-    }];
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapOrderInfo parameters:params modelClass:[ODOrderDetailModel class] success:^(id model)
+     {
+         
+         [weakSelf.dataArray removeAllObjects];
+         [weakSelf.dataArray addObject:[model result]];
+
+         ODOrderDetailModel *statusModel = self.dataArray[0];
+         NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
+         
+         if (![self.orderStatus isEqualToString:orderStatue]) {
+
+             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:orderStatue, @"orderStatus", nil];
+             NSNotification *notification = [NSNotification notificationWithName:ODNotificationSellOrderSecondRefresh object:nil userInfo:dic];
+
+             [[NSNotificationCenter defaultCenter] postNotification:notification];
+         }
+         
+         [weakSelf createScroller];
+     } failure:^(NSError *error) {
+         
+     }];
+
+//    __weakSelf;
 //    [self.manager GET:ODUrlSwapOrderInfo parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 //
 //        if (responseObject) {
@@ -162,7 +175,7 @@
 //
 //        [ODProgressHUD showInfoWithStatus:@"网络异常"];
 //    }];
-//
+
 
 }
 

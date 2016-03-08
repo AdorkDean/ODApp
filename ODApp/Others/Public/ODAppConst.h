@@ -181,7 +181,7 @@ UIKIT_EXTERN NSString * const ODUrlSwapLoveList;
 UIKIT_EXTERN NSString * const ODUrlSwapOrderList;
 UIKIT_EXTERN NSString * const ODUrlSwapOrderInfo;
 
-UIKIT_EXTERN NSString * const kDelateOrderUrl;
+UIKIT_EXTERN NSString * const ODUrlSwapOrderCancel;
 
 UIKIT_EXTERN NSString * const kGetImageDataUrl;
 UIKIT_EXTERN NSString * const kChangePassWorldUrl;
