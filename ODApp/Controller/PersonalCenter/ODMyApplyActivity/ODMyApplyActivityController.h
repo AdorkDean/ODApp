@@ -10,7 +10,6 @@
 
 #import "ODClassMethod.h"
 #import "UIImageView+WebCache.h"
-#import "ODActivityDetailController.h"
 
 #import "ODNewActivityDetailViewController.h"
 

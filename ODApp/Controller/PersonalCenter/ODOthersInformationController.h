@@ -21,7 +21,6 @@
 
 #import "ODLandFirstCell.h"
 #import "ODLandSecondCell.h"
-#import "ODUserEvaluationController.h"
 
 
 @interface ODOthersInformationController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>

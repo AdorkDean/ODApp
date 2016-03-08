@@ -10,6 +10,7 @@
 #import "ODBazaarViewController.h"
 #import "ODHomeFoundViewController.h"
 #import "ODUserInformation.h"
+#import "ODStorePlaceListModel.h"
 #import "ODHomeInfoModel.h"
 #import "ODOtherStoreListModel.h"
 
@@ -170,7 +171,7 @@
 {
     NSDictionary *parameter = @{@"show_type" : @"1",@"call_array":@"1"};
     __weak typeof(self) weakSelf = self;
-    [ODHttpTool getWithURL:ODUrlOtherStoreList parameters:parameter modelClass:[NSObject class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlOtherStoreList parameters:parameter modelClass:[ODStorePlaceListModel class] success:^(id model)
     {
         weakSelf.storeId = model[@"id"];
         [self pushToPlace];

@@ -262,7 +262,7 @@
 - (void)requestStoreDetail
 {
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlStoreDetail parameters:@{@"store_id":self.storeId} modelClass:[ODStoreDetailModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlOtherStoreDetail parameters:@{@"store_id":self.storeId} modelClass:[ODStoreDetailModel class] success:^(id model)
     {
         ODStoreDetailModel *detailModel = [model result];
         [weakSelf.headView.placeBtn setTitle:detailModel.name forState:UIControlStateNormal];
