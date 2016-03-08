@@ -120,6 +120,7 @@ UIKIT_EXTERN NSString * const ODUrlUserLogin1;
 
 UIKIT_EXTERN NSString * const ODUrlStoreOrders;
 UIKIT_EXTERN NSString * const ODUrlStoreInfoOrder;
+UIKIT_EXTERN NSString * const ODUrlStoreDetail;
 
 
 UIKIT_EXTERN NSString * const ODUrlSwapDel;
@@ -128,6 +129,9 @@ UIKIT_EXTERN NSString * const ODUrlSwapDel;
 UIKIT_EXTERN NSString * const ODUrlBbsList;
 
 
+
+UIKIT_EXTERN NSString * const ODUrlOtherStoreList;
+UIKIT_EXTERN NSString * const ODUrlOtherHome;
 
 
 UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
@@ -162,10 +166,10 @@ UIKIT_EXTERN NSString * const kHomeFoundListUrl;
 
 UIKIT_EXTERN NSString * const ODWebUrlFindJob;
 
-UIKIT_EXTERN NSString * const ODHomeChangeSkillUrl;
+//UIKIT_EXTERN NSString * const ODHomeChangeSkillUrl;
 
-UIKIT_EXTERN NSString * const ODStoreListUrl;
-UIKIT_EXTERN NSString * const ODStoreDetailUrl;
+//UIKIT_EXTERN NSString * const ODStoreListUrl;
+//UIKIT_EXTERN NSString * const ODStoreDetailUrl;
 
 UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
