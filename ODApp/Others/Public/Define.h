@@ -9,13 +9,6 @@
 #ifndef Define_h
 #define Define_h
 
-#define kBazaarCellId @"ODBazaarCollectionCell"
-#define kBazaarRewardCellId @"ODBazaarRewardCollectionCell"
-#define kBazaarDetailCellId @"ODBazaarDetailCollectionCell"
-#define kCommunityCellId @"ODCommunityCollectionCell"
-#define kCommunityDetailCellId @"ODCommunityDetailCell"
-#define kMyApplyActivityCellId @"ONMyApplyActivityCell"
-#define kMyOrderRecordCellId @"ODMyOrderRecordCell"
 
 // 屏幕尺寸
 #define kScreenSize [UIScreen mainScreen].bounds.size

@@ -47,7 +47,7 @@
         }];
         
         // 把拼接好的字符串打印出来，就好了。
-        NSLog(@"property == /n%@",strM);
+        NSLog(@"property == \n%@",strM);
     }
     @catch (NSException *exception) {
         NSLog(@"json数据异常");
