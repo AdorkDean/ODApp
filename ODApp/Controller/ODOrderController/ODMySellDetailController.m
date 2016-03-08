@@ -93,66 +93,76 @@
 
 - (void)getData {
 
-
-    self.manager = [AFHTTPRequestOperationManager manager];
-
-
-    NSDictionary *parameters = @{@" order_id" : self.orderId, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:kOrderDetailUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        if (responseObject) {
-
-
-            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-                [self.dataArray removeAllObjects];
-                NSMutableDictionary *dic = responseObject[@"result"];
-                ODOrderDetailModel *model = [[ODOrderDetailModel alloc] init];
-                [model setValuesForKeysWithDictionary:dic];
-                [self.dataArray addObject:model];
-
-
-                ODOrderDetailModel *statusModel = self.dataArray[0];
-                NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
-
-
+//
+//    self.manager = [AFHTTPRequestOperationManager manager];
+//
+//
+//    NSDictionary *parameters = @{@" order_id" : self.orderId, @"open_id" : self.open_id};
+//    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-
-                if (![self.orderStatus isEqualToString:orderStatue]) {
-
-
-                    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:orderStatue, @"orderStatus", nil];
-                    NSNotification *notification = [NSNotification notificationWithName:ODNotificationSellOrderSecondRefresh object:nil userInfo:dic];
-
-                    [[NSNotificationCenter defaultCenter] postNotification:notification];
-
-                }
-                
-
-
-
-            } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-
-                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-
-            }
-
-
-            [weakSelf createScroller];
-
-
-        }
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"order_id"] = self.orderId;
+    params[@"open_id"] = self.open_id;
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlSwapOrderInfo parameters:params modelClass:[NSObject class] success:^(id model) {
+        
+        NSLogFunc;
+        
+    } failure:^(NSError *error) {
+        
     }];
-
+//    [self.manager GET:ODUrlSwapOrderInfo parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//
+//        if (responseObject) {
+//
+//
+//            if ([responseObject[@"status"] isEqualToString:@"success"]) {
+//
+//
+//                [self.dataArray removeAllObjects];
+//                NSMutableDictionary *dic = responseObject[@"result"];
+//                ODOrderDetailModel *model = [[ODOrderDetailModel alloc] init];
+//                [model setValuesForKeysWithDictionary:dic];
+//                [self.dataArray addObject:model];
+//
+//
+//                ODOrderDetailModel *statusModel = self.dataArray[0];
+//                NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
+//
+//
+//    
+//
+//                if (![self.orderStatus isEqualToString:orderStatue]) {
+//
+//
+//                    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:orderStatue, @"orderStatus", nil];
+//                    NSNotification *notification = [NSNotification notificationWithName:ODNotificationSellOrderSecondRefresh object:nil userInfo:dic];
+//
+//                    [[NSNotificationCenter defaultCenter] postNotification:notification];
+//
+//                }
+//                
+//
+//
+//
+//            } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
+//
+//
+//                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+//
+//
+//            }
+//
+//
+//            [weakSelf createScroller];
+//
+//
+//        }
+//    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//
+//        [ODProgressHUD showInfoWithStatus:@"网络异常"];
+//    }];
+//
 
 }
 

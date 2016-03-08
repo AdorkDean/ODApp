@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ODLikeModel.h"
+#import "ODLoveListModel.h"
 #import "ODApplyModel.h"
 
 @interface ODCollectionCell : UICollectionViewCell
@@ -21,11 +21,11 @@
 @property(weak, nonatomic) IBOutlet UIImageView *hisPictureView;
 @property(weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property(nonatomic, strong) ODApplyModel *applyModel;
-@property(nonatomic, strong) ODLikeModel *model;
+@property(nonatomic, strong) ODLoveListModel *model;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineHeightConstraint;
 
 - (void)setWithApplyModel:(ODApplyModel *)model;
 
-- (void)setWithLikeModel:(ODLikeModel *)model;
+- (void)setWithLikeModel:(ODLoveListModel *)model;
 @end

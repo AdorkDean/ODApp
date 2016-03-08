@@ -83,71 +83,102 @@
 - (void)getData {
     NSString *countNumber = [NSString stringWithFormat:@"%ld", (long) self.page];
 
+//    NSDictionary *parameters = @{@"page" : countNumber, @"open_id" : self.open_id};
+//    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
 
-    self.manager = [AFHTTPRequestOperationManager manager];
-
-    NSDictionary *parameters = @{@"page" : countNumber, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"page"] = countNumber;
+    params[@"open_id"] = self.open_id;
     __weakSelf
-    [self.manager GET:kGetMyOrderListUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        if (responseObject) {
-
-
-            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-                if ([countNumber isEqualToString:@"1"]) {
-                    [weakSelf.dataArray removeAllObjects];
-                    [weakSelf.noReusltLabel removeFromSuperview];
-                }
-
-
-                NSMutableDictionary *dic = responseObject[@"result"];
-
-                for (NSMutableDictionary *miniDic in dic) {
-                    ODMyOrderModel *model = [[ODMyOrderModel alloc] init];
-                    [model setValuesForKeysWithDictionary:miniDic];
-                    [weakSelf.dataArray addObject:model];
-                }
-
-                if (weakSelf.dataArray.count == 0) {
-                    weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160) / 2, kScreenSize.height / 2, 160, 30) text:@"暂无订单" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                    [weakSelf.view addSubview:weakSelf.noReusltLabel];
-                }
-
-
-                [weakSelf.collectionView.mj_header endRefreshing];
-
-
-                if (dic.count == 0) {
-                    [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-                }
-                else
-                {
-                    [weakSelf.collectionView.mj_footer endRefreshing];
-                }
-                [weakSelf.collectionView reloadData];
-                
-            }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
-                
-                
-                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-                [weakSelf.collectionView.mj_header endRefreshing];
-                [weakSelf.collectionView.mj_footer endRefreshing];
-                [weakSelf.collectionView reloadData];
-
-
-            }
-
-
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapOrderList parameters:params modelClass:[ODMyOrderModel class] success:^(id model)
+    {
+        NSArray *orderDatas = [model result];
+        if ([countNumber isEqualToString:@"1"]) {
+            [weakSelf.dataArray removeAllObjects];
+            [weakSelf.noReusltLabel removeFromSuperview];
         }
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+        [weakSelf.dataArray addObjectsFromArray:orderDatas];
+
+        if (weakSelf.dataArray.count == 0) {
+            weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160) / 2, kScreenSize.height / 2, 160, 30) text:@"暂无订单" font:16 alignment:@"center" color:@"#000000" alpha:1];
+            [weakSelf.view addSubview:weakSelf.noReusltLabel];
+        }
+
+        [weakSelf.collectionView.mj_header endRefreshing];
+
+        if (!orderDatas.count) {
+            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+        }
+        else
+        {
+            [weakSelf.collectionView.mj_footer endRefreshing];
+        }
+        [weakSelf.collectionView reloadData];
+    } failure:^(NSError *error) {
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
         [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
+//    [self.manager GET:ODUrlSwapOrderList parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//
+//        if (responseObject) {
+//
+//
+//            if ([responseObject[@"status"] isEqualToString:@"success"]) {
+//
+//
+//                if ([countNumber isEqualToString:@"1"]) {
+//                    [weakSelf.dataArray removeAllObjects];
+//                    [weakSelf.noReusltLabel removeFromSuperview];
+//                }
+//
+//
+//                NSMutableDictionary *dic = responseObject[@"result"];
+//
+//                for (NSMutableDictionary *miniDic in dic) {
+//                    ODMyOrderModel *model = [[ODMyOrderModel alloc] init];
+//                    [model setValuesForKeysWithDictionary:miniDic];
+//                    [weakSelf.dataArray addObject:model];
+//                }
+//
+//                if (weakSelf.dataArray.count == 0) {
+//                    weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160) / 2, kScreenSize.height / 2, 160, 30) text:@"暂无订单" font:16 alignment:@"center" color:@"#000000" alpha:1];
+//                    [weakSelf.view addSubview:weakSelf.noReusltLabel];
+//                }
+//
+//
+//                [weakSelf.collectionView.mj_header endRefreshing];
+//
+//
+//                if (dic.count == 0) {
+//                    [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+//                }
+//                else
+//                {
+//                    [weakSelf.collectionView.mj_footer endRefreshing];
+//                }
+//                [weakSelf.collectionView reloadData];
+//                
+//            }else if ([responseObject[@"status"]isEqualToString:@"error"]) {
+//                
+//                
+//                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+//                [weakSelf.collectionView.mj_header endRefreshing];
+//                [weakSelf.collectionView.mj_footer endRefreshing];
+//                [weakSelf.collectionView reloadData];
+//
+//
+//            }
+//
+//
+//        }
+//    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        [weakSelf.collectionView.mj_header endRefreshing];
+//        [weakSelf.collectionView.mj_footer endRefreshing];
+//        [ODProgressHUD showInfoWithStatus:@"网络异常"];
+//    }];
 
 
 }

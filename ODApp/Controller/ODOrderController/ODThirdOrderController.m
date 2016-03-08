@@ -14,11 +14,13 @@
 #import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
 #import "ODOrderThirdHeadView.h"
-#import "ODAddressModel.h"
+#import "ODOrderAddressModel.h"
 #import "ODPayController.h"
 #import "TimeButton.h"
 #import "DataButton.h"
 #import "ODOrderDataModel.h"
+
+#import "ODSaveOrderModel.h"
 
 @interface ODThirdOrderController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -39,11 +41,21 @@
 
 @implementation ODThirdOrderController
 
-- (void)viewDidLoad {
+#pragma mark - 生命周期方法
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-
-
+    
     self.dataArray = [[NSMutableArray alloc] init];
     self.selectDataArray = [[NSMutableArray alloc] init];
     self.view.userInteractionEnabled = YES;
@@ -53,14 +65,11 @@
     [self getData];
 
     [self createCollectionView];
-
-
 }
 
-
-#pragma mark - 初始化
-
-- (void)createCollectionView {
+#pragma mark - 初始化方法
+- (void)createCollectionView
+{
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 115) collectionViewLayout:self.flowLayout];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
@@ -100,26 +109,22 @@
     [saveOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [saveOrderButton addTarget:self action:@selector(saveOrderAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:saveOrderButton];
-
-
 }
 
 
-- (void)saveOrderAction:(UIButton *)sender {
-
-    if ([self.headView.thirdOrderView.timeLabel.text isEqualToString:@"请选择"]) {
-
-
+- (void)saveOrderAction:(UIButton *)sender
+{
+    if ([self.headView.thirdOrderView.timeLabel.text isEqualToString:@"请选择"])
+    {
         [ODProgressHUD showInfoWithStatus:@"请输入服务时间"];
-
-    } else {
-
+    } else
+    {
         [self saveOrder];
     }
-
 }
-
-- (void)getData {
+#pragma mark - 获取数据
+- (void)getData
+{
     self.manager = [AFHTTPRequestOperationManager manager];
 
 
@@ -148,75 +153,45 @@
 
 
     }];
-
-
 }
 
-
-- (void)saveOrder {
-    self.orderManager = [AFHTTPRequestOperationManager manager];
-
-
-    NSString *swap_id = [NSString stringWithFormat:@"%@", self.informationModel.swap_id];
-
-
-    NSDictionary *parameters = @{@"open_id" : self.openId, @"swap_id" : swap_id, @"service_time" : self.headView.thirdOrderView.timeLabel.text, @"user_address_id" : @"0", @"comment" : @""};
-
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    [self.orderManager GET:kGetOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-            NSMutableDictionary *dic = responseObject[@"result"];
-
-
-            NSString *orderId = [NSString stringWithFormat:@"%@", dic[@"order_id"]];
-
-
-            ODPayController *vc = [[ODPayController alloc] init];
-            vc.OrderTitle = self.informationModel.title;
-            vc.orderId = orderId;
-            vc.price = [NSString stringWithFormat:@"%@", self.informationModel.price];
-            vc.swap_type = [NSString stringWithFormat:@"%@", self.informationModel.swap_type];
-            [self.navigationController pushViewController:vc animated:YES];
-
-
-        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-        }
-
-    }              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
-    }];
-
+- (void)saveOrder
+{
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"swap_id"] = [NSString stringWithFormat:@"%@", self.informationModel.swap_id];
+    params[@"service_time"] = self.headView.thirdOrderView.timeLabel.text;
+    params[@"user_address_id"] = @"0";
+    params[@"comment"] = @"";
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapOrder parameters:params modelClass:[ODSaveOrderModel class] success:^(id model)
+     {
+         ODSaveOrderModel *orderModel = [model result];
+         ODPayController *vc = [[ODPayController alloc] init];
+         vc.OrderTitle = weakSelf.informationModel.title;
+         // 获取 order_id
+         vc.orderId = [orderModel order_id];
+         vc.price = weakSelf.informationModel.price;
+         vc.swap_type = weakSelf.informationModel.swap_type;
+         [weakSelf.navigationController pushViewController:vc animated:YES];
+     } failure:^(NSError *error) {
+     }];
 }
 
-
-#pragma mark - UICollectionViewDelegate
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODOrderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
-
-    cell.model = self.informationModel;
-
-
-    return cell;
-}
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+#pragma mark - UICollectionView 数据源方法
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
     return 1;
 }
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return 1;
 }
-
-
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    ODOrderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
+    cell.model = self.informationModel;
+    return cell;
+}
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
 
 
@@ -225,12 +200,23 @@
     UITapGestureRecognizer *timeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeAction)];
     [self.headView.thirdOrderView.choseTimeView addGestureRecognizer:timeTap];
 
-
     return self.headView;
-
 }
 
-- (void)timeAction {
+#pragma mark - UICollectionView 代理方法
+//动态设置每个item的大小
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake(kScreenSize.width, 160);
+}
+//动态设置区头的高度(根据不同的分区)
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    return CGSizeMake(kScreenSize.width, 120);
+}
+
+- (void)timeAction
+{
     [self.choseTimeView removeFromSuperview];
     self.choseTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, KScreenHeight / 2 - ODNavigationHeight, kScreenSize.width, KScreenHeight / 2)];
     self.choseTimeView.userInteractionEnabled = YES;
@@ -438,35 +424,7 @@
 }
 
 
-//动态设置每个item的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 
-    return CGSizeMake(kScreenSize.width, 160);
-
-
-}
-
-//动态设置区头的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(kScreenSize.width, 120);
-
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-}
 
 
 @end

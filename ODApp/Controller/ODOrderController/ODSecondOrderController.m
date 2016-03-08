@@ -5,7 +5,6 @@
 //  Created by zhz on 16/2/4.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
-
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODSecondOrderController.h"
 #import "ODOrderCell.h"
@@ -14,9 +13,12 @@
 #import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
 #import "ODOrderSecondHeadView.h"
-#import "ODAddressModel.h"
+#import "ODOrderaddressmodel.h"
 #import "ODPayController.h"
 #import "ODNavigationController.h"
+
+#import "ODOrderAddressModel.h"
+#import "ODSaveOrderModel.h"
 
 @interface ODSecondOrderController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextViewDelegate>
 
@@ -27,19 +29,28 @@
 @property(nonatomic, strong) UILabel *allPriceLabel;
 @property(nonatomic, copy) NSString *addressId;
 @property(nonatomic, strong) AFHTTPRequestOperationManager *orderManager;
-@property(nonatomic, copy) NSString *openId;
-@property(nonatomic, strong) NSMutableArray *addressArray;
+@property(nonatomic, strong) NSArray *addressArray;
 @property(nonatomic, strong) AFHTTPRequestOperationManager *addressManager;
 @end
 
 @implementation ODSecondOrderController
 
-- (void)viewDidLoad {
+
+#pragma mark - 生命周期方法
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
-
-    self.openId = [ODUserInformation sharedODUserInformation].openID;
-    self.addressArray = [[NSMutableArray alloc] init];
     self.navigationItem.title = @"提交订单";
 
     [self getAddress];
@@ -47,51 +58,9 @@
 
 }
 
-- (void)getAddress {
-    self.addressManager = [AFHTTPRequestOperationManager manager];
-
-    NSDictionary *parameters = @{@"open_id" : self.openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    __weak typeof(self) weakSelf = self;
-    [self.addressManager GET:kGetAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-            [weakSelf.addressArray removeAllObjects];
-
-
-            NSMutableDictionary *dic = responseObject[@"result"];
-
-            NSMutableDictionary *addressDic = dic[@"def"];
-
-
-            if (addressDic.count != 0) {
-                ODAddressModel *model = [[ODAddressModel alloc] init];
-                [model setValuesForKeysWithDictionary:addressDic];
-                [weakSelf.addressArray addObject:model];
-
-            }
-
-
-        }
-
-
-        [weakSelf.collectionView reloadData];
-
-    }                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
-    }];
-
-}
-
-
-#pragma mark - 初始化
-
-- (void)createCollectionView {
+#pragma mark - 初始化方法
+- (void)createCollectionView
+{
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 115) collectionViewLayout:self.flowLayout];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
@@ -130,73 +99,54 @@
     [saveOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [saveOrderButton addTarget:self action:@selector(saveOrderAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:saveOrderButton];
-
-
 }
 
-
-- (void)saveOrderAction:(UIButton *)sender {
-
-    if ([self.headView.secondOrderView.addressLabel.text isEqualToString:@"请选择"]) {
-
-
-        [ODProgressHUD showInfoWithStatus:@"请输入联系地址"];
-
-
-    } else {
-
-        [self saveOrder];
-    }
-
+#pragma mark - 获取数据方法
+- (void)getAddress
+{
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlUserGetAddress parameters: @{} modelClass:[ODOrderAddressModel class] success:^(id model)
+     {
+         ODOrderAddressModel *addressModel = [model result];
+         ODOrderAddressDefModel *addressDefModel = addressModel.def;
+         weakSelf.addressArray = @[addressDefModel];
+         [weakSelf.collectionView reloadData];
+     } failure:^(NSError *error) {
+     }];
 }
-
-
-- (void)saveOrder {
-    self.orderManager = [AFHTTPRequestOperationManager manager];
-
-
-    NSString *swap_id = [NSString stringWithFormat:@"%@", self.informationModel.swap_id];
-
-
-    NSDictionary *parameters = @{@"open_id" : self.openId, @"swap_id" : swap_id, @"service_time" : @"", @"user_address_id" : self.addressId, @"comment" : @""};
-
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    [self.orderManager GET:kGetOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-            NSMutableDictionary *dic = responseObject[@"result"];
-
-
-            NSString *orderId = [NSString stringWithFormat:@"%@", dic[@"order_id"]];
-
-
-            ODPayController *vc = [[ODPayController alloc] init];
-            vc.OrderTitle = self.informationModel.title;
-            vc.orderId = orderId;
-            vc.price = [NSString stringWithFormat:@"%@", self.informationModel.price];
-            vc.swap_type = [NSString stringWithFormat:@"%@", self.informationModel.swap_type];
-            [self.navigationController pushViewController:vc animated:YES];
-
-
-        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-        }
-
-    }              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
+- (void)saveOrder
+{
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"swap_id"] = [NSString stringWithFormat:@"%@", self.informationModel.swap_id];
+    params[@"service_time"] = @"";
+    params[@"user_address_id"] = self.addressId;
+    params[@"comment"] = @"";
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapOrder parameters:params modelClass:[ODSaveOrderModel class] success:^(id model)
+    {
+        ODSaveOrderModel *orderModel = [model result];
+        ODPayController *vc = [[ODPayController alloc] init];
+        vc.OrderTitle = weakSelf.informationModel.title;
+        // 获取 order_id
+        vc.orderId = [orderModel order_id];
+        vc.price = weakSelf.informationModel.price;
+        vc.swap_type = weakSelf.informationModel.swap_type;
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    } failure:^(NSError *error) {
     }];
-
 }
 
 
-#pragma mark - UICollectionViewDelegate
+#pragma mark - UICollectionView 数据源方法
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
 
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 1;
+}
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODOrderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
 
@@ -205,15 +155,6 @@
 
     return cell;
 }
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 1;
-}
-
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
 
@@ -227,73 +168,65 @@
     if (self.addressArray.count == 0) {
         self.headView.secondOrderView.addressLabel.text = @"请选择";
     } else {
-        ODAddressModel *model = self.addressArray[0];
+        ODOrderAddressDefModel *model = self.addressArray[0];
         self.headView.secondOrderView.addressLabel.text = model.address;
-        self.addressId = [NSString stringWithFormat:@"%@", model.id];
+        self.addressId = [NSString stringWithFormat:@"%d", model.id];
 
 
     }
-
-
     return self.headView;
 
 }
 
-
-- (void)addressAction {
-    ODContactAddressController *vc = [[ODContactAddressController alloc] init];
-
-    __weakSelf
-    vc.getAddressBlock = ^(NSString *address, NSString *addrssId, NSString *isAddress) {
-
-        if ([isAddress isEqualToString:@"1"]) {
-            weakSelf.headView.secondOrderView.addressLabel.text = @"请选择";
-            weakSelf.addressId = nil;
-        } else {
-            weakSelf.headView.secondOrderView.addressLabel.text = address;
-            weakSelf.addressId = addrssId;
-
-        }
-
-    };
-
-    vc.addressId = self.addressId;
-
-    ODNavigationController *navi = [[ODNavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:navi animated:YES completion:nil];
-
-
-}
-
-
+#pragma mark - UICollectionView 代理方法
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 
     return CGSizeMake(kScreenSize.width, 160);
-
-
 }
-
 //动态设置区头的高度(根据不同的分区)
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
     return CGSizeMake(kScreenSize.width, 130);
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-
+#pragma mark - 监听方法
+- (void)saveOrderAction:(UIButton *)sender
+{
+    if ([self.headView.secondOrderView.addressLabel.text isEqualToString:@"请选择"])
+    {
+        [ODProgressHUD showInfoWithStatus:@"请输入联系地址"];
+    }
+    else
+    {
+        [self saveOrder];
+    }
+    
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
+- (void)addressAction {
+    ODContactAddressController *vc = [[ODContactAddressController alloc] init];
+    
+    __weakSelf
+    vc.getAddressBlock = ^(NSString *address, NSString *addrssId, NSString *isAddress) {
+        
+        if ([isAddress isEqualToString:@"1"]) {
+            weakSelf.headView.secondOrderView.addressLabel.text = @"请选择";
+            weakSelf.addressId = nil;
+        } else {
+            weakSelf.headView.secondOrderView.addressLabel.text = address;
+            weakSelf.addressId = addrssId;
+            
+        }
+        
+    };
+    
+    vc.addressId = self.addressId;
+    
+    ODNavigationController *navi = [[ODNavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:navi animated:YES completion:nil];
+    
+    
 }
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-}
-
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ODAddressModel.h"
+#import "ODOrderAddressModel.h"
 
 @interface ODAddressCell : UITableViewCell
 
@@ -15,7 +15,7 @@
 @property(weak, nonatomic) IBOutlet UILabel *phoneLabel;
 @property(weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property(weak, nonatomic) IBOutlet UILabel *lineLabel;
-@property(nonatomic, strong) ODAddressModel *model;
+@property(nonatomic, strong) ODOrderAddressDefModel *model;
 
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *lineonstraint;

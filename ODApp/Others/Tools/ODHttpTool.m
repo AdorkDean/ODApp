@@ -5,6 +5,10 @@
 //  Created by 刘培壮 on 16/1/19.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
+
+/** 拼接模型类名 */
+#define ODRequestClassName(className)       NSClassFromString([NSStringFromClass(className)stringByAppendingString:@"Response"])
+
 #import <AFNetworking.h>
 #import "ODHttpTool.h"
 #import "ODProgressHUD.h"
@@ -21,7 +25,7 @@ NSString * const requestSuccessStatus = @"success";
 
 + (NSMutableDictionary *)getRequestParameter:(NSDictionary *)parameter
 {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary ];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
     dic[@"city_id"] = [NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID];
     dic[@"device_id"] = @"";

@@ -175,15 +175,15 @@ UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
 UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
 UIKIT_EXTERN NSString * const kCancelMyOrderUrl;
 UIKIT_EXTERN NSString * const kSaveAddressUrl;
-UIKIT_EXTERN NSString * const kGetAddressUrl;
+UIKIT_EXTERN NSString * const ODUrlUserGetAddress;
 UIKIT_EXTERN NSString * const kDeleteAddressUrl;
 UIKIT_EXTERN NSString * const kGetServecTimeUrl;
 UIKIT_EXTERN NSString * const ODUrlConfirmOrder;
 
 
-UIKIT_EXTERN NSString * const kGetLikeListUrl;
-UIKIT_EXTERN NSString * const kGetMyOrderListUrl;
-UIKIT_EXTERN NSString * const kOrderDetailUrl;
+UIKIT_EXTERN NSString * const ODUrlSwapLoveList;
+UIKIT_EXTERN NSString * const ODUrlSwapOrderList;
+UIKIT_EXTERN NSString * const ODUrlSwapOrderInfo;
 
 UIKIT_EXTERN NSString * const kDelateOrderUrl;
 
@@ -215,5 +215,5 @@ UIKIT_EXTERN NSString * const kMySellListUrl;
 UIKIT_EXTERN NSString * const kDeliveryUrl;
 UIKIT_EXTERN NSString * const kFinshOrderUrl;
 UIKIT_EXTERN NSString * const kEvalueUrl;
+UIKIT_EXTERN NSString * const ODUrlSwapOrder;
 UIKIT_EXTERN NSString * const ODUrlPayBack;
-UIKIT_EXTERN NSString * const kGetOrderUrl;

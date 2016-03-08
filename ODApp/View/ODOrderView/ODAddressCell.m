@@ -21,20 +21,10 @@
     self.lineonstraint.constant = 0.5;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
-}
-
-
-- (void)setModel:(ODAddressModel *)model
+- (void)setModel:(ODOrderAddressDefModel *)model
 {
-    if (_model != model) {
-        
-        _model = model;
-    }
-    
+    _model = model;
     self.nameLabel.text = model.name;
     self.phoneLabel.text = model.tel;
 

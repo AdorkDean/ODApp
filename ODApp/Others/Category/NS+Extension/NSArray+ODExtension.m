@@ -10,25 +10,18 @@
 
 @implementation NSArray (ODExtension)
 
-//- (NSString *)description
-//{
-//    NSMutableString *strM = [NSMutableString string];
-//    [strM appendFormat:@"[\n"];
-//    
-//    // 2.遍历字典，拼接字典中的键值对
-//    [self enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//        [strM appendFormat:@"%@",obj];
-//        if (idx != self.count - 1)
-//        {
-//            [strM appendString:@",\n"];
-//        }
-//    }];
-//    
-//    [strM appendFormat:@"]\n"];
-//    
-//    return strM;
-//
-//}
+- (NSString *)enumerateString
+{
+    NSMutableString *strM = [NSMutableString string];
+    [self enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [strM appendFormat:@"%@",obj];
+        if (idx != self.count - 1)
+        {
+            [strM appendString:@","];
+        }
+    }];
+    return strM;
+}
 
 - (NSString *)desc
 {
@@ -50,21 +43,9 @@
     return strM;
 }
 
-- (NSString *)enumerateString
+- (NSString *)descriptionWithLocale:(id)locale
 {
-    NSMutableString *strM = [NSMutableString string];
-    [self enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [strM appendFormat:@"%@",obj];
-        if (idx != self.count - 1)
-        {
-            [strM appendString:@","];
-        }
-    }];
-    return strM;
+    return [self desc];
 }
-//- (NSString *)descriptionWithLocale:(id)locale
-//{
-//    return [self description];
-//}
 
 @end

@@ -17,9 +17,11 @@
 #import "DataButton.h"
 #import "TimeButton.h"
 #import "UIImageView+WebCache.h"
-#import "ODAddressModel.h"
+#import "ODOrderAddressModel.h"
 #import "ODPayController.h"
 #import "ODPayController.h"
+
+#import "ODSaveOrderModel.h"
 
 @interface ODOrderController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextViewDelegate>
 
@@ -75,7 +77,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
 
     __weak typeof(self) weakSelf = self;
-    [self.addressManager GET:kGetAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.addressManager GET:ODUrlUserGetAddress parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
 
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
@@ -90,7 +92,7 @@
 
 
             if (addressDic.count != 0) {
-                ODAddressModel *model = [[ODAddressModel alloc] init];
+                ODOrderAddressDefModel *model = [[ODOrderAddressDefModel alloc] init];
                 [model setValuesForKeysWithDictionary:addressDic];
                 [weakSelf.addressArray addObject:model];
 
@@ -210,44 +212,60 @@
 }
 
 
-- (void)saveOrder {
-    self.orderManager = [AFHTTPRequestOperationManager manager];
-
-    NSString *swap_id = [NSString stringWithFormat:@"%@", self.informationModel.swap_id];
-
-
-    NSDictionary *parameters = @{@"open_id" : self.openId, @"swap_id" : swap_id, @"service_time" : self.headView.orderView.timeLabel.text, @"user_address_id" : self.addressId, @"comment" : @""};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    [self.orderManager GET:kGetOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-            NSMutableDictionary *dic = responseObject[@"result"];
-
-
-            NSString *orderId = [NSString stringWithFormat:@"%@", dic[@"order_id"]];
-
-
-            ODPayController *vc = [[ODPayController alloc] init];
-            vc.OrderTitle = self.informationModel.title;
-            vc.orderId = orderId;
-            vc.price = [NSString stringWithFormat:@"%@", self.informationModel.price];
-            vc.swap_type = [NSString stringWithFormat:@"%@", self.informationModel.swap_type];
-            [self.navigationController pushViewController:vc animated:YES];
-
-
-        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-
-            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-        }
-
-    }              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
-    }];
+- (void)saveOrder
+{
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"swap_id"] = [NSString stringWithFormat:@"%@", self.informationModel.swap_id];
+    params[@"service_time"] = @"";
+    params[@"user_address_id"] = self.addressId;
+    params[@"comment"] = @"";
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapOrder parameters:params modelClass:[ODSaveOrderModel class] success:^(id model)
+     {
+         ODSaveOrderModel *orderModel = [model result];
+         ODPayController *vc = [[ODPayController alloc] init];
+         vc.OrderTitle = weakSelf.informationModel.title;
+         // 获取 order_id
+         vc.orderId = [orderModel order_id];
+         vc.price = weakSelf.informationModel.price;
+         vc.swap_type = weakSelf.informationModel.swap_type;
+         [weakSelf.navigationController pushViewController:vc animated:YES];
+     } failure:^(NSError *error) {
+     }];
+    
+    
+//    [self.orderManager GET:ODUrlSwapOrder parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//
+//
+//        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+//
+//
+//            NSMutableDictionary *dic = responseObject[@"result"];
+//
+//
+//            NSString *orderId = [NSString stringWithFormat:@"%@", dic[@"order_id"]];
+//
+//
+//            ODPayController *vc = [[ODPayController alloc] init];
+//            vc.OrderTitle = self.informationModel.title;
+//            vc.orderId = orderId;
+//            vc.price = [NSString stringWithFormat:@"%@", self.informationModel.price];
+//            vc.swap_type = [NSString stringWithFormat:@"%@", self.informationModel.swap_type];
+//            [self.navigationController pushViewController:vc animated:YES];
+//
+//
+//        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
+//
+//
+//            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+//        }
+//
+//    }              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//
+//
+//    }];
 
 }
 
@@ -290,9 +308,9 @@
     if (self.addressArray.count == 0) {
         self.headView.orderView.addressLabel.text = @"请选择";
     } else {
-        ODAddressModel *model = self.addressArray[0];
+        ODOrderAddressDefModel *model = self.addressArray[0];
         self.headView.orderView.addressLabel.text = model.address;
-        self.addressId = [NSString stringWithFormat:@"%@", model.id];
+        self.addressId = [NSString stringWithFormat:@"%d", model.id];
 
 
     }
@@ -381,7 +399,7 @@
     [self.view addSubview:self.choseTimeView];
 }
 
-
+#pragma mark - 监听方法
 - (void)timeAction:(DataButton *)sender {
 
     for (NSInteger i = 0; i < 7; i++) {

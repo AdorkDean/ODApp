@@ -11,6 +11,6 @@
 
 @interface ODSecondOrderController : ODBaseViewController
 
-
+@property(nonatomic, strong) NSString *openId;
 @property(nonatomic, strong) ODBazaarExchangeSkillModel *informationModel;
 @end

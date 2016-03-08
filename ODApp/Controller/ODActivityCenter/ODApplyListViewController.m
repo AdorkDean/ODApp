@@ -161,7 +161,6 @@
 
     [cell setWithApplyModel:model];
 
-
     return cell;
 }
 
@@ -177,7 +176,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-    ODLikeModel *model = self.dataArray[indexPath.row];
+    ODLoveListModel *model = self.dataArray[indexPath.row];
     vc.open_id = model.open_id;
     if (![vc.open_id isEqualToString:[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].openID]]) {
         [self.navigationController pushViewController:vc animated:YES];
