@@ -116,7 +116,7 @@ UIKIT_EXTERN NSString * const ODUrlUserChangePasswd;
 UIKIT_EXTERN NSString * const ODUrlUserLogin1;
 
 
-UIKIT_EXTERN NSString * const kBazaarUnlimitTaskUrl;
+UIKIT_EXTERN NSString * const ODUrlBazaarRequestHelp;
 UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDetailUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDelegateUrl;

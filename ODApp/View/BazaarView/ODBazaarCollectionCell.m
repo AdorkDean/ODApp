@@ -11,7 +11,6 @@
 @implementation ODBazaarCollectionCell
 
 - (void)awakeFromNib {
-    
     self.headButton.layer.masksToBounds = YES;
     self.headButton.layer.cornerRadius = 24;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
@@ -24,7 +23,7 @@
     self.statusLabel.backgroundColor = [UIColor colorWithHexString:@"#ffd701" alpha:1];
 }
 
--(void)shodDataWithModel:(ODBazaarModel *)model
+- (void)setModel:(ODBazaarRequestHelpTasksModel *)model
 {
     [self.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     self.titleLabel.text = model.title;

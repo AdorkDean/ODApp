@@ -8,6 +8,20 @@
 
 #import "ODBazaarRequestHelpModel.h"
 
-@implementation ODBazaarRequestHelpModel
+@implementation ODBazaarRequestHelpTasksModel
 
 @end
+
+@implementation ODBazaarRequestHelpModel
+
++ (void)initialize
+{
+    [ODBazaarRequestHelpModel mj_setupObjectClassInArray:^NSDictionary *{
+        return @{
+                 @"tasks":[ODBazaarRequestHelpTasksModel class]
+                 };
+    }];
+}
+@end
+
+ODRequestResultIsDictionaryImplementation(ODBazaarRequestHelpModel)

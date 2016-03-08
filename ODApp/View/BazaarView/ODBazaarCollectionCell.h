@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIButton+WebCache.h"
 #import "ODBazaarModel.h"
+#import "ODBazaarRequestHelpModel.h"
 
 @interface ODBazaarCollectionCell : UICollectionViewCell
 
@@ -20,6 +21,6 @@
 @property(weak, nonatomic) IBOutlet UILabel *statusLabel;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelConstraint;
 
-- (void)shodDataWithModel:(ODBazaarModel *)model;
+@property (nonatomic,strong) ODBazaarRequestHelpTasksModel *model;
 
 @end
