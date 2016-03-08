@@ -128,18 +128,18 @@
 
 - (void)getScrollViewRequest {
     __weakSelf
-    [weakSelf.pictureArray removeAllObjects];
-    [weakSelf.pictureIdArray removeAllObjects];
-    [weakSelf.collectionView reloadData];
+    
     NSDictionary *parameter = @{@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     [ODHttpTool getWithURL:ODUrlOtherHome parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model) {
-                [weakSelf.pictureArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"detail_md5"]];
-                [weakSelf.pictureIdArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"id"]];
-                [weakSelf.collectionView reloadData];
-            }
+        [weakSelf.pictureArray removeAllObjects];
+        [weakSelf.pictureIdArray removeAllObjects];
+        [weakSelf.pictureArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"detail_md5"]];
+        [weakSelf.pictureIdArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"id"]];
+        [weakSelf.collectionView reloadData];
+    }
                    failure:^(NSError *error) {
 
-                   }];
+       }];
 }
 
 #pragma mark - 技能交换数据请求
@@ -150,11 +150,10 @@
 
     [ODHttpTool getWithURL:ODUrlOtherHome parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model)
     {
+        [weakSelf.dataArray removeAllObjects];
         ODHomeInfoModel *infoModel = [model result];
         for (ODHomeInfoSwapModel *swapModel in infoModel.swaps) {
-            if (![[weakSelf.dataArray valueForKeyPath:@"swap_id"] containsObject:[swapModel swap_id]]) {
-                [weakSelf.dataArray addObject:swapModel];
-            }
+            [weakSelf.dataArray addObject:swapModel];
         }
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView reloadData];
@@ -286,7 +285,8 @@
         self.rsusableView.scrollView.delegate = self;
         self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
         self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;
-
+        [self.rsusableView.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        
         for (int i = 0; i < self.pictureArray.count; i++) {
             UIButton *imageButton;
             if (i < self.pictureArray.count - 1) {

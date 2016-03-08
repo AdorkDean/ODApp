@@ -107,6 +107,9 @@ NSString * const ODUrlUserInfo = @"user/info";
 NSString * const ODUrlUserCodeSend = @"user/verify/code/send";
 NSString * const ODUrlUserChangePasswd = @"user/change/passwd";
 NSString * const ODUrlUserGetAddress = @"user/address/list";
+NSString * const ODUrlUserAddressDel = @"user/address/del";
+NSString * const ODUrlUserAssressAdd = @"user/address/add";
+NSString * const kCollectionUrl = @"user/love/list";
 NSString * const ODUrlUserBindMoble = @"user/bind/mobile";
 
 
@@ -145,6 +148,7 @@ NSString * const ODUrlOtherStoreList = @"other/store/list";
 
 
 NSString * const ODUrlBbsList = @"bbs/list";
+//NSString * const ODUrlBbsDel = @"bbs/del";
 
 
 NSString * const ODUrlPersonalReleaseTask = @"swap/list";
@@ -210,8 +214,8 @@ NSString * const kHomeFoundListUrl = @"http://woquapi.test.odong.com/1.0/bbs/lis
 //NSString * const kMyOrderDetailUrl = @"http://woquapi.test.odong.com/1.0/store/info/order";
 
 //NSString * const kCancelMyOrderUrl = @"http://woquapi.test.odong.com/1.0/store/cancel/order";
-NSString * const kSaveAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/add";
-NSString * const kDeleteAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/del";
+//NSString * const kSaveAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/add";
+//NSString * const kDeleteAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/del";
 
 NSString * const kGetServecTimeUrl = @"http://woquapi.test.odong.com/1.0/swap/service/time";
 
@@ -223,7 +227,7 @@ NSString * const kDelateTaskUrl = @"http://woquapi.test.odong.com/1.0/bbs/del";
 NSString * const kGetCommentUrl = @"http://woquapi.test.odong.com/1.0/user/comment/list";
 NSString * const kGetApplyListUrl = @"http://woquapi.test.odong.com/1.0/store/apply/users";
 NSString * const kGiveOpinionUrl = @"http://woquapi.test.odong.com/1.0/other/feedback";
-NSString * const kCollectionUrl = @"http://woquapi.test.odong.com/1.0/user/love/list";
+//NSString * const kCollectionUrl = @"http://woquapi.test.odong.com/1.0/user/love/list";
 
 NSString * const kGetPayInformationUrl = @"http://woquapi.test.odong.com/1.0/pay/weixin/trade/number";
 NSString * const kBalanceUrl = @"http://woquapi.test.odong.com/1.0/user/withdraw/cash";
