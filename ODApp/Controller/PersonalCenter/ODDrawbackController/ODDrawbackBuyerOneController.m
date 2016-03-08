@@ -47,9 +47,6 @@
 @property(nonatomic, strong) UIView *servicePhoneView;
 @property(nonatomic, strong) UIView *serviceTimeView;
 
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *managerRefuse;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *managerReceive;
 
 @end
 
@@ -397,95 +394,60 @@
 #pragma mark - 拒绝退款请求
 - (void)refuseDrawbackRequest
 {
-    self.managerRefuse = [AFHTTPRequestOperationManager manager];
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.cancelOrderView.reasonTextView.text, @"open_id":openId};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
+
     __weakSelf
-    [self.managerRefuse GET:ODRefuseDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-     {
-         if ([responseObject[@"status"] isEqualToString:@"success"])
-         {
-             [ODProgressHUD showInfoWithStatus:@"已拒绝"];
-             
-             NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
-             [[NSNotificationCenter defaultCenter] postNotification:notification];
-             
-             [weakSelf.cancelOrderView removeFromSuperview];
-             [weakSelf.navigationController popViewControllerAnimated:YES];
-         }
-         else
-         {
-             [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-         }
-     }
-                    failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-     {
-         
-     }];
+    [ODHttpTool getWithURL:ODUrlSwapRejectRefund parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        
+        [ODProgressHUD showInfoWithStatus:@"已拒绝"];
+        NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
+        [weakSelf.cancelOrderView removeFromSuperview];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    }
+                   failure:^(NSError *error) {
+                
+    }];
 }
 
 #pragma mark - 接受退款请求
 - (void)receiveDrawbackRequest
 {
-    self.managerReceive = [AFHTTPRequestOperationManager manager];
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason ,@"open_id":openId};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
     __weakSelf
-    [self.managerReceive GET:ODReceiveDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-     {
-         if ([responseObject[@"status"] isEqualToString:@"success"])
-         {
-             [ODProgressHUD showInfoWithStatus:@"已接受"];
-             
-             NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
-             [[NSNotificationCenter defaultCenter] postNotification:notification];
-             
-             [weakSelf.navigationController popViewControllerAnimated:YES];
-         }
-         else
-         {
-             [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-         }
-     }
-                     failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-     {
-         
-     }];
-}
+    [ODHttpTool getWithURL:ODurlSwapConfirmRefund parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        
+        [ODProgressHUD showInfoWithStatus:@"已接受"];
+        NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    }
+                   failure:^(NSError *error) {
+                       
+    }];
+ }
 
 #pragma mark - 申请退款请求
 - (void)releaseDrawbackRequest
 {
-    self.manager = [AFHTTPRequestOperationManager manager];
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason, @"open_id":openId};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
     __weakSelf
-    [self.manager GET:ODReleaseDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-     {
-         if ([responseObject[@"status"] isEqualToString:@"success"])
-         {
-             [ODProgressHUD showInfoWithStatus:@"申请退款成功"];
-             
-             NSNotification *notification =[NSNotification notificationWithName:ODNotificationMyOrderThirdRefresh object:nil userInfo:nil];
-             [[NSNotificationCenter defaultCenter] postNotification:notification];
-             
-             [weakSelf.navigationController popViewControllerAnimated:YES];
-         }
-         else
-         {
-             [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-         }
-     }
-              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-     {
-         
-     }];
+    [ODHttpTool getWithURL:ODUrlSwapOrderCancel parameters:parameter modelClass:[NSObject  class] success:^(id model) {
+        
+        [ODProgressHUD showInfoWithStatus:@"申请退款成功"];
+        NSNotification *notification =[NSNotification notificationWithName:ODNotificationMyOrderThirdRefresh object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+        
+    }
+                   failure:^(NSError *error) {
+                
+    }];
 }
 
 #pragma mark - Action
