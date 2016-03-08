@@ -322,7 +322,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 - (void)requestData {
     __weakSelf
     NSDictionary *parameter = @{@"activity_id" : [@(self.acitityId) stringValue]};
-    [ODHttpTool getWithURL:ODUrlActivityDetail parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlStoreApplyDetail2 parameters:parameter modelClass:[ODActivityDetailModel class] success:^(id model) {
                 weakSelf.resultModel = [model result];
                 [weakSelf analyzeData];
             }
@@ -550,7 +550,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 - (void)clickGood:(ODActivityDetailBtn *)btn {
     BOOL isAdd = self.love_id == 0;
     NSDictionary *dic = isAdd ? @{@"type" : @"3", @"obj_id" : [@(self.resultModel.activity_id) stringValue]} : @{@"love_id" : [@(self.love_id) stringValue]};
-    [ODHttpTool getWithURL:isAdd ? ODUrlOtherLoveAdd : ODUrlOtherLoveDelete parameters:dic modelClass:[NSObject class] success:^(id model) {
+    [ODHttpTool getWithURL:isAdd ? ODUrlOtherLoveAdd : ODUrlOtherLoveDel parameters:dic modelClass:[NSObject class] success:^(id model) {
                 NSDictionary *dic = model;
                 self.love_id = [dic[@"love_id"] integerValue];
                 if (self.love_id != 0) {
@@ -581,7 +581,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 
 - (void)reportRequest {
     NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id) stringValue], @"activity_id", nil];
-    [ODHttpTool getWithURL:ODUrlActivityApply parameters:infoDic modelClass:[NSObject class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlStoreActivityApply parameters:infoDic modelClass:[NSObject class] success:^(id model) {
                 [self requestData];
                 self.reportButton.enabled = NO;
 

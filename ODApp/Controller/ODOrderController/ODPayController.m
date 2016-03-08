@@ -125,7 +125,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
     
-    [self.manager GET:ODUrlPayBack parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:ODUrlPayWeixinCallbackSync parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         __weak typeof(self) weakSelf = self;
         if ([responseObject[@"status"] isEqualToString:@"success"]) {

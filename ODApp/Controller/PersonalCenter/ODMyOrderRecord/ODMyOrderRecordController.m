@@ -9,6 +9,9 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODMyOrderRecordController.h"
 #import "ODUserInformation.h"
+
+#define kMyOrderRecordCellId @"ODMyOrderRecordCell"
+
 @interface ODMyOrderRecordController ()
 
 @property (nonatomic, assign) long cancelOrderRow;

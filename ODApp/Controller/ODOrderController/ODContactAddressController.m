@@ -78,7 +78,7 @@
     NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
 
     __weak typeof(self) weakSelf = self;
-    [self.manager GET:ODUrlUserGetAddress parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self.manager GET:ODUrlUserAddressList parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
 
 
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
@@ -330,36 +330,50 @@
 }
 
 - (void)deleteAddressWithAddress_id:(NSString *)address_id {
-    self.deleteManager = [AFHTTPRequestOperationManager manager];
-
     NSDictionary *parameters = @{@"user_address_id" : address_id, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    [self.deleteManager GET:kDeleteAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        __weakSelf
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-            if ([self.addressId isEqualToString:address_id]) {
-                weakSelf.isAddress = @"1";
-            } else {
-                weakSelf.isAddress = @"2";
-            }
-
-            [weakSelf getData];
-
-
-        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-
-            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlUserAddressDel parameters:parameters modelClass:[NSObject class] success:^(id model) {
+        if ([self.addressId isEqualToString:address_id]) {
+            weakSelf.isAddress = @"1";
+        } else {
+            weakSelf.isAddress = @"2";
         }
-
-
-    }               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
+        
+        [weakSelf getData];
+        
+    } failure:^(NSError *error) {
+        
+        
     }];
+    
+    
+    
+    
+//    [self.deleteManager GET:kDeleteAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//
+//        __weakSelf
+//        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+//
+//            if ([self.addressId isEqualToString:address_id]) {
+//                weakSelf.isAddress = @"1";
+//            } else {
+//                weakSelf.isAddress = @"2";
+//            }
+//
+//            [weakSelf getData];
+//
+//
+//        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
+//
+//
+//            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+//        }
+//
+//
+//    }               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//
+//
+//    }];
 
 }
 

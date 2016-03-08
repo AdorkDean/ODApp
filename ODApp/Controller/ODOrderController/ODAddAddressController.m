@@ -163,101 +163,130 @@
 }
 
 - (void)editeAddress {
-
-
-    self.editeManager = [AFHTTPRequestOperationManager manager];
-
-    NSDictionary *parameters = @{@"user_address_id" : self.addressId, @"tel" : self.addAddressView.phoneTextField.text, @"address" : self.addAddressView.addressTextView.text, @"name" : self.addAddressView.nameTextField.text, @"is_default" : self.is_default, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    __weak typeof(self) weakSelf = self;
-    [self.editeManager GET:kSaveAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-            [weakSelf deleteAddress];
-
-
-        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-
-            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-        }
-
-
-    }              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
+    NSDictionary *parameters = @{
+                                 @"user_address_id" : self.addressId,
+                                 @"tel" : self.addAddressView.phoneTextField.text,
+                                 @"address" : self.addAddressView.addressTextView.text,
+                                 @"name" : self.addAddressView.nameTextField.text,
+                                 @"is_default" : self.is_default,
+                                 @"open_id" : self.open_id
+                                 };
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlUserAssressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
+        [weakSelf deleteAddress];
+        
+    } failure:^(NSError *error) {
+        
+        
     }];
-
+    
+//    [self.editeManager GET:kSaveAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//
+//
+//        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+//
+//
+//            [weakSelf deleteAddress];
+//
+//
+//        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
+//
+//
+//            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+//        }
+//
+//
+//    }              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//
+//
+//    }];
+//
 
 }
 
 
 - (void)saveAddress {
+    NSDictionary *parameters = @{
+                                 @"tel" : self.addAddressView.phoneTextField.text,
+                                 @"address" : self.addAddressView.addressTextView.text,
+                                 @"name" : self.addAddressView.nameTextField.text,
+                                 @"is_default" : self.is_default,
+                                 @"open_id" : self.open_id
+                                 };
 
-
-    self.manager = [AFHTTPRequestOperationManager manager];
-
-    NSDictionary *parameters = @{@"tel" : self.addAddressView.phoneTextField.text, @"address" : self.addAddressView.addressTextView.text, @"name" : self.addAddressView.nameTextField.text, @"is_default" : self.is_default, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:kSaveAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-
-
-            [ODProgressHUD showInfoWithStatus:@"保存成功"];
-
-
-        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-
-            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-
-        }
-
-
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlUserAssressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [ODProgressHUD showInfoWithStatus:@"保存成功"];
+        
+    } failure:^(NSError *error) {
+        
+        
     }];
+    
+    
+    
+//    __weak typeof(self) weakSelf = self;
+//    [self.manager GET:kSaveAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//
+//
+//        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+//
+//            [weakSelf.navigationController popViewControllerAnimated:YES];
+//
+//
+//            [ODProgressHUD showInfoWithStatus:@"保存成功"];
+//
+//
+//        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
+//
+//
+//            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+//
+//
+//        }
+//
+//
+//    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//
+//
+//    }];
 
 
 }
 
 - (void)deleteAddress {
-    self.deleteManager = [AFHTTPRequestOperationManager manager];
-
     NSDictionary *parameters = @{@"user_address_id" : self.addressId, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    __weak typeof(self) weakSelf = self;
-    [self.deleteManager GET:kDeleteAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-
-            [ODProgressHUD showInfoWithStatus:@"修改成功"];
-
-
-        }
-
-
-    }               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlUserAddressDel parameters:parameters modelClass:[NSObject class] success:^(id model) {
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+        [ODProgressHUD showInfoWithStatus:@"修改成功"];
+        
+    } failure:^(NSError *error) {
+        
+        
     }];
+    
+    
+//    __weak typeof(self) weakSelf = self;
+//    [self.deleteManager GET:kDeleteAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//
+//
+//        if ([responseObject[@"status"] isEqualToString:@"success"]) {
+//
+//
+//            [weakSelf.navigationController popViewControllerAnimated:YES];
+//
+//            [ODProgressHUD showInfoWithStatus:@"修改成功"];
+//
+//
+//        }
+//
+//
+//    }               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//
+//
+//    }];
 
 }
 

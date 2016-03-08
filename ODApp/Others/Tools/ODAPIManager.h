@@ -20,6 +20,5 @@
  */
 + (NSMutableDictionary *)signParameters:(NSDictionary *)parameters;
 
-+ (NSString *)getUrl:(NSString *)uri;
 
 @end

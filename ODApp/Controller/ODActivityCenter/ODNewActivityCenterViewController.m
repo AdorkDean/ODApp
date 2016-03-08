@@ -71,7 +71,7 @@ Single_Implementation(ODNewActivityCenterViewController)
 - (void)requestData {
     __weakSelf
 
-    [ODHttpTool getWithURL:ODUrlActivityList parameters:@{} modelClass:[ODActivityListModel class] success:^(id json) {
+    [ODHttpTool getWithURL:ODUrlStoreActivityList parameters:@{} modelClass:[ODActivityListModel class] success:^(id json) {
                 weakSelf.resultLists = [json result];
                 [weakSelf.tableView.mj_header endRefreshing];
                 [weakSelf.tableView reloadData];

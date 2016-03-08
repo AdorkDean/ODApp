@@ -11,14 +11,12 @@
 #import "ODCenderDetailView.h"
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
-#import "CenterDetailModel.h"
 #import "UIImageView+WebCache.h"
 #import "ODChoseCenterController.h"
 #import "ODPrecontractViewController.h"
-#import "CenterDetailCell.h"
 #import "MJRefresh.h"
-#import "CenterActivityModel.h"
-#import "ODActivityDetailController.h"
+#import "ODStoreDetailModel.h"
+
 #import "ODTabBarController.h"
 #import "ODUserInformation.h"
 #import "ODPersonalCenterViewController.h"
@@ -32,11 +30,10 @@ int pageNumnber = 0;
 @property(nonatomic, strong) ODCenderDetailView *centerDetailView;
 @property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) AFHTTPRequestOperationManager *managers;
-@property(nonatomic, strong) CenterDetailModel *model;
+@property(nonatomic, strong) ODStoreDetailModel *model;
 @property(nonatomic, strong) UIPageControl *pageControl;
 @property(nonatomic, strong) UILabel *centerNameLabe;
 @property(nonatomic, strong) NSTimer *myTimer;
-
 
 @end
 
@@ -124,52 +121,37 @@ int pageNumnber = 0;
 
 #pragma mark - 请求数据
 
-- (void)getData {
-
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-
-    NSDictionary *parameter = @{@"store_id" : self.storeId};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSString *url = [ODAPIManager getUrl:@"/1.0/other/store/detail"];
-
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:url parameters:signParameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
-
-        if (responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSMutableDictionary *result = dict[@"result"];
-
-            weakSelf.model = [[CenterDetailModel alloc] initWithDict:result];
-
-            [weakSelf createTableView];
-
-            [weakSelf.tableView reloadData];
-
-        }
-    }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-
-
+- (void)getData
+{
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlOtherStoreDetail parameters:@{@"store_id" : self.storeId} modelClass:[ODStoreDetailModel class] success:^(id model)
+    {
+        weakSelf.model = [model result];
+        [weakSelf.tableView reloadData];
+    }
+                   failure:^(NSError *error)
+     {
+        
     }];
 }
 
 
-#pragma mark - 初始化
-
-- (void)createTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) style:UITableViewStylePlain];
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.tableView.tableHeaderView = self.centerDetailView;
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-    self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    [self.view addSubview:self.tableView];
-
-
-}
-
-
 #pragma mark - 懒加载
+
+- (UITableView *)tableView
+{
+    if (!_tableView)
+    {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) style:UITableViewStylePlain];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.tableHeaderView = self.centerDetailView;
+        _tableView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+        [self.view addSubview:_tableView];
+    }
+    return _tableView;
+}
 
 - (ODCenderDetailView *)centerDetailView {
     if (_centerDetailView == nil) {

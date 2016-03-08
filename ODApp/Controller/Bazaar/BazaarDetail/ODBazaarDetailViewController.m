@@ -9,6 +9,10 @@
 #import "ODBazaarDetailViewController.h"
 #import "UMSocial.h"
 #import "WXApi.h"
+
+
+#define kBazaarDetailCellId @"ODBazaarDetailCollectionCell"
+
 @interface ODBazaarDetailViewController ()<UMSocialUIDelegate>
 
 @end
@@ -112,8 +116,6 @@
 #pragma mark - 初始化manager
 -(void)createRequest
 {
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.dataArray = [[NSMutableArray alloc]init];
     self.picArray = [[NSMutableArray alloc]init];
     [self joiningTogetherParmeters];
@@ -124,36 +126,53 @@
 -(void)joiningTogetherParmeters
 {
     NSDictionary *parameter = @{@"task_id":self.task_id};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kBazaarTaskDetailUrl parameter:signParameter];
+    [self downLoadDataWithUrl:ODUrlTaskDetail parameter:parameter];
 }
 
 
 #pragma mark - 请求数据
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    __weakSelf
+    
+    [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarDetailModel class] success:^(id model) {
         
-        if (responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSDictionary *result = dict[@"result"];
-            ODBazaarDetailModel *detailModel = [[ODBazaarDetailModel alloc]init];
-            [detailModel setValuesForKeysWithDictionary:result];
-            [weakSelf.dataArray addObject:detailModel];
-            weakSelf.applys = result[@"applys"];
-            for (NSDictionary *itemDict in _applys) {
-                ODBazaarDetailModel *model = [[ODBazaarDetailModel alloc]init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.picArray addObject:model];
-            }
+        ODBazaarDetailModel *detailModel = [model result];
+        [weakSelf.dataArray addObject:detailModel];
+        for (ODBazaarDetailApplysModel *itemDict in detailModel.applys) {
+            [weakSelf.picArray addObject:itemDict];
         }
         [weakSelf createUserInfoView];
         [weakSelf createTaskTopDetailView];
         [weakSelf createTaskBottomDetailView];
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        NSLog(@"error");
+        
+    } failure:^(NSError *error) {
+        
+        
     }];
+    
+    
+//    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//        
+//        if (responseObject) {
+//            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//            NSDictionary *result = dict[@"result"];
+//            ODBazaarDetailModel *detailModel = [[ODBazaarDetailModel alloc]init];
+//            [detailModel setValuesForKeysWithDictionary:result];
+//            [weakSelf.dataArray addObject:detailModel];
+//            weakSelf.applys = result[@"applys"];
+//            for (NSDictionary *itemDict in _applys) {
+//                ODBazaarDetailModel *model = [[ODBazaarDetailModel alloc]init];
+//                [model setValuesForKeysWithDictionary:itemDict];
+//                [weakSelf.picArray addObject:model];
+//            }
+//        }
+//        [weakSelf createUserInfoView];
+//        [weakSelf createTaskTopDetailView];
+//        [weakSelf createTaskBottomDetailView];
+//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+//        NSLog(@"error");
+//    }];
     
 }
 
@@ -217,7 +236,7 @@
         NSString *open_id = @"";
         NSString *apply_status = @"";
         for (NSInteger i = 0; i < self.picArray.count; i++) {
-            ODBazaarDetailModel *model = self.picArray[i];
+            ODBazaarDetailApplysModel *model = self.picArray[i];
             NSString *ID = model.open_id;
             NSString *status = [NSString stringWithFormat:@"%@",model.apply_status];
             if ([ID isEqualToString:[ODUserInformation sharedODUserInformation].openID] && [status isEqualToString:@"1"]) {
@@ -632,7 +651,7 @@
 {
     NSString *str = [[NSString alloc]init];
     for (NSInteger i = 0 ; i < self.picArray.count; i++) {
-        ODBazaarDetailModel *model = self.picArray[i];
+        ODBazaarDetailApplysModel *model = self.picArray[i];
         NSString *applyStatus = [NSString stringWithFormat:@"%@",model.apply_status];
         if ([applyStatus isEqualToString:@"1"]) {
             str = applyStatus;
@@ -652,11 +671,11 @@
 {
 
     ODBazaarDetailCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarDetailCellId forIndexPath:indexPath];
-    ODBazaarDetailModel *model = self.picArray[indexPath.row];
+    ODBazaarDetailApplysModel *model = self.picArray[indexPath.row];
    
     [cell.imageV sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     cell.nickLabel.text = model.user_nick;
-    cell.signLabel.text = model.user_sign;
+    cell.signLabel.text = model.sign;
     cell.layer.masksToBounds = YES;
     cell.layer.borderColor = [UIColor colorWithHexString:@"#484848" alpha:1].CGColor;
     cell.layer.borderWidth = 1;
@@ -666,7 +685,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODBazaarDetailModel *model = self.picArray[indexPath.row];
+    ODBazaarDetailApplysModel *model = self.picArray[indexPath.row];
     ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
     NSString *task_status = [NSString stringWithFormat:@"%@",detailModel.task_status];
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {

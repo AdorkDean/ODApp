@@ -8,6 +8,8 @@
 
 #import "ODBazaarRequestHelpViewController.h"
 
+#define kBazaarCellId @"ODBazaarCollectionCell"
+
 @interface ODBazaarRequestHelpViewController ()
 
 @end

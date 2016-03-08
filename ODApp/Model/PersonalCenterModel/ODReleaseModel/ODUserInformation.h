@@ -5,7 +5,7 @@
 //  Created by zhz on 16/1/13.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
-#import "Singleton.h"
+#import "ODSingleton.h"
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import "ODUserModel.h"

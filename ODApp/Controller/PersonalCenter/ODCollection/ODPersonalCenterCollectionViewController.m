@@ -44,7 +44,7 @@
     self.page++;
     NSDictionary *parameter = @{@"type" : @"4", @"page" : [NSString stringWithFormat:@"%ld", self.page], @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kCollectionUrl parameter:signParameter];
+    [self downLoadDataWithUrl:ODUrlUserLoveList parameter:signParameter];
 }
 
 - (void)createRequest {
@@ -60,7 +60,7 @@
     NSDictionary *parameter = @{@"type" : @"4", @"page" : [NSString stringWithFormat:@"%ld", self.page], @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     NSLog(@"%@", signParameter);
-    [self downLoadDataWithUrl:kCollectionUrl parameter:signParameter];
+    [self downLoadDataWithUrl:ODUrlUserLoveList parameter:signParameter];
 }
 
 - (void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter {

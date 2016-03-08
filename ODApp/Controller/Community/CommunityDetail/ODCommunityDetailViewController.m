@@ -9,6 +9,9 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCommunityDetailViewController.h"
 #import "WXApi.h"
+
+#define kCommunityDetailCellId @"ODCommunityDetailCell"
+
 @interface ODCommunityDetailViewController ()<UMSocialUIDelegate>
 
 @end
