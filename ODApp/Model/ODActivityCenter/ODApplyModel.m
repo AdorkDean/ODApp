@@ -9,10 +9,7 @@
 #import "ODApplyModel.h"
 
 @implementation ODApplyModel
--(void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    
-}
-
 
 @end
+
+ODRequestResultIsArrayAll(ODApplyModel)

@@ -550,7 +550,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 - (void)clickGood:(ODActivityDetailBtn *)btn {
     BOOL isAdd = self.love_id == 0;
     NSDictionary *dic = isAdd ? @{@"type" : @"3", @"obj_id" : [@(self.resultModel.activity_id) stringValue]} : @{@"love_id" : [@(self.love_id) stringValue]};
-    [ODHttpTool getWithURL:isAdd ? ODUrlLoveAdd : ODUrlLoveDelete parameters:dic modelClass:[NSObject class] success:^(id model) {
+    [ODHttpTool getWithURL:isAdd ? ODUrlOtherLoveAdd : ODUrlOtherLoveDelete parameters:dic modelClass:[NSObject class] success:^(id model) {
                 NSDictionary *dic = model;
                 self.love_id = [dic[@"love_id"] integerValue];
                 if (self.love_id != 0) {
@@ -606,7 +606,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 
 
         NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:[@(self.resultModel.activity_id) stringValue], @"obj_id", @"4", @"type", @"微信", @"share_platform", nil];
-        [ODHttpTool getWithURL:ODUrlShareCallBack parameters:infoDic modelClass:[NSObject class] success:^(id model) {
+        [ODHttpTool getWithURL:ODUrlOtherShareCallBack parameters:infoDic modelClass:[NSObject class] success:^(id model) {
 
                 }
                        failure:^(NSError *error) {

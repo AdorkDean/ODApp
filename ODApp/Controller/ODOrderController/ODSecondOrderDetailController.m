@@ -358,11 +358,6 @@
 
 #pragma mark - 获取数据
 - (void)getData {
-//    self.manager = [AFHTTPRequestOperationManager manager];
-//    
-//    NSDictionary *parameters = @{@"order_id" : self.order_id, @"open_id" : self.open_id};
-//    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"order_id"] = self.order_id;
@@ -698,51 +693,6 @@
          } failure:^(NSError *error) {
              [ODProgressHUD showInfoWithStatus:@"网络异常"];
          }];
-//        self.delateManager = [AFHTTPRequestOperationManager manager];
-//        NSDictionary *parameters = @{@"order_id" : self.order_id, @"reason" : self.cancelOrderView.reasonTextView.text, @"open_id" : self.open_id};
-//        NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-//
-//        __weak typeof(self) weakSelf = self;
-//        [self.delateManager GET:ODUrlSwapOrderCancel parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//
-//            if (responseObject) {
-//
-//
-//                if ([responseObject[@"status"] isEqualToString:@"success"]) {
-//
-//                    [weakSelf.cancelOrderView removeFromSuperview];
-//
-//
-//                    [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
-//
-//                    ODOrderDetailModel *statusModel = self.dataArray[0];
-//                    weakSelf.orderStatus = [NSString stringWithFormat:@"%@", statusModel.order_status];
-//
-//                    if (self.getRefresh) {
-//
-//
-//                        weakSelf.getRefresh(@"1");
-//                    }
-//
-//
-//                    [weakSelf getData];
-//
-//
-//                } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-//
-//
-//                    [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-//
-//
-//                }
-//
-//
-//            }
-//        }               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//            [ODProgressHUD showInfoWithStatus:@"网络异常"];
-//        }];
-//
-//
     }
 }
 

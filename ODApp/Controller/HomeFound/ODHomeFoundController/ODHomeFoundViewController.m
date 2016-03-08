@@ -114,7 +114,7 @@
 - (void)getLocationCityRequest {
     __weakSelf
     NSDictionary *parameter = @{@"region_name" : @""};
-    [ODHttpTool getWithURL:ODUrlCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlOtherCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
                 ODLocationModel *mode = [model result];
                 weakSelf.cityListArray = mode.all;
                 [weakSelf.collectionView reloadData];

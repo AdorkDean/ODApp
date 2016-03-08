@@ -8,7 +8,8 @@
 
 #import "ODAppModel.h"
 
-@interface ODBazaarModel : ODAppModel
+@interface ODBazaarModel : NSObject
+
 
 @property(nonatomic, copy) NSString *task_id;
 @property(nonatomic, copy) NSString *title;
@@ -21,5 +22,15 @@
 @property(nonatomic, copy) NSString *apply_num;
 @property(nonatomic, copy) NSString *avatar;
 @property(nonatomic, copy) NSString *reason;
+
+
+@end
+
+@interface ODBazaarTasksModel : NSObject
+
+/** tasks */
+@property (nonatomic, strong) NSArray *tasks;
+
+@property (nonatomic, strong) NSArray *hot_tags;
 
 @end
