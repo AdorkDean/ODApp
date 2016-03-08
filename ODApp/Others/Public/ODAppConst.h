@@ -124,7 +124,7 @@ UIKIT_EXTERN NSString * const ODUrlStoreDetail;
 UIKIT_EXTERN NSString * const ODUrlStoreCancelOrder;
 
 
-
+UIKIT_EXTERN NSString * const ODUrlTaskTaskAdd;
 
 
 UIKIT_EXTERN NSString * const ODUrlSwapDel;
@@ -142,7 +142,7 @@ UIKIT_EXTERN NSString * const ODUrlOtherHome;
 
 
 UIKIT_EXTERN NSString * const ODUrlBazaarRequestHelp;
-UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
+//UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDetailUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDelegateUrl;
 UIKIT_EXTERN NSString * const kBazaarAcceptTaskUrl;
@@ -178,9 +178,9 @@ UIKIT_EXTERN NSString * const ODWebUrlFindJob;
 //UIKIT_EXTERN NSString * const ODStoreListUrl;
 //UIKIT_EXTERN NSString * const ODStoreDetailUrl;
 
-UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
-UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
-UIKIT_EXTERN NSString * const kCancelMyOrderUrl;
+//UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
+//UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
+//UIKIT_EXTERN NSString * const kCancelMyOrderUrl;
 UIKIT_EXTERN NSString * const kSaveAddressUrl;
 UIKIT_EXTERN NSString * const ODUrlUserGetAddress;
 UIKIT_EXTERN NSString * const kDeleteAddressUrl;

@@ -319,6 +319,7 @@
 		D4F76DBE1C61AEAD00D59F02 /* ODOrderDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DB81C61AEAD00D59F02 /* ODOrderDataModel.m */; };
 		D4F76DBF1C61AEAD00D59F02 /* TimeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DBA1C61AEAD00D59F02 /* TimeButton.m */; };
 		D4F76DD31C61B04700D59F02 /* ODCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DD21C61B04700D59F02 /* ODCollectionController.m */; };
+		ED3429821C8E7603002D02B6 /* ODBazaarRequestHelpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3429811C8E7603002D02B6 /* ODBazaarRequestHelpModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -907,6 +908,8 @@
 		D4F76DBA1C61AEAD00D59F02 /* TimeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimeButton.m; sourceTree = "<group>"; };
 		D4F76DD11C61B04700D59F02 /* ODCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCollectionController.h; sourceTree = "<group>"; };
 		D4F76DD21C61B04700D59F02 /* ODCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCollectionController.m; sourceTree = "<group>"; };
+		ED3429801C8E7603002D02B6 /* ODBazaarRequestHelpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarRequestHelpModel.h; sourceTree = "<group>"; };
+		ED3429811C8E7603002D02B6 /* ODBazaarRequestHelpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarRequestHelpModel.m; sourceTree = "<group>"; };
 		EEA572BF76BF4C22E1FC80BA /* libPods-ODApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ODApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD754733DED72842C8626E1D /* Pods-ODApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1158,6 +1161,8 @@
 			children = (
 				9DEDCF4E1C64B3F4003015C6 /* ODBazaarDetailModel.h */,
 				9DEDCF4F1C64B3F4003015C6 /* ODBazaarDetailModel.m */,
+				ED3429801C8E7603002D02B6 /* ODBazaarRequestHelpModel.h */,
+				ED3429811C8E7603002D02B6 /* ODBazaarRequestHelpModel.m */,
 			);
 			path = BazaarDetailModel;
 			sourceTree = "<group>";
@@ -2808,6 +2813,7 @@
 				23ACD0021C87F76200FB9D8E /* ODActiveDeviceBtn.m in Sources */,
 				9D46D1481C77459200F4C0CD /* ODPayModel.m in Sources */,
 				D4D0738E1C59B9FA008527C9 /* ODOthersInformationController.m in Sources */,
+				ED3429821C8E7603002D02B6 /* ODBazaarRequestHelpModel.m in Sources */,
 				2314F5931C8992EB00A770DC /* ODStoreCreateOrderModel.m in Sources */,
 				2314F5841C8988D000A770DC /* UIImage+ODExtension.m in Sources */,
 				9DE951E21C783C8600D7339D /* ODWithdrawalView.m in Sources */,
