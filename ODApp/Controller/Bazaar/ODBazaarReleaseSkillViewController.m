@@ -9,6 +9,7 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaarReleaseSkillViewController.h"
 #import "NSArray+ODExtension.h"
+#import "ODUploadImageModel.h"
 
 @interface ODBazaarReleaseSkillViewController ()
 
@@ -283,32 +284,19 @@
 
 -(void)createParameter:(NSString *)str
 {
-    NSDictionary *parameter = @{@"File":str};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self pushImageWithUrl:kPushImageUrl parameter:signParameter];
-}
-
-//上传图片返回数据
--(void)pushImageWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
-{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-    
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"File"] = str;
     __weakSelf
-    [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        if (responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSDictionary *result = dict[@"result"];
-            NSString *str = result[@"File"];
-            [weakSelf.strArray addObject:str];
-            [weakSelf reloadImageButtons];
-        }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        NSLog(@"error");
+    // 上传图片
+    [ODHttpTool postWithURL:ODUrlOtherBase64Upload parameters:params modelClass:[ODUploadImageModel class] success:^(id model) {
+        // 取出模型
+        ODUploadImageModel *uploadModel = [model result];
+        [weakSelf.strArray addObject:uploadModel.File];
+        [weakSelf reloadImageButtons];
+    } failure:^(NSError *error) {
     }];
 }
-
 
 - (void)reloadImageButtons
 {

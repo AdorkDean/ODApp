@@ -276,7 +276,6 @@
     
     ODUserSignatureController *vc = [[ODUserSignatureController alloc] init];
     
-    
     vc.signature =self.informationView.signatureLabel.text;
     
     vc.getTextBlock = ^(NSString *text){
