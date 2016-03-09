@@ -52,9 +52,10 @@ static BOOL const isProduction = FALSE;
 #ifdef __IPHONE_8_0
     if ([[UIDevice currentDevice].systemVersion floatValue] >= 8.0)
     {
-        [JPUSHService registerForRemoteNotificationTypes:(UIUserNotificationTypeBadge |
-                                                          UIUserNotificationTypeSound |
-                                                          UIUserNotificationTypeAlert)
+        [JPUSHService registerForRemoteNotificationTypes:
+         UIUserNotificationTypeBadge |
+         UIUserNotificationTypeSound |
+         UIUserNotificationTypeAlert
                                               categories:nil];
     }
 #endif
@@ -76,6 +77,6 @@ static BOOL const isProduction = FALSE;
     manager.shouldResignOnTouchOutside = YES;
     manager.shouldToolbarUsesTextFieldTintColor = YES;
     manager.enableAutoToolbar = NO;
-
 }
+
 @end
