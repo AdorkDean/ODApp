@@ -220,7 +220,7 @@ UIKIT_EXTERN NSString * const ODUrlUserInfo;
 UIKIT_EXTERN NSString * const ODUrlUserChangePasswd;
 UIKIT_EXTERN NSString * const ODUrlUserLogin1;
 UIKIT_EXTERN NSString * const ODUrlUserAddressDel;
-UIKIT_EXTERN NSString * const ODUrlUserAssressAdd;
+UIKIT_EXTERN NSString * const ODUrlUserAddressAdd;
 UIKIT_EXTERN NSString * const ODUrlUserLoveList;
 UIKIT_EXTERN NSString * const ODUrlUserBindMoble;
 UIKIT_EXTERN NSString * const ODUrlUserAddressList;
