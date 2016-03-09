@@ -56,12 +56,11 @@
 
             [UMSocialConfig setFinishToastIsHidden:YES position:UMSocialiToastPositionCenter];
 
-
-            ODBazaarExchangeSkillModel *model = self.dataArray[0];
-            NSString *url = model.share[@"icon"];
-            NSString *content = model.share[@"desc"];
-            NSString *link = model.share[@"link"];
-            NSString *title = model.share[@"title"];
+            
+            NSString *url = [self.model.share valueForKeyPath:@"icon"];
+            NSString *content = [self.model.share valueForKeyPath:@"desc"];
+            NSString *link = [self.model.share valueForKeyPath:@"link"];
+            NSString *title = [self.model.share valueForKeyPath:@"title"];
 
 
             [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -90,7 +89,6 @@
 
     }
     @catch (NSException *exception) {
-//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"网络异常无法分享"];
         [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
     }
 
@@ -112,16 +110,7 @@
     __weakSelf;
     
     [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarExchangeSkillDetailModel class] success:^(id model) {
-        
-//        for (ODBazaarExchangeSkillModel *skillModel in [model result]) {
-//            [weakSelf.dataArray addObject:skillModel];
-//            weakSelf.love_id = [NSString stringWithFormat:@"%d", skillModel.love_id];
-//            weakSelf.love_num = [NSString stringWithFormat:@"%d", skillModel.love_num];
-//        }
-        
-       
-        
-//        weakSelf.dataArray = [model result];
+
         weakSelf.model = [model result];
         weakSelf.love_id = [NSString stringWithFormat:@"%@", [weakSelf.model valueForKeyPath:@"love_id"]];
         weakSelf.love_num = [NSString stringWithFormat:@"%@", [weakSelf.model valueForKeyPath:@"love_num"]];
@@ -134,28 +123,6 @@
         
         
     }];
-    
-    
-//    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
-//
-//        if (responseObject) {
-//            [weakSelf.dataArray removeAllObjects];
-//            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//            NSDictionary *result = dict[@"result"];
-//            ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc] init];
-//            [model setValuesForKeysWithDictionary:result];
-//            [weakSelf.dataArray addObject:model];
-//            weakSelf.love_id = [NSString stringWithFormat:@"%d", model.love_id];
-//            weakSelf.love_num = [NSString stringWithFormat:@"%d", model.love_num];
-//            [weakSelf createUserInfoView];
-//            [weakSelf createDetailView];
-//            [weakSelf createBottomView];
-//        }
-//    }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-//
-//    }];
-    
-
 }
 
 - (void)createScrollView {
