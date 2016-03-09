@@ -150,8 +150,8 @@ UIKIT_EXTERN NSString * const ODUrlTaskDetail;
 UIKIT_EXTERN NSString * const ODUrlSwapDel;
 UIKIT_EXTERN NSString * const ODUrlSwapOrderCancel;
 UIKIT_EXTERN NSString * const ODUrlSwapRejectRefund;
-UIKIT_EXTERN NSString * const ODurlSwapConfirmRefund;
-
+UIKIT_EXTERN NSString * const ODUrlSwapConfirmRefund;
+UIKIT_EXTERN NSString * const ODUrlSwapServiceTime;
 
 UIKIT_EXTERN NSString * const ODUrlBbsList;
 //UIKIT_EXTERN NSString * const ODUrlBbsDel;
@@ -205,7 +205,7 @@ UIKIT_EXTERN NSString * const ODWebUrlFindJob;
 UIKIT_EXTERN NSString * const kSaveAddressUrl;
 UIKIT_EXTERN NSString * const ODUrlUserAddressList;
 //UIKIT_EXTERN NSString * const kDeleteAddressUrl;
-UIKIT_EXTERN NSString * const kGetServecTimeUrl;
+//UIKIT_EXTERN NSString * const kGetServecTimeUrl;
 UIKIT_EXTERN NSString * const ODUrlStoreConfirmOrder;
 
 

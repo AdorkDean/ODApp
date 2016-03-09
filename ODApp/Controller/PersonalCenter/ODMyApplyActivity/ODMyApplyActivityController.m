@@ -97,9 +97,7 @@ static NSString *const cellId = @"newActivityCell";
             {
                 [weakSelf.resultLists addObject:md];
             }
-        }
-        
-        
+        }                
         if ([[model result]count] == 0)
         {
             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];

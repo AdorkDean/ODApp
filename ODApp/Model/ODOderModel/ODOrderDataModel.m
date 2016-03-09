@@ -8,21 +8,23 @@
 
 #import "ODOrderDataModel.h"
 
-@implementation ODOrderDataModel
-
--(instancetype)initWithDict:(NSDictionary *)dict
-{
-    if (self = [super init])
-    {
-        
-        self.date = dict[@"date"];
-        self.date_name = dict[@"date_name"];
-        self.times = dict[@"times"];
-        
-    }
-    return self;
-}
-
+@implementation ODOrderDataTimesModel
 
 
 @end
+
+@implementation ODOrderDataModel
+
++ (void)initialize {
+
+    [ODOrderDataModel mj_setupObjectClassInArray:^NSDictionary *{
+        return @{
+                 @"times" : [ODOrderDataTimesModel class]
+                 };
+        
+    }];
+}
+
+@end
+
+ODRequestResultIsArrayAll(ODOrderDataModel)

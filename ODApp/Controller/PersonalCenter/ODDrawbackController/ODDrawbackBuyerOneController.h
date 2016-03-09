@@ -16,25 +16,37 @@
 
 @interface ODDrawbackBuyerOneController : ODBaseViewController <UITextViewDelegate>
 
-// 退款原因样式 YES：选择原因
+@property(nonatomic, copy) NSString *order_id;
+
+/**
+ *  退款原因样式 YES：选择原因
+ */
 @property(nonatomic, assign) BOOL isSelectReason;
 
-// 是否需要 拒绝原因 版块
+/**
+ *  显示 拒绝原因
+ */
 @property(nonatomic, assign) BOOL isRefuseReason;
 
-// 一开始是否显示 退款说明
+/**
+ *  显示 退款说明
+ */
 @property(nonatomic, assign) BOOL isDrawbackState;
 
-// 是否需要 联系客服 版块
+/**
+ *  显示 联系客服
+ */
 @property(nonatomic, assign) BOOL isService;
 
-// 是否需要 申请退款 按钮
+/**
+ *  显示 申请退款 按钮
+ */
 @property(nonatomic, assign) BOOL isRelease;
 
-// 是否需要 拒绝 与 接收 按钮
+/**
+ *  显示 拒绝 与 接受 按钮
+ */
 @property(nonatomic, assign) BOOL isRefuseAndReceive;
-
-@property(nonatomic, copy) NSString *order_id;
 
 /**
  *  退款标题

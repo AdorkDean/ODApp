@@ -164,6 +164,8 @@ NSString * const ODUrlBbsList = @"bbs/list";
 NSString * const ODUrlBbsDel = @"bbs/del";
 
 
+
+
 /*** swap */
 NSString * const ODUrlSwapList = @"swap/list";
 NSString * const ODUrlSwapOrder = @"swap/order";
@@ -173,8 +175,9 @@ NSString * const ODUrlSwapOrderInfo = @"swap/order/info";
 NSString * const ODUrlSwapDel = @"swap/del";
 NSString * const ODUrlSwapOrderCancel = @"swap/order/cancel";
 NSString * const ODUrlSwapRejectRefund = @"swap/reject/refund";
-NSString * const ODurlSwapConfirmRefund = @"swap/confirm/refund";
+NSString * const ODUrlSwapConfirmRefund = @"swap/confirm/refund";
 NSString * const ODUrlSwapSellerOrderList = @"swap/seller/order/list";
+NSString * const ODUrlSwapServiceTime = @"swap/service/time";
 
 
 
@@ -235,7 +238,7 @@ NSString * const kHomeFoundListUrl = @"http://woquapi.test.odong.com/1.0/bbs/lis
 //NSString * const kSaveAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/add";
 //NSString * const kDeleteAddressUrl = @"http://woquapi.test.odong.com/1.0/user/address/del";
 
-NSString * const kGetServecTimeUrl = @"http://woquapi.test.odong.com/1.0/swap/service/time";
+//NSString * const kGetServecTimeUrl = @"http://woquapi.test.odong.com/1.0/swap/service/time";
 
 NSString * const kCollectionUrl = @"http://woquapi.test.odong.com/1.0/user/love/list";
 NSString * const kDelateOrderUrl = @"http://woquapi.test.odong.com/1.0/swap/order/cancel";
