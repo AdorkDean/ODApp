@@ -112,7 +112,7 @@ NSString * const requestSuccessStatus = @"success";
     //    manager.responseSerializer = responseSerializer;
     
     
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html",@"text/plain", nil];
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html",@"text/plain", nil];
 
     URL = [ODBaseURL stringByAppendingString:URL];
     NSMutableDictionary *parameter = [self getRequestParameter:parameters];
@@ -132,8 +132,15 @@ NSString * const requestSuccessStatus = @"success";
             {
                 [resultDic NSLogProperty];
             }
-            NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
-            success(model);
+            if (modeleClass == [NSObject class] && ![resultDic isKindOfClass:[NSArray class]])
+            {
+                success(resultDic);
+            }
+            else
+            {
+                NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
+                success(model);
+            }
         }
         else
         {

@@ -33,16 +33,13 @@
 #import "WXApi.h"
 
 
-@interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate>
+@interface ODLandMainController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout , UMSocialUIDelegate, ODInformationControllerDelegate>
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 
 @end
-
-
-
 
 @implementation ODLandMainController
 
@@ -188,6 +185,8 @@
     if (indexPath.section == 0)
     {
         ODInformationController *vc = [[ODInformationController alloc] init];
+        // 设置代理
+        vc.delegate = self;
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if (indexPath.section == 2)
@@ -295,10 +294,12 @@
     return CGSizeMake(0, 5);
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - ODInformationViewController 代理方法
+- (void)infoVc:(ODInformationController *)infoVc DidChangedUserImage:(ODUserModel *)userModel
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    // 更新缓存
+    [[ODUserInformation sharedODUserInformation] updateUserCache:userModel];
+    [self.collectionView reloadData];
 }
 
 #pragma mark - umeng
