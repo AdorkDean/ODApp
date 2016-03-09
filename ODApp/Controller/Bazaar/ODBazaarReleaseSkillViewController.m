@@ -670,7 +670,7 @@
 //            }
 //        }else{
 //            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//                [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
+//                [[NSNotificationCenter defaultCenter ]postNotificationName: ODNotificationReleaseSkill object:nil];
 //                [weakSelf.navigationController popViewControllerAnimated:YES];
 //                 [ODProgressHUD showInfoWithStatus:@"创建成功"];
 //            }else if ([responseObject[@"status"]isEqualToString:@"error"]){
