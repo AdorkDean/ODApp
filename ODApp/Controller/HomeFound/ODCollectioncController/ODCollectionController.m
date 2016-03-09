@@ -10,7 +10,6 @@
 #import "ODCollectionController.h"
 #import "ODCollectionCell.h"
 #import "MJRefresh.h"
-#import "ODAPIManager.h"
 #import "ODOthersInformationController.h"
 
 #import "ODLoveListModel.h"
@@ -21,7 +20,6 @@
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, assign) NSInteger page;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @end
 

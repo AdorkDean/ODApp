@@ -10,13 +10,11 @@
 #import "ODMySellDetailController.h"
 #import "ODOrderDetailView.h"
 
-#import "ODAPIManager.h"
 #import "ODOrderDetailModel.h"
 #import "UIButton+WebCache.h"
 #import "ODPayController.h"
 #import "ODCancelOrderView.h"
 #import "ODDrawbackBuyerOneController.h"
-#import "ODAPIManager.h"
 #import "ODDrawbackBuyerOneController.h"
 
 @interface ODMySellDetailController () <UITextViewDelegate>

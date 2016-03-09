@@ -13,14 +13,12 @@
 #import "ODSecondOrderDetailController.h"
 #import "ODBazaarViewController.h"
 #import "ODCancelOrderView.h"
-#import "ODAPIManager.h"
 #import "Masonry.h"
 
 @interface ODPaySuccessController () <UITextViewDelegate>
 
 @property(nonatomic, strong) ODPaySuccessView *paySuccessView;
 @property(nonatomic, strong) ODCancelOrderView *cancelOrderView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *delateManager;
 @property(nonatomic, copy) NSString *isCancel;
 
 @end

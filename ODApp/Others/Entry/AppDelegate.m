@@ -13,7 +13,6 @@
 #import "ODTabBarController.h"
 #import "MyPageControl.h"
 #import "WXApiObject.h"
-#import "ODAPIManager.h"
 #import "ODAPPInfoTool.h"
 
 #import "ODGuideTool.h"

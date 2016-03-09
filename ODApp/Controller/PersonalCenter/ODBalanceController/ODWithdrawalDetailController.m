@@ -9,7 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODWithdrawalDetailController.h"
 #import "ODWithdrawalCell.h"
-#import "ODAPIManager.h"
 #import "ODBalanceModel.h"
 @interface ODWithdrawalDetailController ()<UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout>
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;

@@ -9,7 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODWithdrawalController.h"
 #import "ODWithdrawalView.h"
-#import "ODAPIManager.h"
 
 @interface ODWithdrawalController () <UITextViewDelegate>
 

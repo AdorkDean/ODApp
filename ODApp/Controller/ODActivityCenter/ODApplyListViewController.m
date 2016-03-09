@@ -10,7 +10,6 @@
 #import "ODApplyListViewController.h"
 #import "ODCollectionCell.h"
 #import "MJRefresh.h"
-#import "ODAPIManager.h"
 #import "ODOthersInformationController.h"
 #import "ODApplyModel.h"
 
@@ -19,7 +18,6 @@
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, assign) NSInteger page;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 
 @property(nonatomic, copy) NSString *open_id;

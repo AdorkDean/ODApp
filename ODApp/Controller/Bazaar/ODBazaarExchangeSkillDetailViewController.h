@@ -9,8 +9,6 @@
 #import "ODBaseViewController.h"
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
-#import "ODAPIManager.h"
-#import "AFHTTPRequestOperationManager.h"
 #import "ODBazaarExchangeSkillDetailModel.h"
 #import "ODHelp.h"
 #import "UMSocial.h"

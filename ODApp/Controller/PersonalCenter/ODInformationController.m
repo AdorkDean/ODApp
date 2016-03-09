@@ -15,7 +15,6 @@
 #import "ODBindingMobileController.h"
 #import "ODTabBarController.h"
 #import "ODUserModel.h"
-#import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
 #import "ODChangePassWordController.h"
 #import "ODUploadImageModel.h"

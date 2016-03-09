@@ -11,7 +11,6 @@
 #import "ODBazaarExchangeSkillModel.h"
 #import "ODBazaarExchangeSkillCollectionCell.h"
 #import "UIImageView+WebCache.h"
-#import "ODAPIManager.h"
 #import "ODHelp.h"
 #import "ODCommunityShowPicViewController.h"
 #import "MJRefresh.h"

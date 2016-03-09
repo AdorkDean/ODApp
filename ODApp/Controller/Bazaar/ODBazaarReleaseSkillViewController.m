@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
+#import <MobileCoreServices/MobileCoreServices.h>
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaarReleaseSkillViewController.h"
 #import "NSArray+ODExtension.h"
@@ -600,7 +601,6 @@
         }else{
             parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.editTimeArray desc],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }
-//        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self pushDataWithUrl:ODUrlSwapEdit parameter:parameter isEdit:YES];
     }else{
         
@@ -610,8 +610,6 @@
         }else if ([self.swap_type isEqualToString:@"2"]){
             parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":@"",@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }
-//        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-        
         [self pushDataWithUrl:ODUrlSwapCreate parameter:parameter isEdit:NO];
     }
 
@@ -619,56 +617,19 @@
 
 -(void)joiningTogetherTimeParmeters
 {
-    NSDictionary *parameter = @{@"swap_id":self.swap_id};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadTimeDataWithUrl:kBazaarReleaseSkillTimeUrl parameter:signParameter];
-}
-
--(void)downLoadTimeDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
-{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     __weakSelf
-    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
-        if (responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSArray *result = dict[@"result"];
-            weakSelf.editTimeArray = [NSMutableArray arrayWithArray:result];
-        }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    NSDictionary *parameter = @{@"swap_id":self.swap_id};
+    [ODHttpTool getWithURL:ODUrlSwapSchedule parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        weakSelf.editTimeArray = [NSMutableArray arrayWithArray:model[@"result"]];
+    } failure:^(NSError *error) {
         
     }];
-    
 }
+
 
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isEdit:(BOOL)isEdit
 {
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    __weakSelf;
-//    [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        
-//        if (isEdit) {
-//            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//                [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
-//                [weakSelf.navigationController popViewControllerAnimated:YES];
-//                [ODProgressHUD showInfoWithStatus:@"编辑成功"];
-//            }else if ([responseObject[@"status"]isEqualToString:@"error"]){
-//                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-//            }
-//        }else{
-//            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//                [[NSNotificationCenter defaultCenter ]postNotificationName: ODNotificationReleaseSkill object:nil];
-//                [weakSelf.navigationController popViewControllerAnimated:YES];
-//                 [ODProgressHUD showInfoWithStatus:@"创建成功"];
-//            }else if ([responseObject[@"status"]isEqualToString:@"error"]){
-//                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-//            }
-//        }
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//        NSLog(@"%@",error.debugDescription);
-//    }];
-    
+    __weakSelf
     [ODHttpTool postWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
         
         if (isEdit) {

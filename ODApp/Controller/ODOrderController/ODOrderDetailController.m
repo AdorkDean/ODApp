@@ -9,7 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODOrderDetailController.h"
 #import "ODOrderDetailView.h"
-#import "ODAPIManager.h"
 #import "ODOrderDetailModel.h"
 #import "UIButton+WebCache.h"
 #import "ODPayController.h"

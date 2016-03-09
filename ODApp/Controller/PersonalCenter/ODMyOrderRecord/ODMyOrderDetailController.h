@@ -9,10 +9,8 @@
 #import "ODBaseViewController.h"
 
 
-#import "ODAPIManager.h"
 #import "ODMyOrderDetailModel.h"
 #import "ODTabBarController.h"
-#import "ODAPIManager.h"
 #import "ODHelp.h"
 
 @interface ODMyOrderDetailController : ODBaseViewController

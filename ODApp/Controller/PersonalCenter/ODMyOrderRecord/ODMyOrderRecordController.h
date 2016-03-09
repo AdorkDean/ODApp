@@ -9,7 +9,6 @@
 #import "ODBaseViewController.h"
 #import "ODClassMethod.h"
 #import "ODMyOrderRecordCell.h"
-#import "ODAPIManager.h"
 #import "ODMyOrderrecordModel.h"
 #import "ODMyOrderDetailController.h"
 #import "ODTabBarController.h"

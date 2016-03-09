@@ -10,7 +10,6 @@
 #import "ODPayController.h"
 #import "ODPayView.h"
 #import "ODPaySuccessController.h"
-#import "ODAPIManager.h"
 #import "ODPayModel.h"
 #import "WXApi.h"
 #import "WXApiObject.h"

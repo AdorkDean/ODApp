@@ -10,7 +10,6 @@
 #import "ODMyOrderController.h"
 #import "ODMyOrderModel.h"
 #import "MJRefresh.h"
-#import "ODAPIManager.h"
 #import "ODMyOrderCell.h"
 #import "ODOrderDetailController.h"
 #import "ODSecondOrderDetailController.h"

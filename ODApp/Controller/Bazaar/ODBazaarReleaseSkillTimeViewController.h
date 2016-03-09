@@ -7,8 +7,7 @@
 //
 
 #import "ODBaseViewController.h"
-#import "AFHTTPRequestOperationManager.h"
-#import "ODAPIManager.h"
+#import "AFNetworking.h"
 #import "ODBazaarReleaseSkillTimeModel.h"
 #import "ODBazaarReleaseSkillTimeViewCell.h"
 

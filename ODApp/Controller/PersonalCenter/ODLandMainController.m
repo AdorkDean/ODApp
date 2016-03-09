@@ -12,7 +12,6 @@
 #import "ODLandSecondCell.h"
 #import "ODLandThirdCell.h"
 #import "ODTabBarController.h"
-#import "ODAPIManager.h"
 #import "ODUserModel.h"
 #import "UIImageView+WebCache.h"
 #import "ODInformationController.h"
@@ -36,7 +35,6 @@
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic , strong) UICollectionView *collectionView;
-@property(nonatomic,strong)AFHTTPRequestOperationManager *manager;
 
 @end
 

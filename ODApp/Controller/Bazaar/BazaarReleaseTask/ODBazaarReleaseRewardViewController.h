@@ -8,7 +8,6 @@
 
 #import "ODBaseViewController.h"
 #import "ODTabBarController.h"
-#import "ODAPIManager.h"
 #import "ODBazaarRewardCollectionCell.h"
 #import "ODBazaarRequestHelpRewardModel.h"
 

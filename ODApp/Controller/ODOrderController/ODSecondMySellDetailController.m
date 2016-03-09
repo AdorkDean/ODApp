@@ -9,13 +9,11 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODSecondMySellDetailController.h"
 #import "ODSecondOrderDetailView.h"
-#import "ODAPIManager.h"
 #import "ODOrderDetailModel.h"
 #import "UIButton+WebCache.h"
 #import "ODPayController.h"
 #import "ODCancelOrderView.h"
 #import "ODDrawbackBuyerOneController.h"
-#import "ODAPIManager.h"
 
 @interface ODSecondMySellDetailController () <UITextViewDelegate>
 
