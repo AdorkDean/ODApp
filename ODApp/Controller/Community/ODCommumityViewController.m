@@ -140,7 +140,7 @@
         [self.button setTitle:self.bbsMark forState:UIControlStateNormal];
         parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
     }
-    [self downLoadDataWithUrl:ODUrlCommunityBbsList paramater:parameter];
+    [self downLoadDataWithUrl:ODUrlBbsList paramater:parameter];
 }
 
 #pragma mark - 请求数据
@@ -249,8 +249,8 @@
         self.releaseSuccess = refresh;
     };
     self.indexPath = indexPath.row;
-    ODCommunityModel *model = self.dataArray[indexPath.row];
-    detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
+    ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
+    detailController.bbs_id = [NSString stringWithFormat:@"%d",model.id];
     [self.navigationController pushViewController:detailController animated:YES];
 }
 

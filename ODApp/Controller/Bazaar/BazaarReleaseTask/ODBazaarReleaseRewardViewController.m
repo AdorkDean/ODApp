@@ -71,7 +71,7 @@
 - (void)joiningTogetherParmeters {
     NSDictionary *parameter = @{};
 //    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:ODUrlRequestHelpReward parameter:parameter];
+    [self downLoadDataWithUrl:ODUrlOtherConfigInfo parameter:parameter];
 }
 
 #pragma mark - 请求数据

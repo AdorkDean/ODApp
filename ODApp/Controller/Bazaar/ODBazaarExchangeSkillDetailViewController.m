@@ -133,11 +133,11 @@
 
     }];
     
-//    [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
-//        weakSelf.dataArray = [model result];
-//    } failure:^(NSError *error) {
-//        
-//    }];
+    [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
+        
+    } failure:^(NSError *error) {
+        
+    }];
 }
 
 - (void)createScrollView {
@@ -341,10 +341,10 @@
     } else {
         if ([self.loveLabel.text isEqualToString:@"收藏"]) {
             NSDictionary *parameter = @{@"type" : @"4", @"obj_id" : self.swap_id, @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
-            [self pushDataWithUrl:ODUrlSkillDetailLove parameter:parameter isLove:YES];
+            [self pushDataWithUrl:ODUrlOtherLoveAdd parameter:parameter isLove:YES];
         } else {
             NSDictionary *parameter = @{@"love_id" : self.love_id, @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
-            [self pushDataWithUrl:ODUrlSkillDetailNotLove parameter:parameter isLove:NO];
+            [self pushDataWithUrl:ODUrlOtherLoveDel parameter:parameter isLove:NO];
         }
     }
 }

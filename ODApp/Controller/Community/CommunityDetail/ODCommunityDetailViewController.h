@@ -21,6 +21,7 @@
 #import "UMSocial.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODOthersInformationController.h"
+#import "ODCommunityDetailInfoModel.h"
 
 @interface ODCommunityDetailViewController : ODBaseViewController <UITableViewDelegate, UITableViewDataSource>
 
@@ -34,7 +35,7 @@
 @property(nonatomic, strong) UIView *bbsView;
 @property(nonatomic, strong) UIView *lineView;
 @property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic, strong) NSArray *dataArray;
 @property(nonatomic, strong) NSMutableArray *imageArray;
 @property(nonatomic, strong) UIView *tabelHeaderView;
 @property(nonatomic, copy) NSString *open_id;

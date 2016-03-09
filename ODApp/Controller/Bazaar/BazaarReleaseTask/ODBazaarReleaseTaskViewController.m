@@ -332,7 +332,7 @@
         parameter = @{@"title" : self.titleTextView.text, @"tag_ids" : @"", @"start_time" : [[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text], @"end_time" : [[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text], @"content" : self.taskDetailTextView.text, @"reward_name" : [self.taskRewardLabel.text substringFromIndex:2], @"open_id" : [ODUserInformation sharedODUserInformation].openID,@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     }
 
-    [self pushDataWithUrl:ODUrlBazaarReleaseTask parameter:parameter];
+//    [self pushDataWithUrl:ODUrlBazaarReleaseTask parameter:parameter];
 
     [self pushDataWithUrl:ODUrlTaskTaskAdd parameter:parameter];
 

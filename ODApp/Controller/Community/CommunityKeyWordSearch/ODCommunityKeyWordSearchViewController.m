@@ -86,7 +86,7 @@
 #pragma mark - 拼接参数
 - (void)joiningTogetherParmeters {
     NSDictionary *parameter = @{@"kw" : self.searchBar.text, @"suggest" : @"0", @"page" : [NSString stringWithFormat:@"%ld", self.count], @"city_id" : [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"call_array" : @"1"};
-    [self downLoadDataWithUrl:ODUrlCommunityBbsSearch paramater:parameter];
+    [self downLoadDataWithUrl:ODUrlBbsSearch paramater:parameter];
 }
 
 #pragma mark - 请求数据

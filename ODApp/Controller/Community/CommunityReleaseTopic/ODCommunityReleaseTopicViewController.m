@@ -380,7 +380,7 @@ NSString *topicContentText = @"";
         }
     }
     NSDictionary *parameter = @{@"title" : self.titleTextView.text, @"content" : self.topicContentTextView.text, @"tag_ids" : tag_ids, @"imgs" : imageStr, @"city_id" : [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"open_id" : [ODUserInformation sharedODUserInformation].openID};
-    [self pushDataWithUrl:ODUrlCommunityReleaseBbs parameter:parameter];
+    [self pushDataWithUrl:ODUrlBbsCreate parameter:parameter];
 }
 
 #pragma mark - 上传数据
