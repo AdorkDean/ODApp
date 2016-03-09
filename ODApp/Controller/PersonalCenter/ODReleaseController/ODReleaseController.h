@@ -17,22 +17,20 @@
 @interface ODReleaseController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 
-@property(nonatomic, strong) UICollectionView *collectionView;
-@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-
-@property(nonatomic, strong) NSMutableArray *dataArray;
-
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
-
-@property(nonatomic, copy) NSString *swap_id;
-
-@property(nonatomic, strong) ODReleaseModel *model;
-
-@property(nonatomic, strong) ODReleaseCell *cell;
-
-@property(nonatomic, assign) int pageCount;
-@property(nonatomic, assign) int pageSelectedCount;
-
-@property(nonatomic, strong) UILabel *noReusltLabel;
+//@property(nonatomic, strong) UICollectionView *collectionView;
+//@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+//
+//@property(nonatomic, strong) NSMutableArray *dataArray;
+//
+//@property(nonatomic, copy) NSString *swap_id;
+//
+//@property(nonatomic, strong) ODReleaseModel *model;
+//
+//@property(nonatomic, strong) ODReleaseCell *cell;
+//
+//@property(nonatomic, assign) int pageCount;
+//@property(nonatomic, assign) int pageSelectedCount;
+//
+//@property(nonatomic, strong) UILabel *noReusltLabel;
 
 @end

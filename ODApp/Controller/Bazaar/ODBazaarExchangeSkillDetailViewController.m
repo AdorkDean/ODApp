@@ -108,8 +108,7 @@
 - (void)joiningTogetherParmeters {
     NSDictionary *parameter = @{@"swap_id" : self.swap_id, @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-
-    NSLog(@"%@", signParameter);
+    NSLog(@"---%@",signParameter);
     [self downLoadDataWithUrl:kBazaarExchangeSkillDetailUrl parameter:signParameter];
 }
 
@@ -124,17 +123,21 @@
             ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc] init];
             [model setValuesForKeysWithDictionary:result];
             [weakSelf.dataArray addObject:model];
-            NSLog(@"%@", model.title);
-            weakSelf.love_id = [NSString stringWithFormat:@"%@", model.love_id];
-            weakSelf.love_num = [NSString stringWithFormat:@"%@", model.love_num];
+            weakSelf.love_id = [NSString stringWithFormat:@"%d", model.love_id];
+            weakSelf.love_num = [NSString stringWithFormat:@"%d", model.love_num];
             [weakSelf createUserInfoView];
             [weakSelf createDetailView];
             [weakSelf createBottomView];
-
         }
     }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
 
     }];
+    
+//    [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
+//        weakSelf.dataArray = [model result];
+//    } failure:^(NSError *error) {
+//        
+//    }];
 }
 
 - (void)createScrollView {
@@ -206,7 +209,7 @@
     [self.detailView addSubview:titleLabel];
 
     UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(titleLabel.frame) + 10, kScreenSize.width - 35, 20)];
-    priceLabel.text = [NSString stringWithFormat:@"%@元/%@", model.price, model.unit];
+    priceLabel.text = [NSString stringWithFormat:@"%d元/%@", model.price, model.unit];
     priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     priceLabel.textAlignment = NSTextAlignmentCenter;
     priceLabel.font = [UIFont systemFontOfSize:15];
@@ -279,7 +282,7 @@
     ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
     ODCollectionController *collection = [[ODCollectionController alloc] init];
     collection.open_id = model.user[@"open_id"];
-    collection.swap_id = [NSString stringWithFormat:@"%@", model.swap_id];
+    collection.swap_id = [NSString stringWithFormat:@"%d", model.swap_id];
     [self.navigationController pushViewController:collection animated:YES];
 }
 
@@ -338,55 +341,38 @@
     } else {
         if ([self.loveLabel.text isEqualToString:@"收藏"]) {
             NSDictionary *parameter = @{@"type" : @"4", @"obj_id" : self.swap_id, @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
-            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-            [self pushDataWithUrl:kBazaarExchangeSkillDetailLoveUrl parameter:signParameter isLove:YES];
+            [self pushDataWithUrl:ODUrlSkillDetailLove parameter:parameter isLove:YES];
         } else {
             NSDictionary *parameter = @{@"love_id" : self.love_id, @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
-            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-            [self pushDataWithUrl:kBazaarExchangeSkillDetailNotLoveUrl parameter:signParameter isLove:NO];
+            [self pushDataWithUrl:ODUrlSkillDetailNotLove parameter:parameter isLove:NO];
         }
     }
 }
 
 - (void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isLove:(BOOL)love {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     __weakSelf;
-    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
+    [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarExchangeSkillDetailLoveModel class] success:^(ODBazaarExchangeSkillDetailLoveModelResponse *model) {
         if (love) {
-            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-                self.love = @"love";
-                [weakSelf joiningTogetherParmeters];
-                NSDictionary *dict = responseObject[@"result"];
-                weakSelf.love_id = [NSString stringWithFormat:@"%@", dict[@"love_id"]];
-//               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"收藏成功"];
-                [ODProgressHUD showInfoWithStatus:@"收藏成功"];
-
-            }
-        } else {
-            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-                self.love = @"love";
-                [weakSelf joiningTogetherParmeters];
-//               [weakSelf createProgressHUDWithAlpha:0.6 withAfterDelay:0.8 title:@"取消收藏"];
-                [ODProgressHUD showInfoWithStatus:@"取消收藏"];
-
-
-            }
+            weakSelf.love = @"love";
+            [weakSelf joiningTogetherParmeters];
+            ODBazaarExchangeSkillDetailLoveModel *loveModel = [model result];
+            weakSelf.love_id = [NSString stringWithFormat:@"%d",loveModel.love_id];
+            [ODProgressHUD showInfoWithStatus:@"收藏成功"];
+        }else{
+            weakSelf.love = @"love";
+            [weakSelf joiningTogetherParmeters];
+            [ODProgressHUD showInfoWithStatus:@"取消收藏"];
         }
-        [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationloveSkill object:nil];
-
-
-    }    failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-
+    } failure:^(NSError *error) {
+        
     }];
-
 }
 
 #pragma mark - 立即购买事件
-
 - (void)payButtonClick:(UIButton *)button {
 
     ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
-    NSString *type = [NSString stringWithFormat:@"%@", model.swap_type];
+    NSString *type = [NSString stringWithFormat:@"%d", model.swap_type];
 
     if ([[[ODUserInformation sharedODUserInformation] openID] isEqualToString:@""]) {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];

@@ -20,6 +20,8 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 
 @implementation ODLocationController
 
+#pragma mark - 生命周期
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -30,6 +32,18 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     [self createCollectionView];
     [self getCityListRequest];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+
+#pragma mark - 数据请求
 
 - (void)getCityListRequest {
     __weakSelf
@@ -46,6 +60,8 @@ NSString *const ODLocationCellID = @"ODLocationCell";
                    }];
 }
 
+#pragma mark - Create UICollectionView
+
 - (void)createCollectionView {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) collectionViewLayout:self.flowLayout];
@@ -59,7 +75,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     [self.view addSubview:self.collectionView];
 }
 
-#pragma mark - UICollectionViewDelegate
+#pragma mark - UICollectionViewDataSource
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODLocationCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ODLocationCellID forIndexPath:indexPath];
@@ -77,6 +93,8 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.cityListArray.count;
 }
+
+#pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     [ODUserInformation sharedODUserInformation].locationCity = self.cityListArray[indexPath.row];
@@ -97,20 +115,9 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     return 0.5;
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 @end

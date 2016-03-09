@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ODBazaarExchangeSkillModel.h"
 #import "ODHomeInfoModel.h"
+#import "UIButton+WebCache.h"
 
 @interface ODBazaarExchangeSkillCollectionCell : UICollectionViewCell
 @property(weak, nonatomic) IBOutlet UIButton *headButton;
@@ -24,6 +25,8 @@
 
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *genderImgWidthConstant;
 @property(assign, nonatomic) CGFloat height;
+@property(nonatomic,strong)ODBazaarExchangeSkillModel *model;
 
 - (void)showDatasWithModel:(ODHomeInfoSwapModel *)model;
+
 @end

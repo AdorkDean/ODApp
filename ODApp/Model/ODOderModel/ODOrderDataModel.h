@@ -8,12 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
+@interface ODOrderDataTimesModel : NSObject
+
+@property (nonatomic, copy) NSString *time;
+@property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *request;
+
+@end
+
 @interface ODOrderDataModel : NSObject
 
 @property(nonatomic, copy) NSString *date;
 @property(nonatomic, copy) NSString *date_name;
 @property(nonatomic, strong) NSMutableArray *times;
-
-- (instancetype)initWithDict:(NSDictionary *)dict;
 
 @end
