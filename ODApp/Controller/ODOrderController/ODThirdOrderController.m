@@ -10,7 +10,6 @@
 #import "ODThirdOrderController.h"
 #import "ODOrderCell.h"
 #import "ODContactAddressController.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
 #import "ODOrderThirdHeadView.h"
@@ -28,10 +27,8 @@
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) UILabel *allPriceLabel;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *orderManager;
 @property(nonatomic, copy) NSString *openId;
 @property(nonatomic, strong) NSMutableArray *addressArray;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *addressManager;
 @property(nonatomic, strong) UIView *choseTimeView;
 @property(nonatomic, strong) UIScrollView *scroller;
 @property(nonatomic, strong) NSMutableArray *dataArray;

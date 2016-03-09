@@ -10,7 +10,6 @@
 #import "ODMyOrderController.h"
 #import "ODMyOrderModel.h"
 #import "MJRefresh.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODMyOrderCell.h"
 #import "ODOrderDetailController.h"
@@ -22,7 +21,7 @@
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, assign) NSInteger page;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, copy) NSString *open_id;
 @property(nonatomic, strong) UILabel *noReusltLabel;

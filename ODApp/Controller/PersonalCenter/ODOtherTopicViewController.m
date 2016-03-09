@@ -54,8 +54,7 @@
 #pragma mark - 初始化manager
 -(void)createRequest
 {
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+
     self.dataArray = [[NSMutableArray alloc]init];
     self.userArray = [[NSMutableArray alloc]init];
     userInfoDic = [NSMutableDictionary dictionary];

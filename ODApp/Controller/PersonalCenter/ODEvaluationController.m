@@ -9,7 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODEvaluationController.h"
 #import "MJRefresh.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
 #import "ODCommunityCollectionCell.h"

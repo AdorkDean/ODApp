@@ -10,7 +10,6 @@
 #import "ODBazaarExchangeSkillDetailViewController.h"
 #import "ODBazaarExchangeSkillModel.h"
 #import "ODBazaarExchangeSkillCollectionCell.h"
-#import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 #import "ODAPIManager.h"
 #import "ODHelp.h"

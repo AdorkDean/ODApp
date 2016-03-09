@@ -9,7 +9,6 @@
 #import "ODSecondOrderController.h"
 #import "ODOrderCell.h"
 #import "ODContactAddressController.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
 #import "ODOrderSecondHeadView.h"
@@ -28,9 +27,7 @@
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) UILabel *allPriceLabel;
 @property(nonatomic, copy) NSString *addressId;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *orderManager;
 @property(nonatomic, strong) NSArray *addressArray;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *addressManager;
 @end
 
 @implementation ODSecondOrderController

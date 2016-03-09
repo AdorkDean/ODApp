@@ -9,14 +9,12 @@
 #import "ODBaseViewController.h"
 #import "ODTabBarController.h"
 #import "ODAPIManager.h"
-#import "AFNetworking.h"
 #import "ODBazaarRewardCollectionCell.h"
 #import "ODBazaarRequestHelpRewardModel.h"
 
 @interface ODBazaarReleaseRewardViewController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate>
 
 @property(nonatomic, strong) UILabel *taskRewardLabel;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, strong) NSMutableArray *idArray;
 @property(nonatomic, strong) UICollectionView *collectionView;

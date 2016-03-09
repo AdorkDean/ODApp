@@ -8,7 +8,6 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODUserNickNameController.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "Masonry.h"
 #import "ODUserModel.h"

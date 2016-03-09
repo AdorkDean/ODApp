@@ -10,7 +10,6 @@
 #import "ODTabBarController.h"
 #import "ODAPIManager.h"
 #import "ODClassMethod.h"
-#import "AFNetworking.h"
 #import "ODCommunityDetailModel.h"
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
@@ -27,7 +26,6 @@
 
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, copy) NSString *bbs_id;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) NSMutableArray *resultArray;
 @property(nonatomic, strong) NSMutableArray *userArray;
 @property(nonatomic, strong) NSArray *bbs_imgArray;

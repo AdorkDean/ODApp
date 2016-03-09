@@ -424,6 +424,49 @@
     UIGraphicsEndImageContext();
     
     return newImage;
+    
+}
+
+
+
+#pragma mark - 请求数据
+-(void)pushImageWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+  
+    __weak typeof (self)weakSelf = self;
+    [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if (responseObject) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSDictionary *result = dict[@"result"];
+            NSString *str = result[@"File"];
+           
+            weakSelf.imgsString = str;
+   
+//            [weakSelf saveImge];
+            
+            NSLog(@"---%@",responseObject);
+
+        }
+  
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+       
+    }];
+}
+
+
+- (void)saveImge
+{
+    __weak typeof (self)weakSelf = self;
+    [ODHttpTool getWithURL:ODUrlUserChange parameters:@{} modelClass:[NSObject class] success:^(id model)
+     {
+        [weakSelf.imagePicker dismissViewControllerAnimated:YES completion:nil];
+    }
+                   failure:^(NSError *error)
+    {
+        
+    }];
 }
 
 

@@ -15,7 +15,6 @@
 #import "ODTabBarController.h"
 
 #import "MJRefresh.h"
-#import "AFNetworking.h"
 
 @interface ODMyOrderRecordController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 

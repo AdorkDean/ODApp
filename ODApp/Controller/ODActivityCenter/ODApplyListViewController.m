@@ -10,7 +10,6 @@
 #import "ODApplyListViewController.h"
 #import "ODCollectionCell.h"
 #import "MJRefresh.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODOthersInformationController.h"
 #import "ODApplyModel.h"

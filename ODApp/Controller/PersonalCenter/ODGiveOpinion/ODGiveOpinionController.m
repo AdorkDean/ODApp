@@ -8,7 +8,6 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODGiveOpinionController.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 
 @interface ODGiveOpinionController ()<UITextViewDelegate>

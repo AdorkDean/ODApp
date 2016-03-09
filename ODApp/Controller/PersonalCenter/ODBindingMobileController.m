@@ -9,14 +9,12 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBindingMobileController.h"
 #import "ODBindingMobileView.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 
 @interface ODBindingMobileController ()
 
 @property(nonatomic, strong) ODBindingMobileView *bindMobileView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *managers;
+
 //定时器
 @property(nonatomic, strong) NSTimer *timer;
 //当前秒数
