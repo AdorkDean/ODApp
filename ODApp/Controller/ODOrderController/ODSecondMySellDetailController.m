@@ -9,24 +9,20 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODSecondMySellDetailController.h"
 #import "ODSecondOrderDetailView.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODOrderDetailModel.h"
 #import "UIButton+WebCache.h"
 #import "ODPayController.h"
 #import "ODCancelOrderView.h"
 #import "ODDrawbackBuyerOneController.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 
 @interface ODSecondMySellDetailController () <UITextViewDelegate>
 
 
 @property(nonatomic, strong) ODSecondOrderDetailView *orderDetailView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, copy) NSString *open_id;
 @property(nonatomic, strong) NSMutableArray *dataArray;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *deliveryManager;
 @property(nonatomic, strong) ODCancelOrderView *cancelOrderView;
 
 

@@ -15,19 +15,17 @@
 #import "ODBindingMobileController.h"
 #import "ODTabBarController.h"
 #import "ODUserModel.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
 #import "ODChangePassWordController.h"
 #import "ODUploadImageModel.h"
+#import "AFNetworking.h"
 
 @interface ODInformationController ()<UITableViewDataSource , UITableViewDelegate ,UIImagePickerControllerDelegate , UIActionSheetDelegate , UINavigationControllerDelegate>
 
 @property (nonatomic , strong) UITableView *tableView;
 @property (nonatomic , strong) NSMutableArray *dataArray;
 @property (nonatomic , strong) ODInformationView *informationView;
-@property (nonatomic , strong) AFHTTPRequestOperationManager *manager;
-@property (nonatomic , strong) AFHTTPRequestOperationManager *managers;
 @property (nonatomic , strong) UIImage *image;
 @property (nonatomic , strong) UIImagePickerController *imagePicker;
 @property (nonatomic , copy) NSString *imgsString;//分界线的标识符
@@ -426,48 +424,5 @@
     return newImage;
     
 }
-
-
-
-#pragma mark - 请求数据
--(void)pushImageWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
-{
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-  
-    __weak typeof (self)weakSelf = self;
-    [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        if (responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSDictionary *result = dict[@"result"];
-            NSString *str = result[@"File"];
-           
-            weakSelf.imgsString = str;
-   
-//            [weakSelf saveImge];
-            
-            NSLog(@"---%@",responseObject);
-
-        }
-  
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-       
-    }];
-}
-
-
-- (void)saveImge
-{
-    __weak typeof (self)weakSelf = self;
-    [ODHttpTool getWithURL:ODUrlUserChange parameters:@{} modelClass:[NSObject class] success:^(id model)
-     {
-        [weakSelf.imagePicker dismissViewControllerAnimated:YES completion:nil];
-    }
-                   failure:^(NSError *error)
-    {
-        
-    }];
-}
-
 
 @end

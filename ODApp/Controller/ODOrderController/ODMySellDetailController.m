@@ -16,7 +16,6 @@
 #import "ODPayController.h"
 #import "ODCancelOrderView.h"
 #import "ODDrawbackBuyerOneController.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODDrawbackBuyerOneController.h"
 
@@ -26,7 +25,6 @@
 @property(nonatomic, strong) ODOrderDetailView *orderDetailView;
 @property(nonatomic, copy) NSString *open_id;
 @property(nonatomic, strong) NSMutableArray *dataArray;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *deliveryManager;
 @property(nonatomic, strong) ODCancelOrderView *cancelOrderView;
 
 

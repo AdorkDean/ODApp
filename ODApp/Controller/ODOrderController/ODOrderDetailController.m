@@ -9,7 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODOrderDetailController.h"
 #import "ODOrderDetailView.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODOrderDetailModel.h"
 #import "UIButton+WebCache.h"
@@ -22,11 +21,6 @@
 
 
 @property(nonatomic, strong) ODOrderDetailView *orderDetailView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *delateManager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *finishManager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *evalueManager;
-
 
 @property(nonatomic, strong) ODEvaluation *evaluationView;
 @property(nonatomic, copy) NSString *open_id;

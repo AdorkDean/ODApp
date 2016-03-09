@@ -10,7 +10,6 @@
 #import "ODContactAddressController.h"
 #import "ODAddressCell.h"
 #import "ODAddAddressController.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODOrderAddressModel.h"
 #import "UITableViewRowAction+JZExtension.h"
@@ -19,8 +18,6 @@
 
 
 @property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *deleteManager;
 @property(nonatomic, copy) NSString *open_id;
 @property(nonatomic, strong) NSMutableArray *defaultArray;
 @property(nonatomic, strong) NSMutableArray *dataArray;

@@ -12,7 +12,6 @@
 #import "ODContactAddressController.h"
 #import "ODOrderHeadView.h"
 #import "ODOrderDataModel.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "DataButton.h"
 #import "TimeButton.h"
@@ -26,13 +25,10 @@
 @interface ODOrderController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextViewDelegate>
 
 @property(nonatomic, strong) UIButton *selectedButton;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *getOrderIdManger;
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) UILabel *allPriceLabel;
 @property(nonatomic, strong) ODOrderHeadView *headView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *orderManager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *addressManager;
 @property(nonatomic, strong) UIView *choseTimeView;
 @property(nonatomic, strong) UIScrollView *scroller;
 @property(nonatomic, strong) NSMutableArray *dataArray;

@@ -10,7 +10,6 @@
 #import "ODTabBarController.h"
 #import "ODClassMethod.h"
 #import "ODAPIManager.h"
-#import "AFNetworking.h"
 
 
 @interface ODCommunityReleaseTopicViewController : ODBaseViewController <UITextViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
@@ -21,7 +20,6 @@
 @property(nonatomic, strong) UITextView *topicContentTextView;
 @property(nonatomic, strong) UILabel *topicContentLabel;
 @property(nonatomic, strong) UIButton *addPicButton;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) NSMutableArray *imageArray;
 @property(nonatomic, strong) NSMutableArray *strArray;
 @property(nonatomic, strong) NSMutableArray *labelArray;

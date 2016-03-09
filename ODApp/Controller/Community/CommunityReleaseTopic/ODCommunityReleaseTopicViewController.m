@@ -5,7 +5,7 @@
 //  Created by Odong-YG on 15/12/25.
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
-
+#import <MobileCoreServices/MobileCoreServices.h>
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCommunityReleaseTopicViewController.h"
 #import "ODUploadImageModel.h"
@@ -27,7 +27,6 @@
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"取消"];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
     [self createScrollView];
-    [self createRequest];
     [self createTextView];
     [self createLabels];
     [self createAddPicButton];
@@ -335,9 +334,6 @@ NSString *topicContentText = @"";
 
 #pragma mark - 初始化manager
 
-- (void)createRequest {
-    self.manager = [AFHTTPRequestOperationManager manager];
-}
 
 #pragma mark - 拼接参数
 

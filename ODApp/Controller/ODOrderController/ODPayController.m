@@ -10,13 +10,11 @@
 #import "ODPayController.h"
 #import "ODPayView.h"
 #import "ODPaySuccessController.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODPayModel.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
 #import "AppMethod.h"
-#import "AFNetworking.h"
 #import "XMLDictionary.h"
 #import "CommonUtil.h"
 #import "ODPaySuccessController.h"
@@ -27,9 +25,7 @@
 @property(nonatomic, strong) UILabel *priceLabel;
 @property(nonatomic, strong) ODPayView *payView;
 @property(nonatomic, copy) NSString *payType;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) ODPayModel *model;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *goManager;
 @property(nonatomic, copy) NSString *isPay;
 @property(nonatomic, assign) int navHasSelfClass;
 
