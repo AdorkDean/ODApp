@@ -154,7 +154,7 @@ UIKIT_EXTERN NSString * const ODurlSwapConfirmRefund;
 
 
 UIKIT_EXTERN NSString * const ODUrlBbsList;
-//UIKIT_EXTERN NSString * const ODUrlBbsDel;
+UIKIT_EXTERN NSString * const ODUrlBbsDel;
 
 
 
@@ -220,15 +220,10 @@ UIKIT_EXTERN NSString * const kChangePassWorldUrl;
 UIKIT_EXTERN NSString * const kGetCodeUrl;
 UIKIT_EXTERN NSString * const kLoginUrl;
 UIKIT_EXTERN NSString * const ODUrlTaskList;
-UIKIT_EXTERN NSString * const ODUrlBbsDel;
 UIKIT_EXTERN NSString * const ODUrlUserCommentList;
 UIKIT_EXTERN NSString * const ODUrlCreateOrder;
 UIKIT_EXTERN NSString * const ODUrlStoreApplyUsers;
-UIKIT_EXTERN NSString * const kGetTaskUrl;
-UIKIT_EXTERN NSString * const kDelateTaskUrl;
-UIKIT_EXTERN NSString * const kGetCommentUrl;
 UIKIT_EXTERN NSString * const ODUrlStoreCreateOrder;
-UIKIT_EXTERN NSString * const kGetApplyListUrl;
 
 UIKIT_EXTERN NSString * const ODUrlOtherFeedback;
 
@@ -245,12 +240,8 @@ UIKIT_EXTERN NSString * const kCollectionUrl;
 UIKIT_EXTERN NSString * const ODUrlUserWithdrawCash;
 UIKIT_EXTERN NSString * const ODUrlUserCashList;
 UIKIT_EXTERN NSString * const ODUrlSwapSellerOrderList;
-UIKIT_EXTERN NSString * const ODUrlUserLoveList;
-UIKIT_EXTERN NSString * const kBalanceUrl;
-UIKIT_EXTERN NSString * const kBalanceListUrl;
-UIKIT_EXTERN NSString * const kMySellListUrl;
-UIKIT_EXTERN NSString * const kDeliveryUrl;
-UIKIT_EXTERN NSString * const kFinshOrderUrl;
-UIKIT_EXTERN NSString * const kEvalueUrl;
+UIKIT_EXTERN NSString * const ODUrlSwapConfirmDelivery;
+UIKIT_EXTERN NSString * const ODUrlSwapFinish;
+UIKIT_EXTERN NSString * const ODUrlSwapOrderReason;
 UIKIT_EXTERN NSString * const ODUrlSwapOrder;
 UIKIT_EXTERN NSString * const ODUrlPayWeixinCallbackSync;

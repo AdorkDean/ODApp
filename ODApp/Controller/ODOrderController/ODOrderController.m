@@ -47,9 +47,24 @@
 
 @implementation ODOrderController
 
+#pragma mark - 生命周期方法
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [self.choseTimeView removeFromSuperview];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
-
 
     self.openId = [ODUserInformation sharedODUserInformation].openID;
     self.dataArray = [[NSMutableArray alloc] init];
@@ -64,10 +79,7 @@
     [self createCollectionView];
 }
 
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [self.choseTimeView removeFromSuperview];
-}
+
 
 
 - (void)getAddress {
@@ -111,42 +123,7 @@
 
 }
 
-- (void)getData {
-    self.manager = [AFHTTPRequestOperationManager manager];
-
-
-    NSDictionary *parameters = @{@"swap_id" : [NSString stringWithFormat:@"%@", self.informationModel.swap_id]};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-
-    [self.manager GET:kGetServecTimeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if (responseObject) {
-            NSMutableDictionary *dic = responseObject[@"result"];
-
-
-            for (NSMutableDictionary *miniDic in dic) {
-                ODOrderDataModel *model = [[ODOrderDataModel alloc] initWithDict:miniDic];
-                [self.dataArray addObject:model];
-            }
-
-
-        }
-
-        [self.collectionView reloadData];
-
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
-    }];
-
-
-}
-
-
 #pragma mark - 初始化
-
 - (void)createCollectionView {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 120) collectionViewLayout:self.flowLayout];
@@ -191,27 +168,7 @@
 }
 
 
-- (void)saveOrderAction:(UIButton *)sender {
-
-    if ([self.headView.orderView.timeLabel.text isEqualToString:@"请选择"]) {
-
-
-        [ODProgressHUD showInfoWithStatus:@"请输入服务时间"];
-
-
-    } else if ([self.headView.orderView.addressLabel.text isEqualToString:@"请选择"]) {
-
-
-        [ODProgressHUD showInfoWithStatus:@"请输入联系地址"];
-
-    } else {
-
-        [self saveOrder];
-    }
-
-}
-
-
+#pragma mark - 获取数据
 - (void)saveOrder
 {
     // 拼接参数
@@ -236,9 +193,47 @@
      }];
 }
 
+- (void)getData {
+    self.manager = [AFHTTPRequestOperationManager manager];
+    
+    
+    NSDictionary *parameters = @{@"swap_id" : [NSString stringWithFormat:@"%@", self.informationModel.swap_id]};
+    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+    
+    
+    [self.manager GET:kGetServecTimeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        
+        if (responseObject) {
+            NSMutableDictionary *dic = responseObject[@"result"];
+            
+            
+            for (NSMutableDictionary *miniDic in dic) {
+                ODOrderDataModel *model = [[ODOrderDataModel alloc] initWithDict:miniDic];
+                [self.dataArray addObject:model];
+            }
+            
+            
+        }
+        
+        [self.collectionView reloadData];
+        
+    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        
+    }];
+    
+    
+}
 
-#pragma mark - UICollectionViewDelegate
 
+#pragma mark - UICollectionView 数据源方法
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 1;
+}
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODOrderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
 
@@ -248,15 +243,7 @@
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 1;
-}
-
-
+#pragma mark - UICollectionView 代理方法
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
 
 
@@ -287,7 +274,6 @@
 
 }
 
-
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
 
@@ -302,6 +288,7 @@
 
 }
 
+#pragma mark - 监听方法
 - (void)timeAction {
     [self.choseTimeView removeFromSuperview];
     self.choseTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, KScreenHeight / 2 - ODNavigationHeight, kScreenSize.width, KScreenHeight / 2)];
@@ -366,7 +353,6 @@
     [self.view addSubview:self.choseTimeView];
 }
 
-#pragma mark - 监听方法
 - (void)timeAction:(DataButton *)sender {
 
     for (NSInteger i = 0; i < 7; i++) {
@@ -390,6 +376,25 @@
 
 }
 
+- (void)saveOrderAction:(UIButton *)sender {
+    
+    if ([self.headView.orderView.timeLabel.text isEqualToString:@"请选择"]) {
+        
+        
+        [ODProgressHUD showInfoWithStatus:@"请输入服务时间"];
+        
+        
+    } else if ([self.headView.orderView.addressLabel.text isEqualToString:@"请选择"]) {
+        
+        
+        [ODProgressHUD showInfoWithStatus:@"请输入联系地址"];
+        
+    } else {
+        
+        [self saveOrder];
+    }
+    
+}
 
 - (void)createButtonWithNumber:(NSInteger)number {
 
@@ -500,7 +505,6 @@
 
 }
 
-
 - (void)ChosetimeAction:(TimeButton *)sender {
     [self.choseTimeView removeFromSuperview];
     NSMutableDictionary *dic = self.selectDataArray[sender.tag - 888];
@@ -529,16 +533,6 @@
     ODNavigationController *navi = [[ODNavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:navi animated:YES completion:nil];
 
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 @end

@@ -53,31 +53,25 @@
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)viewDidLoad {
+    [super viewDidLoad];
     
+    self.view.userInteractionEnabled = YES;
+    
+    self.dataArray = [[NSMutableArray alloc] init];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.open_id = [ODUserInformation sharedODUserInformation].openID;
+    self.navigationItem.title = @"订单详情";
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
+    
+    self.evaluateStar = @"";
+    //                [self createEvaluation];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:NSStringFromClass([self class])];
-}
-
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    self.view.userInteractionEnabled = YES;
-
-    self.dataArray = [[NSMutableArray alloc] init];
-    self.view.backgroundColor = [UIColor whiteColor];
-    self.open_id = [ODUserInformation sharedODUserInformation].openID;
-    self.navigationItem.title = @"订单详情";
-
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
-
-    self.evaluateStar = @"";
-//                [self createEvaluation];
 }
 
 - (void)dealloc {
@@ -405,7 +399,6 @@
     
 }
 
-
 #pragma mark - 获取数据
 - (void)getData {
     // 拼接参数
@@ -501,7 +494,6 @@
     }
 }
 
-
 - (void)backAction:(UIBarButtonItem *)sender {
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backRefrash:) name:ODNotificationMyOrderThirdRefresh object:nil];
@@ -550,30 +542,20 @@
 
 // 确认完成
 - (void)confirmAction:(UIButton *)sender {
-
-    self.finishManager = [AFHTTPRequestOperationManager manager];
-
-    NSDictionary *parameters = @{@"order_id" : self.order_id, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    [self.finishManager GET:kFinshOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        if (responseObject) {
-
-            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-                [self createEvaluation];
-
-            } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-            }
-        }
-    }               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
-    }];
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"order_id"] = self.order_id;
+    params[@"open_id"] = self.open_id;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapFinish parameters:params modelClass:[NSObject class] success:^(id model)
+     {
+         
+         [weakSelf createEvaluation];
+         
+     } failure:^(NSError *error) {
+         
+     }];
 }
 
 - (void)firstButtonClicik:(UIButton *)button {
@@ -635,7 +617,6 @@
 
 }
 
-
 - (void)determineButton:(UIButton *)sender {
 
     if ([self.evaluationView.contentTextView.text isEqualToString:@""] || [self.evaluationView.contentTextView.text isEqualToString:@"请输入评价内容"]) {
@@ -646,57 +627,33 @@
 
         self.evaluateContent = self.evaluationView.contentTextView.text;
     }
+    
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"order_id"] = self.order_id;
+    params[@"reason"] = self.evaluateContent;
+    params[@"reason_num"] = self.evaluateStar;
+    params[@"open_id"] = self.open_id;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapOrderReason parameters:params modelClass:[NSObject class] success:^(id model)
+     {
+         [weakSelf.evaluationView removeFromSuperview];
 
-    self.evalueManager = [AFHTTPRequestOperationManager manager];
+         [ODProgressHUD showInfoWithStatus:@"评价成功"];
 
-    NSDictionary *parameters = @{@"order_id" : self.order_id, @"reason" : self.evaluateContent, @"reason_num" : self.evaluateStar, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+         ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
+         weakSelf.orderStatus = [NSString stringWithFormat:@"%@", statusModel.order_status];
 
-    __weak typeof(self) weakSelf = self;
+         if (weakSelf.getRefresh) {
+             weakSelf.getRefresh(@"1");
+         }
 
-    [self.evalueManager GET:kEvalueUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        if (responseObject) {
-
-
-            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-                [weakSelf.evaluationView removeFromSuperview];
-
-
-                [ODProgressHUD showInfoWithStatus:@"评价成功"];
-
-                ODOrderDetailModel *statusModel = self.dataArray[0];
-                weakSelf.orderStatus = [NSString stringWithFormat:@"%@", statusModel.order_status];
-
-
-                if (weakSelf.getRefresh) {
-
-
-                    weakSelf.getRefresh(@"1");
-                }
-
-
-                [weakSelf getData];
-
-
-            } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-
-                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-
-            }
-
-
-        }
-    }               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
-
-    }];
-
+         [weakSelf getData];
+     } failure:^(NSError *error) {
+         
+     }];
 }
-
 
 // 评价
 - (void)evaluationAction:(UIButton *)sender {
@@ -720,7 +677,6 @@
 
 }
 
-
 // 取消订单
 - (void)cancelOrder:(UIButton *)sender {
     self.cancelOrderView = [ODCancelOrderView getView];
@@ -736,11 +692,9 @@
     [self.evaluationView removeFromSuperview];
 }
 
-
 - (void)cancelView:(UIButton *)sender {
     [self.cancelOrderView removeFromSuperview];
 }
-
 
 - (void)payAction:(UIButton *)sender {
     ODPayController *vc = [[ODPayController alloc] init];

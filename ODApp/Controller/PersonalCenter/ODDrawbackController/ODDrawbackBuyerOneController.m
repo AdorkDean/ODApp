@@ -52,6 +52,20 @@
 
 @implementation ODDrawbackBuyerOneController
 
+#pragma mark - 生命周期方法
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -60,6 +74,10 @@
     self.view.userInteractionEnabled = YES;
     
     [self createScrollView];
+}
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - Create UIScrollView
@@ -591,26 +609,5 @@
         }
     }
 }
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end
