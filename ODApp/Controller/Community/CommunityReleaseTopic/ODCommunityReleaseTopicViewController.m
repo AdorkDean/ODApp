@@ -243,7 +243,7 @@ NSString *topicContentText = @"";
     if ([sourceType isEqualToString:(NSString *) kUTTypeImage]) {
         self.pickedImage = info[UIImagePickerControllerOriginalImage];
 
-        [ODProgressHUD showProgressWithStatus:@"正在上传"];
+//        [ODProgressHUD showProgressWithStatus:@"正在上传"];
         //图片转化为data
         NSData *imageData;
         self.pickedImage = [self scaleImage:self.pickedImage];;
@@ -262,7 +262,6 @@ NSString *topicContentText = @"";
 
 }
 
-#pragma mark - 上传特效
 
 #pragma mark - 拼接参数
 -(void)createParameter:(NSString *)str
@@ -280,6 +279,7 @@ NSString *topicContentText = @"";
     } failure:^(NSError *error) {
     }];
 }
+
 
 //压缩尺寸
 - (UIImage *)scaleImage:(UIImage *)image {
@@ -362,37 +362,19 @@ NSString *topicContentText = @"";
         }
     }
     NSDictionary *parameter = @{@"title" : self.titleTextView.text, @"content" : self.topicContentTextView.text, @"tag_ids" : tag_ids, @"imgs" : imageStr, @"city_id" : [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"open_id" : [ODUserInformation sharedODUserInformation].openID};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSLog(@"%@", signParameter);
-    [self pushDataWithUrl:kCommunityReleaseBbsUrl parameter:signParameter];
+    [self pushDataWithUrl:ODUrlBbsCreate parameter:parameter];
 }
 
 #pragma mark - 上传数据
-
 - (void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter {
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
-
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            if (weakSelf.myBlock) {
-                weakSelf.myBlock([NSString stringWithFormat:@"refresh"]);
-            }
-            [weakSelf.navigationController popViewControllerAnimated:YES];
+    __weakSelf
+    [ODHttpTool getWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        if (weakSelf.myBlock) {
+            weakSelf.myBlock([NSString stringWithFormat:@"refresh"]);
         }
-        if ([responseObject[@"status"] isEqualToString:@"error"]) {
-            if ([responseObject[@"message"] isEqualToString:@"title not found"]) {
-
-                [ODProgressHUD showInfoWithStatus:@"请输入标题"];
-            } else {
-
-                [ODProgressHUD showInfoWithStatus:@"请输入内容"];
-            }
-
-
-        }
-    }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-        NSLog(@"%@", error);
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    } failure:^(NSError *error) {
+        
     }];
 }
 

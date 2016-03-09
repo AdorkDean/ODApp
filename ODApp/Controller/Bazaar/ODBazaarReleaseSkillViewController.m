@@ -600,8 +600,8 @@
         }else{
             parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.editTimeArray desc],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }
-        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-        [self pushDataWithUrl:kBazaarEditSkillUrl parameter:signParameter isEdit:YES];
+//        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        [self pushDataWithUrl:ODUrlSwapEdit parameter:parameter isEdit:YES];
     }else{
         
         NSDictionary *parameter;
@@ -610,8 +610,9 @@
         }else if ([self.swap_type isEqualToString:@"2"]){
             parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":@"",@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }
-        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-        [self pushDataWithUrl:kBazaarReleaseSkillUrl parameter:signParameter isEdit:NO];
+//        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        
+        [self pushDataWithUrl:ODUrlSwapCreate parameter:parameter isEdit:NO];
     }
 
 }
@@ -643,29 +644,44 @@
 
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isEdit:(BOOL)isEdit
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     __weakSelf;
-    [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//    [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//        
+//        if (isEdit) {
+//            if ([responseObject[@"status"]isEqualToString:@"success"]) {
+//                [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
+//                [weakSelf.navigationController popViewControllerAnimated:YES];
+//                [ODProgressHUD showInfoWithStatus:@"编辑成功"];
+//            }else if ([responseObject[@"status"]isEqualToString:@"error"]){
+//                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+//            }
+//        }else{
+//            if ([responseObject[@"status"]isEqualToString:@"success"]) {
+//                [[NSNotificationCenter defaultCenter ]postNotificationName: ODNotificationReleaseSkill object:nil];
+//                [weakSelf.navigationController popViewControllerAnimated:YES];
+//                 [ODProgressHUD showInfoWithStatus:@"创建成功"];
+//            }else if ([responseObject[@"status"]isEqualToString:@"error"]){
+//                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
+//            }
+//        }
+//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+//        NSLog(@"%@",error.debugDescription);
+//    }];
+    
+    [ODHttpTool postWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
         
         if (isEdit) {
-            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-                [ODProgressHUD showInfoWithStatus:@"编辑成功"];
-            }else if ([responseObject[@"status"]isEqualToString:@"error"]){
-                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-            }
+            [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            [ODProgressHUD showInfoWithStatus:@"编辑成功"];
         }else{
-            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-                [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-                 [ODProgressHUD showInfoWithStatus:@"创建成功"];
-            }else if ([responseObject[@"status"]isEqualToString:@"error"]){
-                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-            }
+            [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            [ODProgressHUD showInfoWithStatus:@"创建成功"];
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        NSLog(@"%@",error.debugDescription);
+    } failure:^(NSError *error) {
+        
     }];
 }
 

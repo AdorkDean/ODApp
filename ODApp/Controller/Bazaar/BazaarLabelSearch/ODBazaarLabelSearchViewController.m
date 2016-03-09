@@ -90,18 +90,13 @@
 }
 
 #pragma mark - 请求数据
-- (void)loadMoreData {
-    self.count++;
-    [self requestData];
-}
-
 -(void)requestData
 {
     __weakSelf;
     [self.searchBar resignFirstResponder];
     NSDictionary *parameter = @{@"search" : self.searchBar.text, @"task_status" : @"9", @"page" : [NSString stringWithFormat:@"%ld", self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     
-    [ODHttpTool getWithURL:ODUrlBazaarRequestHelp parameters:parameter modelClass:[ODBazaarRequestHelpModel class] success:^(ODBazaarRequestHelpModelResponse  *model) {
+    [ODHttpTool getWithURL:ODUrlTaskList parameters:parameter modelClass:[ODBazaarRequestHelpModel class] success:^(ODBazaarRequestHelpModelResponse  *model) {
         if (weakSelf.count == 1) {
             [weakSelf.dataArray removeAllObjects];
         }
@@ -117,6 +112,11 @@
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
     }];
+}
+
+- (void)loadMoreData {
+    self.count++;
+    [self requestData];
 }
 
 #pragma mark - UICollectionViewDataSource

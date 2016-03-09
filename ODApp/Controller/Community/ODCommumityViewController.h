@@ -7,25 +7,22 @@
 //
 
 #import "ODBaseViewController.h"
-#import "ODAPIManager.h"
-#import "ODClassMethod.h"
-#import "AFNetworking.h"
-#import "ODCommunityModel.h"
+#import "ODCommunityBbsModel.h"
 #import "ODCommunityCollectionCell.h"
 #import "ODCommunityReleaseTopicViewController.h"
 #import "ODCommunityDetailViewController.h"
 #import "ODCommunityKeyWordSearchViewController.h"
-#import "MJRefresh.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODOthersInformationController.h"
 #import "ODCommunityShowPicViewController.h"
 #import "odbarbutton.h"
+#import "MJRefresh.h"
 
 @interface ODCommumityViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate>
 
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray *dataArray;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+@property(nonatomic ,strong) NSMutableDictionary *userInfoDic;
 @property(nonatomic, strong) ODBarButton *button;
 @property(nonatomic, strong) UIView *classView;
 @property(nonatomic) NSInteger count;
@@ -34,7 +31,5 @@
 @property(nonatomic, copy) NSString *bbsMark;
 @property(nonatomic, assign) int bbsType;
 @property(nonatomic) NSInteger indexPath;
-
-- (void)joiningTogetherParmeters;
 
 @end

@@ -11,3 +11,5 @@
 @implementation ODCommunityDetailModel
 
 @end
+
+ODRequestResultIsArrayImplementation(ODCommunityDetailModel)

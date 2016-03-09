@@ -12,7 +12,7 @@
 #import "UIImageView+WebCache.h"
 #import "ODAPIManager.h"
 #import "AFHTTPRequestOperationManager.h"
-#import "ODBazaarExchangeSkillModel.h"
+#import "ODBazaarExchangeSkillDetailModel.h"
 #import "ODHelp.h"
 #import "UMSocial.h"
 #import "ODOthersInformationController.h"
@@ -20,15 +20,15 @@
 #import "ODCollectionController.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODThirdOrderController.h"
+#import "ODBazaarExchangeSkillDetailLoveModel.h"
 
 
 @interface ODBazaarExchangeSkillDetailViewController : ODBaseViewController <UMSocialUIDelegate, UMSocialDataDelegate>
 
 @property(nonatomic, strong) UIScrollView *scrollView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, copy) NSString *swap_id;
-@property(nonatomic, strong) ODBazaarExchangeSkillModel *model;
-@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic, strong) ODBazaarExchangeSkillDetailModel *model;
+@property(nonatomic, strong) NSArray *dataArray;
 @property(nonatomic, strong) UILabel *loveLabel;
 @property(nonatomic, strong) UIImageView *loveImageView;
 @property(nonatomic, strong) UIView *detailView;

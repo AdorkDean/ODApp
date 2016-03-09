@@ -32,6 +32,7 @@
 		2314F5A91C8E97A300A770DC /* ODTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2314F5A61C8E97A300A770DC /* ODTabBarController.m */; };
 		2314F5AC1C8E9BF800A770DC /* ODCenterDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2314F5AB1C8E9BF800A770DC /* ODCenterDetailController.m */; };
 		2314F5B21C8EB61B00A770DC /* ODStorePlaceListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2314F5B11C8EB61B00A770DC /* ODStorePlaceListModel.m */; };
+		2314F5B61C8EC9EF00A770DC /* ODNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2314F5B51C8EC9EF00A770DC /* ODNewFeatureViewController.m */; };
 		23451CB21C8679040030271B /* ODAppRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 23451CB11C8679040030271B /* ODAppRegister.m */; };
 		23ACCFD11C86D5CF00FB9D8E /* ODPrecontractViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23ACCFD01C86D5CF00FB9D8E /* ODPrecontractViewController.m */; };
 		23ACD0021C87F76200FB9D8E /* ODActiveDeviceBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 23ACCFF21C87F76200FB9D8E /* ODActiveDeviceBtn.m */; };
@@ -50,7 +51,6 @@
 		3D3513761C86CF6B00D36714 /* ODPaySuccessView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3D3513751C86CF6B00D36714 /* ODPaySuccessView.xib */; };
 		402AA1091C90203300BD2FFB /* ODUploadImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 402AA1081C90203300BD2FFB /* ODUploadImageModel.m */; };
 		4058093C1C8D1A6400E32ED2 /* ODGuideTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 4058093B1C8D1A6400E32ED2 /* ODGuideTool.m */; };
-		405809401C8D1C3F00E32ED2 /* ODNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4058093F1C8D1C3F00E32ED2 /* ODNewFeatureViewController.m */; };
 		405809431C8D1CBD00E32ED2 /* ODNewFeatureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 405809421C8D1CBD00E32ED2 /* ODNewFeatureCell.m */; };
 		405809461C8D409700E32ED2 /* ODOrderAddressModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 405809451C8D409700E32ED2 /* ODOrderAddressModel.m */; };
 		4058094C1C8D54B900E32ED2 /* ODSaveOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4058094B1C8D54B900E32ED2 /* ODSaveOrderModel.m */; };
@@ -146,6 +146,10 @@
 		9DF2E98C1C74654A00F77976 /* ODSecondOrderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF2E98B1C74654A00F77976 /* ODSecondOrderDetailController.m */; };
 		9DF2E98F1C74666800F77976 /* ODSecondOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF2E98E1C74666800F77976 /* ODSecondOrderDetailView.m */; };
 		9DF2E9911C74667800F77976 /* ODSecondOrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DF2E9901C74667800F77976 /* ODSecondOrderDetailView.xib */; };
+		B837D4481C8FF30600A92CBC /* ODBazaarExchangeSkillDetailLoveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B837D4431C8FF30600A92CBC /* ODBazaarExchangeSkillDetailLoveModel.m */; };
+		B837D44A1C8FF30600A92CBC /* ODBazaarRequestHelpRewardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B837D4471C8FF30600A92CBC /* ODBazaarRequestHelpRewardModel.m */; };
+		B837D44D1C8FF32800A92CBC /* ODCommunityBbsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B837D44C1C8FF32800A92CBC /* ODCommunityBbsModel.m */; };
+		B837D4501C90137D00A92CBC /* ODCommunityDetailInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B837D44F1C90137D00A92CBC /* ODCommunityDetailInfoModel.m */; };
 		B8382A341C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8382A321C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.m */; };
 		B8382A351C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8382A331C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.xib */; };
 		B8382A391C788011002D83E7 /* ODBazaarDetailEvaluationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8382A381C788011002D83E7 /* ODBazaarDetailEvaluationViewController.m */; };
@@ -313,6 +317,7 @@
 		D4F76DBF1C61AEAD00D59F02 /* TimeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DBA1C61AEAD00D59F02 /* TimeButton.m */; };
 		D4F76DD31C61B04700D59F02 /* ODCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DD21C61B04700D59F02 /* ODCollectionController.m */; };
 		ED3429821C8E7603002D02B6 /* ODBazaarRequestHelpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3429811C8E7603002D02B6 /* ODBazaarRequestHelpModel.m */; };
+		ED3B99B81C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3B99B71C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -383,6 +388,8 @@
 		2314F5AB1C8E9BF800A770DC /* ODCenterDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCenterDetailController.m; sourceTree = "<group>"; };
 		2314F5B01C8EB61B00A770DC /* ODStorePlaceListModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODStorePlaceListModel.h; sourceTree = "<group>"; };
 		2314F5B11C8EB61B00A770DC /* ODStorePlaceListModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODStorePlaceListModel.m; sourceTree = "<group>"; };
+		2314F5B41C8EC9EF00A770DC /* ODNewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewFeatureViewController.h; sourceTree = "<group>"; };
+		2314F5B51C8EC9EF00A770DC /* ODNewFeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewFeatureViewController.m; sourceTree = "<group>"; };
 		23451CB01C8679040030271B /* ODAppRegister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppRegister.h; sourceTree = "<group>"; };
 		23451CB11C8679040030271B /* ODAppRegister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAppRegister.m; sourceTree = "<group>"; };
 		23ACCFCF1C86D5CF00FB9D8E /* ODPrecontractViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPrecontractViewController.h; sourceTree = "<group>"; };
@@ -414,8 +421,6 @@
 		402AA1081C90203300BD2FFB /* ODUploadImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUploadImageModel.m; sourceTree = "<group>"; };
 		4058093A1C8D1A6400E32ED2 /* ODGuideTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODGuideTool.h; sourceTree = "<group>"; };
 		4058093B1C8D1A6400E32ED2 /* ODGuideTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODGuideTool.m; sourceTree = "<group>"; };
-		4058093E1C8D1C3F00E32ED2 /* ODNewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewFeatureViewController.h; sourceTree = "<group>"; };
-		4058093F1C8D1C3F00E32ED2 /* ODNewFeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewFeatureViewController.m; sourceTree = "<group>"; };
 		405809411C8D1CBD00E32ED2 /* ODNewFeatureCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNewFeatureCell.h; sourceTree = "<group>"; };
 		405809421C8D1CBD00E32ED2 /* ODNewFeatureCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNewFeatureCell.m; sourceTree = "<group>"; };
 		405809441C8D409700E32ED2 /* ODOrderAddressModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderAddressModel.h; sourceTree = "<group>"; };
@@ -579,6 +584,14 @@
 		9DF2E98D1C74666800F77976 /* ODSecondOrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSecondOrderDetailView.h; sourceTree = "<group>"; };
 		9DF2E98E1C74666800F77976 /* ODSecondOrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSecondOrderDetailView.m; sourceTree = "<group>"; };
 		9DF2E9901C74667800F77976 /* ODSecondOrderDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODSecondOrderDetailView.xib; sourceTree = "<group>"; };
+		B837D4421C8FF30600A92CBC /* ODBazaarExchangeSkillDetailLoveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarExchangeSkillDetailLoveModel.h; sourceTree = "<group>"; };
+		B837D4431C8FF30600A92CBC /* ODBazaarExchangeSkillDetailLoveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarExchangeSkillDetailLoveModel.m; sourceTree = "<group>"; };
+		B837D4461C8FF30600A92CBC /* ODBazaarRequestHelpRewardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarRequestHelpRewardModel.h; sourceTree = "<group>"; };
+		B837D4471C8FF30600A92CBC /* ODBazaarRequestHelpRewardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarRequestHelpRewardModel.m; sourceTree = "<group>"; };
+		B837D44B1C8FF32800A92CBC /* ODCommunityBbsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityBbsModel.h; sourceTree = "<group>"; };
+		B837D44C1C8FF32800A92CBC /* ODCommunityBbsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityBbsModel.m; sourceTree = "<group>"; };
+		B837D44E1C90137D00A92CBC /* ODCommunityDetailInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityDetailInfoModel.h; sourceTree = "<group>"; };
+		B837D44F1C90137D00A92CBC /* ODCommunityDetailInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityDetailInfoModel.m; sourceTree = "<group>"; };
 		B8382A311C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarPicCollectionViewCell.h; sourceTree = "<group>"; };
 		B8382A321C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarPicCollectionViewCell.m; sourceTree = "<group>"; };
 		B8382A331C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarPicCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -891,6 +904,8 @@
 		D4F76DD21C61B04700D59F02 /* ODCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCollectionController.m; sourceTree = "<group>"; };
 		ED3429801C8E7603002D02B6 /* ODBazaarRequestHelpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarRequestHelpModel.h; sourceTree = "<group>"; };
 		ED3429811C8E7603002D02B6 /* ODBazaarRequestHelpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarRequestHelpModel.m; sourceTree = "<group>"; };
+		ED3B99B61C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarExchangeSkillDetailModel.h; sourceTree = "<group>"; };
+		ED3B99B71C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarExchangeSkillDetailModel.m; sourceTree = "<group>"; };
 		EEA572BF76BF4C22E1FC80BA /* libPods-ODApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ODApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD754733DED72842C8626E1D /* Pods-ODApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1008,6 +1023,7 @@
 		2314F59D1C8E97A300A770DC /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				2314F5B31C8EC9EF00A770DC /* newFeature */,
 				2314F59E1C8E97A300A770DC /* BaseViewController */,
 				2314F5A11C8E97A300A770DC /* NavigationController */,
 				2314F5A41C8E97A300A770DC /* TabBarController */,
@@ -1042,6 +1058,15 @@
 			path = TabBarController;
 			sourceTree = "<group>";
 		};
+		2314F5B31C8EC9EF00A770DC /* newFeature */ = {
+			isa = PBXGroup;
+			children = (
+				2314F5B41C8EC9EF00A770DC /* ODNewFeatureViewController.h */,
+				2314F5B51C8EC9EF00A770DC /* ODNewFeatureViewController.m */,
+			);
+			path = newFeature;
+			sourceTree = "<group>";
+		};
 		23ACCFF01C87F76200FB9D8E /* NewAppointment */ = {
 			isa = PBXGroup;
 			children = (
@@ -1069,15 +1094,6 @@
 				23ACD0011C87F76200FB9D8E /* ODPrecontrBtn.m */,
 			);
 			path = NewAppointment;
-			sourceTree = "<group>";
-		};
-		4058093D1C8D1C2400E32ED2 /* newFeature */ = {
-			isa = PBXGroup;
-			children = (
-				4058093E1C8D1C3F00E32ED2 /* ODNewFeatureViewController.h */,
-				4058093F1C8D1C3F00E32ED2 /* ODNewFeatureViewController.m */,
-			);
-			path = newFeature;
 			sourceTree = "<group>";
 		};
 		830910F0D69A70031BEA3AFD /* Pods */ = {
@@ -1168,10 +1184,16 @@
 				9DEDCF4D1C64B3F4003015C6 /* BazaarDetailModel */,
 				9DEDCF501C64B3F4003015C6 /* ODBazaarExchangeSkillModel.h */,
 				9DEDCF511C64B3F4003015C6 /* ODBazaarExchangeSkillModel.m */,
+				ED3B99B61C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.h */,
+				ED3B99B71C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.m */,
 				9DEDCF521C64B3F4003015C6 /* ODBazaarModel.h */,
 				9DEDCF531C64B3F4003015C6 /* ODBazaarModel.m */,
 				9DEDCF541C64B3F4003015C6 /* ODBazaarReleaseSkillTimeModel.h */,
 				9DEDCF551C64B3F4003015C6 /* ODBazaarReleaseSkillTimeModel.m */,
+				B837D4421C8FF30600A92CBC /* ODBazaarExchangeSkillDetailLoveModel.h */,
+				B837D4431C8FF30600A92CBC /* ODBazaarExchangeSkillDetailLoveModel.m */,
+				B837D4461C8FF30600A92CBC /* ODBazaarRequestHelpRewardModel.h */,
+				B837D4471C8FF30600A92CBC /* ODBazaarRequestHelpRewardModel.m */,
 			);
 			path = BazaarModel;
 			sourceTree = "<group>";
@@ -1587,13 +1609,6 @@
 			name = ODUserInformation;
 			sourceTree = "<group>";
 		};
-		C64273361C5A153B00C38A85 /* ODCenterDetail */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ODCenterDetail;
-			sourceTree = "<group>";
-		};
 		C64273371C5A159800C38A85 /* ODActivityDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -1936,7 +1951,6 @@
 			children = (
 				C64273391C5A15F200C38A85 /* ODCenterOrder */,
 				C64273381C5A15D300C38A85 /* ODCenterMap */,
-				C64273361C5A153B00C38A85 /* ODCenterDetail */,
 				C642733A1C5A160400C38A85 /* ODChoseCenter */,
 				C64273371C5A159800C38A85 /* ODActivityDetail */,
 			);
@@ -2099,6 +2113,8 @@
 				D4D071461C59B9FA008527C9 /* CommunityDetailModel */,
 				D4D071491C59B9FA008527C9 /* ODCommunityModel.h */,
 				D4D0714A1C59B9FA008527C9 /* ODCommunityModel.m */,
+				B837D44B1C8FF32800A92CBC /* ODCommunityBbsModel.h */,
+				B837D44C1C8FF32800A92CBC /* ODCommunityBbsModel.m */,
 			);
 			path = CommunityModel;
 			sourceTree = "<group>";
@@ -2108,6 +2124,8 @@
 			children = (
 				D4D071471C59B9FA008527C9 /* ODCommunityDetailModel.h */,
 				D4D071481C59B9FA008527C9 /* ODCommunityDetailModel.m */,
+				B837D44E1C90137D00A92CBC /* ODCommunityDetailInfoModel.h */,
+				B837D44F1C90137D00A92CBC /* ODCommunityDetailInfoModel.m */,
 			);
 			path = CommunityDetailModel;
 			sourceTree = "<group>";
@@ -2326,7 +2344,6 @@
 		D4D0752B1C59BA45008527C9 /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				4058093D1C8D1C2400E32ED2 /* newFeature */,
 				D43526721C7F3CD6001B6F9E /* View */,
 				C64D45671C5F8C6F003BFFA0 /* Category */,
 				C64D45721C5F8C6F003BFFA0 /* ThirdFrame */,
@@ -2800,6 +2817,7 @@
 				C64D45FE1C5F8C6F003BFFA0 /* TADotView.m in Sources */,
 				C64D45EC1C5F8C6F003BFFA0 /* IQUIViewController+Additions.m in Sources */,
 				9DEDCF421C64B3ED003015C6 /* ODBazaarDetailViewController.m in Sources */,
+				2314F5B61C8EC9EF00A770DC /* ODNewFeatureViewController.m in Sources */,
 				23ACD0071C87F76200FB9D8E /* ODPlacePreFooterView.m in Sources */,
 				D4D075271C59B9FA008527C9 /* ODMyOrderRecordCell.m in Sources */,
 				9D8A989D1C7AF204005BC458 /* ODMySellDetailController.m in Sources */,
@@ -2903,6 +2921,7 @@
 				409A05741C8D6C9200F4E7FD /* ODLoveListModel.m in Sources */,
 				C64D45F51C5F8C6F003BFFA0 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				9DDC9B941C635793000D688F /* ODSecondOrderView.m in Sources */,
+				B837D4501C90137D00A92CBC /* ODCommunityDetailInfoModel.m in Sources */,
 				B839002D1C75CE8A00598410 /* ODPersonalCenterCollectionViewController.m in Sources */,
 				9DEDCF481C64B3ED003015C6 /* ODBazaarReleaseSkillTimeViewController.m in Sources */,
 				2314F5831C8988D000A770DC /* UIColor+ODExtension.m in Sources */,
@@ -2925,7 +2944,6 @@
 				9DEDCF731C64B3FC003015C6 /* ODBazaarReleaseSkillTimeViewCell.m in Sources */,
 				23ACD00E1C87F76D00FB9D8E /* UIView+ODPlaceView.m in Sources */,
 				9DBF7F031C75C3680085875E /* ODGiveOpinionController.m in Sources */,
-				405809401C8D1C3F00E32ED2 /* ODNewFeatureViewController.m in Sources */,
 				C6515DBF1C7ECF3C00B25760 /* ODUserInformation.m in Sources */,
 				D4D073931C59B9FA008527C9 /* ODTopicModel.m in Sources */,
 				D4D0739E1C59B9FA008527C9 /* ODCenterIntroduceModel.m in Sources */,
@@ -2944,6 +2962,7 @@
 				2314F5811C8988D000A770DC /* UIBarButtonItem+ODExtention.m in Sources */,
 				D4D075121C59B9FA008527C9 /* ODBindingMobileView.m in Sources */,
 				D4D0739D1C59B9FA008527C9 /* ODCommunityModel.m in Sources */,
+				ED3B99B81C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.m in Sources */,
 				D4D073851C59B9FA008527C9 /* ODBindingMobileController.m in Sources */,
 				C64D45EB1C5F8C6F003BFFA0 /* IQUIView+Hierarchy.m in Sources */,
 				2314F5651C89886500A770DC /* CommonUtil.m in Sources */,
@@ -2974,6 +2993,7 @@
 				C64D45F11C5F8C6F003BFFA0 /* IQTextView.m in Sources */,
 				D4D0739C1C59B9FA008527C9 /* ODCommunityDetailModel.m in Sources */,
 				9DEDCF441C64B3ED003015C6 /* ODBazaarReleaseRewardViewController.m in Sources */,
+				B837D4481C8FF30600A92CBC /* ODBazaarExchangeSkillDetailLoveModel.m in Sources */,
 				C64D45F01C5F8C6F003BFFA0 /* IQSegmentedNextPrevious.m in Sources */,
 				D4D0751C1C59B9FA008527C9 /* ODTaskCell.m in Sources */,
 				C64D45F91C5F8C6F003BFFA0 /* UITableViewRowAction.m in Sources */,
@@ -2999,6 +3019,8 @@
 				D4D0750E1C59B9FA008527C9 /* ODCenderDetailView.m in Sources */,
 				9DE951F91C785E2300D7339D /* ODWithdrawalDetailController.m in Sources */,
 				C63FECF11C7AA5A6000A8396 /* ODFindFavorableController.m in Sources */,
+				B837D44D1C8FF32800A92CBC /* ODCommunityBbsModel.m in Sources */,
+				B837D44A1C8FF30600A92CBC /* ODBazaarRequestHelpRewardModel.m in Sources */,
 				4058093C1C8D1A6400E32ED2 /* ODGuideTool.m in Sources */,
 				9DEDCF431C64B3ED003015C6 /* ODBazaarLabelSearchViewController.m in Sources */,
 				9DBF7F071C75C53E0085875E /* ODLandThirdCell.m in Sources */,

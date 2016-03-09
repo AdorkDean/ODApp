@@ -1,5 +1,5 @@
 //
-//  ODBazaarExchangeSkillModel.h
+//  ODBazaarExchangeSkillDetailModel.h
 //  ODApp
 //
 //  Created by Odong-YG on 16/3/8.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ODBazaarExchangeSkillImgs_smallModel : NSObject
+@interface ODBazaarExchangeSkillDetailImgs_smallModel : NSObject
 
 @property (nonatomic, copy) NSString *md5;
 
@@ -16,7 +16,7 @@
 
 @end
 
-@interface ODBazaarExchangeSkillImgs_bigModel : NSObject
+@interface ODBazaarExchangeSkillDetailImgs_bigModel : NSObject
 
 @property (nonatomic, assign) int y;
 
@@ -30,7 +30,7 @@
 
 @end
 
-@interface ODBazaarExchangeSkillModel : NSObject
+@interface ODBazaarExchangeSkillDetailModel : NSObject
 
 @property (nonatomic, copy) NSString *content;
 
@@ -64,8 +64,8 @@
 
 @property (nonatomic, strong) NSArray *loves;
 
-@property (nonatomic, assign) int swap_id;
+@property (nonatomic, assign) NSString *swap_id;
 
 @end
 
-ODRequestResultIsArrayProperty(ODBazaarExchangeSkillModel)
+

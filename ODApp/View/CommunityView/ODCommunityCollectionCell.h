@@ -10,7 +10,7 @@
 #import "ODCommunityModel.h"
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
-
+#import "ODCommunityBbsModel.h"
 
 @interface ODCommunityCollectionCell : UICollectionViewCell
 @property(weak, nonatomic) IBOutlet UIButton *headButton;
@@ -21,7 +21,10 @@
 @property(weak, nonatomic) IBOutlet UIView *picView;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *PicConstraintHeight;
 
+@property(nonatomic,strong)ODCommunityBbsListModel *model;
 
-- (void)showDateWithModel:(ODCommunityModel *)model;
+//- (void)showDateWithModel:(ODCommunityModel *)model;
+
+-(void)setModel:(ODCommunityBbsListModel *)model;
 
 @end

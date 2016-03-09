@@ -13,6 +13,7 @@
 #import <Foundation/Foundation.h>
 
 @interface ODAppRegister : NSObject
+
 + (void)registWechat;
 
 + (void)registStatistics;
