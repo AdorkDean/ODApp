@@ -23,6 +23,8 @@
 
 @property(nonatomic,strong)ODCommunityBbsListModel *model;
 
-- (void)showDateWithModel:(ODCommunityModel *)model;
+//- (void)showDateWithModel:(ODCommunityModel *)model;
+
+-(void)setModel:(ODCommunityBbsListModel *)model;
 
 @end
