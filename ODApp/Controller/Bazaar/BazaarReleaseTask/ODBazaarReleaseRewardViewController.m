@@ -70,32 +70,49 @@
 
 - (void)joiningTogetherParmeters {
     NSDictionary *parameter = @{};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kBazaarReleaseRewardUrl parameter:signParameter];
+//    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:ODUrlRequestHelpReward parameter:parameter];
 }
 
 #pragma mark - 请求数据
 
 - (void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter {
     __weak typeof(self) weakSelf = self;
-    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
-        if (responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSDictionary *result = dict[@"result"];
-            NSArray *task_reward = result[@"task_reward"];
-            for (NSDictionary *itemDict in task_reward) {
-                NSString *name = itemDict[@"name"];
-                NSString *id = [NSString stringWithFormat:@"%@", itemDict[@"id"]];
-                [weakSelf.dataArray addObject:name];
-                [weakSelf.idArray addObject:id];
-            }
-            [weakSelf createCollectionView];
-            [weakSelf.collectionView reloadData];
+//    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
+//        if (responseObject) {
+//            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//            NSDictionary *result = dict[@"result"];
+//            NSArray *task_reward = result[@"task_reward"];
+//            for (NSDictionary *itemDict in task_reward) {
+//                NSString *name = itemDict[@"name"];
+//                NSString *id = [NSString stringWithFormat:@"%@", itemDict[@"id"]];
+//                [weakSelf.dataArray addObject:name];
+//                [weakSelf.idArray addObject:id];
+//            }
+//            [weakSelf createCollectionView];
+//            [weakSelf.collectionView reloadData];
+//
+//        }
+//    }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
+//
+//    }];
+    
+    [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarRequestHelpRewardModel class] success:^(ODBazaarRequestHelpRewardModelResponse *model) {
+    
 
+        ODBazaarRequestHelpRewardModel *rewardModel = [model result];
+        for (ODBazaarRequestHelpTask_rewardModel *task_rewardModel in rewardModel.task_reward) {
+            NSString *name = task_rewardModel.name;
+            NSString *id = [NSString stringWithFormat:@"%d",task_rewardModel.id];
+            [weakSelf.dataArray addObject:name];
+            [weakSelf.idArray addObject:id];
         }
-    }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-
+        [weakSelf createCollectionView];
+        [weakSelf.collectionView reloadData];
+    } failure:^(NSError *error) {
+        
     }];
+    
 }
 
 

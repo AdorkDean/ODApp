@@ -11,6 +11,7 @@
 #import "ODAPIManager.h"
 #import "AFNetworking.h"
 #import "ODBazaarRewardCollectionCell.h"
+#import "ODBazaarRequestHelpRewardModel.h"
 
 @interface ODBazaarReleaseRewardViewController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate>
 

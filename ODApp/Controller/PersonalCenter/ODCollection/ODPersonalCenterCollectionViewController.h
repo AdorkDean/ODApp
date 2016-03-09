@@ -19,9 +19,9 @@
 
 @interface ODPersonalCenterCollectionViewController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+
 @property(nonatomic, strong) UICollectionView *collectionView;
-@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic, strong) NSArray *dataArray;
 @property(nonatomic) NSInteger page;
 
 @end
