@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ODBazaarExchangeSkillModel.h"
+#import "ODBazaarExchangeSkillDetailModel.h"
 
 @interface ODOrderCell : UICollectionViewCell
 
@@ -18,7 +18,7 @@
 @property(weak, nonatomic) IBOutlet UILabel *orderPrice;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *labelConstraint;
 
-@property(nonatomic, strong) ODBazaarExchangeSkillModel *model;
+@property(nonatomic, strong) ODBazaarExchangeSkillDetailModel *model;
 
 
 @end

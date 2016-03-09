@@ -29,5 +29,7 @@
 ODRequestResultIsArrayProperty(ODReleaseModel)
 
 @interface ODReleaseLovesModel : NSObject
+
 @property(nonatomic, copy) NSString *img_url;
+
 @end

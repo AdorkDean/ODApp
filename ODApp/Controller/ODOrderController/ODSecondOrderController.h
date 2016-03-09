@@ -7,10 +7,10 @@
 //
 
 #import "ODBaseViewController.h"
-#import "ODBazaarExchangeSkillModel.h"
+#import "ODBazaarExchangeSkillDetailModel.h"
 
 @interface ODSecondOrderController : ODBaseViewController
 
 @property(nonatomic, strong) NSString *openId;
-@property(nonatomic, strong) ODBazaarExchangeSkillModel *informationModel;
+@property(nonatomic, strong) ODBazaarExchangeSkillDetailModel *informationModel;
 @end

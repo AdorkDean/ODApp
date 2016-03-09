@@ -24,7 +24,7 @@
     
 }
 
-- (void)setModel:(ODBazaarExchangeSkillModel *)model
+- (void)setModel:(ODBazaarExchangeSkillDetailModel *)model
 {
     if (_model != model) {
         
@@ -32,11 +32,11 @@
     }
     
     
-    [self.userImgeView sd_setImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]]];
-    self.nickLabel.text = model.user[@"nick"];
+    [self.userImgeView sd_setImageWithURL:[NSURL OD_URLWithString:[model.user valueForKeyPath:@"avatar" ]]];
+    self.nickLabel.text = [model.user valueForKeyPath:@"nick"];
     self.orderTitle.text = model.title;
-    self.orderPrice.text = [NSString stringWithFormat:@"%@元/%@" , model.price , model.unit];
-    NSString *url = model.imgs_small[0][@"img_url"];
+    self.orderPrice.text = [NSString stringWithFormat:@"%d元/%@" , model.price , model.unit];
+    NSString *url = [model.imgs_small[0] valueForKeyPath:@"img_url"];
     [self.orderImageView sd_setImageWithURL:[NSURL OD_URLWithString:url]];
 
     

@@ -13,7 +13,7 @@
 #import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
 #import "ODCommunityCollectionCell.h"
-#import "ODCommunityModel.h"
+//#import "ODCommunityModel.h"
 #import "ODCommunityDetailViewController.h"
 #import "ODOthersInformationController.h"
 @interface ODMyTopicController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
@@ -24,7 +24,6 @@
 @property (nonatomic , strong) UICollectionViewFlowLayout *firstFlowLayout;
 @property (nonatomic , strong) UICollectionView *firstCollectionView;
 @property (nonatomic , assign) NSInteger firstPage;
-@property (nonatomic, strong) AFHTTPRequestOperationManager *firstManager;
 @property (nonatomic, strong) NSMutableArray *FirstDataArray;
 @property (nonatomic , strong) NSMutableDictionary *firstUserInfoDic;
 @property (nonatomic , strong) UILabel *firstLabel;
@@ -32,7 +31,6 @@
 @property (nonatomic , strong) UICollectionViewFlowLayout *secondFlowLayout;
 @property (nonatomic , strong) UICollectionView *secondCollectionView;
 @property (nonatomic , assign) NSInteger secondPage;
-@property (nonatomic, strong) AFHTTPRequestOperationManager *secondManager;
 @property (nonatomic, strong) NSMutableArray *secondDataArray;
 @property (nonatomic , strong) NSMutableDictionary *secondUserInfoDic;
 @property (nonatomic , strong) UILabel *secondLabel;
@@ -213,17 +211,11 @@
 -(void)firstGetData
 {
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.firstPage];
+    NSDictionary *parameters = @{ @"type":@"1",@"page":countNumber , @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID] ,@"open_id":self.open_id,@"call_array" : @"1"};
     
     
-    self.firstManager = [AFHTTPRequestOperationManager manager];
-    
-    NSDictionary *parameters = @{ @"type":@"1",@"page":countNumber , @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID] ,@"open_id":self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    
-    __weak typeof (self)weakSelf = self;
-    [self.firstManager GET:kCommunityBbsLatestUrl parameters:signParameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlBbsList parameters:parameters modelClass:[ODCommunityBbsModel class] success:^(id model) {
         
         if ([countNumber isEqualToString:@"1"]) {
             [weakSelf.FirstDataArray removeAllObjects];
@@ -231,81 +223,51 @@
             [weakSelf.firstUserInfoDic removeAllObjects];
         }
         
-        if (responseObject) {
-            NSDictionary *result = responseObject[@"result"];
-            NSDictionary *bbs_list = result[@"bbs_list"];
-            
-            
-                     
-            if (bbs_list.count != 0) {
-                NSArray *allkeys = [bbs_list allKeys];
-                allkeys = [allkeys sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                    NSComparisonResult result = [obj1 compare:obj2];
-                    return result == NSOrderedAscending;
-                }];
-                
-                
-                for (id bbsKey in allkeys) {
-                    NSString *key = [NSString stringWithFormat:@"%@",bbsKey];
-                    NSDictionary *itemDict = bbs_list[key];
-                    ODCommunityModel *model = [[ODCommunityModel alloc]init];
-                    [model setValuesForKeysWithDictionary:itemDict];
-                    [weakSelf.FirstDataArray addObject:model];
-                }
-
-            }
-            
-            
-            NSDictionary *users = result[@"users"];
-            for (id userKey in users) {
-                NSString *key = [NSString stringWithFormat:@"%@",userKey];
-                NSDictionary *itemDict = users[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc]init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.firstUserInfoDic setObject:model forKey:userKey];
-            }
-            if (weakSelf.FirstDataArray.count == 0) {
-                weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40, KScreenHeight / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [weakSelf.scrollView addSubview:weakSelf.firstLabel];
-            }
-
-            [weakSelf.firstCollectionView.mj_header endRefreshing];
-            
-            if (bbs_list.count == 0) {
-                [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
-            }
-            else
-            {
-                [weakSelf.firstCollectionView.mj_footer endRefreshing];
-            }
-            [weakSelf.firstCollectionView reloadData];
-
+        for (ODCommunityBbsListModel *bbsModel in [[model result] bbs_list]) {
+            [weakSelf.FirstDataArray addObject:bbsModel];
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        for (id userKey in [[model result] users]) {
+            NSString *key = [NSString stringWithFormat:@"%@",userKey];
+            NSDictionary *itemDict = [[model result] users][key];
+            ODCommunityModel *model = [[ODCommunityModel alloc]init];
+            [model setValuesForKeysWithDictionary:itemDict];
+            [weakSelf.firstUserInfoDic setObject:model forKey:userKey];
+        }
+        
+        
+        if (weakSelf.FirstDataArray.count == 0) {
+            weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40, KScreenHeight / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+            [weakSelf.scrollView addSubview:weakSelf.firstLabel];
+        }
         
         [weakSelf.firstCollectionView.mj_header endRefreshing];
-        [weakSelf.firstCollectionView.mj_footer endRefreshing];
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
+        
+        if ([[model result] bbs_list].count == 0) {
+            [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
+        }
+        else
+        {
+            [weakSelf.firstCollectionView.mj_footer endRefreshing];
+        }
+        [weakSelf.firstCollectionView reloadData];
+    } failure:^(NSError *error) {
+        
+        
     }];
     
 }
 
 -(void)secondGetData
 {
-    
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.secondPage];
     
-    
-    
-    self.secondManager = [AFHTTPRequestOperationManager manager];
-    
-    NSDictionary *parameters = @{ @"type":@"2",@"page":countNumber, @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID] , @"open_id":self.open_id  , @"call_array":@"1"};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-      
-    __weak typeof (self)weakSelf = self;
-    [self.secondManager GET:kCommunityBbsLatestUrl parameters:signParameters success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        
+    NSDictionary *parameters = @{ @"type" : @"2",
+                                  @"page":countNumber,
+                                  @"open_id":self.open_id,
+                                  @"call_array":@"1"
+                                  };
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlBbsList parameters:parameters modelClass:[ODCommunityBbsModel class] success:^(id model) {
         
         if ([countNumber isEqualToString:@"1"]) {
             [weakSelf.secondDataArray removeAllObjects];
@@ -313,49 +275,36 @@
             [weakSelf.secondUserInfoDic removeAllObjects];
         }
         
-        
-        if (responseObject)
-        {
-            NSDictionary *result = responseObject[@"result"];
-            NSDictionary *bbs_list = result[@"bbs_list"];
-            NSDictionary *users = result[@"users"];
-            for (NSMutableDictionary *dic in bbs_list)
-            {
-                ODCommunityModel *model = [[ODCommunityModel alloc]init];
-                [model setValuesForKeysWithDictionary:dic];
-                [weakSelf.secondDataArray addObject:model];
-            }
-            for (id userKey in users)
-            {
-                NSString *key = [NSString stringWithFormat:@"%@",userKey];
-                NSDictionary *itemDict = users[key];
-                ODCommunityModel *model = [[ODCommunityModel alloc]init];
-                [model setValuesForKeysWithDictionary:itemDict];
-                [weakSelf.secondUserInfoDic setObject:model forKey:userKey];
-            }
-            
-            
-            if (weakSelf.secondDataArray.count == 0) {
-                weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40 + weakSelf.scrollView.frame.size.width, KScreenHeight / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [weakSelf.scrollView addSubview:weakSelf.secondLabel];
-            }
- 
-            [weakSelf.secondCollectionView.mj_header endRefreshing];
-            
-            if (bbs_list.count == 0) {
-                [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
-            }
-            else
-            {
-                [weakSelf.secondCollectionView.mj_footer endRefreshing];
-            }
-            [weakSelf.secondCollectionView reloadData];
+        for (ODCommunityBbsListModel *bbsModel in [[model result] bbs_list]) {
+            [weakSelf.secondDataArray addObject:bbsModel];
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        for (id userKey in [[model result] users]) {
+            NSString *key = [NSString stringWithFormat:@"%@",userKey];
+            NSDictionary *itemDict = [[model result] users][key];
+            ODCommunityModel *model = [[ODCommunityModel alloc]init];
+            [model setValuesForKeysWithDictionary:itemDict];
+            [weakSelf.secondUserInfoDic setObject:model forKey:userKey];
+        }
         
+        if (weakSelf.secondDataArray.count == 0) {
+            weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40 + weakSelf.scrollView.frame.size.width, KScreenHeight / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
+            [weakSelf.scrollView addSubview:weakSelf.secondLabel];
+        }
+
+        [weakSelf.secondCollectionView.mj_header endRefreshing];
+
+        if ([[model result] bbs_list].count == 0) {
+            [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
+        }
+        else
+        {
+            [weakSelf.secondCollectionView.mj_footer endRefreshing];
+        }
+        [weakSelf.secondCollectionView reloadData];
+
+    } failure:^(NSError *error) {
         [weakSelf.secondCollectionView.mj_header endRefreshing];
         [weakSelf.secondCollectionView.mj_footer endRefreshing];
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
     }];
 }
 
@@ -401,8 +350,8 @@
     }else{
         
         NSIndexPath *indexpath = [self.secondCollectionView indexPathForCell:cell];
-        ODCommunityModel *model = self.secondDataArray[indexpath.row];
-        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+        ODCommunityBbsListModel *model = self.secondDataArray[indexpath.row];
+        NSString *userId = [NSString stringWithFormat:@"%d",model.user_id];
 
         
         NSString *openId = [ODUserInformation sharedODUserInformation].openID;
@@ -431,14 +380,14 @@
     cell.backgroundColor = [UIColor whiteColor];
     
     if (collectionView.tag == 111) {
-        ODCommunityModel *model = self.FirstDataArray[indexPath.row];
-        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+        ODCommunityBbsListModel *model = self.FirstDataArray[indexPath.row];
+        NSString *userId = [NSString stringWithFormat:@"%d",model.user_id];
         cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
         [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.firstUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
         cell.nickLabel.text = [self.firstUserInfoDic[userId]nick];
         cell.signLabel.text = [self.firstUserInfoDic[userId]sign];
-        [cell showDateWithModel:model];
+        [cell setModel:model];
         CGFloat width=kScreenSize.width>320?90:70;
         if (model.imgs.count) {
             for (id vc in cell.picView.subviews) {
@@ -482,14 +431,14 @@
         
     }else if (collectionView.tag == 222) {
         
-        ODCommunityModel *model = self.secondDataArray[indexPath.row];
-        NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+        ODCommunityBbsListModel *model = self.secondDataArray[indexPath.row];
+        NSString *userId = [NSString stringWithFormat:@"%d",model.user_id];
         cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
         [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
         [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.secondUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
         cell.nickLabel.text = [self.secondUserInfoDic[userId]nick];
         cell.signLabel.text = [self.secondUserInfoDic[userId]sign];
-        [cell showDateWithModel:model];
+        [cell setModel:model];
         CGFloat width=kScreenSize.width>320?90:70;
         if (model.imgs.count) {
             for (id vc in cell.picView.subviews) {
@@ -569,8 +518,8 @@
         };
        
         
-        ODCommunityModel *model = self.FirstDataArray[indexPath.row];
-        detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
+        ODCommunityBbsUsersModel *model = self.FirstDataArray[indexPath.row];
+        detailController.bbs_id = [NSString stringWithFormat:@"%d",model.id];
         [self.navigationController pushViewController:detailController animated:YES];
 
     }else if (collectionView.tag == 222) {
@@ -584,8 +533,8 @@
         };
 
         
-        ODCommunityModel *model = self.secondDataArray[indexPath.row];
-        detailController.bbs_id = [NSString stringWithFormat:@"%@",model.id];
+        ODCommunityBbsUsersModel *model = self.secondDataArray[indexPath.row];
+        detailController.bbs_id = [NSString stringWithFormat:@"%d",model.id];
         [self.navigationController pushViewController:detailController animated:YES];
     }
 
@@ -607,7 +556,7 @@
 }
 
 //动态计算cell的高度
--(CGFloat)returnHight:(ODCommunityModel *)model
+-(CGFloat)returnHight:(ODCommunityBbsListModel *)model
 {
     CGFloat width=kScreenSize.width>320?90:70;
     NSString *content = model.content;

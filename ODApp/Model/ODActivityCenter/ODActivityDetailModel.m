@@ -26,7 +26,7 @@
         return @{
                  @"savants" :[ODActivityDetailVIPModel class],
                  @"applies" :[ODActivityDetailAppliesModel class]
-        };
+                 };
     }];
 }
 

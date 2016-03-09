@@ -157,6 +157,11 @@ UIKIT_EXTERN NSString * const ODUrlSwapOrderCancel;
 UIKIT_EXTERN NSString * const ODUrlSwapRejectRefund;
 UIKIT_EXTERN NSString * const ODUrlSwapConfirmRefund;
 UIKIT_EXTERN NSString * const ODUrlSwapServiceTime;
+UIKIT_EXTERN NSString * const ODUrlSwapInfo;
+
+
+
+
 
 UIKIT_EXTERN NSString * const ODUrlBbsList;
 UIKIT_EXTERN NSString * const ODUrlBbsDel;
@@ -166,6 +171,7 @@ UIKIT_EXTERN NSString * const ODUrlBbsView;
 
 UIKIT_EXTERN NSString * const ODUrlOtherStoreList;
 UIKIT_EXTERN NSString * const ODUrlOtherHome;
+
 
 
 UIKIT_EXTERN NSString * const ODUrlBazaarRequestHelp;
@@ -185,7 +191,7 @@ UIKIT_EXTERN NSString * const ODUrlOtherConfigInfo;
 //UIKIT_EXTERN NSString * const kBazaarExchangeSkillUrl;
 UIKIT_EXTERN NSString * const ODUrlBazaarExchangeSkill;
 UIKIT_EXTERN NSString * const ODUrlBazaarSkillDetail;
-UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailUrl;
+//UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseSkillTimeUrl;
 //UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailLoveUrl;
 //UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailNotLoveUrl;
@@ -248,8 +254,6 @@ UIKIT_EXTERN NSString * const ODUrlBbsDel;
 UIKIT_EXTERN NSString * const ODUrlUserCommentList;
 UIKIT_EXTERN NSString * const ODUrlCreateOrder;
 UIKIT_EXTERN NSString * const ODUrlStoreApplyUsers;
-UIKIT_EXTERN NSString * const kGetTaskUrl;
-UIKIT_EXTERN NSString * const kDelateTaskUrl;
 UIKIT_EXTERN NSString * const kGetCommentUrl;
 UIKIT_EXTERN NSString * const ODUrlStoreCreateOrder;
 UIKIT_EXTERN NSString * const kGetApplyListUrl;
