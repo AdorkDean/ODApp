@@ -8,7 +8,6 @@
 
 #import "ODBaseViewController.h"
 
-#import "AFNetworking.h"
 
 #import "ODUserInformation.h"
 #import "ODAPIManager.h"
@@ -20,7 +19,6 @@
 
 @property(nonatomic, strong) NSString *webUrl;
 
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
 
 @end

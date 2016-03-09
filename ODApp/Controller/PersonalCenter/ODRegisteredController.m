@@ -9,7 +9,6 @@
 #import "ODNavigationBarView.h"
 #import "ODRegisteredController.h"
 #import "ODRegisteredView.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODLandMainController.h"
 #import  "ODTabBarController.h"

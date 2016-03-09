@@ -8,13 +8,11 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODUserGenderController.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 
 @interface ODUserGenderController ()
 
-@property(nonatomic,strong) AFHTTPRequestOperationManager *manager;
-@property(nonatomic,strong) AFHTTPRequestOperationManager *managers;
+
 @property(nonatomic,copy) NSString *openID;
 @end
 

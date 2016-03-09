@@ -12,7 +12,6 @@
 #import "ODLandSecondCell.h"
 #import "ODLandThirdCell.h"
 #import "ODTabBarController.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODUserModel.h"
 #import "UIImageView+WebCache.h"

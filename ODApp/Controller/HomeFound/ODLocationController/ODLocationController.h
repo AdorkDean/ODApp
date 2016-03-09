@@ -11,7 +11,6 @@
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
 
-#import "AFNetworking.h"
 
 #import "ODUserInformation.h"
 
@@ -27,7 +26,7 @@
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
 
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+
 
 
 @end

@@ -10,7 +10,6 @@
 #import "ODNavigationBarView.h"
 #import "ODChangePassWordController.h"
 #import "ODRegisteredView.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 
 

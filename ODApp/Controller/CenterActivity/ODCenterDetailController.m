@@ -10,7 +10,6 @@
 #import "ODCenterDetailController.h"
 #import "ODCenderDetailView.h"
 #import "ODAPIManager.h"
-#import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 #import "ODChoseCenterController.h"
 #import "ODPrecontractViewController.h"

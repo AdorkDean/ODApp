@@ -7,7 +7,6 @@
 //
 
 #import "ODBaseViewController.h"
-#import "AFNetworking.h"
 #include "ODAPIManager.h"
 #import "UIButton+WebCache.h"
 #import "ODBazaarReleaseSkillTimeViewController.h"

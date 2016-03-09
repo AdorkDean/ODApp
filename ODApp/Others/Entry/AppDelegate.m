@@ -13,7 +13,6 @@
 #import "ODTabBarController.h"
 #import "MyPageControl.h"
 #import "WXApiObject.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODAPPInfoTool.h"
 
@@ -28,7 +27,6 @@
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) UIViewController *ViewController;
 @property(nonatomic, assign) NSInteger length;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
 
 @end

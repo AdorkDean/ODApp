@@ -8,7 +8,6 @@
 
 #import "ODBaseViewController.h"
 
-#import "AFNetworking.h"
 
 #import "ODAPIManager.h"
 #import "ODMyOrderDetailModel.h"
@@ -27,9 +26,7 @@
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, strong) NSMutableArray *devicesArray;
 
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
-@property(nonatomic, strong) AFHTTPRequestOperationManager *managers;
 
 @property(nonatomic, copy) NSString *order_id;
 

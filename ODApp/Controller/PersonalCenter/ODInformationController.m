@@ -378,7 +378,7 @@
    
 //            [weakSelf saveImge];
             
-            NSLog(@"---%@",str);
+            NSLog(@"---%@",responseObject);
 
         }
   

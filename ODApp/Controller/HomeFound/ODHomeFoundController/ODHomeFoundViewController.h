@@ -10,7 +10,6 @@
 
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
-#import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 
 #import "ODClassMethod.h"

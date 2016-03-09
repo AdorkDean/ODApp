@@ -103,8 +103,8 @@
 
 -(void)createRequest
 {
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    self.manager = [AFHTTPRequestOperationManager manager];
+//    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.resultArray = [[NSMutableArray alloc]init];
     self.userArray = [[NSMutableArray alloc]init];
 //    self.dataArray = [[NSMutableArray alloc]init];
