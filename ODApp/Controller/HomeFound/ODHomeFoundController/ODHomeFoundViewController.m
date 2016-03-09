@@ -124,6 +124,7 @@
                    }];
 }
 
+
 #pragma mark - 热门活动数据请求
 
 - (void)getScrollViewRequest {
