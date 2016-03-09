@@ -118,7 +118,6 @@ NSString * const ODUrlOtherCityList = @"other/city/list";
 NSString * const ODUrlOtherHome = @"other/home";
 NSString * const ODUrlOtherShareCallBack = @"other/share/callback";
 NSString * const ODUrlOtherLoveAdd = @"other/love/add";
-NSString * const ODUrlOtherLoveDelete = @"other/love/del";
 NSString * const ODUrlOtherLoveDel = @"other/love/del";
 NSString * const ODUrlOtherStoreDetail = @"other/store/detail";
 NSString * const ODUrlOtherStoreList = @"other/store/list";
