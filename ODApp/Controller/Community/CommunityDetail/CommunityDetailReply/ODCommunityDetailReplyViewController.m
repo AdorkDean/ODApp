@@ -72,7 +72,6 @@
 
             [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationMyTaskRefresh object:nil];
             [weakSelf.navigationController popViewControllerAnimated:YES];
-//            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"回复成功"];
             [ODProgressHUD showInfoWithStatus:@"回复成功"];
         }
 
