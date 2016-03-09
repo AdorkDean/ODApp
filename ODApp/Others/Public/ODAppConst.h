@@ -269,7 +269,7 @@ UIKIT_EXTERN NSString * const ODUrlUserWithdrawCash;
 UIKIT_EXTERN NSString * const ODUrlUserCashList;
 UIKIT_EXTERN NSString * const ODUrlSwapSellerOrderList;
 UIKIT_EXTERN NSString * const ODUrlUserLoveList;
->>>>>>> 2c52cced8c65c6862043dc93615c588c84c4a451
+
 UIKIT_EXTERN NSString * const kBalanceUrl;
 UIKIT_EXTERN NSString * const kBalanceListUrl;
 UIKIT_EXTERN NSString * const kMySellListUrl;

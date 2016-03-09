@@ -40,30 +40,21 @@
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.page = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"我的收藏";
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self requestData];
+        [weakSelf requestData];
     }];
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf loadMoreData];
     }];
-
-    self.page = 1;
-    [self requestData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
-
-- (void)loadMoreData {
-    self.page++;
-    NSDictionary *parameter = @{@"type" : @"4", @"page" : [NSString stringWithFormat:@"%ld", self.page], @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:ODUrlUserLoveList parameter:signParameter];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -71,18 +62,8 @@
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-}
-#pragma mark - 拼接参数
-
-- (void)joiningTogetherParmeters {
-    self.page = 1;
-    NSDictionary *parameter = @{@"type" : @"4", @"page" : [NSString stringWithFormat:@"%ld", self.page], @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    NSLog(@"%@", signParameter);
-    [self downLoadDataWithUrl:ODUrlUserLoveList parameter:signParameter];
 }
 
 #pragma mark - 数据请求

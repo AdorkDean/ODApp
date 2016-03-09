@@ -10,12 +10,9 @@
 #import "ODCommunityKeyWordSearchViewController.h"
 
 
-@interface ODCommunityKeyWordSearchViewController ()
-
 #define kCommunityCellId @"ODCommunityCollectionCell"
-@interface ODCommunityKeyWordSearchViewController () {
-    NSMutableDictionary *userInfoDic;
-}
+
+@interface ODCommunityKeyWordSearchViewController () 
 
 @end
 
