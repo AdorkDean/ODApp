@@ -126,14 +126,14 @@
     // 发送请求
     [ODHttpTool getWithURL:ODUrlSwapOrder parameters:params modelClass:[ODSaveOrderModel class] success:^(id model)
     {
-        ODSaveOrderModel *orderModel = [model result];
-        ODPayController *vc = [[ODPayController alloc] init];
-        vc.OrderTitle = weakSelf.informationModel.title;
-        // 获取 order_id
-        vc.orderId = [orderModel order_id];
-        vc.price = weakSelf.informationModel.price;
-        vc.swap_type = weakSelf.informationModel.swap_type;
-        [weakSelf.navigationController pushViewController:vc animated:YES];
+//        ODSaveOrderModel *orderModel = [model result];
+//        ODPayController *vc = [[ODPayController alloc] init];
+//        vc.OrderTitle = weakSelf.informationModel.title;
+//        // 获取 order_id
+//        vc.orderId = [orderModel order_id];
+//        vc.price = weakSelf.informationModel.price;
+//        vc.swap_type = weakSelf.informationModel.swap_type;
+//        [weakSelf.navigationController pushViewController:vc animated:YES];
     } failure:^(NSError *error) {
     }];
 }

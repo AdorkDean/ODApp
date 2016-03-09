@@ -414,7 +414,7 @@
             detailReply.parent_id = [NSString stringWithFormat:@"%@",model.id];
         }
         __weakSelf
-        detailReply.myBlock = ^(NSString *str,ODCommunityDetailModel *model){
+        detailReply.myBlock = ^(NSString *str){
             weakSelf.refresh = str;
         };
         [self.navigationController pushViewController:detailReply animated:YES];

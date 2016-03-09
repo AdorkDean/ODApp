@@ -132,9 +132,22 @@ NSString * const ODUrlOtherStoreList = @"other/store/list";
 
 
 
+NSString * const ODUrlBazaarRequestHelp = @"task/list";
+NSString * const ODUrlRequestHelpReward = @"other/config/info";
+NSString * const ODUrlBazaarReleaseTask = @"task/task/add";
+NSString * const ODUrlBazaarExchangeSkill = @"swap/list";
+NSString * const ODUrlBazaarSkillDetail = @"swap/info";
+NSString * const ODUrlBazaarReleaseSkill = @"swap/create";
+NSString * const ODUrlBazaarEditSkill = @"swap/edit";
+NSString * const ODUrlSkillCollection = @"user/love/list";
+NSString * const ODUrlSkillDetailLove = @"other/love/add";
+NSString * const ODUrlSkillDetailNotLove = @"other/love/del";
 
+NSString * const ODUrlCommunityBbsList = @"bbs/list";
+NSString * const ODUrlCommunityBbsReply = @"bbs/reply";
+NSString * const ODUrlCommunityBbsSearch = @"bbs/search";
+NSString * const ODUrlCommunityReleaseBbs = @"bbs/create";
 
-NSString * const ODUrlBbsList = @"bbs/list";
 
 
 NSString * const ODUrlPersonalReleaseTask = @"swap/list";
@@ -153,29 +166,29 @@ NSString * const ODUrlPayBack = @"pay/weixin/callback/sync";
 
 //NSString * const ODPersonReleaseTaskDeleteUrl = @"http://woquapi.test.odong.com/1.0/swap/del";
 
-NSString * const ODUrlBazaarRequestHelp = @"task/list";
-NSString * const kBazaarLabelSearchUrl = @"http://woquapi.test.odong.com/1.0/task/tag/search";
+//NSString * const kBazaarLabelSearchUrl = @"http://woquapi.test.odong.com/1.0/task/tag/search";
 
 NSString * const kBazaarUnlimitTaskUrl = @"http://woquapi.test.odong.com/1.0/task/list";
 
-NSString * const kBazaarReleaseTaskUrl = @"http://woquapi.test.odong.com/1.0/task/task/add";
+//NSString * const kBazaarReleaseTaskUrl = @"http://woquapi.test.odong.com/1.0/task/task/add";
 NSString * const kBazaarTaskDetailUrl = @"http://woquapi.test.odong.com/1.0/task/detail";
 NSString * const kBazaarTaskDelegateUrl = @"http://woquapi.test.odong.com/1.0/task/accept";
 NSString * const kBazaarAcceptTaskUrl = @"http://woquapi.test.odong.com/1.0/task/apply";
 NSString * const kBazaarReleaseRewardUrl = @"http://woquapi.test.odong.com/1.0/other/config/info";
 NSString * const kBazaarTaskReceiveCompleteUrl = @"http://woquapi.test.odong.com/1.0/task/delivery";
 NSString * const kBazaarTaskInitiateCompleteUrl = @"http://woquapi.test.odong.com/1.0/task/confirm";
-NSString * const kBazaarExchangeSkillUrl = @"http://woquapi.test.odong.com/1.0/swap/list";
+//NSString * const kBazaarExchangeSkillUrl = @"http://woquapi.test.odong.com/1.0/swap/list";
+
 NSString * const kBazaarExchangeSkillDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/info";
 NSString * const kBazaarReleaseSkillTimeUrl = @"http://woquapi.test.odong.com/1.0/swap/schedule";
-NSString * const kBazaarExchangeSkillDetailLoveUrl = @"http://woquapi.test.odong.com/1.0/other/love/add";
-NSString * const kBazaarExchangeSkillDetailNotLoveUrl = @"http://woquapi.test.odong.com/1.0/other/love/del";
+//NSString * const kBazaarExchangeSkillDetailLoveUrl = @"http://woquapi.test.odong.com/1.0/other/love/add";
+//NSString * const kBazaarExchangeSkillDetailNotLoveUrl = @"http://woquapi.test.odong.com/1.0/other/love/del";
 NSString * const kBazaarReleaseSkillUrl = @"http://woquapi.test.odong.com/1.0/swap/create";
 NSString * const kBazaarEditSkillUrl = @"http://woquapi.test.odong.com/1.0/swap/edit";
 
-NSString * const kCommunityReleaseBbsUrl = @"http://woquapi.test.odong.com/1.0/bbs/create";
+//NSString * const kCommunityReleaseBbsUrl = @"http://woquapi.test.odong.com/1.0/bbs/create";
 NSString * const kCommunityBbsDetailUrl = @"http://woquapi.test.odong.com/1.0/bbs/view";
-NSString * const kCommunityBbsSearchUrl = @"http://woquapi.test.odong.com/1.0/bbs/search";
+//NSString * const kCommunityBbsSearchUrl = @"http://woquapi.test.odong.com/1.0/bbs/search";
 NSString * const kCommunityBbsReplyListUrl = @"http://woquapi.test.odong.com/1.0/bbs/reply/list";
 NSString * const kCommunityBbsReplyUrl = @"http://woquapi.test.odong.com/1.0/bbs/reply";
 NSString * const kCommunityBbsLatestUrl = @"http://woquapi.test.odong.com/1.0/bbs/list";
@@ -213,7 +226,8 @@ NSString * const kDelateTaskUrl = @"http://woquapi.test.odong.com/1.0/bbs/del";
 NSString * const kGetCommentUrl = @"http://woquapi.test.odong.com/1.0/user/comment/list";
 NSString * const kGetApplyListUrl = @"http://woquapi.test.odong.com/1.0/store/apply/users";
 NSString * const kGiveOpinionUrl = @"http://woquapi.test.odong.com/1.0/other/feedback";
-NSString * const kCollectionUrl = @"http://woquapi.test.odong.com/1.0/user/love/list";
+//NSString * const kCollectionUrl = @"http://woquapi.test.odong.com/1.0/user/love/list";
+
 
 NSString * const kGetPayInformationUrl = @"http://woquapi.test.odong.com/1.0/pay/weixin/trade/number";
 NSString * const kBalanceUrl = @"http://woquapi.test.odong.com/1.0/user/withdraw/cash";
@@ -235,29 +249,30 @@ NSString * const kEvalueUrl = @"http://woquapi.test.odong.com/1.0/swap/order/rea
 NSString * const ODPersonReleaseTaskDeleteUrl = @"http://woquapi.odong.com/1.0/swap/del";
 
 
-NSString * const ODUrlBazaarRequestHelp = @"task/list";
-NSString * const kBazaarLabelSearchUrl = @"http://woquapi.odong.com/1.0/task/tag/search";
+//NSString * const ODUrlBazaarRequestHelp = @"task/list";
+//NSString * const kBazaarLabelSearchUrl = @"http://woquapi.odong.com/1.0/task/tag/search";
 
 NSString * const kBazaarUnlimitTaskUrl = @"http://woquapi.odong.com/1.0/task/list";
 
-NSString * const kBazaarReleaseTaskUrl = @"http://woquapi.odong.com/1.0/task/task/add";
+//NSString * const kBazaarReleaseTaskUrl = @"http://woquapi.odong.com/1.0/task/task/add";
 NSString * const kBazaarTaskDetailUrl = @"http://woquapi.odong.com/1.0/task/detail";
 NSString * const kBazaarTaskDelegateUrl = @"http://woquapi.odong.com/1.0/task/accept";
 NSString * const kBazaarAcceptTaskUrl = @"http://woquapi.odong.com/1.0/task/apply";
 NSString * const kBazaarReleaseRewardUrl = @"http://woquapi.odong.com/1.0/other/config/info";
 NSString * const kBazaarTaskReceiveCompleteUrl = @"http://woquapi.odong.com/1.0/task/delivery";
 NSString * const kBazaarTaskInitiateCompleteUrl = @"http://woquapi.odong.com/1.0/task/confirm";
-NSString * const kBazaarExchangeSkillUrl = @"http://woquapi.odong.com/1.0/swap/list";
+//NSString * const kBazaarExchangeSkillUrl = @"http://woquapi.odong.com/1.0/swap/list";
+
 NSString * const kBazaarExchangeSkillDetailUrl = @"http://woquapi.odong.com/1.0/swap/info";
 NSString * const kBazaarReleaseSkillTimeUrl = @"http://woquapi.odong.com/1.0/swap/schedule";
-NSString * const kBazaarExchangeSkillDetailLoveUrl = @"http://woquapi.odong.com/1.0/other/love/add";
-NSString * const kBazaarExchangeSkillDetailNotLoveUrl = @"http://woquapi.odong.com/1.0/other/love/del";
-NSString * const kBazaarReleaseSkillUrl = @"http://woquapi.odong.com/1.0/swap/create";
+//NSString * const kBazaarExchangeSkillDetailLoveUrl = @"http://woquapi.odong.com/1.0/other/love/add";
+//NSString * const kBazaarExchangeSkillDetailNotLoveUrl = @"http://woquapi.odong.com/1.0/other/love/del";
+//NSString * const kBazaarReleaseSkillUrl = @"http://woquapi.odong.com/1.0/swap/create";
 NSString * const kBazaarEditSkillUrl = @"http://woquapi.odong.com/1.0/swap/edit";
 
-NSString * const kCommunityReleaseBbsUrl = @"http://woquapi.odong.com/1.0/bbs/create";
+//NSString * const kCommunityReleaseBbsUrl = @"http://woquapi.odong.com/1.0/bbs/create";
 NSString * const kCommunityBbsDetailUrl = @"http://woquapi.odong.com/1.0/bbs/view";
-NSString * const kCommunityBbsSearchUrl = @"http://woquapi.odong.com/1.0/bbs/search";
+//NSString * const kCommunityBbsSearchUrl = @"http://woquapi.odong.com/1.0/bbs/search";
 NSString * const kCommunityBbsReplyListUrl = @"http://woquapi.odong.com/1.0/bbs/reply/list";
 NSString * const kCommunityBbsReplyUrl = @"http://woquapi.odong.com/1.0/bbs/reply";
 NSString * const kCommunityBbsLatestUrl = @"http://woquapi.odong.com/1.0/bbs/list";
@@ -294,7 +309,7 @@ NSString * const kDelateTaskUrl = @"http://woquapi.odong.com/1.0/bbs/del";
 NSString * const kGetCommentUrl = @"http://woquapi.odong.com/1.0/user/comment/list";
 NSString * const kGetApplyListUrl = @"http://woquapi.odong.com/1.0/store/apply/users";
 NSString * const kGiveOpinionUrl = @"http://woquapi.odong.com/1.0/other/feedback";
-NSString * const kCollectionUrl = @"http://woquapi.odong.com/1.0/user/love/list";
+//NSString * const kCollectionUrl = @"http://woquapi.odong.com/1.0/user/love/list";
 
 NSString * const kGetPayInformationUrl = @"http://woquapi.odong.com/1.0/pay/weixin/trade/number";
 NSString * const kBalanceUrl = @"http://woquapi.odong.com/1.0/user/withdraw/cash";

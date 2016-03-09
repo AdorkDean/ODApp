@@ -122,7 +122,6 @@
 		9DEDCF4A1C64B3ED003015C6 /* ODBazaarRequestHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCF3E1C64B3ED003015C6 /* ODBazaarRequestHelpViewController.m */; };
 		9DEDCF4B1C64B3ED003015C6 /* ODBazaarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCF401C64B3ED003015C6 /* ODBazaarViewController.m */; };
 		9DEDCF561C64B3F4003015C6 /* ODBazaarDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCF4F1C64B3F4003015C6 /* ODBazaarDetailModel.m */; };
-		9DEDCF571C64B3F4003015C6 /* ODBazaarExchangeSkillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCF511C64B3F4003015C6 /* ODBazaarExchangeSkillModel.m */; };
 		9DEDCF581C64B3F4003015C6 /* ODBazaarModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCF531C64B3F4003015C6 /* ODBazaarModel.m */; };
 		9DEDCF591C64B3F4003015C6 /* ODBazaarReleaseSkillTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCF551C64B3F4003015C6 /* ODBazaarReleaseSkillTimeModel.m */; };
 		9DEDCF6B1C64B3FC003015C6 /* ODBazaarDetailCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DEDCF5D1C64B3FC003015C6 /* ODBazaarDetailCollectionCell.m */; };
@@ -140,6 +139,8 @@
 		9DF2E98C1C74654A00F77976 /* ODSecondOrderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF2E98B1C74654A00F77976 /* ODSecondOrderDetailController.m */; };
 		9DF2E98F1C74666800F77976 /* ODSecondOrderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9DF2E98E1C74666800F77976 /* ODSecondOrderDetailView.m */; };
 		9DF2E9911C74667800F77976 /* ODSecondOrderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DF2E9901C74667800F77976 /* ODSecondOrderDetailView.xib */; };
+		B837D43E1C8FBF7E00A92CBC /* ODBazaarExchangeSkillDetailLoveModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B837D43D1C8FBF7E00A92CBC /* ODBazaarExchangeSkillDetailLoveModel.m */; };
+		B837D4411C8FC51C00A92CBC /* ODBazaarRequestHelpRewardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B837D4401C8FC51C00A92CBC /* ODBazaarRequestHelpRewardModel.m */; };
 		B8382A341C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8382A321C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.m */; };
 		B8382A351C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8382A331C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.xib */; };
 		B8382A391C788011002D83E7 /* ODBazaarDetailEvaluationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8382A381C788011002D83E7 /* ODBazaarDetailEvaluationViewController.m */; };
@@ -147,6 +148,9 @@
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
 		B84F2E741C60A1AD0057DF9E /* ODCommunityShowPicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84F2E731C60A1AD0057DF9E /* ODCommunityShowPicViewController.m */; };
+		B8609E9B1C8E6AEA00161911 /* ODBazaarRequestHelpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8609E9A1C8E6AEA00161911 /* ODBazaarRequestHelpModel.m */; };
+		B8609E9E1C8E766C00161911 /* ODBazaarExchangeSkillModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8609E9D1C8E766C00161911 /* ODBazaarExchangeSkillModel.m */; };
+		B8609EA11C8EBF7700161911 /* ODCommunityBbsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8609EA01C8EBF7700161911 /* ODCommunityBbsModel.m */; };
 		C63FECEA1C7AA540000A8396 /* ODDrawbackBuyerOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = C63FECE81C7AA540000A8396 /* ODDrawbackBuyerOneController.m */; };
 		C63FECF11C7AA5A6000A8396 /* ODFindFavorableController.m in Sources */ = {isa = PBXBuildFile; fileRef = C63FECED1C7AA5A6000A8396 /* ODFindFavorableController.m */; };
 		C63FECF21C7AA5A6000A8396 /* ODFindJobController.m in Sources */ = {isa = PBXBuildFile; fileRef = C63FECF01C7AA5A6000A8396 /* ODFindJobController.m */; };
@@ -543,8 +547,6 @@
 		9DEDCF401C64B3ED003015C6 /* ODBazaarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarViewController.m; sourceTree = "<group>"; };
 		9DEDCF4E1C64B3F4003015C6 /* ODBazaarDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarDetailModel.h; sourceTree = "<group>"; };
 		9DEDCF4F1C64B3F4003015C6 /* ODBazaarDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarDetailModel.m; sourceTree = "<group>"; };
-		9DEDCF501C64B3F4003015C6 /* ODBazaarExchangeSkillModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarExchangeSkillModel.h; sourceTree = "<group>"; };
-		9DEDCF511C64B3F4003015C6 /* ODBazaarExchangeSkillModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarExchangeSkillModel.m; sourceTree = "<group>"; };
 		9DEDCF521C64B3F4003015C6 /* ODBazaarModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarModel.h; sourceTree = "<group>"; };
 		9DEDCF531C64B3F4003015C6 /* ODBazaarModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarModel.m; sourceTree = "<group>"; };
 		9DEDCF541C64B3F4003015C6 /* ODBazaarReleaseSkillTimeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseSkillTimeModel.h; sourceTree = "<group>"; };
@@ -573,6 +575,10 @@
 		9DF2E98D1C74666800F77976 /* ODSecondOrderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSecondOrderDetailView.h; sourceTree = "<group>"; };
 		9DF2E98E1C74666800F77976 /* ODSecondOrderDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSecondOrderDetailView.m; sourceTree = "<group>"; };
 		9DF2E9901C74667800F77976 /* ODSecondOrderDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODSecondOrderDetailView.xib; sourceTree = "<group>"; };
+		B837D43C1C8FBF7E00A92CBC /* ODBazaarExchangeSkillDetailLoveModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarExchangeSkillDetailLoveModel.h; sourceTree = "<group>"; };
+		B837D43D1C8FBF7E00A92CBC /* ODBazaarExchangeSkillDetailLoveModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarExchangeSkillDetailLoveModel.m; sourceTree = "<group>"; };
+		B837D43F1C8FC51C00A92CBC /* ODBazaarRequestHelpRewardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarRequestHelpRewardModel.h; sourceTree = "<group>"; };
+		B837D4401C8FC51C00A92CBC /* ODBazaarRequestHelpRewardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarRequestHelpRewardModel.m; sourceTree = "<group>"; };
 		B8382A311C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarPicCollectionViewCell.h; sourceTree = "<group>"; };
 		B8382A321C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarPicCollectionViewCell.m; sourceTree = "<group>"; };
 		B8382A331C7870CA002D83E7 /* ODBazaarPicCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarPicCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -589,6 +595,12 @@
 		B83C6B861C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B84F2E721C60A1AD0057DF9E /* ODCommunityShowPicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityShowPicViewController.h; sourceTree = "<group>"; };
 		B84F2E731C60A1AD0057DF9E /* ODCommunityShowPicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityShowPicViewController.m; sourceTree = "<group>"; };
+		B8609E991C8E6AEA00161911 /* ODBazaarRequestHelpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarRequestHelpModel.h; sourceTree = "<group>"; };
+		B8609E9A1C8E6AEA00161911 /* ODBazaarRequestHelpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarRequestHelpModel.m; sourceTree = "<group>"; };
+		B8609E9C1C8E766C00161911 /* ODBazaarExchangeSkillModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarExchangeSkillModel.h; sourceTree = "<group>"; };
+		B8609E9D1C8E766C00161911 /* ODBazaarExchangeSkillModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarExchangeSkillModel.m; sourceTree = "<group>"; };
+		B8609E9F1C8EBF7700161911 /* ODCommunityBbsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityBbsModel.h; sourceTree = "<group>"; };
+		B8609EA01C8EBF7700161911 /* ODCommunityBbsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityBbsModel.m; sourceTree = "<group>"; };
 		C5EAEBD7E6B20864218413FA /* Pods-ODApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.debug.xcconfig"; sourceTree = "<group>"; };
 		C63FECE71C7AA540000A8396 /* ODDrawbackBuyerOneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDrawbackBuyerOneController.h; sourceTree = "<group>"; };
 		C63FECE81C7AA540000A8396 /* ODDrawbackBuyerOneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDrawbackBuyerOneController.m; sourceTree = "<group>"; };
@@ -1143,12 +1155,18 @@
 			isa = PBXGroup;
 			children = (
 				9DEDCF4D1C64B3F4003015C6 /* BazaarDetailModel */,
-				9DEDCF501C64B3F4003015C6 /* ODBazaarExchangeSkillModel.h */,
-				9DEDCF511C64B3F4003015C6 /* ODBazaarExchangeSkillModel.m */,
 				9DEDCF521C64B3F4003015C6 /* ODBazaarModel.h */,
 				9DEDCF531C64B3F4003015C6 /* ODBazaarModel.m */,
 				9DEDCF541C64B3F4003015C6 /* ODBazaarReleaseSkillTimeModel.h */,
 				9DEDCF551C64B3F4003015C6 /* ODBazaarReleaseSkillTimeModel.m */,
+				B8609E991C8E6AEA00161911 /* ODBazaarRequestHelpModel.h */,
+				B8609E9A1C8E6AEA00161911 /* ODBazaarRequestHelpModel.m */,
+				B8609E9C1C8E766C00161911 /* ODBazaarExchangeSkillModel.h */,
+				B8609E9D1C8E766C00161911 /* ODBazaarExchangeSkillModel.m */,
+				B837D43C1C8FBF7E00A92CBC /* ODBazaarExchangeSkillDetailLoveModel.h */,
+				B837D43D1C8FBF7E00A92CBC /* ODBazaarExchangeSkillDetailLoveModel.m */,
+				B837D43F1C8FC51C00A92CBC /* ODBazaarRequestHelpRewardModel.h */,
+				B837D4401C8FC51C00A92CBC /* ODBazaarRequestHelpRewardModel.m */,
 			);
 			path = BazaarModel;
 			sourceTree = "<group>";
@@ -2098,6 +2116,8 @@
 				D4D071461C59B9FA008527C9 /* CommunityDetailModel */,
 				D4D071491C59B9FA008527C9 /* ODCommunityModel.h */,
 				D4D0714A1C59B9FA008527C9 /* ODCommunityModel.m */,
+				B8609E9F1C8EBF7700161911 /* ODCommunityBbsModel.h */,
+				B8609EA01C8EBF7700161911 /* ODCommunityBbsModel.m */,
 			);
 			path = CommunityModel;
 			sourceTree = "<group>";
@@ -2808,6 +2828,7 @@
 				23ACD0021C87F76200FB9D8E /* ODActiveDeviceBtn.m in Sources */,
 				9D46D1481C77459200F4C0CD /* ODPayModel.m in Sources */,
 				D4D0738E1C59B9FA008527C9 /* ODOthersInformationController.m in Sources */,
+				B8609E9B1C8E6AEA00161911 /* ODBazaarRequestHelpModel.m in Sources */,
 				2314F5931C8992EB00A770DC /* ODStoreCreateOrderModel.m in Sources */,
 				2314F5841C8988D000A770DC /* UIImage+ODExtension.m in Sources */,
 				9DE951E21C783C8600D7339D /* ODWithdrawalView.m in Sources */,
@@ -2818,13 +2839,16 @@
 				9D1E2C7E1C786896000827B5 /* ODAPIManager.m in Sources */,
 				C64D45FE1C5F8C6F003BFFA0 /* TADotView.m in Sources */,
 				C64D45EC1C5F8C6F003BFFA0 /* IQUIViewController+Additions.m in Sources */,
+				B8609EA11C8EBF7700161911 /* ODCommunityBbsModel.m in Sources */,
 				9DEDCF421C64B3ED003015C6 /* ODBazaarDetailViewController.m in Sources */,
+				B837D43E1C8FBF7E00A92CBC /* ODBazaarExchangeSkillDetailLoveModel.m in Sources */,
 				23ACD0071C87F76200FB9D8E /* ODPlacePreFooterView.m in Sources */,
 				D4D075271C59B9FA008527C9 /* ODMyOrderRecordCell.m in Sources */,
 				9D8A989D1C7AF204005BC458 /* ODMySellDetailController.m in Sources */,
 				9D1F80FE1C76EAE000FC9C2C /* ODOperationFirstCell.m in Sources */,
 				2314F57F1C8988D000A770DC /* NSString+ODExtension.m in Sources */,
 				405809461C8D409700E32ED2 /* ODOrderAddressModel.m in Sources */,
+				B837D4411C8FC51C00A92CBC /* ODBazaarRequestHelpRewardModel.m in Sources */,
 				D4D073801C59B9FA008527C9 /* ODCommumityViewController.m in Sources */,
 				D4D073761C59B9FA008527C9 /* ODActivityDetailController.m in Sources */,
 				9DE951DA1C78371100D7339D /* ODBalanceView.m in Sources */,
@@ -2851,6 +2875,7 @@
 				B8382A391C788011002D83E7 /* ODBazaarDetailEvaluationViewController.m in Sources */,
 				D4D075041C59B9FA008527C9 /* CenterDetailCell.m in Sources */,
 				9DEDCF6F1C64B3FC003015C6 /* ODBazaarCollectionCell.m in Sources */,
+				B8609E9E1C8E766C00161911 /* ODBazaarExchangeSkillModel.m in Sources */,
 				9DF2E98F1C74666800F77976 /* ODSecondOrderDetailView.m in Sources */,
 				2314F5661C89886500A770DC /* ODClassMethod.m in Sources */,
 				C63FECEA1C7AA540000A8396 /* ODDrawbackBuyerOneController.m in Sources */,
@@ -3004,7 +3029,6 @@
 				9DEDCF471C64B3ED003015C6 /* ODBazaarExchangeSkillDetailViewController.m in Sources */,
 				C64D46151C5F8C6F003BFFA0 /* ODHttpTool.m in Sources */,
 				C64D45F21C5F8C6F003BFFA0 /* IQBarButtonItem.m in Sources */,
-				9DEDCF571C64B3F4003015C6 /* ODBazaarExchangeSkillModel.m in Sources */,
 				D4D073A31C59B9FA008527C9 /* ODMyOrderDetailModel.m in Sources */,
 				C64D45ED1C5F8C6F003BFFA0 /* IQUIWindow+Hierarchy.m in Sources */,
 				D4D0737B1C59B9FA008527C9 /* ODChoseCenterController.m in Sources */,

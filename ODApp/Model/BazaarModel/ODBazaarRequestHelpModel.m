@@ -8,9 +8,7 @@
 
 #import "ODBazaarRequestHelpModel.h"
 
-@implementation ODBazaarRequestHelpTasksModel
-
-@end
+ODRequestModelImplementation(ODBazaarRequestHelpTasksModel)
 
 @implementation ODBazaarRequestHelpModel
 

@@ -126,7 +126,7 @@ UIKIT_EXTERN NSString * const ODUrlStoreDetail;
 UIKIT_EXTERN NSString * const ODUrlSwapDel;
 
 
-UIKIT_EXTERN NSString * const ODUrlBbsList;
+UIKIT_EXTERN NSString * const ODUrlCommunityBbsList;
 
 
 
@@ -135,28 +135,42 @@ UIKIT_EXTERN NSString * const ODUrlOtherHome;
 
 
 UIKIT_EXTERN NSString * const ODUrlBazaarRequestHelp;
-UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
+UIKIT_EXTERN NSString * const ODUrlBazaarReleaseTask;
+
+//UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDetailUrl;
 UIKIT_EXTERN NSString * const kBazaarTaskDelegateUrl;
 UIKIT_EXTERN NSString * const kBazaarAcceptTaskUrl;
-UIKIT_EXTERN NSString * const kBazaarReleaseRewardUrl;
-UIKIT_EXTERN NSString * const kBazaarExchangeSkillUrl;
+//UIKIT_EXTERN NSString * const kBazaarReleaseRewardUrl;
+UIKIT_EXTERN NSString * const ODUrlRequestHelpReward;
+
+//UIKIT_EXTERN NSString * const kBazaarExchangeSkillUrl;
+UIKIT_EXTERN NSString * const ODUrlBazaarExchangeSkill;
+UIKIT_EXTERN NSString * const ODUrlBazaarSkillDetail;
 UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseSkillTimeUrl;
-UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailLoveUrl;
-UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailNotLoveUrl;
-UIKIT_EXTERN NSString * const kBazaarReleaseSkillUrl;
-UIKIT_EXTERN NSString * const kBazaarEditSkillUrl;
+//UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailLoveUrl;
+//UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailNotLoveUrl;
+
+UIKIT_EXTERN NSString * const ODUrlSkillDetailLove;
+UIKIT_EXTERN NSString * const ODUrlSkillDetailNotLove;
+
+//UIKIT_EXTERN NSString * const kBazaarReleaseSkillUrl;
+UIKIT_EXTERN NSString * const ODUrlBazaarReleaseSkill;
+
+//UIKIT_EXTERN NSString * const kBazaarEditSkillUrl;
+UIKIT_EXTERN NSString * const ODUrlBazaarEditSkill;
 /** 接收人确认完成 */
 UIKIT_EXTERN NSString * const kBazaarTaskReceiveCompleteUrl;
 /** 发起人确认完成 */
 UIKIT_EXTERN NSString * const kBazaarTaskInitiateCompleteUrl;
 
-UIKIT_EXTERN NSString * const kCommunityReleaseBbsUrl;
+UIKIT_EXTERN NSString * const ODUrlCommunityReleaseBbs;
 UIKIT_EXTERN NSString * const kCommunityBbsDetailUrl;
-UIKIT_EXTERN NSString * const kCommunityBbsSearchUrl;
+UIKIT_EXTERN NSString * const ODUrlCommunityBbsSearch;
 UIKIT_EXTERN NSString * const kCommunityBbsReplyListUrl;
 UIKIT_EXTERN NSString * const kCommunityBbsReplyUrl;
+UIKIT_EXTERN NSString * const ODUrlCommunityBbsReply;
 UIKIT_EXTERN NSString * const kCommunityBbsLatestUrl;
 
 UIKIT_EXTERN NSString * const kPushImageUrl;
@@ -208,7 +222,7 @@ UIKIT_EXTERN NSString * const ODRefuseDrawbackUrl;
 UIKIT_EXTERN NSString * const ODReceiveDrawbackUrl;
 
 
-UIKIT_EXTERN NSString * const kCollectionUrl;
+UIKIT_EXTERN NSString * const ODUrlSkillCollection;
 UIKIT_EXTERN NSString * const kBalanceUrl;
 UIKIT_EXTERN NSString * const kBalanceListUrl;
 UIKIT_EXTERN NSString * const kMySellListUrl;

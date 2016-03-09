@@ -11,78 +11,50 @@
 
 @interface ODCommunityDetailReplyViewController ()
 
-
 @end
 
 @implementation ODCommunityDetailReplyViewController
 
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.navigationItem.title = @"回复";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
-    [self createRequest];
     [self createTextView];
 }
 
-
-- (void)confirmButtonClick {
-    if (self.textView.text.length > 0) {
-        [self joiningTogetherParmeters];
-    } else {
-//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入回复内容"];
-        [ODProgressHUD showInfoWithStatus:@"请输入回复内容"];
-    }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
-#pragma mark - 初始化manager
-
-- (void)createRequest {
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-
-#pragma mark - 拼接参数
-
-- (void)joiningTogetherParmeters {
-    NSDictionary *parameter = @{@"bbs_id" : self.bbs_id, @"content" : self.textView.text, @"parent_id" : self.parent_id, @"open_id" : [ODUserInformation sharedODUserInformation].openID};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self pushDataWithUrl:kCommunityBbsReplyUrl parameter:signParameter];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - 提交数据
-
-- (void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter {
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        if ([dict[@"status"] isEqualToString:@"success"]) {
-            NSDictionary *result = dict[@"result"];
-            ODCommunityDetailModel *model = [[ODCommunityDetailModel alloc] init];
-            [model setValuesForKeysWithDictionary:result];
-
-            if (weakSelf.myBlock) {
-                weakSelf.myBlock([NSString stringWithFormat:@"refresh"], model);
-            }
-
-
-            NSLog(@"%@", dict);
-            [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReplySuccess object:nil];
-
-            [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationMyTaskRefresh object:nil];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-//            [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"回复成功"];
-            [ODProgressHUD showInfoWithStatus:@"回复成功"];
+-(void)pushData
+{
+     NSDictionary *parameter = @{@"bbs_id" : self.bbs_id, @"content" : self.textView.text, @"parent_id" : self.parent_id, @"open_id" : [ODUserInformation sharedODUserInformation].openID};
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlCommunityBbsReply parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        if (weakSelf.myBlock) {
+            weakSelf.myBlock(@"refresh");
         }
-
-    }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-        NSLog(@"error");
+        [ODProgressHUD showInfoWithStatus:@"回复成功"];
+        [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReplySuccess object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationMyTaskRefresh object:nil];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    } failure:^(NSError *error) {
     }];
 }
 
 #pragma mark - 创建textView
-
 - (void)createTextView {
     self.textView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4 + ODTopY, kScreenSize.width - 8, 140) delegate:self tag:0 font:13 color:@"#ffffff" alpha:1 maskToBounds:YES];
     self.textView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
@@ -95,7 +67,6 @@
 }
 
 #pragma mark - UITextViewDelegate
-
 NSString *replyTitleText = @"";
 int maxLength = 250;
 
@@ -103,7 +74,6 @@ int maxLength = 250;
     if (maxLength < 250) {
         maxLength = 250;
     }
-    
     if (textView.text.length > maxLength) {
         NSString *tmp = [textView.text substringToIndex:maxLength];
         NSData *utf8Data = [tmp dataUsingEncoding:NSUTF8StringEncoding];
@@ -122,7 +92,6 @@ int maxLength = 250;
     } else {
         self.label.text = @"";
     }
-
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView {
@@ -137,21 +106,13 @@ int maxLength = 250;
     [self.textView resignFirstResponder];
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - action
+- (void)confirmButtonClick {
+    if (self.textView.text.length > 0) {
+        [self pushData];
+    } else {
+        [ODProgressHUD showInfoWithStatus:@"请输入回复内容"];
+    }
 }
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-}
-
 
 @end

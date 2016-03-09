@@ -335,41 +335,59 @@
     }
 
     NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self pushDataWithUrl:kBazaarReleaseTaskUrl parameter:signParameter];
+    [self pushDataWithUrl:ODUrlBazaarReleaseTask parameter:parameter];
 }
 
 #pragma mark - 提交数据
-
 - (void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter {
 
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
-
-        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-        NSString *status = dict[@"status"];
-        if ([status isEqualToString:@"success"]) {
-            if (weakSelf.myBlock) {
-                weakSelf.myBlock([NSString stringWithFormat:@"release"]);
-            }
-
-            weakSelf.isJob = YES;
-            if (weakSelf.isBazaar == NO) {
-                ODTabBarController *tabbar = (ODTabBarController *) self.navigationController.tabBarController;
-                tabbar.selectedIndex = 2;
-            }
-            else {
-                [ODProgressHUD showInfoWithStatus:@"任务发布成功"];
-                [weakSelf.navigationController popViewControllerAnimated:YES];
-            }
-
-            [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseTask object:nil];
-
-        } else {
-            NSString *message = dict[@"message"];
-            [ODProgressHUD showInfoWithStatus:message];
+//    __weak typeof(self) weakSelf = self;
+//    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
+//
+//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//        NSString *status = dict[@"status"];
+//        if ([status isEqualToString:@"success"]) {
+//            if (weakSelf.myBlock) {
+//                weakSelf.myBlock([NSString stringWithFormat:@"release"]);
+//            }
+//
+//            weakSelf.isJob = YES;
+//            if (weakSelf.isBazaar == NO) {
+//                ODTabBarController *tabbar = (ODTabBarController *) self.navigationController.tabBarController;
+//                tabbar.selectedIndex = 2;
+//            }
+//            else {
+//                [ODProgressHUD showInfoWithStatus:@"任务发布成功"];
+//                [weakSelf.navigationController popViewControllerAnimated:YES];
+//            }
+//
+//            [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseTask object:nil];
+//
+//        } else {
+//            NSString *message = dict[@"message"];
+//            [ODProgressHUD showInfoWithStatus:message];
+//        }
+//    }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
+//        NSLogError
+//    }];
+    
+    __weakSelf
+    [ODHttpTool getWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        if (weakSelf.myBlock) {
+            weakSelf.myBlock([NSString stringWithFormat:@"release"]);
         }
-    }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-        NSLogError
+        weakSelf.isJob = YES;
+        if (weakSelf.isBazaar == NO) {
+            ODTabBarController *tabbar = (ODTabBarController *) self.navigationController.tabBarController;
+            tabbar.selectedIndex = 2;
+        }
+        else {
+            [ODProgressHUD showInfoWithStatus:@"任务发布成功"];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }
+        [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseTask object:nil];
+    } failure:^(NSError *error) {
+        
     }];
 
 }

@@ -89,11 +89,6 @@
 }
 
 #pragma mark - 请求数据
-- (void)loadMoreData {
-    self.count++;
-    [self requestData];
-}
-
 -(void)requestData
 {
     __weakSelf;
@@ -116,6 +111,11 @@
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
     }];
+}
+
+- (void)loadMoreData {
+    self.count++;
+    [self requestData];
 }
 
 #pragma mark - UICollectionViewDataSource
