@@ -100,7 +100,7 @@
 
 - (void)getData {
 
-    NSDictionary *parameters = @{@"swap_id" : [NSString stringWithFormat:@"%@", self.informationModel.swap_id]};
+    NSDictionary *parameters = @{@"swap_id" : [NSString stringWithFormat:@"%d", self.informationModel.swap_id]};
     __weakSelf
     [ODHttpTool getWithURL:ODUrlSwapServiceTime parameters:parameters modelClass:[ODOrderDataModel class] success:^(id model) {
         

@@ -154,6 +154,11 @@ UIKIT_EXTERN NSString * const ODUrlSwapOrderCancel;
 UIKIT_EXTERN NSString * const ODUrlSwapRejectRefund;
 UIKIT_EXTERN NSString * const ODUrlSwapConfirmRefund;
 UIKIT_EXTERN NSString * const ODUrlSwapServiceTime;
+UIKIT_EXTERN NSString * const ODUrlSwapInfo;
+
+
+
+
 
 UIKIT_EXTERN NSString * const ODUrlBbsList;
 //UIKIT_EXTERN NSString * const ODUrlBbsDel;
@@ -182,7 +187,7 @@ UIKIT_EXTERN NSString * const ODUrlRequestHelpReward;
 //UIKIT_EXTERN NSString * const kBazaarExchangeSkillUrl;
 UIKIT_EXTERN NSString * const ODUrlBazaarExchangeSkill;
 UIKIT_EXTERN NSString * const ODUrlBazaarSkillDetail;
-UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailUrl;
+//UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailUrl;
 UIKIT_EXTERN NSString * const kBazaarReleaseSkillTimeUrl;
 //UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailLoveUrl;
 //UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailNotLoveUrl;

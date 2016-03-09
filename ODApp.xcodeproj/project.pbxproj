@@ -315,6 +315,7 @@
 		D4F76DBF1C61AEAD00D59F02 /* TimeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DBA1C61AEAD00D59F02 /* TimeButton.m */; };
 		D4F76DD31C61B04700D59F02 /* ODCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D4F76DD21C61B04700D59F02 /* ODCollectionController.m */; };
 		ED3429821C8E7603002D02B6 /* ODBazaarRequestHelpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3429811C8E7603002D02B6 /* ODBazaarRequestHelpModel.m */; };
+		ED3B99B81C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3B99B71C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -897,6 +898,8 @@
 		D4F76DD21C61B04700D59F02 /* ODCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCollectionController.m; sourceTree = "<group>"; };
 		ED3429801C8E7603002D02B6 /* ODBazaarRequestHelpModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarRequestHelpModel.h; sourceTree = "<group>"; };
 		ED3429811C8E7603002D02B6 /* ODBazaarRequestHelpModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarRequestHelpModel.m; sourceTree = "<group>"; };
+		ED3B99B61C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarExchangeSkillDetailModel.h; sourceTree = "<group>"; };
+		ED3B99B71C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarExchangeSkillDetailModel.m; sourceTree = "<group>"; };
 		EEA572BF76BF4C22E1FC80BA /* libPods-ODApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ODApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD754733DED72842C8626E1D /* Pods-ODApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1175,6 +1178,8 @@
 				9DEDCF4D1C64B3F4003015C6 /* BazaarDetailModel */,
 				9DEDCF501C64B3F4003015C6 /* ODBazaarExchangeSkillModel.h */,
 				9DEDCF511C64B3F4003015C6 /* ODBazaarExchangeSkillModel.m */,
+				ED3B99B61C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.h */,
+				ED3B99B71C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.m */,
 				9DEDCF521C64B3F4003015C6 /* ODBazaarModel.h */,
 				9DEDCF531C64B3F4003015C6 /* ODBazaarModel.m */,
 				9DEDCF541C64B3F4003015C6 /* ODBazaarReleaseSkillTimeModel.h */,
@@ -2945,6 +2950,7 @@
 				2314F5811C8988D000A770DC /* UIBarButtonItem+ODExtention.m in Sources */,
 				D4D075121C59B9FA008527C9 /* ODBindingMobileView.m in Sources */,
 				D4D0739D1C59B9FA008527C9 /* ODCommunityModel.m in Sources */,
+				ED3B99B81C9023BE006CAAB0 /* ODBazaarExchangeSkillDetailModel.m in Sources */,
 				D4D073851C59B9FA008527C9 /* ODBindingMobileController.m in Sources */,
 				C64D45EB1C5F8C6F003BFFA0 /* IQUIView+Hierarchy.m in Sources */,
 				2314F5651C89886500A770DC /* CommonUtil.m in Sources */,

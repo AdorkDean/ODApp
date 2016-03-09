@@ -190,6 +190,7 @@ NSString * const ODUrlSwapRejectRefund = @"swap/reject/refund";
 NSString * const ODUrlSwapConfirmRefund = @"swap/confirm/refund";
 NSString * const ODUrlSwapSellerOrderList = @"swap/seller/order/list";
 NSString * const ODUrlSwapServiceTime = @"swap/service/time";
+NSString * const ODUrlSwapInfo = @"swap/info";
 
 
 
@@ -216,7 +217,7 @@ NSString * const kBazaarTaskReceiveCompleteUrl = @"http://woquapi.test.odong.com
 NSString * const kBazaarTaskInitiateCompleteUrl = @"http://woquapi.test.odong.com/1.0/task/confirm";
 //NSString * const kBazaarExchangeSkillUrl = @"http://woquapi.test.odong.com/1.0/swap/list";
 
-NSString * const kBazaarExchangeSkillDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/info";
+//NSString * const kBazaarExchangeSkillDetailUrl = @"http://woquapi.test.odong.com/1.0/swap/info";
 NSString * const kBazaarReleaseSkillTimeUrl = @"http://woquapi.test.odong.com/1.0/swap/schedule";
 //NSString * const kBazaarExchangeSkillDetailLoveUrl = @"http://woquapi.test.odong.com/1.0/other/love/add";
 //NSString * const kBazaarExchangeSkillDetailNotLoveUrl = @"http://woquapi.test.odong.com/1.0/other/love/del";
