@@ -168,7 +168,7 @@
 {
     NSDictionary *parameter = @{@"task_status" : self.status, @"page" : [NSString stringWithFormat:@"%ld", (long)self.count], @"city_id" : [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlBazaarRequestHelp parameters:parameter modelClass:[ODBazaarRequestHelpModel class] success:^(ODBazaarRequestHelpModelResponse *model) {
+    [ODHttpTool getWithURL:ODUrlTaskList parameters:parameter modelClass:[ODBazaarRequestHelpModel class] success:^(ODBazaarRequestHelpModelResponse *model) {
     
         if (weakSelf.count == 1) {
             [weakSelf.dataArray removeAllObjects];
