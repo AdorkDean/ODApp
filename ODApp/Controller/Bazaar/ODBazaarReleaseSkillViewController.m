@@ -613,7 +613,7 @@
             parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.editTimeArray desc],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
         }
 //        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-        [self pushDataWithUrl:ODUrlBazaarEditSkill parameter:parameter isEdit:YES];
+        [self pushDataWithUrl:ODUrlSwapEdit parameter:parameter isEdit:YES];
     }else{
         
         NSDictionary *parameter;
@@ -624,7 +624,7 @@
         }
 //        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         
-        [self pushDataWithUrl:ODUrlBazaarReleaseSkill parameter:parameter isEdit:NO];
+        [self pushDataWithUrl:ODUrlSwapCreate parameter:parameter isEdit:NO];
     }
 
 }

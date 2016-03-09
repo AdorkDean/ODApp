@@ -339,7 +339,7 @@
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         
             
-        [self pushImageWithUrl:ODUrlOtherBase64Upload parameter:signParameter];
+        [self pushImageWithUrl:kPushImageUrl parameter:signParameter];
 
         
     }
@@ -376,7 +376,9 @@
            
             weakSelf.imgsString = str;
    
-            [weakSelf saveImge];
+//            [weakSelf saveImge];
+            
+            NSLog(@"---%@",responseObject);
 
         }
   

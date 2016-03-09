@@ -7,7 +7,6 @@
 //
 
 #import "ODBaseViewController.h"
-#import "AFNetworking.h"
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
 #import "ODAPIManager.h"

@@ -9,7 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODAddAddressController.h"
 #import "ODAddAddressView.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 
 @interface ODAddAddressController () <UITextViewDelegate>
@@ -17,9 +16,7 @@
 
 @property(nonatomic, strong) UILabel *centerNameLabe;
 @property(nonatomic, strong) ODAddAddressView *addAddressView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *editeManager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *deleteManager;
+
 @property(nonatomic, copy) NSString *open_id;
 @property(nonatomic, copy) NSString *is_default;
 @end

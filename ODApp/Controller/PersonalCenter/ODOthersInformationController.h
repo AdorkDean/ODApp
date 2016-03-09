@@ -8,7 +8,6 @@
 
 #import "ODBaseViewController.h"
 
-#import "AFNetworking.h"
 #import "UIImageView+WebCache.h"
 
 #import "ODUserModel.h"
@@ -32,7 +31,7 @@
 
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+
 
 @property(nonatomic, strong) ODUserModel *model;
 

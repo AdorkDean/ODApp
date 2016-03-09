@@ -81,7 +81,7 @@
 {
     NSDictionary *parameter = @{@"page" : [NSString stringWithFormat:@"%ld", self.page], @"city_id" : [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"my" : @"0"};
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlBazaarExchangeSkill parameters:parameter modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
+    [ODHttpTool getWithURL:ODUrlSwapList parameters:parameter modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
         weakSelf.dataArray = model.result;
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];

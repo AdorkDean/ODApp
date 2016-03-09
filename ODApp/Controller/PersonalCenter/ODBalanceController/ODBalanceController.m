@@ -11,13 +11,11 @@
 #import "ODBalanceView.h"
 #import "ODWithdrawalController.h"
 #import "ODWithdrawalDetailController.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 
 @interface ODBalanceController ()
 
 @property(nonatomic, strong) ODBalanceView *balanceView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, copy) NSString *balance;
 
 @end

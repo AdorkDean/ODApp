@@ -42,7 +42,7 @@
 {
      NSDictionary *parameter = @{@"bbs_id" : self.bbs_id, @"content" : self.textView.text, @"parent_id" : self.parent_id, @"open_id" : [ODUserInformation sharedODUserInformation].openID};
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlCommunityBbsReply parameters:parameter modelClass:[NSObject class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlBbsReply parameters:parameter modelClass:[NSObject class] success:^(id model) {
         if (weakSelf.myBlock) {
             weakSelf.myBlock(@"refresh");
         }

@@ -13,7 +13,6 @@
 #import "ODHomeFoundViewController.h"
 #import "ODCenterIntroduceModel.h"
 
-#import "AFNetworking.h"
 
 
 @interface ODCenterIntroduceController : ODBaseViewController

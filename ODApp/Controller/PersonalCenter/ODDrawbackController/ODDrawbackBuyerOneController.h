@@ -8,7 +8,6 @@
 
 #import "ODBaseViewController.h"
 
-#import "AFNetworking.h"
 
 #import "ODAPIManager.h"
 

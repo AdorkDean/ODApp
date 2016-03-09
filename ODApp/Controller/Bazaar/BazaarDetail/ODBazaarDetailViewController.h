@@ -11,7 +11,6 @@
 #import "ODAPIManager.h"
 #import "ODClassMethod.h"
 #import "ODHelp.h"
-#import "AFNetworking.h"
 #import "UIButton+WebCache.h"
 #import "ODBazaarDetailModel.h"
 #import "ODBazaarDetailLayout.h"

@@ -38,7 +38,6 @@
 @property(nonatomic, copy) NSString *task_status_name;
 @property(nonatomic, copy) NSString *apply_status;
 @property(nonatomic, strong) NSMutableDictionary *share;
-
 @property(nonatomic, strong) NSArray *applys;
 
 /**

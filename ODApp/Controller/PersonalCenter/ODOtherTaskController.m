@@ -9,7 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODOtherTaskController.h"
 #import "MJRefresh.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "ODTaskCell.h"
 #import "ODBazaarModel.h"

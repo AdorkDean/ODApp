@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "ODAPIManager.h"
 #import "ODClassMethod.h"
-#import "AFNetworking.h"
 #import "ODCommunityModel.h"
 #import "ODCommunityCollectionCell.h"
 #import "ODCommunityDetailViewController.h"
@@ -21,7 +20,7 @@
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, strong) NSMutableArray *userArray;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+
 @property(nonatomic) NSInteger count;
 @property(nonatomic, copy) NSString *refresh;
 @property(nonatomic, copy) NSString *open_id;

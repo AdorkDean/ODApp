@@ -13,7 +13,6 @@
 #import "ODSecondOrderDetailController.h"
 #import "ODBazaarViewController.h"
 #import "ODCancelOrderView.h"
-#import "AFNetworking.h"
 #import "ODAPIManager.h"
 #import "Masonry.h"
 

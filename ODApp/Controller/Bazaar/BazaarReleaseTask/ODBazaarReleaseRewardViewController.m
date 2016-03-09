@@ -60,8 +60,7 @@
 #pragma mark - 初始化manager
 
 - (void)createRequest {
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+
     self.dataArray = [[NSMutableArray alloc] init];
     self.idArray = [[NSMutableArray alloc] init];
 }
@@ -71,7 +70,7 @@
 - (void)joiningTogetherParmeters {
     NSDictionary *parameter = @{};
 //    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:ODUrlRequestHelpReward parameter:parameter];
+    [self downLoadDataWithUrl:ODUrlOtherConfigInfo parameter:parameter];
 }
 
 #pragma mark - 请求数据

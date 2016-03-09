@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ODCommunityDetailModel.h"
+#import "UIButton+WebCache.h"
 
 @interface ODCommunityDetailCell : UITableViewCell
 @property(weak, nonatomic) IBOutlet UIButton *headButton;
@@ -17,11 +19,10 @@
 @property(weak, nonatomic) IBOutlet UIButton *deleteButton;
 @property(weak, nonatomic) IBOutlet UIImageView *lineImageView;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *lineImageViewConstraint;
-
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *contentLabelHeight;
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelSpace;
-
 @property(assign, nonatomic) CGFloat timeLabelSpaceConstant;
-//@property (weak, nonatomic) IBOutlet NSLayoutConstraint *timeLabelSpace;
+
+@property(nonatomic,strong)ODCommunityDetailModel *model;
 
 @end
