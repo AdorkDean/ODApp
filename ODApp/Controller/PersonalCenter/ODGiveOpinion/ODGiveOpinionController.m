@@ -127,7 +127,7 @@
         [ODHttpTool getWithURL:ODUrlOtherFeedback parameters:params modelClass:[NSObject class] success:^(id model)
          {
              [ODProgressHUD showInfoWithStatus:@"感谢您的反馈"];
-             [self.navigationController popViewControllerAnimated:YES];
+             [weakSelf.navigationController popViewControllerAnimated:YES];
          } failure:^(NSError *error) {
              
          }];

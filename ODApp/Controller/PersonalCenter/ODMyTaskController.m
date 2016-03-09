@@ -340,7 +340,6 @@
          }
          
          ODBazaarTasksModel *tasksModel = [model result];
-         
          [weakSelf.secondDataArray addObjectsFromArray:tasksModel.tasks];
          
          if (weakSelf.secondDataArray.count == 0) {

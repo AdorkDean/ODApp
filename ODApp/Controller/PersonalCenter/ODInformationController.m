@@ -29,8 +29,7 @@
 @property (nonatomic , strong) AFHTTPRequestOperationManager *managers;
 @property (nonatomic , strong) UIImage *image;
 @property (nonatomic , strong) UIImagePickerController *imagePicker;
-@property (nonatomic , copy) NSString *imgsString;
-
+@property (nonatomic , copy) NSString *imgsString;//分界线的标识符
 @end
 
 @implementation ODInformationController
@@ -332,18 +331,40 @@
         //图片转化为data
         NSData *imageData;
         imageData = UIImagePNGRepresentation(image1);
+        
         NSString *str = @"data:image/jpeg;base64,";
         NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
         
         NSDictionary *parameter = @{@"File":strData};
         NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+//        @"http://woquapi.test.odong.com/1.0/other/base64/upload"
         
+        __weakSelf
+        AFHTTPSessionManager *mgr = [AFHTTPSessionManager manager];
+        mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
+        
+        [mgr POST:@"http://woquapi.test.odong.com/1.0/other/base64/upload" parameters:signParameter constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+            [formData appendPartWithFileData:imageData name:@"file" fileName:@"test.png" mimeType:@"image/png"];
             
-        [self pushImageWithUrl:ODUrlOtherBase64Upload parameter:signParameter];
-
-        
+//            [weakSelf saveImge];
+            
+            NSLog(@"%@", formData);
+            
+            
+        } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
+            NSLog(@"----------------%@", responseObject);
+            
+            
+            weakSelf.imgsString = str;
+            
+            [weakSelf saveImge];
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            
+        }];
     }
 }
+
 
 
 #pragma mark - 压缩照片
@@ -367,6 +388,22 @@
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
   
+   
+    
+//    [ODHttpTool postWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
+//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+//        NSDictionary *result = dict[@"result"];
+//        NSString *str = result[@"File"];
+//        
+//        weakSelf.imgsString = str;
+//        
+//        [weakSelf saveImge];
+        
+//
+//    } failure:^(NSError *error) {
+//        
+//    }];
+    
     __weak typeof (self)weakSelf = self;
     [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if (responseObject) {

@@ -325,13 +325,13 @@
     // 发送请求
     [ODHttpTool getWithURL:ODUrlSwapOrderInfo parameters:params modelClass:[ODOrderDetailModel class] success:^(id model)
      {
-         [self.dataArray removeAllObjects];
-         [self.dataArray addObject:[model result]];
+         [weakSelf.dataArray removeAllObjects];
+         [weakSelf.dataArray addObject:[model result]];
          
          ODOrderDetailModel *statusModel = self.dataArray[0];
          NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
          
-         if (![self.orderStatus isEqualToString:orderStatue]) {
+         if (![weakSelf.orderStatus isEqualToString:orderStatue]) {
              
              NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:orderStatue, @"orderStatus", nil];
              NSNotification *notification = [NSNotification notificationWithName:ODNotificationSellOrderSecondRefresh object:nil userInfo:dic];
@@ -340,7 +340,6 @@
          }
          [weakSelf createScroller];
      } failure:^(NSError *error) {
-         [ODProgressHUD showInfoWithStatus:@"网络异常"];
      }];
 }
 
@@ -453,7 +452,6 @@
          [weakSelf getData];
          [ODProgressHUD showInfoWithStatus:@"操作成功"];
      } failure:^(NSError *error) {
-         
      }];
 }
 

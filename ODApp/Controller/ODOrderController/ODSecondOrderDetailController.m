@@ -478,7 +478,6 @@
      {
          [weakSelf createEvaluation];
      } failure:^(NSError *error) {
-         
      }];
 }
 
@@ -641,7 +640,7 @@
              ODOrderDetailModel *statusModel = self.dataArray[0];
              weakSelf.orderStatus = [NSString stringWithFormat:@"%@", statusModel.order_status];
 
-             if (self.getRefresh) {
+             if (weakSelf.getRefresh) {
 
                  weakSelf.getRefresh(@"1");
              }

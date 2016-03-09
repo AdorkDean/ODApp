@@ -134,7 +134,6 @@
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     __weakSelf
-    
     [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarDetailModel class] success:^(id model) {
         
         ODBazaarDetailModel *detailModel = [model result];
@@ -148,32 +147,7 @@
         
     } failure:^(NSError *error) {
         
-        
     }];
-    
-    
-//    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        
-//        if (responseObject) {
-//            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//            NSDictionary *result = dict[@"result"];
-//            ODBazaarDetailModel *detailModel = [[ODBazaarDetailModel alloc]init];
-//            [detailModel setValuesForKeysWithDictionary:result];
-//            [weakSelf.dataArray addObject:detailModel];
-//            weakSelf.applys = result[@"applys"];
-//            for (NSDictionary *itemDict in _applys) {
-//                ODBazaarDetailModel *model = [[ODBazaarDetailModel alloc]init];
-//                [model setValuesForKeysWithDictionary:itemDict];
-//                [weakSelf.picArray addObject:model];
-//            }
-//        }
-//        [weakSelf createUserInfoView];
-//        [weakSelf createTaskTopDetailView];
-//        [weakSelf createTaskBottomDetailView];
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//        NSLog(@"error");
-//    }];
-    
 }
 
 #pragma mark - 创建用户信息试图

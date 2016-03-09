@@ -13,7 +13,7 @@
 
 @property (nonatomic, copy) NSString *address;
 
-@property (nonatomic, assign) int id;
+@property (nonatomic, assign) NSString *id;
 
 @property (nonatomic, copy) NSString *name;
 

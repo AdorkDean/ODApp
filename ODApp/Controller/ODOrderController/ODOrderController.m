@@ -79,48 +79,26 @@
     [self createCollectionView];
 }
 
-
-
-
 - (void)getAddress {
-    self.addressManager = [AFHTTPRequestOperationManager manager];
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"open_id"] = self.openId;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlUserAddressList parameters:params modelClass:[ODOrderAddressModel class] success:^(id model)
+     {
+         [weakSelf.addressArray removeAllObjects];
 
-    NSDictionary *parameters = @{@"open_id" : self.openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+         ODOrderAddressModel *addressModel = [model result];
+         
+         if (addressModel.def) {
+             [weakSelf.addressArray addObject:addressModel.def];
+         }
 
-    __weak typeof(self) weakSelf = self;
-    [self.addressManager GET:ODUrlUserAddressList parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-            [weakSelf.addressArray removeAllObjects];
-
-
-            NSMutableDictionary *dic = responseObject[@"result"];
-
-            NSMutableDictionary *addressDic = dic[@"def"];
-
-
-            if (addressDic.count != 0) {
-                ODOrderAddressDefModel *model = [[ODOrderAddressDefModel alloc] init];
-                [model setValuesForKeysWithDictionary:addressDic];
-                [weakSelf.addressArray addObject:model];
-
-            }
-
-
-        }
-
-
-        [weakSelf.collectionView reloadData];
-
-    }                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
-    }];
-
+         [weakSelf.collectionView reloadData];
+     
+     } failure:^(NSError *error) {
+     }];
 }
 
 #pragma mark - 初始化
@@ -225,7 +203,6 @@
     
     
 }
-
 
 #pragma mark - UICollectionView 数据源方法
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

@@ -93,14 +93,16 @@
     // 发送请求
     [ODHttpTool getWithURL:ODUrlSwapLoveList parameters:params modelClass:[ODLoveListModel class] success:^(id model)
     {
-        NSArray *loveListData = [model result];
-        if ([countNumber isEqualToString:@"1"]) [self.dataArray removeAllObjects];
+        NSArray *loveListDatas = [model result];
+        if ([countNumber isEqualToString:@"1"]) {
+            [weakSelf.dataArray removeAllObjects];
+        }
 
-        [weakSelf.dataArray addObject:loveListData.firstObject];
+        [weakSelf.dataArray addObject:loveListDatas.firstObject];
 
         [weakSelf.collectionView.mj_header endRefreshing];
 
-        if (!loveListData.count) {
+        if (!loveListDatas.count) {
             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
         }
         else

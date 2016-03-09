@@ -86,11 +86,11 @@
     [ODHttpTool getWithURL:ODUrlStoreApplyUsers parameters:params modelClass:[ODApplyModel class] success:^(id model)
      {
          if ([countNumber isEqualToString:@"1"]) {
-             [self.dataArray removeAllObjects];
+             [weakSelf.dataArray removeAllObjects];
          }
          
          NSArray *applyDatas = [model result];
-        [self.dataArray addObjectsFromArray:applyDatas];
+        [weakSelf.dataArray addObjectsFromArray:applyDatas];
 
          if (applyDatas.count == 0)
          {
