@@ -9,10 +9,7 @@
 #import "ODBalanceModel.h"
 
 @implementation ODBalanceModel
--(void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    
-}
-
 
 @end
+
+ODRequestResultIsArrayAll(ODBalanceModel)

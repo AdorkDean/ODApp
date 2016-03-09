@@ -57,6 +57,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
+
+- (void)loadMoreData {
+    self.page++;
+    NSDictionary *parameter = @{@"type" : @"4", @"page" : [NSString stringWithFormat:@"%ld", self.page], @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    [self downLoadDataWithUrl:ODUrlUserLoveList parameter:signParameter];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -64,8 +71,18 @@
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+#pragma mark - 拼接参数
+
+- (void)joiningTogetherParmeters {
+    self.page = 1;
+    NSDictionary *parameter = @{@"type" : @"4", @"page" : [NSString stringWithFormat:@"%ld", self.page], @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
+    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+    NSLog(@"%@", signParameter);
+    [self downLoadDataWithUrl:ODUrlUserLoveList parameter:signParameter];
 }
 
 #pragma mark - 数据请求

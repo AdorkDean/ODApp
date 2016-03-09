@@ -50,10 +50,6 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     return sigParameters;
 }
 
-+ (NSString *)getUrl:(NSString *)uri {
-    return [ODURL stringByAppendingString:uri];
-}
-
 #pragma mark - 私有函数
 
 

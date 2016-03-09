@@ -36,7 +36,8 @@
 @property(nonatomic, strong) UIScrollView *scroller;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, strong) NSMutableArray *selectDataArray;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
+
+
 @end
 
 @implementation ODThirdOrderController
@@ -81,7 +82,6 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODOrderCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.view addSubview:self.collectionView];
 
-
     UIImageView *amountImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 49 - ODNavigationHeight, kScreenSize.width - 150, 49 )];
     amountImageView.backgroundColor = [UIColor whiteColor];
 
@@ -90,7 +90,6 @@
     priceLabel.font = [UIFont systemFontOfSize:13];
     priceLabel.backgroundColor = [UIColor whiteColor];
     [amountImageView addSubview:priceLabel];
-
 
     self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(88, 15, amountImageView.frame.size.width - 106, 19)];
     self.allPriceLabel.text = [NSString stringWithFormat:@"%@元", self.informationModel.price];
@@ -125,34 +124,38 @@
 #pragma mark - 获取数据
 - (void)getData
 {
-    self.manager = [AFHTTPRequestOperationManager manager];
-
-
     NSDictionary *parameters = @{@"swap_id" : [NSString stringWithFormat:@"%@", self.informationModel.swap_id]};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
 
-
-    [self.manager GET:kGetServecTimeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if (responseObject) {
-            NSMutableDictionary *dic = responseObject[@"result"];
-
-
-            for (NSMutableDictionary *miniDic in dic) {
-                ODOrderDataModel *model = [[ODOrderDataModel alloc] initWithDict:miniDic];
-                [self.dataArray addObject:model];
-            }
-
-
-        }
-
-        [self.collectionView reloadData];
-
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlSwapServiceTime parameters:parameters modelClass:[ODOrderDataModel class] success:^(id model) {
+        [weakSelf.dataArray addObject:model];
+        [weakSelf.collectionView reloadData];
+    } failure:^(NSError *error) {
+        
     }];
+    
+    
+//    [self.manager GET:kGetServecTimeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//
+//
+//        if (responseObject) {
+//            NSMutableDictionary *dic = responseObject[@"result"];
+//
+//
+//            for (NSMutableDictionary *miniDic in dic) {
+//                ODOrderDataModel *model = [[ODOrderDataModel alloc] initWithDict:miniDic];
+//                [self.dataArray addObject:model];
+//            }
+//
+//
+//        }
+//
+//        [self.collectionView reloadData];
+//
+//    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//
+//
+//    }];
 }
 
 - (void)saveOrder
@@ -194,7 +197,6 @@
 }
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
 
-
     self.headView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
     self.headView.thirdOrderView.labelConstraint.constant = 0.5;
     UITapGestureRecognizer *timeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeAction)];
@@ -234,48 +236,38 @@
     contentLabel.textColor = [UIColor lightGrayColor];
     [self.choseTimeView addSubview:contentLabel];
 
-
     self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 30, self.choseTimeView.frame.size.width, 50)];
     self.scroller.backgroundColor = [UIColor whiteColor];
     self.scroller.userInteractionEnabled = YES;
     self.scroller.showsHorizontalScrollIndicator = NO;
     self.scroller.contentSize = CGSizeMake(self.scroller.frame.size.width * 2.35, 50);
     [self.choseTimeView addSubview:self.scroller];
-
-
+    
     for (int i = 0; i < 7; i++) {
         DataButton *button = [[DataButton alloc] initWithFrame:CGRectMake(5 + i * self.scroller.frame.size.width / 3, 5, self.scroller.frame.size.width / 3 - 10, 40)];
+        
         if (i == 0) {
-
             button.dataLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
             button.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
             button.layer.masksToBounds = YES;
             button.layer.cornerRadius = 5;
             button.layer.borderColor = [UIColor colorWithHexString:@"#ff6666" alpha:1].CGColor;
             button.layer.borderWidth = 1;
-
         } else {
             button.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
             button.layer.masksToBounds = YES;
             button.layer.cornerRadius = 5;
             button.layer.borderWidth = 1;
-
         }
-
 
         ODOrderDataModel *model = self.dataArray[i];
         button.tag = i + 7;
         [button addTarget:self action:@selector(timeAction:) forControlEvents:UIControlEventTouchUpInside];
         button.dataLabel.text = [NSString stringWithFormat:@"%@", model.date];
         button.timeLabel.text = [NSString stringWithFormat:@"%@", model.date_name];
-
         [self.scroller addSubview:button];
-
     }
-
-
     [self createButtonWithNumber:0];
-
 
     [self.view addSubview:self.choseTimeView];
 }
@@ -294,20 +286,13 @@
             button.layer.borderColor = [UIColor colorWithHexString:@"#ff6666" alpha:1].CGColor;
             button.dataLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
             button.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-
-
         }
     }
-
-
     [self createButtonWithNumber:sender.tag - 7];
-
-
 }
 
 
 - (void)createButtonWithNumber:(NSInteger)number {
-
     for (int i = 0; i < 15; i++) {
         TimeButton *button = [self.choseTimeView viewWithTag:888 + i];
         [button removeFromSuperview];
@@ -323,22 +308,19 @@
         [button addTarget:self action:@selector(ChosetimeAction:) forControlEvents:UIControlEventTouchUpInside];
 
         NSMutableDictionary *dic = timeArray[i];
-        NSString *status = [NSString stringWithFormat:@"%@", dic[@"status"]];
+        NSString *status = [NSString stringWithFormat:@"%@", [dic valueForKeyPath:@"status"]];
+        
         if (![status isEqualToString:@"1"]) {
-
             button.userInteractionEnabled = NO;
             button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
             [button setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
-
-
         } else {
             [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
         }
-        [button setTitle:[NSString stringWithFormat:@"%@", dic[@"time"]] forState:UIControlStateNormal];
+        [button setTitle:[NSString stringWithFormat:@"%@", [dic valueForKeyPath:@"time"]] forState:UIControlStateNormal];
 
         [self.choseTimeView addSubview:button];
     }
-
 
     for (int i = 0; i < 4; i++) {
         TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i * self.choseTimeView.frame.size.width / 4, 80 + (self.choseTimeView.frame.size.height - 80) / 4, self.choseTimeView.frame.size.width / 4, (self.choseTimeView.frame.size.height - 80) / 4)];
@@ -346,7 +328,8 @@
         button.tag = 888 + i + 4;
         [button addTarget:self action:@selector(ChosetimeAction:) forControlEvents:UIControlEventTouchUpInside];
         NSMutableDictionary *dic = timeArray[i + 4];
-        NSString *status = [NSString stringWithFormat:@"%@", dic[@"status"]];
+        NSString *status = [NSString stringWithFormat:@"%@", [dic valueForKeyPath:@"status"]];
+    
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
             button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
@@ -355,19 +338,18 @@
             [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
         }
 
-
-        [button setTitle:[NSString stringWithFormat:@"%@", dic[@"time"]] forState:UIControlStateNormal];
+        [button setTitle:[NSString stringWithFormat:@"%@", [dic valueForKeyPath:@"time"]] forState:UIControlStateNormal];
         [self.choseTimeView addSubview:button];
     }
 
     for (int i = 0; i < 4; i++) {
         TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i * self.choseTimeView.frame.size.width / 4, 80 + 2 * (self.choseTimeView.frame.size.height - 80) / 4, self.choseTimeView.frame.size.width / 4, (self.choseTimeView.frame.size.height - 80) / 4)];
 
-
         button.tag = 888 + i + 8;
         [button addTarget:self action:@selector(ChosetimeAction:) forControlEvents:UIControlEventTouchUpInside];
         NSMutableDictionary *dic = timeArray[i + 8];
-        NSString *status = [NSString stringWithFormat:@"%@", dic[@"status"]];
+        NSString *status = [NSString stringWithFormat:@"%@", [dic valueForKeyPath:@"status"]];
+        
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
             button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
@@ -375,13 +357,11 @@
 
         } else {
             [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
-
         }
-        [button setTitle:[NSString stringWithFormat:@"%@", dic[@"time"]] forState:UIControlStateNormal];
+        [button setTitle:[NSString stringWithFormat:@"%@", [dic valueForKeyPath:@"time"]] forState:UIControlStateNormal];
         [self.choseTimeView addSubview:button];
     }
     for (int i = 0; i < 4; i++) {
-
 
         if (i == 3) {
             TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i * self.choseTimeView.frame.size.width / 4, 80 + 3 * (self.choseTimeView.frame.size.height - 80) / 4, self.choseTimeView.frame.size.width / 4, (self.choseTimeView.frame.size.height - 80) / 4)];
@@ -394,7 +374,7 @@
             button.tag = 888 + i + 12;
             [button addTarget:self action:@selector(ChosetimeAction:) forControlEvents:UIControlEventTouchUpInside];
             NSMutableDictionary *dic = timeArray[i + 12];
-            NSString *status = [NSString stringWithFormat:@"%@", dic[@"status"]];
+            NSString *status = [NSString stringWithFormat:@"%@", [dic valueForKeyPath:@"status"]];
             if (![status isEqualToString:@"1"]) {
                 button.userInteractionEnabled = NO;
                 button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
@@ -402,25 +382,17 @@
 
             } else {
                 [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
-
             }
-            [button setTitle:[NSString stringWithFormat:@"%@", dic[@"time"]] forState:UIControlStateNormal];
-
+            [button setTitle:[NSString stringWithFormat:@"%@", [dic valueForKeyPath:@"time"]] forState:UIControlStateNormal];
             [self.choseTimeView addSubview:button];
-
         }
-
-
     }
-
 }
-
 
 - (void)ChosetimeAction:(TimeButton *)sender {
     [self.choseTimeView removeFromSuperview];
     NSMutableDictionary *dic = self.selectDataArray[sender.tag - 888];
-    self.headView.thirdOrderView.timeLabel.text = dic[@"request"];
-
+    self.headView.thirdOrderView.timeLabel.text = [dic valueForKeyPath:@"request"];
 }
 
 

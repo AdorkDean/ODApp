@@ -10,6 +10,7 @@
 #import "ODBazaarViewController.h"
 #import "ODHomeFoundViewController.h"
 #import "ODUserInformation.h"
+#import "ODStorePlaceListModel.h"
 #import "ODHomeInfoModel.h"
 #import "ODOtherStoreListModel.h"
 
@@ -114,7 +115,7 @@
 - (void)getLocationCityRequest {
     __weakSelf
     NSDictionary *parameter = @{@"region_name" : @""};
-    [ODHttpTool getWithURL:ODUrlCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlOtherCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
                 ODLocationModel *mode = [model result];
                 weakSelf.cityListArray = mode.all;
                 [weakSelf.collectionView reloadData];
@@ -127,18 +128,18 @@
 
 - (void)getScrollViewRequest {
     __weakSelf
-    [weakSelf.pictureArray removeAllObjects];
-    [weakSelf.pictureIdArray removeAllObjects];
-    [weakSelf.collectionView reloadData];
+    
     NSDictionary *parameter = @{@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     [ODHttpTool getWithURL:ODUrlOtherHome parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model) {
-                [weakSelf.pictureArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"detail_md5"]];
-                [weakSelf.pictureIdArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"id"]];
-                [weakSelf.collectionView reloadData];
-            }
+        [weakSelf.pictureArray removeAllObjects];
+        [weakSelf.pictureIdArray removeAllObjects];
+        [weakSelf.pictureArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"detail_md5"]];
+        [weakSelf.pictureIdArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"id"]];
+        [weakSelf.collectionView reloadData];
+    }
                    failure:^(NSError *error) {
 
-                   }];
+       }];
 }
 
 #pragma mark - 技能交换数据请求
@@ -149,11 +150,10 @@
 
     [ODHttpTool getWithURL:ODUrlOtherHome parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model)
     {
+        [weakSelf.dataArray removeAllObjects];
         ODHomeInfoModel *infoModel = [model result];
         for (ODHomeInfoSwapModel *swapModel in infoModel.swaps) {
-            if (![[weakSelf.dataArray valueForKeyPath:@"swap_id"] containsObject:[swapModel swap_id]]) {
-                [weakSelf.dataArray addObject:swapModel];
-            }
+            [weakSelf.dataArray addObject:swapModel];
         }
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView reloadData];
@@ -170,10 +170,11 @@
 {
     NSDictionary *parameter = @{@"show_type" : @"1",@"call_array":@"1"};
     __weak typeof(self) weakSelf = self;
-    [ODHttpTool getWithURL:ODUrlOtherStoreList parameters:parameter modelClass:[NSObject class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlOtherStoreList parameters:parameter modelClass:[ODStorePlaceListModel class] success:^(ODStorePlaceListModelResponse *model)
     {
-        weakSelf.storeId = model[@"id"];
-        [self pushToPlace];
+        ODStorePlaceListModel *listModel = model.result.firstObject;
+        weakSelf.storeId = [@(listModel.id)stringValue];
+        [weakSelf pushToPlace];
     }
                    failure:^(NSError *error)
     {
@@ -284,7 +285,8 @@
         self.rsusableView.scrollView.delegate = self;
         self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
         self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;
-
+        [self.rsusableView.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+        
         for (int i = 0; i < self.pictureArray.count; i++) {
             UIButton *imageButton;
             if (i < self.pictureArray.count - 1) {

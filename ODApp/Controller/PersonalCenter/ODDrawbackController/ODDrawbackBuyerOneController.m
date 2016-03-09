@@ -47,13 +47,12 @@
 @property(nonatomic, strong) UIView *servicePhoneView;
 @property(nonatomic, strong) UIView *serviceTimeView;
 
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *managerRefuse;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *managerReceive;
 
 @end
 
 @implementation ODDrawbackBuyerOneController
+
+#pragma mark - 生命周期
 
 - (void)viewDidLoad
 {
@@ -63,6 +62,20 @@
     self.view.userInteractionEnabled = YES;
     
     [self createScrollView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 #pragma mark - Create UIScrollView
@@ -150,7 +163,7 @@
     self.drawbackReasonContentView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.drawbackReasonContentView];
     
-    // 退款原因版块 可选择
+    // 退款原因 可选择
     if (self.isSelectReason)
     {
         // 退款原因Label 距离 屏幕左边的 距离
@@ -190,7 +203,7 @@
             [self.drawbackReasonContentView addSubview:selectReasonLineView];
         }
     }
-    // 退款原因版块 不可选择
+    // 退款原因 不可选择
     else
     {
         UILabel *drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - ODLeftMargin * 2, drawbackReasonHeight)];
@@ -210,7 +223,7 @@
 #pragma mark - 拒绝原因
 - (void)createRefuseReasonView
 {
-    // 显示 拒绝原因 版块
+    // 显示 拒绝原因
     if (self.isRefuseReason)
     {
         UILabel *refuseReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonContentView.frame), KScreenWidth, 22)];
@@ -259,7 +272,7 @@
         serviceGetMaxY = CGRectGetMaxY(self.drawbackReasonContentView.frame);
     }
     
-    // 显示 联系客服 版块
+    // 显示 联系客服
     if (self.isService)
     {
         UILabel *contactServiceLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, serviceGetMaxY, KScreenWidth, 22)];
@@ -397,95 +410,107 @@
 #pragma mark - 拒绝退款请求
 - (void)refuseDrawbackRequest
 {
-    self.managerRefuse = [AFHTTPRequestOperationManager manager];
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.cancelOrderView.reasonTextView.text, @"open_id":openId};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
+
     __weakSelf
-    [self.managerRefuse GET:ODRefuseDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-     {
-         if ([responseObject[@"status"] isEqualToString:@"success"])
-         {
-             [ODProgressHUD showInfoWithStatus:@"已拒绝"];
-             
-             NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
-             [[NSNotificationCenter defaultCenter] postNotification:notification];
-             
-             [weakSelf.cancelOrderView removeFromSuperview];
-             [weakSelf.navigationController popViewControllerAnimated:YES];
-         }
-         else
-         {
-             [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-         }
-     }
-                    failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-     {
-         
-     }];
+    [ODHttpTool getWithURL:ODUrlSwapRejectRefund parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        
+        [ODProgressHUD showInfoWithStatus:@"已拒绝"];
+        NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
+        [weakSelf.cancelOrderView removeFromSuperview];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    }
+                   failure:^(NSError *error) {
+                
+    }];
 }
 
 #pragma mark - 接受退款请求
+
 - (void)receiveDrawbackRequest
 {
-    self.managerReceive = [AFHTTPRequestOperationManager manager];
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason ,@"open_id":openId};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
     __weakSelf
-    [self.managerReceive GET:ODReceiveDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-     {
-         if ([responseObject[@"status"] isEqualToString:@"success"])
-         {
-             [ODProgressHUD showInfoWithStatus:@"已接受"];
-             
-             NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
-             [[NSNotificationCenter defaultCenter] postNotification:notification];
-             
-             [weakSelf.navigationController popViewControllerAnimated:YES];
-         }
-         else
-         {
-             [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-         }
-     }
-                     failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-     {
-         
-     }];
-}
+    [ODHttpTool getWithURL:ODUrlSwapConfirmRefund parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        
+        [ODProgressHUD showInfoWithStatus:@"已接受"];
+        NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    }
+                   failure:^(NSError *error) {
+                       
+    }];
+ }
 
 #pragma mark - 申请退款请求
+
 - (void)releaseDrawbackRequest
 {
-    self.manager = [AFHTTPRequestOperationManager manager];
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason, @"open_id":openId};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    
     __weakSelf
-    [self.manager GET:ODReleaseDrawbackUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject)
-     {
-         if ([responseObject[@"status"] isEqualToString:@"success"])
-         {
-             [ODProgressHUD showInfoWithStatus:@"申请退款成功"];
-             
-             NSNotification *notification =[NSNotification notificationWithName:ODNotificationMyOrderThirdRefresh object:nil userInfo:nil];
-             [[NSNotificationCenter defaultCenter] postNotification:notification];
-             
-             [weakSelf.navigationController popViewControllerAnimated:YES];
-         }
-         else
-         {
-             [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-         }
-     }
-              failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error)
-     {
-         
-     }];
+    [ODHttpTool getWithURL:ODUrlSwapOrderCancel parameters:parameter modelClass:[NSObject  class] success:^(id model) {
+        
+        [ODProgressHUD showInfoWithStatus:@"申请退款成功"];
+        NSNotification *notification =[NSNotification notificationWithName:ODNotificationMyOrderThirdRefresh object:nil userInfo:nil];
+        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+        
+    }
+                   failure:^(NSError *error) {
+                
+    }];
+}
+
+#pragma mark - UITextViewDelegate
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if (textView == self.cancelOrderView.reasonTextView)
+    {
+        if ([textView.text isEqualToString:@" 请输入拒绝原因"])
+        {
+            textView.text = @"";
+            textView.textColor = [UIColor blackColor];
+        }
+    }
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+    if (textView.text.length == 0)
+    {
+        self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
+    }
+    else
+    {
+        self.contentPlaceholderLabel.text = @"";
+    }
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    if (textView == self.cancelOrderView.reasonTextView)
+    {
+        if ([self.cancelOrderView.reasonTextView.text isEqualToString:@" 请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
+        {
+            self.cancelOrderView.reasonTextView.text = @" 请输入拒绝原因";
+            self.cancelOrderView.reasonTextView.textColor = [UIColor lightGrayColor];
+        }
+    }
+    else if (textView == self.drawbackStateTextView)
+    {
+        if (textView.text.length == 0)
+        {
+            self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
+        }
+    }
 }
 
 #pragma mark - Action
@@ -586,63 +611,7 @@
     [self.cancelOrderView removeFromSuperview];
 }
 
-#pragma mark - UITextViewDelegate
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    if (textView == self.cancelOrderView.reasonTextView)
-    {
-        if ([textView.text isEqualToString:@" 请输入拒绝原因"])
-        {
-            textView.text = @"";
-            textView.textColor = [UIColor blackColor];
-        }
-    }
-}
 
-- (void)textViewDidChange:(UITextView *)textView
-{
-    if (textView.text.length == 0)
-    {
-        self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
-    }
-    else
-    {
-        self.contentPlaceholderLabel.text = @"";
-    }
-}
-
--(void)textViewDidEndEditing:(UITextView *)textView
-{
-    if (textView == self.cancelOrderView.reasonTextView)
-    {
-        if ([self.cancelOrderView.reasonTextView.text isEqualToString:@" 请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
-        {
-            self.cancelOrderView.reasonTextView.text = @" 请输入拒绝原因";
-            self.cancelOrderView.reasonTextView.textColor = [UIColor lightGrayColor];
-        }
-    }
-    else if (textView == self.drawbackStateTextView)
-    {
-        if (textView.text.length == 0)
-        {
-            self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
-        }
-    }
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-}
 
 - (void)didReceiveMemoryWarning
 {

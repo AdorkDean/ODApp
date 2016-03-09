@@ -9,7 +9,13 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCommunityKeyWordSearchViewController.h"
 
+
 @interface ODCommunityKeyWordSearchViewController ()
+
+#define kCommunityCellId @"ODCommunityCollectionCell"
+@interface ODCommunityKeyWordSearchViewController () {
+    NSMutableDictionary *userInfoDic;
+}
 
 @end
 

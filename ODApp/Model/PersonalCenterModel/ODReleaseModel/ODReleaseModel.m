@@ -17,7 +17,7 @@
 
         return @{
                  @"img_small":[ODReleaseLovesModel class]
-                 
+
                  };
     }];
 }

@@ -262,7 +262,7 @@
 - (void)requestStoreDetail
 {
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlStoreDetail parameters:@{@"store_id":self.storeId} modelClass:[ODStoreDetailModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlOtherStoreDetail parameters:@{@"store_id":self.storeId} modelClass:[ODStoreDetailModel class] success:^(id model)
     {
         ODStoreDetailModel *detailModel = [model result];
         [weakSelf.headView.placeBtn setTitle:detailModel.name forState:UIControlStateNormal];
@@ -280,7 +280,7 @@
 - (void)requestStoreTimeline
 {
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlStoreTime parameters:@{@"store_id":self.storeId,@"start_datetime":self.start_dateTime} modelClass:[ODStoreTimelineModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlStoreTimeline1 parameters:@{@"store_id":self.storeId,@"start_datetime":self.start_dateTime} modelClass:[ODStoreTimelineModel class] success:^(id model)
     {
         if (isSelectedStart)
         {
@@ -332,7 +332,7 @@
                                     @"end_datetime":self.end_datetime,
                                     @"store_id":self.storeId
                                     };
-        [ODHttpTool getWithURL:ODUrlCreateOrder parameters:parameter modelClass:[ODStoreCreateOrderModel class] success:^(id model)
+        [ODHttpTool getWithURL:ODUrlStoreCreateOrder parameters:parameter modelClass:[ODStoreCreateOrderModel class] success:^(id model)
          {
              ODStoreCreateOrderModel *orderModel = [model result];
              [weakSelf requestSubmitWithOrderId:[@(orderModel.order_id)stringValue]];
@@ -356,7 +356,7 @@
                                 @"people_num":self.footerView.numTextView.text,
                                 @"devices":self.devices.enumerateString,
                                 };
-    [ODHttpTool getWithURL:ODUrlConfirmOrder parameters:parameter modelClass:[ODStoreSubmitOrderModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlStoreConfirmOrder parameters:parameter modelClass:[ODStoreSubmitOrderModel class] success:^(id model)
     {
         [ODProgressHUD showInfoWithStatus:@"感谢您的预约请等待审核"];
         [weakSelf.navigationController popViewControllerAnimated:YES];

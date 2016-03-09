@@ -88,7 +88,7 @@ static NSString *const cellId = @"newActivityCell";
     NSDictionary *parameter = @{@"type" : @"0", @"page" : [NSString stringWithFormat:@"%i", self.pageCount]};
     self.noReusltLabel.hidden = YES;
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlMyApplyActivity parameters:parameter modelClass:[ODActivityListModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlStoreApplyMy parameters:parameter modelClass:[ODActivityListModel class] success:^(id model)
     {
         
         for (ODActivityListModel *md in [model result])
@@ -97,9 +97,7 @@ static NSString *const cellId = @"newActivityCell";
             {
                 [weakSelf.resultLists addObject:md];
             }
-        }
-        
-        
+        }                
         if ([[model result]count] == 0)
         {
             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];

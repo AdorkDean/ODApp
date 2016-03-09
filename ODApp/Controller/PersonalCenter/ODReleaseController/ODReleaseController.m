@@ -14,12 +14,33 @@
 NSString * const ODReleaseCellID = @"ODReleaseCell";
 @interface ODReleaseController ()
 
+// 
 @property (nonatomic, assign) long deleteRow;
 @property (nonatomic, assign) long loveRow;
+
+
+@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+
+@property(nonatomic, strong) NSMutableArray *dataArray;
+
+@property(nonatomic, copy) NSString *swap_id;
+
+@property(nonatomic, strong) ODReleaseModel *model;
+
+@property(nonatomic, strong) ODReleaseCell *cell;
+
+@property(nonatomic, assign) int pageCount;
+@property(nonatomic, assign) int pageSelectedCount;
+
+@property(nonatomic, strong) UILabel *noReusltLabel;
+
 
 @end
 
 @implementation ODReleaseController
+
+#pragma mark - 生命周期
 
 - (void)viewDidLoad
 {
@@ -40,6 +61,17 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+
+
 - (void)loadMoreData
 {
     self.pageCount ++;
@@ -54,19 +86,12 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     [self.collectionView reloadData];
 }
 
-#pragma mark - 移除通知
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 #pragma mark - 加载数据请求
 - (void)createRequestData
-{
-    
+{    
     __weakSelf
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"city_id":@"1",@"my":@"1",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-    [ODHttpTool getWithURL:ODUrlPersonalReleaseTask parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlSwapList parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
      {
          if (self.pageCount == 1)
          {
@@ -127,6 +152,81 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     }];
 }
 
+#pragma mark - Create UICollectionView
+- (UICollectionView *)collectionView
+{
+    if (!_collectionView)
+    {
+        __weakSelf
+        self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        self.flowLayout.minimumLineSpacing = 5;
+        self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) collectionViewLayout:self.flowLayout];
+        
+        self.collectionView.delegate = self;
+        self.collectionView.dataSource = self;
+        self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+        [self.collectionView registerNib:[UINib nibWithNibName:@"ODReleaseCell" bundle:nil] forCellWithReuseIdentifier:ODReleaseCellID];
+        self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
+                                         {
+                                             weakSelf.pageCount = 1;
+                                             [weakSelf createRequestData];
+                                         }];
+        self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^
+                                         {
+                                             [weakSelf loadMoreData];
+                                         }];
+        [self.view addSubview:self.collectionView];
+    }
+    return _collectionView;
+}
+
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODReleaseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ODReleaseCellID forIndexPath:indexPath];
+    self.model = self.dataArray[indexPath.row];
+    
+    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    [cell.editButton addTarget:self action:@selector(editButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [cell setModel:self.model];
+    
+    return cell;
+}
+
+#pragma mark - UICollectionViewDelegate
+
+- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    return CGSizeMake(KScreenWidth, 138);
+}
+
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
+    ODReleaseModel *model = self.dataArray[indexPath.row];
+    self.loveRow = indexPath.row;
+    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"])
+    {
+        vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
+        vc.nick = model.user[@"nick"];
+        NSLog(@"%@",vc.swap_id);
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+}
+
 #pragma mark - Action
 
 #pragma mark - 编辑 点击事件
@@ -158,105 +258,29 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     __weakSelf
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除技能" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-    {
-        ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview;
-        NSIndexPath *indexPath = [weakSelf.collectionView indexPathForCell:cell];
-        ODReleaseModel *model = weakSelf.dataArray[indexPath.row];
-        self.deleteRow = indexPath.row;
-        weakSelf.swap_id = model.swap_id;
-        [weakSelf deleteSkillRequest];
-
-    }]];
+                      {
+                          ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview;
+                          NSIndexPath *indexPath = [weakSelf.collectionView indexPathForCell:cell];
+                          ODReleaseModel *model = weakSelf.dataArray[indexPath.row];
+                          self.deleteRow = indexPath.row;
+                          weakSelf.swap_id = model.swap_id;
+                          [weakSelf deleteSkillRequest];
+                          
+                      }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-#pragma mark - Create UICollectionView
-- (UICollectionView *)collectionView
+#pragma mark - 移除通知
+- (void)dealloc
 {
-    if (!_collectionView)
-    {
-        __weakSelf
-        self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        self.flowLayout.minimumLineSpacing = 5;
-        self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) collectionViewLayout:self.flowLayout];
-        
-        self.collectionView.delegate = self;
-        self.collectionView.dataSource = self;
-        self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-        [self.collectionView registerNib:[UINib nibWithNibName:@"ODReleaseCell" bundle:nil] forCellWithReuseIdentifier:ODReleaseCellID];
-        self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
-                                         {
-                                             weakSelf.pageCount = 1;
-                                             [weakSelf createRequestData];
-                                         }];
-        self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^
-                                         {
-                                             [weakSelf loadMoreData];
-                                         }];
-        [self.view addSubview:self.collectionView];
-    }
-    return _collectionView;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-#pragma mark - UICollectionViewDelegate
-- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 1;
-}
-
-- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return self.dataArray.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    ODReleaseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ODReleaseCellID forIndexPath:indexPath];
-    self.model = self.dataArray[indexPath.row];
-    
-    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    [cell.editButton addTarget:self action:@selector(editButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell setModel:self.model];
-    
-    return cell;
-}
-
-- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
-    return CGSizeMake(KScreenWidth, 138);
-}
-
-- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
-    ODReleaseModel *model = self.dataArray[indexPath.row];
-    self.loveRow = indexPath.row;
-    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"])
-    {
-        vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
-        vc.nick = model.user[@"nick"];
-        NSLog(@"%@",vc.swap_id);
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }
-}
-
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 @end

@@ -328,18 +328,19 @@
     NSDictionary *parameter;
     if ([self.taskRewardLabel.text isEqualToString:@"  选择任务奖励"]) {
         parameter = @{@"title" : self.titleTextView.text, @"tag_ids" : @"", @"start_time" : [[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text], @"end_time" : [[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text], @"content" : self.taskDetailTextView.text, @"open_id" : [ODUserInformation sharedODUserInformation].openID,@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
-
     } else {
-
         parameter = @{@"title" : self.titleTextView.text, @"tag_ids" : @"", @"start_time" : [[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text], @"end_time" : [[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text], @"content" : self.taskDetailTextView.text, @"reward_name" : [self.taskRewardLabel.text substringFromIndex:2], @"open_id" : [ODUserInformation sharedODUserInformation].openID,@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
     }
 
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:ODUrlBazaarReleaseTask parameter:parameter];
+
+    [self pushDataWithUrl:ODUrlTaskTaskAdd parameter:parameter];
+
 }
 
 #pragma mark - 提交数据
 - (void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter {
+
 
 //    __weak typeof(self) weakSelf = self;
 //    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
@@ -376,6 +377,7 @@
         if (weakSelf.myBlock) {
             weakSelf.myBlock([NSString stringWithFormat:@"release"]);
         }
+
         weakSelf.isJob = YES;
         if (weakSelf.isBazaar == NO) {
             ODTabBarController *tabbar = (ODTabBarController *) self.navigationController.tabBarController;
@@ -387,9 +389,7 @@
         }
         [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseTask object:nil];
     } failure:^(NSError *error) {
-        
     }];
-
 }
 
 #pragma mark - UITextViewDelegate

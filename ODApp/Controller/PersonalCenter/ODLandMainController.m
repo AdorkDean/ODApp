@@ -23,7 +23,6 @@
 #import "ODMyTaskController.h"
 #import "ODMyApplyActivityController.h"
 #import "ODMyOrderRecordController.h"
-#import "ODUserEvaluationController.h"
 #import "UMSocial.h"
 #import "ODMyOrderController.h"
 #import "ODGiveOpinionController.h"

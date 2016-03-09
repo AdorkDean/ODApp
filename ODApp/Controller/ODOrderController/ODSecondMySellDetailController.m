@@ -87,65 +87,31 @@
 
 
 - (void)getData {
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"order_id"] = self.orderId;
+    params[@"open_id"] = self.open_id;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapOrderInfo parameters:params modelClass:[ODOrderDetailModel class] success:^(id model)
+     {
+         [self.dataArray removeAllObjects];
+         [self.dataArray addObject:[model result]];
 
+         ODOrderDetailModel *statusModel = self.dataArray[0];
+         NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
 
-    self.manager = [AFHTTPRequestOperationManager manager];
+         if (![self.orderStatus isEqualToString:orderStatue]) {
 
-    NSDictionary *parameters = @{@"order_id" : self.orderId, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
+             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:orderStatue, @"orderStatus", nil];
+             NSNotification *notification = [NSNotification notificationWithName:ODNotificationSellOrderSecondRefresh object:nil userInfo:dic];
 
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:ODUrlSwapOrderInfo parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        if (responseObject) {
-
-
-            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-                [self.dataArray removeAllObjects];
-                NSMutableDictionary *dic = responseObject[@"result"];
-                ODOrderDetailModel *model = [[ODOrderDetailModel alloc] init];
-                [model setValuesForKeysWithDictionary:dic];
-                [self.dataArray addObject:model];
-
-
-                ODOrderDetailModel *statusModel = self.dataArray[0];
-                NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
-
-
-                NSLog(@"_____%@", weakSelf.orderStatus);
-                NSLog(@"______%@", orderStatue);
-
-
-                if (![self.orderStatus isEqualToString:orderStatue]) {
-
-
-                    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:orderStatue, @"orderStatus", nil];
-                    NSNotification *notification = [NSNotification notificationWithName:ODNotificationSellOrderSecondRefresh object:nil userInfo:dic];
-
-                    [[NSNotificationCenter defaultCenter] postNotification:notification];
-
-                }
-                
-
-            } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-
-                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-            }
-
-
-            [weakSelf createScroller];
-
-
-        }
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
-    }];
-
-
+             [[NSNotificationCenter defaultCenter] postNotification:notification];
+         }
+         [weakSelf createScroller];
+     } failure:^(NSError *error) {
+         [ODProgressHUD showInfoWithStatus:@"网络异常"];
+     }];
 }
 
 

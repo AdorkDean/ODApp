@@ -9,6 +9,8 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaarReleaseRewardViewController.h"
 
+#define kBazaarRewardCellId @"ODBazaarRewardCollectionCell"
+
 @interface ODBazaarReleaseRewardViewController ()
 
 @end

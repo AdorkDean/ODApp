@@ -79,63 +79,102 @@
 
 - (void)getData
 {
-    
-    
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.pageNumber];
+//
+//    
+//    self.manager = [AFHTTPRequestOperationManager manager];
+//    NSDictionary *parameters = @{@"type":@"1", @"page":countNumber, @"open_id":self.openId};
+//    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
     
-    
-    self.manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *parameters = @{@"type":@"1", @"page":countNumber, @"open_id":self.openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    __weak typeof (self)weakSelf = self;
-    [self.manager GET:kGetCommentUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        
-        if ([countNumber isEqualToString:@"1"]) {
-            [weakSelf.dataArray removeAllObjects];
-            [weakSelf.noReusltLabel removeFromSuperview];
-        }
-     
-        if (responseObject) {
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"type"] = @"1";
+    params[@"page"] = countNumber;
+    params[@"open_id"] = self.openId;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlUserCommentList parameters:params modelClass:[ODEvaluationModel class] success:^(id model)
+     {
+         if ([countNumber isEqualToString:@"1"]) {
+             [weakSelf.dataArray removeAllObjects];
+             [weakSelf.noReusltLabel removeFromSuperview];
+         }
+         
+         NSArray *evaluationDatas = [model result];
+         [weakSelf.dataArray addObjectsFromArray:evaluationDatas];
 
-            NSMutableDictionary *dic = responseObject[@"result"];
-            for (NSMutableDictionary *miniDic in dic) {
-                ODEvaluationModel *model = [[ODEvaluationModel alloc] init];
-                [model setValuesForKeysWithDictionary:miniDic];
-                [weakSelf.dataArray addObject:model];
-      
-            }
+         [weakSelf.collectionView.mj_header endRefreshing];
 
-            [weakSelf.collectionView.mj_header endRefreshing];
-            
-            
-            
-            if (dic.count == 0) {
-                [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-            }
-            else
-            {
-                [weakSelf.collectionView.mj_footer endRefreshing];
-            }
-            
-            if (weakSelf.dataArray.count == 0) {
-                weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
-                [weakSelf.view addSubview:self.noReusltLabel];
-            }
-            
-            else{
-                [weakSelf.collectionView reloadData];
-            }
-        }
-   
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-  
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf.collectionView.mj_footer endRefreshing];
-       [ODProgressHUD showInfoWithStatus:@"网络异常"];
-        
-    }];
+         if (evaluationDatas.count == 0) {
+             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+         }
+         else
+         {
+             [weakSelf.collectionView.mj_footer endRefreshing];
+         }
+
+         if (weakSelf.dataArray.count == 0) {
+             weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
+             [weakSelf.view addSubview:self.noReusltLabel];
+         }
+         else
+         {
+             [weakSelf.collectionView reloadData];
+         }
+
+     } failure:^(NSError *error) {
+         [weakSelf.collectionView.mj_header endRefreshing];
+         [weakSelf.collectionView.mj_footer endRefreshing];
+     }];
+    
+    
+//    [self.manager GET:ODUrlUserCommentList parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        
+//        
+//        if ([countNumber isEqualToString:@"1"]) {
+//            [weakSelf.dataArray removeAllObjects];
+//            [weakSelf.noReusltLabel removeFromSuperview];
+//        }
+//     
+//        if (responseObject) {
+//
+//            NSMutableDictionary *dic = responseObject[@"result"];
+//            for (NSMutableDictionary *miniDic in dic) {
+//                ODEvaluationModel *model = [[ODEvaluationModel alloc] init];
+//                [model setValuesForKeysWithDictionary:miniDic];
+//                [weakSelf.dataArray addObject:model];
+//      
+//            }
+//
+//            [weakSelf.collectionView.mj_header endRefreshing];
+//            
+//            
+//            
+//            if (dic.count == 0) {
+//                [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+//            }
+//            else
+//            {
+//                [weakSelf.collectionView.mj_footer endRefreshing];
+//            }
+//            
+//            if (weakSelf.dataArray.count == 0) {
+//                weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
+//                [weakSelf.view addSubview:self.noReusltLabel];
+//            }
+//            
+//            else{
+//                [weakSelf.collectionView reloadData];
+//            }
+//        }
+//   
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//  
+//        [weakSelf.collectionView.mj_header endRefreshing];
+//        [weakSelf.collectionView.mj_footer endRefreshing];
+//       [ODProgressHUD showInfoWithStatus:@"网络异常"];
+//        
+//    }];
   
 }
 

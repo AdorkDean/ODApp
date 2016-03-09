@@ -9,6 +9,9 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODMyOrderRecordController.h"
 #import "ODUserInformation.h"
+
+#define kMyOrderRecordCellId @"ODMyOrderRecordCell"
+
 @interface ODMyOrderRecordController ()
 
 @property (nonatomic, assign) long cancelOrderRow;
@@ -17,14 +20,14 @@
 
 @implementation ODMyOrderRecordController
 
+#pragma mark - 生命周期
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     self.navigationItem.title = self.centerTitle;
-
     self.count = 1;
-
     self.orderArray = [[NSMutableArray alloc] init];    
 
     [self createCollectionView];
@@ -40,7 +43,6 @@
                                      }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationCancelOrder object:nil];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -52,6 +54,11 @@
         self.isRefresh = NO;
     }
     [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 - (void)reloadData:(NSNotification *)text
@@ -74,12 +81,6 @@
     [self createRequest];
 }
 
-#pragma mark - 移除通知
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 #pragma mark - 加载数据请求
 - (void)createRequest
 {
@@ -89,7 +90,6 @@
     __weakSelf
     [ODHttpTool getWithURL:ODUrlStoreOrders parameters:parameter modelClass:[ODMyOrderRecordModel class] success:^(id model)
     {
-        
         for (ODMyOrderRecordModel *orderModel in [model result])
         {
             if (![[weakSelf.orderArray valueForKey:@"order_id"] containsObject:[orderModel order_id]]) {
@@ -141,7 +141,7 @@
     [self.view addSubview:self.collectionView];    
 }
 
-#pragma mark - UICollectionViewDelegate
+#pragma mark - UICollectionViewDataSource
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
@@ -167,19 +167,16 @@
     return cell;
 }
 
+#pragma mark - UICollectionViewDelegate
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     float height;
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
     height = [ODHelp textHeightFromTextString:model.purpose width:KScreenWidth - 126 fontSize:13] - 13;
     height = height + [ODHelp textHeightFromTextString:model.position_str width:KScreenWidth - 126 fontSize:13] - 13;
     
     return CGSizeMake(KScreenWidth - 8, 130 + height);
-   
 }
-
-
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -194,9 +191,10 @@
     vc.status_str = [self.orderArray[indexPath.row]status_str];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
+#pragma mark - 移除通知
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
