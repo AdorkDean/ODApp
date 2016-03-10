@@ -8,7 +8,6 @@
 
 #import "ODBaseViewController.h"
 #import "AFNetworking.h"
-#import "ODBazaarReleaseSkillTimeModel.h"
 #import "ODBazaarReleaseSkillTimeViewCell.h"
 
 @interface ODBazaarReleaseSkillTimeViewController : ODBaseViewController <UITableViewDataSource, UITableViewDelegate>

@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "ODClassMethod.h"
-#import "ODCommunityModel.h"
 #import "ODCommunityCollectionCell.h"
 #import "ODCommunityDetailViewController.h"
 #import "MJRefresh.h"

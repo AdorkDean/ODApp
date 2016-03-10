@@ -113,6 +113,7 @@ NSString * const ODUrlUserAddressDel = @"user/address/del";
 NSString * const ODUrlUserAssressAdd = @"user/address/add";
 NSString * const ODUrlUserLoveList = @"user/love/list";
 NSString * const ODUrlUserBindMoble = @"user/bind/mobile";
+NSString * const ODUrlUserAddressAdd = @"user/address/add";
 
 /** store */
 NSString * const ODUrlStoreActivityList = @"store/activity/list";
@@ -181,8 +182,10 @@ NSString * const ODUrlSwapServiceTime = @"swap/service/time";
 NSString * const ODUrlSwapCreate = @"swap/create";
 NSString * const ODUrlSwapEdit = @"swap/edit";
 NSString * const ODUrlSwapInfo = @"swap/info";
-
-
+NSString * const ODUrlSwapConfirmDelivery = @"swap/confirm/delivery";
+NSString * const ODUrlSwapFinish = @"swap/finish";
+NSString * const ODUrlSwapOrderReason = @"swap/order/reason";
+NSString * const ODUrlSwapSchedule = @"swap/schedule";
 
 /** pay */
 NSString * const ODUrlPayWeixinTradeNumber = @"pay/weixin/trade/number";

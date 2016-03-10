@@ -208,8 +208,8 @@
 {
     ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-    ODCommunityModel *model = self.dataArray[indexPath.row];
-    NSString *userId = [NSString stringWithFormat:@"%@",model.user_id];
+    ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
+    NSString *userId = [NSString stringWithFormat:@"%d",model.user_id];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     vc.open_id = [userInfoDic[userId]open_id];
     

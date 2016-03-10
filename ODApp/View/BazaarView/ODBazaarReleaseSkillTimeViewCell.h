@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ODBazaarReleaseSkillTimeModel.h"
+
 
 @interface ODBazaarReleaseSkillTimeViewCell : UITableViewCell
 

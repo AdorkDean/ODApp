@@ -362,7 +362,7 @@
 {
     ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-    ODCommunityModel *model = self.dataArray[indexPath.row];
+    ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
     picController.photos = model.imgs_big;
     picController.selectedIndex = button.tag-10*indexPath.row;
