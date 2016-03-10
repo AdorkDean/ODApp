@@ -55,9 +55,9 @@ NSString *const ODLocationCellID = @"ODLocationCell";
                 [weakSelf.collectionView reloadData];
 
             }
-                   failure:^(NSError *error) {
+    failure:^(NSError *error) {
 
-                   }];
+    }];
 }
 
 #pragma mark - Create UICollectionView

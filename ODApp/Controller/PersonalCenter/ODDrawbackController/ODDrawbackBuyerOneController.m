@@ -53,34 +53,30 @@
 @implementation ODDrawbackBuyerOneController
 
 #pragma mark - 生命周期方法
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-}
-#pragma mark - 生命周期
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = self.drawbackTitle;
-    
     self.view.userInteractionEnabled = YES;
     
     [self createScrollView];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+
+
 #pragma mark - Create UIScrollView
-- (void)createScrollView
-{
+- (void)createScrollView {
     uniftyHeight = 43;
     
     // 动态设置 ScrollView 的高度
@@ -106,25 +102,20 @@
     
     // 动态设置 ScrollView ContentSize
     float scrollContentHeight;
-    if (self.isService)
-    {
+    if (self.isService) {
         scrollContentHeight = CGRectGetMaxY(self.serviceTimeView.frame);
     }
-    else if (self.isDrawbackState)
-    {
+    else if (self.isDrawbackState) {
         scrollContentHeight = CGRectGetMaxY(self.drawbackStateView.frame);
     }
-    else
-    {
+    else {
         scrollContentHeight = CGRectGetMaxY(self.drawbackReasonContentView.frame);
     }
-    
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width,scrollContentHeight );
 }
 
 #pragma mark - 退款金额
-- (void)createDrawbackMoneyView
-{
+- (void)createDrawbackMoneyView {
     self.drawbackMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, uniftyHeight)];
     self.drawbackMoneyLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     NSString *drawbackMoneyStr = [NSString stringWithFormat:@"您的退款金额:%@元",self.darwbackMoney];
@@ -138,18 +129,15 @@
 }
 
 #pragma mark - 退款原因
-- (void)createDrawbackReasonView
-{
+- (void)createDrawbackReasonView {
     // 退款原因内容 高度
     float drawbackReasonHeight;
     
     // 动态设置 退款原因 的高度
-    if (self.isSelectReason)
-    {
+    if (self.isSelectReason) {
         drawbackReasonHeight = (uniftyHeight + 0.5) * 5 - 0.5;
     }
-    else
-    {
+    else {
         drawbackReasonHeight = [ODHelp textHeightFromTextString:self.drawbackReason width:KScreenWidth - ODLeftMargin * 2 miniHeight:uniftyHeight fontSize:13.5];
     }
     UILabel *drawbackReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackMoneyLabel.frame), KScreenWidth, 22)];
@@ -164,16 +152,14 @@
     [self.scrollView addSubview:self.drawbackReasonContentView];
     
     // 退款原因 可选择
-    if (self.isSelectReason)
-    {
+    if (self.isSelectReason) {
         // 退款原因Label 距离 屏幕左边的 距离
         float reasonLabelLeftMargin = ODLeftMargin + 25;
         
         self.selectReasonArray = @[@"卖家自身原因无法服务",@"对服务质量不满意",@"未按时交付服务",@"双方已协商好退款",@"其它"];
         self.selectImageArray = @[@"icon_Default address_default",@"icon_Default address_Selected"];
         
-        for (int i = 0; i < self.selectReasonArray.count; i++)
-        {
+        for (int i = 0; i < self.selectReasonArray.count; i++) {
             // 选择原因label
             UILabel *selectReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, (uniftyHeight + 0.5) * i - 0.5, KScreenWidth, uniftyHeight)];
             selectReasonLabel.text = self.selectReasonArray[i];
@@ -196,19 +182,16 @@
             [self.drawbackReasonContentView addSubview: selectReasonButton];
         }
         
-        for (int i = 1; i < self.selectReasonArray.count; i++)
-        {
+        for (int i = 1; i < self.selectReasonArray.count; i++) {
             UIView *selectReasonLineView = [[UIView alloc] initWithFrame:CGRectMake(ODLeftMargin, uniftyHeight * i, KScreenWidth, 0.5)];
             selectReasonLineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
             [self.drawbackReasonContentView addSubview:selectReasonLineView];
         }
     }
     // 退款原因 不可选择
-    else
-    {
+    else {
         UILabel *drawbackReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - ODLeftMargin * 2, drawbackReasonHeight)];
-        if (self.drawbackReason == nil)
-        {
+        if (self.drawbackReason == nil) {
             self.drawbackReason = @"";
         }
         drawbackReasonContentLabel.text = self.drawbackReason;
@@ -221,11 +204,9 @@
 }
 
 #pragma mark - 拒绝原因
-- (void)createRefuseReasonView
-{
+- (void)createRefuseReasonView {
     // 显示 拒绝原因
-    if (self.isRefuseReason)
-    {
+    if (self.isRefuseReason) {
         UILabel *refuseReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackReasonContentView.frame), KScreenWidth, 22)];
         if (self.refuseReason == nil) {
             self.refuseReason = @"";
@@ -254,27 +235,22 @@
 }
 
 #pragma mark - 联系客服
-- (void)createServiceView
-{
+- (void)createServiceView {
     // 动态设置 联系客服GetMaxY
     float serviceGetMaxY;
-    if (self.isDrawbackState)
-    {
+    if (self.isDrawbackState) {
         serviceGetMaxY = CGRectGetMaxY(self.drawbackReasonContentView.frame) + 22 + 150;
         [self drawbackStateView];
     }
-    else if (self.isRefuseReason)
-    {
+    else if (self.isRefuseReason) {
         serviceGetMaxY = CGRectGetMaxY(self.refuseReasonContentView.frame);
     }
-    else
-    {
+    else {
         serviceGetMaxY = CGRectGetMaxY(self.drawbackReasonContentView.frame);
     }
     
     // 显示 联系客服
-    if (self.isService)
-    {
+    if (self.isService) {
         UILabel *contactServiceLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, serviceGetMaxY, KScreenWidth, 22)];
         contactServiceLabel.text = @"联系客服";
         contactServiceLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
@@ -320,8 +296,7 @@
 - (void)createEndButton
 {
     // 显示 申请退款 按钮
-    if (self.isRelease)
-    {
+    if (self.isRelease) {
         UIButton *applyDrawbackButton = [[UIButton alloc] initWithFrame:CGRectMake(0, KControllerHeight - ODNavigationHeight - 50, KScreenWidth, 50)];
         [applyDrawbackButton setTitle:self.confirmButtonContent forState:UIControlStateNormal];
         applyDrawbackButton.titleLabel.font = [UIFont systemFontOfSize:13.5];
@@ -333,19 +308,15 @@
     }
     
     // 显示 拒绝、接受 按钮
-    if (self.isRefuseAndReceive)
-    {
+    if (self.isRefuseAndReceive) {
         NSString *buttonTitle;
         NSString *buttonColor;
-        for (int i = 0; i < 2; i++)
-        {
-            if (i == 0)
-            {
+        for (int i = 0; i < 2; i++) {
+            if (i == 0) {
                 buttonTitle = @"拒绝";
                 buttonColor = @"#d0d0d0";
             }
-            else
-            {
+            else {
                 buttonTitle = @"接受";
                 buttonColor = @"#ff6666";
             }
@@ -364,10 +335,8 @@
 
 
 #pragma mark - 退款说明
--(UIView *)drawbackStateView
-{
-    if (!_drawbackStateView)
-    {
+-(UIView *)drawbackStateView {
+    if (!_drawbackStateView) {
         _drawbackStateView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.drawbackReasonContentView.frame), KScreenWidth, 22 + 150)];
         self.servicePhoneView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
         [self.scrollView addSubview:_drawbackStateView];
@@ -386,8 +355,7 @@
         self.drawbackStateTextView = [[UITextView alloc]initWithFrame:CGRectMake(ODLeftMargin, 22, KScreenWidth - ODLeftMargin * 2, 150)];
         self.drawbackStateTextView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
         self.drawbackStateTextView.font = [UIFont systemFontOfSize:12];
-        if (self.drawbackState == nil)
-        {
+        if (self.drawbackState == nil) {
             self.drawbackState = @"";
         }
         
@@ -408,8 +376,7 @@
 #pragma mark - DataRequest
 
 #pragma mark - 拒绝退款请求
-- (void)refuseDrawbackRequest
-{
+- (void)refuseDrawbackRequest {
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.cancelOrderView.reasonTextView.text, @"open_id":openId};
 
@@ -423,15 +390,13 @@
         [weakSelf.cancelOrderView removeFromSuperview];
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }
-                   failure:^(NSError *error) {
+    failure:^(NSError *error) {
                 
     }];
 }
 
 #pragma mark - 接受退款请求
-
-- (void)receiveDrawbackRequest
-{
+- (void)receiveDrawbackRequest {
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason ,@"open_id":openId};
     __weakSelf
@@ -442,15 +407,13 @@
         [[NSNotificationCenter defaultCenter] postNotification:notification];
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }
-                   failure:^(NSError *error) {
+    failure:^(NSError *error) {
                        
     }];
  }
 
 #pragma mark - 申请退款请求
-
-- (void)releaseDrawbackRequest
-{
+- (void)releaseDrawbackRequest {
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason, @"open_id":openId};
     __weakSelf
@@ -463,51 +426,40 @@
         [weakSelf.navigationController popViewControllerAnimated:YES];
         
     }
-                   failure:^(NSError *error) {
+    failure:^(NSError *error) {
                 
     }];
 }
 
 #pragma mark - UITextViewDelegate
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    if (textView == self.cancelOrderView.reasonTextView)
-    {
-        if ([textView.text isEqualToString:@" 请输入拒绝原因"])
-        {
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if (textView == self.cancelOrderView.reasonTextView) {
+        if ([textView.text isEqualToString:@" 请输入拒绝原因"]) {
             textView.text = @"";
             textView.textColor = [UIColor blackColor];
         }
     }
 }
 
-- (void)textViewDidChange:(UITextView *)textView
-{
-    if (textView.text.length == 0)
-    {
+- (void)textViewDidChange:(UITextView *)textView {
+    if (textView.text.length == 0) {
         self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
     }
-    else
-    {
+    else {
         self.contentPlaceholderLabel.text = @"";
     }
 }
 
--(void)textViewDidEndEditing:(UITextView *)textView
-{
-    if (textView == self.cancelOrderView.reasonTextView)
-    {
-        if ([self.cancelOrderView.reasonTextView.text isEqualToString:@" 请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
-        {
+-(void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView == self.cancelOrderView.reasonTextView) {
+        if ([self.cancelOrderView.reasonTextView.text isEqualToString:@" 请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
             self.cancelOrderView.reasonTextView.text = @" 请输入拒绝原因";
             self.cancelOrderView.reasonTextView.textColor = [UIColor lightGrayColor];
         }
     }
-    else if (textView == self.drawbackStateTextView)
-    {
-        if (textView.text.length == 0)
-        {
+    else if (textView == self.drawbackStateTextView) {
+        if (textView.text.length == 0) {
             self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
         }
     }
@@ -516,39 +468,29 @@
 #pragma mark - Action
 
 #pragma mark - 退款原因点击事件
-
-- (void)selectReasonButtonClick:(UIButton *)button
-{
-    for (int i = 0; i < self.selectReasonArray.count; i++)
-    {
-        if (button.tag == i + 1000)
-        {
+- (void)selectReasonButtonClick:(UIButton *)button {
+    for (int i = 0; i < self.selectReasonArray.count; i++) {
+        if (button.tag == i + 1000) {
             UIImageView *imageView = (UIImageView *)[self.drawbackReasonContentView viewWithTag:button.tag - 900];
             imageView.image = [UIImage imageNamed:self.selectImageArray[1]];
             self.lastSelect = button.tag - 1000;
         }
-        else
-        {
+        else {
             UIImageView *imageView = (UIImageView *)[self.drawbackReasonContentView viewWithTag:i + 100];
             imageView.image = [UIImage imageNamed:self.selectImageArray[0]];
         }
     }
-    if (self.lastSelect == 4)
-    {
+    if (self.lastSelect == 4) {
         self.drawbackStateView.hidden = NO;
     }
-    else
-    {
+    else {
         self.drawbackStateView.hidden = YES;
     }
 }
 
-
 #pragma mark - 拒绝、接受 按钮点击事件
-- (void)refuseAndReceiveButtonClick:(UIButton *)button
-{
-    if (button.tag == 1000)
-    {
+- (void)refuseAndReceiveButtonClick:(UIButton *)button {
+    if (button.tag == 1000) {
         self.cancelOrderView = [ODCancelOrderView getView];
         self.cancelOrderView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
         [self.cancelOrderView.cancelButton addTarget:self action:@selector(cancelView:) forControlEvents:UIControlEventTouchUpInside];
@@ -557,57 +499,46 @@
         self.cancelOrderView.reasonTextView.delegate = self;
         [[[UIApplication sharedApplication]keyWindow] addSubview:self.cancelOrderView];
     }
-    else
-    {
+    else {
         [self receiveDrawbackRequest];
     }
 }
 
 #pragma mark - 申请退款 按钮点击事件
--(void)applyDrawbackButtonClick:(UIButton *)button
-{
-    if (self.lastSelect != self.selectReasonArray.count - 1)
-    {
+-(void)applyDrawbackButtonClick:(UIButton *)button {
+    if (self.lastSelect != self.selectReasonArray.count - 1) {
         self.drawbackReason = self.selectReasonArray[self.lastSelect];
         [self releaseDrawbackRequest];
     }
-    else
-    {
+    else {
         self.drawbackReason = self.drawbackStateTextView.text;
-        if ([self.drawbackStateTextView.text isEqualToString:@""])
-        {
+        if ([self.drawbackStateTextView.text isEqualToString:@""]) {
             [ODProgressHUD showInfoWithStatus:@"请输入退款说明"];
         }
-        else
-        {
+        else {
             [self releaseDrawbackRequest];
         }
     }
 }
 
 #pragma mark - 拨打电话
-- (void)servicePhoneButtonClick:(UIButton *)button
-{
+- (void)servicePhoneButtonClick:(UIButton *)button {
     NSString *telNumber = [NSString stringWithFormat:@"tel:%@",self.servicePhone];
     UIWebView *callWebView = [[UIWebView alloc] init];
     [callWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:telNumber]]];
     [self.view addSubview:callWebView];
 }
 
-- (void)submitAction:(UIButton *)sender
-{
-    if ([self.cancelOrderView.reasonTextView.text isEqualToString:@" 请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
-    {
+- (void)submitAction:(UIButton *)sender {
+    if ([self.cancelOrderView.reasonTextView.text isEqualToString:@" 请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
         [ODProgressHUD showInfoWithStatus:@" 请输入拒绝原因"];
     }
-    else
-    {
+    else {
         [self refuseDrawbackRequest];
     }
 }
 
-- (void)cancelView:(UIButton *)sender
-{
+- (void)cancelView:(UIButton *)sender {
     [self.cancelOrderView removeFromSuperview];
 }
 

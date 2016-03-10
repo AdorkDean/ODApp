@@ -88,7 +88,7 @@
     [amountImageView addSubview:priceLabel];
 
     self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(88, 15, amountImageView.frame.size.width - 106, 19)];
-    self.allPriceLabel.text = [NSString stringWithFormat:@"%@元", self.informationModel.price];
+    self.allPriceLabel.text = [NSString stringWithFormat:@"%d元", self.informationModel.price];
     self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
     self.allPriceLabel.font = [UIFont systemFontOfSize:15];
     self.allPriceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];

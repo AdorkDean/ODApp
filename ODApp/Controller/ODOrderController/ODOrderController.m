@@ -132,7 +132,7 @@
     [amountImageView addSubview:priceLabel];
 
     self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(88, 15, amountImageView.frame.size.width - 106, 19)];
-    self.allPriceLabel.text = [NSString stringWithFormat:@"%@元", self.informationModel.price];
+    self.allPriceLabel.text = [NSString stringWithFormat:@"%d元", self.informationModel.price];
     self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
     self.allPriceLabel.font = [UIFont systemFontOfSize:15];
     self.allPriceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
@@ -166,7 +166,7 @@
 {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"swap_id"] = [NSString stringWithFormat:@"%@", self.informationModel.swap_id];
+    params[@"swap_id"] = [NSString stringWithFormat:@"%d", self.informationModel.swap_id];
     params[@"service_time"] = @"";
     params[@"user_address_id"] = self.addressId;
     params[@"comment"] = @"";
