@@ -47,11 +47,18 @@
 #pragma mark - 加载数据请求
 - (void)getOrderDetailRequest {
     
-    NSDictionary *parameter = @{@"order_id":[NSString stringWithFormat:@"%@", self.order_id]};
+    NSDictionary *parameter = @{@"order_id" : [NSString stringWithFormat:@"%@", self.order_id],
+                                @"call_array" : @"1"
+                                };
     __weakSelf
     [ODHttpTool getWithURL:ODUrlStoreInfoOrder parameters:parameter modelClass:[ODMyOrderDetailModel class] success:^(id model)
     {
-        weakSelf.model = [model result];        
+        weakSelf.model = [model result];
+        
+        for (ODMyOrderDetailDevicesModel *devices in [[model result] devices]) {
+            [weakSelf.devicesArray addObject:devices.name];
+        }
+        
         [weakSelf createOrderView];
     }
     failure:^(NSError *error) {
@@ -97,22 +104,15 @@
     UILabel *deviceLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(experienceCenterLabel.frame) + labelUpMargin, kScreenSize.width - ODLeftMargin * 2, 11.5) text:@"需要使用的中心设备" font:11.5 alignment:@"left" color:@"#8e8e8e" alpha:1];
     [self.scrollView addSubview:deviceLabel];
     
-    NSString *name = [[NSMutableString alloc] init];
-
+    NSMutableString *devicesName = [[NSMutableString alloc] init];
     if (self.devicesArray.count == 0) {
-        name = @"无";
-    }
-    else if (self.devicesArray.count == 1) {
-        name = self.devicesArray[0];
-    }
-    else if (self.devicesArray.count == 2) {
-        name = [NSString stringWithFormat:@"%@,%@",self.devicesArray[0],self.devicesArray[1]];
-    }
-    else if (self.devicesArray.count == 3) {
-        name = [NSString stringWithFormat:@"%@,%@,%@",self.devicesArray[0],self.devicesArray[1],self.devicesArray[2]];
+        [devicesName appendString:@"无"];
     }
     else {
-        name = [NSString stringWithFormat:@"%@,%@,%@,%@",self.devicesArray[0],self.devicesArray[1],self.devicesArray[2],self.devicesArray[3]];
+        for (int i = 0; i < self.devicesArray.count; i++) {
+            [devicesName appendString:[NSString stringWithFormat:@"%@ , ", self.devicesArray[i]]];
+        }
+        [devicesName deleteCharactersInRange:NSMakeRange(devicesName.length - 2, 2)];
     }
     
     UIView *deviceDetailView = [ODClassMethod creatViewWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(deviceLabel.frame) + labelDownMargin, KScreenWidth - viewLeftMargin * 2, labelHeight) tag:0 color:@"#ffffff"];
@@ -121,7 +121,7 @@
     deviceDetailView.layer.borderWidth = 0.5;
     [self.scrollView addSubview:deviceDetailView];
     
-    UILabel *deviceDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(deviceLabel.frame) + labelDownMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",name] font:12.5 alignment:@"left" color:@"#484848" alpha:1];
+    UILabel *deviceDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(deviceLabel.frame) + labelDownMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",devicesName] font:12.5 alignment:@"left" color:@"#484848" alpha:1];
     [self.scrollView addSubview:deviceDetailLabel];
     
 #pragma mark - 活动目的
