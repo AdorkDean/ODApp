@@ -115,6 +115,9 @@ NSString * const ODUrlUserLoveList = @"user/love/list";
 NSString * const ODUrlUserBindMoble = @"user/bind/mobile";
 NSString * const ODUrlUserAddressAdd = @"user/address/add";
 
+
+
+
 /** store */
 NSString * const ODUrlStoreActivityList = @"store/activity/list";
 NSString * const ODUrlStoreApplyDetail2 = @"store/apply/detail2";

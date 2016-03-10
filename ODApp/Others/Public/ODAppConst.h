@@ -100,8 +100,6 @@ UIKIT_EXTERN NSString * const ODWebUrlFindJob;
 #pragma mark - 请求URL接口
 /** 统一的URL */
 UIKIT_EXTERN NSString * const ODBaseURL;
-UIKIT_EXTERN NSString * const ODURL;
-
 
 
 
