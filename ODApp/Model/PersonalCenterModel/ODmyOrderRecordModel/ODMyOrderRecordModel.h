@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Odong Bracelet. All rights reserved.
 //
 
-#import "ODAppModel.h"
+#import "ODMyOrderRecordModel.h"
 
 @interface ODMyOrderRecordModel : NSObject
 

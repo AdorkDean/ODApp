@@ -244,7 +244,6 @@
 		D4D0739D1C59B9FA008527C9 /* ODCommunityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0714A1C59B9FA008527C9 /* ODCommunityModel.m */; };
 		D4D0739E1C59B9FA008527C9 /* ODCenterIntroduceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0714D1C59B9FA008527C9 /* ODCenterIntroduceModel.m */; };
 		D4D0739F1C59B9FA008527C9 /* ODHomeFoundModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0714F1C59B9FA008527C9 /* ODHomeFoundModel.m */; };
-		D4D073A01C59B9FA008527C9 /* ODAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D071521C59B9FA008527C9 /* ODAppModel.m */; };
 		D4D073A11C59B9FA008527C9 /* ODEvaluationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D071551C59B9FA008527C9 /* ODEvaluationModel.m */; };
 		D4D073A31C59B9FA008527C9 /* ODMyOrderDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0715B1C59B9FA008527C9 /* ODMyOrderDetailModel.m */; };
 		D4D073A41C59B9FA008527C9 /* ODMyOrderRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D4D0715D1C59B9FA008527C9 /* ODMyOrderRecordModel.m */; };
@@ -778,8 +777,6 @@
 		D4D0714D1C59B9FA008527C9 /* ODCenterIntroduceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCenterIntroduceModel.m; sourceTree = "<group>"; };
 		D4D0714E1C59B9FA008527C9 /* ODHomeFoundModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHomeFoundModel.h; sourceTree = "<group>"; };
 		D4D0714F1C59B9FA008527C9 /* ODHomeFoundModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeFoundModel.m; sourceTree = "<group>"; };
-		D4D071511C59B9FA008527C9 /* ODAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppModel.h; sourceTree = "<group>"; };
-		D4D071521C59B9FA008527C9 /* ODAppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAppModel.m; sourceTree = "<group>"; };
 		D4D071541C59B9FA008527C9 /* ODEvaluationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODEvaluationModel.h; sourceTree = "<group>"; };
 		D4D071551C59B9FA008527C9 /* ODEvaluationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODEvaluationModel.m; sourceTree = "<group>"; };
 		D4D0715A1C59B9FA008527C9 /* ODMyOrderDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyOrderDetailModel.h; sourceTree = "<group>"; };
@@ -2101,7 +2098,6 @@
 				D4F76D491C605E8700D59F02 /* ODActivityCenter */,
 				D4D071451C59B9FA008527C9 /* CommunityModel */,
 				D4D0714B1C59B9FA008527C9 /* HomeFoundModel */,
-				D4D071501C59B9FA008527C9 /* ODModel */,
 				D4D071531C59B9FA008527C9 /* PersonalCenterModel */,
 			);
 			path = Model;
@@ -2143,15 +2139,6 @@
 				D4D0714F1C59B9FA008527C9 /* ODHomeFoundModel.m */,
 			);
 			path = HomeFoundModel;
-			sourceTree = "<group>";
-		};
-		D4D071501C59B9FA008527C9 /* ODModel */ = {
-			isa = PBXGroup;
-			children = (
-				D4D071511C59B9FA008527C9 /* ODAppModel.h */,
-				D4D071521C59B9FA008527C9 /* ODAppModel.m */,
-			);
-			path = ODModel;
 			sourceTree = "<group>";
 		};
 		D4D071531C59B9FA008527C9 /* PersonalCenterModel */ = {
@@ -2955,7 +2942,6 @@
 				9DEDCF561C64B3F4003015C6 /* ODBazaarDetailModel.m in Sources */,
 				D4F76DAD1C61AEA100D59F02 /* ODOrderView.m in Sources */,
 				D4D073971C59B9FA008527C9 /* ODUserNickNameController.m in Sources */,
-				D4D073A01C59B9FA008527C9 /* ODAppModel.m in Sources */,
 				D4D073861C59B9FA008527C9 /* ODChangePassWordController.m in Sources */,
 				9D8A98A01C7B0208005BC458 /* ODSecondMySellDetailController.m in Sources */,
 				2314F5941C8992EB00A770DC /* ODStoreDetailModel.m in Sources */,
