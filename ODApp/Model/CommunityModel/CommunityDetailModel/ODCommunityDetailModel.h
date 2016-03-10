@@ -8,7 +8,7 @@
 
 #import "ODAppModel.h"
 
-@interface ODCommunityDetailModel : ODAppModel
+@interface ODCommunityDetailModel : NSObject
 
 
 //@property(nonatomic, copy) NSString *title;
