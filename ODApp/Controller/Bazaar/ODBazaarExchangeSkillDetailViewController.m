@@ -50,7 +50,6 @@
 
     @try {
 
-
         if ([WXApi isWXAppInstalled]) {
 
 
@@ -123,30 +122,6 @@
         
         
     }];
-
-    
-
-//    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
-//
-//        if (responseObject) {
-//            [weakSelf.dataArray removeAllObjects];
-//            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//            NSDictionary *result = dict[@"result"];
-//            ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc] init];
-//            [model setValuesForKeysWithDictionary:result];
-//            [weakSelf.dataArray addObject:model];
-//            weakSelf.love_id = [NSString stringWithFormat:@"%d", model.love_id];
-//            weakSelf.love_num = [NSString stringWithFormat:@"%d", model.love_num];
-//            [weakSelf createUserInfoView];
-//            [weakSelf createDetailView];
-//            [weakSelf createBottomView];
-//        }
-//    }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-//
-//    }];
-    
-
-
 }
 
 - (void)createScrollView {

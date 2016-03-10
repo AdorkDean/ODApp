@@ -79,9 +79,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODLocationCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ODLocationCellID forIndexPath:indexPath];
-
     cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-
     cell.cityNameLabel.text = self.cityListArray[indexPath.row];
     return cell;
 }
