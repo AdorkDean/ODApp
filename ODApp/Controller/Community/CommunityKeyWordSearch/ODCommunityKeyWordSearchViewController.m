@@ -184,8 +184,8 @@
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc] init];
-    ODCommunityModel *model = self.dataArray[indexPath.row];
-    detailController.bbs_id = [NSString stringWithFormat:@"%@", model.id];
+    ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
+    detailController.bbs_id = [NSString stringWithFormat:@"%d", model.id];
     [self.navigationController pushViewController:detailController animated:YES];
 }
 
@@ -211,7 +211,7 @@
 }
 
 //动态计算cell的高度
-- (CGFloat)returnHight:(ODCommunityModel *)model {
+- (CGFloat)returnHight:(ODCommunityBbsListModel *)model {
     CGFloat width = kScreenSize.width > 320 ? 90 : 70;
     NSString *content = model.content;
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:10.5]};
@@ -249,7 +249,7 @@
 - (void)imageButtonClick:(UIButton *)button {
     ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *) button.superview.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-    ODCommunityModel *model = self.dataArray[indexPath.row];
+    ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc] init];
     picController.photos = model.imgs;
     picController.selectedIndex = button.tag - 10 * indexPath.row;

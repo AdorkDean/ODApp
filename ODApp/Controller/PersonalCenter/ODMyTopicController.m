@@ -11,7 +11,7 @@
 #import "MJRefresh.h"
 #import "UIImageView+WebCache.h"
 #import "ODCommunityCollectionCell.h"
-//#import "ODCommunityModel.h"
+//#import "ODCommunityBbsModel.h"
 #import "ODCommunityDetailViewController.h"
 #import "ODOthersInformationController.h"
 @interface ODMyTopicController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
@@ -227,7 +227,7 @@
         for (id userKey in [[model result] users]) {
             NSString *key = [NSString stringWithFormat:@"%@",userKey];
             NSDictionary *itemDict = [[model result] users][key];
-            ODCommunityModel *model = [[ODCommunityModel alloc]init];
+            ODCommunityBbsModel *model = [[ODCommunityBbsModel alloc]init];
             [model setValuesForKeysWithDictionary:itemDict];
             [weakSelf.firstUserInfoDic setObject:model forKey:userKey];
         }
@@ -279,7 +279,7 @@
         for (id userKey in [[model result] users]) {
             NSString *key = [NSString stringWithFormat:@"%@",userKey];
             NSDictionary *itemDict = [[model result] users][key];
-            ODCommunityModel *model = [[ODCommunityModel alloc]init];
+            ODCommunityBbsModel *model = [[ODCommunityBbsModel alloc]init];
             [model setValuesForKeysWithDictionary:itemDict];
             [weakSelf.secondUserInfoDic setObject:model forKey:userKey];
         }
@@ -311,7 +311,7 @@
 {
     ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview.superview;
     NSIndexPath *indexPath = [self.firstCollectionView indexPathForCell:cell];
-    ODCommunityModel *model = self.FirstDataArray[indexPath.row];
+    ODCommunityBbsListModel *model = self.FirstDataArray[indexPath.row];
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
     picController.photos = model.imgs;
     picController.selectedIndex = button.tag-10*indexPath.row;
@@ -325,7 +325,7 @@
 {
     ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview.superview;
     NSIndexPath *indexPath = [self.secondCollectionView indexPathForCell:cell];
-    ODCommunityModel *model = self.secondDataArray[indexPath.row];
+    ODCommunityBbsListModel *model = self.secondDataArray[indexPath.row];
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
     picController.photos = model.imgs;
     picController.selectedIndex = button.tag-10*indexPath.row;

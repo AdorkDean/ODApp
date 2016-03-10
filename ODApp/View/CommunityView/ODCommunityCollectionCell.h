@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ODCommunityModel.h"
 #import "UIButton+WebCache.h"
 #import "UIImageView+WebCache.h"
 #import "ODCommunityBbsModel.h"
@@ -23,7 +22,7 @@
 
 @property(nonatomic,strong)ODCommunityBbsListModel *model;
 
-//- (void)showDateWithModel:(ODCommunityModel *)model;
+
 
 -(void)setModel:(ODCommunityBbsListModel *)model;
 

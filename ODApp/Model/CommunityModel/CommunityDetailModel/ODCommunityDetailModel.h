@@ -6,28 +6,8 @@
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
 
-#import "ODAppModel.h"
 
-@interface ODCommunityDetailModel : ODAppModel
-
-
-//@property(nonatomic, copy) NSString *title;
-//@property(nonatomic, copy) NSString *content;
-//@property(nonatomic, copy) NSString *created_at;
-//@property(nonatomic, copy) NSString *user_id;
-//@property(nonatomic, copy) NSString *nick;
-//@property(nonatomic, copy) NSString *sign;
-//@property(nonatomic, copy) NSString *avatar_url;
-//@property(nonatomic, copy) NSString *bbs_id;
-//@property(nonatomic, copy) NSString *parent_user_nick;
-//@property(nonatomic, strong) NSArray *bbs_imgs;
-//@property(nonatomic, strong) NSArray *imgs_big;
-//@property(nonatomic, strong) NSDictionary *user;
-//@property(nonatomic, copy) NSString *id;
-//@property(nonatomic, copy) NSString *open_id;
-//@property(nonatomic, copy) NSString *floor;
-//@property(nonatomic, strong) NSMutableDictionary *share;
-
+@interface ODCommunityDetailModel : NSObject
 
 @property (nonatomic, assign) int bbs_id;
 

@@ -6,7 +6,7 @@
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
 
-#import "ODAppModel.h"
+#import "ODBazaarDetailModel.h"
 
 @interface ODBazaarDetailApplysModel : NSObject
 
