@@ -22,7 +22,6 @@
 
 - (void)setImageArray:(NSArray *)imageArray
 {
-    NSLogFunc
     _imageArray = imageArray;
     for (NSString *imageStr in _imageArray){
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:imageStr]]];
