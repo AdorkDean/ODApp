@@ -226,11 +226,12 @@
         }
         for (id userKey in [[model result] users]) {
             NSString *key = [NSString stringWithFormat:@"%@",userKey];
-            NSDictionary *itemDict = [[model result] users][key];
-            ODCommunityBbsModel *model = [[ODCommunityBbsModel alloc]init];
-            [model setValuesForKeysWithDictionary:itemDict];
-            [weakSelf.firstUserInfoDic setObject:model forKey:userKey];
+            ODCommunityBbsUsersModel *userModel = [ODCommunityBbsUsersModel mj_objectWithKeyValues:[[model result] users][key]];
+            [weakSelf.firstUserInfoDic setObject:userModel forKey:userKey];
         }
+        
+      
+
         
         
         if (weakSelf.FirstDataArray.count == 0) {
@@ -276,12 +277,11 @@
         for (ODCommunityBbsListModel *bbsModel in [[model result] bbs_list]) {
             [weakSelf.secondDataArray addObject:bbsModel];
         }
+        
         for (id userKey in [[model result] users]) {
             NSString *key = [NSString stringWithFormat:@"%@",userKey];
-            NSDictionary *itemDict = [[model result] users][key];
-            ODCommunityBbsModel *model = [[ODCommunityBbsModel alloc]init];
-            [model setValuesForKeysWithDictionary:itemDict];
-            [weakSelf.secondUserInfoDic setObject:model forKey:userKey];
+            ODCommunityBbsUsersModel *userModel = [ODCommunityBbsUsersModel mj_objectWithKeyValues:[[model result] users][key]];
+            [weakSelf.secondUserInfoDic setObject:userModel forKey:userKey];
         }
         
         if (weakSelf.secondDataArray.count == 0) {
