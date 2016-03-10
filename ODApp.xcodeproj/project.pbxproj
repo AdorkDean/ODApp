@@ -2144,9 +2144,9 @@
 			isa = PBXGroup;
 			children = (
 				D4D0731B1C59B9FA008527C9 /* HomeFoundView */,
+				D46C90351C6043BA004942E7 /* ODActivityCenter */,
 				D4F76D911C61AEA100D59F02 /* ODCollectionView */,
 				D4F76D951C61AEA100D59F02 /* ODOrderView */,
-				D46C90351C6043BA004942E7 /* ODActivityCenter */,
 				D4D0755B1C5DECCB008527C9 /* BaseView */,
 				9DEDCF5A1C64B3FC003015C6 /* BazaarView */,
 				D4D073131C59B9FA008527C9 /* CommunityView */,

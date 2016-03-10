@@ -22,8 +22,7 @@
 
 #pragma mark - 生命周期
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.title = self.centerTitle;
@@ -32,21 +31,18 @@
 
     [self createCollectionView];
     __weakSelf
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
-                                     {
+    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
                                          self.count = 1;
                                          [weakSelf createRequest];
                                      }];
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^
-                                     {
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^ {
                                          [weakSelf loadMoreData];
                                      }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationCancelOrder object:nil];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     if (self.isRefresh) {
@@ -61,8 +57,7 @@
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)reloadData:(NSNotification *)text
-{
+- (void)reloadData:(NSNotification *)text {
     @try {
         ODMyOrderRecordModel *model = self.orderArray[self.cancelOrderRow];
         model.status_str = [NSString stringWithFormat:@"%@", text.userInfo[@"status_str"]];
@@ -75,40 +70,32 @@
 }
 
 
-- (void)loadMoreData
-{
+- (void)loadMoreData {
     self.count ++;
     [self createRequest];
 }
 
 #pragma mark - 加载数据请求
-- (void)createRequest
-{
-    
+- (void)createRequest {
     NSDictionary *parameter = @{@"open_id":[NSString stringWithFormat:@"%@",self.open_id],@"page":[NSString stringWithFormat:@"%ld",(long)self.count]};
     self.noReusltLabel.hidden = YES;
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlStoreOrders parameters:parameter modelClass:[ODMyOrderRecordModel class] success:^(id model)
-    {
-        for (ODMyOrderRecordModel *orderModel in [model result])
-        {
+    [ODHttpTool getWithURL:ODUrlStoreOrders parameters:parameter modelClass:[ODMyOrderRecordModel class] success:^(id model) {
+        for (ODMyOrderRecordModel *orderModel in [model result]) {
             if (![[weakSelf.orderArray valueForKey:@"order_id"] containsObject:[orderModel order_id]]) {
                 [weakSelf.orderArray addObject:orderModel];
             }
         }
         [weakSelf.collectionView.mj_header endRefreshing];
-        if ([[model result] count] == 0)
-        {
+        if ([[model result] count] == 0) {
             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
         }
-        else
-        {
+        else {
             [weakSelf.collectionView.mj_footer endRefreshing];
         }
         [weakSelf.collectionView reloadData];
         
-        if (self.count == 1 && self.orderArray.count == 0)
-        {
+        if (self.count == 1 && self.orderArray.count == 0) {
             weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
             weakSelf.noReusltLabel.text = @"暂无技能";
             weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
@@ -118,16 +105,14 @@
         }
         
     }
-                   failure:^(NSError *error)
-    {
+    failure:^(NSError *error) {
         [weakSelf.collectionView.mj_footer endRefreshing];
         [weakSelf.collectionView.mj_header endRefreshing];
     }];  
 }
 
 #pragma mark - Crate UICollectionView
-- (void)createCollectionView
-{
+- (void)createCollectionView {
     UICollectionViewFlowLayout *flowLayout = [[ UICollectionViewFlowLayout alloc] init];
     flowLayout.sectionInset = UIEdgeInsetsMake(4, 4, 0, 4);
     flowLayout.minimumLineSpacing = 5;
@@ -142,18 +127,15 @@
 }
 
 #pragma mark - UICollectionViewDataSource
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
+-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.orderArray.count;
 }
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODMyOrderRecordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMyOrderRecordCellId forIndexPath:indexPath];
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
     [cell showDatawithModel:model];
@@ -168,8 +150,7 @@
 }
 
 #pragma mark - UICollectionViewDelegate
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     float height;
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
     height = [ODHelp textHeightFromTextString:model.purpose width:KScreenWidth - 126 fontSize:13] - 13;
@@ -178,8 +159,7 @@
     return CGSizeMake(KScreenWidth - 8, 130 + height);
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ODMyOrderDetailController *vc = [[ODMyOrderDetailController alloc] init];
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
     self.cancelOrderRow = indexPath.row;
@@ -192,8 +172,7 @@
 }
 
 #pragma mark - 移除通知
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

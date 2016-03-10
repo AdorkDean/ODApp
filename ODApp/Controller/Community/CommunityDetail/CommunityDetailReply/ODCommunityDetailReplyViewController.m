@@ -68,7 +68,7 @@
 
 #pragma mark - UITextViewDelegate
 NSString *replyTitleText = @"";
-int maxLength = 250;
+long maxLength = 250;
 
 - (void)textViewDidChange:(UITextView *)textView {
     if (maxLength < 250) {
