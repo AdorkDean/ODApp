@@ -10,7 +10,6 @@
 
 
 #import "ODUserInformation.h"
-#import "ODAPIManager.h"
 
 @interface ODFindFavorableController : ODBaseViewController
 

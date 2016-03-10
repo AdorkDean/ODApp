@@ -9,8 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODSecondOrderDetailController.h"
 #import "ODSecondOrderDetailView.h"
-#import "AFNetworking.h"
-#import "ODAPIManager.h"
 #import "ODOrderDetailModel.h"
 #import "UIButton+WebCache.h"
 #import "ODPayController.h"
@@ -21,11 +19,6 @@
 @interface ODSecondOrderDetailController () <UITextViewDelegate>
 
 @property(nonatomic, strong) ODSecondOrderDetailView *orderDetailView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
-
-@property(nonatomic, strong) AFHTTPRequestOperationManager *delateManager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *finishManager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *evalueManager;
 @property(nonatomic, copy) NSString *open_id;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, strong) ODEvaluation *evaluationView;
@@ -468,38 +461,17 @@
 
 // 确认完成
 - (void)confirmAction:(UIButton *)sender {
-
-    self.finishManager = [AFHTTPRequestOperationManager manager];
-
-    NSDictionary *parameters = @{@"order_id" : self.order_id, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    [self.finishManager GET:kFinshOrderUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        if (responseObject) {
-
-
-            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-                [self createEvaluation];
-
-
-            } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-
-                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-
-            }
-
-
-        }
-    }               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
-    }];
-
-
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"order_id"] = self.order_id;
+    params[@"open_id"] = self.open_id;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapFinish parameters:params modelClass:[NSObject class] success:^(id model)
+     {
+         [weakSelf createEvaluation];
+     } failure:^(NSError *error) {
+     }];
 }
 
 - (void)firstButtonClicik:(UIButton *)button {
@@ -574,53 +546,30 @@
 
         self.evaluateContent = self.evaluationView.contentTextView.text;
     }
-    self.evalueManager = [AFHTTPRequestOperationManager manager];
-
-    NSDictionary *parameters = @{@"order_id" : self.order_id, @"reason" : self.evaluateContent, @"reason_num" : self.evaluateStar, @"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    __weak typeof(self) weakSelf = self;
-
-
-    [self.evalueManager GET:kEvalueUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-        if (responseObject) {
-
-
-            if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-                [weakSelf.evaluationView removeFromSuperview];
-
-
-                [ODProgressHUD showInfoWithStatus:@"评价成功"];
-
-                ODOrderDetailModel *statusModel = self.dataArray[0];
-                weakSelf.orderStatus = [NSString stringWithFormat:@"%@", statusModel.order_status];
-                if (self.getRefresh) {
-
-
-                    weakSelf.getRefresh(@"1");
-                }
-
-
-                [weakSelf getData];
-
-
-            } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-
-
-                [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-
-
-            }
-
-
-        }
-    }               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [ODProgressHUD showInfoWithStatus:@"网络异常"];
-    }];
-
-
+    
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"order_id"] = self.order_id;
+    params[@"reason"] = self.evaluateContent;
+    params[@"reason_num"] = self.evaluateStar;
+    params[@"open_id"] = self.open_id;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapOrderReason parameters:params modelClass:[NSObject class] success:^(id model)
+     {
+         [weakSelf.evaluationView removeFromSuperview];
+         
+         [ODProgressHUD showInfoWithStatus:@"评价成功"];
+         
+         ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
+         weakSelf.orderStatus = [NSString stringWithFormat:@"%@", statusModel.order_status];
+         if (weakSelf.getRefresh) {
+             weakSelf.getRefresh(@"1");
+         }
+         [weakSelf getData];
+     } failure:^(NSError *error) {
+         
+     }];
 }
 
 
@@ -684,7 +633,7 @@
              ODOrderDetailModel *statusModel = self.dataArray[0];
              weakSelf.orderStatus = [NSString stringWithFormat:@"%@", statusModel.order_status];
 
-             if (self.getRefresh) {
+             if (weakSelf.getRefresh) {
 
                  weakSelf.getRefresh(@"1");
              }

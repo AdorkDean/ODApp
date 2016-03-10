@@ -93,35 +93,126 @@ UIKIT_EXTERN NSString * const ODNotificationSellOrderThirdRefresh;
 /**  点击收藏的通知 */
 UIKIT_EXTERN NSString * const ODNotificationloveSkill;
 
+#pragma mark - 网页URL
+
+UIKIT_EXTERN NSString * const ODWebUrlFindJob;
 
 #pragma mark - 请求URL接口
 /** 统一的URL */
 UIKIT_EXTERN NSString * const ODBaseURL;
 UIKIT_EXTERN NSString * const ODURL;
 
+
+
+
+
+//  bbs
+UIKIT_EXTERN NSString * const ODUrlBbsList;
+UIKIT_EXTERN NSString * const ODUrlBbsDel;
+UIKIT_EXTERN NSString * const ODUrlBbsReplyList;
+UIKIT_EXTERN NSString * const ODUrlBbsView;
+UIKIT_EXTERN NSString * const ODUrlBbsCreate;
+UIKIT_EXTERN NSString * const ODUrlBbsSearch;
+UIKIT_EXTERN NSString * const ODUrlBbsReply;
+
+
+
+
+
+//  other
 UIKIT_EXTERN NSString * const ODUrlOtherLoveAdd;
-UIKIT_EXTERN NSString * const ODUrlOtherLoveDelete;
-UIKIT_EXTERN NSString * const ODUrlMyApplyActivity;
-UIKIT_EXTERN NSString * const ODUrlHomeFound;
-UIKIT_EXTERN NSString * const ODUrlActivityList;
-UIKIT_EXTERN NSString * const ODUrlActivityDetail;
-UIKIT_EXTERN NSString * const ODUrlActivityApply;
 UIKIT_EXTERN NSString * const ODUrlOtherCityList;
 UIKIT_EXTERN NSString * const ODUrlOtherShareCallBack;
-UIKIT_EXTERN NSString * const ODUrlPersonalReleaseTask;
 UIKIT_EXTERN NSString * const ODUrlOtherStoreDetail;
-UIKIT_EXTERN NSString * const ODUrlStoreTime;
 UIKIT_EXTERN NSString * const ODUrlOtherLoveDel;
+UIKIT_EXTERN NSString * const ODUrlOtherCityList;
+UIKIT_EXTERN NSString * const ODUrlOtherShareCallBack;
+UIKIT_EXTERN NSString * const ODUrlOtherStoreDetail;
+UIKIT_EXTERN NSString * const ODUrlOtherStoreList;
+UIKIT_EXTERN NSString * const ODUrlOtherHome;
+UIKIT_EXTERN NSString * const ODUrlOtherConfigInfo;
+UIKIT_EXTERN NSString * const ODUrlOtherBase64Upload;
+UIKIT_EXTERN NSString * const ODUrlOtherFeedback;
+
+
+
+
+//   pay
+UIKIT_EXTERN NSString * const ODUrlPayWeixinTradeNumber;
+UIKIT_EXTERN NSString * const ODUrlPayWeixinCallbackSync;
+
+
+
+
+
+
+//   store
+UIKIT_EXTERN NSString * const ODUrlStoreConfirmOrder;
+UIKIT_EXTERN NSString * const ODUrlStoreApplyUsers;
+UIKIT_EXTERN NSString * const ODUrlStoreCreateOrder;
+UIKIT_EXTERN NSString * const ODUrlStoreTime;
 UIKIT_EXTERN NSString * const ODUrlStoreApplyMy;
-UIKIT_EXTERN NSString * const ODUrlHomeFound;
 UIKIT_EXTERN NSString * const ODUrlStoreActivityList;
 UIKIT_EXTERN NSString * const ODUrlStoreApplyDetail2;
 UIKIT_EXTERN NSString * const ODUrlStoreActivityApply;
-UIKIT_EXTERN NSString * const ODUrlOtherCityList;
-UIKIT_EXTERN NSString * const ODUrlOtherShareCallBack;
-UIKIT_EXTERN NSString * const ODUrlSwapList;
-UIKIT_EXTERN NSString * const ODUrlOtherStoreDetail;
 UIKIT_EXTERN NSString * const ODUrlStoreTimeline1;
+UIKIT_EXTERN NSString * const ODUrlStoreOrders;
+UIKIT_EXTERN NSString * const ODUrlStoreInfoOrder;
+UIKIT_EXTERN NSString * const ODUrlStoreCancelOrder;
+UIKIT_EXTERN NSString * const ODUrlStoreApply;
+
+
+
+
+
+// swap
+UIKIT_EXTERN NSString * const ODUrlSwapSellerOrderList;
+UIKIT_EXTERN NSString * const ODUrlSwapLoveList;
+UIKIT_EXTERN NSString * const ODUrlSwapOrderList;
+UIKIT_EXTERN NSString * const ODUrlSwapOrderInfo;
+UIKIT_EXTERN NSString * const ODUrlSwapConfirmDelivery;
+UIKIT_EXTERN NSString * const ODUrlSwapFinish;
+UIKIT_EXTERN NSString * const ODUrlSwapOrderReason;
+UIKIT_EXTERN NSString * const ODUrlSwapOrder;
+UIKIT_EXTERN NSString * const ODUrlSwapList;
+UIKIT_EXTERN NSString * const ODUrlSwapDel;
+UIKIT_EXTERN NSString * const ODUrlSwapOrderCancel;
+UIKIT_EXTERN NSString * const ODUrlSwapRejectRefund;
+UIKIT_EXTERN NSString * const ODUrlSwapConfirmRefund;
+UIKIT_EXTERN NSString * const ODUrlSwapServiceTime;
+UIKIT_EXTERN NSString * const ODUrlSwapInfo;
+UIKIT_EXTERN NSString * const ODUrlSwapSchedule;
+UIKIT_EXTERN NSString * const ODUrlSwapCreate;
+UIKIT_EXTERN NSString * const ODUrlSwapEdit;
+
+
+
+//  task
+UIKIT_EXTERN NSString * const ODUrlTaskTaskAdd;
+UIKIT_EXTERN NSString * const ODUrlTaskDetail;
+UIKIT_EXTERN NSString * const ODUrlTaskApply;
+UIKIT_EXTERN NSString * const ODurlTaskAccept;
+UIKIT_EXTERN NSString * const ODurlTaskDelivery;
+UIKIT_EXTERN NSString * const ODUrlTaskConfirm;
+UIKIT_EXTERN NSString * const ODUrlTaskList;
+
+
+
+
+
+
+
+
+
+
+
+//  user
+
+
+UIKIT_EXTERN NSString * const ODUrlUserCommentList;
+UIKIT_EXTERN NSString * const ODUrlUserWithdrawCash;
+UIKIT_EXTERN NSString * const ODUrlUserCashList;
+UIKIT_EXTERN NSString * const ODUrlUserLoveList;
 UIKIT_EXTERN NSString * const ODUrlUserChange;
 UIKIT_EXTERN NSString * const ODUrlUserCodeSend;
 UIKIT_EXTERN NSString * const ODUrlUserRegist;
@@ -129,160 +220,10 @@ UIKIT_EXTERN NSString * const ODUrlUserInfo;
 UIKIT_EXTERN NSString * const ODUrlUserChangePasswd;
 UIKIT_EXTERN NSString * const ODUrlUserLogin1;
 UIKIT_EXTERN NSString * const ODUrlUserAddressDel;
-UIKIT_EXTERN NSString * const ODUrlUserAssressAdd;
+UIKIT_EXTERN NSString * const ODUrlUserAddressAdd;
 UIKIT_EXTERN NSString * const ODUrlUserLoveList;
-
-
-
 UIKIT_EXTERN NSString * const ODUrlUserBindMoble;
-
-UIKIT_EXTERN NSString * const ODUrlStoreOrders;
-UIKIT_EXTERN NSString * const ODUrlStoreInfoOrder;
-UIKIT_EXTERN NSString * const ODUrlOtherStoreDetail;
-UIKIT_EXTERN NSString * const ODUrlStoreCancelOrder;
-UIKIT_EXTERN NSString * const ODUrlStoreApply;
-
-
-UIKIT_EXTERN NSString * const ODUrlTaskTaskAdd;
-UIKIT_EXTERN NSString * const ODUrlTaskDetail;
-UIKIT_EXTERN NSString * const ODUrlTaskApply;
-UIKIT_EXTERN NSString * const ODurlTaskAccept;
-UIKIT_EXTERN NSString * const ODurlTaskDelivery;
-UIKIT_EXTERN NSString * const ODUrlTaskConfirm;
-
-
-
-UIKIT_EXTERN NSString * const ODUrlSwapDel;
-UIKIT_EXTERN NSString * const ODUrlSwapOrderCancel;
-UIKIT_EXTERN NSString * const ODUrlSwapRejectRefund;
-UIKIT_EXTERN NSString * const ODUrlSwapConfirmRefund;
-UIKIT_EXTERN NSString * const ODUrlSwapServiceTime;
-UIKIT_EXTERN NSString * const ODUrlSwapInfo;
-
-
-
-
-
-UIKIT_EXTERN NSString * const ODUrlBbsList;
-UIKIT_EXTERN NSString * const ODUrlBbsDel;
-UIKIT_EXTERN NSString * const ODUrlBbsReplyList;
-UIKIT_EXTERN NSString * const ODUrlBbsView;
-
-
-UIKIT_EXTERN NSString * const ODUrlOtherStoreList;
-UIKIT_EXTERN NSString * const ODUrlOtherHome;
-
-
-
-UIKIT_EXTERN NSString * const ODUrlBazaarRequestHelp;
-UIKIT_EXTERN NSString * const ODUrlBazaarReleaseTask;
-
-//UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
-UIKIT_EXTERN NSString * const kBazaarTaskDetailUrl;
-
-//UIKIT_EXTERN NSString * const kBazaarReleaseTaskUrl;
-//UIKIT_EXTERN NSString * const kBazaarTaskDetailUrl;
-
-UIKIT_EXTERN NSString * const kBazaarTaskDelegateUrl;
-UIKIT_EXTERN NSString * const kBazaarAcceptTaskUrl;
-//UIKIT_EXTERN NSString * const kBazaarReleaseRewardUrl;
-UIKIT_EXTERN NSString * const ODUrlOtherConfigInfo;
-
-//UIKIT_EXTERN NSString * const kBazaarExchangeSkillUrl;
-UIKIT_EXTERN NSString * const ODUrlBazaarExchangeSkill;
-UIKIT_EXTERN NSString * const ODUrlBazaarSkillDetail;
-//UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailUrl;
-UIKIT_EXTERN NSString * const kBazaarReleaseSkillTimeUrl;
-//UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailLoveUrl;
-//UIKIT_EXTERN NSString * const kBazaarExchangeSkillDetailNotLoveUrl;
-
-UIKIT_EXTERN NSString * const ODUrlSkillDetailLove;
-UIKIT_EXTERN NSString * const ODUrlSkillDetailNotLove;
-
-//UIKIT_EXTERN NSString * const kBazaarReleaseSkillUrl;
-UIKIT_EXTERN NSString * const ODUrlSwapCreate;
-
-//UIKIT_EXTERN NSString * const kBazaarEditSkillUrl;
-UIKIT_EXTERN NSString * const ODUrlSwapEdit;
-/** 接收人确认完成 */
-UIKIT_EXTERN NSString * const kBazaarTaskReceiveCompleteUrl;
-/** 发起人确认完成 */
-UIKIT_EXTERN NSString * const kBazaarTaskInitiateCompleteUrl;
-
-UIKIT_EXTERN NSString * const ODUrlBbsCreate;
-UIKIT_EXTERN NSString * const kCommunityBbsDetailUrl;
-UIKIT_EXTERN NSString * const ODUrlBbsSearch;
-UIKIT_EXTERN NSString * const kCommunityBbsReplyListUrl;
-UIKIT_EXTERN NSString * const kCommunityBbsReplyUrl;
-UIKIT_EXTERN NSString * const ODUrlBbsReply;
-UIKIT_EXTERN NSString * const kCommunityBbsLatestUrl;
-
-UIKIT_EXTERN NSString * const kPushImageUrl;
-UIKIT_EXTERN NSString * const kDeleteReplyUrl;
-
-UIKIT_EXTERN NSString * const kHomeFoundListUrl;
-
-UIKIT_EXTERN NSString * const ODWebUrlFindJob;
-
-
-//UIKIT_EXTERN NSString * const ODStoreListUrl;
-//UIKIT_EXTERN NSString * const ODStoreDetailUrl;
-
-//UIKIT_EXTERN NSString * const kMyOrderRecordUrl;
-//UIKIT_EXTERN NSString * const kMyOrderDetailUrl;
-//UIKIT_EXTERN NSString * const kCancelMyOrderUrl;
-//UIKIT_EXTERN NSString * const kSaveAddressUrl;
-UIKIT_EXTERN NSString * const kSaveAddressUrl;
 UIKIT_EXTERN NSString * const ODUrlUserAddressList;
-//UIKIT_EXTERN NSString * const kDeleteAddressUrl;
-//UIKIT_EXTERN NSString * const kGetServecTimeUrl;
-UIKIT_EXTERN NSString * const ODUrlStoreConfirmOrder;
-
-
-UIKIT_EXTERN NSString * const ODUrlSwapLoveList;
-UIKIT_EXTERN NSString * const ODUrlSwapOrderList;
-UIKIT_EXTERN NSString * const ODUrlSwapOrderInfo;
-
-UIKIT_EXTERN NSString * const ODUrlSwapOrderCancel;
-
-UIKIT_EXTERN NSString * const ODUrlOtherBase64Upload;
-UIKIT_EXTERN NSString * const kChangePassWorldUrl;
-UIKIT_EXTERN NSString * const kGetCodeUrl;
-UIKIT_EXTERN NSString * const kLoginUrl;
-UIKIT_EXTERN NSString * const ODUrlTaskList;
-UIKIT_EXTERN NSString * const ODUrlBbsDel;
-UIKIT_EXTERN NSString * const ODUrlUserCommentList;
-UIKIT_EXTERN NSString * const ODUrlCreateOrder;
-UIKIT_EXTERN NSString * const ODUrlStoreApplyUsers;
-UIKIT_EXTERN NSString * const kGetCommentUrl;
-UIKIT_EXTERN NSString * const ODUrlStoreCreateOrder;
-UIKIT_EXTERN NSString * const kGetApplyListUrl;
-
-UIKIT_EXTERN NSString * const ODUrlOtherFeedback;
-
-UIKIT_EXTERN NSString * const ODUrlPayWeixinTradeNumber;
-
-UIKIT_EXTERN NSString * const ODPersonReleaseTaskDeleteUrl;
-UIKIT_EXTERN NSString * const ODReleaseDrawbackUrl;
-
-UIKIT_EXTERN NSString * const ODRefuseDrawbackUrl;
-UIKIT_EXTERN NSString * const ODReceiveDrawbackUrl;
 
 
 
-UIKIT_EXTERN NSString * const ODUrlSkillCollection;
-
-UIKIT_EXTERN NSString * const kCollectionUrl;
-UIKIT_EXTERN NSString * const ODUrlUserWithdrawCash;
-UIKIT_EXTERN NSString * const ODUrlUserCashList;
-UIKIT_EXTERN NSString * const ODUrlSwapSellerOrderList;
-UIKIT_EXTERN NSString * const ODUrlUserLoveList;
-
-UIKIT_EXTERN NSString * const kBalanceUrl;
-UIKIT_EXTERN NSString * const kBalanceListUrl;
-UIKIT_EXTERN NSString * const kMySellListUrl;
-UIKIT_EXTERN NSString * const kDeliveryUrl;
-UIKIT_EXTERN NSString * const kFinshOrderUrl;
-UIKIT_EXTERN NSString * const kEvalueUrl;
-UIKIT_EXTERN NSString * const ODUrlSwapOrder;
-UIKIT_EXTERN NSString * const ODUrlPayWeixinCallbackSync;

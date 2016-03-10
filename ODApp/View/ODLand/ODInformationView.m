@@ -7,7 +7,6 @@
 //
 
 #import "ODInformationView.h"
-
 @implementation ODInformationView
 
 - (void)awakeFromNib
@@ -22,8 +21,6 @@
 +(instancetype)getView
 {
     return [[[NSBundle mainBundle] loadNibNamed:@"ODInformationView" owner:nil options:nil] firstObject];
-
-    
 }
 
 @end

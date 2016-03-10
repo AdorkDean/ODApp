@@ -9,7 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODAddAddressController.h"
 #import "ODAddAddressView.h"
-#import "ODAPIManager.h"
 
 @interface ODAddAddressController () <UITextViewDelegate>
 
@@ -169,7 +168,7 @@
                                  @"open_id" : self.open_id
                                  };
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlUserAssressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlUserAddressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
         [weakSelf deleteAddress];
         
     } failure:^(NSError *error) {
@@ -212,7 +211,7 @@
                                  };
 
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlUserAssressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlUserAddressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
         [weakSelf.navigationController popViewControllerAnimated:YES];
         [ODProgressHUD showInfoWithStatus:@"保存成功"];
         

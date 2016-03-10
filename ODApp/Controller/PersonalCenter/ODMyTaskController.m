@@ -10,7 +10,6 @@
 #import "ODMyTaskController.h"
 #import "ODTypeView.h"
 #import "MJRefresh.h"
-#import "ODAPIManager.h"
 #import "ODTaskCell.h"
 #import "ODBazaarModel.h"
 #import "UIImageView+WebCache.h"
@@ -29,18 +28,13 @@
 @property(nonatomic, strong) UICollectionViewFlowLayout *firstFlowLayout;
 @property(nonatomic, strong) UICollectionView *firstCollectionView;
 @property(nonatomic, assign) NSInteger firstPage;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *firstManager;
 @property(nonatomic, strong) NSMutableArray *FirstDataArray;
 @property(nonatomic, copy) NSString *type;
 
 @property(nonatomic, strong) UICollectionViewFlowLayout *secondFlowLayout;
 @property(nonatomic, strong) UICollectionView *secondCollectionView;
 @property(nonatomic, assign) NSInteger secondPage;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *secondManager;
 @property(nonatomic, strong) NSMutableArray *secondDataArray;
-
-
-@property(nonatomic, strong) AFHTTPRequestOperationManager *delateManager;
 
 @property(nonatomic, strong) UIButton *allTaskButton;
 
@@ -339,7 +333,6 @@
          }
          
          ODBazaarTasksModel *tasksModel = [model result];
-         
          [weakSelf.secondDataArray addObjectsFromArray:tasksModel.tasks];
          
          if (weakSelf.secondDataArray.count == 0) {

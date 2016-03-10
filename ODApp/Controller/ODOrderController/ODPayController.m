@@ -10,13 +10,10 @@
 #import "ODPayController.h"
 #import "ODPayView.h"
 #import "ODPaySuccessController.h"
-#import "AFNetworking.h"
-#import "ODAPIManager.h"
 #import "ODPayModel.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
 #import "AppMethod.h"
-#import "AFNetworking.h"
 #import "XMLDictionary.h"
 #import "CommonUtil.h"
 #import "ODPaySuccessController.h"
@@ -27,9 +24,7 @@
 @property(nonatomic, strong) UILabel *priceLabel;
 @property(nonatomic, strong) ODPayView *payView;
 @property(nonatomic, copy) NSString *payType;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) ODPayModel *model;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *goManager;
 @property(nonatomic, copy) NSString *isPay;
 @property(nonatomic, assign) int navHasSelfClass;
 
@@ -114,46 +109,24 @@
      }];
 }
 - (void)getDatawithCode:(NSString *)code {
-    //    [ODHttpTool getWithURL:<#(NSString *)#> parameters:<#(NSDictionary *)#> modelClass:<#(__unsafe_unretained Class)#> success:<#^(id model)success#> failure:<#^(NSError *error)failure#>]
-    self.manager = [AFHTTPRequestOperationManager manager];
-    
-    
-    NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-    
-    
-    NSDictionary *parameters = @{@"order_no" : self.model.out_trade_no, @"errCode" : code, @"open_id" : openId};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-    
-    
-    [self.manager GET:ODUrlPayWeixinCallbackSync parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        __weak typeof(self) weakSelf = self;
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-            
-            
-            ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
-            vc.swap_type = self.swap_type;
-            vc.payStatus = self.isPay;
-            vc.orderId = self.orderId;
-            
-            
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-            
-            
-        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-            
-            
-            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-            
-        }
-        
-        
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        
-    }];
-    
-    
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"order_no"] = self.model.out_trade_no;
+    params[@"errCode"] = code;
+    params[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model)
+     {
+         ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
+         vc.swap_type = weakSelf.swap_type;
+         vc.payStatus = weakSelf.isPay;
+         vc.orderId = weakSelf.orderId;
+
+         [weakSelf.navigationController pushViewController:vc animated:YES];
+     } failure:^(NSError *error) {
+         
+     }];
 }
 
 #pragma mark - 事件方法

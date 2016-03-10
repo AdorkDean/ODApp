@@ -47,8 +47,7 @@
 {
     self.count ++;
     NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadTableDataWithUrl:kCommunityBbsReplyListUrl paramater:signParameter];
+    [self downLoadTableDataWithUrl:ODUrlBbsReplyList paramater:parameter];
 }
 
 #pragma mark - 分享
@@ -103,11 +102,8 @@
 
 -(void)createRequest
 {
-//    self.manager = [AFHTTPRequestOperationManager manager];
-//    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.resultArray = [[NSMutableArray alloc]init];
     self.userArray = [[NSMutableArray alloc]init];
-//    self.dataArray = [[NSMutableArray alloc]init];
 }
 
 #pragma mark - 拼接参数
@@ -115,13 +111,11 @@
 {
     if (userInfo) {
         NSDictionary *parameter = @{@"id":self.bbs_id};
-//        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self downLoadDataWithUrl:ODUrlBbsView paramater:parameter];
         NSLog(@"%@",parameter);
     }else{
         self.count = 1;
         NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
-//        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [self downLoadTableDataWithUrl:ODUrlBbsReplyList paramater:parameter];
     }
 }
@@ -129,27 +123,7 @@
 #pragma mark - 请求发帖人信息
 -(void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)paramater
 {
-//    __weak typeof (self)weakSelf = self;
-//    [self.manager GET:url parameters:paramater success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        
-//            if (responseObject) {
-//                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//                NSDictionary *result = dict[@"result"];
-//                ODCommunityDetailModel *resultModel = [[ODCommunityDetailModel alloc]init];
-//                [resultModel setValuesForKeysWithDictionary:result];
-//                [weakSelf.resultArray addObject:resultModel];
-//                
-//                NSDictionary *user = result[@"user"];
-//                ODCommunityDetailModel *userModel = [[ODCommunityDetailModel alloc]init];
-//                [userModel setValuesForKeysWithDictionary:user];
-//                [weakSelf.userArray addObject:userModel];
-//                [weakSelf createUserInfoView];
-//                [weakSelf createBBSDetailView];
-//               
-//            }
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//    }];
-    
+
     __weakSelf
     [ODHttpTool getWithURL:url parameters:paramater modelClass:[ODCommunityDetailInfoModel class] success:^(ODCommunityDetailInfoModelResponse *model) {
         
@@ -168,40 +142,6 @@
 
 -(void)downLoadTableDataWithUrl:(NSString *)url paramater:(NSDictionary *)paramater
 {
-//    __weak typeof (self)weakSelf = self;
-//    [self.manager GET:url parameters:paramater success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        if (responseObject) {
-//
-//            if (weakSelf.count == 1) {
-//                [weakSelf.dataArray removeAllObjects];
-//            }
-//            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//            NSArray *result = dict[@"result"];
-//            for (NSDictionary *itemDict in result) {
-//                ODCommunityDetailModel *model = [[ODCommunityDetailModel alloc]init];
-//                [model setValuesForKeysWithDictionary:itemDict];
-//                [weakSelf.dataArray addObject:model];
-//            }
-//            [weakSelf joiningTogetherParmetersWithUserInfo:YES];
-//
-//            [weakSelf.tableView.mj_header endRefreshing];
-//            
-//            if (result.count == 0) {
-//                [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
-//            }
-//            else
-//            {
-//                [weakSelf.tableView.mj_footer endRefreshing];
-//            }
-//            [weakSelf.tableView reloadData];
-//              
-//
-//        }
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//        [weakSelf.tableView.mj_header endRefreshing];
-//        [weakSelf.tableView.mj_footer endRefreshing];
-//        [ODProgressHUD showInfoWithStatus:@"网络异常"];
-//    }];
     
     __weakSelf
     [ODHttpTool getWithURL:url parameters:paramater modelClass:[ODCommunityDetailModel class] success:^(ODCommunityDetailModelResponse *model) {
@@ -456,7 +396,6 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         ODCommunityDetailModel *model = self.dataArray[indexPath.row];
         NSDictionary *parameter = @{@"id":[NSString stringWithFormat:@"%d",model.id],@"type":@"3",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-//        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
         [weakSelf deleteDataWithUrl:ODUrlBbsDel parameter:parameter button:button];
         
     }]];
@@ -469,32 +408,12 @@
 -(void)deleteDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter button:(UIButton *)button
 {
     
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-////    __weak typeof (self)weakSelf = self;
-//    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        
-//        if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//            ODCommunityDetailCell *cell = (ODCommunityDetailCell *)button.superview.superview;
-//            NSIndexPath *indexPath = [weakSelf.tableView indexPathForCell:cell];
-//            ODCommunityDetailModel *model = weakSelf.dataArray[indexPath.row];
-//            model.content = @"该楼层已删除";
-////            [weakSelf.dataArray replaceObjectAtIndex:indexPath.row withObject:model];
-//            cell.deleteButton.hidden = YES;
-//            cell.timeLabelSpace.constant = 13;
-//            cell.contentLabel.text = @"该楼层已删除";
-//        }
-//
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//        
-//    }];
-    
     __weakSelf
     [ODHttpTool getWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
         ODCommunityDetailCell *cell = (ODCommunityDetailCell *)button.superview.superview;
         NSIndexPath *indexPath = [weakSelf.tableView indexPathForCell:cell];
         ODCommunityDetailModel *detailModel = weakSelf.dataArray[indexPath.row];
         detailModel.content = @"该楼层已删除";
-//        [weakSelf.dataArray replaceObjectAtIndex:indexPath.row withObject:detailModel];
         cell.deleteButton.hidden = YES;
         cell.timeLabelSpace.constant = 13;
         cell.contentLabel.text = @"该楼层已删除";

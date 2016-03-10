@@ -9,7 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODEvaluationController.h"
 #import "MJRefresh.h"
-#import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
 #import "ODCommunityCollectionCell.h"
 #import "ODCommunityModel.h"
@@ -25,14 +24,12 @@
 @property (nonatomic , strong) UICollectionViewFlowLayout *firstFlowLayout;
 @property (nonatomic , strong) UICollectionView *firstCollectionView;
 @property (nonatomic , assign) NSInteger firstPage;
-@property (nonatomic, strong) AFHTTPRequestOperationManager *firstManager;
 @property (nonatomic, strong) NSMutableArray *FirstDataArray;
 @property (nonatomic , strong) UILabel *firstLabel;
 
 @property (nonatomic , strong) UICollectionViewFlowLayout *secondFlowLayout;
 @property (nonatomic , strong) UICollectionView *secondCollectionView;
 @property (nonatomic , assign) NSInteger secondPage;
-@property (nonatomic, strong) AFHTTPRequestOperationManager *secondManager;
 @property (nonatomic, strong) NSMutableArray *secondDataArray;
 @property (nonatomic , strong) UILabel *secondLabel;
 

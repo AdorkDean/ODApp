@@ -5,9 +5,10 @@
 //  Created by Odong-YG on 15/12/25.
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
-
+#import <MobileCoreServices/MobileCoreServices.h>
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCommunityReleaseTopicViewController.h"
+#import "ODUploadImageModel.h"
 
 @interface ODCommunityReleaseTopicViewController ()
 
@@ -26,7 +27,6 @@
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"取消"];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
     [self createScrollView];
-    [self createRequest];
     [self createTextView];
     [self createLabels];
     [self createAddPicButton];
@@ -263,41 +263,22 @@ NSString *topicContentText = @"";
 
 
 #pragma mark - 拼接参数
-
-- (void)createParameter:(NSString *)str {
-    NSDictionary *parameter = @{@"File" : str};
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self pushImageWithUrl:kPushImageUrl parameter:signParameter];
-
-}
-
-//上传图片返回数据
-- (void)pushImageWithUrl:(NSString *)url parameter:(NSDictionary *)parameter {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-
-    __weak typeof(self) weakSelf = self;
-    [manager POST:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
-
-        if (responseObject) {
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            NSDictionary *result = dict[@"result"];
-            NSString *str = result[@"File"];
-            [weakSelf.strArray addObject:str];
-            [weakSelf reloadImageButtons];
-
-        }
-        NSLog(@"--%@",responseObject);
-    }     failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-        NSLog(@"error");
+-(void)createParameter:(NSString *)str
+{
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"File"] = str;
+    __weakSelf
+    // 上传图片
+    [ODHttpTool postWithURL:ODUrlOtherBase64Upload parameters:params modelClass:[ODUploadImageModel class] success:^(id model) {
+        // 取出模型
+        ODUploadImageModel *uploadModel = [model result];
+        [weakSelf.strArray addObject:uploadModel.File];
+        [weakSelf reloadImageButtons];
+    } failure:^(NSError *error) {
     }];
-    
-//    [ODHttpTool postWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
-//        [[model result]NSLogProperty];
-//    } failure:^(NSError *error) {
-//        
-//    }];
 }
+
 
 //压缩尺寸
 - (UIImage *)scaleImage:(UIImage *)image {
@@ -353,9 +334,6 @@ NSString *topicContentText = @"";
 
 #pragma mark - 初始化manager
 
-- (void)createRequest {
-    self.manager = [AFHTTPRequestOperationManager manager];
-}
 
 #pragma mark - 拼接参数
 

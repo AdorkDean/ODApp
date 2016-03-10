@@ -9,14 +9,12 @@
 #import "ODBaseViewController.h"
 #import "ODTabBarController.h"
 #import "ODClassMethod.h"
-#import "ODAPIManager.h"
 #import "ODBazaarReleaseRewardViewController.h"
 #import "ODBazaarViewController.h"
 
 
 @interface ODBazaarReleaseTaskViewController : ODBaseViewController <UITextViewDelegate>
 
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) UITextView *titleTextView;
 @property(nonatomic, strong) UILabel *titleLabel;

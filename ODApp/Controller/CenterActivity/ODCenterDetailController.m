@@ -9,7 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCenterDetailController.h"
 #import "ODCenderDetailView.h"
-#import "ODAPIManager.h"
 #import "UIImageView+WebCache.h"
 #import "ODChoseCenterController.h"
 #import "ODPrecontractViewController.h"
@@ -27,8 +26,6 @@ int pageNumnber = 0;
 
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, strong) ODCenderDetailView *centerDetailView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *managers;
 @property(nonatomic, strong) ODStoreDetailModel *model;
 @property(nonatomic, strong) UIPageControl *pageControl;
 @property(nonatomic, strong) UILabel *centerNameLabe;

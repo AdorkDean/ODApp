@@ -64,7 +64,7 @@
 
 @property (nonatomic, strong) NSArray *loves;
 
-@property (nonatomic, assign) int swap_id;
+@property (nonatomic, assign) NSString *swap_id;
 
 @end
 

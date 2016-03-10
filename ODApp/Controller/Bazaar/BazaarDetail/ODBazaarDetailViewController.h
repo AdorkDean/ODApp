@@ -8,7 +8,6 @@
 
 #import "ODBaseViewController.h"
 #import "ODTabBarController.h"
-#import "ODAPIManager.h"
 #import "ODClassMethod.h"
 #import "ODHelp.h"
 #import "UIButton+WebCache.h"
@@ -22,7 +21,6 @@
 
 @interface ODBazaarDetailViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextViewDelegate>
 
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, strong) NSMutableArray *picArray;
 @property(nonatomic, strong) NSArray *applys;

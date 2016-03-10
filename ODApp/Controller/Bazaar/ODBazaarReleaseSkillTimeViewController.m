@@ -39,7 +39,6 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(rightItmeClick:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确定"];
     
     [self createTimeView];
-    [self createRequest];
     [self createTableView];
     [self joiningTogetherParmeters];
 }
@@ -75,12 +74,6 @@
     }
 }
 
--(void)createRequest
-{
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-}
-
 -(NSMutableArray *)dataArray
 {
     if (!_dataArray) {
@@ -99,8 +92,7 @@
         parameter = @{@"swap_id":@"0"};
     }
 
-    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-    [self downLoadDataWithUrl:kBazaarReleaseSkillTimeUrl parameter:signParameter];
+    [self downLoadDataWithUrl:ODUrlSwapSchedule parameter:parameter];
 }
 
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter

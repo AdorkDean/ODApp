@@ -9,7 +9,6 @@
 #import "ODBaseViewController.h"
 #import "ODReleaseCell.h"
 #import "ODReleaseModel.h"
-#import "ODAPIManager.h"
 #import "MJRefresh.h"
 #import "ODBazaarReleaseSkillViewController.h"
 

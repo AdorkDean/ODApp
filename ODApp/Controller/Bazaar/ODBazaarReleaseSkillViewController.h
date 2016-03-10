@@ -7,7 +7,6 @@
 //
 
 #import "ODBaseViewController.h"
-#include "ODAPIManager.h"
 #import "UIButton+WebCache.h"
 #import "ODBazaarReleaseSkillTimeViewController.h"
 
@@ -27,7 +26,6 @@
 @property(nonatomic, strong) UILabel *setLabel;
 @property(nonatomic, strong) UIView *timeView;
 @property(nonatomic) BOOL isHaveDian;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, copy) NSString *avatar;
 @property(nonatomic, strong) UIImage *pickedImage;

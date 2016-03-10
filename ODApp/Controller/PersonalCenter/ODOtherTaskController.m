@@ -9,7 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODOtherTaskController.h"
 #import "MJRefresh.h"
-#import "ODAPIManager.h"
 #import "ODTaskCell.h"
 #import "ODBazaarModel.h"
 #import "UIImageView+WebCache.h"
@@ -24,7 +23,6 @@
 @property (nonatomic , strong) UICollectionView *collectionView;
 @property (nonatomic , assign) NSInteger PageNumber;
 
-@property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
 @end

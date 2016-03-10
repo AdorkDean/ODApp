@@ -48,8 +48,7 @@
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-            [self pushDataWithUrl:kDeleteReplyUrl parameter:signParameter withName:@"删除任务"];
+            [self pushDataWithUrl:ODUrlBbsDel parameter:parameter withName:@"删除任务"];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
@@ -134,7 +133,6 @@
 -(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
 {
     __weakSelf
-    
     [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarDetailModel class] success:^(id model) {
         
         ODBazaarDetailModel *detailModel = [model result];
@@ -148,32 +146,7 @@
         
     } failure:^(NSError *error) {
         
-        
     }];
-    
-    
-//    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        
-//        if (responseObject) {
-//            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//            NSDictionary *result = dict[@"result"];
-//            ODBazaarDetailModel *detailModel = [[ODBazaarDetailModel alloc]init];
-//            [detailModel setValuesForKeysWithDictionary:result];
-//            [weakSelf.dataArray addObject:detailModel];
-//            weakSelf.applys = result[@"applys"];
-//            for (NSDictionary *itemDict in _applys) {
-//                ODBazaarDetailModel *model = [[ODBazaarDetailModel alloc]init];
-//                [model setValuesForKeysWithDictionary:itemDict];
-//                [weakSelf.picArray addObject:model];
-//            }
-//        }
-//        [weakSelf createUserInfoView];
-//        [weakSelf createTaskTopDetailView];
-//        [weakSelf createTaskBottomDetailView];
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//        NSLog(@"error");
-//    }];
-    
 }
 
 #pragma mark - 创建用户信息试图
@@ -386,7 +359,6 @@
     }else{
         parameter = @{@"task_id":self.task_id,@"comment":@"好评!任务完成的非常漂亮",@"open_id":[ODUserInformation sharedODUserInformation].openID};
     }
-//    NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
     [self pushDataWithUrl:ODUrlTaskConfirm parameter:parameter withName:@"确认完成"];
 }
 
@@ -399,66 +371,7 @@
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter withName:(NSString *)name
 {
     __weak typeof (self)weakSelf = self;
-    
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//
-//        if ([name isEqualToString:@"删除任务"]) {
-//            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//                if (weakSelf.myBlock) {
-//                    weakSelf.myBlock([NSString stringWithFormat:@"del"]);
-//                }
-//                [weakSelf.navigationController popViewControllerAnimated:YES];
-//            }
-//            
-//        }else if ([name isEqualToString:@"接受任务"]) {
-//            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//                NSDictionary *dict = responseObject[@"result"];
-//                if (weakSelf.myBlock) {
-//                    weakSelf.myBlock([NSString stringWithFormat:@"%@",dict[@"task_status"]]);
-//                }
-//                [weakSelf.picArray removeAllObjects];
-//                [weakSelf joiningTogetherParmeters];
-////                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"接受成功"];
-//                [ODProgressHUD showInfoWithStatus:@"接受成功"];
-//                [weakSelf.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
-//                [weakSelf.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
-//                weakSelf.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-//                 NSLog(@"-----%@",responseObject);
-//            }
-//            
-//           
-//        }else if ([name isEqualToString:@"确认提交"]){
-//    
-//            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//                NSDictionary *dict = responseObject[@"result"];
-//                if (weakSelf.myBlock) {
-//                    weakSelf.myBlock([NSString stringWithFormat:@"%@",dict[@"task_status"]]);
-//                }
-////                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"提交成功"];
-//                [ODProgressHUD showInfoWithStatus:@"提交成功"];
-//                [weakSelf.taskButton setTitle:@"已提交" forState:UIControlStateNormal];
-//                
-//                
-//                        NSLog(@"-====-%@",responseObject);
-//            }
-//        }else if ([name isEqualToString:@"确认完成"]){
-//            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//                NSDictionary *dict = responseObject[@"result"];
-//                if (weakSelf.myBlock) {
-//                    weakSelf.myBlock([NSString stringWithFormat:@"%@",dict[@"task_status"]]);
-//                }
-//                [weakSelf.evaluationView removeFromSuperview];
-////                [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"确认成功"];
-//                [ODProgressHUD showInfoWithStatus:@"确认成功"];
-//                [weakSelf.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
-//                        NSLog(@"+++++++%@",responseObject);
-//            }
-//        }
-//  
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//        
-//    }];
+
     
     [ODHttpTool getWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
         if ([name isEqualToString:@"删除任务"]) {
@@ -717,37 +630,13 @@
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
         if ([task_status isEqualToString:@"1"] && self.num == 1) {
            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否委派" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            __weakSelf
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 
-                NSDictionary *parameter = @{@"task_id":self.task_id,@"apply_open_id":model.open_id};
-//                NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-//                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
                 
-                __weak typeof (self)weakSelf = self;
-//                [manager GET:kBazaarTaskDelegateUrl parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//                    if ([responseObject[@"status"] isEqualToString:@"success"]) {
-//                        NSDictionary *result = responseObject[@"result"];
-//
-//                        weakSelf.num ++ ;
-//                        [weakSelf.picArray removeAllObjects];
-//                        [weakSelf.picArray addObject:model];
-//                        [weakSelf.collectionView reloadData];
-////                        [weakSelf createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"委派成功"];
-//                        [ODProgressHUD showInfoWithStatus:@"委派成功"];
-//                        [weakSelf.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
-//                        if (self.myBlock) {
-//                            self.myBlock([NSString stringWithFormat:@"%@",result[@"task_status"]]);
-//                        }
-//
-//                    }
-//                } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//                }];
+                NSDictionary *parameter = @{@"task_id":self.task_id,@"apply_open_id":model.open_id};
                 
                 [ODHttpTool getWithURL:ODurlTaskAccept parameters:parameter modelClass:[NSObject class] success:^(id model) {
-//                    weakSelf.num ++ ;
-//                    [weakSelf.picArray removeAllObjects];
-//                    [weakSelf.picArray addObject:model];
-//                    [weakSelf.collectionView reloadData];
                     [ODProgressHUD showInfoWithStatus:@"委派成功"];
                     [weakSelf.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
                 } failure:^(NSError *error) {

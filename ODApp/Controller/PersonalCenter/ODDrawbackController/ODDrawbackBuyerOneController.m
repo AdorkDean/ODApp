@@ -52,18 +52,7 @@
 
 @implementation ODDrawbackBuyerOneController
 
-#pragma mark - 生命周期
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.navigationItem.title = self.drawbackTitle;
-    
-    self.view.userInteractionEnabled = YES;
-    
-    [self createScrollView];
-}
-
+#pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -76,6 +65,17 @@
     [super viewWillDisappear:animated];
     
     [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+#pragma mark - 生命周期
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.navigationItem.title = self.drawbackTitle;
+    
+    self.view.userInteractionEnabled = YES;
+    
+    [self createScrollView];
 }
 
 #pragma mark - Create UIScrollView
@@ -610,14 +610,5 @@
 {
     [self.cancelOrderView removeFromSuperview];
 }
-
-
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 @end

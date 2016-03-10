@@ -24,7 +24,6 @@
     [self createTimeLabel];
     [self createTaskDetailTextView];
     [self createTaskRewardLabel];
-    [self createRequest];
 }
 
 
@@ -314,12 +313,6 @@
     };
 }
 
-#pragma mark - 初始化manager
-
-- (void)createRequest {
-    self.manager = [AFHTTPRequestOperationManager manager];
-    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-}
 
 
 #pragma mark - 拼接参数

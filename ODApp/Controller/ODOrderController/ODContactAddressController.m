@@ -10,8 +10,6 @@
 #import "ODContactAddressController.h"
 #import "ODAddressCell.h"
 #import "ODAddAddressController.h"
-#import "AFNetworking.h"
-#import "ODAPIManager.h"
 #import "ODOrderAddressModel.h"
 #import "UITableViewRowAction+JZExtension.h"
 
@@ -19,8 +17,6 @@
 
 
 @property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *deleteManager;
 @property(nonatomic, copy) NSString *open_id;
 @property(nonatomic, strong) NSMutableArray *defaultArray;
 @property(nonatomic, strong) NSMutableArray *dataArray;
@@ -72,56 +68,31 @@
 
 
 - (void)getData {
-    self.manager = [AFHTTPRequestOperationManager manager];
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"open_id"] = self.open_id;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlUserAddressList parameters:params modelClass:[ODOrderAddressModel class] success:^(id model)
+     {
+         [weakSelf.defaultArray removeAllObjects];
+         [weakSelf.dataArray removeAllObjects];
+         
+         // 取出模型
+         ODOrderAddressModel *addressModel = [model result];
+         // 取出def模型
+         ODOrderAddressDefModel *defModel = addressModel.def;
+         if (defModel) {
+             [weakSelf.defaultArray addObject:defModel];
+         }
 
-    NSDictionary *parameters = @{@"open_id" : self.open_id};
-    NSDictionary *signParameters = [ODAPIManager signParameters:parameters];
-
-    __weak typeof(self) weakSelf = self;
-    [self.manager GET:ODUrlUserAddressList parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-
-
-        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-
-
-            [weakSelf.defaultArray removeAllObjects];
-            [weakSelf.dataArray removeAllObjects];
-
-
-            NSMutableDictionary *dic = responseObject[@"result"];
-            NSMutableDictionary *mainDic = dic[@"def"];
-            NSMutableDictionary *otherDic = dic[@"list"];
-
-
-            if (mainDic.count != 0) {
-                ODOrderAddressDefModel *model = [[ODOrderAddressDefModel alloc] init];
-                [model setValuesForKeysWithDictionary:mainDic];
-                [weakSelf.defaultArray addObject:model];
-
-            }
-
-
-            for (NSMutableDictionary *miniDic in otherDic) {
-
-
-                ODOrderAddressDefModel *model = [[ODOrderAddressDefModel alloc] init];
-                [model setValuesForKeysWithDictionary:miniDic];
-                [weakSelf.dataArray addObject:model];
-
-            }
-
-
-        }
-
-        [weakSelf createTableView];
-        [weakSelf.tableView reloadData];
-
-    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-
-
-    }];
-
-
+         [weakSelf.dataArray addObjectsFromArray:addressModel.list];
+         
+         [weakSelf createTableView];
+         [weakSelf.tableView reloadData];
+         
+     } failure:^(NSError *error) {
+     }];
 }
 
 - (void)createTableView {
@@ -319,7 +290,7 @@
         if (self.getAddressBlock) {
             self.getAddressBlock(model.address, [NSString stringWithFormat:@"%@", model.id], @"2");
         }
-    }
+    } 
     else {
         ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
         if (self.getAddressBlock) {

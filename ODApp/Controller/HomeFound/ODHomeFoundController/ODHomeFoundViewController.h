@@ -13,12 +13,10 @@
 #import "UIImageView+WebCache.h"
 
 #import "ODClassMethod.h"
-#import "ODAPIManager.h"
 #import "ODCommumityViewController.h"
 #import "ODPrecontractViewController.h"
 #import "ODTabBarController.h"
 #import "ODLazyViewController.h"
-#import "ODAPIManager.h"
 #import "ODCommunityModel.h"
 #import "ODcommunityCollectionCell.h"
 #import "ODCenterIntroduceController.h"
@@ -46,10 +44,6 @@
 @property(nonatomic, strong) ODHomeFoundFooterView *footerView;
 
 @property(nonatomic, strong) ODCommunityModel *model;
-
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *centerManager;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *centerTelManager;
 
 //滚动窗口数组
 @property(nonatomic, strong) NSMutableArray *pictureArray;

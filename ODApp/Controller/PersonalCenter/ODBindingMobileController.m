@@ -9,7 +9,6 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBindingMobileController.h"
 #import "ODBindingMobileView.h"
-#import "ODAPIManager.h"
 
 @interface ODBindingMobileController ()
 

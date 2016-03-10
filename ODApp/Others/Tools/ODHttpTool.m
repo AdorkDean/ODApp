@@ -66,11 +66,51 @@ NSString * const requestSuccessStatus = @"success";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer=[AFJSONRequestSerializer serializer];
+    //    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    //如果报接受类型不一致请替换一致text/html或别的
+    
+    //    NSSet *set = manager.responseSerializer.acceptableContentTypes;
+    //    NSMutableSet *setM = [NSMutableSet setWithSet:set];
+    //    [setM addObject:@"text/plain"];
+    //    AFHTTPResponseSerializer *responseSerializer = [[AFHTTPResponseSerializer alloc] init];
+    //    responseSerializer.acceptableContentTypes = setM;
+    //    manager.responseSerializer = responseSerializer;
+    
+    
+//    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html",@"text/plain", nil];
+
     URL = [ODBaseURL stringByAppendingString:URL];
     NSMutableDictionary *parameter = [self getRequestParameter:parameters];
     [manager POST:URL parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
+        NSLog(@"responseObject === %@",responseObject);
+        if (success && [responseObject[requestStatus]isEqualToString:requestSuccessStatus])
+        {
+            id resultDic = responseObject[requsetResult];
+            if ([resultDic isKindOfClass:[NSArray class]] && [resultDic count] > 0)
+            {
+                resultDic = [resultDic lastObject];
+            }
+            if ([resultDic isKindOfClass:[NSDictionary class]])
+            {
+                [resultDic NSLogProperty];
+            }
+            if (modeleClass == [NSObject class] && ![resultDic isKindOfClass:[NSArray class]])
+            {
+                success(resultDic);
+            }
+            else
+            {
+                NSObject *model = [ODRequestClassName(modeleClass) mj_objectWithKeyValues:responseObject];
+                success(model);
+            }
+        }
+        else
+        {
+            failure(responseObject[requestStatus]);
+        }
         [self requestSuccessResult:responseObject modelClass:modeleClass successBlock:success failBlock:failure];
+
     }
           failure:^(AFHTTPRequestOperation *operation, NSError *error)
     {

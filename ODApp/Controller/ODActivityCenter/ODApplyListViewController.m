@@ -10,7 +10,6 @@
 #import "ODApplyListViewController.h"
 #import "ODCollectionCell.h"
 #import "MJRefresh.h"
-#import "ODAPIManager.h"
 #import "ODOthersInformationController.h"
 #import "ODApplyModel.h"
 
@@ -19,7 +18,6 @@
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, assign) NSInteger page;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 
 @property(nonatomic, copy) NSString *open_id;
@@ -85,11 +83,11 @@
     [ODHttpTool getWithURL:ODUrlStoreApplyUsers parameters:params modelClass:[ODApplyModel class] success:^(id model)
      {
          if ([countNumber isEqualToString:@"1"]) {
-             [self.dataArray removeAllObjects];
+             [weakSelf.dataArray removeAllObjects];
          }
          
          NSArray *applyDatas = [model result];
-        [self.dataArray addObjectsFromArray:applyDatas];
+        [weakSelf.dataArray addObjectsFromArray:applyDatas];
 
          if (applyDatas.count == 0)
          {

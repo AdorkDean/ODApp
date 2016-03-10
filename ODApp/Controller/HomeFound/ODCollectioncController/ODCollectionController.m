@@ -10,7 +10,6 @@
 #import "ODCollectionController.h"
 #import "ODCollectionCell.h"
 #import "MJRefresh.h"
-#import "ODAPIManager.h"
 #import "ODOthersInformationController.h"
 
 #import "ODLoveListModel.h"
@@ -21,7 +20,6 @@
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, assign) NSInteger page;
-@property(nonatomic, strong) AFHTTPRequestOperationManager *manager;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @end
 
@@ -92,14 +90,16 @@
     // 发送请求
     [ODHttpTool getWithURL:ODUrlSwapLoveList parameters:params modelClass:[ODLoveListModel class] success:^(id model)
     {
-        NSArray *loveListData = [model result];
-        if ([countNumber isEqualToString:@"1"]) [self.dataArray removeAllObjects];
+        NSArray *loveListDatas = [model result];
+        if ([countNumber isEqualToString:@"1"]) {
+            [weakSelf.dataArray removeAllObjects];
+        }
 
-        [weakSelf.dataArray addObject:loveListData.firstObject];
+        [weakSelf.dataArray addObject:loveListDatas.firstObject];
 
         [weakSelf.collectionView.mj_header endRefreshing];
 
-        if (!loveListData.count) {
+        if (!loveListDatas.count) {
             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
         }
         else
