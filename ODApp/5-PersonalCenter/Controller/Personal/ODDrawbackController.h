@@ -1,5 +1,5 @@
 //
-//  ODDrawbackBuyerOneController.h
+//  ODDrawbackController.h
 //  ODApp
 //
 //  Created by Bracelet on 16/2/20.
@@ -8,11 +8,9 @@
 
 #import "ODBaseViewController.h"
 
-
-
 #import "ODHelp.h"
 
-@interface ODDrawbackBuyerOneController : ODBaseViewController <UITextViewDelegate>
+@interface ODDrawbackController : ODBaseViewController <UITextViewDelegate>
 
 @property(nonatomic, copy) NSString *order_id;
 

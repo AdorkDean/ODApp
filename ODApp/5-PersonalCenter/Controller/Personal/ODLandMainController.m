@@ -162,7 +162,7 @@
 
 - (void)collectionAction:(UIButton *)button
 {
-    ODPersonalCenterCollectionViewController *collection = [[ODPersonalCenterCollectionViewController alloc]init];
+    ODPersonalCenterCollectionController *collection = [[ODPersonalCenterCollectionController alloc]init];
     [self.navigationController pushViewController:collection animated:YES];
 }
 

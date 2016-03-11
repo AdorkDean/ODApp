@@ -14,8 +14,8 @@
 #import "UIButton+WebCache.h"
 #import "ODPayController.h"
 #import "ODCancelOrderView.h"
-#import "ODDrawbackBuyerOneController.h"
-#import "ODDrawbackBuyerOneController.h"
+#import "ODDrawbackController.h"
+#import "ODDrawbackController.h"
 
 @interface ODMySellDetailController () <UITextViewDelegate>
 
@@ -393,7 +393,7 @@
 
 - (void)receiveAction:(UIButton *)sender {
 
-    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    ODDrawbackController *vc = [[ODDrawbackController alloc] init];
 
     ODOrderDetailModel *model = self.dataArray[0];
     vc.darwbackMoney = model.total_price;
@@ -413,7 +413,7 @@
 
 - (void)reasonAction:(UIButton *)sender {
 
-    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    ODDrawbackController *vc = [[ODDrawbackController alloc] init];
 
     ODOrderDetailModel *model = self.dataArray[0];
     vc.darwbackMoney = model.total_price;
@@ -444,7 +444,7 @@
 
 - (void)DealDeliveryAction:(UIButton *)sender {
 
-    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    ODDrawbackController *vc = [[ODDrawbackController alloc] init];
 
     ODOrderDetailModel *model = self.dataArray[0];
     vc.darwbackMoney = model.total_price;

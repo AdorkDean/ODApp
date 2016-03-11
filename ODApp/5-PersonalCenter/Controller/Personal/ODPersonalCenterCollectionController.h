@@ -1,5 +1,5 @@
 //
-//  ODPersonalCenterCollectionViewController.h
+//  ODPersonalCenterCollectionController.h
 //  ODApp
 //
 //  Created by Odong-YG on 16/2/18.
@@ -15,7 +15,7 @@
 #import "ODCommunityShowPicViewController.h"
 #import "MJRefresh.h"
 
-@interface ODPersonalCenterCollectionViewController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface ODPersonalCenterCollectionController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 
 @property(nonatomic, strong) UICollectionView *collectionView;

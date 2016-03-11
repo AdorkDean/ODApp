@@ -176,7 +176,7 @@
 		232CB5FA1C9264E200340D12 /* ODCommunityDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB4751C9264E200340D12 /* ODCommunityDetailCell.xib */; };
 		232CB5FB1C9264E200340D12 /* ODPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB47A1C9264E200340D12 /* ODPersonalCenterViewController.m */; };
 		232CB5FC1C9264E200340D12 /* ODRegisteredController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB47C1C9264E200340D12 /* ODRegisteredController.m */; };
-		232CB5FD1C9264E200340D12 /* ODDrawbackBuyerOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB47F1C9264E200340D12 /* ODDrawbackBuyerOneController.m */; };
+		232CB5FD1C9264E200340D12 /* ODDrawbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB47F1C9264E200340D12 /* ODDrawbackController.m */; };
 		232CB5FE1C9264E200340D12 /* ODEvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4811C9264E200340D12 /* ODEvaluationController.m */; };
 		232CB5FF1C9264E200340D12 /* ODGiveOpinionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4831C9264E200340D12 /* ODGiveOpinionController.m */; };
 		232CB6001C9264E200340D12 /* ODLandMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4851C9264E200340D12 /* ODLandMainController.m */; };
@@ -187,7 +187,7 @@
 		232CB6051C9264E200340D12 /* ODOrderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB48F1C9264E200340D12 /* ODOrderDetailController.m */; };
 		232CB6061C9264E200340D12 /* ODOtherTaskController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4911C9264E200340D12 /* ODOtherTaskController.m */; };
 		232CB6071C9264E200340D12 /* ODOtherTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4931C9264E200340D12 /* ODOtherTopicViewController.m */; };
-		232CB6081C9264E200340D12 /* ODPersonalCenterCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4951C9264E200340D12 /* ODPersonalCenterCollectionViewController.m */; };
+		232CB6081C9264E200340D12 /* ODPersonalCenterCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4951C9264E200340D12 /* ODPersonalCenterCollectionController.m */; };
 		232CB6091C9264E200340D12 /* ODReleaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4971C9264E200340D12 /* ODReleaseController.m */; };
 		232CB60A1C9264E200340D12 /* ODSecondMySellDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4991C9264E200340D12 /* ODSecondMySellDetailController.m */; };
 		232CB60B1C9264E200340D12 /* ODSecondOrderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB49B1C9264E200340D12 /* ODSecondOrderDetailController.m */; };
@@ -640,8 +640,8 @@
 		232CB47A1C9264E200340D12 /* ODPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPersonalCenterViewController.m; sourceTree = "<group>"; };
 		232CB47B1C9264E200340D12 /* ODRegisteredController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRegisteredController.h; sourceTree = "<group>"; };
 		232CB47C1C9264E200340D12 /* ODRegisteredController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRegisteredController.m; sourceTree = "<group>"; };
-		232CB47E1C9264E200340D12 /* ODDrawbackBuyerOneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDrawbackBuyerOneController.h; sourceTree = "<group>"; };
-		232CB47F1C9264E200340D12 /* ODDrawbackBuyerOneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDrawbackBuyerOneController.m; sourceTree = "<group>"; };
+		232CB47E1C9264E200340D12 /* ODDrawbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDrawbackController.h; sourceTree = "<group>"; };
+		232CB47F1C9264E200340D12 /* ODDrawbackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDrawbackController.m; sourceTree = "<group>"; };
 		232CB4801C9264E200340D12 /* ODEvaluationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODEvaluationController.h; sourceTree = "<group>"; };
 		232CB4811C9264E200340D12 /* ODEvaluationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODEvaluationController.m; sourceTree = "<group>"; };
 		232CB4821C9264E200340D12 /* ODGiveOpinionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODGiveOpinionController.h; sourceTree = "<group>"; };
@@ -662,8 +662,8 @@
 		232CB4911C9264E200340D12 /* ODOtherTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOtherTaskController.m; sourceTree = "<group>"; };
 		232CB4921C9264E200340D12 /* ODOtherTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOtherTopicViewController.h; sourceTree = "<group>"; };
 		232CB4931C9264E200340D12 /* ODOtherTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOtherTopicViewController.m; sourceTree = "<group>"; };
-		232CB4941C9264E200340D12 /* ODPersonalCenterCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPersonalCenterCollectionViewController.h; sourceTree = "<group>"; };
-		232CB4951C9264E200340D12 /* ODPersonalCenterCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPersonalCenterCollectionViewController.m; sourceTree = "<group>"; };
+		232CB4941C9264E200340D12 /* ODPersonalCenterCollectionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPersonalCenterCollectionController.h; sourceTree = "<group>"; };
+		232CB4951C9264E200340D12 /* ODPersonalCenterCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPersonalCenterCollectionController.m; sourceTree = "<group>"; };
 		232CB4961C9264E200340D12 /* ODReleaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODReleaseController.h; sourceTree = "<group>"; };
 		232CB4971C9264E200340D12 /* ODReleaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODReleaseController.m; sourceTree = "<group>"; };
 		232CB4981C9264E200340D12 /* ODSecondMySellDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSecondMySellDetailController.h; sourceTree = "<group>"; };
@@ -1603,8 +1603,8 @@
 		232CB47D1C9264E200340D12 /* Personal */ = {
 			isa = PBXGroup;
 			children = (
-				232CB47E1C9264E200340D12 /* ODDrawbackBuyerOneController.h */,
-				232CB47F1C9264E200340D12 /* ODDrawbackBuyerOneController.m */,
+				232CB47E1C9264E200340D12 /* ODDrawbackController.h */,
+				232CB47F1C9264E200340D12 /* ODDrawbackController.m */,
 				232CB4801C9264E200340D12 /* ODEvaluationController.h */,
 				232CB4811C9264E200340D12 /* ODEvaluationController.m */,
 				232CB4821C9264E200340D12 /* ODGiveOpinionController.h */,
@@ -1625,8 +1625,8 @@
 				232CB4911C9264E200340D12 /* ODOtherTaskController.m */,
 				232CB4921C9264E200340D12 /* ODOtherTopicViewController.h */,
 				232CB4931C9264E200340D12 /* ODOtherTopicViewController.m */,
-				232CB4941C9264E200340D12 /* ODPersonalCenterCollectionViewController.h */,
-				232CB4951C9264E200340D12 /* ODPersonalCenterCollectionViewController.m */,
+				232CB4941C9264E200340D12 /* ODPersonalCenterCollectionController.h */,
+				232CB4951C9264E200340D12 /* ODPersonalCenterCollectionController.m */,
 				232CB4961C9264E200340D12 /* ODReleaseController.h */,
 				232CB4971C9264E200340D12 /* ODReleaseController.m */,
 				232CB4981C9264E200340D12 /* ODSecondMySellDetailController.h */,
@@ -2317,7 +2317,7 @@
 				232CB5CA1C9264E200340D12 /* ODCollectionController.m in Sources */,
 				232CB6181C9264E200340D12 /* ODMyOrderRecordModel.m in Sources */,
 				232CB5C51C9264E200340D12 /* ODAddAddressController.m in Sources */,
-				232CB6081C9264E200340D12 /* ODPersonalCenterCollectionViewController.m in Sources */,
+				232CB6081C9264E200340D12 /* ODPersonalCenterCollectionController.m in Sources */,
 				232CB6171C9264E200340D12 /* ODMyOrderDetailModel.m in Sources */,
 				232CB5671C9264E200340D12 /* IQUIViewController+Additions.m in Sources */,
 				232CB5F31C9264E200340D12 /* ODCommunityShowPicViewController.m in Sources */,
@@ -2329,7 +2329,7 @@
 				232CB60B1C9264E200340D12 /* ODSecondOrderDetailController.m in Sources */,
 				232CB5B71C9264E200340D12 /* ODCenderDetailView.m in Sources */,
 				232CB5541C9264E200340D12 /* NSArray+ODExtension.m in Sources */,
-				232CB5FD1C9264E200340D12 /* ODDrawbackBuyerOneController.m in Sources */,
+				232CB5FD1C9264E200340D12 /* ODDrawbackController.m in Sources */,
 				232CB56E1C9264E200340D12 /* IQTitleBarButtonItem.m in Sources */,
 				232CB6611C9264E200340D12 /* ODThirdOrderView.m in Sources */,
 				4029EB351C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m in Sources */,
