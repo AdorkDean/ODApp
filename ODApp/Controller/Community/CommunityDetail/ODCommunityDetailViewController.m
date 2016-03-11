@@ -134,7 +134,7 @@
         }
         [weakSelf createUserInfoView];
         [weakSelf createBBSDetailView];
-        
+
     } failure:^(NSError *error) {
         
     }];

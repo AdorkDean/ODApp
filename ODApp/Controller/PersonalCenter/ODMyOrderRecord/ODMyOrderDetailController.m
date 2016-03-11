@@ -77,31 +77,46 @@
     float viewLeftMargin = 4;
     // view 圆角大小
     float viewCornerRadius = 5;
+    // 边框宽度
+    float viewBorderWidth = 0.5;
+    // 字体大小
+    float ContentFontSize = 12.5;
+    float titleFontSize = 11.5;
     
 #pragma mark - 预约时间
-    UIView *timeView = [ODClassMethod creatViewWithFrame:CGRectMake(viewLeftMargin, viewLeftMargin, KScreenWidth - viewLeftMargin * 2, labelHeight) tag:0 color:@"#ffffff"];
+    UIView *timeView = [[UIView alloc] initWithFrame:CGRectMake(viewLeftMargin, viewLeftMargin, KScreenWidth - viewLeftMargin * 2, labelHeight)];
+    timeView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     timeView.layer.cornerRadius = viewCornerRadius;
     timeView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
-    timeView.layer.borderWidth = 0.5;
+    timeView.layer.borderWidth = viewBorderWidth;
     [self.scrollView addSubview:timeView];
     
-    UILabel *timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin,  viewLeftMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@ - %@",self.model.start_date_str,self.model.end_date_str] font:12.5 alignment:@"left" color:@"#484848" alpha:1];
+    UILabel *timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin,  viewLeftMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight)];
+    timeLabel.text = [NSString stringWithFormat:@"%@ - %@",self.model.start_date_str,self.model.end_date_str];
+    timeLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+    timeLabel.font = [UIFont systemFontOfSize:ContentFontSize];
     [self.scrollView addSubview:timeLabel];
     
 #pragma mark - 体验中心名称
-    UIView *experienceCenterView = [ODClassMethod creatViewWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(timeView.frame) + viewLeftMargin, KScreenWidth - viewLeftMargin * 2, labelHeight) tag:0 color:@"#ffffff"];
+    UIView *experienceCenterView = [[UIView alloc] initWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(timeView.frame) + viewLeftMargin, KScreenWidth - viewLeftMargin * 2, labelHeight)];
+    experienceCenterView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     experienceCenterView.layer.cornerRadius = viewCornerRadius;
     experienceCenterView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
-    experienceCenterView.layer.borderWidth = 0.5;
+    experienceCenterView.layer.borderWidth = viewBorderWidth;
     [self.scrollView addSubview:experienceCenterView];
     
-    UILabel *experienceCenterLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(timeLabel.frame) + viewLeftMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",self.model.store_name] font:12.5 alignment:@"left" color:@"#484848" alpha:1];
+    UILabel *experienceCenterLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(timeLabel.frame) + viewLeftMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight)];
+    experienceCenterLabel.text = [NSString stringWithFormat:@"%@",self.model.store_name];
+    experienceCenterLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+    experienceCenterLabel.font = [UIFont systemFontOfSize:ContentFontSize];
     [self.scrollView addSubview:experienceCenterLabel];
     
 #pragma mark - 中心设备
+    // 距离上边控件的距离
     float labelUpMargin = 14;
+    // 距离下边控件的距离
     float labelDownMargin = 5;
-    UILabel *deviceLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(experienceCenterLabel.frame) + labelUpMargin, kScreenSize.width - ODLeftMargin * 2, 11.5) text:@"需要使用的中心设备" font:11.5 alignment:@"left" color:@"#8e8e8e" alpha:1];
+    UILabel *deviceLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(experienceCenterLabel.frame) + labelUpMargin, kScreenSize.width - ODLeftMargin * 2, 11.5) text:@"需要使用的中心设备" font:titleFontSize alignment:@"left" color:@"#8e8e8e" alpha:1];
     [self.scrollView addSubview:deviceLabel];
     
     NSMutableString *devicesName = [[NSMutableString alloc] init];
@@ -118,66 +133,66 @@
     UIView *deviceDetailView = [ODClassMethod creatViewWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(deviceLabel.frame) + labelDownMargin, KScreenWidth - viewLeftMargin * 2, labelHeight) tag:0 color:@"#ffffff"];
     deviceDetailView.layer.cornerRadius = viewCornerRadius;
     deviceDetailView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
-    deviceDetailView.layer.borderWidth = 0.5;
+    deviceDetailView.layer.borderWidth = viewBorderWidth;
     [self.scrollView addSubview:deviceDetailView];
     
-    UILabel *deviceDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(deviceLabel.frame) + labelDownMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",devicesName] font:12.5 alignment:@"left" color:@"#484848" alpha:1];
+    UILabel *deviceDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(deviceLabel.frame) + labelDownMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",devicesName] font:ContentFontSize alignment:@"left" color:@"#484848" alpha:1];
     [self.scrollView addSubview:deviceDetailLabel];
     
 #pragma mark - 活动目的
-    UILabel *purposeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(deviceDetailLabel.frame) + labelUpMargin, kScreenSize.width - ODLeftMargin * 2, 11.5) text:@"活动目的" font:11.5 alignment:@"left" color:@"#8e8e8e" alpha:1];
+    UILabel *purposeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(deviceDetailLabel.frame) + labelUpMargin, kScreenSize.width - ODLeftMargin * 2, titleFontSize) text:@"活动目的" font:titleFontSize alignment:@"left" color:@"#8e8e8e" alpha:1];
     [self.scrollView addSubview:purposeLabel];
     
     UIView *purposeDetailView = [ODClassMethod creatViewWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(purposeLabel.frame) + labelDownMargin, KScreenWidth - viewLeftMargin * 2, labelHeight) tag:0 color:@"#ffffff"];
     purposeDetailView.layer.cornerRadius = viewCornerRadius;
     purposeDetailView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
-    purposeDetailView.layer.borderWidth = 0.5;
+    purposeDetailView.layer.borderWidth = viewBorderWidth;
     [self.scrollView addSubview:purposeDetailView];
     
-    UILabel *purposeDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(purposeLabel.frame) + labelDownMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",self.model.purpose] font:12.5 alignment:@"left" color:@"#484848" alpha:1];
+    UILabel *purposeDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(purposeLabel.frame) + labelDownMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",self.model.purpose] font:ContentFontSize alignment:@"left" color:@"#484848" alpha:1];
     [self.scrollView addSubview:purposeDetailLabel];
     
 #pragma mark - 活动内容
-    UILabel *contentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(purposeDetailLabel.frame) + labelUpMargin, kScreenSize.width - ODLeftMargin * 2, 11.5) text:@"活动内容" font:11.5 alignment:@"left" color:@"#8e8e8e" alpha:1];
+    UILabel *contentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(purposeDetailLabel.frame) + labelUpMargin, kScreenSize.width - ODLeftMargin * 2, titleFontSize) text:@"活动内容" font:11.5 alignment:@"left" color:@"#8e8e8e" alpha:1];
     [self.scrollView addSubview:contentLabel];
     
-    UIView *contentDetailView = [ODClassMethod creatViewWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(contentLabel.frame) + labelDownMargin, KScreenWidth - viewLeftMargin * 2, [ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width - ODLeftMargin * 2 miniHeight:labelHeight fontSize:12.5]) tag:0 color:@"#ffffff"];
+    UIView *contentDetailView = [ODClassMethod creatViewWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(contentLabel.frame) + labelDownMargin, KScreenWidth - viewLeftMargin * 2, [ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width - ODLeftMargin * 2 miniHeight:labelHeight fontSize:ContentFontSize]) tag:0 color:@"#ffffff"];
     contentDetailView.layer.cornerRadius = viewCornerRadius;
     contentDetailView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
-    contentDetailView.layer.borderWidth = 0.5;
+    contentDetailView.layer.borderWidth = viewBorderWidth;
     [self.scrollView addSubview:contentDetailView];
     
-    UILabel *contentDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(contentLabel.frame) + labelDownMargin, kScreenSize.width - ODLeftMargin * 2,[ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width - ODLeftMargin * 2 miniHeight:labelHeight fontSize:12.5] ) text:[NSString stringWithFormat:@"%@",self.model.content] font:12.5 alignment:@"left" color:@"#484848" alpha:1];
+    UILabel *contentDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(contentLabel.frame) + labelDownMargin, kScreenSize.width - ODLeftMargin * 2,[ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width - ODLeftMargin * 2 miniHeight:labelHeight fontSize:ContentFontSize] ) text:[NSString stringWithFormat:@"%@",self.model.content] font:ContentFontSize alignment:@"left" color:@"#484848" alpha:1];
     [self.scrollView addSubview:contentDetailLabel];
     
 #pragma mark - 参加人数
-    UILabel *peopleNumberLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(contentDetailLabel.frame) + labelUpMargin, kScreenSize.width - ODLeftMargin * 2, 11.5) text:@"参加人数" font:11.5 alignment:@"left" color:@"#8e8e8e" alpha:1];
+    UILabel *peopleNumberLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(contentDetailLabel.frame) + labelUpMargin, kScreenSize.width - ODLeftMargin * 2, titleFontSize) text:@"参加人数" font:titleFontSize alignment:@"left" color:@"#8e8e8e" alpha:1];
     [self.scrollView addSubview:peopleNumberLabel];
     
     UIView *peopleNumberDetailView = [ODClassMethod creatViewWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(peopleNumberLabel.frame) + labelDownMargin, KScreenWidth - viewLeftMargin * 2, labelHeight) tag:0 color:@"#ffffff"];
     peopleNumberDetailView.layer.cornerRadius = viewCornerRadius;
     peopleNumberDetailView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
-    peopleNumberDetailView.layer.borderWidth = 0.5;
+    peopleNumberDetailView.layer.borderWidth = viewBorderWidth;
     [self.scrollView addSubview:peopleNumberDetailView];
     
-    UILabel *peopleNumberDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(peopleNumberLabel.frame) + labelDownMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@",self.model.people_num]] font:12.5 alignment:@"left" color:@"#484848" alpha:1];
+    UILabel *peopleNumberDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(peopleNumberLabel.frame) + labelDownMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",[NSString stringWithFormat:@"%@",self.model.people_num]] font:ContentFontSize alignment:@"left" color:@"#484848" alpha:1];
     [self.scrollView addSubview:peopleNumberDetailLabel];
     
 #pragma mark - 场地电话
     UIView *phoneView = [ODClassMethod creatViewWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(peopleNumberDetailLabel.frame) + viewLeftMargin, KScreenWidth - viewLeftMargin * 2, labelHeight) tag:0 color:@"#ffffff"];
     phoneView.layer.cornerRadius = viewCornerRadius;
     phoneView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
-    phoneView.layer.borderWidth = 0.5;
+    phoneView.layer.borderWidth = viewBorderWidth;
     [self.scrollView addSubview:phoneView];
 
-    UILabel *phoneLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin,  CGRectGetMaxY(peopleNumberDetailLabel.frame) + viewLeftMargin, kScreenSize.width - viewLeftMargin * 2, labelHeight) text:@"场地预约电话:" font:12.5 alignment:@"left" color:@"#484848" alpha:1];
+    UILabel *phoneLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin,  CGRectGetMaxY(peopleNumberDetailLabel.frame) + viewLeftMargin, kScreenSize.width - viewLeftMargin * 2, labelHeight) text:@"场地预约电话:" font:ContentFontSize alignment:@"left" color:@"#484848" alpha:1];
     [self.scrollView addSubview:phoneLabel];
     
-    UIButton *phoneButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5 + kScreenSize.width * 1/3, CGRectGetMaxY(peopleNumberDetailLabel.frame) + viewLeftMargin, 100, labelHeight) target:self sel:@selector(phoneButtonClick:) tag:0 image:nil title:self.model.store_tel font:12.5];
+    UIButton *phoneButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5 + kScreenSize.width * 1/3, CGRectGetMaxY(peopleNumberDetailLabel.frame) + viewLeftMargin, 100, labelHeight) target:self sel:@selector(phoneButtonClick:) tag:0 image:nil title:self.model.store_tel font:ContentFontSize];
     [self.scrollView addSubview:phoneButton];
     
 #pragma mark - 审核状态
-    self.checkLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(phoneLabel.frame) + viewLeftMargin, kScreenSize.width - viewLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",self.model.status_str ]font:12.5 alignment:@"center" color:@"#000000" alpha:1];
+    self.checkLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(phoneLabel.frame) + viewLeftMargin, kScreenSize.width - viewLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",self.model.status_str ]font:ContentFontSize alignment:@"center" color:@"#000000" alpha:1];
     self.checkLabel.layer.masksToBounds = YES;
     self.checkLabel.layer.cornerRadius = viewCornerRadius;
     self.checkLabel.layer.borderWidth = 1;

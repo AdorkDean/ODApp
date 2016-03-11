@@ -319,8 +319,7 @@
     return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {    
     return CGSizeMake(0, 551);
 }
 
@@ -412,21 +411,19 @@ updatingLocation:(BOOL)updatingLocation {
 
 
 #pragma mark - Action
-#pragma mark - 定位按钮点击事件
 
+#pragma mark - 定位按钮 点击事件
 - (void)locationButtonClick:(UIButton *)button {
     ODLocationController *vc = [[ODLocationController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - 顶部8个按钮点击事件
-- (void)topEightButtonClick
-{
+#pragma mark - 顶部8个按钮 点击事件
+- (void)topEightButtonClick {
     __weakSelf
     self.rsusableView.topEightButtonTag = ^(NSInteger tag) {
         if (tag == 100) {
             weakSelf.tabBarController.selectedIndex = 1;
-            
         }
         else if (tag == 101) {
             if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
@@ -478,8 +475,7 @@ updatingLocation:(BOOL)updatingLocation {
     };
 }
 
-#pragma mark - 热门活动图片点击事件
-
+#pragma mark - 热门活动图片 点击事件
 - (void)imageButtonClick:(UIButton *)button {
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
@@ -493,7 +489,7 @@ updatingLocation:(BOOL)updatingLocation {
     }
 }
 
-#pragma mark - 寻圈子点击事件
+#pragma mark - 寻圈子 点击事件
 - (void)searchCircleButtonClick{
     __weakSelf
     self.rsusableView.searchCircleButtonTag = ^(NSInteger tag){
@@ -502,25 +498,21 @@ updatingLocation:(BOOL)updatingLocation {
         [weakSelf giveCommumityContent:bbsMarkArray[tag - 1000] andBbsType:5];
     };
 }
-#pragma mark - 加入更多圈子点击事件
-
+#pragma mark - 加入更多圈子 点击事件
 - (void)gestureButtonClick:(UIButton *)button {
     [self giveCommumityContent:@"社区" andBbsType:5];
 }
 
 #pragma mark - 寻圈子跳转刷新
-
 - (void)giveCommumityContent:(NSString *)bbsMark andBbsType:(float)bbsType {
     self.tabBarController.selectedIndex = 3;
     ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
     vc.bbsMark = bbsMark;
     vc.bbsType = bbsType;
-    NSLog(@"%@", bbsMark);
     [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationSearchCircle object:nil];
 }
 
-#pragma mark - 用户头像点击事件
-
+#pragma mark - 用户头像 点击事件
 - (void)headButtonClick:(UIButton *)button {
     ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *) button.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
@@ -536,17 +528,7 @@ updatingLocation:(BOOL)updatingLocation {
     }
 }
 
-#pragma mark - 了解更多技能点击事件
-
-- (void)moreSkillButtonClick:(UIButton *)button {
-    self.tabBarController.selectedIndex = 2;
-    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
-    vc.index = 0;
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseSkill object:nil];
-}
-
-#pragma mark - 技能交换cell图片点击事件
-
+#pragma mark - 技能交换图片 点击事件
 - (void)imageButtonClicked:(UIButton *)button {
     ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *) button.superview.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
@@ -558,6 +540,13 @@ updatingLocation:(BOOL)updatingLocation {
     [self presentViewController:picController animated:YES completion:nil];
 }
 
+#pragma mark - 了解更多技能 点击事件
+- (void)moreSkillButtonClick:(UIButton *)button {
+    self.tabBarController.selectedIndex = 2;
+    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
+    vc.index = 0;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseSkill object:nil];
+}
 
 - (void)pushToPlace
 {
