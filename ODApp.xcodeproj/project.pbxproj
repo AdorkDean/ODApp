@@ -176,7 +176,7 @@
 		232CB5FA1C9264E200340D12 /* ODCommunityDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB4751C9264E200340D12 /* ODCommunityDetailCell.xib */; };
 		232CB5FB1C9264E200340D12 /* ODPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB47A1C9264E200340D12 /* ODPersonalCenterViewController.m */; };
 		232CB5FC1C9264E200340D12 /* ODRegisteredController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB47C1C9264E200340D12 /* ODRegisteredController.m */; };
-		232CB5FD1C9264E200340D12 /* ODDrawbackBuyerOneController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB47F1C9264E200340D12 /* ODDrawbackBuyerOneController.m */; };
+		232CB5FD1C9264E200340D12 /* ODDrawbackController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB47F1C9264E200340D12 /* ODDrawbackController.m */; };
 		232CB5FE1C9264E200340D12 /* ODEvaluationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4811C9264E200340D12 /* ODEvaluationController.m */; };
 		232CB5FF1C9264E200340D12 /* ODGiveOpinionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4831C9264E200340D12 /* ODGiveOpinionController.m */; };
 		232CB6001C9264E200340D12 /* ODLandMainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4851C9264E200340D12 /* ODLandMainController.m */; };
@@ -639,8 +639,8 @@
 		232CB47A1C9264E200340D12 /* ODPersonalCenterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPersonalCenterViewController.m; sourceTree = "<group>"; };
 		232CB47B1C9264E200340D12 /* ODRegisteredController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRegisteredController.h; sourceTree = "<group>"; };
 		232CB47C1C9264E200340D12 /* ODRegisteredController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRegisteredController.m; sourceTree = "<group>"; };
-		232CB47E1C9264E200340D12 /* ODDrawbackBuyerOneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDrawbackBuyerOneController.h; sourceTree = "<group>"; };
-		232CB47F1C9264E200340D12 /* ODDrawbackBuyerOneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDrawbackBuyerOneController.m; sourceTree = "<group>"; };
+		232CB47E1C9264E200340D12 /* ODDrawbackController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDrawbackController.h; sourceTree = "<group>"; };
+		232CB47F1C9264E200340D12 /* ODDrawbackController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDrawbackController.m; sourceTree = "<group>"; };
 		232CB4801C9264E200340D12 /* ODEvaluationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODEvaluationController.h; sourceTree = "<group>"; };
 		232CB4811C9264E200340D12 /* ODEvaluationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODEvaluationController.m; sourceTree = "<group>"; };
 		232CB4821C9264E200340D12 /* ODGiveOpinionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODGiveOpinionController.h; sourceTree = "<group>"; };
@@ -1598,8 +1598,8 @@
 		232CB47D1C9264E200340D12 /* Personal */ = {
 			isa = PBXGroup;
 			children = (
-				232CB47E1C9264E200340D12 /* ODDrawbackBuyerOneController.h */,
-				232CB47F1C9264E200340D12 /* ODDrawbackBuyerOneController.m */,
+				232CB47E1C9264E200340D12 /* ODDrawbackController.h */,
+				232CB47F1C9264E200340D12 /* ODDrawbackController.m */,
 				232CB4801C9264E200340D12 /* ODEvaluationController.h */,
 				232CB4811C9264E200340D12 /* ODEvaluationController.m */,
 				232CB4821C9264E200340D12 /* ODGiveOpinionController.h */,
@@ -2324,7 +2324,7 @@
 				232CB60B1C9264E200340D12 /* ODSecondOrderDetailController.m in Sources */,
 				232CB5B71C9264E200340D12 /* ODCenderDetailView.m in Sources */,
 				232CB5541C9264E200340D12 /* NSArray+ODExtension.m in Sources */,
-				232CB5FD1C9264E200340D12 /* ODDrawbackBuyerOneController.m in Sources */,
+				232CB5FD1C9264E200340D12 /* ODDrawbackController.m in Sources */,
 				232CB56E1C9264E200340D12 /* IQTitleBarButtonItem.m in Sources */,
 				232CB6611C9264E200340D12 /* ODThirdOrderView.m in Sources */,
 				232CB5911C9264E200340D12 /* ODHomeFoundViewController.m in Sources */,

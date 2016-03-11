@@ -1,5 +1,5 @@
 //
-//  ODDrawbackBuyerOneController.m
+//  ODDrawbackController.m
 //  ODApp
 //
 //  Created by Bracelet on 16/2/20.
@@ -7,10 +7,10 @@
 //
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
-#import "ODDrawbackBuyerOneController.h"
+#import "ODDrawbackController.h"
 #import "ODCancelOrderView.h"
 
-@interface ODDrawbackBuyerOneController ()
+@interface ODDrawbackController ()
 {
     // label 统一高度
     float uniftyHeight;
@@ -50,7 +50,7 @@
 
 @end
 
-@implementation ODDrawbackBuyerOneController
+@implementation ODDrawbackController
 
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated

@@ -13,7 +13,7 @@
 #import "UIButton+WebCache.h"
 #import "ODPayController.h"
 #import "ODCancelOrderView.h"
-#import "ODDrawbackBuyerOneController.h"
+#import "ODDrawbackController.h"
 #import "ODEvaluation.h"
 
 @interface ODSecondOrderDetailController () <UITextViewDelegate>
@@ -431,7 +431,7 @@
 // 查看原因
 - (void)reasonAction:(UIButton *)sender {
 
-    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    ODDrawbackController *vc = [[ODDrawbackController alloc] init];
     ODOrderDetailModel *model = self.dataArray[0];
     vc.darwbackMoney = model.total_price;
     vc.order_id = self.order_id;
@@ -582,7 +582,7 @@
 // 申请退款
 - (void)refundAction:(UIButton *)sender {
 
-    ODDrawbackBuyerOneController *vc = [[ODDrawbackBuyerOneController alloc] init];
+    ODDrawbackController *vc = [[ODDrawbackController alloc] init];
     ODOrderDetailModel *model = self.dataArray[0];
     vc.darwbackMoney = model.total_price;
     vc.order_id = self.order_id;
