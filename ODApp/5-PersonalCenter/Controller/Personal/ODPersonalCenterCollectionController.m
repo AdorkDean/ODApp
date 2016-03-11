@@ -1,5 +1,5 @@
 //
-//  ODPersonalCenterCollectionViewController.m
+//  ODPersonalCenterCollectionController.m
 //  ODApp
 //
 //  Created by Odong-YG on 16/2/18.
@@ -7,17 +7,17 @@
 //
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
-#import "ODPersonalCenterCollectionViewController.h"
+#import "ODPersonalCenterCollectionController.h"
 
 #define cellID @"ODBazaarExchangeSkillCollectionCell"
 
-@interface ODPersonalCenterCollectionViewController ()
+@interface ODPersonalCenterCollectionController ()
 
 @property(nonatomic, strong) UILabel *noReusltLabel;
 
 @end
 
-@implementation ODPersonalCenterCollectionViewController
+@implementation ODPersonalCenterCollectionController
 
 #pragma mark - lazyLoad
 -(UICollectionView *)collectionView
