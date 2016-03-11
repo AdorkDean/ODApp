@@ -291,6 +291,7 @@
 		232CB66D1C9264E200340D12 /* ODWithdrawalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB5501C9264E200340D12 /* ODWithdrawalView.xib */; };
 		232CB66E1C9264E200340D12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 232CB5521C9264E200340D12 /* Assets.xcassets */; };
 		232CB66F1C9264E200340D12 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 232CB5531C9264E200340D12 /* Info.plist */; };
+		4029EB351C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4029EB341C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m */; };
 		672D70E18F3238DC081B4B46 /* libPods-ODApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEA572BF76BF4C22E1FC80BA /* libPods-ODApp.a */; };
 		9DD00BDB1C4E397E00F0EE5F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDA1C4E397E00F0EE5F /* Security.framework */; };
 		9DD00BDD1C4E398B00F0EE5F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */; };
@@ -841,6 +842,8 @@
 		232CB5501C9264E200340D12 /* ODWithdrawalView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODWithdrawalView.xib; sourceTree = "<group>"; };
 		232CB5521C9264E200340D12 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		232CB5531C9264E200340D12 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4029EB331C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseSkillTimeModel.h; sourceTree = "<group>"; };
+		4029EB341C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseSkillTimeModel.m; sourceTree = "<group>"; };
 		9DD00BDA1C4E397E00F0EE5F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1451,6 +1454,8 @@
 				232CB4351C9264E200340D12 /* ODOrderAddressModel.m */,
 				232CB4361C9264E200340D12 /* ODUploadImageModel.h */,
 				232CB4371C9264E200340D12 /* ODUploadImageModel.m */,
+				4029EB331C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.h */,
+				4029EB341C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2327,6 +2332,7 @@
 				232CB5FD1C9264E200340D12 /* ODDrawbackBuyerOneController.m in Sources */,
 				232CB56E1C9264E200340D12 /* IQTitleBarButtonItem.m in Sources */,
 				232CB6611C9264E200340D12 /* ODThirdOrderView.m in Sources */,
+				4029EB351C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m in Sources */,
 				232CB5911C9264E200340D12 /* ODHomeFoundViewController.m in Sources */,
 				232CB65D1C9264E200340D12 /* ODSecondOrderDetailView.m in Sources */,
 				232CB5761C9264E200340D12 /* NSData+SDDataCache.m in Sources */,
