@@ -32,7 +32,6 @@
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = self.nick;
     [self requestData];

@@ -1340,16 +1340,18 @@
 				232CB40F1C9264E200340D12 /* ODBazaaeExchangeSkillViewController.m */,
 				232CB4101C9264E200340D12 /* ODBazaarExchangeSkillDetailViewController.h */,
 				232CB4111C9264E200340D12 /* ODBazaarExchangeSkillDetailViewController.m */,
-				232CB4121C9264E200340D12 /* ODBazaarReleaseSkillTimeViewController.h */,
-				232CB4131C9264E200340D12 /* ODBazaarReleaseSkillTimeViewController.m */,
 				232CB4141C9264E200340D12 /* ODBazaarReleaseSkillViewController.h */,
 				232CB4151C9264E200340D12 /* ODBazaarReleaseSkillViewController.m */,
+				232CB4121C9264E200340D12 /* ODBazaarReleaseSkillTimeViewController.h */,
+				232CB4131C9264E200340D12 /* ODBazaarReleaseSkillTimeViewController.m */,
 				232CB4161C9264E200340D12 /* ODCollectionController.h */,
 				232CB4171C9264E200340D12 /* ODCollectionController.m */,
 				232CB40C1C9264E200340D12 /* ODAddAddressController.h */,
 				232CB40D1C9264E200340D12 /* ODAddAddressController.m */,
 				232CB4181C9264E200340D12 /* ODContactAddressController.h */,
 				232CB4191C9264E200340D12 /* ODContactAddressController.m */,
+				232CB40C1C9264E200340D12 /* ODAddAddressController.h */,
+				232CB40D1C9264E200340D12 /* ODAddAddressController.m */,
 			);
 			path = ExchangeSkill;
 			sourceTree = "<group>";
@@ -1357,16 +1359,16 @@
 		232CB41C1C9264E200340D12 /* SearchHelp */ = {
 			isa = PBXGroup;
 			children = (
+				232CB4251C9264E200340D12 /* ODBazaarRequestHelpViewController.h */,
+				232CB4261C9264E200340D12 /* ODBazaarRequestHelpViewController.m */,
 				232CB41D1C9264E200340D12 /* ODBazaarDetailViewController.h */,
 				232CB41E1C9264E200340D12 /* ODBazaarDetailViewController.m */,
 				232CB41F1C9264E200340D12 /* ODBazaarLabelSearchViewController.h */,
 				232CB4201C9264E200340D12 /* ODBazaarLabelSearchViewController.m */,
-				232CB4211C9264E200340D12 /* ODBazaarReleaseRewardViewController.h */,
-				232CB4221C9264E200340D12 /* ODBazaarReleaseRewardViewController.m */,
 				232CB4231C9264E200340D12 /* ODBazaarReleaseTaskViewController.h */,
 				232CB4241C9264E200340D12 /* ODBazaarReleaseTaskViewController.m */,
-				232CB4251C9264E200340D12 /* ODBazaarRequestHelpViewController.h */,
-				232CB4261C9264E200340D12 /* ODBazaarRequestHelpViewController.m */,
+				232CB4211C9264E200340D12 /* ODBazaarReleaseRewardViewController.h */,
+				232CB4221C9264E200340D12 /* ODBazaarReleaseRewardViewController.m */,
 			);
 			path = SearchHelp;
 			sourceTree = "<group>";
@@ -1374,16 +1376,16 @@
 		232CB4271C9264E200340D12 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				232CB4281C9264E200340D12 /* ODBazaarDetailModel.h */,
-				232CB4291C9264E200340D12 /* ODBazaarDetailModel.m */,
-				232CB42A1C9264E200340D12 /* ODBazaarExchangeSkillDetailLoveModel.h */,
-				232CB42B1C9264E200340D12 /* ODBazaarExchangeSkillDetailLoveModel.m */,
-				232CB42C1C9264E200340D12 /* ODBazaarExchangeSkillDetailModel.h */,
-				232CB42D1C9264E200340D12 /* ODBazaarExchangeSkillDetailModel.m */,
 				232CB42E1C9264E200340D12 /* ODBazaarExchangeSkillModel.h */,
 				232CB42F1C9264E200340D12 /* ODBazaarExchangeSkillModel.m */,
+				232CB42C1C9264E200340D12 /* ODBazaarExchangeSkillDetailModel.h */,
+				232CB42D1C9264E200340D12 /* ODBazaarExchangeSkillDetailModel.m */,
+				232CB42A1C9264E200340D12 /* ODBazaarExchangeSkillDetailLoveModel.h */,
+				232CB42B1C9264E200340D12 /* ODBazaarExchangeSkillDetailLoveModel.m */,
 				232CB4301C9264E200340D12 /* ODBazaarRequestHelpModel.h */,
 				232CB4311C9264E200340D12 /* ODBazaarRequestHelpModel.m */,
+				232CB4281C9264E200340D12 /* ODBazaarDetailModel.h */,
+				232CB4291C9264E200340D12 /* ODBazaarDetailModel.m */,
 				232CB4321C9264E200340D12 /* ODBazaarRequestHelpRewardModel.h */,
 				232CB4331C9264E200340D12 /* ODBazaarRequestHelpRewardModel.m */,
 				232CB4341C9264E200340D12 /* ODOrderAddressModel.h */,
@@ -1408,26 +1410,26 @@
 		232CB4391C9264E200340D12 /* ExchangeSkill */ = {
 			isa = PBXGroup;
 			children = (
+				232CB4401C9264E200340D12 /* ODBazaarExchangeSkillCollectionCell.h */,
+				232CB4411C9264E200340D12 /* ODBazaarExchangeSkillCollectionCell.m */,
+				232CB4421C9264E200340D12 /* ODBazaarExchangeSkillCollectionCell.xib */,
+				232CB4461C9264E200340D12 /* ODBazaarReleaseSkillTimeViewCell.h */,
+				232CB4471C9264E200340D12 /* ODBazaarReleaseSkillTimeViewCell.m */,
+				232CB4481C9264E200340D12 /* ODBazaarReleaseSkillTimeViewCell.xib */,
+				232CB44C1C9264E200340D12 /* ODRoundTimeDrawView.h */,
+				232CB44D1C9264E200340D12 /* ODRoundTimeDrawView.m */,
+				232CB4431C9264E200340D12 /* ODBazaarPicCollectionViewCell.h */,
+				232CB4441C9264E200340D12 /* ODBazaarPicCollectionViewCell.m */,
+				232CB4451C9264E200340D12 /* ODBazaarPicCollectionViewCell.xib */,
 				232CB43A1C9264E200340D12 /* ODAddAddressView.h */,
 				232CB43B1C9264E200340D12 /* ODAddAddressView.m */,
 				232CB43C1C9264E200340D12 /* ODAddAddressView.xib */,
 				232CB43D1C9264E200340D12 /* ODAddressCell.h */,
 				232CB43E1C9264E200340D12 /* ODAddressCell.m */,
 				232CB43F1C9264E200340D12 /* ODAddressCell.xib */,
-				232CB4401C9264E200340D12 /* ODBazaarExchangeSkillCollectionCell.h */,
-				232CB4411C9264E200340D12 /* ODBazaarExchangeSkillCollectionCell.m */,
-				232CB4421C9264E200340D12 /* ODBazaarExchangeSkillCollectionCell.xib */,
-				232CB4431C9264E200340D12 /* ODBazaarPicCollectionViewCell.h */,
-				232CB4441C9264E200340D12 /* ODBazaarPicCollectionViewCell.m */,
-				232CB4451C9264E200340D12 /* ODBazaarPicCollectionViewCell.xib */,
-				232CB4461C9264E200340D12 /* ODBazaarReleaseSkillTimeViewCell.h */,
-				232CB4471C9264E200340D12 /* ODBazaarReleaseSkillTimeViewCell.m */,
-				232CB4481C9264E200340D12 /* ODBazaarReleaseSkillTimeViewCell.xib */,
 				232CB4491C9264E200340D12 /* ODCollectionCell.h */,
 				232CB44A1C9264E200340D12 /* ODCollectionCell.m */,
 				232CB44B1C9264E200340D12 /* ODCollectionCell.xib */,
-				232CB44C1C9264E200340D12 /* ODRoundTimeDrawView.h */,
-				232CB44D1C9264E200340D12 /* ODRoundTimeDrawView.m */,
 			);
 			path = ExchangeSkill;
 			sourceTree = "<group>";
@@ -1465,10 +1467,10 @@
 			children = (
 				232CB45C1C9264E200340D12 /* ODCommumityViewController.h */,
 				232CB45D1C9264E200340D12 /* ODCommumityViewController.m */,
-				232CB45E1C9264E200340D12 /* ODCommunityDetailReplyViewController.h */,
-				232CB45F1C9264E200340D12 /* ODCommunityDetailReplyViewController.m */,
 				232CB4601C9264E200340D12 /* ODCommunityDetailViewController.h */,
 				232CB4611C9264E200340D12 /* ODCommunityDetailViewController.m */,
+				232CB45E1C9264E200340D12 /* ODCommunityDetailReplyViewController.h */,
+				232CB45F1C9264E200340D12 /* ODCommunityDetailReplyViewController.m */,
 				232CB4621C9264E200340D12 /* ODCommunityKeyWordSearchViewController.h */,
 				232CB4631C9264E200340D12 /* ODCommunityKeyWordSearchViewController.m */,
 				232CB4641C9264E200340D12 /* ODCommunityReleaseTopicViewController.h */,
