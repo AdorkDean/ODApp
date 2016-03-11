@@ -15,7 +15,6 @@
 @property(nonatomic, strong) NSArray *photos;
 @property(nonatomic) NSInteger selectedIndex;
 @property(nonatomic, strong) UICollectionView *collectionView;
-@property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) UILabel *label;
 @property(nonatomic, copy) NSString *skill;
 @end

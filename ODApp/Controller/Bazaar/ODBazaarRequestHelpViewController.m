@@ -86,15 +86,12 @@
     __weakSelf
 
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationShowBazaar object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
-
         weakSelf.status = @"9";
         [weakSelf.screeningButton setTitle:@"任务筛选" forState:UIControlStateNormal];
         [weakSelf.collectionView.mj_header beginRefreshing];
-
     }];
 
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationReleaseTask object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
-
         weakSelf.status = @"9";
         [weakSelf.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
         [weakSelf.collectionView.mj_header beginRefreshing];
@@ -106,13 +103,11 @@
         [weakSelf.collectionView.mj_header beginRefreshing];
     }];
 
-
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationQuit object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
         weakSelf.status = @"9";
         [weakSelf.screeningButton setTitle:@"任务筛选" forState:UIControlStateNormal];
         [weakSelf.collectionView.mj_header beginRefreshing];
     }];
-
     self.count = 1;
     self.status = @"9";
     self.automaticallyAdjustsScrollViewInsets = NO;
@@ -207,7 +202,6 @@
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
     ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc] init];
     ODBazaarRequestHelpTasksModel *model = self.dataArray[indexPath.row];
     bazaarDetail.task_id = [NSString stringWithFormat:@"%d", model.task_id];
@@ -271,7 +265,6 @@
         [imageView setFrame:CGRectMake(70, 13, 15, 9)];
         [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
         [label setFrame:CGRectMake(40, 10, view.frame.size.width-40, 15)];
-        [self requestData];
     } else if (button.tag == 11) {
         self.status = @"2";
         [self.screeningButton setTitle:@"正在完成" forState:UIControlStateNormal];
@@ -279,7 +272,6 @@
         [imageView setFrame:CGRectMake(85, 13, 15, 9)];
         [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
         [label setFrame:CGRectMake(40, 10, view.frame.size.width-40, 15)];
-        [self requestData];
     } else if (button.tag == 12) {
         self.status = @"4";
         [self.screeningButton setTitle:@"已完成" forState:UIControlStateNormal];
@@ -287,8 +279,6 @@
         [imageView setFrame:CGRectMake(70, 13, 15, 9)];
         [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
         [label setFrame:CGRectMake(40, 10, view.frame.size.width-40, 15)];
-        [self requestData];
-        
     } else if (button.tag == 13) {
         self.status = @"-2";
         [self.screeningButton setTitle:@"已过期" forState:UIControlStateNormal];
@@ -296,8 +286,6 @@
         [imageView setFrame:CGRectMake(70, 13, 15, 9)];
         [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
         [label setFrame:CGRectMake(40, 10, view.frame.size.width-40, 15)];
-        [self requestData];
-        
     } else {
         self.status = @"9";
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
@@ -305,10 +293,8 @@
         [imageView setFrame:CGRectMake(55, 13, 15, 9)];
         [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
         [label setFrame:CGRectMake(40, 10, view.frame.size.width-40, 15)];
-        [self requestData];
     }
     [self.collectionView.mj_header beginRefreshing];
-    
     [self dismissViewControllerAnimated:NO completion:^{
     }];
 }
@@ -321,11 +307,10 @@
 - (void)othersInformationClick:(UIButton *)button {
     ODBazaarCollectionCell *cell = (ODBazaarCollectionCell *) button.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-    ODBazaarModel *model = self.dataArray[indexPath.row];
+    ODBazaarRequestHelpTasksModel *model = self.dataArray[indexPath.row];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     vc.open_id = model.open_id;
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.open_id]) {
-        
     } else {
         [self.navigationController pushViewController:vc animated:YES];
     }
