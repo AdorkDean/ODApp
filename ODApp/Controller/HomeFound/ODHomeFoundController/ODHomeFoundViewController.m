@@ -325,7 +325,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    return CGSizeMake(0, 42);
+    return CGSizeMake(0, 40);
 }
 
 #pragma mark - AMapSearchDelegate

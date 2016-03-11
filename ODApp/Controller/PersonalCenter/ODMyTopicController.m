@@ -251,7 +251,8 @@
         [weakSelf.firstCollectionView reloadData];
     } failure:^(NSError *error) {
         
-        
+        [weakSelf.firstCollectionView.mj_footer endRefreshing];
+        [weakSelf.firstCollectionView.mj_header endRefreshing];
     }];
     
 }

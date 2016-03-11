@@ -15,8 +15,9 @@
 
 @implementation ODMyOrderDetailController
 
-- (void)viewDidLoad
-{    
+#pragma mark - 生命周期
+
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.dataArray = [[NSMutableArray alloc] init];
@@ -25,8 +26,17 @@
     [self getOrderDetailRequest];
 }
 
-- (void)navigationInit
-{
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)navigationInit {
     self.navigationItem.title = @"预约详情";
     if (self.isOther == NO && ![self.status_str isEqualToString:@"已取消"])
     {
@@ -35,79 +45,29 @@
 }
 
 #pragma mark - 加载数据请求
-- (void)getOrderDetailRequest
-{
+- (void)getOrderDetailRequest {
     
-    NSDictionary *parameter = @{@"order_id":[NSString stringWithFormat:@"%@", self.order_id]};
+    NSDictionary *parameter = @{@"order_id" : [NSString stringWithFormat:@"%@", self.order_id],
+                                @"call_array" : @"1"
+                                };
     __weakSelf
     [ODHttpTool getWithURL:ODUrlStoreInfoOrder parameters:parameter modelClass:[ODMyOrderDetailModel class] success:^(id model)
     {
-        weakSelf.model = [model result];        
+        weakSelf.model = [model result];
+        
+        for (ODMyOrderDetailDevicesModel *devices in [[model result] devices]) {
+            [weakSelf.devicesArray addObject:devices.name];
+        }
+        
         [weakSelf createOrderView];
     }
-                   failure:^(NSError *error)
-    {
+    failure:^(NSError *error) {
         
     }];
 }
 
-
-#pragma mark - 取消预约 点击事件
-- (void)cancelOrderButtonClick:(UIButton *)button
-{
-    if ([self.checkLabel.text isEqualToString:@"已取消"] || [self.checkLabel.text isEqualToString:@"后台取消"])
-    {
-        [ODProgressHUD showInfoWithStatus:@"订单已经取消"];
-    }
-    else if ([self.checkLabel.text isEqualToString:@"前台已确认"])
-    {
-        [ODProgressHUD showInfoWithStatus:@"订单已生成,请联系客服"];
-    }
-    else if ([self.checkLabel.text isEqualToString:@"到场已确认"] || [self.checkLabel.text isEqualToString:@"未到场"])
-    {
-        [ODProgressHUD showInfoWithStatus:@"已到活动时间，无需进行取消"];
-    }
-    else
-    {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您确定要取消预约吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-        {
-            NSDictionary *parameter = @{@"open_id":self.open_id,@"order_id":self.order_id};
-            
-            __weakSelf
-            [ODHttpTool getWithURL:ODUrlStoreCancelOrder parameters:parameter modelClass:[NSObject class] success:^(id model) {
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil];
-                [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
-                self.navigationItem.rightBarButtonItem = nil;
-                weakSelf.checkLabel.text = @"已取消";
-                weakSelf.navigationItem.rightBarButtonItem.customView.hidden = YES;
-                weakSelf.status_str = weakSelf.checkLabel.text;
-                
-                NSDictionary *loveDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.status_str,@"status_str", nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil userInfo:loveDict];
-                
-            }
-                           failure:^(NSError *error) {
-                               
-            }];
-
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
-    }
-}
-
-#pragma mark - 拨打电话
-- (void)phoneButtonClick:(UIButton *)button
-{
-    [self.view callToNum:self.model.store_tel];
-}
-
-
 #pragma mark - Create UIScrollView
-- (void)createOrderView
-{
+- (void)createOrderView {
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight)];
     self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     
@@ -117,7 +77,6 @@
     float viewLeftMargin = 4;
     // view 圆角大小
     float viewCornerRadius = 5;
-
     
 #pragma mark - 预约时间
     UIView *timeView = [ODClassMethod creatViewWithFrame:CGRectMake(viewLeftMargin, viewLeftMargin, KScreenWidth - viewLeftMargin * 2, labelHeight) tag:0 color:@"#ffffff"];
@@ -145,26 +104,15 @@
     UILabel *deviceLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(experienceCenterLabel.frame) + labelUpMargin, kScreenSize.width - ODLeftMargin * 2, 11.5) text:@"需要使用的中心设备" font:11.5 alignment:@"left" color:@"#8e8e8e" alpha:1];
     [self.scrollView addSubview:deviceLabel];
     
-    NSString *name = [[NSMutableString alloc] init];
-
-    if (self.devicesArray.count == 0)
-    {
-        name = @"无";
+    NSMutableString *devicesName = [[NSMutableString alloc] init];
+    if (self.devicesArray.count == 0) {
+        [devicesName appendString:@"无"];
     }
-    else if (self.devicesArray.count == 1)
-    {
-        name = self.devicesArray[0];
-    }
-    else if (self.devicesArray.count == 2)
-    {
-        name = [NSString stringWithFormat:@"%@,%@",self.devicesArray[0],self.devicesArray[1]];
-    }
-    else if (self.devicesArray.count == 3)
-    {
-        name = [NSString stringWithFormat:@"%@,%@,%@",self.devicesArray[0],self.devicesArray[1],self.devicesArray[2]];
-    }else
-    {
-        name = [NSString stringWithFormat:@"%@,%@,%@,%@",self.devicesArray[0],self.devicesArray[1],self.devicesArray[2],self.devicesArray[3]];
+    else {
+        for (int i = 0; i < self.devicesArray.count; i++) {
+            [devicesName appendString:[NSString stringWithFormat:@"%@ , ", self.devicesArray[i]]];
+        }
+        [devicesName deleteCharactersInRange:NSMakeRange(devicesName.length - 2, 2)];
     }
     
     UIView *deviceDetailView = [ODClassMethod creatViewWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(deviceLabel.frame) + labelDownMargin, KScreenWidth - viewLeftMargin * 2, labelHeight) tag:0 color:@"#ffffff"];
@@ -173,7 +121,7 @@
     deviceDetailView.layer.borderWidth = 0.5;
     [self.scrollView addSubview:deviceDetailView];
     
-    UILabel *deviceDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(deviceLabel.frame) + labelDownMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",name] font:12.5 alignment:@"left" color:@"#484848" alpha:1];
+    UILabel *deviceDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(deviceLabel.frame) + labelDownMargin, kScreenSize.width - ODLeftMargin * 2, labelHeight) text:[NSString stringWithFormat:@"%@",devicesName] font:12.5 alignment:@"left" color:@"#484848" alpha:1];
     [self.scrollView addSubview:deviceDetailLabel];
     
 #pragma mark - 活动目的
@@ -226,7 +174,6 @@
     [self.scrollView addSubview:phoneLabel];
     
     UIButton *phoneButton = [ODClassMethod creatButtonWithFrame:CGRectMake(5 + kScreenSize.width * 1/3, CGRectGetMaxY(peopleNumberDetailLabel.frame) + viewLeftMargin, 100, labelHeight) target:self sel:@selector(phoneButtonClick:) tag:0 image:nil title:self.model.store_tel font:12.5];
-//    phoneButton.contentVerticalAlignment = UIControlContentHorizontalAlignmentLeft;
     [self.scrollView addSubview:phoneButton];
     
 #pragma mark - 审核状态
@@ -241,21 +188,55 @@
     [self.view addSubview:self.scrollView];
 }
 
+#pragma mark - 取消预约 点击事件
+- (void)cancelOrderButtonClick:(UIButton *)button {
+    if ([self.checkLabel.text isEqualToString:@"已取消"] || [self.checkLabel.text isEqualToString:@"后台取消"]) {
+        [ODProgressHUD showInfoWithStatus:@"订单已经取消"];
+    }
+    else if ([self.checkLabel.text isEqualToString:@"前台已确认"]) {
+        [ODProgressHUD showInfoWithStatus:@"订单已生成,请联系客服"];
+    }
+    else if ([self.checkLabel.text isEqualToString:@"到场已确认"] || [self.checkLabel.text isEqualToString:@"未到场"]) {
+        [ODProgressHUD showInfoWithStatus:@"已到活动时间，无需进行取消"];
+    }
+    else {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"您确定要取消预约吗？" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSDictionary *parameter = @{@"open_id":self.open_id,@"order_id":self.order_id};
+            
+            __weakSelf
+            [ODHttpTool getWithURL:ODUrlStoreCancelOrder parameters:parameter modelClass:[NSObject class] success:^(id model) {
+                
+                [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
+                weakSelf.navigationItem.rightBarButtonItem = nil;
+                weakSelf.checkLabel.text = @"已取消";
+                weakSelf.navigationItem.rightBarButtonItem.customView.hidden = YES;
+                weakSelf.status_str = weakSelf.checkLabel.text;
+                
+                NSDictionary *loveDict =[[NSDictionary alloc] initWithObjectsAndKeys:weakSelf.status_str,@"status_str", nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil userInfo:loveDict];
+                
+            }
+            failure:^(NSError *error) {
+                               
+            }];
+            
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
 
-- (void)didReceiveMemoryWarning
-{
+#pragma mark - 拨打电话
+- (void)phoneButtonClick:(UIButton *)button {
+    [self.view callToNum:self.model.store_tel];
+}
+
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-}
 
 
 @end

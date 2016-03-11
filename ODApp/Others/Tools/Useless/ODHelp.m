@@ -44,6 +44,7 @@
         
 }
 
+//根据字符串的实际内容的多少 在固定的宽度和字体的大小，动态的计算出实际的高度(可设置最小高度)
 + (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat) textWidth miniHeight:(CGFloat)miniHeight fontSize:(CGFloat)size{
 
     //iOS7之后
@@ -60,7 +61,7 @@
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:size]};
     CGRect rect = [text boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine attributes:dict context:nil];
     
-    if (rect.size.height / size < 2)
+    if (rect.size.height < miniHeight)
     {
         return miniHeight;
     }
