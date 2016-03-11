@@ -41,15 +41,6 @@
 		232CB5731C9264E200340D12 /* UITableViewCell+JZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3641C9264E200340D12 /* UITableViewCell+JZExtension.m */; };
 		232CB5741C9264E200340D12 /* UITableViewRowAction+JZExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3661C9264E200340D12 /* UITableViewRowAction+JZExtension.m */; };
 		232CB5751C9264E200340D12 /* UITableViewRowAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3671C9264E200340D12 /* UITableViewRowAction.m */; };
-		232CB5761C9264E200340D12 /* NSData+SDDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB36B1C9264E200340D12 /* NSData+SDDataCache.m */; };
-		232CB5771C9264E200340D12 /* TAAbstractDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB36E1C9264E200340D12 /* TAAbstractDotView.m */; };
-		232CB5781C9264E200340D12 /* TAAnimatedDotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3701C9264E200340D12 /* TAAnimatedDotView.m */; };
-		232CB5791C9264E200340D12 /* TADotView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3721C9264E200340D12 /* TADotView.m */; };
-		232CB57A1C9264E200340D12 /* TAPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3741C9264E200340D12 /* TAPageControl.m */; };
-		232CB57B1C9264E200340D12 /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3761C9264E200340D12 /* SDCollectionViewCell.m */; };
-		232CB57C1C9264E200340D12 /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3781C9264E200340D12 /* SDCycleScrollView.m */; };
-		232CB57D1C9264E200340D12 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB37A1C9264E200340D12 /* UIView+SDExtension.m */; };
-		232CB57E1C9264E200340D12 /* ODAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB37D1C9264E200340D12 /* ODAPIManager.m */; };
 		232CB57F1C9264E200340D12 /* ODAPPInfoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB37F1C9264E200340D12 /* ODAPPInfoTool.m */; };
 		232CB5801C9264E200340D12 /* ODAppRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3811C9264E200340D12 /* ODAppRegister.m */; };
 		232CB5811C9264E200340D12 /* ODGuideTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3831C9264E200340D12 /* ODGuideTool.m */; };
@@ -394,24 +385,6 @@
 		232CB3651C9264E200340D12 /* UITableViewRowAction+JZExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewRowAction+JZExtension.h"; sourceTree = "<group>"; };
 		232CB3661C9264E200340D12 /* UITableViewRowAction+JZExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewRowAction+JZExtension.m"; sourceTree = "<group>"; };
 		232CB3671C9264E200340D12 /* UITableViewRowAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITableViewRowAction.m; sourceTree = "<group>"; };
-		232CB36A1C9264E200340D12 /* NSData+SDDataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+SDDataCache.h"; sourceTree = "<group>"; };
-		232CB36B1C9264E200340D12 /* NSData+SDDataCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+SDDataCache.m"; sourceTree = "<group>"; };
-		232CB36D1C9264E200340D12 /* TAAbstractDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAbstractDotView.h; sourceTree = "<group>"; };
-		232CB36E1C9264E200340D12 /* TAAbstractDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAbstractDotView.m; sourceTree = "<group>"; };
-		232CB36F1C9264E200340D12 /* TAAnimatedDotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAAnimatedDotView.h; sourceTree = "<group>"; };
-		232CB3701C9264E200340D12 /* TAAnimatedDotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAAnimatedDotView.m; sourceTree = "<group>"; };
-		232CB3711C9264E200340D12 /* TADotView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TADotView.h; sourceTree = "<group>"; };
-		232CB3721C9264E200340D12 /* TADotView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TADotView.m; sourceTree = "<group>"; };
-		232CB3731C9264E200340D12 /* TAPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAPageControl.h; sourceTree = "<group>"; };
-		232CB3741C9264E200340D12 /* TAPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAPageControl.m; sourceTree = "<group>"; };
-		232CB3751C9264E200340D12 /* SDCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCollectionViewCell.h; sourceTree = "<group>"; };
-		232CB3761C9264E200340D12 /* SDCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCollectionViewCell.m; sourceTree = "<group>"; };
-		232CB3771C9264E200340D12 /* SDCycleScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCycleScrollView.h; sourceTree = "<group>"; };
-		232CB3781C9264E200340D12 /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
-		232CB3791C9264E200340D12 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
-		232CB37A1C9264E200340D12 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
-		232CB37C1C9264E200340D12 /* ODAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAPIManager.h; sourceTree = "<group>"; };
-		232CB37D1C9264E200340D12 /* ODAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAPIManager.m; sourceTree = "<group>"; };
 		232CB37E1C9264E200340D12 /* ODAPPInfoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAPPInfoTool.h; sourceTree = "<group>"; };
 		232CB37F1C9264E200340D12 /* ODAPPInfoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAPPInfoTool.m; sourceTree = "<group>"; };
 		232CB3801C9264E200340D12 /* ODAppRegister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppRegister.h; sourceTree = "<group>"; };
@@ -998,8 +971,6 @@
 				232CB33B1C9264E200340D12 /* IQKeyBoardManager */,
 				232CB3601C9264E200340D12 /* JPushLib */,
 				232CB3631C9264E200340D12 /* JZTableViewRowAction */,
-				232CB3681C9264E200340D12 /* MBProgressHUD */,
-				232CB3691C9264E200340D12 /* SDCycleScrollView */,
 			);
 			path = ThirdFrame;
 			sourceTree = "<group>";
@@ -1109,49 +1080,9 @@
 			path = JZTableViewRowAction;
 			sourceTree = "<group>";
 		};
-		232CB3681C9264E200340D12 /* MBProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = MBProgressHUD;
-			sourceTree = "<group>";
-		};
-		232CB3691C9264E200340D12 /* SDCycleScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				232CB36A1C9264E200340D12 /* NSData+SDDataCache.h */,
-				232CB36B1C9264E200340D12 /* NSData+SDDataCache.m */,
-				232CB36C1C9264E200340D12 /* PageControl */,
-				232CB3751C9264E200340D12 /* SDCollectionViewCell.h */,
-				232CB3761C9264E200340D12 /* SDCollectionViewCell.m */,
-				232CB3771C9264E200340D12 /* SDCycleScrollView.h */,
-				232CB3781C9264E200340D12 /* SDCycleScrollView.m */,
-				232CB3791C9264E200340D12 /* UIView+SDExtension.h */,
-				232CB37A1C9264E200340D12 /* UIView+SDExtension.m */,
-			);
-			path = SDCycleScrollView;
-			sourceTree = "<group>";
-		};
-		232CB36C1C9264E200340D12 /* PageControl */ = {
-			isa = PBXGroup;
-			children = (
-				232CB36D1C9264E200340D12 /* TAAbstractDotView.h */,
-				232CB36E1C9264E200340D12 /* TAAbstractDotView.m */,
-				232CB36F1C9264E200340D12 /* TAAnimatedDotView.h */,
-				232CB3701C9264E200340D12 /* TAAnimatedDotView.m */,
-				232CB3711C9264E200340D12 /* TADotView.h */,
-				232CB3721C9264E200340D12 /* TADotView.m */,
-				232CB3731C9264E200340D12 /* TAPageControl.h */,
-				232CB3741C9264E200340D12 /* TAPageControl.m */,
-			);
-			path = PageControl;
-			sourceTree = "<group>";
-		};
 		232CB37B1C9264E200340D12 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				232CB37C1C9264E200340D12 /* ODAPIManager.h */,
-				232CB37D1C9264E200340D12 /* ODAPIManager.m */,
 				232CB37E1C9264E200340D12 /* ODAPPInfoTool.h */,
 				232CB37F1C9264E200340D12 /* ODAPPInfoTool.m */,
 				232CB3801C9264E200340D12 /* ODAppRegister.h */,
@@ -2219,7 +2150,6 @@
 				232CB6071C9264E200340D12 /* ODOtherTopicViewController.m in Sources */,
 				232CB64C1C9264E200340D12 /* ODPayModel.m in Sources */,
 				232CB5D91C9264E200340D12 /* ODUploadImageModel.m in Sources */,
-				232CB5791C9264E200340D12 /* TADotView.m in Sources */,
 				232CB63F1C9264E200340D12 /* ODOrderController.m in Sources */,
 				232CB5801C9264E200340D12 /* ODAppRegister.m in Sources */,
 				232CB6261C9264E200340D12 /* ODLandSecondCell.m in Sources */,
@@ -2237,7 +2167,6 @@
 				232CB5D01C9264E200340D12 /* ODBazaarReleaseTaskViewController.m in Sources */,
 				232CB59F1C9264E200340D12 /* ODPrecontractViewController.m in Sources */,
 				232CB60F1C9264E200340D12 /* ODOthersInformationController.m in Sources */,
-				232CB57C1C9264E200340D12 /* SDCycleScrollView.m in Sources */,
 				232CB6001C9264E200340D12 /* ODLandMainController.m in Sources */,
 				232CB5A31C9264E200340D12 /* ODStoreDetailModel.m in Sources */,
 				232CB63D1C9264E200340D12 /* ODMySellController.m in Sources */,
@@ -2272,12 +2201,10 @@
 				232CB59A1C9264E200340D12 /* ODCenterDetailController.m in Sources */,
 				232CB61A1C9264E200340D12 /* ODSecondEvaluationModel.m in Sources */,
 				232CB5C11C9264E200340D12 /* ODPlacePreLabel.m in Sources */,
-				232CB57B1C9264E200340D12 /* SDCollectionViewCell.m in Sources */,
 				232CB58F1C9264E200340D12 /* ODFindFavorableController.m in Sources */,
 				232CB64A1C9264E200340D12 /* ODOrderDataModel.m in Sources */,
 				232CB5F71C9264E200340D12 /* ODCommunityCollectionCell.m in Sources */,
 				232CB61D1C9264E200340D12 /* ODBindingMobileView.m in Sources */,
-				232CB5781C9264E200340D12 /* TAAnimatedDotView.m in Sources */,
 				232CB5A61C9264E200340D12 /* ODStoreTimelineModel.m in Sources */,
 				232CB65A1C9264E200340D12 /* ODOrderThirdHeadView.m in Sources */,
 				232CB6661C9264E200340D12 /* ODPaySuccessView.m in Sources */,
@@ -2310,7 +2237,6 @@
 				232CB58D1C9264E200340D12 /* ODProgressHUD.m in Sources */,
 				232CB5E21C9264E200340D12 /* ODBazaarReleaseSkillTimeViewCell.m in Sources */,
 				232CB5861C9264E200340D12 /* ODHelp.m in Sources */,
-				232CB57A1C9264E200340D12 /* TAPageControl.m in Sources */,
 				232CB57F1C9264E200340D12 /* ODAPPInfoTool.m in Sources */,
 				232CB5891C9264E200340D12 /* ODBarButton.m in Sources */,
 				232CB63B1C9264E200340D12 /* ODMyOrderDetailController.m in Sources */,
@@ -2335,8 +2261,6 @@
 				4029EB351C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m in Sources */,
 				232CB5911C9264E200340D12 /* ODHomeFoundViewController.m in Sources */,
 				232CB65D1C9264E200340D12 /* ODSecondOrderDetailView.m in Sources */,
-				232CB5761C9264E200340D12 /* NSData+SDDataCache.m in Sources */,
-				232CB57E1C9264E200340D12 /* ODAPIManager.m in Sources */,
 				232CB6111C9264E200340D12 /* ODUserNickNameController.m in Sources */,
 				232CB6681C9264E200340D12 /* ODPayView.m in Sources */,
 				232CB6051C9264E200340D12 /* ODOrderDetailController.m in Sources */,
@@ -2356,7 +2280,6 @@
 				232CB5971C9264E200340D12 /* ODLocationCell.m in Sources */,
 				232CB6441C9264E200340D12 /* ODPaySuccessController.m in Sources */,
 				232CB6481C9264E200340D12 /* ODMyOrderModel.m in Sources */,
-				232CB57D1C9264E200340D12 /* UIView+SDExtension.m in Sources */,
 				232CB56B1C9264E200340D12 /* IQSegmentedNextPrevious.m in Sources */,
 				232CB5C71C9264E200340D12 /* ODBazaarExchangeSkillDetailViewController.m in Sources */,
 				232CB5F11C9264E200340D12 /* ODCommunityKeyWordSearchViewController.m in Sources */,
@@ -2394,7 +2317,6 @@
 				232CB65B1C9264E200340D12 /* ODOrderView.m in Sources */,
 				232CB5E71C9264E200340D12 /* ODBazaarCollectionCell.m in Sources */,
 				232CB5B61C9264E200340D12 /* ODActiveDeviceBtn.m in Sources */,
-				232CB5771C9264E200340D12 /* TAAbstractDotView.m in Sources */,
 				232CB61C1C9264E200340D12 /* ODUserModel.m in Sources */,
 				232CB64F1C9264E200340D12 /* ODCancelOrderView.m in Sources */,
 				232CB5F21C9264E200340D12 /* ODCommunityReleaseTopicViewController.m in Sources */,

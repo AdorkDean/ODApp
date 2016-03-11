@@ -74,7 +74,7 @@
 
 -(void)getUserInfo
 {
-     __weakSelf
+    __weakSelf
     [ODHttpTool getWithURL:ODUrlUserInfo parameters:@{} modelClass:[ODUserModel class] success:^(id model)
     {
         ODUserModel *user = [model result];

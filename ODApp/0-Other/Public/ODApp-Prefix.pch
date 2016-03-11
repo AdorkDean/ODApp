@@ -42,6 +42,8 @@
 #define NSLogFunc NSLog(@"%s", __func__);
 /** 打印错误信息  */
 #define NSLogError  NSLog(@"_____error______ = %@",error);
+/**  打印是否销毁   */
+#define NSLogDealloc  - (void)dealloc {  NSLogFunc  }
 
 /**  self弱引用 */
 #define __weakSelf __weak typeof (self)weakSelf = self;
