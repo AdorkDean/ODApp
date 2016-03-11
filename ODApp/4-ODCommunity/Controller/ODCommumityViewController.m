@@ -61,7 +61,6 @@
     
     __weakSelf
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationSearchCircle object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
-        
         [weakSelf.collectionView.mj_header beginRefreshing];
     }];
     
@@ -78,7 +77,6 @@
         [weakSelf loadMoreData];
     }];
     [self.collectionView.mj_header beginRefreshing];
-
 }
 
 -(void)viewWillAppear:(BOOL)animated

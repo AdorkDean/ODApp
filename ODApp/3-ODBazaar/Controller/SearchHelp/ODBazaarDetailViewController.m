@@ -13,27 +13,43 @@
 
 #define kBazaarDetailCellId @"ODBazaarDetailCollectionCell"
 
-@interface ODBazaarDetailViewController ()<UMSocialUIDelegate>
+@interface ODBazaarDetailViewController ()
 
 @end
 
 @implementation ODBazaarDetailViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-  
-    self.navigationItem.title = @"任务详情";
-    [self navigationInit];
-    self.num = 1;
-    [self createScrollView];
-    [self createRequest];
-
+#pragma mark - lazyloaf
+-(UIScrollView *)scrollView{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width,kScreenSize.height-64)];
+        _scrollView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        _scrollView.userInteractionEnabled = YES;
+        [self.view addSubview:_scrollView];
+    }
+    return _scrollView;
 }
 
-#pragma mark - 初始化导航
--(void)navigationInit
-{
-    //分享按钮
+-(NSMutableArray *)dataArray{
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc]init];
+    }
+    return _dataArray;
+}
+
+-(NSMutableArray *)picArray{
+    if (!_picArray) {
+        _picArray = [[NSMutableArray alloc]init];
+    }
+    return _picArray;
+}
+
+#pragma mark - lifeCycle
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.num = 1;
+    self.navigationItem.title = @"任务详情";
+    [self requestData];
     if ([self.task_status_name isEqualToString:@"过期"]&& [[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick:) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"删除"];
     }else{
@@ -41,100 +57,15 @@
     }
 }
 
--(void)shareButtonClick:(UIButton *)button
-{
-    if ([button.titleLabel.text isEqualToString:@"删除"]) {
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-            [self pushDataWithUrl:ODUrlBbsDel parameter:parameter withName:@"删除任务"];
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-        [self presentViewController:alert animated:YES completion:nil];
-    }else{
-        @try {
-            
-            
-            if ([WXApi isWXAppInstalled]) {
-                
-                
-                [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
-                
-                ODBazaarDetailModel *model = self.dataArray[0];
-                NSString *url = model.share[@"icon"];
-                NSString *content = model.share[@"desc"];
-                NSString *link = model.share[@"link"];
-                NSString *title = model.share[@"title"];
-                
-                [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                
-                [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-                [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-                
-                [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-                
-                [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-                
-                [UMSocialSnsService presentSnsIconSheetView:self
-                                                     appKey:kGetUMAppkey
-                                                  shareText:content
-                                                 shareImage:nil
-                                            shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                                   delegate:self];
-
-                
-            }else{
-                
-                [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
-                
-                
-            }
-
-            
-            
-        
-        }
-        @catch (NSException *exception) {
-            [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
-        }
-            
-
-    }
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
-#pragma mark - 创建scrollView
--(void)createScrollView
-{
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width,kScreenSize.height-64)];
-    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    self.scrollView.userInteractionEnabled = YES;
-    [self.view addSubview:self.scrollView];
-}
-
-
-#pragma mark - 初始化manager
--(void)createRequest
-{
-    self.dataArray = [[NSMutableArray alloc]init];
-    self.picArray = [[NSMutableArray alloc]init];
-    [self joiningTogetherParmeters];
-}
-
-
-#pragma mark - 拼接参数
--(void)joiningTogetherParmeters
-{
-    NSDictionary *parameter = @{@"task_id":self.task_id};
-    [self downLoadDataWithUrl:ODUrlTaskDetail parameter:parameter];
-}
-
 
 #pragma mark - 请求数据
--(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
-{
+-(void)requestData{
     __weakSelf
-    [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarDetailModel class] success:^(id model) {
-        
+    NSDictionary *parameter = @{@"task_id":self.task_id};
+    [ODHttpTool getWithURL:ODUrlTaskDetail parameters:parameter modelClass:[ODBazaarDetailModel class] success:^(id model) {
         ODBazaarDetailModel *detailModel = [model result];
         [weakSelf.dataArray addObject:detailModel];
         for (ODBazaarDetailApplysModel *itemDict in detailModel.applys) {
@@ -143,15 +74,13 @@
         [weakSelf createUserInfoView];
         [weakSelf createTaskTopDetailView];
         [weakSelf createTaskBottomDetailView];
-        
     } failure:^(NSError *error) {
         
     }];
 }
 
 #pragma mark - 创建用户信息试图
--(void)createUserInfoView
-{
+-(void)createUserInfoView{
     ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
     self.userView = [ODClassMethod creatViewWithFrame:CGRectMake(12.5, 0, kScreenSize.width-25, 76) tag:0 color:@"#ffffff"];
     [self.scrollView addSubview:self.userView];
@@ -256,53 +185,6 @@
     [self.userView addSubview:lineView];
 }
 
--(void)userHeaderButtonClick:(UIButton *)button
-{
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
-        
-    }else{
-        ODOthersInformationController *otherInfo = [[ODOthersInformationController alloc]init];
-        otherInfo.open_id  = self.open_id;
-        [self.navigationController pushViewController:otherInfo animated:YES];
-    }
-}
-
--(void)taskButtonClick:(UIButton *)button
-{
-    if ([ODUserInformation sharedODUserInformation].openID) {
-        if ([button.titleLabel.text isEqualToString:@"删除任务"]) {
-            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
-            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-//                NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-                [self pushDataWithUrl:ODUrlBbsDel parameter:parameter withName:@"删除任务"];
-            }]];
-            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-            [self presentViewController:alert animated:YES completion:nil];
-        }else if ([button.titleLabel.text isEqualToString:@"接受任务"]){
-            if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
-                ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
-                [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
-                
-            }else{
-                NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation sharedODUserInformation].openID};
-//                NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-                [self pushDataWithUrl:ODUrlTaskApply parameter:parameter withName:@"接受任务"];
-            }
-        }else if ([button.titleLabel.text isEqualToString:@"确认提交"]){
-            NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation sharedODUserInformation].openID};
-//            NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
-            [self pushDataWithUrl:ODurlTaskDelivery parameter:parameter withName:@"确认提交"];
-        }else if ([button.titleLabel.text isEqualToString:@"确认完成"]){
-            [self createEvaluationView];
-        }
-        
-    }else{
-        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
-        [self.navigationController pushViewController:personalCenter animated:YES];
-    }
-}
-
 -(void)createEvaluationView
 {
     self.evaluationView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
@@ -348,23 +230,6 @@
     [offButton setBackgroundImage:[UIImage imageNamed:@"分享页关闭icon"] forState:UIControlStateNormal];
     [offButton addTarget: self action:@selector(offButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.evaluationView addSubview:offButton];
-}
-
--(void)yesButtonClick:(UIButton *)button
-{
-    NSDictionary *parameter;
-    if (self.evaluationTextView.text.length) {
-       parameter = @{@"task_id":self.task_id,@"comment":self.evaluationTextView.text,@"open_id":[ODUserInformation sharedODUserInformation].openID};
-        
-    }else{
-        parameter = @{@"task_id":self.task_id,@"comment":@"好评!任务完成的非常漂亮",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-    }
-    [self pushDataWithUrl:ODUrlTaskConfirm parameter:parameter withName:@"确认完成"];
-}
-
--(void)offButtonClick:(UIButton *)button
-{
-    [self.evaluationView removeFromSuperview];
 }
 
 #pragma mark - 提交数据
@@ -503,13 +368,11 @@
 -(void)allButtonClick
 {
     static BOOL buttonClicked = NO;
-    
     if (buttonClicked) {
         [self.allImageView setImage:[UIImage imageNamed:@"任务详情下拉按钮"]];
         self.allLabel.text = @"显示全部内容";
         [self hiddenPartView];
         buttonClicked = NO;
-        
     }else{
         [self.allImageView setImage:[UIImage imageNamed:@"任务详情上拉按钮"]];
         self.allLabel.text = @"隐藏部分内容";
@@ -534,8 +397,7 @@
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width,self.userView.frame.size.height+self.taskTopView.frame.size.height+self.taskBottomView.frame.size.height+180);
 }
 
--(void)hiddenPartView
-{
+-(void)hiddenPartView{
     CGRect frame = self.taskContentLabel.frame;
     frame.size.height = 60;
     self.taskContentLabel.frame = frame;
@@ -572,15 +434,11 @@
     if (indexPath.row == curIndexPath.row) {
         return YES;
     }
-    
     [self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
-    
     return NO;
 }
 
-
-
-#pragma mark - UICollectionViewDelegate
+#pragma mark - UICollectionViewDateSource
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
@@ -598,7 +456,6 @@
             [self.picArray addObject:model];
         }
     }
-    
     if ([str isEqualToString:@"1"]) {
         return 1;
     }else{
@@ -606,12 +463,9 @@
     }
 }
 
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     ODBazaarDetailCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarDetailCellId forIndexPath:indexPath];
     ODBazaarDetailApplysModel *model = self.picArray[indexPath.row];
-   
     [cell.imageV sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     cell.nickLabel.text = model.user_nick;
     cell.signLabel.text = model.sign;
@@ -622,8 +476,8 @@
     return cell;
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+#pragma mark - UICollectionViewDelegate
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     ODBazaarDetailApplysModel *model = self.picArray[indexPath.row];
     ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
     NSString *task_status = [NSString stringWithFormat:@"%@",detailModel.task_status];
@@ -632,15 +486,11 @@
            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否委派" message:nil preferredStyle:UIAlertControllerStyleAlert];
             __weakSelf
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
-                
                 NSDictionary *parameter = @{@"task_id":self.task_id,@"apply_open_id":model.open_id};
-                
                 [ODHttpTool getWithURL:ODurlTaskAccept parameters:parameter modelClass:[NSObject class] success:^(id model) {
                     [ODProgressHUD showInfoWithStatus:@"委派成功"];
                     [weakSelf.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
                 } failure:^(NSError *error) {
-                    
                 }];
             }]];
             [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -652,10 +502,8 @@
 }
 
 #pragma mark - UITextViewDelegate
-
 NSString *evaluationContentText = @"";
-- (void)textViewDidChange:(UITextView *)textView
-{
+- (void)textViewDidChange:(UITextView *)textView{
     if (textView.text.length > 300){
         textView.text = [textView.text substringToIndex:300];
     }else{
@@ -669,20 +517,111 @@ NSString *evaluationContentText = @"";
     }
 }
 
--(void)textViewDidEndEditing:(UITextView *)textView
-{
+-(void)textViewDidEndEditing:(UITextView *)textView{
     if (textView.text.length == 0) {
         self.placeholderLabel.text = @"好评!任务完成的非常漂亮";
     }
 }
 
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - action
+-(void)shareButtonClick:(UIButton *)button
+{
+    if ([button.titleLabel.text isEqualToString:@"删除"]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation sharedODUserInformation].openID};
+            [self pushDataWithUrl:ODUrlBbsDel parameter:parameter withName:@"删除任务"];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
+        @try {
+            if ([WXApi isWXAppInstalled]) {
+                [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
+                ODBazaarDetailModel *model = self.dataArray[0];
+                NSString *url = model.share[@"icon"];
+                NSString *content = model.share[@"desc"];
+                NSString *link = model.share[@"link"];
+                NSString *title = model.share[@"title"];
+                [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+                [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+                [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+                [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+                [UMSocialSnsService presentSnsIconSheetView:self
+                                                     appKey:kGetUMAppkey
+                                                  shareText:content
+                                                 shareImage:nil
+                                            shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
+                                                   delegate:self];
+                
+            }else{
+                [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
+            }
+        }
+        @catch (NSException *exception) {
+            [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
+        }
+    }
 }
 
+-(void)userHeaderButtonClick:(UIButton *)button
+{
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
+    }else{
+        ODOthersInformationController *otherInfo = [[ODOthersInformationController alloc]init];
+        otherInfo.open_id  = self.open_id;
+        [self.navigationController pushViewController:otherInfo animated:YES];
+    }
+}
+
+-(void)taskButtonClick:(UIButton *)button
+{
+    if ([ODUserInformation sharedODUserInformation].openID) {
+        if ([button.titleLabel.text isEqualToString:@"删除任务"]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation sharedODUserInformation].openID};
+                [self pushDataWithUrl:ODUrlBbsDel parameter:parameter withName:@"删除任务"];
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+        }else if ([button.titleLabel.text isEqualToString:@"接受任务"]){
+            if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+                ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+                [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
+                
+            }else{
+                NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation sharedODUserInformation].openID};
+                [self pushDataWithUrl:ODUrlTaskApply parameter:parameter withName:@"接受任务"];
+            }
+        }else if ([button.titleLabel.text isEqualToString:@"确认提交"]){
+            NSDictionary *parameter = @{@"task_id":self.task_id,@"open_id":[ODUserInformation sharedODUserInformation].openID};
+            [self pushDataWithUrl:ODurlTaskDelivery parameter:parameter withName:@"确认提交"];
+        }else if ([button.titleLabel.text isEqualToString:@"确认完成"]){
+            [self createEvaluationView];
+        }
+        
+    }else{
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
+        [self.navigationController pushViewController:personalCenter animated:YES];
+    }
+}
+
+
+-(void)yesButtonClick:(UIButton *)button{
+    NSDictionary *parameter;
+    if (self.evaluationTextView.text.length) {
+        parameter = @{@"task_id":self.task_id,@"comment":self.evaluationTextView.text,@"open_id":[ODUserInformation sharedODUserInformation].openID};
+    }else{
+        parameter = @{@"task_id":self.task_id,@"comment":@"好评!任务完成的非常漂亮",@"open_id":[ODUserInformation sharedODUserInformation].openID};
+    }
+    [self pushDataWithUrl:ODUrlTaskConfirm parameter:parameter withName:@"确认完成"];
+}
+
+-(void)offButtonClick:(UIButton *)button{
+    [self.evaluationView removeFromSuperview];
+}
 
 
 @end
