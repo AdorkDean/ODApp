@@ -18,7 +18,7 @@
 #import "UIImageView+WebCache.h"
 #import "ODChangePassWordController.h"
 #import "ODUploadImageModel.h"
-#import "AFNetworking.h"
+#import <MobileCoreServices/MobileCoreServices.h>
 
 @interface ODInformationController ()<UITableViewDataSource , UITableViewDelegate ,UIImagePickerControllerDelegate , UIActionSheetDelegate , UINavigationControllerDelegate>
 

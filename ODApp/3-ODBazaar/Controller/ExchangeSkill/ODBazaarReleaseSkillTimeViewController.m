@@ -7,6 +7,7 @@
 //
 #import "ODRoundTimeDrawView.h"
 #import "ODBazaarReleaseSkillTimeViewController.h"
+#import "ODBazaarReleaseSkillTimeModel.h"
 
 #define cellID @"ODBazaarReleaseSkillTimeViewCell"
 
@@ -85,43 +86,39 @@
 #pragma mark - 拼接参数
 -(void)joiningTogetherParmeters
 {
+    // 拼接参数
     NSDictionary *parameter;
     if (self.swap_id) {
         parameter = @{@"swap_id":self.swap_id};
     }else{
         parameter = @{@"swap_id":@"0"};
     }
-
-    [self downLoadDataWithUrl:ODUrlSwapSchedule parameter:parameter];
-}
-
--(void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter
-{
+    
     __weakSelf;
-    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapSchedule parameters:parameter modelClass:[ODBazaarReleaseSkillTimeModel class] success:^(id model) {
         
-        NSLog(@"-------%@",operation);
-        if (responseObject) {
-            
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-            
-            if (weakSelf.dataArray.count) {
-                
-            }else{
-                [weakSelf.dataArray addObjectsFromArray:dict[@"result"]];
-            }
-
-            for (NSInteger i = 0; i < weakSelf.roundViews.count; i++)
-            {
-                ODRoundTimeDrawView *view = weakSelf.roundViews[i];
-                view.firstTimeIsFree = [weakSelf.dataArray[i * 3][@"status"]boolValue];
-                view.secondTimeIsFree = [weakSelf.dataArray[i * 3 + 1][@"status"]boolValue];
-                view.thirdTimeIsFree = [weakSelf.dataArray[i * 3 + 2][@"status"]boolValue];
-            }
-            [weakSelf.tableView reloadData];
+        if ( !weakSelf.dataArray.count ) {
+            [weakSelf.dataArray addObjectsFromArray:[model result]];
         }
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-         
+        
+        for (NSInteger i = 0; i < weakSelf.roundViews.count; i++)
+        {
+            ODRoundTimeDrawView *view = weakSelf.roundViews[i];
+            
+            ODBazaarReleaseSkillTimeModel *firstTime = weakSelf.dataArray[i * 3];
+            view.firstTimeIsFree = [firstTime.status boolValue];
+            
+            ODBazaarReleaseSkillTimeModel *secondTime = weakSelf.dataArray[i * 3 + 1];
+            view.secondTimeIsFree = [secondTime.status boolValue];
+            
+            ODBazaarReleaseSkillTimeModel *thirdTime = weakSelf.dataArray[i * 3 + 2];
+            view.thirdTimeIsFree = [thirdTime.status boolValue];
+        }
+        [weakSelf.tableView reloadData];
+
+    } failure:^(NSError *error) {
+        
     }];
 }
 
@@ -149,10 +146,10 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ODBazaarReleaseSkillTimeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    NSMutableDictionary *dict = self.dataArray[indexPath.section * 3 + indexPath.row];
+    ODBazaarReleaseSkillTimeModel *timeModel = self.dataArray[indexPath.section * 3 + indexPath.row];
     [cell.openButton addTarget:self action:@selector(openButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    cell.timeLabel.text = dict[@"display"];
-    cell.status = [dict[@"status"]boolValue];
+    cell.timeLabel.text = timeModel.display;
+    cell.status = [timeModel.status boolValue];
     return cell;
 }
 
