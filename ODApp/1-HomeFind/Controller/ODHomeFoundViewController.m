@@ -20,6 +20,32 @@
     AMapSearchAPI *_search;
     MAMapView *_mapView;
 }
+
+@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+
+@property(nonatomic, strong) ODCommunityBbsModel *model;
+
+// 头视图
+@property(nonatomic, strong) ODhomeViewCollectionReusableView *rsusableView;
+// 尾视图
+@property(nonatomic, strong) ODHomeFoundFooterView *footerView;
+
+
+
+// 热门活动
+@property(nonatomic, strong) NSMutableArray *pictureArray;
+@property(nonatomic, strong) NSMutableArray *pictureIdArray;
+
+// 技能交换
+@property(nonatomic, strong) NSMutableArray *dataArray;
+
+// 城市列表
+@property(nonatomic, strong) NSArray *cityListArray;
+
+
+
+
 @end
 
 @implementation ODHomeFoundViewController

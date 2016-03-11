@@ -12,6 +12,9 @@
 
 @interface ODDrawbackController : ODBaseViewController <UITextViewDelegate>
 
+/**
+ *  订单ID
+ */
 @property(nonatomic, copy) NSString *order_id;
 
 /**
