@@ -103,8 +103,6 @@
 		232CB5B11C9264E200340D12 /* ODNewActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB3E81C9264E200340D12 /* ODNewActivityCell.xib */; };
 		232CB5B21C9264E200340D12 /* ODTitleLabelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3EA1C9264E200340D12 /* ODTitleLabelView.m */; };
 		232CB5B31C9264E200340D12 /* ODTitleLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB3EB1C9264E200340D12 /* ODTitleLabelView.xib */; };
-		232CB5B41C9264E200340D12 /* ChoseCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3EE1C9264E200340D12 /* ChoseCenterCell.m */; };
-		232CB5B51C9264E200340D12 /* ChoseCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB3EF1C9264E200340D12 /* ChoseCenterCell.xib */; };
 		232CB5B61C9264E200340D12 /* ODActiveDeviceBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3F11C9264E200340D12 /* ODActiveDeviceBtn.m */; };
 		232CB5B71C9264E200340D12 /* ODCenderDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3F31C9264E200340D12 /* ODCenderDetailView.m */; };
 		232CB5B81C9264E200340D12 /* ODCenderDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB3F41C9264E200340D12 /* ODCenderDetailView.xib */; };
@@ -303,6 +301,8 @@
 		9DD00BE91C4E39D800F0EE5F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BE81C4E39D800F0EE5F /* libz.tbd */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
+		ED57CC441C92A0C30091FCFF /* ODChoseCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED57CC421C92A0C30091FCFF /* ODChoseCenterCell.m */; };
+		ED57CC451C92A0C30091FCFF /* ODChoseCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED57CC431C92A0C30091FCFF /* ODChoseCenterCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -511,9 +511,6 @@
 		232CB3E91C9264E200340D12 /* ODTitleLabelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTitleLabelView.h; sourceTree = "<group>"; };
 		232CB3EA1C9264E200340D12 /* ODTitleLabelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTitleLabelView.m; sourceTree = "<group>"; };
 		232CB3EB1C9264E200340D12 /* ODTitleLabelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODTitleLabelView.xib; sourceTree = "<group>"; };
-		232CB3ED1C9264E200340D12 /* ChoseCenterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChoseCenterCell.h; sourceTree = "<group>"; };
-		232CB3EE1C9264E200340D12 /* ChoseCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChoseCenterCell.m; sourceTree = "<group>"; };
-		232CB3EF1C9264E200340D12 /* ChoseCenterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChoseCenterCell.xib; sourceTree = "<group>"; };
 		232CB3F01C9264E200340D12 /* ODActiveDeviceBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODActiveDeviceBtn.h; sourceTree = "<group>"; };
 		232CB3F11C9264E200340D12 /* ODActiveDeviceBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODActiveDeviceBtn.m; sourceTree = "<group>"; };
 		232CB3F21C9264E200340D12 /* ODCenderDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCenderDetailView.h; sourceTree = "<group>"; };
@@ -860,6 +857,9 @@
 		B83C6B841C224F640063ED92 /* ODAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODAppUITests.m; sourceTree = "<group>"; };
 		B83C6B861C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C5EAEBD7E6B20864218413FA /* Pods-ODApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.debug.xcconfig"; sourceTree = "<group>"; };
+		ED57CC411C92A0C30091FCFF /* ODChoseCenterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODChoseCenterCell.h; sourceTree = "<group>"; };
+		ED57CC421C92A0C30091FCFF /* ODChoseCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODChoseCenterCell.m; sourceTree = "<group>"; };
+		ED57CC431C92A0C30091FCFF /* ODChoseCenterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODChoseCenterCell.xib; sourceTree = "<group>"; };
 		EEA572BF76BF4C22E1FC80BA /* libPods-ODApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ODApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD754733DED72842C8626E1D /* Pods-ODApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1337,6 +1337,9 @@
 				232CB3E91C9264E200340D12 /* ODTitleLabelView.h */,
 				232CB3EA1C9264E200340D12 /* ODTitleLabelView.m */,
 				232CB3EB1C9264E200340D12 /* ODTitleLabelView.xib */,
+				ED57CC411C92A0C30091FCFF /* ODChoseCenterCell.h */,
+				ED57CC421C92A0C30091FCFF /* ODChoseCenterCell.m */,
+				ED57CC431C92A0C30091FCFF /* ODChoseCenterCell.xib */,
 			);
 			path = ActivityDetail;
 			sourceTree = "<group>";
@@ -1344,9 +1347,6 @@
 		232CB3EC1C9264E200340D12 /* locationAppointment */ = {
 			isa = PBXGroup;
 			children = (
-				232CB3ED1C9264E200340D12 /* ChoseCenterCell.h */,
-				232CB3EE1C9264E200340D12 /* ChoseCenterCell.m */,
-				232CB3EF1C9264E200340D12 /* ChoseCenterCell.xib */,
 				232CB3F01C9264E200340D12 /* ODActiveDeviceBtn.h */,
 				232CB3F11C9264E200340D12 /* ODActiveDeviceBtn.m */,
 				232CB3F21C9264E200340D12 /* ODCenderDetailView.h */,
@@ -2101,8 +2101,8 @@
 				232CB6601C9264E200340D12 /* ODSecondOrderView.xib in Resources */,
 				232CB5B81C9264E200340D12 /* ODCenderDetailView.xib in Resources */,
 				232CB65C1C9264E200340D12 /* ODOrderView.xib in Resources */,
+				ED57CC451C92A0C30091FCFF /* ODChoseCenterCell.xib in Resources */,
 				232CB6391C9264E200340D12 /* ODViolationsCell.xib in Resources */,
-				232CB5B51C9264E200340D12 /* ChoseCenterCell.xib in Resources */,
 				232CB5DF1C9264E200340D12 /* ODBazaarExchangeSkillCollectionCell.xib in Resources */,
 				232CB65E1C9264E200340D12 /* ODSecondOrderDetailView.xib in Resources */,
 				232CB66B1C9264E200340D12 /* ODWithdrawalCell.xib in Resources */,
@@ -2345,6 +2345,7 @@
 				232CB55D1C9264E200340D12 /* ODBaseViewController.m in Sources */,
 				232CB5CC1C9264E200340D12 /* ODBazaarViewController.m in Sources */,
 				232CB5B01C9264E200340D12 /* ODNewActivityCell.m in Sources */,
+				ED57CC441C92A0C30091FCFF /* ODChoseCenterCell.m in Sources */,
 				232CB6121C9264E200340D12 /* ODUserSignatureController.m in Sources */,
 				232CB6151C9264E200340D12 /* ODEvaluationModel.m in Sources */,
 				232CB5B21C9264E200340D12 /* ODTitleLabelView.m in Sources */,
@@ -2411,7 +2412,6 @@
 				232CB6491C9264E200340D12 /* ODMySellModel.m in Sources */,
 				232CB5621C9264E200340D12 /* main.m in Sources */,
 				232CB5EE1C9264E200340D12 /* ODCommumityViewController.m in Sources */,
-				232CB5B41C9264E200340D12 /* ChoseCenterCell.m in Sources */,
 				232CB5FB1C9264E200340D12 /* ODPersonalCenterViewController.m in Sources */,
 				232CB5EF1C9264E200340D12 /* ODCommunityDetailReplyViewController.m in Sources */,
 				232CB6411C9264E200340D12 /* ODThirdOrderController.m in Sources */,

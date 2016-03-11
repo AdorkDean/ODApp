@@ -217,7 +217,7 @@
 
 #pragma mark - 取消预约 点击事件
 - (void)cancelOrderButtonClick:(UIButton *)button {
-    if ([self.checkLabel.text isEqualToString:@"已取消"] || [self.checkLabel.text isEqualToString:@"后台取消"]) {
+    if ([self.checkLabel.text isEqualToString:@"后台取消"]) {
         [ODProgressHUD showInfoWithStatus:@"订单已经取消"];
     }
     else if ([self.checkLabel.text isEqualToString:@"前台已确认"]) {

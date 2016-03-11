@@ -8,7 +8,14 @@
 
 #import "ODChoseCenterCell.h"
 
+
 @implementation ODChoseCenterCell
+
+
+- (void)setModel:(ODStorePlaceListModel *)model {
+    self.titleLabel.text = model.name;
+}
+
 
 - (void)awakeFromNib {
     // Initialization code

@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+#import "ODStorePlaceListModel.h"
+
 @interface ODChoseCenterCell : UITableViewCell
+
+
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (nonatomic, strong) ODStorePlaceListModel *model;
 
 @end
