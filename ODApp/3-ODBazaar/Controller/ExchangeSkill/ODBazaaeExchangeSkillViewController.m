@@ -65,6 +65,7 @@
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
         [weakSelf.collectionView.mj_header beginRefreshing];
     }];
+    [self.collectionView.mj_header beginRefreshing];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
