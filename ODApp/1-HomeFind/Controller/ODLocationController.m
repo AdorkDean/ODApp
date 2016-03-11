@@ -16,6 +16,16 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     MAMapView *_mapView;
 }
 
+@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+@property(nonatomic, strong) UICollectionView *collectionView;
+
+// 城市列表
+@property(nonatomic, strong) NSMutableArray *cityListArray;
+
+// 城市ID
+@property(nonatomic, strong) NSMutableArray *cityIdArray;
+
+
 @end
 
 @implementation ODLocationController

@@ -27,19 +27,19 @@
     // 比较
     if ([oldVersion isEqualToString:newVersion])
     {
-            NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-            NSString *openId = [user objectForKey:KUserDefaultsOpenId];
-            [ODUserInformation sharedODUserInformation].openID = openId ? openId : @"";
+        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+        NSString *openId = [user objectForKey:KUserDefaultsOpenId];
+        [ODUserInformation sharedODUserInformation].openID = openId ? openId : @"";
         
-            NSString *avatar = [user objectForKey:KUserDefaultsAvatar];
-            [ODUserInformation sharedODUserInformation].avatar = avatar ? avatar : @"";
+        NSString *avatar = [user objectForKey:KUserDefaultsAvatar];
+        [ODUserInformation sharedODUserInformation].avatar = avatar ? avatar : @"";
         
-            NSString *mobile = [user objectForKey:KUserDefaultsMobile];
-            [ODUserInformation sharedODUserInformation].avatar = mobile ? mobile : @"";
-            
-            [ODAppRegister registIQKeyboardManager];
-            
-            [ODAppRegister registUMSocial];
+        NSString *mobile = [user objectForKey:KUserDefaultsMobile];
+        [ODUserInformation sharedODUserInformation].avatar = mobile ? mobile : @"";
+        
+        [ODAppRegister registIQKeyboardManager];
+        
+        [ODAppRegister registUMSocial];
         
         return [[ODTabBarController alloc] init];
     }
@@ -52,6 +52,5 @@
     }
 }
                             
-// #define ZHIofoVersionKey @"CFBundleShortVersionString"
 
 @end

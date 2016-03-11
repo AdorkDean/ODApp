@@ -8,14 +8,13 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODChoseCenterController.h"
-#import "ChoseCenterCell.h"
+#import "ODChoseCenterCell.h"
 #import "ODStorePlaceListModel.h"
 
-@interface ODChoseCenterController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface ODChoseCenterController () <UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) UITableView *tableView;
 
-@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-@property(nonatomic, strong) UICollectionView *collectionView;
 
 @property(nonatomic, strong) NSArray *dataArray;
 
@@ -27,8 +26,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"选择中心";
-    [self createCollectionView];
+    self.dataArray = [[NSArray alloc] init];
+    
+    [self tableView];
     [self getData];
+}
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+        
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.rowHeight = 46;
+        _tableView.tableFooterView = [UIView new];
+        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODChoseCenterCell class]) bundle:nil] forCellReuseIdentifier:@"item"];
+        [self.view addSubview:_tableView];
+        
+    }
+    return _tableView;
 }
 
 #pragma mark - 请求数据
@@ -36,63 +53,33 @@
 - (void)getData
 {
     __weakSelf
-    NSDictionary *parameter = @{@"show_type" : @"1",@"call_array":@"1"};
+    NSDictionary *parameter = @{@"show_type" : @"1",@"call_array" : @"1"};
     [ODHttpTool getWithURL:ODUrlOtherStoreList parameters:parameter modelClass:[ODStorePlaceListModel class] success:^(ODStorePlaceListModelResponse *model)
     {
         weakSelf.dataArray = model.result;
-        [weakSelf.collectionView reloadData];
+        [weakSelf.tableView reloadData];
     }
-                   failure:^(NSError *error)
-    {
+    failure:^(NSError *error) {
         
     }];
 }
 
+#pragma mark - UITableViewDataSource
 
-#pragma mark - 初始化
-
-- (void)createCollectionView {
-
-
-    self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-
-
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor whiteColor];
-
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
-
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ChoseCenterCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
-    [self.view addSubview:self.collectionView];
-
-
-}
-
-
-#pragma mark - UICollectionViewDelegate
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ChoseCenterCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
-
-
-    ODStorePlaceListModel *model = self.dataArray[indexPath.row];
-    cell.titleLabel.text = model.name;
-
-    return cell;
-}
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ODChoseCenterCell *cell = [tableView dequeueReusableCellWithIdentifier:@"item"];
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+    cell.model = self.dataArray[indexPath.row];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ODStorePlaceListModel *model = self.dataArray[indexPath.row];
     NSString *storeId = [NSString stringWithFormat:@"%d",model.id];
     if (self.storeCenterNameBlock)
@@ -104,41 +91,6 @@
         self.isRefreshBlock(YES);
     }
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-
-//动态设置每个item的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-
-    return CGSizeMake(kScreenSize.width, 45.5);
-
-
-}
-
-//动态设置每个分区的缩进量
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0, 0, 0, 0);
-}
-
-//动态设置每个分区的最小行间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0;
-}
-
-//动态返回不同区的列间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section {
-    return 0;
-}
-
-//动态设置区头的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(0, 0);
-
-}
-
-//动态设置区尾的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    return CGSizeMake(0, 0);
 }
 
 

@@ -11,7 +11,6 @@
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
 #import "UIImageView+WebCache.h"
-
 #import "ODClassMethod.h"
 #import "ODCommumityViewController.h"
 #import "ODPrecontractViewController.h"
@@ -27,33 +26,14 @@
 #import "ODFindFavorableController.h"
 #import "ODUserInformation.h"
 
-#import "ODDrawbackBuyerOneController.h"
+#import "ODDrawbackController.h"
 
 @interface ODHomeFoundViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, MAMapViewDelegate, AMapSearchDelegate>
 
-@property(nonatomic, strong) UIButton *locationButton;
-
-@property(nonatomic, strong) UICollectionView *collectionView;
-
-@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-
-@property(nonatomic, strong) ODhomeViewCollectionReusableView *rsusableView;
-@property(nonatomic, strong) ODHomeFoundFooterView *footerView;
-
-@property(nonatomic, strong) ODCommunityBbsModel *model;
-
-//滚动窗口数组
-@property(nonatomic, strong) NSMutableArray *pictureArray;
-@property(nonatomic, strong) NSMutableArray *pictureIdArray;
-
-//技能交换
-@property(nonatomic, strong) NSMutableArray *dataArray;
-
-@property(nonatomic, strong) NSArray *cityListArray;
-
-@property(nonatomic, copy) NSString *centerName;
+/**
+ *  体验中心ID
+ */
 @property(nonatomic, copy) NSString *storeId;
-@property(nonatomic, copy) NSString *centerTel;
 
 
 @end

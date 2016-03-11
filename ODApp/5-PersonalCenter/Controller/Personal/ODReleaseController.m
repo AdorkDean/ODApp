@@ -14,25 +14,26 @@
 NSString * const ODReleaseCellID = @"ODReleaseCell";
 @interface ODReleaseController ()
 
-// 
-@property (nonatomic, assign) long deleteRow;
-@property (nonatomic, assign) long loveRow;
-
-
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-
-@property(nonatomic, strong) NSMutableArray *dataArray;
-
-@property(nonatomic, copy) NSString *swap_id;
 
 @property(nonatomic, strong) ODReleaseModel *model;
 
 @property(nonatomic, strong) ODReleaseCell *cell;
 
-@property(nonatomic, assign) int pageCount;
-@property(nonatomic, assign) int pageSelectedCount;
+// 列表数组
+@property(nonatomic, strong) NSMutableArray *dataArray;
 
+// 数据页数
+@property(nonatomic, assign) int pageCount;
+
+// 记录删除了哪一行
+@property (nonatomic, assign) long deleteRow;
+
+// 记录点击了哪一行
+@property (nonatomic, assign) long loveRow;
+
+// 暂无记录
 @property(nonatomic, strong) UILabel *noReusltLabel;
 
 
@@ -42,8 +43,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 #pragma mark - 生命周期
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.title = @"已发布";
@@ -52,6 +52,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     self.dataArray = [[NSMutableArray alloc] init];
     
     [self createRequestData];
+    
     __weakSelf;
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationEditSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
     {
@@ -72,14 +73,12 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 }
 
 
-- (void)loadMoreData
-{
+- (void)loadMoreData {
     self.pageCount ++;
     [self createRequestData];
 }
 
-- (void)reloadData:(NSNotification *)text
-{
+- (void)reloadData:(NSNotification *)text {
     ODReleaseModel *model = self.dataArray[self.loveRow];
     model.love_num = [NSString stringWithFormat:@"%@" , text.userInfo[@"loveNumber"]];
     [self.dataArray replaceObjectAtIndex:self.loveRow withObject:model];
@@ -87,39 +86,31 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 }
 
 #pragma mark - 加载数据请求
-- (void)createRequestData
-{    
+- (void)createRequestData {
     __weakSelf
-    NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"city_id":@"1",@"my":@"1",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-    [ODHttpTool getWithURL:ODUrlSwapList parameters:parameter modelClass:[ODReleaseModel class] success:^(id model)
-     {
-         if (self.pageCount == 1)
-         {
+    NSDictionary *parameter = @{ @"page" : [NSString stringWithFormat:@"%i", self.pageCount], @"my" : @"1" };
+    [ODHttpTool getWithURL:ODUrlSwapList parameters:parameter modelClass:[ODReleaseModel class] success:^(id model) {
+         if (self.pageCount == 1) {
              [self.dataArray removeAllObjects];
              [self.noReusltLabel removeFromSuperview];
          }
        
-        for (ODReleaseModel *md in [model result])
-        {
-            if (![[weakSelf.dataArray valueForKeyPath:@"swap_id" ] containsObject:[md swap_id]])
-            {
+        for (ODReleaseModel *md in [model result]) {
+            if (![[weakSelf.dataArray valueForKeyPath:@"swap_id"] containsObject:[md swap_id]]) {
                 [weakSelf.dataArray addObject: md];
             }
         }
          
         [weakSelf.collectionView.mj_header endRefreshing];
-        if ([[model result]count] == 0)
-        {
+        if ([[model result]count] == 0) {
             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
         }
-        else
-        {
+        else {
          [weakSelf.collectionView.mj_footer endRefreshing];
         }
         [weakSelf.collectionView reloadData];
         
-        if (self.pageCount == 1 && self.dataArray.count == 0)
-        {
+        if (self.pageCount == 1 && self.dataArray.count == 0) {
          weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
          weakSelf.noReusltLabel.text = @"暂无技能";
          weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
@@ -128,8 +119,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
          [weakSelf.view addSubview:weakSelf.noReusltLabel];
         }
     }
-                   failure:^(NSError *error)
-    {
+    failure:^(NSError *error) {
         [weakSelf.collectionView.mj_footer endRefreshing];
         [weakSelf.collectionView.mj_header endRefreshing];
     }];
@@ -138,25 +128,21 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 #pragma mark - 删除技能请求
 - (void)deleteSkillRequest
 {
-    NSDictionary *parameter = @{@"open_id":[ODUserInformation sharedODUserInformation].openID, @"swap_id":self.swap_id};
+    NSDictionary *parameter = @{@"swap_id" : self.swap_id};
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlSwapDel parameters:parameter modelClass:[NSObject class] success:^(id model)
-    {
+    [ODHttpTool getWithURL:ODUrlSwapDel parameters:parameter modelClass:[NSObject class] success:^(id model) {
         [ODProgressHUD showInfoWithStatus:@"删除任务成功"];
         [weakSelf.dataArray removeObject:weakSelf.dataArray[self.deleteRow]];
         [weakSelf.collectionView reloadData];
     }
-                   failure:^(NSError *error)
-    {
+    failure:^(NSError *error) {
         
     }];
 }
 
 #pragma mark - Create UICollectionView
-- (UICollectionView *)collectionView
-{
-    if (!_collectionView)
-    {
+- (UICollectionView *)collectionView {
+    if (!_collectionView) {
         __weakSelf
         self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
         self.flowLayout.minimumLineSpacing = 5;
@@ -166,13 +152,11 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         self.collectionView.dataSource = self;
         self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
         [self.collectionView registerNib:[UINib nibWithNibName:@"ODReleaseCell" bundle:nil] forCellWithReuseIdentifier:ODReleaseCellID];
-        self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^
-                                         {
+        self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
                                              weakSelf.pageCount = 1;
                                              [weakSelf createRequestData];
                                          }];
-        self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^
-                                         {
+        self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^ {
                                              [weakSelf loadMoreData];
                                          }];
         [self.view addSubview:self.collectionView];
@@ -182,18 +166,15 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 #pragma mark - UICollectionViewDataSource
 
-- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
+- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
-- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
+- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODReleaseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ODReleaseCellID forIndexPath:indexPath];
     self.model = self.dataArray[indexPath.row];
     
@@ -207,21 +188,17 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 #pragma mark - UICollectionViewDelegate
 
-- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
+- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     return CGSizeMake(KScreenWidth, 138);
 }
 
-- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     ODReleaseModel *model = self.dataArray[indexPath.row];
     self.loveRow = indexPath.row;
-    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"])
-    {
+    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {
         vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
         vc.nick = model.user[@"nick"];
-        NSLog(@"%@",vc.swap_id);
         [self.navigationController pushViewController:vc animated:YES];
         
     }
@@ -230,14 +207,12 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 #pragma mark - Action
 
 #pragma mark - 编辑 点击事件
-- (void)editButtonClick:(UIButton *)button
-{
+- (void)editButtonClick:(UIButton *)button {
     ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODReleaseModel *model = self.dataArray[indexPath.row];
     
-    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"])
-    {
+    if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {
         ODBazaarReleaseSkillViewController *vc = [[ODBazaarReleaseSkillViewController alloc] init];
         vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
         vc.skillTitle = model.title;
@@ -253,12 +228,10 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 }
 
 #pragma mark - 删除 点击事件
-- (void)deleteButtonClick:(UIButton *)button
-{
+- (void)deleteButtonClick:(UIButton *)button {
     __weakSelf
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除技能" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action)
-                      {
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                           ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview;
                           NSIndexPath *indexPath = [weakSelf.collectionView indexPathForCell:cell];
                           ODReleaseModel *model = weakSelf.dataArray[indexPath.row];
@@ -272,13 +245,11 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 }
 
 #pragma mark - 移除通知
-- (void)dealloc
-{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
