@@ -74,17 +74,18 @@
 
 #pragma mark - 初始化
 - (void)createCollectionView {
+__weakSelf
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) collectionViewLayout:self.flowLayout];
     self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self DownRefresh];
+        [weakSelf DownRefresh];
     }];
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         
-        [self LoadMoreData];
+        [weakSelf LoadMoreData];
     }];
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODMyOrderCell" bundle:nil] forCellWithReuseIdentifier:@"item"];

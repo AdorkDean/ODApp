@@ -258,8 +258,7 @@
     __weakSelf
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除话题" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSDictionary *parameter = @{@"id":self.bbs_id,@"type":@"1",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-//        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        NSDictionary *parameter = @{@"id":self.bbs_id,@"type":@"1"};
         [weakSelf pushDataWithUrl:ODUrlBbsDel parameter:parameter isBbs:YES];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -426,25 +425,6 @@
 #pragma mark－ 提交数据
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isBbs:(BOOL)isBbs
 {
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    
-//    __weak typeof (self)weakSelf = self;
-//    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        if (isBbs) {
-//            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//                if (weakSelf.myBlock) {
-//                    weakSelf.myBlock(@"delSuccess");
-//                }
-//                [weakSelf.navigationController popViewControllerAnimated:YES];
-//            }
-//        }else{
-//            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//            }
-//        }
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//        
-//    }];
-    
     __weakSelf
     [ODHttpTool getWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
         if (isBbs) {
