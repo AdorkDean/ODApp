@@ -11,6 +11,10 @@
 
 @interface ODFindJobController ()
 
+@property(nonatomic, strong) UIWebView *webView;
+
+@property(nonatomic, strong) NSString *webUrl;
+
 @end
 
 @implementation ODFindJobController

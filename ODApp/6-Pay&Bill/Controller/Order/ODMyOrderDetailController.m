@@ -11,6 +11,17 @@
 #import "ODUserInformation.h"
 @interface ODMyOrderDetailController ()
 
+@property(nonatomic, strong) ODMyOrderDetailModel *model;
+
+@property(nonatomic, strong) UIScrollView *scrollView;
+
+// 审核状态
+@property(nonatomic, strong) UILabel *checkLabel;
+
+// 中心设备
+@property(nonatomic, strong) NSMutableArray *devicesArray;
+
+
 @end
 
 @implementation ODMyOrderDetailController
@@ -20,7 +31,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dataArray = [[NSMutableArray alloc] init];
     self.devicesArray = [[NSMutableArray alloc] init];
     [self navigationInit];
     [self getOrderDetailRequest];
@@ -38,6 +48,8 @@
 
 - (void)navigationInit {
     self.navigationItem.title = @"预约详情";
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
     if (self.isOther == NO && ![self.status_str isEqualToString:@"已取消"])
     {
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelOrderButtonClick:) color:nil highColor:nil title:@"取消预约"];
@@ -228,9 +240,6 @@
                 weakSelf.navigationItem.rightBarButtonItem.customView.hidden = YES;
                 weakSelf.status_str = weakSelf.checkLabel.text;
                 
-                NSDictionary *loveDict =[[NSDictionary alloc] initWithObjectsAndKeys:weakSelf.status_str,@"status_str", nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil userInfo:loveDict];
-                
             }
             failure:^(NSError *error) {
                                
@@ -240,6 +249,14 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }
+}
+
+#pragma mark - Action
+
+- (void)backAction:(UIBarButtonItem *)sender {
+    NSDictionary *statusDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.status_str,@"status_str", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil userInfo:statusDict];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 拨打电话

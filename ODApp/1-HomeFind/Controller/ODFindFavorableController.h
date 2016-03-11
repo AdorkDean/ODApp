@@ -13,9 +13,7 @@
 
 @interface ODFindFavorableController : ODBaseViewController
 
-@property(nonatomic, strong) UIWebView *webView;
 
-@property(nonatomic, strong) NSString *webUrl;
 
 
 

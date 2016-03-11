@@ -14,25 +14,26 @@
 NSString * const ODReleaseCellID = @"ODReleaseCell";
 @interface ODReleaseController ()
 
-// 
-@property (nonatomic, assign) long deleteRow;
-@property (nonatomic, assign) long loveRow;
-
-
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-
-@property(nonatomic, strong) NSMutableArray *dataArray;
-
-@property(nonatomic, copy) NSString *swap_id;
 
 @property(nonatomic, strong) ODReleaseModel *model;
 
 @property(nonatomic, strong) ODReleaseCell *cell;
 
-@property(nonatomic, assign) int pageCount;
-@property(nonatomic, assign) int pageSelectedCount;
+// 列表数组
+@property(nonatomic, strong) NSMutableArray *dataArray;
 
+// 数据页数
+@property(nonatomic, assign) int pageCount;
+
+// 记录删除了哪一行
+@property (nonatomic, assign) long deleteRow;
+
+// 记录点击了哪一行
+@property (nonatomic, assign) long loveRow;
+
+// 暂无记录
 @property(nonatomic, strong) UILabel *noReusltLabel;
 
 

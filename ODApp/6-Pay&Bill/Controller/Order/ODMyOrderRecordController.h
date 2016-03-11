@@ -17,25 +17,20 @@
 
 @interface ODMyOrderRecordController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property(nonatomic, copy) NSString *centerTitle;
-
 @property(nonatomic, copy) NSString *open_id;
 
-@property(nonatomic, strong) UICollectionView *collectionView;
-
-@property(nonatomic, strong) NSMutableArray *orderArray;
-
-@property(nonatomic, assign) BOOL isOther;
-
-@property(nonatomic, strong) UILabel *noReusltLabel;
-
-@property(nonatomic, strong) UILabel *noMoreLabel;
-
-@property(nonatomic, assign) NSInteger count;
-
-
+/**
+ *  是否刷新
+ */
 @property(nonatomic, assign) BOOL isRefresh;
+/**
+ *  标题
+ */
+@property(nonatomic, copy) NSString *centerTitle;
 
-@property(nonatomic, strong) ODMyOrderRecordCell *orderRecordCell;
+/**
+ *  是否是他人个人中心
+ */
+@property(nonatomic, assign) BOOL isOther;
 
 @end

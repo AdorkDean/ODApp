@@ -655,8 +655,8 @@
 		232CB48B1C9264E200340D12 /* ODMyTopicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyTopicController.m; sourceTree = "<group>"; };
 		232CB48C1C9264E200340D12 /* ODOperationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOperationController.h; sourceTree = "<group>"; };
 		232CB48D1C9264E200340D12 /* ODOperationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOperationController.m; sourceTree = "<group>"; };
-		232CB48E1C9264E200340D12 /* ODOrderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderDetailController.h; sourceTree = "<group>"; };
-		232CB48F1C9264E200340D12 /* ODOrderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderDetailController.m; sourceTree = "<group>"; };
+		232CB48E1C9264E200340D12 /* ODOrderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODOrderDetailController.h; path = "../../../5-PersonalCenter/Controller/Personal/ODOrderDetailController.h"; sourceTree = "<group>"; };
+		232CB48F1C9264E200340D12 /* ODOrderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODOrderDetailController.m; path = "../../../5-PersonalCenter/Controller/Personal/ODOrderDetailController.m"; sourceTree = "<group>"; };
 		232CB4901C9264E200340D12 /* ODOtherTaskController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOtherTaskController.h; sourceTree = "<group>"; };
 		232CB4911C9264E200340D12 /* ODOtherTaskController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOtherTaskController.m; sourceTree = "<group>"; };
 		232CB4921C9264E200340D12 /* ODOtherTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOtherTopicViewController.h; sourceTree = "<group>"; };
@@ -750,10 +750,10 @@
 		232CB4ED1C9264E200340D12 /* ODViolationsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODViolationsCell.xib; sourceTree = "<group>"; };
 		232CB4F11C9264E200340D12 /* ODMyOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyOrderController.h; sourceTree = "<group>"; };
 		232CB4F21C9264E200340D12 /* ODMyOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyOrderController.m; sourceTree = "<group>"; };
-		232CB4F31C9264E200340D12 /* ODMyOrderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyOrderDetailController.h; sourceTree = "<group>"; };
-		232CB4F41C9264E200340D12 /* ODMyOrderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyOrderDetailController.m; sourceTree = "<group>"; };
-		232CB4F51C9264E200340D12 /* ODMyOrderRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyOrderRecordController.h; sourceTree = "<group>"; };
-		232CB4F61C9264E200340D12 /* ODMyOrderRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyOrderRecordController.m; sourceTree = "<group>"; };
+		232CB4F31C9264E200340D12 /* ODMyOrderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODMyOrderDetailController.h; path = "../../../6-Pay&Bill/Controller/Order/ODMyOrderDetailController.h"; sourceTree = "<group>"; };
+		232CB4F41C9264E200340D12 /* ODMyOrderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODMyOrderDetailController.m; path = "../../../6-Pay&Bill/Controller/Order/ODMyOrderDetailController.m"; sourceTree = "<group>"; };
+		232CB4F51C9264E200340D12 /* ODMyOrderRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODMyOrderRecordController.h; path = "../../../6-Pay&Bill/Controller/Order/ODMyOrderRecordController.h"; sourceTree = "<group>"; };
+		232CB4F61C9264E200340D12 /* ODMyOrderRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODMyOrderRecordController.m; path = "../../../6-Pay&Bill/Controller/Order/ODMyOrderRecordController.m"; sourceTree = "<group>"; };
 		232CB4F71C9264E200340D12 /* ODMySellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMySellController.h; sourceTree = "<group>"; };
 		232CB4F81C9264E200340D12 /* ODMySellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMySellController.m; sourceTree = "<group>"; };
 		232CB4F91C9264E200340D12 /* ODMySellDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMySellDetailController.h; sourceTree = "<group>"; };
@@ -1614,10 +1614,12 @@
 				232CB48B1C9264E200340D12 /* ODMyTopicController.m */,
 				232CB48C1C9264E200340D12 /* ODOperationController.h */,
 				232CB48D1C9264E200340D12 /* ODOperationController.m */,
-				232CB48E1C9264E200340D12 /* ODOrderDetailController.h */,
-				232CB48F1C9264E200340D12 /* ODOrderDetailController.m */,
 				232CB4901C9264E200340D12 /* ODOtherTaskController.h */,
 				232CB4911C9264E200340D12 /* ODOtherTaskController.m */,
+				232CB4F31C9264E200340D12 /* ODMyOrderDetailController.h */,
+				232CB4F41C9264E200340D12 /* ODMyOrderDetailController.m */,
+				232CB4F51C9264E200340D12 /* ODMyOrderRecordController.h */,
+				232CB4F61C9264E200340D12 /* ODMyOrderRecordController.m */,
 				232CB4921C9264E200340D12 /* ODOtherTopicViewController.h */,
 				232CB4931C9264E200340D12 /* ODOtherTopicViewController.m */,
 				232CB4941C9264E200340D12 /* ODPersonalCenterCollectionController.h */,
@@ -1756,10 +1758,8 @@
 			children = (
 				232CB4F11C9264E200340D12 /* ODMyOrderController.h */,
 				232CB4F21C9264E200340D12 /* ODMyOrderController.m */,
-				232CB4F31C9264E200340D12 /* ODMyOrderDetailController.h */,
-				232CB4F41C9264E200340D12 /* ODMyOrderDetailController.m */,
-				232CB4F51C9264E200340D12 /* ODMyOrderRecordController.h */,
-				232CB4F61C9264E200340D12 /* ODMyOrderRecordController.m */,
+				232CB48E1C9264E200340D12 /* ODOrderDetailController.h */,
+				232CB48F1C9264E200340D12 /* ODOrderDetailController.m */,
 				232CB4F71C9264E200340D12 /* ODMySellController.h */,
 				232CB4F81C9264E200340D12 /* ODMySellController.m */,
 				232CB4F91C9264E200340D12 /* ODMySellDetailController.h */,

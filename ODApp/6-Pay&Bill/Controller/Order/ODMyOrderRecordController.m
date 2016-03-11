@@ -14,7 +14,22 @@
 
 @interface ODMyOrderRecordController ()
 
+@property(nonatomic, strong) ODMyOrderRecordCell *orderRecordCell;
+
+@property(nonatomic, strong) UICollectionView *collectionView;
+
+// 列表数组
+@property(nonatomic, strong) NSMutableArray *orderArray;
+
+// 无纪录
+@property(nonatomic, strong) UILabel *noReusltLabel;
+
+// 数据页数
+@property(nonatomic, assign) NSInteger count;
+
+// 记录点击了哪一行
 @property (nonatomic, assign) long cancelOrderRow;
+
 
 @end
 
@@ -188,7 +203,7 @@
     vc.order_id = [NSString stringWithFormat:@"%@",model.order_id];
     
     [self.navigationController pushViewController:vc animated:YES];
-    vc.status_str = [self.orderArray[indexPath.row]status_str];
+    vc.status_str = [self.orderArray[indexPath.row] status_str];
 }
 
 #pragma mark - 移除通知
