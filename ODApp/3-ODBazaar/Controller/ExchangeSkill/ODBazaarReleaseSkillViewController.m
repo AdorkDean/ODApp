@@ -556,7 +556,14 @@
 
 -(void)releaseButtonClick:(UIButton *)button
 {
-    if (self.titleTextField.text.length>0&&self.titleTextField.text.length<8&&self.contentTextView.text.length>0&&self.priceTextField.text.length>0&&self.unitTextField.text.length<4&&self.unitTextField.text.length>0&&self.swap_type != nil&&self.mArray.count<=5&&self.mArray.count>=3) {
+    if (self.titleTextField.text.length > 0 &&
+        self.titleTextField.text.length < 8 &&
+        self.contentTextView.text.length > 0 &&
+        self.priceTextField.text.length > 0 &&
+        self.unitTextField.text.length < 4 &&
+        self.unitTextField.text.length > 0 &&
+        self.swap_type != nil &&
+        self.mArray.count <= 5 && self.mArray.count >= 3) {
         [self joiningTogetherParmetersWithButton:button];
     }else{
         if (self.titleTextField.text.length==0) {
@@ -596,18 +603,52 @@
         
         NSDictionary *parameter;
         if (self.timeArray.count) {
-            parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray desc],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+            parameter = @{
+                          @"swap_id":self.swap_id,
+                          @"title":self.titleTextField.text,
+                          @"content":self.contentTextView.text,
+                          @"swap_type":self.swap_type,
+                          @"price":self.priceTextField.text,
+                          @"unit":self.unitTextField.text,
+                          @"schedule":[self.timeArray desc],
+                          @"imgs":imageStr,
+                          };
         }else{
-            parameter = @{@"swap_id":self.swap_id,@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.editTimeArray desc],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+            parameter = @{
+                          @"swap_id":self.swap_id,
+                          @"title":self.titleTextField.text,
+                          @"content":self.contentTextView.text,
+                          @"swap_type":self.swap_type,
+                          @"price":self.priceTextField.text,
+                          @"unit":self.unitTextField.text,
+                          @"schedule":[self.editTimeArray desc],
+                          @"imgs":imageStr,
+                          };
         }
         [self pushDataWithUrl:ODUrlSwapEdit parameter:parameter isEdit:YES];
     }else{
         
         NSDictionary *parameter;
         if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
-            parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":[self.timeArray desc],@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+            parameter = @{
+                          @"title":self.titleTextField.text,
+                          @"content":self.contentTextView.text,
+                          @"swap_type":self.swap_type,
+                          @"price":self.priceTextField.text,
+                          @"unit":self.unitTextField.text,
+                          @"schedule":[self.timeArray desc],
+                          @"imgs":imageStr,
+                          };
         }else if ([self.swap_type isEqualToString:@"2"]){
-            parameter = @{@"title":self.titleTextField.text,@"content":self.contentTextView.text,@"swap_type":self.swap_type,@"price":self.priceTextField.text,@"unit":self.unitTextField.text,@"schedule":@"",@"imgs":imageStr,@"city_id":[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID],@"open_id":[[ODUserInformation sharedODUserInformation]openID]};
+            parameter = @{
+                          @"title":self.titleTextField.text,
+                          @"content":self.contentTextView.text,
+                          @"swap_type":self.swap_type,
+                          @"price":self.priceTextField.text,
+                          @"unit":self.unitTextField.text,
+                          @"schedule":@"",
+                          @"imgs":imageStr
+                          };
         }
         [self pushDataWithUrl:ODUrlSwapCreate parameter:parameter isEdit:NO];
     }
