@@ -25,7 +25,6 @@
 @property(nonatomic, strong) MyPageControl *pageControl;
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, strong) UIViewController *ViewController;
-@property(nonatomic, assign) NSInteger length;
 
 
 @end
@@ -69,8 +68,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     } else {
         // 加载引导图
         [self makeLaunchView];
-    }
-    
+    }    
     // 根据需求选择根控制器
 //    self.window.rootViewController = [ODGuideTool chooseRootViewController];
     
@@ -80,10 +78,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-
-
     NSString *urlstring = [url absoluteString];
-
 
     if ([urlstring containsString:@"wx64423cc9497cc581://platformId=wechat"]) {
         BOOL result = [UMSocialSnsService handleOpenURL:url];
@@ -97,20 +92,15 @@ void UncaughtExceptionHandler(NSException *exception) {
     } else {
         return NO;
     }
-
-
 }
 
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
-    
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Required
     [JPUSHService registerDeviceToken:deviceToken];
 }
 
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
-    
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     //Optional
     NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
 }
@@ -145,7 +135,6 @@ void UncaughtExceptionHandler(NSException *exception) {
     NSString *mobile = [user objectForKey:KUserDefaultsMobile];
     [ODUserInformation sharedODUserInformation].avatar = mobile ? mobile : @"";
     
-    
     self.window.rootViewController = [[ODTabBarController alloc] init];
     
     [ODAppRegister registIQKeyboardManager];
@@ -154,12 +143,8 @@ void UncaughtExceptionHandler(NSException *exception) {
 }
 
 - (void)makeLaunchView {
-    
-    
     self.ViewController = [[UIViewController alloc] init];
     self.ViewController.view.frame = [UIScreen mainScreen].bounds;
-    
-    
     
     // 数组内存放加载引导图片
     NSArray *arr = [NSArray arrayWithObjects:@"begin1.jpg", @"begin2.jpg", @"begin3.jpg", @"begin4.jpg", @"begin5.jpg", nil];
@@ -172,47 +157,21 @@ void UncaughtExceptionHandler(NSException *exception) {
     self.scrollView.showsHorizontalScrollIndicator = NO;
     self.scrollView.showsVerticalScrollIndicator = NO;
     
-    
-    if (iPhone4_4S) {
-        
-        self.length = 200;
-        
-    } else if (iPhone5_5s) {
-        
-        self.length = 250;
-        
-        
-    } else if (iPhone6_6s) {
-        
-        self.length = 300;
-        
-        
-    } else {
-        
-        self.length = 330;
-        
-    }
-    
-    
     self.pageControl = [[MyPageControl alloc] initWithFrame:CGRectMake(self.ViewController.view.center.x - 50, self.ViewController.view.center.y * 2 - 30, 200, 30) normalImage:[UIImage imageNamed:@"selected.png"] highlightedImage:[UIImage imageNamed:@"noselected.png"] dotsNumber:4 sideLength:15 dotsGap:10];
     
     self.pageControl.backgroundColor = [UIColor clearColor];
     
-    
     [self.ViewController.view addSubview:self.scrollView];
     [self.ViewController.view addSubview:self.pageControl];
     
-    
     self.window.rootViewController = self.ViewController;
-    
     
     for (int i = 0; i < arr.count; i++) {
         UIImageView *img = [[UIImageView alloc] initWithFrame:CGRectMake(i * [UIScreen mainScreen].bounds.size.width, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height)];
-        
         if (i < arr.count - 1) {
             img.image = [UIImage imageNamed:arr[i]];
-        } else {
-            
+        }
+        else {
             img.image = [UIImage imageNamed:arr[i]];
             img.userInteractionEnabled = YES;
             
@@ -227,66 +186,46 @@ void UncaughtExceptionHandler(NSException *exception) {
             goButton.layer.borderColor = [UIColor blackColor].CGColor;
             goButton.layer.borderWidth = 1;
             
-            
             [goButton addTarget:self action:@selector(tapAction:) forControlEvents:UIControlEventTouchUpInside];
             [img addSubview:goButton];
-            
-            
         }
-        
         [self.scrollView addSubview:img];
-        
     }
-    
 }
 
 
 - (void)tapAction:(UIButton *)sender {
-    
-    
     [UIView animateWithDuration:.5 animations:^{
-        
         //让imageView 渐变消失
         self.scrollView.alpha = 0;
-    }                completion:^(BOOL finished) {
-        
+    }
+                     completion:^(BOOL finished) {
         //将scrollView移除
         [self.scrollView removeFromSuperview];
         //进入主界面
         [self gotoMain];
     }];
-    
-    
 }
 
 
 //停止滑动
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    
-    
     // 拿到偏移量
     CGPoint offset = self.scrollView.contentOffset;
     
     // 算出偏移了几个fram.width
     NSInteger currentIndex = offset.x / self.scrollView.frame.size.width;
     
-    
     if (currentIndex == 4) {
-        
         self.pageControl.alpha = 0;
-        
-        
-    } else {
-        
+    }
+    else {
         self.pageControl.alpha = 1;
-        
         
         // 根据currentIndex 修改pageControl显示的点的位置
         self.pageControl.currentPage = currentIndex;
         
     }
-    
-    
 }
 
 
@@ -312,7 +251,6 @@ void UncaughtExceptionHandler(NSException *exception) {
                 NSNotification *notification = [NSNotification notificationWithName:ODNotificationPaySuccess object:nil userInfo:dict];
                 //通过通知中心发送通知
                 [[NSNotificationCenter defaultCenter] postNotification:notification];
-                
                 
                 break;
             }
