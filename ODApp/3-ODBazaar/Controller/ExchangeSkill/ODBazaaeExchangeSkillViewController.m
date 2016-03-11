@@ -35,6 +35,14 @@
     return _collectionView;
 }
 
+-(NSMutableArray *)dataArray
+{
+    if (!_dataArray) {
+        _dataArray = [[NSMutableArray alloc]init];
+    }
+    return _dataArray;
+}
+
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -43,6 +51,7 @@
     [self requestData];
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.page = 1;
         [weakSelf requestData];
     }];
 
@@ -79,10 +88,14 @@
 #pragma mark - 数据请求
 -(void)requestData
 {
-    NSDictionary *parameter = @{@"page" : [NSString stringWithFormat:@"%ld", self.page], @"city_id" : [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"my" : @"0"};
+    NSDictionary *parameter = @{@"page" : [NSString stringWithFormat:@"%ld", self.page], @"my":@"0"};
     __weakSelf
     [ODHttpTool getWithURL:ODUrlSwapList parameters:parameter modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
-        weakSelf.dataArray = model.result;
+        if (weakSelf.page == 1) {
+            [weakSelf.dataArray removeAllObjects];
+        }
+        NSArray *array = [model result];
+        [weakSelf.dataArray addObjectsFromArray:array];
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];
         [weakSelf.collectionView reloadData];
@@ -146,11 +159,11 @@
     return cell;
 }
 
+#pragma mark - UICollectionViewDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
 }
 
-#pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
