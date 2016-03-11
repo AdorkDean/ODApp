@@ -100,8 +100,9 @@
                 weakSelf.cityListArray = mode.all;
                 [weakSelf.collectionView reloadData];
             }
-                   failure:^(NSError *error) {
-                   }];
+    failure:^(NSError *error) {
+        
+    }];
 }
 
 
@@ -109,8 +110,7 @@
 
 - (void)getScrollViewRequest {
     __weakSelf
-    
-    NSDictionary *parameter = @{@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
+    NSDictionary *parameter = @{};
     [ODHttpTool getWithURL:ODUrlOtherHome parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model) {
         [weakSelf.pictureArray removeAllObjects];
         [weakSelf.pictureIdArray removeAllObjects];
@@ -118,19 +118,18 @@
         [weakSelf.pictureIdArray addObjectsFromArray:[[[model result] activitys] valueForKeyPath:@"id"]];
         [weakSelf.collectionView reloadData];
     }
-                   failure:^(NSError *error) {
+    failure:^(NSError *error) {
 
-       }];
+    }];
 }
 
 #pragma mark - 技能交换数据请求
 
 - (void)getSkillChangeRequest {
-    NSDictionary *parameter = @{@"city_id" : [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
+    NSDictionary *parameter = @{};
     __weak typeof(self) weakSelf = self;
 
-    [ODHttpTool getWithURL:ODUrlOtherHome parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model)
-    {
+    [ODHttpTool getWithURL:ODUrlOtherHome parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model) {
         [weakSelf.dataArray removeAllObjects];
         ODHomeInfoModel *infoModel = [model result];
         for (ODHomeInfoSwapModel *swapModel in infoModel.swaps) {
@@ -140,9 +139,8 @@
         [weakSelf.collectionView reloadData];
 
     }
-                   failure:^(NSError *error)
-    {
-
+    failure:^(NSError *error) {
+        [weakSelf.collectionView.mj_header endRefreshing];
     }];
 }
 #pragma mark - 获得默认的体验中心的Store_id
@@ -157,8 +155,7 @@
         weakSelf.storeId = [@(listModel.id)stringValue];
         [weakSelf pushToPlace];
     }
-                   failure:^(NSError *error)
-    {
+    failure:^(NSError *error) {
         
     }];
 }
@@ -282,25 +279,8 @@
             [self.rsusableView.scrollView addSubview:imageButton];
         }
 
-        // Top Eight Button
-        [self.rsusableView.findActivityButton addTarget:self action:@selector(findActivityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.orderPlaceButton addTarget:self action:@selector(orderPlaceButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.findFavorableButton addTarget:self action:@selector(findFavorableButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.findJobButton addTarget:self action:@selector(findJobButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.searchCircleButton addTarget:self action:@selector(searchCircleButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.searchHelpButton addTarget:self action:@selector(searchHelpButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.changeSkillButton addTarget:self action:@selector(changeSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.moreButton addTarget:self action:@selector(moreButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-
-        // Search Circle
-        [self.rsusableView.emotionButton addTarget:self action:@selector(emotionButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.funnyButton addTarget:self action:@selector(funnyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.moviesButton addTarget:self action:@selector(moviesButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.quadraticButton addTarget:self action:@selector(quadraticButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.lifeButton addTarget:self action:@selector(lifeButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.starButton addTarget:self action:@selector(starButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.beautifulButton addTarget:self action:@selector(beautifulButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.rsusableView.petButton addTarget:self action:@selector(petButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self topEightButtonClick];
+        [self searchCircleButtonClick];
 
         [self.rsusableView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 
@@ -320,13 +300,17 @@
     CGFloat baseHeight = size.height + 119;
     if (model.imgs_small.count == 0) {
         return baseHeight;
-    } else if (model.imgs_small.count > 0 && model.imgs_small.count < 4) {
+    }
+    else if (model.imgs_small.count > 0 && model.imgs_small.count < 4) {
         return baseHeight + width;
-    } else if (model.imgs_small.count >= 4 && model.imgs_small.count < 7) {
+    }
+    else if (model.imgs_small.count >= 4 && model.imgs_small.count < 7) {
         return baseHeight + 2 * width + 5;
-    } else if (model.imgs_small.count >= 7 && model.imgs_small.count < 9) {
+    }
+    else if (model.imgs_small.count >= 7 && model.imgs_small.count < 9) {
         return baseHeight + 3 * width + 10;
-    } else {
+    }
+    else {
         return baseHeight + 3 * width + 10;
     }
 }
@@ -335,14 +319,12 @@
     return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    
-    return CGSizeMake(0, 551.5);
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {    
+    return CGSizeMake(0, 551);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    return CGSizeMake(0, 42);
+    return CGSizeMake(0, 40);
 }
 
 #pragma mark - AMapSearchDelegate
@@ -429,81 +411,71 @@ updatingLocation:(BOOL)updatingLocation {
 
 
 #pragma mark - Action
-#pragma mark - 定位按钮点击事件
 
+#pragma mark - 定位按钮 点击事件
 - (void)locationButtonClick:(UIButton *)button {
     ODLocationController *vc = [[ODLocationController alloc] init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - 顶部8个按钮点击事件
-
-- (void)findActivityButtonClick:(UIButton *)button {
-    self.tabBarController.selectedIndex = 1;
-}
-
-- (void)orderPlaceButtonClick:(UIButton *)button
-{
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""])
-    {
-        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
-        [self presentViewController:vc animated:YES completion:nil];
-        
-    }
-    else
-    {
-        if (self.storeId.integerValue == 0)
-        {
-            [self getDefaultCenterNameRequest];
+#pragma mark - 顶部8个按钮 点击事件
+- (void)topEightButtonClick {
+    __weakSelf
+    self.rsusableView.topEightButtonTag = ^(NSInteger tag) {
+        if (tag == 100) {
+            weakSelf.tabBarController.selectedIndex = 1;
         }
-        else
-        {
-            [self pushToPlace];
+        else if (tag == 101) {
+            if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+                ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
+                [weakSelf presentViewController:vc animated:YES completion:nil];
+            }
+            else {
+                if (weakSelf.storeId.integerValue == 0) {
+                    [weakSelf getDefaultCenterNameRequest];
+                }
+                else  {
+                    [weakSelf pushToPlace];
+                }
+            }
         }
-    }
+        else if (tag == 102) {
+            ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }
+        else if (tag == 103) {
+            if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+                ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
+                [weakSelf.navigationController presentViewController:personalCenter animated:YES completion:nil];
+            }
+            else {
+                ODFindJobController *vc = [[ODFindJobController alloc] init];
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }
+        }
+        else if (tag == 104) {
+            [weakSelf giveCommumityContent:nil andBbsType:4];
+        }
+        else if (tag == 105) {
+            weakSelf.tabBarController.selectedIndex = 2;
+            ODBazaarViewController *vc = weakSelf.tabBarController.childViewControllers[2].childViewControllers[0];
+            vc.index = 1;
+            [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShowBazaar object:nil];
+        }
+        else if (tag == 106) {
+            weakSelf.tabBarController.selectedIndex = 2;
+            ODBazaarViewController *vc = weakSelf.tabBarController.childViewControllers[2].childViewControllers[0];
+            vc.index = 0;
+            [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseSkill object:nil];
+        }
+        else if (tag == 107) {
+            ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
+            [weakSelf.navigationController pushViewController:vc animated:YES];
+        }
+    };
 }
 
-- (void)findFavorableButtonClick:(UIButton *)button {
-    ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-- (void)findJobButtonClick:(UIButton *)button {
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
-        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
-        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
-    }
-    else {
-        ODFindJobController *vc = [[ODFindJobController alloc] init];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-}
-
-- (void)searchCircleButtonClick:(UIButton *)button {
-    [self giveCommumityContent:nil andBbsType:4];
-}
-
-- (void)searchHelpButtonClick:(UIButton *)button {
-    self.tabBarController.selectedIndex = 2;
-    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
-    vc.index = 1;
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShowBazaar object:nil];
-}
-
-- (void)changeSkillButtonClick:(UIButton *)button {
-    self.tabBarController.selectedIndex = 2;
-    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
-    vc.index = 0;
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseSkill object:nil];
-}
-
-- (void)moreButtonClick:(UIButton *)button {
-    ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-#pragma mark - 热门活动图片点击事件
-
+#pragma mark - 热门活动图片 点击事件
 - (void)imageButtonClick:(UIButton *)button {
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
@@ -517,59 +489,30 @@ updatingLocation:(BOOL)updatingLocation {
     }
 }
 
-#pragma mark - 寻圈子8个按钮点击事件
-
-- (void)emotionButtonClick:(UIButton *)button {
-    [self giveCommumityContent:@"情感" andBbsType:5];
+#pragma mark - 寻圈子 点击事件
+- (void)searchCircleButtonClick{
+    __weakSelf
+    self.rsusableView.searchCircleButtonTag = ^(NSInteger tag){
+        
+        NSArray *bbsMarkArray = @[ @"情感", @"搞笑", @"影视", @"二次元", @"生活", @"明星", @"爱美", @"宠物" ];
+        [weakSelf giveCommumityContent:bbsMarkArray[tag - 1000] andBbsType:5];
+    };
 }
-
-- (void)funnyButtonClick:(UIButton *)button {
-    [self giveCommumityContent:@"搞笑" andBbsType:5];
-}
-
-- (void)moviesButtonClick:(UIButton *)button {
-    [self giveCommumityContent:@"影视" andBbsType:5];
-}
-
-- (void)quadraticButtonClick:(UIButton *)button {
-    [self giveCommumityContent:@"二次元" andBbsType:5];
-}
-
-- (void)lifeButtonClick:(UIButton *)button {
-    [self giveCommumityContent:@"生活" andBbsType:5];
-}
-
-- (void)starButtonClick:(UIButton *)button {
-    [self giveCommumityContent:@"明星" andBbsType:5];
-}
-
-- (void)beautifulButtonClick:(UIButton *)button {
-    [self giveCommumityContent:@"爱美" andBbsType:5];
-}
-
-- (void)petButtonClick:(UIButton *)button {
-    [self giveCommumityContent:@"宠物" andBbsType:5];
-}
-
-#pragma mark - 加入更多圈子点击事件
-
+#pragma mark - 加入更多圈子 点击事件
 - (void)gestureButtonClick:(UIButton *)button {
     [self giveCommumityContent:@"社区" andBbsType:5];
 }
 
 #pragma mark - 寻圈子跳转刷新
-
 - (void)giveCommumityContent:(NSString *)bbsMark andBbsType:(float)bbsType {
     self.tabBarController.selectedIndex = 3;
     ODCommumityViewController *vc = self.tabBarController.selectedViewController.childViewControllers[0];
     vc.bbsMark = bbsMark;
     vc.bbsType = bbsType;
-    NSLog(@"%@", bbsMark);
     [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationSearchCircle object:nil];
 }
 
-#pragma mark - 用户头像点击事件
-
+#pragma mark - 用户头像 点击事件
 - (void)headButtonClick:(UIButton *)button {
     ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *) button.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
@@ -585,17 +528,7 @@ updatingLocation:(BOOL)updatingLocation {
     }
 }
 
-#pragma mark - 了解更多技能点击事件
-
-- (void)moreSkillButtonClick:(UIButton *)button {
-    self.tabBarController.selectedIndex = 2;
-    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
-    vc.index = 0;
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseSkill object:nil];
-}
-
-#pragma mark - 技能交换cell图片点击事件
-
+#pragma mark - 技能交换图片 点击事件
 - (void)imageButtonClicked:(UIButton *)button {
     ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *) button.superview.superview.superview;
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
@@ -607,6 +540,13 @@ updatingLocation:(BOOL)updatingLocation {
     [self presentViewController:picController animated:YES completion:nil];
 }
 
+#pragma mark - 了解更多技能 点击事件
+- (void)moreSkillButtonClick:(UIButton *)button {
+    self.tabBarController.selectedIndex = 2;
+    ODBazaarViewController *vc = self.tabBarController.childViewControllers[2].childViewControllers[0];
+    vc.index = 0;
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseSkill object:nil];
+}
 
 - (void)pushToPlace
 {
