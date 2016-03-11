@@ -70,6 +70,7 @@
     }];
     
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weakSelf.count = 1;
         [weakSelf joiningTogetherParmeters];
     }];
     
@@ -128,7 +129,6 @@
 {
     self.bbsType = self.bbsType ? self.bbsType :5;
     self.bbsMark = self.bbsMark ? self.bbsMark :@"";
-    self.count = 1;
     NSDictionary *parameter;
     if ([self.bbsMark isEqualToString:@""]||[self.bbsMark isEqualToString:@"社区"]) {
         [self.button setTitle:@"社区" forState:UIControlStateNormal];
@@ -231,19 +231,17 @@
     return cell;
 }
 
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
-}
-
 #pragma mark - UIPopDelegate
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
     return UIModalPresentationNone;
 }
 
 #pragma mark - UICollectionDelegate
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc]init];
     detailController.myBlock = ^(NSString *refresh){
         self.releaseSuccess = refresh;
@@ -332,7 +330,6 @@
         self.bbsMark = @"全部";
     }
     self.bbsType = 5;
-    [self joiningTogetherParmeters];
     [self.collectionView.mj_header beginRefreshing];
     [self dismissViewControllerAnimated:NO completion:^{
     }];

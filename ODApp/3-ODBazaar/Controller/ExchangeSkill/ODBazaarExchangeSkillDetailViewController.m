@@ -13,151 +13,96 @@
 
 @interface ODBazaarExchangeSkillDetailViewController ()
 
-
-@property(nonatomic, copy) NSString *love_num;
-
-
 @end
 
 @implementation ODBazaarExchangeSkillDetailViewController
 
+#pragma mark - lazyload
+-(UIScrollView *)scrollView
+{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - 64 - 49)];
+        _scrollView.userInteractionEnabled = YES;
+        _scrollView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        [self.view addSubview:_scrollView];
+    }
+    return _scrollView;
+}
 
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self createRequest];
-    [self createScrollView];
-    [self joiningTogetherParmeters];
     self.navigationItem.title = self.nick;
+    [self requestData];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
-
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
 }
 
-- (void)backAction:(UIBarButtonItem *)sender {
-
-    NSDictionary *loveDict = [[NSDictionary alloc] initWithObjectsAndKeys:self.love_num, @"loveNumber", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationloveSkill object:nil userInfo:loveDict];
-
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
-
-#pragma mark - 分享
-
-- (void)shareButtonClick {
-
-    @try {
-
-
-        if ([WXApi isWXAppInstalled]) {
-
-
-            [UMSocialConfig setFinishToastIsHidden:YES position:UMSocialiToastPositionCenter];
-
-            
-            NSString *url = [self.model.share valueForKeyPath:@"icon"];
-            NSString *content = [self.model.share valueForKeyPath:@"desc"];
-            NSString *link = [self.model.share valueForKeyPath:@"link"];
-            NSString *title = [self.model.share valueForKeyPath:@"title"];
-
-
-            [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-
-            [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-            [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-
-            [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-
-            [UMSocialSnsService presentSnsIconSheetView:self
-                                                 appKey:kGetUMAppkey
-                                              shareText:content
-                                             shareImage:nil
-                                        shareToSnsNames:@[UMShareToWechatSession, UMShareToWechatTimeline]
-                                               delegate:self];
-
-        } else {
-
-            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
-
-
-        }
-
-
-    }
-    @catch (NSException *exception) {
-        [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
-    }
-
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-
-- (void)createRequest {
-//    self.dataArray = [[NSMutableArray alloc] init];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
-#pragma mark - 拼接参数
-
-- (void)joiningTogetherParmeters {
-    NSDictionary *parameter = @{@"swap_id" : self.swap_id};
-    [self downLoadDataWithUrl:ODUrlSwapInfo parameter:parameter];
-}
-
-- (void)downLoadDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter {
+#pragma mark - 数据请求
+- (void)requestData
+{
     __weakSelf;
-    
-    [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarExchangeSkillDetailModel class] success:^(id model) {
-
+    NSDictionary *parameter = @{@"swap_id" : self.swap_id};
+    [ODHttpTool getWithURL:ODUrlSwapInfo parameters:parameter modelClass:[ODBazaarExchangeSkillDetailModel class] success:^(id model) {
         weakSelf.model = [model result];
         weakSelf.love_id = [NSString stringWithFormat:@"%@", [weakSelf.model valueForKeyPath:@"love_id"]];
         weakSelf.love_num = [NSString stringWithFormat:@"%@", [weakSelf.model valueForKeyPath:@"love_num"]];
-
         [weakSelf createUserInfoView];
         [weakSelf createDetailView];
         [weakSelf createBottomView];
-        
     } failure:^(NSError *error) {
         
-        
     }];
-
-    
-
-//    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
-//
-//        if (responseObject) {
-//            [weakSelf.dataArray removeAllObjects];
-//            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//            NSDictionary *result = dict[@"result"];
-//            ODBazaarExchangeSkillModel *model = [[ODBazaarExchangeSkillModel alloc] init];
-//            [model setValuesForKeysWithDictionary:result];
-//            [weakSelf.dataArray addObject:model];
-//            weakSelf.love_id = [NSString stringWithFormat:@"%d", model.love_id];
-//            weakSelf.love_num = [NSString stringWithFormat:@"%d", model.love_num];
-//            [weakSelf createUserInfoView];
-//            [weakSelf createDetailView];
-//            [weakSelf createBottomView];
-//        }
-//    }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-//
-//    }];
-    
-
-
 }
 
-- (void)createScrollView {
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - 64 - 49)];
-    self.scrollView.userInteractionEnabled = YES;
-    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    [self.view addSubview:self.scrollView];
+- (void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isLove:(BOOL)love {
+    __weakSelf;
+    [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarExchangeSkillDetailLoveModel class] success:^(ODBazaarExchangeSkillDetailLoveModelResponse *model) {
+        if (love) {
+            weakSelf.love = @"love";
+            [weakSelf requestData];
+            ODBazaarExchangeSkillDetailLoveModel *loveModel = [model result];
+            weakSelf.love_id = [NSString stringWithFormat:@"%d",loveModel.love_id];
+            [ODProgressHUD showInfoWithStatus:@"收藏成功"];
+        }else{
+            weakSelf.love = @"love";
+            [weakSelf requestData];
+            [ODProgressHUD showInfoWithStatus:@"取消收藏"];
+        }
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark - UMSocialUIDelegate
+- (void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response {
+    if (response.responseCode == UMSResponseCodeSuccess) {
+        NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:self.swap_id, @"obj_id", @"3", @"type", @"微信", @"share_platform", nil];
+        [ODHttpTool getWithURL:ODUrlOtherShareCallBack parameters:infoDic modelClass:[NSObject class] success:^(id model) {
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    }
 }
 
 - (void)createUserInfoView {
-//    ODBazaarExchangeSkillDetailModel *model = [self.dataArray objectAtIndex:0];
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(otherInfoClick)];
     UIView *userInfoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 73)];
     userInfoView.backgroundColor = [UIColor whiteColor];
@@ -194,19 +139,7 @@
     [userInfoView addSubview:lineView];
 }
 
-- (void)otherInfoClick {
-//    ODBazaarExchangeSkillDetailModel *model = [self.dataArray objectAtIndex:0];
-    ODOthersInformationController *otherInfo = [[ODOthersInformationController alloc] init];
-    otherInfo.open_id = self.model.user[@"open_id"];
-    if ([self.model.user[@"open_id"] isEqualToString:[ODUserInformation sharedODUserInformation].openID]) {
-
-    } else {
-        [self.navigationController pushViewController:otherInfo animated:YES];
-    }
-}
-
 - (void)createDetailView {
-//    ODBazaarExchangeSkillDetailModel *model = [self.dataArray objectAtIndex:0];
     self.detailView = [[UIView alloc] initWithFrame:CGRectMake(0, 66, kScreenSize.width, 200)];
     self.detailView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.detailView];
@@ -248,7 +181,7 @@
         }];
         [self.detailView addSubview:imageView];
     }
-    self.loveImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kScreenSize.width - 181) / 2, CGRectGetMaxY(frame) + 30, 181, 40)];
+    self.loveImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kScreenSize.width - 181)/2, CGRectGetMaxY(frame)+30, 181, 40)];
     self.loveImageView.image = [UIImage imageNamed:@"Skills profile page_share"];
     [self.detailView addSubview:self.loveImageView];
     self.detailView.frame = CGRectMake(0, 66, kScreenSize.width, self.loveImageView.frame.origin.y + self.loveImageView.frame.size.height + 60);
@@ -257,48 +190,27 @@
 }
 
 - (void)createLoveButton {
-//    ODBazaarExchangeSkillDetailModel *model = [self.dataArray objectAtIndex:0];
+    NSInteger count;
     if (self.model.loves.count < 8) {
-        for (NSInteger i = 0; i < self.model.loves.count; i++) {
-            NSDictionary *dict = self.model.loves[i];
-            CGFloat width = 30;
-            UIButton *button = [[UIButton alloc] init];
-            button.frame = CGRectMake((kScreenSize.width - (self.model.loves.count - 1) * 10 - self.model.loves.count * width) / 2 + (width + 10) * i, CGRectGetMaxY(self.loveImageView.frame) + 15, width, width);
-            button.layer.masksToBounds = YES;
-            button.layer.cornerRadius = width / 2;
-            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString: [dict valueForKeyPath:@"avatar"]] forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-            [self.detailView addSubview:button];
-        }
-    } else {
-        for (NSInteger i = 0; i < 7; i++) {
-            NSDictionary *dict = self.model.loves[i];
-            CGFloat width = 30;
-            UIButton *button = [[UIButton alloc] init];
-            button.frame = CGRectMake((kScreenSize.width - 6 * 10 - 7 * width) / 2 + (width + 10) * i, CGRectGetMaxY(self.loveImageView.frame) + 15, width, width);
-            button.layer.masksToBounds = YES;
-            button.layer.cornerRadius = width / 2;
-            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[dict valueForKeyPath:@"avatar"]] forState:UIControlStateNormal];
-            [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-            [self.detailView addSubview:button];
-        }
+        count = self.model.loves.count;
+    }else{
+        count = 7;
+    }
+    for (NSInteger i = 0; i < count; i++) {
+        NSDictionary *dict = self.model.loves[i];
+        CGFloat width = 30;
+        UIButton *button = [[UIButton alloc] init];
+        button.frame = CGRectMake((kScreenSize.width-(count-1)*10-count*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+15, width, width);
+        button.layer.masksToBounds = YES;
+        button.layer.cornerRadius = width / 2;
+        [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString: [dict valueForKeyPath:@"avatar"]] forState:UIControlStateNormal];
+        [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self.detailView addSubview:button];
     }
 }
 
-#pragma mark - 收藏人列表点击事件
-
-- (void)lovesListButtonClick:(UIButton *)button {
-//    ODBazaarExchangeSkillDetailModel *model = [self.dataArray objectAtIndex:0];
-    ODCollectionController *collection = [[ODCollectionController alloc] init];
-    collection.open_id = [self.model.user valueForKeyPath:@"open_id"];
-    collection.swap_id = [NSString stringWithFormat:@"%d", self.model.swap_id];
-    [self.navigationController pushViewController:collection animated:YES];
-}
-
 #pragma mark - 底部收藏购买试图
-
 - (void)createBottomView {
-//    ODBazaarExchangeSkillDetailModel *model = [self.dataArray objectAtIndex:0];
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 64 - 49, kScreenSize.width, 49)];
     [bottomView setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6" alpha:1]];
     [self.view addSubview:bottomView];
@@ -311,7 +223,6 @@
     [bottomView addSubview:loveButton];
 
     UIImageView *loveImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, 17, 15, 15)];
-
     [loveButton addSubview:loveImageView];
 
     self.loveLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(loveImageView.frame) + 5, 18, 50, 13)];
@@ -341,7 +252,59 @@
     [bottomView addSubview:payButton];
 }
 
-#pragma mark - 收藏事件
+#pragma mark - action
+- (void)backAction:(UIBarButtonItem *)sender {
+    NSDictionary *loveDict = [[NSDictionary alloc] initWithObjectsAndKeys:self.love_num, @"loveNumber", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationloveSkill object:nil userInfo:loveDict];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)shareButtonClick {
+    @try {
+        if ([WXApi isWXAppInstalled]) {
+            [UMSocialConfig setFinishToastIsHidden:YES position:UMSocialiToastPositionCenter];
+            
+            NSString *url = [self.model.share valueForKeyPath:@"icon"];
+            NSString *content = [self.model.share valueForKeyPath:@"desc"];
+            NSString *link = [self.model.share valueForKeyPath:@"link"];
+            NSString *title = [self.model.share valueForKeyPath:@"title"];
+            [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
+            [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
+            [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
+            [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
+            [UMSocialSnsService presentSnsIconSheetView:self
+                                                 appKey:kGetUMAppkey
+                                              shareText:content
+                                             shareImage:nil
+                                        shareToSnsNames:@[UMShareToWechatSession, UMShareToWechatTimeline]
+                                               delegate:self];
+            
+        } else {
+            
+            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
+        }
+    }
+    @catch (NSException *exception) {
+        [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
+    }
+}
+
+- (void)otherInfoClick {
+    ODOthersInformationController *otherInfo = [[ODOthersInformationController alloc] init];
+    otherInfo.open_id = self.model.user[@"open_id"];
+    if ([self.model.user[@"open_id"] isEqualToString:[ODUserInformation sharedODUserInformation].openID]) {
+    } else {
+        [self.navigationController pushViewController:otherInfo animated:YES];
+    }
+}
+
+- (void)lovesListButtonClick:(UIButton *)button {
+    ODCollectionController *collection = [[ODCollectionController alloc] init];
+    collection.open_id = [self.model.user valueForKeyPath:@"open_id"];
+    collection.swap_id = [NSString stringWithFormat:@"%d", self.model.swap_id];
+    [self.navigationController pushViewController:collection animated:YES];
+}
 
 - (void)loveButtonClick:(UIButton *)button {
     if ([[[ODUserInformation sharedODUserInformation] openID] isEqualToString:@""]) {
@@ -358,87 +321,26 @@
     }
 }
 
-- (void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isLove:(BOOL)love {
-    __weakSelf;
-    [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarExchangeSkillDetailLoveModel class] success:^(ODBazaarExchangeSkillDetailLoveModelResponse *model) {
-        if (love) {
-            weakSelf.love = @"love";
-            [weakSelf joiningTogetherParmeters];
-            ODBazaarExchangeSkillDetailLoveModel *loveModel = [model result];
-            weakSelf.love_id = [NSString stringWithFormat:@"%d",loveModel.love_id];
-            [ODProgressHUD showInfoWithStatus:@"收藏成功"];
-        }else{
-            weakSelf.love = @"love";
-            [weakSelf joiningTogetherParmeters];
-            [ODProgressHUD showInfoWithStatus:@"取消收藏"];
-        }
-    } failure:^(NSError *error) {
-        
-    }];
-}
-
-#pragma mark - 立即购买事件
 - (void)payButtonClick:(UIButton *)button {
-
-//    ODBazaarExchangeSkillModel *model = [self.dataArray objectAtIndex:0];
     NSString *type = [NSString stringWithFormat:@"%d", self.model.swap_type];
-
     if ([[[ODUserInformation sharedODUserInformation] openID] isEqualToString:@""]) {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
-
     } else {
         if ([type isEqualToString:@"1"]) {
             ODOrderController *vc = [[ODOrderController alloc] init];
             vc.informationModel = self.model;
             [self.navigationController pushViewController:vc animated:YES];
         } else if ([type isEqualToString:@"2"]) {
-
             ODSecondOrderController *orderController = [[ODSecondOrderController alloc] init];
             orderController.informationModel = self.model;
             [self.navigationController pushViewController:orderController animated:YES];
-
         } else {
             ODThirdOrderController *orderController = [[ODThirdOrderController alloc] init];
             orderController.informationModel = self.model;
             [self.navigationController pushViewController:orderController animated:YES];
         }
     }
-}
-
-- (void)didFinishGetUMSocialDataInViewController:(UMSocialResponseEntity *)response {
-
-    if (response.responseCode == UMSResponseCodeSuccess) {
-
-        NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:self.swap_id, @"obj_id", @"3", @"type", @"微信", @"share_platform", nil];
-        [ODHttpTool getWithURL:ODUrlOtherShareCallBack parameters:infoDic modelClass:[NSObject class] success:^(id model) {
-//             [ODProgressHUD showSuccessWithStatus:@"分享成功"];
-                }
-                       failure:^(NSError *error) {
-
-                       }];
-
-
-    }
-
-}
-
-- (void)didFinishGetUMSocialDataResponse:(UMSocialResponseEntity *)response {
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 @end

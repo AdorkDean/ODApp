@@ -14,56 +14,71 @@
 
 @implementation ODBazaarReleaseTaskViewController
 
+#pragma mark - lazyload
+-(UIScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - 64)];
+        _scrollView.userInteractionEnabled = YES;
+        _scrollView.contentSize = CGSizeMake(kScreenSize.width, 504);
+        [self.view addSubview:_scrollView];
+    }
+    return _scrollView;
+}
+
+-(UIDatePicker *)datePicker{
+    if (!_datePicker) {
+        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width - 8, 150)];
+        [self.backPickerView addSubview:_datePicker];
+        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+        _datePicker.locale = locale;
+        [self.backPickerView addSubview:_datePicker];
+        UIButton *cancelPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 150, kScreenSize.width / 2 - 4, 50) target:self sel:@selector(cancelPickerButtonClick:) tag:0 image:nil title:@"取消" font:16];
+        [self.backPickerView addSubview:cancelPickerButton];
+        UIButton *confirmPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width / 2 - 4, 150, kScreenSize.width / 2 - 4, 50) target:self sel:@selector(confirmPickerButtonClick:) tag:0 image:nil title:@"确认" font:16];
+        [self.backPickerView addSubview:confirmPickerButton];
+    }
+    return _datePicker;
+}
+
+-(UIView *)backPickerView{
+    if (!_backPickerView) {
+        _backPickerView = [[UIView alloc]initWithFrame:CGRectMake(4, kScreenSize.height - 200 - 64, kScreenSize.width - 8, 200)];
+        _backPickerView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+        [self.view addSubview:_backPickerView];
+    }
+    return _backPickerView;
+}
+
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self navigationInit];
-    [self createScrollView];
+    self.navigationItem.title = @"新任务";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
     [self createTitleTextView];
     [self createTimeLabel];
     [self createTaskDetailTextView];
     [self createTaskRewardLabel];
 }
 
-
-#pragma mark - 初始化导航
-
-- (void)navigationInit {
-    self.navigationItem.title = @"新任务";
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
-}
-
-- (void)confirmButtonClick:(UIButton *)button {
-
-    [self.titleTextView resignFirstResponder];
-    [self.taskDetailTextView resignFirstResponder];
-    [self.backPickerView removeFromSuperview];
-
-    if (self.titleTextView.text.length > 0 && self.taskDetailTextView.text.length > 0) {
-        [self joiningTogetherParmeters];
-    } else {
-        if (self.titleTextView.text.length == 0) {
-//            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入任务标题"];
-            [ODProgressHUD showInfoWithStatus:@"请输入任务标题"];
-        } else if (self.taskDetailTextView.text.length == 0) {
-//            [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"请输入任务内容"];
-            [ODProgressHUD showInfoWithStatus:@"请输入任务内容"];
-        }
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.isJob) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
-#pragma mark - 创建scrollView
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
 
-- (void)createScrollView {
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - 64)];
-    self.scrollView.userInteractionEnabled = YES;
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width, 504);
-    [self.view addSubview:self.scrollView];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - 创建titleTextView
-
 - (void)createTitleTextView {
     self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 140) delegate:self tag:0 font:14 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.scrollView addSubview:self.titleTextView];
@@ -71,11 +86,9 @@
     self.titleLabel.textColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1];
     self.titleLabel.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.titleLabel];
-
 }
 
 #pragma mark - 创建时间Label
-
 - (void)createTimeLabel {
     CGFloat width = (kScreenSize.width - 16) / 12;
     NSArray *array = @[@"开始时间", @"结束时间"];
@@ -111,7 +124,7 @@
     NSString *endTimeString = [endTimeFormatter stringFromDate:endDate];
 
     //开始日期label
-    UITapGestureRecognizer *startDateGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startDateGestureClick)];
+    UITapGestureRecognizer *startDateGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dateGestureClick)];
     UIView *startDateView = [ODClassMethod creatViewWithFrame:CGRectMake(8 + 3.5 * width, 148, 5 * width, 30.5) tag:0 color:@"#ffffff"];
     [startDateView addGestureRecognizer:startDateGesture];
     startDateView.layer.masksToBounds = YES;
@@ -129,7 +142,7 @@
     [startDateView addSubview:startDateImageView];
 
     //结束日期label
-    UITapGestureRecognizer *endDateGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endDateGestureClick)];
+    UITapGestureRecognizer *endDateGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dateGestureClick)];
     UIView *endDateView = [ODClassMethod creatViewWithFrame:CGRectMake(8 + 3.5 * width, 182.5, 5 * width, 30.5) tag:0 color:@"#ffffff"];
     [endDateView addGestureRecognizer:endDateGesture];
     endDateView.layer.masksToBounds = YES;
@@ -147,7 +160,7 @@
     [endDateView addSubview:endDateImageView];
 
     //开始时间label
-    UITapGestureRecognizer *startTimeGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startTimeGestureClick)];
+    UITapGestureRecognizer *startTimeGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeGestureClick)];
     UIView *startTimeView = [ODClassMethod creatViewWithFrame:CGRectMake(12 + 8.5 * width, 148, 3.5 * width, 30.5) tag:0 color:@"#ffffff"];
     [startTimeView addGestureRecognizer:startTimeGesture];
     startTimeView.layer.masksToBounds = YES;
@@ -165,7 +178,7 @@
 
 
     //结束时间label
-    UITapGestureRecognizer *endTimeGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endTimeGestureClick)];
+    UITapGestureRecognizer *endTimeGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeGestureClick)];
     UIView *endTimeView = [ODClassMethod creatViewWithFrame:CGRectMake(12 + 8.5 * width, 182.5, 3.5 * width, 30.5) tag:0 color:@"#ffffff"];
     [endTimeView addGestureRecognizer:endTimeGesture];
     endTimeView.layer.masksToBounds = YES;
@@ -182,81 +195,20 @@
     [endTimeView addSubview:endTimeImageView];
 }
 
-- (void)startDateGestureClick {
+- (void)dateGestureClick {
     [self.titleTextView resignFirstResponder];
     [self.taskDetailTextView resignFirstResponder];
-    [self.backPickerView removeFromSuperview];
-    [self setUpDatePickerView];
+    self.backPickerView.hidden = NO;
     self.datePicker.datePickerMode = UIDatePickerModeDate;
-    self.type = @"startDate";
+    self.type = @"date";
 }
 
-- (void)endDateGestureClick {
+- (void)timeGestureClick {
     [self.titleTextView resignFirstResponder];
     [self.taskDetailTextView resignFirstResponder];
-    [self.backPickerView removeFromSuperview];
-    [self setUpDatePickerView];
-    self.datePicker.datePickerMode = UIDatePickerModeDate;
-    self.type = @"endDate";
-}
-
-- (void)startTimeGestureClick {
-    [self.titleTextView resignFirstResponder];
-    [self.taskDetailTextView resignFirstResponder];
-    [self.backPickerView removeFromSuperview];
-    [self setUpDatePickerView];
+    self.backPickerView.hidden = NO;
     self.datePicker.datePickerMode = UIDatePickerModeTime;
-    self.type = @"startTime";
-}
-
-- (void)endTimeGestureClick {
-    [self.titleTextView resignFirstResponder];
-    [self.taskDetailTextView resignFirstResponder];
-    [self.backPickerView removeFromSuperview];
-    [self setUpDatePickerView];
-    self.datePicker.datePickerMode = UIDatePickerModeTime;
-    self.type = @"endTime";
-}
-
-#pragma mark - 初始化datePickerView
-
-- (void)setUpDatePickerView {
-    self.backPickerView = [ODClassMethod creatViewWithFrame:CGRectMake(4, kScreenSize.height - 200 - 64, kScreenSize.width - 8, 200) tag:0 color:@"f3f3f3"];
-    [self.view addSubview:self.backPickerView];
-
-    //显示中文
-    self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width - 8, 150)];
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-    self.datePicker.locale = locale;
-    //只能选择大于当前时间的日期
-//    [self.datePicker setMinimumDate:[NSDate date]];
-    [self.backPickerView addSubview:self.datePicker];
-
-    UIButton *cancelPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 150, kScreenSize.width / 2 - 4, 50) target:self sel:@selector(cancelPickerButtonClick:) tag:0 image:nil title:@"取消" font:16];
-    [self.backPickerView addSubview:cancelPickerButton];
-    UIButton *confirmPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width / 2 - 4, 150, kScreenSize.width / 2 - 4, 50) target:self sel:@selector(confirmPickerButtonClick:) tag:0 image:nil title:@"确认" font:16];
-    [self.backPickerView addSubview:confirmPickerButton];
-}
-
-
-//确认datePickerView
-- (void)confirmPickerButtonClick:(UIButton *)button {
-    if ([self.type isEqualToString:@"startDate"]) {
-        self.startDateLabel.text = [NSString stringWithFormat:@"%@", [self timeFormatDate:YES]];
-    } else if ([self.type isEqualToString:@"endDate"]) {
-        self.endDateLabel.text = [NSString stringWithFormat:@"%@", [self timeFormatDate:YES]];
-    } else if ([self.type isEqualToString:@"startTime"]) {
-        self.startTimeLabel.text = [NSString stringWithFormat:@"%@", [self timeFormatDate:NO]];
-    } else if ([self.type isEqualToString:@"endTime"]) {
-        self.endTimeLabel.text = [NSString stringWithFormat:@"%@", [self timeFormatDate:NO]];
-    }
-    self.type = nil;
-    [self.backPickerView removeFromSuperview];
-}
-
-//取消datePickerView
-- (void)cancelPickerButtonClick:(UIButton *)button {
-    [self.backPickerView removeFromSuperview];
+    self.type = @"time";
 }
 
 //时间格式
@@ -273,7 +225,6 @@
 }
 
 #pragma mark - 创建taskDetailTextView
-
 - (void)createTaskDetailTextView {
     self.taskDetailTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 217, kScreenSize.width - 8, 245) delegate:self tag:0 font:14 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.scrollView addSubview:self.taskDetailTextView];
@@ -284,7 +235,6 @@
 }
 
 #pragma mark - 创建TaskRewardLabel
-
 - (void)createTaskRewardLabel {
     UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(taskRewardClick)];
     UIView *taskeRewardView = [ODClassMethod creatViewWithFrame:CGRectMake(4, 465, kScreenSize.width - 8, 34) tag:0 color:@"#ffffff"];
@@ -304,73 +254,19 @@
     [taskeRewardView addSubview:imageVidew];
 }
 
-//任务奖励
-- (void)taskRewardClick {
-    ODBazaarReleaseRewardViewController *reward = [[ODBazaarReleaseRewardViewController alloc] init];
-    [self.navigationController pushViewController:reward animated:YES];
-    reward.taskRewardBlock = ^(NSString *name) {
-        self.taskRewardLabel.text = [NSString stringWithFormat:@"  %@", name];
-    };
-}
-
-
-
-#pragma mark - 拼接参数
-
-- (void)joiningTogetherParmeters {
-    NSDictionary *parameter;
-    if ([self.taskRewardLabel.text isEqualToString:@"  选择任务奖励"]) {
-        parameter = @{@"title" : self.titleTextView.text, @"tag_ids" : @"", @"start_time" : [[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text], @"end_time" : [[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text], @"content" : self.taskDetailTextView.text, @"open_id" : [ODUserInformation sharedODUserInformation].openID,@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
-    } else {
-        parameter = @{@"title" : self.titleTextView.text, @"tag_ids" : @"", @"start_time" : [[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text], @"end_time" : [[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text], @"content" : self.taskDetailTextView.text, @"reward_name" : [self.taskRewardLabel.text substringFromIndex:2], @"open_id" : [ODUserInformation sharedODUserInformation].openID,@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
-    }
-
-//    [self pushDataWithUrl:ODUrlBazaarReleaseTask parameter:parameter];
-
-    [self pushDataWithUrl:ODUrlTaskTaskAdd parameter:parameter];
-
-}
-
 #pragma mark - 提交数据
-- (void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter {
-
-
-//    __weak typeof(self) weakSelf = self;
-//    [self.manager GET:url parameters:parameter success:^(AFHTTPRequestOperation *_Nonnull operation, id _Nonnull responseObject) {
-//
-//        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
-//        NSString *status = dict[@"status"];
-//        if ([status isEqualToString:@"success"]) {
-//            if (weakSelf.myBlock) {
-//                weakSelf.myBlock([NSString stringWithFormat:@"release"]);
-//            }
-//
-//            weakSelf.isJob = YES;
-//            if (weakSelf.isBazaar == NO) {
-//                ODTabBarController *tabbar = (ODTabBarController *) self.navigationController.tabBarController;
-//                tabbar.selectedIndex = 2;
-//            }
-//            else {
-//                [ODProgressHUD showInfoWithStatus:@"任务发布成功"];
-//                [weakSelf.navigationController popViewControllerAnimated:YES];
-//            }
-//
-//            [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationReleaseTask object:nil];
-//
-//        } else {
-//            NSString *message = dict[@"message"];
-//            [ODProgressHUD showInfoWithStatus:message];
-//        }
-//    }         failure:^(AFHTTPRequestOperation *_Nullable operation, NSError *_Nonnull error) {
-//        NSLogError
-//    }];
-    
+- (void)pushData{
     __weakSelf
-    [ODHttpTool getWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
+     NSDictionary *parameter;
+    if ([self.taskRewardLabel.text isEqualToString:@"  选择任务奖励"]) {
+        parameter = @{@"title" : self.titleTextView.text, @"tag_ids" : @"", @"start_time" : [[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text], @"end_time" : [[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text], @"content" : self.taskDetailTextView.text};
+    } else {
+        parameter = @{@"title" : self.titleTextView.text, @"tag_ids" : @"", @"start_time" : [[self.startDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.startTimeLabel.text], @"end_time" : [[self.endDateLabel.text stringByAppendingString:@" "] stringByAppendingString:self.endTimeLabel.text], @"content" : self.taskDetailTextView.text, @"reward_name" : [self.taskRewardLabel.text substringFromIndex:2]};
+    }
+    [ODHttpTool getWithURL:ODUrlTaskTaskAdd parameters:parameter modelClass:[NSObject class] success:^(id model) {
         if (weakSelf.myBlock) {
             weakSelf.myBlock([NSString stringWithFormat:@"release"]);
         }
-
         weakSelf.isJob = YES;
         if (weakSelf.isBazaar == NO) {
             ODTabBarController *tabbar = (ODTabBarController *) self.navigationController.tabBarController;
@@ -386,10 +282,8 @@
 }
 
 #pragma mark - UITextViewDelegate
-
 NSString *taskTitleText = @"";
 NSString *taskDetailText = @"";
-
 - (void)textViewDidChange:(UITextView *)textView {
     if (textView == self.titleTextView) {
         if (textView.text.length > 30) {
@@ -397,7 +291,6 @@ NSString *taskDetailText = @"";
         } else {
             taskTitleText = textView.text;
         }
-
         if (self.titleTextView.text.length == 0) {
             self.titleLabel.text = @"请输入任务标题";
         } else {
@@ -419,7 +312,6 @@ NSString *taskDetailText = @"";
     }
 }
 
-
 - (void)textViewDidEndEditing:(UITextView *)textView {
     if (textView == self.titleTextView) {
         if (textView.text.length == 0) {
@@ -433,24 +325,44 @@ NSString *taskDetailText = @"";
 }
 
 
-#pragma mark - 试图将要出现
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    if (self.isJob) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+#pragma mark - action
+- (void)confirmButtonClick:(UIButton *)button {
+    [self.titleTextView resignFirstResponder];
+    [self.taskDetailTextView resignFirstResponder];
+    [self.backPickerView removeFromSuperview];
+    if (self.titleTextView.text.length > 0 && self.taskDetailTextView.text.length > 0) {
+        [self pushData];
+    } else {
+        if (self.titleTextView.text.length == 0) {
+            [ODProgressHUD showInfoWithStatus:@"请输入任务标题"];
+        } else if (self.taskDetailTextView.text.length == 0) {
+            [ODProgressHUD showInfoWithStatus:@"请输入任务内容"];
+        }
     }
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)confirmPickerButtonClick:(UIButton *)button {
+    if ([self.type isEqualToString:@"date"]) {
+        self.startDateLabel.text = [NSString stringWithFormat:@"%@", [self timeFormatDate:YES]];
+        self.endDateLabel.text = [NSString stringWithFormat:@"%@", [self timeFormatDate:YES]];
+    } else if ([self.type isEqualToString:@"time"]) {
+        self.startTimeLabel.text = [NSString stringWithFormat:@"%@", [self timeFormatDate:NO]];
+        self.endTimeLabel.text = [NSString stringWithFormat:@"%@", [self timeFormatDate:NO]];
+    }
+    self.type = nil;
+    self.backPickerView.hidden = YES;
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
+- (void)cancelPickerButtonClick:(UIButton *)button {
+    self.backPickerView.hidden = YES;
 }
+
+- (void)taskRewardClick {
+    ODBazaarReleaseRewardViewController *reward = [[ODBazaarReleaseRewardViewController alloc] init];
+    [self.navigationController pushViewController:reward animated:YES];
+    reward.taskRewardBlock = ^(NSString *name) {
+        self.taskRewardLabel.text = [NSString stringWithFormat:@"  %@", name];
+    };
+}
+
 @end

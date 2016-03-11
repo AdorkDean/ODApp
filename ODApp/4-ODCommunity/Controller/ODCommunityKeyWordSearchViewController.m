@@ -70,7 +70,7 @@
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         if (weakSelf.searchBar.text.length > 0) {
-            [weakSelf joiningTogetherParmeters];
+            [weakSelf requestData];
         } else {
             [weakSelf.collectionView.mj_header endRefreshing];
         }
@@ -83,18 +83,12 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
 }
 
-#pragma mark - 拼接参数
-- (void)joiningTogetherParmeters {
-    NSDictionary *parameter = @{@"kw" : self.searchBar.text, @"suggest" : @"0", @"page" : [NSString stringWithFormat:@"%ld", self.count], @"city_id" : [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"call_array" : @"1"};
-    [self downLoadDataWithUrl:ODUrlBbsSearch paramater:parameter];
-}
-
 #pragma mark - 请求数据
-- (void)downLoadDataWithUrl:(NSString *)url paramater:(NSDictionary *)parameter {
-
-    [self.searchBar resignFirstResponder];
+- (void)requestData {
     __weakSelf
-    [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODCommunityBbsModel class] success:^(ODCommunityBbsModelResponse  *model) {
+    [self.searchBar resignFirstResponder];
+     NSDictionary *parameter = @{@"kw" : self.searchBar.text, @"suggest" : @"0", @"page" : [NSString stringWithFormat:@"%ld", self.count],  @"call_array" : @"1"};
+    [ODHttpTool getWithURL:ODUrlBbsSearch parameters:parameter modelClass:[ODCommunityBbsModel class] success:^(ODCommunityBbsModelResponse  *model) {
         if (weakSelf.count == 1) {
             [weakSelf.dataArray removeAllObjects];
         }
@@ -120,7 +114,7 @@
 - (void)loadMoreData {
     if (self.searchBar.text.length > 0) {
         self.count++;
-        [self joiningTogetherParmeters];
+        [self requestData];
     } else {
         [self.collectionView.mj_footer endRefreshing];
     }
@@ -177,11 +171,11 @@
     return cell;
 }
 
+#pragma mark - UICollectionViewDelegate
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
     return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
 }
 
-#pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc] init];
     ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
@@ -206,7 +200,7 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self joiningTogetherParmeters];
+    [self requestData];
     [self.collectionView.mj_header beginRefreshing];
 }
 
@@ -235,7 +229,7 @@
 - (void)confirmButtonClick {
    [self.searchBar resignFirstResponder];
    if (self.searchBar.text.length > 0) {
-       [self joiningTogetherParmeters];
+       [self requestData];
        [self.collectionView.mj_header beginRefreshing];
    } else {
        [ODProgressHUD showInfoWithStatus:@"请输入搜索内容"];

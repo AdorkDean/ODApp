@@ -165,7 +165,6 @@
     [self.collectionView.mj_header beginRefreshing];
 }
 
-
 #pragma mark - action
 - (void)confirmButtonClick:(UIButton *)button {
     [self.searchBar resignFirstResponder];
