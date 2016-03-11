@@ -12,16 +12,79 @@
 #import <AFNetworking.h>
 #import "ODHttpTool.h"
 #import "ODProgressHUD.h"
-#import "ODAPIManager.h"
 #import "ODAPPInfoTool.h"
 #import "ODUserInformation.h"
+#import <CommonCrypto/CommonDigest.h>
+
+
 
 NSString * const requestStatus = @"status";
 NSString * const requsetResult = @"result";
 NSString * const requsetMessage = @"message";
 NSString * const requestSuccessStatus = @"success";
 
+
+
+static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
+
+
+
+@interface NSString (ODHttpTool)
+
+@property(nonatomic, strong, readonly) NSString *md5;
+
+@end
+
+
+
+@implementation NSString (LingQianHelper)
+
+- (NSString *)md5 {
+    const char *cStr = [self UTF8String];
+    unsigned char result[16];
+    CC_MD5(cStr, (CC_LONG) strlen(cStr), result);
+    NSMutableString *hash = [NSMutableString string];
+    for (int i = 0; i < 16; i++) {
+        [hash appendFormat:@"%02X", result[i]];
+    }
+    
+    return [hash uppercaseString];
+}
+
+@end
+
+
+
 @implementation ODHttpTool
+
+#pragma mark - 签名
+
++ (NSMutableDictionary *)signParameters:(NSDictionary *)parameters
+{
+    NSMutableDictionary *sigParameters = [NSMutableDictionary dictionaryWithDictionary:parameters];
+    sigParameters[@"sign"] = [self signStringWithParameters:sigParameters];
+    
+    return sigParameters;
+}
+
+
+/**
+ *  参数签名
+ *
+ *  @param parameters 参数
+ *
+ *  @return sign
+ */
++ (NSString *)signStringWithParameters:(NSDictionary *)parameters
+{
+    NSArray *allValues = [[parameters allValues] arrayByAddingObject:privateKey];
+    allValues = [allValues sortedArrayUsingSelector:@selector(compare:)];
+    NSString *signData = [allValues componentsJoinedByString:@"|"];
+    
+    return [[[[signData.md5 lowercaseString] md5] lowercaseString] substringWithRange:NSMakeRange(9, 6)];
+}
+
+
 
 + (NSMutableDictionary *)getRequestParameter:(NSDictionary *)parameter
 {
@@ -41,7 +104,7 @@ NSString * const requestSuccessStatus = @"success";
         dic[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
     }
     [dic setValuesForKeysWithDictionary:parameter];
-    return [ODAPIManager signParameters:dic];
+    return [self signParameters:dic];
 }
 
 #pragma mark - 数据请求

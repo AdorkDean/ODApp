@@ -49,7 +49,6 @@
 		232CB57B1C9264E200340D12 /* SDCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3761C9264E200340D12 /* SDCollectionViewCell.m */; };
 		232CB57C1C9264E200340D12 /* SDCycleScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3781C9264E200340D12 /* SDCycleScrollView.m */; };
 		232CB57D1C9264E200340D12 /* UIView+SDExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB37A1C9264E200340D12 /* UIView+SDExtension.m */; };
-		232CB57E1C9264E200340D12 /* ODAPIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB37D1C9264E200340D12 /* ODAPIManager.m */; };
 		232CB57F1C9264E200340D12 /* ODAPPInfoTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB37F1C9264E200340D12 /* ODAPPInfoTool.m */; };
 		232CB5801C9264E200340D12 /* ODAppRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3811C9264E200340D12 /* ODAppRegister.m */; };
 		232CB5811C9264E200340D12 /* ODGuideTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3831C9264E200340D12 /* ODGuideTool.m */; };
@@ -410,8 +409,6 @@
 		232CB3781C9264E200340D12 /* SDCycleScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCycleScrollView.m; sourceTree = "<group>"; };
 		232CB3791C9264E200340D12 /* UIView+SDExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SDExtension.h"; sourceTree = "<group>"; };
 		232CB37A1C9264E200340D12 /* UIView+SDExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SDExtension.m"; sourceTree = "<group>"; };
-		232CB37C1C9264E200340D12 /* ODAPIManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAPIManager.h; sourceTree = "<group>"; };
-		232CB37D1C9264E200340D12 /* ODAPIManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAPIManager.m; sourceTree = "<group>"; };
 		232CB37E1C9264E200340D12 /* ODAPPInfoTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAPPInfoTool.h; sourceTree = "<group>"; };
 		232CB37F1C9264E200340D12 /* ODAPPInfoTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAPPInfoTool.m; sourceTree = "<group>"; };
 		232CB3801C9264E200340D12 /* ODAppRegister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppRegister.h; sourceTree = "<group>"; };
@@ -1150,8 +1147,6 @@
 		232CB37B1C9264E200340D12 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				232CB37C1C9264E200340D12 /* ODAPIManager.h */,
-				232CB37D1C9264E200340D12 /* ODAPIManager.m */,
 				232CB37E1C9264E200340D12 /* ODAPPInfoTool.h */,
 				232CB37F1C9264E200340D12 /* ODAPPInfoTool.m */,
 				232CB3801C9264E200340D12 /* ODAppRegister.h */,
@@ -2336,7 +2331,6 @@
 				232CB5911C9264E200340D12 /* ODHomeFoundViewController.m in Sources */,
 				232CB65D1C9264E200340D12 /* ODSecondOrderDetailView.m in Sources */,
 				232CB5761C9264E200340D12 /* NSData+SDDataCache.m in Sources */,
-				232CB57E1C9264E200340D12 /* ODAPIManager.m in Sources */,
 				232CB6111C9264E200340D12 /* ODUserNickNameController.m in Sources */,
 				232CB6681C9264E200340D12 /* ODPayView.m in Sources */,
 				232CB6051C9264E200340D12 /* ODOrderDetailController.m in Sources */,

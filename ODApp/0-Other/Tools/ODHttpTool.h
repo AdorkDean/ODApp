@@ -10,6 +10,16 @@
 @interface ODHttpTool : NSObject
 
 /**
+ *  签名
+ *
+ *  @param parameters 参数
+ *
+ *  @return 签名之后的参数
+ */
++ (NSMutableDictionary *)signParameters:(NSDictionary *)parameters;
+
+
+/**
  *  封装get请求
  *
  *  @param URL        请求地址
