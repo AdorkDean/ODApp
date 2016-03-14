@@ -18,6 +18,7 @@
 #import "ODBazaarExchangeSkillDetailLoveModel.h"
 #import "ODHelp.h"
 #import "UMSocial.h"
+#import "ODPublicTool.h"
 
 
 @interface ODBazaarExchangeSkillDetailViewController : ODBaseViewController <UMSocialUIDelegate>

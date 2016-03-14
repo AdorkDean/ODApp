@@ -234,39 +234,8 @@
         ODGiveOpinionController *vc = [[ODGiveOpinionController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     }
-   else if (indexPath.section == 10)
-    {
-        if ([WXApi isWXAppInstalled]) {
-            
-            
-            [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
-            
-            
-            NSString *url = user.share.icon;
-            NSString *content = user.share.desc;
-            NSString *link = user.share.link;
-            NSString *title = user.share.title;
-            
-            [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-            [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-            [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-            [UMSocialSnsService presentSnsIconSheetView:self
-                                                 appKey:kGetUMAppkey
-                                              shareText:content
-                                             shareImage:nil
-                                        shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                               delegate:self];
-            
-            
-        }else{
-            
-            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
-            
-            
-        }
-
+   else if (indexPath.section == 10){
+        [ODPublicTool shareAppWithTarget:self dictionary:(NSDictionary *)user.share controller:self];
     }
 }
 

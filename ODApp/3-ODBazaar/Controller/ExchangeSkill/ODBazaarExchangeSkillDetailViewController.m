@@ -259,34 +259,7 @@
 }
 
 - (void)shareButtonClick {
-    @try {
-        if ([WXApi isWXAppInstalled]) {
-            [UMSocialConfig setFinishToastIsHidden:YES position:UMSocialiToastPositionCenter];
-            
-            NSString *url = [self.model.share valueForKeyPath:@"icon"];
-            NSString *content = [self.model.share valueForKeyPath:@"desc"];
-            NSString *link = [self.model.share valueForKeyPath:@"link"];
-            NSString *title = [self.model.share valueForKeyPath:@"title"];
-            [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-            [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-            [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-            [UMSocialSnsService presentSnsIconSheetView:self
-                                                 appKey:kGetUMAppkey
-                                              shareText:content
-                                             shareImage:nil
-                                        shareToSnsNames:@[UMShareToWechatSession, UMShareToWechatTimeline]
-                                               delegate:self];
-            
-        } else {
-            
-            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
-        }
-    }
-    @catch (NSException *exception) {
-        [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
-    }
+    [ODPublicTool shareAppWithTarget:self dictionary:self.model.share controller:self];
 }
 
 - (void)otherInfoClick {
