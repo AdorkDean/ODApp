@@ -1346,6 +1346,8 @@
 				232CB4131C9264E200340D12 /* ODBazaarReleaseSkillTimeViewController.m */,
 				232CB4161C9264E200340D12 /* ODCollectionController.h */,
 				232CB4171C9264E200340D12 /* ODCollectionController.m */,
+				232CB40C1C9264E200340D12 /* ODAddAddressController.h */,
+				232CB40D1C9264E200340D12 /* ODAddAddressController.m */,
 				232CB4181C9264E200340D12 /* ODContactAddressController.h */,
 				232CB4191C9264E200340D12 /* ODContactAddressController.m */,
 				232CB40C1C9264E200340D12 /* ODAddAddressController.h */,

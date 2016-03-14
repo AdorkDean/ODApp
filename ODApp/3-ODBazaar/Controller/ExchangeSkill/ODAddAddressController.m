@@ -175,28 +175,6 @@
         
         
     }];
-    
-//    [self.editeManager GET:kSaveAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//
-//
-//        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-//
-//
-//            [weakSelf deleteAddress];
-//
-//
-//        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-//
-//
-//            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-//        }
-//
-//
-//    }              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//
-//
-//    }];
-//
 
 }
 
@@ -220,34 +198,6 @@
         
     }];
     
-    
-    
-//    __weak typeof(self) weakSelf = self;
-//    [self.manager GET:kSaveAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//
-//
-//        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-//
-//            [weakSelf.navigationController popViewControllerAnimated:YES];
-//
-//
-//            [ODProgressHUD showInfoWithStatus:@"保存成功"];
-//
-//
-//        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-//
-//
-//            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-//
-//
-//        }
-//
-//
-//    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//
-//
-//    }];
-
 
 }
 
@@ -262,27 +212,6 @@
         
         
     }];
-    
-    
-//    __weak typeof(self) weakSelf = self;
-//    [self.deleteManager GET:kDeleteAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//
-//
-//        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-//
-//
-//            [weakSelf.navigationController popViewControllerAnimated:YES];
-//
-//            [ODProgressHUD showInfoWithStatus:@"修改成功"];
-//
-//
-//        }
-//
-//
-//    }               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//
-//
-//    }];
 
 }
 

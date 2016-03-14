@@ -120,7 +120,7 @@
 #pragma mark - 获取数据
 - (void)getData
 {
-    NSDictionary *parameters = @{@"swap_id" : [NSString stringWithFormat:@"%@", self.informationModel.swap_id]};
+    NSDictionary *parameters = @{@"swap_id" : [NSString stringWithFormat:@"%d", self.informationModel.swap_id]};
 
     __weakSelf
     [ODHttpTool getWithURL:ODUrlSwapServiceTime parameters:parameters modelClass:[ODOrderDataModel class] success:^(id model) {
@@ -131,27 +131,6 @@
     }];
     
     
-//    [self.manager GET:kGetServecTimeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//
-//
-//        if (responseObject) {
-//            NSMutableDictionary *dic = responseObject[@"result"];
-//
-//
-//            for (NSMutableDictionary *miniDic in dic) {
-//                ODOrderDataModel *model = [[ODOrderDataModel alloc] initWithDict:miniDic];
-//                [self.dataArray addObject:model];
-//            }
-//
-//
-//        }
-//
-//        [self.collectionView reloadData];
-//
-//    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//
-//
-//    }];
 }
 
 - (void)saveOrder

@@ -535,33 +535,8 @@ NSString *evaluationContentText = @"";
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        @try {
-            if ([WXApi isWXAppInstalled]) {
-                [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
-                ODBazaarDetailModel *model = self.dataArray[0];
-                NSString *url = model.share[@"icon"];
-                NSString *content = model.share[@"desc"];
-                NSString *link = model.share[@"link"];
-                NSString *title = model.share[@"title"];
-                [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-                [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-                [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-                [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-                [UMSocialSnsService presentSnsIconSheetView:self
-                                                     appKey:kGetUMAppkey
-                                                  shareText:content
-                                                 shareImage:nil
-                                            shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                                   delegate:self];
-                
-            }else{
-                [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
-            }
-        }
-        @catch (NSException *exception) {
-            [ODProgressHUD showInfoWithStatus:@"网络异常无法分享"];
-        }
+        ODBazaarDetailModel *model = [self.dataArray firstObject];
+        [ODPublicTool shareAppWithTarget:self dictionary:model.share controller:self];
     }
 }
 

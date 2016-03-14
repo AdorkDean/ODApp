@@ -6,9 +6,7 @@
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
 
-#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCommunityDetailViewController.h"
-#import "WXApi.h"
 
 #define kCommunityDetailCellId @"ODCommunityDetailCell"
 
@@ -53,52 +51,9 @@
 #pragma mark - 分享
 -(void)shareButtonClick
 {
-    
-        
-        
-        if ([WXApi isWXAppInstalled]) {
-            
-            
-            [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
-            
-            
-            ODCommunityDetailInfoModel *model = self.resultArray[0];
-            NSString *url = model.share[@"icon"];
-            NSString *content = model.share[@"desc"];
-            NSString *link = model.share[@"link"];
-            NSString *title = model.share[@"title"];
-            
-            
-            [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-            [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-            
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-            
-            [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-            
-            [UMSocialSnsService presentSnsIconSheetView:self
-                                                 appKey:kGetUMAppkey
-                                              shareText:content
-                                             shareImage:nil
-                                        shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                               delegate:self];
-            
-            
-        }else{
-            
-            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
-            
-            
-        }
-
- 
-
+    ODCommunityDetailInfoModel *model = [self.resultArray firstObject];
+    [ODPublicTool shareAppWithTarget:self dictionary:model.share controller:self];
 }
-
-
-
 
 -(void)createRequest
 {
@@ -258,8 +213,7 @@
     __weakSelf
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除话题" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        NSDictionary *parameter = @{@"id":self.bbs_id,@"type":@"1",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-//        NSDictionary *signParameter = [ODAPIManager signParameters:parameter];
+        NSDictionary *parameter = @{@"id":self.bbs_id,@"type":@"1"};
         [weakSelf pushDataWithUrl:ODUrlBbsDel parameter:parameter isBbs:YES];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
@@ -426,25 +380,6 @@
 #pragma mark－ 提交数据
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isBbs:(BOOL)isBbs
 {
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    
-//    __weak typeof (self)weakSelf = self;
-//    [manager GET:url parameters:parameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        if (isBbs) {
-//            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//                if (weakSelf.myBlock) {
-//                    weakSelf.myBlock(@"delSuccess");
-//                }
-//                [weakSelf.navigationController popViewControllerAnimated:YES];
-//            }
-//        }else{
-//            if ([responseObject[@"status"]isEqualToString:@"success"]) {
-//            }
-//        }
-//    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-//        
-//    }];
-    
     __weakSelf
     [ODHttpTool getWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
         if (isBbs) {

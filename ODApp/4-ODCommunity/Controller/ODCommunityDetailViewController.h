@@ -16,10 +16,10 @@
 #import "ODCommunityDetailReplyViewController.h"
 #import "ODCommunityDetailCell.h"
 #import "MJRefresh.h"
-#import "UMSocial.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODOthersInformationController.h"
 #import "ODCommunityDetailInfoModel.h"
+#import "ODPublicTool.h"
 
 @interface ODCommunityDetailViewController : ODBaseViewController <UITableViewDelegate, UITableViewDataSource>
 

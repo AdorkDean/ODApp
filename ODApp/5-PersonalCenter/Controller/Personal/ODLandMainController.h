@@ -10,6 +10,7 @@
 
 #import "ODPersonalCenterCollectionController.h"
 #import "ODReleaseController.h"
+#import "ODPublicTool.h"
 
 @interface ODLandMainController : ODBaseViewController
 
