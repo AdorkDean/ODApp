@@ -8,15 +8,19 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODApplyListViewController.h"
-#import "ODCollectionCell.h"
 #import "MJRefresh.h"
 #import "ODOthersInformationController.h"
 #import "ODApplyModel.h"
+#import "ODApplyListCell.h"
+NSString *const ODApplyListCellID = @"ODApplyListCellID";
 
-@interface ODApplyListViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface ODApplyListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
+
+@property (nonatomic, strong) UITableView *tableView;
+
 @property(nonatomic, assign) NSInteger page;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 
@@ -43,31 +47,33 @@
     self.page = 1;
     self.dataArray = [[NSMutableArray alloc] init];
     [self getData];
-    [self createCollectionView];
 
     self.navigationItem.title = @"TA们申请过";
 }
 
-
-#pragma mark - 初始化
-- (void)createCollectionView {
-    self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor whiteColor];
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self DownRefresh];
-    }];
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor backgroundColor];
         
-        [self LoadMoreData];
-    }];
-    
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ODCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
-    [self.view addSubview:self.collectionView];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.rowHeight = 68;
+        _tableView.tableFooterView = [UIView new];
+        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODApplyListCell class]) bundle:nil] forCellReuseIdentifier:ODApplyListCellID];
+        
+        __weakSelf
+        _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [weakSelf DownRefresh];
+        }];
+        _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            [weakSelf LoadMoreData];
+        }];
+        
+        [self.view addSubview:_tableView];
+    }
+    return _tableView;
 }
-
 
 #pragma mark - 获取数据
 - (void)getData {
@@ -91,58 +97,43 @@
 
          if (applyDatas.count == 0)
          {
-             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
          }
          else
          {
-             [weakSelf.collectionView.mj_footer endRefreshing];
+             [weakSelf.tableView.mj_footer endRefreshing];
          }
-         [weakSelf.collectionView.mj_header endRefreshing];
-         [weakSelf.collectionView reloadData];
+         [weakSelf.tableView.mj_header endRefreshing];
+         [weakSelf.tableView reloadData];
          
      } failure:^(NSError *error) {
-         [weakSelf.collectionView.mj_header endRefreshing];
-         [weakSelf.collectionView.mj_footer endRefreshing];
+         [weakSelf.tableView.mj_header endRefreshing];
+         [weakSelf.tableView.mj_footer endRefreshing];
      }];
 }
 
+#pragma mark - UITableViewDataSource
 
-#pragma mark - UICollectionView 数据源方法
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
-
-    ODApplyModel *model = self.dataArray[indexPath.row];
-
-    [cell setWithApplyModel:model];
-
-    return cell;
-}
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ODApplyListCell *cell = [tableView dequeueReusableCellWithIdentifier:ODApplyListCellID];
+    ODApplyModel *model = self.dataArray[indexPath.row];
+    [cell setWithApplyModel:model];
+    return cell;
+}
 
-#pragma mark - UICollectionView 代理方法
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - UITablaViewDelegate
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     ODLoveListModel *model = self.dataArray[indexPath.row];
     vc.open_id = model.open_id;
     if (![vc.open_id isEqualToString:[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].openID]]) {
         [self.navigationController pushViewController:vc animated:YES];
     }
-
-
-}
-//动态设置每个item的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-
-    return CGSizeMake(kScreenSize.width, 68);
-
-
 }
 
 #pragma mark - 事件方法

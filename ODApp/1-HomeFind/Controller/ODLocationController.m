@@ -11,13 +11,10 @@
 
 NSString *const ODLocationCellID = @"ODLocationCell";
 
-@interface ODLocationController () <MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface ODLocationController () <MAMapViewDelegate, AMapSearchDelegate,  UITableViewDataSource, UITableViewDelegate> {
     AMapSearchAPI *_search;
     MAMapView *_mapView;
 }
-
-@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-@property(nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic, strong) UITableView *tableView;
 
