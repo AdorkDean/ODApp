@@ -17,6 +17,9 @@
 // 循环cell标识
 static NSString * const exchangeCellId = @"exchangeCell";
 
+// 选中的cell
+#define ODSelectedUsers self.dataArray[self.tableView.indexPathForSelectedRow.row]
+
 @interface ODBazaaeExchangeSkillViewController () <UITableViewDataSource, UITableViewDelegate>
 
 /** 表格 */
@@ -68,19 +71,15 @@ static NSString * const exchangeCellId = @"exchangeCell";
 - (void)setupTableView
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
-#warning 需要修改
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - 64 - 40 - 55) style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODBazaaeExchangeNavHeight - ODTabBarHeight) style:UITableViewStylePlain];
     tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-    
     tableView.dataSource = self;
     tableView.delegate = self;
-    
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
     // 注册cell
     [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarExchangeSkillCell class]) bundle:nil] forCellReuseIdentifier:exchangeCellId];
 }
@@ -91,14 +90,13 @@ static NSString * const exchangeCellId = @"exchangeCell";
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewUsers)];
     [self.tableView.mj_header beginRefreshing];
-    
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreUsers)];
 }
 
 #pragma mark - UITableView 数据源方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // 判断是否显示foot
+    // 判断是否显示footer
     NSUInteger count = self.dataArray.count;
     self.tableView.mj_footer.hidden = (count == 0);
     return count;
@@ -114,6 +112,9 @@ static NSString * const exchangeCellId = @"exchangeCell";
 #pragma mark - 代理方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
+    // 停止刷新
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
     // 点击后取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
@@ -126,7 +127,6 @@ static NSString * const exchangeCellId = @"exchangeCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLogFunc;
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     return model.rowHeight;
 }
@@ -189,6 +189,18 @@ static NSString * const exchangeCellId = @"exchangeCell";
         self.page = self.page - 1;
         [weakSelf.tableView.mj_footer endRefreshing];
     }];
+}
+
+/**
+ *  时刻监测footer的状态
+ */
+- (void)checkFooterState
+{
+    ODBazaarExchangeSkillModel *model = ODSelectedUsers;
+    // 判断是否隐藏footer
+//    BOOL result = (model.users.count == category.total);
+//    self.userTableView.mj_footer.hidden = result;
+//    if (!result) [self.userTableView.mj_footer endRefreshing];
 }
 
 @end

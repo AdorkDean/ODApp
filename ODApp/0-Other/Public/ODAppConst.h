@@ -13,6 +13,9 @@ UIKIT_EXTERN CGFloat const ODTopY;
 /** 导航栏标题字体大小 */
 UIKIT_EXTERN CGFloat const ODNavigationTextFont;
 
+/** 欧动集市自定义导航栏高度 */
+UIKIT_EXTERN CGFloat const ODBazaaeExchangeNavHeight;
+
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 UIKIT_EXTERN NSString * const kUserCache;
