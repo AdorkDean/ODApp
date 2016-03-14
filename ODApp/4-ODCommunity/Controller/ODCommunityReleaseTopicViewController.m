@@ -181,7 +181,6 @@ NSString *topicContentText = @"";
 }
 
 #pragma mark - 创建添加图片按钮
-
 - (void)createAddPicButton {
     CGFloat width = (kScreenSize.width - 20) / 4;
     self.addPicButton = [ODClassMethod creatButtonWithFrame:CGRectMake(4, CGRectGetMaxY(self.topicContentTextView.frame) + 95, width, width) target:self sel:@selector(addPicButtonClick:) tag:0 image:@"发布新话题－默认icon" title:nil font:0];
