@@ -13,4 +13,11 @@
  */
 - (BOOL)isBlank;
 
+/**
+ *  计算文字Size
+ */
+- (CGSize)od_SizeWithFont:(UIFont *)font maxWidth:(CGFloat)maxWidth;
+
+- (CGSize)od_SizeWithFont:(UIFont *)font;
+
 @end

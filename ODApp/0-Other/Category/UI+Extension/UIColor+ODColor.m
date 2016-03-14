@@ -25,4 +25,34 @@
     return [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
 }
 
++ (UIColor *)colorWhiteColor
+{
+    return [UIColor colorWithHexString:@"#ffffff" alpha:1];
+}
+
++ (UIColor *)colorRedColor
+{
+    return [UIColor colorWithHexString:@"#ff6666" alpha:1];
+}
+
++ (UIColor *)colorBlackColor
+{
+    return [UIColor colorWithHexString:@"#000000" alpha:1];
+}
+
++ (UIColor *)colorGrayColor
+{
+    return [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
+}
+
++ (UIColor *)colorGloomyColor
+{
+    return [UIColor colorWithHexString:@"#484848" alpha:1];
+}
+
++ (UIColor *)colorGraynessColor
+{
+    return [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+}
+
 @end
