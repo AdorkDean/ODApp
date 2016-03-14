@@ -61,6 +61,7 @@ NSString *const ODApplyListCellID = @"ODApplyListCellID";
         _tableView.rowHeight = 68;
         _tableView.tableFooterView = [UIView new];
         [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODApplyListCell class]) bundle:nil] forCellReuseIdentifier:ODApplyListCellID];
+        [self.view addSubview:_tableView];
         
         __weakSelf
         _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -68,9 +69,7 @@ NSString *const ODApplyListCellID = @"ODApplyListCellID";
         }];
         _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
             [weakSelf LoadMoreData];
-        }];
-        
-        [self.view addSubview:_tableView];
+        }];   
     }
     return _tableView;
 }
