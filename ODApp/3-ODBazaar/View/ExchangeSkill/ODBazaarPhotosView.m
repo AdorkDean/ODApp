@@ -7,8 +7,9 @@
 //
 
 #import "ODBazaarPhotosView.h"
-#import "UIImageView+WebCache.h"
 #import "ODBazaarExchangeSkillModel.h"
+#import "ODBazaarPhoto.h"
+#import "ODCommunityShowPicViewController.h"
 
 #define ODPhotoWH ((KScreenWidth - 75 - ODPhotoMargin * 3) / 3)
 #define ODPhotoMargin (17 / 2)
@@ -21,35 +22,42 @@
     if (self = [super initWithFrame:frame])
     {
         self.autoresizingMask = UIViewAutoresizingNone;
+        
+        self.backgroundColor = [UIColor blueColor];
     }
     return self;
 }
 
-- (void)setPhotos:(NSArray *)photos
+- (void)setPhotos:(ODBazaarExchangeSkillModel *)photos
 {
     _photos = photos;
     
-    // 取出传入的数组长度
-    NSUInteger count = photos.count;
+    // 取出小图数组长度
+    NSUInteger count = photos.imgs_small.count;
     
     // 创建图片控件
     while (self.subviews.count < count) {
-        UIImageView *imageView = [[UIImageView alloc] init];
-        [self addSubview:imageView];
+        ODBazaarPhoto *photoView = [[ODBazaarPhoto alloc] init];
+        [self addSubview:photoView];
+
     }
     
     // 创建了足够的imageView
     for (NSUInteger i = 0; i < self.subviews.count; i++)
     {
-        UIImageView *photoView = self.subviews[i];
+        ODBazaarPhoto *photoView = self.subviews[i];
         if (i < count) {
-            ODBazaarExchangeSkillImgs_smallModel *model = self.photos[i];
-            [photoView sd_setImageWithURL:[NSURL OD_URLWithString:model.img_url]
-                         placeholderImage:nil];
+            // 传递数据
+            photoView.photo = self.photos.imgs_small[i];
             photoView.hidden = NO;
         } else {
             photoView.hidden = YES;
         }
+        
+        // 添加点击手势
+        photoView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickPhotoView:)];
+        [photoView addGestureRecognizer:tap];
     }
 }
 
@@ -60,7 +68,7 @@
 {
     [super layoutSubviews];
     
-    NSUInteger photosCount = self.photos.count;
+    NSUInteger photosCount = self.photos.imgs_small.count;
     NSInteger maxCol = ODPhotoMaxCol(photosCount);
     for (NSUInteger i = 0; i < photosCount; i++) {
         UIImageView *photoView = self.subviews[i];
@@ -91,6 +99,22 @@
     CGFloat photosH = rows * ODPhotoWH + (rows - 1) * ODPhotoMargin;
     
     return CGSizeMake(photosW, photosH);
+}
+
+- (void)clickPhotoView:(ODBazaarPhoto *)photoView
+{
+    ODBazaarExchangeSkillModel *model = self.photos;
+    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc] init];
+    picController.photos = model.imgs_big;
+    // 取出图片对应的位置
+    NSUInteger index = [self.subviews indexOfObject:photoView];
+    
+    picController.selectedIndex = index > 1000 ? 0 : index;
+    picController.skill = @"skill";
+    
+    UITabBarController *tabBarControler = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UINavigationController *navigationController = tabBarControler.selectedViewController;
+    [navigationController.topViewController presentViewController:picController animated:YES completion:nil];
 }
 
 @end

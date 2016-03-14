@@ -97,7 +97,7 @@
     if (model.imgs_small.count) {
         self.photosView.hidden = NO;
         self.photosView.frame = model.photosFrame;
-        self.photosView.photos = model.imgs_small;
+        self.photosView.photos = model;
     } else {
         self.photosView.hidden = YES;
     }

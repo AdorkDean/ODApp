@@ -11,6 +11,9 @@ CGFloat const ODNavigationTextFont = 17;
 /** 欧动集市自定义导航栏高度 */
 CGFloat const ODBazaaeExchangeNavHeight = 40;
 
+/** 欧动集市cell的间隙 */
+CGFloat const ODBazaaeExchangeCellMargin = 6;
+
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 NSString * const kUserCache = @"kUserCache";

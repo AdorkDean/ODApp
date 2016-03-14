@@ -16,6 +16,9 @@ UIKIT_EXTERN CGFloat const ODNavigationTextFont;
 /** 欧动集市自定义导航栏高度 */
 UIKIT_EXTERN CGFloat const ODBazaaeExchangeNavHeight;
 
+/** 欧动集市cell的间隙 */
+UIKIT_EXTERN CGFloat const ODBazaaeExchangeCellMargin;
+
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 UIKIT_EXTERN NSString * const kUserCache;

@@ -9,10 +9,8 @@
 #import "ODBazaarExchangeSkillModel.h"
 #import "ODBazaarPhotosView.h"
 
-ODRequestModelImplementation(ODBazaarExchangeSkillImgs_smallModel)
-
-ODRequestModelImplementation(ODBazaarExchangeSkillImgs_bigModel)
-
+static CGFloat const bottomMargin = (30 / 2);
+static CGFloat const photoBottomMargin = (25 / 2);
 
 @implementation ODBazaarExchangeSkillModel
 
@@ -28,40 +26,42 @@ ODRequestModelImplementation(ODBazaarExchangeSkillImgs_bigModel)
     }];
 }
 
-
+/**
+ *  计算行高
+ */
 - (CGFloat)rowHeight
 {
     if (!_rowHeight) {
-        
-        CGFloat bottomMargin = 30;
-        
         // 计算名称文字高度
-        CGFloat nameH = [self.title od_SizeWithFont:[UIFont systemFontOfSize:11.5]].height;
-        CGFloat nickH = [self.user[@"nick"] od_SizeWithFont:[UIFont systemFontOfSize:11]].height;
+        CGFloat nameLabelHeight = [self.title od_SizeWithFont:[UIFont systemFontOfSize:11.5]].height;
+        CGFloat nickLabelHeight = [self.user[@"nick"] od_SizeWithFont:[UIFont systemFontOfSize:11]].height;
         
         // 配图X/Y值
         CGFloat photosViewX = 75;
-        CGFloat photosViewY = 45 + nameH + nickH;
+        CGFloat photosViewY = 45 + nameLabelHeight + nickLabelHeight;
         
         CGSize photosViewSize = [ODBazaarPhotosView zh_sizeWithConnt:self.imgs_small.count];
-        
         _photosFrame = (CGRect){{photosViewX, photosViewY}, photosViewSize};
-        
-//        _rowHeight = ;
     
         // 计算正文文字高度
-        CGFloat contentH = [self.content od_SizeWithFont:[UIFont systemFontOfSize:11] maxWidth:KScreenWidth - 75 - 35 / 2].height;
+        CGFloat contentLabelHeight = [self.content od_SizeWithFont:[UIFont systemFontOfSize:11] maxWidth:(photosViewSize.width - 17 / 2)].height;
         
-        CGFloat loveH = [[NSString stringWithFormat:@"%d", self.love_num] od_SizeWithFont:[UIFont systemFontOfSize:9]].height;
+//        self.content
+        if (contentLabelHeight >= 35) contentLabelHeight = 35;
         
-        _rowHeight = CGRectGetMaxY(_photosFrame) + bottomMargin + contentH + 25 / 2 + 6 + loveH;
+        CGFloat loveHeight = [[NSString stringWithFormat:@"%d", self.love_num] od_SizeWithFont:[UIFont systemFontOfSize:9]].height;
         
+        _rowHeight = CGRectGetMaxY(_photosFrame) + (bottomMargin * 2) +
+                     (contentLabelHeight + photoBottomMargin) +
+                     ODBazaaeExchangeCellMargin + loveHeight;
     }
-    
     return _rowHeight;
 }
 
-
 @end
+
+ODRequestModelImplementation(ODBazaarExchangeSkillImgs_smallModel)
+
+ODRequestModelImplementation(ODBazaarExchangeSkillImgs_bigModel)
 
 ODRequestResultIsArrayImplementation(ODBazaarExchangeSkillModel)
