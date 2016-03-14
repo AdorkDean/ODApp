@@ -131,27 +131,6 @@
     }];
     
     
-//    [self.manager GET:kGetServecTimeUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//
-//
-//        if (responseObject) {
-//            NSMutableDictionary *dic = responseObject[@"result"];
-//
-//
-//            for (NSMutableDictionary *miniDic in dic) {
-//                ODOrderDataModel *model = [[ODOrderDataModel alloc] initWithDict:miniDic];
-//                [self.dataArray addObject:model];
-//            }
-//
-//
-//        }
-//
-//        [self.collectionView reloadData];
-//
-//    }         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//
-//
-//    }];
 }
 
 - (void)saveOrder

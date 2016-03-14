@@ -15,7 +15,6 @@
 
 @interface ODContactAddressController () <UITableViewDataSource, UITableViewDelegate>
 
-
 @property(nonatomic, strong) UITableView *tableView;
 @property(nonatomic, copy) NSString *open_id;
 @property(nonatomic, strong) NSMutableArray *defaultArray;
@@ -316,36 +315,6 @@
         
         
     }];
-    
-    
-    
-    
-//    [self.deleteManager GET:kDeleteAddressUrl parameters:signParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-//
-//        __weakSelf
-//        if ([responseObject[@"status"] isEqualToString:@"success"]) {
-//
-//            if ([self.addressId isEqualToString:address_id]) {
-//                weakSelf.isAddress = @"1";
-//            } else {
-//                weakSelf.isAddress = @"2";
-//            }
-//
-//            [weakSelf getData];
-//
-//
-//        } else if ([responseObject[@"status"] isEqualToString:@"error"]) {
-//
-//
-//            [ODProgressHUD showInfoWithStatus:responseObject[@"message"]];
-//        }
-//
-//
-//    }               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-//
-//
-//    }];
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

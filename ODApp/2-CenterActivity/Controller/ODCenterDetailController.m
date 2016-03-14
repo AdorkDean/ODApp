@@ -160,23 +160,9 @@ int pageNumnber = 0;
 
         self.centerDetailView = [ODCenderDetailView getView];
 
+        self.centerDetailView.frame = CGRectMake(0, 0, kScreenSize.width, 250 + 95 + self.centerDetailView.scrollerHeight.constant + rect.size.height);
 
-        if (iPhone4_4S) {
-            self.centerDetailView.frame = CGRectMake(0, 0, kScreenSize.width, 250 + kScreenSize.height / 10 + self.centerDetailView.scrollerHeight.constant + rect.size.height);
-
-        } else if (iPhone5_5s) {
-
-            self.centerDetailView.frame = CGRectMake(0, 0, kScreenSize.width, 250 + kScreenSize.height / 12 + self.centerDetailView.scrollerHeight.constant + rect.size.height);
-
-        } else if (iPhone6_6s) {
-
-            self.centerDetailView.frame = CGRectMake(0, 0, kScreenSize.width, 250 + kScreenSize.height / 14 + self.centerDetailView.scrollerHeight.constant + rect.size.height);
-
-
-        } else {
-            self.centerDetailView.frame = CGRectMake(0, 0, kScreenSize.width, 250 + kScreenSize.height / 16 + self.centerDetailView.scrollerHeight.constant + rect.size.height);
-
-        }
+   
 
 
         self.centerDetailView.detailTextView.text = self.model.desc;

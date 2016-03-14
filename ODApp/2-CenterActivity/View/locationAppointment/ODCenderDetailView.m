@@ -14,19 +14,8 @@
 {
    ODCenderDetailView *view =  [[[NSBundle mainBundle] loadNibNamed:@"ODCenderDetailView" owner:nil options:nil] firstObject];
     
-    if (iPhone4_4S) {
-       view.scrollerHeight.constant = 210;
-        
-    }else if (iPhone5_5s) {
-        
-       view.scrollerHeight.constant = 210;
-    }else if (iPhone6_6s) {
-        
-       view.scrollerHeight.constant = 270;
-        
-    }else {
-        view.scrollerHeight.constant = 290;
-    }
+    view.scrollerHeight.constant = 270;
+    
 
    view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     

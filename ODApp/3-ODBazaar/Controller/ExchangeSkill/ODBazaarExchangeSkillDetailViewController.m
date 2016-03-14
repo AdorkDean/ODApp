@@ -284,10 +284,10 @@
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
     } else {
         if ([self.loveLabel.text isEqualToString:@"收藏"]) {
-            NSDictionary *parameter = @{@"type" : @"4", @"obj_id" : self.swap_id, @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
+            NSDictionary *parameter = @{@"type" : @"4", @"obj_id" : self.swap_id};
             [self pushDataWithUrl:ODUrlOtherLoveAdd parameter:parameter isLove:YES];
         } else {
-            NSDictionary *parameter = @{@"love_id" : self.love_id, @"open_id" : [[ODUserInformation sharedODUserInformation] openID]};
+            NSDictionary *parameter = @{@"love_id" : self.love_id};
             [self pushDataWithUrl:ODUrlOtherLoveDel parameter:parameter isLove:NO];
         }
     }
