@@ -93,7 +93,7 @@
 {
     [super viewWillAppear:animated];
 
-    [self locationCity];
+    [self locationCity1];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
@@ -110,7 +110,7 @@
 
 #pragma mark - 显示定位城市
 
-- (void)locationCity {
+- (void)locationCity1 {
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_locationNew"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
 }
 
@@ -122,10 +122,9 @@
     __weakSelf
     NSDictionary *parameter = @{@"region_name" : @""};
     [ODHttpTool getWithURL:ODUrlOtherCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
-                ODLocationModel *mode = [model result];
-                weakSelf.cityListArray = mode.all;
-                [weakSelf.collectionView reloadData];
-            }
+        weakSelf.cityListArray = [[model result] all];
+            [weakSelf.collectionView reloadData];
+    }
     failure:^(NSError *error) {
         
     }];
@@ -417,18 +416,19 @@ updatingLocation:(BOOL)updatingLocation {
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action) {
             [ODUserInformation sharedODUserInformation].locationCity = cityResult;
 
-            for (NSDictionary *cityInformation in weakSelf.cityListArray) {
-                if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityInformation[@"name"]]) {
-                    [ODUserInformation sharedODUserInformation].cityID = cityInformation[@"id"];
+            for (ODCityNameModel *cityInformation in weakSelf.cityListArray) {
+                
+                if ([[ODUserInformation sharedODUserInformation].locationCity isEqualToString:cityInformation.name]) {
+                    [ODUserInformation sharedODUserInformation].cityID = cityInformation.id;
                 }
             }
-            [weakSelf locationCity];
+            [weakSelf locationCity1];
             [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationLocationSuccessRefresh object:nil];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction *_Nonnull action) {
             [ODUserInformation sharedODUserInformation].locationCity = [NSString stringWithFormat:@"全国"];
             [ODUserInformation sharedODUserInformation].cityID = @"1";
-            [weakSelf locationCity];
+            [weakSelf locationCity1];
 
         }]];
         [self presentViewController:alert animated:YES completion:nil];

@@ -11,7 +11,7 @@
 
 NSString *const ODLocationCellID = @"ODLocationCell";
 
-@interface ODLocationController () {
+@interface ODLocationController () <MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDelegate, UITableViewDataSource, UITableViewDelegate> {
     AMapSearchAPI *_search;
     MAMapView *_mapView;
 }
@@ -19,11 +19,10 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) UICollectionView *collectionView;
 
-// 城市列表
-@property(nonatomic, strong) NSMutableArray *cityListArray;
+@property (nonatomic, strong) UITableView *tableView;
 
-// 城市ID
-@property(nonatomic, strong) NSMutableArray *cityIdArray;
+@property(nonatomic, strong) NSArray *dataArray;
+
 
 
 @end
@@ -37,9 +36,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 
     self.navigationItem.title = @"选择城市";
 
-    self.cityListArray = [[NSMutableArray alloc] init];
-    self.cityIdArray = [[NSMutableArray alloc] init];
-    [self createCollectionView];
+    self.dataArray = [[NSArray alloc] init];
     [self getCityListRequest];
 }
 
@@ -53,77 +50,61 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
+#pragma mark - 懒加载
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor backgroundColor];
+        
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.rowHeight = 40;
+        _tableView.tableFooterView = [UIView new];
+        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODLocationCell class]) bundle:nil] forCellReuseIdentifier:ODLocationCellID];
+        [self.view addSubview:_tableView];
+    }
+    return _tableView;
+}
+
 #pragma mark - 数据请求
 
 - (void)getCityListRequest {
     __weakSelf
     NSDictionary *parameter = @{@"region_name" : @"上海"};
     [ODHttpTool getWithURL:ODUrlOtherCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
-                ODLocationModel *mode = [model result];
-                weakSelf.cityListArray = [mode.all valueForKeyPath:@"name"];
-                weakSelf.cityIdArray = [mode.all valueForKey:@"id"];
-                [weakSelf.collectionView reloadData];
+        weakSelf.dataArray = [[model result] all];
+        [weakSelf.tableView reloadData];
+        }
+    failure:^(NSError *error) {
 
-            }
-                   failure:^(NSError *error) {
-
-                   }];
+    }];
 }
 
-#pragma mark - Create UICollectionView
+#pragma mark - UITableViewDataSource
 
-- (void)createCollectionView {
-    self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) collectionViewLayout:self.flowLayout];
-
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ODLocationCell" bundle:nil] forCellWithReuseIdentifier:ODLocationCellID];
-
-    [self.view addSubview:self.collectionView];
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.dataArray.count;
 }
 
-#pragma mark - UICollectionViewDataSource
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODLocationCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ODLocationCellID forIndexPath:indexPath];
-
-    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-
-    cell.cityNameLabel.text = self.cityListArray[indexPath.row];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ODLocationCell *cell = [tableView dequeueReusableCellWithIdentifier:ODLocationCellID];
+    cell.model = self.dataArray[indexPath.row];
+    cell.backgroundColor = [UIColor colorWhiteColor];
     return cell;
 }
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
+#pragma mark - UITableViewDelegate
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.cityListArray.count;
-}
-
-#pragma mark - UICollectionViewDelegate
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    [ODUserInformation sharedODUserInformation].locationCity = self.cityListArray[indexPath.row];
-    [ODUserInformation sharedODUserInformation].cityID = self.cityIdArray[indexPath.row];
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ODCityNameModel *model = self.dataArray[indexPath.row];
+    [ODUserInformation sharedODUserInformation].locationCity = model.name;
+    [ODUserInformation sharedODUserInformation].cityID = model.id;
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationLocationSuccessRefresh object:nil];
-
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-//动态设置每个item的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(kScreenSize.width, 40);
-}
-
-//动态设置每个分区的最小行间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 0.5;
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

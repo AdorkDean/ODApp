@@ -2,16 +2,18 @@
 //  ODLocationCell.h
 //  ODApp
 //
-//  Created by Bracelet on 16/2/17.
-//  Copyright © 2016年 Odong Bracelet. All rights reserved.
+//  Created by Bracelet on 16/3/14.
+//  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface ODLocationCell : UICollectionViewCell
+#import "ODLocationModel.h"
 
+@interface ODLocationCell : UITableViewCell
 
-@property(weak, nonatomic) IBOutlet UILabel *cityNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cityNameLabel;
 
+@property (nonatomic, strong) ODCityNameModel *model;
 
 @end

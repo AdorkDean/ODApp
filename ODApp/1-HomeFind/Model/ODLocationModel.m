@@ -15,7 +15,7 @@
 
     [ODLocationModel mj_setupObjectClassInArray:^NSDictionary *{
         return @{
-                 @"dis1play":[ODCityNameModel class]
+                 @"all":[ODCityNameModel class]
                  
                  };
     }];

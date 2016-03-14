@@ -12,8 +12,44 @@
 
 + (UIColor *)themeColor;
 
+/**
+ *  #e6e6e6
+ **/
 + (UIColor *)lineColor;
 
+/**
+ *  #f3f3f3
+ **/
 + (UIColor *)backgroundColor;
+
+/**
+ *  #ffffff
+ **/
++ (UIColor *)colorWhiteColor;
+
+/*
+ *  #ff6666
+ **/
++ (UIColor *)colorRedColor;
+
+/**
+ *  #000000
+ **/
++ (UIColor *)colorBlackColor;
+
+/**
+ *  #d0d0d0
+ **/
++ (UIColor *)colorGrayColor;
+
+/**
+ *  #484848
+ **/
++ (UIColor *)colorGloomyColor;
+
+/**
+ *  #8e8e8e
+ **/
++ (UIColor *)colorGraynessColor;
 
 @end
