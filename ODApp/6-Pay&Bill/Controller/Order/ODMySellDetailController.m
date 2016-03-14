@@ -72,57 +72,12 @@
 #pragma mark - 初始化方法
 - (void)createScroller {
     
-    self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
-    self.scroller.backgroundColor = [UIColor whiteColor];
-    self.scroller.userInteractionEnabled = YES;
+    float scrollHeight = KScreenHeight - 64 - 50;
     
     ODOrderDetailModel *model = self.dataArray[0];
     NSString *status = [NSString stringWithFormat:@"%@", model.order_status];
     
-    if ([status isEqualToString:@"-1"]) {
-        
-        if (iPhone4_4S) {
-            
-            
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 350);
-            
-        } else if (iPhone5_5s) {
-            
-            
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 220);
-            
-            
-        } else {
-            
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 100);
-            
-            
-        }
-        
-        
-    } else {
-        
-        
-        if (iPhone4_4S) {
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 250);
-            
-        } else if (iPhone5_5s) {
-            
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 150);
-            
-        } else {
-            
-            
-            self.scroller.contentSize = CGSizeMake(kScreenSize.width, kScreenSize.height + 50);
-            
-            
-        }
-        
-        
-    }
-    
-    
-    [self.view addSubview:self.scroller];
+
     
     
     if ([status isEqualToString:@"2"]) {
@@ -175,11 +130,16 @@
         [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.reasonButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:self.reasonButton];
-        
-        
-    }
-    [self createOrderView];
     
+    }else {
+        scrollHeight = KScreenHeight - 64;
+    }
+    self.scroller = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, scrollHeight)];
+    self.scroller.userInteractionEnabled = YES;
+    self.scroller.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.scroller];
+    [self createOrderView];
+    self.scroller.contentSize = CGSizeMake(kScreenSize.width, CGRectGetMaxY(self.orderDetailView.orderTimeLabel.frame));
     
 }
 

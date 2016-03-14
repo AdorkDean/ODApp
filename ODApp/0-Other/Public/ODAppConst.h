@@ -98,9 +98,9 @@ UIKIT_EXTERN NSString * const ODNotificationloveSkill;
 UIKIT_EXTERN NSString * const ODWebUrlFindJob;
 
 #pragma mark - 请求URL接口
+
 /** 统一的URL */
 UIKIT_EXTERN NSString * const ODBaseURL;
-
 
 
 
@@ -112,8 +112,6 @@ UIKIT_EXTERN NSString * const ODUrlBbsView;
 UIKIT_EXTERN NSString * const ODUrlBbsCreate;
 UIKIT_EXTERN NSString * const ODUrlBbsSearch;
 UIKIT_EXTERN NSString * const ODUrlBbsReply;
-
-
 
 
 
@@ -134,13 +132,9 @@ UIKIT_EXTERN NSString * const ODUrlOtherFeedback;
 
 
 
-
 //   pay
 UIKIT_EXTERN NSString * const ODUrlPayWeixinTradeNumber;
 UIKIT_EXTERN NSString * const ODUrlPayWeixinCallbackSync;
-
-
-
 
 
 
@@ -158,8 +152,6 @@ UIKIT_EXTERN NSString * const ODUrlStoreOrders;
 UIKIT_EXTERN NSString * const ODUrlStoreInfoOrder;
 UIKIT_EXTERN NSString * const ODUrlStoreCancelOrder;
 UIKIT_EXTERN NSString * const ODUrlStoreApply;
-
-
 
 
 
@@ -196,17 +188,7 @@ UIKIT_EXTERN NSString * const ODUrlTaskList;
 
 
 
-
-
-
-
-
-
-
-
 //  user
-
-
 UIKIT_EXTERN NSString * const ODUrlUserCommentList;
 UIKIT_EXTERN NSString * const ODUrlUserWithdrawCash;
 UIKIT_EXTERN NSString * const ODUrlUserCashList;

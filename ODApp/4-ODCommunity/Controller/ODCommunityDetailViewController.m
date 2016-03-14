@@ -6,9 +6,7 @@
 //  Copyright © 2015年 Odong-YG. All rights reserved.
 //
 
-#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCommunityDetailViewController.h"
-#import "WXApi.h"
 
 #define kCommunityDetailCellId @"ODCommunityDetailCell"
 
@@ -53,52 +51,9 @@
 #pragma mark - 分享
 -(void)shareButtonClick
 {
-    
-        
-        
-        if ([WXApi isWXAppInstalled]) {
-            
-            
-            [UMSocialConfig setFinishToastIsHidden:YES  position:UMSocialiToastPositionCenter];
-            
-            
-            ODCommunityDetailInfoModel *model = self.resultArray[0];
-            NSString *url = model.share[@"icon"];
-            NSString *content = model.share[@"desc"];
-            NSString *link = model.share[@"link"];
-            NSString *title = model.share[@"title"];
-            
-            
-            [[UMSocialData defaultData].urlResource setResourceType:UMSocialUrlResourceTypeImage url:[url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            [UMSocialData defaultData].extConfig.wechatSessionData.title = title;
-            [UMSocialData defaultData].extConfig.wechatTimelineData.title = title;
-            
-            [UMSocialData defaultData].extConfig.wechatSessionData.url = link;
-            
-            [UMSocialData defaultData].extConfig.wechatTimelineData.url = link;
-            
-            [UMSocialSnsService presentSnsIconSheetView:self
-                                                 appKey:kGetUMAppkey
-                                              shareText:content
-                                             shareImage:nil
-                                        shareToSnsNames:@[UMShareToWechatSession,UMShareToWechatTimeline]
-                                               delegate:self];
-            
-            
-        }else{
-            
-            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
-            
-            
-        }
-
- 
-
+    ODCommunityDetailInfoModel *model = [self.resultArray firstObject];
+    [ODPublicTool shareAppWithTarget:self dictionary:model.share controller:self];
 }
-
-
-
 
 -(void)createRequest
 {

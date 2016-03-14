@@ -15,7 +15,7 @@
 #import "ODLocationCell.h"
 #import "ODLocationModel.h"
 
-@interface ODLocationController : ODBaseViewController <MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface ODLocationController : ODBaseViewController 
 
 
 
