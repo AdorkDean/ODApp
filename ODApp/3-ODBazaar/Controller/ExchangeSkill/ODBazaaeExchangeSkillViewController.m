@@ -14,21 +14,17 @@
 #import "ODBazaarExchangeSkillDetailViewController.h"
 #import "ODBazaarExchangeSkillModel.h"
 
-// 循环cell标识
-static NSString * const exchangeCellId = @"exchangeCell";
-
-// 选中cell保存的模型
-#define ODSelectedUsers self.dataArray[self.tableView.indexPathForSelectedRow.row]
-
 @interface ODBazaaeExchangeSkillViewController () <UITableViewDataSource, UITableViewDelegate>
 
 /** 表格 */
 @property (nonatomic, strong) UITableView *tableView;
-
 /** 参数 */
 @property (nonatomic, strong) NSMutableDictionary *params;
 
 @end
+
+// 循环cell标识
+static NSString * const exchangeCellId = @"exchangeCell";
 
 @implementation ODBazaaeExchangeSkillViewController
 
@@ -63,7 +59,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 }
 
 - (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - 初始化方法
@@ -91,17 +87,15 @@ static NSString * const exchangeCellId = @"exchangeCell";
 - (void)setupRefresh
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewUsers)];
-//    [self.tableView.mj_header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreUsers)];
+    self.tableView.mj_footer.automaticallyHidden = YES;
 }
 
 #pragma mark - UITableView 数据源方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSUInteger count = self.dataArray.count;
-    // 判断是否显示footer
-    [self checkFooterState:count];
-    return count;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -118,9 +112,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     // 停止刷新
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
-    // 点击后取消选中
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
+    
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     detailControler.swap_id = [NSString stringWithFormat:@"%d", model.swap_id];
@@ -146,19 +138,20 @@ static NSString * const exchangeCellId = @"exchangeCell";
     self.params = params;
     __weakSelf
     [ODHttpTool getWithURL:ODUrlSwapList parameters:params modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
-        if (self.params != params) return;
+        if (weakSelf.params != params) return;
         // 清空所有数据
         [weakSelf.dataArray removeAllObjects];
         
-        NSArray *newDatas = [model result];
-        [weakSelf.dataArray addObjectsFromArray:newDatas];
+        NSArray *newUsers = [model result];
+        [weakSelf.dataArray addObjectsFromArray:newUsers];
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf checkFooterState:newUsers.count];
+        
         // 重新设置page = 1
-        self.page = 1;
-        [self checkFooterState:newDatas.count];
+        weakSelf.page = 1;
     } failure:^(NSError *error) {
-        if (self.params != params) return;
+        if (weakSelf.params != params) return;
         [weakSelf.tableView.mj_header endRefreshing];
     }];
 }
@@ -172,22 +165,22 @@ static NSString * const exchangeCellId = @"exchangeCell";
     [self.tableView.mj_header endRefreshing];
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"page"] = [NSString stringWithFormat:@"%@", @(self.page)];
+    params[@"page"] = [NSString stringWithFormat:@"%@", @(page)];
     params[@"my"] = @"0";
     self.params = params;
     __weakSelf
     [ODHttpTool getWithURL:ODUrlSwapList parameters:params modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
-        if (self.params != params) return;
+        if (weakSelf.params != params) return;
         NSArray *array = [model result];
         [weakSelf.dataArray addObjectsFromArray:array];
         [weakSelf.tableView reloadData];
-        [weakSelf.tableView.mj_footer endRefreshing];
+        
+        [weakSelf checkFooterState:array.count];
         // 请求成功后才赋值页码
         weakSelf.page = page;
-        [self checkFooterState:array.count];
     } failure:^(NSError *error) {
-        if (self.params != params) return;
-        self.page = self.page - 1;
+        if (weakSelf.params != params) return;
+        weakSelf.page = weakSelf.page - 1;
         [weakSelf.tableView.mj_footer endRefreshing];
     }];
 }
@@ -197,10 +190,6 @@ static NSString * const exchangeCellId = @"exchangeCell";
  */
 - (void)checkFooterState:(NSUInteger)count
 {
-    // 每次刷新右边数据时, 都控制footer显示或者隐藏
-    self.tableView.mj_footer.hidden = (count == 0);
-    
-    // 让底部控件结束刷新
     if (count < 20) { // 全部数据已经加载完毕
         [self.tableView.mj_footer endRefreshingWithNoMoreData];
     } else { // 还没有加载完毕

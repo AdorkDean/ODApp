@@ -4,7 +4,7 @@
 //
 //  Created by Odong-YG on 16/2/2.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
-//
+//  求帮助界面
 
 #import "ODBaseViewController.h"
 #import "ODBazaarCollectionCell.h"
@@ -18,10 +18,11 @@
 #import "ODBazaarRequestHelpModel.h"
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 
-@interface ODBazaarRequestHelpViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIPopoverPresentationControllerDelegate>
+@interface ODBazaarRequestHelpViewController : ODBaseViewController
+//<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIPopoverPresentationControllerDelegate>
 
 @property(nonatomic, copy) NSString *open_id;
-@property(nonatomic, strong) UICollectionView *collectionView;
+//@property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, strong) UIView *headView;
 @property(nonatomic, copy) NSString *status;

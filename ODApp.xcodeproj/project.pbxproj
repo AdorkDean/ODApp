@@ -281,6 +281,8 @@
 		232CB6721C92AF4C00340D12 /* ODPublicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB6711C92AF4C00340D12 /* ODPublicTool.m */; };
 		4029EB351C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4029EB341C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m */; };
 		4045DC981C97AD60007CD2BC /* ODBazaarPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 4045DC971C97AD60007CD2BC /* ODBazaarPhoto.m */; };
+		4045DC9C1C97D349007CD2BC /* ODBazaarHelpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4045DC9A1C97D349007CD2BC /* ODBazaarHelpCell.m */; };
+		4045DC9D1C97D349007CD2BC /* ODBazaarHelpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4045DC9B1C97D349007CD2BC /* ODBazaarHelpCell.xib */; };
 		407850231C9674AE00413E8D /* ODBazaarPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 407850221C9674AE00413E8D /* ODBazaarPhotosView.m */; };
 		40A02D1B1C965A3F009CE702 /* ODBazaarExchangeSkillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A02D191C965A3F009CE702 /* ODBazaarExchangeSkillCell.m */; };
 		40A02D1C1C965A3F009CE702 /* ODBazaarExchangeSkillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40A02D1A1C965A3F009CE702 /* ODBazaarExchangeSkillCell.xib */; };
@@ -823,6 +825,9 @@
 		4029EB341C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseSkillTimeModel.m; sourceTree = "<group>"; };
 		4045DC961C97AD60007CD2BC /* ODBazaarPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarPhoto.h; sourceTree = "<group>"; };
 		4045DC971C97AD60007CD2BC /* ODBazaarPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarPhoto.m; sourceTree = "<group>"; };
+		4045DC991C97D349007CD2BC /* ODBazaarHelpCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarHelpCell.h; sourceTree = "<group>"; };
+		4045DC9A1C97D349007CD2BC /* ODBazaarHelpCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarHelpCell.m; sourceTree = "<group>"; };
+		4045DC9B1C97D349007CD2BC /* ODBazaarHelpCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarHelpCell.xib; sourceTree = "<group>"; };
 		407850211C9674AE00413E8D /* ODBazaarPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarPhotosView.h; sourceTree = "<group>"; };
 		407850221C9674AE00413E8D /* ODBazaarPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarPhotosView.m; sourceTree = "<group>"; };
 		40A02D181C965A3F009CE702 /* ODBazaarExchangeSkillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarExchangeSkillCell.h; sourceTree = "<group>"; };
@@ -1432,6 +1437,13 @@
 		232CB4391C9264E200340D12 /* ExchangeSkill */ = {
 			isa = PBXGroup;
 			children = (
+				40A02D181C965A3F009CE702 /* ODBazaarExchangeSkillCell.h */,
+				40A02D191C965A3F009CE702 /* ODBazaarExchangeSkillCell.m */,
+				40A02D1A1C965A3F009CE702 /* ODBazaarExchangeSkillCell.xib */,
+				407850211C9674AE00413E8D /* ODBazaarPhotosView.h */,
+				407850221C9674AE00413E8D /* ODBazaarPhotosView.m */,
+				4045DC961C97AD60007CD2BC /* ODBazaarPhoto.h */,
+				4045DC971C97AD60007CD2BC /* ODBazaarPhoto.m */,
 				232CB4401C9264E200340D12 /* ODBazaarExchangeSkillCollectionCell.h */,
 				232CB4411C9264E200340D12 /* ODBazaarExchangeSkillCollectionCell.m */,
 				232CB4421C9264E200340D12 /* ODBazaarExchangeSkillCollectionCell.xib */,
@@ -1452,13 +1464,6 @@
 				232CB4491C9264E200340D12 /* ODCollectionCell.h */,
 				232CB44A1C9264E200340D12 /* ODCollectionCell.m */,
 				232CB44B1C9264E200340D12 /* ODCollectionCell.xib */,
-				40A02D181C965A3F009CE702 /* ODBazaarExchangeSkillCell.h */,
-				40A02D191C965A3F009CE702 /* ODBazaarExchangeSkillCell.m */,
-				40A02D1A1C965A3F009CE702 /* ODBazaarExchangeSkillCell.xib */,
-				407850211C9674AE00413E8D /* ODBazaarPhotosView.h */,
-				407850221C9674AE00413E8D /* ODBazaarPhotosView.m */,
-				4045DC961C97AD60007CD2BC /* ODBazaarPhoto.h */,
-				4045DC971C97AD60007CD2BC /* ODBazaarPhoto.m */,
 			);
 			path = ExchangeSkill;
 			sourceTree = "<group>";
@@ -1466,6 +1471,9 @@
 		232CB44E1C9264E200340D12 /* SearchHelp */ = {
 			isa = PBXGroup;
 			children = (
+				4045DC991C97D349007CD2BC /* ODBazaarHelpCell.h */,
+				4045DC9A1C97D349007CD2BC /* ODBazaarHelpCell.m */,
+				4045DC9B1C97D349007CD2BC /* ODBazaarHelpCell.xib */,
 				232CB44F1C9264E200340D12 /* ODBazaarCollectionCell.h */,
 				232CB4501C9264E200340D12 /* ODBazaarCollectionCell.m */,
 				232CB4511C9264E200340D12 /* ODBazaarCollectionCell.xib */,
@@ -2066,6 +2074,7 @@
 				232CB6351C9264E200340D12 /* ODTaskCell.xib in Resources */,
 				232CB6531C9264E200340D12 /* ODMyOrderCell.xib in Resources */,
 				232CB6601C9264E200340D12 /* ODSecondOrderView.xib in Resources */,
+				4045DC9D1C97D349007CD2BC /* ODBazaarHelpCell.xib in Resources */,
 				232CB5B81C9264E200340D12 /* ODCenderDetailView.xib in Resources */,
 				232CB65C1C9264E200340D12 /* ODOrderView.xib in Resources */,
 				ED57CC451C92A0C30091FCFF /* ODChoseCenterCell.xib in Resources */,
@@ -2338,6 +2347,7 @@
 				232CB5A21C9264E200340D12 /* ODStoreCreateOrderModel.m in Sources */,
 				407850231C9674AE00413E8D /* ODBazaarPhotosView.m in Sources */,
 				232CB6641C9264E200340D12 /* ODBalanceView.m in Sources */,
+				4045DC9C1C97D349007CD2BC /* ODBazaarHelpCell.m in Sources */,
 				232CB55C1C9264E200340D12 /* UIView+ODExtension.m in Sources */,
 				232CB5D81C9264E200340D12 /* ODOrderAddressModel.m in Sources */,
 				232CB6561C9264E200340D12 /* ODOrderDetailView.m in Sources */,
