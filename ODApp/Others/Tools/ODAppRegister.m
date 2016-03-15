@@ -20,8 +20,8 @@ static NSString * const kGetWXAppSecret = @"a6034898f4a370df22a358c5e6192645";
 /** 高德地图的apiKey */
 static NSString * const ODLocationApiKey = @"82b3b9feaca8b2c33829a156672a5fd0";
 /** 极光推送的apiKey */
-static NSString * const JPushAppKey = @"0e65afefdb32078c64936a6b";
-static NSString * const JPushMasterSecret = @"1d57142cfee45fd7bd0218cf";
+static NSString * const JPushAppKey = @"b2fe699862b85aa72bd21e82";
+static NSString * const JPushMasterSecret = @"bc50a30593d33b9b691e7b52";
 static NSString * const channel = @"AppStore";
 static BOOL const isProduction = FALSE;
 
