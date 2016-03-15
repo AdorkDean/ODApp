@@ -13,6 +13,7 @@
 
 @property(nonatomic, strong) ODBazaarExchangeSkillModel *model;
 
-@property (nonatomic, strong) NSArray *dataArray;
+@property(nonatomic, strong) NSArray *dataArray;
+
 
 @end

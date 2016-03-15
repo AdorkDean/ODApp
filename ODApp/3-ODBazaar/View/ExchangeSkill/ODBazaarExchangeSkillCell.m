@@ -8,7 +8,7 @@
 
 #import "ODBazaarExchangeSkillCell.h"
 #import "ODBazaarExchangeSkillModel.h"
-
+#import "ODHomeInfoModel.h"
 #import "UIButton+WebCache.h"
 #import "ODBazaarPhotosView.h"
 #import "ODOthersInformationController.h"
@@ -75,7 +75,7 @@
         // 设置圆角
         [weakSelf.avatarButton setBackgroundImage:[image OD_circleImage] forState:UIControlStateNormal];
     }];
-    // 监听点击
+//    // 监听点击
     [self.avatarButton addTarget:self action:@selector(clickavatarButton) forControlEvents:UIControlEventTouchUpInside];
     
     self.titleLabel.text = model.title;
@@ -129,5 +129,7 @@
         [navigationController pushViewController:vc animated:YES];
     }
 }
+
+
 
 @end

@@ -12,7 +12,7 @@
 #import "ODUserInformation.h"
 #import "ODStorePlaceListModel.h"
 #import "ODHomeInfoModel.h"
-
+#import "ODHomeButton.h"
 #define cellID @"ODBazaarExchangeSkillCollectionCell"
 
 // 循环cell标识
@@ -25,38 +25,33 @@ static NSString * const exchangeCellId = @"exchangeCell";
     MAMapView *_mapView;
 }
 
+@property(nonatomic, strong) UIView *headerView;
+@property(nonatomic, strong) UIView *topClassView;
+@property(nonatomic, strong) UIView *activityView;
+@property(nonatomic, strong) UIView *findCircleView;
 
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property(nonatomic, strong) ODCommunityBbsModel *model;
-@property(nonatomic ,strong) UITableView *tableView;
+@property(nonatomic, strong) UITableView *tableView;
 
 // 头视图
 @property(nonatomic, strong) ODhomeViewCollectionReusableView *rsusableView;
 // 尾视图
 @property(nonatomic, strong) ODHomeFoundFooterView *footerView;
-
-
-
 // 热门活动
 @property(nonatomic, strong) NSMutableArray *pictureArray;
 @property(nonatomic, strong) NSMutableArray *pictureIdArray;
-
 // 技能交换
 @property(nonatomic, strong) NSMutableArray *dataArray;
-
 // 城市列表
 @property(nonatomic, strong) NSArray *cityListArray;
-
-
-
 
 @end
 
 @implementation ODHomeFoundViewController
 
 #pragma mark - lifeCycle
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -73,10 +68,11 @@ static NSString * const exchangeCellId = @"exchangeCell";
 
     userInfoDic = [NSMutableDictionary dictionary];
 
-//    [self getLocationCityRequest];
-//    [self createCollectionView];
-//    [self getScrollViewRequest];
-//    [self getSkillChangeRequest];
+    [self createHeaderView];
+    [self createFooterView];
+    [self getLocationCityRequest];
+    [self getScrollViewRequest];
+    [self getSkillChangeRequest];
 
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
     _mapView.delegate = self;
@@ -88,8 +84,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     _search.delegate = self;
 
     __weakSelf
-    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note)
-    {
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note){
         [weakSelf.collectionView.mj_header beginRefreshing];
     }];
 }
@@ -128,7 +123,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     NSDictionary *parameter = @{@"region_name" : @""};
     [ODHttpTool getWithURL:ODUrlOtherCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
         weakSelf.cityListArray = [[model result] all];
-            [weakSelf.collectionView reloadData];
+            [weakSelf.tableView reloadData];
     }
     failure:^(NSError *error) {
         
@@ -161,38 +156,34 @@ static NSString * const exchangeCellId = @"exchangeCell";
     [ODHttpTool getWithURL:ODUrlOtherHome parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model) {
         [weakSelf.dataArray removeAllObjects];
         ODHomeInfoModel *infoModel = [model result];
-        for (ODHomeInfoSwapModel *swapModel in infoModel.swaps) {
-            [weakSelf.dataArray addObject:swapModel];
+        for (ODBazaarExchangeSkillModel *skillModel in infoModel.swaps) {
+            [weakSelf.dataArray addObject:skillModel];
         }
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf.collectionView reloadData];
-
+        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.tableView reloadData];
     }
     failure:^(NSError *error) {
         [weakSelf.collectionView.mj_header endRefreshing];
     }];
 }
-
 
 #pragma mark - 获得默认的体验中心的Store_id
 - (void)getDefaultCenterNameRequest
 {
     NSDictionary *parameter = @{@"show_type" : @"1",@"call_array":@"1"};
     __weak typeof(self) weakSelf = self;
-    [ODHttpTool getWithURL:ODUrlOtherStoreList parameters:parameter modelClass:[ODStorePlaceListModel class] success:^(ODStorePlaceListModelResponse *model)
-    {
+    [ODHttpTool getWithURL:ODUrlOtherStoreList parameters:parameter modelClass:[ODStorePlaceListModel class] success:^(ODStorePlaceListModelResponse *model){
         ODStorePlaceListModel *listModel = model.result.firstObject;
         weakSelf.storeId = [@(listModel.id)stringValue];
         [weakSelf pushToPlace];
     }
     failure:^(NSError *error) {
-        
     }];
 }
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODBazaaeExchangeNavHeight - ODTabBarHeight) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODTabBarHeight) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
         _tableView.dataSource = self;
         _tableView.delegate = self;
@@ -227,10 +218,10 @@ static NSString * const exchangeCellId = @"exchangeCell";
     // 点击后取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    ODHomeInfoSwapModel *model = self.dataArray[indexPath.row];
+    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
-    detailControler.swap_id = [NSString stringWithFormat:@"%@", model.swap_id];
-    detailControler.nick = model.user[@"nick"];
+    detailControler.swap_id = [NSString stringWithFormat:@"%d", model.swap_id];
+    detailControler.nick = model.user.nick;
     [self.navigationController pushViewController:detailControler animated:YES];
 }
 
@@ -239,178 +230,116 @@ static NSString * const exchangeCellId = @"exchangeCell";
     return model.rowHeight;
 }
 
-
-
-
-#pragma mark - Create UICollectionView
-
-- (void)createCollectionView {
-    __weakSelf
-    self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight - ODTabBarHeight) collectionViewLayout:self.flowLayout];
-
-    self.flowLayout.minimumLineSpacing = 6;
-    self.flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-
-    [self.collectionView registerClass:[ODhomeViewCollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"supple"];
-    [self.collectionView registerClass:[ODHomeFoundFooterView class] forSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"supple"];
-
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakSelf refreshdata];
-    }];
-
-    [self.view addSubview:self.collectionView];
+-(void)createHeaderView{
+    self.headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 200)];
+    self.headerView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    [self.view addSubview:self.headerView];
+    [self createTopClassView];
 }
 
-#pragma mark - UICollectionViewDelegate
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataArray.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODBazaarExchangeSkillCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    ODHomeInfoSwapModel *model = self.dataArray[indexPath.row];
-    [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
-
-    [cell.headButton addTarget:self action:@selector(headButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    cell.nickLabel.text = model.user[@"nick"];
-    [cell showDatasWithModel:model];
-
-    CGFloat width = kScreenSize.width > 320 ? 90 : 70;
-    if (model.imgs_small.count) {
-        for (id vc in cell.picView.subviews) {
-            [vc removeFromSuperview];
-        }
-        if (model.imgs_small.count == 4) {
-            for (NSInteger i = 0; i < model.imgs_small.count; i++) {
-                NSDictionary *dict = model.imgs_small[i];
-                UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake((width + 5) * (i % 2), (width + 5) * (i / 2), width, width)];
-                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
-                [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-                imageButton.tag = 10 * indexPath.row + i;
-                [cell.picView addSubview:imageButton];
-            }
-            cell.picViewConstraintHeight.constant = 2 * width + 5;
-        }
-        else {
-            for (NSInteger i = 0; i < model.imgs_small.count; i++) {
-                NSDictionary *dict = model.imgs_small[i];
-                UIButton *imageButton = [[UIButton alloc] initWithFrame:CGRectMake((width + 5) * (i % 3), (width + 5) * (i / 3), width, width)];
-                [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:dict[@"img_url"]] forState:UIControlStateNormal];
-                [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-                imageButton.tag = 10 * indexPath.row + i;
-                [cell.picView addSubview:imageButton];
-            }
-            cell.picViewConstraintHeight.constant = width + (width + 5) * ((model.imgs_small.count - 1) / 3);
-        }
+-(void)createTopClassView{
+    
+    self.topClassView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 147.5)];
+    self.topClassView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    [self.headerView addSubview:self.topClassView];
+    
+    NSArray *array = @[@"找活动",@"约场地",@"找优惠",@"找兼职",@"寻圈子",@"求帮助",@"换技能",@"更多"];
+    NSArray *imageArray = @[@"icon_activity",@"icon_field",@"icon_Discount",@"icon_Work-study",@"icon_circle_big",@"icon_help",@"icon_Skill_big",@"icon_more"];
+    CGFloat width = (KScreenWidth-2*ODLeftMargin)/4;
+    for (NSInteger i = 0; i < array.count; i++) {
+        UIButton *button = [ODHomeButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(ODLeftMargin+width*(i%4), 65*(i/4), width, 65);
+        [button setImage:[UIImage imageNamed:imageArray[i]] forState:UIControlStateNormal];
+        [button setTitle:array[i] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        button.titleLabel.font = [UIFont systemFontOfSize:10];
+        [self.headerView addSubview:button];
     }
-    else {
-        for (id vc in cell.picView.subviews) {
-            [vc removeFromSuperview];
-        }
-        cell.picViewConstraintHeight.constant = 0;
-    }
-    return cell;
+    [self createActivityView];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODHomeInfoSwapModel *model = self.dataArray[indexPath.row];
-    ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
-
-    vc.swap_id = [NSString stringWithFormat:@"%@", model.swap_id];
-    vc.nick = model.user[@"nick"];
-
-    [self.navigationController pushViewController:vc animated:YES];
+-(void)createActivityView{
+    self.activityView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topClassView.frame)+6, kScreenSize.width, 160)];
+    self.activityView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    [self.headerView addSubview:self.activityView];
+    
+    UIImageView *hotActivityImageView = [[UIImageView alloc]initWithFrame:CGRectMake(ODLeftMargin, 5, 17, 16)];
+    hotActivityImageView.image = [UIImage imageNamed:@"icon_Hot activityNew"];
+    [self.activityView addSubview:hotActivityImageView];
+    
+    UILabel *hotActivityLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(hotActivityImageView.frame) + 7.5, 5, 60, 20)];
+    hotActivityLabel.text = @"热门活动";
+    hotActivityLabel.font = [UIFont systemFontOfSize:14];
+    hotActivityLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+    [self.activityView addSubview:hotActivityLabel];
+    
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(hotActivityLabel.frame) + 10, (kScreenSize.width - 17.5), 110)];
+    [self.activityView addSubview:scrollView];
+    self.headerView.frame = CGRectMake(0, 0, kScreenSize.width, self.topClassView.frame.size.height+self.activityView.frame.size.height+12);
+    [self createFindCircleView];
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    static NSString *viewId = @"supple";
+-(void)createFindCircleView{
+    
+    self.findCircleView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.activityView.frame)+6, kScreenSize.width, 198)];
+    self.findCircleView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    [self.headerView addSubview:self.findCircleView];
+    
+    UIImageView *findCircleImage = [[UIImageView alloc]initWithFrame:CGRectMake(ODLeftMargin, 10, 15, 12.5)];
+    findCircleImage.image = [UIImage imageNamed:@"icon_circle_smallNew"];
+    [self.findCircleView addSubview:findCircleImage];
 
-    self.rsusableView = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:viewId forIndexPath:indexPath];
+    UILabel *findCircleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(findCircleImage.frame)+ 7.5, 5, 60, 20)];
+    findCircleLabel.text = @"寻圈子";
+    findCircleLabel.font = [UIFont systemFontOfSize:14];
+    findCircleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+    [self.findCircleView addSubview:findCircleLabel];
+    
+    UIView *findCircleBtnView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(findCircleLabel.frame) + 10, kScreenSize.width, 130)];
+    findCircleBtnView.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+    [self.findCircleView addSubview:findCircleBtnView];
 
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
-        // Hot Activity
-        self.rsusableView.scrollView.contentSize = CGSizeMake((kScreenSize.width - 15) * 7 / 12 * self.pictureArray.count, 0);
-        self.rsusableView.scrollView.contentOffset = CGPointMake(0, 0);
-        self.rsusableView.scrollView.delegate = self;
-        self.rsusableView.scrollView.showsHorizontalScrollIndicator = NO;
-        self.rsusableView.scrollView.showsVerticalScrollIndicator = NO;
-        [self.rsusableView.scrollView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    NSArray *array = @[ @"button_emotion", @"button_Funny", @"button_Movies", @"button_quadratic element", @"button_Life", @"button_Star", @"button_beautiful", @"button_Pet" ];
+    
+    CGFloat width = kScreenSize.width/4;
+    for (NSInteger i = 0; i < array.count; i++) {
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = CGRectMake(width*(i%4), 65*(i/4), width, 65);
+        [button setImage:[UIImage imageNamed:array[i]] forState:UIControlStateNormal];
+        [findCircleBtnView addSubview:button];
         
-        for (int i = 0; i < self.pictureArray.count; i++) {
-            UIButton *imageButton;
-            if (i < self.pictureArray.count - 1) {
-                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7 / 12 * i, 0, (kScreenSize.width - 15) * 7 / 12 - 8, 120)];
-            }
-            else {
-                imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7 / 12 * i, 0, (kScreenSize.width - 15) * 7 / 12, 120)];
-            }
-            [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.pictureArray[i]] forState:UIControlStateNormal];
-            imageButton.tag = 100 + i;
-            [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-            [self.rsusableView.scrollView addSubview:imageButton];
-        }
-
-        [self topEightButtonClick];
-        [self searchCircleButtonClick];
-
-        [self.rsusableView.gestureButton addTarget:self action:@selector(gestureButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-
     }
-    else if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
-        [self.rsusableView.moreSkillButton addTarget:self action:@selector(moreSkillButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return self.rsusableView;
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width -180)/2, CGRectGetMaxY(findCircleBtnView.frame)+14, 12, 8)];
+    imageView.image = [UIImage imageNamed:@"icon_gesture"];
+    [self.findCircleView addSubview:imageView];
+    
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake((kScreenSize.width - 160) / 2, CGRectGetMaxY(findCircleBtnView.frame) + 8, 160, 20)];
+    [button setTitle:@"想加入更多圈子么？ 憋说话，点我！" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:9];
+    [self.findCircleView addSubview:button];
+    self.headerView.frame = CGRectMake(0, 0, kScreenSize.width, self.topClassView.frame.size.height+self.activityView.frame.size.height+self.findCircleView.frame.size.height+18);
+     self.tableView.tableHeaderView = self.headerView;
 }
 
-//动态计算cell的高度
-- (CGFloat)returnHight:(ODHomeInfoSwapModel *)model {
-    CGFloat width = kScreenSize.width > 320 ? 90 : 70;
-    NSString *content = model.content;
-    NSDictionary *dict = @{NSFontAttributeName : [UIFont systemFontOfSize:13]};
-    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width - 93, 35) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
-    CGFloat baseHeight = size.height + 119;
-    if (model.imgs_small.count == 0) {
-        return baseHeight;
-    }
-    else if (model.imgs_small.count > 0 && model.imgs_small.count < 4) {
-        return baseHeight + width;
-    }
-    else if (model.imgs_small.count >= 4 && model.imgs_small.count < 7) {
-        return baseHeight + 2 * width + 5;
-    }
-    else if (model.imgs_small.count >= 7 && model.imgs_small.count < 9) {
-        return baseHeight + 3 * width + 10;
-    }
-    else {
-        return baseHeight + 3 * width + 10;
-    }
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {    
-    return CGSizeMake(0, 551);
-}
-
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section {
-    return CGSizeMake(0, 40);
+-(void)createFooterView{
+    UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 28.5)];
+    footerView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width-180)/2, 10.25, 12, 8)];
+    imageView.image = [UIImage imageNamed:@"icon_gesture"];
+    [footerView addSubview:imageView];
+    
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake((kScreenSize.width-160)/2, 4.25, 160, 20)];
+    [button setTitle:@"想了解更多技能？ 憋说话，点我！" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:9];
+    [footerView addSubview:button];
+    self.tableView.tableFooterView = footerView;
 }
 
 #pragma mark - AMapSearchDelegate
-
 //地图定位成功回调
 - (void) mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
 updatingLocation:(BOOL)updatingLocation {
@@ -446,9 +375,8 @@ updatingLocation:(BOOL)updatingLocation {
     if (response.pois.count == 0) {
         return;
     }
-    //通过 AMapPOISearchResponse 对象处理搜索结果
-//    for (AMapPOI *p in response.pois)
-//    {
+//    通过 AMapPOISearchResponse 对象处理搜索结果
+//    for (AMapPOI *p in response.pois){
 //        NSString *strPoi = [NSString stringWithFormat:@"%@", p.name];
 //    }
 }
@@ -492,8 +420,6 @@ updatingLocation:(BOOL)updatingLocation {
     }
 }
 
-
-#pragma mark - Action
 
 #pragma mark - 定位按钮 点击事件
 - (void)locationButtonClick:(UIButton *)button {
@@ -576,7 +502,6 @@ updatingLocation:(BOOL)updatingLocation {
 - (void)searchCircleButtonClick{
     __weakSelf
     self.rsusableView.searchCircleButtonTag = ^(NSInteger tag){
-        
         NSArray *bbsMarkArray = @[ @"情感", @"搞笑", @"影视", @"二次元", @"生活", @"明星", @"爱美", @"宠物" ];
         [weakSelf giveCommumityContent:bbsMarkArray[tag - 1000] andBbsType:5];
     };
@@ -604,7 +529,6 @@ updatingLocation:(BOOL)updatingLocation {
     vc.open_id = model.user.open_id;
     
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user.open_id]) {
-        
     }
     else {
         [self.navigationController pushViewController:vc animated:YES];
