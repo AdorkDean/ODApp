@@ -72,6 +72,18 @@
 
 }
 
+/**
+ *  设置cell间隙
+ */
+- (void)setFrame:(CGRect)frame
+{
+    // 判断是否是最后一个cell
+    //    if (!self.dataArray.lastObject)
+    
+    frame.size.height -= ODBazaaeExchangeCellMargin;
+    [super setFrame:frame];
+}
+
 #pragma mark - 事件方法
 /**
  *  点击头像按钮

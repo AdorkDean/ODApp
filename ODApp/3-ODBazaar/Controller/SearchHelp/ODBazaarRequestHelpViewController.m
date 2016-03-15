@@ -159,15 +159,13 @@ static NSString * const helpCellId = @"helpCell";
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewTasks)];
     [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTasks)];
+    self.tableView.mj_footer.automaticallyHidden = YES;
 }
 
 #pragma mark - UITableView 数据源方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSUInteger count = self.dataArray.count;
-    // 判断是否显示footer
-    [self checkFooterState:count];
-    return count;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -201,10 +199,8 @@ static NSString * const helpCellId = @"helpCell";
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_header endRefreshing];
         [self checkFooterState:helpModel.tasks.count];
-        
         // 重新设置为1
         self.count = 1;
-        
     } failure:^(NSError *error) {
         if (self.params != params) return;
         [weakSelf.tableView.mj_header endRefreshing];
@@ -240,7 +236,7 @@ static NSString * const helpCellId = @"helpCell";
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"task_status"] = self.status;
-    params[@"page"] = [NSString stringWithFormat:@"%ld", self.count];
+    params[@"page"] = [NSString stringWithFormat:@"%ld", page];
     params[@"city_id"] = [ODUserInformation sharedODUserInformation].cityID;
     self.params = params;
     __weakSelf
@@ -249,9 +245,7 @@ static NSString * const helpCellId = @"helpCell";
         
         ODBazaarRequestHelpModel *helpModel = [model result];
         [weakSelf.dataArray addObjectsFromArray:helpModel.tasks];
-        
         [weakSelf.tableView reloadData];
-        [weakSelf.tableView.mj_footer endRefreshing];
         [self checkFooterState:helpModel.tasks.count];
         
         // 请求成功后才赋值页码
@@ -268,10 +262,6 @@ static NSString * const helpCellId = @"helpCell";
  */
 - (void)checkFooterState:(NSUInteger)count
 {
-    // 每次刷新右边数据时, 都控制footer显示或者隐藏
-    self.tableView.mj_footer.hidden = (count == 0);
-    
-    // 让底部控件结束刷新
     if (count < 20) { // 全部数据已经加载完毕
         [self.tableView.mj_footer endRefreshingWithNoMoreData];
     } else { // 还没有加载完毕
