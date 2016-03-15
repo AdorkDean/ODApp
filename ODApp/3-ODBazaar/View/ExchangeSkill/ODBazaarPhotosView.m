@@ -10,6 +10,8 @@
 #import "ODBazaarExchangeSkillModel.h"
 #import "ODCommunityShowPicViewController.h"
 
+#import "ODBazaarPhoto.h"
+
 #define ODPhotoWH ((KScreenWidth - 75 - ODPhotoMargin * 3) / 3)
 #define ODPhotoMargin (17 / 2)
 #define ODPhotoMaxCol(count) ((count == 4) ? 2 : 3)
@@ -28,19 +30,16 @@
     // 创建图片控件
     while (self.subviews.count < count)
     {
-        UIImageView *photoView = [[UIImageView alloc] init];
+        ODBazaarPhoto *photoView = [[ODBazaarPhoto alloc] init];
         [self addSubview:photoView];
     }
     
     for (NSUInteger i = 0; i < self.subviews.count; i++)
     {
-        UIImageView *photoView = self.subviews[i];
+        ODBazaarPhoto *photoView = self.subviews[i];
         if (i < count) {
-            // 下载图片
             photoView.hidden = NO;
-            ODBazaarExchangeSkillImgs_smallModel *smallM = img_small[i];
-            [photoView sd_setImageWithURL:[NSURL OD_URLWithString:smallM.img_url]
-                         placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+            photoView.smallModel = img_small[i];
         } else {
             photoView.hidden = YES;
         }
@@ -97,15 +96,15 @@
 /**
  *  点击图片
  */
-- (void)clickPhotoView:(UIImageView *)photoView
+- (void)clickPhotoView:(UITapGestureRecognizer *)gesture
 {
+    ODBazaarPhoto *photo = (ODBazaarPhoto *)gesture.view;
+    
     ODBazaarExchangeSkillModel *model = self.skillModel;
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc] init];
     picController.photos = model.imgs_big;
     // 取出图片对应的位置
-    NSUInteger index = [self.subviews indexOfObject:photoView];
-    
-    picController.selectedIndex = index > 1000 ? 0 : index;
+    picController.selectedIndex = [model.imgs_small indexOfObject:photo.smallModel];
     picController.skill = @"skill";
     
     UITabBarController *tabBarControler = (id)[UIApplication sharedApplication].keyWindow.rootViewController;

@@ -17,7 +17,7 @@
 // 循环cell标识
 static NSString * const exchangeCellId = @"exchangeCell";
 
-// 选中的cell
+// 选中cell保存的模型
 #define ODSelectedUsers self.dataArray[self.tableView.indexPathForSelectedRow.row]
 
 @interface ODBazaaeExchangeSkillViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -50,8 +50,10 @@ static NSString * const exchangeCellId = @"exchangeCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 初始化TableView
     [self setupTableView];
     
+    // 初始化刷新控件
     [self setupRefresh];
 }
 
@@ -89,16 +91,16 @@ static NSString * const exchangeCellId = @"exchangeCell";
 - (void)setupRefresh
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewUsers)];
-    [self.tableView.mj_header beginRefreshing];
+//    [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreUsers)];
 }
 
 #pragma mark - UITableView 数据源方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // 判断是否显示footer
     NSUInteger count = self.dataArray.count;
-    self.tableView.mj_footer.hidden = (count == 0);
+    // 判断是否显示footer
+    [self checkFooterState:count];
     return count;
 }
 
@@ -150,12 +152,11 @@ static NSString * const exchangeCellId = @"exchangeCell";
         
         NSArray *newDatas = [model result];
         [weakSelf.dataArray addObjectsFromArray:newDatas];
-        
-        // 重新设置page = 1
-        self.page = 1;
-        
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_header endRefreshing];
+        // 重新设置page = 1
+        self.page = 1;
+        [self checkFooterState:newDatas.count];
     } failure:^(NSError *error) {
         if (self.params != params) return;
         [weakSelf.tableView.mj_header endRefreshing];
@@ -179,12 +180,11 @@ static NSString * const exchangeCellId = @"exchangeCell";
         if (self.params != params) return;
         NSArray *array = [model result];
         [weakSelf.dataArray addObjectsFromArray:array];
-        
-        // 请求成功后才赋值页码
-        weakSelf.page = page;
-        
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_footer endRefreshing];
+        // 请求成功后才赋值页码
+        weakSelf.page = page;
+        [self checkFooterState:array.count];
     } failure:^(NSError *error) {
         if (self.params != params) return;
         self.page = self.page - 1;
@@ -195,13 +195,17 @@ static NSString * const exchangeCellId = @"exchangeCell";
 /**
  *  时刻监测footer的状态
  */
-- (void)checkFooterState
+- (void)checkFooterState:(NSUInteger)count
 {
-    ODBazaarExchangeSkillModel *model = ODSelectedUsers;
-    // 判断是否隐藏footer
-//    BOOL result = (model.users.count == category.total);
-//    self.userTableView.mj_footer.hidden = result;
-//    if (!result) [self.userTableView.mj_footer endRefreshing];
+    // 每次刷新右边数据时, 都控制footer显示或者隐藏
+    self.tableView.mj_footer.hidden = (count == 0);
+    
+    // 让底部控件结束刷新
+    if (count < 20) { // 全部数据已经加载完毕
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else { // 还没有加载完毕
+        [self.tableView.mj_footer endRefreshing];
+    }
 }
 
 @end
