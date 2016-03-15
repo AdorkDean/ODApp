@@ -18,4 +18,10 @@
     self.signLabel.textColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
 }
 
+-(void)setModel:(ODBazaarDetailApplysModel *)model{
+    [self.imageV sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    self.nickLabel.text = model.user_nick;
+    self.signLabel.text = model.sign;
+}
+
 @end

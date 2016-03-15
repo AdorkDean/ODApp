@@ -43,4 +43,5 @@
 @property(nonatomic, strong) UIView *evaluationView;
 @property(nonatomic, strong) UITextView *evaluationTextView;
 @property(nonatomic, strong) UILabel *placeholderLabel;
+@property(nonatomic, strong) ODBazaarDetailModel *model;
 @end
