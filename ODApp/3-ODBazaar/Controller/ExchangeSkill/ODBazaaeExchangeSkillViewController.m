@@ -14,21 +14,17 @@
 #import "ODBazaarExchangeSkillDetailViewController.h"
 #import "ODBazaarExchangeSkillModel.h"
 
-// 循环cell标识
-static NSString * const exchangeCellId = @"exchangeCell";
-
-// 选中cell保存的模型
-#define ODSelectedUsers self.dataArray[self.tableView.indexPathForSelectedRow.row]
-
 @interface ODBazaaeExchangeSkillViewController () <UITableViewDataSource, UITableViewDelegate>
 
 /** 表格 */
 @property (nonatomic, strong) UITableView *tableView;
-
 /** 参数 */
 @property (nonatomic, strong) NSMutableDictionary *params;
 
 @end
+
+// 循环cell标识
+static NSString * const exchangeCellId = @"exchangeCell";
 
 @implementation ODBazaaeExchangeSkillViewController
 
@@ -63,7 +59,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 }
 
 - (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - 初始化方法
@@ -91,7 +87,8 @@ static NSString * const exchangeCellId = @"exchangeCell";
 - (void)setupRefresh
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewUsers)];
-//    [self.tableView.mj_header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
+//    self.tableView.mj_header
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreUsers)];
 }
 
@@ -118,8 +115,6 @@ static NSString * const exchangeCellId = @"exchangeCell";
     // 停止刷新
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
-    // 点击后取消选中
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
@@ -150,13 +145,14 @@ static NSString * const exchangeCellId = @"exchangeCell";
         // 清空所有数据
         [weakSelf.dataArray removeAllObjects];
         
-        NSArray *newDatas = [model result];
-        [weakSelf.dataArray addObjectsFromArray:newDatas];
+        NSArray *newUsers = [model result];
+        [weakSelf.dataArray addObjectsFromArray:newUsers];
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_header endRefreshing];
+        [self checkFooterState:newUsers.count];
+        
         // 重新设置page = 1
         self.page = 1;
-        [self checkFooterState:newDatas.count];
     } failure:^(NSError *error) {
         if (self.params != params) return;
         [weakSelf.tableView.mj_header endRefreshing];
@@ -181,10 +177,10 @@ static NSString * const exchangeCellId = @"exchangeCell";
         NSArray *array = [model result];
         [weakSelf.dataArray addObjectsFromArray:array];
         [weakSelf.tableView reloadData];
+        [self checkFooterState:array.count];
         [weakSelf.tableView.mj_footer endRefreshing];
         // 请求成功后才赋值页码
         weakSelf.page = page;
-        [self checkFooterState:array.count];
     } failure:^(NSError *error) {
         if (self.params != params) return;
         self.page = self.page - 1;

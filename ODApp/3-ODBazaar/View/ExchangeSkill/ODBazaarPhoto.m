@@ -18,7 +18,11 @@
     _smallModel = smallModel;
     
     [self sd_setImageWithURL:[NSURL OD_URLWithString:smallModel.img_url]
-            placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+            placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (image == nil) return;
+                
+                [self setImage:image];
+            }];
 }
 
 @end

@@ -14,6 +14,6 @@
 @interface ODBazaaeExchangeSkillViewController : ODBaseViewController
 
 @property(nonatomic, strong) NSMutableArray *dataArray;
+/** 页码 */
 @property(nonatomic, assign) NSInteger page;
-
 @end
