@@ -106,10 +106,7 @@
  */
 - (void)setFrame:(CGRect)frame
 {
-    // 判断是否是最后一个cell
-//    if (!self.dataArray.lastObject)
-    
-        frame.size.height -= ODBazaaeExchangeCellMargin;
+    frame.size.height -= ODBazaaeExchangeCellMargin;
     [super setFrame:frame];
 }
 

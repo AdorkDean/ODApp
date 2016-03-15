@@ -50,7 +50,6 @@ static CGFloat const photoBottomMargin = (25 / 2);
         // 计算正文文字高度
         CGFloat contentLabelHeight = [self.content od_SizeWithFont:[UIFont systemFontOfSize:11] maxWidth:(photosViewSize.width - 17 / 2)].height;
         
-//        self.content
         if (contentLabelHeight >= 35) contentLabelHeight = 35;
         
         CGFloat loveHeight = [[NSString stringWithFormat:@"%d", self.love_num] od_SizeWithFont:[UIFont systemFontOfSize:9]].height;
