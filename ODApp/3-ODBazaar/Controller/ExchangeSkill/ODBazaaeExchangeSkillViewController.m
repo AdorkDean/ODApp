@@ -117,7 +117,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     [self.tableView.mj_footer endRefreshing];
     // 点击后取消选中
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
+
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     detailControler.swap_id = [NSString stringWithFormat:@"%d", model.swap_id];

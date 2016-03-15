@@ -78,7 +78,6 @@
     // 监听点击
     [self.avatarButton addTarget:self action:@selector(clickavatarButton) forControlEvents:UIControlEventTouchUpInside];
     
-    
     self.titleLabel.text = model.title;
     self.priceLabel.text = [[[[NSString stringWithFormat:@"%d",model.price] stringByAppendingString:@"元"] stringByAppendingString:@"/"]stringByAppendingString:model.unit];
     self.nickLabel.text = model.user[@"nick"];

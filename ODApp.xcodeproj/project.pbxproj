@@ -1168,12 +1168,12 @@
 		232CB3A11C9264E200340D12 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				232CB3A61C9264E200340D12 /* ODHomeFoundViewController.h */,
+				232CB3A71C9264E200340D12 /* ODHomeFoundViewController.m */,
 				232CB3A21C9264E200340D12 /* ODFindFavorableController.h */,
 				232CB3A31C9264E200340D12 /* ODFindFavorableController.m */,
 				232CB3A41C9264E200340D12 /* ODFindJobController.h */,
 				232CB3A51C9264E200340D12 /* ODFindJobController.m */,
-				232CB3A61C9264E200340D12 /* ODHomeFoundViewController.h */,
-				232CB3A71C9264E200340D12 /* ODHomeFoundViewController.m */,
 				232CB3A81C9264E200340D12 /* ODLocationController.h */,
 				232CB3A91C9264E200340D12 /* ODLocationController.m */,
 			);

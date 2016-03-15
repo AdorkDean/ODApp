@@ -15,16 +15,21 @@
 
 #define cellID @"ODBazaarExchangeSkillCollectionCell"
 
-@interface ODHomeFoundViewController () {
+// 循环cell标识
+static NSString * const exchangeCellId = @"exchangeCell";
+
+@interface ODHomeFoundViewController ()<UITableViewDelegate,UITableViewDataSource>
+{
     NSMutableDictionary *userInfoDic;
     AMapSearchAPI *_search;
     MAMapView *_mapView;
 }
 
+
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-
 @property(nonatomic, strong) ODCommunityBbsModel *model;
+@property(nonatomic ,strong) UITableView *tableView;
 
 // 头视图
 @property(nonatomic, strong) ODhomeViewCollectionReusableView *rsusableView;
@@ -68,10 +73,10 @@
 
     userInfoDic = [NSMutableDictionary dictionary];
 
-    [self getLocationCityRequest];
-    [self createCollectionView];
-    [self getScrollViewRequest];
-    [self getSkillChangeRequest];
+//    [self getLocationCityRequest];
+//    [self createCollectionView];
+//    [self getScrollViewRequest];
+//    [self getSkillChangeRequest];
 
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
     _mapView.delegate = self;
@@ -149,7 +154,6 @@
 }
 
 #pragma mark - 技能交换数据请求
-
 - (void)getSkillChangeRequest {
     NSDictionary *parameter = @{};
     __weak typeof(self) weakSelf = self;
@@ -168,8 +172,9 @@
         [weakSelf.collectionView.mj_header endRefreshing];
     }];
 }
-#pragma mark - 获得默认的体验中心的Store_id
 
+
+#pragma mark - 获得默认的体验中心的Store_id
 - (void)getDefaultCenterNameRequest
 {
     NSDictionary *parameter = @{@"show_type" : @"1",@"call_array":@"1"};
@@ -184,6 +189,58 @@
         
     }];
 }
+
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODBazaaeExchangeNavHeight - ODTabBarHeight) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        // 取消分割线
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        // 注册cell
+        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarExchangeSkillCell class]) bundle:nil] forCellReuseIdentifier:exchangeCellId];
+        [self.view addSubview:_tableView];
+    }
+    return _tableView;
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return 1;
+}
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.dataArray.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ODBazaarExchangeSkillCell *cell = [tableView dequeueReusableCellWithIdentifier:exchangeCellId];
+    cell.model = self.dataArray[indexPath.row];
+    return cell;
+}
+
+#pragma mark - 代理方法
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    // 停止刷新
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+    // 点击后取消选中
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    ODHomeInfoSwapModel *model = self.dataArray[indexPath.row];
+    ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
+    detailControler.swap_id = [NSString stringWithFormat:@"%@", model.swap_id];
+    detailControler.nick = model.user[@"nick"];
+    [self.navigationController pushViewController:detailControler animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+    return model.rowHeight;
+}
+
+
+
 
 #pragma mark - Create UICollectionView
 
