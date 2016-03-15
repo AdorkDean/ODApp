@@ -106,6 +106,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 {
     ODBazaarExchangeSkillCell *cell = [tableView dequeueReusableCellWithIdentifier:exchangeCellId];
     cell.model = self.dataArray[indexPath.row];
+    cell.dataArray = self.dataArray;
     return cell;
 }
 
@@ -121,7 +122,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     detailControler.swap_id = [NSString stringWithFormat:@"%d", model.swap_id];
-    detailControler.nick = model.user[@"nick"];
+    detailControler.nick = model.user.nick;
     [self.navigationController pushViewController:detailControler animated:YES];
 }
 

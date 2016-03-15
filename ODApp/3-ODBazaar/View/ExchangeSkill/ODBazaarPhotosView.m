@@ -8,7 +8,6 @@
 
 #import "ODBazaarPhotosView.h"
 #import "ODBazaarExchangeSkillModel.h"
-#import "ODBazaarPhoto.h"
 #import "ODCommunityShowPicViewController.h"
 
 #define ODPhotoWH ((KScreenWidth - 75 - ODPhotoMargin * 3) / 3)
@@ -17,39 +16,31 @@
 
 @implementation ODBazaarPhotosView
 
-- (instancetype)initWithFrame:(CGRect)frame
+#pragma mark - 初始化方法
+- (void)setSkillModel:(ODBazaarExchangeSkillModel *)skillModel
 {
-    if (self = [super initWithFrame:frame])
-    {
-        self.autoresizingMask = UIViewAutoresizingNone;
-        
-        self.backgroundColor = [UIColor blueColor];
-    }
-    return self;
-}
-
-- (void)setPhotos:(ODBazaarExchangeSkillModel *)photos
-{
-    _photos = photos;
+    _skillModel = skillModel;
     
-    // 取出小图数组长度
-    NSUInteger count = photos.imgs_small.count;
+    // 取出img_small数组长度
+    NSArray *img_small = skillModel.imgs_small;
+    NSUInteger count = img_small.count;
     
     // 创建图片控件
-    while (self.subviews.count < count) {
-        ODBazaarPhoto *photoView = [[ODBazaarPhoto alloc] init];
+    while (self.subviews.count < count)
+    {
+        UIImageView *photoView = [[UIImageView alloc] init];
         [self addSubview:photoView];
-
     }
     
-    // 创建了足够的imageView
     for (NSUInteger i = 0; i < self.subviews.count; i++)
     {
-        ODBazaarPhoto *photoView = self.subviews[i];
+        UIImageView *photoView = self.subviews[i];
         if (i < count) {
-            // 传递数据
-            photoView.photo = self.photos.imgs_small[i];
+            // 下载图片
             photoView.hidden = NO;
+            ODBazaarExchangeSkillImgs_smallModel *smallM = img_small[i];
+            [photoView sd_setImageWithURL:[NSURL OD_URLWithString:smallM.img_url]
+                         placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
         } else {
             photoView.hidden = YES;
         }
@@ -68,7 +59,8 @@
 {
     [super layoutSubviews];
     
-    NSUInteger photosCount = self.photos.imgs_small.count;
+    NSUInteger photosCount = self.skillModel.imgs_small.count;
+    
     NSInteger maxCol = ODPhotoMaxCol(photosCount);
     for (NSUInteger i = 0; i < photosCount; i++) {
         UIImageView *photoView = self.subviews[i];
@@ -101,9 +93,13 @@
     return CGSizeMake(photosW, photosH);
 }
 
-- (void)clickPhotoView:(ODBazaarPhoto *)photoView
+#pragma mark - 事件方法
+/**
+ *  点击图片
+ */
+- (void)clickPhotoView:(UIImageView *)photoView
 {
-    ODBazaarExchangeSkillModel *model = self.photos;
+    ODBazaarExchangeSkillModel *model = self.skillModel;
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc] init];
     picController.photos = model.imgs_big;
     // 取出图片对应的位置

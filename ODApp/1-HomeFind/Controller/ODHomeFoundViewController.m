@@ -544,9 +544,9 @@ updatingLocation:(BOOL)updatingLocation {
     NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-    vc.open_id = model.user[@"open_id"];
+    vc.open_id = model.user.open_id;
     
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]]) {
+    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user.open_id]) {
         
     }
     else {
