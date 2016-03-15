@@ -12,6 +12,10 @@
 static CGFloat const bottomMargin = (30 / 2);
 static CGFloat const photoBottomMargin = (25 / 2);
 
+@implementation ODBazaarExchangeSkillUserModel
+
+@end
+
 @implementation ODBazaarExchangeSkillModel
 
 @synthesize rowHeight = _rowHeight;
@@ -34,7 +38,7 @@ static CGFloat const photoBottomMargin = (25 / 2);
     if (!_rowHeight) {
         // 计算名称文字高度
         CGFloat nameLabelHeight = [self.title od_SizeWithFont:[UIFont systemFontOfSize:11.5]].height;
-        CGFloat nickLabelHeight = [self.user[@"nick"] od_SizeWithFont:[UIFont systemFontOfSize:11]].height;
+        CGFloat nickLabelHeight = [self.user.nick od_SizeWithFont:[UIFont systemFontOfSize:11]].height;
         
         // 配图X/Y值
         CGFloat photosViewX = 75;

@@ -24,9 +24,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *loveLabel;
 @property (nonatomic, weak) IBOutlet UILabel *shareLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *genderImageView;
-
 /** 配图 */
 @property (nonatomic, weak) ODBazaarPhotosView *photosView;
+
 @end
 
 @implementation ODBazaarExchangeSkillCell
@@ -34,8 +34,7 @@
 #pragma mark - 懒加载
 - (ODBazaarPhotosView *)photosView
 {
-    if (!_photosView)
-    {
+    if (_photosView == nil) {
         ODBazaarPhotosView *photosView = [[ODBazaarPhotosView alloc] init];
         [self.contentView addSubview:photosView];
         _photosView = photosView;
@@ -47,9 +46,11 @@
 /**
  *  初始化控件
  */
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     // 取消选中样式
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.genderImageView.contentMode = UIViewContentModeCenter;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     self.nickLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
@@ -68,9 +69,8 @@
     // 设置数据
     UIImage *placeholderImage = [UIImage OD_circleImageNamed:@"titlePlaceholderImage"];
     __weakSelf;
-    
     // 头像
-    [self.avatarButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:model.user[@"avatar"]] forState:UIControlStateNormal placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.avatarButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:model.user.avatar] forState:UIControlStateNormal placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (image == nil) return;
         // 设置圆角
         [weakSelf.avatarButton setBackgroundImage:[image OD_circleImage] forState:UIControlStateNormal];
@@ -80,13 +80,12 @@
     
     self.titleLabel.text = model.title;
     self.priceLabel.text = [[[[NSString stringWithFormat:@"%d",model.price] stringByAppendingString:@"元"] stringByAppendingString:@"/"]stringByAppendingString:model.unit];
-    self.nickLabel.text = model.user[@"nick"];
+    self.nickLabel.text = model.user.nick;
     self.contentLabel.text = model.content;
     
     self.loveLabel.text = [NSString stringWithFormat:@"%d",model.love_num];
     self.shareLabel.text = [NSString stringWithFormat:@"%d",model.share_num];
-    NSString *gender = [NSString stringWithFormat:@"%@",model.user[@"gender"]];
-    if ([gender isEqualToString:@"2"]) {
+    if (model.user.gender == ODBazaarUserGenderTypeWoman) {
         self.genderImageView.image = [UIImage imageNamed:@"icon_woman"];
     }else{
         self.genderImageView.image = [UIImage imageNamed:@"icon_man"];
@@ -96,7 +95,7 @@
     if (model.imgs_small.count) {
         self.photosView.hidden = NO;
         self.photosView.frame = model.photosFrame;
-        self.photosView.photos = model;
+        self.photosView.skillModel = model;
     } else {
         self.photosView.hidden = YES;
     }
@@ -107,8 +106,8 @@
  */
 - (void)setFrame:(CGRect)frame
 {
-    frame.size.height -= 6;
-    
+    // 判断是否是最后一个cell
+    if (!self.dataArray.lastObject) frame.size.height -= ODBazaaeExchangeCellMargin;
     [super setFrame:frame];
 }
 
@@ -120,7 +119,7 @@
 {
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
     // 取出open_id
-    NSString *open_id = self.model.user[@"open_id"];
+    NSString *open_id = self.model.user.open_id;
     vc.open_id = open_id;
     // 如果不是自己, 可以跳转
     if (![[ODUserInformation sharedODUserInformation].openID isEqualToString:open_id])

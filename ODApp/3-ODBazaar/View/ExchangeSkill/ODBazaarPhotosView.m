@@ -8,8 +8,9 @@
 
 #import "ODBazaarPhotosView.h"
 #import "ODBazaarExchangeSkillModel.h"
-#import "ODBazaarPhoto.h"
 #import "ODCommunityShowPicViewController.h"
+
+#import "ODBazaarPhoto.h"
 
 #define ODPhotoWH ((KScreenWidth - 75 - ODPhotoMargin * 3) / 3)
 #define ODPhotoMargin (17 / 2)
@@ -17,39 +18,28 @@
 
 @implementation ODBazaarPhotosView
 
-- (instancetype)initWithFrame:(CGRect)frame
+#pragma mark - 初始化方法
+- (void)setSkillModel:(ODBazaarExchangeSkillModel *)skillModel
 {
-    if (self = [super initWithFrame:frame])
-    {
-        self.autoresizingMask = UIViewAutoresizingNone;
-        
-        self.backgroundColor = [UIColor blueColor];
-    }
-    return self;
-}
-
-- (void)setPhotos:(ODBazaarExchangeSkillModel *)photos
-{
-    _photos = photos;
+    _skillModel = skillModel;
     
-    // 取出小图数组长度
-    NSUInteger count = photos.imgs_small.count;
+    // 取出img_small数组长度
+    NSArray *img_small = skillModel.imgs_small;
+    NSUInteger count = img_small.count;
     
     // 创建图片控件
-    while (self.subviews.count < count) {
+    while (self.subviews.count < count)
+    {
         ODBazaarPhoto *photoView = [[ODBazaarPhoto alloc] init];
         [self addSubview:photoView];
-
     }
     
-    // 创建了足够的imageView
     for (NSUInteger i = 0; i < self.subviews.count; i++)
     {
         ODBazaarPhoto *photoView = self.subviews[i];
         if (i < count) {
-            // 传递数据
-            photoView.photo = self.photos.imgs_small[i];
             photoView.hidden = NO;
+            photoView.smallModel = img_small[i];
         } else {
             photoView.hidden = YES;
         }
@@ -68,7 +58,8 @@
 {
     [super layoutSubviews];
     
-    NSUInteger photosCount = self.photos.imgs_small.count;
+    NSUInteger photosCount = self.skillModel.imgs_small.count;
+    
     NSInteger maxCol = ODPhotoMaxCol(photosCount);
     for (NSUInteger i = 0; i < photosCount; i++) {
         UIImageView *photoView = self.subviews[i];
@@ -101,15 +92,19 @@
     return CGSizeMake(photosW, photosH);
 }
 
-- (void)clickPhotoView:(ODBazaarPhoto *)photoView
+#pragma mark - 事件方法
+/**
+ *  点击图片
+ */
+- (void)clickPhotoView:(UITapGestureRecognizer *)gesture
 {
-    ODBazaarExchangeSkillModel *model = self.photos;
+    ODBazaarPhoto *photo = (ODBazaarPhoto *)gesture.view;
+    
+    ODBazaarExchangeSkillModel *model = self.skillModel;
     ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc] init];
     picController.photos = model.imgs_big;
     // 取出图片对应的位置
-    NSUInteger index = [self.subviews indexOfObject:photoView];
-    
-    picController.selectedIndex = index > 1000 ? 0 : index;
+    picController.selectedIndex = [model.imgs_small indexOfObject:photo.smallModel];
     picController.skill = @"skill";
     
     UITabBarController *tabBarControler = (id)[UIApplication sharedApplication].keyWindow.rootViewController;

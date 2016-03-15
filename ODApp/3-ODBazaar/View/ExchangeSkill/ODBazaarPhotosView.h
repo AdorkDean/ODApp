@@ -12,7 +12,7 @@
 @interface ODBazaarPhotosView : UIView
 
 /** 配图数组 */
-@property (nonatomic, strong) ODBazaarExchangeSkillModel *photos;
+@property (nonatomic, strong) ODBazaarExchangeSkillModel *skillModel;
 
 /**
  *  根据传入图片计算配图高度

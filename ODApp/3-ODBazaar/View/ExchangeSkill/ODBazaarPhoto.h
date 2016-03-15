@@ -2,7 +2,7 @@
 //  ODBazaarPhoto.h
 //  ODApp
 //
-//  Created by 王振航 on 16/3/14.
+//  Created by 王振航 on 16/3/15.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 
 @interface ODBazaarPhoto : UIImageView
 
-/** 模型 */
-@property (nonatomic, strong) ODBazaarExchangeSkillImgs_smallModel *photo;
+/** 地址 */
+@property (nonatomic, strong) ODBazaarExchangeSkillImgs_smallModel *smallModel;
 
 @end
