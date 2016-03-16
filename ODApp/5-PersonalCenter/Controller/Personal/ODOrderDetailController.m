@@ -282,7 +282,7 @@
     if ([status isEqualToString:@"1"]) {
         
         self.orderDetailView.typeLabel.text = @"待支付";
-        self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
+//        self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
         
     } else if ([status isEqualToString:@"2"]) {
         
@@ -316,7 +316,7 @@
     } else if ([status isEqualToString:@"-1"]) {
         
         self.orderDetailView.typeLabel.text = @"已取消";
-        self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
+//        self.orderDetailView.typeLabel.textColor = [UIColor lightGrayColor];
         
     } else if ([status isEqualToString:@"-2"]) {
         

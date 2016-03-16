@@ -14,6 +14,9 @@
 #import "ODOrderDetailController.h"
 #import "ODSecondOrderDetailController.h"
 
+
+#import "ODIndentDetailController.h"
+
 @interface ODMyOrderController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 
@@ -153,33 +156,50 @@
     self.indexRow = indexPath.row;
     
     
-    if ([swap_type isEqualToString:@"1"]) {
-        ODSecondOrderDetailController *vc = [[ODSecondOrderDetailController alloc] init];
-        vc.order_id = [NSString stringWithFormat:@"%@", model.order_id];
-        vc.orderType = model.status_str;
-        vc.orderStatus = orderStatus;
-        [self.navigationController pushViewController:vc animated:YES];
+    ODIndentDetailController *vc = [[ODIndentDetailController alloc] init];
+
+    vc.order_id = [NSString stringWithFormat:@"%@", model.order_id];
+    vc.orderType = model.status_str;
+    vc.orderStatus = orderStatus;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    __weakSelf
+    vc.getRefresh = ^(NSString *isRefresh) {
         
-        __weakSelf
-        vc.getRefresh = ^(NSString *isRefresh) {
-            
-            
-            weakSelf.isRefresh = isRefresh;
-        };
-        
-    } else {
-        ODOrderDetailController *vc = [[ODOrderDetailController alloc] init];
-        vc.order_id = [NSString stringWithFormat:@"%@", model.order_id];
-        vc.orderType = model.status_str;
-        vc.orderStatus = orderStatus;
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        __weakSelf
-        vc.getRefresh = ^(NSString *isRefresh) {
-            
-            weakSelf.isRefresh = isRefresh;
-        };
-    }
+        weakSelf.isRefresh = isRefresh;
+    };
+    
+    
+//    if ([swap_type isEqualToString:@"1"]) {
+//        ODSecondOrderDetailController *vc = [[ODSecondOrderDetailController alloc] init];
+//        vc.order_id = [NSString stringWithFormat:@"%@", model.order_id];
+//        vc.orderType = model.status_str;
+//        vc.orderStatus = orderStatus;
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+//        __weakSelf
+//        vc.getRefresh = ^(NSString *isRefresh) {
+//            
+//            
+//            weakSelf.isRefresh = isRefresh;
+//        };
+//        
+//    } else {
+//        
+//        
+//        
+//        ODOrderDetailController *vc = [[ODOrderDetailController alloc] init];
+//        vc.order_id = [NSString stringWithFormat:@"%@", model.order_id];
+//        vc.orderType = model.status_str;
+//        vc.orderStatus = orderStatus;
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+//        __weakSelf
+//        vc.getRefresh = ^(NSString *isRefresh) {
+//            
+//            weakSelf.isRefresh = isRefresh;
+//        };
+//    }
 }
 
 //动态设置每个item的大小
