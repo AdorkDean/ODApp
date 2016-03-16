@@ -9,7 +9,6 @@
 #import "ODBaseViewController.h"
 #import "ODBazaarExchangeSkillDetailViewController.h"
 #import "ODBazaarExchangeSkillModel.h"
-#import "ODBazaarExchangeSkillCollectionCell.h"
 #import "UIImageView+WebCache.h"
 #import "ODHelp.h"
 #import "ODCommunityShowPicViewController.h"

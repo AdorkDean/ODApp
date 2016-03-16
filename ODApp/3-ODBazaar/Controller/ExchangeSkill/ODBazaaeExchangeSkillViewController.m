@@ -20,6 +20,8 @@
 @property (nonatomic, strong) UITableView *tableView;
 /** 参数 */
 @property (nonatomic, strong) NSMutableDictionary *params;
+/** 页码 */
+@property (nonatomic, assign) NSInteger page;
 
 @end
 
@@ -46,6 +48,9 @@ static NSString * const exchangeCellId = @"exchangeCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 接收通知
+    [self addObserver];
+    
     // 初始化TableView
     [self setupTableView];
     
@@ -59,17 +64,33 @@ static NSString * const exchangeCellId = @"exchangeCell";
 }
 
 - (void)dealloc{
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - 初始化方法
+
+/**
+ *  接收通知
+ */
+- (void)addObserver
+{
+    __weakSelf;
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationReleaseSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
+        [weakSelf.tableView.mj_header beginRefreshing];
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
+        [weakSelf.tableView.mj_header beginRefreshing];
+    }];
+}
 /**
  *  初始化表格
  */
 - (void)setupTableView
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODBazaaeExchangeNavHeight - ODTabBarHeight) style:UITableViewStylePlain];
+    // 创建表格
+    CGRect frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODBazaaeExchangeNavHeight - ODTabBarHeight);
+    UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
     tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     tableView.dataSource = self;
     tableView.delegate = self;
@@ -109,7 +130,6 @@ static NSString * const exchangeCellId = @"exchangeCell";
 #pragma mark - 代理方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    // 停止刷新
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
     
@@ -148,7 +168,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf checkFooterState:newUsers.count];
         
-        // 重新设置page = 1
+        // 重新设置 page = 1
         weakSelf.page = 1;
     } failure:^(NSError *error) {
         if (weakSelf.params != params) return;
@@ -158,11 +178,10 @@ static NSString * const exchangeCellId = @"exchangeCell";
 
 - (void)loadMoreUsers
 {
-    // 取出页码
-    NSInteger page = self.page + 1;
-    
     // 结束下拉刷新
     [self.tableView.mj_header endRefreshing];
+    // 取出页码
+    NSInteger page = self.page + 1;
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"page"] = [NSString stringWithFormat:@"%@", @(page)];

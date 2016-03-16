@@ -26,6 +26,9 @@
 
 #pragma mark - 初始化方法
 - (void)awakeFromNib {
+    // 取消选中样式
+    self.autoresizingMask = NO;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     self.nameLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
@@ -34,6 +37,9 @@
     self.statusLabel.layer.cornerRadius = 5;
     self.statusLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.statusLabel.backgroundColor = [UIColor colorWithHexString:@"#ffd701" alpha:1];
+    
+    CGFloat leftMargin = 67.5;
+//    self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - leftMargin - 15;
 }
 
 /**

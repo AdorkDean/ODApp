@@ -19,6 +19,9 @@ UIKIT_EXTERN CGFloat const ODBazaaeExchangeNavHeight;
 /** 欧动集市cell的间隙 */
 UIKIT_EXTERN CGFloat const ODBazaaeExchangeCellMargin;
 
+/** 获取验证码时间 */
+UIKIT_EXTERN NSTimeInterval const getVerificationCodeTime;
+
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 UIKIT_EXTERN NSString * const kUserCache;
