@@ -1479,12 +1479,12 @@
 		232CB44E1C9264E200340D12 /* SearchHelp */ = {
 			isa = PBXGroup;
 			children = (
-				409141831C98F70E0059E05F /* ODBazaarCollectionCell.h */,
-				409141841C98F70E0059E05F /* ODBazaarCollectionCell.m */,
-				409141851C98F70E0059E05F /* ODBazaarCollectionCell.xib */,
 				4045DC991C97D349007CD2BC /* ODBazaarHelpCell.h */,
 				4045DC9A1C97D349007CD2BC /* ODBazaarHelpCell.m */,
 				4045DC9B1C97D349007CD2BC /* ODBazaarHelpCell.xib */,
+				409141831C98F70E0059E05F /* ODBazaarCollectionCell.h */,
+				409141841C98F70E0059E05F /* ODBazaarCollectionCell.m */,
+				409141851C98F70E0059E05F /* ODBazaarCollectionCell.xib */,
 				232CB4521C9264E200340D12 /* ODBazaarDetailCollectionCell.h */,
 				232CB4531C9264E200340D12 /* ODBazaarDetailCollectionCell.m */,
 				232CB4541C9264E200340D12 /* ODBazaarDetailCollectionCell.xib */,

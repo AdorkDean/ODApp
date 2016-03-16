@@ -102,8 +102,8 @@ static CGFloat const lineHeight = 1;
     scrollView.pagingEnabled = YES;
     scrollView.delegate = self;
     scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.showsVerticalScrollIndicator = NO;
     scrollView.bounces = NO;
-    scrollView.contentSize = CGSizeMake(2 * KScreenWidth, height);
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
 }
@@ -183,6 +183,7 @@ static CGFloat const lineHeight = 1;
 - (void)changeController:(UIButton *)button
 {
     self.index = button.tag - 10010;
+    self.scrollView.contentSize = CGSizeMake(2 * KScreenWidth, 0);
 }
 
 @end

@@ -97,6 +97,8 @@ static NSString * const exchangeCellId = @"exchangeCell";
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
+    tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 6);
+    
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell

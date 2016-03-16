@@ -71,6 +71,7 @@
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="SHx-qU-7lK" firstAttribute="bottom" secondItem="Z54-fX-NH3" secondAttribute="bottom" id="4ci-VX-l6x"/>
                 <constraint firstAttribute="trailing" secondItem="dVs-am-zZd" secondAttribute="trailing" constant="15" id="5cz-6u-vPA"/>
                 <constraint firstItem="0hi-Av-bFs" firstAttribute="leading" secondItem="wsq-oO-xbz" secondAttribute="trailing" constant="10" id="6ic-Wm-9Cn"/>
                 <constraint firstItem="Z54-fX-NH3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="82l-Ul-IWA"/>
@@ -80,7 +81,6 @@
                 <constraint firstItem="0hi-Av-bFs" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="14" id="UJw-qB-U9Q"/>
                 <constraint firstAttribute="trailing" secondItem="SHx-qU-7lK" secondAttribute="trailing" constant="15" id="ZSb-Ow-Pzs"/>
                 <constraint firstItem="wsq-oO-xbz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="cMQ-RL-7zz"/>
-                <constraint firstItem="Z54-fX-NH3" firstAttribute="top" secondItem="wsq-oO-xbz" secondAttribute="bottom" constant="22" id="d4T-eH-KdZ"/>
                 <constraint firstItem="dVs-am-zZd" firstAttribute="top" secondItem="0hi-Av-bFs" secondAttribute="bottom" constant="10" id="e61-SV-oJh"/>
                 <constraint firstItem="wsq-oO-xbz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="oR0-Sm-Rpb"/>
                 <constraint firstItem="dVs-am-zZd" firstAttribute="leading" secondItem="wsq-oO-xbz" secondAttribute="trailing" constant="10" id="sYX-a3-oUZ"/>

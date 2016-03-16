@@ -24,6 +24,18 @@
 
 @implementation ODBazaarHelpCell
 
+- (UILabel *)contentLabel
+{
+    if (!_contentLabel)
+    {
+        
+        UILabel *contentLabel = [[UILabel alloc] init];
+        [self.contentView addSubview:contentLabel];
+        _contentLabel = contentLabel;
+    }
+    return _contentLabel;
+}
+
 #pragma mark - 初始化方法
 - (void)awakeFromNib {
     // 取消选中样式
@@ -31,15 +43,15 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.contentLabel.font = [UIFont systemFontOfSize:11.5];
+    self.contentLabel.numberOfLines = 2;
+    self.contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     self.nameLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     self.statusLabel.layer.masksToBounds = YES;
     self.statusLabel.layer.cornerRadius = 5;
     self.statusLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.statusLabel.backgroundColor = [UIColor colorWithHexString:@"#ffd701" alpha:1];
-    
-    CGFloat leftMargin = 67.5;
-//    self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - leftMargin - 15;
 }
 
 /**
@@ -63,6 +75,7 @@
     
     self.titleLabel.text = model.title;
     self.contentLabel.text = model.content;
+    self.contentLabel.frame = model.contentFrame;
     self.nameLabel.text = model.user_nick;
     //设置Label显示不同大小的字体
     NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];
