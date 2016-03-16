@@ -26,7 +26,7 @@
 
 @property (nonatomic, copy) NSString *avatar;
 
-@property (nonatomic, assign) int task_id;
+@property (nonatomic, assign) NSInteger task_id;
 
 @property (nonatomic, copy) NSString *task_start_date;
 

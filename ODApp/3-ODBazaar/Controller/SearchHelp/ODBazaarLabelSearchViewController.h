@@ -7,7 +7,6 @@
 //
 
 #import "ODBaseViewController.h"
-#import "ODBazaarCollectionCell.h"
 #import "MJRefresh.h"
 #import "ODBazaarModel.h"
 #import "ODBazaarDetailViewController.h"

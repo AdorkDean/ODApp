@@ -12,6 +12,7 @@
 #import "ODUserInformation.h"
 #import "ODStorePlaceListModel.h"
 #import "ODHomeInfoModel.h"
+#import "ODBazaarExchangeSkillCollectionCell.h"
 
 #define cellID @"ODBazaarExchangeSkillCollectionCell"
 
