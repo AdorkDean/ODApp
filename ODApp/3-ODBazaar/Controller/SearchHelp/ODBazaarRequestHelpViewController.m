@@ -9,7 +9,7 @@
 #import "ODBazaarRequestHelpViewController.h"
 #import "ODBazaarHelpCell.h"
 
-@interface ODBazaarRequestHelpViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface ODBazaarRequestHelpViewController () <UITableViewDataSource, UITableViewDelegate,UIPopoverPresentationControllerDelegate>
 
 /** 表格 */
 @property (nonatomic, strong) UITableView *tableView;
@@ -38,39 +38,20 @@ static NSString * const helpCellId = @"helpCell";
     if ([self.refresh isEqualToString:@"release"]) {
         self.status = @"9";
         [self.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
-//        [self.collectionView.mj_header beginRefreshing];
+        [self.tableView.mj_header beginRefreshing];
     } else if ([self.refresh isEqualToString:@"del"]) {
         [self.dataArray removeObjectAtIndex:self.indexPath];
-//        [self.collectionView reloadData];
+        [self.tableView reloadData];
     }
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationShowBazaar object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
-//        weakSelf.status = @"9";
-//        [weakSelf.screeningButton setTitle:@"任务筛选" forState:UIControlStateNormal];
-//        [weakSelf.collectionView.mj_header beginRefreshing];
-//    }];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationReleaseTask object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
-//        weakSelf.status = @"9";
-//        [weakSelf.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
-//        [weakSelf.collectionView.mj_header beginRefreshing];
-//        
-//    }];
-//    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
-//        weakSelf.status = @"9";
-//        [weakSelf.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
-//        [weakSelf.collectionView.mj_header beginRefreshing];
-//    }];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationQuit object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
-//        weakSelf.status = @"9";
-//        [weakSelf.screeningButton setTitle:@"任务筛选" forState:UIControlStateNormal];
-//        [weakSelf.collectionView.mj_header beginRefreshing];
-//    }];
+    
+    // 添加通知
+    [self addObserver];
+    
     [self createScreeningAndSearchButton];
     
     [self setupTableView];
@@ -89,6 +70,38 @@ static NSString * const helpCellId = @"helpCell";
 }
 
 #pragma mark - 初始化方法
+
+/**
+ *  接收通知
+ */
+- (void)addObserver
+{
+    __weakSelf
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationShowBazaar object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
+        weakSelf.status = @"9";
+        [weakSelf.screeningButton setTitle:@"任务筛选" forState:UIControlStateNormal];
+        [weakSelf.tableView.mj_header beginRefreshing];
+    }];
+
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationReleaseTask object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
+        weakSelf.status = @"9";
+        [weakSelf.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
+        [weakSelf.tableView.mj_header beginRefreshing];
+
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
+        weakSelf.status = @"9";
+        [weakSelf.screeningButton setTitle:@"全部" forState:UIControlStateNormal];
+        [weakSelf.tableView.mj_header beginRefreshing];
+    }];
+
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationQuit object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
+        weakSelf.status = @"9";
+        [weakSelf.screeningButton setTitle:@"任务筛选" forState:UIControlStateNormal];
+        [weakSelf.tableView.mj_header beginRefreshing];
+    }];
+}
+
 /**
  *  创建搜索栏
  */
@@ -176,7 +189,33 @@ static NSString * const helpCellId = @"helpCell";
 }
 
 #pragma mark - UITableView 代理方法
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+    
+    ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc] init];
+    ODBazaarRequestHelpTasksModel *model = self.dataArray[indexPath.row];
+    bazaarDetail.task_id = [NSString stringWithFormat:@"%ld", model.task_id];
+    bazaarDetail.task_status_name = model.task_status_name;
+    bazaarDetail.open_id = model.open_id;
+    __weakSelf
+    bazaarDetail.myBlock = ^(NSString *del) {
+        weakSelf.refresh = del;
+    };
+    if ([self.refresh isEqualToString:@"accept"]) {
+        [bazaarDetail.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
+    }
+    self.indexPath = indexPath.row;
+    [self.navigationController pushViewController:bazaarDetail animated:YES];
+}
 
+#pragma mark - UIPopDelegate
+- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
+    return UIModalPresentationNone;
+}
+
+#pragma mark - 事件方法
 - (void)loadNewTasks
 {
     // 结束上拉加载
@@ -189,42 +228,22 @@ static NSString * const helpCellId = @"helpCell";
     self.params = params;
     __weakSelf
     [ODHttpTool getWithURL:ODUrlTaskList parameters:params modelClass:[ODBazaarRequestHelpModel class] success:^(ODBazaarRequestHelpModelResponse *model) {
-        if (self.params != params) return;
+        if (weakSelf.params != params) return;
         // 清空所有数据
         [weakSelf.dataArray removeAllObjects];
         
         ODBazaarRequestHelpModel *helpModel = [model result];
         [weakSelf.dataArray addObjectsFromArray:helpModel.tasks];
-
+        
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_header endRefreshing];
-        [self checkFooterState:helpModel.tasks.count];
+        [weakSelf checkFooterState:helpModel.tasks.count];
         // 重新设置为1
-        self.count = 1;
+        weakSelf.count = 1;
     } failure:^(NSError *error) {
-        if (self.params != params) return;
+        if (weakSelf.params != params) return;
         [weakSelf.tableView.mj_header endRefreshing];
     }];
-    
-//    NSDictionary *parameter = @{@"task_status" : self.status, @"page" : [NSString stringWithFormat:@"%ld", (long)self.count], @"city_id" : [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
-//    __weakSelf
-//    [ODHttpTool getWithURL:ODUrlTaskList parameters:parameter modelClass:[ODBazaarRequestHelpModel class] success:^(ODBazaarRequestHelpModelResponse *model) {
-//        
-//        if (weakSelf.count == 1) {
-//            [weakSelf.dataArray removeAllObjects];
-//        }
-//        
-//        ODBazaarRequestHelpModel *helpModel = [model result];
-//        for (ODBazaarRequestHelpTasksModel *taskModel in helpModel.tasks) {
-//            [weakSelf.dataArray addObject:taskModel];
-//        }
-//        [weakSelf.collectionView.mj_header endRefreshing];
-//        [weakSelf.collectionView.mj_footer endRefreshing];
-//        [weakSelf.collectionView reloadData];
-//    } failure:^(NSError *error) {
-//        [weakSelf.collectionView.mj_header endRefreshing];
-//        [weakSelf.collectionView.mj_footer endRefreshing];
-//    }];
 }
 
 - (void)loadMoreTasks
@@ -241,18 +260,17 @@ static NSString * const helpCellId = @"helpCell";
     self.params = params;
     __weakSelf
     [ODHttpTool getWithURL:ODUrlTaskList parameters:params modelClass:[ODBazaarRequestHelpModel class] success:^(ODBazaarRequestHelpModelResponse *model) {
-        if (self.params != params) return;
+        if (weakSelf.params != params) return;
         
         ODBazaarRequestHelpModel *helpModel = [model result];
         [weakSelf.dataArray addObjectsFromArray:helpModel.tasks];
         [weakSelf.tableView reloadData];
-        [self checkFooterState:helpModel.tasks.count];
-        
+        [weakSelf checkFooterState:helpModel.tasks.count];
         // 请求成功后才赋值页码
         weakSelf.count = page;
     } failure:^(NSError *error) {
-        if (self.params != params) return;
-        self.count = self.count - 1;
+        if (weakSelf.params != params) return;
+        weakSelf.count = weakSelf.count - 1;
         [weakSelf.tableView.mj_footer endRefreshing];
     }];
 }
@@ -269,47 +287,6 @@ static NSString * const helpCellId = @"helpCell";
     }
 }
 
-
-//#pragma mark - UICollectionViewDataSource
-//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-//    return 1;
-//}
-//
-//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    return self.dataArray.count;
-//}
-//
-//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    ODBazaarCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarCellId forIndexPath:indexPath];
-//    cell.model = self.dataArray[indexPath.row];
-//    [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-//    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-//    return cell;
-//}
-//
-//#pragma mark - UICollectionViewDelegate
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-//    ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc] init];
-//    ODBazaarRequestHelpTasksModel *model = self.dataArray[indexPath.row];
-//    bazaarDetail.task_id = [NSString stringWithFormat:@"%d", model.task_id];
-//    bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@", model.task_status_name];
-//    bazaarDetail.open_id = [NSString stringWithFormat:@"%@", model.open_id];
-//    bazaarDetail.myBlock = ^(NSString *del) {
-//        self.refresh = del;
-//    };
-//    if ([self.refresh isEqualToString:@"accept"]) {
-//        [bazaarDetail.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
-//    }
-//    self.indexPath = indexPath.row;
-//    [self.navigationController pushViewController:bazaarDetail animated:YES];
-//}
-
-#pragma mark - UIPopDelegate
-- (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
-    return UIModalPresentationNone;
-}
-
-#pragma mark - action
 -(void)screeningButtonClick:(UIButton *)button
 {
     UIViewController *controller = [[UIViewController alloc]init];
@@ -381,7 +358,7 @@ static NSString * const helpCellId = @"helpCell";
         [view setFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame)+5, 10, kScreenSize.width-self.screeningButton.frame.size.width-25, 35)];
         [label setFrame:CGRectMake(40, 10, view.frame.size.width-40, 15)];
     }
-//    [self.collectionView.mj_header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
     [self dismissViewControllerAnimated:NO completion:^{
     }];
 }
@@ -390,18 +367,5 @@ static NSString * const helpCellId = @"helpCell";
     ODBazaarLabelSearchViewController *labelSearch = [[ODBazaarLabelSearchViewController alloc] init];
     [self.navigationController pushViewController:labelSearch animated:YES];
 }
-
-//- (void)othersInformationClick:(UIButton *)button {
-//    ODBazaarCollectionCell *cell = (ODBazaarCollectionCell *) button.superview.superview;
-////    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-//    ODBazaarRequestHelpTasksModel *model = self.dataArray[indexPath.row];
-//    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-//    vc.open_id = model.open_id;
-//    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.open_id]) {
-//    } else {
-//        [self.navigationController pushViewController:vc animated:YES];
-//    }
-//}
-
 
 @end

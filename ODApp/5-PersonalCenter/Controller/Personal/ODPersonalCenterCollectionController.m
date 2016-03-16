@@ -8,6 +8,7 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODPersonalCenterCollectionController.h"
+#import "ODBazaarExchangeSkillCollectionCell.h"
 
 #define cellID @"ODBazaarExchangeSkillCollectionCell"
 
