@@ -358,7 +358,6 @@
 		232CB3301C9264E200340D12 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		232CB3311C9264E200340D12 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		232CB3321C9264E200340D12 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		232CB3341C9264E200340D12 /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		232CB3351C9264E200340D12 /* ODApp-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ODApp-Prefix.pch"; sourceTree = "<group>"; };
 		232CB3361C9264E200340D12 /* ODAppConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppConst.h; sourceTree = "<group>"; };
 		232CB3371C9264E200340D12 /* ODAppConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAppConst.m; sourceTree = "<group>"; };
@@ -997,7 +996,6 @@
 		232CB3331C9264E200340D12 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				232CB3341C9264E200340D12 /* Define.h */,
 				232CB3351C9264E200340D12 /* ODApp-Prefix.pch */,
 				232CB3361C9264E200340D12 /* ODAppConst.h */,
 				232CB3371C9264E200340D12 /* ODAppConst.m */,
