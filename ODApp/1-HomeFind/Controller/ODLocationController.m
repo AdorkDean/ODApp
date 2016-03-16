@@ -96,9 +96,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     ODCityNameModel *model = self.dataArray[indexPath.row];
     [ODUserInformation sharedODUserInformation].locationCity = model.name;
     [ODUserInformation sharedODUserInformation].cityID = model.id;
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationLocationSuccessRefresh object:nil];
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
