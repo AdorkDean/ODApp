@@ -47,7 +47,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:NSStringFromClass([self class])];
-    
     // 停止定时器
     [self.timer invalidate];
     self.timer = nil;
@@ -69,7 +68,7 @@
 {
     // 初始化
     self.navigationItem.title = @"绑定手机";
-    self.currentTime = 60;
+    self.currentTime = getVerificationCodeTime;
     self.openId = [ODUserInformation sharedODUserInformation].openID;
     
     // 创建MobileView
@@ -133,7 +132,7 @@
         [self.timer invalidate];
         self.timer = nil;
         
-        self.currentTime = 60;
+        self.currentTime = getVerificationCodeTime;
     } else {
         [self.bindMobileView.getCodelButton setTitle:[NSString stringWithFormat:@"%ld秒后重发", self.currentTime] forState:UIControlStateNormal];
         self.bindMobileView.getCodelButton.userInteractionEnabled = NO;
