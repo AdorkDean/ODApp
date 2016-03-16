@@ -297,6 +297,7 @@
 		9DD00BE91C4E39D800F0EE5F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BE81C4E39D800F0EE5F /* libz.tbd */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
+		B852161B1C97FB0E0003D102 /* ODHomeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B852161A1C97FB0E0003D102 /* ODHomeButton.m */; };
 		ED46880E1C965F5300E31F64 /* ODLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED46880C1C965F5300E31F64 /* ODLocationCell.m */; };
 		ED46880F1C965F5300E31F64 /* ODLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED46880D1C965F5300E31F64 /* ODLocationCell.xib */; };
 		ED4688131C96905F00E31F64 /* ODApplyListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4688111C96905F00E31F64 /* ODApplyListCell.m */; };
@@ -847,6 +848,8 @@
 		B83C6B801C224F640063ED92 /* ODAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ODAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B841C224F640063ED92 /* ODAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODAppUITests.m; sourceTree = "<group>"; };
 		B83C6B861C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B85216191C97FB0E0003D102 /* ODHomeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHomeButton.h; sourceTree = "<group>"; };
+		B852161A1C97FB0E0003D102 /* ODHomeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeButton.m; sourceTree = "<group>"; };
 		C5EAEBD7E6B20864218413FA /* Pods-ODApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.debug.xcconfig"; sourceTree = "<group>"; };
 		ED46880B1C965F5300E31F64 /* ODLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLocationCell.h; sourceTree = "<group>"; };
 		ED46880C1C965F5300E31F64 /* ODLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLocationCell.m; sourceTree = "<group>"; };
@@ -1173,12 +1176,12 @@
 		232CB3A11C9264E200340D12 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				232CB3A61C9264E200340D12 /* ODHomeFoundViewController.h */,
+				232CB3A71C9264E200340D12 /* ODHomeFoundViewController.m */,
 				232CB3A21C9264E200340D12 /* ODFindFavorableController.h */,
 				232CB3A31C9264E200340D12 /* ODFindFavorableController.m */,
 				232CB3A41C9264E200340D12 /* ODFindJobController.h */,
 				232CB3A51C9264E200340D12 /* ODFindJobController.m */,
-				232CB3A61C9264E200340D12 /* ODHomeFoundViewController.h */,
-				232CB3A71C9264E200340D12 /* ODHomeFoundViewController.m */,
 				232CB3A81C9264E200340D12 /* ODLocationController.h */,
 				232CB3A91C9264E200340D12 /* ODLocationController.m */,
 			);
@@ -1206,6 +1209,8 @@
 				ED46880B1C965F5300E31F64 /* ODLocationCell.h */,
 				ED46880C1C965F5300E31F64 /* ODLocationCell.m */,
 				ED46880D1C965F5300E31F64 /* ODLocationCell.xib */,
+				B85216191C97FB0E0003D102 /* ODHomeButton.h */,
+				B852161A1C97FB0E0003D102 /* ODHomeButton.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2196,6 +2201,7 @@
 				232CB5801C9264E200340D12 /* ODAppRegister.m in Sources */,
 				232CB6261C9264E200340D12 /* ODLandSecondCell.m in Sources */,
 				232CB6521C9264E200340D12 /* ODMyOrderCell.m in Sources */,
+				B852161B1C97FB0E0003D102 /* ODHomeButton.m in Sources */,
 				232CB6581C9264E200340D12 /* ODOrderHeadView.m in Sources */,
 				232CB5811C9264E200340D12 /* ODGuideTool.m in Sources */,
 				232CB5961C9264E200340D12 /* ODhomeViewCollectionReusableView.m in Sources */,

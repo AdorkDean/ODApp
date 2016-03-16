@@ -25,8 +25,9 @@
 #import "ODNewActivityDetailViewController.h"
 #import "ODFindFavorableController.h"
 #import "ODUserInformation.h"
-
 #import "ODDrawbackController.h"
+#import "ODBazaarExchangeSkillCell.h"
+#import "ODBazaarExchangeSkillModel.h"
 
 @interface ODHomeFoundViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, MAMapViewDelegate, AMapSearchDelegate>
 

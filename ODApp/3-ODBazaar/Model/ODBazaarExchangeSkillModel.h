@@ -8,8 +8,8 @@
 
 typedef enum : NSUInteger
 {
-    ODBazaarUserGenderTypeMan = 0,
-    ODBazaarUserGenderTypeWoman = 1,
+    ODBazaarUserGenderTypeMan = 1,
+    ODBazaarUserGenderTypeWoman = 2,
 } ODBazaarUserGenderType;
 
 #import <Foundation/Foundation.h>
@@ -35,6 +35,7 @@ typedef enum : NSUInteger
 @property (nonatomic, copy) NSString *profile;
 /** 学校名称 */
 @property (nonatomic, copy) NSString *school_name;
+
 @end
 
 @interface ODBazaarExchangeSkillImgs_smallModel : NSObject

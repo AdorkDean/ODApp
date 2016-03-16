@@ -30,6 +30,7 @@ static CGFloat const photoBottomMargin = (25 / 2);
     }];
 }
 
+
 /**
  *  计算行高
  */
