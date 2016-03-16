@@ -44,6 +44,7 @@
     self.page = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"我的收藏";
+    [self requestData];
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf requestData];

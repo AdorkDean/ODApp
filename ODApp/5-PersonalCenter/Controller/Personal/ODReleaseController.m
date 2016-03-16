@@ -10,16 +10,16 @@
 #import "ODReleaseController.h"
 #import "ODBazaarExchangeSkillDetailViewController.h"
 
+#import "ODReleaseView.h"
 
+NSString * const ODReleaseViewID = @"ODReleaseViewID";
 NSString * const ODReleaseCellID = @"ODReleaseCell";
-@interface ODReleaseController ()
+@interface ODReleaseController () <UITableViewDataSource, UITableViewDelegate>
 
-@property(nonatomic, strong) UICollectionView *collectionView;
-@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
+@property (nonatomic, strong) UITableView *tableView;
 
 @property(nonatomic, strong) ODReleaseModel *model;
 
-@property(nonatomic, strong) ODReleaseCell *cell;
 
 // 列表数组
 @property(nonatomic, strong) NSMutableArray *dataArray;
@@ -35,7 +35,6 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 // 暂无记录
 @property(nonatomic, strong) UILabel *noReusltLabel;
-
 
 @end
 
@@ -56,7 +55,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     __weakSelf;
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationEditSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
     {
-        [weakSelf.collectionView.mj_header beginRefreshing];
+        [weakSelf.tableView.mj_header beginRefreshing];
     }];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationloveSkill object:nil];
 
@@ -82,7 +81,7 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     ODReleaseModel *model = self.dataArray[self.loveRow];
     model.love_num = [NSString stringWithFormat:@"%@" , text.userInfo[@"loveNumber"]];
     [self.dataArray replaceObjectAtIndex:self.loveRow withObject:model];
-    [self.collectionView reloadData];
+    [self.tableView reloadData];
 }
 
 #pragma mark - 加载数据请求
@@ -101,14 +100,14 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
             }
         }
          
-        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
         if ([[model result]count] == 0) {
-            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
         }
         else {
-         [weakSelf.collectionView.mj_footer endRefreshing];
+         [weakSelf.tableView.mj_footer endRefreshing];
         }
-        [weakSelf.collectionView reloadData];
+        [weakSelf.tableView reloadData];
         
         if (self.pageCount == 1 && self.dataArray.count == 0) {
          weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
@@ -120,8 +119,8 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
         }
     }
     failure:^(NSError *error) {
-        [weakSelf.collectionView.mj_footer endRefreshing];
-        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
     }];
 }
 
@@ -133,66 +132,57 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     [ODHttpTool getWithURL:ODUrlSwapDel parameters:parameter modelClass:[NSObject class] success:^(id model) {
         [ODProgressHUD showInfoWithStatus:@"删除任务成功"];
         [weakSelf.dataArray removeObject:weakSelf.dataArray[self.deleteRow]];
-        [weakSelf.collectionView reloadData];
+        [weakSelf.tableView reloadData];
     }
     failure:^(NSError *error) {
         
     }];
 }
 
-#pragma mark - Create UICollectionView
-- (UICollectionView *)collectionView {
-    if (!_collectionView) {
-        __weakSelf
-        self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        self.flowLayout.minimumLineSpacing = 5;
-        self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight) collectionViewLayout:self.flowLayout];
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight + 6) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor backgroundColor];
         
-        self.collectionView.delegate = self;
-        self.collectionView.dataSource = self;
-        self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-        [self.collectionView registerNib:[UINib nibWithNibName:@"ODReleaseCell" bundle:nil] forCellWithReuseIdentifier:ODReleaseCellID];
-        self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
-                                             weakSelf.pageCount = 1;
-                                             [weakSelf createRequestData];
-                                         }];
-        self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^ {
-                                             [weakSelf loadMoreData];
-                                         }];
-        [self.view addSubview:self.collectionView];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.rowHeight = 144;
+        _tableView.tableFooterView = [UIView new];
+        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODReleaseView class]) bundle:nil] forCellReuseIdentifier:ODReleaseViewID];
+        [self.view addSubview:_tableView];
+        
+        __weakSelf
+        _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
+            weakSelf.pageCount = 1;
+            [weakSelf createRequestData];
+        }];
+        _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^ {
+            [weakSelf loadMoreData];
+        }];
+        [self.view addSubview:_tableView];
     }
-    return _collectionView;
+    return _tableView;
 }
 
-#pragma mark - UICollectionViewDataSource
+#pragma mark - UITableViewDataSource
 
-- (NSInteger) numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger) collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODReleaseCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:ODReleaseCellID forIndexPath:indexPath];
-    self.model = self.dataArray[indexPath.row];
-    
-    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ODReleaseView *cell = [tableView dequeueReusableCellWithIdentifier:ODReleaseViewID];
+    cell.model = self.dataArray[indexPath.row];
+    cell.backgroundColor = [UIColor whiteColor];
     [cell.editButton addTarget:self action:@selector(editButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell setModel:self.model];
-    
     return cell;
 }
 
-#pragma mark - UICollectionViewDelegate
+#pragma mark - UITableViewDelegate
 
-- (CGSize) collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    return CGSizeMake(KScreenWidth, 138);
-}
-
-- (void) collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ODBazaarExchangeSkillDetailViewController *vc = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     ODReleaseModel *model = self.dataArray[indexPath.row];
     self.loveRow = indexPath.row;
@@ -208,8 +198,8 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
 
 #pragma mark - 编辑 点击事件
 - (void)editButtonClick:(UIButton *)button {
-    ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview;
-    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+    ODReleaseView *cell = (ODReleaseView *)button.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     ODReleaseModel *model = self.dataArray[indexPath.row];
     
     if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {
@@ -232,8 +222,8 @@ NSString * const ODReleaseCellID = @"ODReleaseCell";
     __weakSelf
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除技能" message:nil preferredStyle:UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                          ODReleaseCell *cell = (ODReleaseCell *)button.superview.superview;
-                          NSIndexPath *indexPath = [weakSelf.collectionView indexPathForCell:cell];
+                          ODReleaseView *cell = (ODReleaseView *)button.superview.superview;
+                          NSIndexPath *indexPath = [weakSelf.tableView indexPathForCell:cell];
                           ODReleaseModel *model = weakSelf.dataArray[indexPath.row];
                           self.deleteRow = indexPath.row;
                           weakSelf.swap_id = model.swap_id;

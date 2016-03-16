@@ -7,12 +7,11 @@
 //
 
 #import "ODBaseViewController.h"
-#import "ODReleaseCell.h"
 #import "ODReleaseModel.h"
 #import "MJRefresh.h"
 #import "ODBazaarReleaseSkillViewController.h"
 
-@interface ODReleaseController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface ODReleaseController : ODBaseViewController
 
 /**
  *  交易ID
