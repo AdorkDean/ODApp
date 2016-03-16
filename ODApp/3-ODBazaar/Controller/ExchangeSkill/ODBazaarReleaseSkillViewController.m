@@ -121,7 +121,8 @@
     NSDictionary *parameter = @{@"File":str};
     NSDictionary *signParameter = [ODHttpTool signParameters:parameter];
     __weakSelf
-    [manager POST:@"http://woquapi.test.odong.com/1.0/other/base64/upload" parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+    NSString *url = [NSString stringWithFormat:@"%@/%@",ODBaseURL,ODUrlOtherBase64Upload];
+    [manager POST:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
         if (responseObject) {
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
             NSDictionary *result = dict[@"result"];

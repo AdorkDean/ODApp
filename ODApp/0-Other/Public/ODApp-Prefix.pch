@@ -13,7 +13,6 @@
 #ifdef __OBJC__
 
 /***  导入公共头文件 预编译文件 可以自动把这些头文件 导入到每个文件中 ***/
-#import "Define.h"
 #import "ODModelDefine.h"
 #import "ODAppConst.h"
 
@@ -49,7 +48,7 @@
 #define NSLogDealloc  - (void)dealloc {  NSLogFunc  }
 
 /**  self弱引用 */
-#define __weakSelf __weak typeof (self)weakSelf = self;
+#define __weakSelf __weak typeof(self) weakSelf = self;
 /**  self强引用 */
 #define __strongSelf  __strong __typeof(self) strongSelf = weakSelf;
 /**  方法过期 */
@@ -57,6 +56,16 @@
 
 /**  判断手机的系统版本 */
 #define iOS(v) ([UIDevice currentDevice].systemVersion.doubleValue >= (v))
+
+
+// 屏幕尺寸
+#define kScreenSize [UIScreen mainScreen].bounds.size
+// 屏幕宽度
+#define KScreenWidth kScreenSize.width
+// 屏幕高度
+#define KScreenHeight kScreenSize.height
+// 控制器的高度
+#define KControllerHeight KScreenHeight - ODTopY
 
 /**************************  后面不能写宏定义 *************************************/
 #endif

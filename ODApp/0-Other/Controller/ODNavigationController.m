@@ -42,8 +42,8 @@
 
 #pragma mark - <UIGestureRecognizerDelegate>
 
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    NSLog(@"%@", self.childViewControllers);
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
     if (self.childViewControllers.count > 1) {
         [self popViewControllerAnimated:YES];
         return NO;
