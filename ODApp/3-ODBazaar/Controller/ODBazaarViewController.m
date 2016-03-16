@@ -146,10 +146,12 @@ static CGFloat const lineHeight = 1;
     self.index = index;
     
     // 加载第二界面
-    UIViewController *vc = self.childViewControllers[index];
-    vc.view.frame = CGRectMake(KScreenWidth * index, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODTabBarHeight);
+    UIViewController *childVc = self.childViewControllers[index];
+    // 如果已经加载子控制器,  直接返回
+    if (childVc.isViewLoaded) return;
+    childVc.view.frame = CGRectMake(KScreenWidth * index, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODTabBarHeight);
     
-    [scrollView addSubview:vc.view];
+    [scrollView addSubview:childVc.view];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
