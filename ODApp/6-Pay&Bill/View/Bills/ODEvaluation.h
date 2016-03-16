@@ -10,6 +10,8 @@
 
 @interface ODEvaluation : UIView
 
+@property (nonatomic, strong) UIButton *starButton;
+
 @property(nonatomic, strong) UIButton *firstButton;
 @property(nonatomic, strong) UIButton *secondButton;
 @property(nonatomic, strong) UIButton *thirdButton;
@@ -21,6 +23,9 @@
 @property(nonatomic, strong) UIButton *determineButton;
 
 @property(nonatomic, strong) UIButton *cancelButton;
+
+
+@property (nonatomic, copy) void(^ starButtonTag)(NSInteger starButtonTag);
 
 
 @end

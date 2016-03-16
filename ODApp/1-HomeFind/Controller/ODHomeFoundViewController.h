@@ -7,7 +7,6 @@
 //
 
 #import "ODBaseViewController.h"
-
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
 #import "UIImageView+WebCache.h"
@@ -19,7 +18,6 @@
 #import "ODhomeViewCollectionReusableView.h"
 #import "ODOthersInformationController.h"
 #import "ODPersonalCenterViewController.h"
-#import "ODHomeFoundFooterView.h"
 #import "ODLocationController.h"
 #import "ODFindJobController.h"
 #import "ODNewActivityDetailViewController.h"
@@ -29,7 +27,7 @@
 #import "ODBazaarExchangeSkillCell.h"
 #import "ODBazaarExchangeSkillModel.h"
 
-@interface ODHomeFoundViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, MAMapViewDelegate, AMapSearchDelegate>
+@interface ODHomeFoundViewController : ODBaseViewController <UIScrollViewDelegate, MAMapViewDelegate, AMapSearchDelegate>
 
 /**
  *  体验中心ID

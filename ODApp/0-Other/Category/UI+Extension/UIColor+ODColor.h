@@ -23,19 +23,9 @@
 + (UIColor *)backgroundColor;
 
 /**
- *  #ffffff
- **/
-+ (UIColor *)colorWhiteColor;
-
-/*
  *  #ff6666
  **/
 + (UIColor *)colorRedColor;
-
-/**
- *  #000000
- **/
-+ (UIColor *)colorBlackColor;
 
 /**
  *  #d0d0d0

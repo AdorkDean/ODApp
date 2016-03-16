@@ -25,20 +25,12 @@
     return [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
 }
 
-+ (UIColor *)colorWhiteColor
-{
-    return [UIColor colorWithHexString:@"#ffffff" alpha:1];
-}
 
 + (UIColor *)colorRedColor
 {
     return [UIColor colorWithHexString:@"#ff6666" alpha:1];
 }
 
-+ (UIColor *)colorBlackColor
-{
-    return [UIColor colorWithHexString:@"#000000" alpha:1];
-}
 
 + (UIColor *)colorGrayColor
 {

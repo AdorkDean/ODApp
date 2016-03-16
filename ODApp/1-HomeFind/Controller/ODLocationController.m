@@ -86,7 +86,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ODLocationCell *cell = [tableView dequeueReusableCellWithIdentifier:ODLocationCellID];
     cell.model = self.dataArray[indexPath.row];
-    cell.backgroundColor = [UIColor colorWhiteColor];
+    cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 
@@ -96,9 +96,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
     ODCityNameModel *model = self.dataArray[indexPath.row];
     [ODUserInformation sharedODUserInformation].locationCity = model.name;
     [ODUserInformation sharedODUserInformation].cityID = model.id;
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationLocationSuccessRefresh object:nil];
-    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
