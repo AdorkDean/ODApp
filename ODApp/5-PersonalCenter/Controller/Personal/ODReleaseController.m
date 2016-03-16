@@ -13,7 +13,6 @@
 #import "ODReleaseView.h"
 
 NSString * const ODReleaseViewID = @"ODReleaseViewID";
-NSString * const ODReleaseCellID = @"ODReleaseCell";
 @interface ODReleaseController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
