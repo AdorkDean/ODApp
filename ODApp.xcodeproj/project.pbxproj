@@ -63,7 +63,6 @@
 		232CB5921C9264E200340D12 /* ODLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3A91C9264E200340D12 /* ODLocationController.m */; };
 		232CB5931C9264E200340D12 /* ODHomeInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3AC1C9264E200340D12 /* ODHomeInfoModel.m */; };
 		232CB5941C9264E200340D12 /* ODLocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3AE1C9264E200340D12 /* ODLocationModel.m */; };
-		232CB5961C9264E200340D12 /* ODhomeViewCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3B31C9264E200340D12 /* ODhomeViewCollectionReusableView.m */; };
 		232CB5991C9264E200340D12 /* ODApplyListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3BA1C9264E200340D12 /* ODApplyListViewController.m */; };
 		232CB59A1C9264E200340D12 /* ODCenterDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3BC1C9264E200340D12 /* ODCenterDetailController.m */; };
 		232CB59B1C9264E200340D12 /* ODCenterPactureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3BE1C9264E200340D12 /* ODCenterPactureController.m */; };
@@ -443,8 +442,6 @@
 		232CB3AC1C9264E200340D12 /* ODHomeInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeInfoModel.m; sourceTree = "<group>"; };
 		232CB3AD1C9264E200340D12 /* ODLocationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLocationModel.h; sourceTree = "<group>"; };
 		232CB3AE1C9264E200340D12 /* ODLocationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLocationModel.m; sourceTree = "<group>"; };
-		232CB3B21C9264E200340D12 /* ODhomeViewCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODhomeViewCollectionReusableView.h; sourceTree = "<group>"; };
-		232CB3B31C9264E200340D12 /* ODhomeViewCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODhomeViewCollectionReusableView.m; sourceTree = "<group>"; };
 		232CB3B91C9264E200340D12 /* ODApplyListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODApplyListViewController.h; sourceTree = "<group>"; };
 		232CB3BA1C9264E200340D12 /* ODApplyListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODApplyListViewController.m; sourceTree = "<group>"; };
 		232CB3BB1C9264E200340D12 /* ODCenterDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCenterDetailController.h; sourceTree = "<group>"; };
@@ -1212,8 +1209,6 @@
 		232CB3AF1C9264E200340D12 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				232CB3B21C9264E200340D12 /* ODhomeViewCollectionReusableView.h */,
-				232CB3B31C9264E200340D12 /* ODhomeViewCollectionReusableView.m */,
 				ED46880B1C965F5300E31F64 /* ODLocationCell.h */,
 				ED46880C1C965F5300E31F64 /* ODLocationCell.m */,
 				ED46880D1C965F5300E31F64 /* ODLocationCell.xib */,
@@ -2230,7 +2225,6 @@
 				B852161B1C97FB0E0003D102 /* ODHomeButton.m in Sources */,
 				232CB6581C9264E200340D12 /* ODOrderHeadView.m in Sources */,
 				232CB5811C9264E200340D12 /* ODGuideTool.m in Sources */,
-				232CB5961C9264E200340D12 /* ODhomeViewCollectionReusableView.m in Sources */,
 				ED51F0921C97E8D0005525AD /* ODIndentDetailTopView.m in Sources */,
 				232CB61F1C9264E200340D12 /* ODEvaluationCell.m in Sources */,
 				232CB55A1C9264E200340D12 /* UIColor+ODExtension.m in Sources */,

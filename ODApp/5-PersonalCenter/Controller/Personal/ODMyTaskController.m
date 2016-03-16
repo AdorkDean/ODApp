@@ -35,12 +35,10 @@
 @property(nonatomic, strong) UICollectionView *secondCollectionView;
 @property(nonatomic, assign) NSInteger secondPage;
 @property(nonatomic, strong) NSMutableArray *secondDataArray;
-
 @property(nonatomic, strong) UIButton *allTaskButton;
 
 
 @property(nonatomic, copy) NSString *openID;
-
 @property(nonatomic, strong) UILabel *firstLabel;
 @property(nonatomic, strong) UILabel *secondLabel;
 
