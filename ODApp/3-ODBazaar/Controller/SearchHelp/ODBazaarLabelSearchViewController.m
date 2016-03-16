@@ -8,6 +8,7 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaarLabelSearchViewController.h"
+#import "ODBazaarCollectionCell.h"
 
 #define kBazaarCellId @"ODBazaarCollectionCell"
 @interface ODBazaarLabelSearchViewController ()

@@ -8,6 +8,7 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODPersonalCenterCollectionController.h"
+#import "ODBazaarExchangeSkillCollectionCell.h"
 
 #define cellID @"ODBazaarExchangeSkillCollectionCell"
 
@@ -43,6 +44,7 @@
     self.page = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"我的收藏";
+    [self requestData];
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [weakSelf requestData];

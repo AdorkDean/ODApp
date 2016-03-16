@@ -1,19 +1,20 @@
 //
-//  ODReleaseCell.h
+//  ODReleaseView.h
 //  ODApp
 //
-//  Created by Bracelet on 16/2/18.
+//  Created by Bracelet on 16/3/16.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+
 #import "ODReleaseModel.h"
 #import "UIImageView+WebCache.h"
 #import "ODPersonalTaskButton.h"
 
 @class ODPersonalTaskButton;
 
-@interface ODReleaseCell : UICollectionViewCell
+@interface ODReleaseView : UITableViewCell
 
 @property(weak, nonatomic) IBOutlet UIImageView *titleImageView;
 @property(weak, nonatomic) IBOutlet UILabel *contentLabel;
@@ -32,8 +33,8 @@
 @property(nonatomic, strong) ODReleaseModel *model;
 
 @property(weak, nonatomic) IBOutlet NSLayoutConstraint *buttonWidthConstraint;
-@property(weak, nonatomic) IBOutlet NSLayoutConstraint *horicontalLineViewHeight;
 
-@property(weak, nonatomic) IBOutlet NSLayoutConstraint *lineViewWidth;
+
+
 
 @end

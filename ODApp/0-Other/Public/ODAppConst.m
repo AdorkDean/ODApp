@@ -14,6 +14,9 @@ CGFloat const ODBazaaeExchangeNavHeight = 40;
 /** 欧动集市cell的间隙 */
 CGFloat const ODBazaaeExchangeCellMargin = 6;
 
+/** 获取验证码时间 */
+NSTimeInterval const getVerificationCodeTime = 60;
+
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 NSString * const kUserCache = @"kUserCache";
