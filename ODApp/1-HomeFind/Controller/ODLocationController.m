@@ -86,7 +86,7 @@ NSString *const ODLocationCellID = @"ODLocationCell";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ODLocationCell *cell = [tableView dequeueReusableCellWithIdentifier:ODLocationCellID];
     cell.model = self.dataArray[indexPath.row];
-    cell.backgroundColor = [UIColor colorWhiteColor];
+    cell.backgroundColor = [UIColor whiteColor];
     return cell;
 }
 

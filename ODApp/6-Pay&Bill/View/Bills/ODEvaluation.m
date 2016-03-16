@@ -28,6 +28,23 @@
     self.alpha = 0.95;
    
     self.userInteractionEnabled = YES;
+    
+    
+    
+    
+    for (int i = 1; i < 6; i++) {
+        self.starButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        self.starButton.frame = CGRectMake((self.frame.size.width - 200) / 6 * i, 100, 40, 30);
+        [self.starButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+        self.starButton.tag = 1000 + i;
+        [self.starButton addTarget:self action:@selector(starButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:self.starButton];
+    }
+    
+    
+    
+    
+    
     self.firstButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.firstButton.frame = CGRectMake((self.frame.size.width - 200) / 6, 100, 40, 30);
     [self.firstButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
@@ -111,7 +128,11 @@
 }
 
 
-
+- (void)starButtonClick:(UIButton *)button {
+    if (self.starButtonTag) {
+        self.starButtonTag(button.tag);
+    }
+}
 
 
 
