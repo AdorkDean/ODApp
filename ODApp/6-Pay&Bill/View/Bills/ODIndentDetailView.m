@@ -37,7 +37,16 @@
     self.orderWay.text = model.order_status;
     self.orderPrice.text = [NSString stringWithFormat:@"%@元/%@", model.order_price, model.unit];
     self.orderNumber.text = [NSString stringWithFormat:@"数量：%@", model.num];
-    self.orderMoney.text = [NSString stringWithFormat:@"费用合计：%@元", model.total_price];
+    
+    NSString *moneyStr = [NSString stringWithFormat:@"费用合计：%@元", model.total_price];
+    NSMutableAttributedString *moneyStr1 = [[NSMutableAttributedString alloc] initWithString:moneyStr];
+    [moneyStr1 addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 5)];
+    
+    self.orderMoney.attributedText = moneyStr1;
+    
+    
+    
+    
     
     if ([model.swap_type isEqualToString:@"1"]) {
         self.orderWay.text = @" 上门服务 ";
