@@ -7,13 +7,14 @@
 //
 
 #import "ODHomeInfoModel.h"
+#import "ODBazaarExchangeSkillModel.h"
 
 @implementation ODHomeInfoModel
 + (void)initialize
 {
     [ODHomeInfoModel mj_setupObjectClassInArray:^NSDictionary *{
         return @{
-                 @"swaps" :[ODHomeInfoSwapModel class],
+                 @"swaps" :[ODBazaarExchangeSkillModel class],
                  @"activitys" :[ODHomeInfoActivitiesModel class]
                  };
     }];

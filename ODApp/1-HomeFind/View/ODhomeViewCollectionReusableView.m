@@ -18,6 +18,7 @@
 #pragma mark - Top Eight Button
         
         self.activityView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 0, kScreenSize.width, 140) tag:0 color:@"#ffffff"];
+        self.activityView.backgroundColor = [UIColor redColor];
         [self addSubview:self.activityView];
         
         float aroundSpace = 40;
@@ -34,7 +35,11 @@
             for (NSInteger i = 0; i < 4; i ++) {
                 UIButton *topEightButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin + buttonWidth * i, buttonHeight * j, buttonWidth, buttonHeight)];
                 topEightButton.tag = 100 + (i + 4 * j);
-                
+                if (j==0&&i == 1) {
+                    topEightButton.backgroundColor = [UIColor purpleColor];
+                    self.topEightLabel.backgroundColor = [UIColor blueColor];
+                }
+            
                 [topEightButton addTarget:self action:@selector(topEightButtonClick:) forControlEvents:UIControlEventTouchUpInside];
                 
                 [self.activityView addSubview:topEightButton];

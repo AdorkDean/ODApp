@@ -6,7 +6,37 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
+typedef enum : NSUInteger
+{
+    ODBazaarUserGenderTypeMan = 1,
+    ODBazaarUserGenderTypeWoman = 2,
+} ODBazaarUserGenderType;
+
 #import <Foundation/Foundation.h>
+
+@interface ODBazaarExchangeSkillUserModel : NSObject
+/** 头像 */
+@property (nonatomic, copy) NSString *avatar;
+/** 昵称 */
+@property (nonatomic, copy) NSString *nick;
+/** 性别 */
+@property (nonatomic, assign) ODBazaarUserGenderType gender;
+/** 签名 */
+@property (nonatomic, copy) NSString *sign;
+/** 电话 */
+@property (nonatomic, copy) NSString *mobile;
+/** 标题 */
+@property (nonatomic, copy) NSString *title;
+/** open_id */
+@property (nonatomic, copy) NSString *open_id;
+/** user_auth_status */
+@property (nonatomic, strong) NSNumber *user_auth_status;
+/** 简介 */
+@property (nonatomic, copy) NSString *profile;
+/** 学校名称 */
+@property (nonatomic, copy) NSString *school_name;
+
+@end
 
 @interface ODBazaarExchangeSkillImgs_smallModel : NSObject
 
@@ -60,11 +90,18 @@
 
 @property (nonatomic, assign) int love_id;
 
-@property (nonatomic, strong) NSDictionary *user;
+@property (nonatomic, strong) ODBazaarExchangeSkillUserModel *user;
 
 @property (nonatomic, strong) NSArray *loves;
 
 @property (nonatomic, assign) int swap_id;
+
+
+/** 配图的frame */
+@property (nonatomic, assign, readonly) CGRect photosFrame;
+
+/** cell的高度 */
+@property (nonatomic, assign, readonly) CGFloat rowHeight;
 
 @end
 

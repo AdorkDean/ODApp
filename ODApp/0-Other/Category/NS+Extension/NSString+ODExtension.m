@@ -31,4 +31,20 @@
     }
 }
 
+/**
+ *  计算文字Size
+ */
+- (CGSize)od_SizeWithFont:(UIFont *)font maxWidth:(CGFloat)maxWidth
+{
+    NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
+    attrs[NSFontAttributeName] = font;
+    CGSize maxSize = CGSizeMake(maxWidth, MAXFLOAT);
+    return [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:attrs context:nil].size;
+}
+
+- (CGSize)od_SizeWithFont:(UIFont *)font
+{
+    return [self od_SizeWithFont:font maxWidth:MAXFLOAT];
+}
+
 @end

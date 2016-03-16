@@ -8,18 +8,12 @@
 
 #import "ODBaseViewController.h"
 #import "ODBazaarExchangeSkillDetailViewController.h"
-#import "ODBazaarExchangeSkillModel.h"
 #import "ODBazaarExchangeSkillCollectionCell.h"
-#import "UIImageView+WebCache.h"
-#import "ODHelp.h"
-#import "ODCommunityShowPicViewController.h"
-#import "MJRefresh.h"
+//#import "ODCommunityShowPicViewController.h"
 
-@interface ODBazaaeExchangeSkillViewController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface ODBazaaeExchangeSkillViewController : ODBaseViewController
 
-@property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray *dataArray;
-@property(nonatomic) NSInteger page;
-@property(nonatomic) CGFloat height;
-
+/** 页码 */
+@property(nonatomic, assign) NSInteger page;
 @end

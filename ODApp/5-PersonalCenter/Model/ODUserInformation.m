@@ -18,6 +18,7 @@ Single_Implementation(ODUserInformation)
 {
     [ODUserInformation sharedODUserInformation].openID = user.open_id;
     [ODUserInformation sharedODUserInformation].mobile = user.mobile;
+    [ODUserInformation sharedODUserInformation].avatar = user.avatar;
         
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     [userDefault setObject:user.open_id forKey:KUserDefaultsOpenId];
@@ -28,8 +29,7 @@ Single_Implementation(ODUserInformation)
 }
 
 
-- (ODUserModel *)getUserCache
-{
+- (ODUserModel *)getUserCache{
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     NSDictionary *userDic = [userDefault objectForKey:kUserCache];
     if (userDic == nil) {

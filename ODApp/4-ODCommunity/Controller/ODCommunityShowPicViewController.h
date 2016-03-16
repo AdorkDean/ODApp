@@ -13,7 +13,7 @@
 @interface ODCommunityShowPicViewController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate>
 
 @property(nonatomic, strong) NSArray *photos;
-@property(nonatomic) NSInteger selectedIndex;
+@property(nonatomic, assign) NSUInteger selectedIndex;
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) UILabel *label;
 @property(nonatomic, copy) NSString *skill;

@@ -29,20 +29,15 @@
 
 - (void)releaseButtonClick:(UIButton *)button {
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
-
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
-
     } else {
-
-
         if (self.index == 0) {
             ODBazaarReleaseSkillViewController *releaseSkill = [[ODBazaarReleaseSkillViewController alloc] init];
             [self.navigationController pushViewController:releaseSkill animated:YES];
         } else {
             ODBazaarReleaseTaskViewController *releaseTask = [[ODBazaarReleaseTaskViewController alloc] init];
             releaseTask.isBazaar = YES;
-
             [self.navigationController pushViewController:releaseTask animated:YES];
         }
     }

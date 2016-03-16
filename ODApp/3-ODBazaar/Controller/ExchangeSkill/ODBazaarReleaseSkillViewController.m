@@ -11,17 +11,18 @@
 #import "ODBazaarReleaseSkillViewController.h"
 #import "NSArray+ODExtension.h"
 #import "ODUploadImageModel.h"
-
+#import "AFNetworking.h"
+#import "ODHttpTool.h"
 @interface ODBazaarReleaseSkillViewController ()
 
 @end
 
 @implementation ODBazaarReleaseSkillViewController
 
-@synthesize imageArray = _imageArray;
+#pragma mark - lazyload
 
-- (void)setImageArray:(NSArray *)imageArray
-{
+@synthesize imageArray = _imageArray;
+- (void)setImageArray:(NSArray *)imageArray{
     _imageArray = imageArray;
     for (NSString *imageStr in _imageArray){
         UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:imageStr]]];
@@ -30,8 +31,7 @@
 }
 
 - (NSMutableArray *)mArray{
-    if (!_mArray)
-    {
+    if (!_mArray){
         _mArray = [[NSMutableArray alloc]init];
     }
     return _mArray;
@@ -44,51 +44,113 @@
     return _strArray;
 }
 
+-(UIScrollView *)scrollView{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
+        _scrollView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+        _scrollView.userInteractionEnabled = YES;
+        _scrollView.delegate = self;
+        [self.view addSubview:_scrollView];
+    }
+    return _scrollView;
+}
+
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLogFunc
     if ([self.type isEqualToString:@"编辑"]) {
-        [self joiningTogetherTimeParmeters];
+        [self requestTimeData];
+        [self reloadImageButtons];
         self.navigationItem.title = @"编辑技能";
     }else{
         self.navigationItem.title = @"发布技能";
     }
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self getUserInfo];
-    [self createScrollView];
+    [self createTopView];
     [self createMiddleView];
     [self createPicView];
     [self createBottomView];
     [self createReleaseButton];
-    [self reloadImageButtons];
+
 }
 
--(void)createScrollView
-{
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
-    self.scrollView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-    self.scrollView.userInteractionEnabled = YES;
-    self.scrollView.delegate = self;
-    [self.view addSubview:self.scrollView];
-}
-
--(void)getUserInfo
-{
-    __weakSelf
-    [ODHttpTool getWithURL:ODUrlUserInfo parameters:@{} modelClass:[ODUserModel class] success:^(id model)
-    {
-        ODUserModel *user = [model result];
-        weakSelf.avatar = user.avatar;
-        [weakSelf createTopView];
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    UIView *view = (UIView *)[self.bottomView viewWithTag:1];
+    if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
+        if ([self.swap_type isEqualToString:@"1"]) {
+            UIButton *button = (UIButton *)[view viewWithTag:10];
+            [button setBackgroundImage:[UIImage imageNamed:@"button_Home service_Selected"] forState:UIControlStateNormal];
+        }else{
+            UIButton *button = (UIButton *)[view viewWithTag:11];
+            [button setBackgroundImage:[UIImage imageNamed:@"button_Online service_Selected"] forState:UIControlStateNormal];
+        }
+        self.timeView.hidden = NO;
+        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
+    }else if ([self.swap_type isEqualToString:@"2"]){
+        UIButton *button = (UIButton *)[view viewWithTag:12];
+        [button setBackgroundImage:[UIImage imageNamed:@"button_Express delivery_Selected"] forState:UIControlStateNormal];
+        self.timeView.hidden = YES;
+        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
     }
-                   failure:^(NSError *error)
-    {
-        
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+#pragma mark - 数据请求
+-(void)requestTimeData{
+    __weakSelf
+    NSDictionary *parameter = @{@"swap_id":self.swap_id};
+    [ODHttpTool getWithURL:ODUrlSwapSchedule parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        weakSelf.editTimeArray = [NSMutableArray arrayWithArray:model[@"result"]];
+    } failure:^(NSError *error) {
     }];
 }
 
--(void)createTopView
-{
+-(void)pushDataWith:(NSString *)str{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSDictionary *parameter = @{@"File":str};
+    NSDictionary *signParameter = [ODHttpTool signParameters:parameter];
+    __weakSelf
+    [manager POST:@"http://woquapi.test.odong.com/1.0/other/base64/upload" parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if (responseObject) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSDictionary *result = dict[@"result"];
+            NSString *str = result[@"File"];
+            [weakSelf.strArray addObject:str];
+            [weakSelf reloadImageButtons];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"error");
+    }];
+}
+
+-(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isEdit:(BOOL)isEdit{
+    __weakSelf
+    [ODHttpTool postWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        if (isEdit) {
+            [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            [ODProgressHUD showInfoWithStatus:@"编辑成功"];
+        }else{
+            [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+            [ODProgressHUD showInfoWithStatus:@"创建成功"];
+        }
+    } failure:^(NSError *error) {
+    }];
+}
+
+-(void)createTopView{
     UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width,60)];
     topView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:topView];
@@ -97,8 +159,7 @@
     headButton.frame = CGRectMake(17.5, 10, 40, 40);
     headButton.layer.masksToBounds = YES;
     headButton.layer.cornerRadius = 20;
-    [headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.avatar] forState:UIControlStateNormal];
-    [headButton addTarget:self action:@selector(headButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    [headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].avatar]] forState:UIControlStateNormal];
     [topView addSubview:headButton];
     
     UILabel *woQuLabel = [[UILabel alloc]initWithFrame:CGRectMake(67.5, 20, 40, 20)];
@@ -129,13 +190,7 @@
     [topView addSubview:lineView];
 }
 
--(void)headButtonClick:(UIButton *)button
-{
-    
-}
-
--(void)createMiddleView
-{
+-(void)createMiddleView{
     UIView *middleView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, kScreenSize.width,170)];
     middleView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:middleView];
@@ -168,14 +223,12 @@
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(17.5, 169.5, kScreenSize.width-35, 0.5)];
     lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     [middleView addSubview:lineView];
-    
 }
 
--(void)createPicView
-{
+-(void)createPicView{
     CGFloat width = (kScreenSize.width-35-30)/4;
     self.picView = [[UIView alloc]initWithFrame:CGRectMake(0, 230, kScreenSize.width, width+20)];
-    self.picView.backgroundColor = [UIColor whiteColor];
+    self.picView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.picView];
     
     self.addPicButton = [[UIButton alloc]initWithFrame:CGRectMake(17.5, 10, width, width)];
@@ -189,126 +242,13 @@
     [self.addPicButton addSubview:imageView];
 }
 
--(void)addPicButtonClick:(UIButton *)button
-{
-    if (self.mArray.count<5) {
-        [self.titleTextField resignFirstResponder];
-        [self.contentTextView resignFirstResponder];
-        [self.priceTextField resignFirstResponder];
-        [self.unitTextField resignFirstResponder];
-        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
-        [actionSheet showInView:self.view];
-    }else{
-//        [self createProgressHUDWithAlpha:0.6f withAfterDelay:1.0f title:@"已达图片最大上传数"];
-        [ODProgressHUD showInfoWithStatus:@"已达图片最大上传数"];
-    }
-    
-}
-
-#pragma mark - UIActionSheetDelegate
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
-    imagePicker.delegate = self;
-    
-    switch (buttonIndex) {
-        case 0:
-            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-                [self presentViewController:imagePicker animated:YES completion:nil];
-            }
-            else {
-                
-//                [self createProgressHUDWithAlpha:0.6f withAfterDelay:0.8f title:@"您当前的照相机不可用"];
-                [ODProgressHUD showInfoWithStatus:@"您当前的照相机不可用"];
-            }
-            break;
-        case 1:
-            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-            [self presentViewController:imagePicker animated:YES completion:nil];
-            
-            break;
-        default:
-            break;
-    }
-}
-
-#pragma mark - 自己处理cancel
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
-//点击确定之后
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
-{
-    NSString *sourceType = info[UIImagePickerControllerMediaType];
-    if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
-        self.pickedImage = info[UIImagePickerControllerOriginalImage];
-        
-        [ODProgressHUD showProgressWithStatus:@"正在上传"];
-        
-        //图片转化为data
-        NSData *imageData;
-        self.pickedImage = [self scaleImage:self.pickedImage];;
-        if (UIImagePNGRepresentation(self.pickedImage)==nil) {
-            imageData = UIImageJPEGRepresentation(self.pickedImage,0.3);
-        }else{
-            imageData = UIImagePNGRepresentation(self.pickedImage);
-        }
-        NSString *str = @"data:image/jpeg;base64,";
-        NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
-        [self.mArray addObject:self.pickedImage];
-        [self createParameter:strData];
-        
-    }
-    [picker dismissViewControllerAnimated:YES completion:nil];
-    
-}
-
-
-//压缩尺寸
--(UIImage *) scaleImage:(UIImage *)image
-{
-    CGSize size = CGSizeMake(image.size.width * 0.3, image.size.height * 0.3);
-    UIGraphicsBeginImageContext(size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGAffineTransform transform = CGAffineTransformIdentity;
-    transform = CGAffineTransformScale(transform,0.3, 0.3);
-    CGContextConcatCTM(context, transform);
-    [image drawAtPoint:CGPointMake(0.0f, 0.0f)];
-    UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newimg;
-}
-
--(void)createParameter:(NSString *)str
-{
-    // 拼接参数
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"File"] = str;
-    __weakSelf
-    // 上传图片
-    [ODHttpTool postWithURL:ODUrlOtherBase64Upload parameters:params modelClass:[ODUploadImageModel class] success:^(id model) {
-        // 取出模型
-        ODUploadImageModel *uploadModel = [model result];
-        [weakSelf.strArray addObject:uploadModel.File];
-        [weakSelf reloadImageButtons];
-    } failure:^(NSError *error) {
-    }];
-}
-
-- (void)reloadImageButtons
-{
+- (void)reloadImageButtons{
     NSInteger width = (kScreenSize.width-35-30)/4;
-    for (UIButton *view in self.picView.subviews)
-    {
-        if ([view isKindOfClass:[UIButton class]] && ![view isEqual:self.addPicButton])
-        {
+    for (UIButton *view in self.picView.subviews){
+        if ([view isKindOfClass:[UIButton class]] && ![view isEqual:self.addPicButton]){
             [view removeFromSuperview];
         }
     }
-    NSLogFunc
     for (NSInteger i = 0; i < self.mArray.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         [button setBackgroundImage:self.mArray[i] forState:UIControlStateNormal];
@@ -344,24 +284,7 @@
     [ODProgressHUD dismiss];
 }
 
-#pragma mark - 删除图片
--(void)deletePicClick:(UIButton *)button
-{
-    NSLogFunc
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除图片" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    __weakSelf;
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [button removeFromSuperview];
-        [weakSelf.mArray removeObject:button.currentBackgroundImage];
-        [weakSelf.strArray removeObjectAtIndex:button.tag-100];
-        [weakSelf reloadImageButtons];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
--(void)createBottomView
-{
+-(void)createBottomView{
     self.bottomView = [[UIView alloc]init];
     self.bottomView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.bottomView.userInteractionEnabled = YES;
@@ -442,59 +365,11 @@
         }
         [serviceView addSubview:button];
     }
-    
     self.bottomView.frame = CGRectMake(0, CGRectGetMaxY(self.picView.frame)+6, kScreenSize.width, priceView.frame.size.height+unitView.frame.size.height+serviceView.frame.size.height+18);
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
 }
 
--(void)serviceButtonClick:(UIButton *)button
-{
-    NSInteger width = (kScreenSize.width-35-30)/4;
-    NSArray *selectedArray = @[@"button_Home service_Selected",@"button_Online service_Selected",@"button_Express delivery_Selected"];
-    NSArray *array = @[@"button_Home service_default",@"button_Online service_default",@"button_Express delivery_default"];
-    UIView *view = (UIView *)[self.bottomView viewWithTag:1];
-    
-    if (self.selectedButton == nil) {
-        self.selectedButton = button;
-        [button setBackgroundImage:[UIImage imageNamed:selectedArray[button.tag-10]] forState:UIControlStateNormal];
-    }else if (self.selectedButton == button){
-        
-    }else if (self.selectedButton != button){
-        for (NSInteger i = 0; i < selectedArray.count; i++) {
-            UIButton *btn = (UIButton *)[view viewWithTag:10+i];
-            if (btn == button) {
-                [button setBackgroundImage:[UIImage imageNamed:selectedArray[button.tag-10]] forState:UIControlStateNormal];
-                self.selectedButton = button;
-            }else{
-                [btn setBackgroundImage:[UIImage imageNamed:array[i]] forState:UIControlStateNormal];
-            }
-        }
-    }
-
-    if (button.tag == 10 || button.tag==11) {
-        if (button.tag == 10) {
-            self.swap_type = @"1";
-        }else{
-            self.swap_type = @"3";
-        }
-        self.timeView.hidden = NO;
-        self.timeView.frame = CGRectMake(0, CGRectGetMaxY(self.bottomView.frame), kScreenSize.width, 50);
-        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
-        if (self.mArray.count >=4) {
-            [self.scrollView setContentOffset:CGPointMake(0, 59+50+width+10) animated:YES];
-        }else{
-            [self.scrollView setContentOffset:CGPointMake(0, 59+50) animated:YES];
-        }
-    }
-    if (button.tag == 12) {
-        self.swap_type = @"2";
-        self.timeView.hidden = YES;
-        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
-    }
-}
-
--(UIView *)timeView
-{
+-(UIView *)timeView{
     if (!_timeView) {
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(serviceTimeClick:)];
         _timeView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bottomView.frame), kScreenSize.width, 50)];
@@ -509,7 +384,6 @@
         [_timeView addSubview:label];
         
         self.setLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-95, 15, 60, 20)];
-        
         if ([self.type isEqualToString:@"编辑"]&&([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"])) {
             self.setLabel.text = @"设置完成";
         }else{
@@ -527,21 +401,7 @@
     return _timeView;
 }
 
--(void)serviceTimeClick:(UITapGestureRecognizer *)gesture
-{
-    ODBazaarReleaseSkillTimeViewController *timeController = [[ODBazaarReleaseSkillTimeViewController alloc]init];
-    timeController.myBlock = ^(NSMutableArray *array){
-        self.timeArray = [[NSMutableArray alloc]init];
-        self.timeArray = array;
-        self.setLabel.text = @"设置完成";
-    };
-    timeController.swap_id = self.swap_id;
-    timeController.dataArray = self.timeArray;
-    [self.navigationController pushViewController:timeController animated:YES];
-}
-
--(void)createReleaseButton
-{
+-(void)createReleaseButton{
     UIButton *releaseButton = [[UIButton alloc]initWithFrame:CGRectMake(0, kScreenSize.height-64-50, kScreenSize.width, 50)];
     if ([self.type isEqualToString:@"编辑"]) {
         [releaseButton setTitle:@"编辑" forState:UIControlStateNormal];
@@ -554,38 +414,66 @@
     [self.view addSubview:releaseButton];
 }
 
--(void)releaseButtonClick:(UIButton *)button
-{
-    if (self.titleTextField.text.length > 0 &&
-        self.titleTextField.text.length < 8 &&
-        self.contentTextView.text.length > 0 &&
-        self.priceTextField.text.length > 0 &&
-        self.unitTextField.text.length < 4 &&
-        self.unitTextField.text.length > 0 &&
-        self.swap_type != nil &&
-        self.mArray.count <= 5 && self.mArray.count >= 3) {
-        [self joiningTogetherParmetersWithButton:button];
-    }else{
-        if (self.titleTextField.text.length==0) {
-            [ODProgressHUD showInfoWithStatus:@"请输入标题"];
-        }else if (self.titleTextField.text.length>7){
-            [ODProgressHUD showInfoWithStatus:@"标题不能超过七个字"];
-        }else if (self.contentTextView.text.length==0){
-            [ODProgressHUD showInfoWithStatus:@"请输入内容"];
-        }else if (self.priceTextField.text.length==0){
-            [ODProgressHUD showInfoWithStatus:@"不要钱了吗"];
-        }else if (self.unitTextField.text.length==0){
-            [ODProgressHUD showInfoWithStatus:@"认真填写个单位吧"];
-        }else if (self.unitTextField.text.length>3){
-            [ODProgressHUD showInfoWithStatus:@"单位不能超过三个字"];
-        }else if (self.swap_type == nil){
-            [ODProgressHUD showInfoWithStatus:@"请选择你的服务方式"];
-        }else if (([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"])&&self.timeArray.count==0&&[button.titleLabel.text isEqualToString:@"发布"]){
-            [ODProgressHUD showInfoWithStatus:@"请设置时间"];
-        }else if (self.mArray.count<3||self.mArray.count>5){
-            [ODProgressHUD showInfoWithStatus:@"图需3-5张"];
-        }
+#pragma mark - UIActionSheetDelegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    imagePicker.delegate = self;
+    switch (buttonIndex) {
+        case 0:
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+                imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                [self presentViewController:imagePicker animated:YES completion:nil];
+            }else {
+                [ODProgressHUD showInfoWithStatus:@"您当前的照相机不可用"];
+            }
+            break;
+        case 1:
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+            break;
+        default:
+            break;
     }
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    NSString *sourceType = info[UIImagePickerControllerMediaType];
+    if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
+        self.pickedImage = info[UIImagePickerControllerOriginalImage];
+        [ODProgressHUD showProgressWithStatus:@"正在上传"];
+        //图片转化为data
+        NSData *imageData;
+        self.pickedImage = [self scaleImage:self.pickedImage];;
+        if (UIImagePNGRepresentation(self.pickedImage)==nil) {
+            imageData = UIImageJPEGRepresentation(self.pickedImage,0.3);
+        }else{
+            imageData = UIImagePNGRepresentation(self.pickedImage);
+        }
+        NSString *str = @"data:image/jpeg;base64,";
+        NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+        [self.mArray addObject:self.pickedImage];
+        [self pushDataWith:strData];
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(UIImage *) scaleImage:(UIImage *)image
+{
+    CGSize size = CGSizeMake(image.size.width * 0.3, image.size.height * 0.3);
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    transform = CGAffineTransformScale(transform,0.3, 0.3);
+    CGContextConcatCTM(context, transform);
+    [image drawAtPoint:CGPointMake(0.0f, 0.0f)];
+    UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newimg;
 }
 
 -(void)joiningTogetherParmetersWithButton:(UIButton *)button
@@ -600,7 +488,6 @@
         }
     }
     if ([button.titleLabel.text isEqualToString:@"编辑"]) {
-        
         NSDictionary *parameter;
         if (self.timeArray.count) {
             parameter = @{
@@ -627,7 +514,6 @@
         }
         [self pushDataWithUrl:ODUrlSwapEdit parameter:parameter isEdit:YES];
     }else{
-        
         NSDictionary *parameter;
         if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
             parameter = @{
@@ -652,44 +538,10 @@
         }
         [self pushDataWithUrl:ODUrlSwapCreate parameter:parameter isEdit:NO];
     }
-
 }
-
--(void)joiningTogetherTimeParmeters
-{
-    __weakSelf
-    NSDictionary *parameter = @{@"swap_id":self.swap_id};
-    [ODHttpTool getWithURL:ODUrlSwapSchedule parameters:parameter modelClass:[NSObject class] success:^(id model) {
-        weakSelf.editTimeArray = [NSMutableArray arrayWithArray:model[@"result"]];
-    } failure:^(NSError *error) {
-        
-    }];
-}
-
-
--(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isEdit:(BOOL)isEdit
-{
-    __weakSelf
-    [ODHttpTool postWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
-        
-        if (isEdit) {
-            [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-            [ODProgressHUD showInfoWithStatus:@"编辑成功"];
-        }else{
-            [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
-            [ODProgressHUD showInfoWithStatus:@"创建成功"];
-        }
-    } failure:^(NSError *error) {
-        
-    }];
-}
-
 
 #pragma mark - UITextFieldDelegate
--(void)textFieldDidChange:(UITextField *)textField
-{
+-(void)textFieldDidChange:(UITextField *)textField{
     if (textField == self.titleTextField) {
         self.titleCountLabel.text = [NSString stringWithFormat:@"%ld/7",textField.text.length];
         if (textField.text.length>7) {
@@ -697,14 +549,10 @@
         } else {
             self.titleCountLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1.0f];
         }
-        
     }
 }
 
-
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     if (textField == self.priceTextField) {
         if ([textField.text rangeOfString:@"."].location == NSNotFound) {
             self.isHaveDian = NO;
@@ -738,7 +586,6 @@
     return YES;
 }
 
-
 #pragma mark - UITextViewDelegate
 NSString *skillContentText = @"";
 - (void)textViewDidChange:(UITextView *)textView
@@ -758,46 +605,130 @@ NSString *skillContentText = @"";
     }
 }
 
--(void)textViewDidEndEditing:(UITextView *)textView
-{
+-(void)textViewDidEndEditing:(UITextView *)textView{
    if (textView.text.length == 0) {
        self.contentPlaceholderLabel.text = @"请输入任务标题";
    }
 }
 
--(void)viewWillAppear:(BOOL)animated
+#pragma amrk - action
+-(void)addPicButtonClick:(UIButton *)button
 {
-    [super viewWillAppear:animated];
+    if (self.mArray.count<5) {
+        [self.titleTextField resignFirstResponder];
+        [self.contentTextView resignFirstResponder];
+        [self.priceTextField resignFirstResponder];
+        [self.unitTextField resignFirstResponder];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
+        [actionSheet showInView:self.view];
+    }else{
+        [ODProgressHUD showInfoWithStatus:@"已达图片最大上传数"];
+    }
+}
+
+-(void)deletePicClick:(UIButton *)button
+{
+    NSLogFunc
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除图片" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    __weakSelf;
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [button removeFromSuperview];
+        [weakSelf.mArray removeObject:button.currentBackgroundImage];
+        [weakSelf.strArray removeObjectAtIndex:button.tag-100];
+        [weakSelf reloadImageButtons];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+-(void)serviceButtonClick:(UIButton *)button{
+    NSInteger width = (kScreenSize.width-35-30)/4;
+    NSArray *selectedArray = @[@"button_Home service_Selected",@"button_Online service_Selected",@"button_Express delivery_Selected"];
+    NSArray *array = @[@"button_Home service_default",@"button_Online service_default",@"button_Express delivery_default"];
     UIView *view = (UIView *)[self.bottomView viewWithTag:1];
-    if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
-        if ([self.swap_type isEqualToString:@"1"]) {
-            UIButton *button = (UIButton *)[view viewWithTag:10];
-            [button setBackgroundImage:[UIImage imageNamed:@"button_Home service_Selected"] forState:UIControlStateNormal];
+    
+    if (self.selectedButton == nil) {
+        self.selectedButton = button;
+        [button setBackgroundImage:[UIImage imageNamed:selectedArray[button.tag-10]] forState:UIControlStateNormal];
+    }else if (self.selectedButton == button){
+        
+    }else if (self.selectedButton != button){
+        for (NSInteger i = 0; i < selectedArray.count; i++) {
+            UIButton *btn = (UIButton *)[view viewWithTag:10+i];
+            if (btn == button) {
+                [button setBackgroundImage:[UIImage imageNamed:selectedArray[button.tag-10]] forState:UIControlStateNormal];
+                self.selectedButton = button;
+            }else{
+                [btn setBackgroundImage:[UIImage imageNamed:array[i]] forState:UIControlStateNormal];
+            }
+        }
+    }
+    
+    if (button.tag == 10 || button.tag==11) {
+        if (button.tag == 10) {
+            self.swap_type = @"1";
         }else{
-            UIButton *button = (UIButton *)[view viewWithTag:11];
-            [button setBackgroundImage:[UIImage imageNamed:@"button_Online service_Selected"] forState:UIControlStateNormal];
+            self.swap_type = @"3";
         }
         self.timeView.hidden = NO;
+        self.timeView.frame = CGRectMake(0, CGRectGetMaxY(self.bottomView.frame), kScreenSize.width, 50);
         self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
-    }else if ([self.swap_type isEqualToString:@"2"]){
-        UIButton *button = (UIButton *)[view viewWithTag:12];
-        [button setBackgroundImage:[UIImage imageNamed:@"button_Express delivery_Selected"] forState:UIControlStateNormal];
+        if (self.mArray.count >=4) {
+            [self.scrollView setContentOffset:CGPointMake(0, 59+50+width+10) animated:YES];
+        }else{
+            [self.scrollView setContentOffset:CGPointMake(0, 59+50) animated:YES];
+        }
+    }
+    if (button.tag == 12) {
+        self.swap_type = @"2";
         self.timeView.hidden = YES;
         self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
     }
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
-#pragma mark - UIScrollViewDelegate
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)serviceTimeClick:(UITapGestureRecognizer *)gesture{
+    ODBazaarReleaseSkillTimeViewController *timeController = [[ODBazaarReleaseSkillTimeViewController alloc]init];
+    timeController.myBlock = ^(NSMutableArray *array){
+        self.timeArray = [[NSMutableArray alloc]init];
+        self.timeArray = array;
+        self.setLabel.text = @"设置完成";
+    };
+    timeController.swap_id = self.swap_id;
+    timeController.dataArray = self.timeArray;
+    [self.navigationController pushViewController:timeController animated:YES];
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
+-(void)releaseButtonClick:(UIButton *)button{
+    if (self.titleTextField.text.length > 0 &&
+        self.titleTextField.text.length < 8 &&
+        self.contentTextView.text.length > 0 &&
+        self.priceTextField.text.length > 0 &&
+        self.unitTextField.text.length < 4 &&
+        self.unitTextField.text.length > 0 &&
+        self.swap_type != nil &&
+        self.mArray.count <= 5 && self.mArray.count >= 3) {
+        [self joiningTogetherParmetersWithButton:button];
+    }else{
+        if (self.titleTextField.text.length==0) {
+            [ODProgressHUD showInfoWithStatus:@"请输入标题"];
+        }else if (self.titleTextField.text.length>7){
+            [ODProgressHUD showInfoWithStatus:@"标题不能超过七个字"];
+        }else if (self.contentTextView.text.length==0){
+            [ODProgressHUD showInfoWithStatus:@"请输入内容"];
+        }else if (self.priceTextField.text.length==0){
+            [ODProgressHUD showInfoWithStatus:@"不要钱了吗"];
+        }else if (self.unitTextField.text.length==0){
+            [ODProgressHUD showInfoWithStatus:@"认真填写个单位吧"];
+        }else if (self.unitTextField.text.length>3){
+            [ODProgressHUD showInfoWithStatus:@"单位不能超过三个字"];
+        }else if (self.swap_type == nil){
+            [ODProgressHUD showInfoWithStatus:@"请选择你的服务方式"];
+        }else if (([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"])&&self.timeArray.count==0&&[button.titleLabel.text isEqualToString:@"发布"]){
+            [ODProgressHUD showInfoWithStatus:@"请设置时间"];
+        }else if (self.mArray.count<3||self.mArray.count>5){
+            [ODProgressHUD showInfoWithStatus:@"图需3-5张"];
+        }
+    }
 }
 
 @end

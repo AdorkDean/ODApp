@@ -8,69 +8,49 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaaeExchangeSkillViewController.h"
+#import "ODBazaarExchangeSkillCell.h"
 
-#define cellID @"ODBazaarExchangeSkillCollectionCell"
+#import "MJRefresh.h"
+#import "ODBazaarExchangeSkillDetailViewController.h"
+#import "ODBazaarExchangeSkillModel.h"
 
-@interface ODBazaaeExchangeSkillViewController ()
+@interface ODBazaaeExchangeSkillViewController () <UITableViewDataSource, UITableViewDelegate>
+
+/** 表格 */
+@property (nonatomic, strong) UITableView *tableView;
+/** 参数 */
+@property (nonatomic, strong) NSMutableDictionary *params;
 
 @end
 
+// 循环cell标识
+static NSString * const exchangeCellId = @"exchangeCell";
+
 @implementation ODBazaaeExchangeSkillViewController
 
-#pragma mark - lazyLoad
--(UICollectionView *)collectionView
-{
-    if (!_collectionView) {
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.minimumInteritemSpacing = 5;
-        flowLayout.minimumLineSpacing = 5;
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - 64 - 40 - 55) collectionViewLayout:flowLayout];
-        _collectionView.dataSource = self;
-        _collectionView.delegate = self;
-        _collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-        [_collectionView registerNib:[UINib nibWithNibName:@"ODBazaarExchangeSkillCollectionCell" bundle:nil] forCellWithReuseIdentifier:cellID];
-        [self.view addSubview:_collectionView];
-    }
-    return _collectionView;
-}
-
+#pragma mark - 懒加载
 -(NSMutableArray *)dataArray
 {
     if (!_dataArray) {
-        _dataArray = [[NSMutableArray alloc]init];
+        _dataArray = [NSMutableArray array];
     }
     return _dataArray;
 }
 
-#pragma mark - lifeCycle
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    self.page = 1;
-    [self requestData];
-    __weakSelf
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        self.page = 1;
-        [weakSelf requestData];
-    }];
-
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [weakSelf loadMoreData];
-    }];
-
-    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationReleaseSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
-        [weakSelf.collectionView.mj_header beginRefreshing];
-    }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
-        [weakSelf.collectionView.mj_header beginRefreshing];
-    }];
-    [self.collectionView.mj_header beginRefreshing];
-}
-
+#pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // 初始化TableView
+    [self setupTableView];
+    
+    // 初始化刷新控件
+    [self setupRefresh];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -79,143 +59,142 @@
 }
 
 - (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-#pragma mark - 数据请求
--(void)requestData
+#pragma mark - 初始化方法
+/**
+ *  初始化表格
+ */
+- (void)setupTableView
 {
-    NSDictionary *parameter = @{@"page" : [NSString stringWithFormat:@"%ld", self.page], @"my":@"0"};
-    __weakSelf
-    [ODHttpTool getWithURL:ODUrlSwapList parameters:parameter modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
-        if (weakSelf.page == 1) {
-            [weakSelf.dataArray removeAllObjects];
-        }
-        NSArray *array = [model result];
-        [weakSelf.dataArray addObjectsFromArray:array];
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf.collectionView.mj_footer endRefreshing];
-        [weakSelf.collectionView reloadData];
-    } failure:^(NSError *error) {
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf.collectionView.mj_footer endRefreshing];
-    }];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODBazaaeExchangeNavHeight - ODTabBarHeight) style:UITableViewStylePlain];
+    tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    tableView.dataSource = self;
+    tableView.delegate = self;
+    [self.view addSubview:tableView];
+    self.tableView = tableView;
+    
+    // 取消分割线
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    // 注册cell
+    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarExchangeSkillCell class]) bundle:nil] forCellReuseIdentifier:exchangeCellId];
+}
+/**
+ *  设置刷新控件
+ */
+- (void)setupRefresh
+{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewUsers)];
+    [self.tableView.mj_header beginRefreshing];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreUsers)];
+    self.tableView.mj_footer.automaticallyHidden = YES;
 }
 
-- (void)loadMoreData {
-    self.page++;
-    [self requestData];
-}
-
-
-#pragma mark - UICollectionViewDataSource
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+#pragma mark - UITableView 数据源方法
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return self.dataArray.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODBazaarExchangeSkillCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellID forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODBazaarExchangeSkillCell *cell = [tableView dequeueReusableCellWithIdentifier:exchangeCellId];
     cell.model = self.dataArray[indexPath.row];
-    [cell.headButton addTarget:self action:@selector(otherInfoClick:) forControlEvents:UIControlEventTouchUpInside];
-    CGFloat width = kScreenSize.width > 320 ? 90 : 70;
-    if (cell.model.imgs_small.count) {
-        for (id vc in cell.picView.subviews) {
-            [vc removeFromSuperview];
-        }
-        for (NSInteger i = 0; i < cell.model.imgs_small.count; i++) {
-            ODBazaarExchangeSkillImgs_smallModel *smallModel = cell.model.imgs_small[i];
-            UIButton *imageButton = [[UIButton alloc] init];
-            if (cell.model.imgs_small.count == 4) {
-                imageButton.frame = CGRectMake((width + 5) * (i % 2), (width + 5) * (i / 2), width, width);
-                cell.picViewConstraintHeight.constant = 2 * width + 5;
-            }else{
-                imageButton.frame = CGRectMake((width + 5) * (i % 3), (width + 5) * (i / 3), width, width);
-                cell.picViewConstraintHeight.constant = width + (width + 5) * ((cell.model.imgs_small.count - 1) / 3);
-            }
-            [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:smallModel.img_url] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
-                if (error) {
-                    [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
-                }
-            }];
-            [imageButton addTarget:self action:@selector(imageButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
-            imageButton.tag = 10 * indexPath.row + i;
-            [cell.picView addSubview:imageButton];
-        }
-    }
-    else {
-        for (id vc in cell.picView.subviews) {
-            [vc removeFromSuperview];
-        }
-        cell.picViewConstraintHeight.constant = 0;
-    }
+    cell.dataArray = self.dataArray;
     return cell;
 }
 
-#pragma mark - UICollectionViewDelegate
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - 代理方法
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    // 停止刷新
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+    
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     detailControler.swap_id = [NSString stringWithFormat:@"%d", model.swap_id];
-    detailControler.nick = model.user[@"nick"];
+    detailControler.nick = model.user.nick;
     [self.navigationController pushViewController:detailControler animated:YES];
 }
 
-#pragma mark - action
-- (void)imageButtonClicked:(UIButton *)button {
-    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *) button.superview.superview.superview;
-    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc] init];
-    picController.photos = model.imgs_big;
-    picController.selectedIndex = button.tag - 10 * indexPath.row;
-    picController.skill = @"skill";
-    [self.navigationController presentViewController:picController animated:YES completion:nil];
+    return model.rowHeight;
 }
 
-- (void)otherInfoClick:(UIButton *)button {
-    ODBazaarExchangeSkillCollectionCell *cell = (ODBazaarExchangeSkillCollectionCell *) button.superview.superview;
-    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-    vc.open_id = model.user[@"open_id"];
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:model.user[@"open_id"]]) {
-    } else {
-        [self.navigationController pushViewController:vc animated:YES];
+#pragma mark - 事件方法
+- (void)loadNewUsers
+{
+    // 结束上拉加载
+    [self.tableView.mj_footer endRefreshing];
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"page"] = [NSString stringWithFormat:@"%@", @(self.page)];
+    params[@"my"] = @"0";
+    self.params = params;
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlSwapList parameters:params modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
+        if (weakSelf.params != params) return;
+        // 清空所有数据
+        [weakSelf.dataArray removeAllObjects];
+        
+        NSArray *newUsers = [model result];
+        [weakSelf.dataArray addObjectsFromArray:newUsers];
+        [weakSelf.tableView reloadData];
+        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf checkFooterState:newUsers.count];
+        
+        // 重新设置page = 1
+        weakSelf.page = 1;
+    } failure:^(NSError *error) {
+        if (weakSelf.params != params) return;
+        [weakSelf.tableView.mj_header endRefreshing];
+    }];
+}
+
+- (void)loadMoreUsers
+{
+    // 取出页码
+    NSInteger page = self.page + 1;
+    
+    // 结束下拉刷新
+    [self.tableView.mj_header endRefreshing];
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"page"] = [NSString stringWithFormat:@"%@", @(page)];
+    params[@"my"] = @"0";
+    self.params = params;
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlSwapList parameters:params modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
+        if (weakSelf.params != params) return;
+        NSArray *array = [model result];
+        [weakSelf.dataArray addObjectsFromArray:array];
+        [weakSelf.tableView reloadData];
+        
+        [weakSelf checkFooterState:array.count];
+        // 请求成功后才赋值页码
+        weakSelf.page = page;
+    } failure:^(NSError *error) {
+        if (weakSelf.params != params) return;
+        weakSelf.page = weakSelf.page - 1;
+        [weakSelf.tableView.mj_footer endRefreshing];
+    }];
+}
+
+/**
+ *  时刻监测footer的状态
+ */
+- (void)checkFooterState:(NSUInteger)count
+{
+    if (count < 20) { // 全部数据已经加载完毕
+        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+    } else { // 还没有加载完毕
+        [self.tableView.mj_footer endRefreshing];
     }
 }
-
-//动态计算cell的高度
-- (CGFloat)returnHight:(ODBazaarExchangeSkillModel *)model {
-    CGFloat width = kScreenSize.width > 320 ? 90 : 70;
-    NSString *content = model.content;
-    NSDictionary *dict = @{NSFontAttributeName : [UIFont systemFontOfSize:11]};
-    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width - 93, 30) options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading | NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
-    CGFloat baseHeight = size.height + 121;
-    if (model.imgs_small.count == 0) {
-        return baseHeight;
-    } else if (model.imgs_small.count > 0 && model.imgs_small.count < 4) {
-        return baseHeight + width;
-    } else if (model.imgs_small.count >= 4 && model.imgs_small.count < 7) {
-        return baseHeight + 2 * width + 5;
-    } else if (model.imgs_small.count >= 7 && model.imgs_small.count < 9) {
-        return baseHeight + 3 * width + 10;
-    } else {
-        return baseHeight + 3 * width + 10;
-    }
-}
-
 
 @end
