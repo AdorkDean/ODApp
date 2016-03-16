@@ -11,6 +11,7 @@
 @implementation ODBazaarCollectionCell
 
 - (void)awakeFromNib {
+    
     self.headButton.layer.masksToBounds = YES;
     self.headButton.layer.cornerRadius = 24;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];

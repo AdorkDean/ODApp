@@ -20,7 +20,6 @@
 @property(weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property(weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property(weak, nonatomic) IBOutlet UILabel *statusLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *contentHConstraint;
 @end
 
 @implementation ODBazaarHelpCell
@@ -28,6 +27,7 @@
 #pragma mark - 初始化方法
 - (void)awakeFromNib {
     // 取消选中样式
+    self.autoresizingMask = NO;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
@@ -39,7 +39,7 @@
     self.statusLabel.backgroundColor = [UIColor colorWithHexString:@"#ffd701" alpha:1];
     
     CGFloat leftMargin = 67.5;
-    self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - leftMargin - 15;
+//    self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - leftMargin - 15;
 }
 
 /**
@@ -76,8 +76,6 @@
 //    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-83, 30) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
 //    self.contentLabelConstraint.constant = size.height;
 
-    CGFloat contentHeight = [model.content od_SizeWithFont:[UIFont systemFontOfSize:11.5] maxWidth:self.contentLabel.preferredMaxLayoutWidth].height;
-    self.contentHConstraint.constant = contentHeight;
 }
 
 /**
