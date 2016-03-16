@@ -11,6 +11,25 @@
 
 @interface UIImageView (ODCache)
 
+/**
+ *  设置网络图片
+ */
+- (void)od_setImageWithURLString:(NSString *)URLString;
+
+/**
+ *  设置圆形网络图片
+ */
+- (void)od_setRoundImageWithURLString:(NSString *)URLString;
+
+/**
+ *  设置网络图片带有失败图
+ */
+- (void)od_setImageErrorWithURLString:(NSString *)URLString;
+
+/**
+ *  设置下载完成后的事件
+ */
 - (void)od_setImageWithURLString:(NSString *)URLString completed:(SDWebImageCompletionBlock)completerBlock;
+
 
 @end
