@@ -1,22 +1,22 @@
 //
-//  ODReleaseCell.m
+//  ODReleaseView.m
 //  ODApp
 //
-//  Created by Bracelet on 16/2/18.
+//  Created by Bracelet on 16/3/16.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODReleaseCell.h"
+#import "ODReleaseView.h"
 
-@implementation ODReleaseCell
+@implementation ODReleaseView
 
 - (void)awakeFromNib {
     [self.contentView bringSubviewToFront:self.lineView];
     self.titleImageView.layer.cornerRadius = 7;
     self.titleImageView.layer.masksToBounds = YES;
     
-    self.horicontalLineViewHeight.constant = 0.5;
-    self.lineViewWidth.constant = 0.5;
+//    self.horicontalLineViewHeight.constant = 0.5;
+//    self.lineViewWidth.constant = 0.5;
     
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     
@@ -31,7 +31,7 @@
 
 - (void)setModel:(ODReleaseModel *)model
 {
-
+    
     [self.titleImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.imgs_small[0][@"img_url"]]placeholderImage:[UIImage imageNamed:@"placeholderImage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (error) {
             self.titleImageView.image = [UIImage imageNamed:@"errorplaceholderImage"];
@@ -48,10 +48,11 @@
         self.illegalLabel.text = @"违规";
         self.editButton.enabled = NO;
     }
-    else{    
+    else{
         self.illegalLabel.text = @"";
         self.editButton.enabled = YES;
     }
 }
+
 
 @end

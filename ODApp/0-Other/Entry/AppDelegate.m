@@ -37,7 +37,6 @@
 #pragma mark - bug邮件
 
 void UncaughtExceptionHandler(NSException *exception) {
-    NSLog(@"----UncaughtExceptionHandler");
     NSArray *arr = [exception callStackSymbols];
     NSString *reason = [exception reason];
     NSString *name = [exception name];
