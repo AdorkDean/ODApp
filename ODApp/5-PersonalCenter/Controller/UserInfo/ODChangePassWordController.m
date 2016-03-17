@@ -85,7 +85,6 @@
     [self navigationInit];
     [self.view addSubview:self.registView];
     self.currentTime = getVerificationCodeTime;
-    
 }
 
 #pragma mark - 初始化方法
@@ -126,7 +125,6 @@
     __weakSelf;
     NSDictionary *parameters = @{ @"mobile":self.registView.phoneNumber.text, @"type":@"3" };
     [ODHttpTool getWithURL:ODUrlUserCodeSend parameters:parameters modelClass:[NSObject class] success:^(id model) {
-        //        [self.timer setFireDate:[NSDate distantPast]];
         // 开启定时器
         [weakSelf timer];
     } failure:^(NSError *error) {

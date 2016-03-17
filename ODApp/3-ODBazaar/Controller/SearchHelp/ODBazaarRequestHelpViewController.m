@@ -156,8 +156,8 @@ static NSString * const helpCellId = @"helpCell";
     self.tableView = tableView;
     
     // 设置估算高度值
-    tableView.rowHeight = UITableViewAutomaticDimension;
-    tableView.estimatedRowHeight = 200;
+//    tableView.rowHeight = UITableViewAutomaticDimension;
+//    tableView.estimatedRowHeight = 200;
     
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -208,6 +208,12 @@ static NSString * const helpCellId = @"helpCell";
     }
     self.indexPath = indexPath.row;
     [self.navigationController pushViewController:bazaarDetail animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODBazaarRequestHelpTasksModel *model = self.dataArray[indexPath.row];
+    return model.cellHeight;
 }
 
 #pragma mark - UIPopDelegate
