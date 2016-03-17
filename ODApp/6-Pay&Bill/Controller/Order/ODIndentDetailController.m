@@ -52,9 +52,6 @@
 // UIScrollView 高度
 @property (nonatomic, assign) long scrollHeight;
 
-// UIScrollView contentSize
-@property (nonatomic, assign) long screollContentSize;
-
 // 订单内容
 @property (nonatomic, strong) ODIndentDetailView *indentDetailView;
 
@@ -118,8 +115,6 @@
         [self createBuyerInformationView];
         [self createOrderCancelReasonView];
         [self createDealTimeView];
-
-        self.scrollView.contentSize = CGSizeMake(kScreenSize.width, self.screollContentSize);
         
         [self.view addSubview:_scrollView];
     }
@@ -128,7 +123,6 @@
 
 - (UIButton *)endIsOneButton {
     if (!_endIsOneButton) {
-        
         NSString *status = [NSString stringWithFormat:@"%@", self.orderStatus];
         _endIsOneButton = [UIButton buttonWithType:UIButtonTypeSystem];
         _endIsOneButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
@@ -389,7 +383,7 @@
         lineView.backgroundColor = [UIColor lineColor];
         [self.dealTimeView addSubview:lineView];
     }
-    self.screollContentSize = CGRectGetMaxY(self.dealTimeView.frame);
+    self.scrollView.contentSize = CGSizeMake(KScreenWidth, CGRectGetMaxY(self.dealTimeView.frame));
     [self.scrollView addSubview:self.dealTimeView];
 }
 

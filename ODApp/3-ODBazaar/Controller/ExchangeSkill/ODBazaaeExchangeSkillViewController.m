@@ -97,8 +97,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
-    tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 6);
-    
+    tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell
@@ -125,7 +124,6 @@ static NSString * const exchangeCellId = @"exchangeCell";
 {
     ODBazaarExchangeSkillCell *cell = [tableView dequeueReusableCellWithIdentifier:exchangeCellId];
     cell.model = self.dataArray[indexPath.row];
-    cell.dataArray = self.dataArray;
     return cell;
 }
 
@@ -195,8 +193,8 @@ static NSString * const exchangeCellId = @"exchangeCell";
         NSArray *array = [model result];
         [weakSelf.dataArray addObjectsFromArray:array];
         [weakSelf.tableView reloadData];
-        
         [weakSelf checkFooterState:array.count];
+        
         // 请求成功后才赋值页码
         weakSelf.page = page;
     } failure:^(NSError *error) {

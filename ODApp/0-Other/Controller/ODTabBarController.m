@@ -17,6 +17,7 @@
 #import "ODLandMainController.h"
 
 #import "ODPersonalCenterViewController.h"
+#import "ODPersonalCenterController.h"
 
 @interface ODTabBarController () <ODTabBarDelegate>
 
@@ -36,7 +37,7 @@
 - (void)createViewControllers {
     NSArray *titleArray = @[@"首页发现", @"中心活动", @"欧动集市", @"欧动社区", @"个人中心"];
     NSArray *imageArray = @[@"icon_home-find", @"icon_Center - activity", @"icon_market", @"icon_community", @"icon_Personal Center"];
-    NSArray *controllers = @[[[ODHomeFoundViewController alloc] init], [[ODNewActivityCenterViewController alloc] init], [[ODBazaarViewController alloc] init], [[ODCommumityViewController alloc] init], [[ODLandMainController alloc] init]];
+    NSArray *controllers = @[[[ODHomeFoundViewController alloc] init], [[ODNewActivityCenterViewController alloc] init], [[ODBazaarViewController alloc] init], [[ODCommumityViewController alloc] init], [[ODPersonalCenterController alloc] init]];
     for (NSInteger i = 0; i < controllers.count; i++) {
         [self setupOneChildVc:[[ODNavigationController alloc] initWithRootViewController:controllers[i]] image:[NSString stringWithFormat:@"%@_default", imageArray[i]] selectedImage:[NSString stringWithFormat:@"%@_Selected", imageArray[i]] title:titleArray[i]];
     }

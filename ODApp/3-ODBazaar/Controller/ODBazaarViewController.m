@@ -9,16 +9,17 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaarViewController.h"
 
-@interface ODBazaarViewController ()
+@interface ODBazaarViewController () <UIScrollViewDelegate>
+
 /** scrollView */
-@property(nonatomic, weak) UIScrollView *scrollView;
+@property (nonatomic, weak) UIScrollView *scrollView;
 /** 指示器 */
-@property(nonatomic, weak) UIView *lineView;
+@property (nonatomic, weak) UIView *lineView;
 
 @end
 
 /** 动画持续时间 */
-static NSTimeInterval const animateDuration = 0.25;
+static NSTimeInterval const animateDuration = 0.15;
 
 /** 下划线高度 */
 static CGFloat const lineHeight = 1;
@@ -39,17 +40,14 @@ static CGFloat const lineHeight = 1;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    // 设置导航栏
     [self setupNav];
-    
+    // 创建自定义导航栏
     [self setupCustomNav];
-
-    [self createScrollView];
-
+    // 添加子控制器
     [self setupChilidVc];
-    
-    // 默认加载第一界面
-    [self scrollViewDidEndDecelerating:self.scrollView];
+    // 创建ScrollView
+    [self createScrollView];
 }
 
 #pragma mark - 初始化方法
@@ -75,12 +73,10 @@ static CGFloat const lineHeight = 1;
         [button setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
         [button setBackgroundColor:[UIColor colorWithHexString:@"#ffffff" alpha:1]];
         [button setFrame:CGRectMake((KScreenWidth * 0.5) * i, 0, KScreenWidth * 0.5, ODBazaaeExchangeNavHeight)];
-        button.tag = 10010 + i;
         [self.view addSubview:button];
         
         [button addTarget:self action:@selector(changeController:) forControlEvents:UIControlEventTouchUpInside];
     }
-    
     // 创建指示器
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, (ODBazaaeExchangeNavHeight - lineHeight), KScreenWidth * 0.5, lineHeight)];
     lineView.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
@@ -98,7 +94,6 @@ static CGFloat const lineHeight = 1;
     
     CGRect frame = CGRectMake(0, ODBazaaeExchangeNavHeight, KScreenWidth, height);
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:frame];
-    scrollView.userInteractionEnabled = YES;
     scrollView.pagingEnabled = YES;
     scrollView.delegate = self;
     scrollView.showsHorizontalScrollIndicator = NO;
@@ -106,6 +101,10 @@ static CGFloat const lineHeight = 1;
     scrollView.bounces = NO;
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
+    // 设置偏移量
+    scrollView.contentSize = CGSizeMake(self.childViewControllers.count * KScreenWidth, 0);
+    // 默认加载第一个界面
+    [self scrollViewDidEndDecelerating:scrollView];
 }
 
 /**
@@ -149,13 +148,13 @@ static CGFloat const lineHeight = 1;
     UIViewController *childVc = self.childViewControllers[index];
     // 如果已经加载子控制器,  直接返回
     if (childVc.isViewLoaded) return;
-    childVc.view.frame = CGRectMake(KScreenWidth * index, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODTabBarHeight);
-    
+    childVc.view.frame = CGRectMake(KScreenWidth * index, 0, KScreenWidth, scrollView.od_height);
     [scrollView addSubview:childVc.view];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
+    if (![scrollView isEqual:self.scrollView]) return;
     [self scrollViewDidEndDecelerating:scrollView];
 }
 
@@ -182,8 +181,7 @@ static CGFloat const lineHeight = 1;
 
 - (void)changeController:(UIButton *)button
 {
-    self.index = button.tag - 10010;
-    self.scrollView.contentSize = CGSizeMake(2 * KScreenWidth, 0);
+    self.index = button.od_x / (KScreenWidth * 0.5);
 }
 
 @end

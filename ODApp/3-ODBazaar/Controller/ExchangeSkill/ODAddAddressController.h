@@ -17,5 +17,4 @@
 @property(nonatomic, strong) ODOrderAddressDefModel *addressModel;
 @property(nonatomic, assign) BOOL isDefault;
 
-
 @end

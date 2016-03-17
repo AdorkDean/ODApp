@@ -20,6 +20,9 @@
     self.view.backgroundColor = [UIColor backgroundColor];
 }
 
-
+- (void)dealloc
+{
+    NSLogFunc
+}
 
 @end

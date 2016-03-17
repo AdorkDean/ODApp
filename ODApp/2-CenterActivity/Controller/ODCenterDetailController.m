@@ -18,7 +18,7 @@
 #import "ODTabBarController.h"
 #import "ODUserInformation.h"
 #import "ODPersonalCenterViewController.h"
-#import "ODCenterPactureController.h"
+#import "ODPublicWebViewController.h"
 
 int pageNumnber = 0;
 
@@ -82,16 +82,14 @@ int pageNumnber = 0;
 }
 
 
-- (void)addressAction:(UITapGestureRecognizer *)sender {
-
-    ODCenterPactureController *vc = [[ODCenterPactureController alloc] init];
-
-    NSString *webUrl = [NSString stringWithFormat:@"http://h5.odong.com/map/search?lng=%@&lat=%@", self.model.lng, self.model.lat];
-
+- (void)addressAction:(UITapGestureRecognizer *)sender
+{
+    ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
+    NSString *webUrl = [NSString stringWithFormat:@"%@?lng=%@&lat=%@",ODWebUrlMapSearch, self.model.lng, self.model.lat];
     vc.webUrl = webUrl;
-    vc.activityName = self.model.name;
+    vc.navigationTitle = self.model.name;
+    vc.isShowProgress = YES;
     [self.navigationController pushViewController:vc animated:YES];
-
 }
 
 
