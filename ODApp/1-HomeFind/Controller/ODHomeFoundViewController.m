@@ -55,8 +55,6 @@ static NSString * const exchangeCellId = @"exchangeCell";
 
     [self getLocationCityRequest];
     [self getSkillChangeRequest];
-    [self createHeaderView];
-    [self createFooterView];
 
     _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds))];
     _mapView.delegate = self;
@@ -71,11 +69,6 @@ static NSString * const exchangeCellId = @"exchangeCell";
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note){
         [weakSelf.tableView.mj_header beginRefreshing];
     }];
-    
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self getSkillChangeRequest];
-    }];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -105,7 +98,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     NSDictionary *parameter = @{@"region_name":@""};
     [ODHttpTool getWithURL:ODUrlOtherCityList parameters:parameter modelClass:[ODLocationModel class] success:^(id model) {
         weakSelf.cityListArray = [[model result] all];
-        [weakSelf.tableView reloadData];
+        
     }
     failure:^(NSError *error) {
     }];
@@ -117,6 +110,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     __weakSelf;
     [ODHttpTool getWithURL:ODUrlOtherHome parameters:parameter modelClass:[ODHomeInfoModel class] success:^(id model) {
         [weakSelf.dataArray removeAllObjects];
+        [weakSelf.pictureArray removeAllObjects];
         ODHomeInfoModel *infoModel = [model result];
         for (ODBazaarExchangeSkillModel *skillModel in infoModel.swaps) {
             [weakSelf.dataArray addObject:skillModel];
@@ -128,6 +122,8 @@ static NSString * const exchangeCellId = @"exchangeCell";
         
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView reloadData];
+        [weakSelf createHeaderView];
+        [weakSelf createFooterView];
     }
     failure:^(NSError *error) {
         [weakSelf.tableView.mj_header endRefreshing];
@@ -157,6 +153,9 @@ static NSString * const exchangeCellId = @"exchangeCell";
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         // 注册cell
         [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarExchangeSkillCell class]) bundle:nil] forCellReuseIdentifier:exchangeCellId];
+        self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [self getSkillChangeRequest];
+        }];
         [self.view addSubview:_tableView];
     }
     return _tableView;
@@ -260,6 +259,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
         }
         [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:activityModel.detail_md5] forState:UIControlStateNormal];
         imageButton.tag = 100 + i;
+        imageButton.backgroundColor = [UIColor purpleColor];
         [imageButton addTarget:self action:@selector(activityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [scrollView addSubview:imageButton];
     }
