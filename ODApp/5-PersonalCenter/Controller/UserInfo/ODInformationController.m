@@ -155,6 +155,14 @@
         
         [weakSelf createTableView];
         [weakSelf.tableView reloadData];
+        
+        if ([weakSelf.delegate respondsToSelector:@selector(infoVc:DidChangedUserImage:)])
+        {
+            [weakSelf.delegate infoVc:weakSelf DidChangedUserImage:user];
+        }
+        // 更新缓存
+        [[ODUserInformation sharedODUserInformation] updateUserCache:user];
+        
     } failure:^(NSError *error) {
         
     }];
@@ -399,10 +407,6 @@
          
          [weakSelf.informationView.userImageView sd_setImageWithURL:[NSURL URLWithString:userModel.avatar]];
          
-         // 判断是否实现代理
-         if ([weakSelf.delegate respondsToSelector:@selector(infoVc:DidChangedUserImage:)]) {
-             [weakSelf.delegate infoVc:self DidChangedUserImage:userModel];
-         }
          [weakSelf.tableView reloadData];
          
          [weakSelf.imagePicker dismissViewControllerAnimated:YES completion:nil];
