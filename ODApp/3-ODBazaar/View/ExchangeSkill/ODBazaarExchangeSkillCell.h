@@ -11,9 +11,7 @@
 
 @interface ODBazaarExchangeSkillCell : UITableViewCell
 
+/** Skill模型 */
 @property(nonatomic, strong) ODBazaarExchangeSkillModel *model;
-
-@property(nonatomic, strong) NSArray *dataArray;
-
 
 @end
