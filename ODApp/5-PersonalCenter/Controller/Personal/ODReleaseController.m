@@ -43,12 +43,10 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.navigationItem.title = @"已发布";
     
     self.pageCount = 1;
     self.dataArray = [[NSMutableArray alloc] init];
-    
     [self createRequestData];
     
     __weakSelf;
@@ -57,7 +55,6 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
         [weakSelf.tableView.mj_header beginRefreshing];
     }];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationloveSkill object:nil];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -70,12 +67,6 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-
-- (void)loadMoreData {
-    self.pageCount ++;
-    [self createRequestData];
-}
-
 - (void)reloadData:(NSNotification *)text {
     ODReleaseModel *model = self.dataArray[self.loveRow];
     model.love_num = [NSString stringWithFormat:@"%@" , text.userInfo[@"loveNumber"]];
@@ -83,61 +74,7 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
     [self.tableView reloadData];
 }
 
-#pragma mark - 加载数据请求
-- (void)createRequestData {
-    __weakSelf
-    NSDictionary *parameter = @{ @"page" : [NSString stringWithFormat:@"%i", self.pageCount], @"my" : @"1" };
-    [ODHttpTool getWithURL:ODUrlSwapList parameters:parameter modelClass:[ODReleaseModel class] success:^(id model) {
-         if (self.pageCount == 1) {
-             [self.dataArray removeAllObjects];
-             [self.noReusltLabel removeFromSuperview];
-         }
-       
-        for (ODReleaseModel *md in [model result]) {
-            if (![[weakSelf.dataArray valueForKeyPath:@"swap_id"] containsObject:[md swap_id]]) {
-                [weakSelf.dataArray addObject: md];
-            }
-        }
-         
-        [weakSelf.tableView.mj_header endRefreshing];
-        if ([[model result]count] == 0) {
-            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
-        }
-        else {
-         [weakSelf.tableView.mj_footer endRefreshing];
-        }
-        [weakSelf.tableView reloadData];
-        
-        if (self.pageCount == 1 && self.dataArray.count == 0) {
-         weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
-         weakSelf.noReusltLabel.text = @"暂无技能";
-         weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
-         weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
-         weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-         [weakSelf.view addSubview:weakSelf.noReusltLabel];
-        }
-    }
-    failure:^(NSError *error) {
-        [weakSelf.tableView.mj_footer endRefreshing];
-        [weakSelf.tableView.mj_header endRefreshing];
-    }];
-}
-
-#pragma mark - 删除技能请求
-- (void)deleteSkillRequest
-{
-    NSDictionary *parameter = @{@"swap_id" : self.swap_id};
-    __weakSelf
-    [ODHttpTool getWithURL:ODUrlSwapDel parameters:parameter modelClass:[NSObject class] success:^(id model) {
-        [ODProgressHUD showInfoWithStatus:@"删除任务成功"];
-        [weakSelf.dataArray removeObject:weakSelf.dataArray[self.deleteRow]];
-        [weakSelf.tableView reloadData];
-    }
-    failure:^(NSError *error) {
-        
-    }];
-}
-
+#pragma mark - 懒加载
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight + 6) style:UITableViewStylePlain];
@@ -162,6 +99,67 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
         [self.view addSubview:_tableView];
     }
     return _tableView;
+}
+
+#pragma mark - 加载数据请求
+
+- (void)createRequestData {
+    __weakSelf
+    NSDictionary *parameter = @{
+                                @"page" : [NSString stringWithFormat:@"%i", self.pageCount],
+                                @"my" : @"1"
+                                };
+    [ODHttpTool getWithURL:ODUrlSwapList parameters:parameter modelClass:[ODReleaseModel class] success:^(id model) {
+         if (weakSelf.pageCount == 1) {
+             [weakSelf.dataArray removeAllObjects];
+             [weakSelf.noReusltLabel removeFromSuperview];
+         }
+        for (ODReleaseModel *md in [model result]) {
+            if (![[weakSelf.dataArray valueForKeyPath:@"swap_id"] containsObject:[md swap_id]]) {
+                [weakSelf.dataArray addObject: md];
+            }
+        }
+        [weakSelf.tableView.mj_header endRefreshing];
+        if ([[model result]count] == 0) {
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        else {
+         [weakSelf.tableView.mj_footer endRefreshing];
+        }
+        [weakSelf.tableView reloadData];
+        
+        if (weakSelf.pageCount == 1 && weakSelf.dataArray.count == 0) {
+         weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
+         weakSelf.noReusltLabel.text = @"暂无技能";
+         weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
+         weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
+         weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+         [weakSelf.view addSubview:weakSelf.noReusltLabel];
+        }
+    }
+    failure:^(NSError *error) {
+        [weakSelf.tableView.mj_footer endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
+    }];
+}
+
+- (void)loadMoreData {
+    self.pageCount ++;
+    [self createRequestData];
+}
+
+#pragma mark - 删除技能请求
+- (void)deleteSkillRequest {
+    NSDictionary *parameter = @{@"swap_id" : self.swap_id};
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlSwapDel parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        [ODProgressHUD showInfoWithStatus:@"删除任务成功"];
+        [weakSelf.dataArray removeObject:weakSelf.dataArray[weakSelf.deleteRow]];
+        [weakSelf.tableView reloadData];
+    }
+    failure:^(NSError *error) {
+        
+    }];
 }
 
 #pragma mark - UITableViewDataSource
@@ -224,7 +222,7 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
                           ODReleaseView *cell = (ODReleaseView *)button.superview.superview;
                           NSIndexPath *indexPath = [weakSelf.tableView indexPathForCell:cell];
                           ODReleaseModel *model = weakSelf.dataArray[indexPath.row];
-                          self.deleteRow = indexPath.row;
+                          weakSelf.deleteRow = indexPath.row;
                           weakSelf.swap_id = model.swap_id;
                           [weakSelf deleteSkillRequest];
                           

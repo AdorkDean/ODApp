@@ -7,10 +7,9 @@
 //
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
+
 #import "ODPersonalCenterCollectionController.h"
 #import "ODBazaarExchangeSkillCollectionCell.h"
-
-#define cellID @"ODBazaarExchangeSkillCell"
 
 NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
 
@@ -18,7 +17,14 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
 
 @property (nonatomic, strong) UITableView *tableView;
 
+// 无纪录
 @property(nonatomic, strong) UILabel *noReusltLabel;
+
+// 数据数组
+@property(nonatomic, strong) NSMutableArray *dataArray;
+
+// 数据页数
+@property(nonatomic) NSInteger page;
 
 @end
 

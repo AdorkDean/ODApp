@@ -19,7 +19,7 @@
 #import "ODActivitybottomView.h"
 #import "ODActivityDetailInfoViewCell.h"
 
-#import "ODCenterPactureController.h"
+#import "ODPublicWebViewController.h"
 #import "UMSocial.h"
 #import "ODCenterDetailController.h"
 #import "ODApplyListViewController.h"
@@ -440,10 +440,11 @@ static NSString *const detailInfoCell = @"detailInfoCell";
                     [self.navigationController pushViewController:vc animated:YES];
                 }
                 else {
-                    ODCenterPactureController *vc = [[ODCenterPactureController alloc] init];
-                    NSString *webUrl = [NSString stringWithFormat:@"http://h5.odong.com/map/search?lng=%@&lat=%@", self.resultModel.lng, self.resultModel.lat];
+                    ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
+                    NSString *webUrl = [NSString stringWithFormat:@"%@?lng=%@&lat=%@", ODWebUrlMapSearch,self.resultModel.lng, self.resultModel.lat];
                     vc.webUrl = webUrl;
-                    vc.activityName = self.resultModel.store_address;
+                    vc.navigationTitle = self.resultModel.store_address;
+                    vc.isShowProgress = YES;
                     [self.navigationController pushViewController:vc animated:YES];
                 }
             }
