@@ -105,6 +105,10 @@ UIKIT_EXTERN NSString * const ODNotificationloveSkill;
 #pragma mark - 网页URL
 
 UIKIT_EXTERN NSString * const ODWebUrlFindJob;
+UIKIT_EXTERN NSString * const ODWebUrlExpect;
+UIKIT_EXTERN NSString * const ODWebUrlMapSearch;
+
+
 
 #pragma mark - 请求URL接口
 
