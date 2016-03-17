@@ -16,24 +16,28 @@
 #import "ODOthersInformationController.h"
 #import "ODEvaluationCell.h"
 #import "ODSecondEvaluationModel.h"
-@interface ODEvaluationController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
+
+#import "ODEvaluationView.h"
+
+NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
+
+@interface ODEvaluationController ()< UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic , strong) UISegmentedControl *segmentedControl;
 @property (nonatomic, strong) UIScrollView * scrollView;
 
-@property (nonatomic , strong) UICollectionViewFlowLayout *firstFlowLayout;
-@property (nonatomic , strong) UICollectionView *firstCollectionView;
 @property (nonatomic , assign) NSInteger firstPage;
 @property (nonatomic, strong) NSMutableArray *FirstDataArray;
 @property (nonatomic , strong) UILabel *firstLabel;
 
-@property (nonatomic , strong) UICollectionViewFlowLayout *secondFlowLayout;
-@property (nonatomic , strong) UICollectionView *secondCollectionView;
 @property (nonatomic , assign) NSInteger secondPage;
 @property (nonatomic, strong) NSMutableArray *secondDataArray;
 @property (nonatomic , strong) UILabel *secondLabel;
 
+@property (nonatomic, strong) UITableView *taskTableView;
+@property (nonatomic, strong) UITableView *skillTableView;
 
+@property (nonatomic, strong) ODEvaluationView *evaluationView;
 
 @end
 
@@ -49,7 +53,7 @@
     self.firstPage = 1;
     self.secondPage = 1;
     
-    self.FirstDataArray = [NSMutableArray array];
+    self.FirstDataArray = [[NSMutableArray alloc] init];
     self.secondDataArray = [NSMutableArray array];
   
    
@@ -57,10 +61,12 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = self.typeTitle;
     
+    [self firstGetData];
+    [self secondGetData];
+    
     [self creatSegment];
     [self creatScroller];
-    [self createCollectionView];
-
+    
     
 }
 
@@ -96,7 +102,7 @@
 {
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, kScreenSize.width, kScreenSize.height - 40)];
     self.scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height - 40);
-    self.scrollView.backgroundColor =[UIColor whiteColor];
+    self.scrollView.backgroundColor =[UIColor backgroundColor];
     self.scrollView.userInteractionEnabled = YES;
     self.scrollView.alwaysBounceVertical = YES;
     self.scrollView.bounces = NO;
@@ -104,91 +110,77 @@
     self.scrollView.pagingEnabled = YES;
     self.scrollView.delegate = self;
     [self.view addSubview:self.scrollView];
-    
-    
 }
 
-- (void)createCollectionView
-{
-    __weakSelf
-    
-    // 我发表的collectionView
-    self.firstFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.firstFlowLayout.sectionInset = UIEdgeInsetsMake(5, 0, 0, 0);
-    self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.firstFlowLayout];
-    self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-    self.firstCollectionView.dataSource = self;
-    self.firstCollectionView.delegate = self;
-    self.firstCollectionView.tag = 111;
-    [self.firstCollectionView registerClass:[ODEvaluationCell class] forCellWithReuseIdentifier:@"item"];
-    self.firstCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakSelf firstDownRefresh];
-    }];
-    self.firstCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+- (UITableView *)taskTableView {
+    if (!_taskTableView) {
+        _taskTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) style:UITableViewStylePlain];
+        _taskTableView.backgroundColor = [UIColor backgroundColor];
+        _taskTableView.delegate = self;
+        _taskTableView.dataSource = self;
+        _taskTableView.tag = 111;
+        _taskTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_taskTableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODEvaluationView class]) bundle:nil] forCellReuseIdentifier:ODEvaluationViewID];
+        [self.scrollView addSubview:_taskTableView];
         
-        [weakSelf firstLoadMoreData];
-    }];
-    
-    [self.firstCollectionView.mj_header beginRefreshing];
-    [self.scrollView addSubview:self.firstCollectionView];
-    
-    // 我回复的collectionView
-    self.secondFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.secondFlowLayout.sectionInset = UIEdgeInsetsMake(5, 0, 0, 0);
-    self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width,10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.secondFlowLayout];
-    self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-    self.secondCollectionView.dataSource = self;
-    self.secondCollectionView.delegate = self;
-    self.secondCollectionView.tag = 222;
-    [self.secondCollectionView registerClass:[ODEvaluationCell class] forCellWithReuseIdentifier:@"item"];
-    self.secondCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakSelf secondDownRefresh];
-    }];
-    self.secondCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        __weakSelf
+        _taskTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [weakSelf firstDownRefresh];
+        }];
+        _taskTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            [weakSelf firstLoadMoreData];
+        }];
         
-        [weakSelf secondLoadMoreData];
-    }];
-    
-    [self.secondCollectionView.mj_header beginRefreshing];
-    [self.scrollView addSubview:self.secondCollectionView];
-    
+    }
+    return _taskTableView;
 }
 
+- (UITableView *)skillTableView {
+    if (!_skillTableView) {
+        _skillTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) style:UITableViewStylePlain];
+        _skillTableView.backgroundColor = [UIColor backgroundColor];
+        _skillTableView.delegate = self;
+        _skillTableView.dataSource = self;
+        _skillTableView.tag = 222;
+        _skillTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_skillTableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODEvaluationView class]) bundle:nil] forCellReuseIdentifier:ODEvaluationViewID];
+        [self.scrollView addSubview:_skillTableView];
+        __weakSelf
+        _skillTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+            [weakSelf firstDownRefresh];
+        }];
+        _skillTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            [weakSelf firstLoadMoreData];
+        }];
+    }
+    return _skillTableView;
+}
 
 
 #pragma mark - 刷新
-- (void)firstDownRefresh
-{
-    
+- (void)firstDownRefresh {
     self.firstPage = 1;
     [self firstGetData];
 }
 
-- (void)firstLoadMoreData
-{
+- (void)firstLoadMoreData {
     self.firstPage++;
     [self firstGetData];
 }
 
-- (void)secondDownRefresh
-{
-    
+- (void)secondDownRefresh {
     self.secondPage = 1;
     [self secondGetData];
 }
 
-- (void)secondLoadMoreData
-{
+- (void)secondLoadMoreData {
     self.secondPage++;
     [self secondGetData];
-    
 }
 
 #pragma mark - 请求数据
--(void)firstGetData
-{
+-(void)firstGetData {
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.firstPage];
-    
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"type"] = @"1";
@@ -196,8 +188,7 @@
     params[@"open_id"] = self.openId;
     __weakSelf
     // 发送请求
-    [ODHttpTool getWithURL:ODUrlUserCommentList parameters:params modelClass:[ODEvaluationModel class] success:^(id model)
-     {
+    [ODHttpTool getWithURL:ODUrlUserCommentList parameters:params modelClass:[ODEvaluationModel class] success:^(id model) {
          if ([countNumber isEqualToString:@"1"]) {
              [weakSelf.FirstDataArray removeAllObjects];
              [weakSelf.firstLabel removeFromSuperview];
@@ -206,27 +197,24 @@
          NSArray *evaluationDatas = [model result];
          [weakSelf.FirstDataArray addObjectsFromArray:evaluationDatas];
 
-         if (weakSelf.FirstDataArray.count == 0)
-         {
+         if (weakSelf.FirstDataArray.count == 0) {
              weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
              [weakSelf.scrollView addSubview:weakSelf.firstLabel];
          }
 
-         [weakSelf.firstCollectionView.mj_header endRefreshing];
+         [weakSelf.taskTableView.mj_header endRefreshing];
 
          if (evaluationDatas.count == 0) {
-             [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
+             [weakSelf.taskTableView.mj_footer endRefreshingWithNoMoreData];
          }
-         else
-         {
-             [weakSelf.firstCollectionView.mj_footer endRefreshing];
+         else {
+             [weakSelf.taskTableView.mj_footer endRefreshing];
          }
-         
-         [weakSelf.firstCollectionView reloadData];
+         [weakSelf.taskTableView reloadData];
   
      } failure:^(NSError *error) {
-         [weakSelf.firstCollectionView.mj_header endRefreshing];
-         [weakSelf.firstCollectionView.mj_footer endRefreshing];
+         [weakSelf.taskTableView.mj_header endRefreshing];
+         [weakSelf.taskTableView.mj_footer endRefreshing];
      }];
 }
 
@@ -257,120 +245,60 @@
              [weakSelf.scrollView addSubview:weakSelf.secondLabel];
          }
 
-         [weakSelf.secondCollectionView.mj_header endRefreshing];
+         [weakSelf.skillTableView.mj_header endRefreshing];
 
          if (evaluationDatas.count == 0) {
-             [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
+             [weakSelf.skillTableView.mj_footer endRefreshingWithNoMoreData];
          }
          else
          {
-             [weakSelf.secondCollectionView.mj_footer endRefreshing];
+             [weakSelf.skillTableView.mj_footer endRefreshing];
          }
          
-         [weakSelf.secondCollectionView reloadData];
+         [weakSelf.skillTableView reloadData];
  
      } failure:^(NSError *error) {
-         [weakSelf.firstCollectionView.mj_header endRefreshing];
-         [weakSelf.firstCollectionView.mj_footer endRefreshing];
+         [weakSelf.skillTableView.mj_header endRefreshing];
+         [weakSelf.skillTableView.mj_footer endRefreshing];
      }];
 }
 
 
+#pragma mark - UITableViewDataSource
 
-#pragma mark - UICollectionViewDelegate
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-   
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (tableView.tag == 111) {
+        return self.FirstDataArray.count;
+    }
+    else {
+        return self.secondDataArray.count;
+    }
+}
 
-    ODEvaluationCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
-    
-    cell.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
-    cell.layer.borderWidth = 0.5;
-    
-    if (collectionView.tag == 111) {
-        
-        
-        cell.backgroundColor = [UIColor whiteColor];
-        cell.model = self.FirstDataArray[indexPath.row];
-        
-    }else{
-        
-        cell.backgroundColor = [UIColor whiteColor];
-        
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ODEvaluationView *cell = [tableView dequeueReusableCellWithIdentifier:ODEvaluationViewID];
+    if (tableView.tag == 111) {
+        ODEvaluationModel *model = self.FirstDataArray[indexPath.row];
+        [cell setTaskModel:model];
+    }
+    else {
         
         ODSecondEvaluationModel *model = self.secondDataArray[indexPath.row];
-        
-        
-        
-        [cell dealWithModel:model];
-        
-        
-        
-
-
-        
-        
+        [cell setSkillModel:model];
     }
-    
-
-
-    
-    
-    
     return cell;
-    
 }
 
-
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 1;
-}
-
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    if (collectionView.tag == 111) {
-        
-        
-        return self.FirstDataArray.count;
-    }else{
-        
-        
-          return self.secondDataArray.count;
-        
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView.tag == 111) {
+        ODEvaluationModel *model = self.FirstDataArray[indexPath.row];
+        return [ODHelp textHeightFromTextString:model.comment width:KScreenWidth - ODLeftMargin * 2 miniHeight:40 fontSize:12.5];
+    }
+    else {
+        ODSecondEvaluationModel *model = self.secondDataArray[indexPath.row];
+        return [ODHelp textHeightFromTextString:model.reason width:KScreenWidth - ODLeftMargin * 2 miniHeight:40 fontSize:12.5];
     }
 }
-
-
-//动态设置每个item的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
-    if (collectionView.tag == 111) {
-        
-        
-           return CGSizeMake(kScreenSize.width , [ODEvaluationCell returnHight:self.FirstDataArray[indexPath.row]]);
-    }else{
-        
-        return CGSizeMake(kScreenSize.width , [ODEvaluationCell returnSecondHight:self.secondDataArray[indexPath.row]]);
-
-        
-        
-    }
- 
-    
-    
-    
-}
-//动态设置每个分区的最小行间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 5;
-}
-
-
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
