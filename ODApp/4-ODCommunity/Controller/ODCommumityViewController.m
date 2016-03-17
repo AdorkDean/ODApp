@@ -307,26 +307,7 @@
 
 -(void)titleViewLabelButtonClick:(UIButton *)button
 {
-    if ([button.titleLabel.text isEqualToString:@"情感"]) {
-        self.bbsMark = @"情感";
-    }else if ([button.titleLabel.text isEqualToString:@"搞笑"]){
-        self.bbsMark = @"搞笑";
-    }else if ([button.titleLabel.text isEqualToString:@"影视"]){
-        self.bbsMark = @"影视";
-    }else if ([button.titleLabel.text isEqualToString:@"二次元"]){
-        self.bbsMark = @"二次元";
-    }else if ([button.titleLabel.text isEqualToString:@"生活"]){
-        self.bbsMark = @"生活";
-    }else if ([button.titleLabel.text isEqualToString:@"明星"]){
-        [self.button setTitle:@"明星" forState:UIControlStateNormal];
-        self.bbsMark = @"明星";
-    }else if ([button.titleLabel.text isEqualToString:@"爱美"]){
-        self.bbsMark = @"爱美";
-    }else if ([button.titleLabel.text isEqualToString:@"宠物"]){
-        self.bbsMark = @"宠物";
-    }else if ([button.titleLabel.text isEqualToString:@"全部"]){
-        self.bbsMark = @"全部";
-    }
+    self.bbsMark = button.titleLabel.text;
     self.bbsType = 5;
     [self.collectionView.mj_header beginRefreshing];
     [self dismissViewControllerAnimated:NO completion:^{

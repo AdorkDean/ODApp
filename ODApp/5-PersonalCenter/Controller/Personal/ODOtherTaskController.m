@@ -9,12 +9,10 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODOtherTaskController.h"
 #import "MJRefresh.h"
-#import "ODTaskCell.h"
 #import "ODBazaarModel.h"
 #import "UIImageView+WebCache.h"
 #import "ODBazaarDetailViewController.h"
 #import "ODTabBarController.h"
-#import "ODViolationsCell.h"
 @interface ODOtherTaskController ()
 
 <UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
@@ -155,24 +153,26 @@
     NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
     
     if ([status isEqualToString:@"-1"]) {
-        ODViolationsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item1" forIndexPath:indexPath];
+//        ODViolationsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item1" forIndexPath:indexPath];
         
-        [cell.deleteButton removeFromSuperview];
-        cell.model = model;
-        
-        return cell;
+//        [cell.deleteButton removeFromSuperview];
+//        cell.model = model;
+//        
+//        return cell;
         
         
     }else{
         
-        ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
-        
-        cell.model = model;
-        
-        
-        return cell;
-        
+//        ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
+//        
+//        cell.model = model;
+//        
+//        
+//        return cell;
+//        
     }
+    
+    return nil;
 }
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

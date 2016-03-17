@@ -11,6 +11,7 @@
 @implementation ODMyTaskCell
 
 - (void)awakeFromNib {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor whiteColor];
     self.spaceView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.headButton.layer.masksToBounds = YES;
