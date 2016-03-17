@@ -308,6 +308,8 @@
 		ED51F08C1C979EB5005525AD /* ODIndentDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED51F08B1C979EB5005525AD /* ODIndentDetailView.xib */; };
 		ED51F0921C97E8D0005525AD /* ODIndentDetailTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED51F0911C97E8D0005525AD /* ODIndentDetailTopView.m */; };
 		ED51F0961C97E8F3005525AD /* ODIndentDetailTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED51F0951C97E8F3005525AD /* ODIndentDetailTopView.xib */; };
+		ED5327311C9A527C00BB45B1 /* ODEvaluationView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED53272F1C9A527C00BB45B1 /* ODEvaluationView.m */; };
+		ED5327321C9A527C00BB45B1 /* ODEvaluationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED5327301C9A527C00BB45B1 /* ODEvaluationView.xib */; };
 		ED57CC441C92A0C30091FCFF /* ODChoseCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED57CC421C92A0C30091FCFF /* ODChoseCenterCell.m */; };
 		ED57CC451C92A0C30091FCFF /* ODChoseCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED57CC431C92A0C30091FCFF /* ODChoseCenterCell.xib */; };
 /* End PBXBuildFile section */
@@ -870,6 +872,9 @@
 		ED51F0901C97E8D0005525AD /* ODIndentDetailTopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODIndentDetailTopView.h; sourceTree = "<group>"; };
 		ED51F0911C97E8D0005525AD /* ODIndentDetailTopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODIndentDetailTopView.m; sourceTree = "<group>"; };
 		ED51F0951C97E8F3005525AD /* ODIndentDetailTopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODIndentDetailTopView.xib; sourceTree = "<group>"; };
+		ED53272E1C9A527C00BB45B1 /* ODEvaluationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODEvaluationView.h; sourceTree = "<group>"; };
+		ED53272F1C9A527C00BB45B1 /* ODEvaluationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODEvaluationView.m; sourceTree = "<group>"; };
+		ED5327301C9A527C00BB45B1 /* ODEvaluationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODEvaluationView.xib; sourceTree = "<group>"; };
 		ED57CC411C92A0C30091FCFF /* ODChoseCenterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODChoseCenterCell.h; sourceTree = "<group>"; };
 		ED57CC421C92A0C30091FCFF /* ODChoseCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODChoseCenterCell.m; sourceTree = "<group>"; };
 		ED57CC431C92A0C30091FCFF /* ODChoseCenterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODChoseCenterCell.xib; sourceTree = "<group>"; };
@@ -1676,6 +1681,9 @@
 				232CB4C31C9264E200340D12 /* ODBindingMobileView.xib */,
 				232CB4C41C9264E200340D12 /* ODEvaluationCell.h */,
 				232CB4C51C9264E200340D12 /* ODEvaluationCell.m */,
+				ED53272E1C9A527C00BB45B1 /* ODEvaluationView.h */,
+				ED53272F1C9A527C00BB45B1 /* ODEvaluationView.m */,
+				ED5327301C9A527C00BB45B1 /* ODEvaluationView.xib */,
 				232CB4C61C9264E200340D12 /* ODInformationView.h */,
 				232CB4C71C9264E200340D12 /* ODInformationView.m */,
 				232CB4C81C9264E200340D12 /* ODInformationView.xib */,
@@ -2144,6 +2152,7 @@
 				232CB5F81C9264E200340D12 /* ODCommunityCollectionCell.xib in Resources */,
 				232CB6651C9264E200340D12 /* ODBalanceView.xib in Resources */,
 				232CB5B31C9264E200340D12 /* ODTitleLabelView.xib in Resources */,
+				ED5327321C9A527C00BB45B1 /* ODEvaluationView.xib in Resources */,
 				232CB6211C9264E200340D12 /* ODInformationView.xib in Resources */,
 				232CB6571C9264E200340D12 /* ODOrderDetailView.xib in Resources */,
 				4091418C1C9930D80059E05F /* ODBazaarExchangeSkillCollectionCell.xib in Resources */,
@@ -2320,6 +2329,7 @@
 				232CB5E21C9264E200340D12 /* ODBazaarReleaseSkillTimeViewCell.m in Sources */,
 				232CB5861C9264E200340D12 /* ODHelp.m in Sources */,
 				232CB57F1C9264E200340D12 /* ODAPPInfoTool.m in Sources */,
+				ED5327311C9A527C00BB45B1 /* ODEvaluationView.m in Sources */,
 				232CB5891C9264E200340D12 /* ODBarButton.m in Sources */,
 				232CB63B1C9264E200340D12 /* ODMyOrderDetailController.m in Sources */,
 				ED4688131C96905F00E31F64 /* ODApplyListCell.m in Sources */,
