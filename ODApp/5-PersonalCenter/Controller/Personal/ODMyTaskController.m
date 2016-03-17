@@ -16,14 +16,18 @@
 #import "ODBazaarDetailViewController.h"
 #import "ODViolationsCell.h"
 #import "ODOthersInformationController.h"
+#import "ODMyTaskCell.h"
 
-@interface ODMyTaskController () <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface ODMyTaskController () <UIScrollViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate,UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic, strong) ODTypeView *typeView;
 @property(nonatomic, strong) UISegmentedControl *segmentedControl;
 @property(nonatomic, strong) UIScrollView *scrollView;
 @property(nonatomic, assign) BOOL showType;
 
+
+@property(nonatomic,strong)UITableView *releaseTableView;
+@property(nonatomic,strong)UITableView *acceptTableView;
 
 @property(nonatomic, strong) UICollectionViewFlowLayout *firstFlowLayout;
 @property(nonatomic, strong) UICollectionView *firstCollectionView;
@@ -57,48 +61,28 @@
     [super viewWillAppear:animated];
     
     if ([self.isFirstRefresh isEqualToString:@"del"]) {
-        
         [self.FirstDataArray removeObject:self.FirstDataArray[self.firstIndex]];
-        
         [self.firstCollectionView reloadData];
-        
     }
-    
-    
+
     if (!([self.isFirstRefresh isEqualToString:@""] || [self.isFirstRefresh isEqualToString:@"del"])) {
-        
-        
         ODBazaarModel *model = self.FirstDataArray[self.firstIndex];
-        
-        
         model.task_status = self.isFirstRefresh;
-        
         [self.FirstDataArray replaceObjectAtIndex:self.firstIndex withObject:model];
-        
         [self.firstCollectionView reloadData];
-        
-        
     }
     
     if (!([self.isSecondRefresh isEqualToString:@""] || [self.isSecondRefresh isEqualToString:@"del"])) {
-        
-        
         ODBazaarModel *model = self.secondDataArray[self.secondIndex];
-        
         model.task_status = self.isSecondRefresh;
-        
         [self.secondDataArray replaceObjectAtIndex:self.secondIndex withObject:model];
-        
         [self.secondCollectionView reloadData];
-        
-        
     }
-    
-    
     self.showType = YES;
     [self.typeView removeFromSuperview];
-    
     [MobClick beginLogPageView:NSStringFromClass([self class])];
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -121,6 +105,8 @@
     self.FirstDataArray = [NSMutableArray array];
     self.secondDataArray = [NSMutableArray array];
     [self navigationInit];
+    [self firstGetData];
+    [self secondGetData];
     [self creatSegment];
     [self creatScroller];
 }
@@ -144,22 +130,22 @@
 
 - (void)creatSegment {
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发布的", @"我接受的"]];
-    self.segmentedControl.frame = CGRectMake(4, 10, kScreenSize.width - 8, 30);
+    self.segmentedControl.frame = CGRectMake(10, 7.5, kScreenSize.width - 20, 28);
     self.segmentedControl.clipsToBounds = YES;
     self.segmentedControl.layer.cornerRadius = 7;
     self.segmentedControl.layer.borderWidth = 1;
     self.segmentedControl.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
 
-    self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
-    self.segmentedControl.backgroundColor = [UIColor whiteColor];
+    self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+    self.segmentedControl.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.segmentedControl.selectedSegmentIndex = 0;
 
     NSDictionary *selectedTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:15],
-            NSForegroundColorAttributeName : [UIColor blackColor]};
+            NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#484848" alpha:1]};
     [self.segmentedControl setTitleTextAttributes:selectedTextAttributes forState:UIControlStateSelected];
 
     NSDictionary *unselectedTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:15],
-            NSForegroundColorAttributeName : [UIColor lightGrayColor]};
+            NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#b0b0b0" alpha:1]};
     [self.segmentedControl setTitleTextAttributes:unselectedTextAttributes forState:UIControlStateNormal];
 
     [self.segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
@@ -183,55 +169,24 @@
     [self.view addSubview:self.scrollView];
 
 
-    self.firstFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width, self.scrollView.frame.size.height - 74) collectionViewLayout:self.firstFlowLayout];
-    self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-    self.firstCollectionView.dataSource = self;
-    self.firstCollectionView.delegate = self;
+    self.releaseTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width, self.scrollView.frame.size.height - 74) style:UITableViewStylePlain];
+    self.releaseTableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.releaseTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.releaseTableView.dataSource = self;
+    self.releaseTableView.delegate = self;
+    [self.releaseTableView registerNib:[UINib nibWithNibName:@"ODMyTaskCell" bundle:nil] forCellReuseIdentifier:@"first"];
+    [self.scrollView addSubview:self.releaseTableView];
 
-    [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
-    [self.firstCollectionView registerNib:[UINib nibWithNibName:@"ODViolationsCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
-
-    __weakSelf
-
-
-    self.firstCollectionView.tag = 111;
-    self.firstCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakSelf firstDownRefresh];
-    }];
-    self.firstCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-
-        [weakSelf firstLoadMoreData];
-    }];
-    [self.firstCollectionView.mj_header beginRefreshing];
-    [self.scrollView addSubview:self.firstCollectionView];
-
-
-    self.secondFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width, 10, self.scrollView.frame.size.width, self.scrollView.frame.size.height - 74) collectionViewLayout:self.secondFlowLayout];
-    self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-    self.secondCollectionView.dataSource = self;
-    self.secondCollectionView.delegate = self;
-
-    [self.secondCollectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
-    [self.secondCollectionView registerNib:[UINib nibWithNibName:@"ODViolationsCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
-
-    self.secondCollectionView.tag = 222;
-    self.secondCollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [weakSelf secondDownRefresh];
-    }];
-    self.secondCollectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-
-        [weakSelf secondLoadMoreData];
-    }];
-    [self.secondCollectionView.mj_header beginRefreshing];
-
-
-    [self.scrollView addSubview:self.secondCollectionView];
+    self.acceptTableView = [[UITableView alloc]initWithFrame:CGRectMake(self.scrollView.frame.size.width, 10, self.scrollView.frame.size.width, self.scrollView.frame.size.height - 74) style:UITableViewStylePlain];
+    self.acceptTableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.acceptTableView.dataSource = self;
+    self.acceptTableView.delegate = self;
+    self.acceptTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self.acceptTableView registerNib:[UINib nibWithNibName:@"ODMyTaskCell" bundle:nil] forCellReuseIdentifier:@"first"];
+    [self.scrollView addSubview:self.acceptTableView];
 }
 
 - (void)createTypeView {
-
     self.typeView = [ODTypeView getView];
     self.typeView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
     self.typeView.layer.borderWidth = 1;
@@ -242,7 +197,6 @@
 
     UITapGestureRecognizer *allTaskTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(allTaskAction)];
     [self.typeView.allTaskImageView addGestureRecognizer:allTaskTap];
-
 
     UITapGestureRecognizer *waitCompleteTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(waitCompleteAction)];
     [self.typeView.waitingCompleteImageView addGestureRecognizer:waitCompleteTap];
@@ -269,12 +223,10 @@
     
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"city_id"] = [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID];
     params[@"suggest"] = @"0";
     params[@"task_status"] = self.type;
     params[@"page"] = countNumber;
     params[@"my"] = @"1";
-    params[@"open_id"] = self.open_id;
     __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlTaskList parameters:params modelClass:[ODBazaarTasksModel class] success:^(id model)
@@ -289,23 +241,23 @@
          
          [weakSelf.FirstDataArray addObjectsFromArray:tasksModel.tasks];
          
-         if (weakSelf.FirstDataArray.count == 0) {
-             weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40, KScreenHeight / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-             [weakSelf.scrollView addSubview:self.firstLabel];
-         }
-         [weakSelf.firstCollectionView.mj_header endRefreshing];
-         if (tasksModel.tasks.count == 0) {
-             [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
-         }
-         else
-         {
-             [weakSelf.firstCollectionView.mj_footer endRefreshing];
-         }
-         [weakSelf.firstCollectionView reloadData];
+//         if (weakSelf.FirstDataArray.count == 0) {
+//             weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(self.scrollView.center.x - 40, KScreenHeight / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+//             [weakSelf.scrollView addSubview:self.firstLabel];
+//         }
+//         [weakSelf.firstCollectionView.mj_header endRefreshing];
+//         if (tasksModel.tasks.count == 0) {
+//             [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
+//         }
+//         else
+//         {
+//             [weakSelf.firstCollectionView.mj_footer endRefreshing];
+//         }
+         [weakSelf.releaseTableView reloadData];
          
      } failure:^(NSError *error) {
-         [weakSelf.secondCollectionView.mj_header endRefreshing];
-         [weakSelf.secondCollectionView.mj_footer endRefreshing];
+//         [weakSelf.secondCollectionView.mj_header endRefreshing];
+//         [weakSelf.secondCollectionView.mj_footer endRefreshing];
          [ODProgressHUD showInfoWithStatus:@"网络异常"];
      }];
 }
@@ -315,12 +267,10 @@
     
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"city_id"] = [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID];
     params[@"suggest"] = @"0";
     params[@"task_status"] = self.type;
     params[@"page"] = countNumber;
     params[@"my"] = @"2";
-    params[@"open_id"] = self.open_id;
     __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlTaskList parameters:params modelClass:[ODBazaarTasksModel class] success:^(id model)
@@ -333,191 +283,95 @@
          ODBazaarTasksModel *tasksModel = [model result];
          [weakSelf.secondDataArray addObjectsFromArray:tasksModel.tasks];
          
-         if (weakSelf.secondDataArray.count == 0) {
-             weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40 + weakSelf.scrollView.frame.size.width, KScreenHeight / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-             [weakSelf.scrollView addSubview:self.secondLabel];
-         }
-         
-         [weakSelf.secondCollectionView.mj_header endRefreshing];
-         
-         if (tasksModel.tasks.count == 0) {
-             [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
-         }
-         else
-         {
-             [weakSelf.secondCollectionView.mj_footer endRefreshing];
-         }
-         
-         [weakSelf.secondCollectionView reloadData];
+//         if (weakSelf.secondDataArray.count == 0) {
+//             weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40 + weakSelf.scrollView.frame.size.width, KScreenHeight / 2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+//             [weakSelf.scrollView addSubview:self.secondLabel];
+//         }
+//         
+//         [weakSelf.secondCollectionView.mj_header endRefreshing];
+//         
+//         if (tasksModel.tasks.count == 0) {
+//             [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
+//         }
+//         else
+//         {
+//             [weakSelf.secondCollectionView.mj_footer endRefreshing];
+//         }
+//         
+         [weakSelf.acceptTableView reloadData];
          
      } failure:^(NSError *error) {
-         [weakSelf.secondCollectionView.mj_header endRefreshing];
-         [weakSelf.secondCollectionView.mj_footer endRefreshing];
+//         [weakSelf.secondCollectionView.mj_header endRefreshing];
+//         [weakSelf.secondCollectionView.mj_footer endRefreshing];
          [ODProgressHUD showInfoWithStatus:@"网络异常"];
      }];
 }
 
 #pragma mark - UICollectionView 数据源方法
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (collectionView.tag == 111) {
-        
-        ODBazaarModel *model = self.FirstDataArray[indexPath.row];
-        NSString *status = [NSString stringWithFormat:@"%@", model.task_status];
-        
-        if ([status isEqualToString:@"-1"]) {
-            ODViolationsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
-            
-            cell.model = model;
-            [cell.deleteButton addTarget:self action:@selector(deleteAction:) forControlEvents:UIControlEventTouchUpInside];
-            return cell;
-            
-            
-        } else {
-            
-            ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
-            
-            cell.model = model;
-            [cell.userImageViewButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-            cell.userImageViewButton.tag = 111;
-            
-            
-            return cell;
-            
-        }
-        
-    } else {
-        
-        ODBazaarModel *model = self.secondDataArray[indexPath.row];
-        NSString *status = [NSString stringWithFormat:@"%@", model.task_status];
-        
-        if ([status isEqualToString:@"-1"]) {
-            ODViolationsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
-            
-            cell.model = model;
-            [cell.deleteButton removeFromSuperview];
-            return cell;
-            
-            
-        } else {
-            
-            ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
-            
-            cell.model = model;
-            [cell.userImageViewButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-            cell.userImageViewButton.tag = 222;
-            
-            
-            return cell;
-            
-        }
-    }
-    
-}
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (collectionView.tag == 111) {
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (tableView == self.releaseTableView) {
         return self.FirstDataArray.count;
-    }
-    else {
+    }else{
         return self.secondDataArray.count;
     }
 }
 
-#pragma mark - UICollectionView 代理方法
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (collectionView.tag == 111) {
-        
-        
-        self.firstIndex = indexPath.row;
-        
-        
-        ODBazaarModel *model = self.FirstDataArray[indexPath.row];
-        NSString *status = [NSString stringWithFormat:@"%@", model.task_status];
-        if ([status isEqualToString:@"-1"]) {;
-        } else {
-            ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc] init];
-            bazaarDetail.myBlock = ^(NSString *del) {
-                
-                self.isFirstRefresh = del;
-                
-                
-            };
-            
-            bazaarDetail.task_id = [NSString stringWithFormat:@"%@", model.task_id];
-            bazaarDetail.open_id = [NSString stringWithFormat:@"%@", model.open_id];
-            bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@", model.task_status_name];
-            [self.navigationController pushViewController:bazaarDetail animated:YES];
-        }
-        
-        
-    } else if (collectionView.tag == 222) {
-        
-        
-        self.secondIndex = indexPath.row;
-        
-        ODBazaarModel *model = self.secondDataArray[indexPath.row];
-        NSString *status = [NSString stringWithFormat:@"%@", model.task_status];
-        
-        if ([status isEqualToString:@"-1"]) {;
-        } else {
-            ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc] init];
-            
-            bazaarDetail.myBlock = ^(NSString *del) {
-                
-                self.isSecondRefresh = del;
-                
-                
-            };
-            
-            
-            bazaarDetail.task_id = [NSString stringWithFormat:@"%@", model.task_id];
-            bazaarDetail.open_id = [NSString stringWithFormat:@"%@", model.open_id];
-            bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@", model.task_status_name];
-            [self.navigationController pushViewController:bazaarDetail animated:YES];
-            
-        }
-        
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ODMyTaskCell *cell = [tableView dequeueReusableCellWithIdentifier:@"first"];
+    if (tableView == self.releaseTableView) {
+        cell.model = self.FirstDataArray[indexPath.row];
+    }else{
+        cell.model = self.secondDataArray[indexPath.row];
     }
-    
-    
+    return cell;
 }
-//动态设置每个item的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return CGSizeMake(kScreenSize.width, 140);
-    
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 150;
 }
-//动态设置每个分区的最小行间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 5;
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    ODBazaarModel *model;
+    self.firstIndex = indexPath.row;
+    self.secondIndex = indexPath.row;
+    if (tableView == self.releaseTableView) {
+        model = self.FirstDataArray[indexPath.row];
+    }else{
+        model = self.secondDataArray[indexPath.row];
+    }
+    NSString *status = [NSString stringWithFormat:@"%@", model.task_status];
+    if ([status isEqualToString:@"-1"]) {;
+    } else {
+        ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc] init];
+        bazaarDetail.myBlock = ^(NSString *del) {
+            self.isFirstRefresh = del;
+        };
+        bazaarDetail.task_id = [NSString stringWithFormat:@"%@", model.task_id];
+        bazaarDetail.open_id = [NSString stringWithFormat:@"%@", model.open_id];
+        bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@", model.task_status_name];
+        [self.navigationController pushViewController:bazaarDetail animated:YES];
+    }
 }
 
 #pragma mark - UIScrollView 代理方法
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (![scrollView isEqual:self.scrollView])
         return;
-    
     int page = scrollView.contentOffset.x / self.view.frame.size.width;
-    
-    
     self.showType = YES;
     [self.typeView removeFromSuperview];
-    
     self.segmentedControl.selectedSegmentIndex = page;
-    
-    
 }
 
 #pragma mark - UISegmentDelegate
 - (void)segmentAction:(UISegmentedControl *)sender {
     self.showType = YES;
     [self.typeView removeFromSuperview];
-    
-    
     CGPoint point = CGPointMake(self.scrollView.frame.size.width * sender.selectedSegmentIndex, 0);
     [self.scrollView setContentOffset:point animated:YES];
 }
@@ -530,48 +384,29 @@
     } else {
         [self.typeView removeFromSuperview];
     }
-
-
-    self.showType = !self.showType;
-
+   self.showType = !self.showType;
 }
 
 - (void)deleteAction:(UIButton *)sender {
-
     ODTaskCell *cell = (ODTaskCell *) sender.superview.superview;
     NSIndexPath *indexPath = [self.firstCollectionView indexPathForCell:cell];
     ODBazaarModel *model = self.FirstDataArray[indexPath.row];
-
     [self.FirstDataArray removeObject:self.FirstDataArray[indexPath.row]];
-
-
     [self.firstCollectionView reloadData];
-
-
     NSString *taskId = [NSString stringWithFormat:@"%@", model.task_id];
     [self delegateTaskWith:taskId];
-
-
 }
 
 - (void)othersInformationClick:(UIButton *)sender {
 
     ODTaskCell *cell = (ODTaskCell *) sender.superview.superview;
     ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-
-
     if (sender.tag == 111) {
-
-        ;
-
-
     } else {
-
         NSIndexPath *indexpath = [self.secondCollectionView indexPathForCell:cell];
         ODBazaarModel *model = self.secondDataArray[indexpath.row];
         vc.open_id = model.open_id;
         [self.navigationController pushViewController:vc animated:YES];
-
     }
 }
 
@@ -596,115 +431,72 @@
 // 选择类型
 - (void)allTaskAction {
     self.type = @"0";
-
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
-
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"全部任务"];
-
-
-    [self.typeView removeFromSuperview];
+  [self.typeView removeFromSuperview];
     self.showType = YES;
-
 }
 
 - (void)waitTaskAction {
     self.type = @"1";
-
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
-
-
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"等待派单"];
-
     [self.typeView removeFromSuperview];
     self.showType = YES;
-
 }
 
 - (void)waitCompleteAction {
-
     self.type = @"2";
-
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
-
-
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"等待完成"];
-
-
-    [self.typeView removeFromSuperview];
+   [self.typeView removeFromSuperview];
     self.showType = YES;
-
 }
 
 - (void)completeTaskAction {
     self.type = @"4";
-
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
-
-
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"完成任务"];
-
-
     [self.typeView removeFromSuperview];
     self.showType = YES;
-
 }
-
 
 - (void)overdueTaskAction {
     self.type = @"-2";
-
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
-
-
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"过期任务"];
-
-
     [self.typeView removeFromSuperview];
     self.showType = YES;
-
 }
 
 - (void)violationsTaskAction {
     self.type = @"-1";
-
     [self.firstCollectionView.mj_header beginRefreshing];
     [self.secondCollectionView.mj_header beginRefreshing];
-
-
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"违规任务"];
-
-
     [self.typeView removeFromSuperview];
     self.showType = YES;
-
 }
 
 - (void)firstDownRefresh {
-
     self.firstPage = 1;
     [self firstGetData];
-
-
 }
 
 
 - (void)firstLoadMoreData {
     self.firstPage++;
     [self firstGetData];
-
 }
 
 - (void)secondDownRefresh {
-
-    self.secondPage = 1;
+  self.secondPage = 1;
     [self secondGetData];
-
-
 }
 
 - (void)secondLoadMoreData {
