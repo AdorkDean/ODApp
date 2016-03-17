@@ -10,6 +10,9 @@
 
 @interface UIColor (ODColor)
 
+/**
+ *  主题颜色
+ */
 + (UIColor *)themeColor;
 
 /**

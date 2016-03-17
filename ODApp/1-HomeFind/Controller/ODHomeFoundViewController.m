@@ -437,9 +437,13 @@ updatingLocation:(BOOL)updatingLocation {
                 }
             }
             break;
-        case 2:{
-            ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];}
+        case 2:
+        {
+            ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
+            vc.navigationTitle = @"敬请期待";
+            vc.webUrl = ODWebUrlExpect;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             break;
         case 3:
             if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
@@ -447,7 +451,11 @@ updatingLocation:(BOOL)updatingLocation {
                 [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
             }
             else {
-                ODFindJobController *vc = [[ODFindJobController alloc] init];
+                ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
+                vc.navigationTitle = @"找兼职";
+                vc.isShowProgress = YES;
+                NSString *store_id = @"2";
+                vc.webUrl = [NSString stringWithFormat:@"%@?access_token=%@&store_id=%@&open_id=%@", ODWebUrlFindJob, [ODUserInformation sharedODUserInformation].openID, store_id, [ODUserInformation sharedODUserInformation].openID];
                 [self.navigationController pushViewController:vc animated:YES];
             }
 
@@ -464,9 +472,13 @@ updatingLocation:(BOOL)updatingLocation {
         case 6:
             [self moreSkillButtonClick];
             break;
-        case 7:{
-            ODFindFavorableController *vc = [[ODFindFavorableController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];}
+        case 7:
+        {
+            ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
+            vc.navigationTitle = @"敬请期待";
+            vc.webUrl = ODWebUrlExpect;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
             break;
         default:
             break;

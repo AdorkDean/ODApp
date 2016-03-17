@@ -98,7 +98,9 @@ NSString * const ODNotificationSellOrderThirdRefresh = @"ODNotificationSellOrder
 #pragma mark - 请求URL接口
 /** 网页接口 */
 NSString * const ODWebUrlFindJob = @"http://www.myjob500.com/user/extloginpf";
+NSString * const ODWebUrlExpect = @"http://h5.odong.com/woqu/expect";
 
+NSString * const ODWebUrlMapSearch = @"http://h5.odong.com/map/search";
 
 /** 统一的URL */
 #ifdef DEBUG
