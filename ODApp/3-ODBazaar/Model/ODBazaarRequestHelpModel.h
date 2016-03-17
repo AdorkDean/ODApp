@@ -38,12 +38,21 @@
 
 @property (nonatomic, copy) NSString *content;
 
+/** cell的高度 */
+@property (nonatomic, assign) CGFloat cellHeight;
+
+/** 正文的frame */
+@property (nonatomic, assign) CGRect contentFrame;
+
 @end
 
 @interface ODBazaarRequestHelpModel : NSObject
 
 @property (nonatomic, strong) NSArray *hot_tags;
 @property (nonatomic, strong) NSArray *tasks;
+
+
+
 
 @end
 

@@ -10,12 +10,11 @@
 
 @interface ODBindingMobileView : UIView
 
-+ (instancetype)getView;
++ (instancetype)mobileView;
 
 @property(weak, nonatomic) IBOutlet UITextField *phoneTextField;
 @property(weak, nonatomic) IBOutlet UITextField *verificationTextField;
 @property(weak, nonatomic) IBOutlet UIButton *getCodelButton;
 @property(weak, nonatomic) IBOutlet UIButton *bindingButton;
-
 
 @end

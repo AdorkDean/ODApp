@@ -219,6 +219,7 @@
     [self.indentDetailView setModel:model];
     self.indentDetailView.frame = CGRectMake(0, 44 + 6, KScreenWidth, 196);
     [self.scrollView addSubview:self.indentDetailView];
+    [self.indentDetailView.phoneButton addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 // 买家信息
@@ -228,7 +229,7 @@
     
     labelHeight = 40;
     
-    float addressHeight = [ODHelp textHeightFromTextString:[NSString stringWithFormat:@"服务地址：%@", model.address] width:KScreenWidth - ODLeftMargin * 2 miniHeight:labelHeight fontSize:13.5];
+    float addressHeight = [ODHelp textHeightFromTextString:[NSString stringWithFormat:@"服务地址：%@", model.address] width:KScreenWidth - ODLeftMargin * 2 - 13.5 * 5 miniHeight:labelHeight fontSize:13.5];
     
     // 动态设置 buyerInfoamtionView 的高度
     float buyerInformationViewHeight;
@@ -295,12 +296,20 @@
             adressLabelY = CGRectGetMaxY(lineView.frame);
         }
         // 快递服务
-        UILabel * addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, adressLabelY, KScreenWidth - ODLeftMargin * 2, addressHeight)];
-        addressLabel.text = [NSString stringWithFormat:@"服务地址：%@",model.address];
+        UILabel * addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, adressLabelY, 13.5 * 5, labelHeight)];
+//        addressLabel.text = [NSString stringWithFormat:@"服务地址：%@",model.address];
+        addressLabel.text = @"服务地址：";
         addressLabel.textColor = [UIColor colorGloomyColor];
-        addressLabel.numberOfLines = 0;
         addressLabel.font = [UIFont systemFontOfSize:13.5];
         [self.buyerView addSubview:addressLabel];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin + 13.5 * 5, adressLabelY, KScreenWidth - ODLeftMargin * 2 - 13.5 * 5, addressHeight)];
+        label.text = [NSString stringWithFormat:@"%@",model.address];
+        label.textColor = [UIColor colorGloomyColor];
+        label.numberOfLines = 0;
+        label.font = [UIFont systemFontOfSize:13.5];
+        [self.buyerView addSubview:label];
+        
         buyerInformationViewHeight = CGRectGetMaxY(addressLabel.frame);
     }
     // 线上服务
@@ -341,7 +350,11 @@
         [self.orderCancelReasonView addSubview:lineView];
         
         UILabel *orderReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(lineView.frame), KScreenWidth - ODLeftMargin * 2, reasonHeight)];
+        if (!model.reason.length) {
+            orderReasonContentLabel.text = @"无";
+        }
         orderReasonContentLabel.text = model.reason;
+        orderReasonContentLabel.numberOfLines = 0;
         orderReasonContentLabel.font = [UIFont systemFontOfSize:13.5];
         orderReasonContentLabel.textColor = [UIColor colorGloomyColor];
         [self.orderCancelReasonView addSubview:orderReasonContentLabel];

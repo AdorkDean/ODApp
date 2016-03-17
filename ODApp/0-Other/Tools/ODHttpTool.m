@@ -112,7 +112,7 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
 + (void)getWithURL:(NSString *)URL parameters:(NSDictionary *)parameters modelClass:(__unsafe_unretained Class)modeleClass success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    URL = [ODBaseURL stringByAppendingString:URL];
+    URL = [ODBaseURL stringByAppendingPathComponent:URL];
     NSMutableDictionary *parameter = [self getRequestParameter:parameters];
     [manager GET:URL parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
@@ -142,7 +142,7 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     
 //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html",@"text/plain", nil];
 
-    URL = [ODBaseURL stringByAppendingString:URL];
+    URL = [ODBaseURL stringByAppendingPathComponent:URL];
     NSMutableDictionary *parameter = [self getRequestParameter:parameters];
     [manager POST:URL parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
@@ -186,7 +186,7 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     // 1.创建请求管理对象
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
-    URL = [ODBaseURL stringByAppendingString:URL];
+    URL = [ODBaseURL stringByAppendingPathComponent:URL];
     NSMutableDictionary *parameter = [self getRequestParameter:parameters];
 
     // 2.发送请求

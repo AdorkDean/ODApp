@@ -102,8 +102,8 @@ static CGFloat const lineHeight = 1;
     scrollView.pagingEnabled = YES;
     scrollView.delegate = self;
     scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.showsVerticalScrollIndicator = NO;
     scrollView.bounces = NO;
-    scrollView.contentSize = CGSizeMake(2 * KScreenWidth, height);
     [self.view addSubview:scrollView];
     self.scrollView = scrollView;
 }
@@ -146,10 +146,12 @@ static CGFloat const lineHeight = 1;
     self.index = index;
     
     // 加载第二界面
-    UIViewController *vc = self.childViewControllers[index];
-    vc.view.frame = CGRectMake(KScreenWidth * index, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODTabBarHeight);
+    UIViewController *childVc = self.childViewControllers[index];
+    // 如果已经加载子控制器,  直接返回
+    if (childVc.isViewLoaded) return;
+    childVc.view.frame = CGRectMake(KScreenWidth * index, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODTabBarHeight);
     
-    [scrollView addSubview:vc.view];
+    [scrollView addSubview:childVc.view];
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
@@ -181,6 +183,7 @@ static CGFloat const lineHeight = 1;
 - (void)changeController:(UIButton *)button
 {
     self.index = button.tag - 10010;
+    self.scrollView.contentSize = CGSizeMake(2 * KScreenWidth, 0);
 }
 
 @end

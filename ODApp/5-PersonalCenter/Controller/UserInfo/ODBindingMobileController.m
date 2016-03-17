@@ -72,12 +72,13 @@
     self.openId = [ODUserInformation sharedODUserInformation].openID;
     
     // 创建MobileView
-    ODBindingMobileView *bindMobileView = [ODBindingMobileView getView];
+    ODBindingMobileView *bindMobileView = [ODBindingMobileView mobileView];
     bindMobileView.frame = CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight);
     
     [bindMobileView.getCodelButton addTarget:self action:@selector(getCodeAction:) forControlEvents:UIControlEventTouchUpInside];
     [bindMobileView.bindingButton addTarget:self action:@selector(bindingAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:self.bindMobileView];
+    self.bindMobileView = bindMobileView;
 }
 /**
  *  创建警告框

@@ -17,6 +17,9 @@
 @property(nonatomic, assign) CGFloat od_centerX;
 @property(nonatomic, assign) CGFloat od_centerY;
 
+/**
+ *  从xib加载View
+ */
 + (instancetype)od_viewFromXib;
 
 /**

@@ -210,8 +210,6 @@
 		232CB62F1C9264E200340D12 /* ODPersonalTaskButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4DE1C9264E200340D12 /* ODPersonalTaskButton.m */; };
 		232CB6301C9264E200340D12 /* ODRegisteredView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4E01C9264E200340D12 /* ODRegisteredView.m */; };
 		232CB6311C9264E200340D12 /* ODRegisteredView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB4E11C9264E200340D12 /* ODRegisteredView.xib */; };
-		232CB6321C9264E200340D12 /* ODReleaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4E31C9264E200340D12 /* ODReleaseCell.m */; };
-		232CB6331C9264E200340D12 /* ODReleaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB4E41C9264E200340D12 /* ODReleaseCell.xib */; };
 		232CB6341C9264E200340D12 /* ODTaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4E61C9264E200340D12 /* ODTaskCell.m */; };
 		232CB6351C9264E200340D12 /* ODTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB4E71C9264E200340D12 /* ODTaskCell.xib */; };
 		232CB6361C9264E200340D12 /* ODTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4E91C9264E200340D12 /* ODTypeView.m */; };
@@ -273,6 +271,7 @@
 		232CB66E1C9264E200340D12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 232CB5521C9264E200340D12 /* Assets.xcassets */; };
 		232CB66F1C9264E200340D12 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 232CB5531C9264E200340D12 /* Info.plist */; };
 		232CB6721C92AF4C00340D12 /* ODPublicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB6711C92AF4C00340D12 /* ODPublicTool.m */; };
+		23B22B2A1C98FEAA00AB11ED /* UIImageView+ODCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B22B291C98FEAA00AB11ED /* UIImageView+ODCache.m */; };
 		4029EB351C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4029EB341C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m */; };
 		4045DC981C97AD60007CD2BC /* ODBazaarPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 4045DC971C97AD60007CD2BC /* ODBazaarPhoto.m */; };
 		4045DC9C1C97D349007CD2BC /* ODBazaarHelpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4045DC9A1C97D349007CD2BC /* ODBazaarHelpCell.m */; };
@@ -305,6 +304,8 @@
 		ED4688131C96905F00E31F64 /* ODApplyListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4688111C96905F00E31F64 /* ODApplyListCell.m */; };
 		ED4688141C96905F00E31F64 /* ODApplyListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4688121C96905F00E31F64 /* ODApplyListCell.xib */; };
 		ED46881C1C96AD9500E31F64 /* ODIndentDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED46881B1C96AD9500E31F64 /* ODIndentDetailController.m */; };
+		ED4917B91C9944FE001E549A /* ODReleaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4917B71C9944FE001E549A /* ODReleaseView.m */; };
+		ED4917BA1C9944FE001E549A /* ODReleaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4917B81C9944FE001E549A /* ODReleaseView.xib */; };
 		ED51F08A1C979E87005525AD /* ODIndentDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED51F0891C979E87005525AD /* ODIndentDetailView.m */; };
 		ED51F08C1C979EB5005525AD /* ODIndentDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED51F08B1C979EB5005525AD /* ODIndentDetailView.xib */; };
 		ED51F0921C97E8D0005525AD /* ODIndentDetailTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED51F0911C97E8D0005525AD /* ODIndentDetailTopView.m */; };
@@ -360,7 +361,6 @@
 		232CB3301C9264E200340D12 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		232CB3311C9264E200340D12 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		232CB3321C9264E200340D12 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		232CB3341C9264E200340D12 /* Define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Define.h; sourceTree = "<group>"; };
 		232CB3351C9264E200340D12 /* ODApp-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ODApp-Prefix.pch"; sourceTree = "<group>"; };
 		232CB3361C9264E200340D12 /* ODAppConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAppConst.h; sourceTree = "<group>"; };
 		232CB3371C9264E200340D12 /* ODAppConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAppConst.m; sourceTree = "<group>"; };
@@ -711,9 +711,6 @@
 		232CB4DF1C9264E200340D12 /* ODRegisteredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODRegisteredView.h; sourceTree = "<group>"; };
 		232CB4E01C9264E200340D12 /* ODRegisteredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODRegisteredView.m; sourceTree = "<group>"; };
 		232CB4E11C9264E200340D12 /* ODRegisteredView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODRegisteredView.xib; sourceTree = "<group>"; };
-		232CB4E21C9264E200340D12 /* ODReleaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODReleaseCell.h; sourceTree = "<group>"; };
-		232CB4E31C9264E200340D12 /* ODReleaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODReleaseCell.m; sourceTree = "<group>"; };
-		232CB4E41C9264E200340D12 /* ODReleaseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODReleaseCell.xib; sourceTree = "<group>"; };
 		232CB4E51C9264E200340D12 /* ODTaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTaskCell.h; sourceTree = "<group>"; };
 		232CB4E61C9264E200340D12 /* ODTaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTaskCell.m; sourceTree = "<group>"; };
 		232CB4E71C9264E200340D12 /* ODTaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODTaskCell.xib; sourceTree = "<group>"; };
@@ -818,6 +815,8 @@
 		232CB5531C9264E200340D12 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		232CB6701C92AF4C00340D12 /* ODPublicTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPublicTool.h; sourceTree = "<group>"; };
 		232CB6711C92AF4C00340D12 /* ODPublicTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPublicTool.m; sourceTree = "<group>"; };
+		23B22B281C98FEAA00AB11ED /* UIImageView+ODCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ODCache.h"; sourceTree = "<group>"; };
+		23B22B291C98FEAA00AB11ED /* UIImageView+ODCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ODCache.m"; sourceTree = "<group>"; };
 		4029EB331C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseSkillTimeModel.h; sourceTree = "<group>"; };
 		4029EB341C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseSkillTimeModel.m; sourceTree = "<group>"; };
 		4045DC961C97AD60007CD2BC /* ODBazaarPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarPhoto.h; sourceTree = "<group>"; };
@@ -868,6 +867,9 @@
 		ED4688121C96905F00E31F64 /* ODApplyListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODApplyListCell.xib; sourceTree = "<group>"; };
 		ED46881A1C96AD9500E31F64 /* ODIndentDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODIndentDetailController.h; sourceTree = "<group>"; };
 		ED46881B1C96AD9500E31F64 /* ODIndentDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODIndentDetailController.m; sourceTree = "<group>"; };
+		ED4917B61C9944FE001E549A /* ODReleaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODReleaseView.h; sourceTree = "<group>"; };
+		ED4917B71C9944FE001E549A /* ODReleaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODReleaseView.m; sourceTree = "<group>"; };
+		ED4917B81C9944FE001E549A /* ODReleaseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODReleaseView.xib; sourceTree = "<group>"; };
 		ED51F0881C979E87005525AD /* ODIndentDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODIndentDetailView.h; sourceTree = "<group>"; };
 		ED51F0891C979E87005525AD /* ODIndentDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODIndentDetailView.m; sourceTree = "<group>"; };
 		ED51F08B1C979EB5005525AD /* ODIndentDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODIndentDetailView.xib; sourceTree = "<group>"; };
@@ -967,6 +969,8 @@
 				232CB3231C9264E200340D12 /* UIImage+ODExtension.m */,
 				232CB3241C9264E200340D12 /* UIView+ODExtension.h */,
 				232CB3251C9264E200340D12 /* UIView+ODExtension.m */,
+				23B22B281C98FEAA00AB11ED /* UIImageView+ODCache.h */,
+				23B22B291C98FEAA00AB11ED /* UIImageView+ODCache.m */,
 			);
 			path = "UI+Extension";
 			sourceTree = "<group>";
@@ -999,7 +1003,6 @@
 		232CB3331C9264E200340D12 /* Public */ = {
 			isa = PBXGroup;
 			children = (
-				232CB3341C9264E200340D12 /* Define.h */,
 				232CB3351C9264E200340D12 /* ODApp-Prefix.pch */,
 				232CB3361C9264E200340D12 /* ODAppConst.h */,
 				232CB3371C9264E200340D12 /* ODAppConst.m */,
@@ -1484,12 +1487,12 @@
 		232CB44E1C9264E200340D12 /* SearchHelp */ = {
 			isa = PBXGroup;
 			children = (
-				409141831C98F70E0059E05F /* ODBazaarCollectionCell.h */,
-				409141841C98F70E0059E05F /* ODBazaarCollectionCell.m */,
-				409141851C98F70E0059E05F /* ODBazaarCollectionCell.xib */,
 				4045DC991C97D349007CD2BC /* ODBazaarHelpCell.h */,
 				4045DC9A1C97D349007CD2BC /* ODBazaarHelpCell.m */,
 				4045DC9B1C97D349007CD2BC /* ODBazaarHelpCell.xib */,
+				409141831C98F70E0059E05F /* ODBazaarCollectionCell.h */,
+				409141841C98F70E0059E05F /* ODBazaarCollectionCell.m */,
+				409141851C98F70E0059E05F /* ODBazaarCollectionCell.xib */,
 				232CB4521C9264E200340D12 /* ODBazaarDetailCollectionCell.h */,
 				232CB4531C9264E200340D12 /* ODBazaarDetailCollectionCell.m */,
 				232CB4541C9264E200340D12 /* ODBazaarDetailCollectionCell.xib */,
@@ -1711,9 +1714,9 @@
 				232CB4DF1C9264E200340D12 /* ODRegisteredView.h */,
 				232CB4E01C9264E200340D12 /* ODRegisteredView.m */,
 				232CB4E11C9264E200340D12 /* ODRegisteredView.xib */,
-				232CB4E21C9264E200340D12 /* ODReleaseCell.h */,
-				232CB4E31C9264E200340D12 /* ODReleaseCell.m */,
-				232CB4E41C9264E200340D12 /* ODReleaseCell.xib */,
+				ED4917B61C9944FE001E549A /* ODReleaseView.h */,
+				ED4917B71C9944FE001E549A /* ODReleaseView.m */,
+				ED4917B81C9944FE001E549A /* ODReleaseView.xib */,
 				232CB4E51C9264E200340D12 /* ODTaskCell.h */,
 				232CB4E61C9264E200340D12 /* ODTaskCell.m */,
 				232CB4E71C9264E200340D12 /* ODTaskCell.xib */,
@@ -2101,7 +2104,6 @@
 			files = (
 				232CB6371C9264E200340D12 /* ODTypeView.xib in Resources */,
 				232CB62E1C9264E200340D12 /* ODOperationSeccondCell.xib in Resources */,
-				232CB6331C9264E200340D12 /* ODReleaseCell.xib in Resources */,
 				232CB6311C9264E200340D12 /* ODRegisteredView.xib in Resources */,
 				232CB5DB1C9264E200340D12 /* ODAddAddressView.xib in Resources */,
 				232CB5AD1C9264E200340D12 /* ODActivityDetailInfoViewCell.xib in Resources */,
@@ -2125,6 +2127,7 @@
 				232CB5E11C9264E200340D12 /* ODBazaarPicCollectionViewCell.xib in Resources */,
 				232CB6501C9264E200340D12 /* ODCancelOrderView.xib in Resources */,
 				ED4688141C96905F00E31F64 /* ODApplyListCell.xib in Resources */,
+				ED4917BA1C9944FE001E549A /* ODReleaseView.xib in Resources */,
 				232CB5E51C9264E200340D12 /* ODCollectionCell.xib in Resources */,
 				ED51F08C1C979EB5005525AD /* ODIndentDetailView.xib in Resources */,
 				ED51F0961C97E8F3005525AD /* ODIndentDetailTopView.xib in Resources */,
@@ -2317,7 +2320,6 @@
 				232CB5871C9264E200340D12 /* XMLDictionary.m in Sources */,
 				232CB6281C9264E200340D12 /* ODLandThirdCell.m in Sources */,
 				232CB6591C9264E200340D12 /* ODOrderSecondHeadView.m in Sources */,
-				232CB6321C9264E200340D12 /* ODReleaseCell.m in Sources */,
 				232CB5751C9264E200340D12 /* UITableViewRowAction.m in Sources */,
 				232CB6721C92AF4C00340D12 /* ODPublicTool.m in Sources */,
 				232CB5CD1C9264E200340D12 /* ODBazaarDetailViewController.m in Sources */,
@@ -2419,6 +2421,7 @@
 				232CB5821C9264E200340D12 /* ODHttpTool.m in Sources */,
 				232CB55B1C9264E200340D12 /* UIImage+ODExtension.m in Sources */,
 				232CB56D1C9264E200340D12 /* IQBarButtonItem.m in Sources */,
+				23B22B2A1C98FEAA00AB11ED /* UIImageView+ODCache.m in Sources */,
 				232CB5BD1C9264E200340D12 /* ODPlacePreDeviceView.m in Sources */,
 				232CB6221C9264E200340D12 /* ODLandFirstCell.m in Sources */,
 				232CB58E1C9264E200340D12 /* ODTabBar.m in Sources */,
@@ -2457,6 +2460,7 @@
 				B865882D1C9953AA002ECB0C /* ODMyTaskViolationsCell.m in Sources */,
 				232CB5D31C9264E200340D12 /* ODBazaarExchangeSkillDetailLoveModel.m in Sources */,
 				232CB5551C9264E200340D12 /* NSDictionary+ODExtension.m in Sources */,
+				ED4917B91C9944FE001E549A /* ODReleaseView.m in Sources */,
 				232CB5FE1C9264E200340D12 /* ODEvaluationController.m in Sources */,
 				232CB5E91C9264E200340D12 /* ODBazaarDetailCollectionCell.m in Sources */,
 				232CB5D41C9264E200340D12 /* ODBazaarExchangeSkillDetailModel.m in Sources */,

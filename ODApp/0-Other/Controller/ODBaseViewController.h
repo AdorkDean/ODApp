@@ -10,7 +10,6 @@
 #import "ODClassMethod.h"
 #import "ODProgressHUD.h"
 #import "ODHttpTool.h"
-#import "ODNetClosedView.h"
 #import "ODUserInformation.h"
 
 @interface ODBaseViewController : UIViewController

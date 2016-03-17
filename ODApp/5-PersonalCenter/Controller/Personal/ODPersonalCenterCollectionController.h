@@ -14,11 +14,9 @@
 #import "ODCommunityShowPicViewController.h"
 #import "MJRefresh.h"
 
-@interface ODPersonalCenterCollectionController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface ODPersonalCenterCollectionController : ODBaseViewController 
 
 
-@property(nonatomic, strong) UICollectionView *collectionView;
-@property(nonatomic, strong) NSArray *dataArray;
-@property(nonatomic) NSInteger page;
+
 
 @end
