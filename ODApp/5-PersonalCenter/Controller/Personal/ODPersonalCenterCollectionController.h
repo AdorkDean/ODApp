@@ -17,7 +17,6 @@
 @interface ODPersonalCenterCollectionController : ODBaseViewController 
 
 
-@property(nonatomic, strong) NSMutableArray *dataArray;
-@property(nonatomic) NSInteger page;
+
 
 @end
