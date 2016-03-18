@@ -14,21 +14,15 @@
 #import "ODHomeFoundViewController.h"
 #import "ODUserModel.h"
 
-
-
-
 @interface ODRegisteredController ()<UITextFieldDelegate>
 
 // 视图
-@property(nonatomic , strong) ODRegisteredView *registView;
+@property (nonatomic, strong) ODRegisteredView *registView;
 //　定时器相关
-@property(nonatomic,strong)NSTimer *timer;
-@property(nonatomic)NSInteger currentTime;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) NSInteger currentTime;
 
 @end
-
-
-
 
 @implementation ODRegisteredController
 
@@ -180,14 +174,6 @@
     }];
 }
 
-
-
-#pragma mark - 内存管理
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - umeng
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -196,6 +182,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    // 解决键盘退出慢的问题
+    [[UIApplication sharedApplication].keyWindow endEditing:YES];
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 

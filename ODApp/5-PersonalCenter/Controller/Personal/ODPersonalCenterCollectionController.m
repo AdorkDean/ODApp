@@ -156,7 +156,7 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
-    detailControler.swap_id = [NSString stringWithFormat:@"%d", model.swap_id];
+    detailControler.swap_id = [NSString stringWithFormat:@"%ld", model.swap_id];
     detailControler.nick = model.user.nick;
     [self.navigationController pushViewController:detailControler animated:YES];
 }

@@ -48,7 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"中心详情";
-    [self getData];
+    [self getRequestData];
 }
 
 #pragma mark - lifeCycle
@@ -68,7 +68,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - 懒加载
+#pragma mark - LazyLoad
 
 #pragma mark - 底层ScrollView
 - (UIScrollView *)scrollView {
@@ -161,7 +161,7 @@
 }
 
 #pragma mark - 请求数据
-- (void)getData {
+- (void)getRequestData {
     __weakSelf
     [ODHttpTool getWithURL:ODUrlOtherStoreDetail parameters:@{@"store_id" : self.storeId} modelClass:[ODStoreDetailModel class] success:^(id model)
     {
@@ -187,7 +187,7 @@
     self.pageControl.currentPage = currentIndex;
 }
 
-#pragma mark - 点击事件
+#pragma mark - Action
 
 #pragma mark - 场地预约
 - (void)appointmentAction:(UIButton *)sender {

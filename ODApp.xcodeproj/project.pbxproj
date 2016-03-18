@@ -256,7 +256,6 @@
 		232CB66C1C9264E200340D12 /* ODWithdrawalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB54F1C9264E200340D12 /* ODWithdrawalView.m */; };
 		232CB66D1C9264E200340D12 /* ODWithdrawalView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB5501C9264E200340D12 /* ODWithdrawalView.xib */; };
 		232CB66E1C9264E200340D12 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 232CB5521C9264E200340D12 /* Assets.xcassets */; };
-		232CB66F1C9264E200340D12 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 232CB5531C9264E200340D12 /* Info.plist */; };
 		232CB6721C92AF4C00340D12 /* ODPublicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB6711C92AF4C00340D12 /* ODPublicTool.m */; };
 		23B22B2A1C98FEAA00AB11ED /* UIImageView+ODCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B22B291C98FEAA00AB11ED /* UIImageView+ODCache.m */; };
 		23B22B331C9A597600AB11ED /* ODPublicWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B22B321C9A597600AB11ED /* ODPublicWebViewController.m */; };
@@ -300,6 +299,7 @@
 		B86588291C993E44002ECB0C /* ODMyTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B86588271C993E44002ECB0C /* ODMyTaskCell.xib */; };
 		B865882D1C9953AA002ECB0C /* ODMyTaskViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B865882B1C9953AA002ECB0C /* ODMyTaskViolationsCell.m */; };
 		B865882E1C9953AA002ECB0C /* ODMyTaskViolationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B865882C1C9953AA002ECB0C /* ODMyTaskViolationsCell.xib */; };
+		ED3D47841C9BDCE1008B5A0F /* ODNoResultLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D47831C9BDCE1008B5A0F /* ODNoResultLabel.m */; };
 		ED46880E1C965F5300E31F64 /* ODLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED46880C1C965F5300E31F64 /* ODLocationCell.m */; };
 		ED46880F1C965F5300E31F64 /* ODLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED46880D1C965F5300E31F64 /* ODLocationCell.xib */; };
 		ED4688131C96905F00E31F64 /* ODApplyListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4688111C96905F00E31F64 /* ODApplyListCell.m */; };
@@ -870,6 +870,8 @@
 		B865882B1C9953AA002ECB0C /* ODMyTaskViolationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyTaskViolationsCell.m; sourceTree = "<group>"; };
 		B865882C1C9953AA002ECB0C /* ODMyTaskViolationsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyTaskViolationsCell.xib; sourceTree = "<group>"; };
 		C5EAEBD7E6B20864218413FA /* Pods-ODApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.debug.xcconfig"; sourceTree = "<group>"; };
+		ED3D47821C9BDCE1008B5A0F /* ODNoResultLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ODNo\U0010ResultLabel.h"; sourceTree = "<group>"; };
+		ED3D47831C9BDCE1008B5A0F /* ODNoResultLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ODNo\U0010ResultLabel.m"; sourceTree = "<group>"; };
 		ED46880B1C965F5300E31F64 /* ODLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLocationCell.h; sourceTree = "<group>"; };
 		ED46880C1C965F5300E31F64 /* ODLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLocationCell.m; sourceTree = "<group>"; };
 		ED46880D1C965F5300E31F64 /* ODLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODLocationCell.xib; sourceTree = "<group>"; };
@@ -1192,6 +1194,8 @@
 				232CB3971C9264E200340D12 /* ODNavigationBarView.m */,
 				232CB3981C9264E200340D12 /* ODNetClosedView.h */,
 				232CB3991C9264E200340D12 /* ODNetClosedView.m */,
+				ED3D47821C9BDCE1008B5A0F /* ODNoResultLabel.h */,
+				ED3D47831C9BDCE1008B5A0F /* ODNoResultLabel.m */,
 				232CB39A1C9264E200340D12 /* ODNewFeatureCell.h */,
 				232CB39B1C9264E200340D12 /* ODNewFeatureCell.m */,
 				232CB39C1C9264E200340D12 /* ODProgressHUD.h */,
@@ -1375,9 +1379,9 @@
 		232CB4091C9264E200340D12 /* 3-ODBazaar */ = {
 			isa = PBXGroup;
 			children = (
-				232CB40A1C9264E200340D12 /* Controller */,
 				232CB4271C9264E200340D12 /* Model */,
 				232CB4381C9264E200340D12 /* View */,
+				232CB40A1C9264E200340D12 /* Controller */,
 			);
 			path = "3-ODBazaar";
 			sourceTree = "<group>";
@@ -2201,7 +2205,6 @@
 				232CB5AB1C9264E200340D12 /* ODActivityDetailContentCell.xib in Resources */,
 				232CB5BE1C9264E200340D12 /* ODPlacePreDeviceView.xib in Resources */,
 				232CB5DD1C9264E200340D12 /* ODAddressCell.xib in Resources */,
-				232CB66F1C9264E200340D12 /* Info.plist in Resources */,
 				B86588291C993E44002ECB0C /* ODMyTaskCell.xib in Resources */,
 				232CB5C01C9264E200340D12 /* ODPlacePreFooterView.xib in Resources */,
 				ED46880F1C965F5300E31F64 /* ODLocationCell.xib in Resources */,
@@ -2383,6 +2386,7 @@
 				232CB64D1C9264E200340D12 /* ODSaveOrderModel.m in Sources */,
 				232CB6631C9264E200340D12 /* TimeButton.m in Sources */,
 				232CB5871C9264E200340D12 /* XMLDictionary.m in Sources */,
+				ED3D47841C9BDCE1008B5A0F /* ODNoResultLabel.m in Sources */,
 				232CB6281C9264E200340D12 /* ODLandThirdCell.m in Sources */,
 				232CB6591C9264E200340D12 /* ODOrderSecondHeadView.m in Sources */,
 				232CB5751C9264E200340D12 /* UITableViewRowAction.m in Sources */,
