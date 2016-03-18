@@ -35,8 +35,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    self.tableView.contentOffset = CGPointZero;
+    if (![ODUserInformation sharedODUserInformation].openID.length) return;
     self.headerView.user = [[ODUserInformation sharedODUserInformation] getUserCache];
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 - (void)viewWillDisappear:(BOOL)animated {
@@ -65,7 +67,7 @@
     self.tableView.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
     
     // 调整tableView距离导航栏高度
-//        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 20, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 14, 0);
     
     // 创建头部视图
     ODPersonalCenterHeaderView *headerView = [ODPersonalCenterHeaderView headerView];
@@ -73,7 +75,6 @@
     headerView.od_width = KScreenWidth;
     self.tableView.tableHeaderView = headerView;
     self.headerView = headerView;
-    if (![ODUserInformation sharedODUserInformation].openID.length) return;
 }
 
 /**
@@ -143,6 +144,8 @@
     };
     
     ODArrowItem *item8 = [ODArrowItem itemWithName:@"分享我们的app"];
+    // 设置cell背景颜色
+    item8.colorType = ODSettingCellColorTypeYellow;
     item8.oprtionBlock = ^(NSIndexPath *index){
         [ODPublicTool shareAppWithTarget:weakSelf dictionary:(NSDictionary *)user.share controller:weakSelf];
     };

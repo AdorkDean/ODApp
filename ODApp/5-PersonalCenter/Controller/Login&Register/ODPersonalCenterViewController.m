@@ -13,7 +13,7 @@
 #import "ODHomeFoundViewController.h"
 #import "ODlandingView.h"
 #import "ODRegisteredController.h"
-#import "ODLandMainController.h"
+//#import "ODLandMainController.h"
 #import "ODTabBarController.h"
 #import "ODChangePassWordController.h"
 #import "ODUserModel.h"

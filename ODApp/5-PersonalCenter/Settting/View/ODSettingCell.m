@@ -76,6 +76,13 @@
 {
     self.imageView.image = self.item.icon;
     self.textLabel.text = self.item.name;
+    
+    if (self.item.colorType == ODSettingCellColorTypeWhite) {
+        self.backgroundColor = [UIColor whiteColor];
+    } else {
+        self.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+    }
+    
     self.detailTextLabel.text = self.item.subTitle;
 }
 

@@ -9,7 +9,7 @@
 #import "ODNavigationBarView.h"
 #import "ODRegisteredController.h"
 #import "ODRegisteredView.h"
-#import "ODLandMainController.h"
+//#import "ODLandMainController.h"
 #import  "ODTabBarController.h"
 #import "ODHomeFoundViewController.h"
 #import "ODUserModel.h"
