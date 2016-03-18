@@ -94,7 +94,7 @@ typedef enum : NSUInteger
 
 @property (nonatomic, strong) NSArray *loves;
 
-@property (nonatomic, assign) int swap_id;
+@property (nonatomic, assign) NSInteger swap_id;
 
 
 /** 配图的frame */

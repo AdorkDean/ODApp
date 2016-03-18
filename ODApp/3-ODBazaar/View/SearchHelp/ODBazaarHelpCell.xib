@@ -30,8 +30,13 @@
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7Tz-DH-92Q"/>
+                            </mask>
+                        </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mX-hO-vQ2" userLabel="时间">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6mX-hO-vQ2" userLabel="时间">
                         <rect key="frame" x="292" y="76" width="33" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -44,9 +49,15 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wug-HA-uRe" userLabel="名称">
-                        <rect key="frame" x="10" y="77.5" width="31" height="14.5"/>
+                        <rect key="frame" x="10" y="68" width="48" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I9B-Vn-3d0">
+                        <rect key="frame" x="68" y="40" width="27.5" height="26"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10.5"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -54,29 +65,23 @@
                     <constraint firstItem="bZp-if-l4k" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="ADV-Tw-b9t"/>
                     <constraint firstItem="CiD-hE-uQ4" firstAttribute="leading" secondItem="6mX-hO-vQ2" secondAttribute="trailing" constant="10" id="BEi-Xk-xef"/>
                     <constraint firstItem="E3x-01-fG1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="DVr-3l-3UM"/>
+                    <constraint firstItem="6mX-hO-vQ2" firstAttribute="top" secondItem="I9B-Vn-3d0" secondAttribute="bottom" constant="10" id="DgC-3H-0as"/>
                     <constraint firstAttribute="bottom" secondItem="6mX-hO-vQ2" secondAttribute="bottom" constant="12" id="Dvn-ZB-Eb3"/>
                     <constraint firstItem="wug-HA-uRe" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="JQo-qK-Paa"/>
-                    <constraint firstItem="wug-HA-uRe" firstAttribute="bottom" secondItem="CiD-hE-uQ4" secondAttribute="bottom" id="TWG-kn-sxr"/>
-                    <constraint firstItem="wug-HA-uRe" firstAttribute="top" secondItem="bZp-if-l4k" secondAttribute="bottom" constant="22" id="VrL-bn-hoC"/>
+                    <constraint firstItem="wug-HA-uRe" firstAttribute="top" secondItem="bZp-if-l4k" secondAttribute="bottom" constant="10" id="RFq-4b-EWB"/>
+                    <constraint firstItem="I9B-Vn-3d0" firstAttribute="leading" secondItem="bZp-if-l4k" secondAttribute="trailing" constant="10" id="T8k-mE-MpP"/>
                     <constraint firstItem="bZp-if-l4k" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="VzR-26-MBI"/>
                     <constraint firstItem="6mX-hO-vQ2" firstAttribute="bottom" secondItem="CiD-hE-uQ4" secondAttribute="bottom" id="ZJ0-JC-p2c"/>
-                    <constraint firstItem="6mX-hO-vQ2" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wug-HA-uRe" secondAttribute="trailing" constant="10" id="brD-ef-ofh"/>
+                    <constraint firstItem="I9B-Vn-3d0" firstAttribute="top" secondItem="E3x-01-fG1" secondAttribute="bottom" constant="10" id="fKk-71-pGg"/>
                     <constraint firstItem="E3x-01-fG1" firstAttribute="leading" secondItem="bZp-if-l4k" secondAttribute="trailing" constant="10" id="mPE-2t-GIh"/>
-                    <constraint firstItem="wug-HA-uRe" firstAttribute="bottom" secondItem="CiD-hE-uQ4" secondAttribute="bottom" id="rSi-oi-4V6"/>
+                    <constraint firstItem="wug-HA-uRe" firstAttribute="width" secondItem="bZp-if-l4k" secondAttribute="width" id="mhw-8D-WMa"/>
                     <constraint firstAttribute="trailing" secondItem="E3x-01-fG1" secondAttribute="trailing" constant="15" id="sYX-7E-e9J"/>
                     <constraint firstItem="CiD-hE-uQ4" firstAttribute="trailing" secondItem="E3x-01-fG1" secondAttribute="trailing" id="vt2-q5-RRh"/>
-                    <constraint firstAttribute="bottom" secondItem="wug-HA-uRe" secondAttribute="bottom" constant="22" id="xd6-Gh-LuA"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="TWG-kn-sxr"/>
-                        <exclude reference="VrL-bn-hoC"/>
-                        <exclude reference="xd6-Gh-LuA"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="avatarButton" destination="bZp-if-l4k" id="7Lv-cx-eOP"/>
+                <outlet property="contentLabel" destination="I9B-Vn-3d0" id="Zuz-d9-bDl"/>
                 <outlet property="nameLabel" destination="wug-HA-uRe" id="R1a-jH-X8S"/>
                 <outlet property="statusLabel" destination="CiD-hE-uQ4" id="Hhq-a8-AaO"/>
                 <outlet property="timeLabel" destination="6mX-hO-vQ2" id="OhU-8H-4Cp"/>

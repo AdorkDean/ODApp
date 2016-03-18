@@ -170,7 +170,6 @@
     params[@"id"] = taskId;
     params[@"type"] = @"2";
     params[@"open_id"] = self.open_id;
-    __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlBbsDel parameters:params modelClass:[NSObject class] success:^(id model)
      {
