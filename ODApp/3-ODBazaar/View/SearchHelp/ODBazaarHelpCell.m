@@ -20,39 +20,28 @@
 @property(nonatomic, weak) IBOutlet UILabel *timeLabel;
 @property(nonatomic, weak) IBOutlet UILabel *statusLabel;
 /** 正文 */
-@property(nonatomic, weak) UILabel *contentLabel;
+@property(nonatomic, weak) IBOutlet UILabel *contentLabel;
 
 @end
 
 @implementation ODBazaarHelpCell
-#pragma mark - 懒加载
-- (UILabel *)contentLabel
-{
-    if (!_contentLabel)
-    {
-        UILabel *contentLabel = [[UILabel alloc] init];
-        [self.contentView addSubview:contentLabel];
-        _contentLabel = contentLabel;
-    }
-    return _contentLabel;
-}
 
 #pragma mark - 初始化方法
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     // 取消选中样式
     self.autoresizingMask = NO;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    self.contentLabel.font = [UIFont systemFontOfSize:11.5];
-    self.contentLabel.numberOfLines = 2;
-    self.contentLabel.lineBreakMode = NSLineBreakByTruncatingTail;
     self.nameLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
     self.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     self.statusLabel.layer.masksToBounds = YES;
     self.statusLabel.layer.cornerRadius = 5;
     self.statusLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.statusLabel.backgroundColor = [UIColor colorWithHexString:@"#ffd701" alpha:1];
+    // 限制正文最大宽度
+    self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 15 - self.contentLabel.od_x;
 }
 
 /**
@@ -76,7 +65,6 @@
     
     self.titleLabel.text = model.title;
     self.contentLabel.text = model.content;
-    self.contentLabel.frame = model.contentFrame;
     self.nameLabel.text = model.user_nick;
     //设置Label显示不同大小的字体
     NSString *time = [[[model.task_start_date substringFromIndex:5] stringByReplacingOccurrencesOfString:@"/" withString:@"."] stringByReplacingOccurrencesOfString:@" " withString:@"."];

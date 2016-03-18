@@ -135,7 +135,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
-    detailControler.swap_id = [NSString stringWithFormat:@"%d", model.swap_id];
+    detailControler.swap_id = [NSString stringWithFormat:@"%ld", model.swap_id];
     detailControler.nick = model.user.nick;
     [self.navigationController pushViewController:detailControler animated:YES];
 }
@@ -153,7 +153,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     [self.tableView.mj_footer endRefreshing];
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"page"] = [NSString stringWithFormat:@"%@", @(self.page)];
+    params[@"page"] = @"1";
     params[@"my"] = @"0";
     self.params = params;
     __weakSelf
