@@ -16,7 +16,6 @@
 #import "ODOthersInformationController.h"
 #import "ODEvaluationCell.h"
 #import "ODSecondEvaluationModel.h"
-#import "ODNoResultLabel.h"
 
 #import "ODEvaluationView.h"
 
@@ -188,16 +187,8 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          NSArray *evaluationDatas = [model result];
          [weakSelf.taskDataArray addObjectsFromArray:evaluationDatas];
        
-        ODNo_ResultLabel *label = [[ODNo_ResultLabel alloc]init];
 
-         if (weakSelf.taskDataArray.count == 0) {
-             label.text = @"暂无评价";
-             [label showOnSuperView:weakSelf.taskTableView];
-         }
-        else
-        {
-            [label hidden];
-        }
+        
 
          [weakSelf.taskTableView.mj_header endRefreshing];
          if (evaluationDatas.count == 0) {
@@ -234,16 +225,11 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          [weakSelf.skillDataArray addObjectsFromArray:evaluationDatas];
         
 
-         ODNo_ResultLabel *label = [[ODNo_ResultLabel alloc]init];
          
          if (weakSelf.skillDataArray.count == 0) {
-             label.text = @"暂无评价";
-             [label showOnSuperView:weakSelf.skillTableView];
+             
          }
-         else
-         {
-             [label hidden];
-         }
+         
          
          
          [weakSelf.skillTableView.mj_header endRefreshing];
