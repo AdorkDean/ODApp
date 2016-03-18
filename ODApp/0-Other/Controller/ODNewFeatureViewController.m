@@ -9,11 +9,15 @@
 #import "ODNewFeatureViewController.h"
 
 #import "ODNewFeatureCell.h"
+#import "MyPageControl.h"
 
 @interface ODNewFeatureViewController ()
 
 /** 引导页图片 */
 @property (nonatomic, weak) UIImageView *guideImageViews;
+
+/** 小圆点 */
+@property (nonatomic, weak) MyPageControl *pageControl;
 
 @end
 
@@ -45,6 +49,9 @@ static NSString * const reuseIdentifier = @"Cell";
     
     // 初始化collectionView
     [self setupCollectionView];
+    
+    // 初始化pageControll
+    [self setupPageControl];
 }
 
 #pragma mark - 初始化方法
@@ -53,22 +60,24 @@ static NSString * const reuseIdentifier = @"Cell";
  */
 - (void)setupCollectionView
 {
-    // Register cell classes
+    // Register cell
     [self.collectionView registerClass:[ODNewFeatureCell class] forCellWithReuseIdentifier:reuseIdentifier];
-    
     self.collectionView.bounces = NO;
-    
     self.collectionView.showsHorizontalScrollIndicator = NO;
-    
     self.collectionView.pagingEnabled = YES;
 }
 
 - (void)setupPageControl
 {
-    
+    CGRect frame = CGRectMake(self.view.od_centerX - 50, self.view.od_centerY * 2 - 30, 200, 30);
+    MyPageControl *pageControl = [[MyPageControl alloc] initWithFrame:frame normalImage:[UIImage imageNamed:@"selected.png"] highlightedImage:[UIImage imageNamed:@"noselected.png"] dotsNumber:5 sideLength:15 dotsGap:10];
+    pageControl.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:pageControl];
+    self.pageControl = pageControl;
 }
 
-#pragma mark - <UICollectionViewDataSource>
+
+#pragma mark - UICollectionView 数据源方法
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
     return 1;
@@ -92,14 +101,19 @@ static NSString * const reuseIdentifier = @"Cell";
     return cell;
 }
 
-#pragma mark - <UIScrollViewDelegate>
+#pragma mark - UIScrollView 代理方法
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSInteger index = scrollView.contentOffset.x / KScreenWidth + 0.5;
+    // 滚动pageControl
+    self.pageControl.currentPage = index;
+}
+
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
     CGFloat curOffsetX = scrollView.contentOffset.x;
-    
     // 计算index
     NSInteger index = curOffsetX / scrollView.bounds.size.width + 1;
-    
     self.guideImageViews.image = [UIImage imageNamed:[NSString stringWithFormat:@"begin%ld", index]];
 }
 
