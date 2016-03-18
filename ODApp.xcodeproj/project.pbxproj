@@ -300,6 +300,8 @@
 		B865882D1C9953AA002ECB0C /* ODMyTaskViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B865882B1C9953AA002ECB0C /* ODMyTaskViolationsCell.m */; };
 		B865882E1C9953AA002ECB0C /* ODMyTaskViolationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B865882C1C9953AA002ECB0C /* ODMyTaskViolationsCell.xib */; };
 		ED3D47841C9BDCE1008B5A0F /* ODNoResultLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D47831C9BDCE1008B5A0F /* ODNoResultLabel.m */; };
+		ED3D47881C9BEB44008B5A0F /* ODMyOrderRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D47861C9BEB44008B5A0F /* ODMyOrderRecordView.m */; };
+		ED3D47891C9BEB44008B5A0F /* ODMyOrderRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3D47871C9BEB44008B5A0F /* ODMyOrderRecordView.xib */; };
 		ED46880E1C965F5300E31F64 /* ODLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED46880C1C965F5300E31F64 /* ODLocationCell.m */; };
 		ED46880F1C965F5300E31F64 /* ODLocationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED46880D1C965F5300E31F64 /* ODLocationCell.xib */; };
 		ED4688131C96905F00E31F64 /* ODApplyListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4688111C96905F00E31F64 /* ODApplyListCell.m */; };
@@ -872,6 +874,9 @@
 		C5EAEBD7E6B20864218413FA /* Pods-ODApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.debug.xcconfig"; sourceTree = "<group>"; };
 		ED3D47821C9BDCE1008B5A0F /* ODNoResultLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ODNo\U0010ResultLabel.h"; sourceTree = "<group>"; };
 		ED3D47831C9BDCE1008B5A0F /* ODNoResultLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ODNo\U0010ResultLabel.m"; sourceTree = "<group>"; };
+		ED3D47851C9BEB44008B5A0F /* ODMyOrderRecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyOrderRecordView.h; sourceTree = "<group>"; };
+		ED3D47861C9BEB44008B5A0F /* ODMyOrderRecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyOrderRecordView.m; sourceTree = "<group>"; };
+		ED3D47871C9BEB44008B5A0F /* ODMyOrderRecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyOrderRecordView.xib; sourceTree = "<group>"; };
 		ED46880B1C965F5300E31F64 /* ODLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLocationCell.h; sourceTree = "<group>"; };
 		ED46880C1C965F5300E31F64 /* ODLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLocationCell.m; sourceTree = "<group>"; };
 		ED46880D1C965F5300E31F64 /* ODLocationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODLocationCell.xib; sourceTree = "<group>"; };
@@ -1728,6 +1733,9 @@
 				232CB4D41C9264E200340D12 /* ODMyOrderRecordCell.h */,
 				232CB4D51C9264E200340D12 /* ODMyOrderRecordCell.m */,
 				232CB4D61C9264E200340D12 /* ODMyOrderRecordCell.xib */,
+				ED3D47851C9BEB44008B5A0F /* ODMyOrderRecordView.h */,
+				ED3D47861C9BEB44008B5A0F /* ODMyOrderRecordView.m */,
+				ED3D47871C9BEB44008B5A0F /* ODMyOrderRecordView.xib */,
 				232CB4D71C9264E200340D12 /* ODOperationFirstCell.h */,
 				232CB4D81C9264E200340D12 /* ODOperationFirstCell.m */,
 				232CB4D91C9264E200340D12 /* ODOperationFirstCell.xib */,
@@ -2172,6 +2180,7 @@
 			files = (
 				232CB62E1C9264E200340D12 /* ODOperationSeccondCell.xib in Resources */,
 				232CB6311C9264E200340D12 /* ODRegisteredView.xib in Resources */,
+				ED3D47891C9BEB44008B5A0F /* ODMyOrderRecordView.xib in Resources */,
 				4003348E1C9B97C500973818 /* ODPersonalCenterHeaderView.xib in Resources */,
 				232CB5DB1C9264E200340D12 /* ODAddAddressView.xib in Resources */,
 				232CB5AD1C9264E200340D12 /* ODActivityDetailInfoViewCell.xib in Resources */,
@@ -2395,6 +2404,7 @@
 				232CB6291C9264E200340D12 /* ODMyOrderRecordCell.m in Sources */,
 				232CB5EC1C9264E200340D12 /* ODBazaarRewardCollectionCell.m in Sources */,
 				232CB58B1C9264E200340D12 /* ODNetClosedView.m in Sources */,
+				ED3D47881C9BEB44008B5A0F /* ODMyOrderRecordView.m in Sources */,
 				232CB5FF1C9264E200340D12 /* ODGiveOpinionController.m in Sources */,
 				232CB58D1C9264E200340D12 /* ODProgressHUD.m in Sources */,
 				232CB5E21C9264E200340D12 /* ODBazaarReleaseSkillTimeViewCell.m in Sources */,

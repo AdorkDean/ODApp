@@ -1,32 +1,27 @@
 //
-//  ODMyOrderRecordCell.m
+//  ODMyOrderRecordView.m
 //  ODApp
 //
-//  Created by Bracelet on 16/1/8.
-//  Copyright © 2016年 Odong Bracelet. All rights reserved.
+//  Created by Bracelet on 16/3/18.
+//  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODMyOrderRecordCell.h"
+#import "ODMyOrderRecordView.h"
 
-@implementation ODMyOrderRecordCell
+@implementation ODMyOrderRecordView
 
 - (void)awakeFromNib
 {
     self.checkStateLabel.layer.cornerRadius = 5;
     self.checkStateLabel.layer.borderWidth = 0.5;
-    self.checkStateLabel.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
-    self.lineHeight.constant = 0.5;
-    
-    self.backgroundColor = [UIColor whiteColor];
-    self.layer.masksToBounds = YES;
+    self.checkStateLabel.layer.borderColor = [UIColor lineColor].CGColor;
     self.layer.cornerRadius = 5;
     self.layer.borderColor = [UIColor lineColor].CGColor;
-    self.layer.borderWidth = 0.5;
-    
+    self.layer.borderWidth = 0.5f;
 }
 
 - (void)showDatawithModel:(ODMyOrderRecordModel *)model{
-
+    
     if ([model.purpose  isEqual: @""])
     {
         self.centerPurposeDetailLabel.text = @"无";
@@ -41,6 +36,12 @@
     self.checkStateLabel.text = model.status_str;
 }
 
-
+- (void)setFrame:(CGRect)frame
+{
+    frame.origin.y += 4;
+    frame.size.height -= 4;
+    
+    [super setFrame:frame];
+}
 
 @end
