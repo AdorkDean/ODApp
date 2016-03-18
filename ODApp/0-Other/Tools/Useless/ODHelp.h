@@ -16,9 +16,20 @@
 + (NSString *)dateStringFromNumberTimer:(NSString *)timerStr;
 //根据字符串内容的多少  在固定宽度 下计算出实际的行高
 
+/**
+ * 动态计算文本高度
+ **/
 + (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat)textWidth fontSize:(CGFloat)size;
 
+/**
+ * 动态计算文本高度（可设置最小高度）
+ **/
 + (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat)textWidth miniHeight:(CGFloat)miniHeight fontSize:(CGFloat)size;
+
+/**
+ * 暂无数据
+ **/
++ (void)createNoResultView:(NSString *)title addSubview:(id)viewName;
 
 
 @end

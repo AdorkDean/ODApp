@@ -24,16 +24,22 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
 @interface ODEvaluationController ()< UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic , strong) UISegmentedControl *segmentedControl;
+
 @property (nonatomic, strong) UIScrollView * scrollView;
 
-@property (nonatomic , assign) NSInteger firstPage;
-@property (nonatomic, strong) NSMutableArray *FirstDataArray;
-@property (nonatomic , strong) UILabel *firstLabel;
+// 页数
+@property (nonatomic , assign) NSInteger taskPageNumber;
+@property (nonatomic , assign) NSInteger skillPageNumber;
 
-@property (nonatomic , assign) NSInteger secondPage;
-@property (nonatomic, strong) NSMutableArray *secondDataArray;
-@property (nonatomic , strong) UILabel *secondLabel;
+// 数据数组
+@property (nonatomic, strong) NSMutableArray *taskDataArray;
+@property (nonatomic, strong) NSMutableArray *skillDataArray;
 
+// 无记录label
+@property (nonatomic , strong) UILabel *taskNoResultLabel;
+@property (nonatomic , strong) UILabel *skillNoResultLabel;
+
+// UITableView
 @property (nonatomic, strong) UITableView *taskTableView;
 @property (nonatomic, strong) UITableView *skillTableView;
 
@@ -45,31 +51,33 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    
     self.navigationItem.title = @"我收到的评价";
-    
-    self.firstPage = 1;
-    self.secondPage = 1;
-    
-    self.FirstDataArray = [[NSMutableArray alloc] init];
-    self.secondDataArray = [NSMutableArray array];
+    self.taskPageNumber = 1;
+    self.skillPageNumber = 1;
+    self.taskDataArray = [[NSMutableArray alloc] init];
+    self.skillDataArray = [NSMutableArray array];
   
    
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = self.typeTitle;
     
     [self creatSegment];
-    [self firstGetData];
-    [self secondGetData];
+    [self taskGetRequestData];
+    [self skillGetRequestData];
+}
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 #pragma mark - 初始化
--(void)creatSegment
-{
+-(void)creatSegment {
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"任务评价", @"技能评价"]];
     self.segmentedControl.frame = CGRectMake(4, 10, kScreenSize.width - 8, 30);
     self.segmentedControl.clipsToBounds = YES;
@@ -125,10 +133,12 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
         
         __weakSelf
         _taskTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [weakSelf firstDownRefresh];
+            weakSelf.taskPageNumber = 1;
+            [weakSelf taskGetRequestData];
         }];
         _taskTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-            [weakSelf firstLoadMoreData];
+            weakSelf.taskPageNumber++;
+            [weakSelf taskGetRequestData];
         }];
         
     }
@@ -147,40 +157,20 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
         [self.scrollView addSubview:_skillTableView];
         __weakSelf
         _skillTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [weakSelf secondGetData];
+            weakSelf.skillPageNumber = 1;
+            [weakSelf skillGetRequestData];
         }];
         _skillTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-            [weakSelf secondGetData];
+            weakSelf.skillPageNumber = 1;
+            [weakSelf skillGetRequestData];
         }];
     }
     return _skillTableView;
 }
 
-
-#pragma mark - 刷新
-- (void)firstDownRefresh {
-    self.firstPage = 1;
-    [self firstGetData];
-}
-
-- (void)firstLoadMoreData {
-    self.firstPage++;
-    [self firstGetData];
-}
-
-- (void)secondDownRefresh {
-    self.secondPage = 1;
-    [self secondGetData];
-}
-
-- (void)secondLoadMoreData {
-    self.secondPage++;
-    [self secondGetData];
-}
-
 #pragma mark - 请求数据
--(void)firstGetData {
-    NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.firstPage];
+-(void)taskGetRequestData {
+    NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.taskPageNumber];
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"type"] = @"1";
@@ -190,25 +180,18 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     // 发送请求
     [ODHttpTool getWithURL:ODUrlUserCommentList parameters:params modelClass:[ODEvaluationModel class] success:^(id model) {
          if ([countNumber isEqualToString:@"1"]) {
-             [weakSelf.FirstDataArray removeAllObjects];
-             [weakSelf.firstLabel removeFromSuperview];
+             [weakSelf.taskDataArray removeAllObjects];
+             [weakSelf.taskNoResultLabel removeFromSuperview];
          }
          
          NSArray *evaluationDatas = [model result];
-         [weakSelf.FirstDataArray addObjectsFromArray:evaluationDatas];
+         [weakSelf.taskDataArray addObjectsFromArray:evaluationDatas];
 
-         if (weakSelf.FirstDataArray.count == 0) {
-             weakSelf.firstLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30)];
-             weakSelf.firstLabel.text = @"暂无评价";
-             weakSelf.firstLabel.textColor = [UIColor blackColor];
-             weakSelf.firstLabel.font = [UIFont systemFontOfSize:16];
-             weakSelf.firstLabel.textAlignment = NSTextAlignmentCenter;
-             [weakSelf.taskTableView addSubview:weakSelf.firstLabel];
+         if (weakSelf.taskDataArray.count == 0) {
+             [ODHelp createNoResultView:@"暂无评价" addSubview:weakSelf.taskTableView];
          }
 
          [weakSelf.taskTableView.mj_header endRefreshing];
-        
-
          if (evaluationDatas.count == 0) {
              [weakSelf.taskTableView.mj_footer endRefreshingWithNoMoreData];
          }
@@ -222,9 +205,8 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
      }];
 }
 
--(void)secondGetData
-{
-    NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.secondPage];
+-(void)skillGetRequestData {
+    NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.skillPageNumber];
     
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -236,23 +218,16 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     [ODHttpTool getWithURL:ODUrlUserCommentList parameters:params modelClass:[ODSecondEvaluationModel class] success:^(id model)
      {
          if ([countNumber isEqualToString:@"1"]) {
-             [weakSelf.secondDataArray removeAllObjects];
-             [weakSelf.secondLabel removeFromSuperview];
+             [weakSelf.skillDataArray removeAllObjects];
+             [weakSelf.skillNoResultLabel removeFromSuperview];
          }
          
          NSArray *evaluationDatas = [model result];
-         [weakSelf.secondDataArray addObjectsFromArray:evaluationDatas];
+         [weakSelf.skillDataArray addObjectsFromArray:evaluationDatas];
          
-         if (weakSelf.secondDataArray.count == 0)
+         if (weakSelf.skillDataArray.count == 0)
          {
-             weakSelf.secondLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
-             weakSelf.secondLabel.text = @"暂无评价";
-             weakSelf.secondLabel.textColor = [UIColor blackColor];
-             weakSelf.secondLabel.font = [UIFont systemFontOfSize:16];
-             weakSelf.secondLabel.textAlignment = NSTextAlignmentCenter;
-             
-             
-             [weakSelf.skillTableView addSubview:weakSelf.secondLabel];
+             [ODHelp createNoResultView:@"暂无评价" addSubview:weakSelf.skillTableView];             
          }
 
          [weakSelf.skillTableView.mj_header endRefreshing];
@@ -278,22 +253,22 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView.tag == 111) {
-        return self.FirstDataArray.count;
+        return self.taskDataArray.count;
     }
     else {
-        return self.secondDataArray.count;
+        return self.skillDataArray.count;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ODEvaluationView *cell = [tableView dequeueReusableCellWithIdentifier:ODEvaluationViewID];
     if (tableView.tag == 111) {
-        ODEvaluationModel *model = self.FirstDataArray[indexPath.row];
+        ODEvaluationModel *model = self.taskDataArray[indexPath.row];
         [cell setTaskModel:model];
     }
     else {
         
-        ODSecondEvaluationModel *model = self.secondDataArray[indexPath.row];
+        ODSecondEvaluationModel *model = self.skillDataArray[indexPath.row];
         [cell setSkillModel:model];
     }
     return cell;
@@ -301,11 +276,11 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView.tag == 111) {
-        ODEvaluationModel *model = self.FirstDataArray[indexPath.row];
+        ODEvaluationModel *model = self.taskDataArray[indexPath.row];
         return [ODHelp textHeightFromTextString:model.comment width:KScreenWidth - ODLeftMargin * 2 miniHeight:40 fontSize:12.5];
     }
     else {
-        ODSecondEvaluationModel *model = self.secondDataArray[indexPath.row];
+        ODSecondEvaluationModel *model = self.skillDataArray[indexPath.row];
         return [ODHelp textHeightFromTextString:model.reason width:KScreenWidth - ODLeftMargin * 2 miniHeight:40 fontSize:12.5];
     }
 }
@@ -336,15 +311,7 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
 }
 
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-}
 
 
 
