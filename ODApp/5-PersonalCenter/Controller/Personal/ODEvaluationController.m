@@ -61,13 +61,10 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = self.typeTitle;
     
+    [self creatSegment];
     [self firstGetData];
     [self secondGetData];
-    
-    [self creatSegment];
-    [self creatScroller];
-    
-    
+
 }
 
 #pragma mark - 初始化
@@ -97,24 +94,27 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     [self.view addSubview:self.segmentedControl];
 }
 
-
-- (void)creatScroller
-{
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, kScreenSize.width, kScreenSize.height - 40)];
-    self.scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height - 40);
-    self.scrollView.backgroundColor =[UIColor backgroundColor];
-    self.scrollView.userInteractionEnabled = YES;
-    self.scrollView.alwaysBounceVertical = YES;
-    self.scrollView.bounces = NO;
-    self.scrollView.showsHorizontalScrollIndicator = NO;
-    self.scrollView.pagingEnabled = YES;
-    self.scrollView.delegate = self;
-    [self.view addSubview:self.scrollView];
+- (UIScrollView *)scrollView {
+    if (!_scrollView) {
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, kScreenSize.width, kScreenSize.height - 40)];
+        self.scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height - 40);
+        self.scrollView.backgroundColor =[UIColor backgroundColor];
+        self.scrollView.userInteractionEnabled = YES;
+        self.scrollView.alwaysBounceVertical = YES;
+        self.scrollView.bounces = NO;
+        self.scrollView.showsHorizontalScrollIndicator = NO;
+        self.scrollView.pagingEnabled = YES;
+        self.scrollView.delegate = self;
+        [self.view addSubview:self.scrollView];
+    }
+    return _scrollView;
 }
+
+
 
 - (UITableView *)taskTableView {
     if (!_taskTableView) {
-        _taskTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) style:UITableViewStylePlain];
+        _taskTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 64) style:UITableViewStylePlain];
         _taskTableView.backgroundColor = [UIColor backgroundColor];
         _taskTableView.delegate = self;
         _taskTableView.dataSource = self;
@@ -137,7 +137,7 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
 
 - (UITableView *)skillTableView {
     if (!_skillTableView) {
-        _skillTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) style:UITableViewStylePlain];
+        _skillTableView = [[UITableView alloc] initWithFrame:CGRectMake(KScreenWidth, 0, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 64) style:UITableViewStylePlain];
         _skillTableView.backgroundColor = [UIColor backgroundColor];
         _skillTableView.delegate = self;
         _skillTableView.dataSource = self;
@@ -147,10 +147,10 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
         [self.scrollView addSubview:_skillTableView];
         __weakSelf
         _skillTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-            [weakSelf firstDownRefresh];
+            [weakSelf secondGetData];
         }];
         _skillTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-            [weakSelf firstLoadMoreData];
+            [weakSelf secondGetData];
         }];
     }
     return _skillTableView;
@@ -198,11 +198,16 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          [weakSelf.FirstDataArray addObjectsFromArray:evaluationDatas];
 
          if (weakSelf.FirstDataArray.count == 0) {
-             weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
-             [weakSelf.scrollView addSubview:weakSelf.firstLabel];
+             weakSelf.firstLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30)];
+             weakSelf.firstLabel.text = @"暂无评价";
+             weakSelf.firstLabel.textColor = [UIColor blackColor];
+             weakSelf.firstLabel.font = [UIFont systemFontOfSize:16];
+             weakSelf.firstLabel.textAlignment = NSTextAlignmentCenter;
+             [weakSelf.taskTableView addSubview:weakSelf.firstLabel];
          }
 
          [weakSelf.taskTableView.mj_header endRefreshing];
+        
 
          if (evaluationDatas.count == 0) {
              [weakSelf.taskTableView.mj_footer endRefreshingWithNoMoreData];
@@ -211,7 +216,6 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
              [weakSelf.taskTableView.mj_footer endRefreshing];
          }
          [weakSelf.taskTableView reloadData];
-  
      } failure:^(NSError *error) {
          [weakSelf.taskTableView.mj_header endRefreshing];
          [weakSelf.taskTableView.mj_footer endRefreshing];
@@ -241,8 +245,14 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          
          if (weakSelf.secondDataArray.count == 0)
          {
-             weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160)/2 + KScreenWidth, kScreenSize.height/2, 160, 30) text:@"暂无评价" font:16 alignment:@"center" color:@"#000000" alpha:1];
-             [weakSelf.scrollView addSubview:weakSelf.secondLabel];
+             weakSelf.secondLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
+             weakSelf.secondLabel.text = @"暂无评价";
+             weakSelf.secondLabel.textColor = [UIColor blackColor];
+             weakSelf.secondLabel.font = [UIFont systemFontOfSize:16];
+             weakSelf.secondLabel.textAlignment = NSTextAlignmentCenter;
+             
+             
+             [weakSelf.skillTableView addSubview:weakSelf.secondLabel];
          }
 
          [weakSelf.skillTableView.mj_header endRefreshing];
@@ -309,7 +319,6 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     int page = scrollView.contentOffset.x / self.view.frame.size.width;
     
     self.segmentedControl.selectedSegmentIndex  = page;
-    
 }
 
 
@@ -318,11 +327,8 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
 {
     CGPoint point = CGPointMake(self.scrollView.frame.size.width * sender.selectedSegmentIndex, 0);
     [self.scrollView setContentOffset:point animated:YES];
+    
 }
-
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
