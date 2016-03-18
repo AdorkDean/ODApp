@@ -2331,11 +2331,8 @@
 				232CB63D1C9264E200340D12 /* ODMySellController.m in Sources */,
 				232CB5F61C9264E200340D12 /* ODCommunityDetailModel.m in Sources */,
 				232CB5941C9264E200340D12 /* ODLocationModel.m in Sources */,
-<<<<<<< HEAD
 				232CB5901C9264E200340D12 /* ODFindJobController.m in Sources */,
-=======
 				232CB6361C9264E200340D12 /* ODTypeView.m in Sources */,
->>>>>>> d809d6862151a95f73d1d8f591bb9c718c80fc55
 				232CB58C1C9264E200340D12 /* ODNewFeatureCell.m in Sources */,
 				232CB6201C9264E200340D12 /* ODInformationView.m in Sources */,
 				232CB5581C9264E200340D12 /* UIBarButtonItem+ODExtention.m in Sources */,
@@ -2504,11 +2501,8 @@
 				232CB58E1C9264E200340D12 /* ODTabBar.m in Sources */,
 				232CB5931C9264E200340D12 /* ODHomeInfoModel.m in Sources */,
 				232CB6161C9264E200340D12 /* ODLoveListModel.m in Sources */,
-<<<<<<< HEAD
-=======
 				232CB6381C9264E200340D12 /* ODViolationsCell.m in Sources */,
 				406C58AB1C9ABC6B0078F16D /* ODArrowItem.m in Sources */,
->>>>>>> d809d6862151a95f73d1d8f591bb9c718c80fc55
 				232CB6491C9264E200340D12 /* ODMySellModel.m in Sources */,
 				40A02D1B1C965A3F009CE702 /* ODBazaarExchangeSkillCell.m in Sources */,
 				232CB5621C9264E200340D12 /* main.m in Sources */,
