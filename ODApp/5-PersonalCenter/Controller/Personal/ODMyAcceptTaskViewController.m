@@ -17,6 +17,8 @@
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic)NSInteger page;
+@property(nonatomic,copy)NSString *type;
+@property(nonatomic)NSInteger index;
 
 @end
 
@@ -47,16 +49,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.page = 1;
+    [self requestData];
+    
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        self.page = 1;
+        [self requestData];
+    }];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [self loadMoreData];
+    }];
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+     if (self.type.length){
+        ODBazaarModel *model = self.dataArray[self.index];
+        model.task_status = self.type;
+        [self.dataArray replaceObjectAtIndex:self.index withObject:model];
+        [self.tableView reloadData];
+    }
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.type = @"";
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
 #pragma mark - 数据请求
-- (void)requestReleaseData {
+- (void)requestData {
     __weakSelf
-    NSDictionary *parameter = @{@"suggest":@"0",@"task_status":@"",@"page":[NSString stringWithFormat:@"%ld", (long) self.page],@"my":@"2"};
+    NSDictionary *parameter = @{@"suggest":@"0",@"task_status":@"9",@"page":[NSString stringWithFormat:@"%ld", (long) self.page],@"my":@"2"};
     [ODHttpTool getWithURL:ODUrlTaskList parameters:parameter modelClass:[ODBazaarTasksModel class] success:^(id model)
      {
          if (self.page == 1) {
@@ -65,14 +92,18 @@
          ODBazaarTasksModel *tasksModel = [model result];
          [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];
          [weakSelf.tableView reloadData];
+         [weakSelf.tableView.mj_header endRefreshing];
+         [weakSelf.tableView.mj_footer endRefreshing];
      } failure:^(NSError *error) {
+         [weakSelf.tableView.mj_header endRefreshing];
+         [weakSelf.tableView.mj_footer endRefreshing];
          [ODProgressHUD showInfoWithStatus:@"网络异常"];
      }];
 }
 
--(void)loadMoreReleaseData{
+-(void)loadMoreData{
     self.page++;
-    [self requestReleaseData];
+    [self requestData];
 }
 
 #pragma mark - UITableViewDateSource
@@ -98,8 +129,11 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ODBazaarModel *model = self.dataArray[indexPath.row];
     ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc] init];
-    bazaarDetail.myBlock = ^(NSString *del) {
+    __weakSelf
+    bazaarDetail.myBlock = ^(NSString *type) {
+        weakSelf.type = type;
     };
+    self.index = indexPath.row;
     bazaarDetail.task_id = [NSString stringWithFormat:@"%@", model.task_id];
     bazaarDetail.open_id = [NSString stringWithFormat:@"%@", model.open_id];
     bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@", model.task_status_name];

@@ -7,16 +7,20 @@
 //
 
 #import "ODMyReleaseTaskViewController.h"
+#import "ODMyTaskController.h"
 #import "ODBazaarDetailViewController.h"
 #import "ODBazaarModel.h"
 #import "ODMyTaskCell.h"
 #import "ODMyTaskViolationsCell.h"
 
-@interface ODMyReleaseTaskViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ODMyReleaseTaskViewController ()<UITableViewDelegate,UITableViewDataSource, ODMyTaskControllerDelegate>
 
-@property(nonatomic,strong)UITableView *tableView;
+
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic)NSInteger page;
+@property(nonatomic,copy)NSString *type;
+@property(nonatomic)NSInteger index;
+
 
 @end
 
@@ -44,10 +48,50 @@
     return _dataArray;
 }
 
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.page = 1;
+    self.status = @"0";
+    [self requestData];
+    __weakSelf
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weakSelf.page = 1;
+        [weakSelf requestData];
+    }];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [weakSelf loadMoreData];
+    }];
+    
+    ODMyTaskController *controller = [[ODMyTaskController alloc]init];
+    controller.taskDelegate = self;
+    controller.myBlock = ^(NSString *status){
+        weakSelf.status = status;
+        [weakSelf.tableView.mj_header beginRefreshing];
+    };
+    
+    [self addChildViewController:controller];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    if ([self.type isEqualToString:@"del"]) {
+        [self.dataArray removeObjectAtIndex:self.index];
+        [self.tableView reloadData];
+    }else if (![self.type isEqualToString:@"del"] && self.type.length){
+        ODBazaarModel *model = self.dataArray[self.index];
+        model.task_status = self.type;
+        [self.dataArray replaceObjectAtIndex:self.index withObject:model];
+        [self.tableView reloadData];
+    }
+    
+    [self.tableView.mj_header beginRefreshing];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.type = @"";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,9 +99,9 @@
 }
 
 #pragma mark - 数据请求
-- (void)requestReleaseData {
+- (void)requestData {
     __weakSelf
-    NSDictionary *parameter = @{@"suggest":@"0",@"task_status":@"",@"page":[NSString stringWithFormat:@"%ld", (long) self.page],@"my":@"1"};
+    NSDictionary *parameter = @{@"suggest":@"0",@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld", (long) self.page],@"my":@"1"};
     [ODHttpTool getWithURL:ODUrlTaskList parameters:parameter modelClass:[ODBazaarTasksModel class] success:^(id model)
      {
          if (self.page == 1) {
@@ -66,14 +110,18 @@
          ODBazaarTasksModel *tasksModel = [model result];
          [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];
          [weakSelf.tableView reloadData];
+         [weakSelf.tableView.mj_header endRefreshing];
+         [weakSelf.tableView.mj_footer endRefreshing];
      } failure:^(NSError *error) {
+         [weakSelf.tableView.mj_header endRefreshing];
+         [weakSelf.tableView.mj_footer endRefreshing];
          [ODProgressHUD showInfoWithStatus:@"网络异常"];
      }];
 }
 
--(void)loadMoreReleaseData{
+-(void)loadMoreData{
     self.page++;
-    [self requestReleaseData];
+    [self requestData];
 }
 
 #pragma mark - UITableViewDateSource
@@ -90,6 +138,7 @@
     if ([model.task_status isEqualToString:@"-1"]) {
         ODMyTaskViolationsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"second"];
         cell.model = self.dataArray[indexPath.row];
+        [cell.deleteButton addTarget:self action:@selector(deleteButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(18, 75, 15, 15)];
         imageView.image = [UIImage imageNamed:@"weigui"];
         [cell.contentView addSubview:imageView];
@@ -103,7 +152,7 @@
 
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 150;
+    return 200;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -111,15 +160,42 @@
     NSString *status = [NSString stringWithFormat:@"%@", model.task_status];
     if ([status isEqualToString:@"-1"]) {;
     } else {
+        __weakSelf
         ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc] init];
-        bazaarDetail.myBlock = ^(NSString *del) {
+        bazaarDetail.myBlock = ^(NSString *type) {
+            weakSelf.type = type;
         };
         bazaarDetail.task_id = [NSString stringWithFormat:@"%@", model.task_id];
         bazaarDetail.open_id = [NSString stringWithFormat:@"%@", model.open_id];
         bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@", model.task_status_name];
+        self.index = indexPath.row;
         [self.navigationController pushViewController:bazaarDetail animated:YES];
     }
 }
+
+#pragma mark - ODMyTaskVc 代理方法
+- (void)taskVc:(ODMyTaskController *)vc didClickedPopMenu:(NSString *)type
+{
+    self.status = type;
+    
+    [self.tableView.mj_header beginRefreshing];
+}
+
+-(void)deleteButtonClick:(UIButton *)button{
+    ODMyTaskViolationsCell *cell = (ODMyTaskViolationsCell *)button.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    ODBazaarModel *model = self.dataArray[indexPath.row];
+    NSDictionary *params = @{@"id":model.task_id,@"type":@"2"};
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlBbsDel parameters:params modelClass:[NSObject class] success:^(id model){
+        [ODProgressHUD showInfoWithStatus:@"删除成功"];
+        [weakSelf.dataArray removeObjectAtIndex:indexPath.row];
+        [weakSelf.tableView reloadData];
+    } failure:^(NSError *error) {
+    }];
+}
+
+
 
 
 

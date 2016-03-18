@@ -88,17 +88,13 @@
 
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter withName:(NSString *)name{
     __weak typeof (self)weakSelf = self;
-    [ODHttpTool getWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
+    [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarDetailModel class] success:^(id model) {
         if ([name isEqualToString:@"删除任务"]) {
-            if (weakSelf.myBlock) {
-                weakSelf.myBlock([NSString stringWithFormat:@"del"]);
-            }
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }else if ([name isEqualToString:@"接受任务"]) {
             [weakSelf.picArray removeAllObjects];
             [weakSelf requestData];
             [weakSelf.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
-            
             [weakSelf.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
             weakSelf.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
             [ODProgressHUD showInfoWithStatus:@"接受成功"];
@@ -110,6 +106,16 @@
             [weakSelf.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
             [ODProgressHUD showInfoWithStatus:@"确认成功"];
         }
+       
+        if (weakSelf.myBlock) {
+            if ([name isEqualToString:@"删除任务"]){
+                weakSelf.myBlock(@"del");
+            }else{
+                self.model = [model result];
+                weakSelf.myBlock(self.model.task_status);
+            }
+        }
+      
     } failure:^(NSError *error) {
     }];
 }

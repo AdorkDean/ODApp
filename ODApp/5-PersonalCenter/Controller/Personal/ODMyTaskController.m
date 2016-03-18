@@ -15,17 +15,7 @@
 
 @property(nonatomic, strong) UISegmentedControl *segmentedControl;
 @property(nonatomic, strong) UIScrollView *scrollView;
-
-
-
-@property(nonatomic, copy) NSString *openID;
-@property(nonatomic, strong) UILabel *firstLabel;
-@property(nonatomic, strong) UILabel *secondLabel;
-
-
-@property(nonatomic, assign) NSInteger firstIndex;
-@property(nonatomic, assign) NSInteger secondIndex;
-
+@property(nonatomic, strong) NSString *type;
 
 @end
 
@@ -34,8 +24,8 @@
 #pragma mark - lazyload
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 43, kScreenSize.width, kScreenSize.height - 43)];
-        _scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height - 43);
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 43, kScreenSize.width, kScreenSize.height -64 -43)];
+        _scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height -64 -43);
         _scrollView.userInteractionEnabled = YES;
         _scrollView.alwaysBounceVertical = YES;
         _scrollView.bounces = NO;
@@ -53,11 +43,9 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.view.backgroundColor = [UIColor whiteColor];
     [self creatSegmentControll];
-
+    [self setupChilidVc];
     self.navigationItem.title = @"我的任务";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithType:ODBarButtonTypeTextLeft target:self action:@selector(typeAction:) image:[UIImage imageNamed:@"任务筛选下拉箭头"] highImage:nil textColor:nil highColor:nil title:@"全部任务"];
-    [self setupChilidVc];
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -86,7 +74,6 @@
     self.segmentedControl.layer.cornerRadius = 7;
     self.segmentedControl.layer.borderWidth = 1;
     self.segmentedControl.layer.borderColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1].CGColor;
-
     self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
     self.segmentedControl.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     self.segmentedControl.selectedSegmentIndex = 0;
@@ -104,9 +91,15 @@
 
 -(void)setupChilidVc{
     ODMyReleaseTaskViewController *releaseTask = [[ODMyReleaseTaskViewController alloc]init];
-    [self addChildViewController:releaseTask];
-    
+    releaseTask.view.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-43);
     ODMyAcceptTaskViewController *acceptTask = [[ODMyAcceptTaskViewController alloc]init];
+    acceptTask.view.frame = CGRectMake(kScreenSize.width, 0, kScreenSize.width, kScreenSize.height-64-43);
+    
+    
+    [self.scrollView addSubview:releaseTask.view];
+    [self.scrollView addSubview:acceptTask.view];
+    
+    [self addChildViewController:releaseTask];
     [self addChildViewController:acceptTask];
 }
 
@@ -158,29 +151,34 @@
     controller.popoverPresentationController.sourceRect = button.bounds;
     popVC.permittedArrowDirections = UIPopoverArrowDirectionUp;
     popVC.delegate = self;
-    
     [self presentViewController:controller animated:YES completion:^{
     }];
-
 }
-
-- (void)delegateTaskWith:(NSString *)taskId {
-    // 拼接参数
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"id"] = taskId;
-    params[@"type"] = @"2";
-    params[@"open_id"] = self.open_id;
-    __weakSelf
-    // 发送请求
-    [ODHttpTool getWithURL:ODUrlBbsDel parameters:params modelClass:[NSObject class] success:^(id model)
-     {
-         [ODProgressHUD showInfoWithStatus:@"删除成功"];
-     } failure:^(NSError *error) {
-     }];
-}
-
 
 -(void)taskClassButtonClick:(UIButton *)button{
+    
+    NSLog(@"dfsdfsdf");
+    if ([button.titleLabel.text isEqualToString:@"全部任务"]) {
+        self.type = @"0";
+    }else if ([button.titleLabel.text isEqualToString:@"等待派遣"]){
+        self.type = @"1";
+    }else if ([button.titleLabel.text isEqualToString:@"等待完成"]){
+        self.type = @"2";
+    }else if ([button.titleLabel.text isEqualToString:@"完成任务"]){
+        self.type = @"4";
+    }else if ([button.titleLabel.text isEqualToString:@"过期任务"]){
+        self.type = @"-2";
+    }else if ([button.titleLabel.text isEqualToString:@"违规任务"]){
+        self.type = @"-1";
+    }
+//    if (self.myBlock) {
+//        self.myBlock(self.type);
+//    }
+    
+    if ([self.taskDelegate respondsToSelector:@selector(taskVc:didClickedPopMenu:)]) {
+        [self.taskDelegate taskVc:self didClickedPopMenu:self.type];
+    }
+    
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 

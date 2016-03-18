@@ -50,17 +50,6 @@
                             </mask>
                         </variation>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z9x-SZ-cLQ">
-                        <rect key="frame" x="41" y="75" width="60" height="15"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="60" id="J2I-fd-HbR"/>
-                            <constraint firstAttribute="height" constant="15" id="N0Q-hd-5hk"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="riN-KK-np0">
                         <rect key="frame" x="0.0" y="0.0" width="373" height="4"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,7 +70,18 @@
                         <rect key="frame" x="102" y="75" width="253" height="15"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="0xx-FV-9bS"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="0xx-FV-9bS"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z9x-SZ-cLQ">
+                        <rect key="frame" x="41" y="75" width="60" height="15"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="J2I-fd-HbR"/>
+                            <constraint firstAttribute="height" constant="15" id="N0Q-hd-5hk"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -95,6 +95,7 @@
                     <constraint firstItem="G47-Jl-EcX" firstAttribute="leading" secondItem="HqL-ey-0mh" secondAttribute="trailing" constant="10" id="9Y1-iz-MLF"/>
                     <constraint firstAttribute="bottom" secondItem="h6T-Ix-iWm" secondAttribute="bottom" constant="10" id="AUn-p3-Cj5"/>
                     <constraint firstItem="h6T-Ix-iWm" firstAttribute="top" secondItem="i5l-Fy-6fD" secondAttribute="bottom" constant="10" id="AnM-XB-tah"/>
+                    <constraint firstAttribute="bottom" secondItem="Z9x-SZ-cLQ" secondAttribute="bottom" constant="10" id="LYn-UF-7zS"/>
                     <constraint firstAttribute="trailing" secondItem="HqL-ey-0mh" secondAttribute="trailing" constant="18" id="NfM-b0-1HI"/>
                     <constraint firstAttribute="trailing" secondItem="G47-Jl-EcX" secondAttribute="trailing" constant="18" id="O6t-MW-GGo"/>
                     <constraint firstItem="i5l-Fy-6fD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="QXz-dJ-6qT"/>
@@ -115,6 +116,7 @@
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="NfM-b0-1HI"/>
+                        <exclude reference="LYn-UF-7zS"/>
                         <exclude reference="m4f-iJ-Leu"/>
                     </mask>
                 </variation>

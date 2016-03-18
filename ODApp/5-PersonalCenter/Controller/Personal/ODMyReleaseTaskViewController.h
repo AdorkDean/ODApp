@@ -10,4 +10,7 @@
 
 @interface ODMyReleaseTaskViewController : ODBaseViewController
 
+@property(nonatomic,copy)NSString *status;
+@property(nonatomic,strong)UITableView *tableView;
+
 @end
