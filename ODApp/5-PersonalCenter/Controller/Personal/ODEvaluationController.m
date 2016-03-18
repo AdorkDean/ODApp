@@ -188,7 +188,7 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          NSArray *evaluationDatas = [model result];
          [weakSelf.taskDataArray addObjectsFromArray:evaluationDatas];
        
-        ODNo_ResultLabel *label = [[ODNo_ResultLabel alloc]init];
+        ODNoResultLabel *label = [[ODNoResultLabel alloc]init];
 
          if (weakSelf.taskDataArray.count == 0) {
              label.text = @"暂无评价";
@@ -234,7 +234,7 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          [weakSelf.skillDataArray addObjectsFromArray:evaluationDatas];
         
 
-         ODNo_ResultLabel *label = [[ODNo_ResultLabel alloc]init];
+         ODNoResultLabel *label = [[ODNoResultLabel alloc]init];
          
          if (weakSelf.skillDataArray.count == 0) {
              label.text = @"暂无评价";
