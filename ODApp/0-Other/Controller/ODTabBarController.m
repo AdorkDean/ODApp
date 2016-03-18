@@ -14,7 +14,7 @@
 #import "ODNewActivityCenterViewController.h"
 #import "ODBazaarViewController.h"
 #import "ODCommumityViewController.h"
-#import "ODLandMainController.h"
+//#import "ODLandMainController.h"
 
 #import "ODPersonalCenterViewController.h"
 #import "ODPersonalCenterController.h"

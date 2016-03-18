@@ -45,7 +45,7 @@
     
     self.dataArray = [[NSMutableArray alloc] init];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self getData];
+//    [self getData];
     self.navigationItem.title = @"个人中心";
 }
 
@@ -57,7 +57,6 @@
 #pragma mark - 初始化方法
 - (void)createTableView
 {
-    
     if (self.tableView == nil) {
         self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 50) style:UITableViewStylePlain];
         
@@ -155,13 +154,13 @@
         
         [weakSelf createTableView];
         [weakSelf.tableView reloadData];
-        
+    
+        // 更新缓存
+        [[ODUserInformation sharedODUserInformation] updateUserCache:user];
         if ([weakSelf.delegate respondsToSelector:@selector(infoVc:DidChangedUserImage:)])
         {
             [weakSelf.delegate infoVc:weakSelf DidChangedUserImage:user];
         }
-        // 更新缓存
-        [[ODUserInformation sharedODUserInformation] updateUserCache:user];
         
     } failure:^(NSError *error) {
         
