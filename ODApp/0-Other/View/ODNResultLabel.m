@@ -6,7 +6,7 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODNoResultLabel.h"
+#import "ODNResultLabel.h"
 
 @implementation ODNoResultLabel
 

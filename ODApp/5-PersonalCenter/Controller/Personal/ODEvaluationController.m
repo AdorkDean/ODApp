@@ -16,7 +16,7 @@
 #import "ODOthersInformationController.h"
 #import "ODEvaluationCell.h"
 #import "ODSecondEvaluationModel.h"
-#import "ODNoResultLabel.h"
+#import "ODNResultLabel.h"
 
 #import "ODEvaluationView.h"
 
