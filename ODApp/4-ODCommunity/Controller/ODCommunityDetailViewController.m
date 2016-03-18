@@ -311,7 +311,6 @@
         otherInfo.open_id = [NSString stringWithFormat:@"%@",model.user[@"open_id"]];
         [self.navigationController pushViewController:otherInfo animated:YES];
     }
-    
 }
 
 -(void)replyButtonClick:(UIButton *)button

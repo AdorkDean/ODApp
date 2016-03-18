@@ -11,7 +11,7 @@
 
 @interface ODBazaarHelpCell : UITableViewCell
 
-/** Task */
+/** Task模型 */
 @property (nonatomic, strong) ODBazaarRequestHelpTasksModel *model;
 
 @end

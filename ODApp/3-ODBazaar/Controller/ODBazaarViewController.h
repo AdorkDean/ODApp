@@ -11,7 +11,8 @@
 #import "ODBazaarRequestHelpViewController.h"
 #import "ODBazaarReleaseSkillViewController.h"
 
-@interface ODBazaarViewController : ODBaseViewController <UIScrollViewDelegate>
-@property(nonatomic) NSInteger index;
+@interface ODBazaarViewController : ODBaseViewController
+
+@property( nonatomic, assign) NSInteger index;
 
 @end

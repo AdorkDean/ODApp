@@ -14,21 +14,22 @@
 
 @interface ODBazaarHelpCell()
 
-@property(weak, nonatomic) IBOutlet UIButton *avatarButton;
-@property(weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property(weak, nonatomic) IBOutlet UILabel *contentLabel;
-@property(weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property(weak, nonatomic) IBOutlet UILabel *timeLabel;
-@property(weak, nonatomic) IBOutlet UILabel *statusLabel;
+@property(nonatomic, weak) IBOutlet UIButton *avatarButton;
+@property(nonatomic, weak) IBOutlet UILabel *titleLabel;
+@property(nonatomic, weak) IBOutlet UILabel *nameLabel;
+@property(nonatomic, weak) IBOutlet UILabel *timeLabel;
+@property(nonatomic, weak) IBOutlet UILabel *statusLabel;
+/** 正文 */
+@property(nonatomic, weak) UILabel *contentLabel;
+
 @end
 
 @implementation ODBazaarHelpCell
-
+#pragma mark - 懒加载
 - (UILabel *)contentLabel
 {
     if (!_contentLabel)
     {
-        
         UILabel *contentLabel = [[UILabel alloc] init];
         [self.contentView addSubview:contentLabel];
         _contentLabel = contentLabel;
@@ -83,12 +84,6 @@
     [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10] range:NSMakeRange(0, 5)];
     self.timeLabel.attributedText = noteStr;
     self.statusLabel.text = @"任务开始";
-    
-//    NSString *content = model.content;
-//    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:11]};
-//    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-83, 30) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
-//    self.contentLabelConstraint.constant = size.height;
-
 }
 
 /**
@@ -96,9 +91,6 @@
  */
 - (void)setFrame:(CGRect)frame
 {
-    // 判断是否是最后一个cell
-    //    if (!self.dataArray.lastObject)
-    
     frame.size.height -= ODBazaaeExchangeCellMargin;
     [super setFrame:frame];
 }

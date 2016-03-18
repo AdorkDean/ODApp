@@ -11,7 +11,6 @@
 @interface ODMyTaskController : ODBaseViewController
 
 @property(nonatomic, copy) NSString *open_id;
-
 @property(nonatomic, copy) NSString *isFirstRefresh;
 @property(nonatomic, copy) NSString *isSecondRefresh;
 

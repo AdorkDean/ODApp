@@ -75,7 +75,7 @@
         // 设置圆角
         [weakSelf.avatarButton setBackgroundImage:[image OD_circleImage] forState:UIControlStateNormal];
     }];
-//    // 监听点击
+    // 监听点击
     [self.avatarButton addTarget:self action:@selector(clickavatarButton) forControlEvents:UIControlEventTouchUpInside];
     
     self.titleLabel.text = model.title;
@@ -108,7 +108,7 @@
 {
     frame.size.height -= ODBazaaeExchangeCellMargin;
     [super setFrame:frame];
-}
+}   
 
 #pragma mark - 事件方法
 /**
@@ -128,7 +128,5 @@
         [navigationController pushViewController:vc animated:YES];
     }
 }
-
-
 
 @end

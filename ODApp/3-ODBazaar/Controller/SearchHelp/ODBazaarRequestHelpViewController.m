@@ -154,11 +154,7 @@ static NSString * const helpCellId = @"helpCell";
     tableView.delegate = self;
     [self.view addSubview:tableView];
     self.tableView = tableView;
-    
-    // 设置估算高度值
-//    tableView.rowHeight = UITableViewAutomaticDimension;
-//    tableView.estimatedRowHeight = 200;
-    
+    tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell
