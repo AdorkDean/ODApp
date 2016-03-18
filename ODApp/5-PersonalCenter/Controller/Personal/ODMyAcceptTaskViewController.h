@@ -10,4 +10,6 @@
 
 @interface ODMyAcceptTaskViewController : ODBaseViewController
 
+@property(nonatomic,copy)NSString *status;
+
 @end

@@ -8,7 +8,6 @@
 
 #import "ODBaseViewController.h"
 #import "ODTabBarController.h"
-#import "ODClassMethod.h"
 #import "ODHelp.h"
 #import "UIButton+WebCache.h"
 #import "ODBazaarDetailModel.h"
@@ -18,6 +17,7 @@
 #import "ODPersonalCenterViewController.h"
 #import "ODOthersInformationController.h"
 #import "ODPublicTool.h"
+#import "ODBazaarModel.h"
 
 @interface ODBazaarDetailViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextViewDelegate,UMSocialUIDelegate>
 
@@ -39,7 +39,7 @@
 @property(nonatomic, copy) NSString *open_id;
 @property(nonatomic, copy) NSString *task_id;
 @property(nonatomic) NSInteger num;
-@property(nonatomic, copy) void(^myBlock)(NSString *del);
+@property(nonatomic, copy) void(^myBlock)(NSString *type);
 @property(nonatomic, strong) UIView *evaluationView;
 @property(nonatomic, strong) UITextView *evaluationTextView;
 @property(nonatomic, strong) UILabel *placeholderLabel;
