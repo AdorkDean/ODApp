@@ -9,7 +9,7 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODLocationController.h"
 
-NSString *const ODLocationCellID = @"ODLocationCell";
+static NSString *const ODLocationCellID = @"ODLocationCell";
 
 @interface ODLocationController () <MAMapViewDelegate, AMapSearchDelegate,  UITableViewDataSource, UITableViewDelegate> {
     AMapSearchAPI *_search;

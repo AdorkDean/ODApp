@@ -1,9 +1,9 @@
 //
-//  ODCenterDetailController.h
+//  ODCenterDetailsController.h
 //  ODApp
 //
-//  Created by zhz on 15/12/24.
-//  Copyright © 2015年 Odong-YG. All rights reserved.
+//  Created by Bracelet on 16/3/17.
+//  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
 #import "ODBaseViewController.h"
