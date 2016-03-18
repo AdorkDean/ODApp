@@ -8,6 +8,13 @@
 
 #import "ODNavigationBarView.h"
 
+@interface ODNavigationBarView ()
+
+/** 标题label */
+@property (nonatomic,strong) UILabel *titleLabel;
+
+@end
+
 @implementation ODNavigationBarView
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -24,17 +31,25 @@
     return [[self alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, ODNavigationHeight)];
 }
 
+- (UILabel *)titleLabel
+{
+    if (!_titleLabel)
+    {
+        UILabel *label = [[UILabel alloc]init];
+        label.font = [UIFont systemFontOfSize:17];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.textColor = [UIColor blackColor];
+        label.backgroundColor = [UIColor clearColor];
+        [self addSubview:label];
+        _titleLabel = label;
+    }
+    return _titleLabel;
+}
 - (void)setTitle:(NSString *)title
 {
-    UILabel *label = [[UILabel alloc]init];
-    label.text = title;
-    label.font = [UIFont systemFontOfSize:17];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor blackColor];
-    label.backgroundColor = [UIColor clearColor];
-    [label sizeToFit];
-    label.frame = CGRectMake((kScreenSize.width - label.od_width) / 2, [self getYFromBtn:label], label.od_width, label.od_height);
-    [self addSubview:label];
+    self.titleLabel.text = title;
+    [self.titleLabel sizeToFit];
+    self.titleLabel.frame = CGRectMake((kScreenSize.width - self.titleLabel.od_width) / 2, [self getYFromBtn:self.titleLabel], self.titleLabel.od_width, self.titleLabel.od_height);
 }
 
 - (void)setLeftBarButton:(ODBarButton *)leftBarButton

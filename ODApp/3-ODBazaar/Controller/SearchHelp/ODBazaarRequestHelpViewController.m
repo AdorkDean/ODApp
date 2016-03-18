@@ -70,7 +70,6 @@ static NSString * const helpCellId = @"helpCell";
 }
 
 #pragma mark - 初始化方法
-
 /**
  *  接收通知
  */
@@ -105,7 +104,8 @@ static NSString * const helpCellId = @"helpCell";
 /**
  *  创建搜索栏
  */
-- (void)createScreeningAndSearchButton {
+- (void)createScreeningAndSearchButton
+{
     //任务筛选
     self.screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 10, 112, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"任务筛选" font:15];
     [self.screeningButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
@@ -154,6 +154,10 @@ static NSString * const helpCellId = @"helpCell";
     tableView.delegate = self;
     [self.view addSubview:tableView];
     self.tableView = tableView;
+    // 估算tableView高度
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 300;
+    
     tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -206,12 +210,6 @@ static NSString * const helpCellId = @"helpCell";
     [self.navigationController pushViewController:bazaarDetail animated:YES];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    ODBazaarRequestHelpTasksModel *model = self.dataArray[indexPath.row];
-    return model.cellHeight;
-}
-
 #pragma mark - UIPopDelegate
 - (UIModalPresentationStyle)adaptivePresentationStyleForPresentationController:(UIPresentationController *)controller {
     return UIModalPresentationNone;
@@ -225,7 +223,7 @@ static NSString * const helpCellId = @"helpCell";
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"task_status"] = self.status;
-    params[@"page"] = [NSString stringWithFormat:@"%ld", self.count];
+    params[@"page"] = @"1";
     params[@"city_id"] = [ODUserInformation sharedODUserInformation].cityID;
     self.params = params;
     __weakSelf

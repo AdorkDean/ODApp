@@ -22,6 +22,7 @@
 
 @implementation ODNewFeatureCell
 
+#pragma mark - 懒加载
 /** 懒加载 */
 - (UIImageView *)imageView
 {
@@ -40,24 +41,13 @@
     if (!_startButton)
     {
         UIButton *startButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [startButton setBackgroundImage:[UIImage imageNamed:@"立即体验icon"] forState:UIControlStateNormal];
-        startButton.od_width = 140;
-        startButton.od_height = 50;
         [self.contentView addSubview:startButton];
         _startButton = startButton;
-        
-        [startButton addTarget:self action:@selector(start) forControlEvents:UIControlEventTouchUpInside];
     }
     return _startButton;
 }
 
-- (void)start
-{
-    [UIView animateWithDuration:0.25 animations:^{
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[ODTabBarController alloc] init];
-    }];
-}
-
+#pragma mark - 设置数据
 - (void)setImage:(UIImage *)image
 {
     _image = image;
@@ -73,8 +63,11 @@
     [super layoutSubviews];
     
     self.imageView.frame = [UIScreen mainScreen].bounds;
-    
-    self.startButton.center = CGPointMake([UIScreen mainScreen].bounds.size.width * 0.5, [UIScreen mainScreen].bounds.size.height * 0.87);
+
+    // 设置开始按钮frame
+    self.startButton.od_width = 140;
+    self.startButton.od_height = 50;
+    self.startButton.center = CGPointMake(KScreenWidth * 0.5, KScreenHeight * 0.8);
 }
 
 - (void)setIndex:(NSIndexPath *)indexPath imageCount:(NSInteger)count
@@ -82,11 +75,28 @@
     if (indexPath.item == (count - 1))
     {
         self.startButton.hidden = NO;
+        [self.startButton setTitle:@"立即体验" forState:UIControlStateNormal];
+        self.startButton.titleLabel.font = [UIFont systemFontOfSize:17];
+        [self.startButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        self.startButton.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+        self.startButton.layer.masksToBounds = YES;
+        self.startButton.layer.cornerRadius = 25;
+        self.startButton.layer.borderColor = [UIColor blackColor].CGColor;
+        self.startButton.layer.borderWidth = 1;
+        [self.startButton addTarget:self action:@selector(start) forControlEvents:UIControlEventTouchUpInside];
     }
     else
     {
         self.startButton.hidden = YES;
     }
+}
+
+#pragma mark - 事件方法
+- (void)start
+{
+    [UIView animateWithDuration:0.25 animations:^{
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[ODTabBarController alloc] init];
+    }];
 }
 
 @end

@@ -47,7 +47,7 @@
     [self createCollectionView];
     __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
-                                         self.count = 1;
+                                         weakSelf.count = 1;
                                          [weakSelf createRequest];
                                      }];
     self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^ {
@@ -98,8 +98,8 @@
         }
         [weakSelf.collectionView reloadData];
         
-        if (self.count == 1 && self.orderArray.count == 0) {
-            self.noReusltLabel.hidden = NO;
+        if (weakSelf.count == 1 && weakSelf.orderArray.count == 0) {
+            weakSelf.noReusltLabel.hidden = NO;
         }
     }
     failure:^(NSError *error) {

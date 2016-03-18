@@ -37,10 +37,6 @@
         NSString *mobile = [user objectForKey:KUserDefaultsMobile];
         [ODUserInformation sharedODUserInformation].avatar = mobile ? mobile : @"";
         
-        [ODAppRegister registIQKeyboardManager];
-        
-        [ODAppRegister registUMSocial];
-        
         return [[ODTabBarController alloc] init];
     }
     else

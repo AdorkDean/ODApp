@@ -1,35 +1,45 @@
 //
-//  ODCenterDetailController.m
+//  ODCenterDetailsController.m
 //  ODApp
 //
-//  Created by zhz on 15/12/24.
-//  Copyright © 2015年 Odong-YG. All rights reserved.
+//  Created by Bracelet on 16/3/17.
+//  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCenterDetailController.h"
-#import "ODCenderDetailView.h"
+
 #import "UIImageView+WebCache.h"
+
+#import "ODPersonalCenterViewController.h"
 #import "ODChoseCenterController.h"
 #import "ODPrecontractViewController.h"
-#import "MJRefresh.h"
+#import "ODPublicWebViewController.h"
+#import "ODTabBarController.h"
+
 #import "ODStoreDetailModel.h"
 
-#import "ODTabBarController.h"
-#import "ODUserInformation.h"
-#import "ODPersonalCenterViewController.h"
-#import "ODPublicWebViewController.h"
+#import "ODCenterDetailView.h"
 
-int pageNumnber = 0;
+@interface ODCenterDetailController () <UIScrollViewDelegate>
 
-@interface ODCenterDetailController () <UITableViewDataSource, UITableViewDelegate>
-
-@property(nonatomic, strong) UITableView *tableView;
-@property(nonatomic, strong) ODCenderDetailView *centerDetailView;
 @property(nonatomic, strong) ODStoreDetailModel *model;
+
+@property (nonatomic, strong) UIScrollView *scrollView;
+
+// 顶部图片scrollView
+@property (nonatomic, strong) UIScrollView *pictureScrollView;
+
 @property(nonatomic, strong) UIPageControl *pageControl;
-@property(nonatomic, strong) UILabel *centerNameLabe;
-@property(nonatomic, strong) NSTimer *myTimer;
+
+// 中心信息
+@property (nonatomic,strong) ODCenterDetailView *centerDetailView;
+
+// 场地预约按钮
+@property (nonatomic, strong) UIButton *centerOrderButton;
+
+// 中心描述
+@property (nonatomic, strong) UIView *centerStateView;
 
 @end
 
@@ -38,214 +48,174 @@ int pageNumnber = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"中心详情";
-    [self getData];
+    [self getRequestData];
 }
 
 #pragma mark - lifeCycle
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    pageNumnber = 0;
-    self.myTimer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:self.myTimer forMode:NSRunLoopCommonModes];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [self.myTimer invalidate];
-    self.myTimer = nil;
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-#pragma mark - 点击事件
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
+#pragma mark - LazyLoad
+
+#pragma mark - 底层ScrollView
+- (UIScrollView *)scrollView {
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight)];
+        _scrollView.backgroundColor = [UIColor backgroundColor];
+        [self.view addSubview:self.scrollView];
+    }
+    return _scrollView;
+}
+
+#pragma mark - 顶部图片ScrollView
+- (UIScrollView *)pictureScrollView {
+    if (!_pictureScrollView) {
+        float scrollViewHeight = KScreenWidth * 376/750;
+        _pictureScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, scrollViewHeight)];
+        _pictureScrollView.contentSize = CGSizeMake(KScreenWidth * self.model.pics.count, scrollViewHeight);
+        
+        _pictureScrollView.delegate = self;
+        _pictureScrollView.showsHorizontalScrollIndicator = NO;
+        _pictureScrollView.showsVerticalScrollIndicator = NO;
+        _pictureScrollView.pagingEnabled = YES;
+        
+        for (int i = 0; i < self.model.pics.count; i++) {
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * kScreenSize.width, 0, kScreenSize.width, scrollViewHeight)];
+            [imageView sd_setImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@", self.model.pics[i]]]];
+            [_pictureScrollView addSubview:imageView];
+        }
+        self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(self.view.center.x - 50, scrollViewHeight - 30, 100, 20)];
+        self.pageControl.backgroundColor = [UIColor clearColor];
+        self.pageControl.numberOfPages = self.model.pics.count;
+        self.pageControl.currentPage = 0;
+        self.pageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
+        self.pageControl.userInteractionEnabled = YES;
+        
+        [self.scrollView addSubview:_pictureScrollView];
+        [self.scrollView addSubview:self.pageControl];
+    }
+    return _pictureScrollView;
+}
+
+#pragma mark - 中心信息
+- (void)createCenterDetailView {
+    self.centerDetailView = [[ODCenterDetailView alloc] init];
+    self.centerDetailView = [ODCenterDetailView centerDetailView];
+    [self.centerDetailView setModel:self.model];
+    self.centerDetailView.frame = CGRectMake(5, CGRectGetMaxY(self.pictureScrollView.frame) + 5, KScreenWidth - 10, 170);
+    [self.centerDetailView.centerTelButton addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.centerDetailView.centerAddressButton addTarget:self action:@selector(addressAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.scrollView addSubview:self.self.centerDetailView];
+}
+
+#pragma mark - 场地预约
+- (UIButton *)centerOrderButton {
+    if (!_centerOrderButton) {
+        _centerOrderButton = [[UIButton alloc] initWithFrame:CGRectMake(5, CGRectGetMaxY(self.centerDetailView.frame) + 5, KScreenWidth - 10, 30)];
+        [_centerOrderButton setTitle:@"场地预约" forState:UIControlStateNormal];
+        [_centerOrderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _centerOrderButton.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+        _centerOrderButton.titleLabel.font = [UIFont systemFontOfSize:13.5];
+        _centerOrderButton.layer.cornerRadius = 5;
+        _centerOrderButton.layer.borderColor = [UIColor lineColor].CGColor;
+        _centerOrderButton.layer.borderWidth = 0.5f;
+        [_centerOrderButton addTarget:self action:@selector(appointmentAction:) forControlEvents:UIControlEventTouchUpInside];
+        [self.scrollView addSubview:_centerOrderButton];
+    }
+    return _centerOrderButton;
+}
+
+#pragma mark - 中心描述
+- (UIView *)centerStateView {
+    if (!_centerStateView) {
+        float centerStateViewHeight = [ODHelp textHeightFromTextString:self.model.desc width:KScreenWidth - ODLeftMargin * 2 fontSize:12.5] + 10;
+
+        _centerStateView = [[UIView alloc] initWithFrame:CGRectMake(5, CGRectGetMaxY(self.centerOrderButton.frame) + 5, KScreenWidth - 10, centerStateViewHeight)];
+        _centerStateView.backgroundColor = [UIColor whiteColor];
+        _centerStateView.layer.cornerRadius = 5;
+        _centerStateView.layer.borderColor = [UIColor lineColor].CGColor;
+        _centerStateView.layer.borderWidth = 0.5f;
+        UILabel *centerStateLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin - 5, 0, KScreenWidth - ODLeftMargin * 2, centerStateViewHeight)];
+        centerStateLabel.numberOfLines = 0;
+        centerStateLabel.text = self.model.desc;
+        centerStateLabel.textColor = [UIColor blackColor];
+        centerStateLabel.font = [UIFont systemFontOfSize:12.5];
+        [_centerStateView addSubview:centerStateLabel];
+        [self.scrollView addSubview:_centerStateView];
+        self.scrollView.contentSize = CGSizeMake(KScreenWidth, CGRectGetMaxY(_centerStateView.frame) + 5);
+    }
+    return _centerStateView;
+}
+
+#pragma mark - 请求数据
+- (void)getRequestData {
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlOtherStoreDetail parameters:@{@"store_id" : self.storeId} modelClass:[ODStoreDetailModel class] success:^(id model)
+    {
+        weakSelf.model = [model result];
+        [weakSelf createCenterDetailView];
+        [weakSelf centerOrderButton];
+        [weakSelf centerStateView];
+    }
+    failure:^(NSError *error) {
+         
+    }];
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+    // 拿到偏移量
+    CGPoint offset = self.pictureScrollView.contentOffset;
+    
+    // 算出偏移了几个fram.width
+    NSInteger currentIndex = offset.x / self.pictureScrollView.frame.size.width;
+    
+    // 根据currentIndex 修改pageControl显示的点的位置
+    self.pageControl.currentPage = currentIndex;
+}
+
+#pragma mark - Action
+
+#pragma mark - 场地预约
 - (void)appointmentAction:(UIButton *)sender {
-
+    
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
-
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
-
-
-    } else {
+    }
+    else {
         ODPrecontractViewController *vc = [[ODPrecontractViewController alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
         vc.storeId = self.storeId;
     }
 }
 
-- (void)phoneAction:(UITapGestureRecognizer *)sender
-{
-    [self.view callToNum:self.centerDetailView.phoneLabel.text];
+#pragma mark - 打电话
+- (void)phoneAction:(UITapGestureRecognizer *)sender {
+    [self.view callToNum:self.centerDetailView.centerTelLabel.text];
 }
 
-
-- (void)addressAction:(UITapGestureRecognizer *)sender
-{
+#pragma mark - 中心地址
+- (void)addressAction:(UITapGestureRecognizer *)sender {
     ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
     NSString *webUrl = [NSString stringWithFormat:@"%@?lng=%@&lat=%@",ODWebUrlMapSearch, self.model.lng, self.model.lat];
     vc.webUrl = webUrl;
     vc.navigationTitle = self.model.name;
     vc.isShowProgress = YES;
     [self.navigationController pushViewController:vc animated:YES];
-}
-
-
-#pragma mark - 定时器
-
-- (void)timerFired {
-    pageNumnber++;
-    if (pageNumnber == self.model.pics.count) {
-        [self.centerDetailView.scrollerView setContentOffset:CGPointMake(0, 0) animated:YES];
-
-        pageNumnber = 0;
-    } else {
-
-        [self.centerDetailView.scrollerView setContentOffset:CGPointMake(pageNumnber * kScreenSize.width, 0) animated:YES];
-
-    }
-
-
-    self.pageControl.currentPage = pageNumnber;
-
-
-}
-
-#pragma mark - 请求数据
-
-- (void)getData
-{
-    __weakSelf
-    [ODHttpTool getWithURL:ODUrlOtherStoreDetail parameters:@{@"store_id" : self.storeId} modelClass:[ODStoreDetailModel class] success:^(id model)
-    {
-        weakSelf.model = [model result];
-        [weakSelf.tableView reloadData];
-    }
-                   failure:^(NSError *error)
-     {
-        
-    }];
-}
-
-
-#pragma mark - 懒加载
-
-- (UITableView *)tableView
-{
-    if (!_tableView)
-    {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 60) style:UITableViewStylePlain];
-        _tableView.dataSource = self;
-        _tableView.delegate = self;
-        _tableView.tableHeaderView = self.centerDetailView;
-        _tableView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-        _tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-        [self.view addSubview:_tableView];
-    }
-    return _tableView;
-}
-
-- (ODCenderDetailView *)centerDetailView {
-    if (_centerDetailView == nil) {
-
-
-        CGRect rect = [self.model.desc boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - 20, 0)
-                                                    options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading
-                                                 attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11]}
-                                                    context:nil];
-
-        self.centerDetailView = [ODCenderDetailView getView];
-
-        self.centerDetailView.frame = CGRectMake(0, 0, kScreenSize.width, 250 + 95 + self.centerDetailView.scrollerHeight.constant + rect.size.height);
-
-   
-
-
-        self.centerDetailView.detailTextView.text = self.model.desc;
-        self.centerDetailView.centerNameLabel.text = self.model.name;
-        self.centerDetailView.phoneLabel.text = self.model.tel;
-        self.centerDetailView.addressTextView.text = self.model.address;
-        self.centerDetailView.addressTextView.scrollEnabled = NO;
-        self.centerDetailView.timeTextView.text = self.model.business_hours;
-
-
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneAction:)];
-        [self.centerDetailView.phoneLabel addGestureRecognizer:tap];
-
-        [self.centerDetailView.appointmentButton addTarget:self action:@selector(appointmentAction:) forControlEvents:UIControlEventTouchUpInside];
-
-
-        UITapGestureRecognizer *addressTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addressAction:)];
-        [self.centerDetailView.addressImageView addGestureRecognizer:addressTap];
-
-
-
-
-        // 设置scrollerView的内容视图大小
-        self.centerDetailView.scrollerView.contentSize = CGSizeMake(self.model.pics.count * kScreenSize.width, self.centerDetailView.scrollerHeight.constant);
-        // 设置整页滑动
-        self.centerDetailView.scrollerView.pagingEnabled = YES;
-        // 隐藏滚动条
-        self.centerDetailView.scrollerView.showsHorizontalScrollIndicator = NO;
-        self.centerDetailView.scrollerView.delegate = self;
-
-        // 创建图片
-        for (int i = 0; i < self.model.pics.count; i++) {
-
-            // 创建imageView;
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * kScreenSize.width, 0, kScreenSize.width, self.centerDetailView.scrollerHeight.constant)];
-            NSString *url = self.model.pics[i];
-            [imageView sd_setImageWithURL:[NSURL OD_URLWithString:url]];
-            // imageView添加到scroller上
-            [self.centerDetailView.scrollerView addSubview:imageView];
-
-        }
-
-        // 创建pageControl
-        self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(self.view.center.x - 50, self.centerDetailView.scrollerHeight.constant - 30, 100, 20)];
-        self.pageControl.backgroundColor = [UIColor clearColor];
-        // 给pageControl设置点的个数
-        self.pageControl.numberOfPages = self.model.pics.count;
-        // 设置默认选中的点
-        self.pageControl.currentPage = 0;
-        // 当前选中点的颜色
-        self.pageControl.currentPageIndicatorTintColor = [UIColor redColor];
-        // 未被选中点的颜色
-        self.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
-        self.pageControl.userInteractionEnabled = YES;
-        [self.centerDetailView addSubview:self.pageControl];
-
-    }
-    return _centerDetailView;
-}
-
-#pragma mark - UITableViewDelegate
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellID = @"cellId";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellID];
-    }
-
-
-    return cell;
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

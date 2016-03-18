@@ -13,7 +13,7 @@
 #import "ODHomeFoundViewController.h"
 #import "ODlandingView.h"
 #import "ODRegisteredController.h"
-#import "ODLandMainController.h"
+//#import "ODLandMainController.h"
 #import "ODTabBarController.h"
 #import "ODChangePassWordController.h"
 #import "ODUserModel.h"
@@ -133,6 +133,8 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    // 解决键盘退出慢的问题
+    [[UIApplication sharedApplication].keyWindow endEditing:YES];
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
@@ -140,12 +142,6 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-#pragma mark - 内存管理
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 @end
