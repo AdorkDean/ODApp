@@ -26,10 +26,7 @@
  **/
 + (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat)textWidth miniHeight:(CGFloat)miniHeight fontSize:(CGFloat)size;
 
-/**
- * 暂无数据
- **/
-+ (void)createNoResultView:(NSString *)title addSubview:(id)viewName;
+
 
 
 @end

@@ -72,14 +72,7 @@
     }
 }
 
-+ (void)createNoResultView:(NSString *)title addSubview:(id)viewName{
-    UILabel *noResultLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
-    noResultLabel.text = title;
-    noResultLabel.textColor = [UIColor blackColor];
-    noResultLabel.font = [UIFont systemFontOfSize:16];
-    noResultLabel.textAlignment = NSTextAlignmentCenter;
-    [viewName addSubview:noResultLabel];
-}
+
 
 
 
