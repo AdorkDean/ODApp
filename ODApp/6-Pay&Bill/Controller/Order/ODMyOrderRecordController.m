@@ -10,13 +10,16 @@
 #import "ODMyOrderRecordController.h"
 #import "ODUserInformation.h"
 
+#import "ODMyOrderRecordView.h"
+
 #define kMyOrderRecordCellId @"ODMyOrderRecordCell"
 
-@interface ODMyOrderRecordController ()
+NSString *const ODMyOrderRecordViewID = @"ODMyOrderRecordViewID";
 
-@property(nonatomic, strong) ODMyOrderRecordCell *orderRecordCell;
+@interface ODMyOrderRecordController () <UITableViewDataSource, UITableViewDelegate>
 
-@property(nonatomic, strong) UICollectionView *collectionView;
+@property(nonatomic, strong) ODMyOrderRecordView *orderRecordCell;
+
 
 // 列表数组
 @property(nonatomic, strong) NSMutableArray *orderArray;
@@ -29,6 +32,9 @@
 
 // 记录点击了哪一行
 @property (nonatomic, assign) long cancelOrderRow;
+
+
+@property (nonatomic, strong) UITableView *tableView;
 
 
 @end
@@ -44,14 +50,15 @@
     self.count = 1;
     self.orderArray = [[NSMutableArray alloc] init];    
 
-    [self createCollectionView];
+    [self createRequest];
     __weakSelf
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
-                                         weakSelf.count = 1;
-                                         [weakSelf createRequest];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
+        weakSelf.count = 1;
+        [weakSelf createRequest];
                                      }];
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^ {
-                                         [weakSelf loadMoreData];
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^ {
+        weakSelf.count ++;
+         [weakSelf createRequest];
                                      }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationCancelOrder object:nil];
@@ -61,7 +68,7 @@
     [super viewWillAppear:animated];
     
     if (self.isRefresh) {
-        [self.collectionView.mj_header beginRefreshing];
+        [self.tableView.mj_header beginRefreshing];
         self.isRefresh = NO;
     }
     [MobClick beginLogPageView:NSStringFromClass([self class])];
@@ -72,10 +79,7 @@
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)loadMoreData {
-    self.count ++;
-    [self createRequest];
-}
+
 
 #pragma mark - 加载数据请求
 - (void)createRequest {
@@ -89,22 +93,22 @@
                 [weakSelf.orderArray addObject:orderModel];
             }
         }
-        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
         if ([[model result] count] == 0) {
-            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
         }
         else {
-            [weakSelf.collectionView.mj_footer endRefreshing];
+            [weakSelf.tableView.mj_footer endRefreshing];
         }
-        [weakSelf.collectionView reloadData];
+        [weakSelf.tableView reloadData];
         
         if (weakSelf.count == 1 && weakSelf.orderArray.count == 0) {
             weakSelf.noReusltLabel.hidden = NO;
         }
     }
     failure:^(NSError *error) {
-        [weakSelf.collectionView.mj_footer endRefreshing];
-        [weakSelf.collectionView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
     }];  
 }
 
@@ -121,64 +125,46 @@
     return _noReusltLabel;
 }
 
-
-
-#pragma mark - Crate UICollectionView
-- (void)createCollectionView {
-    UICollectionViewFlowLayout *flowLayout = [[ UICollectionViewFlowLayout alloc] init];
-    flowLayout.sectionInset = UIEdgeInsetsMake(4, 4, 0, 4);
-    flowLayout.minimumLineSpacing = 5;
-    
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight)collectionViewLayout:flowLayout];
-    self.collectionView.delegate = self;
-    self.collectionView.dataSource = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ODMyOrderRecordCell" bundle:nil] forCellWithReuseIdentifier:kMyOrderRecordCellId];
-
-    [self.view addSubview:self.collectionView];    
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(4, ODTopY  , kScreenSize.width - 8, KControllerHeight - ODNavigationHeight) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor backgroundColor];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.tableFooterView = [UIView new];
+        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODMyOrderRecordView class]) bundle:nil] forCellReuseIdentifier:ODMyOrderRecordViewID];
+        [self.view addSubview:_tableView];
+    }
+    return _tableView;
 }
 
-#pragma mark - UICollectionViewDataSource
+#pragma mark - UITableViewDataSource
 
--(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return  self.orderArray.count;
 }
 
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.orderArray.count;
-}
-
--(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODMyOrderRecordCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMyOrderRecordCellId forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ODMyOrderRecordView *cell = [tableView dequeueReusableCellWithIdentifier:ODMyOrderRecordViewID];
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
     [cell showDatawithModel:model];
-    
-    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    cell.layer.masksToBounds = YES;
-    cell.layer.cornerRadius = 5;
-    cell.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
-    cell.layer.borderWidth = 0.5;
-    
     return cell;
 }
 
-#pragma mark - UICollectionViewDelegate
-
--(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    float height;
-    ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
-    height = [ODHelp textHeightFromTextString:model.purpose width:KScreenWidth - 126 fontSize:13] - 13;
-    height = height + [ODHelp textHeightFromTextString:model.position_str width:KScreenWidth - 126 fontSize:13] - 13;
-    
-    return CGSizeMake(KScreenWidth - 8, 130 + height);
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 200;
 }
 
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ODMyOrderDetailController *vc = [[ODMyOrderDetailController alloc] init];
     ODMyOrderRecordModel *model = self.orderArray[indexPath.row];
     self.cancelOrderRow = indexPath.row;
     vc.isOther = self.isOther;
-    vc.open_id = self.open_id;    
+    vc.open_id = self.open_id;
     vc.order_id = [NSString stringWithFormat:@"%@",model.order_id];
     
     [self.navigationController pushViewController:vc animated:YES];
@@ -192,7 +178,7 @@
         ODMyOrderRecordModel *model = self.orderArray[self.cancelOrderRow];
         model.status_str = [NSString stringWithFormat:@"%@", text.userInfo[@"status_str"]];
         [self.orderArray replaceObjectAtIndex:self.cancelOrderRow withObject:model];
-        [self.collectionView reloadData];
+        [self.tableView reloadData];
     }
     @catch (NSException *exception) {
         

@@ -36,10 +36,9 @@
 {
     [super viewWillAppear:animated];
     self.tableView.contentOffset = CGPointZero;
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
     if (![ODUserInformation sharedODUserInformation].openID.length) return;
     self.headerView.user = [[ODUserInformation sharedODUserInformation] getUserCache];
-//    [self.tableView reloadData];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
@@ -120,8 +119,7 @@
     item4.oprtionBlock = ^(NSIndexPath *index){
         ODEvaluationController *vc = [[ODEvaluationController alloc] init];
         vc.typeTitle = @"我收到的评价";
-        NSString *openId = [ODUserInformation sharedODUserInformation].openID;
-        vc.openId = openId;
+        vc.openId = user.open_id;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
     

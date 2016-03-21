@@ -106,7 +106,7 @@ NSString * const ODWebUrlMapSearch = @"http://h5.odong.com/map/search";
 
 /** 统一的URL */
 #ifdef DEBUG
-NSString * const ODBaseURL = @"http://woquapi.odong.com/1.0";
+NSString * const ODBaseURL = @"http://woquapi.test.odong.com/1.0";
 #else
 NSString * const ODBaseURL = @"http://woquapi.odong.com/1.0";
 #endif

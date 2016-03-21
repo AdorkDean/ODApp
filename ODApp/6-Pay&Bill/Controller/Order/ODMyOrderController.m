@@ -15,7 +15,7 @@
 #import "ODSecondOrderDetailController.h"
 
 
-#import "ODIndentDetailController.h"
+#import "ODBuyOrderDetailController.h"
 
 @interface ODMyOrderController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -152,7 +152,7 @@
     self.indexRow = indexPath.row;
     
     
-    ODIndentDetailController *vc = [[ODIndentDetailController alloc] init];
+    ODBuyOrderDetailController *vc = [[ODBuyOrderDetailController alloc] init];
 
     vc.order_id = [NSString stringWithFormat:@"%@", model.order_id];
     vc.orderType = model.status_str;

@@ -15,7 +15,7 @@
 
 #import "MJRefresh.h"
 
-@interface ODMyOrderRecordController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface ODMyOrderRecordController : ODBaseViewController
 
 @property(nonatomic, copy) NSString *open_id;
 
