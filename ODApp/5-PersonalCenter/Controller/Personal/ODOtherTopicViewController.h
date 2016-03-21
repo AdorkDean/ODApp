@@ -23,6 +23,5 @@
 @property(nonatomic, copy) NSString *refresh;
 @property(nonatomic, copy) NSString *open_id;
 
-@property(nonatomic, strong) UILabel *noReusltLabel;
 
 @end

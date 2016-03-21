@@ -15,4 +15,10 @@
 @property(nonatomic, copy) NSString *addressId;
 
 
+/**
+ * 外卖
+ */
+@property (nonatomic, assign) BOOL isTakeOut;
+
+
 @end

@@ -94,6 +94,8 @@ NSString * const ODNotificationSellOrderSecondRefresh = @"ODNotificationSellOrde
 /** 已购买三级页面通知 */
 NSString * const ODNotificationSellOrderThirdRefresh = @"ODNotificationSellOrderThirdRefresh";
 
+/** 刷新任务发布及回复*/
+NSString * const ODNotificationRefreshTask =  @"ODNotificationRefreshTask";
 
 #pragma mark - 请求URL接口
 /** 网页接口 */

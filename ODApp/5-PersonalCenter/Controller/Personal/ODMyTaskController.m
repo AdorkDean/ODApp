@@ -24,8 +24,8 @@
 #pragma mark - lazyload
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
-        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 43, kScreenSize.width, kScreenSize.height -64 -43)];
-        _scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height -64 -43);
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 50, kScreenSize.width, kScreenSize.height -64 -50)];
+        _scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height -64 -50);
         _scrollView.userInteractionEnabled = YES;
         _scrollView.alwaysBounceVertical = YES;
         _scrollView.bounces = NO;
@@ -68,21 +68,40 @@
 
 
 - (void)creatSegmentControll {
-    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发布的", @"我接受的"]];
-    self.segmentedControl.frame = CGRectMake(10, 7.5, kScreenSize.width - 20, 28);
+//    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发布的", @"我接受的"]];
+//    self.segmentedControl.frame = CGRectMake(10, 7.5, kScreenSize.width - 20, 28);
+//    self.segmentedControl.clipsToBounds = YES;
+//    self.segmentedControl.layer.cornerRadius = 7;
+//    self.segmentedControl.layer.borderWidth = 1;
+//    self.segmentedControl.layer.borderColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1].CGColor;
+//    self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+//    self.segmentedControl.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+//    self.segmentedControl.selectedSegmentIndex = 0;
+//
+//    NSDictionary *selectedTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:15],
+//            NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#484848" alpha:1]};
+//    [self.segmentedControl setTitleTextAttributes:selectedTextAttributes forState:UIControlStateSelected];
+//    NSDictionary *unselectedTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:15],
+//            NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#b0b0b0" alpha:1]};
+//    [self.segmentedControl setTitleTextAttributes:unselectedTextAttributes forState:UIControlStateNormal];
+    
+    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发表的", @"我回复的"]];
+    self.segmentedControl.frame = CGRectMake(4, 10, kScreenSize.width - 8, 30);
     self.segmentedControl.clipsToBounds = YES;
     self.segmentedControl.layer.cornerRadius = 7;
     self.segmentedControl.layer.borderWidth = 1;
-    self.segmentedControl.layer.borderColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1].CGColor;
-    self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
-    self.segmentedControl.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.segmentedControl.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
+    self.segmentedControl.backgroundColor = [UIColor whiteColor];
+    self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
+    
     self.segmentedControl.selectedSegmentIndex = 0;
-
-    NSDictionary *selectedTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:15],
-            NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#484848" alpha:1]};
+    
+    NSDictionary *selectedTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:15],
+                                             NSForegroundColorAttributeName: [UIColor blackColor]};
     [self.segmentedControl setTitleTextAttributes:selectedTextAttributes forState:UIControlStateSelected];
-    NSDictionary *unselectedTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:15],
-            NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#b0b0b0" alpha:1]};
+    
+    NSDictionary *unselectedTextAttributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:15],
+                                               NSForegroundColorAttributeName: [UIColor lightGrayColor]};
     [self.segmentedControl setTitleTextAttributes:unselectedTextAttributes forState:UIControlStateNormal];
 
     [self.segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
@@ -91,9 +110,9 @@
 
 -(void)setupChilidVc{
     ODMyReleaseTaskViewController *releaseTask = [[ODMyReleaseTaskViewController alloc]init];
-    releaseTask.view.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-43);
+    releaseTask.view.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50);
     ODMyAcceptTaskViewController *acceptTask = [[ODMyAcceptTaskViewController alloc]init];
-    acceptTask.view.frame = CGRectMake(kScreenSize.width, 0, kScreenSize.width, kScreenSize.height-64-43);
+    acceptTask.view.frame = CGRectMake(kScreenSize.width, 0, kScreenSize.width, kScreenSize.height-64-50);
     
     
     [self.scrollView addSubview:releaseTask.view];
@@ -156,8 +175,6 @@
 }
 
 -(void)taskClassButtonClick:(UIButton *)button{
-    
-    NSLog(@"dfsdfsdf");
     if ([button.titleLabel.text isEqualToString:@"全部任务"]) {
         self.type = @"0";
     }else if ([button.titleLabel.text isEqualToString:@"等待派遣"]){
@@ -171,14 +188,9 @@
     }else if ([button.titleLabel.text isEqualToString:@"违规任务"]){
         self.type = @"-1";
     }
-//    if (self.myBlock) {
-//        self.myBlock(self.type);
-//    }
     
-    if ([self.taskDelegate respondsToSelector:@selector(taskVc:didClickedPopMenu:)]) {
-        [self.taskDelegate taskVc:self didClickedPopMenu:self.type];
-    }
-    
+    NSDictionary *dict = @{@"type":self.type};
+    [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationRefreshTask object:nil userInfo:dict];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 

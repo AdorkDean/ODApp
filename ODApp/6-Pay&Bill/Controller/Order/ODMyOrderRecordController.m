@@ -24,9 +24,6 @@ NSString *const ODMyOrderRecordViewID = @"ODMyOrderRecordViewID";
 // 列表数组
 @property(nonatomic, strong) NSMutableArray *orderArray;
 
-// 无纪录
-@property(nonatomic, strong) UILabel *noReusltLabel;
-
 // 数据页数
 @property(nonatomic, assign) NSInteger count;
 
@@ -85,7 +82,6 @@ NSString *const ODMyOrderRecordViewID = @"ODMyOrderRecordViewID";
 - (void)createRequest {
     
     NSDictionary *parameter = @{@"open_id":[NSString stringWithFormat:@"%@",self.open_id],@"page":[NSString stringWithFormat:@"%ld",(long)self.count]};
-    self.noReusltLabel.hidden = YES;
     __weakSelf
     [ODHttpTool getWithURL:ODUrlStoreOrders parameters:parameter modelClass:[ODMyOrderRecordModel class] success:^(id model) {
         for (ODMyOrderRecordModel *orderModel in [model result]) {
@@ -93,7 +89,7 @@ NSString *const ODMyOrderRecordViewID = @"ODMyOrderRecordViewID";
                 [weakSelf.orderArray addObject:orderModel];
             }
         }
-        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];        
         if ([[model result] count] == 0) {
             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
         }
@@ -102,27 +98,19 @@ NSString *const ODMyOrderRecordViewID = @"ODMyOrderRecordViewID";
         }
         [weakSelf.tableView reloadData];
         
-        if (weakSelf.count == 1 && weakSelf.orderArray.count == 0) {
-            weakSelf.noReusltLabel.hidden = NO;
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        if (weakSelf.orderArray.count == 0) {
+            [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无预约"];
         }
+        else {
+            [noResultabel hidden];
+        }
+        
     }
     failure:^(NSError *error) {
         [weakSelf.tableView.mj_footer endRefreshing];
         [weakSelf.tableView.mj_header endRefreshing];
     }];  
-}
-
-- (UILabel *)noReusltLabel {
-
-    if (!_noReusltLabel) {
-        _noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
-        _noReusltLabel.text = @"暂无预约";
-        _noReusltLabel.font = [UIFont systemFontOfSize:16];
-        _noReusltLabel.textAlignment = NSTextAlignmentCenter;
-        _noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-        [self.view addSubview:_noReusltLabel];
-    }
-    return _noReusltLabel;
 }
 
 - (UITableView *)tableView {
