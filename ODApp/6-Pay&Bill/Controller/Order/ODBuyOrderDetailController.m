@@ -469,15 +469,15 @@
          }
          if ([weakSelf.orderStatus isEqualToString:@"1"] || [weakSelf.orderStatus isEqualToString:@"4"]) {
              if (self.isSellDetail) {
-                 self.scrollHeight = KScreenHeight - 64;
+                 self.scrollHeight = KControllerHeight - ODNavigationHeight;
              }
              else {
-                 self.scrollHeight = KScreenHeight - 64 - 50;
+                 self.scrollHeight = KControllerHeight - ODNavigationHeight - 50;
              }
              [weakSelf endIsTwoButton];
          }
          else if ([weakSelf.orderStatus isEqualToString:@"-2"] && self.isSellDetail){
-             self.scrollHeight = KScreenHeight - 64 - 50;
+             self.scrollHeight = KControllerHeight - ODNavigationHeight - 50;
              [weakSelf endIsOneButton];
          }
          else if ([weakSelf.orderStatus isEqualToString:@"2"] ||
@@ -485,11 +485,11 @@
                   [weakSelf.orderStatus isEqualToString:@"-3"] ||
                   [weakSelf.orderStatus isEqualToString:@"-4"] ||
                   [weakSelf.orderStatus isEqualToString:@"-5"]) {
-             self.scrollHeight = KScreenHeight - 64 - 50;
+             self.scrollHeight = KControllerHeight - ODNavigationHeight - 50;
              [weakSelf endIsOneButton];
          }
          else{
-             self.scrollHeight = KScreenHeight - 64;
+             self.scrollHeight = KControllerHeight - ODNavigationHeight;
          }
          [weakSelf scrollView];
      } failure:^(NSError *error) {

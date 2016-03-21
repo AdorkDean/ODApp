@@ -50,14 +50,6 @@ static NSString *const cellId = @"newActivityCell";
     return _resultLists;
 }
 
-- (UILabel *)noReusltLabel {
-    if (!_noReusltLabel) {
-        _noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80) / 2, kScreenSize.height / 2, 80, 30) text:@"暂无活动" font:16 alignment:@"center" color:@"#000000" alpha:1];
-        [self.view addSubview:_noReusltLabel];
-    }
-    return _noReusltLabel;
-}
-
 #pragma mark - lifeCycle
 
 - (void)viewDidLoad {
@@ -86,7 +78,6 @@ static NSString *const cellId = @"newActivityCell";
 
 - (void)requestData {
     NSDictionary *parameter = @{@"type" : @"0", @"page" : [NSString stringWithFormat:@"%i", self.pageCount]};
-    self.noReusltLabel.hidden = YES;
     __weakSelf
     [ODHttpTool getWithURL:ODUrlStoreApplyMy parameters:parameter modelClass:[ODActivityListModel class] success:^(id model)
     {
@@ -106,15 +97,15 @@ static NSString *const cellId = @"newActivityCell";
         {            
             [weakSelf.tableView.mj_footer endRefreshing];
         }        
-        if (weakSelf.pageCount && weakSelf.resultLists.count == 0)
-        {
-            weakSelf.noReusltLabel.hidden = NO;
+
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        if (weakSelf.resultLists.count == 0) {
+            [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无活动"];
         }
-        else
-        {
-            [weakSelf.tableView reloadData];
+        else {
+            [noResultabel hidden];
         }
-        
+        [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_header endRefreshing];
     }
                    failure:^(NSError *error)

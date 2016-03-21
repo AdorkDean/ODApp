@@ -45,7 +45,12 @@
 
 - (void)navigationInit {
     self.view.userInteractionEnabled = YES;
-    self.navigationItem.title = @"联系地址";
+    if (self.isTakeOut) {
+        self.navigationItem.title = @"送餐地址";
+    }
+    else {
+        self.navigationItem.title = @"联系地址";
+    }
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
 }
 

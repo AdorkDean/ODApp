@@ -80,7 +80,6 @@
     __weakSelf
     [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODCommunityBbsModel class] success:^(id model) {
         if (weakSelf.count == 1) {
-            [self.noReusltLabel removeFromSuperview];
             [weakSelf.dataArray removeAllObjects];
         }
         for (ODCommunityBbsListModel *bbsModel in [[model result] bbs_list]) {
@@ -93,11 +92,15 @@
         }
         
         [weakSelf.collectionView.mj_header endRefreshing];
-
-        if (weakSelf.dataArray.count == 0 && weakSelf.count == 1) {
-            weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [weakSelf.view addSubview:weakSelf.noReusltLabel];
+        
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        if (weakSelf.dataArray.count == 0) {
+            [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无话题"];
         }
+        else {
+            [noResultabel hidden];
+        }
+        
         if ([[model result] bbs_list].count == 0) {
             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
         }
@@ -259,12 +262,6 @@
     ODCommunityBbsUsersModel *model = self.dataArray[indexPath.row];
     detailController.bbs_id = [NSString stringWithFormat:@"%d",model.id];
     [self.navigationController pushViewController:detailController animated:YES];
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated {

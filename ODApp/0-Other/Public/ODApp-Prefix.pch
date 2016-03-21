@@ -29,6 +29,7 @@
 #import "UIImage+ODExtension.h"
 #import "UIBarButtonItem+ODExtention.h"
 
+#import "ODNoResultLabel.h"
 
 #import "MJExtension.h"
 /***  自定义Log函数 ***/

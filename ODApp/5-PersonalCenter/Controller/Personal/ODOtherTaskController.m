@@ -102,7 +102,6 @@
      {
          if ([countNumber isEqualToString:@"1"]) {
              [weakSelf.dataArray removeAllObjects];
-             [weakSelf.noReusltLabel removeFromSuperview];
          }
          
          ODBazaarTasksModel *tasksModel = [model result];
@@ -117,15 +116,15 @@
          {
              [weakSelf.collectionView.mj_footer endRefreshing];
          }
-         
+                  
+         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
          if (weakSelf.dataArray.count == 0) {
-             weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-             [weakSelf.view addSubview:weakSelf.noReusltLabel];
+             [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无任务"];
          }
-         
-         else{
-             [weakSelf.collectionView reloadData];
+         else {
+             [noResultabel hidden];
          }
+         [weakSelf.collectionView reloadData];
          
      } failure:^(NSError *error) {
          [weakSelf.collectionView.mj_header endRefreshing];

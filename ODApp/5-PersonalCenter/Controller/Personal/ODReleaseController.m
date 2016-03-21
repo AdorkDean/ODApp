@@ -32,9 +32,6 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
 // 记录点击了哪一行
 @property (nonatomic, assign) long loveRow;
 
-// 暂无记录
-@property(nonatomic, strong) UILabel *noReusltLabel;
-
 @end
 
 @implementation ODReleaseController
@@ -112,7 +109,6 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
     [ODHttpTool getWithURL:ODUrlSwapList parameters:parameter modelClass:[ODReleaseModel class] success:^(id model) {
          if (weakSelf.pageCount == 1) {
              [weakSelf.dataArray removeAllObjects];
-             [weakSelf.noReusltLabel removeFromSuperview];
          }
         for (ODReleaseModel *md in [model result]) {
             if (![[weakSelf.dataArray valueForKeyPath:@"swap_id"] containsObject:[md swap_id]]) {
@@ -128,14 +124,14 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
         }
         [weakSelf.tableView reloadData];
         
-        if (weakSelf.pageCount == 1 && weakSelf.dataArray.count == 0) {
-         weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
-         weakSelf.noReusltLabel.text = @"暂无技能";
-         weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
-         weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
-         weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-         [weakSelf.view addSubview:weakSelf.noReusltLabel];
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        if (weakSelf.dataArray.count == 0) {
+            [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无技能"];
         }
+        else {
+            [noResultabel hidden];
+        }
+        
     }
     failure:^(NSError *error) {
         [weakSelf.tableView.mj_footer endRefreshing];
@@ -234,11 +230,6 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
 #pragma mark - 移除通知
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
