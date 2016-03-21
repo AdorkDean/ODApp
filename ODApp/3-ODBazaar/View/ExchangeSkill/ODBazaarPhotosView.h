@@ -11,7 +11,7 @@
 
 @interface ODBazaarPhotosView : UIView
 
-/** 配图数组 */
+/** 配图模型 */
 @property (nonatomic, strong) ODBazaarExchangeSkillModel *skillModel;
 
 /**
