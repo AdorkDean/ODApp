@@ -95,8 +95,9 @@
 - (void)start
 {
     [UIView animateWithDuration:0.25 animations:^{
-        [UIApplication sharedApplication].keyWindow.rootViewController = [[ODTabBarController alloc] init];
+        self.imageView.hidden = 0;
     }];
+    [UIApplication sharedApplication].keyWindow.rootViewController = [[ODTabBarController alloc] init];
 }
 
 @end

@@ -70,7 +70,7 @@
     UIImage *placeholderImage = [UIImage OD_circleImageNamed:@"titlePlaceholderImage"];
     __weakSelf;
     // 头像
-    [self.avatarButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:model.user.avatar] forState:UIControlStateNormal placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.avatarButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user.avatar] forState:UIControlStateNormal placeholderImage:placeholderImage options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (image == nil) return;
         // 设置圆角
         [weakSelf.avatarButton setBackgroundImage:[image OD_circleImage] forState:UIControlStateNormal];

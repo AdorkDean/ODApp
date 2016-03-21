@@ -22,7 +22,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uxg-7u-Mce" userLabel="名称">
-                            <rect key="frame" x="85" y="22" width="31" height="14.5"/>
+                            <rect key="frame" x="85" y="22" width="432" height="14.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -37,14 +37,14 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rightjiantou" translatesAutoresizingMaskIntoConstraints="NO" id="enF-lm-Glw" userLabel="指示器">
-                            <rect key="frame" x="567" y="33" width="15" height="15"/>
+                            <rect key="frame" x="575" y="33" width="15" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="fbr-aK-TRT"/>
                                 <constraint firstAttribute="width" constant="15" id="ifl-Mp-7Tb"/>
                             </constraints>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="qrcode_img" translatesAutoresizingMaskIntoConstraints="NO" id="vZx-tT-Omf" userLabel="二维码">
-                            <rect key="frame" x="519" y="21" width="38.5" height="38.5"/>
+                            <rect key="frame" x="527" y="21" width="38.5" height="38.5"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="38.5" id="9OU-WD-oKK"/>
                                 <constraint firstAttribute="width" constant="38.5" id="dAC-xK-5bA"/>
@@ -62,9 +62,10 @@
                         <constraint firstItem="Uxg-7u-Mce" firstAttribute="leading" secondItem="0aW-EF-NIa" secondAttribute="trailing" constant="17.5" id="UpH-s9-rVI"/>
                         <constraint firstItem="enF-lm-Glw" firstAttribute="leading" secondItem="vZx-tT-Omf" secondAttribute="trailing" constant="10" id="X6f-rb-83M"/>
                         <constraint firstItem="vZx-tT-Omf" firstAttribute="top" secondItem="mq4-57-4oc" secondAttribute="top" constant="21" id="YJU-Ed-6fJ"/>
+                        <constraint firstItem="vZx-tT-Omf" firstAttribute="leading" secondItem="Uxg-7u-Mce" secondAttribute="trailing" constant="10" id="ftN-MK-01N"/>
                         <constraint firstItem="enF-lm-Glw" firstAttribute="centerY" secondItem="mq4-57-4oc" secondAttribute="centerY" id="hyQ-ZK-qwB"/>
                         <constraint firstItem="fYo-Xz-Hbk" firstAttribute="top" secondItem="Uxg-7u-Mce" secondAttribute="bottom" constant="10" id="ogH-ox-XKW"/>
-                        <constraint firstAttribute="trailing" secondItem="enF-lm-Glw" secondAttribute="trailing" constant="17.5" id="xPt-KR-zkB"/>
+                        <constraint firstAttribute="trailing" secondItem="enF-lm-Glw" secondAttribute="trailing" constant="10" id="xPt-KR-zkB"/>
                         <constraint firstItem="0aW-EF-NIa" firstAttribute="top" secondItem="mq4-57-4oc" secondAttribute="top" constant="10" id="zlw-Jv-qPX"/>
                     </constraints>
                     <variation key="default">
@@ -78,7 +79,7 @@
                     <rect key="frame" x="0.0" y="86" width="600" height="82"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M6S-7n-4wr" userLabel="已卖出" customClass="ODCustomButton">
-                            <rect key="frame" x="150" y="10" width="150" height="60"/>
+                            <rect key="frame" x="150" y="11" width="150" height="60"/>
                             <state key="normal" title="已卖出" image="yimaichu_icon"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ITI-5n-lc0" userLabel="已发布" customClass="ODCustomButton">
@@ -90,7 +91,7 @@
                             <state key="normal" title="收藏" image="shoucang_icon"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mva-eN-5AI" userLabel="已购买" customClass="ODCustomButton">
-                            <rect key="frame" x="0.0" y="10.5" width="150" height="60"/>
+                            <rect key="frame" x="0.0" y="11" width="150" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="23L-Bc-qGJ"/>
                                 <constraint firstAttribute="width" constant="50" id="RTN-69-fMe"/>
@@ -154,7 +155,7 @@
                 <outletCollection property="userInformation" destination="ITI-5n-lc0" id="VU6-Uf-jJ5"/>
                 <outletCollection property="userInformation" destination="74s-dO-gM8" id="v3Y-K2-GJY"/>
             </connections>
-            <point key="canvasLocation" x="469" y="49.5"/>
+            <point key="canvasLocation" x="469" y="49"/>
         </view>
     </objects>
     <resources>
