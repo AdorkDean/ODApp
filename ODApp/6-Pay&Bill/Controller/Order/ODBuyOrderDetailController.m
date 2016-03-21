@@ -10,7 +10,7 @@
 
 #import "UIButton+WebCache.h"
 
-#import "ODIndentDetailController.h"
+#import "ODBuyOrderDetailController.h"
 #import "ODDrawbackController.h"
 #import "ODPayController.h"
 
@@ -21,7 +21,7 @@
 #import "ODCancelOrderView.h"
 #import "ODEvaluation.h"
 
-@interface ODIndentDetailController () <UITextViewDelegate>{
+@interface ODBuyOrderDetailController () <UITextViewDelegate>{
     // label 统一高度
     float labelHeight;
     
@@ -70,7 +70,7 @@
 
 @end
 
-@implementation ODIndentDetailController
+@implementation ODBuyOrderDetailController
 
 #pragma mark - 生命周期方法
 
@@ -121,6 +121,7 @@
     return _scrollView;
 }
 
+#pragma mark - 底部是一个按钮
 - (UIButton *)endIsOneButton {
     if (!_endIsOneButton) {
         NSString *status = [NSString stringWithFormat:@"%@", self.orderStatus];
@@ -129,83 +130,114 @@
         _endIsOneButton.backgroundColor = [UIColor colorRedColor];
         _endIsOneButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
         [_endIsOneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+       
+        if (self.isSellDetail) {
+            if ([status isEqualToString:@"2"]) {
+                [_endIsOneButton setTitle:@"确认发货" forState:UIControlStateNormal];
+                [_endIsOneButton addTarget:self action:@selector(deliveryAction:) forControlEvents:UIControlEventTouchUpInside];
+            }
+            else if ([status isEqualToString:@"3"]) {
+                [_endIsOneButton setTitle:@"确认服务" forState:UIControlStateNormal];
+                [_endIsOneButton addTarget:self action:@selector(deliveryAction:) forControlEvents:UIControlEventTouchUpInside];
+            }
+            else if ([status isEqualToString:@"-2"]) {
+                [_endIsOneButton setTitle:@"处理退款" forState:UIControlStateNormal];
+                [_endIsOneButton addTarget:self action:@selector(dealDeliveryAction:) forControlEvents:UIControlEventTouchUpInside];
+            }
+            else if ([status isEqualToString:@"-3"] || [status isEqualToString:@"-4"] || [status isEqualToString:@"-5"]) {
+                [_endIsOneButton setTitle:@"查看原因" forState:UIControlStateNormal];
+                [_endIsOneButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
+            }
+        }
+        else {
+            if ([status isEqualToString:@"3"] || [status isEqualToString:@"2"]) {
+                [_endIsOneButton setTitle:@"申请退款" forState:UIControlStateNormal];
+                [_endIsOneButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
+            }
+            else if ([status isEqualToString:@"-5"] || [status isEqualToString:@"-3"] || [status isEqualToString:@"-4"]) {
+                [_endIsOneButton setTitle:@"查看原因" forState:UIControlStateNormal];
+                [_endIsOneButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
+            }
+        }
         
-        if ([status isEqualToString:@"3"] || [status isEqualToString:@"2"]) {
-            [_endIsOneButton setTitle:@"申请退款" forState:UIControlStateNormal];
-            [_endIsOneButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
-        }
-        else if ([status isEqualToString:@"-5"] || [status isEqualToString:@"-3"] || [status isEqualToString:@"-4"]) {
-            [_endIsOneButton setTitle:@"查看原因" forState:UIControlStateNormal];
-            [_endIsOneButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
-        }
+        
+        
         [self.view addSubview:_endIsOneButton];
     }
     return _endIsOneButton;
 }
 
+#pragma mark - 底部是两个按钮
 - (UIButton *)endIsTwoButton {
-    if (!_endIsTwoButton) {
-        ODOrderDetailModel *model = self.dataArray[0];
-        NSString *status = [NSString stringWithFormat:@"%@", self.orderStatus];
-        NSString *swap_type = [NSString stringWithFormat:@"%@", model.swap_type];
-        
-        for (int i = 0; i < 2; i++) {
-            _endIsTwoButton = [UIButton buttonWithType:UIButtonTypeSystem];
-            _endIsTwoButton.frame = CGRectMake(KScreenWidth / 2 * i, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-            _endIsTwoButton.backgroundColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
-            [_endIsTwoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    
+    if (!self.isSellDetail) {
+        if (!_endIsTwoButton) {
+            ODOrderDetailModel *model = self.dataArray[0];
+            NSString *status = [NSString stringWithFormat:@"%@", self.orderStatus];
+            NSString *swap_type = [NSString stringWithFormat:@"%@", model.swap_type];
             
-            if ([status isEqualToString:@"1"]){
-                NSArray *buttonTitleArray = @[ @"取消", @"立即支付" ];
-                [_endIsTwoButton setTitle:buttonTitleArray[i] forState:UIControlStateNormal];
+            for (int i = 0; i < 2; i++) {
+                _endIsTwoButton = [UIButton buttonWithType:UIButtonTypeSystem];
+                _endIsTwoButton.frame = CGRectMake(KScreenWidth / 2 * i, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
+                _endIsTwoButton.backgroundColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
+                [_endIsTwoButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
                 
-                _endIsTwoButton.tag = 1000 + i;
-                
-                if (i == 0) {
-                    _endIsTwoButton.backgroundColor = [UIColor colorGrayColor];
-                }
-                else {
-                    _endIsTwoButton.backgroundColor = [UIColor colorRedColor];
-                }
-                
-                [_endIsTwoButton addTarget:self action:@selector(cancelOrPayOrder:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            else if ([status isEqualToString:@"4"]) {
-                if (i == 0) {
-                    _endIsTwoButton.backgroundColor = [UIColor colorGrayColor];
-                    [_endIsTwoButton setTitle:@"申请退款" forState:UIControlStateNormal];
-                    [_endIsTwoButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
-                }
-                else {
-                    _endIsTwoButton.backgroundColor = [UIColor colorRedColor];
-                    if ([swap_type isEqualToString:@"2"]) {
-                        [_endIsTwoButton setTitle:@"确认收货" forState:UIControlStateNormal];
+                if ([status isEqualToString:@"1"]){
+                    NSArray *buttonTitleArray = @[ @"取消", @"立即支付" ];
+                    [_endIsTwoButton setTitle:buttonTitleArray[i] forState:UIControlStateNormal];
+                    
+                    _endIsTwoButton.tag = 1000 + i;
+                    
+                    if (i == 0) {
+                        _endIsTwoButton.backgroundColor = [UIColor colorGrayColor];
                     }
                     else {
-                        [_endIsTwoButton setTitle:@"确认服务" forState:UIControlStateNormal];
+                        _endIsTwoButton.backgroundColor = [UIColor colorRedColor];
                     }
-                    [_endIsTwoButton addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
+                    
+                    [_endIsTwoButton addTarget:self action:@selector(cancelOrPayOrder:) forControlEvents:UIControlEventTouchUpInside];
                 }
+                else if ([status isEqualToString:@"4"]) {
+                    if (i == 0) {
+                        _endIsTwoButton.backgroundColor = [UIColor colorGrayColor];
+                        [_endIsTwoButton setTitle:@"申请退款" forState:UIControlStateNormal];
+                        [_endIsTwoButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
+                    }
+                    else {
+                        _endIsTwoButton.backgroundColor = [UIColor colorRedColor];
+                        if ([swap_type isEqualToString:@"2"]) {
+                            [_endIsTwoButton setTitle:@"确认收货" forState:UIControlStateNormal];
+                        }
+                        else {
+                            [_endIsTwoButton setTitle:@"确认服务" forState:UIControlStateNormal];
+                        }
+                        [_endIsTwoButton addTarget:self action:@selector(confirmAction:) forControlEvents:UIControlEventTouchUpInside];
+                    }
+                }
+                _endIsTwoButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
+                
+                [self.view addSubview:_endIsTwoButton];
             }
-            _endIsTwoButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
-            
-            [self.view addSubview:_endIsTwoButton];
         }
     }
+    
     return _endIsTwoButton;
 }
 
-// 交易状态
+#pragma mark - 交易状态
 - (void)createTopView {
     ODIndentDetailTopView *detailTopView = [[ODIndentDetailTopView alloc] init];
     detailTopView = [ODIndentDetailTopView detailTopView];
     ODOrderDetailModel *model = self.dataArray[0];
+    if (self.isSellDetail) {
+        detailTopView.isSellDetail = YES;
+    }
     [detailTopView setModel:model];
     detailTopView.frame = CGRectMake(0, 0, KScreenWidth, 44);
     [self.scrollView addSubview:detailTopView];
 }
 
-// 订单内容
+#pragma mark - 订单内容
 - (void)createIndentDetailView {
     self.indentDetailView = [[ODIndentDetailView alloc] init];
     self.indentDetailView = [ODIndentDetailView detailView];
@@ -216,7 +248,7 @@
     [self.indentDetailView.phoneButton addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
-// 买家信息
+#pragma mark - 买家信息
 - (void)createBuyerInformationView {
     ODOrderDetailModel *model = self.dataArray[0];
     NSString *swap_type = [NSString stringWithFormat:@"%@", model.swap_type];
@@ -321,7 +353,7 @@
     
 }
 
-// 订单取消原因
+#pragma mark - 订单取消原因
 - (void)createOrderCancelReasonView {
     ODOrderDetailModel *model = self.dataArray[0];
     if ([model.order_status isEqualToString:@"-1"]) {
@@ -356,7 +388,7 @@
     }
 }
 
-// 交易时间
+#pragma mark - 交易时间
 - (void)createDealTimeView {
     ODOrderDetailModel *model = self.dataArray[0];
 
@@ -387,7 +419,7 @@
     [self.scrollView addSubview:self.dealTimeView];
 }
 
-// 评价
+#pragma mark - 评价
 - (void)createEvaluation {
     self.evaluationView = [[ODEvaluation alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height)];
     self.evaluationView.contentTextView.delegate = self;
@@ -436,10 +468,23 @@
              [[NSNotificationCenter defaultCenter] postNotification:notification];
          }
          if ([weakSelf.orderStatus isEqualToString:@"1"] || [weakSelf.orderStatus isEqualToString:@"4"]) {
-             self.scrollHeight = KScreenHeight - 64 - 50;
+             if (self.isSellDetail) {
+                 self.scrollHeight = KScreenHeight - 64;
+             }
+             else {
+                 self.scrollHeight = KScreenHeight - 64 - 50;
+             }
              [weakSelf endIsTwoButton];
          }
-         else if ([weakSelf.orderStatus isEqualToString:@"2"] || [weakSelf.orderStatus isEqualToString:@"3"] || [weakSelf.orderStatus isEqualToString:@"-3"] || [weakSelf.orderStatus isEqualToString:@"-4"] || [weakSelf.orderStatus isEqualToString:@"-5"]) {
+         else if ([weakSelf.orderStatus isEqualToString:@"-2"] && self.isSellDetail){
+             self.scrollHeight = KScreenHeight - 64 - 50;
+             [weakSelf endIsOneButton];
+         }
+         else if ([weakSelf.orderStatus isEqualToString:@"2"] ||
+                  [weakSelf.orderStatus isEqualToString:@"3"] ||
+                  [weakSelf.orderStatus isEqualToString:@"-3"] ||
+                  [weakSelf.orderStatus isEqualToString:@"-4"] ||
+                  [weakSelf.orderStatus isEqualToString:@"-5"]) {
              self.scrollHeight = KScreenHeight - 64 - 50;
              [weakSelf endIsOneButton];
          }
@@ -483,6 +528,52 @@
 }
 
 #pragma mark - 事件方法
+
+#pragma mark - 确认发货
+- (void)deliveryAction:(UIButton *)sender {
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"order_id"] = self.order_id;
+    params[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlSwapConfirmDelivery parameters:params modelClass:[NSObject class] success:^(id model)
+     {
+         [weakSelf.endIsOneButton removeFromSuperview];
+         
+         ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
+         weakSelf.orderStatus = [NSString stringWithFormat:@"%@", statusModel.order_status];
+         
+         if (weakSelf.getRefresh) {
+             weakSelf.getRefresh(@"1");
+         }
+         
+         [weakSelf getData];
+         [ODProgressHUD showInfoWithStatus:@"操作成功"];
+     } failure:^(NSError *error) {
+         
+     }];
+}
+
+#pragma mark - 处理退款
+- (void)dealDeliveryAction:(UIButton *)sender {
+    
+    ODDrawbackController *vc = [[ODDrawbackController alloc] init];
+    
+    ODOrderDetailModel *model = self.dataArray[0];
+    vc.darwbackMoney = model.total_price;
+    vc.order_id = self.order_id;
+    vc.drawbackReason = model.reason;
+    vc.isRefuseAndReceive = YES;
+    vc.drawbackTitle = @"退款处理";
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+}
+
+#pragma mark - 取消订单
 - (void)submitAction:(UIButton *)sender {
     if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入取消原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
         [ODProgressHUD showInfoWithStatus:@"请输入取消原因"];
@@ -512,6 +603,7 @@
     }
 }
 
+#pragma mark - 返回刷新
 - (void)backAction:(UIBarButtonItem *)sender {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backRefrash:) name:ODNotificationMyOrderThirdRefresh object:nil];
     [self.navigationController popViewControllerAnimated:YES];
@@ -525,7 +617,7 @@
     [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
-// 查看原因
+#pragma mark - 查看原因
 - (void)reasonAction:(UIButton *)sender {
     
     ODDrawbackController *vc = [[ODDrawbackController alloc] init];
@@ -549,7 +641,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-// 确认完成
+#pragma mark - 确认完成
 - (void)confirmAction:(UIButton *)sender {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -565,6 +657,7 @@
          
      }];
 }
+
 
 - (void)determineButton:(UIButton *)sender {
     if ([self.evaluationView.contentTextView.text isEqualToString:@""] || [self.evaluationView.contentTextView.text isEqualToString:@"请输入评价内容"]) {
@@ -600,7 +693,7 @@
     [self createEvaluation];
 }
 
-// 申请退款
+#pragma mark - 申请退款
 - (void)refundAction:(UIButton *)sender {
     ODOrderDetailModel *model = self.dataArray[0];
     ODDrawbackController *vc = [[ODDrawbackController alloc] init];
@@ -614,7 +707,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-// 取消 或 支付订单
+#pragma mark - 取消 或 支付订单
 - (void)cancelOrPayOrder:(UIButton *)sender {
     if (sender.tag == 1000) {
         self.cancelOrderView = [ODCancelOrderView getView];
@@ -643,7 +736,7 @@
     [self.cancelOrderView removeFromSuperview];
 }
 
-// 打电话
+#pragma mark - 打电话
 - (void)phoneAction:(UIButton *)sender {
     ODOrderDetailModel *model = self.dataArray[0];
     NSMutableDictionary *dic = model.user;

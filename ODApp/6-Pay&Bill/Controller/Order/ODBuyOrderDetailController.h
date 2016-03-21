@@ -8,7 +8,7 @@
 
 #import "ODBaseViewController.h"
 
-@interface ODIndentDetailController : ODBaseViewController
+@interface ODBuyOrderDetailController : ODBaseViewController
 
 @property(nonatomic, copy) NSString *order_id;
 
@@ -26,5 +26,11 @@
  * 刷新block
  **/
 @property(nonatomic, copy) void(^getRefresh)(NSString *isRefresh);
+
+/**
+ * 选择卖出订单详情
+ **/
+@property(nonatomic, assign) BOOL isSellDetail;
+
 
 @end

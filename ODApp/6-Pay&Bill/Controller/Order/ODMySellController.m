@@ -14,6 +14,8 @@
 #import "ODMySellDetailController.h"
 #import "ODSecondMySellDetailController.h"
 
+#import "ODBuyOrderDetailController.h"
+
 @interface ODMySellController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 
@@ -162,39 +164,54 @@ __weakSelf
     self.indexRow = indexPath.row;
 
 
-    if ([swap_type isEqualToString:@"1"]) {
-        ODSecondMySellDetailController *vc = [[ODSecondMySellDetailController alloc] init];
-        vc.orderType = model.status_str;
-        vc.orderId = orderId;
-        vc.orderStatus = orderStatus;
-        [self.navigationController pushViewController:vc animated:YES];
+    ODBuyOrderDetailController *vc = [[ODBuyOrderDetailController alloc] init];
+    vc.orderType = model.status_str;
+    vc.order_id = orderId;
+    vc.orderStatus = orderStatus;
+    vc.isSellDetail = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 
-        __weakSelf
-        vc.getRefresh = ^(NSString *isRefresh) {
-
-
-            weakSelf.isRefresh = isRefresh;
-        };
+    __weakSelf
+    vc.getRefresh = ^(NSString *isRefresh) {
 
 
-    } else {
-
-
-        ODMySellDetailController *vc = [[ODMySellDetailController alloc] init];
-        vc.orderType = model.status_str;
-        vc.orderId = orderId;
-        vc.orderStatus = orderStatus;
-        [self.navigationController pushViewController:vc animated:YES];
-
-        __weakSelf
-        vc.getRefresh = ^(NSString *isRefresh) {
-
-
-            weakSelf.isRefresh = isRefresh;
-        };
-
-
-    }
+        weakSelf.isRefresh = isRefresh;
+    };
+    
+    
+//    if ([swap_type isEqualToString:@"1"]) {
+//        ODSecondMySellDetailController *vc = [[ODSecondMySellDetailController alloc] init];
+//        vc.orderType = model.status_str;
+//        vc.orderId = orderId;
+//        vc.orderStatus = orderStatus;
+//        [self.navigationController pushViewController:vc animated:YES];
+//
+//        __weakSelf
+//        vc.getRefresh = ^(NSString *isRefresh) {
+//
+//
+//            weakSelf.isRefresh = isRefresh;
+//        };
+//
+//
+//    } else {
+//
+//
+//        ODMySellDetailController *vc = [[ODMySellDetailController alloc] init];
+//        vc.orderType = model.status_str;
+//        vc.orderId = orderId;
+//        vc.orderStatus = orderStatus;
+//        [self.navigationController pushViewController:vc animated:YES];
+//
+//        __weakSelf
+//        vc.getRefresh = ^(NSString *isRefresh) {
+//
+//
+//            weakSelf.isRefresh = isRefresh;
+//        };
+//
+//
+//    }
 
 
 }

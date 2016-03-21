@@ -16,6 +16,8 @@
 
 @property (nonatomic, strong) ODOrderDetailModel *model;
 
+@property (nonatomic, assign) BOOL isSellDetail;
+
 + (instancetype)detailTopView;
 
 @end
