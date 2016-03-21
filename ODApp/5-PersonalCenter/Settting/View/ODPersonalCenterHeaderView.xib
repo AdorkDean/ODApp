@@ -78,32 +78,24 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rU3-bL-GO9" userLabel="订单信息">
                     <rect key="frame" x="0.0" y="86" width="600" height="82"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M6S-7n-4wr" userLabel="已卖出" customClass="ODCustomButton">
+                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M6S-7n-4wr" userLabel="已卖出" customClass="ODCustomButton">
                             <rect key="frame" x="150" y="11" width="150" height="60"/>
                             <state key="normal" title="已卖出" image="yimaichu_icon"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ITI-5n-lc0" userLabel="已发布" customClass="ODCustomButton">
+                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ITI-5n-lc0" userLabel="已发布" customClass="ODCustomButton">
                             <rect key="frame" x="300" y="11" width="150" height="60"/>
                             <state key="normal" title="已发布" image="yifabu_icon"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74s-dO-gM8" userLabel="收藏" customClass="ODCustomButton">
+                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="74s-dO-gM8" userLabel="收藏" customClass="ODCustomButton">
                             <rect key="frame" x="450" y="11" width="150" height="60"/>
                             <state key="normal" title="收藏" image="shoucang_icon"/>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mva-eN-5AI" userLabel="已购买" customClass="ODCustomButton">
+                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mva-eN-5AI" userLabel="已购买" customClass="ODCustomButton">
                             <rect key="frame" x="0.0" y="11" width="150" height="60"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="60" id="23L-Bc-qGJ"/>
-                                <constraint firstAttribute="width" constant="50" id="RTN-69-fMe"/>
-                                <constraint firstAttribute="height" constant="50" id="t4M-mK-Cax"/>
+                                <constraint firstAttribute="height" constant="60" id="JG4-QI-Yqr"/>
                             </constraints>
                             <state key="normal" title="已购买" image="buy_icon"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="RTN-69-fMe"/>
-                                    <exclude reference="t4M-mK-Cax"/>
-                                </mask>
-                            </variation>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -117,6 +109,7 @@
                         <constraint firstItem="ITI-5n-lc0" firstAttribute="centerY" secondItem="Mva-eN-5AI" secondAttribute="centerY" id="STm-Js-gQH"/>
                         <constraint firstAttribute="trailing" secondItem="74s-dO-gM8" secondAttribute="trailing" id="Xc9-qD-B2K"/>
                         <constraint firstItem="ITI-5n-lc0" firstAttribute="height" secondItem="Mva-eN-5AI" secondAttribute="height" id="XfZ-oE-BAv"/>
+                        <constraint firstItem="Mva-eN-5AI" firstAttribute="height" secondItem="rU3-bL-GO9" secondAttribute="height" id="Z2j-02-g9h"/>
                         <constraint firstItem="Mva-eN-5AI" firstAttribute="centerY" secondItem="rU3-bL-GO9" secondAttribute="centerY" id="f44-zu-hus"/>
                         <constraint firstItem="74s-dO-gM8" firstAttribute="centerY" secondItem="Mva-eN-5AI" secondAttribute="centerY" id="iNc-SD-84a"/>
                         <constraint firstItem="M6S-7n-4wr" firstAttribute="width" secondItem="Mva-eN-5AI" secondAttribute="width" id="kT6-KE-A3S"/>
@@ -127,6 +120,11 @@
                         <constraint firstItem="ITI-5n-lc0" firstAttribute="width" secondItem="Mva-eN-5AI" secondAttribute="width" id="uhu-eu-3YF"/>
                         <constraint firstItem="74s-dO-gM8" firstAttribute="width" secondItem="Mva-eN-5AI" secondAttribute="width" id="zIn-WN-UvH"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Z2j-02-g9h"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
