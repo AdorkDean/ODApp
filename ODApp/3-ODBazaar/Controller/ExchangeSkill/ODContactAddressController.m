@@ -115,6 +115,7 @@
     UIImageView *addAddressImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 50 - ODNavigationHeight, kScreenSize.width, 50)];
 
     addAddressImageView.image = [UIImage imageNamed:@"button_Add address"];
+    addAddressImageView.contentMode = UIViewContentModeCenter;
     addAddressImageView.backgroundColor = [UIColor whiteColor];
     addAddressImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *addAddressTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addAddressAction)];

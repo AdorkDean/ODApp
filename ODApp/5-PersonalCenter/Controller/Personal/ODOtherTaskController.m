@@ -66,14 +66,16 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODViolationsCell" bundle:nil] forCellWithReuseIdentifier:@"item1"];
     
+    __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self downRefresh];
+        weakSelf.PageNumber = 1;
+        [weakSelf downRefresh];
     }];
     
     
     self.collectionView .mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        
-        [self loadMoreData];
+        weakSelf.PageNumber++;
+        [weakSelf loadMoreData];
     }];
     
     
