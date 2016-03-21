@@ -85,7 +85,7 @@
 //            NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#b0b0b0" alpha:1]};
 //    [self.segmentedControl setTitleTextAttributes:unselectedTextAttributes forState:UIControlStateNormal];
     
-    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发表的", @"我回复的"]];
+    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发表的", @"我接受的"]];
     self.segmentedControl.frame = CGRectMake(4, 10, kScreenSize.width - 8, 30);
     self.segmentedControl.clipsToBounds = YES;
     self.segmentedControl.layer.cornerRadius = 7;

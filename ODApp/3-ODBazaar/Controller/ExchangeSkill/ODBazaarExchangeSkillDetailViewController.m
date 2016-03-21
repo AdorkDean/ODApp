@@ -150,7 +150,7 @@
     [self.detailView addSubview:titleLabel];
 
     UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(titleLabel.frame) + 10, kScreenSize.width - 35, 20)];
-    priceLabel.text = [NSString stringWithFormat:@"%d元/%@", self.model.price, self.model.unit];
+    priceLabel.text = [NSString stringWithFormat:@"%.2f元/%@", self.model.price, self.model.unit];
     priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     priceLabel.textAlignment = NSTextAlignmentCenter;
     priceLabel.font = [UIFont systemFontOfSize:15];
@@ -312,6 +312,8 @@
             orderController.informationModel = self.model;
             [self.navigationController pushViewController:orderController animated:YES];
         }
+        
+    
     }
 }
 

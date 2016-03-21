@@ -58,6 +58,12 @@
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self createTopView];
+    [self createMiddleView];
+    [self createPicView];
+    [self createBottomView];
+    [self createReleaseButton];
     if ([self.type isEqualToString:@"编辑"]) {
         [self requestTimeData];
         [self reloadImageButtons];
@@ -65,13 +71,6 @@
     }else{
         self.navigationItem.title = @"发布技能";
     }
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    [self createTopView];
-    [self createMiddleView];
-    [self createPicView];
-    [self createBottomView];
-    [self createReleaseButton];
-
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -137,6 +136,8 @@
 
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isEdit:(BOOL)isEdit{
     __weakSelf
+    
+    NSLog(@"-------%@",parameter);
     [ODHttpTool postWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
         if (isEdit) {
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
@@ -156,11 +157,12 @@
     topView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:topView];
     
+    ODUserModel *model =  [[ODUserInformation sharedODUserInformation]getUserCache];
     UIButton *headButton = [UIButton buttonWithType:UIButtonTypeSystem];
     headButton.frame = CGRectMake(17.5, 10, 40, 40);
     headButton.layer.masksToBounds = YES;
     headButton.layer.cornerRadius = 20;
-    [headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].avatar]] forState:UIControlStateNormal];
+    [headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal];
     [topView addSubview:headButton];
     
     UILabel *woQuLabel = [[UILabel alloc]initWithFrame:CGRectMake(67.5, 20, 40, 20)];
@@ -498,7 +500,7 @@
                           @"swap_type":self.swap_type,
                           @"price":self.priceTextField.text,
                           @"unit":self.unitTextField.text,
-                          @"schedule":[self.timeArray desc],
+                          @"schedule":[self.timeArray od_desc],
                           @"imgs":imageStr,
                           };
         }else{
@@ -509,7 +511,7 @@
                           @"swap_type":self.swap_type,
                           @"price":self.priceTextField.text,
                           @"unit":self.unitTextField.text,
-                          @"schedule":[self.editTimeArray desc],
+                          @"schedule":[self.editTimeArray od_desc],
                           @"imgs":imageStr,
                           };
         }
@@ -523,7 +525,7 @@
                           @"swap_type":self.swap_type,
                           @"price":self.priceTextField.text,
                           @"unit":self.unitTextField.text,
-                          @"schedule":[self.timeArray desc],
+                          @"schedule":[self.timeArray od_desc],
                           @"imgs":imageStr,
                           };
         }else if ([self.swap_type isEqualToString:@"2"]){

@@ -8,6 +8,7 @@
 #import "ODRoundTimeDrawView.h"
 #import "ODBazaarReleaseSkillTimeViewController.h"
 #import "ODBazaarReleaseSkillTimeModel.h"
+#import <MJExtension.h>
 
 #define cellID @"ODBazaarReleaseSkillTimeViewCell"
 
@@ -46,8 +47,10 @@
 
 -(void)rightItmeClick:(UIButton *)button
 {
+    __weakSelf;
     if(self.myBlock) {
-        self.myBlock(self.dataArray);
+        NSMutableArray *dict = [ODBazaarReleaseSkillTimeModel mj_keyValuesArrayWithObjectArray:weakSelf.dataArray];
+        weakSelf.myBlock(dict);
     }
     
     [self.navigationController popViewControllerAnimated:YES];
@@ -99,6 +102,7 @@
     [ODHttpTool getWithURL:ODUrlSwapSchedule parameters:parameter modelClass:[ODBazaarReleaseSkillTimeModel class] success:^(id model) {
         
         if ( !weakSelf.dataArray.count ) {
+            NSArray *array = [model result];
             [weakSelf.dataArray addObjectsFromArray:[model result]];
         }
         

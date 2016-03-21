@@ -10,7 +10,7 @@
 
 @interface NSArray (ODExtension)
 
-- (NSString *)desc;
+- (NSString *)od_desc;
 
 - (NSString *)enumerateString;
 
