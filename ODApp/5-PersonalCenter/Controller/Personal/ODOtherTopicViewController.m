@@ -94,12 +94,6 @@
         [weakSelf.collectionView.mj_header endRefreshing];
         
         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
-        if (weakSelf.dataArray.count == 0) {
-            [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无话题"];
-        }
-        else {
-            [noResultabel hidden];
-        }
         
         if ([[model result] bbs_list].count == 0) {
             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
@@ -109,6 +103,12 @@
             [weakSelf.collectionView.mj_footer endRefreshing];
         }
         [weakSelf.collectionView reloadData];
+        if (weakSelf.dataArray.count == 0) {
+            [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无话题"];
+        }
+        else {
+            [noResultabel hidden];
+        }
     } failure:^(NSError *error) {
         [weakSelf.collectionView.mj_header endRefreshing];
         [weakSelf.collectionView.mj_footer endRefreshing];

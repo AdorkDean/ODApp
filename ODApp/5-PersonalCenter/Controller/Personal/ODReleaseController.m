@@ -130,8 +130,7 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
         }
         else {
             [noResultabel hidden];
-        }
-        
+        }        
     }
     failure:^(NSError *error) {
         [weakSelf.tableView.mj_footer endRefreshing];

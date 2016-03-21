@@ -88,7 +88,9 @@ static NSString *const cellId = @"newActivityCell";
             {
                 [weakSelf.resultLists addObject:md];
             }
-        }                
+        }
+        
+        [weakSelf.tableView.mj_header endRefreshing];
         if ([[model result]count] == 0)
         {
             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -96,17 +98,16 @@ static NSString *const cellId = @"newActivityCell";
         else
         {            
             [weakSelf.tableView.mj_footer endRefreshing];
-        }        
-
+        }
+        [weakSelf.tableView reloadData];
+        
         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.resultLists.count == 0) {
             [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无活动"];
         }
         else {
             [noResultabel hidden];
-        }
-        [weakSelf.tableView reloadData];
-        [weakSelf.tableView.mj_header endRefreshing];
+        }        
     }
                    failure:^(NSError *error)
     {
