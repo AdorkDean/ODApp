@@ -111,12 +111,6 @@ __weakSelf
          [weakSelf.dataArray addObjectsFromArray:mySellDatas];
 
          ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
-         if (weakSelf.dataArray.count == 0) {
-             [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无订单"];
-         }
-         else {
-             [noResultabel hidden];
-         }
 
          [weakSelf.collectionView.mj_header endRefreshing];
          if (mySellDatas.count == 0) {
@@ -127,6 +121,13 @@ __weakSelf
              [weakSelf.collectionView.mj_footer endRefreshing];
          }
          [weakSelf.collectionView reloadData];
+         
+         if (weakSelf.dataArray.count == 0) {
+             [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无订单"];
+         }
+         else {
+             [noResultabel hidden];
+         }
      } failure:^(NSError *error) {
          
      }];

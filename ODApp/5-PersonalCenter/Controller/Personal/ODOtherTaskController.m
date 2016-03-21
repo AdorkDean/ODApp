@@ -118,7 +118,8 @@
          {
              [weakSelf.collectionView.mj_footer endRefreshing];
          }
-                  
+         [weakSelf.collectionView reloadData];
+         
          ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
          if (weakSelf.dataArray.count == 0) {
              [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无任务"];
@@ -126,8 +127,6 @@
          else {
              [noResultabel hidden];
          }
-         [weakSelf.collectionView reloadData];
-         
      } failure:^(NSError *error) {
          [weakSelf.collectionView.mj_header endRefreshing];
          [weakSelf.collectionView.mj_footer endRefreshing];

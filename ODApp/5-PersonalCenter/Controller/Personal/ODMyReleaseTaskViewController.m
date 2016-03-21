@@ -20,7 +20,6 @@
 @property(nonatomic)NSInteger page;
 @property(nonatomic,copy)NSString *type;
 @property(nonatomic)NSInteger index;
-@property(nonatomic,strong)UILabel *label;
 
 
 @end
@@ -101,15 +100,10 @@
      {
          if (weakSelf.page == 1) {
              [weakSelf.dataArray removeAllObjects];
-             [weakSelf.label removeFromSuperview];
          }
          ODBazaarTasksModel *tasksModel = [model result];
          [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];
          
-         if (weakSelf.dataArray.count == 0 && weakSelf.page == 1) {
-             weakSelf.label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, KScreenHeight/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-             [weakSelf.tableView addSubview:weakSelf.label];
-         }
          [weakSelf.tableView.mj_header endRefreshing];
          if (tasksModel.tasks.count == 0) {
              [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
@@ -117,6 +111,14 @@
              [weakSelf.tableView.mj_footer endRefreshing];
          }
          [weakSelf.tableView reloadData];
+         
+         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+         if (weakSelf.dataArray.count == 0) {
+             [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无任务"];
+         }
+         else {
+             [noResultabel hidden];
+         }
      } failure:^(NSError *error) {
          [weakSelf.tableView.mj_header endRefreshing];
          [weakSelf.tableView.mj_footer endRefreshing];

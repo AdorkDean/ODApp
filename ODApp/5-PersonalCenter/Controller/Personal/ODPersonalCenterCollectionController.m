@@ -112,8 +112,7 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
         }
         else {
             [noResultabel hidden];
-        }
-        
+        }        
     } failure:^(NSError *error) {
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView.mj_footer endRefreshing];
