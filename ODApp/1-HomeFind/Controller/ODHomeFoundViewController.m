@@ -259,7 +259,6 @@ static NSString * const exchangeCellId = @"exchangeCell";
         }
         [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:activityModel.detail_md5] forState:UIControlStateNormal];
         imageButton.tag = 100 + i;
-        imageButton.backgroundColor = [UIColor purpleColor];
         [imageButton addTarget:self action:@selector(activityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [scrollView addSubview:imageButton];
     }

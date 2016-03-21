@@ -102,6 +102,9 @@ UIKIT_EXTERN NSString * const ODNotificationSellOrderThirdRefresh;
 /**  点击收藏的通知 */
 UIKIT_EXTERN NSString * const ODNotificationloveSkill;
 
+/** 刷新任务发布及回复*/
+UIKIT_EXTERN NSString * const ODNotificationRefreshTask;
+
 #pragma mark - 网页URL
 
 UIKIT_EXTERN NSString * const ODWebUrlFindJob;

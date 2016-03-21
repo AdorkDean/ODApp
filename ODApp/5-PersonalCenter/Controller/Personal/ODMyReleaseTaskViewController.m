@@ -13,13 +13,14 @@
 #import "ODMyTaskCell.h"
 #import "ODMyTaskViolationsCell.h"
 
-@interface ODMyReleaseTaskViewController ()<UITableViewDelegate,UITableViewDataSource, ODMyTaskControllerDelegate>
+@interface ODMyReleaseTaskViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic)NSInteger page;
 @property(nonatomic,copy)NSString *type;
 @property(nonatomic)NSInteger index;
+@property(nonatomic,strong)UILabel *label;
 
 
 @end
@@ -29,7 +30,7 @@
 #pragma mark - lazyload
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0,kScreenSize.width, kScreenSize.height-64-43) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0,kScreenSize.width, kScreenSize.height-64-50) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.dataSource = self;
@@ -64,14 +65,7 @@
         [weakSelf loadMoreData];
     }];
     
-    ODMyTaskController *controller = [[ODMyTaskController alloc]init];
-    controller.taskDelegate = self;
-    controller.myBlock = ^(NSString *status){
-        weakSelf.status = status;
-        [weakSelf.tableView.mj_header beginRefreshing];
-    };
-    
-    [self addChildViewController:controller];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(notificationClick:) name:ODNotificationRefreshTask object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -89,14 +83,15 @@
     [self.tableView.mj_header beginRefreshing];
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
+
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.type = @"";
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
 #pragma mark - 数据请求
 - (void)requestData {
@@ -104,14 +99,24 @@
     NSDictionary *parameter = @{@"suggest":@"0",@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld", (long) self.page],@"my":@"1"};
     [ODHttpTool getWithURL:ODUrlTaskList parameters:parameter modelClass:[ODBazaarTasksModel class] success:^(id model)
      {
-         if (self.page == 1) {
+         if (weakSelf.page == 1) {
              [weakSelf.dataArray removeAllObjects];
+             [weakSelf.label removeFromSuperview];
          }
          ODBazaarTasksModel *tasksModel = [model result];
          [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];
-         [weakSelf.tableView reloadData];
+         
+         if (weakSelf.dataArray.count == 0 && weakSelf.page == 1) {
+             weakSelf.label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, KScreenHeight/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+             [weakSelf.tableView addSubview:weakSelf.label];
+         }
          [weakSelf.tableView.mj_header endRefreshing];
-         [weakSelf.tableView.mj_footer endRefreshing];
+         if (tasksModel.tasks.count == 0) {
+             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+         }else{
+             [weakSelf.tableView.mj_footer endRefreshing];
+         }
+         [weakSelf.tableView reloadData];
      } failure:^(NSError *error) {
          [weakSelf.tableView.mj_header endRefreshing];
          [weakSelf.tableView.mj_footer endRefreshing];
@@ -173,14 +178,7 @@
     }
 }
 
-#pragma mark - ODMyTaskVc 代理方法
-- (void)taskVc:(ODMyTaskController *)vc didClickedPopMenu:(NSString *)type
-{
-    self.status = type;
-    
-    [self.tableView.mj_header beginRefreshing];
-}
-
+#pragma mark - action
 -(void)deleteButtonClick:(UIButton *)button{
     ODMyTaskViolationsCell *cell = (ODMyTaskViolationsCell *)button.superview.superview;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -195,9 +193,10 @@
     }];
 }
 
-
-
-
+-(void)notificationClick:(NSNotification *)text{
+    self.status = text.userInfo[@"type"];
+    [self.tableView.mj_header beginRefreshing];
+}
 
 
 @end

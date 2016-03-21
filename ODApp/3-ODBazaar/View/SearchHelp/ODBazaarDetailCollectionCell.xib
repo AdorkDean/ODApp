@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -13,24 +13,45 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="120" height="150"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WJX-Bs-uBz">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WJX-Bs-uBz">
                         <rect key="frame" x="20" y="6" width="80" height="80"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="80" id="1b1-R6-9Dd"/>
+                            <constraint firstAttribute="height" constant="80" id="vPD-8W-gAW"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pLS-hu-XVF">
-                        <rect key="frame" x="20" y="96" width="80" height="20"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pLS-hu-XVF">
+                        <rect key="frame" x="20" y="96" width="80" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="Mji-T7-pRK"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJg-8C-adP">
-                        <rect key="frame" x="10" y="120" width="100" height="30"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJg-8C-adP">
+                        <rect key="frame" x="10" y="115" width="100" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="TIU-7D-yo0"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <constraints>
+                <constraint firstItem="pLS-hu-XVF" firstAttribute="top" secondItem="WJX-Bs-uBz" secondAttribute="bottom" constant="10" id="6oC-hu-Jf5"/>
+                <constraint firstItem="QJg-8C-adP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="BGV-Fx-1FJ"/>
+                <constraint firstAttribute="trailing" secondItem="QJg-8C-adP" secondAttribute="trailing" constant="10" id="GAa-SG-92x"/>
+                <constraint firstItem="WJX-Bs-uBz" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="6" id="VWM-vh-VaU"/>
+                <constraint firstItem="QJg-8C-adP" firstAttribute="top" secondItem="pLS-hu-XVF" secondAttribute="bottom" constant="4" id="Zgw-kV-KQB"/>
+                <constraint firstAttribute="trailing" secondItem="WJX-Bs-uBz" secondAttribute="trailing" constant="20" id="mn7-zz-fUB"/>
+                <constraint firstItem="pLS-hu-XVF" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="omZ-MJ-fL5"/>
+                <constraint firstAttribute="trailing" secondItem="pLS-hu-XVF" secondAttribute="trailing" constant="20" id="ptg-W6-8f2"/>
+                <constraint firstItem="WJX-Bs-uBz" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="ulj-6m-dYM"/>
+            </constraints>
             <size key="customSize" width="120" height="166"/>
             <connections>
                 <outlet property="imageV" destination="WJX-Bs-uBz" id="50n-zb-mxO"/>

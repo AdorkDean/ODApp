@@ -19,6 +19,7 @@
 @property(nonatomic)NSInteger page;
 @property(nonatomic,copy)NSString *type;
 @property(nonatomic)NSInteger index;
+@property(nonatomic,strong)UILabel *label;
 
 @end
 
@@ -27,7 +28,7 @@
 #pragma mark - lazyload
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0,kScreenSize.width, kScreenSize.height-64-43) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0,kScreenSize.width, kScreenSize.height-64-50) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.dataSource = self;
@@ -49,6 +50,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.page = 1;
+    self.status = @"0";
     [self requestData];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -58,6 +60,8 @@
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [self loadMoreData];
     }];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(notificationClick:) name:ODNotificationRefreshTask object:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -75,25 +79,35 @@
     self.type = @"";
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
+
 
 #pragma mark - 数据请求
 - (void)requestData {
     __weakSelf
-    NSDictionary *parameter = @{@"suggest":@"0",@"task_status":@"9",@"page":[NSString stringWithFormat:@"%ld", (long) self.page],@"my":@"2"};
+    NSDictionary *parameter = @{@"suggest":@"0",@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld", (long) self.page],@"my":@"2"};
     [ODHttpTool getWithURL:ODUrlTaskList parameters:parameter modelClass:[ODBazaarTasksModel class] success:^(id model)
      {
-         if (self.page == 1) {
+         if (weakSelf.page == 1) {
              [weakSelf.dataArray removeAllObjects];
+             [weakSelf.label removeFromSuperview];
          }
          ODBazaarTasksModel *tasksModel = [model result];
          [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];
-         [weakSelf.tableView reloadData];
+         
+         if (weakSelf.dataArray.count == 0 && weakSelf.page == 1) {
+             weakSelf.label = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
+             [weakSelf.view addSubview:weakSelf.label];
+         }
          [weakSelf.tableView.mj_header endRefreshing];
-         [weakSelf.tableView.mj_footer endRefreshing];
+         if (tasksModel.tasks.count == 0) {
+             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+         }else{
+             [weakSelf.tableView.mj_footer endRefreshing];
+         }
+         [weakSelf.tableView reloadData];
      } failure:^(NSError *error) {
          [weakSelf.tableView.mj_header endRefreshing];
          [weakSelf.tableView.mj_footer endRefreshing];
@@ -116,9 +130,20 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ODMyTaskCell *cell = [tableView dequeueReusableCellWithIdentifier:@"first"];
-    cell.model = self.dataArray[indexPath.row];
-    return cell;
+    ODBazaarModel *model = self.dataArray[indexPath.row];
+    if ([model.task_status isEqualToString:@"-1"]) {
+        ODMyTaskViolationsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"second"];
+        cell.model = self.dataArray[indexPath.row];
+        cell.deleteButton.hidden = YES;
+        UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(18, 75, 15, 15)];
+        imageView.image = [UIImage imageNamed:@"weigui"];
+        [cell.contentView addSubview:imageView];
+        return cell;
+    }else{
+        ODMyTaskCell *cell = [tableView dequeueReusableCellWithIdentifier:@"first"];
+        cell.model = self.dataArray[indexPath.row];
+        return cell;
+    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -128,17 +153,26 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ODBazaarModel *model = self.dataArray[indexPath.row];
-    ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc] init];
-    __weakSelf
-    bazaarDetail.myBlock = ^(NSString *type) {
-        weakSelf.type = type;
-    };
-    self.index = indexPath.row;
-    bazaarDetail.task_id = [NSString stringWithFormat:@"%@", model.task_id];
-    bazaarDetail.open_id = [NSString stringWithFormat:@"%@", model.open_id];
-    bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@", model.task_status_name];
-    [self.navigationController pushViewController:bazaarDetail animated:YES];
-  
+    NSString *status = [NSString stringWithFormat:@"%@", model.task_status];
+    if ([status isEqualToString:@"-1"]) {;
+    } else {
+        __weakSelf
+        ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc] init];
+        bazaarDetail.myBlock = ^(NSString *type) {
+            weakSelf.type = type;
+        };
+        bazaarDetail.task_id = [NSString stringWithFormat:@"%@", model.task_id];
+        bazaarDetail.open_id = [NSString stringWithFormat:@"%@", model.open_id];
+        bazaarDetail.task_status_name = [NSString stringWithFormat:@"%@", model.task_status_name];
+        self.index = indexPath.row;
+        [self.navigationController pushViewController:bazaarDetail animated:YES];
+    }
+}
+
+#pragma mark - action
+-(void)notificationClick:(NSNotification *)text{
+    self.status = text.userInfo[@"type"];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 

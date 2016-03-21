@@ -112,7 +112,7 @@
     ODArrowItem *item3 = [ODArrowItem itemWithName:@"我的任务"];
     item3.oprtionBlock = ^(NSIndexPath *index){
         ODMyTaskController *vc = [[ODMyTaskController alloc] init];
-        vc.open_id = user.open_id;
+//        vc.open_id = user.open_id;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
     
