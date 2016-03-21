@@ -200,7 +200,7 @@
     } else {
         ODOrderAddressDefModel *model = self.addressArray[0];
         self.headView.orderView.addressLabel.text = model.address;
-        self.addressId = [NSString stringWithFormat:@"%@", model.id];
+        self.addressId = model.id;
     }
     return self.headView;
 }

@@ -11,7 +11,7 @@
 
 @interface ODBazaarPhoto : UIImageView
 
-/** 地址 */
+/** 小图模型 */
 @property (nonatomic, strong) ODBazaarExchangeSkillImgs_smallModel *smallModel;
 
 @end

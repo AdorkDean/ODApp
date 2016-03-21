@@ -233,13 +233,6 @@
             [weakSelf.firstUserInfoDic setObject:userModel forKey:userKey];
         }
         
-        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
-        if (weakSelf.FirstDataArray.count == 0) {
-            [noResultabel showOnSuperView:weakSelf.firstCollectionView title:@"暂无话题"];
-        }
-        else {
-            [noResultabel hidden];
-        }
         [weakSelf.firstCollectionView.mj_header endRefreshing];
         if ([[model result] bbs_list].count == 0) {
             [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
@@ -249,6 +242,14 @@
             [weakSelf.firstCollectionView.mj_footer endRefreshing];
         }
         [weakSelf.firstCollectionView reloadData];
+        
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        if (weakSelf.FirstDataArray.count == 0) {
+            [noResultabel showOnSuperView:weakSelf.firstCollectionView title:@"暂无话题"];
+        }
+        else {
+            [noResultabel hidden];
+        }
     } failure:^(NSError *error) {
         
         
@@ -283,15 +284,7 @@
             ODCommunityBbsUsersModel *userModel = [ODCommunityBbsUsersModel mj_objectWithKeyValues:[[model result] users][key]];
             [weakSelf.secondUserInfoDic setObject:userModel forKey:userKey];
         }
-        
-        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
-        if (weakSelf.secondDataArray.count == 0) {
-            [noResultabel showOnSuperView:weakSelf.secondCollectionView title:@"暂无话题"];
-        }
-        else {
-            [noResultabel hidden];
-        }
-        
+
         [weakSelf.secondCollectionView.mj_header endRefreshing];
         if ([[model result] bbs_list].count == 0) {
             [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
@@ -302,6 +295,13 @@
         }
         [weakSelf.secondCollectionView reloadData];
 
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        if (weakSelf.secondDataArray.count == 0) {
+            [noResultabel showOnSuperView:weakSelf.secondCollectionView title:@"暂无话题"];
+        }
+        else {
+            [noResultabel hidden];
+        }
     } failure:^(NSError *error) {
         [weakSelf.secondCollectionView.mj_header endRefreshing];
         [weakSelf.secondCollectionView.mj_footer endRefreshing];

@@ -16,6 +16,7 @@
 #import "ODReleaseController.h"
 #import "ODPersonalCenterCollectionController.h"
 #import "ODInformationController.h"
+#import "ODCustomButton.h"
 
 @interface ODPersonalCenterHeaderView() <ODInformationControllerDelegate>
 
@@ -58,7 +59,7 @@
     self.nameLabel.text = user.nick.length ? user.nick : @"您还未设置昵称";
     self.signLabel.text = user.nick.length ? user.sign : @"您还未设置签名";
     
-    for (UIButton *button in self.userInformation)
+    for (ODCustomButton *button in self.userInformation)
     {
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
