@@ -94,6 +94,8 @@ NSString * const ODNotificationSellOrderSecondRefresh = @"ODNotificationSellOrde
 /** 已购买三级页面通知 */
 NSString * const ODNotificationSellOrderThirdRefresh = @"ODNotificationSellOrderThirdRefresh";
 
+/** 刷新任务发布及回复*/
+NSString * const ODNotificationRefreshTask =  @"ODNotificationRefreshTask";
 
 #pragma mark - 请求URL接口
 /** 网页接口 */
@@ -104,7 +106,7 @@ NSString * const ODWebUrlMapSearch = @"http://h5.odong.com/map/search";
 
 /** 统一的URL */
 #ifdef DEBUG
-NSString * const ODBaseURL = @"http://woquapi.odong.com/1.0";
+NSString * const ODBaseURL = @"http://woquapi.test.odong.com/1.0";
 #else
 NSString * const ODBaseURL = @"http://woquapi.odong.com/1.0";
 #endif

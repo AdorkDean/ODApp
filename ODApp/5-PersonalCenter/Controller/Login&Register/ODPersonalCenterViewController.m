@@ -18,18 +18,13 @@
 #import "ODChangePassWordController.h"
 #import "ODUserModel.h"
 
-
-
 @interface ODPersonalCenterViewController ()
 
 @property (nonatomic , strong) ODlandingView *landView;
 
 @end
 
-
-
 @implementation ODPersonalCenterViewController
-
 
 #pragma mark - 界面
 - (void)viewDidLoad
@@ -110,6 +105,13 @@
     {
         ODUserModel *user = [model result];
         [[ODUserInformation sharedODUserInformation] updateUserCache:user];
+        
+        // 缓存头像和二维码
+        UIImageView *avatarView = nil;
+        [avatarView sd_setImageWithURL:[NSURL OD_URLWithString:user.avatar] placeholderImage:nil];
+        
+        UIImageView *codeView = nil;
+        [codeView sd_setImageWithURL:[NSURL OD_URLWithString:user.avatar] placeholderImage:nil];
         
         [ODProgressHUD showToast:self.view msg:@"登录成功"];
         [weakSelf dismissViewControllerAnimated:YES completion:^{

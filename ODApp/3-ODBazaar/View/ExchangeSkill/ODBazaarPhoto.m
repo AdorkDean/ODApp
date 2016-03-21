@@ -17,12 +17,14 @@
 {
     _smallModel = smallModel;
     
-    [self sd_setImageWithURL:[NSURL OD_URLWithString:smallModel.img_url]
-            placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                if (image == nil) return;
-                
-                [self setImage:image];
-            }];
+    __weakSelf;
+    [self sd_setImageWithURL:[NSURL OD_URLWithString:smallModel.img_url] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image == nil) {
+            [weakSelf setImage:[UIImage imageNamed:@"errorplaceholderImage"]];
+        } else {
+            [weakSelf setImage:image];
+        }
+    }];
 }
 
 @end

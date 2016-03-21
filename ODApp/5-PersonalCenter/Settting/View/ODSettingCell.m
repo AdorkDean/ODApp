@@ -59,7 +59,7 @@
     
     self.textLabel.od_x = 12.5;
     
-    self.accessoryView.od_x = KScreenWidth - 35 / 2 - 15;
+    self.accessoryView.od_x = KScreenWidth - 25;
 }
 
 #pragma mark - 设置数据

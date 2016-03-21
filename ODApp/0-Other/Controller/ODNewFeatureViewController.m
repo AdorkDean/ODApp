@@ -23,7 +23,9 @@
 
 @implementation ODNewFeatureViewController
 
-static NSString * const reuseIdentifier = @"Cell";
+static NSString * const reuseIdentifier = @"newFeatureCell";
+
+static NSInteger const showCount = 4;
 
 #pragma mark - 生命周期方法
 /**
@@ -69,8 +71,8 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (void)setupPageControl
 {
-    CGRect frame = CGRectMake(self.view.od_centerX - 50, self.view.od_centerY * 2 - 30, 200, 30);
-    MyPageControl *pageControl = [[MyPageControl alloc] initWithFrame:frame normalImage:[UIImage imageNamed:@"selected.png"] highlightedImage:[UIImage imageNamed:@"noselected.png"] dotsNumber:5 sideLength:15 dotsGap:10];
+    CGRect frame = CGRectMake((KScreenWidth - 90) * 0.5, self.view.od_height - 50, 90, 30);
+    MyPageControl *pageControl = [[MyPageControl alloc] initWithFrame:frame normalImage:[UIImage imageNamed:@"selected.png"] highlightedImage:[UIImage imageNamed:@"noselected.png"] dotsNumber:showCount sideLength:15 dotsGap:10];
     pageControl.backgroundColor = [UIColor clearColor];
     [self.view addSubview:pageControl];
     self.pageControl = pageControl;
@@ -91,13 +93,9 @@ static NSString * const reuseIdentifier = @"Cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODNewFeatureCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell
     NSString *imageName = [NSString stringWithFormat:@"begin%ld", indexPath.item + 1];
     cell.image = [UIImage imageNamed:imageName];
-    
     [cell setIndex:indexPath imageCount:5];
-    
     return cell;
 }
 
@@ -107,6 +105,12 @@ static NSString * const reuseIdentifier = @"Cell";
     NSInteger index = scrollView.contentOffset.x / KScreenWidth + 0.5;
     // 滚动pageControl
     self.pageControl.currentPage = index;
+    
+    if (index == showCount) {
+        self.pageControl.hidden = YES;
+    } else {
+        self.pageControl.hidden = NO;
+    }
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
