@@ -49,7 +49,12 @@
         self.orderStateLabel.text = @"已取消";
     }
     else if ([model.order_status isEqualToString:@"-2"]) {
-        self.orderStateLabel.text = @"已申请退款";
+        if (self.isSellDetail) {
+            self.orderStateLabel.text = @"买家已申请退款";
+        }
+        else {
+            self.orderStateLabel.text = @"已申请退款";
+        }        
     }
     else if ([model.order_status isEqualToString:@"-3"]) {
         self.orderStateLabel.text = @"退款已受理";
