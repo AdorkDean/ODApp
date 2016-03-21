@@ -14,6 +14,9 @@
 //#import "ODCommunityBbsModel.h"
 #import "ODCommunityDetailViewController.h"
 #import "ODOthersInformationController.h"
+
+#import "ODNoResultLabel.h"
+
 @interface ODMyTopicController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
 @property (nonatomic , strong) UISegmentedControl *segmentedControl;
@@ -230,17 +233,14 @@
             [weakSelf.firstUserInfoDic setObject:userModel forKey:userKey];
         }
         
-      
-
-        
-        
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.FirstDataArray.count == 0) {
-            weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40, KScreenHeight / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [weakSelf.scrollView addSubview:weakSelf.firstLabel];
+            [noResultabel showOnSuperView:weakSelf.firstCollectionView title:@"暂无话题"];
         }
-        
+        else {
+            [noResultabel hidden];
+        }
         [weakSelf.firstCollectionView.mj_header endRefreshing];
-        
         if ([[model result] bbs_list].count == 0) {
             [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
         }
@@ -284,13 +284,15 @@
             [weakSelf.secondUserInfoDic setObject:userModel forKey:userKey];
         }
         
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.secondDataArray.count == 0) {
-            weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40 + weakSelf.scrollView.frame.size.width, KScreenHeight / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [weakSelf.scrollView addSubview:weakSelf.secondLabel];
+            [noResultabel showOnSuperView:weakSelf.secondCollectionView title:@"暂无话题"];
         }
-
+        else {
+            [noResultabel hidden];
+        }
+        
         [weakSelf.secondCollectionView.mj_header endRefreshing];
-
         if ([[model result] bbs_list].count == 0) {
             [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
         }

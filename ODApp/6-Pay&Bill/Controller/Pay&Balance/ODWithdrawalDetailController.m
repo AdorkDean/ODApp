@@ -72,14 +72,13 @@
 
          NSArray *balanceDatas = [model result];
          [weakSelf.dataArray addObjectsFromArray:balanceDatas];
-         
+        
+         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
          if (weakSelf.dataArray.count == 0) {
-             weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
-             weakSelf.noReusltLabel.text = @"暂无提现记录";
-             weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
-             weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
-             weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-             [weakSelf.view addSubview:weakSelf.noReusltLabel];
+             [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无提现记录"];
+         }
+         else {
+             [noResultabel hidden];
          }
          
          [weakSelf.collectionView reloadData];

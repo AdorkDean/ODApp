@@ -17,9 +17,6 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
 
 @property (nonatomic, strong) UITableView *tableView;
 
-// 无纪录
-@property(nonatomic, strong) UILabel *noReusltLabel;
-
 // 数据数组
 @property(nonatomic, strong) NSMutableArray *dataArray;
 
@@ -84,21 +81,16 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - 数据请求
 -(void)requestData
 {
     NSDictionary *parameter = @{
                                 @"type" : @"4",
-                                @"page" : [NSString stringWithFormat:@"%ld", self.page],
+                                @"page" : [NSString stringWithFormat:@"%ld", (long)self.page],
                                 };
     __weakSelf
     [ODHttpTool getWithURL:ODUrlUserLoveList parameters:parameter modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
         if (self.page == 1) {
-            [weakSelf.noReusltLabel removeFromSuperview];
             [weakSelf.dataArray removeAllObjects];
         }
         
@@ -114,14 +106,14 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
         }
         [weakSelf.tableView reloadData];
         
-        if (self.page == 1 && self.dataArray.count == 0) {
-            weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
-            weakSelf.noReusltLabel.text = @"暂无收藏";
-            weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
-            weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
-            weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-            [weakSelf.view addSubview:weakSelf.noReusltLabel];
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        if (weakSelf.dataArray.count == 0) {
+            [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无收藏"];
         }
+        else {
+            [noResultabel hidden];
+        }
+        
     } failure:^(NSError *error) {
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView.mj_footer endRefreshing];

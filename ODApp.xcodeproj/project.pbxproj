@@ -319,6 +319,7 @@
 		ED53273A1C9AAFD200BB45B1 /* ODCenterDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED5327391C9AAFD200BB45B1 /* ODCenterDetailController.m */; };
 		ED57CC441C92A0C30091FCFF /* ODChoseCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED57CC421C92A0C30091FCFF /* ODChoseCenterCell.m */; };
 		ED57CC451C92A0C30091FCFF /* ODChoseCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED57CC431C92A0C30091FCFF /* ODChoseCenterCell.xib */; };
+		ED7F6AFE1C9FC8AB0099EEB0 /* ODNoResultLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7F6AFD1C9FC8AB0099EEB0 /* ODNoResultLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -902,6 +903,8 @@
 		ED57CC411C92A0C30091FCFF /* ODChoseCenterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODChoseCenterCell.h; sourceTree = "<group>"; };
 		ED57CC421C92A0C30091FCFF /* ODChoseCenterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODChoseCenterCell.m; sourceTree = "<group>"; };
 		ED57CC431C92A0C30091FCFF /* ODChoseCenterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODChoseCenterCell.xib; sourceTree = "<group>"; };
+		ED7F6AFC1C9FC8AB0099EEB0 /* ODNoResultLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNoResultLabel.h; sourceTree = "<group>"; };
+		ED7F6AFD1C9FC8AB0099EEB0 /* ODNoResultLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNoResultLabel.m; sourceTree = "<group>"; };
 		EEA572BF76BF4C22E1FC80BA /* libPods-ODApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ODApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD754733DED72842C8626E1D /* Pods-ODApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1202,6 +1205,8 @@
 				232CB39D1C9264E200340D12 /* ODProgressHUD.m */,
 				232CB39E1C9264E200340D12 /* ODTabBar.h */,
 				232CB39F1C9264E200340D12 /* ODTabBar.m */,
+				ED7F6AFC1C9FC8AB0099EEB0 /* ODNoResultLabel.h */,
+				ED7F6AFD1C9FC8AB0099EEB0 /* ODNoResultLabel.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2361,6 +2366,7 @@
 				400334881C9B97C500973818 /* ODCheckItem.m in Sources */,
 				232CB5FC1C9264E200340D12 /* ODRegisteredController.m in Sources */,
 				232CB5A51C9264E200340D12 /* ODStoreSubmitOrderModel.m in Sources */,
+				ED7F6AFE1C9FC8AB0099EEB0 /* ODNoResultLabel.m in Sources */,
 				232CB5E61C9264E200340D12 /* ODRoundTimeDrawView.m in Sources */,
 				4003348B1C9B97C500973818 /* ODSwitchItem.m in Sources */,
 				232CB5661C9264E200340D12 /* IQUIView+Hierarchy.m in Sources */,

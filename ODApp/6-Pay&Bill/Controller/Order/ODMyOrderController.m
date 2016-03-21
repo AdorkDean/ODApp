@@ -26,7 +26,6 @@
 
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, copy) NSString *open_id;
-@property(nonatomic, strong) UILabel *noReusltLabel;
 
 @property(nonatomic, assign) NSInteger indexRow;
 
@@ -94,14 +93,15 @@
         NSArray *orderDatas = [model result];
         if ([countNumber isEqualToString:@"1"]) {
             [weakSelf.dataArray removeAllObjects];
-            [weakSelf.noReusltLabel removeFromSuperview];
         }
-
         [weakSelf.dataArray addObjectsFromArray:orderDatas];
 
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.dataArray.count == 0) {
-            weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 160) / 2, kScreenSize.height / 2, 160, 30) text:@"暂无订单" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [weakSelf.view addSubview:weakSelf.noReusltLabel];
+            [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无订单"];
+        }
+        else {
+            [noResultabel hidden];
         }
 
         [weakSelf.collectionView.mj_header endRefreshing];
