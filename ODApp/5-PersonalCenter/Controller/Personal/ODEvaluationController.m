@@ -231,7 +231,7 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          [weakSelf.skillDataArray addObjectsFromArray:evaluationDatas];
          
          [weakSelf.skillTableView.mj_header endRefreshing];
-         if (evaluationDatas.count == 0) {
+         if (weakSelf.skillDataArray.count % 20 != 0) {
              [weakSelf.skillTableView.mj_footer endRefreshingWithNoMoreData];
          }
          else
