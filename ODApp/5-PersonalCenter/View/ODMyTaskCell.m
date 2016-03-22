@@ -33,7 +33,7 @@
     if (_model != model) {
         _model = model;
     }
-    [self.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal];
+    [self.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed completed:nil];
     self.nickLabel.text = model.user_nick;
     self.titleLabel.text = model.title;
     self.contentLabel.text = model.content;

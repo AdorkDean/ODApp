@@ -17,14 +17,7 @@
 #import "ODMyTaskCell.h"
 #import "ODMyTaskViolationsCell.h"
 
-@interface ODOtherTaskController ()
-
-<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate,UITableViewDelegate,UITableViewDataSource>
-
-@property (nonatomic , strong) UICollectionViewFlowLayout *flowLayout;
-@property (nonatomic , strong) UICollectionView *collectionView;
-@property (nonatomic , assign) NSInteger PageNumber;
-
+@interface ODOtherTaskController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
@@ -37,7 +30,7 @@
 #pragma mark - lazyload
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0,kScreenSize.width, kScreenSize.height-64-50) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, -6,kScreenSize.width, kScreenSize.height-58) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.dataSource = self;
@@ -60,9 +53,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+     __weakSelf
     self.page = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"他发起的任务";
+    [self getData];
+   
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        weakSelf.page = 1;
+        [weakSelf getData];
+    }];
+    
+    self.tableView .mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        weakSelf.page ++;
+        [weakSelf getData];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -79,42 +84,8 @@
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - 初始化方法
-- (void)createCollection
-{
-    
-    self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width,kScreenSize.height - 64) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-    self.collectionView.dataSource = self;
-    self.collectionView.delegate = self;
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ODViolationsCell" bundle:nil] forCellWithReuseIdentifier:@"item1"];
-    
-    __weakSelf
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        weakSelf.PageNumber = 1;
-        [weakSelf downRefresh];
-    }];
-    
-    
-    self.collectionView .mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        weakSelf.PageNumber++;
-        [weakSelf loadMoreData];
-    }];
-    
-    
-    
-    [self.collectionView.mj_header beginRefreshing];
-    
-    [self.view addSubview:self.collectionView];
-    
-    
-}
 #pragma mark - 获取数据
-- (void)getData
-{
-
+- (void)getData{
     NSDictionary *params = @{@"suggest":@"0",@"task_status":@"0",@"page":[NSString stringWithFormat:@"%ld", (long) self.page],@"my":@"1",@"open_id":self.openId};
     __weakSelf
     // 发送请求
@@ -127,7 +98,7 @@
          ODBazaarTasksModel *tasksModel = [model result];
          [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];
          
-         [weakSelf.collectionView.mj_header endRefreshing];
+         [weakSelf.tableView.mj_header endRefreshing];
          if (tasksModel.tasks.count == 0) {
              [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
          }else{
@@ -137,9 +108,8 @@
          
          ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
          if (weakSelf.dataArray.count == 0) {
-             [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无任务"];
-         }
-         else {
+             [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无任务"];
+         }else {
              [noResultabel hidden];
          }
      } failure:^(NSError *error) {
@@ -176,44 +146,6 @@
         return cell;
     }
 }
-//-(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-//{
-//    return 1;
-//}
-//
-//-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-//{
-//    
-//    return self.dataArray.count;
-//    
-//}
-//-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    ODBazaarModel *model = self.dataArray[indexPath.row];
-//    NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
-//    
-//    if ([status isEqualToString:@"-1"]) {
-////        ODViolationsCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item1" forIndexPath:indexPath];
-//        
-////        [cell.deleteButton removeFromSuperview];
-////        cell.model = model;
-////        
-////        return cell;
-//        
-//        
-//    }else{
-//        
-////        ODTaskCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
-////        
-////        cell.model = model;
-////        
-////        
-////        return cell;
-////        
-//    }
-//    
-//    return nil;
-//}
 
 #pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -232,69 +164,7 @@
     }
 }
 
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc]init];
-    ODBazaarModel *model = self.dataArray[indexPath.row];
-    
-    
-    NSString *status = [NSString stringWithFormat:@"%@" , model.task_status];
-    
-    if ([status isEqualToString:@"-1"]) {
-        
-        ;
-    }else{
-        
-        bazaarDetail.task_id = [NSString stringWithFormat:@"%@",model.task_id];
-        bazaarDetail.open_id = [NSString stringWithFormat:@"%@",model.open_id];
-        bazaarDetail.task_status_name = model.task_status_name;
-        [self.navigationController pushViewController:bazaarDetail animated:YES];
-        
-    }
-}
 
-//动态设置每个item的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return CGSizeMake(kScreenSize.width , 140);
-}
-//动态设置每个分区的缩进量
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(0, 0, 0, 0);
-}
-//动态设置每个分区的最小行间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 5;
-}
-//动态返回不同区的列间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return 0;
-}
-//动态设置区头的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-{
-    return CGSizeMake(0, 0);
-    
-}
-//动态设置区尾的高度(根据不同的分区)
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
-{
-    return CGSizeMake(0, 0);
-}
-#pragma mark - 事件方法
-- (void)downRefresh
-{
-    self.PageNumber = 1;
-    [self getData];
-}
-- (void)loadMoreData
-{
-    self.PageNumber++;
-    [self getData];
-}
+
 
 @end
