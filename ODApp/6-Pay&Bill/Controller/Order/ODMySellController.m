@@ -35,6 +35,10 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationSellOrderSecondRefresh object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationOrderListRefresh object:nil];
+    
+    
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 - (void)viewDidLoad {
@@ -66,7 +70,7 @@
 - (void)reloadData:(NSNotification *)text {
 
     ODMySellModel *model = self.dataArray[self.indexRow];
-    model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"orderStatus"]];
+    model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"order_status"]];
     [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
     [self.collectionView reloadData];
 

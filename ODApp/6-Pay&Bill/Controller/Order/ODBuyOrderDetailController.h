@@ -23,6 +23,11 @@
 @property(nonatomic, copy) NSString *orderStatus;
 
 /**
+ *
+ **/
+@property(nonatomic, copy) NSString *swapType;
+
+/**
  * 刷新block
  **/
 @property(nonatomic, copy) void(^getRefresh)(NSString *isRefresh);

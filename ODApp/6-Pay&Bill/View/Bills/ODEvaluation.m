@@ -34,7 +34,7 @@
     
     for (int i = 1; i < 6; i++) {
         self.starButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        self.starButton.frame = CGRectMake((self.frame.size.width - 200) / 6 * i, 100, 40, 30);
+        self.starButton.frame = CGRectMake((self.frame.size.width - 200) / 6 * i + 40 * (i - 1), 100, 40, 30);
         [self.starButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
         self.starButton.tag = 1000 + i;
         [self.starButton addTarget:self action:@selector(starButtonClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -45,38 +45,38 @@
     
     
     
-    self.firstButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.firstButton.frame = CGRectMake((self.frame.size.width - 200) / 6, 100, 40, 30);
-    [self.firstButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
-    [self addSubview:self.firstButton];
-    
-    
-    self.secondButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.secondButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 2 + 40, 100, 40, 30);
-    [self.secondButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
-    [self addSubview:self.secondButton];
-    
-    
-    
-    
-    self.thirdButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.thirdButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 3 + 80, 100, 40, 30);
-    [self.thirdButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
-    [self addSubview:self.thirdButton];
-    
-    
-    
-    self.fourthButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.fourthButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 4 + 120, 100, 40, 30);
-    [self.fourthButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
-    [self addSubview:self.fourthButton];
-    
-    
-    
-    self.fiveButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.fiveButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 5 + 160, 100, 40, 30);
-    [self.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
-    [self addSubview:self.fiveButton];
+//    self.firstButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.firstButton.frame = CGRectMake((self.frame.size.width - 200) / 6, 100, 40, 30);
+//    [self.firstButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+//    [self addSubview:self.firstButton];
+//    
+//    
+//    self.secondButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.secondButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 2 + 40, 100, 40, 30);
+//    [self.secondButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+//    [self addSubview:self.secondButton];
+//    
+//    
+//    
+//    
+//    self.thirdButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.thirdButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 3 + 80, 100, 40, 30);
+//    [self.thirdButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+//    [self addSubview:self.thirdButton];
+//    
+//    
+//    
+//    self.fourthButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.fourthButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 4 + 120, 100, 40, 30);
+//    [self.fourthButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+//    [self addSubview:self.fourthButton];
+//    
+//    
+//    
+//    self.fiveButton = [UIButton buttonWithType:UIButtonTypeCustom];
+//    self.fiveButton.frame = CGRectMake(((self.frame.size.width - 200) / 6 ) * 5 + 160, 100, 40, 30);
+//    [self.fiveButton setImage:[UIImage imageNamed:@"3K$7ZE(Z[0WTC}}}G8DR14P"] forState:UIControlStateNormal];
+//    [self addSubview:self.fiveButton];
 
     
     self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 160, kScreenSize.width - 100, 20)];

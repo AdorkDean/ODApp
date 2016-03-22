@@ -73,8 +73,7 @@
 @property (nonatomic, strong) UIButton *endLeftButton;
 @property (nonatomic, strong) UIButton *endRightButton;
 
-
-@property (nonatomic, assign) BOOL isCancelOrder;
+@property (nonatomic, strong) ODOrderDetailModel *model;
 
 
 @end
@@ -82,12 +81,6 @@
 @implementation ODBuyOrderDetailController
 
 #pragma mark - 生命周期方法
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -103,8 +96,14 @@
     
     self.evaluateStar = @"";
     //                [self createEvaluation];
-    [self getData];
     
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self getData];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -115,62 +114,65 @@
 #pragma mark - 懒加载
 
 - (void)createScrollView {
-        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, self.scrollHeight)];
-        self.scrollView.backgroundColor = [UIColor backgroundColor];
-        
-        [self createTopView];
-        [self createIndentDetailView];
-        [self createBuyerInformationView];
-        [self createOrderCancelReasonView];
-        [self createDealTimeView];
-        [self.view addSubview:self.scrollView];
-
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, self.scrollHeight)];
+    self.scrollView.backgroundColor = [UIColor backgroundColor];
+    
+    [self createTopView];
+    [self createIndentDetailView];
+    [self createBuyerInformationView];
+    [self createOrderCancelReasonView];
+    [self createDealTimeView];
+    [self.view addSubview:self.scrollView];
 }
 
 #pragma mark - 底部是一个按钮
-- (UIButton *)endIsOneButton {
-    if (!_endIsOneButton) {
-        NSString *status = [NSString stringWithFormat:@"%@", self.orderStatus];
-        _endIsOneButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        _endIsOneButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        _endIsOneButton.backgroundColor = [UIColor colorRedColor];
-        _endIsOneButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
-        [_endIsOneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-       
-        if (self.isSellDetail) {
-            if ([status isEqualToString:@"2"]) {
-                [_endIsOneButton setTitle:@"确认发货" forState:UIControlStateNormal];
-                [_endIsOneButton addTarget:self action:@selector(deliveryAction:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            else if ([status isEqualToString:@"3"]) {
-                [_endIsOneButton setTitle:@"确认服务" forState:UIControlStateNormal];
-                [_endIsOneButton addTarget:self action:@selector(deliveryAction:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            else if ([status isEqualToString:@"-2"]) {
-                [_endIsOneButton setTitle:@"处理退款" forState:UIControlStateNormal];
-                [_endIsOneButton addTarget:self action:@selector(dealDeliveryAction:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            else if ([status isEqualToString:@"-3"] || [status isEqualToString:@"-4"] || [status isEqualToString:@"-5"]) {
-                [_endIsOneButton setTitle:@"查看原因" forState:UIControlStateNormal];
-                [_endIsOneButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
-            }
+- (void)createEndisOneButton {
+
+//    NSString *status = [NSString stringWithFormat:@"%@", self.model.order_status];
+//    NSString *swapType = [NSString stringWithFormat:@"%@",self.model.swap_type];
+    _endIsOneButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    _endIsOneButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
+    _endIsOneButton.backgroundColor = [UIColor colorRedColor];
+    _endIsOneButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
+    [_endIsOneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+   
+    if (self.isSellDetail) {
+        if ([self.model.order_status isEqualToString:@"2"]) {
+            [_endIsOneButton setTitle:@"确认发货" forState:UIControlStateNormal];
+            [_endIsOneButton addTarget:self action:@selector(deliveryAction:) forControlEvents:UIControlEventTouchUpInside];
         }
-        else {
-            if ([status isEqualToString:@"3"] || [status isEqualToString:@"2"]) {
-                [_endIsOneButton setTitle:@"申请退款" forState:UIControlStateNormal];
-                [_endIsOneButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
-            }
-            else if ([status isEqualToString:@"-5"] || [status isEqualToString:@"-3"] || [status isEqualToString:@"-4"]) {
-                [_endIsOneButton setTitle:@"查看原因" forState:UIControlStateNormal];
-                [_endIsOneButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
-            }
+        else if ([self.model.order_status isEqualToString:@"3"]) {
+            [_endIsOneButton setTitle:@"确认服务" forState:UIControlStateNormal];
+            [_endIsOneButton addTarget:self action:@selector(deliveryAction:) forControlEvents:UIControlEventTouchUpInside];
         }
-        
-        
-        
-        [self.view addSubview:_endIsOneButton];
+        else if ([self.model.order_status isEqualToString:@"-2"]) {
+            [_endIsOneButton setTitle:@"处理退款" forState:UIControlStateNormal];
+            [_endIsOneButton addTarget:self action:@selector(dealDeliveryAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else if ([self.model.order_status isEqualToString:@"-3"] || [self.model.order_status isEqualToString:@"-4"] || [self.model.order_status isEqualToString:@"-5"]) {
+            [_endIsOneButton setTitle:@"查看原因" forState:UIControlStateNormal];
+            [_endIsOneButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
     }
-    return _endIsOneButton;
+    else {
+        if ([self.model.order_status isEqualToString:@"3"] || [self.model.order_status isEqualToString:@"2"]) {
+            [_endIsOneButton setTitle:@"申请退款" forState:UIControlStateNormal];
+            [_endIsOneButton addTarget:self action:@selector(refundAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        else if ([self.model.order_status isEqualToString:@"-5"] || [self.model.order_status isEqualToString:@"-3"] || [self.model.order_status isEqualToString:@"-4"]) {
+            [_endIsOneButton setTitle:@"查看原因" forState:UIControlStateNormal];
+            [_endIsOneButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+        if ([self.model.order_status isEqualToString:@"5"] && [self.model.swap_type isEqualToString:@"1"]) {
+            [_endIsOneButton setTitle:@"评价" forState:UIControlStateNormal];
+            [_endIsOneButton addTarget:self action:@selector(evaluationAction:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    }
+    
+    
+    
+    [self.view addSubview:_endIsOneButton];
+
 }
 
 #pragma mark - 底部是两个按钮
@@ -437,7 +439,7 @@
                 [button setImage:[UIImage imageNamed:starArray[0]] forState:UIControlStateNormal];
             }
         }
-        weakSelf.evaluateStar = [NSString stringWithFormat:@"%ld", (long)tag];
+        weakSelf.evaluateStar = [NSString stringWithFormat:@"%ld", (long)tag - 1000];
         weakSelf.evaluationView.titleLabel.text = evaluationArray[tag - 1001];
     };
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.evaluationView];
@@ -458,6 +460,7 @@
          [weakSelf.dataArray removeAllObjects];
          [weakSelf.dataArray addObject:detailModel];
          
+         self.model = weakSelf.dataArray[0];
          ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
          NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
          if (![self.orderStatus isEqualToString:orderStatue]) {
@@ -465,35 +468,35 @@
              NSNotification *notification = [NSNotification notificationWithName:ODNotificationMyOrderSecondRefresh object:nil userInfo:dic];
              [[NSNotificationCenter defaultCenter] postNotification:notification];
          }
-         if (([weakSelf.orderStatus isEqualToString:@"1"] || [weakSelf.orderStatus isEqualToString:@"4"])) {
+         
+         if (([self.model.order_status isEqualToString:@"1"] || [self.model.order_status isEqualToString:@"4"])) {
+             
              if (self.isSellDetail) {
                  self.scrollHeight = KControllerHeight - ODNavigationHeight;
              }
              else {
                  self.scrollHeight = KControllerHeight - ODNavigationHeight - 50;
              }
-             if (!self.isCancelOrder) {
-                 [weakSelf createEndIsTwoButton];
-             }
-             else{
-                 self.scrollHeight = KControllerHeight - ODNavigationHeight;
-             }
+             [weakSelf createEndIsTwoButton];
+
          }
-         else if ([weakSelf.orderStatus isEqualToString:@"-2"] && self.isSellDetail){
+         else if ([self.model.order_status isEqualToString:@"-2"] && self.isSellDetail){
              self.scrollHeight = KControllerHeight - ODNavigationHeight - 50;
-             [weakSelf endIsOneButton];
+             [weakSelf createEndisOneButton];
          }
-         else if ([weakSelf.orderStatus isEqualToString:@"2"] ||
-                  [weakSelf.orderStatus isEqualToString:@"3"] ||
-                  [weakSelf.orderStatus isEqualToString:@"-3"] ||
-                  [weakSelf.orderStatus isEqualToString:@"-4"] ||
-                  [weakSelf.orderStatus isEqualToString:@"-5"]) {
+         else if ([self.model.order_status isEqualToString:@"2"] ||
+                  [self.model.order_status isEqualToString:@"3"] ||
+                  ([self.model.order_status isEqualToString:@"5"] && [weakSelf.model.swap_type isEqualToString:@"1"]) ||
+                  [self.model.order_status isEqualToString:@"-3"] ||
+                  [self.model.order_status isEqualToString:@"-4"] ||
+                  [self.model.order_status isEqualToString:@"-5"]) {
              self.scrollHeight = KControllerHeight - ODNavigationHeight - 50;
-             [weakSelf endIsOneButton];
+             [weakSelf createEndisOneButton];
          }
          else {
              self.scrollHeight = KControllerHeight - ODNavigationHeight;
          }
+         
          [weakSelf createScrollView];
      } failure:^(NSError *error) {
          [ODProgressHUD showInfoWithStatus:@"网络异常"];
@@ -545,13 +548,16 @@
          [weakSelf.endIsOneButton removeFromSuperview];
          
          ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
-         weakSelf.orderStatus = [NSString stringWithFormat:@"%@", statusModel.order_status];
+         self.model.order_status = [NSString stringWithFormat:@"%@", statusModel.order_status];
          
          if (weakSelf.getRefresh) {
              weakSelf.getRefresh(@"1");
          }
          
+         self.scrollHeight = KControllerHeight - ODNavigationHeight;
          [weakSelf getData];
+         [weakSelf.endIsOneButton removeFromSuperview];
+         
          [ODProgressHUD showInfoWithStatus:@"操作成功"];
      } failure:^(NSError *error) {
          
@@ -569,7 +575,6 @@
     vc.drawbackReason = model.reason;
     vc.isRefuseAndReceive = YES;
     vc.drawbackTitle = @"退款处理";
-    
     
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -593,16 +598,12 @@
             [weakSelf.cancelOrderView removeFromSuperview];
             [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
             ODOrderDetailModel *statusModel = self.dataArray[0];
-            weakSelf.orderStatus = [NSString stringWithFormat:@"%@", statusModel.order_status];
+            self.model.order_status = [NSString stringWithFormat:@"%@", statusModel.order_status];
             if (weakSelf.getRefresh) {
                 weakSelf.getRefresh(@"1");
             }
-            self.isCancelOrder = YES;
-            [weakSelf.endLeftButton removeFromSuperview];
-            [weakSelf.endRightButton removeFromSuperview];
-            [weakSelf getData];
-//            [weakSelf.scrollView.mj_header beginRefreshing];
 
+            [weakSelf getData];
         } failure:^(NSError *error) {
             [ODProgressHUD showInfoWithStatus:@"网络异常"];
         }];
@@ -611,16 +612,9 @@
 
 #pragma mark - 返回刷新
 - (void)backAction:(UIBarButtonItem *)sender {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backRefrash:) name:ODNotificationMyOrderThirdRefresh object:nil];
+    NSDictionary *statusDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.model.order_status,@"order_status", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationOrderListRefresh object:nil userInfo:statusDict];
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)backRefrash:(NSNotification *)text {
-    ODOrderDetailModel *statusModel = self.dataArray[0];
-    NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
-    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:orderStatue, @"orderStatus", nil];
-    NSNotification *notification = [NSNotification notificationWithName:ODNotificationMyOrderSecondRefresh object:nil userInfo:dic];
-    [[NSNotificationCenter defaultCenter] postNotification:notification];
 }
 
 #pragma mark - 查看原因
@@ -683,8 +677,13 @@
          [weakSelf.evaluationView removeFromSuperview];
          [ODProgressHUD showInfoWithStatus:@"评价成功"];
          ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
-         weakSelf.orderStatus = [NSString stringWithFormat:@"%@", statusModel.order_status];
-         
+         self.model.order_status = [NSString stringWithFormat:@"%@", statusModel.order_status];
+        
+        self.orderStatus = @"5";
+        self.model.swap_type = @"1";
+        [weakSelf.endIsOneButton removeFromSuperview];
+        [weakSelf.scrollView removeFromSuperview];
+        
          if (weakSelf.getRefresh) {
              weakSelf.getRefresh(@"1");
          }
@@ -694,7 +693,7 @@
      }];
 }
 
-// 评价
+#pragma mark - 评价
 - (void)evaluationAction:(UIButton *)sender {
     [self createEvaluation];
 }
