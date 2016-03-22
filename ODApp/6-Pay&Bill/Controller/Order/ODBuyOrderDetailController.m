@@ -163,7 +163,7 @@
             [_endIsOneButton setTitle:@"查看原因" forState:UIControlStateNormal];
             [_endIsOneButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
         }
-        if ([self.model.order_status isEqualToString:@"5"] && self.model.reason_num.length > 0) {
+        if ([self.model.order_status isEqualToString:@"5"] && [self.model.reason_num floatValue] == 0) {
             [_endIsOneButton setTitle:@"评价" forState:UIControlStateNormal];
             [_endIsOneButton addTarget:self action:@selector(evaluationAction:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -486,7 +486,7 @@
          }
          else if ([self.model.order_status isEqualToString:@"2"] ||
                   [self.model.order_status isEqualToString:@"3"] ||
-                  ([self.model.order_status isEqualToString:@"5"] && [weakSelf.model.swap_type isEqualToString:@"1"]) ||
+                  ([self.model.order_status isEqualToString:@"5"] && [self.model.reason_num floatValue] == 0) ||
                   [self.model.order_status isEqualToString:@"-3"] ||
                   [self.model.order_status isEqualToString:@"-4"] ||
                   [self.model.order_status isEqualToString:@"-5"]) {
