@@ -97,12 +97,6 @@ typedef enum : NSUInteger
 @property (nonatomic, assign) NSInteger swap_id;
 
 
-/** 配图的frame */
-@property (nonatomic, assign, readonly) CGRect photosFrame;
-
-/** cell的高度 */
-@property (nonatomic, assign, readonly) CGFloat rowHeight;
-
 @end
 
 ODRequestResultIsArrayProperty(ODBazaarExchangeSkillModel)

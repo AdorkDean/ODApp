@@ -12,6 +12,9 @@
 
 #import "ODTakeAwayModel.h"
 #import "ODTakeAwayCell.h"
+#import "ODTakeAwayHeaderView.h"
+
+#import "NSString+ODExtension.h"
 
 @interface ODTakeAwayViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -86,11 +89,15 @@ static NSString * const exchangeCellId = @"takeAwayCell";
     // 创建表格
     CGRect frame = CGRectMake(0, 0, KScreenWidth, self.view.od_height);
     UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
-    tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     tableView.dataSource = self;
     tableView.delegate = self;
     [self.view addSubview:tableView];
     self.tableView = tableView;
+    
+    self.tableView.contentInset = UIEdgeInsetsMake(163, 0, 0, 0);
+    
+    // 设置tableView的rowHeight
+    tableView.rowHeight = 90;
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell
@@ -102,7 +109,9 @@ static NSString * const exchangeCellId = @"takeAwayCell";
  */
 - (void)setupHeaderView
 {
-    
+    ODTakeAwayHeaderView *headerView = [ODTakeAwayHeaderView headerView];
+    [headerView sizeToFit];
+    [self.view addSubview:headerView];
 }
 
 /**
@@ -119,7 +128,8 @@ static NSString * const exchangeCellId = @"takeAwayCell";
 #pragma mark - UITableView 数据源方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.datas.count;
+//    return self.datas.count;
+    return 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

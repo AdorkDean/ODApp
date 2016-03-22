@@ -98,6 +98,8 @@ static NSString * const exchangeCellId = @"exchangeCell";
     self.tableView = tableView;
     
     tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
+    tableView.rowHeight = UITableViewAutomaticDimension;
+    tableView.estimatedRowHeight = 300;
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell
@@ -140,11 +142,11 @@ static NSString * const exchangeCellId = @"exchangeCell";
     [self.navigationController pushViewController:detailControler animated:YES];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    return model.rowHeight;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+//    return model.rowHeight;
+//}
 
 #pragma mark - 事件方法
 - (void)loadNewUsers
