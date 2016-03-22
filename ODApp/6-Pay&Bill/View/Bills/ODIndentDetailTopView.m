@@ -42,7 +42,12 @@
         }
     }
     else if ([model.order_status isEqualToString:@"5"]) {
-        self.orderStateLabel.text = @"已评价";
+        if (model.reason_num.length > 0) {
+            self.orderStateLabel.text = @"已评价";
+        }
+        else {
+            self.orderStateLabel.text = @"已完成";
+        }
         self.orderStateLabel.textColor = [UIColor redColor];
     }
     else if ([model.order_status isEqualToString:@"-1"]) {

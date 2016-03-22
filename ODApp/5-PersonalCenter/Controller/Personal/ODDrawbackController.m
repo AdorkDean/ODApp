@@ -48,6 +48,8 @@
 @property(nonatomic, strong) UIView *serviceTimeView;
 
 
+@property (nonatomic, strong) NSString *order_status;
+
 @end
 
 @implementation ODDrawbackController
@@ -417,16 +419,20 @@
     [ODHttpTool getWithURL:ODUrlSwapRejectRefund parameters:parameter modelClass:[NSObject class] success:^(id model) {
         
         [ODProgressHUD showInfoWithStatus:@"已拒绝"];
-        NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
-        
+//        NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
+//        [[NSNotificationCenter defaultCenter] postNotification:notification];
+//        
+////        [weakSelf refreshDetail:@"-5"];
         [weakSelf.cancelOrderView removeFromSuperview];
         [weakSelf.navigationController popViewControllerAnimated:YES];
+        
+        
     }
                    failure:^(NSError *error) {
                 
     }];
 }
+
 
 #pragma mark - 接受退款请求
 
@@ -438,14 +444,19 @@
     [ODHttpTool getWithURL:ODUrlSwapConfirmRefund parameters:parameter modelClass:[NSObject class] success:^(id model) {
         
         [ODProgressHUD showInfoWithStatus:@"已接受"];
-        NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
+//        NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
+//        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
+//        [weakSelf refreshDetail:@"-3"];
+
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }
                    failure:^(NSError *error) {
                        
     }];
- }
+}
+
+
 
 #pragma mark - 申请退款请求
 
@@ -457,11 +468,12 @@
     [ODHttpTool getWithURL:ODUrlSwapOrderCancel parameters:parameter modelClass:[NSObject  class] success:^(id model) {
         
         [ODProgressHUD showInfoWithStatus:@"申请退款成功"];
-        NSNotification *notification =[NSNotification notificationWithName:ODNotificationMyOrderThirdRefresh object:nil userInfo:nil];
-        [[NSNotificationCenter defaultCenter] postNotification:notification];
+//        NSNotification *notification =[NSNotification notificationWithName:ODNotificationMyOrderThirdRefresh object:nil userInfo:nil];
+//        [[NSNotificationCenter defaultCenter] postNotification:notification];
+        
+//        [weakSelf refreshDetail:@"-2"];
         
         [weakSelf.navigationController popViewControllerAnimated:YES];
-        
     }
                    failure:^(NSError *error) {
                 

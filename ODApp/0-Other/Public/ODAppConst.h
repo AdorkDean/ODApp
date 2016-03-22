@@ -77,7 +77,7 @@ UIKIT_EXTERN NSString * const ODNotificationCancelOrder;
 /** 定位刷新 */
 UIKIT_EXTERN NSString * const ODNotificationLocationSuccessRefresh;
 
-/** 订单刷新 */
+/** 订单列表刷新 */
 UIKIT_EXTERN NSString * const ODNotificationOrderListRefresh;
 
 /**  退出成功刷新集市状态 */
@@ -100,6 +100,7 @@ UIKIT_EXTERN NSString * const ODNotificationSellOrderSecondRefresh;
 
 /** 已购买三级页面通知 */
 UIKIT_EXTERN NSString * const ODNotificationSellOrderThirdRefresh;
+
 
 /**  点击收藏的通知 */
 UIKIT_EXTERN NSString * const ODNotificationloveSkill;

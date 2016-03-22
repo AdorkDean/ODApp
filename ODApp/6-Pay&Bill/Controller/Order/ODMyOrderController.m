@@ -36,7 +36,10 @@
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationMyOrderSecondRefresh object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationMyOrderSecondRefresh object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationOrderListRefresh object:nil];
+    
+    
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 - (void)viewWillDisappear:(BOOL)animated {
@@ -223,12 +226,18 @@
 }
 - (void)reloadData:(NSNotification *)text {
     
-    if (self.indexRow < self.dataArray.count) {
-        ODMyOrderModel *model = self.dataArray[self.indexRow];
-        model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"orderStatus"]];
-        [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
-        [self.collectionView reloadData];
-    }
+    ODMyOrderModel *model = self.dataArray[self.indexRow];
+    model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"order_status"]];
+    [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
+    [self.collectionView reloadData];
+    
+    
+//    if (self.indexRow < self.dataArray.count) {
+//        ODMyOrderModel *model = self.dataArray[self.indexRow];
+//        model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"orderStatus"]];
+//        [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
+//        [self.collectionView reloadData];
+//    }
 }
 
 @end
