@@ -19,8 +19,9 @@
 
 - (void)awakeFromNib {
     self.backgroundColor = [UIColor whiteColor];
-    
+    self.userImageView.layer.masksToBounds = YES;
     self.userImageView.layer.cornerRadius = 24;
+    self.orderImageView.layer.masksToBounds = YES;
     self.orderImageView.layer.cornerRadius = 5;
     
     self.orderWay.layer.cornerRadius = 5;

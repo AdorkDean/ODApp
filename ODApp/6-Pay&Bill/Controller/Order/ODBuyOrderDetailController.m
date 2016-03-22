@@ -602,10 +602,6 @@
             if (weakSelf.getRefresh) {
                 weakSelf.getRefresh(@"1");
             }
-//            self.orderStatus = @"-1";
-//            [weakSelf.endLeftButton removeFromSuperview];
-//            [weakSelf.endRightButton removeFromSuperview];
-//            [weakSelf.scrollView removeFromSuperview];
 
             [weakSelf getData];
         } failure:^(NSError *error) {
@@ -620,14 +616,6 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationOrderListRefresh object:nil userInfo:statusDict];
     [self.navigationController popViewControllerAnimated:YES];
 }
-
-//- (void)backRefrash:(NSNotification *)text {
-//    ODOrderDetailModel *statusModel = self.dataArray[0];
-//    NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
-//    NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:orderStatue, @"orderStatus", nil];
-//    NSNotification *notification = [NSNotification notificationWithName:ODNotificationMyOrderSecondRefresh object:nil userInfo:dic];
-//    [[NSNotificationCenter defaultCenter] postNotification:notification];
-//}
 
 #pragma mark - 查看原因
 - (void)reasonAction:(UIButton *)sender {
