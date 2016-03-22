@@ -186,9 +186,6 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          
          NSArray *evaluationDatas = [model result];
          [weakSelf.taskDataArray addObjectsFromArray:evaluationDatas];
-       
-
-        
 
          [weakSelf.taskTableView.mj_header endRefreshing];
          if (evaluationDatas.count == 0) {
@@ -198,6 +195,15 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
              [weakSelf.taskTableView.mj_footer endRefreshing];
          }
          [weakSelf.taskTableView reloadData];
+        
+        ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
+        if (weakSelf.taskDataArray.count == 0) {
+            [noResultLabel showOnSuperView:weakSelf.taskTableView title:@"暂无评价"];
+        }
+        else
+        {
+            [noResultLabel hidden];
+        }
      } failure:^(NSError *error) {
          [weakSelf.taskTableView.mj_header endRefreshing];
          [weakSelf.taskTableView.mj_footer endRefreshing];
@@ -223,17 +229,8 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          
          NSArray *evaluationDatas = [model result];
          [weakSelf.skillDataArray addObjectsFromArray:evaluationDatas];
-        
-
-         
-         if (weakSelf.skillDataArray.count == 0) {
-             
-         }
-         
-         
          
          [weakSelf.skillTableView.mj_header endRefreshing];
-
          if (evaluationDatas.count == 0) {
              [weakSelf.skillTableView.mj_footer endRefreshingWithNoMoreData];
          }
@@ -241,9 +238,16 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          {
              [weakSelf.skillTableView.mj_footer endRefreshing];
          }
-         
          [weakSelf.skillTableView reloadData];
  
+         ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
+         if (weakSelf.skillDataArray.count == 0) {
+             [noResultLabel showOnSuperView:weakSelf.skillTableView title:@"暂无评价"];
+         }
+         else
+         {
+             [noResultLabel hidden];
+         }
      } failure:^(NSError *error) {
          [weakSelf.skillTableView.mj_header endRefreshing];
          [weakSelf.skillTableView.mj_footer endRefreshing];

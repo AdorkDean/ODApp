@@ -146,6 +146,7 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     NSMutableDictionary *parameter = [self getRequestParameter:parameters];
     [manager POST:URL parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
+        
         NSLog(@"responseObject === %@",responseObject);
         if (success && [responseObject[requestStatus]isEqualToString:requestSuccessStatus])
         {

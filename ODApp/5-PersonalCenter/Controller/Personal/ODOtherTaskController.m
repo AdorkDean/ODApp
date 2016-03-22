@@ -66,14 +66,16 @@
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODTaskCell" bundle:nil] forCellWithReuseIdentifier:@"item"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODViolationsCell" bundle:nil] forCellWithReuseIdentifier:@"item1"];
     
+    __weakSelf
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self downRefresh];
+        weakSelf.PageNumber = 1;
+        [weakSelf downRefresh];
     }];
     
     
     self.collectionView .mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        
-        [self loadMoreData];
+        weakSelf.PageNumber++;
+        [weakSelf loadMoreData];
     }];
     
     
@@ -102,7 +104,6 @@
      {
          if ([countNumber isEqualToString:@"1"]) {
              [weakSelf.dataArray removeAllObjects];
-             [weakSelf.noReusltLabel removeFromSuperview];
          }
          
          ODBazaarTasksModel *tasksModel = [model result];
@@ -117,16 +118,15 @@
          {
              [weakSelf.collectionView.mj_footer endRefreshing];
          }
+         [weakSelf.collectionView reloadData];
          
+         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
          if (weakSelf.dataArray.count == 0) {
-             weakSelf.noReusltLabel = [ODClassMethod creatLabelWithFrame:CGRectMake((kScreenSize.width - 80)/2, kScreenSize.height/2, 80, 30) text:@"暂无任务" font:16 alignment:@"center" color:@"#000000" alpha:1];
-             [weakSelf.view addSubview:weakSelf.noReusltLabel];
+             [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无任务"];
          }
-         
-         else{
-             [weakSelf.collectionView reloadData];
+         else {
+             [noResultabel hidden];
          }
-         
      } failure:^(NSError *error) {
          [weakSelf.collectionView.mj_header endRefreshing];
          [weakSelf.collectionView.mj_footer endRefreshing];

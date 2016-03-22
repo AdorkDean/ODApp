@@ -45,7 +45,12 @@
 
 - (void)navigationInit {
     self.view.userInteractionEnabled = YES;
-    self.navigationItem.title = @"联系地址";
+    if (self.isTakeOut) {
+        self.navigationItem.title = @"送餐地址";
+    }
+    else {
+        self.navigationItem.title = @"联系地址";
+    }
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
 }
 
@@ -110,6 +115,7 @@
     UIImageView *addAddressImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 50 - ODNavigationHeight, kScreenSize.width, 50)];
 
     addAddressImageView.image = [UIImage imageNamed:@"button_Add address"];
+    addAddressImageView.contentMode = UIViewContentModeCenter;
     addAddressImageView.backgroundColor = [UIColor whiteColor];
     addAddressImageView.userInteractionEnabled = YES;
     UITapGestureRecognizer *addAddressTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(addAddressAction)];

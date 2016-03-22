@@ -44,7 +44,7 @@
 -(void)loadMoreData
 {
     self.count ++;
-    NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
+    NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":[NSString stringWithFormat:@"%ld",(long)self.count]};
     [self downLoadTableDataWithUrl:ODUrlBbsReplyList paramater:parameter];
 }
 
@@ -59,6 +59,7 @@
 {
     self.resultArray = [[NSMutableArray alloc]init];
     self.userArray = [[NSMutableArray alloc]init];
+    self.dataArray = [[NSMutableArray alloc]init];
 }
 
 #pragma mark - 拼接参数
@@ -70,7 +71,7 @@
         NSLog(@"%@",parameter);
     }else{
         self.count = 1;
-        NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":[NSString stringWithFormat:@"%ld",self.count]};
+        NSDictionary *parameter = @{@"bbs_id":self.bbs_id,@"page":[NSString stringWithFormat:@"%ld",(long)self.count]};
         [self downLoadTableDataWithUrl:ODUrlBbsReplyList paramater:parameter];
     }
 }
@@ -85,7 +86,7 @@
         ODCommunityDetailInfoModel *infoModel = [model result];
         [weakSelf.resultArray addObject:infoModel];
         for (ODCommunityDetailInfoImgs_bigModel *imgs_bigModel in infoModel.imgs_big) {
-            [self.userArray addObject:imgs_bigModel];
+            [weakSelf.userArray addObject:imgs_bigModel];
         }
         [weakSelf createUserInfoView];
         [weakSelf createBBSDetailView];
@@ -100,10 +101,23 @@
     
     __weakSelf
     [ODHttpTool getWithURL:url parameters:paramater modelClass:[ODCommunityDetailModel class] success:^(ODCommunityDetailModelResponse *model) {
-        weakSelf.dataArray = [model result];
+        if (weakSelf.count == 1) {
+            [weakSelf.dataArray removeAllObjects];
+        }
+        NSArray *array = [model result];
+        [weakSelf.dataArray addObjectsFromArray:array];
+        [weakSelf.tableView.mj_header endRefreshing];
+        if ([[model result] count] == 0) {
+            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        else {
+            [weakSelf.tableView.mj_footer endRefreshing];
+        }
         [weakSelf.tableView reloadData];
     } failure:^(NSError *error) {
+        [weakSelf.tableView.mj_header endRefreshing];
         
+        [weakSelf.tableView.mj_footer endRefreshing];
     }];
 }
 

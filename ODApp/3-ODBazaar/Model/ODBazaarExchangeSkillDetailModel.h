@@ -44,7 +44,7 @@
 
 @property (nonatomic, copy) NSString *title;
 
-@property (nonatomic, assign) int price;
+@property (nonatomic, assign) CGFloat price;
 
 @property (nonatomic, assign) int swap_type;
 

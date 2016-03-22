@@ -64,6 +64,7 @@
     }else{
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick:) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,10 +76,11 @@
     __weakSelf
     NSDictionary *parameter = @{@"task_id":self.task_id};
     [ODHttpTool getWithURL:ODUrlTaskDetail parameters:parameter modelClass:[ODBazaarDetailModel class] success:^(id model) {
-        self.model = [model result];
+        weakSelf.model = [model result];
         for (ODBazaarDetailApplysModel *itemDict in self.model.applys) {
             [weakSelf.picArray addObject:itemDict];
         }
+        
         [weakSelf createUserInfoView];
         [weakSelf createTaskTopDetailView];
         [weakSelf createTaskBottomDetailView];

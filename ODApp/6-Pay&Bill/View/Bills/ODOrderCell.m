@@ -35,7 +35,7 @@
     [self.userImgeView sd_setImageWithURL:[NSURL OD_URLWithString:[model.user valueForKeyPath:@"avatar" ]]];
     self.nickLabel.text = [model.user valueForKeyPath:@"nick"];
     self.orderTitle.text = model.title;
-    self.orderPrice.text = [NSString stringWithFormat:@"%d元/%@" , model.price , model.unit];
+    self.orderPrice.text = [NSString stringWithFormat:@"%.2f元/%@" , model.price , model.unit];
     NSString *url = [model.imgs_small[0] valueForKeyPath:@"img_url"];
     [self.orderImageView sd_setImageWithURL:[NSURL OD_URLWithString:url]];
 

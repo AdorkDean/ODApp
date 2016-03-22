@@ -68,21 +68,18 @@
     // 发送请求
     [ODHttpTool getWithURL:ODUrlUserCashList parameters:params modelClass:[ODBalanceModel class] success:^(id model)
      {
-         [weakSelf.dataArray removeAllObjects];
+        [weakSelf.dataArray removeAllObjects];
 
-         NSArray *balanceDatas = [model result];
-         [weakSelf.dataArray addObjectsFromArray:balanceDatas];
-         
-         if (weakSelf.dataArray.count == 0) {
-             weakSelf.noReusltLabel = [[UILabel alloc] initWithFrame:CGRectMake((kScreenSize.width - 160)/2, kScreenSize.height/2, 160, 30)];
-             weakSelf.noReusltLabel.text = @"暂无提现记录";
-             weakSelf.noReusltLabel.font = [UIFont systemFontOfSize:16];
-             weakSelf.noReusltLabel.textAlignment = NSTextAlignmentCenter;
-             weakSelf.noReusltLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-             [weakSelf.view addSubview:weakSelf.noReusltLabel];
-         }
-         
-         [weakSelf.collectionView reloadData];
+        NSArray *balanceDatas = [model result];
+        [weakSelf.dataArray addObjectsFromArray:balanceDatas];
+        [weakSelf.collectionView reloadData];
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        if (weakSelf.dataArray.count == 0) {
+            [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无提现记录"];
+        }
+        else {
+            [noResultabel hidden];
+        }
      } failure:^(NSError *error) {
          
      }];

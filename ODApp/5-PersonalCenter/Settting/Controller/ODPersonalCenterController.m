@@ -35,7 +35,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    self.tableView.contentOffset = CGPointZero;
+    [self setupTableView];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
     if (![ODUserInformation sharedODUserInformation].openID.length) return;
     self.headerView.user = [[ODUserInformation sharedODUserInformation] getUserCache];
@@ -48,9 +48,7 @@
 {
     [super viewDidLoad];
 
-    // 初始化表格
-    [self setupTableView];
-    
+    // 初始化数据
     [self setupGroup];
 }
 
@@ -67,11 +65,11 @@
     
     // 调整tableView距离导航栏高度
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 14, 0);
+    self.tableView.contentOffset = CGPointZero;
     
     // 创建头部视图
     ODPersonalCenterHeaderView *headerView = [ODPersonalCenterHeaderView headerView];
-    headerView.od_height = 172;
-    headerView.od_width = KScreenWidth;
+    [headerView sizeToFit];
     self.tableView.tableHeaderView = headerView;
     self.headerView = headerView;
 }

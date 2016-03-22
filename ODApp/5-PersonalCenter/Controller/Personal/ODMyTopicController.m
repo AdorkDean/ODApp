@@ -14,6 +14,9 @@
 //#import "ODCommunityBbsModel.h"
 #import "ODCommunityDetailViewController.h"
 #import "ODOthersInformationController.h"
+
+#import "ODNoResultLabel.h"
+
 @interface ODMyTopicController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
 @property (nonatomic , strong) UISegmentedControl *segmentedControl;
@@ -230,17 +233,7 @@
             [weakSelf.firstUserInfoDic setObject:userModel forKey:userKey];
         }
         
-      
-
-        
-        
-        if (weakSelf.FirstDataArray.count == 0) {
-            weakSelf.firstLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40, KScreenHeight / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [weakSelf.scrollView addSubview:weakSelf.firstLabel];
-        }
-        
         [weakSelf.firstCollectionView.mj_header endRefreshing];
-        
         if ([[model result] bbs_list].count == 0) {
             [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
         }
@@ -249,6 +242,14 @@
             [weakSelf.firstCollectionView.mj_footer endRefreshing];
         }
         [weakSelf.firstCollectionView reloadData];
+        
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        if (weakSelf.FirstDataArray.count == 0) {
+            [noResultabel showOnSuperView:weakSelf.firstCollectionView title:@"暂无话题"];
+        }
+        else {
+            [noResultabel hidden];
+        }
     } failure:^(NSError *error) {
         
         
@@ -283,14 +284,8 @@
             ODCommunityBbsUsersModel *userModel = [ODCommunityBbsUsersModel mj_objectWithKeyValues:[[model result] users][key]];
             [weakSelf.secondUserInfoDic setObject:userModel forKey:userKey];
         }
-        
-        if (weakSelf.secondDataArray.count == 0) {
-            weakSelf.secondLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(weakSelf.scrollView.center.x - 40 + weakSelf.scrollView.frame.size.width, KScreenHeight / 2, 80, 30) text:@"暂无话题" font:16 alignment:@"center" color:@"#000000" alpha:1];
-            [weakSelf.scrollView addSubview:weakSelf.secondLabel];
-        }
 
         [weakSelf.secondCollectionView.mj_header endRefreshing];
-
         if ([[model result] bbs_list].count == 0) {
             [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
         }
@@ -300,6 +295,13 @@
         }
         [weakSelf.secondCollectionView reloadData];
 
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        if (weakSelf.secondDataArray.count == 0) {
+            [noResultabel showOnSuperView:weakSelf.secondCollectionView title:@"暂无话题"];
+        }
+        else {
+            [noResultabel hidden];
+        }
     } failure:^(NSError *error) {
         [weakSelf.secondCollectionView.mj_header endRefreshing];
         [weakSelf.secondCollectionView.mj_footer endRefreshing];
