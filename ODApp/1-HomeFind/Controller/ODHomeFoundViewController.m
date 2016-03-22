@@ -257,8 +257,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
         else {
             imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7 / 12 * i, 0, (kScreenSize.width - 15) * 7 / 12, 120)];
         }
-        [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:activityModel.detail_md5] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
-        imageButton.tag = 100 + i;
+        [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:activityModel.detail_md5] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
         [imageButton addTarget:self action:@selector(activityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [scrollView addSubview:imageButton];
     }

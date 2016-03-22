@@ -23,7 +23,7 @@
       view.secondLineLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
       view.thirdLineLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
       view.fourthLineLabel.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-    view.thirdLineLabelConstraint.constant = 0.5;
+     view.thirdLineLabelConstraint.constant = 0.5;
     view.fourthLineLabelConstraint.constant = 0.5;
     view.treasureImageView.hidden = YES;
     view.treasureLabel.hidden = YES;

@@ -68,24 +68,7 @@
 
 
 - (void)creatSegmentControll {
-//    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发布的", @"我接受的"]];
-//    self.segmentedControl.frame = CGRectMake(10, 7.5, kScreenSize.width - 20, 28);
-//    self.segmentedControl.clipsToBounds = YES;
-//    self.segmentedControl.layer.cornerRadius = 7;
-//    self.segmentedControl.layer.borderWidth = 1;
-//    self.segmentedControl.layer.borderColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1].CGColor;
-//    self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
-//    self.segmentedControl.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-//    self.segmentedControl.selectedSegmentIndex = 0;
-//
-//    NSDictionary *selectedTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:15],
-//            NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#484848" alpha:1]};
-//    [self.segmentedControl setTitleTextAttributes:selectedTextAttributes forState:UIControlStateSelected];
-//    NSDictionary *unselectedTextAttributes = @{NSFontAttributeName : [UIFont boldSystemFontOfSize:15],
-//            NSForegroundColorAttributeName : [UIColor colorWithHexString:@"#b0b0b0" alpha:1]};
-//    [self.segmentedControl setTitleTextAttributes:unselectedTextAttributes forState:UIControlStateNormal];
-    
-    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发表的", @"我接受的"]];
+    self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"我发布的", @"我接受的"]];
     self.segmentedControl.frame = CGRectMake(4, 10, kScreenSize.width - 8, 30);
     self.segmentedControl.clipsToBounds = YES;
     self.segmentedControl.layer.cornerRadius = 7;
