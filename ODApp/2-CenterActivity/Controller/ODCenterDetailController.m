@@ -115,7 +115,14 @@
     self.centerDetailView = [[ODCenterDetailView alloc] init];
     self.centerDetailView = [ODCenterDetailView centerDetailView];
     [self.centerDetailView setModel:self.model];
-    self.centerDetailView.frame = CGRectMake(5, CGRectGetMaxY(self.pictureScrollView.frame) + 5, KScreenWidth - 10, 170);
+    
+    float cellHeight = 170;
+    cellHeight = cellHeight + [ODHelp textHeightFromTextString:self.model.name width:KScreenWidth - 105 - ODLeftMargin fontSize:12] - 12;
+    cellHeight = cellHeight + [ODHelp textHeightFromTextString:self.model.address width:KScreenWidth - 105 - ODLeftMargin fontSize:12] - 12;
+    cellHeight = cellHeight + [ODHelp textHeightFromTextString:self.model.business_hours width:KScreenWidth - 105 - ODLeftMargin fontSize:12] - 12;
+    
+    
+    self.centerDetailView.frame = CGRectMake(5, CGRectGetMaxY(self.pictureScrollView.frame) + 5, KScreenWidth - 10, cellHeight);
     [self.centerDetailView.centerTelButton addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.centerDetailView.centerAddressButton addTarget:self action:@selector(addressAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:self.self.centerDetailView];
