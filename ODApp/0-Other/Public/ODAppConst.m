@@ -79,7 +79,7 @@ NSString * const ODNotificationLoginSuccess = @"ODNotificationLoginSuccess";
 /** 定位成功刷新 */
 NSString * const ODNotificationLocationSuccessRefresh = @"ODNotificationLocationSuccessRefresh";
 
-/** 订单刷新 */
+/** 订单列表刷新 */
 NSString * const ODNotificationOrderListRefresh = @"ODNotificationOrderListRefresh";
 
 /**  点击收藏的通知 */
@@ -93,6 +93,10 @@ NSString * const ODNotificationMyOrderThirdRefresh = @"ODNotificationMyOrderThir
 NSString * const ODNotificationSellOrderSecondRefresh = @"ODNotificationSellOrderSecondRefresh";
 /** 已购买三级页面通知 */
 NSString * const ODNotificationSellOrderThirdRefresh = @"ODNotificationSellOrderThirdRefresh";
+
+
+
+
 
 /** 刷新任务发布及回复*/
 NSString * const ODNotificationRefreshTask =  @"ODNotificationRefreshTask";
