@@ -137,10 +137,10 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    return model.rowHeight;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    ODBturn model.rowHeight;
+//}azaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+//    re
 
 #pragma mark - UITableViewDelegate
 
