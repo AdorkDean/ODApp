@@ -1,20 +1,22 @@
 //
-//  ODBazaaeExchangeSkillViewController.m
+//  ODTakeAwayViewController.m
 //  ODApp
 //
-//  Created by Odong-YG on 16/2/1.
-//  Copyright © 2016年 Odong-YG. All rights reserved.
-//
+//  Created by 王振航 on 16/3/22.
+//  Copyright © 2016年 Odong Org. All rights reserved.
+//  定外卖
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
-#import "ODBazaaeExchangeSkillViewController.h"
-#import "ODBazaarExchangeSkillCell.h"
+#import "ODTakeAwayViewController.h"
+#import <MJRefresh.h>
 
-#import "MJRefresh.h"
-#import "ODBazaarExchangeSkillDetailViewController.h"
-#import "ODBazaarExchangeSkillModel.h"
+#import "ODTakeAwayModel.h"
+#import "ODTakeAwayCell.h"
+#import "ODTakeAwayHeaderView.h"
 
-@interface ODBazaaeExchangeSkillViewController () <UITableViewDataSource, UITableViewDelegate>
+#import "NSString+ODExtension.h"
+
+@interface ODTakeAwayViewController () <UITableViewDataSource, UITableViewDelegate>
 
 /** 表格 */
 @property (nonatomic, strong) UITableView *tableView;
@@ -23,21 +25,24 @@
 /** 页码 */
 @property (nonatomic, assign) NSInteger page;
 
+/** 模型数组 */
+@property(nonatomic, strong) NSMutableArray *datas;
+
 @end
 
-// 循环cell标识
-static NSString * const exchangeCellId = @"exchangeCell";
-
-@implementation ODBazaaeExchangeSkillViewController
+@implementation ODTakeAwayViewController
 
 #pragma mark - 懒加载
--(NSMutableArray *)dataArray
+- (NSMutableArray *)datas
 {
-    if (!_dataArray) {
-        _dataArray = [NSMutableArray array];
+    if (_datas == nil) {
+        _datas = [NSMutableArray array];
     }
-    return _dataArray;
+    return _datas;
 }
+
+// 循环cell标识
+static NSString * const exchangeCellId = @"takeAwayCell";
 
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,43 +50,36 @@ static NSString * const exchangeCellId = @"exchangeCell";
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    // 接收通知
-    [self addObserver];
-    
-    // 初始化TableView
-    [self setupTableView];
-    
-    // 初始化刷新控件
-    [self setupRefresh];
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    // 初始化titleView
+    [self setupTitleView];
+    
+    // 初始化表格
+    [self setupTableView];
+    
+    // 初始化headerView
+    [self setupHeaderView];
+    
+    // 初始化刷新控件
+    [self setupRefresh];
 }
 
 #pragma mark - 初始化方法
-
 /**
- *  接收通知
+ *  初始化titleView
  */
-- (void)addObserver
+- (void)setupTitleView
 {
-    __weakSelf;
-    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationReleaseSkill object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
-        [weakSelf.tableView.mj_header beginRefreshing];
-    }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note) {
-        [weakSelf.tableView.mj_header beginRefreshing];
-    }];
 }
+
 /**
  *  初始化表格
  */
@@ -89,22 +87,33 @@ static NSString * const exchangeCellId = @"exchangeCell";
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
     // 创建表格
-    CGRect frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODBazaaeExchangeNavHeight - ODTabBarHeight);
+    CGRect frame = CGRectMake(0, 0, KScreenWidth, self.view.od_height);
     UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
-    tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
     tableView.dataSource = self;
     tableView.delegate = self;
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
-    tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
-    tableView.rowHeight = UITableViewAutomaticDimension;
-    tableView.estimatedRowHeight = 300;
+    self.tableView.contentInset = UIEdgeInsetsMake(163, 0, 0, 0);
+    
+    // 设置tableView的rowHeight
+    tableView.rowHeight = 90;
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell
-    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarExchangeSkillCell class]) bundle:nil] forCellReuseIdentifier:exchangeCellId];
+    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODTakeAwayCell class]) bundle:nil] forCellReuseIdentifier:exchangeCellId];
 }
+
+/**
+ *  初始化headerView
+ */
+- (void)setupHeaderView
+{
+    ODTakeAwayHeaderView *headerView = [ODTakeAwayHeaderView headerView];
+    [headerView sizeToFit];
+    [self.view addSubview:headerView];
+}
+
 /**
  *  设置刷新控件
  */
@@ -119,13 +128,14 @@ static NSString * const exchangeCellId = @"exchangeCell";
 #pragma mark - UITableView 数据源方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArray.count;
+//    return self.datas.count;
+    return 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODBazaarExchangeSkillCell *cell = [tableView dequeueReusableCellWithIdentifier:exchangeCellId];
-    cell.model = self.dataArray[indexPath.row];
+    ODTakeAwayCell *cell = [tableView dequeueReusableCellWithIdentifier:exchangeCellId];
+//    cell.model = self.dataArray[indexPath.row];
     return cell;
 }
 
@@ -134,19 +144,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 {
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
-    
-    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
-    detailControler.swap_id = [NSString stringWithFormat:@"%ld", model.swap_id];
-    detailControler.nick = model.user.nick;
-    [self.navigationController pushViewController:detailControler animated:YES];
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-//    return model.rowHeight;
-//}
 
 #pragma mark - 事件方法
 - (void)loadNewUsers
@@ -159,16 +157,16 @@ static NSString * const exchangeCellId = @"exchangeCell";
     params[@"my"] = @"0";
     self.params = params;
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlSwapList parameters:params modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
+    [ODHttpTool getWithURL:@"" parameters:params modelClass:[ODTakeAwayModel class] success:^(id model) {
         if (weakSelf.params != params) return;
         // 清空所有数据
-        [weakSelf.dataArray removeAllObjects];
+        [weakSelf.datas removeAllObjects];
         
-        NSArray *newUsers = [model result];
-        [weakSelf.dataArray addObjectsFromArray:newUsers];
+        NSArray *newDatas = [model result];
+        [weakSelf.datas addObjectsFromArray:newDatas];
         [weakSelf.tableView reloadData];
         [weakSelf.tableView.mj_header endRefreshing];
-        [weakSelf checkFooterState:newUsers.count];
+        [weakSelf checkFooterState:newDatas.count];
         
         // 重新设置 page = 1
         weakSelf.page = 1;
@@ -190,10 +188,10 @@ static NSString * const exchangeCellId = @"exchangeCell";
     params[@"my"] = @"0";
     self.params = params;
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlSwapList parameters:params modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
+    [ODHttpTool getWithURL:@"" parameters:params modelClass:[ODTakeAwayModel class] success:^(id model) {
         if (weakSelf.params != params) return;
         NSArray *array = [model result];
-        [weakSelf.dataArray addObjectsFromArray:array];
+        [weakSelf.datas addObjectsFromArray:array];
         [weakSelf.tableView reloadData];
         [weakSelf checkFooterState:array.count];
         
@@ -217,5 +215,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
         [self.tableView.mj_footer endRefreshing];
     }
 }
+
+
 
 @end

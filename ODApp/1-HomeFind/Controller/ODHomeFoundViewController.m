@@ -13,6 +13,8 @@
 #import "ODStorePlaceListModel.h"
 #import "ODHomeInfoModel.h"
 #import "ODHomeButton.h"
+#import "ODTakeAwayViewController.h"
+
 #define cellID @"ODBazaarExchangeSkillCollectionCell"
 
 // 循环cell标识
@@ -436,11 +438,9 @@ updatingLocation:(BOOL)updatingLocation {
             }
             break;
         case 2:
-        {
-            ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
-            vc.navigationTitle = @"敬请期待";
-            vc.webUrl = ODWebUrlExpect;
-            [self.navigationController pushViewController:vc animated:YES];
+        {   // 跳转至定外卖界面
+            ODTakeAwayViewController *takeAwayVc = [[ODTakeAwayViewController alloc] init];
+            [self.navigationController pushViewController:takeAwayVc animated:YES];
         }
             break;
         case 3:
