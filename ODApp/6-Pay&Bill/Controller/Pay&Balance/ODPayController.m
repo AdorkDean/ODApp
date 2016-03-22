@@ -43,9 +43,9 @@
         [self.payView.treasurePayButton addTarget:self action:@selector(treasurePayAction:) forControlEvents:UIControlEventTouchUpInside];
         
         self.payView.orderNameLabel.text = self.OrderTitle;
-        self.payView.priceLabel.text = [NSString stringWithFormat:@"%@元", self.price];
+        self.payView.priceLabel.text = [NSString stringWithFormat:@"%.2f元", [self.price floatValue]];
         self.payView.priceLabel.textColor = [UIColor redColor];
-        self.payView.orderPriceLabel.text = [NSString stringWithFormat:@"%@元", self.price];
+        self.payView.orderPriceLabel.text = [NSString stringWithFormat:@"%.2f元", [self.price floatValue]];
         [self.payView.payButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
         
         
