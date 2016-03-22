@@ -77,8 +77,14 @@
     NSDictionary *parameter = @{@"task_id":self.task_id};
     [ODHttpTool getWithURL:ODUrlTaskDetail parameters:parameter modelClass:[ODBazaarDetailModel class] success:^(id model) {
         weakSelf.model = [model result];
-        for (ODBazaarDetailApplysModel *itemDict in weakSelf.model.applys) {
-            [weakSelf.picArray addObject:itemDict];
+        for (ODBazaarDetailApplysModel *applysModel in weakSelf.model.applys) {
+            if ([applysModel.apply_status isEqualToString:@"1"]) {
+                [weakSelf.picArray removeAllObjects];
+                [weakSelf.picArray addObject:applysModel];
+                break;
+            }else{
+                [weakSelf.picArray addObject:applysModel];
+            }
         }
         
         [weakSelf createUserInfoView];
@@ -114,11 +120,10 @@
             if ([name isEqualToString:@"删除任务"]){
                 weakSelf.myBlock(@"del");
             }else{
-                self.model = [model result];
-                weakSelf.myBlock(self.model.task_status);
+                weakSelf.model = [model result];
+                weakSelf.myBlock(weakSelf.model.task_status);
             }
         }
-      
     } failure:^(NSError *error) {
     }];
 }
@@ -152,21 +157,20 @@
     [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.userView addSubview:self.taskButton];
 
-    NSString *task_status = [NSString stringWithFormat:@"%@",self.model.task_status];
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
-        if ([task_status isEqualToString:@"1"]) {
+        if ([self.model.task_status isEqualToString:@"1"]) {
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"删除任务" forState:UIControlStateNormal];
-        }else if ([task_status isEqualToString:@"2"]){
+        }else if ([self.model.task_status isEqualToString:@"2"]){
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
-        }else if ([task_status isEqualToString:@"3"]){
+        }else if ([self.model.task_status isEqualToString:@"3"]){
             [self.taskButton setTitle:@"确认完成" forState:UIControlStateNormal];
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
-        }else if ([task_status isEqualToString:@"4"]){
+        }else if ([self.model.task_status isEqualToString:@"4"]){
             [self.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
-        }else if ([task_status isEqualToString:@"-2"]){
+        }else if ([self.model.task_status isEqualToString:@"-2"]){
             self.taskButton.userInteractionEnabled = NO;
             [self.taskButton setTitle:@"过期任务" forState:UIControlStateNormal];
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"b0b0b0" alpha:1] forState:UIControlStateNormal];
@@ -185,35 +189,35 @@
                 apply_status = @"0";
             }
         }
-        if ([task_status isEqualToString:@"1"] && open_id.length == 0 && [apply_status isEqualToString:@"0"]) {
+        if ([self.model.task_status isEqualToString:@"1"] && open_id.length == 0 && [apply_status isEqualToString:@"0"]) {
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
-        }else if ([task_status isEqualToString:@"1"] && open_id.length == 0 && [apply_status isEqualToString:@""]){
+        }else if ([self.model.task_status isEqualToString:@"1"] && open_id.length == 0 && [apply_status isEqualToString:@""]){
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
             self.taskButton.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
             [self.taskButton setTitle:@"接受任务" forState:UIControlStateNormal];
-        }else if ([task_status isEqualToString:@"2"] && open_id.length > 0){
+        }else if ([self.model.task_status isEqualToString:@"2"] && open_id.length > 0){
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"确认提交" forState:UIControlStateNormal];
-        }else if ([task_status isEqualToString:@"4"] && open_id.length > 0 ){
+        }else if ([self.model.task_status isEqualToString:@"4"] && open_id.length > 0 ){
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
-        }else if ([task_status isEqualToString:@"3"] && open_id.length > 0){
+        }else if ([self.model.task_status isEqualToString:@"3"] && open_id.length > 0){
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"已提交" forState:UIControlStateNormal];
-        }else if ([task_status isEqualToString:@"4"] && open_id.length == 0){
+        }else if ([self.model.task_status isEqualToString:@"4"] && open_id.length == 0){
             [self.taskButton removeFromSuperview];
             userNickLabel.frame = CGRectMake(60, 10, self.userView.frame.size.width-60, 20);
             userSignLabel.frame = CGRectMake(60, 30, self.userView.frame.size.width-60, 40);
-        }else if ([task_status isEqualToString:@"2"] && open_id.length == 0 ){
+        }else if ([self.model.task_status isEqualToString:@"2"] && open_id.length == 0 ){
             [self.taskButton removeFromSuperview];
             userNickLabel.frame = CGRectMake(60, 10, self.userView.frame.size.width-60, 20);
             userSignLabel.frame = CGRectMake(60, 30, self.userView.frame.size.width-60, 40);
-        }else if ([task_status isEqualToString:@"3"] && open_id.length == 0){
+        }else if ([self.model.task_status isEqualToString:@"3"] && open_id.length == 0){
             [self.taskButton removeFromSuperview];
             userNickLabel.frame = CGRectMake(60, 10, self.userView.frame.size.width-60, 20);
             userSignLabel.frame = CGRectMake(60, 30, self.userView.frame.size.width-60, 40);
-        }else if ([task_status isEqualToString:@"-2"]){
+        }else if ([self.model.task_status isEqualToString:@"-2"]){
             self.taskButton.userInteractionEnabled = NO;
             [self.taskButton setTitle:@"过期任务" forState:UIControlStateNormal];
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"b0b0b0" alpha:1] forState:UIControlStateNormal];
@@ -354,7 +358,6 @@
     [self.taskBottomView addSubview:lineView];
     
     self.taskBottomView.frame = CGRectMake(12.5, CGRectGetMaxY(self.taskTopView.frame)+10, kScreenSize.width-25, lineView.frame.size.height+lineView.frame.origin.y);
-    self.collectionView.hidden = NO;
 }
 
 -(void)showAllView{
@@ -419,21 +422,7 @@
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    NSString *str = [[NSString alloc]init];
-    for (NSInteger i = 0 ; i < self.picArray.count; i++) {
-        ODBazaarDetailApplysModel *model = self.picArray[i];
-        NSString *applyStatus = [NSString stringWithFormat:@"%@",model.apply_status];
-        if ([applyStatus isEqualToString:@"1"]) {
-            str = applyStatus;
-            [self.picArray removeAllObjects];
-            [self.picArray addObject:model];
-        }
-    }
-    if ([str isEqualToString:@"1"]) {
-        return 1;
-    }else{
-        return self.picArray.count;
-    }
+    return self.picArray.count;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
