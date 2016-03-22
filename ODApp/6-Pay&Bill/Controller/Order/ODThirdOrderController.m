@@ -88,7 +88,7 @@
     [amountImageView addSubview:priceLabel];
 
     self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(88, 15, amountImageView.frame.size.width - 106, 19)];
-    self.allPriceLabel.text = [NSString stringWithFormat:@"%d元", self.informationModel.price];
+    self.allPriceLabel.text = [NSString stringWithFormat:@"%.2f元", self.informationModel.price];
     self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
     self.allPriceLabel.font = [UIFont systemFontOfSize:15];
     self.allPriceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
@@ -142,16 +142,17 @@
     params[@"user_address_id"] = @"0";
     params[@"comment"] = @"";
     // 发送请求
+    __weakSelf
     [ODHttpTool getWithURL:ODUrlSwapOrder parameters:params modelClass:[ODSaveOrderModel class] success:^(id model)
      {
-//         ODSaveOrderModel *orderModel = [model result];
-//         ODPayController *vc = [[ODPayController alloc] init];
-//         vc.OrderTitle = weakSelf.informationModel.title;
-//         // 获取 order_id
-//         vc.orderId = [orderModel order_id];
-//         vc.price = weakSelf.informationModel.price;
-////         vc.swap_type = weakSelf.informationModel.swap_type;  
-//         [weakSelf.navigationController pushViewController:vc animated:YES];
+         ODSaveOrderModel *orderModel = [model result];
+         ODPayController *vc = [[ODPayController alloc] init];
+         vc.OrderTitle = weakSelf.informationModel.title;
+         // 获取 order_id
+         vc.orderId = [orderModel order_id];
+         vc.price = [NSString stringWithFormat:@"%f", weakSelf.informationModel.price];
+         vc.swap_type = [NSString stringWithFormat:@"%d", weakSelf.informationModel.swap_type];
+         [weakSelf.navigationController pushViewController:vc animated:YES];
      } failure:^(NSError *error) {
      }];
 }

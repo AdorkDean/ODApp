@@ -210,8 +210,8 @@ static NSString * const exchangeCellId = @"exchangeCell";
     self.topClassView.userInteractionEnabled = YES;
     [self.headerView addSubview:self.topClassView];
     
-    NSArray *array = @[@"找活动",@"约场地",@"找优惠",@"找兼职",@"寻圈子",@"求帮助",@"换技能",@"更多"];
-    NSArray *imageArray = @[@"icon_activity",@"icon_field",@"icon_Discount",@"icon_Work-study",@"icon_circle_big",@"icon_help",@"icon_Skill_big",@"icon_more"];
+    NSArray *array = @[@"找活动",@"约场地",@"订外卖",@"找兼职",@"寻圈子",@"求帮助",@"换技能",@"更多"];
+    NSArray *imageArray = @[@"icon_activity",@"icon_field",@"icon_Takeaway",@"icon_Work-study",@"icon_circle_big",@"icon_help",@"icon_Skill_big",@"icon_more"];
     CGFloat width = (KScreenWidth-2*ODLeftMargin)/4;
     for (NSInteger i = 0; i < array.count; i++) {
         UIButton *button = [ODHomeButton buttonWithType:UIButtonTypeCustom];
@@ -257,8 +257,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
         else {
             imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7 / 12 * i, 0, (kScreenSize.width - 15) * 7 / 12, 120)];
         }
-        [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:activityModel.detail_md5] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
-        imageButton.tag = 100 + i;
+        [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:activityModel.detail_md5] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
         [imageButton addTarget:self action:@selector(activityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [scrollView addSubview:imageButton];
     }

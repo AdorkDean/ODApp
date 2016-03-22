@@ -44,7 +44,6 @@ UIKIT_EXTERN NSString * const ODNotificationShowBazaar;
 /** 刷新我的话题通知 */
 UIKIT_EXTERN NSString * const ODNotificationMyTaskRefresh;
 
-
 /**  求帮助的通知 */
 UIKIT_EXTERN NSString * const ODNotificationSearchHelp;
 
@@ -92,10 +91,13 @@ UIKIT_EXTERN NSString * const ODNotificationLoginSuccess;
 
 /** 已购买二级页面通知 */
 UIKIT_EXTERN NSString * const ODNotificationMyOrderSecondRefresh;
+
 /** 已购买三级页面通知 */
 UIKIT_EXTERN NSString * const ODNotificationMyOrderThirdRefresh;
+
 /** 已卖出二级页面通知 */
 UIKIT_EXTERN NSString * const ODNotificationSellOrderSecondRefresh;
+
 /** 已购买三级页面通知 */
 UIKIT_EXTERN NSString * const ODNotificationSellOrderThirdRefresh;
 

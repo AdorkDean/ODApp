@@ -150,15 +150,15 @@
     [self.detailView addSubview:titleLabel];
 
     UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(titleLabel.frame) + 10, kScreenSize.width - 35, 20)];
-    priceLabel.text = [NSString stringWithFormat:@"%d元/%@", self.model.price, self.model.unit];
+    priceLabel.text = [NSString stringWithFormat:@"%.2f元/%@", self.model.price, self.model.unit];
     priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
     priceLabel.textAlignment = NSTextAlignmentCenter;
     priceLabel.font = [UIFont systemFontOfSize:15];
     [self.detailView addSubview:priceLabel];
 
-    UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(priceLabel.frame) + 37.5, kScreenSize.width - 20, [ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width - 20 fontSize:11])];
+    UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(priceLabel.frame) + 27.5, kScreenSize.width - 20, [ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width - 20 fontSize:13])];
     contentLabel.text = self.model.content;
-    contentLabel.font = [UIFont systemFontOfSize:11];
+    contentLabel.font = [UIFont systemFontOfSize:13];
     contentLabel.numberOfLines = 0;
     [self.detailView addSubview:contentLabel];
 

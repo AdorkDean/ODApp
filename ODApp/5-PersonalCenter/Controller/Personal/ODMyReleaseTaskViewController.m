@@ -20,7 +20,8 @@
 @property(nonatomic)NSInteger page;
 @property(nonatomic,copy)NSString *type;
 @property(nonatomic)NSInteger index;
-
+@property(nonatomic,copy)NSString *status;
+@property(nonatomic,strong)UITableView *tableView;
 
 @end
 

@@ -23,7 +23,7 @@
     return strM;
 }
 
-- (NSString *)desc
+- (NSString *)od_desc
 {
     // 1.定义字符创保存拼接结果
     NSMutableString *strM = [NSMutableString string];
@@ -41,11 +41,12 @@
     [strM appendFormat:@"]\n"];
     
     return strM;
+    
 }
 
-- (NSString *)descriptionWithLocale:(id)locale
-{
-    return [self desc];
-}
+//- (NSString *)descriptionWithLocale:(id)locale
+//{
+//    return [self od_desc];
+//}
 
 @end

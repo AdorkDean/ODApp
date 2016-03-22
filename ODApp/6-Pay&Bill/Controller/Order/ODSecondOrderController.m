@@ -79,7 +79,7 @@
 
 
     self.allPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(88, 15, amountImageView.frame.size.width - 106, 19)];
-    self.allPriceLabel.text = [NSString stringWithFormat:@"%d元", self.informationModel.price];
+    self.allPriceLabel.text = [NSString stringWithFormat:@"%.2f元", self.informationModel.price];
     self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
     self.allPriceLabel.font = [UIFont systemFontOfSize:15];
     self.allPriceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
@@ -127,7 +127,7 @@
         vc.OrderTitle = weakSelf.informationModel.title;
         // 获取 order_id
         vc.orderId = [orderModel order_id];
-        vc.price = [NSString stringWithFormat:@"%d", weakSelf.informationModel.price];
+        vc.price = [NSString stringWithFormat:@"%f", weakSelf.informationModel.price];
         vc.swap_type = [NSString stringWithFormat:@"%d", weakSelf.informationModel.swap_type];
         [weakSelf.navigationController pushViewController:vc animated:YES];
     } failure:^(NSError *error) {

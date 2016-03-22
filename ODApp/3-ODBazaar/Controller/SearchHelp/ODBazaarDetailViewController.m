@@ -64,6 +64,7 @@
     }else{
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick:) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -75,13 +76,15 @@
     __weakSelf
     NSDictionary *parameter = @{@"task_id":self.task_id};
     [ODHttpTool getWithURL:ODUrlTaskDetail parameters:parameter modelClass:[ODBazaarDetailModel class] success:^(id model) {
-        self.model = [model result];
-        for (ODBazaarDetailApplysModel *itemDict in self.model.applys) {
+        weakSelf.model = [model result];
+        for (ODBazaarDetailApplysModel *itemDict in weakSelf.model.applys) {
             [weakSelf.picArray addObject:itemDict];
         }
+        
         [weakSelf createUserInfoView];
         [weakSelf createTaskTopDetailView];
         [weakSelf createTaskBottomDetailView];
+        [weakSelf.collectionView reloadData];
     } failure:^(NSError *error) {
     }];
 }
@@ -164,6 +167,7 @@
             [self.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
         }else if ([task_status isEqualToString:@"-2"]){
+            self.taskButton.userInteractionEnabled = NO;
             [self.taskButton setTitle:@"过期任务" forState:UIControlStateNormal];
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"b0b0b0" alpha:1] forState:UIControlStateNormal];
         }
@@ -210,6 +214,7 @@
             userNickLabel.frame = CGRectMake(60, 10, self.userView.frame.size.width-60, 20);
             userSignLabel.frame = CGRectMake(60, 30, self.userView.frame.size.width-60, 40);
         }else if ([task_status isEqualToString:@"-2"]){
+            self.taskButton.userInteractionEnabled = NO;
             [self.taskButton setTitle:@"过期任务" forState:UIControlStateNormal];
             [self.taskButton setTitleColor:[UIColor colorWithHexString:@"b0b0b0" alpha:1] forState:UIControlStateNormal];
         }
