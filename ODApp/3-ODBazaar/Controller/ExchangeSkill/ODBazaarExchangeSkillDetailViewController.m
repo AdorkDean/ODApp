@@ -156,9 +156,9 @@
     priceLabel.font = [UIFont systemFontOfSize:15];
     [self.detailView addSubview:priceLabel];
 
-    UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(priceLabel.frame) + 37.5, kScreenSize.width - 20, [ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width - 20 fontSize:11])];
+    UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(priceLabel.frame) + 27.5, kScreenSize.width - 20, [ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width - 20 fontSize:13])];
     contentLabel.text = self.model.content;
-    contentLabel.font = [UIFont systemFontOfSize:11];
+    contentLabel.font = [UIFont systemFontOfSize:13];
     contentLabel.numberOfLines = 0;
     [self.detailView addSubview:contentLabel];
 
@@ -312,8 +312,6 @@
             orderController.informationModel = self.model;
             [self.navigationController pushViewController:orderController animated:YES];
         }
-        
-    
     }
 }
 

@@ -68,6 +68,13 @@
         [weakSelf.collectionView.mj_header beginRefreshing];
     }];
     
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationQuit object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        weakSelf.bbsMark = @"全部";
+        weakSelf.bbsType = 5;
+        [weakSelf.collectionView.mj_header beginRefreshing];
+
+    }];
+    
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         weakSelf.count = 1;
         [weakSelf joiningTogetherParmeters];
@@ -88,7 +95,6 @@
     }else if ([self.releaseSuccess isEqualToString:@"refresh"]){
         self.bbsMark = @"全部";
         self.bbsType = 5;
-        [self joiningTogetherParmeters];
         [self.collectionView.mj_header beginRefreshing];
     }
 }
@@ -211,9 +217,12 @@
                 imageButton.frame = CGRectMake((width + 5) * (i % 3), (width + 5) * (i / 3), width, width);
                  cell.PicConstraintHeight.constant = width+(width+5)*(cell.model.imgs.count/3);
             }
-            [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:cell.model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
+            
+            [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:cell.model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 if (error) {
                     [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
+                } else {
+                    [imageButton setBackgroundImage:image forState:UIControlStateNormal];
                 }
             }];
             [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
