@@ -423,7 +423,7 @@
 //        [[NSNotificationCenter defaultCenter] postNotification:notification];
 //        
 ////        [weakSelf refreshDetail:@"-5"];
-//        [weakSelf.cancelOrderView removeFromSuperview];
+        [weakSelf.cancelOrderView removeFromSuperview];
         [weakSelf.navigationController popViewControllerAnimated:YES];
         
         
