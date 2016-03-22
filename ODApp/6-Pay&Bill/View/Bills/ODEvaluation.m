@@ -116,11 +116,8 @@
     self.cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.cancelButton.frame = CGRectMake(kScreenSize.width - 50, 20, 30, 30);
     [self.cancelButton setImage:[UIImage imageNamed:@"分享页关闭icon"] forState:UIControlStateNormal];
-    
-    
-    
-//    
-//    [self addSubview:self.cancelButton];
+
+    [self addSubview:self.cancelButton];
 
     
     

@@ -42,7 +42,7 @@
         }
     }
     else if ([model.order_status isEqualToString:@"5"]) {
-        if (![model.swap_type isEqualToString:@"1"]) {
+        if (model.reason_num.length > 0) {
             self.orderStateLabel.text = @"已评价";
         }
         else {
