@@ -124,7 +124,7 @@
 
     __weakSelf
     [ODHttpTool getWithURL:ODUrlSwapServiceTime parameters:parameters modelClass:[ODOrderDataModel class] success:^(id model) {
-        [weakSelf.dataArray addObject:model];
+        [weakSelf.dataArray addObjectsFromArray:[model result]];
         [weakSelf.collectionView reloadData];
     } failure:^(NSError *error) {
         
@@ -137,7 +137,7 @@
 {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    params[@"swap_id"] = [NSString stringWithFormat:@"%@", self.informationModel.swap_id];
+    params[@"swap_id"] = [NSString stringWithFormat:@"%d", self.informationModel.swap_id];
     params[@"service_time"] = self.headView.thirdOrderView.timeLabel.text;
     params[@"user_address_id"] = @"0";
     params[@"comment"] = @"";
@@ -220,7 +220,6 @@
     
     for (int i = 0; i < 7; i++) {
         DataButton *button = [[DataButton alloc] initWithFrame:CGRectMake(5 + i * self.scroller.frame.size.width / 3, 5, self.scroller.frame.size.width / 3 - 10, 40)];
-        
         if (i == 0) {
             button.dataLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
             button.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];

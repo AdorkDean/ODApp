@@ -13,6 +13,7 @@
 #import "ODUploadImageModel.h"
 #import "AFNetworking.h"
 #import "ODHttpTool.h"
+#import "UIImageView+WebCache.h"
 @interface ODBazaarReleaseSkillViewController ()
 
 @end
@@ -24,9 +25,12 @@
 @synthesize imageArray = _imageArray;
 - (void)setImageArray:(NSArray *)imageArray{
     _imageArray = imageArray;
+    __weakSelf
     for (NSString *imageStr in _imageArray){
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL OD_URLWithString:imageStr]]];
-        [self.mArray addObject:image];
+        UIImageView *imageView = [[UIImageView alloc]init];
+        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:imageStr]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+              [weakSelf.mArray addObject:image];
+        }];
     }
 }
 
@@ -136,8 +140,6 @@
 
 -(void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isEdit:(BOOL)isEdit{
     __weakSelf
-    
-    NSLog(@"-------%@",parameter);
     [ODHttpTool postWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
         if (isEdit) {
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];

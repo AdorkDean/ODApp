@@ -79,8 +79,6 @@
         [self.dataArray replaceObjectAtIndex:self.index withObject:model];
         [self.tableView reloadData];
     }
-    
-    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)dealloc{
