@@ -29,8 +29,8 @@
 #pragma mark - 初始化方法
 - (void)awakeFromNib
 {
-    // 取消选中样式
     self.autoresizingMask = UIViewAutoresizingNone;
+    // 取消选中样式
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
@@ -41,7 +41,7 @@
     self.statusLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.statusLabel.backgroundColor = [UIColor colorWithHexString:@"#ffd701" alpha:1];
     // 限制正文最大宽度
-    self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 15 - self.contentLabel.od_x;
+    self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 90;
 }
 
 /**

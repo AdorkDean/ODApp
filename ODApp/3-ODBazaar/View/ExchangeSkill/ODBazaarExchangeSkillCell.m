@@ -33,6 +33,9 @@
 /** 配图的宽度 */
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *photosViewConstraintW;
 
+/** 正文的高度 */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *starConstraintH;
+
 @end
 
 @implementation ODBazaarExchangeSkillCell
@@ -55,7 +58,7 @@
     self.shareLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     
     // 设置文字最大宽度
-    self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 15 - 75;
+    self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 90;
 }
 
 /**
@@ -74,6 +77,7 @@
         // 设置圆角
         [weakSelf.avatarButton setBackgroundImage:[image OD_circleImage] forState:UIControlStateNormal];
     }];
+    
     // 监听点击
     [self.avatarButton addTarget:self action:@selector(clickavatarButton) forControlEvents:UIControlEventTouchUpInside];
     
@@ -97,7 +101,10 @@
     CGSize photosViewSize = [ODBazaarPhotosView zh_sizeWithConnt:model.imgs_small.count];
     self.photosViewConstraintH.constant = photosViewSize.height;
     self.photosViewConstraintW.constant = photosViewSize.width;
+    CGFloat contentH = [self.model.content boundingRectWithSize:CGSizeMake(KScreenWidth - 90, 30) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11.0f]} context:nil].size.height;
+    self.starConstraintH.constant = 12 + contentH + 15;
 }
+
 
 /**
  *  设置cell间隙
