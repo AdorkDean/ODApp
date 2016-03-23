@@ -46,6 +46,8 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableFooterView = [UIView new];
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.estimatedRowHeight = 300;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarExchangeSkillCell class]) bundle:nil] forCellReuseIdentifier:ODBazaarExchangeSkillCellID];
         [self.view addSubview:_tableView];
@@ -137,10 +139,10 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    return model.rowHeight;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    ODBturn model.rowHeight;
+//}azaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+//    re
 
 #pragma mark - UITableViewDelegate
 

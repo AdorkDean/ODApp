@@ -35,9 +35,6 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
 @property (nonatomic, strong) NSMutableArray *taskDataArray;
 @property (nonatomic, strong) NSMutableArray *skillDataArray;
 
-// 无记录label
-@property (nonatomic , strong) UILabel *taskNoResultLabel;
-@property (nonatomic , strong) UILabel *skillNoResultLabel;
 
 // UITableView
 @property (nonatomic, strong) UITableView *taskTableView;
@@ -161,7 +158,7 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
             [weakSelf skillGetRequestData];
         }];
         _skillTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-            weakSelf.skillPageNumber = 1;
+            weakSelf.skillPageNumber++                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ;
             [weakSelf skillGetRequestData];
         }];
     }
@@ -181,7 +178,6 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     [ODHttpTool getWithURL:ODUrlUserCommentList parameters:params modelClass:[ODEvaluationModel class] success:^(id model) {
          if ([countNumber isEqualToString:@"1"]) {
              [weakSelf.taskDataArray removeAllObjects];
-             [weakSelf.taskNoResultLabel removeFromSuperview];
          }
          
          NSArray *evaluationDatas = [model result];
@@ -224,14 +220,13 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
      {
          if ([countNumber isEqualToString:@"1"]) {
              [weakSelf.skillDataArray removeAllObjects];
-             [weakSelf.skillNoResultLabel removeFromSuperview];
          }
          
          NSArray *evaluationDatas = [model result];
          [weakSelf.skillDataArray addObjectsFromArray:evaluationDatas];
          
          [weakSelf.skillTableView.mj_header endRefreshing];
-         if (evaluationDatas.count == 0) {
+         if ([[model result] count] == 0) {
              [weakSelf.skillTableView.mj_footer endRefreshingWithNoMoreData];
          }
          else
