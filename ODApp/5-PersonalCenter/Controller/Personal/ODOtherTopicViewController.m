@@ -95,14 +95,8 @@
         
         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
         
-        if ([[model result] bbs_list].count == 0) {
-            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-        }
-        else
-        {
-            [weakSelf.collectionView.mj_footer endRefreshing];
-        }
-        [weakSelf.collectionView reloadData];
+        [ODHttpTool OD_endRefreshWith:weakSelf.collectionView array:[[model result] bbs_list]];
+        
         if (weakSelf.dataArray.count == 0) {
             [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无话题"];
         }

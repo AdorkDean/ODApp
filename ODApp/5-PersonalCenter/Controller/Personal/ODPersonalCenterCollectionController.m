@@ -99,14 +99,7 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
         NSArray *array = model.result;
         [weakSelf.dataArray addObjectsFromArray:array];
         
-        [weakSelf.tableView.mj_header endRefreshing];
-        if ([[model result]count] == 0) {
-            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
-        }
-        else {
-            [weakSelf.tableView.mj_footer endRefreshing];
-        }
-        [weakSelf.tableView reloadData];
+        [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:[model result]];
         
         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.dataArray.count == 0) {

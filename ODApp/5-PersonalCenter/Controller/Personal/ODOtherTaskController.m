@@ -96,15 +96,9 @@
          }
          
          ODBazaarTasksModel *tasksModel = [model result];
-         [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];
+         [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];         
          
-         [weakSelf.tableView.mj_header endRefreshing];
-         if (tasksModel.tasks.count == 0) {
-             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
-         }else{
-             [weakSelf.tableView.mj_footer endRefreshing];
-         }
-         [weakSelf.tableView reloadData];
+         [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:tasksModel.tasks];
          
          ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
          if (weakSelf.dataArray.count == 0) {

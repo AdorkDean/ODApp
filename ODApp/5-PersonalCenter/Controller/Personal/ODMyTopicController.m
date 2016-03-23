@@ -233,15 +233,7 @@
             [weakSelf.firstUserInfoDic setObject:userModel forKey:userKey];
         }
         
-        [weakSelf.firstCollectionView.mj_header endRefreshing];
-        if ([[model result] bbs_list].count == 0) {
-            [weakSelf.firstCollectionView.mj_footer endRefreshingWithNoMoreData];
-        }
-        else
-        {
-            [weakSelf.firstCollectionView.mj_footer endRefreshing];
-        }
-        [weakSelf.firstCollectionView reloadData];
+        [ODHttpTool OD_endRefreshWith:weakSelf.firstCollectionView array:[[model result] bbs_list]];
         
         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.FirstDataArray.count == 0) {
@@ -285,16 +277,8 @@
             [weakSelf.secondUserInfoDic setObject:userModel forKey:userKey];
         }
 
-        [weakSelf.secondCollectionView.mj_header endRefreshing];
-        if ([[model result] bbs_list].count == 0) {
-            [weakSelf.secondCollectionView.mj_footer endRefreshingWithNoMoreData];
-        }
-        else
-        {
-            [weakSelf.secondCollectionView.mj_footer endRefreshing];
-        }
-        [weakSelf.secondCollectionView reloadData];
-
+        [ODHttpTool OD_endRefreshWith:weakSelf.secondCollectionView array:[[model result] bbs_list]];
+        
         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.secondDataArray.count == 0) {
             [noResultabel showOnSuperView:weakSelf.secondCollectionView title:@"暂无话题"];

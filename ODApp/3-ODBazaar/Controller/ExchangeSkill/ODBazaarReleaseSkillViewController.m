@@ -143,13 +143,13 @@
     [ODHttpTool postWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
         if (isEdit) {
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
             [ODProgressHUD showInfoWithStatus:@"编辑成功"];
+            [weakSelf.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
         }else{
             [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
-            [weakSelf.navigationController popViewControllerAnimated:YES];
             [ODProgressHUD showInfoWithStatus:@"创建成功"];
-        }
+            [weakSelf.navigationController popViewControllerAnimated:YES];
+        }        
     } failure:^(NSError *error) {
     }];
 }
