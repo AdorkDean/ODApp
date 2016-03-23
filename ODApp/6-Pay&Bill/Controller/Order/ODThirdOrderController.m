@@ -220,7 +220,6 @@
     
     for (int i = 0; i < 7; i++) {
         DataButton *button = [[DataButton alloc] initWithFrame:CGRectMake(5 + i * self.scroller.frame.size.width / 3, 5, self.scroller.frame.size.width / 3 - 10, 40)];
-        
         if (i == 0) {
             button.dataLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
             button.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
