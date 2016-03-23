@@ -12,4 +12,4 @@
 
 @end
 
-ODRequestResultIsDictionaryAll(ODSecondEvaluationModel)
+ODRequestResultIsArrayAll(ODSecondEvaluationModel)
