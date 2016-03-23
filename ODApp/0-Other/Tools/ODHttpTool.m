@@ -234,7 +234,7 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     }
     else
     {
-        [ODProgressHUD showErrorWithStatus:responseObject[requsetMessage]];
+        [ODProgressHUD showInfoWithStatus:responseObject[requsetMessage]];
         failBlock(responseObject[requestStatus]);
     }
 }
