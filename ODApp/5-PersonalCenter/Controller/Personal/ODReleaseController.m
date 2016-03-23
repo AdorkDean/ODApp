@@ -197,14 +197,7 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
     if (![[NSString stringWithFormat:@"%@", model.status] isEqualToString:@"-1"]) {
         ODBazaarReleaseSkillViewController *vc = [[ODBazaarReleaseSkillViewController alloc] init];
         vc.swap_id = [NSString stringWithFormat:@"%@",model.swap_id];
-        vc.skillTitle = model.title;
-        vc.content = model.content;
-        vc.price = model.price;
-        vc.unit = model.unit;
-        vc.swap_type = [NSString stringWithFormat:@"%@",model.swap_type];
         vc.type = @"编辑";
-        vc.imageArray = [model.imgs_small valueForKeyPath:@"img_url"];
-        [vc.strArray addObjectsFromArray:[model.imgs_small valueForKeyPath:@"md5"]];
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
