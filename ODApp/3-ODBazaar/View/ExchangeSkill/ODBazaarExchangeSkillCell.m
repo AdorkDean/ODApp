@@ -25,22 +25,17 @@
 @property (nonatomic, weak) IBOutlet UILabel *shareLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *genderImageView;
 /** 配图 */
-@property (nonatomic, weak) ODBazaarPhotosView *photosView;
+@property (nonatomic, weak) IBOutlet ODBazaarPhotosView *photosView;
+
+/** 配图的高度 */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *photosViewConstraintH;
+
+/** 配图的宽度 */
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *photosViewConstraintW;
 
 @end
 
 @implementation ODBazaarExchangeSkillCell
-
-#pragma mark - 懒加载
-- (ODBazaarPhotosView *)photosView
-{
-    if (_photosView == nil) {
-        ODBazaarPhotosView *photosView = [[ODBazaarPhotosView alloc] init];
-        [self.contentView addSubview:photosView];
-        _photosView = photosView;
-    }
-    return _photosView;
-}
 
 #pragma mark - 初始化方法
 /**
@@ -49,6 +44,7 @@
 - (void)awakeFromNib
 {
     // 取消选中样式
+    self.autoresizingMask = UIViewAutoresizingNone;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.genderImageView.contentMode = UIViewContentModeCenter;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
@@ -57,6 +53,9 @@
     self.contentLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
     self.loveLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     self.shareLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    
+    // 设置文字最大宽度
+    self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 15 - 75;
 }
 
 /**
@@ -92,13 +91,15 @@
     }
     
     // 设置配图
-    if (model.imgs_small.count) {
-        self.photosView.hidden = NO;
-        self.photosView.frame = model.photosFrame;
-        self.photosView.skillModel = model;
-    } else {
-        self.photosView.hidden = YES;
-    }
+    self.photosView.skillModel = model;
+    
+    self.photosView.backgroundColor = [UIColor orangeColor];
+    self.contentLabel.backgroundColor = [UIColor redColor];
+    
+    // 改变配图约束
+    CGSize photosViewSize = [ODBazaarPhotosView zh_sizeWithConnt:model.imgs_small.count];
+    self.photosViewConstraintH.constant = photosViewSize.height;
+    self.photosViewConstraintW.constant = photosViewSize.width;
 }
 
 /**

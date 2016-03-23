@@ -163,7 +163,7 @@
             [_endIsOneButton setTitle:@"查看原因" forState:UIControlStateNormal];
             [_endIsOneButton addTarget:self action:@selector(reasonAction:) forControlEvents:UIControlEventTouchUpInside];
         }
-        if ([self.model.order_status isEqualToString:@"5"] && [self.model.swap_type isEqualToString:@"1"]) {
+        if ([self.model.order_status isEqualToString:@"5"] && [self.model.reason_num floatValue] == 0) {
             [_endIsOneButton setTitle:@"评价" forState:UIControlStateNormal];
             [_endIsOneButton addTarget:self action:@selector(evaluationAction:) forControlEvents:UIControlEventTouchUpInside];
         }
@@ -486,7 +486,7 @@
          }
          else if ([self.model.order_status isEqualToString:@"2"] ||
                   [self.model.order_status isEqualToString:@"3"] ||
-                  ([self.model.order_status isEqualToString:@"5"] && [weakSelf.model.swap_type isEqualToString:@"1"]) ||
+                  ([self.model.order_status isEqualToString:@"5"] && [self.model.reason_num floatValue] == 0) ||
                   [self.model.order_status isEqualToString:@"-3"] ||
                   [self.model.order_status isEqualToString:@"-4"] ||
                   [self.model.order_status isEqualToString:@"-5"]) {
@@ -533,7 +533,7 @@
     }
 }
 
-#pragma mark - 事件方法
+#pragma mark - Action
 
 #pragma mark - 确认发货
 - (void)deliveryAction:(UIButton *)sender {
@@ -545,18 +545,18 @@
     // 发送请求
     [ODHttpTool getWithURL:ODUrlSwapConfirmDelivery parameters:params modelClass:[NSObject class] success:^(id model)
      {
-         [weakSelf.endIsOneButton removeFromSuperview];
+//         [weakSelf.endIsOneButton removeFromSuperview];
          
-         ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
-         self.model.order_status = [NSString stringWithFormat:@"%@", statusModel.order_status];
+//         ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
+//         self.model.order_status = [NSString stringWithFormat:@"%@", statusModel.order_status];
+//         
+//         if (weakSelf.getRefresh) {
+//             weakSelf.getRefresh(@"1");
+//         }
          
-         if (weakSelf.getRefresh) {
-             weakSelf.getRefresh(@"1");
-         }
          
-         self.scrollHeight = KControllerHeight - ODNavigationHeight;
          [weakSelf getData];
-         [weakSelf.endIsOneButton removeFromSuperview];
+//         [weakSelf.endIsOneButton removeFromSuperview];
          
          [ODProgressHUD showInfoWithStatus:@"操作成功"];
      } failure:^(NSError *error) {
@@ -597,11 +597,11 @@
         [ODHttpTool getWithURL:ODUrlSwapOrderCancel parameters:params modelClass:[NSObject class] success:^(id model) {
             [weakSelf.cancelOrderView removeFromSuperview];
             [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
-            ODOrderDetailModel *statusModel = self.dataArray[0];
-            self.model.order_status = [NSString stringWithFormat:@"%@", statusModel.order_status];
-            if (weakSelf.getRefresh) {
-                weakSelf.getRefresh(@"1");
-            }
+//            ODOrderDetailModel *statusModel = self.dataArray[0];
+//            self.model.order_status = [NSString stringWithFormat:@"%@", statusModel.order_status];
+//            if (weakSelf.getRefresh) {
+//                weakSelf.getRefresh(@"1");
+//            }
 
             [weakSelf getData];
         } failure:^(NSError *error) {
@@ -676,17 +676,17 @@
     [ODHttpTool getWithURL:ODUrlSwapOrderReason parameters:params modelClass:[NSObject class] success:^(id model) {
          [weakSelf.evaluationView removeFromSuperview];
          [ODProgressHUD showInfoWithStatus:@"评价成功"];
-         ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
-         self.model.order_status = [NSString stringWithFormat:@"%@", statusModel.order_status];
+//         ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
+//         self.model.order_status = [NSString stringWithFormat:@"%@", statusModel.order_status];
         
-        self.orderStatus = @"5";
-        self.model.swap_type = @"1";
-        [weakSelf.endIsOneButton removeFromSuperview];
-        [weakSelf.scrollView removeFromSuperview];
+//        self.orderStatus = @"5";
+//        self.model.swap_type = @"1";
+//        [weakSelf.endIsOneButton removeFromSuperview];
+//        [weakSelf.scrollView removeFromSuperview];
         
-         if (weakSelf.getRefresh) {
-             weakSelf.getRefresh(@"1");
-         }
+//         if (weakSelf.getRefresh) {
+//             weakSelf.getRefresh(@"1");
+//         }
          [weakSelf getData];
      } failure:^(NSError *error) {
          
@@ -744,8 +744,12 @@
 #pragma mark - 打电话
 - (void)phoneAction:(UIButton *)sender {
     ODOrderDetailModel *model = self.dataArray[0];
-    NSMutableDictionary *dic = model.user;
-    [self.view callToNum:dic[@"mobile"]];
+    if (self.isSellDetail) {
+        [self.view callToNum:model.user[@"mobile"]];
+    }
+    else {
+        [self.view callToNum:model.tel];
+    }
 }
 
 - (void)dealloc {

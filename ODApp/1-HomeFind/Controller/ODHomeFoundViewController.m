@@ -13,8 +13,8 @@
 #import "ODStorePlaceListModel.h"
 #import "ODHomeInfoModel.h"
 #import "ODHomeButton.h"
+#import "ODTakeAwayViewController.h"
 
-// 循环cell标识
 static NSString * const exchangeCellId = @"exchangeCell";
 
 @interface ODHomeFoundViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -150,6 +150,9 @@ static NSString * const exchangeCellId = @"exchangeCell";
         _tableView.delegate = self;
         // 取消分割线
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.estimatedRowHeight = 300;
         // 注册cell
         [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarExchangeSkillCell class]) bundle:nil] forCellReuseIdentifier:exchangeCellId];
         self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -189,10 +192,10 @@ static NSString * const exchangeCellId = @"exchangeCell";
     [self.navigationController pushViewController:detailControler animated:YES];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    return model.rowHeight;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+//    return model.rowHeight;
+//}
 
 -(void)createHeaderView{
     self.headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 200)];
@@ -256,6 +259,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
         else {
             imageButton = [[UIButton alloc] initWithFrame:CGRectMake((kScreenSize.width - 15) * 7 / 12 * i, 0, (kScreenSize.width - 15) * 7 / 12, 120)];
         }
+        imageButton.tag = 100+i;
         [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:activityModel.detail_md5] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
         [imageButton addTarget:self action:@selector(activityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [scrollView addSubview:imageButton];
@@ -435,11 +439,9 @@ updatingLocation:(BOOL)updatingLocation {
             }
             break;
         case 2:
-        {
-            ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
-            vc.navigationTitle = @"敬请期待";
-            vc.webUrl = ODWebUrlExpect;
-            [self.navigationController pushViewController:vc animated:YES];
+        {   // 跳转至定外卖界面
+            ODTakeAwayViewController *takeAwayVc = [[ODTakeAwayViewController alloc] init];
+            [self.navigationController pushViewController:takeAwayVc animated:YES];
         }
             break;
         case 3:
