@@ -15,9 +15,6 @@
 #import "ODHomeButton.h"
 #import "ODTakeAwayViewController.h"
 
-#define cellID @"ODBazaarExchangeSkillCollectionCell"
-
-// 循环cell标识
 static NSString * const exchangeCellId = @"exchangeCell";
 
 @interface ODHomeFoundViewController ()<UITableViewDelegate,UITableViewDataSource>
