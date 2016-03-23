@@ -12,13 +12,20 @@
 
 #import "ODBazaarPhoto.h"
 
-#define ODPhotoWH ((KScreenWidth - 75 - ODPhotoMargin * 3) / 3)
-#define ODPhotoMargin (17 / 2)
+//#define ODPhotoMargin (17 / 2)
+static CGFloat const ODPhotoMargin = 17 / 2;
+//#define ODPhotoWH ((KScreenWidth - 75 - ODPhotoMargin * 3) / 3)
 #define ODPhotoMaxCol(count) ((count == 4) ? 2 : 3)
 
 @implementation ODBazaarPhotosView
 
 #pragma mark - 初始化方法
+
+- (void)awakeFromNib
+{
+    self.translatesAutoresizingMaskIntoConstraints = NO;
+}
+
 - (void)setSkillModel:(ODBazaarExchangeSkillModel *)skillModel
 {
     _skillModel = skillModel;
@@ -57,6 +64,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    CGFloat ODPhotoWH = ((KScreenWidth - 75 - ODPhotoMargin * 3) / 3);
     
     NSUInteger photosCount = self.skillModel.imgs_small.count;
     
@@ -81,7 +89,7 @@
 {
     // 最大列数（一行最多有多少列）
     NSInteger maxCols = ODPhotoMaxCol(count);
-    
+    CGFloat ODPhotoWH = ((KScreenWidth - 75 - ODPhotoMargin * 3) / 3);
     NSInteger cols = (count >= maxCols) ? maxCols : count;
     CGFloat photosW = cols * ODPhotoWH + (cols - 1) * ODPhotoMargin;
     

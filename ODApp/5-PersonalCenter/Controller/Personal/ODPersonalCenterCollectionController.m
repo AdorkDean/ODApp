@@ -46,6 +46,8 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableFooterView = [UIView new];
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.estimatedRowHeight = 300;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarExchangeSkillCell class]) bundle:nil] forCellReuseIdentifier:ODBazaarExchangeSkillCellID];
         [self.view addSubview:_tableView];
