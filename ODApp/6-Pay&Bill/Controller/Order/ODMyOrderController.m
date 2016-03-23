@@ -98,16 +98,8 @@
             [weakSelf.dataArray removeAllObjects];
         }
         [weakSelf.dataArray addObjectsFromArray:orderDatas];
-
-        [weakSelf.collectionView.mj_header endRefreshing];
-        if (!orderDatas.count) {
-            [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-        }
-        else
-        {
-            [weakSelf.collectionView.mj_footer endRefreshing];
-        }
-        [weakSelf.collectionView reloadData];
+        
+        [ODHttpTool OD_endRefreshWith:weakSelf.collectionView array:orderDatas];
         
         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.dataArray.count == 0) {

@@ -102,7 +102,7 @@
     [ODHttpTool getWithURL:ODUrlSwapSchedule parameters:parameter modelClass:[ODBazaarReleaseSkillTimeModel class] success:^(id model) {
         
         if ( !weakSelf.dataArray.count ) {
-            NSArray *array = [model result];
+//            NSArray *array = [model result];
             [weakSelf.dataArray addObjectsFromArray:[model result]];
         }
         

@@ -100,14 +100,8 @@ NSString *const ODApplyList1CellID = @"ODApplyList1CellID";
         for (id loves in loveListDatas) {
             [weakSelf.dataArray addObject:loves];
         }
-        [weakSelf.tableView.mj_header endRefreshing];
-        if (!loveListDatas.count) {
-            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
-        }
-        else {
-            [weakSelf.tableView.mj_footer endRefreshing];
-        }
-        [weakSelf.tableView reloadData];
+        
+        [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:loveListDatas];        
     }
     failure:^(NSError *error) {
        [weakSelf.tableView.mj_header endRefreshing];

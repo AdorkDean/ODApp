@@ -16,7 +16,7 @@
 #import "ODUserInformation.h"
 #import <CommonCrypto/CommonDigest.h>
 
-
+#import "MJRefresh.h"
 
 NSString * const requestStatus = @"status";
 NSString * const requsetResult = @"result";
@@ -234,7 +234,7 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     }
     else
     {
-        [ODProgressHUD showErrorWithStatus:responseObject[requsetMessage]];
+        [ODProgressHUD showInfoWithStatus:responseObject[requsetMessage]];
         failBlock(responseObject[requestStatus]);
     }
 }
@@ -247,4 +247,23 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
         failBlock(error);
     }
 }
+
++ (void)OD_endRefreshWith:(UIScrollView *)scrollView array:(NSArray *)array {
+    [scrollView.mj_header endRefreshing];
+    if (array.count < 20) {
+        [scrollView.mj_footer endRefreshingWithNoMoreData];
+    }
+    else {
+        [scrollView.mj_footer endRefreshing];
+    }
+    if ([scrollView isKindOfClass:[UITableView class]])
+    {
+        [(UITableView *)scrollView reloadData];
+    }
+    else if ([scrollView isKindOfClass:[UICollectionView class]])
+    {
+        [(UICollectionView *)scrollView reloadData];
+    }
+}
+
 @end

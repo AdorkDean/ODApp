@@ -79,8 +79,6 @@
         [self.dataArray replaceObjectAtIndex:self.index withObject:model];
         [self.tableView reloadData];
     }
-    
-    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)dealloc{
@@ -103,15 +101,9 @@
              [weakSelf.dataArray removeAllObjects];
          }
          ODBazaarTasksModel *tasksModel = [model result];
-         [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];
+         [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];         
          
-         [weakSelf.tableView.mj_header endRefreshing];
-         if (tasksModel.tasks.count == 0) {
-             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
-         }else{
-             [weakSelf.tableView.mj_footer endRefreshing];
-         }
-         [weakSelf.tableView reloadData];
+         [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:tasksModel.tasks];
          
          ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
          if (weakSelf.dataArray.count == 0) {
