@@ -153,6 +153,9 @@ static NSString * const exchangeCellId = @"exchangeCell";
         _tableView.delegate = self;
         // 取消分割线
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.estimatedRowHeight = 300;
         // 注册cell
         [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarExchangeSkillCell class]) bundle:nil] forCellReuseIdentifier:exchangeCellId];
         self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -192,10 +195,10 @@ static NSString * const exchangeCellId = @"exchangeCell";
     [self.navigationController pushViewController:detailControler animated:YES];
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    return model.rowHeight;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+//    return model.rowHeight;
+//}
 
 -(void)createHeaderView{
     self.headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 200)];

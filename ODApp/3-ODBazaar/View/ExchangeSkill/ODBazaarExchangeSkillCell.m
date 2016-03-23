@@ -44,6 +44,7 @@
 - (void)awakeFromNib
 {
     // 取消选中样式
+    self.autoresizingMask = UIViewAutoresizingNone;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.genderImageView.contentMode = UIViewContentModeCenter;
     self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
@@ -54,7 +55,7 @@
     self.shareLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
     
     // 设置文字最大宽度
-    self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 15 - self.contentLabel.od_x;
+    self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 15 - 75;
 }
 
 /**
@@ -91,6 +92,9 @@
     
     // 设置配图
     self.photosView.skillModel = model;
+    
+    self.photosView.backgroundColor = [UIColor orangeColor];
+    self.contentLabel.backgroundColor = [UIColor redColor];
     
     // 改变配图约束
     CGSize photosViewSize = [ODBazaarPhotosView zh_sizeWithConnt:model.imgs_small.count];
