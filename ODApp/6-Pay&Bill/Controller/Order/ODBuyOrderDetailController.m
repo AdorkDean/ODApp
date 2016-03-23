@@ -273,15 +273,14 @@
     for (int i = 0; i < 3; i++) {
         NSString *buyerName;
         NSString *buyerTel;
-        if ([swap_type isEqualToString:@"2"]) {
-            buyerName = [NSString stringWithFormat:@"联系人：%@", model.name];
-            buyerTel = [NSString stringWithFormat:@"联系方式：%@", model.tel];
-        }
-        else {
+        if ([swap_type isEqualToString:@"3"]) {
             buyerName = [NSString stringWithFormat:@"联系人：%@", model.order_user[@"nick"]];
             buyerTel = [NSString stringWithFormat:@"联系方式：%@", model.order_user[@"mobile"]];
         }
-
+        else {
+            buyerName = [NSString stringWithFormat:@"联系人：%@", model.name];
+            buyerTel = [NSString stringWithFormat:@"联系方式：%@", model.tel];
+        }
         NSArray *buyerArray = @[ @"买家信息", buyerName, buyerTel ];
         buyerLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, labelHeight * i, KScreenWidth - ODLeftMargin * 2, labelHeight)];
         buyerLabel.text = [NSString stringWithFormat:@"%@",buyerArray[i]];
@@ -545,28 +544,15 @@
     // 发送请求
     [ODHttpTool getWithURL:ODUrlSwapConfirmDelivery parameters:params modelClass:[NSObject class] success:^(id model)
      {
-//         [weakSelf.endIsOneButton removeFromSuperview];
-         
-//         ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
-//         self.model.order_status = [NSString stringWithFormat:@"%@", statusModel.order_status];
-//         
-//         if (weakSelf.getRefresh) {
-//             weakSelf.getRefresh(@"1");
-//         }
-         
-         
-         [weakSelf getData];
-//         [weakSelf.endIsOneButton removeFromSuperview];
-         
          [ODProgressHUD showInfoWithStatus:@"操作成功"];
+         [weakSelf getData];
      } failure:^(NSError *error) {
          
      }];
 }
 
 #pragma mark - 处理退款
-- (void)dealDeliveryAction:(UIButton *)sender {
-    
+- (void)dealDeliveryAction:(UIButton *)sender {    
     ODDrawbackController *vc = [[ODDrawbackController alloc] init];
     
     ODOrderDetailModel *model = self.dataArray[0];
@@ -577,8 +563,6 @@
     vc.drawbackTitle = @"退款处理";
     
     [self.navigationController pushViewController:vc animated:YES];
-    
-    
 }
 
 #pragma mark - 取消订单
@@ -597,12 +581,6 @@
         [ODHttpTool getWithURL:ODUrlSwapOrderCancel parameters:params modelClass:[NSObject class] success:^(id model) {
             [weakSelf.cancelOrderView removeFromSuperview];
             [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
-//            ODOrderDetailModel *statusModel = self.dataArray[0];
-//            self.model.order_status = [NSString stringWithFormat:@"%@", statusModel.order_status];
-//            if (weakSelf.getRefresh) {
-//                weakSelf.getRefresh(@"1");
-//            }
-
             [weakSelf getData];
         } failure:^(NSError *error) {
             [ODProgressHUD showInfoWithStatus:@"网络异常"];
@@ -676,17 +654,6 @@
     [ODHttpTool getWithURL:ODUrlSwapOrderReason parameters:params modelClass:[NSObject class] success:^(id model) {
          [weakSelf.evaluationView removeFromSuperview];
          [ODProgressHUD showInfoWithStatus:@"评价成功"];
-//         ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
-//         self.model.order_status = [NSString stringWithFormat:@"%@", statusModel.order_status];
-        
-//        self.orderStatus = @"5";
-//        self.model.swap_type = @"1";
-//        [weakSelf.endIsOneButton removeFromSuperview];
-//        [weakSelf.scrollView removeFromSuperview];
-        
-//         if (weakSelf.getRefresh) {
-//             weakSelf.getRefresh(@"1");
-//         }
          [weakSelf getData];
      } failure:^(NSError *error) {
          
@@ -745,10 +712,15 @@
 - (void)phoneAction:(UIButton *)sender {
     ODOrderDetailModel *model = self.dataArray[0];
     if (self.isSellDetail) {
-        [self.view callToNum:model.user[@"mobile"]];
+        if ([model.swap_type isEqualToString:@"3"]) {
+            [self.view callToNum:model.order_user[@"mobile"]];
+        }
+        else {
+            [self.view callToNum:model.tel];
+        }
     }
     else {
-        [self.view callToNum:model.tel];
+        [self.view callToNum:model.user[@"mobile"]];
     }
 }
 
