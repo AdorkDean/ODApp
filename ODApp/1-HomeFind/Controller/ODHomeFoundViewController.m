@@ -13,7 +13,6 @@
 #import "ODStorePlaceListModel.h"
 #import "ODHomeInfoModel.h"
 #import "ODHomeButton.h"
-#define cellID @"ODBazaarExchangeSkillCollectionCell"
 
 // 循环cell标识
 static NSString * const exchangeCellId = @"exchangeCell";
