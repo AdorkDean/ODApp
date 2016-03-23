@@ -744,8 +744,12 @@
 #pragma mark - 打电话
 - (void)phoneAction:(UIButton *)sender {
     ODOrderDetailModel *model = self.dataArray[0];
-    NSMutableDictionary *dic = model.user;
-    [self.view callToNum:dic[@"mobile"]];
+    if (self.isSellDetail) {
+        [self.view callToNum:model.user[@"mobile"]];
+    }
+    else {
+        [self.view callToNum:model.tel];
+    }
 }
 
 - (void)dealloc {
