@@ -93,9 +93,6 @@
     // 设置配图
     self.photosView.skillModel = model;
     
-    self.photosView.backgroundColor = [UIColor orangeColor];
-    self.contentLabel.backgroundColor = [UIColor redColor];
-    
     // 改变配图约束
     CGSize photosViewSize = [ODBazaarPhotosView zh_sizeWithConnt:model.imgs_small.count];
     self.photosViewConstraintH.constant = photosViewSize.height;
