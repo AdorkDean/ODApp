@@ -44,9 +44,9 @@
     
 }
 
-//- (NSString *)descriptionWithLocale:(id)locale
-//{
-//    return [self od_desc];
-//}
+- (NSString *)descriptionWithLocale:(id)locale
+{
+    return [self od_desc];
+}
 
 @end

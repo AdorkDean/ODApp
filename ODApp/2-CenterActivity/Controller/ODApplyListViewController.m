@@ -93,17 +93,8 @@ NSString *const ODApplyListCellID = @"ODApplyListCellID";
          
          NSArray *applyDatas = [model result];
         [weakSelf.dataArray addObjectsFromArray:applyDatas];
-
-         if (applyDatas.count == 0)
-         {
-             [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
-         }
-         else
-         {
-             [weakSelf.tableView.mj_footer endRefreshing];
-         }
-         [weakSelf.tableView.mj_header endRefreshing];
-         [weakSelf.tableView reloadData];
+         
+        [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:applyDatas];
          
      } failure:^(NSError *error) {
          [weakSelf.tableView.mj_header endRefreshing];

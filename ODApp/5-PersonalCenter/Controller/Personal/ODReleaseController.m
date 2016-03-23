@@ -115,15 +115,9 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
                 [weakSelf.dataArray addObject: md];
             }
         }
-        [weakSelf.tableView.mj_header endRefreshing];
-        if ([[model result]count] == 0) {
-            [weakSelf.tableView.mj_footer endRefreshingWithNoMoreData];
-        }
-        else {
-         [weakSelf.tableView.mj_footer endRefreshing];
-        }
-        [weakSelf.tableView reloadData];
-        
+        // 刷新数据
+        [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:[model result]];
+
         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.dataArray.count == 0) {
             [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无技能"];

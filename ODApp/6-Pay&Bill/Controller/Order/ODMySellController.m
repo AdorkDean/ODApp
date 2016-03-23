@@ -16,7 +16,7 @@
 
 #import "ODBuyOrderDetailController.h"
 
-@interface ODMySellController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface ODMySellController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource>
 
 
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
@@ -26,6 +26,9 @@
 @property(nonatomic, copy) NSString *open_id;
 
 @property(nonatomic, assign) NSInteger indexRow;
+
+@property (nonatomic, strong) UITableView *tableView;
+
 
 @end
 
@@ -76,6 +79,14 @@
 
 }
 
+//- (UITableView *)tableView {
+//    if (!_tableView) {
+//        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - odnaviagt) style:UITableViewStylePlain];
+//    }
+//    return _tableView;
+//}
+
+
 #pragma mark - 初始化
 - (void)createCollectionView {
 __weakSelf
@@ -107,31 +118,23 @@ __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlSwapSellerOrderList parameters:params modelClass:[ODMySellModel class] success:^(id model)
      {
-         if ([countNumber isEqualToString:@"1"]) {
-             [weakSelf.dataArray removeAllObjects];
-         }
+        if ([countNumber isEqualToString:@"1"]) {
+            [weakSelf.dataArray removeAllObjects];
+        }
          
-         NSArray *mySellDatas = [model result];
-         [weakSelf.dataArray addObjectsFromArray:mySellDatas];
+        NSArray *mySellDatas = [model result];
+        [weakSelf.dataArray addObjectsFromArray:mySellDatas];
 
-         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
-
-         [weakSelf.collectionView.mj_header endRefreshing];
-         if (mySellDatas.count == 0) {
-             [weakSelf.collectionView.mj_footer endRefreshingWithNoMoreData];
-         }
-         else
-         {
-             [weakSelf.collectionView.mj_footer endRefreshing];
-         }
-         [weakSelf.collectionView reloadData];
+        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
          
-         if (weakSelf.dataArray.count == 0) {
-             [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无订单"];
-         }
-         else {
-             [noResultabel hidden];
-         }
+        [ODHttpTool OD_endRefreshWith:weakSelf.collectionView array:mySellDatas];
+         
+        if (weakSelf.dataArray.count == 0) {
+            [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无订单"];
+        }
+        else {
+            [noResultabel hidden];
+        }
      } failure:^(NSError *error) {
          
      }];
@@ -161,7 +164,7 @@ __weakSelf
     ODMyOrderModel *model = self.dataArray[indexPath.row];
 
 
-    NSString *swap_type = [NSString stringWithFormat:@"%@", model.swap_type];
+//    NSString *swap_type = [NSString stringWithFormat:@"%@", model.swap_type];
     NSString *orderId = [NSString stringWithFormat:@"%@", model.order_id];
     NSString *orderStatus = [NSString stringWithFormat:@"%@", model.order_status];
 
