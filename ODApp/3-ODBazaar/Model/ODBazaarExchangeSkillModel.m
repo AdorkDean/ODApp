@@ -9,8 +9,8 @@
 #import "ODBazaarExchangeSkillModel.h"
 #import "ODBazaarPhotosView.h"
 
-static CGFloat const bottomMargin = (30 / 2);
-static CGFloat const photoBottomMargin = (25 / 2);
+//static CGFloat const bottomMargin = (30 / 2);
+//static CGFloat const photoBottomMargin = (25 / 2);
 
 @implementation ODBazaarExchangeSkillUserModel
 

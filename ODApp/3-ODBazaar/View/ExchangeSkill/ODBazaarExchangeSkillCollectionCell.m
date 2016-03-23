@@ -43,7 +43,7 @@
     _model = model;
     [self.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
     self.titleLabel.text = model.title;
-    self.priceLabel.text = [[[[NSString stringWithFormat:@"%d",model.price] stringByAppendingString:@"元"] stringByAppendingString:@"/"]stringByAppendingString:model.unit];
+    self.priceLabel.text = [[[[NSString stringWithFormat:@"%f",model.price] stringByAppendingString:@"元"] stringByAppendingString:@"/"]stringByAppendingString:model.unit];
     self.nickLabel.text = model.user.nick;
     self.contentLabel.text = model.content;
     self.loveLabel.text = [NSString stringWithFormat:@"%d",model.love_num];

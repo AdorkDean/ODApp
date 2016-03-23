@@ -176,28 +176,20 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlUserCommentList parameters:params modelClass:[ODEvaluationModel class] success:^(id model) {
-         if ([countNumber isEqualToString:@"1"]) {
-             [weakSelf.taskDataArray removeAllObjects];
-         }
+        if ([countNumber isEqualToString:@"1"]) {
+            [weakSelf.taskDataArray removeAllObjects];
+        }
          
-         NSArray *evaluationDatas = [model result];
-         [weakSelf.taskDataArray addObjectsFromArray:evaluationDatas];
-
-         [weakSelf.taskTableView.mj_header endRefreshing];
-         if (evaluationDatas.count == 0) {
-             [weakSelf.taskTableView.mj_footer endRefreshingWithNoMoreData];
-         }
-         else {
-             [weakSelf.taskTableView.mj_footer endRefreshing];
-         }
-         [weakSelf.taskTableView reloadData];
+        NSArray *evaluationDatas = [model result];
+        [weakSelf.taskDataArray addObjectsFromArray:evaluationDatas];
+        
+        [ODHttpTool OD_endRefreshWith:weakSelf.taskTableView array:evaluationDatas];
         
         ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.taskDataArray.count == 0) {
             [noResultLabel showOnSuperView:weakSelf.taskTableView title:@"暂无评价"];
         }
-        else
-        {
+        else {
             [noResultLabel hidden];
         }
      } failure:^(NSError *error) {
@@ -225,16 +217,8 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          NSArray *evaluationDatas = [model result];
          [weakSelf.skillDataArray addObjectsFromArray:evaluationDatas];
          
-         [weakSelf.skillTableView.mj_header endRefreshing];
-         if ([[model result] count] == 0) {
-             [weakSelf.skillTableView.mj_footer endRefreshingWithNoMoreData];
-         }
-         else
-         {
-             [weakSelf.skillTableView.mj_footer endRefreshing];
-         }
-         [weakSelf.skillTableView reloadData];
- 
+         [ODHttpTool OD_endRefreshWith:weakSelf.skillTableView array:evaluationDatas];
+          
          ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
          if (weakSelf.skillDataArray.count == 0) {
              [noResultLabel showOnSuperView:weakSelf.skillTableView title:@"暂无评价"];
