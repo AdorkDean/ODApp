@@ -22,6 +22,7 @@
 @property(nonatomic)NSInteger index;
 @property(nonatomic,copy)NSString *status;
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)ODNoResultLabel *label;
 
 @end
 
@@ -56,6 +57,7 @@
     self.page = 1;
     self.status = @"0";
     [self requestData];
+    self.label = [[ODNoResultLabel alloc]init];
     __weakSelf
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         weakSelf.page = 1;
@@ -105,12 +107,10 @@
          
          [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:tasksModel.tasks];
          
-         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
-         if (weakSelf.dataArray.count == 0) {
-             [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无任务"];
-         }
-         else {
-             [noResultabel hidden];
+        if (weakSelf.dataArray.count == 0) {
+             [self.label showOnSuperView:weakSelf.tableView title:@"暂无任务"];
+         }else {
+             [self.label hidden];
          }
      } failure:^(NSError *error) {
          [weakSelf.tableView.mj_header endRefreshing];

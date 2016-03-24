@@ -18,6 +18,7 @@
 {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor backgroundColor];
+    self.noResultabel = [[ODNoResultLabel alloc] init];
 }
 
 - (void)dealloc
