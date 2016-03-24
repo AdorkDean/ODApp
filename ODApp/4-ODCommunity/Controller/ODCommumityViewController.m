@@ -219,10 +219,13 @@
             }
             
             [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:cell.model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                if (error) {
+//                if (error) {
+//                    [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
+//                } else {
+//                    [imageButton setBackgroundImage:image forState:UIControlStateNormal];
+//                }
+                if (!image) {
                     [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
-                } else {
-                    [imageButton setBackgroundImage:image forState:UIControlStateNormal];
                 }
             }];
             [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
