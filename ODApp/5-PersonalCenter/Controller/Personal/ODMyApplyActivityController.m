@@ -90,14 +90,14 @@ static NSString *const cellId = @"newActivityCell";
             }
         }
         
-        [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:[model result]];
+        [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[model result]];
         
-        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        
         if (weakSelf.resultLists.count == 0) {
-            [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无活动"];
+            [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无活动"];
         }
         else {
-            [noResultabel hidden];
+            [self.noResultabel hidden];
         }        
     }
                    failure:^(NSError *error)

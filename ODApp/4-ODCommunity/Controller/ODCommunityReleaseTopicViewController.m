@@ -9,6 +9,7 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCommunityReleaseTopicViewController.h"
 #import "ODUploadImageModel.h"
+#import "AFNetworking.h"
 
 @interface ODCommunityReleaseTopicViewController ()
 
@@ -16,53 +17,94 @@
 
 @implementation ODCommunityReleaseTopicViewController
 
+#pragma mark - lazyload
+-(UIScrollView *)scrollView{
+    if (!_scrollView) {
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - 64)];
+        [self.view addSubview:_scrollView];
+    }
+    return _scrollView;
+}
+
+-(NSMutableArray *)imageArray{
+    if (!_imageArray) {
+        _imageArray = [NSMutableArray array];
+    }
+    return _imageArray;
+}
+
+-(NSMutableArray *)strArray{
+    if (!_strArray) {
+        _strArray = [NSMutableArray array];
+    }
+    return _strArray;
+}
+
+-(NSMutableArray *)labelArray{
+    if (!_labelArray) {
+        _labelArray = [NSMutableArray array];
+    }
+    return _labelArray;
+}
+
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.imageArray = [[NSMutableArray alloc] init];
-    self.strArray = [[NSMutableArray alloc] init];
-    self.labelArray = [NSMutableArray array];
     self.navigationItem.title = @"新话题";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor colorWithRGBString:@"#000000" alpha:1] highColor:nil title:@"取消"];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithRGBString:@"#000000" alpha:1] highColor:nil title:@"确认"];
-    [self createScrollView];
     [self createTextView];
     [self createLabels];
     [self createAddPicButton];
 }
 
-- (void)cancelButtonClick {
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)confirmButtonClick {
-    [self.titleTextView resignFirstResponder];
-    [self.topicContentTextView resignFirstResponder];
-
-    if (self.titleTextView.text.length > 0 && self.topicContentTextView.text.length > 0) {
-        [self joiningTogetherParmeters];
-    } else if (self.titleTextView.text.length > 0 && self.topicContentTextView.text.length == 0) {
-
-        [ODProgressHUD showInfoWithStatus:@"请输入话题内容"];
-    } else {
-
-        [ODProgressHUD showInfoWithStatus:@"请输入话题标题"];
-    }
-
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-#pragma mark - 创建scrollView
+#pragma mark - 拼接参数
+-(void)pushImageData:(NSString *)str{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    NSDictionary *parameter = @{@"File":str};
+    NSDictionary *signParameter = [ODHttpTool signParameters:parameter];
+    __weakSelf
+    NSString *url = [NSString stringWithFormat:@"%@/%@",ODBaseURL,ODUrlOtherBase64Upload];
+    [manager POST:url parameters:signParameter success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        if (responseObject) {
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:NSJSONReadingMutableContainers error:nil];
+            NSDictionary *result = dict[@"result"];
+            NSString *str = result[@"File"];
+            [weakSelf.strArray addObject:str];
+            [weakSelf reloadImageButtons];
+        }
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"error");
+    }];
+}
 
-- (void)createScrollView {
-    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - 64)];
-    [self.view addSubview:self.scrollView];
+#pragma mark - 上传数据
+- (void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter {
+    __weakSelf
+    [ODHttpTool getWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        if (weakSelf.myBlock) {
+            weakSelf.myBlock([NSString stringWithFormat:@"refresh"]);
+        }
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+    } failure:^(NSError *error) {
+    }];
 }
 
 #pragma mark - 创建textView
-
 - (void)createTextView {
-    //标题
     self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 53) delegate:self tag:0 font:13 color:@"#ffffff" alpha:1 maskToBounds:YES];
     self.titleTextView.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     [self.scrollView addSubview:self.titleTextView];
@@ -71,7 +113,6 @@
     self.titleLabel.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.titleLabel];
 
-    //内容
     self.topicContentTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, CGRectGetMaxY(self.titleTextView.frame) + 4, kScreenSize.width - 8, 106) delegate:self tag:0 font:13 color:@"#ffffff" alpha:101 maskToBounds:YES];
     self.topicContentTextView.textColor = [UIColor colorWithRGBString:@"#7e7e7e" alpha:1];
     [self.scrollView addSubview:self.topicContentTextView];
@@ -81,50 +122,7 @@
     [self.scrollView addSubview:self.topicContentLabel];
 }
 
-#pragma mark - UITextViewDelegate
-NSString *topicTitleText = @"";
-NSString *topicContentText = @"";
-
-- (void)textViewDidChange:(UITextView *)textView {
-    if (textView == self.titleTextView) {
-        if (textView.text.length > 30) {
-            textView.text = [textView.text substringToIndex:30];
-        } else {
-            topicTitleText = textView.text;
-        }
-
-        if (self.titleTextView.text.length == 0) {
-            self.titleLabel.text = @"请输入话题标题";
-        } else {
-            self.titleLabel.text = @"";
-        }
-    } else if (textView == self.topicContentTextView) {
-        if (textView.text.length > 500) {
-            textView.text = [textView.text substringToIndex:500];
-        } else {
-            topicContentText = textView.text;
-        }
-
-        if (self.topicContentTextView.text.length == 0) {
-            self.topicContentLabel.text = @"请输入话题内容";
-        } else {
-            self.topicContentLabel.text = @"";
-        }
-    }
-}
-
-- (void)textViewDidEndEditing:(UITextView *)textView {
-    if (textView == self.titleTextView) {
-        if (textView.text.length == 0) {
-            self.titleLabel.text = @"请输入话题标题";
-        }
-    } else {
-        if (textView.text.length == 0) {
-            self.topicContentLabel.text = @"请输入话题内容";
-        }
-    }
-}
-
+#pragma mark - 创建标签
 - (void)createLabels {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(4, CGRectGetMaxY(self.topicContentTextView.frame) + 10, kScreenSize.width - 8, 15)];
     label.text = @"标签选择";
@@ -149,37 +147,6 @@ NSString *topicContentText = @"";
     }
 }
 
-- (void)labelButtonClick:(UIButton *)button {
-    NSString *tag_ids;
-    if ([button.titleLabel.text isEqualToString:@"情感"]) {
-        tag_ids = @"4";
-    } else if ([button.titleLabel.text isEqualToString:@"搞笑"]) {
-        tag_ids = @"5";
-    } else if ([button.titleLabel.text isEqualToString:@"影视"]) {
-        tag_ids = @"7";
-    } else if ([button.titleLabel.text isEqualToString:@"二次元"]) {
-        tag_ids = @"8";
-    } else if ([button.titleLabel.text isEqualToString:@"生活"]) {
-        tag_ids = @"6";
-    } else if ([button.titleLabel.text isEqualToString:@"明星"]) {
-        tag_ids = @"9";
-    } else if ([button.titleLabel.text isEqualToString:@"爱美"]) {
-        tag_ids = @"11";
-    } else if ([button.titleLabel.text isEqualToString:@"宠物"]) {
-        tag_ids = @"10";
-    }
-
-    if ([self.labelArray containsObject:tag_ids]) {
-        [button setTitleColor:[UIColor colorWithRGBString:@"#b0b0b0" alpha:1] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
-        [self.labelArray removeObject:tag_ids];
-    } else {
-        [button setTitleColor:[UIColor colorWithRGBString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
-        [self.labelArray addObject:tag_ids];
-    }
-}
-
 #pragma mark - 创建添加图片按钮
 - (void)createAddPicButton {
     CGFloat width = (kScreenSize.width - 20) / 4;
@@ -191,58 +158,34 @@ NSString *topicContentText = @"";
     [self.scrollView addSubview:self.addPicButton];
 }
 
-
-- (void)addPicButtonClick:(UIButton *)button {
-    if (self.imageArray.count < 9) {
-        [self.titleTextView resignFirstResponder];
-        [self.topicContentTextView resignFirstResponder];
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"相册", nil];
-        [actionSheet showInView:self.view];
-    } else {
-         [ODProgressHUD showInfoWithStatus:@"已达图片最大上传数"];
-    }
-}
-
 #pragma mark - UIActionSheetDelegate
-
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
-
     switch (buttonIndex) {
         case 0:
             if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
                 imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
                 [self presentViewController:imagePicker animated:YES completion:nil];
-            }
-            else {
+            }else {
                 [ODProgressHUD showInfoWithStatus:@"您当前的照相机不可用"];
             }
             break;
         case 1:
             imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
             [self presentViewController:imagePicker animated:YES completion:nil];
-
             break;
         default:
             break;
     }
 }
 
-#pragma mark - 自己处理cancel
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
-//点击确定之后
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info {
     NSString *sourceType = info[UIImagePickerControllerMediaType];
     if ([sourceType isEqualToString:(NSString *) kUTTypeImage]) {
         self.pickedImage = info[UIImagePickerControllerOriginalImage];
 
-//        [ODProgressHUD showProgressWithStatus:@"正在上传"];
-        //图片转化为data
+        [ODProgressHUD showProgressWithStatus:@"正在上传"];
         NSData *imageData;
         self.pickedImage = [self scaleImage:self.pickedImage];;
         if (UIImagePNGRepresentation(self.pickedImage) == nil) {
@@ -253,33 +196,16 @@ NSString *topicContentText = @"";
         NSString *str = @"data:image/jpeg;base64,";
         NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
         [self.imageArray addObject:self.pickedImage];
-        [self createParameter:strData];
-
+        [self pushImageData:strData];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
 
 }
 
-
-#pragma mark - 拼接参数
--(void)createParameter:(NSString *)str
-{
-    // 拼接参数
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"File"] = str;
-    __weakSelf
-    // 上传图片
-    [ODHttpTool postWithURL:ODUrlOtherBase64Upload parameters:params modelClass:[ODUploadImageModel class] success:^(id model) {
-        // 取出模型
-        ODUploadImageModel *uploadModel = [model result];
-        [weakSelf.strArray addObject:uploadModel.File];
-        [weakSelf reloadImageButtons];
-    } failure:^(NSError *error) {
-    }];
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-//压缩尺寸
 - (UIImage *)scaleImage:(UIImage *)image {
     CGSize size = CGSizeMake(image.size.width * 0.3, image.size.height * 0.3);
     UIGraphicsBeginImageContext(size);
@@ -300,7 +226,6 @@ NSString *topicContentText = @"";
             [view removeFromSuperview];
         }
     }
-
     for (NSInteger i = 0; i < self.imageArray.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setBackgroundImage:self.imageArray[i] forState:UIControlStateNormal];
@@ -316,26 +241,7 @@ NSString *topicContentText = @"";
     [ODProgressHUD dismiss];
 }
 
-
-#pragma mark - 删除图片
-
-- (void)deletePicClick:(UIButton *)button {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除图片" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action) {
-        [button removeFromSuperview];
-        [self.imageArray removeObject:button.currentBackgroundImage];
-        [self.strArray removeObjectAtIndex:button.tag - 10010];
-        [self reloadImageButtons];
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:alert animated:YES completion:nil];
-}
-
-#pragma mark - 初始化manager
-
-
 #pragma mark - 拼接参数
-
 - (void)joiningTogetherParmeters {
     NSString *imageStr = [[NSString alloc] init];
     for (NSInteger i = 0; i < self.strArray.count; i++) {
@@ -360,28 +266,119 @@ NSString *topicContentText = @"";
     [self pushDataWithUrl:ODUrlBbsCreate parameter:parameter];
 }
 
-#pragma mark - 上传数据
-- (void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter {
-    __weakSelf
-    [ODHttpTool getWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
-        if (weakSelf.myBlock) {
-            weakSelf.myBlock([NSString stringWithFormat:@"refresh"]);
+#pragma mark - UITextViewDelegate
+NSString *topicTitleText = @"";
+NSString *topicContentText = @"";
+- (void)textViewDidChange:(UITextView *)textView {
+    if (textView == self.titleTextView) {
+        if (textView.text.length > 30) {
+            textView.text = [textView.text substringToIndex:30];
+        } else {
+            topicTitleText = textView.text;
         }
-        [weakSelf.navigationController popViewControllerAnimated:YES];
-    } failure:^(NSError *error) {
         
-    }];
+        if (self.titleTextView.text.length == 0) {
+            self.titleLabel.text = @"请输入话题标题";
+        } else {
+            self.titleLabel.text = @"";
+        }
+    } else if (textView == self.topicContentTextView) {
+        if (textView.text.length > 500) {
+            textView.text = [textView.text substringToIndex:500];
+        } else {
+            topicContentText = textView.text;
+        }
+        
+        if (self.topicContentTextView.text.length == 0) {
+            self.topicContentLabel.text = @"请输入话题内容";
+        } else {
+            self.topicContentLabel.text = @"";
+        }
+    }
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView == self.titleTextView) {
+        if (textView.text.length == 0) {
+            self.titleLabel.text = @"请输入话题标题";
+        }
+    } else {
+        if (textView.text.length == 0) {
+            self.topicContentLabel.text = @"请输入话题内容";
+        }
+    }
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
+
+#pragma mark - action
+- (void)cancelButtonClick {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)confirmButtonClick {
+    [self.titleTextView resignFirstResponder];
+    [self.topicContentTextView resignFirstResponder];
+    
+    if (self.titleTextView.text.length > 0 && self.topicContentTextView.text.length > 0) {
+        [self joiningTogetherParmeters];
+    } else if (self.titleTextView.text.length > 0 && self.topicContentTextView.text.length == 0) {
+        [ODProgressHUD showInfoWithStatus:@"请输入话题内容"];
+    } else {
+        [ODProgressHUD showInfoWithStatus:@"请输入话题标题"];
+    }
+}
+- (void)labelButtonClick:(UIButton *)button {
+    NSString *tag_ids;
+    if ([button.titleLabel.text isEqualToString:@"情感"]) {
+        tag_ids = @"4";
+    } else if ([button.titleLabel.text isEqualToString:@"搞笑"]) {
+        tag_ids = @"5";
+    } else if ([button.titleLabel.text isEqualToString:@"影视"]) {
+        tag_ids = @"7";
+    } else if ([button.titleLabel.text isEqualToString:@"二次元"]) {
+        tag_ids = @"8";
+    } else if ([button.titleLabel.text isEqualToString:@"生活"]) {
+        tag_ids = @"6";
+    } else if ([button.titleLabel.text isEqualToString:@"明星"]) {
+        tag_ids = @"9";
+    } else if ([button.titleLabel.text isEqualToString:@"爱美"]) {
+        tag_ids = @"11";
+    } else if ([button.titleLabel.text isEqualToString:@"宠物"]) {
+        tag_ids = @"10";
+    }
+    
+    if ([self.labelArray containsObject:tag_ids]) {
+        [button setTitleColor:[UIColor colorWithRGBString:@"#b0b0b0" alpha:1] forState:UIControlStateNormal];
+        button.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        [self.labelArray removeObject:tag_ids];
+    } else {
+        [button setTitleColor:[UIColor colorWithRGBString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
+        button.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+        [self.labelArray addObject:tag_ids];
+    }
+}
+
+- (void)addPicButtonClick:(UIButton *)button {
+    if (self.imageArray.count < 9) {
+        [self.titleTextView resignFirstResponder];
+        [self.topicContentTextView resignFirstResponder];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照", @"相册", nil];
+        [actionSheet showInView:self.view];
+    } else {
+        [ODProgressHUD showInfoWithStatus:@"已达图片最大上传数"];
+    }
+}
+
+- (void)deletePicClick:(UIButton *)button {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除图片" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action) {
+        [button removeFromSuperview];
+        [self.imageArray removeObject:button.currentBackgroundImage];
+        [self.strArray removeObjectAtIndex:button.tag - 10010];
+        [self reloadImageButtons];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 @end

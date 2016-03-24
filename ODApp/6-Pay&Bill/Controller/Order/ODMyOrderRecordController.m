@@ -90,14 +90,14 @@ NSString *const ODMyOrderRecordViewID = @"ODMyOrderRecordViewID";
             }
         }
 
-        [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:[model result]];
+        [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[model result]];
         
-        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        
         if (weakSelf.orderArray.count == 0) {
-            [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无预约"];
+            [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无预约"];
         }
         else {
-            [noResultabel hidden];
+            [self.noResultabel hidden];
         }
     
     }

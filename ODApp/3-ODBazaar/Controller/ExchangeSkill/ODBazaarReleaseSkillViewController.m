@@ -15,6 +15,7 @@
 #import "ODHttpTool.h"
 #import "UIImageView+WebCache.h"
 #import "ODBazaarExchangeSkillDetailModel.h"
+#import "ODBazaarReleaseSkillTimeModel.h"
 
 @interface ODBazaarReleaseSkillViewController ()
 
@@ -78,16 +79,12 @@
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - 数据请求
 -(void)requestTimeData{
     __weakSelf
     NSDictionary *parameter = @{@"swap_id":self.swap_id};
-    [ODHttpTool getWithURL:ODUrlSwapSchedule parameters:parameter modelClass:[NSObject class] success:^(id model) {
-        weakSelf.editTimeArray = [NSMutableArray arrayWithArray:model[@"result"]];
+    [ODHttpTool getWithURL:ODUrlSwapSchedule parameters:parameter modelClass:[ODBazaarReleaseSkillTimeModel class] success:^(id model) {
+        weakSelf.editTimeArray = [NSMutableArray arrayWithArray:[model result]];
     } failure:^(NSError *error) {
     }];
 }
@@ -524,6 +521,7 @@
                           @"imgs":imageStr,
                           };
         }else{
+            NSMutableArray *array = [ODBazaarReleaseSkillTimeModel mj_keyValuesArrayWithObjectArray:self.editTimeArray];
             parameter = @{
                           @"swap_id":self.swap_id,
                           @"title":self.titleTextField.text,
@@ -531,7 +529,7 @@
                           @"swap_type":self.swap_type,
                           @"price":self.priceTextField.text,
                           @"unit":self.unitTextField.text,
-                          @"schedule":[self.editTimeArray od_desc],
+                          @"schedule":[array od_desc],
                           @"imgs":imageStr,
                           };
         }
@@ -717,7 +715,6 @@ NSString *skillContentText = @"";
         self.setLabel.text = @"设置完成";
     };
     timeController.swap_id = self.swap_id;
-    NSLog(@"======%@",self.swap_id);
     timeController.dataArray = self.timeArray;
     [self.navigationController pushViewController:timeController animated:YES];
 }
