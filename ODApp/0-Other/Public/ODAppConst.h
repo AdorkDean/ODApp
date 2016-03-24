@@ -34,9 +34,6 @@ UIKIT_EXTERN NSString * const KUserDefaultsAvatar;
 
 UIKIT_EXTERN NSString * const KUserDefaultsMobile;
 
-/** info.plist中记录的版本号 */
-UIKIT_EXTERN NSString * const kUserDefaultsVersionKey;
-
 /** 友盟的apiKey */
 UIKIT_EXTERN NSString * const kGetUMAppkey;
 
@@ -111,12 +108,13 @@ UIKIT_EXTERN NSString * const ODNotificationloveSkill;
 /** 刷新任务发布及回复*/
 UIKIT_EXTERN NSString * const ODNotificationRefreshTask;
 
-#pragma mark - 网页URL
+#pragma mark - H5网页URL
 
 UIKIT_EXTERN NSString * const ODWebUrlFindJob;
 UIKIT_EXTERN NSString * const ODWebUrlExpect;
 UIKIT_EXTERN NSString * const ODWebUrlMapSearch;
 
+UIKIT_EXTERN NSString * const ODWebUrlNative;
 
 
 #pragma mark - 请求URL接口
@@ -204,8 +202,8 @@ UIKIT_EXTERN NSString * const ODUrlSwapEdit;
 UIKIT_EXTERN NSString * const ODUrlTaskTaskAdd;
 UIKIT_EXTERN NSString * const ODUrlTaskDetail;
 UIKIT_EXTERN NSString * const ODUrlTaskApply;
-UIKIT_EXTERN NSString * const ODurlTaskAccept;
-UIKIT_EXTERN NSString * const ODurlTaskDelivery;
+UIKIT_EXTERN NSString * const ODUrlTaskAccept;
+UIKIT_EXTERN NSString * const ODUrlTaskDelivery;
 UIKIT_EXTERN NSString * const ODUrlTaskConfirm;
 UIKIT_EXTERN NSString * const ODUrlTaskList;
 

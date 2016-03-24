@@ -149,7 +149,6 @@
     
     self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-68.5, 25, 68.5, 25) target:nil sel:nil tag:0 image:nil title:@"" font:12];
     self.taskButton.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
-    [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"#d0d0d0" alpha:1] forState:UIControlStateNormal];
     self.taskButton.layer.masksToBounds = YES;
     self.taskButton.layer.cornerRadius = 5;
     self.taskButton.layer.borderWidth = 1;
@@ -444,7 +443,7 @@
             __weakSelf
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 NSDictionary *parameter = @{@"task_id":self.task_id,@"apply_open_id":model.open_id};
-                [ODHttpTool getWithURL:ODurlTaskAccept parameters:parameter modelClass:[NSObject class] success:^(id model) {
+                [ODHttpTool getWithURL:ODUrlTaskAccept parameters:parameter modelClass:[NSObject class] success:^(id model) {
                     [weakSelf.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
                     [ODProgressHUD showInfoWithStatus:@"委派成功"];
                     [weakSelf.picArray removeAllObjects];
@@ -528,7 +527,7 @@ NSString *evaluationContentText = @"";
             [self pushDataWithUrl:ODUrlTaskApply parameter:parameter withName:@"接受任务"];
         }else if ([button.titleLabel.text isEqualToString:@"确认提交"]){
             NSDictionary *parameter = @{@"task_id":self.task_id};
-            [self pushDataWithUrl:ODurlTaskDelivery parameter:parameter withName:@"确认提交"];
+            [self pushDataWithUrl:ODUrlTaskDelivery parameter:parameter withName:@"确认提交"];
         }else if ([button.titleLabel.text isEqualToString:@"确认完成"]){
             [self createEvaluationView];
         }

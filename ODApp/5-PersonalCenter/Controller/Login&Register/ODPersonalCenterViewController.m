@@ -10,7 +10,7 @@
 #import "ODNavigationController.h"
 #import "ODPersonalCenterViewController.h"
 #import "ODTabBarController.h"
-#import "ODHomeFoundViewController.h"
+#import "ODHomeFindViewController.h"
 #import "ODlandingView.h"
 #import "ODRegisteredController.h"
 //#import "ODLandMainController.h"

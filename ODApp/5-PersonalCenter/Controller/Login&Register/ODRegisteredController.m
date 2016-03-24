@@ -11,7 +11,7 @@
 #import "ODRegisteredView.h"
 //#import "ODLandMainController.h"
 #import  "ODTabBarController.h"
-#import "ODHomeFoundViewController.h"
+#import "ODHomeFindViewController.h"
 #import "ODUserModel.h"
 
 @interface ODRegisteredController ()<UITextFieldDelegate>

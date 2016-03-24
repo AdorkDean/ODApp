@@ -73,12 +73,12 @@
         NSArray *balanceDatas = [model result];
         [weakSelf.dataArray addObjectsFromArray:balanceDatas];
         [weakSelf.collectionView reloadData];
-        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        
         if (weakSelf.dataArray.count == 0) {
-            [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无提现记录"];
+            [self.noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无提现记录"];
         }
         else {
-            [noResultabel hidden];
+            [self.noResultabel hidden];
         }
      } failure:^(NSError *error) {
          

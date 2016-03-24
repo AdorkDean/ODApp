@@ -98,13 +98,13 @@
          ODBazaarTasksModel *tasksModel = [model result];
          [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];         
          
-         [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:tasksModel.tasks];
+         [ODHttpTool od_endRefreshWith:weakSelf.tableView array:tasksModel.tasks];
          
-         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+         
          if (weakSelf.dataArray.count == 0) {
-             [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无任务"];
+             [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无任务"];
          }else {
-             [noResultabel hidden];
+             [self.noResultabel hidden];
          }
      } failure:^(NSError *error) {
          [weakSelf.tableView.mj_header endRefreshing];

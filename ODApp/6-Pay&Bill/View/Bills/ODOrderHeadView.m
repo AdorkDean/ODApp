@@ -14,20 +14,13 @@
 {
     self =[super initWithFrame:frame];
     if (self) {
-        
-        
         self.orderView = [ODOrderView getView];
         self.orderView.frame = self.frame;
         [self addSubview:self.orderView];
-        
-        
-        
-        
+ 
     }
     return self;
 }
-
-
 
 
 @end
