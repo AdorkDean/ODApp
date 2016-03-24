@@ -14,14 +14,14 @@
     
     self.headButton.layer.masksToBounds = YES;
     self.headButton.layer.cornerRadius = 24;
-    self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-    self.contentLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    self.nameLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-    self.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    self.titleLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+    self.contentLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+    self.nameLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+    self.timeLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     self.statusLabel.layer.masksToBounds = YES;
     self.statusLabel.layer.cornerRadius = 5;
-    self.statusLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-    self.statusLabel.backgroundColor = [UIColor colorWithHexString:@"#ffd701" alpha:1];
+    self.statusLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+    self.statusLabel.backgroundColor = [UIColor colorWithRGBString:@"#ffd701" alpha:1];
 }
 
 - (void)setModel:(ODBazaarRequestHelpTasksModel *)model

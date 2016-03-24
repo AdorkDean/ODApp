@@ -23,7 +23,7 @@
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - 64 - 49)];
         _scrollView.userInteractionEnabled = YES;
-        _scrollView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        _scrollView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
         [self.view addSubview:_scrollView];
     }
     return _scrollView;
@@ -120,7 +120,7 @@
 
     UILabel *certificationLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + 5, 24, kScreenSize.width - 88 - 50, 12)];
     certificationLabel.font = [UIFont systemFontOfSize:11.5];
-    certificationLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    certificationLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
     NSString *user_auth_status = [NSString stringWithFormat:@"%@", self.model.user[@"user_auth_status"]];
     if ([user_auth_status isEqualToString:@"0"]) {
         certificationLabel.text = @"未认证";
@@ -134,7 +134,7 @@
     [userInfoView addSubview:arrowImageView];
 
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 60, kScreenSize.width, 6)];
-    lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    lineView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
     [userInfoView addSubview:lineView];
 }
 
@@ -151,7 +151,7 @@
 
     UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(titleLabel.frame) + 10, kScreenSize.width - 35, 20)];
     priceLabel.text = [NSString stringWithFormat:@"%.2f元/%@", self.model.price, self.model.unit];
-    priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    priceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     priceLabel.textAlignment = NSTextAlignmentCenter;
     priceLabel.font = [UIFont systemFontOfSize:15];
     [self.detailView addSubview:priceLabel];
@@ -211,13 +211,13 @@
 #pragma mark - 底部收藏购买试图
 - (void)createBottomView {
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 64 - 49, kScreenSize.width, 49)];
-    [bottomView setBackgroundColor:[UIColor colorWithHexString:@"#e6e6e6" alpha:1]];
+    [bottomView setBackgroundColor:[UIColor colorWithRGBString:@"#e6e6e6" alpha:1]];
     [self.view addSubview:bottomView];
 
     UIButton *loveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 49)];
     [loveButton addTarget:self action:@selector(loveButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    loveButton.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
-    loveButton.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    loveButton.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+    loveButton.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
     loveButton.layer.borderWidth = 0.5;
     [bottomView addSubview:loveButton];
 
@@ -232,7 +232,7 @@
         self.loveLabel.text = @"已收藏";
         loveImageView.image = [UIImage imageNamed:@"Skills profile page_icon_Collection"];
     }
-    self.loveLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.loveLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     self.loveLabel.textAlignment = NSTextAlignmentLeft;
     self.loveLabel.font = [UIFont systemFontOfSize:12.5];
     [loveButton addSubview:self.loveLabel];
@@ -240,13 +240,13 @@
     UIButton *payButton = [[UIButton alloc] initWithFrame:CGRectMake(100, 0, kScreenSize.width - 100, 49)];
     [payButton setTitle:@"立即购买" forState:UIControlStateNormal];
     if ([[self.model.user valueForKeyPath:@"open_id"] isEqualToString:[ODUserInformation sharedODUserInformation].openID]) {
-        [payButton setBackgroundColor:[UIColor colorWithHexString:@"#b0b0b0" alpha:1]];
+        [payButton setBackgroundColor:[UIColor colorWithRGBString:@"#b0b0b0" alpha:1]];
         payButton.userInteractionEnabled = NO;
     } else {
-        [payButton setBackgroundColor:[UIColor colorWithHexString:@"#ff6666" alpha:1]];
+        [payButton setBackgroundColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1]];
         payButton.userInteractionEnabled = YES;
     }
-    [payButton setTitleColor:[UIColor colorWithHexString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
+    [payButton setTitleColor:[UIColor colorWithRGBString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
     [payButton addTarget:self action:@selector(payButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:payButton];
 }

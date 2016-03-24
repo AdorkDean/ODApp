@@ -13,12 +13,12 @@
 - (void)awakeFromNib {
     self.headButton.layer.masksToBounds = YES;
     self.headButton.layer.cornerRadius = 24;
-    self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-    self.priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-    self.nickLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    self.contentLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-    self.loveLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    self.shareLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.titleLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+    self.priceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+    self.nickLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+    self.contentLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+    self.loveLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+    self.shareLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
 }
 
 -(void)showDatasWithModel:(ODHomeInfoSwapModel *)model

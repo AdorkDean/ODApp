@@ -42,7 +42,7 @@
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
-        _scrollView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+        _scrollView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
         _scrollView.userInteractionEnabled = YES;
         _scrollView.delegate = self;
         [self.view addSubview:_scrollView];
@@ -169,7 +169,7 @@
 
 -(void)createTopView{
     UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width,60)];
-    topView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    topView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:topView];
     
     ODUserModel *model =  [[ODUserInformation sharedODUserInformation]getUserCache];
@@ -182,7 +182,7 @@
     
     UILabel *woQuLabel = [[UILabel alloc]initWithFrame:CGRectMake(67.5, 20, 40, 20)];
     woQuLabel.text = @"我去 ·";
-    woQuLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    woQuLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     woQuLabel.font = [UIFont systemFontOfSize:13];
     woQuLabel.textAlignment = NSTextAlignmentCenter;
     [topView addSubview:woQuLabel];
@@ -190,30 +190,30 @@
     self.titleCountLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-50, 20, 32.5, 20)];
     self.titleCountLabel.text = @"0/7";
     self.titleCountLabel.textAlignment = NSTextAlignmentRight;
-    self.titleCountLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    self.titleCountLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
     self.titleCountLabel.font = [UIFont systemFontOfSize:13];
     [topView addSubview:self.titleCountLabel ];
     
     self.titleTextField = [[UITextField alloc]initWithFrame:CGRectMake(120, 20, kScreenSize.width-170, 20)];
     self.titleTextField.placeholder = @"如:叫PS、陪看电影、代买早饭等";
     self.titleTextField.font = [UIFont systemFontOfSize:13];
-    self.titleTextField.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.titleTextField.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     self.titleTextField.delegate = self;
     [self.titleTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     [topView addSubview:self.titleTextField];
     
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 59.5, kScreenSize.width, 0.5)];
-    lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    lineView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
     [topView addSubview:lineView];
 }
 
 -(void)createMiddleView{
     UIView *middleView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, kScreenSize.width,170)];
-    middleView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    middleView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:middleView];
     
     self.contentTextView = [[UITextView alloc]initWithFrame:CGRectMake(12, 6, kScreenSize.width-24, 134)];
-    self.contentTextView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.contentTextView.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     self.contentTextView.font = [UIFont systemFontOfSize:12];
     self.contentTextView.delegate = self;
     [middleView addSubview:self.contentTextView];
@@ -224,7 +224,7 @@
     }else{
         self.contentPlaceholderLabel.text = @"提供技能 , 变身校园大卡";
     }
-    self.contentPlaceholderLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    self.contentPlaceholderLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
     self.contentPlaceholderLabel.font = [UIFont systemFontOfSize:12];
     self.contentPlaceholderLabel.userInteractionEnabled = NO;
     [middleView addSubview:self.contentPlaceholderLabel];
@@ -232,19 +232,19 @@
     self.contentCountLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-100, 140, 82.5, 20)];
     self.contentCountLabel.text = [NSString stringWithFormat:@"%ld/250",self.contentTextView.text.length];
     self.contentCountLabel.textAlignment = NSTextAlignmentRight;
-    self.contentCountLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    self.contentCountLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
     self.contentCountLabel.font = [UIFont systemFontOfSize:12];
     [middleView addSubview:self.contentCountLabel];
     
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(17.5, 169.5, kScreenSize.width-35, 0.5)];
-    lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    lineView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
     [middleView addSubview:lineView];
 }
 
 -(void)createPicView{
     CGFloat width = (kScreenSize.width-35-30)/4;
     self.picView = [[UIView alloc]initWithFrame:CGRectMake(0, 230, kScreenSize.width, width+20)];
-    self.picView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    self.picView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.picView];
     
     self.addPicButton = [[UIButton alloc]initWithFrame:CGRectMake(17.5, 10, width, width)];
@@ -311,12 +311,12 @@
 
 -(void)createBottomView{
     self.bottomView = [[UIView alloc]init];
-    self.bottomView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.bottomView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
     self.bottomView.userInteractionEnabled = YES;
     [self.scrollView addSubview:self.bottomView];
     
     UIView *priceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 50)];
-    priceView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    priceView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.bottomView addSubview:priceView];
     
     UIImageView *priceImageView = [[UIImageView alloc]initWithFrame:CGRectMake(17.5, 15, 20, 20)];
@@ -325,21 +325,21 @@
     
     UILabel *priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(priceImageView.frame)+7.5, 15, 50, 20)];
     priceLabel.text = @"价格:";
-    priceLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    priceLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     priceLabel.font = [UIFont systemFontOfSize:14];
     priceLabel.textAlignment = NSTextAlignmentCenter;
     [priceView addSubview:priceLabel];
     
     self.priceTextField = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(priceLabel.frame)+5, 15, kScreenSize.width-100, 20)];
     self.priceTextField.placeholder = @"输入价格";
-    self.priceTextField.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.priceTextField.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     self.priceTextField.font = [UIFont systemFontOfSize:14];
     self.priceTextField.delegate = self;
     self.priceTextField.keyboardType = UIKeyboardTypeDecimalPad;
     [priceView addSubview:self.priceTextField];
     
     UIView *unitView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(priceView.frame)+6, kScreenSize.width, 50)];
-    unitView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    unitView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.bottomView addSubview:unitView];
     
     UIImageView *unitImageView = [[UIImageView alloc]initWithFrame:CGRectMake(17.5, 15, 20, 20)];
@@ -348,21 +348,21 @@
     
     UILabel *unitLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(unitImageView.frame)+7.5, 15, 50, 20)];
     unitLabel.text = @"单位:";
-    unitLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    unitLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     unitLabel.font = [UIFont systemFontOfSize:14];
     unitLabel.textAlignment = NSTextAlignmentCenter;
     [unitView addSubview:unitLabel];
     
     self.unitTextField = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(unitLabel.frame)+5, 15, kScreenSize.width-100, 20)];
     self.unitTextField.placeholder = @"如 每次/每分钟/每小时 等";
-    self.unitTextField.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.unitTextField.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     self.unitTextField.font = [UIFont systemFontOfSize:14];
     self.unitTextField.delegate = self;
     [unitView addSubview:self.unitTextField];
     
     CGFloat width = (kScreenSize.width-35-40)/3;
     UIView *serviceView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(unitView.frame)+6, kScreenSize.width, width+55)];
-    serviceView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    serviceView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     serviceView.tag = 1;
     [self.bottomView addSubview:serviceView];
     
@@ -396,13 +396,13 @@
     if (!_timeView) {
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(serviceTimeClick:)];
         _timeView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bottomView.frame), kScreenSize.width, 50)];
-        _timeView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        _timeView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
         [_timeView addGestureRecognizer:gesture];
         [self.scrollView addSubview:_timeView];
         
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 15, 100, 20)];
         label.text = @"可服务时间";
-        label.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        label.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
         label.font = [UIFont systemFontOfSize:14];
         [_timeView addSubview:label];
         
@@ -412,7 +412,7 @@
         }else{
             self.setLabel.text = @"请设置";
         }
-        self.setLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        self.setLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
         self.setLabel.font = [UIFont systemFontOfSize:14];
         self.setLabel.textAlignment = NSTextAlignmentRight;
         [_timeView addSubview:self.setLabel];
@@ -431,8 +431,8 @@
     }else{
         [releaseButton setTitle:@"发布" forState:UIControlStateNormal];
     }
-    [releaseButton setTitleColor:[UIColor colorWithHexString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
-    [releaseButton setBackgroundColor:[UIColor colorWithHexString:@"#ff6666" alpha:1]];
+    [releaseButton setTitleColor:[UIColor colorWithRGBString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
+    [releaseButton setBackgroundColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1]];
     [releaseButton addTarget:self action:@selector(releaseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:releaseButton];
 }
@@ -568,9 +568,9 @@
     if (textField == self.titleTextField) {
         self.titleCountLabel.text = [NSString stringWithFormat:@"%ld/7",textField.text.length];
         if (textField.text.length>7) {
-            self.titleCountLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1.0f];
+            self.titleCountLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1.0f];
         } else {
-            self.titleCountLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1.0f];
+            self.titleCountLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1.0f];
         }
     }
 }

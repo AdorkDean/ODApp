@@ -32,7 +32,7 @@
     [super viewDidLoad];
     [self navigationInit];
     [self.view addSubview:self.landView];
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#f7f7f7" alpha:1];;
+    self.view.backgroundColor = [UIColor colorWithRGBString:@"#f7f7f7" alpha:1];;
 }
 
 - (void)navigationInit

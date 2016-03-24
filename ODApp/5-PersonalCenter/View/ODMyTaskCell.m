@@ -13,16 +13,16 @@
 - (void)awakeFromNib {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.backgroundColor = [UIColor whiteColor];
-    self.spaceView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.spaceView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
     self.headButton.layer.masksToBounds = YES;
     self.headButton.layer.cornerRadius = 29;
     self.headButton.layer.borderColor = [UIColor clearColor].CGColor;
     self.headButton.layer.borderWidth = 1;
-    self.lineImageView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
-    self.timeLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-    self.contentLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    self.nickLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-    self.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    self.lineImageView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
+    self.timeLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+    self.contentLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+    self.nickLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+    self.timeLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -54,9 +54,9 @@
         self.statusLabel.text = @"无效";
     }
     if ([status isEqualToString:@"-2"]) {
-        self.statusLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+        self.statusLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
     }else{
-        self.statusLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        self.statusLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     }
 }
 @end

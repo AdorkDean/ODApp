@@ -14,7 +14,7 @@
 {
     self.layer.masksToBounds = YES;
     self.layer.cornerRadius = 5;
-    self.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    self.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
     self.layer.borderWidth = 1;
 }
 @end

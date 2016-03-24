@@ -14,7 +14,7 @@
 {
     self.checkStateLabel.layer.cornerRadius = 5;
     self.checkStateLabel.layer.borderWidth = 0.5;
-    self.checkStateLabel.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    self.checkStateLabel.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
     self.lineHeight.constant = 0.5;
     
     self.backgroundColor = [UIColor whiteColor];

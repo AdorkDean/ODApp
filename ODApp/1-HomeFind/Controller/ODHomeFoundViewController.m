@@ -87,7 +87,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 
 #pragma mark - 显示定位城市
 - (void)locationCity {
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_locationNew"] highImage:nil textColor:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithType:(ODBarButtonTypeImageLeft) target:self action:@selector(locationButtonClick:) image:[UIImage imageNamed:@"icon_locationNew"] highImage:nil textColor:[UIColor colorWithRGBString:@"#000000" alpha:1] highColor:nil title:[ODUserInformation sharedODUserInformation].locationCity];
 }
 
 
@@ -145,7 +145,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODTabBarHeight) style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+        _tableView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         // 取消分割线
@@ -199,7 +199,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 
 -(void)createHeaderView{
     self.headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 200)];
-    self.headerView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.headerView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
     self.headerView.userInteractionEnabled = YES;
     [self.view addSubview:self.headerView];
     [self createTopClassView];
@@ -208,7 +208,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 -(void)createTopClassView{
     
     self.topClassView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 147.5)];
-    self.topClassView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    self.topClassView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     self.topClassView.userInteractionEnabled = YES;
     [self.headerView addSubview:self.topClassView];
     
@@ -221,7 +221,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
         [button setImage:[UIImage imageNamed:imageArray[i]] forState:UIControlStateNormal];
         [button setTitle:array[i] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(topClassButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRGBString:@"#000000" alpha:1] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:10];
         [self.topClassView addSubview:button];
     }
@@ -230,7 +230,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 
 -(void)createActivityView{
     self.activityView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.topClassView.frame)+6, kScreenSize.width, 160)];
-    self.activityView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    self.activityView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.headerView addSubview:self.activityView];
     
     UIImageView *hotActivityImageView = [[UIImageView alloc]initWithFrame:CGRectMake(ODLeftMargin, 5, 17, 16)];
@@ -240,7 +240,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     UILabel *hotActivityLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(hotActivityImageView.frame) + 7.5, 5, 60, 20)];
     hotActivityLabel.text = @"热门活动";
     hotActivityLabel.font = [UIFont systemFontOfSize:14];
-    hotActivityLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+    hotActivityLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
     [self.activityView addSubview:hotActivityLabel];
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(hotActivityLabel.frame) + 10, (kScreenSize.width - 17.5), 110)];
@@ -271,7 +271,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 -(void)createFindCircleView{
     
     self.findCircleView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.activityView.frame)+6, kScreenSize.width, 198)];
-    self.findCircleView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    self.findCircleView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.headerView addSubview:self.findCircleView];
     
     UIImageView *findCircleImage = [[UIImageView alloc]initWithFrame:CGRectMake(ODLeftMargin, 13.75, 15, 12.5)];
@@ -281,11 +281,11 @@ static NSString * const exchangeCellId = @"exchangeCell";
     UILabel *findCircleLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(findCircleImage.frame)+ 7.5, 10, 60, 20)];
     findCircleLabel.text = @"寻圈子";
     findCircleLabel.font = [UIFont systemFontOfSize:14];
-    findCircleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+    findCircleLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
     [self.findCircleView addSubview:findCircleLabel];
     
     self.findCircleBtnView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(findCircleLabel.frame) + 10, kScreenSize.width, 130)];
-    self.findCircleBtnView.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+    self.findCircleBtnView.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
     [self.findCircleView addSubview:self.findCircleBtnView];
 
     NSArray *array = @[ @"button_emotion", @"button_Funny", @"button_Movies", @"button_quadratic element", @"button_Life", @"button_Star", @"button_beautiful", @"button_Pet" ];
@@ -305,7 +305,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake((kScreenSize.width - 160) / 2, CGRectGetMaxY(self.findCircleBtnView.frame) + 8, 160, 20)];
     [button setTitle:@"想加入更多圈子么？ 憋说话，点我！" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRGBString:@"#555555" alpha:1] forState:UIControlStateNormal];
     button.titleLabel.font = [UIFont systemFontOfSize:9];
     [button addTarget:self action:@selector(moreCycleButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.findCircleView addSubview:button];
@@ -315,7 +315,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 
 -(void)createFooterView{
     UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 28.5)];
-    footerView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    footerView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width-180)/2, 10.25, 12, 8)];
     imageView.image = [UIImage imageNamed:@"icon_gesture"];
@@ -323,7 +323,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
     
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake((kScreenSize.width-160)/2, 4.25, 160, 20)];
     [button setTitle:@"想了解更多技能？ 憋说话，点我！" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRGBString:@"#555555" alpha:1] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(moreSkillButtonClick) forControlEvents:UIControlEventTouchUpInside];
     button.titleLabel.font = [UIFont systemFontOfSize:9];
     [footerView addSubview:button];

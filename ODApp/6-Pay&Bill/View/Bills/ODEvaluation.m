@@ -93,14 +93,14 @@
     self.contentTextView.textColor = [UIColor lightGrayColor];
     self.contentTextView.layer.masksToBounds = YES;
     self.contentTextView.layer.cornerRadius = 5;
-    self.contentTextView.layer.borderColor = [UIColor colorWithHexString:@"#d9d9d9" alpha:1.0f].CGColor;
+    self.contentTextView.layer.borderColor = [UIColor colorWithRGBString:@"#d9d9d9" alpha:1.0f].CGColor;
     self.contentTextView.layer.borderWidth = 0.5;
     [self addSubview:self.contentTextView];
     
     
     self.determineButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.determineButton.frame = CGRectMake(30, 370, kScreenSize.width - 60, 35);
-    self.determineButton.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+    self.determineButton.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
     [self.determineButton setTitle:@"确认完成" forState:UIControlStateNormal];
     [self.determineButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.determineButton.titleLabel.font = [UIFont systemFontOfSize:13];

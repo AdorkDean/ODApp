@@ -50,12 +50,12 @@
     self.autoresizingMask = UIViewAutoresizingNone;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.genderImageView.contentMode = UIViewContentModeCenter;
-    self.titleLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-    self.priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-    self.nickLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    self.contentLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-    self.loveLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    self.shareLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.titleLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+    self.priceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+    self.nickLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+    self.contentLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+    self.loveLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+    self.shareLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
     
     // 设置文字最大宽度
     self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 90;

@@ -15,7 +15,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = text;
     label.font = [UIFont systemFontOfSize:size];
-    label.textColor = [UIColor colorWithHexString:color alpha:opacity];
+    label.textColor = [UIColor colorWithRGBString:color alpha:opacity];
     label.numberOfLines = 0;
     
     if ([alignment isEqualToString:@"left"]) {
@@ -34,7 +34,7 @@
     UILabel *label = [[UILabel alloc] initWithFrame:frame];
     label.text = text;
     label.font = [UIFont systemFontOfSize:size];
-    label.textColor = [UIColor colorWithHexString:color alpha:opacity];
+    label.textColor = [UIColor colorWithRGBString:color alpha:opacity];
     label.numberOfLines = 0;
     label.userInteractionEnabled = YES;
     
@@ -50,7 +50,7 @@
         label.layer.masksToBounds = YES;
         label.layer.cornerRadius = 5;
         label.layer.borderWidth = 1;
-        label.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+        label.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
     }
     return label;
 }
@@ -90,7 +90,7 @@
 {
     UIView *view = [[UIView alloc]initWithFrame:frame];
     view.tag = tag;
-    view.backgroundColor = [UIColor colorWithHexString:color alpha:1];
+    view.backgroundColor = [UIColor colorWithRGBString:color alpha:1];
     return view;
 }
 + (UITextField *)creatTextFieldWithFrame:(CGRect)frame placeHolder:(NSString *)string delegate:(id<UITextFieldDelegate>)delegate tag:(NSInteger)tag
@@ -116,12 +116,12 @@
     //设置tag值
     textView.tag = tag;
     textView.font = [UIFont systemFontOfSize:size];
-    textView.backgroundColor = [UIColor colorWithHexString:color alpha:opacity];
+    textView.backgroundColor = [UIColor colorWithRGBString:color alpha:opacity];
     if (maskToBounds) {
         textView.layer.masksToBounds = YES;
         textView.layer.cornerRadius = 5;
         textView.layer.borderWidth = 0.5;
-        textView.layer.borderColor = [UIColor colorWithHexString:@"e6e6e6" alpha:1].CGColor;
+        textView.layer.borderColor = [UIColor colorWithRGBString:@"e6e6e6" alpha:1].CGColor;
     }
     return textView;
 }

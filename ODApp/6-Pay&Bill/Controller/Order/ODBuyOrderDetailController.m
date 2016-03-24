@@ -185,12 +185,12 @@
         
         self.endLeftButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.endLeftButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-        self.endLeftButton.backgroundColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
+        self.endLeftButton.backgroundColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
         [self.endLeftButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         self.endRightButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.endRightButton.frame = CGRectMake(KScreenWidth / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-        self.endRightButton.backgroundColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
+        self.endRightButton.backgroundColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
         [self.endRightButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.endLeftButton.backgroundColor = [UIColor colorGrayColor];
         self.endRightButton.backgroundColor = [UIColor colorRedColor];

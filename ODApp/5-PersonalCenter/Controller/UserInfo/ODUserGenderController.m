@@ -49,7 +49,7 @@
     [manView addSubview:firstArror];
     
     UIImageView *firstLine = [[UIImageView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(manView.frame), kScreenSize.width - ODLeftMargin, 0.5)];
-    firstLine.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    firstLine.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
     [self.view addSubview:firstLine];
     UIImageView *firstSpaceLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(manView.frame), ODLeftMargin, 0.5)];
     firstSpaceLine.backgroundColor = [UIColor whiteColor];
@@ -73,7 +73,7 @@
     [womanView addSubview:secondArror];
     
     UIImageView *secondLine = [[UIImageView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(womanView.frame), kScreenSize.width - ODLeftMargin, 0.5)];
-    secondLine.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    secondLine.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
     [self.view addSubview:secondLine];
     UIImageView *secondSpaceLine = [[UIImageView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(womanView.frame), ODLeftMargin, 0.5)];
     secondSpaceLine.backgroundColor = [UIColor whiteColor];

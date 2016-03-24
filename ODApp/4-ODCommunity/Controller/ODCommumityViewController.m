@@ -26,7 +26,7 @@
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0, kScreenSize.width, kScreenSize.height-64-55) collectionViewLayout:flowLayout];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
-        _collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+        _collectionView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
         [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
         [self.view addSubview:_collectionView];
     }
@@ -195,7 +195,7 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommunityCellId forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    cell.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     cell.model = self.dataArray[indexPath.row];
     NSString *userId = [NSString stringWithFormat:@"%d",cell.model.user_id];
     [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.userInfoDic[userId]avatar_url]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
@@ -287,8 +287,8 @@
 -(void)titleButtonClick:(UIButton *)button
 {
     UIViewController *controller = [[UIViewController alloc]init];
-    controller.view.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
-    controller.view.layer.borderColor = [UIColor colorWithHexString:@"#000000" alpha:1].CGColor;
+    controller.view.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
+    controller.view.layer.borderColor = [UIColor colorWithRGBString:@"#000000" alpha:1].CGColor;
     controller.view.layer.borderWidth = 1;
     controller.view.layer.cornerRadius = 10;
     
@@ -297,7 +297,7 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setFrame:CGRectMake(0, 30*i, 110, 29)];
         [button setTitle:array[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRGBString:@"#000000" alpha:1] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(titleViewLabelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [controller.view addSubview:button];
         UIImageView *lineImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(button.frame)+0.5, 80, 0.5)];

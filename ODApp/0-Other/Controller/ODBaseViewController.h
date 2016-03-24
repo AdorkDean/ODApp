@@ -12,6 +12,11 @@
 #import "ODHttpTool.h"
 #import "ODUserInformation.h"
 
+#import "ODNoResultLabel.h"
+
 @interface ODBaseViewController : UIViewController
+
+@property (nonatomic, strong) ODNoResultLabel *noResultabel;
+
 
 @end

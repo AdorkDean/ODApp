@@ -98,9 +98,9 @@
     self.segmentedControl.clipsToBounds = YES;
     self.segmentedControl.layer.cornerRadius = 7;
     self.segmentedControl.layer.borderWidth = 1;
-    self.segmentedControl.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
+    self.segmentedControl.layer.borderColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1].CGColor;
     self.segmentedControl.backgroundColor = [UIColor whiteColor];
-    self.segmentedControl.tintColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
+    self.segmentedControl.tintColor = [UIColor colorWithRGBString:@"#ffd801" alpha:1];
     
     self.segmentedControl.selectedSegmentIndex = 0;
     
@@ -141,7 +141,7 @@
     // 我发表的collectionView
     self.firstFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.firstCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.firstFlowLayout];
-    self.firstCollectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.firstCollectionView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
     self.firstCollectionView.dataSource = self;
     self.firstCollectionView.delegate = self;
     self.firstCollectionView.tag = 111;
@@ -160,7 +160,7 @@
     // 我回复的collectionView
     self.secondFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.secondCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(self.scrollView.frame.size.width,10, self.scrollView.frame.size.width,self.scrollView.frame.size.height - 74) collectionViewLayout:self.secondFlowLayout];
-    self.secondCollectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.secondCollectionView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
     self.secondCollectionView.dataSource = self;
     self.secondCollectionView.delegate = self;
     self.secondCollectionView.tag = 222;
@@ -366,7 +366,7 @@
     if (collectionView.tag == 111) {
         ODCommunityBbsListModel *model = self.FirstDataArray[indexPath.row];
         NSString *userId = [NSString stringWithFormat:@"%d",model.user_id];
-        cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        cell.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
         [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
         [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.firstUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
         cell.nickLabel.text = [self.firstUserInfoDic[userId]nick];
@@ -417,7 +417,7 @@
         
         ODCommunityBbsListModel *model = self.secondDataArray[indexPath.row];
         NSString *userId = [NSString stringWithFormat:@"%d",model.user_id];
-        cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        cell.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
         [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
         [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.secondUserInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
         cell.nickLabel.text = [self.secondUserInfoDic[userId]nick];

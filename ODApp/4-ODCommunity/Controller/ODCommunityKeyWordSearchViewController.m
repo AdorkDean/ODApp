@@ -23,7 +23,7 @@
     if (!_searchBar) {
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 8, kScreenSize.width - 20,30)];
         [[[[_searchBar.subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
-        _searchBar.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        _searchBar.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
         _searchBar.delegate = self;
         _searchBar.placeholder = @"标签关键字";
         [self.view addSubview:_searchBar];
@@ -40,7 +40,7 @@
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,46, kScreenSize.width, kScreenSize.height-110) collectionViewLayout:flowLayout];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
-        _collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+        _collectionView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
         [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
         [self.view addSubview:_collectionView];
     }
@@ -79,8 +79,8 @@
         [weakSelf loadMoreData];
     }];
     self.navigationItem.title = @"欧动社区";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"取消"];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor colorWithRGBString:@"#000000" alpha:1] highColor:nil title:@"取消"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithRGBString:@"#000000" alpha:1] highColor:nil title:@"确认"];
 }
 
 #pragma mark - 请求数据
@@ -131,7 +131,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommunityCellId forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    cell.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     cell.model = self.dataArray[indexPath.row];
     NSString *userId = [NSString stringWithFormat:@"%d",cell.model.user_id];
     [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.userInfoDic[userId]avatar_url]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];

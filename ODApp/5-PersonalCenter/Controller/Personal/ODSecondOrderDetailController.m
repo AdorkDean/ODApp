@@ -119,7 +119,7 @@
         [self.orderDetailView addSubview:reason];
         
         UILabel *secondLine = [[UILabel alloc] initWithFrame:CGRectMake(18, reason.frame.origin.y + 30, kScreenSize.width - 18, 1)];
-        secondLine.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
+        secondLine.backgroundColor = [UIColor colorWithRGBString:@"#f6f6f6" alpha:1];
         [self.orderDetailView addSubview:secondLine];
         
         float reasonHeight;
@@ -135,7 +135,7 @@
         
         
         UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(reasonLabel.frame), kScreenSize.width, 6)];
-        line.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
+        line.backgroundColor = [UIColor colorWithRGBString:@"#f6f6f6" alpha:1];
         [self.orderDetailView addSubview:line];
         
         self.orderDetailView.spaceToTop.constant = reasonHeight + 62;
@@ -225,7 +225,7 @@
         
         UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
         refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        refundButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        refundButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
         [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
         refundButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
         [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -237,7 +237,7 @@
         
         UIButton *cancelButton = [UIButton buttonWithType:UIButtonTypeSystem];
         cancelButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-        cancelButton.backgroundColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
+        cancelButton.backgroundColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
         [cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
         cancelButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
@@ -246,7 +246,7 @@
         
         UIButton *payButton = [UIButton buttonWithType:UIButtonTypeSystem];
         payButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-        payButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        payButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
         [payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [payButton setTitle:@"立即支付" forState:UIControlStateNormal];
         payButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
@@ -258,7 +258,7 @@
         
         UIButton *refundButton = [UIButton buttonWithType:UIButtonTypeSystem];
         refundButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-        refundButton.backgroundColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
+        refundButton.backgroundColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
         [refundButton setTitle:@"申请退款" forState:UIControlStateNormal];
         refundButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
         [refundButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -268,7 +268,7 @@
         
         UIButton *confirmButton = [UIButton buttonWithType:UIButtonTypeSystem];
         confirmButton.frame = CGRectMake(kScreenSize.width / 2, kScreenSize.height - 50 - 64, kScreenSize.width / 2, 50);
-        confirmButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        confirmButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
         [confirmButton setTitle:@"确认服务" forState:UIControlStateNormal];
         confirmButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
         [confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -281,7 +281,7 @@
         
         UIButton *reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
         reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        reasonButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
         [reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
         reasonButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
         [reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

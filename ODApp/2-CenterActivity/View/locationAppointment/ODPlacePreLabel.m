@@ -26,7 +26,7 @@
 
 - (void)setUp
 {
-    self.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
     self.font = [UIFont systemFontOfSize:10.5];
 }
 @end

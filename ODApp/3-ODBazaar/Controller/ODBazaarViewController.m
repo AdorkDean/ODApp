@@ -70,8 +70,8 @@ static CGFloat const lineHeight = 1;
     for (NSUInteger i = 0; i < count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setTitle:array[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithHexString:@"#484848" alpha:1] forState:UIControlStateNormal];
-        [button setBackgroundColor:[UIColor colorWithHexString:@"#ffffff" alpha:1]];
+        [button setTitleColor:[UIColor colorWithRGBString:@"#484848" alpha:1] forState:UIControlStateNormal];
+        [button setBackgroundColor:[UIColor colorWithRGBString:@"#ffffff" alpha:1]];
         [button setFrame:CGRectMake((KScreenWidth * 0.5) * i, 0, KScreenWidth * 0.5, ODBazaaeExchangeNavHeight)];
         [self.view addSubview:button];
         
@@ -79,7 +79,7 @@ static CGFloat const lineHeight = 1;
     }
     // 创建指示器
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, (ODBazaaeExchangeNavHeight - lineHeight), KScreenWidth * 0.5, lineHeight)];
-    lineView.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+    lineView.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
     [self.view addSubview:lineView];
     self.lineView = lineView;
 }

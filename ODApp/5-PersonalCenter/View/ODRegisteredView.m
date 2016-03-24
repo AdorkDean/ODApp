@@ -19,7 +19,7 @@
 
     view.registereButton.layer.masksToBounds = YES;
     view.registereButton.layer.cornerRadius = 5;
-    view.registereButton.layer.borderColor = [UIColor colorWithHexString:@"#333333" alpha:1].CGColor;
+    view.registereButton.layer.borderColor = [UIColor colorWithRGBString:@"#333333" alpha:1].CGColor;
     view.registereButton.layer.borderWidth = 0.5f;
 
     view.password.secureTextEntry = YES;
