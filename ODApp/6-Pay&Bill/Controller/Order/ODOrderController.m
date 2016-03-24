@@ -76,7 +76,7 @@
 - (void)createCollectionView {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 120) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithRGBString:@"#f6f6f6" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[ODOrderHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
@@ -97,13 +97,13 @@
     self.allPriceLabel.text = [NSString stringWithFormat:@"%.2f元", self.informationModel.price];
     self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
     self.allPriceLabel.font = [UIFont systemFontOfSize:15];
-    self.allPriceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    self.allPriceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     [amountImageView addSubview:self.allPriceLabel];
     [self.view addSubview:amountImageView];
 
     UIButton *saveOrderButton = [UIButton buttonWithType:UIButtonTypeSystem];
     saveOrderButton.frame = CGRectMake(kScreenSize.width - 150, kScreenSize.height - 49 - ODNavigationHeight, 150, 49);
-    saveOrderButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    saveOrderButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     [saveOrderButton setTitle:@"提交订单" forState:UIControlStateNormal];
     saveOrderButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [saveOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -256,15 +256,15 @@
         DataButton *button = [[DataButton alloc] initWithFrame:CGRectMake(5 + i * self.scroller.frame.size.width / 3, 5, self.scroller.frame.size.width / 3 - 10, 40)];
         if (i == 0) {
             
-            button.dataLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-            button.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+            button.dataLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+            button.timeLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
             button.layer.masksToBounds = YES;
             button.layer.cornerRadius = 5;
-            button.layer.borderColor = [UIColor colorWithHexString:@"#ff6666" alpha:1].CGColor;
+            button.layer.borderColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1].CGColor;
             button.layer.borderWidth = 1;
             
         } else {
-            button.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+            button.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
             button.layer.masksToBounds = YES;
             button.layer.cornerRadius = 5;
             button.layer.borderWidth = 1;
@@ -289,14 +289,14 @@
     for (NSInteger i = 0; i < 7; i++) {
         DataButton *button = [self.scroller viewWithTag:i + 7];
         if (sender.tag != button.tag) {
-            button.layer.borderColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1].CGColor;
-            button.dataLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-            button.timeLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+            button.layer.borderColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1].CGColor;
+            button.dataLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+            button.timeLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
             
         } else {
-            button.layer.borderColor = [UIColor colorWithHexString:@"#ff6666" alpha:1].CGColor;
-            button.dataLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-            button.timeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+            button.layer.borderColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1].CGColor;
+            button.dataLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+            button.timeLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
         }
     }
     [self createButtonWithNumber:sender.tag - 7];
@@ -324,11 +324,11 @@
         if (![status isEqualToString:@"1"]) {
             
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
-            [button setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+            button.backgroundColor = [UIColor colorWithRGBString:@"#f0f0f0" alpha:1];
+            [button setTitleColor:[UIColor colorWithRGBString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
             
         } else {
-            [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithRGBString:@"#555555" alpha:1] forState:UIControlStateNormal];
         }
         [button setTitle:[NSString stringWithFormat:@"%@", timeData.time] forState:UIControlStateNormal];
         
@@ -345,10 +345,10 @@
         NSString *status = timeData.status;
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
-            [button setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+            button.backgroundColor = [UIColor colorWithRGBString:@"#f0f0f0" alpha:1];
+            [button setTitleColor:[UIColor colorWithRGBString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
         } else {
-            [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithRGBString:@"#555555" alpha:1] forState:UIControlStateNormal];
         }
         
         [button setTitle:timeData.time forState:UIControlStateNormal];
@@ -365,11 +365,11 @@
         NSString *status = timeData.status;
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
-            [button setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+            button.backgroundColor = [UIColor colorWithRGBString:@"#f0f0f0" alpha:1];
+            [button setTitleColor:[UIColor colorWithRGBString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
             
         } else {
-            [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorWithRGBString:@"#555555" alpha:1] forState:UIControlStateNormal];
             
         }
         [button setTitle:timeData.time forState:UIControlStateNormal];
@@ -381,7 +381,7 @@
         if (i == 3) {
             TimeButton *button = [[TimeButton alloc] initWithFrame:CGRectMake(i * self.choseTimeView.frame.size.width / 4, 80 + 3 * (self.choseTimeView.frame.size.height - 80) / 4, self.choseTimeView.frame.size.width / 4, (self.choseTimeView.frame.size.height - 80) / 4)];
             button.userInteractionEnabled = NO;
-            button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
+            button.backgroundColor = [UIColor colorWithRGBString:@"#f0f0f0" alpha:1];
             [self.choseTimeView addSubview:button];
             
         } else {
@@ -392,11 +392,11 @@
             NSString *status = timeData.status;
             if (![status isEqualToString:@"1"]) {
                 button.userInteractionEnabled = NO;
-                button.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
-                [button setTitleColor:[UIColor colorWithHexString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+                button.backgroundColor = [UIColor colorWithRGBString:@"#f0f0f0" alpha:1];
+                [button setTitleColor:[UIColor colorWithRGBString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
                 
             } else {
-                [button setTitleColor:[UIColor colorWithHexString:@"#555555" alpha:1] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor colorWithRGBString:@"#555555" alpha:1] forState:UIControlStateNormal];
                 
             }
             [button setTitle:timeData.time forState:UIControlStateNormal];

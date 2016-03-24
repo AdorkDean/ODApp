@@ -15,16 +15,16 @@
     ODPaySuccessView *view =  [[[NSBundle mainBundle] loadNibNamed:@"ODPaySuccessView" owner:nil options:nil] firstObject];
     
     view.userInteractionEnabled = YES;
-    view.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    view.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     
     view.firstButton.layer.masksToBounds = YES;
     view.firstButton.layer.cornerRadius = 5;
-    view.firstButton.layer.borderColor = [UIColor colorWithHexString:@"#333333" alpha:1.0f].CGColor;
+    view.firstButton.layer.borderColor = [UIColor colorWithRGBString:@"#333333" alpha:1.0f].CGColor;
     view.firstButton.layer.borderWidth = 0.5f;
     
     view.secondButton.layer.masksToBounds = YES;
     view.secondButton.layer.cornerRadius = 5;
-    view.secondButton.layer.borderColor = [UIColor colorWithHexString:@"#333333" alpha:1.0f].CGColor;
+    view.secondButton.layer.borderColor = [UIColor colorWithRGBString:@"#333333" alpha:1.0f].CGColor;
     view.secondButton.layer.borderWidth = 0.5f;
     
     return view;

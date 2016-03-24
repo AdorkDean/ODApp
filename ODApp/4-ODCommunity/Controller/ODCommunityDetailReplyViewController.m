@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"回复";
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithHexString:@"#000000" alpha:1] highColor:nil title:@"确认"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithRGBString:@"#000000" alpha:1] highColor:nil title:@"确认"];
     [self createTextView];
 }
 
@@ -57,11 +57,11 @@
 #pragma mark - 创建textView
 - (void)createTextView {
     self.textView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4 + ODTopY, kScreenSize.width - 8, 140) delegate:self tag:0 font:13 color:@"#ffffff" alpha:1 maskToBounds:YES];
-    self.textView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.textView.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     [self.view addSubview:self.textView];
 
     self.label = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4 + ODTopY, kScreenSize.width - 20, 30) text:@"请输入回复TA的内容" font:13 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    self.label.textColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
+    self.label.textColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
     self.label.userInteractionEnabled = NO;
     [self.view addSubview:self.label];
 }

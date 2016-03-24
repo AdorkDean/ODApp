@@ -61,7 +61,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"个人中心";
     self.tableView.rowHeight = 48;
-    self.tableView.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
+    self.tableView.backgroundColor = [UIColor colorWithRGBString:@"#f6f6f6" alpha:1];
     
     // 调整tableView距离导航栏高度
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 14, 0);

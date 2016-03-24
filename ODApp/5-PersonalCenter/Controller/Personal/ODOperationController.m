@@ -48,7 +48,7 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(clearCacheClick)];
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 44)];
     [view addGestureRecognizer:tapGesture];
-    view.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    view.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.view addSubview:view];
     
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 0, 120, 44)];
@@ -72,8 +72,8 @@
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(17.5, 64, kScreenSize.width-35, 35)];
     [button addTarget:self action:@selector(quitButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"退出登录" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor colorWithHexString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
-    [button setBackgroundColor:[UIColor colorWithHexString:@"#ff6666" alpha:1]];
+    [button setTitleColor:[UIColor colorWithRGBString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
+    [button setBackgroundColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1]];
     button.titleLabel.font = [UIFont systemFontOfSize:13];
     button.layer.masksToBounds = YES;
     button.layer.cornerRadius = 5;

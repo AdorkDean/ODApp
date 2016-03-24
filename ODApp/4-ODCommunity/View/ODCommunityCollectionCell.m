@@ -16,10 +16,10 @@
     self.headButton.layer.cornerRadius = 24;
     self.headButton.layer.borderColor = [UIColor clearColor].CGColor;
     self.headButton.layer.borderWidth = 1;
-    self.nickLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-    self.signLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    self.timeLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
-    self.contentLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+    self.nickLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+    self.signLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+    self.timeLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+    self.contentLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
 }
 
 

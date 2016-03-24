@@ -59,7 +59,7 @@
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 115) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithRGBString:@"#f6f6f6" alpha:1];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     [self.collectionView registerClass:[ODOrderSecondHeadView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
@@ -82,14 +82,14 @@
     self.allPriceLabel.text = [NSString stringWithFormat:@"%.2f元", self.informationModel.price];
     self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
     self.allPriceLabel.font = [UIFont systemFontOfSize:15];
-    self.allPriceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    self.allPriceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     [amountImageView addSubview:self.allPriceLabel];
     [self.view addSubview:amountImageView];
 
 
     UIButton *saveOrderButton = [UIButton buttonWithType:UIButtonTypeSystem];
     saveOrderButton.frame = CGRectMake(kScreenSize.width - 150, kScreenSize.height - 49 - ODNavigationHeight, 150, 49);
-    saveOrderButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    saveOrderButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     [saveOrderButton setTitle:@"提交订单" forState:UIControlStateNormal];
     saveOrderButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [saveOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

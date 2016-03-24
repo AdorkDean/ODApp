@@ -27,7 +27,7 @@
 
 
     self.navigationItem.title = @"余额";
-    self.view.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.view.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
     self.view.userInteractionEnabled = YES;
 
 

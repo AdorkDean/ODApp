@@ -263,7 +263,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         webView.delegate = self;
         webView.layer.masksToBounds = YES;
         webView.layer.cornerRadius = 5;
-        webView.layer.borderColor = [UIColor colorWithHexString:@"d0d0d0" alpha:1].CGColor;
+        webView.layer.borderColor = [UIColor colorWithRGBString:@"d0d0d0" alpha:1].CGColor;
         webView.backgroundColor = [UIColor redColor];
         webView.scrollView.showsHorizontalScrollIndicator = NO;
         webView.scrollView.scrollEnabled = NO;
@@ -401,7 +401,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
             NSMutableAttributedString *attributeString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"由 %@ 组织", self.resultModel.organization_name]];
             [attributeString addAttributes:
                     @{
-                            NSForegroundColorAttributeName : [UIColor colorWithHexString:@"3963b2" alpha:1]
+                            NSForegroundColorAttributeName : [UIColor colorWithRGBString:@"3963b2" alpha:1]
                     }                range:NSMakeRange(2, attributeString.length - 5)];
             [cell detailInfoLabel].attributedText = attributeString;
             [cell statusLabel].hidden = YES;

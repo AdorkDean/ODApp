@@ -81,7 +81,7 @@
     if (self.item.colorType == ODSettingCellColorTypeWhite) {
         self.backgroundColor = [UIColor whiteColor];
     } else {
-        self.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+        self.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
     }
     
     self.detailTextLabel.text = self.item.subTitle;

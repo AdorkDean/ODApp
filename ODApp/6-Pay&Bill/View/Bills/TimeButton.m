@@ -30,15 +30,15 @@
     
     
     UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 0.5, self.frame.size.height)];
-    label1.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
+    label1.backgroundColor = [UIColor colorWithRGBString:@"#f0f0f0" alpha:1];
     [self addSubview:label1];
     
     UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width - 0.5 , 0, 0.5, self.frame.size.height)];
-    label2.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
+    label2.backgroundColor = [UIColor colorWithRGBString:@"#f0f0f0" alpha:1];
     [self addSubview:label2];
     
     UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(0, self.frame.size.height - 1, self.frame.size.width, 1)];
-    label3.backgroundColor = [UIColor colorWithHexString:@"#f0f0f0" alpha:1];
+    label3.backgroundColor = [UIColor colorWithRGBString:@"#f0f0f0" alpha:1];
     [self addSubview:label3];
     
     

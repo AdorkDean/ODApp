@@ -27,9 +27,9 @@
 {
     // 取消选中样式
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.titleLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
-    self.discountPriceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-    self.originalPriceLabel.textColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
+    self.titleLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+    self.discountPriceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+    self.originalPriceLabel.textColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
 }
 
 - (void)setDatas:(ODTakeAwayModel *)datas

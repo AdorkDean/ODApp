@@ -183,7 +183,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 //            [goButton setTitle:@"立即体验" forState:UIControlStateNormal];
 //            goButton.titleLabel.font = [UIFont systemFontOfSize:17];
 //            [goButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//            goButton.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+//            goButton.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
 //            goButton.layer.masksToBounds = YES;
 //            goButton.layer.cornerRadius = 25;
 //            goButton.layer.borderColor = [UIColor blackColor].CGColor;

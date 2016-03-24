@@ -12,39 +12,39 @@
 
 + (UIColor *)themeColor
 {
-    return [UIColor colorWithHexString:@"#ffd802" alpha:1];
+    return [UIColor colorWithRGBString:@"#ffd802" alpha:1];
 }
 
 + (UIColor *)lineColor
 {
-    return [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    return [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
 }
 
 + (UIColor *)backgroundColor
 {
-    return [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    return [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
 }
 
 
 + (UIColor *)colorRedColor
 {
-    return [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    return [UIColor colorWithRGBString:@"#ff6666" alpha:1];
 }
 
 
 + (UIColor *)colorGrayColor
 {
-    return [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
+    return [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
 }
 
 + (UIColor *)colorGloomyColor
 {
-    return [UIColor colorWithHexString:@"#484848" alpha:1];
+    return [UIColor colorWithRGBString:@"#484848" alpha:1];
 }
 
 + (UIColor *)colorGraynessColor
 {
-    return [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    return [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
 }
 
 @end
