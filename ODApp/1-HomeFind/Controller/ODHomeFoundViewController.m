@@ -15,6 +15,8 @@
 #import "ODHomeButton.h"
 #import "ODTakeAwayViewController.h"
 
+#import "ODPublicWebViewController.h"
+
 static NSString * const exchangeCellId = @"exchangeCell";
 
 @interface ODHomeFoundViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -473,9 +475,17 @@ updatingLocation:(BOOL)updatingLocation {
             break;
         case 7:
         {
+//            ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
+//            vc.navigationTitle = @"敬请期待";
+//            vc.webUrl = ODWebUrlExpect;
+            
+            
             ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
-            vc.navigationTitle = @"敬请期待";
-            vc.webUrl = ODWebUrlExpect;
+            
+            vc.navigationTitle = @"饮料";
+            NSString *order_id = @"1";
+            vc.webUrl = [NSString stringWithFormat:@"%@/order?id=%@", ODWebUrlNative,order_id];
+            
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

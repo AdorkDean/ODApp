@@ -8,18 +8,14 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODOrderAndSellController.h"
-#import "ODMySellModel.h"
 #import "MJRefresh.h"
-#import "ODMyOrderCell.h"
-#import "ODMySellDetailController.h"
-#import "ODSecondMySellDetailController.h"
 
 #import "ODBuyOrderDetailController.h"
-
+#import "ODMySellModel.h"
 #import "ODOrderAndSellView.h"
 
 NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
-@interface ODOrderAndSellController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource>
+@interface ODOrderAndSellController () <UITableViewDelegate, UITableViewDataSource>
 
 
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
@@ -147,62 +143,26 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
     return self.dataArray.count;
 }
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//
-//}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ODOrderAndSellView *cell = [tableView dequeueReusableCellWithIdentifier:ODOrderAndSellViewID];
+    ODMySellModel *model = self.dataArray[indexPath.row];
+    [cell dealWithSellModel:model];
+    return cell;
+}
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-}
-
-
-
-#pragma mark - UICollectionView 数据源方法
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataArray.count;
-}
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODMyOrderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
-    
-    ODMySellModel *model = self.dataArray[indexPath.row];
-    
-    [cell dealWithSellModel:model];
-    
-    
-    return cell;
-}
-
-#pragma mark - UICollectionView 代理方法
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     ODMyOrderModel *model = self.dataArray[indexPath.row];
-    
-    NSString *orderId = [NSString stringWithFormat:@"%@", model.order_id];
-    NSString *orderStatus = [NSString stringWithFormat:@"%@", model.order_status];
     
     self.indexRow = indexPath.row;
     
-    
     ODBuyOrderDetailController *vc = [[ODBuyOrderDetailController alloc] init];
-    vc.orderType = model.status_str;
-    vc.order_id = orderId;
-    vc.orderStatus = orderStatus;
+    vc.order_id = [NSString stringWithFormat:@"%@", model.order_id];
+    vc.orderStatus = [NSString stringWithFormat:@"%@", model.order_status];
     vc.isSellDetail = YES;
     [self.navigationController pushViewController:vc animated:YES];
-    
 }
-//动态设置每个item的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(kScreenSize.width, 126);
-}
-//动态设置每个分区的最小行间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 6;
-}
+
 
 @end
