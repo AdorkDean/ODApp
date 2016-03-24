@@ -24,8 +24,6 @@ NSString * const KUserDefaultsOpenId = @"userOpenId";
 NSString * const KUserDefaultsAvatar = @"userAvatar";
 NSString * const KUserDefaultsMobile = @"userMobile";
 
-/** info.plist中记录的版本号 */
-NSString * const kUserDefaultsVersionKey = @"CFBundleShortVersionString";
 
 /** 友盟的apiKey */
 NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
