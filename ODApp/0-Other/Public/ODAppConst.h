@@ -31,9 +31,6 @@ UIKIT_EXTERN NSString * const KUserDefaultsAvatar;
 
 UIKIT_EXTERN NSString * const KUserDefaultsMobile;
 
-/** info.plist中记录的版本号 */
-UIKIT_EXTERN NSString * const kUserDefaultsVersionKey;
-
 /** 友盟的apiKey */
 UIKIT_EXTERN NSString * const kGetUMAppkey;
 
@@ -108,7 +105,7 @@ UIKIT_EXTERN NSString * const ODNotificationloveSkill;
 /** 刷新任务发布及回复*/
 UIKIT_EXTERN NSString * const ODNotificationRefreshTask;
 
-#pragma mark - 网页URL
+#pragma mark - H5网页URL
 
 UIKIT_EXTERN NSString * const ODWebUrlFindJob;
 UIKIT_EXTERN NSString * const ODWebUrlExpect;
