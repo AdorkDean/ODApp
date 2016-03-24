@@ -256,6 +256,8 @@
 		232CB6721C92AF4C00340D12 /* ODPublicTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB6711C92AF4C00340D12 /* ODPublicTool.m */; };
 		23B22B2A1C98FEAA00AB11ED /* UIImageView+ODCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B22B291C98FEAA00AB11ED /* UIImageView+ODCache.m */; };
 		23B22B331C9A597600AB11ED /* ODPublicWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B22B321C9A597600AB11ED /* ODPublicWebViewController.m */; };
+		400216121CA3B07000DB8777 /* ODInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 400216111CA3B07000DB8777 /* ODInfiniteScrollView.m */; };
+		400216181CA3C5B000DB8777 /* ODTakeOutBannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 400216171CA3C5B000DB8777 /* ODTakeOutBannerModel.m */; };
 		400334851C9B97C500973818 /* ODBaseSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4003346F1C9B97C500973818 /* ODBaseSettingController.m */; };
 		400334861C9B97C500973818 /* ODPersonalCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 400334711C9B97C500973818 /* ODPersonalCenterController.m */; };
 		400334871C9B97C500973818 /* ODArrowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 400334741C9B97C500973818 /* ODArrowItem.m */; };
@@ -805,6 +807,10 @@
 		23B22B291C98FEAA00AB11ED /* UIImageView+ODCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ODCache.m"; sourceTree = "<group>"; };
 		23B22B311C9A597600AB11ED /* ODPublicWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPublicWebViewController.h; sourceTree = "<group>"; };
 		23B22B321C9A597600AB11ED /* ODPublicWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPublicWebViewController.m; sourceTree = "<group>"; };
+		400216101CA3B07000DB8777 /* ODInfiniteScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODInfiniteScrollView.h; sourceTree = "<group>"; };
+		400216111CA3B07000DB8777 /* ODInfiniteScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODInfiniteScrollView.m; sourceTree = "<group>"; };
+		400216161CA3C5B000DB8777 /* ODTakeOutBannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTakeOutBannerModel.h; sourceTree = "<group>"; };
+		400216171CA3C5B000DB8777 /* ODTakeOutBannerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTakeOutBannerModel.m; sourceTree = "<group>"; };
 		4003346E1C9B97C500973818 /* ODBaseSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBaseSettingController.h; sourceTree = "<group>"; };
 		4003346F1C9B97C500973818 /* ODBaseSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBaseSettingController.m; sourceTree = "<group>"; };
 		400334701C9B97C500973818 /* ODPersonalCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPersonalCenterController.h; sourceTree = "<group>"; };
@@ -1204,6 +1210,8 @@
 		232CB3911C9264E200340D12 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				400216101CA3B07000DB8777 /* ODInfiniteScrollView.h */,
+				400216111CA3B07000DB8777 /* ODInfiniteScrollView.m */,
 				232CB3921C9264E200340D12 /* MyPageControl.h */,
 				232CB3931C9264E200340D12 /* MyPageControl.m */,
 				232CB3941C9264E200340D12 /* ODBarButton.h */,
@@ -1227,9 +1235,9 @@
 		232CB3A01C9264E200340D12 /* 1-HomeFind */ = {
 			isa = PBXGroup;
 			children = (
-				232CB3A11C9264E200340D12 /* Controller */,
 				232CB3AA1C9264E200340D12 /* Model */,
 				232CB3AF1C9264E200340D12 /* View */,
+				232CB3A11C9264E200340D12 /* Controller */,
 			);
 			path = "1-HomeFind";
 			sourceTree = "<group>";
@@ -1237,14 +1245,14 @@
 		232CB3A11C9264E200340D12 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				405480161CA0E19100D85A55 /* ODTakeAwayViewController.h */,
+				405480171CA0E19100D85A55 /* ODTakeAwayViewController.m */,
 				232CB3A61C9264E200340D12 /* ODHomeFoundViewController.h */,
 				232CB3A71C9264E200340D12 /* ODHomeFoundViewController.m */,
 				23B22B311C9A597600AB11ED /* ODPublicWebViewController.h */,
 				23B22B321C9A597600AB11ED /* ODPublicWebViewController.m */,
 				232CB3A81C9264E200340D12 /* ODLocationController.h */,
 				232CB3A91C9264E200340D12 /* ODLocationController.m */,
-				405480161CA0E19100D85A55 /* ODTakeAwayViewController.h */,
-				405480171CA0E19100D85A55 /* ODTakeAwayViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1252,12 +1260,14 @@
 		232CB3AA1C9264E200340D12 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				405480211CA0E5E000D85A55 /* ODTakeAwayModel.h */,
+				405480221CA0E5E000D85A55 /* ODTakeAwayModel.m */,
+				400216161CA3C5B000DB8777 /* ODTakeOutBannerModel.h */,
+				400216171CA3C5B000DB8777 /* ODTakeOutBannerModel.m */,
 				232CB3AB1C9264E200340D12 /* ODHomeInfoModel.h */,
 				232CB3AC1C9264E200340D12 /* ODHomeInfoModel.m */,
 				232CB3AD1C9264E200340D12 /* ODLocationModel.h */,
 				232CB3AE1C9264E200340D12 /* ODLocationModel.m */,
-				405480211CA0E5E000D85A55 /* ODTakeAwayModel.h */,
-				405480221CA0E5E000D85A55 /* ODTakeAwayModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1265,6 +1275,9 @@
 		232CB3AF1C9264E200340D12 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				4054801C1CA0E4D500D85A55 /* ODTakeAwayCell.h */,
+				4054801D1CA0E4D500D85A55 /* ODTakeAwayCell.m */,
+				4054801E1CA0E4D500D85A55 /* ODTakeAwayCell.xib */,
 				404758A61CA13E0300D0DDE6 /* ODLandFirstCell.h */,
 				404758A71CA13E0300D0DDE6 /* ODLandFirstCell.m */,
 				404758A81CA13E0300D0DDE6 /* ODLandFirstCell.xib */,
@@ -1276,9 +1289,6 @@
 				ED46880D1C965F5300E31F64 /* ODLocationCell.xib */,
 				B85216191C97FB0E0003D102 /* ODHomeButton.h */,
 				B852161A1C97FB0E0003D102 /* ODHomeButton.m */,
-				4054801C1CA0E4D500D85A55 /* ODTakeAwayCell.h */,
-				4054801D1CA0E4D500D85A55 /* ODTakeAwayCell.m */,
-				4054801E1CA0E4D500D85A55 /* ODTakeAwayCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2419,6 +2429,7 @@
 				232CB6091C9264E200340D12 /* ODReleaseController.m in Sources */,
 				232CB64D1C9264E200340D12 /* ODSaveOrderModel.m in Sources */,
 				232CB6631C9264E200340D12 /* TimeButton.m in Sources */,
+				400216121CA3B07000DB8777 /* ODInfiniteScrollView.m in Sources */,
 				232CB5871C9264E200340D12 /* XMLDictionary.m in Sources */,
 				232CB6591C9264E200340D12 /* ODOrderSecondHeadView.m in Sources */,
 				232CB5751C9264E200340D12 /* UITableViewRowAction.m in Sources */,
@@ -2545,6 +2556,7 @@
 				232CB5F51C9264E200340D12 /* ODCommunityDetailInfoModel.m in Sources */,
 				232CB62D1C9264E200340D12 /* ODOperationSeccondCell.m in Sources */,
 				232CB5C81C9264E200340D12 /* ODBazaarReleaseSkillTimeViewController.m in Sources */,
+				400216181CA3C5B000DB8777 /* ODTakeOutBannerModel.m in Sources */,
 				232CB62B1C9264E200340D12 /* ODOperationFirstCell.m in Sources */,
 				232CB64B1C9264E200340D12 /* ODOrderDetailModel.m in Sources */,
 				232CB62F1C9264E200340D12 /* ODPersonalTaskButton.m in Sources */,
