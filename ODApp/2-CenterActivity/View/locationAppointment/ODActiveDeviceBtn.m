@@ -29,7 +29,7 @@
     [self setImage:[UIImage imageNamed:@"gouxuan_unselected_icon"] forState:UIControlStateNormal];
     [self setImage:[UIImage imageNamed:@"gouxuan_selected_icon"] forState:UIControlStateSelected];
     self.titleLabel.font = [UIFont systemFontOfSize:12.5];
-    [self setTitleColor:[UIColor colorWithHexString:@"484848" alpha:1] forState:UIControlStateNormal];
+    [self setTitleColor:[UIColor colorWithRGBString:@"484848" alpha:1] forState:UIControlStateNormal];
     [self addTarget:self action:@selector(selectClick:) forControlEvents:UIControlEventTouchUpInside];
 }
 

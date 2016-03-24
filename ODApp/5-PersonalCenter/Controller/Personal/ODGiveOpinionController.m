@@ -47,7 +47,7 @@
     self.textView.backgroundColor = [UIColor whiteColor];
     self.textView.layer.masksToBounds = YES;
     self.textView.layer.cornerRadius = 5;
-    self.textView.layer.borderColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1].CGColor;
+    self.textView.layer.borderColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1].CGColor;
     self.textView.layer.borderWidth = 1;
     
     self.textView.text = @"请输入您的反馈内容";

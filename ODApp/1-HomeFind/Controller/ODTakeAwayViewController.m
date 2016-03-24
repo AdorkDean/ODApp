@@ -59,14 +59,11 @@ static NSString * const exchangeCellId = @"takeAwayCell";
 {
     [super viewDidLoad];
     
-    // 初始化titleView
-    [self setupTitleView];
-    
     // 初始化表格
     [self setupTableView];
     
     // 初始化headerView
-    [self setupHeaderView];
+//    [self setupHeaderView];
     
     // 初始化刷新控件
     [self setupRefresh];
@@ -74,17 +71,11 @@ static NSString * const exchangeCellId = @"takeAwayCell";
 
 #pragma mark - 初始化方法
 /**
- *  初始化titleView
- */
-- (void)setupTitleView
-{
-}
-
-/**
  *  初始化表格
  */
 - (void)setupTableView
 {
+    self.navigationItem.title = @"定外卖";
     self.automaticallyAdjustsScrollViewInsets = NO;
     // 创建表格
     CGRect frame = CGRectMake(0, 0, KScreenWidth, self.view.od_height);
@@ -94,7 +85,7 @@ static NSString * const exchangeCellId = @"takeAwayCell";
     [self.view addSubview:tableView];
     self.tableView = tableView;
     
-    self.tableView.contentInset = UIEdgeInsetsMake(163, 0, 0, 0);
+//    self.tableView.contentInset = UIEdgeInsetsMake(163, 0, 0, 0);
     
     // 设置tableView的rowHeight
     tableView.rowHeight = 90;
@@ -111,7 +102,8 @@ static NSString * const exchangeCellId = @"takeAwayCell";
 {
     ODTakeAwayHeaderView *headerView = [ODTakeAwayHeaderView headerView];
     [headerView sizeToFit];
-    [self.view addSubview:headerView];
+//    [self.view addSubview:headerView];
+    self.tableView.tableHeaderView = headerView;
 }
 
 /**
@@ -137,6 +129,13 @@ static NSString * const exchangeCellId = @"takeAwayCell";
     ODTakeAwayCell *cell = [tableView dequeueReusableCellWithIdentifier:exchangeCellId];
 //    cell.model = self.dataArray[indexPath.row];
     return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    ODTakeAwayHeaderView *headerView = [ODTakeAwayHeaderView headerView];
+    [headerView sizeToFit];
+    return headerView;
 }
 
 #pragma mark - 代理方法

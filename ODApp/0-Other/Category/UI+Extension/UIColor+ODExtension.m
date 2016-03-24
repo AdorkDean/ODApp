@@ -20,10 +20,10 @@
 
 + (UIColor *)colorWithRGBString:(NSString *)rgbString
 {
-    return [self colorWithHexString:rgbString alpha:1];
+    return [self colorWithRGBString:rgbString alpha:1];
 }
 
-+ (UIColor *) colorWithHexString: (NSString *)color alpha:(float)opacity
++ (UIColor *) colorWithRGBString: (NSString *)color alpha:(float)opacity
 {
     NSString *cString = [[color stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]uppercaseString];
     

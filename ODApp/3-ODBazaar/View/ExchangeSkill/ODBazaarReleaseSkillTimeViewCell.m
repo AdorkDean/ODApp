@@ -12,9 +12,9 @@
 
 - (void)awakeFromNib
 {
-    self.timeLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    self.timeLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.lineView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
 }
 
 - (void)setStatus:(BOOL)status

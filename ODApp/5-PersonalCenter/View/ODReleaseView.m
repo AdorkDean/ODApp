@@ -18,14 +18,14 @@
 //    self.horicontalLineViewHeight.constant = 0.5;
 //    self.lineViewWidth.constant = 0.5;
     
-    self.contentLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.contentLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     
-    self.priceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    self.priceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     
-    self.lovesLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
+    self.lovesLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
     
-    self.illegalLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-    self.horizontalLineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    self.illegalLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+    self.horizontalLineView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
     self.buttonWidthConstraint.constant = KScreenWidth / 2;
 }
 

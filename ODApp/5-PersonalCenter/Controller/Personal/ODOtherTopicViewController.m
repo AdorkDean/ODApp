@@ -121,7 +121,7 @@
     self.collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0, kScreenSize.width, kScreenSize.height-64) collectionViewLayout:flowLayout];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
-    self.collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.collectionView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
     [self.view addSubview:self.collectionView];
     
@@ -143,7 +143,7 @@
     ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommunityCellId forIndexPath:indexPath];
     ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
     NSString *userId = [NSString stringWithFormat:@"%d",model.user_id];
-    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    cell.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [cell.headButton addTarget:self action:@selector(otherInformationClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[userInfoDic[userId]avatar_url] ] forState:UIControlStateNormal];
     cell.nickLabel.text = [userInfoDic[userId]nick];

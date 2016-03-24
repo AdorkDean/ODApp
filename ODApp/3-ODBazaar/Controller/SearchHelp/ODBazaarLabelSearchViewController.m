@@ -23,7 +23,7 @@
     if (!_searchBar) {
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 8, kScreenSize.width - 20, 30)];
         [[[[_searchBar.subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
-        _searchBar.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        _searchBar.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
         _searchBar.delegate = self;
         _searchBar.placeholder = @"标签关键字";
         [self.view addSubview:_searchBar];
@@ -42,7 +42,7 @@
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 46, kScreenSize.width, kScreenSize.height - 110) collectionViewLayout:flowLayout];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
-        _collectionView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+        _collectionView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
         [_collectionView registerNib:[UINib nibWithNibName:@"ODBazaarCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarCellId];
         [self.view addSubview:_collectionView];
     }
@@ -132,7 +132,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODBazaarCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarCellId forIndexPath:indexPath];
     cell.model = self.dataArray[indexPath.row];
-    cell.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    cell.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     return cell;
 }
 

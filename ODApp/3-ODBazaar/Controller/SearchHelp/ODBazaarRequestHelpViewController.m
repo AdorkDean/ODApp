@@ -108,11 +108,11 @@ static NSString * const helpCellId = @"helpCell";
 {
     //任务筛选
     self.screeningButton = [ODClassMethod creatButtonWithFrame:CGRectMake(10, 10, 112, 35) target:self sel:@selector(screeningButtonClick:) tag:0 image:nil title:@"任务筛选" font:15];
-    [self.screeningButton setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    [self.screeningButton setTitleColor:[UIColor colorWithRGBString:@"#000000" alpha:1] forState:UIControlStateNormal];
     self.screeningButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25);
     self.screeningButton.layer.masksToBounds = YES;
     self.screeningButton.layer.cornerRadius = 5;
-    self.screeningButton.layer.borderColor = [UIColor colorWithHexString:@"484848" alpha:1].CGColor;
+    self.screeningButton.layer.borderColor = [UIColor colorWithRGBString:@"484848" alpha:1].CGColor;
     self.screeningButton.layer.borderWidth = 1;
     [self.view addSubview:self.screeningButton];
     
@@ -124,7 +124,7 @@ static NSString * const helpCellId = @"helpCell";
     UIView *searchView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame) + 5, 10, kScreenSize.width - 137, 35)];
     searchView.layer.masksToBounds = YES;
     searchView.layer.cornerRadius = 5;
-    searchView.layer.borderColor = [UIColor colorWithHexString:@"484848" alpha:1].CGColor;
+    searchView.layer.borderColor = [UIColor colorWithRGBString:@"484848" alpha:1].CGColor;
     searchView.layer.borderWidth = 1;
     [searchView addGestureRecognizer:searchGestuer];
     searchView.tag = 10011;
@@ -135,7 +135,7 @@ static NSString * const helpCellId = @"helpCell";
     
     UILabel *seacrhLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(searchImageView.frame)+10, 10, searchView.frame.size.width-40, 15)];
     seacrhLabel.text = @"请输入您要搜索的关键字";
-    seacrhLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    seacrhLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
     seacrhLabel.font = [UIFont systemFontOfSize:15];
     seacrhLabel.tag = 10012;
     [searchView addSubview:seacrhLabel];
@@ -149,7 +149,7 @@ static NSString * const helpCellId = @"helpCell";
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTabBarHeight, KScreenWidth, KScreenHeight - ODNavigationHeight - 95 - ODTabBarHeight) style:UITableViewStylePlain];
-    tableView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    tableView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
     tableView.dataSource = self;
     tableView.delegate = self;
     [self.view addSubview:tableView];
@@ -290,18 +290,18 @@ static NSString * const helpCellId = @"helpCell";
 -(void)screeningButtonClick:(UIButton *)button
 {
     UIViewController *controller = [[UIViewController alloc]init];
-    controller.view.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    controller.view.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
     NSArray *array = @[@"待派遣",@"正在完成",@"已完成",@"已过期",@"全部"];
     for (NSInteger i = 0; i < array.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setTitle:array[i] forState:UIControlStateNormal];
         button.frame = CGRectMake(0, 30*i, 112, 29);
         button.tag = i+10;
-        [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRGBString:@"#000000" alpha:1] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
         [controller.view addSubview:button];
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(7, CGRectGetMaxY(button.frame)+0.5, 98, 0.5)];
-        lineView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        lineView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
         [controller.view addSubview:lineView];
     }
     //设置弹出模式

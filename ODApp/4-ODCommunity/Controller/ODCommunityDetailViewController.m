@@ -280,8 +280,8 @@
     }else{
         NSString *str = [NSString stringWithFormat:@"回复 %@ : %@",model.parent_user_nick,model.content];
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:str];
-        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#ff6666" alpha:1] range:NSMakeRange(0, 2)];
-        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHexString:@"#000000" alpha:1] range:NSMakeRange(3, [model.parent_user_nick length])];
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRGBString:@"#ff6666" alpha:1] range:NSMakeRange(0, 2)];
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRGBString:@"#000000" alpha:1] range:NSMakeRange(3, [model.parent_user_nick length])];
         cell.contentLabel.attributedText = noteStr;
         
         //根据内容的多少来设置contentLabel的高度
@@ -407,8 +407,8 @@
 -(void)createReplyButton
 {
     UIButton *button = [ODClassMethod creatButtonWithFrame:CGRectMake(0, kScreenSize.height-50-ODNavigationHeight, kScreenSize.width, 50) target:self sel:@selector(replyButtonClick:) tag:0 image:nil title:@"回复TA" font:16];
-    button.backgroundColor = [UIColor colorWithHexString:@"#ffd801" alpha:1];
-    [button setTitleColor:[UIColor colorWithHexString:@"#000000" alpha:1] forState:UIControlStateNormal];
+    button.backgroundColor = [UIColor colorWithRGBString:@"#ffd801" alpha:1];
+    [button setTitleColor:[UIColor colorWithRGBString:@"#000000" alpha:1] forState:UIControlStateNormal];
     [self.view addSubview:button];
 }
 

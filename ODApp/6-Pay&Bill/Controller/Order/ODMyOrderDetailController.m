@@ -208,7 +208,7 @@
     UIView *peopleNumberDetailView = [[UIView alloc] initWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(peopleNumberLabel.frame) + labelDownMargin, KScreenWidth - viewLeftMargin * 2, labelHeight)];
     peopleNumberDetailView.backgroundColor = [UIColor whiteColor];
     peopleNumberDetailView.layer.cornerRadius = viewCornerRadius;
-    peopleNumberDetailView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    peopleNumberDetailView.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
     peopleNumberDetailView.layer.borderWidth = viewBorderWidth;
     [self.scrollView addSubview:peopleNumberDetailView];
     
@@ -235,7 +235,7 @@
     UIButton *phoneButton = [[UIButton alloc] initWithFrame:CGRectMake(ODLeftMargin + ContentFontSize * 7, CGRectGetMaxY(peopleNumberDetailLabel.frame) + viewLeftMargin, 100, labelHeight)];
     
     [phoneButton setTitle:[NSString stringWithFormat:@"%@",self.model.store_tel] forState:UIControlStateNormal];
-    [phoneButton setTitleColor:[UIColor colorWithHexString:@"#004dda" alpha:1] forState:UIControlStateNormal];
+    [phoneButton setTitleColor:[UIColor colorWithRGBString:@"#004dda" alpha:1] forState:UIControlStateNormal];
     phoneButton.titleLabel.textAlignment = NSTextAlignmentLeft;
     phoneButton.titleLabel.font = [UIFont systemFontOfSize:ContentFontSize];
     [phoneButton addTarget:self action:@selector(phoneButtonClick:) forControlEvents:UIControlEventTouchUpInside];

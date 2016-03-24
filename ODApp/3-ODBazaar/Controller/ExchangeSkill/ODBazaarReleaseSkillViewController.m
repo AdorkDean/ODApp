@@ -14,26 +14,17 @@
 #import "AFNetworking.h"
 #import "ODHttpTool.h"
 #import "UIImageView+WebCache.h"
+#import "ODBazaarExchangeSkillDetailModel.h"
+
 @interface ODBazaarReleaseSkillViewController ()
+
+@property(nonatomic, strong) ODBazaarExchangeSkillDetailModel *model;
 
 @end
 
 @implementation ODBazaarReleaseSkillViewController
 
 #pragma mark - lazyload
-
-@synthesize imageArray = _imageArray;
-- (void)setImageArray:(NSArray *)imageArray{
-    _imageArray = imageArray;
-    __weakSelf
-    for (NSString *imageStr in _imageArray){
-        UIImageView *imageView = [[UIImageView alloc]init];
-        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:imageStr]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-              [weakSelf.mArray addObject:image];
-        }];
-    }
-}
-
 - (NSMutableArray *)mArray{
     if (!_mArray){
         _mArray = [[NSMutableArray alloc]init];
@@ -51,7 +42,7 @@
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
-        _scrollView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+        _scrollView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
         _scrollView.userInteractionEnabled = YES;
         _scrollView.delegate = self;
         [self.view addSubview:_scrollView];
@@ -63,39 +54,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
+    if ([self.type isEqualToString:@"编辑"]) {
+        self.navigationItem.title = @"编辑技能";
+        [self requestTimeData];
+        [self requestDetailData];
+    }else{
+        self.navigationItem.title = @"发布技能";
+    }
     [self createTopView];
     [self createMiddleView];
     [self createPicView];
     [self createBottomView];
     [self createReleaseButton];
-    if ([self.type isEqualToString:@"编辑"]) {
-        [self requestTimeData];
-        [self reloadImageButtons];
-        self.navigationItem.title = @"编辑技能";
-    }else{
-        self.navigationItem.title = @"发布技能";
-    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    UIView *view = (UIView *)[self.bottomView viewWithTag:1];
-    if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
-        if ([self.swap_type isEqualToString:@"1"]) {
-            UIButton *button = (UIButton *)[view viewWithTag:10];
-            [button setBackgroundImage:[UIImage imageNamed:@"button_Home service_Selected"] forState:UIControlStateNormal];
-        }else{
-            UIButton *button = (UIButton *)[view viewWithTag:11];
-            [button setBackgroundImage:[UIImage imageNamed:@"button_Online service_Selected"] forState:UIControlStateNormal];
-        }
-        self.timeView.hidden = NO;
-        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
-    }else if ([self.swap_type isEqualToString:@"2"]){
-        UIButton *button = (UIButton *)[view viewWithTag:12];
-        [button setBackgroundImage:[UIImage imageNamed:@"button_Express delivery_Selected"] forState:UIControlStateNormal];
-        self.timeView.hidden = YES;
-        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
-    }
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
@@ -118,6 +92,16 @@
     }];
 }
 
+-(void)requestDetailData{
+    __weakSelf
+    NSDictionary *parameter = @{@"swap_id":self.swap_id};
+    [ODHttpTool getWithURL:ODUrlSwapInfo parameters:parameter modelClass:[ODBazaarExchangeSkillDetailModel class] success:^(id model) {
+        weakSelf.model = [model result];
+        [weakSelf setControls];
+    } failure:^(NSError *error) {
+    }];
+}
+
 -(void)pushDataWith:(NSString *)str{
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -131,7 +115,7 @@
             NSDictionary *result = dict[@"result"];
             NSString *str = result[@"File"];
             [weakSelf.strArray addObject:str];
-            [weakSelf reloadImageButtons];
+            [weakSelf reloadImageButtonsWithMarray:weakSelf.mArray];
         }
     } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
         NSLog(@"error");
@@ -143,20 +127,49 @@
     [ODHttpTool postWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
         if (isEdit) {
             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationEditSkill object:nil];
+            [weakSelf.navigationController popToViewController:weakSelf.navigationController.childViewControllers[1] animated:YES];
             [ODProgressHUD showInfoWithStatus:@"编辑成功"];
-            [weakSelf.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
         }else{
             [[NSNotificationCenter defaultCenter ]postNotificationName:ODNotificationReleaseSkill object:nil];
-            [ODProgressHUD showInfoWithStatus:@"创建成功"];
             [weakSelf.navigationController popViewControllerAnimated:YES];
-        }        
+            [ODProgressHUD showInfoWithStatus:@"创建成功"];
+        }
     } failure:^(NSError *error) {
     }];
 }
 
+-(void)setControls{
+    [self reloadImageButtonsWithMarray:(NSMutableArray *)self.model.imgs_small];
+    self.titleTextField.text = self.model.title;
+    self.contentTextView.text = self.model.content;
+    [self.strArray addObjectsFromArray:[self.model.imgs_small valueForKeyPath:@"md5"]];
+    self.priceTextField.text = [NSString stringWithFormat:@"%.2f",self.model.price];
+    self.unitTextField.text = self.model.unit;
+    self.swap_type = [NSString stringWithFormat:@"%d",self.model.swap_type];
+    self.contentCountLabel.text = [NSString stringWithFormat:@"%ld/250",self.model.content.length];
+    self.titleCountLabel.text = [NSString stringWithFormat:@"%ld/7",self.model.title.length];
+    UIView *view = (UIView *)[self.bottomView viewWithTag:1];
+    if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
+        if ([self.swap_type isEqualToString:@"1"]) {
+            UIButton *button = (UIButton *)[view viewWithTag:10];
+            [button setBackgroundImage:[UIImage imageNamed:@"button_Home service_Selected"] forState:UIControlStateNormal];
+        }else{
+            UIButton *button = (UIButton *)[view viewWithTag:11];
+            [button setBackgroundImage:[UIImage imageNamed:@"button_Online service_Selected"] forState:UIControlStateNormal];
+        }
+        self.timeView.hidden = NO;
+        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height+56);
+    }else if ([self.swap_type isEqualToString:@"2"]){
+        UIButton *button = (UIButton *)[view viewWithTag:12];
+        [button setBackgroundImage:[UIImage imageNamed:@"button_Express delivery_Selected"] forState:UIControlStateNormal];
+        self.timeView.hidden = YES;
+        self.scrollView.contentSize = CGSizeMake(kScreenSize.width,236+self.picView.frame.size.height+self.bottomView.frame.size.height);
+    }
+}
+
 -(void)createTopView{
     UIView *topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width,60)];
-    topView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    topView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:topView];
     
     ODUserModel *model =  [[ODUserInformation sharedODUserInformation]getUserCache];
@@ -169,97 +182,104 @@
     
     UILabel *woQuLabel = [[UILabel alloc]initWithFrame:CGRectMake(67.5, 20, 40, 20)];
     woQuLabel.text = @"我去 ·";
-    woQuLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    woQuLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     woQuLabel.font = [UIFont systemFontOfSize:13];
     woQuLabel.textAlignment = NSTextAlignmentCenter;
     [topView addSubview:woQuLabel];
     
     self.titleCountLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-50, 20, 32.5, 20)];
-    self.titleCountLabel.text = [NSString stringWithFormat:@"%ld/7",self.skillTitle.length];
+    self.titleCountLabel.text = @"0/7";
     self.titleCountLabel.textAlignment = NSTextAlignmentRight;
-    self.titleCountLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    self.titleCountLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
     self.titleCountLabel.font = [UIFont systemFontOfSize:13];
     [topView addSubview:self.titleCountLabel ];
     
     self.titleTextField = [[UITextField alloc]initWithFrame:CGRectMake(120, 20, kScreenSize.width-170, 20)];
     self.titleTextField.placeholder = @"如:叫PS、陪看电影、代买早饭等";
     self.titleTextField.font = [UIFont systemFontOfSize:13];
-    self.titleTextField.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.titleTextField.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     self.titleTextField.delegate = self;
     [self.titleTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    self.titleTextField.text = self.skillTitle;
     [topView addSubview:self.titleTextField];
     
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 59.5, kScreenSize.width, 0.5)];
-    lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    lineView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
     [topView addSubview:lineView];
 }
 
 -(void)createMiddleView{
     UIView *middleView = [[UIView alloc]initWithFrame:CGRectMake(0, 60, kScreenSize.width,170)];
-    middleView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    middleView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:middleView];
     
     self.contentTextView = [[UITextView alloc]initWithFrame:CGRectMake(12, 6, kScreenSize.width-24, 134)];
-    self.contentTextView.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.contentTextView.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     self.contentTextView.font = [UIFont systemFontOfSize:12];
-    self.contentTextView.text = self.content;
     self.contentTextView.delegate = self;
     [middleView addSubview:self.contentTextView];
     
     self.contentPlaceholderLabel = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 10, kScreenSize.width-35, 20)];
-    if (self.content) {
+    if ([self.type isEqualToString:@"编辑"]) {
         self.contentPlaceholderLabel.text = @"";
     }else{
-       self.contentPlaceholderLabel.text = @"提供技能 , 变身校园大卡";
+        self.contentPlaceholderLabel.text = @"提供技能 , 变身校园大卡";
     }
-    self.contentPlaceholderLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    self.contentPlaceholderLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
     self.contentPlaceholderLabel.font = [UIFont systemFontOfSize:12];
     self.contentPlaceholderLabel.userInteractionEnabled = NO;
     [middleView addSubview:self.contentPlaceholderLabel];
-   
+    
     self.contentCountLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-100, 140, 82.5, 20)];
     self.contentCountLabel.text = [NSString stringWithFormat:@"%ld/250",self.contentTextView.text.length];
     self.contentCountLabel.textAlignment = NSTextAlignmentRight;
-    self.contentCountLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1];
+    self.contentCountLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
     self.contentCountLabel.font = [UIFont systemFontOfSize:12];
     [middleView addSubview:self.contentCountLabel];
     
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(17.5, 169.5, kScreenSize.width-35, 0.5)];
-    lineView.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
+    lineView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
     [middleView addSubview:lineView];
 }
 
 -(void)createPicView{
     CGFloat width = (kScreenSize.width-35-30)/4;
     self.picView = [[UIView alloc]initWithFrame:CGRectMake(0, 230, kScreenSize.width, width+20)];
-    self.picView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    self.picView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.scrollView addSubview:self.picView];
     
     self.addPicButton = [[UIButton alloc]initWithFrame:CGRectMake(17.5, 10, width, width)];
     [self.addPicButton setBackgroundImage:[UIImage imageNamed:@"button_Add pictures"] forState:UIControlStateNormal];
     [self.addPicButton addTarget:self action:@selector(addPicButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.picView addSubview:self.addPicButton];
-
+    
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 0.4*width, 0.2*width)];
     imageView.image = [UIImage imageNamed:@"button_Cover label_one"];
     imageView.tag = 9;
     [self.addPicButton addSubview:imageView];
 }
 
-- (void)reloadImageButtons{
+- (void)reloadImageButtonsWithMarray:(NSMutableArray *)marray{
     NSInteger width = (kScreenSize.width-35-30)/4;
     for (UIButton *view in self.picView.subviews){
         if ([view isKindOfClass:[UIButton class]] && ![view isEqual:self.addPicButton]){
             [view removeFromSuperview];
         }
     }
-    for (NSInteger i = 0; i < self.mArray.count; i++) {
+    
+    __weakSelf
+    for (NSInteger i = 0; i < marray.count; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-        [button setBackgroundImage:self.mArray[i] forState:UIControlStateNormal];
+        button.frame = CGRectMake(17.5+(width+10)*(i%4), 10+(10+width)*(i/4), width, width);
+        if ([self.type isEqualToString:@"编辑"] && marray!=self.mArray) {
+            NSDictionary *dict = marray[i];
+            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[dict valueForKeyPath:@"img_url"]] forState:UIControlStateNormal completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [weakSelf.mArray addObject:image];
+            }];
+        }else{
+            [button setBackgroundImage:marray[i] forState:UIControlStateNormal];
+        }
         button.tag = 100+i;
         [button addTarget:self action:@selector(deletePicClick:) forControlEvents:UIControlEventTouchUpInside];
-        button.frame = CGRectMake(17.5+(width+10)*(i%4), 10+(10+width)*(i/4), width, width);
         [self.picView addSubview:button];
         
         UIImageView *deleteImageView = [[UIImageView alloc]initWithFrame:CGRectMake(width-22.5, 2.5, 20, 20)];
@@ -274,8 +294,8 @@
     }
     UIImageView *imageView = (UIImageView *)[self.addPicButton viewWithTag:9];
     [imageView removeFromSuperview];
-    [self.addPicButton setFrame:CGRectMake(17.5+(width+10) * (self.mArray.count%4), 10+(10+width)*(self.mArray.count/4), width, width)];
-    [self.picView setFrame:CGRectMake(0, 230, kScreenSize.width, 20+width+(width+10)*(self.mArray.count/4))];
+    [self.addPicButton setFrame:CGRectMake(17.5+(width+10) * (marray.count%4), 10+(10+width)*(marray.count/4), width, width)];
+    [self.picView setFrame:CGRectMake(0, 230, kScreenSize.width, 20+width+(width+10)*(marray.count/4))];
     
     CGFloat height = self.bottomView.frame.size.height;
     self.bottomView.frame = CGRectMake(0, CGRectGetMaxY(self.picView.frame)+6, kScreenSize.width, height);
@@ -291,12 +311,12 @@
 
 -(void)createBottomView{
     self.bottomView = [[UIView alloc]init];
-    self.bottomView.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    self.bottomView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
     self.bottomView.userInteractionEnabled = YES;
     [self.scrollView addSubview:self.bottomView];
     
     UIView *priceView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 50)];
-    priceView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    priceView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.bottomView addSubview:priceView];
     
     UIImageView *priceImageView = [[UIImageView alloc]initWithFrame:CGRectMake(17.5, 15, 20, 20)];
@@ -305,22 +325,21 @@
     
     UILabel *priceLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(priceImageView.frame)+7.5, 15, 50, 20)];
     priceLabel.text = @"价格:";
-    priceLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    priceLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     priceLabel.font = [UIFont systemFontOfSize:14];
     priceLabel.textAlignment = NSTextAlignmentCenter;
     [priceView addSubview:priceLabel];
     
     self.priceTextField = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(priceLabel.frame)+5, 15, kScreenSize.width-100, 20)];
     self.priceTextField.placeholder = @"输入价格";
-    self.priceTextField.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.priceTextField.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     self.priceTextField.font = [UIFont systemFontOfSize:14];
-    self.priceTextField.text = self.price;
     self.priceTextField.delegate = self;
     self.priceTextField.keyboardType = UIKeyboardTypeDecimalPad;
     [priceView addSubview:self.priceTextField];
     
     UIView *unitView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(priceView.frame)+6, kScreenSize.width, 50)];
-    unitView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    unitView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     [self.bottomView addSubview:unitView];
     
     UIImageView *unitImageView = [[UIImageView alloc]initWithFrame:CGRectMake(17.5, 15, 20, 20)];
@@ -329,22 +348,21 @@
     
     UILabel *unitLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(unitImageView.frame)+7.5, 15, 50, 20)];
     unitLabel.text = @"单位:";
-    unitLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    unitLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     unitLabel.font = [UIFont systemFontOfSize:14];
     unitLabel.textAlignment = NSTextAlignmentCenter;
     [unitView addSubview:unitLabel];
     
     self.unitTextField = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(unitLabel.frame)+5, 15, kScreenSize.width-100, 20)];
     self.unitTextField.placeholder = @"如 每次/每分钟/每小时 等";
-    self.unitTextField.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+    self.unitTextField.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     self.unitTextField.font = [UIFont systemFontOfSize:14];
-    self.unitTextField.text = self.unit;
     self.unitTextField.delegate = self;
     [unitView addSubview:self.unitTextField];
     
     CGFloat width = (kScreenSize.width-35-40)/3;
     UIView *serviceView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(unitView.frame)+6, kScreenSize.width, width+55)];
-    serviceView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+    serviceView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     serviceView.tag = 1;
     [self.bottomView addSubview:serviceView];
     
@@ -378,13 +396,13 @@
     if (!_timeView) {
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(serviceTimeClick:)];
         _timeView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.bottomView.frame), kScreenSize.width, 50)];
-        _timeView.backgroundColor = [UIColor colorWithHexString:@"#ffffff" alpha:1];
+        _timeView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
         [_timeView addGestureRecognizer:gesture];
         [self.scrollView addSubview:_timeView];
         
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(17.5, 15, 100, 20)];
         label.text = @"可服务时间";
-        label.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        label.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
         label.font = [UIFont systemFontOfSize:14];
         [_timeView addSubview:label];
         
@@ -394,7 +412,7 @@
         }else{
             self.setLabel.text = @"请设置";
         }
-        self.setLabel.textColor = [UIColor colorWithHexString:@"#000000" alpha:1];
+        self.setLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
         self.setLabel.font = [UIFont systemFontOfSize:14];
         self.setLabel.textAlignment = NSTextAlignmentRight;
         [_timeView addSubview:self.setLabel];
@@ -413,8 +431,8 @@
     }else{
         [releaseButton setTitle:@"发布" forState:UIControlStateNormal];
     }
-    [releaseButton setTitleColor:[UIColor colorWithHexString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
-    [releaseButton setBackgroundColor:[UIColor colorWithHexString:@"#ff6666" alpha:1]];
+    [releaseButton setTitleColor:[UIColor colorWithRGBString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
+    [releaseButton setBackgroundColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1]];
     [releaseButton addTarget:self action:@selector(releaseButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:releaseButton];
 }
@@ -550,9 +568,9 @@
     if (textField == self.titleTextField) {
         self.titleCountLabel.text = [NSString stringWithFormat:@"%ld/7",textField.text.length];
         if (textField.text.length>7) {
-            self.titleCountLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1.0f];
+            self.titleCountLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1.0f];
         } else {
-            self.titleCountLabel.textColor = [UIColor colorWithHexString:@"#b0b0b0" alpha:1.0f];
+            self.titleCountLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1.0f];
         }
     }
 }
@@ -602,7 +620,7 @@ NSString *skillContentText = @"";
     }
     
     if (textView.text.length == 0) {
-        self.contentPlaceholderLabel.text = @"请输入任务标题";
+        self.contentPlaceholderLabel.text = @"提供技能 , 变身校园大卡";
         self.contentCountLabel.text = [NSString stringWithFormat:@"%ld/250",textView.text.length];
     }else{
         self.contentPlaceholderLabel.text = @"";
@@ -611,9 +629,9 @@ NSString *skillContentText = @"";
 }
 
 -(void)textViewDidEndEditing:(UITextView *)textView{
-   if (textView.text.length == 0) {
-       self.contentPlaceholderLabel.text = @"请输入任务标题";
-   }
+    if (textView.text.length == 0) {
+        self.contentPlaceholderLabel.text = @"提供技能 , 变身校园大卡";
+    }
 }
 
 #pragma amrk - action
@@ -640,7 +658,7 @@ NSString *skillContentText = @"";
         [button removeFromSuperview];
         [weakSelf.mArray removeObject:button.currentBackgroundImage];
         [weakSelf.strArray removeObjectAtIndex:button.tag-100];
-        [weakSelf reloadImageButtons];
+        [weakSelf reloadImageButtonsWithMarray:weakSelf.mArray];
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
@@ -699,6 +717,7 @@ NSString *skillContentText = @"";
         self.setLabel.text = @"设置完成";
     };
     timeController.swap_id = self.swap_id;
+    NSLog(@"======%@",self.swap_id);
     timeController.dataArray = self.timeArray;
     [self.navigationController pushViewController:timeController animated:YES];
 }

@@ -78,7 +78,7 @@
         [self.startButton setTitle:@"立即体验" forState:UIControlStateNormal];
         self.startButton.titleLabel.font = [UIFont systemFontOfSize:17];
         [self.startButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        self.startButton.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+        self.startButton.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
         self.startButton.layer.masksToBounds = YES;
         self.startButton.layer.cornerRadius = 25;
         self.startButton.layer.borderColor = [UIColor blackColor].CGColor;

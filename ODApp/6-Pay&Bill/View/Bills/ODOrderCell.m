@@ -18,7 +18,7 @@
     self.userImgeView.layer.cornerRadius = 19;
     self.userImgeView.layer.borderColor = [UIColor clearColor].CGColor;
     self.userImgeView.layer.borderWidth = 1;
-    self.orderPrice.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    self.orderPrice.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     self.backgroundColor = [UIColor whiteColor];
     self.labelConstraint.constant = 0.5;
     

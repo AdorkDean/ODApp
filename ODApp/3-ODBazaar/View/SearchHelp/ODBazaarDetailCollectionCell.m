@@ -14,8 +14,8 @@
     // Initialization code
     self.imageV.layer.masksToBounds = YES;
     self.imageV.layer.cornerRadius = 40;
-    self.nickLabel.textColor = [UIColor colorWithHexString:@"#484848" alpha:1];
-    self.signLabel.textColor = [UIColor colorWithHexString:@"#d0d0d0" alpha:1];
+    self.nickLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+    self.signLabel.textColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
 }
 
 -(void)setModel:(ODBazaarDetailApplysModel *)model{

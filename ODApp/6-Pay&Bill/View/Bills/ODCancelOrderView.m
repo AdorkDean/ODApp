@@ -19,12 +19,12 @@
     view.backgroundColor = [UIColor whiteColor];
     view.reasonTextView.layer.masksToBounds = YES;
     view.reasonTextView.layer.cornerRadius = 5;
-    view.reasonTextView.layer.borderColor = [UIColor colorWithHexString:@"d9d9d9" alpha:1.0f].CGColor;
+    view.reasonTextView.layer.borderColor = [UIColor colorWithRGBString:@"d9d9d9" alpha:1.0f].CGColor;
     view.reasonTextView.layer.borderWidth = 0.5;
     view.alpha = 0.95;
     
     
-    view.submitButton.backgroundColor = [UIColor colorWithHexString:@"#ffd802" alpha:1];
+    view.submitButton.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
     view.submitButton.layer.masksToBounds = YES;
     view.submitButton.layer.cornerRadius = 5;
     view.submitButton.layer.borderColor = [UIColor clearColor].CGColor;

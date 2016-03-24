@@ -14,11 +14,11 @@
 {
     ODBalanceView *view =  [[[NSBundle mainBundle] loadNibNamed:@"ODBalanceView" owner:nil options:nil] firstObject];
     
-    view.backgroundColor = [UIColor colorWithHexString:@"#f3f3f3" alpha:1];
+    view.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
 
     view.userInteractionEnabled = YES;
-    view.backgroundColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1];
-    view.withdrawalButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    view.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
+    view.withdrawalButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     
   
     view.balanceImageView.layer.masksToBounds = YES;

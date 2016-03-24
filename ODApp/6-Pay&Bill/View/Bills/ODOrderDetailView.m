@@ -48,8 +48,8 @@
     
  
     
-    view.typeLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
-    view.allPriceLabel.textColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    view.typeLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+    view.allPriceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     
     return view;
     

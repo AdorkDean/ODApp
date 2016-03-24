@@ -9,16 +9,11 @@
 #import "ODBazaarExchangeSkillModel.h"
 #import "ODBazaarPhotosView.h"
 
-//static CGFloat const bottomMargin = (30 / 2);
-//static CGFloat const photoBottomMargin = (25 / 2);
-
 @implementation ODBazaarExchangeSkillUserModel
 
 @end
 
 @implementation ODBazaarExchangeSkillModel
-
-//@synthesize rowHeight = _rowHeight;
 
 + (void)initialize
 {
@@ -29,36 +24,6 @@
                  };
     }];
 }
-
-
-///**
-// *  计算行高
-// */
-//- (CGFloat)rowHeight
-//{
-//    if (!_rowHeight) {
-//        // 计算名称文字高度
-//        CGFloat nameLabelHeight = [self.title od_SizeWithFont:[UIFont systemFontOfSize:11.5]].height;
-//        CGFloat nickLabelHeight = [self.user.nick od_SizeWithFont:[UIFont systemFontOfSize:11]].height;
-//        
-//        // 配图X/Y值
-//        CGFloat photosViewX = 75;
-//        CGFloat photosViewY = 45 + nameLabelHeight + nickLabelHeight;
-//        
-//        CGSize photosViewSize = [ODBazaarPhotosView zh_sizeWithConnt:self.imgs_small.count];
-//        _photosFrame = (CGRect){{photosViewX, photosViewY}, photosViewSize};
-//    
-//        // 计算正文文字高度
-//        CGFloat contentLabelHeight = [self.content od_SizeWithFont:[UIFont systemFontOfSize:11] maxWidth:(photosViewSize.width - 17.5)].height;
-//        
-//        CGFloat loveHeight = [[NSString stringWithFormat:@"%d", self.love_num] od_SizeWithFont:[UIFont systemFontOfSize:9]].height;
-//        
-//        _rowHeight = CGRectGetMaxY(_photosFrame) + (bottomMargin * 2) +
-//                     (contentLabelHeight + photoBottomMargin) +
-//                     ODBazaaeExchangeCellMargin + loveHeight;
-//    }
-//    return _rowHeight;
-//}
 
 @end
 

@@ -22,7 +22,7 @@
     self.userButtonView.layer.borderWidth = 0.5;
     self.lineHeight.constant = 0.5;
     
-    self.contentImageView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    self.contentImageView.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
     self.contentImageView.layer.masksToBounds = YES;
     self.contentImageView.layer.borderWidth = 0.5f;
     self.contentImageView.layer.cornerRadius = 5;
@@ -38,12 +38,12 @@
     [self.contentImageView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.swap_img] forState:UIControlStateNormal];
     
     self.nikeLabel.text = model.swap_user_nick;
-    self.nikeLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.nikeLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
     self.titleLabel.text = [NSString stringWithFormat:@"我去 · %@" , model.swap_title];
     self.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" , model.swap_price , model.swap_unit];
-    self.priceLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.priceLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
     self.dateLabel.text = model.order_created_at;
-    self.dateLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.dateLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
     
     
     NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
@@ -126,12 +126,12 @@
     [self.contentImageView sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.swap_img] forState:UIControlStateNormal];
     
     self.nikeLabel.text = model.order_user_nick;
-    self.nikeLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.nikeLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
     self.titleLabel.text = [NSString stringWithFormat:@"我去 · %@" , model.swap_title];
     self.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" , model.swap_price , model.swap_unit];
-    self.priceLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.priceLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
     self.dateLabel.text = model.order_created_at;
-    self.dateLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.dateLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
     
     
     NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];

@@ -14,7 +14,7 @@
     // Initialization code
     
     
-    self.titleLabel.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+    self.titleLabel.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     
  
     

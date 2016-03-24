@@ -84,7 +84,7 @@
         
         self.deliveryButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.deliveryButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        self.deliveryButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        self.deliveryButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
         [self.deliveryButton setTitle:@"确认发货" forState:UIControlStateNormal];
         self.deliveryButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
         [self.deliveryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -97,7 +97,7 @@
         
         self.deliveryButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.deliveryButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        self.deliveryButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        self.deliveryButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
         [self.deliveryButton setTitle:@"确认服务" forState:UIControlStateNormal];
         self.deliveryButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
         [self.deliveryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -112,7 +112,7 @@
         
         self.DealDeliveryButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.DealDeliveryButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        self.DealDeliveryButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        self.DealDeliveryButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
         [self.DealDeliveryButton setTitle:@"处理退款" forState:UIControlStateNormal];
         self.deliveryButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
         [self.DealDeliveryButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -124,7 +124,7 @@
         
         self.reasonButton = [UIButton buttonWithType:UIButtonTypeSystem];
         self.reasonButton.frame = CGRectMake(0, kScreenSize.height - 50 - 64, kScreenSize.width, 50);
-        self.reasonButton.backgroundColor = [UIColor colorWithHexString:@"#ff6666" alpha:1];
+        self.reasonButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
         [self.reasonButton setTitle:@"查看原因" forState:UIControlStateNormal];
         self.reasonButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
         [self.reasonButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -185,7 +185,7 @@
         [self.orderDetailView addSubview:self.reason];
         
         UILabel *secondLine = [[UILabel alloc] initWithFrame:CGRectMake(18, self.reason.frame.origin.y + 30, kScreenSize.width - 18, 1)];
-        secondLine.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
+        secondLine.backgroundColor = [UIColor colorWithRGBString:@"#f6f6f6" alpha:1];
         [self.orderDetailView addSubview:secondLine];
         
         
@@ -202,7 +202,7 @@
         
         
         UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(reasonLabel.frame), kScreenSize.width, 6)];
-        line.backgroundColor = [UIColor colorWithHexString:@"#f6f6f6" alpha:1];
+        line.backgroundColor = [UIColor colorWithRGBString:@"#f6f6f6" alpha:1];
         [self.orderDetailView addSubview:line];
         
         self.orderDetailView.spaceToTop.constant = reasonHeight + 62;

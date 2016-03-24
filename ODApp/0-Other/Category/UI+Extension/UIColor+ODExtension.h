@@ -23,6 +23,6 @@
 /**
  *  带有透明度的RGB颜色设置
  */
-+ (UIColor *)colorWithHexString:(NSString *)color alpha:(float)opacity;
++ (UIColor *)colorWithRGBString:(NSString *)rgbString alpha:(float)opacity;
 
 @end
