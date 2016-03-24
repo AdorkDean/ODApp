@@ -197,13 +197,6 @@
         
         self.gerderImgeView.image = [UIImage imageNamed:@"icon_man"];
     }
-    
-    
-    
-    
-    
-    
-    
 }
 
 

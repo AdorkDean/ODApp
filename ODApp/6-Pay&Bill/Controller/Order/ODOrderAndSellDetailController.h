@@ -8,7 +8,7 @@
 
 #import "ODBaseViewController.h"
 
-@interface ODBuyOrderDetailController : ODBaseViewController
+@interface ODOrderAndSellDetailController : ODBaseViewController
 
 @property(nonatomic, copy) NSString *order_id;
 

@@ -149,7 +149,6 @@
     
     self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-68.5, 25, 68.5, 25) target:nil sel:nil tag:0 image:nil title:@"" font:12];
     self.taskButton.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
-    [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"#d0d0d0" alpha:1] forState:UIControlStateNormal];
     self.taskButton.layer.masksToBounds = YES;
     self.taskButton.layer.cornerRadius = 5;
     self.taskButton.layer.borderWidth = 1;

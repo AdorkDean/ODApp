@@ -94,7 +94,7 @@ NSString *const ODApplyListCellID = @"ODApplyListCellID";
          NSArray *applyDatas = [model result];
         [weakSelf.dataArray addObjectsFromArray:applyDatas];
          
-        [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:applyDatas];
+        [ODHttpTool od_endRefreshWith:weakSelf.tableView array:applyDatas];
          
      } failure:^(NSError *error) {
          [weakSelf.tableView.mj_header endRefreshing];

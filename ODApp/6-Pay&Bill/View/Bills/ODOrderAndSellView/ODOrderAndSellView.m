@@ -20,7 +20,7 @@
     self.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
     self.userImageView.layer.borderWidth = 0.5;
     
-    self.contentImageView.layer.borderColor = [UIColor colorWithHexString:@"#e6e6e6" alpha:1].CGColor;
+    self.contentImageView.layer.borderColor = [UIColor lineColor].CGColor;
     self.contentImageView.layer.masksToBounds = YES;
     self.contentImageView.layer.borderWidth = 0.5f;
     self.contentImageView.layer.cornerRadius = 5;
@@ -29,17 +29,18 @@
 
 
 - (void)dealWithBuyModel:(ODMyOrderModel *)model {
-    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.swap_user_avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString: model.swap_user_avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    
     
     [self.contentImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.swap_img]];
     
     self.nikeLabel.text = model.swap_user_nick;
-    self.nikeLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.nikeLabel.textColor = [UIColor colorGraynessColor];
     self.titleLabel.text = [NSString stringWithFormat:@"我去 · %@" , model.swap_title];
     self.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" , model.swap_price , model.swap_unit];
-    self.priceLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.priceLabel.textColor = [UIColor colorGraynessColor];
     self.dateLabel.text = model.order_created_at;
-    self.dateLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.dateLabel.textColor = [UIColor colorGraynessColor];
     
     NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];
     
@@ -122,12 +123,12 @@
     
     
     self.nikeLabel.text = model.order_user_nick;
-    self.nikeLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.nikeLabel.textColor = [UIColor colorGraynessColor];
     self.titleLabel.text = [NSString stringWithFormat:@"我去 · %@" , model.swap_title];
     self.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" , model.swap_price , model.swap_unit];
-    self.priceLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.priceLabel.textColor = [UIColor colorGraynessColor];
     self.dateLabel.text = model.order_created_at;
-    self.dateLabel.textColor = [UIColor colorWithHexString:@"#8e8e8e" alpha:1];
+    self.dateLabel.textColor = [UIColor colorGraynessColor];
     
     
     NSString *status = [NSString stringWithFormat:@"%@" , model.order_status];

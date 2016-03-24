@@ -107,7 +107,7 @@
         NSArray *array = [model result];
         [weakSelf.dataArray addObjectsFromArray:array];
         
-        [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:[model result]];
+        [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[model result]];
         
     } failure:^(NSError *error) {
         [weakSelf.tableView.mj_header endRefreshing];

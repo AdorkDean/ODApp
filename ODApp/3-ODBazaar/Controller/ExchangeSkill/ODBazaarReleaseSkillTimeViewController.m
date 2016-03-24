@@ -49,8 +49,8 @@
 {
     __weakSelf;
     if(self.myBlock) {
-        NSMutableArray *dict = [ODBazaarReleaseSkillTimeModel mj_keyValuesArrayWithObjectArray:weakSelf.dataArray];
-        weakSelf.myBlock(dict);
+        NSMutableArray *array = [ODBazaarReleaseSkillTimeModel mj_keyValuesArrayWithObjectArray:weakSelf.dataArray];
+        weakSelf.myBlock(array);
     }
     
     [self.navigationController popViewControllerAnimated:YES];

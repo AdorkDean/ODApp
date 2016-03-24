@@ -233,14 +233,14 @@
             [weakSelf.firstUserInfoDic setObject:userModel forKey:userKey];
         }
         
-        [ODHttpTool OD_endRefreshWith:weakSelf.firstCollectionView array:[[model result] bbs_list]];
+        [ODHttpTool od_endRefreshWith:weakSelf.firstCollectionView array:[[model result] bbs_list]];
         
-        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        
         if (weakSelf.FirstDataArray.count == 0) {
-            [noResultabel showOnSuperView:weakSelf.firstCollectionView title:@"暂无话题"];
+            [self.noResultabel showOnSuperView:weakSelf.firstCollectionView title:@"暂无话题"];
         }
         else {
-            [noResultabel hidden];
+            [self.noResultabel hidden];
         }
     } failure:^(NSError *error) {
         
@@ -277,14 +277,14 @@
             [weakSelf.secondUserInfoDic setObject:userModel forKey:userKey];
         }
 
-        [ODHttpTool OD_endRefreshWith:weakSelf.secondCollectionView array:[[model result] bbs_list]];
+        [ODHttpTool od_endRefreshWith:weakSelf.secondCollectionView array:[[model result] bbs_list]];
         
-        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        
         if (weakSelf.secondDataArray.count == 0) {
-            [noResultabel showOnSuperView:weakSelf.secondCollectionView title:@"暂无话题"];
+            [self.noResultabel showOnSuperView:weakSelf.secondCollectionView title:@"暂无话题"];
         }
         else {
-            [noResultabel hidden];
+            [self.noResultabel hidden];
         }
     } failure:^(NSError *error) {
         [weakSelf.secondCollectionView.mj_header endRefreshing];

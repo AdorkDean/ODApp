@@ -11,12 +11,13 @@
 
 #import <UIImageView+WebCache.h>
 
-#import "ODMySellController.h"
-#import "ODMyOrderController.h"
 #import "ODReleaseController.h"
 #import "ODPersonalCenterCollectionController.h"
 #import "ODInformationController.h"
 #import "ODCustomButton.h"
+
+#import "ODOrderAndSellController.h"
+
 
 @interface ODPersonalCenterHeaderView() <ODInformationControllerDelegate>
 
@@ -82,12 +83,18 @@
     UINavigationController *navVc = [self findOwnNavVc];
     switch (index) {
         case 0: {
-            ODMyOrderController *vc = [[ODMyOrderController alloc] init];
+//            ODMyOrderController *vc = [[ODMyOrderController alloc] init];
+            ODOrderAndSellController *vc = [[ODOrderAndSellController alloc] init];
+
             [navVc pushViewController:vc animated:YES];
             break;
         }
         case 1: {
-            ODMySellController *vc = [[ODMySellController alloc] init];
+//            ODMySellController *vc = [[ODMySellController alloc] init];
+            
+            ODOrderAndSellController *vc = [[ODOrderAndSellController alloc] init];
+            
+            vc.isSell = YES;
             [navVc pushViewController:vc animated:YES];
             break;
         }

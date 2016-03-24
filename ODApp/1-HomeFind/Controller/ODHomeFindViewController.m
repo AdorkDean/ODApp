@@ -1,5 +1,5 @@
 //
-//  ODHomeFoundViewController.m
+//  ODHomeFindViewController.m
 //  ODApp
 //
 //  Created by Odong-YG on 15/12/17.
@@ -8,16 +8,18 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaarViewController.h"
-#import "ODHomeFoundViewController.h"
+#import "ODHomeFindViewController.h"
 #import "ODUserInformation.h"
 #import "ODStorePlaceListModel.h"
 #import "ODHomeInfoModel.h"
 #import "ODHomeButton.h"
 #import "ODTakeAwayViewController.h"
 
+#import "ODPublicWebViewController.h"
+
 static NSString * const exchangeCellId = @"exchangeCell";
 
-@interface ODHomeFoundViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ODHomeFindViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     AMapSearchAPI *_search;
     MAMapView *_mapView;
@@ -39,7 +41,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 
 @end
 
-@implementation ODHomeFoundViewController
+@implementation ODHomeFindViewController
 
 #pragma mark - lifeCycle
 - (void)viewDidLoad{
@@ -473,9 +475,17 @@ updatingLocation:(BOOL)updatingLocation {
             break;
         case 7:
         {
+//            ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
+//            vc.navigationTitle = @"敬请期待";
+//            vc.webUrl = ODWebUrlExpect;
+            
+            
             ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
-            vc.navigationTitle = @"敬请期待";
-            vc.webUrl = ODWebUrlExpect;
+            
+            vc.navigationTitle = @"饮料";
+            NSString *order_id = @"1";
+            vc.webUrl = [NSString stringWithFormat:@"%@/order?id=%@", ODWebUrlNative,order_id];
+            
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

@@ -20,7 +20,7 @@
 @property(nonatomic,copy)NSString *type;
 @property(nonatomic)NSInteger index;
 @property(nonatomic,copy)NSString *status;
-@property(nonatomic,strong)ODNoResultLabel *label;
+
 
 @end
 
@@ -52,7 +52,6 @@
     [super viewDidLoad];
     self.page = 1;
     self.status = @"0";
-    self.label = [[ODNoResultLabel alloc]init];
     [self requestData];
     __weakSelf
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -97,12 +96,12 @@
          ODBazaarTasksModel *tasksModel = [model result];
          [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];         
          
-         [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:tasksModel.tasks];
+         [ODHttpTool od_endRefreshWith:weakSelf.tableView array:tasksModel.tasks];
          
          if (weakSelf.dataArray.count == 0) {
-             [self.label showOnSuperView:weakSelf.tableView title:@"暂无任务"];
+             [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无任务"];
          }else{
-             [self.label hidden];
+             [self.noResultabel hidden];
          }
      } failure:^(NSError *error) {
          [weakSelf.tableView.mj_header endRefreshing];
