@@ -12,5 +12,6 @@
 
 @property(nonatomic, copy) NSString *isRefresh;
 
+@property (nonatomic, assign) BOOL isSell;
 
 @end

@@ -8,22 +8,15 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODOrderAndSellController.h"
-#import "ODMySellModel.h"
 #import "MJRefresh.h"
-#import "ODMyOrderCell.h"
-#import "ODMySellDetailController.h"
-#import "ODSecondMySellDetailController.h"
 
 #import "ODBuyOrderDetailController.h"
-
+#import "ODMySellModel.h"
 #import "ODOrderAndSellView.h"
 
 NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
 @interface ODOrderAndSellController () <UITableViewDelegate, UITableViewDataSource>
 
-
-@property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
-@property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, assign) NSInteger page;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, copy) NSString *open_id;
@@ -55,8 +48,13 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
     self.dataArray = [[NSMutableArray alloc] init];
     [self createRequestData];
     
+    if (self.isSell) {
+        self.navigationItem.title = @"已卖出";
+    }
+    else {
+        self.navigationItem.title = @"已购买";
+    }
     
-    self.navigationItem.title = @"已卖出";
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -74,10 +72,12 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
 }
 
 - (void)reloadData:(NSNotification *)text {
+    
     ODMySellModel *model = self.dataArray[self.indexRow];
     model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"order_status"]];
     [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
-    [self.collectionView reloadData];
+    [self.tableView reloadData];
+    
 }
 
 - (UITableView *)tableView {
@@ -115,7 +115,21 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
     params[@"open_id"] = self.open_id;
     __weakSelf
     // 发送请求
-    [ODHttpTool getWithURL:ODUrlSwapSellerOrderList parameters:params modelClass:[ODMySellModel class] success:^(id model)
+
+    NSObject *orderAndSellModel;
+    NSString *orderAndSellUrl;
+    if (self.isSell) {
+        ODMySellModel *model = [[ODMySellModel alloc] init];
+        orderAndSellModel = model;
+        orderAndSellUrl = ODUrlSwapSellerOrderList;
+    }
+    else {
+        ODMyOrderModel *model = [[ODMyOrderModel alloc] init];
+        orderAndSellModel = model;
+        orderAndSellUrl = ODUrlSwapOrderList;
+    }
+    
+    [ODHttpTool getWithURL:orderAndSellUrl parameters:params modelClass:[orderAndSellModel class] success:^(id model)
      {
          if ([countNumber isEqualToString:@"1"]) {
              [weakSelf.dataArray removeAllObjects];
@@ -124,15 +138,15 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
          NSArray *mySellDatas = [model result];
          [weakSelf.dataArray addObjectsFromArray:mySellDatas];
          
+         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
          
-         
-         [ODHttpTool od_endRefreshWith:weakSelf.collectionView array:mySellDatas];
+         [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:mySellDatas];
          
          if (weakSelf.dataArray.count == 0) {
-             [self.noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无订单"];
+             [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
          }
          else {
-             [self.noResultabel hidden];
+             [noResultabel hidden];
          }
      } failure:^(NSError *error) {
          
@@ -145,62 +159,40 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
     return self.dataArray.count;
 }
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//
-//}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ODOrderAndSellView *cell = [tableView dequeueReusableCellWithIdentifier:ODOrderAndSellViewID];
+    if (self.isSell) {
+        ODMySellModel *model = self.dataArray[indexPath.row];
+        [cell dealWithSellModel:model];
+    }
+    else {
+        ODMyOrderModel *model = self.dataArray[indexPath.row];
+        [cell dealWithBuyModel:model];
+    }
+    return cell;
+}
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-}
-
-
-
-#pragma mark - UICollectionView 数据源方法
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
-}
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.dataArray.count;
-}
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODMyOrderCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"item" forIndexPath:indexPath];
-    
-    ODMySellModel *model = self.dataArray[indexPath.row];
-    
-    [cell dealWithSellModel:model];
-    
-    
-    return cell;
-}
-
-#pragma mark - UICollectionView 代理方法
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
-    ODMyOrderModel *model = self.dataArray[indexPath.row];
-    
-    NSString *orderId = [NSString stringWithFormat:@"%@", model.order_id];
-    NSString *orderStatus = [NSString stringWithFormat:@"%@", model.order_status];
     
     self.indexRow = indexPath.row;
     
-    
     ODBuyOrderDetailController *vc = [[ODBuyOrderDetailController alloc] init];
-    vc.orderType = model.status_str;
-    vc.order_id = orderId;
-    vc.orderStatus = orderStatus;
-    vc.isSellDetail = YES;
-    [self.navigationController pushViewController:vc animated:YES];
     
+    if (self.isSell) {
+        ODMySellModel *model = self.dataArray[indexPath.row];
+        vc.order_id = [NSString stringWithFormat:@"%@", model.order_id];
+        vc.orderStatus = [NSString stringWithFormat:@"%@", model.order_status];
+        vc.isSellDetail = YES;
+    }else {
+        ODMyOrderModel *model = self.dataArray[indexPath.row];
+        vc.order_id = [NSString stringWithFormat:@"%@", model.order_id];
+        vc.orderStatus = [NSString stringWithFormat:@"%@", model.order_status];
+    }
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
-//动态设置每个item的大小
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(kScreenSize.width, 126);
-}
-//动态设置每个分区的最小行间距
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section {
-    return 6;
-}
+
 
 @end

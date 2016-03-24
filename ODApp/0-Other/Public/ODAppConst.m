@@ -24,8 +24,6 @@ NSString * const KUserDefaultsOpenId = @"userOpenId";
 NSString * const KUserDefaultsAvatar = @"userAvatar";
 NSString * const KUserDefaultsMobile = @"userMobile";
 
-/** info.plist中记录的版本号 */
-NSString * const kUserDefaultsVersionKey = @"CFBundleShortVersionString";
 
 /** 友盟的apiKey */
 NSString * const kGetUMAppkey = @"569dda54e0f55a994f0021cf";
@@ -108,6 +106,7 @@ NSString * const ODWebUrlFindJob = @"http://www.myjob500.com/user/extloginpf";
 NSString * const ODWebUrlExpect = @"http://h5.odong.com/woqu/expect";
 NSString * const ODWebUrlMapSearch = @"http://h5.odong.com/map/search";
 
+NSString * const ODWebUrlNative = @"http://h5.test.odong.com/native";
 /** 统一的URL */
 #ifdef DEBUG
 NSString * const ODBaseURL = @"http://woquapi.test.odong.com/1.0";

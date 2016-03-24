@@ -16,6 +16,8 @@
 
 
 @implementation ODGuideTool
+/** info.plist中记录的版本号 */
+NSString * const kUserDefaultsVersionKey = @"CFBundleShortVersionString";
 
 + (UIViewController *)chooseRootViewController
 {

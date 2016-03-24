@@ -11,8 +11,6 @@
 #import "ODMyOrderModel.h"
 #import "MJRefresh.h"
 #import "ODMyOrderCell.h"
-#import "ODOrderDetailController.h"
-#import "ODSecondOrderDetailController.h"
 
 
 #import "ODBuyOrderDetailController.h"

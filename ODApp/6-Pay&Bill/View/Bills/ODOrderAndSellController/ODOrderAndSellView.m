@@ -29,12 +29,13 @@
 
 
 - (void)dealWithBuyModel:(ODMyOrderModel *)model {
-    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.swap_user_avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString: model.swap_user_avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    
     
     [self.contentImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.swap_img]];
     
     self.nikeLabel.text = model.swap_user_nick;
-    self.nikeLabel.textColor = [UIColor colorRedColor];
+    self.nikeLabel.textColor = [UIColor colorGraynessColor];
     self.titleLabel.text = [NSString stringWithFormat:@"我去 · %@" , model.swap_title];
     self.priceLabel.text = [NSString stringWithFormat:@"%@元/%@" , model.swap_price , model.swap_unit];
     self.priceLabel.textColor = [UIColor colorGraynessColor];
