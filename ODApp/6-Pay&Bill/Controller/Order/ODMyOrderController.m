@@ -99,14 +99,14 @@
         }
         [weakSelf.dataArray addObjectsFromArray:orderDatas];
         
-        [ODHttpTool OD_endRefreshWith:weakSelf.collectionView array:orderDatas];
+        [ODHttpTool od_endRefreshWith:weakSelf.collectionView array:orderDatas];
         
-        ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+        
         if (weakSelf.dataArray.count == 0) {
-            [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无订单"];
+            [self.noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无订单"];
         }
         else {
-            [noResultabel hidden];
+            [self.noResultabel hidden];
         }
     } failure:^(NSError *error) {
         [weakSelf.collectionView.mj_header endRefreshing];

@@ -52,7 +52,7 @@
 + (void)postWithURL:(NSString *)URL parameters:(NSDictionary *)parameters fromDataArray:(NSArray *)dataArray modelClass:(Class)modeleClass success:(void (^)(id model))success failure:(void (^)(NSError *))failure;
 
 // 刷新数据
-+ (void)OD_endRefreshWith:(UIScrollView *)scrollView array:(NSArray *)array;
++ (void)od_endRefreshWith:(UIScrollView *)scrollView array:(NSArray *)array;
 
 
 @end

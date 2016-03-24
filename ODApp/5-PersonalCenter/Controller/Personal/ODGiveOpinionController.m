@@ -12,6 +12,7 @@
 @interface ODGiveOpinionController ()<UITextViewDelegate>
 
 @property (nonatomic , strong) UITextView *textView;
+@property (nonatomic , strong) UILabel *placeholdelLabel;
 
 @end
 
@@ -49,38 +50,30 @@
     self.textView.layer.cornerRadius = 5;
     self.textView.layer.borderColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1].CGColor;
     self.textView.layer.borderWidth = 1;
-    
-    self.textView.text = @"请输入您的反馈内容";
-    self.textView.textColor = [UIColor lightGrayColor];
-    
     self.textView.font = [UIFont systemFontOfSize:14];
-    
     self.textView.delegate = self;
+    self.placeholdelLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, kScreenSize.width - 20, 20)];
+    self.placeholdelLabel.text = @"请输入您的反馈内容";
+    self.placeholdelLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
+    self.placeholdelLabel.font = [UIFont systemFontOfSize:14];
     [self.view addSubview:self.textView];
+    [self.view addSubview:self.placeholdelLabel];
     
 }
 
 #pragma mark - UITextView 代理方法
-- (void)textViewDidBeginEditing:(UITextView *)textView {
-    if ([textView.text isEqualToString:@"请输入您的反馈内容"]) {
-        textView.text = @"";
-        textView.textColor = [UIColor blackColor];
-    }
-}
 - (void)textViewDidChange:(UITextView *)textView {
-    
     NSString *replyTitleText = @"";
     if (textView.text.length > 500){
         textView.text = [textView.text substringToIndex:500];
     }else{
         replyTitleText = textView.text;
     }
-}
-
--(void)textViewDidEndEditing:(UITextView *)textView {
-    if ([self.textView.text isEqualToString:@"请输入您的反馈内容"] || [self.textView.text isEqualToString:@""]) {
-        self.textView.text = @"请输入您的反馈内容";
-        self.textView.textColor = [UIColor lightGrayColor];
+    
+    if (textView.text.length == 0) {
+        self.placeholdelLabel.text =  @"请输入您的反馈内容";
+    }else{
+       self.placeholdelLabel.text = @"";
     }
 }
 

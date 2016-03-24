@@ -19,7 +19,7 @@
 #import "ODOrderAndSellView.h"
 
 NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
-@interface ODOrderAndSellController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITableViewDelegate, UITableViewDataSource>
+@interface ODOrderAndSellController () <UITableViewDelegate, UITableViewDataSource>
 
 
 @property(nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
@@ -74,12 +74,10 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
 }
 
 - (void)reloadData:(NSNotification *)text {
-    
     ODMySellModel *model = self.dataArray[self.indexRow];
     model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"order_status"]];
     [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
     [self.collectionView reloadData];
-    
 }
 
 - (UITableView *)tableView {
@@ -126,15 +124,15 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
          NSArray *mySellDatas = [model result];
          [weakSelf.dataArray addObjectsFromArray:mySellDatas];
          
-         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
          
-         [ODHttpTool OD_endRefreshWith:weakSelf.collectionView array:mySellDatas];
+         
+         [ODHttpTool od_endRefreshWith:weakSelf.collectionView array:mySellDatas];
          
          if (weakSelf.dataArray.count == 0) {
-             [noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无订单"];
+             [self.noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无订单"];
          }
          else {
-             [noResultabel hidden];
+             [self.noResultabel hidden];
          }
      } failure:^(NSError *error) {
          

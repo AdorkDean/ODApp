@@ -183,7 +183,7 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
         NSArray *evaluationDatas = [model result];
         [weakSelf.taskDataArray addObjectsFromArray:evaluationDatas];
         
-        [ODHttpTool OD_endRefreshWith:weakSelf.taskTableView array:evaluationDatas];
+        [ODHttpTool od_endRefreshWith:weakSelf.taskTableView array:evaluationDatas];
         
         ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.taskDataArray.count == 0) {
@@ -217,7 +217,7 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          NSArray *evaluationDatas = [model result];
          [weakSelf.skillDataArray addObjectsFromArray:evaluationDatas];
          
-         [ODHttpTool OD_endRefreshWith:weakSelf.skillTableView array:evaluationDatas];
+         [ODHttpTool od_endRefreshWith:weakSelf.skillTableView array:evaluationDatas];
           
          ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
          if (weakSelf.skillDataArray.count == 0) {

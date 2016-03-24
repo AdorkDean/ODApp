@@ -101,7 +101,7 @@ NSString *const ODApplyList1CellID = @"ODApplyList1CellID";
             [weakSelf.dataArray addObject:loves];
         }
         
-        [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:loveListDatas];        
+        [ODHttpTool od_endRefreshWith:weakSelf.tableView array:loveListDatas];        
     }
     failure:^(NSError *error) {
        [weakSelf.tableView.mj_header endRefreshing];
