@@ -8,6 +8,7 @@
 
 #import "ODTakeAwayHeaderView.h"
 #import "ODInfiniteScrollView.h"
+#import "ODTakeOutBannerModel.h"
 
 @interface ODTakeAwayHeaderView()
 
@@ -58,7 +59,14 @@
 {
     _banners = banners;
     // 传递图片地址数组
-    self.scrollView.images = [banners valueForKeyPath:@"img_url"];
+    
+    NSMutableArray *arrayM = [NSMutableArray array];
+    for (ODTakeOutBannerModel *banner in banners)
+    {
+        [arrayM addObject:banner.img_url];
+    }
+    self.scrollView.images = arrayM;
+//    self.scrollView.images = [banners valueForKeyPath:@"img_url"];
     self.scrollView.pageControl.currentPageIndicatorTintColor = [UIColor orangeColor];
     self.scrollView.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
 }

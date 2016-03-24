@@ -54,7 +54,7 @@
         weakSelf.shopImageView.image = image;
     }];
     self.titleLabel.text = datas.title;
-    self.discountPriceLabel.text = [NSString stringWithFormat:@"¥%@", datas.price];
+    self.discountPriceLabel.text = [NSString stringWithFormat:@"¥%@", datas.price_show];
     self.originalPriceLabel.text = [NSString stringWithFormat:@"¥%@", datas.price_fake];
 
     // 设置按钮不同情况下的状态
