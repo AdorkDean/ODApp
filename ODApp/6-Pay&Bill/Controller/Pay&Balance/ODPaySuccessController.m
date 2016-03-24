@@ -91,20 +91,6 @@
 // 订单详情
 - (void)orderDetail:(UIButton *)sender {
 
-//    if ([self.swap_type isEqualToString:@"1"]) {
-//        ODSecondOrderDetailController *vc = [[ODSecondOrderDetailController alloc] init];
-//        vc.order_id = [NSString stringWithFormat:@"%@", self.orderId];
-//
-//        [self.navigationController pushViewController:vc animated:YES];
-//
-//    } else {
-//
-//        ODOrderDetailController *vc = [[ODOrderDetailController alloc] init];
-//        vc.order_id = [NSString stringWithFormat:@"%@", self.orderId];
-//        [self.navigationController pushViewController:vc animated:YES];
-//
-//
-//    }
     ODBuyOrderDetailController *vc = [[ODBuyOrderDetailController alloc] init];
             vc.order_id = [NSString stringWithFormat:@"%@", self.orderId];
             [self.navigationController pushViewController:vc animated:YES];
