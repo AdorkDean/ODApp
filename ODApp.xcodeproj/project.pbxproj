@@ -57,7 +57,7 @@
 		232CB58C1C9264E200340D12 /* ODNewFeatureCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB39B1C9264E200340D12 /* ODNewFeatureCell.m */; };
 		232CB58D1C9264E200340D12 /* ODProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB39D1C9264E200340D12 /* ODProgressHUD.m */; };
 		232CB58E1C9264E200340D12 /* ODTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB39F1C9264E200340D12 /* ODTabBar.m */; };
-		232CB5911C9264E200340D12 /* ODHomeFoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3A71C9264E200340D12 /* ODHomeFoundViewController.m */; };
+		232CB5911C9264E200340D12 /* ODHomeFindViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3A71C9264E200340D12 /* ODHomeFindViewController.m */; };
 		232CB5921C9264E200340D12 /* ODLocationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3A91C9264E200340D12 /* ODLocationController.m */; };
 		232CB5931C9264E200340D12 /* ODHomeInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3AC1C9264E200340D12 /* ODHomeInfoModel.m */; };
 		232CB5941C9264E200340D12 /* ODLocationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3AE1C9264E200340D12 /* ODLocationModel.m */; };
@@ -440,8 +440,8 @@
 		232CB39D1C9264E200340D12 /* ODProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODProgressHUD.m; sourceTree = "<group>"; };
 		232CB39E1C9264E200340D12 /* ODTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTabBar.h; sourceTree = "<group>"; };
 		232CB39F1C9264E200340D12 /* ODTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTabBar.m; sourceTree = "<group>"; };
-		232CB3A61C9264E200340D12 /* ODHomeFoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHomeFoundViewController.h; sourceTree = "<group>"; };
-		232CB3A71C9264E200340D12 /* ODHomeFoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeFoundViewController.m; sourceTree = "<group>"; };
+		232CB3A61C9264E200340D12 /* ODHomeFindViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHomeFindViewController.h; sourceTree = "<group>"; };
+		232CB3A71C9264E200340D12 /* ODHomeFindViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeFindViewController.m; sourceTree = "<group>"; };
 		232CB3A81C9264E200340D12 /* ODLocationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODLocationController.h; sourceTree = "<group>"; };
 		232CB3A91C9264E200340D12 /* ODLocationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODLocationController.m; sourceTree = "<group>"; };
 		232CB3AB1C9264E200340D12 /* ODHomeInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHomeInfoModel.h; sourceTree = "<group>"; };
@@ -1217,8 +1217,8 @@
 		232CB3A11C9264E200340D12 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				232CB3A61C9264E200340D12 /* ODHomeFoundViewController.h */,
-				232CB3A71C9264E200340D12 /* ODHomeFoundViewController.m */,
+				232CB3A61C9264E200340D12 /* ODHomeFindViewController.h */,
+				232CB3A71C9264E200340D12 /* ODHomeFindViewController.m */,
 				23B22B311C9A597600AB11ED /* ODPublicWebViewController.h */,
 				23B22B321C9A597600AB11ED /* ODPublicWebViewController.m */,
 				232CB3A81C9264E200340D12 /* ODLocationController.h */,
@@ -2429,7 +2429,7 @@
 				232CB56E1C9264E200340D12 /* IQTitleBarButtonItem.m in Sources */,
 				232CB6611C9264E200340D12 /* ODThirdOrderView.m in Sources */,
 				4029EB351C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m in Sources */,
-				232CB5911C9264E200340D12 /* ODHomeFoundViewController.m in Sources */,
+				232CB5911C9264E200340D12 /* ODHomeFindViewController.m in Sources */,
 				232CB6111C9264E200340D12 /* ODUserNickNameController.m in Sources */,
 				ED46881C1C96AD9500E31F64 /* ODOrderAndSellDetailController.m in Sources */,
 				400334871C9B97C500973818 /* ODArrowItem.m in Sources */,

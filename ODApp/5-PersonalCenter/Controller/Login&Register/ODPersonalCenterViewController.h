@@ -9,7 +9,7 @@
 
 #import "ODBaseViewController.h"
 
-#import "ODHomeFoundViewController.h"
+#import "ODHomeFindViewController.h"
 
 @protocol ODPersonalCenterVCDelegate <NSObject>
 
