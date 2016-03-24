@@ -13,7 +13,7 @@
 #import "ODCancelOrderView.h"
 #import "Masonry.h"
 
-#import "ODBuyOrderDetailController.h"
+#import "ODOrderAndSellDetailController.h"
 
 @interface ODPaySuccessController () <UITextViewDelegate>
 
@@ -91,7 +91,7 @@
 // 订单详情
 - (void)orderDetail:(UIButton *)sender {
 
-    ODBuyOrderDetailController *vc = [[ODBuyOrderDetailController alloc] init];
+    ODOrderAndSellDetailController *vc = [[ODOrderAndSellDetailController alloc] init];
             vc.order_id = [NSString stringWithFormat:@"%@", self.orderId];
             [self.navigationController pushViewController:vc animated:YES];
 

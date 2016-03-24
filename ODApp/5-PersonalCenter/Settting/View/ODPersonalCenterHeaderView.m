@@ -11,8 +11,6 @@
 
 #import <UIImageView+WebCache.h>
 
-#import "ODMySellController.h"
-#import "ODMyOrderController.h"
 #import "ODReleaseController.h"
 #import "ODPersonalCenterCollectionController.h"
 #import "ODInformationController.h"

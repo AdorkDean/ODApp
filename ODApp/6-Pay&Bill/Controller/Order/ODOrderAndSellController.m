@@ -10,7 +10,7 @@
 #import "ODOrderAndSellController.h"
 #import "MJRefresh.h"
 
-#import "ODBuyOrderDetailController.h"
+#import "ODOrderAndSellDetailController.h"
 #import "ODMySellModel.h"
 #import "ODOrderAndSellView.h"
 
@@ -123,15 +123,13 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
          NSArray *mySellDatas = [model result];
          [weakSelf.dataArray addObjectsFromArray:mySellDatas];
          
-         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
-         
-         [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:mySellDatas];
+         [ODHttpTool od_endRefreshWith:weakSelf.tableView array:mySellDatas];
          
          if (weakSelf.dataArray.count == 0) {
-             [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
+             [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
          }
          else {
-             [noResultabel hidden];
+             [self.noResultabel hidden];
          }
      } failure:^(NSError *error) {
          
@@ -163,7 +161,7 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
     
     self.indexRow = indexPath.row;
     
-    ODBuyOrderDetailController *vc = [[ODBuyOrderDetailController alloc] init];
+    ODOrderAndSellDetailController *vc = [[ODOrderAndSellDetailController alloc] init];
     
     if (self.isSell) {
         ODMySellModel *model = self.dataArray[indexPath.row];
