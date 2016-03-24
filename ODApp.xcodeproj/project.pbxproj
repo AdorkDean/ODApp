@@ -162,8 +162,6 @@
 		232CB6071C9264E200340D12 /* ODOtherTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4931C9264E200340D12 /* ODOtherTopicViewController.m */; };
 		232CB6081C9264E200340D12 /* ODPersonalCenterCollectionController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4951C9264E200340D12 /* ODPersonalCenterCollectionController.m */; };
 		232CB6091C9264E200340D12 /* ODReleaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4971C9264E200340D12 /* ODReleaseController.m */; };
-		232CB60A1C9264E200340D12 /* ODSecondMySellDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4991C9264E200340D12 /* ODSecondMySellDetailController.m */; };
-		232CB60B1C9264E200340D12 /* ODSecondOrderDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB49B1C9264E200340D12 /* ODSecondOrderDetailController.m */; };
 		232CB60C1C9264E200340D12 /* ODBindingMobileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB49E1C9264E200340D12 /* ODBindingMobileController.m */; };
 		232CB60D1C9264E200340D12 /* ODChangePassWordController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4A01C9264E200340D12 /* ODChangePassWordController.m */; };
 		232CB60E1C9264E200340D12 /* ODInformationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4A21C9264E200340D12 /* ODInformationController.m */; };
@@ -639,10 +637,6 @@
 		232CB4951C9264E200340D12 /* ODPersonalCenterCollectionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPersonalCenterCollectionController.m; sourceTree = "<group>"; };
 		232CB4961C9264E200340D12 /* ODReleaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODReleaseController.h; sourceTree = "<group>"; };
 		232CB4971C9264E200340D12 /* ODReleaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODReleaseController.m; sourceTree = "<group>"; };
-		232CB4981C9264E200340D12 /* ODSecondMySellDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSecondMySellDetailController.h; sourceTree = "<group>"; };
-		232CB4991C9264E200340D12 /* ODSecondMySellDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSecondMySellDetailController.m; sourceTree = "<group>"; };
-		232CB49A1C9264E200340D12 /* ODSecondOrderDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSecondOrderDetailController.h; sourceTree = "<group>"; };
-		232CB49B1C9264E200340D12 /* ODSecondOrderDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSecondOrderDetailController.m; sourceTree = "<group>"; };
 		232CB49D1C9264E200340D12 /* ODBindingMobileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBindingMobileController.h; sourceTree = "<group>"; };
 		232CB49E1C9264E200340D12 /* ODBindingMobileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBindingMobileController.m; sourceTree = "<group>"; };
 		232CB49F1C9264E200340D12 /* ODChangePassWordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODChangePassWordController.h; sourceTree = "<group>"; };
@@ -1677,10 +1671,6 @@
 				232CB4951C9264E200340D12 /* ODPersonalCenterCollectionController.m */,
 				232CB4961C9264E200340D12 /* ODReleaseController.h */,
 				232CB4971C9264E200340D12 /* ODReleaseController.m */,
-				232CB4981C9264E200340D12 /* ODSecondMySellDetailController.h */,
-				232CB4991C9264E200340D12 /* ODSecondMySellDetailController.m */,
-				232CB49A1C9264E200340D12 /* ODSecondOrderDetailController.h */,
-				232CB49B1C9264E200340D12 /* ODSecondOrderDetailController.m */,
 			);
 			path = Personal;
 			sourceTree = "<group>";
@@ -2463,7 +2453,6 @@
 				232CB6461C9264E200340D12 /* ODWithdrawalDetailController.m in Sources */,
 				232CB5741C9264E200340D12 /* UITableViewRowAction+JZExtension.m in Sources */,
 				232CB5681C9264E200340D12 /* IQUIWindow+Hierarchy.m in Sources */,
-				232CB60B1C9264E200340D12 /* ODSecondOrderDetailController.m in Sources */,
 				232CB5541C9264E200340D12 /* NSArray+ODExtension.m in Sources */,
 				232CB5FD1C9264E200340D12 /* ODDrawbackController.m in Sources */,
 				232CB56E1C9264E200340D12 /* IQTitleBarButtonItem.m in Sources */,
@@ -2516,7 +2505,6 @@
 				232CB6561C9264E200340D12 /* ODOrderDetailView.m in Sources */,
 				232CB66A1C9264E200340D12 /* ODWithdrawalCell.m in Sources */,
 				232CB6061C9264E200340D12 /* ODOtherTaskController.m in Sources */,
-				232CB60A1C9264E200340D12 /* ODSecondMySellDetailController.m in Sources */,
 				232CB5731C9264E200340D12 /* UITableViewCell+JZExtension.m in Sources */,
 				232CB55F1C9264E200340D12 /* ODNewFeatureViewController.m in Sources */,
 				232CB5A41C9264E200340D12 /* ODStorePlaceListModel.m in Sources */,
