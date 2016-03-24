@@ -20,6 +20,7 @@
 @property(nonatomic,copy)NSString *type;
 @property(nonatomic)NSInteger index;
 @property(nonatomic,copy)NSString *status;
+@property(nonatomic,strong)ODNoResultLabel *label;
 
 @end
 
@@ -51,14 +52,15 @@
     [super viewDidLoad];
     self.page = 1;
     self.status = @"0";
+    self.label = [[ODNoResultLabel alloc]init];
     [self requestData];
-    
+    __weakSelf
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        self.page = 1;
-        [self requestData];
+        weakSelf.page = 1;
+        [weakSelf requestData];
     }];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [self loadMoreData];
+        [weakSelf loadMoreData];
     }];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(notificationClick:) name:ODNotificationRefreshTask object:nil];
@@ -83,7 +85,6 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
-
 #pragma mark - 数据请求
 - (void)requestData {
     __weakSelf
@@ -98,13 +99,10 @@
          
          [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:tasksModel.tasks];
          
-         ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
          if (weakSelf.dataArray.count == 0) {
-             [noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无任务"];
-         }
-         else
-         {
-             [noResultLabel hidden];
+             [self.label showOnSuperView:weakSelf.tableView title:@"暂无任务"];
+         }else{
+             [self.label hidden];
          }
      } failure:^(NSError *error) {
          [weakSelf.tableView.mj_header endRefreshing];
