@@ -197,8 +197,8 @@ UIKIT_EXTERN NSString * const ODUrlSwapEdit;
 UIKIT_EXTERN NSString * const ODUrlTaskTaskAdd;
 UIKIT_EXTERN NSString * const ODUrlTaskDetail;
 UIKIT_EXTERN NSString * const ODUrlTaskApply;
-UIKIT_EXTERN NSString * const ODurlTaskAccept;
-UIKIT_EXTERN NSString * const ODurlTaskDelivery;
+UIKIT_EXTERN NSString * const ODUrlTaskAccept;
+UIKIT_EXTERN NSString * const ODUrlTaskDelivery;
 UIKIT_EXTERN NSString * const ODUrlTaskConfirm;
 UIKIT_EXTERN NSString * const ODUrlTaskList;
 

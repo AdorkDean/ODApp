@@ -169,8 +169,8 @@ NSString * const ODUrlTaskList = @"task/list";
 NSString * const ODUrlTaskTaskAdd = @"task/task/add";
 NSString * const ODUrlTaskDetail = @"task/detail";
 NSString * const ODUrlTaskApply = @"task/apply"; //接受任务
-NSString * const ODurlTaskAccept = @"task/accept";
-NSString * const ODurlTaskDelivery = @"task/delivery";
+NSString * const ODUrlTaskAccept = @"task/accept";
+NSString * const ODUrlTaskDelivery = @"task/delivery";
 NSString * const ODUrlTaskConfirm = @"task/confirm";
 
 

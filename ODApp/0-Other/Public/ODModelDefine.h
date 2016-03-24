@@ -29,7 +29,7 @@ return @{ \
 ODRequestResultIsArrayProperty(className) \
 ODRequestResultIsArrayImplementation(className)
 
-/** .h  请求回来的result是字典的情况 */
+/**  .h  请求回来的result是字典的情况 */
 #define ODRequestResultIsDictionaryProperty(className) \
 @interface className##Response : NSObject\
 @property (nonatomic, strong) className *result;\
@@ -37,7 +37,7 @@ ODRequestResultIsArrayImplementation(className)
 @end
 
 
-/** .m  请求回来的result字典的内部元素转化成模型实现 */
+/**  .m  请求回来的result字典的内部元素转化成模型实现 */
 #define ODRequestResultIsDictionaryImplementation(className) \
 @implementation className##Response\
 @end
