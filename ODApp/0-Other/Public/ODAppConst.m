@@ -201,6 +201,10 @@ NSString * const ODUrlSwapSchedule = @"swap/schedule";
 NSString * const ODUrlPayWeixinTradeNumber = @"pay/weixin/trade/number";
 NSString * const ODUrlPayWeixinCallbackSync = @"pay/weixin/callback/sync";
 
-/** 外卖 */
+/** 外卖首页 */
 NSString * const ODUrlTakeOutList = @"takeout/list";
+/** 订单详情 */
+NSString * const ODUrlTakeOutOrderInfo = @"takeout/order/info";
+/** 外卖订单列表 */
+NSString * const ODUrlTakeOutOrderList = @"takeout/order/list";
 
