@@ -24,4 +24,9 @@
  */
 + (instancetype)OD_circleImageNamed:(NSString *)name;
 
+/**
+ *  根据传过来的数字大小, 绘制不同程度的圆角矩形
+ */
+- (instancetype)od_roundedCornerImage:(CGFloat)cornerradius;
+
 @end

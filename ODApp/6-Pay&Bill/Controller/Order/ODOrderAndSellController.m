@@ -10,7 +10,7 @@
 #import "ODOrderAndSellController.h"
 #import "MJRefresh.h"
 
-#import "ODBuyOrderDetailController.h"
+#import "ODOrderAndSellDetailController.h"
 #import "ODMySellModel.h"
 #import "ODOrderAndSellView.h"
 
@@ -30,23 +30,15 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
 
 @implementation ODOrderAndSellController
 
-#pragma mark - 生命周期方法
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationSellOrderSecondRefresh object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationOrderListRefresh object:nil];
-    
-    
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
+#pragma mark - Life Cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.page = 1;
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     self.dataArray = [[NSMutableArray alloc] init];
-    [self createRequestData];
+    [self getRequestData];
     
     if (self.isSell) {
         self.navigationItem.title = @"已卖出";
@@ -57,27 +49,20 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationSellOrderSecondRefresh object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationOrderListRefresh object:nil];
+    
+    
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     self.isRefresh = @"";
     [MobClick endLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)reloadData:(NSNotification *)text {
-    
-    ODMySellModel *model = self.dataArray[self.indexRow];
-    model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"order_status"]];
-    [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
-    [self.tableView reloadData];
-    
 }
 
 - (UITableView *)tableView {
@@ -95,19 +80,19 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
         __weakSelf
         _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
             weakSelf.page = 1;
-            [weakSelf createRequestData];
+            [weakSelf getRequestData];
         }];
         _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^ {
             weakSelf.page++;
-            [weakSelf createRequestData];
+            [weakSelf getRequestData];
         }];
         [self.view addSubview:_tableView];
     }
     return _tableView;
 }
 
-#pragma mark - 获取数据
-- (void)createRequestData {
+#pragma mark - Get Data
+- (void)getRequestData {
     NSString *countNumber = [NSString stringWithFormat:@"%ld", (long) self.page];
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -138,15 +123,18 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
          NSArray *mySellDatas = [model result];
          [weakSelf.dataArray addObjectsFromArray:mySellDatas];
          
+<<<<<<< HEAD
          ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
          
+=======
+>>>>>>> 2dc44ef4af08feccf0ae27e8f2f0cb66ae15c935
          [ODHttpTool od_endRefreshWith:weakSelf.tableView array:mySellDatas];
          
          if (weakSelf.dataArray.count == 0) {
-             [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
+             [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
          }
          else {
-             [noResultabel hidden];
+             [self.noResultabel hidden];
          }
      } failure:^(NSError *error) {
          
@@ -178,7 +166,7 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
     
     self.indexRow = indexPath.row;
     
-    ODBuyOrderDetailController *vc = [[ODBuyOrderDetailController alloc] init];
+    ODOrderAndSellDetailController *vc = [[ODOrderAndSellDetailController alloc] init];
     
     if (self.isSell) {
         ODMySellModel *model = self.dataArray[indexPath.row];
@@ -194,5 +182,19 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - Action
+- (void)reloadData:(NSNotification *)text {
+    
+    ODMySellModel *model = self.dataArray[self.indexRow];
+    model.order_status = [NSString stringWithFormat:@"%@", text.userInfo[@"order_status"]];
+    [self.dataArray replaceObjectAtIndex:self.indexRow withObject:model];
+    [self.tableView reloadData];
+    
+}
+
+#pragma mark - Remove Notification
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

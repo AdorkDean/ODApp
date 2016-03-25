@@ -1,5 +1,5 @@
 //
-//  ODHomeFoundViewController.h
+//  ODHomeFindViewController.h
 //  ODApp
 //
 //  Created by Odong-YG on 15/12/17.
@@ -23,7 +23,7 @@
 #import "ODBazaarExchangeSkillCell.h"
 #import "ODBazaarExchangeSkillModel.h"
 
-@interface ODHomeFoundViewController : ODBaseViewController <UIScrollViewDelegate, MAMapViewDelegate, AMapSearchDelegate>
+@interface ODHomeFindViewController : ODBaseViewController <UIScrollViewDelegate, MAMapViewDelegate, AMapSearchDelegate>
 
 /**
  *  体验中心ID

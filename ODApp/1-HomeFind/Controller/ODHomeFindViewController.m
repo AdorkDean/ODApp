@@ -1,5 +1,5 @@
 //
-//  ODHomeFoundViewController.m
+//  ODHomeFindViewController.m
 //  ODApp
 //
 //  Created by Odong-YG on 15/12/17.
@@ -8,7 +8,7 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaarViewController.h"
-#import "ODHomeFoundViewController.h"
+#import "ODHomeFindViewController.h"
 #import "ODUserInformation.h"
 #import "ODStorePlaceListModel.h"
 #import "ODHomeInfoModel.h"
@@ -19,7 +19,7 @@
 
 static NSString * const exchangeCellId = @"exchangeCell";
 
-@interface ODHomeFoundViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ODHomeFindViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     AMapSearchAPI *_search;
     MAMapView *_mapView;
@@ -41,7 +41,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
 
 @end
 
-@implementation ODHomeFoundViewController
+@implementation ODHomeFindViewController
 
 #pragma mark - lifeCycle
 - (void)viewDidLoad{

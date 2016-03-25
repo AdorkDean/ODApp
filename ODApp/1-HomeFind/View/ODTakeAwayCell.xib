@@ -28,36 +28,33 @@
                         </variation>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8cc-OL-xhT" userLabel="物品名称">
-                        <rect key="frame" x="90" y="15" width="38" height="18"/>
+                        <rect key="frame" x="90" y="15" width="90" height="18"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="38" id="HW9-6N-8f5"/>
+                            <constraint firstAttribute="width" constant="90" id="HW9-6N-8f5"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNG-im-ERM" userLabel="优惠价格">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNG-im-ERM" userLabel="优惠价格">
                         <rect key="frame" x="90" y="48" width="55" height="27"/>
                         <fontDescription key="fontDescription" type="system" pointSize="22.5"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wU-WL-acn" userLabel="初始价格">
-                        <rect key="frame" x="151" y="57" width="38" height="18"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="38" id="x7s-qV-zP5"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hl-wK-REW" userLabel="状态按钮">
-                        <rect key="frame" x="266" y="33" width="36" height="26"/>
+                        <rect key="frame" x="222" y="33" width="80" height="26"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="80" id="Ri3-SD-ONu"/>
                             <constraint firstAttribute="height" constant="26" id="ceR-Or-OsD"/>
                         </constraints>
-                        <state key="normal" title="购买">
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <state key="normal" title="购买" backgroundImage="button_purchase">
                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <state key="disabled" title="已结束" backgroundImage="button_end">
+                            <color key="titleColor" red="1" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
                             <action selector="buyTakeAway" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7eq-fi-trC"/>
@@ -70,6 +67,15 @@
                             <constraint firstAttribute="height" constant="1" id="cLW-k0-fby"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="bottom" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8wU-WL-acn" userLabel="初始价格">
+                        <rect key="frame" x="151" y="57" width="40" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="x7s-qV-zP5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="CLB-2R-q82" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="01g-Dj-c4c"/>
@@ -80,27 +86,25 @@
                     <constraint firstItem="8cc-OL-xhT" firstAttribute="top" secondItem="CLB-2R-q82" secondAttribute="top" id="Qlc-uy-hk6"/>
                     <constraint firstItem="8cc-OL-xhT" firstAttribute="leading" secondItem="CLB-2R-q82" secondAttribute="trailing" constant="12.5" id="Vk1-iz-pgm"/>
                     <constraint firstItem="Ut3-tb-qIu" firstAttribute="trailing" secondItem="5hl-wK-REW" secondAttribute="trailing" id="dFd-6g-R4d"/>
-                    <constraint firstAttribute="bottom" secondItem="CLB-2R-q82" secondAttribute="bottom" constant="15" id="hLn-pm-t0T"/>
                     <constraint firstItem="FNG-im-ERM" firstAttribute="bottom" secondItem="CLB-2R-q82" secondAttribute="bottom" id="iew-y8-CjD"/>
                     <constraint firstItem="8wU-WL-acn" firstAttribute="leading" secondItem="FNG-im-ERM" secondAttribute="trailing" constant="6" id="ihk-km-YUC"/>
                     <constraint firstItem="Ut3-tb-qIu" firstAttribute="leading" secondItem="CLB-2R-q82" secondAttribute="leading" id="pki-Ex-Rrl"/>
                     <constraint firstItem="FNG-im-ERM" firstAttribute="leading" secondItem="8cc-OL-xhT" secondAttribute="leading" id="tHb-Za-T40"/>
                     <constraint firstItem="CLB-2R-q82" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17.5" id="wEn-aD-mz2"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="hLn-pm-t0T"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="avatarView" destination="CLB-2R-q82" id="Qzv-ch-uuz"/>
                 <outlet property="buyButton" destination="5hl-wK-REW" id="JQc-BR-nlZ"/>
                 <outlet property="discountPriceLabel" destination="FNG-im-ERM" id="ZA5-ZN-RfC"/>
                 <outlet property="originalPriceLabel" destination="8wU-WL-acn" id="8zV-tK-2CE"/>
+                <outlet property="shopImageView" destination="CLB-2R-q82" id="HNy-cE-Wmt"/>
                 <outlet property="titleLabel" destination="8cc-OL-xhT" id="kBm-Ik-hH3"/>
             </connections>
             <point key="canvasLocation" x="448" y="272"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="button_end" width="76" height="26"/>
+        <image name="button_purchase" width="76" height="26"/>
+    </resources>
 </document>

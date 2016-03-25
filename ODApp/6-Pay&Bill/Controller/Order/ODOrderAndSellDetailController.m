@@ -10,7 +10,7 @@
 
 #import "UIButton+WebCache.h"
 
-#import "ODBuyOrderDetailController.h"
+#import "ODOrderAndSellDetailController.h"
 #import "ODDrawbackController.h"
 #import "ODPayController.h"
 
@@ -22,7 +22,7 @@
 #import "ODEvaluation.h"
 #import <MJRefresh.h>
 
-@interface ODBuyOrderDetailController () <UITextViewDelegate>{
+@interface ODOrderAndSellDetailController () <UITextViewDelegate>{
     // label 统一高度
     float labelHeight;
     
@@ -78,7 +78,7 @@
 
 @end
 
-@implementation ODBuyOrderDetailController
+@implementation ODOrderAndSellDetailController
 
 #pragma mark - 生命周期方法
 
