@@ -17,7 +17,7 @@
 
 #import "ODTakeAwayDetailController.h"
 
-#import "ODTestWebViewController.h"
+#import "ODTakeAwayDetailController.h"
 
 static NSString * const exchangeCellId = @"exchangeCell";
 
@@ -484,7 +484,7 @@ updatingLocation:(BOOL)updatingLocation {
             
 //            ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
             
-            ODTestWebViewController *vc = [[ODTestWebViewController alloc] init];
+            ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
             
 //            vc.navigationTitle = @"饮料";
 //            NSString *order_id = @"1";
