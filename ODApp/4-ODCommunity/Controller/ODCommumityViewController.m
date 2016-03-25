@@ -193,6 +193,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
     [cell showDataWithModel:model dict:self.userInfoDic index:indexPath];
     return cell;
