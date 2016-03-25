@@ -28,8 +28,6 @@
     self.indexPath = index;
     self.timeLabel.text = model.created_at;
     self.contentLabel.text = model.content;
-    
-    NSLog(@"-----%@",model.content);
     NSString *userId = [NSString stringWithFormat:@"%d",model.user_id];
     self.open_id = [dict[userId]open_id];
     [self.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[dict[userId]avatar_url]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];

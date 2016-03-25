@@ -102,15 +102,9 @@
         }
         [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[[model result] bbs_list]];
         if (weakSelf.dataArray.count == 0) {
-<<<<<<< HEAD
             [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无话题"];
         }else {
             [weakSelf.noResultLabel hidden];
-=======
-            [self.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无话题"];
-        }else {
-            [self.noResultLabel hidden];
->>>>>>> 6f2539e4b4adb4f9c19ed2c11e067ecf68c120eb
         }
     } failure:^(NSError *error) {
         [weakSelf.tableView.mj_header endRefreshing];
