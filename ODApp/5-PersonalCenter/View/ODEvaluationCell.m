@@ -14,7 +14,6 @@
 -(id)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
-        
         [self addViews];
     }
     return self;
@@ -37,38 +36,21 @@
 
 - (void)setModel:(ODEvaluationModel *)model
 {
-    
     if (_model != model) {
-       
         _model = model;
     }
     
-    
-    
-      // 根据内容更改label的高度
-    CGRect rect = [model.comment boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - ODLeftMargin * 2,0)
-                                             options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
-                                          attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]}
-                                             context:nil];
-    self.contentLabel.frame = CGRectMake(ODLeftMargin, 0, self.contentView.frame.size.width - ODLeftMargin * 2, rect.size.height+30-14);
+    // 根据内容更改label的高度
+    CGSize commentSize = [model.comment od_sizeWithFontSize:14.0f
+                                                    maxSize:CGSizeMake(KScreenWidth - ODLeftMargin * 2, 0)];
+    self.contentLabel.frame = CGRectMake(ODLeftMargin, 0, self.contentView.frame.size.width - ODLeftMargin * 2,
+                                         commentSize.height + 30 - 14);
     self.contentLabel.text = [NSString stringWithFormat:@"%@" , model.comment];
-  
-    
-    
-  
-    
-    
-    
-    
 }
 
 
 -(void)dealWithModel:(ODSecondEvaluationModel *)model
 {
-    
-    
-    
-    
     if ([model.reason isEqualToString:@""]) {
         
         NSString *reason_num = [NSString stringWithFormat:@"%@" , model.reason_num];
@@ -102,11 +84,10 @@
         
     }else{
         // 根据内容更改label的高度
-        CGRect rect = [model.reason boundingRectWithSize:CGSizeMake([UIScreen mainScreen].bounds.size.width - ODLeftMargin * 2,0)
-                                                 options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
-                                              attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]}
-                                                 context:nil];
-        self.contentLabel.frame = CGRectMake(ODLeftMargin, 0, self.contentView.frame.size.width - ODLeftMargin * 2, rect.size.height + 30 - 14);
+        CGSize reasonSize = [model.reason od_sizeWithFontSize:14.0f
+                                                      maxSize:CGSizeMake(KScreenWidth - ODLeftMargin * 2, 0)];
+        self.contentLabel.frame = CGRectMake(ODLeftMargin, 0, self.contentView.frame.size.width - ODLeftMargin * 2,
+                                             reasonSize.height + 30 - 14);
         self.contentLabel.text = model.reason;
 
     }
@@ -122,11 +103,9 @@
 {
     //根据内容计算,更改Label的高度
     if (model.comment) {
-        CGRect rect = [model.comment boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width - ODLeftMargin * 2, 0)
-                                                        options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
-                                                     attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]}
-                                                        context:nil];
-        return (rect.size.height+30-14);
+        CGSize commentSize = [model.comment od_sizeWithFontSize:14.0f
+                                                      maxSize:CGSizeMake(KScreenWidth - ODLeftMargin * 2, 0)];
+        return (commentSize.height + 30 - 14);
     }else{
         
         return 30;
@@ -142,11 +121,9 @@
     
     //根据内容计算,更改Label的高度
     if (![model.reason isEqualToString:@""]) {
-        CGRect rect = [model.reason boundingRectWithSize:CGSizeMake([[UIScreen mainScreen] bounds].size.width - ODLeftMargin * 2, 0)
-                                                  options:NSStringDrawingUsesLineFragmentOrigin |NSStringDrawingUsesFontLeading
-                                               attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:14]}
-                                                  context:nil];
-        return (rect.size.height + 30 - 14);
+        CGSize reasonSize = [model.reason od_sizeWithFontSize:14.0f
+                                                        maxSize:CGSizeMake(KScreenWidth - ODLeftMargin * 2, 0)];
+        return (reasonSize.height + 30 - 14);
     }else{
         
         return 30;

@@ -103,7 +103,7 @@
     ODArrowItem *item2 = [ODArrowItem itemWithName:@"我的话题"];
     item2.oprtionBlock = ^(NSIndexPath *index){
         ODMyTopicController *vc = [[ODMyTopicController alloc] init];
-        vc.open_id = user.open_id;
+//        vc.open_id = user.open_id;
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
     

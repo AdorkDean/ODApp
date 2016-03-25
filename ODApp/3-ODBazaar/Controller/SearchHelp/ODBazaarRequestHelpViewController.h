@@ -27,6 +27,6 @@
 @property (nonatomic, strong) UIButton *screeningButton;
 @property (nonatomic, copy) NSString *refresh;
 @property (nonatomic, assign) NSInteger indexPath;
-@property (nonatomic, strong) UILabel *noResultLabel;
+//@property (nonatomic, strong) UILabel *noResultLabel;
 
 @end

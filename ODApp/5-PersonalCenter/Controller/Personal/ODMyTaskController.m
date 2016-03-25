@@ -97,7 +97,6 @@
     ODMyAcceptTaskViewController *acceptTask = [[ODMyAcceptTaskViewController alloc]init];
     acceptTask.view.frame = CGRectMake(kScreenSize.width, 0, kScreenSize.width, kScreenSize.height-64-50);
     
-    
     [self.scrollView addSubview:releaseTask.view];
     [self.scrollView addSubview:acceptTask.view];
     

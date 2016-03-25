@@ -37,10 +37,10 @@
     self.timeLabel.attributedText = noteStr;
     self.statusLabel.text = @"任务开始";
     
-    NSString *content = model.content;
-    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:11]};
-    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-83, 30) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
-    self.contentLabelConstraint.constant = size.height;
+    // 计算正文实际Size
+    CGSize concentSize = [model.content od_sizeWithFontSize:11.0f
+                                                    maxSize:CGSizeMake(KScreenWidth - 83, 30)];
+    self.contentLabelConstraint.constant = concentSize.height;
 }
 
 
