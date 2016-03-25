@@ -33,12 +33,6 @@
     self.titleLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     self.discountPriceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     self.originalPriceLabel.textColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
-    
-    // 添加中划线
-    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:self.originalPriceLabel.text attributes:attribtDic];
-    self.originalPriceLabel.attributedText = attribtStr;
-    
 }
 
 - (void)setDatas:(ODTakeAwayModel *)datas
@@ -59,6 +53,11 @@
 
     // 设置按钮不同情况下的状态
     self.buyButton.enabled = (datas.show_status == ODTakeOutStatusBuy);
+    
+    // 添加中划线
+    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:self.originalPriceLabel.text attributes:attribtDic];
+    self.originalPriceLabel.attributedText = attribtStr;
 }
 
 #pragma mark - 事件方法

@@ -26,24 +26,18 @@
 @property (nonatomic, weak) IBOutlet UIImageView *genderImageView;
 /** 配图 */
 @property (nonatomic, weak) IBOutlet ODBazaarPhotosView *photosView;
-
 /** 配图的高度 */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *photosViewConstraintH;
-
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *photosViewConstraintH;
 /** 配图的宽度 */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *photosViewConstraintW;
-
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *photosViewConstraintW;
 /** 正文的高度 */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *starConstraintH;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *starConstraintH;
 
 @end
 
 @implementation ODBazaarExchangeSkillCell
 
 #pragma mark - 初始化方法
-/**
- *  初始化控件
- */
 - (void)awakeFromNib
 {
     // 取消选中样式
@@ -101,10 +95,11 @@
     CGSize photosViewSize = [ODBazaarPhotosView zh_sizeWithConnt:model.imgs_small.count];
     self.photosViewConstraintH.constant = photosViewSize.height;
     self.photosViewConstraintW.constant = photosViewSize.width;
-    CGFloat contentH = [self.model.content boundingRectWithSize:CGSizeMake(KScreenWidth - 90, 30) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11.0f]} context:nil].size.height;
-    self.starConstraintH.constant = 12 + contentH + 15;
+    // 计算正文真实Size
+    CGSize contentSize = [self.model.content od_sizeWithFontSize:11.0f
+                                                         maxSize:CGSizeMake(KScreenWidth - 90, 30)];
+    self.starConstraintH.constant = 12 + contentSize.height + 15;
 }
-
 
 /**
  *  设置cell间隙

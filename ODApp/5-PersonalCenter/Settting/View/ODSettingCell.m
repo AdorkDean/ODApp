@@ -15,10 +15,34 @@
 
 @interface ODSettingCell()
 
+/** 指示器 */
+@property (nonatomic, strong) UIImageView *arrowIndicator;
+
+/** 开关 */
+@property (nonatomic, strong) UISwitch *switchView;
+
 @end
 
 @implementation ODSettingCell
 
+#pragma mark - 懒加载
+- (UIImageView *)arrowIndicator
+{
+    if (_arrowIndicator == nil) {
+        _arrowIndicator = [[UIImageView alloc] initWithImage:
+                                         [UIImage imageNamed:@"rightjiantou"]];
+    }
+    return _arrowIndicator;
+}
+- (UISwitch *)switchView
+{
+    if (_switchView == nil) {
+        _switchView = [[UISwitch alloc] init];
+    }
+    return _switchView;
+}
+
+#pragma mark - 初始化方法
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])
@@ -29,19 +53,16 @@
     return self;
 }
 
-#pragma mark - 初始化方法
 + (instancetype)cellWithTableView:(UITableView *)tableView cellStyle:(UITableViewCellStyle)style
 {
     static NSString *ID = nil;
     if (!ID) {
         ID = [NSString stringWithFormat:@"%@ID", NSStringFromClass(self)];
     }
-    
     ODSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (!cell) {
         cell = [[self alloc] initWithStyle:style reuseIdentifier:ID];
     }
-    
     return cell;
 }
 
@@ -60,7 +81,7 @@
     
     self.textLabel.od_x = 12.5;
     
-    self.accessoryView.od_x = KScreenWidth - 25;
+//    self.accessoryView.od_x = KScreenWidth - 25;
 }
 
 #pragma mark - 设置数据
@@ -68,8 +89,10 @@
 {
     _item = item;
     
+    // 设置数据
     [self setupData];
     
+    // 设置指示器样式
     [self setupAccessoryView];
 }
 
@@ -90,15 +113,13 @@
 - (void)setupAccessoryView
 {
     if ([self.item isKindOfClass:[ODArrowItem class]]) {
-        UIImageView *arrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"rightjiantou"]];
-        self.accessoryView = arrow;
+        self.accessoryView = self.arrowIndicator;
     } else if ([self.item isKindOfClass:[ODSwitchItem class]]) {
-        self.accessoryView = [[UISwitch alloc] init];
+        self.accessoryView = self.switchView;
     } else if ([self.item isKindOfClass:[ODCheckItem class]]) {
         self.accessoryView = nil;
     } else {
         self.accessoryView = nil;
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
 }
 

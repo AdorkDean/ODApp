@@ -26,7 +26,7 @@
 @end
 
 // 循环cell标识
-static NSString * const exchangeCellId = @"takeAwayCell";
+static NSString * const exchangeCellId = @"myTakeOutCell";
 
 @implementation ODMyTakeOutViewController
 #pragma mark - 懒加载
@@ -37,7 +37,6 @@ static NSString * const exchangeCellId = @"takeAwayCell";
     }
     return _datas;
 }
-
 
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
@@ -53,7 +52,11 @@ static NSString * const exchangeCellId = @"takeAwayCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // 初始化表格
     [self setupTableView];
+    
+    // 初始化刷新控件
+    [self setupRefresh];
 }
 
 #pragma mark - 初始化方法
@@ -63,7 +66,6 @@ static NSString * const exchangeCellId = @"takeAwayCell";
 - (void)setupTableView
 {
     self.navigationItem.title = @"我的外卖";
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
     // 创建表格
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds
@@ -74,7 +76,6 @@ static NSString * const exchangeCellId = @"takeAwayCell";
     self.tableView = tableView;
 
     self.page = @1;
-    
     // rowHeight
     tableView.rowHeight = 90;
     // 取消分割线
@@ -86,7 +87,7 @@ static NSString * const exchangeCellId = @"takeAwayCell";
 /**
  *  设置刷新控件
  */
-- (void)setupScrollViewRefresh
+- (void)setupRefresh
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewTakeOuts)];
     [self.tableView.mj_header beginRefreshing];
