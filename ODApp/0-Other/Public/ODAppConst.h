@@ -23,7 +23,7 @@ UIKIT_EXTERN CGFloat const ODBazaaeExchangeCellMargin;
 UIKIT_EXTERN NSTimeInterval const getVerificationCodeTime;
 
 /** 动画持续时间 */
-UIKIT_EXTERN NSTimeInterval const animateDuration;
+UIKIT_EXTERN NSTimeInterval const kAnimateDuration;
 
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */

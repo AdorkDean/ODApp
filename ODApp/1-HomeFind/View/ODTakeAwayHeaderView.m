@@ -81,7 +81,7 @@
     self.selectedButton = button;
     self.selectedButton.enabled = NO;
     
-    [UIView animateWithDuration:animateDuration animations:^{
+    [UIView animateWithDuration:kAnimateDuration animations:^{
         self.indicatorLine.od_centerX = button.od_centerX;
     }];
     

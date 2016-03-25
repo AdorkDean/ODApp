@@ -26,11 +26,10 @@
 /** 懒加载 */
 - (UIImageView *)imageView
 {
-    if (!_imageView)
-    {
+    if (_imageView == nil) {
         UIImageView *imageView = [[UIImageView alloc] init];
-        _imageView = imageView;
         [self.contentView addSubview:imageView];
+        _imageView = imageView;
     }
     return _imageView;
 }
@@ -38,8 +37,7 @@
 /** 懒加载开始按钮 */
 - (UIButton *)startButton
 {
-    if (!_startButton)
-    {
+    if (_startButton == nil) {
         UIButton *startButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [self.contentView addSubview:startButton];
         _startButton = startButton;
@@ -94,10 +92,11 @@
 #pragma mark - 事件方法
 - (void)start
 {
-    [UIView animateWithDuration:0.25 animations:^{
-        self.imageView.hidden = 0;
+    [UIView animateWithDuration:kAnimateDuration animations:^{
+        self.imageView.hidden = 0.0;
+    } completion:^(BOOL finished) {
+        [UIApplication sharedApplication].keyWindow.rootViewController = [[ODTabBarController alloc] init];
     }];
-    [UIApplication sharedApplication].keyWindow.rootViewController = [[ODTabBarController alloc] init];
 }
 
 @end
