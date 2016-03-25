@@ -89,19 +89,6 @@ UIKIT_EXTERN NSString * const ODNotificationReplySuccess;
 /**  登录成功后的通知 */
 UIKIT_EXTERN NSString * const ODNotificationLoginSuccess;
 
-/** 已购买二级页面通知 */
-UIKIT_EXTERN NSString * const ODNotificationMyOrderSecondRefresh;
-
-/** 已购买三级页面通知 */
-UIKIT_EXTERN NSString * const ODNotificationMyOrderThirdRefresh;
-
-/** 已卖出二级页面通知 */
-UIKIT_EXTERN NSString * const ODNotificationSellOrderSecondRefresh;
-
-/** 已购买三级页面通知 */
-UIKIT_EXTERN NSString * const ODNotificationSellOrderThirdRefresh;
-
-
 /**  点击收藏的通知 */
 UIKIT_EXTERN NSString * const ODNotificationloveSkill;
 

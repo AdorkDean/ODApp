@@ -43,7 +43,7 @@ static CGFloat const labelDownMargin = 5;
 
 @implementation ODMyOrderDetailController
 
-#pragma mark - 生命周期
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,7 +68,7 @@ static CGFloat const labelDownMargin = 5;
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-#pragma mark - 加载数据请求
+#pragma mark - Load Data Request
 - (void)getOrderDetailRequest {
     NSDictionary *parameter = @{@"order_id" : [NSString stringWithFormat:@"%@", self.order_id],
                                 @"call_array" : @"1"

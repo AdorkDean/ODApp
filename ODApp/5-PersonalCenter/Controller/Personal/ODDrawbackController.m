@@ -54,7 +54,19 @@
 
 @implementation ODDrawbackController
 
-#pragma mark - 生命周期方法
+
+#pragma mark - Life Cycle
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.navigationItem.title = self.drawbackTitle;
+    
+    self.view.userInteractionEnabled = YES;
+    
+    [self createScrollView];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -67,17 +79,6 @@
     [super viewWillDisappear:animated];
     
     [MobClick endLogPageView:NSStringFromClass([self class])];
-}
-#pragma mark - 生命周期
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.navigationItem.title = self.drawbackTitle;
-    
-    self.view.userInteractionEnabled = YES;
-    
-    [self createScrollView];
 }
 
 #pragma mark - Create UIScrollView
@@ -407,11 +408,10 @@
     return _drawbackStateView;
 }
 
-#pragma mark - DataRequest
+#pragma mark - Load Data Request
 
-#pragma mark - 拒绝退款请求
-- (void)refuseDrawbackRequest
-{
+#pragma mark - 拒绝退款
+- (void)refuseDrawbackRequest {
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.cancelOrderView.reasonTextView.text, @"open_id":openId};
 
@@ -419,14 +419,8 @@
     [ODHttpTool getWithURL:ODUrlSwapRejectRefund parameters:parameter modelClass:[NSObject class] success:^(id model) {
         
         [ODProgressHUD showInfoWithStatus:@"已拒绝"];
-//        NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
-//        [[NSNotificationCenter defaultCenter] postNotification:notification];
-//        
-////        [weakSelf refreshDetail:@"-5"];
         [weakSelf.cancelOrderView removeFromSuperview];
         [weakSelf.navigationController popViewControllerAnimated:YES];
-        
-        
     }
                    failure:^(NSError *error) {
                 
@@ -434,21 +428,14 @@
 }
 
 
-#pragma mark - 接受退款请求
-
-- (void)receiveDrawbackRequest
-{
+#pragma mark - 接受退款
+- (void)receiveDrawbackRequest {
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason ,@"open_id":openId};
     __weakSelf
     [ODHttpTool getWithURL:ODUrlSwapConfirmRefund parameters:parameter modelClass:[NSObject class] success:^(id model) {
         
         [ODProgressHUD showInfoWithStatus:@"已接受"];
-//        NSNotification *notification =[NSNotification notificationWithName:ODNotificationSellOrderThirdRefresh object:nil userInfo:nil];
-//        [[NSNotificationCenter defaultCenter] postNotification:notification];
-        
-//        [weakSelf refreshDetail:@"-3"];
-
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }
                    failure:^(NSError *error) {
@@ -456,23 +443,14 @@
     }];
 }
 
-
-
-#pragma mark - 申请退款请求
-
-- (void)releaseDrawbackRequest
-{
+#pragma mark - 申请退款
+- (void)releaseDrawbackRequest {
     NSString *openId = [ODUserInformation sharedODUserInformation].openID;
     NSDictionary *parameter = @{@"order_id":self.order_id,@"reason":self.drawbackReason, @"open_id":openId};
     __weakSelf
     [ODHttpTool getWithURL:ODUrlSwapOrderCancel parameters:parameter modelClass:[NSObject  class] success:^(id model) {
         
         [ODProgressHUD showInfoWithStatus:@"申请退款成功"];
-//        NSNotification *notification =[NSNotification notificationWithName:ODNotificationMyOrderThirdRefresh object:nil userInfo:nil];
-//        [[NSNotificationCenter defaultCenter] postNotification:notification];
-        
-//        [weakSelf refreshDetail:@"-2"];
-        
         [weakSelf.navigationController popViewControllerAnimated:YES];
     }
                    failure:^(NSError *error) {
@@ -482,10 +460,8 @@
 
 #pragma mark - UITextViewDelegate
 
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    if (textView == self.cancelOrderView.reasonTextView)
-    {
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    if (textView == self.cancelOrderView.reasonTextView) {
         if ([textView.text isEqualToString:@" 请输入拒绝原因"])
         {
             textView.text = @"";
@@ -494,32 +470,24 @@
     }
 }
 
-- (void)textViewDidChange:(UITextView *)textView
-{
-    if (textView.text.length == 0)
-    {
+- (void)textViewDidChange:(UITextView *)textView {
+    if (textView.text.length == 0) {
         self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
     }
-    else
-    {
+    else {
         self.contentPlaceholderLabel.text = @"";
     }
 }
 
--(void)textViewDidEndEditing:(UITextView *)textView
-{
-    if (textView == self.cancelOrderView.reasonTextView)
-    {
-        if ([self.cancelOrderView.reasonTextView.text isEqualToString:@" 请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""])
-        {
+-(void)textViewDidEndEditing:(UITextView *)textView {
+    if (textView == self.cancelOrderView.reasonTextView) {
+        if ([self.cancelOrderView.reasonTextView.text isEqualToString:@" 请输入拒绝原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
             self.cancelOrderView.reasonTextView.text = @" 请输入拒绝原因";
             self.cancelOrderView.reasonTextView.textColor = [UIColor lightGrayColor];
         }
     }
-    else if (textView == self.drawbackStateTextView)
-    {
-        if (textView.text.length == 0)
-        {
+    else if (textView == self.drawbackStateTextView) {
+        if (textView.text.length == 0) {
             self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
         }
     }
@@ -527,36 +495,28 @@
 
 #pragma mark - Action
 
-#pragma mark - 退款原因点击事件
-
-- (void)selectReasonButtonClick:(UIButton *)button
-{
-    for (int i = 0; i < self.selectReasonArray.count; i++)
-    {
-        if (button.tag == i + 1000)
-        {
+#pragma mark - 选择退款原因
+- (void)selectReasonButtonClick:(UIButton *)button {
+    for (int i = 0; i < self.selectReasonArray.count; i++) {
+        if (button.tag == i + 1000) {
             UIImageView *imageView = (UIImageView *)[self.drawbackReasonContentView viewWithTag:button.tag - 900];
             imageView.image = [UIImage imageNamed:self.selectImageArray[1]];
             self.lastSelect = button.tag - 1000;
         }
-        else
-        {
+        else {
             UIImageView *imageView = (UIImageView *)[self.drawbackReasonContentView viewWithTag:i + 100];
             imageView.image = [UIImage imageNamed:self.selectImageArray[0]];
         }
     }
-    if (self.lastSelect == 4)
-    {
+    if (self.lastSelect == 4) {
         self.drawbackStateView.hidden = NO;
     }
-    else
-    {
+    else {
         self.drawbackStateView.hidden = YES;
     }
 }
 
-
-#pragma mark - 拒绝、接受 按钮点击事件
+#pragma mark - 拒绝、接受退款
 - (void)refuseAndReceiveButtonClick:(UIButton *)button
 {
     if (button.tag == 1000)
@@ -575,7 +535,7 @@
     }
 }
 
-#pragma mark - 申请退款 按钮点击事件
+#pragma mark - 申请退款
 -(void)applyDrawbackButtonClick:(UIButton *)button
 {
     if (self.lastSelect != self.selectReasonArray.count - 1)

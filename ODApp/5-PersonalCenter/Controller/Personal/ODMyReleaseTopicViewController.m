@@ -1,35 +1,42 @@
 //
-//  ODOtherTopicViewController.m
+//  ODMyReleaseTopicViewController.m
 //  ODApp
 //
-//  Created by Odong-YG on 16/1/18.
-//  Copyright © 2016年 Odong-YG. All rights reserved.
+//  Created by Odong-YG on 16/3/25.
+//  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import <UMengAnalytics-NO-IDFA/MobClick.h>
-#import "ODOtherTopicViewController.h"
+#import "ODMyReleaseTopicViewController.h"
 #import "ODCommunityCell.h"
+#import "ODCommunityBbsModel.h"
+#import "ODCommunityDetailViewController.h"
+#import "ODOthersInformationController.h"
+#import "MJRefresh.h"
 
-@interface ODOtherTopicViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ODMyReleaseTopicViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic ,strong) NSMutableDictionary *userInfoDic;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic) NSInteger count;
 @property(nonatomic, copy) NSString *refresh;
+@property(nonatomic)NSInteger index;
 
 @end
 
-@implementation ODOtherTopicViewController
+@implementation ODMyReleaseTopicViewController
 
 #pragma mark - lazyload
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64)];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-50)];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor backgroundColor];
+        UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 4)];
+        view.backgroundColor = [UIColor backgroundColor];
+        _tableView.tableHeaderView = view;
         [_tableView registerNib:[UINib nibWithNibName:@"ODCommunityCell" bundle:nil] forCellReuseIdentifier:@"cellId"];
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
         _tableView.rowHeight = UITableViewAutomaticDimension;
@@ -55,12 +62,11 @@
     return _dataArray;
 }
 
-#pragma mark - lifeCycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.count = 1;
-    self.navigationItem.title = @"他发表的话题";
     [self requestData];
     __weakSelf
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -74,18 +80,28 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    if ([self.refresh isEqualToString:@"delSuccess"]) {
+        [self.dataArray removeObjectAtIndex:self.index];
+        [self.tableView reloadData];
+    }
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    self.refresh = @"";
     [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 #pragma mark - 请求数据
 -(void)requestData{
     __weakSelf
-    NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",(long)self.count],@"open_id":self.open_id,@"call_array":@"1"};
+    NSDictionary *parameter = @{@"type":@"1",@"page":[NSString stringWithFormat:@"%ld",(long)self.count],@"call_array":@"1"};
     [ODHttpTool getWithURL:ODUrlBbsList parameters:parameter modelClass:[ODCommunityBbsModel class] success:^(id model) {
         if (weakSelf.count == 1) {
             [weakSelf.dataArray removeAllObjects];
@@ -101,19 +117,18 @@
             [weakSelf.userInfoDic setObject:userModel forKey:userKey];
         }
         [weakSelf.tableView reloadData];
-        [weakSelf.tableView.mj_header endRefreshing];
         [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[[model result] bbs_list]];
         if (weakSelf.dataArray.count == 0) {
-            [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无话题"];
+            [weakSelf.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无话题"];
         }else {
-            [self.noResultabel hidden];
+            [weakSelf.noResultabel hidden];
         }
     } failure:^(NSError *error) {
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView.mj_footer endRefreshing];
-        
     }];
 }
+
 
 #pragma mark - 加载更多
 -(void)loadMoreData{
@@ -132,6 +147,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
     [cell showDataWithModel:model dict:self.userInfoDic index:indexPath];
     return cell;
@@ -140,10 +156,16 @@
 #pragma mark - UITableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc] init];
+    __weakSelf
+    detailController.myBlock = ^(NSString *refresh){
+        weakSelf.refresh = refresh;
+    };
+    self.index = indexPath.row;
     ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
     detailController.bbs_id = [NSString stringWithFormat:@"%d", model.id];
     [self.navigationController pushViewController:detailController animated:YES];
 }
+
 
 
 

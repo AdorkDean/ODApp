@@ -8,11 +8,22 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCommunityKeyWordSearchViewController.h"
+#import "ODCommunityCell.h"
+#import "ODCommunityBbsModel.h"
+#import "ODCommunityDetailViewController.h"
+#import "ODCommunityShowPicViewController.h"
+#import "MJRefresh.h"
 
+@interface ODCommunityKeyWordSearchViewController () <UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>
 
-#define kCommunityCellId @"ODCommunityCollectionCell"
-
-@interface ODCommunityKeyWordSearchViewController () 
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic ,strong) NSMutableDictionary *userInfoDic;
+@property(nonatomic, strong) NSMutableArray *userArray;
+@property(nonatomic, strong) UISearchBar *searchBar;
+@property(nonatomic) NSInteger count;
+@property(nonatomic, copy) NSString *keyText;
+@property(nonatomic, strong) UILabel *noReusltLabel;
 
 @end
 
@@ -31,20 +42,20 @@
     return _searchBar;
 }
 
--(UICollectionView *)collectionView{
-    if (!_collectionView) {
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc]init];
-        flowLayout.minimumInteritemSpacing = 5;
-        flowLayout.minimumLineSpacing = 5;
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,46, kScreenSize.width, kScreenSize.height-110) collectionViewLayout:flowLayout];
-        _collectionView.dataSource = self;
-        _collectionView.delegate = self;
-        _collectionView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
-        [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
-        [self.view addSubview:_collectionView];
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 46, kScreenSize.width, kScreenSize.height-110)];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.backgroundColor = [UIColor backgroundColor];
+        [_tableView registerNib:[UINib nibWithNibName:@"ODCommunityCell" bundle:nil] forCellReuseIdentifier:@"cellId"];
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.estimatedRowHeight = 300;;
+        [self.view addSubview:_tableView];
     }
-    return _collectionView;
+    return _tableView;
 }
 
 -(NSMutableDictionary *)userInfoDic{
@@ -68,14 +79,14 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self searchBar];
     __weakSelf
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         if (weakSelf.searchBar.text.length > 0) {
             [weakSelf requestData];
         } else {
-            [weakSelf.collectionView.mj_header endRefreshing];
+            [weakSelf.tableView.mj_header endRefreshing];
         }
     }];
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf loadMoreData];
     }];
     self.navigationItem.title = @"欧动社区";
@@ -102,13 +113,15 @@
             ODCommunityBbsUsersModel *userModel = [ODCommunityBbsUsersModel mj_objectWithKeyValues:users[key]];
             [weakSelf.userInfoDic setObject:userModel forKey:userKey];
         }
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf.collectionView.mj_footer endRefreshing];
-        [weakSelf.collectionView reloadData];
+        [weakSelf.tableView reloadData];
+        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
+        
     } failure:^(NSError *error) {
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf.collectionView.mj_footer endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
     }];
+
 }
 
 - (void)loadMoreData {
@@ -116,72 +129,34 @@
         self.count++;
         [self requestData];
     } else {
-        [self.collectionView.mj_footer endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     }
 }
 
-#pragma mark - UICollectionViewDelegate
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+#pragma mark - UITableViewDataSource
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommunityCellId forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
-    cell.model = self.dataArray[indexPath.row];
-    NSString *userId = [NSString stringWithFormat:@"%d",cell.model.user_id];
-    [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.userInfoDic[userId]avatar_url]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
-    [cell.headButton addTarget:self action:@selector(othersInformationClick:) forControlEvents:UIControlEventTouchUpInside];
-    cell.nickLabel.text = [self.userInfoDic[userId]nick];
-    cell.signLabel.text = [self.userInfoDic[userId]sign];
-    
-    CGFloat width=kScreenSize.width>320?90:70;
-    if (cell.model.imgs.count) {
-        for (id vc in cell.picView.subviews) {
-            [vc removeFromSuperview];
-        }
-        for (NSInteger i = 0; i < cell.model.imgs.count; i++) {
-            UIButton *imageButton = [[UIButton alloc] init];
-            if (cell.model.imgs.count == 4) {
-                imageButton.frame = CGRectMake((width + 5) * (i % 2), (width + 5) * (i / 2), width, width);
-                cell.PicConstraintHeight.constant = 2*width+5;
-            }else{
-                imageButton.frame = CGRectMake((width + 5) * (i % 3), (width + 5) * (i / 3), width, width);
-                cell.PicConstraintHeight.constant = width+(width+5)*(cell.model.imgs.count/3);
-            }
-            [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:cell.model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL){
-                if (error) {
-                    [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
-                }
-            }];
-            [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-            imageButton.tag = 10 * indexPath.row + i;
-            [cell.picView addSubview:imageButton];
-        }
-    }else{
-        for (id vc in cell.picView.subviews) {
-            [vc removeFromSuperview];
-        }
-        cell.PicConstraintHeight.constant = 0.5;
-    }
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
+    ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
+    [cell showDataWithModel:model dict:self.userInfoDic index:indexPath];
     return cell;
 }
 
-#pragma mark - UICollectionViewDelegate
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(kScreenSize.width, [self returnHight:self.dataArray[indexPath.row]]);
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ODCommunityDetailViewController *detailController = [[ODCommunityDetailViewController alloc] init];
     ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
     detailController.bbs_id = [NSString stringWithFormat:@"%d", model.id];
     [self.navigationController pushViewController:detailController animated:YES];
 }
+
 
 #pragma mark - UISearchBarDelegate
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
@@ -201,36 +176,15 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
     [self requestData];
-    [self.collectionView.mj_header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
-
-//动态计算cell的高度
-- (CGFloat)returnHight:(ODCommunityBbsListModel *)model {
-    CGFloat width = kScreenSize.width > 320 ? 90 : 70;
-    NSString *content = model.content;
-    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:10.5]};
-    CGSize size = [content boundingRectWithSize:CGSizeMake(kScreenSize.width-20, 30) options:(NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine) attributes:dict context:nil].size;
-    CGFloat baseHeight = size.height + 93;
-    if (model.imgs.count == 0) {
-        return baseHeight+0.5;
-    } else if (model.imgs.count > 0 && model.imgs.count < 4) {
-        return baseHeight + width;
-    } else if (model.imgs.count >= 4 && model.imgs.count < 7) {
-        return baseHeight + 2 * width + 5;
-    } else if (model.imgs.count >= 7 && model.imgs.count < 9) {
-        return baseHeight + 3 * width + 10;
-    } else {
-        return baseHeight + 3 * width + 10;
-    }
-}
-
        
 #pragma mark - action
 - (void)confirmButtonClick {
    [self.searchBar resignFirstResponder];
    if (self.searchBar.text.length > 0) {
        [self requestData];
-       [self.collectionView.mj_header beginRefreshing];
+       [self.tableView.mj_header beginRefreshing];
    } else {
        [ODProgressHUD showInfoWithStatus:@"请输入搜索内容"];
    }
@@ -240,27 +194,5 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)imageButtonClick:(UIButton *)button {
-    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *) button.superview.superview.superview;
-    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-    ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
-    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc] init];
-    picController.photos = model.imgs;
-    picController.selectedIndex = button.tag - 10 * indexPath.row;
-    [self presentViewController:picController animated:YES completion:nil];
-}
-
-- (void)othersInformationClick:(UIButton *)button {
-    ODCommunityCollectionCell *cell = (ODCommunityCollectionCell *)button.superview.superview;
-    NSIndexPath *indexPath = [self.collectionView indexPathForCell:cell];
-    ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
-    NSString *userId = [NSString stringWithFormat:@"%d",model.user_id];
-    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
-    vc.open_id = [self.userInfoDic[userId]open_id];
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:[self.userInfoDic[userId]open_id]]) {
-    }else{
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-}
 
 @end

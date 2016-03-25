@@ -23,6 +23,7 @@
  *  是否刷新
  */
 @property(nonatomic, assign) BOOL isRefresh;
+
 /**
  *  标题
  */

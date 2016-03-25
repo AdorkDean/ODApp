@@ -86,19 +86,6 @@ NSString * const ODNotificationOrderListRefresh = @"ODNotificationOrderListRefre
 /**  点击收藏的通知 */
 NSString * const ODNotificationloveSkill = @"ODNotificationloveSkill";
 
-/** 已购买二级页面通知 */
-NSString * const ODNotificationMyOrderSecondRefresh = @"ODNotificationMyOrderSecondRefresh";
-/** 已购买三级页面通知 */
-NSString * const ODNotificationMyOrderThirdRefresh = @"ODNotificationMyOrderThirdRefresh";
-/** 已卖出二级页面通知 */
-NSString * const ODNotificationSellOrderSecondRefresh = @"ODNotificationSellOrderSecondRefresh";
-/** 已购买三级页面通知 */
-NSString * const ODNotificationSellOrderThirdRefresh = @"ODNotificationSellOrderThirdRefresh";
-
-
-
-
-
 /** 刷新任务发布及回复*/
 NSString * const ODNotificationRefreshTask =  @"ODNotificationRefreshTask";
 
