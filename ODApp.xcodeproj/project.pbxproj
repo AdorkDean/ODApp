@@ -292,6 +292,10 @@
 		B84DCFA51C9AB71400EBC599 /* ODMyReleaseTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84DCFA41C9AB71400EBC599 /* ODMyReleaseTaskViewController.m */; };
 		B84DCFA81C9AB72A00EBC599 /* ODMyAcceptTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84DCFA71C9AB72A00EBC599 /* ODMyAcceptTaskViewController.m */; };
 		B852161B1C97FB0E0003D102 /* ODHomeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B852161A1C97FB0E0003D102 /* ODHomeButton.m */; };
+		B853645E1CA510FA005E312B /* ODCommunityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B853645C1CA510FA005E312B /* ODCommunityCell.m */; };
+		B853645F1CA510FA005E312B /* ODCommunityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B853645D1CA510FA005E312B /* ODCommunityCell.xib */; };
+		B85364621CA51FA3005E312B /* ODMyReleaseTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85364611CA51FA3005E312B /* ODMyReleaseTopicViewController.m */; };
+		B85364681CA52008005E312B /* ODMyReplyTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85364671CA52008005E312B /* ODMyReplyTopicViewController.m */; };
 		B86588281C993E44002ECB0C /* ODMyTaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B86588261C993E44002ECB0C /* ODMyTaskCell.m */; };
 		B86588291C993E44002ECB0C /* ODMyTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B86588271C993E44002ECB0C /* ODMyTaskCell.xib */; };
 		B865882D1C9953AA002ECB0C /* ODMyTaskViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B865882B1C9953AA002ECB0C /* ODMyTaskViolationsCell.m */; };
@@ -859,6 +863,13 @@
 		B84DCFA71C9AB72A00EBC599 /* ODMyAcceptTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyAcceptTaskViewController.m; sourceTree = "<group>"; };
 		B85216191C97FB0E0003D102 /* ODHomeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODHomeButton.h; sourceTree = "<group>"; };
 		B852161A1C97FB0E0003D102 /* ODHomeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODHomeButton.m; sourceTree = "<group>"; };
+		B853645B1CA510FA005E312B /* ODCommunityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityCell.h; sourceTree = "<group>"; };
+		B853645C1CA510FA005E312B /* ODCommunityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityCell.m; sourceTree = "<group>"; };
+		B853645D1CA510FA005E312B /* ODCommunityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODCommunityCell.xib; sourceTree = "<group>"; };
+		B85364601CA51FA3005E312B /* ODMyReleaseTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyReleaseTopicViewController.h; sourceTree = "<group>"; };
+		B85364611CA51FA3005E312B /* ODMyReleaseTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyReleaseTopicViewController.m; sourceTree = "<group>"; };
+		B85364661CA52008005E312B /* ODMyReplyTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyReplyTopicViewController.h; sourceTree = "<group>"; };
+		B85364671CA52008005E312B /* ODMyReplyTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyReplyTopicViewController.m; sourceTree = "<group>"; };
 		B86588251C993E44002ECB0C /* ODMyTaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyTaskCell.h; sourceTree = "<group>"; };
 		B86588261C993E44002ECB0C /* ODMyTaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyTaskCell.m; sourceTree = "<group>"; };
 		B86588271C993E44002ECB0C /* ODMyTaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyTaskCell.xib; sourceTree = "<group>"; };
@@ -1596,6 +1607,9 @@
 				232CB4731C9264E200340D12 /* ODCommunityDetailCell.h */,
 				232CB4741C9264E200340D12 /* ODCommunityDetailCell.m */,
 				232CB4751C9264E200340D12 /* ODCommunityDetailCell.xib */,
+				B853645B1CA510FA005E312B /* ODCommunityCell.h */,
+				B853645C1CA510FA005E312B /* ODCommunityCell.m */,
+				B853645D1CA510FA005E312B /* ODCommunityCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1651,6 +1665,10 @@
 				B84DCFA71C9AB72A00EBC599 /* ODMyAcceptTaskViewController.m */,
 				232CB48A1C9264E200340D12 /* ODMyTopicController.h */,
 				232CB48B1C9264E200340D12 /* ODMyTopicController.m */,
+				B85364601CA51FA3005E312B /* ODMyReleaseTopicViewController.h */,
+				B85364611CA51FA3005E312B /* ODMyReleaseTopicViewController.m */,
+				B85364661CA52008005E312B /* ODMyReplyTopicViewController.h */,
+				B85364671CA52008005E312B /* ODMyReplyTopicViewController.m */,
 				232CB48C1C9264E200340D12 /* ODOperationController.h */,
 				232CB48D1C9264E200340D12 /* ODOperationController.m */,
 				232CB4901C9264E200340D12 /* ODOtherTaskController.h */,
@@ -2234,6 +2252,7 @@
 				232CB6671C9264E200340D12 /* ODPaySuccessView.xib in Resources */,
 				232CB5F81C9264E200340D12 /* ODCommunityCollectionCell.xib in Resources */,
 				232CB6651C9264E200340D12 /* ODBalanceView.xib in Resources */,
+				B853645F1CA510FA005E312B /* ODCommunityCell.xib in Resources */,
 				232CB5B31C9264E200340D12 /* ODTitleLabelView.xib in Resources */,
 				ED5327321C9A527C00BB45B1 /* ODEvaluationView.xib in Resources */,
 				232CB6211C9264E200340D12 /* ODInformationView.xib in Resources */,
@@ -2495,6 +2514,7 @@
 				232CB59C1C9264E200340D12 /* ODChoseCenterController.m in Sources */,
 				B84DCFA81C9AB72A00EBC599 /* ODMyAcceptTaskViewController.m in Sources */,
 				232CB5D51C9264E200340D12 /* ODBazaarExchangeSkillModel.m in Sources */,
+				B853645E1CA510FA005E312B /* ODCommunityCell.m in Sources */,
 				232CB56C1C9264E200340D12 /* IQTextView.m in Sources */,
 				232CB5851C9264E200340D12 /* ODClassMethod.m in Sources */,
 				232CB6451C9264E200340D12 /* ODWithdrawalController.m in Sources */,
@@ -2519,6 +2539,7 @@
 				232CB5621C9264E200340D12 /* main.m in Sources */,
 				232CB5EE1C9264E200340D12 /* ODCommumityViewController.m in Sources */,
 				232CB5FB1C9264E200340D12 /* ODPersonalCenterViewController.m in Sources */,
+				B85364621CA51FA3005E312B /* ODMyReleaseTopicViewController.m in Sources */,
 				232CB5EF1C9264E200340D12 /* ODCommunityDetailReplyViewController.m in Sources */,
 				232CB6411C9264E200340D12 /* ODThirdOrderController.m in Sources */,
 				232CB5DA1C9264E200340D12 /* ODAddAddressView.m in Sources */,
@@ -2541,6 +2562,7 @@
 				232CB5571C9264E200340D12 /* NSURL+ODExtension.m in Sources */,
 				232CB5E41C9264E200340D12 /* ODCollectionCell.m in Sources */,
 				232CB64E1C9264E200340D12 /* DataButton.m in Sources */,
+				B85364681CA52008005E312B /* ODMyReplyTopicViewController.m in Sources */,
 				232CB6471C9264E200340D12 /* ODBalanceModel.m in Sources */,
 				ED5327351C9A9B7D00BB45B1 /* ODCenterDetailView.m in Sources */,
 				232CB5601C9264E200340D12 /* ODTabBarController.m in Sources */,

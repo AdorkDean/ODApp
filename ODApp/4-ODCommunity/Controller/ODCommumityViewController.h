@@ -18,9 +18,8 @@
 #import "odbarbutton.h"
 #import "MJRefresh.h"
 
-@interface ODCommumityViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate>
+@interface ODCommumityViewController : ODBaseViewController
 
-@property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic ,strong) NSMutableDictionary *userInfoDic;
 @property(nonatomic, strong) ODBarButton *button;
