@@ -11,9 +11,6 @@
 
 @interface ODPublicWebViewController ()<UIWebViewDelegate>
 
-/** 网页视图 */
-@property (nonatomic,strong) UIWebView *webView;
-
 @end
 
 @implementation ODPublicWebViewController
@@ -70,20 +67,6 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [ODProgressHUD dismiss];
-    
-    NSString* jsCode = [NSString stringWithFormat:@"buyNow('%@')",self.webUrl];
-    
-    //调用html页面的js方法
-    [webView stringByEvaluatingJavaScriptFromString:jsCode];
 }
-
--(BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
-    NSLog(@"123456");
-    return YES;
-  
-}
-
-
-
 
 @end
