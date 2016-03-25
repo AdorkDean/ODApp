@@ -9,6 +9,23 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODMyOrderDetailController.h"
 #import "ODUserInformation.h"
+
+// label 高度
+static CGFloat const labelHeight = 30;
+// view 距离左边的距离
+static CGFloat const viewLeftMargin = 4;
+// view 圆角大小
+static CGFloat const viewCornerRadius = 5;
+// 边框宽度
+static CGFloat const viewBorderWidth = 0.5;
+// 字体大小
+static CGFloat const ContentFontSize = 12.5;
+static CGFloat const titleFontSize = 11.5;
+// 距离上边控件的距离
+static CGFloat const labelUpMargin = 14;
+// 距离下边控件的距离
+static CGFloat const labelDownMargin = 5;
+
 @interface ODMyOrderDetailController ()
 
 @property(nonatomic, strong) ODMyOrderDetailModel *model;
@@ -32,7 +49,12 @@
     [super viewDidLoad];
     
     self.devicesArray = [[NSMutableArray alloc] init];
-    [self navigationInit];
+    self.navigationItem.title = @"预约详情";
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
+    if (self.isOther == NO && ![self.status_str isEqualToString:@"已取消"]) {
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelOrderButtonClick:) color:nil highColor:nil title:@"取消预约"];
+    }
     [self getOrderDetailRequest];
 }
 
@@ -46,16 +68,6 @@
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)navigationInit {
-    self.navigationItem.title = @"预约详情";
-    
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
-    if (self.isOther == NO && ![self.status_str isEqualToString:@"已取消"])
-    {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelOrderButtonClick:) color:nil highColor:nil title:@"取消预约"];
-    }
-}
-
 #pragma mark - 加载数据请求
 - (void)getOrderDetailRequest {
     NSDictionary *parameter = @{@"order_id" : [NSString stringWithFormat:@"%@", self.order_id],
@@ -67,7 +79,7 @@
         for (ODMyOrderDetailDevicesModel *devices in [[model result] devices]) {
             [weakSelf.devicesArray addObject:devices.name];
         }
-        [weakSelf createOrderView];
+        [weakSelf createScrollView];
     }
     failure:^(NSError *error) {
         
@@ -75,21 +87,9 @@
 }
 
 #pragma mark - Create UIScrollView
-- (void)createOrderView {
+- (void)createScrollView {
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight)];
     self.scrollView.backgroundColor = [UIColor backgroundColor];
-    
-    // label 高度
-    float labelHeight = 30;
-    // view 距离左边的距离
-    float viewLeftMargin = 4;
-    // view 圆角大小
-    float viewCornerRadius = 5;
-    // 边框宽度
-    float viewBorderWidth = 0.5;
-    // 字体大小
-    float ContentFontSize = 12.5;
-    float titleFontSize = 11.5;
     
 #pragma mark - 预约时间
     UIView *timeView = [[UIView alloc] initWithFrame:CGRectMake(viewLeftMargin, viewLeftMargin, KScreenWidth - viewLeftMargin * 2, labelHeight)];
@@ -120,11 +120,6 @@
     [self.scrollView addSubview:experienceCenterLabel];
     
 #pragma mark - 中心设备
-    // 距离上边控件的距离
-    float labelUpMargin = 14;
-    // 距离下边控件的距离
-    float labelDownMargin = 5;
-    
     UILabel *deviceLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(experienceCenterLabel.frame) + labelUpMargin, kScreenSize.width - ODLeftMargin * 2, 11.5)];
     deviceLabel.text = @"需要使用的中心设备";
     deviceLabel.font = [UIFont systemFontOfSize:titleFontSize];
@@ -258,7 +253,9 @@
     [self.view addSubview:self.scrollView];
 }
 
-#pragma mark - 取消预约 点击事件
+#pragma mark - Action
+
+#pragma mark - 取消预约
 - (void)cancelOrderButtonClick:(UIButton *)button {
     if ([self.checkLabel.text isEqualToString:@"后台取消"]) {
         [ODProgressHUD showInfoWithStatus:@"订单已经取消"];
@@ -294,24 +291,17 @@
     }
 }
 
-#pragma mark - Action
-
-- (void)backAction:(UIBarButtonItem *)sender {
-    NSDictionary *statusDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.status_str,@"status_str", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil userInfo:statusDict];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
 #pragma mark - 拨打电话
 - (void)phoneButtonClick:(UIButton *)button {
     [self.view callToNum:self.model.store_tel];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 返回刷新
+- (void)backAction:(UIBarButtonItem *)sender {
+    NSDictionary *statusDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.status_str,@"status_str", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil userInfo:statusDict];
+    [self.navigationController popViewControllerAnimated:YES];
 }
-
 
 
 @end

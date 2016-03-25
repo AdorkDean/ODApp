@@ -80,7 +80,7 @@
 
 @implementation ODOrderAndSellDetailController
 
-#pragma mark - 生命周期方法
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -88,21 +88,17 @@
     self.view.userInteractionEnabled = YES;
     
     self.dataArray = [[NSMutableArray alloc] init];
-    self.view.backgroundColor = [UIColor whiteColor];
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
     self.navigationItem.title = @"订单详情";
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
     
     self.evaluateStar = @"";
-    //                [self createEvaluation];
-    
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self getData];
+    [self getRequestData];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
@@ -111,7 +107,7 @@
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-#pragma mark - 懒加载
+#pragma mark - Create ScrollView
 
 - (void)createScrollView {
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, self.scrollHeight)];
@@ -168,15 +164,11 @@
             [_endIsOneButton addTarget:self action:@selector(evaluationAction:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
-    
-    
-    
     [self.view addSubview:_endIsOneButton];
 
 }
 
 #pragma mark - 底部是两个按钮
-
 - (void)createEndIsTwoButton {
     if (!self.isSellDetail) {
         ODOrderDetailModel *model = self.dataArray[0];
@@ -198,13 +190,11 @@
         self.endRightButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
 
         if ([status isEqualToString:@"1"]){
-            
             [self.endLeftButton setTitle:@"取消" forState:UIControlStateNormal];
             [self.endRightButton setTitle:@"立即支付" forState:UIControlStateNormal];
             [self.endLeftButton addTarget:self action:@selector(cancelOrder:) forControlEvents:UIControlEventTouchUpInside];
             [self.endRightButton addTarget:self action:@selector(payOrder:) forControlEvents:UIControlEventTouchUpInside];
         }
-        
         else if ([status isEqualToString:@"4"]) {
             [self.endLeftButton setTitle:@"申请退款" forState:UIControlStateNormal];
             if ([swap_type isEqualToString:@"2"]) {
@@ -347,7 +337,6 @@
 
     dealTimeY = CGRectGetMaxY(self.buyerView.frame);
     [self.scrollView addSubview:self.buyerView];
-    
 }
 
 #pragma mark - 订单取消原因
@@ -361,8 +350,6 @@
         self.orderCancelReasonView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.buyerView.frame) + 6, KScreenWidth, labelHeight + reasonHeight + 0.5)];
         self.orderCancelReasonView.backgroundColor = [UIColor whiteColor];
         [self.scrollView addSubview:self.orderCancelReasonView];
-        
-//        self.scrollView 
         
         UILabel *orderCancelReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - ODLeftMargin * 2, labelHeight)];
         orderCancelReasonLabel.text = @"订单取消原因";
@@ -444,8 +431,8 @@
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.evaluationView];
 }
 
-#pragma mark - 获取数据
-- (void)getData {
+#pragma mark - Get Data
+- (void)getRequestData {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"order_id"] = self.order_id;
@@ -467,9 +454,7 @@
              NSNotification *notification = [NSNotification notificationWithName:ODNotificationMyOrderSecondRefresh object:nil userInfo:dic];
              [[NSNotificationCenter defaultCenter] postNotification:notification];
          }
-         
          if (([self.model.order_status isEqualToString:@"1"] || [self.model.order_status isEqualToString:@"4"])) {
-             
              if (self.isSellDetail) {
                  self.scrollHeight = KControllerHeight - ODNavigationHeight;
              }
@@ -477,7 +462,6 @@
                  self.scrollHeight = KControllerHeight - ODNavigationHeight - 50;
              }
              [weakSelf createEndIsTwoButton];
-
          }
          else if ([self.model.order_status isEqualToString:@"-2"] && self.isSellDetail){
              self.scrollHeight = KControllerHeight - ODNavigationHeight - 50;
@@ -495,7 +479,6 @@
          else {
              self.scrollHeight = KControllerHeight - ODNavigationHeight;
          }
-         
          [weakSelf createScrollView];
      } failure:^(NSError *error) {
          [ODProgressHUD showInfoWithStatus:@"网络异常"];
@@ -542,10 +525,9 @@
     params[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
     __weakSelf
     // 发送请求
-    [ODHttpTool getWithURL:ODUrlSwapConfirmDelivery parameters:params modelClass:[NSObject class] success:^(id model)
-     {
+    [ODHttpTool getWithURL:ODUrlSwapConfirmDelivery parameters:params modelClass:[NSObject class] success:^(id model) {
          [ODProgressHUD showInfoWithStatus:@"操作成功"];
-         [weakSelf getData];
+         [weakSelf getRequestData];
      } failure:^(NSError *error) {
          
      }];
@@ -581,18 +563,11 @@
         [ODHttpTool getWithURL:ODUrlSwapOrderCancel parameters:params modelClass:[NSObject class] success:^(id model) {
             [weakSelf.cancelOrderView removeFromSuperview];
             [ODProgressHUD showInfoWithStatus:@"取消订单成功"];
-            [weakSelf getData];
+            [weakSelf getRequestData];
         } failure:^(NSError *error) {
             [ODProgressHUD showInfoWithStatus:@"网络异常"];
         }];
     }
-}
-
-#pragma mark - 返回刷新
-- (void)backAction:(UIBarButtonItem *)sender {
-    NSDictionary *statusDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.model.order_status,@"order_status", nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationOrderListRefresh object:nil userInfo:statusDict];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 查看原因
@@ -636,7 +611,7 @@
      }];
 }
 
-
+#pragma mark - 评价
 - (void)determineButton:(UIButton *)sender {
     if ([self.evaluationView.contentTextView.text isEqualToString:@""] || [self.evaluationView.contentTextView.text isEqualToString:@"请输入评价内容"]) {
         self.evaluateContent = @"";
@@ -654,7 +629,7 @@
     [ODHttpTool getWithURL:ODUrlSwapOrderReason parameters:params modelClass:[NSObject class] success:^(id model) {
          [weakSelf.evaluationView removeFromSuperview];
          [ODProgressHUD showInfoWithStatus:@"评价成功"];
-         [weakSelf getData];
+         [weakSelf getRequestData];
      } failure:^(NSError *error) {
          
      }];
@@ -679,8 +654,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - 取消 或 支付订单
-
+#pragma mark - 取消订单
 - (void)cancelOrder:(UIButton *)sender {
     self.cancelOrderView = [ODCancelOrderView getView];
     self.cancelOrderView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
@@ -690,6 +664,7 @@
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.cancelOrderView];
 }
 
+#pragma mark - 支付订单
 - (void)payOrder:(UIButton *)sender {
     ODPayController *vc = [[ODPayController alloc] init];
     ODOrderDetailModel *model = self.dataArray[0];
@@ -706,6 +681,13 @@
 
 - (void)cancelView:(UIButton *)sender {
     [self.cancelOrderView removeFromSuperview];
+}
+
+#pragma mark - 返回刷新
+- (void)backAction:(UIBarButtonItem *)sender {
+    NSDictionary *statusDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.model.order_status,@"order_status", nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationOrderListRefresh object:nil userInfo:statusDict];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - 打电话

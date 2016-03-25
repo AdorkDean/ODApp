@@ -118,18 +118,17 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
      {
          if ([countNumber isEqualToString:@"1"]) {
              [weakSelf.dataArray removeAllObjects];
-         }
-         
+         }         
          NSArray *mySellDatas = [model result];
          [weakSelf.dataArray addObjectsFromArray:mySellDatas];
          
          [ODHttpTool od_endRefreshWith:weakSelf.tableView array:mySellDatas];
          
          if (weakSelf.dataArray.count == 0) {
-             [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
+             [self.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
          }
          else {
-             [self.noResultabel hidden];
+             [self.noResultLabel hidden];
          }
      } failure:^(NSError *error) {
          

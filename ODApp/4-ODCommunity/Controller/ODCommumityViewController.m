@@ -26,7 +26,7 @@
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0,0, kScreenSize.width, kScreenSize.height-64-55) collectionViewLayout:flowLayout];
         _collectionView.dataSource = self;
         _collectionView.delegate = self;
-        _collectionView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
+        _collectionView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3"];
         [self.collectionView registerNib:[UINib nibWithNibName:@"ODCommunityCollectionCell" bundle:nil] forCellWithReuseIdentifier:kCommunityCellId];
         [self.view addSubview:_collectionView];
     }
@@ -72,7 +72,7 @@
         weakSelf.bbsMark = @"全部";
         weakSelf.bbsType = 5;
         [weakSelf.collectionView.mj_header beginRefreshing];
-
+        
     }];
     
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
@@ -125,7 +125,7 @@
     
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(searchButtonClick) image:[UIImage imageNamed:@"fangdajing_icon"] highImage:nil];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(publishButtonClick) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil];
-
+    
 }
 
 #pragma mark - 拼接参数
@@ -195,7 +195,7 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODCommunityCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kCommunityCellId forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+    cell.backgroundColor = [UIColor colorWithRGBString:@"#ffffff"];
     cell.model = self.dataArray[indexPath.row];
     NSString *userId = [NSString stringWithFormat:@"%d",cell.model.user_id];
     [cell.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[self.userInfoDic[userId]avatar_url]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
@@ -215,15 +215,15 @@
                 cell.PicConstraintHeight.constant = 2*width+5;
             }else{
                 imageButton.frame = CGRectMake((width + 5) * (i % 3), (width + 5) * (i / 3), width, width);
-                 cell.PicConstraintHeight.constant = width+(width+5)*(cell.model.imgs.count/3);
+                cell.PicConstraintHeight.constant = width+(width+5)*(cell.model.imgs.count/3);
             }
             
             [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:cell.model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                if (error) {
-//                    [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
-//                } else {
-//                    [imageButton setBackgroundImage:image forState:UIControlStateNormal];
-//                }
+                //                if (error) {
+                //                    [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
+                //                } else {
+                //                    [imageButton setBackgroundImage:image forState:UIControlStateNormal];
+                //                }
                 if (!image) {
                     [imageButton setBackgroundImage:[UIImage imageNamed:@"errorplaceholderImage"] forState:UIControlStateNormal];
                 }
@@ -287,8 +287,8 @@
 -(void)titleButtonClick:(UIButton *)button
 {
     UIViewController *controller = [[UIViewController alloc]init];
-    controller.view.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
-    controller.view.layer.borderColor = [UIColor colorWithRGBString:@"#000000" alpha:1].CGColor;
+    controller.view.backgroundColor = [UIColor themeColor];
+    controller.view.layer.borderColor = [UIColor colorWithRGBString:@"#000000"].CGColor;
     controller.view.layer.borderWidth = 1;
     controller.view.layer.cornerRadius = 10;
     
@@ -297,7 +297,7 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setFrame:CGRectMake(0, 30*i, 110, 29)];
         [button setTitle:array[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRGBString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorWithRGBString:@"#000000"] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(titleViewLabelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [controller.view addSubview:button];
         UIImageView *lineImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(button.frame)+0.5, 80, 0.5)];
