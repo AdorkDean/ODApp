@@ -259,6 +259,7 @@
 		4003348F1C9B97C500973818 /* ODSettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 400334841C9B97C500973818 /* ODSettingCell.m */; };
 		402261351CA5051200E0B737 /* ODMyTakeOutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402261341CA5051200E0B737 /* ODMyTakeOutViewController.m */; };
 		4029EB351C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4029EB341C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m */; };
+		40336B351CA53B77002487F2 /* ODMyTakeOutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 40336B341CA53B77002487F2 /* ODMyTakeOutModel.m */; };
 		4045DC981C97AD60007CD2BC /* ODBazaarPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 4045DC971C97AD60007CD2BC /* ODBazaarPhoto.m */; };
 		4045DC9C1C97D349007CD2BC /* ODBazaarHelpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4045DC9A1C97D349007CD2BC /* ODBazaarHelpCell.m */; };
 		4045DC9D1C97D349007CD2BC /* ODBazaarHelpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4045DC9B1C97D349007CD2BC /* ODBazaarHelpCell.xib */; };
@@ -819,6 +820,8 @@
 		402261341CA5051200E0B737 /* ODMyTakeOutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyTakeOutViewController.m; sourceTree = "<group>"; };
 		4029EB331C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseSkillTimeModel.h; sourceTree = "<group>"; };
 		4029EB341C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseSkillTimeModel.m; sourceTree = "<group>"; };
+		40336B331CA53B77002487F2 /* ODMyTakeOutModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyTakeOutModel.h; sourceTree = "<group>"; };
+		40336B341CA53B77002487F2 /* ODMyTakeOutModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyTakeOutModel.m; sourceTree = "<group>"; };
 		4045DC961C97AD60007CD2BC /* ODBazaarPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarPhoto.h; sourceTree = "<group>"; };
 		4045DC971C97AD60007CD2BC /* ODBazaarPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarPhoto.m; sourceTree = "<group>"; };
 		4045DC991C97D349007CD2BC /* ODBazaarHelpCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarHelpCell.h; sourceTree = "<group>"; };
@@ -1280,14 +1283,14 @@
 		232CB3AA1C9264E200340D12 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				405480211CA0E5E000D85A55 /* ODTakeAwayModel.h */,
+				405480221CA0E5E000D85A55 /* ODTakeAwayModel.m */,
 				4096EDFA1CA3F337001D916C /* ODTakeOutBannerModel.h */,
 				4096EDFB1CA3F337001D916C /* ODTakeOutBannerModel.m */,
 				232CB3AB1C9264E200340D12 /* ODHomeInfoModel.h */,
 				232CB3AC1C9264E200340D12 /* ODHomeInfoModel.m */,
 				232CB3AD1C9264E200340D12 /* ODLocationModel.h */,
 				232CB3AE1C9264E200340D12 /* ODLocationModel.m */,
-				405480211CA0E5E000D85A55 /* ODTakeAwayModel.h */,
-				405480221CA0E5E000D85A55 /* ODTakeAwayModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1742,6 +1745,8 @@
 		232CB4AB1C9264E200340D12 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				40336B331CA53B77002487F2 /* ODMyTakeOutModel.h */,
+				40336B341CA53B77002487F2 /* ODMyTakeOutModel.m */,
 				232CB4AC1C9264E200340D12 /* ODApplyModel.h */,
 				232CB4AD1C9264E200340D12 /* ODApplyModel.m */,
 				232CB4AE1C9264E200340D12 /* ODBazaarModel.h */,
@@ -2420,6 +2425,7 @@
 				ED4FF44F1CA3D14D00EDE431 /* ODOrderAndSellView.m in Sources */,
 				232CB5A01C9264E200340D12 /* ODActivityDetailModel.m in Sources */,
 				232CB5D61C9264E200340D12 /* ODBazaarRequestHelpModel.m in Sources */,
+				40336B351CA53B77002487F2 /* ODMyTakeOutModel.m in Sources */,
 				232CB5A11C9264E200340D12 /* ODActivityListModel.m in Sources */,
 				4045DC981C97AD60007CD2BC /* ODBazaarPhoto.m in Sources */,
 				232CB5CF1C9264E200340D12 /* ODBazaarReleaseRewardViewController.m in Sources */,

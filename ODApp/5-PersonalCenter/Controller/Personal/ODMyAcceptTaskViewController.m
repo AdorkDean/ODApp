@@ -101,9 +101,9 @@
           [weakSelf.tableView reloadData];
          [ODHttpTool od_endRefreshWith:weakSelf.tableView array:tasksModel.tasks];
          if (weakSelf.dataArray.count == 0) {
-             [weakSelf.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无任务"];
+             [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无任务"];
          }else{
-             [weakSelf.noResultabel hidden];
+             [weakSelf.noResultLabel hidden];
          }
      } failure:^(NSError *error) {
          [weakSelf.tableView.mj_header endRefreshing];
