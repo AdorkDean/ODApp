@@ -35,33 +35,8 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
 
 @implementation ODReleaseController
 
-#pragma mark - 懒加载
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight + 6) style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor backgroundColor];
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        _tableView.rowHeight = 144;
-        _tableView.tableFooterView = [UIView new];
-        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODReleaseView class]) bundle:nil] forCellReuseIdentifier:ODReleaseViewID];
-        [self.view addSubview:_tableView];
-        
-        __weakSelf
-        _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
-            weakSelf.pageCount = 1;
-            [weakSelf createRequestData];
-        }];
-        _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^ {
-            [weakSelf loadMoreData];
-        }];
-        [self.view addSubview:_tableView];
-    }
-    return _tableView;
-}
+#pragma mark - Life Cycle
 
-#pragma mark - 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"已发布";
@@ -86,18 +61,9 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+#pragma mark - Load Data Request
 
-- (void)reloadData:(NSNotification *)text {
-    ODReleaseModel *model = self.dataArray[self.loveRow];
-    model.love_num = [NSString stringWithFormat:@"%@" , text.userInfo[@"loveNumber"]];
-    [self.dataArray replaceObjectAtIndex:self.loveRow withObject:model];
-    [self.tableView reloadData];
-}
-
-#pragma mark - 加载数据请求
+#pragma mark - 列表数据请求
 - (void)createRequestData {
     __weakSelf
     NSDictionary *parameter = @{@"page":[NSString stringWithFormat:@"%i", self.pageCount],@"my":@"1"};
@@ -125,11 +91,6 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
     }];
 }
 
-- (void)loadMoreData {
-    self.pageCount ++;
-    [self createRequestData];
-}
-
 #pragma mark - 删除技能请求
 - (void)deleteSkillRequest {
     NSDictionary *parameter = @{@"swap_id" : self.swap_id};
@@ -143,7 +104,35 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
     }];
 }
 
+#pragma mark - Create UITableView
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight + 6) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor backgroundColor];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.rowHeight = 144;
+        _tableView.tableFooterView = [UIView new];
+        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODReleaseView class]) bundle:nil] forCellReuseIdentifier:ODReleaseViewID];
+        [self.view addSubview:_tableView];
+        
+        __weakSelf
+        _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
+            weakSelf.pageCount = 1;
+            [weakSelf createRequestData];
+        }];
+        _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^ {
+            weakSelf.pageCount++;
+            [weakSelf createRequestData];
+        }];
+        [self.view addSubview:_tableView];
+    }
+    return _tableView;
+}
+
 #pragma mark - UITableViewDataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
@@ -168,7 +157,9 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
     }
 }
 
-#pragma mark - 编辑 点击事件
+#pragma mark - Action
+
+#pragma mark - 编辑
 - (void)editButtonClick:(UIButton *)button {
     ODReleaseView *cell = (ODReleaseView *)button.superview.superview;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
@@ -182,7 +173,7 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
     }
 }
 
-#pragma mark - 删除 点击事件
+#pragma mark - 删除
 - (void)deleteButtonClick:(UIButton *)button {
     __weakSelf
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除技能" message:nil preferredStyle:UIAlertControllerStyleAlert];
@@ -197,6 +188,19 @@ NSString * const ODReleaseViewID = @"ODReleaseViewID";
                       }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+#pragma mark - 返回刷新
+- (void)reloadData:(NSNotification *)text {
+    ODReleaseModel *model = self.dataArray[self.loveRow];
+    model.love_num = [NSString stringWithFormat:@"%@" , text.userInfo[@"loveNumber"]];
+    [self.dataArray replaceObjectAtIndex:self.loveRow withObject:model];
+    [self.tableView reloadData];
+}
+
+#pragma mark - Remove Notification
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

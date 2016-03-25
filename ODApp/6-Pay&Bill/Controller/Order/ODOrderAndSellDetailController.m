@@ -447,13 +447,6 @@
          [weakSelf.dataArray addObject:detailModel];
          
          self.model = weakSelf.dataArray[0];
-         ODOrderDetailModel *statusModel = weakSelf.dataArray[0];
-         NSString *orderStatue = [NSString stringWithFormat:@"%@", statusModel.order_status];
-         if (![self.orderStatus isEqualToString:orderStatue]) {
-             NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:orderStatue, @"orderStatus", nil];
-             NSNotification *notification = [NSNotification notificationWithName:ODNotificationMyOrderSecondRefresh object:nil userInfo:dic];
-             [[NSNotificationCenter defaultCenter] postNotification:notification];
-         }
          if (([self.model.order_status isEqualToString:@"1"] || [self.model.order_status isEqualToString:@"4"])) {
              if (self.isSellDetail) {
                  self.scrollHeight = KControllerHeight - ODNavigationHeight;
