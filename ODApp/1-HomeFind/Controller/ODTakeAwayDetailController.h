@@ -10,6 +10,10 @@
 #import "PontoDispatcher.h"
 
 @interface ODTakeAwayDetailController : UIViewController<PontoDispatcherCallbackDelegate>
+
 @property (strong, nonatomic) IBOutlet UIWebView *webView;
+
+@property (nonatomic, copy) NSString *product_id;
+
 @end
 

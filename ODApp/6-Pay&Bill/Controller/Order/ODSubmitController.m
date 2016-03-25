@@ -1,27 +1,22 @@
 //
-//  ODTakeAwayDetailController.m
+//  ODSubmitController.m
 //  ODApp
 //
-//  Created by Bracelet on 16/3/24.
+//  Created by Bracelet on 16/3/25.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODTakeAwayDetailController.h"
+#import "ODSubmitController.h"
 
-@interface ODTakeAwayDetailController ()
-@property (nonatomic, strong) PontoDispatcher *pontoDispatcher;
+@interface ODSubmitController ()
+
 @end
 
-@implementation ODTakeAwayDetailController
+@implementation ODSubmitController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.pontoDispatcher = [[PontoDispatcher alloc] initWithHandlerClassesPrefix:@"Ponto" andWebView:self.webView];
-    [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/order?id=%@", ODWebUrlNative, self.product_id]]]];
-
-    
-    // Do any additional setup after loading the view from its nib.
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {

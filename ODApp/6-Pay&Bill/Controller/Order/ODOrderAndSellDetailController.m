@@ -22,10 +22,10 @@
 #import "ODEvaluation.h"
 #import <MJRefresh.h>
 
+// label 统一高度
+static CGFloat labelHeight = 40;
+
 @interface ODOrderAndSellDetailController () <UITextViewDelegate>{
-    // label 统一高度
-    float labelHeight;
-    
     // dealTimeView 起始纵坐标
     float dealTimeY;
 }
@@ -67,8 +67,6 @@
 
 // 底部按钮
 @property (nonatomic, strong) UIButton *endIsOneButton;
-
-
 
 @property (nonatomic, strong) UIButton *endLeftButton;
 @property (nonatomic, strong) UIButton *endRightButton;
@@ -165,7 +163,6 @@
         }
     }
     [self.view addSubview:_endIsOneButton];
-
 }
 
 #pragma mark - 底部是两个按钮
@@ -240,9 +237,7 @@
 - (void)createBuyerInformationView {
     ODOrderDetailModel *model = self.dataArray[0];
     NSString *swap_type = [NSString stringWithFormat:@"%@", model.swap_type];
-    
-    labelHeight = 40;
-    
+
     float addressHeight = [ODHelp textHeightFromTextString:[NSString stringWithFormat:@"服务地址：%@", model.address] width:KScreenWidth - ODLeftMargin * 2 - 13.5 * 5 miniHeight:labelHeight fontSize:13.5];
     
     // 动态设置 buyerInfoamtionView 的高度
@@ -431,7 +426,7 @@
     [[[UIApplication sharedApplication] keyWindow] addSubview:self.evaluationView];
 }
 
-#pragma mark - Get Data
+#pragma mark - Load Data Request
 - (void)getRequestData {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -478,7 +473,8 @@
      }];
 }
 
-#pragma mark - UITextView 代理方法
+#pragma mark - UITextView Delegate
+
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     if (textView == self.cancelOrderView.reasonTextView) {
         if ([textView.text isEqualToString:@"请输入取消原因"]) {
@@ -493,6 +489,7 @@
         }
     }
 }
+
 - (void)textViewDidEndEditing:(UITextView *)textView {
     if (textView == self.cancelOrderView.reasonTextView) {
         if ([self.cancelOrderView.reasonTextView.text isEqualToString:@"请输入取消原因"] || [self.cancelOrderView.reasonTextView.text isEqualToString:@""]) {
@@ -628,7 +625,6 @@
      }];
 }
 
-#pragma mark - 评价
 - (void)evaluationAction:(UIButton *)sender {
     [self createEvaluation];
 }
