@@ -11,11 +11,8 @@
 #import "MJRefresh.h"
 #import "UIImageView+WebCache.h"
 #import "ODCommunityCollectionCell.h"
-//#import "ODCommunityBbsModel.h"
 #import "ODCommunityDetailViewController.h"
 #import "ODOthersInformationController.h"
-
-#import "ODNoResultLabel.h"
 
 @interface ODMyTopicController ()<UIScrollViewDelegate,UICollectionViewDataSource , UICollectionViewDelegate>
 
@@ -237,10 +234,10 @@
         
         
         if (weakSelf.FirstDataArray.count == 0) {
-            [self.noResultabel showOnSuperView:weakSelf.firstCollectionView title:@"暂无话题"];
+            [self.noResultLabel showOnSuperView:weakSelf.firstCollectionView title:@"暂无话题"];
         }
         else {
-            [self.noResultabel hidden];
+            [self.noResultLabel hidden];
         }
     } failure:^(NSError *error) {
         
@@ -281,10 +278,10 @@
         
         
         if (weakSelf.secondDataArray.count == 0) {
-            [self.noResultabel showOnSuperView:weakSelf.secondCollectionView title:@"暂无话题"];
+            [self.noResultLabel showOnSuperView:weakSelf.secondCollectionView title:@"暂无话题"];
         }
         else {
-            [self.noResultabel hidden];
+            [self.noResultLabel hidden];
         }
     } failure:^(NSError *error) {
         [weakSelf.secondCollectionView.mj_header endRefreshing];

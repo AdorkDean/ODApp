@@ -98,10 +98,10 @@
         [ODHttpTool od_endRefreshWith:weakSelf.collectionView array:[[model result] bbs_list]];
         
         if (weakSelf.dataArray.count == 0) {
-            [self.noResultabel showOnSuperView:weakSelf.collectionView title:@"暂无话题"];
+            [self.noResultLabel showOnSuperView:weakSelf.collectionView title:@"暂无话题"];
         }
         else {
-            [self.noResultabel hidden];
+            [self.noResultLabel hidden];
         }
     } failure:^(NSError *error) {
         [weakSelf.collectionView.mj_header endRefreshing];

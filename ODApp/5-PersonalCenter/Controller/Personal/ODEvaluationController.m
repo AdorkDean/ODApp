@@ -185,12 +185,11 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
         
         [ODHttpTool od_endRefreshWith:weakSelf.taskTableView array:evaluationDatas];
         
-        ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.taskDataArray.count == 0) {
-            [noResultLabel showOnSuperView:weakSelf.taskTableView title:@"暂无评价"];
+            [self.noResultLabel showOnSuperView:weakSelf.taskTableView title:@"暂无评价"];
         }
         else {
-            [noResultLabel hidden];
+            [self.noResultLabel hidden];
         }
      } failure:^(NSError *error) {
          [weakSelf.taskTableView.mj_header endRefreshing];
@@ -219,13 +218,12 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
          
          [ODHttpTool od_endRefreshWith:weakSelf.skillTableView array:evaluationDatas];
           
-         ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
          if (weakSelf.skillDataArray.count == 0) {
-             [noResultLabel showOnSuperView:weakSelf.skillTableView title:@"暂无评价"];
+             [self.noResultLabel showOnSuperView:weakSelf.skillTableView title:@"暂无评价"];
          }
          else
          {
-             [noResultLabel hidden];
+             [self.noResultLabel hidden];
          }
      } failure:^(NSError *error) {
          [weakSelf.skillTableView.mj_header endRefreshing];

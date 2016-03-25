@@ -94,10 +94,10 @@ NSString *const ODMyOrderRecordViewID = @"ODMyOrderRecordViewID";
         
         
         if (weakSelf.orderArray.count == 0) {
-            [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无预约"];
+            [self.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无预约"];
         }
         else {
-            [self.noResultabel hidden];
+            [self.noResultLabel hidden];
         }
     
     }

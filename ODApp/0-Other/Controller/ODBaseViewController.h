@@ -16,7 +16,7 @@
 
 @interface ODBaseViewController : UIViewController
 
-@property (nonatomic, strong) ODNoResultLabel *noResultabel;
+@property (nonatomic, strong) ODNoResultLabel *noResultLabel;
 
 
 @end

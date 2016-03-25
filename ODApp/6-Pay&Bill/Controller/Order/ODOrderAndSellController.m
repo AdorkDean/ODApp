@@ -125,10 +125,10 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
          [ODHttpTool od_endRefreshWith:weakSelf.tableView array:mySellDatas];
          
          if (weakSelf.dataArray.count == 0) {
-             [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
+             [self.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
          }
          else {
-             [self.noResultabel hidden];
+             [self.noResultLabel hidden];
          }
      } failure:^(NSError *error) {
          
