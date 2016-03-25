@@ -26,24 +26,18 @@
 @property (nonatomic, weak) IBOutlet UIImageView *genderImageView;
 /** 配图 */
 @property (nonatomic, weak) IBOutlet ODBazaarPhotosView *photosView;
-
 /** 配图的高度 */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *photosViewConstraintH;
-
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *photosViewConstraintH;
 /** 配图的宽度 */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *photosViewConstraintW;
-
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *photosViewConstraintW;
 /** 正文的高度 */
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *starConstraintH;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *starConstraintH;
 
 @end
 
 @implementation ODBazaarExchangeSkillCell
 
 #pragma mark - 初始化方法
-/**
- *  初始化控件
- */
 - (void)awakeFromNib
 {
     // 取消选中样式
@@ -106,7 +100,6 @@
                                                          maxSize:CGSizeMake(KScreenWidth - 90, 30)];
     self.starConstraintH.constant = 12 + contentSize.height + 15;
 }
-
 
 /**
  *  设置cell间隙
