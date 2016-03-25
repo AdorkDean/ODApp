@@ -82,7 +82,8 @@
     }];
     
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        [weakSelf loadMoreData];
+        self.count++;
+        [weakSelf joiningTogetherParmeters];
     }];
     [self.tableView.mj_header beginRefreshing];
 }
@@ -137,13 +138,33 @@
     NSDictionary *parameter;
     if ([self.bbsMark isEqualToString:@""]||[self.bbsMark isEqualToString:@"社区"]) {
         [self.button setTitle:@"社区" forState:UIControlStateNormal];
-        parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":@"", @"call_array":@"1"};
-    }else if ([self.bbsMark isEqualToString:@"全部"]){
+        parameter = @{
+                      @"type":[NSString stringWithFormat:@"%i", self.bbsType],
+                      @"page":[NSString stringWithFormat:@"%ld",self.count],
+                      @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID],
+                      @"search":@"",
+                      @"call_array":@"1"
+                      };
+    }
+    else if ([self.bbsMark isEqualToString:@"全部"]){
         [self.button setTitle:@"全部" forState:UIControlStateNormal];
-        parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":@"", @"call_array":@"1"};
-    }else{
+        parameter = @{
+                      @"type":[NSString stringWithFormat:@"%i", self.bbsType],
+                      @"page":[NSString stringWithFormat:@"%ld",self.count],
+                      @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID],
+                      @"search":@"",
+                      @"call_array":@"1"
+                      };
+    }
+    else{
         [self.button setTitle:self.bbsMark forState:UIControlStateNormal];
-        parameter = @{@"type":[NSString stringWithFormat:@"%i", self.bbsType], @"page":[NSString stringWithFormat:@"%ld",self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID], @"search":self.bbsMark, @"call_array":@"1"};
+        parameter = @{
+                      @"type":[NSString stringWithFormat:@"%i", self.bbsType],
+                      @"page":[NSString stringWithFormat:@"%ld",self.count],
+                      @"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID],
+                      @"search":self.bbsMark,
+                      @"call_array":@"1"
+                      };
     }
     [self downLoadDataWithUrl:ODUrlBbsList paramater:parameter];
 }
@@ -166,20 +187,16 @@
             ODCommunityBbsUsersModel *userModel = [ODCommunityBbsUsersModel mj_objectWithKeyValues:users[key]];
             [weakSelf.userInfoDic setObject:userModel forKey:userKey];
         }
-        [weakSelf.tableView reloadData];
-        [weakSelf.tableView.mj_header endRefreshing];
-        [weakSelf.tableView.mj_footer endRefreshing];
+//        [weakSelf.tableView reloadData];
+//        [weakSelf.tableView.mj_header endRefreshing];
+//        [weakSelf.tableView.mj_footer endRefreshing];
+        
+        [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[[model result] bbs_list]];
         
     } failure:^(NSError *error) {
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView.mj_footer endRefreshing];
     }];
-}
-
--(void)loadMoreData
-{
-    self.count++;
-    [self joiningTogetherParmeters];
 }
 
 #pragma mark - UITableViewDataSource
@@ -224,7 +241,7 @@
     controller.view.layer.borderWidth = 1;
     controller.view.layer.cornerRadius = 10;
     
-    NSArray *array = @[@"情感",@"搞笑",@"影视",@"二次元",@"生活",@"明星",@"爱美",@"宠物",@"全部"];
+    NSArray *array = @[ @"情感", @"搞笑", @"影视", @"二次元", @"生活", @"明星", @"爱美", @"宠物", @"全部" ];
     for (NSInteger i = 0 ; i < array.count ; i++) {
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setFrame:CGRectMake(0, 30*i, 110, 29)];

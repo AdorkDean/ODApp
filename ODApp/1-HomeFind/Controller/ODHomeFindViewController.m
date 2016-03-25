@@ -17,8 +17,6 @@
 
 #import "ODTakeAwayDetailController.h"
 
-#import "ODTakeAwayDetailController.h"
-
 static NSString * const exchangeCellId = @"exchangeCell";
 
 @interface ODHomeFindViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -477,19 +475,9 @@ updatingLocation:(BOOL)updatingLocation {
             break;
         case 7:
         {
-//            ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
-//            vc.navigationTitle = @"敬请期待";
-//            vc.webUrl = ODWebUrlExpect;
-            
-            
-//            ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
-            
-            ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
-            
-//            vc.navigationTitle = @"饮料";
-//            NSString *order_id = @"1";
-//            vc.webUrl = [NSString stringWithFormat:@"%@/order?id=%@", ODWebUrlNative,order_id];
-//            vc.isShowProgress = YES;
+            ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
+            vc.navigationTitle = @"敬请期待";
+            vc.webUrl = ODWebUrlExpect;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;
