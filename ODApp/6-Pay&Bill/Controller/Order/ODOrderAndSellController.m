@@ -123,6 +123,11 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
          NSArray *mySellDatas = [model result];
          [weakSelf.dataArray addObjectsFromArray:mySellDatas];
          
+<<<<<<< HEAD
+         ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
+         
+=======
+>>>>>>> 2dc44ef4af08feccf0ae27e8f2f0cb66ae15c935
          [ODHttpTool od_endRefreshWith:weakSelf.tableView array:mySellDatas];
          
          if (weakSelf.dataArray.count == 0) {

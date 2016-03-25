@@ -18,9 +18,6 @@
 
 @end
 
-/** 动画持续时间 */
-static NSTimeInterval const animateDuration = 0.15;
-
 /** 下划线高度 */
 static CGFloat const lineHeight = 1;
 
