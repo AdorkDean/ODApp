@@ -18,7 +18,7 @@ CGFloat const ODBazaaeExchangeCellMargin = 6;
 NSTimeInterval const getVerificationCodeTime = 60;
 
 /** 动画持续时间 */
-NSTimeInterval const animateDuration = 0.15;
+NSTimeInterval const kAnimateDuration = 0.15;
 
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */

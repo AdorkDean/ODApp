@@ -18,7 +18,6 @@
 @property(nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property(nonatomic, weak) IBOutlet UILabel *nameLabel;
 @property(nonatomic, weak) IBOutlet UILabel *timeLabel;
-@property(nonatomic, weak) IBOutlet UILabel *statusLabel;
 /** 正文 */
 @property(nonatomic, weak) IBOutlet UILabel *contentLabel;
 
@@ -36,10 +35,6 @@
     self.contentLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
     self.nameLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
     self.timeLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
-    self.statusLabel.layer.masksToBounds = YES;
-    self.statusLabel.layer.cornerRadius = 5;
-    self.statusLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
-    self.statusLabel.backgroundColor = [UIColor colorWithRGBString:@"#ffd701" alpha:1];
     // 限制正文最大宽度
     self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 90;
 }
@@ -71,7 +66,6 @@
     NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:time];
     [noteStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:10] range:NSMakeRange(0, 5)];
     self.timeLabel.attributedText = noteStr;
-    self.statusLabel.text = @"任务开始";
 }
 
 /**
