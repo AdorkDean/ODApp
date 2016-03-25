@@ -166,9 +166,11 @@
             ODCommunityBbsUsersModel *userModel = [ODCommunityBbsUsersModel mj_objectWithKeyValues:users[key]];
             [weakSelf.userInfoDic setObject:userModel forKey:userKey];
         }
-        [weakSelf.tableView reloadData];
-        [weakSelf.tableView.mj_header endRefreshing];
-        [weakSelf.tableView.mj_footer endRefreshing];
+//        [weakSelf.tableView reloadData];
+//        [weakSelf.tableView.mj_header endRefreshing];
+//        [weakSelf.tableView.mj_footer endRefreshing];
+        
+        [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[[model result] bbs_list]];
         
     } failure:^(NSError *error) {
         [weakSelf.tableView.mj_header endRefreshing];

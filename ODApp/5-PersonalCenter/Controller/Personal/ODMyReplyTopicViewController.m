@@ -109,7 +109,6 @@
             ODCommunityBbsUsersModel *userModel = [ODCommunityBbsUsersModel mj_objectWithKeyValues:users[key]];
             [weakSelf.userInfoDic setObject:userModel forKey:userKey];
         }
-        [weakSelf.tableView reloadData];
         [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[[model result] bbs_list]];
         if (weakSelf.dataArray.count == 0) {
             [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无话题"];
