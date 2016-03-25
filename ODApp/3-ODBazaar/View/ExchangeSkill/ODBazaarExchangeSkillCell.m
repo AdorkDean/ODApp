@@ -101,8 +101,10 @@
     CGSize photosViewSize = [ODBazaarPhotosView zh_sizeWithConnt:model.imgs_small.count];
     self.photosViewConstraintH.constant = photosViewSize.height;
     self.photosViewConstraintW.constant = photosViewSize.width;
-    CGFloat contentH = [self.model.content boundingRectWithSize:CGSizeMake(KScreenWidth - 90, 30) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11.0f]} context:nil].size.height;
-    self.starConstraintH.constant = 12 + contentH + 15;
+    // 计算正文真实Size
+    CGSize contentSize = [self.model.content od_sizeWithFontSize:11.0f
+                                                         maxSize:CGSizeMake(KScreenWidth - 90, 30)];
+    self.starConstraintH.constant = 12 + contentSize.height + 15;
 }
 
 
