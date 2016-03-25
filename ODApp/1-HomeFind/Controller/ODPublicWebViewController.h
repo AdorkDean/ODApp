@@ -19,5 +19,8 @@
 /** 是否显示进度条 默认为NO */
 @property (nonatomic,assign) BOOL isShowProgress;
 
+/** 网页视图 */
+@property (nonatomic,strong) UIWebView *webView;
+
 
 @end

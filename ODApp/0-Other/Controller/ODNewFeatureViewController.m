@@ -15,36 +15,19 @@
 
 /** 引导页图片 */
 @property (nonatomic, weak) UIImageView *guideImageViews;
-
 /** 小圆点 */
 @property (nonatomic, weak) MyPageControl *pageControl;
 
 @end
 
+/** 复用collectionCell标识 */
+static NSString * const reuseIdentifier = @"newFeatureCell";
+/** 图片个数 */
+static NSInteger const imageCount = 5;
+
 @implementation ODNewFeatureViewController
 
-static NSString * const reuseIdentifier = @"newFeatureCell";
-
-static NSInteger const showCount = 4;
-
 #pragma mark - 生命周期方法
-/**
- *  设置布局方式
- */
-- (instancetype)init
-{
-    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    
-    layout.itemSize = [UIScreen mainScreen].bounds.size;
-    
-    layout.minimumInteritemSpacing = 0;
-    layout.minimumLineSpacing = 0;
-    
-    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-    
-    return [self initWithCollectionViewLayout:layout];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -57,6 +40,19 @@ static NSInteger const showCount = 4;
 }
 
 #pragma mark - 初始化方法
+/**
+ *  设置布局方式
+ */
+- (instancetype)init
+{
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.itemSize = kScreenSize;
+    layout.minimumInteritemSpacing = 0;
+    layout.minimumLineSpacing = 0;
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    return [self initWithCollectionViewLayout:layout];
+}
+
 /**
  *  初始化collectionView
  */
@@ -71,13 +67,15 @@ static NSInteger const showCount = 4;
 
 - (void)setupPageControl
 {
-    CGRect frame = CGRectMake((KScreenWidth - 90) * 0.5, self.view.od_height - 50, 90, 30);
-    MyPageControl *pageControl = [[MyPageControl alloc] initWithFrame:frame normalImage:[UIImage imageNamed:@"selected.png"] highlightedImage:[UIImage imageNamed:@"noselected.png"] dotsNumber:showCount sideLength:15 dotsGap:10];
+    CGRect frame = CGRectMake((KScreenWidth - 90) * 0.5, self.view.od_height * 0.9, 90, 30);
+    MyPageControl *pageControl = [[MyPageControl alloc] initWithFrame:frame
+                                                          normalImage:[UIImage imageNamed:@"noselected"]
+                                                     highlightedImage:[UIImage imageNamed:@"selected"]
+                                                           dotsNumber:(imageCount - 1) sideLength:15 dotsGap:10];
     pageControl.backgroundColor = [UIColor clearColor];
     [self.view addSubview:pageControl];
     self.pageControl = pageControl;
 }
-
 
 #pragma mark - UICollectionView 数据源方法
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -87,7 +85,7 @@ static NSInteger const showCount = 4;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 5;
+    return imageCount;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -95,7 +93,7 @@ static NSInteger const showCount = 4;
     ODNewFeatureCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     NSString *imageName = [NSString stringWithFormat:@"begin%ld", indexPath.item + 1];
     cell.image = [UIImage imageNamed:imageName];
-    [cell setIndex:indexPath imageCount:5];
+    [cell setIndex:indexPath imageCount:imageCount];
     return cell;
 }
 
@@ -106,11 +104,8 @@ static NSInteger const showCount = 4;
     // 滚动pageControl
     self.pageControl.currentPage = index;
     
-    if (index == showCount) {
-        self.pageControl.hidden = YES;
-    } else {
-        self.pageControl.hidden = NO;
-    }
+    // 根据滚动位置判断pageControl是否隐藏
+    self.pageControl.hidden = (index == (imageCount - 1));
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView

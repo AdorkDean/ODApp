@@ -46,15 +46,12 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
     else {
         self.navigationItem.title = @"已购买";
     }
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationSellOrderSecondRefresh object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationOrderListRefresh object:nil];
-    
     
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
@@ -64,6 +61,8 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
     self.isRefresh = @"";
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
+
+#pragma mark - Lazy Load
 
 - (UITableView *)tableView {
     if (!_tableView) {
@@ -91,7 +90,8 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
     return _tableView;
 }
 
-#pragma mark - Get Data
+#pragma mark - Load Data Request
+
 - (void)getRequestData {
     NSString *countNumber = [NSString stringWithFormat:@"%ld", (long) self.page];
     // 拼接参数
@@ -118,18 +118,17 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
      {
          if ([countNumber isEqualToString:@"1"]) {
              [weakSelf.dataArray removeAllObjects];
-         }
-         
+         }         
          NSArray *mySellDatas = [model result];
          [weakSelf.dataArray addObjectsFromArray:mySellDatas];
          
          [ODHttpTool od_endRefreshWith:weakSelf.tableView array:mySellDatas];
          
          if (weakSelf.dataArray.count == 0) {
-             [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
+             [self.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
          }
          else {
-             [self.noResultabel hidden];
+             [self.noResultLabel hidden];
          }
      } failure:^(NSError *error) {
          

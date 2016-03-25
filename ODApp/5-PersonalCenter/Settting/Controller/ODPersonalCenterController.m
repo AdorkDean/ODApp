@@ -22,6 +22,7 @@
 #import "ODGiveOpinionController.h"
 #import "ODOperationController.h"
 #import "ODPublicTool.h"
+#import "ODMyTakeOutViewController.h"
 
 @interface ODPersonalCenterController ()
 
@@ -107,11 +108,7 @@
     };
     
     ODArrowItem *item3 = [ODArrowItem itemWithName:@"我的任务"];
-    item3.oprtionBlock = ^(NSIndexPath *index){
-        ODMyTaskController *vc = [[ODMyTaskController alloc] init];
-//        vc.open_id = user.open_id;
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-    };
+    item3.destVc = [ODMyTaskController class];
     
     ODArrowItem *item4 = [ODArrowItem itemWithName:@"我收到的评价"];
     item4.oprtionBlock = ^(NSIndexPath *index){
@@ -122,22 +119,13 @@
     };
     
     ODArrowItem *item5 = [ODArrowItem itemWithName:@"余额"];
-    item5.oprtionBlock = ^(NSIndexPath *index){
-        ODBalanceController *vc = [[ODBalanceController alloc] init];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-    };
+    item5.destVc = [ODBalanceController class];
     
     ODArrowItem *item6 = [ODArrowItem itemWithName:@"设置"];
-    item6.oprtionBlock = ^(NSIndexPath *index){
-        ODOperationController *vc = [[ODOperationController alloc] init];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-    };
+    item6.destVc = [ODOperationController class];
     
     ODArrowItem *item7 = [ODArrowItem itemWithName:@"意见反馈"];
-    item7.oprtionBlock = ^(NSIndexPath *index){
-        ODGiveOpinionController *vc = [[ODGiveOpinionController alloc] init];
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-    };
+    item7.destVc = [ODGiveOpinionController class];
     
     ODArrowItem *item8 = [ODArrowItem itemWithName:@"分享我们的app"];
     // 设置cell背景颜色
@@ -146,7 +134,13 @@
         [ODPublicTool shareAppWithTarget:weakSelf dictionary:(NSDictionary *)user.share controller:weakSelf];
     };
     
-    ODGroupItem *group = [ODGroupItem groupWithItems:@[item0, item1, item2, item3,
+    /**
+     *  添加我的外卖
+     */
+    ODArrowItem *myTakeOut = [ODArrowItem itemWithName:@"我的外卖"];
+    myTakeOut.destVc = [ODMyTakeOutViewController class];
+    
+    ODGroupItem *group = [ODGroupItem groupWithItems:@[myTakeOut,item0, item1, item2, item3,
                                                        item4, item5, item6, item7, item8]];
     
     [self.groups addObject:group];

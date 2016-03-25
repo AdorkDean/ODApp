@@ -46,6 +46,8 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
 
 @implementation ODEvaluationController
 
+#pragma mark - Life Cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"我收到的评价";
@@ -54,7 +56,6 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     self.taskDataArray = [[NSMutableArray alloc] init];
     self.skillDataArray = [NSMutableArray array];
   
-   
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = self.typeTitle;
     
@@ -99,6 +100,8 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     [self.view addSubview:self.segmentedControl];
 }
 
+#pragma mark - Lazy Load
+
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
         self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, kScreenSize.width, kScreenSize.height - 40)];
@@ -114,8 +117,6 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     }
     return _scrollView;
 }
-
-
 
 - (UITableView *)taskTableView {
     if (!_taskTableView) {
@@ -137,7 +138,6 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
             weakSelf.taskPageNumber++;
             [weakSelf taskGetRequestData];
         }];
-        
     }
     return _taskTableView;
 }
@@ -165,7 +165,9 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     return _skillTableView;
 }
 
-#pragma mark - 请求数据
+#pragma mark - Load Data Request
+
+#pragma mark - 任务评价
 -(void)taskGetRequestData {
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.taskPageNumber];
     // 拼接参数
@@ -179,18 +181,15 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
         if ([countNumber isEqualToString:@"1"]) {
             [weakSelf.taskDataArray removeAllObjects];
         }
-         
         NSArray *evaluationDatas = [model result];
         [weakSelf.taskDataArray addObjectsFromArray:evaluationDatas];
         
         [ODHttpTool od_endRefreshWith:weakSelf.taskTableView array:evaluationDatas];
-        
-        ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.taskDataArray.count == 0) {
-            [noResultLabel showOnSuperView:weakSelf.taskTableView title:@"暂无评价"];
+            [self.noResultLabel showOnSuperView:weakSelf.taskTableView title:@"暂无评价"];
         }
         else {
-            [noResultLabel hidden];
+            [self.noResultLabel hidden];
         }
      } failure:^(NSError *error) {
          [weakSelf.taskTableView.mj_header endRefreshing];
@@ -198,9 +197,9 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
      }];
 }
 
+#pragma mark - 技能评价
 -(void)skillGetRequestData {
     NSString *countNumber = [NSString stringWithFormat:@"%ld" , (long)self.skillPageNumber];
-    
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"type"] = @"3";
@@ -208,31 +207,25 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     params[@"open_id"] = self.openId;
     __weakSelf
     // 发送请求
-    [ODHttpTool getWithURL:ODUrlUserCommentList parameters:params modelClass:[ODSecondEvaluationModel class] success:^(id model)
-     {
+    [ODHttpTool getWithURL:ODUrlUserCommentList parameters:params modelClass:[ODSecondEvaluationModel class] success:^(id model) {
          if ([countNumber isEqualToString:@"1"]) {
              [weakSelf.skillDataArray removeAllObjects];
          }
-         
          NSArray *evaluationDatas = [model result];
          [weakSelf.skillDataArray addObjectsFromArray:evaluationDatas];
          
          [ODHttpTool od_endRefreshWith:weakSelf.skillTableView array:evaluationDatas];
-          
-         ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
          if (weakSelf.skillDataArray.count == 0) {
-             [noResultLabel showOnSuperView:weakSelf.skillTableView title:@"暂无评价"];
+             [self.noResultLabel showOnSuperView:weakSelf.skillTableView title:@"暂无评价"];
          }
-         else
-         {
-             [noResultLabel hidden];
+         else {
+             [self.noResultLabel hidden];
          }
      } failure:^(NSError *error) {
          [weakSelf.skillTableView.mj_header endRefreshing];
          [weakSelf.skillTableView.mj_footer endRefreshing];
      }];
 }
-
 
 #pragma mark - UITableViewDataSource
 
@@ -271,8 +264,7 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
 }
 
 #pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     if (![scrollView isEqual:self.scrollView])
         return;
     
@@ -289,15 +281,6 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     [self.scrollView setContentOffset:point animated:YES];
     
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
-
 
 
 @end
