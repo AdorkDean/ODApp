@@ -140,7 +140,7 @@ NSString *const ODOrderAndSellViewID = @"ODOrderAndSellViewID";
          
          ODNoResultLabel *noResultabel = [[ODNoResultLabel alloc] init];
          
-         [ODHttpTool OD_endRefreshWith:weakSelf.tableView array:mySellDatas];
+         [ODHttpTool od_endRefreshWith:weakSelf.tableView array:mySellDatas];
          
          if (weakSelf.dataArray.count == 0) {
              [noResultabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
