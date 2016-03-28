@@ -1,5 +1,5 @@
 //
-//  ODTakeAwayHeaderView.h
+//  ODTakeOutHeaderView.h
 //  ODApp
 //
 //  Created by 王振航 on 16/3/22.
@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ODTakeAwayHeaderView;
+@class ODTakeOutHeaderView;
 
-@protocol ODTakeAwayHeaderViewDelegate <NSObject>
+@protocol ODTakeOutHeaderViewDelegate <NSObject>
 
 @optional
-- (void)headerView:(ODTakeAwayHeaderView *)headerView didClickedMenuButton:(NSInteger)index;
+- (void)headerView:(ODTakeOutHeaderView *)headerView didClickedMenuButton:(NSInteger)index;
 
 @end
 
-@interface ODTakeAwayHeaderView : UIView
+@interface ODTakeOutHeaderView : UIView
 
 /**
  *  快速创建View
@@ -27,6 +27,6 @@
 @property (nonatomic, strong) NSArray *banners;
 
 /** 代理 */
-@property (nonatomic, weak) id<ODTakeAwayHeaderViewDelegate> delegate;
+@property (nonatomic, weak) id<ODTakeOutHeaderViewDelegate> delegate;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  ODTakeAwayViewController.h
+//  ODTakeOutHomeController.h
 //  ODApp
 //
 //  Created by 王振航 on 16/3/22.
@@ -8,6 +8,6 @@
 
 #import "ODBaseViewController.h"
 
-@interface ODTakeAwayViewController : ODBaseViewController
+@interface ODTakeOutHomeController : ODBaseViewController
 
 @end

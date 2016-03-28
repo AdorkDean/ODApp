@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HqL-ey-0mh">
-                        <rect key="frame" x="18" y="14" width="281" height="15"/>
+                        <rect key="frame" x="18" y="14" width="281" height="14.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="TRf-zV-Mba"/>
                             <constraint firstAttribute="width" constant="250" id="acW-QJ-N6U"/>
@@ -31,13 +31,13 @@
                         </variation>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xian" translatesAutoresizingMaskIntoConstraints="NO" id="bKg-rZ-uE8">
-                        <rect key="frame" x="13" y="39" width="347" height="1"/>
+                        <rect key="frame" x="13" y="38" width="347" height="1"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="9Ga-Lo-JXZ"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5l-Fy-6fD">
-                        <rect key="frame" x="18" y="50" width="337" height="15"/>
+                        <rect key="frame" x="18" y="49" width="337" height="14.5"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="AF7-gC-uTQ"/>
                         </constraints>
@@ -66,8 +66,8 @@
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="删除"/>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6T-Ix-iWm">
-                        <rect key="frame" x="102" y="75" width="253" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6T-Ix-iWm">
+                        <rect key="frame" x="102" y="73.5" width="253" height="16.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="15" id="0xx-FV-9bS"/>
@@ -76,8 +76,8 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z9x-SZ-cLQ">
-                        <rect key="frame" x="41" y="75" width="60" height="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z9x-SZ-cLQ">
+                        <rect key="frame" x="41" y="74" width="60" height="15"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="J2I-fd-HbR"/>
@@ -130,7 +130,7 @@
                 <outlet property="statusLabel" destination="HqL-ey-0mh" id="2TH-aH-WwY"/>
                 <outlet property="titleLabel" destination="i5l-Fy-6fD" id="2WX-uy-Jgq"/>
             </connections>
-            <point key="canvasLocation" x="650.5" y="500"/>
+            <point key="canvasLocation" x="650.5" y="499.5"/>
         </tableViewCell>
     </objects>
     <resources>

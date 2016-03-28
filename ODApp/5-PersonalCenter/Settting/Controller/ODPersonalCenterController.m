@@ -65,6 +65,8 @@
     self.tableView.backgroundColor = [UIColor colorWithRGBString:@"#f6f6f6" alpha:1];
     
     // 调整tableView距离导航栏高度
+    self.tableView.od_height = KScreenHeight;
+    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 14, 0);
     self.tableView.contentOffset = CGPointZero;
     

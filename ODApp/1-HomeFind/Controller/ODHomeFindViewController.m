@@ -13,7 +13,7 @@
 #import "ODStorePlaceListModel.h"
 #import "ODHomeInfoModel.h"
 #import "ODHomeButton.h"
-#import "ODTakeAwayViewController.h"
+#import "ODTakeOutHomeController.h"
 
 #import "ODTakeAwayDetailController.h"
 
@@ -437,7 +437,7 @@ updatingLocation:(BOOL)updatingLocation {
             break;
         case 2:
         {   // 跳转至定外卖界面
-            ODTakeAwayViewController *takeAwayVc = [[ODTakeAwayViewController alloc] init];
+            ODTakeOutHomeController *takeAwayVc = [[ODTakeOutHomeController alloc] init];
             [self.navigationController pushViewController:takeAwayVc animated:YES];
         }
             break;

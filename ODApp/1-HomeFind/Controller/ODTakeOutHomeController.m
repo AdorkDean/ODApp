@@ -1,5 +1,5 @@
 //
-//  ODTakeAwayViewController.m
+//  ODTakeOutHomeController.m
 //  ODApp
 //
 //  Created by 王振航 on 16/3/22.
@@ -7,18 +7,18 @@
 //  定外卖
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
-#import "ODTakeAwayViewController.h"
+#import "ODTakeOutHomeController.h"
 
 #import <MJRefresh.h>
 #import "ODTakeOutBannerModel.h"
-#import "ODTakeAwayModel.h"
-#import "ODTakeAwayCell.h"
-#import "ODTakeAwayHeaderView.h"
+#import "ODTakeOutModel.h"
+#import "ODTakeOutCell.h"
+#import "ODTakeOutHeaderView.h"
 
 #import "ODTakeAwayDetailController.h"
 
-@interface ODTakeAwayViewController () <UITableViewDataSource, UITableViewDelegate,
-                                        ODTakeAwayHeaderViewDelegate>
+@interface ODTakeOutHomeController () <UITableViewDataSource, UITableViewDelegate,
+                                        ODTakeOutHeaderViewDelegate>
 
 /** scrollView */
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -33,11 +33,11 @@
 /** 模型数组 */
 @property (nonatomic, strong) NSMutableArray *datas;
 /** 头部控件 */
-@property (nonatomic, weak) ODTakeAwayHeaderView *headerView;
+@property (nonatomic, weak) ODTakeOutHeaderView *headerView;
 
 @end
 
-@implementation ODTakeAwayViewController
+@implementation ODTakeOutHomeController
 
 #pragma mark - 懒加载
 - (NSMutableArray *)datas
@@ -119,7 +119,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell
-    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODTakeAwayCell class]) bundle:nil] forCellReuseIdentifier:takeAwayCellId];
+    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODTakeOutCell class]) bundle:nil] forCellReuseIdentifier:takeAwayCellId];
 }
 
 /**
@@ -127,8 +127,9 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
  */
 - (void)setupHeaderView
 {
-    ODTakeAwayHeaderView *headerView = [ODTakeAwayHeaderView headerView];
+    ODTakeOutHeaderView *headerView = [ODTakeOutHeaderView headerView];
     [headerView sizeToFit];
+    headerView.od_width = KScreenWidth;
     // 设置代理
     headerView.delegate = self;
     [self.scrollView addSubview:headerView];
@@ -154,7 +155,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODTakeAwayCell *cell = [tableView dequeueReusableCellWithIdentifier:takeAwayCellId];
+    ODTakeOutCell *cell = [tableView dequeueReusableCellWithIdentifier:takeAwayCellId];
     cell.datas = self.datas[indexPath.row];
     return cell;
 }
@@ -166,14 +167,14 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     [self.scrollView.mj_footer endRefreshing];
     // 点击方法
     
-    ODTakeAwayModel *model = self.datas[indexPath.row];
+    ODTakeOutModel *model = self.datas[indexPath.row];
     ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
     vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - ODTakeAwayHeaderView 代理方法
-- (void)headerView:(ODTakeAwayHeaderView *)headerView didClickedMenuButton:(NSInteger)index
+#pragma mark - ODTakeOutHeaderView 代理方法
+- (void)headerView:(ODTakeOutHeaderView *)headerView didClickedMenuButton:(NSInteger)index
 {
     self.type = @(index);
     self.page = @1;
@@ -204,7 +205,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     params[@"page"] = [NSString stringWithFormat:@"%@", self.page];
     self.params = params;
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlTakeOutList parameters:params modelClass:[ODTakeAwayModel class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlTakeOutList parameters:params modelClass:[ODTakeOutModel class] success:^(id model) {
         if (weakSelf.params != params) return;
         // 清空所有数据
         [weakSelf.datas removeAllObjects];
@@ -234,7 +235,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     params[@"page"] = [NSString stringWithFormat:@"%@", currentPage];
     self.params = params;
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlTakeOutList parameters:params modelClass:[ODTakeAwayModel class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlTakeOutList parameters:params modelClass:[ODTakeOutModel class] success:^(id model) {
         if (weakSelf.params != params) return;
         NSArray *moreTakeOuts = [model result];
         [weakSelf.datas addObjectsFromArray:moreTakeOuts];

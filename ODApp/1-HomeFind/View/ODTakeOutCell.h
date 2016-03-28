@@ -1,5 +1,5 @@
 //
-//  ODTakeAwayCell.h
+//  ODTakeOutCell.h
 //  ODApp
 //
 //  Created by 王振航 on 16/3/22.
@@ -7,11 +7,11 @@
 //  定外卖cell
 
 #import <UIKit/UIKit.h>
-@class ODTakeAwayModel;
+@class ODTakeOutModel;
 
-@interface ODTakeAwayCell : UITableViewCell
+@interface ODTakeOutCell : UITableViewCell
 
 /** 模型数据 */
-@property (nonatomic, strong) ODTakeAwayModel *datas;
+@property (nonatomic, strong) ODTakeOutModel *datas;
 
 @end
