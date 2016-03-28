@@ -125,7 +125,7 @@
     self.centerDetailView.frame = CGRectMake(5, CGRectGetMaxY(self.pictureScrollView.frame) + 5, KScreenWidth - 10, cellHeight);
     [self.centerDetailView.centerTelButton addTarget:self action:@selector(phoneAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.centerDetailView.centerAddressButton addTarget:self action:@selector(addressAction:) forControlEvents:UIControlEventTouchUpInside];
-    [self.scrollView addSubview:self.self.centerDetailView];
+    [self.scrollView addSubview:self.centerDetailView];
 }
 
 #pragma mark - 场地预约
