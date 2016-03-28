@@ -107,7 +107,7 @@
  */
 - (void)setupData
 {
-    self.imageView.image = [UIImage imageNamed:self.item.icon];
+    if (self.item.icon.length) self.imageView.image = [UIImage imageNamed:self.item.icon];
     self.textLabel.text = self.item.name;
     self.detailTextLabel.text = self.item.subTitle;
     
@@ -116,6 +116,7 @@
     } else {
         self.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
     }
+    self.accessoryView.od_x = KScreenWidth - 10 - self.accessoryView.od_width;
 }
 
 /**

@@ -19,7 +19,7 @@
 
 + (instancetype)itemWithName:(NSString *)name
 {
-    return [self itemWithIcon:nil name:name];
+    return [self itemWithIcon:@"" name:name];
 }
 
 @end

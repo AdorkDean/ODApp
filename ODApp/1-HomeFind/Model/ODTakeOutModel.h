@@ -1,5 +1,5 @@
 //
-//  ODTakeAwayModel.h
+//  ODTakeOutModel.h
 //  ODApp
 //
 //  Created by 王振航 on 16/3/22.
@@ -16,10 +16,10 @@ typedef NS_ENUM(NSUInteger, ODTakeOutStatus) {
 
 #import <Foundation/Foundation.h>
 
-@interface ODTakeAwayModel : NSObject
+@interface ODTakeOutModel : NSObject
 
 /** 商品Id */
-@property (nonatomic, strong) NSNumber *product_id;
+@property (nonatomic, copy) NSString *product_id;
 /** 商品名称 */
 @property (nonatomic, copy) NSString *title;
 /** 商品内容 */
