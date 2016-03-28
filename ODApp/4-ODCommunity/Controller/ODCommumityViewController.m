@@ -202,6 +202,11 @@ static NSString *cellId = @"ODCommunityCell";
 #pragma mark - UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
+    
+    UITableView *talbeView = [[UITableView alloc] init];
+    [tableView removeFromSuperview];
+    UIView *view = [[UIView alloc] init];
+    [view removeFromSuperview];
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
