@@ -48,14 +48,21 @@
         for (id vc in self.picView.subviews) {
             [vc removeFromSuperview];
         }
-        for (NSInteger i = 0; i < model.imgs.count; i++) {
+        
+        NSInteger count;
+        if (model.imgs.count>9) {
+            count = 9;
+        }else{
+            count = model.imgs_big.count;
+        }
+        for (NSInteger i = 0; i < count; i++) {
             UIButton *imageButton = [[UIButton alloc] init];
             if (model.imgs.count == 4) {
                 imageButton.frame = CGRectMake((width + 5) * (i % 2), (width + 5) * (i / 2), width, width);
-                self.picConstraintHeight.constant = 2*width+5;
+                self.picConstraintHeight.constant = 2*width+5+6;
             }else{
                 imageButton.frame = CGRectMake((width + 5) * (i % 3), (width + 5) * (i / 3), width, width);
-                self.picConstraintHeight.constant = width+(width+5)*((model.imgs.count-1)/3);
+                self.picConstraintHeight.constant = width+(width+5)*((count-1)/3)+6;
             }
             
             [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -70,6 +77,14 @@
         }
         self.picConstraintHeight.constant = 0.5;
     }
+    
+    CGFloat contentH = [self.model.content boundingRectWithSize:CGSizeMake(KScreenWidth - 20, 30) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName : [UIFont systemFontOfSize:10.5f]} context:nil].size.height;
+    if (model.imgs.count==0) {
+        self.spaceHeight.constant = 10 + contentH;
+    }else{
+        self.spaceHeight.constant = 10 + contentH + 10;
+    }
+    
 
 }
 

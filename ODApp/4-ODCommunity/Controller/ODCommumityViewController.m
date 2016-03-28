@@ -15,6 +15,8 @@
 
 @end
 
+static NSString *cellId = @"ODCommunityCell";
+
 @implementation ODCommumityViewController
 
 #pragma mark - lazyload
@@ -25,7 +27,7 @@
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor backgroundColor];
-        [_tableView registerNib:[UINib nibWithNibName:@"ODCommunityCell" bundle:nil] forCellReuseIdentifier:@"cellId"];
+        [_tableView registerNib:[UINib nibWithNibName:@"ODCommunityCell" bundle:nil] forCellReuseIdentifier:cellId];
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.estimatedRowHeight = 300;;
@@ -187,11 +189,9 @@
             ODCommunityBbsUsersModel *userModel = [ODCommunityBbsUsersModel mj_objectWithKeyValues:users[key]];
             [weakSelf.userInfoDic setObject:userModel forKey:userKey];
         }
-//        [weakSelf.tableView reloadData];
-//        [weakSelf.tableView.mj_header endRefreshing];
-//        [weakSelf.tableView.mj_footer endRefreshing];
-        
+
         [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[[model result] bbs_list]];
+    
         
     } failure:^(NSError *error) {
         [weakSelf.tableView.mj_header endRefreshing];
@@ -209,7 +209,8 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
+    ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
     [cell showDataWithModel:model dict:self.userInfoDic index:indexPath];
     return cell;

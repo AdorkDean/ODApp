@@ -44,7 +44,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ODSettingCell *cell = [ODSettingCell cellWithTableView:tableView cellStyle:UITableViewCellStyleDefault];
+    ODSettingCell *cell = [ODSettingCell cellWithTableView:tableView cellStyle:UITableViewCellStyleSubtitle];
     
     ODGroupItem *group = self.groups[indexPath.section];
     ODSettingItem *item = group.items[indexPath.row];

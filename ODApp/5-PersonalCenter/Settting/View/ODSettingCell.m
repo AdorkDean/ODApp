@@ -15,7 +15,7 @@
 
 @interface ODSettingCell()
 
-/** 指示器 */
+/** 辅助视图 */
 @property (nonatomic, strong) UIImageView *arrowIndicator;
 
 /** 开关 */
@@ -57,7 +57,7 @@
 {
     static NSString *ID = nil;
     if (!ID) {
-        ID = [NSString stringWithFormat:@"%@ID", NSStringFromClass(self)];
+        ID = [NSString stringWithFormat:@"%@Id", NSStringFromClass(self)];
     }
     ODSettingCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     if (!cell) {
@@ -80,8 +80,14 @@
     [super layoutSubviews];
     
     self.textLabel.od_x = 12.5;
+    self.textLabel.od_centerY = self.detailTextLabel.od_centerY = self.imageView.od_centerY = self.contentView.od_centerY;
     
-//    self.accessoryView.od_x = KScreenWidth - 25;
+    if (self.imageView.image) {
+        self.textLabel.od_x= CGRectGetMaxY(self.imageView.frame) + 10;
+    }
+    
+    self.detailTextLabel.od_x = KScreenWidth - self.detailTextLabel.od_width - 17.5
+                                - self.accessoryView.od_width;
 }
 
 #pragma mark - 设置数据
@@ -96,20 +102,25 @@
     [self setupAccessoryView];
 }
 
+/**
+ *  设置数据
+ */
 - (void)setupData
 {
-    self.imageView.image = self.item.icon;
+    self.imageView.image = [UIImage imageNamed:self.item.icon];
     self.textLabel.text = self.item.name;
+    self.detailTextLabel.text = self.item.subTitle;
     
     if (self.item.colorType == ODSettingCellColorTypeWhite) {
         self.backgroundColor = [UIColor whiteColor];
     } else {
         self.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
     }
-    
-    self.detailTextLabel.text = self.item.subTitle;
 }
 
+/**
+ *  设置指示器样式
+ */
 - (void)setupAccessoryView
 {
     if ([self.item isKindOfClass:[ODArrowItem class]]) {
