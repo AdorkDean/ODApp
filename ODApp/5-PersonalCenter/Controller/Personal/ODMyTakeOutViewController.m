@@ -11,6 +11,7 @@
 
 #import <MJRefresh.h>
 #import "ODTakeAwayCell.h"
+#import "ODMyTakeOutModel.h"
 
 @interface ODMyTakeOutViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -19,7 +20,7 @@
 /** 参数 */
 @property (nonatomic, strong) NSMutableDictionary *params;
 /** 页码 */
-@property (nonatomic, strong) NSNumber *page;
+@property (nonatomic, copy) NSString *page;
 /** 模型数组 */
 @property (nonatomic, strong) NSMutableArray *datas;
 
@@ -123,9 +124,11 @@ static NSString * const exchangeCellId = @"myTakeOutCell";
     [self.tableView.mj_footer endRefreshing];
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"type"] = @"1";
+    params[@"page"] = self.page;
     self.params = params;
     __weakSelf
-    [ODHttpTool getWithURL:@"" parameters:params modelClass:[NSObject class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlTakeOutOrderList parameters:params modelClass:[ODMyTakeOutModel class] success:^(id model) {
         if (weakSelf.params != params) return;
         // 清空所有数据
         [weakSelf.datas removeAllObjects];
@@ -148,7 +151,7 @@ static NSString * const exchangeCellId = @"myTakeOutCell";
     // 结束下拉刷新
     [self.tableView.mj_header endRefreshing];
     // 取出页码
-    NSNumber *currentPage = @([self.page integerValue] + 1);
+//    NSString *currentPage = [NSString stringWithFormat:@"%ld", [self.page.intValue + 1]];
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     self.params = params;
@@ -160,10 +163,10 @@ static NSString * const exchangeCellId = @"myTakeOutCell";
         [weakSelf.tableView reloadData];
         [weakSelf checkFooterState:moreTakeOuts.count];
         // 请求成功后才赋值页码
-        weakSelf.page = currentPage;
+//        weakSelf.page = currentPage;
     } failure:^(NSError *error) {
         if (weakSelf.params != params) return;
-        weakSelf.page = @([weakSelf.page integerValue] - 1);
+//        weakSelf.page = @([weakSelf.page integerValue] - 1);
         [weakSelf.tableView.mj_footer endRefreshing];
     }];
 }

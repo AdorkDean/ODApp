@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *contentLabel;
 @property (weak, nonatomic) IBOutlet UIView *picView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *picConstraintHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *spaceHeight;
 
 @property(nonatomic,copy)NSString *open_id;
 @property(nonatomic,strong)NSIndexPath *indexPath;

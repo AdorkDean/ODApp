@@ -214,5 +214,9 @@ UIKIT_EXTERN NSString * const ODUrlUserBindMoble;
 UIKIT_EXTERN NSString * const ODUrlUserAddressList;
 
 
-/** 外卖 */
+/** 外卖首页 */
 UIKIT_EXTERN NSString * const ODUrlTakeOutList;
+/** 订单详情 */
+UIKIT_EXTERN NSString * const ODUrlTakeOutOrderInfo;
+/** 外卖订单列表 */
+UIKIT_EXTERN NSString * const ODUrlTakeOutOrderList;

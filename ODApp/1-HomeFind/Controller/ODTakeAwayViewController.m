@@ -15,6 +15,8 @@
 #import "ODTakeAwayCell.h"
 #import "ODTakeAwayHeaderView.h"
 
+#import "ODTakeAwayDetailController.h"
+
 @interface ODTakeAwayViewController () <UITableViewDataSource, UITableViewDelegate,
                                         ODTakeAwayHeaderViewDelegate>
 
@@ -163,6 +165,11 @@ static NSString * const exchangeCellId = @"takeAwayCell";
     [self.scrollView.mj_header endRefreshing];
     [self.scrollView.mj_footer endRefreshing];
     // 点击方法
+    
+    ODTakeAwayModel *model = self.datas[indexPath.row];
+    ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
+    vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - ODTakeAwayHeaderView 代理方法
