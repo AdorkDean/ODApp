@@ -7,12 +7,6 @@
 //
 
 #import "ODBaseViewController.h"
-#import "ODBazaarExchangeSkillDetailViewController.h"
-#import "ODBazaarExchangeSkillModel.h"
-#import "UIImageView+WebCache.h"
-#import "ODHelp.h"
-#import "ODCommunityShowPicViewController.h"
-#import "MJRefresh.h"
 
 @interface ODPersonalCenterCollectionController : ODBaseViewController 
 

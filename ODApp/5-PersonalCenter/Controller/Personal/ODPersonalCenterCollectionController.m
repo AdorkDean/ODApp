@@ -7,11 +7,16 @@
 //
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
-
+#import "ODBazaarExchangeSkillDetailViewController.h"
+#import "ODBazaarExchangeSkillModel.h"
+#import "UIImageView+WebCache.h"
+#import "ODHelp.h"
+#import "ODCommunityShowPicViewController.h"
+#import "MJRefresh.h"
 #import "ODPersonalCenterCollectionController.h"
 #import "ODBazaarExchangeSkillCollectionCell.h"
 
-NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
+NSString *const cellID = @"ODBazaarExchangeSkillCell";
 
 @interface ODPersonalCenterCollectionController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -28,11 +33,8 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
 @implementation ODPersonalCenterCollectionController
 
 #pragma mark - lazyLoad
-
-- (NSMutableArray *)dataArray
-{
-    if (!_dataArray)
-    {
+- (NSMutableArray *)dataArray{
+    if (!_dataArray){
         _dataArray = [NSMutableArray array];
     }
     return _dataArray;
@@ -42,14 +44,13 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight + 6) style:UITableViewStylePlain];
         _tableView.backgroundColor = [UIColor backgroundColor];
-        
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableFooterView = [UIView new];
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.estimatedRowHeight = 300;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarExchangeSkillCell class]) bundle:nil] forCellReuseIdentifier:ODBazaarExchangeSkillCellID];
+        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarExchangeSkillCell class]) bundle:nil] forCellReuseIdentifier:cellID];
         [self.view addSubview:_tableView];
     }
     return _tableView;
@@ -68,7 +69,6 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
         [weakSelf requestData];
     }];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        weakSelf.page++;
         [weakSelf loadMoreData];
     }];
 }
@@ -84,12 +84,9 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
 }
 
 #pragma mark - 数据请求
--(void)requestData
-{
-    NSDictionary *parameter = @{
-                                @"type" : @"4",
-                                @"page" : [NSString stringWithFormat:@"%ld", (long)self.page],
-                                };
+-(void)requestData{
+    NSDictionary *parameter = @{@"type" : @"4",
+                                @"page" : [NSString stringWithFormat:@"%ld", (long)self.page]};
     __weakSelf
     [ODHttpTool getWithURL:ODUrlUserLoveList parameters:parameter modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
         if (self.page == 1) {
@@ -100,12 +97,9 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
         [weakSelf.dataArray addObjectsFromArray:array];
         
         [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[model result]];
-        
-        
         if (weakSelf.dataArray.count == 0) {
             [self.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无收藏"];
-        }
-        else {
+        }else {
             [self.noResultLabel hidden];
         }        
     } failure:^(NSError *error) {
@@ -121,43 +115,23 @@ NSString *const ODBazaarExchangeSkillCellID = @"ODBazaarExchangeSkillCell";
 }
 
 #pragma mark - UITableViewDataSource
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ODBazaarExchangeSkillCell *cell = [tableView dequeueReusableCellWithIdentifier:ODBazaarExchangeSkillCellID];
+    ODBazaarExchangeSkillCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     cell.model = self.dataArray[indexPath.row];
     return cell;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    ODBturn model.rowHeight;
-//}azaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-//    re
-
 #pragma mark - UITableViewDelegate
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
     ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
     detailControler.swap_id = [NSString stringWithFormat:@"%ld", model.swap_id];
     detailControler.nick = model.user.nick;
     [self.navigationController pushViewController:detailControler animated:YES];
-}
-
-#pragma mark - action
-
-- (void)imageButtonClicked:(UIButton *)button {
-    ODBazaarExchangeSkillCell *cell = (ODBazaarExchangeSkillCell *) button.superview.superview.superview;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc] init];
-    picController.photos = model.imgs_big;
-    picController.selectedIndex = button.tag - 10 * indexPath.row;
-    picController.skill = @"skill";
-    [self presentViewController:picController animated:YES completion:nil];
 }
 
 
