@@ -49,7 +49,7 @@
 }
 
 // 循环cell标识
-static NSString * const exchangeCellId = @"takeAwayCell";
+static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
@@ -119,7 +119,7 @@ static NSString * const exchangeCellId = @"takeAwayCell";
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell
-    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODTakeAwayCell class]) bundle:nil] forCellReuseIdentifier:exchangeCellId];
+    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODTakeAwayCell class]) bundle:nil] forCellReuseIdentifier:takeAwayCellId];
 }
 
 /**
@@ -154,7 +154,7 @@ static NSString * const exchangeCellId = @"takeAwayCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODTakeAwayCell *cell = [tableView dequeueReusableCellWithIdentifier:exchangeCellId];
+    ODTakeAwayCell *cell = [tableView dequeueReusableCellWithIdentifier:takeAwayCellId];
     cell.datas = self.datas[indexPath.row];
     return cell;
 }

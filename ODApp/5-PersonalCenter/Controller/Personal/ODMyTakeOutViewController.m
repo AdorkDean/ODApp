@@ -27,7 +27,7 @@
 @end
 
 // 循环cell标识
-static NSString * const exchangeCellId = @"myTakeOutCell";
+static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
 
 @implementation ODMyTakeOutViewController
 #pragma mark - 懒加载
@@ -82,7 +82,7 @@ static NSString * const exchangeCellId = @"myTakeOutCell";
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell
-    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODTakeAwayCell class]) bundle:nil] forCellReuseIdentifier:exchangeCellId];
+    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODTakeAwayCell class]) bundle:nil] forCellReuseIdentifier:myTakeOutCellId];
 }
 
 /**
@@ -104,7 +104,7 @@ static NSString * const exchangeCellId = @"myTakeOutCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODTakeAwayCell *cell = [tableView dequeueReusableCellWithIdentifier:exchangeCellId];
+    ODTakeAwayCell *cell = [tableView dequeueReusableCellWithIdentifier:myTakeOutCellId];
     cell.datas = self.datas[indexPath.row];
     return cell;
 }

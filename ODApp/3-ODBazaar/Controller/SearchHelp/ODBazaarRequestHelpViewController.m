@@ -19,7 +19,7 @@
 @end
 
 // 循环cell标识
-static NSString * const helpCellId = @"helpCell";
+static NSString * const helpCellId = @"ODBazaarRequestHelpViewCell";
 
 @implementation ODBazaarRequestHelpViewController
 
