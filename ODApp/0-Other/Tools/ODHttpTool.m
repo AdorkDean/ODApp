@@ -250,12 +250,6 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
 
 + (void)od_endRefreshWith:(UIScrollView *)scrollView array:(NSArray *)array {
     [scrollView.mj_header endRefreshing];
-    if (array.count < 20) {
-        [scrollView.mj_footer endRefreshingWithNoMoreData];
-    }
-    else {
-        [scrollView.mj_footer endRefreshing];
-    }
     if ([scrollView isKindOfClass:[UITableView class]])
     {
         [(UITableView *)scrollView reloadData];
@@ -264,6 +258,13 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     {
         [(UICollectionView *)scrollView reloadData];
     }
+    if (array.count < 20) {
+        [scrollView.mj_footer endRefreshingWithNoMoreData];
+    }
+    else {
+        [scrollView.mj_footer endRefreshing];
+    }
+
 }
 
 @end

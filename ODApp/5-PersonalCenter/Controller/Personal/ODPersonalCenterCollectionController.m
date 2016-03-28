@@ -16,8 +16,6 @@
 #import "ODPersonalCenterCollectionController.h"
 #import "ODBazaarExchangeSkillCollectionCell.h"
 
-NSString *const cellID = @"ODBazaarExchangeSkillCell";
-
 @interface ODPersonalCenterCollectionController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -29,6 +27,8 @@ NSString *const cellID = @"ODBazaarExchangeSkillCell";
 @property(nonatomic) NSInteger page;
 
 @end
+
+NSString *const cellID = @"ODBazaarExchangeSkillCell";
 
 @implementation ODPersonalCenterCollectionController
 
