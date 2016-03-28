@@ -234,8 +234,7 @@ static NSString *cellId = @"ODCommunityCell";
 }
 
 #pragma mark - action
--(void)titleButtonClick:(UIButton *)button
-{
+-(void)titleButtonClick:(UIButton *)button{
     UIViewController *controller = [[UIViewController alloc]init];
     controller.view.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
     controller.view.layer.borderColor = [UIColor colorWithRGBString:@"#000000" alpha:1].CGColor;
@@ -267,8 +266,7 @@ static NSString *cellId = @"ODCommunityCell";
     }];
 }
 
--(void)titleViewLabelButtonClick:(UIButton *)button
-{
+-(void)titleViewLabelButtonClick:(UIButton *)button{
     self.bbsMark = button.titleLabel.text;
     self.bbsType = 5;
     [self.tableView.mj_header beginRefreshing];
@@ -276,14 +274,12 @@ static NSString *cellId = @"ODCommunityCell";
     }];
 }
 
--(void)searchButtonClick
-{
+-(void)searchButtonClick{
     ODCommunityKeyWordSearchViewController *keyWordSearch = [[ODCommunityKeyWordSearchViewController alloc]init];
     [self.navigationController pushViewController:keyWordSearch animated:YES];
 }
 
--(void)publishButtonClick
-{
+-(void)publishButtonClick{
     __weakSelf
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];

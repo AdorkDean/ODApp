@@ -23,6 +23,8 @@
 
 @implementation ODChoseCenterController
 
+#pragma mark - lifeCycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"选择中心";
