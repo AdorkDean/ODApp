@@ -10,22 +10,23 @@
 #import "ODUserModel.h"
 
 #import <UIImageView+WebCache.h>
-
 #import "ODReleaseController.h"
 #import "ODPersonalCenterCollectionController.h"
 #import "ODInformationController.h"
 #import "ODCustomButton.h"
-
 #import "ODOrderAndSellController.h"
-
 
 @interface ODPersonalCenterHeaderView() <ODInformationControllerDelegate>
 
-@property(weak, nonatomic) IBOutlet UIImageView *avatarImageView;
-@property(weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property(weak, nonatomic) IBOutlet UILabel *signLabel;
-
-@property (weak, nonatomic) IBOutlet UIView *showInformationView;
+/** 头像 */
+@property(nonatomic, weak) IBOutlet UIImageView *avatarImageView;
+/** 名字 */
+@property(nonatomic, weak) IBOutlet UILabel *nameLabel;
+/** 签名 */
+@property(nonatomic, weak) IBOutlet UILabel *signLabel;
+/** headerView */
+@property (nonatomic, weak) IBOutlet UIView *showInformationView;
+/** 按钮组 */
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *userInformation;
 
 @end
@@ -80,46 +81,47 @@
 - (void)buttonClick:(UIButton *)btn
 {
     NSUInteger index = btn.od_x / (self.od_width * 0.25);
-    UINavigationController *navVc = [self findOwnNavVc];
+    UINavigationController *navVc = [self findCurrentCNavVc];
     switch (index) {
         case 0: {
             ODOrderAndSellController *vc = [[ODOrderAndSellController alloc] init];
-
             [navVc pushViewController:vc animated:YES];
-            break;
-        }
+        } break;
         case 1: {
             ODOrderAndSellController *vc = [[ODOrderAndSellController alloc] init];
             vc.isSell = YES;
             [navVc pushViewController:vc animated:YES];
-            break;
-        }
+        } break;
         case 2: {
             ODReleaseController *vc = [[ODReleaseController alloc] init];
             [navVc pushViewController:vc animated:YES];
-            break;
-        }
+        } break;
         case 3: {
-            ODPersonalCenterCollectionController *collection = [[ODPersonalCenterCollectionController alloc]init];
-            [navVc pushViewController:collection animated:YES];
-            break;
-        }
+            ODPersonalCenterCollectionController *vc = [[ODPersonalCenterCollectionController alloc] init];
+            [navVc pushViewController:vc animated:YES];
+        } break;
     }
 }
 
-- (UINavigationController *)findOwnNavVc
+/**
+ *  查找当前的导航控制器
+ */
+- (UINavigationController *)findCurrentCNavVc
 {
     UITabBarController *tabBarControler = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
     UINavigationController *navigationController = tabBarControler.selectedViewController;
     return navigationController;
 }
 
+/**
+ *  跳转至个人详情
+ */
 - (void)showMessage:(UITapGestureRecognizer *)gesture
 {
     ODInformationController *vc = [[ODInformationController alloc] init];
     // 设置代理
     vc.delegate = self;
-    [[self findOwnNavVc] pushViewController:vc animated:YES];
+    [[self findCurrentCNavVc] pushViewController:vc animated:YES];
 }
 
 @end

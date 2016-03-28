@@ -17,7 +17,7 @@
 
 #import "ODTakeAwayDetailController.h"
 
-static NSString * const exchangeCellId = @"exchangeCell";
+static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 
 @interface ODHomeFindViewController ()<UITableViewDelegate,UITableViewDataSource>
 {

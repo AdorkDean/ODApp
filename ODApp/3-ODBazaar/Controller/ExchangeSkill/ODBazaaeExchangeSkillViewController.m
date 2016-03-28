@@ -26,7 +26,7 @@
 @end
 
 // 循环cell标识
-static NSString * const exchangeCellId = @"exchangeCell";
+static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 
 @implementation ODBazaaeExchangeSkillViewController
 
