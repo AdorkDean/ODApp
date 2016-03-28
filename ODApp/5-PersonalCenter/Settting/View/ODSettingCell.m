@@ -80,8 +80,16 @@
     [super layoutSubviews];
     
     self.textLabel.od_x = 12.5;
+    self.textLabel.od_centerY = self.detailTextLabel.od_centerY = self.imageView.od_centerY = self.contentView.od_centerY;
     
 //    self.accessoryView.od_x = KScreenWidth - 25;
+    
+    if (self.imageView.image) {
+        self.textLabel.od_x= CGRectGetMaxY(self.imageView.frame) + 10;
+    }
+    
+    self.detailTextLabel.od_x = KScreenWidth - self.detailTextLabel.od_width - 17.5
+                                - self.accessoryView.od_width;
 }
 
 #pragma mark - 设置数据
@@ -100,6 +108,7 @@
 {
     self.imageView.image = self.item.icon;
     self.textLabel.text = self.item.name;
+    self.detailTextLabel.text = self.item.subTitle;
     
     if (self.item.colorType == ODSettingCellColorTypeWhite) {
         self.backgroundColor = [UIColor whiteColor];
@@ -107,7 +116,6 @@
         self.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
     }
     
-    self.detailTextLabel.text = self.item.subTitle;
 }
 
 - (void)setupAccessoryView
