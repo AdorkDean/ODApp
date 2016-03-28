@@ -24,8 +24,7 @@
 
 @end
 
-// 循环cell标识
-static NSString * const helpCellId = @"helpCell";
+static NSString * const cellId = @"ODBazaarHelpCell";
 
 @implementation ODBazaarLabelSearchViewController
 
@@ -55,7 +54,7 @@ static NSString * const helpCellId = @"helpCell";
         // 取消分割线
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         // 注册cell
-        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarHelpCell class]) bundle:nil] forCellReuseIdentifier:helpCellId];
+        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarHelpCell class]) bundle:nil] forCellReuseIdentifier:cellId];
         [self.view addSubview:_tableView];
     }
     return _tableView;
@@ -118,9 +117,12 @@ static NSString * const helpCellId = @"helpCell";
             [weakSelf.dataArray addObject:taskModel];
         }
       
-        [weakSelf.tableView reloadData];
-        [weakSelf.tableView.mj_header endRefreshing];
-        [weakSelf.tableView.mj_footer endRefreshing];
+        [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[[model result] tasks]];
+        if (weakSelf.dataArray.count == 0) {
+            [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"没有符合条件的任务"];
+        }else {
+            [weakSelf.noResultLabel hidden];
+        }
     } failure:^(NSError *error) {
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf.tableView.mj_footer endRefreshing];
@@ -142,7 +144,7 @@ static NSString * const helpCellId = @"helpCell";
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ODBazaarHelpCell *cell = [tableView dequeueReusableCellWithIdentifier:helpCellId];
+    ODBazaarHelpCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     cell.model = self.dataArray[indexPath.row];
     return cell;
 }

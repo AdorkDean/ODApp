@@ -2219,6 +2219,7 @@
 				TargetAttributes = {
 					B83C6B611C224F640063ED92 = {
 						CreatedOnToolsVersion = 7.1.1;
+						DevelopmentTeam = 3WT82VX8WP;
 					};
 					B83C6B741C224F640063ED92 = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -2772,7 +2773,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ODApp/0-Other/Public/ODApp-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ODApp/7-Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2802,7 +2803,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ODApp/0-Other/Public/ODApp-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/ODApp/7-Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

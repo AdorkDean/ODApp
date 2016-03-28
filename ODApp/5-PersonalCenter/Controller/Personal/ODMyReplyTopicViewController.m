@@ -23,6 +23,8 @@
 
 @end
 
+static NSString *cellId = @"ODCommunityCell";
+
 @implementation ODMyReplyTopicViewController
 
 #pragma mark - lazyload
@@ -36,7 +38,7 @@
         _tableView.tableHeaderView = view;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor backgroundColor];
-        [_tableView registerNib:[UINib nibWithNibName:@"ODCommunityCell" bundle:nil] forCellReuseIdentifier:@"cellId"];
+        [_tableView registerNib:[UINib nibWithNibName:@"ODCommunityCell" bundle:nil] forCellReuseIdentifier:cellId];
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.estimatedRowHeight = 300;;
@@ -138,7 +140,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
+    ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
     [cell showDataWithModel:model dict:self.userInfoDic index:indexPath];

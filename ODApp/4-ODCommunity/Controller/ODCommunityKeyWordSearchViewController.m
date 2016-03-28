@@ -27,6 +27,8 @@
 
 @end
 
+static NSString *cellId = @"ODCommunityCell";
+
 @implementation ODCommunityKeyWordSearchViewController
 
 #pragma mark - lazyload
@@ -49,7 +51,7 @@
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor backgroundColor];
-        [_tableView registerNib:[UINib nibWithNibName:@"ODCommunityCell" bundle:nil] forCellReuseIdentifier:@"cellId"];
+        [_tableView registerNib:[UINib nibWithNibName:@"ODCommunityCell" bundle:nil] forCellReuseIdentifier:cellId];
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.estimatedRowHeight = 300;;
@@ -81,6 +83,7 @@
     __weakSelf
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         if (weakSelf.searchBar.text.length > 0) {
+            weakSelf.count = 1;
             [weakSelf requestData];
         } else {
             [weakSelf.tableView.mj_header endRefreshing];
@@ -115,6 +118,11 @@
         }
 
         [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[[model result] bbs_list]];
+        if (weakSelf.dataArray.count == 0) {
+            [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"没有符合条件的话题"];
+        }else {
+            [weakSelf.noResultLabel hidden];
+        }
         
     } failure:^(NSError *error) {
         [weakSelf.tableView.mj_header endRefreshing];
@@ -142,7 +150,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
+    ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
     [cell showDataWithModel:model dict:self.userInfoDic index:indexPath];
     return cell;
@@ -174,7 +182,6 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self requestData];
     [self.tableView.mj_header beginRefreshing];
 }
        
@@ -182,7 +189,6 @@
 - (void)confirmButtonClick {
    [self.searchBar resignFirstResponder];
    if (self.searchBar.text.length > 0) {
-       [self requestData];
        [self.tableView.mj_header beginRefreshing];
    } else {
        [ODProgressHUD showInfoWithStatus:@"请输入搜索内容"];
