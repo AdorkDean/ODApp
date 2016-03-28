@@ -17,7 +17,6 @@
 #import "UIImageView+WebCache.h"
 #import "ODOrderAddressModel.h"
 #import "ODPayController.h"
-#import "ODPayController.h"
 
 #import "ODSaveOrderModel.h"
 
@@ -57,22 +56,32 @@
     [self.choseTimeView removeFromSuperview];
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
+    // 初始化操作
+    [self setupInit];
+}
+
+#pragma mark - 初始化
+/**
+ *  初始化操作
+ */
+- (void)setupInit
+{
     self.openId = [ODUserInformation sharedODUserInformation].openID;
     self.dataArray = [[NSMutableArray alloc] init];
     self.selectDataArray = [[NSMutableArray alloc] init];
     self.addressArray = [[NSMutableArray alloc] init];
     self.navigationItem.title = @"提交订单";
-
+    
     [self getData];
     [self getAddress];
-
+    
     [self createCollectionView];
 }
 
-#pragma mark - 初始化
 - (void)createCollectionView {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 120) collectionViewLayout:self.flowLayout];
