@@ -18,9 +18,6 @@
 
 @end
 
-/** 动画持续时间 */
-static NSTimeInterval const animateDuration = 0.15;
-
 /** 下划线高度 */
 static CGFloat const lineHeight = 1;
 
@@ -127,7 +124,7 @@ static CGFloat const lineHeight = 1;
     _index = index;
     
     // 添加动画效果
-    [UIView animateWithDuration:animateDuration animations:^{
+    [UIView animateWithDuration:kAnimateDuration animations:^{
         self.lineView.od_x = KScreenWidth * 0.5 * index;
     }];
     

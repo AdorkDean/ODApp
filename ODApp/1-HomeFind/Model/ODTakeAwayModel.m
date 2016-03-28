@@ -11,3 +11,5 @@
 @implementation ODTakeAwayModel
 
 @end
+
+ODRequestResultIsArrayAll(ODTakeAwayModel)

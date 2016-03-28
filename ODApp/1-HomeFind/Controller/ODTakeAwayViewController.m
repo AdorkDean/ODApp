@@ -8,25 +8,30 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODTakeAwayViewController.h"
-#import <MJRefresh.h>
 
+#import <MJRefresh.h>
+#import "ODTakeOutBannerModel.h"
 #import "ODTakeAwayModel.h"
 #import "ODTakeAwayCell.h"
 #import "ODTakeAwayHeaderView.h"
 
-#import "NSString+ODExtension.h"
+@interface ODTakeAwayViewController () <UITableViewDataSource, UITableViewDelegate,
+                                        ODTakeAwayHeaderViewDelegate>
 
-@interface ODTakeAwayViewController () <UITableViewDataSource, UITableViewDelegate>
-
+/** scrollView */
+@property (nonatomic, strong) UIScrollView *scrollView;
 /** 表格 */
 @property (nonatomic, strong) UITableView *tableView;
 /** 参数 */
 @property (nonatomic, strong) NSMutableDictionary *params;
 /** 页码 */
-@property (nonatomic, assign) NSInteger page;
-
+@property (nonatomic, strong) NSNumber *page;
+/** 类型 */
+@property (nonatomic, strong) NSNumber *type;
 /** 模型数组 */
-@property(nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, strong) NSMutableArray *datas;
+/** 头部控件 */
+@property (nonatomic, weak) ODTakeAwayHeaderView *headerView;
 
 @end
 
@@ -59,35 +64,55 @@ static NSString * const exchangeCellId = @"takeAwayCell";
 {
     [super viewDidLoad];
     
+    // 初始化scrollView
+    [self setupScrollView];
+    
     // 初始化表格
     [self setupTableView];
     
     // 初始化headerView
-//    [self setupHeaderView];
+    [self setupHeaderView];
+    
+    // 加载广告页
+    [self loadNewBanners];
     
     // 初始化刷新控件
-    [self setupRefresh];
+    [self setupScrollViewRefresh];
 }
 
 #pragma mark - 初始化方法
+/**
+ *  初始化scrollView
+ */
+- (void)setupScrollView
+{
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    scrollView.frame = self.view.bounds;
+    [self.view addSubview:scrollView];
+    self.scrollView = scrollView;
+}
+
 /**
  *  初始化表格
  */
 - (void)setupTableView
 {
-    self.navigationItem.title = @"定外卖";
+    self.navigationItem.title = @"订外卖";
     self.automaticallyAdjustsScrollViewInsets = NO;
     // 创建表格
-    CGRect frame = CGRectMake(0, 0, KScreenWidth, self.view.od_height);
-    UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:self.scrollView.bounds
+                                                          style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
-    [self.view addSubview:tableView];
+    tableView.bounces = NO;
+    [self.scrollView addSubview:tableView];
     self.tableView = tableView;
     
-//    self.tableView.contentInset = UIEdgeInsetsMake(163, 0, 0, 0);
+    self.tableView.contentInset = UIEdgeInsetsMake(163, 0, 0, 0);
     
-    // 设置tableView的rowHeight
+    self.type = self.page = @1;
+    
+    // rowHeight
     tableView.rowHeight = 90;
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -102,61 +127,77 @@ static NSString * const exchangeCellId = @"takeAwayCell";
 {
     ODTakeAwayHeaderView *headerView = [ODTakeAwayHeaderView headerView];
     [headerView sizeToFit];
-//    [self.view addSubview:headerView];
-    self.tableView.tableHeaderView = headerView;
+    // 设置代理
+    headerView.delegate = self;
+    [self.scrollView addSubview:headerView];
+    self.headerView = headerView;
 }
 
 /**
  *  设置刷新控件
  */
-- (void)setupRefresh
+- (void)setupScrollViewRefresh
 {
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewUsers)];
-    [self.tableView.mj_header beginRefreshing];
-    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreUsers)];
-    self.tableView.mj_footer.automaticallyHidden = YES;
+    self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewTakeOuts)];
+    [self.scrollView.mj_header beginRefreshing];
+    self.scrollView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTakeOuts)];
+    self.scrollView.mj_footer.automaticallyHidden = YES;
 }
 
 #pragma mark - UITableView 数据源方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    return self.datas.count;
-    return 20;
+    return self.datas.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ODTakeAwayCell *cell = [tableView dequeueReusableCellWithIdentifier:exchangeCellId];
-//    cell.model = self.dataArray[indexPath.row];
+    cell.datas = self.datas[indexPath.row];
     return cell;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    ODTakeAwayHeaderView *headerView = [ODTakeAwayHeaderView headerView];
-    [headerView sizeToFit];
-    return headerView;
-}
-
-#pragma mark - 代理方法
+#pragma mark - UITableView 代理方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
+    [self.scrollView.mj_header endRefreshing];
+    [self.scrollView.mj_footer endRefreshing];
+    // 点击方法
+}
+
+#pragma mark - ODTakeAwayHeaderView 代理方法
+- (void)headerView:(ODTakeAwayHeaderView *)headerView didClickedMenuButton:(NSInteger)index
+{
+    self.type = @(index);
+    self.page = @1;
+    [self loadNewTakeOuts];
 }
 
 #pragma mark - 事件方法
-- (void)loadNewUsers
+- (void)loadNewBanners
 {
-    // 结束上拉加载
-    [self.tableView.mj_footer endRefreshing];
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"page"] = @"1";
-    params[@"my"] = @"0";
+    params[@"position"] = @"9";
+    params[@"store_id"] = @"0";
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlOtherBanner parameters:params modelClass:[ODTakeOutBannerModel class] success:^(id model) {
+        weakSelf.headerView.banners = [model result];
+    } failure:^(NSError *error) {
+    }];
+}
+
+- (void)loadNewTakeOuts
+{
+    // 结束上拉加载
+    [self.scrollView.mj_footer endRefreshing];
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"type"] = [NSString stringWithFormat:@"%@", self.type];
+    params[@"page"] = [NSString stringWithFormat:@"%@", self.page];
     self.params = params;
     __weakSelf
-    [ODHttpTool getWithURL:@"" parameters:params modelClass:[ODTakeAwayModel class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlTakeOutList parameters:params modelClass:[ODTakeAwayModel class] success:^(id model) {
         if (weakSelf.params != params) return;
         // 清空所有数据
         [weakSelf.datas removeAllObjects];
@@ -164,42 +205,40 @@ static NSString * const exchangeCellId = @"takeAwayCell";
         NSArray *newDatas = [model result];
         [weakSelf.datas addObjectsFromArray:newDatas];
         [weakSelf.tableView reloadData];
-        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.scrollView.mj_header endRefreshing];
         [weakSelf checkFooterState:newDatas.count];
-        
         // 重新设置 page = 1
-        weakSelf.page = 1;
+        weakSelf.page = @1;
     } failure:^(NSError *error) {
         if (weakSelf.params != params) return;
-        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.scrollView.mj_header endRefreshing];
     }];
 }
 
-- (void)loadMoreUsers
+- (void)loadMoreTakeOuts
 {
     // 结束下拉刷新
-    [self.tableView.mj_header endRefreshing];
+    [self.scrollView.mj_header endRefreshing];
     // 取出页码
-    NSInteger page = self.page + 1;
+    NSNumber *currentPage = @([self.page integerValue] + 1);
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"page"] = [NSString stringWithFormat:@"%@", @(page)];
-    params[@"my"] = @"0";
+    params[@"type"] = [NSString stringWithFormat:@"%@", self.type];
+    params[@"page"] = [NSString stringWithFormat:@"%@", currentPage];
     self.params = params;
     __weakSelf
-    [ODHttpTool getWithURL:@"" parameters:params modelClass:[ODTakeAwayModel class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlTakeOutList parameters:params modelClass:[ODTakeAwayModel class] success:^(id model) {
         if (weakSelf.params != params) return;
-        NSArray *array = [model result];
-        [weakSelf.datas addObjectsFromArray:array];
+        NSArray *moreTakeOuts = [model result];
+        [weakSelf.datas addObjectsFromArray:moreTakeOuts];
         [weakSelf.tableView reloadData];
-        [weakSelf checkFooterState:array.count];
-        
+        [weakSelf checkFooterState:moreTakeOuts.count];
         // 请求成功后才赋值页码
-        weakSelf.page = page;
+        weakSelf.page = currentPage;
     } failure:^(NSError *error) {
         if (weakSelf.params != params) return;
-        weakSelf.page = weakSelf.page - 1;
-        [weakSelf.tableView.mj_footer endRefreshing];
+        weakSelf.page = @([weakSelf.page integerValue] - 1);
+        [weakSelf.scrollView.mj_footer endRefreshing];
     }];
 }
 
@@ -209,12 +248,10 @@ static NSString * const exchangeCellId = @"takeAwayCell";
 - (void)checkFooterState:(NSUInteger)count
 {
     if (count < 20) { // 全部数据已经加载完毕
-        [self.tableView.mj_footer endRefreshingWithNoMoreData];
+        [self.scrollView.mj_footer endRefreshingWithNoMoreData];
     } else { // 还没有加载完毕
-        [self.tableView.mj_footer endRefreshing];
+        [self.scrollView.mj_footer endRefreshing];
     }
 }
-
-
 
 @end

@@ -83,17 +83,13 @@
     UINavigationController *navVc = [self findOwnNavVc];
     switch (index) {
         case 0: {
-//            ODMyOrderController *vc = [[ODMyOrderController alloc] init];
             ODOrderAndSellController *vc = [[ODOrderAndSellController alloc] init];
 
             [navVc pushViewController:vc animated:YES];
             break;
         }
         case 1: {
-//            ODMySellController *vc = [[ODMySellController alloc] init];
-            
             ODOrderAndSellController *vc = [[ODOrderAndSellController alloc] init];
-            
             vc.isSell = YES;
             [navVc pushViewController:vc animated:YES];
             break;

@@ -17,6 +17,9 @@ CGFloat const ODBazaaeExchangeCellMargin = 6;
 /** 获取验证码时间 */
 NSTimeInterval const getVerificationCodeTime = 60;
 
+/** 动画持续时间 */
+NSTimeInterval const kAnimateDuration = 0.15;
+
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 NSString * const kUserCache = @"kUserCache";
@@ -82,19 +85,6 @@ NSString * const ODNotificationOrderListRefresh = @"ODNotificationOrderListRefre
 
 /**  点击收藏的通知 */
 NSString * const ODNotificationloveSkill = @"ODNotificationloveSkill";
-
-/** 已购买二级页面通知 */
-NSString * const ODNotificationMyOrderSecondRefresh = @"ODNotificationMyOrderSecondRefresh";
-/** 已购买三级页面通知 */
-NSString * const ODNotificationMyOrderThirdRefresh = @"ODNotificationMyOrderThirdRefresh";
-/** 已卖出二级页面通知 */
-NSString * const ODNotificationSellOrderSecondRefresh = @"ODNotificationSellOrderSecondRefresh";
-/** 已购买三级页面通知 */
-NSString * const ODNotificationSellOrderThirdRefresh = @"ODNotificationSellOrderThirdRefresh";
-
-
-
-
 
 /** 刷新任务发布及回复*/
 NSString * const ODNotificationRefreshTask =  @"ODNotificationRefreshTask";
@@ -162,7 +152,7 @@ NSString * const ODUrlOtherStoreList = @"other/store/list";
 NSString * const ODUrlOtherBase64Upload = @"other/base64/upload";
 NSString * const ODUrlOtherFeedback = @"other/feedback";
 NSString * const ODUrlOtherConfigInfo = @"other/config/info";
-
+NSString * const ODUrlOtherBanner = @"other/banner";
 
 
 /** task */
@@ -210,4 +200,7 @@ NSString * const ODUrlSwapSchedule = @"swap/schedule";
 /** pay */
 NSString * const ODUrlPayWeixinTradeNumber = @"pay/weixin/trade/number";
 NSString * const ODUrlPayWeixinCallbackSync = @"pay/weixin/callback/sync";
+
+/** 外卖 */
+NSString * const ODUrlTakeOutList = @"takeout/list";
 

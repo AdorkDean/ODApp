@@ -15,7 +15,7 @@
 #import "ODHomeButton.h"
 #import "ODTakeAwayViewController.h"
 
-#import "ODPublicWebViewController.h"
+#import "ODTakeAwayDetailController.h"
 
 static NSString * const exchangeCellId = @"exchangeCell";
 
@@ -480,12 +480,14 @@ updatingLocation:(BOOL)updatingLocation {
 //            vc.webUrl = ODWebUrlExpect;
             
             
-            ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
+//            ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
             
-            vc.navigationTitle = @"饮料";
-            NSString *order_id = @"1";
-            vc.webUrl = [NSString stringWithFormat:@"%@/order?id=%@", ODWebUrlNative,order_id];
+            ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
             
+//            vc.navigationTitle = @"饮料";
+//            NSString *order_id = @"1";
+//            vc.webUrl = [NSString stringWithFormat:@"%@/order?id=%@", ODWebUrlNative,order_id];
+//            vc.isShowProgress = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

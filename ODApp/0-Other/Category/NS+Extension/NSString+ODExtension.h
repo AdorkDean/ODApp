@@ -14,10 +14,28 @@
 - (BOOL)isBlank;
 
 /**
- *  计算文字Size
+ *  限制文字的Size, 计算文字实际的Size
+ *
+ *  @param fontSize 字体大小
+ *  @param maxSize  文字的最大Size
+ *
+ *  @return 实际的Size
  */
-- (CGSize)od_SizeWithFont:(UIFont *)font maxWidth:(CGFloat)maxWidth;
+- (CGSize)od_sizeWithFontSize:(CGFloat)fontSize maxSize:(CGSize)maxSize;
 
-- (CGSize)od_SizeWithFont:(UIFont *)font;
+/**
+ *  不限定大小的文字最大Size
+ *
+ *  @param font 字体大小
+ */
+- (CGSize)od_sizeWithFontSize:(CGFloat)fontSize;
+
+/**
+ *  限定最大宽度的文字最大Size
+ *
+ *  @param fontSize 字体大小
+ *  @param maxWidth 文字最大宽度
+ */
+- (CGSize)od_sizeWithFontSize:(CGFloat)fontSize maxWidth:(CGFloat)maxWidth;
 
 @end

@@ -22,6 +22,9 @@ UIKIT_EXTERN CGFloat const ODBazaaeExchangeCellMargin;
 /** 获取验证码时间 */
 UIKIT_EXTERN NSTimeInterval const getVerificationCodeTime;
 
+/** 动画持续时间 */
+UIKIT_EXTERN NSTimeInterval const kAnimateDuration;
+
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 UIKIT_EXTERN NSString * const kUserCache;
@@ -86,19 +89,6 @@ UIKIT_EXTERN NSString * const ODNotificationReplySuccess;
 /**  登录成功后的通知 */
 UIKIT_EXTERN NSString * const ODNotificationLoginSuccess;
 
-/** 已购买二级页面通知 */
-UIKIT_EXTERN NSString * const ODNotificationMyOrderSecondRefresh;
-
-/** 已购买三级页面通知 */
-UIKIT_EXTERN NSString * const ODNotificationMyOrderThirdRefresh;
-
-/** 已卖出二级页面通知 */
-UIKIT_EXTERN NSString * const ODNotificationSellOrderSecondRefresh;
-
-/** 已购买三级页面通知 */
-UIKIT_EXTERN NSString * const ODNotificationSellOrderThirdRefresh;
-
-
 /**  点击收藏的通知 */
 UIKIT_EXTERN NSString * const ODNotificationloveSkill;
 
@@ -146,6 +136,7 @@ UIKIT_EXTERN NSString * const ODUrlOtherHome;
 UIKIT_EXTERN NSString * const ODUrlOtherConfigInfo;
 UIKIT_EXTERN NSString * const ODUrlOtherBase64Upload;
 UIKIT_EXTERN NSString * const ODUrlOtherFeedback;
+UIKIT_EXTERN NSString * const ODUrlOtherBanner;
 
 
 
@@ -223,4 +214,5 @@ UIKIT_EXTERN NSString * const ODUrlUserBindMoble;
 UIKIT_EXTERN NSString * const ODUrlUserAddressList;
 
 
-
+/** 外卖 */
+UIKIT_EXTERN NSString * const ODUrlTakeOutList;

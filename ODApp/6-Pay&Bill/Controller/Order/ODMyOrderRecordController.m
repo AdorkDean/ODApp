@@ -38,7 +38,7 @@ NSString *const ODMyOrderRecordViewID = @"ODMyOrderRecordViewID";
 
 @implementation ODMyOrderRecordController
 
-#pragma mark - 生命周期
+#pragma mark - Life Cycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,18 +52,17 @@ NSString *const ODMyOrderRecordViewID = @"ODMyOrderRecordViewID";
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
         weakSelf.count = 1;
         [weakSelf createRequest];
-                                     }];
+    }];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^ {
         weakSelf.count ++;
          [weakSelf createRequest];
-                                     }];
+    }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData:) name:ODNotificationCancelOrder object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     if (self.isRefresh) {
         [self.tableView.mj_header beginRefreshing];
         self.isRefresh = NO;
@@ -76,9 +75,7 @@ NSString *const ODMyOrderRecordViewID = @"ODMyOrderRecordViewID";
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-
-
-#pragma mark - 加载数据请求
+#pragma mark - Load Data Request
 - (void)createRequest {
     
     NSDictionary *parameter = @{@"open_id":[NSString stringWithFormat:@"%@",self.open_id],@"page":[NSString stringWithFormat:@"%ld",(long)self.count]};
@@ -94,10 +91,10 @@ NSString *const ODMyOrderRecordViewID = @"ODMyOrderRecordViewID";
         
         
         if (weakSelf.orderArray.count == 0) {
-            [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无预约"];
+            [self.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无预约"];
         }
         else {
-            [self.noResultabel hidden];
+            [self.noResultLabel hidden];
         }
     
     }
@@ -107,6 +104,7 @@ NSString *const ODMyOrderRecordViewID = @"ODMyOrderRecordViewID";
     }];  
 }
 
+#pragma mark - Create UITableView
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(4, ODTopY  , kScreenSize.width - 8, KControllerHeight - ODNavigationHeight) style:UITableViewStylePlain];

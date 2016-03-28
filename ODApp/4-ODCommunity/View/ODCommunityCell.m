@@ -1,0 +1,118 @@
+//
+//  ODCommunityCell.m
+//  ODApp
+//
+//  Created by Odong-YG on 16/3/24.
+//  Copyright © 2016年 Odong Org. All rights reserved.
+//
+
+#import "ODCommunityCell.h"
+
+@implementation ODCommunityCell
+
+/**
+ *  初始化方法
+ */
+- (void)awakeFromNib {
+    self.nickLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+    self.signLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+    self.timeLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+    self.contentLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+}
+
+/**
+ *  设置数据
+ */
+-(void)showDataWithModel:(ODCommunityBbsListModel *)model dict:(NSMutableDictionary *)dict index:(NSIndexPath *)index{
+    self.model = model;
+    self.indexPath = index;
+    self.timeLabel.text = model.created_at;
+    self.contentLabel.text = model.content;
+    NSString *userId = [NSString stringWithFormat:@"%d",model.user_id];
+    self.open_id = [dict[userId]open_id];
+    [self.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[dict[userId]avatar_url]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    // 设置数据
+    UIImage *placeholderImage = [UIImage OD_circleImageNamed:@"titlePlaceholderImage"];
+    __weakSelf;
+    // 头像
+    [self.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[dict[userId]avatar_url]] forState:UIControlStateNormal placeholderImage:placeholderImage options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        if (image == nil) return;
+        // 设置圆角
+        [weakSelf.headButton setBackgroundImage:[image OD_circleImage] forState:UIControlStateNormal];
+    }];
+    [self.headButton addTarget:self action:@selector(otherInfoClick) forControlEvents:UIControlEventTouchUpInside];
+    self.nickLabel.text = [dict[userId]nick];
+    self.signLabel.text = [dict[userId]sign];
+    CGFloat width = kScreenSize.width>320?90:70;
+    if (model.imgs.count) {
+        for (id vc in self.picView.subviews) {
+            [vc removeFromSuperview];
+        }
+        for (NSInteger i = 0; i < model.imgs.count; i++) {
+            UIButton *imageButton = [[UIButton alloc] init];
+            if (model.imgs.count == 4) {
+                imageButton.frame = CGRectMake((width + 5) * (i % 2), (width + 5) * (i / 2), width, width);
+                self.picConstraintHeight.constant = 2*width+5;
+            }else{
+                imageButton.frame = CGRectMake((width + 5) * (i % 3), (width + 5) * (i / 3), width, width);
+                self.picConstraintHeight.constant = width+(width+5)*((model.imgs.count-1)/3);
+            }
+            
+            [imageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.imgs[i]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            }];
+            [imageButton addTarget:self action:@selector(imageButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+            imageButton.tag = 10 * index.row + i;
+            [self.picView addSubview:imageButton];
+        }
+    }else{
+        for (id vc in self.picView.subviews) {
+            [vc removeFromSuperview];
+        }
+        self.picConstraintHeight.constant = 0.5;
+    }
+
+}
+
+/**
+ *  设置cell间隙
+ */
+- (void)setFrame:(CGRect)frame
+{
+    frame.size.height -= ODBazaaeExchangeCellMargin;
+    [super setFrame:frame];
+}
+
+#pragma mark - 事件方法
+/**
+ *  点击头像按钮
+ */
+- (void)otherInfoClick{
+    ODOthersInformationController *vc = [[ODOthersInformationController alloc] init];
+    // 取出open_id
+    NSString *open_id = self.open_id;
+    vc.open_id = open_id;
+    // 如果不是自己, 可以跳转
+    if (![[ODUserInformation sharedODUserInformation].openID isEqualToString:open_id]){
+        UITabBarController *tabBarControler = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UINavigationController *navigationController = tabBarControler.selectedViewController;
+        [navigationController pushViewController:vc animated:YES];
+    }
+}
+
+/**
+ *   点击图片方法
+ */
+-(void)imageButtonClick:(UIButton *)button{
+    ODCommunityShowPicViewController *picController = [[ODCommunityShowPicViewController alloc]init];
+    picController.photos = self.model.imgs_big;
+    picController.selectedIndex = button.tag-10*self.indexPath.row;
+    UITabBarController *tabBarControler = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UINavigationController *navigationController = tabBarControler.selectedViewController;
+    [navigationController.topViewController presentViewController:picController animated:YES completion:nil];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
+}
+
+@end

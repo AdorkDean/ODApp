@@ -73,11 +73,13 @@
         [self.dataArray replaceObjectAtIndex:self.index withObject:model];
         [self.tableView reloadData];
     }
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.type = @"";
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 -(void)dealloc{
@@ -96,12 +98,12 @@
          ODBazaarTasksModel *tasksModel = [model result];
          [weakSelf.dataArray addObjectsFromArray:tasksModel.tasks];         
          
+          [weakSelf.tableView reloadData];
          [ODHttpTool od_endRefreshWith:weakSelf.tableView array:tasksModel.tasks];
-         
          if (weakSelf.dataArray.count == 0) {
-             [self.noResultabel showOnSuperView:weakSelf.tableView title:@"暂无任务"];
+             [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无任务"];
          }else{
-             [self.noResultabel hidden];
+             [weakSelf.noResultLabel hidden];
          }
      } failure:^(NSError *error) {
          [weakSelf.tableView.mj_header endRefreshing];

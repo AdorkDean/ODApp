@@ -71,14 +71,6 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ziU-dr-U0g">
-                    <rect key="frame" x="287" y="69" width="15" height="15"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="15" id="0hq-jh-wN6"/>
-                        <constraint firstAttribute="height" constant="15" id="Iau-6N-hty"/>
-                    </constraints>
-                    <state key="normal" image="Skills profile page_icon_arrow_upper"/>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQ6-sR-B5s">
                     <rect key="frame" x="111" y="66" width="168" height="20"/>
                     <constraints>
@@ -98,6 +90,14 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ziU-dr-U0g">
+                    <rect key="frame" x="287" y="69" width="15" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="15" id="0hq-jh-wN6"/>
+                        <constraint firstAttribute="height" constant="15" id="Iau-6N-hty"/>
+                    </constraints>
+                    <state key="normal" image="Skills profile page_icon_arrow_upper"/>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
