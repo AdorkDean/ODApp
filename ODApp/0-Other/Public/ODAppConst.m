@@ -177,7 +177,7 @@ NSString * const ODUrlBbsView = @"bbs/view";
 
 
 
-/*** swap */
+/** swap */
 NSString * const ODUrlSwapList = @"swap/list";
 NSString * const ODUrlSwapOrder = @"swap/order";
 NSString * const ODUrlSwapLoveList = @"swap/love/list";
@@ -196,6 +196,10 @@ NSString * const ODUrlSwapConfirmDelivery = @"swap/confirm/delivery";
 NSString * const ODUrlSwapFinish = @"swap/finish";
 NSString * const ODUrlSwapOrderReason = @"swap/order/reason";
 NSString * const ODUrlSwapSchedule = @"swap/schedule";
+
+/** shopcart */
+NSString * const ODUrlShopcartOrder = @"shopcart/order";
+
 
 /** pay */
 NSString * const ODUrlPayWeixinTradeNumber = @"pay/weixin/trade/number";
