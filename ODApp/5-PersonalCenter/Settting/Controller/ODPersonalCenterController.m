@@ -101,11 +101,12 @@
     };
 
     ODArrowItem *item2 = [ODArrowItem itemWithName:@"我的话题"];
-    item2.oprtionBlock = ^(NSIndexPath *index){
-        ODMyTopicController *vc = [[ODMyTopicController alloc] init];
+    item2.destVc = [ODMyTopicController class];
+//    item2.oprtionBlock = ^(NSIndexPath *index){
+//        ODMyTopicController *vc = [[ODMyTopicController alloc] init];
 //        vc.open_id = user.open_id;
-        [weakSelf.navigationController pushViewController:vc animated:YES];
-    };
+//        [weakSelf.navigationController pushViewController:vc animated:YES];
+//    };
     
     ODArrowItem *item3 = [ODArrowItem itemWithName:@"我的任务"];
     item3.destVc = [ODMyTaskController class];

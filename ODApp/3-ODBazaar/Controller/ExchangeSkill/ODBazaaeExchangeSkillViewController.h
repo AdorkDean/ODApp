@@ -8,7 +8,7 @@
 
 #import "ODBaseViewController.h"
 #import "ODBazaarExchangeSkillDetailViewController.h"
-//#import "ODCommunityShowPicViewController.h"
+
 
 @interface ODBazaaeExchangeSkillViewController : ODBaseViewController
 

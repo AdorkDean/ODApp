@@ -22,15 +22,29 @@ typedef enum : NSUInteger
 @property (nonatomic, copy) NSString *name;
 
 /** 头像 */
-@property (nonatomic, weak) UIImage *icon;
+@property (nonatomic, copy) NSString *icon;
 
 /** subTitle */
 @property (nonatomic, copy) NSString *subTitle;
 
-+ (instancetype)itemWithIcon:(UIImage *)icon name:(NSString *)name;
+/**
+ *  创建带图片和文字的cell
+ *
+ *  @param icon 图片名称
+ *  @param name 文字
+ */
++ (instancetype)itemWithIcon:(NSString *)icon name:(NSString *)name;
+
+/**
+ *  创建只带文字的cell
+ *
+ *  @param name 文字
+ */
 + (instancetype)itemWithName:(NSString *)name;
 
-/** block */
+/**
+ *  将点击cell后需要执行的代码, 放入oprtionBlock中
+ */
 @property (nonatomic, copy) void((^oprtionBlock))(NSIndexPath *indexPath);
 
 @end

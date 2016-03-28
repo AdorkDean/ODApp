@@ -17,7 +17,7 @@
 
 #import "ODTakeAwayDetailController.h"
 
-static NSString * const exchangeCellId = @"exchangeCell";
+static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 
 @interface ODHomeFindViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
@@ -152,7 +152,7 @@ static NSString * const exchangeCellId = @"exchangeCell";
         _tableView.delegate = self;
         // 取消分割线
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
+
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.estimatedRowHeight = 300;
         // 注册cell
@@ -193,11 +193,6 @@ static NSString * const exchangeCellId = @"exchangeCell";
     detailControler.nick = model.user.nick;
     [self.navigationController pushViewController:detailControler animated:YES];
 }
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-//    return model.rowHeight;
-//}
 
 -(void)createHeaderView{
     self.headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 200)];

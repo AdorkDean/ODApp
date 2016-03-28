@@ -9,7 +9,7 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaaeExchangeSkillViewController.h"
 #import "ODBazaarExchangeSkillCell.h"
-
+ 
 #import "MJRefresh.h"
 #import "ODBazaarExchangeSkillDetailViewController.h"
 #import "ODBazaarExchangeSkillModel.h"
@@ -26,7 +26,7 @@
 @end
 
 // 循环cell标识
-static NSString * const exchangeCellId = @"exchangeCell";
+static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 
 @implementation ODBazaaeExchangeSkillViewController
 

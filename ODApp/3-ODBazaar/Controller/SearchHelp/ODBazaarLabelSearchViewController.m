@@ -8,18 +8,28 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODBazaarLabelSearchViewController.h"
-#import "ODBazaarCollectionCell.h"
+#import "ODBazaarHelpCell.h"
+#import "MJRefresh.h"
+#import "ODBazaarModel.h"
+#import "ODBazaarDetailViewController.h"
+#import "ODBazaarRequestHelpModel.h"
 
-#define kBazaarCellId @"ODBazaarCollectionCell"
-@interface ODBazaarLabelSearchViewController ()
+@interface ODBazaarLabelSearchViewController ()<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate, UITextFieldDelegate>
+
+@property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic, strong) UISearchBar *searchBar;
+@property(nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic) NSInteger count;
+@property(nonatomic, strong) UILabel *noReusltLabel;
 
 @end
+
+static NSString * const cellId = @"ODBazaarHelpCell";
 
 @implementation ODBazaarLabelSearchViewController
 
 #pragma mark - lazyLoad
--(UISearchBar *)searchBar
-{
+-(UISearchBar *)searchBar{
     if (!_searchBar) {
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 8, kScreenSize.width - 20, 30)];
         [[[[_searchBar.subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
@@ -31,22 +41,23 @@
     return _searchBar;
 }
 
--(UICollectionView *)collectionView
-{
-    if (!_collectionView) {
-        UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        flowLayout.minimumInteritemSpacing = 5;
-        flowLayout.minimumLineSpacing = 5;
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        flowLayout.itemSize = CGSizeMake(kScreenSize.width, 107);
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 46, kScreenSize.width, kScreenSize.height - 110) collectionViewLayout:flowLayout];
-        _collectionView.dataSource = self;
-        _collectionView.delegate = self;
-        _collectionView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
-        [_collectionView registerNib:[UINib nibWithNibName:@"ODBazaarCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarCellId];
-        [self.view addSubview:_collectionView];
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 46, kScreenSize.width, kScreenSize.height - 64- 46) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        // 估算tableView高度
+        _tableView.rowHeight = UITableViewAutomaticDimension;
+        _tableView.estimatedRowHeight = 300;
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
+        // 取消分割线
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        // 注册cell
+        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODBazaarHelpCell class]) bundle:nil] forCellReuseIdentifier:cellId];
+        [self.view addSubview:_tableView];
     }
-    return _collectionView;
+    return _tableView;
 }
 
 -(NSMutableArray *)dataArray
@@ -66,16 +77,16 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
     [self searchBar];
     __weakSelf
-    self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         if (weakSelf.searchBar.text.length > 0) {
             weakSelf.count = 1;
             [weakSelf requestData];
         } else {
-            [weakSelf.collectionView.mj_header endRefreshing];
+            [weakSelf.tableView.mj_header endRefreshing];
         }
     }];
 
-    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf loadMoreData];
     }];
 }
@@ -91,11 +102,10 @@
 }
 
 #pragma mark - 请求数据
--(void)requestData
-{
+-(void)requestData{
     __weakSelf;
     [self.searchBar resignFirstResponder];
-    NSDictionary *parameter = @{@"search" : self.searchBar.text, @"task_status" : @"9", @"page" : [NSString stringWithFormat:@"%ld", self.count],@"city_id":[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].cityID]};
+    NSDictionary *parameter = @{@"search" : self.searchBar.text, @"task_status" : @"9", @"page" : [NSString stringWithFormat:@"%ld", self.count]};
     
     [ODHttpTool getWithURL:ODUrlTaskList parameters:parameter modelClass:[ODBazaarRequestHelpModel class] success:^(ODBazaarRequestHelpModelResponse  *model) {
         if (weakSelf.count == 1) {
@@ -106,12 +116,16 @@
         for (ODBazaarRequestHelpTasksModel *taskModel in helpModel.tasks) {
             [weakSelf.dataArray addObject:taskModel];
         }
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf.collectionView.mj_footer endRefreshing];
-        [weakSelf.collectionView reloadData];
+      
+        [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[[model result] tasks]];
+        if (weakSelf.dataArray.count == 0) {
+            [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"没有符合条件的任务"];
+        }else {
+            [weakSelf.noResultLabel hidden];
+        }
     } failure:^(NSError *error) {
-        [weakSelf.collectionView.mj_header endRefreshing];
-        [weakSelf.collectionView.mj_footer endRefreshing];
+        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
     }];
 }
 
@@ -120,24 +134,23 @@
     [self requestData];
 }
 
-#pragma mark - UICollectionViewDataSource
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+#pragma mark - UITableViewDataSource
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    ODBazaarCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarCellId forIndexPath:indexPath];
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ODBazaarHelpCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     cell.model = self.dataArray[indexPath.row];
-    cell.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     return cell;
 }
 
-#pragma mark - UICollectionViewDelegate
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - UITableViewDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     ODBazaarDetailViewController *bazaarDetail = [[ODBazaarDetailViewController alloc] init];
     ODBazaarRequestHelpTasksModel *model = self.dataArray[indexPath.row];
     bazaarDetail.task_id = [NSString stringWithFormat:@"%ld", model.task_id];
@@ -163,14 +176,14 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    [self.collectionView.mj_header beginRefreshing];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 #pragma mark - action
 - (void)confirmButtonClick:(UIButton *)button {
     [self.searchBar resignFirstResponder];
     if (self.searchBar.text.length > 0) {
-        [self.collectionView.mj_header beginRefreshing];
+        [self.tableView.mj_header beginRefreshing];
     } else {
         [ODProgressHUD showInfoWithStatus:@"请输入搜索内容"];
     }

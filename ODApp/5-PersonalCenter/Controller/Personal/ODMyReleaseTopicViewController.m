@@ -24,6 +24,8 @@
 
 @end
 
+static NSString *cellId = @"ODCommunityCell";
+
 @implementation ODMyReleaseTopicViewController
 
 #pragma mark - lazyload
@@ -37,7 +39,7 @@
         UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 4)];
         view.backgroundColor = [UIColor backgroundColor];
         _tableView.tableHeaderView = view;
-        [_tableView registerNib:[UINib nibWithNibName:@"ODCommunityCell" bundle:nil] forCellReuseIdentifier:@"cellId"];
+        [_tableView registerNib:[UINib nibWithNibName:@"ODCommunityCell" bundle:nil] forCellReuseIdentifier:cellId];
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.estimatedRowHeight = 300;;
@@ -145,7 +147,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
+    ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
     [cell showDataWithModel:model dict:self.userInfoDic index:indexPath];

@@ -21,8 +21,10 @@
 @property(nonatomic)NSInteger index;
 @property(nonatomic,copy)NSString *status;
 
-
 @end
+
+static NSString *taskCellId = @"ODMyTaskCell";
+static NSString *violationsCellId = @"ODMyTaskViolationsCell";
 
 @implementation ODMyAcceptTaskViewController
 
@@ -34,8 +36,8 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        [_tableView registerNib:[UINib nibWithNibName:@"ODMyTaskCell" bundle:nil] forCellReuseIdentifier:@"first"];
-        [_tableView registerNib:[UINib nibWithNibName:@"ODMyTaskViolationsCell" bundle:nil] forCellReuseIdentifier:@"second"];
+        [_tableView registerNib:[UINib nibWithNibName:@"ODMyTaskCell" bundle:nil] forCellReuseIdentifier:taskCellId];
+        [_tableView registerNib:[UINib nibWithNibName:@"ODMyTaskViolationsCell" bundle:nil] forCellReuseIdentifier:violationsCellId];
         [self.view addSubview:_tableView];
     }
     return _tableView;
@@ -129,7 +131,7 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ODBazaarModel *model = self.dataArray[indexPath.row];
     if ([model.task_status isEqualToString:@"-1"]) {
-        ODMyTaskViolationsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"second"];
+        ODMyTaskViolationsCell *cell = [tableView dequeueReusableCellWithIdentifier:violationsCellId];
         cell.model = self.dataArray[indexPath.row];
         cell.deleteButton.hidden = YES;
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(18, 75, 15, 15)];
@@ -137,7 +139,7 @@
         [cell.contentView addSubview:imageView];
         return cell;
     }else{
-        ODMyTaskCell *cell = [tableView dequeueReusableCellWithIdentifier:@"first"];
+        ODMyTaskCell *cell = [tableView dequeueReusableCellWithIdentifier:taskCellId];
         cell.model = self.dataArray[indexPath.row];
         return cell;
     }

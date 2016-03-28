@@ -9,10 +9,10 @@
 #import "ODSettingItem.h"
 
 @implementation ODSettingItem
-+ (instancetype)itemWithIcon:(UIImage *)icon name:(NSString *)name
++ (instancetype)itemWithIcon:(NSString *)icon name:(NSString *)name
 {
     ODSettingItem *item = [[self alloc] init];
-    if (icon) item.icon = icon;
+    if (icon.length) item.icon = icon;
     item.name = name;
     return item;
 }

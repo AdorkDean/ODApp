@@ -7,18 +7,11 @@
 //
 
 #import "ODBaseViewController.h"
-#import "MJRefresh.h"
-#import "ODBazaarModel.h"
-#import "ODBazaarDetailViewController.h"
-#import "ODBazaarRequestHelpModel.h"
 
 
-@interface ODBazaarLabelSearchViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate, UITextFieldDelegate>
 
-@property(nonatomic, strong) UISearchBar *searchBar;
-@property(nonatomic, strong) UICollectionView *collectionView;
-@property(nonatomic, strong) NSMutableArray *dataArray;
-@property(nonatomic) NSInteger count;
-@property(nonatomic, strong) UILabel *noReusltLabel;
+@interface ODBazaarLabelSearchViewController : ODBaseViewController  
+
+
 
 @end

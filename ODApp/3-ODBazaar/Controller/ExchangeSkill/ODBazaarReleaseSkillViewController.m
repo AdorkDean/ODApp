@@ -202,6 +202,7 @@
     UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 59.5, kScreenSize.width, 0.5)];
     lineView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
     [topView addSubview:lineView];
+    
 }
 
 -(void)createMiddleView{
@@ -269,8 +270,10 @@
         button.frame = CGRectMake(17.5+(width+10)*(i%4), 10+(10+width)*(i/4), width, width);
         if ([self.type isEqualToString:@"编辑"] && marray!=self.mArray) {
             NSDictionary *dict = marray[i];
-            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[dict valueForKeyPath:@"img_url"]] forState:UIControlStateNormal completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                [weakSelf.mArray addObject:image];
+            [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:[dict valueForKeyPath:@"img_url"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                if (image) {
+                    [weakSelf.mArray addObject:image];
+                }
             }];
         }else{
             [button setBackgroundImage:marray[i] forState:UIControlStateNormal];
