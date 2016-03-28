@@ -38,11 +38,12 @@
 }
 
 - (void)getRequestData:(NSString *)paramas{
-    NSString *url = @"http://woquapi.test.odong.com/1.0/shopcart/order";
-    NSDictionary *parameter = @{ @"object_type" : @"1", @" object_id" :[NSString stringWithFormat:@"%@", paramas] };
-    [ODHttpTool getWithURL:url parameters:parameter modelClass:[NSObject class] success:^(id model) {
+    NSDictionary *parameter = @{
+                                @"object_type" : @"1",
+                                @" object_id" :[NSString stringWithFormat:@"%@", paramas]
+                                };
+    [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parameter modelClass:[NSObject class] success:^(id model) {
         NSLog(@"12333333");
-        
     }
     failure:^(NSError *error) {
     

@@ -183,7 +183,8 @@ UIKIT_EXTERN NSString * const ODUrlSwapSchedule;
 UIKIT_EXTERN NSString * const ODUrlSwapCreate;
 UIKIT_EXTERN NSString * const ODUrlSwapEdit;
 
-
+/** shopcart */
+UIKIT_EXTERN NSString * const ODUrlShopcartOrder;
 
 //  task
 UIKIT_EXTERN NSString * const ODUrlTaskTaskAdd;

@@ -67,7 +67,7 @@ static NSInteger const imageCount = 5;
 
 - (void)setupPageControl
 {
-    CGRect frame = CGRectMake((KScreenWidth - 90) * 0.5, self.view.od_height * 0.9, 90, 30);
+    CGRect frame = CGRectMake((KScreenWidth - 90) * 0.5, self.view.od_height * 0.93, 90, 30);
     MyPageControl *pageControl = [[MyPageControl alloc] initWithFrame:frame
                                                           normalImage:[UIImage imageNamed:@"noselected"]
                                                      highlightedImage:[UIImage imageNamed:@"selected"]

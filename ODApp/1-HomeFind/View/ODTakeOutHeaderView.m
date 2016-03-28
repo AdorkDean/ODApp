@@ -1,16 +1,16 @@
 //
-//  ODTakeAwayHeaderView.m
+//  ODTakeOutHeaderView.m
 //  ODApp
 //
 //  Created by 王振航 on 16/3/22.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODTakeAwayHeaderView.h"
+#import "ODTakeOutHeaderView.h"
 #import "ODInfiniteScrollView.h"
 #import "ODTakeOutBannerModel.h"
 
-@interface ODTakeAwayHeaderView()
+@interface ODTakeOutHeaderView()
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *menuView;
 
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation ODTakeAwayHeaderView
+@implementation ODTakeOutHeaderView
 
 /**
  *  快速创建View

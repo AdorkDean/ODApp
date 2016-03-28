@@ -10,7 +10,7 @@
 #import "ODMyTakeOutViewController.h"
 
 #import <MJRefresh.h>
-#import "ODTakeAwayCell.h"
+#import "ODTakeOutCell.h"
 #import "ODMyTakeOutModel.h"
 
 @interface ODMyTakeOutViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -20,7 +20,7 @@
 /** 参数 */
 @property (nonatomic, strong) NSMutableDictionary *params;
 /** 页码 */
-@property (nonatomic, copy) NSString *page;
+@property (nonatomic, assign) NSInteger page;
 /** 模型数组 */
 @property (nonatomic, strong) NSMutableArray *datas;
 
@@ -76,13 +76,13 @@ static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
     [self.view addSubview:tableView];
     self.tableView = tableView;
 
-    self.page = @1;
+    self.page = 1;
     // rowHeight
     tableView.rowHeight = 90;
     // 取消分割线
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     // 注册cell
-    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODTakeAwayCell class]) bundle:nil] forCellReuseIdentifier:myTakeOutCellId];
+    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODTakeOutCell class]) bundle:nil] forCellReuseIdentifier:myTakeOutCellId];
 }
 
 /**
@@ -91,7 +91,7 @@ static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
 - (void)setupRefresh
 {
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewTakeOuts)];
-    [self.tableView.mj_header beginRefreshing];
+//    [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTakeOuts)];
     self.tableView.mj_footer.automaticallyHidden = YES;
 }
@@ -104,7 +104,7 @@ static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODTakeAwayCell *cell = [tableView dequeueReusableCellWithIdentifier:myTakeOutCellId];
+    ODTakeOutCell *cell = [tableView dequeueReusableCellWithIdentifier:myTakeOutCellId];
     cell.datas = self.datas[indexPath.row];
     return cell;
 }
@@ -125,7 +125,8 @@ static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"type"] = @"1";
-    params[@"page"] = self.page;
+    params[@"page"] = [NSString stringWithFormat:@"%ld", self.page];
+    params[@"open_id"] = @"766148455eed214ed1f8";
     self.params = params;
     __weakSelf
     [ODHttpTool getWithURL:ODUrlTakeOutOrderList parameters:params modelClass:[ODMyTakeOutModel class] success:^(id model) {
@@ -139,7 +140,7 @@ static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
         [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf checkFooterState:newDatas.count];
         // 重新设置 page = 1
-        weakSelf.page = @1;
+        weakSelf.page = 1;
     } failure:^(NSError *error) {
         if (weakSelf.params != params) return;
         [weakSelf.tableView.mj_header endRefreshing];
@@ -151,7 +152,7 @@ static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
     // 结束下拉刷新
     [self.tableView.mj_header endRefreshing];
     // 取出页码
-//    NSString *currentPage = [NSString stringWithFormat:@"%ld", [self.page.intValue + 1]];
+    NSInteger currentPage = self.page;
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     self.params = params;
@@ -163,10 +164,10 @@ static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
         [weakSelf.tableView reloadData];
         [weakSelf checkFooterState:moreTakeOuts.count];
         // 请求成功后才赋值页码
-//        weakSelf.page = currentPage;
+        weakSelf.page = currentPage;
     } failure:^(NSError *error) {
         if (weakSelf.params != params) return;
-//        weakSelf.page = @([weakSelf.page integerValue] - 1);
+        weakSelf.page = weakSelf.page - 1;
         [weakSelf.tableView.mj_footer endRefreshing];
     }];
 }
@@ -182,7 +183,5 @@ static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
         [self.tableView.mj_footer endRefreshing];
     }
 }
-
-
 
 @end

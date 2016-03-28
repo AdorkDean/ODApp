@@ -1,17 +1,18 @@
 //
-//  ODTakeAwayCell.m
+//  ODTakeOutCell.m
 //  ODApp
 //
 //  Created by 王振航 on 16/3/22.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //  定外卖cell
 
-#import "ODTakeAwayCell.h"
+#import "ODTakeOutCell.h"
 
-#import "ODTakeAwayModel.h"
+#import "ODTakeOutModel.h"
 #import "UIImageView+WebCache.h"
+#import "ODBuyTakeOutViewController.h"
 
-@interface ODTakeAwayCell()
+@interface ODTakeOutCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *shopImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
@@ -23,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
 @end
 
-@implementation ODTakeAwayCell
+@implementation ODTakeOutCell
 
 #pragma mark - 初始化方法
 - (void)awakeFromNib
@@ -35,7 +36,7 @@
     self.originalPriceLabel.textColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
 }
 
-- (void)setDatas:(ODTakeAwayModel *)datas
+- (void)setDatas:(ODTakeOutModel *)datas
 {
     _datas = datas;
     
@@ -63,7 +64,11 @@
 #pragma mark - 事件方法
 - (IBAction)buyTakeAway
 {
-    NSLogFunc;
+    ODBuyTakeOutViewController *vc = [[ODBuyTakeOutViewController alloc] init];
+    vc.order_id = self.datas.product_id;
+    UITabBarController *tabBarControler = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UINavigationController *navigationController = tabBarControler.selectedViewController;
+    [navigationController pushViewController:vc animated:YES];
 }
 
 

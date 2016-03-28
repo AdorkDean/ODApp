@@ -23,11 +23,7 @@
 
 - (void)showOnSuperView:(UIView *)view
 {
-    if ([view.subviews containsObject:self])
-    {
-        
-    }
-    else
+    if (![view.subviews containsObject:self])
     {
         [view addSubview:self];
         self.frame = CGRectMake((self.superview.od_width - 160)/2, self.superview.od_height/2, 160, 30);
