@@ -15,6 +15,8 @@
 
 @end
 
+static NSString *cellId = @"ODCommunityCell";
+
 @implementation ODCommumityViewController
 
 #pragma mark - lazyload
@@ -25,7 +27,7 @@
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = [UIColor backgroundColor];
-        [_tableView registerNib:[UINib nibWithNibName:@"ODCommunityCell" bundle:nil] forCellReuseIdentifier:@"cellId"];
+        [_tableView registerNib:[UINib nibWithNibName:@"ODCommunityCell" bundle:nil] forCellReuseIdentifier:cellId];
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
         _tableView.rowHeight = UITableViewAutomaticDimension;
         _tableView.estimatedRowHeight = 300;;
@@ -207,7 +209,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cellId"];
+    ODCommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     ODCommunityBbsListModel *model = self.dataArray[indexPath.row];
     [cell showDataWithModel:model dict:self.userInfoDic index:indexPath];
@@ -232,8 +234,7 @@
 }
 
 #pragma mark - action
--(void)titleButtonClick:(UIButton *)button
-{
+-(void)titleButtonClick:(UIButton *)button{
     UIViewController *controller = [[UIViewController alloc]init];
     controller.view.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
     controller.view.layer.borderColor = [UIColor colorWithRGBString:@"#000000" alpha:1].CGColor;
@@ -265,8 +266,7 @@
     }];
 }
 
--(void)titleViewLabelButtonClick:(UIButton *)button
-{
+-(void)titleViewLabelButtonClick:(UIButton *)button{
     self.bbsMark = button.titleLabel.text;
     self.bbsType = 5;
     [self.tableView.mj_header beginRefreshing];
@@ -274,14 +274,12 @@
     }];
 }
 
--(void)searchButtonClick
-{
+-(void)searchButtonClick{
     ODCommunityKeyWordSearchViewController *keyWordSearch = [[ODCommunityKeyWordSearchViewController alloc]init];
     [self.navigationController pushViewController:keyWordSearch animated:YES];
 }
 
--(void)publishButtonClick
-{
+-(void)publishButtonClick{
     __weakSelf
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
