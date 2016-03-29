@@ -102,7 +102,7 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     dic[@"network_type"] = @"";
     dic[@"latitude"] = @"";
     dic[@"longitude"] = @"";
-    if (dic[@"open_id"] == nil)
+    if (parameter[@"open_id"] == nil)
     {
         dic[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
     }
