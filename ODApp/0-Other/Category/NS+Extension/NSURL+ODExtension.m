@@ -20,7 +20,8 @@
 
 + (instancetype)OD_URLWithString:(NSString *)URLString
 {
-    NSString *string = [URLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+//    NSString *string = [URLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *string = [URLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     return [NSURL URLWithString:string];
 }
 
