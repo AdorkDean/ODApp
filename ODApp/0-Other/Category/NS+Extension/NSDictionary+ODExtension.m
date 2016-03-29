@@ -88,10 +88,12 @@
 - (NSString *)od_URLDesc
 {
     NSString *urlString = [[self od_desc] stringByReplacingOccurrencesOfString:@"\n\t\"" withString:@""];
-    NSString *urlString1 = [urlString stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-    NSString *urlString2 = [urlString1 stringByReplacingOccurrencesOfString:@":" withString:@"="];
-    NSString *urlString3 = [urlString2 stringByReplacingOccurrencesOfString:@"," withString:@"&"];
-    return urlString3;
+    urlString = [urlString stringByReplacingOccurrencesOfString:@"{" withString:@""];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@"}" withString:@""];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@":" withString:@"="];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@"," withString:@"&"];
+    return urlString;
 }
 
 @end
