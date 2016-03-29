@@ -91,26 +91,29 @@
     self.informationView.userImageView.layer.borderWidth = 1;
     
     
-    if ([model.sign isEqualToString:@""]) {
-        self.informationView.signatureLabel.text = @"未设置签名";
-    }else{
-        
-        
-        self.informationView.signatureLabel.text = model.sign;
-        
-    }
+//    if ([model.sign isEqualToString:@""]) {
+//        self.informationView.signatureLabel.text = @"未设置签名";
+//    }else{
+//        
+//        
+//        self.informationView.signatureLabel.text = model.sign;
+//        
+//    }
+    
+    self.informationView.signatureLabel.text = model.sign ? : @"";
     
     UITapGestureRecognizer *signatureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signatureAction)];
     [self.informationView.signatureImageView addGestureRecognizer:signatureTap];
     
     
     
-    if ([model.nick isEqualToString:@""]) {
-        self.informationView.nickNameLabel.text = @"未设置昵称";
-    }else{
-        self.informationView.nickNameLabel.text = model.nick;
-        
-    }
+//    if ([model.nick isEqualToString:@""]) {
+//        self.informationView.nickNameLabel.text = @"未设置昵称";
+//    }else{
+//        self.informationView.nickNameLabel.text = model.nick;
+//        
+//    }
+    self.informationView.nickNameLabel.text = model.nick ? : @"未设置昵称";
     
     UITapGestureRecognizer *nickNameTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nickNameAction)];
     [self.informationView.nickNameImageView addGestureRecognizer:nickNameTap];
@@ -387,7 +390,6 @@
 {
     UIActionSheet *actionSheet = [[UIActionSheet alloc]initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
     [actionSheet showInView:self.view];
-    
 }
 
 /**
