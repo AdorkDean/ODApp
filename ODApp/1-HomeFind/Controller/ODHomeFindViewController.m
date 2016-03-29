@@ -165,6 +165,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     return _tableView;
 }
 
+#pragma mark - UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;
 }
@@ -311,26 +312,29 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 }
 
 -(void)createFooterView{
-    UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 28.5)];
+    UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 29)];
     footerView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width-180)/2, 10.25, 12, 8)];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width-180)/2, 10.5, 12, 8)];
     imageView.image = [UIImage imageNamed:@"icon_gesture"];
     [footerView addSubview:imageView];
     
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake((kScreenSize.width-160)/2, 4.25, 160, 20)];
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake((kScreenSize.width-160)/2, 4.5, 160, 20)];
     [button setTitle:@"想了解更多技能？ 憋说话，点我！" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor colorWithRGBString:@"#555555" alpha:1] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(moreSkillButtonClick) forControlEvents:UIControlEventTouchUpInside];
     button.titleLabel.font = [UIFont systemFontOfSize:9];
     [footerView addSubview:button];
+    
+    UIView *spaceView = [[UIView alloc]initWithFrame:CGRectMake(0, 29, kScreenSize.width, 6)];
+    spaceView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3"];
+    [footerView addSubview:spaceView];
     self.tableView.tableFooterView = footerView;
 }
 
 #pragma mark - AMapSearchDelegate
 //地图定位成功回调
-- (void) mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation
-updatingLocation:(BOOL)updatingLocation {
+-(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
     if (updatingLocation) {
         _mapView.showsUserLocation = NO;
         [_mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
