@@ -183,40 +183,29 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *, id> *)info {
     NSString *sourceType = info[UIImagePickerControllerMediaType];
     if ([sourceType isEqualToString:(NSString *) kUTTypeImage]) {
-        self.pickedImage = info[UIImagePickerControllerOriginalImage];
-
-        [ODProgressHUD showProgressWithStatus:@"正在上传"];
+        NSString *imageUrl = [info[UIImagePickerControllerReferenceURL] absoluteString];
+        NSRange range;
+        range.location = [imageUrl rangeOfString:@"=" options:NSBackwardsSearch].location + 1;
+        range.length = imageUrl.length - range.location;
+        imageUrl = [imageUrl substringWithRange:range];
         NSData *imageData;
-        self.pickedImage = [self scaleImage:self.pickedImage];
-        if (UIImagePNGRepresentation(self.pickedImage) == nil) {
-            imageData =  [self imageData:self.pickedImage];
-        } else {
+        self.pickedImage = info[UIImagePickerControllerOriginalImage];
+        if ([imageUrl.lowercaseString isEqualToString:@"jpg"]) {
+            imageData = UIImageJPEGRepresentation(self.pickedImage, 0.3);
+        }else {
             imageData = UIImagePNGRepresentation(self.pickedImage);
         }
         NSString *str = @"data:image/jpeg;base64,";
         NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
         [self.imageArray addObject:self.pickedImage];
+        [ODProgressHUD showProgressWithStatus:@"正在上传"];
         [self pushImageData:strData];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
-
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
--(UIImage *) imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth{
-    CGSize imageSize = sourceImage.size;
-    CGFloat width = imageSize.width;
-    CGFloat height = imageSize.height;
-    CGFloat targetWidth = defineWidth;
-    CGFloat targetHeight = (targetWidth / width) * height;
-    UIGraphicsBeginImageContext(CGSizeMake(targetWidth, targetHeight));
-    [sourceImage drawInRect:CGRectMake(0,0,targetWidth, targetHeight)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
 }
 
 - (UIImage *)scaleImage:(UIImage *)image {
@@ -230,25 +219,6 @@
     UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newimg;
-    
-}
-
--(NSData *)imageData:(UIImage *)myimage
-{
-    NSData *data=UIImageJPEGRepresentation(myimage, 1.0);
-    
-    NSLogFunc;
-    
-    if (data.length>100*1024) {
-        if (data.length>1024*1024) {//1M以及以上
-            data=UIImageJPEGRepresentation([self scaleImage:myimage], 0.1);
-        }else if (data.length>512*1024) {//0.5M-1M
-            data=UIImageJPEGRepresentation(myimage, 0.5);
-        }else if (data.length>200*1024) {//0.25M-0.5M
-            data=UIImageJPEGRepresentation(myimage, 0.9);
-        }
-    }
-    return data;
 }
 
 - (void)reloadImageButtons {
