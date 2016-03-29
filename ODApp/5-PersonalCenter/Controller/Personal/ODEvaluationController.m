@@ -189,11 +189,13 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
         [weakSelf.taskDataArray addObjectsFromArray:evaluationDatas];
         
         [ODHttpTool od_endRefreshWith:weakSelf.taskTableView array:evaluationDatas];
+        
+        ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
         if (weakSelf.taskDataArray.count == 0) {
-            [self.noResultLabel showOnSuperView:weakSelf.taskTableView title:@"暂无评价"];
+            [noResultLabel showOnSuperView:weakSelf.taskTableView title:@"暂无评价"];
         }
         else {
-            [self.noResultLabel hidden];
+            [noResultLabel hidden];
         }
      } failure:^(NSError *error) {
          [weakSelf.taskTableView.mj_header endRefreshing];
@@ -212,19 +214,20 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlUserCommentList parameters:params modelClass:[ODSecondEvaluationModel class] success:^(id model) {
-         if ([countNumber isEqualToString:@"1"]) {
-             [weakSelf.skillDataArray removeAllObjects];
-         }
-         NSArray *evaluationDatas = [model result];
-         [weakSelf.skillDataArray addObjectsFromArray:evaluationDatas];
+        if ([countNumber isEqualToString:@"1"]) {
+            [weakSelf.skillDataArray removeAllObjects];
+        }
+        NSArray *evaluationDatas = [model result];
+        [weakSelf.skillDataArray addObjectsFromArray:evaluationDatas];
          
-         [ODHttpTool od_endRefreshWith:weakSelf.skillTableView array:evaluationDatas];
-         if (weakSelf.skillDataArray.count == 0) {
-             [self.noResultLabel showOnSuperView:weakSelf.skillTableView title:@"暂无评价"];
-         }
-         else {
-             [self.noResultLabel hidden];
-         }
+        [ODHttpTool od_endRefreshWith:weakSelf.skillTableView array:evaluationDatas];
+        ODNoResultLabel *noResultLabel = [[ODNoResultLabel alloc] init];
+        if (weakSelf.skillDataArray.count == 0) {
+            [noResultLabel showOnSuperView:weakSelf.skillTableView title:@"暂无评价"];
+        }
+        else {
+            [noResultLabel hidden];
+        }
      } failure:^(NSError *error) {
          [weakSelf.skillTableView.mj_header endRefreshing];
          [weakSelf.skillTableView.mj_footer endRefreshing];
