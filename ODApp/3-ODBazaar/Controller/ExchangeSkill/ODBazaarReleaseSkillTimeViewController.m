@@ -17,9 +17,14 @@
  *  圆圈的数组
  */
 @property (nonatomic, strong) NSMutableArray *roundViews;
+
+
 @end
 
+
+
 @implementation ODBazaarReleaseSkillTimeViewController
+@synthesize dataArray = _dataArray;
 - (NSMutableArray *)roundViews
 {
     if (!_roundViews)
@@ -84,6 +89,16 @@
         _dataArray = [[NSMutableArray alloc]init];
     }
     return _dataArray;
+}
+
+- (void)setDataArray:(NSMutableArray *)dataArray
+{
+    if (dataArray.count)
+    {
+        dataArray = [ODBazaarReleaseSkillTimeModel mj_objectArrayWithKeyValuesArray:dataArray];
+    }
+    
+    _dataArray = dataArray;
 }
 
 #pragma mark - 拼接参数
@@ -152,6 +167,12 @@
     ODBazaarReleaseSkillTimeViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellID];
     ODBazaarReleaseSkillTimeModel *timeModel = self.dataArray[indexPath.section * 3 + indexPath.row];
     [cell.openButton addTarget:self action:@selector(openButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+//    if ([timeModel isKindOfClass:[NSDictionary class]])
+//    {
+//        timeModel = [ODBazaarReleaseSkillTimeModel mj_objectWithKeyValues:timeModel];
+//    }
+    
     cell.timeLabel.text = timeModel.display;
     cell.status = [timeModel.status boolValue];
     return cell;
