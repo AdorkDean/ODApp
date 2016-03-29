@@ -10,6 +10,12 @@
 
 #import "ODHttpTool.h"
 
+#import "ODUserInformation.h"
+
+#import "ODPersonalCenterViewController.h"
+#import "ODBuyTakeOutViewController.h"
+
+
 @implementation PontoH5ToMobileRequest {
 }
 
@@ -28,12 +34,17 @@
         UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
         UINavigationController *navVc = tabBarVc.selectedViewController;
         
-        UIViewController *vc = [UIViewController new];
-        
-        vc.title = @"123";
-        vc.view.backgroundColor = [UIColor randomColor];
-        
-        [navVc pushViewController:vc animated:YES];
+        if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+            ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
+            [navVc presentViewController:vc animated:YES completion:nil];
+        }
+        else {
+//            UIViewController *vc = [UIViewController new];
+            ODBuyTakeOutViewController *vc = [[ODBuyTakeOutViewController alloc] init];
+            vc.title = @"123";
+            vc.view.backgroundColor = [UIColor randomColor];            
+            [navVc pushViewController:vc animated:YES];
+        }
     }
 }
 
