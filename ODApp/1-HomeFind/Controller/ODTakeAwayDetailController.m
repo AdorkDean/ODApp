@@ -23,14 +23,8 @@
     self.navigationItem.title = self.takeAwayTitle;
     self.pontoDispatcher = [[PontoDispatcher alloc] initWithHandlerClassesPrefix:@"Ponto" andWebView:self.webView];
     if (self.isCart) {
-//        NSString *city_id = [NSString stringWithFormat:@"city_id=%@",[NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].openID]];
-//        NSString *platform = @"platform=iphone";
-//        NSString *channel = @"channel=appstore";
-//        NSString *app_version = [NSString stringWithFormat:@"app_version=%@", [ODAPPInfoTool APPVersion]];
-//        NSString *open_id = [NSString stringWithFormat:@"open_id=%@", [NSString stringWithFormat:@"%@", [ODUserInformation sharedODUserInformation].openID]];
-        NSString *open_id = @"766148455eed214ed1f8";
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@?open_id=%@", ODWebUrlNativeCart, open_id]]]];
-        
+        NSString *urlString = [[ODHttpTool getRequestParameter:@{}]od_URLDesc];
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@?%@", ODWebUrlNativeCart,urlString]]]];
     }
     else {
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?id=%@", ODWebUrlNative, self.product_id]]]];
