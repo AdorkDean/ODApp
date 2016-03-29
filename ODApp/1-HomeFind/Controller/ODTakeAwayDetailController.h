@@ -15,5 +15,7 @@
 
 @property (nonatomic, copy) NSString *product_id;
 
+@property (nonatomic, strong) NSString *takeAwayTitle;
+
 @end
 
