@@ -15,10 +15,10 @@
 #import "ODBindingMobileController.h"
 #import "ODTabBarController.h"
 #import "ODUserModel.h"
-#import "UIImageView+WebCache.h"
 #import "ODChangePassWordController.h"
 #import "ODUploadImageModel.h"
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "UIImageView+ODCache.h"
 
 @interface ODInformationController ()<UITableViewDataSource , UITableViewDelegate ,UIImagePickerControllerDelegate , UIActionSheetDelegate , UINavigationControllerDelegate>
 
@@ -75,7 +75,9 @@
     ODUserModel *model = self.dataArray[0];
     
     
-    [self.informationView.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
+//    [self.informationView.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
+    // 加载头像
+    [self.informationView.userImageView od_loadCachedImage:model.avatar];
     
     
     UITapGestureRecognizer *pictMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(picAction)];
@@ -136,12 +138,12 @@
     
     UITapGestureRecognizer *passWordTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(passWordAction)];
     [self.informationView.passWordImageView addGestureRecognizer:passWordTap];
-    
-    [self.informationView.codeImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.qrcode]];
-    
-    
-    
+
+    // 加载二维码图片
+    [self.informationView.codeImageView od_loadCachedImage:model.qrcode];
 }
+
+
 
 #pragma mark - 请求数据
 - (void)getData
@@ -424,7 +426,6 @@
     UIGraphicsEndImageContext();
     
     return newImage;
-    
 }
 
 @end

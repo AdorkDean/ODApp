@@ -32,4 +32,11 @@
 - (void)od_setImageWithURLString:(NSString *)URLString completed:(SDWebImageCompletionBlock)completerBlock;
 
 
+/**
+ *  根据URL, 查找缓存图片
+ *  没有缓存, 下载图片
+ *  有缓存,  直接加载缓存图片
+ */
+- (void)od_loadCachedImage:(NSString *)urlString;
+
 @end

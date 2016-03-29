@@ -106,13 +106,6 @@
         ODUserModel *user = [model result];
         [[ODUserInformation sharedODUserInformation] updateUserCache:user];
         
-        // 缓存头像和二维码
-        UIImageView *avatarView = nil;
-        [avatarView sd_setImageWithURL:[NSURL OD_URLWithString:user.avatar] placeholderImage:nil];
-        
-        UIImageView *codeView = nil;
-        [codeView sd_setImageWithURL:[NSURL OD_URLWithString:user.avatar] placeholderImage:nil];
-        
         [ODProgressHUD showToast:self.view msg:@"登录成功"];
         [weakSelf dismissViewControllerAnimated:YES completion:^{
             ODTabBarController *tabBar = (ODTabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
@@ -121,12 +114,8 @@
             if (weakSelf.delegate != nil) {
                 [weakSelf.delegate personalHasLoginSuccess];
             }
-            
         }];
-    }
-                   failure:^(NSError *error)
-    {
-        
+    } failure:^(NSError *error) {
     }];
 }
 
