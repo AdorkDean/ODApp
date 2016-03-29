@@ -9,6 +9,7 @@
 
 @interface ODHttpTool : NSObject
 
+
 + (NSMutableDictionary *)getRequestParameter:(NSDictionary *)parameter;
 
 /**
