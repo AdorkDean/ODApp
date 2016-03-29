@@ -9,5 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface NSDictionary (ODExtension)
+
 - (void)NSLogProperty;
+
+- (NSString *)od_desc;
+
+- (NSString *)od_URLDesc;
+
 @end

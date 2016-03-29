@@ -15,7 +15,15 @@
 
 @property (nonatomic, copy) NSString *product_id;
 
+/**
+ * 标题
+ */
 @property (nonatomic, strong) NSString *takeAwayTitle;
+
+/**
+ * 是否是购物车
+ */
+@property (nonatomic, assign) BOOL isCart;
 
 @end
 
