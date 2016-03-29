@@ -312,7 +312,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 }
 
 -(void)createFooterView{
-    UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 29)];
+    UIView *footerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 35)];
     footerView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
     
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake((kScreenSize.width-180)/2, 10.5, 12, 8)];
