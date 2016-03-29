@@ -49,7 +49,7 @@
 - (void)buyNowRequestData:(NSString *)paramasId {
     NSDictionary *parameter = @{
                                 @"object_type" : @"1",
-                                @" object_id" :[NSString stringWithFormat:@"%@", paramasId]
+                                @"object_id" :[NSString stringWithFormat:@"%@", paramasId]
                                 };
     [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parameter modelClass:[NSObject class] success:^(id model) {
         NSLog(@"12333333");
@@ -75,7 +75,7 @@
 - (void)orderNowRequestData:(NSString *)paramsId {
     NSDictionary *parameter = @{
                                 @"object_type" : @"1",
-                                @" object_id" :[NSString stringWithFormat:@"%@", paramsId]
+                                @"object_id" :[NSString stringWithFormat:@"%@", paramsId]
                                 };
     [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parameter modelClass:[NSObject class] success:^(id model) {
         
