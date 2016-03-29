@@ -25,11 +25,12 @@
     return [[self alloc] init];
 }
 
+#pragma mark - 直接购买
 - (void)buyNow:(id)params {
     if ([params isKindOfClass:[NSDictionary class]]) {
         NSLog(@"%@", params);
         NSLog(@"%@",params[@"id"]);
-        [self getRequestData:params[@"id"]];
+        [self buyNowRequestData:params[@"id"]];
         
         UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
         UINavigationController *navVc = tabBarVc.selectedViewController;
@@ -39,25 +40,47 @@
             [navVc presentViewController:vc animated:YES completion:nil];
         }
         else {
-//            UIViewController *vc = [UIViewController new];
             ODBuyTakeOutViewController *vc = [[ODBuyTakeOutViewController alloc] init];
-            vc.title = @"123";
-            vc.view.backgroundColor = [UIColor randomColor];            
             [navVc pushViewController:vc animated:YES];
         }
     }
 }
 
-- (void)getRequestData:(NSString *)paramas{
+- (void)buyNowRequestData:(NSString *)paramasId {
     NSDictionary *parameter = @{
                                 @"object_type" : @"1",
-                                @" object_id" :[NSString stringWithFormat:@"%@", paramas]
+                                @" object_id" :[NSString stringWithFormat:@"%@", paramasId]
                                 };
     [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parameter modelClass:[NSObject class] success:^(id model) {
         NSLog(@"12333333");
     }
-    failure:^(NSError *error) {
-    
+                   failure:^(NSError *error) {
+                       
+                   }];
+}
+
+#pragma mark - 购物车
+- (void)orderNow:(id)params {
+    if ([params isKindOfClass:[NSDictionary class]]) {
+        NSLog(@"params ------->  %@", params);
+        [self orderNowRequestData:params];
+        
+        UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UINavigationController *navVc = tabBarVc.selectedViewController;
+        ODBuyTakeOutViewController *vc = [[ODBuyTakeOutViewController alloc] init];
+        [navVc pushViewController:vc animated:YES];
+    }
+}
+
+- (void)orderNowRequestData:(NSString *)paramasId {
+    NSDictionary *parameter = @{
+                                @"object_type" : @"1",
+                                @" object_id" :[NSString stringWithFormat:@"%@", paramasId]
+                                };
+    [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        
+    } failure:^(NSError *error) {
+        
     }];
 }
 
