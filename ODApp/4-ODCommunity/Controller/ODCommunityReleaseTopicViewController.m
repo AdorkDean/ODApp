@@ -187,9 +187,9 @@
 
         [ODProgressHUD showProgressWithStatus:@"正在上传"];
         NSData *imageData;
-        self.pickedImage = [self scaleImage:self.pickedImage];;
+        self.pickedImage = [self scaleImage:self.pickedImage];
         if (UIImagePNGRepresentation(self.pickedImage) == nil) {
-            imageData = UIImageJPEGRepresentation(self.pickedImage, 0.3);
+            imageData =  [self imageData:self.pickedImage];
         } else {
             imageData = UIImagePNGRepresentation(self.pickedImage);
         }
@@ -206,17 +206,49 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(UIImage *) imageCompressForWidth:(UIImage *)sourceImage targetWidth:(CGFloat)defineWidth{
+    CGSize imageSize = sourceImage.size;
+    CGFloat width = imageSize.width;
+    CGFloat height = imageSize.height;
+    CGFloat targetWidth = defineWidth;
+    CGFloat targetHeight = (targetWidth / width) * height;
+    UIGraphicsBeginImageContext(CGSizeMake(targetWidth, targetHeight));
+    [sourceImage drawInRect:CGRectMake(0,0,targetWidth, targetHeight)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 - (UIImage *)scaleImage:(UIImage *)image {
-    CGSize size = CGSizeMake(image.size.width * 0.3, image.size.height * 0.3);
+    CGSize size = CGSizeMake(image.size.width * 0.5, image.size.height * 0.5);
     UIGraphicsBeginImageContext(size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     CGAffineTransform transform = CGAffineTransformIdentity;
-    transform = CGAffineTransformScale(transform, 0.3, 0.3);
+    transform = CGAffineTransformScale(transform, 0.5, 0.5);
     CGContextConcatCTM(context, transform);
     [image drawAtPoint:CGPointMake(0.0f, 0.0f)];
     UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newimg;
+    
+}
+
+-(NSData *)imageData:(UIImage *)myimage
+{
+    NSData *data=UIImageJPEGRepresentation(myimage, 1.0);
+    
+    NSLogFunc;
+    
+    if (data.length>100*1024) {
+        if (data.length>1024*1024) {//1M以及以上
+            data=UIImageJPEGRepresentation([self scaleImage:myimage], 0.1);
+        }else if (data.length>512*1024) {//0.5M-1M
+            data=UIImageJPEGRepresentation(myimage, 0.5);
+        }else if (data.length>200*1024) {//0.25M-0.5M
+            data=UIImageJPEGRepresentation(myimage, 0.9);
+        }
+    }
+    return data;
 }
 
 - (void)reloadImageButtons {
