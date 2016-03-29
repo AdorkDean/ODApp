@@ -9,6 +9,7 @@
 
 @interface ODHttpTool : NSObject
 
+
 + (NSMutableDictionary *)getRequestParameter:(NSDictionary *)parameter;
 
 /**
@@ -53,7 +54,6 @@
  */
 + (void)postWithURL:(NSString *)URL parameters:(NSDictionary *)parameters fromDataArray:(NSArray *)dataArray modelClass:(Class)modeleClass success:(void (^)(id model))success failure:(void (^)(NSError *))failure;
 
-+ (NSMutableDictionary *)getRequestParameter:(NSDictionary *)parameter;
 
 // 刷新数据
 + (void)od_endRefreshWith:(UIScrollView *)scrollView array:(NSArray *)array;

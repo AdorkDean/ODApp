@@ -87,7 +87,8 @@
 
 - (NSString *)od_URLDesc
 {
-    NSString *urlString = [[self od_desc] stringByReplacingOccurrencesOfString:@"\n\t\"" withString:@""];
+    NSString *urlString = [self od_desc];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@"\n\t\"" withString:@""];
     urlString = [urlString stringByReplacingOccurrencesOfString:@"{" withString:@""];
     urlString = [urlString stringByReplacingOccurrencesOfString:@"}" withString:@""];
     urlString = [urlString stringByReplacingOccurrencesOfString:@"\"" withString:@""];

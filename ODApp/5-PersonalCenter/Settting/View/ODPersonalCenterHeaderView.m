@@ -64,7 +64,6 @@
     for (ODCustomButton *button in self.userInformation)
     {
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        
         [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     }
 }

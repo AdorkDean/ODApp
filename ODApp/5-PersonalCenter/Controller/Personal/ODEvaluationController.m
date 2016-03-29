@@ -76,6 +76,10 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
 
 #pragma mark - 初始化
 -(void)creatSegment {
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, KScreenWidth, 50)];
+    view.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:view];
+    
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:@[@"任务评价", @"技能评价"]];
     self.segmentedControl.frame = CGRectMake(4, 10, kScreenSize.width - 8, 30);
     self.segmentedControl.clipsToBounds = YES;
@@ -97,15 +101,15 @@ NSString *const ODEvaluationViewID = @"ODEvaluationViewID";
     
     [self.segmentedControl addTarget:self action:@selector(segmentAction:) forControlEvents:UIControlEventValueChanged];
     
-    [self.view addSubview:self.segmentedControl];
+    [view addSubview:self.segmentedControl];
 }
 
 #pragma mark - Lazy Load
 
 - (UIScrollView *)scrollView {
     if (!_scrollView) {
-        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 40, kScreenSize.width, kScreenSize.height - 40)];
-        self.scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height - 40);
+        self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 50, kScreenSize.width, kScreenSize.height - 40)];
+        self.scrollView.contentSize = CGSizeMake(kScreenSize.width * 2, kScreenSize.height - 50);
         self.scrollView.backgroundColor =[UIColor backgroundColor];
         self.scrollView.userInteractionEnabled = YES;
         self.scrollView.alwaysBounceVertical = YES;

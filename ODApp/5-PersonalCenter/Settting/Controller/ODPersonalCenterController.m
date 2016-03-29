@@ -5,6 +5,8 @@
 //  Created by 王振航 on 16/3/17.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
+#define MAS_SHORTHAND
+#define MAS_SHORTHAND_GLOBALS
 
 #import "ODPersonalCenterController.h"
 
@@ -23,6 +25,7 @@
 #import "ODOperationController.h"
 #import "ODPublicTool.h"
 #import "ODMyTakeOutViewController.h"
+#import "Masonry.h"
 
 @interface ODPersonalCenterController ()
 
@@ -72,9 +75,13 @@
     
     // 创建头部视图
     ODPersonalCenterHeaderView *headerView = [ODPersonalCenterHeaderView headerView];
-    [headerView sizeToFit];
     self.tableView.tableHeaderView = headerView;
     self.headerView = headerView;
+    [headerView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.equalTo(self.view).offset(0);
+        make.width.equalTo(self.view);
+        make.height.equalTo(172);
+    }];
 }
 
 /**
@@ -143,8 +150,8 @@
     ODArrowItem *myTakeOut = [ODArrowItem itemWithName:@"我的外卖"];
     myTakeOut.destVc = [ODMyTakeOutViewController class];
     
-    ODGroupItem *group = [ODGroupItem groupWithItems:@[myTakeOut,item0, item1, item2, item3,
-                                                       item4, item5, item6, item7, item8]];
+    ODGroupItem *group = [ODGroupItem groupWithItems:@[item0, item1, item2, item3,
+                                                       item4, item5, item6, item7, item8, myTakeOut]];
     
     [self.groups addObject:group];
 }
