@@ -467,19 +467,22 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     NSString *sourceType = info[UIImagePickerControllerMediaType];
     if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
-        self.pickedImage = info[UIImagePickerControllerOriginalImage];
-        [ODProgressHUD showProgressWithStatus:@"正在上传"];
-        //图片转化为data
+        NSString *imageUrl = [info[UIImagePickerControllerReferenceURL] absoluteString];
+        NSRange range;
+        range.location = [imageUrl rangeOfString:@"=" options:NSBackwardsSearch].location + 1;
+        range.length = imageUrl.length - range.location;
+        imageUrl = [imageUrl substringWithRange:range];
         NSData *imageData;
-        self.pickedImage = [self scaleImage:self.pickedImage];;
-        if (UIImagePNGRepresentation(self.pickedImage)==nil) {
-            imageData = UIImageJPEGRepresentation(self.pickedImage,0.3);
-        }else{
+        self.pickedImage = info[UIImagePickerControllerOriginalImage];
+        if ([imageUrl.lowercaseString isEqualToString:@"jpg"]) {
+            imageData = UIImageJPEGRepresentation(self.pickedImage, 0.3);
+        }else {
             imageData = UIImagePNGRepresentation(self.pickedImage);
         }
         NSString *str = @"data:image/jpeg;base64,";
         NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
         [self.mArray addObject:self.pickedImage];
+        [ODProgressHUD showProgressWithStatus:@"正在上传"];
         [self pushDataWith:strData];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];

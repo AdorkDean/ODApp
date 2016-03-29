@@ -13,5 +13,5 @@
 @property (nonatomic, strong) NSArray *images;
 /** pageControl */
 @property (nonatomic, weak, readonly) UIPageControl *pageControl;
-@property (nonatomic, assign, getter=isScrollDirectionPortrait) BOOL scrollDirectionPortrait;
+@property (nonatomic, assign, getter = isScrollDirectionPortrait) BOOL scrollDirectionPortrait;
 @end

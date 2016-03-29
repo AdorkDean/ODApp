@@ -41,4 +41,26 @@ static NSString * const errorPlaceholder = @"errorplaceholderImage";
     [self sd_setImageWithURL:[NSURL OD_URLWithString:URLString] placeholderImage:[UIImage imageNamed:placeholderImg] completed:completerBlock];
 }
 
+- (void)od_loadCachedImage:(NSString *)urlString
+{
+    __weakSelf;
+    UIImage *cachedImage = [[SDImageCache sharedImageCache] imageFromDiskCacheForKey:urlString];
+    if (!cachedImage) {
+        SDWebImageDownloader *downloader = [SDWebImageDownloader sharedDownloader];
+        
+        [downloader downloadImageWithURL:[NSURL OD_URLWithString:urlString]
+                                 options:0
+                                progress:NULL
+                               completed:
+         ^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+             // 保存到磁盘
+             [[SDImageCache sharedImageCache] storeImage:image forKey:urlString toDisk:YES];
+             // 显示图片
+             if (image && finished) weakSelf.image = image;
+         }];
+    }
+    // 直接从缓存中加载图片
+    weakSelf.image = cachedImage;
+}
+
 @end
