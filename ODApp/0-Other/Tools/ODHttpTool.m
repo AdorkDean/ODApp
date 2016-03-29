@@ -84,7 +84,10 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     return [[[[signData.md5 lowercaseString] md5] lowercaseString] substringWithRange:NSMakeRange(9, 6)];
 }
 
-
++ (NSMutableDictionary *)getSignParameter:(NSDictionary *)parameter
+{
+    return [self signParameters:[self getRequestParameter:parameter]];
+}
 
 + (NSMutableDictionary *)getRequestParameter:(NSDictionary *)parameter
 {
@@ -104,7 +107,7 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
         dic[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
     }
     [dic setValuesForKeysWithDictionary:parameter];
-    return [self signParameters:dic];
+    return dic;
 }
 
 #pragma mark - 数据请求
@@ -113,7 +116,7 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     URL = [ODBaseURL stringByAppendingPathComponent:URL];
-    NSMutableDictionary *parameter = [self getRequestParameter:parameters];
+    NSMutableDictionary *parameter = [self getSignParameter:parameters];
     [manager GET:URL parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         [self requestSuccessResult:responseObject modelClass:modeleClass successBlock:success failBlock:failure];
@@ -143,7 +146,7 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
 //    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript", @"text/html",@"text/plain", nil];
 
     URL = [ODBaseURL stringByAppendingPathComponent:URL];
-    NSMutableDictionary *parameter = [self getRequestParameter:parameters];
+    NSMutableDictionary *parameter = [self getSignParameter:parameters];
     [manager POST:URL parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         
@@ -188,7 +191,7 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
 
     URL = [ODBaseURL stringByAppendingPathComponent:URL];
-    NSMutableDictionary *parameter = [self getRequestParameter:parameters];
+    NSMutableDictionary *parameter = [self getSignParameter:parameters];
 
     // 2.发送请求
     [manager POST:URL parameters:parameter constructingBodyWithBlock:^(id<AFMultipartFormData> formData)

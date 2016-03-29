@@ -96,7 +96,9 @@ NSString * const ODWebUrlFindJob = @"http://www.myjob500.com/user/extloginpf";
 NSString * const ODWebUrlExpect = @"http://h5.odong.com/woqu/expect";
 NSString * const ODWebUrlMapSearch = @"http://h5.odong.com/map/search";
 
-NSString * const ODWebUrlNative = @"http://h5.test.odong.com/native";
+NSString * const ODWebUrlNative = @"http://h5.test.odong.com/native/order";
+NSString *const ODWebUrlNativeCart = @"http://h5.test.odong.com/native/cart";
+
 /** 统一的URL */
 #ifdef DEBUG
 NSString * const ODBaseURL = @"http://woquapi.test.odong.com/1.0";

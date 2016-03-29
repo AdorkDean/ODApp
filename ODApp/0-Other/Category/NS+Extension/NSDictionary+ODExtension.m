@@ -9,6 +9,7 @@
 #import "NSDictionary+ODExtension.h"
 
 @implementation NSDictionary (ODExtension)
+
 - (void)NSLogProperty
 {
     
@@ -55,28 +56,44 @@
    
 }
 
-- (NSString *)descriptionWithLocale:(id)locale{
+- (NSString *)descriptionWithLocale:(id)locale
+{
+    return [self od_desc];
+}
+
+- (NSString *)od_desc
+{
     // 1.定义字符创保存拼接结果
     NSMutableString *strM = [NSMutableString string];
     [strM appendFormat:@"{\n"];
     
     // 2.遍历字典，拼接字典中的键值对
     [self enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop)
-    {
-        if ([obj isKindOfClass:[NSString class]])
-        {
-            obj = [NSString stringWithFormat:@"\"%@\"",obj];
-        }
-//        else if ([obj isKindOfClass:[NSArray class]])
-//        {
-//            obj = [obj desc];
-//        }
-        [strM appendFormat:@"\t\"%@\":%@,\n",key,obj];
-    }];
+     {
+         if ([obj isKindOfClass:[NSString class]])
+         {
+             obj = [NSString stringWithFormat:@"\"%@\"",obj];
+         }
+         //        else if ([obj isKindOfClass:[NSArray class]])
+         //        {
+         //            obj = [obj desc];
+         //        }
+         [strM appendFormat:@"\t\"%@\":%@,\n",key,obj];
+     }];
     
     [strM replaceCharactersInRange:NSMakeRange(strM.length - [@",\n" length], 1) withString:@"\n}"];
     return strM;
 }
 
+- (NSString *)od_URLDesc
+{
+    NSString *urlString = [[self od_desc] stringByReplacingOccurrencesOfString:@"\n\t\"" withString:@""];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@"{" withString:@""];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@"}" withString:@""];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@":" withString:@"="];
+    urlString = [urlString stringByReplacingOccurrencesOfString:@"," withString:@"&"];
+    return urlString;
+}
 
 @end

@@ -170,6 +170,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     ODTakeOutModel *model = self.datas[indexPath.row];
     ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
     vc.takeAwayTitle = model.title;
+    vc.isCart = YES;
     vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
     [self.navigationController pushViewController:vc animated:YES];
 }
