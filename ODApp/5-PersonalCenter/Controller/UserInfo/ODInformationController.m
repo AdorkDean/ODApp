@@ -18,7 +18,7 @@
 #import "ODChangePassWordController.h"
 #import "ODUploadImageModel.h"
 #import <MobileCoreServices/MobileCoreServices.h>
-#import "UIImageView+ODCache.h"
+#import "UIImageView+WebCache.h"
 
 @interface ODInformationController ()<UITableViewDataSource , UITableViewDelegate ,UIImagePickerControllerDelegate , UIActionSheetDelegate , UINavigationControllerDelegate>
 
@@ -77,7 +77,9 @@
     
 //    [self.informationView.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
     // 加载头像
-    [self.informationView.userImageView od_loadCachedImage:model.avatar];
+//    [self.informationView.userImageView od_loadCachedImage:model.avatar];
+    
+    [self.informationView.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar] placeholderImage:nil options:SDWebImageRetryFailed];
     
     
     UITapGestureRecognizer *pictMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(picAction)];
@@ -143,7 +145,8 @@
     [self.informationView.passWordImageView addGestureRecognizer:passWordTap];
 
     // 加载二维码图片
-    [self.informationView.codeImageView od_loadCachedImage:model.qrcode];
+//    [self.informationView.codeImageView od_loadCachedImage:model.qrcode];
+    [self.informationView.codeImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.qrcode] placeholderImage:nil options:SDWebImageRetryFailed];
 }
 
 
