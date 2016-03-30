@@ -332,7 +332,7 @@
 		ED57CC441C92A0C30091FCFF /* ODChoseCenterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED57CC421C92A0C30091FCFF /* ODChoseCenterCell.m */; };
 		ED57CC451C92A0C30091FCFF /* ODChoseCenterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED57CC431C92A0C30091FCFF /* ODChoseCenterCell.xib */; };
 		ED7F6AFE1C9FC8AB0099EEB0 /* ODNoResultLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = ED7F6AFD1C9FC8AB0099EEB0 /* ODNoResultLabel.m */; };
-		EDDFEA3A1CABBDAA008C9B37 /* UIColor+ODColor .m in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEA381CABBDAA008C9B37 /* UIColor+ODColor .m */; };
+		EDDFEA3A1CABBDAA008C9B37 /* UIColor+ODColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EDDFEA381CABBDAA008C9B37 /* UIColor+ODColor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -939,7 +939,7 @@
 		ED57CC431C92A0C30091FCFF /* ODChoseCenterCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODChoseCenterCell.xib; sourceTree = "<group>"; };
 		ED7F6AFC1C9FC8AB0099EEB0 /* ODNoResultLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODNoResultLabel.h; sourceTree = "<group>"; };
 		ED7F6AFD1C9FC8AB0099EEB0 /* ODNoResultLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODNoResultLabel.m; sourceTree = "<group>"; };
-		EDDFEA381CABBDAA008C9B37 /* UIColor+ODColor .m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ODColor .m"; sourceTree = "<group>"; };
+		EDDFEA381CABBDAA008C9B37 /* UIColor+ODColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ODColor.m"; sourceTree = "<group>"; };
 		EDDFEA391CABBDAA008C9B37 /* UIColor+ODColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ODColor.h"; sourceTree = "<group>"; };
 		EEA572BF76BF4C22E1FC80BA /* libPods-ODApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ODApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD754733DED72842C8626E1D /* Pods-ODApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -1026,7 +1026,7 @@
 				232CB31D1C9264E200340D12 /* UIBarButtonItem+ODExtention.m */,
 				232CB3201C9264E200340D12 /* UIColor+ODExtension.h */,
 				232CB3211C9264E200340D12 /* UIColor+ODExtension.m */,
-				EDDFEA381CABBDAA008C9B37 /* UIColor+ODColor .m */,
+				EDDFEA381CABBDAA008C9B37 /* UIColor+ODColor.m */,
 				EDDFEA391CABBDAA008C9B37 /* UIColor+ODColor.h */,
 				232CB3221C9264E200340D12 /* UIImage+ODExtension.h */,
 				232CB3231C9264E200340D12 /* UIImage+ODExtension.m */,
@@ -2450,7 +2450,7 @@
 				232CB5E61C9264E200340D12 /* ODRoundTimeDrawView.m in Sources */,
 				4003348B1C9B97C500973818 /* ODSwitchItem.m in Sources */,
 				232CB5661C9264E200340D12 /* IQUIView+Hierarchy.m in Sources */,
-				EDDFEA3A1CABBDAA008C9B37 /* UIColor+ODColor .m in Sources */,
+				EDDFEA3A1CABBDAA008C9B37 /* UIColor+ODColor.m in Sources */,
 				ED53273A1C9AAFD200BB45B1 /* ODCenterDetailController.m in Sources */,
 				232CB61A1C9264E200340D12 /* ODSecondEvaluationModel.m in Sources */,
 				232CB5C11C9264E200340D12 /* ODPlacePreLabel.m in Sources */,
