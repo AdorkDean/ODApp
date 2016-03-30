@@ -12,8 +12,8 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    self.nickLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
-    self.signLabel.textColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
+    self.nickLabel.textColor = [UIColor colorGloomyColor];
+    self.signLabel.textColor = [UIColor colorGrayColor];
 }
 
 -(void)setModel:(ODBazaarDetailApplysModel *)model{

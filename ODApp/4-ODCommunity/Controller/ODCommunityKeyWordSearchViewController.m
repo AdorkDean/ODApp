@@ -36,7 +36,7 @@ static NSString *cellId = @"ODCommunityCell";
     if (!_searchBar) {
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 8, kScreenSize.width - 20,30)];
         [[[[_searchBar.subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
-        _searchBar.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        _searchBar.backgroundColor = [UIColor whiteColor];
         _searchBar.delegate = self;
         _searchBar.placeholder = @"标签关键字";
         [self.view addSubview:_searchBar];
@@ -93,8 +93,8 @@ static NSString *cellId = @"ODCommunityCell";
         [weakSelf loadMoreData];
     }];
     self.navigationItem.title = @"欧动社区";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor colorWithRGBString:@"#000000" alpha:1] highColor:nil title:@"取消"];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithRGBString:@"#000000" alpha:1] highColor:nil title:@"确认"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor blackColor] highColor:nil title:@"取消"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor blackColor] highColor:nil title:@"确认"];
 }
 
 #pragma mark - 请求数据

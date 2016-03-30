@@ -32,8 +32,8 @@
         
         NSString *str = [NSString stringWithFormat:@"[默认]%@",model.address];
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:str];
-        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRGBString:@"#ff6666" alpha:1] range:NSMakeRange(0, 4)];
-        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRGBString:@"#000000" alpha:1] range:NSMakeRange(4, model.address.length)];
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorRedColor] range:NSMakeRange(0, 4)];
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(4, model.address.length)];
         self.addressLabel.attributedText = noteStr;
 
     }else{

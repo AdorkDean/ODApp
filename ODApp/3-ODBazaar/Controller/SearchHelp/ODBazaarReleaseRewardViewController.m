@@ -38,7 +38,7 @@
         view.layer.masksToBounds = YES;
         view.layer.cornerRadius = 5;
         view.layer.borderWidth = 1;
-        view.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+        view.layer.borderColor = [UIColor lineColor].CGColor;
         [self.view addSubview:view];
         _textField = [ODClassMethod creatTextFieldWithFrame:CGRectMake(8, 0, kScreenSize.width - 16, 40) placeHolder:@"请输入任务奖励" delegate:self tag:0];
         _textField.font = [UIFont systemFontOfSize:13];
@@ -59,8 +59,8 @@
         _collectionView.layer.masksToBounds = YES;
         _collectionView.layer.cornerRadius = 5;
         _collectionView.layer.borderWidth = 1;
-        _collectionView.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
-        _collectionView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
+        _collectionView.layer.borderColor = [UIColor lineColor].CGColor;
+        _collectionView.backgroundColor = [UIColor backgroundColor];
         [_collectionView registerNib:[UINib nibWithNibName:@"ODBazaarRewardCollectionCell" bundle:nil] forCellWithReuseIdentifier:kBazaarRewardCellId];
         [self.view addSubview:_collectionView];
     }
@@ -117,7 +117,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ODBazaarRewardCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarRewardCellId forIndexPath:indexPath];
     cell.nameLabel.text = self.dataArray[indexPath.row];
-    cell.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+    cell.backgroundColor = [UIColor whiteColor];
     if (indexPath.row == 0) {
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(kScreenSize.width - 32.5, 18.3, 15, 8.4)];
         self.imageView.image = [UIImage imageNamed:@"时间下拉箭头"];

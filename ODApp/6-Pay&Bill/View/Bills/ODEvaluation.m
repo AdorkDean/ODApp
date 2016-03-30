@@ -100,7 +100,7 @@
     
     self.determineButton = [UIButton buttonWithType:UIButtonTypeCustom];
     self.determineButton.frame = CGRectMake(30, 370, kScreenSize.width - 60, 35);
-    self.determineButton.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
+    self.determineButton.backgroundColor = [UIColor themeColor];
     [self.determineButton setTitle:@"确认完成" forState:UIControlStateNormal];
     [self.determineButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     self.determineButton.titleLabel.font = [UIFont systemFontOfSize:13];

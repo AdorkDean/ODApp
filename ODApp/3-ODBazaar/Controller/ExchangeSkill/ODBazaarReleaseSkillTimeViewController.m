@@ -41,9 +41,9 @@
     self.index2 = 1;
     self.index3 = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.view.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"我的可服务时段";
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(rightItmeClick:) color:[UIColor colorWithRGBString:@"#000000" alpha:1] highColor:nil title:@"确定"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(rightItmeClick:) color:[UIColor blackColor] highColor:nil title:@"确定"];
     
     [self createTimeView];
     [self createTableView];
@@ -76,7 +76,7 @@
         
         UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(7.5+labelWidth*i, CGRectGetMaxY(imageView.frame)+9, labelWidth, 20)];
         label.text = array[i];
-        label.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+        label.textColor = [UIColor colorRedColor];
         label.font = [UIFont systemFontOfSize:14];
         label.textAlignment = NSTextAlignmentCenter;
         [self.view addSubview:label];
@@ -186,12 +186,12 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 40)];
-    view.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
+    view.backgroundColor = [UIColor lineColor];
     
     NSArray *array = @[@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六",@"星期日"];
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 20, kScreenSize.width-10, 10)];
     label.text = [array objectAtIndex:section];
-    label.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
+    label.textColor = [UIColor colorGreyColor];
     label.font = [UIFont systemFontOfSize:12];
     [view addSubview:label];
     return view;

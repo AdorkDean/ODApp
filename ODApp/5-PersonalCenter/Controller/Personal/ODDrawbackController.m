@@ -98,7 +98,7 @@
         scrollViewHeight = KControllerHeight - ODNavigationHeight;
     }
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, scrollViewHeight)];
-    self.scrollView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
+    self.scrollView.backgroundColor = [UIColor backgroundColor];
     [self.view addSubview:self.scrollView];
     
     [self createDrawbackMoneyView];
@@ -129,14 +129,14 @@
 - (void)createDrawbackMoneyView
 {
     self.drawbackMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, uniftyHeight)];
-    self.drawbackMoneyLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+    self.drawbackMoneyLabel.textColor = [UIColor blackColor];
     NSString *drawbackMoneyStr = [NSString stringWithFormat:@"您的退款金额:%@元",self.darwbackMoney];
     NSMutableAttributedString *moneyNumberStr = [[NSMutableAttributedString alloc]initWithString:drawbackMoneyStr];
-    [moneyNumberStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRGBString:@"#ff6666" alpha:1] range:NSMakeRange([moneyNumberStr length] - self.darwbackMoney.length -1, self.darwbackMoney.length)];
+    [moneyNumberStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorRedColor] range:NSMakeRange([moneyNumberStr length] - self.darwbackMoney.length -1, self.darwbackMoney.length)];
     self.drawbackMoneyLabel.attributedText = moneyNumberStr;
     self.drawbackMoneyLabel.font = [UIFont systemFontOfSize:13.5];
     self.drawbackMoneyLabel.textAlignment = NSTextAlignmentCenter;
-    self.drawbackMoneyLabel.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+    self.drawbackMoneyLabel.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.drawbackMoneyLabel];
 }
 
@@ -157,13 +157,13 @@
     }
     UILabel *drawbackReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.drawbackMoneyLabel.frame), KScreenWidth, 22)];
     drawbackReasonLabel.text = @"退款原因";
-    drawbackReasonLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+    drawbackReasonLabel.textColor = [UIColor colorGraynessColor];
     drawbackReasonLabel.font = [UIFont systemFontOfSize:12];
     drawbackReasonLabel.textAlignment = NSTextAlignmentLeft;
     [self.scrollView addSubview:drawbackReasonLabel];
     
     self.drawbackReasonContentView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(drawbackReasonLabel.frame), KScreenWidth, drawbackReasonHeight)];
-    self.drawbackReasonContentView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+    self.drawbackReasonContentView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.drawbackReasonContentView];
     
     // 退款原因 可选择
@@ -180,10 +180,10 @@
             // 选择原因label
             UILabel *selectReasonLabel = [[UILabel alloc] initWithFrame:CGRectMake(reasonLabelLeftMargin, (uniftyHeight + 0.5) * i - 0.5, KScreenWidth, uniftyHeight)];
             selectReasonLabel.text = self.selectReasonArray[i];
-            selectReasonLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+            selectReasonLabel.textColor = [UIColor blackColor];
             selectReasonLabel.font = [UIFont systemFontOfSize:13.5];
             selectReasonLabel.textAlignment = NSTextAlignmentLeft;
-            selectReasonLabel.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+            selectReasonLabel.backgroundColor = [UIColor whiteColor];
             [self.drawbackReasonContentView addSubview:selectReasonLabel];
             
             // 选择图片imageView
@@ -202,7 +202,7 @@
         for (int i = 1; i < self.selectReasonArray.count; i++)
         {
             UIView *selectReasonLineView = [[UIView alloc] initWithFrame:CGRectMake(ODLeftMargin, uniftyHeight * i, KScreenWidth, 0.5)];
-            selectReasonLineView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
+            selectReasonLineView.backgroundColor = [UIColor lineColor];
             [self.drawbackReasonContentView addSubview:selectReasonLineView];
         }
     }
@@ -216,7 +216,7 @@
         }
         drawbackReasonContentLabel.text = self.drawbackReason;
         drawbackReasonContentLabel.numberOfLines = 0;
-        drawbackReasonContentLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+        drawbackReasonContentLabel.textColor = [UIColor blackColor];
         drawbackReasonContentLabel.font = [UIFont systemFontOfSize:13.5];
         drawbackReasonContentLabel.textAlignment = NSTextAlignmentLeft;
         [self.drawbackReasonContentView addSubview:drawbackReasonContentLabel];
@@ -234,7 +234,7 @@
             self.refuseReason = @"";
         }
         refuseReasonLabel.text = @"拒绝原因";
-        refuseReasonLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+        refuseReasonLabel.textColor = [UIColor colorGraynessColor];
         refuseReasonLabel.font = [UIFont systemFontOfSize:12];
         refuseReasonLabel.textAlignment = NSTextAlignmentLeft;
         [self.scrollView addSubview:refuseReasonLabel];
@@ -243,12 +243,12 @@
         refuseReasonHeight = [ODHelp textHeightFromTextString:self.refuseReason width:KScreenWidth - ODLeftMargin * 2 miniHeight:uniftyHeight fontSize:13.5];
         
         self.refuseReasonContentView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(refuseReasonLabel.frame), KScreenWidth, refuseReasonHeight)];
-        self.refuseReasonContentView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        self.refuseReasonContentView.backgroundColor = [UIColor whiteColor];
         [self.scrollView addSubview:self.refuseReasonContentView];
         
         UILabel *refuseReasonContentLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth - ODLeftMargin * 2, refuseReasonHeight)];
         refuseReasonContentLabel.text = self.refuseReason;
-        refuseReasonContentLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+        refuseReasonContentLabel.textColor = [UIColor blackColor];
         refuseReasonContentLabel.numberOfLines = 0;
         refuseReasonContentLabel.font = [UIFont systemFontOfSize:13.5];
         refuseReasonContentLabel.textAlignment = NSTextAlignmentLeft;
@@ -280,21 +280,21 @@
     {
         UILabel *contactServiceLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, serviceGetMaxY, KScreenWidth, 22)];
         contactServiceLabel.text = @"联系客服";
-        contactServiceLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+        contactServiceLabel.textColor = [UIColor colorGraynessColor];
         contactServiceLabel.font = [UIFont systemFontOfSize:12];
         contactServiceLabel.textAlignment = NSTextAlignmentLeft;
         [self.scrollView addSubview:contactServiceLabel];
         
         self.servicePhoneView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(contactServiceLabel.frame), KScreenWidth, uniftyHeight)];
-        self.servicePhoneView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        self.servicePhoneView.backgroundColor = [UIColor whiteColor];
         [self.scrollView addSubview:self.servicePhoneView];
         
         UILabel *servicePhoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, 70, uniftyHeight)];
         servicePhoneLabel.text = @"客服电话：";
-        servicePhoneLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+        servicePhoneLabel.textColor = [UIColor blackColor];
         servicePhoneLabel.font = [UIFont systemFontOfSize:13.5];
         servicePhoneLabel.textAlignment = NSTextAlignmentLeft;
-        servicePhoneLabel.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        servicePhoneLabel.backgroundColor = [UIColor whiteColor];
         [self.servicePhoneView addSubview:servicePhoneLabel];
         
         UIButton *servicePhoneButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(servicePhoneLabel.frame), 0, 200, uniftyHeight)];
@@ -306,15 +306,15 @@
         [self.servicePhoneView addSubview:servicePhoneButton];
         
         self.serviceTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.servicePhoneView.frame) + 1, KScreenWidth, uniftyHeight)];
-        self.serviceTimeView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        self.serviceTimeView.backgroundColor = [UIColor whiteColor];
         [self.scrollView addSubview:self.serviceTimeView];
         
         UILabel *serviceTimeLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(self.servicePhoneView.frame) + 1, KScreenWidth, uniftyHeight)];
         serviceTimeLabel.text = [NSString stringWithFormat:@"%@时间：%@",self.customerService, self.serviceTime];
-        serviceTimeLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+        serviceTimeLabel.textColor = [UIColor blackColor];
         serviceTimeLabel.font = [UIFont systemFontOfSize:13.5];
         serviceTimeLabel.textAlignment = NSTextAlignmentLeft;
-        serviceTimeLabel.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        serviceTimeLabel.backgroundColor = [UIColor whiteColor];
         [self.scrollView addSubview:serviceTimeLabel];
     }
 }
@@ -330,7 +330,7 @@
         applyDrawbackButton.titleLabel.font = [UIFont systemFontOfSize:13.5];
         applyDrawbackButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
         [applyDrawbackButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        applyDrawbackButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+        applyDrawbackButton.backgroundColor = [UIColor colorRedColor];
         [applyDrawbackButton addTarget:self action:@selector(applyDrawbackButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:applyDrawbackButton];
     }
@@ -372,22 +372,22 @@
     if (!_drawbackStateView)
     {
         _drawbackStateView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.drawbackReasonContentView.frame), KScreenWidth, 22 + 150)];
-        self.servicePhoneView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
+        self.servicePhoneView.backgroundColor = [UIColor lineColor];
         [self.scrollView addSubview:_drawbackStateView];
         
         UILabel *drawbackStateLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth, 22)];
         drawbackStateLabel.text = @"退款说明";
-        drawbackStateLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+        drawbackStateLabel.textColor = [UIColor colorGraynessColor];
         drawbackStateLabel.font = [UIFont systemFontOfSize:12];
         drawbackStateLabel.textAlignment = NSTextAlignmentLeft;
         [_drawbackStateView addSubview:drawbackStateLabel];
         
         UIView *drawbackStateContentView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(drawbackStateLabel.frame), KScreenWidth, 150)];
-        drawbackStateContentView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        drawbackStateContentView.backgroundColor = [UIColor whiteColor];
         [_drawbackStateView addSubview:drawbackStateContentView];
         
         self.drawbackStateTextView = [[UITextView alloc]initWithFrame:CGRectMake(ODLeftMargin, 22, KScreenWidth - ODLeftMargin * 2, 150)];
-        self.drawbackStateTextView.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+        self.drawbackStateTextView.textColor = [UIColor blackColor];
         self.drawbackStateTextView.font = [UIFont systemFontOfSize:12];
         if (self.drawbackState == nil)
         {
@@ -400,7 +400,7 @@
         
         self.contentPlaceholderLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, kScreenSize.width-35, 20)];
         self.contentPlaceholderLabel.text = @" 请输入适当的退款理由";
-        self.contentPlaceholderLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
+        self.contentPlaceholderLabel.textColor = [UIColor colorGreyColor];
         self.contentPlaceholderLabel.font = [UIFont systemFontOfSize:14];
         self.contentPlaceholderLabel.userInteractionEnabled = NO;
         [self.drawbackStateTextView addSubview:self.contentPlaceholderLabel];

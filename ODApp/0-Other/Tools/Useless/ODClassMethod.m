@@ -50,7 +50,7 @@
         label.layer.masksToBounds = YES;
         label.layer.cornerRadius = 5;
         label.layer.borderWidth = 1;
-        label.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+        label.layer.borderColor = [UIColor lineColor].CGColor;
     }
     return label;
 }
