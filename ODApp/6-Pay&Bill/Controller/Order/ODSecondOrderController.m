@@ -82,14 +82,14 @@
     self.allPriceLabel.text = [NSString stringWithFormat:@"%.2f元", self.informationModel.price];
     self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
     self.allPriceLabel.font = [UIFont systemFontOfSize:15];
-    self.allPriceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+    self.allPriceLabel.textColor = [UIColor colorRedColor];
     [amountImageView addSubview:self.allPriceLabel];
     [self.view addSubview:amountImageView];
 
 
     UIButton *saveOrderButton = [UIButton buttonWithType:UIButtonTypeSystem];
     saveOrderButton.frame = CGRectMake(kScreenSize.width - 150, kScreenSize.height - 49 - ODNavigationHeight, 150, 49);
-    saveOrderButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+    saveOrderButton.backgroundColor = [UIColor colorRedColor];
     [saveOrderButton setTitle:@"提交订单" forState:UIControlStateNormal];
     saveOrderButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [saveOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

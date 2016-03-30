@@ -31,10 +31,10 @@
     self.autoresizingMask = UIViewAutoresizingNone;
     // 取消选中样式
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.titleLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
-    self.contentLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
-    self.nameLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
-    self.timeLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+    self.titleLabel.textColor = [UIColor colorGloomyColor];
+    self.contentLabel.textColor = [UIColor colorGraynessColor];
+    self.nameLabel.textColor = [UIColor blackColor];
+    self.timeLabel.textColor = [UIColor colorRedColor];
     // 限制正文最大宽度
     self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 90;
     

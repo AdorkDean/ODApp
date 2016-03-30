@@ -91,7 +91,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     // 创建表格
     CGRect frame = CGRectMake(0, 0, KScreenWidth, KScreenHeight - ODNavigationHeight - ODBazaaeExchangeNavHeight - ODTabBarHeight);
     UITableView *tableView = [[UITableView alloc] initWithFrame:frame style:UITableViewStylePlain];
-    tableView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
+    tableView.backgroundColor = [UIColor backgroundColor];
     tableView.dataSource = self;
     tableView.delegate = self;
     [self.view addSubview:tableView];

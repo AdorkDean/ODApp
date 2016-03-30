@@ -37,6 +37,11 @@
     return [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
 }
 
++ (UIColor *)colorGreyColor
+{
+    return [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
+}
+
 + (UIColor *)colorGloomyColor
 {
     return [UIColor colorWithRGBString:@"#484848" alpha:1];

@@ -73,7 +73,7 @@
     self.segmentedControl.clipsToBounds = YES;
     self.segmentedControl.layer.cornerRadius = 7;
     self.segmentedControl.layer.borderWidth = 1;
-    self.segmentedControl.layer.borderColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1].CGColor;
+    self.segmentedControl.layer.borderColor = [UIColor colorGrayColor].CGColor;
     self.segmentedControl.backgroundColor = [UIColor whiteColor];
     self.segmentedControl.tintColor = [UIColor colorWithRGBString:@"#ffd801" alpha:1];
     
@@ -127,7 +127,7 @@
 #pragma mark - action  
 - (void)typeAction:(UIButton *)button {
     UIViewController *controller = [[UIViewController alloc]init];
-    controller.view.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
+    controller.view.backgroundColor = [UIColor backgroundColor];
     controller.view.layer.borderColor = [UIColor colorWithRGBString:@"484848" alpha:1].CGColor;
     controller.view.layer.borderWidth = 0.5;
     controller.view.layer.cornerRadius = 12;
@@ -137,11 +137,11 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setFrame:CGRectMake(0, 30*i, 112, 29.5)];
         [button setTitle:array[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRGBString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(taskClassButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [controller.view addSubview:button];
         UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(7, CGRectGetMaxY(button.frame)+0.5, 98, 0.5)];
-        lineView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        lineView.backgroundColor = [UIColor whiteColor];
         [controller.view addSubview:lineView];
     }
     //设置弹出模式

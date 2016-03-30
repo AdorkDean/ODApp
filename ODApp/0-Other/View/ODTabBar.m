@@ -13,8 +13,8 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
-        self.tintColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+        self.backgroundColor = [UIColor backgroundColor];
+        self.tintColor = [UIColor colorGloomyColor];
     }
     return self;
 }

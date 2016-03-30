@@ -15,7 +15,7 @@
     ODPaySuccessView *view =  [[[NSBundle mainBundle] loadNibNamed:@"ODPaySuccessView" owner:nil options:nil] firstObject];
     
     view.userInteractionEnabled = YES;
-    view.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+    view.backgroundColor = [UIColor whiteColor];
     
     view.firstButton.layer.masksToBounds = YES;
     view.firstButton.layer.cornerRadius = 5;

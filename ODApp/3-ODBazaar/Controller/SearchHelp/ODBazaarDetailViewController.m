@@ -26,7 +26,7 @@
         layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         layout.itemSize = CGSizeMake(120, 150);
         _collectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.taskBottomView.frame)+10, kScreenSize.width, 150) collectionViewLayout:layout];
-        _collectionView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.showsHorizontalScrollIndicator = NO;
         _collectionView.showsVerticalScrollIndicator = NO;
         _collectionView.dataSource = self;
@@ -39,7 +39,7 @@
 -(UIScrollView *)scrollView{
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width,kScreenSize.height-64)];
-        _scrollView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        _scrollView.backgroundColor = [UIColor whiteColor];
         _scrollView.userInteractionEnabled = YES;
         [self.view addSubview:_scrollView];
     }
@@ -60,7 +60,7 @@
     self.navigationItem.title = @"任务详情";
     [self requestData];
     if ([self.task_status_name isEqualToString:@"过期"]&& [[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
-        self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick:) color:[UIColor colorWithRGBString:@"#000000" alpha:1] highColor:nil title:@"删除"];
+        self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick:) color:[UIColor blackColor] highColor:nil title:@"删除"];
     }else{
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick:) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
     }
@@ -104,8 +104,8 @@
             [weakSelf.picArray removeAllObjects];
             [weakSelf requestData];
             [weakSelf.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
-            [weakSelf.taskButton setTitleColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
-            weakSelf.taskButton.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+            [weakSelf.taskButton setTitleColor:[UIColor colorRedColor] forState:UIControlStateNormal];
+            weakSelf.taskButton.backgroundColor = [UIColor whiteColor];
             [ODProgressHUD showInfoWithStatus:@"接受成功"];
         }else if ([name isEqualToString:@"确认提交"]){
             [ODProgressHUD showInfoWithStatus:@"提交成功"];
@@ -148,7 +148,7 @@
     [self.userView addSubview:userSignLabel];
     
     self.taskButton = [ODClassMethod creatButtonWithFrame:CGRectMake(self.userView.frame.size.width-68.5, 25, 68.5, 25) target:nil sel:nil tag:0 image:nil title:@"" font:12];
-    self.taskButton.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+    self.taskButton.backgroundColor = [UIColor whiteColor];
     self.taskButton.layer.masksToBounds = YES;
     self.taskButton.layer.cornerRadius = 5;
     self.taskButton.layer.borderWidth = 1;
@@ -158,17 +158,17 @@
 
     if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:self.open_id]) {
         if ([self.model.task_status isEqualToString:@"1"]) {
-            [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitleColor:[UIColor colorRedColor] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"删除任务" forState:UIControlStateNormal];
         }else if ([self.model.task_status isEqualToString:@"2"]){
-            [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitleColor:[UIColor colorRedColor] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
         }else if ([self.model.task_status isEqualToString:@"3"]){
             [self.taskButton setTitle:@"确认完成" forState:UIControlStateNormal];
-            [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitleColor:[UIColor colorRedColor] forState:UIControlStateNormal];
         }else if ([self.model.task_status isEqualToString:@"4"]){
             [self.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
-            [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitleColor:[UIColor colorRedColor] forState:UIControlStateNormal];
         }else if ([self.model.task_status isEqualToString:@"-2"]){
             self.taskButton.userInteractionEnabled = NO;
             [self.taskButton setTitle:@"过期任务" forState:UIControlStateNormal];
@@ -189,20 +189,20 @@
             }
         }
         if ([self.model.task_status isEqualToString:@"1"] && open_id.length == 0 && [apply_status isEqualToString:@"0"]) {
-            [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitleColor:[UIColor colorRedColor] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"待派遣" forState:UIControlStateNormal];
         }else if ([self.model.task_status isEqualToString:@"1"] && open_id.length == 0 && [apply_status isEqualToString:@""]){
-            [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"#000000" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
             self.taskButton.backgroundColor = [UIColor colorWithRGBString:@"#ffd801" alpha:1];
             [self.taskButton setTitle:@"接受任务" forState:UIControlStateNormal];
         }else if ([self.model.task_status isEqualToString:@"2"] && open_id.length > 0){
-            [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitleColor:[UIColor colorRedColor] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"确认提交" forState:UIControlStateNormal];
         }else if ([self.model.task_status isEqualToString:@"4"] && open_id.length > 0 ){
-            [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitleColor:[UIColor colorRedColor] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"已完成" forState:UIControlStateNormal];
         }else if ([self.model.task_status isEqualToString:@"3"] && open_id.length > 0){
-            [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitleColor:[UIColor colorRedColor] forState:UIControlStateNormal];
             [self.taskButton setTitle:@"已提交" forState:UIControlStateNormal];
         }else if ([self.model.task_status isEqualToString:@"4"] && open_id.length == 0){
             [self.taskButton removeFromSuperview];
@@ -234,35 +234,35 @@
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 200, kScreenSize.width, 20)];
     label.text = @"发表评价 , 确认完成任务";
     label.textAlignment = NSTextAlignmentCenter;
-    label.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+    label.textColor = [UIColor blackColor];
     label.font = [UIFont systemFontOfSize:14];
     [self.evaluationView addSubview:label];
     
     self.evaluationTextView = [[UITextView alloc]initWithFrame:CGRectMake(40, CGRectGetMaxY(label.frame)+5, kScreenSize.width-80, 100)];
-    self.evaluationTextView.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
+    self.evaluationTextView.textColor = [UIColor colorGreyColor];
     self.evaluationTextView.font = [UIFont systemFontOfSize:12];
     self.evaluationTextView .delegate = self;
     self.evaluationTextView.layer.masksToBounds = YES;
     self.evaluationTextView.layer.cornerRadius = 5;
-    self.evaluationTextView.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+    self.evaluationTextView.layer.borderColor = [UIColor lineColor].CGColor;
     self.evaluationTextView.layer.borderWidth = 0.5;
     [self.evaluationView addSubview:self.evaluationTextView];
     
     self.placeholderLabel = [[UILabel alloc]initWithFrame:CGRectMake(45, CGRectGetMaxY(label.frame)+15, 200, 10)];
     self.placeholderLabel.text = @"好评!任务完成的非常漂亮";
-    self.placeholderLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
+    self.placeholderLabel.textColor = [UIColor colorGreyColor];
     self.placeholderLabel.font = [UIFont systemFontOfSize:12];
     [self.evaluationView addSubview:self.placeholderLabel];
     
     UIButton *yesButton = [[UIButton alloc]initWithFrame:CGRectMake(40, CGRectGetMaxY(self.evaluationTextView.frame)+10, kScreenSize.width-80, 40)];
     yesButton.layer.masksToBounds = YES;
     yesButton.layer.cornerRadius = 5;
-    yesButton.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+    yesButton.layer.borderColor = [UIColor lineColor].CGColor;
     yesButton.layer.borderWidth = 0.5;
     [yesButton setTitle:@"是的" forState:UIControlStateNormal];
     yesButton.titleLabel.font = [UIFont systemFontOfSize:13];
-    [yesButton setTitleColor:[UIColor colorWithRGBString:@"#000000" alpha:1] forState:UIControlStateNormal];
-    [yesButton setBackgroundColor:[UIColor colorWithRGBString:@"#ffd802" alpha:1]];
+    [yesButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [yesButton setBackgroundColor:[UIColor themeColor]];
     [yesButton addTarget:self action:@selector(yesButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.evaluationView addSubview:yesButton];
     
@@ -295,7 +295,7 @@
     self.taskContentLabel.text = self.model.content;
     self.taskContentLabel.font = [UIFont systemFontOfSize:12.5];
     self.taskContentLabel.textAlignment = NSTextAlignmentLeft;
-    self.taskContentLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+    self.taskContentLabel.textColor = [UIColor colorGloomyColor];
     self.taskContentLabel.numberOfLines = 4;
     [self.taskTopView addSubview:self.taskContentLabel];
     self.taskTopView.frame = CGRectMake(12.5, CGRectGetMaxY(self.userView.frame), kScreenSize.width-25, self.taskContentLabel.frame.size.height+self.taskContentLabel.frame.origin.y);
@@ -428,7 +428,7 @@
     ODBazaarDetailCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:kBazaarDetailCellId forIndexPath:indexPath];
     cell.model = self.picArray[indexPath.row];
     cell.layer.masksToBounds = YES;
-    cell.layer.borderColor = [UIColor colorWithRGBString:@"#484848" alpha:1].CGColor;
+    cell.layer.borderColor = [UIColor colorGloomyColor].CGColor;
     cell.layer.borderWidth = 1;
     return cell;
 }

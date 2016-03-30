@@ -31,7 +31,7 @@
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, -6,kScreenSize.width, kScreenSize.height-58) style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
+        _tableView.backgroundColor = [UIColor backgroundColor];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.dataSource = self;
         _tableView.delegate = self;

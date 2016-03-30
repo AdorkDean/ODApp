@@ -203,7 +203,7 @@ static CGFloat const labelDownMargin = 5;
     UIView *peopleNumberDetailView = [[UIView alloc] initWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(peopleNumberLabel.frame) + labelDownMargin, KScreenWidth - viewLeftMargin * 2, labelHeight)];
     peopleNumberDetailView.backgroundColor = [UIColor whiteColor];
     peopleNumberDetailView.layer.cornerRadius = viewCornerRadius;
-    peopleNumberDetailView.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+    peopleNumberDetailView.layer.borderColor = [UIColor lineColor].CGColor;
     peopleNumberDetailView.layer.borderWidth = viewBorderWidth;
     [self.scrollView addSubview:peopleNumberDetailView];
     

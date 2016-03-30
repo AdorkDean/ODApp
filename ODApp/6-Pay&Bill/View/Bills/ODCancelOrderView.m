@@ -24,7 +24,7 @@
     view.alpha = 0.95;
     
     
-    view.submitButton.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
+    view.submitButton.backgroundColor = [UIColor themeColor];
     view.submitButton.layer.masksToBounds = YES;
     view.submitButton.layer.cornerRadius = 5;
     view.submitButton.layer.borderColor = [UIColor clearColor].CGColor;
