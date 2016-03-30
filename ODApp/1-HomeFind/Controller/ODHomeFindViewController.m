@@ -538,5 +538,4 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-
 @end
