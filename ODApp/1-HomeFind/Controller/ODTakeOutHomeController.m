@@ -6,6 +6,9 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //  定外卖
 
+#define MAS_SHORTHAND
+#define MAS_SHORTHAND_GLOBALS
+
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODTakeOutHomeController.h"
 
@@ -16,6 +19,7 @@
 #import "ODTakeOutHeaderView.h"
 
 #import "ODTakeAwayDetailController.h"
+#import <Masonry.h>
 
 @interface ODTakeOutHomeController () <UITableViewDataSource, UITableViewDelegate,
                                         ODTakeOutHeaderViewDelegate>
@@ -128,12 +132,17 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 - (void)setupHeaderView
 {
     ODTakeOutHeaderView *headerView = [ODTakeOutHeaderView headerView];
-    [headerView sizeToFit];
-    headerView.od_width = KScreenWidth;
+//    [headerView sizeToFit];
+//    headerView.od_width = KScreenWidth;
     // 设置代理
     headerView.delegate = self;
     [self.scrollView addSubview:headerView];
     self.headerView = headerView;
+    [headerView makeConstraints:^(MASConstraintMaker *make) {
+        make.left.top.equalTo(self.view).offset(0);
+        make.width.equalTo(self.view);
+        make.height.equalTo(163);
+    }];
 }
 
 /**
