@@ -15,6 +15,8 @@
 
 @interface ODBazaarExchangeSkillDetailViewController ()
 
+@property (nonatomic, assign) BOOL isCollect;
+
 @end
 
 @implementation ODBazaarExchangeSkillDetailViewController
@@ -38,7 +40,6 @@
     self.navigationItem.title = self.nick;
     [self requestData];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -67,6 +68,10 @@
         [weakSelf createUserInfoView];
         [weakSelf createDetailView];
         [weakSelf createBottomView];
+        
+        if (self.isCollect) {
+            [weakSelf backRefreshData];
+        }
     } failure:^(NSError *error) {
         
     }];
@@ -75,6 +80,7 @@
 - (void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isLove:(BOOL)love {
     __weakSelf;
     [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarExchangeSkillDetailLoveModel class] success:^(ODBazaarExchangeSkillDetailLoveModelResponse *model) {
+        self.isCollect = YES;
         if (love) {
             weakSelf.love = @"love";
             [weakSelf requestData];
@@ -86,6 +92,7 @@
             [weakSelf requestData];
             [ODProgressHUD showInfoWithStatus:@"取消收藏"];
         }
+        
     } failure:^(NSError *error) {
         
     }];
@@ -250,10 +257,10 @@
 }
 
 #pragma mark - action
-- (void)backAction:(UIBarButtonItem *)sender {
+
+- (void)backRefreshData {
     NSDictionary *loveDict = [[NSDictionary alloc] initWithObjectsAndKeys:self.love_num, @"loveNumber", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationloveSkill object:nil userInfo:loveDict];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)shareButtonClick {
