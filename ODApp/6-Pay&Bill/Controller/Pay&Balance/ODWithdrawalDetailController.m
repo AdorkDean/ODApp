@@ -75,10 +75,10 @@
         [weakSelf.collectionView reloadData];
         
         if (weakSelf.dataArray.count == 0) {
-            [self.noResultLabel showOnSuperView:weakSelf.collectionView title:@"暂无提现记录"];
+            [weakSelf.noResultLabel showOnSuperView:weakSelf.collectionView title:@"暂无提现记录"];
         }
         else {
-            [self.noResultLabel hidden];
+            [weakSelf.noResultLabel hidden];
         }
      } failure:^(NSError *error) {
          

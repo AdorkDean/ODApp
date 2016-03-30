@@ -29,4 +29,9 @@
  */
 - (instancetype)od_roundedCornerImage:(CGFloat)cornerradius;
 
+
+/**
+ *  裁剪图片
+ */
++ (UIImage *)od_scaleImage:(UIImage *)image;
 @end

@@ -21,6 +21,8 @@ NSString * const ODAlertIsLoading = nil;
 {
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
 //    [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
+    [SVProgressHUD setBackgroundColor:[UIColor colorWithRGBString:@"#4a4a4a" alpha:0.8]];
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     [SVProgressHUD setInfoImage:nil];
 }
 
@@ -31,12 +33,12 @@ NSString * const ODAlertIsLoading = nil;
 
 + (void)showProgressWithStatus:(NSString *)status
 {
-    [SVProgressHUD showWithStatus:status];
+    [SVProgressHUD showWithStatus:status maskType:SVProgressHUDMaskTypeNone];
 }
 
 + (void)showInfoWithStatus:(NSString *)status
 {
-    [SVProgressHUD showInfoWithStatus:status];
+    [SVProgressHUD showInfoWithStatus:status maskType:SVProgressHUDMaskTypeNone];
 }
 
 + (void)showToast:(UIView *)view msg:(NSString *)msg
@@ -60,7 +62,7 @@ NSString * const ODAlertIsLoading = nil;
     [SVProgressHUD dismiss];
 }
 
-//- (void)createProgressHUDWithAlpha:(float)alpha withAfterDelay:(float)afterDelay title:(NSString *)title
+//- (void)showProgressHUDWithAlpha:(float)alpha withAfterDelay:(float)afterDelay title:(NSString *)title
 //{
 //    
 //    self.HUD = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];

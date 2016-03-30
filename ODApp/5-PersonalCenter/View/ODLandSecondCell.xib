@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
@@ -24,25 +23,25 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="场地预约icon2" translatesAutoresizingMaskIntoConstraints="NO" id="9Ev-bB-nPp">
-                        <rect key="frame" x="364" y="14" width="7" height="13"/>
+                        <rect key="frame" x="364" y="31" width="7" height="13"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="13" id="hg6-wr-3G9"/>
-                            <constraint firstAttribute="width" constant="7" id="hky-jD-vTI"/>
+                            <constraint firstAttribute="height" constant="13" id="IQP-Wo-S3Q"/>
+                            <constraint firstAttribute="width" constant="7" id="SVF-oz-xg9"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="9Ev-bB-nPp" firstAttribute="leading" secondItem="Gy3-Up-ShN" secondAttribute="trailing" constant="33" id="9Yl-N3-kdP"/>
+                <constraint firstItem="9Ev-bB-nPp" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="EpS-yL-XOY"/>
                 <constraint firstItem="YzX-AY-n9a" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Jze-3m-B3y"/>
                 <constraint firstItem="YzX-AY-n9a" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="KV4-rm-Cc6"/>
                 <constraint firstAttribute="bottom" secondItem="Gy3-Up-ShN" secondAttribute="bottom" constant="5" id="T4U-fj-e98"/>
                 <constraint firstAttribute="trailing" secondItem="YzX-AY-n9a" secondAttribute="trailing" id="Wzm-3j-9bS"/>
-                <constraint firstAttribute="trailing" secondItem="9Ev-bB-nPp" secondAttribute="trailing" constant="10" id="a8z-2L-gkd"/>
                 <constraint firstItem="Gy3-Up-ShN" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="18" id="iud-XF-YTD"/>
                 <constraint firstItem="Gy3-Up-ShN" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="5" id="jSp-W6-rVK"/>
                 <constraint firstAttribute="bottom" secondItem="YzX-AY-n9a" secondAttribute="bottom" id="pQa-Fm-E2z"/>
-                <constraint firstItem="9Ev-bB-nPp" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="14" id="qXy-a6-VbY"/>
                 <constraint firstAttribute="trailing" secondItem="Gy3-Up-ShN" secondAttribute="trailing" constant="50" id="z7g-gg-PMF"/>
             </constraints>
             <size key="customSize" width="381" height="74"/>

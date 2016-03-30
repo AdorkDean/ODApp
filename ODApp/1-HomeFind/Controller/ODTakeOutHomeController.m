@@ -132,17 +132,17 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 - (void)setupHeaderView
 {
     ODTakeOutHeaderView *headerView = [ODTakeOutHeaderView headerView];
-//    [headerView sizeToFit];
-//    headerView.od_width = KScreenWidth;
+    [headerView sizeToFit];
+    headerView.od_width = KScreenWidth;
     // 设置代理
     headerView.delegate = self;
     [self.scrollView addSubview:headerView];
     self.headerView = headerView;
-    [headerView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(self.view).offset(0);
-        make.width.equalTo(self.view);
-        make.height.equalTo(163);
-    }];
+//    [headerView makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.top.equalTo(self.view).offset(0);
+//        make.width.equalTo(self.view);
+//        make.height.equalTo(163);
+//    }];
 }
 
 /**
