@@ -89,7 +89,7 @@ NSString *const cellID = @"ODBazaarExchangeSkillCell";
                                 @"page" : [NSString stringWithFormat:@"%ld", (long)self.page]};
     __weakSelf
     [ODHttpTool getWithURL:ODUrlUserLoveList parameters:parameter modelClass:[ODBazaarExchangeSkillModel class] success:^(ODBazaarExchangeSkillModelResponse *model) {
-        if (self.page == 1) {
+        if (weakSelf.page == 1) {
             [weakSelf.dataArray removeAllObjects];
         }
         
@@ -98,9 +98,9 @@ NSString *const cellID = @"ODBazaarExchangeSkillCell";
         
         [ODHttpTool od_endRefreshWith:weakSelf.tableView array:[model result]];
         if (weakSelf.dataArray.count == 0) {
-            [self.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无收藏"];
+            [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无收藏"];
         }else {
-            [self.noResultLabel hidden];
+            [weakSelf.noResultLabel hidden];
         }        
     } failure:^(NSError *error) {
         [weakSelf.tableView.mj_header endRefreshing];
