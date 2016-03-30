@@ -102,7 +102,7 @@ UIKIT_EXTERN NSString * const ODWebUrlExpect;
 UIKIT_EXTERN NSString * const ODWebUrlMapSearch;
 
 UIKIT_EXTERN NSString * const ODWebUrlNative;
-UIKIT_EXTERN NSString *const ODWebUrlNativeCart;
+UIKIT_EXTERN NSString * const ODWebUrlNativeCart;
 
 
 #pragma mark - 请求URL接口
