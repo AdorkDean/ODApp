@@ -8,7 +8,6 @@
 
 #import "ODBaseViewController.h"
 #import "ODCommunityBbsModel.h"
-#import "ODCommunityCollectionCell.h"
 #import "ODCommunityReleaseTopicViewController.h"
 #import "ODCommunityDetailViewController.h"
 #import "ODCommunityKeyWordSearchViewController.h"
