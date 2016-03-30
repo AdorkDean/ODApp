@@ -39,11 +39,10 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self setupTableView];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
-    if (![ODUserInformation sharedODUserInformation].openID.length)  return;
+    [self setupTableView];
+    if (![ODUserInformation sharedODUserInformation].openID.length) return;
     
-    self.tableView.contentOffset = CGPointZero;
     self.headerView.user = [[ODUserInformation sharedODUserInformation] getUserCache];
 }
 - (void)viewWillDisappear:(BOOL)animated {
@@ -53,9 +52,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // 初始化表格
-    [self setupTableView];
     
     // 初始化数据
     [self setupGroup];
@@ -71,6 +67,7 @@
     self.navigationItem.title = @"个人中心";
     self.tableView.rowHeight = 48;
     self.tableView.backgroundColor = [UIColor colorWithRGBString:@"#f6f6f6" alpha:1];
+    self.tableView.contentOffset = CGPointZero;
     
     // 调整tableView距离导航栏高度
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 14, 0);
