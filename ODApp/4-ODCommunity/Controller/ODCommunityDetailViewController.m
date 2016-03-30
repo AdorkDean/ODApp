@@ -183,19 +183,16 @@
         ODCommunityDetailInfoImgs_bigModel *imgs_bigModel = self.userArray[i];
         UIImageView *imageView = [[UIImageView alloc]init];
         CGFloat multiple = imgs_bigModel.x/imgs_bigModel.y;
+        
+        NSLog(@"====%f",multiple);
         if (imgs_bigModel.y==0) {
             imageView.frame = CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, 300);
         }else{
            imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, CGRectGetMaxY(frame)+10, kScreenSize.width-20, (kScreenSize.width-20)/multiple)];
+            NSLog(@"=======%f",imageView.frame.size.height);
         }
         frame = imageView.frame;
-        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:imgs_bigModel.img_url] placeholderImage:[UIImage imageNamed:@"placeholderImage"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if (error)
-            {
-                imageView.image = [UIImage imageNamed:@"errorplaceholderImage"];
-            }
-
-        }];
+        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:imgs_bigModel.img_url] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
         [self.bbsView addSubview:imageView];
     }
     

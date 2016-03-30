@@ -175,11 +175,7 @@
             imageView = [[UIImageView alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(frame) + 6, kScreenSize.width - 35, (kScreenSize.width - 35) / multiple)];
         }
         frame = imageView.frame;
-        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:[dict valueForKeyPath:@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-            if (error) {
-                imageView.image = [UIImage imageNamed:@"errorplaceholderImage"];
-            }
-        }];
+        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:[dict valueForKeyPath:@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
         [self.detailView addSubview:imageView];
     }
     self.loveImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kScreenSize.width - 181)/2, CGRectGetMaxY(frame)+30, 181, 40)];
@@ -204,7 +200,7 @@
         button.frame = CGRectMake((kScreenSize.width-(count-1)*10-count*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+15, width, width);
         button.layer.masksToBounds = YES;
         button.layer.cornerRadius = width / 2;
-        [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString: [dict valueForKeyPath:@"avatar"]] forState:UIControlStateNormal];
+        [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString: [dict valueForKeyPath:@"avatar"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
         [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.detailView addSubview:button];
     }
@@ -301,12 +297,6 @@
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
     } else {
-        
-//        ODSubmitOrderController *vc = [[ODSubmitOrderController alloc] init];
-//        vc.swap_type = self.model.swap_type;
-//        vc.model = self.model;
-//        [self.navigationController pushViewController:vc animated:YES];
-        
         if ([type isEqualToString:@"1"]) {
             ODOrderController *vc = [[ODOrderController alloc] init];
             vc.informationModel = self.model;
