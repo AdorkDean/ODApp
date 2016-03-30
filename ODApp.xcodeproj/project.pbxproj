@@ -12,7 +12,6 @@
 		232CB5561C9264E200340D12 /* NSString+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3181C9264E200340D12 /* NSString+ODExtension.m */; };
 		232CB5571C9264E200340D12 /* NSURL+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB31A1C9264E200340D12 /* NSURL+ODExtension.m */; };
 		232CB5581C9264E200340D12 /* UIBarButtonItem+ODExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB31D1C9264E200340D12 /* UIBarButtonItem+ODExtention.m */; };
-		232CB5591C9264E200340D12 /* UIColor+ODColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB31F1C9264E200340D12 /* UIColor+ODColor.m */; };
 		232CB55A1C9264E200340D12 /* UIColor+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3211C9264E200340D12 /* UIColor+ODExtension.m */; };
 		232CB55B1C9264E200340D12 /* UIImage+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3231C9264E200340D12 /* UIImage+ODExtension.m */; };
 		232CB55C1C9264E200340D12 /* UIView+ODExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB3251C9264E200340D12 /* UIView+ODExtension.m */; };
@@ -145,8 +144,6 @@
 		232CB5F41C9264E200340D12 /* ODCommunityBbsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB46A1C9264E200340D12 /* ODCommunityBbsModel.m */; };
 		232CB5F51C9264E200340D12 /* ODCommunityDetailInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB46C1C9264E200340D12 /* ODCommunityDetailInfoModel.m */; };
 		232CB5F61C9264E200340D12 /* ODCommunityDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB46E1C9264E200340D12 /* ODCommunityDetailModel.m */; };
-		232CB5F71C9264E200340D12 /* ODCommunityCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4711C9264E200340D12 /* ODCommunityCollectionCell.m */; };
-		232CB5F81C9264E200340D12 /* ODCommunityCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB4721C9264E200340D12 /* ODCommunityCollectionCell.xib */; };
 		232CB5F91C9264E200340D12 /* ODCommunityDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB4741C9264E200340D12 /* ODCommunityDetailCell.m */; };
 		232CB5FA1C9264E200340D12 /* ODCommunityDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 232CB4751C9264E200340D12 /* ODCommunityDetailCell.xib */; };
 		232CB5FB1C9264E200340D12 /* ODPersonalCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 232CB47A1C9264E200340D12 /* ODPersonalCenterViewController.m */; };
@@ -297,6 +294,7 @@
 		B853645F1CA510FA005E312B /* ODCommunityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B853645D1CA510FA005E312B /* ODCommunityCell.xib */; };
 		B85364621CA51FA3005E312B /* ODMyReleaseTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85364611CA51FA3005E312B /* ODMyReleaseTopicViewController.m */; };
 		B85364681CA52008005E312B /* ODMyReplyTopicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B85364671CA52008005E312B /* ODMyReplyTopicViewController.m */; };
+		B85B4B011CABB1E2006D431E /* UIColor+ODColor .m in Sources */ = {isa = PBXBuildFile; fileRef = B85B4B001CABB1E2006D431E /* UIColor+ODColor .m */; };
 		B86588281C993E44002ECB0C /* ODMyTaskCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B86588261C993E44002ECB0C /* ODMyTaskCell.m */; };
 		B86588291C993E44002ECB0C /* ODMyTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B86588271C993E44002ECB0C /* ODMyTaskCell.xib */; };
 		B865882D1C9953AA002ECB0C /* ODMyTaskViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B865882B1C9953AA002ECB0C /* ODMyTaskViolationsCell.m */; };
@@ -366,7 +364,6 @@
 		232CB31C1C9264E200340D12 /* UIBarButtonItem+ODExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+ODExtention.h"; sourceTree = "<group>"; };
 		232CB31D1C9264E200340D12 /* UIBarButtonItem+ODExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+ODExtention.m"; sourceTree = "<group>"; };
 		232CB31E1C9264E200340D12 /* UIColor+ODColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ODColor.h"; sourceTree = "<group>"; };
-		232CB31F1C9264E200340D12 /* UIColor+ODColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ODColor.m"; sourceTree = "<group>"; };
 		232CB3201C9264E200340D12 /* UIColor+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ODExtension.h"; sourceTree = "<group>"; };
 		232CB3211C9264E200340D12 /* UIColor+ODExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ODExtension.m"; sourceTree = "<group>"; };
 		232CB3221C9264E200340D12 /* UIImage+ODExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ODExtension.h"; sourceTree = "<group>"; };
@@ -616,9 +613,6 @@
 		232CB46C1C9264E200340D12 /* ODCommunityDetailInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityDetailInfoModel.m; sourceTree = "<group>"; };
 		232CB46D1C9264E200340D12 /* ODCommunityDetailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityDetailModel.h; sourceTree = "<group>"; };
 		232CB46E1C9264E200340D12 /* ODCommunityDetailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityDetailModel.m; sourceTree = "<group>"; };
-		232CB4701C9264E200340D12 /* ODCommunityCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityCollectionCell.h; sourceTree = "<group>"; };
-		232CB4711C9264E200340D12 /* ODCommunityCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityCollectionCell.m; sourceTree = "<group>"; };
-		232CB4721C9264E200340D12 /* ODCommunityCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODCommunityCollectionCell.xib; sourceTree = "<group>"; };
 		232CB4731C9264E200340D12 /* ODCommunityDetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityDetailCell.h; sourceTree = "<group>"; };
 		232CB4741C9264E200340D12 /* ODCommunityDetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityDetailCell.m; sourceTree = "<group>"; };
 		232CB4751C9264E200340D12 /* ODCommunityDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODCommunityDetailCell.xib; sourceTree = "<group>"; };
@@ -884,6 +878,7 @@
 		B85364611CA51FA3005E312B /* ODMyReleaseTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyReleaseTopicViewController.m; sourceTree = "<group>"; };
 		B85364661CA52008005E312B /* ODMyReplyTopicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyReplyTopicViewController.h; sourceTree = "<group>"; };
 		B85364671CA52008005E312B /* ODMyReplyTopicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyReplyTopicViewController.m; sourceTree = "<group>"; };
+		B85B4B001CABB1E2006D431E /* UIColor+ODColor .m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ODColor .m"; sourceTree = "<group>"; };
 		B86588251C993E44002ECB0C /* ODMyTaskCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyTaskCell.h; sourceTree = "<group>"; };
 		B86588261C993E44002ECB0C /* ODMyTaskCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyTaskCell.m; sourceTree = "<group>"; };
 		B86588271C993E44002ECB0C /* ODMyTaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyTaskCell.xib; sourceTree = "<group>"; };
@@ -1030,7 +1025,7 @@
 				232CB31C1C9264E200340D12 /* UIBarButtonItem+ODExtention.h */,
 				232CB31D1C9264E200340D12 /* UIBarButtonItem+ODExtention.m */,
 				232CB31E1C9264E200340D12 /* UIColor+ODColor.h */,
-				232CB31F1C9264E200340D12 /* UIColor+ODColor.m */,
+				B85B4B001CABB1E2006D431E /* UIColor+ODColor .m */,
 				232CB3201C9264E200340D12 /* UIColor+ODExtension.h */,
 				232CB3211C9264E200340D12 /* UIColor+ODExtension.m */,
 				232CB3221C9264E200340D12 /* UIImage+ODExtension.h */,
@@ -1641,9 +1636,6 @@
 		232CB46F1C9264E200340D12 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				232CB4701C9264E200340D12 /* ODCommunityCollectionCell.h */,
-				232CB4711C9264E200340D12 /* ODCommunityCollectionCell.m */,
-				232CB4721C9264E200340D12 /* ODCommunityCollectionCell.xib */,
 				232CB4731C9264E200340D12 /* ODCommunityDetailCell.h */,
 				232CB4741C9264E200340D12 /* ODCommunityDetailCell.m */,
 				232CB4751C9264E200340D12 /* ODCommunityDetailCell.xib */,
@@ -2311,7 +2303,6 @@
 				400F18501CA93220000EFFBC /* ODTakeOutHeaderView.xib in Resources */,
 				ED5327371C9A9C0000BB45B1 /* ODCenterDetailView.xib in Resources */,
 				232CB6671C9264E200340D12 /* ODPaySuccessView.xib in Resources */,
-				232CB5F81C9264E200340D12 /* ODCommunityCollectionCell.xib in Resources */,
 				232CB6651C9264E200340D12 /* ODBalanceView.xib in Resources */,
 				B853645F1CA510FA005E312B /* ODCommunityCell.xib in Resources */,
 				232CB5B31C9264E200340D12 /* ODTitleLabelView.xib in Resources */,
@@ -2396,7 +2387,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				232CB5591C9264E200340D12 /* UIColor+ODColor.m in Sources */,
 				232CB5A81C9264E200340D12 /* ODActivitybottomView.m in Sources */,
 				ED537ED91CA5207500EB12F4 /* ODSubmitOrderController.m in Sources */,
 				232CB6071C9264E200340D12 /* ODOtherTopicViewController.m in Sources */,
@@ -2460,11 +2450,11 @@
 				232CB5E61C9264E200340D12 /* ODRoundTimeDrawView.m in Sources */,
 				4003348B1C9B97C500973818 /* ODSwitchItem.m in Sources */,
 				232CB5661C9264E200340D12 /* IQUIView+Hierarchy.m in Sources */,
+				B85B4B011CABB1E2006D431E /* UIColor+ODColor .m in Sources */,
 				ED53273A1C9AAFD200BB45B1 /* ODCenterDetailController.m in Sources */,
 				232CB61A1C9264E200340D12 /* ODSecondEvaluationModel.m in Sources */,
 				232CB5C11C9264E200340D12 /* ODPlacePreLabel.m in Sources */,
 				232CB64A1C9264E200340D12 /* ODOrderDataModel.m in Sources */,
-				232CB5F71C9264E200340D12 /* ODCommunityCollectionCell.m in Sources */,
 				232CB61D1C9264E200340D12 /* ODBindingMobileView.m in Sources */,
 				ED4FF4731CA3E89C00EDE431 /* PontoDispatcher.m in Sources */,
 				232CB5A61C9264E200340D12 /* ODStoreTimelineModel.m in Sources */,
