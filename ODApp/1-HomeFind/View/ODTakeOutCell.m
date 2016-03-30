@@ -44,9 +44,8 @@
     UIImage *placehoderImage = [UIImage imageNamed:@"placeholder_picture"];
     __weakSelf;
     [self.shopImageView sd_setImageWithURL:[NSURL OD_URLWithString:datas.img_small] placeholderImage:placehoderImage options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        if (image == nil ) return;
-        image = [image od_roundedCornerImage:10.0f];
-        weakSelf.shopImageView.image = image;
+        if ( !image ) return;
+        weakSelf.shopImageView.image = [image od_roundedCornerImage:10.0f];
     }];
     self.titleLabel.text = datas.title;
     self.discountPriceLabel.text = [NSString stringWithFormat:@"¥%@", datas.price_show];
@@ -56,8 +55,9 @@
     self.buyButton.enabled = (datas.show_status == ODTakeOutStatusBuy);
     
     // 添加中划线
-    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:self.originalPriceLabel.text attributes:attribtDic];
+    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc] initWithString:
+                                                      self.originalPriceLabel.text attributes:attribtDic];
     self.originalPriceLabel.attributedText = attribtStr;
 }
 

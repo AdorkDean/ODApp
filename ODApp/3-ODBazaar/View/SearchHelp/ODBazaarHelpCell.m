@@ -37,6 +37,21 @@
     self.timeLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
     // 限制正文最大宽度
     self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 90;
+    
+    [self stopBlendedLayers];
+}
+
+- (void)stopBlendedLayers {
+    
+    self.titleLabel.backgroundColor = [UIColor whiteColor];
+    self.contentLabel.backgroundColor = [UIColor whiteColor];
+    self.nameLabel.backgroundColor = [UIColor whiteColor];
+    self.timeLabel.backgroundColor = [UIColor whiteColor];
+    
+    self.titleLabel.layer.masksToBounds = YES;
+    self.contentLabel.layer.masksToBounds = YES;
+    self.nameLabel.layer.masksToBounds = YES;
+    self.timeLabel.layer.masksToBounds = YES;
 }
 
 /**

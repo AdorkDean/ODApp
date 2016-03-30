@@ -151,7 +151,7 @@ static int const ImageViewCount = 3;
 - (void)updateContent
 {
     // 设置图片
-    for (int i = 0; i<self.scrollView.subviews.count; i++) {
+    for (int i = 0; i < self.scrollView.subviews.count; i++) {
         UIImageView *imageView = self.scrollView.subviews[i];
         NSInteger index = self.pageControl.currentPage;
         if (i == 0) {
