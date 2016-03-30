@@ -475,7 +475,7 @@
         NSData *imageData;
         self.pickedImage = info[UIImagePickerControllerOriginalImage];
         if ([imageUrl.lowercaseString isEqualToString:@"jpg"]) {
-            self.pickedImage = [self scaleImage:self.pickedImage];
+            self.pickedImage = [UIImage od_scaleImage:self.pickedImage];
             imageData = UIImageJPEGRepresentation(self.pickedImage, 0.3);
         }else {
             imageData = UIImagePNGRepresentation(self.pickedImage);
@@ -487,20 +487,6 @@
         [self pushDataWith:strData];
     }
     [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
--(UIImage *) scaleImage:(UIImage *)image
-{
-    CGSize size = CGSizeMake(image.size.width * 0.3, image.size.height * 0.3);
-    UIGraphicsBeginImageContext(size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    CGAffineTransform transform = CGAffineTransformIdentity;
-    transform = CGAffineTransformScale(transform,0.3, 0.3);
-    CGContextConcatCTM(context, transform);
-    [image drawAtPoint:CGPointMake(0.0f, 0.0f)];
-    UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newimg;
 }
 
 -(void)joiningTogetherParmetersWithButton:(UIButton *)button

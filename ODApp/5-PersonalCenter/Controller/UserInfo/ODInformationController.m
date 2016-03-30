@@ -36,7 +36,7 @@
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self getData];
+//    [self getData];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
@@ -45,7 +45,7 @@
     
     self.dataArray = [[NSMutableArray alloc] init];
     self.view.backgroundColor = [UIColor whiteColor];
-//    [self getData];
+    [self getData];
     self.navigationItem.title = @"个人中心";
 }
 
@@ -236,34 +236,23 @@
 {
     NSString *sourceType = info[UIImagePickerControllerMediaType];
     if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
-        
-        self.image = info[UIImagePickerControllerEditedImage];
-        /**
-         //拿到图片
-         UIImage *image = [UIImage imageNamed:@"flower.png"]; NSString *path_sandox = NSHomeDirectory();
-         //设置一个图片的存储路径
-         NSString *imagePath = [path_sandox stringByAppendingString:@"/Documents/flower.png"];
-         //把图片直接保存到指定的路径（同时应该把图片的路径imagePath存起来，下次就可以直接用来取）
-         [UIImagePNGRepresentation(image) writeToFile:imagePath atomically:YES];
-         
-         */
-
-        
-        
-        //设置image的尺寸
-        CGSize imagesize = self.image.size;
-        
-        imagesize.height = 200;
-        imagesize.width = 200;
-        
-        //对图片大小进行压缩--
-        UIImage *image1 = [self imageWithImage:self.image scaledToSize:imagesize];
-        //图片转化为data
+        NSString *imageUrl = [info[UIImagePickerControllerReferenceURL] absoluteString];
+        NSRange range;
+        range.location = [imageUrl rangeOfString:@"=" options:NSBackwardsSearch].location + 1;
+        range.length = imageUrl.length - range.location;
+        imageUrl = [imageUrl substringWithRange:range];
         NSData *imageData;
-        imageData = UIImagePNGRepresentation(image1);
-        
+        self.image = info[UIImagePickerControllerEditedImage];
+        self.image =  [UIImage od_scaleImage:self.image];
+        if ([imageUrl.lowercaseString isEqualToString:@"jpg"]) {
+            imageData = UIImageJPEGRepresentation(self.image, 0.3);
+        }else {
+            imageData = UIImagePNGRepresentation(self.image);
+        }
         NSString *str = @"data:image/jpeg;base64,";
         NSString *strData = [str stringByAppendingString:[imageData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
+        [self.imagePicker dismissViewControllerAnimated:YES completion:nil];
+        [ODProgressHUD showProgressWithStatus:@"正在上传"];
         
         // 拼接参数
         NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -274,7 +263,7 @@
             // 取出模型
             ODUploadImageModel *uploadModel = [model result];
             weakSelf.imgsString = uploadModel.File;
-            
+            [ODProgressHUD dismiss];
             // 更新图片
             [weakSelf updateUserImage];
         } failure:^(NSError *error) {
@@ -411,26 +400,16 @@
      {
          ODUserModel *userModel = [model result];
          
-         [weakSelf.informationView.userImageView sd_setImageWithURL:[NSURL URLWithString:userModel.avatar]];
+         //         [weakSelf.informationView.userImageView sd_setImageWithURL:[NSURL URLWithString:userModel.avatar]];
+         weakSelf.informationView.userImageView.image = weakSelf.image;
+         
+         [[ODUserInformation sharedODUserInformation] updateUserCache:userModel];
          
          [weakSelf.tableView reloadData];
          
-         [weakSelf.imagePicker dismissViewControllerAnimated:YES completion:nil];
+//         [weakSelf.imagePicker dismissViewControllerAnimated:YES completion:nil];
      } failure:^(NSError *error) {
      }];
-}
-
-/**
- *  压缩图片
- */
--(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize
-{
-    UIGraphicsBeginImageContext(newSize);
-    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
 }
 
 @end

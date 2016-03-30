@@ -59,4 +59,17 @@
     UIGraphicsEndImageContext();
     return image;
 }
+
++ (UIImage *)od_scaleImage:(UIImage *)image {
+    CGSize size = CGSizeMake(image.size.width * 0.5, image.size.height * 0.5);
+    UIGraphicsBeginImageContext(size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGAffineTransform transform = CGAffineTransformIdentity;
+    transform = CGAffineTransformScale(transform, 0.5, 0.5);
+    CGContextConcatCTM(context, transform);
+    [image drawAtPoint:CGPointMake(0.0f, 0.0f)];
+    UIImage *newimg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newimg;
+}
 @end
