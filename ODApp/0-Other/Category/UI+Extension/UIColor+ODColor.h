@@ -36,6 +36,11 @@
 + (UIColor *)colorGrayColor;
 
 /**
+ *  #b0b0b0
+ **/
++ (UIColor *)colorGreyColor;
+
+/**
  *  #484848
  **/
 + (UIColor *)colorGloomyColor;

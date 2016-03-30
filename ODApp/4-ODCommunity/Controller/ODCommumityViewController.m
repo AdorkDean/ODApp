@@ -236,8 +236,8 @@ static NSString *cellId = @"ODCommunityCell";
 #pragma mark - action
 -(void)titleButtonClick:(UIButton *)button{
     UIViewController *controller = [[UIViewController alloc]init];
-    controller.view.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
-    controller.view.layer.borderColor = [UIColor colorWithRGBString:@"#000000" alpha:1].CGColor;
+    controller.view.backgroundColor = [UIColor themeColor];
+    controller.view.layer.borderColor = [UIColor blackColor].CGColor;
     controller.view.layer.borderWidth = 1;
     controller.view.layer.cornerRadius = 10;
     
@@ -246,7 +246,7 @@ static NSString *cellId = @"ODCommunityCell";
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         [button setFrame:CGRectMake(0, 30*i, 110, 29)];
         [button setTitle:array[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRGBString:@"#000000" alpha:1] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(titleViewLabelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [controller.view addSubview:button];
         UIImageView *lineImage = [[UIImageView alloc]initWithFrame:CGRectMake(15, CGRectGetMaxY(button.frame)+0.5, 80, 0.5)];

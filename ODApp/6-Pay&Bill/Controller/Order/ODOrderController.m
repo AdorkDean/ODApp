@@ -106,13 +106,13 @@
     self.allPriceLabel.text = [NSString stringWithFormat:@"%.2f元", self.informationModel.price];
     self.allPriceLabel.textAlignment = NSTextAlignmentLeft;
     self.allPriceLabel.font = [UIFont systemFontOfSize:15];
-    self.allPriceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+    self.allPriceLabel.textColor = [UIColor colorRedColor];
     [amountImageView addSubview:self.allPriceLabel];
     [self.view addSubview:amountImageView];
 
     UIButton *saveOrderButton = [UIButton buttonWithType:UIButtonTypeSystem];
     saveOrderButton.frame = CGRectMake(kScreenSize.width - 150, kScreenSize.height - 49 - ODNavigationHeight, 150, 49);
-    saveOrderButton.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+    saveOrderButton.backgroundColor = [UIColor colorRedColor];
     [saveOrderButton setTitle:@"提交订单" forState:UIControlStateNormal];
     saveOrderButton.titleLabel.font = [UIFont systemFontOfSize:13];
     [saveOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -265,15 +265,15 @@
         DataButton *button = [[DataButton alloc] initWithFrame:CGRectMake(5 + i * self.scroller.frame.size.width / 3, 5, self.scroller.frame.size.width / 3 - 10, 40)];
         if (i == 0) {
             
-            button.dataLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
-            button.timeLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+            button.dataLabel.textColor = [UIColor colorRedColor];
+            button.timeLabel.textColor = [UIColor colorRedColor];
             button.layer.masksToBounds = YES;
             button.layer.cornerRadius = 5;
-            button.layer.borderColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1].CGColor;
+            button.layer.borderColor = [UIColor colorRedColor].CGColor;
             button.layer.borderWidth = 1;
             
         } else {
-            button.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+            button.layer.borderColor = [UIColor lineColor].CGColor;
             button.layer.masksToBounds = YES;
             button.layer.cornerRadius = 5;
             button.layer.borderWidth = 1;
@@ -298,14 +298,14 @@
     for (NSInteger i = 0; i < 7; i++) {
         DataButton *button = [self.scroller viewWithTag:i + 7];
         if (sender.tag != button.tag) {
-            button.layer.borderColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1].CGColor;
-            button.dataLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
-            button.timeLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+            button.layer.borderColor = [UIColor colorGraynessColor].CGColor;
+            button.dataLabel.textColor = [UIColor colorGraynessColor];
+            button.timeLabel.textColor = [UIColor colorGraynessColor];
             
         } else {
-            button.layer.borderColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1].CGColor;
-            button.dataLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
-            button.timeLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+            button.layer.borderColor = [UIColor colorRedColor].CGColor;
+            button.dataLabel.textColor = [UIColor colorRedColor];
+            button.timeLabel.textColor = [UIColor colorRedColor];
         }
     }
     [self createButtonWithNumber:sender.tag - 7];
@@ -334,7 +334,7 @@
             
             button.userInteractionEnabled = NO;
             button.backgroundColor = [UIColor colorWithRGBString:@"#f0f0f0" alpha:1];
-            [button setTitleColor:[UIColor colorWithRGBString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorGraynessColor] forState:UIControlStateNormal];
             
         } else {
             [button setTitleColor:[UIColor colorWithRGBString:@"#555555" alpha:1] forState:UIControlStateNormal];
@@ -355,7 +355,7 @@
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
             button.backgroundColor = [UIColor colorWithRGBString:@"#f0f0f0" alpha:1];
-            [button setTitleColor:[UIColor colorWithRGBString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorGraynessColor] forState:UIControlStateNormal];
         } else {
             [button setTitleColor:[UIColor colorWithRGBString:@"#555555" alpha:1] forState:UIControlStateNormal];
         }
@@ -375,7 +375,7 @@
         if (![status isEqualToString:@"1"]) {
             button.userInteractionEnabled = NO;
             button.backgroundColor = [UIColor colorWithRGBString:@"#f0f0f0" alpha:1];
-            [button setTitleColor:[UIColor colorWithRGBString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+            [button setTitleColor:[UIColor colorGraynessColor] forState:UIControlStateNormal];
             
         } else {
             [button setTitleColor:[UIColor colorWithRGBString:@"#555555" alpha:1] forState:UIControlStateNormal];
@@ -402,7 +402,7 @@
             if (![status isEqualToString:@"1"]) {
                 button.userInteractionEnabled = NO;
                 button.backgroundColor = [UIColor colorWithRGBString:@"#f0f0f0" alpha:1];
-                [button setTitleColor:[UIColor colorWithRGBString:@"#8e8e8e" alpha:1] forState:UIControlStateNormal];
+                [button setTitleColor:[UIColor colorGraynessColor] forState:UIControlStateNormal];
                 
             } else {
                 [button setTitleColor:[UIColor colorWithRGBString:@"#555555" alpha:1] forState:UIControlStateNormal];

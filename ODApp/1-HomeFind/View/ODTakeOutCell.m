@@ -31,9 +31,9 @@
 {
     // 取消选中样式
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.titleLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
-    self.discountPriceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
-    self.originalPriceLabel.textColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
+    self.titleLabel.textColor = [UIColor blackColor];
+    self.discountPriceLabel.textColor = [UIColor colorRedColor];
+    self.originalPriceLabel.textColor = [UIColor colorGrayColor];
 }
 
 - (void)setDatas:(ODTakeOutModel *)datas

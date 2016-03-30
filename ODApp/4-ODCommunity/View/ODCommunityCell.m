@@ -14,10 +14,10 @@
  *  初始化方法
  */
 - (void)awakeFromNib {
-    self.nickLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
-    self.signLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
-    self.timeLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
-    self.contentLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
+    self.nickLabel.textColor = [UIColor colorGloomyColor];
+    self.signLabel.textColor = [UIColor colorGraynessColor];
+    self.timeLabel.textColor = [UIColor colorGraynessColor];
+    self.contentLabel.textColor = [UIColor colorGloomyColor];
 }
 
 /**

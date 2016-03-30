@@ -43,7 +43,7 @@
 -(UIView *)backPickerView{
     if (!_backPickerView) {
         _backPickerView = [[UIView alloc]initWithFrame:CGRectMake(4, kScreenSize.height - 200 - 64, kScreenSize.width - 8, 200)];
-        _backPickerView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
+        _backPickerView.backgroundColor = [UIColor backgroundColor];
         [self.view addSubview:_backPickerView];
     }
     return _backPickerView;
@@ -94,7 +94,7 @@
     NSArray *array = @[@"开始时间", @"结束时间"];
     for (NSInteger i = 0; i < array.count; i++) {
         UILabel *label = [ODClassMethod creatLabelWithFrame:CGRectMake(4, 148 + (30.5 + 4) * i, 3.5 * width, 30.5) text:array[i] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
-        label.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        label.backgroundColor = [UIColor whiteColor];
         [self.scrollView addSubview:label];
     }
 
@@ -130,7 +130,7 @@
     startDateView.layer.masksToBounds = YES;
     startDateView.layer.cornerRadius = 5;
     startDateView.layer.borderWidth = 1;
-    startDateView.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+    startDateView.layer.borderColor = [UIColor lineColor].CGColor;
     [self.scrollView addSubview:startDateView];
 
     self.startDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5 * width - 30, 30.5) text:[NSString stringWithFormat:@"%@", startDateString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
@@ -148,7 +148,7 @@
     endDateView.layer.masksToBounds = YES;
     endDateView.layer.cornerRadius = 5;
     endDateView.layer.borderWidth = 1;
-    endDateView.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+    endDateView.layer.borderColor = [UIColor lineColor].CGColor;
     [self.scrollView addSubview:endDateView];
 
     self.endDateLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 5 * width - 30, 30.5) text:[NSString stringWithFormat:@"%@", endDateString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
@@ -166,7 +166,7 @@
     startTimeView.layer.masksToBounds = YES;
     startTimeView.layer.cornerRadius = 5;
     startTimeView.layer.borderWidth = 1;
-    startTimeView.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+    startTimeView.layer.borderColor = [UIColor lineColor].CGColor;
     [self.scrollView addSubview:startTimeView];
     self.startTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5 * width - 30, 30.5) text:[NSString stringWithFormat:@"%@", startTimeString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
     [startTimeView addSubview:self.startTimeLabel];
@@ -184,7 +184,7 @@
     endTimeView.layer.masksToBounds = YES;
     endTimeView.layer.cornerRadius = 5;
     endTimeView.layer.borderWidth = 1;
-    endTimeView.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+    endTimeView.layer.borderColor = [UIColor lineColor].CGColor;
     [self.scrollView addSubview:endTimeView];
 
     self.endTimeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, 3.5 * width - 30, 30.5) text:[NSString stringWithFormat:@"%@", endTimeString] font:13 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:NO];
@@ -229,7 +229,7 @@
     self.taskDetailTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 217, kScreenSize.width - 8, 245) delegate:self tag:0 font:14 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.scrollView addSubview:self.taskDetailTextView];
     self.taskDetailLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 217, kScreenSize.width - 20, 30) text:@"请输入任务详情" font:14 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    self.taskDetailLabel.textColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
+    self.taskDetailLabel.textColor = [UIColor colorGrayColor];
     self.taskDetailLabel.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.taskDetailLabel];
 }
@@ -242,10 +242,10 @@
     taskeRewardView.layer.masksToBounds = YES;
     taskeRewardView.layer.cornerRadius = 5;
     taskeRewardView.layer.borderWidth = 1;
-    taskeRewardView.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+    taskeRewardView.layer.borderColor = [UIColor lineColor].CGColor;
     [self.scrollView addSubview:taskeRewardView];
     self.taskRewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, 0, taskeRewardView.frame.size.width-35, 34) text:@"  选择任务奖励" font:13 alignment:@"left" color:@"#b0b0b0" alpha:1 maskToBounds:NO];
-    self.taskRewardLabel.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+    self.taskRewardLabel.backgroundColor = [UIColor whiteColor];
     [taskeRewardView addSubview:self.taskRewardLabel];
 
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(kScreenSize.width - 8 - 30, 10, 1, 14) tag:0 color:@"#b0b0b0"];

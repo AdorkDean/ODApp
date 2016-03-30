@@ -33,7 +33,7 @@ static NSString * const cellId = @"ODBazaarHelpCell";
     if (!_searchBar) {
         _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(10, 8, kScreenSize.width - 20, 30)];
         [[[[_searchBar.subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
-        _searchBar.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        _searchBar.backgroundColor = [UIColor whiteColor];
         _searchBar.delegate = self;
         _searchBar.placeholder = @"标签关键字";
         [self.view addSubview:_searchBar];
@@ -44,7 +44,7 @@ static NSString * const cellId = @"ODBazaarHelpCell";
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 46, kScreenSize.width, kScreenSize.height - 64- 46) style:UITableViewStylePlain];
-        _tableView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3" alpha:1];
+        _tableView.backgroundColor = [UIColor backgroundColor];
         _tableView.dataSource = self;
         _tableView.delegate = self;
         // 估算tableView高度
