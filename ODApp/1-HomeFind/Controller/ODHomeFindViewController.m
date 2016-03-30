@@ -210,12 +210,12 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     self.topClassView.userInteractionEnabled = YES;
     [self.headerView addSubview:self.topClassView];
     
-    NSArray *array = @[@"找活动",@"约场地",@"订外卖",@"找兼职",@"寻圈子",@"求帮助",@"换技能",@"更多"];
-    NSArray *imageArray = @[@"icon_activity",@"icon_field",@"icon_Takeaway",@"icon_Work-study",@"icon_circle_big",@"icon_help",@"icon_Skill_big",@"icon_more"];
-    CGFloat width = (KScreenWidth-2*ODLeftMargin)/4;
+    NSArray *array = @[ @"找活动", @"约场地", @"订外卖", @"找兼职", @"寻圈子", @"求帮助", @"换技能", @"更多" ];
+    NSArray *imageArray = @[ @"icon_activity", @"icon_field", @"icon_Takeaway", @"icon_Work-study", @"icon_circle_big", @"icon_help", @"icon_Skill_big", @"icon_more" ];
+    CGFloat width = (KScreenWidth - 2 * ODLeftMargin ) / 4;
     for (NSInteger i = 0; i < array.count; i++) {
         UIButton *button = [ODHomeButton buttonWithType:UIButtonTypeCustom];
-        button.frame = CGRectMake(ODLeftMargin+width*(i%4), 65*(i/4), width, 65);
+        button.frame = CGRectMake(ODLeftMargin + width * (i % 4), 65 * (i / 4), width, 65);
         [button setImage:[UIImage imageNamed:imageArray[i]] forState:UIControlStateNormal];
         [button setTitle:array[i] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(topClassButtonClick:) forControlEvents:UIControlEventTouchUpInside];

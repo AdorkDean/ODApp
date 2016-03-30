@@ -27,7 +27,7 @@
 {
     NSString *cString = [[color stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]uppercaseString];
     
-    if ([cString length]<6) {
+    if ([cString length] < 6) {
         return [UIColor clearColor];
     }
     
@@ -42,7 +42,7 @@
         cString = [cString substringFromIndex:1];
     }
     
-    if ([cString length]!=6) {
+    if ([cString length] != 6) {
         return [UIColor clearColor];
     }
     

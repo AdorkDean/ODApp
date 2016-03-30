@@ -11,7 +11,7 @@
 @interface UIColor (ODColor)
 
 /**
- *  主题颜色
+ *  #ffd802
  */
 + (UIColor *)themeColor;
 
