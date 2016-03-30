@@ -10,7 +10,6 @@
 #import "ODEvaluationController.h"
 #import "MJRefresh.h"
 #import "UIImageView+WebCache.h"
-#import "ODCommunityCollectionCell.h"
 #import "ODCommunityBbsModel.h"
 #import "ODCommunityDetailViewController.h"
 #import "ODOthersInformationController.h"
