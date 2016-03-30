@@ -13,9 +13,9 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    CGFloat width = (KScreenWidth-2*ODLeftMargin)/4;
-    self.imageView.od_centerX = width/2;
-    self.titleLabel.od_centerX = width/2;
+    CGFloat width = (KScreenWidth - 2 * ODLeftMargin) / 4;
+    self.imageView.od_centerX = width / 2;
+    self.titleLabel.od_centerX = width / 2;
     self.imageView.od_y = ODLeftMargin;
     self.titleLabel.od_y = 55;
 }

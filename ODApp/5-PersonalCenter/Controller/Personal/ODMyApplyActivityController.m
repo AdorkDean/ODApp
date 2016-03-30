@@ -94,10 +94,10 @@ static NSString *const cellId = @"newActivityCell";
         
         
         if (weakSelf.resultLists.count == 0) {
-            [self.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无活动"];
+            [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无活动"];
         }
         else {
-            [self.noResultLabel hidden];
+            [weakSelf.noResultLabel hidden];
         }        
     }
                    failure:^(NSError *error)
