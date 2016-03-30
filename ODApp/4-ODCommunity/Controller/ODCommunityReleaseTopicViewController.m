@@ -191,6 +191,7 @@
         NSData *imageData;
         self.pickedImage = info[UIImagePickerControllerOriginalImage];
         if ([imageUrl.lowercaseString isEqualToString:@"jpg"]) {
+            self.pickedImage =  [self scaleImage:self.pickedImage];
             imageData = UIImageJPEGRepresentation(self.pickedImage, 0.3);
         }else {
             imageData = UIImagePNGRepresentation(self.pickedImage);
