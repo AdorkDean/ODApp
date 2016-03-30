@@ -37,8 +37,7 @@
     if (_payView == nil) {
         self.payView = [ODPayView getView];
         self.payView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
-        
-        
+                
         [self.payView.weixinPaybutton addTarget:self action:@selector(weixinPayAction:) forControlEvents:UIControlEventTouchUpInside];
         [self.payView.treasurePayButton addTarget:self action:@selector(treasurePayAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -47,8 +46,6 @@
         self.payView.priceLabel.textColor = [UIColor redColor];
         self.payView.orderPriceLabel.text = [NSString stringWithFormat:@"%.2f元", [self.price floatValue]];
         [self.payView.payButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
     }
     return _payView;
 }
@@ -76,14 +73,10 @@
             self.navHasSelfClass += 1;
         }
     }
-    
     if (self.navHasSelfClass == 1) {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay:) name:ODNotificationPaySuccess object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
     }
-
-
-
 }
 - (void)dealloc {
     if (self.navHasSelfClass == 1) {
@@ -131,115 +124,65 @@
 
 #pragma mark - 事件方法
 - (void)failPay:(NSNotification *)text {
-
-
     NSString *code = text.userInfo[@"codeStatus"];
     self.isPay = @"2";
     [self getDatawithCode:code];
-
-
 }
 
 - (void)successPay:(NSNotification *)text {
-
-
     NSString *code = text.userInfo[@"codeStatus"];
     self.isPay = @"1";
     [self getDatawithCode:code];
-
-
 }
 
 - (void)payAction:(UIButton *)sender {
-
     if ([self.payType isEqualToString:@"1"]) {
-
-
         if ([WXApi isWXAppInstalled]) {
-
             if ([self.isPay isEqualToString:@"1"]) {
-
-
                 [ODProgressHUD showInfoWithStatus:@"该订单已支付"];
-
-
             } else {
-
                 [self payMoney];
-
-
             }
-
-        } else {
-
-
+        }
+        else {
             [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
         }
-
-
-    } else {
-
-
-        if ([self.isPay isEqualToString:@"1"]) {
-
-            [ODProgressHUD showInfoWithStatus:@"该订单已支付"];
-
-
-        } else {
-
-
-            [ODProgressHUD showInfoWithStatus:@"支付宝支付暂未开放"];
-
-
-        }
-
-
     }
-
-
+    else {
+        if ([self.isPay isEqualToString:@"1"]) {
+            [ODProgressHUD showInfoWithStatus:@"该订单已支付"];
+        }
+        else {
+            [ODProgressHUD showInfoWithStatus:@"支付宝支付暂未开放"];
+        }
+    }
 }
 
 - (void)payMoney {
-
-
     PayReq *request = [[PayReq alloc] init];
 
     request.partnerId = self.model.partnerid;
-
     request.prepayId = self.model.prepay_id;
-
     request.package = self.model.package;
-
     request.nonceStr = self.model.nonce_str;
-
     request.timeStamp = self.model.timeStamp;
-
     request.sign = self.model.sign;
 
     [WXApi sendReq:request];
-
-
 }
 
 - (void)weixinPayAction:(UIButton *)sender {
-
     self.payType = @"1";
 
     [self.payView.weixinPaybutton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
-
     [self.payView.treasurePayButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-
-
 }
 
 - (void)treasurePayAction:(UIButton *)sender {
     self.payType = @"2";
 
     [self.payView.treasurePayButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
-
     [self.payView.weixinPaybutton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-
-
 }
 
 
