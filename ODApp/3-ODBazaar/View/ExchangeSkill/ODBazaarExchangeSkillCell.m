@@ -53,6 +53,24 @@
     
     // 设置文字最大宽度
     self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 90;
+    [self stopBlendedLayers];
+}
+
+- (void)stopBlendedLayers {
+    
+    self.titleLabel.backgroundColor = [UIColor whiteColor];
+    self.priceLabel.backgroundColor = [UIColor whiteColor];
+    self.nickLabel.backgroundColor = [UIColor whiteColor];
+    self.contentLabel.backgroundColor = [UIColor whiteColor];
+    self.loveLabel.backgroundColor = [UIColor whiteColor];
+    self.shareLabel.backgroundColor = [UIColor whiteColor];
+    
+    self.shareLabel.layer.masksToBounds = YES;
+    self.titleLabel.layer.masksToBounds = YES;
+    self.priceLabel.layer.masksToBounds = YES;
+    self.nickLabel.layer.masksToBounds = YES;
+    self.contentLabel.layer.masksToBounds = YES;
+    self.loveLabel.layer.masksToBounds = YES;
 }
 
 /**
