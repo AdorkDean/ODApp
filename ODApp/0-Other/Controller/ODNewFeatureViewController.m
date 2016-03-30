@@ -58,7 +58,6 @@ static NSInteger const imageCount = 5;
  */
 - (void)setupCollectionView
 {
-    // Register cell
     [self.collectionView registerClass:[ODNewFeatureCell class] forCellWithReuseIdentifier:reuseIdentifier];
     self.collectionView.bounces = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
@@ -78,11 +77,6 @@ static NSInteger const imageCount = 5;
 }
 
 #pragma mark - UICollectionView 数据源方法
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
-{
-    return 1;
-}
-
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return imageCount;

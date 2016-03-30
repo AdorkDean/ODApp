@@ -25,7 +25,7 @@
 #import "ODOperationController.h"
 #import "ODPublicTool.h"
 #import "ODMyTakeOutViewController.h"
-#import "Masonry.h"
+#import <Masonry.h>
 
 @interface ODPersonalCenterController ()
 
@@ -41,7 +41,9 @@
     [super viewWillAppear:animated];
     [self setupTableView];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
-    if (![ODUserInformation sharedODUserInformation].openID.length) return;
+    if (![ODUserInformation sharedODUserInformation].openID.length)  return;
+    
+    self.tableView.contentOffset = CGPointZero;
     self.headerView.user = [[ODUserInformation sharedODUserInformation] getUserCache];
 }
 - (void)viewWillDisappear:(BOOL)animated {
@@ -52,6 +54,9 @@
 {
     [super viewDidLoad];
 
+    // 初始化表格
+    [self setupTableView];
+    
     // 初始化数据
     [self setupGroup];
 }
@@ -68,10 +73,7 @@
     self.tableView.backgroundColor = [UIColor colorWithRGBString:@"#f6f6f6" alpha:1];
     
     // 调整tableView距离导航栏高度
-    self.tableView.od_height = KScreenHeight;
-    self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 14, 0);
-    self.tableView.contentOffset = CGPointZero;
     
     // 创建头部视图
     ODPersonalCenterHeaderView *headerView = [ODPersonalCenterHeaderView headerView];
@@ -111,11 +113,6 @@
 
     ODArrowItem *item2 = [ODArrowItem itemWithName:@"我的话题"];
     item2.destVc = [ODMyTopicController class];
-//    item2.oprtionBlock = ^(NSIndexPath *index){
-//        ODMyTopicController *vc = [[ODMyTopicController alloc] init];
-//        vc.open_id = user.open_id;
-//        [weakSelf.navigationController pushViewController:vc animated:YES];
-//    };
     
     ODArrowItem *item3 = [ODArrowItem itemWithName:@"我的任务"];
     item3.destVc = [ODMyTaskController class];
@@ -150,8 +147,8 @@
     ODArrowItem *myTakeOut = [ODArrowItem itemWithName:@"我的外卖"];
     myTakeOut.destVc = [ODMyTakeOutViewController class];
     
-    ODGroupItem *group = [ODGroupItem groupWithItems:@[item0, item1, item2, item3,
-                                                       item4, item5, item6, item7, item8, myTakeOut]];
+    ODGroupItem *group = [ODGroupItem groupWithItems:@[myTakeOut, item0, item1, item2, item3,
+                                                       item4, item5, item6, item7, item8]];
     
     [self.groups addObject:group];
 }
