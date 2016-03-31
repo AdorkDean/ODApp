@@ -25,7 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-
     self.is_default = @"0";
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
 
