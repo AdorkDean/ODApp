@@ -80,6 +80,12 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     self.numberLabel.layer.masksToBounds = YES;
 }
 
+- (void)dealloc
+{
+    self.numberLabel.text = @"0";
+    self.priceLabel.text = @"0";
+}
+
 + (instancetype)shopCart
 {
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
@@ -94,9 +100,9 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     {
         NSDictionary *userDict = shops[dict];
         
+        
         [arrayM addObject:userDict];
     }
-    
     self.datasArray = [ODTakeOutModel mj_objectArrayWithKeyValuesArray:arrayM];
     // 逆序
 //    self.datasArray = [[self.datasArray reverseObjectEnumerator] allObjects];
@@ -124,7 +130,6 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 55, KScreenWidth, height);
     
     if (!self.datasArray.count) [self dismiss];
-    
     [self.shopCartView reloadData];
 }
 

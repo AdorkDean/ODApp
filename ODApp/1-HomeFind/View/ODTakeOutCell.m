@@ -11,6 +11,7 @@
 #import "ODTakeOutModel.h"
 #import "ODBuyTakeOutViewController.h"
 #import <UIImageView+WebCache.h>
+#import "ODShopCartListCell.h"
 
 @interface ODTakeOutCell()
 
@@ -73,7 +74,27 @@
     NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc] initWithString:
                                                       self.originalPriceLabel.text attributes:attribtDic];
     self.originalPriceLabel.attributedText = attribtStr;
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusClick:) name:@"addNumber" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusClick:) name:@"minusNumber" object:nil];
 }
+
+
+- (void)plusClick:(NSNotification *)note
+{
+    ODShopCartListCell *cell = note.object;
+    
+    self.datas.shopNumber = cell.takeOut.shopNumber;
+}
+
+- (void)minusClick:(NSNotification *)note
+{
+    ODShopCartListCell *cell = note.object;
+    self.datas.shopNumber = cell.takeOut.shopNumber;
+}
+
+
 
 #pragma mark - 事件方法
 - (IBAction)buyTakeAway:(UIButton *)button

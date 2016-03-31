@@ -18,6 +18,7 @@
 #import "ODTakeOutCell.h"
 #import "ODTakeOutHeaderView.h"
 #import "ODShopCartView.h"
+#import "ODShopCartListCell.h"
 
 #import "ODConfirmOrderViewController.h"
 #import <Masonry.h>
@@ -90,7 +91,9 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    self.shops = nil;
+    result = 0;
+    priceResult = 0.0f;
     // 初始化购物车
     [self setupShopCart];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
@@ -123,6 +126,40 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     
     // 初始化刷新控件
     [self setupScrollViewRefresh];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusClick:) name:@"addNumber" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusClick:) name:@"minusNumber" object:nil];
+}
+
+- (void)plusClick:(NSNotification *)note
+{
+     ODShopCartListCell *cell = note.object;
+    
+    NSInteger number = cell.takeOut.shopNumber;
+    result = number;
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", number];
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"%.2f", (priceResult - [cell.takeOut.price_show floatValue])];
+    [self.shopCart.shopCartView reloadData];
+}
+
+- (void)minusClick:(NSNotification *)note
+{
+    
+    ODShopCartListCell *cell = note.object;
+    NSInteger number = cell.takeOut.shopNumber;
+    result = number;
+    if (!number) {
+        [self.shopCart.shops removeObjectForKey:cell.takeOut.title];
+        priceResult = 0.0f;
+    }
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", number];
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"%.2f", (priceResult - [cell.takeOut.price_show floatValue])];
+    [self.shopCart.shopCartView reloadData];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - 初始化方法
@@ -156,7 +193,6 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 //    tableView.contentInset = UIEdgeInsetsMake(163, 0, 0, 0);
     
     self.type = self.page = @1;
-    tableView.sectionHeaderHeight = 163;
     
     // rowHeight
     tableView.rowHeight = 90;
@@ -249,26 +285,27 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     [self loadNewTakeOuts];
 }
 
+static NSInteger result = 0;
+static CGFloat priceResult = 0;
 #pragma mark - ODTakeOutCellDelegate
 - (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(ODTakeOutModel *)takeOut
 {
     // 商品总数量
-    static NSInteger result = 0;
     result += 1;
     // 计算数量
     self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
     // 计算价格
-    static CGFloat priceResult = 0;
     priceResult += takeOut.price_show.floatValue;
     self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
     
     // 保存商品个数
-    NSInteger shopNumber = takeOut.shopNumber;
-    shopNumber += 1;
-    takeOut.shopNumber = shopNumber;
-    self.shops[takeOut.title] = takeOut.mj_keyValues;
-    self.shopCart.title = takeOut.title;
+//    NSInteger shopNumber = takeOut.shopNumber;
+//    shopNumber += 1;
+    takeOut.shopNumber += 1;
     
+    // 传递数据
+    self.shopCart.title = takeOut.title;
+    self.shops[takeOut.title] = takeOut.mj_keyValues;
     self.shopCart.shops = self.shops;
 }
 
