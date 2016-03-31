@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="购物车View" customClass="ODShopCartView">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="76"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9j-rj-mGw">
+                    <rect key="frame" x="420" y="0.0" width="180" height="76"/>
+                    <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12.5"/>
+                    <state key="normal" title="去结算"/>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="voS-LN-OyJ" userLabel="左侧View">
+                    <rect key="frame" x="0.0" y="0.0" width="420" height="76"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_shopping" translatesAutoresizingMaskIntoConstraints="NO" id="aYG-Md-DCa" userLabel="购物车图片">
+                            <rect key="frame" x="17" y="30" width="20" height="15"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="15" id="1Ob-Wr-Ywf"/>
+                                <constraint firstAttribute="width" constant="20" id="IPY-3B-Y8d"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6G-yf-ePx" userLabel="商品数量">
+                            <rect key="frame" x="32" y="22.5" width="10" height="10"/>
+                            <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="10" id="DCA-21-ZSk"/>
+                                <constraint firstAttribute="width" constant="10" id="f1s-Hu-LlF"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXd-pC-4x8" userLabel="总价格">
+                            <rect key="frame" x="55" y="27" width="42" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="sXd-pC-4x8" secondAttribute="bottom" constant="17.5" id="0mw-65-ikZ"/>
+                        <constraint firstItem="aYG-Md-DCa" firstAttribute="centerY" secondItem="voS-LN-OyJ" secondAttribute="centerY" id="1Bf-OI-OZz"/>
+                        <constraint firstItem="aYG-Md-DCa" firstAttribute="leading" secondItem="voS-LN-OyJ" secondAttribute="leading" constant="17.5" id="FGU-dp-KPh"/>
+                        <constraint firstItem="sXd-pC-4x8" firstAttribute="top" secondItem="voS-LN-OyJ" secondAttribute="top" constant="17.5" id="KHb-mE-v6U"/>
+                        <constraint firstItem="sXd-pC-4x8" firstAttribute="centerY" secondItem="aYG-Md-DCa" secondAttribute="centerY" id="RPH-M9-eSd"/>
+                        <constraint firstItem="sXd-pC-4x8" firstAttribute="leading" secondItem="aYG-Md-DCa" secondAttribute="trailing" constant="17.5" id="nxO-8T-TqP"/>
+                        <constraint firstItem="sXd-pC-4x8" firstAttribute="top" secondItem="k6G-yf-ePx" secondAttribute="centerY" id="pim-4N-qxC"/>
+                        <constraint firstItem="sXd-pC-4x8" firstAttribute="leading" secondItem="k6G-yf-ePx" secondAttribute="trailing" constant="12.5" id="y2l-CK-mdH"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="0mw-65-ikZ"/>
+                            <exclude reference="KHb-mE-v6U"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="voS-LN-OyJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5L0-vM-nKS"/>
+                <constraint firstAttribute="trailing" secondItem="u9j-rj-mGw" secondAttribute="trailing" id="7xh-mi-5qs"/>
+                <constraint firstItem="voS-LN-OyJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Hrv-Lf-wMz"/>
+                <constraint firstItem="u9j-rj-mGw" firstAttribute="leading" secondItem="voS-LN-OyJ" secondAttribute="trailing" id="Vlc-UI-RDc"/>
+                <constraint firstItem="voS-LN-OyJ" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.7" id="ml6-U8-1W3"/>
+                <constraint firstAttribute="bottom" secondItem="u9j-rj-mGw" secondAttribute="bottom" id="qy7-aQ-xHH"/>
+                <constraint firstAttribute="bottom" secondItem="voS-LN-OyJ" secondAttribute="bottom" id="vQb-72-sXy"/>
+                <constraint firstItem="u9j-rj-mGw" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="vxB-AN-wKE"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="leftView" destination="voS-LN-OyJ" id="iXn-Mg-fGb"/>
+            </connections>
+            <point key="canvasLocation" x="471" y="105"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_shopping" width="20" height="15"/>
+    </resources>
+</document>
