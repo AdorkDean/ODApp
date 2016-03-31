@@ -9,8 +9,8 @@
 #import "ODTakeOutCell.h"
 
 #import "ODTakeOutModel.h"
-#import "UIImageView+WebCache.h"
 #import "ODBuyTakeOutViewController.h"
+#import <UIImageView+WebCache.h>
 
 @interface ODTakeOutCell()
 
@@ -34,6 +34,20 @@
     self.titleLabel.textColor = [UIColor blackColor];
     self.discountPriceLabel.textColor = [UIColor colorRedColor];
     self.originalPriceLabel.textColor = [UIColor colorGrayColor];
+    
+    [self stopBlendedLayers];
+}
+
+- (void)stopBlendedLayers
+{
+    
+    self.titleLabel.backgroundColor = [UIColor whiteColor];
+    self.discountPriceLabel.backgroundColor = [UIColor whiteColor];
+    self.originalPriceLabel.backgroundColor = [UIColor whiteColor];
+    
+    self.titleLabel.layer.masksToBounds = YES;
+    self.discountPriceLabel.layer.masksToBounds = YES;
+    self.originalPriceLabel.layer.masksToBounds = YES;
 }
 
 - (void)setDatas:(ODTakeOutModel *)datas

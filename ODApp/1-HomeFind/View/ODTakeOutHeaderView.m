@@ -52,6 +52,8 @@
             button.enabled = NO;
             self.selectedButton = button;
         }
+        button.titleLabel.backgroundColor = [UIColor whiteColor];
+        button.titleLabel.layer.masksToBounds = YES;
     }
 }
 

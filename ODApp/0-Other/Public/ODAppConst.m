@@ -200,7 +200,7 @@ NSString * const ODUrlSwapOrderReason = @"swap/order/reason";
 NSString * const ODUrlSwapSchedule = @"swap/schedule";
 
 /** shopcart */
-NSString * const ODUrlShopcartOrder = @"shopcart/order";
+//NSString * const ODUrlShopcartOrder = @"shopcart/order";
 
 
 /** pay */
@@ -208,6 +208,7 @@ NSString * const ODUrlPayWeixinTradeNumber = @"pay/weixin/trade/number";
 NSString * const ODUrlPayWeixinCallbackSync = @"pay/weixin/callback/sync";
 
 
+#pragma mark - 外卖接口
 /** 外卖首页 */
 NSString * const ODUrlTakeOutList = @"takeout/list";
 /** 订单详情 */
@@ -215,3 +216,18 @@ NSString * const ODUrlTakeOutOrderInfo = @"takeout/order/info";
 /** 外卖订单列表 */
 NSString * const ODUrlTakeOutOrderList = @"takeout/order/list";
 
+#pragma mark - 购物车
+/** list(下架商品不返回) */
+NSString * const ODUrlShopcartList = @"shopcart/list";
+/** 增加到购物车/减少购物车某商品 */
+NSString * const ODUrlShopcartAdd = @"shopcart/add";
+/** 修改购物车某商品数量 */
+NSString * const ODUrlShopcartEdit = @"shopcart/edit";
+/** 刪除單個商品 */
+NSString * const ODUrlShopcartDel = @"shopcart/del";
+/** 清除購物車 */
+NSString * const ODUrlShopcartClear = @"shopcart/clear";
+/** 直接下单按钮/购物车选中商品下单按钮 */
+NSString * const ODUrlShopcartOrder = @"shopcart/order";
+/** 确认下单 */
+NSString * const ODUrlShopcartOrderConfirm = @"shopcart/order/confirm";
