@@ -128,7 +128,7 @@
 - (void)typeAction:(UIButton *)button {
     UIViewController *controller = [[UIViewController alloc]init];
     controller.view.backgroundColor = [UIColor backgroundColor];
-    controller.view.layer.borderColor = [UIColor colorWithRGBString:@"484848" alpha:1].CGColor;
+    controller.view.layer.borderColor = [UIColor colorGloomyColor].CGColor;
     controller.view.layer.borderWidth = 0.5;
     controller.view.layer.cornerRadius = 12;
     

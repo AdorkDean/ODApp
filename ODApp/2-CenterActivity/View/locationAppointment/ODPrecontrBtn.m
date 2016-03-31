@@ -29,7 +29,7 @@
 {
     [self od_setBorder];
     self.titleLabel.font = [UIFont systemFontOfSize:12.5];
-    self.titleLabel.textColor = [UIColor colorWithRGBString:@"484848" alpha:1];
+    self.titleLabel.textColor = [UIColor colorGloomyColor];
     self.backgroundColor = [UIColor whiteColor];
 }
 

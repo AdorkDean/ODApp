@@ -327,7 +327,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     [footerView addSubview:button];
     
     UIView *spaceView = [[UIView alloc]initWithFrame:CGRectMake(0, 29, kScreenSize.width, 6)];
-    spaceView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3"];
+    spaceView.backgroundColor = [UIColor backgroundColor];
     [footerView addSubview:spaceView];
     self.tableView.tableFooterView = footerView;
 }
