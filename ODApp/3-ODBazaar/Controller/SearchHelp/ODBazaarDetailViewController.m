@@ -152,7 +152,7 @@
     self.taskButton.layer.masksToBounds = YES;
     self.taskButton.layer.cornerRadius = 5;
     self.taskButton.layer.borderWidth = 1;
-    self.taskButton.layer.borderColor = [UIColor colorWithRGBString:@"b0b0b0" alpha:1].CGColor;
+    self.taskButton.layer.borderColor = [UIColor colorGreyColor].CGColor;
     [self.taskButton addTarget:self action:@selector(taskButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [self.userView addSubview:self.taskButton];
 
@@ -172,7 +172,7 @@
         }else if ([self.model.task_status isEqualToString:@"-2"]){
             self.taskButton.userInteractionEnabled = NO;
             [self.taskButton setTitle:@"过期任务" forState:UIControlStateNormal];
-            [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"b0b0b0" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitleColor:[UIColor colorGreyColor] forState:UIControlStateNormal];
         }
     }else{
         NSString *open_id = @"";
@@ -219,7 +219,7 @@
         }else if ([self.model.task_status isEqualToString:@"-2"]){
             self.taskButton.userInteractionEnabled = NO;
             [self.taskButton setTitle:@"过期任务" forState:UIControlStateNormal];
-            [self.taskButton setTitleColor:[UIColor colorWithRGBString:@"b0b0b0" alpha:1] forState:UIControlStateNormal];
+            [self.taskButton setTitleColor:[UIColor colorGreyColor] forState:UIControlStateNormal];
         }
     }
     UIView *lineView = [ODClassMethod creatViewWithFrame:CGRectMake(0, 75.5, kScreenSize.width-25, 0.5) tag:0 color:@"#e6e6e6"];
@@ -281,7 +281,7 @@
     [self.taskTopView addSubview:taskTitleLabel];
     
     UILabel *contentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(taskTitleLabel.frame)+17.5, 60, 20) text:@"任务内容 :" font:11.5 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
-    contentLabel.layer.borderColor = [UIColor colorWithRGBString:@"ffd802" alpha:1].CGColor;
+    contentLabel.layer.borderColor = [UIColor themeColor].CGColor;
     [self.taskTopView addSubview:contentLabel];
 
     CGRect frame ;
@@ -313,7 +313,7 @@
     UILabel *rewardLabel;
     if (height < 60) {
        rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.allView.frame)+7.5, 60, 20) text:@"任务奖励 :" font:11.5 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
-       rewardLabel.layer.borderColor = [UIColor colorWithRGBString:@"ffd802" alpha:1].CGColor;
+       rewardLabel.layer.borderColor = [UIColor themeColor].CGColor;
     }else{
         labelHeight = 20;
         buttonHeight = 16;
@@ -331,7 +331,7 @@
         
         //任务奖励
         rewardLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(self.allView.frame)+10, 60, 20) text:@"任务奖励 :" font:11.5 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
-        rewardLabel.layer.borderColor = [UIColor colorWithRGBString:@"ffd802" alpha:1].CGColor;
+        rewardLabel.layer.borderColor = [UIColor themeColor].CGColor;
     }
     [self.taskBottomView addSubview:rewardLabel];
     
@@ -342,7 +342,7 @@
     [self.taskBottomView addSubview:taskRewardLabel];
     
     UILabel *timeLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(0, CGRectGetMaxY(taskRewardLabel.frame)+17.5,60, 20) text:@"任务时间 :" font:11.5 alignment:@"center" color:@"#484848" alpha:1 maskToBounds:YES];
-    timeLabel.layer.borderColor = [UIColor colorWithRGBString:@"ffd802" alpha:1].CGColor;
+    timeLabel.layer.borderColor = [UIColor themeColor].CGColor;
     [self.taskBottomView addSubview:timeLabel];
     
     NSString *startTime = [[self.model.task_datetime substringWithRange:NSMakeRange(5, 14)] stringByReplacingOccurrencesOfString:@"/" withString:@"."];

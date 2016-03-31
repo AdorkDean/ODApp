@@ -37,7 +37,7 @@ static CGFloat const textFont = 13.5;
 {
     [self od_setBorder];
     self.font = [UIFont systemFontOfSize:textFont];
-    self.textColor = [UIColor colorWithRGBString:@"484848" alpha:1];
+    self.textColor = [UIColor colorGloomyColor];
     
     __weakSelf
     [[NSNotificationCenter defaultCenter]addObserverForName:UITextViewTextDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note)
@@ -69,7 +69,7 @@ static CGFloat const textFont = 13.5;
     {
         _placeHolderLabel = [[UILabel alloc]init];
         _placeHolderLabel.numberOfLines = 0;
-        _placeHolderLabel.textColor = [UIColor colorWithRGBString:@"d0d0d0" alpha:1];
+        _placeHolderLabel.textColor = [UIColor colorGrayColor];
         [self addSubview:_placeHolderLabel];
     }
     return _placeHolderLabel;

@@ -121,7 +121,7 @@
         textView.layer.masksToBounds = YES;
         textView.layer.cornerRadius = 5;
         textView.layer.borderWidth = 0.5;
-        textView.layer.borderColor = [UIColor colorWithRGBString:@"e6e6e6" alpha:1].CGColor;
+        textView.layer.borderColor = [UIColor lineColor].CGColor;
     }
     return textView;
 }

@@ -14,8 +14,8 @@
 #import "ODHomeInfoModel.h"
 #import "ODHomeButton.h"
 #import "ODTakeOutHomeController.h"
-
 #import "ODTakeAwayDetailController.h"
+#import "ODTestUrlViewController.h"
 
 static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 
@@ -327,7 +327,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     [footerView addSubview:button];
     
     UIView *spaceView = [[UIView alloc]initWithFrame:CGRectMake(0, 29, kScreenSize.width, 6)];
-    spaceView.backgroundColor = [UIColor colorWithRGBString:@"#f3f3f3"];
+    spaceView.backgroundColor = [UIColor backgroundColor];
     [footerView addSubview:spaceView];
     self.tableView.tableFooterView = footerView;
 }
@@ -507,7 +507,9 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 }
 #pragma mark - 加入更多圈子 点击事件
 - (void)moreCycleButtonClick {
-    [self giveCommumityContent:@"社区" andBbsType:5];
+//    [self giveCommumityContent:@"社区" andBbsType:5];
+    ODTestUrlViewController *test = [[ODTestUrlViewController alloc]init];
+    [self.navigationController pushViewController:test animated:YES];
 }
 
 #pragma mark - 寻圈子跳转刷新

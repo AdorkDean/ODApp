@@ -21,7 +21,7 @@
 {
     if (self = [super initWithFrame:frame])
     {
-        self.backgroundColor = [UIColor colorWithRGBString:@"ffd802" alpha:1];
+        self.backgroundColor = [UIColor themeColor];
     }
     return self;
 }

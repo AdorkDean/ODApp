@@ -83,7 +83,7 @@
     self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 140) delegate:self tag:0 font:14 color:@"#ffffff" alpha:1 maskToBounds:YES];
     [self.scrollView addSubview:self.titleTextView];
     self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4, kScreenSize.width - 20, 30) text:@"请输入任务标题" font:14 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    self.titleLabel.textColor = [UIColor colorWithRGBString:@"d0d0d0" alpha:1];
+    self.titleLabel.textColor = [UIColor colorGrayColor];
     self.titleLabel.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.titleLabel];
 }

@@ -290,6 +290,10 @@
 		9DD00BE91C4E39D800F0EE5F /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BE81C4E39D800F0EE5F /* libz.tbd */; };
 		B83C6B7A1C224F640063ED92 /* ODAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B791C224F640063ED92 /* ODAppTests.m */; };
 		B83C6B851C224F640063ED92 /* ODAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B83C6B841C224F640063ED92 /* ODAppUITests.m */; };
+		B84321561CACEC1A00B826CD /* ODTestUrlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84321551CACEC1A00B826CD /* ODTestUrlViewController.m */; };
+		B84321591CAD0DA000B826CD /* ODConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84321581CAD0DA000B826CD /* ODConfirmOrderViewController.m */; };
+		B843215D1CAD17C200B826CD /* ODConfirmOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B843215B1CAD17C200B826CD /* ODConfirmOrderCell.m */; };
+		B843215E1CAD17C200B826CD /* ODConfirmOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B843215C1CAD17C200B826CD /* ODConfirmOrderCell.xib */; };
 		B84DCFA51C9AB71400EBC599 /* ODMyReleaseTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84DCFA41C9AB71400EBC599 /* ODMyReleaseTaskViewController.m */; };
 		B84DCFA81C9AB72A00EBC599 /* ODMyAcceptTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84DCFA71C9AB72A00EBC599 /* ODMyAcceptTaskViewController.m */; };
 		B852161B1C97FB0E0003D102 /* ODHomeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B852161A1C97FB0E0003D102 /* ODHomeButton.m */; };
@@ -872,6 +876,13 @@
 		B83C6B801C224F640063ED92 /* ODAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ODAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B83C6B841C224F640063ED92 /* ODAppUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ODAppUITests.m; sourceTree = "<group>"; };
 		B83C6B861C224F640063ED92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B84321541CACEC1A00B826CD /* ODTestUrlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTestUrlViewController.h; sourceTree = "<group>"; };
+		B84321551CACEC1A00B826CD /* ODTestUrlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTestUrlViewController.m; sourceTree = "<group>"; };
+		B84321571CAD0DA000B826CD /* ODConfirmOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderViewController.h; sourceTree = "<group>"; };
+		B84321581CAD0DA000B826CD /* ODConfirmOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderViewController.m; sourceTree = "<group>"; };
+		B843215A1CAD17C200B826CD /* ODConfirmOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderCell.h; sourceTree = "<group>"; };
+		B843215B1CAD17C200B826CD /* ODConfirmOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderCell.m; sourceTree = "<group>"; };
+		B843215C1CAD17C200B826CD /* ODConfirmOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODConfirmOrderCell.xib; sourceTree = "<group>"; };
 		B84DCFA31C9AB71400EBC599 /* ODMyReleaseTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyReleaseTaskViewController.h; sourceTree = "<group>"; };
 		B84DCFA41C9AB71400EBC599 /* ODMyReleaseTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyReleaseTaskViewController.m; sourceTree = "<group>"; };
 		B84DCFA61C9AB72A00EBC599 /* ODMyAcceptTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyAcceptTaskViewController.h; sourceTree = "<group>"; };
@@ -1272,12 +1283,16 @@
 		232CB3A11C9264E200340D12 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B84321571CAD0DA000B826CD /* ODConfirmOrderViewController.h */,
+				B84321581CAD0DA000B826CD /* ODConfirmOrderViewController.m */,
 				400F18571CA93288000EFFBC /* ODBuyTakeOutViewController.h */,
 				400F18581CA93288000EFFBC /* ODBuyTakeOutViewController.m */,
 				400F18541CA93239000EFFBC /* ODTakeOutHomeController.h */,
 				400F18551CA93239000EFFBC /* ODTakeOutHomeController.m */,
 				232CB3A61C9264E200340D12 /* ODHomeFindViewController.h */,
 				232CB3A71C9264E200340D12 /* ODHomeFindViewController.m */,
+				B84321541CACEC1A00B826CD /* ODTestUrlViewController.h */,
+				B84321551CACEC1A00B826CD /* ODTestUrlViewController.m */,
 				23B22B311C9A597600AB11ED /* ODPublicWebViewController.h */,
 				23B22B321C9A597600AB11ED /* ODPublicWebViewController.m */,
 				232CB3A81C9264E200340D12 /* ODLocationController.h */,
@@ -1655,6 +1670,9 @@
 				B853645B1CA510FA005E312B /* ODCommunityCell.h */,
 				B853645C1CA510FA005E312B /* ODCommunityCell.m */,
 				B853645D1CA510FA005E312B /* ODCommunityCell.xib */,
+				B843215A1CAD17C200B826CD /* ODConfirmOrderCell.h */,
+				B843215B1CAD17C200B826CD /* ODConfirmOrderCell.m */,
+				B843215C1CAD17C200B826CD /* ODConfirmOrderCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2324,6 +2342,7 @@
 				232CB6211C9264E200340D12 /* ODInformationView.xib in Resources */,
 				4091418C1C9930D80059E05F /* ODBazaarExchangeSkillCollectionCell.xib in Resources */,
 				40A02D1C1C965A3F009CE702 /* ODBazaarExchangeSkillCell.xib in Resources */,
+				B843215E1CAD17C200B826CD /* ODConfirmOrderCell.xib in Resources */,
 				ED537EDE1CA5227E00EB12F4 /* ODSubmitOrderView.xib in Resources */,
 				232CB5E31C9264E200340D12 /* ODBazaarReleaseSkillTimeViewCell.xib in Resources */,
 				232CB5EA1C9264E200340D12 /* ODBazaarDetailCollectionCell.xib in Resources */,
@@ -2542,6 +2561,7 @@
 				232CB55D1C9264E200340D12 /* ODBaseViewController.m in Sources */,
 				232CB5CC1C9264E200340D12 /* ODBazaarViewController.m in Sources */,
 				232CB5B01C9264E200340D12 /* ODNewActivityCell.m in Sources */,
+				B843215D1CAD17C200B826CD /* ODConfirmOrderCell.m in Sources */,
 				402261351CA5051200E0B737 /* ODMyTakeOutViewController.m in Sources */,
 				ED537EDC1CA5227400EB12F4 /* ODSubmitOrderView.m in Sources */,
 				ED57CC441C92A0C30091FCFF /* ODChoseCenterCell.m in Sources */,
@@ -2615,6 +2635,7 @@
 				232CB5621C9264E200340D12 /* main.m in Sources */,
 				232CB5EE1C9264E200340D12 /* ODCommumityViewController.m in Sources */,
 				232CB5FB1C9264E200340D12 /* ODPersonalCenterViewController.m in Sources */,
+				B84321591CAD0DA000B826CD /* ODConfirmOrderViewController.m in Sources */,
 				B85364621CA51FA3005E312B /* ODMyReleaseTopicViewController.m in Sources */,
 				232CB5EF1C9264E200340D12 /* ODCommunityDetailReplyViewController.m in Sources */,
 				232CB6411C9264E200340D12 /* ODThirdOrderController.m in Sources */,
@@ -2653,6 +2674,7 @@
 				232CB5E91C9264E200340D12 /* ODBazaarDetailCollectionCell.m in Sources */,
 				232CB5D41C9264E200340D12 /* ODBazaarExchangeSkillDetailModel.m in Sources */,
 				232CB6421C9264E200340D12 /* ODBalanceController.m in Sources */,
+				B84321561CACEC1A00B826CD /* ODTestUrlViewController.m in Sources */,
 				232CB5561C9264E200340D12 /* NSString+ODExtension.m in Sources */,
 				232CB58A1C9264E200340D12 /* ODNavigationBarView.m in Sources */,
 			);
