@@ -11,13 +11,20 @@
 @implementation ODConfirmOrderCell
 
 - (void)awakeFromNib {
-    // Initialization code
+    
+    self.nameLabel.textColor = [UIColor colorGloomyColor];
+    self.countLabel.textColor = [UIColor colorGreyColor];
+    self.priceLabel.textColor = [UIColor redColor];
+}
+
+-(void)setModel:(ODConfirmOrderModelShopcart_list *)model{
+    self.nameLabel.text = model.obj_title;
+    self.priceLabel.text = model.price_show;
+    self.countLabel.text = model.num;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end
