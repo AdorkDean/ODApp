@@ -11,7 +11,7 @@
 #import "ODTakeOutModel.h"
 #import "ODBuyTakeOutViewController.h"
 #import <UIImageView+WebCache.h>
-
+#import "ODConfirmOrderViewController.h"
 @interface ODTakeOutCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *shopImageView;
@@ -66,7 +66,7 @@
     self.originalPriceLabel.text = [NSString stringWithFormat:@"¥%@", datas.price_fake];
 
     // 设置按钮不同情况下的状态
-    self.buyButton.enabled = (datas.show_status == ODTakeOutStatusBuy);
+//    self.buyButton.enabled = (datas.show_status == ODTakeOutStatusBuy);
     
     // 添加中划线
     NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
@@ -78,11 +78,12 @@
 #pragma mark - 事件方法
 - (IBAction)buyTakeAway
 {
+    ODConfirmOrderViewController *controller = [[ODConfirmOrderViewController alloc]init];
     ODBuyTakeOutViewController *vc = [[ODBuyTakeOutViewController alloc] init];
     vc.order_id = self.datas.product_id;
     UITabBarController *tabBarControler = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
     UINavigationController *navigationController = tabBarControler.selectedViewController;
-    [navigationController pushViewController:vc animated:YES];
+    [navigationController pushViewController:controller animated:YES];
 }
 
 

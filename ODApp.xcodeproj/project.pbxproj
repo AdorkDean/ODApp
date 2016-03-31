@@ -876,9 +876,9 @@
 		B84321551CACEC1A00B826CD /* ODTestUrlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTestUrlViewController.m; sourceTree = "<group>"; };
 		B84321571CAD0DA000B826CD /* ODConfirmOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderViewController.h; sourceTree = "<group>"; };
 		B84321581CAD0DA000B826CD /* ODConfirmOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderViewController.m; sourceTree = "<group>"; };
-		B843215A1CAD17C200B826CD /* ODConfirmOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderCell.h; sourceTree = "<group>"; };
-		B843215B1CAD17C200B826CD /* ODConfirmOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderCell.m; sourceTree = "<group>"; };
-		B843215C1CAD17C200B826CD /* ODConfirmOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODConfirmOrderCell.xib; sourceTree = "<group>"; };
+		B843215A1CAD17C200B826CD /* ODConfirmOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODConfirmOrderCell.h; path = "../../4-ODCommunity/View/ODConfirmOrderCell.h"; sourceTree = "<group>"; };
+		B843215B1CAD17C200B826CD /* ODConfirmOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODConfirmOrderCell.m; path = "../../4-ODCommunity/View/ODConfirmOrderCell.m"; sourceTree = "<group>"; };
+		B843215C1CAD17C200B826CD /* ODConfirmOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ODConfirmOrderCell.xib; path = "../../4-ODCommunity/View/ODConfirmOrderCell.xib"; sourceTree = "<group>"; };
 		B843215F1CAD24E200B826CD /* ODConfirmOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderModel.h; sourceTree = "<group>"; };
 		B84321601CAD24E200B826CD /* ODConfirmOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderModel.m; sourceTree = "<group>"; };
 		B84DCFA31C9AB71400EBC599 /* ODMyReleaseTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyReleaseTaskViewController.h; sourceTree = "<group>"; };
@@ -1340,6 +1340,9 @@
 				ED46880D1C965F5300E31F64 /* ODLocationCell.xib */,
 				B85216191C97FB0E0003D102 /* ODHomeButton.h */,
 				B852161A1C97FB0E0003D102 /* ODHomeButton.m */,
+				B843215A1CAD17C200B826CD /* ODConfirmOrderCell.h */,
+				B843215B1CAD17C200B826CD /* ODConfirmOrderCell.m */,
+				B843215C1CAD17C200B826CD /* ODConfirmOrderCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1667,9 +1670,6 @@
 				B853645B1CA510FA005E312B /* ODCommunityCell.h */,
 				B853645C1CA510FA005E312B /* ODCommunityCell.m */,
 				B853645D1CA510FA005E312B /* ODCommunityCell.xib */,
-				B843215A1CAD17C200B826CD /* ODConfirmOrderCell.h */,
-				B843215B1CAD17C200B826CD /* ODConfirmOrderCell.m */,
-				B843215C1CAD17C200B826CD /* ODConfirmOrderCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
