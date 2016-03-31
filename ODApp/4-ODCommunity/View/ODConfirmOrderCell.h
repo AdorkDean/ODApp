@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ODConfirmOrderModel.h"
 
 @interface ODConfirmOrderCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *countLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+
+@property(nonatomic,strong)ODConfirmOrderModelShopcart_list *model;
 
 @end

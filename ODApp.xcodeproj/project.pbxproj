@@ -294,6 +294,7 @@
 		B84321591CAD0DA000B826CD /* ODConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84321581CAD0DA000B826CD /* ODConfirmOrderViewController.m */; };
 		B843215D1CAD17C200B826CD /* ODConfirmOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B843215B1CAD17C200B826CD /* ODConfirmOrderCell.m */; };
 		B843215E1CAD17C200B826CD /* ODConfirmOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B843215C1CAD17C200B826CD /* ODConfirmOrderCell.xib */; };
+		B84321611CAD24E200B826CD /* ODConfirmOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B84321601CAD24E200B826CD /* ODConfirmOrderModel.m */; };
 		B84DCFA51C9AB71400EBC599 /* ODMyReleaseTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84DCFA41C9AB71400EBC599 /* ODMyReleaseTaskViewController.m */; };
 		B84DCFA81C9AB72A00EBC599 /* ODMyAcceptTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B84DCFA71C9AB72A00EBC599 /* ODMyAcceptTaskViewController.m */; };
 		B852161B1C97FB0E0003D102 /* ODHomeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B852161A1C97FB0E0003D102 /* ODHomeButton.m */; };
@@ -883,6 +884,8 @@
 		B843215A1CAD17C200B826CD /* ODConfirmOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderCell.h; sourceTree = "<group>"; };
 		B843215B1CAD17C200B826CD /* ODConfirmOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderCell.m; sourceTree = "<group>"; };
 		B843215C1CAD17C200B826CD /* ODConfirmOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODConfirmOrderCell.xib; sourceTree = "<group>"; };
+		B843215F1CAD24E200B826CD /* ODConfirmOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderModel.h; sourceTree = "<group>"; };
+		B84321601CAD24E200B826CD /* ODConfirmOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderModel.m; sourceTree = "<group>"; };
 		B84DCFA31C9AB71400EBC599 /* ODMyReleaseTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyReleaseTaskViewController.h; sourceTree = "<group>"; };
 		B84DCFA41C9AB71400EBC599 /* ODMyReleaseTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyReleaseTaskViewController.m; sourceTree = "<group>"; };
 		B84DCFA61C9AB72A00EBC599 /* ODMyAcceptTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyAcceptTaskViewController.h; sourceTree = "<group>"; };
@@ -1319,6 +1322,8 @@
 				232CB3AC1C9264E200340D12 /* ODHomeInfoModel.m */,
 				232CB3AD1C9264E200340D12 /* ODLocationModel.h */,
 				232CB3AE1C9264E200340D12 /* ODLocationModel.m */,
+				B843215F1CAD24E200B826CD /* ODConfirmOrderModel.h */,
+				B84321601CAD24E200B826CD /* ODConfirmOrderModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2534,6 +2539,7 @@
 				400F184F1CA93220000EFFBC /* ODTakeOutHeaderView.m in Sources */,
 				400334891C9B97C500973818 /* ODGroupItem.m in Sources */,
 				232CB5C51C9264E200340D12 /* ODAddAddressController.m in Sources */,
+				B84321611CAD24E200B826CD /* ODConfirmOrderModel.m in Sources */,
 				232CB6081C9264E200340D12 /* ODPersonalCenterCollectionController.m in Sources */,
 				232CB6171C9264E200340D12 /* ODMyOrderDetailModel.m in Sources */,
 				232CB5671C9264E200340D12 /* IQUIViewController+Additions.m in Sources */,
