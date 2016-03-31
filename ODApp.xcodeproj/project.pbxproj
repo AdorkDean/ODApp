@@ -1254,9 +1254,9 @@
 		232CB3A01C9264E200340D12 /* 1-HomeFind */ = {
 			isa = PBXGroup;
 			children = (
-				232CB3A11C9264E200340D12 /* Controller */,
 				232CB3AA1C9264E200340D12 /* Model */,
 				232CB3AF1C9264E200340D12 /* View */,
+				232CB3A11C9264E200340D12 /* Controller */,
 			);
 			path = "1-HomeFind";
 			sourceTree = "<group>";

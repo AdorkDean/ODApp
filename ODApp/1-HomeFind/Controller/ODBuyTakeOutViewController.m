@@ -18,26 +18,37 @@
 
 @implementation ODBuyTakeOutViewController
 
+#pragma mark - 生命周期方法
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"确定购买";
+    // 初始化表格
+    [self setupTableView];
     
-    // 拼接参数
-//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-//    params[@"order_id"] = self.order_id;
-//    params[@"open_id"] = @"766148455eed214ed1f8";
-////    __weakSelf
-//    [ODHttpTool getWithURL:ODUrlTakeOutOrderInfo parameters:params modelClass:[ODBuyTakeOutModel class] success:^(id model) {
-//        
-//        
-//    } failure:^(NSError *error) {
-//        
-    //    }];
+    // 初始化表格内容
     [self setupGroup00];
     [self setupGroup01];
     [self setupGroup02];
+}
+
+#pragma mark - 初始化方法
+
+- (void)setupTableView
+{
+    self.navigationItem.title = @"确定购买";
+    
+    // 拼接参数
+    //    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    //    params[@"order_id"] = self.order_id;
+    //    params[@"open_id"] = @"766148455eed214ed1f8";
+    ////    __weakSelf
+    //    [ODHttpTool getWithURL:ODUrlTakeOutOrderInfo parameters:params modelClass:[ODBuyTakeOutModel class] success:^(id model) {
+    //
+    //
+    //    } failure:^(NSError *error) {
+    //        
+    //    }];
 }
 
 - (void)setupGroup00
@@ -49,9 +60,6 @@
     [self.groups addObject:group];
 }
 
-/**
- *  设置cell内容
- */
 - (void)setupGroup01
 {
     

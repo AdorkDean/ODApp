@@ -16,7 +16,8 @@
 @interface ODMyTakeOutViewController () <UITableViewDataSource, UITableViewDelegate>
 
 /** 表格 */
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, weak) UITableView *tableView;
+
 /** 参数 */
 @property (nonatomic, strong) NSMutableDictionary *params;
 /** 页码 */
@@ -30,6 +31,7 @@
 static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
 
 @implementation ODMyTakeOutViewController
+
 #pragma mark - 懒加载
 - (NSMutableArray *)datas
 {
