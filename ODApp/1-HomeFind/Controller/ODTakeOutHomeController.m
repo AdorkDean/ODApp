@@ -43,6 +43,9 @@
 /** 模型数组 */
 @property (nonatomic, strong) NSMutableArray *datas;
 
+/** 购物车列表 */
+@property (nonatomic, strong) NSMutableDictionary *shops;
+
 @end
 
 @implementation ODTakeOutHomeController
@@ -61,6 +64,15 @@
         _headerView = headerView;
     }
     return _headerView;
+}
+
+- (NSMutableDictionary *)shops
+{
+    if (!_shops)
+    {
+        _shops = [NSMutableDictionary dictionary];
+    }
+    return _shops;
 }
 
 #pragma mark - 懒加载
@@ -238,16 +250,25 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 }
 
 #pragma mark - ODTakeOutCellDelegate
-- (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(UIButton *)button
+- (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(ODTakeOutModel *)takeOut
 {
-    UIButton *testButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    [window addSubview:testButton];
-    [testButton makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(window);
-        make.bottom.equalTo(self.shopCart.top);
-        make.height.equalTo(100);
-    }];
+    static NSInteger result = 0;
+    result += 1;
+    // 计算数量
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
+    // 计算价格
+    static CGFloat priceResult = 0;
+    priceResult += takeOut.price_show.floatValue;
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+    
+    // 保存商品个数
+    NSInteger shopNumber = takeOut.shopNumber;
+    shopNumber += 1;
+    takeOut.shopNumber = shopNumber;
+    self.shops[takeOut.title] = takeOut.mj_keyValues;
+    self.shopCart.title = takeOut.title;
+    
+    self.shopCart.shops = self.shops;
 }
 
 #pragma mark - 事件方法

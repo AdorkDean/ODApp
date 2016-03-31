@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ODTakeOutModel;
 
 @interface ODShopCartListCell : UITableViewCell
+
+/** 模型 */
+@property (nonatomic, strong) ODTakeOutModel *takeOut;
 
 @end

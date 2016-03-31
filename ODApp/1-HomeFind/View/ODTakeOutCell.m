@@ -66,7 +66,7 @@
     self.originalPriceLabel.text = [NSString stringWithFormat:@"¥%@", datas.price_fake];
 
     // 设置按钮不同情况下的状态
-    self.buyButton.enabled = (datas.show_status == ODTakeOutStatusBuy);
+//    self.buyButton.enabled = (datas.show_status == ODTakeOutStatusBuy);
     
     // 添加中划线
     NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
@@ -76,11 +76,11 @@
 }
 
 #pragma mark - 事件方法
-- (void)buyTakeAway:(UIButton *)button
+- (IBAction)buyTakeAway:(UIButton *)button
 {
     if ([self.delegate respondsToSelector:@selector(takeOutCell:didClickedButton:)])
     {
-        [self.delegate takeOutCell:self didClickedButton:button];
+        [self.delegate takeOutCell:self didClickedButton:self.datas];
     }
 }
 

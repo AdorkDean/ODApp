@@ -22,25 +22,25 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="voS-LN-OyJ" userLabel="左侧View">
                     <rect key="frame" x="0.0" y="0.0" width="420" height="76"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_shopping" translatesAutoresizingMaskIntoConstraints="NO" id="aYG-Md-DCa" userLabel="购物车图片">
-                            <rect key="frame" x="17" y="30" width="20" height="15"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="icon_shopping" translatesAutoresizingMaskIntoConstraints="NO" id="aYG-Md-DCa" userLabel="购物车图片">
+                            <rect key="frame" x="17" y="27" width="20" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="1Ob-Wr-Ywf"/>
                                 <constraint firstAttribute="width" constant="20" id="IPY-3B-Y8d"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6G-yf-ePx" userLabel="商品数量">
-                            <rect key="frame" x="32" y="22.5" width="10" height="10"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6G-yf-ePx" userLabel="商品数量">
+                            <rect key="frame" x="27" y="21" width="15" height="15"/>
                             <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="10" id="DCA-21-ZSk"/>
-                                <constraint firstAttribute="width" constant="10" id="f1s-Hu-LlF"/>
+                                <constraint firstAttribute="height" constant="15" id="DCA-21-ZSk"/>
+                                <constraint firstAttribute="width" constant="15" id="f1s-Hu-LlF"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="9"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXd-pC-4x8" userLabel="总价格">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="¥0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXd-pC-4x8" userLabel="总价格">
                             <rect key="frame" x="55" y="27" width="42" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -81,6 +81,8 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="leftView" destination="voS-LN-OyJ" id="iXn-Mg-fGb"/>
+                <outlet property="numberLabel" destination="k6G-yf-ePx" id="B0Q-Qd-dqd"/>
+                <outlet property="priceLabel" destination="sXd-pC-4x8" id="cMN-XE-Fcf"/>
             </connections>
             <point key="canvasLocation" x="471" y="105"/>
         </view>
