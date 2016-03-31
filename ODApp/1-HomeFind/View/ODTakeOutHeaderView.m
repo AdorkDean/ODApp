@@ -67,9 +67,9 @@
     {
         [arrayM addObject:banner.img_url];
     }
-    // 传递地址数组(不为空时)
+    //  传递地址数组(不为空时)
     if ( arrayM.count ) self.scrollView.images = arrayM;
-    // 设置pageControl颜色
+    //     设置pageControl颜色
     self.scrollView.pageControl.currentPageIndicatorTintColor = [UIColor orangeColor];
     self.scrollView.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
 }
@@ -87,6 +87,8 @@
     [UIView animateWithDuration:kAnimateDuration animations:^{
         self.indicatorLine.od_centerX = button.od_centerX;
     }];
+    
+    [self setNeedsDisplay];
     
     NSInteger index = button.od_x / button.od_width + 1;
     // 更新参数

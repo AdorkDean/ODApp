@@ -12,8 +12,6 @@ ODRequestModelImplementation(ODCommunityBbsListModel)
 
 ODRequestModelImplementation(ODCommunityBbsUsersModel)
 
-
-
 @implementation ODCommunityBbsModel
 
 + (void)initialize

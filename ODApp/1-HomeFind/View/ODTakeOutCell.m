@@ -76,13 +76,12 @@
 }
 
 #pragma mark - 事件方法
-- (IBAction)buyTakeAway
+- (void)buyTakeAway:(UIButton *)button
 {
-    ODBuyTakeOutViewController *vc = [[ODBuyTakeOutViewController alloc] init];
-    vc.order_id = self.datas.product_id;
-    UITabBarController *tabBarControler = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
-    UINavigationController *navigationController = tabBarControler.selectedViewController;
-    [navigationController pushViewController:vc animated:YES];
+    if ([self.delegate respondsToSelector:@selector(takeOutCell:didClickedButton:)])
+    {
+        [self.delegate takeOutCell:self didClickedButton:button];
+    }
 }
 
 

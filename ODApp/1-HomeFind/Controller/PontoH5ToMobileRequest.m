@@ -14,7 +14,7 @@
 
 #import "ODPersonalCenterViewController.h"
 #import "ODBuyTakeOutViewController.h"
-
+#import "ODConfirmOrderViewController.h"
 
 @implementation PontoH5ToMobileRequest {
 }
@@ -40,8 +40,10 @@
             [navVc presentViewController:vc animated:YES completion:nil];
         }
         else {
-            ODBuyTakeOutViewController *vc = [[ODBuyTakeOutViewController alloc] init];
-            [navVc pushViewController:vc animated:YES];
+//            ODBuyTakeOutViewController *vc = [[ODBuyTakeOutViewController alloc] init];
+//            [navVc pushViewController:vc animated:YES];
+            ODConfirmOrderViewController *confirmOrder = [[ODConfirmOrderViewController alloc]init];
+            [navVc pushViewController:confirmOrder animated:YES];
         }
     }
 }
