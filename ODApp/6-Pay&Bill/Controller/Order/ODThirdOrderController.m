@@ -69,7 +69,7 @@
 {
     self.flowLayout = [[UICollectionViewFlowLayout alloc] init];
     self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, kScreenSize.height - 115) collectionViewLayout:self.flowLayout];
-    self.collectionView.backgroundColor = [UIColor colorWithRGBString:@"#f6f6f6" alpha:1];
+    self.collectionView.backgroundColor = [UIColor backgroundColor];
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.userInteractionEnabled = YES;

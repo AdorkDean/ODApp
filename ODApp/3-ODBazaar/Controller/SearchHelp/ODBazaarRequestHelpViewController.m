@@ -112,7 +112,7 @@ static NSString * const helpCellId = @"ODBazaarRequestHelpViewCell";
     self.screeningButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 25);
     self.screeningButton.layer.masksToBounds = YES;
     self.screeningButton.layer.cornerRadius = 5;
-    self.screeningButton.layer.borderColor = [UIColor colorWithRGBString:@"484848" alpha:1].CGColor;
+    self.screeningButton.layer.borderColor = [UIColor colorGloomyColor].CGColor;
     self.screeningButton.layer.borderWidth = 1;
     [self.view addSubview:self.screeningButton];
     
@@ -124,7 +124,7 @@ static NSString * const helpCellId = @"ODBazaarRequestHelpViewCell";
     UIView *searchView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(self.screeningButton.frame) + 5, 10, kScreenSize.width - 137, 35)];
     searchView.layer.masksToBounds = YES;
     searchView.layer.cornerRadius = 5;
-    searchView.layer.borderColor = [UIColor colorWithRGBString:@"484848" alpha:1].CGColor;
+    searchView.layer.borderColor = [UIColor colorGloomyColor].CGColor;
     searchView.layer.borderWidth = 1;
     [searchView addGestureRecognizer:searchGestuer];
     searchView.tag = 10011;
