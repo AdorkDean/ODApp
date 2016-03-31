@@ -13,11 +13,15 @@
 
 #import <MJExtension.h>
 
-@interface ODShopCartView() <UITableViewDataSource, UITableViewDelegate>
+@interface ODShopCartView() <UITableViewDataSource, UITableViewDelegate,
+                             ODShopCartListCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *leftView;
 
-@property (nonatomic, strong) NSArray *datasArray;
+@property (nonatomic, strong) NSMutableArray *datasArray;
+
+/** 蒙板 */
+@property (nonatomic, strong) UIView *coverView;
 
 @end
 
@@ -27,11 +31,11 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
 
 - (UITableView *)shopCartView
 {
-    if (!_shopCartView)
-    {
+    if (!_shopCartView) {
         _shopCartView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, CGFLOAT_MIN) style:UITableViewStylePlain];
         _shopCartView.dataSource = self;
         _shopCartView.delegate = self;
+        
         UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
         [keyWindow addSubview:self.shopCartView];
         
@@ -41,6 +45,30 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
         [_shopCartView registerNib:[UINib nibWithNibName:NSStringFromClass([ODShopCartListCell class]) bundle:nil] forCellReuseIdentifier:shopCartListCell];
     }
     return _shopCartView;
+}
+
+- (UIView *)coverView
+{
+    if (!_coverView) {
+        _coverView = [[UIView alloc] init];
+        _coverView.backgroundColor = [UIColor blackColor];
+        _coverView.alpha = 0.6;
+        _coverView.frame = [UIApplication sharedApplication].keyWindow.bounds;
+        
+        _coverView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *gas = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismiss)];
+        [_coverView addGestureRecognizer:gas];
+    }
+    return _coverView;
+}
+
+- (NSMutableArray *)datasArray
+{
+    if (!_datasArray)
+    {
+        _datasArray = [NSMutableArray array];
+    }
+    return _datasArray;
 }
 
 - (void)awakeFromNib
@@ -66,40 +94,66 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     {
         NSDictionary *userDict = shops[dict];
         
-        self.datasArray = [NSMutableArray array];
-        
         [arrayM addObject:userDict];
     }
     
     self.datasArray = [ODTakeOutModel mj_objectArrayWithKeyValuesArray:arrayM];
     // 逆序
-    self.datasArray = [[self.datasArray reverseObjectEnumerator] allObjects];
+//    self.datasArray = [[self.datasArray reverseObjectEnumerator] allObjects];
 }
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.shops.count;
+    return self.datasArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ODShopCartListCell *cell = [tableView dequeueReusableCellWithIdentifier:shopCartListCell];
     cell.takeOut = self.datasArray[indexPath.row];
+    cell.delegate = self;
     return cell;
 }
 
+#pragma mark - ODShopCartListCellDelegate
+- (void)shopCartListcell:(ODShopCartListCell *)cell RemoveCurrentRow:(ODTakeOutModel *)currentData
+{
+    [self.datasArray removeObject:currentData];
+    CGFloat height = self.datasArray.count * 44;
+    self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 55, KScreenWidth, height);
+    
+    if (!self.datasArray.count) [self dismiss];
+    
+    [self.shopCartView reloadData];
+}
 
+/**
+ *  点击购物车
+ */
 - (void)clickShopCart
 {
+    if (!self.datasArray.count) return;
     self.isOpened = !self.isOpened;
     
     if (self.isOpened) {
-        CGFloat height = self.shops.count * 44;
+        CGFloat height = self.datasArray.count * 44;
         self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 55, KScreenWidth, height);
+        
+        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+        [keyWindow insertSubview:self.coverView belowSubview:self];
     } else {
-        self.shopCartView.od_height = 0;
+        // 移除蒙板
+        [self dismiss];
     }
+    [self.shopCartView reloadData];
+}
+
+- (void)dismiss
+{
+    self.isOpened = NO;
+    self.shopCartView.od_height = 0;
+    if (self.coverView.subviews) [self.coverView removeFromSuperview];
     [self.shopCartView reloadData];
 }
 

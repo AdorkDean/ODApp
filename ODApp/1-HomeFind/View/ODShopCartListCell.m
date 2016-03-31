@@ -33,26 +33,35 @@
 
 - (IBAction)plusButtonClick:(id)sender {
     NSInteger number = [self.numberLabel.text integerValue];
-    if (number >= 0)
-    {
+    if (number < 0) return;
+//    if (number >= 0)
+//    {
         number += 1;
-    }
+//    }
+    self.numberLabel.text = [NSString stringWithFormat:@"%ld", number];
 }
 
 - (IBAction)minusButtonClick:(id)sender {
     NSInteger number = [self.numberLabel.text integerValue];
-    if (number > 0)
-    {
+    if (number <= 0) return;
+//    if (number > 0)
+//    {
         number -= 1;
         
         if (number == 0)
         {
-            UITableView *tableView = (UITableView *)self.superview;
-            NSIndexPath *indexPath = [tableView indexPathForSelectedRow];
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-            [tableView reloadData];
+            
+//            UITableView *tableView = (UITableView *)self.superview;
+////            NSIndexPath *indexPath = [tableView indexPathForSelectedRow];
+////            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//            [self.datas removeObject:self.takeOut];
+//            [tableView reloadData];
+            if ([self.delegate respondsToSelector:@selector(shopCartListcell:RemoveCurrentRow:)])
+            {
+                [self.delegate shopCartListcell:self RemoveCurrentRow:self.takeOut];
+            }
         }
-    }
+//    }
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", number];
 }
 

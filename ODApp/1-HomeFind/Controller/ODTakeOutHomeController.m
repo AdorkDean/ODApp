@@ -90,6 +90,9 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    // 初始化购物车
+    [self setupShopCart];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
@@ -114,9 +117,6 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     
     // 初始化headerView
 //    [self setupHeaderView];
-    
-    // 初始化购物车
-    [self setupShopCart];
     
     // 加载广告页
     [self loadNewBanners];
@@ -252,6 +252,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 #pragma mark - ODTakeOutCellDelegate
 - (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(ODTakeOutModel *)takeOut
 {
+    // 商品总数量
     static NSInteger result = 0;
     result += 1;
     // 计算数量
