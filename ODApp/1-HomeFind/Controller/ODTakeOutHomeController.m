@@ -91,11 +91,21 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.shops = nil;
-    result = 0;
-    priceResult = 0.0f;
+//    self.shops = nil;
+    
     // 初始化购物车
     [self setupShopCart];
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    result = [[user objectForKey:@"result"] integerValue];
+    priceResult = [[user objectForKey:@"priceResult"] floatValue];
+    NSDictionary *cacheShops = [user objectForKey:@"shops"];
+    self.shops = cacheShops.mutableCopy;
+    self.shopCart.shops = self.shops;
+    
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+    
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
@@ -127,34 +137,46 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     // 初始化刷新控件
     [self setupScrollViewRefresh];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusClick:) name:@"addNumber" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusClick:) name:@"minusNumber" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusShopCart:) name:@"addNumber" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusShopCart:) name:@"minusNumber" object:nil];
 }
 
-- (void)plusClick:(NSNotification *)note
+- (void)plusShopCart:(NSNotification *)note
 {
-     ODShopCartListCell *cell = note.object;
-    
-    NSInteger number = cell.takeOut.shopNumber;
-    result = number;
-    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", number];
-    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"%.2f", (priceResult - [cell.takeOut.price_show floatValue])];
-    [self.shopCart.shopCartView reloadData];
-}
-
-- (void)minusClick:(NSNotification *)note
-{
-    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     ODShopCartListCell *cell = note.object;
     NSInteger number = cell.takeOut.shopNumber;
-    result = number;
+    
+//    result = number;
+    priceResult += cell.takeOut.price_show.floatValue;
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", (result - number)];
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+    [self.shopCart.shopCartView reloadData];
+    
+    [user setObject:@(result) forKey:@"result"];
+    [user setObject:@(priceResult) forKey:@"priceResult"];
+    [user synchronize];
+}
+
+- (void)minusShopCart:(NSNotification *)note
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    ODShopCartListCell *cell = note.object;
+    NSInteger number = cell.takeOut.shopNumber;
+
+//    result = number;
     if (!number) {
         [self.shopCart.shops removeObjectForKey:cell.takeOut.title];
-        priceResult = 0.0f;
+        [user setObject:self.shopCart.shops forKey:@"shops"];
     }
-    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", number];
-    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"%.2f", (priceResult - [cell.takeOut.price_show floatValue])];
+    priceResult -= cell.takeOut.price_show.floatValue;
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", (result - number)];
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
     [self.shopCart.shopCartView reloadData];
+    
+    [user setObject:@(result) forKey:@"result"];
+    [user setObject:@(priceResult) forKey:@"priceResult"];
+    [user synchronize];
 }
 
 - (void)dealloc
@@ -307,6 +329,13 @@ static CGFloat priceResult = 0;
     self.shopCart.title = takeOut.title;
     self.shops[takeOut.title] = takeOut.mj_keyValues;
     self.shopCart.shops = self.shops;
+    
+    // 保存数据
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:@(result) forKey:@"result"];
+    [user setObject:@(priceResult) forKey:@"priceResult"];
+    [user setObject:self.shops forKey:@"shops"];
+    [user synchronize];
 }
 
 #pragma mark - 事件方法

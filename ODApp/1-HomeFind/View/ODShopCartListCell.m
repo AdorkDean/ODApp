@@ -32,6 +32,7 @@
 }
 
 - (IBAction)plusButtonClick:(id)sender {
+    self.Add = YES;
     NSInteger number = self.takeOut.shopNumber;
     if (number < 0) return;
     number += 1;
@@ -43,6 +44,7 @@
 }
 
 - (IBAction)minusButtonClick:(id)sender {
+    self.Add = NO;
     NSInteger number = self.takeOut.shopNumber;
     if (number <= 0) return;
     number -= 1;

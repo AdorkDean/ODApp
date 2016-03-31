@@ -27,4 +27,6 @@
 /** <#desc#> */
 @property (nonatomic, weak) id<ODShopCartListCellDelegate> delegate;
 
+@property (nonatomic, assign, getter=isAdd) BOOL Add;
+
 @end
