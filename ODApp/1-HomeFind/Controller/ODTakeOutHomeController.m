@@ -19,7 +19,7 @@
 #import "ODTakeOutHeaderView.h"
 #import "ODShopCartView.h"
 
-#import "ODTakeAwayDetailController.h"
+#import "ODConfirmOrderViewController.h"
 #import <Masonry.h>
 
 @interface ODTakeOutHomeController () <UITableViewDataSource, UITableViewDelegate,
@@ -221,11 +221,11 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
     // 点击方法
-    ODTakeOutModel *model = self.datas[indexPath.row];
-    ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
-    vc.takeAwayTitle = model.title;
+//    ODTakeOutModel *model = self.datas[indexPath.row];
+    ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc] init];
+//    vc.takeAwayTitle = model.title;
 //    vc.isCart = YES;
-    vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
+//    vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
