@@ -114,7 +114,7 @@
     if (self.item.colorType == ODSettingCellColorTypeWhite) {
         self.backgroundColor = [UIColor whiteColor];
     } else {
-        self.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
+        self.backgroundColor = [UIColor themeColor];
     }
     self.accessoryView.od_x = KScreenWidth - 10 - self.accessoryView.od_width;
 }

@@ -48,13 +48,13 @@
     self.textView.backgroundColor = [UIColor whiteColor];
     self.textView.layer.masksToBounds = YES;
     self.textView.layer.cornerRadius = 5;
-    self.textView.layer.borderColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1].CGColor;
+    self.textView.layer.borderColor = [UIColor colorGrayColor].CGColor;
     self.textView.layer.borderWidth = 1;
     self.textView.font = [UIFont systemFontOfSize:14];
     self.textView.delegate = self;
     self.placeholdelLabel = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, kScreenSize.width - 20, 20)];
     self.placeholdelLabel.text = @"请输入您的反馈内容";
-    self.placeholdelLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
+    self.placeholdelLabel.textColor = [UIColor colorGreyColor];
     self.placeholdelLabel.font = [UIFont systemFontOfSize:14];
     [self.view addSubview:self.textView];
     [self.view addSubview:self.placeholdelLabel];

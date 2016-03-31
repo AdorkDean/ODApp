@@ -44,15 +44,33 @@
     self.autoresizingMask = UIViewAutoresizingNone;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.genderImageView.contentMode = UIViewContentModeCenter;
-    self.titleLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
-    self.priceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
-    self.nickLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
-    self.contentLabel.textColor = [UIColor colorWithRGBString:@"#484848" alpha:1];
-    self.loveLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
-    self.shareLabel.textColor = [UIColor colorWithRGBString:@"#8e8e8e" alpha:1];
+    self.titleLabel.textColor = [UIColor colorGloomyColor];
+    self.priceLabel.textColor = [UIColor colorRedColor];
+    self.nickLabel.textColor = [UIColor colorGraynessColor];
+    self.contentLabel.textColor = [UIColor colorGloomyColor];
+    self.loveLabel.textColor = [UIColor colorGraynessColor];
+    self.shareLabel.textColor = [UIColor colorGraynessColor];
     
     // 设置文字最大宽度
     self.contentLabel.preferredMaxLayoutWidth = KScreenWidth - 90;
+    [self stopBlendedLayers];
+}
+
+- (void)stopBlendedLayers {
+    
+    self.titleLabel.backgroundColor = [UIColor whiteColor];
+    self.priceLabel.backgroundColor = [UIColor whiteColor];
+    self.nickLabel.backgroundColor = [UIColor whiteColor];
+    self.contentLabel.backgroundColor = [UIColor whiteColor];
+    self.loveLabel.backgroundColor = [UIColor whiteColor];
+    self.shareLabel.backgroundColor = [UIColor whiteColor];
+    
+    self.shareLabel.layer.masksToBounds = YES;
+    self.titleLabel.layer.masksToBounds = YES;
+    self.priceLabel.layer.masksToBounds = YES;
+    self.nickLabel.layer.masksToBounds = YES;
+    self.contentLabel.layer.masksToBounds = YES;
+    self.loveLabel.layer.masksToBounds = YES;
 }
 
 /**

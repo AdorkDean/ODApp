@@ -25,7 +25,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-
     self.is_default = @"0";
     self.open_id = [ODUserInformation sharedODUserInformation].openID;
 
@@ -45,7 +44,7 @@
 
     self.addAddressView = [ODAddAddressView getView];
     self.addAddressView.frame = CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight);
-    self.addAddressView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
+    self.addAddressView.backgroundColor = [UIColor lineColor];
     [self.view addSubview:self.addAddressView];
 
 
@@ -70,7 +69,7 @@
         self.addAddressView.phoneTextField.text = self.addressModel.tel;
     } else {
         self.addAddressView.addressTextView.text = @"请输入联系地址";
-        self.addAddressView.addressTextView.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
+        self.addAddressView.addressTextView.textColor = [UIColor colorGreyColor];
         self.addAddressView.phoneTextField.text = [ODUserInformation sharedODUserInformation].mobile;
 
     };
@@ -99,7 +98,7 @@
 
     if (textView == self.addAddressView.addressTextView) {
         if ([textView.text isEqualToString:@""]) {
-            textView.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
+            textView.textColor = [UIColor colorGreyColor];
             textView.text = @"请输入联系地址";
 
         }

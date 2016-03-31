@@ -9,8 +9,8 @@
 #import "ODTakeOutCell.h"
 
 #import "ODTakeOutModel.h"
-#import "UIImageView+WebCache.h"
 #import "ODBuyTakeOutViewController.h"
+#import <UIImageView+WebCache.h>
 
 @interface ODTakeOutCell()
 
@@ -31,9 +31,23 @@
 {
     // 取消选中样式
     self.selectionStyle = UITableViewCellSelectionStyleNone;
-    self.titleLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
-    self.discountPriceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
-    self.originalPriceLabel.textColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
+    self.titleLabel.textColor = [UIColor blackColor];
+    self.discountPriceLabel.textColor = [UIColor colorRedColor];
+    self.originalPriceLabel.textColor = [UIColor colorGrayColor];
+    
+    [self stopBlendedLayers];
+}
+
+- (void)stopBlendedLayers
+{
+    
+    self.titleLabel.backgroundColor = [UIColor whiteColor];
+    self.discountPriceLabel.backgroundColor = [UIColor whiteColor];
+    self.originalPriceLabel.backgroundColor = [UIColor whiteColor];
+    
+    self.titleLabel.layer.masksToBounds = YES;
+    self.discountPriceLabel.layer.masksToBounds = YES;
+    self.originalPriceLabel.layer.masksToBounds = YES;
 }
 
 - (void)setDatas:(ODTakeOutModel *)datas
@@ -44,9 +58,8 @@
     UIImage *placehoderImage = [UIImage imageNamed:@"placeholder_picture"];
     __weakSelf;
     [self.shopImageView sd_setImageWithURL:[NSURL OD_URLWithString:datas.img_small] placeholderImage:placehoderImage options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-        if (image == nil ) return;
-        image = [image od_roundedCornerImage:10.0f];
-        weakSelf.shopImageView.image = image;
+        if ( !image ) return;
+        weakSelf.shopImageView.image = [image od_roundedCornerImage:10.0f];
     }];
     self.titleLabel.text = datas.title;
     self.discountPriceLabel.text = [NSString stringWithFormat:@"¥%@", datas.price_show];
@@ -56,8 +69,9 @@
     self.buyButton.enabled = (datas.show_status == ODTakeOutStatusBuy);
     
     // 添加中划线
-    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:self.originalPriceLabel.text attributes:attribtDic];
+    NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+    NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc] initWithString:
+                                                      self.originalPriceLabel.text attributes:attribtDic];
     self.originalPriceLabel.attributedText = attribtStr;
 }
 

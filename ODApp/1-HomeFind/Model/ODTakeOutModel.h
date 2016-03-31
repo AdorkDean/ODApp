@@ -9,7 +9,8 @@
 /**
  *  外卖按钮状态
  */
-typedef NS_ENUM(NSUInteger, ODTakeOutStatus) {
+typedef NS_ENUM(NSUInteger, ODTakeOutStatus)
+{
     ODTakeOutStatusBuy = 1, // 购买
     ODTakeOutStatusEnd = 2  // 结束 (不能购买)
 };

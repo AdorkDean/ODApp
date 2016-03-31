@@ -15,6 +15,8 @@
 
 @interface ODBazaarExchangeSkillDetailViewController ()
 
+@property (nonatomic, assign) BOOL isCollect;
+
 @end
 
 @implementation ODBazaarExchangeSkillDetailViewController
@@ -25,7 +27,7 @@
     if (!_scrollView) {
         _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height - 64 - 49)];
         _scrollView.userInteractionEnabled = YES;
-        _scrollView.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        _scrollView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:_scrollView];
     }
     return _scrollView;
@@ -38,7 +40,6 @@
     self.navigationItem.title = self.nick;
     [self requestData];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(shareButtonClick) image:[UIImage imageNamed:@"话题详情-分享icon"] highImage:nil];
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -67,6 +68,10 @@
         [weakSelf createUserInfoView];
         [weakSelf createDetailView];
         [weakSelf createBottomView];
+        
+        if (self.isCollect) {
+            [weakSelf backRefreshData];
+        }
     } failure:^(NSError *error) {
         
     }];
@@ -75,6 +80,7 @@
 - (void)pushDataWithUrl:(NSString *)url parameter:(NSDictionary *)parameter isLove:(BOOL)love {
     __weakSelf;
     [ODHttpTool getWithURL:url parameters:parameter modelClass:[ODBazaarExchangeSkillDetailLoveModel class] success:^(ODBazaarExchangeSkillDetailLoveModelResponse *model) {
+        self.isCollect = YES;
         if (love) {
             weakSelf.love = @"love";
             [weakSelf requestData];
@@ -86,6 +92,7 @@
             [weakSelf requestData];
             [ODProgressHUD showInfoWithStatus:@"取消收藏"];
         }
+        
     } failure:^(NSError *error) {
         
     }];
@@ -122,7 +129,7 @@
 
     UILabel *certificationLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame) + 5, 24, kScreenSize.width - 88 - 50, 12)];
     certificationLabel.font = [UIFont systemFontOfSize:11.5];
-    certificationLabel.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
+    certificationLabel.textColor = [UIColor colorGreyColor];
     NSString *user_auth_status = [NSString stringWithFormat:@"%@", self.model.user[@"user_auth_status"]];
     if ([user_auth_status isEqualToString:@"0"]) {
         certificationLabel.text = @"未认证";
@@ -136,7 +143,7 @@
     [userInfoView addSubview:arrowImageView];
 
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 60, kScreenSize.width, 6)];
-    lineView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
+    lineView.backgroundColor = [UIColor lineColor];
     [userInfoView addSubview:lineView];
 }
 
@@ -153,7 +160,7 @@
 
     UILabel *priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(titleLabel.frame) + 10, kScreenSize.width - 35, 20)];
     priceLabel.text = [NSString stringWithFormat:@"%.2f元/%@", self.model.price, self.model.unit];
-    priceLabel.textColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+    priceLabel.textColor = [UIColor colorRedColor];
     priceLabel.textAlignment = NSTextAlignmentCenter;
     priceLabel.font = [UIFont systemFontOfSize:15];
     [self.detailView addSubview:priceLabel];
@@ -209,13 +216,13 @@
 #pragma mark - 底部收藏购买试图
 - (void)createBottomView {
     UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, kScreenSize.height - 64 - 49, kScreenSize.width, 49)];
-    [bottomView setBackgroundColor:[UIColor colorWithRGBString:@"#e6e6e6" alpha:1]];
+    [bottomView setBackgroundColor:[UIColor lineColor]];
     [self.view addSubview:bottomView];
 
     UIButton *loveButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 100, 49)];
     [loveButton addTarget:self action:@selector(loveButtonClick:) forControlEvents:UIControlEventTouchUpInside];
-    loveButton.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
-    loveButton.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+    loveButton.backgroundColor = [UIColor whiteColor];
+    loveButton.layer.borderColor = [UIColor lineColor].CGColor;
     loveButton.layer.borderWidth = 0.5;
     [bottomView addSubview:loveButton];
 
@@ -230,7 +237,7 @@
         self.loveLabel.text = @"已收藏";
         loveImageView.image = [UIImage imageNamed:@"Skills profile page_icon_Collection"];
     }
-    self.loveLabel.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+    self.loveLabel.textColor = [UIColor blackColor];
     self.loveLabel.textAlignment = NSTextAlignmentLeft;
     self.loveLabel.font = [UIFont systemFontOfSize:12.5];
     [loveButton addSubview:self.loveLabel];
@@ -238,22 +245,22 @@
     UIButton *payButton = [[UIButton alloc] initWithFrame:CGRectMake(100, 0, kScreenSize.width - 100, 49)];
     [payButton setTitle:@"立即购买" forState:UIControlStateNormal];
     if ([[self.model.user valueForKeyPath:@"open_id"] isEqualToString:[ODUserInformation sharedODUserInformation].openID]) {
-        [payButton setBackgroundColor:[UIColor colorWithRGBString:@"#b0b0b0" alpha:1]];
+        [payButton setBackgroundColor:[UIColor colorGreyColor]];
         payButton.userInteractionEnabled = NO;
     } else {
-        [payButton setBackgroundColor:[UIColor colorWithRGBString:@"#ff6666" alpha:1]];
+        [payButton setBackgroundColor:[UIColor colorRedColor]];
         payButton.userInteractionEnabled = YES;
     }
-    [payButton setTitleColor:[UIColor colorWithRGBString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
+    [payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [payButton addTarget:self action:@selector(payButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:payButton];
 }
 
 #pragma mark - action
-- (void)backAction:(UIBarButtonItem *)sender {
+
+- (void)backRefreshData {
     NSDictionary *loveDict = [[NSDictionary alloc] initWithObjectsAndKeys:self.love_num, @"loveNumber", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationloveSkill object:nil userInfo:loveDict];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)shareButtonClick {

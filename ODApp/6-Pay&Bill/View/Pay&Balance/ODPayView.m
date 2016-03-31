@@ -19,10 +19,10 @@
       view.userInteractionEnabled = YES;
   
       view.backgroundColor = [UIColor whiteColor];
-      view.firstLineLabel.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
-      view.secondLineLabel.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
-      view.thirdLineLabel.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
-      view.fourthLineLabel.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
+      view.firstLineLabel.backgroundColor = [UIColor lineColor];
+      view.secondLineLabel.backgroundColor = [UIColor lineColor];
+      view.thirdLineLabel.backgroundColor = [UIColor lineColor];
+      view.fourthLineLabel.backgroundColor = [UIColor lineColor];
      view.thirdLineLabelConstraint.constant = 0.5;
     view.fourthLineLabelConstraint.constant = 0.5;
     view.treasureImageView.hidden = YES;

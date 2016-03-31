@@ -53,8 +53,8 @@
 
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationItem.title = @"新话题";
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor colorWithRGBString:@"#000000" alpha:1] highColor:nil title:@"取消"];
-    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor colorWithRGBString:@"#000000" alpha:1] highColor:nil title:@"确认"];
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor blackColor] highColor:nil title:@"取消"];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor blackColor] highColor:nil title:@"确认"];
     [self createTextView];
     [self createLabels];
     [self createAddPicButton];
@@ -106,10 +106,10 @@
 #pragma mark - 创建textView
 - (void)createTextView {
     self.titleTextView = [ODClassMethod creatTextViewWithFrame:CGRectMake(4, 4, kScreenSize.width - 8, 53) delegate:self tag:0 font:13 color:@"#ffffff" alpha:1 maskToBounds:YES];
-    self.titleTextView.textColor = [UIColor colorWithRGBString:@"#000000" alpha:1];
+    self.titleTextView.textColor = [UIColor blackColor];
     [self.scrollView addSubview:self.titleTextView];
     self.titleLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, 4, kScreenSize.width - 20, 30) text:@"请输入话题标题" font:13 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    self.titleLabel.textColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
+    self.titleLabel.textColor = [UIColor colorGrayColor];
     self.titleLabel.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.titleLabel];
 
@@ -117,7 +117,7 @@
     self.topicContentTextView.textColor = [UIColor colorWithRGBString:@"#7e7e7e" alpha:1];
     [self.scrollView addSubview:self.topicContentTextView];
     self.topicContentLabel = [ODClassMethod creatLabelWithFrame:CGRectMake(10, CGRectGetMaxY(self.titleTextView.frame) + 4, kScreenSize.width - 20, 30) text:@"请输入话题内容" font:13 alignment:@"left" color:@"#d0d0d0" alpha:1 maskToBounds:NO];
-    self.titleLabel.textColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1];
+    self.titleLabel.textColor = [UIColor colorGrayColor];
     self.topicContentLabel.userInteractionEnabled = NO;
     [self.scrollView addSubview:self.topicContentLabel];
 }
@@ -126,7 +126,7 @@
 - (void)createLabels {
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(4, CGRectGetMaxY(self.topicContentTextView.frame) + 10, kScreenSize.width - 8, 15)];
     label.text = @"标签选择";
-    label.textColor = [UIColor colorWithRGBString:@"#b0b0b0" alpha:1];
+    label.textColor = [UIColor colorGreyColor];
     label.font = [UIFont systemFontOfSize:15];
     [self.scrollView addSubview:label];
 
@@ -136,12 +136,12 @@
         UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
         button.frame = CGRectMake(4 + (width + 4) * (i % 4), CGRectGetMaxY(label.frame) + 10 + (25 + 4) * (i / 4), width, 25);
         [button setTitle:array[i] forState:UIControlStateNormal];
-        [button setTitleColor:[UIColor colorWithRGBString:@"#b0b0b0" alpha:1] forState:UIControlStateNormal];
+        [button setTitleColor:[UIColor colorGreyColor] forState:UIControlStateNormal];
         button.titleLabel.font = [UIFont systemFontOfSize:14];
         [button addTarget:self action:@selector(labelButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         button.layer.masksToBounds = YES;
         button.layer.cornerRadius = 5;
-        button.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        button.backgroundColor = [UIColor whiteColor];
         button.tag = 1 + i;
         [self.scrollView addSubview:button];
     }
@@ -154,7 +154,7 @@
     self.addPicButton.layer.masksToBounds = YES;
     self.addPicButton.layer.cornerRadius = 5;
     self.addPicButton.layer.borderWidth = 1;
-    self.addPicButton.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+    self.addPicButton.layer.borderColor = [UIColor lineColor].CGColor;
     [self.scrollView addSubview:self.addPicButton];
 }
 
@@ -339,12 +339,12 @@ NSString *topicContentText = @"";
     }
     
     if ([self.labelArray containsObject:tag_ids]) {
-        [button setTitleColor:[UIColor colorWithRGBString:@"#b0b0b0" alpha:1] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor colorWithRGBString:@"#ffffff" alpha:1];
+        [button setTitleColor:[UIColor colorGreyColor] forState:UIControlStateNormal];
+        button.backgroundColor = [UIColor whiteColor];
         [self.labelArray removeObject:tag_ids];
     } else {
-        [button setTitleColor:[UIColor colorWithRGBString:@"#ffffff" alpha:1] forState:UIControlStateNormal];
-        button.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+        [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        button.backgroundColor = [UIColor colorRedColor];
         [self.labelArray addObject:tag_ids];
     }
 }

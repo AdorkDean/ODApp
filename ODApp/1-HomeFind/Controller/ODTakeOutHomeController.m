@@ -25,9 +25,12 @@
                                         ODTakeOutHeaderViewDelegate>
 
 /** scrollView */
-@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, weak) UIScrollView *scrollView;
 /** 表格 */
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, weak) UITableView *tableView;
+/** 头部控件 */
+@property (nonatomic, weak) ODTakeOutHeaderView *headerView;
+
 /** 参数 */
 @property (nonatomic, strong) NSMutableDictionary *params;
 /** 页码 */
@@ -36,8 +39,6 @@
 @property (nonatomic, strong) NSNumber *type;
 /** 模型数组 */
 @property (nonatomic, strong) NSMutableArray *datas;
-/** 头部控件 */
-@property (nonatomic, weak) ODTakeOutHeaderView *headerView;
 
 @end
 

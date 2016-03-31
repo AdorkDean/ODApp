@@ -51,7 +51,6 @@ static CGFloat const labelDownMargin = 5;
     self.devicesArray = [[NSMutableArray alloc] init];
     self.navigationItem.title = @"预约详情";
     
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
     if (self.isOther == NO && ![self.status_str isEqualToString:@"已取消"]) {
         self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelOrderButtonClick:) color:nil highColor:nil title:@"取消预约"];
     }
@@ -203,7 +202,7 @@ static CGFloat const labelDownMargin = 5;
     UIView *peopleNumberDetailView = [[UIView alloc] initWithFrame:CGRectMake(viewLeftMargin, CGRectGetMaxY(peopleNumberLabel.frame) + labelDownMargin, KScreenWidth - viewLeftMargin * 2, labelHeight)];
     peopleNumberDetailView.backgroundColor = [UIColor whiteColor];
     peopleNumberDetailView.layer.cornerRadius = viewCornerRadius;
-    peopleNumberDetailView.layer.borderColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1].CGColor;
+    peopleNumberDetailView.layer.borderColor = [UIColor lineColor].CGColor;
     peopleNumberDetailView.layer.borderWidth = viewBorderWidth;
     [self.scrollView addSubview:peopleNumberDetailView];
     
@@ -279,7 +278,7 @@ static CGFloat const labelDownMargin = 5;
                 weakSelf.checkLabel.text = @"已取消";
                 weakSelf.navigationItem.rightBarButtonItem.customView.hidden = YES;
                 weakSelf.status_str = weakSelf.checkLabel.text;
-                
+                [weakSelf backRefreshData];
             }
             failure:^(NSError *error) {
                                
@@ -297,10 +296,9 @@ static CGFloat const labelDownMargin = 5;
 }
 
 #pragma mark - 返回刷新
-- (void)backAction:(UIBarButtonItem *)sender {
+- (void)backRefreshData {
     NSDictionary *statusDict =[[NSDictionary alloc] initWithObjectsAndKeys:self.status_str,@"status_str", nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationCancelOrder object:nil userInfo:statusDict];
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

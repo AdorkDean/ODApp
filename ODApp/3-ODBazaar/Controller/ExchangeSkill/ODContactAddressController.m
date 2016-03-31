@@ -106,7 +106,7 @@
     self.tableView.userInteractionEnabled = YES;
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    self.tableView.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
+    self.tableView.backgroundColor = [UIColor lineColor];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     [self.tableView registerNib:[UINib nibWithNibName:@"ODAddressCell" bundle:nil] forCellReuseIdentifier:@"item"];
 
@@ -206,7 +206,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
     if (section == 0) {
         UIImageView *view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 0)];
-        view.backgroundColor = [UIColor colorWithRGBString:@"#e6e6e6" alpha:1];
+        view.backgroundColor = [UIColor lineColor];
         view.userInteractionEnabled = YES;
         return view;
 
@@ -252,7 +252,7 @@
 
 
     }];
-    action1.backgroundColor = [UIColor colorWithRGBString:@"#ff6666" alpha:1];
+    action1.backgroundColor = [UIColor colorRedColor];
 
 
     UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[UIImage imageNamed:@"icon_bianji"] handler:^(UITableViewRowAction *_Nullable action, NSIndexPath *_Nullable indexPath) {
@@ -283,7 +283,7 @@
 
 
     }];
-    action2.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
+    action2.backgroundColor = [UIColor themeColor];
 
     return @[action1, action2];
 }

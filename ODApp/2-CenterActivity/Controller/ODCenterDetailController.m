@@ -134,7 +134,7 @@
         _centerOrderButton = [[UIButton alloc] initWithFrame:CGRectMake(5, CGRectGetMaxY(self.centerDetailView.frame) + 5, KScreenWidth - 10, 30)];
         [_centerOrderButton setTitle:@"场地预约" forState:UIControlStateNormal];
         [_centerOrderButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        _centerOrderButton.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
+        _centerOrderButton.backgroundColor = [UIColor themeColor];
         _centerOrderButton.titleLabel.font = [UIFont systemFontOfSize:13.5];
         _centerOrderButton.layer.cornerRadius = 5;
         _centerOrderButton.layer.borderColor = [UIColor lineColor].CGColor;

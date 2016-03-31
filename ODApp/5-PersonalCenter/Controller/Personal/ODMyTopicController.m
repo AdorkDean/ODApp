@@ -55,7 +55,7 @@
     self.segmentedControl.clipsToBounds = YES;
     self.segmentedControl.layer.cornerRadius = 7;
     self.segmentedControl.layer.borderWidth = 1;
-    self.segmentedControl.layer.borderColor = [UIColor colorWithRGBString:@"#d0d0d0" alpha:1].CGColor;
+    self.segmentedControl.layer.borderColor = [UIColor colorGrayColor].CGColor;
     self.segmentedControl.backgroundColor = [UIColor whiteColor];
     self.segmentedControl.tintColor = [UIColor colorWithRGBString:@"#ffd801" alpha:1];
     self.segmentedControl.selectedSegmentIndex = 0;

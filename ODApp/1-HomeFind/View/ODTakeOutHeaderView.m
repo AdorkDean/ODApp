@@ -52,6 +52,8 @@
             button.enabled = NO;
             self.selectedButton = button;
         }
+        button.titleLabel.backgroundColor = [UIColor whiteColor];
+        button.titleLabel.layer.masksToBounds = YES;
     }
 }
 
@@ -65,8 +67,9 @@
     {
         [arrayM addObject:banner.img_url];
     }
-    self.scrollView.images = arrayM;
-//    self.scrollView.images = [banners valueForKeyPath:@"img_url"];
+    // 传递地址数组(不为空时)
+    if ( arrayM.count ) self.scrollView.images = arrayM;
+    // 设置pageControl颜色
     self.scrollView.pageControl.currentPageIndicatorTintColor = [UIColor orangeColor];
     self.scrollView.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
 }

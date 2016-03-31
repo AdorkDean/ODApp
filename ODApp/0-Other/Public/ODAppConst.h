@@ -215,10 +215,26 @@ UIKIT_EXTERN NSString * const ODUrlUserLoveList;
 UIKIT_EXTERN NSString * const ODUrlUserBindMoble;
 UIKIT_EXTERN NSString * const ODUrlUserAddressList;
 
-
+#pragma mark - 外卖接口
 /** 外卖首页 */
 UIKIT_EXTERN NSString * const ODUrlTakeOutList;
 /** 订单详情 */
 UIKIT_EXTERN NSString * const ODUrlTakeOutOrderInfo;
 /** 外卖订单列表 */
 UIKIT_EXTERN NSString * const ODUrlTakeOutOrderList;
+
+#pragma mark - 购物车
+/** list(下架商品不返回) */
+UIKIT_EXTERN NSString * const ODUrlShopcartList;
+/** 增加到购物车/减少购物车某商品 */
+UIKIT_EXTERN NSString * const ODUrlShopcartAdd;
+/** 修改购物车某商品数量 */
+UIKIT_EXTERN NSString * const ODUrlShopcartEdit;
+/** 刪除單個商品 */
+UIKIT_EXTERN NSString * const ODUrlShopcartDel;
+/** 清除購物車 */
+UIKIT_EXTERN NSString * const ODUrlShopcartClear;
+/** 直接下单按钮/购物车选中商品下单按钮 */
+UIKIT_EXTERN NSString * const ODUrlShopcartOrder;
+/** 确认下单 */
+UIKIT_EXTERN NSString * const ODUrlShopcartOrderConfirm;
