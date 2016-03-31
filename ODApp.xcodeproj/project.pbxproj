@@ -262,6 +262,7 @@
 		402261351CA5051200E0B737 /* ODMyTakeOutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 402261341CA5051200E0B737 /* ODMyTakeOutViewController.m */; };
 		4029EB351C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4029EB341C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m */; };
 		40336B351CA53B77002487F2 /* ODMyTakeOutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 40336B341CA53B77002487F2 /* ODMyTakeOutModel.m */; };
+		4035EF7D1CACCC8200564BBA /* ODBuyTakeOutModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4035EF7C1CACCC8200564BBA /* ODBuyTakeOutModel.m */; };
 		4045DC981C97AD60007CD2BC /* ODBazaarPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 4045DC971C97AD60007CD2BC /* ODBazaarPhoto.m */; };
 		4045DC9C1C97D349007CD2BC /* ODBazaarHelpCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4045DC9A1C97D349007CD2BC /* ODBazaarHelpCell.m */; };
 		4045DC9D1C97D349007CD2BC /* ODBazaarHelpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4045DC9B1C97D349007CD2BC /* ODBazaarHelpCell.xib */; };
@@ -826,6 +827,8 @@
 		4029EB341C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseSkillTimeModel.m; sourceTree = "<group>"; };
 		40336B331CA53B77002487F2 /* ODMyTakeOutModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyTakeOutModel.h; sourceTree = "<group>"; };
 		40336B341CA53B77002487F2 /* ODMyTakeOutModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyTakeOutModel.m; sourceTree = "<group>"; };
+		4035EF7B1CACCC8200564BBA /* ODBuyTakeOutModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBuyTakeOutModel.h; sourceTree = "<group>"; };
+		4035EF7C1CACCC8200564BBA /* ODBuyTakeOutModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBuyTakeOutModel.m; sourceTree = "<group>"; };
 		4045DC961C97AD60007CD2BC /* ODBazaarPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarPhoto.h; sourceTree = "<group>"; };
 		4045DC971C97AD60007CD2BC /* ODBazaarPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarPhoto.m; sourceTree = "<group>"; };
 		4045DC991C97D349007CD2BC /* ODBazaarHelpCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarHelpCell.h; sourceTree = "<group>"; };
@@ -1254,9 +1257,9 @@
 		232CB3A01C9264E200340D12 /* 1-HomeFind */ = {
 			isa = PBXGroup;
 			children = (
-				232CB3A11C9264E200340D12 /* Controller */,
 				232CB3AA1C9264E200340D12 /* Model */,
 				232CB3AF1C9264E200340D12 /* View */,
+				232CB3A11C9264E200340D12 /* Controller */,
 			);
 			path = "1-HomeFind";
 			sourceTree = "<group>";
@@ -1286,6 +1289,8 @@
 		232CB3AA1C9264E200340D12 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				4035EF7B1CACCC8200564BBA /* ODBuyTakeOutModel.h */,
+				4035EF7C1CACCC8200564BBA /* ODBuyTakeOutModel.m */,
 				400F18511CA9322E000EFFBC /* ODTakeOutModel.h */,
 				400F18521CA9322E000EFFBC /* ODTakeOutModel.m */,
 				4096EDFA1CA3F337001D916C /* ODTakeOutBannerModel.h */,
@@ -2569,6 +2574,7 @@
 				232CB55F1C9264E200340D12 /* ODNewFeatureViewController.m in Sources */,
 				232CB5A41C9264E200340D12 /* ODStorePlaceListModel.m in Sources */,
 				232CB6301C9264E200340D12 /* ODRegisteredView.m in Sources */,
+				4035EF7D1CACCC8200564BBA /* ODBuyTakeOutModel.m in Sources */,
 				232CB5C61C9264E200340D12 /* ODBazaaeExchangeSkillViewController.m in Sources */,
 				232CB5EB1C9264E200340D12 /* ODBazaarDetailLayout.m in Sources */,
 				232CB59C1C9264E200340D12 /* ODChoseCenterController.m in Sources */,
