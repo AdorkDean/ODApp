@@ -7,11 +7,21 @@
 //  定外卖cell
 
 #import <UIKit/UIKit.h>
-@class ODTakeOutModel;
+@class ODTakeOutModel, ODTakeOutCell;
+
+@protocol ODTakeOutCellDelegate <NSObject>
+
+@optional
+- (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(UIButton *)button;
+
+@end
 
 @interface ODTakeOutCell : UITableViewCell
 
 /** 模型数据 */
 @property (nonatomic, strong) ODTakeOutModel *datas;
+
+/** 代理 */
+@property (nonatomic, weak) id<ODTakeOutCellDelegate> delegate;
 
 @end

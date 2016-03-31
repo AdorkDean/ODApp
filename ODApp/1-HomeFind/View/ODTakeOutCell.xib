@@ -56,9 +56,6 @@
                         <state key="disabled" title="已结束" backgroundImage="button_end">
                             <color key="titleColor" red="1" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
-                        <connections>
-                            <action selector="buyTakeAway" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7eq-fi-trC"/>
-                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ut3-tb-qIu" userLabel="分隔线">
                         <rect key="frame" x="17" y="90" width="285" height="1"/>
