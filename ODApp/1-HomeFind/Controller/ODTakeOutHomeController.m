@@ -52,22 +52,7 @@
 
 @implementation ODTakeOutHomeController
 
-- (ODTakeOutHeaderView *)headerView
-{
-    if (!_headerView)
-    {
-        ODTakeOutHeaderView *headerView = [[ODTakeOutHeaderView alloc] init];
-        [headerView sizeToFit];
-        headerView.od_width = KScreenWidth;
-        headerView.od_height = 163;
-        // 设置代理
-        headerView.delegate = self;
-//        [self.scrollView addSubview:headerView];
-        _headerView = headerView;
-    }
-    return _headerView;
-}
-
+#pragma mark - 懒加载
 - (NSMutableDictionary *)shops
 {
     if (!_shops) {
@@ -76,7 +61,6 @@
     return _shops;
 }
 
-#pragma mark - 懒加载
 - (NSMutableArray *)datas
 {
     if (_datas == nil) {
@@ -110,7 +94,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:NSStringFromClass([self class])];
     
-    [UIView animateWithDuration:0.15 animations:^{
+    [UIView animateWithDuration:kAnimateDuration animations:^{
         [self.shopCart removeFromSuperview];
     }];
 }
@@ -126,16 +110,33 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     [self setupTableView];
     
     // 初始化headerView
-//    [self setupHeaderView];
+    [self setupHeaderView];
     
     // 加载广告页
     [self loadNewBanners];
     
+    // 加载数据
+    [self loadNewTakeOuts];
+    
     // 初始化刷新控件
     [self setupScrollViewRefresh];
     
+    [self addObserver];
+}
+
+- (void)addObserver
+{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusShopCart:) name:@"addNumber" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusShopCart:) name:@"minusNumber" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllDatas:) name:@"removeAll" object:nil];
+}
+
+- (void)removeAllDatas:(NSNotification *)note
+{
+    result = 0;
+    priceResult = 0;
+    [self.shops removeAllObjects];
 }
 
 - (void)plusShopCart:(NSNotification *)note
@@ -239,11 +240,10 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     self.navigationItem.title = @"订外卖";
     self.automaticallyAdjustsScrollViewInsets = NO;
     // 创建表格
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - 64)
-                                                          style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 163, KScreenWidth, KScreenHeight - 64 - 163 - 49) style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
-    tableView.bounces = YES;
+//    tableView.bounces = YES;
     [self.view addSubview:tableView];
     self.tableView = tableView;
 //    tableView.contentInset = UIEdgeInsetsMake(163, 0, 0, 0);
@@ -288,8 +288,8 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
  */
 - (void)setupScrollViewRefresh
 {
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewTakeOuts)];
-    [self.tableView.mj_header beginRefreshing];
+//    self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewTakeOuts)];
+//    [self.scrollView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTakeOuts)];
     self.tableView.mj_footer.automaticallyHidden = YES;
 }
@@ -309,19 +309,9 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 }
 
 #pragma mark - UITableViewDelegate
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return self.headerView;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 163;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    [self.tableView.mj_header endRefreshing];
+//    [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
     // 点击方法
     ODTakeOutModel *model = self.datas[indexPath.row];
@@ -403,20 +393,20 @@ static CGFloat priceResult = 0;
         NSArray *newDatas = [model result];
         [weakSelf.datas addObjectsFromArray:newDatas];
         [weakSelf.tableView reloadData];
-        [weakSelf.tableView.mj_header endRefreshing];
+//        [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf checkFooterState:newDatas.count];
         // 重新设置 page = 1
         weakSelf.page = @1;
     } failure:^(NSError *error) {
         if (weakSelf.params != params) return;
-        [weakSelf.tableView.mj_header endRefreshing];
+//        [weakSelf.tableView.mj_header endRefreshing];
     }];
 }
 
 - (void)loadMoreTakeOuts
 {
     // 结束下拉刷新
-    [self.tableView.mj_header endRefreshing];
+//    [self.tableView.mj_header endRefreshing];
     // 取出页码
     NSNumber *currentPage = @([self.page integerValue] + 1);
     // 拼接参数

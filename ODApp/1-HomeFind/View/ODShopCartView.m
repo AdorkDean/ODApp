@@ -5,7 +5,6 @@
 //  Created by 王振航 on 16/3/31.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
-
 #import "ODShopCartView.h"
 #import "ODTakeOutModel.h"
 
@@ -16,7 +15,7 @@
 #import <MJExtension.h>
 
 @interface ODShopCartView() <UITableViewDataSource, UITableViewDelegate,
-                             ODShopCartListCellDelegate>
+                             ODShopCartListCellDelegate, ODShopCartListHeaderViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *leftView;
 
@@ -38,7 +37,6 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
         _shopCartView.dataSource = self;
         _shopCartView.delegate = self;
         _shopCartView.bounces = NO;
-        _shopCartView.rowHeight = 46;
         
         UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
         [keyWindow addSubview:self.shopCartView];
@@ -83,21 +81,9 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     self.numberLabel.layer.cornerRadius = 7.5;
     self.numberLabel.layer.masksToBounds = YES;
 }
-
-- (void)dealloc
-{
-    self.numberLabel.text = @"0";
-    self.priceLabel.text = @"0";
-}
-
 + (instancetype)shopCart
 {
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
-}
-
-- (void)setupHeaderView
-{
-    
 }
 
 - (void)setShops:(NSMutableDictionary *)shops
@@ -134,13 +120,41 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
 #pragma mark - ODShopCartListCellDelegate
 - (void)shopCartListcell:(ODShopCartListCell *)cell RemoveCurrentRow:(ODTakeOutModel *)currentData
 {
+    //    NSUInteger index = [self.datasArray indexOfObject:currentData];
+    CGFloat height = (self.datasArray.count - 1) * 44 + 25;
     [self.datasArray removeObject:currentData];
-    CGFloat height = self.datasArray.count * 44 + 25;
     [UIView animateWithDuration:kAnimateDuration animations:^{
         self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 49, KScreenWidth, height);
     }];
     
+    [self.shopCartView reloadData];
     if (!self.datasArray.count) [self dismiss];
+}
+
+#pragma mark - ODShopCartListHeaderViewDelegate
+- (void)shopCartHeaderViewDidClickClearButton:(ODShopCartListHeaderView *)headerView
+{
+    // 清除缓存
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user removeObjectForKey:@"shops"];
+    [user removeObjectForKey:@"result"];
+    [user removeObjectForKey:@"priceResult"];
+    [user synchronize];
+    
+    [self dismiss];
+    
+    
+    // 发送通知, 清空所有
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAll" object:self];
+    
+    // 清空所有
+    [self.datasArray removeAllObjects];
+    self.numberLabel.text = @"0";
+    self.priceLabel.text = @"¥0";
+    for (ODTakeOutModel *takeOut in self.datasArray)
+    {
+        takeOut.shopNumber = 0;
+    }
     [self.shopCartView reloadData];
 }
 
@@ -154,16 +168,16 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     
     if (self.isOpened) {
         CGFloat height = self.datasArray.count * 44 + 25;
-//        self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 49, KScreenWidth, height);
         [UIView animateWithDuration:kAnimateDuration animations:^{
             self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 49, KScreenWidth, height);
         }];
         
-        
+        // 设置头部视图
         ODShopCartListHeaderView *headerView = [ODShopCartListHeaderView headerView];
         headerView.od_width = KScreenWidth;
         headerView.od_height = 25;
         _shopCartView.tableHeaderView = headerView;
+        headerView.delegate = self;
         
         UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
         [keyWindow insertSubview:self.coverView belowSubview:self];
@@ -182,7 +196,6 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     self.isOpened = NO;
     [UIView animateWithDuration:kAnimateDuration animations:^{
         self.shopCartView.frame = CGRectMake(0, KScreenHeight - 49, KScreenWidth, CGFLOAT_MIN);
-        
     } completion:^(BOOL finished) {
         if (self.coverView.subviews) [self.coverView removeFromSuperview];
     }];
