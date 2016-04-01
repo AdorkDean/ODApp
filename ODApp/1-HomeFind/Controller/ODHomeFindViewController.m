@@ -15,7 +15,7 @@
 #import "ODHomeButton.h"
 #import "ODTakeOutHomeController.h"
 #import "ODTakeAwayDetailController.h"
-#import "ODTestUrlViewController.h"
+//#import "ODTestUrlViewController.h"
 
 static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 
