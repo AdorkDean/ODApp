@@ -211,7 +211,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
                                 @"price_show":[NSString
                                                stringWithFormat:@"%f", self.count],
                                 @"pay_type":@"2",
-                                @"shopcart_ids":@"1,2,3"
+                                @"shopcart_ids":self.shopcart_ids
                                 };
     [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:parameter modelClass:[NSObject class] success:^(id model) {
     } failure:^(NSError *error) {
