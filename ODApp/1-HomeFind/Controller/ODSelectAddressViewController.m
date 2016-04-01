@@ -20,6 +20,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 @property (nonatomic ,strong) AMapSearchAPI * mapSearchAPI;
 @property (nonatomic ,strong) MAUserLocation * currentLocation;
 @property (nonatomic ,strong) NSMutableDictionary * userLocationDict;
+
 @property (nonatomic ,strong) UISearchBar *searchBar;
 @property (nonatomic ,strong) UITextField *textField;
 @property (nonatomic ,strong) UITableView *tableView;
@@ -61,10 +62,14 @@ static NSString *cellId = @"ODSelectAddressCell";
     self.mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 300)];
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
-    self.mapView.customizeUserLocationAccuracyCircleRepresentation = YES;
-    self.mapView.userTrackingMode = MAUserTrackingModeFollow;
-    [self.mapView setUserTrackingMode: MAUserTrackingModeFollow animated:YES];
-    [self.mapView setZoomLevel:20 animated:YES];
+    self.mapView.showsCompass = NO;
+    self.mapView.showsScale = NO;
+    self.mapView.mapType = MAMapTypeStandard;
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tagGestureClick:)];
+    [self.mapView addGestureRecognizer:tapGesture];
+//    self.mapView.customizeUserLocationAccuracyCircleRepresentation = YES;
+    [self.mapView setUserTrackingMode: MAUserTrackingModeFollowWithHeading animated:YES];//地图跟着位置移动
+//    [self.mapView setZoomLevel:20 animated:YES];
     
     self.mapSearchAPI = [[AMapSearchAPI alloc] init];
     self.mapSearchAPI.delegate = self;
@@ -72,11 +77,12 @@ static NSString *cellId = @"ODSelectAddressCell";
     
 }
 
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     
     MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
-//    pointAnnotation.coordinate = CLLocationCoordinate2DMake(31.286952094415877, 121.50222749809993);
+    pointAnnotation.coordinate = CLLocationCoordinate2DMake(31.286952094415877, 121.50222749809993);
     [self.mapView addAnnotation:pointAnnotation];
 }
 
@@ -110,6 +116,11 @@ static NSString *cellId = @"ODSelectAddressCell";
 //    self.searchBar.delegate = self;
 //    self.searchBar.placeholder = @"请输入你的地址";
 //    self.navigationItem.titleView = self.searchBar;
+    
+    self.search = [ZHSearch search];
+    self.search.od_width = 200;
+    self.search.od_height = 30;
+    self.navigationItem.titleView = self.search;
 }
 
 #pragma mark - UITableViewDataSource
@@ -120,7 +131,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ODSelectAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    [cell showDataWithNSDictionary:self.dataArray[indexPath.row] index:indexPath];
+    [cell showDataWithAMapPOI:self.dataArray[indexPath.row] index:indexPath];
     return cell;
 }
 
@@ -130,7 +141,10 @@ static NSString *cellId = @"ODSelectAddressCell";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+    AMapPOI *poi = self.dataArray[indexPath.row];
+    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+    pointAnnotation.coordinate = CLLocationCoordinate2DMake(poi.location.longitude,poi.location.latitude );
+    [self.mapView addAnnotation:pointAnnotation];
 }
 
 
@@ -138,6 +152,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 //地图定位成功回调
 -(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
     if (updatingLocation) {
+        self.mapView.showsUserLocation = NO;
         [self.mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
         
         //构造AMapReGeocodeSearchRequest对象
@@ -168,11 +183,8 @@ static NSString *cellId = @"ODSelectAddressCell";
         return;
     }
     
-    for (AMapPOI *p in response.pois) {
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        [dict setObject:p.name forKey:@"name"];
-        [dict setObject:[NSString stringWithFormat:@"%@%@%@",p.city,p.district,p.address] forKey:@"detail"];
-        [self.dataArray addObject:dict];
+    for (AMapPOI *poi in response.pois) {
+        [self.dataArray addObject:poi];
     }
     [self.tableView reloadData];
 }
@@ -203,6 +215,16 @@ static NSString *cellId = @"ODSelectAddressCell";
     
 }
 
+-(void)tagGestureClick:(UITapGestureRecognizer *)gesture{
+    MAPointAnnotation *annotation = [[MAPointAnnotation alloc] init];
+    //把 这个 坐标 转化为 相对于地图的 真正经纬度
+    CGPoint point = [gesture locationInView:self.mapView];
+    annotation.coordinate = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
+  
+    //增加到地图上
+    [self.mapView addAnnotation:annotation];
+
+}
 
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MAMapKit/MAMapKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
 
 @interface ODSelectAddressCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
@@ -14,6 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailAddressLabel;
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 
--(void)showDataWithNSDictionary:(NSDictionary *)dict index:(NSIndexPath *)index;
+-(void)showDataWithAMapPOI:(AMapPOI *)poi index:(NSIndexPath *)index;
 
 @end
