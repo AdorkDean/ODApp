@@ -84,6 +84,7 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"order_no"] = self.model.out_trade_no;
     params[@"errCode"] = code;
+    params[@"type"] = self.tradeType;
     __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model)

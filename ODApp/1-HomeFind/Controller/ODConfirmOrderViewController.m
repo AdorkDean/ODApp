@@ -63,7 +63,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tradeType = @"1";
     self.navigationItem.title = @"确认订单";
     [self requestData];
 }
@@ -235,8 +235,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
                                 @"price_show":[NSString
                                                stringWithFormat:@"%f", self.count],
                                 @"pay_type":@"2",
-                                @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString],
-                                @"open_id":ODTestOpenId
+                                @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString]
                                 };
     __weakSelf
     [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:parameter modelClass:[ODTakeOutConfirmModel class] success:^(id model)

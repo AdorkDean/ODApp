@@ -10,6 +10,9 @@
 
 @interface ODPayController : ODBaseViewController
 
+/** 交易类型 */
+@property (nonatomic,copy) NSString *tradeType;
+
 
 @property(nonatomic, copy) NSString *payType;
 @property(nonatomic, copy) NSString *orderId;

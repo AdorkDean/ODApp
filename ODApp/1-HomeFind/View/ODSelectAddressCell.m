@@ -19,10 +19,12 @@
 -(void)showDataWithNSDictionary:(NSDictionary *)dict index:(NSIndexPath *)index{
     if (index.row == 0) {
         self.iconImageView.image = [UIImage imageNamed:@"icon_id"];
+        self.titleLabel.text = [NSString stringWithFormat:@"[当前]%@",dict[@"name"]];
+        
     }else{
         self.iconImageView.image = [UIImage imageNamed:@"icon_id_Unchecked"];
+        self.titleLabel.text = dict[@"name"];
     }
-    self.titleLabel.text = dict[@"name"];
     self.detailAddressLabel.text = dict[@"detail"];
 }
 
