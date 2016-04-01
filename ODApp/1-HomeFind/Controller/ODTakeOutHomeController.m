@@ -125,6 +125,13 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [UIView animateWithDuration:kAnimateDuration animations:^{
+        for (UIView *childView in [UIApplication sharedApplication].keyWindow.subviews)
+        {
+            if (childView == self. shopCart) [self.shopCart removeFromSuperview];
+        }
+    }];
 }
 
 #pragma mark - 初始化方法
@@ -350,6 +357,7 @@ static CGFloat priceResult = 0;
     priceResult = 0;
     [self.shops removeAllObjects];
     [self.shopCart.shopCartView reloadData];
+    self.shopCart.buyButton.enabled = NO;
 }
 
 - (void)plusShopCart:(NSNotification *)note

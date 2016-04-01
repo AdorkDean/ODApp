@@ -130,8 +130,12 @@ static CGFloat priceResult;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [UIView animateWithDuration:kAnimateDuration animations:^{
-        [self.shopCart removeFromSuperview];
+        for (UIView *childView in [UIApplication sharedApplication].keyWindow.subviews)
+        {
+            if (childView == self. shopCart) [self.shopCart removeFromSuperview];
+        }
     }];
+  
 }
 
 #pragma mark - 初始化方法
@@ -174,7 +178,6 @@ static CGFloat priceResult;
         }
     }
     self.shopCart.shops = dictM;
-    
     [self.shopCart.shopCartView reloadData];
     [user setObject:dictM forKey:@"shops"];
     [user setObject:@(result) forKey:@"result"];
@@ -193,6 +196,7 @@ static CGFloat priceResult;
     priceResult = 0;
     [self.shops removeAllObjects];
     [self.shopCart.shopCartView reloadData];
+    self.shopCart.buyButton.enabled = NO;
 }
 
 - (void)plusShopCart:(NSNotification *)note

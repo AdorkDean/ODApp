@@ -34,8 +34,6 @@ static CGFloat const shopCartCellH = 44;
 /** 蒙板 */
 @property (nonatomic, strong) UIView *coverView;
 
-/** 结算按钮 */
-@property (weak, nonatomic) IBOutlet UIButton *buyButton;
 
 @end
 
@@ -129,7 +127,7 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
 //    self.datasArray = [[self.datasArray reverseObjectEnumerator] allObjects];
     
     // 设置按钮状态
-    self.buyButton.enabled = [self.numberLabel.text integerValue];
+    self.buyButton.enabled = self.datasArray.count;
 }
 
 #pragma mark - UITableViewDataSource
