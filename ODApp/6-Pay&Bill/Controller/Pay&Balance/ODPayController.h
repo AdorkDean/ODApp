@@ -20,6 +20,9 @@
 @property(nonatomic, copy) NSString *price;
 @property(nonatomic, copy) NSString *swap_type;
 
+/** 成功参数 */
+@property (nonatomic,strong) NSDictionary *successParams;
+
 - (void)payAction:(UIButton *)sender;
 - (void)getWeiXinDataWithParam:(NSDictionary *)params;
 

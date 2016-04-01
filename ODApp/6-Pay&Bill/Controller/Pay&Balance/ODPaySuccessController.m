@@ -12,6 +12,7 @@
 #import "ODBazaarViewController.h"
 #import "ODCancelOrderView.h"
 #import "Masonry.h"
+#import "ODTakeAwayDetailController.h"
 
 #import "ODOrderAndSellDetailController.h"
 
@@ -83,18 +84,30 @@
 }
 
 
-- (void)PayAgain:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)PayAgain:(UIButton *)sender
+{
+    [self getWeiXinDataWithParam:self.params];
+
 }
 
 
 // 订单详情
-- (void)orderDetail:(UIButton *)sender {
-
-    ODOrderAndSellDetailController *vc = [[ODOrderAndSellDetailController alloc] init];
-            vc.order_id = [NSString stringWithFormat:@"%@", self.orderId];
-            [self.navigationController pushViewController:vc animated:YES];
-
+- (void)orderDetail:(UIButton *)sender
+{
+    if ([self.tradeType isEqualToString:@"1"])
+    {
+        ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc]init];
+        vc.order_id = [NSString stringWithFormat:@"%@", self.orderId];
+        vc.isOrderDetail = YES;
+        vc.takeAwayTitle = @"订单详情";
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else
+    {
+        ODOrderAndSellDetailController *vc = [[ODOrderAndSellDetailController alloc] init];
+        vc.order_id = [NSString stringWithFormat:@"%@", self.orderId];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 // 再去逛逛
@@ -111,12 +124,6 @@
     }
 
 
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
