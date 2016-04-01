@@ -35,6 +35,9 @@
                     <state key="normal" title="清空" image="icon_delete">
                         <color key="titleColor" red="0.69019607843137254" green="0.69019607843137254" blue="0.69019607843137254" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="clearButtonClick" destination="iN0-l3-epB" eventType="touchUpInside" id="iYC-Ul-c1D"/>
+                    </connections>
                 </button>
                 <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dt8-te-Tr6">
                     <rect key="frame" x="17" y="24" width="334" height="1"/>
