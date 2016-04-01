@@ -565,9 +565,10 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         [[self.bottomButtonView goodBtn] setTitle:[NSString stringWithFormat:@"赞 %zd", loveNum] forState:UIControlStateNormal];
         btn.enabled = YES;
     }
-                   failure:^(NSError *error) {
+                   failure:^(NSError *error)
+     {
                        btn.enabled = YES;
-                   }];
+     }];
 }
 
 - (void)report:(ODActivityDetailBtn *)btn {
