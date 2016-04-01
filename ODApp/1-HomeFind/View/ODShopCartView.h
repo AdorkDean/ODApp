@@ -16,12 +16,14 @@
 /** 数量 */
 @property (nonatomic, weak) IBOutlet UILabel *numberLabel;
 
+/** 数据 */
 @property (nonatomic, strong) NSMutableDictionary *shops;
 
-/** <#desc#> */
+/** 标题 */
 @property (nonatomic, copy) NSString *title;
 
-@property (nonatomic, assign, getter=isOpened) BOOL isOpened;
+/** 是否展开 */
+@property (nonatomic, assign, getter=isOpened) BOOL opened;
 
 /** 购物车列表 */
 @property (nonatomic, strong) UITableView *shopCartView;

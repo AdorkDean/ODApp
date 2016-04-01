@@ -15,4 +15,12 @@
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
 }
 
+- (IBAction)clearButtonClick
+{
+    if ([self.delegate respondsToSelector:@selector(shopCartHeaderViewDidClickClearButton:)])
+    {
+        [self.delegate shopCartHeaderViewDidClickClearButton:self];
+    }
+}
+
 @end

@@ -24,16 +24,19 @@
 #import "ODConfirmOrderViewController.h"
 #import <Masonry.h>
 
+
+// 循环cell标识
+static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
+
 @interface ODTakeOutHomeController () <UITableViewDataSource, UITableViewDelegate,
                                         ODTakeOutHeaderViewDelegate, ODTakeOutCellDelegate>
 
-/** scrollView */
-@property (nonatomic, weak) UIScrollView *scrollView;
 /** 表格 */
 @property (nonatomic, weak) UITableView *tableView;
 /** 头部控件 */
 @property (nonatomic, weak) ODTakeOutHeaderView *headerView;
 
+/** 购物车 */
 @property (nonatomic, weak) ODShopCartView *shopCart;
 
 /** 参数 */
@@ -52,22 +55,7 @@
 
 @implementation ODTakeOutHomeController
 
-- (ODTakeOutHeaderView *)headerView
-{
-    if (!_headerView)
-    {
-        ODTakeOutHeaderView *headerView = [[ODTakeOutHeaderView alloc] init];
-        [headerView sizeToFit];
-        headerView.od_width = KScreenWidth;
-        headerView.od_height = 163;
-        // 设置代理
-        headerView.delegate = self;
-//        [self.scrollView addSubview:headerView];
-        _headerView = headerView;
-    }
-    return _headerView;
-}
-
+#pragma mark - 懒加载
 - (NSMutableDictionary *)shops
 {
     if (!_shops) {
@@ -76,7 +64,6 @@
     return _shops;
 }
 
-#pragma mark - 懒加载
 - (NSMutableArray *)datas
 {
     if (_datas == nil) {
@@ -84,9 +71,6 @@
     }
     return _datas;
 }
-
-// 循环cell标识
-static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
@@ -110,7 +94,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:NSStringFromClass([self class])];
     
-    [UIView animateWithDuration:0.15 animations:^{
+    [UIView animateWithDuration:kAnimateDuration animations:^{
         [self.shopCart removeFromSuperview];
     }];
 }
@@ -119,99 +103,22 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 {
     [super viewDidLoad];
     
-    // 初始化scrollView
-//    [self setupScrollView];
-    
     // 初始化表格
     [self setupTableView];
     
     // 初始化headerView
-//    [self setupHeaderView];
+    [self setupHeaderView];
     
     // 加载广告页
     [self loadNewBanners];
     
+    // 加载数据
+    [self loadNewTakeOuts];
+    
     // 初始化刷新控件
     [self setupScrollViewRefresh];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusShopCart:) name:@"addNumber" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusShopCart:) name:@"minusNumber" object:nil];
-}
-
-- (void)plusShopCart:(NSNotification *)note
-{
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    ODShopCartListCell *cell = note.object;
-    NSInteger number = cell.takeOut.shopNumber;
-    
-    result = [[user objectForKey:@"result"] integerValue];
-    result += 1;
-    priceResult += cell.takeOut.price_show.floatValue;
-    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
-    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
-    
-    // 更新模型
-    NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
-    NSMutableDictionary *obj = [cacheShops objectForKey:cell.takeOut.title];
-    NSMutableDictionary *mutableItem = [NSMutableDictionary dictionaryWithDictionary:obj];
-    // 修改数量
-    [mutableItem setObject:@(number) forKey:@"shopNumber"];
-    
-    NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
-    for (NSString *key in cacheShops)
-    {
-        NSDictionary *dict = cacheShops[key];
-        if ([dict isEqual:obj]) {
-          [dictM setObject:mutableItem forKey:key];
-        } else {
-            [dictM setObject:dict forKey:key];
-        }
-    }
-    
-    [self.shopCart.shopCartView reloadData];
-    [user setObject:dictM forKey:@"shops"];
-    [user setObject:@(result) forKey:@"result"];
-    [user setObject:@(priceResult) forKey:@"priceResult"];
-    [user synchronize];
-}
-
-- (void)minusShopCart:(NSNotification *)note
-{
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    ODShopCartListCell *cell = note.object;
-    NSInteger number = cell.takeOut.shopNumber;
-
-    result = [[user objectForKey:@"result"] integerValue];
-    result -= 1;
-    if (!number) {
-        [self.shopCart.shops removeObjectForKey:cell.takeOut.title];
-        [user setObject:self.shopCart.shops forKey:@"shops"];
-    }
-    priceResult -= cell.takeOut.price_show.floatValue;
-    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
-    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
-    // 更新模型
-    NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
-    NSMutableDictionary *obj = [cacheShops objectForKey:cell.takeOut.title];
-    NSMutableDictionary *mutableItem = [NSMutableDictionary dictionaryWithDictionary:obj];
-    // 修改数量
-    [mutableItem setObject:@(number) forKey:@"shopNumber"];
-    
-    NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
-    for (NSString *key in cacheShops)
-    {
-        NSDictionary *dict = cacheShops[key];
-        if ([dict isEqual:obj]) {
-            [dictM setObject:mutableItem forKey:key];
-        } else {
-            [dictM setObject:dict forKey:key];
-        }
-    }
-    [self.shopCart.shopCartView reloadData];
-    [user setObject:dictM forKey:@"shops"];
-    [user setObject:@(result) forKey:@"result"];
-    [user setObject:@(priceResult) forKey:@"priceResult"];
-    [user synchronize];
+    [self addObserver];
 }
 
 - (void)dealloc
@@ -220,15 +127,14 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 }
 
 #pragma mark - 初始化方法
-/**
- *  初始化scrollView
- */
-- (void)setupScrollView
+
+
+- (void)addObserver
 {
-    UIScrollView *scrollView = [[UIScrollView alloc] init];
-    scrollView.frame = self.view.bounds;
-    [self.view addSubview:scrollView];
-    self.scrollView = scrollView;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusShopCart:) name:@"addNumber" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusShopCart:) name:@"minusNumber" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllDatas:) name:@"removeAll" object:nil];
 }
 
 /**
@@ -239,14 +145,11 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     self.navigationItem.title = @"订外卖";
     self.automaticallyAdjustsScrollViewInsets = NO;
     // 创建表格
-    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, KScreenHeight - 64)
-                                                          style:UITableViewStylePlain];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 163, KScreenWidth, KScreenHeight - 64 - 163 - 49) style:UITableViewStylePlain];
     tableView.dataSource = self;
     tableView.delegate = self;
-    tableView.bounces = YES;
     [self.view addSubview:tableView];
     self.tableView = tableView;
-//    tableView.contentInset = UIEdgeInsetsMake(163, 0, 0, 0);
     self.type = self.page = @1;
     
     // rowHeight
@@ -267,7 +170,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     headerView.od_width = KScreenWidth;
     // 设置代理
     headerView.delegate = self;
-    [self.scrollView addSubview:headerView];
+    [self.view addSubview:headerView];
     self.headerView = headerView;
 }
 
@@ -288,8 +191,8 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
  */
 - (void)setupScrollViewRefresh
 {
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewTakeOuts)];
-    [self.tableView.mj_header beginRefreshing];
+//    self.scrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewTakeOuts)];
+//    [self.scrollView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTakeOuts)];
     self.tableView.mj_footer.automaticallyHidden = YES;
 }
@@ -309,19 +212,9 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 }
 
 #pragma mark - UITableViewDelegate
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return self.headerView;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 163;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-    [self.tableView.mj_header endRefreshing];
+//    [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
     // 点击方法
     ODTakeOutModel *model = self.datas[indexPath.row];
@@ -403,20 +296,20 @@ static CGFloat priceResult = 0;
         NSArray *newDatas = [model result];
         [weakSelf.datas addObjectsFromArray:newDatas];
         [weakSelf.tableView reloadData];
-        [weakSelf.tableView.mj_header endRefreshing];
+//        [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf checkFooterState:newDatas.count];
         // 重新设置 page = 1
         weakSelf.page = @1;
     } failure:^(NSError *error) {
         if (weakSelf.params != params) return;
-        [weakSelf.tableView.mj_header endRefreshing];
+//        [weakSelf.tableView.mj_header endRefreshing];
     }];
 }
 
 - (void)loadMoreTakeOuts
 {
     // 结束下拉刷新
-    [self.tableView.mj_header endRefreshing];
+//    [self.tableView.mj_header endRefreshing];
     // 取出页码
     NSNumber *currentPage = @([self.page integerValue] + 1);
     // 拼接参数
@@ -450,6 +343,90 @@ static CGFloat priceResult = 0;
     } else { // 还没有加载完毕
         [self.tableView.mj_footer endRefreshing];
     }
+}
+
+
+- (void)removeAllDatas:(NSNotification *)note
+{
+    result = 0;
+    priceResult = 0;
+    [self.shops removeAllObjects];
+}
+
+- (void)plusShopCart:(NSNotification *)note
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    ODShopCartListCell *cell = note.object;
+    NSInteger number = cell.takeOut.shopNumber;
+    
+    result = [[user objectForKey:@"result"] integerValue];
+    result += 1;
+    priceResult += cell.takeOut.price_show.floatValue;
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+    
+    // 更新模型
+    NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
+    NSMutableDictionary *obj = [cacheShops objectForKey:cell.takeOut.title];
+    NSMutableDictionary *mutableItem = [NSMutableDictionary dictionaryWithDictionary:obj];
+    // 修改数量
+    [mutableItem setObject:@(number) forKey:@"shopNumber"];
+    
+    NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
+    for (NSString *key in cacheShops)
+    {
+        NSDictionary *dict = cacheShops[key];
+        if ([dict isEqual:obj]) {
+            [dictM setObject:mutableItem forKey:key];
+        } else {
+            [dictM setObject:dict forKey:key];
+        }
+    }
+    
+    [self.shopCart.shopCartView reloadData];
+    [user setObject:dictM forKey:@"shops"];
+    [user setObject:@(result) forKey:@"result"];
+    [user setObject:@(priceResult) forKey:@"priceResult"];
+    [user synchronize];
+}
+
+- (void)minusShopCart:(NSNotification *)note
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    ODShopCartListCell *cell = note.object;
+    NSInteger number = cell.takeOut.shopNumber;
+    
+    result = [[user objectForKey:@"result"] integerValue];
+    result -= 1;
+    if (!number) {
+        [self.shopCart.shops removeObjectForKey:cell.takeOut.title];
+        [user setObject:self.shopCart.shops forKey:@"shops"];
+    }
+    priceResult -= cell.takeOut.price_show.floatValue;
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+    // 更新模型
+    NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
+    NSMutableDictionary *obj = [cacheShops objectForKey:cell.takeOut.title];
+    NSMutableDictionary *mutableItem = [NSMutableDictionary dictionaryWithDictionary:obj];
+    // 修改数量
+    [mutableItem setObject:@(number) forKey:@"shopNumber"];
+    
+    NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
+    for (NSString *key in cacheShops)
+    {
+        NSDictionary *dict = cacheShops[key];
+        if ([dict isEqual:obj]) {
+            [dictM setObject:mutableItem forKey:key];
+        } else {
+            [dictM setObject:dict forKey:key];
+        }
+    }
+    [self.shopCart.shopCartView reloadData];
+    [user setObject:dictM forKey:@"shops"];
+    [user setObject:@(result) forKey:@"result"];
+    [user setObject:@(priceResult) forKey:@"priceResult"];
+    [user synchronize];
 }
 
 @end

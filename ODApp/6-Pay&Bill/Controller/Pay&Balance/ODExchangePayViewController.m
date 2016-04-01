@@ -37,6 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"支付订单";
+    [self getWeiXinData];
 }
 
 - (void)weixinPayAction:(UIButton *)sender {
