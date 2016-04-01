@@ -38,9 +38,10 @@
     [super viewDidLoad];
     self.navigationItem.title = @"支付订单";
     self.tradeType = @"0";
-    [self getWeiXinDataWithParam:@{
-                                 @"bbs_order_id":self.orderId
-                                   }];
+    self.successParams = @{
+                           @"bbs_order_id":self.orderId
+                           };
+    [self getWeiXinDataWithParam:self.successParams];
 }
 
 - (void)weixinPayAction:(UIButton *)sender {

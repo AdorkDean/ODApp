@@ -19,7 +19,7 @@
 #import "ODPayModel.h"
 @implementation PontoH5ToMobileRequest {
 }
-
+//Single_Implementation(PontoH5ToMobileRequest)
 
 + (id)instance {
     
@@ -77,8 +77,12 @@
         [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
         return;
     }
-    NSDictionary *parameter = @{ @"type" : @"1", @"takeout_order_id" : [NSString stringWithFormat:@"%@", paramsId] };
-    [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:parameter modelClass:[ODPayModel class] success:^(id model) {
+    self.successParam = @{
+                          @"type" : @"1",
+                          @"takeout_order_id" : [NSString stringWithFormat:@"%@", paramsId]
+                          };
+    
+    [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:self.successParam modelClass:[ODPayModel class] success:^(id model) {
         
         ODPayModel *payModel = [model result];
         [self payMoneyGiveWeiXin:payModel];

@@ -8,6 +8,8 @@
 #define MAS_SHORTHAND
 #define MAS_SHORTHAND_GLOBALS
 
+#import "PontoH5ToMobileRequest.h"
+#import "ODPaySuccessController.h"
 #import "ODTakeAwayDetailController.h"
 #import "ODShopCartListCell.h"
 #import "ODTakeOutModel.h"
@@ -21,6 +23,7 @@
 
 @interface ODTakeAwayDetailController ()
 @property (nonatomic, strong) PontoDispatcher *pontoDispatcher;
+@property(nonatomic, copy) NSString *isPay;
 
 @property (nonatomic, weak) ODShopCartView *shopCart;
 @end
@@ -80,7 +83,7 @@ static CGFloat priceResult = 0;
     // 商品总数量
 //    result += 1;
     // 计算数量
-    shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
+    shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)result];
     shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
     
     // 读取缓存的shopNumber
@@ -113,6 +116,11 @@ static CGFloat priceResult = 0;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusShopCart:) name:ODNotificationShopCartAddNumber object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusShopCart:) name:ODNotificationShopCartminusNumber object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllDatas:) name:ODNotificationShopCartRemoveALL object:nil];
+    if ([self.takeAwayTitle isEqualToString:@"订单详情"])
+    {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay:) name:ODNotificationPaySuccess object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
+    }
 }
 
 - (void)removeAllDatas:(NSNotification *)note
@@ -131,7 +139,7 @@ static CGFloat priceResult = 0;
     result = [[user objectForKey:@"result"] integerValue];
     result += 1;
     priceResult += cell.takeOut.price_show.floatValue;
-    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)result];
     self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
     
     // 更新模型
@@ -172,7 +180,7 @@ static CGFloat priceResult = 0;
         [user setObject:self.shopCart.shops forKey:@"shops"];
     }
     priceResult -= cell.takeOut.price_show.floatValue;
-    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%zd", (long)result];
     self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
     // 更新模型
     NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
@@ -197,4 +205,47 @@ static CGFloat priceResult = 0;
     [user setObject:@(priceResult) forKey:@"priceResult"];
     [user synchronize];
 }
+
+- (void)getDatawithCode:(NSString *)code {
+    // 拼接参数
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    params[@"order_no"] = self.model.out_trade_no;
+    params[@"errCode"] = code;
+    params[@"type"] = @"1";
+    __weakSelf
+    // 发送请求
+    [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model)
+     {
+         for (UIViewController *vc in weakSelf.navigationController.childViewControllers)
+         {
+             if ([vc isKindOfClass:[ODPaySuccessController class]])
+             {
+                 return ;
+             }
+         }
+         ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
+//         vc.swap_type = weakSelf.swap_type;
+         vc.payStatus = weakSelf.isPay;
+//         vc.orderId = weakSelf.orderId;
+//         vc.params = [PontoH5ToMobileRequest ].;
+         vc.tradeType = @"1";
+         [weakSelf.navigationController pushViewController:vc animated:YES];
+     } failure:^(NSError *error) {
+         [weakSelf.navigationController popViewControllerAnimated:YES];
+     }];
+}
+
+#pragma mark - 事件方法
+- (void)failPay:(NSNotification *)text {
+    NSString *code = text.userInfo[@"codeStatus"];
+    self.isPay = @"2";
+    [self getDatawithCode:code];
+}
+
+- (void)successPay:(NSNotification *)text {
+    NSString *code = text.userInfo[@"codeStatus"];
+    self.isPay = @"1";
+    [self getDatawithCode:code];
+}
+
 @end
