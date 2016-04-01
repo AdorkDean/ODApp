@@ -11,10 +11,13 @@
 @interface ODPayController : ODBaseViewController
 
 
+@property(nonatomic, copy) NSString *payType;
 @property(nonatomic, copy) NSString *orderId;
 @property(nonatomic, copy) NSString *OrderTitle;
 @property(nonatomic, copy) NSString *price;
 @property(nonatomic, copy) NSString *swap_type;
 
+- (void)payAction:(UIButton *)sender;
+- (void)getWeiXinData;
 
 @end

@@ -8,7 +8,6 @@
 
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODPayController.h"
-#import "ODPayView.h"
 #import "ODPaySuccessController.h"
 #import "ODPayModel.h"
 #import "WXApi.h"
@@ -22,8 +21,6 @@
 
 @property(nonatomic, strong) UILabel *orderNameLabel;
 @property(nonatomic, strong) UILabel *priceLabel;
-@property(nonatomic, strong) ODPayView *payView;
-@property(nonatomic, copy) NSString *payType;
 @property(nonatomic, strong) ODPayModel *model;
 @property(nonatomic, copy) NSString *isPay;
 @property(nonatomic, assign) int navHasSelfClass;
@@ -32,23 +29,6 @@
 
 @implementation ODPayController
 
-#pragma mark - 懒加载
-- (ODPayView *)payView {
-    if (_payView == nil) {
-        self.payView = [ODPayView getView];
-        self.payView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
-                
-        [self.payView.weixinPaybutton addTarget:self action:@selector(weixinPayAction:) forControlEvents:UIControlEventTouchUpInside];
-        [self.payView.treasurePayButton addTarget:self action:@selector(treasurePayAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        self.payView.orderNameLabel.text = self.OrderTitle;
-        self.payView.priceLabel.text = [NSString stringWithFormat:@"%.2f元", [self.price floatValue]];
-        self.payView.priceLabel.textColor = [UIColor redColor];
-        self.payView.orderPriceLabel.text = [NSString stringWithFormat:@"%.2f元", [self.price floatValue]];
-        [self.payView.payButton addTarget:self action:@selector(payAction:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    return _payView;
-}
 
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
@@ -63,13 +43,10 @@
     [super viewDidLoad];
 
     self.payType = @"1";
-    self.navigationItem.title = @"支付订单";
-    [self.view addSubview:self.payView];
-    [self getData];
     
     self.navHasSelfClass = 0;
     for (UIViewController *vc in self.navigationController.viewControllers) {
-        if ([vc class] == [ODPayController class]) {
+        if ([vc isKindOfClass:[ODPayController class]]) {
             self.navHasSelfClass += 1;
         }
     }
@@ -88,25 +65,27 @@
 }
 
 #pragma mark - 获取数据
-- (void)getData {
+- (void)getWeiXinData {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"bbs_order_id"] = self.orderId;
-    params[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
     __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:params modelClass:[ODPayModel class] success:^(id model)
      {
          weakSelf.model = [model result];
-     } failure:^(NSError *error) {
+         [weakSelf payMoney];
+     }
+                   failure:^(NSError *error)
+    {
      }];
 }
+
 - (void)getDatawithCode:(NSString *)code {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"order_no"] = self.model.out_trade_no;
     params[@"errCode"] = code;
-    params[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
     __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model)
@@ -118,7 +97,7 @@
 
          [weakSelf.navigationController pushViewController:vc animated:YES];
      } failure:^(NSError *error) {
-         
+         [weakSelf.navigationController popViewControllerAnimated:YES]; 
      }];
 }
 
@@ -169,20 +148,6 @@
     request.sign = self.model.sign;
 
     [WXApi sendReq:request];
-}
-
-- (void)weixinPayAction:(UIButton *)sender {
-    self.payType = @"1";
-
-    [self.payView.weixinPaybutton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
-    [self.payView.treasurePayButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
-}
-
-- (void)treasurePayAction:(UIButton *)sender {
-    self.payType = @"2";
-
-    [self.payView.treasurePayButton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
-    [self.payView.weixinPaybutton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
 }
 
 

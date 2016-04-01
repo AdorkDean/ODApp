@@ -6,9 +6,9 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODBaseViewController.h"
+#import "ODPayController.h"
 
-@interface ODConfirmOrderViewController : ODBaseViewController
+@interface ODConfirmOrderViewController : ODPayController
 
 @property (nonatomic, strong) NSArray *datas;
 

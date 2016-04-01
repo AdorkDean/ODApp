@@ -11,7 +11,6 @@
 #import "ODConfirmOrderCell.h"
 #import "ODAddAddressController.h"
 
-#import "ODPayModel.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
 
@@ -26,8 +25,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)UIView *tableHeaderView;
-@property(nonatomic,strong)ODConfirmOrderModel *model;
-@property (nonatomic, strong) ODPayModel *payModel;
+@property(nonatomic,strong)ODConfirmOrderModel *orderModel;
 @property (nonatomic, strong) ODTakeOutConfirmModel *confirmModel;
 @property(nonatomic)CGFloat count;
 
@@ -62,7 +60,6 @@ static NSString *cellId = @"ODConfirmOrderCell";
     
     self.navigationItem.title = @"确认订单";
     [self requestData];
-   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,15 +77,15 @@ static NSString *cellId = @"ODConfirmOrderCell";
     [self.tableHeaderView addSubview:infoView];
     
     UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, 17, 100, 20)];
-    nameLabel.text = [self.model.address valueForKeyPath:@"name"];
+    nameLabel.text = [self.orderModel.address valueForKeyPath:@"name"];
     nameLabel.font = [UIFont systemFontOfSize:13.5];
     
     UILabel *numLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(nameLabel.frame)+15, 17, 150, 20)];
-    numLabel.text = [self.model.address valueForKeyPath:@"tel"];
+    numLabel.text = [self.orderModel.address valueForKeyPath:@"tel"];
     numLabel.font = [UIFont systemFontOfSize:13.5];
     
     UILabel *addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, CGRectGetMaxY(nameLabel.frame)+7.5, kScreenSize.width-60, 15)];
-    addressLabel.text = [self.model.address valueForKeyPath:@"address"];
+    addressLabel.text = [self.orderModel.address valueForKeyPath:@"address"];
     addressLabel.textColor = [UIColor colorGreyColor];
     addressLabel.font = [UIFont systemFontOfSize:11];
     
@@ -179,8 +176,8 @@ static NSString *cellId = @"ODConfirmOrderCell";
     __weakSelf;
     NSDictionary *parametr = @{@"shopcart_json" : self.datas.od_URLDesc};
     [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parametr modelClass:[ODConfirmOrderModel class] success:^(ODConfirmOrderModelResponse * model) {
-        weakSelf.model = [model result];
-        [weakSelf.dataArray addObjectsFromArray:weakSelf.model.shopcart_list];
+        weakSelf.orderModel = [model result];
+        [weakSelf.dataArray addObjectsFromArray:weakSelf.orderModel.shopcart_list];
         [weakSelf createTableHeaderView];
         [weakSelf createBottomView];
         [weakSelf.tableView reloadData];
@@ -216,6 +213,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     
 }
 
+
 -(void)buttonClick:(UIButton *)button{
     if (![WXApi isWXAppInstalled])
     {
@@ -228,44 +226,19 @@ static NSString *cellId = @"ODConfirmOrderCell";
                                                stringWithFormat:@"%f", self.count],
                                 @"pay_type":@"2",
                                 @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString],
-//                                @"open_id":@"766148455eed214ed1f8"
+                                @"open_id":ODTestOpenId
                                 };
     __weakSelf
     [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:parameter modelClass:[ODTakeOutConfirmModel class] success:^(id model)
      {
          weakSelf.confirmModel = [model result];
+         weakSelf.orderId = weakSelf.confirmModel.order_id;
          [weakSelf getWeiXinData];
      }
                    failure:^(NSError *error)
      {
         
     }];
-}
-
-- (void)getWeiXinData {
-    NSDictionary *parameter = @{ @"type" : @"1", @"takeout_order_id" : self.confirmModel.order_id };
-    __weakSelf
-    [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:parameter modelClass:[ODPayModel class] success:^(id model) {
-       
-        weakSelf.payModel = [model result];
-        [weakSelf payMoneyGiveWeiXin];
-        
-    } failure:^(NSError *error) {
-        
-    }];
-}
-
-- (void)payMoneyGiveWeiXin {
-    PayReq *request = [[PayReq alloc] init];
-    
-    request.partnerId = self.payModel.partnerid;
-    request.prepayId = self.payModel.prepay_id;
-    request.package = self.payModel.package;
-    request.nonceStr = self.payModel.nonce_str;
-    request.timeStamp = self.payModel.timeStamp;
-    request.sign = self.payModel.sign;
-    
-    [WXApi sendReq:request];
 }
 
 @end

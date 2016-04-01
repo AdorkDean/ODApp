@@ -13,7 +13,7 @@
 #import "UIImageView+WebCache.h"
 #import "ODOrderThirdHeadView.h"
 #import "ODOrderAddressModel.h"
-#import "ODPayController.h"
+#import "ODExchangePayViewController.h"
 #import "TimeButton.h"
 #import "DataButton.h"
 #import "ODOrderDataModel.h"
@@ -146,7 +146,7 @@
     [ODHttpTool getWithURL:ODUrlSwapOrder parameters:params modelClass:[ODSaveOrderModel class] success:^(id model)
      {
          ODSaveOrderModel *orderModel = [model result];
-         ODPayController *vc = [[ODPayController alloc] init];
+         ODExchangePayViewController *vc = [[ODExchangePayViewController alloc] init];
          vc.OrderTitle = weakSelf.informationModel.title;
          // 获取 order_id
          vc.orderId = [orderModel order_id];

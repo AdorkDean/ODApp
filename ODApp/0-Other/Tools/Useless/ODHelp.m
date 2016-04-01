@@ -68,7 +68,7 @@
     else
     {
         //返回计算出的行高
-        return rect.size.height + 10;
+        return rect.size.height + 12;
     }
 }
 

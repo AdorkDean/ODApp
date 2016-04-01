@@ -243,6 +243,7 @@
 		23B22B331C9A597600AB11ED /* ODPublicWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23B22B321C9A597600AB11ED /* ODPublicWebViewController.m */; };
 		23EBA2301CAE1875009D32C6 /* ODConfirmOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EBA22E1CAE1875009D32C6 /* ODConfirmOrderCell.m */; };
 		23EBA2311CAE1875009D32C6 /* ODConfirmOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23EBA22F1CAE1875009D32C6 /* ODConfirmOrderCell.xib */; };
+		23EBA2341CAE6D25009D32C6 /* ODExchangePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EBA2331CAE6D25009D32C6 /* ODExchangePayViewController.m */; };
 		400334851C9B97C500973818 /* ODBaseSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4003346F1C9B97C500973818 /* ODBaseSettingController.m */; };
 		400334861C9B97C500973818 /* ODPersonalCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 400334711C9B97C500973818 /* ODPersonalCenterController.m */; };
 		400334871C9B97C500973818 /* ODArrowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 400334741C9B97C500973818 /* ODArrowItem.m */; };
@@ -723,15 +724,15 @@
 		232CB4F51C9264E200340D12 /* ODMyOrderRecordController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ODMyOrderRecordController.h; path = "../../../6-Pay&Bill/Controller/Order/ODMyOrderRecordController.h"; sourceTree = "<group>"; };
 		232CB4F61C9264E200340D12 /* ODMyOrderRecordController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ODMyOrderRecordController.m; path = "../../../6-Pay&Bill/Controller/Order/ODMyOrderRecordController.m"; sourceTree = "<group>"; };
 		232CB4FB1C9264E200340D12 /* ODOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderController.h; sourceTree = "<group>"; };
-		232CB4FC1C9264E200340D12 /* ODOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderController.m; sourceTree = "<group>"; };
+		232CB4FC1C9264E200340D12 /* ODOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODOrderController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		232CB4FD1C9264E200340D12 /* ODSecondOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSecondOrderController.h; sourceTree = "<group>"; };
-		232CB4FE1C9264E200340D12 /* ODSecondOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSecondOrderController.m; sourceTree = "<group>"; };
+		232CB4FE1C9264E200340D12 /* ODSecondOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODSecondOrderController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		232CB4FF1C9264E200340D12 /* ODThirdOrderController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODThirdOrderController.h; sourceTree = "<group>"; };
-		232CB5001C9264E200340D12 /* ODThirdOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODThirdOrderController.m; sourceTree = "<group>"; };
+		232CB5001C9264E200340D12 /* ODThirdOrderController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODThirdOrderController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		232CB5021C9264E200340D12 /* ODBalanceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBalanceController.h; sourceTree = "<group>"; };
 		232CB5031C9264E200340D12 /* ODBalanceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBalanceController.m; sourceTree = "<group>"; };
-		232CB5041C9264E200340D12 /* ODPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPayController.h; sourceTree = "<group>"; };
-		232CB5051C9264E200340D12 /* ODPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPayController.m; sourceTree = "<group>"; };
+		232CB5041C9264E200340D12 /* ODPayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ODPayController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		232CB5051C9264E200340D12 /* ODPayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODPayController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		232CB5061C9264E200340D12 /* ODPaySuccessController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPaySuccessController.h; sourceTree = "<group>"; };
 		232CB5071C9264E200340D12 /* ODPaySuccessController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODPaySuccessController.m; sourceTree = "<group>"; };
 		232CB5081C9264E200340D12 /* ODWithdrawalController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODWithdrawalController.h; sourceTree = "<group>"; };
@@ -805,6 +806,8 @@
 		23EBA22D1CAE1875009D32C6 /* ODConfirmOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderCell.h; sourceTree = "<group>"; };
 		23EBA22E1CAE1875009D32C6 /* ODConfirmOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderCell.m; sourceTree = "<group>"; };
 		23EBA22F1CAE1875009D32C6 /* ODConfirmOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODConfirmOrderCell.xib; sourceTree = "<group>"; };
+		23EBA2321CAE6D25009D32C6 /* ODExchangePayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ODExchangePayViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		23EBA2331CAE6D25009D32C6 /* ODExchangePayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODExchangePayViewController.m; sourceTree = "<group>"; };
 		4003346E1C9B97C500973818 /* ODBaseSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBaseSettingController.h; sourceTree = "<group>"; };
 		4003346F1C9B97C500973818 /* ODBaseSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBaseSettingController.m; sourceTree = "<group>"; };
 		400334701C9B97C500973818 /* ODPersonalCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPersonalCenterController.h; sourceTree = "<group>"; };
@@ -837,7 +840,7 @@
 		400F18571CA93288000EFFBC /* ODBuyTakeOutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBuyTakeOutViewController.h; sourceTree = "<group>"; };
 		400F18581CA93288000EFFBC /* ODBuyTakeOutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBuyTakeOutViewController.m; sourceTree = "<group>"; };
 		402261331CA5051200E0B737 /* ODMyTakeOutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyTakeOutViewController.h; sourceTree = "<group>"; };
-		402261341CA5051200E0B737 /* ODMyTakeOutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyTakeOutViewController.m; sourceTree = "<group>"; };
+		402261341CA5051200E0B737 /* ODMyTakeOutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODMyTakeOutViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4029EB331C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarReleaseSkillTimeModel.h; sourceTree = "<group>"; };
 		4029EB341C926FE8001FF46F /* ODBazaarReleaseSkillTimeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarReleaseSkillTimeModel.m; sourceTree = "<group>"; };
 		40336B331CA53B77002487F2 /* ODMyTakeOutModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyTakeOutModel.h; sourceTree = "<group>"; };
@@ -920,7 +923,7 @@
 		ED3D47851C9BEB44008B5A0F /* ODMyOrderRecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyOrderRecordView.h; sourceTree = "<group>"; };
 		ED3D47861C9BEB44008B5A0F /* ODMyOrderRecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyOrderRecordView.m; sourceTree = "<group>"; };
 		ED3D47871C9BEB44008B5A0F /* ODMyOrderRecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyOrderRecordView.xib; sourceTree = "<group>"; };
-		ED3FDCDC1CAD4C4D0059692B /* ODConfirmOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderViewController.h; sourceTree = "<group>"; };
+		ED3FDCDC1CAD4C4D0059692B /* ODConfirmOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ODConfirmOrderViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		ED3FDCDD1CAD4C4D0059692B /* ODConfirmOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderViewController.m; sourceTree = "<group>"; };
 		ED3FDCDE1CAD4C4D0059692B /* ODTestUrlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTestUrlViewController.h; sourceTree = "<group>"; };
 		ED3FDCDF1CAD4C4D0059692B /* ODTestUrlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTestUrlViewController.m; sourceTree = "<group>"; };
@@ -936,7 +939,7 @@
 		ED4688111C96905F00E31F64 /* ODApplyListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODApplyListCell.m; sourceTree = "<group>"; };
 		ED4688121C96905F00E31F64 /* ODApplyListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODApplyListCell.xib; sourceTree = "<group>"; };
 		ED46881A1C96AD9500E31F64 /* ODOrderAndSellDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderAndSellDetailController.h; sourceTree = "<group>"; };
-		ED46881B1C96AD9500E31F64 /* ODOrderAndSellDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderAndSellDetailController.m; sourceTree = "<group>"; };
+		ED46881B1C96AD9500E31F64 /* ODOrderAndSellDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ODOrderAndSellDetailController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		ED4917B61C9944FE001E549A /* ODReleaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODReleaseView.h; sourceTree = "<group>"; };
 		ED4917B71C9944FE001E549A /* ODReleaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODReleaseView.m; sourceTree = "<group>"; };
 		ED4917B81C9944FE001E549A /* ODReleaseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODReleaseView.xib; sourceTree = "<group>"; };
@@ -1931,6 +1934,8 @@
 				232CB5031C9264E200340D12 /* ODBalanceController.m */,
 				232CB5041C9264E200340D12 /* ODPayController.h */,
 				232CB5051C9264E200340D12 /* ODPayController.m */,
+				23EBA2321CAE6D25009D32C6 /* ODExchangePayViewController.h */,
+				23EBA2331CAE6D25009D32C6 /* ODExchangePayViewController.m */,
 				232CB5061C9264E200340D12 /* ODPaySuccessController.h */,
 				232CB5071C9264E200340D12 /* ODPaySuccessController.m */,
 				232CB5081C9264E200340D12 /* ODWithdrawalController.h */,
@@ -2580,6 +2585,7 @@
 				232CB5651C9264E200340D12 /* IQUITextFieldView+Additions.m in Sources */,
 				232CB6461C9264E200340D12 /* ODWithdrawalDetailController.m in Sources */,
 				232CB5741C9264E200340D12 /* UITableViewRowAction+JZExtension.m in Sources */,
+				23EBA2341CAE6D25009D32C6 /* ODExchangePayViewController.m in Sources */,
 				232CB5681C9264E200340D12 /* IQUIWindow+Hierarchy.m in Sources */,
 				232CB5541C9264E200340D12 /* NSArray+ODExtension.m in Sources */,
 				232CB5FD1C9264E200340D12 /* ODDrawbackController.m in Sources */,
