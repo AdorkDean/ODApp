@@ -12,7 +12,7 @@
 
 #import "ODOrderAndSellDetailController.h"
 #import "ODDrawbackController.h"
-#import "ODPayController.h"
+#import "ODExchangePayViewController.h"
 
 #import "ODOrderDetailModel.h"
 
@@ -655,7 +655,7 @@ static CGFloat labelHeight = 40;
 
 #pragma mark - 支付订单
 - (void)payOrder:(UIButton *)sender {
-    ODPayController *vc = [[ODPayController alloc] init];
+    ODExchangePayViewController *vc = [[ODExchangePayViewController alloc] init];
     ODOrderDetailModel *model = self.dataArray[0];
     vc.orderId = [NSString stringWithFormat:@"%@", model.order_id];
     vc.OrderTitle = model.title;

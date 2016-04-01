@@ -13,7 +13,7 @@
 #import "ODMyTakeOutModel.h"
 #import "ODTakeOutView.h"
 #import "ODTakeAwayDetailController.h"
-#import "ODPayController.h"
+#import "ODExchangePayViewController.h"
 #import "ODConfirmOrderViewController.h"
 
 @interface ODMyTakeOutViewController () <UITableViewDataSource, UITableViewDelegate>
