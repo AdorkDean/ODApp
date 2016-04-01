@@ -42,4 +42,10 @@ typedef NS_ENUM(NSUInteger, ODTakeOutStatus)
 /** 送货时间 */
 @property (nonatomic, copy) NSString *store_sendtime;
 
+/** 点击商品次数 */
+@property (nonatomic, assign) NSInteger shopNumber;
+
+/** 总价格 */
+@property (nonatomic, assign) CGFloat totalPrice;
+
 @end
