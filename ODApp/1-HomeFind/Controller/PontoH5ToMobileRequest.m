@@ -78,11 +78,10 @@
         return;
     }
     NSDictionary *parameter = @{ @"type" : @"1", @"takeout_order_id" : [NSString stringWithFormat:@"%@", paramsId] };
-    __weakSelf
     [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:parameter modelClass:[ODPayModel class] success:^(id model) {
         
         ODPayModel *payModel = [model result];
-        [weakSelf payMoneyGiveWeiXin:payModel];
+        [self payMoneyGiveWeiXin:payModel];
         
     } failure:^(NSError *error) {
         
