@@ -97,7 +97,7 @@ NSString * const ODWebUrlExpect = @"http://h5.odong.com/woqu/expect";
 NSString * const ODWebUrlMapSearch = @"http://h5.odong.com/map/search";
 
 NSString * const ODWebUrlNative = @"http://h5.test.odong.com/native/order";
-NSString * const ODWebUrlNativeCart = @"http://h5.test.odong.com/native/cart?";
+NSString * const ODWebUrlNativeOrderInfo = @"http://h5.test.odong.com/native/order/info?";
 
 /** 统一的URL */
 #ifdef DEBUG

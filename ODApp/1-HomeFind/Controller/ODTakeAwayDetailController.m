@@ -29,9 +29,9 @@
     [self createWebView];
     self.pontoDispatcher = [[PontoDispatcher alloc] initWithHandlerClassesPrefix:@"Ponto" andWebView:self.webView];
     
-    if (self.isCart) {
-        NSString *urlString = [[ODHttpTool getRequestParameter:@{@"open_id":@"766148455eed214ed1f8"}]od_URLDesc];
-        NSString *url = [ODWebUrlNativeCart stringByAppendingString:urlString];
+    if (self.isOrderDetail) {
+        NSString *urlString = [[ODHttpTool getRequestParameter:@{@"open_id" : @"766148455eed214ed1f8", @"order_id" : self.order_id}]od_URLDesc];
+        NSString *url = [ODWebUrlNativeOrderInfo stringByAppendingString:urlString];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL OD_URLWithString:url]]];
     }
     else {
