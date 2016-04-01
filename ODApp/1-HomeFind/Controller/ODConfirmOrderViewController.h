@@ -10,4 +10,6 @@
 
 @interface ODConfirmOrderViewController : ODBaseViewController
 
+@property (nonatomic, strong) NSArray *datas;
+
 @end
