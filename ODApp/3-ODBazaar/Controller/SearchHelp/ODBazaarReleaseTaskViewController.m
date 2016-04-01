@@ -25,30 +25,6 @@
     return _scrollView;
 }
 
--(UIDatePicker *)datePicker{
-    if (!_datePicker) {
-        _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width - 8, 150)];
-        [self.backPickerView addSubview:_datePicker];
-        NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
-        _datePicker.locale = locale;
-        [self.backPickerView addSubview:_datePicker];
-        UIButton *cancelPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 150, kScreenSize.width / 2 - 4, 50) target:self sel:@selector(cancelPickerButtonClick:) tag:0 image:nil title:@"取消" font:16];
-        [self.backPickerView addSubview:cancelPickerButton];
-        UIButton *confirmPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width / 2 - 4, 150, kScreenSize.width / 2 - 4, 50) target:self sel:@selector(confirmPickerButtonClick:) tag:0 image:nil title:@"确认" font:16];
-        [self.backPickerView addSubview:confirmPickerButton];
-    }
-    return _datePicker;
-}
-
--(UIView *)backPickerView{
-    if (!_backPickerView) {
-        _backPickerView = [[UIView alloc]initWithFrame:CGRectMake(4, kScreenSize.height - 200 - 64, kScreenSize.width - 8, 200)];
-        _backPickerView.backgroundColor = [UIColor backgroundColor];
-        [self.view addSubview:_backPickerView];
-    }
-    return _backPickerView;
-}
-
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -124,7 +100,7 @@
     NSString *endTimeString = [endTimeFormatter stringFromDate:endDate];
 
     //开始日期label
-    UITapGestureRecognizer *startDateGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dateGestureClick)];
+    UITapGestureRecognizer *startDateGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startDateGestureClick)];
     UIView *startDateView = [ODClassMethod creatViewWithFrame:CGRectMake(8 + 3.5 * width, 148, 5 * width, 30.5) tag:0 color:@"#ffffff"];
     [startDateView addGestureRecognizer:startDateGesture];
     startDateView.layer.masksToBounds = YES;
@@ -142,7 +118,7 @@
     [startDateView addSubview:startDateImageView];
 
     //结束日期label
-    UITapGestureRecognizer *endDateGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dateGestureClick)];
+    UITapGestureRecognizer *endDateGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endDateGestureClick)];
     UIView *endDateView = [ODClassMethod creatViewWithFrame:CGRectMake(8 + 3.5 * width, 182.5, 5 * width, 30.5) tag:0 color:@"#ffffff"];
     [endDateView addGestureRecognizer:endDateGesture];
     endDateView.layer.masksToBounds = YES;
@@ -160,7 +136,7 @@
     [endDateView addSubview:endDateImageView];
 
     //开始时间label
-    UITapGestureRecognizer *startTimeGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeGestureClick)];
+    UITapGestureRecognizer *startTimeGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(startTimeGestureClick)];
     UIView *startTimeView = [ODClassMethod creatViewWithFrame:CGRectMake(12 + 8.5 * width, 148, 3.5 * width, 30.5) tag:0 color:@"#ffffff"];
     [startTimeView addGestureRecognizer:startTimeGesture];
     startTimeView.layer.masksToBounds = YES;
@@ -178,7 +154,7 @@
 
 
     //结束时间label
-    UITapGestureRecognizer *endTimeGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(timeGestureClick)];
+    UITapGestureRecognizer *endTimeGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(endTimeGestureClick)];
     UIView *endTimeView = [ODClassMethod creatViewWithFrame:CGRectMake(12 + 8.5 * width, 182.5, 3.5 * width, 30.5) tag:0 color:@"#ffffff"];
     [endTimeView addGestureRecognizer:endTimeGesture];
     endTimeView.layer.masksToBounds = YES;
@@ -195,21 +171,43 @@
     [endTimeView addSubview:endTimeImageView];
 }
 
-- (void)dateGestureClick {
+
+- (void)startTimeGestureClick {
     [self.titleTextView resignFirstResponder];
     [self.taskDetailTextView resignFirstResponder];
-    self.backPickerView.hidden = NO;
-    self.datePicker.datePickerMode = UIDatePickerModeDate;
-    self.type = @"date";
+    [self.backPickerView removeFromSuperview];
+    [self setUpDatePickerView];
+    self.datePicker.datePickerMode = UIDatePickerModeTime;
+    self.type = @"startTime";
 }
 
-- (void)timeGestureClick {
+- (void)endTimeGestureClick {
     [self.titleTextView resignFirstResponder];
     [self.taskDetailTextView resignFirstResponder];
-    self.backPickerView.hidden = NO;
+    [self.backPickerView removeFromSuperview];
+    [self setUpDatePickerView];
     self.datePicker.datePickerMode = UIDatePickerModeTime;
-    self.type = @"time";
+    self.type = @"endTime";
 }
+
+- (void)startDateGestureClick {
+    [self.titleTextView resignFirstResponder];
+    [self.taskDetailTextView resignFirstResponder];
+    [self.backPickerView removeFromSuperview];
+    [self setUpDatePickerView];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    self.type = @"startDate";
+}
+
+- (void)endDateGestureClick {
+    [self.titleTextView resignFirstResponder];
+    [self.taskDetailTextView resignFirstResponder];
+    [self.backPickerView removeFromSuperview];
+    [self setUpDatePickerView];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    self.type = @"endDate";
+}
+
 
 //时间格式
 - (NSString *)timeFormatDate:(BOOL)isDate {
@@ -223,6 +221,27 @@
     NSString *currentOlderOneDateStr = [dateFormatter stringFromDate:selected];
     return currentOlderOneDateStr;
 }
+
+#pragma mark - 初始化datePickerView
+
+- (void)setUpDatePickerView {
+    self.backPickerView = [ODClassMethod creatViewWithFrame:CGRectMake(4, kScreenSize.height - 200 - 64, kScreenSize.width - 8, 200) tag:0 color:@"f3f3f3"];
+    [self.view addSubview:self.backPickerView];
+    
+    //显示中文
+    self.datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width - 8, 150)];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    self.datePicker.locale = locale;
+    //只能选择大于当前时间的日期
+    //    [self.datePicker setMinimumDate:[NSDate date]];
+    [self.backPickerView addSubview:self.datePicker];
+    
+    UIButton *cancelPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 150, kScreenSize.width / 2 - 4, 50) target:self sel:@selector(cancelPickerButtonClick:) tag:0 image:nil title:@"取消" font:16];
+    [self.backPickerView addSubview:cancelPickerButton];
+    UIButton *confirmPickerButton = [ODClassMethod creatButtonWithFrame:CGRectMake(kScreenSize.width / 2 - 4, 150, kScreenSize.width / 2 - 4, 50) target:self sel:@selector(confirmPickerButtonClick:) tag:0 image:nil title:@"确认" font:16];
+    [self.backPickerView addSubview:confirmPickerButton];
+}
+
 
 #pragma mark - 创建taskDetailTextView
 - (void)createTaskDetailTextView {
@@ -342,11 +361,13 @@ NSString *taskDetailText = @"";
 }
 
 - (void)confirmPickerButtonClick:(UIButton *)button {
-    if ([self.type isEqualToString:@"date"]) {
+    if ([self.type isEqualToString:@"startDate"]) {
         self.startDateLabel.text = [NSString stringWithFormat:@"%@", [self timeFormatDate:YES]];
+    } else if ([self.type isEqualToString:@"endDate"]) {
         self.endDateLabel.text = [NSString stringWithFormat:@"%@", [self timeFormatDate:YES]];
-    } else if ([self.type isEqualToString:@"time"]) {
+    } else if ([self.type isEqualToString:@"startTime"]) {
         self.startTimeLabel.text = [NSString stringWithFormat:@"%@", [self timeFormatDate:NO]];
+    } else if ([self.type isEqualToString:@"endTime"]) {
         self.endTimeLabel.text = [NSString stringWithFormat:@"%@", [self timeFormatDate:NO]];
     }
     self.type = nil;

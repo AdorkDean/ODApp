@@ -298,6 +298,12 @@
 		B86588291C993E44002ECB0C /* ODMyTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B86588271C993E44002ECB0C /* ODMyTaskCell.xib */; };
 		B865882D1C9953AA002ECB0C /* ODMyTaskViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B865882B1C9953AA002ECB0C /* ODMyTaskViolationsCell.m */; };
 		B865882E1C9953AA002ECB0C /* ODMyTaskViolationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B865882C1C9953AA002ECB0C /* ODMyTaskViolationsCell.xib */; };
+		B869FE121CAE1ADA003E08EE /* ODConfirmOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B869FE101CAE1ADA003E08EE /* ODConfirmOrderCell.m */; };
+		B869FE131CAE1ADA003E08EE /* ODConfirmOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B869FE111CAE1ADA003E08EE /* ODConfirmOrderCell.xib */; };
+		B869FE181CAE1B1B003E08EE /* ODDeliveryNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B869FE151CAE1B1B003E08EE /* ODDeliveryNoteViewController.m */; };
+		B869FE191CAE1B1B003E08EE /* ODSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B869FE171CAE1B1B003E08EE /* ODSelectAddressViewController.m */; };
+		B8EF1AB71CAE3F5000CA31C6 /* ODSelectAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EF1AB51CAE3F5000CA31C6 /* ODSelectAddressCell.m */; };
+		B8EF1AB81CAE3F5000CA31C6 /* ODSelectAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8EF1AB61CAE3F5000CA31C6 /* ODSelectAddressCell.xib */; };
 		ED03473E1CA2A4770090D834 /* ODOrderAndSellController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED03473D1CA2A4770090D834 /* ODOrderAndSellController.m */; };
 		ED379AA71CAE0BF500AE1503 /* ODTakeOutView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED379AA51CAE0BF500AE1503 /* ODTakeOutView.m */; };
 		ED379AA81CAE0BF500AE1503 /* ODTakeOutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED379AA61CAE0BF500AE1503 /* ODTakeOutView.xib */; };
@@ -893,6 +899,16 @@
 		B865882A1C9953AA002ECB0C /* ODMyTaskViolationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyTaskViolationsCell.h; sourceTree = "<group>"; };
 		B865882B1C9953AA002ECB0C /* ODMyTaskViolationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyTaskViolationsCell.m; sourceTree = "<group>"; };
 		B865882C1C9953AA002ECB0C /* ODMyTaskViolationsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyTaskViolationsCell.xib; sourceTree = "<group>"; };
+		B869FE0F1CAE1ADA003E08EE /* ODConfirmOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderCell.h; sourceTree = "<group>"; };
+		B869FE101CAE1ADA003E08EE /* ODConfirmOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderCell.m; sourceTree = "<group>"; };
+		B869FE111CAE1ADA003E08EE /* ODConfirmOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODConfirmOrderCell.xib; sourceTree = "<group>"; };
+		B869FE141CAE1B1B003E08EE /* ODDeliveryNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDeliveryNoteViewController.h; sourceTree = "<group>"; };
+		B869FE151CAE1B1B003E08EE /* ODDeliveryNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDeliveryNoteViewController.m; sourceTree = "<group>"; };
+		B869FE161CAE1B1B003E08EE /* ODSelectAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSelectAddressViewController.h; sourceTree = "<group>"; };
+		B869FE171CAE1B1B003E08EE /* ODSelectAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSelectAddressViewController.m; sourceTree = "<group>"; };
+		B8EF1AB41CAE3F5000CA31C6 /* ODSelectAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSelectAddressCell.h; sourceTree = "<group>"; };
+		B8EF1AB51CAE3F5000CA31C6 /* ODSelectAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSelectAddressCell.m; sourceTree = "<group>"; };
+		B8EF1AB61CAE3F5000CA31C6 /* ODSelectAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODSelectAddressCell.xib; sourceTree = "<group>"; };
 		C5EAEBD7E6B20864218413FA /* Pods-ODApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.debug.xcconfig"; sourceTree = "<group>"; };
 		ED03473C1CA2A4770090D834 /* ODOrderAndSellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderAndSellController.h; sourceTree = "<group>"; };
 		ED03473D1CA2A4770090D834 /* ODOrderAndSellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderAndSellController.m; sourceTree = "<group>"; };
@@ -1293,6 +1309,10 @@
 			children = (
 				ED3FDCDC1CAD4C4D0059692B /* ODConfirmOrderViewController.h */,
 				ED3FDCDD1CAD4C4D0059692B /* ODConfirmOrderViewController.m */,
+				B869FE141CAE1B1B003E08EE /* ODDeliveryNoteViewController.h */,
+				B869FE151CAE1B1B003E08EE /* ODDeliveryNoteViewController.m */,
+				B869FE161CAE1B1B003E08EE /* ODSelectAddressViewController.h */,
+				B869FE171CAE1B1B003E08EE /* ODSelectAddressViewController.m */,
 				ED3FDCDE1CAD4C4D0059692B /* ODTestUrlViewController.h */,
 				ED3FDCDF1CAD4C4D0059692B /* ODTestUrlViewController.m */,
 				400F18571CA93288000EFFBC /* ODBuyTakeOutViewController.h */,
@@ -1356,6 +1376,9 @@
 				ED46880D1C965F5300E31F64 /* ODLocationCell.xib */,
 				B85216191C97FB0E0003D102 /* ODHomeButton.h */,
 				B852161A1C97FB0E0003D102 /* ODHomeButton.m */,
+				B8EF1AB41CAE3F5000CA31C6 /* ODSelectAddressCell.h */,
+				B8EF1AB51CAE3F5000CA31C6 /* ODSelectAddressCell.m */,
+				B8EF1AB61CAE3F5000CA31C6 /* ODSelectAddressCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1683,6 +1706,9 @@
 				B853645B1CA510FA005E312B /* ODCommunityCell.h */,
 				B853645C1CA510FA005E312B /* ODCommunityCell.m */,
 				B853645D1CA510FA005E312B /* ODCommunityCell.xib */,
+				B869FE0F1CAE1ADA003E08EE /* ODConfirmOrderCell.h */,
+				B869FE101CAE1ADA003E08EE /* ODConfirmOrderCell.m */,
+				B869FE111CAE1ADA003E08EE /* ODConfirmOrderCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2333,11 +2359,13 @@
 				232CB6621C9264E200340D12 /* ODThirdOrderView.xib in Resources */,
 				232CB5711C9264E200340D12 /* IQKeyboardManager.bundle in Resources */,
 				232CB5A91C9264E200340D12 /* ODActivitybottomView.xib in Resources */,
+				B869FE131CAE1ADA003E08EE /* ODConfirmOrderCell.xib in Resources */,
 				232CB5BC1C9264E200340D12 /* ODPlacePrecontrHeaderView.xib in Resources */,
 				232CB5AB1C9264E200340D12 /* ODActivityDetailContentCell.xib in Resources */,
 				232CB5BE1C9264E200340D12 /* ODPlacePreDeviceView.xib in Resources */,
 				232CB5DD1C9264E200340D12 /* ODAddressCell.xib in Resources */,
 				B86588291C993E44002ECB0C /* ODMyTaskCell.xib in Resources */,
+				B8EF1AB81CAE3F5000CA31C6 /* ODSelectAddressCell.xib in Resources */,
 				232CB5C01C9264E200340D12 /* ODPlacePreFooterView.xib in Resources */,
 				ED46880F1C965F5300E31F64 /* ODLocationCell.xib in Resources */,
 				232CB6691C9264E200340D12 /* ODPayView.xib in Resources */,
@@ -2436,6 +2464,7 @@
 			files = (
 				232CB5A81C9264E200340D12 /* ODActivitybottomView.m in Sources */,
 				ED537ED91CA5207500EB12F4 /* ODSubmitOrderController.m in Sources */,
+				B869FE191CAE1B1B003E08EE /* ODSelectAddressViewController.m in Sources */,
 				232CB6071C9264E200340D12 /* ODOtherTopicViewController.m in Sources */,
 				232CB64C1C9264E200340D12 /* ODPayModel.m in Sources */,
 				232CB5D91C9264E200340D12 /* ODUploadImageModel.m in Sources */,
@@ -2570,6 +2599,7 @@
 				232CB6681C9264E200340D12 /* ODPayView.m in Sources */,
 				400334851C9B97C500973818 /* ODBaseSettingController.m in Sources */,
 				232CB5AA1C9264E200340D12 /* ODActivityDetailBtn.m in Sources */,
+				B869FE121CAE1ADA003E08EE /* ODConfirmOrderCell.m in Sources */,
 				400F18591CA93288000EFFBC /* ODBuyTakeOutViewController.m in Sources */,
 				232CB5BF1C9264E200340D12 /* ODPlacePreFooterView.m in Sources */,
 				232CB55D1C9264E200340D12 /* ODBaseViewController.m in Sources */,
@@ -2627,6 +2657,7 @@
 				B853645E1CA510FA005E312B /* ODCommunityCell.m in Sources */,
 				232CB56C1C9264E200340D12 /* IQTextView.m in Sources */,
 				232CB5851C9264E200340D12 /* ODClassMethod.m in Sources */,
+				B869FE181CAE1B1B003E08EE /* ODDeliveryNoteViewController.m in Sources */,
 				232CB6451C9264E200340D12 /* ODWithdrawalController.m in Sources */,
 				232CB65B1C9264E200340D12 /* ODOrderView.m in Sources */,
 				232CB5B61C9264E200340D12 /* ODActiveDeviceBtn.m in Sources */,
@@ -2665,6 +2696,7 @@
 				232CB62F1C9264E200340D12 /* ODPersonalTaskButton.m in Sources */,
 				232CB6431C9264E200340D12 /* ODPayController.m in Sources */,
 				232CB5CE1C9264E200340D12 /* ODBazaarLabelSearchViewController.m in Sources */,
+				B8EF1AB71CAE3F5000CA31C6 /* ODSelectAddressCell.m in Sources */,
 				232CB5991C9264E200340D12 /* ODApplyListViewController.m in Sources */,
 				ED4FF4721CA3E89C00EDE431 /* PontoBaseHandler.m in Sources */,
 				232CB5D21C9264E200340D12 /* ODBazaarDetailModel.m in Sources */,
@@ -2764,7 +2796,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2802,7 +2834,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

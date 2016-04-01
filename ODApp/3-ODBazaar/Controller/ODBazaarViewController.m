@@ -161,7 +161,7 @@ static CGFloat const lineHeight = 1;
  */
 - (void)publishButtonClick
 {
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+    if ([ODUserInformation sharedODUserInformation].openID.length == 0) {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
     } else {

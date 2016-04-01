@@ -37,7 +37,7 @@
         UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
         UINavigationController *navVc = tabBarVc.selectedViewController;
         
-        if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+        if ([ODUserInformation sharedODUserInformation].openID.length == 0) {
             ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
             [navVc presentViewController:vc animated:YES completion:nil];
         }
