@@ -11,7 +11,9 @@
 
 @interface ODTakeAwayDetailController : UIViewController<PontoDispatcherCallbackDelegate>
 
-@property (strong, nonatomic) IBOutlet UIWebView *webView;
+//@property (strong, nonatomic) IBOutlet UIWebView *webView;
+
+@property (nonatomic, strong) UIWebView *webView;
 
 @property (nonatomic, copy) NSString *product_id;
 
@@ -24,6 +26,11 @@
  * 是否是购物车
  */
 @property (nonatomic, assign) BOOL isCart;
+
+/**
+ * 是否是购物车
+ */
+@property (nonatomic, assign) BOOL isOrderDetail;
 
 @end
 
