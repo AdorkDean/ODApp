@@ -117,7 +117,7 @@ NSString * const ODBaseURL = @"http://woquapi.test.odong.com/1.0";
 NSString * const ODBaseURL = @"http://woquapi.odong.com/1.0";
 #endif
 
-NSString * const ODTestOpenId = @"766148455eed214ed1f8";
+NSString * const ODTestOpenId = @"9605447569d90d877e78";
 
 /** user */
 NSString * const ODUrlUserLogin1 = @"user/login1";

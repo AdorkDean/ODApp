@@ -15,7 +15,6 @@
 #import "ODHomeButton.h"
 #import "ODTakeOutHomeController.h"
 #import "ODTakeAwayDetailController.h"
-#import "ODTestUrlViewController.h"
 
 static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 
@@ -426,7 +425,8 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
             self.tabBarController.selectedIndex = 1;
             break;
         case 1:
-            if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+            if ([ODUserInformation sharedODUserInformation].openID.length == 0) {
+                
                 ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
                 [self presentViewController:vc animated:YES completion:nil];
             }
@@ -446,7 +446,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
         }
             break;
         case 3:
-            if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+            if ([ODUserInformation sharedODUserInformation].openID.length == 0) {
                 ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
                 [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
             }
@@ -487,7 +487,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 
 #pragma mark - 热门活动图片 点击事件
 - (void)activityButtonClick:(UIButton *)button {
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+    if ([ODUserInformation sharedODUserInformation].openID.length == 0) {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
     }

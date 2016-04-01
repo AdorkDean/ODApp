@@ -10,6 +10,8 @@
 #import "ODConfirmOrderModel.h"
 #import "ODConfirmOrderCell.h"
 #import "ODAddAddressController.h"
+#import "ODDeliveryNoteViewController.h"
+#import "ODSelectAddressViewController.h"
 
 #import "WXApi.h"
 #import "WXApiObject.h"
@@ -25,8 +27,12 @@ static NSString *cellId = @"ODConfirmOrderCell";
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)UIView *tableHeaderView;
+
+@property(nonatomic,strong)ODConfirmOrderModel *model;
+@property(nonatomic,strong)UILabel *remarkDetailLabel;
 @property(nonatomic,strong)ODConfirmOrderModel *orderModel;
 @property (nonatomic, strong) ODTakeOutConfirmModel *confirmModel;
+
 @property(nonatomic)CGFloat count;
 
 @end
@@ -116,12 +122,12 @@ static NSString *cellId = @"ODConfirmOrderCell";
     [deliveryView addGestureRecognizer:deliveryTap];
     [self.tableHeaderView addSubview:deliveryView];
     
-    UILabel *remarkLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, 15, 100, 20)];
+    UILabel *remarkLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, 15, 60, 20)];
     remarkLabel.text = @"配送备注";
     remarkLabel.font = [UIFont systemFontOfSize:13.5];
     
-    UILabel *remarkDetailLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(remarkLabel.frame)+10, 15, kScreenSize.width-135,20)];
-    remarkDetailLabel.font = [UIFont systemFontOfSize:13.5];
+    self.remarkDetailLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(remarkLabel.frame)+10, 15, kScreenSize.width-120,20)];
+    self.remarkDetailLabel.font = [UIFont systemFontOfSize:13.5];
     
     UIImageView *imageView1 = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-25.4, 17.5, 8.4, 15)];
     imageView1.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
@@ -139,7 +145,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     detailTimeLabel.font = [UIFont systemFontOfSize:13.5];
     detailTimeLabel.textAlignment = NSTextAlignmentRight;
     
-    [deliveryView addSubview:remarkLabel],[deliveryView addSubview:remarkDetailLabel], [deliveryView addSubview:imageView1],[deliveryView addSubview:lineView],[deliveryView addSubview:timeLabel];
+    [deliveryView addSubview:remarkLabel],[deliveryView addSubview:self.remarkDetailLabel], [deliveryView addSubview:imageView1],[deliveryView addSubview:lineView],[deliveryView addSubview:timeLabel];
     [deliveryView addSubview:detailTimeLabel];
     
     self.tableHeaderView.frame = CGRectMake(0, 0, kScreenSize.width,infoView.frame.size.height+ payView.frame.size.height+ deliveryView.frame.size.height+18);
@@ -205,12 +211,16 @@ static NSString *cellId = @"ODConfirmOrderCell";
 
 #pragma mark - UIAction
 -(void)infoTapClick{
-    ODAddAddressController *controller = [[ODAddAddressController alloc]init];
-    [self.navigationController pushViewController:controller animated:YES];
+    ODSelectAddressViewController *address = [[ODSelectAddressViewController alloc]init];
+    [self.navigationController pushViewController:address animated:YES];
 }
 
 -(void)deliverTapClick{
-    
+    ODDeliveryNoteViewController *deliveryNote = [[ODDeliveryNoteViewController alloc]init];
+    deliveryNote.myBlock=^(NSString *str){
+        self.remarkDetailLabel.text = str;
+    };
+    [self.navigationController pushViewController:deliveryNote animated:YES];
 }
 
 
@@ -233,7 +243,10 @@ static NSString *cellId = @"ODConfirmOrderCell";
      {
          weakSelf.confirmModel = [model result];
          weakSelf.orderId = weakSelf.confirmModel.order_id;
-         [weakSelf getWeiXinData];
+         [weakSelf getWeiXinDataWithParam:@{
+                                             @"type" : @"1",
+                                             @"takeout_order_id" : self.confirmModel.order_id
+                                            }];
      }
                    failure:^(NSError *error)
      {

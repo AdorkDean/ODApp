@@ -31,7 +31,7 @@
     
     // 订单详情页
     if (self.isOrderDetail) {
-        NSString *urlString = [[ODHttpTool getRequestParameter:@{@"order_id" : self.order_id}]od_URLDesc];
+        NSString *urlString = [[ODHttpTool getRequestParameter:@{ @"order_id" : self.order_id}]od_URLDesc];
         NSString *url = [ODWebUrlNativeOrderInfo stringByAppendingString:urlString];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL OD_URLWithString:url]]];
     }
