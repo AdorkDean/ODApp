@@ -302,6 +302,8 @@
 		ED03473E1CA2A4770090D834 /* ODOrderAndSellController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED03473D1CA2A4770090D834 /* ODOrderAndSellController.m */; };
 		ED379AA71CAE0BF500AE1503 /* ODTakeOutView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED379AA51CAE0BF500AE1503 /* ODTakeOutView.m */; };
 		ED379AA81CAE0BF500AE1503 /* ODTakeOutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED379AA61CAE0BF500AE1503 /* ODTakeOutView.xib */; };
+		ED379AAC1CAE11CC00AE1503 /* ODShopCartListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ED379AAA1CAE11CC00AE1503 /* ODShopCartListCell.m */; };
+		ED379AAD1CAE11CC00AE1503 /* ODShopCartListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED379AAB1CAE11CC00AE1503 /* ODShopCartListCell.xib */; };
 		ED3D47881C9BEB44008B5A0F /* ODMyOrderRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D47861C9BEB44008B5A0F /* ODMyOrderRecordView.m */; };
 		ED3D47891C9BEB44008B5A0F /* ODMyOrderRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3D47871C9BEB44008B5A0F /* ODMyOrderRecordView.xib */; };
 		ED3FDCE01CAD4C4D0059692B /* ODConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3FDCDD1CAD4C4D0059692B /* ODConfirmOrderViewController.m */; };
@@ -899,6 +901,9 @@
 		ED379AA41CAE0BF500AE1503 /* ODTakeOutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTakeOutView.h; sourceTree = "<group>"; };
 		ED379AA51CAE0BF500AE1503 /* ODTakeOutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTakeOutView.m; sourceTree = "<group>"; };
 		ED379AA61CAE0BF500AE1503 /* ODTakeOutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODTakeOutView.xib; sourceTree = "<group>"; };
+		ED379AA91CAE11CC00AE1503 /* ODShopCartListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODShopCartListCell.h; sourceTree = "<group>"; };
+		ED379AAA1CAE11CC00AE1503 /* ODShopCartListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODShopCartListCell.m; sourceTree = "<group>"; };
+		ED379AAB1CAE11CC00AE1503 /* ODShopCartListCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODShopCartListCell.xib; sourceTree = "<group>"; };
 		ED3D47851C9BEB44008B5A0F /* ODMyOrderRecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyOrderRecordView.h; sourceTree = "<group>"; };
 		ED3D47861C9BEB44008B5A0F /* ODMyOrderRecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyOrderRecordView.m; sourceTree = "<group>"; };
 		ED3D47871C9BEB44008B5A0F /* ODMyOrderRecordView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyOrderRecordView.xib; sourceTree = "<group>"; };
@@ -1331,6 +1336,9 @@
 		232CB3AF1C9264E200340D12 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ED379AA91CAE11CC00AE1503 /* ODShopCartListCell.h */,
+				ED379AAA1CAE11CC00AE1503 /* ODShopCartListCell.m */,
+				ED379AAB1CAE11CC00AE1503 /* ODShopCartListCell.xib */,
 				ED3FDCE51CAD4D0D0059692B /* ODShopCartView.h */,
 				ED3FDCE61CAD4D0D0059692B /* ODShopCartView.m */,
 				ED3FDCE71CAD4D0D0059692B /* ODShopCartView.xib */,
@@ -2316,6 +2324,7 @@
 				232CB5E51C9264E200340D12 /* ODCollectionCell.xib in Resources */,
 				ED51F08C1C979EB5005525AD /* ODIndentDetailView.xib in Resources */,
 				ED51F0961C97E8F3005525AD /* ODIndentDetailTopView.xib in Resources */,
+				ED379AAD1CAE11CC00AE1503 /* ODShopCartListCell.xib in Resources */,
 				232CB61E1C9264E200340D12 /* ODBindingMobileView.xib in Resources */,
 				232CB6251C9264E200340D12 /* ODlandingView.xib in Resources */,
 				ED379AA81CAE0BF500AE1503 /* ODTakeOutView.xib in Resources */,
@@ -2508,6 +2517,7 @@
 				232CB6241C9264E200340D12 /* ODlandingView.m in Sources */,
 				232CB5C31C9264E200340D12 /* ODPrecontrBtn.m in Sources */,
 				232CB5D11C9264E200340D12 /* ODBazaarRequestHelpViewController.m in Sources */,
+				ED379AAC1CAE11CC00AE1503 /* ODShopCartListCell.m in Sources */,
 				232CB60C1C9264E200340D12 /* ODBindingMobileController.m in Sources */,
 				232CB5C41C9264E200340D12 /* UIView+ODPlaceView.m in Sources */,
 				232CB6091C9264E200340D12 /* ODReleaseController.m in Sources */,
