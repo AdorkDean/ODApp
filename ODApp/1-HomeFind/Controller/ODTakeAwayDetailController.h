@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PontoDispatcher.h"
+@class ODTakeOutModel;
 
 @interface ODTakeAwayDetailController : UIViewController<PontoDispatcherCallbackDelegate>
 
@@ -36,6 +37,12 @@
  * 订单ID
  */
 @property (nonatomic, strong) NSString *order_id;
+
+@property (nonatomic, strong) NSMutableDictionary *shops;
+
+- (void)setupNumber:(NSInteger)number price:(CGFloat)totolPrice;
+
+@property (nonatomic, strong) ODTakeOutModel *takeOut;
 
 @end
 

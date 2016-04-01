@@ -20,6 +20,7 @@
     if (index.row == 0) {
         self.iconImageView.image = [UIImage imageNamed:@"icon_id"];
         self.titleLabel.text = [NSString stringWithFormat:@"[当前]%@",dict[@"name"]];
+        
     }else{
         self.iconImageView.image = [UIImage imageNamed:@"icon_id_Unchecked"];
         self.titleLabel.text = dict[@"name"];
