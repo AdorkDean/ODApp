@@ -16,7 +16,6 @@
 #import "ODBuyTakeOutViewController.h"
 #import "ODConfirmOrderViewController.h"
 
-#import "ODPayController.h"
 
 @implementation PontoH5ToMobileRequest {
 }
@@ -27,11 +26,11 @@
     return [[self alloc] init];
 }
 
-#pragma mark - 商品详情页
-- (void)buyNow:(id)params {
+#pragma mark - 商品详情
+
+- (void)addToCart:(id)params {
     if ([params isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"%@", params);
-        NSLog(@"%@",params[@"id"]);
+        NSLog(@"params------->%@",params[@"id"]);
         [self buyNowRequestData:params[@"id"]];
         
         UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
@@ -42,10 +41,9 @@
             [navVc presentViewController:vc animated:YES completion:nil];
         }
         else {
-//            ODBuyTakeOutViewController *vc = [[ODBuyTakeOutViewController alloc] init];
+//            ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc]init];
 //            [navVc pushViewController:vc animated:YES];
-            ODConfirmOrderViewController *confirmOrder = [[ODConfirmOrderViewController alloc]init];
-            [navVc pushViewController:confirmOrder animated:YES];
+            // 给购物车添加东西
         }
     }
 }
@@ -68,15 +66,14 @@
 
 - (void)paymentNow:(id)params {
     if ([params isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"params------->  %@", params);
+        NSLog(@"params------->%@", params);
         UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
         UINavigationController *navVc = tabBarVc.selectedViewController;
-        ODPayController *vc = [[ODPayController alloc] init];
+        ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc]init];
 //        vc.orderId = self.order_id;
 //        vc.price = model.price_show;
         [navVc pushViewController:vc animated:YES];
     }
-    
 }
 
 
@@ -87,7 +84,7 @@
 #pragma mark - 购物车
 - (void)orderNow:(id)params {
     if ([params isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"params ------->  %@", params);
+        NSLog(@"params ------->%@", params);
         [self orderNowRequestData:params];
         
         UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;

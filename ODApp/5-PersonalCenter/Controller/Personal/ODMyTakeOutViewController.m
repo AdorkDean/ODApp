@@ -14,6 +14,7 @@
 #import "ODTakeOutView.h"
 #import "ODTakeAwayDetailController.h"
 #import "ODPayController.h"
+#import "ODConfirmOrderViewController.h"
 
 @interface ODMyTakeOutViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -22,14 +23,13 @@
 
 /** 页码 */
 @property (nonatomic, assign) NSInteger pageCount;
+
 /** 模型数组 */
 @property (nonatomic, strong) NSMutableArray *dataArray;
 
 @end
 
 // 循环cell标识
-static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
-
 static NSString * const ODTakeOutViewID = @"ODTakeOutViewID";
 
 @implementation ODMyTakeOutViewController
@@ -138,24 +138,16 @@ static NSString * const ODTakeOutViewID = @"ODTakeOutViewID";
 }
 
 #pragma mark - Action
-
 - (void)payOrLookAction:(UIButton *)sender {
     ODTakeOutView *cell = (ODTakeOutView *)sender.superview.superview;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     ODMyTakeOutModel *model = self.dataArray[indexPath.row];
     
-    if ([model.status isEqualToString:@"1"]) {
-        ODPayController *vc = [[ODPayController alloc] init];
-        vc.orderId = model.order_id;
-        vc.price = model.price_show;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else {
-        ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
-        vc.isOrderDetail = YES;
-        vc.order_id = model.order_id;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
+    vc.isOrderDetail = YES;
+    vc.order_id = model.order_id;
+    vc.takeAwayTitle = @"订单详情";
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
