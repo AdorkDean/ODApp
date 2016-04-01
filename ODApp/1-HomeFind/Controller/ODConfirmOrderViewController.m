@@ -206,7 +206,13 @@ static NSString *cellId = @"ODConfirmOrderCell";
 }
 
 -(void)buttonClick:(UIButton *)button{
-    NSDictionary *parameter = @{@"address_id":@"1",@"price_show":[NSString stringWithFormat:@"%f", self.count],@"pay_type":@"2",@"shopcart_ids":@"1,2,3"};
+    NSDictionary *parameter = @{
+                                @"address_id":@"1",
+                                @"price_show":[NSString
+                                               stringWithFormat:@"%f", self.count],
+                                @"pay_type":@"2",
+                                @"shopcart_ids":@"1,2,3"
+                                };
     [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:parameter modelClass:[NSObject class] success:^(id model) {
     } failure:^(NSError *error) {
         
