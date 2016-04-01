@@ -507,9 +507,9 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 }
 #pragma mark - 加入更多圈子 点击事件
 - (void)moreCycleButtonClick {
-//    [self giveCommumityContent:@"社区" andBbsType:5];
-    ODTestUrlViewController *test = [[ODTestUrlViewController alloc]init];
-    [self.navigationController pushViewController:test animated:YES];
+    [self giveCommumityContent:@"社区" andBbsType:5];
+//    ODTestUrlViewController *test = [[ODTestUrlViewController alloc]init];
+//    [self.navigationController pushViewController:test animated:YES];
 }
 
 #pragma mark - 寻圈子跳转刷新

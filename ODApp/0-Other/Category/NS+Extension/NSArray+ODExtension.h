@@ -14,4 +14,6 @@
 
 - (NSString *)enumerateString;
 
+- (NSString *)od_URLDesc;
+
 @end

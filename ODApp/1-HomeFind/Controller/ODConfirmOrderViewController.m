@@ -10,6 +10,7 @@
 #import "ODConfirmOrderModel.h"
 #import "ODConfirmOrderCell.h"
 #import "ODAddAddressController.h"
+
 static NSString *cellId = @"ODConfirmOrderCell";
 
 @interface ODConfirmOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -165,7 +166,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 #pragma mark - 数据请求
 -(void)requestData{
     __weakSelf;
-    NSDictionary *parametr = @{@"shopcart_ids":@"1,2,3",@"open_id":@"766148455eed214ed1f8"};
+    NSDictionary *parametr = @{@"shopcart_json" : self.datas.od_URLDesc, @"open_id":@"766148455eed214ed1f8"};
     [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parametr modelClass:[ODConfirmOrderModel class] success:^(ODConfirmOrderModelResponse * model) {
         weakSelf.model = [model result];
         [weakSelf.dataArray addObjectsFromArray:weakSelf.model.shopcart_list];
