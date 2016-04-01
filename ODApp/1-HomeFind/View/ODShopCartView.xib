@@ -18,6 +18,9 @@
                     <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12.5"/>
                     <state key="normal" title="去结算"/>
+                    <state key="disabled">
+                        <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
+                    </state>
                     <connections>
                         <action selector="comfirmClick" destination="iN0-l3-epB" eventType="touchUpInside" id="lMk-3d-o7m"/>
                     </connections>
@@ -83,6 +86,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="buyButton" destination="u9j-rj-mGw" id="uOf-r5-jGE"/>
                 <outlet property="leftView" destination="voS-LN-OyJ" id="iXn-Mg-fGb"/>
                 <outlet property="numberLabel" destination="k6G-yf-ePx" id="B0Q-Qd-dqd"/>
                 <outlet property="priceLabel" destination="sXd-pC-4x8" id="cMN-XE-Fcf"/>

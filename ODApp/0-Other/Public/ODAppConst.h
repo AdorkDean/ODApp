@@ -95,6 +95,15 @@ UIKIT_EXTERN NSString * const ODNotificationloveSkill;
 /** 刷新任务发布及回复*/
 UIKIT_EXTERN NSString * const ODNotificationRefreshTask;
 
+
+#pragma mark - 购物车通知
+/** 购物车添加商品数量通知 */
+UIKIT_EXTERN NSString * const ODNotificationShopCartAddNumber;
+/** 购物车减少商品数量通知 */
+UIKIT_EXTERN NSString * const ODNotificationShopCartminusNumber;
+/** 清空购物车所有商品通知 */
+UIKIT_EXTERN NSString * const ODNotificationShopCartRemoveALL;
+
 #pragma mark - H5网页URL
 
 UIKIT_EXTERN NSString * const ODWebUrlFindJob;
@@ -110,7 +119,7 @@ UIKIT_EXTERN NSString * const ODWebUrlNativeOrderInfo;
 /** 统一的URL */
 UIKIT_EXTERN NSString * const ODBaseURL;
 
-UIKIT_EXTERN NSString * const ODTestOpenId;
+//UIKIT_EXTERN NSString * const ODTestOpenId;
 
 //  bbs
 UIKIT_EXTERN NSString * const ODUrlBbsList;

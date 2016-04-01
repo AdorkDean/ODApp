@@ -510,7 +510,7 @@ NSString *evaluationContentText = @"";
 
 -(void)taskButtonClick:(UIButton *)button
 {
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+    if ([ODUserInformation sharedODUserInformation].openID.length == 0) {
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc]init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
     }else{

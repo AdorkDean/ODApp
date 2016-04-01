@@ -89,6 +89,17 @@ NSString * const ODNotificationloveSkill = @"ODNotificationloveSkill";
 /** 刷新任务发布及回复*/
 NSString * const ODNotificationRefreshTask =  @"ODNotificationRefreshTask";
 
+
+#pragma mark - 购物车通知
+/** 购物车添加商品数量通知 */
+NSString * const ODNotificationShopCartAddNumber =  @"ODNotificationShopCartAddNumber";
+
+/** 购物车减少商品数量通知 */
+NSString * const ODNotificationShopCartminusNumber =  @"ODNotificationShopCartminusNumber";
+
+/** 清空购物车所有商品通知 */
+NSString * const ODNotificationShopCartRemoveALL =  @"ODNotificationShopCartRemoveALL";
+
 #pragma mark - 请求URL接口
 /** 网页接口 */
 NSString * const ODWebUrlFindJob = @"http://www.myjob500.com/user/extloginpf";
@@ -106,7 +117,7 @@ NSString * const ODBaseURL = @"http://woquapi.test.odong.com/1.0";
 NSString * const ODBaseURL = @"http://woquapi.odong.com/1.0";
 #endif
 
-NSString * const ODTestOpenId = @"9605447569d90d877e78";
+//NSString * const ODTestOpenId = @"9605447569d90d877e78";
 
 /** user */
 NSString * const ODUrlUserLogin1 = @"user/login1";

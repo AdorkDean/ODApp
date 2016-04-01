@@ -199,7 +199,7 @@
 #pragma mark - 场地预约
 - (void)appointmentAction:(UIButton *)sender {
     
-    if ([[ODUserInformation sharedODUserInformation].openID isEqualToString:@""]) {
+    if ([ODUserInformation sharedODUserInformation].openID.length == 0) {
         ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
         [self presentViewController:vc animated:YES completion:nil];
     }
