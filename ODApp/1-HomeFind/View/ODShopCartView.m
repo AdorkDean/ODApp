@@ -12,6 +12,13 @@
 #import "ODConfirmOrderViewController.h"
 #import "ODShopCartListHeaderView.h"
 
+/** 购物车HeaderView Height */
+static CGFloat const shopCartHeaderViewH = 25;
+/** 购物车 Height */
+static CGFloat const shopCartH = 49;
+/** 购物车Cell Height */
+static CGFloat const shopCartCellH = 44;
+
 #import <MJExtension.h>
 
 @interface ODShopCartView() <UITableViewDataSource, UITableViewDelegate,
@@ -20,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UIView *leftView;
 
 @property (nonatomic, strong) NSMutableArray *datasArray;
+
+/** 购物车头部视图 */
+@property (nonatomic, strong) ODShopCartListHeaderView *headerView;
 
 /** 蒙板 */
 @property (nonatomic, strong) UIView *coverView;
@@ -30,10 +40,21 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
 
 @implementation ODShopCartView
 
+- (ODShopCartListHeaderView *)headerView
+{
+    if (!_headerView)
+    {
+        _headerView = [ODShopCartListHeaderView headerView];
+        _shopCartView.tableHeaderView = _headerView;
+        _headerView.delegate = self;
+    }
+    return _headerView;
+}
+
 - (UITableView *)shopCartView
 {
     if (!_shopCartView) {
-        _shopCartView = [[UITableView alloc] initWithFrame:CGRectMake(0, KScreenHeight - 49, KScreenWidth, CGFLOAT_MIN) style:UITableViewStylePlain];
+        _shopCartView = [[UITableView alloc] initWithFrame:CGRectMake(0, KScreenHeight - shopCartH, KScreenWidth, CGFLOAT_MIN) style:UITableViewStylePlain];
         _shopCartView.dataSource = self;
         _shopCartView.delegate = self;
         _shopCartView.bounces = NO;
@@ -78,7 +99,7 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     UITapGestureRecognizer *gas =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickShopCart)];
     [self.leftView addGestureRecognizer:gas];
     
-    self.numberLabel.layer.cornerRadius = 7.5;
+    self.numberLabel.layer.cornerRadius = self.numberLabel.od_width * 0.5;
     self.numberLabel.layer.masksToBounds = YES;
 }
 + (instancetype)shopCart
@@ -120,12 +141,14 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
 #pragma mark - ODShopCartListCellDelegate
 - (void)shopCartListcell:(ODShopCartListCell *)cell RemoveCurrentRow:(ODTakeOutModel *)currentData
 {
-    //    NSUInteger index = [self.datasArray indexOfObject:currentData];
-    CGFloat height = (self.datasArray.count - 1) * 44 + 25;
     [self.datasArray removeObject:currentData];
+    CGFloat height = self.datasArray.count * shopCartCellH + shopCartHeaderViewH;
     [UIView animateWithDuration:kAnimateDuration animations:^{
-        self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 49, KScreenWidth, height);
+        self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - shopCartH, KScreenWidth, height);
     }];
+    
+    self.headerView.od_width = KScreenWidth;
+    self.headerView.od_height = shopCartHeaderViewH;
     
     [self.shopCartView reloadData];
     if (!self.datasArray.count) [self dismiss];
@@ -143,7 +166,6 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     
     [self dismiss];
     
-    
     // 发送通知, 清空所有
     [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAll" object:self];
     
@@ -151,10 +173,10 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     [self.datasArray removeAllObjects];
     self.numberLabel.text = @"0";
     self.priceLabel.text = @"¥0";
-    for (ODTakeOutModel *takeOut in self.datasArray)
-    {
-        takeOut.shopNumber = 0;
-    }
+    
+    // 移除所有模型中保存的商品数量
+    for (ODTakeOutModel *takeOut in self.datasArray) takeOut.shopNumber = 0;
+
     [self.shopCartView reloadData];
 }
 
@@ -164,20 +186,16 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
 - (void)clickShopCart
 {
     if (!self.datasArray.count) return;
-    self.isOpened = !self.isOpened;
+    self.opened = !self.opened;
     
     if (self.isOpened) {
-        CGFloat height = self.datasArray.count * 44 + 25;
+        CGFloat height = self.datasArray.count * shopCartCellH + shopCartHeaderViewH;
         [UIView animateWithDuration:kAnimateDuration animations:^{
-            self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 49, KScreenWidth, height);
+            self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - shopCartH, KScreenWidth, height);
         }];
         
-        // 设置头部视图
-        ODShopCartListHeaderView *headerView = [ODShopCartListHeaderView headerView];
-        headerView.od_width = KScreenWidth;
-        headerView.od_height = 25;
-        _shopCartView.tableHeaderView = headerView;
-        headerView.delegate = self;
+        self.headerView.od_width = KScreenWidth;
+        self.headerView.od_height = shopCartHeaderViewH;
         
         UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
         [keyWindow insertSubview:self.coverView belowSubview:self];
@@ -193,9 +211,9 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
  */
 - (void)dismiss
 {
-    self.isOpened = NO;
+    self.opened = NO;
     [UIView animateWithDuration:kAnimateDuration animations:^{
-        self.shopCartView.frame = CGRectMake(0, KScreenHeight - 49, KScreenWidth, CGFLOAT_MIN);
+        self.shopCartView.frame = CGRectMake(0, KScreenHeight - shopCartH, KScreenWidth, CGFLOAT_MIN);
     } completion:^(BOOL finished) {
         if (self.coverView.subviews) [self.coverView removeFromSuperview];
     }];

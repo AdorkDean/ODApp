@@ -18,7 +18,8 @@
 
 @implementation ODShopCartListCell
 
-- (void)awakeFromNib {
+- (void)awakeFromNib
+{
     self.autoresizingMask = UIViewAutoresizingNone;
 }
 
@@ -26,12 +27,17 @@
 {
     _takeOut = takeOut;
     
+    // 设置数据
     self.titleLabel.text = takeOut.title;
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", takeOut.shopNumber];
     self.priceLabel.text = [NSString stringWithFormat:@"%@", takeOut.price_show];
 }
 
-- (IBAction)plusButtonClick:(id)sender {
+/**
+ *  点击加号按钮
+ */
+- (IBAction)plusButtonClick:(id)sender
+{
     NSInteger number = self.takeOut.shopNumber;
     if (number < 0) return;
     number += 1;
@@ -42,11 +48,17 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"addNumber" object:self];
 }
 
-- (IBAction)minusButtonClick:(id)sender {
+/**
+ *  点击减号按钮
+ */
+- (IBAction)minusButtonClick:(id)sender
+{
     NSInteger number = self.takeOut.shopNumber;
     if (number <= 0) return;
     number -= 1;
     self.takeOut.shopNumber = number;
+    
+    // 数量减到0时, 删除当前行
     if (number == 0)
     {
         if ([self.delegate respondsToSelector:@selector(shopCartListcell:RemoveCurrentRow:)])
