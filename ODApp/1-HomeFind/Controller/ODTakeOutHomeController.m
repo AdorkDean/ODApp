@@ -118,6 +118,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     // 初始化刷新控件
     [self setupScrollViewRefresh];
     
+    // 添加通知
     [self addObserver];
 }
 
@@ -128,13 +129,11 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 
 #pragma mark - 初始化方法
 
-
 - (void)addObserver
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusShopCart:) name:@"addNumber" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusShopCart:) name:@"minusNumber" object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllDatas:) name:@"removeAll" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusShopCart:) name:ODNotificationShopCartAddNumber object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusShopCart:) name:ODNotificationShopCartminusNumber object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllDatas:) name:ODNotificationShopCartRemoveALL object:nil];
 }
 
 /**

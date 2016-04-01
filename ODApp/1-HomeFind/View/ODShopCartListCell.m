@@ -45,7 +45,7 @@
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", number];
     
     // 发送通知, 修改购物车商品数量
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"addNumber" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartAddNumber object:self];
 }
 
 /**
@@ -69,7 +69,7 @@
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", number];
     
     // 发送通知, 修改购物车商品数量
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"minusNumber" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartminusNumber object:self];
 }
 
 @end
