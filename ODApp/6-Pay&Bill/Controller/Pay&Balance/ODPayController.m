@@ -43,7 +43,6 @@
     [super viewDidLoad];
 
     self.payType = @"1";
-    [self getData];
     
     self.navHasSelfClass = 0;
     for (UIViewController *vc in self.navigationController.viewControllers) {
@@ -66,17 +65,17 @@
 }
 
 #pragma mark - 获取数据
-- (void)getData {
+- (void)getWeiXinDataWithParam:(NSDictionary *)params {
     // 拼接参数
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"bbs_order_id"] = self.orderId;
-    params[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
     __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:params modelClass:[ODPayModel class] success:^(id model)
      {
          weakSelf.model = [model result];
-     } failure:^(NSError *error) {
+         [weakSelf payMoney];
+     }
+                   failure:^(NSError *error)
+    {
      }];
 }
 
@@ -85,8 +84,6 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"order_no"] = self.model.out_trade_no;
     params[@"errCode"] = code;
-    params[@"open_id"] = ODTestOpenId;
-//    params[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
     __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model)

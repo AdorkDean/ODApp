@@ -18,5 +18,6 @@
 @property(nonatomic, copy) NSString *swap_type;
 
 - (void)payAction:(UIButton *)sender;
+- (void)getWeiXinDataWithParam:(NSDictionary *)params;
 
 @end

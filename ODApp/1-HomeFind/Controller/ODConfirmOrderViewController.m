@@ -13,7 +13,6 @@
 #import "ODDeliveryNoteViewController.h"
 #import "ODSelectAddressViewController.h"
 
-#import "ODPayModel.h"
 #import "WXApi.h"
 #import "WXApiObject.h"
 
@@ -32,7 +31,6 @@ static NSString *cellId = @"ODConfirmOrderCell";
 @property(nonatomic,strong)ODConfirmOrderModel *model;
 @property(nonatomic,strong)UILabel *remarkDetailLabel;
 @property(nonatomic,strong)ODConfirmOrderModel *orderModel;
-@property (nonatomic, strong) ODPayModel *payModel;
 @property (nonatomic, strong) ODTakeOutConfirmModel *confirmModel;
 
 @property(nonatomic)CGFloat count;
@@ -238,44 +236,22 @@ static NSString *cellId = @"ODConfirmOrderCell";
                                                stringWithFormat:@"%f", self.count],
                                 @"pay_type":@"2",
                                 @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString],
-//                                @"open_id":@"766148455eed214ed1f8"
+                                @"open_id":ODTestOpenId
                                 };
     __weakSelf
     [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:parameter modelClass:[ODTakeOutConfirmModel class] success:^(id model)
      {
          weakSelf.confirmModel = [model result];
-         [weakSelf getWeiXinData];
+         weakSelf.orderId = weakSelf.confirmModel.order_id;
+         [weakSelf getWeiXinDataWithParam:@{
+                                             @"type" : @"1",
+                                             @"takeout_order_id" : self.confirmModel.order_id
+                                            }];
      }
                    failure:^(NSError *error)
      {
         
     }];
-}
-
-- (void)getWeiXinData {
-    NSDictionary *parameter = @{ @"type" : @"1", @"takeout_order_id" : self.confirmModel.order_id };
-    __weakSelf
-    [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:parameter modelClass:[ODPayModel class] success:^(id model) {
-       
-        weakSelf.payModel = [model result];
-        [weakSelf payMoneyGiveWeiXin];
-        
-    } failure:^(NSError *error) {
-        
-    }];
-}
-
-- (void)payMoneyGiveWeiXin {
-    PayReq *request = [[PayReq alloc] init];
-    
-    request.partnerId = self.payModel.partnerid;
-    request.prepayId = self.payModel.prepay_id;
-    request.package = self.payModel.package;
-    request.nonceStr = self.payModel.nonce_str;
-    request.timeStamp = self.payModel.timeStamp;
-    request.sign = self.payModel.sign;
-    
-    [WXApi sendReq:request];
 }
 
 @end

@@ -168,7 +168,7 @@ static int const ImageViewCount = 3;
         
 //        imageView.image = self.images[index];
         // 下载图片
-        [imageView sd_setImageWithURL:[NSURL URLWithString:self.images[index]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:0];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:self.images[index]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
     }
     
     // 设置偏移量在中间
