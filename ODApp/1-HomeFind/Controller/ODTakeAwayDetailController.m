@@ -26,17 +26,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = self.takeAwayTitle;
-    [self setupShopCart];
+    [self createWebView];
     self.pontoDispatcher = [[PontoDispatcher alloc] initWithHandlerClassesPrefix:@"Ponto" andWebView:self.webView];
-    if (self.isCart) {
-        NSString *urlString = [[ODHttpTool getRequestParameter:@{@"open_id":@"766148455eed214ed1f8"}]od_URLDesc];
-        NSString *url = [ODWebUrlNativeCart stringByAppendingString:urlString];
+    
+    if (self.isOrderDetail) {
+        NSString *urlString = [[ODHttpTool getRequestParameter:@{@"open_id" : @"766148455eed214ed1f8", @"order_id" : self.order_id}]od_URLDesc];
+        NSString *url = [ODWebUrlNativeOrderInfo stringByAppendingString:urlString];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL OD_URLWithString:url]]];
     }
     else {
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?id=%@", ODWebUrlNative, self.product_id]]]];
+        [self setupShopCart];
     }    
 }
+
+- (void)createWebView {
+
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight - 49)];
+    [self.view addSubview:self.webView];
+}
+
 
 - (void)setupShopCart
 {
@@ -44,7 +53,7 @@
     [self.view addSubview:shopCart];
     [shopCart makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.equalTo(self.view);
-        make.height.equalTo(55);
+        make.height.equalTo(49);
     }];
 }
 @end

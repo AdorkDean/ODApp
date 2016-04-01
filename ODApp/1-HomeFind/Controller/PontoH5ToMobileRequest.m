@@ -16,6 +16,8 @@
 #import "ODBuyTakeOutViewController.h"
 #import "ODConfirmOrderViewController.h"
 
+#import "ODPayController.h"
+
 @implementation PontoH5ToMobileRequest {
 }
 
@@ -25,7 +27,7 @@
     return [[self alloc] init];
 }
 
-#pragma mark - 直接购买
+#pragma mark - 商品详情页
 - (void)buyNow:(id)params {
     if ([params isKindOfClass:[NSDictionary class]]) {
         NSLog(@"%@", params);
@@ -61,6 +63,27 @@
                    }];
 }
 
+
+#pragma mark - 订单详情
+
+- (void)paymentNow:(id)params {
+    if ([params isKindOfClass:[NSDictionary class]]) {
+        NSLog(@"params------->  %@", params);
+        UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
+        UINavigationController *navVc = tabBarVc.selectedViewController;
+        ODPayController *vc = [[ODPayController alloc] init];
+//        vc.orderId = self.order_id;
+//        vc.price = model.price_show;
+        [navVc pushViewController:vc animated:YES];
+    }
+    
+}
+
+
+
+
+
+
 #pragma mark - 购物车
 - (void)orderNow:(id)params {
     if ([params isKindOfClass:[NSDictionary class]]) {
@@ -85,6 +108,7 @@
         
     }];
 }
+
 
 
 @end

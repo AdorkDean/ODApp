@@ -10,8 +10,6 @@
 #import "ODConfirmOrderModel.h"
 #import "ODConfirmOrderCell.h"
 #import "ODAddAddressController.h"
-#import "ODSelectAddressViewController.h"
-#import "ODDeliveryNoteViewController.h"
 
 static NSString *cellId = @"ODConfirmOrderCell";
 
@@ -168,7 +166,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 #pragma mark - 数据请求
 -(void)requestData{
     __weakSelf;
-    NSDictionary *parametr = @{@"shopcart_ids":@"26,27,28",@"open_id":@"766148455eed214ed1f8"};
+    NSDictionary *parametr = @{@"shopcart_json" : self.datas.od_URLDesc, @"open_id":@"766148455eed214ed1f8"};
     [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parametr modelClass:[ODConfirmOrderModel class] success:^(ODConfirmOrderModelResponse * model) {
         weakSelf.model = [model result];
         [weakSelf.dataArray addObjectsFromArray:weakSelf.model.shopcart_list];
@@ -204,8 +202,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 }
 
 -(void)deliverTapClick{
-    ODDeliveryNoteViewController *deliveryNote = [[ODDeliveryNoteViewController alloc]init];
-    [self.navigationController pushViewController:deliveryNote animated:YES];
+    
 }
 
 -(void)buttonClick:(UIButton *)button{
@@ -214,7 +211,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
                                 @"price_show":[NSString
                                                stringWithFormat:@"%f", self.count],
                                 @"pay_type":@"2",
-                                @"shopcart_ids":@"1,2,3"
+                                @"shopcart_ids":self.shopcart_ids
                                 };
     [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:parameter modelClass:[NSObject class] success:^(id model) {
     } failure:^(NSError *error) {
