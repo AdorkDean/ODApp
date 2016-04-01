@@ -118,14 +118,18 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     for (NSDictionary *dict in shops)
     {
         NSDictionary *userDict = shops[dict];
-        [arrayM addObject:userDict];
+        
+//        if ([[userDict valueForKey:@"shopNumber"] integerValue]) {
+            [arrayM addObject:userDict];
+            
+//        }
     }
     self.datasArray = [ODTakeOutModel mj_objectArrayWithKeyValuesArray:arrayM];
     // 逆序
 //    self.datasArray = [[self.datasArray reverseObjectEnumerator] allObjects];
     
     // 设置按钮状态
-    self.buyButton.enabled = self.datasArray.count;
+    self.buyButton.enabled = [self.numberLabel.text integerValue];
 }
 
 #pragma mark - UITableViewDataSource
@@ -171,7 +175,7 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     [self dismiss];
     
     // 发送通知, 清空所有
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAll" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartRemoveALL object:self];
     
     // 清空所有
     [self.datasArray removeAllObjects];
@@ -179,7 +183,9 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     self.priceLabel.text = @"¥0";
     
     // 移除所有模型中保存的商品数量
-    for (ODTakeOutModel *takeOut in self.datasArray) takeOut.shopNumber = 0;
+    for (ODTakeOutModel *takeOut in self.datasArray) {
+        takeOut.shopNumber = 0;
+    }
 
     [self.shopCartView reloadData];
 }

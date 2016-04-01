@@ -40,8 +40,6 @@
 
 @property (nonatomic, strong) NSMutableDictionary *shops;
 
-- (void)setupNumber:(NSInteger)number price:(CGFloat)totolPrice;
-
 @property (nonatomic, strong) ODTakeOutModel *takeOut;
 
 @end

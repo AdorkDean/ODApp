@@ -213,14 +213,12 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 #pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
-//    [self.tableView.mj_header endRefreshing];
     [self.tableView.mj_footer endRefreshing];
     // 点击方法
     ODTakeOutModel *model = self.datas[indexPath.row];
     ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
     vc.shops = self.shops;
     vc.takeAwayTitle = model.title;
-//    vc setupNumber:result price:<#(CGFloat)#>
     vc.takeOut = self.datas[indexPath.row];
     vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
     [self.navigationController pushViewController:vc animated:YES];
@@ -298,13 +296,11 @@ static CGFloat priceResult = 0;
         NSArray *newDatas = [model result];
         [weakSelf.datas addObjectsFromArray:newDatas];
         [weakSelf.tableView reloadData];
-//        [weakSelf.tableView.mj_header endRefreshing];
         [weakSelf checkFooterState:newDatas.count];
         // 重新设置 page = 1
         weakSelf.page = @1;
     } failure:^(NSError *error) {
         if (weakSelf.params != params) return;
-//        [weakSelf.tableView.mj_header endRefreshing];
     }];
 }
 
@@ -353,6 +349,7 @@ static CGFloat priceResult = 0;
     result = 0;
     priceResult = 0;
     [self.shops removeAllObjects];
+    [self.shopCart.shopCartView reloadData];
 }
 
 - (void)plusShopCart:(NSNotification *)note
