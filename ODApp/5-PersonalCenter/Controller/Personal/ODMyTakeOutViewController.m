@@ -86,7 +86,6 @@ static NSString * const ODTakeOutViewID = @"ODTakeOutViewID";
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"type"] = @"1";
     params[@"page"] = [NSString stringWithFormat:@"%ld", self.pageCount];
-    params[@"open_id"] = @"766148455eed214ed1f8";
     __weakSelf
     [ODHttpTool getWithURL:ODUrlTakeOutOrderList parameters:params modelClass:[ODMyTakeOutModel class] success:^(id model) {
         if (weakSelf.pageCount == 1) {

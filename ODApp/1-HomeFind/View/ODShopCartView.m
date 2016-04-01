@@ -34,6 +34,9 @@ static CGFloat const shopCartCellH = 44;
 /** 蒙板 */
 @property (nonatomic, strong) UIView *coverView;
 
+/** 结算按钮 */
+@property (weak, nonatomic) IBOutlet UIButton *buyButton;
+
 @end
 
 static NSString * const shopCartListCell = @"ODShopCartListCell";
@@ -115,13 +118,14 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     for (NSDictionary *dict in shops)
     {
         NSDictionary *userDict = shops[dict];
-        
-        
         [arrayM addObject:userDict];
     }
     self.datasArray = [ODTakeOutModel mj_objectArrayWithKeyValuesArray:arrayM];
     // 逆序
 //    self.datasArray = [[self.datasArray reverseObjectEnumerator] allObjects];
+    
+    // 设置按钮状态
+    self.buyButton.enabled = self.datasArray.count;
 }
 
 #pragma mark - UITableViewDataSource
@@ -225,6 +229,8 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
  */
 - (IBAction)comfirmClick {
     [self dismiss];
+    
+    if (!self.datasArray.count) return;
     
     UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
     UINavigationController *navVc = tabBarVc.selectedViewController;

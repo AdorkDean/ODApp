@@ -49,13 +49,9 @@
                             <constraint firstAttribute="width" constant="80" id="Ri3-SD-ONu"/>
                             <constraint firstAttribute="height" constant="26" id="ceR-Or-OsD"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" title="购买" backgroundImage="button_purchase">
-                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        </state>
-                        <state key="disabled" title="已结束" backgroundImage="button_end">
-                            <color key="titleColor" red="1" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="calibratedRGB"/>
-                        </state>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <state key="normal" backgroundImage="button_purchase-1"/>
+                        <state key="disabled" title="已结束"/>
                         <connections>
                             <action selector="buyTakeAway:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wRZ-B6-Ufr"/>
                         </connections>
@@ -104,7 +100,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="button_end" width="76" height="26"/>
-        <image name="button_purchase" width="11" height="8"/>
+        <image name="button_purchase-1" width="76" height="26"/>
     </resources>
 </document>
