@@ -230,7 +230,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
         [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
         return;
     }
-    NSDictionary *parameter = @{
+    NSDictionary *successParams = @{
                                 @"address_id":@"1",
                                 @"price_show":[NSString
                                                stringWithFormat:@"%f", self.count],
@@ -238,14 +238,16 @@ static NSString *cellId = @"ODConfirmOrderCell";
                                 @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString]
                                 };
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:parameter modelClass:[ODTakeOutConfirmModel class] success:^(id model)
+    [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:successParams modelClass:[ODTakeOutConfirmModel class] success:^(id model)
      {
-         weakSelf.confirmModel = [model result];
-         weakSelf.orderId = weakSelf.confirmModel.order_id;
-         [weakSelf getWeiXinDataWithParam:@{
-                                             @"type" : @"1",
-                                             @"takeout_order_id" : self.confirmModel.order_id
-                                            }];
+         __strongSelf
+         strongSelf.confirmModel = [model result];
+         strongSelf.orderId = strongSelf.confirmModel.order_id;
+         strongSelf.successParams = @{
+                                    @"type" : @"1",
+                                    @"takeout_order_id" : strongSelf.confirmModel.order_id
+                                    };
+         [strongSelf getWeiXinDataWithParam:strongSelf.successParams];
      }
                    failure:^(NSError *error)
      {
