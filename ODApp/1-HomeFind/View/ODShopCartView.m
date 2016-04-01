@@ -11,6 +11,7 @@
 
 #import "ODShopCartListCell.h"
 #import "ODConfirmOrderViewController.h"
+#import "ODShopCartListHeaderView.h"
 
 #import <MJExtension.h>
 
@@ -33,9 +34,11 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
 - (UITableView *)shopCartView
 {
     if (!_shopCartView) {
-        _shopCartView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, KScreenWidth, CGFLOAT_MIN) style:UITableViewStylePlain];
+        _shopCartView = [[UITableView alloc] initWithFrame:CGRectMake(0, KScreenHeight - 49, KScreenWidth, CGFLOAT_MIN) style:UITableViewStylePlain];
         _shopCartView.dataSource = self;
         _shopCartView.delegate = self;
+        _shopCartView.bounces = NO;
+        _shopCartView.rowHeight = 46;
         
         UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
         [keyWindow addSubview:self.shopCartView];
@@ -92,6 +95,11 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
 }
 
+- (void)setupHeaderView
+{
+    
+}
+
 - (void)setShops:(NSMutableDictionary *)shops
 {
     _shops = shops;
@@ -127,8 +135,10 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
 - (void)shopCartListcell:(ODShopCartListCell *)cell RemoveCurrentRow:(ODTakeOutModel *)currentData
 {
     [self.datasArray removeObject:currentData];
-    CGFloat height = self.datasArray.count * 44;
-    self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 55, KScreenWidth, height);
+    CGFloat height = self.datasArray.count * 44 + 25;
+    [UIView animateWithDuration:kAnimateDuration animations:^{
+        self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 49, KScreenWidth, height);
+    }];
     
     if (!self.datasArray.count) [self dismiss];
     [self.shopCartView reloadData];
@@ -143,8 +153,17 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     self.isOpened = !self.isOpened;
     
     if (self.isOpened) {
-        CGFloat height = self.datasArray.count * 44;
-        self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 55, KScreenWidth, height);
+        CGFloat height = self.datasArray.count * 44 + 25;
+//        self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 49, KScreenWidth, height);
+        [UIView animateWithDuration:kAnimateDuration animations:^{
+            self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - 49, KScreenWidth, height);
+        }];
+        
+        
+        ODShopCartListHeaderView *headerView = [ODShopCartListHeaderView headerView];
+        headerView.od_width = KScreenWidth;
+        headerView.od_height = 25;
+        _shopCartView.tableHeaderView = headerView;
         
         UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
         [keyWindow insertSubview:self.coverView belowSubview:self];
@@ -155,15 +174,27 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     [self.shopCartView reloadData];
 }
 
+/**
+ *  移除蒙板
+ */
 - (void)dismiss
 {
     self.isOpened = NO;
-    self.shopCartView.od_height = 0;
-    if (self.coverView.subviews) [self.coverView removeFromSuperview];
+    [UIView animateWithDuration:kAnimateDuration animations:^{
+        self.shopCartView.frame = CGRectMake(0, KScreenHeight - 49, KScreenWidth, CGFLOAT_MIN);
+        
+    } completion:^(BOOL finished) {
+        if (self.coverView.subviews) [self.coverView removeFromSuperview];
+    }];
     [self.shopCartView reloadData];
 }
 
+/**
+ *  点击去结算
+ */
 - (IBAction)comfirmClick {
+    [self dismiss];
+    
     UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
     UINavigationController *navVc = tabBarVc.selectedViewController;
     ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc] init];

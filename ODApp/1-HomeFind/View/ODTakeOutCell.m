@@ -94,8 +94,6 @@
     self.datas.shopNumber = cell.takeOut.shopNumber;
 }
 
-
-
 #pragma mark - 事件方法
 - (IBAction)buyTakeAway:(UIButton *)button
 {
