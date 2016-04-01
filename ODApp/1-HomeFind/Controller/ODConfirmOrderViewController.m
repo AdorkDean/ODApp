@@ -11,6 +11,14 @@
 #import "ODConfirmOrderCell.h"
 #import "ODAddAddressController.h"
 
+#import "ODPayModel.h"
+#import "WXApi.h"
+#import "WXApiObject.h"
+
+#import "ODMyTakeOutModel.h"
+
+#import "ODTakeOutConfirmModel.h"
+
 static NSString *cellId = @"ODConfirmOrderCell";
 
 @interface ODConfirmOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -19,7 +27,10 @@ static NSString *cellId = @"ODConfirmOrderCell";
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)UIView *tableHeaderView;
 @property(nonatomic,strong)ODConfirmOrderModel *model;
+@property (nonatomic, strong) ODPayModel *payModel;
+@property (nonatomic, strong) ODTakeOutConfirmModel *confirmModel;
 @property(nonatomic)CGFloat count;
+
 @end
 
 @implementation ODConfirmOrderViewController
@@ -166,7 +177,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 #pragma mark - 数据请求
 -(void)requestData{
     __weakSelf;
-    NSDictionary *parametr = @{@"shopcart_json" : self.datas.od_URLDesc, @"open_id":@"766148455eed214ed1f8"};
+    NSDictionary *parametr = @{@"shopcart_json" : self.datas.od_URLDesc};
     [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parametr modelClass:[ODConfirmOrderModel class] success:^(ODConfirmOrderModelResponse * model) {
         weakSelf.model = [model result];
         [weakSelf.dataArray addObjectsFromArray:weakSelf.model.shopcart_list];
@@ -206,22 +217,55 @@ static NSString *cellId = @"ODConfirmOrderCell";
 }
 
 -(void)buttonClick:(UIButton *)button{
+    if (![WXApi isWXAppInstalled])
+    {
+        [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
+        return;
+    }
     NSDictionary *parameter = @{
                                 @"address_id":@"1",
                                 @"price_show":[NSString
                                                stringWithFormat:@"%f", self.count],
                                 @"pay_type":@"2",
                                 @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString],
-                                @"open_id":@"766148455eed214ed1f8"
+//                                @"open_id":@"766148455eed214ed1f8"
                                 };
-    [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:parameter modelClass:[NSObject class] success:^(id model)
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:parameter modelClass:[ODTakeOutConfirmModel class] success:^(id model)
      {
-         
+         weakSelf.confirmModel = [model result];
+         [weakSelf getWeiXinData];
      }
                    failure:^(NSError *error)
      {
         
     }];
+}
+
+- (void)getWeiXinData {
+    NSDictionary *parameter = @{ @"type" : @"1", @"takeout_order_id" : self.confirmModel.order_id };
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:parameter modelClass:[ODPayModel class] success:^(id model) {
+       
+        weakSelf.payModel = [model result];
+        [weakSelf payMoneyGiveWeiXin];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)payMoneyGiveWeiXin {
+    PayReq *request = [[PayReq alloc] init];
+    
+    request.partnerId = self.payModel.partnerid;
+    request.prepayId = self.payModel.prepay_id;
+    request.package = self.payModel.package;
+    request.nonceStr = self.payModel.nonce_str;
+    request.timeStamp = self.payModel.timeStamp;
+    request.sign = self.payModel.sign;
+    
+    [WXApi sendReq:request];
 }
 
 @end

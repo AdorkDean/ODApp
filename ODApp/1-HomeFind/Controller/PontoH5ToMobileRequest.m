@@ -16,7 +16,7 @@
 #import "ODBuyTakeOutViewController.h"
 #import "ODConfirmOrderViewController.h"
 
-
+#import "ODPayModel.h"
 @implementation PontoH5ToMobileRequest {
 }
 
@@ -67,45 +67,39 @@
 - (void)paymentNow:(id)params {
     if ([params isKindOfClass:[NSDictionary class]]) {
         NSLog(@"params------->%@", params);
-        UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
-        UINavigationController *navVc = tabBarVc.selectedViewController;
-        ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc]init];
-//        vc.orderId = self.order_id;
-//        vc.price = model.price_show;
-        [navVc pushViewController:vc animated:YES];
+        [self getWeiXinData:params[@"id"]];
     }
 }
 
-
-
-
-
-
-#pragma mark - 购物车
-- (void)orderNow:(id)params {
-    if ([params isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"params ------->%@", params);
-        [self orderNowRequestData:params];
+- (void)getWeiXinData:(NSString *)paramsId {
+    
+    if (![WXApi isWXAppInstalled]) {
+        [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
+        return;
+    }
+    NSDictionary *parameter = @{ @"type" : @"1", @"takeout_order_id" : [NSString stringWithFormat:@"%@", paramsId] };
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:parameter modelClass:[ODPayModel class] success:^(id model) {
         
-        UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
-        UINavigationController *navVc = tabBarVc.selectedViewController;
-        ODBuyTakeOutViewController *vc = [[ODBuyTakeOutViewController alloc] init];
-        [navVc pushViewController:vc animated:YES];
-    }
-}
-
-- (void)orderNowRequestData:(NSString *)paramsId {
-    NSDictionary *parameter = @{
-                                @"object_type" : @"1",
-                                @"object_id" :[NSString stringWithFormat:@"%@", paramsId]
-                                };
-    [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parameter modelClass:[NSObject class] success:^(id model) {
+        ODPayModel *payModel = [model result];
+        [weakSelf payMoneyGiveWeiXin:payModel];
         
     } failure:^(NSError *error) {
         
     }];
 }
 
-
+- (void)payMoneyGiveWeiXin:(ODPayModel *)model {
+    PayReq *request = [[PayReq alloc] init];
+    
+    request.partnerId = model.partnerid;
+    request.prepayId = model.prepay_id;
+    request.package = model.package;
+    request.nonceStr = model.nonce_str;
+    request.timeStamp = model.timeStamp;
+    request.sign = model.sign;
+    
+    [WXApi sendReq:request];
+}
 
 @end
