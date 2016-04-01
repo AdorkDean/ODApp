@@ -6,13 +6,12 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import "ODBaseViewController.h"
+#import "ODPayController.h"
 
-@interface ODConfirmOrderViewController : ODBaseViewController
+@interface ODConfirmOrderViewController : ODPayController
 
 @property (nonatomic, strong) NSArray *datas;
-/** 商品的ids */
-@property (nonatomic,copy) NSString *shopcart_ids;
 
+@property (nonatomic, strong) NSString *takeOutID;
 
 @end

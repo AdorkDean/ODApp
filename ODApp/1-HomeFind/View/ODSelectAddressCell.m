@@ -16,10 +16,18 @@
     self.lineView.backgroundColor = [UIColor lineColor];
 }
 
+-(void)showDataWithNSDictionary:(NSDictionary *)dict index:(NSIndexPath *)index{
+    if (index.row == 0) {
+        self.iconImageView.image = [UIImage imageNamed:@"icon_id"];
+    }else{
+        self.iconImageView.image = [UIImage imageNamed:@"icon_id_Unchecked"];
+    }
+    self.titleLabel.text = dict[@"name"];
+    self.detailAddressLabel.text = dict[@"detail"];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

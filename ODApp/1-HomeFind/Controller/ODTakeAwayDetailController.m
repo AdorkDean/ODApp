@@ -29,24 +29,31 @@
     [self createWebView];
     self.pontoDispatcher = [[PontoDispatcher alloc] initWithHandlerClassesPrefix:@"Ponto" andWebView:self.webView];
     
+    // 订单详情页
     if (self.isOrderDetail) {
         NSString *urlString = [[ODHttpTool getRequestParameter:@{@"open_id" : @"766148455eed214ed1f8", @"order_id" : self.order_id}]od_URLDesc];
         NSString *url = [ODWebUrlNativeOrderInfo stringByAppendingString:urlString];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL OD_URLWithString:url]]];
     }
+    // 商品详情页
     else {
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?id=%@", ODWebUrlNative, self.product_id]]]];
         [self setupShopCart];
     }    
 }
 
+#pragma mark - Create UIWebView
 - (void)createWebView {
-
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight - 49)];
+    float footHeight = 0;
+    if (!self.isOrderDetail) {
+        footHeight = 49;
+    }
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight - footHeight)];
     [self.view addSubview:self.webView];
 }
 
 
+#pragma mark - 购物车
 - (void)setupShopCart
 {
     ODShopCartView *shopCart = [ODShopCartView shopCart];

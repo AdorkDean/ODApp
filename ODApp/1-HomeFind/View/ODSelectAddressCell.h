@@ -14,4 +14,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *detailAddressLabel;
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 
+-(void)showDataWithNSDictionary:(NSDictionary *)dict index:(NSIndexPath *)index;
+
 @end

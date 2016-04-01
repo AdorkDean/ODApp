@@ -1,15 +1,14 @@
 //
-//  ODMyTakeOutModel.h
+//  ODTakeOutConfirmModel.h
 //  ODApp
 //
-//  Created by 王振航 on 16/3/25.
+//  Created by Bracelet on 16/4/1.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-
-@interface ODMyTakeOutProductsModel : NSObject
+@interface odTakeOUtConfirmProductsModel : NSObject
 
 /** 外卖商品的Id */
 @property (nonatomic, copy) NSString *takeout_product_id;
@@ -26,7 +25,7 @@
 
 @end
 
-@interface ODMyTakeOutModel : NSObject
+@interface ODTakeOutConfirmModel : NSObject
 
 /** 订单Id */
 @property (nonatomic, copy) NSString *order_id;
@@ -56,3 +55,5 @@
 @property (nonatomic, strong) NSArray *products;
 
 @end
+
+

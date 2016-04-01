@@ -16,8 +16,7 @@
 #import "ODBuyTakeOutViewController.h"
 #import "ODConfirmOrderViewController.h"
 
-#import "ODPayController.h"
-
+#import "ODPayModel.h"
 @implementation PontoH5ToMobileRequest {
 }
 
@@ -27,11 +26,11 @@
     return [[self alloc] init];
 }
 
-#pragma mark - 商品详情页
-- (void)buyNow:(id)params {
+#pragma mark - 商品详情
+
+- (void)addToCart:(id)params {
     if ([params isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"%@", params);
-        NSLog(@"%@",params[@"id"]);
+        NSLog(@"params------->%@",params[@"id"]);
         [self buyNowRequestData:params[@"id"]];
         
         UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
@@ -42,10 +41,9 @@
             [navVc presentViewController:vc animated:YES completion:nil];
         }
         else {
-//            ODBuyTakeOutViewController *vc = [[ODBuyTakeOutViewController alloc] init];
+//            ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc]init];
 //            [navVc pushViewController:vc animated:YES];
-            ODConfirmOrderViewController *confirmOrder = [[ODConfirmOrderViewController alloc]init];
-            [navVc pushViewController:confirmOrder animated:YES];
+            // 给购物车添加东西
         }
     }
 }
@@ -68,47 +66,40 @@
 
 - (void)paymentNow:(id)params {
     if ([params isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"params------->  %@", params);
-        UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
-        UINavigationController *navVc = tabBarVc.selectedViewController;
-        ODPayController *vc = [[ODPayController alloc] init];
-//        vc.orderId = self.order_id;
-//        vc.price = model.price_show;
-        [navVc pushViewController:vc animated:YES];
+        NSLog(@"params------->%@", params);
+        [self getWeiXinData:params[@"id"]];
     }
+}
+
+- (void)getWeiXinData:(NSString *)paramsId {
     
-}
-
-
-
-
-
-
-#pragma mark - 购物车
-- (void)orderNow:(id)params {
-    if ([params isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"params ------->  %@", params);
-        [self orderNowRequestData:params];
-        
-        UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
-        UINavigationController *navVc = tabBarVc.selectedViewController;
-        ODBuyTakeOutViewController *vc = [[ODBuyTakeOutViewController alloc] init];
-        [navVc pushViewController:vc animated:YES];
+    if (![WXApi isWXAppInstalled]) {
+        [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
+        return;
     }
-}
-
-- (void)orderNowRequestData:(NSString *)paramsId {
-    NSDictionary *parameter = @{
-                                @"object_type" : @"1",
-                                @"object_id" :[NSString stringWithFormat:@"%@", paramsId]
-                                };
-    [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parameter modelClass:[NSObject class] success:^(id model) {
+    NSDictionary *parameter = @{ @"type" : @"1", @"takeout_order_id" : [NSString stringWithFormat:@"%@", paramsId] };
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:parameter modelClass:[ODPayModel class] success:^(id model) {
+        
+        ODPayModel *payModel = [model result];
+        [weakSelf payMoneyGiveWeiXin:payModel];
         
     } failure:^(NSError *error) {
         
     }];
 }
 
-
+- (void)payMoneyGiveWeiXin:(ODPayModel *)model {
+    PayReq *request = [[PayReq alloc] init];
+    
+    request.partnerId = model.partnerid;
+    request.prepayId = model.prepay_id;
+    request.package = model.package;
+    request.nonceStr = model.nonce_str;
+    request.timeStamp = model.timeStamp;
+    request.sign = model.sign;
+    
+    [WXApi sendReq:request];
+}
 
 @end

@@ -19,9 +19,10 @@ static NSString *cellId = @"ODSelectAddressCell";
 @property (nonatomic ,strong) AMapSearchAPI * mapSearchAPI;
 @property (nonatomic ,strong) MAUserLocation * currentLocation;
 @property (nonatomic ,strong) NSMutableDictionary * userLocationDict;
-@property(nonatomic,strong)UISearchBar *searchBar;
-@property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSMutableArray *dataArray;
+@property (nonatomic ,strong) UISearchBar *searchBar;
+@property (nonatomic ,strong) UITextField *textField;
+@property (nonatomic ,strong) UITableView *tableView;
+@property (nonatomic ,strong) NSMutableArray *dataArray;
 
 @end
 
@@ -58,9 +59,9 @@ static NSString *cellId = @"ODSelectAddressCell";
     self.mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 300)];
     self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
+    self.mapView.customizeUserLocationAccuracyCircleRepresentation = YES;
+    self.mapView.userTrackingMode = MAUserTrackingModeFollow;
     [self.mapView setUserTrackingMode: MAUserTrackingModeFollow animated:YES];
-    _mapView.customizeUserLocationAccuracyCircleRepresentation = YES;
-    _mapView.userTrackingMode = MAUserTrackingModeFollow;
     [self.mapView setZoomLevel:20 animated:YES];
     
     self.mapSearchAPI = [[AMapSearchAPI alloc] init];
@@ -73,13 +74,11 @@ static NSString *cellId = @"ODSelectAddressCell";
     [super viewDidAppear:animated];
     
     MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
-    pointAnnotation.coordinate = CLLocationCoordinate2DMake(31.286952094415877, 121.50222749809993);
-    
-    [_mapView addAnnotation:pointAnnotation];
+//    pointAnnotation.coordinate = CLLocationCoordinate2DMake(31.286952094415877, 121.50222749809993);
+    [self.mapView addAnnotation:pointAnnotation];
 }
 
-- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation
-{
+- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation{
     if ([annotation isKindOfClass:[MAPointAnnotation class]])
     {
         static NSString *pointReuseIndentifier = @"pointReuseIndentifier";
@@ -109,6 +108,7 @@ static NSString *cellId = @"ODSelectAddressCell";
     self.searchBar.delegate = self;
     self.searchBar.placeholder = @"请输入你的地址";
     self.navigationItem.titleView = self.searchBar;
+
 }
 
 #pragma mark - UITableViewDataSource
@@ -119,15 +119,12 @@ static NSString *cellId = @"ODSelectAddressCell";
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ODSelectAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    NSDictionary *dict =  self.dataArray[indexPath.row];
-    cell.titleLabel.text = dict[@"name"];
-    cell.detailAddressLabel.text = dict[@"detail"];
+    [cell showDataWithNSDictionary:self.dataArray[indexPath.row] index:indexPath];
     return cell;
 }
 
 #pragma mark - UITabeleDelegate
-
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
+-(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     return 50;
 }
 
@@ -179,6 +176,31 @@ static NSString *cellId = @"ODSelectAddressCell";
     [self.tableView reloadData];
 }
 
+//实现逆地理编码的回调函数
+- (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response {
+    if (response.regeocode != nil) {
+        NSString *cityResult;
+        //通过AMapReGeocodeSearchResponse对象处理搜索结果
+        NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
+        if (result.length == 0) {
+            result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
+            if (result.length != 0) {
+                cityResult = [result substringToIndex:[result length] - 1];
+            }
+        }
+        else {
+            cityResult = [result substringToIndex:[result length] - 1];
+        }
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@", cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action) {
+            [ODUserInformation sharedODUserInformation].locationCity = cityResult;
+            
+        }]];
+    
+    }
+    
+}
 
 
 

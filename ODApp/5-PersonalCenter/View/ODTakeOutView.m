@@ -50,7 +50,7 @@
         [self.takeOutContentView addSubview:takeOutNumberLabel];
     }
     
-    self.takeOutTotalMoney.text = model.price_show;
+    self.takeOutTotalMoney.text = [NSString stringWithFormat:@"合计 ￥%.2f",model.price_show];
     
     if ([model.status isEqualToString:@"1"]) {
         [self.enterButton setTitle:@"支付" forState:UIControlStateNormal];
@@ -58,6 +58,7 @@
     }
     else {
         [self.enterButton setTitle:@"查看" forState:UIControlStateNormal];
+        self.enterButton.backgroundColor = [UIColor whiteColor];
     }
 }
 
