@@ -299,6 +299,13 @@
 		B86588291C993E44002ECB0C /* ODMyTaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B86588271C993E44002ECB0C /* ODMyTaskCell.xib */; };
 		B865882D1C9953AA002ECB0C /* ODMyTaskViolationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B865882B1C9953AA002ECB0C /* ODMyTaskViolationsCell.m */; };
 		B865882E1C9953AA002ECB0C /* ODMyTaskViolationsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B865882C1C9953AA002ECB0C /* ODMyTaskViolationsCell.xib */; };
+		B869FDF81CAE0711003E08EE /* ODConfirmOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B869FDF71CAE0711003E08EE /* ODConfirmOrderViewController.m */; };
+		B869FDFB1CAE0722003E08EE /* ODTestUrlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B869FDFA1CAE0722003E08EE /* ODTestUrlViewController.m */; };
+		B869FDFE1CAE0739003E08EE /* ODConfirmOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B869FDFD1CAE0739003E08EE /* ODConfirmOrderModel.m */; };
+		B869FE021CAE0766003E08EE /* ODShopCartView.m in Sources */ = {isa = PBXBuildFile; fileRef = B869FE001CAE0766003E08EE /* ODShopCartView.m */; };
+		B869FE031CAE0766003E08EE /* ODShopCartView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B869FE011CAE0766003E08EE /* ODShopCartView.xib */; };
+		B869FE071CAE0A90003E08EE /* ODConfirmOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B869FE051CAE0A90003E08EE /* ODConfirmOrderCell.m */; };
+		B869FE081CAE0A90003E08EE /* ODConfirmOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B869FE061CAE0A90003E08EE /* ODConfirmOrderCell.xib */; };
 		ED03473E1CA2A4770090D834 /* ODOrderAndSellController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED03473D1CA2A4770090D834 /* ODOrderAndSellController.m */; };
 		ED3D47881C9BEB44008B5A0F /* ODMyOrderRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED3D47861C9BEB44008B5A0F /* ODMyOrderRecordView.m */; };
 		ED3D47891C9BEB44008B5A0F /* ODMyOrderRecordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED3D47871C9BEB44008B5A0F /* ODMyOrderRecordView.xib */; };
@@ -888,6 +895,18 @@
 		B865882A1C9953AA002ECB0C /* ODMyTaskViolationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODMyTaskViolationsCell.h; sourceTree = "<group>"; };
 		B865882B1C9953AA002ECB0C /* ODMyTaskViolationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODMyTaskViolationsCell.m; sourceTree = "<group>"; };
 		B865882C1C9953AA002ECB0C /* ODMyTaskViolationsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODMyTaskViolationsCell.xib; sourceTree = "<group>"; };
+		B869FDF61CAE0711003E08EE /* ODConfirmOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderViewController.h; sourceTree = "<group>"; };
+		B869FDF71CAE0711003E08EE /* ODConfirmOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderViewController.m; sourceTree = "<group>"; };
+		B869FDF91CAE0722003E08EE /* ODTestUrlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTestUrlViewController.h; sourceTree = "<group>"; };
+		B869FDFA1CAE0722003E08EE /* ODTestUrlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTestUrlViewController.m; sourceTree = "<group>"; };
+		B869FDFC1CAE0739003E08EE /* ODConfirmOrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderModel.h; sourceTree = "<group>"; };
+		B869FDFD1CAE0739003E08EE /* ODConfirmOrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderModel.m; sourceTree = "<group>"; };
+		B869FDFF1CAE0766003E08EE /* ODShopCartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODShopCartView.h; sourceTree = "<group>"; };
+		B869FE001CAE0766003E08EE /* ODShopCartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODShopCartView.m; sourceTree = "<group>"; };
+		B869FE011CAE0766003E08EE /* ODShopCartView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODShopCartView.xib; sourceTree = "<group>"; };
+		B869FE041CAE0A90003E08EE /* ODConfirmOrderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODConfirmOrderCell.h; sourceTree = "<group>"; };
+		B869FE051CAE0A90003E08EE /* ODConfirmOrderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODConfirmOrderCell.m; sourceTree = "<group>"; };
+		B869FE061CAE0A90003E08EE /* ODConfirmOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODConfirmOrderCell.xib; sourceTree = "<group>"; };
 		C5EAEBD7E6B20864218413FA /* Pods-ODApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.debug.xcconfig"; sourceTree = "<group>"; };
 		ED03473C1CA2A4770090D834 /* ODOrderAndSellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderAndSellController.h; sourceTree = "<group>"; };
 		ED03473D1CA2A4770090D834 /* ODOrderAndSellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderAndSellController.m; sourceTree = "<group>"; };
@@ -1272,6 +1291,10 @@
 		232CB3A11C9264E200340D12 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B869FDF61CAE0711003E08EE /* ODConfirmOrderViewController.h */,
+				B869FDF71CAE0711003E08EE /* ODConfirmOrderViewController.m */,
+				B869FDF91CAE0722003E08EE /* ODTestUrlViewController.h */,
+				B869FDFA1CAE0722003E08EE /* ODTestUrlViewController.m */,
 				400F18571CA93288000EFFBC /* ODBuyTakeOutViewController.h */,
 				400F18581CA93288000EFFBC /* ODBuyTakeOutViewController.m */,
 				400F18541CA93239000EFFBC /* ODTakeOutHomeController.h */,
@@ -1294,6 +1317,8 @@
 		232CB3AA1C9264E200340D12 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B869FDFC1CAE0739003E08EE /* ODConfirmOrderModel.h */,
+				B869FDFD1CAE0739003E08EE /* ODConfirmOrderModel.m */,
 				4035EF7B1CACCC8200564BBA /* ODBuyTakeOutModel.h */,
 				4035EF7C1CACCC8200564BBA /* ODBuyTakeOutModel.m */,
 				400F18511CA9322E000EFFBC /* ODTakeOutModel.h */,
@@ -1314,6 +1339,9 @@
 				400F18471CA93220000EFFBC /* ODTakeOutCell.h */,
 				400F18481CA93220000EFFBC /* ODTakeOutCell.m */,
 				400F18491CA93220000EFFBC /* ODTakeOutCell.xib */,
+				B869FDFF1CAE0766003E08EE /* ODShopCartView.h */,
+				B869FE001CAE0766003E08EE /* ODShopCartView.m */,
+				B869FE011CAE0766003E08EE /* ODShopCartView.xib */,
 				ED3FDCD31CAD0D710059692B /* ODTakeOutView.h */,
 				ED3FDCD41CAD0D710059692B /* ODTakeOutView.m */,
 				ED3FDCD51CAD0D710059692B /* ODTakeOutView.xib */,
@@ -1650,6 +1678,9 @@
 			isa = PBXGroup;
 			children = (
 				232CB4731C9264E200340D12 /* ODCommunityDetailCell.h */,
+				B869FE041CAE0A90003E08EE /* ODConfirmOrderCell.h */,
+				B869FE051CAE0A90003E08EE /* ODConfirmOrderCell.m */,
+				B869FE061CAE0A90003E08EE /* ODConfirmOrderCell.xib */,
 				232CB4741C9264E200340D12 /* ODCommunityDetailCell.m */,
 				232CB4751C9264E200340D12 /* ODCommunityDetailCell.xib */,
 				B853645B1CA510FA005E312B /* ODCommunityCell.h */,
@@ -2287,6 +2318,7 @@
 				232CB5BA1C9264E200340D12 /* ODPickerHeaderView.xib in Resources */,
 				232CB6551C9264E200340D12 /* ODOrderCell.xib in Resources */,
 				232CB5E11C9264E200340D12 /* ODBazaarPicCollectionViewCell.xib in Resources */,
+				B869FE031CAE0766003E08EE /* ODShopCartView.xib in Resources */,
 				232CB6501C9264E200340D12 /* ODCancelOrderView.xib in Resources */,
 				ED4688141C96905F00E31F64 /* ODApplyListCell.xib in Resources */,
 				ED4917BA1C9944FE001E549A /* ODReleaseView.xib in Resources */,
@@ -2302,6 +2334,7 @@
 				232CB5A91C9264E200340D12 /* ODActivitybottomView.xib in Resources */,
 				232CB5BC1C9264E200340D12 /* ODPlacePrecontrHeaderView.xib in Resources */,
 				232CB5AB1C9264E200340D12 /* ODActivityDetailContentCell.xib in Resources */,
+				B869FE081CAE0A90003E08EE /* ODConfirmOrderCell.xib in Resources */,
 				232CB5BE1C9264E200340D12 /* ODPlacePreDeviceView.xib in Resources */,
 				232CB5DD1C9264E200340D12 /* ODAddressCell.xib in Resources */,
 				B86588291C993E44002ECB0C /* ODMyTaskCell.xib in Resources */,
@@ -2514,6 +2547,7 @@
 				400F184F1CA93220000EFFBC /* ODTakeOutHeaderView.m in Sources */,
 				400334891C9B97C500973818 /* ODGroupItem.m in Sources */,
 				232CB5C51C9264E200340D12 /* ODAddAddressController.m in Sources */,
+				B869FDFE1CAE0739003E08EE /* ODConfirmOrderModel.m in Sources */,
 				ED3FDCD61CAD0D710059692B /* ODTakeOutView.m in Sources */,
 				232CB6081C9264E200340D12 /* ODPersonalCenterCollectionController.m in Sources */,
 				232CB6171C9264E200340D12 /* ODMyOrderDetailModel.m in Sources */,
@@ -2614,11 +2648,14 @@
 				40A02D1B1C965A3F009CE702 /* ODBazaarExchangeSkillCell.m in Sources */,
 				232CB5621C9264E200340D12 /* main.m in Sources */,
 				232CB5EE1C9264E200340D12 /* ODCommumityViewController.m in Sources */,
+				B869FDF81CAE0711003E08EE /* ODConfirmOrderViewController.m in Sources */,
 				232CB5FB1C9264E200340D12 /* ODPersonalCenterViewController.m in Sources */,
 				B85364621CA51FA3005E312B /* ODMyReleaseTopicViewController.m in Sources */,
 				232CB5EF1C9264E200340D12 /* ODCommunityDetailReplyViewController.m in Sources */,
+				B869FDFB1CAE0722003E08EE /* ODTestUrlViewController.m in Sources */,
 				232CB6411C9264E200340D12 /* ODThirdOrderController.m in Sources */,
 				232CB5DA1C9264E200340D12 /* ODAddAddressView.m in Sources */,
+				B869FE021CAE0766003E08EE /* ODShopCartView.m in Sources */,
 				ED4FF4711CA3E89C00EDE431 /* NSURL+QueryDictionary.m in Sources */,
 				232CB5F51C9264E200340D12 /* ODCommunityDetailInfoModel.m in Sources */,
 				232CB62D1C9264E200340D12 /* ODOperationSeccondCell.m in Sources */,
@@ -2633,6 +2670,7 @@
 				232CB5D21C9264E200340D12 /* ODBazaarDetailModel.m in Sources */,
 				232CB5841C9264E200340D12 /* CommonUtil.m in Sources */,
 				232CB56F1C9264E200340D12 /* IQToolbar.m in Sources */,
+				B869FE071CAE0A90003E08EE /* ODConfirmOrderCell.m in Sources */,
 				232CB6541C9264E200340D12 /* ODOrderCell.m in Sources */,
 				232CB6031C9264E200340D12 /* ODMyTopicController.m in Sources */,
 				232CB5F41C9264E200340D12 /* ODCommunityBbsModel.m in Sources */,
