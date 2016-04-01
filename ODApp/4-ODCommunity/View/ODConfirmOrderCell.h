@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *countLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
+@property (weak, nonatomic) IBOutlet UIView *lineView;
 
 @property(nonatomic,strong)ODConfirmOrderModelShopcart_list *model;
 

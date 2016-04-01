@@ -15,12 +15,13 @@
     self.nameLabel.textColor = [UIColor colorGloomyColor];
     self.countLabel.textColor = [UIColor colorGreyColor];
     self.priceLabel.textColor = [UIColor redColor];
+    self.lineView.backgroundColor = [UIColor backgroundColor];
 }
 
 -(void)setModel:(ODConfirmOrderModelShopcart_list *)model{
     self.nameLabel.text = model.obj_title;
-    self.priceLabel.text = model.price_show;
-    self.countLabel.text = model.num;
+    self.priceLabel.text = [NSString stringWithFormat:@"￥ %@",model.price_show];
+    self.countLabel.text = [NSString stringWithFormat:@"X %@",model.num];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -9,7 +9,7 @@
 #import "ODConfirmOrderViewController.h"
 #import "ODConfirmOrderModel.h"
 #import "ODConfirmOrderCell.h"
-
+#import "ODAddAddressController.h"
 static NSString *cellId = @"ODConfirmOrderCell";
 
 @interface ODConfirmOrderViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -17,7 +17,8 @@ static NSString *cellId = @"ODConfirmOrderCell";
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)UIView *tableHeaderView;
-
+@property(nonatomic,strong)ODConfirmOrderModel *model;
+@property(nonatomic)CGFloat count;
 @end
 
 @implementation ODConfirmOrderViewController
@@ -25,7 +26,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 #pragma mark - lzayload
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-63) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64-49) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -49,21 +50,105 @@ static NSString *cellId = @"ODConfirmOrderCell";
     
     self.navigationItem.title = @"确认订单";
     [self requestData];
-    [self createBottomView];
+   
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+-(void)createTableHeaderView{
+    self.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 200)];
+    self.tableHeaderView.backgroundColor = [UIColor backgroundColor];
+    UITapGestureRecognizer *infoTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(infoTapClick)];
+    
+    UIView *infoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 66)];
+    infoView.backgroundColor = [UIColor whiteColor];
+    [infoView addGestureRecognizer:infoTap];
+    [self.tableHeaderView addSubview:infoView];
+    
+    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, 17, 100, 20)];
+    nameLabel.text = [self.model.address valueForKeyPath:@"name"];
+    nameLabel.font = [UIFont systemFontOfSize:13.5];
+    
+    UILabel *numLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(nameLabel.frame)+15, 17, 150, 20)];
+    numLabel.text = [self.model.address valueForKeyPath:@"tel"];
+    numLabel.font = [UIFont systemFontOfSize:13.5];
+    
+    UILabel *addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, CGRectGetMaxY(nameLabel.frame)+7.5, kScreenSize.width-60, 15)];
+    addressLabel.text = [self.model.address valueForKeyPath:@"address"];
+    addressLabel.textColor = [UIColor colorGreyColor];
+    addressLabel.font = [UIFont systemFontOfSize:11];
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-25.4, 25.5, 8.4, 15)];
+    imageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
+    [infoView addSubview:nameLabel],[infoView addSubview:numLabel],[infoView addSubview:addressLabel],[infoView addSubview:imageView];
+    
+    UIView *payView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(infoView.frame)+6, kScreenSize.width, 55)];
+    payView.backgroundColor = [UIColor whiteColor];
+    [self.tableHeaderView addSubview:payView];
+    
+    UIImageView *wxIamgeView = [[UIImageView alloc]initWithFrame:CGRectMake(17, 18.5, 22.5, 18)];
+    wxIamgeView.image = [UIImage imageNamed:@"icon_WeChat Payment"];
+    [payView addSubview:wxIamgeView];
+    
+    UILabel *wxLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxY(wxIamgeView.frame)+7.5, 15, 100, 25)];
+    wxLabel.text = @"微信钱包支付";
+    wxLabel.font = [UIFont systemFontOfSize:13.5];
+    [payView addSubview:wxLabel];
+    
+    UIImageView *confirmImageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-37, 20, 20, 20)];
+    confirmImageView.image = [UIImage imageNamed:@"icon_Default address_Selected"];
+    [payView addSubview:confirmImageView];
+    
+    UITapGestureRecognizer *deliveryTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(deliverTapClick)];
+    UIView *deliveryView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(payView.frame)+6, kScreenSize.width,101)];
+    deliveryView.backgroundColor = [UIColor whiteColor];
+    [deliveryView addGestureRecognizer:deliveryTap];
+    [self.tableHeaderView addSubview:deliveryView];
+    
+    UILabel *remarkLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, 15, 100, 20)];
+    remarkLabel.text = @"配送备注";
+    remarkLabel.font = [UIFont systemFontOfSize:13.5];
+    
+    UILabel *remarkDetailLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(remarkLabel.frame)+10, 15, kScreenSize.width-135,20)];
+    remarkDetailLabel.font = [UIFont systemFontOfSize:13.5];
+    
+    UIImageView *imageView1 = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-25.4, 17.5, 8.4, 15)];
+    imageView1.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
+    
+    UIView *lineView = [[UIView alloc]initWithFrame:CGRectMake(17, CGRectGetMaxY(remarkLabel.frame)+15, kScreenSize.width-17, 1)];
+    lineView.backgroundColor = [UIColor backgroundColor];
+    
+    UILabel *timeLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, CGRectGetMaxY(lineView.frame)+15, 100, 20)];
+    timeLabel.text = @"配送时间";
+    timeLabel.font = [UIFont systemFontOfSize:13.5];
+    
+    UILabel *detailTimeLabel = [[UILabel alloc]initWithFrame:CGRectMake(kScreenSize.width-120, CGRectGetMaxY(lineView.frame)+15, 103, 20)];
+    detailTimeLabel.text = @"25分钟内";
+    detailTimeLabel.textColor = [UIColor colorGreyColor];
+    detailTimeLabel.font = [UIFont systemFontOfSize:13.5];
+    detailTimeLabel.textAlignment = NSTextAlignmentRight;
+    
+    [deliveryView addSubview:remarkLabel],[deliveryView addSubview:remarkDetailLabel], [deliveryView addSubview:imageView1],[deliveryView addSubview:lineView],[deliveryView addSubview:timeLabel];
+    [deliveryView addSubview:detailTimeLabel];
+    
+    self.tableHeaderView.frame = CGRectMake(0, 0, kScreenSize.width,infoView.frame.size.height+ payView.frame.size.height+ deliveryView.frame.size.height+18);
+    self.tableView.tableHeaderView = self.tableHeaderView;
+}
+
 #pragma mark - 创建底部试图
 -(void)createBottomView{
-    UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenSize.height-64-49, kScreenSize.width-100, 49)];
+    UIView *bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, kScreenSize.height-64-49, kScreenSize.width, 49)];
     bottomView.backgroundColor = [UIColor colorWithRGBString:@"#000000" alpha:0.9];
+    bottomView.userInteractionEnabled = YES;
     [self.view addSubview:bottomView];
     
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(17, 0, kScreenSize.width-117, 49)];
-    label.text = @"合计  ￥10";
+    for (ODConfirmOrderModelShopcart_list *model  in self.dataArray) {
+        self.count += [model.num floatValue]*[model.price_show floatValue];
+    }
+    label.text = [NSString stringWithFormat:@"合计 %.2f",self.count];
     label.textColor = [UIColor colorWithRGBString:@"#ffffff"];
     label.font = [UIFont systemFontOfSize:17];
     [bottomView addSubview:label];
@@ -71,6 +156,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(label.frame), 0, 100, 49)];
     [button setTitle:@"确认下单" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor colorWithRGBString:@"#ffffff"] forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
     [button setBackgroundColor:[UIColor colorRedColor]];
     button.titleLabel.font = [UIFont systemFontOfSize:12.5];
     [bottomView addSubview:button];
@@ -79,10 +165,12 @@ static NSString *cellId = @"ODConfirmOrderCell";
 #pragma mark - 数据请求
 -(void)requestData{
     __weakSelf;
-    NSDictionary *parametr = @{@"shopcart_ids":@"17,18",@"open_id":@"766148455eed214ed1f8"};
-    [ODHttpTool getWithURL:ODUrlSwapOrder parameters:parametr modelClass:[ODConfirmOrderModel class] success:^(ODConfirmOrderModelResponse * model) {
-        ODConfirmOrderModel *orderModel = [model result];
-        [weakSelf.dataArray addObjectsFromArray:orderModel.shopcart_list];
+    NSDictionary *parametr = @{@"shopcart_ids":@"1,2,3",@"open_id":@"766148455eed214ed1f8"};
+    [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parametr modelClass:[ODConfirmOrderModel class] success:^(ODConfirmOrderModelResponse * model) {
+        weakSelf.model = [model result];
+        [weakSelf.dataArray addObjectsFromArray:weakSelf.model.shopcart_list];
+        [weakSelf createTableHeaderView];
+        [weakSelf createBottomView];
         [weakSelf.tableView reloadData];
     } failure:^(NSError *error) {
         
@@ -100,13 +188,34 @@ static NSString *cellId = @"ODConfirmOrderCell";
     return cell;
 }
 
+
+#pragma mark - UITableViewDelegate
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;
 }
 
-#pragma mark - UITableViewDelegate
+#pragma mark - UIAction
+-(void)infoTapClick{
+    ODAddAddressController *controller = [[ODAddAddressController alloc]init];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
+-(void)deliverTapClick{
+    
+}
 
-
+-(void)buttonClick:(UIButton *)button{
+    NSDictionary *parameter = @{
+                                @"address_id":@"1",
+                                @"price_show":[NSString
+                                               stringWithFormat:@"%f", self.count],
+                                @"pay_type":@"2",
+                                @"shopcart_ids":@"1,2,3"
+                                };
+    [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:parameter modelClass:[NSObject class] success:^(id model) {
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 @end

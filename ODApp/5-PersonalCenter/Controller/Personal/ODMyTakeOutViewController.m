@@ -9,39 +9,43 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODMyTakeOutViewController.h"
 
-#import <MJRefresh.h>
-#import "ODTakeOutCell.h"
+#import "MJRefresh.h"
 #import "ODMyTakeOutModel.h"
+#import "ODTakeOutView.h"
+#import "ODTakeAwayDetailController.h"
+#import "ODPayController.h"
 
 @interface ODMyTakeOutViewController () <UITableViewDataSource, UITableViewDelegate>
 
 /** 表格 */
-@property (nonatomic, weak) UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 
-/** 参数 */
-@property (nonatomic, strong) NSMutableDictionary *params;
 /** 页码 */
-@property (nonatomic, assign) NSInteger page;
+@property (nonatomic, assign) NSInteger pageCount;
 /** 模型数组 */
-@property (nonatomic, strong) NSMutableArray *datas;
+@property (nonatomic, strong) NSMutableArray *dataArray;
 
 @end
 
 // 循环cell标识
 static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
 
+static NSString * const ODTakeOutViewID = @"ODTakeOutViewID";
+
 @implementation ODMyTakeOutViewController
 
-#pragma mark - 懒加载
-- (NSMutableArray *)datas
-{
-    if (_datas == nil) {
-        _datas = [NSMutableArray array];
-    }
-    return _datas;
+
+#pragma mark - Life Cycle
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationItem.title = @"我的订单";
+    self.dataArray = [[NSMutableArray alloc] init];
+    self.pageCount = 1;
+
+    [self createRequestData];
 }
 
-#pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
@@ -52,66 +56,80 @@ static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
+#pragma mark - Lazy Load
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, ODTopY - 6, KScreenWidth, KControllerHeight - ODNavigationHeight + 6) style:UITableViewStylePlain];
+        _tableView.backgroundColor = [UIColor backgroundColor];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.tableFooterView = [UIView new];
+        [_tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODTakeOutView class]) bundle:nil] forCellReuseIdentifier:ODTakeOutViewID];
+        [self.view addSubview:_tableView];
     
-    // 初始化表格
-    [self setupTableView];
-    
-    // 初始化刷新控件
-    [self setupRefresh];
+        __weakSelf
+        _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
+            weakSelf.pageCount = 1;
+            [weakSelf createRequestData];
+        }];
+        _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+            weakSelf.pageCount++;
+            [weakSelf createRequestData];
+        }];
+    }
+    return _tableView;
 }
 
-#pragma mark - 初始化方法
-/**
- *  初始化表格
- */
-- (void)setupTableView
-{
-    self.navigationItem.title = @"我的外卖";
-    self.automaticallyAdjustsScrollViewInsets = NO;
-    // 创建表格
-    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds
-                                                          style:UITableViewStylePlain];
-    tableView.dataSource = self;
-    tableView.delegate = self;
-    [self.view addSubview:tableView];
-    self.tableView = tableView;
-
-    self.page = 1;
-    // rowHeight
-    tableView.rowHeight = 90;
-    // 取消分割线
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    // 注册cell
-    [tableView registerNib:[UINib nibWithNibName:NSStringFromClass([ODTakeOutCell class]) bundle:nil] forCellReuseIdentifier:myTakeOutCellId];
+#pragma mark - Get Request Data
+- (void)createRequestData {
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    params[@"type"] = @"1";
+    params[@"page"] = [NSString stringWithFormat:@"%ld", self.pageCount];
+    params[@"open_id"] = @"766148455eed214ed1f8";
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlTakeOutOrderList parameters:params modelClass:[ODMyTakeOutModel class] success:^(id model) {
+        if (weakSelf.pageCount == 1) {
+            [weakSelf.dataArray removeAllObjects];
+        }
+        NSArray *newDatas = [model result];
+        [weakSelf.dataArray addObjectsFromArray:newDatas];
+        
+        [ODHttpTool od_endRefreshWith:weakSelf.tableView array:newDatas];
+        if (weakSelf.dataArray.count == 0) {
+            [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
+        }
+        else {
+            [weakSelf.noResultLabel hidden];
+        }
+    } failure:^(NSError *error) {
+        [weakSelf.tableView.mj_header endRefreshing];
+        [weakSelf.tableView.mj_footer endRefreshing];
+    }];
 }
 
-/**
- *  设置刷新控件
- */
-- (void)setupRefresh
-{
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewTakeOuts)];
-//    [self.tableView.mj_header beginRefreshing];
-    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTakeOuts)];
-    self.tableView.mj_footer.automaticallyHidden = YES;
-}
 
-#pragma mark - UITableView 数据源方法
+#pragma mark - UITableView DataSource
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.datas.count;
+    return self.dataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ODTakeOutCell *cell = [tableView dequeueReusableCellWithIdentifier:myTakeOutCellId];
-    cell.datas = self.datas[indexPath.row];
+    ODTakeOutView *cell = [tableView dequeueReusableCellWithIdentifier:ODTakeOutViewID];
+    cell.model = self.dataArray[indexPath.row];
+    [cell.enterButton addTarget:self action:@selector(payOrLookAction:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
 
-#pragma mark - UITableView 代理方法
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    return 150;
+}
+
+#pragma mark - UITableView Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
 {
     [self.tableView.mj_header endRefreshing];
@@ -119,71 +137,24 @@ static NSString * const myTakeOutCellId = @"ODMyTakeOutViewCell";
     // 点击方法
 }
 
-#pragma mark - 事件方法
-- (void)loadNewTakeOuts
-{
-    // 结束上拉加载
-    [self.tableView.mj_footer endRefreshing];
-    // 拼接参数
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"type"] = @"1";
-    params[@"page"] = [NSString stringWithFormat:@"%ld", self.page];
-    params[@"open_id"] = @"766148455eed214ed1f8";
-    self.params = params;
-    __weakSelf
-    [ODHttpTool getWithURL:ODUrlTakeOutOrderList parameters:params modelClass:[ODMyTakeOutModel class] success:^(id model) {
-        if (weakSelf.params != params) return;
-        // 清空所有数据
-        [weakSelf.datas removeAllObjects];
-        
-        NSArray *newDatas = [model result];
-        [weakSelf.datas addObjectsFromArray:newDatas];
-        [weakSelf.tableView reloadData];
-        [weakSelf.tableView.mj_header endRefreshing];
-        [weakSelf checkFooterState:newDatas.count];
-        // 重新设置 page = 1
-        weakSelf.page = 1;
-    } failure:^(NSError *error) {
-        if (weakSelf.params != params) return;
-        [weakSelf.tableView.mj_header endRefreshing];
-    }];
-}
+#pragma mark - Action
 
-- (void)loadMoreTakeOuts
-{
-    // 结束下拉刷新
-    [self.tableView.mj_header endRefreshing];
-    // 取出页码
-    NSInteger currentPage = self.page;
-    // 拼接参数
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    self.params = params;
-    __weakSelf
-    [ODHttpTool getWithURL:@"" parameters:params modelClass:[NSObject class] success:^(id model) {
-        if (weakSelf.params != params) return;
-        NSArray *moreTakeOuts = [model result];
-        [weakSelf.datas addObjectsFromArray:moreTakeOuts];
-        [weakSelf.tableView reloadData];
-        [weakSelf checkFooterState:moreTakeOuts.count];
-        // 请求成功后才赋值页码
-        weakSelf.page = currentPage;
-    } failure:^(NSError *error) {
-        if (weakSelf.params != params) return;
-        weakSelf.page = weakSelf.page - 1;
-        [weakSelf.tableView.mj_footer endRefreshing];
-    }];
-}
-
-/**
- *  时刻监测footer的状态
- */
-- (void)checkFooterState:(NSUInteger)count
-{
-    if (count < 20) { // 全部数据已经加载完毕
-        [self.tableView.mj_footer endRefreshingWithNoMoreData];
-    } else { // 还没有加载完毕
-        [self.tableView.mj_footer endRefreshing];
+- (void)payOrLookAction:(UIButton *)sender {
+    ODTakeOutView *cell = (ODTakeOutView *)sender.superview.superview;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    ODMyTakeOutModel *model = self.dataArray[indexPath.row];
+    
+    if ([model.status isEqualToString:@"1"]) {
+        ODPayController *vc = [[ODPayController alloc] init];
+        vc.orderId = model.order_id;
+        vc.price = model.price_show;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else {
+        ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
 
 @end
