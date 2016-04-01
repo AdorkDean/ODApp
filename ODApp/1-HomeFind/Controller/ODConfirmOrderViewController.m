@@ -177,7 +177,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 #pragma mark - 数据请求
 -(void)requestData{
     __weakSelf;
-    NSDictionary *parametr = @{@"shopcart_json" : self.datas.od_URLDesc, @"open_id":@"766148455eed214ed1f8"};
+    NSDictionary *parametr = @{@"shopcart_json" : self.datas.od_URLDesc};
     [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parametr modelClass:[ODConfirmOrderModel class] success:^(ODConfirmOrderModelResponse * model) {
         weakSelf.model = [model result];
         [weakSelf.dataArray addObjectsFromArray:weakSelf.model.shopcart_list];
@@ -245,6 +245,9 @@ static NSString *cellId = @"ODConfirmOrderCell";
         weakSelf.payModel = [model result];
         if ([WXApi isWXAppInstalled]) {
             [weakSelf payMoneyGiveWeiXin];
+        }
+        else {
+            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
         }
     } failure:^(NSError *error) {
         
