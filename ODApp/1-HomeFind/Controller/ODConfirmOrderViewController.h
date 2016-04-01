@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) NSString *takeOutID;
 
+@property (nonatomic, copy) NSString *order_no;
+
 @end
