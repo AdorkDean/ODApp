@@ -259,6 +259,8 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewTakeOuts)];
     [self.tableView.mj_header beginRefreshing];
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreTakeOuts)];
+    
+    
     self.tableView.mj_footer.automaticallyHidden = YES;
 }
 
