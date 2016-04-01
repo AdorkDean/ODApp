@@ -211,10 +211,15 @@ static NSString *cellId = @"ODConfirmOrderCell";
                                 @"price_show":[NSString
                                                stringWithFormat:@"%f", self.count],
                                 @"pay_type":@"2",
-                                @"shopcart_ids":@"1,2,3"
+                                @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString],
+                                @"open_id":@"766148455eed214ed1f8"
                                 };
-    [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:parameter modelClass:[NSObject class] success:^(id model) {
-    } failure:^(NSError *error) {
+    [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:parameter modelClass:[NSObject class] success:^(id model)
+     {
+         
+     }
+                   failure:^(NSError *error)
+     {
         
     }];
 }
