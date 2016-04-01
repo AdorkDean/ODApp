@@ -143,17 +143,23 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     ODShopCartListCell *cell = note.object;
-    NSInteger number = cell.takeOut.shopNumber;
+//    NSInteger number = cell.takeOut.shopNumber;
     
     result = [[user objectForKey:@"result"] integerValue];
-    
-//    result = number;
+    result += 1;
     priceResult += cell.takeOut.price_show.floatValue;
-    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result++];
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
     self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
     [self.shopCart.shopCartView reloadData];
     
     [user setObject:@(result) forKey:@"result"];
+    
+    // 更新模型
+    NSDictionary *cacheShops = [user objectForKey:@"shops"];
+    NSDictionary *obj = [cacheShops objectForKey:cell.takeOut.title];
+    
+    [user setObject:cacheShops forKey:@"shops"];
+    [user setObject:cell.takeOut forKey:@"shops"];
     [user setObject:@(priceResult) forKey:@"priceResult"];
     [user synchronize];
 }
@@ -164,14 +170,14 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     ODShopCartListCell *cell = note.object;
     NSInteger number = cell.takeOut.shopNumber;
 
-    //    result = number;
     result = [[user objectForKey:@"result"] integerValue];
+    result -= 1;
     if (!number) {
         [self.shopCart.shops removeObjectForKey:cell.takeOut.title];
         [user setObject:self.shopCart.shops forKey:@"shops"];
     }
     priceResult -= cell.takeOut.price_show.floatValue;
-    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result--];
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
     self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
     [self.shopCart.shopCartView reloadData];
     
