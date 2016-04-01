@@ -168,14 +168,14 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     UINavigationController *navVc = tabBarVc.selectedViewController;
     ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc] init];
     
-    NSMutableArray *dict = [NSMutableArray array];
     NSMutableArray *jsonM = [NSMutableArray array];
     for (ODTakeOutModel *takeOut in self.datasArray)
     {
+        NSMutableArray *dict = [NSMutableArray array];
         [dict addObject:@(1)];
         [dict addObject:takeOut.product_id];
         [dict addObject:@(takeOut.shopNumber)];
-        [jsonM addObject:dict];
+        [jsonM addObject:dict.od_URLDesc];
     }
     vc.datas = jsonM;
     [navVc pushViewController:vc animated:YES];
