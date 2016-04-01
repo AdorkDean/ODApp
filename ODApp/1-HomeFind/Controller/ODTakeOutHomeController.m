@@ -18,11 +18,11 @@
 #import "ODTakeOutCell.h"
 #import "ODTakeOutHeaderView.h"
 #import "ODShopCartView.h"
+#import "ODShopCartListCell.h"
+#import "ODTakeAwayDetailController.h"
 
 #import "ODConfirmOrderViewController.h"
 #import <Masonry.h>
-
-#import "ODTakeAwayDetailController.h"
 
 @interface ODTakeOutHomeController () <UITableViewDataSource, UITableViewDelegate,
                                         ODTakeOutHeaderViewDelegate, ODTakeOutCellDelegate>
@@ -45,6 +45,9 @@
 /** 模型数组 */
 @property (nonatomic, strong) NSMutableArray *datas;
 
+/** 购物车列表 */
+@property (nonatomic, strong) NSMutableDictionary *shops;
+
 @end
 
 @implementation ODTakeOutHomeController
@@ -65,6 +68,14 @@
     return _headerView;
 }
 
+- (NSMutableDictionary *)shops
+{
+    if (!_shops) {
+        _shops = [NSMutableDictionary dictionary];
+    }
+    return _shops;
+}
+
 #pragma mark - 懒加载
 - (NSMutableArray *)datas
 {
@@ -80,6 +91,19 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    // 初始化购物车
+    [self setupShopCart];
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    result = [[user objectForKey:@"result"] integerValue];
+    priceResult = [[user objectForKey:@"priceResult"] floatValue];
+    NSDictionary *cacheShops = [user objectForKey:@"shops"];
+    self.shops = cacheShops.mutableCopy;
+    self.shopCart.shops = self.shops;
+    
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+    
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
@@ -105,14 +129,60 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     // 初始化headerView
 //    [self setupHeaderView];
     
-    // 初始化购物车
-    [self setupShopCart];
-    
     // 加载广告页
     [self loadNewBanners];
     
     // 初始化刷新控件
     [self setupScrollViewRefresh];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusShopCart:) name:@"addNumber" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusShopCart:) name:@"minusNumber" object:nil];
+}
+
+- (void)plusShopCart:(NSNotification *)note
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    ODShopCartListCell *cell = note.object;
+    NSInteger number = cell.takeOut.shopNumber;
+    
+    result = [[user objectForKey:@"result"] integerValue];
+    
+//    result = number;
+    priceResult += cell.takeOut.price_show.floatValue;
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result++];
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+    [self.shopCart.shopCartView reloadData];
+    
+    [user setObject:@(result) forKey:@"result"];
+    [user setObject:@(priceResult) forKey:@"priceResult"];
+    [user synchronize];
+}
+
+- (void)minusShopCart:(NSNotification *)note
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    ODShopCartListCell *cell = note.object;
+    NSInteger number = cell.takeOut.shopNumber;
+
+    //    result = number;
+    result = [[user objectForKey:@"result"] integerValue];
+    if (!number) {
+        [self.shopCart.shops removeObjectForKey:cell.takeOut.title];
+        [user setObject:self.shopCart.shops forKey:@"shops"];
+    }
+    priceResult -= cell.takeOut.price_show.floatValue;
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result--];
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+    [self.shopCart.shopCartView reloadData];
+    
+    [user setObject:@(result) forKey:@"result"];
+    [user setObject:@(priceResult) forKey:@"priceResult"];
+    [user synchronize];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - 初始化方法
@@ -146,7 +216,6 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 //    tableView.contentInset = UIEdgeInsetsMake(163, 0, 0, 0);
     
     self.type = self.page = @1;
-    tableView.sectionHeaderHeight = 163;
     
     // rowHeight
     tableView.rowHeight = 90;
@@ -226,7 +295,6 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     [self.tableView.mj_footer endRefreshing];
     // 点击方法
     ODTakeOutModel *model = self.datas[indexPath.row];
-//    ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc] init];
     ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
     vc.takeAwayTitle = model.title;
     vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
@@ -241,17 +309,35 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     [self loadNewTakeOuts];
 }
 
+static NSInteger result = 0;
+static CGFloat priceResult = 0;
 #pragma mark - ODTakeOutCellDelegate
-- (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(UIButton *)button
+- (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(ODTakeOutModel *)takeOut
 {
-    UIButton *testButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
-    UIWindow *window = [UIApplication sharedApplication].keyWindow;
-    [window addSubview:testButton];
-    [testButton makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(window);
-        make.bottom.equalTo(self.shopCart.top);
-        make.height.equalTo(100);
-    }];
+    // 商品总数量
+    result += 1;
+    // 计算数量
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
+    // 计算价格
+    priceResult += takeOut.price_show.floatValue;
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+    
+    // 保存商品个数
+//    NSInteger shopNumber = takeOut.shopNumber;
+//    shopNumber += 1;
+    takeOut.shopNumber += 1;
+    
+    // 传递数据
+    self.shopCart.title = takeOut.title;
+    self.shops[takeOut.title] = takeOut.mj_keyValues;
+    self.shopCart.shops = self.shops;
+    
+    // 保存数据
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user setObject:@(result) forKey:@"result"];
+    [user setObject:@(priceResult) forKey:@"priceResult"];
+    [user setObject:self.shops forKey:@"shops"];
+    [user synchronize];
 }
 
 #pragma mark - 事件方法

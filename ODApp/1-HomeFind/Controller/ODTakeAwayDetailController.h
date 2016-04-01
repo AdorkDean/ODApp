@@ -18,7 +18,7 @@
 @property (nonatomic, copy) NSString *product_id;
 
 /**
- * 标题
+ * 商品ID
  */
 @property (nonatomic, strong) NSString *takeAwayTitle;
 
@@ -28,9 +28,14 @@
 @property (nonatomic, assign) BOOL isCart;
 
 /**
- * 是否是购物车
+ * 是否是订单详情
  */
 @property (nonatomic, assign) BOOL isOrderDetail;
+
+/**
+ * 订单ID
+ */
+@property (nonatomic, strong) NSString *order_id;
 
 @end
 

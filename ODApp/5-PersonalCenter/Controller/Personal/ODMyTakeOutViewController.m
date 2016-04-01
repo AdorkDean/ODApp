@@ -152,6 +152,8 @@ static NSString * const ODTakeOutViewID = @"ODTakeOutViewID";
     }
     else {
         ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
+        vc.isOrderDetail = YES;
+        vc.order_id = model.order_id;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
