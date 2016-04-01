@@ -9,6 +9,8 @@
 #define MAS_SHORTHAND_GLOBALS
 
 #import "ODTakeAwayDetailController.h"
+#import "ODShopCartListCell.h"
+#import "ODTakeOutModel.h"
 
 #import <Masonry.h>
 #import "ODHttpTool.h"
@@ -19,6 +21,8 @@
 
 @interface ODTakeAwayDetailController ()
 @property (nonatomic, strong) PontoDispatcher *pontoDispatcher;
+
+@property (nonatomic, weak) ODShopCartView *shopCart;
 @end
 
 @implementation ODTakeAwayDetailController
@@ -39,7 +43,8 @@
     else {
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?id=%@", ODWebUrlNative, self.product_id]]]];
         [self setupShopCart];
-    }    
+    }
+    [self addObserver];
 }
 
 #pragma mark - Create UIWebView
@@ -53,14 +58,143 @@
 }
 
 
+static NSInteger result = 0;
+static CGFloat priceResult = 0;
 #pragma mark - 购物车
 - (void)setupShopCart
 {
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     ODShopCartView *shopCart = [ODShopCartView shopCart];
-    [self.view addSubview:shopCart];
+    [keyWindow addSubview:shopCart];
     [shopCart makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.equalTo(self.view);
+        make.bottom.left.right.equalTo(keyWindow);
         make.height.equalTo(49);
     }];
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    result = [[user objectForKey:@"result"] integerValue];
+    priceResult = [[user objectForKey:@"priceResult"] floatValue];
+    self.shopCart = shopCart;
+    shopCart.shops = self.shops;
+    
+    // 商品总数量
+//    result += 1;
+    // 计算数量
+    shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
+    shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+    
+    // 读取缓存的shopNumber
+    NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
+    NSDictionary *obj = [cacheShops objectForKey:self.takeOut.title];
+    NSInteger cacheNumber = [[obj valueForKey:@"shopNumber"] integerValue];
+    
+    // 保存商品个数
+    self.takeOut.shopNumber = cacheNumber;
+//    takeOut.shopNumber += 1;
+//    [self.shops setObject:takeOut.mj_keyValues forKey:takeOut.title];
+//    self.shopCart.shops = self.shops;
+    
+    // 保存数据
+    [user setObject:@(result) forKey:@"result"];
+    [user setObject:@(priceResult) forKey:@"priceResult"];
+    [user setObject:self.shops forKey:@"shops"];
+    [user synchronize];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+#pragma mark - 初始化方法
+
+- (void)addObserver
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusShopCart:) name:ODNotificationShopCartAddNumber object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusShopCart:) name:ODNotificationShopCartminusNumber object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllDatas:) name:ODNotificationShopCartRemoveALL object:nil];
+}
+
+- (void)removeAllDatas:(NSNotification *)note
+{
+    result = 0;
+    priceResult = 0;
+    [self.shops removeAllObjects];
+}
+
+- (void)plusShopCart:(NSNotification *)note
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    ODShopCartListCell *cell = note.object;
+    NSInteger number = cell.takeOut.shopNumber;
+    
+    result = [[user objectForKey:@"result"] integerValue];
+    result += 1;
+    priceResult += cell.takeOut.price_show.floatValue;
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+    
+    // 更新模型
+    NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
+    NSMutableDictionary *obj = [cacheShops objectForKey:cell.takeOut.title];
+    NSMutableDictionary *mutableItem = [NSMutableDictionary dictionaryWithDictionary:obj];
+    // 修改数量
+    [mutableItem setObject:@(number) forKey:@"shopNumber"];
+    
+    NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
+    for (NSString *key in cacheShops)
+    {
+        NSDictionary *dict = cacheShops[key];
+        if ([dict isEqual:obj]) {
+            [dictM setObject:mutableItem forKey:key];
+        } else {
+            [dictM setObject:dict forKey:key];
+        }
+    }
+    
+    [self.shopCart.shopCartView reloadData];
+    [user setObject:dictM forKey:@"shops"];
+    [user setObject:@(result) forKey:@"result"];
+    [user setObject:@(priceResult) forKey:@"priceResult"];
+    [user synchronize];
+}
+
+- (void)minusShopCart:(NSNotification *)note
+{
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    ODShopCartListCell *cell = note.object;
+    NSInteger number = cell.takeOut.shopNumber;
+    
+    result = [[user objectForKey:@"result"] integerValue];
+    result -= 1;
+    if (!number) {
+        [self.shopCart.shops removeObjectForKey:cell.takeOut.title];
+        [user setObject:self.shopCart.shops forKey:@"shops"];
+    }
+    priceResult -= cell.takeOut.price_show.floatValue;
+    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
+    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+    // 更新模型
+    NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
+    NSMutableDictionary *obj = [cacheShops objectForKey:cell.takeOut.title];
+    NSMutableDictionary *mutableItem = [NSMutableDictionary dictionaryWithDictionary:obj];
+    // 修改数量
+    [mutableItem setObject:@(number) forKey:@"shopNumber"];
+    
+    NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
+    for (NSString *key in cacheShops)
+    {
+        NSDictionary *dict = cacheShops[key];
+        if ([dict isEqual:obj]) {
+            [dictM setObject:mutableItem forKey:key];
+        } else {
+            [dictM setObject:dict forKey:key];
+        }
+    }
+    [self.shopCart.shopCartView reloadData];
+    [user setObject:dictM forKey:@"shops"];
+    [user setObject:@(result) forKey:@"result"];
+    [user setObject:@(priceResult) forKey:@"priceResult"];
+    [user synchronize];
 }
 @end

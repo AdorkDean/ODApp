@@ -218,7 +218,10 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     // 点击方法
     ODTakeOutModel *model = self.datas[indexPath.row];
     ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
+    vc.shops = self.shops;
     vc.takeAwayTitle = model.title;
+//    vc setupNumber:result price:<#(CGFloat)#>
+    vc.takeOut = self.datas[indexPath.row];
     vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
     [self.navigationController pushViewController:vc animated:YES];
 }
