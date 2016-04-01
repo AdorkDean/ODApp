@@ -24,7 +24,11 @@
 
 - (void)setModel:(ODMyTakeOutModel *)model {
     _model = model;
-    self.outletSignImageView.image = [UIImage imageNamed:@""];
+    
+    NSURL *url = [NSURL OD_URLWithString:model.store_icon];
+    
+    [self.outletSignImageView sd_setImageWithURL:url];
+    
     self.takeOutStatus.text = model.status_str;
     
     self.takeOutContentHeight.constant = 44 * model.products.count;

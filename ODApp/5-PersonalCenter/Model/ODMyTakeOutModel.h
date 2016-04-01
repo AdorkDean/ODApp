@@ -52,6 +52,8 @@
 @property (nonatomic, copy) NSString *store_id;
 /** 商店名称 */
 @property (nonatomic, copy) NSString *store_name;
+/** 商店商标 */
+@property (nonatomic, copy) NSString *store_icon;
 /** 商品模型 */
 @property (nonatomic, strong) NSArray *products;
 

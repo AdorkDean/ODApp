@@ -29,7 +29,6 @@
 
 @implementation ODPayController
 
-
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -89,11 +88,19 @@
     // 发送请求
     [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model)
      {
+         for (UIViewController *vc in weakSelf.navigationController.childViewControllers)
+         {
+             if ([vc isKindOfClass:[ODPaySuccessController class]])
+             {
+                 return ;
+             }
+         }
          ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
          vc.swap_type = weakSelf.swap_type;
          vc.payStatus = weakSelf.isPay;
          vc.orderId = weakSelf.orderId;
-
+         vc.params = weakSelf.successParams;
+         vc.tradeType = weakSelf.tradeType;
          [weakSelf.navigationController pushViewController:vc animated:YES];
      } failure:^(NSError *error) {
          [weakSelf.navigationController popViewControllerAnimated:YES]; 
