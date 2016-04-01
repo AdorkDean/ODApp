@@ -98,12 +98,11 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     result = [[user objectForKey:@"result"] integerValue];
     priceResult = [[user objectForKey:@"priceResult"] floatValue];
     NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
-    self.shops = cacheShops;
+    self.shops = [NSMutableDictionary dictionaryWithDictionary:cacheShops];
     self.shopCart.shops = self.shops;
     
     self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
     self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
-    
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
@@ -150,8 +149,6 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     priceResult += cell.takeOut.price_show.floatValue;
     self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
     self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
-    [self.shopCart.shopCartView reloadData];
-    
     
     // 更新模型
     NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
@@ -170,6 +167,8 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
             [dictM setObject:dict forKey:key];
         }
     }
+    
+    [self.shopCart.shopCartView reloadData];
     [user setObject:dictM forKey:@"shops"];
     [user setObject:@(result) forKey:@"result"];
     [user setObject:@(priceResult) forKey:@"priceResult"];
@@ -191,7 +190,6 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     priceResult -= cell.takeOut.price_show.floatValue;
     self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", result];
     self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
-    [self.shopCart.shopCartView reloadData];
     // 更新模型
     NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
     NSMutableDictionary *obj = [cacheShops objectForKey:cell.takeOut.title];
@@ -209,6 +207,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
             [dictM setObject:dict forKey:key];
         }
     }
+    [self.shopCart.shopCartView reloadData];
     [user setObject:dictM forKey:@"shops"];
     [user setObject:@(result) forKey:@"result"];
     [user setObject:@(priceResult) forKey:@"priceResult"];
@@ -279,7 +278,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     [keyWindow addSubview:shopCart];
     [shopCart makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.left.right.equalTo(keyWindow);
-        make.height.equalTo(55);
+        make.height.equalTo(49);
     }];
     self.shopCart = shopCart;
 }
@@ -352,17 +351,20 @@ static CGFloat priceResult = 0;
     // 计算价格
     priceResult += takeOut.price_show.floatValue;
     self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
+
+    // 读取缓存的shopNumber
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
+    NSDictionary *obj = [cacheShops objectForKey:takeOut.title];
+    NSInteger cacheNumber = [[obj valueForKey:@"shopNumber"] integerValue];
     
     // 保存商品个数
+    takeOut.shopNumber = cacheNumber;
     takeOut.shopNumber += 1;
-    
-    // 传递数据
-    self.shopCart.title = takeOut.title;
-    self.shops[takeOut.title] = takeOut.mj_keyValues;
+    [self.shops setObject:takeOut.mj_keyValues forKey:takeOut.title];
     self.shopCart.shops = self.shops;
     
     // 保存数据
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     [user setObject:@(result) forKey:@"result"];
     [user setObject:@(priceResult) forKey:@"priceResult"];
     [user setObject:self.shops forKey:@"shops"];

@@ -270,6 +270,8 @@
 		404758A91CA13E0300D0DDE6 /* ODLandFirstCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 404758A71CA13E0300D0DDE6 /* ODLandFirstCell.m */; };
 		404758AA1CA13E0300D0DDE6 /* ODLandFirstCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 404758A81CA13E0300D0DDE6 /* ODLandFirstCell.xib */; };
 		407850231C9674AE00413E8D /* ODBazaarPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 407850221C9674AE00413E8D /* ODBazaarPhotosView.m */; };
+		407EE6181CAE566200EFA09D /* ODShopCartListHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 407EE6171CAE566200EFA09D /* ODShopCartListHeaderView.m */; };
+		407EE61A1CAE567100EFA09D /* ODShopCartListHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 407EE6191CAE567100EFA09D /* ODShopCartListHeaderView.xib */; };
 		409141861C98F70E0059E05F /* ODBazaarCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 409141841C98F70E0059E05F /* ODBazaarCollectionCell.m */; };
 		409141871C98F70E0059E05F /* ODBazaarCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 409141851C98F70E0059E05F /* ODBazaarCollectionCell.xib */; };
 		4091418B1C9930D80059E05F /* ODBazaarExchangeSkillCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 409141891C9930D80059E05F /* ODBazaarExchangeSkillCollectionCell.m */; };
@@ -851,6 +853,9 @@
 		404758A81CA13E0300D0DDE6 /* ODLandFirstCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODLandFirstCell.xib; sourceTree = "<group>"; };
 		407850211C9674AE00413E8D /* ODBazaarPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarPhotosView.h; sourceTree = "<group>"; };
 		407850221C9674AE00413E8D /* ODBazaarPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarPhotosView.m; sourceTree = "<group>"; };
+		407EE6161CAE566200EFA09D /* ODShopCartListHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODShopCartListHeaderView.h; sourceTree = "<group>"; };
+		407EE6171CAE566200EFA09D /* ODShopCartListHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODShopCartListHeaderView.m; sourceTree = "<group>"; };
+		407EE6191CAE567100EFA09D /* ODShopCartListHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODShopCartListHeaderView.xib; sourceTree = "<group>"; };
 		409141831C98F70E0059E05F /* ODBazaarCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarCollectionCell.h; sourceTree = "<group>"; };
 		409141841C98F70E0059E05F /* ODBazaarCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarCollectionCell.m; sourceTree = "<group>"; };
 		409141851C98F70E0059E05F /* ODBazaarCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarCollectionCell.xib; sourceTree = "<group>"; };
@@ -1341,6 +1346,9 @@
 		232CB3AF1C9264E200340D12 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				407EE6161CAE566200EFA09D /* ODShopCartListHeaderView.h */,
+				407EE6171CAE566200EFA09D /* ODShopCartListHeaderView.m */,
+				407EE6191CAE567100EFA09D /* ODShopCartListHeaderView.xib */,
 				ED379AA91CAE11CC00AE1503 /* ODShopCartListCell.h */,
 				ED379AAA1CAE11CC00AE1503 /* ODShopCartListCell.m */,
 				ED379AAB1CAE11CC00AE1503 /* ODShopCartListCell.xib */,
@@ -2326,6 +2334,7 @@
 				232CB6551C9264E200340D12 /* ODOrderCell.xib in Resources */,
 				232CB5E11C9264E200340D12 /* ODBazaarPicCollectionViewCell.xib in Resources */,
 				ED3FDCE91CAD4D0D0059692B /* ODShopCartView.xib in Resources */,
+				407EE61A1CAE567100EFA09D /* ODShopCartListHeaderView.xib in Resources */,
 				232CB6501C9264E200340D12 /* ODCancelOrderView.xib in Resources */,
 				ED4688141C96905F00E31F64 /* ODApplyListCell.xib in Resources */,
 				ED4917BA1C9944FE001E549A /* ODReleaseView.xib in Resources */,
@@ -2534,6 +2543,7 @@
 				232CB6631C9264E200340D12 /* TimeButton.m in Sources */,
 				232CB5871C9264E200340D12 /* XMLDictionary.m in Sources */,
 				232CB6591C9264E200340D12 /* ODOrderSecondHeadView.m in Sources */,
+				407EE6181CAE566200EFA09D /* ODShopCartListHeaderView.m in Sources */,
 				232CB5751C9264E200340D12 /* UITableViewRowAction.m in Sources */,
 				232CB6721C92AF4C00340D12 /* ODPublicTool.m in Sources */,
 				232CB5CD1C9264E200340D12 /* ODBazaarDetailViewController.m in Sources */,

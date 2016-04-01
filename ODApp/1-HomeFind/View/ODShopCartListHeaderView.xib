@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ODShopCartListHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="351" height="25"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_Mark" translatesAutoresizingMaskIntoConstraints="NO" id="btI-Pp-m7a">
+                    <rect key="frame" x="17" y="6" width="3" height="13"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="13" id="dtU-2x-7BL"/>
+                        <constraint firstAttribute="width" constant="3" id="j6M-DC-iXI"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="购物车" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rK4-Wo-kVz">
+                    <rect key="frame" x="26" y="5" width="37.5" height="15"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12.5"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ro0-oT-GGr">
+                    <rect key="frame" x="291" y="7" width="60" height="12"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="1r4-DH-4ui"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="清空" image="icon_delete">
+                        <color key="titleColor" red="0.69019607843137254" green="0.69019607843137254" blue="0.69019607843137254" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dt8-te-Tr6">
+                    <rect key="frame" x="17" y="24" width="334" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="tyx-DL-Gv8"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="btI-Pp-m7a" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="17.5" id="1IW-H7-MLM"/>
+                <constraint firstItem="Dt8-te-Tr6" firstAttribute="leading" secondItem="btI-Pp-m7a" secondAttribute="leading" id="9Ja-Ub-c81"/>
+                <constraint firstItem="rK4-Wo-kVz" firstAttribute="leading" secondItem="btI-Pp-m7a" secondAttribute="trailing" constant="6" id="BEb-ER-hJk"/>
+                <constraint firstAttribute="bottom" secondItem="Dt8-te-Tr6" secondAttribute="bottom" id="HAh-v0-OL8"/>
+                <constraint firstItem="btI-Pp-m7a" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bsY-WG-84O"/>
+                <constraint firstAttribute="trailing" secondItem="Dt8-te-Tr6" secondAttribute="trailing" id="haz-2g-yJm"/>
+                <constraint firstItem="Dt8-te-Tr6" firstAttribute="leading" secondItem="rK4-Wo-kVz" secondAttribute="leading" id="hf8-DV-auA"/>
+                <constraint firstAttribute="trailing" secondItem="ro0-oT-GGr" secondAttribute="trailing" id="ndj-e6-kUs"/>
+                <constraint firstItem="rK4-Wo-kVz" firstAttribute="centerY" secondItem="btI-Pp-m7a" secondAttribute="centerY" id="phv-az-hSf"/>
+                <constraint firstItem="ro0-oT-GGr" firstAttribute="centerY" secondItem="btI-Pp-m7a" secondAttribute="centerY" id="tzt-a8-iBx"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="hf8-DV-auA"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="216.5" y="98.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_Mark" width="2" height="12"/>
+        <image name="icon_delete" width="10" height="12"/>
+    </resources>
+</document>
