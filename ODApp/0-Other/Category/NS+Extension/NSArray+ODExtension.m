@@ -46,7 +46,8 @@
 - (NSString *)od_URLDesc
 {
     NSString *urlString = [self enumerateString];
-    
+    urlString = [@"["stringByAppendingString:urlString];
+    urlString = [urlString stringByAppendingString:@"]"];
     urlString = [urlString stringByReplacingOccurrencesOfString:@" " withString:@""];
     urlString = [urlString stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     urlString = [urlString stringByReplacingOccurrencesOfString:@"\t" withString:@""];
