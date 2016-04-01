@@ -118,7 +118,7 @@
     item4.oprtionBlock = ^(NSIndexPath *index){
         ODEvaluationController *vc = [[ODEvaluationController alloc] init];
         vc.typeTitle = @"我收到的评价";
-        vc.openId = user.open_id;
+        vc.openId = [NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].openID];
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
     
