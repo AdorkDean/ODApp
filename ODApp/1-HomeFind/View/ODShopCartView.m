@@ -10,6 +10,7 @@
 #import "ODTakeOutModel.h"
 
 #import "ODShopCartListCell.h"
+#import "ODConfirmOrderViewController.h"
 
 #import <MJExtension.h>
 
@@ -161,5 +162,24 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     if (self.coverView.subviews) [self.coverView removeFromSuperview];
     [self.shopCartView reloadData];
 }
+
+- (IBAction)comfirmClick {
+    UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UINavigationController *navVc = tabBarVc.selectedViewController;
+    ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc] init];
+    
+    NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+    NSMutableArray *jsonM = [NSMutableArray array];
+    for (ODTakeOutModel *takeOut in self.datasArray)
+    {
+        [dict setObject:@(1) forKey:@"type"];
+        [dict setObject:takeOut.product_id forKey:@"product_id"];
+        [dict setObject:@(takeOut.shopNumber) forKey:@"num"];
+        [jsonM addObject:dict];
+    }
+    
+    [navVc pushViewController:vc animated:YES];
+}
+
 
 @end
