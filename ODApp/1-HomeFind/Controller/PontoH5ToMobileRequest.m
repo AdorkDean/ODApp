@@ -16,7 +16,7 @@
 #import "ODBuyTakeOutViewController.h"
 #import "ODConfirmOrderViewController.h"
 
-
+#import "ODPayModel.h"
 @implementation PontoH5ToMobileRequest {
 }
 
@@ -70,8 +70,7 @@
         UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
         UINavigationController *navVc = tabBarVc.selectedViewController;
         ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc]init];
-//        vc.orderId = self.order_id;
-//        vc.price = model.price_show;
+        
         [navVc pushViewController:vc animated:YES];
     }
 }

@@ -217,6 +217,11 @@ static NSString *cellId = @"ODConfirmOrderCell";
 }
 
 -(void)buttonClick:(UIButton *)button{
+    if (![WXApi isWXAppInstalled])
+    {
+        [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
+        return;
+    }
     NSDictionary *parameter = @{
                                 @"address_id":@"1",
                                 @"price_show":[NSString
@@ -243,12 +248,8 @@ static NSString *cellId = @"ODConfirmOrderCell";
     [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:parameter modelClass:[ODPayModel class] success:^(id model) {
        
         weakSelf.payModel = [model result];
-        if ([WXApi isWXAppInstalled]) {
-            [weakSelf payMoneyGiveWeiXin];
-        }
-        else {
-            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
-        }
+        [weakSelf payMoneyGiveWeiXin];
+        
     } failure:^(NSError *error) {
         
     }];

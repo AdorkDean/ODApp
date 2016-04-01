@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSArray *datas;
 
+@property (nonatomic, strong) NSString *takeOutID;
+
 @end
