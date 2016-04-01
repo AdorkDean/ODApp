@@ -16,16 +16,19 @@
     self.lineView.backgroundColor = [UIColor lineColor];
 }
 
--(void)showDataWithNSDictionary:(NSDictionary *)dict index:(NSIndexPath *)index{
+-(void)showDataWithAMapPOI:(AMapPOI *)poi index:(NSIndexPath *)index{
     if (index.row == 0) {
         self.iconImageView.image = [UIImage imageNamed:@"icon_id"];
-        self.titleLabel.text = [NSString stringWithFormat:@"[当前]%@",dict[@"name"]];
+        NSString *str = [NSString stringWithFormat:@"[当前]%@",poi.name];
+        NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:str];
+        [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorRedColor] range:NSMakeRange(0, 4)];
+        self.titleLabel.attributedText = noteStr;
         
     }else{
         self.iconImageView.image = [UIImage imageNamed:@"icon_id_Unchecked"];
-        self.titleLabel.text = dict[@"name"];
+        self.titleLabel.text = poi.name;
     }
-    self.detailAddressLabel.text = dict[@"detail"];
+    self.detailAddressLabel.text = [NSString stringWithFormat:@"%@%@%@",poi.city,poi.district,poi.address];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
