@@ -63,7 +63,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tradeType = @"1";
     self.navigationItem.title = @"确认订单";
     [self requestData];
 }
