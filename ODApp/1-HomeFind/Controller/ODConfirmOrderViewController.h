@@ -11,8 +11,5 @@
 @interface ODConfirmOrderViewController : ODBaseViewController
 
 @property (nonatomic, strong) NSArray *datas;
-/** 商品的ids */
-@property (nonatomic,copy) NSString *shopcart_ids;
-
 
 @end

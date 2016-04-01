@@ -551,21 +551,22 @@ static NSString *const detailInfoCell = @"detailInfoCell";
 - (void)clickGood:(ODActivityDetailBtn *)btn {
     BOOL isAdd = self.love_id == 0;
     NSDictionary *dic = isAdd ? @{@"type" : @"3", @"obj_id" : [@(self.resultModel.activity_id) stringValue]} : @{@"love_id" : [@(self.love_id) stringValue]};
+    btn.enabled = NO;
     [ODHttpTool getWithURL:isAdd ? ODUrlOtherLoveAdd : ODUrlOtherLoveDel parameters:dic modelClass:[NSObject class] success:^(id model) {
-                NSDictionary *dic = model;
-                self.love_id = [dic[@"love_id"] integerValue];
-                if (self.love_id != 0) {
-                    loveNum++;
-                }
-                else if (!dic) {
-                    loveNum--;
-                }
-                btn.OD_selectedState = !btn.OD_selectedState;
-                [[self.bottomButtonView goodBtn] setTitle:[NSString stringWithFormat:@"赞 %zd", loveNum] forState:UIControlStateNormal];
-
-            }
+        NSDictionary *dic = model;
+        self.love_id = [dic[@"love_id"] integerValue];
+        if (self.love_id != 0) {
+            loveNum++;
+        }
+        else if (!dic) {
+            loveNum--;
+        }
+        btn.OD_selectedState = !btn.OD_selectedState;
+        [[self.bottomButtonView goodBtn] setTitle:[NSString stringWithFormat:@"赞 %zd", loveNum] forState:UIControlStateNormal];
+        btn.enabled = YES;
+    }
                    failure:^(NSError *error) {
-
+                       btn.enabled = YES;
                    }];
 }
 
