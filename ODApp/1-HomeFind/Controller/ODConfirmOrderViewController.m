@@ -233,7 +233,10 @@ static NSString *cellId = @"ODConfirmOrderCell";
      {
          weakSelf.confirmModel = [model result];
          weakSelf.orderId = weakSelf.confirmModel.order_id;
-         [weakSelf getWeiXinData];
+         [weakSelf getWeiXinDataWithParam:@{
+                                             @"type" : @"1",
+                                             @"takeout_order_id" : self.confirmModel.order_id
+                                            }];
      }
                    failure:^(NSError *error)
      {

@@ -65,10 +65,8 @@
 }
 
 #pragma mark - 获取数据
-- (void)getWeiXinData {
+- (void)getWeiXinDataWithParam:(NSDictionary *)params {
     // 拼接参数
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    params[@"bbs_order_id"] = self.orderId;
     __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:params modelClass:[ODPayModel class] success:^(id model)
