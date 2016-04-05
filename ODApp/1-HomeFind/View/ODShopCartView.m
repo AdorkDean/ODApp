@@ -130,7 +130,7 @@ static NSString * const kShopCarts = @"shopCarts";
     self.shopCars = [NSMutableArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
     
     self.buyButton.enabled = cacheTotalPrice;
-    self.buyButton.backgroundColor = [UIColor lightGrayColor];
+    self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
     
     // 支付完成后, 清空购物车
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clean) name:ODNotificationPaySuccess object:nil];
@@ -239,6 +239,7 @@ static NSString * const kShopCarts = @"shopCarts";
     CGFloat totalPrice = self.priceLabel.text.floatValue + data.price_show.floatValue;
     self.priceLabel.text = [NSString stringWithFormat:@"%.2f", totalPrice];
     self.buyButton.enabled = totalPrice;
+    self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1]: [UIColor lightGrayColor];
     
     // 添加商品
     if ([self.shopCars containsObject:data]) {
@@ -298,6 +299,7 @@ static NSString * const kShopCarts = @"shopCarts";
     self.shopCount = 0;
     self.numberLabel.text = self.priceLabel.text = @"0";
     self.buyButton.enabled = NO;
+    self.buyButton.backgroundColor = [UIColor lightGrayColor];
     
     // 移除缓存
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
@@ -332,6 +334,7 @@ static NSString * const kShopCarts = @"shopCarts";
         [self.shopCartView reloadData];
     }
     self.buyButton.enabled = self.priceLabel.text.floatValue;
+    self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
     
     // 更新缓存
     [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
