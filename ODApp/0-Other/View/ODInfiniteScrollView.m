@@ -16,8 +16,6 @@ static int const ImageViewCount = 3;
 @property (nonatomic, weak) UIScrollView *scrollView;
 @property (nonatomic, weak) NSTimer *timer;
 
-
-
 @end
 
 @implementation ODInfiniteScrollView
@@ -113,6 +111,11 @@ static int const ImageViewCount = 3;
     CGFloat minDistance = MAXFLOAT;
     for (int i = 0; i<self.scrollView.subviews.count; i++) {
         UIImageView *imageView = self.scrollView.subviews[i];
+        
+        imageView.userInteractionEnabled = YES;
+        // 添加手势
+        UITapGestureRecognizer *gas = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImage:)];
+        [imageView addGestureRecognizer:gas];
         CGFloat distance = 0;
         if (self.isScrollDirectionPortrait) {
             distance = ABS(imageView.frame.origin.y - scrollView.contentOffset.y);
@@ -176,6 +179,15 @@ static int const ImageViewCount = 3;
         self.scrollView.contentOffset = CGPointMake(0, self.scrollView.frame.size.height);
     } else {
         self.scrollView.contentOffset = CGPointMake(self.scrollView.frame.size.width, 0);
+    }
+}
+
+- (void)clickImage:(UIGestureRecognizer *)gas
+{
+    UIImageView *imageView = (UIImageView *)gas.view;
+    if ([self.delegate respondsToSelector:@selector(infiniteScrollViewDidClickImage:index:)])
+    {
+        [self.delegate infiniteScrollViewDidClickImage:self index:imageView.tag];
     }
 }
 

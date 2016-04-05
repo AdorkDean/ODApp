@@ -12,10 +12,10 @@
 @implementation ODUserInformation
 Single_Implementation(ODUserInformation)
 
-- (NSString *)openID
-{
-    return [self getUserCache].open_id;
-}
+//- (NSString *)openID
+//{
+//    return [self getUserCache].open_id;
+//}
 
 - (void)updateUserCache:(ODUserModel *)user
 {

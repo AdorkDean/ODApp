@@ -10,6 +10,8 @@
 
 @interface ODPaySuccessController : ODPayController
 
+Single_Interface(ODPaySuccessController)
+
 @property(nonatomic, copy) NSString *payStatus;
 
 /** 参数 */

@@ -26,6 +26,7 @@
 
 @implementation ODPaySuccessController
 
+Single_Implementation(ODPaySuccessController)
 
 - (void)viewDidLoad {
     [super viewDidLoad];

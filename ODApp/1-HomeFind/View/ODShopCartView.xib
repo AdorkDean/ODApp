@@ -19,7 +19,7 @@
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12.5"/>
                     <state key="normal" title="去结算"/>
                     <state key="disabled">
-                        <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="comfirmClick" destination="iN0-l3-epB" eventType="touchUpInside" id="lMk-3d-o7m"/>
@@ -29,14 +29,14 @@
                     <rect key="frame" x="0.0" y="0.0" width="420" height="49"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_shopping" translatesAutoresizingMaskIntoConstraints="NO" id="aYG-Md-DCa" userLabel="购物车图片">
-                            <rect key="frame" x="17" y="16.5" width="20" height="15"/>
+                            <rect key="frame" x="17" y="17" width="20" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="1Ob-Wr-Ywf"/>
                                 <constraint firstAttribute="width" constant="20" id="IPY-3B-Y8d"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k6G-yf-ePx" userLabel="商品数量">
-                            <rect key="frame" x="27" y="6.5" width="15" height="15"/>
+                            <rect key="frame" x="27" y="6" width="15" height="15"/>
                             <color key="backgroundColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="DCA-21-ZSk"/>
@@ -46,8 +46,14 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXd-pC-4x8" userLabel="总价格">
-                            <rect key="frame" x="55" y="13.5" width="21" height="20.5"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sXd-pC-4x8" userLabel="总价格">
+                            <rect key="frame" x="55" y="14" width="11" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5n-LJ-wfb" userLabel="总价格">
+                            <rect key="frame" x="66" y="14" width="10.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -60,8 +66,10 @@
                         <constraint firstItem="aYG-Md-DCa" firstAttribute="leading" secondItem="voS-LN-OyJ" secondAttribute="leading" constant="17.5" id="FGU-dp-KPh"/>
                         <constraint firstItem="sXd-pC-4x8" firstAttribute="top" secondItem="voS-LN-OyJ" secondAttribute="top" constant="17.5" id="KHb-mE-v6U"/>
                         <constraint firstItem="sXd-pC-4x8" firstAttribute="centerY" secondItem="aYG-Md-DCa" secondAttribute="centerY" id="RPH-M9-eSd"/>
+                        <constraint firstItem="U5n-LJ-wfb" firstAttribute="baseline" secondItem="sXd-pC-4x8" secondAttribute="baseline" id="a5O-Q3-dyz"/>
                         <constraint firstItem="sXd-pC-4x8" firstAttribute="leading" secondItem="aYG-Md-DCa" secondAttribute="trailing" constant="17.5" id="nxO-8T-TqP"/>
                         <constraint firstItem="sXd-pC-4x8" firstAttribute="top" secondItem="k6G-yf-ePx" secondAttribute="centerY" id="pim-4N-qxC"/>
+                        <constraint firstItem="U5n-LJ-wfb" firstAttribute="leading" secondItem="sXd-pC-4x8" secondAttribute="trailing" id="rAs-WZ-WlU"/>
                         <constraint firstItem="sXd-pC-4x8" firstAttribute="leading" secondItem="k6G-yf-ePx" secondAttribute="trailing" constant="12.5" id="y2l-CK-mdH"/>
                     </constraints>
                     <variation key="default">
@@ -89,9 +97,9 @@
                 <outlet property="buyButton" destination="u9j-rj-mGw" id="uOf-r5-jGE"/>
                 <outlet property="leftView" destination="voS-LN-OyJ" id="iXn-Mg-fGb"/>
                 <outlet property="numberLabel" destination="k6G-yf-ePx" id="B0Q-Qd-dqd"/>
-                <outlet property="priceLabel" destination="sXd-pC-4x8" id="cMN-XE-Fcf"/>
+                <outlet property="priceLabel" destination="U5n-LJ-wfb" id="Aug-pO-Whl"/>
             </connections>
-            <point key="canvasLocation" x="471" y="105"/>
+            <point key="canvasLocation" x="471" y="104.5"/>
         </view>
     </objects>
     <resources>

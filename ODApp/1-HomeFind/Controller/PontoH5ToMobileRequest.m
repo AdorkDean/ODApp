@@ -7,7 +7,7 @@
 //
 
 #import "PontoH5ToMobileRequest.h"
-
+#import "ODPaySuccessController.h"
 #import "ODHttpTool.h"
 
 #import "ODUserInformation.h"
@@ -19,7 +19,6 @@
 #import "ODPayModel.h"
 @implementation PontoH5ToMobileRequest {
 }
-//Single_Implementation(PontoH5ToMobileRequest)
 
 + (id)instance {
     
@@ -87,7 +86,7 @@
                           @"type" : @"1",
                           @"takeout_order_id" : [NSString stringWithFormat:@"%@", paramsId]
                           };
-    
+    [ODPaySuccessController sharedODPaySuccessController].params = self.successParam;
     [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:self.successParam modelClass:[ODPayModel class] success:^(id model) {
         
         ODPayModel *payModel = [model result];

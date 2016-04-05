@@ -31,6 +31,30 @@
 
 @implementation ODTakeAwayDetailController
 
+#pragma mark - View Lifecycle
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+    
+    if (self.isOrderDetail) {
+        return;
+    } else {
+        [self setupShopCart];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.shopCart removeFromSuperview];
+    
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+    if (![[self.navigationController viewControllers] containsObject: self])
+    {
+        [self.shopCart dismiss];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = self.takeAwayTitle;
@@ -47,27 +71,15 @@
     else {
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?id=%@", ODWebUrlNative, self.product_id]]]];
         
-        [self setupShopCart];
     }
     
+    // 点击 H5 购买商品按钮
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(h5addShopNumber:) name:ODNotificationShopCartAddNumber object:nil];
+    // 退出时退出购物车
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(pop) color:nil highColor:nil title:@"返回"];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-//    self.shopCart.hidden = NO;
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-    
-//    self.shopCart.hidden = YES;
-}
-
-#pragma mark - Create UIWebView
+#pragma mark - 初始化方法
 - (void)createWebView {
     float footHeight = 0;
     if (!self.isOrderDetail) {
@@ -77,30 +89,24 @@
     [self.view addSubview:self.webView];
 }
 
-#pragma mark - 购物车
 - (void)setupShopCart
 {
-//    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     ODShopCartView *shopCart = [ODShopCartView shopCart];
-    [self.view addSubview:shopCart];
+//    [self.view addSubview:shopCart];
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    [keyWindow addSubview:shopCart];
     self.shopCart = shopCart;
     [shopCart makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.equalTo(self.view);
+        make.bottom.left.right.equalTo(keyWindow);
         make.height.equalTo(49);
     }];
 }
 
-- (void)h5addShopNumber:(NSNotification *)note
-{
-    // 阻止多次点击, 造成数据错误
-    [[self.shopCart class] cancelPreviousPerformRequestsWithTarget:self.shopCart selector:@selector(addShopCount:) object:self.takeOut];
-    [self.shopCart performSelector:@selector(addShopCount:) withObject:self.takeOut afterDelay:0.2f];
-}
-
-#pragma mark - 初始化方法
 - (void)getDatawithCode:(NSString *)code {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
+
+    params[@"order_no"] = self.orderNo;
 //    params[@"order_no"] = self.model.out_trade_no;
     params[@"errCode"] = code;
     params[@"type"] = @"1";
@@ -115,11 +121,10 @@
                  return ;
              }
          }
-         ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
-//         vc.swap_type = weakSelf.swap_type;
+         ODPaySuccessController *vc = [ODPaySuccessController sharedODPaySuccessController];
+         vc.orderId = self.order_id;
+         //         vc.swap_type = weakSelf.swap_type;
          vc.payStatus = weakSelf.isPay;
-//         vc.orderId = weakSelf.orderId;
-//         vc.params = [PontoH5ToMobileRequest ].;
          vc.tradeType = @"1";
          [weakSelf.navigationController pushViewController:vc animated:YES];
      } failure:^(NSError *error) {
@@ -127,7 +132,19 @@
      }];
 }
 
-#pragma mark - 事件方法
+#pragma mark - IBActions
+- (void)pop
+{
+    // 退出购物车
+    [self.shopCart dismiss];
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)h5addShopNumber:(NSNotification *)note
+{
+    [self.shopCart addShopCount:self.takeOut];
+}
+
 - (void)failPay:(NSNotification *)text {
     NSString *code = text.userInfo[@"codeStatus"];
     self.isPay = @"2";

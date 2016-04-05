@@ -17,7 +17,6 @@
     self.backgroundColor = [UIColor whiteColor];
     self.layer.masksToBounds = YES;
     self.takeOutContentView.backgroundColor = [UIColor whiteColor];
-    self.enterButton.layer.borderColor = [UIColor lineColor].CGColor;
     self.enterButton.layer.borderWidth = 0.5;
     self.enterButton.layer.cornerRadius = 5;
 }
@@ -30,6 +29,12 @@
     [self.outletSignImageView sd_setImageWithURL:url];
     
     self.takeOutStatus.text = model.status_str;
+    if ([model.status isEqualToString:@"4"]) {
+        self.takeOutStatus.textColor = [UIColor redColor];
+    }
+    else {
+        self.takeOutStatus.textColor = [UIColor colorGreyColor];
+    }
     
     self.takeOutContentHeight.constant = 44 * model.products.count;
     
@@ -54,15 +59,23 @@
         [self.takeOutContentView addSubview:takeOutNumberLabel];
     }
     
-    self.takeOutTotalMoney.text = [NSString stringWithFormat:@"合计 ￥%.2f",model.price_show];
+    NSString *money = [NSString stringWithFormat:@"合计 ￥%.2f",model.price_show];
+    NSMutableAttributedString *moneyStr = [[NSMutableAttributedString alloc] initWithString:money];
+    [moneyStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.5] range:NSMakeRange(0, 2)];
+    
+    self.takeOutTotalMoney.attributedText = moneyStr;
     
     if ([model.status isEqualToString:@"1"]) {
         [self.enterButton setTitle:@"支付" forState:UIControlStateNormal];
-        self.enterButton.backgroundColor = [UIColor colorWithRGBString:@"#ffd802" alpha:1];
+        self.enterButton.backgroundColor = [UIColor themeColor];
+        self.enterButton.layer.borderColor = [UIColor lineColor].CGColor;
+
     }
     else {
         [self.enterButton setTitle:@"查看" forState:UIControlStateNormal];
         self.enterButton.backgroundColor = [UIColor whiteColor];
+            self.enterButton.layer.borderColor = [UIColor blackColor].CGColor;
+        
     }
 }
 

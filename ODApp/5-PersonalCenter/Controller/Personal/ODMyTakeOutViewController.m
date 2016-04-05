@@ -150,9 +150,11 @@ static NSString * const ODTakeOutViewID = @"ODTakeOutViewID";
     vc.isOrderDetail = YES;
     vc.order_id = model.order_id;
     vc.takeAwayTitle = @"订单详情";
+    vc.orderNo = model.order_no;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - Remove NSNotification
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }

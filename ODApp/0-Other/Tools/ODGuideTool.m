@@ -43,8 +43,6 @@ NSString * const kUserDefaultsVersionKey = @"CFBundleShortVersionString";
     }
     else
     {
-#warning TODO
-        return [[ODTabBarController alloc] init];
         // 保存版本号
         [[NSUserDefaults standardUserDefaults] setValue:newVersion forKeyPath:kUserDefaultsVersionKey];
         [[NSUserDefaults standardUserDefaults] synchronize];

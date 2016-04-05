@@ -18,15 +18,9 @@
 
 @implementation ODShopCartListCell
 
-- (void)awakeFromNib
-{
-    self.autoresizingMask = UIViewAutoresizingNone;
-}
-
 - (void)setTakeOut:(ODTakeOutModel *)takeOut
 {
     _takeOut = takeOut;
-    
     // 设置数据
     self.titleLabel.text = takeOut.title;
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", takeOut.shopNumber];
