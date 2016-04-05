@@ -26,7 +26,8 @@
         float reason_num = [skillModel.reason_num floatValue];
         NSArray *array = @[ @"非常不满意", @"不满意", @"一般", @"满意", @"非常满意" ];
         for (int i = 0; i < array.count; i++) {
-            if (reason_num == i) {
+            if (reason_num - 1 == i) {
+                self.contentLabel.text = array[i];
             }
         }
     }
