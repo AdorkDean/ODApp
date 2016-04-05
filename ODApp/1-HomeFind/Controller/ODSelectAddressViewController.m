@@ -10,18 +10,15 @@
 #import "ODSelectAddressCell.h"
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
-#import <AMapLocationKit/AMapLocationKit.h>
-//#import "ZHSearch.h"
-
+#import "ODKeywordsSearchViewController.h"
 
 static NSString *cellId = @"ODSelectAddressCell";
 
-@interface ODSelectAddressViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,MAMapViewDelegate, AMapSearchDelegate,AMapLocationManagerDelegate>
+@interface ODSelectAddressViewController ()<UISearchBarDelegate,UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,MAMapViewDelegate, AMapSearchDelegate>
 
 @property (nonatomic ,strong) MAMapView * mapView;
 @property (nonatomic ,strong) AMapSearchAPI * mapSearchAPI;
 @property (nonatomic ,strong) MAPointAnnotation *pointAnnotation;
-@property (nonatomic ,strong) AMapLocationManager *locationManager;
 
 @property (nonatomic ,strong) MAUserLocation * currentLocation;
 @property (nonatomic ,strong) NSMutableDictionary * userLocationDict;
@@ -31,10 +28,9 @@ static NSString *cellId = @"ODSelectAddressCell";
 @property (nonatomic ,strong) UITableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *dataArray;
 
-//@property (nonatomic ,strong) ZHSearch *search;
 @property (nonatomic ,strong) UIImageView *imageView;
+@property (nonatomic ,copy) NSString *city;
 
-//@property (nonatomic ,strong) ZHSearch *search;
 
 
 @end
@@ -84,14 +80,9 @@ static NSString *cellId = @"ODSelectAddressCell";
     self.mapSearchAPI.delegate = self;
     [self.view addSubview:self.mapView];
     
+    [self createImageView];
 }
 
-
-
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -99,31 +90,32 @@ static NSString *cellId = @"ODSelectAddressCell";
 
 #pragma mark - 初始胡导航
 -(void)navigationInit{
-
-//    self.search = [ZHSearch search];
-//    self.search.od_width = 200;
-//    self.search.od_height = 30;
-//    self.navigationItem.titleView = self.search;
-
-//    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
-//    [[[[self.searchBar.subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
-//    self.searchBar.backgroundColor = [UIColor whiteColor];
-//    self.searchBar.delegate = self;
-//    self.searchBar.placeholder = @"请输入你的地址";
-//    self.navigationItem.titleView = self.searchBar;
     
-//    self.search = [ZHSearch search];
-//    self.search.od_width = 200;
-//    self.search.od_height = 30;
-//    self.navigationItem.titleView = self.search;
-
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGestureClick:)];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width-100, 30)];
+    view.layer.masksToBounds = YES;
+    view.layer.cornerRadius = 5;
+    view.backgroundColor = [UIColor whiteColor];
+    [view addGestureRecognizer:tapGesture];
+    
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 20, 20)];
+    imageView.image = [UIImage imageNamed:@"icon_search"];
+    [view addSubview:imageView];
+    
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame)+15, 0, view.frame.size.width-50, 30)];
+    label.text = @"请输入你的地址";
+    label.textColor = [UIColor colorGrayColor];
+    label.font = [UIFont systemFontOfSize:15];
+    [view addSubview:label];
+    self.navigationItem.titleView = view;
 }
 
 -(void)createImageView{
     self.imageView = [[UIImageView alloc]init];
     self.imageView.image = [UIImage imageNamed:@"bbbb"];
     [self.imageView sizeToFit];
-    self.imageView.center = self.mapView.center;
+    self.imageView.od_centerY = self.mapView.od_centerY-50;
+    self.imageView.od_centerX = self.mapView.od_centerX;
     [self.mapView addSubview:self.imageView];
 }
 
@@ -160,9 +152,8 @@ static NSString *cellId = @"ODSelectAddressCell";
             annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation
                                                           reuseIdentifier:reuseIndetifier];
         }
-        annotationView.image = [UIImage imageNamed:@"bbbb"];
+        annotationView.image = [UIImage imageNamed:@"aaaa"];
         //设置中心点偏移，使得标注底部中间点成为经纬度对应点
-        annotationView.centerOffset = CGPointMake(0, -18);
         return annotationView;
     }
     return nil;
@@ -181,13 +172,14 @@ static NSString *cellId = @"ODSelectAddressCell";
         regeo.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
         regeo.radius = 1000;
         regeo.requireExtension = YES;
+    
         
         //点标注
         self.pointAnnotation = [[MAPointAnnotation alloc] init];
         self.pointAnnotation.coordinate = CLLocationCoordinate2DMake(userLocation.coordinate.latitude,userLocation.coordinate.longitude);
         [self.mapView addAnnotation:self.pointAnnotation];
         
-        
+        self.currentLocation = userLocation;
         //发起逆地理编码
         [self.mapSearchAPI AMapReGoecodeSearch:regeo];
         
@@ -220,31 +212,13 @@ static NSString *cellId = @"ODSelectAddressCell";
 //实现逆地理编码的回调函数
 - (void)onReGeocodeSearchDone:(AMapReGeocodeSearchRequest *)request response:(AMapReGeocodeSearchResponse *)response {
     if (response.regeocode != nil) {
-        NSString *cityResult;
         //通过AMapReGeocodeSearchResponse对象处理搜索结果
-        NSString *result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.city];
-        if (result.length == 0) {
-            result = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
-            if (result.length != 0) {
-                cityResult = [result substringToIndex:[result length] - 1];
-            }
-        }
-        else {
-            cityResult = [result substringToIndex:[result length] - 1];
-        }
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"当前定位到%@", cityResult] message:nil preferredStyle:UIAlertControllerStyleAlert];
-
-        [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction *_Nonnull action) {
-            [ODUserInformation sharedODUserInformation].locationCity = cityResult;
-            
-        }]];
-    
+        self.city = [NSString stringWithFormat:@"%@", response.regeocode.addressComponent.province];
     }
     
 }
 
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
-    
     AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
     request.location = [AMapGeoPoint locationWithLatitude:mapView.region.center.latitude longitude:mapView.region.center.longitude];
     request.keywords = @"";
@@ -253,5 +227,15 @@ static NSString *cellId = @"ODSelectAddressCell";
     //发起周边搜索
     [self.mapSearchAPI AMapPOIAroundSearch:request];
 }
+
+
+-(void)tapGestureClick:(UITapGestureRecognizer *)tap{
+    ODKeywordsSearchViewController *keywords = [[ODKeywordsSearchViewController alloc]init];
+    keywords.city = self.city;
+    [self.navigationController pushViewController:keywords animated:YES];
+}
+
+
+
 
 @end

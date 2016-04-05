@@ -13,7 +13,7 @@
 #import "ODCancelOrderView.h"
 #import "Masonry.h"
 #import "ODTakeAwayDetailController.h"
-
+#import "ODTakeOutHomeController.h"
 #import "ODOrderAndSellDetailController.h"
 
 @interface ODPaySuccessController () <UITextViewDelegate>
@@ -102,6 +102,7 @@ Single_Implementation(ODPaySuccessController)
         vc.order_id = [NSString stringWithFormat:@"%@", self.orderId];
         vc.isOrderDetail = YES;
         vc.takeAwayTitle = @"订单详情";
+        vc.orderNo = self.order_no;
         [self.navigationController pushViewController:vc animated:YES];
     }
     else
@@ -113,18 +114,32 @@ Single_Implementation(ODPaySuccessController)
 }
 
 // 再去逛逛
-- (void)goOther:(UIButton *)sender {
-
+- (void)goOther:(UIButton *)sender
+{
     ODTabBarController *tabBar = (ODTabBarController *) self.tabBarController;
-    if (tabBar.currentIndex == 2) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([self.tradeType isEqualToString:@"1"])
+    {
+        if (tabBar.currentIndex == 0) {
+            ODTakeOutHomeController *takeVc = self.navigationController.childViewControllers[1];
+            [self.navigationController popToViewController:takeVc animated:YES];
+        }
+        else {
+            ODTakeOutHomeController *takeVc = [[ODTakeOutHomeController alloc]init];
+            tabBar.selectedIndex = 0;
+            [tabBar.navigationController pushViewController:takeVc animated:YES];
+        }
     }
-    else {
-        tabBar.selectedIndex = 2;
-        ODBazaarViewController *vc = tabBar.childViewControllers[2].childViewControllers[0];
-        vc.index = 0;
+    else
+    {
+        if (tabBar.currentIndex == 2) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        else {
+            tabBar.selectedIndex = 2;
+            ODBazaarViewController *vc = tabBar.childViewControllers[2].childViewControllers[0];
+            vc.index = 0;
+        }
     }
-
 
 }
 
