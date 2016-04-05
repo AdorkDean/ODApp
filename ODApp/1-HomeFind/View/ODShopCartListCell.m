@@ -36,40 +36,33 @@
 /**
  *  点击加号按钮
  */
-- (IBAction)plusButtonClick:(id)sender
+- (IBAction)plusButtonClick
 {
     NSInteger number = self.takeOut.shopNumber;
-    if (number < 0) return;
     number += 1;
     self.takeOut.shopNumber = number;
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", number];
-    
-    // 发送通知, 修改购物车商品数量
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartAddNumber object:self];
+    if ([self.delegate respondsToSelector:@selector(shopCartListcell:DidClickMinusButton:)])
+    {
+        [self.delegate shopCartListcell:self DidClickMinusButton:self.takeOut];
+    }
 }
 
 /**
  *  点击减号按钮
  */
-- (IBAction)minusButtonClick:(id)sender
+- (IBAction)minusButtonClick
 {
     NSInteger number = self.takeOut.shopNumber;
     if (number <= 0) return;
     number -= 1;
     self.takeOut.shopNumber = number;
-    
-    // 数量减到0时, 删除当前行
-    if (number == 0)
-    {
-        if ([self.delegate respondsToSelector:@selector(shopCartListcell:RemoveCurrentRow:)])
-        {
-            [self.delegate shopCartListcell:self RemoveCurrentRow:self.takeOut];
-        }
-    }
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", number];
     
-    // 发送通知, 修改购物车商品数量
-    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartminusNumber object:self];
+    if ([self.delegate respondsToSelector:@selector(shopCartListcell:DidClickPlusButton:)])
+    {
+        [self.delegate shopCartListcell:self DidClickPlusButton:self.takeOut];
+    }
 }
 
 @end

@@ -28,7 +28,7 @@
                         </constraints>
                         <state key="normal" backgroundImage="button_plus"/>
                         <connections>
-                            <action selector="plusButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="oeh-YB-FBS"/>
+                            <action selector="plusButtonClick" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CpE-GU-sDb"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKm-b6-mGu" userLabel="数量">
@@ -51,7 +51,7 @@
                         </constraints>
                         <state key="normal" backgroundImage="button_minus"/>
                         <connections>
-                            <action selector="minusButtonClick:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Gkq-NH-v4c"/>
+                            <action selector="minusButtonClick" destination="KGk-i7-Jjw" eventType="touchUpInside" id="giN-i3-Odh"/>
                         </connections>
                     </button>
                     <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1U-j2-tj4">

@@ -17,7 +17,7 @@ typedef NS_ENUM(NSUInteger, ODTakeOutStatus)
 
 #import <Foundation/Foundation.h>
 
-@interface ODTakeOutModel : NSObject
+@interface ODTakeOutModel : NSObject <NSCoding>
 
 /** 商品Id */
 @property (nonatomic, copy) NSString *product_id;
@@ -41,11 +41,7 @@ typedef NS_ENUM(NSUInteger, ODTakeOutStatus)
 @property (nonatomic, copy) NSString *store_hours;
 /** 送货时间 */
 @property (nonatomic, copy) NSString *store_sendtime;
-
 /** 点击商品次数 */
 @property (nonatomic, assign) NSInteger shopNumber;
-
-/** 总价格 */
-@property (nonatomic, assign) CGFloat totalPrice;
 
 @end
