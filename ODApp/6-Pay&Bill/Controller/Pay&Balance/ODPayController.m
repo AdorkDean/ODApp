@@ -19,9 +19,9 @@
 
 @interface ODPayController ()
 
+@property(nonatomic, strong) ODPayModel *model;
 @property(nonatomic, strong) UILabel *orderNameLabel;
 @property(nonatomic, strong) UILabel *priceLabel;
-@property(nonatomic, strong) ODPayModel *model;
 @property(nonatomic, copy) NSString *isPay;
 @property(nonatomic, assign) int navHasSelfClass;
 
@@ -72,6 +72,7 @@
      {
          weakSelf.model = [model result];
          [weakSelf payMoney];
+//         [weakSelf.navigationController popViewControllerAnimated:YES];
      }
                    failure:^(NSError *error)
     {

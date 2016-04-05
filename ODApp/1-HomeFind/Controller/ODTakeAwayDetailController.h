@@ -6,13 +6,11 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "ODPayController.h"
 #import "PontoDispatcher.h"
 @class ODTakeOutModel;
 
-@interface ODTakeAwayDetailController : UIViewController<PontoDispatcherCallbackDelegate>
-
-//@property (strong, nonatomic) IBOutlet UIWebView *webView;
+@interface ODTakeAwayDetailController : ODPayController<PontoDispatcherCallbackDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 
@@ -37,6 +35,9 @@
  * 订单ID
  */
 @property (nonatomic, strong) NSString *order_id;
+
+/** order_no */
+@property (nonatomic,copy) NSString *orderNo;
 
 /** <#desc#> */
 @property (nonatomic, strong) ODTakeOutModel *takeOut;
