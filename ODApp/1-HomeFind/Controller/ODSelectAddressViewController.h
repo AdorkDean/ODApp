@@ -10,4 +10,6 @@
 
 @interface ODSelectAddressViewController : ODBaseViewController
 
+@property(nonatomic, copy) void(^myBlock)(NSString *address,NSString *addressTitle);
+
 @end

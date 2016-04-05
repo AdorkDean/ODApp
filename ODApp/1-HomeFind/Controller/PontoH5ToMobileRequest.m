@@ -7,7 +7,7 @@
 //
 
 #import "PontoH5ToMobileRequest.h"
-#import "ODPaySuccessController.h"
+#import "ODTakeOutpaysingleModel.h"
 #import "ODHttpTool.h"
 
 #import "ODUserInformation.h"
@@ -73,8 +73,12 @@
     if ([params isKindOfClass:[NSDictionary class]]) {
         NSLog(@"params------->%@", params);
         [self getWeiXinData:params[@"id"]];
+        [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_no = params[@"order_no"];
     }
 }
+
+
+
 
 - (void)getWeiXinData:(NSString *)paramsId {
     
@@ -86,7 +90,7 @@
                           @"type" : @"1",
                           @"takeout_order_id" : [NSString stringWithFormat:@"%@", paramsId]
                           };
-    [ODPaySuccessController sharedODPaySuccessController].params = self.successParam;
+    [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].params = self.successParam;
     [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:self.successParam modelClass:[ODPayModel class] success:^(id model) {
         
         ODPayModel *payModel = [model result];
@@ -109,5 +113,7 @@
     
     [WXApi sendReq:request];
 }
+
+
 
 @end

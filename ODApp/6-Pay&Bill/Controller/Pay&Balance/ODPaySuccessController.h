@@ -10,14 +10,14 @@
 
 @interface ODPaySuccessController : ODPayController
 
-Single_Interface(ODPaySuccessController)
+//Single_Interface(ODPaySuccessController)
 
 @property(nonatomic, copy) NSString *payStatus;
 
 /** 参数 */
 @property (nonatomic,strong) NSDictionary *params;
 
-/** order_no */
-@property (nonatomic,copy) NSString *order_no;
+///** order_no */
+//@property (nonatomic,copy) NSString *order_no;
 
 @end

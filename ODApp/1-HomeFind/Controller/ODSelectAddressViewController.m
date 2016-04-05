@@ -137,7 +137,11 @@ static NSString *cellId = @"ODSelectAddressCell";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    AMapPOI *poi = self.dataArray [indexPath.row];
+    if (self.myBlock) {
+        self.myBlock(poi.name,poi.address);
+    }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark -MAAnnotationViewDelegate

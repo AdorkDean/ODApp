@@ -38,6 +38,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"支付订单";
     self.tradeType = @"0";
+    [self payView];
     self.successParams = @{
                            @"bbs_order_id":self.orderId
                            };
