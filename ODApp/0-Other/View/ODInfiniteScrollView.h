@@ -7,6 +7,13 @@
 //  无限滚动ScrollView
 
 #import <UIKit/UIKit.h>
+@class ODInfiniteScrollView;
+
+@protocol ODInfiniteScrollViewDelegate <NSObject>
+
+- (void)infiniteScrollViewDidClickImage:(ODInfiniteScrollView *)infiniteScrollView index:(NSInteger)index;
+
+@end
 
 @interface ODInfiniteScrollView : UIView
 /** 图片数组 */
@@ -14,4 +21,8 @@
 /** pageControl */
 @property (nonatomic, weak, readonly) UIPageControl *pageControl;
 @property (nonatomic, assign, getter = isScrollDirectionPortrait) BOOL scrollDirectionPortrait;
+
+/** delegate */
+@property (nonatomic, weak) id<ODInfiniteScrollViewDelegate> delegate;
+
 @end

@@ -9,8 +9,9 @@
 #import "ODTakeOutHeaderView.h"
 #import "ODInfiniteScrollView.h"
 #import "ODTakeOutBannerModel.h"
+#import "ODPublicWebViewController.h"
 
-@interface ODTakeOutHeaderView()
+@interface ODTakeOutHeaderView() <ODInfiniteScrollViewDelegate>
 
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *menuView;
 
@@ -42,6 +43,7 @@
 - (void)awakeFromNib
 {
     self.autoresizingMask = UIViewAutoresizingNone;
+    self.scrollView.delegate = self;
     
     // 添加点击事件
     for (UIButton *button in self.menuView) {
@@ -61,15 +63,13 @@
 {
     _banners = banners;
     // 传递图片地址数组
-    
     NSMutableArray *arrayM = [NSMutableArray array];
-    for (ODTakeOutBannerModel *banner in banners)
-    {
+    for (ODTakeOutBannerModel *banner in banners) {
         [arrayM addObject:banner.img_url];
     }
-    //  传递地址数组(不为空时)
+    // 传递地址数组(不为空时)
     if ( arrayM.count ) self.scrollView.images = arrayM;
-    //     设置pageControl颜色
+    // 设置pageControl颜色
     self.scrollView.pageControl.currentPageIndicatorTintColor = [UIColor orangeColor];
     self.scrollView.pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
 }
@@ -95,6 +95,21 @@
     if ([self.delegate respondsToSelector:@selector(headerView:didClickedMenuButton:)]) {
         [self.delegate headerView:self didClickedMenuButton:index];
     }
+}
+
+#pragma mark - ODInfiniteScrollViewDelegate
+- (void)infiniteScrollViewDidClickImage:(ODInfiniteScrollView *)infiniteScrollView index:(NSInteger)index
+{
+    ODTakeOutBannerModel *banner = self.banners[index];
+    if ( !banner.img_url ) return;
+    ODPublicWebViewController *webViewVc = [[ODPublicWebViewController alloc] init];
+    webViewVc.webUrl = banner.img_url;
+    webViewVc.navigationTitle = banner.title;
+    webViewVc.isShowProgress = YES;
+    // 跳转
+    UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UINavigationController *navVc = tabBarVc.selectedViewController;
+    [navVc pushViewController:webViewVc animated:YES];
 }
 
 @end

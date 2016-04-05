@@ -13,6 +13,9 @@
 
 + (instancetype)shopCart;
 
+/** 购买商品方法 */
 - (void)addShopCount:(ODTakeOutModel *)data;
+
+- (void)dismiss;
 
 @end

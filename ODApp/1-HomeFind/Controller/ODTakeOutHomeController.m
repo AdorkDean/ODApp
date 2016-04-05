@@ -22,6 +22,7 @@
 #import "ODTakeAwayDetailController.h"
 
 #import "ODConfirmOrderViewController.h"
+#import "ODPersonalCenterViewController.h"
 #import <Masonry.h>
 
 
@@ -55,7 +56,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 
 @implementation ODTakeOutHomeController
 
-#pragma mark - 懒加载
+#pragma mark - LazyLoad
 - (NSMutableDictionary *)shops
 {
     if (!_shops) {
@@ -72,7 +73,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     return _datas;
 }
 
-#pragma mark - 生命周期方法
+#pragma mark - Lifecycle
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -118,6 +119,12 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 {
     self.navigationItem.title = @"订外卖";
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    if (![ODUserInformation sharedODUserInformation].openID.length) {
+        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+    
     // 创建表格
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 163, KScreenWidth, KScreenHeight - 64 - 163 - 49) style:UITableViewStylePlain];
     tableView.dataSource = self;
@@ -151,11 +158,10 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 - (void)setupShopCart
 {
     ODShopCartView *shopCart = [ODShopCartView shopCart];
-//    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-//    [keyWindow addSubview:shopCart];
-    [self.view addSubview:shopCart];
+    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+    [keyWindow addSubview:shopCart];
     [shopCart makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.equalTo(self.view);
+        make.bottom.left.right.equalTo(keyWindow);
         make.height.equalTo(49);
     }];
     self.shopCart = shopCart;
@@ -170,49 +176,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     self.tableView.mj_footer.automaticallyHidden = YES;
 }
 
-#pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.datas.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    ODTakeOutCell *cell = [tableView dequeueReusableCellWithIdentifier:takeAwayCellId];
-    cell.delegate = self;
-    cell.datas = self.datas[indexPath.row];
-    return cell;
-}
-
-#pragma mark - UITableViewDelegate
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
-    [self.tableView.mj_footer endRefreshing];
-    // 点击方法
-    ODTakeOutModel *model = self.datas[indexPath.row];
-    ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
-    vc.takeAwayTitle = model.title;
-    vc.takeOut = model;
-    vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
-#pragma mark - ODTakeOutHeaderViewDelegate
-- (void)headerView:(ODTakeOutHeaderView *)headerView didClickedMenuButton:(NSInteger)index
-{
-    self.type = @(index);
-    self.page = @1;
-    [self loadNewTakeOuts];
-}
-
-#pragma mark - ODTakeOutCellDelegate
-- (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(ODTakeOutModel *)takeOut
-{
-    // 点击购买按钮
-    [self.shopCart addShopCount:takeOut];
-}
-
-#pragma mark - 事件方法
+#pragma mark - IBActions
 - (void)loadNewBanners
 {
     // 拼接参数
@@ -287,6 +251,48 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     } else { // 还没有加载完毕
         [self.tableView.mj_footer endRefreshing];
     }
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.datas.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODTakeOutCell *cell = [tableView dequeueReusableCellWithIdentifier:takeAwayCellId];
+    cell.delegate = self;
+    cell.datas = self.datas[indexPath.row];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    [self.tableView.mj_footer endRefreshing];
+    // 点击方法
+    ODTakeOutModel *model = self.datas[indexPath.row];
+    ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
+    vc.takeAwayTitle = model.title;
+    vc.takeOut = model;
+    vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - ODTakeOutHeaderViewDelegate
+- (void)headerView:(ODTakeOutHeaderView *)headerView didClickedMenuButton:(NSInteger)index
+{
+    self.type = @(index);
+    self.page = @1;
+    [self loadNewTakeOuts];
+}
+
+#pragma mark - ODTakeOutCellDelegate
+- (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(ODTakeOutModel *)takeOut
+{
+    // 点击购买按钮
+    [self.shopCart addShopCount:takeOut];
 }
 
 @end
