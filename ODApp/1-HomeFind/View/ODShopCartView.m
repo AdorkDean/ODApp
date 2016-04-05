@@ -46,6 +46,9 @@ static CGFloat const shopCartCellH = 44;
 /** 是否展开 */
 @property (nonatomic, assign, getter = isOpened) BOOL opened;
 
+/** 是否清空 */
+@property (nonatomic, assign, getter = isClear) BOOL clear;
+
 @end
 
 static NSString * const shopCartListCell = @"ODShopCartListCell";
@@ -227,6 +230,11 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
  */
 - (void)addShopCount:(ODTakeOutModel *)data
 {
+    if (self.isClear)
+    {
+        data.shopNumber = 0;
+        self.clear = NO;
+    }
     data.shopNumber++;
     // 修改数量
     self.shopCount++;
@@ -272,10 +280,12 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
 #pragma mark - ODShopCartListHeaderViewDelegate
 - (void)shopCartHeaderViewDidClickClearButton:(ODShopCartListHeaderView *)headerView
 {
+    self.clear = YES;
     // 清空购物车数据
     for (ODTakeOutModel *takeOut in self.shopCars) {
         takeOut.shopNumber = 0;
     }
+    
     [self.shopCars removeAllObjects];
     
     [self dismiss];
