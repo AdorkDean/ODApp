@@ -20,7 +20,6 @@ NSString * const ODAlertIsLoading = nil;
 + (void)initialize
 {
     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
-//    [SVProgressHUD setBackgroundColor:[UIColor whiteColor]];
     [SVProgressHUD setBackgroundColor:[UIColor colorWithRGBString:@"#4a4a4a" alpha:0.8]];
     [SVProgressHUD setForegroundColor:[UIColor whiteColor]];
     [SVProgressHUD setInfoImage:nil];
@@ -33,7 +32,7 @@ NSString * const ODAlertIsLoading = nil;
 
 + (void)showProgressWithStatus:(NSString *)status
 {
-    [SVProgressHUD showWithStatus:status maskType:SVProgressHUDMaskTypeNone];
+    [SVProgressHUD showWithStatus:status];
 }
 
 + (void)showInfoWithStatus:(NSString *)status

@@ -141,9 +141,7 @@
 
 - (void)h5addShopNumber:(NSNotification *)note
 {
-    // 阻止多次点击, 造成数据错误
-    [[self.shopCart class] cancelPreviousPerformRequestsWithTarget:self.shopCart selector:@selector(addShopCount:) object:self.takeOut];
-    [self.shopCart performSelector:@selector(addShopCount:) withObject:self.takeOut afterDelay:0.2f];
+    [self.shopCart addShopCount:self.takeOut];
 }
 
 - (void)failPay:(NSNotification *)text {

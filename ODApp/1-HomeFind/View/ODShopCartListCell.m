@@ -32,10 +32,10 @@
  */
 - (IBAction)plusButtonClick
 {
-//    NSInteger number = self.takeOut.shopNumber;
-//    number += 1;
-//    self.takeOut.shopNumber = number;
-    self.numberLabel.text = [NSString stringWithFormat:@"%ld", ++self.takeOut.shopNumber];
+    NSInteger number = self.takeOut.shopNumber;
+    number += 1;
+    self.takeOut.shopNumber = number;
+    self.numberLabel.text = [NSString stringWithFormat:@"%ld", number];
     if ([self.delegate respondsToSelector:@selector(shopCartListcell:DidClickMinusButton:)])
     {
         [self.delegate shopCartListcell:self DidClickMinusButton:self.takeOut];

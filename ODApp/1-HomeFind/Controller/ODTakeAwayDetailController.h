@@ -39,7 +39,6 @@
 /** order_no */
 @property (nonatomic,copy) NSString *orderNo;
 
-/** <#desc#> */
 @property (nonatomic, strong) ODTakeOutModel *takeOut;
 
 @end

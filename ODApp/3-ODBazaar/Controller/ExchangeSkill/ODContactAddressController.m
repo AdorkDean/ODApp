@@ -12,6 +12,7 @@
 #import "ODAddAddressController.h"
 #import "ODOrderAddressModel.h"
 #import "UITableViewRowAction+JZExtension.h"
+#import "ODAddNewAddressViewController.h"
 
 @interface ODContactAddressController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -129,7 +130,10 @@
     ODAddAddressController *vc = [[ODAddAddressController alloc] init];
     vc.typeTitle = @"新增地址";
     vc.isAdd = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    ODAddNewAddressViewController *new = [[ODAddNewAddressViewController alloc]init];
+    [self.navigationController pushViewController:new animated:YES];
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - tableViewDelegate

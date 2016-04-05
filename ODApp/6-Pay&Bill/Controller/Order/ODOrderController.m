@@ -162,7 +162,7 @@
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"swap_id"] = [NSString stringWithFormat:@"%d", self.informationModel.swap_id];
-    params[@"service_time"] = @"";
+    params[@"service_time"] = self.headView.orderView.timeLabel.text;
     params[@"user_address_id"] = self.addressId;
     params[@"comment"] = @"";
     __weakSelf
