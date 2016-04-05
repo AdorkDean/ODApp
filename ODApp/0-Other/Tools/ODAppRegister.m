@@ -12,7 +12,7 @@
 #import "IQKeyboardManager.h"
 #import "MAMapKit.h"
 #import "AMapSearchServices.h"
-
+#import "AMapLocationKit.h"
 
 /** 微信的apiKey */
 static NSString * const kGetWXAppId = @"wx64423cc9497cc581";
@@ -68,6 +68,7 @@ static BOOL const isProduction = FALSE;
     //配置用户Key
     [MAMapServices sharedServices].apiKey = ODLocationApiKey;
     [AMapSearchServices sharedServices].apiKey = ODLocationApiKey;
+    [AMapLocationServices sharedServices].apiKey = ODLocationApiKey;
 }
 
 + (void)registIQKeyboardManager
