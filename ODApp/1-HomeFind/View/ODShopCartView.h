@@ -28,4 +28,8 @@
 /** 购物车列表 */
 @property (nonatomic, strong) UITableView *shopCartView;
 
+
+/** 结算按钮 */
+@property (weak, nonatomic) IBOutlet UIButton *buyButton;
+
 @end

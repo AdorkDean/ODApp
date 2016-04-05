@@ -11,8 +11,6 @@
 @interface ODPaySuccessController : ODPayController
 
 @property(nonatomic, copy) NSString *payStatus;
-@property(nonatomic, copy) NSString *orderId;
-@property(nonatomic, copy) NSString *swap_type;
 
 /** 参数 */
 @property (nonatomic,strong) NSDictionary *params;

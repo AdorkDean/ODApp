@@ -34,8 +34,6 @@ static CGFloat const shopCartCellH = 44;
 /** 蒙板 */
 @property (nonatomic, strong) UIView *coverView;
 
-/** 结算按钮 */
-@property (weak, nonatomic) IBOutlet UIButton *buyButton;
 
 @end
 
@@ -118,7 +116,11 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     for (NSDictionary *dict in shops)
     {
         NSDictionary *userDict = shops[dict];
-        [arrayM addObject:userDict];
+        
+//        if ([[userDict valueForKey:@"shopNumber"] integerValue]) {
+            [arrayM addObject:userDict];
+            
+//        }
     }
     self.datasArray = [ODTakeOutModel mj_objectArrayWithKeyValuesArray:arrayM];
     // 逆序
@@ -171,7 +173,7 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     [self dismiss];
     
     // 发送通知, 清空所有
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAll" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartRemoveALL object:self];
     
     // 清空所有
     [self.datasArray removeAllObjects];
@@ -179,7 +181,9 @@ static NSString * const shopCartListCell = @"ODShopCartListCell";
     self.priceLabel.text = @"¥0";
     
     // 移除所有模型中保存的商品数量
-    for (ODTakeOutModel *takeOut in self.datasArray) takeOut.shopNumber = 0;
+    for (ODTakeOutModel *takeOut in self.datasArray) {
+        takeOut.shopNumber = 0;
+    }
 
     [self.shopCartView reloadData];
 }
