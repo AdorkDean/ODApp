@@ -124,7 +124,7 @@ static NSString * const kShopCarts = @"shopCarts";
     
     [self loadCache];
     
-    self.buyButton.enabled = (self.priceLabel.text.floatValue > 0);
+    self.buyButton.enabled = self.priceLabel.text.floatValue;
 }
 
 + (instancetype)shopCart
@@ -150,8 +150,6 @@ static NSString * const kShopCarts = @"shopCarts";
         self.headerView.od_width = KScreenWidth;
         self.headerView.od_height = shopCartHeaderViewH;
         UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
-//        [keyWindow insertSubview:self.coverView belowSubview:self.shopCartView];
-        
         [keyWindow insertSubview:self.coverView belowSubview:self];
     } else {
         // 移除蒙板
@@ -209,8 +207,9 @@ static NSString * const kShopCarts = @"shopCarts";
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     self.shopCount = [[user valueForKey:kShopCount] integerValue];
-    self.numberLabel.text = [NSString stringWithFormat:@"%ld", self.shopCount];
-    self.priceLabel.text = [NSString stringWithFormat:@"%.2f", [[user valueForKey:kTotalPrice] floatValue]];
+    self.numberLabel.text = self.shopCount ? [NSString stringWithFormat:@"%ld", self.shopCount] : @"0";
+    CGFloat cacheTotalPrice = [[user valueForKey:kTotalPrice] floatValue];
+    self.priceLabel.text = cacheTotalPrice ? [NSString stringWithFormat:@"%.2f", cacheTotalPrice] : @"0";
     // 读取shopCarts
     NSData *data = [user valueForKey:kShopCarts];
     self.shopCars = [NSMutableArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
@@ -255,7 +254,10 @@ static NSString * const kShopCarts = @"shopCarts";
     
     self.buyButton.enabled = YES;
     // 添加商品
-    if ([self.shopCars containsObject:data]) return;
+    if ([self.shopCars containsObject:data]) {
+        [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
+        return;
+    }
     
     for (ODTakeOutModel *takeOut in self.shopCars)
     {
@@ -350,7 +352,7 @@ static NSString * const kShopCarts = @"shopCarts";
         [self.shopCartView reloadData];
         if (!self.shopCars.count) [self dismiss];
     }
-    self.buyButton.enabled = (self.priceLabel.text.integerValue > 0);
+    self.buyButton.enabled = self.priceLabel.text.floatValue;
     
     // 更新缓存
     [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
