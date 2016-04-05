@@ -133,12 +133,17 @@ static NSString * const kShopCarts = @"shopCarts";
     self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
     
     // 支付完成后, 清空购物车
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clean) name:ODNotificationPaySuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanCache:) name:ODNotificationPaySuccess object:nil];
 }
 
 + (instancetype)shopCart
 {
     return [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self) owner:nil options:nil].firstObject;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - IBActions
@@ -262,7 +267,7 @@ static NSString * const kShopCarts = @"shopCarts";
     [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
 }
 
-- (void)clean
+- (void)cleanCache:(NSNotification *)note
 {
     [self shopCartHeaderViewDidClickClearButton:nil];
 }
@@ -308,7 +313,7 @@ static NSString * const kShopCarts = @"shopCarts";
     [user removeObjectForKey:kShopCarts];
     [user synchronize];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"removeALLDATA" object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartRemoveALL object:self];
 }
 
 #pragma mark - ODShopCartListCellDelegate
@@ -332,6 +337,10 @@ static NSString * const kShopCarts = @"shopCarts";
         self.headerView.od_width = KScreenWidth;
         self.headerView.od_height = shopCartHeaderViewH;
         [self.shopCartView reloadData];
+        
+        if (!self.shopCars.count) [self dismiss];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartminusNumber object:nil];
     }
     self.buyButton.enabled = self.priceLabel.text.floatValue;
     self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];

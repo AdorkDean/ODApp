@@ -80,7 +80,13 @@
     // 退出时退出购物车
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(pop) color:nil highColor:nil title:@"返回"];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"removeALLDATA" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartRemoveALL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartminusNumber object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - 初始化方法
@@ -138,7 +144,7 @@
 }
 
 #pragma mark - IBActions
-- (void)test:(NSNotification *)note
+- (void)clearShopNumber:(NSNotification *)note
 {
     self.takeOut.shopNumber = 0;
 }
