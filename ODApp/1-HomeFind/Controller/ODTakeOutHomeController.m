@@ -22,6 +22,7 @@
 #import "ODTakeAwayDetailController.h"
 
 #import "ODConfirmOrderViewController.h"
+#import "ODPersonalCenterViewController.h"
 #import <Masonry.h>
 
 
@@ -118,6 +119,12 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 {
     self.navigationItem.title = @"订外卖";
     self.automaticallyAdjustsScrollViewInsets = NO;
+    
+    if (![ODUserInformation sharedODUserInformation].openID.length) {
+        ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
+    
     // 创建表格
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 163, KScreenWidth, KScreenHeight - 64 - 163 - 49) style:UITableViewStylePlain];
     tableView.dataSource = self;

@@ -35,6 +35,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
+    
+    if (self.isOrderDetail) {
+        return;
+    } else {
+        [self setupShopCart];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -65,7 +71,6 @@
     else {
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?id=%@", ODWebUrlNative, self.product_id]]]];
         
-        [self setupShopCart];
     }
     
     // 点击 H5 购买商品按钮
