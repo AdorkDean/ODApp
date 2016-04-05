@@ -45,8 +45,6 @@ static CGFloat const shopCartCellH = 44;
 @property (nonatomic, assign) NSInteger shopCount;
 /** 是否展开 */
 @property (nonatomic, assign, getter = isOpened) BOOL opened;
-/** 是否展开 */
-@property (nonatomic, assign, getter = isCleared) BOOL cleared;
 
 @end
 
@@ -132,6 +130,7 @@ static NSString * const kShopCarts = @"shopCarts";
     self.shopCars = [NSMutableArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
     
     self.buyButton.enabled = cacheTotalPrice;
+    self.buyButton.backgroundColor = [UIColor lightGrayColor];
     
     // 支付完成后, 清空购物车
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clean) name:ODNotificationPaySuccess object:nil];
@@ -217,13 +216,11 @@ static NSString * const kShopCarts = @"shopCarts";
 {
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
     
-    if (shopCount) [user setObject:@(shopCount) forKey:kShopCount];
-    if (totalPrice) [user setObject:@(totalPrice) forKey:kTotalPrice];
-    if (shopCarts) {
-        //将shopCarts类型变为NSData类型
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:shopCarts];
-        [user setObject:data forKey:kShopCarts];
-    }
+    [user setObject:@(shopCount) forKey:kShopCount];
+    [user setObject:@(totalPrice) forKey:kTotalPrice];
+    //将shopCarts类型变为NSData类型
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:shopCarts];
+    [user setObject:data forKey:kShopCarts];
     [user synchronize];
 }
 
@@ -245,7 +242,6 @@ static NSString * const kShopCarts = @"shopCarts";
     
     // 添加商品
     if ([self.shopCars containsObject:data]) {
-        self.cleared = NO;
         [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
         return;
     }
@@ -287,7 +283,6 @@ static NSString * const kShopCarts = @"shopCarts";
 #pragma mark - ODShopCartListHeaderViewDelegate
 - (void)shopCartHeaderViewDidClickClearButton:(ODShopCartListHeaderView *)headerView
 {
-    self.cleared = YES;
     // 清空购物车数据
     for (ODTakeOutModel *takeOut in self.shopCars) {
         takeOut.shopNumber = 0;
@@ -297,42 +292,25 @@ static NSString * const kShopCarts = @"shopCarts";
     
     [self dismiss];
     
+    // 刷新
+    [self.shopCartView reloadData];
+    
     self.shopCount = 0;
     self.numberLabel.text = self.priceLabel.text = @"0";
     self.buyButton.enabled = NO;
     
-    // 刷新
-    [self.shopCartView reloadData];
-    
     // 移除缓存
     NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-//    [user removeObjectForKey:kShopCount];
-//    [user removeObjectForKey:kTotalPrice];
-//    [user removeObjectForKey:kShopCarts];
-    [user setObject:@(0) forKey:kShopCount];
-    [user setObject:@(0.0) forKey:kTotalPrice];
-    [user setObject:nil forKey:kShopCarts];
+    [user removeObjectForKey:kShopCount];
+    [user removeObjectForKey:kTotalPrice];
+    [user removeObjectForKey:kShopCarts];
     [user synchronize];
-    
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"removeALLDATA" object:self];
 }
 
 #pragma mark - ODShopCartListCellDelegate
 - (void)shopCartListcell:(ODShopCartListCell *)cell DidClickMinusButton:(ODTakeOutModel *)currentData
-{
-    self.shopCount++;
-    self.numberLabel.text = [NSString stringWithFormat:@"%ld", self.shopCount];
-    
-    // 计算总价
-    CGFloat totalPrice = self.priceLabel.text.floatValue + currentData.price_show.floatValue;
-    self.priceLabel.text = [NSString stringWithFormat:@"%.2f", totalPrice];
-    
-    // 更新缓存
-    [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
-}
-
-- (void)shopCartListcell:(ODShopCartListCell *)cell DidClickPlusButton:(ODTakeOutModel *)currentData
 {
     self.shopCount--;
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", self.shopCount];
@@ -352,9 +330,21 @@ static NSString * const kShopCarts = @"shopCarts";
         self.headerView.od_width = KScreenWidth;
         self.headerView.od_height = shopCartHeaderViewH;
         [self.shopCartView reloadData];
-        if (!self.shopCars.count) [self dismiss];
     }
     self.buyButton.enabled = self.priceLabel.text.floatValue;
+    
+    // 更新缓存
+    [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
+}
+
+- (void)shopCartListcell:(ODShopCartListCell *)cell DidClickPlusButton:(ODTakeOutModel *)currentData
+{
+    self.shopCount++;
+    self.numberLabel.text = [NSString stringWithFormat:@"%ld", self.shopCount];
+    
+    // 计算总价
+    CGFloat totalPrice = self.priceLabel.text.floatValue + currentData.price_show.floatValue;
+    self.priceLabel.text = [NSString stringWithFormat:@"%.2f", totalPrice];
     
     // 更新缓存
     [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];

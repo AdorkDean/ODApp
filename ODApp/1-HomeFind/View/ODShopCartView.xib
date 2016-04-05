@@ -19,7 +19,7 @@
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12.5"/>
                     <state key="normal" title="去结算"/>
                     <state key="disabled">
-                        <color key="titleColor" red="0.69019607839999997" green="0.69019607839999997" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="comfirmClick" destination="iN0-l3-epB" eventType="touchUpInside" id="lMk-3d-o7m"/>
