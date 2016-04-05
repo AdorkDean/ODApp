@@ -10,14 +10,19 @@
 #import "ODSelectAddressCell.h"
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
 //#import "ZHSearch.h"
+
 
 static NSString *cellId = @"ODSelectAddressCell";
 
-@interface ODSelectAddressViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,MAMapViewDelegate, AMapSearchDelegate>
+@interface ODSelectAddressViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,MAMapViewDelegate, AMapSearchDelegate,AMapLocationManagerDelegate>
 
 @property (nonatomic ,strong) MAMapView * mapView;
 @property (nonatomic ,strong) AMapSearchAPI * mapSearchAPI;
+@property (nonatomic ,strong) MAPointAnnotation *pointAnnotation;
+@property (nonatomic ,strong) AMapLocationManager *locationManager;
+
 @property (nonatomic ,strong) MAUserLocation * currentLocation;
 @property (nonatomic ,strong) NSMutableDictionary * userLocationDict;
 
@@ -25,7 +30,12 @@ static NSString *cellId = @"ODSelectAddressCell";
 @property (nonatomic ,strong) UITextField *textField;
 @property (nonatomic ,strong) UITableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *dataArray;
+
 //@property (nonatomic ,strong) ZHSearch *search;
+@property (nonatomic ,strong) UIImageView *imageView;
+
+//@property (nonatomic ,strong) ZHSearch *search;
+
 
 @end
 
@@ -52,6 +62,7 @@ static NSString *cellId = @"ODSelectAddressCell";
     return _dataArray;
 }
 
+
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,11 +76,9 @@ static NSString *cellId = @"ODSelectAddressCell";
     self.mapView.showsCompass = NO;
     self.mapView.showsScale = NO;
     self.mapView.mapType = MAMapTypeStandard;
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tagGestureClick:)];
-    [self.mapView addGestureRecognizer:tapGesture];
-//    self.mapView.customizeUserLocationAccuracyCircleRepresentation = YES;
+    self.mapView.customizeUserLocationAccuracyCircleRepresentation = YES;
     [self.mapView setUserTrackingMode: MAUserTrackingModeFollowWithHeading animated:YES];//地图跟着位置移动
-//    [self.mapView setZoomLevel:20 animated:YES];
+    [self.mapView setZoomLevel:20 animated:YES];
     
     self.mapSearchAPI = [[AMapSearchAPI alloc] init];
     self.mapSearchAPI.delegate = self;
@@ -78,30 +87,10 @@ static NSString *cellId = @"ODSelectAddressCell";
 }
 
 
+
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
-    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
-    pointAnnotation.coordinate = CLLocationCoordinate2DMake(31.286952094415877, 121.50222749809993);
-    [self.mapView addAnnotation:pointAnnotation];
-}
-
-- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation{
-    if ([annotation isKindOfClass:[MAPointAnnotation class]])
-    {
-        static NSString *pointReuseIndentifier = @"pointReuseIndentifier";
-        MAPinAnnotationView*annotationView = (MAPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndentifier];
-        if (annotationView == nil)
-        {
-            annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndentifier];
-        }
-        annotationView.canShowCallout= YES;       //设置气泡可以弹出，默认为NO
-        annotationView.animatesDrop = YES;        //设置标注动画显示，默认为NO
-        annotationView.draggable = YES;        //设置标注可以拖动，默认为NO
-        annotationView.pinColor = MAPinAnnotationColorPurple;
-        return annotationView;
-    }
-    return nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,6 +99,12 @@ static NSString *cellId = @"ODSelectAddressCell";
 
 #pragma mark - 初始胡导航
 -(void)navigationInit{
+
+//    self.search = [ZHSearch search];
+//    self.search.od_width = 200;
+//    self.search.od_height = 30;
+//    self.navigationItem.titleView = self.search;
+
 //    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
 //    [[[[self.searchBar.subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
 //    self.searchBar.backgroundColor = [UIColor whiteColor];
@@ -121,6 +116,15 @@ static NSString *cellId = @"ODSelectAddressCell";
 //    self.search.od_width = 200;
 //    self.search.od_height = 30;
 //    self.navigationItem.titleView = self.search;
+
+}
+
+-(void)createImageView{
+    self.imageView = [[UIImageView alloc]init];
+    self.imageView.image = [UIImage imageNamed:@"bbbb"];
+    [self.imageView sizeToFit];
+    self.imageView.center = self.mapView.center;
+    [self.mapView addSubview:self.imageView];
 }
 
 #pragma mark - UITableViewDataSource
@@ -141,14 +145,31 @@ static NSString *cellId = @"ODSelectAddressCell";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    AMapPOI *poi = self.dataArray[indexPath.row];
-    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
-    pointAnnotation.coordinate = CLLocationCoordinate2DMake(poi.location.longitude,poi.location.latitude );
-    [self.mapView addAnnotation:pointAnnotation];
+
+}
+
+#pragma mark -MAAnnotationViewDelegate
+- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id <MAAnnotation>)annotation{
+    
+    if ([annotation isKindOfClass:[MAPointAnnotation class]])
+    {
+        static NSString *reuseIndetifier = @"annotationReuseIndetifier";
+        MAAnnotationView *annotationView = (MAAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseIndetifier];
+        if (annotationView == nil)
+        {
+            annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation
+                                                          reuseIdentifier:reuseIndetifier];
+        }
+        annotationView.image = [UIImage imageNamed:@"bbbb"];
+        //设置中心点偏移，使得标注底部中间点成为经纬度对应点
+        annotationView.centerOffset = CGPointMake(0, -18);
+        return annotationView;
+    }
+    return nil;
 }
 
 
-#pragma mark - AMapSearchDelegate
+#pragma mark - MAMapViewDelegate
 //地图定位成功回调
 -(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
     if (updatingLocation) {
@@ -160,6 +181,12 @@ static NSString *cellId = @"ODSelectAddressCell";
         regeo.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
         regeo.radius = 1000;
         regeo.requireExtension = YES;
+        
+        //点标注
+        self.pointAnnotation = [[MAPointAnnotation alloc] init];
+        self.pointAnnotation.coordinate = CLLocationCoordinate2DMake(userLocation.coordinate.latitude,userLocation.coordinate.longitude);
+        [self.mapView addAnnotation:self.pointAnnotation];
+        
         
         //发起逆地理编码
         [self.mapSearchAPI AMapReGoecodeSearch:regeo];
@@ -179,6 +206,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 
 //实现POI搜索对应的回调函数
 - (void)onPOISearchDone:(AMapPOIAroundSearchRequest *)request response:(AMapPOISearchResponse *)response {
+    [self.dataArray removeAllObjects];
     if (response.pois.count == 0) {
         return;
     }
@@ -215,16 +243,15 @@ static NSString *cellId = @"ODSelectAddressCell";
     
 }
 
--(void)tagGestureClick:(UITapGestureRecognizer *)gesture{
-    MAPointAnnotation *annotation = [[MAPointAnnotation alloc] init];
-    //把 这个 坐标 转化为 相对于地图的 真正经纬度
-    CGPoint point = [gesture locationInView:self.mapView];
-    annotation.coordinate = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
-  
-    //增加到地图上
-    [self.mapView addAnnotation:annotation];
-
+- (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
+    
+    AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
+    request.location = [AMapGeoPoint locationWithLatitude:mapView.region.center.latitude longitude:mapView.region.center.longitude];
+    request.keywords = @"";
+    request.sortrule = 0;
+    request.requireExtension = YES;
+    //发起周边搜索
+    [self.mapSearchAPI AMapPOIAroundSearch:request];
 }
-
 
 @end
