@@ -8,6 +8,8 @@
 #define MAS_SHORTHAND
 #define MAS_SHORTHAND_GLOBALS
 
+
+
 #import "ODTakeOutpaysinglemodel.h"
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "PontoH5ToMobileRequest.h"
@@ -17,7 +19,6 @@
 #import "ODTakeOutModel.h"
 
 #import <Masonry.h>
-#import "ODHttpTool.h"
 #import "ODUserInformation.h"
 #import "ODAPPInfoTool.h"
 
@@ -111,6 +112,8 @@
     params[@"errCode"] = code;
     params[@"type"] = @"1";
     __weakSelf
+    
+    
     // 发送请求
     [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model)
      {
