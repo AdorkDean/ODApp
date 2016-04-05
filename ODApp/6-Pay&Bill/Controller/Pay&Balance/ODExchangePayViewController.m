@@ -42,7 +42,7 @@
     self.successParams = @{
                            @"bbs_order_id":self.orderId
                            };
-    [self getWeiXinDataWithParam:self.successParams];
+//    [self getWeiXinDataWithParam:self.successParams];
 }
 
 - (void)weixinPayAction:(UIButton *)sender {
