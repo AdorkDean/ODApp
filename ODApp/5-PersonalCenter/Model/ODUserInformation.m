@@ -12,7 +12,10 @@
 @implementation ODUserInformation
 Single_Implementation(ODUserInformation)
 
-
+- (NSString *)openID
+{
+    return [self getUserCache].open_id;
+}
 
 - (void)updateUserCache:(ODUserModel *)user
 {
@@ -26,6 +29,7 @@ Single_Implementation(ODUserInformation)
     [userDefault setObject:user.mobile forKey:KUserDefaultsMobile];
     
     [userDefault setObject:user.mj_keyValues forKey:kUserCache];
+    [userDefault synchronize];
 }
 
 

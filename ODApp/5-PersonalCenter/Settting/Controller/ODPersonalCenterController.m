@@ -41,6 +41,9 @@
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
     [self setupTableView];
+    
+    ODUserModel *test = [[ODUserInformation sharedODUserInformation] getUserCache];
+    
     if (![ODUserInformation sharedODUserInformation].openID.length) return;
     
     self.headerView.user = [[ODUserInformation sharedODUserInformation] getUserCache];
