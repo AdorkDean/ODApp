@@ -17,5 +17,7 @@ Single_Interface(ODPaySuccessController)
 /** 参数 */
 @property (nonatomic,strong) NSDictionary *params;
 
+/** order_no */
+@property (nonatomic,copy) NSString *order_no;
 
 @end

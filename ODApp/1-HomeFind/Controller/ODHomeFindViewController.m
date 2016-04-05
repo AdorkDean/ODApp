@@ -440,9 +440,17 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
             }
             break;
         case 2:
-        {   // 跳转至定外卖界面
-            ODTakeOutHomeController *takeAwayVc = [[ODTakeOutHomeController alloc] init];
-            [self.navigationController pushViewController:takeAwayVc animated:YES];
+        {
+            if ([ODUserInformation sharedODUserInformation].openID.length == 0) {
+                ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
+                [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
+            }
+            else {
+                // 跳转至定外卖界面
+                ODTakeOutHomeController *takeAwayVc = [[ODTakeOutHomeController alloc] init];
+                [self.navigationController pushViewController:takeAwayVc animated:YES];
+            }
+
         }
             break;
         case 3:

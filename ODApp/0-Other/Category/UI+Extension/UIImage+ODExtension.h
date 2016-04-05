@@ -34,4 +34,9 @@
  *  裁剪图片
  */
 + (UIImage *)od_scaleImage:(UIImage *)image;
+
+/**
+ *颜色值转换成图片
+ */
++ (UIImage *)od_imageWithColor:(UIColor *)color;
 @end
