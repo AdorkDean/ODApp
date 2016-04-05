@@ -11,7 +11,6 @@
 
 @interface PontoH5ToMobileRequest : PontoBaseHandler
 
-//Single_Interface(PontoH5ToMobileRequest)
 /** 成功参数 */
 @property (nonatomic,strong) NSDictionary *successParam;
 
