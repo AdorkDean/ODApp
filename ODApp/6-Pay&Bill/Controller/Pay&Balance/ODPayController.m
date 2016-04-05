@@ -10,7 +10,6 @@
 #import "ODPayController.h"
 #import "ODPaySuccessController.h"
 #import "ODPayModel.h"
-#import "WXApi.h"
 #import "WXApiObject.h"
 #import "AppMethod.h"
 #import "XMLDictionary.h"
@@ -22,7 +21,6 @@
 @property(nonatomic, strong) ODPayModel *model;
 @property(nonatomic, strong) UILabel *orderNameLabel;
 @property(nonatomic, strong) UILabel *priceLabel;
-@property(nonatomic, copy) NSString *isPay;
 
 @end
 
@@ -111,28 +109,6 @@
     [self getDatawithCode:code];
 }
 
-- (void)payAction:(UIButton *)sender {
-    if ([self.payType isEqualToString:@"1"]) {
-        if ([WXApi isWXAppInstalled]) {
-            if ([self.isPay isEqualToString:@"1"]) {
-                [ODProgressHUD showInfoWithStatus:@"该订单已支付"];
-            } else {
-                [self payMoney];
-            }
-        }
-        else {
-            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
-        }
-    }
-    else {
-        if ([self.isPay isEqualToString:@"1"]) {
-            [ODProgressHUD showInfoWithStatus:@"该订单已支付"];
-        }
-        else {
-            [ODProgressHUD showInfoWithStatus:@"支付宝支付暂未开放"];
-        }
-    }
-}
 
 - (void)payMoney {
     PayReq *request = [[PayReq alloc] init];
