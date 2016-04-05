@@ -10,7 +10,7 @@
 #import "PontoDispatcher.h"
 @class ODTakeOutModel;
 
-@interface ODTakeAwayDetailController : ODPayController<PontoDispatcherCallbackDelegate>
+@interface ODTakeAwayDetailController : ODBaseViewController <PontoDispatcherCallbackDelegate>
 
 @property (nonatomic, strong) UIWebView *webView;
 
