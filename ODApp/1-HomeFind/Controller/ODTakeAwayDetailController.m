@@ -107,7 +107,6 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
 
     params[@"order_no"] = self.orderNo;
-//    params[@"order_no"] = self.model.out_trade_no;
     params[@"errCode"] = code;
     params[@"type"] = @"1";
     __weakSelf
@@ -121,10 +120,10 @@
                  return ;
              }
          }
+         __strongSelf
          ODPaySuccessController *vc = [ODPaySuccessController sharedODPaySuccessController];
-         vc.orderId = self.order_id;
-         //         vc.swap_type = weakSelf.swap_type;
-         vc.payStatus = weakSelf.isPay;
+         vc.orderId = strongSelf.order_id;
+         vc.payStatus = strongSelf.isPay;
          vc.tradeType = @"1";
          [weakSelf.navigationController pushViewController:vc animated:YES];
      } failure:^(NSError *error) {
