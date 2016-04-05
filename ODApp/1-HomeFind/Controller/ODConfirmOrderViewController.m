@@ -9,16 +9,13 @@
 #import "ODConfirmOrderViewController.h"
 #import "ODConfirmOrderModel.h"
 #import "ODConfirmOrderCell.h"
-#import "ODAddAddressController.h"
 #import "ODDeliveryNoteViewController.h"
 #import "ODSelectAddressViewController.h"
-
 #import "WXApi.h"
 #import "WXApiObject.h"
-
 #import "ODMyTakeOutModel.h"
-
 #import "ODTakeOutConfirmModel.h"
+#import "ODContactAddressController.h"
 
 static NSString *cellId = @"ODConfirmOrderCell";
 
@@ -211,8 +208,8 @@ static NSString *cellId = @"ODConfirmOrderCell";
 
 #pragma mark - UIAction
 -(void)infoTapClick{
-    ODSelectAddressViewController *address = [[ODSelectAddressViewController alloc]init];
-    [self.navigationController pushViewController:address animated:YES];
+    ODContactAddressController *controller = [[ODContactAddressController alloc]init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 -(void)deliverTapClick{
