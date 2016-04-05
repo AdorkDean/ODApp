@@ -23,7 +23,6 @@
 @property(nonatomic, strong) UILabel *orderNameLabel;
 @property(nonatomic, strong) UILabel *priceLabel;
 @property(nonatomic, copy) NSString *isPay;
-@property(nonatomic, assign) int navHasSelfClass;
 
 @end
 
@@ -42,22 +41,13 @@
     [super viewDidLoad];
 
     self.payType = @"1";
-    
-    self.navHasSelfClass = 0;
-    for (UIViewController *vc in self.navigationController.viewControllers) {
-        if ([vc isKindOfClass:[ODPayController class]]) {
-            self.navHasSelfClass += 1;
-        }
-    }
-    if (self.navHasSelfClass == 1) {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay:) name:ODNotificationPaySuccess object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
-    }
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay:) name:ODNotificationPaySuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
 }
+
 - (void)dealloc {
-    if (self.navHasSelfClass == 1) {
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

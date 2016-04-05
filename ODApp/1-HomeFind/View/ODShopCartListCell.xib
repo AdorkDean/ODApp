@@ -20,36 +20,36 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xn-sA-I0U" userLabel="加号按钮">
-                        <rect key="frame" x="287" y="14" width="15" height="15"/>
+                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xn-sA-I0U" userLabel="加号按钮">
+                        <rect key="frame" x="277" y="9" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="15" id="21T-Rf-vJq"/>
-                            <constraint firstAttribute="width" constant="15" id="YvE-08-ylR"/>
+                            <constraint firstAttribute="height" constant="25" id="21T-Rf-vJq"/>
+                            <constraint firstAttribute="width" constant="25" id="YvE-08-ylR"/>
                         </constraints>
-                        <state key="normal" backgroundImage="button_plus"/>
+                        <state key="normal" image="button_plus"/>
                         <connections>
                             <action selector="plusButtonClick" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CpE-GU-sDb"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YKm-b6-mGu" userLabel="数量">
-                        <rect key="frame" x="266" y="13" width="8.5" height="16.5"/>
+                        <rect key="frame" x="256" y="13" width="8.5" height="16.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13.5"/>
                         <color key="textColor" red="0.28235294117647058" green="0.28235294117647058" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JaI-5o-PnK" userLabel="价格">
-                        <rect key="frame" x="192" y="13" width="34" height="16.5"/>
+                        <rect key="frame" x="172" y="13" width="34" height="16.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13.5"/>
                         <color key="textColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qg5-cn-tg1" userLabel="减号按钮">
-                        <rect key="frame" x="239" y="14" width="15" height="15"/>
+                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qg5-cn-tg1" userLabel="减号按钮">
+                        <rect key="frame" x="218" y="9.5" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="15" id="Irs-NO-l7i"/>
-                            <constraint firstAttribute="width" constant="15" id="ip0-KG-v7b"/>
+                            <constraint firstAttribute="height" constant="25" id="Irs-NO-l7i"/>
+                            <constraint firstAttribute="width" constant="25" id="ip0-KG-v7b"/>
                         </constraints>
-                        <state key="normal" backgroundImage="button_minus"/>
+                        <state key="normal" image="button_minus"/>
                         <connections>
                             <action selector="minusButtonClick" destination="KGk-i7-Jjw" eventType="touchUpInside" id="giN-i3-Odh"/>
                         </connections>

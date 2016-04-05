@@ -132,6 +132,9 @@ static NSString * const kShopCarts = @"shopCarts";
     self.shopCars = [NSMutableArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
     
     self.buyButton.enabled = cacheTotalPrice;
+    
+    // 支付完成后, 清空购物车
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clean) name:ODNotificationPaySuccess object:nil];
 }
 
 + (instancetype)shopCart
@@ -260,6 +263,11 @@ static NSString * const kShopCarts = @"shopCarts";
     
     // 更新缓存
     [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
+}
+
+- (void)clean
+{
+    [self shopCartHeaderViewDidClickClearButton:nil];
 }
 
 #pragma mark - UITableViewDataSource
