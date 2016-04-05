@@ -169,7 +169,7 @@ static CGFloat labelHeight = 40;
 - (void)createEndIsTwoButton {
     if (!self.isSellDetail) {
         ODOrderDetailModel *model = self.dataArray[0];
-        NSString *status = [NSString stringWithFormat:@"%@", self.orderStatus];
+        NSString *status = [NSString stringWithFormat:@"%@", model.order_status];
         NSString *swap_type = [NSString stringWithFormat:@"%@", model.swap_type];
         
         self.endLeftButton = [UIButton buttonWithType:UIButtonTypeSystem];

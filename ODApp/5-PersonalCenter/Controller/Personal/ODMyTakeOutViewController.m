@@ -153,6 +153,7 @@ static NSString * const ODTakeOutViewID = @"ODTakeOutViewID";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - Remove NSNotification
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
