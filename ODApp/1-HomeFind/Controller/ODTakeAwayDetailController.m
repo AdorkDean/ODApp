@@ -140,9 +140,13 @@
 
 - (void)h5addShopNumber:(NSNotification *)note
 {
+    // 读取shopCarts
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"shopCarts"];
+    NSMutableArray *array = [NSMutableArray arrayWithArray:[NSKeyedUnarchiver unarchiveObjectWithData:data]];
+    
     // 阻止多次点击, 造成数据错误
-    [[self.shopCart class] cancelPreviousPerformRequestsWithTarget:self.shopCart selector:@selector(addShopCount:) object:self.takeOut];
-    [self.shopCart performSelector:@selector(addShopCount:) withObject:self.takeOut afterDelay:0.2f];
+    [[self class] cancelPreviousPerformRequestsWithTarget:self.shopCart selector:@selector(addShopCount:) object:self.takeOut];
+    [self.shopCart performSelector:@selector(addShopCount:) withObject:array[self.index] afterDelay:0.1f];
 }
 
 - (void)failPay:(NSNotification *)text {

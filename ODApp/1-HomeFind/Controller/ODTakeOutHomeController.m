@@ -275,7 +275,9 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     ODTakeOutModel *model = self.datas[indexPath.row];
     ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
     vc.takeAwayTitle = model.title;
-    vc.takeOut = model;
+//    vc.takeOut = model;
+    vc.index = indexPath.row;
+    
     vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -291,8 +293,10 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 #pragma mark - ODTakeOutCellDelegate
 - (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(ODTakeOutModel *)takeOut
 {
+    [[self class] cancelPreviousPerformRequestsWithTarget:self.shopCart selector:@selector(addShopCount:) object:takeOut];
+    [self.shopCart performSelector:@selector(addShopCount:) withObject:takeOut afterDelay:0.1f];
     // 点击购买按钮
-    [self.shopCart addShopCount:takeOut];
+//    [self.shopCart addShopCount:takeOut];
 }
 
 @end
