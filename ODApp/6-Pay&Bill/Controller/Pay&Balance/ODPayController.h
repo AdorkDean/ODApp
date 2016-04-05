@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
+#import "WXApi.h"
 #import "ODBaseViewController.h"
 
 @interface ODPayController : ODBaseViewController
@@ -14,6 +15,7 @@
 @property (nonatomic,copy) NSString *tradeType;
 
 
+@property(nonatomic, copy) NSString *isPay;
 @property(nonatomic, copy) NSString *payType;
 @property(nonatomic, copy) NSString *orderId;
 @property(nonatomic, copy) NSString *OrderTitle;
@@ -23,7 +25,6 @@
 /** 成功参数 */
 @property (nonatomic,strong) NSDictionary *successParams;
 
-- (void)payAction:(UIButton *)sender;
 - (void)getWeiXinDataWithParam:(NSDictionary *)params;
 
 @end

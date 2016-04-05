@@ -39,15 +39,11 @@
     self.navigationItem.title = @"支付订单";
     self.tradeType = @"0";
     [self payView];
-    self.successParams = @{
-                           @"bbs_order_id":self.orderId
-                           };
-//    [self getWeiXinDataWithParam:self.successParams];
+
 }
 
 - (void)weixinPayAction:(UIButton *)sender {
     self.payType = @"1";
-    
     [self.payView.weixinPaybutton setImage:[UIImage imageNamed:@"icon_Default address_Selected"] forState:UIControlStateNormal];
     [self.payView.treasurePayButton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
 }
@@ -59,6 +55,32 @@
     [self.payView.weixinPaybutton setImage:[UIImage imageNamed:@"icon_Default address_default"] forState:UIControlStateNormal];
 }
 
+- (void)payAction:(UIButton *)sender {
+    if ([self.payType isEqualToString:@"1"]) {
+        if ([WXApi isWXAppInstalled]) {
+            if ([self.isPay isEqualToString:@"1"]) {
+                [ODProgressHUD showInfoWithStatus:@"该订单已支付"];
+            } else {
+                self.successParams = @{
+                                       @"bbs_order_id":self.orderId
+                                       };
+                
+                [self getWeiXinDataWithParam:self.successParams];
+            }
+        }
+        else {
+            [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
+        }
+    }
+    else {
+        if ([self.isPay isEqualToString:@"1"]) {
+            [ODProgressHUD showInfoWithStatus:@"该订单已支付"];
+        }
+        else {
+            [ODProgressHUD showInfoWithStatus:@"支付宝支付暂未开放"];
+        }
+    }
+}
 
 
 @end
