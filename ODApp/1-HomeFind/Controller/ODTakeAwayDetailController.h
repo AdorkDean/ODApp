@@ -39,11 +39,7 @@
 /** order_no */
 @property (nonatomic,copy) NSString *orderNo;
 
-/** <#desc#> */
 @property (nonatomic, strong) ODTakeOutModel *takeOut;
-
-/** 点击的位置 */
-@property (nonatomic, assign) NSInteger index;
 
 @end
 
