@@ -113,11 +113,10 @@
                  return ;
              }
          }
-         ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
-//         vc.swap_type = weakSelf.swap_type;
+         ODPaySuccessController *vc = [ODPaySuccessController sharedODPaySuccessController];
+         
+         //         vc.swap_type = weakSelf.swap_type;
          vc.payStatus = weakSelf.isPay;
-//         vc.orderId = weakSelf.orderId;
-//         vc.params = [PontoH5ToMobileRequest ].;
          vc.tradeType = @"1";
          [weakSelf.navigationController pushViewController:vc animated:YES];
      } failure:^(NSError *error) {
