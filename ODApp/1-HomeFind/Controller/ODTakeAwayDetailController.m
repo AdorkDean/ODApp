@@ -77,6 +77,8 @@
     
     // 点击 H5 购买商品按钮
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(h5addShopNumber:) name:ODNotificationShopCartAddNumber object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay:) name:ODNotificationPaySuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
     // 退出时退出购物车
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(pop) color:nil highColor:nil title:@"返回"];
     
@@ -112,7 +114,7 @@
     }];
 }
 
-- (void)getDatawithCode:(NSString *)code {
+- (void)getDatawithCode1:(NSString *)code {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
 
@@ -136,6 +138,7 @@
          ODPaySuccessController *vc = [[ODPaySuccessController alloc]init];
          vc.orderId = weakSelf.order_id;
          vc.payStatus = weakSelf.isPay;
+         vc.params = [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].params;
          vc.tradeType = @"1";
          [weakSelf.navigationController pushViewController:vc animated:YES];
      } failure:^(NSError *error) {
@@ -164,13 +167,13 @@
 - (void)failPay:(NSNotification *)text {
     NSString *code = text.userInfo[@"codeStatus"];
     self.isPay = @"2";
-    [self getDatawithCode:code];
+    [self getDatawithCode1:code];
 }
 
 - (void)successPay:(NSNotification *)text {
     NSString *code = text.userInfo[@"codeStatus"];
     self.isPay = @"1";
-    [self getDatawithCode:code];
+    [self getDatawithCode1:code];
 }
 
 @end
