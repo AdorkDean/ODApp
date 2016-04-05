@@ -11,7 +11,8 @@
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
-#import "ZHSearch.h"
+//#import "ZHSearch.h"
+
 
 static NSString *cellId = @"ODSelectAddressCell";
 
@@ -29,8 +30,12 @@ static NSString *cellId = @"ODSelectAddressCell";
 @property (nonatomic ,strong) UITextField *textField;
 @property (nonatomic ,strong) UITableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *dataArray;
-@property (nonatomic ,strong) ZHSearch *search;
+
+//@property (nonatomic ,strong) ZHSearch *search;
 @property (nonatomic ,strong) UIImageView *imageView;
+
+//@property (nonatomic ,strong) ZHSearch *search;
+
 
 @end
 
@@ -94,10 +99,24 @@ static NSString *cellId = @"ODSelectAddressCell";
 
 #pragma mark - 初始胡导航
 -(void)navigationInit{
-    self.search = [ZHSearch search];
-    self.search.od_width = 200;
-    self.search.od_height = 30;
-    self.navigationItem.titleView = self.search;
+
+//    self.search = [ZHSearch search];
+//    self.search.od_width = 200;
+//    self.search.od_height = 30;
+//    self.navigationItem.titleView = self.search;
+
+//    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 150, 30)];
+//    [[[[self.searchBar.subviews objectAtIndex:0] subviews] objectAtIndex:0] removeFromSuperview];
+//    self.searchBar.backgroundColor = [UIColor whiteColor];
+//    self.searchBar.delegate = self;
+//    self.searchBar.placeholder = @"请输入你的地址";
+//    self.navigationItem.titleView = self.searchBar;
+    
+//    self.search = [ZHSearch search];
+//    self.search.od_width = 200;
+//    self.search.od_height = 30;
+//    self.navigationItem.titleView = self.search;
+
 }
 
 -(void)createImageView{

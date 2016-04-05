@@ -38,10 +38,7 @@
  */
 @property (nonatomic, strong) NSString *order_id;
 
-@property (nonatomic, strong) NSMutableDictionary *shops;
-
-- (void)setupNumber:(NSInteger)number price:(CGFloat)totolPrice;
-
+/** <#desc#> */
 @property (nonatomic, strong) ODTakeOutModel *takeOut;
 
 @end

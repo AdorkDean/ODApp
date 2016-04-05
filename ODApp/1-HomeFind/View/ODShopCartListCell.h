@@ -12,8 +12,8 @@
 @protocol ODShopCartListCellDelegate <NSObject>
 
 @optional
-- (void)shopCartListcell:(ODShopCartListCell *)cell RemoveCurrentRow:(ODTakeOutModel *)currentData;
-
+- (void)shopCartListcell:(ODShopCartListCell *)cell DidClickPlusButton:(ODTakeOutModel *)currentData;
+- (void)shopCartListcell:(ODShopCartListCell *)cell DidClickMinusButton:(ODTakeOutModel *)currentData;
 @end
 
 @interface ODShopCartListCell : UITableViewCell

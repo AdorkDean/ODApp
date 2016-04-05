@@ -44,6 +44,10 @@ static NSString * const ODTakeOutViewID = @"ODTakeOutViewID";
     self.pageCount = 1;
 
     [self createRequestData];
+    __weakSelf
+    [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationPaySuccess object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf.tableView.mj_header beginRefreshing];
+    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -149,5 +153,8 @@ static NSString * const ODTakeOutViewID = @"ODTakeOutViewID";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 @end

@@ -8,6 +8,7 @@
 #define MAS_SHORTHAND
 #define MAS_SHORTHAND_GLOBALS
 
+#import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "PontoH5ToMobileRequest.h"
 #import "ODPaySuccessController.h"
 #import "ODTakeAwayDetailController.h"
@@ -21,7 +22,7 @@
 
 #import "ODShopCartView.h"
 
-@interface ODTakeAwayDetailController ()
+@interface ODTakeAwayDetailController()
 @property (nonatomic, strong) PontoDispatcher *pontoDispatcher;
 @property(nonatomic, copy) NSString *isPay;
 
@@ -45,9 +46,25 @@
     // 商品详情页
     else {
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?id=%@", ODWebUrlNative, self.product_id]]]];
+        
         [self setupShopCart];
     }
-    [self addObserver];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(h5addShopNumber:) name:ODNotificationShopCartAddNumber object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+//    self.shopCart.hidden = NO;
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+    
+//    self.shopCart.hidden = YES;
 }
 
 #pragma mark - Create UIWebView
@@ -60,152 +77,27 @@
     [self.view addSubview:self.webView];
 }
 
-
-static NSInteger result = 0;
-static CGFloat priceResult = 0;
 #pragma mark - 购物车
 - (void)setupShopCart
 {
-    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+//    UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     ODShopCartView *shopCart = [ODShopCartView shopCart];
-    [keyWindow addSubview:shopCart];
+    [self.view addSubview:shopCart];
+    self.shopCart = shopCart;
     [shopCart makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.left.right.equalTo(keyWindow);
+        make.bottom.left.right.equalTo(self.view);
         make.height.equalTo(49);
     }];
-    
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    result = [[user objectForKey:@"result"] integerValue];
-    priceResult = [[user objectForKey:@"priceResult"] floatValue];
-    self.shopCart = shopCart;
-    shopCart.shops = self.shops;
-    
-    // 商品总数量
-//    result += 1;
-    // 计算数量
-    shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)result];
-    shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
-    
-    // 读取缓存的shopNumber
-    NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
-    NSDictionary *obj = [cacheShops objectForKey:self.takeOut.title];
-    NSInteger cacheNumber = [[obj valueForKey:@"shopNumber"] integerValue];
-    
-    // 保存商品个数
-    self.takeOut.shopNumber = cacheNumber;
-//    takeOut.shopNumber += 1;
-//    [self.shops setObject:takeOut.mj_keyValues forKey:takeOut.title];
-//    self.shopCart.shops = self.shops;
-    
-    // 保存数据
-    [user setObject:@(result) forKey:@"result"];
-    [user setObject:@(priceResult) forKey:@"priceResult"];
-    [user setObject:self.shops forKey:@"shops"];
-    [user synchronize];
 }
 
-- (void)dealloc
+- (void)h5addShopNumber:(NSNotification *)note
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    // 阻止多次点击, 造成数据错误
+    [[self.shopCart class] cancelPreviousPerformRequestsWithTarget:self.shopCart selector:@selector(addShopCount:) object:self.takeOut];
+    [self.shopCart performSelector:@selector(addShopCount:) withObject:self.takeOut afterDelay:0.2f];
 }
 
 #pragma mark - 初始化方法
-
-- (void)addObserver
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusShopCart:) name:ODNotificationShopCartAddNumber object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusShopCart:) name:ODNotificationShopCartminusNumber object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(removeAllDatas:) name:ODNotificationShopCartRemoveALL object:nil];
-    if ([self.takeAwayTitle isEqualToString:@"订单详情"])
-    {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay:) name:ODNotificationPaySuccess object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
-    }
-}
-
-- (void)removeAllDatas:(NSNotification *)note
-{
-    result = 0;
-    priceResult = 0;
-    [self.shops removeAllObjects];
-}
-
-- (void)plusShopCart:(NSNotification *)note
-{
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    ODShopCartListCell *cell = note.object;
-    NSInteger number = cell.takeOut.shopNumber;
-    
-    result = [[user objectForKey:@"result"] integerValue];
-    result += 1;
-    priceResult += cell.takeOut.price_show.floatValue;
-    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%ld", (long)result];
-    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
-    
-    // 更新模型
-    NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
-    NSMutableDictionary *obj = [cacheShops objectForKey:cell.takeOut.title];
-    NSMutableDictionary *mutableItem = [NSMutableDictionary dictionaryWithDictionary:obj];
-    // 修改数量
-    [mutableItem setObject:@(number) forKey:@"shopNumber"];
-    
-    NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
-    for (NSString *key in cacheShops)
-    {
-        NSDictionary *dict = cacheShops[key];
-        if ([dict isEqual:obj]) {
-            [dictM setObject:mutableItem forKey:key];
-        } else {
-            [dictM setObject:dict forKey:key];
-        }
-    }
-    
-    [self.shopCart.shopCartView reloadData];
-    [user setObject:dictM forKey:@"shops"];
-    [user setObject:@(result) forKey:@"result"];
-    [user setObject:@(priceResult) forKey:@"priceResult"];
-    [user synchronize];
-}
-
-- (void)minusShopCart:(NSNotification *)note
-{
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    ODShopCartListCell *cell = note.object;
-    NSInteger number = cell.takeOut.shopNumber;
-    
-    result = [[user objectForKey:@"result"] integerValue];
-    result -= 1;
-    if (!number) {
-        [self.shopCart.shops removeObjectForKey:cell.takeOut.title];
-        [user setObject:self.shopCart.shops forKey:@"shops"];
-    }
-    priceResult -= cell.takeOut.price_show.floatValue;
-    self.shopCart.numberLabel.text = [NSString stringWithFormat:@"%zd", (long)result];
-    self.shopCart.priceLabel.text = [NSString stringWithFormat:@"¥%.2f", priceResult];
-    // 更新模型
-    NSMutableDictionary *cacheShops = [user objectForKey:@"shops"];
-    NSMutableDictionary *obj = [cacheShops objectForKey:cell.takeOut.title];
-    NSMutableDictionary *mutableItem = [NSMutableDictionary dictionaryWithDictionary:obj];
-    // 修改数量
-    [mutableItem setObject:@(number) forKey:@"shopNumber"];
-    
-    NSMutableDictionary *dictM = [NSMutableDictionary dictionary];
-    for (NSString *key in cacheShops)
-    {
-        NSDictionary *dict = cacheShops[key];
-        if ([dict isEqual:obj]) {
-            [dictM setObject:mutableItem forKey:key];
-        } else {
-            [dictM setObject:dict forKey:key];
-        }
-    }
-    [self.shopCart.shopCartView reloadData];
-    [user setObject:dictM forKey:@"shops"];
-    [user setObject:@(result) forKey:@"result"];
-    [user setObject:@(priceResult) forKey:@"priceResult"];
-    [user synchronize];
-}
-
 - (void)getDatawithCode:(NSString *)code {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];

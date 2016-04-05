@@ -44,6 +44,7 @@
 //            ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc]init];
 //            [navVc pushViewController:vc animated:YES];
             // 给购物车添加东西
+            [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartAddNumber object:self];
         }
     }
 }
@@ -59,6 +60,11 @@
                    failure:^(NSError *error) {
                        
                    }];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

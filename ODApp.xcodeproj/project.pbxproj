@@ -307,9 +307,6 @@
 		B8EF1AC91CAE82CB00CA31C6 /* ODSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EF1AC71CAE82CB00CA31C6 /* ODSelectAddressViewController.m */; };
 		B8EF1ACD1CAE836800CA31C6 /* ODSelectAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EF1ACB1CAE836800CA31C6 /* ODSelectAddressCell.m */; };
 		B8EF1ACE1CAE836800CA31C6 /* ODSelectAddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B8EF1ACC1CAE836800CA31C6 /* ODSelectAddressCell.xib */; };
-		B8EF1AD01CAE85E900CA31C6 /* ZHSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EF1ACF1CAE85E900CA31C6 /* ZHSearch.m */; };
-		B8EF1AD31CAE862C00CA31C6 /* searchbar_textfield_background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8EF1AD21CAE862C00CA31C6 /* searchbar_textfield_background@2x.png */; };
-		B8EF1AD51CAE863200CA31C6 /* searchbar_textfield_search_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B8EF1AD41CAE863200CA31C6 /* searchbar_textfield_search_icon@2x.png */; };
 		ED03473E1CA2A4770090D834 /* ODOrderAndSellController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED03473D1CA2A4770090D834 /* ODOrderAndSellController.m */; };
 		ED379AA71CAE0BF500AE1503 /* ODTakeOutView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED379AA51CAE0BF500AE1503 /* ODTakeOutView.m */; };
 		ED379AA81CAE0BF500AE1503 /* ODTakeOutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED379AA61CAE0BF500AE1503 /* ODTakeOutView.xib */; };
@@ -920,10 +917,6 @@
 		B8EF1ACA1CAE836800CA31C6 /* ODSelectAddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSelectAddressCell.h; sourceTree = "<group>"; };
 		B8EF1ACB1CAE836800CA31C6 /* ODSelectAddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODSelectAddressCell.m; sourceTree = "<group>"; };
 		B8EF1ACC1CAE836800CA31C6 /* ODSelectAddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODSelectAddressCell.xib; sourceTree = "<group>"; };
-		B8EF1ACF1CAE85E900CA31C6 /* ZHSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZHSearch.m; sourceTree = "<group>"; };
-		B8EF1AD11CAE85F100CA31C6 /* ZHSearch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHSearch.h; sourceTree = "<group>"; };
-		B8EF1AD21CAE862C00CA31C6 /* searchbar_textfield_background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar_textfield_background@2x.png"; sourceTree = "<group>"; };
-		B8EF1AD41CAE863200CA31C6 /* searchbar_textfield_search_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchbar_textfield_search_icon@2x.png"; sourceTree = "<group>"; };
 		C5EAEBD7E6B20864218413FA /* Pods-ODApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ODApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ODApp/Pods-ODApp.debug.xcconfig"; sourceTree = "<group>"; };
 		ED03473C1CA2A4770090D834 /* ODOrderAndSellController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODOrderAndSellController.h; sourceTree = "<group>"; };
 		ED03473D1CA2A4770090D834 /* ODOrderAndSellController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODOrderAndSellController.m; sourceTree = "<group>"; };
@@ -1322,10 +1315,6 @@
 		232CB3A11C9264E200340D12 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				B8EF1AD21CAE862C00CA31C6 /* searchbar_textfield_background@2x.png */,
-				B8EF1AD41CAE863200CA31C6 /* searchbar_textfield_search_icon@2x.png */,
-				B8EF1AD11CAE85F100CA31C6 /* ZHSearch.h */,
-				B8EF1ACF1CAE85E900CA31C6 /* ZHSearch.m */,
 				B8EF1AC41CAE82CB00CA31C6 /* ODDeliveryNoteViewController.h */,
 				B8EF1AC51CAE82CB00CA31C6 /* ODDeliveryNoteViewController.m */,
 				B8EF1AC61CAE82CB00CA31C6 /* ODSelectAddressViewController.h */,
@@ -2364,7 +2353,6 @@
 				232CB66B1C9264E200340D12 /* ODWithdrawalCell.xib in Resources */,
 				232CB5FA1C9264E200340D12 /* ODCommunityDetailCell.xib in Resources */,
 				ED4FF4501CA3D14D00EDE431 /* ODOrderAndSellView.xib in Resources */,
-				B8EF1AD31CAE862C00CA31C6 /* searchbar_textfield_background@2x.png in Resources */,
 				232CB5B11C9264E200340D12 /* ODNewActivityCell.xib in Resources */,
 				232CB5BA1C9264E200340D12 /* ODPickerHeaderView.xib in Resources */,
 				232CB6551C9264E200340D12 /* ODOrderCell.xib in Resources */,
@@ -2380,7 +2368,6 @@
 				ED379AAD1CAE11CC00AE1503 /* ODShopCartListCell.xib in Resources */,
 				232CB61E1C9264E200340D12 /* ODBindingMobileView.xib in Resources */,
 				232CB6251C9264E200340D12 /* ODlandingView.xib in Resources */,
-				B8EF1AD51CAE863200CA31C6 /* searchbar_textfield_search_icon@2x.png in Resources */,
 				ED379AA81CAE0BF500AE1503 /* ODTakeOutView.xib in Resources */,
 				404758AA1CA13E0300D0DDE6 /* ODLandFirstCell.xib in Resources */,
 				400F184E1CA93220000EFFBC /* ODTakeOutCell.xib in Resources */,
@@ -2660,7 +2647,6 @@
 				232CB6401C9264E200340D12 /* ODSecondOrderController.m in Sources */,
 				4091418B1C9930D80059E05F /* ODBazaarExchangeSkillCollectionCell.m in Sources */,
 				232CB65F1C9264E200340D12 /* ODSecondOrderView.m in Sources */,
-				B8EF1AD01CAE85E900CA31C6 /* ZHSearch.m in Sources */,
 				4003348A1C9B97C500973818 /* ODSettingItem.m in Sources */,
 				232CB5611C9264E200340D12 /* AppDelegate.m in Sources */,
 				232CB5701C9264E200340D12 /* IQUIView+IQKeyboardToolbar.m in Sources */,
