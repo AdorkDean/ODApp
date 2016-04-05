@@ -38,8 +38,7 @@
  */
 @property (nonatomic, strong) NSString *order_id;
 
-@property (nonatomic, strong) NSMutableDictionary *shops;
-
+/** <#desc#> */
 @property (nonatomic, strong) ODTakeOutModel *takeOut;
 
 @end

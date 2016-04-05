@@ -10,7 +10,7 @@
 #import "ODSelectAddressCell.h"
 #import <MAMapKit/MAMapKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
-#import "ZHSearch.h"
+//#import "ZHSearch.h"
 
 static NSString *cellId = @"ODSelectAddressCell";
 
@@ -25,7 +25,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 @property (nonatomic ,strong) UITextField *textField;
 @property (nonatomic ,strong) UITableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *dataArray;
-@property (nonatomic ,strong) ZHSearch *search;
+//@property (nonatomic ,strong) ZHSearch *search;
 
 @end
 
@@ -117,10 +117,10 @@ static NSString *cellId = @"ODSelectAddressCell";
 //    self.searchBar.placeholder = @"请输入你的地址";
 //    self.navigationItem.titleView = self.searchBar;
     
-    self.search = [ZHSearch search];
-    self.search.od_width = 200;
-    self.search.od_height = 30;
-    self.navigationItem.titleView = self.search;
+//    self.search = [ZHSearch search];
+//    self.search.od_width = 200;
+//    self.search.od_height = 30;
+//    self.navigationItem.titleView = self.search;
 }
 
 #pragma mark - UITableViewDataSource

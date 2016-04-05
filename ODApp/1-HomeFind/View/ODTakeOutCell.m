@@ -76,23 +76,23 @@
     self.originalPriceLabel.attributedText = attribtStr;
     
     // 接收通知
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusClick:) name:ODNotificationShopCartAddNumber object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusClick:) name:ODNotificationShopCartminusNumber object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(plusClick:) name:ODNotificationShopCartAddNumber object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(minusClick:) name:ODNotificationShopCartminusNumber object:nil];
 }
 
 
-- (void)plusClick:(NSNotification *)note
-{
-    ODShopCartListCell *cell = note.object;
-    
-    self.datas.shopNumber = cell.takeOut.shopNumber;
-}
-
-- (void)minusClick:(NSNotification *)note
-{
-    ODShopCartListCell *cell = note.object;
-    self.datas.shopNumber = cell.takeOut.shopNumber;
-}
+//- (void)plusClick:(NSNotification *)note
+//{
+//    ODShopCartListCell *cell = note.object;
+//    
+//    self.datas.shopNumber = cell.takeOut.shopNumber;
+//}
+//
+//- (void)minusClick:(NSNotification *)note
+//{
+//    ODShopCartListCell *cell = note.object;
+//    self.datas.shopNumber = cell.takeOut.shopNumber;
+//}
 
 #pragma mark - 事件方法
 - (IBAction)buyTakeAway:(UIButton *)button
