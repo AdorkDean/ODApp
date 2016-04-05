@@ -87,7 +87,6 @@
                           @"takeout_order_id" : [NSString stringWithFormat:@"%@", paramsId]
                           };
     [ODPaySuccessController sharedODPaySuccessController].params = self.successParam;
-    [ODPaySuccessController sharedODPaySuccessController].orderId = paramsId;
     [ODHttpTool getWithURL:ODUrlPayWeixinTradeNumber parameters:self.successParam modelClass:[ODPayModel class] success:^(id model) {
         
         ODPayModel *payModel = [model result];

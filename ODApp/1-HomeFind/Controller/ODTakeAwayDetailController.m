@@ -100,6 +100,8 @@
 - (void)getDatawithCode:(NSString *)code {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
+
+    params[@"order_no"] = self.orderNo;
 //    params[@"order_no"] = self.model.out_trade_no;
     params[@"errCode"] = code;
     params[@"type"] = @"1";
@@ -115,7 +117,7 @@
              }
          }
          ODPaySuccessController *vc = [ODPaySuccessController sharedODPaySuccessController];
-         
+         vc.orderId = self.order_id;
          //         vc.swap_type = weakSelf.swap_type;
          vc.payStatus = weakSelf.isPay;
          vc.tradeType = @"1";

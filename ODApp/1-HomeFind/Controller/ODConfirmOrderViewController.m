@@ -217,8 +217,9 @@ static NSString *cellId = @"ODConfirmOrderCell";
 
 -(void)deliverTapClick{
     ODDeliveryNoteViewController *deliveryNote = [[ODDeliveryNoteViewController alloc]init];
+    __weakSelf
     deliveryNote.myBlock=^(NSString *str){
-        self.remarkDetailLabel.text = str;
+        weakSelf.remarkDetailLabel.text = str;
     };
     [self.navigationController pushViewController:deliveryNote animated:YES];
 }
