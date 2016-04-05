@@ -40,9 +40,9 @@
                         </constraints>
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lsS-Ax-BNH">
-                        <rect key="frame" x="293" y="225" width="60" height="25"/>
+                        <rect key="frame" x="293" y="227" width="60" height="22"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="eNR-Xz-wXB"/>
+                            <constraint firstAttribute="height" constant="22" id="eNR-Xz-wXB"/>
                             <constraint firstAttribute="width" constant="60" id="qFT-zO-iGs"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13.5"/>
@@ -64,7 +64,7 @@
                             <constraint firstAttribute="height" constant="53" id="FDo-a8-jYw"/>
                             <constraint firstAttribute="width" constant="150" id="JX7-a4-0fO"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
