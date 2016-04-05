@@ -8,6 +8,7 @@
 #define MAS_SHORTHAND
 #define MAS_SHORTHAND_GLOBALS
 
+#import "ODTakeOutpaysinglemodel.h"
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "PontoH5ToMobileRequest.h"
 #import "ODPaySuccessController.h"
@@ -106,7 +107,7 @@
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
 
-    params[@"order_no"] = self.orderNo;
+    params[@"order_no"] = [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_no;
     params[@"errCode"] = code;
     params[@"type"] = @"1";
     __weakSelf
@@ -120,10 +121,10 @@
                  return ;
              }
          }
-         __strongSelf
-         ODPaySuccessController *vc = [ODPaySuccessController sharedODPaySuccessController];
-         vc.orderId = strongSelf.order_id;
-         vc.payStatus = strongSelf.isPay;
+         
+         ODPaySuccessController *vc = [[ODPaySuccessController alloc]init];
+         vc.orderId = weakSelf.order_id;
+         vc.payStatus = weakSelf.isPay;
          vc.tradeType = @"1";
          [weakSelf.navigationController pushViewController:vc animated:YES];
      } failure:^(NSError *error) {

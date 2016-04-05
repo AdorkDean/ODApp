@@ -6,6 +6,7 @@
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
 
+#import "ODTakeOutPaySingleModel.h"
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODPaySuccessController.h"
 #import "ODPaySuccessView.h"
@@ -26,7 +27,7 @@
 
 @implementation ODPaySuccessController
 
-Single_Implementation(ODPaySuccessController)
+//Single_Implementation(ODPaySuccessController)
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -102,7 +103,7 @@ Single_Implementation(ODPaySuccessController)
         vc.order_id = [NSString stringWithFormat:@"%@", self.orderId];
         vc.isOrderDetail = YES;
         vc.takeAwayTitle = @"订单详情";
-        vc.orderNo = self.order_no;
+        vc.orderNo = [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_no;
         [self.navigationController pushViewController:vc animated:YES];
     }
     else
