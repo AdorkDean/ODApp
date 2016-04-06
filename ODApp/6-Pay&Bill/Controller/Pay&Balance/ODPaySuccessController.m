@@ -41,6 +41,7 @@
         make.bottom.equalTo(self.view).with.offset(0);
     }];
     
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(goOther:) color:nil highColor:nil title:@"返回"];
 }
 
