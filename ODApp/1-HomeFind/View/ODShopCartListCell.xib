@@ -62,7 +62,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBr-2d-SPV">
-                        <rect key="frame" x="163" y="13.5" width="9" height="16.5"/>
+                        <rect key="frame" x="161" y="13" width="9" height="16.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13.5"/>
                         <color key="textColor" red="1" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -70,7 +70,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Qg5-cn-tg1" firstAttribute="centerY" secondItem="3xn-sA-I0U" secondAttribute="centerY" id="2lG-9G-ujf"/>
-                    <constraint firstItem="JaI-5o-PnK" firstAttribute="leading" secondItem="kBr-2d-SPV" secondAttribute="trailing" id="2wr-33-t4Z"/>
+                    <constraint firstItem="JaI-5o-PnK" firstAttribute="leading" secondItem="kBr-2d-SPV" secondAttribute="trailing" constant="2" id="2wr-33-t4Z"/>
                     <constraint firstItem="p1U-j2-tj4" firstAttribute="leading" secondItem="qda-u4-lzV" secondAttribute="leading" id="4QG-yV-7BJ"/>
                     <constraint firstAttribute="trailing" secondItem="3xn-sA-I0U" secondAttribute="trailing" constant="17.5" id="8zK-Ot-fOe"/>
                     <constraint firstItem="YKm-b6-mGu" firstAttribute="centerY" secondItem="3xn-sA-I0U" secondAttribute="centerY" id="AGM-5y-YuM"/>

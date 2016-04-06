@@ -25,7 +25,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ro0-oT-GGr">
-                    <rect key="frame" x="291" y="7" width="60" height="12"/>
+                    <rect key="frame" x="291" y="0.0" width="60" height="24"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="1r4-DH-4ui"/>
@@ -52,7 +52,9 @@
                 <constraint firstItem="btI-Pp-m7a" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="17.5" id="1IW-H7-MLM"/>
                 <constraint firstItem="Dt8-te-Tr6" firstAttribute="leading" secondItem="btI-Pp-m7a" secondAttribute="leading" id="9Ja-Ub-c81"/>
                 <constraint firstItem="rK4-Wo-kVz" firstAttribute="leading" secondItem="btI-Pp-m7a" secondAttribute="trailing" constant="6" id="BEb-ER-hJk"/>
+                <constraint firstItem="ro0-oT-GGr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="FTk-zb-IHW"/>
                 <constraint firstAttribute="bottom" secondItem="Dt8-te-Tr6" secondAttribute="bottom" id="HAh-v0-OL8"/>
+                <constraint firstItem="Dt8-te-Tr6" firstAttribute="top" secondItem="ro0-oT-GGr" secondAttribute="bottom" id="N5l-YT-CM2"/>
                 <constraint firstItem="btI-Pp-m7a" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="bsY-WG-84O"/>
                 <constraint firstAttribute="trailing" secondItem="Dt8-te-Tr6" secondAttribute="trailing" id="haz-2g-yJm"/>
                 <constraint firstItem="Dt8-te-Tr6" firstAttribute="leading" secondItem="rK4-Wo-kVz" secondAttribute="leading" id="hf8-DV-auA"/>

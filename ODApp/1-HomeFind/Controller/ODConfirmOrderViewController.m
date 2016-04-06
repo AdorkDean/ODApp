@@ -16,6 +16,7 @@
 #import "ODMyTakeOutModel.h"
 #import "ODTakeOutConfirmModel.h"
 #import "ODContactAddressController.h"
+#import "ODShopCartView.h"
 
 static NSString *cellId = @"ODConfirmOrderCell";
 
@@ -71,12 +72,14 @@ static NSString *cellId = @"ODConfirmOrderCell";
 
 - (void)cleanCache:(NSNotification *)note
 {
-    // 移除缓存
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    [user removeObjectForKey:@"shopCount"];
-    [user removeObjectForKey:@"totalPrice"];
-    [user removeObjectForKey:@"shopCarts"];
-    [user synchronize];
+//    // 移除缓存
+//    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+//    [user removeObjectForKey:@"shopCount"];
+//    [user removeObjectForKey:@"totalPrice"];
+//    [user removeObjectForKey:@"shopCarts"];
+//    [user synchronize];
+    ODShopCartView *view = [ODShopCartView shopCart];
+    [view shopCartHeaderViewDidClickClearButton:nil];
 }
 
 - (void)dealloc
