@@ -90,7 +90,7 @@
     
     [self setNeedsDisplay];
     
-    NSInteger index = button.od_x / button.od_width + 1;
+    NSInteger index = button.od_x / button.od_width;
     // 更新参数
     if ([self.delegate respondsToSelector:@selector(headerView:didClickedMenuButton:)]) {
         [self.delegate headerView:self didClickedMenuButton:index];
@@ -101,9 +101,9 @@
 - (void)infiniteScrollViewDidClickImage:(ODInfiniteScrollView *)infiniteScrollView index:(NSInteger)index
 {
     ODTakeOutBannerModel *banner = self.banners[index];
-    if ( !banner.img_url ) return;
+    if ( !banner.banner_url ) return;
     ODPublicWebViewController *webViewVc = [[ODPublicWebViewController alloc] init];
-    webViewVc.webUrl = banner.img_url;
+    webViewVc.webUrl = banner.banner_url;
     webViewVc.navigationTitle = banner.title;
     webViewVc.isShowProgress = YES;
     // 跳转
