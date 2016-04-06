@@ -106,7 +106,6 @@
 - (void)setupShopCart
 {
     ODShopCartView *shopCart = [ODShopCartView shopCart];
-//    [self.view addSubview:shopCart];
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:shopCart];
     self.shopCart = shopCart;
