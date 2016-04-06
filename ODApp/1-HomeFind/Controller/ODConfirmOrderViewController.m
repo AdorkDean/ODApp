@@ -218,6 +218,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     deliveryNote.myBlock=^(NSString *str){
         weakSelf.remarkDetailLabel.text = str;
     };
+    deliveryNote.noteContent = self.remarkDetailLabel.text;
     [self.navigationController pushViewController:deliveryNote animated:YES];
 }
 
@@ -233,6 +234,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
                                 @"price_show":[NSString
                                                stringWithFormat:@"%f", self.count],
                                 @"pay_type":@"2",
+                                @"remark":self.remarkDetailLabel.text,
                                 @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString]
                                 };
     __weakSelf

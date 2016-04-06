@@ -12,4 +12,6 @@
 
 @property(nonatomic, copy) void(^myBlock)(NSString *str);
 
+@property (nonatomic, copy) NSString *noteContent;
+
 @end
