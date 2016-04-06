@@ -7,8 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ODSingleton.h"
 
 @interface ODAPPInfoTool : NSObject
+
+Single_Interface(ODAPPInfoTool)
+
+/** 网络状态 */
+@property (nonatomic,copy) NSString *networkType;
 
 /**
  *  获取Version版本号
@@ -19,6 +25,11 @@
  *  获取Build版本号
  */
 + (NSString *)APPBuild;
+
+/**
+ *  获取设备deviceId
+ */
++ (NSString *)deviceId;
 
 /**
  *  获取 当前设备版本

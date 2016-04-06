@@ -94,12 +94,12 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
     dic[@"city_id"] = [NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID];
-    dic[@"device_id"] = @"";
-    dic[@"platform"] = @"iphone";
-    dic[@"platform_version"] = @"";
+    dic[@"device_id"] = [ODAPPInfoTool deviceId];
+    dic[@"platform"] = @"iPhone";
+    dic[@"platform_version"] = [UIDevice currentDevice].systemVersion;
     dic[@"channel"] = @"appstore";
     dic[@"app_version"] = [ODAPPInfoTool APPVersion];
-    dic[@"network_type"] = @"";
+    dic[@"network_type"] = [ODAPPInfoTool sharedODAPPInfoTool].networkType;
     dic[@"latitude"] = @"";
     dic[@"longitude"] = @"";
     if (parameter[@"open_id"] == nil)
