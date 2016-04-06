@@ -427,13 +427,13 @@
     __weakSelf
     vc.getAddressBlock = ^(ODOrderAddressDefModel *model) {
         
-        if ([isAddress isEqualToString:@"1"]) {
-            weakSelf.headView.orderView.addressLabel.text = @"请选择";
-            weakSelf.addressId = nil;
-        } else {
-            weakSelf.headView.orderView.addressLabel.text = address;
-            weakSelf.addressId = addrssId;
-        }
+//        if ([isAddress isEqualToString:@"1"]) {
+//            weakSelf.headView.orderView.addressLabel.text = @"请选择";
+//            weakSelf.addressId = nil;
+//        } else {
+//            weakSelf.headView.orderView.addressLabel.text = address;
+//            weakSelf.addressId = addrssId;
+//        }
     };
     
     vc.addressId = self.addressId;
