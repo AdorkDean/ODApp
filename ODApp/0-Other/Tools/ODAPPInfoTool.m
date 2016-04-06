@@ -10,6 +10,8 @@
 
 @implementation ODAPPInfoTool
 
+Single_Implementation(ODAPPInfoTool)
+
 + (NSString *)APPVersion
 {
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
@@ -18,6 +20,11 @@
 + (NSString *)APPBuild
 {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+}
+
++ (NSString *)deviceId
+{
+    return [[[UIDevice currentDevice]identifierForVendor]UUIDString];
 }
 
 + (double)iOSVersion
