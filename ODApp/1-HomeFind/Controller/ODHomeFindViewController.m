@@ -45,7 +45,6 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 #pragma mark - lifeCycle
 - (void)viewDidLoad{
     [super viewDidLoad];
-    self.navigationItem.title = @"首页";
 
     self.automaticallyAdjustsScrollViewInsets = NO;
     [ODUserInformation sharedODUserInformation].cityID = @"1";
@@ -74,9 +73,20 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self locationCity];
+    self.navigationItem.title = @"首页";
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    UINavigationController *nav = self.tabBarController.childViewControllers[4];
+    if (nav.childViewControllers.count > 1)
+    {
+        [nav popToRootViewControllerAnimated:YES];
+    }
+
+}
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:NSStringFromClass([self class])];

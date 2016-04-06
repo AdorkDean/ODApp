@@ -29,10 +29,13 @@
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay:) name:ODNotificationPaySuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 - (void)viewDidLoad {
@@ -40,13 +43,10 @@
 
     self.payType = @"1";
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay:) name:ODNotificationPaySuccess object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
 }
 
 - (void)dealloc {
     NSLogFunc
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -78,19 +78,21 @@
     // 发送请求
     [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model)
      {
-         [weakSelf.navigationController.childViewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+         for (NSInteger i = 0; i < weakSelf.navigationController.childViewControllers.count; i++)
+         {
+             UIViewController * _Nonnull obj = weakSelf.navigationController.childViewControllers[i];
              if ([obj isKindOfClass:[ODPaySuccessController class]])
              {
                  [(ODPaySuccessController *)obj setPayStatus:weakSelf.isPay];
                  
-                 if (idx != weakSelf.navigationController.childViewControllers.count - 1)
+                 if (i != weakSelf.navigationController.childViewControllers.count - 1)
                  {
                      [weakSelf.navigationController popToViewController:obj animated:YES];
                  }
                  return ;
-             }
-             
-         }];
+             }    
+         }
+
          ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
          vc.swap_type = weakSelf.swap_type;
          vc.payStatus = weakSelf.isPay;

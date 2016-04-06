@@ -63,13 +63,13 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartminusNumber object:nil];
     
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationPaySuccess object:nil];
-    for (UIViewController *vc in self.navigationController.viewControllers)
-    {
-        if ([vc isKindOfClass:NSClassFromString(@"ODPaySuccessController")])
-        {
-            [vc removeFromParentViewController];
-        }
-    }
+//    for (UIViewController *vc in self.navigationController.viewControllers)
+//    {
+//        if ([vc isKindOfClass:NSClassFromString(@"ODPayController")])
+//        {
+//            [vc removeFromParentViewController];
+//        }
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -124,13 +124,24 @@
     
     // 发送请求
     [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model) {
-         for (UIViewController *vc in weakSelf.navigationController.childViewControllers)
-         {
-             if ([vc isKindOfClass:[ODPaySuccessController class]]) {
-                 return ;
-             }
-         }
-         
+        
+        for (NSInteger i = 0; i < weakSelf.navigationController.childViewControllers.count; i++)
+        {
+            UIViewController * _Nonnull obj = weakSelf.navigationController.childViewControllers[i];
+            if ([obj isKindOfClass:[ODPaySuccessController class]])
+            {
+                [(ODPaySuccessController *)obj setPayStatus:weakSelf.isPay];
+                
+                if (i != weakSelf.navigationController.childViewControllers.count - 1)
+                {
+                    [weakSelf.navigationController popToViewController:obj animated:YES];
+                }
+//                break;
+                return ;
+            }
+
+        }
+        
          ODPaySuccessController *vc = [[ODPaySuccessController alloc]init];
          vc.orderId = weakSelf.order_id;
          vc.payStatus = weakSelf.isPay;
