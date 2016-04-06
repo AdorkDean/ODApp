@@ -11,6 +11,8 @@
 
 @interface ODSelectAddressViewController : ODBaseViewController
 
-@property(nonatomic, copy) void(^myBlock)(NSString *address,NSString *addressTitle,AMapGeoPoint *location);
+@property(nonatomic,copy) void(^myBlock)(NSString *address,NSString *addressTitle,AMapGeoPoint *location);
+@property(nonatomic,copy)NSString *lat;
+@property(nonatomic,copy)NSString *lng;
 
 @end

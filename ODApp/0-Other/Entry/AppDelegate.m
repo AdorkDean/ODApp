@@ -79,7 +79,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     [ODUserInformation sharedODUserInformation].avatar = avatar ? avatar : @"";
     
     NSString *mobile = [user objectForKey:KUserDefaultsMobile];
-    [ODUserInformation sharedODUserInformation].avatar = mobile ? mobile : @"";
+    [ODUserInformation sharedODUserInformation].mobile = mobile ? mobile : @"";
 
     
     return YES;

@@ -100,8 +100,8 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
     dic[@"channel"] = @"appstore";
     dic[@"app_version"] = [ODAPPInfoTool APPVersion];
     dic[@"network_type"] = [ODAPPInfoTool sharedODAPPInfoTool].networkType;
-    dic[@"latitude"] = @"";
-    dic[@"longitude"] = @"";
+    dic[@"latitude"] = [@([ODUserInformation sharedODUserInformation].userCoordinate.latitude) stringValue];
+    dic[@"longitude"] = [@([ODUserInformation sharedODUserInformation].userCoordinate.longitude) stringValue];
     if (parameter[@"open_id"] == nil)
     {
         dic[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;

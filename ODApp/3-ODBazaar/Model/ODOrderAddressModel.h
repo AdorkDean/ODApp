@@ -17,7 +17,7 @@
 
 @property (nonatomic, copy) NSString *name;
 
-@property (nonatomic, assign) int is_default;
+@property (nonatomic, copy) NSString *is_default;
 
 @property (nonatomic, copy) NSString *tel;
 

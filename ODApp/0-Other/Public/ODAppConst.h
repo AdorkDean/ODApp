@@ -98,6 +98,9 @@ UIKIT_EXTERN NSString * const ODNotificationRefreshTask;
 /** 添加地址通知*/
 UIKIT_EXTERN NSString * const ODNotificationAddAddress;
 
+/** 保存地址通知*/
+UIKIT_EXTERN NSString * const ODNotificationSaveAddress;
+
 #pragma mark - 购物车通知
 /** 购物车添加商品数量通知 */
 UIKIT_EXTERN NSString * const ODNotificationShopCartAddNumber;

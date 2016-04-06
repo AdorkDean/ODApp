@@ -9,6 +9,7 @@
 #import "ODAddNewAddressViewController.h"
 #import "ODSelectAddressViewController.h"
 #import <AMapSearchKit/AMapSearchKit.h>
+#import "ODConfirmOrderViewController.h"
 
 @interface ODAddNewAddressViewController ()
 
@@ -16,6 +17,9 @@
 @property(nonatomic,strong)UIView *infoView;
 @property(nonatomic,strong)AMapGeoPoint *location;
 @property(nonatomic,copy)NSString *is_default;
+@property(nonatomic)BOOL isLocation;
+
+@property (nonatomic, copy) NSString *address_id;
 
 @end
 
@@ -24,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.isLocation = NO;
     self.is_default = @"0";
     self.navigationItem.title = self.naviTitle;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(saveInfoClick) color:nil highColor:nil title:@"保存"];
@@ -32,6 +37,10 @@
     [self createBottomView];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(notificationClick:) name:ODNotificationAddAddress object:nil];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -105,7 +114,13 @@
     [self.view addSubview:bottomView];
     
     self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(17.5, 15, 20, 20)];
-    self.imageView.image = [UIImage imageNamed:@"icon_Default address_default"];
+    if ([self.navigationItem.title isEqualToString:@"编辑地址"] && [self.addressModel.is_default isEqualToString:@"1"]) {
+        self.imageView.image = [UIImage imageNamed:@"icon_Default address_Selected"];
+        self.is_default = @"1";
+    }else{
+        self.imageView.image = [UIImage imageNamed:@"icon_Default address_default"];
+        self.is_default = @"0";
+    }
     [bottomView addSubview:self.imageView];
     
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.imageView.frame)+8, 15, 200, 20)];
@@ -150,12 +165,27 @@
         [button setTitleColor:[UIColor colorGloomyColor] forState:UIControlStateNormal];
         textField.text = addresstitle;
         weakSelf.location = location;
+        weakSelf.isLocation = YES;
     };
+    
+    if (self.isLocation) {
+        controller.lat = [NSString stringWithFormat:@"%f",self.location.latitude];
+        controller.lng = [NSString stringWithFormat:@"%f",self.location.longitude];
+    }else{
+        controller.lat = self.addressModel.lat;
+        controller.lng = self.addressModel.lng;
+    }
+
     [self.navigationController pushViewController:controller animated:YES];
 }
 
 -(void)tapGestureClick:(UITapGestureRecognizer *)tap{
     static BOOL isClick = YES;
+    
+    if ([self.is_default isEqualToString:@"1"]) {
+        isClick = NO;
+    }
+    
     if (isClick) {
         self.imageView.image = [UIImage imageNamed:@"icon_Default address_Selected"];
         isClick = NO;
@@ -185,8 +215,10 @@
     __weakSelf
     [ODHttpTool getWithURL:ODUrlUserAddressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
         [ODProgressHUD showInfoWithStatus:@"保存成功"];
-        [weakSelf.navigationController popViewControllerAnimated:YES];
-
+        ODConfirmOrderViewController *vc = weakSelf.navigationController.childViewControllers[2];
+        NSMutableDictionary *dict = model;
+        [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationSaveAddress object:self userInfo:dict];
+        [weakSelf.navigationController popToViewController:vc animated:YES];
     } failure:^(NSError *error) {
         
         
@@ -212,7 +244,10 @@
     __weakSelf
     [ODHttpTool getWithURL:ODUrlUserAddressEdit parameters:parameters modelClass:[NSObject class] success:^(id model) {
         [ODProgressHUD showInfoWithStatus:@"编辑成功"];
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+        ODConfirmOrderViewController *vc = weakSelf.navigationController.childViewControllers[2];
+        NSMutableDictionary *dict = model;
+        [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationSaveAddress object:self userInfo:dict];
+        [weakSelf.navigationController popToViewController:vc animated:YES];
     } failure:^(NSError *error) {
         
         
@@ -227,6 +262,7 @@
     [addressButton setTitleColor:[UIColor colorGloomyColor] forState:UIControlStateNormal];
     addressTitleTextField.text = text.userInfo[@"address"];
     self.location = text.userInfo[@"location"];
+    self.isLocation = YES;
 
 }
 

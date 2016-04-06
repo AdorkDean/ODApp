@@ -35,24 +35,6 @@
 @implementation ODTakeAwayDetailController
 
 #pragma mark - View Lifecycle
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    [MobClick beginLogPageView:NSStringFromClass([self class])];
-    
-    if (self.isOrderDetail) {
-        return;
-    } else {
-        [self setupShopCart];
-    }
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    
-    [self.shopCart removeFromSuperview];
-    
-    [MobClick endLogPageView:NSStringFromClass([self class])];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -90,9 +72,23 @@
     }
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [MobClick beginLogPageView:NSStringFromClass([self class])];
+    
+    if (self.isOrderDetail) {
+        return;
+    } else {
+        [self setupShopCart];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.shopCart removeFromSuperview];
+    
+    [MobClick endLogPageView:NSStringFromClass([self class])];
 }
 
 #pragma mark - 初始化方法
@@ -105,8 +101,7 @@
     [self.view addSubview:self.webView];
 }
 
-- (void)setupShopCart
-{
+- (void)setupShopCart {
     ODShopCartView *shopCart = [ODShopCartView shopCart];
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:shopCart];
@@ -117,6 +112,7 @@
     }];
 }
 
+#pragma mark - Get Request Data
 - (void)getDatawithCode1:(NSString *)code {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -126,14 +122,11 @@
     params[@"type"] = @"1";
     __weakSelf
     
-    
     // 发送请求
-    [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model)
-     {
+    [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model) {
          for (UIViewController *vc in weakSelf.navigationController.childViewControllers)
          {
-             if ([vc isKindOfClass:[ODPaySuccessController class]])
-             {
+             if ([vc isKindOfClass:[ODPaySuccessController class]]) {
                  return ;
              }
          }
@@ -150,13 +143,12 @@
 }
 
 #pragma mark - IBActions
-- (void)clearShopNumber:(NSNotification *)note
-{
+
+- (void)clearShopNumber:(NSNotification *)note {
     self.takeOut.shopNumber = 0;
 }
 
-- (void)h5addShopNumber:(NSNotification *)note
-{
+- (void)h5addShopNumber:(NSNotification *)note {
     [self.shopCart addShopCount:self.takeOut];
 }
 
@@ -170,6 +162,11 @@
     NSString *code = text.userInfo[@"codeStatus"];
     self.isPay = @"1";
     [self getDatawithCode1:code];
+}
+
+#pragma mark - Remove NSNotification
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

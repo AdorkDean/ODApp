@@ -54,9 +54,9 @@
                             <action selector="minusButtonClick" destination="KGk-i7-Jjw" eventType="touchUpInside" id="giN-i3-Odh"/>
                         </connections>
                     </button>
-                    <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1U-j2-tj4">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1U-j2-tj4" userLabel="分隔线">
                         <rect key="frame" x="17" y="42" width="303" height="1"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="S6s-zh-Nub"/>
                         </constraints>

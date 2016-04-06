@@ -41,7 +41,7 @@
     for (UIView *view in self.takeOutContentView.subviews) {
         if (![view isKindOfClass:[UILabel class]]) return;
         UILabel *label = (UILabel *)view;
-        label.text = @"";
+        [label removeFromSuperview];
     }
     
     for (int i = 0; i < model.products.count; i++) {        
@@ -59,9 +59,10 @@
         [self.takeOutContentView addSubview:takeOutNumberLabel];
     }
     
-    NSString *money = [NSString stringWithFormat:@"合计 ￥%.2f",model.price_show];
+    NSString *money = [NSString stringWithFormat:@"合计 ￥%@",model.price_show];
     NSMutableAttributedString *moneyStr = [[NSMutableAttributedString alloc] initWithString:money];
     [moneyStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.5] range:NSMakeRange(0, 2)];
+    
     
     self.takeOutTotalMoney.attributedText = moneyStr;
     

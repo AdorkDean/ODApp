@@ -36,7 +36,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 @property(nonatomic,strong)UILabel *addressLabel;
 @property(nonatomic,copy)NSString *addressId;
 
-@property(nonatomic)CGFloat count;
+@property(nonatomic)float count;
 
 @end
 
@@ -69,6 +69,14 @@ static NSString *cellId = @"ODConfirmOrderCell";
     self.tradeType = @"1";
     self.navigationItem.title = @"确认订单";
     [self requestData];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeAddress:) name:ODNotificationSaveAddress object:nil];
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+//    [self requestData];
 }
 
 -(void)createTableHeaderView{
@@ -83,7 +91,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     
     self.nameLabel = [[UILabel alloc]init];
     NSString *is_default = [NSString stringWithFormat:@"%@",[self.orderModel.address valueForKeyPath:@"is_default"]];
-    if (is_default.length) {
+    if ([is_default isEqualToString:@"0"]||[is_default isEqualToString:@"1"]) {
         self.nameLabel.frame = CGRectMake(17, 17, 100, 20);
         self.nameLabel.text = [self.orderModel.address valueForKeyPath:@"name"];
     }else{
@@ -168,6 +176,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     bottomView.userInteractionEnabled = YES;
     [self.view addSubview:bottomView];
     
+    self.count = 0;
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(17, 0, kScreenSize.width-117, 49)];
     for (ODConfirmOrderModelShopcart_list *model  in self.dataArray) {
         self.count += [model.num floatValue]*[model.price_show floatValue];
@@ -191,6 +200,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     __weakSelf;
     NSDictionary *parametr = @{@"shopcart_json" : self.datas.od_URLDesc};
     [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parametr modelClass:[ODConfirmOrderModel class] success:^(ODConfirmOrderModelResponse * model) {
+        [weakSelf.dataArray removeAllObjects];
         weakSelf.orderModel = [model result];
         [weakSelf.dataArray addObjectsFromArray:weakSelf.orderModel.shopcart_list];
         [weakSelf createTableHeaderView];
@@ -281,10 +291,21 @@ static NSString *cellId = @"ODConfirmOrderCell";
          // 清空购物车
          ODShopCartView *view = [ODShopCartView shopCart];
          [view shopCartHeaderViewDidClickClearButton:nil];
-     }
+         
+    }
                    failure:^(NSError *error)
      {
     }];
+}
+
+-(void)changeAddress:(NSNotification *)user{
+    
+    self.nameLabel.text = user.userInfo[@"name"];
+    self.nameLabel.frame = CGRectMake(17, 17, 100, 20);
+    self.numLabel.text = user.userInfo[@"tel"];
+    self.addressLabel.text = user.userInfo[@"address"];
+    self.addressLabel.frame = CGRectMake(17, CGRectGetMaxY(self.nameLabel.frame)+7.5, kScreenSize.width-60, 15);
+    self.addressId  = [NSString stringWithFormat:@"%@",user.userInfo[@"id"]];
 }
 
 @end

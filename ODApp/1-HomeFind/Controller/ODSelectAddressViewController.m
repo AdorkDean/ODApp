@@ -58,6 +58,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 }
 
 
+
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -66,13 +67,11 @@ static NSString *cellId = @"ODSelectAddressCell";
     [self navigationInit];
     
     self.mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, kScreenSize.width, 300)];
-    self.mapView.showsUserLocation = YES;
     self.mapView.delegate = self;
     self.mapView.showsCompass = NO;
     self.mapView.showsScale = NO;
     self.mapView.mapType = MAMapTypeStandard;
     self.mapView.customizeUserLocationAccuracyCircleRepresentation = YES;
-    [self.mapView setUserTrackingMode: MAUserTrackingModeFollowWithHeading animated:YES];//地图跟着位置移动
     [self.mapView setZoomLevel:20 animated:YES];
     
     self.mapSearchAPI = [[AMapSearchAPI alloc] init];
@@ -80,14 +79,20 @@ static NSString *cellId = @"ODSelectAddressCell";
     [self.view addSubview:self.mapView];
     
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:[UIImage imageNamed:@"icon_location_origin"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"icon_location"] forState:UIControlStateNormal];
     [btn sizeToFit];
-    btn.frame = CGRectMake(20, 200, btn.od_width, btn.od_height);
+    btn.frame = CGRectMake(kScreenSize.width-40, 20, btn.od_width, btn.od_height);
     [btn addTarget:self action:@selector(backToOrigin) forControlEvents:UIControlEventTouchUpInside];
     [self.mapView addSubview:btn];
     
     [self createImageView];
+    self.mapView.showsUserLocation = YES;
+    
+    
+    
+
 }
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -105,11 +110,11 @@ static NSString *cellId = @"ODSelectAddressCell";
     view.backgroundColor = [UIColor whiteColor];
     [view addGestureRecognizer:tapGesture];
     
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 20, 20)];
+    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(10, 5, 20, 20)];
     imageView.image = [UIImage imageNamed:@"icon_search"];
     [view addSubview:imageView];
     
-    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame)+15, 0, view.frame.size.width-50, 30)];
+    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame)+10, 0, view.frame.size.width-50, 30)];
     label.text = @"请输入你的地址";
     label.textColor = [UIColor colorGrayColor];
     label.font = [UIFont systemFontOfSize:15];
@@ -121,7 +126,7 @@ static NSString *cellId = @"ODSelectAddressCell";
     self.imageView = [[UIImageView alloc]init];
     self.imageView.image = [UIImage imageNamed:@"bbbb"];
     [self.imageView sizeToFit];
-    self.imageView.od_centerY = self.mapView.od_centerY-50;
+    self.imageView.od_centerY = self.mapView.od_centerY-45;
     self.imageView.od_centerX = self.mapView.od_centerX;
     [self.mapView addSubview:self.imageView];
 }
@@ -175,6 +180,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 //地图定位成功回调
 -(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
     if (updatingLocation) {
+        
         self.mapView.showsUserLocation = NO;
         [self.mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
         
@@ -183,14 +189,10 @@ static NSString *cellId = @"ODSelectAddressCell";
         regeo.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
         regeo.radius = 1000;
         regeo.requireExtension = YES;
-    
         
-        //点标注
         self.pointAnnotation = [[MAPointAnnotation alloc] init];
-        self.pointAnnotation.coordinate = CLLocationCoordinate2DMake(userLocation.coordinate.latitude,userLocation.coordinate.longitude);
+        self.pointAnnotation.coordinate = CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
         [self.mapView addAnnotation:self.pointAnnotation];
-        
-        self.currentLocation = userLocation;
         //发起逆地理编码
         [self.mapSearchAPI AMapReGoecodeSearch:regeo];
         
@@ -239,6 +241,12 @@ static NSString *cellId = @"ODSelectAddressCell";
     [self.mapSearchAPI AMapPOIAroundSearch:request];
 }
 
+- (void)mapViewDidFinishLoadingMap:(MAMapView *)mapView dataSize:(NSInteger)dataSize{
+    if (self.lat.length) {
+        self.mapView.centerCoordinate = CLLocationCoordinate2DMake([self.lat doubleValue], [self.lng doubleValue]);
+    }
+
+}
 
 -(void)tapGestureClick:(UITapGestureRecognizer *)tap{
     ODKeywordsSearchViewController *keywords = [[ODKeywordsSearchViewController alloc]init];
@@ -251,4 +259,6 @@ static NSString *cellId = @"ODSelectAddressCell";
     self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;
     [self.mapView setZoomLevel:20 animated:YES];
 }
+
+
 @end

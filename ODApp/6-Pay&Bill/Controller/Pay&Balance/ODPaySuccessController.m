@@ -50,6 +50,8 @@
             [vc removeFromParentViewController];
         }
     }
+//    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+//    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(goOther:) color:nil highColor:nil title:@"返回"];
 }
 
 #pragma mark - 懒加载

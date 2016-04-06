@@ -34,7 +34,6 @@ static NSString * const ODTakeOutViewID = @"ODTakeOutViewID";
 
 @implementation ODMyTakeOutViewController
 
-
 #pragma mark - Life Cycle
 
 - (void)viewDidLoad {
