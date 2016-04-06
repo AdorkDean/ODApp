@@ -464,6 +464,10 @@
     [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
+/**
+ *  拍照 : info[UIImagePickerControllerOriginalImage] == nil
+ *  本地 : assets-library://asset/asset.JPG?id=AEFCAAE3-1B0D-404A-8FF5-7A49BA02C7B7&ext=JPG
+ */
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     NSString *sourceType = info[UIImagePickerControllerMediaType];
     if ([sourceType isEqualToString:(NSString *)kUTTypeImage]) {
@@ -474,10 +478,12 @@
         imageUrl = [imageUrl substringWithRange:range];
         NSData *imageData;
         self.pickedImage = info[UIImagePickerControllerOriginalImage];
-        if ([imageUrl.lowercaseString isEqualToString:@"jpg"]) {
+        if ([imageUrl.lowercaseString isEqualToString:@"jpg"]) {    // JPG
             self.pickedImage = [UIImage od_scaleImage:self.pickedImage];
             imageData = UIImageJPEGRepresentation(self.pickedImage, 0.3);
-        }else {
+        } else if (!imageUrl.length) { // 拍照
+            imageData = UIImageJPEGRepresentation(self.pickedImage, 0.3);
+        } else {    // 其他类型 : bmp...
             imageData = UIImagePNGRepresentation(self.pickedImage);
         }
         NSString *str = @"data:image/jpeg;base64,";

@@ -68,10 +68,25 @@ static NSString *cellId = @"ODConfirmOrderCell";
     self.tradeType = @"1";
     self.navigationItem.title = @"确认订单";
     [self requestData];
+    
+    
+    // 支付完成后, 清空购物车
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanCache:) name:ODNotificationPaySuccess object:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)cleanCache:(NSNotification *)note
+{
+    // 移除缓存
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user removeObjectForKey:@"shopCount"];
+    [user removeObjectForKey:@"totalPrice"];
+    [user removeObjectForKey:@"shopCarts"];
+    [user synchronize];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)createTableHeaderView{
@@ -229,6 +244,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     deliveryNote.myBlock= ^(NSString *str){
         weakSelf.remarkDetailLabel.text = str;
     };
+    deliveryNote.noteContent = self.remarkDetailLabel.text;
     [self.navigationController pushViewController:deliveryNote animated:YES];
 }
 
@@ -239,12 +255,20 @@ static NSString *cellId = @"ODConfirmOrderCell";
         [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
         return;
     }
+    NSString *remarkStr;
+    if (self.remarkDetailLabel.text.length != 0) {
+        remarkStr = self.remarkDetailLabel.text;
+    }
+    else {
+        remarkStr = @"";
+    }
     NSDictionary *successParams = @{
                                 @"address_id":self.addressId,
                                 @"price_show":[NSString
                                                stringWithFormat:@"%f", self.count],
                                 @"pay_type":@"2",
-                                @"remark":self.remarkDetailLabel.text,
+                                @"remark":remarkStr,
+
                                 @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString]
                                 };
     __weakSelf

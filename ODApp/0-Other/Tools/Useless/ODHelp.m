@@ -61,14 +61,14 @@
     NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:size]};
     CGRect rect = [text boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading|NSStringDrawingTruncatesLastVisibleLine attributes:dict context:nil];
     
-    if (rect.size.height < miniHeight)
+    if (rect.size.height < miniHeight - 15)
     {
         return miniHeight;
     }
     else
     {
         //返回计算出的行高
-        return rect.size.height + 12;
+        return rect.size.height + 15;
     }
 }
 

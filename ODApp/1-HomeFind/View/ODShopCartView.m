@@ -132,8 +132,8 @@ static NSString * const kShopCarts = @"shopCarts";
     self.buyButton.enabled = cacheTotalPrice;
     self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
     
-    // 支付完成后, 清空购物车
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanCache:) name:ODNotificationPaySuccess object:nil];
+//    // 支付完成后, 清空购物车
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanCache:) name:ODNotificationPaySuccess object:nil];
 }
 
 + (instancetype)shopCart
@@ -265,11 +265,6 @@ static NSString * const kShopCarts = @"shopCarts";
     
     // 更新缓存
     [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
-}
-
-- (void)cleanCache:(NSNotification *)note
-{
-    [self shopCartHeaderViewDidClickClearButton:nil];
 }
 
 #pragma mark - UITableViewDataSource

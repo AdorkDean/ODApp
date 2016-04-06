@@ -111,11 +111,6 @@ static int const ImageViewCount = 3;
     CGFloat minDistance = MAXFLOAT;
     for (int i = 0; i<self.scrollView.subviews.count; i++) {
         UIImageView *imageView = self.scrollView.subviews[i];
-        
-        imageView.userInteractionEnabled = YES;
-        // 添加手势
-        UITapGestureRecognizer *gas = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImage:)];
-        [imageView addGestureRecognizer:gas];
         CGFloat distance = 0;
         if (self.isScrollDirectionPortrait) {
             distance = ABS(imageView.frame.origin.y - scrollView.contentOffset.y);
@@ -169,9 +164,14 @@ static int const ImageViewCount = 3;
         }
         imageView.tag = index;
         
-//        imageView.image = self.images[index];
+        // 添加手势
+        imageView.userInteractionEnabled = YES;
+        UITapGestureRecognizer *gas = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImage:)];
+        [imageView addGestureRecognizer:gas];
         // 下载图片
         [imageView sd_setImageWithURL:[NSURL URLWithString:self.images[index]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
+        
+//        imageView.image = self.images[index];
     }
     
     // 设置偏移量在中间
@@ -181,6 +181,7 @@ static int const ImageViewCount = 3;
         self.scrollView.contentOffset = CGPointMake(self.scrollView.frame.size.width, 0);
     }
 }
+
 
 - (void)clickImage:(UIGestureRecognizer *)gas
 {
@@ -194,7 +195,7 @@ static int const ImageViewCount = 3;
 #pragma mark - 定时器处理
 - (void)startTimer
 {
-    NSTimer *timer = [NSTimer timerWithTimeInterval:4 target:self selector:@selector(next) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer timerWithTimeInterval:2 target:self selector:@selector(next) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     self.timer = timer;
 }

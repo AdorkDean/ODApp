@@ -13,7 +13,6 @@
 #import "ODUserInformation.h"
 
 #import "ODPersonalCenterViewController.h"
-#import "ODBuyTakeOutViewController.h"
 #import "ODConfirmOrderViewController.h"
 
 #import "ODPayModel.h"

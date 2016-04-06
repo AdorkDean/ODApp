@@ -9,7 +9,6 @@
 #import "ODTakeOutCell.h"
 
 #import "ODTakeOutModel.h"
-#import "ODBuyTakeOutViewController.h"
 #import <UIImageView+WebCache.h>
 #import "ODShopCartListCell.h"
 
@@ -38,6 +37,10 @@
     self.originalPriceLabel.textColor = [UIColor colorGrayColor];
     
     [self stopBlendedLayers];
+    
+    
+    // 适配小屏幕
+    [self sizeToFitScreen];
 }
 
 - (void)stopBlendedLayers
@@ -49,6 +52,15 @@
     self.titleLabel.layer.masksToBounds = YES;
     self.discountPriceLabel.layer.masksToBounds = YES;
     self.originalPriceLabel.layer.masksToBounds = YES;
+}
+
+- (void)sizeToFitScreen
+{
+    if (KScreenWidth == 320) {
+        self.titleLabel.font = [UIFont systemFontOfSize:12];
+        self.discountPriceLabel.font = [UIFont systemFontOfSize:15];
+        self.originalPriceLabel.font = [UIFont systemFontOfSize:12];
+    }
 }
 
 - (void)setDatas:(ODTakeOutModel *)datas
@@ -63,8 +75,8 @@
         weakSelf.shopImageView.image = [image od_roundedCornerImage:10.0f];
     }];
     self.titleLabel.text = datas.title;
-    self.discountPriceLabel.text = [NSString stringWithFormat:@"¥%@", datas.price_show];
-    self.originalPriceLabel.text = [NSString stringWithFormat:@"¥%@", datas.price_fake];
+    self.discountPriceLabel.text = [NSString stringWithFormat:@"¥ %.2f", [datas.price_show floatValue]];
+    self.originalPriceLabel.text = [NSString stringWithFormat:@"¥ %.2f", [datas.price_fake floatValue]];
 
     // 设置按钮不同情况下的状态
     self.buyButton.enabled = (datas.show_status == ODTakeOutStatusBuy);
