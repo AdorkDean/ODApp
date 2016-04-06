@@ -134,10 +134,10 @@ NSString * const ODUrlUserWithdrawCash = @"user/withdraw/cash";
 NSString * const ODUrlUserCashList = @"user/cash/list";
 NSString * const ODUrlUserAddressList = @"user/address/list";
 NSString * const ODUrlUserAddressDel = @"user/address/del";
-NSString * const ODUrlUserAssressAdd = @"user/address/add";
+NSString * const ODUrlUserAddressAdd = @"user/address/add";
 NSString * const ODUrlUserLoveList = @"user/love/list";
 NSString * const ODUrlUserBindMoble = @"user/bind/mobile";
-NSString * const ODUrlUserAddressAdd = @"user/address/add";
+NSString * const ODUrlUserAddressEdit = @"user/address/edit";
 
 
 

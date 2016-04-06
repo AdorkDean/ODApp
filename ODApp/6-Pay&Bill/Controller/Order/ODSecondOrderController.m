@@ -202,8 +202,14 @@
 
 - (void)addressAction {
     ODContactAddressController *vc = [[ODContactAddressController alloc] init];
-    
     __weakSelf
+    vc.getAddressBlock = ^(ODOrderAddressDefModel *model){
+        weakSelf.headView.secondOrderView.addressLabel.text = model.address;
+        weakSelf.addressId = [NSString stringWithFormat:@"%@",model.id];
+    };
+
+//    __weakSelf
+
 //    vc.getAddressBlock = ^(NSString *address, NSString *addrssId, NSString *isAddress) {
 //        
 //        if ([isAddress isEqualToString:@"1"]) {
@@ -218,9 +224,7 @@
 //    };
     
     vc.addressId = self.addressId;
-    
-    ODNavigationController *navi = [[ODNavigationController alloc] initWithRootViewController:vc];
-    [self presentViewController:navi animated:YES completion:nil];
+    [self.navigationController pushViewController:vc animated:YES];
     
     
 }

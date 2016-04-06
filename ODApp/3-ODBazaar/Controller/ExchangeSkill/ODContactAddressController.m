@@ -76,6 +76,7 @@
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"open_id"] = self.open_id;
+    
     __weakSelf
     // 发送请求
     [ODHttpTool getWithURL:ODUrlUserAddressList parameters:params modelClass:[ODOrderAddressModel class] success:^(id model)
@@ -87,11 +88,19 @@
          ODOrderAddressModel *addressModel = [model result];
          // 取出def模型
          ODOrderAddressDefModel *defModel = addressModel.def;
-         if (defModel) {
+         NSString *is_default = [NSString stringWithFormat:@"%d",defModel.is_default];
+         if ([is_default isEqualToString:@"1"]) {
              [weakSelf.defaultArray addObject:defModel];
          }
-
+         
          [weakSelf.dataArray addObjectsFromArray:addressModel.list];
+         
+         if ([is_default isEqualToString:@"0"]) {
+             [weakSelf.dataArray insertObject:defModel atIndex:0];
+         }
+         
+
+         
          
          [weakSelf createTableView];
          [weakSelf.tableView reloadData];
@@ -142,30 +151,40 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ODAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:@"item" forIndexPath:indexPath];
 
-
-    if (indexPath.section == 0) {
-        [cell.lineLabel removeFromSuperview];
-
-        if (self.defaultArray.count == 0) {;
-        } else {
+//    if (self.defaultArray.count != 0 && indexPath.section == 0) { //有默认地址
+//        [cell.lineLabel removeFromSuperview];
+//        ODOrderAddressDefModel *model = self.defaultArray[0];
+//        cell.isDefault = @"1";
+//        cell.model = model;
+//    }
+//    else
+//    {
+//
+//        if (indexPath.row == self.dataArray.count - 1) {
+//            [cell.lineLabel removeFromSuperview];
+//        }
+//        ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
+//        cell.isDefault = @"2";
+//        cell.model = model;
+//
+//
+//    }
+    
+    if (self.defaultArray.count) {
+        if (indexPath.section == 0) {
+            [cell.lineLabel removeFromSuperview];
             ODOrderAddressDefModel *model = self.defaultArray[0];
             cell.isDefault = @"1";
             cell.model = model;
+        }else{
+            ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
+            cell.isDefault = @"2";
+            cell.model = model;
         }
-
-
-    }
-
-    if (indexPath.section == 1) {
-
-        if (indexPath.row == self.dataArray.count - 1) {
-            [cell.lineLabel removeFromSuperview];
-        }
+    }else{
         ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
         cell.isDefault = @"2";
         cell.model = model;
-
-
     }
 
 
@@ -177,19 +196,22 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        if (self.defaultArray.count == 0) {
-            return 0;
-        } else {
+    if (self.defaultArray.count != 0) { //有默认地址
+        if (section == 0) {
             return 1;
         }
-    } else {
+        else {
+            return self.dataArray.count;
+        }
+    }
+    else //没有默认地址
+    {
         return self.dataArray.count;
     }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1 + self.defaultArray.count;
 }
 
 
@@ -235,23 +257,36 @@
         [weakSelf setEditing:false animated:true];
 
         NSString *address_id = @"";
-        if (indexPath.section == 0) {
-
-            ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
-            address_id = [NSString stringWithFormat:@"%@", model.id];
-            [weakSelf.defaultArray removeObjectAtIndex:indexPath.row];
-            [weakSelf.tableView reloadData];
-
-        } else {
-
+//        if (indexPath.section == 0) {
+//            ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
+//            address_id = [NSString stringWithFormat:@"%@", model.id];
+//            [weakSelf.defaultArray removeObjectAtIndex:indexPath.row];
+//            [weakSelf.tableView reloadData];
+//        } else {
+//            ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
+//            address_id = [NSString stringWithFormat:@"%@", model.id];
+//            [weakSelf.dataArray removeObjectAtIndex:indexPath.row];
+//            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
+//        }
+        
+        if (self.defaultArray.count) {
+            if (indexPath.section == 0) {
+                ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
+                address_id = [NSString stringWithFormat:@"%@", model.id];
+                [weakSelf.defaultArray removeObjectAtIndex:indexPath.row];
+                [weakSelf.tableView reloadData];
+            }else{
+                ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
+                address_id = [NSString stringWithFormat:@"%@", model.id];
+                [weakSelf.dataArray removeObjectAtIndex:indexPath.row];
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
+            }
+        }else{
             ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
             address_id = [NSString stringWithFormat:@"%@", model.id];
             [weakSelf.dataArray removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
-
-
         }
-
 
         [weakSelf deleteAddressWithAddress_id:address_id];
 
@@ -268,33 +303,50 @@
         vc.typeTitle = @"编辑地址";
         vc.isAdd = NO;
         new.naviTitle = @"编辑地址";
-        if (indexPath.section == 0) {
-            ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
-//            vc.isDefault = YES;
-//            NSString *addressId = [NSString stringWithFormat:@"%@", model.id];
-//            vc.addressId = addressId;
-//            vc.addressModel = model;
-            new.addressId = [NSString stringWithFormat:@"%@",model.id];
-            new.addressModel = model;
-            new.isDefault = YES;
-            [weakSelf.navigationController pushViewController:new animated:YES];
-            
-
-        } else {
-
+//        if (indexPath.section == 0) {
+//            ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
+////            vc.isDefault = YES;
+////            NSString *addressId = [NSString stringWithFormat:@"%@", model.id];
+////            vc.addressId = addressId;
+////            vc.addressModel = model;
+//            new.addressId = [NSString stringWithFormat:@"%@",model.id];
+//            new.addressModel = model;
+//            new.isDefault = YES;
+//            [weakSelf.navigationController pushViewController:new animated:YES];
+//        } else {
+//
+//            ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
+////            NSString *addressId = [NSString stringWithFormat:@"%@", model.id];
+////            vc.isDefault = NO;
+////            vc.addressId = addressId;
+////            vc.addressModel = model;
+//            new.addressId = [NSString stringWithFormat:@"%@",model.id];
+//            new.addressModel = model;
+//            new.isDefault = YES;
+//            [weakSelf.navigationController pushViewController:new animated:YES];
+//        }
+        
+        if (self.defaultArray.count) {
+            if (indexPath.section == 0) {
+                ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
+                new.addressId = [NSString stringWithFormat:@"%@",model.id];
+                new.addressModel = model;
+                new.isDefault = YES;
+                [weakSelf.navigationController pushViewController:new animated:YES];
+            }else{
+                ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
+                new.addressId = [NSString stringWithFormat:@"%@",model.id];
+                new.addressModel = model;
+                new.isDefault = YES;
+                [weakSelf.navigationController pushViewController:new animated:YES];
+            }
+        }else{
             ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
-            
-//            NSString *addressId = [NSString stringWithFormat:@"%@", model.id];
-//            vc.isDefault = NO;
-//            vc.addressId = addressId;
-//            vc.addressModel = model;
             new.addressId = [NSString stringWithFormat:@"%@",model.id];
             new.addressModel = model;
             new.isDefault = YES;
             [weakSelf.navigationController pushViewController:new animated:YES];
-
         }
-
 
     }];
     action2.backgroundColor = [UIColor themeColor];
@@ -304,17 +356,22 @@
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
-        if (self.getAddressBlock) {
-//            self.getAddressBlock(model.address, [NSString stringWithFormat:@"%@", model.id], @"2");
-            self.getAddressBlock(model);
+
+    if (self.defaultArray.count) {
+        if (indexPath.section == 0) {
+            ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
+            if (self.getAddressBlock) {
+                self.getAddressBlock(model);
+            }
+        }else{
+            ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
+            if (self.getAddressBlock) {
+                self.getAddressBlock(model);
+            }
         }
-    } 
-    else {
+    }else{
         ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
         if (self.getAddressBlock) {
-//            self.getAddressBlock(model.address, [NSString stringWithFormat:@"%@", model.id], @"2");
             self.getAddressBlock(model);
         }
     }
@@ -322,7 +379,7 @@
 }
 
 - (void)deleteAddressWithAddress_id:(NSString *)address_id {
-    NSDictionary *parameters = @{@"user_address_id" : address_id, @"open_id" : self.open_id};
+    NSDictionary *parameters = @{@"user_address_id" : address_id};
     __weakSelf
     [ODHttpTool getWithURL:ODUrlUserAddressDel parameters:parameters modelClass:[NSObject class] success:^(id model) {
         if ([self.addressId isEqualToString:address_id]) {

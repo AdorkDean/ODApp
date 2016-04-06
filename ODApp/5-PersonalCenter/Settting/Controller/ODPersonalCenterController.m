@@ -42,7 +42,7 @@
     [MobClick beginLogPageView:NSStringFromClass([self class])];
     [self setupTableView];
     
-    ODUserModel *test = [[ODUserInformation sharedODUserInformation] getUserCache];
+//    ODUserModel *test = [[ODUserInformation sharedODUserInformation] getUserCache];
     
     if (![ODUserInformation sharedODUserInformation].openID.length) return;
     
