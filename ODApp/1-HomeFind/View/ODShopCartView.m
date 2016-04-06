@@ -131,9 +131,6 @@ static NSString * const kShopCarts = @"shopCarts";
     
     self.buyButton.enabled = cacheTotalPrice;
     self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
-    
-    // 支付完成后, 清空购物车
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanCache:) name:ODNotificationPaySuccess object:nil];
 }
 
 + (instancetype)shopCart
