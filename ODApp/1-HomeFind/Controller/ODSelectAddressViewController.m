@@ -9,7 +9,6 @@
 #import "ODSelectAddressViewController.h"
 #import "ODSelectAddressCell.h"
 #import <MAMapKit/MAMapKit.h>
-#import <AMapSearchKit/AMapSearchKit.h>
 #import "ODKeywordsSearchViewController.h"
 
 static NSString *cellId = @"ODSelectAddressCell";
@@ -139,7 +138,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     AMapPOI *poi = self.dataArray [indexPath.row];
     if (self.myBlock) {
-        self.myBlock(poi.name,poi.address);
+        self.myBlock(poi.name,poi.address,poi.location);
     }
     [self.navigationController popViewControllerAnimated:YES];
 }

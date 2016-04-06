@@ -61,7 +61,7 @@
             self.getAddressBlock(@"", @"", @"1");
         }
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
@@ -132,6 +132,7 @@
     vc.isAdd = YES;
     
     ODAddNewAddressViewController *new = [[ODAddNewAddressViewController alloc]init];
+    new.naviTitle = @"新增地址";
     [self.navigationController pushViewController:new animated:YES];
 //    [self.navigationController pushViewController:vc animated:YES];
 }
@@ -263,8 +264,10 @@
         [weakSelf setEditing:false animated:true];
 
         ODAddAddressController *vc = [[ODAddAddressController alloc] init];
+        ODAddNewAddressViewController *new = [[ODAddNewAddressViewController alloc]init];
         vc.typeTitle = @"编辑地址";
         vc.isAdd = NO;
+        new.naviTitle = @"编辑地址";
         if (indexPath.section == 0) {
             ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
             vc.isDefault = YES;
