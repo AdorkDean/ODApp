@@ -204,18 +204,18 @@
     ODContactAddressController *vc = [[ODContactAddressController alloc] init];
     
     __weakSelf
-    vc.getAddressBlock = ^(NSString *address, NSString *addrssId, NSString *isAddress) {
-        
-        if ([isAddress isEqualToString:@"1"]) {
-            weakSelf.headView.secondOrderView.addressLabel.text = @"请选择";
-            weakSelf.addressId = nil;
-        } else {
-            weakSelf.headView.secondOrderView.addressLabel.text = address;
-            weakSelf.addressId = addrssId;
-            
-        }
-        
-    };
+//    vc.getAddressBlock = ^(NSString *address, NSString *addrssId, NSString *isAddress) {
+//        
+//        if ([isAddress isEqualToString:@"1"]) {
+//            weakSelf.headView.secondOrderView.addressLabel.text = @"请选择";
+//            weakSelf.addressId = nil;
+//        } else {
+//            weakSelf.headView.secondOrderView.addressLabel.text = address;
+//            weakSelf.addressId = addrssId;
+//            
+//        }
+//        
+//    };
     
     vc.addressId = self.addressId;
     

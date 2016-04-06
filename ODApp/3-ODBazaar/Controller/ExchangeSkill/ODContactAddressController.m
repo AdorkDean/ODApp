@@ -58,7 +58,7 @@
 - (void)backAction:(UIButton *)sender {
     if ([self.isAddress isEqualToString:@"1"]) {
         if (self.getAddressBlock) {
-            self.getAddressBlock(@"", @"", @"1");
+//            self.getAddressBlock(@"", @"", @"1");
         }
     }
     [self.navigationController popViewControllerAnimated:YES];
@@ -270,21 +270,28 @@
         new.naviTitle = @"编辑地址";
         if (indexPath.section == 0) {
             ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
-            vc.isDefault = YES;
-            NSString *addressId = [NSString stringWithFormat:@"%@", model.id];
-            vc.addressId = addressId;
-            vc.addressModel = model;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
-
+//            vc.isDefault = YES;
+//            NSString *addressId = [NSString stringWithFormat:@"%@", model.id];
+//            vc.addressId = addressId;
+//            vc.addressModel = model;
+            new.addressId = [NSString stringWithFormat:@"%@",model.id];
+            new.addressModel = model;
+            new.isDefault = YES;
+            [weakSelf.navigationController pushViewController:new animated:YES];
+            
 
         } else {
 
             ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
-            NSString *addressId = [NSString stringWithFormat:@"%@", model.id];
-            vc.isDefault = NO;
-            vc.addressId = addressId;
-            vc.addressModel = model;
-            [weakSelf.navigationController pushViewController:vc animated:YES];
+            
+//            NSString *addressId = [NSString stringWithFormat:@"%@", model.id];
+//            vc.isDefault = NO;
+//            vc.addressId = addressId;
+//            vc.addressModel = model;
+            new.addressId = [NSString stringWithFormat:@"%@",model.id];
+            new.addressModel = model;
+            new.isDefault = YES;
+            [weakSelf.navigationController pushViewController:new animated:YES];
 
         }
 
@@ -300,16 +307,18 @@
     if (indexPath.section == 0) {
         ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
         if (self.getAddressBlock) {
-            self.getAddressBlock(model.address, [NSString stringWithFormat:@"%@", model.id], @"2");
+//            self.getAddressBlock(model.address, [NSString stringWithFormat:@"%@", model.id], @"2");
+            self.getAddressBlock(model);
         }
     } 
     else {
         ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
         if (self.getAddressBlock) {
-            self.getAddressBlock(model.address, [NSString stringWithFormat:@"%@", model.id], @"2");
+//            self.getAddressBlock(model.address, [NSString stringWithFormat:@"%@", model.id], @"2");
+            self.getAddressBlock(model);
         }
     }
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)deleteAddressWithAddress_id:(NSString *)address_id {

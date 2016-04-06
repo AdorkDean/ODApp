@@ -425,16 +425,16 @@
     ODContactAddressController *vc = [[ODContactAddressController alloc] init];
     
     __weakSelf
-    vc.getAddressBlock = ^(NSString *address, NSString *addrssId, NSString *isAddress) {
-        
-        if ([isAddress isEqualToString:@"1"]) {
-            weakSelf.headView.orderView.addressLabel.text = @"请选择";
-            weakSelf.addressId = nil;
-        } else {
-            weakSelf.headView.orderView.addressLabel.text = address;
-            weakSelf.addressId = addrssId;
-        }
-    };
+//    vc.getAddressBlock = ^(NSString *address, NSString *addrssId, NSString *isAddress) {
+//        
+//        if ([isAddress isEqualToString:@"1"]) {
+//            weakSelf.headView.orderView.addressLabel.text = @"请选择";
+//            weakSelf.addressId = nil;
+//        } else {
+//            weakSelf.headView.orderView.addressLabel.text = address;
+//            weakSelf.addressId = addrssId;
+//        }
+//    };
     
     vc.addressId = self.addressId;
     ODNavigationController *navi = [[ODNavigationController alloc] initWithRootViewController:vc];

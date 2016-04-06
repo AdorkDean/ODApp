@@ -17,6 +17,7 @@
 #import "ODTakeOutConfirmModel.h"
 #import "ODContactAddressController.h"
 #import "ODShopCartView.h"
+#import "ODOrderAddressModel.h"
 
 static NSString *cellId = @"ODConfirmOrderCell";
 
@@ -29,7 +30,11 @@ static NSString *cellId = @"ODConfirmOrderCell";
 @property(nonatomic,strong)ODConfirmOrderModel *model;
 @property(nonatomic,strong)UILabel *remarkDetailLabel;
 @property(nonatomic,strong)ODConfirmOrderModel *orderModel;
-@property (nonatomic, strong) ODTakeOutConfirmModel *confirmModel;
+@property(nonatomic,strong) ODTakeOutConfirmModel *confirmModel;
+@property(nonatomic,strong)UILabel *nameLabel;
+@property(nonatomic,strong)UILabel *numLabel;
+@property(nonatomic,strong)UILabel *addressLabel;
+@property(nonatomic,copy)NSString *addressId;
 
 @property(nonatomic)CGFloat count;
 
@@ -97,22 +102,22 @@ static NSString *cellId = @"ODConfirmOrderCell";
     [infoView addGestureRecognizer:infoTap];
     [self.tableHeaderView addSubview:infoView];
     
-    UILabel *nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, 17, 100, 20)];
-    nameLabel.text = [self.orderModel.address valueForKeyPath:@"name"];
-    nameLabel.font = [UIFont systemFontOfSize:13.5];
+    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, 17, 100, 20)];
+    self.nameLabel.text = [self.orderModel.address valueForKeyPath:@"name"];
+    self.nameLabel.font = [UIFont systemFontOfSize:13.5];
     
-    UILabel *numLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(nameLabel.frame)+15, 17, 150, 20)];
-    numLabel.text = [self.orderModel.address valueForKeyPath:@"tel"];
-    numLabel.font = [UIFont systemFontOfSize:13.5];
+    self.numLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.nameLabel.frame)+15, 17, 150, 20)];
+    self.numLabel.text = [self.orderModel.address valueForKeyPath:@"tel"];
+    self.numLabel.font = [UIFont systemFontOfSize:13.5];
     
-    UILabel *addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, CGRectGetMaxY(nameLabel.frame)+7.5, kScreenSize.width-60, 15)];
-    addressLabel.text = [self.orderModel.address valueForKeyPath:@"address"];
-    addressLabel.textColor = [UIColor colorGreyColor];
-    addressLabel.font = [UIFont systemFontOfSize:11];
+    self.addressLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, CGRectGetMaxY(self.nameLabel.frame)+7.5, kScreenSize.width-60, 15)];
+    self.addressLabel.text = [self.orderModel.address valueForKeyPath:@"address"];
+    self.addressLabel.textColor = [UIColor colorGreyColor];
+    self.addressLabel.font = [UIFont systemFontOfSize:11];
     
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-25.4, 25.5, 8.4, 15)];
     imageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
-    [infoView addSubview:nameLabel],[infoView addSubview:numLabel],[infoView addSubview:addressLabel],[infoView addSubview:imageView];
+    [infoView addSubview:self.nameLabel],[infoView addSubview:self.numLabel],[infoView addSubview:self.addressLabel],[infoView addSubview:imageView];
     
     UIView *payView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(infoView.frame)+6, kScreenSize.width, 55)];
     payView.backgroundColor = [UIColor whiteColor];
@@ -227,13 +232,19 @@ static NSString *cellId = @"ODConfirmOrderCell";
 #pragma mark - UIAction
 -(void)infoTapClick{
     ODContactAddressController *controller = [[ODContactAddressController alloc]init];
+    controller.getAddressBlock = ^(ODOrderAddressDefModel *model){
+        self.nameLabel.text = model.name;
+        self.numLabel.text = model.tel;
+        self.addressLabel.text = model.address;
+        self.addressId  = [NSString stringWithFormat:@"%@",model.id];
+    };
     [self.navigationController pushViewController:controller animated:YES];
 }
 
 -(void)deliverTapClick{
     ODDeliveryNoteViewController *deliveryNote = [[ODDeliveryNoteViewController alloc]init];
     __weakSelf
-    deliveryNote.myBlock=^(NSString *str){
+    deliveryNote.myBlock= ^(NSString *str){
         weakSelf.remarkDetailLabel.text = str;
     };
     deliveryNote.noteContent = self.remarkDetailLabel.text;
@@ -255,11 +266,12 @@ static NSString *cellId = @"ODConfirmOrderCell";
         remarkStr = @"";
     }
     NSDictionary *successParams = @{
-                                @"address_id":@"1",
+                                @"address_id":self.addressId,
                                 @"price_show":[NSString
                                                stringWithFormat:@"%f", self.count],
                                 @"pay_type":@"2",
                                 @"remark":remarkStr,
+
                                 @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString]
                                 };
     __weakSelf
