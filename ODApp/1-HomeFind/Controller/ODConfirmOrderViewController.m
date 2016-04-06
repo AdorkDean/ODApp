@@ -36,7 +36,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 @property(nonatomic,strong)UILabel *addressLabel;
 @property(nonatomic,copy)NSString *addressId;
 
-@property(nonatomic)CGFloat count;
+@property(nonatomic)float count;
 
 @end
 
@@ -69,11 +69,14 @@ static NSString *cellId = @"ODConfirmOrderCell";
     self.tradeType = @"1";
     self.navigationItem.title = @"确认订单";
     [self requestData];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeAddress:) name:ODNotificationSaveAddress object:nil];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self requestData];
+//    [self requestData];
 }
 
 -(void)createTableHeaderView{
@@ -173,6 +176,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     bottomView.userInteractionEnabled = YES;
     [self.view addSubview:bottomView];
     
+    self.count = 0;
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(17, 0, kScreenSize.width-117, 49)];
     for (ODConfirmOrderModelShopcart_list *model  in self.dataArray) {
         self.count += [model.num floatValue]*[model.price_show floatValue];
@@ -292,6 +296,16 @@ static NSString *cellId = @"ODConfirmOrderCell";
                    failure:^(NSError *error)
      {
     }];
+}
+
+-(void)changeAddress:(NSNotification *)user{
+    
+    self.nameLabel.text = user.userInfo[@"name"];
+    self.nameLabel.frame = CGRectMake(17, 17, 100, 20);
+    self.numLabel.text = user.userInfo[@"tel"];
+    self.addressLabel.text = user.userInfo[@"address"];
+    self.addressLabel.frame = CGRectMake(17, CGRectGetMaxY(self.nameLabel.frame)+7.5, kScreenSize.width-60, 15);
+    self.addressId  = [NSString stringWithFormat:@"%@",user.userInfo[@"id"]];
 }
 
 @end
