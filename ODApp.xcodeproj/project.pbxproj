@@ -339,7 +339,6 @@
 		ED4FF4731CA3E89C00EDE431 /* PontoDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4FF4701CA3E89C00EDE431 /* PontoDispatcher.m */; };
 		ED4FF4761CA3EA2B00EDE431 /* PontoH5ToMobileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4FF4751CA3EA2B00EDE431 /* PontoH5ToMobileRequest.m */; };
 		ED4FF47C1CA3F12600EDE431 /* ODTakeAwayDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED4FF47A1CA3F12600EDE431 /* ODTakeAwayDetailController.m */; };
-		ED4FF47D1CA3F12600EDE431 /* ODTakeAwayDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED4FF47B1CA3F12600EDE431 /* ODTakeAwayDetailController.xib */; };
 		ED51F08A1C979E87005525AD /* ODIndentDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED51F0891C979E87005525AD /* ODIndentDetailView.m */; };
 		ED51F08C1C979EB5005525AD /* ODIndentDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED51F08B1C979EB5005525AD /* ODIndentDetailView.xib */; };
 		ED51F0921C97E8D0005525AD /* ODIndentDetailTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED51F0911C97E8D0005525AD /* ODIndentDetailTopView.m */; };
@@ -976,7 +975,6 @@
 		ED4FF4751CA3EA2B00EDE431 /* PontoH5ToMobileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PontoH5ToMobileRequest.m; sourceTree = "<group>"; };
 		ED4FF4791CA3F12600EDE431 /* ODTakeAwayDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODTakeAwayDetailController.h; sourceTree = "<group>"; };
 		ED4FF47A1CA3F12600EDE431 /* ODTakeAwayDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODTakeAwayDetailController.m; sourceTree = "<group>"; };
-		ED4FF47B1CA3F12600EDE431 /* ODTakeAwayDetailController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODTakeAwayDetailController.xib; sourceTree = "<group>"; };
 		ED51F0881C979E87005525AD /* ODIndentDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODIndentDetailView.h; sourceTree = "<group>"; };
 		ED51F0891C979E87005525AD /* ODIndentDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODIndentDetailView.m; sourceTree = "<group>"; };
 		ED51F08B1C979EB5005525AD /* ODIndentDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODIndentDetailView.xib; sourceTree = "<group>"; };
@@ -1346,7 +1344,6 @@
 				ED4FF4751CA3EA2B00EDE431 /* PontoH5ToMobileRequest.m */,
 				ED4FF4791CA3F12600EDE431 /* ODTakeAwayDetailController.h */,
 				ED4FF47A1CA3F12600EDE431 /* ODTakeAwayDetailController.m */,
-				ED4FF47B1CA3F12600EDE431 /* ODTakeAwayDetailController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2405,7 +2402,6 @@
 				232CB62C1C9264E200340D12 /* ODOperationFirstCell.xib in Resources */,
 				232CB6271C9264E200340D12 /* ODLandSecondCell.xib in Resources */,
 				232CB5ED1C9264E200340D12 /* ODBazaarRewardCollectionCell.xib in Resources */,
-				ED4FF47D1CA3F12600EDE431 /* ODTakeAwayDetailController.xib in Resources */,
 				232CB62A1C9264E200340D12 /* ODMyOrderRecordCell.xib in Resources */,
 				409141871C98F70E0059E05F /* ODBazaarCollectionCell.xib in Resources */,
 				400F18501CA93220000EFFBC /* ODTakeOutHeaderView.xib in Resources */,

@@ -207,6 +207,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
         [weakSelf createTableHeaderView];
         [weakSelf createBottomView];
         [weakSelf.tableView reloadData];
+        weakSelf.addressId = [weakSelf.orderModel.address valueForKeyPath:@"id"];
     } failure:^(NSError *error) {
         
     }];
@@ -228,6 +229,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;
 }
+
 
 #pragma mark - UIAction
 -(void)infoTapClick{
@@ -265,15 +267,13 @@ static NSString *cellId = @"ODConfirmOrderCell";
     else {
         remarkStr = @"";
     }
-    NSDictionary *successParams = @{
-                                @"address_id":self.addressId,
-                                @"price_show":[NSString
-                                               stringWithFormat:@"%f", self.count],
-                                @"pay_type":@"2",
-                                @"remark":remarkStr,
-
-                                @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString]
-                                };
+    NSMutableDictionary *successParams = [NSMutableDictionary dictionary];
+    successParams[@"address_id"] = [NSString stringWithFormat:@"%@",self.addressId];
+//    successParams[@"price_show"] = [NSString
+//                                    stringWithFormat:@"%f", self.count];
+    successParams[@"pay_type"] = @"2";
+    successParams[@"remark"] = remarkStr;
+    successParams[@"shopcart_json"] = self.datas.od_URLDesc;
     __weakSelf
     [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:successParams modelClass:[ODTakeOutConfirmModel class] success:^(id model)
      {
