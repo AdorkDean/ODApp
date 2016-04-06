@@ -288,15 +288,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
          ODShopCartView *view = [ODShopCartView shopCart];
          [view shopCartHeaderViewDidClickClearButton:nil];
          
-         // 清除当前控制器
-         for (UIViewController *vc in self.navigationController.viewControllers)
-         {
-             if ([vc isKindOfClass:[self class]])
-             {
-                 [vc removeFromParentViewController];
-             }
-         }
-     }
+    }
                    failure:^(NSError *error)
      {
     }];
