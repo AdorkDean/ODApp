@@ -17,7 +17,7 @@ static CGFloat const shopCartHeaderViewH = 25;
 /** 购物车 Height */
 static CGFloat const shopCartH = 49;
 /** 购物车Cell Height */
-static CGFloat const shopCartCellH = 44;
+static CGFloat const shopCartCellH = 46;
 
 #import <MJExtension.h>
 
@@ -83,6 +83,7 @@ static NSString * const kShopCarts = @"shopCarts";
         _shopCartView.dataSource = self;
         _shopCartView.delegate = self;
         _shopCartView.bounces = NO;
+        _shopCartView.rowHeight = shopCartCellH;
         
         UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
         [keyWindow addSubview:_shopCartView];
@@ -131,9 +132,6 @@ static NSString * const kShopCarts = @"shopCarts";
     
     self.buyButton.enabled = cacheTotalPrice;
     self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
-    
-//    // 支付完成后, 清空购物车
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanCache:) name:ODNotificationPaySuccess object:nil];
 }
 
 + (instancetype)shopCart
@@ -280,6 +278,7 @@ static NSString * const kShopCarts = @"shopCarts";
     cell.delegate = self;
     return cell;
 }
+
 
 #pragma mark - ODShopCartListHeaderViewDelegate
 - (void)shopCartHeaderViewDidClickClearButton:(ODShopCartListHeaderView *)headerView

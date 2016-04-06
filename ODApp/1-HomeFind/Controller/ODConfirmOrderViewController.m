@@ -16,6 +16,7 @@
 #import "ODMyTakeOutModel.h"
 #import "ODTakeOutConfirmModel.h"
 #import "ODContactAddressController.h"
+#import "ODShopCartView.h"
 #import "ODOrderAddressModel.h"
 
 static NSString *cellId = @"ODConfirmOrderCell";
@@ -68,25 +69,6 @@ static NSString *cellId = @"ODConfirmOrderCell";
     self.tradeType = @"1";
     self.navigationItem.title = @"确认订单";
     [self requestData];
-    
-    
-    // 支付完成后, 清空购物车
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanCache:) name:ODNotificationPaySuccess object:nil];
-}
-
-- (void)cleanCache:(NSNotification *)note
-{
-    // 移除缓存
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    [user removeObjectForKey:@"shopCount"];
-    [user removeObjectForKey:@"totalPrice"];
-    [user removeObjectForKey:@"shopCarts"];
-    [user synchronize];
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)createTableHeaderView{
@@ -204,6 +186,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
         [weakSelf createTableHeaderView];
         [weakSelf createBottomView];
         [weakSelf.tableView reloadData];
+        weakSelf.addressId = [weakSelf.orderModel.address valueForKeyPath:@"id"];
     } failure:^(NSError *error) {
         
     }];
@@ -225,6 +208,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50;
 }
+
 
 #pragma mark - UIAction
 -(void)infoTapClick{
@@ -263,13 +247,12 @@ static NSString *cellId = @"ODConfirmOrderCell";
         remarkStr = @"";
     }
     NSMutableDictionary *successParams = [NSMutableDictionary dictionary];
-    successParams[@"address_id"] = self.addressId;
-    successParams[@"price_show"] = [NSString
-                                    stringWithFormat:@"%f", self.count];
+    successParams[@"address_id"] = [NSString stringWithFormat:@"%@",self.addressId];
+//    successParams[@"price_show"] = [NSString
+//                                    stringWithFormat:@"%f", self.count];
     successParams[@"pay_type"] = @"2";
     successParams[@"remark"] = remarkStr;
-    successParams[@"shopcart_ids"] = [[self.dataArray valueForKeyPath:@"id"]enumerateString];
-   
+    successParams[@"shopcart_json"] = self.datas.od_URLDesc;
     __weakSelf
     [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:successParams modelClass:[ODTakeOutConfirmModel class] success:^(id model)
      {
@@ -282,10 +265,13 @@ static NSString *cellId = @"ODConfirmOrderCell";
                                     @"takeout_order_id" : strongSelf.confirmModel.order_id
                                     };
          [strongSelf getWeiXinDataWithParam:strongSelf.successParams];
+         
+         // 清空购物车
+         ODShopCartView *view = [ODShopCartView shopCart];
+         [view shopCartHeaderViewDidClickClearButton:nil];
      }
                    failure:^(NSError *error)
      {
-        
     }];
 }
 

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ODTakeOutModel;
+@class ODTakeOutModel, ODShopCartListHeaderView;
 
 @interface ODShopCartView : UIView
 
@@ -17,5 +17,7 @@
 - (void)addShopCount:(ODTakeOutModel *)data;
 
 - (void)dismiss;
+
+- (void)shopCartHeaderViewDidClickClearButton:(ODShopCartListHeaderView *)headerView;
 
 @end
