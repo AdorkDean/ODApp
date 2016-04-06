@@ -661,6 +661,12 @@ NSString *skillContentText = @"";
 }
 
 -(void)serviceButtonClick:(UIButton *)button{
+    
+    [self.titleTextField resignFirstResponder];
+    [self.contentTextView resignFirstResponder];
+    [self.priceTextField resignFirstResponder];
+    [self.unitTextField resignFirstResponder];
+    
     NSInteger width = (kScreenSize.width-35-30)/4;
     NSArray *selectedArray = @[@"button_Home service_Selected",@"button_Online service_Selected",@"button_Express delivery_Selected"];
     NSArray *array = @[@"button_Home service_default",@"button_Online service_default",@"button_Express delivery_default"];
