@@ -337,7 +337,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     if (updatingLocation) {
         _mapView.showsUserLocation = NO;
         [_mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
-
+        [ODUserInformation sharedODUserInformation].userCoordinate = userLocation.location.coordinate;
         //构造AMapReGeocodeSearchRequest对象
         AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
         regeo.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];

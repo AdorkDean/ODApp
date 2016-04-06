@@ -33,7 +33,7 @@
 /** 商品单号 */
 @property (nonatomic, copy) NSString *order_no;
 /** 商品价格 */
-@property (nonatomic, assign) float price_show;
+@property (nonatomic, copy) NSString *price_show;
 /** 地址 */
 @property (nonatomic, copy) NSString *address;
 /** 收件人姓名 */

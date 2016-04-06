@@ -26,9 +26,9 @@ typedef NS_ENUM(NSUInteger, ODTakeOutStatus)
 /** 商品内容 */
 @property (nonatomic, copy) NSString *content;
 /** 商品优惠价 */
-@property (nonatomic, strong) NSNumber *price_show;
+@property (nonatomic, copy) NSString *price_show;
 /** 商品原价 */
-@property (nonatomic, strong) NSNumber *price_fake;
+@property (nonatomic, copy) NSString *price_fake;
 /** 商品小图 */
 @property (nonatomic, copy) NSString *img_small;
 /** 商品大图 */

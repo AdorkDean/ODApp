@@ -75,8 +75,8 @@
         weakSelf.shopImageView.image = [image od_roundedCornerImage:10.0f];
     }];
     self.titleLabel.text = datas.title;
-    self.discountPriceLabel.text = [NSString stringWithFormat:@"¥ %.2f", [datas.price_show floatValue]];
-    self.originalPriceLabel.text = [NSString stringWithFormat:@"¥ %.2f", [datas.price_fake floatValue]];
+    self.discountPriceLabel.text = [NSString stringWithFormat:@"¥ %@", datas.price_show];
+    self.originalPriceLabel.text = [NSString stringWithFormat:@"¥ %@", datas.price_fake];
 
     // 设置按钮不同情况下的状态
     self.buyButton.enabled = (datas.show_status == ODTakeOutStatusBuy);

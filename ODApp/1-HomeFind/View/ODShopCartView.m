@@ -70,6 +70,8 @@ static NSString * const kShopCarts = @"shopCarts";
 {
     if (!_headerView) {
         _headerView = [ODShopCartListHeaderView headerView];
+        _headerView.od_width = KScreenWidth;
+        _headerView.od_height = shopCartHeaderViewH;
         _shopCartView.tableHeaderView = _headerView;
         _headerView.delegate = self;
     }
