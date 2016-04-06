@@ -45,6 +45,7 @@
 }
 
 - (void)dealloc {
+    NSLogFunc
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 - (void)didReceiveMemoryWarning {
@@ -77,13 +78,19 @@
     // 发送请求
     [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model)
      {
-         for (UIViewController *vc in weakSelf.navigationController.childViewControllers)
-         {
-             if ([vc isKindOfClass:[ODPaySuccessController class]])
+         [weakSelf.navigationController.childViewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+             if ([obj isKindOfClass:[ODPaySuccessController class]])
              {
+                 [(ODPaySuccessController *)obj setPayStatus:weakSelf.isPay];
+                 
+                 if (idx != weakSelf.navigationController.childViewControllers.count - 1)
+                 {
+                     [weakSelf.navigationController popToViewController:obj animated:YES];
+                 }
                  return ;
              }
-         }
+             
+         }];
          ODPaySuccessController *vc = [[ODPaySuccessController alloc] init];
          vc.swap_type = weakSelf.swap_type;
          vc.payStatus = weakSelf.isPay;

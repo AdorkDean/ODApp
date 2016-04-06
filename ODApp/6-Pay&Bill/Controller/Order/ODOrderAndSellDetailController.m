@@ -92,6 +92,13 @@ static CGFloat labelHeight = 40;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backAction:) color:nil highColor:nil title:@"返回"];
     
     self.evaluateStar = @"";
+    for (UIViewController *vc in self.navigationController.viewControllers)
+    {
+        if ([vc isKindOfClass:NSClassFromString(@"ODPaySuccessController")])
+        {
+            [vc removeFromParentViewController];
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
