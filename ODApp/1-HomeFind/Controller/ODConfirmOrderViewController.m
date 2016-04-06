@@ -262,15 +262,14 @@ static NSString *cellId = @"ODConfirmOrderCell";
     else {
         remarkStr = @"";
     }
-    NSDictionary *successParams = @{
-                                @"address_id":self.addressId,
-                                @"price_show":[NSString
-                                               stringWithFormat:@"%f", self.count],
-                                @"pay_type":@"2",
-                                @"remark":remarkStr,
-
-                                @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString]
-                                };
+    NSMutableDictionary *successParams = [NSMutableDictionary dictionary];
+    successParams[@"address_id"] = self.addressId;
+    successParams[@"price_show"] = [NSString
+                                    stringWithFormat:@"%f", self.count];
+    successParams[@"pay_type"] = @"2";
+    successParams[@"remark"] = remarkStr;
+    successParams[@"shopcart_ids"] = [[self.dataArray valueForKeyPath:@"id"]enumerateString];
+   
     __weakSelf
     [ODHttpTool getWithURL:ODUrlShopcartOrderConfirm parameters:successParams modelClass:[ODTakeOutConfirmModel class] success:^(id model)
      {
