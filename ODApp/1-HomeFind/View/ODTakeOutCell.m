@@ -75,7 +75,7 @@
                                                       self.originalPriceLabel.text attributes:attribtDic];
     self.originalPriceLabel.attributedText = attribtStr;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:@"removeALLDATA" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:ODNotificationShopCartRemoveALL object:nil];
 }
 
 - (void)dealloc

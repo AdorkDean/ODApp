@@ -38,7 +38,7 @@
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", number];
     if ([self.delegate respondsToSelector:@selector(shopCartListcell:DidClickMinusButton:)])
     {
-        [self.delegate shopCartListcell:self DidClickMinusButton:self.takeOut];
+        [self.delegate shopCartListcell:self DidClickPlusButton:self.takeOut];
     }
 }
 
@@ -55,7 +55,7 @@
     
     if ([self.delegate respondsToSelector:@selector(shopCartListcell:DidClickPlusButton:)])
     {
-        [self.delegate shopCartListcell:self DidClickPlusButton:self.takeOut];
+        [self.delegate shopCartListcell:self DidClickMinusButton:self.takeOut];
     }
 }
 

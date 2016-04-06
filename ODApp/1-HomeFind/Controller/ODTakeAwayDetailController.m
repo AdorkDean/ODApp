@@ -8,6 +8,8 @@
 #define MAS_SHORTHAND
 #define MAS_SHORTHAND_GLOBALS
 
+
+
 #import "ODTakeOutpaysinglemodel.h"
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "PontoH5ToMobileRequest.h"
@@ -17,7 +19,6 @@
 #import "ODTakeOutModel.h"
 
 #import <Masonry.h>
-#import "ODHttpTool.h"
 #import "ODUserInformation.h"
 #import "ODAPPInfoTool.h"
 
@@ -76,8 +77,18 @@
     
     // 点击 H5 购买商品按钮
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(h5addShopNumber:) name:ODNotificationShopCartAddNumber object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay:) name:ODNotificationPaySuccess object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
     // 退出时退出购物车
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(pop) color:nil highColor:nil title:@"返回"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartRemoveALL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartminusNumber object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - 初始化方法
@@ -103,7 +114,7 @@
     }];
 }
 
-- (void)getDatawithCode:(NSString *)code {
+- (void)getDatawithCode1:(NSString *)code {
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
 
@@ -111,6 +122,8 @@
     params[@"errCode"] = code;
     params[@"type"] = @"1";
     __weakSelf
+    
+    
     // 发送请求
     [ODHttpTool getWithURL:ODUrlPayWeixinCallbackSync parameters:params modelClass:[NSObject class] success:^(id model)
      {
@@ -125,6 +138,7 @@
          ODPaySuccessController *vc = [[ODPaySuccessController alloc]init];
          vc.orderId = weakSelf.order_id;
          vc.payStatus = weakSelf.isPay;
+         vc.params = [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].params;
          vc.tradeType = @"1";
          [weakSelf.navigationController pushViewController:vc animated:YES];
      } failure:^(NSError *error) {
@@ -133,6 +147,11 @@
 }
 
 #pragma mark - IBActions
+- (void)clearShopNumber:(NSNotification *)note
+{
+    self.takeOut.shopNumber = 0;
+}
+
 - (void)pop
 {
     // 退出购物车
@@ -148,13 +167,13 @@
 - (void)failPay:(NSNotification *)text {
     NSString *code = text.userInfo[@"codeStatus"];
     self.isPay = @"2";
-    [self getDatawithCode:code];
+    [self getDatawithCode1:code];
 }
 
 - (void)successPay:(NSNotification *)text {
     NSString *code = text.userInfo[@"codeStatus"];
     self.isPay = @"1";
-    [self getDatawithCode:code];
+    [self getDatawithCode1:code];
 }
 
 @end
