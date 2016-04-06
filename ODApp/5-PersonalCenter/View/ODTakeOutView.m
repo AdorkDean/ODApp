@@ -41,7 +41,7 @@
     for (UIView *view in self.takeOutContentView.subviews) {
         if (![view isKindOfClass:[UILabel class]]) return;
         UILabel *label = (UILabel *)view;
-        label.text = @"";
+        [label removeFromSuperview];
     }
     
     for (int i = 0; i < model.products.count; i++) {        
