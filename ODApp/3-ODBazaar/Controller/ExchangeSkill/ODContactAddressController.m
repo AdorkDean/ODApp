@@ -88,7 +88,7 @@
          ODOrderAddressModel *addressModel = [model result];
          // 取出def模型
          ODOrderAddressDefModel *defModel = addressModel.def;
-         NSString *is_default = [NSString stringWithFormat:@"%d",defModel.is_default];
+         NSString *is_default = [NSString stringWithFormat:@"%@",defModel.is_default];
          if ([is_default isEqualToString:@"1"]) {
              [weakSelf.defaultArray addObject:defModel];
          }
@@ -98,12 +98,14 @@
          if ([is_default isEqualToString:@"0"]) {
              [weakSelf.dataArray insertObject:defModel atIndex:0];
          }
-         
 
-         
-         
          [weakSelf createTableView];
          [weakSelf.tableView reloadData];
+         if (weakSelf.dataArray.count == 0 && weakSelf.defaultArray.count == 0) {
+             [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无地址"];
+         }else{
+             [weakSelf.noResultLabel hidden];
+         }
          
      } failure:^(NSError *error) {
      }];

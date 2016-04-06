@@ -116,10 +116,7 @@ static NSString *cellId = @"ODAddressKeywordCell";
     
     NSDictionary *dict = @{@"name":poi.name,@"address":poi.address,@"location":poi.location};
     [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationAddAddress object:self userInfo:dict];
-    //    if (self.myBlock) {
-    //        self.myBlock(poi.name,poi.address,poi.location);
-    //    }
-    //
+  
     for (UIViewController *vc in self.navigationController.childViewControllers) {
         if ([NSStringFromClass([vc class]) isEqualToString:NSStringFromClass([ODAddNewAddressViewController class])]) {
             [self.navigationController popToViewController:vc animated:YES];

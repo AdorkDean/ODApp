@@ -71,6 +71,11 @@ static NSString *cellId = @"ODConfirmOrderCell";
     [self requestData];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requestData];
+}
+
 -(void)createTableHeaderView{
     self.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 200)];
     self.tableHeaderView.backgroundColor = [UIColor backgroundColor];
@@ -83,7 +88,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     
     self.nameLabel = [[UILabel alloc]init];
     NSString *is_default = [NSString stringWithFormat:@"%@",[self.orderModel.address valueForKeyPath:@"is_default"]];
-    if (is_default.length) {
+    if ([is_default isEqualToString:@"0"]||[is_default isEqualToString:@"1"]) {
         self.nameLabel.frame = CGRectMake(17, 17, 100, 20);
         self.nameLabel.text = [self.orderModel.address valueForKeyPath:@"name"];
     }else{
@@ -191,6 +196,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     __weakSelf;
     NSDictionary *parametr = @{@"shopcart_json" : self.datas.od_URLDesc};
     [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parametr modelClass:[ODConfirmOrderModel class] success:^(ODConfirmOrderModelResponse * model) {
+        [weakSelf.dataArray removeAllObjects];
         weakSelf.orderModel = [model result];
         [weakSelf.dataArray addObjectsFromArray:weakSelf.orderModel.shopcart_list];
         [weakSelf createTableHeaderView];

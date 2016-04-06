@@ -16,6 +16,7 @@
 @property(nonatomic,strong)UIView *infoView;
 @property(nonatomic,strong)AMapGeoPoint *location;
 @property(nonatomic,copy)NSString *is_default;
+@property(nonatomic)BOOL isLocation;
 
 @end
 
@@ -24,6 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.isLocation = NO;
     self.is_default = @"0";
     self.navigationItem.title = self.naviTitle;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(saveInfoClick) color:nil highColor:nil title:@"保存"];
@@ -105,7 +107,13 @@
     [self.view addSubview:bottomView];
     
     self.imageView = [[UIImageView alloc]initWithFrame:CGRectMake(17.5, 15, 20, 20)];
-    self.imageView.image = [UIImage imageNamed:@"icon_Default address_default"];
+    if ([self.navigationItem.title isEqualToString:@"编辑地址"] && [self.addressModel.is_default isEqualToString:@"1"]) {
+        self.imageView.image = [UIImage imageNamed:@"icon_Default address_Selected"];
+        self.is_default = @"1";
+    }else{
+        self.imageView.image = [UIImage imageNamed:@"icon_Default address_default"];
+        self.is_default = @"0";
+    }
     [bottomView addSubview:self.imageView];
     
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.imageView.frame)+8, 15, 200, 20)];
@@ -150,12 +158,27 @@
         [button setTitleColor:[UIColor colorGloomyColor] forState:UIControlStateNormal];
         textField.text = addresstitle;
         weakSelf.location = location;
+        weakSelf.isLocation = YES;
     };
+    
+    if (self.isLocation) {
+        controller.lat = [NSString stringWithFormat:@"%f",self.location.latitude];
+        controller.lng = [NSString stringWithFormat:@"%f",self.location.longitude];
+    }else{
+        controller.lat = self.addressModel.lat;
+        controller.lng = self.addressModel.lng;
+    }
+
     [self.navigationController pushViewController:controller animated:YES];
 }
 
 -(void)tapGestureClick:(UITapGestureRecognizer *)tap{
     static BOOL isClick = YES;
+    
+    if ([self.is_default isEqualToString:@"1"]) {
+        isClick = NO;
+    }
+    
     if (isClick) {
         self.imageView.image = [UIImage imageNamed:@"icon_Default address_Selected"];
         isClick = NO;
