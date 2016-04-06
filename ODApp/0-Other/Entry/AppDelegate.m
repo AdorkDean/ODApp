@@ -71,7 +71,20 @@ void UncaughtExceptionHandler(NSException *exception) {
     
     [ODAppRegister registJPushWithLaunchOption:launchOptions];
     
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    NSString *openId = [user objectForKey:KUserDefaultsOpenId];
+    [ODUserInformation sharedODUserInformation].openID = openId ? openId : @"";
+    
+    NSString *avatar = [user objectForKey:KUserDefaultsAvatar];
+    [ODUserInformation sharedODUserInformation].avatar = avatar ? avatar : @"";
+    
+    NSString *mobile = [user objectForKey:KUserDefaultsMobile];
+    [ODUserInformation sharedODUserInformation].avatar = mobile ? mobile : @"";
+
+    
     return YES;
+    
+    
 }
 
 

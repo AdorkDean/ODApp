@@ -57,6 +57,7 @@
             [button addTarget:self action:@selector(buttonClick:) forControlEvents:UIControlEventTouchUpInside];
             [button setTitleColor:[UIColor colorGrayColor] forState:UIControlStateNormal];
             button.tag = i+1;
+            button.titleLabel.font = [UIFont systemFontOfSize:13.5];
             button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
             [self.infoView addSubview:button];
         }else{
@@ -68,8 +69,8 @@
                 NSString *str = [ODUserInformation sharedODUserInformation].mobile;
                 textField.text = str;
             }
+            textField.font = [UIFont systemFontOfSize:13.5];
             [self.infoView addSubview:textField];
-        
         }
         
         
@@ -209,7 +210,7 @@
                               
                                  };
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlUserAddressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlUserAddressEdit parameters:parameters modelClass:[NSObject class] success:^(id model) {
         [ODProgressHUD showInfoWithStatus:@"编辑成功"];
         [weakSelf.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {

@@ -29,15 +29,15 @@ NSString * const kUserDefaultsVersionKey = @"CFBundleShortVersionString";
     // 比较
     if ([oldVersion isEqualToString:newVersion])
     {
-        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-        NSString *openId = [user objectForKey:KUserDefaultsOpenId];
-        [ODUserInformation sharedODUserInformation].openID = openId ? openId : @"";
-        
-        NSString *avatar = [user objectForKey:KUserDefaultsAvatar];
-        [ODUserInformation sharedODUserInformation].avatar = avatar ? avatar : @"";
-        
-        NSString *mobile = [user objectForKey:KUserDefaultsMobile];
-        [ODUserInformation sharedODUserInformation].avatar = mobile ? mobile : @"";
+//        NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+//        NSString *openId = [user objectForKey:KUserDefaultsOpenId];
+//        [ODUserInformation sharedODUserInformation].openID = openId ? openId : @"";
+//        
+//        NSString *avatar = [user objectForKey:KUserDefaultsAvatar];
+//        [ODUserInformation sharedODUserInformation].avatar = avatar ? avatar : @"";
+//        
+//        NSString *mobile = [user objectForKey:KUserDefaultsMobile];
+//        [ODUserInformation sharedODUserInformation].avatar = mobile ? mobile : @"";
         
         return [[ODTabBarController alloc] init];
     }

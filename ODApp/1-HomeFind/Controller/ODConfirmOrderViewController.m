@@ -99,10 +99,16 @@ static NSString *cellId = @"ODConfirmOrderCell";
     [infoView addGestureRecognizer:infoTap];
     [self.tableHeaderView addSubview:infoView];
     
-    self.nameLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, 17, 100, 20)];
-    self.nameLabel.text = [self.orderModel.address valueForKeyPath:@"name"];
+    self.nameLabel = [[UILabel alloc]init];
+    NSString *is_default = [NSString stringWithFormat:@"%@",[self.orderModel.address valueForKeyPath:@"is_default"]];
+    if (is_default.length) {
+        self.nameLabel.frame = CGRectMake(17, 17, 100, 20);
+        self.nameLabel.text = [self.orderModel.address valueForKeyPath:@"name"];
+    }else{
+        self.nameLabel.frame = CGRectMake(17, 23, 100, 20);
+        self.nameLabel.text = @"请选择配送地址";
+    }
     self.nameLabel.font = [UIFont systemFontOfSize:13.5];
-    
     self.numLabel = [[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(self.nameLabel.frame)+15, 17, 150, 20)];
     self.numLabel.text = [self.orderModel.address valueForKeyPath:@"tel"];
     self.numLabel.font = [UIFont systemFontOfSize:13.5];
@@ -111,7 +117,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     self.addressLabel.text = [self.orderModel.address valueForKeyPath:@"address"];
     self.addressLabel.textColor = [UIColor colorGreyColor];
     self.addressLabel.font = [UIFont systemFontOfSize:11];
-    
+
     UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(kScreenSize.width-25.4, 25.5, 8.4, 15)];
     imageView.image = [UIImage imageNamed:@"Skills profile page_icon_arrow_upper"];
     [infoView addSubview:self.nameLabel],[infoView addSubview:self.numLabel],[infoView addSubview:self.addressLabel],[infoView addSubview:imageView];
@@ -133,11 +139,15 @@ static NSString *cellId = @"ODConfirmOrderCell";
     confirmImageView.image = [UIImage imageNamed:@"icon_Default address_Selected"];
     [payView addSubview:confirmImageView];
     
-    UITapGestureRecognizer *deliveryTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(deliverTapClick)];
+    
     UIView *deliveryView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(payView.frame)+6, kScreenSize.width,101)];
     deliveryView.backgroundColor = [UIColor whiteColor];
-    [deliveryView addGestureRecognizer:deliveryTap];
     [self.tableHeaderView addSubview:deliveryView];
+    
+    UITapGestureRecognizer *deliveryTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(deliverTapClick)];
+    UIView *remarkView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 50)];
+    [remarkView addGestureRecognizer:deliveryTap];
+    [deliveryView addSubview:remarkView];
     
     UILabel *remarkLabel = [[UILabel alloc]initWithFrame:CGRectMake(17, 15, 60, 20)];
     remarkLabel.text = @"配送备注";
@@ -162,7 +172,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
     detailTimeLabel.font = [UIFont systemFontOfSize:13.5];
     detailTimeLabel.textAlignment = NSTextAlignmentRight;
     
-    [deliveryView addSubview:remarkLabel],[deliveryView addSubview:self.remarkDetailLabel], [deliveryView addSubview:imageView1],[deliveryView addSubview:lineView],[deliveryView addSubview:timeLabel];
+    [remarkView addSubview:remarkLabel],[remarkView addSubview:self.remarkDetailLabel], [remarkView addSubview:imageView1],[deliveryView addSubview:lineView],[deliveryView addSubview:timeLabel];
     [deliveryView addSubview:detailTimeLabel];
     
     self.tableHeaderView.frame = CGRectMake(0, 0, kScreenSize.width,infoView.frame.size.height+ payView.frame.size.height+ deliveryView.frame.size.height+18);
@@ -233,8 +243,10 @@ static NSString *cellId = @"ODConfirmOrderCell";
     ODContactAddressController *controller = [[ODContactAddressController alloc]init];
     controller.getAddressBlock = ^(ODOrderAddressDefModel *model){
         self.nameLabel.text = model.name;
+        self.nameLabel.frame = CGRectMake(17, 17, 100, 20);
         self.numLabel.text = model.tel;
         self.addressLabel.text = model.address;
+        self.addressLabel.frame = CGRectMake(17, CGRectGetMaxY(self.nameLabel.frame)+7.5, kScreenSize.width-60, 15);
         self.addressId  = [NSString stringWithFormat:@"%@",model.id];
     };
     [self.navigationController pushViewController:controller animated:YES];

@@ -425,8 +425,13 @@
     ODContactAddressController *vc = [[ODContactAddressController alloc] init];
     
     __weakSelf
-    vc.getAddressBlock = ^(ODOrderAddressDefModel *model) {
-        
+    
+    vc.getAddressBlock = ^(ODOrderAddressDefModel *model){
+        weakSelf.headView.orderView.addressLabel.text = model.address;
+        weakSelf.addressId = [NSString stringWithFormat:@"%@",model.id];
+    };
+//    vc.getAddressBlock = ^(NSString *address, NSString *addrssId, NSString *isAddress) {
+//        
 //        if ([isAddress isEqualToString:@"1"]) {
 //            weakSelf.headView.orderView.addressLabel.text = @"请选择";
 //            weakSelf.addressId = nil;
@@ -434,7 +439,7 @@
 //            weakSelf.headView.orderView.addressLabel.text = address;
 //            weakSelf.addressId = addrssId;
 //        }
-    };
+//    };
     
     vc.addressId = self.addressId;
     [self.navigationController pushViewController:vc animated:YES];
