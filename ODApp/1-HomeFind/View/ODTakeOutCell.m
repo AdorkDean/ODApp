@@ -37,6 +37,10 @@
     self.originalPriceLabel.textColor = [UIColor colorGrayColor];
     
     [self stopBlendedLayers];
+    
+    
+    // 适配小屏幕
+    [self sizeToFitScreen];
 }
 
 - (void)stopBlendedLayers
@@ -48,6 +52,15 @@
     self.titleLabel.layer.masksToBounds = YES;
     self.discountPriceLabel.layer.masksToBounds = YES;
     self.originalPriceLabel.layer.masksToBounds = YES;
+}
+
+- (void)sizeToFitScreen
+{
+    if (KScreenWidth == 320) {
+        self.titleLabel.font = [UIFont systemFontOfSize:12];
+        self.discountPriceLabel.font = [UIFont systemFontOfSize:15];
+        self.originalPriceLabel.font = [UIFont systemFontOfSize:12];
+    }
 }
 
 - (void)setDatas:(ODTakeOutModel *)datas
