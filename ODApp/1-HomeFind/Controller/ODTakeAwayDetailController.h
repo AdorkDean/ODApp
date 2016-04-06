@@ -14,10 +14,8 @@
 
 @property (nonatomic, strong) UIWebView *webView;
 
-@property (nonatomic, copy) NSString *product_id;
-
 /**
- * 商品ID
+ * 详情title
  */
 @property (nonatomic, strong) NSString *takeAwayTitle;
 
@@ -32,11 +30,18 @@
 @property (nonatomic, assign) BOOL isOrderDetail;
 
 /**
+ * 商品ID
+ */
+@property (nonatomic, copy) NSString *product_id;
+
+/**
  * 订单ID
  */
 @property (nonatomic, strong) NSString *order_id;
 
-/** order_no */
+/**
+ * order_no 
+ */
 @property (nonatomic,copy) NSString *orderNo;
 
 @property (nonatomic, strong) ODTakeOutModel *takeOut;

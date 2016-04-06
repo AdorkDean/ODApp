@@ -26,6 +26,7 @@
 
 #pragma mark - 商品详情
 
+// addToCart  H5 button点击事件
 - (void)addToCart:(id)params {
     if ([params isKindOfClass:[NSDictionary class]]) {
         NSLog(@"params------->%@",params[@"id"]);
@@ -68,6 +69,7 @@
 
 #pragma mark - 订单详情
 
+// paymentNow  H5 button点击事件
 - (void)paymentNow:(id)params {
     if ([params isKindOfClass:[NSDictionary class]]) {
         NSLog(@"params------->%@", params);
@@ -75,9 +77,6 @@
         [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_no = params[@"order_no"];
     }
 }
-
-
-
 
 - (void)getWeiXinData:(NSString *)paramsId {
     
@@ -112,7 +111,6 @@
     
     [WXApi sendReq:request];
 }
-
 
 
 @end
