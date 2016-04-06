@@ -7,6 +7,7 @@
 //
 
 #import "ODNetClosedView.h"
+#import "ODAPPInfoTool.h"
 #import "AFNetworkReachabilityManager.h"
 
 @interface ODNetClosedView ()
@@ -28,18 +29,22 @@
         // 当网络状态改变了, 就会调用这个block
         switch (status) {
             case AFNetworkReachabilityStatusUnknown: // 未知网络
+                [ODAPPInfoTool sharedODAPPInfoTool].networkType = @"unknow";
                 [self dismiss];
                 break;
                 
             case AFNetworkReachabilityStatusNotReachable: // 没有网络(断网)
+                [ODAPPInfoTool sharedODAPPInfoTool].networkType = @"breaked";
                 [self show];
                 break;
                 
             case AFNetworkReachabilityStatusReachableViaWWAN: // 手机自带网络
+                [ODAPPInfoTool sharedODAPPInfoTool].networkType = @"3G/4G";
                 [self dismiss];
                 break;
                 
             case AFNetworkReachabilityStatusReachableViaWiFi: // WIFI
+                [ODAPPInfoTool sharedODAPPInfoTool].networkType = @"WIFI";
                 [self dismiss];
                 break;
         }
