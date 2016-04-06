@@ -15,7 +15,7 @@
 @property(nonatomic,strong)UIImageView *imageView;
 @property(nonatomic,strong)UIView *infoView;
 @property(nonatomic,strong)AMapGeoPoint *location;
-@property(nonatomic,copy)NSString *isDefault;
+@property(nonatomic,copy)NSString *is_default;
 
 @end
 
@@ -24,12 +24,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.isDefault = @"";
+    self.is_default = @"0";
     self.navigationItem.title = self.naviTitle;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(saveInfoClick) color:nil highColor:nil title:@"保存"];
     
     [self createInfoView];
     [self createBottomView];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(notificationClick:) name:ODNotificationAddAddress object:nil];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear: animated];
+    
 }
 
 -(void)createInfoView{
@@ -73,6 +80,19 @@
         [self.infoView addSubview:imageView];
         [self.infoView addSubview:lineView];
     }
+    
+    if ([self.navigationItem.title isEqualToString:@"编辑地址"]) {
+        UITextField *nameTextField = (UITextField *)[self.infoView viewWithTag:1];
+        UITextField *phoneNumTextField = (UITextField *)[self.infoView viewWithTag:2];
+        UIButton *addressButton = (UIButton *)[self.view viewWithTag:3];
+        UITextField *addressTitleTextField = (UITextField *)[self.view viewWithTag:4];
+        nameTextField.text = self.addressModel.name;
+        phoneNumTextField.text = self.addressModel.tel;
+        [addressButton setTitle:self.addressModel.address_title forState:UIControlStateNormal];
+        [addressButton setTitleColor:[UIColor colorGloomyColor] forState:UIControlStateNormal];
+        addressTitleTextField.text = self.addressModel.address;
+        
+    }
 }
 
 -(void)createBottomView{
@@ -100,8 +120,13 @@
     UITextField *phoneNumTextField = (UITextField *)[self.infoView viewWithTag:2];
     UIButton *addressButton = (UIButton *)[self.view viewWithTag:3];
     UITextField *addressTitleTextField = (UITextField *)[self.view viewWithTag:4];
+    
     if (nameTextField.text.length&&phoneNumTextField.text.length&&addressButton.titleLabel.text.length&&addressTitleTextField.text.length) {
-        [self saveAddress];
+        if ([self.navigationItem.title isEqualToString:@"编辑地址"]) {
+            [self editeAddress];
+        }else{
+          [self saveAddress];
+        }
     }else if (!nameTextField.text.length){
         [ODProgressHUD showInfoWithStatus:@"请输入姓名"];
     }else if (!phoneNumTextField.text.length){
@@ -133,11 +158,11 @@
     if (isClick) {
         self.imageView.image = [UIImage imageNamed:@"icon_Default address_Selected"];
         isClick = NO;
-        self.isDefault = @"1";
+        self.is_default = @"1";
     }else{
         self.imageView.image = [UIImage imageNamed:@"icon_Default address_default"];
         isClick = YES;
-        self.isDefault = @"0";
+        self.is_default = @"0";
     }
 }
 
@@ -153,19 +178,55 @@
                                  @"name" : nameTextField.text,
                                  @"lat":[NSString stringWithFormat:@"%f",self.location.latitude],
                                  @"lng":[NSString stringWithFormat:@"%f",self.location.longitude],
-                                 @"is_default":self.isDefault,
+                                 @"is_default":self.is_default,
                                  };
     
     __weakSelf
     [ODHttpTool getWithURL:ODUrlUserAddressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
-        [weakSelf.navigationController popViewControllerAnimated:YES];
         [ODProgressHUD showInfoWithStatus:@"保存成功"];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
+
+    } failure:^(NSError *error) {
+        
+        
+    }];
+}
+
+- (void)editeAddress {
+    UITextField *nameTextField = (UITextField *)[self.infoView viewWithTag:1];
+    UITextField *phoneNumTextField = (UITextField *)[self.infoView viewWithTag:2];
+    UIButton *addressButton = (UIButton *)[self.view viewWithTag:3];
+    UITextField *addressTitleTextField = (UITextField *)[self.view viewWithTag:4];
+    NSDictionary *parameters = @{
+                                 @"user_address_id" : self.addressId,
+                                 @"tel" : phoneNumTextField.text,
+                                 @"address" : addressTitleTextField.text,
+                                 @"address_title":addressButton.titleLabel.text,
+                                 @"name" : nameTextField.text,
+                                 @"lat":[NSString stringWithFormat:@"%@",self.addressModel.lat],
+                                 @"lng":[NSString stringWithFormat:@"%@",self.addressModel.lng],
+                                 @"is_default" : self.is_default,
+                              
+                                 };
+    __weakSelf
+    [ODHttpTool getWithURL:ODUrlUserAddressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
+        [ODProgressHUD showInfoWithStatus:@"编辑成功"];
+        [weakSelf.navigationController popViewControllerAnimated:YES];
     } failure:^(NSError *error) {
         
         
     }];
     
-    
+}
+
+-(void)notificationClick:(NSNotification *)text{
+    UIButton *addressButton = (UIButton *)[self.view viewWithTag:3];
+    UITextField *addressTitleTextField = (UITextField *)[self.view viewWithTag:4];
+    [addressButton setTitle:text.userInfo[@"name"] forState:UIControlStateNormal];
+    [addressButton setTitleColor:[UIColor colorGloomyColor] forState:UIControlStateNormal];
+    addressTitleTextField.text = text.userInfo[@"address"];
+    self.location = text.userInfo[@"location"];
+
 }
 
 @end

@@ -7,9 +7,12 @@
 //
 
 #import "ODBaseViewController.h"
+#import <AMapSearchKit/AMapSearchKit.h>
 
 @interface ODKeywordsSearchViewController : ODBaseViewController
 
 @property (nonatomic ,copy) NSString *city;
+
+@property(nonatomic, copy) void(^myBlock)(NSString *address,NSString *addressTitle,AMapGeoPoint *location);
 
 @end

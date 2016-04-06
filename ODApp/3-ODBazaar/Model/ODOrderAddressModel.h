@@ -21,6 +21,12 @@
 
 @property (nonatomic, copy) NSString *tel;
 
+@property (nonatomic, copy) NSString *address_title;
+
+@property (nonatomic, copy) NSString *lat;
+
+@property (nonatomic, copy) NSString *lng;
+
 @end
 
 
