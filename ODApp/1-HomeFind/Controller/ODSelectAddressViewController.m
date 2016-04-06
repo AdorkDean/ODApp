@@ -5,7 +5,7 @@
 //  Created by Odong-YG on 16/4/1.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
-
+#import "masonry.h"
 #import "ODSelectAddressViewController.h"
 #import "ODSelectAddressCell.h"
 #import <MAMapKit/MAMapKit.h>
@@ -78,6 +78,13 @@ static NSString *cellId = @"ODSelectAddressCell";
     self.mapSearchAPI = [[AMapSearchAPI alloc] init];
     self.mapSearchAPI.delegate = self;
     [self.view addSubview:self.mapView];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setImage:[UIImage imageNamed:@"icon_location_origin"] forState:UIControlStateNormal];
+    [btn sizeToFit];
+    btn.frame = CGRectMake(20, 200, btn.od_width, btn.od_height);
+    [btn addTarget:self action:@selector(backToOrigin) forControlEvents:UIControlEventTouchUpInside];
+    [self.mapView addSubview:btn];
     
     [self createImageView];
 }
@@ -238,7 +245,9 @@ static NSString *cellId = @"ODSelectAddressCell";
     [self.navigationController pushViewController:keywords animated:YES];
 }
 
-
-
-
+- (void)backToOrigin
+{
+    self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;
+    [self.mapView setZoomLevel:20 animated:YES];
+}
 @end
