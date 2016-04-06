@@ -424,7 +424,7 @@
 - (void)addressAction {
     ODContactAddressController *vc = [[ODContactAddressController alloc] init];
     
-    __weakSelf
+//    __weakSelf
 //    vc.getAddressBlock = ^(NSString *address, NSString *addrssId, NSString *isAddress) {
 //        
 //        if ([isAddress isEqualToString:@"1"]) {
