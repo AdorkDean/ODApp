@@ -5,7 +5,7 @@
 //  Created by Odong-YG on 16/4/5.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
-
+#import "IQKeyboardManager.h"
 #import "ODKeywordsSearchViewController.h"
 #import "ODAddressKeywordCell.h"
 #import <AMapSearchKit/AMapSearchKit.h>
@@ -52,7 +52,17 @@ static NSString *cellId = @"ODAddressKeywordCell";
     self.mapSearchAPI.delegate = self;
 }
 
-
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[IQKeyboardManager sharedManager]setEnable:NO];
+    [self.textField becomeFirstResponder];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [self.textField resignFirstResponder];
+}
 #pragma mark - 初始胡导航
 -(void)navigationInit{
     
@@ -120,6 +130,10 @@ static NSString *cellId = @"ODAddressKeywordCell";
         }
     }
     
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    [self.view endEditing:YES];
 }
 
 

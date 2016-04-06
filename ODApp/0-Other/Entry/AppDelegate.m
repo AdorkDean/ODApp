@@ -65,7 +65,7 @@ void UncaughtExceptionHandler(NSException *exception) {
     // 根据需求选择根控制器
     self.window.rootViewController = [ODGuideTool chooseRootViewController];
     
-//    [ODAppRegister registIQKeyboardManager];
+    [ODAppRegister registIQKeyboardManager];
     
     [ODAppRegister registUMSocial];
     
