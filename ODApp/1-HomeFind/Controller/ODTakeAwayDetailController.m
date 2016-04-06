@@ -29,6 +29,9 @@
 @property(nonatomic, copy) NSString *isPay;
 
 @property (nonatomic, weak) ODShopCartView *shopCart;
+
+@property (nonatomic, assign, getter = isOrder) BOOL order;
+
 @end
 
 @implementation ODTakeAwayDetailController
@@ -150,14 +153,20 @@
 #pragma mark - IBActions
 - (void)clearShopNumber:(NSNotification *)note
 {
+    self.order = YES;
     self.takeOut.shopNumber = 0;
 }
 
 - (void)pop
 {
-    // 退出购物车
-    [self.shopCart dismiss];
-    [self.navigationController popViewControllerAnimated:YES];
+    if (self.order) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    } else {
+        // 退出购物车
+        [self.shopCart dismiss];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
 }
 
 - (void)h5addShopNumber:(NSNotification *)note
