@@ -63,10 +63,25 @@ static NSString *cellId = @"ODConfirmOrderCell";
     self.tradeType = @"1";
     self.navigationItem.title = @"确认订单";
     [self requestData];
+    
+    
+    // 支付完成后, 清空购物车
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanCache:) name:ODNotificationPaySuccess object:nil];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)cleanCache:(NSNotification *)note
+{
+    // 移除缓存
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    [user removeObjectForKey:@"shopCount"];
+    [user removeObjectForKey:@"totalPrice"];
+    [user removeObjectForKey:@"shopCarts"];
+    [user synchronize];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)createTableHeaderView{
