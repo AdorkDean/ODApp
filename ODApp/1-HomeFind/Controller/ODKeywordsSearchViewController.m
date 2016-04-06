@@ -9,6 +9,7 @@
 #import "ODKeywordsSearchViewController.h"
 #import "ODAddressKeywordCell.h"
 #import <AMapSearchKit/AMapSearchKit.h>
+#import "ODAddNewAddressViewController.h"
 
 static NSString *cellId = @"ODAddressKeywordCell";
 
@@ -71,7 +72,10 @@ static NSString *cellId = @"ODAddressKeywordCell";
     [view addSubview:self.textField];
     self.navigationItem.titleView = view;
 }
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    NSLogFunc
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -84,7 +88,7 @@ static NSString *cellId = @"ODAddressKeywordCell";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ODAddressKeywordCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleGray;
     [cell showDataWithAMapPOI:self.dataArray[indexPath.row] index:indexPath];
     return cell;
 }
@@ -94,10 +98,29 @@ static NSString *cellId = @"ODAddressKeywordCell";
     return 50;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 60;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    
+    AMapPOI *poi = self.dataArray [indexPath.row];
+    
+    NSDictionary *dict = @{@"name":poi.name,@"address":poi.address,@"location":poi.location};
+    [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationAddAddress object:self userInfo:dict];
+    //    if (self.myBlock) {
+    //        self.myBlock(poi.name,poi.address,poi.location);
+    //    }
+    //
+    for (UIViewController *vc in self.navigationController.childViewControllers) {
+        if ([NSStringFromClass([vc class]) isEqualToString:NSStringFromClass([ODAddNewAddressViewController class])]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            break;
+        }
+    }
+    
+}
 
 
 - (void)onPOISearchDone:(AMapPOIKeywordsSearchRequest *)request response:(AMapPOISearchResponse *)response {

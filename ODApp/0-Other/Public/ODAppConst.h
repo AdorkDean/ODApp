@@ -95,6 +95,8 @@ UIKIT_EXTERN NSString * const ODNotificationloveSkill;
 /** 刷新任务发布及回复*/
 UIKIT_EXTERN NSString * const ODNotificationRefreshTask;
 
+/** 添加地址通知*/
+UIKIT_EXTERN NSString * const ODNotificationAddAddress;
 
 #pragma mark - 购物车通知
 /** 购物车添加商品数量通知 */

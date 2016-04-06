@@ -190,10 +190,12 @@
         imageUrl = [imageUrl substringWithRange:range];
         NSData *imageData;
         self.pickedImage = info[UIImagePickerControllerOriginalImage];
-        if ([imageUrl.lowercaseString isEqualToString:@"jpg"]) {
-            self.pickedImage =  [UIImage od_scaleImage:self.pickedImage];
+        if ([imageUrl.lowercaseString isEqualToString:@"jpg"]) {    // JPG
+            self.pickedImage = [UIImage od_scaleImage:self.pickedImage];
             imageData = UIImageJPEGRepresentation(self.pickedImage, 0.3);
-        }else {
+        } else if (!imageUrl.length) { // 拍照
+            imageData = UIImageJPEGRepresentation(self.pickedImage, 0.3);
+        } else {    // 其他类型 : bmp...
             imageData = UIImagePNGRepresentation(self.pickedImage);
         }
         NSString *str = @"data:image/jpeg;base64,";

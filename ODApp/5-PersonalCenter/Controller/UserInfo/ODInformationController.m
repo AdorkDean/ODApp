@@ -244,9 +244,11 @@
         NSData *imageData;
         self.image = info[UIImagePickerControllerEditedImage];
         self.image =  [UIImage od_scaleImage:self.image];
-        if ([imageUrl.lowercaseString isEqualToString:@"jpg"]) {
+        if ([imageUrl.lowercaseString isEqualToString:@"jpg"]) {    // JPG
             imageData = UIImageJPEGRepresentation(self.image, 0.3);
-        }else {
+        } else if (!imageUrl.length) { // 拍照
+            imageData = UIImageJPEGRepresentation(self.image, 0.3);
+        } else {    // 其他类型 : bmp...
             imageData = UIImagePNGRepresentation(self.image);
         }
         NSString *str = @"data:image/jpeg;base64,";
