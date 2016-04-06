@@ -59,11 +59,7 @@
         [self.takeOutContentView addSubview:takeOutNumberLabel];
     }
     
-    NSString *money = [NSString stringWithFormat:@"合计 ￥%.2f",model.price_show];
-    NSString *intStr = [money substringWithRange:NSMakeRange(money.length - 3, 3)];
-    if ([intStr isEqualToString:@".00"]) {
-        money = [money substringWithRange:NSMakeRange(0, money.length - 3)];
-    }
+    NSString *money = [NSString stringWithFormat:@"合计 ￥%@",model.price_show];
     NSMutableAttributedString *moneyStr = [[NSMutableAttributedString alloc] initWithString:money];
     [moneyStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.5] range:NSMakeRange(0, 2)];
     
