@@ -9,6 +9,7 @@
 #import "ODAddNewAddressViewController.h"
 #import "ODSelectAddressViewController.h"
 #import <AMapSearchKit/AMapSearchKit.h>
+#import "ODConfirmOrderViewController.h"
 
 @interface ODAddNewAddressViewController ()
 
@@ -17,6 +18,8 @@
 @property(nonatomic,strong)AMapGeoPoint *location;
 @property(nonatomic,copy)NSString *is_default;
 @property(nonatomic)BOOL isLocation;
+
+@property (nonatomic, copy) NSString *address_id;
 
 @end
 
@@ -34,6 +37,10 @@
     [self createBottomView];
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(notificationClick:) name:ODNotificationAddAddress object:nil];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -208,8 +215,10 @@
     __weakSelf
     [ODHttpTool getWithURL:ODUrlUserAddressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
         [ODProgressHUD showInfoWithStatus:@"保存成功"];
-        [weakSelf.navigationController popViewControllerAnimated:YES];
-
+        ODConfirmOrderViewController *vc = weakSelf.navigationController.childViewControllers[2];
+        NSMutableDictionary *dict = model;
+        [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationSaveAddress object:self userInfo:dict];
+        [weakSelf.navigationController popToViewController:vc animated:YES];
     } failure:^(NSError *error) {
         
         
@@ -235,7 +244,10 @@
     __weakSelf
     [ODHttpTool getWithURL:ODUrlUserAddressEdit parameters:parameters modelClass:[NSObject class] success:^(id model) {
         [ODProgressHUD showInfoWithStatus:@"编辑成功"];
-        [weakSelf.navigationController popViewControllerAnimated:YES];
+        ODConfirmOrderViewController *vc = weakSelf.navigationController.childViewControllers[2];
+        NSMutableDictionary *dict = model;
+        [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationSaveAddress object:self userInfo:dict];
+        [weakSelf.navigationController popToViewController:vc animated:YES];
     } failure:^(NSError *error) {
         
         
@@ -250,6 +262,7 @@
     [addressButton setTitleColor:[UIColor colorGloomyColor] forState:UIControlStateNormal];
     addressTitleTextField.text = text.userInfo[@"address"];
     self.location = text.userInfo[@"location"];
+    self.isLocation = YES;
 
 }
 
