@@ -61,6 +61,7 @@ static NSString *cellId = @"ODAddressKeywordCell";
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [[IQKeyboardManager sharedManager]setEnable:YES];
     [self.textField resignFirstResponder];
 }
 #pragma mark - 初始胡导航
@@ -106,10 +107,6 @@ static NSString *cellId = @"ODAddressKeywordCell";
 #pragma mark - UITabeleDelegate
 -(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     return 50;
-}
-
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
