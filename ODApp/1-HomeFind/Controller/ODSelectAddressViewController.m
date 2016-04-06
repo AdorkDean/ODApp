@@ -97,6 +97,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 #pragma mark - 初始胡导航
 -(void)navigationInit{
     
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGestureClick:)];
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width-100, 30)];
     view.layer.masksToBounds = YES;
