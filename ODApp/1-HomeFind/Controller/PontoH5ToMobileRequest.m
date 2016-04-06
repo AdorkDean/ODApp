@@ -38,10 +38,7 @@
         if ([ODUserInformation sharedODUserInformation].openID.length == 0) {
             ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
             [navVc presentViewController:vc animated:YES completion:nil];
-        }
-        else {
-//            ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc]init];
-//            [navVc pushViewController:vc animated:YES];
+        } else {
             // 给购物车添加东西
             [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartAddNumber object:self];
         }
@@ -55,17 +52,14 @@
                                 };
     [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parameter modelClass:[NSObject class] success:^(id model) {
         NSLog(@"12333333");
-    }
-                   failure:^(NSError *error) {
-                       
-                   }];
+    } failure:^(NSError *error) {
+    }];
 }
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 #pragma mark - 订单详情
 

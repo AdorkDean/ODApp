@@ -30,8 +30,6 @@
 
 @property (nonatomic, weak) ODShopCartView *shopCart;
 
-@property (nonatomic, assign, getter = isOrder) BOOL order;
-
 @end
 
 @implementation ODTakeAwayDetailController
@@ -54,10 +52,6 @@
     [self.shopCart removeFromSuperview];
     
     [MobClick endLogPageView:NSStringFromClass([self class])];
-    if (![[self.navigationController viewControllers] containsObject: self])
-    {
-        [self.shopCart dismiss];
-    }
 }
 
 - (void)viewDidLoad {
@@ -82,13 +76,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(h5addShopNumber:) name:ODNotificationShopCartAddNumber object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(successPay:) name:ODNotificationPaySuccess object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failPay:) name:ODNotificationPayfail object:nil];
-    // 退出时退出购物车
-    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(pop) color:nil highColor:nil title:@"返回"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartRemoveALL object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartminusNumber object:nil];
-    // 支付完成后, 清空购物车
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationPaySuccess object:nil];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationPaySuccess object:nil];
 }
 
 - (void)dealloc
@@ -153,20 +145,7 @@
 #pragma mark - IBActions
 - (void)clearShopNumber:(NSNotification *)note
 {
-    self.order = YES;
     self.takeOut.shopNumber = 0;
-}
-
-- (void)pop
-{
-    if (self.order) {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    } else {
-        // 退出购物车
-        [self.shopCart dismiss];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    
 }
 
 - (void)h5addShopNumber:(NSNotification *)note
