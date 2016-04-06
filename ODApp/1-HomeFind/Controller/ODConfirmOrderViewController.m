@@ -16,6 +16,7 @@
 #import "ODMyTakeOutModel.h"
 #import "ODTakeOutConfirmModel.h"
 #import "ODContactAddressController.h"
+#import "ODShopCartView.h"
 #import "ODOrderAddressModel.h"
 
 static NSString *cellId = @"ODConfirmOrderCell";
@@ -68,25 +69,6 @@ static NSString *cellId = @"ODConfirmOrderCell";
     self.tradeType = @"1";
     self.navigationItem.title = @"确认订单";
     [self requestData];
-    
-    
-    // 支付完成后, 清空购物车
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanCache:) name:ODNotificationPaySuccess object:nil];
-}
-
-- (void)cleanCache:(NSNotification *)note
-{
-    // 移除缓存
-    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
-    [user removeObjectForKey:@"shopCount"];
-    [user removeObjectForKey:@"totalPrice"];
-    [user removeObjectForKey:@"shopCarts"];
-    [user synchronize];
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)createTableHeaderView{
@@ -295,10 +277,13 @@ static NSString *cellId = @"ODConfirmOrderCell";
                                     @"takeout_order_id" : strongSelf.confirmModel.order_id
                                     };
          [strongSelf getWeiXinDataWithParam:strongSelf.successParams];
+         
+         // 清空购物车
+         ODShopCartView *view = [ODShopCartView shopCart];
+         [view shopCartHeaderViewDidClickClearButton:nil];
      }
                    failure:^(NSError *error)
      {
-        
     }];
 }
 

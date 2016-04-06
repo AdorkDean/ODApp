@@ -30,7 +30,6 @@
 - (void)addToCart:(id)params {
     if ([params isKindOfClass:[NSDictionary class]]) {
         NSLog(@"params------->%@",params[@"id"]);
-        [self buyNowRequestData:params[@"id"]];
         
         UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
         UINavigationController *navVc = tabBarVc.selectedViewController;
@@ -38,34 +37,17 @@
         if ([ODUserInformation sharedODUserInformation].openID.length == 0) {
             ODPersonalCenterViewController *vc = [[ODPersonalCenterViewController alloc] init];
             [navVc presentViewController:vc animated:YES completion:nil];
-        }
-        else {
-//            ODConfirmOrderViewController *vc = [[ODConfirmOrderViewController alloc]init];
-//            [navVc pushViewController:vc animated:YES];
+        } else {
             // 给购物车添加东西
             [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartAddNumber object:self];
         }
     }
 }
 
-- (void)buyNowRequestData:(NSString *)paramasId {
-    NSDictionary *parameter = @{
-                                @"object_type" : @"1",
-                                @"object_id" :[NSString stringWithFormat:@"%@", paramasId]
-                                };
-    [ODHttpTool getWithURL:ODUrlShopcartOrder parameters:parameter modelClass:[NSObject class] success:^(id model) {
-        NSLog(@"12333333");
-    }
-                   failure:^(NSError *error) {
-                       
-                   }];
-}
-
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 #pragma mark - 订单详情
 

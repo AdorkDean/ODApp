@@ -507,54 +507,53 @@
         }
     }
     if ([button.titleLabel.text isEqualToString:@"编辑"]) {
-        NSDictionary *parameter;
+        NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
+        
+        
         if (self.timeArray.count) {
-            parameter = @{
-                          @"swap_id":self.swap_id,
-                          @"title":self.titleTextField.text,
-                          @"content":self.contentTextView.text,
-                          @"swap_type":self.swap_type,
-                          @"price":self.priceTextField.text,
-                          @"unit":self.unitTextField.text,
-                          @"schedule":[self.timeArray od_desc],
-                          @"imgs":imageStr,
-                          };
+            
+            parameter[@"swap_id"] = self.swap_id;
+            parameter[@"title"] = self.titleTextField.text;
+            parameter[@"content"] = self.contentTextView.text;
+            parameter[@"swap_type"] = self.swap_type;
+            parameter[@"price"] = self.priceTextField.text;
+            parameter[@"unit"] = self.unitTextField.text;            
+            parameter[@"imgs"] = imageStr;
+            parameter[@"schedule"] = [self.timeArray od_desc];
         }else{
             NSMutableArray *array = [ODBazaarReleaseSkillTimeModel mj_keyValuesArrayWithObjectArray:self.editTimeArray];
-            parameter = @{
-                          @"swap_id":self.swap_id,
-                          @"title":self.titleTextField.text,
-                          @"content":self.contentTextView.text,
-                          @"swap_type":self.swap_type,
-                          @"price":self.priceTextField.text,
-                          @"unit":self.unitTextField.text,
-                          @"schedule":[array od_desc],
-                          @"imgs":imageStr,
-                          };
+            
+            parameter[@"swap_id"] = self.swap_id;
+            parameter[@"title"] = self.titleTextField.text;
+            parameter[@"content"] = self.contentTextView.text;
+            parameter[@"swap_type"] = self.swap_type;
+            parameter[@"price"] = self.priceTextField.text;
+            parameter[@"unit"] = self.unitTextField.text;
+            parameter[@"imgs"] = imageStr;
+            parameter[@"schedule"] = [array od_desc];
         }
         [self pushDataWithUrl:ODUrlSwapEdit parameter:parameter isEdit:YES];
     }else{
-        NSDictionary *parameter;
+        NSMutableDictionary *parameter = [NSMutableDictionary dictionary];
         if ([self.swap_type isEqualToString:@"1"]||[self.swap_type isEqualToString:@"3"]) {
-            parameter = @{
-                          @"title":self.titleTextField.text,
-                          @"content":self.contentTextView.text,
-                          @"swap_type":self.swap_type,
-                          @"price":self.priceTextField.text,
-                          @"unit":self.unitTextField.text,
-                          @"schedule":[self.timeArray od_desc],
-                          @"imgs":imageStr,
-                          };
+            
+            parameter[@"title"] = self.titleTextField.text;
+            parameter[@"content"] = self.contentTextView.text;
+            parameter[@"swap_type"] = self.swap_type;
+            parameter[@"price"] = self.priceTextField.text;
+            parameter[@"unit"] = self.unitTextField.text;
+            parameter[@"schedule"] = [self.timeArray od_desc];
+            parameter[@"imgs"] = imageStr;
+            
         }else if ([self.swap_type isEqualToString:@"2"]){
-            parameter = @{
-                          @"title":self.titleTextField.text,
-                          @"content":self.contentTextView.text,
-                          @"swap_type":self.swap_type,
-                          @"price":self.priceTextField.text,
-                          @"unit":self.unitTextField.text,
-                          @"schedule":@"",
-                          @"imgs":imageStr
-                          };
+            
+            parameter[@"title"] = self.titleTextField.text;
+            parameter[@"content"] = self.contentTextView.text;
+            parameter[@"swap_type"] = self.swap_type;
+            parameter[@"price"] = self.priceTextField.text;
+            parameter[@"unit"] = self.unitTextField.text;
+            parameter[@"schedule"] = @"";
+            parameter[@"imgs"] = imageStr;
         }
         [self pushDataWithUrl:ODUrlSwapCreate parameter:parameter isEdit:NO];
     }
@@ -662,6 +661,12 @@ NSString *skillContentText = @"";
 }
 
 -(void)serviceButtonClick:(UIButton *)button{
+    
+    [self.titleTextField resignFirstResponder];
+    [self.contentTextView resignFirstResponder];
+    [self.priceTextField resignFirstResponder];
+    [self.unitTextField resignFirstResponder];
+    
     NSInteger width = (kScreenSize.width-35-30)/4;
     NSArray *selectedArray = @[@"button_Home service_Selected",@"button_Online service_Selected",@"button_Express delivery_Selected"];
     NSArray *array = @[@"button_Home service_default",@"button_Online service_default",@"button_Express delivery_default"];

@@ -53,7 +53,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5n-LJ-wfb" userLabel="总价格">
-                            <rect key="frame" x="66" y="14" width="10.5" height="20.5"/>
+                            <rect key="frame" x="68" y="14" width="10.5" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
@@ -69,7 +69,7 @@
                         <constraint firstItem="U5n-LJ-wfb" firstAttribute="baseline" secondItem="sXd-pC-4x8" secondAttribute="baseline" id="a5O-Q3-dyz"/>
                         <constraint firstItem="sXd-pC-4x8" firstAttribute="leading" secondItem="aYG-Md-DCa" secondAttribute="trailing" constant="17.5" id="nxO-8T-TqP"/>
                         <constraint firstItem="sXd-pC-4x8" firstAttribute="top" secondItem="k6G-yf-ePx" secondAttribute="centerY" id="pim-4N-qxC"/>
-                        <constraint firstItem="U5n-LJ-wfb" firstAttribute="leading" secondItem="sXd-pC-4x8" secondAttribute="trailing" id="rAs-WZ-WlU"/>
+                        <constraint firstItem="U5n-LJ-wfb" firstAttribute="leading" secondItem="sXd-pC-4x8" secondAttribute="trailing" constant="2" id="rAs-WZ-WlU"/>
                         <constraint firstItem="sXd-pC-4x8" firstAttribute="leading" secondItem="k6G-yf-ePx" secondAttribute="trailing" constant="12.5" id="y2l-CK-mdH"/>
                     </constraints>
                     <variation key="default">

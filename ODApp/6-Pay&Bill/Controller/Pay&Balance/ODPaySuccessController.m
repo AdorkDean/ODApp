@@ -40,8 +40,9 @@
         make.right.equalTo(self.view).with.offset(0);
         make.bottom.equalTo(self.view).with.offset(0);
     }];
+    
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(goOther:) color:nil highColor:nil title:@"返回"];
 }
-
 
 #pragma mark - 懒加载
 
