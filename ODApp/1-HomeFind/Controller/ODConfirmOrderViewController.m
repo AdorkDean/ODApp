@@ -229,12 +229,19 @@ static NSString *cellId = @"ODConfirmOrderCell";
         [ODProgressHUD showInfoWithStatus:@"没有安装微信"];
         return;
     }
+    NSString *remarkStr;
+    if (self.remarkDetailLabel.text.length != 0) {
+        remarkStr = self.remarkDetailLabel.text;
+    }
+    else {
+        remarkStr = @"";
+    }
     NSDictionary *successParams = @{
                                 @"address_id":@"1",
                                 @"price_show":[NSString
                                                stringWithFormat:@"%f", self.count],
                                 @"pay_type":@"2",
-                                @"remark":self.remarkDetailLabel.text,
+                                @"remark":remarkStr,
                                 @"shopcart_ids":[[self.dataArray valueForKeyPath:@"id"]enumerateString]
                                 };
     __weakSelf
