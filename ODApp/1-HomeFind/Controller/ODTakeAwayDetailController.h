@@ -20,11 +20,6 @@
 @property (nonatomic, strong) NSString *takeAwayTitle;
 
 /**
- * 是否是购物车
- */
-@property (nonatomic, assign) BOOL isCart;
-
-/**
  * 是否是订单详情
  */
 @property (nonatomic, assign) BOOL isOrderDetail;
