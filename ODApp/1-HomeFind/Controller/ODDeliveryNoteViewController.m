@@ -42,11 +42,9 @@
     
     
     self.label = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, kScreenSize.width-20, 20)];
-    
     if (self.noteContent.length != 0) {
         self.textView.text = self.noteContent;
-    }
-    else {
+    } else {
         self.label.text = @"请输入备注内容";
     }
 

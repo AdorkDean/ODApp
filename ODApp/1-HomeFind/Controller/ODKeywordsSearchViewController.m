@@ -24,7 +24,7 @@ static NSString *cellId = @"ODAddressKeywordCell";
 @end
 
 @implementation ODKeywordsSearchViewController
-#pragma lazyload
+#pragma  mark - lazyload
 -(UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64) style:UITableViewStylePlain];
@@ -44,53 +44,52 @@ static NSString *cellId = @"ODAddressKeywordCell";
     return _dataArray;
 }
 
+
+#pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     [self navigationInit];
     self.mapSearchAPI = [[AMapSearchAPI alloc] init];
     self.mapSearchAPI.delegate = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[IQKeyboardManager sharedManager]setEnable:NO];
     [self.textField becomeFirstResponder];
 }
-- (void)viewWillDisappear:(BOOL)animated
-{
+
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [[IQKeyboardManager sharedManager]setEnable:YES];
     [self.textField resignFirstResponder];
 }
+
 #pragma mark - 初始胡导航
 -(void)navigationInit{
-    
-    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width-100, 30)];
-    view.layer.masksToBounds = YES;
-    view.layer.cornerRadius = 5;
-    view.backgroundColor = [UIColor whiteColor];
-    
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(15, 5, 20, 20)];
-    imageView.image = [UIImage imageNamed:@"icon_search"];
-    [view addSubview:imageView];
-    
-    self.textField = [[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(imageView.frame)+15, 0, view.frame.size.width-50, 30)];
+    self.textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width-70, 30)];
     self.textField.placeholder = @"请输入你的地址";
+    self.textField.font = [UIFont systemFontOfSize:15];
     self.textField.delegate = self;
+    self.textField.backgroundColor = [UIColor whiteColor];
+    self.textField.layer.masksToBounds = YES;
+    self.textField.layer.cornerRadius = 5;
     [self.textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-    [view addSubview:self.textField];
-    self.navigationItem.titleView = view;
+
+    UIImageView *searchIcon = [[UIImageView alloc]init];
+    searchIcon.image = [UIImage imageNamed:@"icon_search"];
+    searchIcon.contentMode = UIViewContentModeCenter;
+    searchIcon.od_size = CGSizeMake(30,30);
+    
+    self.textField.leftView = searchIcon;
+    self.textField.leftViewMode = UITextFieldViewModeAlways;
+    self.navigationItem.titleView = self.textField;
 }
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     NSLogFunc
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
 
 #pragma mark - UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -99,8 +98,8 @@ static NSString *cellId = @"ODAddressKeywordCell";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ODAddressKeywordCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    cell.selectionStyle = UITableViewCellSelectionStyleGray;
-    [cell showDataWithAMapPOI:self.dataArray[indexPath.row] index:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell showDataWithAMapPOI:self.dataArray[indexPath.row]];
     return cell;
 }
 
@@ -111,7 +110,6 @@ static NSString *cellId = @"ODAddressKeywordCell";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    
     AMapPOI *poi = self.dataArray [indexPath.row];
     NSDictionary *dict = @{@"name":poi.name,@"address":poi.address,@"location":poi.location};
     [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationAddAddress object:self userInfo:dict];
@@ -121,14 +119,9 @@ static NSString *cellId = @"ODAddressKeywordCell";
             break;
         }
     }
-    
 }
 
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self.view endEditing:YES];
-}
-
-
+#pragma mark - AMapSearchDelegate
 - (void)onPOISearchDone:(AMapPOIKeywordsSearchRequest *)request response:(AMapPOISearchResponse *)response {
     [self.dataArray removeAllObjects];
     if (response.pois.count == 0) {
@@ -140,16 +133,15 @@ static NSString *cellId = @"ODAddressKeywordCell";
     [self.tableView reloadData];
 }
 
-
+#pragma mark - UITextFiledDelegate
 -(void)textFieldDidChange:(UITextField *)textField{
     AMapPOIKeywordsSearchRequest *request = [[AMapPOIKeywordsSearchRequest alloc] init];
     request.keywords = textField.text;
     request.sortrule = 0;
     request.requireExtension = YES;
-    request.city = self.city;
+    request.city = [[ODUserInformation sharedODUserInformation]locationCity];
     //发起周边搜索
     [self.mapSearchAPI AMapPOIKeywordsSearch:request];
-
 }
 
 
