@@ -35,7 +35,6 @@
 }
 
 - (void)judgeSwapType {
-    
     if (self.swap_type == 1) {
         self.swapType = @"上门服务";
         [self createServeWayView];
@@ -48,16 +47,12 @@
         [self createServeWayView];
         self.addressY = 44;
         [self createAddressView];
-        
     }
     else {
         self.swapType = @"线上服务";
         [self createServeWayView];
         [self createcserveTimeView];
     }
-    
-    
-    
 }
 
 - (void)createServeWayView {
