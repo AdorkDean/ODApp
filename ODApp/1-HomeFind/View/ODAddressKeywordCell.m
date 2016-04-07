@@ -13,9 +13,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
    self.lineView.backgroundColor = [UIColor lineColor];
+    self.titleLabel.textColor = [UIColor colorWithRGBString:@"#000000"];
+    self.detailLabel.textColor = [UIColor colorGreyColor];
 }
 
--(void)showDataWithAMapPOI:(AMapPOI *)poi index:(NSIndexPath *)index{
+-(void)showDataWithAMapPOI:(AMapPOI *)poi{
     self.titleLabel.text = poi.name;
     self.detailLabel.text = poi.address;
 }

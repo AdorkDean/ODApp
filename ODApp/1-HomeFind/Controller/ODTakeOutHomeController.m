@@ -285,11 +285,9 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 {
     self.type = @(index);
     self.page = @1;
-    [self loadNewTakeOuts];
     // 设置tableView偏移量
-    CGPoint point = self.tableView.contentOffset;
-    point.y = 0;
-    [self.tableView setContentOffset:point animated:YES];
+    [self loadNewTakeOuts];
+    self.tableView.contentOffset = CGPointZero;
 }
 
 #pragma mark - ODTakeOutCellDelegate

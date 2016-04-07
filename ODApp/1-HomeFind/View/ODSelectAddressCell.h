@@ -13,7 +13,7 @@
 @interface ODSelectAddressCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *detailAddressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 
 -(void)showDataWithAMapPOI:(AMapPOI *)poi index:(NSIndexPath *)index;

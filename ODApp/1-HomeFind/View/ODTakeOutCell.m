@@ -15,7 +15,6 @@
 @interface ODTakeOutCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *shopImageView;
-
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 /** 优惠价格 */
 @property (weak, nonatomic) IBOutlet UILabel *discountPriceLabel;
@@ -23,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *originalPriceLabel;
 /** 购买按钮 */
 @property (weak, nonatomic) IBOutlet UIButton *buyButton;
+
 @end
 
 @implementation ODTakeOutCell
@@ -37,8 +37,6 @@
     self.originalPriceLabel.textColor = [UIColor colorGrayColor];
     
     [self stopBlendedLayers];
-    
-    
     // 适配小屏幕
     [self sizeToFitScreen];
 }
@@ -56,10 +54,10 @@
 
 - (void)sizeToFitScreen
 {
-    if (KScreenWidth == 320) {
-        self.titleLabel.font = [UIFont systemFontOfSize:12];
-        self.discountPriceLabel.font = [UIFont systemFontOfSize:15];
-        self.originalPriceLabel.font = [UIFont systemFontOfSize:12];
+    if (KScreenWidth == 320) { // 4寸屏
+        self.titleLabel.font = [UIFont systemFontOfSize:13];
+        self.discountPriceLabel.font = [UIFont systemFontOfSize:16];
+        self.originalPriceLabel.font = self.titleLabel.font;
     }
 }
 
@@ -75,11 +73,8 @@
         weakSelf.shopImageView.image = [image od_roundedCornerImage:10.0f];
     }];
     self.titleLabel.text = datas.title;
-    
     self.discountPriceLabel.text = [NSString stringWithFormat:@"¥ %@", datas.price_show];
     self.originalPriceLabel.text = [NSString stringWithFormat:@"¥ %@", datas.price_fake];
-
-    datas.show_status = 1;
     // 设置按钮不同情况下的状态
     if (datas.show_status == ODTakeOutStatusBuy) {
         [self.buyButton setTitle:@"" forState:UIControlStateNormal];
@@ -90,18 +85,16 @@
         [self.buyButton setBackgroundImage:nil forState:UIControlStateNormal];
         [self.buyButton setTitleColor:[UIColor colorGrayColor] forState:UIControlStateNormal];
     } else {
-        
         [self.buyButton setTitle:@"已告罄" forState:UIControlStateNormal];
         [self.buyButton setBackgroundImage:nil forState:UIControlStateNormal];
         [self.buyButton setTitleColor:[UIColor colorGrayColor] forState:UIControlStateNormal];
     }
-    
     // 添加中划线
     NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
     NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc] initWithString:
                                                       self.originalPriceLabel.text attributes:attribtDic];
     self.originalPriceLabel.attributedText = attribtStr;
-    
+    // 清空购买数量
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:ODNotificationShopCartRemoveALL object:nil];
 }
 
