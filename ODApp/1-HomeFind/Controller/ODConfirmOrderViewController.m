@@ -70,13 +70,16 @@ static NSString *cellId = @"ODConfirmOrderCell";
     self.navigationItem.title = @"确认订单";
     [self requestData];
     
+    __weakSelf
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeAddress:) name:ODNotificationSaveAddress object:nil];
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationRefreshConfirmOrder object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf requestData];
+    }];
     
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self requestData];
 }
 
 -(void)createTableHeaderView{
@@ -291,7 +294,8 @@ static NSString *cellId = @"ODConfirmOrderCell";
          // 清空购物车
          ODShopCartView *view = [ODShopCartView shopCart];
          [view shopCartHeaderViewDidClickClearButton:nil];
-     }
+         
+    }
                    failure:^(NSError *error)
      {
     }];

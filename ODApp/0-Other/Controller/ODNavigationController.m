@@ -40,6 +40,12 @@
     [super pushViewController:viewController animated:animated];
 }
 
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated
+{
+    NSLog(@"%@",self.childViewControllers);
+    return [super popViewControllerAnimated:animated];
+}
+
 #pragma mark - <UIGestureRecognizerDelegate>
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer

@@ -43,6 +43,16 @@
     
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(goOther:) color:nil highColor:nil title:@"返回"];
+//    for (UIViewController *vc in self.navigationController.viewControllers)
+//    {
+//        if ([vc isKindOfClass:NSClassFromString(@"ODConfirmOrderViewController")] || [vc isKindOfClass:NSClassFromString(@"ODTakeAwayDetailController")])
+//        {
+//            [vc removeFromParentViewController];
+//        }
+//
+//    }
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(backTo) color:nil highColor:nil title:@"返回"];
 }
 
 #pragma mark - 懒加载
@@ -52,42 +62,49 @@
 
         self.paySuccessView = [ODPaySuccessView getView];
 
-        if ([self.payStatus isEqualToString:@"1"]) {
-
-            self.paySuccessView.isSuccessLabel.text = @"您的订单已支付成功";
-            self.paySuccessView.isSuccessView.image = [UIImage imageNamed:@"icon_background_"];
-            
-            [self.paySuccessView.isSuccessView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(@213);
-            }];
-
-            [self.paySuccessView.firstButton setTitle:@"订单详情" forState:UIControlStateNormal];
-            [self.paySuccessView.firstButton addTarget:self action:@selector(orderDetail:) forControlEvents:UIControlEventTouchUpInside];
-
-            [self.paySuccessView.secondButton setTitle:@"再去逛逛" forState:UIControlStateNormal];
-            [self.paySuccessView.secondButton addTarget:self action:@selector(goOther:) forControlEvents:UIControlEventTouchUpInside];
-
-        } else if ([self.payStatus isEqualToString:@"2"]) {
-
-            self.paySuccessView.isSuccessLabel.text = @"对不起您的订单支付失败";
-            self.paySuccessView.isSuccessView.image = [UIImage imageNamed:@"icon_Payment failure_background-1"];
-            
-            [self.paySuccessView.isSuccessView mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(@161);
-            }];
-
-            [self.paySuccessView.firstButton setTitle:@"重新支付" forState:UIControlStateNormal];
-            [self.paySuccessView.firstButton addTarget:self action:@selector(PayAgain:) forControlEvents:UIControlEventTouchUpInside];
-
-            [self.paySuccessView.secondButton setTitle:@"订单详情" forState:UIControlStateNormal];
-            [self.paySuccessView.secondButton addTarget:self action:@selector(orderDetail:) forControlEvents:UIControlEventTouchUpInside];
-        }
-
-
     }
     return _paySuccessView;
 }
 
+- (void)setPayStatus:(NSString *)payStatus
+{
+    if ([payStatus isEqualToString:@"1"]) {
+        
+        self.paySuccessView.isSuccessLabel.text = @"您的订单已支付成功";
+        self.paySuccessView.isSuccessView.image = [UIImage imageNamed:@"icon_background_"];
+        
+        [self.paySuccessView.isSuccessView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(@213);
+        }];
+        
+        [self.paySuccessView.firstButton setTitle:@"订单详情" forState:UIControlStateNormal];
+        [self.paySuccessView.firstButton removeTarget:self action:@selector(PayAgain:) forControlEvents:UIControlEventTouchUpInside];
+        [self.paySuccessView.firstButton addTarget:self action:@selector(orderDetail:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.paySuccessView.secondButton setTitle:@"再去逛逛" forState:UIControlStateNormal];
+        [self.paySuccessView.secondButton removeTarget:self action:@selector(orderDetail:) forControlEvents:UIControlEventTouchUpInside];
+        [self.paySuccessView.secondButton addTarget:self action:@selector(goOther:) forControlEvents:UIControlEventTouchUpInside];
+        
+    } else if ([payStatus isEqualToString:@"2"]) {
+        
+        self.paySuccessView.isSuccessLabel.text = @"对不起您的订单支付失败";
+        self.paySuccessView.isSuccessView.image = [UIImage imageNamed:@"icon_Payment failure_background-1"];
+        
+        [self.paySuccessView.isSuccessView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(@161);
+        }];
+        
+        [self.paySuccessView.firstButton setTitle:@"重新支付" forState:UIControlStateNormal];
+        [self.paySuccessView.firstButton removeTarget:self action:@selector(orderDetail:) forControlEvents:UIControlEventTouchUpInside];
+        [self.paySuccessView.firstButton addTarget:self action:@selector(PayAgain:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [self.paySuccessView.secondButton setTitle:@"订单详情" forState:UIControlStateNormal];
+        [self.paySuccessView.secondButton removeTarget:self action:@selector(goOther:) forControlEvents:UIControlEventTouchUpInside];
+
+        [self.paySuccessView.secondButton addTarget:self action:@selector(orderDetail:) forControlEvents:UIControlEventTouchUpInside];
+    }
+
+}
 
 - (void)PayAgain:(UIButton *)sender
 {
@@ -127,9 +144,7 @@
             [self.navigationController popToViewController:takeVc animated:YES];
         }
         else {
-            ODTakeOutHomeController *takeVc = [[ODTakeOutHomeController alloc]init];
             tabBar.selectedIndex = 0;
-            [tabBar.navigationController pushViewController:takeVc animated:YES];
         }
     }
     else
@@ -141,6 +156,31 @@
             tabBar.selectedIndex = 2;
             ODBazaarViewController *vc = tabBar.childViewControllers[2].childViewControllers[0];
             vc.index = 0;
+        }
+    }
+
+}
+
+- (void)backTo
+{
+    ODTabBarController *tabBar = (ODTabBarController *) self.tabBarController;
+    if ([self.tradeType isEqualToString:@"1"])
+    {
+        if (tabBar.currentIndex == 0) {
+            ODTakeOutHomeController *takeVc = self.navigationController.childViewControllers[1];
+            [self.navigationController popToViewController:takeVc animated:YES];
+        }
+        else {
+            [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
+        }
+    }
+    else
+    {
+        if (tabBar.currentIndex == 2) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+        else {
+            [self.navigationController popToViewController:self.navigationController.childViewControllers[1] animated:YES];
         }
     }
 

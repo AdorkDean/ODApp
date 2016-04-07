@@ -89,6 +89,11 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     [self.shopCart removeFromSuperview];
     
     [MobClick endLogPageView:NSStringFromClass([self class])];
+    if (![[self.navigationController viewControllers] containsObject:self])
+    {
+        // 调用方法
+        [self.shopCart removeFromSuperview];
+    }
 }
 
 - (void)viewDidLoad
@@ -281,6 +286,10 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     self.type = @(index);
     self.page = @1;
     [self loadNewTakeOuts];
+    // 设置tableView偏移量
+    CGPoint point = self.tableView.contentOffset;
+    point.y = 0;
+    [self.tableView setContentOffset:point animated:YES];
 }
 
 #pragma mark - ODTakeOutCellDelegate

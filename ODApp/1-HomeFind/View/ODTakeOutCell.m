@@ -75,11 +75,26 @@
         weakSelf.shopImageView.image = [image od_roundedCornerImage:10.0f];
     }];
     self.titleLabel.text = datas.title;
+    
     self.discountPriceLabel.text = [NSString stringWithFormat:@"¥ %@", datas.price_show];
     self.originalPriceLabel.text = [NSString stringWithFormat:@"¥ %@", datas.price_fake];
 
+    datas.show_status = 1;
     // 设置按钮不同情况下的状态
-    self.buyButton.enabled = (datas.show_status == ODTakeOutStatusBuy);
+    if (datas.show_status == ODTakeOutStatusBuy) {
+        [self.buyButton setTitle:@"" forState:UIControlStateNormal];
+        [self.buyButton setBackgroundImage:[UIImage imageNamed:@"button_purchase-1"] forState:UIControlStateNormal];
+        [self.buyButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    } else if (datas.show_status == ODTakeOutStatusEnd){
+        [self.buyButton setTitle:@"已结束" forState:UIControlStateNormal];
+        [self.buyButton setBackgroundImage:nil forState:UIControlStateNormal];
+        [self.buyButton setTitleColor:[UIColor colorGrayColor] forState:UIControlStateNormal];
+    } else {
+        
+        [self.buyButton setTitle:@"已告罄" forState:UIControlStateNormal];
+        [self.buyButton setBackgroundImage:nil forState:UIControlStateNormal];
+        [self.buyButton setTitleColor:[UIColor colorGrayColor] forState:UIControlStateNormal];
+    }
     
     // 添加中划线
     NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName:[NSNumber numberWithInteger:NSUnderlineStyleSingle]};
