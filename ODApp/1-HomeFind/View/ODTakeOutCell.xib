@@ -42,7 +42,9 @@
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <state key="normal" backgroundImage="button_purchase-1"/>
-                        <state key="disabled" title="已结束"/>
+                        <state key="disabled" title="已结束">
+                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
+                        </state>
                         <connections>
                             <action selector="buyTakeAway:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wRZ-B6-Ufr"/>
                         </connections>
