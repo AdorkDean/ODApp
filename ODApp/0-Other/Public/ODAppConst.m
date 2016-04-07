@@ -106,6 +106,9 @@ NSString * const ODNotificationAddAddress = @"ODNotificationAddAddress";
 /** 保存地址通知*/
 NSString * const ODNotificationSaveAddress = @"ODNotificationSaveAddress";
 
+/** 刷新确认订单界面*/
+NSString * const ODNotificationRefreshConfirmOrder = @"ODNotificationRefreshConfirmOrder";
+
 
 #pragma mark - 请求URL接口
 /** 网页接口 */
