@@ -3,76 +3,56 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="68" id="KGk-i7-Jjw" customClass="ODAddressKeywordCell">
-            <rect key="frame" x="0.0" y="0.0" width="374" height="68"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="81" id="KGk-i7-Jjw" customClass="ODAddressKeywordCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="81"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="374" height="67"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPE-Cg-r1Z">
-                        <rect key="frame" x="16" y="8" width="341" height="20"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="20" id="YXc-zL-5LF"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" verticalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPE-Cg-r1Z">
+                        <rect key="frame" x="17" y="17" width="341" height="22"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fTQ-lc-Od4">
-                        <rect key="frame" x="17" y="38" width="340" height="7"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fTQ-lc-Od4">
+                        <rect key="frame" x="17" y="46" width="341" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V6G-Ps-Z0Z">
-                        <rect key="frame" x="0.0" y="58" width="374" height="1"/>
+                        <rect key="frame" x="0.0" y="79" width="375" height="1"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="QBX-mf-lTM"/>
-                            <constraint firstAttribute="height" constant="1" id="UCz-gH-vdH"/>
+                            <constraint firstAttribute="height" constant="1" id="nl5-MN-n6E"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="QBX-mf-lTM"/>
-                            </mask>
-                        </variation>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="fTQ-lc-Od4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="1MA-Ov-Lwx"/>
-                    <constraint firstItem="V6G-Ps-Z0Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="6rz-7I-B82"/>
-                    <constraint firstItem="V6G-Ps-Z0Z" firstAttribute="top" secondItem="fTQ-lc-Od4" secondAttribute="bottom" constant="13" id="Cyw-h3-lZw"/>
-                    <constraint firstItem="TPE-Cg-r1Z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="H0b-aU-Ss8"/>
+                    <constraint firstItem="V6G-Ps-Z0Z" firstAttribute="top" secondItem="fTQ-lc-Od4" secondAttribute="bottom" constant="17" id="Fv1-C8-VZT"/>
+                    <constraint firstItem="TPE-Cg-r1Z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="H0b-aU-Ss8"/>
+                    <constraint firstItem="V6G-Ps-Z0Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Huz-qn-sAe"/>
+                    <constraint firstAttribute="bottom" secondItem="V6G-Ps-Z0Z" secondAttribute="bottom" id="JfW-YG-JB1"/>
                     <constraint firstAttribute="trailing" secondItem="fTQ-lc-Od4" secondAttribute="trailing" constant="17" id="Lcn-b2-Egq"/>
                     <constraint firstAttribute="trailing" secondItem="TPE-Cg-r1Z" secondAttribute="trailing" constant="17" id="QLE-4L-dVo"/>
-                    <constraint firstAttribute="bottom" secondItem="V6G-Ps-Z0Z" secondAttribute="bottom" constant="1" id="Qrf-gv-ml2"/>
-                    <constraint firstItem="fTQ-lc-Od4" firstAttribute="top" secondItem="TPE-Cg-r1Z" secondAttribute="bottom" constant="10" id="VIo-PN-Wke"/>
-                    <constraint firstItem="TPE-Cg-r1Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Xjb-Lu-Dp6"/>
-                    <constraint firstItem="V6G-Ps-Z0Z" firstAttribute="top" secondItem="fTQ-lc-Od4" secondAttribute="bottom" constant="10" id="gpl-wd-YTj"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="V6G-Ps-Z0Z" secondAttribute="bottom" id="hnt-Kf-0dm"/>
-                    <constraint firstAttribute="bottom" secondItem="fTQ-lc-Od4" secondAttribute="bottom" constant="10" id="ykv-cP-EUg"/>
-                    <constraint firstAttribute="trailing" secondItem="V6G-Ps-Z0Z" secondAttribute="trailing" id="ynb-PS-ABg"/>
+                    <constraint firstItem="fTQ-lc-Od4" firstAttribute="top" secondItem="TPE-Cg-r1Z" secondAttribute="bottom" constant="7" id="VIo-PN-Wke"/>
+                    <constraint firstItem="TPE-Cg-r1Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="17" id="Xjb-Lu-Dp6"/>
+                    <constraint firstAttribute="trailing" secondItem="V6G-Ps-Z0Z" secondAttribute="trailing" id="Xm8-vk-SDo"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="ykv-cP-EUg"/>
-                        <exclude reference="Qrf-gv-ml2"/>
-                        <exclude reference="gpl-wd-YTj"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="detailLabel" destination="fTQ-lc-Od4" id="LVm-bO-C1j"/>
                 <outlet property="lineView" destination="V6G-Ps-Z0Z" id="Xei-ds-8HZ"/>
                 <outlet property="titleLabel" destination="TPE-Cg-r1Z" id="Hh9-61-XMb"/>
             </connections>
-            <point key="canvasLocation" x="649" y="435"/>
+            <point key="canvasLocation" x="649.5" y="441.5"/>
         </tableViewCell>
     </objects>
 </document>

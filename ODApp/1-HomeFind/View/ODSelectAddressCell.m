@@ -12,8 +12,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
     self.lineView.backgroundColor = [UIColor lineColor];
+    self.titleLabel.textColor = [UIColor colorWithRGBString:@"#000000"];
+    self.addressLabel.textColor = [UIColor colorGreyColor];
 }
 
 -(void)showDataWithAMapPOI:(AMapPOI *)poi index:(NSIndexPath *)index{
@@ -23,12 +24,12 @@
         NSMutableAttributedString *noteStr = [[NSMutableAttributedString alloc]initWithString:str];
         [noteStr addAttribute:NSForegroundColorAttributeName value:[UIColor colorRedColor] range:NSMakeRange(0, 4)];
         self.titleLabel.attributedText = noteStr;
-        
+        self.addressLabel.textColor = [UIColor colorWithRGBString:@"#000000"];
     }else{
         self.iconImageView.image = [UIImage imageNamed:@"icon_id_Unchecked"];
         self.titleLabel.text = poi.name;
     }
-    self.detailAddressLabel.text = [NSString stringWithFormat:@"%@%@%@",poi.city,poi.district,poi.address];
+    self.addressLabel.text = [NSString stringWithFormat:@"%@",poi.address];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

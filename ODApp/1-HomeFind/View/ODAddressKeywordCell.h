@@ -16,6 +16,6 @@
 @property (weak, nonatomic) IBOutlet UIView *lineView;
 
 
--(void)showDataWithAMapPOI:(AMapPOI *)poi index:(NSIndexPath *)index;
+-(void)showDataWithAMapPOI:(AMapPOI *)poi;
 
 @end
