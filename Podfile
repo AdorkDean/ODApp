@@ -6,7 +6,7 @@ pod 'SDWebImage', '~> 3.7.3'
 pod 'MJRefresh'
 pod 'Masonry'
 pod 'MJExtension'
-pod 'SVProgressHUD'
+pod 'SVProgressHUD','~> 1.1.3'
 pod 'AMapLocation'
 platform :ios, '7.0' #手机的系统
 pod 'AMap3DMap'  #3D地图SDK
