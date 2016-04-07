@@ -50,7 +50,10 @@
     }
     // 商品详情页
     else {
-        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@?id=%@", ODWebUrlNative, self.product_id]]]];
+        NSString *urlString = [[ODHttpTool getRequestParameter:@{ @"id" : self.product_id }] od_URLDesc];
+        NSString *url = [ODWebUrlNative stringByAppendingString:urlString];
+        
+        [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL OD_URLWithString:url]]];
         
     }
     
