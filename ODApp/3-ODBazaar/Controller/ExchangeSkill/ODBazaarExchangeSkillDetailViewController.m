@@ -304,6 +304,11 @@
         ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
         [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
     } else {
+        
+//        ODSubmitOrderController *vc = [[ODSubmitOrderController alloc] init];
+//        vc.swap_type = self.model.swap_type;
+//        [self.navigationController pushViewController:vc animated:YES];
+        
         if ([type isEqualToString:@"1"]) {
             ODOrderController *vc = [[ODOrderController alloc] init];
             vc.informationModel = self.model;
