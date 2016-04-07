@@ -40,6 +40,7 @@
     if (!_webView)
     {
         _webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, ODTopY, kScreenSize.width, KControllerHeight - ODNavigationHeight)];
+        _webView.backgroundColor = [UIColor backgroundColor];
         [self.view addSubview:self.webView];
     }
     return _webView;
