@@ -210,15 +210,12 @@ static NSString *cellId = @"ODSelectAddressCell";
     [self.mapSearchAPI AMapPOIAroundSearch:request];
 }
 
-
-
 - (void)mapViewDidFinishLoadingMap:(MAMapView *)mapView dataSize:(NSInteger)dataSize{
     NSLogFunc
     if (self.lat.length) {
         self.mapView.centerCoordinate = CLLocationCoordinate2DMake([self.lat doubleValue], [self.lng doubleValue]);
     }
 }
-
 
 
 #pragma mark - AMapSearchDelegate
