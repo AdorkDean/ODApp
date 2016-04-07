@@ -100,7 +100,8 @@
     if (!self.isOrderDetail) {
         footHeight = 49;
     }
-    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight - footHeight)];
+    self.webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, ODTopY, KScreenWidth, KControllerHeight - ODNavigationHeight)];
+    self.webView.backgroundColor = [UIColor backgroundColor];
     [self.view addSubview:self.webView];
 }
 
