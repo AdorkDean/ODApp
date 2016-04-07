@@ -325,7 +325,11 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+
+    [self.tableView setEditing:NO animated:YES];
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
+
+
 
 @end
