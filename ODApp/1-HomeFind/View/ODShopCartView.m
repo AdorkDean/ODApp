@@ -245,6 +245,8 @@ static NSString * const kShopCarts = @"shopCarts";
     self.priceLabel.text = [NSString stringWithFormat:@"%.2f", totalPrice];
     self.buyButton.enabled = totalPrice;
     self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1]: [UIColor lightGrayColor];
+    // 设置总价文字大小
+    self.numberLabel.font = self.shopCount > 99 ? [UIFont systemFontOfSize:9.0f] : [UIFont systemFontOfSize:7.0f];
     
     // 添加商品
     if ([self.shopCars containsObject:data]) {
