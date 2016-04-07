@@ -54,12 +54,15 @@
     self.originalPriceLabel.layer.masksToBounds = YES;
 }
 
+
+
 - (void)sizeToFitScreen
 {
+    // 4寸屏
     if (KScreenWidth == 320) {
-        self.titleLabel.font = [UIFont systemFontOfSize:12];
-        self.discountPriceLabel.font = [UIFont systemFontOfSize:15];
-        self.originalPriceLabel.font = [UIFont systemFontOfSize:12];
+        self.titleLabel.font = [UIFont systemFontOfSize:14];
+        self.discountPriceLabel.font = [UIFont systemFontOfSize:18];
+        self.originalPriceLabel.font = [UIFont systemFontOfSize:14];
     }
 }
 
