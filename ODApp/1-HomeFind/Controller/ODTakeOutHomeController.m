@@ -89,6 +89,11 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     [self.shopCart removeFromSuperview];
     
     [MobClick endLogPageView:NSStringFromClass([self class])];
+    if (![[self.navigationController viewControllers] containsObject:self])
+    {
+        // 调用方法
+        [self.shopCart removeFromSuperview];
+    }
 }
 
 - (void)viewDidLoad

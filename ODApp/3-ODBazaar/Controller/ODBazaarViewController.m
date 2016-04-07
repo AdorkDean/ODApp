@@ -47,6 +47,17 @@ static CGFloat const lineHeight = 1;
     [self createScrollView];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    UINavigationController *nav = self.tabBarController.childViewControllers[4];
+    if (nav.childViewControllers.count > 1)
+    {
+        [nav popToRootViewControllerAnimated:YES];
+    }
+    
+}
+
 #pragma mark - 初始化方法
 /**
  *  设置导航栏

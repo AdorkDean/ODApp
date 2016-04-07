@@ -294,7 +294,8 @@ static NSString *cellId = @"ODConfirmOrderCell";
          // 清空购物车
          ODShopCartView *view = [ODShopCartView shopCart];
          [view shopCartHeaderViewDidClickClearButton:nil];
-     }
+         
+    }
                    failure:^(NSError *error)
      {
     }];
