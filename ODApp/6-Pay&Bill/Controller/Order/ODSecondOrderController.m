@@ -26,7 +26,7 @@
 @property(nonatomic, strong) UICollectionView *collectionView;
 @property(nonatomic, strong) UILabel *allPriceLabel;
 @property(nonatomic, copy) NSString *addressId;
-@property(nonatomic, strong) NSArray *addressArray;
+@property(nonatomic, strong) NSMutableArray *addressArray;
 @end
 
 @implementation ODSecondOrderController
@@ -49,11 +49,20 @@
 
     self.navigationItem.title = @"提交订单";
 
+    self.addressArray = [NSMutableArray array];
     [self getAddress];
     [self createCollectionView];
+    
+    __weakSelf
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationRefreshConfirmOrder object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf getAddress];
+    }];
 
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
 #pragma mark - 初始化方法
 - (void)createCollectionView
 {
@@ -105,7 +114,10 @@
      {
          ODOrderAddressModel *addressModel = [model result];
          ODOrderAddressDefModel *addressDefModel = addressModel.def;
-         weakSelf.addressArray = @[addressDefModel];
+         NSString *is_default = [NSString stringWithFormat:@"%@",addressDefModel.is_default];
+         if ([is_default isEqualToString:@"1"]||[is_default isEqualToString:@"0"]) {
+             [weakSelf.addressArray addObject:addressDefModel];
+         }
          [weakSelf.collectionView reloadData];
      } failure:^(NSError *error) {
      }];
