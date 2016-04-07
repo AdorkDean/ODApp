@@ -215,10 +215,15 @@
     __weakSelf
     [ODHttpTool getWithURL:ODUrlUserAddressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
         [ODProgressHUD showInfoWithStatus:@"保存成功"];
-        ODConfirmOrderViewController *vc = weakSelf.navigationController.childViewControllers[2];
         NSMutableDictionary *dict = model;
         [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationSaveAddress object:self userInfo:dict];
-        [weakSelf.navigationController popToViewController:vc animated:YES];
+        for (UIViewController *vc in self.navigationController.childViewControllers) {
+            if ([NSStringFromClass([vc class]) isEqualToString:NSStringFromClass([ODConfirmOrderViewController class])]) {
+                [weakSelf.navigationController popToViewController:vc animated:YES];
+                break;
+            }
+        }
+     
     } failure:^(NSError *error) {
         
         
@@ -244,10 +249,14 @@
     __weakSelf
     [ODHttpTool getWithURL:ODUrlUserAddressEdit parameters:parameters modelClass:[NSObject class] success:^(id model) {
         [ODProgressHUD showInfoWithStatus:@"编辑成功"];
-        ODConfirmOrderViewController *vc = weakSelf.navigationController.childViewControllers[2];
         NSMutableDictionary *dict = model;
         [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationSaveAddress object:self userInfo:dict];
-        [weakSelf.navigationController popToViewController:vc animated:YES];
+        for (UIViewController *vc in self.navigationController.childViewControllers) {
+            if ([NSStringFromClass([vc class]) isEqualToString:NSStringFromClass([ODConfirmOrderViewController class])]) {
+                [weakSelf.navigationController popToViewController:vc animated:YES];
+                break;
+            }
+        }
     } failure:^(NSError *error) {
         
         

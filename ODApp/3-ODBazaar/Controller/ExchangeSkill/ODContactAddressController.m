@@ -94,7 +94,6 @@
          }
          
          [weakSelf.dataArray addObjectsFromArray:addressModel.list];
-         
          if ([is_default isEqualToString:@"0"]) {
              [weakSelf.dataArray insertObject:defModel atIndex:0];
          }
@@ -102,11 +101,11 @@
          [weakSelf createTableView];
          [weakSelf.tableView reloadData];
          if (weakSelf.dataArray.count == 0 && weakSelf.defaultArray.count == 0) {
+             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationRefreshConfirmOrder object:self];
              [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无地址"];
          }else{
              [weakSelf.noResultLabel hidden];
          }
-         
      } failure:^(NSError *error) {
      }];
 }
@@ -138,40 +137,16 @@
 }
 
 - (void)addAddressAction {
-    ODAddAddressController *vc = [[ODAddAddressController alloc] init];
-    vc.typeTitle = @"新增地址";
-    vc.isAdd = YES;
-    
     ODAddNewAddressViewController *new = [[ODAddNewAddressViewController alloc]init];
     new.naviTitle = @"新增地址";
     [self.navigationController pushViewController:new animated:YES];
-//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - tableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ODAddressCell *cell = [tableView dequeueReusableCellWithIdentifier:@"item" forIndexPath:indexPath];
-
-//    if (self.defaultArray.count != 0 && indexPath.section == 0) { //有默认地址
-//        [cell.lineLabel removeFromSuperview];
-//        ODOrderAddressDefModel *model = self.defaultArray[0];
-//        cell.isDefault = @"1";
-//        cell.model = model;
-//    }
-//    else
-//    {
-//
-//        if (indexPath.row == self.dataArray.count - 1) {
-//            [cell.lineLabel removeFromSuperview];
-//        }
-//        ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
-//        cell.isDefault = @"2";
-//        cell.model = model;
-//
-//
-//    }
-    
+ 
     if (self.defaultArray.count) {
         if (indexPath.section == 0) {
             [cell.lineLabel removeFromSuperview];
@@ -189,7 +164,6 @@
         cell.model = model;
     }
 
-
     return cell;
 }
 
@@ -201,13 +175,11 @@
     if (self.defaultArray.count != 0) { //有默认地址
         if (section == 0) {
             return 1;
-        }
-        else {
+        }else {
             return self.dataArray.count;
         }
     }
-    else //没有默认地址
-    {
+    else {//没有默认地址
         return self.dataArray.count;
     }
 }
@@ -218,14 +190,11 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-
     if (section == 0) {
         if (self.defaultArray.count == 0) {
             return 0;
-
         } else {
             return 13;
-
         }
     } else {
         return 0;
@@ -259,18 +228,6 @@
         [weakSelf setEditing:false animated:true];
 
         NSString *address_id = @"";
-//        if (indexPath.section == 0) {
-//            ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
-//            address_id = [NSString stringWithFormat:@"%@", model.id];
-//            [weakSelf.defaultArray removeObjectAtIndex:indexPath.row];
-//            [weakSelf.tableView reloadData];
-//        } else {
-//            ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
-//            address_id = [NSString stringWithFormat:@"%@", model.id];
-//            [weakSelf.dataArray removeObjectAtIndex:indexPath.row];
-//            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
-//        }
-        
         if (self.defaultArray.count) {
             if (indexPath.section == 0) {
                 ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
@@ -296,38 +253,11 @@
     }];
     action1.backgroundColor = [UIColor colorRedColor];
 
-
     UITableViewRowAction *action2 = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault image:[UIImage imageNamed:@"icon_bianji"] handler:^(UITableViewRowAction *_Nullable action, NSIndexPath *_Nullable indexPath) {
         [weakSelf setEditing:false animated:true];
 
-        ODAddAddressController *vc = [[ODAddAddressController alloc] init];
         ODAddNewAddressViewController *new = [[ODAddNewAddressViewController alloc]init];
-        vc.typeTitle = @"编辑地址";
-        vc.isAdd = NO;
         new.naviTitle = @"编辑地址";
-//        if (indexPath.section == 0) {
-//            ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
-////            vc.isDefault = YES;
-////            NSString *addressId = [NSString stringWithFormat:@"%@", model.id];
-////            vc.addressId = addressId;
-////            vc.addressModel = model;
-//            new.addressId = [NSString stringWithFormat:@"%@",model.id];
-//            new.addressModel = model;
-//            new.isDefault = YES;
-//            [weakSelf.navigationController pushViewController:new animated:YES];
-//        } else {
-//
-//            ODOrderAddressDefModel *model = self.dataArray[indexPath.row];
-////            NSString *addressId = [NSString stringWithFormat:@"%@", model.id];
-////            vc.isDefault = NO;
-////            vc.addressId = addressId;
-////            vc.addressModel = model;
-//            new.addressId = [NSString stringWithFormat:@"%@",model.id];
-//            new.addressModel = model;
-//            new.isDefault = YES;
-//            [weakSelf.navigationController pushViewController:new animated:YES];
-//        }
-        
         if (self.defaultArray.count) {
             if (indexPath.section == 0) {
                 ODOrderAddressDefModel *model = self.defaultArray[indexPath.row];
@@ -355,7 +285,6 @@
 
     return @[action1, action2];
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
@@ -389,12 +318,8 @@
         } else {
             weakSelf.isAddress = @"2";
         }
-        
         [weakSelf getData];
-        
     } failure:^(NSError *error) {
-        
-        
     }];
 }
 
