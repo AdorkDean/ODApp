@@ -14,7 +14,6 @@
     [super awakeFromNib];
     self.lineView.backgroundColor = [UIColor lineColor];
     self.titleLabel.textColor = [UIColor colorWithRGBString:@"#000000"];
-    self.addressLabel.textColor = [UIColor colorGreyColor];
 }
 
 -(void)showDataWithAMapPOI:(AMapPOI *)poi index:(NSIndexPath *)index{
@@ -28,6 +27,7 @@
     }else{
         self.iconImageView.image = [UIImage imageNamed:@"icon_id_Unchecked"];
         self.titleLabel.text = poi.name;
+        self.addressLabel.textColor = [UIColor colorGreyColor];
     }
     self.addressLabel.text = [NSString stringWithFormat:@"%@",poi.address];
 }

@@ -214,6 +214,12 @@
     return self.headView;
 }
 
+-(void)setDict:(NSMutableDictionary *)dict{
+    _dict = dict;
+    self.headView.orderView.addressLabel.text = dict[@"address"];
+    self.addressId = [NSString stringWithFormat:@"%@", dict[@"id"]];
+}
+
 #pragma mark - UICollectionView 代理方法
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -430,17 +436,6 @@
         weakSelf.headView.orderView.addressLabel.text = model.address;
         weakSelf.addressId = [NSString stringWithFormat:@"%@",model.id];
     };
-//    vc.getAddressBlock = ^(NSString *address, NSString *addrssId, NSString *isAddress) {
-//        
-//        if ([isAddress isEqualToString:@"1"]) {
-//            weakSelf.headView.orderView.addressLabel.text = @"请选择";
-//            weakSelf.addressId = nil;
-//        } else {
-//            weakSelf.headView.orderView.addressLabel.text = address;
-//            weakSelf.addressId = addrssId;
-//        }
-//    };
-    
     vc.addressId = self.addressId;
     [self.navigationController pushViewController:vc animated:YES];
 }

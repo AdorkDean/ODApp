@@ -174,6 +174,12 @@
 
 }
 
+-(void)setDict:(NSMutableDictionary *)dict{
+    _dict = dict;
+    self.headView.secondOrderView.addressLabel.text = dict[@"address"];
+    self.addressId = [NSString stringWithFormat:@"%@", dict[@"id"]];
+}
+
 #pragma mark - UICollectionView 代理方法
 //动态设置每个item的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {

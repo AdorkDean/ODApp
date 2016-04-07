@@ -18,6 +18,7 @@
 #import "ODContactAddressController.h"
 #import "ODShopCartView.h"
 #import "ODOrderAddressModel.h"
+#import "ODAddNewAddressViewController.h"
 
 static NSString *cellId = @"ODConfirmOrderCell";
 
@@ -63,6 +64,16 @@ static NSString *cellId = @"ODConfirmOrderCell";
     return _dataArray;
 }
 
+-(void)setDict:(NSMutableDictionary *)dict{
+    _dict = dict;
+    self.nameLabel.text = dict[@"name"];
+    self.nameLabel.frame = CGRectMake(17, 17, 100, 20);
+    self.numLabel.text =  [NSString stringWithFormat:@"%@",dict[@"tel"]];
+    self.addressLabel.text = dict[@"address"];
+    self.addressLabel.frame = CGRectMake(17, CGRectGetMaxY(self.nameLabel.frame)+7.5, kScreenSize.width-60, 15);
+    self.addressId  = [NSString stringWithFormat:@"%@",dict[@"id"]];
+}
+
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -71,17 +82,15 @@ static NSString *cellId = @"ODConfirmOrderCell";
     [self requestData];
     
     __weakSelf
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeAddress:) name:ODNotificationSaveAddress object:nil];
     [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationRefreshConfirmOrder object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
         [weakSelf requestData];
     }];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
+}
     
-}
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-}
-
 -(void)createTableHeaderView{
     self.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 200)];
     self.tableHeaderView.backgroundColor = [UIColor backgroundColor];
@@ -236,13 +245,14 @@ static NSString *cellId = @"ODConfirmOrderCell";
 #pragma mark - UIAction
 -(void)infoTapClick{
     ODContactAddressController *controller = [[ODContactAddressController alloc]init];
+    __weakSelf
     controller.getAddressBlock = ^(ODOrderAddressDefModel *model){
-        self.nameLabel.text = model.name;
-        self.nameLabel.frame = CGRectMake(17, 17, 100, 20);
-        self.numLabel.text = model.tel;
-        self.addressLabel.text = model.address;
-        self.addressLabel.frame = CGRectMake(17, CGRectGetMaxY(self.nameLabel.frame)+7.5, kScreenSize.width-60, 15);
-        self.addressId  = [NSString stringWithFormat:@"%@",model.id];
+        weakSelf.nameLabel.text = model.name;
+        weakSelf.nameLabel.frame = CGRectMake(17, 17, 100, 20);
+        weakSelf.numLabel.text = model.tel;
+        weakSelf.addressLabel.text = model.address;
+        weakSelf.addressLabel.frame = CGRectMake(17, CGRectGetMaxY(self.nameLabel.frame)+7.5, kScreenSize.width-60, 15);
+        weakSelf.addressId  = [NSString stringWithFormat:@"%@",model.id];
     };
     [self.navigationController pushViewController:controller animated:YES];
 }
@@ -273,8 +283,6 @@ static NSString *cellId = @"ODConfirmOrderCell";
     }
     NSMutableDictionary *successParams = [NSMutableDictionary dictionary];
     successParams[@"address_id"] = [NSString stringWithFormat:@"%@",self.addressId];
-//    successParams[@"price_show"] = [NSString
-//                                    stringWithFormat:@"%f", self.count];
     successParams[@"pay_type"] = @"2";
     successParams[@"remark"] = remarkStr;
     successParams[@"shopcart_json"] = self.datas.od_URLDesc;
@@ -294,21 +302,11 @@ static NSString *cellId = @"ODConfirmOrderCell";
          // 清空购物车
          ODShopCartView *view = [ODShopCartView shopCart];
          [view shopCartHeaderViewDidClickClearButton:nil];
-         
     }
                    failure:^(NSError *error)
      {
     }];
 }
 
--(void)changeAddress:(NSNotification *)user{
-    
-    self.nameLabel.text = user.userInfo[@"name"];
-    self.nameLabel.frame = CGRectMake(17, 17, 100, 20);
-    self.numLabel.text = user.userInfo[@"tel"];
-    self.addressLabel.text = user.userInfo[@"address"];
-    self.addressLabel.frame = CGRectMake(17, CGRectGetMaxY(self.nameLabel.frame)+7.5, kScreenSize.width-60, 15);
-    self.addressId  = [NSString stringWithFormat:@"%@",user.userInfo[@"id"]];
-}
 
 @end

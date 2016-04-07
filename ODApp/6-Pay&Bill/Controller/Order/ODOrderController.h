@@ -13,5 +13,6 @@
 
 @property(nonatomic, strong) ODBazaarExchangeSkillDetailModel *informationModel;
 
+@property(nonatomic, strong)NSMutableDictionary *dict;
 
 @end

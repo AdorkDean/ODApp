@@ -139,6 +139,7 @@ static NSString *cellId = @"ODAddressKeywordCell";
     request.keywords = textField.text;
     request.sortrule = 0;
     request.requireExtension = YES;
+    request.offset = 30;
     request.city = [[ODUserInformation sharedODUserInformation]locationCity];
     //发起周边搜索
     [self.mapSearchAPI AMapPOIKeywordsSearch:request];

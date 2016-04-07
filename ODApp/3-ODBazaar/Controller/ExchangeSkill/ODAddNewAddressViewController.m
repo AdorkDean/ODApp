@@ -10,6 +10,8 @@
 #import "ODSelectAddressViewController.h"
 #import <AMapSearchKit/AMapSearchKit.h>
 #import "ODConfirmOrderViewController.h"
+#import "ODOrderController.h"
+#import "ODSecondOrderController.h"
 
 @interface ODAddNewAddressViewController ()
 
@@ -216,17 +218,25 @@
     [ODHttpTool getWithURL:ODUrlUserAddressAdd parameters:parameters modelClass:[NSObject class] success:^(id model) {
         [ODProgressHUD showInfoWithStatus:@"保存成功"];
         NSMutableDictionary *dict = model;
-        [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationSaveAddress object:self userInfo:dict];
         for (UIViewController *vc in self.navigationController.childViewControllers) {
             if ([NSStringFromClass([vc class]) isEqualToString:NSStringFromClass([ODConfirmOrderViewController class])]) {
+                ODConfirmOrderViewController *orderVc = (ODConfirmOrderViewController *)vc;
+                orderVc.dict = dict;
+                [weakSelf.navigationController popToViewController:vc animated:YES];
+                break;
+            }else if ([NSStringFromClass([vc class]) isEqualToString:NSStringFromClass([ODOrderController class])]){
+                ODOrderController *orderVc = (ODOrderController *)vc;
+                orderVc.dict = dict;
+                [weakSelf.navigationController popToViewController:vc animated:YES];
+                break;
+            }else if ([NSStringFromClass([vc class]) isEqualToString:NSStringFromClass([ODSecondOrderController class])]){
+                ODSecondOrderController *orderVc = (ODSecondOrderController *)vc;
+                orderVc.dict = dict;
                 [weakSelf.navigationController popToViewController:vc animated:YES];
                 break;
             }
         }
-     
     } failure:^(NSError *error) {
-        
-        
     }];
 }
 
@@ -250,16 +260,25 @@
     [ODHttpTool getWithURL:ODUrlUserAddressEdit parameters:parameters modelClass:[NSObject class] success:^(id model) {
         [ODProgressHUD showInfoWithStatus:@"编辑成功"];
         NSMutableDictionary *dict = model;
-        [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationSaveAddress object:self userInfo:dict];
         for (UIViewController *vc in self.navigationController.childViewControllers) {
             if ([NSStringFromClass([vc class]) isEqualToString:NSStringFromClass([ODConfirmOrderViewController class])]) {
+                ODConfirmOrderViewController *orderVc = (ODConfirmOrderViewController *)vc;
+                orderVc.dict = dict;
+                [weakSelf.navigationController popToViewController:vc animated:YES];
+                break;
+            }else if ([NSStringFromClass([vc class]) isEqualToString:NSStringFromClass([ODOrderController class])]){
+                ODOrderController *orderVc = (ODOrderController *)vc;
+                orderVc.dict = dict;
+                [weakSelf.navigationController popToViewController:vc animated:YES];
+                break;
+            }else if ([NSStringFromClass([vc class]) isEqualToString:NSStringFromClass([ODSecondOrderController class])]){
+                ODSecondOrderController *orderVc = (ODSecondOrderController *)vc;
+                orderVc.dict = dict;
                 [weakSelf.navigationController popToViewController:vc animated:YES];
                 break;
             }
         }
     } failure:^(NSError *error) {
-        
-        
     }];
     
 }

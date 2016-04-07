@@ -13,4 +13,5 @@
 
 @property(nonatomic, strong) NSString *openId;
 @property(nonatomic, strong) ODBazaarExchangeSkillDetailModel *informationModel;
+@property(nonatomic, strong) NSMutableDictionary *dict;
 @end

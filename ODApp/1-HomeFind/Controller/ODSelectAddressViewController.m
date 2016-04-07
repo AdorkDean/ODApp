@@ -124,7 +124,6 @@ static NSString *cellId = @"ODSelectAddressCell";
 }
 
 
-
 #pragma mark - UITableViewDataSource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.dataArray.count;
@@ -175,7 +174,7 @@ static NSString *cellId = @"ODSelectAddressCell";
         //构造AMapReGeocodeSearchRequest对象
         AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
         regeo.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
-        regeo.radius = 1000;
+        regeo.radius = 3000;
         regeo.requireExtension = YES;
         
         self.pointAnnotation = [[MAPointAnnotation alloc] init];
@@ -190,6 +189,7 @@ static NSString *cellId = @"ODSelectAddressCell";
         request.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
         request.keywords = @"";
         request.sortrule = 0;
+        request.offset = 30;
         request.requireExtension = YES;
         //发起周边搜索
         [self.mapSearchAPI AMapPOIAroundSearch:request];
@@ -201,6 +201,7 @@ static NSString *cellId = @"ODSelectAddressCell";
     request.location = [AMapGeoPoint locationWithLatitude:mapView.region.center.latitude longitude:mapView.region.center.longitude];
     request.keywords = @"";
     request.sortrule = 0;
+    request.offset = 30;
     request.requireExtension = YES;
     //发起周边搜索
     [self.mapSearchAPI AMapPOIAroundSearch:request];
