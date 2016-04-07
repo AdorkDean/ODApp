@@ -307,6 +307,7 @@
         
 //        ODSubmitOrderController *vc = [[ODSubmitOrderController alloc] init];
 //        vc.swap_type = self.model.swap_type;
+//        vc.model = self.model;
 //        [self.navigationController pushViewController:vc animated:YES];
         
         if ([type isEqualToString:@"1"]) {
