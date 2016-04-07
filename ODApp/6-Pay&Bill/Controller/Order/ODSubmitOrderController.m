@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIView *serveWayView;
 @property (nonatomic, strong) UIView *serveTimeView;
 @property (nonatomic, strong) UIView *addressView;
+@property (nonatomic, strong) UIView *serviceTimeView;
 
 @property (nonatomic, assign) float addressY;
 
@@ -32,6 +33,7 @@
     self.navigationItem.title = @"提交订单";
     [self judgeSwapType];
     [self createSkillInformationView];
+    [self createFootView];
 }
 
 - (void)judgeSwapType {
@@ -162,5 +164,66 @@
     [self.view addSubview:self.submitOrderView];
 }
 
+- (void)createServiceTimeView {
+    self.serviceTimeView = [[UIView alloc] initWithFrame:CGRectMake(0, KScreenHeight - 64 - 245, KScreenWidth, 245)];
+    self.serviceTimeView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.serviceTimeView];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 10, 60, 20)];
+    titleLabel.font = [UIFont systemFontOfSize:13];
+    titleLabel.text = @"服务时间";
+    titleLabel.textColor = [UIColor blackColor];
+    [self.serviceTimeView addSubview:titleLabel];
+    
+    UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(titleLabel.frame), 10, 200, 20)];
+    contentLabel.font = [UIFont systemFontOfSize:12];
+    contentLabel.text = @"(该时间将影响订单自动确认时间)";
+    contentLabel.textColor = [UIColor lightGrayColor];
+    [self.serviceTimeView addSubview:contentLabel];
+    
+    float dateButtonWidth = (KScreenWidth - ODLeftMargin * 2 - 10 * 2) / 3;
+    
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(ODLeftMargin, CGRectGetMaxY(contentLabel.frame) + 5, KScreenWidth - ODLeftMargin * 2, 50)];
+    scrollView.backgroundColor = [UIColor whiteColor];
+    scrollView.userInteractionEnabled = YES;
+    scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.showsVerticalScrollIndicator = NO;
+    scrollView.contentSize = CGSizeMake(dateButtonWidth * 7 + 10 * 6, 50);
+    [self.serviceTimeView addSubview:scrollView];
+    
+    
+}
+
+
+- (void)createFootView {
+    UIView *footView = [[UIView alloc] initWithFrame:CGRectMake(0, KScreenHeight - 64 - 49, KScreenWidth, 49)];
+    footView.backgroundColor =[UIColor whiteColor];
+    [self.view addSubview:footView];
+    
+    UILabel *orderMoneyLabel = [[UILabel alloc] initWithFrame:CGRectMake(ODLeftMargin, 0, KScreenWidth * 3 / 5, 49)];
+    orderMoneyLabel.textColor = [UIColor colorRedColor];
+    orderMoneyLabel.font = [UIFont systemFontOfSize:15];
+    
+    NSString *str = [NSString stringWithFormat:@"订单金额：%.2f元", self.model.price];
+    NSMutableAttributedString *moneyStr = [[NSMutableAttributedString alloc] initWithString:str];
+    [moneyStr addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, 5)];
+    [moneyStr addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12.5] range:NSMakeRange(0, 5)];
+    orderMoneyLabel.attributedText = moneyStr;
+    [footView addSubview:orderMoneyLabel];
+    
+    UIButton *submitOrderButton = [[UIButton alloc] initWithFrame:CGRectMake(CGRectGetMaxX(orderMoneyLabel.frame), 0, KScreenWidth * 2 / 5, 49)];
+    [submitOrderButton setTitle:@"提交订单" forState:UIControlStateNormal];
+    submitOrderButton.backgroundColor = [UIColor colorRedColor];
+    [submitOrderButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    submitOrderButton.titleLabel.font = [UIFont systemFontOfSize:12.5];
+    [submitOrderButton addTarget:self action:@selector(submitOrderButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [footView addSubview:submitOrderButton];
+}
+
+#pragma mark - Action
+
+- (void)submitOrderButtonAction:(UIButton *)sender {
+    
+}
 
 @end
