@@ -109,7 +109,7 @@ static NSString *cellId = @"ODSelectAddressCell";
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setImage:[UIImage imageNamed:@"icon_location"] forState:UIControlStateNormal];
     [btn sizeToFit];
-    btn.frame = CGRectMake(kScreenSize.width-40, 20, btn.od_width, btn.od_height);
+    btn.frame = CGRectMake(kScreenSize.width-50, 10, btn.od_width, btn.od_height);
     [btn addTarget:self action:@selector(backToOrigin) forControlEvents:UIControlEventTouchUpInside];
     [self.mapView addSubview:btn];
 }
@@ -194,6 +194,9 @@ static NSString *cellId = @"ODSelectAddressCell";
         //发起周边搜索
         [self.mapSearchAPI AMapPOIAroundSearch:request];
     }
+    if (self.lat.length) {
+        self.mapView.centerCoordinate = CLLocationCoordinate2DMake([self.lat doubleValue], [self.lng doubleValue]);
+    }
 }
 
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
@@ -206,6 +209,14 @@ static NSString *cellId = @"ODSelectAddressCell";
     //发起周边搜索
     [self.mapSearchAPI AMapPOIAroundSearch:request];
 }
+
+- (void)mapViewDidFinishLoadingMap:(MAMapView *)mapView dataSize:(NSInteger)dataSize{
+    NSLogFunc
+    if (self.lat.length) {
+        self.mapView.centerCoordinate = CLLocationCoordinate2DMake([self.lat doubleValue], [self.lng doubleValue]);
+    }
+}
+
 
 #pragma mark - AMapSearchDelegate
 - (void)onPOISearchDone:(AMapPOIAroundSearchRequest *)request response:(AMapPOISearchResponse *)response {
@@ -220,12 +231,7 @@ static NSString *cellId = @"ODSelectAddressCell";
     [self.tableView reloadData];
 }
 
-#pragma mark - 地图加载完成
-- (void)mapViewDidFinishLoadingMap:(MAMapView *)mapView dataSize:(NSInteger)dataSize{
-    if (self.lat.length) {
-        self.mapView.centerCoordinate = CLLocationCoordinate2DMake([self.lat doubleValue], [self.lng doubleValue]);
-    }
-}
+
 
 #pragma mark - action
 -(void)tapGestureClick{
