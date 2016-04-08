@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet UIView *picView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *picConstraintHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *spaceHeight;
+@property (weak, nonatomic) IBOutlet UIButton *informBtn;
 
 @property(nonatomic,copy)NSString *open_id;
 @property(nonatomic,strong)NSIndexPath *indexPath;

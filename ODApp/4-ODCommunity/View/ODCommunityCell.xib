@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="208"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="207"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="207.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHk-6D-lLv">
@@ -64,12 +64,24 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAg-xK-LOo">
+                        <rect key="frame" x="325" y="177.5" width="40" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="Ig5-xp-Hso"/>
+                            <constraint firstAttribute="height" constant="25" id="KMj-us-qDx"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <state key="normal" title="举报">
+                            <color key="titleColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="I6H-vL-ukS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="6PB-Ar-ZSG"/>
                     <constraint firstAttribute="trailing" secondItem="QOM-8C-wh0" secondAttribute="trailing" constant="10" id="8Z6-Sx-s3C"/>
                     <constraint firstItem="3C8-qw-hYV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7kl-6F-bnM" secondAttribute="trailing" constant="10" id="AWh-6r-tm8"/>
                     <constraint firstItem="BNk-9m-3Bw" firstAttribute="leading" secondItem="NHk-6D-lLv" secondAttribute="trailing" constant="10" id="Bea-OM-PaI"/>
+                    <constraint firstAttribute="bottom" secondItem="RAg-xK-LOo" secondAttribute="bottom" constant="5" id="DCY-ug-IoV"/>
                     <constraint firstItem="NHk-6D-lLv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="O7d-Qs-6Vq"/>
                     <constraint firstAttribute="trailing" secondItem="I6H-vL-ukS" secondAttribute="trailing" constant="10" id="Q8s-iQ-EQz"/>
                     <constraint firstAttribute="bottom" secondItem="QOM-8C-wh0" secondAttribute="bottom" priority="999" constant="14" id="QK9-qx-L62"/>
@@ -81,6 +93,7 @@
                     <constraint firstItem="QOM-8C-wh0" firstAttribute="top" secondItem="NHk-6D-lLv" secondAttribute="bottom" constant="35" id="bjZ-uk-2Ik"/>
                     <constraint firstItem="BNk-9m-3Bw" firstAttribute="top" secondItem="7kl-6F-bnM" secondAttribute="bottom" constant="5" id="nhz-Lg-B3A"/>
                     <constraint firstAttribute="trailing" secondItem="3C8-qw-hYV" secondAttribute="trailing" constant="10" id="pr3-78-DHE"/>
+                    <constraint firstAttribute="trailing" secondItem="RAg-xK-LOo" secondAttribute="trailing" constant="10" id="tTf-y4-f6Z"/>
                     <constraint firstItem="3C8-qw-hYV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="uxc-8T-Koo"/>
                     <constraint firstItem="NHk-6D-lLv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="zow-4U-cvz"/>
                 </constraints>
@@ -88,6 +101,7 @@
             <connections>
                 <outlet property="contentLabel" destination="I6H-vL-ukS" id="c4e-fi-VQe"/>
                 <outlet property="headButton" destination="NHk-6D-lLv" id="Un2-UO-Djp"/>
+                <outlet property="informBtn" destination="RAg-xK-LOo" id="eVG-Mz-J1b"/>
                 <outlet property="nickLabel" destination="7kl-6F-bnM" id="NnO-3q-FJe"/>
                 <outlet property="picConstraintHeight" destination="YdQ-Vn-edo" id="1PX-UG-yMp"/>
                 <outlet property="picView" destination="QOM-8C-wh0" id="Wca-5b-l2u"/>
