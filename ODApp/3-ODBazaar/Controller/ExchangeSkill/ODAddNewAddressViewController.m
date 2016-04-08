@@ -79,6 +79,7 @@
             if (i==1) {
                 NSString *str = [ODUserInformation sharedODUserInformation].mobile;
                 textField.text = str;
+                textField.keyboardType = UIKeyboardTypeDecimalPad;
             }
             textField.font = [UIFont systemFontOfSize:13.5];
             [self.infoView addSubview:textField];

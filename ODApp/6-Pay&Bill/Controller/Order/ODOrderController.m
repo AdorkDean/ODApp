@@ -62,6 +62,16 @@
 
     // 初始化操作
     [self setupInit];
+    __weakSelf
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationRefreshConfirmOrder object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf setupInit];
+    }];
+    
+    
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 
 #pragma mark - 初始化
@@ -134,10 +144,10 @@
          
          ODOrderAddressModel *addressModel = [model result];
          
-         if (addressModel.def) {
+         NSString *is_default = [NSString stringWithFormat:@"%@",[addressModel.def valueForKeyPath:@"is_default"]];
+         if ([is_default isEqualToString:@"1"]||[is_default isEqualToString:@"0"]) {
              [weakSelf.addressArray addObject:addressModel.def];
          }
-         
          [weakSelf.collectionView reloadData];
          
      } failure:^(NSError *error) {
