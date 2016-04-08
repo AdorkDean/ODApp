@@ -58,7 +58,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6H-vL-ukS">
-                        <rect key="frame" x="10" y="68" width="355" height="13"/>
+                        <rect key="frame" x="10" y="68" width="335" height="13"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <fontDescription key="fontDescription" type="system" pointSize="10.5"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -70,7 +70,7 @@
                             <constraint firstAttribute="width" constant="40" id="Ig5-xp-Hso"/>
                             <constraint firstAttribute="height" constant="25" id="KMj-us-qDx"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <state key="normal" title="举报">
                             <color key="titleColor" red="0.73333333329999995" green="0.73333333329999995" blue="0.73333333329999995" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
@@ -83,7 +83,7 @@
                     <constraint firstItem="BNk-9m-3Bw" firstAttribute="leading" secondItem="NHk-6D-lLv" secondAttribute="trailing" constant="10" id="Bea-OM-PaI"/>
                     <constraint firstAttribute="bottom" secondItem="RAg-xK-LOo" secondAttribute="bottom" constant="5" id="DCY-ug-IoV"/>
                     <constraint firstItem="NHk-6D-lLv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="O7d-Qs-6Vq"/>
-                    <constraint firstAttribute="trailing" secondItem="I6H-vL-ukS" secondAttribute="trailing" constant="10" id="Q8s-iQ-EQz"/>
+                    <constraint firstAttribute="trailing" secondItem="I6H-vL-ukS" secondAttribute="trailing" constant="30" id="Q8s-iQ-EQz"/>
                     <constraint firstAttribute="bottom" secondItem="QOM-8C-wh0" secondAttribute="bottom" priority="999" constant="14" id="QK9-qx-L62"/>
                     <constraint firstAttribute="trailing" secondItem="BNk-9m-3Bw" secondAttribute="trailing" constant="10" id="Saz-sy-J2I"/>
                     <constraint firstItem="7kl-6F-bnM" firstAttribute="leading" secondItem="NHk-6D-lLv" secondAttribute="trailing" constant="10" id="Tvt-Fw-6cf"/>

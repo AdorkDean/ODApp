@@ -43,9 +43,9 @@
     // 根据网络配置，显示不同的tabbar内容
     ODOtherConfigInfoModel *config = [[ODUserInformation sharedODUserInformation] getConfigCache];
     if (config == nil || config.auditing == 1) {
-        _titleArray = @[@"欧动社区", @"个人中心"];
-        _imageArray = @[@"icon_community", @"icon_Personal Center"];
-        _ctrlsArray = @[[[ODCommumityViewController alloc] init], [[ODPersonalCenterController alloc] init]];
+        _titleArray = @[@"欧动社区", @"中心活动", @"个人中心"];
+        _imageArray = @[@"icon_community", @"icon_Center - activity",  @"icon_Personal Center"];
+        _ctrlsArray = @[[[ODCommumityViewController alloc] init], [[ODNewActivityCenterViewController alloc] init],  [[ODPersonalCenterController alloc] init]];
     } else {
         _titleArray = @[@"首页发现", @"中心活动", @"欧动集市", @"欧动社区", @"个人中心"];
         _imageArray = @[@"icon_home-find", @"icon_Center - activity", @"icon_market", @"icon_community", @"icon_Personal Center"];
