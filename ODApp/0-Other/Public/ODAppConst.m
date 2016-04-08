@@ -23,6 +23,7 @@ NSTimeInterval const kAnimateDuration = 0.15;
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 NSString * const kUserCache = @"kUserCache";
+NSString * const kConfigCache = @"kConfigCache";
 NSString * const KUserDefaultsOpenId = @"userOpenId";
 NSString * const KUserDefaultsAvatar = @"userAvatar";
 NSString * const KUserDefaultsMobile = @"userMobile";
@@ -177,7 +178,7 @@ NSString * const ODUrlOtherBase64Upload = @"other/base64/upload";
 NSString * const ODUrlOtherFeedback = @"other/feedback";
 NSString * const ODUrlOtherConfigInfo = @"other/config/info";
 NSString * const ODUrlOtherBanner = @"other/banner";
-
+NSString * const ODUrlOtherInform = @"other/inform";
 
 /** task */
 NSString * const ODUrlTaskList = @"task/list";

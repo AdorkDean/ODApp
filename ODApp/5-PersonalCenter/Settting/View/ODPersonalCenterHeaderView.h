@@ -10,6 +10,7 @@
 @class ODUserModel;
 
 @interface ODPersonalCenterHeaderView : UIView
+@property (weak, nonatomic) IBOutlet UIView *orderInfoView;
 
 /** 用户模型 */
 @property (nonatomic, strong) ODUserModel *user;
