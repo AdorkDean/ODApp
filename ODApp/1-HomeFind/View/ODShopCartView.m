@@ -19,6 +19,9 @@ static CGFloat const shopCartH = 49;
 /** 购物车Cell Height */
 static CGFloat const shopCartCellH = 46;
 
+/** 商品最大显示数量 */
+static CGFloat const shopCartMaxShowCount = 10;
+
 #import <MJExtension.h>
 
 @interface ODShopCartView() <UITableViewDataSource, UITableViewDelegate,
@@ -157,6 +160,13 @@ static NSString * const kShopCarts = @"shopCarts";
     
     if (self.isOpened) {
         CGFloat height = self.shopCars.count * shopCartCellH + shopCartHeaderViewH;
+        if (self.shopCars.count > shopCartMaxShowCount) {
+            height = shopCartMaxShowCount * shopCartCellH + shopCartHeaderViewH;
+            self.shopCartView.bounces = YES;
+        } else {
+            self.shopCartView.bounces = NO;
+        }
+        
         [UIView animateWithDuration:kAnimateDuration animations:^{
             self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - shopCartH, KScreenWidth, height);
         }];
@@ -256,7 +266,7 @@ static NSString * const kShopCarts = @"shopCarts";
     
     for (ODTakeOutModel *takeOut in self.shopCars)
     {
-        if ([takeOut.title isEqualToString:data.title])
+        if ([takeOut.product_id isEqualToString:data.product_id])
         {
             takeOut.shopNumber++;
             [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
@@ -329,6 +339,13 @@ static NSString * const kShopCarts = @"shopCarts";
         [self.shopCars removeObject:currentData];
         
         CGFloat height = self.shopCars.count * shopCartCellH + shopCartHeaderViewH;
+        if (self.shopCars.count > shopCartMaxShowCount) {
+            height = shopCartMaxShowCount * shopCartCellH + shopCartHeaderViewH;
+            self.shopCartView.bounces = YES;
+        } else {
+            self.shopCartView.bounces = NO;
+        }
+        
         [UIView animateWithDuration:kAnimateDuration animations:^{
             self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - shopCartH, KScreenWidth, height);
         }];
