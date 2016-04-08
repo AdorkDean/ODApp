@@ -269,6 +269,10 @@ static NSString *cellId = @"ODConfirmOrderCell";
 
 
 -(void)buttonClick:(UIButton *)button{
+    if (self.addressLabel.text.length == 0) {
+         [ODProgressHUD showInfoWithStatus:@"请填写地址"];
+        return;
+    }
     if (![WXApi isWXAppInstalled])
     {
         [ODProgressHUD showInfoWithStatus:@"没有安装微信"];

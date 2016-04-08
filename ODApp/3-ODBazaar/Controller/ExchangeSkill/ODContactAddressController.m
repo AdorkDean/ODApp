@@ -101,7 +101,6 @@
          [weakSelf createTableView];
          [weakSelf.tableView reloadData];
          if (weakSelf.dataArray.count == 0 && weakSelf.defaultArray.count == 0) {
-             [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationRefreshConfirmOrder object:self];
              [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无地址"];
          }else{
              [weakSelf.noResultLabel hidden];
@@ -319,6 +318,7 @@
             weakSelf.isAddress = @"2";
         }
         [weakSelf getData];
+        [[NSNotificationCenter defaultCenter]postNotificationName:ODNotificationRefreshConfirmOrder object:self];
     } failure:^(NSError *error) {
     }];
 }
