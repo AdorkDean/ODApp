@@ -23,7 +23,11 @@
 
 @end
 
-@implementation ODTabBarController
+@implementation ODTabBarController {
+    NSArray *_titleArray;
+    NSArray *_imageArray;
+    NSArray *_ctrlsArray;
+}
 
 
 #pragma mark - init
@@ -35,11 +39,21 @@
 }
 
 - (void)createViewControllers {
-    NSArray *titleArray = @[@"首页发现", @"中心活动", @"欧动集市", @"欧动社区", @"个人中心"];
-    NSArray *imageArray = @[@"icon_home-find", @"icon_Center - activity", @"icon_market", @"icon_community", @"icon_Personal Center"];
-    NSArray *controllers = @[[[ODHomeFindViewController alloc] init], [[ODNewActivityCenterViewController alloc] init], [[ODBazaarViewController alloc] init], [[ODCommumityViewController alloc] init], [[ODPersonalCenterController alloc] init]];
-    for (NSInteger i = 0; i < controllers.count; i++) {
-        [self setupOneChildVc:[[ODNavigationController alloc] initWithRootViewController:controllers[i]] image:[NSString stringWithFormat:@"%@_default", imageArray[i]] selectedImage:[NSString stringWithFormat:@"%@_Selected", imageArray[i]] title:titleArray[i]];
+    
+    // 根据网络配置，显示不同的tabbar内容
+    ODOtherConfigInfoModel *config = [[ODUserInformation sharedODUserInformation] getConfigCache];
+    if (config == nil || config.auditing == 1) {
+        _titleArray = @[@"欧动社区", @"个人中心"];
+        _imageArray = @[@"icon_community", @"icon_Personal Center"];
+        _ctrlsArray = @[[[ODCommumityViewController alloc] init], [[ODPersonalCenterController alloc] init]];
+    } else {
+        _titleArray = @[@"首页发现", @"中心活动", @"欧动集市", @"欧动社区", @"个人中心"];
+        _imageArray = @[@"icon_home-find", @"icon_Center - activity", @"icon_market", @"icon_community", @"icon_Personal Center"];
+        _ctrlsArray = @[[[ODHomeFindViewController alloc] init], [[ODNewActivityCenterViewController alloc] init], [[ODBazaarViewController alloc] init], [[ODCommumityViewController alloc] init], [[ODPersonalCenterController alloc] init]];
+    }
+    
+    for (NSInteger i = 0; i < _ctrlsArray.count; i++) {
+        [self setupOneChildVc:[[ODNavigationController alloc] initWithRootViewController:_ctrlsArray[i]] image:[NSString stringWithFormat:@"%@_default", _imageArray[i]] selectedImage:[NSString stringWithFormat:@"%@_Selected", _imageArray[i]] title:_titleArray[i]];
     }
 }
 
@@ -50,8 +64,9 @@
 }
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
+    NSInteger userCenterIndex = _titleArray.count - 1;
     self.selectedViewController = self.childViewControllers[selectedIndex];
-    if (selectedIndex == 4 && [ODUserInformation sharedODUserInformation].openID.length == 0) return;
+    if (selectedIndex == userCenterIndex && [ODUserInformation sharedODUserInformation].openID.length == 0) return;
     self.currentIndex = selectedIndex;
 }
 
@@ -66,14 +81,15 @@
 #pragma mark - ODTabBarDelegate
 
 - (void)od_tabBar:(ODTabBar *)od_tabBar selectIndex:(NSInteger)selectIndex {
-    if (selectIndex == 4 && [ODUserInformation sharedODUserInformation].openID.length == 0) {
+    NSInteger userCenterIndex = _titleArray.count - 1;
+    if (selectIndex == userCenterIndex && [ODUserInformation sharedODUserInformation].openID.length == 0) {
         self.selectedIndex = self.currentIndex;
         ODPersonalCenterViewController *perVC = [[ODPersonalCenterViewController alloc] init];
         [self presentViewController:perVC animated:YES completion:nil];
     }
     else {
         self.selectedIndex = selectIndex;
-        if (selectIndex != 4) {
+        if (selectIndex != userCenterIndex) {
             self.currentIndex = self.selectedIndex;
         }
     }

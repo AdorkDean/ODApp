@@ -28,6 +28,7 @@ UIKIT_EXTERN NSTimeInterval const kAnimateDuration;
 #pragma mark - 通用的Key
 /** 偏好设置保存用户信息 */
 UIKIT_EXTERN NSString * const kUserCache;
+UIKIT_EXTERN NSString * const kConfigCache;
 UIKIT_EXTERN NSString * const KUserDefaultsOpenId;
 
 UIKIT_EXTERN NSString * const KUserDefaultsAvatar;
@@ -155,6 +156,7 @@ UIKIT_EXTERN NSString * const ODUrlOtherConfigInfo;
 UIKIT_EXTERN NSString * const ODUrlOtherBase64Upload;
 UIKIT_EXTERN NSString * const ODUrlOtherFeedback;
 UIKIT_EXTERN NSString * const ODUrlOtherBanner;
+UIKIT_EXTERN NSString * const ODUrlOtherInform;
 
 
 

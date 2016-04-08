@@ -26,6 +26,7 @@
 #import "ODPublicTool.h"
 #import "ODMyTakeOutViewController.h"
 #import <Masonry.h>
+#import "ODOtherConfigInfoＭodel.h"
 
 @interface ODPersonalCenterController ()
 
@@ -76,14 +77,25 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 14, 0);
     
     // 创建头部视图
+    ODOtherConfigInfoModel *config = [[ODUserInformation sharedODUserInformation] getConfigCache];
     ODPersonalCenterHeaderView *headerView = [ODPersonalCenterHeaderView headerView];
-    self.tableView.tableHeaderView = headerView;
-    self.headerView = headerView;
-    [headerView makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(self.view).offset(0);
-        make.width.equalTo(self.view);
-        make.height.equalTo(172);
-    }];
+    
+    if (config == nil || config.auditing == 1) {
+        headerView.frame = CGRectMake(0, 0, headerView.frame.size.width, 86);
+        headerView.orderInfoView.hidden = YES;
+        self.tableView.tableHeaderView = headerView;
+        self.headerView = headerView;
+    } else {
+        headerView.orderInfoView.hidden = NO;
+        self.tableView.tableHeaderView = headerView;
+        self.headerView = headerView;
+        [headerView makeConstraints:^(MASConstraintMaker *make) {
+            make.left.top.equalTo(self.view).offset(0);
+            make.width.equalTo(self.view);
+            make.height.equalTo(172);
+        }];
+    }
+    
 }
 
 /**
@@ -147,8 +159,13 @@
     ODArrowItem *myTakeOut = [ODArrowItem itemWithName:@"我的外卖"];
     myTakeOut.destVc = [ODMyTakeOutViewController class];
     
-    ODGroupItem *group = [ODGroupItem groupWithItems:@[myTakeOut, item0, item1, item2, item3,
-                                                       item4, item5, item6, item7, item8]];
+    ODOtherConfigInfoModel *config = [[ODUserInformation sharedODUserInformation] getConfigCache];
+    ODGroupItem *group = nil;
+    if (config == nil || config.auditing == 1) {
+        group = [ODGroupItem groupWithItems:@[item1, item2, item6, item7, item8]];
+    } else {
+        group = [ODGroupItem groupWithItems:@[myTakeOut, item0, item1, item2, item3, item4, item5, item6, item7, item8]];
+    }
     
     [self.groups addObject:group];
 }

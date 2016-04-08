@@ -9,37 +9,89 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODOthersInformationController.h"
 #import "ODEvaluationController.h"
+#import "ODOtherConfigInfoＭodel.h"
+#import "ODInformViewController.h"
+
+
+@implementation PersonCellData
+@end
+
+
+
+
+
 @interface ODOthersInformationController ()
 
 @end
 
-@implementation ODOthersInformationController
+@implementation ODOthersInformationController {
+    NSMutableArray *_cellData;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self initData];
     
     self.isOther = NO;
     
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(tapInformBtn) color:nil highColor:nil title:@"举报"];
     
     self.navigationItem.title = @"个人中心";
     [self createRequest];
+}
+
+- (void)tapInformBtn
+{
+    if (self.model != nil) {
+        ODInformViewController *informVC = [[ODInformViewController alloc] init];
+        informVC.objectId = self.model.open_id;
+        informVC.type = @"4";
+        [self.navigationController pushViewController:informVC animated:YES];
+    }
+}
+
+- (void)initData
+{
+    _cellData = [NSMutableArray array];
+    
+    PersonCellData *topic = [[PersonCellData alloc] init];
+    topic.title = @"他发表的话题";
+    topic.type = kPersonCellTypeTopic;
+    
+    PersonCellData *reservation = [[PersonCellData alloc] init];
+    reservation.title = @"他的预约中心";
+    reservation.type = kPersonCellTypeReservation;
+    
+    PersonCellData *task = [[PersonCellData alloc] init];
+    task.title = @"他发起的任务";
+    task.type = kPersonCellTypeTask;
+    
+    PersonCellData *comment = [[PersonCellData alloc] init];
+    comment.title = @"他收到的评价";
+    comment.type = kPersonCellTypeComment;
+    
+    ODOtherConfigInfoModel *config = [[ODUserInformation sharedODUserInformation] getConfigCache];
+    if (config == nil || config.auditing == 1) {
+        [_cellData addObject:topic];
+    } else {
+        [_cellData addObject:reservation];
+        [_cellData addObject:topic];
+        [_cellData addObject:task];
+        [_cellData addObject:comment];
+    }
 }
 
 - (void)createRequest
 {
     __weakSelf
     NSDictionary *parameter = @{@"open_id":self.open_id};
-    [ODHttpTool getWithURL:ODUrlUserInfo parameters:parameter modelClass:[ODUserModel class] success:^(id model)
-     {
+    [ODHttpTool getWithURL:ODUrlUserInfo parameters:parameter modelClass:[ODUserModel class] success:^(id model) {
         weakSelf.model = [model result];
         [weakSelf createCollectionView];
         [weakSelf.collectionView reloadData];
-    }
-                   failure:^(NSError *error)
-     {
-        
+    } failure:^(NSError *error) {
     }];
  }
 
@@ -75,32 +127,17 @@
     }
     else
     {
+        PersonCellData *data = _cellData[indexPath.section - 1];
         ODLandSecondCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"second" forIndexPath:indexPath];
-        
-        if (indexPath.section == 1)
-        {
-            cell.titleLabel.text = @"他的中心预约";
-        }
-        else if (indexPath.section == 2)
-        {
-            cell.titleLabel.text = @"他发表的话题";
-        }
-        else if (indexPath.section == 3)
-        {
-            cell.titleLabel.text = @"他发起的任务";
-        }
-        else if (indexPath.section == 4)
-        {
-            cell.titleLabel.text = @"他收到的评价";
-        }
-        return cell;        
+        cell.titleLabel.text = data.title;
+        return cell;
     }
 }
 
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 5;
+    return _cellData.count + 1;
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -110,39 +147,45 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
-    {
-        
+    if (indexPath.section == 0) {
+        return;
     }
-    else if (indexPath.section == 1)
-    {
-        ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
-        vc.open_id = self.model.open_id;
-        vc.centerTitle = @"他的预约纪录";
-//        vc.isOther = self.isOther;
-        vc.isRefresh = YES;
-        vc.isOther = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }
-    else if (indexPath.section == 2)
-    {
-        ODOtherTopicViewController *vc = [[ODOtherTopicViewController alloc] init];
-        vc.open_id = self.model.open_id;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else if (indexPath.section == 3)
-    {
-        ODOtherTaskController *vc = [[ODOtherTaskController alloc]init];
-        vc.openId = self.model.open_id;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else if (indexPath.section == 4)
-    {
-        ODEvaluationController *vc = [[ODEvaluationController alloc] init];
-        vc.typeTitle = @"他收到的评价";
-        vc.openId = self.model.open_id;
-        [self.navigationController pushViewController:vc animated:YES];
+    
+    PersonCellData *data = _cellData[indexPath.section - 1];
+    
+    switch (data.type) {
+        case kPersonCellTypeReservation:
+        {
+            ODMyOrderRecordController *vc = [[ODMyOrderRecordController alloc] init];
+            vc.open_id = self.model.open_id;
+            vc.centerTitle = @"他的预约纪录";
+            vc.isRefresh = YES;
+            vc.isOther = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case kPersonCellTypeTopic:
+        {
+            ODOtherTopicViewController *vc = [[ODOtherTopicViewController alloc] init];
+            vc.open_id = self.model.open_id;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case kPersonCellTypeTask:
+        {
+            ODOtherTaskController *vc = [[ODOtherTaskController alloc]init];
+            vc.openId = self.model.open_id;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
+        case kPersonCellTypeComment:
+        {
+            ODEvaluationController *vc = [[ODEvaluationController alloc] init];
+            vc.typeTitle = @"他收到的评价";
+            vc.openId = self.model.open_id;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+            break;
     }
 }
 
