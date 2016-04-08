@@ -16,6 +16,7 @@
 #import "ODAPPInfoTool.h"
 
 #import "ODGuideTool.h"
+#import "ODHttpTool.h"
 
 
 @interface AppDelegate () <UIScrollViewDelegate, WXApiDelegate> {
@@ -52,6 +53,7 @@ void UncaughtExceptionHandler(NSException *exception) {
 #pragma mark - UIApplicationDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
+    [self loadConfig];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
@@ -85,6 +87,23 @@ void UncaughtExceptionHandler(NSException *exception) {
     return YES;
     
     
+}
+
+- (void)loadConfig {
+    
+    [ODHttpTool getWithURL:ODUrlOtherConfigInfo parameters:@{} modelClass:[ODOtherConfigInfoModel class] success:^(ODOtherConfigInfoModelResponse *model) {
+        ODOtherConfigInfoModel *config = model.result;
+        ODOtherConfigInfoModel *oldConfig = [[ODUserInformation sharedODUserInformation] getConfigCache];
+        NSLog(@"%@", model);
+        if (oldConfig == nil || oldConfig.auditing != config.auditing) {
+            [[ODUserInformation sharedODUserInformation] updateConfigCache:config];
+            if ([self.window.rootViewController isKindOfClass:[ODTabBarController class]]) {
+                self.window.rootViewController = [[ODTabBarController alloc]init];
+            }
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@", error);
+    }];
 }
 
 

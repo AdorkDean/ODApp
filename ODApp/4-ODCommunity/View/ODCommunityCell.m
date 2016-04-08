@@ -7,6 +7,7 @@
 //
 
 #import "ODCommunityCell.h"
+#import "ODInformViewController.h"
 
 @implementation ODCommunityCell
 
@@ -40,6 +41,7 @@
         // 设置圆角
         [weakSelf.headButton setBackgroundImage:[image OD_circleImage] forState:UIControlStateNormal];
     }];
+    [self.informBtn addTarget:self action:@selector(tapInformBtn) forControlEvents:UIControlEventTouchUpInside];
     [self.headButton addTarget:self action:@selector(otherInfoClick) forControlEvents:UIControlEventTouchUpInside];
     self.nickLabel.text = [dict[userId]nick];
     self.signLabel.text = [dict[userId]sign];
@@ -111,6 +113,17 @@
         UINavigationController *navigationController = tabBarControler.selectedViewController;
         [navigationController pushViewController:vc animated:YES];
     }
+}
+
+// 举报
+- (void)tapInformBtn {
+    ODInformViewController *informVC = [[ODInformViewController alloc] init];
+    informVC.objectId = [NSString stringWithFormat:@"%d", self.model.id];
+    informVC.type = @"1";
+    
+    UITabBarController *tabBarControler = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
+    UINavigationController *navigationController = tabBarControler.selectedViewController;
+    [navigationController pushViewController:informVC  animated:YES];
 }
 
 /**

@@ -53,4 +53,23 @@ Single_Implementation(ODUserInformation)
     }
 }
 
+- (void)updateConfigCache:(ODOtherConfigInfoModel *)config
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:config.mj_keyValues forKey:kConfigCache];
+    [userDefault synchronize];
+}
+
+- (ODOtherConfigInfoModel *)getConfigCache
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSDictionary *configDic = [userDefault objectForKey:kConfigCache];
+    if (configDic == nil) {
+        return  nil;
+    } else {
+        return [ODOtherConfigInfoModel mj_objectWithKeyValues:configDic];
+    }
+}
+
+
 @end
