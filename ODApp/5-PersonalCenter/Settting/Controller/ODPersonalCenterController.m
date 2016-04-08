@@ -147,8 +147,7 @@
     ODArrowItem *myTakeOut = [ODArrowItem itemWithName:@"我的外卖"];
     myTakeOut.destVc = [ODMyTakeOutViewController class];
     
-    ODGroupItem *group = [ODGroupItem groupWithItems:@[myTakeOut, item0, item1, item2, item3,
-                                                       item4, item5, item6, item7, item8]];
+    ODGroupItem *group = [ODGroupItem groupWithItems:@[myTakeOut, item0, item1, item2, item3, item4, item5, item6, item7, item8]];
     
     [self.groups addObject:group];
 }
