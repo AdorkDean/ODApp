@@ -208,6 +208,8 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     [self.navigationController pushViewController:detailControler animated:YES];
 }
 
+#pragma mark - Create Header View
+
 -(void)createHeaderView{
     self.headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 200)];
     self.headerView.backgroundColor = [UIColor backgroundColor];
