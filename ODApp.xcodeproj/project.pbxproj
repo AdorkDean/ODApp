@@ -245,6 +245,9 @@
 		23EBA2301CAE1875009D32C6 /* ODConfirmOrderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EBA22E1CAE1875009D32C6 /* ODConfirmOrderCell.m */; };
 		23EBA2311CAE1875009D32C6 /* ODConfirmOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23EBA22F1CAE1875009D32C6 /* ODConfirmOrderCell.xib */; };
 		23EBA2341CAE6D25009D32C6 /* ODExchangePayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23EBA2331CAE6D25009D32C6 /* ODExchangePayViewController.m */; };
+		3DCD2BA41CB7781300B15DCF /* ODOtherConfigInfoＭodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DCD2BA31CB7781300B15DCF /* ODOtherConfigInfoＭodel.m */; };
+		3DDC54351CB75F6900E83423 /* ODInformViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DDC54341CB75F6900E83423 /* ODInformViewController.m */; };
+		3DDC54371CB75F8200E83423 /* ODInformViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3DDC54361CB75F8200E83423 /* ODInformViewController.xib */; };
 		400334851C9B97C500973818 /* ODBaseSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4003346F1C9B97C500973818 /* ODBaseSettingController.m */; };
 		400334861C9B97C500973818 /* ODPersonalCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 400334711C9B97C500973818 /* ODPersonalCenterController.m */; };
 		400334871C9B97C500973818 /* ODArrowItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 400334741C9B97C500973818 /* ODArrowItem.m */; };
@@ -816,6 +819,11 @@
 		23EBA22F1CAE1875009D32C6 /* ODConfirmOrderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODConfirmOrderCell.xib; sourceTree = "<group>"; };
 		23EBA2321CAE6D25009D32C6 /* ODExchangePayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ODExchangePayViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		23EBA2331CAE6D25009D32C6 /* ODExchangePayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODExchangePayViewController.m; sourceTree = "<group>"; };
+		3DCD2BA21CB7781300B15DCF /* ODOtherConfigInfoＭodel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ODOtherConfigInfoＭodel.h"; sourceTree = "<group>"; };
+		3DCD2BA31CB7781300B15DCF /* ODOtherConfigInfoＭodel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ODOtherConfigInfoＭodel.m"; sourceTree = "<group>"; };
+		3DDC54331CB75F6900E83423 /* ODInformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODInformViewController.h; sourceTree = "<group>"; };
+		3DDC54341CB75F6900E83423 /* ODInformViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODInformViewController.m; sourceTree = "<group>"; };
+		3DDC54361CB75F8200E83423 /* ODInformViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODInformViewController.xib; sourceTree = "<group>"; };
 		4003346E1C9B97C500973818 /* ODBaseSettingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBaseSettingController.h; sourceTree = "<group>"; };
 		4003346F1C9B97C500973818 /* ODBaseSettingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBaseSettingController.m; sourceTree = "<group>"; };
 		400334701C9B97C500973818 /* ODPersonalCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODPersonalCenterController.h; sourceTree = "<group>"; };
@@ -1754,6 +1762,9 @@
 				232CB4781C9264E200340D12 /* Login&Register */,
 				232CB47D1C9264E200340D12 /* Personal */,
 				232CB49C1C9264E200340D12 /* UserInfo */,
+				3DDC54331CB75F6900E83423 /* ODInformViewController.h */,
+				3DDC54341CB75F6900E83423 /* ODInformViewController.m */,
+				3DDC54361CB75F8200E83423 /* ODInformViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1860,6 +1871,8 @@
 				232CB4BD1C9264E200340D12 /* ODUserInformation.m */,
 				232CB4BE1C9264E200340D12 /* ODUserModel.h */,
 				232CB4BF1C9264E200340D12 /* ODUserModel.m */,
+				3DCD2BA21CB7781300B15DCF /* ODOtherConfigInfoＭodel.h */,
+				3DCD2BA31CB7781300B15DCF /* ODOtherConfigInfoＭodel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2416,6 +2429,7 @@
 				40A02D1C1C965A3F009CE702 /* ODBazaarExchangeSkillCell.xib in Resources */,
 				ED537EDE1CA5227E00EB12F4 /* ODSubmitOrderView.xib in Resources */,
 				232CB5E31C9264E200340D12 /* ODBazaarReleaseSkillTimeViewCell.xib in Resources */,
+				3DDC54371CB75F8200E83423 /* ODInformViewController.xib in Resources */,
 				232CB5EA1C9264E200340D12 /* ODBazaarDetailCollectionCell.xib in Resources */,
 				232CB5AF1C9264E200340D12 /* ODActivityVIPCell.xib in Resources */,
 				232CB66D1C9264E200340D12 /* ODWithdrawalView.xib in Resources */,
@@ -2540,6 +2554,7 @@
 				232CB5641C9264E200340D12 /* IQNSArray+Sort.m in Sources */,
 				232CB5A71C9264E200340D12 /* ODActivePersonInfoView.m in Sources */,
 				232CB5BB1C9264E200340D12 /* ODPlacePrecontrHeaderView.m in Sources */,
+				3DCD2BA41CB7781300B15DCF /* ODOtherConfigInfoＭodel.m in Sources */,
 				ED46880E1C965F5300E31F64 /* ODLocationCell.m in Sources */,
 				232CB6511C9264E200340D12 /* ODEvaluation.m in Sources */,
 				232CB6021C9264E200340D12 /* ODMyTaskController.m in Sources */,
@@ -2709,6 +2724,7 @@
 				232CB5931C9264E200340D12 /* ODHomeInfoModel.m in Sources */,
 				232CB6161C9264E200340D12 /* ODLoveListModel.m in Sources */,
 				232CB6491C9264E200340D12 /* ODMySellModel.m in Sources */,
+				3DDC54351CB75F6900E83423 /* ODInformViewController.m in Sources */,
 				40A02D1B1C965A3F009CE702 /* ODBazaarExchangeSkillCell.m in Sources */,
 				232CB5621C9264E200340D12 /* main.m in Sources */,
 				232CB5EE1C9264E200340D12 /* ODCommumityViewController.m in Sources */,

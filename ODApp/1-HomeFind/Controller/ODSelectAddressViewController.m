@@ -93,7 +93,7 @@ static NSString *cellId = @"ODSelectAddressCell";
     self.mapView.showsUserLocation = YES;
     self.mapView.mapType = MAMapTypeStandard;
     self.mapView.customizeUserLocationAccuracyCircleRepresentation = YES;
-    [self.mapView setZoomLevel:20 animated:YES];
+    [self.mapView setZoomLevel:19 animated:YES];
     [self.view addSubview:self.mapView];
 }
 
@@ -210,12 +210,12 @@ static NSString *cellId = @"ODSelectAddressCell";
     [self.mapSearchAPI AMapPOIAroundSearch:request];
 }
 
-- (void)mapViewDidFinishLoadingMap:(MAMapView *)mapView dataSize:(NSInteger)dataSize{
-    NSLogFunc
-    if (self.lat.length) {
-        self.mapView.centerCoordinate = CLLocationCoordinate2DMake([self.lat doubleValue], [self.lng doubleValue]);
-    }
-}
+//- (void)mapViewDidFinishLoadingMap:(MAMapView *)mapView dataSize:(NSInteger)dataSize{
+//    NSLogFunc
+//    if (self.lat.length) {
+//        self.mapView.centerCoordinate = CLLocationCoordinate2DMake([self.lat doubleValue], [self.lng doubleValue]);
+//    }
+//}
 
 
 #pragma mark - AMapSearchDelegate
@@ -231,8 +231,6 @@ static NSString *cellId = @"ODSelectAddressCell";
     [self.tableView reloadData];
 }
 
-
-
 #pragma mark - action
 -(void)tapGestureClick{
     ODKeywordsSearchViewController *keywords = [[ODKeywordsSearchViewController alloc]init];
@@ -241,7 +239,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 
 - (void)backToOrigin{
     self.mapView.centerCoordinate = self.mapView.userLocation.location.coordinate;
-    [self.mapView setZoomLevel:20 animated:YES];
+    [self.mapView setZoomLevel:19 animated:YES];
 }
 
 

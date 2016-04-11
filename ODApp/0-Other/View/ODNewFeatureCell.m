@@ -65,7 +65,7 @@
     // 设置开始按钮frame
     self.startButton.od_width = 140;
     self.startButton.od_height = 50;
-    self.startButton.center = CGPointMake(KScreenWidth * 0.5, KScreenHeight * 0.8);
+    self.startButton.center = CGPointMake(KScreenWidth * 0.5, KScreenHeight * 0.83);
 }
 
 - (void)setIndex:(NSIndexPath *)indexPath imageCount:(NSInteger)count

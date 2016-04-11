@@ -10,6 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "ODUserModel.h"
 #import <CoreLocation/CoreLocation.h>
+#import "ODOtherConfigInfoＭodel.h"
 
 @interface ODUserInformation : NSObject
 
@@ -24,5 +25,8 @@ Single_Interface(ODUserInformation)
 
 - (void)updateUserCache:(ODUserModel *)user;
 - (ODUserModel *)getUserCache;
+
+- (void)updateConfigCache:(ODOtherConfigInfoModel *)config;
+- (ODOtherConfigInfoModel *)getConfigCache;
 
 @end

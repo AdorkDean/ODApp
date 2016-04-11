@@ -8,6 +8,7 @@
 
 #import "ODUserInformation.h"
 #import "ODAppConst.h"
+#import "JPUSHService.h"
 
 @implementation ODUserInformation
 Single_Implementation(ODUserInformation)
@@ -30,6 +31,15 @@ Single_Implementation(ODUserInformation)
     
     [userDefault setObject:user.mj_keyValues forKey:kUserCache];
     [userDefault synchronize];
+    
+    [JPUSHService setAlias:user.open_id callbackSelector:@selector(setTags:alias:fetchCompletionHandle:) object:nil];
+}
+
+-(void)tagsAliasCallback:(int)iResCode
+                    tags:(NSSet*)tags
+                   alias:(NSString*)alias
+{
+    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
 
 
@@ -42,5 +52,24 @@ Single_Implementation(ODUserInformation)
         return [ODUserModel mj_objectWithKeyValues:userDic];
     }
 }
+
+- (void)updateConfigCache:(ODOtherConfigInfoModel *)config
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    [userDefault setObject:config.mj_keyValues forKey:kConfigCache];
+    [userDefault synchronize];
+}
+
+- (ODOtherConfigInfoModel *)getConfigCache
+{
+    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+    NSDictionary *configDic = [userDefault objectForKey:kConfigCache];
+    if (configDic == nil) {
+        return  nil;
+    } else {
+        return [ODOtherConfigInfoModel mj_objectWithKeyValues:configDic];
+    }
+}
+
 
 @end

@@ -20,6 +20,18 @@
 #import "ODLandFirstCell.h"
 #import "ODLandSecondCell.h"
 
+typedef enum {
+    kPersonCellTypeReservation,
+    kPersonCellTypeTopic,
+    kPersonCellTypeTask,
+    kPersonCellTypeComment
+} PersonCellType;
+
+@interface PersonCellData : NSObject
+@property NSString *title;
+@property PersonCellType type;
+@end
+
 
 @interface ODOthersInformationController : ODBaseViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
