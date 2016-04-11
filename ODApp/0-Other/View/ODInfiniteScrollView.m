@@ -195,7 +195,7 @@ static int const ImageViewCount = 3;
 #pragma mark - 定时器处理
 - (void)startTimer
 {
-    NSTimer *timer = [NSTimer timerWithTimeInterval:2 target:self selector:@selector(next) userInfo:nil repeats:YES];
+    NSTimer *timer = [NSTimer timerWithTimeInterval:3 target:self selector:@selector(next) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
     self.timer = timer;
 }
