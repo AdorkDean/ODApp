@@ -31,9 +31,9 @@
 
 
 - (void)setModel:(ODOrderDetailModel *)model {
-    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@", [model.user valueForKeyPath:@"avatar"]]]];
+    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@", [model.user valueForKeyPath:@"avatar"]]]placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     self.userNameLabel.text = [model.user valueForKeyPath:@"nick"];
-    [self.orderImageView sd_setImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@", [model.imgs_small[0] valueForKeyPath:@"img_url"]]]];
+    [self.orderImageView sd_setImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@", [model.imgs_small[0] valueForKeyPath:@"img_url"]]]placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
     self.orderTitle.text = model.title;
     self.orderWay.text = model.order_status;
     self.orderPrice.text = [NSString stringWithFormat:@"%@元/%@", model.order_price, model.unit];

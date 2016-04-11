@@ -29,7 +29,7 @@
 -(void)setWithLikeModel:(ODLoveListModel *)model
 {
     
-    [self.userImageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    [self.userImageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     self.schoolLabel.text = model.school_name;
     self.nameLabel.text = model.nick;
     self.userImageButton.userInteractionEnabled = NO;
@@ -55,7 +55,7 @@
 -(void)setWithApplyModel:(ODApplyModel *)model
 {
     
-    [self.userImageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar_url] forState:UIControlStateNormal];
+    [self.userImageButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar_url] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     self.schoolLabel.text = model.nick;
     self.nameLabel.text = model.sign;
     self.userImageButton.userInteractionEnabled = NO;

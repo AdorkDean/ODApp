@@ -29,7 +29,7 @@
 
 
 - (void)dealWithBuyModel:(ODMyOrderModel *)model {
-    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString: model.swap_user_avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString: model.swap_user_avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]options:SDWebImageRetryFailed];
     
     
     [self.contentImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.swap_img]];
@@ -117,7 +117,7 @@
 - (void)dealWithSellModel:(ODMySellModel *)model
 {
     
-    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.order_user_avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.order_user_avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]options:SDWebImageRetryFailed];
     
     [self.contentImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.swap_img]];
     

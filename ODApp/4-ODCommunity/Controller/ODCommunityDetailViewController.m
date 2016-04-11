@@ -126,7 +126,7 @@
     
     //头像
     UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 17.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"" font:0];
-    [userHeaderButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:infoModel.user[@"avatar_url"]] forState:UIControlStateNormal];
+    [userHeaderButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:infoModel.user[@"avatar_url"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     userHeaderButton.layer.masksToBounds = YES;
     userHeaderButton.layer.cornerRadius = 24;
     userHeaderButton.backgroundColor = [UIColor grayColor];
@@ -258,7 +258,7 @@
     ODCommunityDetailCell *cell = [tableView dequeueReusableCellWithIdentifier:kCommunityDetailCellId];
     ODCommunityDetailModel *model = self.dataArray[indexPath.row];
    
-    [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar_url"]] forState:UIControlStateNormal];
+    [cell.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user[@"avatar_url"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     [cell.headButton addTarget:self action:@selector(cellHeadButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [cell.replyButton addTarget:self action:@selector(replyButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     cell.nickName.text = model.user[@"nick"];

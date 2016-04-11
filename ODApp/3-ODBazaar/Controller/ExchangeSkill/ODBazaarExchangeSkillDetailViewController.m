@@ -120,7 +120,7 @@
     UIImageView *headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(17.5, 10, 40, 40)];
     headImageView.layer.masksToBounds = YES;
     headImageView.layer.cornerRadius = 20;
-    [headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.user[@"avatar"]] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    [headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.user[@"avatar"]] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     [userInfoView addSubview:headImageView];
 
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(CGRectGetMaxX(headImageView.frame) + 17.5, 24.25, 11.5, 11.5)];
@@ -207,7 +207,7 @@
         button.frame = CGRectMake((kScreenSize.width-(count-1)*10-count*width)/2+(width+10)*i, CGRectGetMaxY(self.loveImageView.frame)+15, width, width);
         button.layer.masksToBounds = YES;
         button.layer.cornerRadius = width / 2;
-        [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString: [dict valueForKeyPath:@"avatar"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+        [button sd_setBackgroundImageWithURL:[NSURL OD_URLWithString: [dict valueForKeyPath:@"avatar"]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
         [button addTarget:self action:@selector(lovesListButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.detailView addSubview:button];
     }

@@ -79,7 +79,7 @@
     // 加载头像
 //    [self.informationView.userImageView od_loadCachedImage:model.avatar];
     
-    [self.informationView.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar] placeholderImage:nil options:SDWebImageRetryFailed];
+    [self.informationView.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     
     
     UITapGestureRecognizer *pictMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(picAction)];
