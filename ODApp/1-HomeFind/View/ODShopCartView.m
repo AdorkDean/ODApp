@@ -336,6 +336,7 @@ static NSString * const kShopCarts = @"shopCarts";
     
     // 将商品从购物车中移除
     if (currentData.shopNumber == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartminusNumber object:nil];
         [self.shopCars removeObject:currentData];
         
         CGFloat height = self.shopCars.count * shopCartCellH + shopCartHeaderViewH;
@@ -354,8 +355,6 @@ static NSString * const kShopCarts = @"shopCarts";
         [self.shopCartView reloadData];
         
         if (!self.shopCars.count) [self dismiss];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartminusNumber object:nil];
     }
     self.buyButton.enabled = self.priceLabel.text.floatValue;
     self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];

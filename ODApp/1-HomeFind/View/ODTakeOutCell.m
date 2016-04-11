@@ -96,7 +96,6 @@
     self.originalPriceLabel.attributedText = attribtStr;
     // 清空购买数量
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartRemoveALL object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartminusNumber object:nil];
 }
 
 - (void)dealloc
