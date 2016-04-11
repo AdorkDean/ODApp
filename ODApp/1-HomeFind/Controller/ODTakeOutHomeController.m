@@ -297,7 +297,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     animation.path = path.CGPath;
     animation.removedOnCompletion = NO;
     animation.fillMode = kCAFillModeForwards;
-    animation.duration = 0.8;
+    animation.duration = 0.6;
     animation.delegate = self;
     animation.autoreverses = NO;
     animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
@@ -347,7 +347,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     // 添加动画
     [self shopCartAnimation:dict];
     // 延迟执行
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // 点击购买按钮
         [self.shopCart addShopCount:takeOut];
     });

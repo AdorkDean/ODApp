@@ -96,6 +96,7 @@
     self.originalPriceLabel.attributedText = attribtStr;
     // 清空购买数量
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartRemoveALL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(markShopNumber:) name:ODNotificationShopCartminusNumber object:nil];
 }
 
 - (void)dealloc
@@ -106,6 +107,11 @@
 - (void)clearShopNumber:(NSNotification *)note
 {
     self.datas.shopNumber = 0;
+}
+
+- (void)markShopNumber:(NSNotification *)note
+{
+    self.datas.clear = YES;
 }
 
 #pragma mark - 事件方法
