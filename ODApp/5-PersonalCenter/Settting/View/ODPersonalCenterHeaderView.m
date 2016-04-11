@@ -52,7 +52,7 @@
     // 头像
     UIImage *placeholderImage = [UIImage OD_circleImageNamed:@"titlePlaceholderImage"];
     __weakSelf;
-    [self.avatarImageView sd_setImageWithURL:[NSURL OD_URLWithString:user.avatar] placeholderImage:placeholderImage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    [self.avatarImageView sd_setImageWithURL:[NSURL OD_URLWithString:user.avatar] placeholderImage:placeholderImage options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
         if (image == nil) return;
         // 设置圆角
         weakSelf.avatarImageView.image = [image OD_circleImage];

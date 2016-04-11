@@ -32,7 +32,7 @@
     }
     
     
-    [self.userImgeView sd_setImageWithURL:[NSURL OD_URLWithString:[model.user valueForKeyPath:@"avatar" ]]];
+    [self.userImgeView sd_setImageWithURL:[NSURL OD_URLWithString:[model.user valueForKeyPath:@"avatar"]]placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     self.nickLabel.text = [model.user valueForKeyPath:@"nick"];
     self.orderTitle.text = model.title;
     self.orderPrice.text = [NSString stringWithFormat:@"%.2f元/%@" , model.price , model.unit];

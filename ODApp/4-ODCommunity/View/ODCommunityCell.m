@@ -31,7 +31,7 @@
     self.contentLabel.text = model.content;
     NSString *userId = [NSString stringWithFormat:@"%d",model.user_id];
     self.open_id = [dict[userId]open_id];
-    [self.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[dict[userId]avatar_url]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    [self.headButton sd_setBackgroundImageWithURL: [NSURL OD_URLWithString:[dict[userId]avatar_url]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]options:SDWebImageRetryFailed];
     // 设置数据
     UIImage *placeholderImage = [UIImage OD_circleImageNamed:@"titlePlaceholderImage"];
     __weakSelf;
