@@ -98,7 +98,12 @@ static NSString *violationsCellId = @"ODMyTaskViolationsCell";
 #pragma mark - 数据请求
 - (void)requestData {
     __weakSelf
-    NSDictionary *parameter = @{@"suggest":@"0",@"task_status":self.status,@"page":[NSString stringWithFormat:@"%ld", (long) self.page],@"my":@"1"};
+    NSDictionary *parameter = @{
+                                @"suggest":@"0",
+                                @"task_status":self.status,
+                                @"page":[NSString stringWithFormat:@"%ld", (long) self.page],
+                                @"my":@"1"
+                                };
     [ODHttpTool getWithURL:ODUrlTaskList parameters:parameter modelClass:[ODBazaarTasksModel class] success:^(id model)
      {
          if (weakSelf.page == 1) {

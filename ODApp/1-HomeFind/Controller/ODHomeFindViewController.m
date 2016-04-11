@@ -68,6 +68,8 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     [[NSNotificationCenter defaultCenter] addObserverForName:ODNotificationLocationSuccessRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *_Nonnull note){
         [weakSelf.tableView.mj_header beginRefreshing];
     }];
+    
+ 
 }
 
 - (void)viewWillAppear:(BOOL)animated{

@@ -22,6 +22,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 @property (nonatomic ,strong) UITableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *dataArray;
 @property (nonatomic ,strong) UIImageView *imageView;
+@property (nonatomic)BOOL isScroll;
 
 
 @end
@@ -53,6 +54,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isScroll = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self navigationInit];
     [self mapViewInit];
@@ -184,7 +186,6 @@ static NSString *cellId = @"ODSelectAddressCell";
         //发起逆地理编码
         [self.mapSearchAPI AMapReGoecodeSearch:regeo];
         
-        //构造AMapPOIAroundSearchRequest对象，设置周边请求参数
         AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
         request.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
         request.keywords = @"";
