@@ -333,6 +333,9 @@ static NSString * const kShopCarts = @"shopCarts";
     // 计算总价
     CGFloat totalPrice = self.priceLabel.text.floatValue - currentData.price_show.floatValue;
     self.priceLabel.text = [NSString stringWithFormat:@"%.2f", totalPrice];
+    // 按钮状态
+    self.buyButton.enabled = self.priceLabel.text.floatValue;
+    self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
     
     // 将商品从购物车中移除
     if (currentData.shopNumber == 0) {
@@ -360,8 +363,6 @@ static NSString * const kShopCarts = @"shopCarts";
             if (!self.shopCars.count) [self dismiss];
         }
     }
-    self.buyButton.enabled = self.priceLabel.text.floatValue;
-    self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
     
     // 更新缓存
     [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
