@@ -92,16 +92,18 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
 + (NSMutableDictionary *)getRequestParameter:(NSDictionary *)parameter
 {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    
-    dic[@"city_id"] = [NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID];
+    NSString *city_id = [NSString stringWithFormat:@"%@",[ODUserInformation sharedODUserInformation].cityID] ? : @"1";
+    CGFloat latitude = [ODUserInformation sharedODUserInformation].userCoordinate.latitude ? : 0;
+    CGFloat longitude = [ODUserInformation sharedODUserInformation].userCoordinate.longitude ? : 0;
+    dic[@"city_id"] = city_id;
     dic[@"device_id"] = [ODAPPInfoTool deviceId];
     dic[@"platform"] = @"iphone";
     dic[@"platform_version"] = [UIDevice currentDevice].systemVersion;
     dic[@"channel"] = @"appstore";
     dic[@"app_version"] = [ODAPPInfoTool APPVersion];
     dic[@"network_type"] = [ODAPPInfoTool sharedODAPPInfoTool].networkType;
-    dic[@"latitude"] = [@([ODUserInformation sharedODUserInformation].userCoordinate.latitude) stringValue];
-    dic[@"longitude"] = [@([ODUserInformation sharedODUserInformation].userCoordinate.longitude) stringValue];
+    dic[@"latitude"] = [@(latitude) stringValue];
+    dic[@"longitude"] = [@(longitude) stringValue];
     if (parameter[@"open_id"] == nil)
     {
         dic[@"open_id"] = [ODUserInformation sharedODUserInformation].openID;
