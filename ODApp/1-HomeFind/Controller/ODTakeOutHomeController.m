@@ -131,7 +131,8 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     tableView.delegate = self;
     [self.view addSubview:tableView];
     self.tableView = tableView;
-    self.type = self.page = @1;
+    self.type = @0;
+    self.page = @1;
     
     // rowHeight
     tableView.rowHeight = 90;
@@ -208,7 +209,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
         NSArray *newDatas = [model result];
         [weakSelf.datas addObjectsFromArray:newDatas];
         [weakSelf.tableView reloadData];
-        [weakSelf checkFooterState:newDatas.count];
+//        [weakSelf checkFooterState:newDatas.count];
         // 重新设置 page = 1
         weakSelf.page = @1;
     } failure:^(NSError *error) {
@@ -219,7 +220,12 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 - (void)loadMoreTakeOuts
 {
     // 取出页码
-    NSNumber *currentPage = @([self.page integerValue] + 1);
+    NSNumber *currentPage;
+//    if (self.datas.count < 20) {
+//        currentPage = @([self.page integerValue]);
+//    } else {
+        currentPage = @([self.page integerValue] + 1);
+//    }
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"type"] = [NSString stringWithFormat:@"%@", self.type];
@@ -228,6 +234,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     __weakSelf
     [ODHttpTool getWithURL:ODUrlTakeOutList parameters:params modelClass:[ODTakeOutModel class] success:^(id model) {
         if (weakSelf.params != params) return;
+        
         NSArray *moreTakeOuts = [model result];
         [weakSelf.datas addObjectsFromArray:moreTakeOuts];
         [weakSelf.tableView reloadData];
