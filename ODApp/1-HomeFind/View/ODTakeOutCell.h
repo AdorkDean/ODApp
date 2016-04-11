@@ -12,7 +12,7 @@
 @protocol ODTakeOutCellDelegate <NSObject>
 
 @optional
-- (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(ODTakeOutModel *)takeOut;
+- (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(ODTakeOutModel *)takeOut userInfo:(NSDictionary *)dict;
 
 @end
 
