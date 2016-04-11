@@ -333,31 +333,36 @@ static NSString * const kShopCarts = @"shopCarts";
     // 计算总价
     CGFloat totalPrice = self.priceLabel.text.floatValue - currentData.price_show.floatValue;
     self.priceLabel.text = [NSString stringWithFormat:@"%.2f", totalPrice];
+    // 按钮状态
+    self.buyButton.enabled = self.priceLabel.text.floatValue;
+    self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
     
     // 将商品从购物车中移除
     if (currentData.shopNumber == 0) {
         [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartminusNumber object:nil];
         [self.shopCars removeObject:currentData];
         
-        CGFloat height = self.shopCars.count * shopCartCellH + shopCartHeaderViewH;
-        if (self.shopCars.count > shopCartMaxShowCount) {
-            height = shopCartMaxShowCount * shopCartCellH + shopCartHeaderViewH;
-            self.shopCartView.bounces = YES;
+        if (self.shopCars.count == 0) {
+            [self shopCartHeaderViewDidClickClearButton:nil];
         } else {
-            self.shopCartView.bounces = NO;
+            CGFloat height = self.shopCars.count * shopCartCellH + shopCartHeaderViewH;
+            if (self.shopCars.count > shopCartMaxShowCount) {
+                height = shopCartMaxShowCount * shopCartCellH + shopCartHeaderViewH;
+                self.shopCartView.bounces = YES;
+            } else {
+                self.shopCartView.bounces = NO;
+            }
+            
+            [UIView animateWithDuration:kAnimateDuration animations:^{
+                self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - shopCartH, KScreenWidth, height);
+            }];
+            self.headerView.od_width = KScreenWidth;
+            self.headerView.od_height = shopCartHeaderViewH;
+            [self.shopCartView reloadData];
+            
+            if (!self.shopCars.count) [self dismiss];
         }
-        
-        [UIView animateWithDuration:kAnimateDuration animations:^{
-            self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - shopCartH, KScreenWidth, height);
-        }];
-        self.headerView.od_width = KScreenWidth;
-        self.headerView.od_height = shopCartHeaderViewH;
-        [self.shopCartView reloadData];
-        
-        if (!self.shopCars.count) [self dismiss];
     }
-    self.buyButton.enabled = self.priceLabel.text.floatValue;
-    self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
     
     // 更新缓存
     [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
