@@ -94,7 +94,7 @@
         
         for (int i = 0; i < self.model.pics.count; i++) {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * kScreenSize.width, 0, kScreenSize.width, scrollViewHeight)];
-            [imageView sd_setImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@", self.model.pics[i]]]];
+            [imageView sd_setImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@", self.model.pics[i]]]placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
             [_pictureScrollView addSubview:imageView];
         }
         self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(self.view.center.x - 50, scrollViewHeight - 30, 100, 20)];

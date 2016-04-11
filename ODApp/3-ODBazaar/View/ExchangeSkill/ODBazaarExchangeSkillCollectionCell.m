@@ -41,7 +41,7 @@
 -(void)setModel:(ODBazaarExchangeSkillModel *)model{
     
     _model = model;
-    [self.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    [self.headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.user.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     self.titleLabel.text = model.title;
     self.priceLabel.text = [[[[NSString stringWithFormat:@"%f",model.price] stringByAppendingString:@"元"] stringByAppendingString:@"/"]stringByAppendingString:model.unit];
     self.nickLabel.text = model.user.nick;

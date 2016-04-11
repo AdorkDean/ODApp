@@ -174,7 +174,7 @@
     headButton.frame = CGRectMake(17.5, 10, 40, 40);
     headButton.layer.masksToBounds = YES;
     headButton.layer.cornerRadius = 20;
-    [headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal];
+    [headButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:model.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     [topView addSubview:headButton];
     
     UILabel *woQuLabel = [[UILabel alloc]initWithFrame:CGRectMake(67.5, 20, 40, 20)];

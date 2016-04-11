@@ -30,7 +30,7 @@
     }
 
 
-    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
+    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     self.qrcodeImageView.image = [UIImage imageNamed:@"qrcode_img"];
 
 

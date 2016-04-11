@@ -30,7 +30,7 @@
     if (_model != model) {
         _model = model;
     }
-    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:[model.user valueForKeyPath:@"avater"]] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:[model.user valueForKeyPath:@"avater"]] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     self.userNameLabel.text = [model.user valueForKeyPath:@"nick"];
     
     [self.skillImageView sd_setImageWithURL:[NSURL OD_URLWithString:[model.imgs_small[0] valueForKeyPath:@"img_url"]]];
