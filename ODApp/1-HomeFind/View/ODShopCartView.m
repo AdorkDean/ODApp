@@ -339,22 +339,26 @@ static NSString * const kShopCarts = @"shopCarts";
         [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartminusNumber object:nil];
         [self.shopCars removeObject:currentData];
         
-        CGFloat height = self.shopCars.count * shopCartCellH + shopCartHeaderViewH;
-        if (self.shopCars.count > shopCartMaxShowCount) {
-            height = shopCartMaxShowCount * shopCartCellH + shopCartHeaderViewH;
-            self.shopCartView.bounces = YES;
+        if (self.shopCars.count == 0) {
+            [self shopCartHeaderViewDidClickClearButton:nil];
         } else {
-            self.shopCartView.bounces = NO;
+            CGFloat height = self.shopCars.count * shopCartCellH + shopCartHeaderViewH;
+            if (self.shopCars.count > shopCartMaxShowCount) {
+                height = shopCartMaxShowCount * shopCartCellH + shopCartHeaderViewH;
+                self.shopCartView.bounces = YES;
+            } else {
+                self.shopCartView.bounces = NO;
+            }
+            
+            [UIView animateWithDuration:kAnimateDuration animations:^{
+                self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - shopCartH, KScreenWidth, height);
+            }];
+            self.headerView.od_width = KScreenWidth;
+            self.headerView.od_height = shopCartHeaderViewH;
+            [self.shopCartView reloadData];
+            
+            if (!self.shopCars.count) [self dismiss];
         }
-        
-        [UIView animateWithDuration:kAnimateDuration animations:^{
-            self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - shopCartH, KScreenWidth, height);
-        }];
-        self.headerView.od_width = KScreenWidth;
-        self.headerView.od_height = shopCartHeaderViewH;
-        [self.shopCartView reloadData];
-        
-        if (!self.shopCars.count) [self dismiss];
     }
     self.buyButton.enabled = self.priceLabel.text.floatValue;
     self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
