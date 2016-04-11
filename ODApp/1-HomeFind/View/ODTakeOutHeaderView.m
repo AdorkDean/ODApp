@@ -101,7 +101,7 @@
 - (void)infiniteScrollViewDidClickImage:(ODInfiniteScrollView *)infiniteScrollView index:(NSInteger)index
 {
     ODTakeOutBannerModel *banner = self.banners[index];
-    if ( !banner.banner_url ) return;
+    if ( !banner.banner_url.length ) return;
     ODPublicWebViewController *webViewVc = [[ODPublicWebViewController alloc] init];
     webViewVc.webUrl = banner.banner_url;
     webViewVc.navigationTitle = banner.title;

@@ -111,9 +111,9 @@
 #pragma mark - 事件方法
 - (IBAction)buyTakeAway:(UIButton *)button
 {
-    if ([self.delegate respondsToSelector:@selector(takeOutCell:didClickedButton:)])
+    if ([self.delegate respondsToSelector:@selector(takeOutCell:didClickedButton:userInfo:)])
     {
-        [self.delegate takeOutCell:self didClickedButton:self.datas];
+        [self.delegate takeOutCell:self didClickedButton:self.datas userInfo:@{@"position" : [NSValue valueWithCGPoint:[self convertPoint:self.buyButton.center toView:self.superview]]}];
     }
 }
 

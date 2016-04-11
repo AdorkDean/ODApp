@@ -209,7 +209,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
         NSArray *newDatas = [model result];
         [weakSelf.datas addObjectsFromArray:newDatas];
         [weakSelf.tableView reloadData];
-//        [weakSelf checkFooterState:newDatas.count];
+        [weakSelf checkFooterState:newDatas.count];
         // 重新设置 page = 1
         weakSelf.page = @1;
     } failure:^(NSError *error) {
@@ -220,12 +220,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 - (void)loadMoreTakeOuts
 {
     // 取出页码
-    NSNumber *currentPage;
-//    if (self.datas.count < 20) {
-//        currentPage = @([self.page integerValue]);
-//    } else {
-        currentPage = @([self.page integerValue] + 1);
-//    }
+    NSNumber *currentPage = @([self.page integerValue] + 1);
     // 拼接参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"type"] = [NSString stringWithFormat:@"%@", self.type];
@@ -258,6 +253,55 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     } else { // 还没有加载完毕
         [self.tableView.mj_footer endRefreshing];
     }
+}
+
+/**
+ *  设置购物车动画
+ */
+- (void)shopCartAnimation:(NSDictionary *)dict
+{
+    NSValue *value = dict[@"position"];
+    CGPoint lbCenter = value.CGPointValue;
+    
+    UIImage *image = [UIImage imageNamed:@"icon_shopCart_circle"];
+    image = [image OD_circleImage];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    imageView.contentMode = UIViewContentModeCenter;
+    imageView.frame = CGRectMake(0, 0, 10, 10);
+    imageView.hidden = YES;
+    imageView.center = lbCenter;
+    
+    CALayer *layer = [[CALayer alloc]init];
+    layer.contents = imageView.layer.contents;
+    layer.frame = imageView.frame;
+    layer.opacity = 1;
+    [self.view.layer addSublayer:layer];
+    
+    CGPoint btnCenter = CGPointMake(10, CGRectGetMidY(self.shopCart.frame));
+    CGPoint endpoint = [self.view convertPoint:btnCenter fromView:self.view];
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    
+    //动画起点
+    CGPoint startPoint = [self.view convertPoint:lbCenter fromView:self.tableView];
+    [path moveToPoint:startPoint];
+    //贝塞尔曲线控制点
+    float sx = startPoint.x;
+    float sy = startPoint.y;
+    float ex = endpoint.x;
+    float x = sx + (ex - sx) / 3 - 100;
+    float y = sy - 75;
+    CGPoint centerPoint = CGPointMake(x, y);
+    [path addQuadCurveToPoint:endpoint controlPoint:centerPoint];
+    
+    CAKeyframeAnimation *animation=[CAKeyframeAnimation animationWithKeyPath:@"position"];
+    animation.path = path.CGPath;
+    animation.removedOnCompletion = NO;
+    animation.fillMode = kCAFillModeForwards;
+    animation.duration = 0.8;
+    animation.delegate = self;
+    animation.autoreverses = NO;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
+    [layer addAnimation:animation forKey:@"buy"];
 }
 
 #pragma mark - UITableViewDataSource
@@ -298,10 +342,16 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 }
 
 #pragma mark - ODTakeOutCellDelegate
-- (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(ODTakeOutModel *)takeOut
+- (void)takeOutCell:(ODTakeOutCell *)cell didClickedButton:(ODTakeOutModel *)takeOut userInfo:(NSDictionary *)dict
 {
-    // 点击购买按钮
-    [self.shopCart addShopCount:takeOut];
+    // 添加动画
+    [self shopCartAnimation:dict];
+    // 延迟执行
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        // 点击购买按钮
+        [self.shopCart addShopCount:takeOut];
+    });
+
 }
 
 @end
