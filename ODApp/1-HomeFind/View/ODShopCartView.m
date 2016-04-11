@@ -166,7 +166,7 @@ static NSString * const kShopCarts = @"shopCarts";
         } else {
             self.shopCartView.bounces = NO;
         }
-        
+    
         [UIView animateWithDuration:kAnimateDuration animations:^{
             self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - shopCartH, KScreenWidth, height);
         }];
@@ -256,7 +256,7 @@ static NSString * const kShopCarts = @"shopCarts";
     self.buyButton.enabled = totalPrice;
     self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1]: [UIColor lightGrayColor];
     // 设置总价文字大小
-    self.numberLabel.font = self.shopCount > 99 ? [UIFont systemFontOfSize:9.0f] : [UIFont systemFontOfSize:7.0f];
+    self.numberLabel.font = (self.shopCount < 99) ? [UIFont systemFontOfSize:9.0f] : [UIFont systemFontOfSize:7.0f];
     
     // 添加商品
     if ([self.shopCars containsObject:data]) {
