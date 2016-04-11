@@ -104,6 +104,8 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 }
 
 
+#pragma mark - Get Request Data
+
 #pragma mark - 定位城市数据请求
 - (void)getLocationCityRequest {
     __weakSelf
@@ -191,7 +193,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     return cell;
 }
 
-#pragma mark - 代理方法
+#pragma mark - UITableViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
     // 停止刷新
     [self.tableView.mj_header endRefreshing];
@@ -205,6 +207,8 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     detailControler.nick = model.user.nick;
     [self.navigationController pushViewController:detailControler animated:YES];
 }
+
+#pragma mark - Create Header View
 
 -(void)createHeaderView{
     self.headerView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, 200)];
@@ -273,7 +277,6 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
         [imageButton addTarget:self action:@selector(activityButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         [scrollView addSubview:imageButton];
     }
-    self.headerView.frame = CGRectMake(0, 0, kScreenSize.width, self.topClassView.frame.size.height+self.activityView.frame.size.height+12);
     [self createFindCircleView];
 }
 
@@ -318,7 +321,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     button.titleLabel.font = [UIFont systemFontOfSize:9];
     [button addTarget:self action:@selector(moreCycleButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.findCircleView addSubview:button];
-    self.headerView.frame = CGRectMake(0, 0, kScreenSize.width, self.topClassView.frame.size.height+self.activityView.frame.size.height+self.findCircleView.frame.size.height+18);
+    self.headerView.frame = CGRectMake(0, 0, kScreenSize.width, CGRectGetMaxY(self.findCircleView.frame) + 6);
      self.tableView.tableHeaderView = self.headerView;
 }
 
