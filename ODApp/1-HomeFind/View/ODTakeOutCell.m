@@ -95,7 +95,8 @@
                                                       self.originalPriceLabel.text attributes:attribtDic];
     self.originalPriceLabel.attributedText = attribtStr;
     // 清空购买数量
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(test:) name:ODNotificationShopCartRemoveALL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartRemoveALL object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartminusNumber object:nil];
 }
 
 - (void)dealloc
@@ -103,7 +104,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)test:(NSNotification *)note
+- (void)clearShopNumber:(NSNotification *)note
 {
     self.datas.shopNumber = 0;
 }
