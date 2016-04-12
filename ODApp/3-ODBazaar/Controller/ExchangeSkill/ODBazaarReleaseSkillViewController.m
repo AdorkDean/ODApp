@@ -482,6 +482,7 @@
             self.pickedImage = [UIImage od_scaleImage:self.pickedImage];
             imageData = UIImageJPEGRepresentation(self.pickedImage, 0.3);
         } else if (!imageUrl.length) { // 拍照
+            self.pickedImage = [UIImage od_scaleImage:self.pickedImage];
             imageData = UIImageJPEGRepresentation(self.pickedImage, 0.3);
         } else {    // 其他类型 : bmp...
             imageData = UIImagePNGRepresentation(self.pickedImage);
