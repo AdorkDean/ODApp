@@ -13,14 +13,12 @@
 
 @interface ODTakeOutHeaderView() <ODInfiniteScrollViewDelegate>
 
+/** 菜单 */
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *menuView;
-
 /** 指示器 */
 @property (weak, nonatomic) IBOutlet UIView *indicatorLine;
-
 /** 无线滚动scrollView */
 @property (nonatomic, weak) IBOutlet ODInfiniteScrollView *scrollView;
-
 /** 被选中的按钮 */
 @property (nonatomic, weak) UIButton *selectedButton;
 

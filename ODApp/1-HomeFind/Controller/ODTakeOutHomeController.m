@@ -18,11 +18,7 @@
 #import "ODTakeOutCell.h"
 #import "ODTakeOutHeaderView.h"
 #import "ODShopCartView.h"
-#import "ODShopCartListCell.h"
 #import "ODTakeAwayDetailController.h"
-
-#import "ODConfirmOrderViewController.h"
-#import "ODPersonalCenterViewController.h"
 #import <Masonry.h>
 
 
@@ -36,7 +32,6 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 @property (nonatomic, weak) UITableView *tableView;
 /** 头部控件 */
 @property (nonatomic, weak) ODTakeOutHeaderView *headerView;
-
 /** 购物车 */
 @property (nonatomic, weak) ODShopCartView *shopCart;
 
@@ -49,22 +44,11 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
 /** 模型数组 */
 @property (nonatomic, strong) NSMutableArray *datas;
 
-/** 购物车列表 */
-@property (nonatomic, strong) NSMutableDictionary *shops;
-
 @end
 
 @implementation ODTakeOutHomeController
 
 #pragma mark - LazyLoad
-- (NSMutableDictionary *)shops
-{
-    if (!_shops) {
-        _shops = [NSMutableDictionary dictionary];
-    }
-    return _shops;
-}
-
 - (NSMutableArray *)datas
 {
     if (_datas == nil) {
@@ -325,7 +309,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     // 点击方法
     ODTakeOutModel *model = self.datas[indexPath.row];
     ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
-    vc.takeAwayTitle = model.title;
+    vc.takeAwayTitle = @"商品详情";
     vc.takeOut = model;
     vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
     [self.navigationController pushViewController:vc animated:YES];
