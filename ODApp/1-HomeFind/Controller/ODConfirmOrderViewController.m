@@ -28,7 +28,6 @@ static NSString *cellId = @"ODConfirmOrderCell";
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)UIView *tableHeaderView;
 
-@property(nonatomic,strong)ODConfirmOrderModel *model;
 @property(nonatomic,strong)UILabel *remarkDetailLabel;
 @property(nonatomic,strong)ODConfirmOrderModel *orderModel;
 @property(nonatomic,strong) ODTakeOutConfirmModel *confirmModel;
@@ -104,10 +103,10 @@ static NSString *cellId = @"ODConfirmOrderCell";
     self.nameLabel = [[UILabel alloc]init];
     NSString *is_default = [NSString stringWithFormat:@"%@",[self.orderModel.address valueForKeyPath:@"is_default"]];
     if ([is_default isEqualToString:@"0"]||[is_default isEqualToString:@"1"]) {
-        self.nameLabel.frame = CGRectMake(17, 17, 100, 20);
+        self.nameLabel.frame = CGRectMake(17, 17, 80, 20);
         self.nameLabel.text = [self.orderModel.address valueForKeyPath:@"name"];
     }else{
-        self.nameLabel.frame = CGRectMake(17, 23, 100, 20);
+        self.nameLabel.frame = CGRectMake(17, 23, 80, 20);
         self.nameLabel.text = @"请选择配送地址";
     }
     self.nameLabel.font = [UIFont systemFontOfSize:13.5];

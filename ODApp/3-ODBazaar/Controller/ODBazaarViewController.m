@@ -65,7 +65,7 @@ static CGFloat const lineHeight = 1;
 - (void)setupNav
 {
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationItem.title = @"欧动集市";
+    self.navigationItem.title = @"集市";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(publishButtonClick) image:[UIImage imageNamed:@"发布任务icon"] highImage:nil];
 }
 /**

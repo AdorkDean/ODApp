@@ -5,7 +5,7 @@
 //  Created by 刘培壮 on 16/2/1.
 //  Copyright © 2016年 Odong-YG. All rights reserved.
 //
-
+#import "ODStorePlaceListModel.h"
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "mjrefresh.h"
 #import "ODActivitylistModel.h"
@@ -18,6 +18,7 @@
 @interface ODNewActivityCenterViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, strong) UITableView *tableView;
+@property(nonatomic, copy) NSString *storeId;
 
 /**
  *  从服务器获取到的数据
@@ -52,6 +53,8 @@ Single_Implementation(ODNewActivityCenterViewController)
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"中心活动";
+    self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(placePre:) color:nil highColor:nil title:@"场地预约"];
+
     self.needRefresh = YES;
 }
 
@@ -66,6 +69,24 @@ Single_Implementation(ODNewActivityCenterViewController)
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [ODNewActivityCenterViewController sharedODNewActivityCenterViewController].needRefresh = self.tabBarController.selectedIndex != 1;
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [MobClick endLogPageView:NSStringFromClass([self class])];
+}
+
+#pragma mark - privateMethod
+
+- (void)getDefaultCenterNameRequest{
+    NSDictionary *parameter = @{@"show_type" : @"1",@"call_array":@"1"};
+    __weakSelf;
+    [ODHttpTool getWithURL:ODUrlOtherStoreList parameters:parameter modelClass:[ODStorePlaceListModel class] success:^(ODStorePlaceListModelResponse *model){
+        ODStorePlaceListModel *listModel = model.result.firstObject;
+        weakSelf.storeId = [@(listModel.id)stringValue];
+        [weakSelf pushToPlace];
+    }
+                   failure:^(NSError *error) {
+                   }];
 }
 
 - (void)requestData {
@@ -109,9 +130,23 @@ Single_Implementation(ODNewActivityCenterViewController)
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    [MobClick endLogPageView:NSStringFromClass([self class])];
+#pragma mark - actions
+
+- (void)placePre:(id)sender
+{
+    if (!self.storeId.length) {
+        [self getDefaultCenterNameRequest];
+    }
+        else
+    {
+        [self pushToPlace];
+    }
+}
+
+- (void)pushToPlace{
+    ODPrecontractViewController *vc = [[ODPrecontractViewController alloc] init];
+    vc.storeId = [NSString stringWithFormat:@"%@", self.storeId];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 @end
