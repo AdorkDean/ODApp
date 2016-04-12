@@ -28,7 +28,6 @@ static NSString *cellId = @"ODConfirmOrderCell";
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)UIView *tableHeaderView;
 
-@property(nonatomic,strong)ODConfirmOrderModel *model;
 @property(nonatomic,strong)UILabel *remarkDetailLabel;
 @property(nonatomic,strong)ODConfirmOrderModel *orderModel;
 @property(nonatomic,strong) ODTakeOutConfirmModel *confirmModel;
