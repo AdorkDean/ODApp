@@ -92,6 +92,9 @@ static NSString *cellId = @"ODSelectAddressCell";
     self.mapView.delegate = self;
     self.mapView.showsCompass = NO;
     self.mapView.showsScale = NO;
+    self.mapView.zoomEnabled = NO;
+    self.mapView.rotateEnabled = NO;
+    self.mapView.skyModelEnable = NO;
     self.mapView.showsUserLocation = YES;
     self.mapView.mapType = MAMapTypeStandard;
     self.mapView.customizeUserLocationAccuracyCircleRepresentation = YES;
@@ -109,7 +112,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 #pragma mark - 初始化按钮
 -(void)createOriginButton{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:[UIImage imageNamed:@"icon_location"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"icon_location_coord"] forState:UIControlStateNormal];
     [btn sizeToFit];
     btn.frame = CGRectMake(kScreenSize.width-50, 10, btn.od_width, btn.od_height);
     [btn addTarget:self action:@selector(backToOrigin) forControlEvents:UIControlEventTouchUpInside];

@@ -245,6 +245,11 @@ static NSString * const kShopCarts = @"shopCarts";
  */
 - (void)addShopCount:(ODTakeOutModel *)data
 {
+    if (data.isClear) {
+        data.shopNumber = 0;
+        data.clear = NO;
+    }
+    
     data.shopNumber += 1;
     // 修改数量
     self.shopCount += 1;
@@ -327,7 +332,7 @@ static NSString * const kShopCarts = @"shopCarts";
 #pragma mark - ODShopCartListCellDelegate
 - (void)shopCartListcell:(ODShopCartListCell *)cell DidClickMinusButton:(ODTakeOutModel *)currentData
 {
-    self.shopCount--;
+    self.shopCount -= 1;
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", self.shopCount];
     
     // 计算总价
@@ -370,7 +375,7 @@ static NSString * const kShopCarts = @"shopCarts";
 
 - (void)shopCartListcell:(ODShopCartListCell *)cell DidClickPlusButton:(ODTakeOutModel *)currentData
 {
-    self.shopCount++;
+    self.shopCount += 1;
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", self.shopCount];
     
     // 计算总价

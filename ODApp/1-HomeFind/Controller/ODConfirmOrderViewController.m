@@ -302,13 +302,10 @@ static NSString *cellId = @"ODConfirmOrderCell";
                                     @"takeout_order_id" : strongSelf.confirmModel.order_id
                                     };
          [strongSelf getWeiXinDataWithParam:strongSelf.successParams];
-         
          // 清空购物车
          ODShopCartView *view = [ODShopCartView shopCart];
          [view shopCartHeaderViewDidClickClearButton:nil];
-    }
-                   failure:^(NSError *error)
-     {
+    }failure:^(NSError *error){
     }];
 }
 
