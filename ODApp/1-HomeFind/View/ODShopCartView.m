@@ -166,7 +166,7 @@ static NSString * const kShopCarts = @"shopCarts";
         } else {
             self.shopCartView.bounces = NO;
         }
-        
+    
         [UIView animateWithDuration:kAnimateDuration animations:^{
             self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - shopCartH, KScreenWidth, height);
         }];
@@ -245,6 +245,11 @@ static NSString * const kShopCarts = @"shopCarts";
  */
 - (void)addShopCount:(ODTakeOutModel *)data
 {
+    if (data.isClear) {
+        data.shopNumber = 0;
+        data.clear = NO;
+    }
+    
     data.shopNumber += 1;
     // 修改数量
     self.shopCount += 1;
@@ -256,7 +261,7 @@ static NSString * const kShopCarts = @"shopCarts";
     self.buyButton.enabled = totalPrice;
     self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1]: [UIColor lightGrayColor];
     // 设置总价文字大小
-    self.numberLabel.font = self.shopCount > 99 ? [UIFont systemFontOfSize:9.0f] : [UIFont systemFontOfSize:7.0f];
+    self.numberLabel.font = (self.shopCount < 99) ? [UIFont systemFontOfSize:9.0f] : [UIFont systemFontOfSize:7.0f];
     
     // 添加商品
     if ([self.shopCars containsObject:data]) {
@@ -327,38 +332,42 @@ static NSString * const kShopCarts = @"shopCarts";
 #pragma mark - ODShopCartListCellDelegate
 - (void)shopCartListcell:(ODShopCartListCell *)cell DidClickMinusButton:(ODTakeOutModel *)currentData
 {
-    self.shopCount--;
+    self.shopCount -= 1;
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", self.shopCount];
     
     // 计算总价
     CGFloat totalPrice = self.priceLabel.text.floatValue - currentData.price_show.floatValue;
     self.priceLabel.text = [NSString stringWithFormat:@"%.2f", totalPrice];
+    // 按钮状态
+    self.buyButton.enabled = self.priceLabel.text.floatValue;
+    self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
     
     // 将商品从购物车中移除
     if (currentData.shopNumber == 0) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartminusNumber object:nil];
         [self.shopCars removeObject:currentData];
         
-        CGFloat height = self.shopCars.count * shopCartCellH + shopCartHeaderViewH;
-        if (self.shopCars.count > shopCartMaxShowCount) {
-            height = shopCartMaxShowCount * shopCartCellH + shopCartHeaderViewH;
-            self.shopCartView.bounces = YES;
+        if (self.shopCars.count == 0) {
+            [self shopCartHeaderViewDidClickClearButton:nil];
         } else {
-            self.shopCartView.bounces = NO;
+            CGFloat height = self.shopCars.count * shopCartCellH + shopCartHeaderViewH;
+            if (self.shopCars.count > shopCartMaxShowCount) {
+                height = shopCartMaxShowCount * shopCartCellH + shopCartHeaderViewH;
+                self.shopCartView.bounces = YES;
+            } else {
+                self.shopCartView.bounces = NO;
+            }
+            
+            [UIView animateWithDuration:kAnimateDuration animations:^{
+                self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - shopCartH, KScreenWidth, height);
+            }];
+            self.headerView.od_width = KScreenWidth;
+            self.headerView.od_height = shopCartHeaderViewH;
+            [self.shopCartView reloadData];
+            
+            if (!self.shopCars.count) [self dismiss];
         }
-        
-        [UIView animateWithDuration:kAnimateDuration animations:^{
-            self.shopCartView.frame = CGRectMake(0, KScreenHeight - height - shopCartH, KScreenWidth, height);
-        }];
-        self.headerView.od_width = KScreenWidth;
-        self.headerView.od_height = shopCartHeaderViewH;
-        [self.shopCartView reloadData];
-        
-        if (!self.shopCars.count) [self dismiss];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:ODNotificationShopCartminusNumber object:nil];
     }
-    self.buyButton.enabled = self.priceLabel.text.floatValue;
-    self.buyButton.backgroundColor = self.buyButton.enabled ? [UIColor colorWithRGBString:@"#ff6666" alpha:1] : [UIColor lightGrayColor];
     
     // 更新缓存
     [self updateCacheshopCount:self.shopCount totalPrice:totalPrice shopCarts:self.shopCars];
@@ -366,7 +375,7 @@ static NSString * const kShopCarts = @"shopCarts";
 
 - (void)shopCartListcell:(ODShopCartListCell *)cell DidClickPlusButton:(ODTakeOutModel *)currentData
 {
-    self.shopCount++;
+    self.shopCount += 1;
     self.numberLabel.text = [NSString stringWithFormat:@"%ld", self.shopCount];
     
     // 计算总价

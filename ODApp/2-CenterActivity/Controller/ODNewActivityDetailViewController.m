@@ -334,7 +334,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
     self.activityVIPs = self.resultModel.savants;
     self.activityApplies = self.resultModel.applies;
     self.reportButton.enabled = (self.resultModel.apply_status != 1) && (self.resultModel.apply_status != -6) && (self.resultModel.apply_status != -4);
-    [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] placeholderImage:[UIImage imageNamed:@"placeholderImage"]];
+    [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] placeholderImage:[UIImage imageNamed:@"placeholderImage"]options:SDWebImageRetryFailed];
     
     self.titleLabel.text = self.resultModel.content;
     [self.infoTableView reloadData];
@@ -413,7 +413,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
         ODActivityDetailVIPModel *vipModel = self.resultModel.savants[indexPath.row];
         ODActivityVIPCell *cell = [tableView dequeueReusableCellWithIdentifier:VIPCell];
         [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        [[cell VIPHeadImgView] sd_setImageWithURL:[NSURL OD_URLWithString:[vipModel avatar]] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [[cell VIPHeadImgView] sd_setImageWithURL:[NSURL OD_URLWithString:[vipModel avatar]] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             [[(ODActivityVIPCell *) cell VIPHeadImgView] setImage:[image OD_circleImage]];
         }];
         [[cell VIPName] setText:vipModel.nick];

@@ -64,15 +64,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartRemoveALL object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationShopCartminusNumber object:nil];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(clearShopNumber:) name:ODNotificationPaySuccess object:nil];
-//    for (UIViewController *vc in self.navigationController.viewControllers)
-//    {
-//        if ([vc isKindOfClass:NSClassFromString(@"ODPayController")])
-//        {
-//            [vc removeFromParentViewController];
-//        }
-//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

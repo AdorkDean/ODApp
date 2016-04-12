@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -12,14 +12,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ro0-oT-GGr">
-                    <rect key="frame" x="291" y="0.0" width="60" height="23"/>
+                    <rect key="frame" x="291" y="0.0" width="60" height="25"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="60" id="1r4-DH-4ui"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                     <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" title="清空" image="icon_delete">
+                    <state key="normal" title="清空" image="icon_delete1">
                         <color key="titleColor" red="0.69019607843137254" green="0.69019607843137254" blue="0.69019607843137254" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -27,16 +27,16 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_Mark" translatesAutoresizingMaskIntoConstraints="NO" id="btI-Pp-m7a">
-                    <rect key="frame" x="17" y="5.5" width="3" height="13"/>
+                    <rect key="frame" x="17" y="6" width="3" height="13"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="13" id="dtU-2x-7BL"/>
                         <constraint firstAttribute="width" constant="3" id="j6M-DC-iXI"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="购物车" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rK4-Wo-kVz">
-                    <rect key="frame" x="26" y="4.5" width="37.5" height="15"/>
+                    <rect key="frame" x="26" y="5" width="38" height="15"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12.5"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dt8-te-Tr6" userLabel="分隔线">
@@ -67,6 +67,6 @@
     </objects>
     <resources>
         <image name="icon_Mark" width="2" height="12"/>
-        <image name="icon_delete" width="10" height="12"/>
+        <image name="icon_delete1" width="10" height="12"/>
     </resources>
 </document>

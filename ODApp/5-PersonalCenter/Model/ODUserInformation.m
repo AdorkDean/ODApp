@@ -8,6 +8,7 @@
 
 #import "ODUserInformation.h"
 #import "ODAppConst.h"
+#import "JPUSHService.h"
 
 @implementation ODUserInformation
 Single_Implementation(ODUserInformation)
@@ -30,6 +31,15 @@ Single_Implementation(ODUserInformation)
     
     [userDefault setObject:user.mj_keyValues forKey:kUserCache];
     [userDefault synchronize];
+    
+    [JPUSHService setAlias:user.open_id callbackSelector:@selector(setTags:alias:fetchCompletionHandle:) object:nil];
+}
+
+-(void)tagsAliasCallback:(int)iResCode
+                    tags:(NSSet*)tags
+                   alias:(NSString*)alias
+{
+    NSLog(@"rescode: %d, \ntags: %@, \nalias: %@\n", iResCode, tags , alias);
 }
 
 

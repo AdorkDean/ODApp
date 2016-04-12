@@ -117,7 +117,7 @@
     {
         ODLandFirstCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
         
-        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]options:SDWebImageRetryFailed];
         [cell.qrcodeImageView removeFromSuperview];
         [cell.centerImageView removeFromSuperview];
         cell.nickNameLabel.text = self.model.nick;

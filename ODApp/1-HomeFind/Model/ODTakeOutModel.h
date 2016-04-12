@@ -43,7 +43,7 @@ typedef NS_ENUM(NSUInteger, ODTakeOutStatus)
 @property (nonatomic, copy) NSString *store_sendtime;
 /** 点击商品次数 */
 @property (nonatomic, assign) NSInteger shopNumber;
-/** 是否已经清除购物车 */
+/** 是否已经清除数量 */
 @property (nonatomic, assign, getter = isClear) BOOL clear;
 
 @end

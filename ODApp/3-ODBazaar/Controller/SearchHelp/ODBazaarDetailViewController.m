@@ -134,7 +134,7 @@
     [self.scrollView addSubview:self.userView];
 
     UIButton *userHeaderButton = [ODClassMethod creatButtonWithFrame:CGRectMake(0, 13.5, 48, 48) target:self sel:@selector(userHeaderButtonClick:) tag:0 image:nil title:@"sds" font:0];
-    [userHeaderButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.model.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]];
+    [userHeaderButton sd_setBackgroundImageWithURL:[NSURL OD_URLWithString:self.model.avatar] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     userHeaderButton.layer.masksToBounds = YES;
     userHeaderButton.layer.cornerRadius = 24;
     userHeaderButton.backgroundColor = [UIColor grayColor];
@@ -442,7 +442,7 @@
            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否委派" message:nil preferredStyle:UIAlertControllerStyleAlert];
             __weakSelf
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSDictionary *parameter = @{@"task_id":self.task_id,@"apply_open_id":model.open_id};
+                NSDictionary *parameter = @{@"task_id":weakSelf.task_id,@"apply_open_id":model.open_id};
                 [ODHttpTool getWithURL:ODUrlTaskAccept parameters:parameter modelClass:[NSObject class] success:^(id model) {
                     [weakSelf.taskButton setTitle:@"已经派遣" forState:UIControlStateNormal];
                     [ODProgressHUD showInfoWithStatus:@"委派成功"];
@@ -486,9 +486,10 @@ NSString *evaluationContentText = @"";
 -(void)shareButtonClick:(UIButton *)button{
     if ([button.titleLabel.text isEqualToString:@"删除"]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
+        __weakSelf
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2",@"open_id":[ODUserInformation sharedODUserInformation].openID};
-            [self pushDataWithUrl:ODUrlBbsDel parameter:parameter withName:@"删除任务"];
+            NSDictionary *parameter = @{@"id":weakSelf.task_id,@"type":@"2",@"open_id":[ODUserInformation sharedODUserInformation].openID};
+            [weakSelf pushDataWithUrl:ODUrlBbsDel parameter:parameter withName:@"删除任务"];
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
@@ -516,9 +517,10 @@ NSString *evaluationContentText = @"";
     }else{
         if ([button.titleLabel.text isEqualToString:@"删除任务"]) {
             UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"是否删除任务" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            __weakSelf
             [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                NSDictionary *parameter = @{@"id":self.task_id,@"type":@"2"};
-                [self pushDataWithUrl:ODUrlBbsDel parameter:parameter withName:@"删除任务"];
+                NSDictionary *parameter = @{@"id":weakSelf.task_id,@"type":@"2"};
+                [weakSelf pushDataWithUrl:ODUrlBbsDel parameter:parameter withName:@"删除任务"];
             }]];
             [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
             [self presentViewController:alert animated:YES completion:nil];

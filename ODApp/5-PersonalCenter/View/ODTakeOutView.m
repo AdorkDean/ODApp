@@ -26,7 +26,7 @@
     
     NSURL *url = [NSURL OD_URLWithString:model.store_icon];
     
-    [self.outletSignImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_E+logo"]];
+    [self.outletSignImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"icon_E+logo"] options:SDWebImageRetryFailed];
     
     self.takeOutStatus.text = model.status_str;
     if ([model.status isEqualToString:@"4"]) {

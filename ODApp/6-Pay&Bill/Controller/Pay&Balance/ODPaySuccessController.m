@@ -16,6 +16,7 @@
 #import "ODTakeAwayDetailController.h"
 #import "ODTakeOutHomeController.h"
 #import "ODOrderAndSellDetailController.h"
+#import "ODHomeFindViewController.h"
 
 @interface ODPaySuccessController () <UITextViewDelegate>
 
@@ -145,6 +146,10 @@
         }
         else {
             tabBar.selectedIndex = 0;
+            ODHomeFindViewController *homeVc = tabBar.selectedViewController.childViewControllers[0];
+            ODTakeOutHomeController *takeVc = [[ODTakeOutHomeController alloc]init];
+            [homeVc.navigationController pushViewController:takeVc animated:YES];
+            
         }
     }
     else
@@ -160,6 +165,8 @@
     }
 
 }
+
+
 
 - (void)backTo
 {

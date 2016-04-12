@@ -156,7 +156,7 @@
     /**
      *  添加我的外卖
      */
-    ODArrowItem *myTakeOut = [ODArrowItem itemWithName:@"我的外卖"];
+    ODArrowItem *myTakeOut = [ODArrowItem itemWithName:@"我的外卖列表"];
     myTakeOut.destVc = [ODMyTakeOutViewController class];
     
     ODOtherConfigInfoModel *config = [[ODUserInformation sharedODUserInformation] getConfigCache];

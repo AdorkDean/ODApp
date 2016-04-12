@@ -22,6 +22,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 @property (nonatomic ,strong) UITableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *dataArray;
 @property (nonatomic ,strong) UIImageView *imageView;
+@property (nonatomic)BOOL isScroll;
 
 
 @end
@@ -53,6 +54,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isScroll = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self navigationInit];
     [self mapViewInit];
@@ -90,6 +92,9 @@ static NSString *cellId = @"ODSelectAddressCell";
     self.mapView.delegate = self;
     self.mapView.showsCompass = NO;
     self.mapView.showsScale = NO;
+    self.mapView.zoomEnabled = NO;
+    self.mapView.rotateEnabled = NO;
+    self.mapView.skyModelEnable = NO;
     self.mapView.showsUserLocation = YES;
     self.mapView.mapType = MAMapTypeStandard;
     self.mapView.customizeUserLocationAccuracyCircleRepresentation = YES;
@@ -107,7 +112,7 @@ static NSString *cellId = @"ODSelectAddressCell";
 #pragma mark - 初始化按钮
 -(void)createOriginButton{
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setImage:[UIImage imageNamed:@"icon_location"] forState:UIControlStateNormal];
+    [btn setImage:[UIImage imageNamed:@"icon_location_coord"] forState:UIControlStateNormal];
     [btn sizeToFit];
     btn.frame = CGRectMake(kScreenSize.width-50, 10, btn.od_width, btn.od_height);
     [btn addTarget:self action:@selector(backToOrigin) forControlEvents:UIControlEventTouchUpInside];
@@ -184,7 +189,6 @@ static NSString *cellId = @"ODSelectAddressCell";
         //发起逆地理编码
         [self.mapSearchAPI AMapReGoecodeSearch:regeo];
         
-        //构造AMapPOIAroundSearchRequest对象，设置周边请求参数
         AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
         request.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
         request.keywords = @"";
