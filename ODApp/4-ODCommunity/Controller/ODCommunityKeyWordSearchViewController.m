@@ -106,6 +106,7 @@ static NSString *cellId = @"ODCommunityCell";
         if (weakSelf.count == 1) {
             [weakSelf.dataArray removeAllObjects];
         }
+        [weakSelf.tableView reloadData];
         ODCommunityBbsModel *bbsModel = [model result];
         for (ODCommunityBbsListModel *listModel in bbsModel.bbs_list) {
             [weakSelf.dataArray addObject:listModel];
@@ -174,8 +175,6 @@ static NSString *cellId = @"ODCommunityCell";
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:NO animated:YES];
-    [self.dataArray removeAllObjects];
-    [self.tableView reloadData];
     return YES;
 }
 

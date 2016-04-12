@@ -111,7 +111,7 @@ static NSString * const cellId = @"ODBazaarHelpCell";
         if (weakSelf.count == 1) {
             [weakSelf.dataArray removeAllObjects];
         }
-        
+        [weakSelf.tableView reloadData];
         ODBazaarRequestHelpModel *helpModel = [model result];
         for (ODBazaarRequestHelpTasksModel *taskModel in helpModel.tasks) {
             [weakSelf.dataArray addObject:taskModel];
@@ -167,8 +167,6 @@ static NSString * const cellId = @"ODBazaarHelpCell";
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:NO animated:YES];
-    [self.dataArray removeAllObjects];
-    [self.tableView reloadData];
     return YES;
 }
 
