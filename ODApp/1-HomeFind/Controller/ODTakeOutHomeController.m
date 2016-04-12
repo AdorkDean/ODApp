@@ -325,7 +325,7 @@ static NSString * const takeAwayCellId = @"ODTakeAwayViewCell";
     // 点击方法
     ODTakeOutModel *model = self.datas[indexPath.row];
     ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
-    vc.takeAwayTitle = model.title;
+    vc.takeAwayTitle = @"商品详情";
     vc.takeOut = model;
     vc.product_id = [NSString stringWithFormat:@"%@", model.product_id];
     [self.navigationController pushViewController:vc animated:YES];
