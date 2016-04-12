@@ -184,8 +184,8 @@ static NSString *cellId = @"ODSelectAddressCell";
         
         self.pointAnnotation = [[MAPointAnnotation alloc] init];
         self.pointAnnotation.coordinate = CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
-        
         [self.mapView addAnnotation:self.pointAnnotation];
+        
         //发起逆地理编码
         [self.mapSearchAPI AMapReGoecodeSearch:regeo];
         
