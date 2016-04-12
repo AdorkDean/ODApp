@@ -167,6 +167,8 @@ static NSString * const cellId = @"ODBazaarHelpCell";
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:NO animated:YES];
+    [self.dataArray removeAllObjects];
+    [self.tableView reloadData];
     return YES;
 }
 
