@@ -9,7 +9,7 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODCenterDetailController.h"
 
-#import "UIImageView+WebCache.h"
+#import "UIImageView+ODCache.h"
 
 #import "ODPersonalCenterViewController.h"
 #import "ODChoseCenterController.h"
@@ -95,6 +95,7 @@
         for (int i = 0; i < self.model.pics.count; i++) {
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(i * kScreenSize.width, 0, kScreenSize.width, scrollViewHeight)];
             [imageView sd_setImageWithURL:[NSURL OD_URLWithString:[NSString stringWithFormat:@"%@", self.model.pics[i]]]];
+//            [imageView od_setImageWithURLString:]
             [_pictureScrollView addSubview:imageView];
         }
         self.pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake(self.view.center.x - 50, scrollViewHeight - 30, 100, 20)];
