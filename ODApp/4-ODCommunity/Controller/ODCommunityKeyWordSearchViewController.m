@@ -92,7 +92,7 @@ static NSString *cellId = @"ODCommunityCell";
     self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [weakSelf loadMoreData];
     }];
-    self.navigationItem.title = @"欧动社区";
+    self.navigationItem.title = @"社区";
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(cancelButtonClick) color:[UIColor blackColor] highColor:nil title:@"取消"];
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick) color:[UIColor blackColor] highColor:nil title:@"确认"];
 }
@@ -174,6 +174,8 @@ static NSString *cellId = @"ODCommunityCell";
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:NO animated:YES];
+    [self.dataArray removeAllObjects];
+    [self.tableView reloadData];
     return YES;
 }
 

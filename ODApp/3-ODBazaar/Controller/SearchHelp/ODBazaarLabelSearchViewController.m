@@ -73,7 +73,7 @@ static NSString * const cellId = @"ODBazaarHelpCell";
     [super viewDidLoad];
     self.count = 1;
     self.automaticallyAdjustsScrollViewInsets = NO;
-    self.navigationItem.title = @"欧动集市";
+    self.navigationItem.title = @"集市";
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(confirmButtonClick:) color:nil highColor:nil title:@"确认"];
     [self searchBar];
     __weakSelf
@@ -167,6 +167,8 @@ static NSString * const cellId = @"ODBazaarHelpCell";
 
 - (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
     [searchBar setShowsCancelButton:NO animated:YES];
+    [self.dataArray removeAllObjects];
+    [self.tableView reloadData];
     return YES;
 }
 
