@@ -9,6 +9,7 @@
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODOperationController.h"
 #import "ODTabBarController.h"
+#import "ODShopCartView.h"
 
 @interface ODOperationController ()
 @property(nonatomic, assign)BOOL isClean;
@@ -105,6 +106,8 @@
         [weakSelf dismissViewControllerAnimated:YES completion:^{
         }];
         //清空数据
+        [[ODShopCartView shopCart] shopCartHeaderViewDidClickClearButton:nil];
+        
         [ODUserInformation sharedODUserInformation].openID = @"";
         NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
         [user setObject:@"" forKey:KUserDefaultsOpenId];
