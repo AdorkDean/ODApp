@@ -10,14 +10,14 @@
 #import "ODBazaaeExchangeSkillViewController.h"
 #import "ODBazaarExchangeSkillCell.h"
  
-#import "MJRefresh.h"
+#import <MJRefresh.h>
 #import "ODBazaarExchangeSkillDetailViewController.h"
 #import "ODBazaarExchangeSkillModel.h"
 
 @interface ODBazaaeExchangeSkillViewController () <UITableViewDataSource, UITableViewDelegate>
 
 /** 表格 */
-@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, weak) UITableView *tableView;
 /** 参数 */
 @property (nonatomic, strong) NSMutableDictionary *params;
 /** 页码 */
@@ -30,7 +30,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 
 @implementation ODBazaaeExchangeSkillViewController
 
-#pragma mark - 懒加载
+#pragma mark - LazyLoad
 -(NSMutableArray *)dataArray
 {
     if (!_dataArray) {
@@ -39,7 +39,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     return _dataArray;
 }
 
-#pragma mark - 生命周期方法
+#pragma mark - View Lifecycle
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
@@ -68,7 +68,6 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
 }
 
 #pragma mark - 初始化方法
-
 /**
  *  接收通知
  */
@@ -116,39 +115,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     self.tableView.mj_footer.automaticallyHidden = YES;
 }
 
-#pragma mark - UITableView 数据源方法
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.dataArray.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    ODBazaarExchangeSkillCell *cell = [tableView dequeueReusableCellWithIdentifier:exchangeCellId];
-    cell.model = self.dataArray[indexPath.row];
-    return cell;
-}
-
-#pragma mark - 代理方法
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView.mj_footer endRefreshing];
-    
-    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-    ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
-    detailControler.swap_id = [NSString stringWithFormat:@"%ld", model.swap_id];
-    detailControler.nick = model.user.nick;
-    [self.navigationController pushViewController:detailControler animated:YES];
-}
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
-//    return model.rowHeight;
-//}
-
-#pragma mark - 事件方法
+#pragma mark - IBActions
 - (void)loadNewUsers
 {
     // 结束上拉加载
@@ -216,6 +183,32 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
     } else { // 还没有加载完毕
         [self.tableView.mj_footer endRefreshing];
     }
+}
+
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.dataArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ODBazaarExchangeSkillCell *cell = [tableView dequeueReusableCellWithIdentifier:exchangeCellId];
+    cell.model = self.dataArray[indexPath.row];
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
+    [self.tableView.mj_header endRefreshing];
+    [self.tableView.mj_footer endRefreshing];
+    
+    ODBazaarExchangeSkillModel *model = self.dataArray[indexPath.row];
+    ODBazaarExchangeSkillDetailViewController *detailControler = [[ODBazaarExchangeSkillDetailViewController alloc] init];
+    detailControler.swap_id = [NSString stringWithFormat:@"%ld", model.swap_id];
+    detailControler.nick = model.user.nick;
+    [self.navigationController pushViewController:detailControler animated:YES];
 }
 
 @end

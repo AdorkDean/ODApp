@@ -36,7 +36,7 @@
 #pragma mark - 生命周期方法
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [self getData];
+    [self getData];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
 }
 
@@ -45,7 +45,6 @@
     
     self.dataArray = [[NSMutableArray alloc] init];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self getData];
     self.navigationItem.title = @"个人中心";
 }
 
@@ -74,47 +73,25 @@
     
     ODUserModel *model = self.dataArray[0];
     
-    
-//    [self.informationView.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar]];
     // 加载头像
-//    [self.informationView.userImageView od_loadCachedImage:model.avatar];
-    
     [self.informationView.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     
     
     UITapGestureRecognizer *pictMap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(picAction)];
     [self.informationView.userImageView addGestureRecognizer:pictMap];
     
-    
-    
     self.informationView.userImageView.layer.masksToBounds = YES;
     self.informationView.userImageView.layer.cornerRadius = 47.5;
     self.informationView.userImageView.layer.borderColor = [UIColor clearColor].CGColor;
     self.informationView.userImageView.layer.borderWidth = 1;
     
-    
-//    if ([model.sign isEqualToString:@""]) {
-//        self.informationView.signatureLabel.text = @"未设置签名";
-//    }else{
-//        
-//        
-//        self.informationView.signatureLabel.text = model.sign;
-//        
-//    }
-    
+    // 设置签名
     self.informationView.signatureLabel.text = model.sign ? : @"";
     
     UITapGestureRecognizer *signatureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signatureAction)];
     [self.informationView.signatureImageView addGestureRecognizer:signatureTap];
     
-    
-    
-//    if ([model.nick isEqualToString:@""]) {
-//        self.informationView.nickNameLabel.text = @"未设置昵称";
-//    }else{
-//        self.informationView.nickNameLabel.text = model.nick;
-//        
-//    }
+    // 设置昵称
     self.informationView.nickNameLabel.text = model.nick ? : @"未设置昵称";
     
     UITapGestureRecognizer *nickNameTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nickNameAction)];
@@ -136,27 +113,25 @@
     
     
     self.informationView.phoneLabel.text = model.mobile;
-    
-    //    UITapGestureRecognizer *phoneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneAction)];
-    //    [self.informationView.phoneImageView addGestureRecognizer:phoneTap];
-    //
-    
+
+    // 点击手机暂时不添加事件
+//    UITapGestureRecognizer *phoneTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneAction)];
+//    [self.informationView.phoneImageView addGestureRecognizer:phoneTap];
+
     UITapGestureRecognizer *passWordTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(passWordAction)];
     [self.informationView.passWordImageView addGestureRecognizer:passWordTap];
 
     // 加载二维码图片
-//    [self.informationView.codeImageView od_loadCachedImage:model.qrcode];
     [self.informationView.codeImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.qrcode] placeholderImage:nil options:SDWebImageRetryFailed];
 }
-
-
 
 #pragma mark - 请求数据
 - (void)getData
 {
-    [self.dataArray removeAllObjects];
     __weakSelf
     [ODHttpTool getWithURL:ODUrlUserInfo  parameters:@{} modelClass:[ODUserModel class] success:^(id model) {
+        [weakSelf.dataArray removeAllObjects];
+        
         ODUserModel *user = [model result];
         [weakSelf.dataArray addObject:user];
         
@@ -165,13 +140,10 @@
     
         // 更新缓存
         [[ODUserInformation sharedODUserInformation] updateUserCache:user];
-        if ([weakSelf.delegate respondsToSelector:@selector(infoVc:DidChangedUserImage:)])
-        {
+        if ([weakSelf.delegate respondsToSelector:@selector(infoVc:DidChangedUserImage:)]) {
             [weakSelf.delegate infoVc:weakSelf DidChangedUserImage:user];
         }
-        
     } failure:^(NSError *error) {
-        
     }];
 }
 
