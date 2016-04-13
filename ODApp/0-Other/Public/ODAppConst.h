@@ -128,6 +128,8 @@ UIKIT_EXTERN NSString * const ODWebUrlNativeOrderInfo;
 
 /** 统一的URL */
 UIKIT_EXTERN NSString * const ODBaseURL;
+UIKIT_EXTERN NSString * const ODH5BaseURL;
+
 
 //UIKIT_EXTERN NSString * const ODTestOpenId;
 
