@@ -60,6 +60,9 @@
 - (void)setBanners:(NSArray *)banners
 {
     _banners = banners;
+    
+    if (!banners.count) return;
+    
     // 传递图片地址数组
     NSMutableArray *arrayM = [NSMutableArray array];
     for (ODTakeOutBannerModel *banner in banners) {
@@ -98,6 +101,7 @@
 #pragma mark - ODInfiniteScrollViewDelegate
 - (void)infiniteScrollViewDidClickImage:(ODInfiniteScrollView *)infiniteScrollView index:(NSInteger)index
 {
+    if (!self.banners.count) return;
     ODTakeOutBannerModel *banner = self.banners[index];
     if ( !banner.banner_url.length ) return;
     ODPublicWebViewController *webViewVc = [[ODPublicWebViewController alloc] init];
