@@ -170,7 +170,6 @@ static int const ImageViewCount = 3;
         [imageView addGestureRecognizer:gas];
         // 下载图片
         [imageView sd_setImageWithURL:[NSURL URLWithString:self.images[index]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
-        
 //        imageView.image = self.images[index];
     }
     

@@ -116,18 +116,22 @@ NSString * const ODNotificationRefreshConfirmOrder = @"ODNotificationRefreshConf
 /** 网页接口 */
 NSString * const ODWebUrlFindJob = @"http://www.myjob500.com/user/extloginpf";
 
-NSString * const ODWebUrlExpect = @"http://h5.odong.com/woqu/expect";
-NSString * const ODWebUrlMapSearch = @"http://h5.odong.com/map/search";
+NSString * const ODWebUrlExpect = @"woqu/expect";
+NSString * const ODWebUrlMapSearch = @"map/search";
 
-NSString * const ODWebUrlNative = @"http://h5.test.odong.com/native/order?";
-NSString * const ODWebUrlNativeOrderInfo = @"http://h5.test.odong.com/native/order/info?";
+NSString * const ODWebUrlNative = @"native/order";
+NSString * const ODWebUrlNativeOrderInfo = @"native/order/info";
 
 /** 统一的URL */
 #ifdef DEBUG
 NSString * const ODBaseURL = @"http://woquapi.test.odong.com/1.0";
+NSString * const ODH5BaseURL = @"http://h5.test.odong.com";
 #else
 NSString * const ODBaseURL = @"http://woquapi.odong.com/1.0";
+NSString * const ODH5BaseURL = @"http://h5.odong.com";
+
 #endif
+
 
 //NSString * const ODTestOpenId = @"9605447569d90d877e78";
 

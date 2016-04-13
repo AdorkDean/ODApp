@@ -441,7 +441,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
                 }
                 else {
                     ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
-                    NSString *webUrl = [NSString stringWithFormat:@"%@?lng=%@&lat=%@", ODWebUrlMapSearch,self.resultModel.lng, self.resultModel.lat];
+                    NSString *webUrl = [NSString stringWithFormat:@"%@/%@?lng=%@&lat=%@", ODH5BaseURL,ODWebUrlMapSearch,self.resultModel.lng, self.resultModel.lat];
                     vc.webUrl = webUrl;
                     vc.navigationTitle = self.resultModel.store_address;
                     vc.isShowProgress = YES;
