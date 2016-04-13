@@ -44,11 +44,6 @@
     }
 }
 
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 #pragma mark - 订单详情
 
 // paymentNow  H5 button点击事件
