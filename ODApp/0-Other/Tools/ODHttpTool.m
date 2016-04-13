@@ -118,7 +118,7 @@ static NSString *const privateKey = @"@#$%T-90KJ(3;lkm54)(YUr41mkl09hk";
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     URL = [ODBaseURL stringByAppendingPathComponent:URL];
-    NSMutableDictionary *parameter = [self getSignParameter:parameters];
+    NSMutableDictionary *parameter = [self getSignParameter:parameters ? : @{}];
     [manager GET:URL parameters:parameter success:^(AFHTTPRequestOperation *operation, id responseObject)
     {
         [self requestSuccessResult:responseObject modelClass:modeleClass successBlock:success failBlock:failure];
