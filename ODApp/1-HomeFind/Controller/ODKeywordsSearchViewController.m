@@ -65,7 +65,7 @@ static NSString *cellId = @"ODAddressKeywordCell";
     [self.textField resignFirstResponder];
 }
 
-#pragma mark - 初始胡导航
+#pragma mark - 初始化导航
 -(void)navigationInit{
     self.textField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width-70, 30)];
     self.textField.placeholder = @"请输入你的地址";
