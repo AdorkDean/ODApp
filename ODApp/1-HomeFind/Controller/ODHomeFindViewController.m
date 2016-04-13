@@ -499,7 +499,7 @@ static NSString * const exchangeCellId = @"ODBazaaeExchangeSkillViewCell";
         {
             ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
             vc.navigationTitle = @"敬请期待";
-            vc.webUrl = [ODH5BaseURL stringByAppendingPathExtension:ODWebUrlExpect];
+            vc.webUrl = [ODH5BaseURL stringByAppendingPathComponent:ODWebUrlExpect];
             [self.navigationController pushViewController:vc animated:YES];
         }
             break;

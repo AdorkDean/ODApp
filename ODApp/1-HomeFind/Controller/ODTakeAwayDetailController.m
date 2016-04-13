@@ -45,13 +45,15 @@
     // 订单详情页
     if (self.isOrderDetail) {
         NSString *urlString = [[ODHttpTool getRequestParameter:@{ @"order_id" : self.order_id}] od_URLDesc];
-        NSString *url = [[NSString stringWithFormat:@"%@?", [ODH5BaseURL stringByAppendingPathExtension:ODWebUrlNativeOrderInfo]] stringByAppendingString:urlString];
+        NSString *url = [[NSString stringWithFormat:@"%@?", [ODH5BaseURL stringByAppendingPathComponent:ODWebUrlNativeOrderInfo]] stringByAppendingString:urlString];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL OD_URLWithString:url]]];
     }
     // 商品详情页
     else {
         NSString *urlString = [[ODHttpTool getRequestParameter:@{ @"id" : self.product_id }] od_URLDesc];
-        NSString *url = [[NSString stringWithFormat:@"%@?", [ODH5BaseURL stringByAppendingPathExtension:ODWebUrlNative]] stringByAppendingString:urlString];
+        NSString *url = [NSString stringWithFormat:@"%@?%@", [ODH5BaseURL stringByAppendingPathComponent:ODWebUrlNative], urlString];
+        
+//        NSLog(@"url = %@", url);
         
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL OD_URLWithString:url]]];
         
