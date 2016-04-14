@@ -86,13 +86,13 @@
     self.informationView.userImageView.layer.borderWidth = 1;
     
     // 设置签名
-    self.informationView.signatureLabel.text = model.sign ? : @"";
+    self.informationView.signatureLabel.text = model.sign.length ? model.sign : @"未设置签名";
     
     UITapGestureRecognizer *signatureTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(signatureAction)];
     [self.informationView.signatureImageView addGestureRecognizer:signatureTap];
     
     // 设置昵称
-    self.informationView.nickNameLabel.text = model.nick ? : @"未设置昵称";
+    self.informationView.nickNameLabel.text = model.nick.length ? model.nick : @"未设置昵称";
     
     UITapGestureRecognizer *nickNameTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nickNameAction)];
     [self.informationView.nickNameImageView addGestureRecognizer:nickNameTap];

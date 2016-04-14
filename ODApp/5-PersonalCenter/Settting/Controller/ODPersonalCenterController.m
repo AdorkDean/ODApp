@@ -162,7 +162,7 @@
     ODOtherConfigInfoModel *config = [[ODUserInformation sharedODUserInformation] getConfigCache];
     ODGroupItem *group = nil;
     if (config == nil || config.auditing == 1) {
-        group = [ODGroupItem groupWithItems:@[item1, item2, item6, item7, item8]];
+        group = [ODGroupItem groupWithItems:@[item0, item1, item2, item6, item7, item8]];
     } else {
         group = [ODGroupItem groupWithItems:@[myTakeOut, item0, item1, item2, item3, item4, item5, item6, item7, item8]];
     }
