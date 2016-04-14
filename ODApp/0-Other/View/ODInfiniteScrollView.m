@@ -9,7 +9,7 @@
 #import "ODInfiniteScrollView.h"
 #import "UIImageView+WebCache.h"
 
-static int const ImageViewCount = 3;
+static NSInteger const ImageViewCount = 3;
 
 @interface ODInfiniteScrollView() <UIScrollViewDelegate>
 
@@ -83,6 +83,7 @@ static int const ImageViewCount = 3;
     CGFloat pageX = self.scrollView.frame.size.width - pageW;
     CGFloat pageY = self.scrollView.frame.size.height - pageH;
     self.pageControl.frame = CGRectMake(pageX, pageY, pageW, pageH);
+    self.pageControl.center = CGPointMake(self.scrollView.center.x, pageY + 10);
     
     // 设置内容
     [self updateContent];
@@ -100,7 +101,7 @@ static int const ImageViewCount = 3;
     [self updateContent];
     
     // 开始定时器
-    [self startTimer];
+//    [self startTimer];
 }
 
 #pragma mark - <UIScrollViewDelegate>
@@ -194,15 +195,15 @@ static int const ImageViewCount = 3;
 #pragma mark - 定时器处理
 - (void)startTimer
 {
-    NSTimer *timer = [NSTimer timerWithTimeInterval:3 target:self selector:@selector(next) userInfo:nil repeats:YES];
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
-    self.timer = timer;
+//    NSTimer *timer = [NSTimer timerWithTimeInterval:3 target:self selector:@selector(next) userInfo:nil repeats:YES];
+//    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+//    self.timer = timer;
 }
 
 - (void)stopTimer
 {
-    [self.timer invalidate];
-    self.timer = nil;
+//    [self.timer invalidate];
+//    self.timer = nil;
 }
 
 - (void)next

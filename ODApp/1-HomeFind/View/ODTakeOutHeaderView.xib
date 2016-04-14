@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
@@ -16,21 +16,21 @@
                     <rect key="frame" x="0.0" y="125" width="375" height="38"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zG0-fJ-dlu" userLabel="全部">
-                            <rect key="frame" x="0.0" y="0.0" width="124" height="38"/>
+                            <rect key="frame" x="0.0" y="0.0" width="124.5" height="38"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="全部">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CJ9-MH-h9F">
-                            <rect key="frame" x="125" y="0.0" width="125" height="38"/>
+                            <rect key="frame" x="125.5" y="0.0" width="124" height="38"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="饮料">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Anm-fD-NyH">
-                            <rect key="frame" x="251" y="0.0" width="124" height="38"/>
+                            <rect key="frame" x="250" y="0.0" width="124.5" height="38"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <state key="normal" title="套餐">
                                 <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -45,7 +45,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wpw-bb-qXY" userLabel="分隔线2">
-                            <rect key="frame" x="250" y="14" width="1" height="10"/>
+                            <rect key="frame" x="249" y="14" width="1" height="10"/>
                             <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="1" id="THY-D2-mtp"/>
@@ -60,7 +60,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1v-uc-Mvz" userLabel="指示器">
-                            <rect key="frame" x="0.0" y="36" width="125" height="1"/>
+                            <rect key="frame" x="0.0" y="36" width="125.5" height="1"/>
                             <color key="backgroundColor" red="1" green="0.84705882352941175" blue="0.0078431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="xuO-Sn-ef5"/>
@@ -120,7 +120,7 @@
                         </mask>
                     </variation>
                 </view>
-                <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="hh0-Ui-nrZ" customClass="ODInfiniteScrollView">
+                <view contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="hh0-Ui-nrZ">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
