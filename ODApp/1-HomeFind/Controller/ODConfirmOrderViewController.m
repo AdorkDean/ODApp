@@ -298,6 +298,7 @@ static NSString *cellId = @"ODConfirmOrderCell";
          strongSelf.orderId = strongSelf.confirmModel.order_id;
          strongSelf.order_no = strongSelf.confirmModel.order_no;
          [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_no = strongSelf.confirmModel.order_no;
+         [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_id = strongSelf.confirmModel.order_id;
          strongSelf.successParams = @{
                                     @"type" : @"1",
                                     @"takeout_order_id" : strongSelf.confirmModel.order_id

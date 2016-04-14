@@ -120,7 +120,7 @@
     if ([self.tradeType isEqualToString:@"1"])
     {
         ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc]init];
-        vc.order_id = [NSString stringWithFormat:@"%@", self.orderId];
+        [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_id = [NSString stringWithFormat:@"%@", self.orderId];
         vc.isOrderDetail = YES;
         vc.takeAwayTitle = @"订单详情";
         vc.orderNo = [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_no;

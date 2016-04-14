@@ -32,7 +32,7 @@
 /**
  * 订单ID
  */
-@property (nonatomic, strong) NSString *order_id;
+//@property (nonatomic, strong) NSString *order_id;
 
 /**
  * order_no 
