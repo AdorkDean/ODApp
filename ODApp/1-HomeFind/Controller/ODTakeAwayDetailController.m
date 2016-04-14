@@ -142,7 +142,7 @@
          ODPaySuccessController *vc = [[ODPaySuccessController alloc]init];
          vc.orderId = [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_id;
          vc.payStatus = weakSelf.isPay;
-         vc.params = [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].params;
+        vc.params = [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].params ? : @{@"type":@"1", @"takeout_order_id":[ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_id};
          vc.tradeType = @"1";
          [weakSelf.navigationController pushViewController:vc animated:YES];
      } failure:^(NSError *error) {
