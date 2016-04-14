@@ -22,7 +22,6 @@ static NSString *cellId = @"ODSelectAddressCell";
 @property (nonatomic ,strong) UITableView *tableView;
 @property (nonatomic ,strong) NSMutableArray *dataArray;
 @property (nonatomic ,strong) UIImageView *imageView;
-@property (nonatomic)BOOL isScroll;
 
 
 @end
@@ -54,7 +53,6 @@ static NSString *cellId = @"ODSelectAddressCell";
 #pragma mark - lifeCycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.isScroll = NO;
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self navigationInit];
     [self mapViewInit];
