@@ -44,7 +44,7 @@
     
     // 订单详情页
     if (self.isOrderDetail) {
-        NSString *urlString = [[ODHttpTool getRequestParameter:@{ @"order_id" : self.order_id}] od_URLDesc];
+        NSString *urlString = [[ODHttpTool getRequestParameter:@{ @"order_id" : [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_id}] od_URLDesc];
         NSString *url = [[NSString stringWithFormat:@"%@?", [ODH5BaseURL stringByAppendingPathComponent:ODWebUrlNativeOrderInfo]] stringByAppendingString:urlString];
         [self.webView loadRequest:[NSURLRequest requestWithURL:[NSURL OD_URLWithString:url]]];
     }
@@ -140,9 +140,9 @@
         }
         
          ODPaySuccessController *vc = [[ODPaySuccessController alloc]init];
-         vc.orderId = weakSelf.order_id;
+         vc.orderId = [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_id;
          vc.payStatus = weakSelf.isPay;
-         vc.params = [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].params;
+        vc.params = [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].params ? : @{@"type":@"1", @"takeout_order_id":[ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_id};
          vc.tradeType = @"1";
          [weakSelf.navigationController pushViewController:vc animated:YES];
      } failure:^(NSError *error) {

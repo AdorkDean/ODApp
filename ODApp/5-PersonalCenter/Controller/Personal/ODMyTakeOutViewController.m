@@ -5,7 +5,7 @@
 //  Created by 王振航 on 16/3/25.
 //  Copyright © 2016年 Odong Org. All rights reserved.
 //
-
+#import "odtakeoutpaysinglemodel.h"
 #import <UMengAnalytics-NO-IDFA/MobClick.h>
 #import "ODMyTakeOutViewController.h"
 #import "ODPaySuccessController.h"
@@ -147,7 +147,7 @@ static NSString * const ODTakeOutViewID = @"ODTakeOutViewID";
     
     ODTakeAwayDetailController *vc = [[ODTakeAwayDetailController alloc] init];
     vc.isOrderDetail = YES;
-    vc.order_id = model.order_id;
+    [ODTakeOutPaySingleModel sharedODTakeOutPaySingleModel].order_id = model.order_id;
     vc.takeAwayTitle = @"订单详情";
     vc.orderNo = model.order_no;
     [self.navigationController pushViewController:vc animated:YES];

@@ -18,4 +18,7 @@ Single_Interface(ODTakeOutPaySingleModel)
 /** order_no */
 @property (nonatomic,copy) NSString *order_no;
 
+/** order_id */
+@property (nonatomic,copy) NSString *order_id;
+
 @end
