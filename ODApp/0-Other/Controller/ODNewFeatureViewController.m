@@ -10,6 +10,7 @@
 
 #import "ODNewFeatureCell.h"
 #import "MyPageControl.h"
+#import "ODShopCartView.h"
 
 @interface ODNewFeatureViewController ()
 
@@ -37,6 +38,10 @@ static NSInteger const imageCount = 5;
     
     // 初始化pageControll
     [self setupPageControl];
+    
+    // 清空购物车
+    ODShopCartView  *shopCart = [ODShopCartView shopCart];
+    [shopCart shopCartHeaderViewDidClickClearButton:nil];
 }
 
 #pragma mark - 初始化方法
@@ -85,7 +90,7 @@ static NSInteger const imageCount = 5;
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ODNewFeatureCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    NSString *imageName = [NSString stringWithFormat:@"begin%ld", indexPath.item + 1];
+    NSString *imageName = [NSString stringWithFormat:@"begin%zd", indexPath.item + 1];
     cell.image = [UIImage imageNamed:imageName];
     [cell setIndex:indexPath imageCount:imageCount];
     return cell;
@@ -107,7 +112,7 @@ static NSInteger const imageCount = 5;
     CGFloat curOffsetX = scrollView.contentOffset.x;
     // 计算index
     NSInteger index = curOffsetX / scrollView.bounds.size.width + 1;
-    self.guideImageViews.image = [UIImage imageNamed:[NSString stringWithFormat:@"begin%ld", index]];
+    self.guideImageViews.image = [UIImage imageNamed:[NSString stringWithFormat:@"begin%zd", index]];
 }
 
 @end
