@@ -144,9 +144,17 @@ Single_Implementation(ODNewActivityCenterViewController)
 }
 
 - (void)pushToPlace{
-    ODPrecontractViewController *vc = [[ODPrecontractViewController alloc] init];
-    vc.storeId = [NSString stringWithFormat:@"%@", self.storeId];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if ([ODUserInformation sharedODUserInformation].openID.length == 0) {
+        ODPersonalCenterViewController *personalCenter = [[ODPersonalCenterViewController alloc] init];
+        [self.navigationController presentViewController:personalCenter animated:YES completion:nil];
+    }
+    else {
+        ODPrecontractViewController *vc = [[ODPrecontractViewController alloc] init];
+        vc.storeId = [NSString stringWithFormat:@"%@", self.storeId];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
 }
 
 @end

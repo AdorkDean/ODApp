@@ -111,8 +111,12 @@ static CGFloat const lineHeight = 1;
     self.scrollView = scrollView;
     // 设置偏移量
     scrollView.contentSize = CGSizeMake(self.childViewControllers.count * KScreenWidth, 0);
-    // 默认加载第一个界面
-    [self scrollViewDidEndDecelerating:scrollView];
+    
+    if (self.index == 0) {      // 加载换技能界面
+        [self scrollViewDidEndDecelerating:scrollView];
+    } else {                    // 加载求帮助界面
+        [self setIndex:1];
+    }
 }
 
 /**
