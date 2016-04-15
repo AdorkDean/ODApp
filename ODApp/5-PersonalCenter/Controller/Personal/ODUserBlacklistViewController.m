@@ -80,6 +80,7 @@ static NSString *cellId = @"ODUserBlackListCell";
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     ODUserBlackListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.data = self.dataArray [indexPath.row];
     cell.delegate = self;
     return cell;

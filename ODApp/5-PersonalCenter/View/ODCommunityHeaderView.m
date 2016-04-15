@@ -60,7 +60,7 @@ static CGFloat signfontSize = 10.0f;
         [blackListButton makeConstraints:^(MASConstraintMaker *make) {
             make.centerY.equalTo(self);
             make.right.equalTo(self).offset(-margin);
-            make.size.equalTo(CGSizeMake(80, 30));
+            make.size.equalTo(CGSizeMake(80, 40));
         }];
         // 拉黑功能
         [blackListButton addTarget:self action:@selector(addBlackList) forControlEvents:UIControlEventTouchUpInside];

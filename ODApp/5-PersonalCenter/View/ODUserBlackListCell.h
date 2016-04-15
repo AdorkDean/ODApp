@@ -12,6 +12,7 @@
 @protocol ODUserBlackListCellDelegate <NSObject>
 
 @optional
+
 - (void)userBlackListCellDidClickBlackListButton:(ODUserBlackListCell *)cell;
 
 @end
