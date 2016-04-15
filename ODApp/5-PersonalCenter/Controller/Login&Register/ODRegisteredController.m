@@ -13,7 +13,7 @@
 #import  "ODTabBarController.h"
 #import "ODHomeFindViewController.h"
 #import "ODUserModel.h"
-
+#import "ODPublicWebViewController.h"
 @interface ODRegisteredController ()<UITextFieldDelegate>
 
 // 视图
@@ -30,9 +30,14 @@
 {
     [super viewDidLoad];
     [self.view addSubview:self.registView];
-    [self navigationInit];
+    self.navigationItem.title = @"账号注册";
+    self.navigationItem.leftBarButtonItem = [UIBarButtonItem OD_itemWithTarget:self action:@selector(finish) color:nil highColor:nil title:@"返回"];
     [self createTimer];
     self.currentTime = 60;
+}
+
+- (void)finish {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - 界面
@@ -41,24 +46,16 @@
 {
     if (_registView == nil) {
         self.registView = [ODRegisteredView getView];
-        self.registView.frame = CGRectMake(0, 64, kScreenSize.width, kScreenSize.height);
+        self.registView.frame = CGRectMake(0, 0, kScreenSize.width, kScreenSize.height);
         [self.registView.getVerification addTarget:self action:@selector(getVerification:) forControlEvents:UIControlEventTouchUpInside];
         [self.registView.registereButton addTarget:self action:@selector(registere:) forControlEvents:UIControlEventTouchUpInside];
         [self.registView.seePassword addTarget:self action:@selector(seePassword:) forControlEvents:UIControlEventTouchUpInside];
+        [self.registView.agreementButton addTarget:self  action:@selector(agreementButtonClick:) forControlEvents:UIControlEventTouchUpInside];
         self.registView.phoneNumber.delegate = self;
         self.registView.password.delegate = self;
     }
     return _registView;
 }
-
-- (void)navigationInit
-{
-    ODNavigationBarView *naviView = [ODNavigationBarView navigationBarView];
-    naviView.title = @"账号注册";
-    naviView.leftBarButton = [ODBarButton barButtonWithTarget:self action:@selector(fanhui:) title:@"返回"];
-    [self.view addSubview:naviView];
-}
-
 
 #pragma mark - 定时器
 -(void)createTimer
@@ -130,11 +127,22 @@
     }
 }
 
+-(void)agreementButtonClick:(UIButton *)button{
+
+    ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
+    vc.bgColor = [UIColor whiteColor];
+    vc.navigationTitle = @"用户协议";
+    vc.isShowProgress = YES;
+    vc.webUrl = @"http://h5.odong.com/woqu/treaty";
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 -(void)fanhui:(UIButton *)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
 
 #pragma mark - 请求数据
 -(void)getRegest

@@ -73,17 +73,6 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6s-jV-DYt">
-                    <rect key="frame" x="10" y="173" width="300" height="40"/>
-                    <color key="backgroundColor" red="1" green="0.84705882352941175" blue="0.0078431372549019607" alpha="0.94913793103448274" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="HdJ-Lf-boL"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <state key="normal" title="注册">
-                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                </button>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请设置密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pVs-u5-So5">
                     <rect key="frame" x="20" y="102" width="260" height="40"/>
                     <constraints>
@@ -123,11 +112,34 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXX-7x-Oiq">
+                    <rect key="frame" x="240" y="153" width="60" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="60" id="WNd-kp-fjO"/>
+                        <constraint firstAttribute="height" constant="30" id="rli-4a-AeH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="用户协议">
+                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6s-jV-DYt">
+                    <rect key="frame" x="10" y="193" width="300" height="40"/>
+                    <color key="backgroundColor" red="1" green="0.84705882352941175" blue="0.0078431372549019607" alpha="0.94913793103448274" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="HdJ-Lf-boL"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="注册">
+                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="Xt7-46-5kf" firstAttribute="top" secondItem="nJJ-BT-ihR" secondAttribute="bottom" id="0LJ-1q-3ff"/>
                 <constraint firstItem="z65-fQ-3Sk" firstAttribute="top" secondItem="IJu-c0-l6x" secondAttribute="bottom" constant="10" id="2R1-MH-srY"/>
+                <constraint firstAttribute="trailing" secondItem="eXX-7x-Oiq" secondAttribute="trailing" constant="20" id="31k-jd-IN7"/>
                 <constraint firstItem="nJJ-BT-ihR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="3rR-nh-cvj"/>
                 <constraint firstItem="IJu-c0-l6x" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="4GS-0b-M8K"/>
                 <constraint firstItem="f6s-jV-DYt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="580-5s-15w"/>
@@ -142,7 +154,9 @@
                 <constraint firstAttribute="trailing" secondItem="IJu-c0-l6x" secondAttribute="trailing" constant="10" id="Ihf-nJ-nrT"/>
                 <constraint firstItem="nJJ-BT-ihR" firstAttribute="top" secondItem="LUR-nf-qtU" secondAttribute="bottom" id="MIh-G6-V5M"/>
                 <constraint firstAttribute="trailing" secondItem="9f9-ND-bH2" secondAttribute="trailing" constant="20" id="Mdf-m0-zbv"/>
+                <constraint firstItem="f6s-jV-DYt" firstAttribute="top" secondItem="eXX-7x-Oiq" secondAttribute="bottom" constant="10" id="O9r-zm-TXw"/>
                 <constraint firstAttribute="trailing" secondItem="iYN-ES-akg" secondAttribute="trailing" constant="10" id="Q4G-Eu-bD4"/>
+                <constraint firstItem="eXX-7x-Oiq" firstAttribute="top" secondItem="iYN-ES-akg" secondAttribute="bottom" constant="10" id="T6U-4t-HBr"/>
                 <constraint firstAttribute="trailing" secondItem="f6s-jV-DYt" secondAttribute="trailing" constant="10" id="VFw-Xb-Aw2"/>
                 <constraint firstItem="iYN-ES-akg" firstAttribute="top" secondItem="pVs-u5-So5" secondAttribute="bottom" id="Yjp-Ka-Gkh"/>
                 <constraint firstItem="Oe4-nD-tBE" firstAttribute="top" secondItem="nJJ-BT-ihR" secondAttribute="bottom" constant="10" id="aAp-zP-j7m"/>
@@ -150,7 +164,6 @@
                 <constraint firstItem="9f9-ND-bH2" firstAttribute="top" secondItem="nJJ-BT-ihR" secondAttribute="bottom" constant="10" id="bLo-aB-mQT"/>
                 <constraint firstItem="LUR-nf-qtU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="bt5-mN-Peo"/>
                 <constraint firstAttribute="trailing" secondItem="nJJ-BT-ihR" secondAttribute="trailing" constant="10" id="drz-Wv-cep"/>
-                <constraint firstItem="f6s-jV-DYt" firstAttribute="top" secondItem="iYN-ES-akg" secondAttribute="bottom" constant="30" id="f4z-yj-nYs"/>
                 <constraint firstItem="Xt7-46-5kf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="g7K-wE-WH4"/>
                 <constraint firstItem="IJu-c0-l6x" firstAttribute="top" secondItem="Xt7-46-5kf" secondAttribute="bottom" id="v4P-ed-TnX"/>
                 <constraint firstItem="pVs-u5-So5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="wfT-Bg-6mo"/>
@@ -158,6 +171,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="agreementButton" destination="eXX-7x-Oiq" id="iVZ-Pf-gOK"/>
                 <outlet property="getVerification" destination="9f9-ND-bH2" id="eSZ-Wj-i1G"/>
                 <outlet property="line1" destination="nJJ-BT-ihR" id="S1j-oL-Nb2"/>
                 <outlet property="line2" destination="IJu-c0-l6x" id="4ha-a3-p9y"/>

@@ -91,8 +91,8 @@
 - (void)registered:(UIButton *)sender
 {
     ODRegisteredController *vc = [[ODRegisteredController alloc] init];
-    vc.personalVC = self;
-    [self presentViewController:vc animated:YES completion:nil];
+    ODNavigationController *nav = [[ODNavigationController alloc]initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 
