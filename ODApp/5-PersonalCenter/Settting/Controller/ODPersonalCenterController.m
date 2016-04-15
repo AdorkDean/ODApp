@@ -9,11 +9,8 @@
 #define MAS_SHORTHAND_GLOBALS
 
 #import "ODPersonalCenterController.h"
-
 #import "ODPersonalCenterHeaderView.h"
-
 #import "ODUserInformation.h"
-
 #import "ODInformationController.h"
 #import "ODMyOrderRecordController.h"
 #import "ODMyApplyActivityController.h"
@@ -27,6 +24,7 @@
 #import "ODMyTakeOutViewController.h"
 #import <Masonry.h>
 #import "ODOtherConfigInfoＭodel.h"
+#import "ODPublicWebViewController.h"
 
 @interface ODPersonalCenterController ()
 
@@ -153,6 +151,17 @@
         [ODPublicTool shareAppWithTarget:weakSelf dictionary:(NSDictionary *)user.share controller:weakSelf];
     };
     
+    // 找工作
+    ODArrowItem *job = [ODArrowItem itemWithName:@"找工作"];
+    job.oprtionBlock = ^(NSIndexPath *index){
+        ODPublicWebViewController *vc = [[ODPublicWebViewController alloc] init];
+        vc.navigationTitle = @"找工作";
+        vc.isShowProgress = YES;
+        NSString *store_id = @"2";
+        vc.webUrl = [NSString stringWithFormat:@"%@?access_token=%@&store_id=%@&open_id=%@", ODWebUrlFindJob, [ODUserInformation sharedODUserInformation].openID, store_id, [ODUserInformation sharedODUserInformation].openID];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    };
+    
     /**
      *  添加我的外卖
      */
@@ -162,7 +171,7 @@
     ODOtherConfigInfoModel *config = [[ODUserInformation sharedODUserInformation] getConfigCache];
     ODGroupItem *group = nil;
     if (config == nil || config.auditing == 1) {
-        group = [ODGroupItem groupWithItems:@[item0, item1, item2, item6, item7, item8]];
+        group = [ODGroupItem groupWithItems:@[job,item0, item1, item2, item6, item7, item8]];
     } else {
         group = [ODGroupItem groupWithItems:@[myTakeOut, item0, item1, item2, item3, item4, item5, item6, item7, item8]];
     }

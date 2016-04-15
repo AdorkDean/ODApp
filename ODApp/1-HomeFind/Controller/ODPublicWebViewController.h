@@ -22,5 +22,7 @@
 /** 网页视图 */
 @property (nonatomic,strong) UIWebView *webView;
 
+/** 背景色 */
+@property (nonatomic,strong) UIColor *bgColor;
 
 @end
