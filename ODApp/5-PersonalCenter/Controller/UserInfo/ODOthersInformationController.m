@@ -12,6 +12,8 @@
 #import "ODOtherConfigInfoＭodel.h"
 #import "ODInformViewController.h"
 
+#import "ODCommunityHeaderView.h"
+
 
 @implementation PersonCellData
 @end
@@ -103,7 +105,8 @@
     self.collectionView.dataSource = self;
     self.collectionView.delegate = self;
     self.collectionView.backgroundColor = [UIColor backgroundColor];
-    [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandFirstCell" bundle:nil] forCellWithReuseIdentifier:@"first"];
+//    [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([ODCommunityHeaderView class]) bundle:nil] forCellWithReuseIdentifier:@"first"];
+    [self.collectionView registerClass:[ODCommunityHeaderView class] forCellWithReuseIdentifier:@"first"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"ODLandSecondCell" bundle:nil] forCellWithReuseIdentifier:@"second"];
 
     [self.view addSubview:self.collectionView];
@@ -115,15 +118,9 @@
 {
     if (indexPath.section == 0)
     {
-        ODLandFirstCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
-        
-        [cell.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.model.avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]options:SDWebImageRetryFailed];
-        [cell.qrcodeImageView removeFromSuperview];
-        [cell.centerImageView removeFromSuperview];
-        cell.nickNameLabel.text = self.model.nick;
-        cell.signatureLabel.text = self.model.sign;
-        
-        return cell;
+        ODCommunityHeaderView *headerView = [collectionView dequeueReusableCellWithReuseIdentifier:@"first" forIndexPath:indexPath];
+        headerView.data = self.model;
+        return headerView;
     }
     else
     {
@@ -194,7 +191,7 @@
 {
     if (indexPath.section == 0)
     {
-        return CGSizeMake(kScreenSize.width , 90);
+        return CGSizeMake(kScreenSize.width , 80);
     }
     else
     {
@@ -232,12 +229,6 @@
     return CGSizeMake(0, 5);
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
@@ -247,4 +238,5 @@
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:NSStringFromClass([self class])];
 }
+
 @end

@@ -259,3 +259,8 @@ NSString * const ODUrlShopcartClear = @"shopcart/clear";
 NSString * const ODUrlShopcartOrder = @"shopcart/order";
 /** 确认下单 */
 NSString * const ODUrlShopcartOrderConfirm = @"shopcart/order/confirm";
+
+#pragma mark - 黑名单
+/** 加入黑名单 */
+NSString * const ODDocUserReject = @"user/reject";
+NSString * const ODNotificationBlackListRefresh = @"blackListRefresh";

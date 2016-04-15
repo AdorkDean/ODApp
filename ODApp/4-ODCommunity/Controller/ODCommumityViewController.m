@@ -75,7 +75,10 @@ static NSString *cellId = @"ODCommunityCell";
         weakSelf.bbsMark = @"全部";
         weakSelf.bbsType = 5;
         [weakSelf.tableView.mj_header beginRefreshing];
-        
+    }];
+    
+    [[NSNotificationCenter defaultCenter]addObserverForName:ODNotificationBlackListRefresh object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        [weakSelf.tableView.mj_header beginRefreshing];
     }];
     
     self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{

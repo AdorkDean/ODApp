@@ -284,6 +284,7 @@
 		4096EDFF1CA3F43D001D916C /* ODInfiniteScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4096EDFE1CA3F43D001D916C /* ODInfiniteScrollView.m */; };
 		40A02D1B1C965A3F009CE702 /* ODBazaarExchangeSkillCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40A02D191C965A3F009CE702 /* ODBazaarExchangeSkillCell.m */; };
 		40A02D1C1C965A3F009CE702 /* ODBazaarExchangeSkillCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40A02D1A1C965A3F009CE702 /* ODBazaarExchangeSkillCell.xib */; };
+		40E04B291CC0C10B00E02479 /* ODCommunityHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40E04B281CC0C10B00E02479 /* ODCommunityHeaderView.m */; };
 		672D70E18F3238DC081B4B46 /* libPods-ODApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEA572BF76BF4C22E1FC80BA /* libPods-ODApp.a */; };
 		9DD00BDB1C4E397E00F0EE5F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDA1C4E397E00F0EE5F /* Security.framework */; };
 		9DD00BDD1C4E398B00F0EE5F /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */; };
@@ -889,6 +890,8 @@
 		40A02D181C965A3F009CE702 /* ODBazaarExchangeSkillCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBazaarExchangeSkillCell.h; sourceTree = "<group>"; };
 		40A02D191C965A3F009CE702 /* ODBazaarExchangeSkillCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBazaarExchangeSkillCell.m; sourceTree = "<group>"; };
 		40A02D1A1C965A3F009CE702 /* ODBazaarExchangeSkillCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODBazaarExchangeSkillCell.xib; sourceTree = "<group>"; };
+		40E04B271CC0C10B00E02479 /* ODCommunityHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODCommunityHeaderView.h; sourceTree = "<group>"; };
+		40E04B281CC0C10B00E02479 /* ODCommunityHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODCommunityHeaderView.m; sourceTree = "<group>"; };
 		9DD00BDA1C4E397E00F0EE5F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		9DD00BDC1C4E398B00F0EE5F /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
 		9DD00BDE1C4E399700F0EE5F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -1888,6 +1891,8 @@
 		232CB4C01C9264E200340D12 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				40E04B271CC0C10B00E02479 /* ODCommunityHeaderView.h */,
+				40E04B281CC0C10B00E02479 /* ODCommunityHeaderView.m */,
 				ED379AA41CAE0BF500AE1503 /* ODTakeOutView.h */,
 				ED379AA51CAE0BF500AE1503 /* ODTakeOutView.m */,
 				ED379AA61CAE0BF500AE1503 /* ODTakeOutView.xib */,
@@ -2691,6 +2696,7 @@
 				232CB6401C9264E200340D12 /* ODSecondOrderController.m in Sources */,
 				4091418B1C9930D80059E05F /* ODBazaarExchangeSkillCollectionCell.m in Sources */,
 				232CB65F1C9264E200340D12 /* ODSecondOrderView.m in Sources */,
+				40E04B291CC0C10B00E02479 /* ODCommunityHeaderView.m in Sources */,
 				4003348A1C9B97C500973818 /* ODSettingItem.m in Sources */,
 				232CB5611C9264E200340D12 /* AppDelegate.m in Sources */,
 				232CB5701C9264E200340D12 /* IQUIView+IQKeyboardToolbar.m in Sources */,
