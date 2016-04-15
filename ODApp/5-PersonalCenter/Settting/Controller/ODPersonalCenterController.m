@@ -25,6 +25,7 @@
 #import <Masonry.h>
 #import "ODOtherConfigInfoＭodel.h"
 #import "ODPublicWebViewController.h"
+#import "ODUserBlacklistViewController.h"
 
 @interface ODPersonalCenterController ()
 
@@ -159,6 +160,13 @@
         vc.isShowProgress = YES;
         NSString *store_id = @"2";
         vc.webUrl = [NSString stringWithFormat:@"%@?access_token=%@&store_id=%@&open_id=%@", ODWebUrlFindJob, [ODUserInformation sharedODUserInformation].openID, store_id, [ODUserInformation sharedODUserInformation].openID];
+        [weakSelf.navigationController pushViewController:vc animated:YES];
+    };
+    
+    //用户黑名单
+    ODArrowItem *blacklist = [ODArrowItem itemWithName:@"黑名单"];
+    blacklist.oprtionBlock = ^(NSIndexPath *index){
+        ODUserBlacklistViewController *vc = [[ODUserBlacklistViewController alloc]init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
     };
     

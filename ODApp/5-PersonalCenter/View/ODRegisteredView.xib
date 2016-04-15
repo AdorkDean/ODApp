@@ -140,6 +140,7 @@
                 <constraint firstItem="Xt7-46-5kf" firstAttribute="top" secondItem="nJJ-BT-ihR" secondAttribute="bottom" id="0LJ-1q-3ff"/>
                 <constraint firstItem="z65-fQ-3Sk" firstAttribute="top" secondItem="IJu-c0-l6x" secondAttribute="bottom" constant="10" id="2R1-MH-srY"/>
                 <constraint firstAttribute="trailing" secondItem="eXX-7x-Oiq" secondAttribute="trailing" constant="20" id="31k-jd-IN7"/>
+                <constraint firstItem="f6s-jV-DYt" firstAttribute="top" secondItem="iYN-ES-akg" secondAttribute="bottom" constant="50" id="3EM-KR-yc2"/>
                 <constraint firstItem="nJJ-BT-ihR" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="3rR-nh-cvj"/>
                 <constraint firstItem="IJu-c0-l6x" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="4GS-0b-M8K"/>
                 <constraint firstItem="f6s-jV-DYt" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="580-5s-15w"/>
@@ -154,7 +155,6 @@
                 <constraint firstAttribute="trailing" secondItem="IJu-c0-l6x" secondAttribute="trailing" constant="10" id="Ihf-nJ-nrT"/>
                 <constraint firstItem="nJJ-BT-ihR" firstAttribute="top" secondItem="LUR-nf-qtU" secondAttribute="bottom" id="MIh-G6-V5M"/>
                 <constraint firstAttribute="trailing" secondItem="9f9-ND-bH2" secondAttribute="trailing" constant="20" id="Mdf-m0-zbv"/>
-                <constraint firstItem="f6s-jV-DYt" firstAttribute="top" secondItem="eXX-7x-Oiq" secondAttribute="bottom" constant="10" id="O9r-zm-TXw"/>
                 <constraint firstAttribute="trailing" secondItem="iYN-ES-akg" secondAttribute="trailing" constant="10" id="Q4G-Eu-bD4"/>
                 <constraint firstItem="eXX-7x-Oiq" firstAttribute="top" secondItem="iYN-ES-akg" secondAttribute="bottom" constant="10" id="T6U-4t-HBr"/>
                 <constraint firstAttribute="trailing" secondItem="f6s-jV-DYt" secondAttribute="trailing" constant="10" id="VFw-Xb-Aw2"/>
@@ -180,6 +180,7 @@
                 <outlet property="phoneNumber" destination="LUR-nf-qtU" id="Cbt-LX-jXk"/>
                 <outlet property="registereButton" destination="f6s-jV-DYt" id="4hi-6M-TjA"/>
                 <outlet property="seePassword" destination="z65-fQ-3Sk" id="ppH-iV-2le"/>
+                <outlet property="spaceConstraint" destination="3EM-KR-yc2" id="7hO-oY-iyz"/>
                 <outlet property="verification" destination="Xt7-46-5kf" id="Reo-Z1-zuW"/>
             </connections>
             <point key="canvasLocation" x="127" y="238"/>

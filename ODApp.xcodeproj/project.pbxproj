@@ -310,6 +310,8 @@
 		B87A1D241CB3A91100170906 /* ODAddressKeywordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B87A1D221CB3A91100170906 /* ODAddressKeywordCell.m */; };
 		B87A1D251CB3A91100170906 /* ODAddressKeywordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B87A1D231CB3A91100170906 /* ODAddressKeywordCell.xib */; };
 		B87A1D281CB3BA0A00170906 /* ODAddNewAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87A1D271CB3BA0A00170906 /* ODAddNewAddressViewController.m */; };
+		B8C56C1B1CC0D1340001669D /* ODUserBlacklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C56C1A1CC0D1340001669D /* ODUserBlacklistViewController.m */; };
+		B8C56C1E1CC0D8B80001669D /* ODUserBlackListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C56C1D1CC0D8B80001669D /* ODUserBlackListCell.m */; };
 		B8EF1AC81CAE82CB00CA31C6 /* ODDeliveryNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EF1AC51CAE82CB00CA31C6 /* ODDeliveryNoteViewController.m */; };
 		B8EF1AC91CAE82CB00CA31C6 /* ODSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EF1AC71CAE82CB00CA31C6 /* ODSelectAddressViewController.m */; };
 		B8EF1ACD1CAE836800CA31C6 /* ODSelectAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EF1ACB1CAE836800CA31C6 /* ODSelectAddressCell.m */; };
@@ -928,6 +930,10 @@
 		B87A1D231CB3A91100170906 /* ODAddressKeywordCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ODAddressKeywordCell.xib; sourceTree = "<group>"; };
 		B87A1D261CB3BA0A00170906 /* ODAddNewAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODAddNewAddressViewController.h; sourceTree = "<group>"; };
 		B87A1D271CB3BA0A00170906 /* ODAddNewAddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODAddNewAddressViewController.m; sourceTree = "<group>"; };
+		B8C56C191CC0D1340001669D /* ODUserBlacklistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserBlacklistViewController.h; sourceTree = "<group>"; };
+		B8C56C1A1CC0D1340001669D /* ODUserBlacklistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserBlacklistViewController.m; sourceTree = "<group>"; };
+		B8C56C1C1CC0D8B80001669D /* ODUserBlackListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserBlackListCell.h; sourceTree = "<group>"; };
+		B8C56C1D1CC0D8B80001669D /* ODUserBlackListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserBlackListCell.m; sourceTree = "<group>"; };
 		B8EF1AC41CAE82CB00CA31C6 /* ODDeliveryNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDeliveryNoteViewController.h; sourceTree = "<group>"; };
 		B8EF1AC51CAE82CB00CA31C6 /* ODDeliveryNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDeliveryNoteViewController.m; sourceTree = "<group>"; };
 		B8EF1AC61CAE82CB00CA31C6 /* ODSelectAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSelectAddressViewController.h; sourceTree = "<group>"; };
@@ -1783,6 +1789,8 @@
 		232CB47D1C9264E200340D12 /* Personal */ = {
 			isa = PBXGroup;
 			children = (
+				B8C56C191CC0D1340001669D /* ODUserBlacklistViewController.h */,
+				B8C56C1A1CC0D1340001669D /* ODUserBlacklistViewController.m */,
 				402261331CA5051200E0B737 /* ODMyTakeOutViewController.h */,
 				402261341CA5051200E0B737 /* ODMyTakeOutViewController.m */,
 				232CB47E1C9264E200340D12 /* ODDrawbackController.h */,
@@ -1926,6 +1934,8 @@
 				B865882A1C9953AA002ECB0C /* ODMyTaskViolationsCell.h */,
 				B865882B1C9953AA002ECB0C /* ODMyTaskViolationsCell.m */,
 				B865882C1C9953AA002ECB0C /* ODMyTaskViolationsCell.xib */,
+				B8C56C1C1CC0D8B80001669D /* ODUserBlackListCell.h */,
+				B8C56C1D1CC0D8B80001669D /* ODUserBlackListCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2630,6 +2640,7 @@
 				232CB55E1C9264E200340D12 /* ODNavigationController.m in Sources */,
 				232CB5651C9264E200340D12 /* IQUITextFieldView+Additions.m in Sources */,
 				232CB6461C9264E200340D12 /* ODWithdrawalDetailController.m in Sources */,
+				B8C56C1B1CC0D1340001669D /* ODUserBlacklistViewController.m in Sources */,
 				232CB5741C9264E200340D12 /* UITableViewRowAction+JZExtension.m in Sources */,
 				23EBA2341CAE6D25009D32C6 /* ODExchangePayViewController.m in Sources */,
 				232CB5681C9264E200340D12 /* IQUIWindow+Hierarchy.m in Sources */,
@@ -2659,6 +2670,7 @@
 				232CB6151C9264E200340D12 /* ODEvaluationModel.m in Sources */,
 				ED4FF47C1CA3F12600EDE431 /* ODTakeAwayDetailController.m in Sources */,
 				ED379AA71CAE0BF500AE1503 /* ODTakeOutView.m in Sources */,
+				B8C56C1E1CC0D8B80001669D /* ODUserBlackListCell.m in Sources */,
 				232CB5B21C9264E200340D12 /* ODTitleLabelView.m in Sources */,
 				ED51F08A1C979E87005525AD /* ODIndentDetailView.m in Sources */,
 				400F184D1CA93220000EFFBC /* ODTakeOutCell.m in Sources */,

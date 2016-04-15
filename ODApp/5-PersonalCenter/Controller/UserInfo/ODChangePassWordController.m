@@ -58,8 +58,8 @@
         [self.registView.registereButton addTarget:self action:@selector(registere:) forControlEvents:UIControlEventTouchUpInside];
         [self.registView.registereButton setTitle:@"确认修改" forState:UIControlStateNormal];
         [self.registView.seePassword addTarget:self action:@selector(seePassword:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
+        self.registView.agreementButton.hidden = YES;
+        self.registView.spaceConstraint.constant = 30;
         self.registView.phoneNumber.delegate = self;
         self.registView.password.delegate = self;
     }

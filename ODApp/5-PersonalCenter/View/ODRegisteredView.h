@@ -24,5 +24,6 @@
 @property(weak, nonatomic) IBOutlet UILabel *line1;
 @property(weak, nonatomic) IBOutlet UILabel *line2;
 @property(weak, nonatomic) IBOutlet UILabel *line3;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *spaceConstraint;
 
 @end
