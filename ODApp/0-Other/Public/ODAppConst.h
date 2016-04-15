@@ -261,3 +261,8 @@ UIKIT_EXTERN NSString * const ODUrlShopcartClear;
 UIKIT_EXTERN NSString * const ODUrlShopcartOrder;
 /** 确认下单 */
 UIKIT_EXTERN NSString * const ODUrlShopcartOrderConfirm;
+
+#pragma mark - 黑名单
+/** 加入黑名单 */
+UIKIT_EXTERN NSString * const ODDocUserReject;
+UIKIT_EXTERN NSString * const ODNotificationBlackListRefresh;
