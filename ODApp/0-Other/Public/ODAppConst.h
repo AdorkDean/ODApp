@@ -264,5 +264,5 @@ UIKIT_EXTERN NSString * const ODUrlShopcartOrderConfirm;
 
 #pragma mark - 黑名单
 /** 加入黑名单 */
-UIKIT_EXTERN NSString * const ODDocUserReject;
+UIKIT_EXTERN NSString * const ODUrlUserReject;
 UIKIT_EXTERN NSString * const ODNotificationBlackListRefresh;

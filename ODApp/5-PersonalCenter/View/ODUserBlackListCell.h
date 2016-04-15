@@ -7,7 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+@class ODBlacklistModel, ODUserBlackListCell;
+
+@protocol ODUserBlackListCellDelegate <NSObject>
+
+@optional
+- (void)userBlackListCellDidClickBlackListButton:(ODUserBlackListCell *)cell;
+
+@end
 
 @interface ODUserBlackListCell : UITableViewCell
+
+@property (nonatomic, strong) ODBlacklistModel *data;
+
+@property (nonatomic, weak) id<ODUserBlackListCellDelegate> delegate;
 
 @end

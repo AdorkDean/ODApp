@@ -313,6 +313,7 @@
 		B87A1D281CB3BA0A00170906 /* ODAddNewAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B87A1D271CB3BA0A00170906 /* ODAddNewAddressViewController.m */; };
 		B8C56C1B1CC0D1340001669D /* ODUserBlacklistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C56C1A1CC0D1340001669D /* ODUserBlacklistViewController.m */; };
 		B8C56C1E1CC0D8B80001669D /* ODUserBlackListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C56C1D1CC0D8B80001669D /* ODUserBlackListCell.m */; };
+		B8C56C211CC0DC9C0001669D /* ODBlacklistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B8C56C201CC0DC9C0001669D /* ODBlacklistModel.m */; };
 		B8EF1AC81CAE82CB00CA31C6 /* ODDeliveryNoteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EF1AC51CAE82CB00CA31C6 /* ODDeliveryNoteViewController.m */; };
 		B8EF1AC91CAE82CB00CA31C6 /* ODSelectAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EF1AC71CAE82CB00CA31C6 /* ODSelectAddressViewController.m */; };
 		B8EF1ACD1CAE836800CA31C6 /* ODSelectAddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EF1ACB1CAE836800CA31C6 /* ODSelectAddressCell.m */; };
@@ -937,6 +938,8 @@
 		B8C56C1A1CC0D1340001669D /* ODUserBlacklistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserBlacklistViewController.m; sourceTree = "<group>"; };
 		B8C56C1C1CC0D8B80001669D /* ODUserBlackListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODUserBlackListCell.h; sourceTree = "<group>"; };
 		B8C56C1D1CC0D8B80001669D /* ODUserBlackListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODUserBlackListCell.m; sourceTree = "<group>"; };
+		B8C56C1F1CC0DC9C0001669D /* ODBlacklistModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBlacklistModel.h; sourceTree = "<group>"; };
+		B8C56C201CC0DC9C0001669D /* ODBlacklistModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODBlacklistModel.m; sourceTree = "<group>"; };
 		B8EF1AC41CAE82CB00CA31C6 /* ODDeliveryNoteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODDeliveryNoteViewController.h; sourceTree = "<group>"; };
 		B8EF1AC51CAE82CB00CA31C6 /* ODDeliveryNoteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ODDeliveryNoteViewController.m; sourceTree = "<group>"; };
 		B8EF1AC61CAE82CB00CA31C6 /* ODSelectAddressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODSelectAddressViewController.h; sourceTree = "<group>"; };
@@ -1884,6 +1887,8 @@
 				232CB4BF1C9264E200340D12 /* ODUserModel.m */,
 				3DCD2BA21CB7781300B15DCF /* ODOtherConfigInfoＭodel.h */,
 				3DCD2BA31CB7781300B15DCF /* ODOtherConfigInfoＭodel.m */,
+				B8C56C1F1CC0DC9C0001669D /* ODBlacklistModel.h */,
+				B8C56C201CC0DC9C0001669D /* ODBlacklistModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2644,6 +2649,7 @@
 				232CB5F31C9264E200340D12 /* ODCommunityShowPicViewController.m in Sources */,
 				232CB55E1C9264E200340D12 /* ODNavigationController.m in Sources */,
 				232CB5651C9264E200340D12 /* IQUITextFieldView+Additions.m in Sources */,
+				B8C56C211CC0DC9C0001669D /* ODBlacklistModel.m in Sources */,
 				232CB6461C9264E200340D12 /* ODWithdrawalDetailController.m in Sources */,
 				B8C56C1B1CC0D1340001669D /* ODUserBlacklistViewController.m in Sources */,
 				232CB5741C9264E200340D12 /* UITableViewRowAction+JZExtension.m in Sources */,

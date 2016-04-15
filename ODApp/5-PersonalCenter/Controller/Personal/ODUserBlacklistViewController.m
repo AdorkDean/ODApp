@@ -7,15 +7,18 @@
 //
 
 #import "ODUserBlacklistViewController.h"
-#import "MJRefresh.h"
+#import "ODUserBlackListCell.h"
+#import "ODBlacklistModel.h"
+#import <MJRefresh.h>
 
-@interface ODUserBlacklistViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ODUserBlacklistViewController ()<UITableViewDelegate,UITableViewDataSource, ODUserBlackListCellDelegate>
 
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic)NSInteger page;
 
 @end
+
+static NSString *cellId = @"ODUserBlackListCell";
 
 @implementation ODUserBlacklistViewController
 
@@ -29,10 +32,14 @@
 
 - (UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, kScreenSize.width, kScreenSize.height-64) style:UITableViewStylePlain];
         _tableView.dataSource = self;
         _tableView.delegate = self;
+        _tableView.rowHeight = 86;
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, -ODBazaaeExchangeCellMargin, 0);
         _tableView.backgroundColor = [UIColor backgroundColor];
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [_tableView registerClass:[ODUserBlackListCell class] forCellReuseIdentifier:cellId];
         [self.view addSubview:_tableView];
     }
     return _tableView;
@@ -42,28 +49,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    __weakSelf
-    _tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^ {
-        weakSelf.page = 1;
-        [weakSelf requestData];
-    }];
-    _tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
-        weakSelf.page++;
-        [weakSelf requestData];
-    }];
-
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestData)];
+    [self.tableView.mj_header beginRefreshing];
 }
 
 #pragma mark - 数据请求
 - (void)requestData{
     __weakSelf
-    [ODHttpTool getWithURL:ODUrlTakeOutOrderList parameters:nil modelClass:[NSObject class] success:^(id model) {
-        if (weakSelf.page == 1) {
-            [weakSelf.dataArray removeAllObjects];
-        }
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [ODHttpTool getWithURL:ODUrlUserReject parameters:params modelClass:[ODBlacklistModel class] success:^(ODBlacklistModelResponse *model) {
+        [weakSelf.dataArray removeAllObjects];
+        [weakSelf.dataArray addObjectsFromArray:[model result]];
+        
         [ODHttpTool od_endRefreshWith:weakSelf.tableView array:weakSelf.dataArray];
         if (weakSelf.dataArray.count == 0) {
-            [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无订单"];
+            [weakSelf.noResultLabel showOnSuperView:weakSelf.tableView title:@"暂无黑名单记录"];
         }
         else {
             [weakSelf.noResultLabel hidden];
@@ -78,17 +78,16 @@
     return self.dataArray.count;
 }
 
-//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-//    
-//}
-
--(CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 100;
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    ODUserBlackListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    cell.data = self.dataArray [indexPath.row];
+    cell.delegate = self;
+    return cell;
 }
 
-#pragma mark - UITableViewDelegate
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+#pragma mark - ODUserBlackListCellDelegate
+- (void)userBlackListCellDidClickBlackListButton:(ODUserBlackListCell *)cell{
+    [self.tableView.mj_header beginRefreshing];
 }
 
 @end

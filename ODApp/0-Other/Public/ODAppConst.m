@@ -262,5 +262,5 @@ NSString * const ODUrlShopcartOrderConfirm = @"shopcart/order/confirm";
 
 #pragma mark - 黑名单
 /** 加入黑名单 */
-NSString * const ODDocUserReject = @"user/reject";
+NSString * const ODUrlUserReject = @"user/reject";
 NSString * const ODNotificationBlackListRefresh = @"blackListRefresh";

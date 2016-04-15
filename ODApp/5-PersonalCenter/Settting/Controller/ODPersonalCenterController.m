@@ -164,7 +164,7 @@
     };
     
     //用户黑名单
-    ODArrowItem *blacklist = [ODArrowItem itemWithName:@"黑名单"];
+    ODArrowItem *blacklist = [ODArrowItem itemWithName:@"黑名单列表"];
     blacklist.oprtionBlock = ^(NSIndexPath *index){
         ODUserBlacklistViewController *vc = [[ODUserBlacklistViewController alloc]init];
         [weakSelf.navigationController pushViewController:vc animated:YES];
@@ -179,9 +179,9 @@
     ODOtherConfigInfoModel *config = [[ODUserInformation sharedODUserInformation] getConfigCache];
     ODGroupItem *group = nil;
     if (config == nil || config.auditing == 1) {
-        group = [ODGroupItem groupWithItems:@[job,item0, item1, item2, item6, item7, item8]];
+        group = [ODGroupItem groupWithItems:@[job,item0, item1, item2, item6, item7,blacklist, item8]];
     } else {
-        group = [ODGroupItem groupWithItems:@[myTakeOut, item0, item1, item2, item3, item4, item5, item6, item7, item8]];
+        group = [ODGroupItem groupWithItems:@[myTakeOut, item0, item1, item2, item3, item4, item5, item6, item7,blacklist, item8]];
     }
     
     [self.groups addObject:group];

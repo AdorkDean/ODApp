@@ -113,7 +113,7 @@ static CGFloat signfontSize = 10.0f;
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"reject_user_open_id"] = self.data.open_id;
     params[@"act"] = @"add";
-    [ODHttpTool getWithURL:ODDocUserReject parameters:params modelClass:[NSObject class] success:^(id model) {
+    [ODHttpTool getWithURL:ODUrlUserReject parameters:params modelClass:[NSObject class] success:^(id model) {
         [ODProgressHUD showSuccessWithStatus:@"拉黑成功"];
         
         UITabBarController *tabBarVc = (id)[UIApplication sharedApplication].keyWindow.rootViewController;
