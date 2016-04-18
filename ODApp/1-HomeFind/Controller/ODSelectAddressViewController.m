@@ -172,44 +172,21 @@ static NSString *cellId = @"ODSelectAddressCell";
 -(void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation {
     if (updatingLocation) {
         self.mapView.showsUserLocation = NO;
-        [self.mapView setCenterCoordinate:userLocation.location.coordinate animated:YES];
-        
-        //构造AMapReGeocodeSearchRequest对象
-        AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
-        regeo.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
-        regeo.radius = 3000;
-        regeo.requireExtension = YES;
         
         self.pointAnnotation = [[MAPointAnnotation alloc] init];
         self.pointAnnotation.coordinate = CLLocationCoordinate2DMake(userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude);
         [self.mapView addAnnotation:self.pointAnnotation];
         
-        //发起逆地理编码
-        [self.mapSearchAPI AMapReGoecodeSearch:regeo];
-        
-        AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
-        request.location = [AMapGeoPoint locationWithLatitude:userLocation.coordinate.latitude longitude:userLocation.coordinate.longitude];
-        request.keywords = @"";
-        request.sortrule = 0;
-        request.offset = 30;
-        request.requireExtension = YES;
-        //发起周边搜索
-        [self.mapSearchAPI AMapPOIAroundSearch:request];
-    }
-    if (self.lat.length) {
-        self.mapView.centerCoordinate = CLLocationCoordinate2DMake([self.lat doubleValue], [self.lng doubleValue]);
+        if (self.lat.length) {
+            self.mapView.centerCoordinate = CLLocationCoordinate2DMake([self.lat doubleValue], [self.lng doubleValue]);
+        }else{
+            self.mapView.centerCoordinate = userLocation.location.coordinate;
+        }
     }
 }
 
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
-    AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
-    request.location = [AMapGeoPoint locationWithLatitude:mapView.region.center.latitude longitude:mapView.region.center.longitude];
-    request.keywords = @"";
-    request.sortrule = 0;
-    request.offset = 30;
-    request.requireExtension = YES;
-    //发起周边搜索
-    [self.mapSearchAPI AMapPOIAroundSearch:request];
+    [self poiAroundSearchWithLatitude:mapView.region.center.latitude longitude:mapView.region.center.longitude];
 }
 
 //- (void)mapViewDidFinishLoadingMap:(MAMapView *)mapView dataSize:(NSInteger)dataSize{
@@ -219,6 +196,16 @@ static NSString *cellId = @"ODSelectAddressCell";
 //    }
 //}
 
+-(void)poiAroundSearchWithLatitude:(double)lat longitude:(double)lng{
+    AMapPOIAroundSearchRequest *request = [[AMapPOIAroundSearchRequest alloc] init];
+    request.location = [AMapGeoPoint locationWithLatitude:lat longitude:lng];
+    request.keywords = @"";
+    request.sortrule = 0;
+    request.offset = 30;
+    request.requireExtension = YES;
+    //发起周边搜索
+    [self.mapSearchAPI AMapPOIAroundSearch:request];
+}
 
 #pragma mark - AMapSearchDelegate
 - (void)onPOISearchDone:(AMapPOIAroundSearchRequest *)request response:(AMapPOISearchResponse *)response {
