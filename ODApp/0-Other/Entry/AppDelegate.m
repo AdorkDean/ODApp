@@ -124,6 +124,10 @@ void UncaughtExceptionHandler(NSException *exception) {
     }
 }
 
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // 清除 App badge number
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+}
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     // Required

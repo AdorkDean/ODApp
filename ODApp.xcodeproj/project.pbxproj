@@ -2283,12 +2283,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B83C6B891C224F640063ED92 /* Build configuration list for PBXNativeTarget "ODApp" */;
 			buildPhases = (
-				2872E34B8C82197324EB472D /* Check Pods Manifest.lock */,
+				2872E34B8C82197324EB472D /* 📦 Check Pods Manifest.lock */,
 				B83C6B5E1C224F640063ED92 /* Sources */,
 				B83C6B5F1C224F640063ED92 /* Frameworks */,
 				B83C6B601C224F640063ED92 /* Resources */,
-				C990F7F189A4D1E84CFCEDA6 /* Embed Pods Frameworks */,
-				CDADE34B4B51B5CDC770320B /* Copy Pods Resources */,
+				C990F7F189A4D1E84CFCEDA6 /* 📦 Embed Pods Frameworks */,
+				CDADE34B4B51B5CDC770320B /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2473,14 +2473,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2872E34B8C82197324EB472D /* Check Pods Manifest.lock */ = {
+		2872E34B8C82197324EB472D /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2488,14 +2488,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		C990F7F189A4D1E84CFCEDA6 /* Embed Pods Frameworks */ = {
+		C990F7F189A4D1E84CFCEDA6 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2503,14 +2503,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ODApp/Pods-ODApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		CDADE34B4B51B5CDC770320B /* Copy Pods Resources */ = {
+		CDADE34B4B51B5CDC770320B /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
