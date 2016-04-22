@@ -40,14 +40,14 @@
 {
     [super viewWillAppear:animated];
     [MobClick beginLogPageView:NSStringFromClass([self class])];
-    [self setupTableView];
     
-//    ODUserModel *test = [[ODUserInformation sharedODUserInformation] getUserCache];
+    self.tableView.contentOffset = CGPointZero;
     
     if (![ODUserInformation sharedODUserInformation].openID.length) return;
     
     self.headerView.user = [[ODUserInformation sharedODUserInformation] getUserCache];
 }
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [MobClick endLogPageView:NSStringFromClass([self class])];
@@ -56,6 +56,7 @@
 {
     [super viewDidLoad];
     
+    [self setupTableView];
     // 初始化数据
     [self setupGroup];
 }
@@ -71,7 +72,7 @@
     self.tableView.rowHeight = 48;
     self.tableView.backgroundColor = [UIColor backgroundColor];
     self.tableView.contentOffset = CGPointZero;
-    self.tableView.frame = CGRectMake(0, ODNavigationHeight, KScreenWidth, KScreenHeight - ODNavigationHeight);
+    self.tableView.frame = CGRectMake(0, 64, KScreenWidth, KScreenHeight - ODNavigationHeight - 55);
     // 调整tableView距离导航栏高度
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 14, 0);
     
@@ -86,11 +87,11 @@
         self.headerView = headerView;
     } else {
         headerView.orderInfoView.hidden = NO;
+        [headerView sizeToFit];
+        headerView.od_height = 172;
         self.tableView.tableHeaderView = headerView;
         self.headerView = headerView;
-        headerView.frame = CGRectMake(0, 0, headerView.frame.size.width, 172);
     }
-    
 }
 
 /**

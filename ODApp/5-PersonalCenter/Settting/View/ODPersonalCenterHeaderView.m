@@ -41,6 +41,7 @@
 #pragma mark - 初始化方法
 - (void)awakeFromNib
 {
+    self.autoresizingMask = UIViewAutoresizingNone;
     UITapGestureRecognizer *ges = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(showMessage:)];
     [self.showInformationView addGestureRecognizer:ges];
 }
