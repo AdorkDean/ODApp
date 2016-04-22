@@ -71,7 +71,7 @@
     self.tableView.rowHeight = 48;
     self.tableView.backgroundColor = [UIColor backgroundColor];
     self.tableView.contentOffset = CGPointZero;
-    
+    self.tableView.frame = CGRectMake(0, ODNavigationHeight, KScreenWidth, KScreenHeight - ODNavigationHeight);
     // 调整tableView距离导航栏高度
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 14, 0);
     
@@ -88,11 +88,7 @@
         headerView.orderInfoView.hidden = NO;
         self.tableView.tableHeaderView = headerView;
         self.headerView = headerView;
-        [headerView makeConstraints:^(MASConstraintMaker *make) {
-            make.left.top.equalTo(self.view).offset(0);
-            make.width.equalTo(self.view);
-            make.height.equalTo(172);
-        }];
+        headerView.frame = CGRectMake(0, 0, headerView.frame.size.width, 172);
     }
     
 }
