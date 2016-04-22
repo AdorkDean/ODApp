@@ -89,9 +89,9 @@
     [cell.picImageView addGestureRecognizer:pgr];
     cell.picImageView.userInteractionEnabled = YES;
     if ([self.skill isEqualToString:@"skill"]) {
-        [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:[self.photos[indexPath.row]valueForKeyPath:@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
+        [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:[self.photos[indexPath.row]valueForKeyPath:@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderBigImage"] options:SDWebImageRetryFailed];
     } else {
-        [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.photos[indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
+        [cell.picImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.photos[indexPath.row]] placeholderImage:[UIImage imageNamed:@"placeholderBigImage"] options:SDWebImageRetryFailed];
     }
     cell.picImageView.center = CGPointMake(kScreenSize.width / 2, kScreenSize.height / 2);
     cell.scrollView.zoomScale = 1;

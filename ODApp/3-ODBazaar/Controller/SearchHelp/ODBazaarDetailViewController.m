@@ -360,9 +360,9 @@
 }
 
 -(void)showAllView{
-    ODBazaarDetailModel *detailModel = [self.dataArray objectAtIndex:0];
+
     CGRect frame = self.taskContentLabel.frame;
-    frame.size.height = [ODHelp textHeightFromTextString:detailModel.content width:kScreenSize.width-25 fontSize:12.5];
+    frame.size.height = [ODHelp textHeightFromTextString:self.model.content width:kScreenSize.width-25 fontSize:12.5];
     self.taskContentLabel.frame = frame;
     self.taskContentLabel.numberOfLines = 0;
     self.taskTopView.frame = CGRectMake(12.5, CGRectGetMaxY(self.userView.frame), kScreenSize.width-25, self.taskContentLabel.frame.size.height+self.taskContentLabel.frame.origin.y);
@@ -494,8 +494,7 @@ NSString *evaluationContentText = @"";
         [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
     }else{
-        ODBazaarDetailModel *model = [self.dataArray firstObject];
-        [ODPublicTool shareAppWithTarget:self dictionary:model.share controller:self];
+        [ODPublicTool shareAppWithTarget:self dictionary:self.model.share controller:self];
     }
 }
 

@@ -182,7 +182,8 @@
             imageView = [[UIImageView alloc] initWithFrame:CGRectMake(17.5, CGRectGetMaxY(frame) + 6, kScreenSize.width - 35, (kScreenSize.width - 35) / multiple)];
         }
         frame = imageView.frame;
-        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:[dict valueForKeyPath:@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        [imageView sd_setImageWithURL:[NSURL OD_URLWithString:[dict valueForKeyPath:@"img_url"]] placeholderImage:[UIImage imageNamed:@"placeholderBigImage"] options:SDWebImageRetryFailed];
         [self.detailView addSubview:imageView];
     }
     self.loveImageView = [[UIImageView alloc] initWithFrame:CGRectMake((kScreenSize.width - 181)/2, CGRectGetMaxY(frame)+30, 181, 40)];

@@ -170,7 +170,7 @@ static NSInteger const ImageViewCount = 3;
         UITapGestureRecognizer *gas = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickImage:)];
         [imageView addGestureRecognizer:gas];
         // 下载图片
-        [imageView sd_setImageWithURL:[NSURL URLWithString:self.images[index]] placeholderImage:[UIImage imageNamed:@"placeholderImage"] options:SDWebImageRetryFailed];
+        [imageView sd_setImageWithURL:[NSURL URLWithString:self.images[index]] placeholderImage:[UIImage imageNamed:@"placeholderBigImage"] options:SDWebImageRetryFailed];
 //        imageView.image = self.images[index];
     }
     

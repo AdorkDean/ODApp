@@ -334,7 +334,7 @@ static NSString *const detailInfoCell = @"detailInfoCell";
     self.activityVIPs = self.resultModel.savants;
     self.activityApplies = self.resultModel.applies;
     self.reportButton.enabled = (self.resultModel.apply_status != 1) && (self.resultModel.apply_status != -6) && (self.resultModel.apply_status != -4);
-    [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] placeholderImage:[UIImage imageNamed:@"placeholderImage"]options:SDWebImageRetryFailed];
+    [self.headImageView sd_setImageWithURL:[NSURL OD_URLWithString:self.resultModel.icon_url] placeholderImage:[UIImage imageNamed:@"placeholderBigImage"]options:SDWebImageRetryFailed];
     
     self.titleLabel.text = self.resultModel.content;
     [self.infoTableView reloadData];

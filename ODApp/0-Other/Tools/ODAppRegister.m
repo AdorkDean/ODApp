@@ -30,7 +30,7 @@ static BOOL const isProduction = FALSE;
 
 + (void)registWechat
 {
-    [WXApi registerApp:kGetWXAppId withDescription:@"我去App"];
+    [WXApi registerApp:kGetWXAppId withDescription:@"易学行"];
 }
 
 + (void)registStatistics

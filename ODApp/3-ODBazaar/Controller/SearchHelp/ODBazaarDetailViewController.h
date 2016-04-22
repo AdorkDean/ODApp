@@ -21,7 +21,6 @@
 
 @interface ODBazaarDetailViewController : ODBaseViewController <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextViewDelegate,UMSocialUIDelegate>
 
-@property(nonatomic, strong) NSMutableArray *dataArray;
 @property(nonatomic, strong) NSMutableArray *picArray;
 @property(nonatomic, strong) NSArray *applys;
 @property(nonatomic, strong) UIScrollView *scrollView;

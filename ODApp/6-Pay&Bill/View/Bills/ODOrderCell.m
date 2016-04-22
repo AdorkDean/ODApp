@@ -37,7 +37,7 @@
     self.orderTitle.text = model.title;
     self.orderPrice.text = [NSString stringWithFormat:@"%.2f元/%@" , model.price , model.unit];
     NSString *url = [model.imgs_small[0] valueForKeyPath:@"img_url"];
-    [self.orderImageView sd_setImageWithURL:[NSURL OD_URLWithString:url]];    
+    [self.orderImageView sd_setImageWithURL:[NSURL OD_URLWithString:url]placeholderImage:[UIImage imageNamed:@"placeholderImage"]options:SDWebImageRetryFailed];
 }
 
 

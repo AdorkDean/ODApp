@@ -43,7 +43,7 @@
     {
         ODActivityDetailAppliesModel *model = activePersons[i];
         UIImageView *imgV = [[UIImageView alloc]initWithFrame:CGRectMake((imgVWH + 10) * i, imgVTBDistance, imgVWH, imgVWH)];
-        [imgV sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar_url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [imgV sd_setImageWithURL:[NSURL OD_URLWithString:model.avatar_url] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             imgV.image = [image OD_circleImage];
         }];
         [self.headImgsView addSubview:imgV];

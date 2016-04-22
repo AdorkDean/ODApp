@@ -33,7 +33,7 @@
     [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:[model.user valueForKeyPath:@"avater"]] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"] options:SDWebImageRetryFailed];
     self.userNameLabel.text = [model.user valueForKeyPath:@"nick"];
     
-    [self.skillImageView sd_setImageWithURL:[NSURL OD_URLWithString:[model.imgs_small[0] valueForKeyPath:@"img_url"]]];
+    [self.skillImageView sd_setImageWithURL:[NSURL OD_URLWithString:[model.imgs_small[0] valueForKeyPath:@"img_url"]]placeholderImage:[UIImage imageNamed:@"placeholderImage"]options:SDWebImageRetryFailed];
     self.skillNameLabel.text = model.title;
     self.skillPriceLabel.text = [NSString stringWithFormat:@"%.2f元/%@", model.price, model.unit];
 }

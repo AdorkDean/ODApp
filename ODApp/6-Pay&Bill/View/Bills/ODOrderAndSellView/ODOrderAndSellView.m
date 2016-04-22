@@ -32,7 +32,7 @@
     [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString: model.swap_user_avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]options:SDWebImageRetryFailed];
     
     
-    [self.contentImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.swap_img]];
+    [self.contentImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.swap_img] placeholderImage:[UIImage imageNamed:@"placeholderImage"]options:SDWebImageRetryFailed];
     
     self.nikeLabel.text = model.swap_user_nick;
     self.nikeLabel.textColor = [UIColor colorGraynessColor];
@@ -119,7 +119,7 @@
     
     [self.userImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.order_user_avatar] placeholderImage:[UIImage imageNamed:@"titlePlaceholderImage"]options:SDWebImageRetryFailed];
     
-    [self.contentImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.swap_img]];
+    [self.contentImageView sd_setImageWithURL:[NSURL OD_URLWithString:model.swap_img] placeholderImage:[UIImage imageNamed:@"placeholderImage"]options:SDWebImageRetryFailed];
     
     
     self.nikeLabel.text = model.order_user_nick;
